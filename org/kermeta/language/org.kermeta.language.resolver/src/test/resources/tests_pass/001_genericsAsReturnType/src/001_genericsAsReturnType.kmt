@@ -12,11 +12,12 @@ end
 class Foo
 {
 	reference content : String[0..*]
-	operation bar() : Void is do
+	operation bar() : A<Integer> is do
 		var y : A<Integer> init A<Integer>.new
 		var z : Integer init 1+1
 		z:=y.foo()+1
 		z:=y.x+2
+		result:=y
 	end
 }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages name="root_package">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;25;299"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;25;316"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//root_package/A/@containedType.1" isAspect="false" typeParameter="//root_package/A/B" isAbstract="false" isSingleton="false">
       <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;49;120"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="B"/>
@@ -34,7 +34,7 @@
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Foo" superType="//root_package/Foo/@containedType.0" isAspect="false" isAbstract="false" isSingleton="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;120;297"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;120;315"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
@@ -45,19 +45,22 @@
         </containedType>
       </ownedAttribute>
       <ownedOperation name="bar" type="//root_package/Foo/bar/@containedType.0" isOrdered="true">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;167;295"/>
-        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;167;313"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/Foo/bar/@containedType.0/@containedType.0" typeIdentifier="A">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+            <usings fromQName="kermeta::standard" toName=""/>
+          </containedType>
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;193;295"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;199;313"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="y">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;198;239"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;204;245"/>
             <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;232;239"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;238;245"/>
               <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="A" generics="//root_package/Foo/bar/@body/@statement.0/@initialization/@target/@containedType.0">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;222;232"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;228;238"/>
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
                   <usings fromQName="kermeta::standard" toName=""/>
                 </containedType>
@@ -74,14 +77,14 @@
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="z">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;239;266"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;245;272"/>
             <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
               <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;262;266"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;268;272"/>
               </parameters>
               <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;260;261"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;266;267"/>
               </target>
             </initialization>
             <type name="Integer" type="//root_package/Foo/bar/@body/@statement.1/@type/@containedType.0" isOrdered="true">
@@ -92,19 +95,19 @@
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="z">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;266;267"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;272;273"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
               <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;277;281"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;283;287"/>
               </parameters>
               <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo" isCalledWithParenthesis="true">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;270;276"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;276;282"/>
                 <usings fromQName="kermeta::standard" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="y">
-                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;269;270"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;275;276"/>
                   <usings fromQName="kermeta::standard" toName=""/>
                 </target>
               </target>
@@ -112,22 +115,31 @@
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="z">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;281;282"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;287;288"/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
               <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;288;291"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;294;298"/>
               </parameters>
               <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;285;287"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;291;293"/>
                 <usings fromQName="kermeta::standard" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="y">
-                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;284;285"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;290;291"/>
                   <usings fromQName="kermeta::standard" toName=""/>
                 </target>
               </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;298;304"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="y">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/001_genericsAsReturnType/src/001_genericsAsReturnType.kmt;306;309"/>
+              <usings fromQName="kermeta::standard" toName=""/>
             </value>
           </statement>
         </body>
