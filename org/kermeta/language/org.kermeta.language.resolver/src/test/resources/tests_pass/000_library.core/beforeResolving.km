@@ -56,7 +56,7 @@
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;374;464"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="getMetaClass" type="//kermeta/standard/Object/getMetaClass/@containedType.0" isOrdered="true">
+        <ownedOperation name="getMetaClass" type="//kermeta/standard/Object/getMetaClass/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/getMetaClass/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;488;649"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Class">
@@ -67,8 +67,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;536;649"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="getMetaClass" from="//kermeta/standard/Object/getMetaClass/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="container" type="//kermeta/standard/Object/container/@containedType.0" isOrdered="true">
+        <ownedOperation name="container" type="//kermeta/standard/Object/container/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/container/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;673;899"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
@@ -79,8 +86,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;719;899"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="container" from="//kermeta/standard/Object/container/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="checkInvariants" type="//kermeta/standard/Object/checkInvariants/@containedType.0" isOrdered="true">
+        <ownedOperation name="checkInvariants" type="//kermeta/standard/Object/checkInvariants/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/checkInvariants/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;923;1135"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
@@ -91,8 +105,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;973;1135"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="checkInvariants" from="//kermeta/standard/Object/checkInvariants/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="checkAllInvariants" type="//kermeta/standard/Object/checkAllInvariants/@containedType.0" isOrdered="true">
+        <ownedOperation name="checkAllInvariants" type="//kermeta/standard/Object/checkAllInvariants/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/checkAllInvariants/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;1159;1849"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
@@ -103,8 +124,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;1212;1849"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="checkAllInvariants" from="//kermeta/standard/Object/checkAllInvariants/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="equals" type="//kermeta/standard/Object/equals/@containedType.0" isOrdered="true">
+        <ownedOperation name="equals" type="//kermeta/standard/Object/equals/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/equals/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;1873;2014"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
@@ -122,8 +150,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;1933;2014"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="equals" from="//kermeta/standard/Object/equals/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="isNotEqual" type="//kermeta/standard/Object/isNotEqual/@containedType.0" isOrdered="true">
+        <ownedOperation name="isNotEqual" type="//kermeta/standard/Object/isNotEqual/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/isNotEqual/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;2038;2293"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
@@ -141,6 +176,13 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;2102;2293"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="isNotEqual" from="//kermeta/standard/Object/isNotEqual/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
         <ownedOperation name="isDirectInstanceOf" type="//kermeta/standard/Object/isDirectInstanceOf/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;2293;3068"/>
@@ -160,7 +202,7 @@
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;2347;3068"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="get" type="//kermeta/standard/Object/get/@containedType.0" isOrdered="true">
+        <ownedOperation name="get" type="//kermeta/standard/Object/get/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/get/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3092;3252"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
@@ -178,8 +220,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3152;3252"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="get" from="//kermeta/standard/Object/get/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="set" type="//kermeta/standard/Object/set/@containedType.0" isOrdered="true">
+        <ownedOperation name="set" type="//kermeta/standard/Object/set/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/set/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3276;3440"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
@@ -204,8 +253,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3353;3440"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="set" from="//kermeta/standard/Object/set/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="isSet" type="//kermeta/standard/Object/isSet/@containedType.0" isOrdered="true">
+        <ownedOperation name="isSet" type="//kermeta/standard/Object/isSet/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/isSet/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3464;3688"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
@@ -223,8 +279,15 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3527;3688"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="isSet" from="//kermeta/standard/Object/isSet/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="unset" type="//kermeta/standard/Object/unset/@containedType.0" isOrdered="true">
+        <ownedOperation name="unset" type="//kermeta/standard/Object/unset/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Object/unset/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3712;3834"/>
           <kOwnedTags name="CompilerIgnore" value="true"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
@@ -242,6 +305,13 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3772;3834"/>
           </body>
+          <ownedUnresolvedOperations operationIdentifier="unset" from="//kermeta/standard/Object/unset/@ownedUnresolvedOperations.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::exceptions" toName=""/>
+            </containedType>
+          </ownedUnresolvedOperations>
         </ownedOperation>
         <ownedOperation name="oid" type="//kermeta/standard/Object/oid/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;3858;4076"/>
@@ -9041,7 +9111,7 @@
           <usings fromQName="org::kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
-        <ownedOperation name="add" type="//kermeta/standard/Set/add/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/add/@ownedUnresolvedOperations.0">
+        <ownedOperation name="add" type="//kermeta/standard/Set/add/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;8914;9074"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="org::kermeta::language::structure" toName=""/>
@@ -9056,9 +9126,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;8948;9074"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="add"/>
         </ownedOperation>
-        <ownedOperation name="remove" type="//kermeta/standard/Set/remove/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/remove/@ownedUnresolvedOperations.0">
+        <ownedOperation name="remove" type="//kermeta/standard/Set/remove/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;9074;9255"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="org::kermeta::language::structure" toName=""/>
@@ -9073,9 +9142,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;9111;9255"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="remove"/>
         </ownedOperation>
-        <ownedOperation name="equals" type="//kermeta/standard/Set/equals/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/equals/@ownedUnresolvedOperations.0">
+        <ownedOperation name="equals" type="//kermeta/standard/Set/equals/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;9255;9416"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
             <usings fromQName="org::kermeta::language::structure" toName=""/>
@@ -9090,7 +9158,6 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;9300;9416"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="equals"/>
         </ownedOperation>
         <ownedOperation name="union" type="//kermeta/standard/Set/union/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;9416;9579"/>
@@ -9188,7 +9255,7 @@
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10080;10200"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="asSet" type="//kermeta/standard/Set/asSet/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/asSet/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asSet" type="//kermeta/standard/Set/asSet/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10200;10363"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Set/asSet/@containedType.0/@containedType.0" typeIdentifier="Set">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9201,9 +9268,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10227;10363"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asSet"/>
         </ownedOperation>
-        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Set/asOrderedSet/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/asOrderedSet/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Set/asOrderedSet/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10363;10523"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Set/asOrderedSet/@containedType.0/@containedType.0" typeIdentifier="OrderedSet">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9216,9 +9282,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10404;10523"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asOrderedSet"/>
         </ownedOperation>
-        <ownedOperation name="asBag" type="//kermeta/standard/Set/asBag/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/asBag/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asBag" type="//kermeta/standard/Set/asBag/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10523;10679"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Set/asBag/@containedType.0/@containedType.0" typeIdentifier="Bag">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9231,9 +9296,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10550;10679"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asBag"/>
         </ownedOperation>
-        <ownedOperation name="asSequence" type="//kermeta/standard/Set/asSequence/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Set/asSequence/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asSequence" type="//kermeta/standard/Set/asSequence/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10679;10918"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Set/asSequence/@containedType.0/@containedType.0" typeIdentifier="Sequence">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9246,7 +9310,6 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10716;10918"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asSequence"/>
         </ownedOperation>
         <ownedOperation name="symmetricDifference" type="//kermeta/standard/Set/symmetricDifference/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;10918;11219"/>
@@ -9343,7 +9406,7 @@
           <usings fromQName="org::kermeta::language::structure" toName=""/>
           <usings fromQName="kermeta::exceptions" toName=""/>
         </containedType>
-        <ownedOperation name="equals" type="//kermeta/standard/Bag/equals/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Bag/equals/@ownedUnresolvedOperations.0">
+        <ownedOperation name="equals" type="//kermeta/standard/Bag/equals/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;13284;13431"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
             <usings fromQName="org::kermeta::language::structure" toName=""/>
@@ -9358,7 +9421,6 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;13329;13431"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="equals"/>
         </ownedOperation>
         <ownedOperation name="union" type="//kermeta/standard/Bag/union/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;13431;13591"/>
@@ -9464,7 +9526,7 @@
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14083;14213"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="asSet" type="//kermeta/standard/Bag/asSet/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Bag/asSet/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asSet" type="//kermeta/standard/Bag/asSet/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14213;14384"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Bag/asSet/@containedType.0/@containedType.0" typeIdentifier="Set">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9477,9 +9539,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14240;14384"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asSet"/>
         </ownedOperation>
-        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Bag/asOrderedSet/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Bag/asOrderedSet/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asOrderedSet" type="//kermeta/standard/Bag/asOrderedSet/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14384;14544"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Bag/asOrderedSet/@containedType.0/@containedType.0" typeIdentifier="OrderedSet">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9492,9 +9553,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14425;14544"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asOrderedSet"/>
         </ownedOperation>
-        <ownedOperation name="asBag" type="//kermeta/standard/Bag/asBag/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Bag/asBag/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asBag" type="//kermeta/standard/Bag/asBag/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14544;14699"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Bag/asBag/@containedType.0/@containedType.0" typeIdentifier="Bag">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9507,9 +9567,8 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14571;14699"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asBag"/>
         </ownedOperation>
-        <ownedOperation name="asSequence" type="//kermeta/standard/Bag/asSequence/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/Bag/asSequence/@ownedUnresolvedOperations.0">
+        <ownedOperation name="asSequence" type="//kermeta/standard/Bag/asSequence/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14699;14861"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//kermeta/standard/Bag/asSequence/@containedType.0/@containedType.0" typeIdentifier="Sequence">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
@@ -9522,7 +9581,6 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14736;14861"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="asSequence"/>
         </ownedOperation>
         <ownedOperation name="including" type="//kermeta/standard/Bag/including/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;14861;15064"/>
@@ -9709,7 +9767,7 @@
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;18345;18503"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="equals" type="//kermeta/standard/OrderedCollection/equals/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/OrderedCollection/equals/@ownedUnresolvedOperations.0">
+        <ownedOperation name="equals" type="//kermeta/standard/OrderedCollection/equals/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;18503;18792"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
             <usings fromQName="org::kermeta::language::structure" toName=""/>
@@ -9724,7 +9782,6 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;18548;18792"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="equals"/>
         </ownedOperation>
         <ownedOperation name="indexOf" type="//kermeta/standard/OrderedCollection/indexOf/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;18792;18845"/>
@@ -9789,7 +9846,7 @@
             </containedType>
           </ownedUnresolvedOperations>
         </ownedOperation>
-        <ownedOperation name="addAt" type="//kermeta/standard/OrderedSet/addAt/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/OrderedSet/addAt/@ownedUnresolvedOperations.0">
+        <ownedOperation name="addAt" type="//kermeta/standard/OrderedSet/addAt/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;19286;19406"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="org::kermeta::language::structure" toName=""/>
@@ -9810,7 +9867,6 @@
           <body xsi:type="org_kermeta_language_behavior:Block">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;19339;19406"/>
           </body>
-          <ownedUnresolvedOperations operationIdentifier="addAt"/>
         </ownedOperation>
         <ownedOperation name="equals" type="//kermeta/standard/OrderedSet/equals/@containedType.0" isOrdered="true" superOperation="//kermeta/standard/OrderedSet/equals/@ownedUnresolvedOperations.0">
           <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/language.library.core/src/main/kmt/kermeta/standard/collections.kmt;19406;19769"/>
@@ -12388,7 +12444,7 @@
             </ownedAttribute>
             <ownedAttribute kTag="//org/kermeta/language/structure/TypeMapping/mapping/@kOwnedTags.0" name="mapping" type="//org/kermeta/language/structure/TypeMapping/mapping/@containedType.0" isOrdered="true">
               <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/structure/TypeMapping/mapping"/>
-              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="EObject"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/structure/UnresolvedInferredType/@kOwnedTags.0 //org/kermeta/language/structure/UnresolvedInferredType/@kOwnedTags.1" name="UnresolvedInferredType" superType="//org/kermeta/language/structure/UnresolvedInferredType/@containedType.0 //org/kermeta/language/structure/UnresolvedInferredType/@containedType.1" isAspect="false" isAbstract="false">
