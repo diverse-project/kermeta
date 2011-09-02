@@ -22,7 +22,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 //Aspect of org::kermeta::language::structure elements to get their qualified name
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 //Aspect for getAllSuperTypes in ClassDefinition
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_Aspect_ClassDefinition.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
 
 //Aspects of Unresolveds to store the Resolved found by the Resolver
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/UnresolvedType_Aspect_CorrespondingResolvedType.kmt"
@@ -1390,6 +1390,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 	end
 	
 	method visitUnresolvedCall(visited : UnresolvedCall, ctxt : LanguageVisitorContext) : Void is do 
+		stdio.writeln("   [begin]visitUnresolvedCall")
 		if (visited.toBeVisitedAsUnresolvedCall(pass)) then			
 			visitCallExpression(visited, ctxt)
 			
@@ -1402,7 +1403,9 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 			var typesToBeRemoved : Collection<UnresolvedType> init Set<UnresolvedType>.new
 			var foundType : Type
 			visited.generics.each{g|
+				stdio.writeln("   visiting UnresolvedCall.generics")
 				if (isVisitable(g)) then
+					stdio.writeln("      isvisitable=true")
 				
 					ctxt.currentElement := visited
 				
@@ -1432,6 +1435,7 @@ class ResolverUnresolvedFinderVisitor inherits LanguageVisitor
 				visited.targetParent.accept(self, ctxt)
 			end
 		end
+		stdio.writeln("   [end]visitUnresolvedCall")
 	end
 		
 	method visitVariableDecl(visited : VariableDecl, ctxt : LanguageVisitorContext) : Void is do

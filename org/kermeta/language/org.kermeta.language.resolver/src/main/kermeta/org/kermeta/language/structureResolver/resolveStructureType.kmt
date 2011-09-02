@@ -2,6 +2,8 @@ package org::kermeta::language;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 require "unresolvedType_Aspect.kmt"
 require "ResolverContext_Aspect.kmt"
 using kermeta::standard
@@ -125,8 +127,46 @@ package structure{
 				end
 				}
 			unresolvedWithCorresponding.each{t|
+				// make sure to not introduce a circular inheritance (many algorithm may crash otherwise)
+				var involdedTypeDefiniton : Collection<TypeDefinition> init Sequence<TypeDefinition>.new  
+				//stdio.writeln("   DVK searching cyclic inheritance for " + self.name)
+				t.correspondingType.getAllSuperTypes().each{typeInHierarchy |
+							var searchedElement : Object 
+							if typeInHierarchy.isInstanceOf(UnresolvedType) then
+								searchedElement := typeInHierarchy.asType(UnresolvedType).correspondingType
+							else
+								searchedElement := typeInHierarchy
+							end
+						 	var td : TypeDefinition init void
+						 	if searchedElement.isInstanceOf(TypeDefinition) then
+								td := searchedElement.asType(TypeDefinition) // maybe we are a DataType (ie. inherits from TypeDefintion directly
+							end
+							if td.isVoid and searchedElement.isInstanceOf(Class) then
+								td := searchedElement.asType(Class).typeDefinition
+							end
+							if not td.isVoid then
+								involdedTypeDefiniton.add(td)
+							else
+								//stdio.writeln("  cannot find TypeDefinition for Type "+typeInHierarchy.toString)
+							end
+						}
+				//involdedTypeDefiniton.each{td | stdio.writeln("            DVK involved resolved inheritance "+ td.toString + " ")}
+				
 				superType.remove(t)
-				superType.add(t.correspondingType)
+				if involdedTypeDefiniton.exists{typeDefInHierarchy | typeDefInHierarchy == self } 
+				then
+					// error on self and all supertype definition but don't report if this is kermeta::standard::Object pointing to self
+					if not (self.getQualifiedName.equals("kermeta::standard::Object") and involdedTypeDefiniton.size() == 1) then
+						var involvedList : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+						involdedTypeDefiniton.each{td | involvedList.append(td.getQualifiedName + " ")}
+						involdedTypeDefiniton.each{td |
+							context.errors.add(ResolverException.new.initialize("Cyclic inheritance not allowed. Involved TypeDefinitions are : " + involvedList.toString , td))
+							//stdio.writeln("  Cyclic inheritance not allowed. Involved TypeDefinitions are : " + involvedList.toString) 
+						}
+					end
+				else
+					superType.add(t.correspondingType)
+				end
 				}
 		end
 	
