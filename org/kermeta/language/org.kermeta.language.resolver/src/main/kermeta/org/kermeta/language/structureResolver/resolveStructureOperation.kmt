@@ -18,7 +18,7 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 	reference correspondingOperation : Operation
 	operation findCorrespondingOperation(context : LanguageVisitorContext) : Operation is do
 		// type given in from 
-		stdio.writeln("look for corresponding operation")
+		stdio.writeln("look for corresponding operation "+operationIdentifier)
 		
 		
 		var  classFrom: Class 
@@ -69,13 +69,8 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 					superOperation:=unresolvedOp.correspondingOperation
 					ownedUnresolvedOperations.remove(unresolvedOp)
 				else
-					//TODO when parser will be fixed about considering operation as equivalent as method
-					//the test is to be removed 
-					if unresolvedOp.~from.isVoid then
-						ownedUnresolvedOperations.remove(unresolvedOp)
-					else
-						stdio.writeln("operation cannot be resolved")
-					end	
+					stdio.writeln("operation cannot be resolved")
+						
 				end
 				
 							

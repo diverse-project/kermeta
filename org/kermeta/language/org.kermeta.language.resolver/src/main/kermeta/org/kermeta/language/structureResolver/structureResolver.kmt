@@ -9,11 +9,18 @@ require "resolveStructureOperation.kmt"
 require "resolveStructureProperty.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
+
 aspect class ModelingUnit inherits TypeDefinitionContainer, KermetaModelElement {
+	/**
+	*	The Structure resolving is done in 2 passes : first pass set all types	
+	*	and second pass set unresolved operations and unresolved properties
+	*	To resolve a superOperation, it is required that the whole inheritance hierarchy
+	*	is resolved
+	*/
 	operation resolveWholeStructure(context : LanguageVisitorContext) is do
-	
 		
 		
+		self.resolveStructureInheritance(context)
 		self.resolveStructure(context)
 		
 	end
@@ -23,6 +30,15 @@ aspect class ModelingUnit inherits TypeDefinitionContainer, KermetaModelElement 
 
 aspect class KermetaModelElement{
 
+	operation resolveStructureInheritance(context : LanguageVisitorContext) is do
+		self.eachOwnedElement{ e|
+				if e.isInstanceOf(KermetaModelElement) then
+					e.asType(KermetaModelElement).resolveStructure(context)
+				end
+			e}// must return somthing for scala compiler to work		
+		self.resolveStructureType(context)
+		
+	end
 	operation resolveStructure(context : LanguageVisitorContext) is do
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
@@ -46,6 +62,11 @@ aspect class ClassDefinition inherits GenericTypeDefinition{
 
 aspect class Operation inherits MultiplicityElement, AbstractOperation{
 
+	method resolveStructureInheritance(context : LanguageVisitorContext) is do
+		context.currentOperation:=self
+		super(context)
+		context.currentOperation:=void
+	end
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentOperation:=self
 		super(context)
@@ -54,6 +75,15 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation{
 }
 
 aspect class Package inherits NamedElement, TypeDefinitionContainer{
+	method resolveStructureInheritance(context : LanguageVisitorContext) is do
+		context.currentPackage:=self
+		super(context)
+		if container.isInstanceOf(Package) then
+			context.currentPackage?=container
+		else
+			context.currentPackage:=void
+		end
+	end
 
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentPackage:=self
