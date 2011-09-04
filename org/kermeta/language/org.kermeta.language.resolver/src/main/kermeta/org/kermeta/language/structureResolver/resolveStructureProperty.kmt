@@ -23,8 +23,10 @@ aspect class UnresolvedProperty inherits AbstractProperty, Unresolved {
 		correspondingPropertyClass?= container.asType(Property).type
 		if correspondingPropertyClass.isVoid then
 			result:=void
+			stdio.writeln("correspondingPropertyClass is void")
 		else
 			var cd : ClassDefinition init correspondingPropertyClass.typeDefinition.asType(ClassDefinition)
+			stdio.writeln("look for "+propertyIdentifier+" in "+cd.name)
 			correspondingProperty:=cd.ownedAttribute.detect{x|
 				x.name==propertyIdentifier
 				}
@@ -41,6 +43,8 @@ aspect class Property inherits MultiplicityElement, AbstractProperty{
 				if not unresolvedP.correspondingProperty.isVoid then
 					opposite:=unresolvedP.correspondingProperty
 					ownedUnresolvedProperties.remove(unresolvedP)
+				else
+					stdio.writeln("no corresponding Property")
 				end
 			end
 		end
