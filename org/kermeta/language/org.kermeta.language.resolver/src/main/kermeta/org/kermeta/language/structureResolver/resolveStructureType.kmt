@@ -137,17 +137,19 @@ package structure{
 							else
 								searchedElement := typeInHierarchy
 							end
-						 	var td : TypeDefinition init void
-						 	if searchedElement.isInstanceOf(TypeDefinition) then
-								td := searchedElement.asType(TypeDefinition) // maybe we are a DataType (ie. inherits from TypeDefintion directly
-							end
-							if td.isVoid and searchedElement.isInstanceOf(Class) then
-								td := searchedElement.asType(Class).typeDefinition
-							end
-							if not td.isVoid then
-								involdedTypeDefiniton.add(td)
-							else
-								//stdio.writeln("  cannot find TypeDefinition for Type "+typeInHierarchy.toString)
+						 	if not searchedElement.isVoid then
+							 	var td : TypeDefinition init void
+							 	if searchedElement.isInstanceOf(TypeDefinition) then
+									td := searchedElement.asType(TypeDefinition) // maybe we are a DataType (ie. inherits from TypeDefintion directly
+								end
+								if td.isVoid and searchedElement.isInstanceOf(Class) then
+									td := searchedElement.asType(Class).typeDefinition
+								end
+								if not td.isVoid then
+									involdedTypeDefiniton.add(td)
+								else
+									//stdio.writeln("  cannot find TypeDefinition for Type "+typeInHierarchy.toString)
+								end
 							end
 						}
 				//involdedTypeDefiniton.each{td | stdio.writeln("            DVK involved resolved inheritance "+ td.toString + " ")}
