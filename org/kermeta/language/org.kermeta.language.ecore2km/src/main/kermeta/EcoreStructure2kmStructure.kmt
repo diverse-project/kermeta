@@ -137,7 +137,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		if(typeName.isVoid) then
 			result := void
 		else
-			if(typeName=="ecore::EObject" or typeName=="ecore::EJavaObject" or typeName=="org.eclipse.emf.ecore.EObject") then
+			if(typeName=="EObject" or typeName=="ecore::EObject" or typeName=="ecore::EJavaObject" or typeName=="org.eclipse.emf.ecore.EObject") then
 				result := "kermeta::standard::Object"
 			else
 				result := typeName
