@@ -30,6 +30,7 @@ aspect class ClassDefinition {
 			result:=Set<Operation>.new
 			result.addAll(ownedOperation)
 			superType.each{ superT|
+				if not superT.isInstanceOf(UnresolvedType) then
 				var superCallableOperations : Set<Operation> init superT.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations()
 				superCallableOperations.each{ superCallable|
 					if not result.exists{ op|
@@ -37,6 +38,7 @@ aspect class ClassDefinition {
 						result.add(superCallable)
 					end
 				}
+				end
 			}
 			allCallableOperations:=result
 		end
