@@ -267,7 +267,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			
 			// If the reference has an opposite, an unresolved type is created.
 			if(not ref.eOpposite.isVoid) then
-				var unresolvProp : UnresolvedProperty init UnresolvedProperty.new.initialize(ref.eOpposite.getQualifiedName())
+				var unresolvProp : UnresolvedProperty init UnresolvedProperty.new.initialize(ref.eOpposite.name)
 				prop.opposite := unresolvProp
 				prop.ownedUnresolvedProperties.add(unresolvProp)
 			end
