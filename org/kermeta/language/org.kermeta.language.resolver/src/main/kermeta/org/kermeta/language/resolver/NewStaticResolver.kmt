@@ -39,7 +39,7 @@ class FullStaticResolver
        	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit
        	var resolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
        	unresolvedModelingUnit ?= unresolvedModelResource.one
-       	
+       	unresolvedModelingUnit.canUseCachedStructuralTypeDefinitions := true
        	//checkUnresolved(unresolvedModelingUnit)
         resolvedModelingUnit := doResolving(unresolvedModelingUnit)
          
