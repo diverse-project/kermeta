@@ -40,17 +40,10 @@ aspect class ClassDefinition {
 								result.add(superCallable)
 							end
 						}
-
-				if not superT.isInstanceOf(UnresolvedType) then
-				var superCallableOperations : Set<Operation> init superT.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations()
-				superCallableOperations.each{ superCallable|
-					if not result.exists{ op|
-									op.hasSameSignature(superCallable)} then
-						result.add(superCallable)
 					end
 				end
-				end
 			}
+
 			allCallableOperations:=result
 		end
 	
