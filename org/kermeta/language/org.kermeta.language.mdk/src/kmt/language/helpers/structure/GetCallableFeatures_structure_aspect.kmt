@@ -30,6 +30,17 @@ aspect class ClassDefinition {
 			result:=Set<Operation>.new
 			result.addAll(ownedOperation)
 			superType.each{ superT|
+				if superT.isInstanceOf(Class) then
+					//protection on Object being supertype of himself
+					if superT.asType(Class).typeDefinition!=self then
+						var superCallableOperations : Set<Operation> init superT.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations()
+						superCallableOperations.each{ superCallable|
+							if not result.exists{ op|
+											op.hasSameSignature(superCallable)} then
+								result.add(superCallable)
+							end
+						}
+
 				if not superT.isInstanceOf(UnresolvedType) then
 				var superCallableOperations : Set<Operation> init superT.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations()
 				superCallableOperations.each{ superCallable|
@@ -37,7 +48,7 @@ aspect class ClassDefinition {
 									op.hasSameSignature(superCallable)} then
 						result.add(superCallable)
 					end
-				}
+				end
 				end
 			}
 			allCallableOperations:=result
