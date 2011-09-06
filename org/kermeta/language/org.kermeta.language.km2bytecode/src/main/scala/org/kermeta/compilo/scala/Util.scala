@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutorService
 import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
+import org.eclipse.emf.common.util.EList
 
 object Util extends LogAspect {
     /**
@@ -243,8 +244,10 @@ object Util extends LogAspect {
     }
    
     def getEcoreRenameOperation(op1 : Operation): String={
+        var ownedOperations :  EList[Operation] = null
+       ownedOperations = op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.clone().asInstanceOf[EList[Operation]]
         if(   (Util.hasEcoreTag(op1) && op1.getBody !=null)||
-           (op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.filter( op => op.getName().equals("op_"+op1.getName()) ).size > 0 )){
+           (ownedOperations.filter( op => op.getName().equals("op_"+op1.getName()) ).size > 0 )){
             return "EMFRENAME" + op1.getName
         }else if (op1.getSuperOperation != null){
             return getEcoreRenameOperation(op1.getSuperOperation.asInstanceOf[Operation])
