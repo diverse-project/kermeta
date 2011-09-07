@@ -248,7 +248,7 @@ object Util extends LogAspect {
     def getEcoreRenameOperation(op1 : Operation): String={
       lock.synchronized
       {
-        val ownedOperations  = op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.toArray()
+        val ownedOperations  = op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.toArray().toSeq
         if(   (Util.hasEcoreTag(op1) && op1.getBody !=null)||
            (ownedOperations.filter( op => op.asInstanceOf[Operation].getName().equals("op_"+op1.getName()) ).size > 0 )){
             return "EMFRENAME" + op1.getName
