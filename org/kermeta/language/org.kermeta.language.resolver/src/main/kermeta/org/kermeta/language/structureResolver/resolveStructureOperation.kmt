@@ -40,8 +40,11 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 			if callableOperations.size()==1 then
 				correspondingOperation := callableOperations.one
 			else
-				context.errors.add(ResolverException.new.initialize("Super Operation "+operationIdentifier+" cannot be resolved", self))
-				stdio.writeln("Super Operation "+operationIdentifier+" cannot be resolved from "+context.currentClassDef.name)
+				if callableOperations.size()==0 then
+					context.errors.add(ResolverException.new.initialize("Super Operation "+operationIdentifier+" cannot be resolved", self))
+				else
+					context.errors.add(ResolverException.new.initialize("The current operation have too many super definition to call", self))
+				end
 			end
 			correspondingOperation := classFrom
 				.typeDefinition
@@ -70,11 +73,28 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 					ownedUnresolvedOperations.remove(unresolvedOp)
 				else
 					stdio.writeln("operation cannot be resolved")
+				end
+			end
+		else
+			//we should look for potentially existing superoperations
+			stdio.writeln("currentOperation from is void")
+			var callableOps: Set<Operation> init Set<Operation>.new
+			context.currentClassDef.superType.each{t|
+				if t.isInstanceOf(Class) then
+					stdio.writeln("look into "+t.asType(Class).typeDefinition.name)
+					callableOps.addAll(t.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations().select{op|
+						op.hasSameSignature(context.currentOperation)})
 						
 				end
+				}
+			if callableOps.size()==1 then
+					self.superOperation := callableOps.one
+				else
+					if callableOps.size()!=0 then
+						context.errors.add(ResolverException.new.initialize("The current operation have too many super definition to call", self))
+					end
+				end	
 				
-							
-			end
 		end
 		
 	end

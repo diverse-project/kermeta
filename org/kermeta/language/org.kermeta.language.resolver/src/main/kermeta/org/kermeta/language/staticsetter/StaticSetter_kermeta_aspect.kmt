@@ -220,34 +220,14 @@ package behavior {
 				super(context)
 				//get super operation from the currentOperation
 				stdio.writeln("set staticOperation for a CallSuperOperation")
-				var callableOps: Set<Operation> init Set<Operation>.new
 				if context.currentOperation.superOperation.isVoid then
-					stdio.writeln("currentOperation from is void")
-					context.currentClassDefinition.superType.each{t|
-						if t.isInstanceOf(Class) then
-							stdio.writeln("look into "+t.asType(Class).typeDefinition.name)
-							callableOps.addAll(t.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations().select{op|
-								op.hasSameSignature(context.currentOperation)})
-								
-						end
-						}
+					context.errors.add(ResolverException.new.initialize("No Super Operation found for"+context.currentOperation.name, self))
 				else
 					if context.currentOperation.superOperation.isInstanceOf(Operation) then
-						callableOps.addAll(context.currentOperation.superOperation.asType(Operation).owningClass.getAllCallableOperations().select{op|
-								op.hasSameSignature(context.currentOperation)})
+						staticOperation:=context.currentOperation.superOperation.asType(Operation)
 					end
 				end
-					
-				//var opCalled : Operation init context.currentOperation.superOperation.asType(Operation)
-				if callableOps.size()==1 then
-					self.staticOperation := callableOps.one
-				else
-					if callableOps.size()==0 then
-						context.errors.add(ResolverException.new.initialize("The current operation doesn't have any super definition to call", self))
-					else
-						context.errors.add(ResolverException.new.initialize("The current operation have too many super definition to call", self))
-					end
-				end
+				
 				// The static type of the call operation must be infered.
 				setInferedStaticType(context,context.currentOperation.type)
 				
