@@ -21,6 +21,7 @@ import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
 import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.common.util.BasicEList
 
 object Util extends LogAspect {
     /**
@@ -242,12 +243,14 @@ object Util extends LogAspect {
         }
         return baseName
     }
-   
+
+    var lock : AnyRef = new Object()    // workaround problem on filter use this lock to prevent concurrency deadlock
     def getEcoreRenameOperation(op1 : Operation): String={
-        var ownedOperations :  Iterable[Operation] = null
-       ownedOperations = op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.clone().asInstanceOf[Iterable[Operation]]
+      lock.synchronized
+      {
+        val ownedOperations  = op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.toArray()
         if(   (Util.hasEcoreTag(op1) && op1.getBody !=null)||
-           (ownedOperations.filter( op => op.getName().equals("op_"+op1.getName()) ).size > 0 )){
+           (ownedOperations.filter( op => op.asInstanceOf[Operation].getName().equals("op_"+op1.getName()) ).size > 0 )){
             return "EMFRENAME" + op1.getName
         }else if (op1.getSuperOperation != null){
             return getEcoreRenameOperation(op1.getSuperOperation.asInstanceOf[Operation])
@@ -255,6 +258,7 @@ object Util extends LogAspect {
         else{
             return op1.getName
         }
+      }
     }
     
 }
