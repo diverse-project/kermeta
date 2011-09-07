@@ -216,6 +216,15 @@ public class KPBuilder {
 			findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
 			findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
 			
+			// add resolvable kp depencies in classpath
+			KpLoaderImpl ldr = new KpLoaderImpl();
+			
+			// Load KP file
+			KermetaProject kp = ldr.loadKp(kpFileURL);
+			ArrayList<String> fullClassPath = new ArrayList<String>();
+			fullClassPath.addAll(additionalClassPath);
+			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, compiler.variableExpander));
+			
 			ModelingUnit result = null;
 			
 			if (isBuildNeeded) {

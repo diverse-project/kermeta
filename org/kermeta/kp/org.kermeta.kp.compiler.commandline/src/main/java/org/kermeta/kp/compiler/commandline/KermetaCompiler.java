@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -305,8 +306,10 @@ public class KermetaCompiler {
 				String fileLocation = mergedFile.toURI().toURL().getFile();
 				km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
 				logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
+				List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
+				fullBinaryDependencyClassPath.addAll(additionalClassPath);
 				// deal with scala to bytecode
-				int result =scala2bytecode(additionalClassPath);
+				int result =scala2bytecode(fullBinaryDependencyClassPath);
 				if(result != 0){
 					logger.logProblem(MessagingSystem.Kind.UserERROR, "Error detected during bytecode generation. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));					
 				}
@@ -459,6 +462,44 @@ public class KermetaCompiler {
 		return modelingUnits;
 	}
 
+	/**
+	 * return a list of available jar on the file system corresponding to the kp dependencies
+	 * @param kp
+	 * @param varExpander
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<String> getBinaryDependencyClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+		ArrayList<String> result = new ArrayList<String>();
+		// TODO currently deal only with dependecies on the disk (no mvn:/ dependencies)
+		List<Dependency> dependencies = kp.getDependencies();
+		for (Dependency dep : dependencies) {
+			String dependencyURLWithVariable = dep.getUrl();
+			String dependencyURL = varExpander.expandVariables(dependencyURLWithVariable);
+			if (dependencyURLWithVariable.contains("${")) {
+				// deal with variable expansion
+				logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", LOG_MESSAGE_GROUP);
+			} else {
+				logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+			}
+			URL jarURL = new URL(dependencyURL);
+			if( jarURL.getProtocol().equals("file")){
+				File theFile;
+				try {
+					theFile = new File(jarURL.toURI());
+					if (theFile!=null) {
+						result.add(theFile.getAbsolutePath());
+					}
+				} catch (URISyntaxException e) {
+					// ignore URI that cannot be translated into a local file ... 
+					// TODO
+				}
+			}
+		}
+		return result;
+	}
+	
+	
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
 		ArrayList<URL> kpSources = getSources(kp, varExpander);
 		return getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
