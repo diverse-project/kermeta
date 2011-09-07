@@ -29,7 +29,7 @@ class Object
 	 * Returns the Class object that is the metaclass of current Object
 	 */
 	 @CompilerIgnore "true"
-	operation getMetaClass() : Class from Object is do
+	operation getMetaClass() : Class  is do
 	end
 
 	/**
@@ -37,7 +37,7 @@ class Object
 	 * no container
 	 */
 	@CompilerIgnore "true"
-	operation container() : Object from Object is do
+	operation container() : Object  is do
 	end
 
 	/**
@@ -45,7 +45,7 @@ class Object
 	 * Also check the multiplicity of attributes (except derived and transient attributes)
 	 */
 	@CompilerIgnore "true"
-	operation checkInvariants() : Void from Object is do
+	operation checkInvariants() : Void  is do
 	end
 	
 	/**
@@ -54,7 +54,7 @@ class Object
 	 * Ignores derived attributes. 
 	 */	
 	@CompilerIgnore "true"
-	operation checkAllInvariants() : Void from Object is do
+	operation checkAllInvariants() : Void  is do
 	end
 
 	/**
@@ -70,14 +70,14 @@ class Object
 	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
 	 */
 	@CompilerIgnore "true"
-	operation equals(element : Object) : Boolean from Object is do
+	operation equals(element : Object) : Boolean  is do
 	end
 	
 	/**
 	 * See kermeta::language::structure::Object.equals(Object)
 	 */
 	@CompilerIgnore "true"
-	operation isNotEqual(element : Object) : Boolean from Object is do
+	operation isNotEqual(element : Object) : Boolean  is do
 	end		
 	
 	/**
@@ -111,21 +111,21 @@ class Object
 	 * the name of the given Property (i.e the type of the property instance).
 	 */
 	@CompilerIgnore "true"
-	operation get(~property : Property) : Object from Object is do
+	operation get(~property : Property) : Object  is do
 	end
 	
 	/**
 	 * Sets the <code>element</code> to the <code>~property</code> of the object 
 	 */
 	@CompilerIgnore "true"
-	operation ~set(~property : Property, element : Object) : Void from Object is do
+	operation ~set(~property : Property, element : Object) : Void  is do
 	end
 	
 	/**
 	 * True if the <code>~property</code> of the object has been set
 	 */
 	@CompilerIgnore "true"
-	operation isSet(~property : Property) : Boolean from Object is do
+	operation isSet(~property : Property) : Boolean  is do
 	end
 	
 	/**
@@ -133,7 +133,7 @@ class Object
 	 * The <code>isSet(~property)</code> method will then return False
 	 */
 	@CompilerIgnore "true"
-	operation unset(~property : Property) : Void from Object is do
+	operation unset(~property : Property) : Void  is do
 	end
 	
 	/**
