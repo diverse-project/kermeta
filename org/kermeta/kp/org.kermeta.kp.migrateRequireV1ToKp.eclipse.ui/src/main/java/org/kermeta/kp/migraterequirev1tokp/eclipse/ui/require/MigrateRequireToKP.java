@@ -32,11 +32,21 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpFactory;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.migraterequirev1tokp.eclipse.ui.parser.RequireParser;
+import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
+
 
 
 /** This class migrate the Kermeta V1 require in the (Kermeta Project) kp model.
  require does not exist in kermeta V2 */
 public class MigrateRequireToKP {
+	
+	private EclipseMessagingSystem eclipseMess;
+	
+	/**  Constructor*/
+	public MigrateRequireToKP() {
+		eclipseMess = new EclipseMessagingSystem("migrate Kermeta V1 to V2", "Migrate");
+	}
 	
 	/**
 	 * Parse the selected Kermeta V1 kmt file to migrate require in a .kp file
@@ -95,7 +105,7 @@ public class MigrateRequireToKP {
 	 	@result : true if it is a kmt file, false otherwise
 	 */
 	public boolean isKMTFile(String filePath) {
-		return filePath.endsWith(".kmt\"");
+		return filePath.endsWith(".kmt");
 	}
 	
 	
@@ -153,8 +163,17 @@ public class MigrateRequireToKP {
 		// Create new KP file :
 		String kpPath = createNewKpFile ( pathFile, baseProject,baseProjectNotation,requiredFiles, projectName, groupName);
 		
+		// Add message for user in the Eclipse console
+		eclipseMess.log(Kind.UserINFO," New kp sucessfully created in " + kpPath, "migrate Kermeta V1 to V2" );
+		
+		// List all of the required files for this kp in the Eclipse console
+		for ( String req : requiredFiles) {
+		eclipseMess.log(Kind.UserINFO, req + "file added in "+ kpPath, "migrate Kermeta V1 to V2" );
+		}
+		
 		// Return kp path file
 		return kpPath;
+		
 		//return "";
 		
 	}
@@ -271,33 +290,28 @@ public class MigrateRequireToKP {
  @param baseProject : the path of the base project where this kmt file is stored */
 public void migrateKMT (String pathFile, String baseProject, String baseWorkspace ) throws FileNotFoundException, IOException	 {
 	// The migration is made only on kmt files
-	System.out.println("Begin migrate");
 	
 	//if (isKMTFile(pathFile)) {
 		
-		System.out.println("isKmtFile");
 		// create a new parser 
 		RequireParser parser = new RequireParser (pathFile);
 		
 		// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
-		if (parser.has_stdio()) {
-			
-			
+		if (parser.has_element("stdio."))  {
 			
 			// Test the pathFile and change it to be usable
 			String path = obtainPath(pathFile, baseProject, baseWorkspace);
 			
 			// save the old Kermeta V1 file
-			//copy(pathFile, pathFile + ".old");
+			copy(pathFile, pathFile + ".old");
 			
 			// Add using for stdio : 
-			addUsingStdio (pathFile, "using kermeta::IO::StdIO => stdio");
+			addUsingStdio (pathFile, "using kermeta::io::StdIO => stdio");
+			
+			// Add message to the user for the Eclipse console
+			eclipseMess.log(Kind.UserINFO, pathFile + "kmt file migrated", "migration Kermeta V1 to V2" );
 			
 		}
-		else {
-			
-		}
-		
 		
 	//}
 	
@@ -314,15 +328,18 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		List<String> fileLines = new ArrayList<String>();
 		fileLines =  parser.parseInList();
 		
-		// Retrieve the first index where a require is not followed by a require 
-		int index = lastIndexOfRequire(fileLines);
+		if (! fileLines.contains(using)) {
+			// We add only one times the given using
+			// Retrieve the first index where a require is not followed by a require 
+			int index = lastIndexOfRequire(fileLines);
 		
-		// Add using just after these require
-		fileLines.add(index + 1,using);
+			// Add using just after these require
+			fileLines.add(index + 1,using);
 		
-		// Save the file lines on the file
-		String fileContents = fileContents (fileLines);
-		 writeInFile (pathFile, fileContents);
+			// Save the file lines on the file
+			String fileContents = fileContents (fileLines);
+			writeInFile (pathFile, fileContents);
+		}
 	}
 	
 	

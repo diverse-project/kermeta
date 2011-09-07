@@ -147,7 +147,7 @@ public class RequireParser {
 	// Parse stdio to change in Kermeta::Io::Stdio (by adding an using)
 	//------------------------------------------------------------------------------------------
 	
-	public boolean has_stdio() throws FileNotFoundException {
+	public boolean has_element( String elt) throws FileNotFoundException {
 	    //Note that FileReader is used, not File, since File is not Closeable
 		// Init has stdio to false
 		boolean has_stio = false;
@@ -160,7 +160,7 @@ public class RequireParser {
 	       String resultLine = processLine( scanner.nextLine(), "" );
 	       
 	       // Remove require Kermeta to improve
-	       if (!resultLine.contains(" stdio.") ) { // The line starts with a require
+	       if (!resultLine.contains(elt) ) { // The line starts with a require
 	    	   has_stio = true;
 	       }
 	      }
