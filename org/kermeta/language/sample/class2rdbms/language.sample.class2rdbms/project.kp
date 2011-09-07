@@ -8,11 +8,11 @@ defaultMainOperation : "main"
 	source = "${project.baseUri}/src/main/kmt/Class2RDBMS.kmt"  
 	source = "${project.baseUri}/src/main/kmt/trace.kmt"
 	source = "${project.baseUri}/src/main/ecore/ClassMM.ecore" 
+	//srcQuery ="model/ClassMM.ecore" from "classmm.model"
 	source = "${project.baseUri}/src/main/ecore/RDBMSMM.ecore" 
+	//srcQuery ="model/RDBMSMM.ecore" from "rdbmsmm.model"
 	source = "${project.baseUri}/src/main/kmt/RDBMSMM_aspect.kmt" 
 	
-	//srcQuery ="model/ClassMM.ecore" from "classmm.model"
-	//srcQuery ="model/RDBMSMM.ecore" from "rdbmsmm.model"
 	// depends on library.core	
 	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"  
 	//dependency "classmm.model" URL="mvn:org.kermeta.language.sample/language.sample.class2rdbms.classmm.model/2.0.1-SNAPSHOT" 
