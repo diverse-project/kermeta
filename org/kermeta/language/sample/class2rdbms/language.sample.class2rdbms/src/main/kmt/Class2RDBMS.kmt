@@ -9,7 +9,7 @@ using RDBMSMM
 
 using kermeta::io::StdIO => stdio
 
-class Class2RDBMS 
+class Class2RDBMS  
 {
 	/** The trace of the transformation */
 	reference class2table : Trace<Class, Table>
@@ -206,8 +206,10 @@ class Main
         var resourceSet : ResourceSet init ResourceSet.new
         //repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
         var resource : Resource init 
-        	resourceSet.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
-        							 					 "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+        	//resourceSet.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
+        	//						 					 "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+			resourceSet.createResource("file:/c:/tmp/models/out.xmi", 
+        							 					 "file:/c:/tmp/metamodels/RDBMSMM.ecore")       							 					
 	 	// Define a Root ...
 	 	resource.getContents.add(outputModel)
 	 		 	
@@ -219,8 +221,10 @@ class Main
     operation loadClassModel() : ClassModel is do             
    		var repository : ResourceSet init ResourceSet.new
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
-   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
-   																									"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
+   		//var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
+   		//																							"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
+   		var resource : Resource init repository.createResource("file:/c:/tmp/models/ClassModel.xmi",
+   																									"file:/c:/tmp/metamodels/ClassMM.ecore")
        	resource.load(void)      
        
        from var it : Iterator<Object> init resource.getContents.iterator
