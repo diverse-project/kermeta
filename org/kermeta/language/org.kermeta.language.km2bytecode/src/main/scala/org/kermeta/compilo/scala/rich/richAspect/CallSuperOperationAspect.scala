@@ -24,11 +24,18 @@ trait CallSuperOperationAspect extends KermetaModelElementAspect with LogAspect 
     var actualOperation = actualEObject.asInstanceOf[Operation]
     /* Out EObject Iinstance of Operaiton */
 
-    var superClassFromName = actualOperation.getSuperOperation().asInstanceOf[Operation].getOwningClass.getName
-    var classFrom = actualOperation.getOwningClass
+
+     // the behaviorResolver has already prepared the correct search to the Operation
+     var superClassFromName =  this.getStaticOperation.getOwningClass.getName
+     var superTrait = this.getStaticOperation.getOwningClass
+
+
+   // var superClassFromName = actualOperation.getSuperOperation().asInstanceOf[Operation].getOwningClass.getName
+
+    //var classFrom = actualOperation.getOwningClass
 
     //SEARCH THE FIRST LEVEL SUPER TYPE WHERE OPERATION COMING FROM
-    var superTrait = classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).head
+    //var superTrait = classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).head
     /* var superTrait : Type = null
     var maxLevel : Int = 2
     classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).foreach{stype=>
@@ -48,9 +55,9 @@ trait CallSuperOperationAspect extends KermetaModelElementAspect with LogAspect 
     }*/
 
     log.debug("operation {} from {}",actualOperation.getName, superClassFromName)
-    log.debug(" => {}",superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName         )
-    res.append("super["+superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName+"Aspect]")
-    res.append("."+Util.getEcoreRenameOperation(actualOperation.getSuperOperation.asInstanceOf[Operation]))
+    log.debug(" => {}",superTrait.getName         )
+    res.append("super["+superTrait.getName+"Aspect]")
+    res.append("."+Util.getEcoreRenameOperation(this.getStaticOperation))
     res.append("(")
     Util.generateScalaCodeEach(res,this.getParameters,",")
     //this.getParameters().foreach(par => par.generateScalaCode(res))
