@@ -59,7 +59,10 @@ class Compiler extends LogAspect {
         /* Synchronisation Step */
         futur.get /* Waiting for ScalaAspectVisitor finish submit subtask before close pool ()  */
         Util.threadExecutor.shutdown /* Send ended signal to pool */
-        Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
+        var tpe =  Util.threadExecutor.asInstanceOf[java.util.concurrent.ThreadPoolExecutor]
+       Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
+       log.debug("Thread pool still contains "+ tpe.getQueue().size() + " unfinished tasks, " + tpe.getActiveCount + " active tasks, "
+                          +tpe.getCompletedTaskCount() + " completed tasks, " + tpe.getTaskCount + " total tasks")
         /* End step */
         var endTime= System.currentTimeMillis() - startTime
         log.info("Compilation step complete in "+(endTime)+" millisecondes ")
