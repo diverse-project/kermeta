@@ -1,0 +1,21 @@
+/* $Id:$ 
+ * Creation : September 8, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+using kermeta::standard
+using org::kermeta::language::structure
+
+package helloworld {
+	 
+	class A<G, H> {
+	}
+	 
+	class B inherits A<String, Integer>, C {
+	}
+	
+	class C inherits A<String, Integer> {
+	}
+}

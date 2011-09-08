@@ -82,7 +82,7 @@ aspect class Operation
 					//stdio.writeln("------------------\nChecking parameter : " + p.toString)
 					if (not p.type.isVoid())
 					then
-						stdio.writeln("p.type : " + p.type.toString)
+						//stdio.writeln("p.type : " + p.type.toString)
 						// Check p.type is a String
 						if (p.type.isInstanceOf(ParameterizedType))
 						then
@@ -153,83 +153,4 @@ aspect class Operation
 	end
 	*/
 	
-				/*
-			if (self.ownedParameter.size.equals(1))
-			  then
-			  	// Check this is a collection of String
-			  	// It must then be a TypeContainer
-			  	var param : Parameter init self.ownedParameter.one
-			  	stdio.writeln(" Just one parameter : " + param.name) 
-			  	if ( not(param.containedType.isVoid) )
-			  	then
-			  		// display all containedType 
-			  		stdio.writeln(" - number of containedType : " + param.containedType.size.toString)
-			  		param.containedType.each{ t | 
-			  			stdio.writeln("  -> type : " + t.toString)
-			  			if (t.isInstanceOf(ParameterizedType))
-			  			then
-				  			stdio.writeln("   This is a ParameterizedType...")
-				  			var typeDef : TypeDefinition init t.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
-				  			stdio.writeln("    typeDef : " + typeDef.getQualifiedName)
-				  			// typeDef is a Collection
-				  			//check its containedType
-				  			if (typeDef.containedType.size > 0)
-				  			then
-				  				stdio.writeln("   typeDef.containedType size = " + typeDef.containedType.size.toString)
-				  				typeDef.containedType.each{ ty |
-				  					stdio.writeln("     type:" + ty.toString)
-				  					if (ty.isInstanceOf(ParameterizedType))
-				  					then
-				  						stdio.writeln("      this type is a ParameterizedType")
-				  						//Retreive typeDef
-				  						var tyDef : TypeDefinition init ty.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
-				  						stdio.writeln("       ty.typeDefinition:" + tyDef.getQualifiedName)
-					  					stdio.writeln("       ty.typeParamBinding size :" + ty.asType(ParameterizedType).typeParamBinding.size.toString)
-				  					else
-				  						stdio.writeln("      this type is not a ParameterizedType")
-				  					end
-				  					//check typeParamBinding
-				  				}
-				  			else
-				  				stdio.writeln("   typeDef.containedType is empty")
-				  			end
-				  			
-				  			// Check typeParamBinding
-				  			stdio.writeln("    typeParamBinding size : " + t.asType(ParameterizedType).typeParamBinding.size.toString)
-				  			// there must be one typeParamBinding
-				  			t.asType(ParameterizedType).typeParamBinding.each{ tpb |
-				  				stdio.writeln("    tpb.containedType.size = " + tpb.containedType.size.toString)
-				  				tpb.containedType.each{ ct |
-				  					if (ct.isInstanceOf(ParameterizedType)) 
-				  					then
-				  						stdio.writeln("       typeDef: " + ct.asType(ParameterizedType).typeDefinition.asType(TypeDefinition).getQualifiedName)
-				  					else
-				  						stdio.writeln("       this ct is no ParameterizedType")
-				  					end
-				  				}
-				  			}
-				  			
-				  			false
-			  			else
-				  			stdio.writeln("   This is not a ParameterizedType...")
-				  			false
-			  			end 
-			  		}
-			  		(self.ownedParameter.one.containedType.size==1 and
-			  		self.ownedParameter.one.containedType.one.isInstanceOf(ParameterizedType) and
-			  		self.ownedParameter.one.containedType.one.asType(ParameterizedType).typeDefinition.asType(TypeDefinition).getQualifiedName.equals("kermeta::standard::String"))
-			  		//true
-			  	else
-				  	stdio.writeln(" - containedType is void !")
-			  		false
-			  	end
-			  else
-			  	stdio.writeln(" More than one parameter : " + self.ownedParameter.size.toString) 
-			 	false
-			  end
-			)*/
-		/*else
-			true*/
-	
-//}
 

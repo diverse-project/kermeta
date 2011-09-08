@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : September 7, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+// use Kermeta MDK to retrieve super types
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
+
+
+aspect class Enumeration
+{
+	/**
+	 * If not empty, the supertypes of a Enumeration must be enumerations
+	 */
+	@Scope "RESOLVED"
+	inv super_type_must_be_enumeration is do
+
+		//stdio.writeln("Evaluating super_type_must_be_enumeration for " + self.name)
+		self.getAllSuperTypes().forAll{ typeDef |
+			//stdio.writeln(" - superType : " + typeDef.toString)
+			typeDef.isInstanceOf(org::kermeta::language::structure::Enumeration)
+		}
+
+	end
+
+}

@@ -1,0 +1,1 @@
+no_multiple_inheritance_with_different_bindings

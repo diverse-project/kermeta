@@ -10,43 +10,34 @@ package kermeta::language::structure;
 
 
 require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
 aspect class Property
 {
-	//attribute mustDrillDownCache : Boolean
+	attribute mustDrillDownCache : Boolean
 	
 	operation mustDrillDown() : Boolean is do
-		/*
+		
+		//stdio.writeln("-------------")
+		//stdio.writeln("MustdrillDown")
+		//stdio.writeln(" - self : " + self.toString)
+		//stdio.writeln(" - self.type : " + self.type.toString)
+		
 		if mustDrillDownCache.isVoid
 		then
-			mustDrillDownCache := not kermeta::standard::ValueType.isSuperTypeOf(self.type)
+			mustDrillDownCache := true//not kermeta::standard::ValueType.isSuperTypeOf(self.type)
+			//mustDrillDownCache := not(self.type.isSubTypeOf(org::kermeta::language::structure::DataType))
 		end
+		//stdio.writeln(" - result : " + result.toString)
 		result := mustDrillDownCache
 	
-		*/
+		
 		//stdio.writeln("  ----> mustdrilldown : ")
 		//stdio.writeln("       " + mustDrillDownCache.toString)
 		
-		/*
-		if mustDrillDownCache.isVoid
-		then
-			stdio.writeln( "Property " + self.name + " - type : " + self.type.toString )
-			stdio.writeln( " type metaclass : " + self.type.getMetaClass.name)
-			stdio.writeln(" type's typeContainer : " + self.type.typeContainer.toString)
-			
-			if (not(self.type.typeContainer.isVoid()))
-			then
-				if (self.type.typeContainer.isKindOf(ClassDefinition))
-				then
-					stdio.writeln( "this is a class definition : " + self.type.typeContainer.asType(ClassDefinition).name)
-				end
-			end
-			
-			//mustDrillDownCache := not (kermeta::standard::ValueType.isSuperTypeOf(self.type))
-			//mustDrillDownCache := not (self.type.isSubTypeOf(kermeta::standard::ValueType))
-		end
-		*/
+
 		
-		result := true	
+		//result := true	
 	end 
 
 }

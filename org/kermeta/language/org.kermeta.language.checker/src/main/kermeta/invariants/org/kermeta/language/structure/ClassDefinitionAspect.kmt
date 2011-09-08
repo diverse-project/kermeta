@@ -14,7 +14,10 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
-//require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/StructureHelper.kmt"
+// use Kermeta MDK
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
+// To retrieve a qualified name
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 
 using kermeta::utils
 using kermeta::standard
@@ -38,6 +41,90 @@ aspect class ClassDefinition {
 		}
 	end
 	*/
+	
+	/**
+	 * A class cannot inherit twice the same generic class with 2 different bindings.
+	 * Check the class' inheritance tree.
+	 */
+	@Scope "RESOLVED"
+	inv no_multiple_inheritance_with_different_bindings is do
+	
+		//stdio.writeln("Checking no_multiple_inheritance_with_different_bindings for " + self.name)
+		
+		var res : Boolean init true
+	
+		var typeSet : Set<Type> init Set<Type>.new
+		self.getAllSuperTypes().each{ type |
+			if (type.isInstanceOf(Class))
+			then
+				var qName : String init type.asType(Class).typeDefinition.getQualifiedName
+				//stdio.writeln("  superType qName is : " + qName)
+
+				if (type.asType(Class).typeParamBinding.size>0)
+				then
+					//stdio.writeln("   this superType has " + type.asType(Class).typeParamBinding.size.toString + " bindings")
+					// is it already in the set ?
+					var lType : Type init typeSet.detect{ty|
+						ty.asType(Class).typeDefinition.getQualifiedName.equals(qName)}
+					//if lType is not null, then we must compare the type of the bindings
+					//stdio.writeln("  lType : " + lType.toString)
+					if not(lType.isVoid)
+					then
+						// We have to compare the bindings of type and lType
+						// Browse through lType bindings
+						lType.asType(Class).typeParamBinding.each{ tpb |
+							//there must exist a binding in type with the same variable name for the same type
+							var lTpb : TypeVariableBinding init type.asType(Class).typeParamBinding.detect{ tpbBis | tpbBis.variable.name.equals(tpb.variable.name)}
+							//stdio.writeln("    lTpb : " + lTpb.toString)
+							if (lTpb.isVoid)
+							then
+								// then there is an error
+								//stdio.writeln("Problem with the bindings variable name")
+								res:=false
+							else
+								if (lTpb.type.isInstanceOf(Class) and tpb.type.isInstanceOf(Class))
+								then
+									//stdio.writeln("    lTpb.type.asType(Class).typeDefinition.getQualifiedName : " + lTpb.type.asType(Class).typeDefinition.getQualifiedName)
+									//stdio.writeln("     tpb.type.asType(Class).typeDefinition.getQualifiedName : " + tpb.type.asType(Class).typeDefinition.getQualifiedName)
+									// the binding type on the variable must be the same
+									if not(lTpb.type.asType(Class).typeDefinition.getQualifiedName.equals(
+											tpb.type.asType(Class).typeDefinition.getQualifiedName))
+									then
+										res:=false
+									end
+								else
+									//stdio.writeln("		One of the typeVaraibleBinding is bound to an ObjectTypeVaraible, no check required")
+								end
+							end
+							
+						}
+					else
+						//stdio.writeln("  lType is Void")
+						// add type to the typset
+						//stdio.writeln("   adding " + type.asType(Class).typeDefinition.getQualifiedName + " to the Generic Type Set of super types")
+						typeSet.add(type)	
+					end
+				end
+			end
+		}
+		res
+	end
+	
+	
+	/**
+	  *	if not empty, the supertypes of a ClassDefinition must be Class
+	  */
+	@Scope "RESOLVED"
+	inv super_types_must_be_classes is do
+
+		//stdio.writeln("Evaluating super_types_must_be_classes for " + self.name)
+		self.getAllSuperTypes().forAll{ typeDef |
+			//stdio.writeln(" - superType : " + typeDef.toString)
+			typeDef.isInstanceOf(org::kermeta::language::structure::Class)
+		}
+	
+	end
+	
 	
 	/**
 	 * Fake one for testing purposes */

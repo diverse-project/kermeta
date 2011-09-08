@@ -15,6 +15,9 @@ require kermeta
 
 //structure
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ClassDefinitionAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/EnumerationAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ModelTypeAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/PrimitiveTypeAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ConstraintAspect.kmt"
 //require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/KermetaModelElementAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ModelingUnitAspect.kmt"
