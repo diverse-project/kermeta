@@ -36,6 +36,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.internal.ide.undo.FolderDescription;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
@@ -223,7 +224,7 @@ public class KPBuilder {
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			ArrayList<String> fullClassPath = new ArrayList<String>();
 			fullClassPath.addAll(additionalClassPath);
-			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, compiler.variableExpander));
+			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL)));
 			
 			ModelingUnit result = null;
 			
