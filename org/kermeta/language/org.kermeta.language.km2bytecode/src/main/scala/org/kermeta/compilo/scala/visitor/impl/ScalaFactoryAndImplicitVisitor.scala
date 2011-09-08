@@ -281,7 +281,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
         //}
         res.append("\t init() \n")
-        res.append("\t"+"_root_." )
+        res.append("\ttry {\n")
+        res.append("\t\t"+"_root_." )
         if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
         {
             res.append(GlobalConfiguration.scalaAspectPrefix+".")
@@ -297,9 +298,15 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             if(i != 0){ res.append(" , ")}
             res.append("args("+i+")")
         }
-        res.append(")")
-		
-        res.append("\n}\n}")
+        res.append(")\n")
+        res.append("\t} catch {\n")
+        res.append("\t\t case e :_root_.k2.exceptions.Exception => println(\"Exception caught \"+e+\" \"+e.message) \n" )
+			  res.append("\t\t\t if(e.getCause != null) {e.getCause.printStackTrace()} else {e.printStackTrace()}\n")
+		    res.append("\t\t case e => println(\"Exception caught \"+e)\n")
+        res.append("\t\t\t e.printStackTrace()\n")
+        res.append("\t}\n")
+
+        res.append("}\n}")
 		
         Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "MainRunner", res.toString())
         this.genetateUtilObject
