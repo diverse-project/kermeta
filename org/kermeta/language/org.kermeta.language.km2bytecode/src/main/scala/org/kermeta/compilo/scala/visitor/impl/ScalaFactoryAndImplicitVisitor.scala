@@ -34,7 +34,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
         packName= k2.utils.TypeEquivalence.getPackageEquivalence(packName)
         var impName = packName+ Util.getImplPackageSuffix(packName)+Util.getPackagePrefix(packNameUpper)+"PackageImpl"
        
-    res.append(Util.protectScalaKeyword(impName +".init()"))        
+    res.append("\t\t"+Util.protectScalaKeyword(impName +".init()"))
  res.append(".setEFactoryInstance(")
             res.append(Util.protectScalaKeyword(GlobalConfiguration.scalaAspectPrefix+"."+packName+"."+GlobalConfiguration.factoryName+""))
             res.append(")")
@@ -56,30 +56,30 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
        if (packName.equals("org.eclipse.emf.ecore")){
             //res.append("\n{\n\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
             //res.append("\tc.setAccessible(true);\n")
-            res.append("\n{\n\tvar pack : org.eclipse.emf.ecore.EcorePackage =  org.eclipse.emf.ecore.impl.EcorePackageImpl.init\n")
-            res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
+            res.append("\n{\n\t\tvar pack : org.eclipse.emf.ecore.EcorePackage =  org.eclipse.emf.ecore.impl.EcorePackageImpl.init\n")
+            res.append("\t\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
                   
 //            res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
-            res.append("\tpack.setEFactoryInstance(" +GlobalConfiguration.scalaAspectPrefix+"."+ packName + "."+GlobalConfiguration.factoryName+")\n " )
-            res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
-            res.append("\tf.setAccessible(true)\n")
+            res.append("\t\tpack.setEFactoryInstance(" +GlobalConfiguration.scalaAspectPrefix+"."+ packName + "."+GlobalConfiguration.factoryName+")\n " )
+            res.append("\t\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
+            res.append("\t\tf.setAccessible(true)\n")
             if(packName.equals("org.eclipse.emf.ecore")){
-                res.append("\tf.set(pack, "+ GlobalConfiguration.scalaAspectPrefix+"."+ packName + "."+GlobalConfiguration.factoryName+")\n")
+                res.append("\t\tf.set(pack, "+ GlobalConfiguration.scalaAspectPrefix+"."+ packName + "."+GlobalConfiguration.factoryName+")\n")
             }
-            res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+Util.protectScalaKeyword(packName) + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
-            res.append("\tk2.persistence.EcorePackages.getPacks().put("+Util.protectScalaKeyword(packName) + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
-            res.append("\t"+impName +".init\n}\n")
+            res.append("\t\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+Util.protectScalaKeyword(packName) + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
+            res.append("\t\tk2.persistence.EcorePackages.getPacks().put("+Util.protectScalaKeyword(packName) + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
+            res.append("\t\t"+impName +".init\n}\n")
             return res.toString
         }
         else {
-            res.append("\n{\n\t")
+            res.append("\n\t\t{\n\t\t\t")
             res.append("var pack : "+Util.protectScalaKeyword(packName+"."+ Util.getPackagePrefix( packNameUpper)+"Package")+" = "+Util.protectScalaKeyword(impName +".init")+"\n")
-            res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+Util.protectScalaKeyword(packName + "."+ Util.getPackagePrefix( packNameUpper)+"Package.eNS_URI")+", pack)\n")
-            res.append("\tk2.persistence.EcorePackages.getPacks().put("+Util.protectScalaKeyword(packName + "."+ Util.getPackagePrefix( packNameUpper)+"Package.eNS_URI")+", pack)\n")
-            res.append("\tpack.setEFactoryInstance(")
+            res.append("\t\t\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+Util.protectScalaKeyword(packName + "."+ Util.getPackagePrefix( packNameUpper)+"Package.eNS_URI")+", pack)\n")
+            res.append("\t\t\tk2.persistence.EcorePackages.getPacks().put("+Util.protectScalaKeyword(packName + "."+ Util.getPackagePrefix( packNameUpper)+"Package.eNS_URI")+", pack)\n")
+            res.append("\t\t\tpack.setEFactoryInstance(")
             res.append(Util.protectScalaKeyword(GlobalConfiguration.scalaAspectPrefix+"."+packName+"."+GlobalConfiguration.factoryName+""))
             res.append(")")
-            res.append("\n}\n\n")
+            res.append("\n\t\t}\n\n")
             return res.toString
         }
     
@@ -222,12 +222,12 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
         res.append("object MainRunner  {\n")
         //res.append("def main(args : Array[String]) : Unit = {\n\t" )
-        res.append("def init() : Unit = {\n\t" )
+        res.append("\tdef init() : Unit = {\n" )
         if (GlobalConfiguration.isTest){
             res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
         }
-        res.append("k2.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
-        res.append("k2.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
+        res.append("\t\tk2.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
+        res.append("\t\tk2.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
         java.util.Collections.sort(packages, new java.util.Comparator[Package]{
                 def compare(o1:Package , o2:Package):Int={
                     if ("ecore".equals(o1.getName))
@@ -264,25 +264,25 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             }
         )
 		
-        res.append("\n\t _root_.k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
-      res.append("\n\t _root_.k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+        res.append("\n\t\t _root_.k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+      res.append("\n\t\t _root_.k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
             
-        res.append("}\n")
-        res.append("def init4eclipse() : Unit = {\n\t" )
+        res.append("\t}\n")
+        res.append("\tdef init4eclipse() : Unit = {\n\t" )
         res.append(resinitEclipse.toString)
         res.append("\n\t _root_.k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
       res.append("\n\t _root_.k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
-              res.append("}\n")
+              res.append("\t}\n")
 
 
-        res.append("def main(args : Array[String]) : Unit = {\n")
+        res.append("\tdef main(args : Array[String]) : Unit = {\n")
         //if (packages.exists(pac=> "ecore".equals(pac.getName))){
        //     res.append("\t org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.asInstanceOf[org.eclipse.emf.ecore.EcoreFactoryWrapper].setWrap("+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.eclipse.emf.ecore."+GlobalConfiguration.factoryName+") \n \t" )
             //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
         //}
-        res.append("\t init() \n")
-        res.append("\ttry {\n")
-        res.append("\t\t"+"_root_." )
+        res.append("\t\tinit() \n")
+        res.append("\t\ttry {\n")
+        res.append("\t\t\t"+"_root_." )
         if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
         {
             res.append(GlobalConfiguration.scalaAspectPrefix+".")
@@ -299,14 +299,14 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             res.append("args("+i+")")
         }
         res.append(")\n")
-        res.append("\t} catch {\n")
-        res.append("\t\t case e :_root_.k2.exceptions.Exception => println(\"Exception caught \"+e+\" \"+e.message) \n" )
-			  res.append("\t\t\t if(e.getCause != null) {e.getCause.printStackTrace()} else {e.printStackTrace()}\n")
-		    res.append("\t\t case e => println(\"Exception caught \"+e)\n")
-        res.append("\t\t\t e.printStackTrace()\n")
-        res.append("\t}\n")
+        res.append("\t\t} catch {\n")
+        res.append("\t\t\t case e :_root_.k2.exceptions.Exception => println(\"Exception caught \"+e+\" \"+e.message) \n" )
+			  res.append("\t\t\t\t if(e.getCause != null) {e.getCause.printStackTrace()} else {e.printStackTrace()}\n")
+		    res.append("\t\t\t case e => println(\"Exception caught \"+e)\n")
+        res.append("\t\t\t\t e.printStackTrace()\n")
+        res.append("\t\t}\n")
 
-        res.append("}\n}")
+        res.append("\t}\n}")
 		
         Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "MainRunner", res.toString())
         this.genetateUtilObject
