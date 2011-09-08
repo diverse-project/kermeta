@@ -303,6 +303,7 @@ public class KermetaCompiler {
 				// deal with km to scala
 				// compiler require a file location not an URL
 				logger.progress("KermetaCompiler.kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
+				logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
 				String fileLocation = mergedFile.toURI().toURL().getFile();
 				km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
 				logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
