@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ClassMM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ClassMM="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore">
+<ClassMM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ClassMM="http://kermeta.org/sample/class2rdbms/ClassMM.ecore">
   <classifier xsi:type="ClassMM:Class" name="Toto" is_persistent="true">
     <attrs type="//@classifier.2" name="titi" is_primary="true"/>
   </classifier>
