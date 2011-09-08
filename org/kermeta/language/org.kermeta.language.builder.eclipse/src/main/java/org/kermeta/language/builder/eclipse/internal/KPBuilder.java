@@ -237,9 +237,9 @@ public class KPBuilder {
 			}
 			if (andRun) {
 				if (isBuildNeeded && result != null) {
-					compiler.runK2Program(additionalClassPath, params);
+					compiler.runK2Program(fullClassPath, params);
 				} else {
-					compiler.runK2Program(additionalClassPath, params,kpFileURL,outputFolder,outputFolder);
+					compiler.runK2Program(fullClassPath, params,kpFileURL,outputFolder,outputFolder);
 				}
 				
 			}
