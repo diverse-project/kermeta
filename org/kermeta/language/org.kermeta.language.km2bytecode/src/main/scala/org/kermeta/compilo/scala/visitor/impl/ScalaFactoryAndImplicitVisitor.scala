@@ -280,7 +280,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
        //     res.append("\t org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.asInstanceOf[org.eclipse.emf.ecore.EcoreFactoryWrapper].setWrap("+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.eclipse.emf.ecore."+GlobalConfiguration.factoryName+") \n \t" )
             //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
         //}
-        res.append("\t init() \n\t"+"_root_." )
+        res.append("\t init() \n")
+        res.append("\t"+"_root_." )
         if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
         {
             res.append(GlobalConfiguration.scalaAspectPrefix+".")
