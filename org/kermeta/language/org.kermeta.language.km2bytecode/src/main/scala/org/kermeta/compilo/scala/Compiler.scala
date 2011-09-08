@@ -61,8 +61,10 @@ class Compiler extends LogAspect {
         Util.threadExecutor.shutdown /* Send ended signal to pool */
         var tpe =  Util.threadExecutor.asInstanceOf[java.util.concurrent.ThreadPoolExecutor]
        Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
-       log.debug("Thread pool still contains "+ tpe.getQueue().size() + " unfinished tasks, " + tpe.getActiveCount + " active tasks, "
-                          +tpe.getCompletedTaskCount() + " completed tasks, " + tpe.getTaskCount + " total tasks")
+       if (tpe.getQueue().size() != 0 || tpe.getActiveCount !=0){
+          log.error("Thread pool still contains "+ tpe.getQueue().size() + " unfinished tasks, " + tpe.getActiveCount + " active tasks, (ie. "
+                          +tpe.getCompletedTaskCount() + " completed tasks on " + tpe.getTaskCount + " total tasks)")
+       }
         /* End step */
         var endTime= System.currentTimeMillis() - startTime
         log.info("Compilation step complete in "+(endTime)+" millisecondes ")
