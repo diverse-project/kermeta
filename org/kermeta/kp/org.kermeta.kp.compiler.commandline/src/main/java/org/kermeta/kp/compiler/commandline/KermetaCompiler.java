@@ -85,7 +85,7 @@ public class KermetaCompiler {
 	// public List<String> additionalClassPath = new
 	// java.util.ArrayList<String>();
 	// public String projectName = "project";
-	public KpVariableExpander variableExpander;
+	//public KpVariableExpander variableExpander;
 	public Boolean useFSC = false; // separate compilation server
 
 	public Boolean hasFailed = false;
