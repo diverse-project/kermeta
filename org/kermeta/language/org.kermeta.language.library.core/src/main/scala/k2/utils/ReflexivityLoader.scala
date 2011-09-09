@@ -111,8 +111,9 @@ import _root_.org.osgi.framework.BundleContext
           else
              c= bundleContext.getBundle.loadClass(prefix+"runner.MainRunner")
 
+
           if(c.getClassLoader.getResource(prefix + "Reflexivity.km") == null){
-            println("Failed to load Reflexivity.km")
+            println("Failed to load "+prefix + "Reflexivity.km from "+c.getClassLoader.getResource("").toString)
           }
           this.loadKmModel(c.getClassLoader.getResource(prefix +"Reflexivity.km").toURI().toString()).foreach(e=>
                 if (e.isInstanceOf[ClassDefinition])
