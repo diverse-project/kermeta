@@ -70,7 +70,7 @@ public class KermetaCompiler {
 	
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
-	public static String INTERMEDIATE_SUBFOLDER = "intermediate";
+	public static String INTERMEDIATE_SUBFOLDER = "";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
 	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
