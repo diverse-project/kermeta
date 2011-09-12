@@ -17,6 +17,76 @@
       [Enter License Description here.]
    </license>
 
+
+   <plugin
+         id="fr.irisa.triskell.cache.utilities"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="fr.irisa.triskell.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>   
+   <plugin
+         id="org.emftext.commons.antlr3_2_0"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.diagnostic.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.compiler.commandline"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.editor.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.launcher.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.loader.kp"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.loader.kp.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.kp.migrateRequireV1ToKp.eclipse.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+         
+         
    <plugin
          id="org.kermeta.language.texteditor.eclipse.nature"
          download-size="0"
