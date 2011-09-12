@@ -17,7 +17,7 @@
 	<property name="studio.os.variant" value="linux_x86_64"/>
 	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_${studio.eclipse.code.name}_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_${studio.eclipse.code.name}_bases_for_kermeta/build/kermeta_${studio.eclipse.code.name}_${studio.os.variant}_base.${studio.archive.extension}"/>
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
-	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.1.1.R36x_v20101122_1400.jar"/>
+	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
 	<property name="deploy.server" value="web1.irisa.fr"/>
 	<property name="deploy.user" value="web-kermeta"/>
 	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/kermeta2/update"/>
@@ -25,13 +25,11 @@
 	<property name="kermeta.language.version" value="2.0.1-SNAPSHOT"/>
 	<property name="kermeta.maven.repsitory" value="http://maven.irisa.fr/artifactory/repo"/>
 	
-	<!-- <target name="all" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template"> -->
-	<target name="all" depends="get_studio_base, get_site_template, get_repository_source">
+	<target name="all" depends="clean_result, get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
 		<!--<antcall target="upload" />-->
 	</target>
 	
 	<target name="publish_features_and_bundles" depends="get_repository_source">
-		<delete dir="${updatesite.repository}" failonerror="false"/>
 		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 				           fork="true"
 				           failonerror="true"
@@ -44,10 +42,14 @@
 					<arg value="-artifactRepository"/>
 					<arg value="file:/${updatesite.repository}"/>
 					<arg value="-source"/>
-					<arg value="${source.features.and.bundles}/eclipse"/>
+					<arg value="${source.features.and.bundles}"/>
 					<arg value="-compress"/>
 					<arg value="-publishArtifacts"/>
 				</java>	
+	</target>
+	
+	<target name="clean_result">
+		<delete dir="${updatesite.repository}" failonerror="false"/>
 	</target>
 	<target name="publish_categories" depends="publish_features_and_bundles">
 			<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
@@ -114,9 +116,89 @@
 		<!--<delete dir="${source.features.and.bundles}" failonerror="false"/>-->
 		<mkdir dir="${source.features}" />
 		<mkdir dir="${source.bundles}" />
+		
+		<!-- features -->
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.feature/${kermeta.language.version}/language.feature-${kermeta.language.version}.jar" 
-					dest="${source.features}/org.kermeta.language.feature-${kermeta.language.version}.jar"
-					usetimestamp="true"/>
+			dest="${source.features}"
+			usetimestamp="true"/>
+		
+		<!-- plugins -->
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse.nature/${kermeta.language.version}/language.texteditor.eclipse.nature-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_2_0/${kermeta.language.version}/commons.antlr3_2_0-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.model/${kermeta.language.version}/language.model-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.slf4j.eclipse/${kermeta.language.version}/utils.slf4j.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<!--
+		mvn:org.kermeta.scala/scala-library/2.9.0-1
+		mvn:org.kermeta.scala/jline/2.9.0-1
+		mvn:org.kermeta.scala/scala-compiler/2.9.0-1
+		mvn:fr.irisa.triskell.kermeta/kermeta.model/1.4.0
+		-->
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers/${kermeta.language.version}/utils.helpers-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers.eclipse/${kermeta.language.version}/utils.helpers.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.systemservices.api/${kermeta.language.version}/utils.systemservices.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.systemservices.eclipse/${kermeta.language.version}/utils.systemservices.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.model/${kermeta.language.version}/kp.model-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.editor/${kermeta.language.version}/kp.editor-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.editor.ui/${kermeta.language.version}/kp.editor.ui-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.loader.kp.api/${kermeta.language.version}/kp.loader.kp.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.loader.kp/${kermeta.language.version}/kp.loader.kp-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<!--
+		mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.loader.kmt.scala.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.loader.kmt.scala/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.framework.scala
+		mvn:org.kermeta.language/language.merger.binarymerger.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.merger.binarymerger/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.resolver.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.resolver/2.0.1-SNAPSHOT
+		mvn:org.kermeta.diagnostic/diagnostic.model/2.0.1-SNAPSHOT
+		mvn:org.kermeta.traceability/traceability.model/2.0.2-SNAPSHOT
+		mvn:org.kermeta.language/language.checker.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.checker/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.ecore2km.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.ecore2km/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.km2bytecode/2.0.1-SNAPSHOT
+		mvn:org.kermeta.kp/kp.compiler.commandline/2.0.1-SNAPSHOT
+		mvn:fr.irisa.triskell.utilities/cache.utilities/0.1.0
+		mvn:org.kermeta.language/language.builder.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.builder.eclipse/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.autocompletion.api/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.autocompletion/2.0.1-SNAPSHOT
+		mvn:org.kermeta.language/language.texteditor.eclipse/2.0.1-SNAPSHOT
+		mvn:org.kermeta.kp/kp.launcher.eclipse/2.0.1-SNAPSHOT
+		mvn:org.kermeta.kp/kp.migrateRequireV1ToKp.eclipse.ui/2.0.1-SNAPSHOT
+		
+		-->
+		
+		
 		 	
 	</target>
 </project>
