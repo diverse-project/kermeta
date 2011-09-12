@@ -5,13 +5,13 @@
 
 	<property name="env.WORKSPACE" location="."/>
 	
-	<property name="source.features.and.bundles.downloaded.zip" location="${env.WORKSPACE}/tmp/features_and_bundles.zip"/>		
-	<property name="source.features.and.bundles.url" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip"/>		
-	<property name="updatesite.repository" location="${env.WORKSPACE}/updatesite"/>
+	<property name="updatesite.repository" location="${env.WORKSPACE}/target/updatesite"/>
 	<property name="category.definition" location="./src/resources/site.xml"/>
-	<property name="source.features.and.bundles" location="${env.WORKSPACE}/build/features_and_bundles"/>	
+	<property name="source.features.and.bundles" location="${env.WORKSPACE}/target/features_and_bundles"/>	
+	<property name="source.features" location="${source.features.and.bundles}/features"/>
+	<property name="source.bundles" location="${source.features.and.bundles}/plugins"/>
 	
-	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
+	<property name="studio.base.dir" location="${env.WORKSPACE}/target/studiobase/"/>
 	<property name="studio.archive.extension" value="tar.gz"/>
 	<property name="studio.eclipse.code.name" value="indigo"/>
 	<property name="studio.os.variant" value="linux_x86_64"/>
@@ -22,11 +22,12 @@
 	<property name="deploy.user" value="web-kermeta"/>
 	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/kermeta2/update"/>
 	
-	
+	<property name="kermeta.language.version" value="2.0.1-SNAPSHOT"/>
+	<property name="kermeta.maven.repsitory" value="http://maven.irisa.fr/artifactory/repo"/>
 	
 	<!-- <target name="all" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template"> -->
-	<target name="all" depends="get_studio_base, get_site_template">
-		<antcall target="upload" />
+	<target name="all" depends="get_studio_base, get_site_template, get_repository_source">
+		<!--<antcall target="upload" />-->
 	</target>
 	
 	<target name="publish_features_and_bundles" depends="get_repository_source">
@@ -68,7 +69,7 @@
 	</target>
 	<target name="get_site_template">
 		<copy todir="${updatesite.repository}">
-			<fileset dir="${env.WORKSPACE}/org.kermeta.language.site/src/resources" includes="**" >
+			<fileset dir="${env.WORKSPACE}/src/resources" includes="**" >
 				<!--<exclude name="readme.txt"/>
 				<exclude name="*_build.xml"/>-->
 			</fileset>	
@@ -96,11 +97,11 @@
 		    </fileset>
 		</scp>
 		<!-- override the site.xml with the correct category.xml -->
-		<scp file="category.xml" remoteTofile="${deploy.user}@${deploy.server}:${deploy.path}/site.xml"
+		<!--<scp file="category.xml" remoteTofile="${deploy.user}@${deploy.server}:${deploy.path}/site.xml"
 			keyfile="${key.file}"
 			passphrase=""
 		    trust="yes">
-		</scp>
+		</scp>-->
 	</target>
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
@@ -110,13 +111,12 @@
 		</ant>
 	</target>
 	<target name="get_repository_source">
-		<delete dir="${source.features.and.bundles}" failonerror="false"/>
-		<mkdir dir="${env.WORKSPACE}/tmp"/>
-		<get src="${source.features.and.bundles.url}" 
-					dest="${source.features.and.bundles.downloaded.zip}"
+		<!--<delete dir="${source.features.and.bundles}" failonerror="false"/>-->
+		<mkdir dir="${source.features}" />
+		<mkdir dir="${source.bundles}" />
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.feature/${kermeta.language.version}/language.feature-${kermeta.language.version}.jar" 
+					dest="${source.features}/org.kermeta.language.feature-${kermeta.language.version}.jar"
 					usetimestamp="true"/>
-		<unzip dest="${source.features.and.bundles}"
-			src="${source.features.and.bundles.downloaded.zip}">
-		</unzip> 	
+		 	
 	</target>
 </project>
