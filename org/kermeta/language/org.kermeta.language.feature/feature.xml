@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.language.feature"
       label="Kermeta 2 Studio"
-      version="2.0.1-SNAPSHOT"
+      version="2.0.1.SNAPSHOT"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
