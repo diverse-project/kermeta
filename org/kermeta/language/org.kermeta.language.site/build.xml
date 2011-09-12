@@ -22,8 +22,16 @@
 	<property name="deploy.user" value="web-kermeta"/>
 	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/kermeta2/update"/>
 	
-	<property name="kermeta.language.version" value="2.0.1-SNAPSHOT"/>
+
 	<property name="kermeta.maven.repsitory" value="http://maven.irisa.fr/artifactory/repo"/>
+	<property name="kermeta.language.version" value="2.0.1-SNAPSHOT"/>
+	<property name="k1.model.version" value="1.4.0"/>
+	<property name="k1.framework.version" value="0.12.9"/>
+	<property name="k1.compiler.version" value="2.9.0-1"/>
+	<property name="triskell.utilities.version" value="0.1.0"/>
+	<property name="traceability.version" value="2.0.2-SNAPSHOT"/>
+	<property name="emftext.commons.version" value="2.0.1-SNAPSHOT"/>
+	<property name="scala.version" value="2.9.0-1"/>
 	
 	<target name="all" depends="clean_result, get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
 		<!--<antcall target="upload" />-->
@@ -126,22 +134,25 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse.nature/${kermeta.language.version}/language.texteditor.eclipse.nature-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
-		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_2_0/${kermeta.language.version}/commons.antlr3_2_0-${kermeta.language.version}.jar" 
-			dest="${source.bundles}"
-			usetimestamp="true"/>
-		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.model/${kermeta.language.version}/language.model-${kermeta.language.version}.jar" 
+		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_2_0/${emftext.commons.version}/commons.antlr3_2_0-${emftext.commons.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
 		
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.slf4j.eclipse/${kermeta.language.version}/utils.slf4j.eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
-		<!--
-		mvn:org.kermeta.scala/scala-library/2.9.0-1
-		mvn:org.kermeta.scala/jline/2.9.0-1
-		mvn:org.kermeta.scala/scala-compiler/2.9.0-1
-		mvn:fr.irisa.triskell.kermeta/kermeta.model/1.4.0
-		-->
+		<get src="${kermeta.maven.repsitory}/fr/irisa/triskell/kermeta/kermeta.model/${k1.model.version}/kermeta.model-${k1.model.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/scala-compiler/${k1.compiler.version}/scala-compiler-${k1.compiler.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/scala-library/${scala.version}/scala-library-${scala.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/jline/${scala.version}/jline-${scala.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers/${kermeta.language.version}/utils.helpers-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
@@ -169,34 +180,88 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.loader.kp/${kermeta.language.version}/kp.loader.kp-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
-		<!--
-		mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.loader.kmt.scala.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.loader.kmt.scala/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.framework.scala
-		mvn:org.kermeta.language/language.merger.binarymerger.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.merger.binarymerger/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.resolver.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.resolver/2.0.1-SNAPSHOT
-		mvn:org.kermeta.diagnostic/diagnostic.model/2.0.1-SNAPSHOT
-		mvn:org.kermeta.traceability/traceability.model/2.0.2-SNAPSHOT
-		mvn:org.kermeta.language/language.checker.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.checker/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.ecore2km.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.ecore2km/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.km2bytecode/2.0.1-SNAPSHOT
-		mvn:org.kermeta.kp/kp.compiler.commandline/2.0.1-SNAPSHOT
-		mvn:fr.irisa.triskell.utilities/cache.utilities/0.1.0
-		mvn:org.kermeta.language/language.builder.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.builder.eclipse/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.autocompletion.api/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.autocompletion/2.0.1-SNAPSHOT
-		mvn:org.kermeta.language/language.texteditor.eclipse/2.0.1-SNAPSHOT
-		mvn:org.kermeta.kp/kp.launcher.eclipse/2.0.1-SNAPSHOT
-		mvn:org.kermeta.kp/kp.migrateRequireV1ToKp.eclipse.ui/2.0.1-SNAPSHOT
 		
-		-->
+
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.model/${kermeta.language.version}/language.model-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.loader.kmt.scala.api/${kermeta.language.version}/language.loader.kmt.scala.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.loader.kmt.scala/${kermeta.language.version}/language.loader.kmt.scala-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<!-- **** -->
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.framework.scala/${k1.framework.version}/language.framework.scala-${k1.framework.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<!-- **** -->
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.merger.binarymerger.api/${kermeta.language.version}/language.merger.binarymerger.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.merger.binarymerger/${kermeta.language.version}/language.merger.binarymerger-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.resolver.api/${kermeta.language.version}/language.resolver.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.resolver/${kermeta.language.version}/language.resolver-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/diagnostic/diagnostic.model/${kermeta.language.version}/diagnostic.model-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/traceability/traceability.model/${traceability.version}/traceability.model-${traceability.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.checker.api/${kermeta.language.version}/language.checker.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.checker/${kermeta.language.version}/language.checker-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.ecore2km.api/${kermeta.language.version}/language.ecore2km.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.ecore2km/${kermeta.language.version}/language.ecore2km-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.library.core/${kermeta.language.version}/language.library.core-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.km2bytecode/${kermeta.language.version}/language.km2bytecode-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.compiler.commandline/${kermeta.language.version}/kp.compiler.commandline-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.builder.api/${kermeta.language.version}/language.builder.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.builder.eclipse/${kermeta.language.version}/language.builder.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.autocompletion.api/${kermeta.language.version}/language.autocompletion.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.autocompletion/${kermeta.language.version}/language.autocompletion-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse/${kermeta.language.version}/language.texteditor.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.launcher.eclipse/${kermeta.language.version}/kp.launcher.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.migrateRequireV1ToKp.eclipse.ui/${kermeta.language.version}/kp.migrateRequireV1ToKp.eclipse.ui-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/fr/irisa/triskell/utilities/cache.utilities/${triskell.utilities.version}/cache.utilities-${triskell.utilities.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		
 		
 		
 		 	
