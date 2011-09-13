@@ -37,7 +37,7 @@
 	</target>
 	
 	<target name="deploy" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
-		<!--<antcall target="upload" />-->
+		<antcall target="upload" />
 	</target>
 	
 	<target name="clean_result">
