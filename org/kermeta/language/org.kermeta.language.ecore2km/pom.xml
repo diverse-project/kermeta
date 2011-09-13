@@ -133,6 +133,7 @@
 							<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 							<Bundle-Name>${project.name}</Bundle-Name>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+							<Bundle-Version>${bundle.version}</Bundle-Version>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Bundle-Localization>plugin</Bundle-Localization>
