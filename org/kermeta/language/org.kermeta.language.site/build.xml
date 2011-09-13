@@ -33,8 +33,16 @@
 	<property name="emftext.commons.version" value="2.0.1-SNAPSHOT"/>
 	<property name="scala.version" value="2.9.0-1"/>
 	
-	<target name="all" depends="clean_result, get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
+	<target name="all" depends="clean_result, deploy">
+	</target>
+	
+	<target name="deploy" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
 		<!--<antcall target="upload" />-->
+	</target>
+	
+	<target name="clean_result">
+			<delete dir="${updatesite.repository}" failonerror="false"/>
+			<delete dir="${source.features.and.bundles}" failonerror="false"/>
 	</target>
 	
 	<target name="publish_features_and_bundles" depends="get_repository_source">
@@ -56,9 +64,7 @@
 				</java>	
 	</target>
 	
-	<target name="clean_result">
-		<delete dir="${updatesite.repository}" failonerror="false"/>
-	</target>
+	
 	<target name="publish_categories" depends="publish_features_and_bundles">
 			<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 					           fork="true"
