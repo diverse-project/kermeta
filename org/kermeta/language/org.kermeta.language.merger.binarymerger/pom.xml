@@ -146,12 +146,13 @@
 							<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 							<Bundle-Name>${project.name}</Bundle-Name>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+							<Bundle-Version>${bundle.version}</Bundle-Version>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 							<Bundle-Activator>org.kermeta.language.merger.binarymerger.internal.Activator</Bundle-Activator>
 							<Export-Package>
 								org.kermeta.language.merger.binarymerger
-                        </Export-Package>
+                        	</Export-Package>
 							<Require-Bundle>
 								org.kermeta.scala.scala-library,
 								fr.irisa.triskell.kermeta.model,
@@ -159,7 +160,7 @@
 								org.kermeta.language.merger.binarymerger.api,
 								org.kermeta.language.framework.scala,
 								org.kermeta.utils.systemservices.api
-                        </Require-Bundle>
+                        	</Require-Bundle>
 							<Import-Package>
 								kermeta.persistence,
 								org.eclipse.emf.common.notify,
