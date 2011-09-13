@@ -233,7 +233,37 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>     
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.traceability.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.utils.helpers"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.utils.helpers.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.utils.systemservices.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.kermeta.utils.systemservices.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
     
 
 </feature>
