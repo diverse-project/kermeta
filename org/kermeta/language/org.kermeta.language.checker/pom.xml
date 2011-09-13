@@ -126,6 +126,7 @@
 						<manifestEntries>
 							<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 							<Bundle-Name>${project.name}</Bundle-Name>
+							<Bundle-Version>${bundle.version}</Bundle-Version>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
