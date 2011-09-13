@@ -120,6 +120,7 @@
 			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-Activator>org.kermeta.language.resolver.internal.Activator</Bundle-Activator>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
