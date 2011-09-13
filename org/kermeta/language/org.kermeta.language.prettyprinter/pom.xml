@@ -71,7 +71,7 @@
              <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.7</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -96,6 +96,7 @@
 			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-Activator>org.kermeta.language.prettyprinter.internal.Activator</Bundle-Activator>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
