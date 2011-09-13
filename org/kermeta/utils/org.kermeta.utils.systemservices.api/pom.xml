@@ -39,6 +39,7 @@
 							<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 							<Bundle-Name>${project.name}</Bundle-Name>
 							<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						    <Bundle-Version>${project.version}</Bundle-Version>
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-Localization>plugin</Bundle-Localization>
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
