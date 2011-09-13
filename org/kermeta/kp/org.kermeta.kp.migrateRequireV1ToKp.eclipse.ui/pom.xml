@@ -50,6 +50,7 @@
 			            <Bundle-SymbolicName>org.kermeta.kp.migrateRequireV1ToKp.eclipse.ui;singleton:=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
