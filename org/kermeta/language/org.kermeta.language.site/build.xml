@@ -137,12 +137,9 @@
 			usetimestamp="true"/>
 		
 		<!-- plugins -->
-		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse.nature/${kermeta.language.version}/language.texteditor.eclipse.nature-${kermeta.language.version}.jar" 
+		<!--<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_2_0/${emftext.commons.version}/commons.antlr3_2_0-${emftext.commons.version}.jar" 
 			dest="${source.bundles}"
-			usetimestamp="true"/>
-		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_2_0/${emftext.commons.version}/commons.antlr3_2_0-${emftext.commons.version}.jar" 
-			dest="${source.bundles}"
-			usetimestamp="true"/>
+			usetimestamp="true"/>-->
 		
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.slf4j.eclipse/${kermeta.language.version}/utils.slf4j.eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
@@ -256,6 +253,9 @@
 			dest="${source.bundles}"
 			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse/${kermeta.language.version}/language.texteditor.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse.nature/${kermeta.language.version}/language.texteditor.eclipse.nature-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.launcher.eclipse/${kermeta.language.version}/kp.launcher.eclipse-${kermeta.language.version}.jar" 
