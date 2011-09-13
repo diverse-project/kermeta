@@ -1135,7 +1135,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="#//kermeta/language/structure/TypeContainer #//kermeta/language/structure/Type">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Type corresponding to a set of Types&#xA;Only used in the context of FunctionType"/>
+            <details key="documentation" value="Type corresponding to a set of Types. It represents a set of ModelElement that are instances of the Types in the ProductType.&#xA;The number of ModelElement is the same as the number of Types of the ProductType&#xA;Only used in the context of FunctionType&#xA;This allows to to send to the function a set of elements as parameters, each parameter is typed&#xA;with the types in the set of the ProductType.&#xA;Unfortunatly, there is no surface syntax for a literal that could help in using this type in another context."/>
           </eAnnotations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="type" unique="false"
               upperBound="-1" eType="#//kermeta/language/structure/Type">
@@ -1174,7 +1174,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="UnresolvedInferredType" eSuperTypes="#//kermeta/language/structure/Unresolved #//kermeta/language/structure/Type">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Special type reference which is still unresolved.&#xD;&#xA;However we need to use a special inferrence algorithm in order  to create a real Type that points to a concrete TypeDefinition.&#xD;&#xA;Exemple :&#xD;&#xA;A typical use will be for the type of the lambda parameter i in :&#xD;&#xA;operation foo(f : &lt;Integer->Integer) is abstract&#xD;&#xA;...&#xD;&#xA;foo{i | i+1 }&#xD;&#xA;&#xD;&#xA;in that case, the type of i is an UnresolvedInferredType, the Resolved should find the appropriate operation foo (if there is no ambiguity)&#xD;&#xA;"/>
+            <details key="documentation" value="Special type reference which is still unresolved.&#xD;&#xA;However, we need to use a special inferrence algorithm in order  to create a real Type that points to a concrete TypeDefinition.&#xD;&#xA;Exemple :&#xD;&#xA;A typical use will be for the type of the lambda parameter i in :&#xD;&#xA;operation foo(f : &lt;Integer->Integer) is abstract&#xD;&#xA;...&#xD;&#xA;foo{i | i+1 }&#xD;&#xA;&#xD;&#xA;in that case, the type of i is an UnresolvedInferredType, the Resolver should find the appropriate operation foo (if there is no ambiguity)&#xD;&#xA;"/>
           </eAnnotations>
         </eClassifiers>
       </eSubpackages>
