@@ -41,20 +41,20 @@ public class KermetaProjectNewWizardPage extends WizardNewProjectCreationPage
     protected WizardDialog wizardDialog;
     
     /** true if user uses the default metamodel/model/output folders, false otherwise */
-    public boolean useDefaultFolders = true;
-    protected Button useDefaultFoldersButton;
+//    public boolean useDefaultFolders = true;
+//    protected Button useDefaultFoldersButton;
     
-    private Label _srcFolderLabel;
-    private Text _srcFolder;
-    private String _srcFolderValue = "src/kermeta";
-
-    private Label _modelFolderLabel;
-    private Text _modelFolder;
-    private String _modelFolderValue = "model";
-    
-    private Label _metamodelFolderLabel;
-    private Text _metamodelFolder;
-    private String _metamodelFolderValue = "metamodel";
+//    private Label _srcFolderLabel;
+//    private Text _srcFolder;
+//    private String _srcFolderValue = "src/kermeta";
+//
+//    private Label _modelFolderLabel;
+//    private Text _modelFolder;
+//    private String _modelFolderValue = "model";
+//    
+//    private Label _metamodelFolderLabel;
+//    private Text _metamodelFolder;
+//    private String _metamodelFolderValue = "metamodel";
     
     
 	/**
@@ -83,7 +83,7 @@ public class KermetaProjectNewWizardPage extends WizardNewProjectCreationPage
         // The text field for the project location (default or user defined)
         super.createControl(parent);
         Composite composite = (Composite)getControl();
-        createDefaultFoldersRadioButton(composite);
+       // createDefaultFoldersRadioButton(composite);
         
     }
     /**
@@ -91,7 +91,7 @@ public class KermetaProjectNewWizardPage extends WizardNewProjectCreationPage
      * models/metamodels/src/bin
      * @param parent
      */
-    protected void createDefaultFoldersRadioButton(Composite parent)
+   /* protected void createDefaultFoldersRadioButton(Composite parent)
     {
         
         Font font = parent.getFont();
@@ -139,98 +139,98 @@ public class KermetaProjectNewWizardPage extends WizardNewProjectCreationPage
         };
         useDefaultFoldersButton.addSelectionListener(listener);
         
-    }
+    }*/
     
     /**
      * Enable/Disable the default folder location fields
      * */
-    protected void setLocationFoldersEnabled(boolean b)
-    {/*
-        modelLocationText.setEnabled(b);   modelLocationLabel.setEnabled(b);
-        mmodelLocationText.setEnabled(b);  mmodelLocationLabel.setEnabled(b);*/
-        _srcFolder.setEnabled(b);
-        _srcFolderLabel.setEnabled(b);
-        _modelFolder.setEnabled(b);
-        _modelFolderLabel.setEnabled(b);
-        _metamodelFolder.setEnabled(b);
-        _metamodelFolderLabel.setEnabled(b);
-    }
+//    protected void setLocationFoldersEnabled(boolean b)
+//    {/*
+//        modelLocationText.setEnabled(b);   modelLocationLabel.setEnabled(b);
+//        mmodelLocationText.setEnabled(b);  mmodelLocationLabel.setEnabled(b);*/
+//        _srcFolder.setEnabled(b);
+//        _srcFolderLabel.setEnabled(b);
+//        _modelFolder.setEnabled(b);
+//        _modelFolderLabel.setEnabled(b);
+//        _metamodelFolder.setEnabled(b);
+//        _metamodelFolderLabel.setEnabled(b);
+//    }
 
-    protected void setLocationFoldersForSelection() {
-		if ( useDefaultFolders ) {
-			_srcFolder.setText( _srcFolderValue );
-			_modelFolder.setText( _modelFolderValue );
-			_metamodelFolder.setText( _metamodelFolderValue );
-		}
-    }
+//    protected void setLocationFoldersForSelection() {
+//		if ( useDefaultFolders ) {
+//			_srcFolder.setText( _srcFolderValue );
+//			_modelFolder.setText( _modelFolderValue );
+//			_metamodelFolder.setText( _metamodelFolderValue );
+//		}
+//    }
 
     /**
      * Create the templated folder
      * @param folderGroup
      * @param b
      */
-    private void createUserSpecifiedFolderLocationGroup(Group folderGroup, boolean b) {
-		Font font = folderGroup.getFont();
-		_srcFolderLabel = createLocationLabel(folderGroup, "Kermeta Source Folder", b, font);
-		_srcFolder = createLocationText(folderGroup, b, font, _srcFolderValue);
+//    private void createUserSpecifiedFolderLocationGroup(Group folderGroup, boolean b) {
+//		Font font = folderGroup.getFont();
+//		_srcFolderLabel = createLocationLabel(folderGroup, "Kermeta Source Folder", b, font);
+//		_srcFolder = createLocationText(folderGroup, b, font, _srcFolderValue);
+//
+//		_modelFolderLabel = createLocationLabel(folderGroup, "Model Folder", b, font);
+//		_modelFolder = createLocationText(folderGroup, b, font, _modelFolderValue);
+//		
+//		_metamodelFolderLabel = createLocationLabel(folderGroup, "Metamodel Folder", b, font);
+//		_metamodelFolder = createLocationText(folderGroup, b, font, _metamodelFolderValue);
+//    }
+    
+//    protected Label createLocationLabel(Group folderGroup, String label, boolean enabled, Font font) {
+//        Label _locationLabel = new Label(folderGroup, SWT.NONE);
+//		_locationLabel.setText(label); //$NON-NLS-1$
+//		_locationLabel.setEnabled(enabled);
+//		_locationLabel.setFont(font);
+//		return _locationLabel;
+//    }
 
-		_modelFolderLabel = createLocationLabel(folderGroup, "Model Folder", b, font);
-		_modelFolder = createLocationText(folderGroup, b, font, _modelFolderValue);
-		
-		_metamodelFolderLabel = createLocationLabel(folderGroup, "Metamodel Folder", b, font);
-		_metamodelFolder = createLocationText(folderGroup, b, font, _metamodelFolderValue);
-    }
+//    protected Text createLocationText(Group folderGroup, boolean enabled, Font font, String defaultValue) {
+//        Text _locationText = new Text(folderGroup, SWT.BORDER);
+//        GridData data = new GridData(GridData.FILL_HORIZONTAL);
+//        //data.widthHint = SIZING_TEXT_FIELD_WIDTH;
+//        _locationText.setLayoutData(data);
+//        _locationText.setEnabled(enabled);
+//        _locationText.setFont(font);
+//        _locationText.setText(defaultValue);
+//        return _locationText;
+//    }
     
-    protected Label createLocationLabel(Group folderGroup, String label, boolean enabled, Font font) {
-        Label _locationLabel = new Label(folderGroup, SWT.NONE);
-		_locationLabel.setText(label); //$NON-NLS-1$
-		_locationLabel.setEnabled(enabled);
-		_locationLabel.setFont(font);
-		return _locationLabel;
-    }
-
-    protected Text createLocationText(Group folderGroup, boolean enabled, Font font, String defaultValue) {
-        Text _locationText = new Text(folderGroup, SWT.BORDER);
-        GridData data = new GridData(GridData.FILL_HORIZONTAL);
-        //data.widthHint = SIZING_TEXT_FIELD_WIDTH;
-        _locationText.setLayoutData(data);
-        _locationText.setEnabled(enabled);
-        _locationText.setFont(font);
-        _locationText.setText(defaultValue);
-        return _locationText;
-    }
+//    /**
+//     * 
+//     * @return
+//     */
+//    public String getSrcFolder() {
+//    	return _srcFolder.getText();
+//    }
+//    
+//    /**
+//     * 
+//     * @return
+//     */
+//    public String getModelFolder() {
+//    	return _modelFolder.getText();
+//    }
+//    
+//    /**
+//     * 
+//     * @return
+//     */
+//    public String getMetamodelFolder() {
+//    	return _metamodelFolder.getText();
+//    }
     
-    /**
-     * 
-     * @return
-     */
-    public String getSrcFolder() {
-    	return _srcFolder.getText();
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public String getModelFolder() {
-    	return _modelFolder.getText();
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public String getMetamodelFolder() {
-    	return _metamodelFolder.getText();
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public boolean createFolders() {
-    	return useDefaultFolders;
-    }
+//    /**
+//     * 
+//     * @return
+//     */
+//    public boolean createFolders() {
+//    	return useDefaultFolders;
+//    }
 
     /* (non-Javadoc)
      * @see org.eclipse.ui.dialogs.WizardNewProjectCreationPage#setInitialProjectName(java.lang.String)

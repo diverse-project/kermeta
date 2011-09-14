@@ -129,15 +129,15 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 
 	private InputStream openContentStream() {
 		String contents =
+				"\tusing kermeta::standard\n\n"+
 				 "package "+"mainpackage"+"{\n"+
-					        "\tusing kermeta::standard\n\n"+
-					        "\tclass "+"MainClass"+
-					        "\n\t{\n"+
-					        	"\t\toperation "+"mainOperation"+"() : Void is do \n"+
-					        "\t\t\t// TODO: implement '"+"mainOperation"+ "' operation\n"+
-					        "\t\tend"+
-					        "\n\t}"+
-					        "\n}";
+		        "\tclass "+"MainClass"+
+		        "\n\t{\n"+
+		        "\t\toperation "+"mainOperation"+"() : Void is do \n"+
+		        "\t\t\t// TODO: implement '"+"mainOperation"+ "' operation\n"+
+		        "\t\tend"+
+		        "\n\t}"+
+		        "\n}";
 				
 			//"This is the initial file contents for *.kmt file that should be word-sorted in the Preview page of the multi-page editor";
 		return new ByteArrayInputStream(contents.getBytes());
