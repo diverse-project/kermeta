@@ -138,4 +138,5 @@
         </dependency>
     </dependencies>
     <groupId>org.kermeta.kp</groupId>
+    <version>${kermeta.version}</version>
 </project>
