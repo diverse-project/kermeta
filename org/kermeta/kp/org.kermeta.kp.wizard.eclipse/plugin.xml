@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Kermeta"
+            id="org.kermeta.kp.wizard.eclipse">
+      </category>
+      <wizard
+            name="KMT file creator"
+            icon="icons/sample.gif"
+            category="org.kermeta.kp.wizard.eclipse"
+            class="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard"
+            id="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard">
+      </wizard>
+   </extension>
+
+</plugin>
