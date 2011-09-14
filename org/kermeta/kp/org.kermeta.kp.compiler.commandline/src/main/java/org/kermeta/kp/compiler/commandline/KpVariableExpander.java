@@ -47,9 +47,11 @@ public class KpVariableExpander {
 			else{
 				// deal with system properties
 				String propertyKey =  m.group().substring(m.group().lastIndexOf("{")+1, m.group().lastIndexOf("}"));
-				String possibleReplacement = System.getProperty(propertyKey);
-				if(possibleReplacement != null){
-					replacement = possibleReplacement;
+				if(!propertyKey.isEmpty()){
+					String possibleReplacement = System.getProperty(propertyKey);
+					if(possibleReplacement != null){
+						replacement = possibleReplacement;
+					}
 				}
 			}
 			if(replacement.equals(m.group())){
