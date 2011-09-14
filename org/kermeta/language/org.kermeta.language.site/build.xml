@@ -275,6 +275,9 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.migrateRequireV1ToKp.eclipse.ui/${kermeta.language.version}/kp.migrateRequireV1ToKp.eclipse.ui-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.wizard.eclipse/${kermeta.language.version}/kp.wizard.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/fr/irisa/triskell/utilities/cache.utilities/${triskell.utilities.version}/cache.utilities-${triskell.utilities.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
