@@ -165,6 +165,10 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers.eclipse/${kermeta.language.version}/utils.helpers.eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers.eclipse.jface/${kermeta.language.version}/utils.helpers.eclipse.jface-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.systemservices.api/${kermeta.language.version}/utils.systemservices.api-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
