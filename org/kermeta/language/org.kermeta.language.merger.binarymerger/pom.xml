@@ -150,6 +150,7 @@
 							<Bundle-ClassPath>.</Bundle-ClassPath>
 							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 							<Bundle-Activator>org.kermeta.language.merger.binarymerger.internal.Activator</Bundle-Activator>
+							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Export-Package>
 								org.kermeta.language.merger.binarymerger
                         	</Export-Package>
