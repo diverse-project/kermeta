@@ -70,16 +70,10 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 				 public void run(IProgressMonitor monitor) throws CoreException {
 					 project.create(monitor);
 					 project.open(monitor);
-					 //NatureHelper.addNatureToProject(project, KermetaNature.ID);
 					 addKermetaNatureToProject(project);
-					 //ProjectBuilderHelper.addBuilderToProject(project, KpmProjectBuilder.ID);
-					  
-						 createFolder(project, "src/main/kmt", monitor);
-						 createDefaultKmt(project, "src/main/kmt/Main.kmt", monitor);
-						 createDefaultKp(project, project.getName()+".kp", monitor);
-//						 createFolder(project, page.getModelFolder(), monitor);
-//						 createFolder(project, page.getMetamodelFolder(), monitor);
-				 	
+					 createFolder(project, "src/main/kmt", monitor);
+					 createDefaultKmt(project, "src/main/kmt/Main.kmt", monitor);
+					 createDefaultKp(project, project.getName()+".kp", monitor);
 				 }
 			};
 			ResourcesPlugin.getWorkspace().run(operation, null);
