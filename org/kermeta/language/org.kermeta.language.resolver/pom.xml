@@ -122,6 +122,7 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-Activator>org.kermeta.language.resolver.internal.Activator</Bundle-Activator>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
