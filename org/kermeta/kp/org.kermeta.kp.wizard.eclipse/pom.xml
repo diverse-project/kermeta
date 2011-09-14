@@ -125,10 +125,16 @@
     </build>
 
     <dependencies>
+    	
         <dependency>
             <groupId>org.kermeta.emf</groupId>
             <artifactId>emf.lib</artifactId>
             <version>${emf.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.kermeta.language</groupId>
+        	<artifactId>language.texteditor.eclipse.nature</artifactId>
+        	<version>2.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

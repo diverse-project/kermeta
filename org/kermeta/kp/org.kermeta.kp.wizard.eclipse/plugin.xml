@@ -9,11 +9,19 @@
             id="org.kermeta.kp.wizard.eclipse">
       </category>
       <wizard
-            name="KMT file creator"
+            name="new Kermeta file"
             icon="icons/newkermetafile.png"
             category="org.kermeta.kp.wizard.eclipse"
             class="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard"
             id="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard">
+      </wizard>
+      <wizard
+            category="org.kermeta.kp.wizard.eclipse"
+            class="org.kermeta.kp.wizard.eclipse.wizards.KermetaProjectNewWizard"
+            icon="icons/new_kermeta_project.gif"
+            id="org.kermeta.kp.wizard.eclipse.wizards.KermetaProjectNewWizard"
+            name="New Kermeta Project"
+            project="true">
       </wizard>
    </extension>
 
