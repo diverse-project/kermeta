@@ -135,6 +135,9 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.feature/${kermeta.language.version}/language.feature-${kermeta.language.version}.jar" 
 			dest="${source.features}"
 			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.feature/${kermeta.language.version}/utils.feature-${kermeta.language.version}.jar" 
+			dest="${source.features}"
+			usetimestamp="true"/>
 		
 		<!-- plugins -->
 		<!--<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_2_0/${emftext.commons.version}/commons.antlr3_2_0-${emftext.commons.version}.jar" 
