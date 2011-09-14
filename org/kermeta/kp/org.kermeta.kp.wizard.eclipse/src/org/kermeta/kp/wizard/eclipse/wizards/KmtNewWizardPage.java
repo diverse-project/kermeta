@@ -16,11 +16,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.eclipse.ui.internal.ide.misc.ContainerSelectionGroup;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -33,59 +31,18 @@ public class KmtNewWizardPage extends WizardPage {
 
 	private Text fileText;
 
-	private IStructuredSelection selection;
+	private ISelection selection;
 
-	private Composite linkedResourceParent;
-    private Button advancedButton;
-    public static final int GRID_DATA_WIDTH = 150;
-    public String defaultPackageString = "root_package";
-    public static final String defaultClassString = "Main";
-    public static final String defaultOperationString = "main";
-    private Text packageText;
-    private Text mainClassText;
-    private Text mainOperationText;
-    private Group advancedGroup;
-	
-	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
-	
-	
-	/** The widget for path selection */
-	protected ContainerSelectionGroup containerGroup;
-	
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 * 
 	 * @param pageName
 	 */
-	public KmtNewWizardPage(IStructuredSelection selection) {
+	public KmtNewWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("New Kermeta File");
+		setTitle("Multi-page Editor File");
 		setDescription("This wizard creates a new file with *.kmt extension that can be opened by a multi-page editor.");
 		this.selection = selection;
-		setDefaultPackageName();
-	}
-	
-	/**
-	 * Sets the package name from the selection.
-	 * The name is the container path without the project name, without the src and/or kermeta folder.
-	 * @param container
-	 */
-	private void setDefaultPackageName() {
-		if ( selection.getFirstElement() instanceof IContainer ) {
-			IContainer container = (IContainer) selection.getFirstElement();
-			String s = container.getFullPath().toString();
-			s = s.replace( container.getProject().getFullPath().toString(), "" );
-			if ( s.startsWith("/") )
-				s = s.replaceFirst("/", "");
-			if ( s.startsWith("src/") )
-				s = s.replaceFirst("src/", "");
-			if ( s.startsWith("kermeta/") )
-				s = s.replaceFirst("kermeta/", "");
-			if ( ! s.equals("kermeta") && ! s.equals("src") && ! s.equals("") ) {
-				s = s.replace("/", "::");
-				defaultPackageString = s;			
-			}
-		}
 	}
 
 	/**
@@ -217,15 +174,7 @@ public class KmtNewWizardPage extends WizardPage {
 		setErrorMessage(message);
 		setPageComplete(message == null);
 	}
-	/**
-     * @return Returns the mainClassText.
-     */
-    public Text getMainClassText() {  return mainClassText;}
-    public String getMainClassTextString() {  return mainClassText.getText();}
-    
-	
-	public String getPackageTextString() { return packageText.getText();}
-	
+
 	public String getContainerName() {
 		return containerText.getText();
 	}
@@ -233,12 +182,4 @@ public class KmtNewWizardPage extends WizardPage {
 	public String getFileName() {
 		return fileText.getText();
 	}
-	
-	/**
-     * @return Returns the mainOperationText.
-     */
-    public Text getMainOperationText() { return mainOperationText;}
-    public String getMainOperationTextString() { return mainOperationText.getText();}
-    
-	
 }

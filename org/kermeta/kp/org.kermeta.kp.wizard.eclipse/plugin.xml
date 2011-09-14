@@ -10,7 +10,7 @@
       </category>
       <wizard
             name="KMT file creator"
-            icon="icons/sample.gif"
+            icon="icons/newkermetafile.png"
             category="org.kermeta.kp.wizard.eclipse"
             class="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard"
             id="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard">

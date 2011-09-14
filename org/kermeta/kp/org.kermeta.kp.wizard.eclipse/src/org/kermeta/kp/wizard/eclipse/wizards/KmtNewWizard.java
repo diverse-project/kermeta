@@ -6,11 +6,7 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.core.runtime.*;
 import org.eclipse.jface.operation.*;
-import org.eclipse.jface.preference.IPreferenceStore;
-
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
-
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.core.resources.*;
@@ -18,8 +14,6 @@ import org.eclipse.core.runtime.CoreException;
 import java.io.*;
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.internal.dialogs.DialogUtil;
-import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -33,21 +27,8 @@ import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
  */
 
 public class KmtNewWizard extends Wizard implements INewWizard {
-	
-	public final static String STD_TAB = "\t";
-
-	public final static String STD_NL = "\r\n";
-	
 	private KmtNewWizardPage page;
-	private IStructuredSelection selection;
-	
-	private IWorkbench workbench;
-
-    private String packageTextString;
-
-    private String classTextString;
-
-    private String operationTextString;
+	private ISelection selection;
 
 	/**
 	 * Constructor for KmtNewWizard.
@@ -72,20 +53,12 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	 * using wizard as execution context.
 	 */
 	public boolean performFinish() {
-		//final String containerName = page.getContainerName();
-		//final String fileName = page.getFileName();
-		final IPath containerPath = page.containerGroup.getContainerFullPath();
-	    final String fileName = page.getFileName();
-        packageTextString = page.getPackageTextString();
-        classTextString = page.getMainClassTextString();
-		operationTextString = page.getMainOperationTextString();
-		
-		
-		
+		final String containerName = page.getContainerName();
+		final String fileName = page.getFileName();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
-					doFinish(containerPath, fileName, monitor);
+					doFinish(containerName, fileName, monitor);
 				} catch (CoreException e) {
 					throw new InvocationTargetException(e);
 				} finally {
@@ -112,24 +85,18 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	 */
 
 	private void doFinish(
-		IPath containerPath,//String containerName,
+		String containerName,
 		String fileName,
 		IProgressMonitor monitor)
 		throws CoreException {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IResource resource = root.findMember(containerPath);//new Path(containerName));
+		IResource resource = root.findMember(new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer)) {
-			throwCoreException("Container \"" + containerPath + "\" does not exist.");
+			throwCoreException("Container \"" + containerName + "\" does not exist.");
 		}
-		// File the file with the template text
 		IContainer container = (IContainer) resource;
-		
-		// Put .kmt extension if it does not exist in fileName 
-				if (!fileName.endsWith(".kmt"))
-				{   fileName = fileName+".kmt";		}
-		
 		final IFile file = container.getFile(new Path(fileName));
 		try {
 			InputStream stream = openContentStream();
@@ -143,88 +110,18 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 		}
 		monitor.worked(1);
 		monitor.setTaskName("Opening file for editing...");
-		// FIXME : If file exists it is not editable --
-		// I must display the errors
 		getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
-			    //BasicNewResourceWizard.selectAndReveal(file, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
-				IWorkbenchWindow dw = getWorkbench().getActiveWorkbenchWindow();
-				
+				IWorkbenchPage page =
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
-				    if (dw == null)
-				    {
-				        dw = getWorkbench().openWorkbenchWindow("kermetaPerspective",ResourcesPlugin.getWorkspace());
-				    }
-				    
-				    BasicNewResourceWizard.selectAndReveal(file, dw);
-					if (dw != null) {
-						IWorkbenchPage page = dw.getActivePage();
-						if (page != null) {
-						    page.setEditorAreaVisible(true);
-						    IEditorPart part = IDE.openEditor(page, file, true);
-						    part.setFocus();
-						}
-						else { System.out.println("Error : no active page was found (RunnerPlugin)");}
-					}
+					IDE.openEditor(page, file, true);
 				} catch (PartInitException e) {
-					DialogUtil.openError(
-						dw.getShell(),
-						"Error : Could not open the requested file", //$NON-NLS-1$
-						e.getMessage(),
-						e);
-				}
-				
-				catch (WorkbenchException e)
-				{
-				    e.printStackTrace();
 				}
 			}
 		});
-	 
-		
-//		getShell().getDisplay().asyncExec(new Runnable() {
-//			public void run() {
-//				IWorkbenchPage page =
-//					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-//				try {
-//					IDE.openEditor(page, file, true);
-//				} catch (PartInitException e) {
-//				}
-//			}
-//		});
 		monitor.worked(1);
 	}
-	
-	/***
-	 * Create the template file according to the default
-	 * root package name and main class name and main operation name (all
-	 * may be optional).
-	 * @return
-	 */
-	private String createTemplate()
-	{
-		Date d = new Date(System.currentTimeMillis());
-		//IPreferenceStore store = KermetaUIPlugin.getDefault().getPreferenceStore();
-		//String header = store.getString(PreferenceConstants.P_KMT_HEADER_TEMPLATESTRING);
-		// replace variables in the header
-		//header = header.replaceAll(EscapeChars.forRegex("${date}"), DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(d));
-		//header = header.replaceAll(EscapeChars.forRegex("${user}"), System.getProperty("user.name"));
-		
-	    String template_string = 
-	    	//header+
-	        "@mainClass \""+packageTextString+"::"+classTextString+"\"\n"+ 
-	        "@mainOperation \""+operationTextString+"\"\n\n\n"+
-	        "package "+packageTextString+";\n\n\n"+
-	        "require kermeta\n"+
-	        "class "+classTextString+
-	        "\n{\n"+
-	        	STD_TAB+"operation "+operationTextString+"() : Void is do \n"
-	        +	STD_TAB+STD_TAB+"// TODO: implement '"+operationTextString+ "' operation\n"
-	        +   STD_TAB+"end"+
-	        "\n}";
-	    return template_string;
-	}
-	
 	
 	/**
 	 * We will initialize file contents with a sample text.
@@ -232,7 +129,17 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 
 	private InputStream openContentStream() {
 		String contents =
-			"This is the initial file contents for *.kmt file that should be word-sorted in the Preview page of the multi-page editor";
+				 "package "+"mainpackage"+"{\n"+
+					        "\tusing kermeta::standard\n\n"+
+					        "\tclass "+"MainClass"+
+					        "\n\t{\n"+
+					        	"\t\toperation "+"mainOperation"+"() : Void is do \n"+
+					        "\t\t\t// TODO: implement '"+"mainOperation"+ "' operation\n"+
+					        "\t\tend"+
+					        "\n\t}"+
+					        "\n}";
+				
+			//"This is the initial file contents for *.kmt file that should be word-sorted in the Preview page of the multi-page editor";
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 
@@ -250,10 +157,4 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 	}
-	
-	public IWorkbench getWorkbench()
-	{
-	    return workbench;
-	}
-	
 }
