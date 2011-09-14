@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.kermeta.language.feature_1.0.0.201109121635.jar" id="org.kermeta.language.feature" version="1.0.0.201109121635">
+   <feature url="features/org.kermeta.language.feature_2.0.1.SNAPSHOT.jar" id="org.kermeta.language.feature" version="2.0.1.SNAPSHOT">
       <category name="Kermeta2Language"/>
    </feature>
    <category-def name="Kermeta2Language" label="Kermeta 2 language"/>
