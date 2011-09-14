@@ -112,6 +112,8 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 				"KermetaProject :\""+project.getName()+"\"\n"+ 
 					"version :  \"0.0.1\"\n"+
 					"group :\"group\"\n" +
+					"defaultMainClass : \"mainpackage::MainClass\"\n"+
+					"defaultMainOperation : \"mainOperation\"\n"+
 					"{\n" +
 					"source = \"${project.baseUri}/src/main/kmt/Main.kmt\"\n"+  
 					"dependency \"language.model\" URL=\"mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT\""+
@@ -139,6 +141,7 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 				 "package "+"mainpackage"+"{\n"+
 		        "\tclass "+"MainClass"+
 		        "\n\t{\n"+
+		        "\t\t@main \"\"\n"+
 		        "\t\toperation "+"mainOperation"+"() : Void is do \n"+
 		        "\t\t\t// TODO: implement '"+"mainOperation"+ "' operation\n"+
 		        "\t\tend"+
