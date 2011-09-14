@@ -442,7 +442,8 @@ public class KermetaCompiler {
 			} else {
 				ModelingUnit mu = null;
 				try {
-					mu = new ModelingUnitLoader(logger, this.runInEclipse, this.saveIntermediateFiles, this.targetIntermediateFolder).loadModelingUnitFromURL(oneURL.toString());
+					ModelingUnitLoader muLoader = new ModelingUnitLoader(logger, this.runInEclipse, this.saveIntermediateFiles, this.targetIntermediateFolder);
+					mu = muLoader.loadModelingUnitFromURL(oneURL.toString());
 					if (mu != null) {
 						if (mu.getName() == null) {
 							// force ModelingUnit name to the one provided in the kp
@@ -450,7 +451,7 @@ public class KermetaCompiler {
 						}
 						modelingUnits.add(mu);
 					} else {
-						logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + oneURL, LOG_MESSAGE_GROUP, new FileReference(oneURL));
+						logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + oneURL + " "+muLoader.lastLoadErrorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
 					}
 				} catch (Exception e) {
 					try {					

@@ -43,6 +43,10 @@ public class ModelingUnitLoader {
 	public Boolean saveIntermediateFiles = false;
 	public String targetIntermediateFolder;
 	
+	
+	/** Error message of the last load or empty string if last load was successful */
+	public String lastLoadErrorMessage = "";
+	
 	public ModelingUnitLoader(MessagingSystem logger, Boolean runInEclipse) {
 		super();
 		this.logger = logger;
@@ -58,6 +62,7 @@ public class ModelingUnitLoader {
 	
 	
 	public ModelingUnit loadModelingUnitFromURL(String urlString) throws IOException{
+		lastLoadErrorMessage = "";
 		URI uri =  URI.createURI(urlString);
 		ModelingUnit mu = null;
 		if (urlString.endsWith(".kmt")) {
@@ -72,11 +77,13 @@ public class ModelingUnitLoader {
 					new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
 				}
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				lastLoadErrorMessage = e.toString();
+				this.logger.debug(e.toString(),this.getClass().getName());
+				//e.printStackTrace();
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				lastLoadErrorMessage = e.toString();
+				this.logger.debug(e.toString(),this.getClass().getName());
+				//e.printStackTrace();
 			}
 			
 		}else if (urlString.endsWith(".ecore")) {
@@ -95,7 +102,9 @@ public class ModelingUnitLoader {
 			try {
 				mu = this.loadKM(urlString);
 			} catch (IOException e) {
-				e.printStackTrace();
+				lastLoadErrorMessage = e.toString();
+				this.logger.debug(e.toString(),this.getClass().getName());
+				//e.printStackTrace();
 			}
 			
 		}
