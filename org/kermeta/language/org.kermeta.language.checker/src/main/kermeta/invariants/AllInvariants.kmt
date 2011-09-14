@@ -16,8 +16,6 @@ require kermeta
 //structure
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ClassDefinitionAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/EnumerationAspect.kmt"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ModelTypeAspect.kmt"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/PrimitiveTypeAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ConstraintAspect.kmt"
 //require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/KermetaModelElementAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ModelingUnitAspect.kmt"
@@ -26,7 +24,9 @@ require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invarian
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/PropertyAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/UnresolvedAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/UnresolvedTypeAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/DataTypeAspect.kmt"
 
 //behavior
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/ConditionalAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/VariableDeclAspect.kmt"
 

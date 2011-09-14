@@ -1,0 +1,93 @@
+/* $Id: ModelingUnitHelper.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
+ * Creation date: Aug, 2011
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: 
+ *		Didier Vojtisek <didier.vojtisek@inria.fr>
+ */
+package kermeta::language::structure;
+
+require kermeta
+
+using kermeta::standard
+
+
+
+
+aspect class Type {
+
+	/**
+	 * return true if self and other are similar types, i.e. refereing to the same ClassDefinition including parameters or the same function 
+	 */
+	operation typeEquals(other : Type ) : Boolean is do
+		result := self == other // default equality
+	end
+}
+aspect class ParameterizedType inherits Type {
+	method typeEquals(other : Type ) : Boolean is do
+		if not other.isVoid and other.isInstanceOf(ParameterizedType)  then
+			result := self.typeDefinition == other.asType(ParameterizedType).typeDefinition
+			
+			// Checking typeBindings
+			if (self.typeParamBinding().size() == other.asType(ParameterizedType).typeParamBinding().size()) then
+				from var i : Integer init 0//self.typeParamBinding().size()
+				until i >= self.typeParamBinding().size() or result==false
+				loop
+					//stdio.writeln("i="+i.toString)
+					var t1 : Type init self.typeParamBinding().at(i).type
+					var t2 : Type init other.asType(ParameterizedType).typeParamBinding().at(i).type
+					result := result and t1.typeEquals(t2) 
+					i := i+1
+				end
+			else result := false
+			end 
+		else
+		
+			result := false 
+		end
+		
+	end
+}
+
+aspect class FunctionType inherits Type {
+	method typeEquals(other : Type ) : Boolean is do
+		if not other.isVoid and other.isInstanceOf(FunctionType) then			
+			var p : FunctionType init  other.asType(FunctionType)
+			result := self.left.typeEquals(p.left) and self.right.typeEquals( p.right) 
+		else
+			result := false 
+		end
+	end
+	
+}
+
+
+aspect class PrimitiveType inherits DataType {
+
+	method typeEquals(other : Type) : Boolean is do
+		result := self.instanceType.typeEquals(other)
+	end
+}
+
+aspect class ProductType inherits Type {
+	method typeEquals(other : Type ) : Boolean is do
+		if not other.isVoid and other.isInstanceOf(ProductType) then			
+			if (self.type.size() == other.asType(ProductType).type.size()) then
+				result := true
+				from var i : Integer init self.type.size()
+				until i >= self.type.size() or result==false
+				loop
+					var t1 : Type init self.type.at(i)
+					var t2 : Type init other.asType(ProductType).type.at(i)
+					result := result and t1.typeEquals(t2) 
+					i := i+1
+				end
+			else result := false
+			end  
+		else
+			result := false 
+		end
+	end
+	
+}
+

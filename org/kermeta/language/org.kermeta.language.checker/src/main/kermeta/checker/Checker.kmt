@@ -20,6 +20,9 @@ require "platform:/lookup/org.kermeta.diagnostic.model/model/Diagnostic.ecore"
 
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/AllInvariants.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/PropertyV1Helper.kmt"
+
+
+
 using org::kermeta::diagnostic
 using kermeta::language::structure
 using kermeta::standard
@@ -164,6 +167,8 @@ class Checker
 					end		
 			
 					// Recursivity
+					//stdio.writeln("Classdef(" + cd.name +") Prop(" + prop.name + ") MustDrillDown("+prop.mustDrillDown.toString + ")"  )
+									
 					//if ( prop.isComposite and prop.getViolatedConstraintsMustDrillDown)
 					if ( prop.isComposite and prop.mustDrillDown) 
 					then
@@ -218,17 +223,8 @@ class Checker
 				
 				
 			}
-			
-			
-			
-			
 		end
-	
-		
-		//stdio.writeln("<< checkObject")
-		
-		//checkStatus
-		
+
 		result := diagnosticModel
 		
 	end

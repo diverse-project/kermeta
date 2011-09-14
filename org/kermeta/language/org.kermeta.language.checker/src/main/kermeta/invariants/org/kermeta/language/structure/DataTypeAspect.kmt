@@ -1,0 +1,21 @@
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+aspect class DataType
+{
+	/**
+	 * A DataType must be contained by a TypeDefinitionContainer
+	 */
+	@Scope "RESOLVED"
+	inv container_must_be_TypeDefinitionContainer is do
+
+//		stdio.writeln("Checking inv container_must_be_TypeDefinitionContainer for " + self.name)
+//		stdio.writeln(" container is " + self.container.toString)
+		self.container.isInstanceOf(TypeDefinitionContainer)
+		
+	end
+
+}

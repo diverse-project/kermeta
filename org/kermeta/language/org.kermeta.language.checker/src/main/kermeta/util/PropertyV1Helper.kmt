@@ -12,6 +12,11 @@ package kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/TypeV1Helper.kmt"
+
 aspect class Property
 {
 	attribute mustDrillDownCache : Boolean
@@ -25,19 +30,17 @@ aspect class Property
 		
 		if mustDrillDownCache.isVoid
 		then
-			mustDrillDownCache := true//not kermeta::standard::ValueType.isSuperTypeOf(self.type)
+			//stdio.writeln("mustdrilldown. self.type:" + self.type.toString )
+		
+			//mustDrillDownCache := true//not kermeta::standard::ValueType.isSuperTypeOf(self.type)
 			//mustDrillDownCache := not(self.type.isSubTypeOf(org::kermeta::language::structure::DataType))
+			mustDrillDownCache := not(self.type.typeEquals(kermeta::standard::String) or 
+									  self.type.typeEquals(kermeta::standard::Boolean) or 
+									  self.type.typeEquals(kermeta::standard::Integer))
 		end
 		//stdio.writeln(" - result : " + result.toString)
 		result := mustDrillDownCache
-	
-		
-		//stdio.writeln("  ----> mustdrilldown : ")
-		//stdio.writeln("       " + mustDrillDownCache.toString)
-		
 
-		
-		//result := true	
 	end 
 
 }
