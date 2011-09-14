@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.kermeta.language.category.feature"
-      label="Kermeta 2"
+      id="org.kermeta.language.category.ide.feature"
+      label="Kermeta 2 IDE"
       version="2.0.1.SNAPSHOT"
       provider-name="IRISA/INRIA">
 
@@ -16,12 +16,5 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
-
-   <includes
-         id="org.kermeta.language.category.ide.feature"
-         version="0.0.0"/>
-   <includes
-         id="org.kermeta.language.category.tools.feature"
-         version="0.0.0"/>
 
 </feature>
