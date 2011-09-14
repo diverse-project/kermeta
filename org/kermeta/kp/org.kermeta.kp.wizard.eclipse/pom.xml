@@ -137,4 +137,5 @@
         	<version>2.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+    <groupId>org.kermeta.kp</groupId>
 </project>
