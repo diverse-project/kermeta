@@ -144,9 +144,6 @@
 			dest="${source.bundles}"
 			usetimestamp="true"/>-->
 		
-		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.slf4j.eclipse/${kermeta.language.version}/utils.slf4j.eclipse-${kermeta.language.version}.jar" 
-			dest="${source.bundles}"
-			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/fr/irisa/triskell/kermeta/kermeta.model/${k1.model.version}/kermeta.model-${k1.model.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
@@ -159,6 +156,7 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/jline/${scala.version}/jline-${scala.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers/${kermeta.language.version}/utils.helpers-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
@@ -168,13 +166,16 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.helpers.eclipse.jface/${kermeta.language.version}/utils.helpers.eclipse.jface-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.provisionner4eclipse/${kermeta.language.version}/utils.provisionner4eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.slf4j.eclipse/${kermeta.language.version}/utils.slf4j.eclipse-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.systemservices.api/${kermeta.language.version}/utils.systemservices.api-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.systemservices.eclipse/${kermeta.language.version}/utils.systemservices.eclipse-${kermeta.language.version}.jar" 
-			dest="${source.bundles}"
-			usetimestamp="true"/>
-		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.provisionner4eclipse/${kermeta.language.version}/utils.provisionner4eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
 		
