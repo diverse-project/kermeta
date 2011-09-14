@@ -18,7 +18,9 @@ public class CheckerImpl4Eclipse implements Checker {
 			String optionalContent, MessagingSystem logger) {
 			
 		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.KerRichFactory.createChecker();
-				
+		
+		
+		((org.kermeta.language.language.checker.org.kermeta.language.structure.ModelingUnitAspect)mu).KersetCanUseCachedStructuralTypeDefinitions(true);
 		DiagnosticModel result = checker.checkObject(mu, scope.toString());
 		return result;
 	}
