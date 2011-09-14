@@ -14,7 +14,8 @@ using kermeta::standard
 
 
 
-
+//TODO
+//if 'other' is a PrimitiveType, the test will not work
 aspect class Type {
 
 	/**
@@ -24,6 +25,8 @@ aspect class Type {
 		result := self == other // default equality
 	end
 }
+
+
 aspect class ParameterizedType inherits Type {
 	method typeEquals(other : Type ) : Boolean is do
 		if not other.isVoid and other.isInstanceOf(ParameterizedType)  then
@@ -81,5 +84,14 @@ aspect class ProductType inherits Type {
 		end
 	end
 	
+	
+	
 }
 
+
+aspect class PrimitiveType inherits DataType {
+
+	method typeEquals(other : Type) : Boolean is do
+		result := self.instanceType.typeEquals(other)
+	end
+}
