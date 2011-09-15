@@ -14,15 +14,15 @@
     <name>kermeta.root :: Root for the projects dedicated to kermeta 2</name>
 
     <properties>
-        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
-        <utils.version>2.0.1-SNAPSHOT</utils.version>
-        <traceability.version>2.0.2-SNAPSHOT</traceability.version>
+        <kermeta.version>2.0.1-BETA1</kermeta.version>
+        <utils.version>2.0.1-BETA1</utils.version>
+        <traceability.version>2.0.2-BETA1</traceability.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <emf.version>2.7.0</emf.version>
         <scala.version>2.9.0-1</scala.version>
-        <framework.scala.version>0.12.11</framework.scala.version>
+        <framework.scala.version>1.4.3-BETA1</framework.scala.version>
         <kermeta.model.version>1.4.0</kermeta.model.version>
-        <language.compiler.version>1.4.1-BETA17-SNAPSHOT</language.compiler.version>
+        <language.compiler.version>1.4.3-BETA1</language.compiler.version>
         <osgi.version>4.2.0</osgi.version>
         <slf4j.version>1.6.1</slf4j.version>
         <bundle.vendor>IRISA/INRIA</bundle.vendor>
