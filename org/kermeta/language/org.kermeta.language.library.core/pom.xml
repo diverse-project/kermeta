@@ -31,6 +31,7 @@
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
                             <generateKmOnly>true</generateKmOnly>
+                            <checkingEnabled>false</checkingEnabled>
                             <intermediateFilesRequired>false</intermediateFilesRequired>
                         </configuration>
                     </execution>
