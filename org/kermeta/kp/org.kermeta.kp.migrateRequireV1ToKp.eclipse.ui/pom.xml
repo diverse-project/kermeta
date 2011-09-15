@@ -12,10 +12,10 @@
 	<name>kp.migrateRequireV1ToKp.eclipse.ui : Eclipse menu to migrate requires from a Kermeta V1 file to a kp model</name>
 	<packaging>jar</packaging>
 	<parent>
-    <groupId>org.kermeta.language</groupId>
-    <artifactId>language.root</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
-  </parent>
+	    <groupId>org.kermeta.language</groupId>
+	    <artifactId>language.root</artifactId>
+	    <version>2.0.1-BETA1</version>
+  	</parent>
   
 	<build>
 		<!-- Manage mutli-source java project. Copy the src files inside the targetPath, the unique location for maven compiling
