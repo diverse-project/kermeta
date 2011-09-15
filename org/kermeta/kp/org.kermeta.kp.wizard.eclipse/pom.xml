@@ -21,6 +21,7 @@
     </parent>
     
     <build>
+    	<sourceDirectory>src</sourceDirectory>
     	<resources>
     		<resource>
 				<directory>.</directory>
@@ -30,9 +31,9 @@
 				</includes>
 			</resource>
 			<resource>
-				<directory>src/</directory>
+				<directory>icons</directory>
+				<targetPath>icons</targetPath>
 			</resource>
-			
 		</resources>
         <plugins>
 <!--
@@ -111,13 +112,24 @@
                         <Bundle-SymbolicName>org.kermeta.kp.wizard.eclipse; singleton=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-Activator>org.kermeta.kp.wizard.eclipse.Activator</Bundle-Activator>
+                        <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
-                        	org.kermeta.kp.wizard.eclipse.*,
-                        	org.kermeta.kp.wizard.eclipse.wizards.*
+                        	org.kermeta.kp.wizard.eclipse.*
                         </Export-Package>
+                        <Require-Bundle>
+	                         org.eclipse.ui,
+							 org.eclipse.core.runtime,
+							 org.eclipse.core.resources,
+							 org.eclipse.ui.ide
+						</Require-Bundle>
                         <Import-Package>
-                        	org.eclipse.emf.*,
+                        	!org.eclipse.core.resources,
+                        	!org.eclipse.core.runtime,
+                        	!org.eclipse.ui.*,
+                        	org.eclipse.jface.*,
+                        	org.eclipse.swt.*,
                         	org.osgi.framework;version="[1.5,2)"</Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
@@ -133,6 +145,51 @@
             <artifactId>emf.lib</artifactId>
             <version>${emf.version}</version>
         </dependency>
+        <dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.ide</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.jobs</artifactId>
+			<version>[3.4.100.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>[3.5.1.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.equinox.registry</artifactId>
+			<version>[3.4.100.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.swt</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+			<version>[3.5.2.0,)</version>
+		</dependency>
         <dependency>
         	<groupId>org.kermeta.language</groupId>
         	<artifactId>language.texteditor.eclipse.nature</artifactId>
