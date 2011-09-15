@@ -3,7 +3,7 @@
     <parent>
         <artifactId>language.root</artifactId>
         <groupId>org.kermeta.language</groupId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>2.0.1-BETA1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.km2bytecode</artifactId>
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>org.kermeta.language</groupId>
             <artifactId>language.model</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
+            <version>${kermeta.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
