@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.kermeta.language</groupId>
         <artifactId>language.root</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>2.0.1-BETA1</version>
     </parent>
 
     <build>
@@ -18,7 +18,7 @@
             <plugin>
                 <groupId>org.kermeta.kp</groupId>
                 <artifactId>kp.compiler.mavenplugin</artifactId>
-                <version>2.0.1-SNAPSHOT</version>
+                <version>${kermeta.version}</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -31,6 +31,7 @@
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
                             <generateKmOnly>true</generateKmOnly>
+                            <checkingEnabled>false</checkingEnabled>
                             <intermediateFilesRequired>false</intermediateFilesRequired>
                         </configuration>
                     </execution>
