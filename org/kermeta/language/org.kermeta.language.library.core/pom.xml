@@ -15,10 +15,10 @@
     <build>
         <plugins>
            <!-- Kermeta Compiler plugin -->
-            <!-- <plugin>
+           <plugin>
                 <groupId>org.kermeta.kp</groupId>
                 <artifactId>kp.compiler.mavenplugin</artifactId>
-                <version>2.0.1-SNAPSHOT</version>
+                <version>2.0.1-BETA1</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -35,7 +35,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
             <!-- package into a jar for OSGI -->
             <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
