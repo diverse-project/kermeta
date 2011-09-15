@@ -114,7 +114,7 @@
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
                         	org.kermeta.kp.wizard.eclipse.*,
-                        	org.kermeta.kp.wizard.eclipse.wizards*,
+                        	org.kermeta.kp.wizard.eclipse.wizards.*
                         </Export-Package>
                         <Import-Package>
                         	org.eclipse.emf.*,
