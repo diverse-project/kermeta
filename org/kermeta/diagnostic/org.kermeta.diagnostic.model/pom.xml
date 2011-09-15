@@ -12,18 +12,18 @@
 	<name>Kermeta :: Diagnostic model</name>
 	<groupId>org.kermeta.diagnostic</groupId>
   	<artifactId>diagnostic.model</artifactId>
-	<version>2.0.1-SNAPSHOT</version>
+	<version>2.0.1-BETA1</version>
 
     <properties>
-        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kermeta.version>2.0.1-BETA1</kermeta.version><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <art2.version>2.2.1-beta2</art2.version>
-        <language.version>2.0.1-SNAPSHOT</language.version>
+        <language.version>2.0.1-BETA1</language.version>
         <emf.version>2.6.0</emf.version>
         <scala.version>2.8.1</scala.version>
         <osgi.version>4.2.0</osgi.version>
-        <utils.version>2.0.1-SNAPSHOT</utils.version>
-        <traceability.version>2.0.1-SNAPSHOT</traceability.version>
-        <kp.version>2.0.1-SNAPSHOT</kp.version>
+        <utils.version>2.0.1-BETA1</utils.version>
+        <traceability.version>2.0.2-BETA1</traceability.version>
+        <kp.version>2.0.1-BETA1</kp.version>
         <slf4j.version>1.6.1</slf4j.version>
         <slf4j.version.range>[1.5,2)</slf4j.version.range>
         <bundle.vendor>IRISA/INRIA</bundle.vendor>
@@ -66,7 +66,7 @@
 			<plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.0.0</version>
+                <version>2.3.5</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
