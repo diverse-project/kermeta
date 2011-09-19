@@ -6,11 +6,8 @@
  *            dvojtise
  */
 
-@mainClass "helloworld.HelloWorld"
-@mainOperation "main"
-
 package helloworld {
-	class HelloWorld
+	class Helloworld
 	{
 		@main ""
 		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do 
