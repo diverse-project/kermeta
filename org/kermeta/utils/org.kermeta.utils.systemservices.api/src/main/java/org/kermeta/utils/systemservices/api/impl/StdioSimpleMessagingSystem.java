@@ -8,6 +8,7 @@
 */
 package org.kermeta.utils.systemservices.api.impl;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -114,13 +115,32 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 
 	@Override
 	public void flushAllProblems(URL uri) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void flushProblem(String messageGroup, URL uri) {
-		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String readLine() {
+		String result = "";
+		try {
+			java.io.InputStreamReader isr =new java.io.InputStreamReader(System.in);
+			java.io.BufferedReader bufferedReader  =new java.io.BufferedReader(isr);
+		
+			return bufferedReader.readLine();
+		} catch (IOException e) {
+			error("Failed to read line", "", e);
+		}
+		return result;
+	}
+
+	@Override
+	public String readLine(String prompt) {
+		info(prompt, "");
+		return readLine();
 		
 	}
 	

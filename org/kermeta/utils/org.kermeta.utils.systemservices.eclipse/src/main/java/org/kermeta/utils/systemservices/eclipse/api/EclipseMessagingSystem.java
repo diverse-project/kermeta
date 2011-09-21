@@ -8,8 +8,6 @@
 */
 package org.kermeta.utils.systemservices.eclipse.api;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -20,7 +18,6 @@ import org.eclipse.core.runtime.Status;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
-import org.kermeta.utils.systemservices.eclipse.internal.EclipseConsoleOutputStream;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
 import org.kermeta.utils.systemservices.eclipse.internal.console.ConsoleIO;
 import org.kermeta.utils.systemservices.eclipse.internal.console.EclipseConsoleIOFactory;
@@ -209,6 +206,17 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		default:
 			return new DebugMessage(message+"\n");
 		}
+	}
+
+	@Override
+	public String readLine() {
+		return consoleIO.read();
+	}
+
+	@Override
+	public String readLine(String prompt) {
+		info(prompt, "");
+		return readLine();
 	}
 	
 	

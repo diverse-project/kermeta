@@ -32,6 +32,9 @@ public abstract class MessagingSystem {
 	public abstract void flushProblem(String messageGroup, URL uri);
 	public abstract void flushAllProblems(URL uri);
 	
+	public abstract String readLine();
+	public abstract String readLine(String prompt);
+	
 	
 	
 	public abstract void initProgress(String progressGroup, String message, String messageGroup, int nbWorkUnit);
@@ -67,10 +70,26 @@ public abstract class MessagingSystem {
 	/**
 	 * convenient operation for quicker call
 	 * Equivalent to
+	 * log(MessagingSystem.Kind.UserWARNING, message, messageGroup, null)
+	 */
+	public void warn(String message, String messageGroup){
+		log(MessagingSystem.Kind.UserWARNING, message, messageGroup, null);
+	}
+	/**
+	 * convenient operation for quicker call
+	 * Equivalent to
 	 * log(MessagingSystem.Kind.UserERROR, message, messageGroup, senderTrace)
 	 */
 	public void error(String message, String messageGroup, Throwable senderTrace){
 		log(MessagingSystem.Kind.UserERROR, message, messageGroup, senderTrace);
+	}
+	/**
+	 * convenient operation for quicker call
+	 * Equivalent to
+	 * log(MessagingSystem.Kind.UserERROR, message, messageGroup, null)
+	 */
+	public void error(String message, String messageGroup){
+		log(MessagingSystem.Kind.UserERROR, message, messageGroup, null);
 	}
 	
 }
