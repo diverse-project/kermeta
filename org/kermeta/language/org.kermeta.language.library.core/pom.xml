@@ -80,7 +80,9 @@
 							org.k2.console,
 							org.kermeta,
 							org.kermeta.language.behavior,
-							org.kermeta.language.structure
+							org.kermeta.language.structure,
+                            org.kermeta.utils.systemservices.api.messaging,
+                            org.kermeta.utils.systemservices.api.impl
 						</Import-Package>
 		            </manifestEntries>		            
 		          </archive>
@@ -95,7 +97,12 @@
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
-                       <dependency>
+        <dependency>
+            <groupId>org.kermeta.utils</groupId>
+            <artifactId>utils.systemservices.api</artifactId>
+            <version>${utils.version}</version>
+        </dependency>
+        <dependency>
            <groupId>org.osgi</groupId>
            <artifactId>org.osgi.core</artifactId>
            <version>4.2.0</version>

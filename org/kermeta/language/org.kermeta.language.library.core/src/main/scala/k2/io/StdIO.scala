@@ -5,55 +5,64 @@
 
 package k2.io
 
+
 class StdIOClass extends k2.standard.EObjectImplForPrimitive {
 
-    var _console : org.k2.console.Console = null
-    def console_=(arg : _root_.org.k2.console.Console) = {_console = arg}
+    // default messaging system goes to stdio
+    var _messagingSystem : _root_.org.kermeta.utils.systemservices.api.messaging.MessagingSystem = new _root_.org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem
+    def messagingSystem_=(arg : _root_.org.kermeta.utils.systemservices.api.messaging.MessagingSystem) = {_messagingSystem = arg}
 
+    // writebuffer is used to make sure we create an info message only when a \n is reached or another messages needs it to be flushed
+    var _writeBuffer : StringBuffer = new  StringBuffer
     def write(obj : AnyRef) : Unit = {
-        if (_console == null){
-            Console.print(obj)
-        }else
-            _console.write(obj.toString)
+        val message : String = obj.toString
+        _writeBuffer.synchronized{         // basic way to handle buffer, flush if ends with \n
+            _writeBuffer.append(message)
+            if(message.endsWith("\n")){
+                flushBuffers()
+            }
+        }
     }
 
     def errorln(obj : AnyRef) : Unit = {
-        if (_console == null){
-            Console.println(obj) //TODO PRINT TO ERR CONSOLE
-        }else
-            _console.errorln(obj.toString)
-
+        flushBuffers()
+        _messagingSystem.error(obj.toString,"")
     }
 
+
+    var _errorBuffer : StringBuffer = new  StringBuffer
     def error(obj : AnyRef) : Unit = {
-        if (_console == null){
-            Console.print(obj)
-        }else
-            _console.errorln(obj.toString)
+      val message : String = obj.toString
+      _errorBuffer.synchronized{         // basic way to handle error buffer, wait for
+        _errorBuffer.append(message)
+        if(message.endsWith("\n")){
+            flushBuffers()
+        }
+      }
+    }
+
+    def flushBuffers() : Unit = {
+      _errorBuffer.synchronized{         // basic way to handle error buffer,
+          if(_errorBuffer.length() != 0){
+              _messagingSystem.error(_errorBuffer.toString,"")
+              _errorBuffer = new  StringBuffer
+          }
+      }
+      _writeBuffer.synchronized{         // basic way to handle write buffer,
+          if(_writeBuffer.length() != 0){
+              _messagingSystem.info(_writeBuffer.toString,"")
+              _writeBuffer = new  StringBuffer
+          }
+      }
     }
 
     def writeln(obj : AnyRef) : Unit = {
-        if (_console == null){
-            Console.println(obj)
-        }else
-            _console.writeln(obj.toString)
+        flushBuffers()
+        _messagingSystem.info(obj.toString,"")
     }
 
     def read(prompt : String) : String = {
-        if (_console == null){
-            if (prompt != null){
-                println(prompt);
-            }
-            var ligne_lue:String =null;
-            var lecteur: java.io.InputStreamReader =new java.io.InputStreamReader(System.in);
-            var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
-            ligne_lue=entree.readLine();
-            return ligne_lue;
-        }else
-        {
-            _console.writeln(prompt)
-            return _console.readln()
-        }
+        return _messagingSystem.readLine(prompt)
     }
 
 }
