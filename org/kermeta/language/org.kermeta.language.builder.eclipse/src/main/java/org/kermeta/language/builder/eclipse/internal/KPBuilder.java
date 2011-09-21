@@ -213,6 +213,7 @@ public class KPBuilder {
 			
 			findBundleLocationForClassPath("org.kermeta.scala.scala-library", additionalClassPath);
 			findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
+			findBundleLocationForClassPath("org.kermeta.utils.systemservices.api", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.common", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
