@@ -90,11 +90,20 @@ class StdIOClass extends k2.standard.EObjectImplForPrimitive {
           return _messagingSystem.readLine(prompt)
         }
         else{
+          System.out.print(prompt)
+          System.out.flush()
+          Thread.`yield`()
+          System.out.flush()
+          Thread.`yield`()
+          System.out.flush()
+          Thread.`yield`()
+          System.out.flush()
+          Thread.`yield`()
           var ligne_lue:String =null;
-            var lecteur: java.io.InputStreamReader =new java.io.InputStreamReader(System.in);
-            var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
-            ligne_lue=entree.readLine();
-            return ligne_lue;
+          var lecteur: java.io.InputStreamReader =new java.io.InputStreamReader(System.in);
+          var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
+          ligne_lue=entree.readLine();
+          return ligne_lue;
         }
     }
 
