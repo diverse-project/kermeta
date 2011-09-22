@@ -8,6 +8,7 @@
 */
 package org.kermeta.utils.systemservices.eclipse.api;
 
+import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -94,11 +95,13 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		switch (msgKind) {
 		case UserWARNING:
 		case DevWARNING:
-			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",null));
+			if(messageGroup ==  null || !messageGroup.isEmpty())
+				Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",null));
 			break;
 		case UserERROR:
 		case DevERROR:
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",null));
+			if(messageGroup ==  null || !messageGroup.isEmpty())
+				Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",null));
 			break;
 		default:
 			break;
@@ -119,23 +122,25 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		switch (msgKind) {
 		case UserWARNING:
 		case DevWARNING:
-			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",throwable));
+			if(messageGroup ==  null || !messageGroup.isEmpty())
+				Activator.getDefault().getLog().log(new Status(IStatus.WARNING, messageGroup, IStatus.WARNING, message != null ? message : "<null>",throwable));
 			break;
 		case UserERROR:
 		case DevERROR:
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",throwable));
+			if(messageGroup ==  null || !messageGroup.isEmpty())
+				Activator.getDefault().getLog().log(new Status(IStatus.ERROR, messageGroup, IStatus.ERROR, message != null ? message : "<null>",throwable));
 			break;
 		default:
 			break;
 		}
-		StringWriter sw = new StringWriter();
-		throwable.printStackTrace(new PrintWriter(sw));
-		String stackTrace = sw.toString();
-		consoleIO.print(getConsoleMessageFor(msgKind,message+"\n"+stackTrace));
-		// currently redirect to stdio
-		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
-		//stdioRedirect.log(msgKind, message, messageGroup, exception);
 		
+		String stackTrace = "";
+		if(throwable != null){
+			StringWriter sw = new StringWriter();
+			throwable.printStackTrace(new PrintWriter(sw));
+			stackTrace = "\n"+sw.toString();
+		}
+		consoleIO.print(getConsoleMessageFor(msgKind,message+stackTrace));
 	}
 
 	@Override
@@ -230,7 +235,13 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	@Override
 	public String readLine(String prompt) {
 		info(prompt, "");
+		Thread.yield();
 		return readLine();
+	}
+
+	@Override
+	public BufferedReader getReader() {
+		return consoleIO.getReader();
 	}
 	
 	
