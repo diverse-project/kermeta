@@ -11,6 +11,7 @@ package org.kermeta.utils.systemservices.eclipse.api;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.util.Hashtable;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IStatus;
@@ -42,6 +43,8 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	
 	protected ConsoleIO consoleIO; 
 	
+	protected Hashtable<String,Long> progressStartTimeTable = new Hashtable<String,Long>();
+	
 	
 	public EclipseMessagingSystem(String baseMessageGroup, String consoleTitle) {
 		super();
@@ -61,7 +64,16 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void doneProgress(String progressGroup, String msg, String msgGroup) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		info("["+progressGroup+"]"+ msg, msgGroup);
+		String elapsedTime = "";
+		if(progressGroup!= null){
+			Long startTime = progressStartTimeTable.get(progressGroup);
+			if(startTime != null){
+				long endTime= System.currentTimeMillis() - startTime;
+				elapsedTime = " (done in "+endTime+"ms)";
+				progressStartTimeTable.remove(progressGroup); // free some memory
+			}
+		}
+		debug("["+progressGroup+"]"+ msg+elapsedTime, msgGroup);
 		
 	}
 
@@ -69,8 +81,10 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void initProgress(String progressGroup, String msg, String msgGroup, int unitToWork) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		info("["+progressGroup+"]"+ msg, msgGroup);
-		
+		debug("["+progressGroup+"]"+ msg, msgGroup);
+		if(progressGroup!= null){
+			progressStartTimeTable.put(progressGroup, Long.valueOf(System.currentTimeMillis()));
+		}
 	}
 
 	@Override
@@ -172,7 +186,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void progress(String progressGroup, String msg, String msgGroup, int workedUnit) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		info("["+progressGroup+"]"+ msg, msgGroup);
+		debug("["+progressGroup+"]"+ msg, msgGroup);
 	}
 
 	@Override
