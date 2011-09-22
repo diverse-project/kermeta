@@ -7,14 +7,19 @@
  */
 package org.kermeta.kp.compiler.commandline;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.locks.Lock;
@@ -79,6 +84,7 @@ public class KermetaCompiler {
 	public boolean stopOnError = true;
 
 	public boolean runInEclipse = false;
+	public boolean runResultInSeparateVM = true;
 	public Boolean saveIntermediateFiles = false;
 	public String targetIntermediateFolder;
 	public MessagingSystem logger;
@@ -994,22 +1000,10 @@ public class KermetaCompiler {
 		return result;
 	}
 
-	public void runK2Program(List<String> classpath, List<String> params, String kpFileURL, String targetGeneratedSourceFolder, String targetFolder) {
+	public void createJar(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder){
 		KpLoaderImpl ldr = new KpLoaderImpl();
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		initializeforBuilding(kp, targetGeneratedSourceFolder, targetFolder);
-		runK2Program(classpath,params);
-	}
-	
-	public void runK2Program(List<String> classpath, List<String> params) {
-		StringBuffer f = new StringBuffer();
-		for (String s : classpath) {
-			f.append(s);
-			f.append(File.pathSeparator);
-
-		}
-		EmbeddedScalaRunner.run(f.toString() + GlobalConfiguration.outputBinFolder(), GlobalConfiguration.scalaAspectPrefix() + "runner.MainRunner", params);
-
 		if (GlobalConfiguration.createPackage()) {
 			File fo;
 			try {
@@ -1017,8 +1011,10 @@ public class KermetaCompiler {
 				fo.mkdirs();
 				org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala.run(GlobalConfiguration.outputBinFolder(), GlobalConfiguration.outputProject() + File.separator + "target" + File.separator + GlobalConfiguration.scalaAspectPrefix() + ".jar", GlobalConfiguration.outputFolder() + File.separator + ".." + File.separator + "resources" + File.separator + GlobalConfiguration.scalaAspectPrefix() + "Reflexivity.km");
 			} catch (IOException e) {
-				e.printStackTrace();
+				this.logger.error(e.toString(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
 			}
 		}
 	}
+	
+	
 }
