@@ -65,6 +65,9 @@
 							org.eclipse.emf.ecore.xmi,
 							org.ops4j.pax.url.mvn
                         </Require-Bundle>
+                        <Import-Package>
+							scala.tools.nsc
+                        </Import-Package>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
