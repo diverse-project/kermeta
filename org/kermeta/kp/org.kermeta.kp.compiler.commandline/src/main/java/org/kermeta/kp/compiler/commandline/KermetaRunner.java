@@ -8,12 +8,17 @@
 */
 package org.kermeta.kp.compiler.commandline;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaRunner;
@@ -67,20 +72,34 @@ public class KermetaRunner {
 	                scalaAspectPrefix + "runner.MainRunner", 
 	                params.toString());
 	        this.logger.debug("starting new process with command " +builder.command().toString(), KermetaCompiler.LOG_MESSAGE_GROUP);
-	        builder.redirectErrorStream(true); // debug version: merge output and error stream
+	       // builder.redirectErrorStream(true); // debug version: merge output and error stream
 	        Process process;
 			try {
 				process = builder.start();
-				InputStream is = process.getInputStream();
-			    InputStreamReader isr = new InputStreamReader(is);
-			    BufferedReader br = new BufferedReader(isr);
-			    String line;
-			    while ((line = br.readLine()) != null) {
-			    	this.logger.info(line, KermetaCompiler.LOG_MESSAGE_GROUP);
-			    }
-			    br.close();
-			    //this.logger.debug("Program terminated!", KermetaCompiler.LOG_MESSAGE_GROUP);
+				
+				// redirect logger.getReader to process System.in
+				KermetaRunner.BufferedReader2Stream in2Stream = new KermetaRunner.BufferedReader2Stream(logger.getReader(), process.getOutputStream(),logger);
+				// redirect process System.out to logger.info
+				KermetaRunner.Stream2MessagingSystem out2ms = new KermetaRunner.Stream2MessagingSystem(process.getInputStream(),logger, false);
+				KermetaRunner.Stream2MessagingSystem err2ms = new KermetaRunner.Stream2MessagingSystem(process.getErrorStream(),logger, true);
+				Thread in2StreamThread = new Thread(in2Stream);
+				Thread out2msThread = new Thread(out2ms);
+				Thread err2msThread = new Thread(err2ms);
+				
+				in2StreamThread.start();
+				out2msThread.start();
+				err2msThread.start();
+				
+				out2msThread.join();
+				err2msThread.join();
+				in2Stream.close();
+				in2StreamThread.interrupt();
+				int exitVal = process.waitFor();
+				this.logger.debug("stream threads have joined ", KermetaCompiler.LOG_MESSAGE_GROUP);
+				
 			} catch (IOException e) {
+				this.logger.error(e.toString(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
+			} catch (InterruptedException e) {
 				this.logger.error(e.toString(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
 			}
 
@@ -107,4 +126,87 @@ public class KermetaRunner {
 	public void setJavaVMbin(String javaVMbin) {
 		this.javaVMbin = javaVMbin;
 	}
+	
+	
+	public static class Stream2MessagingSystem implements Runnable {
+        private BufferedReader reader;
+        private MessagingSystem logger;
+        private boolean isError;
+
+        public Stream2MessagingSystem(InputStream inputStream, MessagingSystem logger, boolean isError) {
+                this.reader = new BufferedReader(new InputStreamReader(inputStream));
+                this.logger = logger;
+                this.isError = isError;
+        }
+
+        public void run() {
+                String line;
+                try {
+                        while((line = this.reader.readLine()) != null) {
+                        	if(isError){
+                        		logger.error(line,"");
+                        	}
+                        	else
+                        		logger.info(line,"");
+                        }
+                        this.reader.close();
+                }
+                catch (IOException e) {
+                	logger.error(e.getMessage(), "",e);
+                }
+        }
+    }
+	
+	public static class BufferedReader2Stream implements Runnable {
+        private BufferedReader reader;
+        private PrintWriter writer;
+        private MessagingSystem logger;
+        private boolean mustContinue = true;
+
+        public BufferedReader2Stream(BufferedReader reader, OutputStream outputStream, MessagingSystem logger) {
+                this.reader = reader;
+                this.logger = logger;
+                writer = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(outputStream)), true);
+        }
+
+        public void close(){
+        	mustContinue = false;
+        	/*try {
+				reader.close();
+			} catch (IOException e) {
+            	logger.error(e.getMessage(), "",e);
+			}*/
+        	
+        }
+		public void run() {
+			try{
+                logger.debug("BufferedReader2Stream started", "");
+                String line;
+                try {
+                	while(mustContinue){
+	                	// wait until we have data to complete a readLine()
+	                    while (!this.reader.ready()) {
+	                          Thread.sleep(200);
+	                    }
+	                    line = this.reader.readLine();
+	                    if(line != null){
+	                    	writer.println(line);
+	                    }
+                    }
+	                writer.close();
+                }
+                catch (IOException e) {
+                	//logger.error(e.getMessage(), "",e);
+                } catch (InterruptedException e) {
+                	//logger.error(e.getMessage(), "",e);
+				}
+			}
+			finally{
+                logger.debug("BufferedReader2Stream has stopped", "");
+			}
+        }
+		
+        
+    }
+
 }
