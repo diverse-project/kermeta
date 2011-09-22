@@ -9,6 +9,7 @@
 
 package org.kermeta.utils.systemservices.api.messaging;
 
+import java.io.BufferedReader;
 import java.net.URL;
 
 import org.kermeta.utils.systemservices.api.reference.Reference;
@@ -32,6 +33,8 @@ public abstract class MessagingSystem {
 	public abstract void flushProblem(String messageGroup, URL uri);
 	public abstract void flushAllProblems(URL uri);
 	
+	
+	public abstract BufferedReader getReader();
 	public abstract String readLine();
 	public abstract String readLine(String prompt);
 	
