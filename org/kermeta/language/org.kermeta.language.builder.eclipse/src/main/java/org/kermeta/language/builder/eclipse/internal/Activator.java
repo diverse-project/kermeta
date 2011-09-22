@@ -41,6 +41,10 @@ public class Activator extends AbstractUIPlugin {
 	private BundleContext myContext = null;
 	
 	protected MessagingSystem messaggingSystem;
+	
+	// currently wer run in only one JVM, so we can accept to use only one messagingSystem when running a kermeta program
+	// when we will support several JVM, we'll need to use a smarter strategy
+	protected MessagingSystem messaggingSystem4Runner;
 
 	private WorkspaceResourceChangeListener workspaceResourceChangeListener;
 	
@@ -58,7 +62,8 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		KermetaBuilder.getDefault();
 		plugin = this;
-		messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "Kermeta builder console");
+		messaggingSystem 		= new EclipseMessagingSystem(PLUGIN_ID+".builder", "Kermeta builder console");
+		messaggingSystem4Runner = new EclipseMessagingSystem(PLUGIN_ID+".runner", "Kermeta runner  console");
 		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
 		this.setMyContext(context);
@@ -84,6 +89,10 @@ public class Activator extends AbstractUIPlugin {
 
 	public MessagingSystem getMessaggingSystem() {
 		return messaggingSystem;
+	}
+	
+	public MessagingSystem getMessaggingSystem4Runner(String runnerName) {
+		return messaggingSystem4Runner;
 	}
 
 	public BundleContext getMyContext() {

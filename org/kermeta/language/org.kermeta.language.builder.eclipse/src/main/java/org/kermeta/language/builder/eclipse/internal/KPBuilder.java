@@ -37,6 +37,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.internal.ide.undo.FolderDescription;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
@@ -244,10 +245,17 @@ public class KPBuilder {
 				}
 			}
 			if (andRun) {
-				if (isBuildNeeded && result != null) {
-					compiler.runK2Program(fullClassPath, params);
-				} else {
-					compiler.runK2Program(fullClassPath, params,kpFileURL,outputFolder,outputFolder);
+				//k2.io.StdIO._messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
+				/* k2.io.StdIO$.MODULE$.messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
+				Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");
+				k2.io.StdIO$.MODULE$.writeln("test message");*/
+
+				KermetaRunner runner = new KermetaRunner(outputFolder+"/classes", kp.getGroup()+"."+kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
+				if (isBuildNeeded && result == null) {
+					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).error("Error in build, cannot run "+kpFileURL, this.getClass().getName());
+				}
+				else{
+					runner.runK2Program(params);
 				}
 				
 			}
