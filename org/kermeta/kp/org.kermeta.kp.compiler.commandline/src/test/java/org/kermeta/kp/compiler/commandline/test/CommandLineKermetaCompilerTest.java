@@ -16,7 +16,8 @@ import junit.framework.TestCase;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.aether.AetherUtil;
-import java.io.File;
+import org.kermeta.utils.helpers.SimpleLocalFileConverter;
+
 
 
 public class CommandLineKermetaCompilerTest extends TestCase {
@@ -37,7 +38,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         System.out.println("            to " + targetFolder);
         
         // Phase 1 : compiles without crashing
-        KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(),false);
+        KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
                 
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
         

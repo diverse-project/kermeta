@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -29,6 +30,10 @@ import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.Constraint;
 import org.kermeta.diagnostic.ConstraintDiagnostic;
@@ -58,7 +63,9 @@ import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.utils.helpers.FileHelpers;
+import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.helpers.StringHelper;
+import org.kermeta.utils.helpers.emf.EMFUriHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
@@ -75,6 +82,8 @@ public class KermetaCompiler {
 	
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
+	public static String DEFAULT_KP_LOCATION_IN_FOLDER = "/project.kp";
+	public static String DEFAULT_BINARY_LOCATION_IN_ECLIPSE = "/target/classes";
 	public static String INTERMEDIATE_SUBFOLDER = "";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
@@ -88,6 +97,7 @@ public class KermetaCompiler {
 	public Boolean saveIntermediateFiles = false;
 	public String targetIntermediateFolder;
 	public MessagingSystem logger;
+	public LocalFileConverter fileSystemConverter;
 	// public List<String> additionalClassPath = new
 	// java.util.ArrayList<String>();
 	// public String projectName = "project";
@@ -108,7 +118,7 @@ public class KermetaCompiler {
 	 *            is the MessagingSystem that must be used to log message,
 	 *            problem and progression
 	 */
-	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, Boolean willRunInEclipse) {
+	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, LocalFileConverter uriPhysicalConverter, Boolean willRunInEclipse) {
 		super();
 		this.logger = logger;
 		if (registerProtocols) {
@@ -138,10 +148,11 @@ public class KermetaCompiler {
 	 *            indicates wether the process should be stopped when an error
 	 *            occurs or not
 	 */
-	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse, Boolean checkingEnabled, Boolean stopOnError) {
+	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, LocalFileConverter uriPhysicalConverter,  Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse, Boolean checkingEnabled, Boolean stopOnError) {
 		super();
 		System.err.println("checking enabled (" + checkingEnabled + ") stop on error (" + stopOnError + ")");
 		this.logger = logger;
+		this.fileSystemConverter = uriPhysicalConverter;
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.targetIntermediateFolder = targetIntermediateFolder;
 		this.runInEclipse = willRunInEclipse;
@@ -402,43 +413,108 @@ public class KermetaCompiler {
 		List<Dependency> dependencies = kp.getDependencies();
 		for (Dependency dep : dependencies) {
 			String dependencyURLWithVariable = dep.getUrl();
-			String dependencyURL = varExpander.expandVariables(dependencyURLWithVariable);
+			String dependencyURLString = varExpander.expandVariables(dependencyURLWithVariable);
 			if (dependencyURLWithVariable.contains("${")) {
 				// deal with variable expansion
-				logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", LOG_MESSAGE_GROUP);
+				logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURLString + ")", LOG_MESSAGE_GROUP);
 			} else {
 				logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
 			}
 
 			KermetaProject dependencyKP = null;
 
-			URL jar = new URL(dependencyURL);
-			try {
-				ZipInputStream zip = new ZipInputStream(jar.openStream());
-				ZipEntry ze;
-				while ((ze = zip.getNextEntry()) != null) {
-					if (("/" + ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)) {
-						// load dependencyKP
-						ldr = new KpLoaderImpl();
-						dependencyKP = ldr.loadKp(URI.createURI("jar:" + dependencyURL + "!/" + ze.getName()));
-					}
-				}
 
-				if (dependencyKP == null) {
-					logger.log(MessagingSystem.Kind.UserWARNING, "   dependency doesn't contains a kp file, maybe you use it as input for srcQuery ? ", LOG_MESSAGE_GROUP);
-				} else {
-					String dependencyMergedKMUrl = "jar:" + dependencyURL + "!" + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-					kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
+			// deal with URL : might be a Jar or a folder
+
+			// is this a folder ?
+			URI dependencyKPURI = null;
+			boolean isDirectory = false;
+			try{
+				URI depURI = URI.createURI(dependencyURLString);
+				if(depURI.isPlatformResource() && ! depURI.fileExtension().equals("jar")){
+					/*logger.debug("current URIMAP", LOG_MESSAGE_GROUP);
+					for( Entry<URI, URI> entry : ExtensibleURIConverterImpl.URI_MAP.entrySet()){
+						logger.debug("     "+entry.getKey().toString() + " is resolved into " +entry.getValue().toString(), LOG_MESSAGE_GROUP);
+						
+					}*/
+					//logger.debug("ExtensibleURIConverterImpl.INSTANCE.normalize = "+ExtensibleURIConverterImpl.INSTANCE.normalize(depURI), LOG_MESSAGE_GROUP);
+					//URIUtil util;
+					
+						dependencyKPURI = EMFUriHelper.convertToEMFUri(fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURLString+DEFAULT_KP_LOCATION_IN_FOLDER)));
+						logger.debug("fileSystemConverter.convertSpecialURItoFileURI = "+dependencyKPURI, LOG_MESSAGE_GROUP);
+						isDirectory = true;
+						/*if(!dependencyKPURI.isFile()) {
+							logger.logProblem(MessagingSystem.Kind.UserERROR, "Dependency "+dependencyURLString+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+						}*/
+						// TODO check that this folder exists ...
 				}
-			} catch (Exception e) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Dependency "+dependencyURL+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
-				return  new ArrayList<URL>();
+			}catch( Exception e){
+				logger.error(e.toString()+ " on " +URI.createURI(dependencyURLString).toFileString(), LOG_MESSAGE_GROUP,e);
+			}
+			
+			if(!isDirectory){
+				// let's try as a zip
+				URL jar = new URL(dependencyURLString);
+				try {
+					ZipInputStream zip = new ZipInputStream(jar.openStream());
+					ZipEntry ze;
+					while ((ze = zip.getNextEntry()) != null) {
+						if (("/" + ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)) {
+
+							dependencyKPURI = URI.createURI("jar:" + dependencyURLString + "!/" + ze.getName());
+						}
+					}
+
+				} catch (Exception e) {
+					logger.logProblem(MessagingSystem.Kind.UserERROR, "Dependency "+dependencyURLString+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+					return  new ArrayList<URL>();
+				}
+			}
+
+			if(dependencyKPURI != null){
+				// load dependencyKP
+				logger.debug("loading dependency kp : "+dependencyKPURI.toString(), LOG_MESSAGE_GROUP);
+				ldr = new KpLoaderImpl();				
+				dependencyKP = ldr.loadKp(dependencyKPURI);
+			}
+			if (dependencyKP == null) {
+				if(findSourceQueryUsingDependency(kp,dep) != null){
+					logger.debug("dependency used at least for one srcQuery", LOG_MESSAGE_GROUP);
+				}
+				else{
+					logger.log(MessagingSystem.Kind.UserWARNING, "   dependency neither contains a kp file nor is used in a srcQuery, maybe you use it as a binary classpath complement only ? ", LOG_MESSAGE_GROUP);
+				}
+			} else {
+				String dependencyMergedKMUrl;
+				if(isDirectory){
+					if(runInEclipse){
+						// TODO read an optional preference about where the binary are really located in this specific eclipse project
+						dependencyMergedKMUrl = dependencyURLString + DEFAULT_BINARY_LOCATION_IN_ECLIPSE +DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
+					} else {
+						dependencyMergedKMUrl = dependencyURLString + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
+					}
+				} else {
+					dependencyMergedKMUrl = "jar:" + dependencyURLString + "!" + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
+				}
+				kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
 			}
 		}
-
 		return kpSources;
 	}
 
+	// TODO move to a kp helper project/class
+	protected SourceQuery findSourceQueryUsingDependency(KermetaProject kp, Dependency dep){
+		List<Source> srcs = kp.getSources();		
+		for (Source src : srcs) {
+			if (src instanceof SourceQuery) {
+				if(((SourceQuery)src).getFrom() == dep){
+					return (SourceQuery) src;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, ArrayList<URL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 
