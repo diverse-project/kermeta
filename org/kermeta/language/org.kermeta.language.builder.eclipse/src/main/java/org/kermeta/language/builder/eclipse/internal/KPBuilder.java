@@ -11,30 +11,24 @@ package org.kermeta.language.builder.eclipse.internal;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.eclipse.core.internal.resources.Folder;
-import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.ui.internal.ide.undo.FolderDescription;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
@@ -43,12 +37,11 @@ import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
+import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
-import org.kermeta.utils.helpers.eclipse.URIHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
-import org.osgi.framework.Bundle;
 
 public class KPBuilder {
 	
@@ -75,7 +68,8 @@ public class KPBuilder {
 			String projectUri = f.getParentFile().getCanonicalPath();
 			outputFolder = projectUri+File.separatorChar+"target";
 			outputResourceFolder = outputFolder+"/resources";
-			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),true,outputFolder, true, true, false);
+			//compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),false,outputFolder, true, true, false);
+			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),true,outputFolder, true, true, false);
 			refreshFileIndex();
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
@@ -110,7 +104,7 @@ public class KPBuilder {
 	synchronized public void compile(){
 		try {		
 			ArrayList<String> additionalCalssPath = new ArrayList<String>();		
-			
+			Activator.getDefault().getMessaggingSystem().initProgress(KermetaBuilder.LOG_MESSAGE_GROUP, "Starting km generation of "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP, 0);
 			// for reflexivity set the bundle context
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, additionalCalssPath,true);
 			if (result != null) {
@@ -127,6 +121,7 @@ public class KPBuilder {
 				e.printStackTrace();
 			}
 		}
+		Activator.getDefault().getMessaggingSystem().doneProgress(KermetaBuilder.LOG_MESSAGE_GROUP, "End of km generation for "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP);
 	}
 
 

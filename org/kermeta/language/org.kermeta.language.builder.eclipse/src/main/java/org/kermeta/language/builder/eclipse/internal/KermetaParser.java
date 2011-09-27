@@ -7,6 +7,7 @@ import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecutionner;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
@@ -14,7 +15,7 @@ public class KermetaParser extends KermetaExecutionner<IResource,String> {
 	
 	@Override
 	public void execute(IResource concernedResource, String content) {
-		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), true);
+		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(), true);
 		ModelingUnit freshModelingUnit = null;
 		if (content.equals("")) {
 			try {

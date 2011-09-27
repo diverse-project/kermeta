@@ -49,7 +49,48 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to initialize builders ", this.getClass().getName(), e);
 		}
 	}
+	
+	private void createBuilder(IResource resource) {
+		// add a new visitor dedicated to this
+		// Kermeta project file
+		// ignore if kp file is in target folder 
+		// TODO add a preference page to control that
+		if (!resource.getProjectRelativePath().segments()[0].equals("target")) {
+			Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for " + resource.getFullPath(), this.getClass().getName());
+			final KPBuilder aBuilder = new KPBuilder((IFile) resource);
 
+			kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource), aBuilder);
+
+			Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
+				protected IStatus run(IProgressMonitor monitor) {
+					aBuilder.compile();
+					return Status.OK_STATUS;
+				}
+			};
+			job.setPriority(Job.LONG);
+			job.schedule();
+		}
+	}
+
+
+	private void removeBuilders(IProject aProject) {
+		ArrayList<String> theIdentifierToRemove = new ArrayList<String>();
+		for (KPBuilder aBuilder : kermetaBuilder.kpBuilders.values()) {
+			try {
+				if (!aBuilder.kpProjectFile.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
+					theIdentifierToRemove.add(kermetaBuilder.generateIdentifier(aBuilder.kpProjectFile));
+				}
+			} catch (CoreException e) {
+				theIdentifierToRemove.add(kermetaBuilder.generateIdentifier(aBuilder.kpProjectFile));
+			}
+		}
+		for (String anIdentifier : theIdentifierToRemove) {
+			kermetaBuilder.kpBuilders.remove(anIdentifier);
+		}
+	}
+
+	// ****************** INNER CLASSES ****
+	
 	class KPFileDeltaVisitor implements IResourceDeltaVisitor {
 
 		public boolean visit(IResourceDelta delta) throws CoreException {
@@ -139,39 +180,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 			return processResourceChildren;
 		}
 
-		private void createBuilder(IResource resource) {
-			// add a new visitor dedicated to this
-			// Kermeta project file
-			Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for " + resource.getFullPath(), this.getClass().getName());
-			final KPBuilder aBuilder = new KPBuilder((IFile) resource);
-
-			kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource), aBuilder);
-
-			Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
-				protected IStatus run(IProgressMonitor monitor) {
-					aBuilder.compile();
-					return Status.OK_STATUS;
-				}
-			};
-			job.setPriority(Job.LONG);
-			job.schedule();
-		}
-
-		private void removeBuilders(IProject aProject) {
-			ArrayList<String> theIdentifierToRemove = new ArrayList<String>();
-			for (KPBuilder aBuilder : kermetaBuilder.kpBuilders.values()) {
-				try {
-					if (!aBuilder.kpProjectFile.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
-						theIdentifierToRemove.add(kermetaBuilder.generateIdentifier(aBuilder.kpProjectFile));
-					}
-				} catch (CoreException e) {
-					theIdentifierToRemove.add(kermetaBuilder.generateIdentifier(aBuilder.kpProjectFile));
-				}
-			}
-			for (String anIdentifier : theIdentifierToRemove) {
-				kermetaBuilder.kpBuilders.remove(anIdentifier);
-			}
-		}
+		
 	}
 
 	/**
@@ -192,20 +201,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 						case IResource.FILE:
 							if (resource.getFileExtension() != null) {
 								if (resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION)) {
-									// ignore kp in target folder
-									if (!resource.getProjectRelativePath().segments()[0].equals("target")) {
-										Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "adding builder for " + resource.getFullPath(), this.getClass().getName());
-										final KPBuilder aBuilder = new KPBuilder((IFile) resource);
-										kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource), aBuilder);
-										Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
-											protected IStatus run(IProgressMonitor monitor) {
-												aBuilder.compile();
-												return Status.OK_STATUS;
-											}
-										};
-										job.setPriority(Job.LONG);
-										job.schedule();
-									}
+									createBuilder(resource);
 								}
 							}
 							processResourceChildren = false;

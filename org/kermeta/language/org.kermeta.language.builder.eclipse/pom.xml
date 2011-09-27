@@ -22,6 +22,12 @@
 			<artifactId>org.osgi.core</artifactId>
 			<version>${osgi.version}</version>
 		</dependency>
+		
+        <dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.helpers.eclipse</artifactId>
+			<version>${utils.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.commands</artifactId>
@@ -37,11 +43,11 @@
 			<artifactId>org.eclipse.core.runtime</artifactId>
 			<version>[3.5.0.0,)</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.resources</artifactId>
 			<version>[3.5.2.0,)</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
@@ -115,7 +121,7 @@
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.eclipse</artifactId>
-			<version>${kermeta.version}</version>
+			<version>${utils.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>fr.irisa.triskell.utilities</groupId>
@@ -133,11 +139,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.helpers.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-		</dependency>
         <dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.texteditor.eclipse.nature</artifactId>
