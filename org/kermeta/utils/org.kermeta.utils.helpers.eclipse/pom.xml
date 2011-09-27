@@ -49,6 +49,11 @@
 			<artifactId>org.eclipse.core.jobs</artifactId>
 			<version>[3.4.0.0,)</version>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>utils.helpers</artifactId>
+			<version>${utils.version}</version>			
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
