@@ -15,6 +15,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
 /**
@@ -50,7 +51,7 @@ public class KermetaCompilerCLI {
 	}
 		
 	private void run() throws IOException {
-		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), false);
+		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
 		compiler.kp2bytecode(kpFile, outputFolder,outputFolder,outputFolder,new java.util.ArrayList<String>(), false);
 	}
 
