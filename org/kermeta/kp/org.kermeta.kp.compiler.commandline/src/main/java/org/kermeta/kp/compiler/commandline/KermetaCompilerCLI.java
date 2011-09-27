@@ -64,7 +64,6 @@ public class KermetaCompilerCLI {
 		options = new Options();
 		options.addOption(GENERATE_INTERMEDIATE_FILES_OPTION, false, "Generate intermediate files");
 		options.addOption(TARGET_LOCATION_OPTION, true, "Output folder. " + DEFAULT_TARGET_FOLDER + " by default ");
-		
 	}
 
 	/**

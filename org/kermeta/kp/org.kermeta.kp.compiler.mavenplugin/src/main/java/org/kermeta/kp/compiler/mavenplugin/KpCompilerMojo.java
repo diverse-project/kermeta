@@ -203,7 +203,7 @@ public class KpCompilerMojo extends AbstractMojo {
 						kpModel.getGroup()+"."+kpModel.getName(), 
 						classPathList, 
 						new StdioSimpleMessagingSystem() );
-				runner.runK2Program(  Arrays.asList(params));
+				runner.runK2Program(  Arrays.asList(params),"");
 			}
 		}
 	        // Add kp file and resolved km files in the resulting jar

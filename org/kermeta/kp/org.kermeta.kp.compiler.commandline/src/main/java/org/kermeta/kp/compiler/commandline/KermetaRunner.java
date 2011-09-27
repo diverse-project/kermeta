@@ -46,7 +46,7 @@ public class KermetaRunner {
 		this.logger = logger;
 	}
 	
-	public void runK2Program( List<String> params) {
+	public void runK2Program( List<String> params, String uriMapFileLocation) {
 		
 		this.logger.initProgress(scalaAspectPrefix, "Starting "+scalaAspectPrefix + "runner.MainRunner", KermetaCompiler.LOG_MESSAGE_GROUP, 0);
 		StringBuffer f = new StringBuffer();
@@ -67,7 +67,10 @@ public class KermetaRunner {
 			} 
 	        
 	        ProcessBuilder builder = new ProcessBuilder(
-	        		getJavaVMbin(), "-cp", scalaToolJarCP, "scala.tools.nsc.MainGenericRunner", "-savecompiled",
+	        		getJavaVMbin(), "-cp", scalaToolJarCP,
+	        		"-Durimap.file.location="+(uriMapFileLocation!=null?uriMapFileLocation:""),
+	        		"scala.tools.nsc.MainGenericRunner", 
+	        		"-savecompiled",
 	                "-classpath",f.toString() + outputBinFolder,
 	                scalaAspectPrefix + "runner.MainRunner", 
 	                params.toString());
