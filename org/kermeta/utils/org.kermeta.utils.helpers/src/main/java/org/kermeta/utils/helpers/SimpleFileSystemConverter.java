@@ -15,7 +15,7 @@ import org.kermeta.utils.helpers.emf.EMFUriHelper;
  * Simple URI to Physical converter : no conversion if unsure
  *
  */
-public class SimpleFileSystemconverter extends LocalFileConverter {
+public class SimpleFileSystemConverter extends LocalFileConverter {
 
 
 	@Override
