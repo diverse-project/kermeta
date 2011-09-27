@@ -245,12 +245,12 @@ public class KPBuilder {
 				Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");
 				k2.io.StdIO$.MODULE$.writeln("test message");*/
 
-				KermetaRunner runner = new KermetaRunner(outputFolder+"/classes", kp.getGroup()+"."+kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
+				KermetaRunner runner = new KermetaRunner(outputFolder+File.separator+"classes", kp.getGroup()+"."+kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
 				if (isBuildNeeded && result == null) {
 					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).error("Error in build, cannot run "+kpFileURL, this.getClass().getName());
 				}
 				else{
-					runner.runK2Program(params);
+					runner.runK2Program(params,outputFolder+File.separator+"urimap.properties");
 				}
 				
 			}
