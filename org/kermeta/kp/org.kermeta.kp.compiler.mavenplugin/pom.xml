@@ -50,7 +50,12 @@
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.api</artifactId>
-			<version>${kermeta.version}</version>
+			<version>${utils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.helpers</artifactId>
+			<version>${utils.version}</version>
 		</dependency>
         <dependency>
             <groupId>log4j</groupId>

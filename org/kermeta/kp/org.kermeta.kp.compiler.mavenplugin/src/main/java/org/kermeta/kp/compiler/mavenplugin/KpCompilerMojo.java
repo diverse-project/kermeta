@@ -21,7 +21,11 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.KermetaRunner;
+import org.kermeta.kp.loader.kp.KpLoaderImpl;
+import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
 /**
@@ -178,6 +182,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        KermetaCompiler.initializeFactory();
 	        KermetaCompiler compiler = new KermetaCompiler(true,
 	        		new StdioSimpleMessagingSystem(),
+	        		new SimpleLocalFileConverter(),
 	        		intermediateFilesRequired,
 	        		sourceOutputDirectory.toString(),
 	        		false,
@@ -190,8 +195,15 @@ public class KpCompilerMojo extends AbstractMojo {
                 }
 		else{
 			if (run){
+				KpLoaderImpl ldr = new KpLoaderImpl();
 				
-				compiler.runK2Program(classPathList,  Arrays.asList(params));
+				// Load KP file
+				KermetaProject kpModel = ldr.loadKp(kp.toString());
+				KermetaRunner runner = new KermetaRunner(targetDirectory.toString()+"/classes", 
+						kpModel.getGroup()+"."+kpModel.getName(), 
+						classPathList, 
+						new StdioSimpleMessagingSystem() );
+				runner.runK2Program(  Arrays.asList(params));
 			}
 		}
 	        // Add kp file and resolved km files in the resulting jar
