@@ -45,4 +45,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+	</dependencies>
 </project>
