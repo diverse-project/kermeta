@@ -37,7 +37,8 @@
 							<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 							<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
 							<Export-Package>								
-                        		org.kermeta.utils.helpers
+                        		org.kermeta.utils.helpers,
+                        		org.kermeta.utils.helpers.emf
                         	</Export-Package>
 		            </manifestEntries>		            
 		          </archive>
