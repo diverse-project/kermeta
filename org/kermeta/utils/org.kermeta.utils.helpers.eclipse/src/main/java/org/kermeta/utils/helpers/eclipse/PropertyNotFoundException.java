@@ -11,6 +11,8 @@ package org.kermeta.utils.helpers.eclipse;
 
 import org.eclipse.core.resources.IResource;
 
+
+
 @SuppressWarnings("serial")
 public class PropertyNotFoundException extends Exception {
 

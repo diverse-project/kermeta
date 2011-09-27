@@ -15,6 +15,10 @@ import org.kermeta.utils.helpers.emf.EMFUriHelper;
 
 public class LocalFileConverterForEclipse extends LocalFileConverter {
 
+	public LocalFileConverterForEclipse(){
+		
+	}
+	
 	@Override
 	public java.net.URI convertSpecialURItoFileURI(java.net.URI javaUri) {
 		org.eclipse.emf.common.util.URI emfUri = EMFUriHelper.convertToEMFUri(javaUri);
