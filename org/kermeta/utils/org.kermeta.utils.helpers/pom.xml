@@ -40,6 +40,10 @@
                         		org.kermeta.utils.helpers,
                         		org.kermeta.utils.helpers.emf
                         	</Export-Package>
+                        	<Require-Bundle>
+								org.eclipse.emf.ecore,
+								org.eclipse.emf.ecore.xmi				
+	                        </Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
