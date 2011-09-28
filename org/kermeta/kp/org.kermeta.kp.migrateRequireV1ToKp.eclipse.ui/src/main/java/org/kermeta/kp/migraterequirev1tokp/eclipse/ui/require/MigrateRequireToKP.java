@@ -172,7 +172,7 @@ public class MigrateRequireToKP {
 		}
 		
 		// Return kp path file
-		return reqFiles;
+		return requiredFiles;
 		
 		//return "";
 		
@@ -188,7 +188,8 @@ public class MigrateRequireToKP {
 		List<String> sourceFiles = new ArrayList<String> ();
 		String bproject = baseProject.replace("\\", "/");
 		if (! reqFiles.isEmpty()) {
-			for (String s : reqFiles) {
+			for (String s1 : reqFiles) {
+				String s = s1.replace("\\", "/");
 				String sourceF =s.substring(2, s.length()-1);
 				String source ="";
 				
@@ -292,12 +293,11 @@ public class MigrateRequireToKP {
  * @param baseWorkspace : path to the current workspace 
  *  */
 public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, String baseWorkspace)  throws FileNotFoundException, IOException	{
-	eclipseMess.log(Kind.UserINFO, "", "" );
+	System.out.println("migrateAllKmtFiles");
 	for (String pathFile : kmtFiles) {
 		migrateKMT (pathFile, baseProject,  baseWorkspace ) ;
-		eclipseMess.log(Kind.UserINFO, "path", pathFile);
-		
-	}
+		System.out.println("PATH " + pathFile);
+	} 
 }
 	
 /** Migrate a kmt file to Kermeta v2 if necessary and save the old version before
@@ -305,30 +305,45 @@ public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, Strin
  @param baseProject : the path of the base project where this kmt file is stored */
 public void migrateKMT (String pathFile, String baseProject, String baseWorkspace ) throws FileNotFoundException, IOException	 {
 	// The migration is made only on kmt files
+	String path;
+	if (isKMTFile(pathFile)) {
 	
-	//if (isKMTFile(pathFile)) {
+		// Change pathFile if it is a platform:/lookup or resource or plugin
+		if (pathFile.startsWith("platform:")) {
+			String [] split = pathFile.split("/");
+			String endPath = baseWorkspace;
+			for (int i= 2; i < split.length; i++) {
+				endPath = endPath + "/" + split[i];
+			}
+			path = endPath;
+			System.out.println("END " + path);
+			
+		}
+		else {
+			path = pathFile;
+		}
 		
 		// create a new parser 
-		RequireParser parser = new RequireParser (pathFile);
+		RequireParser parser = new RequireParser (path);
 		
 		// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
 		if (parser.has_element("stdio.")   )  {
 			
 			// Test the pathFile and change it to be usable
-			String path = obtainPath(pathFile, baseProject, baseWorkspace);
+			String path2 = obtainPath(path, baseProject, baseWorkspace);
 			
 			// save the old Kermeta V1 file
-			copy(pathFile, pathFile + ".old");
+			copy(path, path + ".old");
 			
 			// Add using for stdio : 
-			addUsingStdio (pathFile, "using kermeta::io::StdIO => stdio");
+			addUsingStdio (path, "using kermeta::io::StdIO => stdio");
 			
 			// Add message to the user for the Eclipse console
-			eclipseMess.log(Kind.UserINFO, pathFile + "kmt file migrated", "migration Kermeta V1 to V2" );
+			eclipseMess.log(Kind.UserINFO, path + "kmt file migrated", "migration Kermeta V1 to V2" );
 			
 		}
 		
-	//}
+	}
 	
 }
 	

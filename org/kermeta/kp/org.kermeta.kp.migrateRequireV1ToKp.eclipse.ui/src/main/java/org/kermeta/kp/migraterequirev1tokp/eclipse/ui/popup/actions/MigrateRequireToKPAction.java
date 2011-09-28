@@ -77,9 +77,17 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
             		//String kpPath = migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication" );
             	List<String> reqFiles = 	migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
             	
+            	// add main kmt path file
+            	reqFiles.add(kmtPathFile);
             	
+            	if (reqFiles.size() == 0) {
+            		System.out.println("REQFILE SYZE 0");
+            	}
+            	else {
+            		System.out.println("REQFILE NOT EMPTY");
+            	}
             	// Migrate all kmt files
-           // migrate.migrateAllKmtFiles(reqFiles, baseDirectory, workspaceDirectory);
+           migrate.migrateAllKmtFiles(reqFiles, baseDirectory, workspaceDirectory);
             	//migrate.migrateKMT(kmtPathFile,baseDirectory, workspaceDirectory);
             	
             	MessageDialog.openInformation(
