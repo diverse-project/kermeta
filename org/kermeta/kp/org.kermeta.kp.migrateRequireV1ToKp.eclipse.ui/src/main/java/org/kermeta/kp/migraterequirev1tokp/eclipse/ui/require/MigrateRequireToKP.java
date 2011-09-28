@@ -213,6 +213,11 @@ public class MigrateRequireToKP {
 		return sourceFiles;
 	}
 	
+	//---------------------------------------------------------------------------------------------------------------
+	
+	// CREATE NEW KP FILE
+	//---------------------------------------------------------------------------------------------------------------
+	
 	
 	/**  Create new kp file and serialize it
 	 @param pathFile : the Kermeta file's path
@@ -283,7 +288,7 @@ public class MigrateRequireToKP {
 	}
 	
 //------------------------------------------------------------------------------------------------------------------------
-// Update kmt file if necessary
+// UPDATE KMT FILE IF NECESSARY
 //------------------------------------------------------------------------------------------------------------------------
 	
 /**
@@ -305,6 +310,10 @@ public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, Strin
 public void migrateKMT (String pathFile, String baseProject, String baseWorkspace ) throws FileNotFoundException, IOException	 {
 	// The migration is made only on kmt files
 	String path;
+	
+	// Determines whether the file will be migrated 
+	boolean isMigrated = false;
+	
 	if (isKMTFile(pathFile)) {
 	
 		// Change pathFile if it is a platform:/lookup or resource or plugin
@@ -326,49 +335,88 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		// create a new parser 
 		RequireParser parser = new RequireParser (path);
 		
-		// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
-		if (parser.has_element("stdio.")   )  {
-			
-			
-			
+		if (willBeMigrated (parser)) {
 			// save the old Kermeta V1 file
-			copy(path, path + ".old");
-			
-			// Add using for stdio : 
-			addUsingStdio (path, "using kermeta::io::StdIO => stdio");
-			
+						copy(path, path + ".old");
+						
 			// Add message to the user for the Eclipse console
 			eclipseMess.log(Kind.UserINFO, path + "kmt file migrated", "migration Kermeta V1 to V2" );
 			
-		}
+			// Initiate the file lines of the file with the current content
+			List<String> fileLines = parser.parseInList();
+		
+			// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
+			if (parser.has_element("stdio.")   )  {
+			
+				// Add using for stdio : 
+				fileLines = addUsing (path, "using kermeta::io::StdIO => stdio", fileLines);
+
+			
+			}
+		
+			if (parser.has_element("@mainClass") || parser.has_element("@mainOperation")) {
+			
+				// Create list of annotations to remove
+				List<String> startsToRemove = new ArrayList<String>();
+				startsToRemove.add("@mainClass");
+				startsToRemove.add("@mainOperation");
+			
+				// Remove this annotations in the file 
+				fileLines = removeMainAnnotations (path,  startsToRemove, fileLines);
+			}
+			
+			
+			// Store new list in file
+			//Retrieve fileContents from these new lines
+			String fileContent = fileContents (fileLines);
+			
+			// Save the new file content
+			writeInFile (path, fileContent);
+		
+		
+	}
 		
 	}
 	
 }
+
+
+/** 
+ * Determines whether a given file need to be migrated
+ * @param parser : the parser associated with a given file
+ * */
+public boolean willBeMigrated (RequireParser parser) throws FileNotFoundException {
+	return (parser.has_element("stdio.")  || parser.has_element("@mainClass") || parser.has_element("@mainOperation") );
+}
+
+
+	//---------------------------------------------------------------------------------------
+
+	// Add a given using in a file
+	//--------------------------------------------------------------------------------------
 	
 	/** Add a given using on a file
 	 @param pathFile : the file where the using will be added
 	 @param using : the using to add
 	 */
-	public void addUsingStdio (String pathFile, String using) throws FileNotFoundException  {
+	public List<String> addUsing (String pathFile, String using, List<String> fileLines) throws FileNotFoundException  {
 		RequireParser parser = new RequireParser (pathFile);
 		
 		// Put all lines of the file in a list
-		List<String> fileLines = new ArrayList<String>();
-		fileLines =  parser.parseInList();
+		List<String> newLines = new ArrayList<String>();
+		newLines =  fileLines;
 		
-		if (! fileLines.contains(using)) {
+		if (! newLines.contains(using)) {
 			// We add only one times the given using
 			// Retrieve the first index where a require is not followed by a require 
-			int index = lastIndexOfRequire(fileLines);
+			int index = lastIndexOfRequire(newLines);
 		
 			// Add using just after these require
-			fileLines.add(index + 1,using);
+			newLines.add(index + 1,using);
 		
-			// Save the file lines on the file
-			String fileContents = fileContents (fileLines);
-			writeInFile (pathFile, fileContents);
 		}
+		
+		return newLines;
 	}
 	
 	
@@ -386,6 +434,11 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		
 		return index;
 	}
+	
+	
+	//-----------------------------------------------------------------------------------------------------------
+	// Read and write in a KMT file
+	//-----------------------------------------------------------------------------------------------------------
 	
 	
 	/** Write a given content in a file
@@ -473,9 +526,60 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		  }
 	
 	}
+	
+	
+	//--------------------------------------------------------------------------------------------------
+	
+	// Remove @mainClass and @mainOperation
+	//--------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Determines whether a given line starts with a given start from a list
+	 * @param line : the tested line
+	 * @param starts : the possible starts to test
+	 * @result : true if one of the start matches, false otherwise
+	 *  */
+	public boolean lineStartsWith (String line, List<String> starts) {
+		boolean res = false;
+		for (String s : starts) {
+			if (line.startsWith(s)) {
+				res = true;
+			}
+		}
+		
+		return res;
+	}
+	
+	
+	/** 
+	 * Remove main annotation in the file if it is exists
+	 * @param pathFile : the path to the migrated file
+	 * @param startLinesToRemove : list of annotations that start future removed lines
+	 * @result : the new file lines
+	 *  */
+	public List<String> removeMainAnnotations (String pathFile, List<String> startLinesToRemove, List<String> fileLines) throws FileNotFoundException {
+		
+		// Retrieve all of the lines from the file with path as parameter of the method
+		RequireParser parser = new RequireParser (pathFile);
+		
+		// Create new result list
+		List<String> newFileLines = new ArrayList<String>();
+		
+		for (String line : fileLines  ) {
+			// We add only lines that do not start with on of undesired annotation
+			if (!lineStartsWith (line,startLinesToRemove)) {
+				newFileLines.add(line);
+			}
+		}
+		
+		return newFileLines;
+	}
+	
 
 	
-	
+	//----------------------------------------------------------------------------------------------------------------
+	// Main
+	//-----------------------------------------------------------------------------------------------------------------
 	public static void main(String [] arg) {
 		MigrateRequireToKP migrate = new MigrateRequireToKP();
 		try {

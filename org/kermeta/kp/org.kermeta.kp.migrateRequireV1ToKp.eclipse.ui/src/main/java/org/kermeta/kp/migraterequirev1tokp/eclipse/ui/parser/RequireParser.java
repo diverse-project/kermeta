@@ -147,6 +147,11 @@ public class RequireParser {
 	// Parse stdio to change in Kermeta::Io::Stdio (by adding an using)
 	//------------------------------------------------------------------------------------------
 	
+	/**
+	 * Determines whether a given file contains a given element in one of its lines.
+	 * @param elt : the element to search
+	 * @result : true if the element is found, false otherwise
+	 *  */
 	public boolean has_element( String elt) throws FileNotFoundException {
 	    //Note that FileReader is used, not File, since File is not Closeable
 		// Init has stdio to false
@@ -173,4 +178,8 @@ public class RequireParser {
 	    }
 	    return  has_stio;
 	}
+	
+	
+	
+	
 }
