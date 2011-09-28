@@ -151,9 +151,9 @@ public class MigrateRequireToKP {
 	 @param baseWorkspace : the path of the workspace
 	 @param projectName : the name of the kp project (the same as the Kermeta V1 file)
 	 @param groupName : the group of the Kermeta project
-	 @result : the path of the new kp file
+	 @result : the list of required files in the kp
 	  */
-	public String migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
+	public List<String> migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
 		// Parse kmt main file
 		List<String> reqFiles = allRequires( pathFile, baseProject, baseWorkspace);
 		
@@ -172,7 +172,7 @@ public class MigrateRequireToKP {
 		}
 		
 		// Return kp path file
-		return kpPath;
+		return reqFiles;
 		
 		//return "";
 		
@@ -186,7 +186,7 @@ public class MigrateRequireToKP {
 	 @result : the new modified list of path files */
 	public List<String> sourcesInKP (String baseProject, String baseProjectNotation,List<String> reqFiles ){
 		List<String> sourceFiles = new ArrayList<String> ();
-		String bproject = baseProject.replace("/", "/");
+		String bproject = baseProject.replace("\\", "/");
 		if (! reqFiles.isEmpty()) {
 			for (String s : reqFiles) {
 				String sourceF =s.substring(2, s.length()-1);
@@ -285,6 +285,19 @@ public class MigrateRequireToKP {
 // Update kmt file if necessary
 //------------------------------------------------------------------------------------------------------------------------
 	
+/**
+ * Migrate a main kmt file and all of its dependencies in the kp model to Kermeta V2
+ * @param kmtFiles : the list of kermeta V1 files to migrate
+ * @param baseProject : the path to the base project (folder where kp model is stored)
+ * @param baseWorkspace : path to the current workspace 
+ *  */
+public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, String baseWorkspace)  throws FileNotFoundException, IOException	{
+	for (String pathFile : kmtFiles) {
+		migrateKMT (pathFile, baseProject,  baseWorkspace ) ;
+		
+	}
+}
+	
 /** Migrate a kmt file to Kermeta v2 if necessary and save the old version before
  @param pathFile : the path of the kmt file to test
  @param baseProject : the path of the base project where this kmt file is stored */
@@ -297,7 +310,7 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		RequireParser parser = new RequireParser (pathFile);
 		
 		// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
-		if (parser.has_element("stdio."))  {
+		if (parser.has_element("stdio.")   )  {
 			
 			// Test the pathFile and change it to be usable
 			String path = obtainPath(pathFile, baseProject, baseWorkspace);

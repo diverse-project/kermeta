@@ -12,6 +12,7 @@ package org.kermeta.kp.migraterequirev1tokp.eclipse.ui.popup.actions;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 
 import org.eclipse.core.resources.IFile;
@@ -53,10 +54,7 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(
-				shell,
-				"Ui",
-				"New Action was executed.");
+		
 		
 		
 		if ((selection instanceof IStructuredSelection)) {
@@ -77,13 +75,17 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
             	MigrateRequireToKP migrate = new MigrateRequireToKP();
             	try {
             		//String kpPath = migrate.migrateRequireInKP("C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo\\Class2RDBMS.kmt", "C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication\\fr.irisa.triskell.kermeta.samples\\class2RDBMS\\transfo","C:\\Users\\mgouyett\\Marie\\Work\\workspaceKermeta\\runtime-EclipseApplication" );
-            	String kpPath = 	migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
-            	migrate.migrateKMT(kmtPathFile,baseDirectory, workspaceDirectory);
+            	List<String> reqFiles = 	migrate.migrateRequireInKP(kmtPathFile,baseDirectory,"${project.baseUri}",workspaceDirectory, projectName, groupName   );
+            	
+            	
+            	// Migrate all kmt files
+           // migrate.migrateAllKmtFiles(reqFiles, baseDirectory, workspaceDirectory);
+            	//migrate.migrateKMT(kmtPathFile,baseDirectory, workspaceDirectory);
             	
             	MessageDialog.openInformation(
         				shell,
         				"Ui",
-        				"New Action was 2.");
+        				"Kmt migration was executed");
             	// Refresh Kp
             	new Job("Refresh Kp ") {
     				public IStatus run(IProgressMonitor pm) {
