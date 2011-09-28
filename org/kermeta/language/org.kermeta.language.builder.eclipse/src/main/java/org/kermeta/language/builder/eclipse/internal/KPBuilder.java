@@ -9,11 +9,14 @@
 package org.kermeta.language.builder.eclipse.internal;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -229,6 +232,11 @@ public class KPBuilder {
 			if (isBuildNeeded) {
 	
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
+				
+				// generate urimap file
+				// TODO may be we can do that in background because we may have to update it if the user has opened or closed some projects
+				generateURIMapFile(outputFolder);
+				
 				if (result != null) {
 					kp_last_modelingunit = result;
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
@@ -244,7 +252,10 @@ public class KPBuilder {
 				/* k2.io.StdIO$.MODULE$.messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 				Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");
 				k2.io.StdIO$.MODULE$.writeln("test message");*/
-
+				
+				
+				
+				
 				KermetaRunner runner = new KermetaRunner(outputFolder+File.separator+"classes", kp.getGroup()+"."+kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
 				if (isBuildNeeded && result == null) {
 					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).error("Error in build, cannot run "+kpFileURL, this.getClass().getName());
@@ -266,6 +277,20 @@ public class KPBuilder {
 		}
 	}
 	
+	private void generateURIMapFile(String outputFolder) {
+		Properties props = new Properties();
+		// TODO fill map
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(outputFolder+File.separator+"urimap.properties");
+			props.store(fos, "Simulating resolution of eclipse workbench URIs resolution using URI map translation");
+			fos.close();
+		} catch (Exception e) {
+			Activator.getDefault().getMessaggingSystem().error("cannot generate "+outputFolder+File.separator+"urimap.properties", KermetaBuilder.LOG_MESSAGE_GROUP, e);
+		}
+	}
+
+
 	synchronized public void build(){
 		build(false, new ArrayList<String>());
 	}
