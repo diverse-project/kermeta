@@ -133,7 +133,7 @@ public class MigrateRequireToKP {
 				for (int i = 2; i < t.length; i++) {
 					endPath = endPath + "/" + t[i] ;
 				}
-				result = baseWorkspace  + endPath;
+				result = baseProject  + endPath;
 				
 			}
 			else {
@@ -293,10 +293,9 @@ public class MigrateRequireToKP {
  * @param baseWorkspace : path to the current workspace 
  *  */
 public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, String baseWorkspace)  throws FileNotFoundException, IOException	{
-	System.out.println("migrateAllKmtFiles");
+	
 	for (String pathFile : kmtFiles) {
 		migrateKMT (pathFile, baseProject,  baseWorkspace ) ;
-		System.out.println("PATH " + pathFile);
 	} 
 }
 	
@@ -316,12 +315,13 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 				endPath = endPath + "/" + split[i];
 			}
 			path = endPath;
-			System.out.println("END " + path);
 			
 		}
 		else {
 			path = pathFile;
-		}
+		} 
+		
+		
 		
 		// create a new parser 
 		RequireParser parser = new RequireParser (path);
@@ -329,8 +329,7 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		// If the kmt V1 file contains stdio we add the using : using kermeta::IO::StdIO => stdio
 		if (parser.has_element("stdio.")   )  {
 			
-			// Test the pathFile and change it to be usable
-			String path2 = obtainPath(path, baseProject, baseWorkspace);
+			
 			
 			// save the old Kermeta V1 file
 			copy(path, path + ".old");

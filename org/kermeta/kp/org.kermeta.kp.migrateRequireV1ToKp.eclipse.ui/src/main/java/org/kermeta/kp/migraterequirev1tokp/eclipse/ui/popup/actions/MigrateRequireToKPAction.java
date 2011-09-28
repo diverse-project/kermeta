@@ -80,12 +80,7 @@ public class MigrateRequireToKPAction implements IObjectActionDelegate {
             	// add main kmt path file
             	reqFiles.add(kmtPathFile);
             	
-            	if (reqFiles.size() == 0) {
-            		System.out.println("REQFILE SYZE 0");
-            	}
-            	else {
-            		System.out.println("REQFILE NOT EMPTY");
-            	}
+            	
             	// Migrate all kmt files
            migrate.migrateAllKmtFiles(reqFiles, baseDirectory, workspaceDirectory);
             	//migrate.migrateKMT(kmtPathFile,baseDirectory, workspaceDirectory);
