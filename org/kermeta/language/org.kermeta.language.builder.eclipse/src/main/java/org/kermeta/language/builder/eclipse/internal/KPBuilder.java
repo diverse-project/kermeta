@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,8 +22,10 @@ import java.util.Properties;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -45,6 +48,7 @@ import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
+import org.osgi.framework.Bundle;
 
 public class KPBuilder {
 	
@@ -59,6 +63,8 @@ public class KPBuilder {
 	private String outputResourceFolder;
 	private String outputFolder;
 	private String kpFileURL;
+	
+	 
 	
 	public KPBuilder(IFile kpProjectFile) {
 		super();
@@ -278,8 +284,37 @@ public class KPBuilder {
 	}
 	
 	private void generateURIMapFile(String outputFolder) {
+		String localProgressGroup = getProgressGroup()+".generateURIMapFile";
 		Properties props = new Properties();
-		// TODO fill map
+		// fill map
+		Activator.getDefault().getMessaggingSystem().initProgress(localProgressGroup, 
+				"Generating urimap.properties...",  
+				KermetaBuilder.LOG_MESSAGE_GROUP,
+				3);
+		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Retreiving workbench projects...", KermetaBuilder.LOG_MESSAGE_GROUP, 0);
+		for( IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()){
+			String key = "platform:/resource"+project.getFullPath().toString();
+			String value = project.getLocationURI().toString();
+			props.put(key, value);
+		}
+		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Retreiving platform plugins...", KermetaBuilder.LOG_MESSAGE_GROUP, 0);
+		for(Bundle bundle : Activator.getDefault().getMyContext().getBundles()){
+			
+			String key = "platform:/plugin/"+bundle.getSymbolicName()+"/";
+			// String value = new LocalFileConverterForEclipse().convertSpecialURItoFileURI(java.net.URI.create(key)).toString();
+			String value;
+			try {
+				//value = FileLocator.toFileURL(new java.net.URL(key)).toString();
+				URL resolvedURL = Platform.resolve(new java.net.URL(key));
+				value = resolvedURL.toString();
+				props.put(key, value);
+			} catch (Exception e) {
+				Activator.getDefault().getMessaggingSystem().error("cannot find local file for bundle "+bundle.getSymbolicName(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
+			}
+			
+		}
+		
+		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Saving property file...", KermetaBuilder.LOG_MESSAGE_GROUP, 1);		
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(outputFolder+File.separator+"urimap.properties");
@@ -288,6 +323,7 @@ public class KPBuilder {
 		} catch (Exception e) {
 			Activator.getDefault().getMessaggingSystem().error("cannot generate "+outputFolder+File.separator+"urimap.properties", KermetaBuilder.LOG_MESSAGE_GROUP, e);
 		}
+		Activator.getDefault().getMessaggingSystem().doneProgress(localProgressGroup, "End of urimap.properties generation", KermetaBuilder.LOG_MESSAGE_GROUP);
 	}
 
 
@@ -360,5 +396,9 @@ public class KPBuilder {
 			}
 		}
 		return "";
+	}
+	
+	public String getProgressGroup(){
+		return "KPBuilder"+this.hashCode();
 	}
 }
