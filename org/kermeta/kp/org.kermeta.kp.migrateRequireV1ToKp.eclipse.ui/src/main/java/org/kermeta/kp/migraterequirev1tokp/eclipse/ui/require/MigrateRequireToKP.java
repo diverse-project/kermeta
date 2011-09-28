@@ -292,8 +292,10 @@ public class MigrateRequireToKP {
  * @param baseWorkspace : path to the current workspace 
  *  */
 public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, String baseWorkspace)  throws FileNotFoundException, IOException	{
+	eclipseMess.log(Kind.UserINFO, "", "" );
 	for (String pathFile : kmtFiles) {
 		migrateKMT (pathFile, baseProject,  baseWorkspace ) ;
+		eclipseMess.log(Kind.UserINFO, "path", pathFile);
 		
 	}
 }
