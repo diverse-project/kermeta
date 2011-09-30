@@ -309,7 +309,7 @@ public class KPBuilder {
 				value = resolvedURL.toString();
 				props.put(key, value);
 			} catch (Exception e) {
-				Activator.getDefault().getMessaggingSystem().error("cannot find local file for bundle "+bundle.getSymbolicName(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
+				Activator.getDefault().getMessaggingSystem().warn("cannot find local file for bundle "+bundle.getSymbolicName(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
 			}
 			
 		}
