@@ -269,6 +269,7 @@ public class KPBuilder {
 				}
 				else{
 					runner.runK2Program(params,outputFolder+File.separator+"urimap.properties");
+					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null); // refresh local project in case a file is created there
 				}
 				
 			}

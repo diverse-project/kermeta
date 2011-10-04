@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class ExtensibleURIConverterImplURIMapHelper {
@@ -33,8 +34,15 @@ public class ExtensibleURIConverterImplURIMapHelper {
 		}
 		for(Entry<Object, Object> entry : props.entrySet()){
 			// TODO make sure to not add the same URI twice
-			ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI(entry.getKey().toString()),
-												   URI.createURI(entry.getValue().toString()));
+			URI keyURI = URI.createURI(entry.getKey().toString());
+			URI valueURI = URI.createURI(entry.getValue().toString());
+			if(keyURI.isPlatformResource()){
+				valueURI = URI.createURI(entry.getValue().toString()+"/");
+				EcorePlugin.getPlatformResourceMap().put(keyURI.lastSegment(),valueURI);
+				//System.out.println("PlatformResourceMap().put " + keyURI.lastSegment()+"  =>  " +valueURI);
+			}else{
+				ExtensibleURIConverterImpl.URI_MAP.put(keyURI,valueURI);
+			}
 		}
 	}
 	
