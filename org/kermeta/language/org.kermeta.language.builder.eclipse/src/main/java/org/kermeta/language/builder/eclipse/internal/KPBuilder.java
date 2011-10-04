@@ -223,6 +223,7 @@ public class KPBuilder {
 			findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
 			findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
 			findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
+			findBundleLocationForClassPath("org.kermeta.utils.helpers", additionalClassPath);
 			
 			// add resolvable kp depencies in classpath
 			KpLoaderImpl ldr = new KpLoaderImpl();
@@ -291,6 +292,8 @@ public class KPBuilder {
 				"Generating urimap.properties...",  
 				KermetaBuilder.LOG_MESSAGE_GROUP,
 				3);
+		
+		// TODO maybe we can use EcorePlugin.getPlatformResourceMap instead of this ad hoc code ...
 		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Retreiving workbench projects...", KermetaBuilder.LOG_MESSAGE_GROUP, 0);
 		for( IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()){
 			String key = "platform:/resource"+project.getFullPath().toString();
@@ -341,7 +344,7 @@ public class KPBuilder {
 				additionalClassPath.add(theFile.getAbsolutePath());
 			}
 		} catch (Exception e) {
-			
+			Activator.getDefault().getMessaggingSystem().warn("cannot find local file location for bundle "+bundleSymbolicName,  KermetaBuilder.LOG_MESSAGE_GROUP, e);
 		}
 	}
 	
