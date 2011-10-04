@@ -22,7 +22,9 @@ class Class2RDBMS
 		class2table.create
 		fkeys := Set<FKey>.new
 		result := RDBMSModel.new
-		
+		//stdio.errorln("testError \n /n \t/t \r /rmessage")
+		//stdio.writeln("simplePrompt>")
+		//stdio.read("myPrompt>\\n")
 		// Create tables
 		 getAllClasses(inputModel).select{ c | c.is_persistent }.each{ c | 
 		 	stdio.writeln("Create Table " + c.name)
@@ -206,10 +208,10 @@ class Main
         var resourceSet : ResourceSet init ResourceSet.new
         //repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
         var resource : Resource init 
-        	//resourceSet.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
-        	//						 					 "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
-			resourceSet.createResource("file:/c:/tmp/models/out.xmi", 
-        							 					 "file:/c:/tmp/metamodels/RDBMSMM.ecore")       							 					
+        	resourceSet.createResource("platform:/resource/language.sample.class2rdbms/src/main/models/out.xmi", 
+        							 					 "platform:/resource/language.sample.class2rdbms/src/main/ecore/RDBMSMM.ecore")
+			//resourceSet.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/out.xmi", 
+        	//						 					 "file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/RDBMSMM.ecore")       							 					
 	 	// Define a Root ...
 	 	resource.getContents.add(outputModel)
 	 		 	
@@ -221,10 +223,10 @@ class Main
     operation loadClassModel() : ClassModel is do             
    		var repository : ResourceSet init ResourceSet.new
    		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
-   		//var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
-   		//																							"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
-   		var resource : Resource init repository.createResource("file:/c:/tmp/models/ClassModel.xmi",
-   																									"file:/c:/tmp/metamodels/ClassMM.ecore")
+   		var resource : Resource init repository.createResource("platform:/resource/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
+   																									"platform:/resource/language.sample.class2rdbms/src/main/ecore/ClassMM.ecore")
+   		//var resource : Resource init repository.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
+   		//																							"file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/ClassMM.ecore")
        	resource.load(void)      
        
        from var it : Iterator<Object> init resource.getContents.iterator
@@ -235,6 +237,7 @@ class Main
            		result ?= next
            end
        end
+       stdio.writeln("loadClassModel returns "+result.toString)
    end
    
 }
