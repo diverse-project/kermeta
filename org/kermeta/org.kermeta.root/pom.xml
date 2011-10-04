@@ -1,179 +1,199 @@
-<!-- $Id: pom.xml 15400 2011-06-29 07:33:16Z ablouin $   -->
-<!-- License    : EPL                                    -->
-<!-- Project    : org.kermeta.root                       -->
-<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
-<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr>  --> 
+<!-- $Id: pom.xml 15400 2011-06-29 07:33:16Z ablouin $ -->
+<!-- License : EPL -->
+<!-- Project : org.kermeta.root -->
+<!-- Copyright : IRISA / INRIA / Universite de Rennes 1 -->
+<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr> -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kermeta</groupId>
-    <artifactId>kermeta.root</artifactId>
-    <packaging>pom</packaging>
-    <version>2.0-SNAPSHOT</version>
-    <name>kermeta.root :: Root for the projects dedicated to kermeta 2</name>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta</groupId>
+	<artifactId>kermeta.root</artifactId>
+	<packaging>pom</packaging>
+	<version>2.0-SNAPSHOT</version>
+	<name>kermeta.root :: Root for the projects dedicated to kermeta 2</name>
 
-    <properties>
-        <kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
-        <utils.version>2.0.1-SNAPSHOT</utils.version>
-        <traceability.version>2.0.2-SNAPSHOT</traceability.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <emf.version>2.7.0</emf.version>
-        <scala.version>2.9.0-1</scala.version>
-        <framework.scala.version>1.4.3-SNAPSHOT</framework.scala.version>
-        <kermeta.model.version>1.4.0</kermeta.model.version>
-        <language.compiler.version>1.4.3-SNAPSHOT</language.compiler.version>
-        <osgi.version>4.2.0</osgi.version>
-        <slf4j.version>1.6.1</slf4j.version>
-        <bundle.vendor>IRISA/INRIA</bundle.vendor>
-    </properties>
-	
+	<properties>
+		<kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
+		<utils.version>2.0.1-SNAPSHOT</utils.version>
+		<traceability.version>2.0.2-SNAPSHOT</traceability.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<emf.version>2.7.0</emf.version>
+		<scala.version>2.9.0-1</scala.version>
+		<framework.scala.version>1.4.3-SNAPSHOT</framework.scala.version>
+		<kermeta.model.version>1.4.0</kermeta.model.version>
+		<language.compiler.version>1.4.3-SNAPSHOT</language.compiler.version>
+		<osgi.version>4.2.0</osgi.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<bundle.vendor>IRISA/INRIA</bundle.vendor>
+    	<tycho.version>0.11.0</tycho.version>
+    	<eclipse.repository.version>indigo</eclipse.repository.version>
+	</properties>
+
 	<dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-	
-	<build>
-        <plugins>
-        
-        	<!-- calculate versions for some special cases -->
-            <plugin>
-				<groupId>org.codehaus.groovy.maven</groupId>
-		        <artifactId>gmaven-plugin</artifactId>
-		        <version>1.0</version>
-		        <executions>
-		          <execution>
-		            <phase>initialize</phase>
-		            <goals>
-		              <goal>execute</goal>
-		            </goals>
-		            <configuration>
-		              <source>
-		                String scalaVersionNoSuffix = "${scala.version}"
-                        int index = "${scala.version}".indexOf("-")
-                        if(index!=-1)
-                          scalaVersionNoSuffix = "${scala.version}".substring(0,index)
-                        project.properties.setProperty('scala.version.nosuffix', scalaVersionNoSuffix)
-		              </source>
-		            </configuration>
-		          </execution>
-		        </executions>
-	   	   </plugin>
-	   	   <!-- calculate the bundle version from the project version : replace - by .  -->
-			<plugin>
-			  <groupId>org.codehaus.mojo</groupId>
-			  <artifactId>build-helper-maven-plugin</artifactId>
-			  <version>1.7</version>
-			  <executions>
-			    <execution>
-			      <id>regex-property</id>
-			      <goals>
-			        <goal>regex-property</goal>
-			      </goals>
-			      <configuration>
-			        <name>bundle.version</name>
-			        <value>${project.version}</value>
-			        <regex>-</regex>
-			        <replacement>\.</replacement>
-			        <failIfNoMatch>false</failIfNoMatch>
-			      </configuration>
-			    </execution>
-			  </executions>
-			</plugin>
-            
-            <!-- Java compiler plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <!-- Resources plugin : allow to collect and embedd severals resources -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <!-- Felix BnD plugin : allow Bundle packaging : generate OSGi JAR  -->
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.5</version>
-                <extensions>true</extensions>
-            </plugin>
-            <!-- Scala plugin : allow to compile Scala file -->
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <version>2.15.2</version>
-                <executions>
-                    <execution>
-                        <id>scala-compile-first</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
-                </configuration>
-            </plugin>           
-        </plugins>
-    </build>
-    <distributionManagement>
-        <repository>
-            <id>kermeta-public-release</id>
-            <name>Kermeta public release repository on maven.irisa.fr</name>
-            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-        <snapshotRepository>
-            <id>kermeta-public-snapshot</id>
-            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
-            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
-    <profiles>
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <!-- EXAMPLE FOR MYSQL -->
-                <sonar.jdbc.url>
-                   jdbc:derby://localhost:1507/sonar;create=true
-                </sonar.jdbc.url>
-                <sonar.jdbc.driver>org.apache.derby.jdbc.ClientDriver</sonar.jdbc.driver>
-                <sonar.jdbc.username>sonar</sonar.jdbc.username>
-                <sonar.jdbc.password>sonar</sonar.jdbc.password>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-                <!-- SERVER ON A REMOTE HOST -->
-                <sonar.host.url>http://tipimouss.irisa.fr:9000</sonar.host.url>
-            </properties>
-        </profile>
-    </profiles>
+	<build>
+		<plugins>
+
+			<!-- calculate versions for some special cases -->
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<source>
+								String scalaVersionNoSuffix = "${scala.version}"
+								int index = "${scala.version}".indexOf("-")
+								if(index!=-1)
+								scalaVersionNoSuffix = "${scala.version}".substring(0,index)
+								project.properties.setProperty('scala.version.nosuffix',
+								scalaVersionNoSuffix)
+							</source>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- calculate the bundle version from the project version : replace - 
+				by . -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>regex-property</id>
+						<goals>
+							<goal>regex-property</goal>
+						</goals>
+						<configuration>
+							<name>bundle.version</name>
+							<value>${project.version}</value>
+							<regex>-</regex>
+							<replacement>\.</replacement>
+							<failIfNoMatch>false</failIfNoMatch>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Java compiler plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Resources plugin : allow to collect and embedd severals resources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Felix BnD plugin : allow Bundle packaging : generate OSGi JAR -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.5</version>
+				<extensions>true</extensions>
+			</plugin>
+			<!-- Scala plugin : allow to compile Scala file -->
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<version>2.15.2</version>
+				<executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jvmArgs>
+						<jvmArg>-Xmx1024m</jvmArg>
+					</jvmArgs>
+				</configuration>
+			</plugin>
+
+			<!-- enable tycho build extension -->
+			<plugin>
+				<groupId>org.sonatype.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<!-- configure p2 repository to resolve against -->
+		<repository>
+			<id>${eclipse.repository.version}</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/${eclipse.repository.version}/</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>kermeta-public-release</id>
+			<name>Kermeta public release repository on maven.irisa.fr</name>
+			<url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>kermeta-public-snapshot</id>
+			<name>Kermeta public snapshot repository on maven.irisa.fr</name>
+			<url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- EXAMPLE FOR MYSQL -->
+				<sonar.jdbc.url>
+					jdbc:derby://localhost:1507/sonar;create=true
+				</sonar.jdbc.url>
+				<sonar.jdbc.driver>org.apache.derby.jdbc.ClientDriver</sonar.jdbc.driver>
+				<sonar.jdbc.username>sonar</sonar.jdbc.username>
+				<sonar.jdbc.password>sonar</sonar.jdbc.password>
+
+				<!-- SERVER ON A REMOTE HOST -->
+				<sonar.host.url>http://tipimouss.irisa.fr:9000</sonar.host.url>
+			</properties>
+		</profile>
+	</profiles>
 </project>
