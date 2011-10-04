@@ -27,6 +27,7 @@ require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invarian
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/DataTypeAspect.kmt"
 
 //behavior
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/AssignmentAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/ConditionalAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/VariableDeclAspect.kmt"
 

@@ -1,0 +1,40 @@
+/* $Id:$ 
+ * Creation : September 28, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::behavior;
+
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using org::kermeta::language::structure
+
+aspect class Assignment
+{
+	/**
+	 * You are trying to overwrite the internal reflective collection of the property.
+	 * Did you mean to use clear or addAll ?
+	 */
+	@Scope "RESOLVED"
+	inv no_internal_reflexive_collection_att_overwrite is do
+	
+		stdio.writeln("Checking assignment : " + self.toString)
+		stdio.writeln(" the target : " + self.target.toString)
+		// Does the assignment concern a CallFeature ?
+		if (self.target.isInstanceOf(CallProperty))
+		then
+			stdio.writeln(self.target.asType(CallProperty).staticProperty.upper.toString)
+			not(self.target.asType(CallProperty).staticProperty.upper != 1)
+		else
+			true
+		end
+	end
+
+
+}
