@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
+	<packaging>eclipse-plugin</packaging>
 	<name>utils.helpers :: helpers</name>
 	<artifactId>utils.helpers</artifactId>
 
@@ -21,7 +21,7 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
-			<plugin>
+			<!-- 	not required thanks to the use of tycho <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-jar-plugin</artifactId>
 
@@ -47,14 +47,14 @@
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
+	<!-- 	not required thanks to the use of tycho <dependency>
 			<groupId>org.kermeta.emf</groupId>
 			<artifactId>emf.lib</artifactId>
 			<version>${emf.version}</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 </project>
