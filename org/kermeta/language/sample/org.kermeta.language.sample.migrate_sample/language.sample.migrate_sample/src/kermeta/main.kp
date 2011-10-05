@@ -1,0 +1,15 @@
+KermetaProject:"m"
+group:"group"
+defaultMainClass:""
+defaultMainOperation:""
+{
+	source="${project.baseUri}/main.kmt"
+
+	source="${project.baseUri}/Write.kmt"
+
+	source="${project.baseUri}/featureDiagram.ecore"
+
+	
+
+	dependency"language.model"URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+}

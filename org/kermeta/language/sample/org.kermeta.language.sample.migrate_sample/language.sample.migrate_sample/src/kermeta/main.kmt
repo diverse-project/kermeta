@@ -1,0 +1,38 @@
+
+
+
+
+/* $Id:$ 
+ * Creation : August 31, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mgouyett
+ */
+
+
+
+
+package root_package;
+
+
+require "platform:/lookup/m/src/kermeta/Write.kmt"
+require "platform:/lookup/m/metamodel/featureDiagram.ecore"
+
+
+require kermeta
+using kermeta::io::StdIO => stdio
+using kermeta::standard
+using kermeta::io
+
+//alias MyString : kermeta::standard::String;
+
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("Kermeta")
+		
+		var w : write::Write init write::Write.new
+		w.write("Migrate")
+	end
+}

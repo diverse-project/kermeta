@@ -1,0 +1,28 @@
+
+
+
+
+/* $Id:$ 
+ * Creation : August 31, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mgouyett
+ */
+
+
+
+package write;
+
+
+require kermeta
+using kermeta::io::StdIO => stdio
+using kermeta::standard
+using kermeta::io
+
+class Write
+{
+	operation write (s : String) : Void is do
+		stdio.writeln(s)
+	end
+}
