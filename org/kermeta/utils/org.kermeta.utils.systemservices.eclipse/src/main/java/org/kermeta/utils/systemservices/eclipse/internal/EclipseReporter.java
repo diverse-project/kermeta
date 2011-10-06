@@ -1,6 +1,5 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -10,7 +9,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -121,8 +119,9 @@ public class EclipseReporter {
 	public void flushProblem(final String problemGroup,final URL uri) {
 		try {
 			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
-			for (IMarker aMarker : file.getProject().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)) {
+			for (IMarker aMarker : file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)) {
 				if (aMarker.getAttribute(KERMETA_MARKER_ATTRIBUTE).equals(problemGroup)) {
+					//ms.log(Kind.DevDEBUG, "#removing marker on "+ uri+" - problemGroup="+problemGroup, Activator.PLUGIN_ID , new Exception());
 					aMarker.delete();
 				}
 			}
