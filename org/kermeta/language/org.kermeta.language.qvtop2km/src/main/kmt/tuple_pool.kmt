@@ -1,0 +1,99 @@
+package root_package;
+
+require "qvt2kermeta.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::utils
+
+
+/**
+ must contains all the classes corresponding to the different tuples created during the transformation and allow to retrieve them when needed
+ 
+ 
+ 
+*/
+class TuplePool{
+
+	reference tuples : Hashtable<String, ClassDefinition> 
+	
+	
+	operation getTupleTypeDefinition(signature : TupleSignature) : ClassDefinition is do
+	
+		if tuples.containsKey(signature.stringSignature) then
+			result:=tuples.getValue(signature.stringSignature)
+		else
+			var newClassDef : ClassDefinition init genClassDefFromSignature(signature)
+			
+			
+			tuples.put(newClassDef.name, newClassDef)
+			result:=newClassDef
+		end
+		
+	end
+	
+	operation genClassDefFromSignature(signature : TupleSignature) : ClassDefinition is do
+	
+		result := ClassDefinition.new
+		result.name:=signature.stringSignature
+		
+		signature.parts.each{p|
+			var prop : Property init Property.new
+			prop.name := p.name
+			prop.owningClass:=result
+			prop.type:=p.type
+			prop.containedType.add(prop.type)
+			}
+	
+	end
+	
+
+}
+
+
+
+class TupleSignature{
+
+reference parts : seq TuplePartPair [0..*]
+
+	operation initialize ( partset : Set<TuplePartPair>) : TupleSignature is do
+		
+		from var toAdd : Sequence<TuplePartPair> init partset.asSequence()
+		until toAdd.empty()
+		loop
+		    var min : TuplePartPair init toAdd.one
+		    
+		    toAdd.each{x|if x.name.compareTo(min.name)<0 then min:= x end}
+		    toAdd.remove(min)
+		    parts.add(min)
+		end
+		
+		result:=self
+	end
+	/**
+		beware, the string may not be unique, although unlikely to appear twice
+	*/
+	operation stringSignature ()  : String is do
+		var s : StringBuffer init StringBuffer.new
+		parts.each{x| s.append("n_"+x.name+"_v_"+x.type.name+"_")}
+		result:= s.toString
+	end
+}
+
+
+
+
+class TuplePartPair{
+
+	reference name : String
+	reference type : Class
+	
+	operation initialize(n : String, t : Class) : TuplePartPair is do
+		name:=n
+		type:=t
+		result:=self
+	
+	
+	end
+}
+

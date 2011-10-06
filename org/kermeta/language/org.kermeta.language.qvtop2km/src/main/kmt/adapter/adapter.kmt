@@ -1,0 +1,8 @@
+@mainClass "kermeta::language::structure::Operation"
+@mainOperation "domain2range"
+package kermeta;
+require "platform:/resource/qvt-kermeta/transformation/adapter/adapter_1.kmt"
+require "platform:/resource/qvt-kermeta/transformation/adapter/adapter_5.kmt"
+require "platform:/resource/qvt-kermeta/transformation/adapter/kermeta_extension.kmt"
+require "platform:/resource/qvt-kermeta/models/api2.kmt"
+/*require "platform:/resource/qvt-kermeta/models/api1.kmt"*/

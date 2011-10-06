@@ -1,0 +1,8 @@
+KermetaProject :"org.kermeta.language.qvtop2km"
+version :  "0.0.1"
+group :"group"
+defaultMainClass : "mainpackage::MainClass"
+defaultMainOperation : "mainOperation"
+{
+source = "${project.baseUri}/src/main/kmt/Main.kmt"
+dependency "language.model" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"}

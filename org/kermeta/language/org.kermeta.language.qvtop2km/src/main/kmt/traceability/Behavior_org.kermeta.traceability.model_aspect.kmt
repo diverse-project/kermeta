@@ -1,0 +1,356 @@
+/* $Id: Traceability.kmt $
+ * Creation date: October 06, 2006
+ * License:   EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors:
+ * 		Didier Vojtisek
+ *		David Touzet
+ *		Xavier Dolques (adaptation for kermeta version 2)
+ */
+
+
+@uri "http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability"
+package org::kermeta::traceability;
+require "traceability.kmt"
+require "kermeta"
+using kermeta::standard
+using kermeta::language::structure
+
+
+aspect class Trace
+{
+	operation cloneTrace() : Trace is do
+		var clone : Trace init Trace.new
+		clone.sourceElem:=sourceElem
+		clone.targetElem:=targetElem
+		clone.context:=context
+		result:=clone
+	end
+}
+aspect abstract class Traceable
+{
+	operation addTarget( context : Object , targetElem : Traceable) : Void is do 
+		var targetTrace : Trace init Trace.new
+		targetTrace.sourceElem:=self
+		targetTrace.targetElem:=targetElem
+		targetTrace.context?=context
+	end
+	
+	operation resolveAll() : Sequence<Traceable>  is do
+		result:=target.collect{x|x.targetElem}
+	end
+	
+	
+	operation resolveOne(t:Class) : Traceable is do
+		
+		from var i : Integer init 0
+			until target.size() <= i
+				loop
+		
+    			if target.elementAt(i).targetElem.isKindOf(t) then 
+    	
+    				result:=target.elementAt(i).targetElem
+    				i:=target.size()
+    			end
+    			i:=i+1
+			end
+	end
+	
+	
+	operation resolveIn(aContext : Object) : Sequence<Traceable> is do
+		result:=target.select{trace|trace.context.equals(aContext)}.collect{x|x.targetElem}
+	end
+	
+	operation invResolveAll() : Sequence<Traceable>  is do
+		result:=source.collect{x|x.sourceElem}
+	end
+	
+	
+	operation invResolveOne(t:Class) : Traceable is do
+		from var i : Integer init 0
+			until source.size() == i
+				loop
+    			if source.elementAt(i).sourceElem.isKindOf(t) then 
+    				result:=source.elementAt(i).sourceElem
+    				end
+			end
+	end
+	
+	operation invResolveIn(aContext : Object) : Sequence<Traceable> is do
+		result:=source.select{trace|trace.context.equals(aContext)}.collect{x|x.sourceElem}
+	end
+	
+}
+
+
+/**
+ * This abstract class represents a reference to a concrete object
+ */
+aspect abstract class Reference inherits Traceable
+{
+	/**return a copy of the reference with same signature and r.clone().isSameAs(r) return true*/
+	operation cloneRef() : Reference is abstract
+	/**return a unique signature for equivalents references*/
+	operation signature() : String is abstract
+	/** This abstract operation allows testing reference equivalence*/
+	operation isSameAs(obj: Object) : Boolean is abstract
+}
+/*
+ * This class represents a trace model.
+ * This is a set of traces, references and messages.
+ */
+aspect class TracePackage {
+	/* Boolean stating whether contained references are optimized */
+	property readonly optimizedReferences : Boolean getter is do
+		result := true
+
+		var crtID : String
+		var refIDs : set String[0..*] init Set<String>.new
+
+		from var it : Iterator<Reference> init references.iterator
+		until (not result or it.isOff) loop
+			crtID := it.next.toString
+			if(refIDs.contains(crtID)) then
+				result := false
+			else
+				refIDs.add(crtID)
+			end
+		end
+	end
+
+
+	/*
+	 * This operation adds a new trace to the trace model with references duplication,
+	 * which breaks the trace model optimized status
+	 */
+	operation addTrace(trc : Trace) is do
+		references.add(trc.sourceElem.asType(Reference))
+		references.add(trc.targetElem.asType(Reference))
+	end
+
+	/*
+	 * This operation adds a new trace to the trace model with references optimization
+	 */
+	operation addOptimizedTrace(trc: Trace) is do
+		
+
+		var srcRef : Reference init findReference(trc.sourceElem.asType(Reference))
+		if(srcRef == void) then
+			references.add(trc.sourceElem.asType(Reference))
+			srcRef := trc.sourceElem.asType(Reference)
+		else
+			trc.sourceElem:=srcRef
+		end
+		
+		var tgtRef : Reference init findReference(trc.targetElem.asType(Reference))
+		if(tgtRef == void) then
+			references.add(trc.targetElem.asType(Reference))
+			tgtRef := trc.targetElem.asType(Reference)
+		else
+			trc.targetElem:=tgtRef
+		end
+
+	end
+
+	/*
+	 * This operation searches a reference among the set of references already
+	 * contained by the trace model.
+	 * Search is based on the isSameAs operation implemented by reference elements
+	 */
+	operation findReference(ref: Reference) : Reference is do
+		result := void
+
+		var found : Boolean init false
+		from var ref_It : Iterator<Reference> init references.iterator
+		until found or ref_It.isOff loop
+			var crtRef : Reference init ref_It.next
+			if(crtRef.signature ==ref.signature ) then
+				found := true
+				result := crtRef
+			end
+		end
+	end
+
+	/*
+	 * This operation optimizes the set of contained references my merging simlar
+	 * references into a single one.
+	 * Concerned traces are updated consequently
+	 */
+	operation optimizeReferences() is do
+		// Get the set of reference IDs
+		var refIDs : set String[0..*] init Set<String>.new
+		references.each{r | refIDs.add(r.toString)}
+
+		// Get set of references sets according to their ID
+		var refColls : set Set<Reference>[0..*] init Set<Set<Reference>>.new
+		refIDs.each{rID |
+			refColls.add(
+				references.select{r | r.toString == rID}.asSet
+			)
+		}
+
+		// Get list of new references
+		var newRefs : set Reference[0..*] init Set<Reference>.new
+		refColls.each{coll |
+			var aRef : Reference init coll.one
+			
+			coll.each{oldRef|
+				oldRef.source.each{trace | trace.targetElem := aRef}
+				oldRef.target.each{trace | trace.sourceElem := aRef}
+			}
+			newRefs.add(aRef)
+		}
+		// Replace existing references by normalized references
+		references.clear
+		references.addAll(newRefs)
+	end
+	
+	
+	operation size() : Integer is do 
+		result :=0 
+		references.each{refer| 
+			if refer == void then
+				stdio.writeln("the ref is void")
+			else
+				result :=result + refer.target.size()
+			end }
+	end 
+}
+
+
+/*
+ * This class represents a reference to a concrete object contained by a file
+ */
+aspect abstract class FileReference inherits Reference{
+	
+	/*
+	 * This operation defines equivalency between FileReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean is do
+		result := false
+		if(obj != void and FileReference.isInstance(obj)) then
+			var fileRef : FileReference
+			fileRef ?= obj
+			result := self.fileURI == fileRef.fileURI and self.timeStamp == fileRef.timeStamp
+		end
+	end
+	
+	
+}
+
+
+/*
+ * This class represents a reference to a textual file concrete object
+ */
+aspect class TextReference inherits FileReference {
+	/*
+	 * This operation defines equivalency between TextReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean from FileReference is do
+		result := false
+		
+		if(obj != void and obj.isInstanceOf(TextReference)) then
+			var txtRef : TextReference
+			txtRef ?= obj
+			result := super(obj) and
+				self.charBeginOffset == txtRef.charBeginOffset and
+				self.charEndOffset == txtRef.charEndOffset
+			
+		end
+	end
+	
+	
+	/* This method returns a string representation of the TextReference */
+	method toString() : String is do
+		result := fileURI + "#" + charBeginOffset.toString
+			+ "#" + charEndOffset.toString
+	end
+	
+	method cloneRef() : Reference is do
+		 var clone : TextReference init TextReference.new
+		 clone.fileURI := fileURI
+		 clone.timeStamp := timeStamp
+		 clone.charBeginOffset := charBeginOffset
+		 clone.charEndOffset := charEndOffset
+		 result:=clone
+		 
+		 //result:=TextReference.clone(self)
+	end
+	
+	method signature(): String is do 
+		result:="TextReference:"+fileURI.size.toString+":"+fileURI+",ts:"+timeStamp.size.toString+":"+timeStamp+",b:"+charBeginOffset.toString+",e:"+charEndOffset.toString
+	end
+}
+
+
+/*
+ * This class represents a reference to a XML concrete object
+ */
+aspect class XMLReference inherits FileReference {
+	/*
+	 * This operation defines equivalency between XMLReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean from FileReference is do
+		result := false
+		//if(obj != void and obj.getMetaClass == XMLReference) then
+		if(obj != void and obj.isInstanceOf(XMLReference)) then
+			var xmlRef : XMLReference
+			xmlRef ?= obj
+			result := super(obj) and self.xPointer == xmlRef.xPointer
+		end
+	end
+
+	/* This method returns a string representation of the XMLReference */
+	method toString() : String is do
+		result := fileURI + "#" + xPointer
+	end
+	
+	method cloneRef() : Reference is do
+		var clone : XMLReference init XMLReference.new
+		clone.fileURI := fileURI
+		clone.timeStamp := timeStamp
+		clone.xPointer := xPointer
+		result:=clone
+		//result:=XMLReference.clone(self)
+	end
+
+	method signature(): String is do 
+		result:="XMLReference:"+fileURI.size.toString+":"+fileURI+",ts:"+timeStamp.size.toString+":"+timeStamp+",xp:"+xPointer
+	end
+}
+
+
+/*
+ * This class represents a reference to a model element
+ */
+aspect class ModelReference inherits Reference {
+	/*
+	 * This operation defines equivalency between ModelReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean is do
+		result := false
+		if(obj != void and obj.isInstanceOf(ModelReference)) then
+			var mdlRef : ModelReference
+			mdlRef ?= obj
+			result := self.refObject == mdlRef.refObject
+		end
+	end
+
+	/* This method returns a string representation of the ModelReference */
+	method toString() : String is do
+		result := refObject.toString
+	end
+	
+	method cloneRef() : Reference is do
+		//result:=ModelReference.clone(self)
+		var clone : ModelReference init ModelReference.new
+		clone.refObject := refObject
+		result:=clone
+	end
+	
+	method signature() : String is do 
+		var i : Integer 
+		result:="ModelReference:"+refObject.oid.toString
+	end
+	
+}

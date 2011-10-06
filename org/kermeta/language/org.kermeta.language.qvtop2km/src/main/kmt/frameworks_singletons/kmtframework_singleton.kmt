@@ -1,0 +1,149 @@
+package root_package;
+require kermeta
+require "platform:/plugin/org.kermeta.mapper.generator.km/kermeta/modelingunit_extension.kmt"
+using kermeta::language::structure
+using kermeta::persistence
+using kermeta::standard
+using kermeta::utils
+class KmtLib {
+
+reference map : Hashtable<String,NamedElement>
+
+reference libs : Resource [0..*]
+
+
+reference cacheName : String
+reference cacheValue : Object
+
+operation load(lib : Resource) : Void is do
+
+	libs.add(lib)
+	//populateMap(lib)
+end
+
+
+
+operation populateMap(lib : Resource) : Void is do
+	if map.isVoid then
+		map:= Hashtable<String,NamedElement>.new
+	end
+	
+	var toSearch : Sequence<Object> init Sequence<Object>.new
+
+	toSearch.add(lib.one)
+	
+	from var current : Object  
+	until toSearch.empty
+	loop
+		current:=toSearch.first
+		toSearch.removeAt(0)
+		
+		if current!=void then
+			if current.isInstanceOf(ModelingUnit) then
+				toSearch.addAll(current.asType(ModelingUnit).packages)
+			end
+			if current.isInstanceOf(NamedElement) then
+				//stdio.writeln("searched : " + current.asType(kermeta::language::structure::NamedElement).name)
+				//if (current.asType(kermeta::language::structure::NamedElement).qualifiedName==qualifiedName) then
+					map.put(current.asType(NamedElement).qualifiedName,current.asType(NamedElement))
+					//result:=current
+					//stdio.writeln("found!!")
+					//toSearch.clear
+				//else
+					//if (qualifiedName.contains(current.asType(kermeta::language::structure::NamedElement).qualifiedName)) then
+						//stdio.writeln("contains!!")
+						//toSearch.clear
+						var cd : ClassDefinition 
+						cd?= current.getMetaClass.typeDefinition
+						//stdio.writeln("all attributes "+ cd.allAttribute.size.toString)
+						cd.allAttribute.each{att|
+							if att.isComposite then
+								if att.upper==1 then
+									toSearch.add(current.get(att))
+								else
+									current.get(att).asType(Collection<Object>).each{y|toSearch.add(y)}
+								end
+							end
+							}
+					//end
+				//end
+			end	
+		end
+	end
+	
+end
+
+operation getFromQualifiedNameWithMap(qualifiedName : String) : Object is do
+	if map.containsKey(qualifiedName) then
+		result:= map.getValue(qualifiedName)
+	else
+		result:=void
+	end
+end
+
+
+operation getFromQualifiedName(qualifiedName : String) : Object is do
+
+	
+	var resourcesToSearch : Sequence<Resource> init libs.asSequence
+	
+	if cacheName==qualifiedName then
+	result:=cacheValue
+	end
+	
+	from var lib : Resource 
+	until result != void or resourcesToSearch.isEmpty
+	loop
+		lib:=resourcesToSearch.first
+		resourcesToSearch.removeAt(0)
+		
+		var toSearch : Sequence<Object> init Sequence<Object>.new
+	
+		toSearch.add(lib.one)
+		
+		from var current : Object  
+		until toSearch.empty
+		loop
+			current:=toSearch.first
+			toSearch.removeAt(0)
+			
+			if current!=void then
+				if current.isInstanceOf(kermeta::language::structure::ModelingUnit) then
+					toSearch.addAll(current.asType(kermeta::language::structure::ModelingUnit).packages)
+				end
+				if current.isInstanceOf(kermeta::language::structure::NamedElement) then
+					//stdio.writeln("searched : " + current.asType(kermeta::language::structure::NamedElement).name)
+					if (current.asType(kermeta::language::structure::NamedElement).qualifiedName==qualifiedName) then
+						result:=current
+						//stdio.writeln("found!!")
+						toSearch.clear
+					else
+						if (qualifiedName.contains(current.asType(kermeta::language::structure::NamedElement).qualifiedName)) then
+							//stdio.writeln("contains!!")
+							toSearch.clear
+							var cd : kermeta::language::structure::ClassDefinition 
+							cd?= current.getMetaClass.typeDefinition
+							//stdio.writeln("all attributes "+ cd.allAttribute.size.toString)
+							cd.allAttribute.each{att|
+								if att.isComposite then
+									if att.upper==1 then
+										toSearch.add(current.get(att))
+									else
+										current.get(att).asType(Collection<Object>).each{y|toSearch.add(y)}
+									end
+								end
+								}
+						end
+					end
+				end	
+			end
+		end
+	end
+	stdio.writeln("getFromQualifiedName : "+qualifiedName+" "+result.toString)
+	cacheName:=qualifiedName
+	cacheValue:=result
+	
+end
+
+
+}

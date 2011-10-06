@@ -1,0 +1,46 @@
+@mainClass "test::Launch"
+@mainOperation "main"
+
+package test;
+
+require kermeta
+require "SequenceCast.kmt"
+
+using kermeta::language::structure
+using kermeta::standard
+class A {
+
+}
+
+class B inherits A {
+reference name : String
+
+operation initialize(n : String) : B is do
+	name :=n
+	result:=self
+end
+
+
+
+ 
+}
+
+class Launch {
+
+operation main() : Void is do 
+	var seq1 : Sequence<A> init Sequence<A>.new
+	
+	var seq2 : DeferredSequence<B> init DeferredSequence<B>.new.FromSeq(seq1)
+	
+	seq1.add(B.new.initialize("a"))
+	seq1.add(B.new.initialize("b"))
+	seq1.add(B.new.initialize("c"))
+	seq2.add(B.new.initialize("e"))
+	seq1.add(B.new.initialize("d"))
+	
+	DeferredSequence<B>.new.FromSeq(seq1).each{x|stdio.writeln(x.name)}
+	
+end
+
+}
+

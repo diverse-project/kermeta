@@ -1,0 +1,124 @@
+/* $Id:$ 
+ * Creation : February 7, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            xdolques
+ */
+@mainClass "org::kermeta::traceability::TraceRegistry"
+@mainOperation "size"
+
+
+package org::kermeta::traceability;
+
+require "Behavior_org.kermeta.traceability.model_aspect.kmt"
+
+require kermeta
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+
+
+
+class TraceRegistry
+{	
+	
+	attribute registry : Hashtable<String,Reference>
+	
+	attribute traces : TracePackage
+	
+	//return the hashtable providing the link to the references with traces	
+	operation getRegistry() : Hashtable<String,Reference> is do
+		if registry==void then 
+			self.registry:=Hashtable<String,Reference>.new
+		end
+		result := registry
+	end
+	
+	//return the unique Reference in the traceRegistry referencing the same element as initRef and create it if does not exist 
+	operation getCorrespondingReference(initRef : Reference) : Reference is do
+		if not getRegistry.containsKey(initRef.signature) then
+			result:= initRef.cloneRef()
+			getRegistry.put(result.signature,result)
+			getTracePackage.references.add(result)
+		else
+			result:=getRegistry.getValue(initRef.signature)
+		end
+	end
+
+	//add a trace from references
+	operation addTraceFromReferences(source : Reference, target : Reference, context : Object) : Void is do
+		var sourceRef : Reference init getCorrespondingReference(source)
+		var targetRef : Reference init getCorrespondingReference(target)
+		sourceRef.addTarget(context,targetRef)
+	end
+	
+	//add trace while keeping optimized storage of references
+	operation addTrace(trace : Trace) : Void is do
+		
+		var sourceRef : Reference init trace.sourceElem.asType(Reference)
+		var targetRef : Reference init trace.targetElem.asType(Reference)
+				
+		var newTrace : Trace init trace.cloneTrace()
+		
+		getCorrespondingReference(sourceRef).target.add(newTrace)
+		getCorrespondingReference(targetRef).source.add(newTrace)
+
+	end
+	
+		
+	operation addTraceFromObjects(src : kermeta::language::structure::Object, tar : kermeta::language::structure::Object, 
+								  context : kermeta::language::structure::Object) : Void is do
+		var srcRef : ModelReference init ModelReference.new
+		var tarRef : ModelReference init ModelReference.new
+		srcRef.refObject ?= src
+		tarRef.refObject ?= tar
+		addTraceFromReferences(srcRef, tarRef, context)
+	end
+
+	
+	//return the tracepackage that stores all the traces
+	operation getTracePackage() : TracePackage is do
+		if traces==void then
+			self.traces:=TracePackage.new
+		end
+		result:= traces
+	end
+
+	/**return the sources that created ref*/
+	operation getRelatedSources(ref :Reference) : TracePackage is do
+		var resultRegistry : TraceRegistry init TraceRegistry.new
+		var newRef : Reference init resultRegistry.getCorrespondingReference(ref)
+		getCorrespondingReference(ref).source.each{trc|
+			resultRegistry.addTrace(trc) 
+			}
+		result:= resultRegistry.getTracePackage
+	end
+
+	/**return the targets created by ref*/
+	operation getRelatedTargets(ref : Reference) : TracePackage is do
+		//result := TracePackage.new
+		var resultRegistry : TraceRegistry init TraceRegistry.new
+		var newRef : Reference init resultRegistry.getCorrespondingReference(ref)
+		//newRef.target.clear()
+		//result.references.add(newRef)
+		
+		getCorrespondingReference(ref).target.each{trc|
+			resultRegistry.addTrace(trc)
+		}
+		result:= resultRegistry.getTracePackage
+	end
+	
+	//add all the traces from aTracePackage 
+	operation addAllTraces(aTracePackage : TracePackage) : Void is do
+		
+		aTracePackage.references.each{ref| ref.target.each{trc|addTrace(trc)}}
+	
+	end
+
+	//return the number of traces
+	operation size() : Integer is do 
+		result:=0
+		getTracePackage.references.each{ref| result := result + ref.target.size()} 
+	end
+}

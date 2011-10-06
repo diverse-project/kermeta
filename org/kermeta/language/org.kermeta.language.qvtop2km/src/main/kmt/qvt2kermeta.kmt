@@ -1,0 +1,235 @@
+@mainClass "root_package::Qvt2Kermeta"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+require "adapter/adapter.kmt"
+require "qvtoperational_aspect.kmt"
+require "emof_aspect.kmt"
+require "essentialocl_aspect.kmt"
+require "imperativeocl_aspect.kmt"
+require "qvtid/emof_id.kmt"
+require "kermeta_creationHelper.kmt"
+require "frameworks_singletons/qvtoplib_singleton.kmt"
+require "frameworks_singletons/kmtframework_singleton.kmt"
+require "tuple_pool.kmt"
+using kermeta::persistence
+using kermeta::standard
+
+
+
+
+class Qvt2KermetaContext {
+
+
+
+	reference qvtContext : QvtLib
+	
+	reference kmtContext : KmtLib
+	
+	reference tuplePool : TuplePool
+	reference rootMU : kermeta::language::structure::ModelingUnit
+	
+	reference transfoContextCD : kermeta::language::structure::ClassDefinition
+
+	operation initialize() : Qvt2KermetaContext is do
+		
+		qvtContext:=QvtLib.new
+		kmtContext:=KmtLib.new
+		tuplePool:= TuplePool.new
+		result:=self
+	
+	end
+
+	
+}
+
+
+class Qvt2Kermeta{
+
+reference srcModel : Resource
+reference tgtModel : Resource
+
+operation main() : Void is do
+
+		var context : Qvt2KermetaContext init Qvt2KermetaContext.new.initialize()
+		
+		//getMetaClass.typeDefinition.asType(kermeta::language::structure::ClassDefinition).defaultObject:=self
+		
+		stdio.writeln("qvt->kermeta")
+		
+		
+		var sourceRepository     : EMFRepository init EMFRepository.new
+		
+		//srcModel := sourceRepository.createResource("../test/Book2Publication2.qvtoperational", "../models/api2.ecore")
+		//srcModel := sourceRepository.createResource("../test/Ecore2EMOF.qvtoperational", "../models/api2.ecore")
+		//srcModel := sourceRepository.createResource("../test/UML2RDBMS.qvtoperational", "../models/api2.ecore")
+		srcModel := sourceRepository.createResource("../../org.topcased.simulation.sam.control/transformation/org.topcased.simulation.sam.control.sam2samdynamic.qvtoperational", "../models/api2.ecore")
+		srcModel.load()
+		sourceRepository.resources.each{r|stdio.writeln(r.uri)}
+		
+		
+		context.qvtContext.load(sourceRepository.getResource("pathmap://models/essentialocl/oclstdlib.essentialocl"))
+		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof"))
+		context.qvtContext.load(sourceRepository.getResource("pathmap://models/qvtoperational/qvtstdlib.qvtoperational"))
+		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof"))
+		
+		
+		var targetRepository : EMFRepository init EMFRepository.new
+        //tgtModel := targetRepository.createResource("../test/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+        //tgtModel := targetRepository.createResource("../test/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		//tgtModel := targetRepository.createResource("../test/UML2RDBMS.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		tgtModel := targetRepository.createResource("../test/sam2samdyn.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		
+		
+		
+		var kmtResource : Resource init targetRepository.createResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		kmtResource.load
+		var transfoContextResource : Resource init targetRepository.createResource("platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		transfoContextResource.load() 
+		var sequenceCastResource : Resource init targetRepository.createResource("platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
+		sequenceCastResource.load() 
+		
+		
+		context.kmtContext.load(transfoContextResource)
+		context.kmtContext.load(kmtResource)
+		context.kmtContext.load(sequenceCastResource)
+		
+		
+		mapFrameworks(context)
+		transform(context)
+		
+		stdio.writeln("tgtModel size " +tgtModel.size().toString())
+
+		
+		
+		tgtModel.save()
+		stdio.writeln("done")
+end
+
+
+
+
+operation transform(context : Qvt2KermetaContext) : Void is do
+	var kRoot : kermeta::language::structure::ModelingUnit
+	var emofTransfo : qvtoperational::OperationalTransformation
+	
+	
+	
+	srcModel.select{x|x.isInstanceOf(qvtoperational::ModelType)}.each{x|x.range2domain(context) tgtModel.add(x.output)}
+	
+	emofTransfo?= srcModel.detect{x|x.isKindOf(qvtoperational::OperationalTransformation)}
+	emofTransfo.range2domain(context)
+	kRoot?=emofTransfo.output
+	context.rootMU :=kRoot
+	emofTransfo.genClassDefinition(context)
+	emofTransfo.ownedOperation.each{op| if (op!=void).andThen{x|op.isInstanceOf(qvtoperational::MappingOperation)} then op.range2domain(context) end }
+	emofTransfo.ownedOperation.each{op| if (op!=void).andThen{x|op.isInstanceOf(qvtoperational::Helper)} then op.range2domain(context) end }
+	emofTransfo.ownedOperation.each{op| if (op!=void).andThen{x|op.isInstanceOf(qvtoperational::EntryOperation)} then op.range2domain(context) end }
+	var kmtRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	
+	kmtRequire.uri:="kermeta"
+	kRoot.requires.add(kmtRequire)
+	
+	//generate the default primitive types
+	var ptPack : kermeta::language::structure::Package 
+	var emofPtPack : emof::Package
+	emofPtPack?=context.qvtContext.getFromQVTID("primitivetypes")
+	emofPtPack.range2domain(context)
+	ptPack ?=emofPtPack.output
+	stdio.writeln("ptPack "+ptPack.ownedTypeDefinition.size.toString())
+	ptPack.ownedTypeDefinition.each{x|stdio.write(x.name+" "+x.toString+" ")}
+	stdio.writeln("")
+	kRoot.packages.add(ptPack)
+	
+	//transform the package ecore from platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof
+	var ecorePack : emof::Package init context.qvtContext.getFromQVTID("ecore").asType(emof::Package)
+	ecorePack.range2domain(context)
+	//tgtModel.add(ecorePack.output)
+	kRoot.packages.add(ecorePack.output.asType(kermeta::language::structure::Package))
+	
+	
+	//var extensionRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	//extensionRequire.uri:="platform:/resource/qvt-kermeta/transformation/framework_extension/collection_extension.kmt"
+	//kRoot.requires.add(extensionRequire)
+	var transfoContextRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	transfoContextRequire.uri := "platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.kmt"
+	kRoot.requires.add(transfoContextRequire)
+	
+	var deferredColRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	deferredColRequire.uri := "platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.kmt"
+	kRoot.requires.add(deferredColRequire)
+	
+	tgtModel.add(kRoot)
+	
+	mergeMU(tgtModel)
+end
+
+
+operation mergeMU(r : Resource) : Void is do
+	var uniqueRoot: kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
+	
+	tgtModel.each{x| 
+		if x.isInstanceOf(kermeta::language::structure::ModelingUnit) 
+		then 
+			uniqueRoot.packages.addAll(x.asType(kermeta::language::structure::ModelingUnit).packages)
+			uniqueRoot.requires.addAll(x.asType(kermeta::language::structure::ModelingUnit).requires)
+		end }
+	
+	tgtModel.clear
+	tgtModel.add(uniqueRoot)
+	
+	
+end
+
+
+//TODO mapping between the 2 frameworks
+operation mapFrameworks(context : Qvt2KermetaContext) : Void is do 
+
+
+map2FrameworkObjects("OclLib::String::concat","kermeta::standard::String::plus", context)
+map2FrameworkObjects("OclLib::OclAny::=","kermeta::language::structure::Object::equals", context)
+map2FrameworkObjects("OclLib::OclObject::=","kermeta::language::structure::Object::equals", context)
+map2FrameworkObjects("OclLib::OclAny::oclIsKindOf","kermeta::language::structure::Object::isInstanceOf", context)
+map2FrameworkObjects("::QvtLib::OclElement::isKindOf","kermeta::language::structure::Object::isInstanceOf" , context)
+map2FrameworkObjects("::QvtLib::OclElement::asType","kermeta::language::structure::Object::asType", context)
+
+map2FrameworkObjects("OclLib::Sequence::asOrderedSet","kermeta::standard::Collection::asOrderedSet", context)
+map2FrameworkObjects("OclLib::Sequence::first","kermeta::standard::OrderedCollection::first", context)
+map2FrameworkObjects("OclLib::Boolean::and","kermeta::standard::Boolean::and", context)
+map2FrameworkObjects("OclLib::Boolean::not","kermeta::standard::Boolean::not", context)
+end
+
+operation map2FrameworkObjects(source: String, target : String, context : Qvt2KermetaContext) : Void is do
+
+var sourceObject : Object
+
+sourceObject := context.qvtContext.getFromQVTID(source)
+
+var targetObject : Object
+
+targetObject := context.kmtContext.getFromQualifiedName(target)
+sourceObject.output:=targetObject
+
+
+
+
+end
+
+
+
+}
+
+class QvtNotImplementedException inherits kermeta::exceptions::Exception {
+
+attribute notImplementedPart : String
+
+
+	operation initialize(missingPart : String) : QvtNotImplementedException is do
+		message:=missingPart + " not yet implemented, wait for the final version."
+		result:=self
+	end
+
+}
+

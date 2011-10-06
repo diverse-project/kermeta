@@ -1,0 +1,23 @@
+package kermeta::standard;
+
+require kermeta 
+
+aspect class Collection<G>{	
+	operation clearAndAddAll(elements : kermeta::standard::Collection<Object>) : Void is do
+		self.clear()
+		qvtAddAll(elements)
+		
+	end
+
+	operation clearAndAdd(element : G) : Void is do
+		add(element)
+	end
+	
+	operation qvtAddAll(elements : kermeta::standard::Collection<Object>) : Void is do
+		elements.each{x|self.add(x.asType(G))}
+	end 
+	
+	
+
+}
+

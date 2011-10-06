@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="kermeta">
+    <nestedPackage name="language">
+      <nestedPackage name="structure">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="ClassDefinition" isAspect="true" superType="#//@packages.0/language/structure/ClassDefinition/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedAttribute tag="#//@packages.0/language/structure/ClassDefinition/defaultObject/@ownedTags.0"
+              name="defaultObject" type="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0"
+              isOrdered="true" upper="1">
+            <ownedTags value="/**&#xA;&#x9; * Internal object returned by getDefault on a Class whose typeDefinition is &#xA;&#x9; * Should not be accessed by other means&#xA;&#x9; */"
+                object="#//@packages.0/language/structure/ClassDefinition/defaultObject"/>
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          </ownedAttribute>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Class" isAspect="true" superType="#//@packages.0/language/structure/Class/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedOperation tag="#//@packages.0/language/structure/Class/getDefault/@ownedTags.0"
+              name="getDefault" type="#//@packages.0/language/structure/Class/getDefault/@containedType.0"
+              isOrdered="true" upper="1">
+            <ownedTags value="/**&#xA;&#x9; * Get or create a default object instance of this Class&#xA;&#x9; * This allows to have a kind of singleton if you ensure to never call &quot;new&quot; on this ClassDefinition&#xA;&#x9; * Typical use : MySingleton.getDefault().asType(MySingleton)&#xA;&#x9; * Current limitation : Parametrized classes are supported but you'll get only one default object &#xA;&#x9; *&#x9;&#x9;for a given ClassDefinition not matters its parameters. Using getDefault with several binding may lead to &quot;TypeCastError&quot;&#xA;&#x9; * Be careful, as it uses reflection this may be less efficient than passing an object as parameter through your code&#xA;&#x9; * &#xA;&#x9; */"
+                object="#//@packages.0/language/structure/Class/getDefault"/>
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                      identifier="cd">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/ClassDefinition"/>
+                    <type name="ClassDefinition" type="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                        name="cd"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ParameterizedType/typeDefinition/@containedType.0"
+                        name="typeDefinition" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ParameterizedType/typeDefinition">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"
+                          staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@condition/@target/@target/@containedType.0"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new/@containedType.0">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0"
+                            name="defaultObject" staticProperty="#//@packages.0/language/structure/ClassDefinition/defaultObject">
+                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                              name="cd"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new/@containedType.0"
+                            name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"
+                              staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@condition/@target/@target/@containedType.0"/>
+                        </value>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                        name="isVoid" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isVoid">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0"
+                          name="defaultObject" staticProperty="#//@packages.0/language/structure/ClassDefinition/defaultObject">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                            name="cd"/>
+                      </target>
+                    </condition>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0">
+                    <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/language/structure/Class/getDefault/@containedType.0"
+                        name="result"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/ClassDefinition/defaultObject/@containedType.0"
+                        name="defaultObject" staticProperty="#//@packages.0/language/structure/ClassDefinition/defaultObject">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@thenBody/@statement.0/@containedType.0"
+                          name="cd"/>
+                    </value>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block" staticType="TransfoContext.km#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.0/@containedType.0"
+                      identifier="exception">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/exceptions/NotImplementedException"/>
+                    <initialization xsi:type="kermeta_language_behavior:CallFeature"
+                        staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.0/@initialization/@containedType.0"
+                        name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/exceptions/NotImplementedException"/>
+                      <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="TransfoContext.km#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                        <typeref name="NotImplementedException" type="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.0/@initialization/@containedType.0"
+                            upper="1"/>
+                      </target>
+                    </initialization>
+                    <type name="NotImplementedException" type="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.1/@value/@containedType.0">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/exceptions/Exception/message/@containedType.0"
+                        name="message" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/exceptions/Exception/message">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.0/@containedType.0"
+                          name="exception"/>
+                    </target>
+                    <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.1/@value/@containedType.0"
+                        value="getDefault works only with ClassDefinition">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Raise" staticType="TransfoContext.km#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                    <expression xsi:type="kermeta_language_behavior:CallVariable"
+                        staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@elseBody/@statement.0/@containedType.0"
+                        name="exception"/>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                    name="isInstanceOf" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isInstanceOf">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isInstanceOf/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="TransfoContext.km#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                    <typeref name="ClassDefinition" type="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0"
+                        upper="1">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/ClassDefinition"/>
+                    </typeref>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ParameterizedType/typeDefinition/@containedType.0"
+                      name="typeDefinition" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ParameterizedType/typeDefinition">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Class/getDefault/@body/@statement.0/@condition/@target/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Class"/>
+                    </target>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="kermeta::language::structure"/>
+</kermeta_language_structure:ModelingUnit>

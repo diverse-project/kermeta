@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="org">
+    <nestedPackage name="kermeta">
+      <nestedPackage name="traceability">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/TracePackage/@ownedTags.0" name="TracePackage"
+            superType="#//@packages.0/kermeta/traceability/TracePackage/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This class represents a trace model.&#xD;&#xA; * This is a set of traces, references and messages.&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/TracePackage"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedAttribute tag="#//@packages.0/kermeta/traceability/TracePackage/references/@ownedTags.0"
+              name="references" type="#//@packages.0/kermeta/traceability/TracePackage/references/@containedType.0"
+              upper="-1" opposite="#//@packages.0/kermeta/traceability/Reference/traceMdl"
+              isComposite="true">
+            <ownedTags value="/** Set of references to the traced objects of the trace model */"
+                object="#//@packages.0/kermeta/traceability/TracePackage/references"/>
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Reference"/>
+          </ownedAttribute>
+          <ownedAttribute name="subpackage" type="#//@packages.0/kermeta/traceability/TracePackage/subpackage/@containedType.0"
+              isOrdered="true" upper="-1" isComposite="true">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/TracePackage"/>
+          </ownedAttribute>
+          <ownedAttribute name="contexts" type="#//@packages.0/kermeta/traceability/Object"
+              isOrdered="true" upper="-1" isComposite="true"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/Trace/@ownedTags.0" name="Trace"
+            superType="#//@packages.0/kermeta/traceability/Trace/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This class represents a trace element&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/Trace"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedAttribute name="sourceElem" type="#//@packages.0/kermeta/traceability/Trace/sourceElem/@containedType.0"
+              isOrdered="true" upper="1" opposite="#//@packages.0/kermeta/traceability/Traceable/target">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Traceable"/>
+          </ownedAttribute>
+          <ownedAttribute name="targetElem" type="#//@packages.0/kermeta/traceability/Trace/targetElem/@containedType.0"
+              isOrdered="true" upper="1" opposite="#//@packages.0/kermeta/traceability/Traceable/source">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Traceable"/>
+          </ownedAttribute>
+          <ownedAttribute name="context" type="#//@packages.0/kermeta/traceability/Object"
+              isOrdered="true" upper="1"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/Reference/@ownedTags.0" name="Reference"
+            isAbstract="true" superType="#//@packages.0/kermeta/traceability/Reference/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This abstract class represents a reference to a concrete object&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/Reference"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Traceable"/>
+          <ownedAttribute tag="#//@packages.0/kermeta/traceability/Reference/traceMdl/@ownedTags.0"
+              name="traceMdl" type="#//@packages.0/kermeta/traceability/Reference/traceMdl/@containedType.0"
+              isOrdered="true" lower="1" upper="1" opposite="#//@packages.0/kermeta/traceability/TracePackage/references">
+            <ownedTags value="/** Link to the containing trace model */" object="#//@packages.0/kermeta/traceability/Reference/traceMdl"/>
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/TracePackage"/>
+          </ownedAttribute>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/FileReference/@ownedTags.0" name="FileReference"
+            isAbstract="true" superType="#//@packages.0/kermeta/traceability/FileReference/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This class represents a reference to a concrete object contained by a file&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/FileReference"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Reference"/>
+          <ownedAttribute tag="#//@packages.0/kermeta/traceability/FileReference/fileURI/@ownedTags.0"
+              name="fileURI" type="#//@packages.0/kermeta/traceability/String" isOrdered="true"
+              lower="1" upper="1" isComposite="true">
+            <ownedTags value="/** URI of the file containing the referred concrete object */"
+                object="#//@packages.0/kermeta/traceability/FileReference/fileURI"/>
+          </ownedAttribute>
+          <ownedAttribute name="timeStamp" type="#//@packages.0/kermeta/traceability/String"
+              isOrdered="true" upper="1" isComposite="true"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="String"
+            instanceType="Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/TracePackage/findReference/@body/@statement.2/@body/@statement.1/@condition/@target/@containedType.0"/>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/TextReference/@ownedTags.0" name="TextReference"
+            superType="#//@packages.0/kermeta/traceability/TextReference/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This class represents a reference to a textual file concrete object&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/TextReference"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/FileReference"/>
+          <inv name="validTextRef">
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0"
+                  name="isGreaterOrEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/kermeta/traceability/TextReference/validTextRef/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/Traceable/resolveOne/@body/@statement.0/@initialization/@containedType.0"
+                    name="charBeginOffset" staticProperty="#//@packages.0/kermeta/traceability/TextReference/charBeginOffset"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/Traceable/resolveOne/@body/@statement.0/@initialization/@containedType.0"
+                    name="charEndOffset" staticProperty="#//@packages.0/kermeta/traceability/TextReference/charEndOffset"/>
+              </statement>
+            </body>
+          </inv>
+          <ownedAttribute tag="#//@packages.0/kermeta/traceability/TextReference/charBeginOffset/@ownedTags.0"
+              name="charBeginOffset" type="#//@packages.0/kermeta/traceability/Integer"
+              isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTags value="/** Starting line number */" object="#//@packages.0/kermeta/traceability/TextReference/charBeginOffset"/>
+          </ownedAttribute>
+          <ownedAttribute tag="#//@packages.0/kermeta/traceability/TextReference/charEndOffset/@ownedTags.0"
+              name="charEndOffset" type="#//@packages.0/kermeta/traceability/Integer"
+              isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTags value="/** Starting character number */" object="#//@packages.0/kermeta/traceability/TextReference/charEndOffset"/>
+          </ownedAttribute>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Integer"
+            instanceType="Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/Traceable/resolveOne/@body/@statement.0/@initialization/@containedType.0"/>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/XMLReference/@ownedTags.0" name="XMLReference"
+            superType="#//@packages.0/kermeta/traceability/XMLReference/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This class represents a reference to a XML concrete object&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/XMLReference"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/FileReference"/>
+          <ownedAttribute tag="#//@packages.0/kermeta/traceability/XMLReference/xPointer/@ownedTags.0"
+              name="xPointer" type="#//@packages.0/kermeta/traceability/String" isOrdered="true"
+              lower="1" upper="1" isComposite="true">
+            <ownedTags value="/** XML link to the referred XML concrete object */"
+                object="#//@packages.0/kermeta/traceability/XMLReference/xPointer"/>
+          </ownedAttribute>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            tag="#//@packages.0/kermeta/traceability/ModelReference/@ownedTags.0"
+            name="ModelReference" superType="#//@packages.0/kermeta/traceability/ModelReference/@containedType.0">
+          <ownedTags value="/**&#xD;&#xA; * This class represents a reference to a model element&#xD;&#xA; */"
+              object="#//@packages.0/kermeta/traceability/ModelReference"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Reference"/>
+          <ownedAttribute name="refObject" type="#//@packages.0/kermeta/traceability/Object"
+              isOrdered="true" lower="1" upper="1"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Object"
+            instanceType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="QualifiedNameReference" superType="#//@packages.0/kermeta/traceability/QualifiedNameReference/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Reference"/>
+          <ownedAttribute name="qualifiedName" type="#//@packages.0/kermeta/traceability/String"
+              isOrdered="true" lower="1" upper="1" isComposite="true"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Traceable" isAbstract="true" superType="#//@packages.0/kermeta/traceability/Traceable/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+          <ownedAttribute name="target" type="#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"
+              isOrdered="true" upper="-1" opposite="#//@packages.0/kermeta/traceability/Trace/sourceElem"
+              isComposite="true">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Trace"/>
+          </ownedAttribute>
+          <ownedAttribute name="source" type="#//@packages.0/kermeta/traceability/Traceable/source/@containedType.0"
+              isOrdered="true" upper="-1" opposite="#//@packages.0/kermeta/traceability/Trace/targetElem">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/kermeta/traceability/Trace"/>
+          </ownedAttribute>
+        </ownedTypeDefinition>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="org::kermeta::traceability"/>
+</kermeta_language_structure:ModelingUnit>

@@ -1,0 +1,640 @@
+package essentialocl;
+require "qvt2kermeta.kmt"
+using root_package
+using kermeta::standard
+
+
+/**call to a Property*/
+aspect class PropertyCallExp{
+
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		stdio.writeln("PropertyCallExp::range2domain")
+		var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+		referredProperty.range2domain(context)
+		out.staticProperty?=referredProperty.output
+		out.name:=referredProperty.name
+		
+		source.range2domain(context)
+		out.target?=source.output
+		output:=out
+	
+	end
+
+}
+
+
+aspect class TypeExp{
+
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		if output==void then
+			var out : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			output:=out
+			referredType.range2domain(context)
+						
+			if referredType.output.isInstanceOf(kermeta::language::structure::ClassDefinition) then
+				out.typeref:=referredType.output.asType(kermeta::language::structure::ClassDefinition).generateTypeRef
+			else
+				if referredType.output.isInstanceOf(kermeta::language::structure::PrimitiveType) then
+					out.typeref:=referredType.output.asType(kermeta::language::structure::PrimitiveType).generateTypeRef
+				end
+			end
+		
+		end
+		
+	end
+}
+
+aspect class IteratorExp {
+
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		if output==void then
+		
+		
+		var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+		
+		output:=out
+		if (name =="collect") 
+		then
+			out.name:="collect"
+		else
+			if (name == "select") then
+				out.name:="select"
+			else
+			
+				out.name:=name
+				stdio.writeln("name : "+name)
+			end
+		end
+		
+		var lambdaExp : kermeta::language::behavior::LambdaExpression init kermeta::language::behavior::LambdaExpression.new
+		
+		out.parameters.add(lambdaExp)
+	
+		if body!=void then
+			body.range2domain(context)
+			lambdaExp.body?=body.output
+		end
+		
+		
+		source.range2domain(context)
+		out.target?=source.output
+		
+		iterator.each{x|x.toLambdaParameter() lambdaExp.parameters.add(x.output.asType(kermeta::language::behavior::LambdaParameter))}
+		
+		end
+	end
+
+}
+
+
+aspect class OperationCallExp {
+	
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		if output==void then
+			stdio.writeln("OperationCallExp::range2domain")
+			//either the operation is coming from the initial framework
+			var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			output:=out
+			
+			if context.qvtContext.libs.contains(referredOperation.containingResource()) and referredOperation.output==void then
+				
+				//in kermeta the flatten operation from sequence return a bag of objects
+				//should return flatten.asSequence.asType(Sequence<X>) where X is the type of the flatten operation in qvt
+				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
+				if referredOperation.getQVTID()=="OclLib::Sequence::flatten" then
+					
+					var deferredcast : kermeta::language::behavior::CallFeature 
+					deferredcast:=out
+					deferredcast.name:="fromSeq"
+			
+					var dSeqInit : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+					deferredcast.target:=dSeqInit
+					dSeqInit.name:="new"
+					
+					var dseqCD : kermeta::language::structure::ClassDefinition 
+					dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
+					
+					
+					/*
+					//here the sequence type is transformed in a class with the appropriated generic type so we shouldn't use
+					//the generateTypeRef method
+					var operationTypeTR : kermeta::language::behavior::TypeReference init kermeta::language::behavior::TypeReference.new
+					typeLit.typeref:= operationTypeTR
+					
+					operationTypeTR.type:=operationType.generateType()
+					operationTypeTR.containedType.add(operationTypeTR.type)
+					operationTypeTR.upper:=1
+					operationTypeTR.lower:=0
+					operationTypeTR.isUnique:=false
+					
+					*/
+					var operationType : essentialocl::SequenceType init self.type.asType(essentialocl::SequenceType)
+					operationType.elementType.range2domain(context)
+					
+					
+					
+					
+					
+					
+					var dseqLit : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+					dSeqInit.target:=dseqLit
+					dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(operationType.elementType.output.asType(kermeta::language::structure::ClassDefinition))
+
+					var asSequenceFeature : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+					deferredcast.parameters.add(asSequenceFeature)
+					asSequenceFeature.name:="asSequence"
+					
+					var flattenFeature : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+					asSequenceFeature.target :=flattenFeature
+					flattenFeature.name:="flatten"
+					source.range2domain(context)
+					flattenFeature.target?=source.output
+					flattenFeature.staticOperation:=context
+											.kmtContext
+											.getFromQualifiedName("kermeta::standard::Sequence::flatten")
+											.asType(kermeta::language::structure::Operation)
+					
+					//get the parameter from the type of the operation which is a sequenceType
+					
+					/*var typeLit : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+					out.parameters.add(typeLit)
+					operationType.range2domain()*/
+				end
+				//why this qvtid starts with :: is still a mystery
+				if referredOperation.getQVTID()=="::QvtLib::Model::objects" then
+					out.name:="extent"
+					source.range2domain(context)
+					out.target?=source.output
+				end
+
+				
+	
+				stdio.write("THIS IS A STANDARD METHOD")
+				stdio.writeln(" referredOperation name : "+ referredOperation.getQVTID)
+			else
+				//or not
+				stdio.writeln("OperationCallExp")
+				
+				//if there is a source model
+				if source!=void then
+					source.range2domain(context)
+					out.target?=source.output
+				else
+					var transfoCall : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
+					out.target:=transfoCall
+				end
+				if (referredOperation !=void) then
+					referredOperation.range2domain(context)
+					out.staticOperation?=referredOperation.output
+					if out.staticOperation==void then
+						out.name:=referredOperation.name
+					else
+						out.name:=out.staticOperation.name
+					end
+					stdio.writeln("referredOperation name : "+ referredOperation.name)
+				end
+				argument.each{x|
+						x.range2domain(context) 
+						if x.output!=void then 
+							out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
+						else 
+							stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+						end
+						}
+				
+			end
+		end
+	end
+	
+}
+	
+	
+aspect abstract class OclExpression {
+	
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		stdio.writeln("oclexpression metaclass "+self.getMetaClass.name)
+		output:=void
+	end
+	
+}
+	
+
+	
+aspect class VariableExp {
+	
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		var out: kermeta::language::behavior::Expression
+		if (referredVariable.name=="result") then
+			 out:= kermeta::language::behavior::CallResult.new
+		else
+			if (referredVariable.name=="self") then
+				out:= kermeta::language::behavior::SelfExpression.new
+			else
+				if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then
+					var transfoContext : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
+					out := kermeta::language::behavior::CallFeature.new
+					out.asType(kermeta::language::behavior::CallFeature).target:=transfoContext
+					referredVariable.range2domain(context)
+					out.asType(kermeta::language::behavior::CallFeature).staticProperty?= referredVariable.output
+					out.asType(kermeta::language::behavior::CallFeature).name:=out.asType(kermeta::language::behavior::CallFeature).staticProperty.name
+					
+				else
+					out := kermeta::language::behavior::CallVariable.new
+					out.asType(kermeta::language::behavior::CallVariable).name:=referredVariable.name
+				end
+				
+			end
+		end
+		output:=out
+	end
+}
+	
+/**Variables are used in 2 different contexts, as lambda parameters and as variable that need to be declared in kermeta those are represented by 2 different classes*/
+aspect class Variable {
+	
+	operation toLambdaParameter() : Void is do
+		if output==void then
+			var out : kermeta::language::behavior::LambdaParameter init kermeta::language::behavior::LambdaParameter.new
+			output:=out
+			out.name:=name
+		end
+	
+	end
+	
+	
+	/** return the variable declaration corresponding to the self Variable */
+	operation toVariableDecl(context : Qvt2KermetaContext) : kermeta::language::behavior::VariableDecl is do
+		var out : kermeta::language::behavior::VariableDecl init kermeta::language::behavior::VariableDecl.new
+		result:=out
+		out.identifier:=name
+		
+		//first, put a type
+		
+		
+		
+		
+		if (initExpression!=void) then
+			initExpression.range2domain(context)
+			out.initialization?=initExpression.output
+			out.addDocumentationTag("initialized from initExpression does it need a new ?")
+		else
+			//initialization of the variable
+			var newFeat : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			var typeLit : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			
+			out.initialization:=newFeat
+			newFeat.name:="new"
+			newFeat.target:=typeLit
+			type.range2domain(context)
+			if type.output.isInstanceOf(kermeta::language::structure::ClassDefinition) then
+				typeLit.typeref:=type.output.asType(kermeta::language::structure::ClassDefinition).generateTypeRef()
+			else
+				if type.output.isInstanceOf(kermeta::language::structure::PrimitiveType) then
+					typeLit.typeref:=type.output.asType(kermeta::language::structure::PrimitiveType).generateTypeRef()
+				else
+					if type.output.isInstanceOf(kermeta::language::structure::Class) then
+					typeLit.typeref:=kermeta::language::behavior::TypeReference.new
+					typeLit.typeref.type?=type.output
+					typeLit.typeref.containedType.add(type.output.asType(kermeta::language::structure::Class))
+					end
+				end
+			end
+		end
+		
+		type.range2domain(context)
+		if type.output.isInstanceOf(kermeta::language::structure::ClassDefinition) then
+			out.type:=type.output.asType(kermeta::language::structure::ClassDefinition).generateTypeRef()
+		else
+			if type.output.isInstanceOf(kermeta::language::structure::PrimitiveType) then
+				out.type:=type.output.asType(kermeta::language::structure::PrimitiveType).generateTypeRef()
+			else
+				if type.output.isInstanceOf(kermeta::language::structure::Class) then
+					out.type?=type.output.asType(kermeta::language::structure::Class).generateTypeRef()
+					//type is already a container…					
+					//out.containedType.add(type.output.asType(kermeta::language::structure::Class))
+				end
+			end
+		end
+		
+	end
+}
+	
+
+aspect class CollectionItem {
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then
+			var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			output:=out
+			out.name:="add"
+			
+			
+			var collection : essentialocl::CollectionLiteralExp
+			collection ?=container
+			
+			var collectionVar : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+			out.target:=collectionVar
+			collectionVar.name:=collection.collectionTmpId
+			item.range2domain(context)
+			out.parameters.add(item.output.asType(kermeta::language::behavior::Expression))
+			
+			
+		
+		end
+	end
+
+}
+	
+	
+	
+/** definition inlined of a collection in qvt*/
+aspect class CollectionLiteralExp {
+	
+	reference collectionTmpId : kermeta::standard::String
+	
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then
+			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
+			output:=out
+			out.addDocumentationTag("gen from essentialocl::CollectionLiteralExp")
+			
+			//variable declaration of the Collection
+			var vDecl : kermeta::language::behavior::VariableDecl init kermeta::language::behavior::VariableDecl.new
+			out.statement.add(vDecl)
+						//TODO find a way to generate random identifiers that won't collide with existing identifiers
+			vDecl.identifier:="collectionliteral"
+			collectionTmpId:=vDecl.identifier
+			type.range2domain(context)
+			var seqClass : kermeta::language::structure::Class
+			seqClass?=type.output
+			
+			vDecl.containedType.add(seqClass)
+			/*	TODO remove if the following call to generateTypeRef works well 
+			var tRef : kermeta::language::behavior::TypeReference init kermeta::language::behavior::TypeReference.new
+			tRef.lower:=0
+			tRef.upper:=1
+			tRef.type?=type.output
+			if (tRef.type.isInstanceOf(kermeta::language::structure::Class)) then
+				tRef.name:=tRef.type.asType(kermeta::language::structure::Class).name
+			end*/
+			
+			vDecl.type:=type.output.asType(kermeta::language::structure::Type).generateTypeRef
+			
+			//init
+			
+			var callNew : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			vDecl.initialization:=callNew
+			callNew.name:="new"
+			var typeLit : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			callNew.target:=typeLit
+			
+			typeLit.typeref:=seqClass.cloneClass.generateTypeRef			
+			
+
+			
+			
+			
+			//add all the collection items
+			part.each{x|
+					x.range2domain(context)
+					out.statement.add(x.output.asType(kermeta::language::behavior::Expression))
+					}
+				
+			var returnVariable : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+			returnVariable.name:=collectionTmpId
+			
+			out.statement.add(returnVariable)
+			
+			//var vnew : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				
+				
+		end
+	end
+	
+}
+
+
+
+
+/**definition inlined of a tuple in qvt*/
+aspect class TupleLiteralExp {
+
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		
+		if output==void then 
+			//create a signature
+			var tupleparts : Set<root_package::TuplePartPair> init Set<root_package::TuplePartPair>.new
+			
+			part.each{ p |
+					var pair : root_package::TuplePartPair init root_package::TuplePartPair.new
+					pair.name:= (p.~attribute.name)
+					pair.type?=p.~attribute.~class.generateType(context)
+					tupleparts.add(pair)
+				}
+			var tupleSign : root_package::TupleSignature init root_package::TupleSignature.new.initialize(tupleparts)
+			//retrieve the type corresponding to the tuple
+			
+			var tupleClassDef: kermeta::language::structure::ClassDefinition 
+				init context.tuplePool.getTupleTypeDefinition(tupleSign)
+			
+			//declare the tuple
+			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
+			output:=out
+			
+			var varDec : kermeta::language::behavior::VariableDecl init kermeta::language::behavior::VariableDecl.new
+			out.statement.add(varDec)
+			varDec.identifier:=name
+			
+			var tupleTypeRef : kermeta::language::behavior::TypeReference init tupleClassDef.generateTypeRef()
+			varDec.type:=tupleTypeRef
+			
+			//assign each part
+			part.each{p |
+				var assign : kermeta::language::behavior::Assignment init kermeta::language::behavior::Assignment.new
+				out.statement.add(assign)
+				var callProp : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				assign.target:=callProp
+				callProp.name:=p.~attribute.name
+				var callvar : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+				callvar.name:=name
+				
+				p.~value.range2domain(context)
+				assign.~value?=p.~value.output
+				}
+				
+			//return the instance of the tuple
+			var returnVar : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+			out.statement.add(returnVar)
+			returnVar.name:=name
+			
+		end
+	end
+
+}
+
+
+
+
+	
+/** type created for calling a sequence*/
+aspect class SequenceType {
+	
+	method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do
+		result?=output
+	end
+	
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then 
+			var out : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+			output:=out
+			var cd : kermeta::language::structure::ClassDefinition
+			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::Sequence")
+			out.typeDefinition:=cd 
+			var tvarBinding : kermeta::language::structure::TypeVariableBinding init kermeta::language::structure::TypeVariableBinding.new
+			tvarBinding.variable :=cd.typeParameter.one
+			out.typeParamBinding.add(tvarBinding)
+			
+			elementType.range2domain(context)
+			tvarBinding.type:=elementType.generateType(context)
+			
+			if tvarBinding.type.container==void then 
+				tvarBinding.containedType.add(tvarBinding.type)
+			end
+			
+		end
+	end
+}
+	
+	
+/** type created for calling a bag*/
+aspect class BagType {
+	
+	method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do
+		result?=output
+	end
+	
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then 
+			var out : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+			output:=out
+			var cd : kermeta::language::structure::ClassDefinition
+			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::Bag")
+			out.typeDefinition:=cd 
+			var tvarBinding : kermeta::language::structure::TypeVariableBinding init kermeta::language::structure::TypeVariableBinding.new
+			tvarBinding.variable :=cd.typeParameter.one
+			out.typeParamBinding.add(tvarBinding)
+			
+			elementType.range2domain(context)
+			tvarBinding.type:=elementType.generateType(context)
+			
+			if tvarBinding.type.container==void then 
+				tvarBinding.containedType.add(tvarBinding.type)
+			end
+			
+		end
+	end
+}
+
+
+/** type created for calling a set*/
+aspect class SetType {
+	
+	method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do
+		result?=output
+	end
+	
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then 
+			var out : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+			output:=out
+			var cd : kermeta::language::structure::ClassDefinition
+			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::Set")
+			out.typeDefinition:=cd 
+			var tvarBinding : kermeta::language::structure::TypeVariableBinding init kermeta::language::structure::TypeVariableBinding.new
+			tvarBinding.variable :=cd.typeParameter.one
+			out.typeParamBinding.add(tvarBinding)
+			
+			elementType.range2domain(context)
+			tvarBinding.type:=elementType.generateType(context)
+			
+			if tvarBinding.type.container==void then 
+				tvarBinding.containedType.add(tvarBinding.type)
+			end
+			
+		end
+	end
+}
+
+/** type created for calling a orderedset*/
+aspect class OrderedSetType {
+	
+	method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do
+		result?=output
+	end
+	
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then 
+			var out : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+			output:=out
+			var cd : kermeta::language::structure::ClassDefinition
+			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::OrderedSet")
+			out.typeDefinition:=cd 
+			var tvarBinding : kermeta::language::structure::TypeVariableBinding init kermeta::language::structure::TypeVariableBinding.new
+			tvarBinding.variable :=cd.typeParameter.one
+			out.typeParamBinding.add(tvarBinding)
+			
+			elementType.range2domain(context)
+			tvarBinding.type:=elementType.generateType(context)
+			
+			if tvarBinding.type.container==void then 
+				tvarBinding.containedType.add(tvarBinding.type)
+			end
+			
+		end
+	end
+}
+
+
+	
+/** TypeExp is a call to a type for iskindof for instance*/
+aspect class TypeExp {
+	
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		if output==void then
+			var out : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			output:=out
+		
+			referredType.range2domain(context)
+			if referredType.output.isInstanceOf(kermeta::language::structure::ClassDefinition) then
+				out.typeref:=referredType.output.asType(kermeta::language::structure::ClassDefinition).generateTypeRef()
+			else
+				if referredType.output.isInstanceOf(kermeta::language::structure::PrimitiveType) then
+					out.typeref:=referredType.output.asType(kermeta::language::structure::PrimitiveType).generateTypeRef()
+				end
+			end
+		end
+	end
+
+}
+
+
+/** Real literals, they don't exists in kermeta*/
+
+aspect class RealLiteralExp {
+
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		if output==void then
+			var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			output:=out
+			out.name:="toReal"
+			
+			var realValue : kermeta::language::behavior::StringLiteral init kermeta::language::behavior::StringLiteral.new
+			out.target:=realValue
+			realValue.~value:=realSymbol.toString
+		
+	
+		end
+	end
+
+
+}
+

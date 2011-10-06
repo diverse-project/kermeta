@@ -1,0 +1,83 @@
+package essentialocl;
+ require "platform:/resource/qvt-kermeta/transformation/adapter/adapter.kmt"
+
+require kermeta
+using root_package
+aspect class IfExp
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				var out : kermeta::language::behavior::Conditional init kermeta::language::behavior::Conditional.new
+				output := out
+				if condition.isNotEqual(void) then
+					condition.range2domain(context)
+					out.condition ?= condition.output
+
+				end
+				if thenExpression.isNotEqual(void) then
+					thenExpression.range2domain(context)
+					out.thenBody ?= thenExpression.output
+
+				end
+				if elseExpression.isNotEqual(void) then
+					elseExpression.range2domain(context)
+					out.elseBody ?= elseExpression.output
+
+				end
+
+			end
+		end
+
+}
+aspect class StringLiteralExp
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				var out : kermeta::language::behavior::StringLiteral init kermeta::language::behavior::StringLiteral.new
+				output := out
+				out.~value := stringSymbol
+
+			end
+		end
+
+}
+aspect class BooleanLiteralExp
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				var out : kermeta::language::behavior::BooleanLiteral init kermeta::language::behavior::BooleanLiteral.new
+				output := out
+				out.~value := booleanSymbol
+
+			end
+		end
+
+}
+aspect class IntegerLiteralExp
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				var out : kermeta::language::behavior::IntegerLiteral init kermeta::language::behavior::IntegerLiteral.new
+				output := out
+				out.~value := integerSymbol
+
+			end
+		end
+
+}
+aspect class NullLiteralExp
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				var out : kermeta::language::behavior::VoidLiteral init kermeta::language::behavior::VoidLiteral.new
+				output := out
+
+			end
+		end
+
+}

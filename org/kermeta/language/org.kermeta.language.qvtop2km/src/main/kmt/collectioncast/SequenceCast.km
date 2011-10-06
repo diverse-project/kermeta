@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="kermeta">
+    <nestedPackage name="standard">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="DeferredSequence"
+          superType="#//@packages.0/standard/DeferredSequence/@containedType.0">
+        <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+              type="#//@packages.0/standard/DeferredSequence/G"/>
+        </containedType>
+        <ownedAttribute name="original" type="#//@packages.0/standard/DeferredSequence/original/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+            <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+          </containedType>
+        </ownedAttribute>
+        <ownedOperation name="fromSeq" type="#//@packages.0/standard/DeferredSequence/fromSeq/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/standard/DeferredSequence">
+            <typeParamBinding variable="#//@packages.0/standard/DeferredSequence/G"
+                type="#//@packages.0/standard/DeferredSequence/G"/>
+          </containedType>
+          <ownedParameter name="s" type="#//@packages.0/standard/DeferredSequence/fromSeq/@ownedParameter.0/@containedType.0"
+              isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+              <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                  type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@body/@statement.1/@value/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@ownedParameter.0/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@body/@statement.0/@target/@containedType.0"
+                  name="original" staticProperty="#//@packages.0/standard/DeferredSequence/original">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </target>
+              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@ownedParameter.0/@containedType.0"
+                  name="s"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@body/@statement.1/@value/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@containedType.0"
+                  name="result"/>
+              <value xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/standard/DeferredSequence/fromSeq/@body/@statement.1/@value/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/standard/DeferredSequence">
+                  <typeParamBinding variable="#//@packages.0/standard/DeferredSequence/G"
+                      type="#//@packages.0/standard/DeferredSequence/G"/>
+                </containedType>
+              </value>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="add" type="#//@packages.0/standard/DeferredSequence/add/@containedType.0"
+            isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add">
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <ownedParameter name="element" type="#//@packages.0/standard/DeferredSequence/G"
+              isOrdered="true" upper="1"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add/@containedType.0"
+                name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/standard/DeferredSequence/add/@body/@statement.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/standard/DeferredSequence/G"
+                  name="element"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/DeferredSequence/add/@body/@statement.0/@target/@containedType.0"
+                  name="original" staticProperty="#//@packages.0/standard/DeferredSequence/original">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </target>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="each" type="#//@packages.0/standard/DeferredSequence/each/@containedType.0"
+            isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <ownedParameter name="func" type="#//@packages.0/standard/DeferredSequence/each/@ownedParameter.0/@containedType.0"
+              isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/standard/DeferredSequence/G"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@containedType.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                </containedType>
+                <parameters name="x"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                      name="func">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/DeferredSequence/G"
+                        name="asType" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/asType">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/asType/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/asType/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:TypeLiteral"
+                          staticType="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class"/>
+                        <typeref name="G" type="#//@packages.0/standard/DeferredSequence/G"
+                            upper="1"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                          name="x"/>
+                    </parameters>
+                  </statement>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@target/@containedType.0"
+                  name="original" staticProperty="#//@packages.0/standard/DeferredSequence/original">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </target>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="collect" type="#//@packages.0/standard/DeferredSequence/collect/@containedType.1"
+            isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect"
+            typeParameter="#//@packages.0/standard/DeferredSequence/collect/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable"
+              name="T"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+            <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                type="#//@packages.0/standard/DeferredSequence/collect/@containedType.0"/>
+          </containedType>
+          <ownedParameter name="func" type="#//@packages.0/standard/DeferredSequence/collect/@ownedParameter.0/@containedType.0"
+              isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/standard/DeferredSequence/G"
+                right="#//@packages.0/standard/DeferredSequence/collect/@containedType.0"/>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@containedType.1">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@containedType.1">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/standard/DeferredSequence/collect/@containedType.1"
+                  name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@containedType.1"
+                  name="collect" staticTypeVariableBindings="#//@packages.0/standard/DeferredSequence/collect/@containedType.0"
+                  staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@containedType.0/@containedType.0"
+                    right="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@containedType.0/@containedType.1">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect/@containedType.0"/>
+                  </containedType>
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect/@containedType.0"/>
+                  </containedType>
+                </containedType>
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="#//@packages.0/standard/DeferredSequence/collect/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/standard/DeferredSequence/collect/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                  </containedType>
+                  <parameters name="x"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/standard/DeferredSequence/collect/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/standard/DeferredSequence/collect/@containedType.0"
+                        name="func">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/standard/DeferredSequence/G"
+                          name="asType" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/asType">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/asType/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/asType/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:TypeLiteral"
+                            staticType="#//@packages.0/standard/DeferredSequence/each/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@containedType.0">
+                          <typeref name="G" type="#//@packages.0/standard/DeferredSequence/G"
+                              upper="1"/>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                            name="x"/>
+                      </parameters>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/DeferredSequence/collect/@body/@statement.0/@value/@target/@containedType.0"
+                    name="original" staticProperty="#//@packages.0/standard/DeferredSequence/original">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </target>
+              </value>
+            </statement>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="kermeta::standard"/>
+</kermeta_language_structure:ModelingUnit>

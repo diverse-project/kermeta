@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/ SingletonSupport.km#/ TraceRegistry_org.kermeta.traceability.mdk.km#/ Behavior_org.kermeta.traceability.model_aspect.km#/ traceability.km#/">
+  <packages name="root_package">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TransformationContext"
+        superType="#//@packages.0/TransformationContext/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="traceRegistry" type="#//@packages.0/TransformationContext/traceRegistry/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry"/>
+      </ownedAttribute>
+      <ownedOperation name="addTrace" type="#//@packages.0/TransformationContext/addTrace/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="source" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="target" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="context" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+            isOrdered="true" upper="1"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/addTraceFromReferences/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@containedType.0"
+              identifier="srcModelRef">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class"/>
+                <typeref name="ModelReference" type="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="ModelReference" type="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Object"
+                name="refObject" staticProperty="traceability.km#//@packages.0/kermeta/traceability/ModelReference/refObject">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@containedType.0"
+                  name="srcModelRef"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                name="source"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.2/@containedType.0"
+              identifier="tgtModelRef">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.2/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                <typeref name="ModelReference" type="#//@packages.0/TransformationContext/addTrace/@body/@statement.2/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="ModelReference" type="#//@packages.0/TransformationContext/addTrace/@body/@statement.2/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Object"
+                name="refObject" staticProperty="traceability.km#//@packages.0/kermeta/traceability/ModelReference/refObject">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.2/@containedType.0"
+                  name="tgtModelRef"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                name="target"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/addTraceFromReferences/@containedType.0"
+              name="addTraceFromReferences" staticOperation="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/addTraceFromReferences">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/addTrace/@body/@statement.4/@containedType.0/@containedType.0"
+                right="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/addTraceFromReferences/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/addTraceFromReferences/@ownedParameter.0/@containedType.0 TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/addTraceFromReferences/@ownedParameter.1/@containedType.0 traceability.km#//@packages.0/kermeta/traceability/Object"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@containedType.0"
+                name="srcModelRef"/>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.2/@containedType.0"
+                name="tgtModelRef"/>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                name="context"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/traceRegistry/@containedType.0"
+                name="traceRegistry" staticProperty="#//@packages.0/TransformationContext/traceRegistry"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="resolveAllTargets" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+          isOrdered="true" upper="-1">
+        <ownedParameter name="source" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+            isOrdered="true" upper="1"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@target/@containedType.0"
+                name="result">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@value/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                <typeref name="OrderedSet" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@value/@containedType.0"
+                    upper="1"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.1/@containedType.0"
+              identifier="srcModelRef">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.1/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                <typeref name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.1/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.1/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Object"
+                name="refObject" staticProperty="traceability.km#//@packages.0/kermeta/traceability/ModelReference/refObject">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.1/@containedType.0"
+                  name="srcModelRef"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                name="source"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.3/@containedType.0"
+              identifier="registrySource">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+            <type name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.3/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.3/@containedType.0"
+              isCast="true">
+            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.3/@containedType.0"
+                name="registrySource"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference/@containedType.0"
+                name="getCorrespondingReference" staticOperation="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.4/@value/@containedType.0/@containedType.0"
+                  right="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference/@ownedParameter.0/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.1/@containedType.0"
+                  name="srcModelRef"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/traceRegistry/@containedType.0"
+                  name="traceRegistry" staticProperty="#//@packages.0/TransformationContext/traceRegistry"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0"
+              name="addAll" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@containedType.1"
+                name="collect" staticTypeVariableBindings="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@containedType.0/@containedType.0"
+                  right="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@containedType.0/@containedType.1">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@containedType.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect/@containedType.0"/>
+                </containedType>
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect/@containedType.0"/>
+                </containedType>
+              </containedType>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@containedType.0/@containedType.0"
+                    right="traceability.km#//@packages.0/kermeta/traceability/Object">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"/>
+                </containedType>
+                <parameters name="trace"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="traceability.km#//@packages.0/kermeta/traceability/Object">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                      identifier="registryTarget">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+                    <type name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                        name="registryTarget"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Trace/targetElem/@containedType.0"
+                        name="targetElem" staticProperty="traceability.km#//@packages.0/kermeta/traceability/Trace/targetElem">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"
+                          name="trace"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Object"
+                      name="refObject" staticProperty="traceability.km#//@packages.0/kermeta/traceability/ModelReference/refObject">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                        name="registryTarget"/>
+                  </statement>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.5/@parameters.0/@target/@containedType.0"
+                  name="target" staticProperty="traceability.km#//@packages.0/kermeta/traceability/Traceable/target">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                      type="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.3/@containedType.0"
+                    name="registrySource"/>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@target/@containedType.0"
+                name="result"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="resolveAllSources" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+          isOrdered="true" upper="-1">
+        <ownedParameter name="target" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+            isOrdered="true" upper="1"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@target/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.0/@value/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                <typeref name="OrderedSet" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.0/@value/@containedType.0"
+                    upper="1"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.1/@containedType.0"
+              identifier="tgtModelRef">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.1/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/TransformationContext/addTrace/@body/@statement.0/@initialization/@target/@containedType.0">
+                <typeref name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.1/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.1/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Object"
+                name="refObject" staticProperty="traceability.km#//@packages.0/kermeta/traceability/ModelReference/refObject">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.1/@containedType.0"
+                  name="tgtModelRef"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                name="target"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.3/@containedType.0"
+              identifier="registryTarget">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+            <type name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.3/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.3/@containedType.0"
+              isCast="true">
+            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.3/@containedType.0"
+                name="registryTarget"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference/@containedType.0"
+                name="getCorrespondingReference" staticOperation="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.4/@value/@containedType.0/@containedType.0"
+                  right="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="TraceRegistry_org.kermeta.traceability.mdk.km#//@packages.0/kermeta/traceability/TraceRegistry/getCorrespondingReference/@ownedParameter.0/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.1/@containedType.0"
+                  name="tgtModelRef"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/traceRegistry/@containedType.0"
+                  name="traceRegistry" staticProperty="#//@packages.0/TransformationContext/traceRegistry"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0"
+              name="addAll" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@containedType.1"
+                name="collect" staticTypeVariableBindings="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@containedType.0/@containedType.0"
+                  right="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@containedType.0/@containedType.1">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@containedType.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect/@containedType.0"/>
+                </containedType>
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/collect/@containedType.0"/>
+                </containedType>
+              </containedType>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@containedType.0/@containedType.0"
+                    right="traceability.km#//@packages.0/kermeta/traceability/Object">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"/>
+                </containedType>
+                <parameters name="trace"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="traceability.km#//@packages.0/kermeta/traceability/Object">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                      identifier="registrySource">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Behavior_org.kermeta.traceability.model_aspect.km#//@packages.0/kermeta/traceability/ModelReference"/>
+                    <type name="ModelReference" type="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                        name="registrySource"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Trace/sourceElem/@containedType.0"
+                        name="sourceElem" staticProperty="traceability.km#//@packages.0/kermeta/traceability/Trace/sourceElem">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"
+                          name="trace"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="traceability.km#//@packages.0/kermeta/traceability/Object"
+                      name="refObject" staticProperty="traceability.km#//@packages.0/kermeta/traceability/ModelReference/refObject">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@parameters.0/@body/@statement.0/@containedType.0"
+                        name="registrySource"/>
+                  </statement>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.5/@parameters.0/@target/@containedType.0"
+                  name="source" staticProperty="traceability.km#//@packages.0/kermeta/traceability/Traceable/source">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                      type="traceability.km#//@packages.0/kermeta/traceability/Traceable/target/@containedType.0"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TransformationContext/resolveAllSources/@body/@statement.3/@containedType.0"
+                    name="registryTarget"/>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/TransformationContext/resolveAllTargets/@body/@statement.0/@target/@containedType.0"
+                name="result"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ModelParameter"
+        superType="#//@packages.0/ModelParameter/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="modelResource" type="#//@packages.0/ModelParameter/modelResource/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/persistence/Resource"/>
+      </ownedAttribute>
+      <ownedAttribute name="extent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+          isOrdered="true" isUnique="false" upper="-1"/>
+      <ownedOperation name="save" type="#//@packages.0/ModelParameter/save/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+              name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ModelParameter/save/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ModelParameter/save/@body/@statement.0/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters name="x"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0"
+                        name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                          name="x"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/modelResource/@containedType.0"
+                          name="modelResource" staticProperty="#//@packages.0/ModelParameter/modelResource"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                      name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/equals">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/equals/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/ModelParameter/save/@body/@statement.0/@parameters.0/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/container/@containedType.0"
+                        name="container" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/container">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"
+                          name="x"/>
+                    </target>
+                  </condition>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/save/@body/@statement.0/@target/@containedType.0"
+                name="extent" staticProperty="#//@packages.0/ModelParameter/extent">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="initialize" type="#//@packages.0/ModelParameter/initialize/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="initRes" type="#//@packages.0/ModelParameter/initialize/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/persistence/Resource"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ModelParameter/initialize/@ownedParameter.0/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/modelResource/@containedType.0"
+                name="modelResource" staticProperty="#//@packages.0/ModelParameter/modelResource"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ModelParameter/initialize/@ownedParameter.0/@containedType.0"
+                name="initRes"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0"
+              name="addAll" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ModelParameter/initialize/@body/@statement.1/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/addAll/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ModelParameter/initialize/@body/@statement.1/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/initialize/@body/@statement.1/@parameters.0/@containedType.0"
+                name="contents" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/persistence/Resource/contents">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/modelResource/@containedType.0"
+                  name="modelResource" staticProperty="#//@packages.0/ModelParameter/modelResource"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/initialize/@body/@statement.1/@target/@containedType.0"
+                name="extent" staticProperty="#//@packages.0/ModelParameter/extent">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="objects" type="#//@packages.0/ModelParameter/objects/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+        </containedType>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ModelParameter/objects/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ModelParameter/objects/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ModelParameter/objects/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/objects/@body/@statement.0/@value/@containedType.0"
+                name="asSet" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Bag/asSet">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ModelParameter/objects/@body/@statement.0/@value/@target/@containedType.0"
+                  name="extent" staticProperty="#//@packages.0/ModelParameter/extent">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                </containedType>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="#//@packages.0/ReturnException/@ownedTags.0"
+        name="ReturnException" superType="#//@packages.0/ReturnException/@containedType.0">
+      <ownedTags value="/**Exception used to simulate a return operation*/" object="#//@packages.0/ReturnException"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="returnValue" type="#//@packages.0/ReturnException/returnValue/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      </ownedAttribute>
+      <ownedAttribute name="hasValue" type="#//@packages.0/ReturnException/hasValue/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+      </ownedAttribute>
+      <ownedOperation name="returnWithValue" type="#//@packages.0/ReturnException/returnWithValue/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ReturnException"/>
+        <ownedParameter name="retVal" type="#//@packages.0/ReturnException/returnWithValue/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ReturnException/returnWithValue/@body/@statement.2/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ReturnException/returnWithValue/@ownedParameter.0/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ReturnException/returnValue/@containedType.0"
+                name="returnValue" staticProperty="#//@packages.0/ReturnException/returnValue"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ReturnException/returnWithValue/@ownedParameter.0/@containedType.0"
+                name="retVal"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ReturnException/returnWithValue/@body/@statement.1/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ReturnException/hasValue/@containedType.0"
+                name="hasValue" staticProperty="#//@packages.0/ReturnException/hasValue"/>
+            <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ReturnException/returnWithValue/@body/@statement.1/@value/@containedType.0"
+                value="true">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ReturnException/returnWithValue/@body/@statement.2/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ReturnException/returnWithValue/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/ReturnException/returnWithValue/@body/@statement.2/@value/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ReturnException"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="#//@packages.0/BreakException/@ownedTags.0"
+        name="BreakException" superType="#//@packages.0/BreakException/@containedType.0">
+      <ownedTags value="/**Exception used to simulate a break operation*/" object="#//@packages.0/BreakException"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="#//@packages.0/ContinueException/@ownedTags.0"
+        name="ContinueException" superType="#//@packages.0/ContinueException/@containedType.0">
+      <ownedTags value="/**Exception used to simulate a continue exception*/" object="#//@packages.0/ContinueException"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="#//@packages.0/ViolatedGuardException/@ownedTags.0"
+        name="ViolatedGuardException" superType="#//@packages.0/ViolatedGuardException/@containedType.0">
+      <ownedTags value="/**Exception used for violation of guard condition in a mapping*/"
+          object="#//@packages.0/ViolatedGuardException"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <requires uri="platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"/>
+  <requires uri="platform:/resource/qvt-kermeta/transformation/traceability/TraceRegistry_org.kermeta.traceability.mdk.kmt"/>
+  <usings qualifiedName="root_package"/>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::persistence"/>
+  <usings qualifiedName="org::kermeta::traceability"/>
+  <usings qualifiedName="kermeta::language::structure"/>
+</kermeta_language_structure:ModelingUnit>

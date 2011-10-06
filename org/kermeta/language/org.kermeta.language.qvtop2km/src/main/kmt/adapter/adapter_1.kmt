@@ -1,0 +1,213 @@
+package kermeta;
+
+require "platform:/resource/qvt-kermeta/transformation/adapter/adapter.kmt"
+require kermeta
+using root_package
+package language
+{
+	package behavior
+	{
+		aspect class Block
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : qvtoperational::OperationBody init qvtoperational::OperationBody.new
+						output := out
+						statement.each{tnemetats | do
+								var elt : essentialocl::OclExpression
+								tnemetats.domain2range(context)
+								elt ?= tnemetats.output
+								if elt.isNotEqual(void) then
+out.content.add(elt)								end
+							end}
+
+					end
+				end
+
+		}
+		aspect class Conditional
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : essentialocl::IfExp init essentialocl::IfExp.new
+						output := out
+						if condition.isNotEqual(void) then
+							condition.domain2range(context)
+							out.condition ?= condition.output
+
+						end
+						if thenBody.isNotEqual(void) then
+							thenBody.domain2range(context)
+							out.thenExpression ?= thenBody.output
+
+						end
+						if elseBody.isNotEqual(void) then
+							elseBody.domain2range(context)
+							out.elseExpression ?= elseBody.output
+
+						end
+
+					end
+				end
+
+		}
+		aspect class StringLiteral
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : essentialocl::StringLiteralExp init essentialocl::StringLiteralExp.new
+						output := out
+						out.stringSymbol := ~value
+
+					end
+				end
+
+		}
+		aspect class BooleanLiteral
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : essentialocl::BooleanLiteralExp init essentialocl::BooleanLiteralExp.new
+						output := out
+						out.booleanSymbol := ~value
+
+					end
+				end
+
+		}
+		aspect class IntegerLiteral
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : essentialocl::IntegerLiteralExp init essentialocl::IntegerLiteralExp.new
+						output := out
+						out.integerSymbol := ~value
+
+					end
+				end
+
+		}
+		aspect class VoidLiteral
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : essentialocl::NullLiteralExp init essentialocl::NullLiteralExp.new
+						output := out
+
+					end
+				end
+
+		}
+	}
+
+	package structure
+	{
+		aspect class Operation
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : qvtoperational::Helper init qvtoperational::Helper.new
+						output := out
+						if body.isNotEqual(void) then
+							body.domain2range(context)
+							out.body ?= body.output
+
+						end
+						out.name := name
+						if type.isNotEqual(void) then
+							type.domain2range(context)
+							out.type ?= type.output
+
+						end
+
+					end
+				end
+
+		}
+		aspect class ModelingUnit
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : qvtoperational::OperationalTransformation init qvtoperational::OperationalTransformation.new
+						output := out
+
+					end
+				end
+
+		}
+		aspect class Package
+		{
+			method domain2range(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+				do
+					if output.equals(void) then
+						var out : emof::Package init emof::Package.new
+						output := out
+						nestedPackage.each{egakcaPdetsen | do
+								var elt : emof::Package
+								egakcaPdetsen.domain2range(context)
+								elt ?= egakcaPdetsen.output
+								if elt.isNotEqual(void) then
+out.nestedPackage.add(elt)								end
+							end}
+						out.uri := uri
+						out.name := name
+						ownedTypeDefinition.each{noitinifeDepyTdenwo | do
+								var elt : emof::Type
+								noitinifeDepyTdenwo.domain2range(context)
+								elt ?= noitinifeDepyTdenwo.output
+								if elt.isNotEqual(void) then
+out.ownedType.add(elt)								end
+							end}
+
+					end
+				end
+
+		}
+	}
+
+}
+
+package kunit
+{
+}
+
+package standard
+{
+}
+
+package utils
+{
+}
+
+package xmltype
+{
+}
+
+package persistence
+{
+}
+
+package exceptions
+{
+}
+
+package io
+{
+}
+
+package interpreter
+{
+}
+
+package ecore
+{
+}
+

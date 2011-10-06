@@ -1,0 +1,148 @@
+package kermeta;
+
+require kermeta
+require "qvt2kermeta.kmt"
+using kermeta::language::behavior
+using kermeta::language::structure
+using kermeta::standard
+using root_package
+package language{
+
+package structure{
+
+	aspect class Object{
+	
+		operation addDocumentationTag(text:String) : Void is do
+			var tag : kermeta::language::structure::Tag init kermeta::language::structure::Tag.new
+			tag.name:="documentation"
+			tag.~value:=text
+			self.ownedTags.add(tag)
+			self.tag.add(tag)
+		end
+	
+	}
+	
+	aspect class Type {
+		operation generateTypeRef() : kermeta::language::behavior::TypeReference is abstract
+	
+	}
+	
+	aspect class Class{
+	
+		method generateTypeRef() : kermeta::language::behavior::TypeReference is do
+			result:=kermeta::language::behavior::TypeReference.new
+			result.lower:=0
+			result.upper:=1
+			result.isUnique:=true
+			result.type:=self
+			result.containedType.add(self)
+			result.name:=self.name
+		
+		end
+		
+		operation cloneClass() : Class is do
+			
+			result:=Class.new
+			result.typeDefinition:=typeDefinition
+			typeParamBinding.each{binding|
+				var newBinding : TypeVariableBinding init TypeVariableBinding.new
+				result.typeParamBinding.add(newBinding)
+				if binding.type.isInstanceOf(Class) then
+					newBinding.type:=binding.type.asType(Class).cloneClass()
+					newBinding.containedType.add(newBinding.type)
+				else
+					newBinding.type:=binding.type
+				end
+				newBinding.variable:=binding.variable
+			}
+		
+		end
+		
+	}
+	
+	aspect class ClassDefinition {
+		operation generateTypeRef() : kermeta::language::behavior::TypeReference is do
+			result:=kermeta::language::behavior::TypeReference.new
+			result.lower:=0
+			result.upper:=1
+			result.isUnique:=true
+			var c : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+			c.typeDefinition:=self
+			result.type:=c
+			result.containedType.add(c)
+			result.name:=c.name
+
+		end
+		
+		//TODO this doesn't allow to use parameterized type as parameter
+		operation generateParameterizedTypeRef(parameter : ClassDefinition) : kermeta::language::behavior::TypeReference is do
+			result:= generateTypeRef()
+			
+			var varBinding : TypeVariableBinding init TypeVariableBinding.new
+			result.type.asType(ParameterizedType).typeParamBinding.add(varBinding)
+			varBinding.variable:=self.typeParameter.one
+			var paramType : Class init Class.new
+			paramType.typeDefinition:=parameter
+			
+			varBinding.type:=paramType
+			varBinding.containedType.add(paramType)
+		
+		end
+	}
+	
+	aspect class PrimitiveType {
+		method generateTypeRef() : kermeta::language::behavior::TypeReference is do
+			result:=kermeta::language::behavior::TypeReference.new
+			result.lower:=0
+			result.upper:=1
+			result.isUnique:=true
+			result.type:=self
+			result.name:=self.name
+		end
+	
+	
+	}
+}
+
+
+package behavior {
+	aspect class CallVariable {
+	
+		operation initName(n : String) : kermeta::language::behavior::CallVariable is do
+			name:=n
+			result:=self
+		end
+	}
+	
+	aspect class CallFeature {
+	
+		//generate a call to the singleton transformationtionContext
+		//root_package::TransformationContext.getDefault.asType(root_package::TransformationContext)
+		operation callToTransfoContextSingleton(context : Qvt2KermetaContext) : kermeta::language::behavior::CallFeature is do
+			result:= self
+			
+			result.name:="asType"
+			
+			var transfoContextCD : kermeta::language::structure::ClassDefinition
+			transfoContextCD ?= context
+					.kmtContext
+					.getFromQualifiedName("root_package::TransformationContext")
+			
+			var tl_tracetype : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			result.parameters.add(tl_tracetype)
+			tl_tracetype.typeref:=transfoContextCD.generateTypeRef()
+			
+			var cf_getDefault : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			result.target:=cf_getDefault
+			cf_getDefault.name:="getDefault"
+			
+			var tl_getDefault : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			cf_getDefault.target:=tl_getDefault
+			tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
+		end
+	
+	}
+
+}
+
+}

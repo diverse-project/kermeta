@@ -1,0 +1,199 @@
+package kermeta::standard;
+
+require kermeta
+
+using kermeta::persistence
+
+aspect class Sequence<G> inherits Bag<G>, OrderedCollection<G> {
+
+	/**
+	 * Returns a new Bag which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Bag, as many elements as the Collection contains
+	 */
+	method flatten() : Bag<Object> is do
+		stdio.writeln("new flatten "+G.name)
+		var res: Bag<Object> init Bag<Object>.new
+		if (G.isSubTypeOf(Collection<Object>)) then
+			var col : Collection<Object>
+			var o : Object 
+			self.each{e |
+				//o := e
+				//col ?= o
+				col ?= e
+				res.addAll(col)
+			}
+		end
+		result := res
+		stdio.writeln("new flatten size "+ result.size.toString)
+	end
+}
+class DeferredSequence<H>  inherits Sequence<H> {
+
+reference original : Sequence<Object>
+
+operation fromSeq(s : Sequence<Object>) : DeferredSequence<H> is do
+original :=s
+result:=self
+end
+
+method add(element : H) : Void is do
+	stdio.writeln("dseq : add")
+	original.add(element)
+end
+
+method addAll(elements : Collection<H>) : Void is do
+	stdio.writeln("dseq : addAll")
+	elements.each{x|original.add(x)}
+end
+
+method addAt(index : Integer, element : H) : Void is do
+	stdio.writeln("dseq : addAt")
+	original.addAt(index, element)
+end
+
+method any() : H is do
+	stdio.writeln("dseq : any")
+	result ?=original.any()
+
+end
+
+method append(element:H) : Sequence<H> is do
+	stdio.writeln("dseq : append")
+	result:=DeferredSequence<H>.new.fromSeq(original.append(element))
+end
+
+method asBag() : Bag<H> is do
+	stdio.writeln("dseq : asBag TODO")
+	result:=Bag<H>.new
+	result.qvtAddAll(original)
+end
+
+method asOrderedSet() : OrderedSet<H> is do
+	stdio.writeln("dseq : asOrderedSet")
+	result:=OrderedSet<H>.new
+	result.qvtAddAll(original)
+end
+
+method asSequence() : Sequence<H> is do 
+	stdio.writeln("dseq : asSequence TODO")
+	result:=Sequence<H>.new
+	result.qvtAddAll(original)
+	
+end
+
+method asSet() : Set<H> is do
+	stdio.writeln("dseq : asSet TODO")
+	result:=Set<H>.new
+	result.qvtAddAll(original)
+	
+	
+end
+
+method at(index : Integer) : H is do
+	stdio.writeln("dseq : at")
+	result?=original.at(index)
+end
+
+method clear() : Void is do
+	stdio.writeln("dseq : clear")
+	original.clear()
+end
+
+method clearAndAdd(element : H) : Void is do
+	stdio.writeln("dseq : clearAndAdd")
+	original.clearAndAdd(element)
+end
+
+method clearAndAddAll(elements : Collection<Object>) : Void is do
+	stdio.writeln("dseq : clearAndAddAll")
+	original.clearAndAddAll(elements)
+end
+
+method collect<T>(func : <H -> T>) : Sequence<T> is do
+	stdio.writeln("dseq : collect")
+	result := original.collect{x|func(x.asType(H))}
+	stdio.writeln("collect size "+result.size.toString())
+end
+
+method container() : Object is do
+	stdio.writeln("dseq : container")
+	result := original.container
+end
+
+method containingResource() : Resource is do
+	stdio.writeln("dseq : containingResource")
+	result :=original.containingResource
+end
+
+method contains(element : H) : Boolean is do
+	stdio.writeln("dseq : contains")
+	result :=original.contains(element)
+end	
+
+method containsAll(elements : Collection<H>) : Boolean is do
+	stdio.writeln("dseq : containsAll")
+	result := original.containsAll(elements)
+end
+
+method count(element : H) : Integer is do 
+	stdio.writeln("dseq : count")
+	result:=original.count(element)
+end
+
+method detect(detector : <H ->Boolean>) : H is do
+	stdio.writeln("dseq : detect")
+	result?=original.detect{x|detector(x.asType(H))	}
+end
+
+method each(func : <H -> Object >) : Void is do
+	stdio.writeln("dseq : each")
+	original.each{x|
+		func(x.asType(H))}
+
+end
+
+
+method elementAt(index : Integer) : H is do
+	stdio.writeln("dseq : elementAt")
+	result?=original.elementAt(index)
+end
+
+method flatten() : Bag<Object> is do
+	stdio.writeln("dseq : flatten")
+	var res: Bag<Object> init Bag<Object>.new
+		if (H.isInstanceOf(Collection<Object>)) then
+			var col : Collection<Object>
+			var o : Object 
+			self.each{e |
+				//o := e
+				//col ?= o
+				col ?= e
+				res.addAll(col)
+			}
+		end
+		result := res
+		stdio.writeln("flatten size "+ result.size.toString)
+end
+method size() : Integer is do
+	stdio.writeln("dseq : size")
+	result := original.size()
+end
+	
+method first() : H is do 
+result?=original.first
+
+
+end
+method select(selector : <H -> Boolean>) : Sequence<H>  is do
+		var elem : H
+		result := Sequence<H>.new
+		from var it : Iterator<Object> init original.iterator
+		until it.isOff
+		loop
+			elem ?= it.next
+			if selector(elem) then result.add(elem) end
+		end
+	end
+
+}

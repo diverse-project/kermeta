@@ -1,0 +1,68 @@
+package root_package;
+require kermeta
+require "platform:/resource/qvt-kermeta/models/api2.kmt"
+require "../qvtid/emof_id.kmt"
+using kermeta::persistence
+using kermeta::standard
+class QvtLib {
+
+
+reference libs : Resource [0..*]
+
+operation load(lib : Resource ) : Void is do
+	libs.add(lib)
+end
+
+
+	operation getFromQVTID(qvtid : String) : Object is do
+		
+		var resourcesToSearch : Sequence<Resource> init libs.asSequence
+		
+		from var lib : Resource 
+		until result != void or resourcesToSearch.isEmpty
+		loop
+			lib:=resourcesToSearch.first
+			resourcesToSearch.removeAt(0)
+			
+			var toSearch : Sequence<Object> init Sequence<Object>.new
+		
+			toSearch.add(lib.one)
+			
+			from var current : Object  
+			until toSearch.empty
+			loop
+				current:=toSearch.first
+				toSearch.removeAt(0)
+				
+				if current!=void then
+					if current.getQVTID!="" then
+						
+						if (current.getQVTID==qvtid) then
+							result:=current
+							toSearch.clear
+						else
+							if (qvtid.contains(current.getQVTID)) then
+								//stdio.writeln("contains!!")
+								toSearch.clear
+								var cd : kermeta::language::structure::ClassDefinition 
+								cd?= current.getMetaClass.typeDefinition
+								//stdio.writeln("all attributes "+ cd.allAttribute.size.toString)
+								cd.allAttribute.each{att|
+									if att.isComposite then
+										if att.upper==1 then
+											toSearch.add(current.get(att))
+										else
+											current.get(att).asType(Collection<Object>).each{y|toSearch.add(y)}
+										end
+									end
+									}
+							end
+						end
+					end	
+				end
+			end
+		end
+		stdio.writeln("getFromQVTID : "+qvtid+" "+result.toString)
+	end
+}
+

@@ -1,0 +1,256 @@
+package emof;
+
+require "qvt2kermeta.kmt"
+using root_package
+aspect class Type{
+
+	method range2domain(context : Qvt2KermetaContext) : Void is do 
+	
+	
+	end
+	
+	operation generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
+		stdio.writeln("Type generateType")
+		result:=void
+	end
+}
+
+aspect class Package
+{
+	/**
+		trigger the transformation of nested packages
+		and of the typedefinitions of the package
+	*/
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				var out : kermeta::language::structure::Package init kermeta::language::structure::Package.new
+				output := out
+				nestedPackage.each{egakcaPdetsen | do
+						var elt : kermeta::language::structure::Package
+						egakcaPdetsen.range2domain(context)
+						elt ?= egakcaPdetsen.output
+						if elt.isNotEqual(void) then
+							out.nestedPackage.add(elt)
+						end
+					end}
+				out.uri := uri
+				out.name := name
+				ownedType.each{epyTdenwo | 
+						var elt : kermeta::language::structure::TypeDefinition
+						epyTdenwo.range2domain(context)
+						elt ?= epyTdenwo.output
+						if elt.isNotEqual(void) then
+							//stdio.writeln("add a type definition in package : "+elt.name)
+							out.ownedTypeDefinition.add(elt)
+						end
+					}
+
+			end
+		end
+
+}
+
+aspect class Class {
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+			stdio.writeln("Class::range2domain")
+				var out : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
+				output := out
+				out.name := name
+				out.isAbstract := isAbstract
+				/*stdio.writeln("test for isAspect "+getQVTID)
+				if KmtLib.getDefault.asType(KmtLib).getFromQualifiedName(getQVTID)!=void then
+					out.isAspect:=true
+				else*/
+					out.isAspect:=false
+				//end
+				
+				ownedAttribute.each{etubirttAdenwo | do
+						var elt : kermeta::language::structure::Property
+						
+						if out.isAspect then
+							elt?=context.kmtContext.getFromQualifiedName(etubirttAdenwo.getQVTID)
+						end
+						if elt!=void then
+							etubirttAdenwo.output:= elt
+						else
+							etubirttAdenwo.range2domain(context)
+							elt ?= etubirttAdenwo.output
+							if elt.isNotEqual(void) then
+								out.ownedAttribute.add(elt)						
+							end
+						end
+					end}
+				superClass.each{ssalCrepus | do
+						var elt : kermeta::language::structure::Type
+						ssalCrepus.range2domain(context)
+						elt := ssalCrepus.generateType(context)
+						
+						if elt.isNotEqual(void) then
+							out.superType.add(elt)
+							out.containedType.add(elt)						
+						end
+					end}
+
+			stdio.writeln("Class::range2domain-end")
+			end
+		end
+
+method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
+	//stdio.writeln("Class::generateType")
+	if output == void then
+		range2domain(context)
+	end
+	result:= kermeta::language::structure::Class.new
+	result.asType(kermeta::language::structure::Class).typeDefinition?=output
+	//stdio.writeln("Class::generateType-end")
+end
+
+
+
+
+
+}
+
+aspect class Operation {
+
+method range2domain(context : Qvt2KermetaContext) : Void is do
+
+stdio.writeln("operation "+name)
+
+end
+}
+
+aspect class Property
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+		do
+			if output.equals(void) then
+				//stdio.writeln("Property::range2domain")
+				var existing : kermeta::language::structure::Property
+				
+				existing ?= context.kmtContext.getFromQualifiedName(getQVTID)
+				if existing != void then
+					output:=existing
+				else
+					var out : kermeta::language::structure::Property init kermeta::language::structure::Property.new
+					output := out
+					out.default := default
+					out.isComposite := isComposite
+					out.isReadOnly := isReadOnly
+					out.isID := isID
+					out.isDerived := isDerived
+					out.name := name
+					out.lower := lower
+					out.upper := upper
+					
+					if opposite.isNotEqual(void) then
+						opposite.range2domain(context)
+						out.opposite ?= opposite.output
+	
+					end
+					if type.isNotEqual(void) then
+						out.type := type.generateType(context)
+							if (out.type!=void).andThen{x| not out.type.isInstanceOf(kermeta::language::structure::PrimitiveType)} then
+								out.containedType.add(out.type)
+								stdio.writeln("emof::Property create type "+type.name)
+							else
+								stdio.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
+							end
+						
+					end
+					//stdio.writeln("Property::range2domain-end")
+				end
+			end	
+		end
+
+}
+
+aspect class PrimitiveType
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+		//stdio.writeln("PrimitiveType::range2domain")
+		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
+		if output==void then
+			var out : kermeta::language::structure::PrimitiveType init kermeta::language::structure::PrimitiveType.new
+			out.name:=name
+			output:=out
+			
+			if self.name=="EString" or self.name=="String" then
+				var stringCD : kermeta::language::structure::ClassDefinition 
+				
+				stringCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::String")
+				var stringClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				stringClass.typeDefinition := stringCD
+				
+				out.instanceType := stringClass
+				out.containedType.add(stringClass)
+				
+				
+			end
+			if self.name=="EInt" or self.name=="Integer" or self.name=="UnlimitedNatural" then
+				var integerCD : kermeta::language::structure::ClassDefinition 
+				
+				integerCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Integer")
+				var integerClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				integerClass.typeDefinition := integerCD
+				
+				out.instanceType := integerClass
+				out.containedType.add(integerClass)
+			end
+			if self.name=="EBoolean" or self.name=="Boolean" then
+				stdio.writeln("Primitive type boolean : "+name+" "+out.toString)
+				var pack : emof::Package 
+				pack?= self.container()
+				stdio.writeln(pack.name)
+				var boolCD : kermeta::language::structure::ClassDefinition 
+				
+				boolCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
+				var boolClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				boolClass.typeDefinition := boolCD
+				
+				out.instanceType := boolClass
+				out.containedType.add(boolClass)
+			end
+			if self.name=="EFloat" or self.name=="Real" then
+				var realCD : kermeta::language::structure::ClassDefinition 
+				
+				realCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Real")
+				var realClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				realClass.typeDefinition := realCD
+				
+				out.instanceType := realClass
+				out.containedType.add(realClass)
+
+			end
+			
+			if out.instanceType ==void then
+				var anyClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				anyClass.typeDefinition ?= context.kmtContext.getFromQualifiedName("kermeta::language::structure::Object")
+				out.instanceType := anyClass
+				out.containedType.add(anyClass)
+			end			
+				
+			
+//			if out==void then
+	//			stdio.writeln("classdefinition generated from a primitive type "+name)
+		//		out:=kermeta::language::structure::ClassDefinition.new
+			//	out.name:=self.name
+				//out.addDocumentationTag("generated from a primitive type")
+			//end
+			
+		end
+		//stdio.writeln("PrimitiveType::range2domain-end")
+		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
+		
+	end
+
+method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
+	if output == void then
+		range2domain(context)
+	end
+	result:=output.asType(kermeta::language::structure::Type)
+end
+}

@@ -1,0 +1,51 @@
+package emof;
+
+require "../qvt2kermeta.kmt"
+require "kermeta_id.kmt"
+require kermeta
+
+
+
+aspect class Class {
+
+method getQVTID(): kermeta::standard::String is do 
+	
+	
+	
+	
+	result:=~package.getQVTID() + "::"+name
+	
+
+end
+}
+
+aspect class Property {
+
+method getQVTID(): kermeta::standard::String is do 
+
+	result:=~class.getQVTID() + "::"+name
+end
+}
+
+aspect class Operation {
+
+method getQVTID() : kermeta::standard::String is do
+
+	result:=~class.getQVTID() + "::" + name
+end
+
+}
+
+aspect class Package {
+
+	method getQVTID() : kermeta::standard::String is do 
+		result:=""
+		if container!=void and container.isInstanceOf(emof::Package) then
+			result:=container.asType(emof::Package).getQVTID()+"::"
+		end
+		
+		result:=result+name
+	
+	
+	end
+} 

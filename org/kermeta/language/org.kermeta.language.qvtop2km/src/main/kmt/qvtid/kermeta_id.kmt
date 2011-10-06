@@ -1,0 +1,12 @@
+package kermeta::language::structure;
+
+require kermeta
+
+aspect class Object {
+
+operation getQVTID() : kermeta::standard::String is do 
+
+result :=""
+end
+
+} 
