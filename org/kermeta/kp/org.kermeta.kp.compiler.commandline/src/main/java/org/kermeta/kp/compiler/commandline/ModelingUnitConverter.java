@@ -62,13 +62,22 @@ public class ModelingUnitConverter {
 	 * @throws IOException
 	 */
 	public ModelingUnit convert(ModelingUnit mu) throws IOException{
-		URI uri = URI.createURI((mu.getNamespacePrefix() + "." + mu.getName() + ".km_in_memory")
-				.replaceAll("::", "."));
-		if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
-			uri = mu.eResource().getURI();
-		} 
-		ByteArrayOutputStream stream= this.saveMu(mu, uri);
-		return this.LoadMu(stream, uri);
+		ModelingUnit resultMU;
+		logger.initProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "Converting ModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
+		if(mustSaveToFile){
+			URI uri = URI.createURI((mu.getNamespacePrefix() + "." + mu.getName() + ".km_in_memory")
+					.replaceAll("::", "."));
+			if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
+				uri = mu.eResource().getURI();
+			} 
+			ByteArrayOutputStream stream= this.saveMu(mu, uri);
+			resultMU= this.LoadMu(stream, uri);
+		}
+		else{
+			resultMU =EcoreUtil.copy(mu);
+		}
+		logger.doneProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "ModelingUnit converted", KermetaCompiler.LOG_MESSAGE_GROUP);
+		return resultMU;
 	}
 	
 	
