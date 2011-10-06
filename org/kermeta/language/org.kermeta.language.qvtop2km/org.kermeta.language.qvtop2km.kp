@@ -4,5 +4,36 @@ group :"group"
 defaultMainClass : "mainpackage::MainClass"
 defaultMainOperation : "mainOperation"
 {
-source = "${project.baseUri}/src/main/kmt/Main.kmt"
-dependency "language.model" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"}
+	source="${project.baseUri}/src/main/kmt/adapter/adapter_1.kmt"
+	source="${project.baseUri}/src/main/kmt/adapter/adapter_5.kmt"
+	source="${project.baseUri}/src/main/kmt/adapter/kermeta_extension.kmt"
+	source="${project.baseUri}/src/main/kmt/qvtoperational_aspect.kmt"
+
+
+	source ="${project.baseUri}/src/main/kmt/qvt2kermeta.kmt"
+	source="${project.baseUri}/src/main/kmt/emof_aspect.kmt"
+	source="${project.baseUri}/src/main/kmt/essentialocl_aspect.kmt"
+	source="${project.baseUri}/src/main/kmt/imperativeocl_aspect.kmt"
+	source="${project.baseUri}/src/main/kmt/qvtid/emof_id.kmt"
+	source="${project.baseUri}/src/main/kmt/kermeta_creationHelper.kmt"
+	source="${project.baseUri}/src/main/kmt/frameworks_singletons/qvtoplib_singleton.kmt"
+	source="${project.baseUri}/src/main/kmt/frameworks_singletons/kmtframework_singleton.kmt"
+	source="${project.baseUri}/tuple_pool.kmt"
+
+	srcQuery= "/model/QVTOperational.ecore" from "qvt"
+	srcQuery= "/model/EMOF.ecore" from "qvt"
+	srcQuery= "/model/EssentialOCL.ecore" from "qvt"
+	srcQuery= "/model/ImperativeOCL.ecore" from "qvt"
+	srcQuery= "/model/PrimitiveTypes.ecore" from "qvt"
+	srcQuery= "/model/QVTBase.ecore" from "qvt"
+	srcQuery= "/model/QVTCore.ecore" from "qvt"
+	srcQuery= "/model/QVTRelation.ecore" from "qvt"
+	srcQuery= "/model/QVTTemplate.ecore" from "qvt"
+
+	srcQuery= "/build/ecore/kermeta.ecore" from "kmtv1"
+	
+dependency "language.model" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"
+dependency "qvt" URL="${project.baseUri}/resources/fr.tm.elibel.smartqvt.qvt_0.2.4.jar"
+dependency "kmtv1" URL="${project.baseUri}/resources/fr.irisa.triskell.kermeta.model_1.4.0.jar"
+
+}
