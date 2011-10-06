@@ -1,19 +1,8 @@
-@mainClass "root_package::Qvt2Kermeta"
-@mainOperation "main"
+
 
 package root_package;
 
-require kermeta
-require "adapter/adapter.kmt"
-require "qvtoperational_aspect.kmt"
-require "emof_aspect.kmt"
-require "essentialocl_aspect.kmt"
-require "imperativeocl_aspect.kmt"
-require "qvtid/emof_id.kmt"
-require "kermeta_creationHelper.kmt"
-require "frameworks_singletons/qvtoplib_singleton.kmt"
-require "frameworks_singletons/kmtframework_singleton.kmt"
-require "tuple_pool.kmt"
+
 using kermeta::persistence
 using kermeta::standard
 
@@ -195,6 +184,7 @@ map2FrameworkObjects("OclLib::OclAny::oclIsKindOf","kermeta::language::structure
 map2FrameworkObjects("::QvtLib::OclElement::isKindOf","kermeta::language::structure::Object::isInstanceOf" , context)
 map2FrameworkObjects("::QvtLib::OclElement::asType","kermeta::language::structure::Object::asType", context)
 
+map2FrameworkObjects("OclLib::Collection::isEmpty","kermeta::standard::Collection::isEmpty", context)
 map2FrameworkObjects("OclLib::Sequence::asOrderedSet","kermeta::standard::Collection::asOrderedSet", context)
 map2FrameworkObjects("OclLib::Sequence::first","kermeta::standard::OrderedCollection::first", context)
 map2FrameworkObjects("OclLib::Boolean::and","kermeta::standard::Boolean::and", context)

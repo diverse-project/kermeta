@@ -1,6 +1,5 @@
 package qvtoperational;
-require kermeta
-require "qvt2kermeta.kmt"
+
 using root_package
 
 
@@ -592,8 +591,8 @@ aspect class MappingBody {
 						typeR.name:=typeR.type.asType(kermeta::language::structure::NamedElement).name
 					end
 					
-					typeR.upper:=~operation.upper
-					typeR.lower:=~operation.lower
+					typeR.upper:=1//~operation.upper
+					typeR.lower:=0//~operation.lower 
 				else
 					typeR:=resultType(context)
 				end

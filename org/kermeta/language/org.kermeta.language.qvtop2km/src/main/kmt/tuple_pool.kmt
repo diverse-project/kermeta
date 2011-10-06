@@ -1,6 +1,5 @@
 package root_package;
 
-require "qvt2kermeta.kmt"
 
 using kermeta::standard
 using kermeta::language::structure

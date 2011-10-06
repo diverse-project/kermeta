@@ -1,7 +1,6 @@
 package imperativeocl;
 
-require "qvt2kermeta.kmt"
-require "essentialocl_aspect.kmt"
+
 using root_package
 
 /**
@@ -21,12 +20,15 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		then
 			iterateCall.name:="collect"
 		else
-			if (name == "xselect") then
+			if name == "xselect" then
 				iterateCall.name:="select"
 			else
-			
-				iterateCall.name:=name
-				stdio.writeln("name : "+name)
+				if name == "selectOne" then
+					iterateCall.name:="detect"
+				else
+					iterateCall.name:=name
+					stdio.writeln("name : "+name)
+				end
 			end
 		end
 		
@@ -59,7 +61,8 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		source.range2domain(context)
 		iterateCall.target?=source.output
 		
-		if (condition!=void)
+		if 	name != "selectOne" and
+			(condition!=void)
 			.andThen{x|condition.isInstanceOf(essentialocl::TypeExp)} then
 			
 			//a sequence<X> cannot be casted as a sequence<Y> even if X>Y

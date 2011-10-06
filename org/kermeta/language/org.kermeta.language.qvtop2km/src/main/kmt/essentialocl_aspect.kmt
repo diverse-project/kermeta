@@ -1,5 +1,4 @@
 package essentialocl;
-require "qvt2kermeta.kmt"
 using root_package
 using kermeta::standard
 
@@ -23,26 +22,6 @@ aspect class PropertyCallExp{
 }
 
 
-aspect class TypeExp{
-
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
-		if output==void then
-			var out : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
-			output:=out
-			referredType.range2domain(context)
-						
-			if referredType.output.isInstanceOf(kermeta::language::structure::ClassDefinition) then
-				out.typeref:=referredType.output.asType(kermeta::language::structure::ClassDefinition).generateTypeRef
-			else
-				if referredType.output.isInstanceOf(kermeta::language::structure::PrimitiveType) then
-					out.typeref:=referredType.output.asType(kermeta::language::structure::PrimitiveType).generateTypeRef
-				end
-			end
-		
-		end
-		
-	end
-}
 
 aspect class IteratorExp {
 
@@ -53,16 +32,18 @@ aspect class IteratorExp {
 		var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 		
 		output:=out
-		if (name =="collect") 
-		then
+		if name =="collect" then
 			out.name:="collect"
 		else
-			if (name == "select") then
+			if name == "select" then
 				out.name:="select"
 			else
-			
-				out.name:=name
-				stdio.writeln("name : "+name)
+				if name == "selectOne" then
+					out.name:="detect"
+				else
+					out.name:=name
+					stdio.writeln("name : "+name)
+				end
 			end
 		end
 		
@@ -167,6 +148,19 @@ aspect class OperationCallExp {
 					out.target?=source.output
 				end
 
+				if referredOperation.getQVTID() =="::QvtLib::Model::objectsOfType" then
+					out.name:="objectsOfType"
+					source.range2domain(context)
+					out.target?=source.output
+					argument.each{x|
+						x.range2domain(context) 
+						if x.output!=void then 
+							out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
+						else 
+							stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+						end
+						}
+				end
 				
 	
 				stdio.write("THIS IS A STANDARD METHOD")
@@ -615,6 +609,7 @@ aspect class TypeExp {
 	end
 
 }
+
 
 
 /** Real literals, they don't exists in kermeta*/

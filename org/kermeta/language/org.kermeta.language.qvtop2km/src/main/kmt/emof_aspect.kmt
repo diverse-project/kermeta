@@ -1,6 +1,6 @@
 package emof;
 
-require "qvt2kermeta.kmt"
+
 using root_package
 aspect class Type{
 

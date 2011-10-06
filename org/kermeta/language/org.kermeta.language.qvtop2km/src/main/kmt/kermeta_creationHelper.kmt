@@ -1,7 +1,6 @@
 package kermeta;
 
 require kermeta
-require "qvt2kermeta.kmt"
 using kermeta::language::behavior
 using kermeta::language::structure
 using kermeta::standard
