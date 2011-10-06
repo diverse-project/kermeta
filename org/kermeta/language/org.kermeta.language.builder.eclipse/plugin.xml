@@ -5,5 +5,19 @@
 	        point="org.eclipse.ui.startup">
 	     <startup class="org.kermeta.language.builder.eclipse.BuilderEarlyStartup"/>
 	</extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.kermeta.language.builder.eclipse.preferences.KermetaPreferencePage"
+            id="org.kermeta.language.builder.eclipse.preferences.KermetaPreferencePage"
+            name="Kermeta Preferences">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.kermeta.language.builder.eclipse.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>

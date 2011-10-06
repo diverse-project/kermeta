@@ -41,6 +41,7 @@ import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
+import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ModelingUnit;
@@ -80,7 +81,8 @@ public class KPBuilder {
 			outputFolder = projectUri+File.separatorChar+"target";
 			outputResourceFolder = outputFolder+"/resources";
 			//compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),false,outputFolder, true, true, false);
-			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),true,outputFolder, true, true, false);
+			boolean saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
+			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles,outputFolder, true, true, false);
 			refreshFileIndex();
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
@@ -122,6 +124,7 @@ public class KPBuilder {
 			KermetaBuilder.flushProblems(impactedFiles);
 			*/
 			// for reflexivity set the bundle context
+			updateCompilerPreferences();		
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, additionalCalssPath,true);
 			if (result != null) {
 				kp_last_modelingunit = result;
@@ -138,6 +141,11 @@ public class KPBuilder {
 			}
 		}
 		Activator.getDefault().getMessaggingSystem().doneProgress(KermetaBuilder.LOG_MESSAGE_GROUP, "End of km generation for "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP);
+	}
+
+
+	private void updateCompilerPreferences() {
+		compiler.saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
 	}
 
 
@@ -247,6 +255,8 @@ public class KPBuilder {
 				ArrayList<URL> impactedFiles = new ArrayList<URL>();
 				impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
 				KermetaBuilder.flushProblems(impactedFiles);
+
+				updateCompilerPreferences();		
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 				
 				// generate urimap file
