@@ -212,7 +212,7 @@ public class KermetaCompiler {
 			flushProblems(FileHelpers.StringToURL(kpFileURL));
 			String projectName = "project";
 	
-			logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, 6);
+			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, 6);
 			KpLoaderImpl ldr = new KpLoaderImpl();
 	
 			// Load KP file
@@ -245,7 +245,7 @@ public class KermetaCompiler {
 				return null;
 			}
 			
-			logger.progress("KermetaCompiler.kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(modelingUnits);
 	
 			// Did errors occur during the merge ?
@@ -261,10 +261,10 @@ public class KermetaCompiler {
 	
 			// Check mergedUnit for scope MERGED
 			if (checkingEnabled) {
-				logger.progress("KermetaCompiler.kp2bytecode", "Checking merged file...", LOG_MESSAGE_GROUP, 1);
+				logger.progress(getMainProgressGroup()+".kp2bytecode", "Checking merged file...", LOG_MESSAGE_GROUP, 1);
 				DiagnosticModel results = checkModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, CheckerScope.MERGED);
 				if (results != null) {
-					logger.progress("KermetaCompiler.kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
+					logger.progress(getMainProgressGroup()+".kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
 					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 		
 					if (stopOnError && results.getDiagnostics().size() > 0) {
@@ -277,7 +277,7 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
-			logger.progress("KermetaCompiler.kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
 			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/);
 	
 			if (resolvedUnit == null) {
@@ -290,10 +290,10 @@ public class KermetaCompiler {
 			// Check resolvedUnit for scope RESOLVED
 			if (checkingEnabled) {
 
-				logger.progress("KermetaCompiler.kp2bytecode", "Checking resolved file...", LOG_MESSAGE_GROUP, 1);
+				logger.progress(getMainProgressGroup()+".kp2bytecode", "Checking resolved file...", LOG_MESSAGE_GROUP, 1);
 				DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 				if (results != null) {
-					logger.progress("KermetaCompiler.kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
+					logger.progress(getMainProgressGroup()+".kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
 					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 					
 					if (stopOnError && results.getDiagnostics().size() > 0) {
@@ -321,11 +321,11 @@ public class KermetaCompiler {
 			if (!generateKmOnly) {
 				// deal with km to scala
 				// compiler require a file location not an URL
-				logger.progress("KermetaCompiler.kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
+				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
 				logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
 				String fileLocation = mergedFile.toURI().toURL().getFile();
 				km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
-				logger.progress("KermetaCompiler.kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
+				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
 				List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
 				fullBinaryDependencyClassPath.addAll(additionalClassPath);
 				// deal with scala to bytecode
@@ -338,7 +338,7 @@ public class KermetaCompiler {
 			}
 			return resolvedUnit;
 		} finally {
-			logger.doneProgress(LOG_MESSAGE_GROUP, "End of compilation for " +kpFileURL , LOG_MESSAGE_GROUP);
+			logger.doneProgress(getMainProgressGroup()+".kp2bytecode", "End of compilation for " +kpFileURL , LOG_MESSAGE_GROUP);
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			lock.unlock();
@@ -1111,5 +1111,8 @@ public class KermetaCompiler {
 		}
 	}
 	
+	public String getMainProgressGroup(){
+		return "KermetaCompiler["+this.hashCode()+"]";
+	}
 	
 }
