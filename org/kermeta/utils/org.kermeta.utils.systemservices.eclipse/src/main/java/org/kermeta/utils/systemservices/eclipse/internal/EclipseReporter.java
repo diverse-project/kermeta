@@ -118,7 +118,7 @@ public class EclipseReporter {
 	
 	public void flushProblem(final String problemGroup,final URL uri) {
 		try {
-			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
+			IResource file = (IResource) ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(uri));
 			for (IMarker aMarker : file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)) {
 				if (aMarker.getAttribute(KERMETA_MARKER_ATTRIBUTE).equals(problemGroup)) {
 					//ms.log(Kind.DevDEBUG, "#removing marker on "+ uri+" - problemGroup="+problemGroup, Activator.PLUGIN_ID , new Exception());
