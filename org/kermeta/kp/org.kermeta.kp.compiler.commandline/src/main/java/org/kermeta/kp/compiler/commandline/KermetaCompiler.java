@@ -383,12 +383,14 @@ public class KermetaCompiler {
 		List<Source> srcs = kp.getSources();
 		ArrayList<URL> kpSources = new ArrayList<URL>();
 		for (Source src : srcs) {
+			String currentUrl=null;
 			try{
 				if (src instanceof SourceQuery) {
 					// deal with srcQuery
 					SourceQuery srcQuery = (SourceQuery) src;
 					String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
 					String indirectURL = "jar:" + fromDependencyUrl + "!" + varExpander.expandVariables(srcQuery.getQuery());
+					currentUrl = indirectURL;
 					logger.debug("SourceQuery : " + srcQuery + " from " + srcQuery.getFrom().getUrl() + " (expanded to : " + indirectURL + ")", LOG_MESSAGE_GROUP);
 					kpSources.add(FileHelpers.StringToURL(indirectURL));
 				} else {
@@ -407,11 +409,12 @@ public class KermetaCompiler {
 					} else {
 						logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
 					}
+					currentUrl = sourceURL;
 					kpSources.add(FileHelpers.StringToURL(sourceURL));
 				}
 			}
 			catch(IOException e){
-				logger.logProblem(Kind.UserERROR, "Cannot load source "+src.getUrl()+ " "+e.getMessage(), LOG_MESSAGE_GROUP,e, new FileReference(FileHelpers.StringToURL(kpFileUrl)));
+				logger.logProblem(Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), LOG_MESSAGE_GROUP,e, new FileReference(FileHelpers.StringToURL(kpFileUrl)));
 			}
 		}
 
