@@ -65,7 +65,23 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void doneProgress(String progressGroup, String msg, String msgGroup) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		String elapsedTime = "";
+		debug("["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
+		
+	}
+
+	private String getIntermediateElapsedTime(String progressGroup) {
+		String elapsedTime="";
+		if(progressGroup!= null){
+			Long startTime = progressStartTimeTable.get(progressGroup);
+			if(startTime != null){
+				long endTime= System.currentTimeMillis() - startTime;
+				elapsedTime = " (T0 + "+endTime+"ms)";
+			}
+		}
+		return elapsedTime;
+	}
+	private String getElapsedTime(String progressGroup) {
+		String elapsedTime="";
 		if(progressGroup!= null){
 			Long startTime = progressStartTimeTable.get(progressGroup);
 			if(startTime != null){
@@ -74,8 +90,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 				progressStartTimeTable.remove(progressGroup); // free some memory
 			}
 		}
-		debug("["+progressGroup+"]"+ msg+elapsedTime, msgGroup);
-		
+		return elapsedTime;
 	}
 
 	@Override
@@ -191,7 +206,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void progress(String progressGroup, String msg, String msgGroup, int workedUnit) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		debug("["+progressGroup+"]"+ msg, msgGroup);
+		debug("["+progressGroup+"]"+ msg+getIntermediateElapsedTime(progressGroup), msgGroup);
 	}
 
 	@Override
