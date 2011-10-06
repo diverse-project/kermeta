@@ -67,6 +67,7 @@ import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.helpers.StringHelper;
 import org.kermeta.utils.helpers.emf.EMFUriHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
@@ -208,7 +209,7 @@ public class KermetaCompiler {
 	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
 		try {
 			lock.lock();
-			logger.flushProblem(LOG_MESSAGE_GROUP, FileHelpers.StringToURL(kpFileURL));
+			flushProblems(FileHelpers.StringToURL(kpFileURL));
 			String projectName = "project";
 	
 			logger.initProgress("KermetaCompiler.kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, 6);
@@ -230,11 +231,12 @@ public class KermetaCompiler {
 				projectName = kp.getName();
 			}
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
-			ArrayList<URL> kpSources = getSources(kp, varExpander);
+			ArrayList<URL> kpSources = getSources(kp,kpFileURL, varExpander);
 			if (kpSources.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				return null;
 			}
+			
 			flushProblems(kpSources);
 			List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
 	
@@ -369,43 +371,47 @@ public class KermetaCompiler {
 		KpLoaderImpl ldr = new KpLoaderImpl();
 		KermetaProject kp = ldr.loadKp(kpString);
 		if (kp != null) {
-			return getSources(kp, new KpVariableExpander(kpString));
+			return getSources(kp, kpString, new KpVariableExpander(kpString));
 		} else {
 			return new ArrayList<URL>();
 		}
 	}
 
-	public ArrayList<URL> getSources(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+	public ArrayList<URL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl();
 		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
 		ArrayList<URL> kpSources = new ArrayList<URL>();
 		for (Source src : srcs) {
-
-			if (src instanceof SourceQuery) {
-				// deal with srcQuery
-				SourceQuery srcQuery = (SourceQuery) src;
-				String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
-				String indirectURL = "jar:" + fromDependencyUrl + "!" + varExpander.expandVariables(srcQuery.getQuery());
-				logger.debug("SourceQuery : " + srcQuery + " from " + srcQuery.getFrom().getUrl() + " (expanded to : " + indirectURL + ")", LOG_MESSAGE_GROUP);
-				kpSources.add(FileHelpers.StringToURL(indirectURL));
-			} else {
-				String sourceURLWithVariable = src.getUrl();
-				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default
-																									// set
-																									// to
-																									// emptyString
-																									// rather
-																									// than
-																									// null
-				String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
-				if (sourceURLWithVariable.contains("${")) {
-					// deal with variable expansion
-					logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURL + ")", LOG_MESSAGE_GROUP);
+			try{
+				if (src instanceof SourceQuery) {
+					// deal with srcQuery
+					SourceQuery srcQuery = (SourceQuery) src;
+					String fromDependencyUrl = varExpander.expandVariables(srcQuery.getFrom().getUrl());
+					String indirectURL = "jar:" + fromDependencyUrl + "!" + varExpander.expandVariables(srcQuery.getQuery());
+					logger.debug("SourceQuery : " + srcQuery + " from " + srcQuery.getFrom().getUrl() + " (expanded to : " + indirectURL + ")", LOG_MESSAGE_GROUP);
+					kpSources.add(FileHelpers.StringToURL(indirectURL));
 				} else {
-					logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
+					String sourceURLWithVariable = src.getUrl();
+					sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default
+																										// set
+																										// to
+																										// emptyString
+																										// rather
+																										// than
+																										// null
+					String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
+					if (sourceURLWithVariable.contains("${")) {
+						// deal with variable expansion
+						logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURL + ")", LOG_MESSAGE_GROUP);
+					} else {
+						logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
+					}
+					kpSources.add(FileHelpers.StringToURL(sourceURL));
 				}
-				kpSources.add(FileHelpers.StringToURL(sourceURL));
+			}
+			catch(IOException e){
+				logger.logProblem(Kind.UserERROR, "Cannot load source "+src.getUrl()+ " "+e.getMessage(), LOG_MESSAGE_GROUP,e, new FileReference(FileHelpers.StringToURL(kpFileUrl)));
 			}
 		}
 
@@ -590,13 +596,13 @@ public class KermetaCompiler {
 	}
 	
 	
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
-		ArrayList<URL> kpSources = getSources(kp, varExpander);
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
+		ArrayList<URL> kpSources = getSources(kp,kpFileURL, varExpander);
 		return getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
 	}
 
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
-		return getSourceModelingUnits(kp, varExpander, new HashMap<URL, ModelingUnit>());
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander) throws IOException {
+		return getSourceModelingUnits(kp, kpFileURL, varExpander, new HashMap<URL, ModelingUnit>());
 	}
 
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
@@ -968,16 +974,20 @@ public class KermetaCompiler {
 	protected void flushProblems(ArrayList<URL> kpSources) {
 
 		for (URL oneURL : kpSources) {
-			// flush compiler general problems
-			logger.flushProblem(LOG_MESSAGE_GROUP, oneURL);
-			// flush parser problems
-			logger.flushProblem(KMTparser.LOG_MESSAGE_GROUP, oneURL);
-			// flush merger problems
-			// flush resolver problems
-			logger.flushProblem(KmResolver.LOG_MESSAGE_GROUP, oneURL);
-			// flush km2scala problems
-			// flush scala2bytecode problems
+			flushProblems(oneURL);
 		}
+	}
+	protected void flushProblems(URL kpSource) {
+		//logger.log(Kind.DevDEBUG, "flushProblems on "+kpSource, LOG_MESSAGE_GROUP, new Exception());
+		// flush compiler general problems
+		logger.flushProblem(LOG_MESSAGE_GROUP, kpSource);
+		// flush parser problems
+		logger.flushProblem(KMTparser.LOG_MESSAGE_GROUP, kpSource);
+		// flush merger problems
+		// flush resolver problems
+		logger.flushProblem(KmResolver.LOG_MESSAGE_GROUP, kpSource);
+		// flush km2scala problems
+		// flush scala2bytecode problems
 	}
 
 	protected Tag searchForNearestTaggedContainingKME(KermetaModelElement kme) {
