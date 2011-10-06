@@ -11,6 +11,7 @@ package org.kermeta.language.builder.eclipse;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -228,5 +229,11 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 		}
 		
 		return "";
+	}
+	
+	public static void flushProblems(ArrayList<URL> kpSources) {
+		for (URL oneURL : kpSources) {
+			Activator.getDefault().getMessaggingSystem().flushProblem(KermetaBuilder.LOG_MESSAGE_GROUP, oneURL);
+		}
 	}
 }

@@ -41,6 +41,8 @@ import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
+import org.kermeta.language.loader.kmt.scala.KMTparser;
+import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
@@ -114,6 +116,11 @@ public class KPBuilder {
 		try {		
 			ArrayList<String> additionalCalssPath = new ArrayList<String>();		
 			Activator.getDefault().getMessaggingSystem().initProgress(KermetaBuilder.LOG_MESSAGE_GROUP, "Starting km generation of "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP, 0);
+
+			/*ArrayList<URL> impactedFiles = new ArrayList<URL>();
+			impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
+			KermetaBuilder.flushProblems(impactedFiles);
+			*/
 			// for reflexivity set the bundle context
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, additionalCalssPath,true);
 			if (result != null) {
@@ -237,7 +244,9 @@ public class KPBuilder {
 			ModelingUnit result = null;
 			
 			if (isBuildNeeded) {
-	
+				ArrayList<URL> impactedFiles = new ArrayList<URL>();
+				impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
+				KermetaBuilder.flushProblems(impactedFiles);
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 				
 				// generate urimap file
@@ -280,10 +289,14 @@ public class KPBuilder {
 						e,
 						new FileReference(FileHelpers.StringToURL(kpFileURL)));
 			} catch (Exception f) {
-				e.printStackTrace();
+				Activator.getDefault().getMessaggingSystem().error( "failed to mark Failed build on : "+kpFileURL+ " due to"+f.getMessage(), 
+						KermetaBuilder.LOG_MESSAGE_GROUP, 
+						e);
 			}
 		}
 	}
+	
+	
 	
 	private void generateURIMapFile(String outputFolder) {
 		String localProgressGroup = getProgressGroup()+".generateURIMapFile";

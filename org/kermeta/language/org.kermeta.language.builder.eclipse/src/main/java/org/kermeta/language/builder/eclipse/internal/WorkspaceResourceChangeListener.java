@@ -156,7 +156,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 											builder.refreshFileIndex();
 											builder.compile();
 										} catch (IOException e) {
-											Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for " + resource.getFullPath(), this.getClass().getName());
+											Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for " + resource.getFullPath(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
 										}
 									} else {
 										createBuilder(resource);
