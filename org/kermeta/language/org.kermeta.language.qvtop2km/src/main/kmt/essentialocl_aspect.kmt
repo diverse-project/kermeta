@@ -7,7 +7,7 @@ using kermeta::standard
 aspect class PropertyCallExp{
 
 	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
-		stdio.writeln("PropertyCallExp::range2domain")
+		Stdio.writeln("PropertyCallExp::range2domain")
 		var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 		referredProperty.range2domain(context)
 		out.staticProperty?=referredProperty.output
@@ -42,7 +42,7 @@ aspect class IteratorExp {
 					out.name:="detect"
 				else
 					out.name:=name
-					stdio.writeln("name : "+name)
+					Stdio.writeln("name : "+name)
 				end
 			end
 		end
@@ -72,7 +72,7 @@ aspect class OperationCallExp {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
 		if output==void then
-			stdio.writeln("OperationCallExp::range2domain")
+			Stdio.writeln("OperationCallExp::range2domain")
 			//either the operation is coming from the initial framework
 			var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 			output:=out
@@ -157,17 +157,17 @@ aspect class OperationCallExp {
 						if x.output!=void then 
 							out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
 						else 
-							stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+							Stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
 						end
 						}
 				end
 				
 	
-				stdio.write("THIS IS A STANDARD METHOD")
-				stdio.writeln(" referredOperation name : "+ referredOperation.getQVTID)
+				Stdio.write("THIS IS A STANDARD METHOD")
+				Stdio.writeln(" referredOperation name : "+ referredOperation.getQVTID)
 			else
 				//or not
-				stdio.writeln("OperationCallExp")
+				Stdio.writeln("OperationCallExp")
 				
 				//if there is a source model
 				if source!=void then
@@ -185,14 +185,14 @@ aspect class OperationCallExp {
 					else
 						out.name:=out.staticOperation.name
 					end
-					stdio.writeln("referredOperation name : "+ referredOperation.name)
+					Stdio.writeln("referredOperation name : "+ referredOperation.name)
 				end
 				argument.each{x|
 						x.range2domain(context) 
 						if x.output!=void then 
 							out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
 						else 
-							stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+							Stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
 						end
 						}
 				
@@ -206,7 +206,7 @@ aspect class OperationCallExp {
 aspect abstract class OclExpression {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
-		stdio.writeln("oclexpression metaclass "+self.getMetaClass.name)
+		Stdio.writeln("oclexpression metaclass "+self.getMetaClass.name)
 		output:=void
 	end
 	

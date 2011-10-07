@@ -1,7 +1,7 @@
 package emof;
-
-
 using root_package
+using kermeta::standard
+
 aspect class Type{
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
@@ -10,7 +10,7 @@ aspect class Type{
 	end
 	
 	operation generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
-		stdio.writeln("Type generateType")
+		Stdio.writeln("Type generateType")
 		result:=void
 	end
 }
@@ -94,7 +94,7 @@ aspect class Class {
 						end
 					end}
 
-			stdio.writeln("Class::range2domain-end")
+			Stdio.writeln("Class::range2domain-end")
 			end
 		end
 
