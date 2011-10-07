@@ -32,7 +32,6 @@ import org.kermeta.utils.systemservices.eclipse.internal.console.message.InfoMes
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.WarningMessage;
 
 
-
 public class EclipseMessagingSystem extends MessagingSystem {
 
 	protected String baseMessageGroup = "";
@@ -46,7 +45,16 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	
 	protected Hashtable<String,Long> progressStartTimeTable = new Hashtable<String,Long>();
 	
+	protected Integer consoleLogLevel = ConsoleLogLevel.DEV_DEBUG;
 	
+	public Integer getConsoleLogLevel() {
+		return consoleLogLevel;
+	}
+
+	public void setConsoleLogLevel(Integer consoleLogLevel) {
+		this.consoleLogLevel = consoleLogLevel;
+	}
+
 	public EclipseMessagingSystem(String baseMessageGroup, String consoleTitle) {
 		super();
 		this.baseMessageGroup = baseMessageGroup;
@@ -65,7 +73,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void doneProgress(String progressGroup, String msg, String msgGroup) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		debug("["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
+		this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
 		
 	}
 
@@ -97,7 +105,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void initProgress(String progressGroup, String msg, String msgGroup, int unitToWork) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		debug("["+progressGroup+"]"+ msg, msgGroup);
+		this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg, msgGroup);
 		if(progressGroup!= null){
 			progressStartTimeTable.put(progressGroup, Long.valueOf(System.currentTimeMillis()));
 		}
@@ -122,7 +130,9 @@ public class EclipseMessagingSystem extends MessagingSystem {
 			break;
 		}
 		
-		consoleIO.print(getConsoleMessageFor(msgKind,message));
+		if(ConsoleLogLevel.isLevelEnoughToLog(ConsoleLogLevel.kind2Level(msgKind), getConsoleLogLevel())){
+			consoleIO.print(getConsoleMessageFor(msgKind,message));
+		}
 		// currently redirect to stdio
 		//StdioSimpleMessagingSystem stdioRedirect = new StdioSimpleMessagingSystem();
 		//stdioRedirect.log(msgKind, message, messageGroup);
@@ -149,13 +159,15 @@ public class EclipseMessagingSystem extends MessagingSystem {
 			break;
 		}
 		
-		String stackTrace = "";
-		if(throwable != null){
-			StringWriter sw = new StringWriter();
-			throwable.printStackTrace(new PrintWriter(sw));
-			stackTrace = "\n"+sw.toString();
+		if(ConsoleLogLevel.isLevelEnoughToLog(ConsoleLogLevel.kind2Level(msgKind), getConsoleLogLevel())){
+			String stackTrace = "";
+			if(throwable != null){
+				StringWriter sw = new StringWriter();
+				throwable.printStackTrace(new PrintWriter(sw));
+				stackTrace = "\n"+sw.toString();
+			}
+			consoleIO.print(getConsoleMessageFor(msgKind,message+stackTrace));
 		}
-		consoleIO.print(getConsoleMessageFor(msgKind,message+stackTrace));
 	}
 
 	@Override
@@ -206,7 +218,7 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	public void progress(String progressGroup, String msg, String msgGroup, int workedUnit) {
 		// TODO Auto-generated method stub
 		// for the moment forward all messages to usual log
-		debug("["+progressGroup+"]"+ msg+getIntermediateElapsedTime(progressGroup), msgGroup);
+		this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getIntermediateElapsedTime(progressGroup), msgGroup);
 	}
 
 	@Override
