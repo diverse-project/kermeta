@@ -19,10 +19,13 @@ import org.eclipse.core.runtime.ContributorFactoryOSGi;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
+import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 import org.osgi.framework.BundleContext;
 
@@ -64,6 +67,9 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 		messaggingSystem 		= new EclipseMessagingSystem(PLUGIN_ID+".builder", "Kermeta builder console");
 		messaggingSystem4Runner = new EclipseMessagingSystem(PLUGIN_ID+".runner", "Kermeta runner  console");
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		((EclipseMessagingSystem) messaggingSystem).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE)));
+		((EclipseMessagingSystem) messaggingSystem4Runner).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE)));
 		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
 		this.setMyContext(context);

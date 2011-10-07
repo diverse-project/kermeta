@@ -4,6 +4,8 @@ import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.kermeta.language.builder.eclipse.internal.Activator;
+import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
+import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 
 /**
  * This class represents a preference page that
@@ -45,14 +47,36 @@ public class KermetaPreferencePage
 				"&Save intermediate build files",
 				getFieldEditorParent()));
 
-		/*addField(new RadioGroupFieldEditor(
-				PreferenceConstants.P_CHOICE,
-			"An example of a multiple-choice preference",
-			1,
-			new String[][] { { "&Choice 1", "choice1" }, {
-				"C&hoice 2", "choice2" }
-		}, getFieldEditorParent()));
-		addField(
+		
+		addField(new RadioGroupFieldEditor(
+				PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE,
+			"Builder console default log level",
+			2,
+			new String[][] { { "&Developper Debug", ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_DEBUG)}, 
+						 { "Developper Info", ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_INFO) },
+						 { "Developper Warning", ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_WARNING)},
+						 { "Developper Error",   ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_ERROR)}, 
+						 { "&User Info", ConsoleLogLevel.level2String(ConsoleLogLevel.USER_INFO) },
+						 { "User &Warning", ConsoleLogLevel.level2String(ConsoleLogLevel.USER_WARNING)},
+						 { "User &Error",   ConsoleLogLevel.level2String(ConsoleLogLevel.USER_ERROR)}}, 
+			getFieldEditorParent(), 
+			true));
+		addField(new RadioGroupFieldEditor(
+				PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE,
+			"Runner console default log level",
+			2,
+			new String[][] { { "&Developper Debug", ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_DEBUG)}, 
+						 { "Developper Info", ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_INFO) },
+						 { "Developper Warning", ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_WARNING)},
+						 { "Developper Error",   ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_ERROR)}, 
+						 { "&User Info", ConsoleLogLevel.level2String(ConsoleLogLevel.USER_INFO) },
+						 { "User &Warning", ConsoleLogLevel.level2String(ConsoleLogLevel.USER_WARNING)},
+						 { "User &Error",   ConsoleLogLevel.level2String(ConsoleLogLevel.USER_ERROR)}}, 
+			getFieldEditorParent(), 
+			true));
+		
+		
+		/*addField(
 			new StringFieldEditor(PreferenceConstants.P_STRING, "A &text preference:", getFieldEditorParent()));
 			*/
 	}
@@ -62,5 +86,22 @@ public class KermetaPreferencePage
 	 */
 	public void init(IWorkbench workbench) {
 	}
+
+	@Override
+	public boolean performOk() {
+		boolean result = super.performOk();
+		
+		// apply the changes on current Messagingsystem
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		EclipseMessagingSystem ms = ((EclipseMessagingSystem)Activator.getDefault().getMessaggingSystem());
+		ms.setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE)));
+		ms = ((EclipseMessagingSystem)Activator.getDefault().getMessaggingSystem4Runner(Activator.PLUGIN_ID+".runner"));
+		ms.setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE)));
+		return result;
+	}
+	
+	
+	
+	
 	
 }

@@ -9,8 +9,9 @@ public class PreferenceConstants {
 
 	public static final String P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN = "saveBuildIntermediateFilesPreference";
 
-	/*public static final String P_CHOICE = "choicePreference";
+	public static final String P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE = "builderConsoleLogLevelPreference";
+	public static final String P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE = "runnerConsoleLogLevelPreference";
 
-	public static final String P_STRING = "stringPreference";*/
+	//public static final String P_STRING = "stringPreference";
 	
 }
