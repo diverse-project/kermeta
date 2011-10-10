@@ -103,28 +103,17 @@ public class EclipseConsoleIO extends ConsoleIO {
 			console.activate();
 			notAlreadyUsed = false;
 		}
-		// support for reasonnable sized string
-		Runnable r = new Runnable() {
-			public void run() {
-				changeColor(message.getColor());
-				String justifiedMsg = justifyMessage(message.getMessage());
-				if(!((IOConsoleOutputStream)getOutputStream()).isClosed()){
-					try {
-						((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg);
-					} catch (IOException e) {
-					}
-				}
-			}
-		};
-		// support for large string !
-		Job myJob = new Job("Writing a large string to the console") {
-		      public IStatus run(IProgressMonitor monitor) {
-		    	  safePrint( message.getMessage(), message.getColor(), monitor);
-		         return new Status(IStatus.OK, "fr.irisa.triskell.eclipse.utils", "large message printed to the console");
-		      }
-		   };
-		if(message.getMessage().length() > LARGE_MESSAGE_SIZE){
+		
+		
+		if(message.getMessage().length() > LARGE_MESSAGE_SIZE){			
 			// large message
+			// support for large string !
+			Job myJob = new Job("Writing a large string to the console") {
+			      public IStatus run(IProgressMonitor monitor) {
+			    	  safePrint( message.getMessage(), message.getColor(), monitor);
+			         return new Status(IStatus.OK, "fr.irisa.triskell.eclipse.utils", "large message printed to the console");
+			      }
+			   };
 			myJob.schedule();
 			// must wait before continuing
 			try {
@@ -135,6 +124,19 @@ public class EclipseConsoleIO extends ConsoleIO {
 		}
 		else{
 			// normal messages are run in the UI thread
+			// support for reasonnable sized string
+			Runnable r = new Runnable() {
+				public void run() {
+					changeColor(message.getColor());
+					String justifiedMsg = justifyMessage(message.getMessage());
+					if(!((IOConsoleOutputStream)getOutputStream()).isClosed()){
+						try {
+							((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg);
+						} catch (IOException e) {
+						}
+					}
+				}
+			};
 			//ConsolePlugin.getStandardDisplay().syncExec(r);			
 			ConsolePlugin.getStandardDisplay().asyncExec(r);
 		}

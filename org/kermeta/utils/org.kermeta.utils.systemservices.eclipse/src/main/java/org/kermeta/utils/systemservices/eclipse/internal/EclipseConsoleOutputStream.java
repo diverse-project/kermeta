@@ -26,6 +26,9 @@ public class EclipseConsoleOutputStream extends OutputStream {
 
 	ConsoleIO consoleIO;
 	Boolean isErrStream = false;
+	
+	StringBuffer singleByteBuffer = new StringBuffer();
+	
 	public EclipseConsoleOutputStream(ConsoleIO consoleIO) {
 		this.consoleIO = consoleIO;
 	}
@@ -34,24 +37,19 @@ public class EclipseConsoleOutputStream extends OutputStream {
 		this.isErrStream = isErrStream;
 	}
 
+	
 	@Override
 	public void write(int b) throws IOException {
-		// TODO maybe find a more efficient way ?
 		byte[] bytes = {new Integer(b).byteValue()};
-		
 		String s = new String(bytes); 
-		if(isErrStream){
-			consoleIO.print(new ErrorMessage(s));
-		}
-		else{
-			consoleIO.print(s);
-		}
+		singleByteBuffer.append(s);
+		if(singleByteBuffer.length() > 1024 || b==10 || b==13 ) flush();
 	}
 
 	@Override
 	public void write(byte[] b) throws IOException {
 		String s = new String(b);
-		 
+		flush(); 
 		if(isErrStream){
 			consoleIO.print(new ErrorMessage(s));
 		}
@@ -59,6 +57,26 @@ public class EclipseConsoleOutputStream extends OutputStream {
 			consoleIO.print(s);
 		}
 	}
+	
+	
+	@Override
+	public synchronized void flush() throws IOException {
+		super.flush();
+		if(isErrStream){
+			consoleIO.print(singleByteBuffer.toString());
+		}
+		else{
+			consoleIO.print(singleByteBuffer.toString());
+		}
+		singleByteBuffer = new StringBuffer();
+	}
+	
+	@Override
+	public void close() throws IOException {
+		flush();
+		super.close();
+	}
+	
 	
 
 }
