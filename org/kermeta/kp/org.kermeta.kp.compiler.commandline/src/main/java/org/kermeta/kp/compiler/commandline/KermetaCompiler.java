@@ -7,6 +7,7 @@
  */
 package org.kermeta.kp.compiler.commandline;
 
+import java.awt.TrayIcon.MessageType;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -212,7 +213,7 @@ public class KermetaCompiler {
 			flushProblems(FileHelpers.StringToURL(kpFileURL));
 			String projectName = "project";
 	
-			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, 6);
+			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, 8);
 			KpLoaderImpl ldr = new KpLoaderImpl();
 	
 			// Load KP file
@@ -230,6 +231,8 @@ public class KermetaCompiler {
 			if (!kp.getName().isEmpty()) {
 				projectName = kp.getName();
 			}
+
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL);
 			ArrayList<URL> kpSources = getSources(kp,kpFileURL, varExpander);
 			if (kpSources.size() == 0) {
@@ -238,6 +241,8 @@ public class KermetaCompiler {
 			}
 			
 			flushProblems(kpSources);
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
+			
 			List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
 	
 			if (modelingUnits.size() == 0) {
@@ -527,11 +532,13 @@ public class KermetaCompiler {
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, ArrayList<URL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 
-		for (URL oneURL : kpSources) {
+		logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, kpSources.size());
+		for (URL oneURL : kpSources) {			
 			if (dirtyMU.get(oneURL) != null) {
 				modelingUnits.add(dirtyMU.get(oneURL));
 			} else {
 				ModelingUnit mu = null;
+				logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits."+oneURL, "Loading "+oneURL, LOG_MESSAGE_GROUP, 1);
 				try {
 					ModelingUnitLoader muLoader = new ModelingUnitLoader(logger, this.runInEclipse, this.saveIntermediateFiles, this.targetIntermediateFolder);
 					mu = muLoader.loadModelingUnitFromURL(oneURL.toString());
@@ -555,8 +562,11 @@ public class KermetaCompiler {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "Problem loading "+oneURL+" "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
 					} catch (MalformedURLException f) {}
 				}
+				logger.doneProgress(getMainProgressGroup()+".getSourceModelingUnits."+oneURL, oneURL+" loaded.", LOG_MESSAGE_GROUP);
 			}
+			logger.progress(getMainProgressGroup()+".getSourceModelingUnits", oneURL+ " loaded", LOG_MESSAGE_GROUP, 1);
 		}
+		logger.doneProgress(getMainProgressGroup()+".getSourceModelingUnits", "All "+kpSources.size()+" sources loaded.", LOG_MESSAGE_GROUP);
 
 		return modelingUnits;
 	}
@@ -820,30 +830,31 @@ public class KermetaCompiler {
 		// TODO Retrieve faulty objects text reference and logProblem
 
 		for (ResultProblemMessage prob : eprMu.getProblems()) {
-			logger.log(MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP);
+			logger.log(MessagingSystem.Kind.DevERROR, prob.getMessage(), LOG_MESSAGE_GROUP);
 
 			// retrieve faulty object
 			// KermetaModelElement kme = (Kermeprob.getCauseObject();
 			if (prob.getCauseObject() != null) {
-				System.err.println("faultyObject is : " + prob.getCauseObject().toString());
+				logger.log(Kind.DevDEBUG ,"faultyObject is : " + prob.getCauseObject().toString(),LOG_MESSAGE_GROUP);
 
 				org.kermeta.utils.systemservices.api.reference.ModelReference mref = (org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
 
 				if (mref.getModelRef() != null) {
-					System.err.println(mref.getModelRef().toString());
+					logger.log(Kind.DevDEBUG ,mref.getModelRef().toString(),LOG_MESSAGE_GROUP);
 
 					// The object is a KermetaModelElement
 					try {
 						KermetaModelElement kme = (KermetaModelElement) mref.getModelRef();
 	
-						System.err.println("The error involves " + kme.toString());
+						logger.log(Kind.DevDEBUG ,"The error involves " + kme.toString(), LOG_MESSAGE_GROUP);
+						//System.err.println("The error involves " + kme.toString());
 	
 						// Check if there is a sourceLocation tag
 						Boolean tagFound = false;
 	
 						for (Tag t : kme.getKOwnedTags()) {
 	
-							System.err.println("Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")");
+							logger.log(Kind.DevDEBUG ,"Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")", LOG_MESSAGE_GROUP);
 	
 							// logger.log(MessagingSystem.Kind.UserINFO, "Tag : " +
 							// t.getName(), "");
@@ -863,7 +874,7 @@ public class KermetaCompiler {
 							Tag t = searchForNearestTaggedContainingKME(kme);
 	
 							if (t == null) {
-								System.err.println("Impossible to retrieve a container with text traceability");
+								logger.log(MessagingSystem.Kind.DevWARNING,"Impossible to retrieve a container with text traceability", LOG_MESSAGE_GROUP);
 							} else {
 								TextReference ref = createTextReference(t);
 								if (ref != null) {
@@ -903,9 +914,9 @@ public class KermetaCompiler {
 				message = message + "Invariant " + ((InvariantProxy) failedConstraint).getInvariantName() + " on object " + ((ModelReference) diag.getAppliesTo()).getReferencedObject().toString();
 			}
 			if (diag.isIsWarning()) {
-				logger.log(MessagingSystem.Kind.UserWARNING, message, LOG_MESSAGE_GROUP);
+				logger.log(MessagingSystem.Kind.DevWARNING, message, LOG_MESSAGE_GROUP);
 			} else {
-				logger.log(MessagingSystem.Kind.UserERROR, message, LOG_MESSAGE_GROUP);
+				logger.log(MessagingSystem.Kind.DevERROR, message, LOG_MESSAGE_GROUP);
 			}
 
 			// retrieve the referenced EObject tag sourceLocation
@@ -924,10 +935,10 @@ public class KermetaCompiler {
 				// System.err.println("Tag found. Name : " + t.getName() +
 				// ", value : (" + t.getValue() + ")");
 
-				logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(), "");
+				logger.log(MessagingSystem.Kind.DevDEBUG, "Tag : " + t.getName(), LOG_MESSAGE_GROUP);
 				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
 					tagFound = true;
-					logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" + t.getValue() + ")   ", "");
+					logger.log(MessagingSystem.Kind.DevDEBUG, "   -> value :(" + t.getValue() + ")   ", LOG_MESSAGE_GROUP);
 					TextReference ref = createTextReference(t);
 					if (ref != null) {
 						if (diag.isIsWarning()) {
@@ -944,7 +955,7 @@ public class KermetaCompiler {
 				Tag t = searchForNearestTaggedContainingKME(kme);
 
 				if (t == null) {
-					System.err.println("Impossible to retrieve a container with text traceability");
+					logger.log(MessagingSystem.Kind.DevERROR, "Impossible to retrieve a container with text traceability", LOG_MESSAGE_GROUP);
 					// In this case, place the error on the kp file
 					FileReference ref = new FileReference(kpFile);
 					if (diag.isIsWarning()) {
