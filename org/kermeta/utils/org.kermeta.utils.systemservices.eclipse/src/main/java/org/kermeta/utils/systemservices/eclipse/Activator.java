@@ -116,11 +116,11 @@ public class Activator extends AbstractUIPlugin {
 	 * set back the System.out and System.err to their original values
 	 */
 	public void releaseSystemOutAndErr() {
-		System.out.flush();
-		System.err.flush();
+		if(System.out != null) System.out.flush();
+		if(System.err != null) System.err.flush();
 		consoleIO.print("Stopping redirection of System.out and System.err to this console.\n");
-		System.setOut(OriginalSystemOut);
-		System.setErr(OriginalSystemErr);
+		if(OriginalSystemOut != null) System.setOut(OriginalSystemOut);
+		if(OriginalSystemErr != null) System.setErr(OriginalSystemErr);
 		OriginalSystemOut = null;
 		OriginalSystemErr = null;
 	}
