@@ -250,7 +250,7 @@ public class KermetaCompiler {
 			}
 			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
-			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(modelingUnits);
+			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
 	
 			// Did errors occur during the merge ?
 			if (mergedUnit.getProblems().size() > 0) {
@@ -672,7 +672,7 @@ public class KermetaCompiler {
 		return getSourceModelingUnits(kp, kpFileURL, varExpander, new HashMap<URL, ModelingUnit>());
 	}
 
-	public ErrorProneResult<ModelingUnit> mergeModelingUnits(List<ModelingUnit> modelingUnits) throws IOException {
+	public ErrorProneResult<ModelingUnit> mergeModelingUnits(KermetaProject kp, List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		KmBinaryMerger theMerger = null;
 		ModelingUnitConverter muc = new ModelingUnitConverter(logger);
@@ -696,8 +696,9 @@ public class KermetaCompiler {
 			List<ResultProblemMessage> problems = new ArrayList<ResultProblemMessage>();
 
 			for (int i = 1; i < convertedModellingUnits.size(); i++) {
+				logger.debug("merging "+mergedMU.getResult().getName()+" + "+convertedModellingUnits.get(i).getName(), LOG_MESSAGE_GROUP);
 				mergedMU = theMerger.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
-
+				mergedMU.getResult().setName(kp.getName());
 				// Save previous problems
 				for (ResultProblemMessage prob : mergedMU.getProblems()) {
 					problems.add(prob);

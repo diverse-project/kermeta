@@ -43,7 +43,7 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 			if (mu != null) {
 				if (mu.getName() == null) {
 					// force ModelingUnit name to the one provided in the kp
-					mu.setName(projectName);
+					mu.setName(urlToLoad.toString());
 				}
 				return mu;
 			} else {
