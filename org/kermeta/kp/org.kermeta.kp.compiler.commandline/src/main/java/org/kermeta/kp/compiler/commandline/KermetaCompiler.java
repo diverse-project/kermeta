@@ -7,23 +7,21 @@
  */
 package org.kermeta.kp.compiler.commandline;
 
-import java.awt.TrayIcon.MessageType;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.ZipEntry;
@@ -31,10 +29,6 @@ import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.Constraint;
 import org.kermeta.diagnostic.ConstraintDiagnostic;
@@ -52,7 +46,6 @@ import org.kermeta.language.checker.CheckerImpl4Eclipse;
 import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaCompiler;
-import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaRunner;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl;
 import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl4Eclipse;
@@ -109,6 +102,10 @@ public class KermetaCompiler {
 	public Boolean hasFailed = false;
 	public String errorMessage = "";
 	private static final Lock lock = new ReentrantLock();
+	
+	
+	private ExecutorService threadExector = Executors.newCachedThreadPool();
+	private ExecutorService singleThreadExector = Executors.newSingleThreadExecutor();
 
 	/**
 	 * Simple constructor
@@ -529,11 +526,13 @@ public class KermetaCompiler {
 		return null;
 	}
 	
+	
+	
+	
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, ArrayList<URL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 
-		logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, kpSources.size());
-		for (URL oneURL : kpSources) {			
+		/* for (URL oneURL : kpSources) {			
 			if (dirtyMU.get(oneURL) != null) {
 				modelingUnits.add(dirtyMU.get(oneURL));
 			} else {
@@ -566,8 +565,61 @@ public class KermetaCompiler {
 			}
 			logger.progress(getMainProgressGroup()+".getSourceModelingUnits", oneURL+ " loaded", LOG_MESSAGE_GROUP, 1);
 		}
+		*/
+		// TODO load similar compatible files in parallel
+		logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 3);
+		ArrayList<URL> ecoreURLs = new ArrayList<URL>();
+		ArrayList<URL> normalLoadURLs = new ArrayList<URL>();
+		for (URL oneURL : kpSources) {
+			if (dirtyMU.get(oneURL) != null) {
+				modelingUnits.add(dirtyMU.get(oneURL));
+			} else {
+				if(oneURL.getFile().endsWith(".ecore")){
+					ecoreURLs.add(oneURL);
+				}
+				else{
+					normalLoadURLs.add(oneURL);
+				}
+			}
+		}
+		// launch ecore threads
+		ArrayList<Future<ModelingUnit>> ecoreFutures = new ArrayList<Future<ModelingUnit>>();
+		for(URL ecoreURL : ecoreURLs){
+			// EMF isn't thread safe, cannot even run the same transfo in parallel ! => singleThreadExecutor
+			ecoreFutures.add(singleThreadExector.submit(new CallableModelingUnitLoader(ecoreURL, this, kp, projectName)));
+		}
+		// join
+		for(Future<ModelingUnit> future : ecoreFutures){
+			try {
+				ModelingUnit mu = future.get();
+				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread
+			} catch (InterruptedException e) {
+				logger.error("Load of an Ecore ModelingUnit interrupted", LOG_MESSAGE_GROUP, e);
+			} catch (ExecutionException e) {
+				logger.error("Load of a ModelingUnit failed "+ e, LOG_MESSAGE_GROUP, e);
+			}
+		}
+		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+ecoreURLs.size()+" ecore loaded", LOG_MESSAGE_GROUP, 1);
+		// launch normalLoad threads
+		ArrayList<Future<ModelingUnit>> normalLoadFutures = new ArrayList<Future<ModelingUnit>>();
+		for(URL normalLoadURL : normalLoadURLs){
+			normalLoadFutures.add(threadExector.submit(new CallableModelingUnitLoader(normalLoadURL, this, kp, projectName)));
+		}
+		// join
+		for(Future<ModelingUnit> future : normalLoadFutures){
+			try {
+				ModelingUnit mu = future.get();
+				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread
+			} catch (InterruptedException e) {
+				logger.error("Load of a ModelingUnit interrupted", LOG_MESSAGE_GROUP, e);
+			} catch (ExecutionException e) {
+				logger.error("Load of a ModelingUnit failed "+ e, LOG_MESSAGE_GROUP, e);
+			}
+		}
 		logger.doneProgress(getMainProgressGroup()+".getSourceModelingUnits", "All "+kpSources.size()+" sources loaded.", LOG_MESSAGE_GROUP);
 
+		
+		
 		return modelingUnits;
 	}
 
