@@ -39,6 +39,8 @@ import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.SourceQuery;
+import org.kermeta.kp.compiler.commandline.callable.CallableLogProblem;
+import org.kermeta.kp.compiler.commandline.callable.CallableModelingUnitLoader;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.checker.CheckerImpl;
@@ -881,6 +883,8 @@ public class KermetaCompiler {
 	protected void processErrors(ErrorProneResult<ModelingUnit> eprMu) {
 		// TODO Retrieve faulty objects text reference and logProblem
 
+		ArrayList<Future<Boolean>> logProblemFutures = new ArrayList<Future<Boolean>>();
+		
 		for (ResultProblemMessage prob : eprMu.getProblems()) {
 			logger.log(MessagingSystem.Kind.DevERROR, prob.getMessage(), LOG_MESSAGE_GROUP);
 
@@ -917,7 +921,7 @@ public class KermetaCompiler {
 								TextReference ref = createTextReference(t);
 	
 								if (ref != null) {
-									logger.logProblem(MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP, ref);
+									logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP, ref)));
 								}
 							}
 						}
@@ -930,7 +934,7 @@ public class KermetaCompiler {
 							} else {
 								TextReference ref = createTextReference(t);
 								if (ref != null) {
-									logger.logProblem(MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP, ref);
+									logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP, ref)));
 								}
 	
 							}
@@ -940,6 +944,16 @@ public class KermetaCompiler {
 						e.printStackTrace();
 					}
 				}
+			}
+		}
+		// wait for all markers to be placed by eclipse // maybe we don't care until the end of the compilation ? (except for intermangling messages ?)
+		for(Future<Boolean> future : logProblemFutures){
+			try {
+				future.get();
+			} catch (InterruptedException e) {
+				logger.error("Marking interrupted", LOG_MESSAGE_GROUP, e);
+			} catch (ExecutionException e) {
+				logger.error("Marking failed "+ e, LOG_MESSAGE_GROUP, e);
 			}
 		}
 	}
@@ -952,12 +966,15 @@ public class KermetaCompiler {
 		
 		// System.err.println("processing diagnostics : " +
 		// diags.getDiagnostics().size());
-
+		int nbDiagnostics = diags.getDiagnostics().size();
+		logger.initProgress(getMainProgressGroup()+".processCheckingDiagnostics", "Transforming "+ nbDiagnostics +" diagnostic into markers...", LOG_MESSAGE_GROUP, nbDiagnostics);
 		// Display check results
-		if (diags.getDiagnostics().size() > 0) {
+		if (nbDiagnostics > 0) {
 			logger.log(MessagingSystem.Kind.UserINFO, "There are " + diags.getDiagnostics().size() + " failed constraints", LOG_MESSAGE_GROUP);
 		}
 
+		ArrayList<Future<Boolean>> logProblemFutures = new ArrayList<Future<Boolean>>();
+		
 		for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
 
 			String message = "";
@@ -994,9 +1011,9 @@ public class KermetaCompiler {
 					TextReference ref = createTextReference(t);
 					if (ref != null) {
 						if (diag.isIsWarning()) {
-							logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref)));
 						} else {
-							logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref)));
 						}
 					}
 				}
@@ -1011,18 +1028,21 @@ public class KermetaCompiler {
 					// In this case, place the error on the kp file
 					FileReference ref = new FileReference(kpFile);
 					if (diag.isIsWarning()) {
-						logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref)));
+						//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
 					} else {
-						logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref)));
 					}
 					
 				} else {
 					TextReference ref = createTextReference(t);
 					if (ref != null) {
 						if (diag.isIsWarning()) {
-							logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref)));
+							//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
 						} else {
-							logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+							//logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref)));
 						}
 					}
 
@@ -1031,7 +1051,17 @@ public class KermetaCompiler {
 			}
 
 		}
-
+		// wait for all markers to be placed by eclipse // maybe we don't care until the end of the compilation ? (except for intermangling messages ?)
+		for(Future<Boolean> future : logProblemFutures){
+			try {
+				future.get();
+			} catch (InterruptedException e) {
+				logger.error("Marking interrupted", LOG_MESSAGE_GROUP, e);
+			} catch (ExecutionException e) {
+				logger.error("Marking failed "+ e, LOG_MESSAGE_GROUP, e);
+			}
+		}
+		logger.doneProgress(getMainProgressGroup()+".processCheckingDiagnostics", "Transformed "+nbDiagnostics+" diagnostic into markers", LOG_MESSAGE_GROUP);
 	}
 
 	/**

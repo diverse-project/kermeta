@@ -6,13 +6,15 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.kp.compiler.commandline;
+package org.kermeta.kp.compiler.commandline.callable;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.Callable;
 
 import org.kermeta.kp.KermetaProject;
+import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoader;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
