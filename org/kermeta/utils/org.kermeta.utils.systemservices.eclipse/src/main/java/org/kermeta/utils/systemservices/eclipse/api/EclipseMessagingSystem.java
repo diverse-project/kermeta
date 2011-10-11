@@ -177,12 +177,12 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		case UserWARNING:
 			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg,msgGroup);
 			// since the message is in the problem view, downgrade log_kind to dev so it can be filtered
-			log_kind = Kind.DevDEBUG;
+			log_kind = Kind.DevWARNING;
 			break;
 		case UserERROR:
 			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg,msgGroup);
 			// downgrade log_kind to dev
-			log_kind = Kind.DevDEBUG;
+			log_kind = Kind.DevERROR;
 			break;
 		default:
 			break;
@@ -199,12 +199,12 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		case UserWARNING:
 			eclipseReporter.addMarker( IMarker.SEVERITY_WARNING, ref, msg,msgGroup);
 			//  since the message is in the problem view, downgrade log_kind to dev so it can be filtered
-			log_kind = Kind.DevDEBUG;
+			log_kind = Kind.DevWARNING;
 			break;
 		case UserERROR:
 			eclipseReporter.addMarker( IMarker.SEVERITY_ERROR, ref, msg,msgGroup);
 			// downgrade log_kind to dev
-			log_kind = Kind.DevDEBUG;
+			log_kind = Kind.DevERROR;
 			break;
 		default:
 			break;
