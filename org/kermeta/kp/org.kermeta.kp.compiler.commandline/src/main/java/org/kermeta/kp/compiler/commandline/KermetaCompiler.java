@@ -106,7 +106,7 @@ public class KermetaCompiler {
 	private static final Lock lock = new ReentrantLock();
 	
 	
-	private ExecutorService threadExector = Executors.newCachedThreadPool();
+	private ExecutorService threadExector = Executors.newFixedThreadPool(32);// pb on 32 bit system .newCachedThreadPool();
 	private ExecutorService singleThreadExector = Executors.newSingleThreadExecutor();
 
 	/**
