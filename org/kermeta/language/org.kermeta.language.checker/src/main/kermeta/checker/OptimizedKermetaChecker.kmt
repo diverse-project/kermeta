@@ -22,7 +22,7 @@ require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invarian
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/PropertyV1Helper.kmt"
 
 require "platform:/lookup//org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
-
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/GetAllCachedInvariants_ClassDefinition_aspect.kmt"
 
 using org::kermeta::diagnostic
 using kermeta::language::structure
@@ -85,10 +85,13 @@ class Checker
 			var allConstraints : OrderedSet<kermeta::language::structure::Constraint> 
 					init OrderedSet<kermeta::language::structure::Constraint>.new 
 	
-			allConstraints.addAll(cd.~inv)
+			allConstraints.addAll(cd.getAllCachedInvariants)
+	
+			//allConstraints.addAll(cd.~inv)
 
 			//stdio.writeln("-- size of allConstraints before super : " + allConstraints.size().toString())
 			//browse superClasses...
+			/*
 			obj.getMetaClass().superClass.collect{ sC | sC.classDefinition}
 										 .each{classDef |
 				//stdio.writeln("-- superType : " + classDef.name)
@@ -97,7 +100,7 @@ class Checker
 					allConstraints.add(in) 
 				}
 			}
-			
+			*/
 
 			
 			// Checking invariants of the class
