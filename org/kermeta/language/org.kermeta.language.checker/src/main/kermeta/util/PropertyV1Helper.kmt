@@ -15,7 +15,14 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/TypeV1Helper.kmt"
+//require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/TypeV1Helper.kmt"
+
+//require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+//require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+
 
 aspect class Property
 {
@@ -30,13 +37,35 @@ aspect class Property
 		
 		if mustDrillDownCache.isVoid
 		then
-			//stdio.writeln("mustdrilldown. self.type:" + self.type.toString )
+			stdio.writeln("mustdrilldown. self.type:" + self.type.toString )
 		
-			//mustDrillDownCache := true//not kermeta::standard::ValueType.isSuperTypeOf(self.type)
+			mustDrillDownCache := true//not kermeta::standard::ValueType.isSuperTypeOf(self.type)
 			//mustDrillDownCache := not(self.type.isSubTypeOf(org::kermeta::language::structure::DataType))
+			
+			/*
+			
 			mustDrillDownCache := not(self.type.typeEquals(kermeta::standard::String) or 
 									  self.type.typeEquals(kermeta::standard::Boolean) or 
 									  self.type.typeEquals(kermeta::standard::Integer))
+			
+			*/
+			stdio.writeln("self.getRootContainer:"+ self.getRootContainer.toString )	
+			
+			/*
+			var mu : org::kermeta::language::structure::ModelingUnit init self.getRootContainer.asType(org::kermeta::language::structure::ModelingUnit)
+		  	
+		  	var booleanTypeDef : org::kermeta::language::structure::TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
+			var stringTypeDef : org::kermeta::language::structure::TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
+			var integerTypeDef : org::kermeta::language::structure::TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
+			
+			if (self.type.isInstanceOf(ParameterizedType))
+			then
+				var selfTypeDef :  org::kermeta::language::structure::TypeDefinition init self.type.asType(ParameterizedType).typeDefinition
+			else
+				mustDrillDownCache:=true
+			end
+				*/					  
+			stdio.writeln("mustdrilldown. Done")
 		end
 		//stdio.writeln(" - result : " + result.toString)
 		result := mustDrillDownCache

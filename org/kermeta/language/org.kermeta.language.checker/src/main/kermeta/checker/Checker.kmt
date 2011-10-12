@@ -18,7 +18,7 @@ require "platform:/lookup/org.kermeta.diagnostic.model/model/Diagnostic.ecore"
 //require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/Diagnostic.kmt"
 
 
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/AllInvariants.kmt"
+//require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/AllInvariants.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/util/PropertyV1Helper.kmt"
 
 
@@ -66,7 +66,7 @@ class Checker
 	
 	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
 
-		//stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
+		stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
 		
 		
 		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
@@ -224,6 +224,8 @@ class Checker
 				
 			}
 		end
+
+		stdio.writeln("<-- checkObject")
 
 		result := diagnosticModel
 		
