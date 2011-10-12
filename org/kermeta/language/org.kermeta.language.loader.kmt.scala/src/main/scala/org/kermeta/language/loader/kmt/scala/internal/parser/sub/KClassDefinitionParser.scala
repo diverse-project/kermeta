@@ -111,11 +111,19 @@ trait KClassDefinitionParser extends KAbstractParser
   private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ { case _ ~ parents => parents
   }
   // private def classMemberDecls = annotableClassMemberDecl +
-  private def annotableClassMemberDecl = (annotation?) ~ classMemberDecl ^^ { case e ~ e1 =>
-      e match {
+  private def annotableClassMemberDecl = opt((annotation)+) ~ classMemberDecl ^^ { case tags ~ e1 =>
+      /*e match {
         case Some(_ @ annotation) => e1.getKOwnedTags.add(annotation)
         case None => //NOTHING TO DO
-      }
+      } */
+      tags.foreach{elem => elem match {
+          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
+              case t : Tag => e1.getKOwnedTags.add(t);e1.getKOwnedTags.add(t)
+              case _ @ elem => println("TODO unknow elem in tag:" + elem)
+          } }
+          case _ @ d => println("TODO modeling unit tag content: "+d)
+      } }
+
       e1
   }
 

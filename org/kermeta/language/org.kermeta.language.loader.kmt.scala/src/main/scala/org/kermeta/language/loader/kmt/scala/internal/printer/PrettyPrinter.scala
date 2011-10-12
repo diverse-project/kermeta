@@ -44,12 +44,19 @@ object PrettyPrinter {
         m.getOwnedTypeDefinition.foreach(p=>print(p,res))
       }
       case p: Package => {
+        p.getKOwnedTags.foreach{tag =>
+          print(tag, res)
+        }
         res.append("package " + p.getName() + " {\n")
         p.getNestedPackage.foreach(e => print(e, res))
         p.getOwnedTypeDefinition.foreach(e => print(e, res))
         res.append("\n}\n")
       }
       case c: ClassDefinition => {
+        c.getKOwnedTags.foreach{tag =>
+          res.append("\t")
+          print(tag, res)
+        }
         res.append("\t")
         if (c.getIsAbstract)
           res.append("abstract ")
@@ -65,6 +72,10 @@ object PrettyPrinter {
         res.append("\n\t}\n")
       }
       case p: Property => {
+        p.getKOwnedTags.foreach{tag =>
+          res.append("\t\t")
+          print(tag, res)
+        }
         if (p.getIsComposite)
           res.append("\t\tattribute ")
         else
@@ -77,6 +88,10 @@ object PrettyPrinter {
         res.append("\n")
       }
       case op: Operation => {
+        op.getKOwnedTags.foreach{tag =>
+          res.append("\t\t")
+          print(tag, res)
+        }
         res.append("\t\toperation " + op.getName + "(")
         var i = 0
         op.getOwnedParameter.foreach(p => {
@@ -393,7 +408,14 @@ object PrettyPrinter {
         }
         
       }
-     
+
+      case t: Tag => {
+         res.append("@")
+        res.append(t.getName)
+        res.append(" \"")
+        res.append(t.getValue)
+        res.append("\"\n")
+      }
       case o:EObject => res.append("todo " + o.getClass )
     }
     return ;
