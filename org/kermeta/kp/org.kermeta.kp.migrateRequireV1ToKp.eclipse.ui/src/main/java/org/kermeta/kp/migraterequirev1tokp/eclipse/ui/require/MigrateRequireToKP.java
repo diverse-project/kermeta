@@ -80,12 +80,16 @@ public class MigrateRequireToKP {
 		requiredFiles = parseKMTFile (pathFile);
 		List<String> addRequired = new ArrayList<String>();
 		
+		
 		// Iterate on the obtained required files
 		for (String rf : requiredFiles) {
 			if (isKMTFile(rf)) {
 				String path  = obtainPath(rf, baseProject, baseWorkspace);
 				addRequired = parseKMTFile (path);
 			}
+			
+		}
+		
 			
 			// Add these new requires on the requiredFiles list if it is not ever added
 			if (! addRequired.isEmpty()){
@@ -95,7 +99,7 @@ public class MigrateRequireToKP {
 					}
 				}
 			}
-		}
+			
 		return requiredFiles;
 	}
 	
@@ -309,7 +313,7 @@ public void migrateAllKmtFiles (List<String> kmtFiles, String baseProject, Strin
  @param baseProject : the path of the base project where this kmt file is stored */
 public void migrateKMT (String pathFile, String baseProject, String baseWorkspace ) throws FileNotFoundException, IOException	 {
 	// The migration is made only on kmt files
-	String path;
+	String path="";
 	
 	// Determines whether the file will be migrated 
 	boolean isMigrated = false;
@@ -328,6 +332,8 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 		}
 		else {
 			path = pathFile;
+			
+			
 		} 
 		
 		
@@ -377,6 +383,7 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 	}
 		
 	}
+	
 	
 }
 
