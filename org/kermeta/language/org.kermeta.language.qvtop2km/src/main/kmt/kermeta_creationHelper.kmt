@@ -1,9 +1,10 @@
 package kermeta;
 
-require kermeta
+
 using kermeta::language::behavior
 using kermeta::language::structure
 using kermeta::standard
+using kermeta::io
 using root_package
 package language{
 

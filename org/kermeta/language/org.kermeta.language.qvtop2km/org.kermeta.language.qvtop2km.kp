@@ -30,7 +30,7 @@ defaultMainOperation : "mainOperation"
 	srcQuery= "/model/QVTRelation.ecore" from "qvt"
 	srcQuery= "/model/QVTTemplate.ecore" from "qvt"
 
-	srcQuery= "/build/ecore/kermeta.ecore" from "kmtv1"
+	srcQuery= "/build/ecore/kermeta_java.ecore" from "kmtv1"
 	
 dependency "language.model" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"
 dependency "qvt" URL="${project.baseUri}/resources/fr.tm.elibel.smartqvt.qvt_0.2.4.jar"

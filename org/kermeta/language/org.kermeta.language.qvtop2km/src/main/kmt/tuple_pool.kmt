@@ -2,6 +2,7 @@ package root_package;
 
 
 using kermeta::standard
+using kermeta::io
 using kermeta::language::structure
 using kermeta::utils
 

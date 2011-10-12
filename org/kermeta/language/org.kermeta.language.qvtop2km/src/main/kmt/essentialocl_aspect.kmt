@@ -1,13 +1,13 @@
 package essentialocl;
 using root_package
 using kermeta::standard
-
+using kermeta::io
 
 /**call to a Property*/
 aspect class PropertyCallExp{
 
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
-		Stdio.writeln("PropertyCallExp::range2domain")
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+		StdIO.writeln("PropertyCallExp::range2domain")
 		var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 		referredProperty.range2domain(context)
 		out.staticProperty?=referredProperty.output
@@ -25,7 +25,7 @@ aspect class PropertyCallExp{
 
 aspect class IteratorExp {
 
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
 		
 		
@@ -42,7 +42,7 @@ aspect class IteratorExp {
 					out.name:="detect"
 				else
 					out.name:=name
-					Stdio.writeln("name : "+name)
+					StdIO.writeln("name : "+name)
 				end
 			end
 		end
@@ -70,9 +70,9 @@ aspect class IteratorExp {
 
 aspect class OperationCallExp {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
-			Stdio.writeln("OperationCallExp::range2domain")
+			StdIO.writeln("OperationCallExp::range2domain")
 			//either the operation is coming from the initial framework
 			var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 			output:=out
@@ -157,17 +157,17 @@ aspect class OperationCallExp {
 						if x.output!=void then 
 							out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
 						else 
-							Stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+							//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
 						end
 						}
 				end
 				
 	
-				Stdio.write("THIS IS A STANDARD METHOD")
-				Stdio.writeln(" referredOperation name : "+ referredOperation.getQVTID)
+				StdIO.write("THIS IS A STANDARD METHOD")
+				StdIO.writeln(" referredOperation name : "+ referredOperation.getQVTID)
 			else
 				//or not
-				Stdio.writeln("OperationCallExp")
+				StdIO.writeln("OperationCallExp")
 				
 				//if there is a source model
 				if source!=void then
@@ -185,14 +185,14 @@ aspect class OperationCallExp {
 					else
 						out.name:=out.staticOperation.name
 					end
-					Stdio.writeln("referredOperation name : "+ referredOperation.name)
+					StdIO.writeln("referredOperation name : "+ referredOperation.name)
 				end
 				argument.each{x|
 						x.range2domain(context) 
 						if x.output!=void then 
 							out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
 						else 
-							Stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+							//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
 						end
 						}
 				
@@ -205,8 +205,8 @@ aspect class OperationCallExp {
 	
 aspect abstract class OclExpression {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
-		Stdio.writeln("oclexpression metaclass "+self.getMetaClass.name)
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+		//StdIO.writeln("oclexpression metaclass "+self.getMetaClass.name)
 		output:=void
 	end
 	
@@ -216,7 +216,7 @@ aspect abstract class OclExpression {
 	
 aspect class VariableExp {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		var out: kermeta::language::behavior::Expression
 		if (referredVariable.name=="result") then
 			 out:= kermeta::language::behavior::CallResult.new
@@ -592,7 +592,7 @@ aspect class OrderedSetType {
 /** TypeExp is a call to a type for iskindof for instance*/
 aspect class TypeExp {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
 			var out : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
 			output:=out
@@ -616,7 +616,7 @@ aspect class TypeExp {
 
 aspect class RealLiteralExp {
 
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
 			var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 			output:=out

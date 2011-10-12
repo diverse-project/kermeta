@@ -1,7 +1,7 @@
 package emof;
 using root_package
 using kermeta::standard
-
+using kermeta::io
 aspect class Type{
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
@@ -10,7 +10,7 @@ aspect class Type{
 	end
 	
 	operation generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
-		Stdio.writeln("Type generateType")
+		StdIO.writeln("Type generateType")
 		result:=void
 	end
 }
@@ -21,7 +21,7 @@ aspect class Package
 		trigger the transformation of nested packages
 		and of the typedefinitions of the package
 	*/
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
 				var out : kermeta::language::structure::Package init kermeta::language::structure::Package.new
@@ -41,7 +41,7 @@ aspect class Package
 						epyTdenwo.range2domain(context)
 						elt ?= epyTdenwo.output
 						if elt.isNotEqual(void) then
-							//stdio.writeln("add a type definition in package : "+elt.name)
+							//StdIO.writeln("add a type definition in package : "+elt.name)
 							out.ownedTypeDefinition.add(elt)
 						end
 					}
@@ -52,15 +52,15 @@ aspect class Package
 }
 
 aspect class Class {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
-			stdio.writeln("Class::range2domain")
+			StdIO.writeln("Class::range2domain")
 				var out : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
 				output := out
 				out.name := name
 				out.isAbstract := isAbstract
-				/*stdio.writeln("test for isAspect "+getQVTID)
+				/*StdIO.writeln("test for isAspect "+getQVTID)
 				if KmtLib.getDefault.asType(KmtLib).getFromQualifiedName(getQVTID)!=void then
 					out.isAspect:=true
 				else*/
@@ -94,18 +94,18 @@ aspect class Class {
 						end
 					end}
 
-			Stdio.writeln("Class::range2domain-end")
+			StdIO.writeln("Class::range2domain-end")
 			end
 		end
 
 method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
-	//stdio.writeln("Class::generateType")
+	//StdIO.writeln("Class::generateType")
 	if output == void then
 		range2domain(context)
 	end
 	result:= kermeta::language::structure::Class.new
 	result.asType(kermeta::language::structure::Class).typeDefinition?=output
-	//stdio.writeln("Class::generateType-end")
+	//StdIO.writeln("Class::generateType-end")
 end
 
 
@@ -118,17 +118,17 @@ aspect class Operation {
 
 method range2domain(context : Qvt2KermetaContext) : Void is do
 
-stdio.writeln("operation "+name)
+StdIO.writeln("operation "+name)
 
 end
 }
 
 aspect class Property
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
-				//stdio.writeln("Property::range2domain")
+				//StdIO.writeln("Property::range2domain")
 				var existing : kermeta::language::structure::Property
 				
 				existing ?= context.kmtContext.getFromQualifiedName(getQVTID)
@@ -155,13 +155,13 @@ aspect class Property
 						out.type := type.generateType(context)
 							if (out.type!=void).andThen{x| not out.type.isInstanceOf(kermeta::language::structure::PrimitiveType)} then
 								out.containedType.add(out.type)
-								stdio.writeln("emof::Property create type "+type.name)
+								StdIO.writeln("emof::Property create type "+type.name)
 							else
-								stdio.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
+								StdIO.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
 							end
 						
 					end
-					//stdio.writeln("Property::range2domain-end")
+					//StdIO.writeln("Property::range2domain-end")
 				end
 			end	
 		end
@@ -170,8 +170,8 @@ aspect class Property
 
 aspect class PrimitiveType
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
-		//stdio.writeln("PrimitiveType::range2domain")
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+		//StdIO.writeln("PrimitiveType::range2domain")
 		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
 		if output==void then
 			var out : kermeta::language::structure::PrimitiveType init kermeta::language::structure::PrimitiveType.new
@@ -201,10 +201,10 @@ aspect class PrimitiveType
 				out.containedType.add(integerClass)
 			end
 			if self.name=="EBoolean" or self.name=="Boolean" then
-				stdio.writeln("Primitive type boolean : "+name+" "+out.toString)
+				StdIO.writeln("Primitive type boolean : "+name+" "+out.toString)
 				var pack : emof::Package 
 				pack?= self.container()
-				stdio.writeln(pack.name)
+				StdIO.writeln(pack.name)
 				var boolCD : kermeta::language::structure::ClassDefinition 
 				
 				boolCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
@@ -235,14 +235,14 @@ aspect class PrimitiveType
 				
 			
 //			if out==void then
-	//			stdio.writeln("classdefinition generated from a primitive type "+name)
+	//			StdIO.writeln("classdefinition generated from a primitive type "+name)
 		//		out:=kermeta::language::structure::ClassDefinition.new
 			//	out.name:=self.name
 				//out.addDocumentationTag("generated from a primitive type")
 			//end
 			
 		end
-		//stdio.writeln("PrimitiveType::range2domain-end")
+		//StdIO.writeln("PrimitiveType::range2domain-end")
 		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
 		
 	end

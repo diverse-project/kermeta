@@ -1,14 +1,11 @@
-package kermeta;
- require "platform:/resource/qvt-kermeta/transformation/qvt2kermeta.kmt"
 
-require kermeta
 using kermeta::language::structure
 using kermeta::language
 using root_package
-package language
+
+package emof
 {
-	package structure
-	{
+	
 		aspect class Object
 		{
 			reference output : Object
@@ -19,7 +16,6 @@ package language
 			operation range2domain(context : Qvt2KermetaContext) : standard::~Void is
 				abstract
 
-		}
 	}
 
 }

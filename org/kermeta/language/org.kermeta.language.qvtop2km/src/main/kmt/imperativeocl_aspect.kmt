@@ -2,7 +2,8 @@ package imperativeocl;
 
 
 using root_package
-
+using kermeta::standard
+using kermeta::io
 /**
 * iteration on a collection similar to collect or select
 * TODO : what if there are more iterator ?
@@ -12,7 +13,7 @@ aspect class ImperativeIterateExp {
 method range2domain(context : Qvt2KermetaContext) : Void is do
 	if output==void then
 		
-		//stdio.writeln("ImperativeIterateExp")
+		//StdIO.writeln("ImperativeIterateExp")
 	
 		var iterateCall : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 		
@@ -27,7 +28,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 					iterateCall.name:="detect"
 				else
 					iterateCall.name:=name
-					stdio.writeln("name : "+name)
+					StdIO.writeln("name : "+name)
 				end
 			end
 		end
@@ -132,7 +133,7 @@ end
 	/** depends on multivaluation of left expression*/
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			stdio.writeln("AssignExp  -left type : "+left.getMetaClass.name)
+			StdIO.writeln("AssignExp  -left type : "+left.getMetaClass.name)
 		
 			if left.isInstanceOf(essentialocl::PropertyCallExp)
 					.andThen{x|left.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} then 
@@ -147,7 +148,7 @@ end
 				
 				self.~value.each{x|x.range2domain(context)}
 				//TODO take care of multivalued assignement
-				stdio.writeln("value size : "+~value.size.toString)
+				StdIO.writeln("value size : "+~value.size.toString)
 				out.parameters.add(self.~value.one.output.asType(kermeta::language::behavior::Expression))
 				if isMulti(self.~value.one) then
 					if isReset() then
@@ -175,7 +176,7 @@ end
 				out.target?=left.output
 				self.~value.each{x|x.range2domain(context)}
 				//TODO take care of multivalued assignement
-				stdio.writeln("value size : "+~value.size.toString)
+				StdIO.writeln("value size : "+~value.size.toString)
 				out.~value?=self.~value.one.output
 				
 			end
@@ -192,7 +193,7 @@ aspect class VariableInitExp {
 
 */
 
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
 			var out : kermeta::language::behavior::VariableDecl
 			out:=referredVariable.toVariableDecl(context)
@@ -203,7 +204,7 @@ aspect class VariableInitExp {
 }
 
 aspect class LogExp {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
 			//check condition if exists
 			var out : kermeta::language::behavior::Conditional init kermeta::language::behavior::Conditional.new
@@ -229,9 +230,9 @@ aspect class LogExp {
 				writelnFeature.name:="writeln"
 			end
 			
-			var stdioVar : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
-			writelnFeature.target:=stdioVar
-			stdioVar.name:="stdio"
+			var StdIOVar : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+			writelnFeature.target:=StdIOVar
+			StdIOVar.name:="StdIO"
 			
 			argument.one.range2domain(context)
 			writelnFeature.parameters.add(argument.one.output.asType(kermeta::language::behavior::Expression))
@@ -242,9 +243,9 @@ aspect class LogExp {
 				block.statement.add(writelnFeature2)
 				writelnFeature2.name:="writeln"
 				
-				var stdioVar2 : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
-				writelnFeature2.target:=stdioVar2
-				stdioVar2.name:="stdio"
+				var StdIOVar2 : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+				writelnFeature2.target:=StdIOVar2
+				StdIOVar2.name:="StdIO"
 				
 				var toStringFeature : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 				writelnFeature2.parameters.add(toStringFeature)

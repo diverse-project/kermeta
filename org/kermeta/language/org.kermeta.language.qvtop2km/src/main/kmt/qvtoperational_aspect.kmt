@@ -1,14 +1,15 @@
 package qvtoperational;
 
 using root_package
-
+using kermeta::standard
+using kermeta::io
 
 aspect class ObjectExp {
 
 	/* beware ! it will work if body is not modified anywhere else*/
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-			//stdio.writeln("ObjectExp::range2domain")
+			//StdIO.writeln("ObjectExp::range2domain")
 			var out : kermeta::language::behavior::Block
 			body.range2domain(context)
 			out?=body.output
@@ -27,7 +28,7 @@ aspect class ObjectExp {
 			end
 			cv.name:=referredObject.name
 			out.statement.add(cv)
-			//stdio.writeln("ObjectExp::range2domain-end")
+			//StdIO.writeln("ObjectExp::range2domain-end")
 		end
 	end
 }
@@ -36,9 +37,9 @@ aspect class ObjectExp {
 
 aspect class ConstructorBody {
 
-	method range2domain(context : Qvt2KermetaContext)  : Void from kermeta::language::structure::Object is do
+	method range2domain(context : Qvt2KermetaContext)  : Void from emof::Object is do
 		if output==void then
-			//stdio.writeln("ConstructorBody::range2domain")
+			//StdIO.writeln("ConstructorBody::range2domain")
 			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
 			output:=out
 			variable.each{v|
@@ -49,10 +50,10 @@ aspect class ConstructorBody {
 					if not oclexp.output.isVoid() then 
 						out.statement.add(oclexp.output.asType(kermeta::language::behavior::Expression) )
 					else
-						stdio.writeln( "a statement in content is void")
+						StdIO.writeln( "a statement in content is void")
 					end
 					}
-			//stdio.writeln("ConstructorBody::range2domain-end")
+			//StdIO.writeln("ConstructorBody::range2domain-end")
 		end
 	end
 
@@ -60,7 +61,7 @@ aspect class ConstructorBody {
 
 aspect class EntryOperation {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output==void then
 				var out : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
@@ -91,7 +92,7 @@ aspect class OperationBody {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then
-			//stdio.writeln("OperationBody::range2domain")
+			//StdIO.writeln("OperationBody::range2domain")
 			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
 			output:=out
 			
@@ -110,12 +111,12 @@ aspect class OperationBody {
 					if not oclexp.output.isVoid() then 
 						out.statement.add(oclexp.output.asType(kermeta::language::behavior::Expression) )
 					else
-						stdio.writeln( "a statement in content is void")
+						StdIO.writeln( "a statement in content is void")
 					end
 					}
 			genDefaultRescues(context)
 			end
-			//stdio.writeln("OperationBody::range2domain-end")
+			//StdIO.writeln("OperationBody::range2domain-end")
 		end
 	end
 
@@ -158,7 +159,7 @@ aspect class MappingParameter {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then
-			//stdio.writeln("MappingParameter::range2domain")
+			//StdIO.writeln("MappingParameter::range2domain")
 			var out : kermeta::language::structure::Parameter init kermeta::language::structure::Parameter.new
 			output:=out
 			
@@ -173,7 +174,7 @@ aspect class MappingParameter {
 			if out.type.isInstanceOf(kermeta::language::structure::Class) then
 				out.containedType.add(out.type)
 			end
-			//stdio.writeln("MappingParameter::range2domain-end")
+			//StdIO.writeln("MappingParameter::range2domain-end")
 		end
 	end
 }
@@ -182,7 +183,7 @@ aspect class MappingParameter {
 aspect class ImperativeOperation {
 
 	operation getTransformation() : OperationalTransformation is do
-		//stdio.writeln("MappingOperation::getTransformation")
+		//StdIO.writeln("MappingOperation::getTransformation")
 		var o : kermeta::language::structure::Object
 		
 		from  var x : kermeta::language::structure::Object init o:=self.container
@@ -192,7 +193,7 @@ aspect class ImperativeOperation {
 		end
 
 		result?=o
-		//stdio.writeln("MappingOperation::getTransformation-end")
+		//StdIO.writeln("MappingOperation::getTransformation-end")
 	end
 
 }
@@ -214,8 +215,8 @@ aspect class MappingOperation {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then
-			//stdio.writeln("MappingOperation::range2domain")
-			stdio.writeln("\nmapping operation "+name+" id "+oid.toString)
+			//StdIO.writeln("MappingOperation::range2domain")
+			StdIO.writeln("\nmapping operation "+name+" id "+oid.toString)
 			var out : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
 			output:=out
 			out.name:=name
@@ -234,7 +235,7 @@ aspect class MappingOperation {
 				
 				//TODO check if it is still useful
 				if self.~result.one.type.output==void then
-					stdio.writeln("createTypedefinition "+self.~result.one.type.name)
+					StdIO.writeln("createTypedefinition "+self.~result.one.type.name)
 					getTransformation().createTypeDefinition(self.~result.one.type,context)
 				
 				end
@@ -291,7 +292,7 @@ aspect class MappingOperation {
 			out.body?=body.output
 			
 			out.addDocumentationTag("gen from a MappingOperation")
-			//stdio.writeln("MappingOperation::range2domain-end")	
+			//StdIO.writeln("MappingOperation::range2domain-end")	
 		end	
 	end
 	
@@ -300,11 +301,11 @@ aspect class MappingOperation {
 
 aspect class Helper
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output==void then
-				//stdio.writeln("MappingOperation::range2domain")
-				stdio.writeln("\nhelper "+name+" id "+oid.toString)
+				//StdIO.writeln("MappingOperation::range2domain")
+				StdIO.writeln("\nhelper "+name+" id "+oid.toString)
 				var out : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
 				output:=out
 				out.name:=name
@@ -329,7 +330,7 @@ aspect class Helper
 					end
 					
 					if self.~result.one.type.output==void then
-						stdio.writeln("createTypedefinition "+self.~result.one.type.name)
+						StdIO.writeln("createTypedefinition "+self.~result.one.type.name)
 						getTransformation().createTypeDefinition(self.~result.one.type, context)
 					
 					end
@@ -355,10 +356,10 @@ aspect class Helper
 
 aspect class MappingBody {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do 
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
 		
 		if output==void then
-			//stdio.writeln("MappingBody::range2domain")
+			//StdIO.writeln("MappingBody::range2domain")
 			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
 			output:=out
 			
@@ -411,7 +412,7 @@ aspect class MappingBody {
 					if not oclexp.output.isVoid() then
 						initBlock.statement.add(oclexp.output.asType(kermeta::language::behavior::Expression) )
 					else
-						stdio.writeln( "a statement in initSection is void "+oclexp.getMetaClass().name)
+						StdIO.writeln( "a statement in initSection is void "+oclexp.getMetaClass().name)
 					end
 					}
 				initBlock.addDocumentationTag("initSection")
@@ -449,7 +450,7 @@ aspect class MappingBody {
 				if not oclexp.output.isVoid() then 
 				out.statement.add(oclexp.output.asType(kermeta::language::behavior::Expression) )
 				else
-				stdio.writeln( "a statement in content is void")
+				StdIO.writeln( "a statement in content is void")
 				end
 				}
 			//generate the usual rescues
@@ -487,7 +488,7 @@ aspect class MappingBody {
 
 	//generate the trace of the mapping
 	operation createTrace(context : Qvt2KermetaContext) : kermeta::language::behavior::Expression is do
-		//stdio.writeln("MappingBody::createTrace")
+		//StdIO.writeln("MappingBody::createTrace")
 		var cf_trace :  kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 		result := cf_trace
 		cf_trace.name:="addTrace"
@@ -528,7 +529,7 @@ aspect class MappingBody {
 		var tl_getDefault : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
 		cf_getDefault.target:=tl_getDefault
 		tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
-		//stdio.writeln("MappingBody::createTrace-end")
+		//StdIO.writeln("MappingBody::createTrace-end")
 		*/
 	end
 	
@@ -648,7 +649,7 @@ aspect class MappingBody {
 	*/
 	
 	operation createInit(context : Qvt2KermetaContext) : kermeta::language::behavior::Block is do
-		//stdio.writeln("MappingBody::createInit")
+		//StdIO.writeln("MappingBody::createInit")
 		
 		var block: kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
 		
@@ -672,12 +673,12 @@ aspect class MappingBody {
 		
 		
 		result:=block
-		//stdio.writeln("MappingBody::createInit-end")
+		//StdIO.writeln("MappingBody::createInit-end")
 	end
 	
 	//return the equivalent of the operation return type in terms of collection depending on the cardinality, unicity and order
 	operation resultType(context : Qvt2KermetaContext) : kermeta::language::behavior::TypeReference is do
-			//stdio.writeln("MappingBody::resultType") 
+			//StdIO.writeln("MappingBody::resultType") 
 			result:=kermeta::language::behavior::TypeReference.new
 			result.lower:=0
 			result.upper:=1
@@ -712,7 +713,7 @@ aspect class MappingBody {
 			if tvarBinding.type.isInstanceOf(kermeta::language::structure::Class) then 
 				tvarBinding.containedType.add(tvarBinding.type)
 			end
-			//stdio.writeln("MappingBody::resultType-end")
+			//StdIO.writeln("MappingBody::resultType-end")
 	end
 }
 
@@ -753,28 +754,28 @@ aspect class OperationalTransformation {
 
 
 	operation genClassDefinition(context : Qvt2KermetaContext) : Void is do
-		//stdio.writeln("OperationalTransformation::genClassDefinition") 
+		//StdIO.writeln("OperationalTransformation::genClassDefinition") 
 		ownedOperation.each{op | 
 				if op.isInstanceOf(qvtoperational::ImperativeOperation)
 					.andThen{x|op.asType(ImperativeOperation).context!=void} then
 					createTypeDefinition(op.asType(ImperativeOperation).context.type, context) 
 				end 
 				}
-		//stdio.writeln("OperationalTransformation::genClassDefinition-end")
+		//StdIO.writeln("OperationalTransformation::genClassDefinition-end")
 	end
 
 	operation createTypeDefinition(type : emof::Type, context : Qvt2KermetaContext) : Void is do 
-		//stdio.writeln("OperationalTransformation::createTypeDefinition")
-		//stdio.writeln("createContext "+type.name)
+		//StdIO.writeln("OperationalTransformation::createTypeDefinition")
+		//StdIO.writeln("createContext "+type.name)
 		createPackage(type.container.asType(emof::Package), context)
 		type.range2domain(context)
 		type.container.output.asType(kermeta::language::structure::Package).ownedTypeDefinition.add(type.output.asType(kermeta::language::structure::TypeDefinition))
-		//stdio.writeln("OperationalTransformation::createTypeDefinition-end")
+		//StdIO.writeln("OperationalTransformation::createTypeDefinition-end")
 	end
 
 	operation createPackage(pack : emof::Package, context : Qvt2KermetaContext) : Void is do
 		if pack.output==void then
-			//stdio.writeln("OperationalTransformation::createPackage")
+			//StdIO.writeln("OperationalTransformation::createPackage")
 			pack.range2domain(context)
 			if pack.container.isInstanceOf(kermeta::persistence::Resource) then
 				output.asType(kermeta::language::structure::ModelingUnit).packages.add(pack.output.asType(kermeta::language::structure::Package))
@@ -785,7 +786,7 @@ aspect class OperationalTransformation {
 						.add(pack.output.asType(kermeta::language::structure::Package))
 				end
 			end
-			//stdio.writeln("OperationalTransformation::createPackage-end")
+			//StdIO.writeln("OperationalTransformation::createPackage-end")
 		end
 	end
 	
@@ -827,7 +828,7 @@ aspect class ResolveExp {
 
 method range2domain(context : Qvt2KermetaContext) : Void is do
 	if output==void then
-		//stdio.writeln("ResolveExp::range2domain")
+		//StdIO.writeln("ResolveExp::range2domain")
 		var cf_resolve :  kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
 		//if one is true and there is no condition then it's simply a detect on the type of target
 		//if one is false then it's a select on the type that should return a sequence of the type
@@ -953,7 +954,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			.asType(kermeta::language::structure::ClassDefinition)
 			.generateTypeRef()
 		
-		//stdio.writeln("ResolveExp::range2domain-end")
+		//StdIO.writeln("ResolveExp::range2domain-end")
 		
 		//var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature
 		//var out : kermeta::language::behavior::VoidLiteral  init kermeta::language::behavior::VoidLiteral.new
@@ -970,9 +971,9 @@ end
 */
 aspect class ModelType {
 
-method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do 
+method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
 	if output==void then
-		//stdio.writeln("ModelType::range2domain")
+		//StdIO.writeln("ModelType::range2domain")
 		
 		var out : kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
 		output:=out
@@ -980,7 +981,7 @@ method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language:
 				x.range2domain(context) 
 				out.packages.add(x.output.asType(kermeta::language::structure::Package))
 				}
-		//stdio.writeln("ModelType::range2domain-end")
+		//StdIO.writeln("ModelType::range2domain-end")
 	end	
 
 end
@@ -988,10 +989,10 @@ end
 
 aspect class ContextualProperty
 {
-	/* TODO implement "initExpression" and "overriden" */ 
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is do 
+	/* TODO implement "initExpression" and "overriden" */
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
 		if output==void then
-			//stdio.writeln("ContextualProperty::range2domain")
+			//StdIO.writeln("ContextualProperty::range2domain")
 			var out : kermeta::language::structure::Property init kermeta::language::structure::Property.new
 			output := out
 			out.default := default
@@ -1015,13 +1016,13 @@ aspect class ContextualProperty
 				out.type := type.generateType(context)
 				if (out.type!=void) then
 					out.containedType.add(out.type)
-					stdio.writeln("create a type "+type.name )
+					StdIO.writeln("create a type "+type.name )
 				else
-					stdio.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
+					StdIO.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
 				end
 				
 			end
-			//stdio.writeln("ContextualProperty::range2domain-end")
+			//StdIO.writeln("ContextualProperty::range2domain-end")
 		end
 	end
 
@@ -1055,14 +1056,14 @@ aspect class MappingCallExp
 				else
 					out.name:=out.staticOperation.name
 				end
-				stdio.writeln("referredOperation name : "+ referredOperation.name)
+				StdIO.writeln("referredOperation name : "+ referredOperation.name)
 			end
 			argument.each{x|
 					x.range2domain(context) 
 					if x.output!=void then 
 						out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
 					else 
-						stdio.writeln("output is void for a : "+ x.getMetaClass.name) 
+						StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
 					end
 					}
 			//add result value
