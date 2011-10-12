@@ -67,7 +67,7 @@ class Checker
 	
 	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
 
-		stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
+		//stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
 		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
 
 		// Retrieve obj classDefinition	
@@ -93,7 +93,7 @@ class Checker
 										 .each{classDef |
 				//stdio.writeln("-- superType : " + classDef.name)
 				classDef.~inv.each{ in | 
-					stdio.writeln("    -> need to check invariant : " + in.name)
+					//stdio.writeln("    -> need to check invariant : " + in.name)
 					allConstraints.add(in) 
 				}
 			}
