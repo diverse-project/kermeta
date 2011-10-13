@@ -11,13 +11,19 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.ecore2km.api.Ecore2KM;
 import org.kermeta.language.ecore2km.Ecore2KMImpl;
@@ -27,6 +33,7 @@ import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 
 //import scala.Option;
 import scala.collection.Iterator;
@@ -159,9 +166,46 @@ public class ModelingUnitLoader {
 		URI ruri =  URI.createURI(uri);
 		Resource resource = resourceSet.createResource(ruri);
 		resource.load(options);
-        //r.load();    
+        //r.load();   
 		
-        return   converter.convertPackage((EPackage) resource.getContents().get(0), "");
+		EPackage rootPackage;
+		if(runInEclipse){
+			// WORKAROUND problem of incomplete conversion if run in eclipse, the ecore.ecore from nsURI is loaded without using the new factory
+			// this fixes bug 1951
+			logger.log(Kind.DevINFO, "Applying ecore load workaround so it can load ecore model in registry", this.getClass().getName());
+			ArrayList<EObject> objectsToCopy = new ArrayList<EObject>();
+			
+			objectsToCopy.addAll(resource.getContents());
+			for(Resource res : resourceSet.getResources()){
+				if(res != resource){
+					logger.debug( "workaround applied on additional resource "+res.getURI(), this.getClass().getName());
+					objectsToCopy.addAll(res.getContents());
+				}
+			}
+			Map<EObject, Collection<Setting>> externalRefs = EcoreUtil.CrossReferencer.find(objectsToCopy);
+			for(Entry<EObject, Collection<Setting>> entry : externalRefs.entrySet()){
+				EObject rootExternalObject = getRootContainer(entry.getKey());
+				if(!objectsToCopy.contains(rootExternalObject)){
+					logger.debug( "workaround applied on additional EObject "+rootExternalObject, this.getClass().getName());
+					objectsToCopy.add(rootExternalObject);
+				}
+			}
+			
+			Collection<EObject> copiedObjects = EcoreUtil.copyAll(objectsToCopy);
+			rootPackage = (EPackage) copiedObjects.toArray()[0];
+			// END OF WORKAROUND
+			
+		}
+		else{
+			rootPackage = (EPackage) resource.getContents().get(0);
+		}
+		
+        return   converter.convertPackage(rootPackage, "");
+	}
+	
+	private EObject getRootContainer(EObject obj){
+		if(obj.eContainer() != null ) return getRootContainer(obj.eContainer());
+		return obj;
 	}
 
 	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, MalformedURLException  {
