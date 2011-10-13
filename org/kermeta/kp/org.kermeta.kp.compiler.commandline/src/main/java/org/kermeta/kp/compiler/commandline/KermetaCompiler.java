@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.ZipEntry;
@@ -106,7 +107,7 @@ public class KermetaCompiler {
 	private static final Lock lock = new ReentrantLock();
 	
 	
-	private ExecutorService threadExector = Executors.newFixedThreadPool(32);// pb on 32 bit system .newCachedThreadPool();
+	private ExecutorService threadExector = Executors.newCachedThreadPool();
 	private ExecutorService singleThreadExector = Executors.newSingleThreadExecutor();
 
 	/**
@@ -125,6 +126,9 @@ public class KermetaCompiler {
 		if (registerProtocols) {
 			registerMVNUrlHandler();
 		}
+		if (threadExector instanceof ThreadPoolExecutor)
+		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);
+		
 		this.runInEclipse = willRunInEclipse;
 	}
 
@@ -162,6 +166,8 @@ public class KermetaCompiler {
 		if (registerProtocols) {
 			registerMVNUrlHandler();
 		}
+		if (threadExector instanceof ThreadPoolExecutor)
+		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);
 	}
 
 	private void registerMVNUrlHandler() {
@@ -248,7 +254,6 @@ public class KermetaCompiler {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid. There is no modeling unit to compile.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				return null;
 			}
-			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
 	
