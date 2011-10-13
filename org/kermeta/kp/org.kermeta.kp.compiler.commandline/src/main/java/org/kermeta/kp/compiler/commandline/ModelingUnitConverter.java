@@ -119,6 +119,7 @@ public class ModelingUnitConverter {
 				mu.eResource().getContents().add(myEobject);				
 			}			
 			logger.info("Retrying to save .... ", KermetaCompiler.LOG_MESSAGE_GROUP);
+			outputStream = new ByteArrayOutputStream();
 			mu.eResource().save(outputStream, options);
 		}
 
