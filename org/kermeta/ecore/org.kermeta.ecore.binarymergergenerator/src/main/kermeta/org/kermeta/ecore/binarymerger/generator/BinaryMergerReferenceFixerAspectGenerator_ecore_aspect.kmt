@@ -1,0 +1,216 @@
+/* $Id: ActionToPerformOnEcoreModel.kmt,v 1.1 2008-03-14 10:57:56 cfaucher Exp $
+ * Creation date: March 04, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *
+ */
+
+package ecore;
+ 
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/ContainmentBasedActionPerformer_Ecore.kmt"
+require "BinaryMergerReferenceFixerAspectGenerator.kmt"
+require "BinaryMergerGenerator_ecore_common_aspect.kmt"
+
+using ecore
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+using EcoreHelpers
+using org::kermeta::binarymerger::generator
+
+aspect class EObject {
+	operation binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
+	
+}
+aspect class EModelElement {
+	operation binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
+	
+}
+aspect class EPackage {
+	method binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		if not self.container.isVoid() then 
+			content.append(context.indentString)
+			content.append("package " + self.name + " {")
+			context.pushIndent
+		end
+		
+		self.eachOwnedElement{ e |
+			content.append(e.binaryMergerReferenceFixerAspectKmtPrinter(context) + "\n")
+		}
+		
+		if not self.container.isVoid() then
+			context.popIndent
+			content.append(context.indentString)
+			content.append("}\n")
+		end
+		result := content.toString()
+	end
+}
+
+aspect class EClass {
+	method binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		content.append(context.indentString)
+		content.append("aspect class " + self.name + " {")
+		
+		context.pushIndent
+		content.append(context.indentString)
+				
+		if self.eSuperTypes.size()>0 then
+			content.append("method")
+		else if (context.isMMReflexiveKermeta) then
+			// special case of creating  methods on kermeta itself
+			if (self.name == "Object") then
+				content.append("operation")
+			else
+				content.append("method")
+			end
+			
+		else
+			content.append("operation")
+		end end
+		
+		content.append(" fixReferences( ) : Void")
+		
+		if self.eSuperTypes.size()>0 then
+			 content.append(" from " + context.ecoreHelper.getClassifierQualifiedName(self.eSuperTypes.first))
+		end
+		
+		content.append(" is do")
+		context.pushIndent
+		content.append(context.indentString)
+		//content.append("var aspectElement : " + context.ecoreHelper.getClassifierQualifiedName(self))
+		//content.append(context.indentString)
+		//content.append("aspectElement ?= aspectElementObj")
+		//content.append(context.indentString)
+		//content.append("if not aspectElement.isVoid then\n")
+		//context.pushIndent
+		//content.append(context.indentString)
+		if self.eSuperTypes.size()>0 then
+			if(self.eSuperTypes.first().name == "Object")then
+				content.append(context.indentString)
+				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
+				content.append(context.indentString)
+				content.append("// super()")
+			else
+				content.append(context.indentString)
+				content.append("super()")
+			end
+		end
+		
+		
+								
+		self.eachOwnedElement{ e |
+				content.append(e.binaryMergerReferenceFixerAspectKmtPrinter(context))
+		}
+		if self.eSuperTypes.size()>=1 then
+			// must deal with EReference that comes from the other inheritance branch
+			var allFirstSuperTypes : Set<EClass> init getAllFirstSuperTypes
+			self.eAllSuperTypes.each{ s |
+				if (not allFirstSuperTypes.contains(s)) then
+					s.eachOwnedElement{ e |
+						content.append(e.binaryMergerReferenceFixerAspectKmtPrinter(context))
+					}
+				else					
+					if(self.eSuperTypes.first().name == "Object") then
+						content.append(context.indentString)
+						content.append("// workaround compiler V2 bug, embed code that should have been called via super \n")
+						s.eachOwnedElement{ e |
+							content.append(e.binaryMergerReferenceFixerAspectKmtPrinter(context))
+						}
+					end
+				end
+			}
+		end			
+		//context.popIndent
+		//content.append(context.indentString)
+		//content.append("end")
+		context.popIndent
+		content.append(context.indentString)
+		content.append("end")
+		
+		context.popIndent
+		content.append(context.indentString)
+		result := content.append("}").toString()
+	end
+}
+aspect class EReference {
+	method binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+
+
+		
+		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name)
+		var typeName : String init context.ecoreHelper.getClassifierQualifiedName(self.eType) 
+		
+		var involvedInComposition : Boolean init self.containment
+		if not self.eOpposite.isVoid then
+			involvedInComposition := involvedInComposition or self.eOpposite.containment
+		end
+		
+		if (not (involvedInComposition or self.derived or self.transient)) then
+			if self.upperBound==1 then
+				
+				content.append(context.indentString)
+				content.append("if not self."+mangledName+".isVoid then")
+				context.pushIndent
+				content.append(context.indentString)
+				content.append("if not self."+mangledName+".similarElementInMergedModel.isVoid then")
+				context.pushIndent
+				content.append(context.indentString)
+				content.append("// element pointed by this moved element is still in the unmoved model")
+				
+				content.append(context.indentString)
+				content.append("self."+mangledName+" := self."+mangledName+".similarElementInMergedModel.asType("+typeName+")")	
+				context.popIndent
+				content.append(context.indentString)
+				content.append("end")
+				context.popIndent
+				content.append(context.indentString)
+				content.append("end")
+			else
+				content.append(context.indentString)
+				content.append("// find referenced elements not in merged model")
+				if(self.ordered) then
+					content.append(context.indentString) 
+					content.append("// warning order not ensured, TODO")
+				end
+				content.append(context.indentString)
+				content.append("var "+mangledName+"ToMove : kermeta::standard::Sequence<"+typeName+"> init self."+mangledName+".select{ o | not o.similarElementInMergedModel.isVoid }")
+				content.append(context.indentString)
+				content.append(mangledName+"ToMove.each{ o |") 
+				context.pushIndent
+					content.append(context.indentString)
+					content.append("stdio.writeln(\"[fixReferences]replacing \"+o.toString+\" by \"+o.similarElementInMergedModel.toString+\" (referenced by attribute "+mangledName+")\")")
+					//content.append("stdio.writeln(\"[fixReferences]moving a \"+o.toString+\" referenced by attribute "+mangledName+"\")")
+					content.append(context.indentString)
+					content.append("self."+mangledName+".remove(o)")
+					content.append(context.indentString)
+					content.append("self."+mangledName+".add(o.similarElementInMergedModel.asType("+typeName+"))")
+				
+				context.popIndent	
+				content.append(context.indentString)
+				content.append("}")
+				content.append(context.indentString)
+				
+				
+				
+				
+			end			
+		end
+				
+
+		result := content.toString()
+	end
+}	
+	

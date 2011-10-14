@@ -261,6 +261,10 @@ aspect class EReference {
 						content.append("// move it in merged model")
 						content.append(context.indentString)
 						content.append("mergedModelElement."+mangledName+".add(aspect_"+self.name+")")
+						content.append(context.indentString)
+						content.append("// mark moved element so its references could be fixed")
+						content.append(context.indentString)
+						content.append("context.movedElementsNeedingReferenceFix.add(aspect_"+self.name+".asType(Mergeable))")
 					context.popIndent
 					content.append(context.indentString)
 				content.append("end")

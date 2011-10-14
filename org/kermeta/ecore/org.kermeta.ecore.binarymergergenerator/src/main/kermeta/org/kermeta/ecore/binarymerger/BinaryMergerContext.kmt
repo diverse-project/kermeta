@@ -11,12 +11,18 @@ package org::kermeta::ecore::binarymerger;
 
 
 require kermeta
+require "Mergeable.kmt"
 
 using kermeta::standard
 
 class BinaryMergerContext
 {
 
+	/**
+	 * List of elements that may require a fix of their references (ie. link not involved in the composition)
+	 */
+	reference movedElementsNeedingReferenceFix : bag Mergeable[0..*]
+	
 	operation initialize() : BinaryMergerContext is do
 	 	result := self
 	 end
