@@ -9,8 +9,10 @@
 package kermeta::standard;
 
 require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 
-using kermeta::language::structure
+using org::kermeta::language::structure
 
 aspect class Collection<G>
 {
@@ -23,7 +25,7 @@ aspect class Collection<G>
 		self.each{g|
 			cdColl.each{cd|
 				//If g is an instance of one of the ClassDefinition contained in cdColl
-				if g.getMetaClass().typeDefinition.qualifiedName() == cd.asType(ClassDefinition).qualifiedName() then
+				if g.getMetaClass().typeDefinition.qualifiedName() == cd.asType(ClassDefinition).getQualifiedName() then
 					//Then add it to the result set
 					res.add(g)
 				end
