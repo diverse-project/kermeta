@@ -15,6 +15,7 @@ package org::kermeta::binarymerger::generator;
 require kermeta
 require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerAspectGenerator.kmt"
 require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerSignatureAspectGenerator.kmt"
+require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerReferenceFixerAspectGenerator.kmt"
 require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerMoveAspectGenerator.kmt"
 require "platform:/resource/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/generator/BinaryMergerPropertyResolverAspectGenerator.kmt"
 
@@ -28,10 +29,11 @@ class Main
 	operation main() : Void is do 
 		var binaryMergerAspectGenerator : BinaryMergerAspectGenerator init BinaryMergerAspectGenerator.new
 		var binaryMergerSignatureAspectGenerator : BinaryMergerSignatureAspectGenerator init BinaryMergerSignatureAspectGenerator.new
+		var binaryMergerReferenceFixerAspectGenerator : BinaryMergerReferenceFixerAspectGenerator init BinaryMergerReferenceFixerAspectGenerator.new
 		var binaryMergerMoveAspectGenerator : BinaryMergerMoveAspectGenerator init BinaryMergerMoveAspectGenerator.new
 		var binaryMergerPropertyResolverAspectGenerator : BinaryMergerPropertyResolverAspectGenerator init BinaryMergerPropertyResolverAspectGenerator.new
 		
-		binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
+		/*binaryMergerAspectGenerator.generateBinaryMergerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			""
@@ -40,9 +42,14 @@ class Main
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			"") 
+			*/ 
+		binaryMergerReferenceFixerAspectGenerator.generateBinaryMergerReferenceFixerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
+			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
+			"km",
+			"")
 			
 		// use the user version of the signature (the generated file above is for sample only)
-		binaryMergerMoveAspectGenerator.generateBinaryMergerMoveAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
+	/*	binaryMergerMoveAspectGenerator.generateBinaryMergerMoveAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			"require \"platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt\"\n"+
@@ -54,6 +61,6 @@ class Main
 		binaryMergerPropertyResolverAspectGenerator.generateBinaryMergerPropertyResolverAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
-			"")
+			"") */
 	end
 }

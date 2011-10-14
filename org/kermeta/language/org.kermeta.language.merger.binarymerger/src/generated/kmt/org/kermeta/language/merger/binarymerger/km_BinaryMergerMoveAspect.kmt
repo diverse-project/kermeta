@@ -36,6 +36,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -62,6 +64,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -88,6 +92,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.parameters.add(aspect_parameters)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -103,6 +109,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -129,6 +137,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.statement.add(aspect_statement)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_statement.asType(Mergeable))
 							end
 						}
 						self.rescueBlock.each{aspect_rescueBlock | 
@@ -142,6 +152,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.rescueBlock.add(aspect_rescueBlock)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_rescueBlock.asType(Mergeable))
 							end
 						}
 						self.containedType.each{aspect_containedType | 
@@ -155,6 +167,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -183,6 +197,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -212,6 +228,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -238,6 +256,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -264,6 +284,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -290,6 +312,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -319,6 +343,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -346,6 +372,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -372,6 +400,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.body.add(aspect_body)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_body.asType(Mergeable))
 							end
 						}
 						mergedModelElement.exceptionType ?= self.selectUnaryProperty("exceptionType", self.exceptionType, mergedModelElement.exceptionType)
@@ -416,6 +446,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -442,6 +474,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -468,6 +502,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.parameters.add(aspect_parameters)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -485,6 +521,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -511,6 +549,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.parameters.add(aspect_parameters)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 							end
 						}
 						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
@@ -525,6 +565,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -569,6 +611,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -597,6 +641,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -625,6 +671,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -652,6 +700,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -678,6 +728,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -707,6 +759,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -733,6 +787,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -763,6 +819,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -789,6 +847,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.usings.add(aspect_usings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_usings.asType(Mergeable))
 							end
 						}
 						mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
@@ -807,6 +867,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.parameters.add(aspect_parameters)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -822,6 +884,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -848,6 +912,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -874,6 +940,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -900,6 +968,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -932,6 +1002,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_kOwnedTags.asType(Mergeable))
 							end
 						}
 					end
@@ -958,6 +1030,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedParameter.add(aspect_ownedParameter)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedParameter.asType(Mergeable))
 							end
 						}
 						self.~pre.each{aspect_pre | 
@@ -971,6 +1045,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.~pre.add(aspect_pre)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_pre.asType(Mergeable))
 							end
 						}
 						self.~post.each{aspect_post | 
@@ -984,6 +1060,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.~post.add(aspect_post)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_post.asType(Mergeable))
 							end
 						}
 						mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
@@ -998,6 +1076,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedUnresolvedOperations.add(aspect_ownedUnresolvedOperations)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolvedOperations.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1030,6 +1110,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedUnresolvedProperties.add(aspect_ownedUnresolvedProperties)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolvedProperties.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1085,6 +1167,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1160,6 +1244,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeMappings.add(aspect_typeMappings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeMappings.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1175,6 +1261,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1214,6 +1302,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeMappings.add(aspect_typeMappings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeMappings.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1231,6 +1321,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1257,6 +1349,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedLiteral.add(aspect_ownedLiteral)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedLiteral.asType(Mergeable))
 							end
 						}
 						self.typeMappings.each{aspect_typeMappings | 
@@ -1270,6 +1364,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeMappings.add(aspect_typeMappings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeMappings.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1287,6 +1383,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1328,6 +1426,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.nestedPackage.add(aspect_nestedPackage)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_nestedPackage.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1343,6 +1443,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedTypeDefinition.add(aspect_ownedTypeDefinition)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedTypeDefinition.asType(Mergeable))
 							end
 						}
 					end
@@ -1384,6 +1486,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeMappings.add(aspect_typeMappings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeMappings.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1401,6 +1505,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1498,6 +1604,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.~inv.add(aspect_inv)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_inv.asType(Mergeable))
 							end
 						}
 						self.ownedAttribute.each{aspect_ownedAttribute | 
@@ -1511,6 +1619,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedAttribute.add(aspect_ownedAttribute)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedAttribute.asType(Mergeable))
 							end
 						}
 						self.ownedOperation.each{aspect_ownedOperation | 
@@ -1524,6 +1634,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedOperation.add(aspect_ownedOperation)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedOperation.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1541,6 +1653,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1568,6 +1682,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.packages.add(aspect_packages)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_packages.asType(Mergeable))
 							end
 						}
 						self.requires.each{aspect_requires | 
@@ -1581,6 +1697,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.requires.add(aspect_requires)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_requires.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1609,6 +1727,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.ownedTypeDefinition.add(aspect_ownedTypeDefinition)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_ownedTypeDefinition.asType(Mergeable))
 							end
 						}
 					end
@@ -1650,6 +1770,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1676,6 +1798,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.virtualTypeBinding.add(aspect_virtualTypeBinding)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_virtualTypeBinding.asType(Mergeable))
 							end
 						}
 						self.typeParamBinding.each{aspect_typeParamBinding | 
@@ -1689,6 +1813,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeParamBinding.add(aspect_typeParamBinding)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeParamBinding.asType(Mergeable))
 							end
 						}
 					end
@@ -1745,6 +1871,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeMappings.add(aspect_typeMappings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeMappings.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1762,6 +1890,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1788,6 +1918,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.virtualType.add(aspect_virtualType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_virtualType.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1816,6 +1948,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.typeParamBinding.add(aspect_typeParamBinding)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_typeParamBinding.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1870,6 +2004,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.usings.add(aspect_usings)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_usings.asType(Mergeable))
 							end
 						}
 						// select value for unary attribute
@@ -1885,6 +2021,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end
@@ -1941,6 +2079,8 @@ package kermeta {
 							else
 								// move it in merged model
 								mergedModelElement.containedType.add(aspect_containedType)
+								// mark moved element so its references could be fixed
+								context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 							end
 						}
 					end

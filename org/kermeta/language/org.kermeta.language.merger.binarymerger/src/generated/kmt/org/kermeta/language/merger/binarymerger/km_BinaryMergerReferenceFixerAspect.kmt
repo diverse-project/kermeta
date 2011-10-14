@@ -1,0 +1,827 @@
+package org;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt"
+require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/Mergeable.kmt"
+require "platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerAspect.kmt"
+
+using kermeta::language::structure
+using org::kermeta::ecore::binarymerger
+
+package kermeta {
+	package language {
+		package behavior {
+			aspect class Assignment {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class Expression {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+					if not self.staticType.isVoid then
+						if not self.staticType.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.staticType := self.staticType.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class CallExpression {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var staticTypeVariableBindingsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.staticTypeVariableBindings.select{ o | not o.similarElementInMergedModel.isVoid }
+					staticTypeVariableBindingsToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute staticTypeVariableBindings)")
+						self.staticTypeVariableBindings.remove(o)
+						self.staticTypeVariableBindings.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class Block {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class CallVariable {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+					
+					super()
+				end
+			}
+
+			aspect class CallFeature {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+					
+					super()
+				end
+			}
+
+			aspect class CallSuperOperation {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallOperation is do
+					
+					super()
+				end
+			}
+
+			aspect class CallResult {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallVariable is do
+					
+					super()
+				end
+			}
+
+			aspect class CallValue {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+					
+					super()
+				end
+			}
+
+			aspect class Conditional {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class Raise {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class Rescue {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class TypeReference {
+				method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+					
+					super()
+				end
+			}
+
+			aspect class Literal {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class EmptyExpression {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class JavaStaticCall {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class LambdaExpression {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class LambdaParameter {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class IntegerLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+					
+					super()
+				end
+			}
+
+			aspect class StringLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+					
+					super()
+				end
+			}
+
+			aspect class BooleanLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+					
+					super()
+				end
+			}
+
+			aspect class CallTypeLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+					
+					super()
+				end
+			}
+
+			aspect class VoidLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+					
+					super()
+				end
+			}
+
+			aspect class Loop {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class SelfExpression {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class VariableDecl {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+					
+					super()
+				end
+			}
+
+			aspect class UnresolvedCall {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Unresolved is do
+					
+					super()
+					if not self.targetParent.isVoid then
+						if not self.targetParent.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.targetParent := self.targetParent.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var genericsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.generics.select{ o | not o.similarElementInMergedModel.isVoid }
+					genericsToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute generics)")
+						self.generics.remove(o)
+						self.generics.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var staticTypeVariableBindingsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.staticTypeVariableBindings.select{ o | not o.similarElementInMergedModel.isVoid }
+					staticTypeVariableBindingsToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute staticTypeVariableBindings)")
+						self.staticTypeVariableBindings.remove(o)
+						self.staticTypeVariableBindings.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+					if not self.staticType.isVoid then
+						if not self.staticType.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.staticType := self.staticType.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class CallOperation {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallFeature is do
+					
+					super()
+					if not self.staticOperation.isVoid then
+						if not self.staticOperation.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.staticOperation := self.staticOperation.similarElementInMergedModel.asType(org::kermeta::language::structure::Operation)
+						end
+					end
+				end
+			}
+
+			aspect class CallProperty {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallFeature is do
+					
+					super()
+					if not self.staticProperty.isVoid then
+						if not self.staticProperty.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.staticProperty := self.staticProperty.similarElementInMergedModel.asType(org::kermeta::language::structure::Property)
+						end
+					end
+				end
+			}
+
+			aspect class CallEnumLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+					
+					super()
+					if not self.staticEnumLiteral.isVoid then
+						if not self.staticEnumLiteral.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.staticEnumLiteral := self.staticEnumLiteral.similarElementInMergedModel.asType(org::kermeta::language::structure::EnumerationLiteral)
+						end
+					end
+				end
+			}
+
+		}
+
+
+		package structure {
+
+
+			aspect class KermetaModelElement {
+				operation fixReferences( ) : Void is do
+					
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var kTagToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Tag> init self.kTag.select{ o | not o.similarElementInMergedModel.isVoid }
+					kTagToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute kTag)")
+						self.kTag.remove(o)
+						self.kTag.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag))
+					}
+					
+				end
+			}
+
+
+			aspect class Operation {
+				method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var raisedExceptionToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.raisedException.select{ o | not o.similarElementInMergedModel.isVoid }
+					raisedExceptionToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute raisedException)")
+						self.raisedException.remove(o)
+						self.raisedException.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+					if not self.superOperation.isVoid then
+						if not self.superOperation.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.superOperation := self.superOperation.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractOperation)
+						end
+					end
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var typeParameterToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeVariable> init self.typeParameter.select{ o | not o.similarElementInMergedModel.isVoid }
+					typeParameterToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeParameter)")
+						self.typeParameter.remove(o)
+						self.typeParameter.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariable))
+					}
+					
+				end
+			}
+
+			aspect class Property {
+				method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+					
+					super()
+					if not self.opposite.isVoid then
+						if not self.opposite.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.opposite := self.opposite.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractProperty)
+						end
+					end
+				end
+			}
+
+			aspect class Type {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class TypeContainer {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class EnumerationLiteral {
+				method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+					
+					super()
+				end
+			}
+
+			aspect class TypeVariableBinding {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+					
+					super()
+					if not self.variable.isVoid then
+						if not self.variable.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.variable := self.variable.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariable)
+						end
+					end
+					if not self.type.isVoid then
+						if not self.type.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.type := self.type.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class MultiplicityElement {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypedElement is do
+					
+					super()
+				end
+			}
+
+			aspect class TypeDefinition {
+				method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
+					superTypeToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						self.superType.remove(o)
+						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class Class {
+				method fixReferences( ) : Void from org::kermeta::language::structure::ParameterizedType is do
+					
+					super()
+				end
+			}
+
+			aspect class DataType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
+					superTypeToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						self.superType.remove(o)
+						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class Enumeration {
+				method fixReferences( ) : Void from org::kermeta::language::structure::DataType is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
+					superTypeToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						self.superType.remove(o)
+						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class NamedElement {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class Package {
+				method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+					
+					super()
+				end
+			}
+
+			aspect class Parameter {
+				method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+					
+					super()
+				end
+			}
+
+			aspect class PrimitiveType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::DataType is do
+					
+					super()
+					if not self.instanceType.isVoid then
+						if not self.instanceType.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.instanceType := self.instanceType.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
+					superTypeToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						self.superType.remove(o)
+						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class TypedElement {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+					
+					super()
+					if not self.type.isVoid then
+						if not self.type.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.type := self.type.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+
+			aspect class Tag {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var objectToMove : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement> init self.object.select{ o | not o.similarElementInMergedModel.isVoid }
+					objectToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute object)")
+						self.object.remove(o)
+						self.object.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement))
+					}
+					
+				end
+			}
+
+			aspect class AbstractProperty {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class Constraint {
+				method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+					
+					super()
+				end
+			}
+
+
+			aspect class ClassDefinition {
+				method fixReferences( ) : Void from org::kermeta::language::structure::GenericTypeDefinition is do
+					
+					super()
+				end
+			}
+
+
+			aspect class ModelingUnit {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeDefinitionContainer is do
+					
+					super()
+				end
+			}
+
+			aspect class TypeDefinitionContainer {
+				method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+					
+					super()
+				end
+			}
+
+			aspect class Require {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class GenericTypeDefinition {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeDefinition is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var typeParameterToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeVariable> init self.typeParameter.select{ o | not o.similarElementInMergedModel.isVoid }
+					typeParameterToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeParameter)")
+						self.typeParameter.remove(o)
+						self.typeParameter.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariable))
+					}
+					
+				end
+			}
+
+			aspect class ParameterizedType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+					
+					super()
+					if not self.typeDefinition.isVoid then
+						if not self.typeDefinition.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.typeDefinition := self.typeDefinition.similarElementInMergedModel.asType(org::kermeta::language::structure::GenericTypeDefinition)
+						end
+					end
+				end
+			}
+
+			aspect class TypeVariable {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+					
+					super()
+					if not self.supertype.isVoid then
+						if not self.supertype.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.supertype := self.supertype.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class ObjectTypeVariable {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeVariable is do
+					
+					super()
+				end
+			}
+
+			aspect class ModelType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
+					superTypeToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						self.superType.remove(o)
+						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var contentsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement> init self.contents.select{ o | not o.similarElementInMergedModel.isVoid }
+					contentsToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute contents)")
+						self.contents.remove(o)
+						self.contents.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement))
+					}
+					
+				end
+			}
+
+			aspect class ModelTypeVariable {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeVariable is do
+					
+					super()
+				end
+			}
+
+			aspect class VirtualType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::ObjectTypeVariable is do
+					
+					super()
+					if not self.classDefinition.isVoid then
+						if not self.classDefinition.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.classDefinition := self.classDefinition.similarElementInMergedModel.asType(org::kermeta::language::structure::ClassDefinition)
+						end
+					end
+				end
+			}
+
+			aspect class Model {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var contentsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement> init self.contents.select{ o | not o.similarElementInMergedModel.isVoid }
+					contentsToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute contents)")
+						self.contents.remove(o)
+						self.contents.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement))
+					}
+					
+				end
+			}
+
+			aspect class AbstractOperation {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class UnresolvedType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var genericsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.generics.select{ o | not o.similarElementInMergedModel.isVoid }
+					genericsToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute generics)")
+						self.generics.remove(o)
+						self.generics.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class Unresolved {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class UnresolvedProperty {
+				method fixReferences( ) : Void from org::kermeta::language::structure::AbstractProperty is do
+					
+					super()
+				end
+			}
+
+			aspect class UnresolvedOperation {
+				method fixReferences( ) : Void from org::kermeta::language::structure::AbstractOperation is do
+					
+					super()
+					if not self.~from.isVoid then
+						if not self.~from.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.~from := self.~from.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class Using {
+				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+					
+					super()
+				end
+			}
+
+			aspect class ProductType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+					
+					super()
+					// find referenced elements not in merged model
+					// warning order not ensured, TODO
+					var typeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.type.select{ o | not o.similarElementInMergedModel.isVoid }
+					typeToMove.each{ o |
+						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute type)")
+						self.type.remove(o)
+						self.type.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
+					}
+					
+				end
+			}
+
+			aspect class FunctionType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+					
+					super()
+					if not self.left.isVoid then
+						if not self.left.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.left := self.left.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+					if not self.right.isVoid then
+						if not self.right.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.right := self.right.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class VoidType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+					
+					super()
+				end
+			}
+
+			aspect class TypeMapping {
+				method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+					
+					super()
+					if not self.targetType.isVoid then
+						if not self.targetType.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.targetType := self.targetType.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
+				end
+			}
+
+			aspect class UnresolvedInferredType {
+				method fixReferences( ) : Void from org::kermeta::language::structure::Unresolved is do
+					
+					super()
+				end
+			}
+
+		}
+
+
+		aspect class DummyClass {
+			operation fixReferences( ) : Void is do
+				
+			end
+		}
+
+	}
+
+
+	aspect class DummyClass {
+		operation fixReferences( ) : Void is do
+			
+		end
+	}
+
+}
+
+
+aspect class DummyClass {
+	operation fixReferences( ) : Void is do
+		
+	end
+}

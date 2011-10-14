@@ -11,13 +11,13 @@ package kermeta {
 	package language {
 		package behavior {
 			aspect class Assignment {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
 					var aspectElement : org::kermeta::language::behavior::Assignment
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
 						
-						result := super( aspectElement)
+						super()
 						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
 							result := result and self.target == aspectElement.target
 						end
@@ -27,1326 +27,1094 @@ package kermeta {
 						if (not self.isCast.isVoid) and (not aspectElement.isCast.isVoid) then
 							result := result and self.isCast == aspectElement.isCast
 						end
-					else
-						result := false
 					end
-				end
-			}
-
-			aspect class Expression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::behavior::Expression
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::CallExpression
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Block {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::Block
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
-					var aspectElement : org::kermeta::language::behavior::CallVariable
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
-							result := result and self.isAtpre == aspectElement.isAtpre
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallFeature {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
-					var aspectElement : org::kermeta::language::behavior::CallFeature
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
-							result := result and self.target == aspectElement.target
-						end
-						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
-							result := result and self.isAtpre == aspectElement.isAtpre
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallSuperOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallOperation is do
-					var aspectElement : org::kermeta::language::behavior::CallSuperOperation
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallResult {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallVariable is do
-					var aspectElement : org::kermeta::language::behavior::CallResult
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallValue {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
-					var aspectElement : org::kermeta::language::behavior::CallValue
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Conditional {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::Conditional
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.thenBody.isVoid) and (not aspectElement.thenBody.isVoid) then
-							result := result and self.thenBody == aspectElement.thenBody
-						end
-						if (not self.elseBody.isVoid) and (not aspectElement.elseBody.isVoid) then
-							result := result and self.elseBody == aspectElement.elseBody
-						end
-						if (not self.condition.isVoid) and (not aspectElement.condition.isVoid) then
-							result := result and self.condition == aspectElement.condition
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Raise {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::Raise
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.expression.isVoid) and (not aspectElement.expression.isVoid) then
-							result := result and self.expression == aspectElement.expression
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Rescue {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::behavior::Rescue
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
-							result := result and self.exceptionType == aspectElement.exceptionType
-						end
-						if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
-							result := result and self.exceptionName == aspectElement.exceptionName
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeReference {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
-					var aspectElement : org::kermeta::language::behavior::TypeReference
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Literal {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::Literal
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class EmptyExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::EmptyExpression
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class JavaStaticCall {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::JavaStaticCall
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.jclass.isVoid) and (not aspectElement.jclass.isVoid) then
-							result := result and self.jclass == aspectElement.jclass
-						end
-						if (not self.jmethod.isVoid) and (not aspectElement.jmethod.isVoid) then
-							result := result and self.jmethod == aspectElement.jmethod
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class LambdaExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::LambdaExpression
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-							result := result and self.body == aspectElement.body
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class LambdaParameter {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::behavior::LambdaParameter
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
-							result := result and self.type == aspectElement.type
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class IntegerLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
-					var aspectElement : org::kermeta::language::behavior::IntegerLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-							result := result and self.~value == aspectElement.~value
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class StringLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
-					var aspectElement : org::kermeta::language::behavior::StringLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-							result := result and self.~value == aspectElement.~value
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class BooleanLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
-					var aspectElement : org::kermeta::language::behavior::BooleanLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-							result := result and self.~value == aspectElement.~value
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallTypeLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
-					var aspectElement : org::kermeta::language::behavior::CallTypeLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.typeref.isVoid) and (not aspectElement.typeref.isVoid) then
-							result := result and self.typeref == aspectElement.typeref
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class VoidLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
-					var aspectElement : org::kermeta::language::behavior::VoidLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Loop {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::Loop
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
-							result := result and self.initialization == aspectElement.initialization
-						end
-						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-							result := result and self.body == aspectElement.body
-						end
-						if (not self.stopCondition.isVoid) and (not aspectElement.stopCondition.isVoid) then
-							result := result and self.stopCondition == aspectElement.stopCondition
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class SelfExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::SelfExpression
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class VariableDecl {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
-					var aspectElement : org::kermeta::language::behavior::VariableDecl
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
-							result := result and self.initialization == aspectElement.initialization
-						end
-						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
-							result := result and self.type == aspectElement.type
-						end
-						if (not self.identifier.isVoid) and (not aspectElement.identifier.isVoid) then
-							result := result and self.identifier == aspectElement.identifier
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class UnresolvedCall {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
-					var aspectElement : org::kermeta::language::behavior::UnresolvedCall
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
-							result := result and self.target == aspectElement.target
-						end
-						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
-							result := result and self.isAtpre == aspectElement.isAtpre
-						end
-						if (not self.isCalledWithParenthesis.isVoid) and (not aspectElement.isCalledWithParenthesis.isVoid) then
-							result := result and self.isCalledWithParenthesis == aspectElement.isCalledWithParenthesis
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
-					var aspectElement : org::kermeta::language::behavior::CallOperation
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
-					var aspectElement : org::kermeta::language::behavior::CallProperty
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class CallEnumLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
-					var aspectElement : org::kermeta::language::behavior::CallEnumLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-		}
-
-
-		package structure {
-
-
-			aspect class KermetaModelElement {
-				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-					var aspectElement : org::kermeta::language::structure::KermetaModelElement
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := true
-					else
-						result := false
-					end
-				end
-			}
-
-
-			aspect class Operation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
-					var aspectElement : org::kermeta::language::structure::Operation
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-							result := result and self.body == aspectElement.body
-						end
-						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
-							result := result and self.isAbstract == aspectElement.isAbstract
-						end
-						if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
-							result := result and self.uniqueName == aspectElement.uniqueName
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Property {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
-					var aspectElement : org::kermeta::language::structure::Property
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.getterBody.isVoid) and (not aspectElement.getterBody.isVoid) then
-							result := result and self.getterBody == aspectElement.getterBody
-						end
-						if (not self.setterBody.isVoid) and (not aspectElement.setterBody.isVoid) then
-							result := result and self.setterBody == aspectElement.setterBody
-						end
-						if (not self.isReadOnly.isVoid) and (not aspectElement.isReadOnly.isVoid) then
-							result := result and self.isReadOnly == aspectElement.isReadOnly
-						end
-						if (not self.default.isVoid) and (not aspectElement.default.isVoid) then
-							result := result and self.default == aspectElement.default
-						end
-						if (not self.isComposite.isVoid) and (not aspectElement.isComposite.isVoid) then
-							result := result and self.isComposite == aspectElement.isComposite
-						end
-						if (not self.isDerived.isVoid) and (not aspectElement.isDerived.isVoid) then
-							result := result and self.isDerived == aspectElement.isDerived
-						end
-						if (not self.isID.isVoid) and (not aspectElement.isID.isVoid) then
-							result := result and self.isID == aspectElement.isID
-						end
-						if (not self.isGetterAbstract.isVoid) and (not aspectElement.isGetterAbstract.isVoid) then
-							result := result and self.isGetterAbstract == aspectElement.isGetterAbstract
-						end
-						if (not self.isSetterAbstract.isVoid) and (not aspectElement.isSetterAbstract.isVoid) then
-							result := result and self.isSetterAbstract == aspectElement.isSetterAbstract
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Type {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Type
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeContainer {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::TypeContainer
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class EnumerationLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
-					var aspectElement : org::kermeta::language::structure::EnumerationLiteral
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeVariableBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					var aspectElement : org::kermeta::language::structure::TypeVariableBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class MultiplicityElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
-					var aspectElement : org::kermeta::language::structure::MultiplicityElement
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isOrdered.isVoid) and (not aspectElement.isOrdered.isVoid) then
-							result := result and self.isOrdered == aspectElement.isOrdered
-						end
-						if (not self.isUnique.isVoid) and (not aspectElement.isUnique.isVoid) then
-							result := result and self.isUnique == aspectElement.isUnique
-						end
-						if (not self.lower.isVoid) and (not aspectElement.lower.isVoid) then
-							result := result and self.lower == aspectElement.lower
-						end
-						if (not self.upper.isVoid) and (not aspectElement.upper.isVoid) then
-							result := result and self.upper == aspectElement.upper
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
-					var aspectElement : org::kermeta::language::structure::TypeDefinition
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Class {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterizedType is do
-					var aspectElement : org::kermeta::language::structure::Class
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
-							result := result and self.isAbstract == aspectElement.isAbstract
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class DataType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
-					var aspectElement : org::kermeta::language::structure::DataType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Enumeration {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
-					var aspectElement : org::kermeta::language::structure::Enumeration
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class NamedElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::NamedElement
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Package {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
-					var aspectElement : org::kermeta::language::structure::Package
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-							result := result and self.uri == aspectElement.uri
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Parameter {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
-					var aspectElement : org::kermeta::language::structure::Parameter
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class PrimitiveType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
-					var aspectElement : org::kermeta::language::structure::PrimitiveType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypedElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					var aspectElement : org::kermeta::language::structure::TypedElement
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-
-			aspect class Tag {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Tag
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
-							result := result and self.~value == aspectElement.~value
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class AbstractProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::AbstractProperty
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Constraint {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
-					var aspectElement : org::kermeta::language::structure::Constraint
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
-							result := result and self.body == aspectElement.body
-						end
-						if (not self.stereotype.isVoid) and (not aspectElement.stereotype.isVoid) then
-							result := result and self.stereotype == aspectElement.stereotype
-						end
-						if (not self.language.isVoid) and (not aspectElement.language.isVoid) then
-							result := result and self.language == aspectElement.language
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-
-			aspect class ClassDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::GenericTypeDefinition is do
-					var aspectElement : org::kermeta::language::structure::ClassDefinition
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
-							result := result and self.isAbstract == aspectElement.isAbstract
-						end
-						if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
-							result := result and self.isSingleton == aspectElement.isSingleton
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-
-			aspect class ModelingUnit {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinitionContainer is do
-					var aspectElement : org::kermeta::language::structure::ModelingUnit
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.namespacePrefix.isVoid) and (not aspectElement.namespacePrefix.isVoid) then
-							result := result and self.namespacePrefix == aspectElement.namespacePrefix
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeDefinitionContainer {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
-					var aspectElement : org::kermeta::language::structure::TypeDefinitionContainer
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Require {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Require
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-							result := result and self.uri == aspectElement.uri
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class GenericTypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
-					var aspectElement : org::kermeta::language::structure::GenericTypeDefinition
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class ParameterizedType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
-					var aspectElement : org::kermeta::language::structure::ParameterizedType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					var aspectElement : org::kermeta::language::structure::TypeVariable
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class ObjectTypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
-					var aspectElement : org::kermeta::language::structure::ObjectTypeVariable
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class ModelType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
-					var aspectElement : org::kermeta::language::structure::ModelType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class ModelTypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
-					var aspectElement : org::kermeta::language::structure::ModelTypeVariable
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class VirtualType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeVariable is do
-					var aspectElement : org::kermeta::language::structure::VirtualType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Model {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Model
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class AbstractOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::AbstractOperation
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class UnresolvedType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
-					var aspectElement : org::kermeta::language::structure::UnresolvedType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
-							result := result and self.typeIdentifier == aspectElement.typeIdentifier
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Unresolved {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Unresolved
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class UnresolvedProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractProperty is do
-					var aspectElement : org::kermeta::language::structure::UnresolvedProperty
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.propertyIdentifier.isVoid) and (not aspectElement.propertyIdentifier.isVoid) then
-							result := result and self.propertyIdentifier == aspectElement.propertyIdentifier
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class UnresolvedOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractOperation is do
-					var aspectElement : org::kermeta::language::structure::UnresolvedOperation
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.operationIdentifier.isVoid) and (not aspectElement.operationIdentifier.isVoid) then
-							result := result and self.operationIdentifier == aspectElement.operationIdentifier
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Using {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectElement : org::kermeta::language::structure::Using
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
-							result := result and self.fromQName == aspectElement.fromQName
-						end
-						if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
-							result := result and self.toName == aspectElement.toName
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class ProductType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					var aspectElement : org::kermeta::language::structure::ProductType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class FunctionType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					var aspectElement : org::kermeta::language::structure::FunctionType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class VoidType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
-					var aspectElement : org::kermeta::language::structure::VoidType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TypeMapping {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					var aspectElement : org::kermeta::language::structure::TypeMapping
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
-							result := result and self.mapping == aspectElement.mapping
-						end
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class UnresolvedInferredType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
-					var aspectElement : org::kermeta::language::structure::UnresolvedInferredType
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-		}
-
-
-		aspect class DummyClass {
-			operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-				var aspectElement : org::kermeta::language::DummyClass
-				aspectElement ?= aspectElementObj
-				if not aspectElement.isVoid then
-
-					
-					result := true
-				else
-					result := false
-				end
-			end
-		}
-
-	}
-
-
-	aspect class DummyClass {
-		operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-			var aspectElement : org::kermeta::DummyClass
-			aspectElement ?= aspectElementObj
-			if not aspectElement.isVoid then
-
-				
-				result := true
-			else
-				result := false
-			end
-		end
-	}
-
-}
-
-
-aspect class DummyClass {
-	operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-		var aspectElement : org::DummyClass
-		aspectElement ?= aspectElementObj
-		if not aspectElement.isVoid then
-
-			
-			result := true
-		else
-			result := false
-		end
-	end
-}
+				}
+
+				aspect class Expression {
+					method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+						var aspectElement : org::kermeta::language::behavior::Expression
+						aspectElement ?= aspectElementObj
+						if not aspectElement.isVoid then
+
+							
+							super()
+						end
+					}
+
+					aspect class CallExpression {
+						method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+							var aspectElement : org::kermeta::language::behavior::CallExpression
+							aspectElement ?= aspectElementObj
+							if not aspectElement.isVoid then
+
+								
+								super()
+								if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+									result := result and self.name == aspectElement.name
+								end
+							end
+						}
+
+						aspect class Block {
+							method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+								var aspectElement : org::kermeta::language::behavior::Block
+								aspectElement ?= aspectElementObj
+								if not aspectElement.isVoid then
+
+									
+									super()
+								end
+							}
+
+							aspect class CallVariable {
+								method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+									var aspectElement : org::kermeta::language::behavior::CallVariable
+									aspectElement ?= aspectElementObj
+									if not aspectElement.isVoid then
+
+										
+										super()
+										if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+											result := result and self.isAtpre == aspectElement.isAtpre
+										end
+									end
+								}
+
+								aspect class CallFeature {
+									method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+										var aspectElement : org::kermeta::language::behavior::CallFeature
+										aspectElement ?= aspectElementObj
+										if not aspectElement.isVoid then
+
+											
+											super()
+											if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
+												result := result and self.target == aspectElement.target
+											end
+											if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+												result := result and self.isAtpre == aspectElement.isAtpre
+											end
+										end
+									}
+
+									aspect class CallSuperOperation {
+										method fixReferences( ) : Void from org::kermeta::language::behavior::CallOperation is do
+											var aspectElement : org::kermeta::language::behavior::CallSuperOperation
+											aspectElement ?= aspectElementObj
+											if not aspectElement.isVoid then
+
+												
+												super()
+											end
+										}
+
+										aspect class CallResult {
+											method fixReferences( ) : Void from org::kermeta::language::behavior::CallVariable is do
+												var aspectElement : org::kermeta::language::behavior::CallResult
+												aspectElement ?= aspectElementObj
+												if not aspectElement.isVoid then
+
+													
+													super()
+												end
+											}
+
+											aspect class CallValue {
+												method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+													var aspectElement : org::kermeta::language::behavior::CallValue
+													aspectElement ?= aspectElementObj
+													if not aspectElement.isVoid then
+
+														
+														super()
+													end
+												}
+
+												aspect class Conditional {
+													method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+														var aspectElement : org::kermeta::language::behavior::Conditional
+														aspectElement ?= aspectElementObj
+														if not aspectElement.isVoid then
+
+															
+															super()
+															if (not self.thenBody.isVoid) and (not aspectElement.thenBody.isVoid) then
+																result := result and self.thenBody == aspectElement.thenBody
+															end
+															if (not self.elseBody.isVoid) and (not aspectElement.elseBody.isVoid) then
+																result := result and self.elseBody == aspectElement.elseBody
+															end
+															if (not self.condition.isVoid) and (not aspectElement.condition.isVoid) then
+																result := result and self.condition == aspectElement.condition
+															end
+														end
+													}
+
+													aspect class Raise {
+														method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+															var aspectElement : org::kermeta::language::behavior::Raise
+															aspectElement ?= aspectElementObj
+															if not aspectElement.isVoid then
+
+																
+																super()
+																if (not self.expression.isVoid) and (not aspectElement.expression.isVoid) then
+																	result := result and self.expression == aspectElement.expression
+																end
+															end
+														}
+
+														aspect class Rescue {
+															method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																var aspectElement : org::kermeta::language::behavior::Rescue
+																aspectElement ?= aspectElementObj
+																if not aspectElement.isVoid then
+
+																	
+																	super()
+																	if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
+																		result := result and self.exceptionType == aspectElement.exceptionType
+																	end
+																	if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
+																		result := result and self.exceptionName == aspectElement.exceptionName
+																	end
+																end
+															}
+
+															aspect class TypeReference {
+																method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+																	var aspectElement : org::kermeta::language::behavior::TypeReference
+																	aspectElement ?= aspectElementObj
+																	if not aspectElement.isVoid then
+
+																		
+																		super()
+																		if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																			result := result and self.name == aspectElement.name
+																		end
+																	end
+																}
+
+																aspect class Literal {
+																	method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																		var aspectElement : org::kermeta::language::behavior::Literal
+																		aspectElement ?= aspectElementObj
+																		if not aspectElement.isVoid then
+
+																			
+																			super()
+																		end
+																	}
+
+																	aspect class EmptyExpression {
+																		method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																			var aspectElement : org::kermeta::language::behavior::EmptyExpression
+																			aspectElement ?= aspectElementObj
+																			if not aspectElement.isVoid then
+
+																				
+																				super()
+																			end
+																		}
+
+																		aspect class JavaStaticCall {
+																			method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																				var aspectElement : org::kermeta::language::behavior::JavaStaticCall
+																				aspectElement ?= aspectElementObj
+																				if not aspectElement.isVoid then
+
+																					
+																					super()
+																					if (not self.jclass.isVoid) and (not aspectElement.jclass.isVoid) then
+																						result := result and self.jclass == aspectElement.jclass
+																					end
+																					if (not self.jmethod.isVoid) and (not aspectElement.jmethod.isVoid) then
+																						result := result and self.jmethod == aspectElement.jmethod
+																					end
+																				end
+																			}
+
+																			aspect class LambdaExpression {
+																				method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																					var aspectElement : org::kermeta::language::behavior::LambdaExpression
+																					aspectElement ?= aspectElementObj
+																					if not aspectElement.isVoid then
+
+																						
+																						super()
+																						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+																							result := result and self.body == aspectElement.body
+																						end
+																					end
+																				}
+
+																				aspect class LambdaParameter {
+																					method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																						var aspectElement : org::kermeta::language::behavior::LambdaParameter
+																						aspectElement ?= aspectElementObj
+																						if not aspectElement.isVoid then
+
+																							
+																							super()
+																							if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
+																								result := result and self.type == aspectElement.type
+																							end
+																							if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																								result := result and self.name == aspectElement.name
+																							end
+																						end
+																					}
+
+																					aspect class IntegerLiteral {
+																						method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+																							var aspectElement : org::kermeta::language::behavior::IntegerLiteral
+																							aspectElement ?= aspectElementObj
+																							if not aspectElement.isVoid then
+
+																								
+																								super()
+																								if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+																									result := result and self.~value == aspectElement.~value
+																								end
+																							end
+																						}
+
+																						aspect class StringLiteral {
+																							method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+																								var aspectElement : org::kermeta::language::behavior::StringLiteral
+																								aspectElement ?= aspectElementObj
+																								if not aspectElement.isVoid then
+
+																									
+																									super()
+																									if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+																										result := result and self.~value == aspectElement.~value
+																									end
+																								end
+																							}
+
+																							aspect class BooleanLiteral {
+																								method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+																									var aspectElement : org::kermeta::language::behavior::BooleanLiteral
+																									aspectElement ?= aspectElementObj
+																									if not aspectElement.isVoid then
+
+																										
+																										super()
+																										if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+																											result := result and self.~value == aspectElement.~value
+																										end
+																									end
+																								}
+
+																								aspect class CallTypeLiteral {
+																									method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+																										var aspectElement : org::kermeta::language::behavior::CallTypeLiteral
+																										aspectElement ?= aspectElementObj
+																										if not aspectElement.isVoid then
+
+																											
+																											super()
+																											if (not self.typeref.isVoid) and (not aspectElement.typeref.isVoid) then
+																												result := result and self.typeref == aspectElement.typeref
+																											end
+																										end
+																									}
+
+																									aspect class VoidLiteral {
+																										method fixReferences( ) : Void from org::kermeta::language::behavior::Literal is do
+																											var aspectElement : org::kermeta::language::behavior::VoidLiteral
+																											aspectElement ?= aspectElementObj
+																											if not aspectElement.isVoid then
+
+																												
+																												super()
+																											end
+																										}
+
+																										aspect class Loop {
+																											method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																												var aspectElement : org::kermeta::language::behavior::Loop
+																												aspectElement ?= aspectElementObj
+																												if not aspectElement.isVoid then
+
+																													
+																													super()
+																													if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
+																														result := result and self.initialization == aspectElement.initialization
+																													end
+																													if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+																														result := result and self.body == aspectElement.body
+																													end
+																													if (not self.stopCondition.isVoid) and (not aspectElement.stopCondition.isVoid) then
+																														result := result and self.stopCondition == aspectElement.stopCondition
+																													end
+																												end
+																											}
+
+																											aspect class SelfExpression {
+																												method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																													var aspectElement : org::kermeta::language::behavior::SelfExpression
+																													aspectElement ?= aspectElementObj
+																													if not aspectElement.isVoid then
+
+																														
+																														super()
+																													end
+																												}
+
+																												aspect class VariableDecl {
+																													method fixReferences( ) : Void from org::kermeta::language::behavior::Expression is do
+																														var aspectElement : org::kermeta::language::behavior::VariableDecl
+																														aspectElement ?= aspectElementObj
+																														if not aspectElement.isVoid then
+
+																															
+																															super()
+																															if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
+																																result := result and self.initialization == aspectElement.initialization
+																															end
+																															if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
+																																result := result and self.type == aspectElement.type
+																															end
+																															if (not self.identifier.isVoid) and (not aspectElement.identifier.isVoid) then
+																																result := result and self.identifier == aspectElement.identifier
+																															end
+																														end
+																													}
+
+																													aspect class UnresolvedCall {
+																														method fixReferences( ) : Void from org::kermeta::language::structure::Unresolved is do
+																															var aspectElement : org::kermeta::language::behavior::UnresolvedCall
+																															aspectElement ?= aspectElementObj
+																															if not aspectElement.isVoid then
+
+																																
+																																super()
+																																if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
+																																	result := result and self.target == aspectElement.target
+																																end
+																																if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
+																																	result := result and self.isAtpre == aspectElement.isAtpre
+																																end
+																																if (not self.isCalledWithParenthesis.isVoid) and (not aspectElement.isCalledWithParenthesis.isVoid) then
+																																	result := result and self.isCalledWithParenthesis == aspectElement.isCalledWithParenthesis
+																																end
+																																if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																	result := result and self.name == aspectElement.name
+																																end
+																															end
+																														}
+
+																														aspect class CallOperation {
+																															method fixReferences( ) : Void from org::kermeta::language::behavior::CallFeature is do
+																																var aspectElement : org::kermeta::language::behavior::CallOperation
+																																aspectElement ?= aspectElementObj
+																																if not aspectElement.isVoid then
+
+																																	
+																																	super()
+																																end
+																															}
+
+																															aspect class CallProperty {
+																																method fixReferences( ) : Void from org::kermeta::language::behavior::CallFeature is do
+																																	var aspectElement : org::kermeta::language::behavior::CallProperty
+																																	aspectElement ?= aspectElementObj
+																																	if not aspectElement.isVoid then
+
+																																		
+																																		super()
+																																	end
+																																}
+
+																																aspect class CallEnumLiteral {
+																																	method fixReferences( ) : Void from org::kermeta::language::behavior::CallExpression is do
+																																		var aspectElement : org::kermeta::language::behavior::CallEnumLiteral
+																																		aspectElement ?= aspectElementObj
+																																		if not aspectElement.isVoid then
+
+																																			
+																																			super()
+																																		end
+																																	}
+
+																																}
+
+
+																																package structure {
+
+
+																																	aspect class KermetaModelElement {
+																																		operation fixReferences( ) : Void is do
+																																			var aspectElement : org::kermeta::language::structure::KermetaModelElement
+																																			aspectElement ?= aspectElementObj
+																																			if not aspectElement.isVoid then
+
+																																				
+																																			end
+																																		}
+
+
+																																		aspect class Operation {
+																																			method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+																																				var aspectElement : org::kermeta::language::structure::Operation
+																																				aspectElement ?= aspectElementObj
+																																				if not aspectElement.isVoid then
+
+																																					
+																																					super()
+																																					if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+																																						result := result and self.body == aspectElement.body
+																																					end
+																																					if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+																																						result := result and self.isAbstract == aspectElement.isAbstract
+																																					end
+																																					if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
+																																						result := result and self.uniqueName == aspectElement.uniqueName
+																																					end
+																																					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																						result := result and self.name == aspectElement.name
+																																					end
+																																				end
+																																			}
+
+																																			aspect class Property {
+																																				method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+																																					var aspectElement : org::kermeta::language::structure::Property
+																																					aspectElement ?= aspectElementObj
+																																					if not aspectElement.isVoid then
+
+																																						
+																																						super()
+																																						if (not self.getterBody.isVoid) and (not aspectElement.getterBody.isVoid) then
+																																							result := result and self.getterBody == aspectElement.getterBody
+																																						end
+																																						if (not self.setterBody.isVoid) and (not aspectElement.setterBody.isVoid) then
+																																							result := result and self.setterBody == aspectElement.setterBody
+																																						end
+																																						if (not self.isReadOnly.isVoid) and (not aspectElement.isReadOnly.isVoid) then
+																																							result := result and self.isReadOnly == aspectElement.isReadOnly
+																																						end
+																																						if (not self.default.isVoid) and (not aspectElement.default.isVoid) then
+																																							result := result and self.default == aspectElement.default
+																																						end
+																																						if (not self.isComposite.isVoid) and (not aspectElement.isComposite.isVoid) then
+																																							result := result and self.isComposite == aspectElement.isComposite
+																																						end
+																																						if (not self.isDerived.isVoid) and (not aspectElement.isDerived.isVoid) then
+																																							result := result and self.isDerived == aspectElement.isDerived
+																																						end
+																																						if (not self.isID.isVoid) and (not aspectElement.isID.isVoid) then
+																																							result := result and self.isID == aspectElement.isID
+																																						end
+																																						if (not self.isGetterAbstract.isVoid) and (not aspectElement.isGetterAbstract.isVoid) then
+																																							result := result and self.isGetterAbstract == aspectElement.isGetterAbstract
+																																						end
+																																						if (not self.isSetterAbstract.isVoid) and (not aspectElement.isSetterAbstract.isVoid) then
+																																							result := result and self.isSetterAbstract == aspectElement.isSetterAbstract
+																																						end
+																																						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																							result := result and self.name == aspectElement.name
+																																						end
+																																					end
+																																				}
+
+																																				aspect class Type {
+																																					method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																						var aspectElement : org::kermeta::language::structure::Type
+																																						aspectElement ?= aspectElementObj
+																																						if not aspectElement.isVoid then
+
+																																							
+																																							super()
+																																						end
+																																					}
+
+																																					aspect class TypeContainer {
+																																						method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																							var aspectElement : org::kermeta::language::structure::TypeContainer
+																																							aspectElement ?= aspectElementObj
+																																							if not aspectElement.isVoid then
+
+																																								
+																																								super()
+																																							end
+																																						}
+
+																																						aspect class EnumerationLiteral {
+																																							method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+																																								var aspectElement : org::kermeta::language::structure::EnumerationLiteral
+																																								aspectElement ?= aspectElementObj
+																																								if not aspectElement.isVoid then
+
+																																									
+																																									super()
+																																								end
+																																							}
+
+																																							aspect class TypeVariableBinding {
+																																								method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+																																									var aspectElement : org::kermeta::language::structure::TypeVariableBinding
+																																									aspectElement ?= aspectElementObj
+																																									if not aspectElement.isVoid then
+
+																																										
+																																										super()
+																																									end
+																																								}
+
+																																								aspect class MultiplicityElement {
+																																									method fixReferences( ) : Void from org::kermeta::language::structure::TypedElement is do
+																																										var aspectElement : org::kermeta::language::structure::MultiplicityElement
+																																										aspectElement ?= aspectElementObj
+																																										if not aspectElement.isVoid then
+
+																																											
+																																											super()
+																																											if (not self.isOrdered.isVoid) and (not aspectElement.isOrdered.isVoid) then
+																																												result := result and self.isOrdered == aspectElement.isOrdered
+																																											end
+																																											if (not self.isUnique.isVoid) and (not aspectElement.isUnique.isVoid) then
+																																												result := result and self.isUnique == aspectElement.isUnique
+																																											end
+																																											if (not self.lower.isVoid) and (not aspectElement.lower.isVoid) then
+																																												result := result and self.lower == aspectElement.lower
+																																											end
+																																											if (not self.upper.isVoid) and (not aspectElement.upper.isVoid) then
+																																												result := result and self.upper == aspectElement.upper
+																																											end
+																																											if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																												result := result and self.name == aspectElement.name
+																																											end
+																																										end
+																																									}
+
+																																									aspect class TypeDefinition {
+																																										method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+																																											var aspectElement : org::kermeta::language::structure::TypeDefinition
+																																											aspectElement ?= aspectElementObj
+																																											if not aspectElement.isVoid then
+
+																																												
+																																												super()
+																																												if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+																																													result := result and self.isAspect == aspectElement.isAspect
+																																												end
+																																											end
+																																										}
+
+																																										aspect class Class {
+																																											method fixReferences( ) : Void from org::kermeta::language::structure::ParameterizedType is do
+																																												var aspectElement : org::kermeta::language::structure::Class
+																																												aspectElement ?= aspectElementObj
+																																												if not aspectElement.isVoid then
+
+																																													
+																																													super()
+																																													if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+																																														result := result and self.isAbstract == aspectElement.isAbstract
+																																													end
+																																													if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																														result := result and self.name == aspectElement.name
+																																													end
+																																												end
+																																											}
+
+																																											aspect class DataType {
+																																												method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+																																													var aspectElement : org::kermeta::language::structure::DataType
+																																													aspectElement ?= aspectElementObj
+																																													if not aspectElement.isVoid then
+
+																																														
+																																														super()
+																																														if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+																																															result := result and self.isAspect == aspectElement.isAspect
+																																														end
+																																														if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																															result := result and self.name == aspectElement.name
+																																														end
+																																													end
+																																												}
+
+																																												aspect class Enumeration {
+																																													method fixReferences( ) : Void from org::kermeta::language::structure::DataType is do
+																																														var aspectElement : org::kermeta::language::structure::Enumeration
+																																														aspectElement ?= aspectElementObj
+																																														if not aspectElement.isVoid then
+
+																																															
+																																															super()
+																																															if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+																																																result := result and self.isAspect == aspectElement.isAspect
+																																															end
+																																															if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																result := result and self.name == aspectElement.name
+																																															end
+																																														end
+																																													}
+
+																																													aspect class NamedElement {
+																																														method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																															var aspectElement : org::kermeta::language::structure::NamedElement
+																																															aspectElement ?= aspectElementObj
+																																															if not aspectElement.isVoid then
+
+																																																
+																																																super()
+																																																if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																	result := result and self.name == aspectElement.name
+																																																end
+																																															end
+																																														}
+
+																																														aspect class Package {
+																																															method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+																																																var aspectElement : org::kermeta::language::structure::Package
+																																																aspectElement ?= aspectElementObj
+																																																if not aspectElement.isVoid then
+
+																																																	
+																																																	super()
+																																																	if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
+																																																		result := result and self.uri == aspectElement.uri
+																																																	end
+																																																end
+																																															}
+
+																																															aspect class Parameter {
+																																																method fixReferences( ) : Void from org::kermeta::language::structure::MultiplicityElement is do
+																																																	var aspectElement : org::kermeta::language::structure::Parameter
+																																																	aspectElement ?= aspectElementObj
+																																																	if not aspectElement.isVoid then
+
+																																																		
+																																																		super()
+																																																		if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																			result := result and self.name == aspectElement.name
+																																																		end
+																																																	end
+																																																}
+
+																																																aspect class PrimitiveType {
+																																																	method fixReferences( ) : Void from org::kermeta::language::structure::DataType is do
+																																																		var aspectElement : org::kermeta::language::structure::PrimitiveType
+																																																		aspectElement ?= aspectElementObj
+																																																		if not aspectElement.isVoid then
+
+																																																			
+																																																			super()
+																																																			if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+																																																				result := result and self.isAspect == aspectElement.isAspect
+																																																			end
+																																																			if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																				result := result and self.name == aspectElement.name
+																																																			end
+																																																		end
+																																																	}
+
+																																																	aspect class TypedElement {
+																																																		method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+																																																			var aspectElement : org::kermeta::language::structure::TypedElement
+																																																			aspectElement ?= aspectElementObj
+																																																			if not aspectElement.isVoid then
+
+																																																				
+																																																				super()
+																																																				if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																					result := result and self.name == aspectElement.name
+																																																				end
+																																																			end
+																																																		}
+
+
+																																																		aspect class Tag {
+																																																			method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																				var aspectElement : org::kermeta::language::structure::Tag
+																																																				aspectElement ?= aspectElementObj
+																																																				if not aspectElement.isVoid then
+
+																																																					
+																																																					super()
+																																																					if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																						result := result and self.name == aspectElement.name
+																																																					end
+																																																					if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
+																																																						result := result and self.~value == aspectElement.~value
+																																																					end
+																																																				end
+																																																			}
+
+																																																			aspect class AbstractProperty {
+																																																				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																					var aspectElement : org::kermeta::language::structure::AbstractProperty
+																																																					aspectElement ?= aspectElementObj
+																																																					if not aspectElement.isVoid then
+
+																																																						
+																																																						super()
+																																																					end
+																																																				}
+
+																																																				aspect class Constraint {
+																																																					method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+																																																						var aspectElement : org::kermeta::language::structure::Constraint
+																																																						aspectElement ?= aspectElementObj
+																																																						if not aspectElement.isVoid then
+
+																																																							
+																																																							super()
+																																																							if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+																																																								result := result and self.body == aspectElement.body
+																																																							end
+																																																							if (not self.stereotype.isVoid) and (not aspectElement.stereotype.isVoid) then
+																																																								result := result and self.stereotype == aspectElement.stereotype
+																																																							end
+																																																							if (not self.language.isVoid) and (not aspectElement.language.isVoid) then
+																																																								result := result and self.language == aspectElement.language
+																																																							end
+																																																						end
+																																																					}
+
+
+																																																					aspect class ClassDefinition {
+																																																						method fixReferences( ) : Void from org::kermeta::language::structure::GenericTypeDefinition is do
+																																																							var aspectElement : org::kermeta::language::structure::ClassDefinition
+																																																							aspectElement ?= aspectElementObj
+																																																							if not aspectElement.isVoid then
+
+																																																								
+																																																								super()
+																																																								if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+																																																									result := result and self.isAbstract == aspectElement.isAbstract
+																																																								end
+																																																								if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
+																																																									result := result and self.isSingleton == aspectElement.isSingleton
+																																																								end
+																																																							end
+																																																						}
+
+
+																																																						aspect class ModelingUnit {
+																																																							method fixReferences( ) : Void from org::kermeta::language::structure::TypeDefinitionContainer is do
+																																																								var aspectElement : org::kermeta::language::structure::ModelingUnit
+																																																								aspectElement ?= aspectElementObj
+																																																								if not aspectElement.isVoid then
+
+																																																									
+																																																									super()
+																																																									if (not self.namespacePrefix.isVoid) and (not aspectElement.namespacePrefix.isVoid) then
+																																																										result := result and self.namespacePrefix == aspectElement.namespacePrefix
+																																																									end
+																																																								end
+																																																							}
+
+																																																							aspect class TypeDefinitionContainer {
+																																																								method fixReferences( ) : Void from org::kermeta::language::structure::NamedElement is do
+																																																									var aspectElement : org::kermeta::language::structure::TypeDefinitionContainer
+																																																									aspectElement ?= aspectElementObj
+																																																									if not aspectElement.isVoid then
+
+																																																										
+																																																										super()
+																																																									end
+																																																								}
+
+																																																								aspect class Require {
+																																																									method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																										var aspectElement : org::kermeta::language::structure::Require
+																																																										aspectElement ?= aspectElementObj
+																																																										if not aspectElement.isVoid then
+
+																																																											
+																																																											super()
+																																																											if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
+																																																												result := result and self.uri == aspectElement.uri
+																																																											end
+																																																										end
+																																																									}
+
+																																																									aspect class GenericTypeDefinition {
+																																																										method fixReferences( ) : Void from org::kermeta::language::structure::TypeDefinition is do
+																																																											var aspectElement : org::kermeta::language::structure::GenericTypeDefinition
+																																																											aspectElement ?= aspectElementObj
+																																																											if not aspectElement.isVoid then
+
+																																																												
+																																																												super()
+																																																											end
+																																																										}
+
+																																																										aspect class ParameterizedType {
+																																																											method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+																																																												var aspectElement : org::kermeta::language::structure::ParameterizedType
+																																																												aspectElement ?= aspectElementObj
+																																																												if not aspectElement.isVoid then
+
+																																																													
+																																																													super()
+																																																												end
+																																																											}
+
+																																																											aspect class TypeVariable {
+																																																												method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+																																																													var aspectElement : org::kermeta::language::structure::TypeVariable
+																																																													aspectElement ?= aspectElementObj
+																																																													if not aspectElement.isVoid then
+
+																																																														
+																																																														super()
+																																																														if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																															result := result and self.name == aspectElement.name
+																																																														end
+																																																													end
+																																																												}
+
+																																																												aspect class ObjectTypeVariable {
+																																																													method fixReferences( ) : Void from org::kermeta::language::structure::TypeVariable is do
+																																																														var aspectElement : org::kermeta::language::structure::ObjectTypeVariable
+																																																														aspectElement ?= aspectElementObj
+																																																														if not aspectElement.isVoid then
+
+																																																															
+																																																															super()
+																																																															if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																																result := result and self.name == aspectElement.name
+																																																															end
+																																																														end
+																																																													}
+
+																																																													aspect class ModelType {
+																																																														method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+																																																															var aspectElement : org::kermeta::language::structure::ModelType
+																																																															aspectElement ?= aspectElementObj
+																																																															if not aspectElement.isVoid then
+
+																																																																
+																																																																super()
+																																																																if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
+																																																																	result := result and self.isAspect == aspectElement.isAspect
+																																																																end
+																																																																if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																																	result := result and self.name == aspectElement.name
+																																																																end
+																																																															end
+																																																														}
+
+																																																														aspect class ModelTypeVariable {
+																																																															method fixReferences( ) : Void from org::kermeta::language::structure::TypeVariable is do
+																																																																var aspectElement : org::kermeta::language::structure::ModelTypeVariable
+																																																																aspectElement ?= aspectElementObj
+																																																																if not aspectElement.isVoid then
+
+																																																																	
+																																																																	super()
+																																																																	if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																																		result := result and self.name == aspectElement.name
+																																																																	end
+																																																																end
+																																																															}
+
+																																																															aspect class VirtualType {
+																																																																method fixReferences( ) : Void from org::kermeta::language::structure::ObjectTypeVariable is do
+																																																																	var aspectElement : org::kermeta::language::structure::VirtualType
+																																																																	aspectElement ?= aspectElementObj
+																																																																	if not aspectElement.isVoid then
+
+																																																																		
+																																																																		super()
+																																																																		if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+																																																																			result := result and self.name == aspectElement.name
+																																																																		end
+																																																																	end
+																																																																}
+
+																																																																aspect class Model {
+																																																																	method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																																		var aspectElement : org::kermeta::language::structure::Model
+																																																																		aspectElement ?= aspectElementObj
+																																																																		if not aspectElement.isVoid then
+
+																																																																			
+																																																																			super()
+																																																																		end
+																																																																	}
+
+																																																																	aspect class AbstractOperation {
+																																																																		method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																																			var aspectElement : org::kermeta::language::structure::AbstractOperation
+																																																																			aspectElement ?= aspectElementObj
+																																																																			if not aspectElement.isVoid then
+
+																																																																				
+																																																																				super()
+																																																																			end
+																																																																		}
+
+																																																																		aspect class UnresolvedType {
+																																																																			method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+																																																																				var aspectElement : org::kermeta::language::structure::UnresolvedType
+																																																																				aspectElement ?= aspectElementObj
+																																																																				if not aspectElement.isVoid then
+
+																																																																					
+																																																																					super()
+																																																																					if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
+																																																																						result := result and self.typeIdentifier == aspectElement.typeIdentifier
+																																																																					end
+																																																																				end
+																																																																			}
+
+																																																																			aspect class Unresolved {
+																																																																				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																																					var aspectElement : org::kermeta::language::structure::Unresolved
+																																																																					aspectElement ?= aspectElementObj
+																																																																					if not aspectElement.isVoid then
+
+																																																																						
+																																																																						super()
+																																																																					end
+																																																																				}
+
+																																																																				aspect class UnresolvedProperty {
+																																																																					method fixReferences( ) : Void from org::kermeta::language::structure::AbstractProperty is do
+																																																																						var aspectElement : org::kermeta::language::structure::UnresolvedProperty
+																																																																						aspectElement ?= aspectElementObj
+																																																																						if not aspectElement.isVoid then
+
+																																																																							
+																																																																							super()
+																																																																							if (not self.propertyIdentifier.isVoid) and (not aspectElement.propertyIdentifier.isVoid) then
+																																																																								result := result and self.propertyIdentifier == aspectElement.propertyIdentifier
+																																																																							end
+																																																																						end
+																																																																					}
+
+																																																																					aspect class UnresolvedOperation {
+																																																																						method fixReferences( ) : Void from org::kermeta::language::structure::AbstractOperation is do
+																																																																							var aspectElement : org::kermeta::language::structure::UnresolvedOperation
+																																																																							aspectElement ?= aspectElementObj
+																																																																							if not aspectElement.isVoid then
+
+																																																																								
+																																																																								super()
+																																																																								if (not self.operationIdentifier.isVoid) and (not aspectElement.operationIdentifier.isVoid) then
+																																																																									result := result and self.operationIdentifier == aspectElement.operationIdentifier
+																																																																								end
+																																																																							end
+																																																																						}
+
+																																																																						aspect class Using {
+																																																																							method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
+																																																																								var aspectElement : org::kermeta::language::structure::Using
+																																																																								aspectElement ?= aspectElementObj
+																																																																								if not aspectElement.isVoid then
+
+																																																																									
+																																																																									super()
+																																																																									if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
+																																																																										result := result and self.fromQName == aspectElement.fromQName
+																																																																									end
+																																																																									if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
+																																																																										result := result and self.toName == aspectElement.toName
+																																																																									end
+																																																																								end
+																																																																							}
+
+																																																																							aspect class ProductType {
+																																																																								method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+																																																																									var aspectElement : org::kermeta::language::structure::ProductType
+																																																																									aspectElement ?= aspectElementObj
+																																																																									if not aspectElement.isVoid then
+
+																																																																										
+																																																																										super()
+																																																																									end
+																																																																								}
+
+																																																																								aspect class FunctionType {
+																																																																									method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+																																																																										var aspectElement : org::kermeta::language::structure::FunctionType
+																																																																										aspectElement ?= aspectElementObj
+																																																																										if not aspectElement.isVoid then
+
+																																																																											
+																																																																											super()
+																																																																										end
+																																																																									}
+
+																																																																									aspect class VoidType {
+																																																																										method fixReferences( ) : Void from org::kermeta::language::structure::Type is do
+																																																																											var aspectElement : org::kermeta::language::structure::VoidType
+																																																																											aspectElement ?= aspectElementObj
+																																																																											if not aspectElement.isVoid then
+
+																																																																												
+																																																																												super()
+																																																																											end
+																																																																										}
+
+																																																																										aspect class TypeMapping {
+																																																																											method fixReferences( ) : Void from org::kermeta::language::structure::TypeContainer is do
+																																																																												var aspectElement : org::kermeta::language::structure::TypeMapping
+																																																																												aspectElement ?= aspectElementObj
+																																																																												if not aspectElement.isVoid then
+
+																																																																													
+																																																																													super()
+																																																																													if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
+																																																																														result := result and self.mapping == aspectElement.mapping
+																																																																													end
+																																																																												end
+																																																																											}
+
+																																																																											aspect class UnresolvedInferredType {
+																																																																												method fixReferences( ) : Void from org::kermeta::language::structure::Unresolved is do
+																																																																													var aspectElement : org::kermeta::language::structure::UnresolvedInferredType
+																																																																													aspectElement ?= aspectElementObj
+																																																																													if not aspectElement.isVoid then
+
+																																																																														
+																																																																														super()
+																																																																													end
+																																																																												}
+
+																																																																											}
+
+
+																																																																											aspect class DummyClass {
+																																																																												operation fixReferences( ) : Void is do
+																																																																													var aspectElement : org::kermeta::language::DummyClass
+																																																																													aspectElement ?= aspectElementObj
+																																																																													if not aspectElement.isVoid then
+
+																																																																														
+																																																																													end
+																																																																												}
+
+																																																																											}
+
+
+																																																																											aspect class DummyClass {
+																																																																												operation fixReferences( ) : Void is do
+																																																																													var aspectElement : org::kermeta::DummyClass
+																																																																													aspectElement ?= aspectElementObj
+																																																																													if not aspectElement.isVoid then
+
+																																																																														
+																																																																													end
+																																																																												}
+
+																																																																											}
+
+
+																																																																											aspect class DummyClass {
+																																																																												operation fixReferences( ) : Void is do
+																																																																													var aspectElement : org::DummyClass
+																																																																													aspectElement ?= aspectElementObj
+																																																																													if not aspectElement.isVoid then
+
+																																																																														
+																																																																													end
+																																																																												}
