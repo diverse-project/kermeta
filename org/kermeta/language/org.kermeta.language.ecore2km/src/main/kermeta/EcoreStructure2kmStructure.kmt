@@ -222,6 +222,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 					genType.targetKermetaObject := type
 					// Adding the created unresolved type to its parent.
 					object.targetKermetaObject.asType(UnresolvedType).generics.add(type)
+					object.targetKermetaObject.asType(UnresolvedType).containedType.add(type)
 					traceRegistry.addTraceFromObjects(genType, type, void)
 				end
 			end
