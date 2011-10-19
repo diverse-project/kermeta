@@ -71,23 +71,26 @@ aspect class ClassDefinition {
 			context.errors.add(ResolverException.new.initialize(message, self))
 		end
 		var typeParamBinding : TypeVariableBinding
-		var i : Integer init 0
-		//For each UnresolvedType in generics
-		unresolved.generics.each{g|g
-			//Create a new TypeVariableBinding
-			typeParamBinding := TypeVariableBinding.new
-			//Link it with the correspondant TypeVariable of c and the UnresolvedType
-			typeParamBinding.variable := self.typeParameter.at(i)
-			typeParamBinding.type := g
-			if g.container.isVoid or g.container.isInstanceOf(UnresolvedType) then
-				// do not move "dual" Type-TypeDefinition like Enumeration
-				typeParamBinding.containedType.add(g)
-			end
-			//Add the new TypeVariable to the newClass
-			newClass.typeParamBinding.add(typeParamBinding)
-			i := i + 1
-		}
-		
+		if unresolved.generics.size()!=self.typeParameter.size then
+			context.errors.add(ResolverException.new.initialize("wrong number of type parameters", self))
+		else
+			var i : Integer init 0
+			//For each UnresolvedType in generics
+			unresolved.generics.each{g|g
+				//Create a new TypeVariableBinding
+				typeParamBinding := TypeVariableBinding.new
+				//Link it with the correspondant TypeVariable of c and the UnresolvedType
+				typeParamBinding.variable := self.typeParameter.at(i)
+				typeParamBinding.type := g
+				if g.container.isVoid or g.container.isInstanceOf(UnresolvedType) then
+					// do not move "dual" Type-TypeDefinition like Enumeration
+					typeParamBinding.containedType.add(g)
+				end
+				//Add the new TypeVariable to the newClass
+				newClass.typeParamBinding.add(typeParamBinding)
+				i := i + 1
+			}
+		end
 		result := newClass
 	end
 }
