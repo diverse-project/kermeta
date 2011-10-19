@@ -223,7 +223,12 @@ package internal{
 		 * returns the list of TypeDefinition with this name
 		 */
 		operation getTypeDefinitions(typeName : String) : Set<TypeDefinition> is do
-			result := cachedStructuralTypeDefinitions.getValue(typeName).typeDefinitions
+			var tdc : TypeDefinitionCollection init cachedStructuralTypeDefinitions.getValue(typeName)
+			if tdc.isVoid then
+				result:=void
+			else
+				result := tdc.typeDefinitions
+			end
 			if result.isVoid then // always returns at least an empty Set
 				result := Set<TypeDefinition>.new
 			end
