@@ -53,6 +53,7 @@ aspect class Parameter {
 		
 		if(not type.isVoid) then
 			self.containedType.add(type)
+			self.type := type
 		end
 		
 		result := self
@@ -174,6 +175,7 @@ aspect class Operation {
 		self.superOperation := parent
 		if(not returnType.isVoid) then
 			self.containedType.add(returnType)
+			self.type := returnType
 		end
 		result := self
 	end
