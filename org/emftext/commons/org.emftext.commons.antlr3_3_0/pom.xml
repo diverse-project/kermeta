@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.emftext.commons</groupId>
+	<artifactId>commons.antlr3_3_0</artifactId>
+	<packaging>bundle</packaging>
+	<name>ANTLR for  emftext</name>
+
+	<parent>
+		<groupId>org.kermeta.language</groupId>
+		<artifactId>language.root</artifactId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<argLine>-Xmx1024m</argLine>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.1.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>org.emftext.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>ANTLR 3.3.0 Runtime Classes</Bundle-Name>
+						<Bundle-Vendor>Software Technology Group - TU Dresden Germany</Bundle-Vendor>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Require-Bundle>
+            </Require-Bundle>
+						<Export-Package>
+							org.antlr.runtime3_3_0.*
+						</Export-Package>
+						<!--
+							specify the packages that should be imported to correctly build
+							the bundle (i.e <packaging>bundle<packaging> ".*" to also include
+							sub packages use the ! for avoiding to import some packages that
+							are already there with the Require-Bundle
+						-->
+						<Import-Package>
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
