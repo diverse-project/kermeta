@@ -46,6 +46,7 @@ class BinaryMerger
 	end
 	
 	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
+		errors.clear
 		//primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
 		
 		// primaryModelModelingUnit is now used as mergedModel

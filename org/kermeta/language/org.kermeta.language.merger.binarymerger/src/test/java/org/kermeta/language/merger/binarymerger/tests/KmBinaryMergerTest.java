@@ -111,6 +111,7 @@ public class KmBinaryMergerTest extends TestCase {
         } else {
         	// the merge is supposed to be invalid
             assertTrue("Merger hasn't reported error but expecting some",result.hasSevereProblems());
+            System.out.println("   succesfully detected a merge error : "+result.getProblems().get(0).getMessage());
         }
     }
 

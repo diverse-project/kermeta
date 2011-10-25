@@ -40,8 +40,8 @@ public class KmBinaryMergerTestSuite extends TestSuite {
 
         TestSuite suite = new TestSuite("KmBinaryMergerTestSuite");
         try {
-            populate(suite, "KmBinaryMerger_Valid", true, new KmBinaryMergerImpl(),".kmt");
-            populate(suite, "KmBinaryMerger_Invalid", false, new KmBinaryMergerImpl(),".kmt");
+            populate(suite, "KmBinaryMerger_Valid", true,".kmt");
+            populate(suite, "KmBinaryMerger_Invalid", false,".kmt");
            // Util.populate(suite, "KMTLoader_Invalid", false, mergerClass,".kmt");
            // Util.populate(suite, "Checker_Valid", true, loaderClass,".kmt");
            // Util.populate(suite, "Checker_Invalid", true, loaderClass,".kmt");
@@ -58,7 +58,7 @@ public class KmBinaryMergerTestSuite extends TestSuite {
         return suite;
     }
 
-    public static void populate(TestSuite ts, String folder, Boolean valid,KmBinaryMerger merger,String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static void populate(TestSuite ts, String folder, Boolean valid,String filter) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
     
     	
     	File currentDir = new File(".");
@@ -99,14 +99,14 @@ public class KmBinaryMergerTestSuite extends TestSuite {
                     outputFolder+"/"+currentTestName+"_pa.km",
                     "file:/"+currentExpectedOutputFilePath,
                     valid,
-                    merger));
+                    new KmBinaryMergerImpl()));
             ts.addTest(new KmBinaryMergerTest(folder+"/"+currentTestName+"_ap",
                     "file:/"+currentAspectFilePath,
                     "file:/"+currentPrimaryFilePath,
                     outputFolder+"/"+currentTestName+"_ap.km",
                     "file:/"+currentExpectedOutputFilePath,
                     valid,
-                    merger));
+                    new KmBinaryMergerImpl()));
         }
        
 
