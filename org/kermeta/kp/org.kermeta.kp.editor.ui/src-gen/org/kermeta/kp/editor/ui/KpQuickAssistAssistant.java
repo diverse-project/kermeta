@@ -8,8 +8,8 @@ package org.kermeta.kp.editor.ui;
 
 public class KpQuickAssistAssistant extends org.eclipse.jface.text.quickassist.QuickAssistAssistant implements org.eclipse.jface.text.quickassist.IQuickAssistAssistant {
 	
-	public KpQuickAssistAssistant(org.kermeta.kp.editor.ui.KpEditor editor) {
-		setQuickAssistProcessor(new org.kermeta.kp.editor.ui.KpQuickAssistProcessor(editor));
+	public KpQuickAssistAssistant(org.kermeta.kp.editor.IKpResourceProvider resourceProvider, org.kermeta.kp.editor.ui.IKpAnnotationModelProvider annotationModelProvider) {
+		setQuickAssistProcessor(new org.kermeta.kp.editor.ui.KpQuickAssistProcessor(resourceProvider, annotationModelProvider));
 		setInformationControlCreator(new org.eclipse.jface.text.AbstractReusableInformationControlCreator() {
 			public org.eclipse.jface.text.IInformationControl doCreateInformationControl(org.eclipse.swt.widgets.Shell parent) {
 				return new org.eclipse.jface.text.DefaultInformationControl(parent, (org.eclipse.jface.text.DefaultInformationControl.IInformationPresenter) null);

@@ -8,11 +8,13 @@ package org.kermeta.kp.editor.ui;
 
 public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassist.IQuickAssistProcessor {
 	
-	private org.kermeta.kp.editor.ui.KpEditor editor;
+	private org.kermeta.kp.editor.IKpResourceProvider resourceProvider;
+	private org.kermeta.kp.editor.ui.IKpAnnotationModelProvider annotationModelProvider;
 	
-	public KpQuickAssistProcessor(org.kermeta.kp.editor.ui.KpEditor editor) {
+	public KpQuickAssistProcessor(org.kermeta.kp.editor.IKpResourceProvider resourceProvider, org.kermeta.kp.editor.ui.IKpAnnotationModelProvider annotationModelProvider) {
 		super();
-		this.editor = editor;
+		this.resourceProvider = resourceProvider;
+		this.annotationModelProvider = annotationModelProvider;
 	}
 	
 	public boolean canAssist(org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext invocationContext) {
@@ -76,7 +78,7 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 	
 	private java.util.List<org.kermeta.kp.editor.IKpQuickFix> getQuickFixes(org.eclipse.jface.text.source.ISourceViewer sourceViewer, int offset, int length) {
 		java.util.List<org.kermeta.kp.editor.IKpQuickFix> foundFixes = new java.util.ArrayList<org.kermeta.kp.editor.IKpQuickFix>();
-		org.eclipse.jface.text.source.IAnnotationModel model = getAnnotationModel();
+		org.eclipse.jface.text.source.IAnnotationModel model = annotationModelProvider.getAnnotationModel();
 		
 		if (model == null) {
 			return foundFixes;
@@ -109,13 +111,9 @@ public class KpQuickAssistProcessor implements org.eclipse.jface.text.quickassis
 		if (annotation instanceof org.kermeta.kp.editor.ui.KpMarkerAnnotation) {
 			org.kermeta.kp.editor.ui.KpMarkerAnnotation markerAnnotation = (org.kermeta.kp.editor.ui.KpMarkerAnnotation) annotation;
 			org.eclipse.core.resources.IMarker marker = markerAnnotation.getMarker();
-			foundQuickFixes.addAll(new org.kermeta.kp.editor.ui.KpMarkerResolutionGenerator().getQuickFixes(editor.getResource(), marker));
+			foundQuickFixes.addAll(new org.kermeta.kp.editor.ui.KpMarkerResolutionGenerator().getQuickFixes(resourceProvider.getResource(), marker));
 		}
 		return foundQuickFixes;
-	}
-	
-	private org.eclipse.jface.text.source.IAnnotationModel getAnnotationModel() {
-		return editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
 	}
 	
 	public String getErrorMessage() {

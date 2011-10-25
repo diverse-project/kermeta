@@ -13,8 +13,37 @@ package org.kermeta.kp.editor.ui;
 public class KpSyntaxColoringPreferencePage extends org.eclipse.jface.preference.PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {
 	
 	private final static org.kermeta.kp.editor.ui.KpAntlrTokenHelper tokenHelper = new org.kermeta.kp.editor.ui.KpAntlrTokenHelper();
-	private static final java.util.Map<String, java.util.List<HighlightingColorListItem>> content = new java.util.LinkedHashMap<String, java.util.List<HighlightingColorListItem>>();
-	private static final java.util.Collection<IChangedPreference> changedPreferences = new java.util.ArrayList<IChangedPreference>();
+	private final static java.util.Map<String, java.util.List<HighlightingColorListItem>> content = new java.util.LinkedHashMap<String, java.util.List<HighlightingColorListItem>>();
+	private final static java.util.Collection<IChangedPreference> changedPreferences = new java.util.ArrayList<IChangedPreference>();
+	
+	public KpSyntaxColoringPreferencePage() {
+		super();
+		
+		org.kermeta.kp.editor.IKpMetaInformation syntaxPlugin = new org.kermeta.kp.editor.mopp.KpMetaInformation();
+		
+		String languageId = syntaxPlugin.getSyntaxName();
+		
+		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
+		String[] tokenNames = syntaxPlugin.getTokenNames();
+		
+		for (int i = 0; i < tokenNames.length; i++) {
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
+				continue;
+			}
+			
+			String tokenName = tokenHelper.getTokenName(tokenNames, i);
+			if (tokenName == null) {
+				continue;
+			}
+			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenName);
+			terminals.add(item);
+		}
+		java.util.Collections.sort(terminals);
+		content.put(languageId, terminals);
+		
+		setPreferenceStore(org.kermeta.kp.editor.ui.KpUIPlugin.getDefault().getPreferenceStore());
+		setDescription("Configure syntax coloring for ." + languageId + " files.");
+	}
 	
 	private interface IChangedPreference {
 		public void apply(org.eclipse.jface.preference.IPreferenceStore store);
@@ -269,10 +298,10 @@ public class KpSyntaxColoringPreferencePage extends org.eclipse.jface.preference
 		}
 		org.eclipse.swt.graphics.RGB rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(getPreferenceStore(), item.getColorKey());
 		fSyntaxForegroundColorEditor.setColorValue(rgb);
-		fBoldCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getBoldKey()));
-		fItalicCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getItalicKey()));
-		fStrikethroughCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getStrikethroughKey()));
-		fUnderlineCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getUnderlineKey()));
+		fBoldCheckBox.setSelection(getPreferenceStore().getBoolean(item.getBoldKey()));
+		fItalicCheckBox.setSelection(getPreferenceStore().getBoolean(item.getItalicKey()));
+		fStrikethroughCheckBox.setSelection(getPreferenceStore().getBoolean(item.getStrikethroughKey()));
+		fUnderlineCheckBox.setSelection(getPreferenceStore().getBoolean(item.getUnderlineKey()));
 		
 		fEnableCheckbox.setEnabled(true);
 		boolean enable = getPreferenceStore().getBoolean(item.getEnableKey());
@@ -331,7 +360,7 @@ public class KpSyntaxColoringPreferencePage extends org.eclipse.jface.preference
 		org.eclipse.swt.layout.GridData gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL, org.eclipse.swt.layout.GridData.FILL, true, true);
 		gd.heightHint = convertHeightInCharsToPixels(26);
 		int maxWidth = 0;
-		for (java.util.Iterator<java.util.List<HighlightingColorListItem>> it = content.values()		.iterator(); it.hasNext();) {
+		for (java.util.Iterator<java.util.List<HighlightingColorListItem>> it = content.values().iterator(); it.hasNext();) {
 			for (java.util.Iterator<HighlightingColorListItem> j = it.next().iterator(); j.hasNext();) {
 				HighlightingColorListItem item = j.next();
 				maxWidth = Math.max(maxWidth, convertWidthInCharsToPixels(item.getDisplayName().length()));
@@ -517,35 +546,6 @@ public class KpSyntaxColoringPreferencePage extends org.eclipse.jface.preference
 		return (HighlightingColorListItem) element;
 	}
 	
-	public KpSyntaxColoringPreferencePage() {
-		super();
-		
-		org.kermeta.kp.editor.IKpMetaInformation syntaxPlugin = new org.kermeta.kp.editor.mopp.KpMetaInformation();
-		
-		String languageId = syntaxPlugin.getSyntaxName();
-		
-		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
-		String[] tokenNames = syntaxPlugin.getTokenNames();
-		
-		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxColoring(i)) {
-				continue;
-			}
-			
-			String tokenName = tokenHelper.getTokenName(tokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
-			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenName);
-			terminals.add(item);
-		}
-		java.util.Collections.sort(terminals);
-		content.put(languageId, terminals);
-		
-		setPreferenceStore(org.kermeta.kp.editor.ui.KpUIPlugin.getDefault().getPreferenceStore());
-		setDescription("Configure syntax coloring for ." + languageId + " files.");
-	}
-	
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 	}
 	
@@ -609,10 +609,11 @@ public class KpSyntaxColoringPreferencePage extends org.eclipse.jface.preference
 	
 	private void updateActiveEditor() {
 		org.eclipse.ui.IWorkbench workbench = org.eclipse.ui.PlatformUI.getWorkbench();
-		org.eclipse.ui.IEditorPart editor = workbench.getActiveWorkbenchWindow()		.getActivePage().getActiveEditor();
+		org.eclipse.ui.IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (editor != null && editor instanceof org.kermeta.kp.editor.ui.KpEditor) {
 			org.kermeta.kp.editor.ui.KpEditor emfTextEditor = (org.kermeta.kp.editor.ui.KpEditor) editor;
 			emfTextEditor.invalidateTextRepresentation();
 		}
 	}
+	
 }

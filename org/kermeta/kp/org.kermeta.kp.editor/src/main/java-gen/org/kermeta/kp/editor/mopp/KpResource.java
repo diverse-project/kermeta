@@ -133,6 +133,17 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	private java.util.Map<String, org.kermeta.kp.editor.IKpQuickFix> quickFixMap = new java.util.LinkedHashMap<String, org.kermeta.kp.editor.IKpQuickFix>();
 	private java.util.Map<?, ?> loadOptions;
 	
+	/**
+	 * If a post-processor is currently running, this field holds a reference to it.
+	 * This reference is used to terminate post-processing if needed.
+	 */
+	private org.kermeta.kp.editor.IKpResourcePostProcessor runningPostProcessor;
+	
+	/**
+	 * A flag to indicate whether reloading of the resource shall be cancelled.
+	 */
+	private boolean terminateReload = false;
+	
 	public KpResource() {
 		super();
 		resetLocationMap();
@@ -145,10 +156,11 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		this.loadOptions = options;
+		this.terminateReload = false;
 		String encoding = null;
 		java.io.InputStream actualInputStream = inputStream;
 		Object inputStreamPreProcessorProvider = null;
-		if (options!=null) {
+		if (options != null) {
 			inputStreamPreProcessorProvider = options.get(org.kermeta.kp.editor.IKpOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
 		}
 		if (inputStreamPreProcessorProvider != null) {
@@ -194,6 +206,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			isLoaded = false;
 			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 			doLoad(inputStream, loadOptions);
+			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
 		} catch (org.kermeta.kp.editor.mopp.KpTerminateParsingException tpe) {
 			// do nothing - the resource is left unchanged if this exception is thrown
 		}
@@ -203,6 +216,11 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	public void cancelReload() {
 		org.kermeta.kp.editor.IKpTextParser parserCopy = parser;
 		parserCopy.terminate();
+		this.terminateReload = true;
+		org.kermeta.kp.editor.IKpResourcePostProcessor runningPostProcessorCopy = runningPostProcessor;
+		if (runningPostProcessorCopy != null) {
+			runningPostProcessorCopy.terminate();
+		}
 	}
 	
 	protected void doSave(java.io.OutputStream outputStream, java.util.Map<?,?> options) throws java.io.IOException {
@@ -249,7 +267,15 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 		if (internalURIFragmentMap.containsKey(id)) {
 			org.kermeta.kp.editor.IKpContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment = internalURIFragmentMap.get(id);
 			boolean wasResolvedBefore = uriFragment.isResolved();
-			org.kermeta.kp.editor.IKpReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result = uriFragment.resolve();
+			org.kermeta.kp.editor.IKpReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result = null;
+			// catch and report all Exceptions that occur during proxy resolving
+			try {
+				result = uriFragment.resolve();
+			} catch (Exception e) {
+				String message = "An expection occured while resolving the proxy for: "+ id + ". (" + e.toString() + ")";
+				addProblem(new org.kermeta.kp.editor.mopp.KpProblem(message, org.kermeta.kp.editor.KpEProblemType.UNRESOLVED_REFERENCE, org.kermeta.kp.editor.KpEProblemSeverity.ERROR),uriFragment.getProxy());
+				org.kermeta.kp.editor.mopp.KpPlugin.logError(message, e);
+			}
 			if (result == null) {
 				// the resolving did call itself
 				return null;
@@ -376,10 +402,17 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	}
 	
 	protected void runPostProcessors(java.util.Map<?, ?> loadOptions) {
+		org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, org.kermeta.kp.editor.KpEProblemType.ANALYSIS_PROBLEM);
+		if (terminateReload) {
+			return;
+		}
+		// first, run the generated post processor
+		runPostProcessor(new org.kermeta.kp.editor.mopp.KpResourcePostProcessor());
 		if (loadOptions == null) {
 			return;
 		}
-		org.kermeta.kp.editor.mopp.KpMarkerHelper.unmark(this, org.kermeta.kp.editor.KpEProblemType.ANALYSIS_PROBLEM);
+		// then, run post processors that are registered via the load options extension
+		// point
 		Object resourcePostProcessorProvider = loadOptions.get(org.kermeta.kp.editor.IKpOptions.RESOURCE_POSTPROCESSOR_PROVIDER);
 		if (resourcePostProcessorProvider != null) {
 			if (resourcePostProcessorProvider instanceof org.kermeta.kp.editor.IKpResourcePostProcessorProvider) {
@@ -387,6 +420,9 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			} else if (resourcePostProcessorProvider instanceof java.util.Collection<?>) {
 				java.util.Collection<?> resourcePostProcessorProviderCollection = (java.util.Collection<?>) resourcePostProcessorProvider;
 				for (Object processorProvider : resourcePostProcessorProviderCollection) {
+					if (terminateReload) {
+						return;
+					}
 					if (processorProvider instanceof org.kermeta.kp.editor.IKpResourcePostProcessorProvider) {
 						org.kermeta.kp.editor.IKpResourcePostProcessorProvider csProcessorProvider = (org.kermeta.kp.editor.IKpResourcePostProcessorProvider) processorProvider;
 						org.kermeta.kp.editor.IKpResourcePostProcessor postProcessor = csProcessorProvider.getResourcePostProcessor();
@@ -399,16 +435,18 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 	
 	protected void runPostProcessor(org.kermeta.kp.editor.IKpResourcePostProcessor postProcessor) {
 		try {
+			this.runningPostProcessor = postProcessor;
 			postProcessor.process(this);
 		} catch (Exception e) {
 			org.kermeta.kp.editor.mopp.KpPlugin.logError("Exception while running a post-processor.", e);
 		}
+		this.runningPostProcessor = null;
 	}
 	
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
 		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this);
+		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
 	}
 	
 	public void setURI(org.eclipse.emf.common.util.URI uri) {
@@ -588,7 +626,7 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
 				try {
 					org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
-					org.eclipse.emf.validation.service.IBatchValidator validator = (org.eclipse.emf.validation.service.IBatchValidator) service.newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
+					org.eclipse.emf.validation.service.IBatchValidator validator = service.<org.eclipse.emf.ecore.EObject, org.eclipse.emf.validation.service.IBatchValidator>newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
 					validator.setIncludeLiveConstraints(true);
 					org.eclipse.core.runtime.IStatus status = validator.validate(root);
 					addStatus(status, root);
@@ -608,14 +646,19 @@ public class KpResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl
 			causes.clear();
 			causes.addAll(resultLocus);
 		}
-		if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
-			for (org.eclipse.emf.ecore.EObject cause : causes) {
-				addError(status.getMessage(), cause);
+		boolean hasChildren = status.getChildren() != null && status.getChildren().length > 0;
+		// Ignore composite status objects that have children. The actual status
+		// information is then contained in the child objects.
+		if (!status.isMultiStatus() || !hasChildren) {
+			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
+				for (org.eclipse.emf.ecore.EObject cause : causes) {
+					addError(status.getMessage(), org.kermeta.kp.editor.KpEProblemType.ANALYSIS_PROBLEM, cause);
+				}
 			}
-		}
-		if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
-			for (org.eclipse.emf.ecore.EObject cause : causes) {
-				addWarning(status.getMessage(), cause);
+			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
+				for (org.eclipse.emf.ecore.EObject cause : causes) {
+					addWarning(status.getMessage(), org.kermeta.kp.editor.KpEProblemType.ANALYSIS_PROBLEM, cause);
+				}
 			}
 		}
 		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {

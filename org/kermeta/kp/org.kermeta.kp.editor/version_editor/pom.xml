@@ -94,14 +94,16 @@
 				org.eclipse.emf.validation,
 				org.eclipse.emf.workspace,
 				org.emftext.access;resolution:=optional,
-				org.emftext.commons.antlr3_2_0,
+				org.emftext.commons.antlr3_3_0,
 				org.kermeta.kp.model
             </Require-Bundle>
             
             <Export-Package>
               org.kermeta.kp.editor,
               org.kermeta.kp.editor.analysis,
+              org.kermeta.kp.editor.debug,
               org.kermeta.kp.editor.grammar,
+              org.kermeta.kp.editor.launch,
               org.kermeta.kp.editor.mopp,
               org.kermeta.kp.editor.util
             </Export-Package>
@@ -145,7 +147,7 @@
     </dependency>
     <dependency>
       <groupId>org.emftext.commons</groupId>
-      <artifactId>commons.antlr3_2_0</artifactId>
+      <artifactId>commons.antlr3_3_0</artifactId>
       <version>${kermeta.version}</version>
     </dependency>
     <dependency>
@@ -169,6 +171,11 @@
       <groupId>org.kermeta.eclipse</groupId>
       <artifactId>org.eclipse.core.resources</artifactId>
       <version>[3.5.2.0,)</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.debug.core</artifactId>
+      <version>[3.5.0.0,)</version>
     </dependency>
     
     <dependency>

@@ -7,27 +7,31 @@
 package org.kermeta.kp.editor.util;
 
 /**
- * Class TextResourceUtil can be used to perform common tasks on text resources,
+ * Class KpTextResourceUtil can be used to perform common tasks on text resources,
  * such as loading and saving resources, as well as, checking them for errors.
+ * This class is deprecated and has been replaced by
+ * org.kermeta.kp.editor.util.KpResourceUtil.
  */
 public class KpTextResourceUtil {
 	
+	@Deprecated	
 	public static org.kermeta.kp.editor.mopp.KpResource getResource(org.eclipse.core.resources.IFile file) {
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
-		return (org.kermeta.kp.editor.mopp.KpResource) csResource;
+		return org.kermeta.kp.editor.util.KpResourceUtil.getResource(file);
 	}
 	
-	public static org.kermeta.kp.editor.mopp.KpResource getResource(java.io.File file) {
-		return getResource(file, null);
-	}
-	
+	@Deprecated	
 	public static org.kermeta.kp.editor.mopp.KpResource getResource(java.io.File file, java.util.Map<?,?> options) {
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		if (options != null) {
-			rs.getLoadOptions().putAll(options);
-		}
-		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createFileURI(file.getAbsolutePath()), true);
-		return (org.kermeta.kp.editor.mopp.KpResource) csResource;
+		return org.kermeta.kp.editor.util.KpResourceUtil.getResource(file, options);
 	}
+	
+	@Deprecated	
+	public static org.kermeta.kp.editor.mopp.KpResource getResource(org.eclipse.emf.common.util.URI uri) {
+		return org.kermeta.kp.editor.util.KpResourceUtil.getResource(uri);
+	}
+	
+	@Deprecated	
+	public static org.kermeta.kp.editor.mopp.KpResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+		return org.kermeta.kp.editor.util.KpResourceUtil.getResource(uri, options);
+	}
+	
 }

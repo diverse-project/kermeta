@@ -11,9 +11,10 @@ package org.kermeta.kp.editor.ui;
  */
 public class KpHighlighting implements org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener {
 	
+	private final static org.kermeta.kp.editor.ui.KpPositionHelper positionHelper = new org.kermeta.kp.editor.ui.KpPositionHelper();
+	
 	private java.util.List<org.eclipse.jface.viewers.ISelectionChangedListener> selectionChangedListeners = new java.util.ArrayList<org.eclipse.jface.viewers.ISelectionChangedListener>();
 	private org.eclipse.jface.viewers.ISelection selection = null;
-	private final static org.kermeta.kp.editor.ui.KpPositionHelper positionHelper = new org.kermeta.kp.editor.ui.KpPositionHelper();
 	private boolean isHighlightBrackets = true;
 	private org.kermeta.kp.editor.ui.KpTokenScanner scanner;
 	private org.kermeta.kp.editor.ui.KpColorManager colorManager;
@@ -21,6 +22,7 @@ public class KpHighlighting implements org.eclipse.jface.viewers.ISelectionProvi
 	private org.eclipse.swt.graphics.Color black;
 	private org.eclipse.swt.custom.StyledText textWidget;
 	private org.eclipse.jface.preference.IPreferenceStore preferenceStore;
+	private org.kermeta.kp.editor.ui.KpEditor editor;
 	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
 	private org.kermeta.kp.editor.ui.KpOccurrence occurrence;
 	private org.kermeta.kp.editor.ui.KpBracketSet bracketSet;
@@ -49,6 +51,9 @@ public class KpHighlighting implements org.eclipse.jface.viewers.ISelectionProvi
 		}
 		
 		private void refreshHighlighting() {
+			if (textWidget.isDisposed()) {
+				return;
+			}
 			int textCaret = textWidget.getCaretOffset();
 			if (textCaret < 0 || textCaret > textWidget.getCharCount()) {
 				return;
@@ -105,6 +110,7 @@ public class KpHighlighting implements org.eclipse.jface.viewers.ISelectionProvi
 		this.display = org.eclipse.swt.widgets.Display.getCurrent();
 		sourceviewer.getSelectionProvider();
 		preferenceStore = org.kermeta.kp.editor.ui.KpUIPlugin.getDefault().getPreferenceStore();
+		this.editor = editor;
 		textWidget = sourceviewer.getTextWidget();
 		projectionViewer = sourceviewer;
 		scanner = new org.kermeta.kp.editor.ui.KpTokenScanner(textResource, colorManager);
@@ -250,19 +256,7 @@ public class KpHighlighting implements org.eclipse.jface.viewers.ISelectionProvi
 	
 	private void handleContentOutlineSelection(org.eclipse.jface.viewers.ISelection selection) {
 		if (!selection.isEmpty()) {
-			Object selectedElement = ((org.eclipse.jface.viewers.IStructuredSelection) selection).getFirstElement();
-			if (selectedElement instanceof org.eclipse.emf.ecore.EObject) {
-				org.eclipse.emf.ecore.EObject selectedEObject = (org.eclipse.emf.ecore.EObject) selectedElement;
-				org.eclipse.emf.ecore.resource.Resource resource = selectedEObject.eResource();
-				if (resource instanceof org.kermeta.kp.editor.IKpTextResource) {
-					org.kermeta.kp.editor.IKpTextResource textResource = (org.kermeta.kp.editor.IKpTextResource) resource;
-					org.kermeta.kp.editor.IKpLocationMap locationMap = textResource.getLocationMap();
-					int elementCharStart = locationMap.getCharStart(selectedEObject);
-					int elementCharEnd = locationMap.getCharEnd(selectedEObject);
-					org.eclipse.jface.text.TextSelection textEditorSelection = new org.eclipse.jface.text.TextSelection(elementCharStart, elementCharEnd - elementCharStart + 1);
-					projectionViewer.getSelectionProvider().setSelection(textEditorSelection);
-				}
-			}
+			editor.setSelection(selection);
 		}
 	}
 	

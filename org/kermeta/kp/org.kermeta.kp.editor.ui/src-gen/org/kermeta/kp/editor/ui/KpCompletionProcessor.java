@@ -8,16 +8,16 @@ package org.kermeta.kp.editor.ui;
 
 public class KpCompletionProcessor implements org.eclipse.jface.text.contentassist.IContentAssistProcessor {
 	
-	private org.kermeta.kp.editor.ui.KpEditor editor;
+	private org.kermeta.kp.editor.IKpResourceProvider resourceProvider;
+	private org.kermeta.kp.editor.ui.IKpBracketHandlerProvider bracketHandlerProvider;
 	
-	public KpCompletionProcessor(org.kermeta.kp.editor.ui.KpEditor editor) {
-		this.editor = editor;
+	public KpCompletionProcessor(org.kermeta.kp.editor.IKpResourceProvider resourceProvider, org.kermeta.kp.editor.ui.IKpBracketHandlerProvider bracketHandlerProvider) {
+		this.resourceProvider = resourceProvider;
+		this.bracketHandlerProvider = bracketHandlerProvider;
 	}
 	
 	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeCompletionProposals(org.eclipse.jface.text.ITextViewer viewer, int offset) {
-		
-		org.eclipse.emf.ecore.resource.Resource resource = editor.getResource();
-		org.kermeta.kp.editor.IKpTextResource textResource = (org.kermeta.kp.editor.IKpTextResource) resource;
+		org.kermeta.kp.editor.IKpTextResource textResource = resourceProvider.getResource();
 		String content = viewer.getDocument().get();
 		org.kermeta.kp.editor.ui.KpCodeCompletionHelper helper = new org.kermeta.kp.editor.ui.KpCodeCompletionHelper();
 		org.kermeta.kp.editor.ui.KpCompletionProposal[] computedProposals = helper.computeCompletionProposals(textResource, content, offset);
@@ -48,7 +48,7 @@ public class KpCompletionProcessor implements org.eclipse.jface.text.contentassi
 			int replacementLength = prefix.length();
 			// if a closing bracket was automatically inserted right before, we enlarge the
 			// replacement length in order to overwrite the bracket.
-			org.kermeta.kp.editor.ui.IKpBracketHandler bracketHandler = editor.getBracketHandler();
+			org.kermeta.kp.editor.ui.IKpBracketHandler bracketHandler = bracketHandlerProvider.getBracketHandler();
 			String closingBracket = bracketHandler.getClosingBracket();
 			if (bracketHandler.addedClosingBracket() && proposalString.endsWith(closingBracket)) {
 				replacementLength += closingBracket.length();

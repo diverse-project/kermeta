@@ -65,4 +65,5 @@ public class KpEObjectSelection implements org.eclipse.jface.viewers.IStructured
 		list.add(selectedObject);
 		return list;
 	}
+	
 }

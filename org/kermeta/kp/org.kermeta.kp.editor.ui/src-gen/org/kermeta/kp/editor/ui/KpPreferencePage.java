@@ -13,7 +13,7 @@ public class KpPreferencePage extends org.eclipse.jface.preference.PreferencePag
 	
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 		setPreferenceStore(org.kermeta.kp.editor.ui.KpUIPlugin.getDefault().getPreferenceStore());
-		setDescription(" Kp Text Editor Preferences");
+		setDescription("Kp Text Editor Preferences");
 	}
 	
 	@Override	

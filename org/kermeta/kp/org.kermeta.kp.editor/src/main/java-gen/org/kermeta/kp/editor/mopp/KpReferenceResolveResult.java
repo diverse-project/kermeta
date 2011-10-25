@@ -72,7 +72,7 @@ public class KpReferenceResolveResult<ReferenceType> implements org.kermeta.kp.e
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType>>();
+			mappings = new java.util.ArrayList<org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new org.kermeta.kp.editor.mopp.KpElementMapping<ReferenceType>(identifier, target, warning));
 		errorMessage = null;
@@ -84,7 +84,7 @@ public class KpReferenceResolveResult<ReferenceType> implements org.kermeta.kp.e
 	
 	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType>>();
+			mappings = new java.util.ArrayList<org.kermeta.kp.editor.IKpReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new org.kermeta.kp.editor.mopp.KpURIMapping<ReferenceType>(identifier, uri, warning));
 	}

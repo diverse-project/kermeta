@@ -13,24 +13,29 @@ package org.kermeta.kp.editor.ui;
 public class KpEditorConfiguration extends org.eclipse.jface.text.source.SourceViewerConfiguration {
 	
 	private org.kermeta.kp.editor.ui.KpColorManager colorManager;
-	private org.kermeta.kp.editor.ui.KpEditor theEditor;
+	private org.kermeta.kp.editor.IKpResourceProvider resourceProvider;
+	private org.kermeta.kp.editor.ui.IKpAnnotationModelProvider annotationModelProvider;
+	private org.kermeta.kp.editor.ui.IKpBracketHandlerProvider bracketHandlerProvider;
 	private org.kermeta.kp.editor.ui.KpQuickAssistAssistant quickAssistAssistant;
 	
 	/**
 	 * Creates a new editor configuration.
 	 * 
-	 * @param editor the editor to configure
+	 * @param resourceProvider the provider for the resource (usually this is the
+	 * editor)
 	 * @param colorManager the color manager to use
 	 */
-	public KpEditorConfiguration(org.kermeta.kp.editor.ui.KpEditor editor, org.kermeta.kp.editor.ui.KpColorManager colorManager) {
-		this.theEditor = editor;
+	public KpEditorConfiguration(org.kermeta.kp.editor.IKpResourceProvider resourceProvider, org.kermeta.kp.editor.ui.IKpAnnotationModelProvider annotationModelProvider, org.kermeta.kp.editor.ui.IKpBracketHandlerProvider bracketHandlerProvider, org.kermeta.kp.editor.ui.KpColorManager colorManager) {
+		this.resourceProvider = resourceProvider;
+		this.annotationModelProvider = annotationModelProvider;
+		this.bracketHandlerProvider = bracketHandlerProvider;
 		this.colorManager = colorManager;
 	}
 	
 	public org.eclipse.jface.text.contentassist.IContentAssistant getContentAssistant(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
 		
 		org.eclipse.jface.text.contentassist.ContentAssistant assistant = new org.eclipse.jface.text.contentassist.ContentAssistant();
-		assistant.setContentAssistProcessor(new org.kermeta.kp.editor.ui.KpCompletionProcessor(theEditor), org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.setContentAssistProcessor(new org.kermeta.kp.editor.ui.KpCompletionProcessor(resourceProvider, bracketHandlerProvider), org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.enableAutoActivation(true);
 		assistant.setAutoActivationDelay(500);
 		assistant.setProposalPopupOrientation(org.eclipse.jface.text.contentassist.IContentAssistant.PROPOSAL_OVERLAY);
@@ -45,16 +50,14 @@ public class KpEditorConfiguration extends org.eclipse.jface.text.source.SourceV
 		};
 	}
 	
-	protected org.eclipse.jface.text.rules.ITokenScanner getScanner(String fileName) {
-		return new org.kermeta.kp.editor.ui.KpTokenScanner(theEditor.getResource(), colorManager);
+	protected org.eclipse.jface.text.rules.ITokenScanner getScanner() {
+		return new org.kermeta.kp.editor.ui.KpTokenScanner(resourceProvider.getResource(), colorManager);
 	}
 	
 	public org.eclipse.jface.text.presentation.IPresentationReconciler getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
 		
 		org.eclipse.jface.text.presentation.PresentationReconciler reconciler = new org.eclipse.jface.text.presentation.PresentationReconciler();
-		String fileName = theEditor.getEditorInput().getName();
-		
-		org.eclipse.jface.text.rules.DefaultDamagerRepairer repairer = new org.eclipse.jface.text.rules.DefaultDamagerRepairer(getScanner(fileName));
+		org.eclipse.jface.text.rules.DefaultDamagerRepairer repairer = new org.eclipse.jface.text.rules.DefaultDamagerRepairer(getScanner());
 		reconciler.setDamager(repairer, org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(repairer, org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
 		
@@ -66,19 +69,19 @@ public class KpEditorConfiguration extends org.eclipse.jface.text.source.SourceV
 	}
 	
 	public org.eclipse.jface.text.ITextHover getTextHover(org.eclipse.jface.text.source.ISourceViewer sourceViewer, String contentType) {
-		return new org.kermeta.kp.editor.ui.KpTextHover(theEditor);
+		return new org.kermeta.kp.editor.ui.KpTextHover(resourceProvider);
 	}
 	
 	public org.eclipse.jface.text.hyperlink.IHyperlinkDetector[] getHyperlinkDetectors(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
 		if (sourceViewer == null) {
 			return null;
 		}
-		return new org.eclipse.jface.text.hyperlink.IHyperlinkDetector[] { new org.kermeta.kp.editor.ui.KpHyperlinkDetector(theEditor.getResource()) };
+		return new org.eclipse.jface.text.hyperlink.IHyperlinkDetector[] { new org.kermeta.kp.editor.ui.KpHyperlinkDetector(resourceProvider.getResource()) };
 	}
 	
 	public org.eclipse.jface.text.quickassist.IQuickAssistAssistant getQuickAssistAssistant(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
 		if (quickAssistAssistant == null) {
-			quickAssistAssistant = new org.kermeta.kp.editor.ui.KpQuickAssistAssistant(theEditor);
+			quickAssistAssistant = new org.kermeta.kp.editor.ui.KpQuickAssistAssistant(resourceProvider, annotationModelProvider);
 		}
 		return quickAssistAssistant;
 	}

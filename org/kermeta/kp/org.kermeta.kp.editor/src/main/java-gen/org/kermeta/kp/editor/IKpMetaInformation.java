@@ -58,7 +58,7 @@ public interface IKpMetaInformation {
 	 * 
 	 * @return a new instance of the printer class
 	 */
-	public org.kermeta.kp.editor.IKpTextPrinter createPrinter(java.io.OutputStream ouputStream, org.kermeta.kp.editor.IKpTextResource resource);
+	public org.kermeta.kp.editor.IKpTextPrinter createPrinter(java.io.OutputStream outputStream, org.kermeta.kp.editor.IKpTextResource resource);
 	
 	/**
 	 * Returns all meta classes for which syntax was defined. This information is used

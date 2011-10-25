@@ -32,6 +32,7 @@
 	         <filtering>true</filtering>
 	         <directory>../src/main/java-gen</directory>
 	         <excludes>
+	             <exclude>**/debug/**</exclude>
 	             <exclude>**/editor/IKpBuilder.java</exclude>
 	             <exclude>**/editor/mopp/KpBuilder.java</exclude>
 	             <exclude>**/editor/mopp/KpBuilderAdpater.java</exclude>
@@ -40,7 +41,9 @@
 	             <exclude>**/editor/mopp/KpPlugin.java</exclude>
 	             <exclude>**/editor/mopp/KpResource.java</exclude>
 	             <exclude>**/editor/mopp/KpResourceFactoryDelegator.java</exclude>
+	             <exclude>**/editor/util/KpResourceUtil.java</exclude>
 	             <exclude>**/editor/util/KpTextResourceUtil.java</exclude>
+	             <exclude>**/launch/**</exclude>
 	         </excludes>
 	     </resource>
 	     <resource>
@@ -146,7 +149,7 @@
     </dependency>
     <dependency>
       <groupId>org.emftext.commons</groupId>
-      <artifactId>commons.antlr3_2_0</artifactId>
+      <artifactId>commons.antlr3_3_0</artifactId>
       <version>${kermeta.version}</version>
     </dependency>
     <dependency>

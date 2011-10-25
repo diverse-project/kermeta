@@ -10,10 +10,11 @@ package org.kermeta.kp.editor.ui;
  * A class to display the information of an element. Most of the code is taken
  * from <code>org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover</code>.
  */
-public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclipse.jface.text.ITextHoverExtension, org.eclipse.jface.text.ITextHoverExtension2{
+public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclipse.jface.text.ITextHoverExtension, org.eclipse.jface.text.ITextHoverExtension2 {
 	
 	private static final String FONT = org.eclipse.jface.resource.JFaceResources.DIALOG_FONT;
-	private org.kermeta.kp.editor.ui.KpEditor editor;
+	
+	private org.kermeta.kp.editor.IKpResourceProvider resourceProvider;
 	private org.kermeta.kp.editor.IKpHoverTextProvider hoverTextProvider;
 	/**
 	 * The style sheet (css).
@@ -197,12 +198,14 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 	/**
 	 * Creates a new TextHover to collect the information about the hovered element.
 	 */
-	public KpTextHover(org.kermeta.kp.editor.ui.KpEditor editor) {
+	public KpTextHover(org.kermeta.kp.editor.IKpResourceProvider resourceProvider) {
 		super();
-		this.editor = editor;
-		hoverTextProvider = new org.kermeta.kp.editor.ui.KpUIMetaInformation().getHoverTextProvider();
+		this.resourceProvider = resourceProvider;
+		this.hoverTextProvider = new org.kermeta.kp.editor.ui.KpUIMetaInformation().getHoverTextProvider();
 	}
 	
+	// The warning about overriding or implementing a deprecated API cannot be avoided
+	// because the SourceViewerConfiguration class depends on ITextHover.
 	public String getHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
 		return ((org.kermeta.kp.editor.ui.KpDocBrowserInformationControlInput) getHoverInfo2(textViewer, hoverRegion)).getHtml();
 	}
@@ -217,7 +220,7 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 	
 	public org.eclipse.jface.text.IInformationControlCreator getHoverControlCreator() {
 		if (hoverControlCreator == null) {
-			hoverControlCreator = new HoverControlCreator(			getInformationPresenterControlCreator());
+			hoverControlCreator = new HoverControlCreator(getInformationPresenterControlCreator());
 		}
 		return hoverControlCreator;
 	}
@@ -234,7 +237,7 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 	}
 	
 	private org.kermeta.kp.editor.ui.KpDocBrowserInformationControlInput internalGetHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
-		org.kermeta.kp.editor.IKpTextResource textResource = editor.getResource();
+		org.kermeta.kp.editor.IKpTextResource textResource = resourceProvider.getResource();
 		org.kermeta.kp.editor.IKpLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(hoverRegion.getOffset());
 		if (elementsAtOffset == null || elementsAtOffset.size() == 0) {
@@ -257,11 +260,12 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 	private org.kermeta.kp.editor.ui.KpDocBrowserInformationControlInput getHoverInfo(java.util.List<org.eclipse.emf.ecore.EObject> elements, org.eclipse.jface.text.ITextViewer textViewer, org.kermeta.kp.editor.ui.KpDocBrowserInformationControlInput previousInput) {
 		StringBuffer buffer = new StringBuffer();
 		org.eclipse.emf.ecore.EObject proxyObject = getFirstProxy(elements);
+		org.eclipse.emf.ecore.EObject containerObject = getFirstNonProxy(elements);
 		org.eclipse.emf.ecore.EObject declarationObject = null;
 		// get the token text, which is hovered. It is needed to jump to the declaration.
 		String tokenText = "";
 		if (proxyObject != null) {
-			org.kermeta.kp.editor.IKpTextResource textResource = editor.getResource();
+			org.kermeta.kp.editor.IKpTextResource textResource = resourceProvider.getResource();
 			org.kermeta.kp.editor.IKpLocationMap locationMap = textResource.getLocationMap();
 			int offset = locationMap.getCharStart(proxyObject);
 			int length = locationMap.getCharEnd(proxyObject) + 1 - offset;
@@ -269,9 +273,9 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 				tokenText = textViewer.getDocument().get(offset, length);
 			} catch (org.eclipse.jface.text.BadLocationException e) {
 			}
-			declarationObject = org.eclipse.emf.ecore.util.EcoreUtil.resolve(proxyObject, editor.getResource());
+			declarationObject = org.eclipse.emf.ecore.util.EcoreUtil.resolve(proxyObject, resourceProvider.getResource());
 			if (declarationObject != null) {
-				org.kermeta.kp.editor.ui.KpHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(declarationObject));
+				org.kermeta.kp.editor.ui.KpHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(containerObject, declarationObject));
 			}
 		} else {
 			org.kermeta.kp.editor.ui.KpHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(elements.get(0)));
@@ -279,7 +283,7 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 		if (buffer.length() > 0) {
 			org.kermeta.kp.editor.ui.KpHTMLPrinter.insertPageProlog(buffer, 0, org.kermeta.kp.editor.ui.KpTextHover.getStyleSheet());
 			org.kermeta.kp.editor.ui.KpHTMLPrinter.addPageEpilog(buffer);
-			return new org.kermeta.kp.editor.ui.KpDocBrowserInformationControlInput(previousInput, declarationObject, editor.getResource(), buffer.toString(), tokenText);
+			return new org.kermeta.kp.editor.ui.KpDocBrowserInformationControlInput(previousInput, declarationObject, resourceProvider.getResource(), buffer.toString(), tokenText);
 		}
 		return null;
 	}
@@ -313,39 +317,30 @@ public class KpTextHover implements org.eclipse.jface.text.ITextHover, org.eclip
 		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(org.kermeta.kp.editor.ui.KpUIPlugin.PLUGIN_ID);
 		java.net.URL styleSheetURL = bundle.getEntry("/css/hover_style.css");
 		if (styleSheetURL != null) {
-			java.io.BufferedReader reader = null;
 			try {
-				reader = new java.io.BufferedReader(new java.io.InputStreamReader(styleSheetURL.openStream()));
-				StringBuffer buffer = new StringBuffer();
-				String line = reader.readLine();
-				while (line != null) {
-					buffer.append(line);
-					buffer.append('\n');
-					line = reader.readLine();
-				}
-				return buffer.toString();
+				return org.kermeta.kp.editor.util.KpStreamUtil.getContent(styleSheetURL.openStream());
 			} catch (java.io.IOException ex) {
 				ex.printStackTrace();
-				return "";
-			} finally {
-				try {
-					if (reader != null) {
-						reader.close();
-					}
-				} catch (java.io.IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
-		return null;
+		return "";
 	}
 	
 	private static org.eclipse.emf.ecore.EObject getFirstProxy(java.util.List<org.eclipse.emf.ecore.EObject> elements) {
+		return getFirstObject(elements, true);
+	}
+	
+	private static org.eclipse.emf.ecore.EObject getFirstNonProxy(java.util.List<org.eclipse.emf.ecore.EObject> elements) {
+		return getFirstObject(elements, false);
+	}
+	
+	private static org.eclipse.emf.ecore.EObject getFirstObject(java.util.List<org.eclipse.emf.ecore.EObject> elements, boolean proxy) {
 		for (org.eclipse.emf.ecore.EObject object : elements) {
-			if (object.eIsProxy()) {
+			if (proxy == object.eIsProxy()) {
 				return object;
 			}
 		}
 		return null;
 	}
+	
 }

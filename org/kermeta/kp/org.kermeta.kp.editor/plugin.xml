@@ -54,24 +54,58 @@
 	
 	<extension id="org.kermeta.kp.editor.nature" name="kp nature" point="org.eclipse.core.resources.natures">
 		<runtime>
-			<run class="org.kermeta.kp.editor.mopp.KpNature" />
+			<run class="org.kermeta.kp.editor.mopp.KpNature">
+			</run>
 		</runtime>
-		<builder id="org.kermeta.kp.editor.builder" />
+		<builder id="org.kermeta.kp.editor.builder">
+		</builder>
 	</extension>
 	
 	<extension point="org.eclipse.core.resources.builders" id="org.kermeta.kp.editor.builder" name="kp Builder">
 		<builder hasNature="true">
-			<run class="org.kermeta.kp.editor.mopp.KpBuilderAdapter" />
+			<run class="org.kermeta.kp.editor.mopp.KpBuilderAdapter">
+			</run>
 		</builder>
 	</extension>
 	
-	<extension-point id="org.kermeta.kp.editor.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	<extension-point id="org.kermeta.kp.editor.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
 	
 	<extension point="org.eclipse.emf.ecore.extension_parser">
 		<parser class="org.kermeta.kp.editor.mopp.KpResourceFactoryDelegator" type="kp">
 		</parser>
 	</extension>
 	
-	<extension-point id="org.kermeta.kp.editor.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	<extension-point id="org.kermeta.kp.editor.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="org.kermeta.kp.editor.debug.KpLineBreakpoint" id="org.kermeta.kp.editor.debug.breakpoint" markerType="org.kermeta.kp.editor.debug.lineBreakpoint.marker" name="kp Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="org.kermeta.kp.editor.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="org.kermeta.kp.editor.ui.launchConfigurationType" delegate="org.kermeta.kp.editor.launch.KpLaunchConfigurationDelegate" modes="run,debug" name="kp Application" sourceLocatorId="org.kermeta.kp.editor.ui.sourceLocator" sourcePathComputerId="org.kermeta.kp.editor.ui.sourcePathComputer" delegateName="kp Launch Tooling" delegateDescription="This will run or debug .kp files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="org.kermeta.kp.editor.debug.KpSourcePathComputerDelegate" id="org.kermeta.kp.editor.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="org.kermeta.kp.editor.ui.sourceLocator" class="org.kermeta.kp.editor.debug.KpSourceLocator" name="kp Source Locator">
+		</sourceLocator>
+	</extension>
 	
 </plugin>

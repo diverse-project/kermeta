@@ -8,7 +8,8 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.kermeta.kp.editor.ui.KpEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="kp" icon="icons/editor_icon.gif" id="org.kermeta.kp.editor.ui.KpEditor" name="EMFText kp Editor">
-			<contentTypeBinding contentTypeId="org.kermeta.kp.editor"/>
+			<contentTypeBinding contentTypeId="org.kermeta.kp.editor">
+			</contentTypeBinding>
 		</editor>
 	</extension>
 	
@@ -31,32 +32,130 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kp.editor.ui.KpNewFileWizard" id="org.kermeta.kp.editor.ui.KpNewFileWizard" name="EMFText .kp file">
 		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.kermeta.kp.editor.ui.KpNewProjectWizard" id="org.kermeta.kp.editor.ui.KpNewProjectWizard" name="EMFText kp project" project="true">
+		</wizard>
 	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
-		<markerResolutionGenerator class="org.kermeta.kp.editor.ui.KpMarkerResolutionGenerator" markerType="org.kermeta.kp.editor.problem" />
+		<markerResolutionGenerator class="org.kermeta.kp.editor.ui.KpMarkerResolutionGenerator" markerType="org.kermeta.kp.editor.problem">
+		</markerResolutionGenerator>
 	</extension>
 	
 	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
-		<factory class="org.kermeta.kp.editor.ui.KpAnnotationModelFactory" extensions="kp" />
+		<factory class="org.kermeta.kp.editor.ui.KpAnnotationModelFactory" extensions="kp">
+		</factory>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.kermeta.kp.editor" name=".kp File" base-type="org.eclipse.core.runtime.text" file-extensions="kp"/>
+		<content-type id="org.kermeta.kp.editor" name=".kp File" base-type="org.eclipse.core.runtime.text" file-extensions="kp">
+		</content-type>
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
-		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="kp" id="org.kermeta.kp.editor.ui.provider" />
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="kp" id="org.kermeta.kp.editor.ui.provider">
+		</provider>
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors.annotationTypes">
-		<type name="org.kermeta.kp.editor.ui.occurences" />
-		<type name="org.kermeta.kp.editor.ui.occurences.declaration" super="org.kermeta.kp.editor.ui.occurences" />
+		<type name="org.kermeta.kp.editor.ui.occurences">
+		</type>
+		<type name="org.kermeta.kp.editor.ui.occurences.declaration" super="org.kermeta.kp.editor.ui.occurences">
+		</type>
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
-		<specification annotationType="org.kermeta.kp.editor.ui.occurences" label="Occurrences (in .kp files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="kp.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="kp.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="kp.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kp.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kp.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="kp.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="kp.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="kp.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="kp.occurrenceTextStyle" textStylePreferenceValue="NONE" />
-		<specification annotationType="org.kermeta.kp.editor.ui.occurences.declaration" label="Declarations (in .kp files)" textPreferenceKey="kp.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="kp.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="kp.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kp.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kp.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="kp.declarationTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.kermeta.kp.editor.ui.occurences" label="Occurrences (in .kp files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="kp.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="kp.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="kp.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kp.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kp.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="kp.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="kp.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="kp.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="kp.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.kermeta.kp.editor.ui.occurences.declaration" label="Declarations (in .kp files)" textPreferenceKey="kp.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="kp.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="kp.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="kp.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="kp.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="kp.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.kermeta.kp.editor.ui.launchConfigurationType" id="org.kermeta.kp.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.kermeta.kp.editor.ui.launchConfigurationType" class="org.kermeta.kp.editor.ui.launch.KpLaunchConfigurationTabGroup" id="org.kermeta.kp.launchConfigurationTabGroup" helpContextId="org.kermeta.kp.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug kp model.">
+			</launchMode>
+			<launchMode mode="run" description="Run kp model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="kp Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.kermeta.kp.launch" modes="run,debug" class="org.kermeta.kp.editor.ui.launch.KpLaunchShortcut" description="Launch a kp model" id="org.kermeta.kp.launchShortcut">
+			<description description="Run kp model" mode="run">
+			</description>
+			<description description="Debug kp model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.kermeta.kp.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.kermeta.kp.editor.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.kermeta.kp.PropertyTester" type="java.lang.Object" namespace="org.kermeta.kp" properties="isLaunchable" class="org.kermeta.kp.editor.ui.KpPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.kermeta.kp.editor.ui.debug.lineBreakpoint" markerType="org.kermeta.kp.editor.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.kermeta.kp.editor.ui.debug.lineBreakpoint" label="Breakpoints (in .kp files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.kermeta.kp.editor.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.kermeta.kp.editor.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.kermeta.kp.editor.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.kermeta.kp.editor.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.kermeta.kp.editor.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.kermeta.kp.editor.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.kermeta.kp.editor.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.kermeta.kp.editor.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.kermeta.kp.editor.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.kermeta.kp.editor.ui.KpEditor" class="org.kermeta.kp.editor.ui.debug.KpAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.kermeta.kp.editor.debug.KpDebugVariable" class="org.kermeta.kp.editor.ui.debug.KpAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.kermeta.kp.editor.debug.KpDebugVariable" class="org.kermeta.kp.editor.ui.debug.KpAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.kermeta.kp.editor.ui.RulerPopupActions" targetID="org.kermeta.kp.editor.EditorRuler">
+			<action id="org.kermeta.kp.editor.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.kermeta.kp.editor.ui.KpEditor" id="org.kermeta.kp.editor.ui.BreakpointRulerActions">
+			<action id="org.kermeta.kp.editor.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.kermeta.kp.editor.debugModel" class="org.kermeta.kp.editor.ui.debug.KpDebugModelPresentation">
+		</debugModelPresentation>
 	</extension>
 	
 </plugin>

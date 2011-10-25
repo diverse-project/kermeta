@@ -8,21 +8,18 @@ package org.kermeta.kp.editor.ui;
 
 public class KpMarkerAnnotation extends org.eclipse.ui.texteditor.MarkerAnnotation implements org.eclipse.jface.text.quickassist.IQuickFixableAnnotation {
 	
-	boolean quickFixableState;
-	boolean isQuickFixable;
+	// private boolean isQuickFixable;
 	
 	public KpMarkerAnnotation(org.eclipse.core.resources.IMarker marker) {
 		super(marker);
 	}
 	
 	public void setQuickFixable(boolean state) {
-		isQuickFixable = state;
-		quickFixableState = true;
+		// this.isQuickFixable = state;
 	}
 	
 	public boolean isQuickFixableStateSet() {
 		return true;
-		//return quickFixableState;
 	}
 	
 	public boolean isQuickFixable() {
