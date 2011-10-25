@@ -942,12 +942,14 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						/* removes isAbstract and isSingleton from signature
 						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 							result := result and self.isAbstract == aspectElement.isAbstract
 						end
 						if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
 							result := result and self.isSingleton == aspectElement.isSingleton
 						end
+						*/
 					else
 						result := false
 					end

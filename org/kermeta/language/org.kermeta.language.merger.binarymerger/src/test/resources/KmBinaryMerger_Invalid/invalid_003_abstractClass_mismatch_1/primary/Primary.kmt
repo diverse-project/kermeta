@@ -1,0 +1,7 @@
+
+package mainpackage{
+	abstract class MainClass
+	{
+		
+	}
+}

@@ -1,0 +1,13 @@
+
+
+package mainpackage{
+	
+	aspect singleton SingletonClass
+	{
+		
+	}
+	aspect class NonSingletonClass
+	{
+		
+	}
+}

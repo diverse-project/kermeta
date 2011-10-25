@@ -318,7 +318,7 @@ package kermeta {
 					    aspectIsAspect := aspectValue.toString.equals("true") // workaround for aspectValue.asType(Boolean)
 						if ((not primaryIsAspect) and (not aspectIsAspect)) then
 							// 2 non open classes shouldn't be merged
-					        stdio.writeln("raising BinaryMergerException for Typedefinition.isAspect... primaryIsAspect="+primaryIsAspect.toString+", aspectIsAspect="+aspectIsAspect.toString)
+					        //stdio.writeln("raising BinaryMergerException for Typedefinition.isAspect... primaryIsAspect="+primaryIsAspect.toString+", aspectIsAspect="+aspectIsAspect.toString)
 							raise BinaryMergerException.new.initialize("Cannot merge classes which aren't opened using aspect", void, self)
 						end
 						result := primaryIsAspect.asType(Boolean) and aspectIsAspect.asType(Boolean)
@@ -411,7 +411,28 @@ package kermeta {
 			aspect class ClassDefinition inherits org::kermeta::language::structure::GenericTypeDefinition {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::GenericTypeDefinition is do
 					
-					result := super( propertyName, primaryValue, aspectValue)
+					// deal with isAbstract
+					// 
+					if (propertyName.equals("isAbstract")) then
+						if not primaryValue.equals(aspectValue) then
+							raise BinaryMergerException.new.initialize("Cannot merge an abstract class with a non abstract class. Please either repeat the abstract keyword or remove it on every definitions of this class.", void, self)
+						else
+							result := primaryValue
+						end
+						// TODO may be we can avoid the abstract keyword on an aspect class if it is present on a non aspect class
+						// in that case the result would be an abstract class						
+					else
+					if (propertyName.equals("isSingleton")) then
+						if not primaryValue.equals(aspectValue) then
+							raise BinaryMergerException.new.initialize("Cannot merge a singleton class with a non singleton class. Please either use singleton or class keyword on every definitions of this class.", void, self)
+						else
+							result := primaryValue
+						end
+						// TODO may be we can avoid the singleton keyword on an aspect class if it is present on a non aspect class
+						// in that case the result would be a singleton class						
+					else
+						result := super( propertyName, primaryValue, aspectValue)
+					end end
 				end
 			}
 

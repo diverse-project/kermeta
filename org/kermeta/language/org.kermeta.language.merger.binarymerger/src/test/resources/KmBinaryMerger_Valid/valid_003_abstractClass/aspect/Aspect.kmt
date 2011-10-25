@@ -1,0 +1,13 @@
+
+
+package mainpackage{
+	
+	aspect abstract class AbstractClass
+	{
+		
+	}
+	aspect class NonAbstractClass
+	{
+		
+	}
+}

@@ -1,0 +1,11 @@
+
+package mainpackage{
+	singleton SingletonClass
+	{
+		
+	}
+	class NonSingletonClass
+	{
+		
+	}
+}

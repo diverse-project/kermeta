@@ -38,11 +38,12 @@ class Main
 			"km",
 			""
 			)
+			*/
 		binaryMergerSignatureAspectGenerator.generateBinaryMergerSignatureAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			"") 
-			*/ 
+			 
 		binaryMergerReferenceFixerAspectGenerator.generateBinaryMergerReferenceFixerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",

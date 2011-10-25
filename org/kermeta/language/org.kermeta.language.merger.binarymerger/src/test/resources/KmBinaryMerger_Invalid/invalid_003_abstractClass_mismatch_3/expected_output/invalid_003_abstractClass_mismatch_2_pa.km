@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="mainpackage">
+    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Invalid/invalid_003_abstractClass_mismatch_1/primary/Primary.kmt;25;83"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Invalid/invalid_003_abstractClass_mismatch_1/aspect/Aspect.kmt;25;81"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="MainClass" superType="#//mainpackage/MainClass/@containedType.0" isAspect="false"
+        isAbstract="true" isSingleton="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Invalid/invalid_003_abstractClass_mismatch_1/primary/Primary.kmt;47;81"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="MainClass" superType="#//mainpackage/MainClass.1/@containedType.0" isAspect="true"
+        isAbstract="false" isSingleton="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Invalid/invalid_003_abstractClass_mismatch_1/aspect/Aspect.kmt;47;79"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

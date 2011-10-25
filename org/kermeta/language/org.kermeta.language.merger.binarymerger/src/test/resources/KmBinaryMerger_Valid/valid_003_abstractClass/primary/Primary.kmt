@@ -1,0 +1,11 @@
+
+package mainpackage{
+	abstract class AbstractClass
+	{
+		
+	}
+	class NonAbstractClass
+	{
+		
+	}
+}
