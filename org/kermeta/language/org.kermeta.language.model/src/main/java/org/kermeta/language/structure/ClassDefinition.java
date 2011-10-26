@@ -61,6 +61,7 @@ public interface ClassDefinition extends GenericTypeDefinition {
 
 	/**
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -70,7 +71,7 @@ public interface ClassDefinition extends GenericTypeDefinition {
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getClassDefinition_IsAbstract()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean"
 	 * @generated
 	 */
 	Boolean getIsAbstract();
@@ -121,6 +122,7 @@ public interface ClassDefinition extends GenericTypeDefinition {
 
 	/**
 	 * Returns the value of the '<em><b>Is Singleton</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -131,7 +133,7 @@ public interface ClassDefinition extends GenericTypeDefinition {
 	 * @return the value of the '<em>Is Singleton</em>' attribute.
 	 * @see #setIsSingleton(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getClassDefinition_IsSingleton()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean"
 	 * @generated
 	 */
 	Boolean getIsSingleton();

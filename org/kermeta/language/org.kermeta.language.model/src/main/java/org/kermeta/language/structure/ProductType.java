@@ -14,8 +14,12 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Type corresponding to a set of Types
+ * Type corresponding to a set of Types. It represents a set of ModelElement that are instances of the Types in the ProductType.
+ * The number of ModelElement is the same as the number of Types of the ProductType
  * Only used in the context of FunctionType
+ * This allows to to send to the function a set of elements as parameters, each parameter is typed
+ * with the types in the set of the ProductType.
+ * Unfortunatly, there is no surface syntax for a literal that could help in using this type in another context.
  * <!-- end-model-doc -->
  *
  * <p>

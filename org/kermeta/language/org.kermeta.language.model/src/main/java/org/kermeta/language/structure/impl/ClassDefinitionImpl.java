@@ -66,7 +66,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_ABSTRACT_EDEFAULT = null;
+	protected static final Boolean IS_ABSTRACT_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
@@ -106,7 +106,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_SINGLETON_EDEFAULT = null;
+	protected static final Boolean IS_SINGLETON_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsSingleton() <em>Is Singleton</em>}' attribute.
