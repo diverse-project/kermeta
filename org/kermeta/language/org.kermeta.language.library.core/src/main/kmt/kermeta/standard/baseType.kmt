@@ -57,6 +57,14 @@ class Object
 	operation checkAllInvariants() : Void  is do
 	end
 
+    /**
+     * Runs checking of a single invariant on the Object
+     */
+    @CompilerIgnore "true"
+    operation checkInvariant(constraint : Constraint) : Void is do
+    end
+
+
 	/**
 	 * semantic equality,
 	 * if you wish to test for object identity you need to use the method oid
@@ -87,7 +95,12 @@ class Object
 	//@CompilerIgnore "true"
 	operation isDirectInstanceOf(cl : Class) : Boolean is do
 	end
-	
+
+	@CompilerIgnore "true"
+	@Deprecated "Operation isKindOf is deprecated, use isDirectInstanceOf instead"
+	operation isKindOf(cl : Class) : Boolean is do
+	end
+
 	/** 
 	 * Returns the instances of the given property for this Object.
 	 *
@@ -362,7 +375,7 @@ class String {
 
           end
         @CompilerIgnore "true"
-         operation length() : Integer is do
+         operation size() : Integer is do
 
           end
         @CompilerIgnore "true"
@@ -453,7 +466,59 @@ class String {
          operation notifyAll() : Void is do
 
           end
+
+
+        //Add missing methods from Kermeta V1
+        @CompilerIgnore "true"
+          operation allCharacters() : Character[0..*] is do
+          end
+
+        @CompilerIgnore "true"
+            operation append(other : String) : String is do
+            end
+
+        @CompilerIgnore "true"
+        operation contains(other : String) : Boolean is do
+        end
+
+        @CompilerIgnore "true"
+        operation elementAt(index : Integer) : Character is do
+        end
+
+        //@CompilerIgnore "true"
+        @Deprecated "true"
+        operation replace(str1 : String, str2 : String) : String is do
+        end
+
+        @CompilerIgnore "true"
+        operation toInteger() : Integer is do
+        end
+
+        //@CompilerIgnore "true"
+        @Deprecated "true"
+        operation replaceKeyword(keyword : String, replacement : String) : String is do
+        end
+
+        @CompilerIgnore "true"
+        operation toReal() : Real is do
+        end
+
+        @CompilerIgnore "true"
+        operation toBoolean() : Boolean is do
+        end
+
+/*
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+        @CompilerIgnore "true"
+  */
 }
+
 @CompilerIgnore "true"
 class Integer inherits Numeric {        @CompilerIgnore "true"
          operation numberOfLeadingZeros(arg0:Integer) : Integer is do
@@ -616,6 +681,16 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
          operation times(body : <Integer->Object>) : Void is do
 
           end
+
+          // Add missing methods from V1
+        @CompilerIgnore "true"
+        operation toReal() : Real is do
+        end
+
+
+
+
+
 }
 @CompilerIgnore "true"
 class Boolean {        @CompilerIgnore "true"
@@ -1286,7 +1361,7 @@ class StringBuffer {        @CompilerIgnore "true"
 
           end
         @CompilerIgnore "true"
-         operation length() : Integer is do
+         operation size() : Integer is do
 
           end
         @CompilerIgnore "true"

@@ -291,7 +291,7 @@ class RichStringBuffer(value: StringBuffer) extends KermetaObject with EObjectIm
 	 def getChars(arg0:Int,arg1:Int,arg2:Array[Char],arg3:Int) : Any = value.getChars(arg0,arg1,arg2,arg3)
 	 def lastIndexOf(arg0:java.lang.String) : Int = value.lastIndexOf(arg0)
 	 def lastIndexOf(arg0:java.lang.String,arg1:Int) : Int = value.lastIndexOf(arg0,arg1)
-	 def length() : Int = value.length()
+	 def size() : Int = value.length()
 	 def offsetByCodePoints(arg0:Int,arg1:Int) : Int = value.offsetByCodePoints(arg0,arg1)
 	 def replace(arg0:Int,arg1:Int,arg2:java.lang.String) : java.lang.StringBuffer = value.replace(arg0,arg1,arg2)
 	 def substring(arg0:Int) : java.lang.String = value.substring(arg0)
@@ -637,7 +637,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	 def lastIndexOf(arg0:Int,arg1:Int) : Int = value.lastIndexOf(arg0,arg1)
 	 def lastIndexOf(arg0:java.lang.String) : Int = value.lastIndexOf(arg0)
 	 def lastIndexOf(arg0:java.lang.String,arg1:Int) : Int = value.lastIndexOf(arg0,arg1)
-	 def length() : Int = value.length()
+	 def size() : Int = value.length()
 	 def matches(arg0:java.lang.String) : Boolean = value.matches(arg0)
 	 def offsetByCodePoints(arg0:Int,arg1:Int) : Int = value.offsetByCodePoints(arg0,arg1)
 	 def regionMatches(arg0:Int,arg1:java.lang.String,arg2:Int,arg3:Int) : Boolean = value.regionMatches(arg0,arg1,arg2,arg3)
@@ -656,7 +656,19 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	 def toUpperCase() : java.lang.String = value.toUpperCase()
 	 def trim() : java.lang.String = value.trim()
 
-    override def isVoid():Boolean = value ==null;
+   //Add missing methods from Kermeta V1
+   def allCharacters() : Array[Char] = value.toCharArray()
+   def append(arg0:java.lang.String) : java.lang.String = {return value+arg0}
+   def contains(arg0:java.lang.String) : Boolean = value.contains(arg0)
+   def elementAt(arg0:Int) : Char = value.charAt(arg0)
+   def replace(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
+   def replaceKeyword(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
+   def toInteger() : Int = _root_.java.lang.Integer.parseInt(value)
+   def toReal() : Double = _root_.java.lang.Double.parseDouble(value)
+   def toBoolean() : Boolean = _root_.java.lang.Boolean.parseBoolean(value)
+
+
+  override def isVoid():Boolean = value ==null;
     override def getValue():Object = value 		   
     override def equals(o:Any):Boolean ={
         if (o.isInstanceOf[String]){

@@ -23,7 +23,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
 	def equals(element : Any) : Boolean
 	//def isNotEqual(element : Any) : Boolean = !this.equals(element)
-//	def isDirectInstanceOf(cl : Class) : Boolean
+
 
   //TODO
 	def isSet(property : org.kermeta.language.structure.Property) : Boolean =false
@@ -83,7 +83,11 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def equals(o : KermetaObject):java.lang.Boolean = o == this
 
   def isNotEqual(o : Any) : Boolean = !equals(o)
+
+  def isDirectInstanceOf(cl : EClass) : Boolean = this.eClass().equals(cl)
+
   def isKindOf(cl : EClass) : Boolean = this.eClass().equals(cl)
+
   def get(prop : org.kermeta.language.structure.Property) :java.lang.Object= {
     if (prop == null){
       println ("prop est null aie")
@@ -175,7 +179,6 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
  //
  //
  //
-
 
 
 
