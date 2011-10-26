@@ -1,0 +1,131 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "TypeAwareMergerContext.kmt"
+using kermeta::standard
+using org::kermeta::language::resolver
+using kermeta::utils
+
+
+
+aspect class KermetaModelElement{
+
+	operation typeAwareMerge(context : TypeAwareMergerContext) is do
+		self.eachOwnedElement{ e|
+				if e.isInstanceOf(KermetaModelElement) then
+					e.asType(KermetaModelElement).typeAwareMerge(context)
+				end
+			e}// must return somthing for scala compiler to work		
+		
+	end
+}
+
+aspect class ClassDefinition {
+
+	method typeAwareMerge(context : TypeAwareMergerContext) is do
+		mergeInheritedClasses(context)
+		mergeOperations(context)
+		mergeProperties(context)
+	
+	
+	end
+
+
+	operation mergeOperations(context : TypeAwareMergerContext) is do
+		var opTable : Hashtable<String, Sequence<Operation>> init Hashtable<String, Sequence<Operation>>.new
+		//add all the operations to the table
+		self.ownedOperation.each{op|
+			if not opTable.containsKey(op.name) then
+				opTable.put(op.name,Sequence<Operation>.new)
+			end
+			opTable.getValue(op.name).add(op)
+			}	
+			
+		//look all the values i.e. all the sequence of operations with the same name
+		opTable.values.each{opSeq |
+			if opSeq.size()!=1 then
+				var mergedOp : Operation init opSeq.elementAt(0).asType(Operation)
+		
+				from var i : Integer init 1
+				until i==opSeq.size() loop
+				
+				mergedOp.merge(opSeq.elementAt(i), context)
+				i:=i+1
+				
+				end
+			end
+		}
+	
+	end
+
+	operation mergeInheritedClasses(context : TypeAwareMergerContext) is do
+	
+	
+	end
+	operation mergeProperties(context: TypeAwareMergerContext) is do
+	
+	end
+
+}
+
+aspect class Operation {
+
+	operation merge(otherOperation : Operation, context : TypeAwareMergerContext) is do
+	
+	
+	end
+	
+	/**says if two operations are mergeable
+	
+	two operations are mergeable if  : 
+	
+	-at least one of the body is void
+	- is abstract is equal
+	- all the MultiplicityElement attributes are equal (isOrdered, isUnique, lower, upper)
+	- name is equal
+	- ownedParameter is equal in size, in names of parameters, in types of parameters (modulo the typeParameter), in order of parameters
+	- owningClass is equal
+	- raisedException is equal
+	- superOperation is equal
+	- type is equal
+	*/
+	operation mergeableWith(otherOperation : Operation , context : TypeAwareMergerContext) : Boolean is do
+	
+		if 	(self.body.isVoid or otherOperation.body.isVoid)
+			and self.name == otherOperation.name 
+			and self.owningClass == otherOperation.owningClass 
+			and self.isOrdered == otherOperation.isOrdered
+			and self.isUnique == otherOperation.isUnique
+			and self.lower == otherOperation.lower
+			and self.upper == otherOperation.upper
+			then
+			
+			
+			if	self.typeParameter.size == otherOperation.typeParameter.size then
+				
+				var binding : Sequence<Set<TypeVariable>> init Sequence<Set<TypeVariable>>.new
+				from var i : Integer init 0
+				until i==self.typeParameters.size loop
+					var equivalentVars : Set<TypeVariable> init Set<TypeVariable>.new
+					equivalentVars.add(self.typeParameters.elementAt(i))
+					equivalentVars.add(otherOperation.typeParameters.elementAt(i))
+					binding.add(equivalentVars) 
+				end	
+				
+				
+				
+			else
+				result:=false
+			end
+		
+		else
+			result:=false
+		end
+	
+	end
+	
+	
+	
+}
