@@ -147,13 +147,13 @@ public class EMFCompareModelHelper {
 					if( ac.getAttribute().getName().equals("value") && ac.getLeftElement() instanceof Tag){
 						Tag t = (Tag)ac.getLeftElement();
 						if (t.getName().equals("traceability_text_reference")){
-							System.out.println("Ignoring change Tag.value UpdateAttribute : "+elem.toString());
+							System.out.println("\t\tIgnoring change Tag.value UpdateAttribute : "+elem.toString());
 							isDifferent = false;
 						}
 					}
 				}
 				if(isDifferent){
-					System.out.println("Difference detected : "+elem.toString());
+					System.out.println("\t\tDifference detected : "+elem.toString());
 					isReallyDifferent = true;
 				}
 			}
