@@ -414,22 +414,47 @@ package kermeta {
 					// deal with isAbstract
 					// 
 					if (propertyName.equals("isAbstract")) then
+						// asbtract
 						if not primaryValue.equals(aspectValue) then
-							raise BinaryMergerException.new.initialize("Cannot merge an abstract class with a non abstract class. Please either repeat the abstract keyword or remove it on every definitions of this class.", void, self)
+							var otherClassDef : org::kermeta::language::structure::ClassDefinition 
+							otherClassDef ?= self.getSimilarElement()
+							if(self.isAspect and otherClassDef.isAspect) then
+								//  the merge order might be important,
+								// different values in 2 aspect classes
+								result := false
+							else
+								if(not self.isAspect) then
+									if(self.isAbstract) then
+										// ok
+										result := true
+									else
+										// problem 
+										raise BinaryMergerException.new.initialize("Cannot change a concrete Class into an abstract class using an aspect.", void, self.getElementInMergedModel())
+									end
+								else
+									if(otherClassDef.isAbstract) then
+										result := true
+									else // problem 
+										raise BinaryMergerException.new.initialize("Cannot change a concrete Class into an abstract class using an aspect.", void, self.getElementInMergedModel())
+									end
+								end
+							end
+							//stdio.writeln("\tself.isAspect="+self.isAspect.toString+", otherClassDef.isAspect="+otherClassDef.isAspect.toString)
 						else
+							// same value, return the first one
 							result := primaryValue
 						end
 						// TODO may be we can avoid the abstract keyword on an aspect class if it is present on a non aspect class
-						// in that case the result would be an abstract class						
+						// in that case the result would be an abstract class	
+						//  the merge order might be important, if the merge takes two aspects classes: one abstract one concrete the result is abstract, 
+						//   because they must be coherents together, even if 					
 					else
 					if (propertyName.equals("isSingleton")) then
 						if not primaryValue.equals(aspectValue) then
-							raise BinaryMergerException.new.initialize("Cannot merge a singleton class with a non singleton class. Please either use singleton or class keyword on every definitions of this class.", void, self)
+							raise BinaryMergerException.new.initialize("Cannot merge a singleton class with a non singleton class. Please either use singleton or class keyword on every definitions of this class.", void, self.getElementInMergedModel())
 						else
 							result := primaryValue
-						end
-						// TODO may be we can avoid the singleton keyword on an aspect class if it is present on a non aspect class
-						// in that case the result would be a singleton class						
+						end						
 					else
 						result := super( propertyName, primaryValue, aspectValue)
 					end end

@@ -1,0 +1,8 @@
+using kermeta::standard
+
+package mainpackage{
+	aspect class MainClass
+	{
+		
+	}
+}
