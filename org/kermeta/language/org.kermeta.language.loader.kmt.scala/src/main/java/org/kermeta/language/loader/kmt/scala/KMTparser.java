@@ -12,9 +12,11 @@ import java.net.URL;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
+import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.loader.kmt.scala.internal.parser.*;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.TextReference;
@@ -26,7 +28,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
 
     public ModelingUnit load(URL url, String optionalContent, MessagingSystem logger) {
         KParser parser = new KParser();
-
+                
         String content = optionalContent;
         if (content.equals("")) {
         	if(url.getProtocol().equals("jar")){
@@ -87,10 +89,53 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
     				tag.setValue(url.toString() + ";" + tag.getValue());
     			}
     		}
+    		
+    		// Check that no aspect on a ClassDefinition defines class parameters 
+            if (kme instanceof ClassDefinition) {
+                ClassDefinition cd = (ClassDefinition)kme;
+                if (cd.getIsAspect()) {
+                    // Check that there are no generic parameters
+                	if (cd.getTypeParameter().size()>0) {
+                		for (Tag tag : cd.getKOwnedTags()) {
+                			if (tag.getName().equals("traceability_text_reference")) {
+                				TextReference tRef = createTextReference(tag);
+                            	logger.logProblem(Kind.UserERROR, "You are not allowed to define class parameters within an aspect", KMTparser.LOG_MESSAGE_GROUP, tRef);
+                            	return null;
+                			}
+                		}
+                	}
+                }
+            }
     	}
 
         //return (ModelingUnit) result.get();
     	return mu;
     }
+    
+	private TextReference createTextReference(Tag tag) {
+
+		String value = tag.getValue();
+		String[] values = value.split(";");
+
+		TextReference ref = null;
+
+		try {
+			ref = new TextReference(new URL(values[0]), new Integer(values[1]), new Integer(values[2]));
+			// ref.setBeginLine(new Integer(values[1]));
+			// ref.setBeginOffset(new Integer(values[2]));
+
+			// new TextReference()
+
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ref;
+	}
+
 }
 
