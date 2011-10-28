@@ -21,10 +21,10 @@ aspect class Type {
 	/**
 	 * return true if self and other are similar types, i.e. refereing to the same ClassDefinition including parameters or the same function 
 	 */
-	/*operation typeEquals(other : Type ) : Boolean is do
+	operation typeEquals(other : Type ) : Boolean is do
 		result := self.typeEquivalence(other,void) // default equality
 	end
-	*/
+	
 	/**
 	* return true if self and other are similar types, 
 	* but take into account that some type variables can be equivalent
