@@ -11,41 +11,48 @@ using kermeta::standard
 using org::kermeta::language::resolver
 
 aspect class ModelingUnit inherits TypeDefinitionContainer, KermetaModelElement {
-	/**
+	/* *
 	*	The Structure resolving is done in 2 passes : first pass set all types	
 	*	and second pass set unresolved operations and unresolved properties
 	*	To resolve a superOperation, it is required that the whole inheritance hierarchy
 	*	is resolved
 	*/
-	operation resolveWholeStructure(context : LanguageVisitorContext) is do
+	/*operation resolveWholeStructure(context : LanguageVisitorContext) is do
 		
 		
 		self.resolveStructureInheritance(context)
 		self.resolveStructure(context)
 		
-	end
+	end*/
 	
 
 }
 
 aspect class KermetaModelElement{
 
+	/**
+	* resolve only unresolvedType
+	
+	*/
 	operation resolveStructureInheritance(context : LanguageVisitorContext) is do
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
-					e.asType(KermetaModelElement).resolveStructure(context)
+					e.asType(KermetaModelElement).resolveStructureInheritance(context)
 				end
 			e}// must return somthing for scala compiler to work		
 		self.resolveStructureType(context)
 		
 	end
+	/**
+	* resolve unresolvedOperation (with resolved from:unresolvedType) and unresolvedProperty 
+	*
+	*/
 	operation resolveStructure(context : LanguageVisitorContext) is do
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
 					e.asType(KermetaModelElement).resolveStructure(context)
 				end
 			e}// must return somthing for scala compiler to work		
-		self.resolveStructureType(context)
 		self.resolveStructureOperation(context)
 		self.resolveStructureProperty(context)
 	end

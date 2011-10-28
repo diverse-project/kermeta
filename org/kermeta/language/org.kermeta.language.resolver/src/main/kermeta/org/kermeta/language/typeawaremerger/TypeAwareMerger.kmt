@@ -4,6 +4,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
 require "TypeAwareMergerContext.kmt"
+require "TypeRebind.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
 using kermeta::utils
@@ -28,33 +29,18 @@ aspect class ClassDefinition {
 		mergeInheritedClasses(context)
 		mergeOperations(context)
 		mergeProperties(context)
-	
-	
 	end
 
-
 	operation mergeOperations(context : TypeAwareMergerContext) is do
-		var opTable : Hashtable<String, Sequence<Operation>> init Hashtable<String, Sequence<Operation>>.new
-		//add all the operations to the table
-		self.ownedOperation.each{op|
-			if not opTable.containsKey(op.name) then
-				opTable.put(op.name,Sequence<Operation>.new)
-			end
-			opTable.getValue(op.name).add(op)
-			}	
-			
-		//look all the values i.e. all the sequence of operations with the same name
-		opTable.values.each{opSeq |
-			if opSeq.size()!=1 then
-				var mergedOp : Operation init opSeq.elementAt(0).asType(Operation)
-		
-				from var i : Integer init 1
-				until i==opSeq.size() loop
-				
-				mergedOp.merge(opSeq.elementAt(i), context)
-				i:=i+1
-				
-				end
+		var opsToMerge : Sequence<Operation> init Sequence<Operation>.new
+		opsToMerge.addAll(ownedOperation)
+		ownedOperation.clear
+		opsToMerge.each{op|
+			var mergeable : Operation init ownedOperation.detect{ ownedOp| ownedOp.mergeableWith(op, context) }
+			if not mergeable.isVoid then
+				mergeable.merge(op, context)
+			else
+				ownedOperation.add(op)
 			end
 		}
 	
@@ -65,7 +51,7 @@ aspect class ClassDefinition {
 	
 	end
 	operation mergeProperties(context: TypeAwareMergerContext) is do
-	
+		
 	end
 
 }
@@ -73,8 +59,22 @@ aspect class ClassDefinition {
 aspect class Operation {
 
 	operation merge(otherOperation : Operation, context : TypeAwareMergerContext) is do
-	
-	
+		if self.body.isVoid 
+		and not otherOperation.body.isVoid then
+			self.body:=otherOperation.body.rebind(self.typeParameter, otherOperation.typeParameter)
+		end
+		
+		kOwnedTags.addAll(otherOperation.kOwnedTags)
+		kTag.addAll(otherOperation.kTag)
+		
+		otherOperation.~pre.each{c|
+			c.body.rebind(self.typeParameter, otherOperation.typeParameter)}
+		self.~pre.addAll(otherOperation.~pre)
+		
+		otherOperation.~post.each{c|
+			c.body.rebind(self.typeParameter, otherOperation.typeParameter)}
+		self.~post.addAll(otherOperation.~post)
+
 	end
 	
 	/**says if two operations are mergeable
@@ -102,12 +102,9 @@ aspect class Operation {
 			and self.isUnique == otherOperation.isUnique
 			and self.lower == otherOperation.lower
 			and self.upper == otherOperation.upper
-			and self.ownedParameter.size == otherOperation.ownedParameter.size
-			then
+			and self.ownedParameter.size == otherOperation.ownedParameter.size then
 			
 			//check the parameters names
-		
-		
 			var paramNamesAreEqual : Boolean init true
 			from var i : Integer init 0
 			until i==self.ownedParameter.size loop
@@ -118,15 +115,15 @@ aspect class Operation {
 			//check type equivalence
 			if	paramNamesAreEqual
 				and self.typeParameter.size == otherOperation.typeParameter.size then
-				
-				
+
 				//create set of equivalent typevariables from typeParameters of the operations
-				var binding : Sequence<Set<TypeVariable>> init Sequence<Set<TypeVariable>>.new
+				var binding : Sequence<Binding> init Sequence<Binding>.new
 				from var i : Integer init 0
 				until i==self.typeParameter.size loop
-					var equivalentVars : Set<TypeVariable> init Set<TypeVariable>.new
-					equivalentVars.add(self.typeParameter.elementAt(i))
-					equivalentVars.add(otherOperation.typeParameter.elementAt(i))
+					var equivalentVars : Binding init Binding.new
+					equivalentVars.types:=Set<TypeVariable>.new
+					equivalentVars.types.add(self.typeParameter.elementAt(i))
+					equivalentVars.types.add(otherOperation.typeParameter.elementAt(i))
 					binding.add(equivalentVars) 
 				end	
 				

@@ -21,7 +21,7 @@ require "../resolver/ResolverException.kmt"
 using kermeta::standard
 
 
-class TypeAwareMergerContext
+class TypeAwareMergerContext 
 {
 	reference errors : OrderedSet<ResolverException>
 

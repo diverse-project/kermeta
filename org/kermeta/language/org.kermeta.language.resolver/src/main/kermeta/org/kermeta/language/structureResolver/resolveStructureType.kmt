@@ -10,10 +10,15 @@ using kermeta::standard
 using org::kermeta::language::resolver
 package structure{
 	aspect class KermetaModelElement{
-	
+		
+		/**
+		* resolving type is done in two steps
+		* 1) resolve all unresolvedtypes contained by elements, link unresolvedtypes to resolved types, remove unresolved type from container and add the resolved type
+		* 2) replace the references to unresolvedtypes with references to resolved types
+		*/
 		operation resolveStructureType(context : LanguageVisitorContext) is do
 			
-
+			
 			self.resolveStructureContainedType(context)
 			
 			self.resolveStructureReferencedType(context)

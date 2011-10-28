@@ -1,0 +1,162 @@
+package org::kermeta::language;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "TypeAwareMerger.kmt"
+
+using kermeta::standard
+using org::kermeta::language::behavior
+
+package structure{
+	aspect class KermetaModelElement{
+		
+		operation rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+		
+			eachOwnedElement{containedElt |
+				containedElt.rebind(newTypeParam, oldTypeParam)}
+		
+		end
+	}
+
+	aspect class UnresolvedType inherits Type, Unresolved, TypeContainer {
+		
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			// must maintain order	
+			from var i : Integer init 0
+			until i==generics.size
+			loop
+				if generics.at(i).isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(generics.at(i)) then
+						 
+						 var index : Integer init oldTypeParam.indexOf(generics.at(i))
+						 generics.removeAt(i)
+						 generics.insertAt(i,newTypeParam.elementAt(index))
+					
+					end
+				else
+					generics.at(i).rebind(newTypeParam,oldTypeParam)
+				end			
+				i:=i+1
+			end
+				
+		end
+	}
+	
+	
+	aspect class TypeVariableBinding inherits TypeContainer, KermetaModelElement {
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			if not type.isVoid then
+				if type.isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(type) then
+						 var index : Integer init oldTypeParam.indexOf(type)
+						 type:=newTypeParam.elementAt(index)
+					end
+				else
+					type.rebind(newTypeParam,oldTypeParam)
+				end
+			end
+		end
+	}
+	
+	
+	aspect class TypedElement inherits TypeContainer, NamedElement {
+		
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			if not type.isVoid then
+				if type.isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(type) then
+						 var index : Integer init oldTypeParam.indexOf(type)
+						 type:=newTypeParam.elementAt(index)
+					end
+				else
+					type.rebind(newTypeParam,oldTypeParam)
+				end
+			end
+		end
+	}
+	
+	
+	aspect class ProductType inherits TypeContainer, Type{
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			type.each{ t|
+				if t.isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(t) then
+						 var index : Integer init oldTypeParam.indexOf(t)
+						 t:=newTypeParam.elementAt(index)
+					end	
+				else
+					t.rebind(newTypeParam,oldTypeParam)
+				end
+				}
+		end
+	}
+	
+	aspect class FunctionType inherits TypeContainer, Type {
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			if not left.isVoid then
+				if left.isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(left) then
+						 var index : Integer init oldTypeParam.indexOf(left)
+						 left:=newTypeParam.elementAt(index)
+					end
+				else
+					left.rebind(newTypeParam,oldTypeParam)
+				end
+			end
+			if not right.isVoid then
+				if right.isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(right) then
+						 var index : Integer init oldTypeParam.indexOf(right)
+						 right:=newTypeParam.elementAt(index)
+					end
+				else
+					right.rebind(newTypeParam,oldTypeParam)
+				end
+			end
+		end
+	}
+	
+
+}
+package behavior {
+	aspect class UnresolvedCall inherits Unresolved, CallExpression, TypeContainer{
+	
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			// must maintain order	
+			from var i : Integer init 0
+			until i==generics.size
+			loop
+				if generics.at(i).isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(generics.at(i)) then
+						 
+						 var index : Integer init oldTypeParam.indexOf(generics.at(i))
+						 generics.removeAt(i)
+						 generics.insertAt(i,newTypeParam.elementAt(index))
+					
+					end
+				else
+					generics.at(i).rebind(newTypeParam,oldTypeParam)
+				end	
+				i:=i+1
+			end
+		end
+	}
+	
+	aspect class TypeReference inherits MultiplicityElement{
+	
+		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
+			if not type.isVoid then
+				if type.isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(type) then
+						 var index : Integer init oldTypeParam.indexOf(type)
+						 type:=newTypeParam.elementAt(index)
+					end
+				else
+					type.rebind(newTypeParam,oldTypeParam)
+				end
+			end
+		end
+	}
+	
+}

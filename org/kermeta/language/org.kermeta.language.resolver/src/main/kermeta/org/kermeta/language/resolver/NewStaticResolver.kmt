@@ -18,9 +18,11 @@ require "../staticsetter/StaticSetter_kermeta_aspect.kmt"
 require "../staticsetter/StaticSetterContext.kmt"
 require "ResolverException.kmt"
 require "../structureResolver/structureResolver.kmt"
+require "../typeawaremerger/TypeAwareMerger.kmt"
+//require "../structureResolver/ResolverContext_Aspect.kmt"
 using org::kermeta::language::staticsetter
-//using language::helpers
 
+using org::kermeta::language::resolver
 using kermeta::persistence
 using kermeta::standard
 
@@ -41,7 +43,7 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	unresolvedModelingUnit.canUseCachedStructuralTypeDefinitions := true
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
+        resolvedModelingUnit := doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit)))
          
         stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
@@ -65,13 +67,27 @@ class FullStaticResolver
 
 
 	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		result := doStaticSetting(doResolving(unresolvedModelingUnit))
+		result := doStaticSetting(doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit))))
 	end
 
-	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation doTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		//init of context
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedModelingUnit)
-		unresolvedModelingUnit.resolveWholeStructure(ctxt)
+		unresolvedModelingUnit.resolveStructureInheritance(ctxt)
+		result:=unresolvedModelingUnit
+	end
+	
+	operation doTypeAwareMerging(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		var mergeCtxt : TypeAwareMergerContext init TypeAwareMergerContext.new
+		mergeCtxt.errors:=ctxt.errors
+		unresolvedModelingUnit.typeAwareMerge( mergeCtxt)
+		result:=unresolvedModelingUnit
+	
+	end
+	
+	operation doStructureResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		//init of context
+		unresolvedModelingUnit.resolveStructure(ctxt)
 		result:=unresolvedModelingUnit
 	end
 
