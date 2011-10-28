@@ -13,6 +13,12 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 using kermeta::standard
 using kermeta::utils
 
+class Binding{
+	
+	reference types : Set<TypeVariable>
+
+}
+
 
 //TODO
 //if 'other' is a PrimitiveType, the test will not work
@@ -29,7 +35,7 @@ aspect class Type {
 	* return true if self and other are similar types, 
 	* but take into account that some type variables can be equivalent
 	*/
-	operation typeEquivalence(other : Type, bindings : Sequence<Set<TypeVariable>>) : Boolean is do
+	operation typeEquivalence(other : Type, bindings : Sequence<Binding>) : Boolean is do
 		result := self == other
 	
 	end
@@ -39,15 +45,15 @@ aspect class Type {
 
 aspect class TypeVariable inherits TypeContainer, Type, NamedElement {
 
-	method typeEquivalence (other : Type, bindings : Sequence<Set<TypeVariable>>) : Boolean is do
+	method typeEquivalence (other : Type, bindings : Sequence<Binding>) : Boolean is do
 		result:= self==other
 		
 		if not bindings.isVoid 
 			and not result 
 			and other.isInstanceOf(TypeVariable) then
  			bindings.each{equivalentVars|
-				if equivalentVars.contains(self) then
-					result := equivalentVars.contains(other.asType(TypeVariable))
+				if equivalentVars.types.contains(self) then
+					result := equivalentVars.types.contains(other.asType(TypeVariable))
 				end}
 
 		
@@ -57,7 +63,7 @@ aspect class TypeVariable inherits TypeContainer, Type, NamedElement {
 }
 
 aspect class ParameterizedType inherits Type {
-	method typeEquivalence(other : Type, bindings : Sequence<Set<TypeVariable>>) : Boolean is do
+	method typeEquivalence(other : Type, bindings : Sequence<Binding>) : Boolean is do
 		if not other.isVoid and other.isInstanceOf(ParameterizedType)  then
 			result := self.typeDefinition == other.asType(ParameterizedType).typeDefinition
 			
@@ -82,7 +88,7 @@ aspect class ParameterizedType inherits Type {
 }
 
 aspect class FunctionType inherits Type {
-	method typeEquivalence(other : Type,bindings : Sequence<Set<TypeVariable>> ) : Boolean is do
+	method typeEquivalence(other : Type,bindings : Sequence<Binding> ) : Boolean is do
 		if not other.isVoid and other.isInstanceOf(FunctionType) then			
 			var p : FunctionType init  other.asType(FunctionType)
 			result := self.left.typeEquivalence(p.left, bindings) and self.right.typeEquivalence( p.right, bindings) 
@@ -94,7 +100,7 @@ aspect class FunctionType inherits Type {
 }
 
 aspect class ProductType inherits Type {
-	method typeEquivalence(other : Type, bindings : Sequence<Set<TypeVariable>> ) : Boolean is do
+	method typeEquivalence(other : Type, bindings : Sequence<Binding> ) : Boolean is do
 		if not other.isVoid and other.isInstanceOf(ProductType) then			
 			if (self.type.size() == other.asType(ProductType).type.size()) then
 				result := true
@@ -120,7 +126,7 @@ aspect class ProductType inherits Type {
 
 aspect class PrimitiveType inherits DataType {
 
-	method typeEquivalence(other : Type,bindings : Sequence<Set<TypeVariable>>) : Boolean is do
+	method typeEquivalence(other : Type,bindings : Sequence<Binding>) : Boolean is do
 		result := self.instanceType.typeEquivalence(other, bindings)
 	end
 }
