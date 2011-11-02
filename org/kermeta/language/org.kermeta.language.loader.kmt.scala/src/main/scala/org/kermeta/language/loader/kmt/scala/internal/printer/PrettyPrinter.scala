@@ -80,6 +80,9 @@ object PrettyPrinter {
           res.append("\t\tattribute ")
         else
           res.append("\t\treference ")
+        if (p.getIsReadOnly)
+          res.append("readonly ")
+
         res.append(p.getName + " : ")
         printMultiplicityElementTypeType(p,res)
           

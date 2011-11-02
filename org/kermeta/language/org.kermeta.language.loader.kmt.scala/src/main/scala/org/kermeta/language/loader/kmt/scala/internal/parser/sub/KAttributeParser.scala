@@ -13,19 +13,25 @@ package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import org.kermeta.language.structure.Property
 import org.kermeta.language.structure.StructureFactory
+import scala.Predef._
 
 trait KAttributeParser extends KAbstractParser with KMultiplicityParser {
 
   def propertyDeclKeyword = ( "attribute" | "reference" )
-  
-  def attribute : Parser[Property] = propertyDeclKeyword ~ ident ~ ":" ~ multiplicityType ~ opt("#" ~> ident) ^^ { case propertyKeyword ~ id ~ _ ~ mType ~ ooposite =>
+  def readonlyModifier = opt("readonly")
+
+
+  def attribute : Parser[Property] = propertyDeclKeyword ~ readonlyModifier ~ ident ~ ":" ~ multiplicityType ~ opt("#" ~> ident) ^^ { case propertyKeyword ~ readonlyM ~ id ~ _ ~ mType ~ ooposite =>
       val newo = StructureFactory.eINSTANCE.createProperty
       newo.setName(id)
       propertyKeyword match {
         case "attribute" => newo.setIsComposite(true)
         case "reference" => newo.setIsComposite(false)
       }
-
+      readonlyM match {
+        case Some(_) => newo.setIsReadOnly(true)
+        case None => newo.setIsReadOnly(false)
+      }
       // copy Type and multiplicity information in this Property
       mType.copyToKElem(newo)
 
