@@ -552,12 +552,16 @@ package kermeta {
 
 			aspect class Operation {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					/* disable merge of operation because we cannot correctly deal with its UnresolvedType
+					   the operations are duplicated, and resolved after , then a fusion is applied 
+					   (see bug 1962)
 					var aspectElement : org::kermeta::language::structure::Operation
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
 						
 						result := super( aspectElement)
+						*/
 						/* ignore abstract and body -> will raise an exception in case of conflict */
 					    /*
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
@@ -570,17 +574,20 @@ package kermeta {
 							result := result and self.uniqueName == aspectElement.uniqueName
 						end
 						*/
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+					/*	if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-					else
+					else */
 						result := false
-					end
+					/* end */
 				end
 			}
 
 			aspect class Property {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					/* disable merge of operation because we cannot correctly deal with its UnresolvedType
+					   the operations are duplicated, and resolved after, then a fusion is applied 
+					   (see bug 1962)
 					var aspectElement : org::kermeta::language::structure::Property
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
@@ -617,9 +624,9 @@ package kermeta {
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-					else
+					else */
 						result := false
-					end
+					//end
 				end
 			}
 
