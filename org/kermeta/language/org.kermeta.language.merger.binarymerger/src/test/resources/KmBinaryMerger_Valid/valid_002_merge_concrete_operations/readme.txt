@@ -1,0 +1,1 @@
+this is valid at this step, but the fusion must fail on that
