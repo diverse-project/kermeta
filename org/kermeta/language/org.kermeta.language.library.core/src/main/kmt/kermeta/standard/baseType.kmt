@@ -500,7 +500,7 @@ class String {
         end
 
         @CompilerIgnore "true"
-        operation toReal() : Real is do
+        operation toReal() : Double is do
         end
 
         @CompilerIgnore "true"
@@ -684,7 +684,7 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
 
           // Add missing methods from V1
         @CompilerIgnore "true"
-        operation toReal() : Real is do
+        operation toReal() : Double is do
         end
 
 
@@ -1003,6 +1003,9 @@ class Short inherits Numeric {        @CompilerIgnore "true"
 
           end
 }
+
+
+
 @CompilerIgnore "true"
 class Double inherits Numeric {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
