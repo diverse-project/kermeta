@@ -1,0 +1,46 @@
+Nouvelle structure du resolver pour supporter les nommages locaux de paramètres ou de type génériques
+
+
+1) Il est souhaitable qu'une classe comportant un type générique (class A<X>) puisse être aspectisé et que dans cet aspect le nom du type générique soit changé (aspect class A<Y>)
+
+Une nouvelle phase doit donc être introduite avant le merge des classes qui permette la résolution des appels aux types génériques locaux, de manière à ce que le merge puisse mettre à jour ces appels 
+
+par expl 
+
+class A<X> {
+operation foo():X is do end}
+
+aspect class A<Y> { 
+operation bar():Y is do end}
+
+le merge des 2 donne
+
+class A<X>{
+operation foo() : X is do end
+operation bar() : X is do end }
+
+on voit que le type de retour de bar correspond au type générique passé en paramètre de la classe A. Cette mise à jour au moment du merge ne peut être effectué que si le type Y avait été résolu et identifié comme le type générique de l'aspect.
+
+
+Cette phase de résolution doit donc résoudre : les unresolvedtype correspondant à un type générique local, les unresolvedCalls correspondant à un calltypeliteral vers un type générique local
+
+
+2) On peut ensuite merger tous les typedefinition de telle sorte que pour un type donné il n'existe qu'un seul type definition. Mais il n'est pas encore possible de merger les opérations, car tant que les types ne sont pas résolus, il n'est pas possible de comparer les signatures des operation pour voir celles qui sont mergeables.
+
+3) On doit donc dans une troisième étape résoudre tous les unresolvedtypes pour pouvoir continuer le merge. Cela est rendu possible par l'étape précédente car il existe maintenant une typedefinition unique à pointer pour chaque type.
+Il est nécessaire qu'à la fin de cette étapes tous les types des paramètres d'une operation soient résolus, et que dans le corps d'un operation ou dans ses pre ou post conditions, tous les appels vers un des paramètres ou un des types génériques locaux soient résolus.
+La résolution des appels vers les types génériques locaux étant déjà gérés par l'étape 1) seuls la résolution des types des paramètres est nécessaire.
+
+4) On peut à partir de là fusionner les operations et properties en prenant en compte les signatures grace aux types résolus.
+
+5) On peut enfin résoudre les unresolvedOperation dans les from des operation, les unresolvedproperties dans les opposites des Property et tous les unresolvedCall dans les corps des opérations
+
+En résumé :
+
+1) résolution locale des types génériques dans les  unresolvedcall et unresolvedType
+2) merge initial qui merge les modelingunit jusqu'au niveau des types définitions, en conservant des doublons potentiels
+3) résolution globale des UnresolvedType pour permettre la comparaison des signatures d'opérations ou de Property
+4) fusion des operations/property
+5) résolution globale du reste
+
+
