@@ -1,0 +1,13 @@
+KermetaProject:"org.kermeta.language.sample.callEcoreSample"
+group:"group"
+defaultMainClass:""
+defaultMainOperation:""
+{
+	source="${project.baseUri}/requireEcore.kmt"
+     
+     srcQuery= "/model/Ecore.ecore" from "ecore.model"
+	
+
+	dependency"language.model"URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	dependency "ecore.model" URL = "${project.baseUri}/../../lib/org.eclipse.emf.ecore_2.7.0.v20110605-0747.jar"
+}

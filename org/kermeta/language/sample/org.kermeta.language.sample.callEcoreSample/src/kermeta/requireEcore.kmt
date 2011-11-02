@@ -1,0 +1,19 @@
+
+
+
+package callEcore;
+
+
+require kermeta
+using kermeta::io::StdIO => stdio
+
+
+class RequireEcore {
+
+operation main () : Void is do 
+
+stdio.writeln("Require ecore")
+
+end 
+
+}

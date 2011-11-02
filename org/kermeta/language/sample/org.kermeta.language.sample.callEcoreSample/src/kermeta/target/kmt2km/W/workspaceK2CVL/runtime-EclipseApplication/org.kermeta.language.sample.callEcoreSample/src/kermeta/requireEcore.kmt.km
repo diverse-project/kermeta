@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="callEcore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="RequireEcore" superType="//callEcore/RequireEcore/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;76;171"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+      <ownedOperation name="main" type="//callEcore/RequireEcore/main/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;98;169"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;126;169"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;136;163"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Require ecore">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;145;160"/>
+            </parameters>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="stdio">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;131;136"/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta">
+    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/org.kermeta.language.sample.callEcoreSample/src/kermeta/requireEcore.kmt;24;40"/>
+  </requires>
+</org_kermeta_language_structure:ModelingUnit>
