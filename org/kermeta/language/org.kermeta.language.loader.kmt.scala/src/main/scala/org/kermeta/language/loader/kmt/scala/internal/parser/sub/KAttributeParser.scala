@@ -12,26 +12,79 @@
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import org.kermeta.language.structure.Property
+import org.kermeta.language.behavior.Expression
 import org.kermeta.language.structure.StructureFactory
 import scala.Predef._
 
-trait KAttributeParser extends KAbstractParser with KMultiplicityParser {
+trait KAttributeParser extends KAbstractParser with KMultiplicityParser{
 
-  def propertyDeclKeyword = ( "attribute" | "reference" )
+  def attributeDeclKeyword = ( "attribute" | "reference" )
+  def propertyDeclKeyword = ("property")
   def readonlyModifier = opt("readonly")
 
 
-  def attribute : Parser[Property] = propertyDeclKeyword ~ readonlyModifier ~ ident ~ ":" ~ multiplicityType ~ opt("#" ~> ident) ^^ { case propertyKeyword ~ readonlyM ~ id ~ _ ~ mType ~ ooposite =>
+  def getterParser = "getter" ~ "is" ~ fStatement ^^ { case k1 ~ k2 ~ exp => exp}
+  def setterParser = "setter" ~ "is" ~ fStatement ^^ { case k1 ~ k2 ~ exp => exp}
+
+  def getterFirst : Parser[Tuple2[Expression,Expression]] = getterParser ~ opt(setterParser) ^^ { case getM ~ setM =>
+
+    var resTuple : Tuple2[Expression,Expression] = (null,null)
+
+    setM match {
+      case Some(setterBody) => resTuple  = (getM, setterBody)
+      case None => resTuple  = (getM, resTuple._2)
+    }
+    resTuple
+  }
+
+  def setterFirst : Parser[Tuple2[Expression,Expression]] = setterParser ~ getterParser ^^ { case setM ~ getM =>
+
+    var resTuple : Tuple2[Expression,Expression] = (getM,setM)
+    resTuple
+  }
+
+  def getterSetterParser : Parser[Tuple2[Expression,Expression]] = (getterFirst | setterFirst)
+
+
+  def derivedProperty : Parser[Property] = propertyDeclKeyword ~ readonlyModifier ~ ident ~ ":" ~ multiplicityType ~ getterSetterParser ^^ { case _ ~ readonlyM ~ id ~ _ ~ mType ~ getSetM =>
+    val newo = StructureFactory.eINSTANCE.createProperty
+    newo.setName(id)
+    newo.setIsComposite(false)
+    newo.setIsDerived(true)
+
+    readonlyM match {
+      case Some(_) => newo.setIsReadOnly(true)
+      case None => newo.setIsReadOnly(false)
+    }
+
+    // copy Type and multiplicity information in this Property
+    mType.copyToKElem(newo)
+
+    newo.setGetterBody(getSetM._1)
+    newo.setSetterBody(getSetM._2)
+
+    newo
+
+  }
+
+  def attribute : Parser[Property] = attributeDeclKeyword ~ readonlyModifier ~ ident ~ ":" ~ multiplicityType ~ opt("#" ~> ident)  ^^ { case propertyKeyword ~ readonlyM ~ id ~ _ ~ mType ~ ooposite =>
       val newo = StructureFactory.eINSTANCE.createProperty
       newo.setName(id)
       propertyKeyword match {
-        case "attribute" => newo.setIsComposite(true)
-        case "reference" => newo.setIsComposite(false)
+        case "attribute" => {
+          newo.setIsComposite(true)
+          newo.setIsDerived(false)
+        }
+        case "reference" => {
+          newo.setIsComposite(false)
+          newo.setIsDerived(false)
+        }
       }
       readonlyM match {
         case Some(_) => newo.setIsReadOnly(true)
         case None => newo.setIsReadOnly(false)
       }
+
       // copy Type and multiplicity information in this Property
       mType.copyToKElem(newo)
 

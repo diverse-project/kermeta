@@ -31,6 +31,7 @@ trait KClassDefinitionParser extends KAbstractParser
   def invariant : Parser[Constraint]
   def annotation : Parser[Tag]
   def attribute : Parser[Property]
+  def derivedProperty : Parser[Property]
   def operation : Parser[Operation]
 
   /* END CONTRACT */
@@ -97,7 +98,10 @@ trait KClassDefinitionParser extends KAbstractParser
                 newo.getOwnedOperation.add(m);
                // DVK operation can own its type directly, no need to put them in the class newo.getContainedType.add(m.getType) // TODO OPTIMISATION
               }
-            case m : Property => newo.getOwnedAttribute.add(m)
+            case m : Property => {
+                newo.getOwnedAttribute.add(m)
+            }
+
             case _ => println("class def add new member type")
           }
         }}
@@ -127,7 +131,7 @@ trait KClassDefinitionParser extends KAbstractParser
       e1
   }
 
-  def classMemberDecl = kpositioned ( invariant | operation | property | attribute ) //attribute | reference | operation ;
+  def classMemberDecl = kpositioned ( invariant | operation | property | attribute | derivedProperty) //attribute | reference | operation ;
 
 
 

@@ -78,8 +78,13 @@ object PrettyPrinter {
         }
         if (p.getIsComposite)
           res.append("\t\tattribute ")
-        else
-          res.append("\t\treference ")
+        else {
+          if (p.getIsDerived) {
+            res.append("\t\tproperty ")
+          }
+          else
+            res.append("\t\treference ")
+        }
         if (p.getIsReadOnly)
           res.append("readonly ")
 
@@ -89,6 +94,19 @@ object PrettyPrinter {
         //TODO opposite
         //TODO getter setter for derived
         res.append("\n")
+
+        if (p.getIsDerived) {
+
+          if (p.getGetterBody != null) {
+            res.append("\t\t\tgetter is ")
+            res.append(print(p.getGetterBody, res))
+          }
+          if (p.getSetterBody != null) {
+            res.append("\t\t\tsetter is ")
+            res.append(print(p.getSetterBody, res))
+          }
+        }
+
       }
       case op: Operation => {
         op.getKOwnedTags.foreach{tag =>
