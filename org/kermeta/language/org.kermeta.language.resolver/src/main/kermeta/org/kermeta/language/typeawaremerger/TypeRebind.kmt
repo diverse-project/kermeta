@@ -14,7 +14,8 @@ package structure{
 		operation rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 		
 			eachOwnedElement{containedElt |
-				containedElt.asType(KermetaModelElement).rebind(newTypeParam, oldTypeParam)}
+				containedElt.asType(KermetaModelElement).rebind(newTypeParam, oldTypeParam)
+				void }
 		
 		end
 	}
@@ -31,7 +32,7 @@ package structure{
 						 
 						 var index : Integer init oldTypeParam.indexOf(generics.at(i).asType(TypeVariable))
 						 generics.removeAt(i)
-						 generics.insertAt(i,newTypeParam.elementAt(index))
+						 generics.addAt(i,newTypeParam.elementAt(index))
 					
 					end
 				else
@@ -79,16 +80,20 @@ package structure{
 	
 	aspect class ProductType inherits TypeContainer, Type{
 		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
-			type.each{ t|
-				if t.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(t.asType(TypeVariable)) then
-						 var index : Integer init oldTypeParam.indexOf(t.asType(TypeVariable))
-						 t:=newTypeParam.elementAt(index)
+			
+			from var i : Integer init 0
+			until i==type.size 
+			loop
+				if type.elementAt(i).isInstanceOf(TypeVariable) then
+					if oldTypeParam.contains(type.elementAt(i).asType(TypeVariable)) then
+						var index : Integer init oldTypeParam.indexOf(type.elementAt(i).asType(TypeVariable))
+						type.removeAt(i)
+						type.addAt(i,newTypeParam.elementAt(index))
 					end	
 				else
-					t.rebind(newTypeParam,oldTypeParam)
+					 type.elementAt(i).rebind(newTypeParam,oldTypeParam)
 				end
-				}
+			end
 		end
 	}
 	
@@ -132,7 +137,7 @@ package behavior {
 						 
 						 var index : Integer init oldTypeParam.indexOf(generics.at(i).asType(TypeVariable))
 						 generics.removeAt(i)
-						 generics.insertAt(i,newTypeParam.elementAt(index))
+						 generics.addAt(i,newTypeParam.elementAt(index))
 					
 					end
 				else

@@ -115,7 +115,7 @@ aspect class Operation {
 			and self.upper == otherOperation.upper
 			and self.ownedParameter.size == otherOperation.ownedParameter.size then
 			//stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
-			stdio.writeln("1")
+			//stdio.writeln("1")
 			//check the parameters names
 			var paramNamesAreEqual : Boolean init true
 			from var i : Integer init 0
@@ -129,7 +129,7 @@ aspect class Operation {
 			if	paramNamesAreEqual
 				and self.typeParameter.size == otherOperation.typeParameter.size then
 
-				stdio.writeln("2")
+				//stdio.writeln("2")
 				//create set of equivalent typevariables from typeParameters of the operations
 				var binding : Sequence<Binding> init Sequence<Binding>.new
 				from var i : Integer init 0
@@ -148,24 +148,33 @@ aspect class Operation {
 				until i==self.ownedParameter.size loop
 					if paramTypesAreEquivalent then
 						paramTypesAreEquivalent := self.ownedParameter.elementAt(i).type.typeEquivalence(otherOperation.ownedParameter.elementAt(i).type, binding)
-						stdio.writeln("i"+paramTypesAreEquivalent.toString)
+						//stdio.writeln("i"+paramTypesAreEquivalent.toString)
 					end
 					i:=i+1
 				end	
 				
 				//check type equivalence for return type superOperation and Exception Type
 				if paramTypesAreEquivalent then
-					stdio.writeln("3")
-					var exceptionsAreEquivalent : Boolean init true
+					//stdio.writeln("3")
+					
+					var superOperationsAreEquivalent : Boolean 
+					
+					//check type equivalence for superOperation
+					if not self.superOperation.isVoid and not self.superOperation.isVoid then
+						superOperationsAreEquivalent:=self.superOperation.asType(UnresolvedOperation).~from.typeEquivalence(otherOperation.superOperation.asType(UnresolvedOperation).~from, binding)
+					else
+						superOperationsAreEquivalent:=self.superOperation.isVoid and self.superOperation.isVoid
+					end
+					
 					
 					result:= self.type.typeEquivalence(otherOperation.type, binding)
-							and self.superOperation.asType(UnresolvedOperation).~from.typeEquivalence(otherOperation.superOperation.asType(UnresolvedOperation).~from, binding)
+							and superOperationsAreEquivalent
 							and self.raisedException.forAll{selfException|
 									otherOperation.raisedException.exists{otherException| selfException.typeEquivalence(otherException, binding)}}
 				end
 			end	
 		end
-		stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
+		//stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
 	end
 	
 	

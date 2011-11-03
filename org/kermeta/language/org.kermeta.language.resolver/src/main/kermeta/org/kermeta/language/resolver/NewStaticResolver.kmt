@@ -100,20 +100,22 @@ class FullStaticResolver
 		result:=unresolvedModelingUnit
 	end
 
-	/*operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
-       	var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
+       	/*var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 
 		ctxt := LanguageVisitorContext.new.initialise()
 	
-   		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)
+   		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)*/
+   		
+   		doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit)))
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
        	//checkDangling(unresolvedModelingUnit.containingResource())       	
 		//checkUnresolved(unresolvedModelingUnit)
        	
        	result := unresolvedModelingUnit
-	end*/
+	end
 	
 	operation doStaticSetting(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do      	
 		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")

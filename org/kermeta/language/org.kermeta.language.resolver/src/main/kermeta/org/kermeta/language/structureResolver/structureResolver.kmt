@@ -59,6 +59,11 @@ aspect class KermetaModelElement{
 }
 
 aspect class ClassDefinition inherits GenericTypeDefinition{
+	method resolveStructureInheritance(context : LanguageVisitorContext) is do
+		context.currentClassDef:=self
+		super(context)
+		context.currentClassDef:=void
+	end
 
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentClassDef:=self
