@@ -14,7 +14,7 @@ package structure{
 		operation rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 		
 			eachOwnedElement{containedElt |
-				containedElt.rebind(newTypeParam, oldTypeParam)}
+				containedElt.asType(KermetaModelElement).rebind(newTypeParam, oldTypeParam)}
 		
 		end
 	}
@@ -27,9 +27,9 @@ package structure{
 			until i==generics.size
 			loop
 				if generics.at(i).isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(generics.at(i)) then
+					if oldTypeParam.contains(generics.at(i).asType(TypeVariable)) then
 						 
-						 var index : Integer init oldTypeParam.indexOf(generics.at(i))
+						 var index : Integer init oldTypeParam.indexOf(generics.at(i).asType(TypeVariable))
 						 generics.removeAt(i)
 						 generics.insertAt(i,newTypeParam.elementAt(index))
 					
@@ -48,8 +48,8 @@ package structure{
 		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 			if not type.isVoid then
 				if type.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(type) then
-						 var index : Integer init oldTypeParam.indexOf(type)
+					if oldTypeParam.contains(type.asType(TypeVariable)) then
+						 var index : Integer init oldTypeParam.indexOf(type.asType(TypeVariable))
 						 type:=newTypeParam.elementAt(index)
 					end
 				else
@@ -65,8 +65,8 @@ package structure{
 		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 			if not type.isVoid then
 				if type.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(type) then
-						 var index : Integer init oldTypeParam.indexOf(type)
+					if oldTypeParam.contains(type.asType(TypeVariable)) then
+						 var index : Integer init oldTypeParam.indexOf(type.asType(TypeVariable))
 						 type:=newTypeParam.elementAt(index)
 					end
 				else
@@ -81,8 +81,8 @@ package structure{
 		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 			type.each{ t|
 				if t.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(t) then
-						 var index : Integer init oldTypeParam.indexOf(t)
+					if oldTypeParam.contains(t.asType(TypeVariable)) then
+						 var index : Integer init oldTypeParam.indexOf(t.asType(TypeVariable))
 						 t:=newTypeParam.elementAt(index)
 					end	
 				else
@@ -96,8 +96,8 @@ package structure{
 		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 			if not left.isVoid then
 				if left.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(left) then
-						 var index : Integer init oldTypeParam.indexOf(left)
+					if oldTypeParam.contains(left.asType(TypeVariable)) then
+						 var index : Integer init oldTypeParam.indexOf(left.asType(TypeVariable))
 						 left:=newTypeParam.elementAt(index)
 					end
 				else
@@ -106,8 +106,8 @@ package structure{
 			end
 			if not right.isVoid then
 				if right.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(right) then
-						 var index : Integer init oldTypeParam.indexOf(right)
+					if oldTypeParam.contains(right.asType(TypeVariable)) then
+						 var index : Integer init oldTypeParam.indexOf(right.asType(TypeVariable))
 						 right:=newTypeParam.elementAt(index)
 					end
 				else
@@ -128,9 +128,9 @@ package behavior {
 			until i==generics.size
 			loop
 				if generics.at(i).isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(generics.at(i)) then
+					if oldTypeParam.contains(generics.at(i).asType(TypeVariable)) then
 						 
-						 var index : Integer init oldTypeParam.indexOf(generics.at(i))
+						 var index : Integer init oldTypeParam.indexOf(generics.at(i).asType(TypeVariable))
 						 generics.removeAt(i)
 						 generics.insertAt(i,newTypeParam.elementAt(index))
 					
@@ -148,8 +148,8 @@ package behavior {
 		method rebind(newTypeParam : OrderedSet<TypeVariable> ,oldTypeParam : OrderedSet<TypeVariable> ) is do
 			if not type.isVoid then
 				if type.isInstanceOf(TypeVariable) then
-					if oldTypeParam.contains(type) then
-						 var index : Integer init oldTypeParam.indexOf(type)
+					if oldTypeParam.contains(type.asType(TypeVariable)) then
+						 var index : Integer init oldTypeParam.indexOf(type.asType(TypeVariable))
 						 type:=newTypeParam.elementAt(index)
 					end
 				else

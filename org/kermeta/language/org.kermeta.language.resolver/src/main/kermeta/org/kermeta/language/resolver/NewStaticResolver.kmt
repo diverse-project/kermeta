@@ -44,14 +44,23 @@ class FullStaticResolver
        	unresolvedModelingUnit.canUseCachedStructuralTypeDefinitions := true
        	//checkUnresolved(unresolvedModelingUnit)
         resolvedModelingUnit := doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit)))
-         
+        
+        //workaround to remove cache before saving as it triggers errors in interpreted mode
+       	var cache : org::kermeta::language::structure::internal::ModelingUnitCache init resolvedModelingUnit.cache
+        resolvedModelingUnit.cache:=void
+       	         
         stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
+       	
+       	//workaround to remove cache before saving as it triggers errors in interpreted mode
+       	resolvedModelingUnit.cache:=cache
        	
        	resolvedModelingUnit := unresolvedModelingUnit
        	checkUnresolved(resolvedModelingUnit)
        	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
        	
+       	//workaround to remove cache before saving as it triggers errors in interpreted mode
+       	resolvedModelingUnit.cache:=void
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
        	
        	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"StaticSetted.km" + " saved ************************")

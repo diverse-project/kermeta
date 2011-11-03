@@ -93,29 +93,43 @@ aspect class Operation {
 	*/
 	operation mergeableWith(otherOperation : Operation , context : TypeAwareMergerContext) : Boolean is do
 		result:=false
-		
+		/*stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "
+			+(self.body.isVoid or otherOperation.body.isVoid).toString
+			+(self.name == otherOperation.name).toString
+			+ (self.owningClass == otherOperation.owningClass).toString
+			+(self.isOrdered == otherOperation.isOrdered).toString
+			+( self.isUnique == otherOperation.isUnique).toString
+			+( self.lower == otherOperation.lower).toString
+			+( self.upper == otherOperation.upper).toString
+			+( self.ownedParameter.size == otherOperation.ownedParameter.size).toString
+			
+		)*/
+			
 		//check quick equality check
 		if 	(self.body.isVoid or otherOperation.body.isVoid)
 			and self.name == otherOperation.name 
-			and self.owningClass == otherOperation.owningClass 
+			//and self.owningClass == otherOperation.owningClass 
 			and self.isOrdered == otherOperation.isOrdered
 			and self.isUnique == otherOperation.isUnique
 			and self.lower == otherOperation.lower
 			and self.upper == otherOperation.upper
 			and self.ownedParameter.size == otherOperation.ownedParameter.size then
-			
+			//stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
+			stdio.writeln("1")
 			//check the parameters names
 			var paramNamesAreEqual : Boolean init true
 			from var i : Integer init 0
 			until i==self.ownedParameter.size loop
 				paramNamesAreEqual:= paramNamesAreEqual 
 					and self.ownedParameter.elementAt(i).name == otherOperation.ownedParameter.elementAt(i).name
+				i:=i+1
 			end	
 		
 			//check type equivalence
 			if	paramNamesAreEqual
 				and self.typeParameter.size == otherOperation.typeParameter.size then
 
+				stdio.writeln("2")
 				//create set of equivalent typevariables from typeParameters of the operations
 				var binding : Sequence<Binding> init Sequence<Binding>.new
 				from var i : Integer init 0
@@ -125,6 +139,7 @@ aspect class Operation {
 					equivalentVars.types.add(self.typeParameter.elementAt(i))
 					equivalentVars.types.add(otherOperation.typeParameter.elementAt(i))
 					binding.add(equivalentVars) 
+					i:=i+1
 				end	
 				
 				//check type equivalence for parameters
@@ -133,12 +148,14 @@ aspect class Operation {
 				until i==self.ownedParameter.size loop
 					if paramTypesAreEquivalent then
 						paramTypesAreEquivalent := self.ownedParameter.elementAt(i).type.typeEquivalence(otherOperation.ownedParameter.elementAt(i).type, binding)
+						stdio.writeln("i"+paramTypesAreEquivalent.toString)
 					end
+					i:=i+1
 				end	
 				
 				//check type equivalence for return type superOperation and Exception Type
 				if paramTypesAreEquivalent then
-					
+					stdio.writeln("3")
 					var exceptionsAreEquivalent : Boolean init true
 					
 					result:= self.type.typeEquivalence(otherOperation.type, binding)
@@ -148,6 +165,7 @@ aspect class Operation {
 				end
 			end	
 		end
+		stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
 	end
 	
 	
