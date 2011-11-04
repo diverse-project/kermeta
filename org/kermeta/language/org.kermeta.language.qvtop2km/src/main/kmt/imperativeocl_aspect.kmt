@@ -133,7 +133,7 @@ end
 	/** depends on multivaluation of left expression*/
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			StdIO.writeln("AssignExp  -left type : "+left.getMetaClass.name)
+			//StdIO.writeln("AssignExp  -left type : "+left.getMetaClass.name)
 		
 			if left.isInstanceOf(essentialocl::PropertyCallExp)
 					.andThen{x|left.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} then 

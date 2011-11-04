@@ -1,11 +1,9 @@
 package essentialocl;
- require "platform:/resource/qvt-kermeta/transformation/adapter/adapter.kmt"
-
-require kermeta
+using kermeta::standard
 using root_package
 aspect class IfExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
 				var out : kermeta::language::behavior::Conditional init kermeta::language::behavior::Conditional.new
@@ -32,7 +30,7 @@ aspect class IfExp
 }
 aspect class StringLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
 				var out : kermeta::language::behavior::StringLiteral init kermeta::language::behavior::StringLiteral.new
@@ -45,7 +43,7 @@ aspect class StringLiteralExp
 }
 aspect class BooleanLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
 				var out : kermeta::language::behavior::BooleanLiteral init kermeta::language::behavior::BooleanLiteral.new
@@ -58,7 +56,7 @@ aspect class BooleanLiteralExp
 }
 aspect class IntegerLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
 				var out : kermeta::language::behavior::IntegerLiteral init kermeta::language::behavior::IntegerLiteral.new
@@ -71,7 +69,7 @@ aspect class IntegerLiteralExp
 }
 aspect class NullLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from kermeta::language::structure::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
 				var out : kermeta::language::behavior::VoidLiteral init kermeta::language::behavior::VoidLiteral.new

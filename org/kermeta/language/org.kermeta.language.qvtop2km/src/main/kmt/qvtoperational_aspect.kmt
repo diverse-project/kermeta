@@ -412,7 +412,7 @@ aspect class MappingBody {
 					if not oclexp.output.isVoid() then
 						initBlock.statement.add(oclexp.output.asType(kermeta::language::behavior::Expression) )
 					else
-						StdIO.writeln( "a statement in initSection is void "+oclexp.getMetaClass().name)
+						//StdIO.writeln( "a statement in initSection is void "+oclexp.getMetaClass().name)
 					end
 					}
 				initBlock.addDocumentationTag("initSection")
@@ -769,7 +769,7 @@ aspect class OperationalTransformation {
 		//StdIO.writeln("createContext "+type.name)
 		createPackage(type.container.asType(emof::Package), context)
 		type.range2domain(context)
-		type.container.output.asType(kermeta::language::structure::Package).ownedTypeDefinition.add(type.output.asType(kermeta::language::structure::TypeDefinition))
+		type.container.asType(emof::Package).output.asType(kermeta::language::structure::Package).ownedTypeDefinition.add(type.output.asType(kermeta::language::structure::TypeDefinition))
 		//StdIO.writeln("OperationalTransformation::createTypeDefinition-end")
 	end
 
@@ -777,12 +777,12 @@ aspect class OperationalTransformation {
 		if pack.output==void then
 			//StdIO.writeln("OperationalTransformation::createPackage")
 			pack.range2domain(context)
-			if pack.container.isInstanceOf(kermeta::persistence::Resource) then
+			if pack.container.isInstanceOf(kermeta::emfpersistence::Resource) then
 				output.asType(kermeta::language::structure::ModelingUnit).packages.add(pack.output.asType(kermeta::language::structure::Package))
 			else
-				if (pack.container.output==void).andThen{x|pack.container.isInstanceOf(emof::Package)} then
+				if (pack.container.asType(emof::Object).output==void).andThen{x|pack.container.isInstanceOf(emof::Package)} then
 					createPackage(pack.container.asType(emof::Package),context)
-					pack.container.output.asType(kermeta::language::structure::Package).nestedPackage
+					pack.container.asType(emof::Object).output.asType(kermeta::language::structure::Package).nestedPackage
 						.add(pack.output.asType(kermeta::language::structure::Package))
 				end
 			end
@@ -978,7 +978,7 @@ method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		var out : kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
 		output:=out
 		metamodel.each{x|
-				x.range2domain(context) 
+				x.asType(emof::Object).range2domain(context) 
 				out.packages.add(x.output.asType(kermeta::language::structure::Package))
 				}
 		//StdIO.writeln("ModelType::range2domain-end")
@@ -1004,7 +1004,7 @@ aspect class ContextualProperty
 			out.lower := lower
 			out.upper := upper
 			
-			context.range2domain(context)
+			self.context.range2domain(context)
 			out.owningClass?=self.context.output
 			
 			if opposite.isNotEqual(void) then
@@ -1063,7 +1063,7 @@ aspect class MappingCallExp
 					if x.output!=void then 
 						out.parameters.add(x.output.asType(kermeta::language::behavior::Expression)) 
 					else 
-						StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
+						//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
 					end
 					}
 			//add result value

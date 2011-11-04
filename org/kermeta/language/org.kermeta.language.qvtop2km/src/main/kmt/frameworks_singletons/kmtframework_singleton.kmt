@@ -1,8 +1,6 @@
 package root_package;
-require kermeta
-require "platform:/plugin/org.kermeta.mapper.generator.km/kermeta/modelingunit_extension.kmt"
 using kermeta::language::structure
-using kermeta::persistence
+using kermeta::emfpersistence
 using kermeta::standard
 using kermeta::utils
 class KmtLib {
@@ -30,7 +28,7 @@ operation populateMap(lib : Resource) : Void is do
 	
 	var toSearch : Sequence<Object> init Sequence<Object>.new
 
-	toSearch.add(lib.one)
+	toSearch.add(lib.getContents().one)
 	
 	from var current : Object  
 	until toSearch.empty

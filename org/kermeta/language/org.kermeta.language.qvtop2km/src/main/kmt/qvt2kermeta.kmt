@@ -6,7 +6,7 @@ package root_package;
 using kermeta::persistence
 using kermeta::standard
 using kermeta::io
-
+using kermeta::emfpersistence
 
 
 class Qvt2KermetaContext {
@@ -49,14 +49,14 @@ operation main() : Void is do
 		StdIO.writeln("qvt->kermeta")
 		
 		
-		var sourceRepository     : EMFRepository init EMFRepository.new
+		var sourceRepository     : ResourceSet init ResourceSet.new
 		
 		//srcModel := sourceRepository.createResource("../test/Book2Publication2.qvtoperational", "../models/api2.ecore")
 		//srcModel := sourceRepository.createResource("../test/Ecore2EMOF.qvtoperational", "../models/api2.ecore")
 		//srcModel := sourceRepository.createResource("../test/UML2RDBMS.qvtoperational", "../models/api2.ecore")
 		srcModel := sourceRepository.createResource("../../org.topcased.simulation.sam.control/transformation/org.topcased.simulation.sam.control.sam2samdynamic.qvtoperational", "../models/api2.ecore")
-		srcModel.load()
-		sourceRepository.resources.each{r|StdIO.writeln(r.uri)}
+		srcModel.load(void)
+		sourceRepository.getResources().each{r|StdIO.writeln(r.asType(Resource).getURI())}
 		
 		
 		context.qvtContext.load(sourceRepository.getResource("pathmap://models/essentialocl/oclstdlib.essentialocl"))
@@ -65,7 +65,7 @@ operation main() : Void is do
 		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof"))
 		
 		
-		var targetRepository : EMFRepository init EMFRepository.new
+		var targetRepository : ResourceSet init ResourceSet.new
         //tgtModel := targetRepository.createResource("../test/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
         //tgtModel := targetRepository.createResource("../test/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("../test/UML2RDBMS.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
@@ -74,11 +74,11 @@ operation main() : Void is do
 		
 		
 		var kmtResource : Resource init targetRepository.createResource("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		kmtResource.load
+		kmtResource.load(void)
 		var transfoContextResource : Resource init targetRepository.createResource("platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		transfoContextResource.load() 
+		transfoContextResource.load(void) 
 		var sequenceCastResource : Resource init targetRepository.createResource("platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		sequenceCastResource.load() 
+		sequenceCastResource.load(void) 
 		
 		
 		context.kmtContext.load(transfoContextResource)
@@ -89,7 +89,7 @@ operation main() : Void is do
 		mapFrameworks(context)
 		transform(context)
 		
-		StdIO.writeln("tgtModel size " +tgtModel.size().toString())
+		//StdIO.writeln("tgtModel size " +tgtModel.size().toString())
 
 		
 		
@@ -106,9 +106,9 @@ operation transform(context : Qvt2KermetaContext) : Void is do
 	
 	
 	
-	srcModel.select{x|x.isInstanceOf(qvtoperational::ModelType)}.each{x|x.range2domain(context) tgtModel.add(x.output)}
+	srcModel.getContents().select{x|x.isInstanceOf(qvtoperational::ModelType)}.each{x|x.asType(emof::Object).range2domain(context) tgtModel.getContents().add(x.asType(emof::Object).output)}
 	
-	emofTransfo?= srcModel.detect{x|x.isKindOf(qvtoperational::OperationalTransformation)}
+	emofTransfo?= srcModel.getContents().detect{x|x.isInstanceOf(qvtoperational::OperationalTransformation)}
 	emofTransfo.range2domain(context)
 	kRoot?=emofTransfo.output
 	context.rootMU :=kRoot
@@ -150,7 +150,7 @@ operation transform(context : Qvt2KermetaContext) : Void is do
 	deferredColRequire.uri := "platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.kmt"
 	kRoot.requires.add(deferredColRequire)
 	
-	tgtModel.add(kRoot)
+	tgtModel.getContents().add(kRoot)
 	
 	mergeMU(tgtModel)
 end
@@ -159,15 +159,15 @@ end
 operation mergeMU(r : Resource) : Void is do
 	var uniqueRoot: kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
 	
-	tgtModel.each{x| 
+	tgtModel.getContents().each{x| 
 		if x.isInstanceOf(kermeta::language::structure::ModelingUnit) 
 		then 
 			uniqueRoot.packages.addAll(x.asType(kermeta::language::structure::ModelingUnit).packages)
 			uniqueRoot.requires.addAll(x.asType(kermeta::language::structure::ModelingUnit).requires)
 		end }
 	
-	tgtModel.clear
-	tgtModel.add(uniqueRoot)
+	tgtModel.getContents().clear
+	tgtModel.getContents().add(uniqueRoot)
 	
 	
 end
@@ -200,7 +200,7 @@ sourceObject := context.qvtContext.getFromQVTID(source)
 var targetObject : Object
 
 targetObject := context.kmtContext.getFromQualifiedName(target)
-sourceObject.output:=targetObject
+sourceObject.asType(emof::Object).output:=targetObject
 
 
 

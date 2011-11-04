@@ -1,8 +1,6 @@
 package root_package;
 require kermeta
-require "platform:/resource/qvt-kermeta/models/api2.kmt"
-require "../qvtid/emof_id.kmt"
-using kermeta::persistence
+using kermeta::emfpersistence
 using kermeta::standard
 class QvtLib {
 
@@ -26,7 +24,7 @@ end
 			
 			var toSearch : Sequence<Object> init Sequence<Object>.new
 		
-			toSearch.add(lib.one)
+			toSearch.add(lib.getContents().one)
 			
 			from var current : Object  
 			until toSearch.empty
