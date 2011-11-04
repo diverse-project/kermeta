@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="mainpackage">
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;25;208"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainpackage/MainClass/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;47;166"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedAttribute name="a" type="//mainpackage/MainClass/a/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;68;91"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="b" type="//mainpackage/MainClass/b/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;91;117"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="B">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="mainOperation" type="//mainpackage/MainClass/mainOperation/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;117;161"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//mainpackage/B/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;166;206"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedAttribute name="a" type="//mainpackage/B/a/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/TypeAwareFusionTestSimple/src/main/kmt/Main.kmt;178;204"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="MainClass">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

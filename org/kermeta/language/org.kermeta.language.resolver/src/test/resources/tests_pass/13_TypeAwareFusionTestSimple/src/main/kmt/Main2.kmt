@@ -1,0 +1,18 @@
+using kermeta::standard
+
+package mainpackage{
+	aspect class MainClass
+	{
+		
+		reference b: B#a
+		@main ""
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+	
+	aspect class B{
+	
+		reference a : MainClass#b
+	}
+}

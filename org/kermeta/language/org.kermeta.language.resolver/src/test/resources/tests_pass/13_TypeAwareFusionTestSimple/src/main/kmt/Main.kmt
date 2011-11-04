@@ -1,0 +1,20 @@
+using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+		reference a : String
+		reference b : B
+	
+	
+	
+	
+		operation mainOperation() : Void is do	end
+	}
+	
+	class B
+	{
+	reference a: MainClass
+	
+	}
+}
