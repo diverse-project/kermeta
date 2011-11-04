@@ -61,7 +61,8 @@ aspect class Operation {
 	operation merge(otherOperation : Operation, context : TypeAwareMergerContext) is do
 		if self.body.isVoid 
 		and not otherOperation.body.isVoid then
-			self.body:=otherOperation.body.rebind(self.typeParameter, otherOperation.typeParameter)
+			otherOperation.body.rebind(self.typeParameter, otherOperation.typeParameter)
+			self.body:=otherOperation.body
 		end
 		
 		kOwnedTags.addAll(otherOperation.kOwnedTags)

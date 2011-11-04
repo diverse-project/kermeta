@@ -43,7 +43,7 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	unresolvedModelingUnit.canUseCachedStructuralTypeDefinitions := true
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit)))
+        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
         
         //workaround to remove cache before saving as it triggers errors in interpreted mode
        	var cache : org::kermeta::language::structure::internal::ModelingUnitCache init resolvedModelingUnit.cache
