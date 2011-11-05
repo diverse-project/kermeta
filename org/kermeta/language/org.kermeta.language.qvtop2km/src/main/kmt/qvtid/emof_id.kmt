@@ -6,6 +6,7 @@ require kermeta
 
 
 
+
 aspect class Class {
 
 method getQVTID(): kermeta::standard::String is do 

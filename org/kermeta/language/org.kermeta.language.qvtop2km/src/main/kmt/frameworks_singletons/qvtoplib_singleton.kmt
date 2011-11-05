@@ -1,6 +1,7 @@
 package root_package;
 require kermeta
 using kermeta::emfpersistence
+using kermeta::io
 using kermeta::standard
 class QvtLib {
 
@@ -26,7 +27,7 @@ end
 		
 			toSearch.add(lib.getContents().one)
 			
-			from var current : Object  
+			from var current : emof::Object  
 			until toSearch.empty
 			loop
 				current:=toSearch.first
@@ -60,7 +61,7 @@ end
 				end
 			end
 		end
-		stdio.writeln("getFromQVTID : "+qvtid+" "+result.toString)
+		StdIO.writeln("getFromQVTID : "+qvtid+" "+result.toString)
 	end
 }
 

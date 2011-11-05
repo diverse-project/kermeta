@@ -1,6 +1,6 @@
-package kermeta::language::structure;
+package emof;
 
-require kermeta
+
 
 aspect class Object {
 

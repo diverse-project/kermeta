@@ -97,7 +97,7 @@ operation getFromQualifiedName(qualifiedName : String) : Object is do
 		
 		var toSearch : Sequence<Object> init Sequence<Object>.new
 	
-		toSearch.add(lib.one)
+		toSearch.add(lib.getContents().one)
 		
 		from var current : Object  
 		until toSearch.empty
@@ -137,7 +137,7 @@ operation getFromQualifiedName(qualifiedName : String) : Object is do
 			end
 		end
 	end
-	stdio.writeln("getFromQualifiedName : "+qualifiedName+" "+result.toString)
+	//StdIO.writeln("getFromQualifiedName : "+qualifiedName+" "+result.toString)
 	cacheName:=qualifiedName
 	cacheValue:=result
 	
