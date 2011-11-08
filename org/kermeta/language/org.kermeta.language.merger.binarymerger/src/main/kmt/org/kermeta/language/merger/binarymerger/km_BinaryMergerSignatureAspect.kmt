@@ -1163,8 +1163,7 @@ package kermeta {
 
 			aspect class UnresolvedType {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
-					/*
-					By default cannot match UnresolvedType that simply, (need to be resolved to be sure that the typeIdentifier is ok 
+					
 					var aspectElement : org::kermeta::language::structure::UnresolvedType
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
@@ -1173,10 +1172,10 @@ package kermeta {
 						result := super( aspectElement)
 						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
 							result := result and self.typeIdentifier == aspectElement.typeIdentifier
-						end
-					else */
+						end 
+					else 
 						result := false
-					// end
+					end
 				end
 			}
 
