@@ -137,11 +137,16 @@ aspect class UnresolvedType inherits Type, Unresolved, TypeContainer {
 			var otherUT  : UnresolvedType 
 			otherUT ?= other
 			result := (self.typeIdentifier == otherUT.typeIdentifier)
+			// cannot match if this isn't a full qualified name
+			if not self.typeIdentifier.contains("::") then 
+				result := false
+			end
 			// Cannot match UnresolvedType that have usings or generics, (need to be resolved to be sure that the typeIdentifier is ok					
 			result := result and not (self.generics.size > 0 )
 			result := result and not (self.usings.size > 0 )
 			result := result and not (otherUT.generics.size > 0 )
 			result := result and not (otherUT.usings.size > 0 )
+			
 		else
 			result := false
 		end
