@@ -105,7 +105,7 @@ aspect class EClass {
 			end
 			
 		else
-			content.append("operation")
+			content.append("method")
 		end end
 		
 		content.append(" fixReferences( ) : Void")
@@ -153,7 +153,22 @@ aspect class EClass {
 					end
 				end
 			}
-		end			
+		end	
+		if self.eSuperTypes.size()==0 then
+			// call eachOwnedElement only if there is no super that have already done it
+			content.append(context.indentString)
+			content.append("// drill down into all contained elements")
+			content.append(context.indentString)		
+			content.append("self.eachOwnedElement{ e | e")
+			if (not context.isMMReflexiveKermeta) then
+				content.append(".asType(Mergeable)")
+			end
+			content.append(".fixReferences()")
+			content.append(context.indentString)
+			content.append("\tvoid")
+			content.append(context.indentString)	
+			content.append("}")	
+		end	
 		context.popIndent
 		content.append(context.indentString)
 		content.append("end")

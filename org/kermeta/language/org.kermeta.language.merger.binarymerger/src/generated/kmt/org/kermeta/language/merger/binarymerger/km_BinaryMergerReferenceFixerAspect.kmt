@@ -533,11 +533,10 @@ package kermeta {
 						self.kTag.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag))
 					}
 					
-					// TO BE GENERATED 
+					// drill down into all contained elements
 					self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
 						void
 					}
-					
 				end
 				operation mergeReferences( ) : Void is do
 					var mergedModelElement : org::kermeta::language::structure::KermetaModelElement
@@ -721,7 +720,6 @@ package kermeta {
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
 					// find referenced elements not in merged model
-					// warning order not ensured, TODO
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
 						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
@@ -735,7 +733,6 @@ package kermeta {
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
 					// merge references from aspect and primary model (not involved in composition)
-					// TODO warning partial order not ensured
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
 					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
 					mergedModelElement.superType.addAll(superTypeToAdd)
@@ -761,7 +758,6 @@ package kermeta {
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
 					// find referenced elements not in merged model
-					// warning order not ensured, TODO
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
 						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
@@ -775,7 +771,6 @@ package kermeta {
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
 					// merge references from aspect and primary model (not involved in composition)
-					// TODO warning partial order not ensured
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
 					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
 					mergedModelElement.superType.addAll(superTypeToAdd)
@@ -788,7 +783,6 @@ package kermeta {
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
 					// find referenced elements not in merged model
-					// warning order not ensured, TODO
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
 						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
@@ -802,7 +796,6 @@ package kermeta {
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
 					// merge references from aspect and primary model (not involved in composition)
-					// TODO warning partial order not ensured
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
 					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
 					mergedModelElement.superType.addAll(superTypeToAdd)
@@ -860,7 +853,6 @@ package kermeta {
 						end
 					end
 					// find referenced elements not in merged model
-					// warning order not ensured, TODO
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
 						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
@@ -879,7 +871,6 @@ package kermeta {
 						mergedModelElement.instanceType ?= mergedModelElement.instanceType.getElementInMergedModel
 					end
 					// merge references from aspect and primary model (not involved in composition)
-					// TODO warning partial order not ensured
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
 					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
 					mergedModelElement.superType.addAll(superTypeToAdd)
@@ -1112,7 +1103,6 @@ package kermeta {
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
 					// find referenced elements not in merged model
-					// warning order not ensured, TODO
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
 						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
@@ -1135,7 +1125,6 @@ package kermeta {
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
 					// merge references from aspect and primary model (not involved in composition)
-					// TODO warning partial order not ensured
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
 					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
 					mergedModelElement.superType.addAll(superTypeToAdd)
@@ -1434,6 +1423,10 @@ package kermeta {
 				var aspectModelElement : org::kermeta::language::DummyClass
 				aspectModelElement ?= self.similarElementInAspectModel
 				
+				// drill down into all contained elements
+				self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
+					void
+				}
 			end
 			operation mergeReferences( ) : Void is do
 				var mergedModelElement : org::kermeta::language::DummyClass
@@ -1450,6 +1443,10 @@ package kermeta {
 			var aspectModelElement : org::kermeta::DummyClass
 			aspectModelElement ?= self.similarElementInAspectModel
 			
+			// drill down into all contained elements
+			self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
+				void
+			}
 		end
 		operation mergeReferences( ) : Void is do
 			var mergedModelElement : org::kermeta::DummyClass
@@ -1466,6 +1463,10 @@ aspect class DummyClass inherits Mergeable  {
 		var aspectModelElement : org::DummyClass
 		aspectModelElement ?= self.similarElementInAspectModel
 		
+		// drill down into all contained elements
+		self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
+			void
+		}
 	end
 	operation mergeReferences( ) : Void is do
 		var mergedModelElement : org::DummyClass
