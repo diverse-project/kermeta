@@ -23,6 +23,12 @@ class BinaryMergerContext
 	 */
 	reference movedElementsNeedingReferenceFix : bag Mergeable[0..*]
 	
+	/**
+	 * List of elements that may require to merge references (ie. link not involved in a composition)
+	 * this isn't a bag because add from MergerMove, but an element may be added several times (one per valid reference)
+	 */
+	reference elementsNeedingReferenceMerge : Mergeable[0..*]
+	
 	operation initialize() : BinaryMergerContext is do
 	 	result := self
 	 end

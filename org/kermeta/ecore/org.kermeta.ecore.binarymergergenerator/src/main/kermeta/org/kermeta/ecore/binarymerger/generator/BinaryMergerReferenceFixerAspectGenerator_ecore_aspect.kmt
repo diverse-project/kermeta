@@ -33,6 +33,9 @@ aspect class EModelElement {
 	operation binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		result := ""
 	end
+	operation binaryMergerReferenceMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		result := ""
+	end
 	
 }
 aspect class EPackage {
@@ -58,14 +61,39 @@ aspect class EPackage {
 }
 
 aspect class EClass {
+
 	method binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		var content : StringBuffer init StringBuffer.new
 		content.append(context.indentString)
-		content.append("aspect class " + self.name + " {")
+		content.append("aspect class " + self.name )
+		if self.eSuperTypes.size()==0 and not context.isMMReflexiveKermeta then
+			content.append(" inherits Mergeable ")
+		end
+		if self.eSuperTypes.size()>0 then
+			content.append(" inherits ")
+			self.eSuperTypes.indexedEach{st, eachcontext|
+			 	if not eachcontext.isFirst then
+			 		content.append(", ")
+			 	end
+				content.append(context.ecoreHelper.getClassifierQualifiedName(st))
+			}
+		 /*	if not context.isMMReflexiveKermeta then
+				content.append(", Mergeable ")
+		 	end */
+		end
+		content.append(" {")
 		
 		context.pushIndent
+		content.append(context.indentString) 
+		writeFixReferenceOperation(context, content)
+		content.append(context.indentString)			
+		writeMergeReferenceOperation(context, content)
+		context.popIndent
 		content.append(context.indentString)
-				
+		result := content.append("}").toString()
+	end
+	operation writeFixReferenceOperation(context : BinaryMergerGeneratorContext, content : StringBuffer) is do
+		// adding fixReference operation  (todo : both add method are similar, could be simplier if written using lambda ...)	
 		if self.eSuperTypes.size()>0 then
 			content.append("method")
 		else if (context.isMMReflexiveKermeta) then
@@ -89,27 +117,21 @@ aspect class EClass {
 		content.append(" is do")
 		context.pushIndent
 		content.append(context.indentString)
-		//content.append("var aspectElement : " + context.ecoreHelper.getClassifierQualifiedName(self))
-		//content.append(context.indentString)
-		//content.append("aspectElement ?= aspectElementObj")
-		//content.append(context.indentString)
-		//content.append("if not aspectElement.isVoid then\n")
-		//context.pushIndent
-		//content.append(context.indentString)
+		content.append("var aspectModelElement : " + context.ecoreHelper.getClassifierQualifiedName(self))
+		content.append(context.indentString)
+		content.append("aspectModelElement ?= self.similarElementInAspectModel")
+		content.append(context.indentString)
 		if self.eSuperTypes.size()>0 then
 			if(self.eSuperTypes.first().name == "Object")then
-				content.append(context.indentString)
+				//content.append(context.indentString)
 				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
 				content.append(context.indentString)
 				content.append("// super()")
 			else
-				content.append(context.indentString)
+				//content.append(context.indentString)
 				content.append("super()")
 			end
-		end
-		
-		
-								
+		end					
 		self.eachOwnedElement{ e |
 				content.append(e.binaryMergerReferenceFixerAspectKmtPrinter(context))
 		}
@@ -132,24 +154,80 @@ aspect class EClass {
 				end
 			}
 		end			
-		//context.popIndent
-		//content.append(context.indentString)
-		//content.append("end")
 		context.popIndent
 		content.append(context.indentString)
 		content.append("end")
+	end
+	operation writeMergeReferenceOperation(context : BinaryMergerGeneratorContext, content : StringBuffer) is do
+		// adding mergeReference operation  (todo : both add method are similar, could be simplier if written using lambda ...)	
+		if self.eSuperTypes.size()>0 then
+			content.append("method")
+		else if (context.isMMReflexiveKermeta) then
+			// special case of creating  methods on kermeta itself
+			if (self.name == "Object") then
+				content.append("operation")
+			else
+				content.append("method")
+			end
+			
+		else
+			content.append("operation")
+		end end
 		
+		content.append(" mergeReferences( ) : Void")
+		
+		if self.eSuperTypes.size()>0 then
+			 content.append(" from " + context.ecoreHelper.getClassifierQualifiedName(self.eSuperTypes.first))
+		end
+		
+		content.append(" is do")
+		context.pushIndent
+		content.append(context.indentString)
+		content.append("var mergedModelElement : " + context.ecoreHelper.getClassifierQualifiedName(self))
+		content.append(context.indentString)
+		content.append("mergedModelElement ?= self.similarElementInMergedModel")
+		content.append(context.indentString)
+		if self.eSuperTypes.size()>0 then
+			if(self.eSuperTypes.first().name == "Object")then
+				//content.append(context.indentString)
+				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
+				content.append(context.indentString)
+				content.append("// super()")
+			else
+				//content.append(context.indentString)
+				content.append("super()")
+			end
+		end					
+		self.eachOwnedElement{ e |
+				content.append(e.binaryMergerReferenceMergerAspectKmtPrinter(context))
+		}
+		if self.eSuperTypes.size()>=1 then
+			// must deal with EReference that comes from the other inheritance branch
+			var allFirstSuperTypes : Set<EClass> init getAllFirstSuperTypes
+			self.eAllSuperTypes.each{ s |
+				if (not allFirstSuperTypes.contains(s)) then
+					s.eachOwnedElement{ e |
+						content.append(e.binaryMergerReferenceMergerAspectKmtPrinter(context))
+					}
+				else					
+					if(self.eSuperTypes.first().name == "Object") then
+						content.append(context.indentString)
+						content.append("// workaround compiler V2 bug, embed code that should have been called via super \n")
+						s.eachOwnedElement{ e |
+							content.append(e.binaryMergerReferenceMergerAspectKmtPrinter(context))
+						}
+					end
+				end
+			}
+		end			
 		context.popIndent
 		content.append(context.indentString)
-		result := content.append("}").toString()
+		content.append("end")
 	end
 }
 aspect class EReference {
 	method binaryMergerReferenceFixerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		var content : StringBuffer init StringBuffer.new
-
-
-		
 		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name)
 		var typeName : String init context.ecoreHelper.getClassifierQualifiedName(self.eType) 
 		
@@ -206,6 +284,55 @@ aspect class EReference {
 				
 				
 				
+			end			
+		end
+				
+
+		result := content.toString()
+	end
+	method binaryMergerReferenceMergerAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
+		var content : StringBuffer init StringBuffer.new
+		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name)
+		var typeName : String init context.ecoreHelper.getClassifierQualifiedName(self.eType) 
+		
+		var involvedInComposition : Boolean init self.containment
+		if not self.eOpposite.isVoid then
+			involvedInComposition := involvedInComposition or self.eOpposite.containment
+		end
+		
+		if (not (involvedInComposition or self.derived or self.transient)) then
+			if self.upperBound==1 then
+				//content.append(context.indentString)
+				//content.append("if (not mergedModelElement.isVoid) then")
+				//context.pushIndent
+					content.append(context.indentString)
+					content.append("// select value for unary reference (not involved in composition)")
+					content.append(context.indentString)
+					content.append("mergedModelElement."+mangledName+" ?= mergedModelElement.selectUnaryProperty(\""+mangledName+"\", self."+mangledName+", mergedModelElement."+mangledName+")")					
+					content.append(context.indentString)
+					content.append("if (not mergedModelElement."+mangledName+".isVoid) then")
+					context.pushIndent
+						content.append(context.indentString)
+						content.append("mergedModelElement."+mangledName+" ?= mergedModelElement."+mangledName+".getElementInMergedModel")
+					context.popIndent
+					content.append(context.indentString)
+					content.append("end")
+				//context.popIndent
+				//content.append(context.indentString)
+				//content.append("end")
+			else
+				content.append(context.indentString)
+				content.append("// merge references from aspect and primary model (not involved in composition)")
+				if(self.ordered) then
+					content.append(context.indentString) 
+					content.append("// TODO warning partial order not ensured")
+				end	
+				content.append(context.indentString)
+				content.append("var "+mangledName+"ToAdd : kermeta::standard::Sequence<"+typeName+">")
+				content.append(context.indentString)
+				content.append(mangledName+"ToAdd := self."+mangledName+".select{o | not mergedModelElement."+mangledName+".exists{ p | p.localMatch(o)}	}")
+				content.append(context.indentString)
+				content.append("mergedModelElement."+mangledName+".addAll("+mangledName+"ToAdd)")			
 			end			
 		end
 				
