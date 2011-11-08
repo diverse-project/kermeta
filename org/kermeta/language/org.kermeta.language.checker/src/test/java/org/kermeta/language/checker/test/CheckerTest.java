@@ -68,7 +68,7 @@ public class CheckerTest extends TestCase {
         System.out.println("---------------------------------\nChecking " + kmFile);
 
         
-        String expectedFailedInvariant=null;
+        String expectedFailedInvariant="";
         
         if (isInvalidTestCase) { 
 
@@ -173,7 +173,7 @@ public class CheckerTest extends TestCase {
 			
 			// repeat until all lines is read
 			while ((text = reader.readLine()) != null) {
-				contents.append(text).append(System.getProperty("line.separator"));
+				contents.append(text)/*.append(System.getProperty("line.separator"))*/;
 			}
 		} 
 		catch (FileNotFoundException e) {
@@ -197,7 +197,7 @@ public class CheckerTest extends TestCase {
 		// show file contents here
 		System.out.println("("+contents.toString()+")");
 		// And delete \n at the end
-		return contents.toString().substring(0, contents.toString().length()-2);
+		return contents.toString().substring(0, contents.toString().length()/*-2*/);
 	}
 	
     @Override
