@@ -130,3 +130,20 @@ aspect class PrimitiveType inherits DataType {
 		result := self.instanceType.typeEquivalence(other, bindings)
 	end
 }
+
+aspect class UnresolvedType inherits Type, Unresolved, TypeContainer {
+	method typeEquivalence(other : Type,bindings : Sequence<Binding>) : Boolean is do
+		if not other.isVoid and other.isInstanceOf(UnresolvedType) then
+			var otherUT  : UnresolvedType 
+			otherUT ?= other
+			result := (self.typeIdentifier == otherUT.typeIdentifier)
+			// Cannot match UnresolvedType that have usings or generics, (need to be resolved to be sure that the typeIdentifier is ok					
+			result := result and not (self.generics.size > 0 )
+			result := result and not (self.usings.size > 0 )
+			result := result and not (otherUT.generics.size > 0 )
+			result := result and not (otherUT.usings.size > 0 )
+		else
+			result := false
+		end
+	end
+}
