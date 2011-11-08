@@ -21,6 +21,7 @@ class Mergeable
 	reference similarElementInAspectModel : Mergeable#similarElementInMergedModel
 	
 	operation binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is abstract
+	operation fixReferences() is abstract
 	
 	/** returns the similarElement regardless where it is stored (similarElementInMergedModel or similarElementInAspectModel) */
 	operation getSimilarElement() : Mergeable is do
