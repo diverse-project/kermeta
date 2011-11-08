@@ -55,6 +55,10 @@ class BinaryMerger
 		var context : org::kermeta::ecore::binarymerger::BinaryMergerContext init org::kermeta::ecore::binarymerger::BinaryMergerContext.new
 		do 
 			aspectModelModelingUnit.binaryMerger_MoveToMergedModel(context)
+			stdio.writeln("Merging references of "+context.elementsNeedingReferenceMerge.size.toString+" objects")
+			context.elementsNeedingReferenceMerge.each{o |
+				o.asType(KermetaModelElement).mergeReferences
+			}	
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
 			}

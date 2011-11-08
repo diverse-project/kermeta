@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="test">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Child" superType="//test/Child/@containedType.0 //test/Child/@containedType.1" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/010_InheritanceFromAspects/primary/010_multiInheritanceFromAspects_aspect2.kmt;39;94"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/010_InheritanceFromAspects/aspect/010_multiInheritanceFromAspects_aspect1.kmt;99;138"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Parent1">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedAttribute name="attributeFromChild" type="//test/Child/attributeFromChild/@containedType.0" isOrdered="true" isComposite="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/010_InheritanceFromAspects/primary/010_multiInheritanceFromAspects_aspect2.kmt;54;92"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Parent1" superType="//test/Parent1/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/010_InheritanceFromAspects/aspect/010_multiInheritanceFromAspects_aspect1.kmt;39;99"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedAttribute name="attributeFromParent1" type="//test/Parent1/attributeFromParent1/@containedType.0" isOrdered="true" isComposite="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/010_InheritanceFromAspects/aspect/010_multiInheritanceFromAspects_aspect1.kmt;56;97"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>
