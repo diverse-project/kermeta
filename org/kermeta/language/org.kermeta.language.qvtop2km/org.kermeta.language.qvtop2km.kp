@@ -18,7 +18,7 @@ defaultMainOperation : "mainOperation"
 	source="${project.baseUri}/src/main/kmt/frameworks_singletons/qvtoplib_singleton.kmt"
 	source="${project.baseUri}/src/main/kmt/frameworks_singletons/kmtframework_singleton.kmt"
 	source="${project.baseUri}/src/main/kmt/tuple_pool.kmt"
-	source="${project.baseUri}/src/main/kmt/framework_extension/k1metaoperations.kmt"
+	source="${project.baseUri}/src/main/kmt/framework_extension/k1metaoperations.kmt" 
 
 	srcQuery= "/model/QVTOperational.ecore" from "qvt" 
 	srcQuery= "/model/EMOF.ecore" from "qvt"

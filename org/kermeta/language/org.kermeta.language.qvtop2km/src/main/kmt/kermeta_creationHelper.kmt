@@ -1,4 +1,4 @@
-package kermeta;
+package org::kermeta;
 
 
 using org::kermeta::language::behavior
@@ -10,14 +10,14 @@ package language{
 
 package structure{
 
-	aspect class Object{
+	aspect class KermetaModelElement{
 	
 		operation addDocumentationTag(text:String) : Void is do
-			var tag : org::kermeta::language::structure::Tag init org::kermeta::language::structure::Tag.new
-			tag.name:="documentation"
-			tag.~value:=text
-			self.ownedTags.add(tag)
-			self.tag.add(tag)
+			var kTag : org::kermeta::language::structure::Tag init org::kermeta::language::structure::Tag.new
+			kTag.name:="documentation"
+			kTag.~value:=text
+			self.kOwnedTags.add(ktag)
+			self.kTag.add(tag)
 		end
 	
 	}

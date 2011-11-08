@@ -8,7 +8,7 @@ aspect class PropertyCallExp{
 
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		StdIO.writeln("PropertyCallExp::range2domain")
-		var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var out : org::kermeta::language::behavior::CallProperty init org::kermeta::language::behavior::CallProperty.new
 		referredProperty.range2domain(context)
 		out.staticProperty?=referredProperty.output
 		out.name:=referredProperty.name
@@ -117,7 +117,7 @@ aspect class OperationCallExp {
 					
 					
 					
-					var dseqLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+					var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 					dSeqInit.target:=dseqLit
 					dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(operationType.elementType.output.asType(org::kermeta::language::structure::ClassDefinition))
 
@@ -594,7 +594,7 @@ aspect class TypeExp {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
-			var out : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var out : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			output:=out
 		
 			referredType.range2domain(context)
