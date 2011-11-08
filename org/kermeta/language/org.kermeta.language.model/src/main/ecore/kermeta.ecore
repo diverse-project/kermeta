@@ -506,7 +506,11 @@
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="uniqueName" eType="#//kermeta/language/structure/String"
-              transient="true" derived="true"/>
+              transient="true" derived="true">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="The uniqueName of an Operation is a calculated value. It returns a value that will be unique for this Operation&#xD;&#xA;even if the name of the operation itself is shared by several Operation in the context of operation overloading.&#xD;&#xA;Currently, the value is calculated using the number of parameters. (TODO should be more precise but this implies that we really support operation overloading in all kermeta workflow)"/>
+            </eAnnotations>
+          </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//kermeta/language/structure/MultiplicityElement #//kermeta/language/structure/AbstractProperty">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
