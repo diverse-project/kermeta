@@ -18,9 +18,9 @@ class Qvt2KermetaContext {
 	reference kmtContext : KmtLib
 	
 	reference tuplePool : TuplePool
-	reference rootMU : kermeta::language::structure::ModelingUnit
+	reference rootMU : org::kermeta::language::structure::ModelingUnit
 	
-	reference transfoContextCD : kermeta::language::structure::ClassDefinition
+	reference transfoContextCD : org::kermeta::language::structure::ClassDefinition
 
 	operation initialize() : Qvt2KermetaContext is do
 		
@@ -44,7 +44,7 @@ operation main() : Void is do
 
 		var context : Qvt2KermetaContext init Qvt2KermetaContext.new.initialize()
 		
-		//getMetaClass.typeDefinition.asType(kermeta::language::structure::ClassDefinition).defaultObject:=self
+		//getMetaClass.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).defaultObject:=self
 		
 		StdIO.writeln("qvt->kermeta")
 		
@@ -101,7 +101,7 @@ end
 
 
 operation transform(context : Qvt2KermetaContext) : Void is do
-	var kRoot : kermeta::language::structure::ModelingUnit
+	var kRoot : org::kermeta::language::structure::ModelingUnit
 	var emofTransfo : qvtoperational::OperationalTransformation
 	
 	
@@ -116,13 +116,13 @@ operation transform(context : Qvt2KermetaContext) : Void is do
 	emofTransfo.ownedOperation.each{op| if (op!=void).andThen{x|op.isInstanceOf(qvtoperational::MappingOperation)} then op.range2domain(context) end }
 	emofTransfo.ownedOperation.each{op| if (op!=void).andThen{x|op.isInstanceOf(qvtoperational::Helper)} then op.range2domain(context) end }
 	emofTransfo.ownedOperation.each{op| if (op!=void).andThen{x|op.isInstanceOf(qvtoperational::EntryOperation)} then op.range2domain(context) end }
-	var kmtRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	var kmtRequire : org::kermeta::language::structure::Require init org::kermeta::language::structure::Require.new
 	
 	kmtRequire.uri:="kermeta"
 	kRoot.requires.add(kmtRequire)
 	
 	//generate the default primitive types
-	var ptPack : kermeta::language::structure::Package 
+	var ptPack : org::kermeta::language::structure::Package 
 	var emofPtPack : emof::Package
 	emofPtPack?=context.qvtContext.getFromQVTID("primitivetypes")
 	emofPtPack.range2domain(context)
@@ -136,17 +136,17 @@ operation transform(context : Qvt2KermetaContext) : Void is do
 	var ecorePack : emof::Package init context.qvtContext.getFromQVTID("ecore").asType(emof::Package)
 	ecorePack.range2domain(context)
 	//tgtModel.add(ecorePack.output)
-	kRoot.packages.add(ecorePack.output.asType(kermeta::language::structure::Package))
+	kRoot.packages.add(ecorePack.output.asType(org::kermeta::language::structure::Package))
 	
 	
-	//var extensionRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	//var extensionRequire : org::kermeta::language::structure::Require init org::kermeta::language::structure::Require.new
 	//extensionRequire.uri:="platform:/resource/qvt-kermeta/transformation/framework_extension/collection_extension.kmt"
 	//kRoot.requires.add(extensionRequire)
-	var transfoContextRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	var transfoContextRequire : org::kermeta::language::structure::Require init org::kermeta::language::structure::Require.new
 	transfoContextRequire.uri := "platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.kmt"
 	kRoot.requires.add(transfoContextRequire)
 	
-	var deferredColRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+	var deferredColRequire : org::kermeta::language::structure::Require init org::kermeta::language::structure::Require.new
 	deferredColRequire.uri := "platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.kmt"
 	kRoot.requires.add(deferredColRequire)
 	
@@ -157,13 +157,13 @@ end
 
 
 operation mergeMU(r : Resource) : Void is do
-	var uniqueRoot: kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
+	var uniqueRoot: org::kermeta::language::structure::ModelingUnit init org::kermeta::language::structure::ModelingUnit.new
 	
 	tgtModel.getContents().each{x| 
-		if x.isInstanceOf(kermeta::language::structure::ModelingUnit) 
+		if x.isInstanceOf(org::kermeta::language::structure::ModelingUnit) 
 		then 
-			uniqueRoot.packages.addAll(x.asType(kermeta::language::structure::ModelingUnit).packages)
-			uniqueRoot.requires.addAll(x.asType(kermeta::language::structure::ModelingUnit).requires)
+			uniqueRoot.packages.addAll(x.asType(org::kermeta::language::structure::ModelingUnit).packages)
+			uniqueRoot.requires.addAll(x.asType(org::kermeta::language::structure::ModelingUnit).requires)
 		end }
 	
 	tgtModel.getContents().clear
@@ -178,11 +178,11 @@ operation mapFrameworks(context : Qvt2KermetaContext) : Void is do
 
 
 map2FrameworkObjects("OclLib::String::concat","kermeta::standard::String::plus", context)
-map2FrameworkObjects("OclLib::OclAny::=","kermeta::language::structure::Object::equals", context)
-map2FrameworkObjects("OclLib::OclObject::=","kermeta::language::structure::Object::equals", context)
-map2FrameworkObjects("OclLib::OclAny::oclIsKindOf","kermeta::language::structure::Object::isInstanceOf", context)
-map2FrameworkObjects("::QvtLib::OclElement::isKindOf","kermeta::language::structure::Object::isInstanceOf" , context)
-map2FrameworkObjects("::QvtLib::OclElement::asType","kermeta::language::structure::Object::asType", context)
+map2FrameworkObjects("OclLib::OclAny::=","kermeta::standard::Object::equals", context)
+map2FrameworkObjects("OclLib::OclObject::=","kermeta::standard::Object::equals", context)
+map2FrameworkObjects("OclLib::OclAny::oclIsKindOf","kermeta::standard::Object::isInstanceOf", context)
+map2FrameworkObjects("::QvtLib::OclElement::isKindOf","kermeta::standard::Object::isInstanceOf" , context)
+map2FrameworkObjects("::QvtLib::OclElement::asType","kermeta::standard::Object::asType", context)
 
 map2FrameworkObjects("OclLib::Collection::isEmpty","kermeta::standard::Collection::isEmpty", context)
 map2FrameworkObjects("OclLib::Sequence::asOrderedSet","kermeta::standard::Collection::asOrderedSet", context)

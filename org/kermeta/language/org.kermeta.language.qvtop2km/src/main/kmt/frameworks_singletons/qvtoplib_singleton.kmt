@@ -43,7 +43,7 @@ end
 							if (qvtid.contains(current.getQVTID)) then
 								//stdio.writeln("contains!!")
 								toSearch.clear
-								var cd : kermeta::language::structure::ClassDefinition 
+								var cd : org::kermeta::language::structure::ClassDefinition 
 								cd?= current.getMetaClass.typeDefinition
 								//stdio.writeln("all attributes "+ cd.allAttribute.size.toString)
 								cd.allAttribute.each{att|

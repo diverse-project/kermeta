@@ -6,7 +6,7 @@ package test;
 require kermeta
 require "SequenceCast.kmt"
 
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::standard
 class A {
 

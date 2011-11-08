@@ -17,7 +17,7 @@ require "platform:/resource/qvt-kermeta/transformation/traceability/TraceRegistr
 using kermeta::standard
 using kermeta::persistence
 using org::kermeta::traceability
-using kermeta::language::structure
+using org::kermeta::language::structure
 
 
 class TransformationContext
@@ -96,9 +96,9 @@ class ModelParameter {
 
 /**Exception used to simulate a return operation*/
 class ReturnException {
- 	attribute returnValue : kermeta::language::structure::Object
+ 	attribute returnValue : kermeta::standard::Object
  	attribute hasValue : kermeta::standard::Boolean
- 	operation returnWithValue(retVal : kermeta::language::structure::Object) : ReturnException is do 
+ 	operation returnWithValue(retVal : kermeta::standard::Object) : ReturnException is do 
  		returnValue:=retVal
  		hasValue:=true
  		result:=self

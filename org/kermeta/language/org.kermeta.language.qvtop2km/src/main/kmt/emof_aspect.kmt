@@ -9,7 +9,7 @@ aspect class Type{
 	
 	end
 	
-	operation generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
+	operation generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
 		StdIO.writeln("Type generateType")
 		result:=void
 	end
@@ -24,10 +24,10 @@ aspect class Package
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
-				var out : kermeta::language::structure::Package init kermeta::language::structure::Package.new
+				var out : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new
 				output := out
 				nestedPackage.each{egakcaPdetsen | do
-						var elt : kermeta::language::structure::Package
+						var elt : org::kermeta::language::structure::Package
 						egakcaPdetsen.range2domain(context)
 						elt ?= egakcaPdetsen.output
 						if elt.isNotEqual(void) then
@@ -37,7 +37,7 @@ aspect class Package
 				out.uri := uri
 				out.name := name
 				ownedType.each{epyTdenwo | 
-						var elt : kermeta::language::structure::TypeDefinition
+						var elt : org::kermeta::language::structure::TypeDefinition
 						epyTdenwo.range2domain(context)
 						elt ?= epyTdenwo.output
 						if elt.isNotEqual(void) then
@@ -56,9 +56,9 @@ aspect class Class {
 		do
 			if output.equals(void) then
 			StdIO.writeln("Class::range2domain")
-				var out : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
+				var out : org::kermeta::language::structure::ClassDefinition init org::kermeta::language::structure::ClassDefinition.new
 				output := out
-				out.name := name
+				//out.name := name
 				out.isAbstract := isAbstract
 				/*StdIO.writeln("test for isAspect "+getQVTID)
 				if KmtLib.getDefault.asType(KmtLib).getFromQualifiedName(getQVTID)!=void then
@@ -68,7 +68,7 @@ aspect class Class {
 				//end
 				
 				ownedAttribute.each{etubirttAdenwo | do
-						var elt : kermeta::language::structure::Property
+						var elt : org::kermeta::language::structure::Property
 						
 						if out.isAspect then
 							elt?=context.kmtContext.getFromQualifiedName(etubirttAdenwo.getQVTID)
@@ -84,7 +84,7 @@ aspect class Class {
 						end
 					end}
 				superClass.each{ssalCrepus | do
-						var elt : kermeta::language::structure::Type
+						var elt : org::kermeta::language::structure::Type
 						ssalCrepus.range2domain(context)
 						elt := ssalCrepus.generateType(context)
 						
@@ -98,13 +98,13 @@ aspect class Class {
 			end
 		end
 
-method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
+method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
 	//StdIO.writeln("Class::generateType")
 	if output == void then
 		range2domain(context)
 	end
-	result:= kermeta::language::structure::Class.new
-	result.asType(kermeta::language::structure::Class).typeDefinition?=output
+	result:= org::kermeta::language::structure::Class.new
+	result.asType(org::kermeta::language::structure::Class).typeDefinition?=output
 	//StdIO.writeln("Class::generateType-end")
 end
 
@@ -129,13 +129,13 @@ aspect class Property
 		do
 			if output.equals(void) then
 				//StdIO.writeln("Property::range2domain")
-				var existing : kermeta::language::structure::Property
+				var existing : org::kermeta::language::structure::Property
 				
 				existing ?= context.kmtContext.getFromQualifiedName(getQVTID)
 				if existing != void then
 					output:=existing
 				else
-					var out : kermeta::language::structure::Property init kermeta::language::structure::Property.new
+					var out : org::kermeta::language::structure::Property init org::kermeta::language::structure::Property.new
 					output := out
 					out.default := default
 					out.isComposite := isComposite
@@ -153,7 +153,7 @@ aspect class Property
 					end
 					if type.isNotEqual(void) then
 						out.type := type.generateType(context)
-							if (out.type!=void).andThen{x| not out.type.isInstanceOf(kermeta::language::structure::PrimitiveType)} then
+							if (out.type!=void).andThen{x| not out.type.isInstanceOf(org::kermeta::language::structure::PrimitiveType)} then
 								out.containedType.add(out.type)
 								StdIO.writeln("emof::Property create type "+type.name)
 							else
@@ -174,15 +174,15 @@ aspect class PrimitiveType
 		//StdIO.writeln("PrimitiveType::range2domain")
 		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
 		if output==void then
-			var out : kermeta::language::structure::PrimitiveType init kermeta::language::structure::PrimitiveType.new
+			var out : org::kermeta::language::structure::PrimitiveType init org::kermeta::language::structure::PrimitiveType.new
 			out.name:=name
 			output:=out
 			
 			if self.name=="EString" or self.name=="String" then
-				var stringCD : kermeta::language::structure::ClassDefinition 
+				var stringCD : org::kermeta::language::structure::ClassDefinition 
 				
 				stringCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::String")
-				var stringClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				var stringClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
 				stringClass.typeDefinition := stringCD
 				
 				out.instanceType := stringClass
@@ -191,10 +191,10 @@ aspect class PrimitiveType
 				
 			end
 			if self.name=="EInt" or self.name=="Integer" or self.name=="UnlimitedNatural" then
-				var integerCD : kermeta::language::structure::ClassDefinition 
+				var integerCD : org::kermeta::language::structure::ClassDefinition 
 				
 				integerCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Integer")
-				var integerClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				var integerClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
 				integerClass.typeDefinition := integerCD
 				
 				out.instanceType := integerClass
@@ -205,20 +205,20 @@ aspect class PrimitiveType
 				var pack : emof::Package 
 				pack?= self.container()
 				StdIO.writeln(pack.name)
-				var boolCD : kermeta::language::structure::ClassDefinition 
+				var boolCD : org::kermeta::language::structure::ClassDefinition 
 				
 				boolCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
-				var boolClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				var boolClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
 				boolClass.typeDefinition := boolCD
 				
 				out.instanceType := boolClass
 				out.containedType.add(boolClass)
 			end
 			if self.name=="EFloat" or self.name=="Real" then
-				var realCD : kermeta::language::structure::ClassDefinition 
+				var realCD : org::kermeta::language::structure::ClassDefinition 
 				
 				realCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Real")
-				var realClass: kermeta::language::structure::Class init kermeta::language::structure::Class.new
+				var realClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
 				realClass.typeDefinition := realCD
 				
 				out.instanceType := realClass
@@ -227,8 +227,8 @@ aspect class PrimitiveType
 			end
 			
 			if out.instanceType ==void then
-				var anyClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
-				anyClass.typeDefinition ?= context.kmtContext.getFromQualifiedName("kermeta::language::structure::Object")
+				var anyClass : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+				anyClass.typeDefinition ?= context.kmtContext.getFromQualifiedName("org::kermeta::language::structure::Object")
 				out.instanceType := anyClass
 				out.containedType.add(anyClass)
 			end			
@@ -236,7 +236,7 @@ aspect class PrimitiveType
 			
 //			if out==void then
 	//			StdIO.writeln("classdefinition generated from a primitive type "+name)
-		//		out:=kermeta::language::structure::ClassDefinition.new
+		//		out:=org::kermeta::language::structure::ClassDefinition.new
 			//	out.name:=self.name
 				//out.addDocumentationTag("generated from a primitive type")
 			//end
@@ -247,10 +247,10 @@ aspect class PrimitiveType
 		
 	end
 
-method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do 
+method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
 	if output == void then
 		range2domain(context)
 	end
-	result:=output.asType(kermeta::language::structure::Type)
+	result:=output.asType(org::kermeta::language::structure::Type)
 end
 }

@@ -15,7 +15,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		
 		//StdIO.writeln("ImperativeIterateExp")
 	
-		var iterateCall : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+		var iterateCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 		
 		if (name =="xcollect") 
 		then
@@ -33,9 +33,9 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			end
 		end
 		
-		var lambdaExp : kermeta::language::behavior::LambdaExpression init kermeta::language::behavior::LambdaExpression.new
+		var lambdaExp : org::kermeta::language::behavior::LambdaExpression init org::kermeta::language::behavior::LambdaExpression.new
 		
-		iterator.each{x|x.toLambdaParameter() lambdaExp.parameters.add(x.output.asType(kermeta::language::behavior::LambdaParameter))}
+		iterator.each{x|x.toLambdaParameter() lambdaExp.parameters.add(x.output.asType(org::kermeta::language::behavior::LambdaParameter))}
 		iterateCall.parameters.add(lambdaExp)
 		if body!=void then
 			body.range2domain(context)
@@ -48,10 +48,10 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			
 			condition.range2domain(context)
 			if condition.isInstanceOf(essentialocl::TypeExp) then 
-				var typeCheckCall : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var typeCheckCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				typeCheckCall.name:="isInstanceOf"
-				typeCheckCall.parameters.add(condition.output.asType(kermeta::language::behavior::Expression))
-				typeCheckCall.target:=kermeta::language::behavior::CallVariable.new.initName(lambdaExp.parameters.one.name)
+				typeCheckCall.parameters.add(condition.output.asType(org::kermeta::language::behavior::Expression))
+				typeCheckCall.target:=org::kermeta::language::behavior::CallVariable.new.initName(lambdaExp.parameters.one.name)
 				lambdaExp.body:=typeCheckCall
 				
 			else
@@ -69,21 +69,21 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			//a sequence<X> cannot be casted as a sequence<Y> even if X>Y
 			//hence we created the deferred sequences
 			
-			var deferredcast : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			var deferredcast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 			deferredcast.name:="fromSeq"
 			
-			var dSeqInit : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			var dSeqInit : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 			deferredcast.target:=dSeqInit
 			dSeqInit.name:="new"
 			
-			var dseqCD : kermeta::language::structure::ClassDefinition 
+			var dseqCD : org::kermeta::language::structure::ClassDefinition 
 			dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
 			
-			var paramTypeCD : kermeta::language::structure::ClassDefinition
+			var paramTypeCD : org::kermeta::language::structure::ClassDefinition
 			condition.asType(essentialocl::TypeExp).referredType.range2domain(context)
 			paramTypeCD?=condition.asType(essentialocl::TypeExp).referredType.output
 			
-			var dseqLit : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			var dseqLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
 			dSeqInit.target:=dseqLit
 			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(paramTypeCD)
 			
@@ -92,15 +92,15 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			output:=deferredcast
 			
 			/*
-			var castCall : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			var castCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 			castCall.name := "asType"
-			var castLit : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+			var castLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
 			
-			var paramTypeCD : kermeta::language::structure::ClassDefinition
+			var paramTypeCD : org::kermeta::language::structure::ClassDefinition
 			condition.asType(essentialocl::TypeExp).referredType.range2domain()
 			paramTypeCD?=condition.asType(essentialocl::TypeExp).referredType.output
 			
-			var seqCD : kermeta::language::structure::ClassDefinition
+			var seqCD : org::kermeta::language::structure::ClassDefinition
 			seqCD?=KmtLib.getDefault.asType(KmtLib).getFromQualifiedName("kermeta::standard::Sequence")
 			
 			castLit.typeref:=seqCD.generateParameterizedTypeRef(paramTypeCD)
@@ -140,7 +140,7 @@ end
 					//or
 				//left.isInstanceOf(essentialocl::VariableExp).andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} 
 				
-				var out : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				output:=out
 				
 				left.range2domain(context)
@@ -149,7 +149,7 @@ end
 				self.~value.each{x|x.range2domain(context)}
 				//TODO take care of multivalued assignement
 				StdIO.writeln("value size : "+~value.size.toString)
-				out.parameters.add(self.~value.one.output.asType(kermeta::language::behavior::Expression))
+				out.parameters.add(self.~value.one.output.asType(org::kermeta::language::behavior::Expression))
 				if isMulti(self.~value.one) then
 					if isReset() then
 						out.name:="clearAndAddAll"
@@ -167,7 +167,7 @@ end
 				
 				
 					
-				var out : kermeta::language::behavior::Assignment init kermeta::language::behavior::Assignment.new
+				var out : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
 				output:=out
 				
 				
@@ -195,7 +195,7 @@ aspect class VariableInitExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
-			var out : kermeta::language::behavior::VariableDecl
+			var out : org::kermeta::language::behavior::VariableDecl
 			out:=referredVariable.toVariableDecl(context)
 			output:=out
 		end
@@ -207,22 +207,22 @@ aspect class LogExp {
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
 			//check condition if exists
-			var out : kermeta::language::behavior::Conditional init kermeta::language::behavior::Conditional.new
+			var out : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
 			output:=out
 			if condition==void then
-				var condition : kermeta::language::behavior::BooleanLiteral init kermeta::language::behavior::BooleanLiteral.new
+				var condition : org::kermeta::language::behavior::BooleanLiteral init org::kermeta::language::behavior::BooleanLiteral.new
 				condition.~value:=true
 				out.condition:=condition
 			else
 				condition.range2domain(context)
 				out.condition?=condition.output
 			end
-			var block : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
+			var block : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 			out.thenBody:=block
 			
 			
 			//print the message
-			var writelnFeature : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+			var writelnFeature : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 			block.statement.add(writelnFeature)
 			if argument.size>1 then
 				writelnFeature.name:="write"
@@ -230,24 +230,24 @@ aspect class LogExp {
 				writelnFeature.name:="writeln"
 			end
 			
-			var StdIOVar : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+			var StdIOVar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
 			writelnFeature.target:=StdIOVar
 			StdIOVar.name:="StdIO"
 			
 			argument.one.range2domain(context)
-			writelnFeature.parameters.add(argument.one.output.asType(kermeta::language::behavior::Expression))
+			writelnFeature.parameters.add(argument.one.output.asType(org::kermeta::language::behavior::Expression))
 			
 			//print the second argument
 			if argument.size>1 then
-				var writelnFeature2 : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var writelnFeature2 : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				block.statement.add(writelnFeature2)
 				writelnFeature2.name:="writeln"
 				
-				var StdIOVar2 : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+				var StdIOVar2 : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
 				writelnFeature2.target:=StdIOVar2
 				StdIOVar2.name:="StdIO"
 				
-				var toStringFeature : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var toStringFeature : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				writelnFeature2.parameters.add(toStringFeature)
 				toStringFeature.name:="toString"
 				argument.elementAt(2).range2domain(context)
@@ -262,27 +262,27 @@ aspect class ReturnExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-				var out : kermeta::language::behavior::Raise init kermeta::language::behavior::Raise.new
+				var out : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 				output:=out
 				
-				var newExp : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				newExp.name:="new"
 
-				var exceptionLiteral : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
 				newExp.target:=exceptionLiteral
-				var exceptionCD : kermeta::language::structure::ClassDefinition
+				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				
 				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ReturnException")
 				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
 				
 				
 			if ~value!=void then
-				var returnValueAssign : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var returnValueAssign : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				out.expression:=returnValueAssign
 				returnValueAssign.name:="returnWithValue"
 				returnValueAssign.target:=newExp
 				~value.range2domain(context)
-				returnValueAssign.parameters.add(~value.output.asType(kermeta::language::behavior::Expression))
+				returnValueAssign.parameters.add(~value.output.asType(org::kermeta::language::behavior::Expression))
 			else
 				out.expression:=newExp				
 			end
@@ -296,15 +296,15 @@ aspect class BreakExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-				var out : kermeta::language::behavior::Raise init kermeta::language::behavior::Raise.new
+				var out : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 				output:=out
 				
-				var newExp : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				newExp.name:="new"
 
-				var exceptionLiteral : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
 				newExp.target:=exceptionLiteral
-				var exceptionCD : kermeta::language::structure::ClassDefinition
+				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				
 				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::BreakException")
 				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
@@ -321,15 +321,15 @@ aspect class ContinueExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-				var out : kermeta::language::behavior::Raise init kermeta::language::behavior::Raise.new
+				var out : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 				output:=out
 				
-				var newExp : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				newExp.name:="new"
 
-				var exceptionLiteral : kermeta::language::behavior::TypeLiteral init kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
 				newExp.target:=exceptionLiteral
-				var exceptionCD : kermeta::language::structure::ClassDefinition
+				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				
 				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ContinueException")
 				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
@@ -348,10 +348,10 @@ aspect class SwitchExp{
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-			var out : kermeta::language::behavior::Conditional init kermeta::language::behavior::Conditional.new
+			var out : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
 			output:=out
 			
-			var currentCondition : kermeta::language::behavior::Conditional init out
+			var currentCondition : org::kermeta::language::behavior::Conditional init out
 			from var iter : kermeta::standard::Iterator<AltExp> init alternativePart.iterator
 			until iter.isOff
 			loop
@@ -362,7 +362,7 @@ aspect class SwitchExp{
 				currentCondition.thenBody?=alternative.body.output
 				
 				if not iter.isOff then
-					var newCondition : kermeta::language::behavior::Conditional init kermeta::language::behavior::Conditional.new
+					var newCondition : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
 					currentCondition.elseBody:=newCondition
 					currentCondition:=newCondition
 				else
@@ -380,13 +380,13 @@ aspect class CatchExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then
-			var out : kermeta::language::behavior::Rescue init kermeta::language::behavior::Rescue.new
+			var out : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
 			output := out
 			if body.empty then 
-				out.body.add(kermeta::language::behavior::VoidLiteral.new)
+				out.body.add(org::kermeta::language::behavior::VoidLiteral.new)
 			else
 				body.each{x|x.range2domain(context)
-				out.body.add(x.output.asType(kermeta::language::behavior::Expression))
+				out.body.add(x.output.asType(org::kermeta::language::behavior::Expression))
 				}
 			end
 			
@@ -403,13 +403,13 @@ aspect class BlockExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
+			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 			output:=out
 			body.each{x|x.range2domain(context)
-				out.statement.add(x.output.asType(kermeta::language::behavior::Expression))
+				out.statement.add(x.output.asType(org::kermeta::language::behavior::Expression))
 				}
 			//in qvtop a block return a void
-			out.statement.add(kermeta::language::behavior::VoidLiteral.new)
+			out.statement.add(org::kermeta::language::behavior::VoidLiteral.new)
 			
 		end
 	end
@@ -421,10 +421,10 @@ aspect class DictLiteralExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			var out : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new
+			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 			output:=out
 			//generate declaration
-			var varDec : kermeta::language::behavior::VariableDecl init kermeta::language::behavior::VariableDecl.new
+			var varDec : org::kermeta::language::behavior::VariableDecl init org::kermeta::language::behavior::VariableDecl.new
 			out.statement.add(varDec)
 			varDec.identifier:=self.name
 			
@@ -433,16 +433,16 @@ aspect class DictLiteralExp {
 			//add values
 			
 			part.each{ p|
-				var callPut : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new
+				var callPut : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				out.statement.add(callPut)
 				callPut.name:="put"
-				var callTable : kermeta::language::behavior::CallVariable init kermeta::language::behavior::CallVariable.new
+				var callTable : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
 				callPut.target:=callPut
 				callTable.name:=varDec.identifier
 				p.key.range2domain(context)
-				callPut.parameters.add(p.key.output.asType(kermeta::language::behavior::Expression))
+				callPut.parameters.add(p.key.output.asType(org::kermeta::language::behavior::Expression))
 				p.~value.range2domain(context)
-				callPut.parameters.add(p.~value.output.asType(kermeta::language::behavior::Expression))
+				callPut.parameters.add(p.~value.output.asType(org::kermeta::language::behavior::Expression))
 			}
 			
 			
@@ -456,18 +456,18 @@ aspect class DictLiteralExp {
 
 aspect class DictionaryType {
 	
-	method generateType(context : Qvt2KermetaContext) : kermeta::language::structure::Type is do
+	method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do
 		result?=output
 	end
 	
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			var out : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+			var out : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
 			output:=out
-			var cd : kermeta::language::structure::ClassDefinition
+			var cd : org::kermeta::language::structure::ClassDefinition
 			cd?=context.kmtContext.getFromQualifiedName("kermeta::utils::Hashtable")
 			out.typeDefinition:=cd 
-			var tvarBinding1 : kermeta::language::structure::TypeVariableBinding init kermeta::language::structure::TypeVariableBinding.new
+			var tvarBinding1 : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
 			tvarBinding1.variable :=cd.typeParameter.one
 			out.typeParamBinding.add(tvarBinding1)
 			
@@ -477,7 +477,7 @@ aspect class DictionaryType {
 			if tvarBinding1.type.container==void then 
 				tvarBinding1.containedType.add(tvarBinding1.type)
 			end
-			var tvarBinding2 : kermeta::language::structure::TypeVariableBinding init kermeta::language::structure::TypeVariableBinding.new
+			var tvarBinding2 : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
 			tvarBinding2.variable :=cd.typeParameter.elementAt(1)
 			out.typeParamBinding.add(tvarBinding2)
 			
@@ -499,7 +499,7 @@ aspect class ComputeExp {
 
 	method range2domain() : Void is do
 		if output==void then
-			var out : kermeta::language::behavior::VarDecl init kermeta::language::behavior::VarDecl.new
+			var out : org::kermeta::language::behavior::VarDecl init org::kermeta::language::behavior::VarDecl.new
 			output:=out
 			out.name:=returnedElement.identifier
 			

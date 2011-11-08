@@ -1,5 +1,5 @@
 package root_package;
-using kermeta::language::structure
+using org::kermeta::language::structure
 using kermeta::emfpersistence
 using kermeta::standard
 using kermeta::utils
@@ -11,7 +11,7 @@ reference libs : Resource [0..*]
 
 
 reference cacheName : String
-reference cacheValue : Object
+reference cacheValue : kermeta::standard::Object
 
 operation load(lib : Resource) : Void is do
 
@@ -26,11 +26,11 @@ operation populateMap(lib : Resource) : Void is do
 		map:= Hashtable<String,NamedElement>.new
 	end
 	
-	var toSearch : Sequence<Object> init Sequence<Object>.new
+	var toSearch : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
 
 	toSearch.add(lib.getContents().one)
 	
-	from var current : Object  
+	from var current : kermeta::standard::Object  
 	until toSearch.empty
 	loop
 		current:=toSearch.first
@@ -41,14 +41,14 @@ operation populateMap(lib : Resource) : Void is do
 				toSearch.addAll(current.asType(ModelingUnit).packages)
 			end
 			if current.isInstanceOf(NamedElement) then
-				//stdio.writeln("searched : " + current.asType(kermeta::language::structure::NamedElement).name)
-				//if (current.asType(kermeta::language::structure::NamedElement).qualifiedName==qualifiedName) then
+				//stdio.writeln("searched : " + current.asType(org::kermeta::language::structure::NamedElement).name)
+				//if (current.asType(org::kermeta::language::structure::NamedElement).qualifiedName==qualifiedName) then
 					map.put(current.asType(NamedElement).qualifiedName,current.asType(NamedElement))
 					//result:=current
 					//stdio.writeln("found!!")
 					//toSearch.clear
 				//else
-					//if (qualifiedName.contains(current.asType(kermeta::language::structure::NamedElement).qualifiedName)) then
+					//if (qualifiedName.contains(current.asType(org::kermeta::language::structure::NamedElement).qualifiedName)) then
 						//stdio.writeln("contains!!")
 						//toSearch.clear
 						var cd : ClassDefinition 
@@ -59,7 +59,7 @@ operation populateMap(lib : Resource) : Void is do
 								if att.upper==1 then
 									toSearch.add(current.get(att))
 								else
-									current.get(att).asType(Collection<Object>).each{y|toSearch.add(y)}
+									current.get(att).asType(Collection<kermeta::standard::Object>).each{y|toSearch.add(y)}
 								end
 							end
 							}
@@ -71,7 +71,7 @@ operation populateMap(lib : Resource) : Void is do
 	
 end
 
-operation getFromQualifiedNameWithMap(qualifiedName : String) : Object is do
+operation getFromQualifiedNameWithMap(qualifiedName : String) : kermeta::standard::Object is do
 	if map.containsKey(qualifiedName) then
 		result:= map.getValue(qualifiedName)
 	else
@@ -80,7 +80,7 @@ operation getFromQualifiedNameWithMap(qualifiedName : String) : Object is do
 end
 
 
-operation getFromQualifiedName(qualifiedName : String) : Object is do
+operation getFromQualifiedName(qualifiedName : String) : kermeta::standard::Object is do
 
 	
 	var resourcesToSearch : Sequence<Resource> init libs.asSequence
@@ -95,31 +95,31 @@ operation getFromQualifiedName(qualifiedName : String) : Object is do
 		lib:=resourcesToSearch.first
 		resourcesToSearch.removeAt(0)
 		
-		var toSearch : Sequence<Object> init Sequence<Object>.new
+		var toSearch : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
 	
 		toSearch.add(lib.getContents().one)
 		
-		from var current : Object  
+		from var current : kermeta::standard::Object  
 		until toSearch.empty
 		loop
 			current:=toSearch.first
 			toSearch.removeAt(0)
 			
 			if current!=void then
-				if current.isInstanceOf(kermeta::language::structure::ModelingUnit) then
-					toSearch.addAll(current.asType(kermeta::language::structure::ModelingUnit).packages)
+				if current.isInstanceOf(org::kermeta::language::structure::ModelingUnit) then
+					toSearch.addAll(current.asType(org::kermeta::language::structure::ModelingUnit).packages)
 				end
-				if current.isInstanceOf(kermeta::language::structure::NamedElement) then
-					//stdio.writeln("searched : " + current.asType(kermeta::language::structure::NamedElement).name)
-					if (current.asType(kermeta::language::structure::NamedElement).qualifiedName==qualifiedName) then
+				if current.isInstanceOf(org::kermeta::language::structure::NamedElement) then
+					//stdio.writeln("searched : " + current.asType(org::kermeta::language::structure::NamedElement).name)
+					if (current.asType(org::kermeta::language::structure::NamedElement).qualifiedName==qualifiedName) then
 						result:=current
 						//stdio.writeln("found!!")
 						toSearch.clear
 					else
-						if (qualifiedName.contains(current.asType(kermeta::language::structure::NamedElement).qualifiedName)) then
+						if (qualifiedName.contains(current.asType(org::kermeta::language::structure::NamedElement).qualifiedName)) then
 							//stdio.writeln("contains!!")
 							toSearch.clear
-							var cd : kermeta::language::structure::ClassDefinition 
+							var cd : org::kermeta::language::structure::ClassDefinition 
 							cd?= current.getMetaClass.typeDefinition
 							//stdio.writeln("all attributes "+ cd.allAttribute.size.toString)
 							cd.allAttribute.each{att|
@@ -127,7 +127,7 @@ operation getFromQualifiedName(qualifiedName : String) : Object is do
 									if att.upper==1 then
 										toSearch.add(current.get(att))
 									else
-										current.get(att).asType(Collection<Object>).each{y|toSearch.add(y)}
+										current.get(att).asType(Collection<kermeta::standard::Object>).each{y|toSearch.add(y)}
 									end
 								end
 								}

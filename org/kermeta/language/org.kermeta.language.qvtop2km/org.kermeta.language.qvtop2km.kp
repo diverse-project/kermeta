@@ -1,6 +1,6 @@
 KermetaProject :"org.kermeta.language.qvtop2km"
 version :  "0.0.1"
-group :"group"
+group :"theGroup"
 defaultMainClass : "mainpackage::MainClass"
 defaultMainOperation : "mainOperation"
 {
@@ -20,7 +20,7 @@ defaultMainOperation : "mainOperation"
 	source="${project.baseUri}/src/main/kmt/tuple_pool.kmt"
 	source="${project.baseUri}/src/main/kmt/framework_extension/k1metaoperations.kmt"
 
-	srcQuery= "/model/QVTOperational.ecore" from "qvt"
+	srcQuery= "/model/QVTOperational.ecore" from "qvt" 
 	srcQuery= "/model/EMOF.ecore" from "qvt"
 	srcQuery= "/model/EssentialOCL.ecore" from "qvt"
 	srcQuery= "/model/ImperativeOCL.ecore" from "qvt"
@@ -30,9 +30,11 @@ defaultMainOperation : "mainOperation"
 	srcQuery= "/model/QVTRelation.ecore" from "qvt"
 	srcQuery= "/model/QVTTemplate.ecore" from "qvt"
  
-	srcQuery= "/build/ecore/kermeta_java.ecore" from "kmtv1"
- 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"
-	dependency "kmtv1" URL="${project.baseUri}/resources/fr.irisa.triskell.kermeta.model_1.4.0.jar"
+	//srcQuery= "/build/ecore/kermeta_java.ecore" from "kmtv1" 
+ 	//source= "${project.baseUri}/resources/My.ecore" //from "kmtv1"
+ 	//source= "${project.baseUri}/resources/plugins/kermeta_java.ecore" 
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	//dependency "kmtv1" URL="${project.baseUri}/resources/fr.irisa.triskell.kermeta.model_1.4.0.jar"
+	//dependency "kmtv1" URL="${project.baseUri}/resources/plugins/kmtv1.jar" 
 	dependency "qvt" URL="${project.baseUri}/resources/fr.tm.elibel.smartqvt.qvt_0.2.4.jar"
 }

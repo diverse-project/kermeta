@@ -1,29 +1,24 @@
-	using kermeta::standard
-package kermeta{
-	package language {
-		package structure {
-			aspect class ClassDefinition{
+using kermeta::standard
+package org{
+	package kermeta{
+		package language {
+			package structure {
+				aspect class ClassDefinition{
+				
+				operation allAttribute() : Set<Property> is do 
+				
+				end
+				
+				}
 			
-			operation allAttribute() : Set<Property> is do 
-			
-			end
-			
+				aspect class NamedElement{
+				
+				operation qualifiedName() : String is do
+				
+				end
+				
+				}
 			}
-		
-			aspect class NamedElement{
-			
-			operation qualifiedName() : String is do
-			
-			end
-			
-			}
-		
-		
 		}
-	
-	
 	}
-
-
 }
-
