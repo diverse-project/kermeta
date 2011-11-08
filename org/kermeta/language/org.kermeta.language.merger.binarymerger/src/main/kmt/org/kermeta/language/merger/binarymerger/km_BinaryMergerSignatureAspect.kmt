@@ -3,6 +3,7 @@ package org;
 require kermeta
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.ecore.binarymergergenerator/src/main/kermeta/org/kermeta/ecore/binarymerger/BinaryMergerContext.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 
 using kermeta::language::structure
 using org::kermeta::ecore::binarymerger
@@ -638,6 +639,8 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						// type will match only if they are equivalent, ie. TypeDefinition are compatible
+						result := result and typeEquals(aspectElement)
 					else
 						result := false
 					end
@@ -748,6 +751,8 @@ package kermeta {
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
+						
+						
 					else
 						result := false
 					end
@@ -1158,6 +1163,8 @@ package kermeta {
 
 			aspect class UnresolvedType {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+					/*
+					By default cannot match UnresolvedType that simply, (need to be resolved to be sure that the typeIdentifier is ok 
 					var aspectElement : org::kermeta::language::structure::UnresolvedType
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
@@ -1167,9 +1174,9 @@ package kermeta {
 						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
 							result := result and self.typeIdentifier == aspectElement.typeIdentifier
 						end
-					else
+					else */
 						result := false
-					end
+					// end
 				end
 			}
 

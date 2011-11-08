@@ -520,7 +520,7 @@ package kermeta {
 
 
 			aspect class KermetaModelElement inherits Mergeable  {
-				operation fixReferences( ) : Void is do
+				method fixReferences( ) : Void is do
 					var aspectModelElement : org::kermeta::language::structure::KermetaModelElement
 					aspectModelElement ?= self.similarElementInAspectModel
 					
@@ -531,6 +531,11 @@ package kermeta {
 						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute kTag)")
 						self.kTag.remove(o)
 						self.kTag.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag))
+					}
+					
+					// TO BE GENERATED 
+					self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
+						void
 					}
 					
 				end
@@ -1425,7 +1430,7 @@ package kermeta {
 
 
 		aspect class DummyClass inherits Mergeable  {
-			operation fixReferences( ) : Void is do
+			method fixReferences( ) : Void is do
 				var aspectModelElement : org::kermeta::language::DummyClass
 				aspectModelElement ?= self.similarElementInAspectModel
 				
@@ -1441,7 +1446,7 @@ package kermeta {
 
 
 	aspect class DummyClass inherits Mergeable  {
-		operation fixReferences( ) : Void is do
+		method fixReferences( ) : Void is do
 			var aspectModelElement : org::kermeta::DummyClass
 			aspectModelElement ?= self.similarElementInAspectModel
 			
@@ -1457,7 +1462,7 @@ package kermeta {
 
 
 aspect class DummyClass inherits Mergeable  {
-	operation fixReferences( ) : Void is do
+	method fixReferences( ) : Void is do
 		var aspectModelElement : org::DummyClass
 		aspectModelElement ?= self.similarElementInAspectModel
 		
