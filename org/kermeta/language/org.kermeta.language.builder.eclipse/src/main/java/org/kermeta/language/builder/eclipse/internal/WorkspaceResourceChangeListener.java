@@ -120,7 +120,8 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 				break;
 
 			case IResource.FILE:
-				if (resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION)) {
+				if ( (resource.getFileExtension() != null ) && 
+						(resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION))) {
 					KPBuilder builder = null;
 					switch (delta.getKind()) {
 					case IResourceDelta.ADDED:
