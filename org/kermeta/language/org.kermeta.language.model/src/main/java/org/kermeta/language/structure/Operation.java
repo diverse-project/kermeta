@@ -251,7 +251,7 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	 * @return the value of the '<em>Unique Name</em>' attribute.
 	 * @see #setUniqueName(String)
 	 * @see org.kermeta.language.structure.StructurePackage#getOperation_UniqueName()
-	 * @model dataType="org.kermeta.language.structure.String" derived="true"
+	 * @model dataType="org.kermeta.language.structure.String" transient="true" derived="true"
 	 * @generated
 	 */
 	String getUniqueName();
