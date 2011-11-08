@@ -74,42 +74,52 @@ public class KmBinaryMergerTestSuite extends TestSuite {
         File folderFile = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder).getFile());
         
         for (File subFolder : folderFile.listFiles()){
-        	String currentTestName = subFolder.getName();
-        	File aspectFolder = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder + "/" +subFolder.getName() +"/aspect").getFile());
-        	File primaryFolder = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder + "/" +subFolder.getName() +"/primary").getFile());
-        	File expectedOutputFolder = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder + "/" +subFolder.getName() +"/expected_output").getFile());
-        	
-        	if(!aspectFolder.exists()){ 
-        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_pa", " cannot find "+folder + "/" +subFolder.getName() +"/aspect"));
-        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_ap", " cannot find "+folder + "/" +subFolder.getName() +"/aspect"));
-        		continue;
-        	}
-        	if(!primaryFolder.exists()){ 
-        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_pa", " cannot find "+folder + "/" +subFolder.getName() +"/primary"));
-        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_ap", " cannot find "+folder + "/" +subFolder.getName() +"/primary"));
-        		continue;
-        	}
-        	
-        	
-            String currentAspectFilePath = aspectFolder.listFiles().length > 0 ? aspectFolder.listFiles()[0].getAbsolutePath() : ""; 
-            String currentPrimaryFilePath = primaryFolder.listFiles().length > 0 ? primaryFolder.listFiles()[0].getAbsolutePath() : ""; 
-            String currentExpectedOutputFilePath = expectedOutputFolder.listFiles().length > 0 ? expectedOutputFolder.listFiles()[0].getAbsolutePath() : ""; 
-            ts.addTest(new KmBinaryMergerTest(folder+"/"+currentTestName+"_pa",
-                    "file:/"+currentPrimaryFilePath,
-                    "file:/"+currentAspectFilePath,
-                    outputFolder+"/"+currentTestName+"_pa.km",
-                    "file:/"+currentExpectedOutputFilePath,
-                    valid,
-                    new KmBinaryMergerImpl()));
-            if( ! ignoreReverseMerge){
-	            ts.addTest(new KmBinaryMergerTest(folder+"/"+currentTestName+"_ap",
-	                    "file:/"+currentAspectFilePath,
-	                    "file:/"+currentPrimaryFilePath,
-	                    outputFolder+"/"+currentTestName+"_ap.km",
-	                    "file:/"+currentExpectedOutputFilePath,
-	                    valid,
-	                    new KmBinaryMergerImpl()));
-            }
+        	try {
+        		if(subFolder.isDirectory()){
+		        	String currentTestName = subFolder.getName();
+		        	File aspectFolder = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder + "/" +subFolder.getName() +"/aspect").getFile());
+		        	File primaryFolder = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder + "/" +subFolder.getName() +"/primary").getFile());
+		        	File expectedOutputFolder = new File(KmBinaryMergerTestSuite.class.getClassLoader().getResource(folder + "/" +subFolder.getName() +"/expected_output").getFile());
+		        	
+		        	if(!aspectFolder.exists()){ 
+		        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_pa", " cannot find "+folder + "/" +subFolder.getName() +"/aspect"));
+		        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_ap", " cannot find "+folder + "/" +subFolder.getName() +"/aspect"));
+		        		continue;
+		        	}
+		        	if(!primaryFolder.exists()){ 
+		        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_pa", " cannot find "+folder + "/" +subFolder.getName() +"/primary"));
+		        		ts.addTest(new FailedTest(folder+"/"+currentTestName+"_ap", " cannot find "+folder + "/" +subFolder.getName() +"/primary"));
+		        		continue;
+		        	}
+		        	
+		        	
+		            String currentAspectFilePath = aspectFolder.listFiles().length > 0 ? aspectFolder.listFiles()[0].getAbsolutePath() : ""; 
+		            String currentPrimaryFilePath = primaryFolder.listFiles().length > 0 ? primaryFolder.listFiles()[0].getAbsolutePath() : ""; 
+		            String currentExpectedOutputFilePath = expectedOutputFolder.listFiles().length > 0 ? expectedOutputFolder.listFiles()[0].getAbsolutePath() : ""; 
+		            ts.addTest(new KmBinaryMergerTest(folder+"/"+currentTestName+"_pa",
+		                    "file:/"+currentPrimaryFilePath,
+		                    "file:/"+currentAspectFilePath,
+		                    outputFolder+"/"+currentTestName+"_pa.km",
+		                    "file:/"+currentExpectedOutputFilePath,
+		                    valid,
+		                    new KmBinaryMergerImpl()));
+		            if( ! ignoreReverseMerge){
+			            ts.addTest(new KmBinaryMergerTest(folder+"/"+currentTestName+"_ap",
+			                    "file:/"+currentAspectFilePath,
+			                    "file:/"+currentPrimaryFilePath,
+			                    outputFolder+"/"+currentTestName+"_ap.km",
+			                    "file:/"+currentExpectedOutputFilePath,
+			                    valid,
+			                    new KmBinaryMergerImpl()));
+		            }
+        		}
+        	} catch (Throwable ex) {
+                Logger.getLogger(KmBinaryMergerTestSuite.class.getName()).log(Level.SEVERE, null, ex);
+                ts.addTest(new FailedTest(folder+"/"+subFolder.getName()+"_pa", "cannot initialize test "+ex));
+                if( ! ignoreReverseMerge){
+                    ts.addTest(new FailedTest(folder+"/"+subFolder.getName()+"_ap", "cannot initialize test "+ex));
+                }
+            } 
         }
        
 
