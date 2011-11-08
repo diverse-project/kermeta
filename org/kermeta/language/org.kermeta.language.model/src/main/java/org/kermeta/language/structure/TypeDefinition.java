@@ -71,7 +71,7 @@ public interface TypeDefinition extends NamedElement, TypeContainer {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getTypeDefinition_SuperType()
-	 * @model
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<Type> getSuperType();

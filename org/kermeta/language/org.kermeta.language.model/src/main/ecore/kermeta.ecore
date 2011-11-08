@@ -673,8 +673,8 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit&#xA;this class)"/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
-              eType="#//kermeta/language/structure/Type">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="superType" ordered="false"
+              upperBound="-1" eType="#//kermeta/language/structure/Type">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Classes from which this ClassDefinition inherits.&#xD;&#xA;TODO after discussion this link seems not correctly named : a better name would be &quot;extends&quot; especially because it can be used in model type and enumeration"/>
             </eAnnotations>
