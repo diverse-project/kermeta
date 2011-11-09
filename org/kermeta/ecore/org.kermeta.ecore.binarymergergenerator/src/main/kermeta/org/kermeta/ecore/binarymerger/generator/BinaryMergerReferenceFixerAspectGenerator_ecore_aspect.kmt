@@ -345,7 +345,25 @@ aspect class EReference {
 				content.append(context.indentString)
 				content.append("var "+mangledName+"ToAdd : kermeta::standard::Sequence<"+typeName+">")
 				content.append(context.indentString)
-				content.append(mangledName+"ToAdd := self."+mangledName+".select{o | not mergedModelElement."+mangledName+".exists{ p | p.localMatch(o)}	}")
+				content.append(mangledName+"ToAdd := self."+mangledName+".select{o | ")
+				context.pushIndent
+					context.pushIndent
+						content.append(context.indentString) 
+						content.append("// select content in aspect element which aren't in the mergedModel element")
+						content.append(context.indentString)
+						content.append("not mergedModelElement."+mangledName+".exists{ p | p.localMatch(o)}")
+					context.popIndent
+					content.append(context.indentString)
+					content.append("}.collect{ c |")
+					context.pushIndent
+						content.append(context.indentString) 
+						content.append("// make sure to get the version that is in the merged model")
+						content.append(context.indentString)
+						content.append("c.getElementInMergedModel().asType("+typeName+")")
+					context.popIndent
+					content.append(context.indentString)
+					content.append("}")
+				context.popIndent
 				content.append(context.indentString)
 				content.append("mergedModelElement."+mangledName+".addAll("+mangledName+"ToAdd)")			
 			end			

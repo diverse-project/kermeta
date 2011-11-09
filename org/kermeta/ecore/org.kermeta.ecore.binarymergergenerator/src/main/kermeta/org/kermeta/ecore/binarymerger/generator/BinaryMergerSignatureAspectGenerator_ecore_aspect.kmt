@@ -92,6 +92,8 @@ aspect class EClass {
 		content.append(" is do")
 		context.pushIndent
 		content.append(context.indentString)
+		content.append("// TODO deal with aspectElementObj not a strict instance of "+ self.name )
+		content.append(context.indentString)
 		content.append("var aspectElement : " + context.ecoreHelper.getClassifierQualifiedName(self))
 		content.append(context.indentString)
 		content.append("aspectElement ?= aspectElementObj")

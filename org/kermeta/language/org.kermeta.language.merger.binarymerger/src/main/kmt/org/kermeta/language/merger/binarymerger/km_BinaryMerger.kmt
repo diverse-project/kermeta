@@ -59,6 +59,7 @@ class BinaryMerger
 			context.elementsNeedingReferenceMerge.each{o |
 				o.asType(KermetaModelElement).mergeReferences
 			}	
+			//mergedModelModelingUnit.fixReferences
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
 			}

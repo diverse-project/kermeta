@@ -74,7 +74,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var staticTypeVariableBindingsToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					staticTypeVariableBindingsToAdd := self.staticTypeVariableBindings.select{o | not mergedModelElement.staticTypeVariableBindings.exists{ p | p.localMatch(o)}	}
+					staticTypeVariableBindingsToAdd := self.staticTypeVariableBindings.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.staticTypeVariableBindings.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.staticTypeVariableBindings.addAll(staticTypeVariableBindingsToAdd)
 				end
 			}
@@ -426,12 +432,24 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var genericsToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					genericsToAdd := self.generics.select{o | not mergedModelElement.generics.exists{ p | p.localMatch(o)}	}
+					genericsToAdd := self.generics.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.generics.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.generics.addAll(genericsToAdd)
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var staticTypeVariableBindingsToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					staticTypeVariableBindingsToAdd := self.staticTypeVariableBindings.select{o | not mergedModelElement.staticTypeVariableBindings.exists{ p | p.localMatch(o)}	}
+					staticTypeVariableBindingsToAdd := self.staticTypeVariableBindings.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.staticTypeVariableBindings.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.staticTypeVariableBindings.addAll(staticTypeVariableBindingsToAdd)
 					// select value for unary reference (not involved in composition)
 					mergedModelElement.staticType ?= mergedModelElement.selectUnaryProperty("staticType", self.staticType, mergedModelElement.staticType)
@@ -545,7 +563,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var kTagToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Tag>
-					kTagToAdd := self.kTag.select{o | not mergedModelElement.kTag.exists{ p | p.localMatch(o)}	}
+					kTagToAdd := self.kTag.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.kTag.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Tag)
+						}
 					mergedModelElement.kTag.addAll(kTagToAdd)
 				end
 			}
@@ -588,7 +612,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var raisedExceptionToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					raisedExceptionToAdd := self.raisedException.select{o | not mergedModelElement.raisedException.exists{ p | p.localMatch(o)}	}
+					raisedExceptionToAdd := self.raisedException.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.raisedException.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.raisedException.addAll(raisedExceptionToAdd)
 					// select value for unary reference (not involved in composition)
 					mergedModelElement.superOperation ?= mergedModelElement.selectUnaryProperty("superOperation", self.superOperation, mergedModelElement.superOperation)
@@ -598,7 +628,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var typeParameterToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::TypeVariable>
-					typeParameterToAdd := self.typeParameter.select{o | not mergedModelElement.typeParameter.exists{ p | p.localMatch(o)}	}
+					typeParameterToAdd := self.typeParameter.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.typeParameter.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::TypeVariable)
+						}
 					mergedModelElement.typeParameter.addAll(typeParameterToAdd)
 				end
 			}
@@ -734,7 +770,13 @@ package kermeta {
 					super()
 					// merge references from aspect and primary model (not involved in composition)
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
+					superTypeToAdd := self.superType.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.superType.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.superType.addAll(superTypeToAdd)
 				end
 			}
@@ -772,7 +814,13 @@ package kermeta {
 					super()
 					// merge references from aspect and primary model (not involved in composition)
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
+					superTypeToAdd := self.superType.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.superType.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.superType.addAll(superTypeToAdd)
 				end
 			}
@@ -797,7 +845,13 @@ package kermeta {
 					super()
 					// merge references from aspect and primary model (not involved in composition)
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
+					superTypeToAdd := self.superType.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.superType.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.superType.addAll(superTypeToAdd)
 				end
 			}
@@ -872,7 +926,13 @@ package kermeta {
 					end
 					// merge references from aspect and primary model (not involved in composition)
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
+					superTypeToAdd := self.superType.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.superType.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.superType.addAll(superTypeToAdd)
 				end
 			}
@@ -924,7 +984,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var objectToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement>
-					objectToAdd := self.object.select{o | not mergedModelElement.object.exists{ p | p.localMatch(o)}	}
+					objectToAdd := self.object.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.object.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::KermetaModelElement)
+						}
 					mergedModelElement.object.addAll(objectToAdd)
 				end
 			}
@@ -1031,7 +1097,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var typeParameterToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::TypeVariable>
-					typeParameterToAdd := self.typeParameter.select{o | not mergedModelElement.typeParameter.exists{ p | p.localMatch(o)}	}
+					typeParameterToAdd := self.typeParameter.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.typeParameter.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::TypeVariable)
+						}
 					mergedModelElement.typeParameter.addAll(typeParameterToAdd)
 				end
 			}
@@ -1126,12 +1198,24 @@ package kermeta {
 					super()
 					// merge references from aspect and primary model (not involved in composition)
 					var superTypeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					superTypeToAdd := self.superType.select{o | not mergedModelElement.superType.exists{ p | p.localMatch(o)}	}
+					superTypeToAdd := self.superType.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.superType.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.superType.addAll(superTypeToAdd)
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var contentsToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement>
-					contentsToAdd := self.contents.select{o | not mergedModelElement.contents.exists{ p | p.localMatch(o)}	}
+					contentsToAdd := self.contents.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.contents.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::KermetaModelElement)
+						}
 					mergedModelElement.contents.addAll(contentsToAdd)
 				end
 			}
@@ -1195,7 +1279,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var contentsToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement>
-					contentsToAdd := self.contents.select{o | not mergedModelElement.contents.exists{ p | p.localMatch(o)}	}
+					contentsToAdd := self.contents.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.contents.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::KermetaModelElement)
+						}
 					mergedModelElement.contents.addAll(contentsToAdd)
 				end
 			}
@@ -1235,7 +1325,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var genericsToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					genericsToAdd := self.generics.select{o | not mergedModelElement.generics.exists{ p | p.localMatch(o)}	}
+					genericsToAdd := self.generics.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.generics.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.generics.addAll(genericsToAdd)
 				end
 			}
@@ -1325,7 +1421,13 @@ package kermeta {
 					// merge references from aspect and primary model (not involved in composition)
 					// TODO warning partial order not ensured
 					var typeToAdd : kermeta::standard::Sequence<org::kermeta::language::structure::Type>
-					typeToAdd := self.type.select{o | not mergedModelElement.type.exists{ p | p.localMatch(o)}	}
+					typeToAdd := self.type.select{o | 
+							// select content in aspect element which aren't in the mergedModel element
+							not mergedModelElement.type.exists{ p | p.localMatch(o)}
+						}.collect{ c |
+							// make sure to get the version that is in the merged model
+							c.getElementInMergedModel().asType(org::kermeta::language::structure::Type)
+						}
 					mergedModelElement.type.addAll(typeToAdd)
 				end
 			}
