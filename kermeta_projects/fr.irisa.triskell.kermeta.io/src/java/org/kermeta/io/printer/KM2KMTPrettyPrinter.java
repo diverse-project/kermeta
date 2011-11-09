@@ -868,12 +868,13 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				else result +="bag ";
 			}
 		}
-
-		result += this.accept(elem.getType());
-		if (elem.getLower() != 0 || elem.getUpper() != 1) {
-			result += "[" + elem.getLower() + "..";
-			result += (elem.getUpper()<0)?"*":""+elem.getUpper();
-			result += "]";
+		if (elem.getType() != null){
+			result += this.accept(elem.getType());
+			if (elem.getLower() != 0 || elem.getUpper() != 1) {
+				result += "[" + elem.getLower() + "..";
+				result += (elem.getUpper()<0)?"*":""+elem.getUpper();
+				result += "]";
+			}
 		}
 		return result;
 	}
