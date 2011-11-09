@@ -1,6 +1,6 @@
 package testArithm;
 
-using kermeta::standard::{Integer => Integer}
+using kermeta::standard::Integer => Integer
 
 // arithmetic operations
 class Test_arithm {
