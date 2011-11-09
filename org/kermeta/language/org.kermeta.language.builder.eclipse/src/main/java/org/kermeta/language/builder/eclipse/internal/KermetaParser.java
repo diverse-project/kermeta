@@ -6,6 +6,8 @@ import org.eclipse.core.resources.IResource;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecutionner;
+import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
+import org.kermeta.language.builder.eclipse.preferences.PreferenceToBuildAction;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
@@ -30,8 +32,7 @@ public class KermetaParser extends KermetaExecutionner<IResource,String> {
 				e.printStackTrace();
 			}
 		}
-					
-		if (freshModelingUnit != null) {
+		if (freshModelingUnit != null && PreferenceToBuildAction.musGenerateKM(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONKEYSTRIKE_STRING))) {
 			KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
 			if (kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(concernedResource)) != null) {
 				kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(concernedResource)).kpFiles.get(kermetaBuilder.generateIdentifier(concernedResource)).modelingUnit = freshModelingUnit;

@@ -40,6 +40,7 @@ import org.kermeta.utils.systemservices.api.reference.FileReference;
 public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	
 	public static final String KP_FILE_EXTENSION = "kp";
+	public static final String KMT_FILE_EXTENSION = "kpmt";
 	public HashMap<String,KPBuilder> kpBuilders = new HashMap<String,KPBuilder>();
 	
 	private static KermetaBuilder instance = null;

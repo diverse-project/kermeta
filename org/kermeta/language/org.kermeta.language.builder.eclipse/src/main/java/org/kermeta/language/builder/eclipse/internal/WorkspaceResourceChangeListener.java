@@ -27,6 +27,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
+import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
+import org.kermeta.language.builder.eclipse.preferences.PreferenceToBuildAction;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 
 /**
@@ -162,6 +165,58 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 									} else {
 										createBuilder(resource);
 									}
+
+								}
+							}
+						} catch (CoreException e) {
+						}
+						break;
+					}
+				}
+				if ( (resource.getFileExtension() != null ) && 
+						(resource.getFileExtension().equals(KermetaBuilder.KMT_FILE_EXTENSION))) {
+					KPBuilder builder = null;
+					switch (delta.getKind()) {
+					case IResourceDelta.CHANGED:
+						if ((delta.getFlags() & IResourceDelta.CONTENT) == 0)
+							// we care only about content change
+							return false;
+						try {
+							if (resource.getProject() != null) {
+								if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
+									Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "Save action on  " + resource.getFullPath(), this.getClass().getName());
+									
+									KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
+									if (kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)) != null) {
+										//kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)).kpFiles.get(kermetaBuilder.generateIdentifier(resource)).modelingUnit = freshModelingUnit;
+										if (kermetaBuilder.findKPidentifierFromKMT(resource) != null) {
+											if(PreferenceToBuildAction.musGenerateBytecode(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
+												kermetaBuilder.buildFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
+											}
+											else if(PreferenceToBuildAction.musGenerateKM(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
+														kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
+											}
+										} else {
+											Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+resource+ ", no kp referenced", this.getClass().getCanonicalName());
+										}
+									} else {
+											Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+resource+ ", no kp referenced", this.getClass().getCanonicalName());
+										}
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
 
 								}
 							}
