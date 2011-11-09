@@ -150,17 +150,41 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 
 
   def annotableElement = kpositioned (subPackageDecl | classDecl | enumDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
-  def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
+
+  def subPackageDecl = "package" ~ rep1sep(ident,"::") ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage
-      newp.setName(packageName)
+      //newp.setName(packageName)
+      //var currentPackage = newp
+      var i = 0
+      var currentPackage=newp
+      packageName.foreach(pack=>{
+        if (i==0) {
+          newp.setName(pack)
+          i=i+1
+        } else {
+          var localPackage = StructureFactory.eINSTANCE.createPackage()
+          localPackage.setName(pack)
+          currentPackage.getNestedPackage.add(localPackage)
+          localPackage.setNestingPackage(currentPackage)
+          currentPackage=localPackage
+          i=i+1
+        }
+      })
+
       decls match {
         case Some(_ @ subElem) => subElem.asInstanceOf[List[_]].foreach{elem => elem match {
+          case cdef : ClassDefinition => currentPackage.getOwnedTypeDefinition.add(cdef)
+          case enum : Enumeration => currentPackage.getOwnedTypeDefinition.add(enum)
+          case subPack : Package => currentPackage.getNestedPackage.add(subPack);subPack.setNestingPackage(currentPackage)
+          case _ => println("unknow subelem")
+              /*
               case cdef : ClassDefinition => newp.getOwnedTypeDefinition.add(cdef)
               case enum : Enumeration => newp.getOwnedTypeDefinition.add(enum)
               case subPack : Package => newp.getNestedPackage.add(subPack);subPack.setNestingPackage(newp)
               case _ => println("unknow subelem")
+              */
             }}
-        case None => println("Warning : Empty Package "+newp.getName)
+        case None => println("Warning : Empty Package "+currentPackage.getName)
       }
       newp
   }

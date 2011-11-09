@@ -101,7 +101,6 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
 
       /* Process pre and post conditions */
       prePosts.foreach{tuple=>
-        println("Found a " + tuple._1 + " named " + tuple._2)
         var constraint = StructureFactory.eINSTANCE.createConstraint()
         constraint.setName(tuple._2)
         constraint.setBody(tuple._3)
