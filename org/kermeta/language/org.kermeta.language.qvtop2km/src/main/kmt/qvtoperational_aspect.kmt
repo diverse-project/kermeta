@@ -381,7 +381,7 @@ aspect class MappingBody {
 				raiseExcep.expression:=newCall
 				newCall.name:="new"
 
-				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 				newCall.target:=exceptionLiteral
 				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				
@@ -575,7 +575,7 @@ aspect class MappingBody {
 			assign.target:=callAssignee
 			
 			var newFeat : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-			var typeLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			var typeR : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
 		
 			assign.~value:=newFeat
@@ -841,7 +841,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			output:=detectCast
 			detectCast.name:="asType"
 			target.type.range2domain(context)
-			var castLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var castLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 		
 			castLiteral.typeref:=target.type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef()
 			detectCast.parameters.add(castLiteral)
@@ -859,7 +859,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			var dseqCD : org::kermeta::language::structure::ClassDefinition 
 			dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
 			
-			var dseqLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			dSeqInit.target:=dseqLit
 			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(self.target.type.output.asType(org::kermeta::language::structure::ClassDefinition))
 			
@@ -904,7 +904,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			andCall.parameters.add(exp)
 		end
 		
-		var typeToTest : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+		var typeToTest : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 		
 		typeToTest.typeref:=target.type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef() //range2domain already done earlier
 		typeTestCall.parameters.add(typeToTest)
@@ -928,7 +928,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		
 		cf_cast.name:="asType"
 		
-		var tl_tracetype : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+		var tl_tracetype : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 		cf_cast.parameters.add(tl_tracetype)
 		
 		
@@ -945,7 +945,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		cf_getDefault.name:="getDefault"
 		
 		
-		var tl_getDefault : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+		var tl_getDefault : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 		cf_getDefault.target:=tl_getDefault
 		
 		
@@ -1037,7 +1037,7 @@ aspect class MappingCallExp
 {
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-			var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 			output:=out
 			
 			//if there is a source model
@@ -1045,7 +1045,7 @@ aspect class MappingCallExp
 				source.range2domain(context)
 				out.target?=source.output
 			else
-				var transfoCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
+				var transfoCall : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
 				out.target:=transfoCall
 			end
 			if (referredOperation !=void) then

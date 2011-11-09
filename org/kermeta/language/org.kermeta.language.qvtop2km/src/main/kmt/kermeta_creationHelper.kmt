@@ -16,8 +16,8 @@ package structure{
 			var kTag : org::kermeta::language::structure::Tag init org::kermeta::language::structure::Tag.new
 			kTag.name:="documentation"
 			kTag.~value:=text
-			self.kOwnedTags.add(ktag)
-			self.kTag.add(tag)
+			self.kOwnedTags.add(kTag)
+			self.kTag.add(kTag)
 		end
 	
 	}
@@ -128,7 +128,7 @@ package behavior {
 					.kmtContext
 					.getFromQualifiedName("root_package::TransformationContext")
 			
-			var tl_tracetype : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var tl_tracetype : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			result.parameters.add(tl_tracetype)
 			tl_tracetype.typeref:=transfoContextCD.generateTypeRef()
 			
@@ -136,7 +136,7 @@ package behavior {
 			result.target:=cf_getDefault
 			cf_getDefault.name:="getDefault"
 			
-			var tl_getDefault : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var tl_getDefault : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			cf_getDefault.target:=tl_getDefault
 			tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
 		end

@@ -83,7 +83,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			condition.asType(essentialocl::TypeExp).referredType.range2domain(context)
 			paramTypeCD?=condition.asType(essentialocl::TypeExp).referredType.output
 			
-			var dseqLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			dSeqInit.target:=dseqLit
 			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(paramTypeCD)
 			
@@ -268,7 +268,7 @@ aspect class ReturnExp {
 				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				newExp.name:="new"
 
-				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 				newExp.target:=exceptionLiteral
 				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				
@@ -277,7 +277,7 @@ aspect class ReturnExp {
 				
 				
 			if ~value!=void then
-				var returnValueAssign : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var returnValueAssign : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 				out.expression:=returnValueAssign
 				returnValueAssign.name:="returnWithValue"
 				returnValueAssign.target:=newExp
@@ -302,7 +302,7 @@ aspect class BreakExp {
 				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				newExp.name:="new"
 
-				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 				newExp.target:=exceptionLiteral
 				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				
@@ -327,7 +327,7 @@ aspect class ContinueExp {
 				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				newExp.name:="new"
 
-				var exceptionLiteral : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 				newExp.target:=exceptionLiteral
 				var exceptionCD : org::kermeta::language::structure::ClassDefinition
 				

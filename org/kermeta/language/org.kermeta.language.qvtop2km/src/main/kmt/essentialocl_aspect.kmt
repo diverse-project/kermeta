@@ -74,7 +74,7 @@ aspect class OperationCallExp {
 		if output==void then
 			StdIO.writeln("OperationCallExp::range2domain")
 			//either the operation is coming from the initial framework
-			var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 			output:=out
 			
 			if context.qvtContext.libs.contains(referredOperation.containingResource()) and referredOperation.output==void then
@@ -84,11 +84,11 @@ aspect class OperationCallExp {
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
 				if referredOperation.getQVTID()=="OclLib::Sequence::flatten" then
 					
-					var deferredcast : org::kermeta::language::behavior::CallFeature 
+					var deferredcast : org::kermeta::language::behavior::CallOperation
 					deferredcast:=out
 					deferredcast.name:="fromSeq"
 			
-					var dSeqInit : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+					var dSeqInit : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 					deferredcast.target:=dSeqInit
 					dSeqInit.name:="new"
 					
@@ -121,11 +121,11 @@ aspect class OperationCallExp {
 					dSeqInit.target:=dseqLit
 					dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(operationType.elementType.output.asType(org::kermeta::language::structure::ClassDefinition))
 
-					var asSequenceFeature : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+					var asSequenceFeature : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 					deferredcast.parameters.add(asSequenceFeature)
 					asSequenceFeature.name:="asSequence"
 					
-					var flattenFeature : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+					var flattenFeature : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 					asSequenceFeature.target :=flattenFeature
 					flattenFeature.name:="flatten"
 					source.range2domain(context)
@@ -174,7 +174,7 @@ aspect class OperationCallExp {
 					source.range2domain(context)
 					out.target?=source.output
 				else
-					var transfoCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
+					var transfoCall : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
 					out.target:=transfoCall
 				end
 				if (referredOperation !=void) then
@@ -225,12 +225,12 @@ aspect class VariableExp {
 				out:= org::kermeta::language::behavior::SelfExpression.new
 			else
 				if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then
-					var transfoContext : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
-					out := org::kermeta::language::behavior::CallFeature.new
+					var transfoContext : org::kermeta::language::behavior::CallProperty init org::kermeta::language::behavior::CallProperty.new.callToTransfoContextSingleton(context)
+					out := org::kermeta::language::behavior::CallProperty.new
 					out.asType(org::kermeta::language::behavior::CallFeature).target:=transfoContext
 					referredVariable.range2domain(context)
-					out.asType(org::kermeta::language::behavior::CallFeature).staticProperty?= referredVariable.output
-					out.asType(org::kermeta::language::behavior::CallFeature).name:=out.asType(org::kermeta::language::behavior::CallFeature).staticProperty.name
+					out.asType(org::kermeta::language::behavior::CallProperty).staticProperty?= referredVariable.output
+					out.asType(org::kermeta::language::behavior::CallFeature).name:=out.asType(org::kermeta::language::behavior::CallProperty).staticProperty.name
 					
 				else
 					out := org::kermeta::language::behavior::CallVariable.new
@@ -274,7 +274,7 @@ aspect class Variable {
 		else
 			//initialization of the variable
 			var newFeat : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-			var typeLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			
 			out.initialization:=newFeat
 			newFeat.name:="new"
@@ -375,10 +375,10 @@ aspect class CollectionLiteralExp {
 			
 			//init
 			
-			var callNew : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var callNew : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 			vDecl.initialization:=callNew
 			callNew.name:="new"
-			var typeLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
+			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			callNew.target:=typeLit
 			
 			typeLit.typeref:=seqClass.cloneClass.generateTypeRef			
