@@ -136,6 +136,12 @@ aspect class CallFeature {
 		result := self
 	end
 	
+	operation initializeWithACallFeature(propertyName : String, callF : CallExpression) : CallFeature is do
+		self.initialize(propertyName)
+		self.target := callF
+		result := self
+	end
+	
 	// Creates an each
 	// i.e v.each{p|expr}
 	/**
@@ -185,6 +191,39 @@ aspect class CallFeature {
 		result := self
 	end
 	
+	operation initializeForASelect(target : Expression, targetType : Type, expr : Expression, variableName : String, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
+		var cl_caller : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Object"))
+		var ft_caller : FunctionType init FunctionType.new.initialize(targetType,cl_caller)
+		
+		//FunctionType variableName
+		var cl_var : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Object"))
+		var ft_var : FunctionType init FunctionType.new.initialize(targetType,cl_var)
+				
+		//FunctionType expr
+		var cl_expr : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Object")) 
+		var ft_expr : FunctionType init FunctionType.new.initializeRight(cl_expr)
+		
+		//ProductType expr
+		var pt_expr : ProductType init ProductType.new
+		pt_expr.type.add(targetType)
+		ft_expr.containedType.add(pt_expr)
+		
+		// Main FunctionType
+		var pt_each : ProductType init ProductType.new.initialize(ft_var)
+		var cl_each : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::VoidType")) 
+		var ft_each : FunctionType init FunctionType.new.initialize(pt_each,cl_each) 
+		
+		// LambdaExpression
+		var lambda : LambdaExpression init LambdaExpression.new.initialize(ft_expr,expr,variableName)
+		
+		// Each
+		self.initialize("select")
+		self.containedType.add(ft_each)
+		self.parameters.add(lambda)
+		self.target := target
+		result := self
+	end
+	
 	/**
 	 * Creates a new CallFeature to produce a target.func(param)
 	 * 
@@ -199,7 +238,7 @@ aspect class CallFeature {
 	 * @param func
 	 *			  name of the function to call
 	 */
-	operation initializeForAFunctionCall(target : CallExpression, param : CallExpression, targetType : Type, typesFromFramework : Hashtable<String,ClassDefinition>, func : String) : CallFeature is do
+	operation initializeForAFunctionCall(target : CallExpression, param : Expression, targetType : Type, typesFromFramework : Hashtable<String,ClassDefinition>, func : String) : CallFeature is do
 		var cl_add : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::VoidType"))
 		var pt_add : ProductType init ProductType.new.initialize(targetType)
 		var ft_add : FunctionType init FunctionType.new.initialize(pt_add,cl_add)
@@ -207,7 +246,9 @@ aspect class CallFeature {
 		// Add
 		self.initialize(func)
 		self.containedType.add(ft_add)
-		self.parameters.add(param)
+		if param != void then
+			self.parameters.add(param)
+		end
 		self.target := target
 		result := self
 	end
@@ -300,10 +341,13 @@ aspect class TypeReference {
 	operation initialize(type : Type) : TypeReference is do
 		var c : Class
 		c ?= type
+		stdio.writeln("TypeReference.initialize.class="+c.toString)
 		self.type := type
 		self.upper := 1
 		self.name := c.name
+		stdio.writeln("TypeReference.containedType.BERFOREsize="+self.containedType.size().toString)
 		self.containedType.add(c)
+		stdio.writeln("TypeReference.containedType.AFTERsize="+self.containedType.size().toString)
 		result := self
 	end
 	
@@ -420,6 +464,14 @@ aspect class StringLiteral {
 	 *            type of the StringLiteral
 	 */
 	operation initialize(val : String, type : Type) : StringLiteral is do
+		self.~value := val
+		self.containedType.add(type)
+		result := self
+	end
+}
+
+aspect class IntegerLiteral {
+	operation initialize(val : Integer, type : Type) : IntegerLiteral is do
 		self.~value := val
 		self.containedType.add(type)
 		result := self
