@@ -13,6 +13,7 @@ package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 import org.kermeta.language.structure.Parameter
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
+import org.kermeta.language.behavior.Expression
 import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 
 trait KOperationParser extends KAbstractParser with KMultiplicityParser {
@@ -26,7 +27,21 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   def operationReturnType = opt(":" ~> multiplicityType)
   def methodFromType = opt("from" ~> genericQualifiedType )
 
-  def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ _ ~ body =>
+  /* Pre and post conditions for operations */
+  def preconditionParser : Parser[Tuple3[String,String,Expression]]= "pre" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp =>
+    /*var resTuple: Tuple2[String, Expression] = (id, exp)
+    resTuple*/
+    (key,id,exp)
+  }
+  def postconditionParser : Parser[Tuple3[String, String,Expression]] = "post" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp =>
+    /*var resTuple : Tuple2[String, Expression] = (id, exp)
+    resTuple*/
+    (key,id,exp)
+  }
+
+  def prePostConditionParser : Parser[Tuple3[String, String, Expression]] = (preconditionParser | postconditionParser)
+
+  def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ rep(prePostConditionParser) ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ prePosts ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
       fromType match {
         case None =>
@@ -83,6 +98,23 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
             //newo.getContainedType.add(selectedUnresolvedType)
           }
       }
+
+      /* Process pre and post conditions */
+      prePosts.foreach{tuple=>
+        println("Found a " + tuple._1 + " named " + tuple._2)
+        var constraint = StructureFactory.eINSTANCE.createConstraint()
+        constraint.setName(tuple._2)
+        constraint.setBody(tuple._3)
+        if (tuple._1=="pre") {
+          // This is a pre condition
+          constraint.setPreOwner(newo)
+        } else {
+          // this is a post condition
+          constraint.setPostOwner(newo)
+        }
+
+      }
+
       newo
   }
 

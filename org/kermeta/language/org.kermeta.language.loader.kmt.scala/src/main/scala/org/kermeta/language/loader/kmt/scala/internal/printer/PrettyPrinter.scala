@@ -124,7 +124,17 @@ object PrettyPrinter {
         res.append(") : ")
         printMultiplicityElementTypeType(op,res)
         //TODO lower upper superoperation
-        res.append(" is ")
+        op.getPre.foreach(p=>{
+          res.append("\n\t\t\tpre " + p.getName + "is")
+          print(p.getBody,res)
+
+        })
+        op.getPost.foreach(p=>{
+          res.append("\n\t\t\tpost " + p.getName + "is")
+          print(p.getBody,res)
+
+        })
+        res.append("\n\t\tis ")
         if (op.getIsAbstract!= null && op.getIsAbstract)
           res.append(" abstract ")
         else
