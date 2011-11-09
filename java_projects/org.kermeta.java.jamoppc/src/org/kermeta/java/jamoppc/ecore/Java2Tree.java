@@ -505,35 +505,35 @@ public class Java2Tree extends TreeVisitor{
 		// TODO Hack 15.03.2011 for KompilerV2
 		if (e instanceof Boolean){
 			dt.setName(_BOOLEAN);
-			dt.setInstanceClassName(_BOOLEAN);
+			dt.setInstanceClassName(BOOLEAN);
 		}
 		else if (e instanceof org.emftext.language.java.types.Byte){
 			dt.setName(_BYTE);
-			dt.setInstanceClassName(_BYTE);
+			dt.setInstanceClassName(BYTE);
 		}
 		else if (e instanceof Char){
 			dt.setName(_CHAR);
-			dt.setInstanceClassName(_CHAR);
+			dt.setInstanceClassName(CHAR);
 		}
 		else if (e instanceof Double){
 			dt.setName(_DOUBLE);
-			dt.setInstanceClassName(_DOUBLE);
+			dt.setInstanceClassName(DOUBLE);
 		}
 		else if (e instanceof org.emftext.language.java.types.Float){
 			dt.setName(_FLOAT);
-			dt.setInstanceClassName(_FLOAT);
+			dt.setInstanceClassName(FLOAT);
 		}
 		else if (e instanceof Int){
 			dt.setName(_INTEGER);
-			dt.setInstanceClassName(_INTEGER);
+			dt.setInstanceClassName(INTEGER);
 		}
 		else if (e instanceof Long){
 			dt.setName(_LONG);
-			dt.setInstanceClassName(_LONG);
+			dt.setInstanceClassName(LONG);
 		}
 		else if (e instanceof Short){
 			dt.setName(_SHORT);
-			dt.setInstanceClassName(_SHORT);
+			dt.setInstanceClassName(SHORT);
 		}
 		dt = addDatatype(dt.getName(),dt.getInstanceClassName());
 		lastElement.setEType(dt);
