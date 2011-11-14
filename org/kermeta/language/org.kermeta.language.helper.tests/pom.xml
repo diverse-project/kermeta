@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.loader.kmt.scala</artifactId>
-			<version>${kermeta.version}</version> <!-- WARNING we have a cyclic dependency here ! need to either split the code (or duplicate used code) when used by the scala loader -->
+			<version>2.0.1-SNAPSHOT</version> <!-- WARNING we have a cyclic dependency here ! need to either split the code (or duplicate used code) when used by the scala loader -->
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
