@@ -1,0 +1,84 @@
+/* $Id:$ 
+ * Creation : October 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ 
+ */
+
+
+package org::kermeta::language;
+
+
+require kermeta
+require "StaticSetter_kermeta_aspect.kmt"
+require "StaticSetter_typevariableResolver.kmt"
+using kermeta::standard
+
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+using org::kermeta::language::resolver
+using org::kermeta::language::staticsetter
+using kermeta::utils
+
+package behavior {
+	aspect class Expression
+	{
+	/**
+		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
+		 */
+		operation setInferedStaticType(context : StaticSetterContext, type : Type) : Type is do
+			
+			if not type.isVoid then
+				self.staticType := type
+				if(type.container.isVoid) then
+					self.containedType.add(self.staticType)
+				end
+				result := self.staticType
+			end
+		end
+		
+	}
+	
+	aspect class CallFeature
+	{
+	
+	/**
+		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
+		 */
+		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type is do
+			
+			if not type.isVoid then
+				// make sure all parameter of this type are concrete
+				var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
+				
+				if not target.isVoid then
+					if target.staticType.isInstanceOf(Class) then
+						bindings.addAll(target.staticType.asType(Class).getAllTypeVariableBindings())
+					end
+				end
+				if (context.verbose) then 
+					stdio.write("bindings.size : "+bindings.size.toString+" content = (")
+					bindings.each{b | 
+						stdio.write("["+b.type.toString+","+b.variable.prettyPrint+"], "
+					)}
+					stdio.writeln(") on type " +type.toString)
+				end
+				self.staticType := type.resolveTypeVariables(context,bindings)
+				if(self.staticType.isVoid) then
+					stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType")					
+					self.staticType := context.createTypeFromQualifiedName("kermeta::standard::Void")
+				end
+				if(self.staticType.container.isVoid) then
+					
+					self.containedType.add(self.staticType)
+				end
+				
+				result := self.staticType
+			else
+				stdio.writeln("Warning setting void as statictype on "+ self.name)
+			end
+		end
+	}
+}

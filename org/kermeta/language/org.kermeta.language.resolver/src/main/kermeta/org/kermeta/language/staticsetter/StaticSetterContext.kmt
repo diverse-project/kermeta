@@ -16,7 +16,6 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/each
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetter_kermeta_aspect.kmt"
-require "SimpleDuplicate_kermeta_aspect.kmt"
 require "../resolver/ResolverException.kmt"
 
 using kermeta::standard

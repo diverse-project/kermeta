@@ -18,7 +18,8 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
-require "StaticSetter_typevariableResolver.kmt"
+
+require "behaviorResolver_inferedStaticType.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/prettyprinters/PrettyPrinter_kermeta_aspect.kmt"
@@ -144,19 +145,7 @@ package behavior {
 			}
 		end
 		
-		/**
-		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
-		 */
-		operation setInferedStaticType(context : StaticSetterContext, type : Type) : Type is do
-			
-			if not type.isVoid then
-				self.staticType := type
-				if(type.container.isVoid) then
-					self.containedType.add(self.staticType)
-				end
-				result := self.staticType
-			end
-		end
+
 		
 	}
 	
@@ -247,12 +236,8 @@ package behavior {
 		//a TypeLiteral
 		//an EnumLiteral
 	
-		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
-			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of UnresolvedCall") end
-			if (context.verbose) then stdio.writeln("resolving UnresolvedCall "+ name) end
-			//var targetType : Type 
-			if (target.isVoid) then
-				// look for a variable in the context
+		operation resolveCallToVariable(context : StaticSetterContext) : CallVariable is do
+			if target.isVoid then
 				var symbolType : Type init context.getTypeForSymbol(self.name)
 				if not symbolType.isVoid then	
 					var callVariable : CallVariable init CallVariable.new
@@ -266,26 +251,16 @@ package behavior {
 					//	this is the CallVariable that must replace this UnresolvedCall
 					result := callVariable
 				else
-					target:= SelfExpression.new
+					result:= void
 				end
+			else
+				result:=void
 			end
-			if not target.isVoid then	
-				if (context.verbose) then stdio.writeln("  infering targetType...") end
-				// replace current target by the possibly resolved one
-				target := target.resolveCallAndInferStatic(context)
-				
-				if (context.verbose) then stdio.writeln("             target is infered as "+ target.staticType.toString + " for UnresolvedCall " + name) end
-			end 
-			//resolve parameters
-			super(context)		
-			
-			//if result is a variable with parameters, add resolved parameters
-			if not result.isVoid and not self.parameters.isEmpty then
-				result.asType(CallVariable).parameters.addAll(self.parameters)
-			end
-			
-			// if not already found, look for an Enumeration
-			if result.isVoid and not target.isVoid and target.isInstanceOf(CallTypeLiteral) then
+		end
+		
+		
+		operation resolveCallToEnumLiteral(context : StaticSetterContext) : CallEnumLiteral is do
+			if not target.isVoid and target.isInstanceOf(CallTypeLiteral) then
 				var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
 				// maybe the typeLiteral is an enumeration and we are looking for the EnumerationLiteral
 				if callTypeLiteral.typeref.type.isInstanceOf(Enumeration) then
@@ -298,118 +273,126 @@ package behavior {
 						callEnumLiteral.kOwnedTags.addAll(self.kOwnedTags)
 						// callEnumLiteral.target := self.target
 						result := callEnumLiteral
+					else
+						result := void
 					end
-				end
-			end
-			// if not already found, look for an Operation
-			if result.isVoid then
-				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
-					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" ) 
 				else
-					var op : Operation init target.staticType.getCallableOperationByName(self.name)
-					//Here we must look if target is a TypeLiteral and if the type is a singleton
-					if op.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
-						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation1 of UnresolvedCall") end
-						// this is a TypeLiteral  
-						// if this is a singleteton, try to look in the typereference
-						var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
-						op := callTypeLiteral.typeref.type.getCallableOperationByName(self.name)
-						
-					end
-					//Here we must look into Object which is the implicit superclass of everything
-					if (op.isVoid) then
-						if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
-						var objectAny : ClassDefinition
-						objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
-						op := objectAny.getCallableOperationByName(self.name)
-					end
-					//if we finally found an operation
-					if not op.isVoid then
-						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
-						var callOperation :  CallOperation init  CallOperation.new
-						// move content of UnresolvedCall into the new CallOperation
-						callOperation.name := self.name
-						callOperation.kOwnedTags.addAll(self.kOwnedTags)
-						// infer staticType of the content (except target which has been done previously)
-						// TODO check if necessary, probably already done
-						callOperation.eachOwnedElement{ e | 
-							e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
-							e // scala compiler needs somthing to return
-						}
-						
-						// reassign target and parameters
-						callOperation.parameters.addAll(self.parameters)
-						callOperation.target := self.target 
-						// set staticOperation
-						callOperation.staticOperation := op
-						
-						// The static type of the call operation must be infered.
-						inferStaticTypeOfCallOperation(callOperation, op, context)
-						
-						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
-						//	this is the CallOperation that must replace this UnresolvedCall
-						result := callOperation
-						
-						
-						
-					end
+					result:=void
 				end
+			else
+				result:=void
 			end
-			// if not found, look for a Property
-			if result.isVoid then
-				if (context.verbose) then stdio.writeln("      still not found trying to find a property "+name) end
-				if (target.isVoid).orElse{x|target.staticType.isVoid} then 
-					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a property. Probably due to a previous element that hasn't been resolved" ) 
-				else
-					if (context.verbose) then stdio.writeln("      target.staticType "+target.staticType.toString) end
-					var prop : Property init target.staticType.getCallablePropertyByName(self.name)
-					//Here we look if the target is a TypeLiteral in case of a singleton
-					if prop.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
-						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property1 of UnresolvedCall "+name) end
-						// this is a TypeLiteral  
-						// if this is a singleteton, try to look in the typereference
-						var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
-						prop := callTypeLiteral.typeref.type.getCallablePropertyByName(self.name)
-					end
-					//Here we must look into Object which is the implicit superclass of everything
-					if (prop.isVoid) then
-						if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find property : "+self.name)  end
-						var objectAny : ClassDefinition
-						objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
-						prop := objectAny.getCallablePropertyByName(self.name)
-					end
+		end
+		
+		operation resolveCallToOperation(context : StaticSetterContext) : CallOperation is do
+			if (target.isVoid).orElse{x|target.staticType.isVoid} then 
+					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" )
+					result:=void 
+			else
+				var op : Operation init target.staticType.getCallableOperationByName(self.name)
+				//Here we must look if target is a TypeLiteral and if the type is a singleton
+				if op.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
+					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation1 of UnresolvedCall") end
+					// this is a TypeLiteral  
+					// if this is a singleteton, try to look in the typereference
+					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
+					op := callTypeLiteral.typeref.type.getCallableOperationByName(self.name)
 					
-					//if we finally found a property
-					if not prop.isVoid then
-						if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property2 of UnresolvedCall : "+self.name) end
-						var callProperty :  CallProperty init  CallProperty.new
-						// move content of UnresolvedCall into the new CallOperation
-						callProperty.name := self.name
-						//callProperty.parameters.addAll(self.parameters)
-						callProperty.kOwnedTags.addAll(self.kOwnedTags)
-						// infer staticType of the content (except target which has been done previously)
-						callProperty.eachOwnedElement{ e | 
-							e.asType(KermetaModelElement).inferContainedExpressionStatic(context)						
-							e // scala compiler needs somthing to return
-						}
-						
-						// reassign target
-						callProperty.target := self.target 
-						// set staticProperty
-						callProperty.staticProperty := prop
-						
-						callProperty.setInferedStaticType(context, context.createTypeFromMultiplicityElement(prop))
-						if (context.verbose) then stdio.writeln("  CallProperty "+ name + " resolved") end
-						//	this is the CallProperty that must replace this UnresolvedCall
-						result := callProperty
-					end
+				end
+				//Here we must look into Object which is the implicit superclass of everything
+				if (op.isVoid) then
+					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
+					var objectAny : ClassDefinition
+					objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
+					op := objectAny.getCallableOperationByName(self.name)
+				end
+				//if we finally found an operation
+				if not op.isVoid then
+					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
+					var callOperation :  CallOperation init  CallOperation.new
+					// move content of UnresolvedCall into the new CallOperation
+					callOperation.name := self.name
+					callOperation.kOwnedTags.addAll(self.kOwnedTags)
+					// infer staticType of the content (except target which has been done previously)
+					// TODO check if necessary, probably already done
+					callOperation.eachOwnedElement{ e | 
+						e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
+						e // scala compiler needs somthing to return
+					}
+					
+					// reassign target and parameters
+					callOperation.parameters.addAll(self.parameters)
+					callOperation.target := self.target 
+					// set staticOperation
+					callOperation.staticOperation := op
+					
+					// The static type of the call operation must be infered.
+					inferStaticTypeOfCallOperation(callOperation, op, context)
+					
+					if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
+					//	this is the CallOperation that must replace this UnresolvedCall
+					result := callOperation
+					
+				else 	
+					result:=void
 				end
 			end
-			
-			//if not found, look for a typevariable from the operation definition or the classdefinition and called by a CallTypeLiteral
-			
-			if result.isVoid then
-			
+		end
+	
+		operation resolveCallToProperty(context : StaticSetterContext) : CallProperty is do
+			if (target.isVoid).orElse{x|target.staticType.isVoid} then 
+					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a property. Probably due to a previous element that hasn't been resolved" )
+					result:=void 
+			else
+				if (context.verbose) then stdio.writeln("      target.staticType "+target.staticType.toString) end
+				var prop : Property init target.staticType.getCallablePropertyByName(self.name)
+				//Here we look if the target is a TypeLiteral in case of a singleton
+				if prop.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
+					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property1 of UnresolvedCall "+name) end
+					// this is a TypeLiteral  
+					// if this is a singleteton, try to look in the typereference
+					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
+					prop := callTypeLiteral.typeref.type.getCallablePropertyByName(self.name)
+				end
+				//Here we must look into Object which is the implicit superclass of everything
+				if (prop.isVoid) then
+					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find property : "+self.name)  end
+					var objectAny : ClassDefinition
+					objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
+					prop := objectAny.getCallablePropertyByName(self.name)
+				end
+				
+				//if we finally found a property
+				if not prop.isVoid then
+					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property2 of UnresolvedCall : "+self.name) end
+					var callProperty :  CallProperty init  CallProperty.new
+					// move content of UnresolvedCall into the new CallOperation
+					callProperty.name := self.name
+					//callProperty.parameters.addAll(self.parameters)
+					callProperty.kOwnedTags.addAll(self.kOwnedTags)
+					// infer staticType of the content (except target which has been done previously)
+					callProperty.eachOwnedElement{ e | 
+						e.asType(KermetaModelElement).inferContainedExpressionStatic(context)						
+						e // scala compiler needs somthing to return
+					}
+					
+					// reassign target
+					callProperty.target := self.target 
+					// set staticProperty
+					callProperty.staticProperty := prop
+					
+					callProperty.setInferedStaticType(context, context.createTypeFromMultiplicityElement(prop))
+					if (context.verbose) then stdio.writeln("  CallProperty "+ name + " resolved") end
+					//	this is the CallProperty that must replace this UnresolvedCall
+					result := callProperty
+				else
+					result:=void
+				end
+			end
+		end
+	
+		operation resolveCallToTypeVariable(context : StaticSetterContext) : CallTypeLiteral is do
+			if target.isVoid then
 				var typeVar :TypeVariable 
 				//first in operation
 				typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==self.name}
@@ -423,12 +406,16 @@ package behavior {
 					callTL.typeref.type := typeVar
 					callTL.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
 					result:=callTL
+				else 
+					result:=void
 				end
-			end			
-			
-			// if not found, look for a TypeDefinition called by a CallTypeLiteral
-			if result.isVoid then
-				if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>TypeDef of UnresolvedCall") end
+			else
+				result:=void
+			end
+		end
+		
+		operation resolveCallToTypeLiteral(context : StaticSetterContext) : CallTypeLiteral is do
+			if target.isVoid then
 				var typeDef : TypeDefinition 
 				typeDef := context.currentModelingUnit.getTypeDefinitionByNameAndUsings(self.name, usings, context.currentModelingUnit.retrievePackage(getQualifiedNameResolving()))
 				
@@ -452,7 +439,77 @@ package behavior {
 					end
 					//	this is the CallTypeLiteral that must replace this UnresolvedCall
 					result := callTypeLiteral
+				else
+				 	result := void
 				end	
+			else
+				result := void
+			end
+		end
+	
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
+			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of UnresolvedCall") end
+			if (context.verbose) then stdio.writeln("resolving UnresolvedCall "+ name) end
+			
+			var isTargetInitiallyVoid : Boolean init true
+			//var targetType : Type 
+			if (target.isVoid) then
+				// look for a variable in the context
+				result:=resolveCallToVariable(context)
+				
+				if result.isVoid then
+					target:= SelfExpression.new
+				end
+			else
+				isTargetInitiallyVoid:=false	
+			end
+			
+			//if we are not looking for a variable, then we need to know what is the type of the target to
+			//know where to look
+			if not target.isVoid then	
+				if (context.verbose) then stdio.writeln("  infering targetType...") end
+				// replace current target by the possibly resolved one
+				target := target.resolveCallAndInferStatic(context)
+				
+				if (context.verbose) then stdio.writeln("             target is infered as "+ target.staticType.toString + " for UnresolvedCall " + name) end
+			end 
+			
+			//resolve parameters
+			super(context)
+			
+			//if result is a variable with parameters, add resolved parameters
+			if not result.isVoid and not self.parameters.isEmpty then
+				result.asType(CallVariable).parameters.addAll(self.parameters)
+			end
+			
+			// if not already found, look for an Enumeration
+			if result.isVoid  then
+				result := resolveCallToEnumLiteral(context)
+			end
+			
+			// if not already found, look for an Operation
+			if result.isVoid then
+				result := resolveCallToOperation(context)
+			end
+			
+			// if not found, look for a Property
+			if result.isVoid then
+				if (context.verbose) then stdio.writeln("      still not found trying to find a property "+name) end
+				result:=resolveCallToProperty(context)
+			end
+			
+			if result.isVoid and isTargetInitiallyVoid then
+				//if we are looking for a typeliteral, then we shouldn't keep the artificially added self as target
+				target:=void
+			
+				//if not found, look for a typevariable from the operation definition or the classdefinition and called by a CallTypeLiteral
+				result:=resolveCallToTypeVariable(context)
+			
+				// if not found, look for a TypeDefinition called by a CallTypeLiteral
+				if result.isVoid then
+					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>TypeDef of UnresolvedCall") end
+					result:=resolveCallToTypeLiteral(context)
+				end
 			end
 			if result.isVoid then
 				context.errors.add(ResolverException.new.initialize("The call " + name + " is undefined.", self))
