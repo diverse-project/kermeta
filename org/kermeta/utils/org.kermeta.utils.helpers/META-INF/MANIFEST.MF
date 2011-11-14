@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: utils.helpers :: helpers
 Bundle-SymbolicName: org.kermeta.utils.helpers;singleton:=true
-Bundle-Version: 2.0.1.BETA2
+Bundle-Version: 2.0.1-BETA2
 Bundle-ClassPath: .
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
