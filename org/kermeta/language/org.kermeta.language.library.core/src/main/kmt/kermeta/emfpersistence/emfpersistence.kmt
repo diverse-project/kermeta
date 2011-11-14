@@ -110,7 +110,7 @@ class ResourceSet {        @CompilerIgnore "true"
 
           end
         @CompilerIgnore "true"
-         operation getResources() : OrderedSet<Object> is do
+         operation getResources() : OrderedSet<Resource> is do
 
           end
         @CompilerIgnore "true"
