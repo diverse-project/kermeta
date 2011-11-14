@@ -185,7 +185,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 							if (resource.getProject() != null) {
 								if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
 									Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "Save action on  " + resource.getFullPath(), this.getClass().getName());
-									
+
 									KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
 									if (kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)) != null) {
 										//kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)).kpFiles.get(kermetaBuilder.generateIdentifier(resource)).modelingUnit = freshModelingUnit;
@@ -194,30 +194,14 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 												kermetaBuilder.buildFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
 											}
 											else if(PreferenceToBuildAction.musGenerateKM(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
-														kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
+												kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
 											}
 										} else {
 											Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+resource+ ", no kp referenced", this.getClass().getCanonicalName());
 										}
 									} else {
-											Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+resource+ ", no kp referenced", this.getClass().getCanonicalName());
-										}
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-
+										Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevWARNING, "not able to compile the file "+resource+ ", no kp referenced", this.getClass().getCanonicalName());
+									}
 								}
 							}
 						} catch (CoreException e) {
