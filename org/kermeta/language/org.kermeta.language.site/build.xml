@@ -18,9 +18,9 @@
 	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_${studio.eclipse.code.name}_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_${studio.eclipse.code.name}_bases_for_kermeta/build/kermeta_${studio.eclipse.code.name}_${studio.os.variant}_base.${studio.archive.extension}"/>
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
-	<property name="deploy.server" value="web1.irisa.fr"/>
+	<property name="deploy.server" value="kermeta.org"/>
 	<property name="deploy.user" value="web-kermeta"/>
-	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/kermeta2_snapshot/update"/>
+	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2_snapshot/update"/>
 	
 
 	<property name="kermeta.maven.repsitory" value="http://maven.irisa.fr/artifactory/repo"/>
