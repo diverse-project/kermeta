@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.utils.feature"
       label="Kermeta utils"
-      version="2.0.1.BETA1"
+      version="2.0.1.BETA2"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
