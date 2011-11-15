@@ -41,3 +41,56 @@ aspect class Remove {
 		end
 	end
 }
+
+aspect class Destroy{
+	method execute() is do
+		// get value
+		var val : Object init resolveValue
+		
+		stdio.writeln("KOMPOSE DEBUG: Destroy "+val.toString)
+		var cls : ENamedElement
+		if val.isInstanceOf(EClassifier) then
+			// check for EDatatype/EEnum
+			cls := context.model.asType(EPackage).eClassifiers.select{c|c.name.equals(val.asType(EClass).name)}.one
+			// raise an exception if the class was not found
+			if cls == void then 
+				var ex : ClassNotFoundException init ClassNotFoundException.new
+				ex.destroyDirective := self
+				raise ex
+			else
+				context.model.asType(EPackage).eClassifiers.remove(cls.asType(EClass))
+				stdio.writeln("Class "+cls.name+" has been tagged to be destroyed !")
+			end
+		else
+			if val.isInstanceOf(ETypedElement) then
+				cls := context.model.asType(EPackage).eClassifiers.select{c|
+					stdio.writeln("KOMPOSE DEBUG: looking for "+val.asType(ENamedElement).name+" in "+c.name)
+					val.container().asType(ENamedElement).name.equals(c.name)
+				}.one
+				//stdio.writeln(val.container().asType(ENamedElement).name)
+				//stdio.writeln(cls.name)
+				if cls != void then
+					cls.asType(EClass).eStructuralFeatures.remove(val.asType(EStructuralFeature))
+				else
+					// EParameter
+				end
+			else
+				// EEnumLiteral?
+			end
+		end
+		stdio.writeln("KOMPOSE DEBUG: Destroy found "+val.toString)		
+	end
+}
+
+aspect class Merge{
+	method execute() is do
+		// get left
+		var left : Object init resolveLeftRef
+		// get value
+		var right : Object init resolveRightRef
+		stdio.writeln("MERGE "+left.toString+" with "+right.toString)
+		var composer : ModelElementComposer init ModelElementComposer.new
+		//var cm : Mergeable init left.asType(Mergeable).merge(right.asType(Mergeable))
+		//stdio.writeln("MERGED "+cm.toString)
+	end
+}
