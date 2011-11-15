@@ -332,11 +332,12 @@ public class KPBuilder {
 			String value;
 			try {
 				//value = FileLocator.toFileURL(new java.net.URL(key)).toString();
-				URL resolvedURL = Platform.resolve(new java.net.URL(key));
+				URL resolvedURL = FileLocator.resolve(new java.net.URL(key));
+				//URL resolvedURL = Platform.resolve(new java.net.URL(key));
 				value = resolvedURL.toString();
 				props.put(key, value);
 			} catch (Exception e) {
-				Activator.getDefault().getMessaggingSystem().warn("cannot find local file for bundle "+bundle.getSymbolicName(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
+				Activator.getDefault().getMessaggingSystem().warn("Failed to find local file for bundle "+bundle.getSymbolicName()+". Will not be added to the urimap used to simulate Eclipse URI in standalone mode. Cause: "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, null);
 			}
 			
 		}
