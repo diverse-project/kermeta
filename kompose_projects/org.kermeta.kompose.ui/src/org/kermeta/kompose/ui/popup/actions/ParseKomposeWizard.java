@@ -15,7 +15,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.kermeta.kompose.ui.console.KomposeConsole;
+//import org.kermeta.kompose.ui.console.KomposeConsole;
 
 
 public class ParseKomposeWizard extends Wizard {
@@ -57,8 +57,8 @@ public class ParseKomposeWizard extends Wizard {
 		
 		IFile xmiFile = null;
 
-		KomposeConsole.printlnMessage( "Parsing file " + inputFile, KomposeConsole.INFO);
-		
+		//KomposeConsole.printlnMessage( "Parsing file " + inputFile, KomposeConsole.INFO);
+		System.out.println("Parsing file " + inputFile);
 		try {
 			KomposeParser kParser = new KomposeParser(inputFile.getContents());
 			Composer c = null;
@@ -67,7 +67,8 @@ public class ParseKomposeWizard extends Wizard {
 			
 			//for(String msg : parser.warnings) ISTeCQConsole.printlnMessage( msg, ISTeCQConsole.WARNING);
 			if(c == null){
-				KomposeConsole.printlnMessage( "ERROR : " + kParser.getException(), KomposeConsole.ERROR);
+				//KomposeConsole.printlnMessage( "ERROR : " + kParser.getException(), KomposeConsole.ERROR);
+				System.out.println("ERROR : " + kParser.getException());
 			}
 			
 			if (kParser.getErrors().isEmpty()) {
@@ -82,14 +83,17 @@ public class ParseKomposeWizard extends Wizard {
 				
 				xmiFile.refreshLocal(1, null);
 				
-				KomposeConsole.printlnMessage( "Done - File " + xmiFile + " successfully created.", KomposeConsole.OK);
+				//KomposeConsole.printlnMessage( "Done - File " + xmiFile + " successfully created.", KomposeConsole.OK);
+				System.out.println("Done - File " + xmiFile + " successfully created.");
 			}
 			else {
-				for(String msg : kParser.getErrors()) KomposeConsole.printlnMessage( msg, KomposeConsole.ERROR);
+				for(String msg : kParser.getErrors()) //KomposeConsole.printlnMessage( msg, KomposeConsole.ERROR);
+				System.out.println(msg);
 			}
 			
 		} catch (Throwable e) {
-			KomposeConsole.printlnMessage( "ERROR : " + e.getMessage(), KomposeConsole.ERROR);
+			System.out.println("ERROR : " + e.getMessage());
+			//KomposeConsole.printlnMessage( "ERROR : " + e.getMessage(), KomposeConsole.ERROR);
 			e.printStackTrace();
 		}
 		return true;
