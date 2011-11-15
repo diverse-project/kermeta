@@ -91,6 +91,21 @@ aspect class VariableDecl {
 	end
 }
 
+aspect class CallResult {
+	operation initializeResult() : CallResult is do
+		self.name := "result"
+		result := self
+	end
+}
+
+aspect class CallSuperOperation {
+	operation initialize(params : Sequence<Expression>) : CallSuperOperation is do
+		self.name := "super"
+		self.parameters.addAll(params)
+		result :=  self
+	end
+}
+
 aspect class CallFeature {
 	
 	//Type.new
@@ -136,7 +151,7 @@ aspect class CallFeature {
 		result := self
 	end
 	
-	operation initializeWithACallFeature(propertyName : String, callF : CallExpression) : CallFeature is do
+	operation initializeWithACallFeature(propertyName : String, callF : Expression) : CallFeature is do
 		self.initialize(propertyName)
 		self.target := callF
 		result := self

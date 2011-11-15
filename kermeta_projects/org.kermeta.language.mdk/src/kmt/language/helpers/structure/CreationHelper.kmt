@@ -89,6 +89,21 @@ aspect class Operation {
 		}
 		result := self
 	end
+	
+	operation initializeForAGetter(name : String, returnType : Type, parent : Operation, params : kermeta::utils::Hashtable<String,Object>) : Operation is do
+		var get_name : String
+		if returnType.isKindOf(kermeta::standard::Boolean) then 
+			get_name := "is"
+		else
+			get_name := "get"
+		end
+		result := self.initialize(get_name+name,returnType,parent,params)	
+	end
+	
+	operation initializeForASetter(name : String, returnType : Type, parent : Operation, params : kermeta::utils::Hashtable<String,Object>) : Operation is do
+		var set_name : String init "set"
+		result := self.initialize(set_name+name,returnType,parent,params)
+	end
 }
 
 aspect class Parameter {
