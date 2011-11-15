@@ -22,7 +22,6 @@ Export-Package: org.kermeta.io.checker,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.ui,
- fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.eclipse.util,
  org.eclipse.gymnast.runtime.core,
  fr.irisa.triskell.traceability.model,
@@ -30,3 +29,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.log4j.util
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.io.loader.plugin.LoaderPlugin
+Import-Package: fr.irisa.triskell.kermeta.ast.helper,
+ fr.irisa.triskell.kermeta.constraintchecker,
+ fr.irisa.triskell.kermeta.exceptions,
+ fr.irisa.triskell.kermeta.language.structure,
+ fr.irisa.triskell.kermeta.loader.kmt.kmt2km,
+ fr.irisa.triskell.kermeta.modelhelper,
+ fr.irisa.triskell.kermeta.parser.gen.ast,
+ fr.irisa.triskell.kermeta.typechecker,
+ org.kermeta.io,
+ org.kermeta.loader,
+ org.kermeta.model
