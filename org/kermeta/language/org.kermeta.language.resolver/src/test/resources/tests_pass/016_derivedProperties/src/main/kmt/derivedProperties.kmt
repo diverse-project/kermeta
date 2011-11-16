@@ -1,0 +1,22 @@
+	using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+
+		attribute x : String
+		
+		
+		property y : String
+			getter is do 
+				result:=x
+			end
+			setter is do 
+				value:=x
+			end
+
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+}
