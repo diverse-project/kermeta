@@ -31,7 +31,7 @@
     </genClasses>
     <genClasses ecoreClass="kompose.ecore#//Engine"/>
     <genClasses ecoreClass="kompose.ecore#//ConflictResolver"/>
-    <genClasses image="false" ecoreClass="kompose.ecore#//Mergeable"/>
     <genClasses image="false" ecoreClass="kompose.ecore#//Signature"/>
+    <genClasses ecoreClass="kompose.ecore#//Match"/>
   </genPackages>
 </genmodel:GenModel>

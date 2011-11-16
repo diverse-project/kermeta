@@ -7,7 +7,7 @@
 package kompose.impl;
 
 import kompose.KomposePackage;
-import kompose.Mergeable;
+import kompose.Match;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -15,20 +15,20 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Mergeable</b></em>'.
+ * An implementation of the model object '<em><b>Match</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public abstract class MergeableImpl extends EObjectImpl implements Mergeable {
+public class MatchImpl extends EObjectImpl implements Match {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MergeableImpl() {
+	protected MatchImpl() {
 		super();
 	}
 
@@ -39,7 +39,7 @@ public abstract class MergeableImpl extends EObjectImpl implements Mergeable {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KomposePackage.Literals.MERGEABLE;
+		return KomposePackage.Literals.MATCH;
 	}
 
-} //MergeableImpl
+} //MatchImpl

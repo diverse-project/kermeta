@@ -38,7 +38,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConflictResolver"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mergeable" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Signature" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Match"/>
 </ecore:EPackage>

@@ -25,14 +25,27 @@ aspect class Composer{
 	
 	operation loadCompositionModel(uri : String) : Context is do
 		var resource : EMFResource
-		resource ?= EMFRepository.getDefault().asType(EMFRepository).getResource(uri)
+		resource ?= EMFRepository.new.getResource(uri)
 		resource.load
 		result := resource.one.asType(Context)
 	end
 	operation loadModel(uri : String) : EMFResource is do
 		var resource : EMFResource
-       	resource ?= EMFRepository.getDefault().asType(EMFRepository).getResource(uri)
+       	resource ?= EMFRepository.new.getResource(uri)
         resource.load
+        stdio.writeln("Printing objects from load...")
+        resource.contents.each{c|
+        	stdio.write("*")
+        	if c.isInstanceOf(ecore::ENamedElement) then
+        		stdio.write(c.asType(ecore::ENamedElement).name)
+        	else
+        		if c.isInstanceOf(ecore::EGenericType) then
+        			stdio.write(c.asType(ecore::EGenericType).eClassifier.name)
+        		end
+        		//stdio.writeln()
+        	end
+        	 stdio.write(c.toString + " is in the resource\n")
+        }
         result := resource
 	end
 	operation saveModel(model : Object, model_uri : String, mm_uri : String) is do
@@ -40,13 +53,31 @@ aspect class Composer{
    		var repository : EMFRepository init EMFRepository.new
    		resource ?= repository.createResource(model_uri, mm_uri)
         resource.add(model)
+        resource.contents.each{c|
+        	stdio.write("\n")
+        	if c.isInstanceOf(ecore::ENamedElement) then
+        		stdio.write(c.asType(ecore::ENamedElement).name)
+        	else
+        		if c.isInstanceOf(ecore::EGenericType) then
+        			stdio.write(c.asType(ecore::EGenericType).eClassifier.name)
+        			if c.asType(ecore::EGenericType).eTypeParameter != void then
+        				stdio.write(" " + c.asType(ecore::EGenericType).eTypeParameter.name)
+        			end
+        			c.asType(ecore::EGenericType).eTypeArguments.each{t|
+        				stdio.write(" " + t.asType(ecore::EGenericType).eClassifier.name)
+        			}
+        		end
+        		//stdio.writeln()
+        	end
+        	 stdio.write(c.toString + " is in the resource")
+        }
       	resource.save
 	end
 	
 	operation compose(ctx : Context) is do
-		var engine : Engine init Engine.getDefault().asType(Engine)
-		var matcher : Matcher init Matcher.getDefault().asType(Matcher)
-		var merger : Merger init Merger.getDefault().asType(Merger)
+		var engine : Engine init Engine.new
+		var matcher : Matcher init Matcher.new
+		var merger : Merger init Merger.new
 		//loading models
 		stdio.writeln("loading models")
 		primaryModel := loadModel(ctx.primaryModelURI)
@@ -56,13 +87,13 @@ aspect class Composer{
 		//executing directives
 		stdio.writeln("executing directives")
 		engine.applyDirectives(primaryModel.one.asType(Mergeable),ctx, ctx.predirectivesPM)
-		//engine.applyDirectives(aspectModel.one.asType(Mergeable),ctx, ctx.predirectivesAM)
-		ctx.indexate(primaryModel.one)
-		var cm2 : Object
-		cm2 := merger.fixReferences(primaryModel.one.asType(Mergeable), ctx)
-		saveModel(cm2,ctx.composedModelURI,ctx.metamodelName)
+		engine.applyDirectives(aspectModel.one.asType(Mergeable),ctx, ctx.predirectivesAM)
+		//ctx.indexate(primaryModel.one)
+		//var cm2 : Object
+		//cm2 := merger.fixReferences(primaryModel.one.asType(Mergeable), ctx)
+		//saveModel(cm2,ctx.composedModelURI,ctx.metamodelName)
 		//looking for match
-		/*stdio.writeln("looking for match")
+		stdio.writeln("looking for match")
 		//var matches : OrderedSet<Match> init OrderedSet<Match>.new
 		var matches : OrderedSet<Match> init matcher.computeMatch(primaryModel,aspectModel)
 		matches.each{m|
@@ -76,29 +107,31 @@ aspect class Composer{
 				stdio.writeln("-- "+m.eltPM.asType(ecore::ENamedElement).name+" matches "+m.eltAM.toString)
 			end
 		}
+		stdio.writeln("Number of matches "+matches.size.toString)
 		//merging models
-		ctx.indexate(primaryModel.instances.one)
-		ctx.indexate(aspectModel.instances.one)
+		ctx.indexate(primaryModel.one)
+		ctx.indexate(aspectModel.one)
 		stdio.writeln("merging models")
 		//stdio.writeln(merger.merge(primaryModel.instances.one,aspectModel.instances.one,matches).toString)
 		var cm : Object
-		stdio.writeln("cm is "+cm.toString)
 		//cm := merger.merge(primaryModel,aspectModel,matches)
-		cm := merger.merge(primaryModel.instances.one.asType(Mergeable),aspectModel.instances.one.asType(Mergeable),matches, ctx)
-		stdio.writeln("###Composed objects")
-		ctx.trace.keys().each{k|
-			stdio.writeln(k.toString+" should match with "+ctx.trace.getValue(k).toString)
-		}
-		stdio.writeln("###End composed objects")
+		cm := merger.merge(primaryModel.one.asType(Mergeable),aspectModel.one.asType(Mergeable),matches, ctx,ConflictResolver.new)
+		stdio.writeln("cm is "+cm.toString)
+		//stdio.writeln("###Composed objects")
+		/*ctx.trace.keys().each{k|
+			//stdio.writeln(k.toString+" should match with "+ctx.trace.getValue(k).toString)
+		}*/
+		//stdio.writeln("###End composed objects")
 		var cm2 : Object
-		cm2 := merger.fixReferences(cm.asType(Mergeable), ctx)
+		cm2 := cm
+		//cm2 := merger.fixReferences(cm.asType(Mergeable), ctx)
 		//executing directives
 		stdio.writeln("executing postdirectives")
 		engine.applyDirectives(cm2.asType(Mergeable),ctx, ctx.postdirectives)
 		//saving model
 		stdio.writeln("saving model")
 		saveModel(cm2,ctx.composedModelURI,ctx.metamodelName)
-		*/
+		
 	end
 }
 
@@ -137,7 +170,7 @@ aspect class Context{
 				//stdio.writeln("element "+ element.toString +" contained in the resource")
 				if not self.objectIndex.containsKey(element.oid) then
 					self.objectIndex.put(element.oid,element)
-					var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+					var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived and not p.isReadOnly}
 					properties.each{ p |
 						if p.upper != 1 then
 							var objects : Collection<Object> objects?=element.~get(p)
@@ -255,15 +288,17 @@ aspect class Engine{
 aspect class Matcher{
 	operation computeMatch(model1 : Resource, model2 : Resource) : OrderedSet<Match> is do
 		var matches : OrderedSet<Match> init OrderedSet<Match>.new
+		stdio.writeln("number of elements in the first model= "+model1.contents.size.toString)
+		stdio.writeln("number of elements in the second model= "+model2.contents.size.toString)
 		model1.contents.each{c|
-			stdio.write("\n"+c.asType(Mergeable).toString+" match with \n")
+			//stdio.write("\n"+c.asType(Mergeable).toString+" match with \n")
 			model2.contents.select{e|e.getMetaClass().classDefinition.equals(c.getMetaClass().classDefinition)}.each{c2|
-				stdio.write("\t"+c2.asType(Mergeable).toString+"?")
-				if c.asType(Mergeable).getSignature() == c2.asType(Mergeable).getSignature() then
+				//stdio.write("\t"+c2.asType(Mergeable).toString+"?")
+				if c.asType(Mergeable).getSignature().eq(c2.asType(Mergeable).getSignature()) then
 					matches.add(Match.new.initialize(c,c2))
-					stdio.write(" yes.\n")
+					//stdio.write(" yes.\n")
 				else
-					stdio.write(" no.\n")
+					//stdio.write(" no.\n")
 				end
 			}
 		}
@@ -272,18 +307,18 @@ aspect class Matcher{
 	
 	operation computeMatchForMergeable(o1 : Mergeable, o2 : Mergeable, hasToBeEqual : Boolean) : OrderedSet<Match> is do
 		var matches : OrderedSet<Match> init OrderedSet<Match>.new
-		if (o1.getSignature == o2.getSignature).orElse{e|hasToBeEqual} then
+		if (o1.getSignature.eq(o2.getSignature)).orElse{e|hasToBeEqual} then
 			//stdio.writeln("####### Adding a match for "+o1.getStringID+" and "+o2.getStringID)
 			matches.add(Match.new.initialize(o1,o2))
 			var props1 : Sequence<Property> init o1.getMetaClass.classDefinition.allAttribute.select{p| not p.isDerived and p.isComposite}
 			var props2 : Sequence<Property> init o2.getMetaClass.classDefinition.allAttribute.select{p| not p.isDerived and p.isComposite}
 			props1.each{p1|
 				props2.select{p|p.type.equals(p1.type)}.each{p2|
-					stdio.writeln(o1.get(p1).toString+ " " +o2.get(p2).toString)
+					//stdio.writeln(o1.get(p1).toString+ " " +o2.get(p2).toString)
 					if (o1.get(p1) != void) and (o2.get(p2) != void) then
 						if p1.upper == 1 and p2.upper == 1 then
 							if Mergeable.isSuperTypeOf(p1.type) and Mergeable.isSuperTypeOf(p2.type) then
-								stdio.writeln("recursive call for "+p1.type.toString+" and "+p2.type.toString)
+								//stdio.writeln("recursive call for "+p1.type.toString+" and "+p2.type.toString)
 								matches.addAll(computeMatchForMergeable(o1.get(p1).asType(Mergeable), o2.get(p2).asType(Mergeable), false))
 							end
 						else
@@ -291,7 +326,7 @@ aspect class Matcher{
 							var c2 : Collection<Object>
 							c1 ?= o1.get(p1)
 							c2 ?= o2.get(p2)
-							stdio.writeln("Collections are not void="+(c1 != void).toString+" "+(c2 != void).toString)
+							//stdio.writeln("Collections are not void="+(c1 != void).toString+" "+(c2 != void).toString)
 							matches.addAll(computeMatchForCollectionOfMergeable(c1, c2))
 						end
 					end
@@ -304,9 +339,9 @@ aspect class Matcher{
 	operation computeMatchForCollectionOfMergeable(o1 : Collection<Object>, o2 : Collection<Object>) : OrderedSet<Match> is do
 		var matches : OrderedSet<Match> init OrderedSet<Match>.new
 		o1.each{p1|
-			stdio.writeln("\t\t"+p1.toString)
+			//stdio.writeln("\t\t"+p1.toString)
 			o2.each{p2|
-				stdio.writeln("\t\t"+p2.toString)
+				//stdio.writeln("\t\t"+p2.toString)
 				matches.addAll(computeMatchForMergeable(p1.asType(Mergeable),p2.asType(Mergeable),false))
 			}
 		}
@@ -328,16 +363,16 @@ aspect class Match{
 	end
 }
 
-aspect abstract class Mergeable{
+abstract class Mergeable{
 	operation getSignature() : kompose::Signature is abstract
 	operation getStringID() : String is abstract
 }
 
 aspect class Merger{
-	operation merge(model1 : Mergeable, model2 : Mergeable, matches : OrderedSet<Match>, ctx : Context) : Mergeable is do
+	operation merge(model1 : Mergeable, model2 : Mergeable, matches : OrderedSet<Match>, ctx : Context, cf : ConflictResolver) : Mergeable is do
 		//stdio.writeln("##MERGING "+model1.getStringID + " with "+model2.getStringID)
 		var type : Class init model1.getMetaClass
-		stdio.writeln("metaclass="+model1.getMetaClass.toString)
+		//stdio.writeln("metaclass="+model1.getMetaClass.toString)
 		result ?= type.new
 		var e : Match init matches.select{m|m.eltPM.equals(model1)}.one
 		if e != void then
@@ -347,10 +382,10 @@ aspect class Merger{
 		end
 		//stdio.writeln("result= "+result.toString+" for "+model1.toString)
 		var props : Collection<Property> init model1.getMetaClass.classDefinition.allAttribute.select{p|
-			not p.isDerived
+			not p.isDerived and not p.isReadOnly
 		}
 		props.each{p|
-			stdio.writeln(p.name+" from "+model1.toString)
+			//stdio.writeln(p.name+" from "+model1.toString)
 			var mergeable : Boolean init Mergeable.isSuperTypeOf(p.type)
 			var selfValue : Object init model1.get(p)
 			var otherValue : Object init model2.get(p)
@@ -365,19 +400,19 @@ aspect class Merger{
 							var me1 : Mergeable		me1 ?= selfValue
 							var me2 : Mergeable		me2 ?= otherValue
 							if me1 == void or me2 == void then
-								stdio.writeln("Elements are not mergeable")
+								//stdio.writeln("Elements are not mergeable")
 							else
-								stdio.writeln("Looking for match for "+p.type.toString)
+								//stdio.writeln("Looking for match for "+p.type.toString)
 								var match_prop : Match init matches.select{m|m.eltPM.equals(me1)}.one
-								stdio.writeln(match_prop.toString)
+								//stdio.writeln(match_prop.toString)
 								if match_prop != void then
 									if p.isComposite() then
-										result.~set(p, merge(me1, me2, matches, ctx))
+										result.~set(p, merge(me1, me2, matches, ctx,cf))
 									else
 										result.~set(p,me1)
 									end
 								else
-									stdio.writeln("Elements signature do not match: m1="+me1.getStringID+"/m2="+me2.getStringID)
+									//stdio.writeln("Elements signature do not match: m1="+me1.getStringID+"/m2="+me2.getStringID)
 									result.~set(p,me1)
 								end
 							end
@@ -385,7 +420,7 @@ aspect class Merger{
 							if selfValue == otherValue then
 								result.~set(p, selfValue)
 							else
-								result.~set(p,ConflictResolver.getDefault().asType(ConflictResolver).resolveConflict(selfValue,otherValue,p))
+								result.~set(p,cf.resolveConflict(selfValue,otherValue,p))
 							end
 						end
 					end
@@ -415,7 +450,7 @@ aspect class Merger{
 					end
 				end*/
 			else
-				stdio.writeln("Merging collection "+p.name)
+				//stdio.writeln("Merging collection "+p.name)
 				//merge collections
 				if selfValue == void then
 					result.~set(p, otherValue)
@@ -423,7 +458,7 @@ aspect class Merger{
 					if otherValue == void then
 						result.~set(p, selfValue)
 					else
-						result := mergeCollections(model1.asType(Mergeable),model2.asType(Mergeable),result,p,matches, ctx)
+						result := mergeCollections(model1.asType(Mergeable),model2.asType(Mergeable),result,p,matches, ctx,cf)
 					end
 				end
 			end
@@ -439,7 +474,7 @@ aspect class Merger{
 	 * param ctx : context provided by a specialization
 	 * returns a merged collection
 	 */
-	operation mergeCollections(m1 : Mergeable, m2 : Mergeable, out : Mergeable, p : Property, matches : OrderedSet<Match>, ctx : Context) : Mergeable is do
+	operation mergeCollections(m1 : Mergeable, m2 : Mergeable, out : Mergeable, p : Property, matches : OrderedSet<Match>, ctx : Context, cf : ConflictResolver) : Mergeable is do
 		result := out
 		var ocol1 : Collection<Object> 	ocol1 ?= m1.get(p) 
 		var col1 : Collection<Mergeable> init Sequence<Mergeable>.new
@@ -460,8 +495,8 @@ aspect class Merger{
 				var match : Match init matches.select{m|m.eltPM.equals(me)}.one
 				if match != void then
 					if p.isComposite then
-						stdio.writeln("Should call merge on "+me.toString + " | " + match.eltAM.asType(Mergeable).toString)
-						col.add(merge(me,match.eltAM.asType(Mergeable),matches,ctx))
+						//stdio.writeln("Should call merge on "+me.toString + " | " + match.eltAM.asType(Mergeable).toString)
+						col.add(merge(me,match.eltAM.asType(Mergeable),matches,ctx,cf))
 					else
 						col.add(me)
 					end
@@ -487,49 +522,83 @@ aspect class Merger{
 	 * returns a restored mergeable object
 	 */
 	operation fixReferences(e : Mergeable, ctx : Context) : Mergeable is do
-		stdio.writeln("Processing "+e.toString)
-		if ctx.isProcessed(e) then
-			stdio.writeln(e.toString+" has already been processed")
-			result := e
+		var e1 : Mergeable init e
+		if e.isInstanceOf(ecore::ENamedElement) then
+			stdio.writeln("Processing "+e.toString+" "+e.asType(ecore::ENamedElement).name)
 		else
-			if ctx.trace.values.select{v|v.equals(e)}.one != void then
-				stdio.writeln(e.toString+" is a composed object")
-				result := e
+			stdio.writeln("Processing "+e.toString)
+		end
+		if ctx.isProcessed(e1) then
+			if e.isInstanceOf(ecore::ENamedElement) then
+				stdio.writeln(e1.toString+" "+e1.asType(ecore::ENamedElement).name+" has already been processed")
 			else
-				result := ctx.trace.getValue(e)
-				if result != void then
-					stdio.writeln(e.toString+" has been merged into "+result.toString)
-					e := result
+				stdio.writeln(e1.toString+" has already been processed")
+			end
+			result := e1
+		else
+			if ctx.trace.values.select{v|v.equals(e1)}.one != void then
+				if e.isInstanceOf(ecore::ENamedElement) then
+					stdio.writeln(e1.toString+" "+e1.asType(ecore::ENamedElement).name+" is a composed object")
 				else
-					stdio.writeln(e.toString+" has not been merged")
-					result ?= e.getMetaClass().new
-					ctx.addTrace(e, result)
+					stdio.writeln(e1.toString+" is a composed object")
+				end
+				result := e1
+			else
+				result := ctx.trace.getValue(e1)
+				if result != void then
+					if e.isInstanceOf(ecore::ENamedElement) then
+						stdio.writeln(e1.toString+" has been merged into "+result.toString)
+					else
+						stdio.writeln(e1.toString+" "+e1.asType(ecore::ENamedElement).name+" has been merged into "+result.toString)
+					end
+					e1 := result
+				else
+					if e.isInstanceOf(ecore::ENamedElement) then
+						stdio.writeln(e.toString+" "+e1.asType(ecore::ENamedElement).name+" has not been merged")
+					else
+						stdio.writeln(e.toString+" has not been merged")
+					end
+					//result ?= e1.getMetaClass().new
+					result := e1
+					ctx.addTrace(e1, result)
 				end
 			end
 			if not ctx.isProcessed(result) then
-				stdio.writeln(e.toString+" has not been processed yet")
+				if e.isInstanceOf(ecore::ENamedElement) then
+					stdio.writeln(e.toString+" "+e.asType(ecore::ENamedElement).name+" has not been processed yet")
+				else
+					stdio.writeln(e.toString+" has not been processed yet")
+				end
 				ctx.addProcessedElement(result)
-				var props : Collection<Property> init e.getMetaClass.typeDefinition.asType(ClassDefinition).allAttribute.select{p|
-					not p.isDerived
+				var props : Collection<Property> init e1.getMetaClass.typeDefinition.asType(ClassDefinition).allAttribute.select{p|
+					not p.isDerived and not p.isReadOnly
 				}
 				props.each{p|
 					var me : Mergeable
 					if p.upper == 1 then						
-						me ?= e.get(p)
+						me ?= e1.get(p)
 						if me != void then
-							result.~set(p,fixReferences(me,ctx))
+							if ctx.isProcessed(me).orElse{e|ctx.trace.values.select{v|v.equals(e1)}.one != void}.orElse{e|ctx.objectIndex.containsKey(me.oid())} then
+								result.~set(p,fixReferences(me,ctx))
+							else
+								result.~set(p,me)
+							end
 						else
-							result.~set(p,e.get(p))
+							result.~set(p,e1.get(p))
 						end
 					else
 						var objs : Collection<Object>
 						var objres : Hashtable<Object, Object>
-						objs ?= e.get(p)
+						objs ?= e1.get(p)
 						objres := Hashtable<Object, Object>.new
 						objs.each{ o |
 							me ?= o
 							if me != void then
-								objres.put(me, fixReferences(me, ctx))
+								/*if ctx.isProcessed(me) then
+									objres.put(me,me)
+								else
+								*/	objres.put(me, fixReferences(me, ctx))
+								//end
 							end
 						}
 						objs ?= result.get(p)
@@ -546,17 +615,18 @@ aspect class Merger{
 }
 
 aspect abstract class Signature{
+	operation eq(o : Object) : Boolean is abstract
 }
 
 class StringSignature inherits Signature
 {
 	attribute sign : kermeta::standard::String
 	
-	method equals(other : Object ) : kermeta::standard::Boolean is do
+	method eq(other : Object ) : kermeta::standard::Boolean is do
 		var othersign : StringSignature
 		othersign ?= other
 		if othersign != void then
-			result := sign == othersign.sign
+			result := sign.equals(othersign.sign)
 		else
 			result := false
 		end

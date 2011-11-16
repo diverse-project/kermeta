@@ -15,6 +15,7 @@ import kompose.Directives;
 import kompose.Engine;
 import kompose.KomposeFactory;
 import kompose.KomposePackage;
+import kompose.Match;
 import kompose.Matcher;
 import kompose.Mergeable;
 import kompose.Merger;
@@ -84,14 +85,14 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mergeableEClass = null;
+	private EClass signatureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass signatureEClass = null;
+	private EClass matchEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -338,8 +339,8 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMergeable() {
-		return mergeableEClass;
+	public EClass getSignature() {
+		return signatureEClass;
 	}
 
 	/**
@@ -347,8 +348,8 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSignature() {
-		return signatureEClass;
+	public EClass getMatch() {
+		return matchEClass;
 	}
 
 	/**
@@ -421,9 +422,9 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 
 		conflictResolverEClass = createEClass(CONFLICT_RESOLVER);
 
-		mergeableEClass = createEClass(MERGEABLE);
-
 		signatureEClass = createEClass(SIGNATURE);
+
+		matchEClass = createEClass(MATCH);
 
 		// Create enums
 		modesEEnum = createEEnum(MODES);
@@ -489,9 +490,9 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 
 		initEClass(conflictResolverEClass, ConflictResolver.class, "ConflictResolver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(mergeableEClass, Mergeable.class, "Mergeable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(signatureEClass, Signature.class, "Signature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(matchEClass, Match.class, "Match", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(modesEEnum, Modes.class, "Modes");

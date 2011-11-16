@@ -197,7 +197,8 @@ aspect class Concat{
 		stdio.writeln("Concat.execute(property)= "+prop.name.toString)
 		var concat_value : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
 		val.each{v|
-			if v.isInstanceOf(prop.type) then
+			var type : Type init prop.type
+			if v.isInstanceOf(type) then
 				concat_value.append(v.toString)
 			else
 				var prop2 : Property
@@ -271,7 +272,8 @@ aspect class Set{
 		//if val.isInstanceOf(prop.type.asType(Class)) then
 		// set the value
 		stdio.writeln("#####val.isInstanceOf="+val.toString)
-		if val.isInstanceOf(prop.type) then
+		var type : Type init prop.type 
+		if val.isInstanceOf(type) then
 			stdio.writeln("#####val is a primitiveType")
 			targetObj.~set(prop, val)
 		else
@@ -391,7 +393,7 @@ aspect class NameRef{
 				ne ?= it.next()
 				if ne != void then
 					//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
-					if n == ne.getStringID then 
+					if n.equals(ne.getStringID) then 
 						cur := ne
 						found := true					
 					end
@@ -412,7 +414,7 @@ aspect class NameRef{
 					ne ?= it.next()
 					if ne != void then
 						//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
-						if n == ne.getStringID then 
+						if n.equals(ne.getStringID) then 
 							cur := ne
 							found := true					
 						end

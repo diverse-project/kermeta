@@ -67,6 +67,7 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 			case KomposePackage.COMPOSER: return createComposer();
 			case KomposePackage.ENGINE: return createEngine();
 			case KomposePackage.CONFLICT_RESOLVER: return createConflictResolver();
+			case KomposePackage.MATCH: return createMatch();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -164,6 +165,16 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	public ConflictResolver createConflictResolver() {
 		ConflictResolverImpl conflictResolver = new ConflictResolverImpl();
 		return conflictResolver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Match createMatch() {
+		MatchImpl match = new MatchImpl();
+		return match;
 	}
 
 	/**

@@ -80,6 +80,15 @@ public interface KomposeFactory extends EFactory {
 	ConflictResolver createConflictResolver();
 
 	/**
+	 * Returns a new object of class '<em>Match</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Match</em>'.
+	 * @generated
+	 */
+	Match createMatch();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

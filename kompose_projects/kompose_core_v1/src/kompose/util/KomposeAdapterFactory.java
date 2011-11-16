@@ -96,12 +96,12 @@ public class KomposeAdapterFactory extends AdapterFactoryImpl {
 				return createConflictResolverAdapter();
 			}
 			@Override
-			public Adapter caseMergeable(Mergeable object) {
-				return createMergeableAdapter();
-			}
-			@Override
 			public Adapter caseSignature(Signature object) {
 				return createSignatureAdapter();
+			}
+			@Override
+			public Adapter caseMatch(Match object) {
+				return createMatchAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -208,20 +208,6 @@ public class KomposeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kompose.Mergeable <em>Mergeable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kompose.Mergeable
-	 * @generated
-	 */
-	public Adapter createMergeableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kompose.Signature <em>Signature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -232,6 +218,20 @@ public class KomposeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSignatureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kompose.Match <em>Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kompose.Match
+	 * @generated
+	 */
+	public Adapter createMatchAdapter() {
 		return null;
 	}
 

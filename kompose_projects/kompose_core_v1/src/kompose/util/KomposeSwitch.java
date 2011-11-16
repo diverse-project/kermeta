@@ -123,15 +123,15 @@ public class KomposeSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KomposePackage.MERGEABLE: {
-				Mergeable mergeable = (Mergeable)theEObject;
-				T result = caseMergeable(mergeable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KomposePackage.SIGNATURE: {
 				Signature signature = (Signature)theEObject;
 				T result = caseSignature(signature);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KomposePackage.MATCH: {
+				Match match = (Match)theEObject;
+				T result = caseMatch(match);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -230,21 +230,6 @@ public class KomposeSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mergeable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mergeable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMergeable(Mergeable object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Signature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -256,6 +241,21 @@ public class KomposeSwitch<T> {
 	 * @generated
 	 */
 	public T caseSignature(Signature object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Match</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Match</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMatch(Match object) {
 		return null;
 	}
 

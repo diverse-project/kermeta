@@ -142,22 +142,6 @@
     <element xmi:type="ecore:EClass" href="kompose.ecore#//ConflictResolver"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_maDY8oKJEd-NS5vz_CJqzQ" x="410" y="150"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_pstcgIKJEd-NS5vz_CJqzQ" type="1001">
-    <children xmi:type="notation:Node" xmi:id="_psuDkIKJEd-NS5vz_CJqzQ" type="4001"/>
-    <children xmi:type="notation:Node" xmi:id="_psuDkYKJEd-NS5vz_CJqzQ" type="5001">
-      <styles xmi:type="notation:DrawerStyle" xmi:id="_psuDkoKJEd-NS5vz_CJqzQ"/>
-      <styles xmi:type="notation:SortingStyle" xmi:id="_psuDk4KJEd-NS5vz_CJqzQ"/>
-      <styles xmi:type="notation:FilteringStyle" xmi:id="_psuDlIKJEd-NS5vz_CJqzQ"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_psuDlYKJEd-NS5vz_CJqzQ" type="5002">
-      <styles xmi:type="notation:DrawerStyle" xmi:id="_psuDloKJEd-NS5vz_CJqzQ"/>
-      <styles xmi:type="notation:SortingStyle" xmi:id="_psuDl4KJEd-NS5vz_CJqzQ"/>
-      <styles xmi:type="notation:FilteringStyle" xmi:id="_psuDmIKJEd-NS5vz_CJqzQ"/>
-    </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_pstcgYKJEd-NS5vz_CJqzQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="kompose.ecore#//Mergeable"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pstcgoKJEd-NS5vz_CJqzQ" x="-126" y="114"/>
-  </children>
   <children xmi:type="notation:Node" xmi:id="_eLW_wIK2Ed-NS5vz_CJqzQ" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_eLY09IK2Ed-NS5vz_CJqzQ" source="Shortcut">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_eLY09YK2Ed-NS5vz_CJqzQ" key="modelID" value="EcoreTools"/>

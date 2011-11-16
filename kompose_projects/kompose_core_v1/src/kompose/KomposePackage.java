@@ -284,25 +284,6 @@ public interface KomposePackage extends EPackage {
 	int CONFLICT_RESOLVER_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link kompose.impl.MergeableImpl <em>Mergeable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kompose.impl.MergeableImpl
-	 * @see kompose.impl.KomposePackageImpl#getMergeable()
-	 * @generated
-	 */
-	int MERGEABLE = 6;
-
-	/**
-	 * The number of structural features of the '<em>Mergeable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MERGEABLE_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link kompose.impl.SignatureImpl <em>Signature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -310,7 +291,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getSignature()
 	 * @generated
 	 */
-	int SIGNATURE = 7;
+	int SIGNATURE = 6;
 
 	/**
 	 * The number of structural features of the '<em>Signature</em>' class.
@@ -320,6 +301,25 @@ public interface KomposePackage extends EPackage {
 	 * @ordered
 	 */
 	int SIGNATURE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kompose.impl.MatchImpl <em>Match</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kompose.impl.MatchImpl
+	 * @see kompose.impl.KomposePackageImpl#getMatch()
+	 * @generated
+	 */
+	int MATCH = 7;
+
+	/**
+	 * The number of structural features of the '<em>Match</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCH_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kompose.Modes <em>Modes</em>}' enum.
@@ -535,16 +535,6 @@ public interface KomposePackage extends EPackage {
 	EClass getConflictResolver();
 
 	/**
-	 * Returns the meta object for class '{@link kompose.Mergeable <em>Mergeable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Mergeable</em>'.
-	 * @see kompose.Mergeable
-	 * @generated
-	 */
-	EClass getMergeable();
-
-	/**
 	 * Returns the meta object for class '{@link kompose.Signature <em>Signature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -553,6 +543,16 @@ public interface KomposePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSignature();
+
+	/**
+	 * Returns the meta object for class '{@link kompose.Match <em>Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Match</em>'.
+	 * @see kompose.Match
+	 * @generated
+	 */
+	EClass getMatch();
 
 	/**
 	 * Returns the meta object for enum '{@link kompose.Modes <em>Modes</em>}'.
@@ -754,16 +754,6 @@ public interface KomposePackage extends EPackage {
 		EClass CONFLICT_RESOLVER = eINSTANCE.getConflictResolver();
 
 		/**
-		 * The meta object literal for the '{@link kompose.impl.MergeableImpl <em>Mergeable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kompose.impl.MergeableImpl
-		 * @see kompose.impl.KomposePackageImpl#getMergeable()
-		 * @generated
-		 */
-		EClass MERGEABLE = eINSTANCE.getMergeable();
-
-		/**
 		 * The meta object literal for the '{@link kompose.impl.SignatureImpl <em>Signature</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -772,6 +762,16 @@ public interface KomposePackage extends EPackage {
 		 * @generated
 		 */
 		EClass SIGNATURE = eINSTANCE.getSignature();
+
+		/**
+		 * The meta object literal for the '{@link kompose.impl.MatchImpl <em>Match</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kompose.impl.MatchImpl
+		 * @see kompose.impl.KomposePackageImpl#getMatch()
+		 * @generated
+		 */
+		EClass MATCH = eINSTANCE.getMatch();
 
 		/**
 		 * The meta object literal for the '{@link kompose.Modes <em>Modes</em>}' enum.
