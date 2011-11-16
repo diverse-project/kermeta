@@ -33,7 +33,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 
   def enumDecl : Parser[Enumeration]
 
-  def program = opt((annotation)+) ~ opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ kermetaUnitContent ^^ { case rootTag ~ packPrefix ~ header ~ unitContent =>
+  def program = opt((annotation)+) ~ opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ { case rootTag ~ packPrefix ~ header ~ unitContent =>
       var newp =StructureFactory.eINSTANCE.createModelingUnit
       var usings : List[Using] = List()
 
@@ -73,6 +73,8 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       unitContent.foreach{elem => elem match {
           case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
                 //case t : Tag => newp.getKTag.add(t);newp.getKOwnedTags.add(t)
+            case l : List[_] => l.asInstanceOf[List[_]].foreach{lelem => lelem match {
+
                 case p : Package => {
                   lastPackageRoot match {
                     case Some(previous)=> previous.getNestedPackage.add(p)
@@ -92,6 +94,27 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
                   }
                 }
                 case _ @ elem => println("TODO unknow elem in main content:" + elem)
+            }}
+                /*
+                case p : Package => {
+                  lastPackageRoot match {
+                    case Some(previous)=> previous.getNestedPackage.add(p)
+                    case None => newp.getPackages.add(p)
+                  }
+                }
+                case cd : ClassDefinition => {
+                   lastPackageRoot match {
+                    case Some(previous)=> previous.getOwnedTypeDefinition.add(cd)
+                    case None => newp.getOwnedTypeDefinition.add(cd)
+                  }
+                }
+                case enum : Enumeration => {
+                  lastPackageRoot match {
+                    case Some(previous)=> previous.getOwnedTypeDefinition.add(enum)
+                    case None => newp.getOwnedTypeDefinition.add(enum)
+                  }
+                }
+                case _ @ elem => println("TODO unknow elem in main content:" + elem)*/
               }}
 
           case _ @ d => println("TODO modeling unit main content: "+d)
