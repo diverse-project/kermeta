@@ -42,6 +42,12 @@ trait KTokens extends Tokens with Parsers {
 	override def toString = chars
     //override def getLength : java.lang.Integer = chars.length
   }
+
+  case class MLDocumentation(docs : String) extends MLComment(docs){
+      //override def toString = docs
+  }
+
+
   /** The class of comment tokens */
   case class ERR_MLComment(chars: String) extends KToken {
     override def toString = "/* "+chars+" */"
