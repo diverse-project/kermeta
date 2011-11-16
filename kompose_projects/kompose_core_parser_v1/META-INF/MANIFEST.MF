@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Parser v1
+Bundle-SymbolicName: kompose_core_parser_v1
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: kompose_core_parser_v1.Activator
+Bundle-Vendor: IRISA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ kompose_core_v1;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: directives,
+ directives.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.xmi.impl
+Export-Package: kompose_core_parser_v1
+Bundle-ClassPath: lib/antlr-3.2.jar,
+ .
