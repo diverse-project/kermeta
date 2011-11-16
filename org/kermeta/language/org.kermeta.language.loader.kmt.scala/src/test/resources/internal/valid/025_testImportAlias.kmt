@@ -3,8 +3,8 @@ package testPrimitiveType;
 require kermeta
 require "014_testClass.kmt"
 
-using testClass::package1::{Coucou  =>  PClass1}
-using testClass::package1::{Class12  =>  AType}
+using testClass::package1::Coucou  =>  PClass1
+using testClass::package1::Class12  =>  AType
 
 class Coucou {
 

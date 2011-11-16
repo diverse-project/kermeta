@@ -11,7 +11,7 @@ using kermeta::standard::Integer
 //from this
 //alias Test_opcall_renamed : testOpPackage::Test_opcall;
 //to this
-using testOpPackage::{Test_opcall =>  Test_opcall_renamed}
+using testOpPackage::Test_opcall =>  Test_opcall_renamed
 
 // operation called in another package
 class Test_intercall {

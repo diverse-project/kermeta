@@ -1,0 +1,17 @@
+package testOpCall;
+
+
+class TestFrom {
+     operation myOperation() : kermeta::standard::Integer is do
+        result := 1
+    end
+}
+class Test_opcall {
+
+    operation myOperation() : kermeta::standard::Integer from TestFrom is  do    // is illegal because the keyword "operation" means that there is no super possible
+        result := 2
+    end
+
+
+
+}

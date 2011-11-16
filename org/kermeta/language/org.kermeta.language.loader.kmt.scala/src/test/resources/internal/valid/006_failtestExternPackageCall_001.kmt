@@ -5,7 +5,7 @@ require "006_testExternPackageCall_003.kmt"
 //from this
 //alias Integer : kermeta::standard::Integer;
 //to this
-using kermeta::standard::{Integer => Integer}
+using kermeta::standard::Integer => Integer
 
 //alias Test_opcall2 : testExternPackage2::Test_opcall;
 // operation called in another package
