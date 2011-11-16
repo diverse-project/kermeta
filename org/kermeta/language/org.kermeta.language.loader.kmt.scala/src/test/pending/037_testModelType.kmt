@@ -1,0 +1,37 @@
+package testPackage;
+
+require kermeta
+
+
+modeltype mtype1 { c2 }
+
+class c2 { }
+
+class mt3c1 { }
+
+modeltype mtype3 { mt3c1 }
+
+  alias PClass1 : testPackage::c2;
+  class mt4c1 {
+    attribute mt4c1p1 : PClass1
+  }
+modeltype mtype4 { PClass1, mt4c1 }
+
+
+  class mt5c1 { }
+  class mt5c2 { }
+modeltype mtype5 { mt5c1, mt5c2 }
+
+
+
+class User {
+  // model-typed property
+  property myModelprop : mtype3
+  // model-typed parameter
+  operation transform(myModel : mtype3) :Void is
+  do
+    // model-typed variable
+  	var x : mtype3
+  	// parameterised model type
+  end
+}
