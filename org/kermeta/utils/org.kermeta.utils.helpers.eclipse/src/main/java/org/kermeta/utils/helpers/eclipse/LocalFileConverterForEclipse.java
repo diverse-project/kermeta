@@ -8,8 +8,13 @@
 */
 package org.kermeta.utils.helpers.eclipse;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
 import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.helpers.emf.EMFUriHelper;
 
@@ -31,7 +36,21 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 			IResource res =ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
 			return java.net.URI.create(res.getRawLocationURI().toString());
 		}
-		// TODO deal with platformPlugin
+		// deal with platformPlugin
+		if(emfUri.isPlatformPlugin()){
+			URL resolvedURL;
+			try {
+				resolvedURL = FileLocator.resolve(javaUri.toURL());
+				//URL resolvedURL = Platform.resolve(new java.net.URL(key));
+				return java.net.URI.create(resolvedURL.toString());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
