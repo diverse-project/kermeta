@@ -106,6 +106,14 @@ package structure {
 			context.currentClassDefinition := void
 		end
 	}
+	
+	aspect class Property {
+		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
+			context.currentProperty := self
+			super(context)
+			context.currentProperty := void
+		end
+	}
 	aspect class Operation {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement  is do
 			context.currentOperation := self
@@ -205,6 +213,7 @@ package behavior {
 	aspect class CallSuperOperation{
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression from CallExpression is do
 			
+			if not context.currentOperation.isVoid then
 				//set parameters
 				super(context)
 				//get super operation from the currentOperation
@@ -222,7 +231,9 @@ package behavior {
 				
 				
 				result := self
-			
+			else
+				context.errors.add(ResolverException.new.initialize("\"super\" keyword should not be used outside of an operation", self))
+			end
 		
 		end
 	}
@@ -329,6 +340,11 @@ package behavior {
 					// The static type of the call operation must be infered.
 					inferStaticTypeOfCallOperation(callOperation, op, context)
 					
+					//if the number of parameters is not correct then an error should be triggered
+					if callOperation.parameters.size()!=callOperation.staticOperation.ownedParameter.size() then
+						context.errors.add(ResolverException.new.initialize("Incorrect number of parameters: expected " + callOperation.staticOperation.ownedParameter.size().toString() + " found "+ 
+						 callOperation.parameters.size().toString , self))
+					end
 					if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
 					//	this is the CallOperation that must replace this UnresolvedCall
 					result := callOperation
@@ -394,8 +410,10 @@ package behavior {
 		operation resolveCallToTypeVariable(context : StaticSetterContext) : CallTypeLiteral is do
 			if target.isVoid then
 				var typeVar :TypeVariable 
-				//first in operation
-				typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==self.name}
+				//first in operation if we are in an operation 
+				if not context.currentOperation.isVoid then
+					typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==self.name}
+				end
 				//then in classdef
 				if typeVar.isVoid then
 					typeVar:=context.currentClassDefinition.typeParameter.detect{ t|t.name==self.name}
@@ -914,15 +932,37 @@ package behavior {
 	
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallResult") end  
+			var multiplicityElementContainer : MultiplicityElement
 			
-			var operationContainer : Operation init context.currentOperation
-			
-			if (operationContainer.isVoid) then
-				context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
+			if not context.currentOperation.isVoid then
+				multiplicityElementContainer:=context.currentOperation
 			else
-				self.setInferedStaticType(context, context.createTypeFromMultiplicityElement(operationContainer) )
+				if not context.currentProperty.isVoid then
+					multiplicityElementContainer:=context.currentProperty
+				else
+					context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
+				end
 			end
 			
+			if not multiplicityElementContainer.isVoid then
+				self.setInferedStaticType(context, context.createTypeFromMultiplicityElement(multiplicityElementContainer) )
+			end
+			
+			
+			result := self
+		end
+	}
+	
+	aspect class CallValue {
+		
+	
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
+			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallValue") end  
+			if not context.currentProperty.isVoid then
+				self.setInferedStaticType(context, context.createTypeFromMultiplicityElement(context.currentProperty) )
+			else
+				context.errors.add(ResolverException.new.initialize("\"value\" cannot be called outside of the setter body of a derived property.", self))
+			end
 			result := self
 		end
 	}

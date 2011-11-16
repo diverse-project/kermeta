@@ -67,6 +67,7 @@ class StaticSetterContext
 	reference currentModelingUnit : org::kermeta::language::structure::ModelingUnit
 	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
 	reference currentOperation : org::kermeta::language::structure::Operation
+	reference currentProperty : org::kermeta::language::structure::Property
 	
 	/**
 	 * contextFrames is used to organize symbols using scopes. 
