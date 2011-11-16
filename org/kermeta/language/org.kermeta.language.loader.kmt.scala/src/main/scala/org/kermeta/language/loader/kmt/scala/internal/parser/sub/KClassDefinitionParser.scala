@@ -69,9 +69,15 @@ trait KClassDefinitionParser extends KAbstractParser
         case Some(paramsI) => {
             paramsI.foreach{params =>
               var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
-              ovar.setName(params)
+              ovar.setName(params._1)
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
+              if (params._2 != null) {
+                var newu = StructureFactory.eINSTANCE.createUnresolvedType()
+                newu.setTypeIdentifier(params._2)
+                ovar.setSupertype(newu)
+                ovar.getContainedType.add(newu)
+              }
             }
           }
       }
@@ -108,9 +114,19 @@ trait KClassDefinitionParser extends KAbstractParser
       newo
   }
 
-  private def classGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  //private def classGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  private def classGenericParems = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
 
+  private def genericDef : Parser[Tuple2[String, String] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
+    var resTuple : Tuple2[String, String] = (null,  null)
+    genType match {
+      case Some(typ) => resTuple = (id, typ)
+      case None => resTuple = (id, null)
+    }
+    resTuple
+  }
 
+  private def genericType = ":" ~ ident ^^ { case k1 ~ ident => ident}
 
   private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ { case _ ~ parents => parents
   }
