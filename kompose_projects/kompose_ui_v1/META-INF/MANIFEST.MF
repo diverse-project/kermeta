@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose UI V1
+Bundle-SymbolicName: kompose_ui_v1;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: kompose_ui_v1.Activator
+Bundle-Vendor: IRISA
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.filesystem,
+ org.eclipse.core.resources;bundle-version="3.5.2",
+ org.eclipse.emf.common;bundle-version="2.5.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.2",
+ org.eclipse.swt;bundle-version="3.5.2",
+ org.eclipse.jface;bundle-version="3.5.2",
+ org.eclipse.ui;bundle-version="3.5.2",
+ org.eclipse.ui.console;bundle-version="3.4.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: kompose,
+ kompose_core_parser_v1,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="kompose_ui_v1.objectContribution1"
+            nameFilter="*.kompt"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="kompose_ui_v1.menu1"
+               label="KomposeV1"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="kompose_ui_v1.popup.actions.ParseKompose"
+               enablesFor="1"
+               id="kompose_ui_v1.parse"
+               label="Parse Kompose File"
+               menubarPath="kompose_ui_v1.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
