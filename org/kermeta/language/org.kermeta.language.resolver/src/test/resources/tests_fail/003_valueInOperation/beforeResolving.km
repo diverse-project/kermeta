@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="preandpost" namespacePrefix="">
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="valueInOperation" namespacePrefix="">
   <packages name="mainpackage">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;26;214"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/003_valueInOperation/src/main/kmt/valueInOperation.kmt;26;181"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainpackage/MainClass/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;48;212"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/003_valueInOperation/src/main/kmt/valueInOperation.kmt;48;179"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
-      <inv name="anInvariant">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;69;115"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;88;115"/>
-          <statement xsi:type="org_kermeta_language_behavior:Assignment">
-            <target xsi:type="org_kermeta_language_behavior:CallValue">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;94;99"/>
-            </target>
-            <value xsi:type="org_kermeta_language_behavior:StringLiteral" value="">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;101;106"/>
-            </value>
-          </statement>
-        </body>
-      </inv>
       <ownedOperation name="mainOperation" type="//mainpackage/MainClass/mainOperation/@containedType.0" isOrdered="true" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;115;210"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/003_valueInOperation/src/main/kmt/valueInOperation.kmt;69;177"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/004_valueInInvariant/src/main/kmt/valueInInvariant.kmt;151;210"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/003_valueInOperation/src/main/kmt/valueInOperation.kmt;105;177"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallValue">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/003_valueInOperation/src/main/kmt/valueInOperation.kmt;160;165"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:StringLiteral" value="">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/irisa/workspaces/runtimeWorkbench/003_valueInOperation/src/main/kmt/valueInOperation.kmt;167;172"/>
+            </value>
+          </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
