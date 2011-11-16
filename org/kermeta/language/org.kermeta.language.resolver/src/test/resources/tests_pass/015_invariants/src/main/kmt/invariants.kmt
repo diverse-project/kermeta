@@ -1,0 +1,23 @@
+	using kermeta::standard
+
+package mainpackage{
+
+
+
+	class MainClass<X>
+	{
+		inv myInvariant is do
+			
+			x!=y
+		end
+		
+		
+		reference x: String
+		
+		
+		reference y : X
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+}
