@@ -55,11 +55,11 @@ class OperationSignature inherits kompose::Signature
 {
 	reference op : EOperation 
 	
-	method equals(other : Object) : kermeta::standard::Boolean is do
+	method eq(other : Object) : kermeta::standard::Boolean is do
 		var othersign : OperationSignature
 		othersign ?= other
 		if othersign != void then
-			result := self.op.name == othersign.op.name 
+			result := self.op.name.equals(othersign.op.name) 
 			//self.op.eParameters.each{ p1 | 
 			//	if result then
 			//		result := othersign.op.eParameters.select{ p2 | p1.getSignature.equals((p2.getSignature)) }.size == 1
@@ -76,12 +76,12 @@ class ParameterSignature inherits kompose::Signature
 {
 	reference param : EParameter 
 	
-	method equals(other : Object ) : kermeta::standard::Boolean is do
+	method eq(other : Object ) : kermeta::standard::Boolean is do
 		var othersign : ParameterSignature
 		othersign ?= other
 		if othersign != void then
-			result := self.param.name == othersign.param.name and
-				self.param.eType.getSignature.equals(othersign.param.eType.getSignature)
+			result := self.param.name.equals(othersign.param.name) and
+				self.param.eType.getSignature.eq(othersign.param.eType.getSignature)
 		else
 			result := false
 		end
@@ -131,7 +131,7 @@ aspect class ENamedElement{
 		result := name
 	end
 	/*method toString() : String is do
-		result := name + self.getStringID
+		result := name + super.toString
 	end*/
 }
 

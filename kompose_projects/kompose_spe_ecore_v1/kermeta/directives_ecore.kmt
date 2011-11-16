@@ -83,7 +83,7 @@ aspect class Merge{
 			matches.addAll(kompose::Matcher.getDefault().asType(kompose::Matcher).computeMatchForMergeable(targetObj,val.asType(kompose::Mergeable),true))
 			stdio.writeln("\tSize after="+matches.size.toString)
 		var merger : kompose::Merger init kompose::Merger.getDefault().asType(kompose::Merger)
-		var cm : kompose::Mergeable init merger.merge(targetObj,val.asType(kompose::Mergeable),matches,ctx)
+		var cm : kompose::Mergeable init merger.merge(targetObj,val.asType(kompose::Mergeable),matches,ctx,kompose::ConflictResolver.new)
 		//targetObj := cm
 		/*cm.asType(ecore::EPackage).eSubpackages.each{p|
 			stdio.writeln("\t"+p.name)

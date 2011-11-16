@@ -1,11 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Specialization Ecore V1
-Bundle-SymbolicName: kompose_spe_ecore_v1
-Bundle-Version: 0.0.6.qualifier
+Bundle-SymbolicName: kompose_spe_ecore_v1;singleton:=true
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: kompose_spe_ecore_v1.Activator
 Bundle-Vendor: IRISA
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-ActivationPolicy: lazy
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.5.2",
+ org.eclipse.core.expressions;bundle-version="3.4.101",
+ fr.irisa.triskell.kermeta.interpreter,
+ kompose_core_v1;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
