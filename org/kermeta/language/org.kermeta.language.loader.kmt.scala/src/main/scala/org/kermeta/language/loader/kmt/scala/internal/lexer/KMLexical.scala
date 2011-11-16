@@ -38,12 +38,23 @@ class KMLexical extends Lexical with KTokens {
   val reserved : HashSet[String] = HashSet("abstract", "and", "aspect", "attribute","bag", "class" , "do", "end", "enum", "enumeration", "else","false", "from", "getter", "init", "inherits","if","inv","is","loop","method","not", "operation", "or","oset", "package", "post", "pre", "property", "until","then","true", "raise", "readonly", "reference", "result","require", "self", "seq", "set", "setter", "singleton", "super", "using","var", "void","rescue")
   val delimiters : HashSet[String] = HashSet("#","=",";","::","@","{","}","(",")",":",":=",".",",","|","==","!=", "?=","-","+","!","*","/","<","<=",">",">=","[","]","..","->","=>")
 
-  
+
+  def docComment : Parser[KToken] =  positioned(docML ~ commentBody ^^ { case _ ~ body =>
+    //println("Lexer found a documentation comment (" + body.mkString + ")")
+    MLDocumentation("/**"+body.mkString) })
 
   def comment : Parser[KToken] = (
-    positioned('/' ~> '/' ~> rep( chrExcept(EofCh, '\n') ) ^^ { case content => Comment(content.mkString) })
+    positioned('/' ~> '/' ~> rep( chrExcept(EofCh, '\n') ) ^^ { case content =>
+      //println("Lexer found a comment (" + content.mkString + ")" )
+      Comment(content.mkString) })
     |
-    positioned(beginML ~ commentBody ^^ {case _ ~ body => MLComment("/*"+body.mkString)})
+    //positioned(docML ~ commentBody ^^ { case _ ~ body =>
+    //  println("Lexer found a (comment parser) documentation comment (" + body.mkString + ")")
+    //  MLDocumentation("/**"+body.mkString) })
+    //|
+    positioned(beginML ~ commentBody ^^ {case _ ~ body =>
+      //println("Lexer found a multiline comment (" + body.mkString  + ")")
+      MLComment("/*"+body.mkString)})
     
   )
 
@@ -51,8 +62,9 @@ class KMLexical extends Lexical with KTokens {
   def commentBody[T]: Parser[List[Elem]] = Parser { in =>
     val elems = new ListBuffer[Elem]
     var startFound = false
-
-    if(in.first == '*') startFound = true
+    if(in.first == '*') {
+      startFound = true
+    }
     elems += in.first
     var tok = in.rest
     while(!  ((tok.first=='/'&&startFound)||(tok.first == EofCh))   ){
@@ -62,6 +74,7 @@ class KMLexical extends Lexical with KTokens {
     }
     elems += tok.first
     Success(elems.toList, tok.rest)
+
   }
 
 
@@ -71,6 +84,8 @@ class KMLexical extends Lexical with KTokens {
   //    bodyml+"*/"
  // }
   def beginML = '/' ~ '*'
+  def docML = '/' ~ '*' ~ '*'
+
   //def endML = '*' ~ '/'
   //def bodyML : Parser[String] = rep( endML ^^^ { "*/" } | chrExcept(EofCh)^^ {case _ => ""} ) ^^ { case s => s.mkString }
 
@@ -104,6 +119,7 @@ class KMLexical extends Lexical with KTokens {
   def token: Parser[KToken] = (
     positioned( '~' ~ identChar ~ rep( identChar | digit ) ^^ { case _ ~ first ~ rest => Identifier(first :: rest mkString "") } )
     |positioned( identChar ~ rep( identChar | digit ) ^^ { case first ~ rest => kident(first :: rest mkString "") } )
+    | positioned(docComment ^^{case dc => dc })
     | positioned(comment ^^{ case c => c })
     | positioned(digit ~ rep( digit )                              ^^ { case first ~ rest => NumericLit(first :: rest mkString "") })
     | positioned('\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") })
