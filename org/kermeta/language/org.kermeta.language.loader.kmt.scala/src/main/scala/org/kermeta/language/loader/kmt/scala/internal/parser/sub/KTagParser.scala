@@ -12,11 +12,21 @@ trait KTagParser extends KAbstractParser {
 
   //NO MINIMAL CONTRACT
 
-  def annotation : Parser[Tag] = "@" ~> ident ~ stringLit ^^ { case id1 ~ st1 =>
+  def annotation : Parser[Tag] = (annotationTag | documentation)
+
+  def annotationTag : Parser[Tag] = "@" ~> ident ~ stringLit ^^ { case id1 ~ st1 =>
       var newo =StructureFactory.eINSTANCE.createTag
       newo.setName(id1.toString)
       newo.setValue(st1.toString)
       newo
+  }
+
+  def documentation : Parser[Tag] = "/**" ~ stringLit ~ "*/" ^^ { case _ ~ st1 ~ _ =>
+      println("Found documentation tag !!")
+      var newt = StructureFactory.eINSTANCE.createTag
+      newt.setName("documentation")
+      newt.setValue(st1.toString)
+      newt
   }
 
 }
