@@ -1,0 +1,14 @@
+	using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+		inv anInvariant is do
+			value:=""
+		end
+		
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+}

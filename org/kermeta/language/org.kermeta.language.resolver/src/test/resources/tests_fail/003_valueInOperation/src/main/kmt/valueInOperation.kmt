@@ -1,0 +1,11 @@
+	using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			value:=""
+		end
+	}
+}
