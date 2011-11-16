@@ -1,0 +1,17 @@
+using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+		@main ""
+		operation mainOperation() : Void is do 
+			var test : MainClass init MainClass.new
+			
+			test.test(1,"")	
+		end
+		
+		operation test(x : Integer, y : String, z : Integer) is do end
+		
+		
+	}
+}
