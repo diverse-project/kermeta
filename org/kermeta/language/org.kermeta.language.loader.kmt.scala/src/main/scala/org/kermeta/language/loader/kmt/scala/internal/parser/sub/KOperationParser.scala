@@ -56,7 +56,13 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
       }
 
       newo.setName(opName)
-      if(body != null) newo.setBody(body)
+      if(body != null) {
+        newo.setIsAbstract(false)
+        newo.setBody(body)
+      }
+      else {
+        newo.setIsAbstract(true)
+      }
 
       opGParams match {
         case None =>
