@@ -64,7 +64,28 @@ object PrettyPrinter {
           res.append("aspect ")
         if (c.getIsSingleton)
           res.append("singleton ")
-        res.append("class " + c.getName() + " {\n")
+        res.append("class " + c.getName())
+        //Generic parameters
+        if (c.getTypeParameter.size()>0) {
+          res.append("<")
+          var i : Int = 0;
+          c.getTypeParameter.foreach{ tp =>
+            if (i==0) {
+              res.append(tp.getName)
+            } else {
+              res.append(", " + tp.getName)
+            }
+            tp.getSupertype match {
+              case urt : UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
+              case (_) =>
+            }
+            i=i+1
+          }
+          res.append(">")
+        }
+
+        res.append(" {\n")
+        //c.getTypeParameter.foreach{ tp => res.append("," + tp.getName)}
         c.getOwnedAttribute.foreach { att => print(att, res) }
         c.getOwnedOperation.foreach { op => print(op, res) }
         //TODO Generic
@@ -137,9 +158,10 @@ object PrettyPrinter {
         res.append("\n\t\tis ")
         if (op.getIsAbstract!= null && op.getIsAbstract)
           res.append(" abstract ")
-        else
+        else {
           print(op.getBody, res)
         //TODO pre post
+        }
         //RaiseException
         res.append("\n")
       }
