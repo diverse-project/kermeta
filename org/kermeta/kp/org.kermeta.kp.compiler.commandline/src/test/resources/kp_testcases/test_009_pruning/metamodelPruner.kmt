@@ -253,7 +253,7 @@ abstract class MetamodelPruner {
 		var oppVoid    : Boolean
 		var propCD     : ClassDefinition
 		var oppPropCD  : ClassDefinition
-		var enum       : Enumeration
+		var ~enum       : Enumeration
 		var primTyp    : PrimitiveType
 		
 		requiredKermetaMetaClasses.each{c |
@@ -265,7 +265,7 @@ abstract class MetamodelPruner {
 			 	oppVoid    := prop.opposite.isVoid
 			 	propCD     := if(propClass) then prop.type.asType(Class).classDefinition else void end
 			 	oppPropCD  := if(not oppVoid and propClass) then prop.opposite.type.asType(Class).classDefinition else void end
-			 	enum	   := if(propEnum) then prop.type.asType(Enumeration) else void end
+			 	~enum	   := if(propEnum) then prop.type.asType(Enumeration) else void end
 			 	primTyp	   := if(propPrim) then prop.type.asType(PrimitiveType) else void end
 			 	
 				//Option 1
@@ -285,9 +285,9 @@ abstract class MetamodelPruner {
 				
 				//Option 2
 				if propLower0 and propEnum then
-					if(considerCard0.orElse{b | requiredKermetaMetaEnumerations.contains(enum)}) then
+					if(considerCard0.orElse{b | requiredKermetaMetaEnumerations.contains(~enum)}) then
 						requiredKermetaMetaProperties.add(prop)
-						requiredKermetaMetaEnumerations.add(enum)
+						requiredKermetaMetaEnumerations.add(~enum)
 					end
 				end
 				
@@ -324,7 +324,7 @@ abstract class MetamodelPruner {
 				
 				if not propLower0 and propEnum then
 					requiredKermetaMetaProperties.add(prop)
-					requiredKermetaMetaEnumerations.add(enum)
+					requiredKermetaMetaEnumerations.add(~enum)
 				end
 			
 				//Add all required properties and their type
@@ -333,7 +333,7 @@ abstract class MetamodelPruner {
 						if propEnum then
 							requiredKermetaMetaProperties.add(prop)
 							requiredKermetaMetaClasses.add(prop.owningClass)
-							requiredKermetaMetaEnumerations.add(enum)
+							requiredKermetaMetaEnumerations.add(~enum)
 						else						
 						if propClass then
 							requiredKermetaMetaProperties.add(prop)
@@ -388,16 +388,16 @@ abstract class MetamodelPruner {
 				//Option 5
 				/*
 				if prop.isComposite and propEnum and prop.lower==0 then
-					if isInRequriedSetOfMetaEnumerations(enum) then
-						requiredKermetaMetaEnumerations.add(enum)
+					if isInRequriedSetOfMetaEnumerations(~enum) then
+						requiredKermetaMetaEnumerations.add(~enum)
 						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
 				*/
 				
 				if prop.isComposite and propEnum and not propLower0 then
-					if isInRequriedSetOfMetaEnumerations(enum) then
-						requiredKermetaMetaEnumerations.add(enum)
+					if isInRequriedSetOfMetaEnumerations(~enum) then
+						requiredKermetaMetaEnumerations.add(~enum)
 						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
@@ -416,8 +416,8 @@ abstract class MetamodelPruner {
 				end
 				
 				if propEnum then
-					if isInRequriedSetOfMetaEnumerations(enum) then
-						requiredKermetaMetaEnumerations.add(enum)
+					if isInRequriedSetOfMetaEnumerations(~enum) then
+						requiredKermetaMetaEnumerations.add(~enum)
 						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
