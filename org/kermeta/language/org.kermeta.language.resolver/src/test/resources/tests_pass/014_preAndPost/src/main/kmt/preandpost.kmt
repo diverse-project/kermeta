@@ -1,0 +1,39 @@
+using kermeta::standard
+using kermeta::io
+package mainpackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+	
+	
+	
+	
+	class PrePost<Z>{
+		
+		
+		
+		operation test<T>(x: String, y : Integer) :String
+		pre pre1 is do
+			var col: Set<Z> init Set<Z>.new
+			StdIO.writeln(col.toString)
+			x==""
+		end
+		pre pre2 is do
+			y==18
+		end
+		post post1 is do
+			var col : Set<T> init Set<T>.new
+			result==""
+		end
+		post post2 is do
+			
+		end
+		is do 
+		
+			result:=""
+		end
+	}
+}
