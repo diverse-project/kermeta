@@ -1,0 +1,14 @@
+using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+		@main ""
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			var setString : Set<String> init Set<String>.new
+			
+			setString.collect{x|x.size()}.select{y|y!=1}
+		end
+	}
+}

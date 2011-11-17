@@ -1,0 +1,9 @@
+KermetaProject :"018_callOperationWithGeneric"
+version :  "0.0.1"
+group :"group"
+defaultMainClass : "mainpackage::MainClass"
+defaultMainOperation : "mainOperation" 
+{
+source = "${project.baseUri}/src/main/kmt/Main.kmt"
+dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+}
