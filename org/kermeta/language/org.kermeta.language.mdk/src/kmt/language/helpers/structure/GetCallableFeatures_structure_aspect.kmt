@@ -153,6 +153,7 @@ aspect class TypeVariable inherits Type{
 	method getAllCallableOperations() : Set<Operation> is do
 		if supertype.isVoid then
 			// should also search in kermeta::standard::Object
+			result := Set<Operation>.new
 		else
 			result := self.supertype.getAllCallableOperations()
 		end
