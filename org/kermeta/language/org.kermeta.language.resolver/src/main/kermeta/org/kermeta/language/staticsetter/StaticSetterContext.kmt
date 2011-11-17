@@ -3,7 +3,7 @@
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
- *            dvojtise
+ *            dvojtise, xdolques
  */
 
 
@@ -19,7 +19,7 @@ require "StaticSetter_kermeta_aspect.kmt"
 require "../resolver/ResolverException.kmt"
 
 using kermeta::standard
-
+using kermeta::utils
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
 using org::kermeta::language::resolver
@@ -27,7 +27,7 @@ using org::kermeta::language::resolver
 class StaticSetterContext
 {
 	reference errors : OrderedSet<ResolverException>
-	
+	reference typeVariableToSet : Hashtable<TypeVariable,Type>
 	//used to store context for late resolving of lambdaexpressions
 	reference waitingContext : Sequence<ToBeResolvedLater>
 

@@ -3,7 +3,7 @@
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
- *            dvojtise
+ *            dvojtise, xdolques
  
  given a type with possibly some typevariable, returns a new type with no typevariable
  */

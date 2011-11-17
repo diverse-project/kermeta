@@ -1,0 +1,105 @@
+/* $Id:$ 
+ * Creation : November 17, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            xdolques
+ */
+
+
+package org::kermeta::language;
+
+
+require "StaticSetter_kermeta_aspect.kmt"
+require kermeta
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::staticsetter
+package behavior{
+	aspect class CallOperation 
+	{
+		operation check(context : StaticSetterContext) : Boolean is do 
+			//todo : associate a typevariable with a set of types. In this case, which one is taken ?
+			context.typeVariableToSet := Hashtable<TypeVariable, Type>.new
+			
+			//todo : check if type parameters are passed to the calloperation and if so bind them with typeParameters from the staticOperation
+			//if there are typeParamaters and they are not filled by the call then put them in the variables to set
+			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
+				staticOperation.typeParameter.each{tv|context.typeVariableToSet.put(tv, void)}
+				
+			end
+			result:=true
+			from var i : Integer init 0
+			until i==self.parameters.size() loop
+				result := result and self.parameters.elementAt(i).staticType.compareToDefinition(staticOperation.ownedParameter.elementAt(i).type,context)
+			
+			end
+			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
+				staticOperation.typeParameter.each{tv|
+						var tvb : TypeVariableBinding init TypeVariableBinding.new
+						tvb.variable:=tv
+						tvb.type:=context.typeVariableToSet.getValue(tv)
+						//type should already be contained
+						}
+			end
+			context.typeVariableToSet := void
+		end
+	}
+}
+//todo  : comparison shouldn't be type equality for the root class, but type conformance
+package structure{
+
+	aspect class Type
+	{
+		operation compareToDefinition(definition : Type,  context : StaticSetterContext) : Boolean is do
+			if definition.isInstanceOf(TypeVariable) and context.typeVariableToSet.containsKey(definition.asType(TypeVariable)) then
+				context.typeVariableToSet.put(definition.asType(TypeVariable), self)
+				result:=true
+			else
+				result:=self.typeEquals(definition)
+			end
+			
+		end
+	}
+	
+	aspect class Class
+	{
+		method compareToDefinition(definition : Type,  context : StaticSetterContext) :Boolean is do
+			if definition.isInstanceOf(TypeVariable) and context.typeVariableToSet.containsKey(definition.asType(TypeVariable)) then
+				context.typeVariableToSet.put(definition.asType(TypeVariable), self)
+				result:=true
+			else
+				if definition.isInstanceOf(Class) then
+					if definition.asType(Class).typeDefinition==self.typeDefinition
+						and self.typeParamBinding.size==definition.asType(Class).typeParamBinding.size
+					then
+						from var i : Integer init 0
+						until i==self.typeParamBinding.size
+						loop
+							result:=result
+									.andThen{x| self
+												.typeParamBinding
+												.elementAt(i)
+												.type
+												.compareToDefinition(definition
+																		.asType(Class)
+																		.typeParamBinding
+																		.elementAt(i)
+																		.type
+																	,context)
+												}
+						end
+					else 
+						result:=false
+					end			
+				else 
+					result:=false
+				end
+			end
+			
+		end
+	
+	}
+
+
+}

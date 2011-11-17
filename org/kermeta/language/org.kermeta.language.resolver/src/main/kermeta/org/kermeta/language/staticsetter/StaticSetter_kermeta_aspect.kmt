@@ -18,6 +18,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 require "StaticSetterContext.kmt"
 require "../resolver/ResolverException.kmt"
+require "callOperationConformanceChecker.kmt"
 
 require "behaviorResolver_inferedStaticType.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
@@ -326,6 +327,7 @@ package behavior {
 					else
 						//	this is the CallOperation that must replace this UnresolvedCall
 						var callOperation :  CallOperation init  CallOperation.new
+						//it is stored temporarily to be used when resolving lambdas
 						self.resolvedCall:=callOperation
 						callOperation.staticOperation:=op
 						// move content of UnresolvedCall into the new CallOperation
@@ -366,7 +368,7 @@ package behavior {
 						self.resolvedCall.parameters.addAll(self.parameters)
 						
 						//TODO check if parameters have the good type and if they must be used to infer a type parameter
-						
+						self.resolvedCall.asType(CallOperation).check(context)
 						self.resolvedCall.asType(CallOperation).target := self.target 
 						
 						// The static type of the call operation must be infered.
@@ -586,6 +588,7 @@ package behavior {
 						context.errors.add(ResolverException.new.initialize("The special operation asType must have a type literal as a parameter.", self))
 					end
 				else
+					//todo : should take into account the infered type parameters
 					callOperation.setInferedStaticType(context,context.createTypeFromMultiplicityElement(op))
 				end
 			end
