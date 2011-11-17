@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.km2bytecode</artifactId>
     <version>2.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>language.km2bytecode :: compilo v2</name>
     
     <dependencies>
@@ -124,65 +124,60 @@
 
                 </configuration>
             </plugin>
-    		<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-jar-plugin</artifactId>
-		        <version>2.3.1</version>		        
-          		
-		        <configuration>
-		          <archive>
-		            <manifestEntries>
-			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Name>${project.name}</Bundle-Name>
-                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+            <plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.5</version>
+				<extensions>true</extensions>
+
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                        <Export-Package>
-			org.kermeta.compilo.scala,
-			org.kermeta.language.km2bytecode.embedded,
-			org.kermeta.language.km2bytecode.embedded.scala
-                        </Export-Package>
-                        <Require-Bundle>
-            org.kermeta.language.model            
-                        </Require-Bundle>
-                        <Import-Package>
-            org.kermeta.language,
-			org.kermeta.language.structure,
-			org.kermeta.language.behavior,
-			scala,
-			scala.actors,
-			scala.collection,
-			scala.collection.immutable,
-			scala.collection.mutable,
-			scala.reflect,
-			scala.runtime,
-			scala.util.matching,
-			scala.util,
-			scala.tools.nsc,
-			scala.tools.nsc.reporters,
-			k2.io,
-			k2.standard,
-			k2.persistence,
-			k2.exceptions,
-			k2.utils,
-			org.eclipse.emf.common.notify,
-			org.eclipse.emf.common.util,
-			org.eclipse.emf.ecore,
-			org.eclipse.emf.ecore.impl,
-			org.eclipse.emf.ecore.resource,
-			org.eclipse.emf.ecore.util,
-			org.eclipse.emf.ecore.xmi,
-			org.eclipse.emf.ecore.xmi.impl,
-			org.slf4j,
-			org.k2.compilo.scala.loader,
-			org.antlr.stringtemplate
-                        </Import-Package>
-		            </manifestEntries>		            
-		          </archive>
-		        </configuration>
-      		</plugin>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Export-Package>
+							org.kermeta.compilo.scala.*,
+							org.kermeta.language.km2bytecode.*
+						</Export-Package>
+						<Import-Package>
+							!antlr.*,
+							!org.apache.maven.*,
+							!javax.*,
+							!org.codehaus.plexus.*,
+							org.kermeta.language,
+							org.kermeta.language.structure.*,
+							org.kermeta.language.behavior.*,
+							scala,
+							scala.actors,
+							scala.collection.*,
+							scala.reflect,
+							scala.runtime,
+							scala.util.matching,
+							scala.util,
+							scala.tools.nsc,
+							scala.tools.nsc.reporters,
+							k2.io,
+							k2.standard,
+							k2.persistence,
+							k2.exceptions,
+							k2.utils,
+							org.eclipse.emf.*,
+							org.slf4j;version="[0,2)",
+							org.k2.compilo.scala.loader
+						</Import-Package>
+						<Private-Package>
+							org.antlr.stringtemplate.*
+						</Private-Package>
+						<!-- add extra element in the manifest, copy them from this file ex: 
+							Bundle-ActivationPolicy: lazy
+						<_include>resources/META-INF/MANIFEST-part.MF</_include> -->
+					</instructions>
+				</configuration>
+			</plugin>    		
         </plugins>
 	</build>    
 </project>
