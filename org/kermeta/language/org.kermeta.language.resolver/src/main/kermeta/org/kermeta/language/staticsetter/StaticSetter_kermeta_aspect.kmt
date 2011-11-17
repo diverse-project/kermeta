@@ -343,7 +343,7 @@ package behavior {
 					//if the number of parameters is not correct then an error should be triggered
 					if callOperation.parameters.size()!=callOperation.staticOperation.ownedParameter.size() then
 						context.errors.add(ResolverException.new.initialize("Incorrect number of parameters: expected " + callOperation.staticOperation.ownedParameter.size().toString() + " found "+ 
-						 callOperation.parameters.size().toString , self))
+						 callOperation.parameters.size().toString , callOperation))
 					end
 					if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
 					//	this is the CallOperation that must replace this UnresolvedCall
