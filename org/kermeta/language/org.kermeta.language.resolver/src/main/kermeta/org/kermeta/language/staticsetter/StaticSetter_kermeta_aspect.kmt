@@ -300,25 +300,30 @@ package behavior {
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" )
 					result:=void 
 			else
-				var op : Operation init target.staticType.getCallableOperationByName(self.name)
+				stdio.writeln((target.isVoid).orElse{x|target.staticType.isVoid}.toString())
+				stdio.writeln(target.toString)
+				stdio.writeln(target.staticType.toString)
+				stdio.writeln(target.staticType.getAllCallableOperations.toString)
+				
+				var ops : Sequence<Operation> init target.staticType.getAllCallableOperations.select{o|o.name==self.name}
 				//Here we must look if target is a TypeLiteral and if the type is a singleton
-				if op.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
+				if ops.isEmpty and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation1 of UnresolvedCall") end
 					// this is a TypeLiteral  
 					// if this is a singleteton, try to look in the typereference
 					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
-					op := callTypeLiteral.typeref.type.getCallableOperationByName(self.name)
+					ops := callTypeLiteral.typeref.type.getAllCallableOperations.select{o|o.name==self.name}
 					
 				end
 				//Here we must look into Object which is the implicit superclass of everything
-				if (op.isVoid) then
+				if ops.isEmpty then
 					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
 					var objectAny : ClassDefinition
 					objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
-					op := objectAny.getCallableOperationByName(self.name)
+					ops := objectAny.getAllCallableOperations.select{o|o.name==self.name}
 				end
 				//if we finally found an operation
-				if not op.isVoid then
+				if not ops.isEmpty then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
 					var callOperation :  CallOperation init  CallOperation.new
 					// move content of UnresolvedCall into the new CallOperation
@@ -334,17 +339,21 @@ package behavior {
 					// reassign target and parameters
 					callOperation.parameters.addAll(self.parameters)
 					callOperation.target := self.target 
+					
+					
 					// set staticOperation
-					callOperation.staticOperation := op
 					
-					// The static type of the call operation must be infered.
-					inferStaticTypeOfCallOperation(callOperation, op, context)
-					
-					//if the number of parameters is not correct then an error should be triggered
-					if callOperation.parameters.size()!=callOperation.staticOperation.ownedParameter.size() then
-						context.errors.add(ResolverException.new.initialize("Incorrect number of parameters: expected " + callOperation.staticOperation.ownedParameter.size().toString() + " found "+ 
+					var op : Operation
+					op:=ops.detect{o|o.ownedParameter.size()==callOperation.parameters.size()}
+					if op.isVoid then
+						context.errors.add(ResolverException.new.initialize("Incorrect number of parameters: expected " + ops.one.ownedParameter.size().toString() + " found "+ 
 						 callOperation.parameters.size().toString , callOperation))
-					end
+					else
+						callOperation.staticOperation := op
+						// The static type of the call operation must be infered.
+						inferStaticTypeOfCallOperation(callOperation, op, context)
+					end	
+					
 					if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
 					//	this is the CallOperation that must replace this UnresolvedCall
 					result := callOperation
