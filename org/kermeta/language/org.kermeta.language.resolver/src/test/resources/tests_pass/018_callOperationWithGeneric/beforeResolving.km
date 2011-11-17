@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="018_callOperationWithGeneric" namespacePrefix="">
   <packages name="mainpackage">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;25;282"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;25;284"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainpackage/MainClass/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;47;280"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;47;282"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="mainOperation" type="//mainpackage/MainClass/mainOperation/@containedType.0" isOrdered="true" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;79;278"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;79;280"/>
         <kOwnedTags name="main" value=""/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;115;278"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;115;280"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="setString">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;170;226"/>
             <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
@@ -38,7 +38,7 @@
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="select" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;255;273"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;255;275"/>
             <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
               <parameters name="y">
                 <type type="//mainpackage/MainClass/mainOperation/@body/@statement.1/@parameters.0/@parameters.0/@type/@containedType.0">
@@ -48,12 +48,18 @@
               <body xsi:type="org_kermeta_language_behavior:Block">
                 <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isNotEqual">
                   <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;268;269"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;270;271"/>
                   </parameters>
                   <usings fromQName="kermeta::standard" toName=""/>
-                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="y">
-                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;265;266"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                    <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;267;268"/>
+                    </parameters>
                     <usings fromQName="kermeta::standard" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="y">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/018_callOperationWithGeneric/src/main/kmt/Main.kmt;265;266"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </target>
                   </target>
                 </statement>
               </body>

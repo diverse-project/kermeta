@@ -8,7 +8,7 @@ package mainpackage{
 			// TODO: implement 'mainOperation' operation
 			var setString : Set<String> init Set<String>.new
 			
-			setString.collect{x|x.size()}.select{y|y!=1}
+			setString.collect{x|x.size()}.select{y|y+2!=1}
 		end
 	}
 }
