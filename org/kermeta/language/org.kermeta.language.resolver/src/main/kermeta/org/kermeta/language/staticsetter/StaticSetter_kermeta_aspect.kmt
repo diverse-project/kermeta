@@ -55,22 +55,7 @@ package structure {
 	aspect class ModelingUnit {
 		method inferContainedExpressionStatic(context : StaticSetterContext) is do
 			context.inferContainedExpressionStatic(self)
-			//we manage unresolved lambda now after the call operation but if other resolving should be deferred 
-			//it should be considered to move that part at the end of the resolving step
 			
-			from var lambdaToBeResolved : ToBeResolvedLater
-			until context.waitingContext.isEmpty()
-			loop
-				if (context.verbose) then stdio.writeln("resolving a lambda") end
-				lambdaToBeResolved := context.waitingContext.first()
-				context.waitingContext.removeAt(0)
-				//if the container of the lambda is still unresolved then there is nothing to do
-				if lambdaToBeResolved.current.container.isInstanceOf(UnresolvedCall) then
-					context.errors.add(ResolverException.new.initialize("The type of the lambda expression cannot be setted while its containing operation is not resolved", lambdaToBeResolved.current))
-				else							
-					lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
-				end
-			end
 		end
 	
 	}
@@ -238,8 +223,7 @@ package behavior {
 		end
 	}
 	
-	// FIXME to refactor: this method is too too long...
-	aspect class UnresolvedCall {
+		aspect class UnresolvedCall {
 		//an unresolved call could be replaced by: 
 		//a callvariable
 		//a callProperty
@@ -247,6 +231,9 @@ package behavior {
 		//a TypeLiteral
 		//an EnumLiteral
 	
+		reference resolvedCall : CallExpression
+		
+		
 		operation resolveCallToVariable(context : StaticSetterContext) : CallVariable is do
 			if target.isVoid then
 				var symbolType : Type init context.getTypeForSymbol(self.name)
@@ -261,6 +248,7 @@ package behavior {
 					end
 					//	this is the CallVariable that must replace this UnresolvedCall
 					result := callVariable
+					self.resolvedCall:=result
 				else
 					result:= void
 				end
@@ -284,6 +272,7 @@ package behavior {
 						callEnumLiteral.kOwnedTags.addAll(self.kOwnedTags)
 						// callEnumLiteral.target := self.target
 						result := callEnumLiteral
+						self.resolvedCall:=result
 					else
 						result := void
 					end
@@ -322,42 +311,75 @@ package behavior {
 					objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
 					ops := objectAny.getAllCallableOperations.select{o|o.name==self.name}
 				end
-				//if we finally found an operation
+				//if we finally found at least one operation
 				if not ops.isEmpty then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
-					var callOperation :  CallOperation init  CallOperation.new
-					// move content of UnresolvedCall into the new CallOperation
-					callOperation.name := self.name
-					callOperation.kOwnedTags.addAll(self.kOwnedTags)
-					// infer staticType of the content (except target which has been done previously)
-					// TODO check if necessary, probably already done
-					callOperation.eachOwnedElement{ e | 
-						e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
-						e // scala compiler needs somthing to return
-					}
-					
-					// reassign target and parameters
-					callOperation.parameters.addAll(self.parameters)
-					callOperation.target := self.target 
 					
 					
-					// set staticOperation
 					
+					//check if there is only one
 					var op : Operation
-					op:=ops.detect{o|o.ownedParameter.size()==callOperation.parameters.size()}
+					op:=ops.detect{o|o.ownedParameter.size()==self.parameters.size()}
 					if op.isVoid then
 						context.errors.add(ResolverException.new.initialize("Incorrect number of parameters: expected " + ops.one.ownedParameter.size().toString() + " found "+ 
-						 callOperation.parameters.size().toString , callOperation))
+						 self.parameters.size().toString , self))
 					else
-						callOperation.staticOperation := op
-						// The static type of the call operation must be infered.
-						inferStaticTypeOfCallOperation(callOperation, op, context)
+						//	this is the CallOperation that must replace this UnresolvedCall
+						var callOperation :  CallOperation init  CallOperation.new
+						self.resolvedCall:=callOperation
+						callOperation.staticOperation:=op
+						// move content of UnresolvedCall into the new CallOperation
+						callOperation.name := self.name
+						callOperation.kOwnedTags.addAll(self.kOwnedTags)
+						// infer staticType of the content (except target which has been done previously)
+						// TODO check if necessary, probably already done
+						callOperation.eachOwnedElement{ e | 
+							e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
+							e // scala compiler needs somthing to return
+						}
+						
+						//retry to resolve lambda here, when staticOperation is known
+						
+						
+						from var lambdaToBeResolved : ToBeResolvedLater
+						until context.waitingContext.isEmpty()
+						loop
+							if (context.verbose) then stdio.writeln("resolving a lambda") end
+							lambdaToBeResolved := context.waitingContext.first()
+							context.waitingContext.removeAt(0)
+							//if the container of the lambda is still unresolved then there is nothing to do
+							if lambdaToBeResolved.current.container.isInstanceOf(UnresolvedCall).andThen{x| lambdaToBeResolved.current.container.asType(UnresolvedCall).resolvedCall.isVoid} then
+								context.errors.add(ResolverException.new.initialize("The type of the lambda expression cannot be setted while its containing operation is not resolved", lambdaToBeResolved.current))
+							else							
+								lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
+							end
+						end
+						
+						
+						
 					end	
 					
-					if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ callOperation.staticType.toString) end
-					//	this is the CallOperation that must replace this UnresolvedCall
-					result := callOperation
 					
+					if not self.resolvedCall.isVoid then
+						
+						// reassign target and parameters
+						self.resolvedCall.parameters.addAll(self.parameters)
+						
+						//TODO check if parameters have the good type and if they must be used to infer a type parameter
+						
+						self.resolvedCall.asType(CallOperation).target := self.target 
+						
+						// The static type of the call operation must be infered.
+						inferStaticTypeOfCallOperation(self.resolvedCall.asType(CallOperation), op, context)
+						
+						
+						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ self.resolvedCall.staticType.toString) end
+					
+					
+						result := self.resolvedCall.asType(CallOperation)
+					else
+						result:=void
+					end
 				else 	
 					result:=void
 				end
@@ -816,17 +838,21 @@ package behavior {
 				context.popContext()
 			//lambda parameters are implicitly typed
 			else
-				if container.isInstanceOf(UnresolvedCall) then
+				if container.isInstanceOf(UnresolvedCall).andThen{x| container.asType(UnresolvedCall).resolvedCall.isVoid} then
 					context.saveWaitingContext(self)
 				//save the context and resolve the lambda expression later
 				else
 				//resolve it now
-					if container.isInstanceOf(CallOperation) and staticType.isVoid then
+					if  container.isInstanceOf(UnresolvedCall).andThen{x| container.asType(UnresolvedCall).resolvedCall.isInstanceOf(CallOperation)}
+						 and staticType.isVoid 
+						
+						then
 						context.pushContext()
 						//find which parameter it is in the calloperation
-						var paramPosition : Integer init container.asType(CallOperation).parameters.indexOf(self)
+						var paramPosition : Integer init container.asType(UnresolvedCall).parameters.indexOf(self)
+						
 						//find the parameter's definition in the operation definition
-						var paramDef : Parameter init container.asType(CallOperation).staticOperation.ownedParameter.elementAt(paramPosition)
+						var paramDef : Parameter init container.asType(UnresolvedCall).resolvedCall.asType(CallOperation).staticOperation.ownedParameter.elementAt(paramPosition)
 						
 						
 						//check if it's really a function with the good number of parameters
@@ -840,8 +866,8 @@ package behavior {
 							
 							//get bindings from the type of the containing callOperation
 							var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-							if container.asType(CallOperation).target.staticType.isInstanceOf(Class) then
-								bindings.addAll(container.asType(CallOperation).target.staticType.asType(Class).getAllTypeVariableBindings())
+							if container.asType(UnresolvedCall).target.staticType.isInstanceOf(Class) then
+								bindings.addAll(container.asType(UnresolvedCall).target.staticType.asType(Class).getAllTypeVariableBindings())
 							end
 							stdio.writeln("lambda bindings.size : "+bindings.size.toString)
 							
