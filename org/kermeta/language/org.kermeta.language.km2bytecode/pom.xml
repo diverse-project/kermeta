@@ -172,9 +172,6 @@
 						<Private-Package>
 							org.antlr.stringtemplate.*
 						</Private-Package>
-						<!-- add extra element in the manifest, copy them from this file ex: 
-							Bundle-ActivationPolicy: lazy
-						<_include>resources/META-INF/MANIFEST-part.MF</_include> -->
 					</instructions>
 				</configuration>
 			</plugin>    		
