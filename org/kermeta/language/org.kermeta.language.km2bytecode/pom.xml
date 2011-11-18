@@ -144,7 +144,6 @@
 							org.kermeta.language.km2bytecode.*
 						</Export-Package>
 						<Import-Package>
-							!antlr.*,
 							!org.apache.maven.*,
 							!javax.*,
 							!org.codehaus.plexus.*,
@@ -170,7 +169,8 @@
 							org.k2.compilo.scala.loader
 						</Import-Package>
 						<Private-Package>
-							org.antlr.stringtemplate.*
+							org.antlr.stringtemplate.*,
+							antlr.*
 						</Private-Package>
 					</instructions>
 				</configuration>
