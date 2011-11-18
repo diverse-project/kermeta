@@ -368,7 +368,7 @@ package behavior {
 						self.resolvedCall.parameters.addAll(self.parameters)
 						
 						//TODO check if parameters have the good type and if they must be used to infer a type parameter
-						self.resolvedCall.asType(CallOperation).check(context)
+						self.resolvedCall.asType(CallOperation).inferTypeVariableFromParameters(context)
 						self.resolvedCall.asType(CallOperation).target := self.target 
 						
 						// The static type of the call operation must be infered.

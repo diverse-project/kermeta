@@ -18,88 +18,100 @@ using org::kermeta::language::staticsetter
 package behavior{
 	aspect class CallOperation 
 	{
-		operation check(context : StaticSetterContext) : Boolean is do 
-			//todo : associate a typevariable with a set of types. In this case, which one is taken ?
-			context.typeVariableToSet := Hashtable<TypeVariable, Type>.new
+		operation inferTypeVariableFromParameters(context : StaticSetterContext) is do 
+			stdio.writeln("inferTypeVariableFromParameters for "+self.name)
+			
+			var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+			
 			
 			//todo : check if type parameters are passed to the calloperation and if so bind them with typeParameters from the staticOperation
 			//if there are typeParamaters and they are not filled by the call then put them in the variables to set
 			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
-				staticOperation.typeParameter.each{tv|context.typeVariableToSet.put(tv, void)}
+				staticOperation.typeParameter.each{tv|typeVariableToSet.put(tv, tv)}
 				
 			end
-			result:=true
+			
 			from var i : Integer init 0
 			until i==self.parameters.size() loop
-				result := result and self.parameters.elementAt(i).staticType.compareToDefinition(staticOperation.ownedParameter.elementAt(i).type,context)
-			
+				
+				if not self.parameters.elementAt(i).staticType.isVoid then
+					self.parameters.elementAt(i).staticType.compareToDefinition(staticOperation.ownedParameter.elementAt(i).type,typeVariableToSet)
+				end
+				i:=i+1
 			end
 			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
 				staticOperation.typeParameter.each{tv|
-						var tvb : TypeVariableBinding init TypeVariableBinding.new
-						tvb.variable:=tv
-						tvb.type:=context.typeVariableToSet.getValue(tv)
+						self.staticTypeVariableBindings.add(typeVariableToSet.getValue(tv))
+						stdio.writeln("binding found : "+tv.name+" - "+typeVariableToSet.getValue(tv).toString)
 						//type should already be contained
 						}
 			end
-			context.typeVariableToSet := void
+			
 		end
 	}
 }
-//todo  : comparison shouldn't be type equality for the root class, but type conformance
+
 package structure{
 
+	
+	
 	aspect class Type
 	{
-		operation compareToDefinition(definition : Type,  context : StaticSetterContext) : Boolean is do
-			if definition.isInstanceOf(TypeVariable) and context.typeVariableToSet.containsKey(definition.asType(TypeVariable)) then
-				context.typeVariableToSet.put(definition.asType(TypeVariable), self)
-				result:=true
-			else
-				result:=self.typeEquals(definition)
+		//if the current type from definition is a type variable, then add the binding
+		//if not, it's only important if self is a class or a function type
+		operation compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+			stdio.writeln("compare a type with something")
+			
+			if definition.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
+				typeVariableToSet.put(definition.asType(TypeVariable), self)
+			
 			end
 			
 		end
+		
+		
 	}
 	
 	aspect class Class
 	{
-		method compareToDefinition(definition : Type,  context : StaticSetterContext) :Boolean is do
-			if definition.isInstanceOf(TypeVariable) and context.typeVariableToSet.containsKey(definition.asType(TypeVariable)) then
-				context.typeVariableToSet.put(definition.asType(TypeVariable), self)
-				result:=true
+		method compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+			stdio.writeln("compare a class with something")
+			if definition.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
+				typeVariableToSet.put(definition.asType(TypeVariable), self)
+				
 			else
 				if definition.isInstanceOf(Class) then
-					if definition.asType(Class).typeDefinition==self.typeDefinition
-						and self.typeParamBinding.size==definition.asType(Class).typeParamBinding.size
+					// they are both of type class with the same number of type parameters, then all type parameters should be checked
+					// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the definition
+					if	self.typeParamBinding.size==definition.asType(Class).typeParamBinding.size
 					then
 						from var i : Integer init 0
 						until i==self.typeParamBinding.size
 						loop
-							result:=result
-									.andThen{x| self
-												.typeParamBinding
-												.elementAt(i)
-												.type
-												.compareToDefinition(definition
-																		.asType(Class)
-																		.typeParamBinding
-																		.elementAt(i)
-																		.type
-																	,context)
-												}
+							 self.typeParamBinding.elementAt(i).type.compareToDefinition(definition.asType(Class).typeParamBinding.elementAt(i).type
+																							,typeVariableToSet)
+							i:=i+1
 						end
-					else 
-						result:=false
 					end			
-				else 
-					result:=false
 				end
 			end
 			
 		end
-	
 	}
-
+	
+	aspect class FunctionType
+	{
+		method compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+			stdio.writeln("compare a FunctionType with something")
+			if definition.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
+				typeVariableToSet.put(definition.asType(TypeVariable), self)
+			else
+				//only the right part may be used to infer a typeParameter
+				if definition.isInstanceOf(FunctionType) and not self.right.isVoid and not definition.asType(FunctionType).right.isVoid then
+					self.right.compareToDefinition(definition.asType(FunctionType).right, typeVariableToSet)
+				end
+			end	
+		end
+	}
 
 }
