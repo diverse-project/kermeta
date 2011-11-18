@@ -81,7 +81,7 @@
     
     <build>
     	<plugins>
-                   <plugin>
+            <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
                 <executions>
@@ -147,6 +147,8 @@
 							!org.apache.maven.*,
 							!javax.*,
 							!org.codehaus.plexus.*,
+							org.antlr.stringtemplate.*,
+							antlr.*,
 							org.kermeta.language,
 							org.kermeta.language.structure.*,
 							org.kermeta.language.behavior.*,
@@ -169,8 +171,6 @@
 							org.k2.compilo.scala.loader
 						</Import-Package>
 						<Private-Package>
-							org.antlr.stringtemplate.*,
-							antlr.*
 						</Private-Package>
 					</instructions>
 				</configuration>
