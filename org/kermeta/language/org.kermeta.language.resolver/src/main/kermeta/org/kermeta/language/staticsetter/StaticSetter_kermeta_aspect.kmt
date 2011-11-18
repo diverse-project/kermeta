@@ -270,6 +270,7 @@ package behavior {
 						if (context.verbose) then stdio.writeln(" found EnumerationLiteral "+enumLiteral.name) end
 						var callEnumLiteral :  CallEnumLiteral init  CallEnumLiteral.new
 						callEnumLiteral.staticEnumLiteral := enumLiteral
+						callEnumLiteral.staticType:= callTypeLiteral.typeref.type
 						callEnumLiteral.kOwnedTags.addAll(self.kOwnedTags)
 						// callEnumLiteral.target := self.target
 						result := callEnumLiteral
