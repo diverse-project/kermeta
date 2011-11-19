@@ -59,10 +59,10 @@ operation main() : Void is do
 		sourceRepository.getResources().each{r|StdIO.writeln(r.asType(Resource).getURI())}
 		
 		
-		context.qvtContext.load(sourceRepository.getResource("pathmap://models/essentialocl/oclstdlib.essentialocl"))
-		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof"))
-		context.qvtContext.load(sourceRepository.getResource("pathmap://models/qvtoperational/qvtstdlib.qvtoperational"))
-		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof"))
+		context.qvtContext.load(sourceRepository.getResource("pathmap://models/essentialocl/oclstdlib.essentialocl",true))
+		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof",true))
+		context.qvtContext.load(sourceRepository.getResource("pathmap://models/qvtoperational/qvtstdlib.qvtoperational",true))
+		context.qvtContext.load(sourceRepository.getResource("platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof",true))
 		
 		
 		var targetRepository : ResourceSet init ResourceSet.new
@@ -93,7 +93,7 @@ operation main() : Void is do
 
 		
 		
-		tgtModel.save()
+		tgtModel.save(void)
 		StdIO.writeln("done")
 end
 
