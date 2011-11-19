@@ -76,7 +76,9 @@ package structure{
 	{
 		method compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
 			stdio.writeln("compare a class with something")
-			if definition.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
+			stdio.writeln("is it a typeVariable ? "+definition.isInstanceOf(TypeVariable).toString)
+			
+			if definition.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(definition.asType(TypeVariable)).toString) typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
 				typeVariableToSet.put(definition.asType(TypeVariable), self)
 				
 			else

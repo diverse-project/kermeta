@@ -22,7 +22,7 @@ using org::kermeta::language::staticsetter
 using kermeta::utils
 
 package behavior {
-	aspect class Expression
+	aspect class Expression inherits TypeContainer
 	{
 	/**
 		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
@@ -40,11 +40,10 @@ package behavior {
 		
 	}
 	
-	aspect class CallFeature
+	aspect class CallFeature inherits CallExpression
 	{
 	
 		operation findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) is do
-		
 			if not target.isVoid then
 				if target.staticType.isInstanceOf(Class) then
 					bindings.addAll(target.staticType.asType(Class).getAllTypeVariableBindings())
@@ -62,12 +61,10 @@ package behavior {
 	/**
 		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
 		 */
-		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type is do
-			
+		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type from Expression is do
 			if not type.isVoid then
 				// make sure all parameter of this type are concrete
 				var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-				
 				findBindings(context ,type, bindings)
 				self.staticType := type.resolveTypeVariables(context,bindings)
 				if(self.staticType.isVoid) then
@@ -89,13 +86,12 @@ package behavior {
 	
 	aspect class CallOperation
 	{
-		method findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) is do
+		method findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) from CallFeature is do
 		
 			super(context ,type, bindings)
-			
 			from var i : Integer init 0
 			until i==self.staticTypeVariableBindings.size loop
-			
+				stdio.writeln("add one binding for variable : "+self.staticOperation.typeParameter.elementAt(i).name)
 				var tvb : TypeVariableBinding init TypeVariableBinding.new
 				tvb.variable:=self.staticOperation.typeParameter.elementAt(i)
 				tvb.type:=self.staticTypeVariableBindings.elementAt(i)

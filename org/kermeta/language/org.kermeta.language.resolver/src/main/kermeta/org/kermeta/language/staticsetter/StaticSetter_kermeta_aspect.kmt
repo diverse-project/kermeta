@@ -605,43 +605,6 @@ package behavior {
 			super(context)		
 			result := self
 		end 
-		
-		/**
-		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
-		 */
-		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type is do
-			
-			if not type.isVoid then
-				// make sure all parameter of this type are concrete
-				var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-				
-				if not target.isVoid then
-					if target.staticType.isInstanceOf(Class) then
-						bindings.addAll(target.staticType.asType(Class).getAllTypeVariableBindings())
-					end
-				end
-				if (context.verbose) then 
-					stdio.write("bindings.size : "+bindings.size.toString+" content = (")
-					bindings.each{b | 
-						stdio.write("["+b.type.toString+","+b.variable.prettyPrint+"], "
-					)}
-					stdio.writeln(") on type " +type.toString)
-				end
-				self.staticType := type.resolveTypeVariables(context,bindings)
-				if(self.staticType.isVoid) then
-					stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType")					
-					self.staticType := context.createTypeFromQualifiedName("kermeta::standard::Void")
-				end
-				if(self.staticType.container.isVoid) then
-					
-					self.containedType.add(self.staticType)
-				end
-				
-				result := self.staticType
-			else
-				stdio.writeln("Warning setting void as statictype on "+ self.name)
-			end
-		end
 	}
 	
 	aspect class EmptyExpression
