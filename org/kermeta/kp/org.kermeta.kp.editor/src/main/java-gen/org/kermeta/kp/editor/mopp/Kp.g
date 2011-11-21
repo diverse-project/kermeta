@@ -221,18 +221,6 @@ options {
 			if (type.getInstanceClass() == org.kermeta.kp.Source.class) {
 				return parse_org_kermeta_kp_Source();
 			}
-			if (type.getInstanceClass() == org.kermeta.kp.SourceFolder.class) {
-				return parse_org_kermeta_kp_SourceFolder();
-			}
-			if (type.getInstanceClass() == org.kermeta.kp.SourceFile.class) {
-				return parse_org_kermeta_kp_SourceFile();
-			}
-			if (type.getInstanceClass() == org.kermeta.kp.SourceNSURI.class) {
-				return parse_org_kermeta_kp_SourceNSURI();
-			}
-			if (type.getInstanceClass() == org.kermeta.kp.SourceQuery.class) {
-				return parse_org_kermeta_kp_SourceQuery();
-			}
 			if (type.getInstanceClass() == org.kermeta.kp.Dependency.class) {
 				return parse_org_kermeta_kp_Dependency();
 			}
@@ -247,9 +235,6 @@ options {
 			}
 			if (type.getInstanceClass() == org.kermeta.kp.MixExpression.class) {
 				return parse_org_kermeta_kp_MixExpression();
-			}
-			if (type.getInstanceClass() == org.kermeta.kp.KermetaProjectRef.class) {
-				return parse_org_kermeta_kp_KermetaProjectRef();
 			}
 		}
 		throw new org.kermeta.kp.editor.mopp.KpUnexpectedContentTypeException(typeObject);
@@ -345,7 +330,7 @@ options {
 				break;
 			}
 		}
-		int followSetID = 100;
+		int followSetID = 81;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			org.antlr.runtime3_3_0.CommonToken nextToken = (org.antlr.runtime3_3_0.CommonToken) tokenStream.get(i);
@@ -527,22 +512,8 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 1);
 	}
 	
-	a1 = ':' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 2);
-	}
-	
 	(
-		a2 = QUOTED_34_34		
+		a1 = QUOTED_34_34		
 		{
 			if (terminateParsing) {
 				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
@@ -551,14 +522,14 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 				element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 				incompleteObjects.push(element);
 			}
-			if (a2 != null) {
+			if (a1 != null) {
 				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				tokenResolver.setOptions(getOptions());
 				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__NAME), result);
+				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -568,53 +539,55 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_2, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 3);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 2);
 	}
 	
 	(
 		(
 			(
 				(
-					a3 = 'version' {
+					a2 = 'groupId' {
 						if (element == null) {
 							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_0_0_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 4);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_9, 3);
 					}
 					
-					a4 = ':' {
+					a3 = '=' {
 						if (element == null) {
 							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_0_0_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_9, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_10, 4);
 					}
 					
 					(
-						a5 = QUOTED_34_34						
+						a4 = QUOTED_34_34						
 						{
 							if (terminateParsing) {
 								throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
@@ -623,94 +596,14 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 								element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 								incompleteObjects.push(element);
 							}
-							if (a5 != null) {
+							if (a4 != null) {
 								org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 								tokenResolver.setOptions(getOptions());
 								org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__VERSION), result);
+								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__GROUP), result);
 								Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
-								}
-								java.lang.String resolved = (java.lang.String) resolvedObject;
-								if (resolved != null) {
-									Object value = resolved;
-									element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__VERSION), value);
-									completedElement(value, false);
-								}
-								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_0_0_0_0_2, resolved, true);
-								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
-							}
-						}
-					)
-					{
-						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 6);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 6);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 6);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 6);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 6);
-					}
-					
-				)
-				{
-					// expected elements (follow set)
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 7);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 7);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 7);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 7);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 7);
-				}
-				
-				
-				|				(
-					a6 = 'group' {
-						if (element == null) {
-							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-							incompleteObjects.push(element);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_1_0_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
-					}
-					{
-						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_10, 8);
-					}
-					
-					a7 = ':' {
-						if (element == null) {
-							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-							incompleteObjects.push(element);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_1_0_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
-					}
-					{
-						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_11, 9);
-					}
-					
-					(
-						a8 = QUOTED_34_34						
-						{
-							if (terminateParsing) {
-								throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-							}
-							if (element == null) {
-								element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-								incompleteObjects.push(element);
-							}
-							if (a8 != null) {
-								org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-								tokenResolver.setOptions(getOptions());
-								org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__GROUP), result);
-								Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
 								}
 								java.lang.String resolved = (java.lang.String) resolvedObject;
 								if (resolved != null) {
@@ -719,62 +612,66 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 									completedElement(value, false);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_1_0_0_0_2, resolved, true);
-								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a8, element);
+								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_0_0_0_0_2, resolved, true);
+								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 10);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 10);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 10);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 10);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 10);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 5);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 5);
 					}
 					
 				)
 				{
 					// expected elements (follow set)
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 11);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 11);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 11);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 11);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 11);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 6);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 6);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 6);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 6);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 6);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 6);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 6);
 				}
 				
 				
 				|				(
-					a9 = 'defaultMainClass' {
+					a5 = 'defaultMainClass' {
 						if (element == null) {
 							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_2_0_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a9, element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_1_0_0_0_0, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 12);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_11, 7);
 					}
 					
-					a10 = ':' {
+					a6 = '=' {
 						if (element == null) {
 							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_2_0_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a10, element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_1_0_0_0_1, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_13, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 8);
 					}
 					
 					(
-						a11 = QUOTED_34_34						
+						a7 = QUOTED_34_34						
 						{
 							if (terminateParsing) {
 								throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
@@ -783,14 +680,14 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 								element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 								incompleteObjects.push(element);
 							}
-							if (a11 != null) {
+							if (a7 != null) {
 								org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 								tokenResolver.setOptions(getOptions());
 								org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a11.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS), result);
+								tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS), result);
 								Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a11).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a11).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a11).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a11).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
 								}
 								java.lang.String resolved = (java.lang.String) resolvedObject;
 								if (resolved != null) {
@@ -799,62 +696,66 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 									completedElement(value, false);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_2_0_0_0_2, resolved, true);
-								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a11, element);
+								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_1_0_0_0_2, resolved, true);
+								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 14);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 14);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 14);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 14);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 14);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 9);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 9);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 9);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 9);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 9);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 9);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 9);
 					}
 					
 				)
 				{
 					// expected elements (follow set)
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 15);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 15);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 15);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 15);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 15);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 10);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 10);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 10);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 10);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 10);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 10);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 10);
 				}
 				
 				
 				|				(
-					a12 = 'defaultMainOperation' {
+					a8 = 'defaultMainOperation' {
 						if (element == null) {
 							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a12, element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_2_0_0_0_0, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_14, 16);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_13, 11);
 					}
 					
-					a13 = ':' {
+					a9 = '=' {
 						if (element == null) {
 							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a13, element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_2_0_0_0_1, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a9, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_15, 17);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_14, 12);
 					}
 					
 					(
-						a14 = QUOTED_34_34						
+						a10 = QUOTED_34_34						
 						{
 							if (terminateParsing) {
 								throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
@@ -863,14 +764,14 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 								element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
 								incompleteObjects.push(element);
 							}
-							if (a14 != null) {
+							if (a10 != null) {
 								org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 								tokenResolver.setOptions(getOptions());
 								org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION), result);
+								tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION), result);
 								Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a14).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a10).getStopIndex());
 								}
 								java.lang.String resolved = (java.lang.String) resolvedObject;
 								if (resolved != null) {
@@ -879,334 +780,516 @@ parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject eleme
 									completedElement(value, false);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_2, resolved, true);
-								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a14, element);
+								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_2_0_0_0_2, resolved, true);
+								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a10, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 18);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 18);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 18);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 18);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 18);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 13);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 13);
 					}
 					
 				)
 				{
 					// expected elements (follow set)
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 19);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 19);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 19);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 19);
-					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 19);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 14);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 14);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 14);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 14);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 14);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 14);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 14);
 				}
 				
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 20);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 20);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 20);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 20);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 20);
-			}
-			
-		)
-		
-	)*	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 21);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 21);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 21);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 21);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 21);
-	}
-	
-	a15 = '{' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a15, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 22, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 22);
-	}
-	
-	(
-		(
-			(
-				a16_0 = parse_org_kermeta_kp_Source				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-						incompleteObjects.push(element);
-					}
-					if (a16_0 != null) {
-						if (a16_0 != null) {
-							Object value = a16_0;
-							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__SOURCES, value);
-							completedElement(value, true);
+				
+				|				(
+					a11 = 'dependencies' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6_0_0_1, a16_0, true);
-						copyLocalizationInfos(a16_0, element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_0, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a11, element);
 					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 23, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 23);
-			}
-			
-			
-			|			(
-				a17_0 = parse_org_kermeta_kp_Dependency				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-						incompleteObjects.push(element);
-					}
-					if (a17_0 != null) {
-						if (a17_0 != null) {
-							Object value = a17_0;
-							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__DEPENDENCIES, value);
-							completedElement(value, true);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6_0_1_1, a17_0, true);
-						copyLocalizationInfos(a17_0, element);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 24);
-			}
-			
-			
-			|			(
-				a18_0 = parse_org_kermeta_kp_Option				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-						incompleteObjects.push(element);
-					}
-					if (a18_0 != null) {
-						if (a18_0 != null) {
-							Object value = a18_0;
-							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__OPTIONS, value);
-							completedElement(value, true);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6_0_2_1, a18_0, true);
-						copyLocalizationInfos(a18_0, element);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 25);
-			}
-			
-			
-			|			(
-				a19_0 = parse_org_kermeta_kp_WeaveDirective				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-						incompleteObjects.push(element);
-					}
-					if (a19_0 != null) {
-						if (a19_0 != null) {
-							Object value = a19_0;
-							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES, value);
-							completedElement(value, true);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6_0_3_1, a19_0, true);
-						copyLocalizationInfos(a19_0, element);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 26);
-			}
-			
-		)
-		
-	)*	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 27, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 27);
-	}
-	
-	a20 = '}' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_8, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a20, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_26, 28);
-	}
-	
-	(
-		(
-			a21 = 'ref' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_10_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a21, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_27, 29);
-			}
-			
-			a22 = '{' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_10_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a22, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 30, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 30);
-			}
-			
-			(
-				(
-					(
-						a23_0 = parse_org_kermeta_kp_KermetaProjectRef						{
-							if (terminateParsing) {
-								throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-							}
-							if (element == null) {
-								element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-								incompleteObjects.push(element);
-							}
-							if (a23_0 != null) {
-								if (a23_0 != null) {
-									Object value = a23_0;
-									addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__REF, value);
-									completedElement(value, true);
-								}
-								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_10_0_0_2_0_0_1, a23_0, true);
-								copyLocalizationInfos(a23_0, element);
-							}
-						}
-					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 31, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 31);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_15, 15);
+					}
+					
+					a12 = '=' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_1, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a12, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 16);
+					}
+					
+					a13 = '{' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_2, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a13, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 17, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 17);
+					}
+					
+					(
+						(
+							(
+								a14_0 = parse_org_kermeta_kp_Dependency								{
+									if (terminateParsing) {
+										throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+									}
+									if (element == null) {
+										element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+										incompleteObjects.push(element);
+									}
+									if (a14_0 != null) {
+										if (a14_0 != null) {
+											Object value = a14_0;
+											addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__DEPENDENCIES, value);
+											completedElement(value, true);
+										}
+										collectHiddenTokens(element);
+										retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_3_0_0_0, a14_0, true);
+										copyLocalizationInfos(a14_0, element);
+									}
+								}
+							)
+							{
+								// expected elements (follow set)
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 18, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 18);
+							}
+							
+						)
+						
+					)*					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 19, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 19);
+					}
+					
+					a15 = '}' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_3_0_0_0_5, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a15, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 20);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 20);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 20);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 20);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 20);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 20);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 20);
 					}
 					
 				)
-				
-			)*			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 32, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 32);
-			}
-			
-			a24 = '}' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-					incompleteObjects.push(element);
+				{
+					// expected elements (follow set)
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 21);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 21);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 21);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 21);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 21);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 21);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 21);
 				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_10_0_0_4, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a24, element);
-			}
+				
+				
+				|				(
+					a16 = 'sources' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_4_0_0_0_0, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a16, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 22);
+					}
+					
+					a17 = '=' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_4_0_0_0_1, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a17, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 23);
+					}
+					
+					a18 = '{' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_4_0_0_0_2, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a18, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 24, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 24);
+					}
+					
+					(
+						(
+							(
+								a19_0 = parse_org_kermeta_kp_Source								{
+									if (terminateParsing) {
+										throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+									}
+									if (element == null) {
+										element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+										incompleteObjects.push(element);
+									}
+									if (a19_0 != null) {
+										if (a19_0 != null) {
+											Object value = a19_0;
+											addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__SOURCES, value);
+											completedElement(value, true);
+										}
+										collectHiddenTokens(element);
+										retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_4_0_0_0_3_0_0_0, a19_0, true);
+										copyLocalizationInfos(a19_0, element);
+									}
+								}
+							)
+							{
+								// expected elements (follow set)
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 25, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 25);
+							}
+							
+						)
+						
+					)*					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 26, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 26);
+					}
+					
+					a20 = '}' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_4_0_0_0_5, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a20, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 27);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 27);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 27);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 27);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 27);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 27);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 27);
+					}
+					
+				)
+				{
+					// expected elements (follow set)
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 28);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 28);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 28);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 28);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 28);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 28);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 28);
+				}
+				
+				
+				|				(
+					a21 = 'options' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_5_0_0_0_0, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a21, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 29);
+					}
+					
+					a22 = '=' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_5_0_0_0_1, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a22, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 30);
+					}
+					
+					a23 = '{' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_5_0_0_0_2, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a23, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_26, 31, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_27, 31);
+					}
+					
+					(
+						(
+							(
+								a24_0 = parse_org_kermeta_kp_Option								{
+									if (terminateParsing) {
+										throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+									}
+									if (element == null) {
+										element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+										incompleteObjects.push(element);
+									}
+									if (a24_0 != null) {
+										if (a24_0 != null) {
+											Object value = a24_0;
+											addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__OPTIONS, value);
+											completedElement(value, true);
+										}
+										collectHiddenTokens(element);
+										retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_5_0_0_0_3_0_0_0, a24_0, true);
+										copyLocalizationInfos(a24_0, element);
+									}
+								}
+							)
+							{
+								// expected elements (follow set)
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_26, 32, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_27, 32);
+							}
+							
+						)
+						
+					)*					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_26, 33, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_27, 33);
+					}
+					
+					a25 = '}' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_5_0_0_0_5, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a25, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 34);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 34);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 34);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 34);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 34);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 34);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 34);
+					}
+					
+				)
+				{
+					// expected elements (follow set)
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 35);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 35);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 35);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 35);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 35);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 35);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 35);
+				}
+				
+				
+				|				(
+					a26 = 'weaveDirectives' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_6_0_0_0_0, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a26, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 36);
+					}
+					
+					a27 = '=' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_6_0_0_0_1, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a27, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 37);
+					}
+					
+					a28 = '{' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_6_0_0_0_2, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a28, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_30, 38, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_31, 38);
+					}
+					
+					(
+						(
+							(
+								a29_0 = parse_org_kermeta_kp_WeaveDirective								{
+									if (terminateParsing) {
+										throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+									}
+									if (element == null) {
+										element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+										incompleteObjects.push(element);
+									}
+									if (a29_0 != null) {
+										if (a29_0 != null) {
+											Object value = a29_0;
+											addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES, value);
+											completedElement(value, true);
+										}
+										collectHiddenTokens(element);
+										retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_6_0_0_0_3_0_0_0, a29_0, true);
+										copyLocalizationInfos(a29_0, element);
+									}
+								}
+							)
+							{
+								// expected elements (follow set)
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_30, 39, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
+								addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_31, 39);
+							}
+							
+						)
+						
+					)*					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_30, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_31, 40);
+					}
+					
+					a30 = '}' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+							incompleteObjects.push(element);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0_0_6_0_0_0_5, null, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a30, element);
+					}
+					{
+						// expected elements (follow set)
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 41);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 41);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 41);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 41);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 41);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 41);
+						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 41);
+					}
+					
+				)
+				{
+					// expected elements (follow set)
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 42);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 42);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 42);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 42);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 42);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 42);
+					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 42);
+				}
+				
+			)
 			{
 				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 43);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 43);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 43);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 43);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 43);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 43);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 43);
 			}
 			
 		)
 		
-	)?	{
+	)*	{
 		// expected elements (follow set)
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 44);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 44);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_4, 44);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 44);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 44);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_7, 44);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_8, 44);
 	}
 	
 ;
@@ -1215,32 +1298,50 @@ parse_org_kermeta_kp_Source returns [org.kermeta.kp.Source element = null]
 @init{
 }
 :
-	a0 = 'source' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSource();
-			incompleteObjects.push(element);
+	(
+		a0 = 'require' {
+			if (element == null) {
+				element = org.kermeta.kp.KpFactory.eINSTANCE.createSource();
+				incompleteObjects.push(element);
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE__BYTE_CODE_FROM_ADEPENDENCY), value);
+				}
+			}
+			collectHiddenTokens(element);
+			retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_1_0_0_0, null, true);
+			copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
-	}
+		{
+			// expected elements (follow set)
+			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_32, 45);
+		}
+		
+		
+		|		a1 = 'source' {
+			if (element == null) {
+				element = org.kermeta.kp.KpFactory.eINSTANCE.createSource();
+				incompleteObjects.push(element);
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE__BYTE_CODE_FROM_ADEPENDENCY), value);
+				}
+			}
+			collectHiddenTokens(element);
+			retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_1_0_1_0, null, true);
+			copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
+		}
+		{
+			// expected elements (follow set)
+			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_32, 46);
+		}
+		
+	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_30, 35);
-	}
-	
-	a1 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSource();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_31, 36);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_32, 47);
 	}
 	
 	(
@@ -1252,6 +1353,11 @@ parse_org_kermeta_kp_Source returns [org.kermeta.kp.Source element = null]
 			if (element == null) {
 				element = org.kermeta.kp.KpFactory.eINSTANCE.createSource();
 				incompleteObjects.push(element);
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE__BYTE_CODE_FROM_ADEPENDENCY), value);
+				}
 			}
 			if (a2 != null) {
 				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
@@ -1276,721 +1382,38 @@ parse_org_kermeta_kp_Source returns [org.kermeta.kp.Source element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 37, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 37);
-	}
-	
-	|//derived choice rules for sub-classes: 
-	
-	c0 = parse_org_kermeta_kp_SourceFolder{ element = c0; /* this is a subclass or primitive expression choice */ }
-	|	c1 = parse_org_kermeta_kp_SourceFile{ element = c1; /* this is a subclass or primitive expression choice */ }
-	|	c2 = parse_org_kermeta_kp_SourceNSURI{ element = c2; /* this is a subclass or primitive expression choice */ }
-	|	c3 = parse_org_kermeta_kp_SourceQuery{ element = c3; /* this is a subclass or primitive expression choice */ }
-	
-;
-
-parse_org_kermeta_kp_SourceFolder returns [org.kermeta.kp.SourceFolder element = null]
-@init{
-}
-:
-	a0 = 'srcDir' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFolder();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_32, 38);
-	}
-	
-	a1 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFolder();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_33, 39);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_34, 39);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_33, 48);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 48, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 48, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 48);
 	}
 	
 	(
 		(
-			a2 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
+			a3 = 'byteCodeFromADependency' {
 				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFolder();
+					element = org.kermeta.kp.KpFactory.eINSTANCE.createSource();
 					incompleteObjects.push(element);
-				}
-				if (a2 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FOLDER__FOLDER_NAME), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE__BYTE_CODE_FROM_ADEPENDENCY), value);
 					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FOLDER__FOLDER_NAME), value);
-						completedElement(value, false);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_2_0_0_0, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
-				}
-			}
-		)
-		{
-			// expected elements (follow set)
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 40, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 40);
-		}
-		
-		
-		|		(
-			a3 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFolder();
-					incompleteObjects.push(element);
-				}
-				if (a3 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FOLDER__URL), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
-					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FOLDER__URL), value);
-						completedElement(value, false);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_2_0_1_0, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
-				}
-			}
-		)
-		{
-			// expected elements (follow set)
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 41, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 41);
-		}
-		
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 42, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 42);
-	}
-	
-;
-
-parse_org_kermeta_kp_SourceFile returns [org.kermeta.kp.SourceFile element = null]
-@init{
-}
-:
-	a0 = 'srcFile' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFile();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_35, 43);
-	}
-	
-	a1 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFile();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_36, 44);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_37, 44);
-	}
-	
-	(
-		(
-			a2 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFile();
-					incompleteObjects.push(element);
-				}
-				if (a2 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FILE__FILE_NAME), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
-					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FILE__FILE_NAME), value);
-						completedElement(value, false);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_2_0_0_0, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
-				}
-			}
-		)
-		{
-			// expected elements (follow set)
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 45, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 45);
-		}
-		
-		
-		|		(
-			a3 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceFile();
-					incompleteObjects.push(element);
-				}
-				if (a3 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FILE__URL), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
-					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_FILE__URL), value);
-						completedElement(value, false);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_2_0_1_0, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
-				}
-			}
-		)
-		{
-			// expected elements (follow set)
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 46, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 46);
-		}
-		
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 47, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 47);
-	}
-	
-;
-
-parse_org_kermeta_kp_SourceNSURI returns [org.kermeta.kp.SourceNSURI element = null]
-@init{
-}
-:
-	a0 = 'srcNSURI' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceNSURI();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_38, 48);
-	}
-	
-	a1 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceNSURI();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_39, 49);
-	}
-	
-	(
-		a2 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceNSURI();
-				incompleteObjects.push(element);
-			}
-			if (a2 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_NSURI__URL), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String) resolvedObject;
-				if (resolved != null) {
-					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_NSURI__URL), value);
-					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_2, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_40, 50);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 50, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 50);
-	}
-	
-	(
-		(
-			a3 = 'from' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceNSURI();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_3_0_0_0, null, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_3, true, true);
 				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
+				// set value of boolean attribute
+				Object value = true;
+				element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE__BYTE_CODE_FROM_ADEPENDENCY), value);
+				completedElement(value, false);
 			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_41, 51);
-			}
-			
-			(
-				a4 = QUOTED_34_34				
-				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceNSURI();
-						incompleteObjects.push(element);
-					}
-					if (a4 != null) {
-						org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-						tokenResolver.setOptions(getOptions());
-						org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_NSURI__FROM), result);
-						Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
-						}
-						String resolved = (String) resolvedObject;
-						org.kermeta.kp.Dependency proxy = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-						collectHiddenTokens(element);
-						registerContextDependentProxy(new org.kermeta.kp.editor.mopp.KpContextDependentURIFragmentFactory<org.kermeta.kp.ImportedSource, org.kermeta.kp.Dependency>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getImportedSourceFromReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_NSURI__FROM), resolved, proxy);
-						if (proxy != null) {
-							Object value = proxy;
-							element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_NSURI__FROM), value);
-							completedElement(value, false);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_3_0_0_1, proxy, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 52, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 52);
-			}
-			
-		)
-		
-	)?	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 53, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 53);
-	}
-	
-;
-
-parse_org_kermeta_kp_SourceQuery returns [org.kermeta.kp.SourceQuery element = null]
-@init{
-}
-:
-	a0 = 'srcQuery' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
-	}
+		)?	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_42, 54);
-	}
-	
-	a1 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_43, 55);
-	}
-	
-	(
-		a2 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-				incompleteObjects.push(element);
-			}
-			if (a2 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__QUERY), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String) resolvedObject;
-				if (resolved != null) {
-					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__QUERY), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_2, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_44, 56);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 56, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 56);
-	}
-	
-	(
-		(
-			a3 = 'from' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 57);
-			}
-			
-			(
-				a4 = QUOTED_34_34				
-				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-						incompleteObjects.push(element);
-					}
-					if (a4 != null) {
-						org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-						tokenResolver.setOptions(getOptions());
-						org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__FROM), result);
-						Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
-						}
-						String resolved = (String) resolvedObject;
-						org.kermeta.kp.Dependency proxy = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-						collectHiddenTokens(element);
-						registerContextDependentProxy(new org.kermeta.kp.editor.mopp.KpContextDependentURIFragmentFactory<org.kermeta.kp.ImportedSource, org.kermeta.kp.Dependency>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getImportedSourceFromReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__FROM), resolved, proxy);
-						if (proxy != null) {
-							Object value = proxy;
-							element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__FROM), value);
-							completedElement(value, false);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3_0_0_1, proxy, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 58);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 58);
-			}
-			
-			(
-				(
-					a5 = 'URL' {
-						if (element == null) {
-							element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-							incompleteObjects.push(element);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3_0_0_2_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
-					}
-					{
-						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_47, 59);
-					}
-					
-					a6 = '=' {
-						if (element == null) {
-							element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-							incompleteObjects.push(element);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3_0_0_2_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
-					}
-					{
-						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_48, 60);
-					}
-					
-					(
-						a7 = QUOTED_34_34						
-						{
-							if (terminateParsing) {
-								throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-							}
-							if (element == null) {
-								element = org.kermeta.kp.KpFactory.eINSTANCE.createSourceQuery();
-								incompleteObjects.push(element);
-							}
-							if (a7 != null) {
-								org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-								tokenResolver.setOptions(getOptions());
-								org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__URL), result);
-								Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
-								}
-								java.lang.String resolved = (java.lang.String) resolvedObject;
-								if (resolved != null) {
-									Object value = resolved;
-									element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.SOURCE_QUERY__URL), value);
-									completedElement(value, false);
-								}
-								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3_0_0_2_0_0_2, resolved, true);
-								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
-							}
-						}
-					)
-					{
-						// expected elements (follow set)
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 61);
-					}
-					
-				)
-				
-			)?			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 62);
-			}
-			
-		)
-		
-	)?	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 63);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 49, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 49, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 49);
 	}
 	
 ;
@@ -2003,14 +1426,24 @@ parse_org_kermeta_kp_Dependency returns [org.kermeta.kp.Dependency element = nul
 		if (element == null) {
 			element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
 			incompleteObjects.push(element);
+			// initialize boolean attribute
+			{
+				Object value = false;
+				element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+			}
+			// initialize boolean attribute
+			{
+				Object value = false;
+				element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+			}
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_49, 64);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_34, 50);
 	}
 	
 	(
@@ -2022,6 +1455,16 @@ parse_org_kermeta_kp_Dependency returns [org.kermeta.kp.Dependency element = nul
 			if (element == null) {
 				element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
 				incompleteObjects.push(element);
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+				}
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+				}
 			}
 			if (a1 != null) {
 				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
@@ -2039,298 +1482,323 @@ parse_org_kermeta_kp_Dependency returns [org.kermeta.kp.Dependency element = nul
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_1, resolved, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_2, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_50, 65);
-	}
-	
-	a2 = 'URL' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_51, 66);
-	}
-	
-	a3 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_52, 67);
-	}
-	
-	(
-		a4 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-				incompleteObjects.push(element);
-			}
-			if (a4 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__URL), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String) resolvedObject;
-				if (resolved != null) {
-					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__URL), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_4, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 68);
-	}
-	
-	
-	|	a5 = 'dependency' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_1_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_53, 69);
-	}
-	
-	(
-		a6 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-				incompleteObjects.push(element);
-			}
-			if (a6 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__NAME), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String) resolvedObject;
-				if (resolved != null) {
-					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__NAME), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_1_1, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_54, 70);
-	}
-	
-	a7 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_1_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_55, 71);
-	}
-	
-	(
-		a8 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
-				incompleteObjects.push(element);
-			}
-			if (a8 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__DEP_REF), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStopIndex());
-				}
-				String resolved = (String) resolvedObject;
-				org.kermeta.kp.KermetaProjectRef proxy = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.kermeta.kp.editor.mopp.KpContextDependentURIFragmentFactory<org.kermeta.kp.Dependency, org.kermeta.kp.KermetaProjectRef>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getDependencyDepRefReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__DEP_REF), resolved, proxy);
-				if (proxy != null) {
-					Object value = proxy;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__DEP_REF), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_1_3, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a8, element);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a8, proxy);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_56, 72);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_57, 72);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 72, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 72);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_35, 51);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_36, 51);
 	}
 	
 	(
 		(
-			a9 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
+			a2 = '=' {
 				if (element == null) {
 					element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
 					incompleteObjects.push(element);
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+					}
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+					}
 				}
-				if (a9 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__GROUP), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a9).getStopIndex());
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_0_0_0_0, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_37, 52);
+			}
+			
+		)
+		{
+			// expected elements (follow set)
+			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_37, 53);
+		}
+		
+		
+		|		(
+			a3 = 'URLs' {
+				if (element == null) {
+					element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
+					incompleteObjects.push(element);
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
 					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__GROUP), value);
-						completedElement(value, false);
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
 					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_1_4, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a9, element);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_1_0_0_0_0, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_38, 54);
+			}
+			
+			a4 = '=' {
+				if (element == null) {
+					element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
+					incompleteObjects.push(element);
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+					}
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+					}
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_1_0_0_0_1, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_37, 55);
+			}
+			
+		)
+		{
+			// expected elements (follow set)
+			addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_37, 56);
+		}
+		
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_37, 57);
+	}
+	
+	(
+		a5 = QUOTED_34_34		
+		{
+			if (terminateParsing) {
+				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
+				incompleteObjects.push(element);
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+				}
+				// initialize boolean attribute
+				{
+					Object value = false;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
 				}
 			}
-		)
-		
-	)?	{
+			if (a5 != null) {
+				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				tokenResolver.setOptions(getOptions());
+				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__URL), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String) resolvedObject;
+				if (resolved != null) {
+					Object value = resolved;
+					addObjectToList(element, org.kermeta.kp.KpPackage.DEPENDENCY__URL, value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4, resolved, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
+			}
+		}
+	)
+	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_57, 73);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 73, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 73);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_39, 58);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_40, 58);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_41, 58);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 58, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 58);
 	}
 	
 	(
 		(
-			a10 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
+			a6 = ',' {
 				if (element == null) {
 					element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
 					incompleteObjects.push(element);
-				}
-				if (a10 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__VERSION), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a10).getStopIndex());
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
 					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__VERSION), value);
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+					}
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_5_0_0_0, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_42, 59);
+			}
+			
+			(
+				a7 = QUOTED_34_34				
+				{
+					if (terminateParsing) {
+						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+					}
+					if (element == null) {
+						element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
+						incompleteObjects.push(element);
+						// initialize boolean attribute
+						{
+							Object value = false;
+							element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+						}
+						// initialize boolean attribute
+						{
+							Object value = false;
+							element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+						}
+					}
+					if (a7 != null) {
+						org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+						tokenResolver.setOptions(getOptions());
+						org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
+						tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__URL), result);
+						Object resolvedObject = result.getResolvedToken();
+						if (resolvedObject == null) {
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
+						}
+						java.lang.String resolved = (java.lang.String) resolvedObject;
+						if (resolved != null) {
+							Object value = resolved;
+							addObjectToList(element, org.kermeta.kp.KpPackage.DEPENDENCY__URL, value);
+							completedElement(value, false);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_5_0_0_1, resolved, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_39, 60);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_40, 60);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_41, 60);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 60, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 60);
+			}
+			
+		)
+		
+	)*	{
+		// expected elements (follow set)
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_39, 61);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_40, 61);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_41, 61);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 61, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 61);
+	}
+	
+	(
+		(
+			(
+				(
+					a8 = 'ignoreByteCode' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
+							incompleteObjects.push(element);
+							// initialize boolean attribute
+							{
+								Object value = false;
+								element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+							}
+							// initialize boolean attribute
+							{
+								Object value = false;
+								element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+							}
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_6_0_0_0, true, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
+						// set value of boolean attribute
+						Object value = true;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
 						completedElement(value, false);
 					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_1_5, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a10, element);
-				}
+				)
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 62, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 62);
 			}
+			
+			
+			|			(
+				(
+					a11 = 'sourceOnly' {
+						if (element == null) {
+							element = org.kermeta.kp.KpFactory.eINSTANCE.createDependency();
+							incompleteObjects.push(element);
+							// initialize boolean attribute
+							{
+								Object value = false;
+								element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__IGNORE_BYTE_CODE), value);
+							}
+							// initialize boolean attribute
+							{
+								Object value = false;
+								element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+							}
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_6_0_1_0, true, true);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a11, element);
+						// set value of boolean attribute
+						Object value = true;
+						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY), value);
+						completedElement(value, false);
+					}
+				)
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 63, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 63);
+			}
+			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 74, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 74);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 64, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 64);
 	}
 	
 ;
@@ -2345,51 +1813,48 @@ parse_org_kermeta_kp_WeaveDirective returns [org.kermeta.kp.WeaveDirective eleme
 			incompleteObjects.push(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_58, 75);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_59, 75);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_43, 65);
 	}
 	
 	(
-		(
-			a1 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createWeaveDirective();
-					incompleteObjects.push(element);
-				}
-				if (a1 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.WEAVE_DIRECTIVE__NAME), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
-					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.WEAVE_DIRECTIVE__NAME), value);
-						completedElement(value, false);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_1, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
-				}
+		a1 = QUOTED_34_34		
+		{
+			if (terminateParsing) {
+				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
 			}
-		)
-		
-	)?	{
+			if (element == null) {
+				element = org.kermeta.kp.KpFactory.eINSTANCE.createWeaveDirective();
+				incompleteObjects.push(element);
+			}
+			if (a1 != null) {
+				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				tokenResolver.setOptions(getOptions());
+				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.WEAVE_DIRECTIVE__NAME), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String) resolvedObject;
+				if (resolved != null) {
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.WEAVE_DIRECTIVE__NAME), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_2, resolved, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
+			}
+		}
+	)
+	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_59, 76);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_44, 66);
 	}
 	
 	a2 = '=' {
@@ -2398,13 +1863,13 @@ parse_org_kermeta_kp_WeaveDirective returns [org.kermeta.kp.WeaveDirective eleme
 			incompleteObjects.push(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_2, null, true);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_60, 77, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_61, 77, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 67, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 67, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
 	}
 	
 	(
@@ -2423,15 +1888,15 @@ parse_org_kermeta_kp_WeaveDirective returns [org.kermeta.kp.WeaveDirective eleme
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_3, a3_0, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_4, a3_0, true);
 				copyLocalizationInfos(a3_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_60, 78, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_61, 78, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 68, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
 	}
 	
 	(
@@ -2450,23 +1915,15 @@ parse_org_kermeta_kp_WeaveDirective returns [org.kermeta.kp.WeaveDirective eleme
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_4, a4_0, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_5, a4_0, true);
 				copyLocalizationInfos(a4_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 79, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 79);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_30, 69, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_31, 69);
 	}
 	
 ;
@@ -2475,75 +1932,22 @@ parse_org_kermeta_kp_Option returns [org.kermeta.kp.Option element = null]
 @init{
 }
 :
-	a0 = 'merger-option' {
+	a0 = 'option' {
 		if (element == null) {
 			element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
 			incompleteObjects.push(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_8_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_62, 80);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_63, 80);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_47, 70);
 	}
 	
 	(
-		(
-			a1 = QUOTED_34_34			
-			{
-				if (terminateParsing) {
-					throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-				}
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
-					incompleteObjects.push(element);
-				}
-				if (a1 != null) {
-					org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-					tokenResolver.setOptions(getOptions());
-					org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-					tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.OPTION__NAME), result);
-					Object resolvedObject = result.getResolvedToken();
-					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
-					}
-					java.lang.String resolved = (java.lang.String) resolvedObject;
-					if (resolved != null) {
-						Object value = resolved;
-						element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.OPTION__NAME), value);
-						completedElement(value, false);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_8_0_0_1, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
-				}
-			}
-		)
-		
-	)?	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_63, 81);
-	}
-	
-	a2 = '=' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_8_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_64, 82);
-	}
-	
-	(
-		a3 = QUOTED_34_34		
+		a1 = QUOTED_34_34		
 		{
 			if (terminateParsing) {
 				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
@@ -2552,14 +1956,88 @@ parse_org_kermeta_kp_Option returns [org.kermeta.kp.Option element = null]
 				element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
 				incompleteObjects.push(element);
 			}
-			if (a3 != null) {
+			if (a1 != null) {
 				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				tokenResolver.setOptions(getOptions());
 				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.OPTION__VALUE), result);
+				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.OPTION__NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String) resolvedObject;
+				if (resolved != null) {
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.OPTION__NAME), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_2, resolved, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_48, 71);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_49, 71);
+	}
+	
+	(
+		(
+			a2 = 'value' {
+				if (element == null) {
+					element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
+					incompleteObjects.push(element);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_3_0_0_1, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_49, 72);
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_49, 73);
+	}
+	
+	a3 = '=' {
+		if (element == null) {
+			element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
+			incompleteObjects.push(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_4, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_50, 74);
+	}
+	
+	(
+		a4 = QUOTED_34_34		
+		{
+			if (terminateParsing) {
+				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.kermeta.kp.KpFactory.eINSTANCE.createOption();
+				incompleteObjects.push(element);
+			}
+			if (a4 != null) {
+				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				tokenResolver.setOptions(getOptions());
+				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.OPTION__VALUE), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -2568,23 +2046,15 @@ parse_org_kermeta_kp_Option returns [org.kermeta.kp.Option element = null]
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_8_0_0_3, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_5, resolved, true);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_16, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_22, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 83, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_25, 83);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_26, 75, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_27, 75);
 	}
 	
 ;
@@ -2619,15 +2089,15 @@ parse_org_kermeta_kp_StringExpression returns [org.kermeta.kp.StringExpression e
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_9_0_0_0, resolved, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_0, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_60, 84, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_61, 84, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 76, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 76, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
 	}
 	
 ;
@@ -2642,13 +2112,13 @@ parse_org_kermeta_kp_MixExpression returns [org.kermeta.kp.MixExpression element
 			incompleteObjects.push(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_10_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_60, 85, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_7);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_61, 85, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_7);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 77, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 77, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
 	}
 	
 	(
@@ -2667,15 +2137,15 @@ parse_org_kermeta_kp_MixExpression returns [org.kermeta.kp.MixExpression element
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_10_0_0_1, a1_0, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_1, a1_0, true);
 				copyLocalizationInfos(a1_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_60, 86, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_8);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_61, 86, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_8);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 78, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_7);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 78, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_7);
 	}
 	
 	(
@@ -2694,14 +2164,14 @@ parse_org_kermeta_kp_MixExpression returns [org.kermeta.kp.MixExpression element
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_10_0_0_2, a2_0, true);
+				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_2, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_65, 87);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_51, 79);
 	}
 	
 	a3 = ')' {
@@ -2710,260 +2180,13 @@ parse_org_kermeta_kp_MixExpression returns [org.kermeta.kp.MixExpression element
 			incompleteObjects.push(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_10_0_0_3, null, true);
+		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_60, 88, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_61, 88, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_6);
-	}
-	
-;
-
-parse_org_kermeta_kp_KermetaProjectRef returns [org.kermeta.kp.KermetaProjectRef element = null]
-@init{
-}
-:
-	(
-		a0 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-				incompleteObjects.push(element);
-			}
-			if (a0 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__GROUP), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String) resolvedObject;
-				if (resolved != null) {
-					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__GROUP), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_66, 89);
-	}
-	
-	a1 = ':' {
-		if (element == null) {
-			element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-			incompleteObjects.push(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_67, 90);
-	}
-	
-	(
-		a2 = QUOTED_34_34		
-		{
-			if (terminateParsing) {
-				throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-				incompleteObjects.push(element);
-			}
-			if (a2 != null) {
-				org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				tokenResolver.setOptions(getOptions());
-				org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__NAME), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String) resolvedObject;
-				if (resolved != null) {
-					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__NAME), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_2, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_68, 91);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_69, 91);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 91, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 91);
-	}
-	
-	(
-		(
-			a3 = 'URL' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_3_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_70, 92);
-			}
-			
-			a4 = '=' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_3_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_71, 93);
-			}
-			
-			(
-				a5 = QUOTED_34_34				
-				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-						incompleteObjects.push(element);
-					}
-					if (a5 != null) {
-						org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-						tokenResolver.setOptions(getOptions());
-						org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__URL), result);
-						Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
-						}
-						java.lang.String resolved = (java.lang.String) resolvedObject;
-						if (resolved != null) {
-							Object value = resolved;
-							element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__URL), value);
-							completedElement(value, false);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_3_0_0_2, resolved, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_69, 94);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 94, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 94);
-			}
-			
-		)
-		
-	)?	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_69, 95);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 95, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 95);
-	}
-	
-	(
-		(
-			a6 = '[' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_4_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_72, 96);
-			}
-			
-			(
-				a7 = QUOTED_34_34				
-				{
-					if (terminateParsing) {
-						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-					}
-					if (element == null) {
-						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-						incompleteObjects.push(element);
-					}
-					if (a7 != null) {
-						org.kermeta.kp.editor.IKpTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-						tokenResolver.setOptions(getOptions());
-						org.kermeta.kp.editor.IKpTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__VERSION), result);
-						Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
-						}
-						java.lang.String resolved = (java.lang.String) resolvedObject;
-						if (resolved != null) {
-							Object value = resolved;
-							element.eSet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT_REF__VERSION), value);
-							completedElement(value, false);
-						}
-						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_4_0_0_1, resolved, true);
-						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
-					}
-				}
-			)
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_73, 97);
-			}
-			
-			a8 = ']' {
-				if (element == null) {
-					element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProjectRef();
-					incompleteObjects.push(element);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11_0_0_4_0_0_2, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 98, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 98);
-			}
-			
-		)
-		
-	)?	{
-		// expected elements (follow set)
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 99, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_4);
-		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 99);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_45, 80, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
+		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_46, 80, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_5);
 	}
 	
 ;
@@ -2981,10 +2204,6 @@ SL_COMMENT:
 ;
 ML_COMMENT:
 	('/*'.*'*/')
-	{ _channel = 99; }
-;
-INTEGER:
-	(('-')?('1'..'9')('0'..'9')*|'0')
 	{ _channel = 99; }
 ;
 FLOAT:

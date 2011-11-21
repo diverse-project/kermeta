@@ -44,8 +44,8 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 	private java.io.OutputStream outputStream;
 	protected java.util.List<PrintToken> tokenOutputStream;
 	private org.kermeta.kp.editor.IKpTokenResolverFactory tokenResolverFactory = new org.kermeta.kp.editor.mopp.KpTokenResolverFactory();
-	private boolean handleTokenSpaceAutomatically = false;
-	private int tokenSpace = 0;
+	private boolean handleTokenSpaceAutomatically = true;
+	private int tokenSpace = 1;
 	/**
 	 * A flag that indicates whether tokens have already been printed for some object.
 	 * The flag is set to false whenever printing of an EObject tree is started. The
@@ -113,48 +113,28 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.SourceFolder) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2, foundFormattingElements);
-			return;
-		}
-		if (element instanceof org.kermeta.kp.SourceFile) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3, foundFormattingElements);
-			return;
-		}
-		if (element instanceof org.kermeta.kp.SourceNSURI) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4, foundFormattingElements);
-			return;
-		}
-		if (element instanceof org.kermeta.kp.SourceQuery) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
+		if (element instanceof org.kermeta.kp.Source) {
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1, foundFormattingElements);
 			return;
 		}
 		if (element instanceof org.kermeta.kp.Dependency) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6, foundFormattingElements);
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2, foundFormattingElements);
 			return;
 		}
 		if (element instanceof org.kermeta.kp.WeaveDirective) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7, foundFormattingElements);
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3, foundFormattingElements);
 			return;
 		}
 		if (element instanceof org.kermeta.kp.Option) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_8, foundFormattingElements);
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4, foundFormattingElements);
 			return;
 		}
 		if (element instanceof org.kermeta.kp.StringExpression) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_9, foundFormattingElements);
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
 			return;
 		}
 		if (element instanceof org.kermeta.kp.MixExpression) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_10, foundFormattingElements);
-			return;
-		}
-		if (element instanceof org.kermeta.kp.KermetaProjectRef) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_11, foundFormattingElements);
-			return;
-		}
-		if (element instanceof org.kermeta.kp.Source) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1, foundFormattingElements);
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6, foundFormattingElements);
 			return;
 		}
 		

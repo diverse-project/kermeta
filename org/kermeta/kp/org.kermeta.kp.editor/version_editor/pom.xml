@@ -148,7 +148,7 @@
     <dependency>
       <groupId>org.emftext.commons</groupId>
       <artifactId>commons.antlr3_3_0</artifactId>
-      <version>1.0.0</version>
+      <version>${kermeta.version}</version>
     </dependency>
     <dependency>
         <groupId>org.osgi</groupId>

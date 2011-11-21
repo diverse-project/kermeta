@@ -58,18 +58,6 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
-		if (object instanceof org.kermeta.kp.FreestyleSource) {
-			result = interprete_org_kermeta_kp_FreestyleSource((org.kermeta.kp.FreestyleSource) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.KermetaProjectRef) {
-			result = interprete_org_kermeta_kp_KermetaProjectRef((org.kermeta.kp.KermetaProjectRef) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		if (object instanceof org.kermeta.kp.MixExpression) {
 			result = interprete_org_kermeta_kp_MixExpression((org.kermeta.kp.MixExpression) object, context);
 		}
@@ -96,36 +84,6 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.kermeta.kp.WeaveDirective) {
 			result = interprete_org_kermeta_kp_WeaveDirective((org.kermeta.kp.WeaveDirective) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.SourceQuery) {
-			result = interprete_org_kermeta_kp_SourceQuery((org.kermeta.kp.SourceQuery) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.SourceNSURI) {
-			result = interprete_org_kermeta_kp_SourceNSURI((org.kermeta.kp.SourceNSURI) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.ImportedSource) {
-			result = interprete_org_kermeta_kp_ImportedSource((org.kermeta.kp.ImportedSource) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.SourceFile) {
-			result = interprete_org_kermeta_kp_SourceFile((org.kermeta.kp.SourceFile) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.SourceFolder) {
-			result = interprete_org_kermeta_kp_SourceFolder((org.kermeta.kp.SourceFolder) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -173,26 +131,6 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 		return null;
 	}
 	
-	public ResultType interprete_org_kermeta_kp_SourceFolder(org.kermeta.kp.SourceFolder object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_SourceFile(org.kermeta.kp.SourceFile object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_SourceNSURI(org.kermeta.kp.SourceNSURI object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_SourceQuery(org.kermeta.kp.SourceQuery object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_ImportedSource(org.kermeta.kp.ImportedSource object, ContextType context) {
-		return null;
-	}
-	
 	public ResultType interprete_org_kermeta_kp_WeaveDirective(org.kermeta.kp.WeaveDirective object, ContextType context) {
 		return null;
 	}
@@ -210,14 +148,6 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_org_kermeta_kp_MixExpression(org.kermeta.kp.MixExpression object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_KermetaProjectRef(org.kermeta.kp.KermetaProjectRef object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_FreestyleSource(org.kermeta.kp.FreestyleSource object, ContextType context) {
 		return null;
 	}
 	
