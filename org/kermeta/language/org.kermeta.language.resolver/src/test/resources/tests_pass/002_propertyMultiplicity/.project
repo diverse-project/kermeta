@@ -7,5 +7,6 @@
 	<buildSpec>
 	</buildSpec>
 	<natures>
+		<nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>
 	</natures>
 </projectDescription>

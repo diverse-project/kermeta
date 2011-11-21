@@ -1,0 +1,8 @@
+KermetaProject "002_propertyMultiplicity" 
+//version :  "someVersion"
+groupId ="group" 
+sources = { 
+	require "${project.baseUri}/src/main/kmt/002_propertyMultiplicity.kmt"}
+dependencies = { 
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+} 
