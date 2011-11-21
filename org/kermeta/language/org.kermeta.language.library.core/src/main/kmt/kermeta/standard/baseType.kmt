@@ -4,6 +4,10 @@ using kermeta::exceptions
 
 
 package kermeta{
+/**
+ * TODO : overloaded are removed until bug 1992 is solved
+ * http://bugzilla.inria.fr/show_bug.cgi?id=1992
+ */
 package standard{
 
 /**
@@ -244,7 +248,7 @@ class String {
         @CompilerIgnore "true"
          operation compareTo(arg0:String) : Integer is do
           end
-
+/*
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
           end
@@ -256,16 +260,16 @@ class String {
         @CompilerIgnore "true"
          operation indexOf(arg0:Integer,arg1:Integer) : Integer is do
           end
-
+*/
         @CompilerIgnore "true"
          operation indexOf(arg0:String) : Integer is do
           end
-
+/*
         @CompilerIgnore "true"
          operation indexOf(arg0:String,arg1:Integer) : Integer is do
           end
-
-        @CompilerIgnore "true"
+*/
+/*        @CompilerIgnore "true"
          operation valueOf(arg0:Object) : String is do
           end
 
@@ -297,7 +301,7 @@ class String {
           end
         @CompilerIgnore "true"
          operation valueOf(arg0:Double) : String is do
-          end
+          end*/
         @CompilerIgnore "true"
          operation charAt(arg0:Integer) : Character is do
 
@@ -358,22 +362,22 @@ class String {
          operation isEmpty() : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation lastIndexOf(arg0:Integer) : Integer is do
 
           end
         @CompilerIgnore "true"
          operation lastIndexOf(arg0:Integer,arg1:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation lastIndexOf(arg0:String) : Integer is do
 
           end
-        @CompilerIgnore "true"
+       /* @CompilerIgnore "true"
          operation lastIndexOf(arg0:String,arg1:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation size() : Integer is do
 
@@ -394,10 +398,10 @@ class String {
          operation regionMatches(arg0:Boolean,arg1:Integer,arg2:String,arg3:Integer,arg4:Integer) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation replace(arg0:Character,arg1:Character) : String is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation replaceAll(arg0:String,arg1:String) : String is do
 
@@ -484,12 +488,12 @@ class String {
         @CompilerIgnore "true"
         operation elementAt(index : Integer) : Character is do
         end
-
+/*
         //@CompilerIgnore "true"
         @Deprecated "true"
         operation replace(str1 : String, str2 : String) : String is do
         end
-
+*/
         @CompilerIgnore "true"
         operation toInteger() : Integer is do
         end
@@ -556,10 +560,10 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
          operation reverseBytes(arg0:Integer) : Integer is do
 
           end
-        @CompilerIgnore "true"
+ /*       @CompilerIgnore "true"
          operation compareTo(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -584,7 +588,7 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
          operation doubleValue() : Double is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation valueOf(arg0:String,arg1:Integer) : Integer is do
 
           end
@@ -595,7 +599,7 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
         @CompilerIgnore "true"
          operation valueOf(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation toHexString(arg0:Integer) : String is do
 
@@ -624,10 +628,7 @@ class Integer inherits Numeric {        @CompilerIgnore "true"
          operation getInteger(arg0:String,arg1:Integer) : Integer is do
 
           end
-        @CompilerIgnore "true"
-         operation getInteger(arg0:String,arg1:Integer) : Integer is do
-
-          end
+        
         @CompilerIgnore "true"
          operation highestOneBit(arg0:Integer) : Integer is do
 
@@ -709,10 +710,10 @@ class Boolean {        @CompilerIgnore "true"
          operation hashCode() : Integer is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation compareTo(arg0:Boolean) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -725,14 +726,14 @@ class Boolean {        @CompilerIgnore "true"
          operation booleanValue() : Boolean is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation valueOf(arg0:Boolean) : Boolean is do
 
           end
         @CompilerIgnore "true"
          operation valueOf(arg0:String) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation parseBoolean(arg0:String) : Boolean is do
 
@@ -792,10 +793,10 @@ class Date inherits Comparable {        @CompilerIgnore "true"
          operation clone() : Object is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation compareTo(arg0:Date) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -930,10 +931,10 @@ class Short inherits Numeric {        @CompilerIgnore "true"
          operation reverseBytes(arg0:Short) : Short is do
 
           end
-        @CompilerIgnore "true"
+ /*       @CompilerIgnore "true"
          operation compareTo(arg0:Short) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -962,14 +963,14 @@ class Short inherits Numeric {        @CompilerIgnore "true"
          operation valueOf(arg0:String,arg1:Integer) : Short is do
 
           end
-        @CompilerIgnore "true"
+ /*       @CompilerIgnore "true"
          operation valueOf(arg0:String) : Short is do
 
           end
         @CompilerIgnore "true"
          operation valueOf(arg0:Short) : Short is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation decode(arg0:String) : Short is do
 
@@ -1035,10 +1036,10 @@ class Double inherits Numeric {        @CompilerIgnore "true"
          operation longBitsToDouble(arg0:Long) : Double is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation compareTo(arg0:Double) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -1063,14 +1064,14 @@ class Double inherits Numeric {        @CompilerIgnore "true"
          operation doubleValue() : Double is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation valueOf(arg0:String) : Double is do
 
           end
         @CompilerIgnore "true"
          operation valueOf(arg0:Double) : Double is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation toHexString(arg0:Double) : String is do
 
@@ -1149,10 +1150,10 @@ class Float inherits Numeric {        @CompilerIgnore "true"
          operation intBitsToFloat(arg0:Integer) : Float is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation compareTo(arg0:Float) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -1177,14 +1178,14 @@ class Float inherits Numeric {        @CompilerIgnore "true"
          operation doubleValue() : Double is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation valueOf(arg0:String) : Float is do
 
           end
         @CompilerIgnore "true"
          operation valueOf(arg0:Float) : Float is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation toHexString(arg0:Float) : String is do
 
@@ -1243,7 +1244,7 @@ class StringBuffer {        @CompilerIgnore "true"
          operation append(arg0:Object) : StringBuffer is do
 
           end
-        @CompilerIgnore "true"
+/*        @CompilerIgnore "true"
          operation append(arg0:String) : StringBuffer is do
 
           end
@@ -1283,50 +1284,8 @@ class StringBuffer {        @CompilerIgnore "true"
          operation append(arg0:Double) : StringBuffer is do
 
           end
-        @CompilerIgnore "true"
-         operation append(arg0:Double) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Float) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Long) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Integer) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Character) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Boolean) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Collection<Character>,arg1:Integer,arg2:Integer) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Collection<Character>) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:StringBuffer) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:String) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation append(arg0:Object) : StringBuffer is do
-
-          end
+ 
+        */
         @CompilerIgnore "true"
          operation indexOf(arg0:String) : Integer is do
 
@@ -1375,20 +1334,12 @@ class StringBuffer {        @CompilerIgnore "true"
          operation replace(arg0:Integer,arg1:Integer,arg2:String) : StringBuffer is do
 
           end
-        @CompilerIgnore "true"
-         operation replace(arg0:Integer,arg1:Integer,arg2:String) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
+       @CompilerIgnore "true"
          operation substring(arg0:Integer) : String is do
 
           end
         @CompilerIgnore "true"
          operation substring(arg0:Integer,arg1:Integer) : String is do
-
-          end
-        @CompilerIgnore "true"
-         operation appendCodePoint(arg0:Integer) : StringBuffer is do
 
           end
         @CompilerIgnore "true"
@@ -1403,22 +1354,17 @@ class StringBuffer {        @CompilerIgnore "true"
          operation delete(arg0:Integer,arg1:Integer) : StringBuffer is do
 
           end
-        @CompilerIgnore "true"
-         operation delete(arg0:Integer,arg1:Integer) : StringBuffer is do
 
-          end
         @CompilerIgnore "true"
          operation deleteCharAt(arg0:Integer) : StringBuffer is do
 
           end
-        @CompilerIgnore "true"
-         operation deleteCharAt(arg0:Integer) : StringBuffer is do
 
-          end
         @CompilerIgnore "true"
          operation ensureCapacity(arg0:Integer) : Void is do
 
           end
+        /*
         @CompilerIgnore "true"
          operation insert(arg0:Integer,arg1:Collection<Character>,arg2:Integer,arg3:Integer) : StringBuffer is do
 
@@ -1426,11 +1372,11 @@ class StringBuffer {        @CompilerIgnore "true"
         @CompilerIgnore "true"
          operation insert(arg0:Integer,arg1:Object) : StringBuffer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation insert(arg0:Integer,arg1:String) : StringBuffer is do
 
-          end
+          end/*
         @CompilerIgnore "true"
          operation insert(arg0:Integer,arg1:Collection<Character>) : StringBuffer is do
 
@@ -1458,55 +1404,12 @@ class StringBuffer {        @CompilerIgnore "true"
         @CompilerIgnore "true"
          operation insert(arg0:Integer,arg1:Double) : StringBuffer is do
 
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Double) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Float) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Long) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Integer) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Character) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Boolean) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Collection<Character>) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:String) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Object) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
-         operation insert(arg0:Integer,arg1:Collection<Character>,arg2:Integer,arg3:Integer) : StringBuffer is do
-
-          end
-        @CompilerIgnore "true"
+          end*/
+         @CompilerIgnore "true"
          operation reverse() : StringBuffer is do
 
           end
-        @CompilerIgnore "true"
-         operation reverse() : StringBuffer is do
-
-          end
+        
         @CompilerIgnore "true"
          operation setCharAt(arg0:Integer,arg1:Character) : Void is do
 
@@ -1549,7 +1452,8 @@ class StringBuffer {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Character {        @CompilerIgnore "true"
+class Character {        
+		/*@CompilerIgnore "true"
          operation isJavaIdentifierStart(arg0:Character) : Boolean is do
 
           end
@@ -1564,7 +1468,7 @@ class Character {        @CompilerIgnore "true"
         @CompilerIgnore "true"
          operation isJavaIdentifierPart(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
@@ -1585,10 +1489,10 @@ class Character {        @CompilerIgnore "true"
          operation reverseBytes(arg0:Character) : Character is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation compareTo(arg0:Character) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation compareTo(arg0:Object) : Integer is do
 
@@ -1641,26 +1545,26 @@ class Character {        @CompilerIgnore "true"
          operation toLowerCase(arg0:Character) : Character is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation toLowerCase(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation toUpperCase(arg0:Character) : Character is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation toUpperCase(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation getType(arg0:Character) : Integer is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation getType(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isHighSurrogate(arg0:Character) : Boolean is do
 
@@ -1673,14 +1577,14 @@ class Character {        @CompilerIgnore "true"
          operation isValidCodePoint(arg0:Integer) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+       /* @CompilerIgnore "true"
          operation digit(arg0:Character,arg1:Integer) : Integer is do
 
           end
         @CompilerIgnore "true"
          operation digit(arg0:Integer,arg1:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation forDigit(arg0:Integer,arg1:Integer) : Character is do
 
@@ -1689,42 +1593,42 @@ class Character {        @CompilerIgnore "true"
          operation getNumericValue(arg0:Character) : Integer is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation getNumericValue(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isDefined(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isDefined(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isDigit(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isDigit(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isISOControl(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isISOControl(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isIdentifierIgnorable(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isIdentifierIgnorable(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isJavaLetter(arg0:Character) : Boolean is do
 
@@ -1737,34 +1641,34 @@ class Character {        @CompilerIgnore "true"
          operation isLetter(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isLetter(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isLetterOrDigit(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isLetterOrDigit(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isLowerCase(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isLowerCase(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isMirrored(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isMirrored(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isSpace(arg0:Character) : Boolean is do
 
@@ -1773,10 +1677,10 @@ class Character {        @CompilerIgnore "true"
          operation isSpaceChar(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isSpaceChar(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isSupplementaryCodePoint(arg0:Integer) : Boolean is do
 
@@ -1789,42 +1693,42 @@ class Character {        @CompilerIgnore "true"
          operation isTitleCase(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isTitleCase(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isUnicodeIdentifierPart(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isUnicodeIdentifierPart(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isUnicodeIdentifierStart(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isUnicodeIdentifierStart(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isUpperCase(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isUpperCase(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation isWhitespace(arg0:Character) : Boolean is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation isWhitespace(arg0:Integer) : Boolean is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation toCodePoint(arg0:Character,arg1:Character) : Integer is do
 
@@ -1833,10 +1737,10 @@ class Character {        @CompilerIgnore "true"
          operation toTitleCase(arg0:Character) : Character is do
 
           end
-        @CompilerIgnore "true"
+        /*@CompilerIgnore "true"
          operation toTitleCase(arg0:Integer) : Integer is do
 
-          end
+          end*/
         @CompilerIgnore "true"
          operation wait(arg0:Long) : Void is do
 
