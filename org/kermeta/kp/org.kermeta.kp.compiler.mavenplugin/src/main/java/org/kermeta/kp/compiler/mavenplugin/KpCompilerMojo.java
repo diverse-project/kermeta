@@ -195,7 +195,7 @@ public class KpCompilerMojo extends AbstractMojo {
                 }
 		else{
 			if (run){
-				KpLoaderImpl ldr = new KpLoaderImpl();
+				KpLoaderImpl ldr = new KpLoaderImpl(new StdioSimpleMessagingSystem());
 				
 				// Load KP file
 				KermetaProject kpModel = ldr.loadKp(kp.toString());
