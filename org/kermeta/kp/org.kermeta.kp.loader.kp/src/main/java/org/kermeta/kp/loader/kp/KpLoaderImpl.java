@@ -22,8 +22,17 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.editor.mopp.KpResourceFactory;
 import org.kermeta.kp.loader.kp.api.KpLoader;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class KpLoaderImpl implements KpLoader{
+	
+	MessagingSystem logger;
+	
+	public KpLoaderImpl(MessagingSystem logger){
+		this.logger = logger;
+	}
+	
+	
 	/**
 	 * @param uriKpResource
 	 */
@@ -35,13 +44,13 @@ public class KpLoaderImpl implements KpLoader{
 	public KermetaProject loadKp(URI uriKpResource) {
 		KermetaProject result = null;
 		KpResourceFactory factory = new KpResourceFactory();
-		System.out.println("factory reached : " + factory.toString());
+		logger.debug("factory reached : " + factory.toString(),  this.getClass().getName());
 		// create resource set
 		ResourceSet rs = new ResourceSetImpl() ;
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("kp", factory);
 		
 		Resource resource = rs.createResource(uriKpResource);
-		System.out.println("Call to EMF  on : "+resource.toString()+" from repository : ");
+		logger.debug("Call to EMF  on : "+resource.toString()+" from repository : ",  this.getClass().getName());
 		
 		try {
 			resource.load(Collections.EMPTY_MAP);
@@ -55,14 +64,13 @@ public class KpLoaderImpl implements KpLoader{
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug(e.getMessage(), this.getClass().getName());
 		}
 		
 		if(result == null)
-			System.out.println("KermetaProject model result is null");
+			logger.debug("KermetaProject model result is null",  this.getClass().getName());
 		else
-			System.out.println("Succesfully loaded " + result.toString());
+			logger.debug("Succesfully loaded " + result.toString(), this.getClass().getName());
 		return result;
 	}
 }
