@@ -26,7 +26,7 @@ aspect class KermetaModelElement{
 aspect class ClassDefinition {
 
 	method typeAwareMerge(context : TypeAwareMergerContext) is do
-		mergeInheritedClasses(context)
+		cleanDoublonForInheritedClasses(context)
 		mergeOperations(context)
 		mergeProperties(context)
 	end
@@ -45,16 +45,141 @@ aspect class ClassDefinition {
 		}
 	
 	end
-
-	operation mergeInheritedClasses(context : TypeAwareMergerContext) is do
-	
-	
+	//remove unnecessary inheritance
+	//todo: when inheriting from A and B remove inheritance to B if A<B
+	operation cleanDoublonForInheritedClasses(context : TypeAwareMergerContext) is do
+		var classesToRemove : Sequence<Class> init Sequence<Class>.new
+		var classesToKeep : Sequence<Class> init Sequence<Class>.new
+		superType.each{t1|
+			if t1.isInstanceOf(Class) then
+				if not classesToKeep.exists{t2|t1.typeEquals(t2)} then
+					classesToKeep.add(t1.asType(Class))
+				else
+					classesToRemove.add(t1.asType(Class))
+				end
+			end
+			}
+		classesToRemove.each{c|superType.remove(c) containedType.remove(c)}
 	end
 	operation mergeProperties(context: TypeAwareMergerContext) is do
-		
+		var propsToMerge : Sequence<Property> init Sequence<Property>.new
+		propsToMerge.addAll(ownedAttribute)
+		ownedAttribute.clear
+		propsToMerge.each{prop|
+			var  mergeable : Property init ownedAttribute.detect{ ownedProp| ownedProp.mergeableWith(prop, context)}
+			if not mergeable.isVoid then
+				mergeable.merge(prop,context)
+			else
+				ownedAttribute.add(prop)
+			end
+		}
 	end
 
 }
+
+
+aspect class Property {
+
+	operation merge(otherProperty : Property, context : TypeAwareMergerContext) is do 
+		if self.getterBody.isVoid and not otherProperty.getterBody.isVoid then
+			self.getterBody:=otherProperty.getterBody
+		end
+		if self.setterBody.isVoid and not otherProperty.setterBody.isVoid then
+			self.setterBody:=otherProperty.setterBody
+		end
+		kOwnedTags.addAll(otherProperty.kOwnedTags)
+		kTag.addAll(otherProperty.kTag)
+		
+		if self.opposite.isVoid and not otherProperty.opposite.isVoid then
+			self.opposite:=otherProperty.opposite
+			if self.opposite.isInstanceOf(UnresolvedProperty) then
+				self.ownedUnresolvedProperties.add(self.opposite.asType(UnresolvedProperty))
+			end
+		end
+	end
+	
+	/**says if two properties are mergeable
+	
+	two properties are mergeable if  : 
+	
+x	one default is void or they are both equals
+x	at least one getterBody is void
+x	isComposite are equals
+x	isDerived are equals
+x	isGetterAbstract are equals
+x	isID are equals
+x	isOrdered are equals
+x	isReadOnly are equals
+x	isSetterAbstract are equals
+x	isUnique are equals
+x	lower are equals
+x	name are equals
+x	one opposite is void or they are both equals
+x	at least one setterBody is void
+x	type are equals
+x	upper are equals
+
+	*/
+	operation mergeableWith(otherProperty : Property, context: TypeAwareMergerContext) : Boolean is do
+		result:=(self.name==otherProperty.name)
+				   .andThen{x| self.lower==otherProperty.lower}
+				   .andThen{x| self.upper==otherProperty.upper}
+				   .andThen{x| self.isComposite==otherProperty.isComposite}
+				   .andThen{x| self.isDerived==otherProperty.isDerived}
+				   .andThen{x| self.isGetterAbstract==otherProperty.isGetterAbstract}
+				   .andThen{x| self.isID==otherProperty.isID}
+				   .andThen{x| self.isOrdered==otherProperty.isOrdered}
+				   .andThen{x| self.isReadOnly==otherProperty.isReadOnly}
+				   .andThen{x| self.isSetterAbstract==otherProperty.isSetterAbstract}
+				   .andThen{x| self.isUnique==otherProperty.isUnique} 
+				   .andThen{x| self.type.typeEquals(otherProperty.type)} 
+				   .andThen{x| self.default.isVoid
+				   		.orElse{y|otherProperty.default.isVoid}
+				   		.orElse{y|self.default==otherProperty.default}}
+				   	.andThen{x| self.getterBody.isVoid
+				   		.orElse{y|otherProperty.getterBody.isVoid}}
+				   	.andThen{x| self.setterBody.isVoid
+				   		.orElse{y|otherProperty.setterBody.isVoid}}
+				   	.andThen{x| self.oppositeEquals(otherProperty,context)}
+		
+		if 	(self.name==otherProperty.name).andThen{x| not result} then
+			context.errors.add(ResolverException.new.initialize("Property "+name+" declared twice with different signatures", self))
+			context.errors.add(ResolverException.new.initialize("Property "+name+" declared twice with different signatures", otherProperty))
+		end  		
+						
+	end 
+	
+	
+	/**
+		return true if the opposite properties are the same or if only one of them is defined
+	*/
+	operation oppositeEquals(otherProperty : Property, context : TypeAwareMergerContext) : Boolean is do
+		
+		if self.opposite.isVoid.orElse{x|otherProperty.opposite.isVoid} then
+			result := true
+		else
+			if self.opposite.isInstanceOf(UnresolvedProperty).andThen{x|self.opposite.isInstanceOf(UnresolvedProperty)} then
+				result:= self.opposite.asType(UnresolvedProperty).propertyIdentifier==otherProperty.opposite.asType(UnresolvedProperty).propertyIdentifier
+			else
+				if self.opposite.isInstanceOf(Property).andThen{x|self.opposite.isInstanceOf(Property)} then
+					result := self.opposite==otherProperty.opposite
+				else
+					if self.opposite.isInstanceOf(Property) then
+						result := self.opposite.asType(Property).name==otherProperty.opposite.asType(UnresolvedProperty).propertyIdentifier
+					else
+						result := self.opposite.asType(UnresolvedProperty).propertyIdentifier==otherProperty.opposite.asType(Property).name
+					end
+				end
+			end
+		end
+	end
+
+
+
+
+}
+
+
 
 aspect class Operation {
 
@@ -107,14 +232,14 @@ aspect class Operation {
 		)*/
 			
 		//check quick equality check
-		if 	(self.body.isVoid or otherOperation.body.isVoid)
-			and self.name == otherOperation.name 
+		if 	(self.name == otherOperation.name)
+			.andThen{x| self.ownedParameter.size == otherOperation.ownedParameter.size} 
+			.andThen{x| (self.body.isVoid or otherOperation.body.isVoid)} 
 			//and self.owningClass == otherOperation.owningClass 
-			and self.isOrdered == otherOperation.isOrdered
-			and self.isUnique == otherOperation.isUnique
-			and self.lower == otherOperation.lower
-			and self.upper == otherOperation.upper
-			and self.ownedParameter.size == otherOperation.ownedParameter.size then
+			.andThen{x| self.isOrdered == otherOperation.isOrdered}
+			.andThen{x| self.isUnique == otherOperation.isUnique}
+			.andThen{x| self.lower == otherOperation.lower}
+			.andThen{x| self.upper == otherOperation.upper} then
 			//stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
 			//stdio.writeln("1")
 			//check the parameters names
@@ -175,6 +300,14 @@ aspect class Operation {
 				end
 			end	
 		end
+		
+		if (self.name == otherOperation.name)
+			.andThen{x| self.ownedParameter.size == otherOperation.ownedParameter.size}
+			.andThen{x| not result} then
+			context.errors.add(ResolverException.new.initialize("Operation "+name+" declared twice with different signatures", self))
+			context.errors.add(ResolverException.new.initialize("Operation "+name+" declared twice with different signatures", otherOperation))
+		end 
+		
 		//stdio.writeln("self "+name+" to merge with "+otherOperation.name+" : "+result.toString())
 	end
 	
