@@ -1,0 +1,13 @@
+	using kermeta::standard
+
+package mainpackage{
+	aspect class MainClass
+	{
+		reference x : A#y
+	}
+	
+	aspect class A
+	{
+		reference y : MainClass#x
+	}
+}

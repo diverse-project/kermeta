@@ -1,0 +1,20 @@
+using kermeta::standard
+
+package mainpackage{
+	class MainClass
+	{
+		reference x : A
+		@main ""
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+	
+	
+	class A
+	{
+		reference y : MainClass
+	}
+	
+	
+}

@@ -1,0 +1,11 @@
+KermetaProject "020_propertiesFusion"
+//version :  "0.0.1"
+groupId ="group"
+defaultMainClass = "mainpackage::MainClass"
+defaultMainOperation = "mainOperation"
+sources = {
+require "${project.baseUri}/src/main/kmt/Main.kmt"
+require "${project.baseUri}/src/main/kmt/new_file.kmt" 
+}
+dependencies = {
+dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"}
