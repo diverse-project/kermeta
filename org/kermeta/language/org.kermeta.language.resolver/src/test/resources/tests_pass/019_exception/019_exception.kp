@@ -2,8 +2,8 @@ KermetaProject "019_exception.kp"
 //version :  "someVersion"
 groupId ="group" 
 sources = { 
-	require "${project.baseUri}/src/main/kmt/019_exception.kmt"
+	require "${project.baseUri}/src/main/kmt/019_exception.kmt" 
 	}
 dependencies = { 
 	dependency "language.model" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"
-} 
+}
