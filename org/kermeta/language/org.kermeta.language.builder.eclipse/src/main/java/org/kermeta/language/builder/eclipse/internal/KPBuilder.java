@@ -241,13 +241,13 @@ public class KPBuilder {
 			findBundleLocationForClassPath("org.kermeta.utils.helpers", additionalClassPath);
 			
 			// add resolvable kp depencies in classpath
-			KpLoaderImpl ldr = new KpLoaderImpl();
+			KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
 			
 			// Load KP file
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			ArrayList<String> fullClassPath = new ArrayList<String>();
 			fullClassPath.addAll(additionalClassPath);
-			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL)));
+			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
 			
 			ModelingUnit result = null;
 			
@@ -405,7 +405,7 @@ public class KPBuilder {
 	}
 	
 	public String getDefaultMainClass(){
-		KpLoaderImpl ldr = new KpLoaderImpl();
+		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
 		if (ldr != null) {
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			if (kp != null) {
@@ -416,7 +416,7 @@ public class KPBuilder {
 	}
 	
 	public String getDefaultMainOperation(){
-		KpLoaderImpl ldr = new KpLoaderImpl();
+		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
 		if (ldr != null) {
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			if (kp != null) {
