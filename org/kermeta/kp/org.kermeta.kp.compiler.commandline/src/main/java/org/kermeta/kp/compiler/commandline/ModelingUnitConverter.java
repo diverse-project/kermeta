@@ -64,23 +64,15 @@ public class ModelingUnitConverter {
 	public ModelingUnit convert(ModelingUnit mu) throws IOException{
 		ModelingUnit resultMU;
 		logger.initProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "Converting ModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
-		
-		logger.debug("Namespace prefix : " + mu.getNamespacePrefix(), KermetaCompiler.LOG_MESSAGE_GROUP);
-		
-		//if (mu.getNamespacePrefix().length())
 		String prefix = "";
-		if (mu.getNamespacePrefix()!=null) {
-			if (mu.getNamespacePrefix().length()!=0) {
-				prefix=mu.getNamespacePrefix() + ".";
-			}
-		}
-		
-	//	URI uri = URI.createURI((mu.getNamespacePrefix() + "." + mu.getName() + ".km_in_memory")
+		if(mu.getNamespacePrefix() != null && !mu.getNamespacePrefix().isEmpty()) prefix = mu.getNamespacePrefix() + ".";
 		URI uri = URI.createURI((prefix + mu.getName() + ".km_in_memory")
-						.replaceAll("::", "."));
+				.replaceAll("::", "."));
 		if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
 			uri = mu.eResource().getURI();
-		} 
+			
+		} 	
+		logger.debug("\t converting using uri "+uri+" getname="+mu.getName(), KermetaCompiler.LOG_MESSAGE_GROUP);
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);
 		resultMU= this.LoadMu(stream, uri);
 
