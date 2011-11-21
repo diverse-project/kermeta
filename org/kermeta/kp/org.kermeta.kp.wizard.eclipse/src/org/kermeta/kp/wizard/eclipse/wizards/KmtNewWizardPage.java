@@ -30,6 +30,8 @@ public class KmtNewWizardPage extends WizardPage {
 	private Text containerText;
 
 	private Text fileText;
+	
+	private Text operationText;
 
 	private ISelection selection;
 
@@ -40,8 +42,8 @@ public class KmtNewWizardPage extends WizardPage {
 	 */
 	public KmtNewWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("Multi-page Editor File");
-		setDescription("This wizard creates a new file with *.kmt extension that can be opened by a multi-page editor.");
+		setTitle("KMT File");
+		setDescription("This wizard creates a new file with *.kmt extension that can be opened by kermeta text editor.");
 		this.selection = selection;
 	}
 
@@ -73,6 +75,8 @@ public class KmtNewWizardPage extends WizardPage {
 				handleBrowse();
 			}
 		});
+		
+		
 		label = new Label(container, SWT.NULL);
 		label.setText("&File name:");
 
@@ -84,6 +88,21 @@ public class KmtNewWizardPage extends WizardPage {
 				dialogChanged();
 			}
 		});
+		
+		
+		label = new Label(container, SWT.NULL); // for filling the grid
+		label = new Label(container, SWT.NULL);
+		label.setText("&Operation name:");
+
+		operationText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		operationText.setLayoutData(gd);
+		operationText.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				dialogChanged();
+			}
+		});
+		
 		initialize();
 		dialogChanged();
 		setControl(container);
@@ -109,7 +128,9 @@ public class KmtNewWizardPage extends WizardPage {
 				containerText.setText(container.getFullPath().toString());
 			}
 		}
-		fileText.setText("new_file.kmt");
+		fileText.setText("NewClass.kmt");
+
+		operationText.setText("myOperation");
 	}
 
 	/**
@@ -181,5 +202,9 @@ public class KmtNewWizardPage extends WizardPage {
 
 	public String getFileName() {
 		return fileText.getText();
+	}
+	
+	public String getOperationName() {
+		return operationText.getText();
 	}
 }

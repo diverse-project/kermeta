@@ -59,10 +59,11 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	public boolean performFinish() {
 		final String containerName = page.getContainerName();
 		final String fileName = page.getFileName();
+		final String operationName = page.getOperationName();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
-					doFinish(containerName, fileName, monitor);
+					doFinish(containerName, fileName, operationName, monitor);
 				} catch (CoreException e) {
 					throw new InvocationTargetException(e);
 				} finally {
@@ -91,6 +92,7 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	private void doFinish(
 		String containerName,
 		String fileName,
+		String operationName,
 		IProgressMonitor monitor)
 		throws CoreException {
 		// create a sample file
@@ -101,9 +103,15 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 			throwCoreException("Container \"" + containerName + "\" does not exist.");
 		}
 		IContainer container = (IContainer) resource;
-		final IFile file = container.getFile(new Path(fileName));
+		final IFile file = container.getFile(new Path(fileName)); 
 		try {
-			InputStream stream = openContentStream();
+			//String packageName = containerName.replaceAll(Pattern.quote("\\"), "::");
+			String packageName = resource.getProjectRelativePath().toString();
+			if(packageName.equals("src/main/kmt")) packageName = "rootPackage";
+			else{
+				packageName = packageName.replaceFirst(Pattern.quote("src/main/kmt/"), "").replaceAll(Pattern.quote("/"), "::");
+			}
+			InputStream stream = openContentStream(fileName.replace(".kmt", ""), packageName, operationName);
 			if (file.exists()) {
 				file.setContents(stream, true, true, monitor);
 			} else {
@@ -131,13 +139,13 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	 * We will initialize file contents with a sample text.
 	 */
 
-	private InputStream openContentStream() {
+	private InputStream openContentStream(String className, String packageName, String operationName) {
 		String contents = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_NEW_KMT_TEMPLATE_STRING);
 		
 		// replace variables with values from the user
-		contents = contents.replaceAll(Pattern.quote("${class.name}"), page.getFileName());
-		contents = contents.replaceAll(Pattern.quote("${package.name}"), "myPackage");
-		contents = contents.replaceAll(Pattern.quote("${operation.name}"), "myOperation");
+		contents = contents.replaceAll(Pattern.quote("${class.name}"), className);
+		contents = contents.replaceAll(Pattern.quote("${package.name}"), packageName);
+		contents = contents.replaceAll(Pattern.quote("${operation.name}"), operationName);
 				
 			//"This is the initial file contents for *.kmt file that should be word-sorted in the Preview page of the multi-page editor";
 		return new ByteArrayInputStream(contents.getBytes());

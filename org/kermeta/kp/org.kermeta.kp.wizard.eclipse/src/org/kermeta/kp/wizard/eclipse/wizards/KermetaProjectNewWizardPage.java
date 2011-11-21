@@ -14,18 +14,7 @@ package org.kermeta.kp.wizard.eclipse.wizards;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 /**
@@ -45,13 +34,13 @@ public class KermetaProjectNewWizardPage extends WizardNewProjectCreationPage
 	public KermetaProjectNewWizardPage(ISelection selection) {
 		super("wizardPage");
 		setTitle("New Kermeta project");
-		setDescription("This wizard creates a new project");
+		setDescription("This wizard creates a new kermeta project");
 	}
 	
 	public KermetaProjectNewWizardPage() {
 		super("wizardPage");
 		setTitle("New Kermeta project");
-		setDescription("This wizard creates a new project");
+		setDescription("This wizard creates a new kermeta project");
 	}
 	
     /**
@@ -61,7 +50,7 @@ public class KermetaProjectNewWizardPage extends WizardNewProjectCreationPage
     public void createControl(Composite parent) {
         // Super method contains the following widgets : 
         super.createControl(parent);
-        Composite composite = (Composite)getControl();
+       // Composite composite = (Composite)getControl();
         
     }
     /**
