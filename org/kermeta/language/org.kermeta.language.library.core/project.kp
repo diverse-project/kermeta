@@ -1,21 +1,21 @@
-KermetaProject :"language.library.core" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language" 
-{ 
+KermetaProject "language.library.core" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId =  "org.kermeta.language" 
+sources ={ 
 	//source = "file:C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-	source = "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
-	source = "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
-	source = "${project.baseUri}/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt"
-	source = "${project.baseUri}/src/main/kmt/kermeta/exceptions/exceptions.kmt"
-	source = "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
-	source = "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
-	source = "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
-	source = "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"  
-	
+	require "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/exceptions/exceptions.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
+	require "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
 	// import kermeta.ecore from the maven jar that distribute it officially
-	srcQuery = "/src/main/ecore/kermeta.ecore" from "language.model"	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT"   
-		 
+	require "${language.model.baseUri}/src/main/ecore/kermeta.ecore" byteCodeFromADependency  
+}
+dependencies={	
+	dependency "language.model" URL="mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT" 
 } 
 
  
