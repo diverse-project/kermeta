@@ -223,12 +223,16 @@ public class KermetaCompiler {
 			// Load KP file
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			if (kp == null) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "Invalid kp file.";
+				this.hasFailed = true;
 				return null;
 			}
 	
 			if (kp.getName() == null) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. Missing project name", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "Invalid kp file. Missing Project name";
+				this.hasFailed = true;
 				return null;
 			}
 			
@@ -240,7 +244,9 @@ public class KermetaCompiler {
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
 			ArrayList<URL> kpSources = getSources(kp,kpFileURL, varExpander);
 			if (kpSources.size() == 0) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "Invalid kp file. No sources detected.";
+				this.hasFailed = true;
 				return null;
 			}
 			
@@ -251,6 +257,8 @@ public class KermetaCompiler {
 	
 			if (modelingUnits.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid. There is no modeling unit to compile.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "Kermeta project invalid.  There is no modeling unit to compile.";
+				this.hasFailed = true;
 				return null;
 			}
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
@@ -261,6 +269,8 @@ public class KermetaCompiler {
 				processErrors(mergedUnit);
 				if (stopOnError) {
 					logger.logProblem(MessagingSystem.Kind.UserERROR, "Unable to merge the files. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					this.errorMessage = "Unable to merge the files. Compilation not complete for this project.";
+					this.hasFailed = true;
 					return null;
 				}
 			}
@@ -277,6 +287,8 @@ public class KermetaCompiler {
 		
 					if (stopOnError && results.getDiagnostics().size() > 0) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The merged result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+						this.errorMessage = "The merged result is not valid. Compilation not complete for this project.";
+						this.hasFailed = true;
 						return null;
 					}
 				}
@@ -290,6 +302,8 @@ public class KermetaCompiler {
 	
 			if (resolvedUnit == null) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
+				this.hasFailed = true;
 				return null;
 			}
 			// workaround cache problem in compiler
@@ -306,6 +320,8 @@ public class KermetaCompiler {
 					
 					if (stopOnError && results.getDiagnostics().size() > 0) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+						this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
+						this.hasFailed = true;
 						return null;
 					}
 				}
@@ -339,7 +355,9 @@ public class KermetaCompiler {
 				// deal with scala to bytecode
 				int result =scala2bytecode(fullBinaryDependencyClassPath);
 				if(result != 0){
-					logger.logProblem(MessagingSystem.Kind.UserERROR, "Error detected during bytecode generation. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));					
+					logger.logProblem(MessagingSystem.Kind.UserERROR, "Error detected during bytecode generation. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					this.errorMessage = "Error detected during bytecode generation. Compilation not complete for this project.";
+					this.hasFailed = true;
 				}
 			} else {
 				logger.info("generateKmOnly flag set => Ignore scala generation", LOG_MESSAGE_GROUP);
