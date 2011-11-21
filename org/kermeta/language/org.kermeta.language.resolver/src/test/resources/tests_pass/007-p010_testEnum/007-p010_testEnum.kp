@@ -1,0 +1,9 @@
+KermetaProject "007-p010_testEnum" 
+//version :  "someVersion" 
+groupId ="group" 
+sources = { 
+	require "${project.baseUri}/src/main/kmt/010_testEnum_001.kmt"
+	}
+dependencies = {
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+}

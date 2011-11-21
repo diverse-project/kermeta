@@ -1,8 +1,0 @@
-KermetaProject :"012_callToAsType" 
-version :  "someVersion" 
-group :"group"  
-{ 
-	source = "${project.baseUri}/012_callToAsType.kmt"
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
-}  
- 
