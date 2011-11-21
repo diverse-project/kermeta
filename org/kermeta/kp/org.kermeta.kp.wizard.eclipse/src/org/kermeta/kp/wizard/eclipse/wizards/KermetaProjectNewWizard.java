@@ -14,6 +14,7 @@ package org.kermeta.kp.wizard.eclipse.wizards;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -29,6 +30,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.kermeta.kp.wizard.eclipse.Activator;
+import org.kermeta.kp.wizard.eclipse.preferences.PreferenceConstants;
 
 
 
@@ -72,7 +75,7 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 					 project.open(monitor);
 					 addKermetaNatureToProject(project);
 					 createFolder(project, "src/main/kmt", monitor);
-					 createDefaultKmt(project, "src/main/kmt/Main.kmt", monitor);
+					 createDefaultKmt(project, "src/main/kmt/MainClass.kmt", monitor);
 					 createDefaultKp(project, project.getName()+".kp", monitor);
 				 }
 			};
@@ -108,16 +111,12 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 		IContainer currentContainer = project;
 		IFile file = currentContainer.getFile(new Path(path));
 		
-		String contents =
-				"KermetaProject :\""+project.getName()+"\"\n"+ 
-					"version :  \"0.0.1\"\n"+
-					"group :\"group\"\n" +
-					"defaultMainClass : \"mainpackage::MainClass\"\n"+
-					"defaultMainOperation : \"mainOperation\"\n"+
-					"{\n" +
-					"source = \"${project.baseUri}/src/main/kmt/Main.kmt\"\n"+  
-					"dependency \"language.model\" URL=\"mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT\""+
-					"}";
+		String contents = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_NEW_KP_TEMPLATE_STRING);
+		
+		// replace variables with values from the user
+		contents = contents.replaceAll(Pattern.quote("${class.name}"), "MainClass");
+		contents = contents.replaceAll(Pattern.quote("${package.name}"), "mainPackage");
+		contents = contents.replaceAll(Pattern.quote("${operation.name}"), "mainOperation");
 		try {
 			InputStream stream =  new ByteArrayInputStream(contents.getBytes());;
 			if (file.exists()) {
@@ -136,17 +135,13 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 		IContainer currentContainer = project;
 		IFile file = currentContainer.getFile(new Path(path));
 		
-		String contents =
-				"using kermeta::standard\n\n"+
-				 "package "+"mainpackage"+"{\n"+
-		        "\tclass "+"MainClass"+
-		        "\n\t{\n"+
-		        "\t\t@main \"\"\n"+
-		        "\t\toperation "+"mainOperation"+"() : Void is do \n"+
-		        "\t\t\t// TODO: implement '"+"mainOperation"+ "' operation\n"+
-		        "\t\tend"+
-		        "\n\t}"+
-		        "\n}";
+		String contents = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_NEW_KMT_TEMPLATE_STRING);
+		
+		// replace variables with values from the user
+		contents = contents.replaceAll(Pattern.quote("${class.name}"), "MainClass");
+		contents = contents.replaceAll(Pattern.quote("${package.name}"), "mainPackage");
+		contents = contents.replaceAll(Pattern.quote("${operation.name}"), "mainOperation");
+		
 		try {
 			InputStream stream =  new ByteArrayInputStream(contents.getBytes());;
 			if (file.exists()) {

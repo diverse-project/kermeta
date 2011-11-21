@@ -127,10 +127,10 @@
                         <Import-Package>
                         	!org.eclipse.core.resources,
                         	!org.eclipse.core.runtime,
-                        	!org.eclipse.ui.*,
-                        	org.eclipse.jface.*,
-                        	org.eclipse.swt.*,
-                        	org.osgi.framework;version="[1.5,2)"</Import-Package>
+                        	!org.eclipse.ui.*, 
+                        	org.osgi.framework;version="[1.5,2)",
+                        	*
+                        </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
                 </configuration>
@@ -194,6 +194,11 @@
         	<groupId>org.kermeta.language</groupId>
         	<artifactId>language.texteditor.eclipse.nature</artifactId>
         	<version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.kermeta.utils</groupId>
+        	<artifactId>utils.helpers.eclipse.jface</artifactId>
+        	<version>2.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

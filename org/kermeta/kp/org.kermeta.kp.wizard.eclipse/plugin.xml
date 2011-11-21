@@ -9,7 +9,7 @@
             id="org.kermeta.kp.wizard.eclipse">
       </category>
       <wizard
-            name="new Kermeta file"
+            name="Kermeta file"
             icon="icons/newkermetafile.png"
             category="org.kermeta.kp.wizard.eclipse"
             class="org.kermeta.kp.wizard.eclipse.wizards.KmtNewWizard"
@@ -20,9 +20,24 @@
             class="org.kermeta.kp.wizard.eclipse.wizards.KermetaProjectNewWizard"
             icon="icons/new_kermeta_project.gif"
             id="org.kermeta.kp.wizard.eclipse.wizards.KermetaProjectNewWizard"
-            name="New Kermeta Project"
+            name="Kermeta project"
             project="true">
       </wizard>
+   </extension>  
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.kermeta.language.builder.eclipse.preferences.KermetaPreferencePage"
+            class="org.kermeta.kp.wizard.eclipse.preferences.KermetaPreferencePage"
+            id="org.kermeta.kp.wizard.eclipse.preferences.KermetaPreferencePage"
+            name="Kermeta template Preferences">
+      </page>
+   </extension> 
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.kermeta.kp.wizard.eclipse.preferences.PreferenceInitializer">
+      </initializer>
    </extension>
 
 </plugin>

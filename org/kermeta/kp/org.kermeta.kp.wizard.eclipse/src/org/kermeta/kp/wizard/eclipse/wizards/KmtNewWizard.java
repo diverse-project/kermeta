@@ -7,6 +7,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.core.runtime.*;
 import org.eclipse.jface.operation.*;
 import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Pattern;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.core.resources.*;
@@ -14,6 +16,8 @@ import org.eclipse.core.runtime.CoreException;
 import java.io.*;
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
+import org.kermeta.kp.wizard.eclipse.Activator;
+import org.kermeta.kp.wizard.eclipse.preferences.PreferenceConstants;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -128,16 +132,12 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 	 */
 
 	private InputStream openContentStream() {
-		String contents =
-				"\tusing kermeta::standard\n\n"+
-				 "package "+"mainpackage"+"{\n"+
-		        "\tclass "+"MainClass"+
-		        "\n\t{\n"+
-		        "\t\toperation "+"mainOperation"+"() : Void is do \n"+
-		        "\t\t\t// TODO: implement '"+"mainOperation"+ "' operation\n"+
-		        "\t\tend"+
-		        "\n\t}"+
-		        "\n}";
+		String contents = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_NEW_KMT_TEMPLATE_STRING);
+		
+		// replace variables with values from the user
+		contents = contents.replaceAll(Pattern.quote("${class.name}"), page.getFileName());
+		contents = contents.replaceAll(Pattern.quote("${package.name}"), "myPackage");
+		contents = contents.replaceAll(Pattern.quote("${operation.name}"), "myOperation");
 				
 			//"This is the initial file contents for *.kmt file that should be word-sorted in the Preview page of the multi-page editor";
 		return new ByteArrayInputStream(contents.getBytes());
