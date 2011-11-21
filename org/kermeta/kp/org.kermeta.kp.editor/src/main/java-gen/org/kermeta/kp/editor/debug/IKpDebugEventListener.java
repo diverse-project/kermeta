@@ -6,10 +6,7 @@
  */
 package org.kermeta.kp.editor.debug;
 
-public interface IKpDebugEventListener {
-	
-	/**
-	 * Notification that the given event occurred in the while debugging.
-	 */
-	public void handleMessage(org.kermeta.kp.editor.debug.KpDebugMessage message);
+public class IKpDebugEventListener {
+	// The generator for this class is currently disabled by option
+	// 'disableDebugSupport' in the .cs file.
 }
