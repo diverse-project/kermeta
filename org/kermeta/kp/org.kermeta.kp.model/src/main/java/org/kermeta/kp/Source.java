@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.kp.Source#getUrl <em>Url</em>}</li>
+ *   <li>{@link org.kermeta.kp.Source#isByteCodeFromADependency <em>Byte Code From ADependency</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,4 +52,31 @@ public interface Source extends EObject {
    * @generated
    */
 	void setUrl(String value);
+
+  /**
+   * Returns the value of the '<em><b>Byte Code From ADependency</b></em>' attribute.
+   * The default value is <code>"false"</code>.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Byte Code From ADependency</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Byte Code From ADependency</em>' attribute.
+   * @see #setByteCodeFromADependency(boolean)
+   * @see org.kermeta.kp.KpPackage#getSource_ByteCodeFromADependency()
+   * @model default="false"
+   * @generated
+   */
+  boolean isByteCodeFromADependency();
+
+  /**
+   * Sets the value of the '{@link org.kermeta.kp.Source#isByteCodeFromADependency <em>Byte Code From ADependency</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Byte Code From ADependency</em>' attribute.
+   * @see #isByteCodeFromADependency()
+   * @generated
+   */
+  void setByteCodeFromADependency(boolean value);
 } // Source

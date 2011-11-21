@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
-import org.kermeta.kp.KermetaProjectRef;
 import org.kermeta.kp.KpPackage;
 import org.kermeta.kp.Option;
 import org.kermeta.kp.Source;
@@ -40,11 +39,9 @@ import org.kermeta.kp.WeaveDirective;
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getWeaveDirectives <em>Weave Directives</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getOptions <em>Options</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getGroup <em>Group</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainOperation <em>Default Main Operation</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getGroup <em>Group</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,46 +89,6 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	protected EList<Option> options;
 
 	/**
-   * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getVersion()
-   * @generated
-   * @ordered
-   */
-	protected static final String VERSION_EDEFAULT = null;
-
-	/**
-   * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getVersion()
-   * @generated
-   * @ordered
-   */
-	protected String version = VERSION_EDEFAULT;
-
-	/**
-   * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getGroup()
-   * @generated
-   * @ordered
-   */
-	protected static final String GROUP_EDEFAULT = null;
-
-	/**
-   * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getGroup()
-   * @generated
-   * @ordered
-   */
-	protected String group = GROUP_EDEFAULT;
-
-	/**
    * The default value of the '{@link #getDefaultMainClass() <em>Default Main Class</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -172,16 +129,26 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
   protected String defaultMainOperation = DEFAULT_MAIN_OPERATION_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getRef() <em>Ref</em>}' containment reference list.
+   * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getRef()
+   * @see #getGroup()
    * @generated
    * @ordered
    */
-	protected EList<KermetaProjectRef> ref;
+	protected static final String GROUP_EDEFAULT = "default";
 
-	/**
+		/**
+   * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getGroup()
+   * @generated
+   * @ordered
+   */
+	protected String group = GROUP_EDEFAULT;
+
+		/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -254,48 +221,6 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 
 	/**
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public String getVersion() {
-    return version;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public void setVersion(String newVersion) {
-    String oldVersion = version;
-    version = newVersion;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__VERSION, oldVersion, version));
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public String getGroup() {
-    return group;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public void setGroup(String newGroup) {
-    String oldGroup = group;
-    group = newGroup;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__GROUP, oldGroup, group));
-  }
-
-	/**
-   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
@@ -345,15 +270,23 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EList<KermetaProjectRef> getRef() {
-    if (ref == null)
-    {
-      ref = new EObjectContainmentEList<KermetaProjectRef>(KermetaProjectRef.class, this, KpPackage.KERMETA_PROJECT__REF);
-    }
-    return ref;
+	public String getGroup() {
+    return group;
   }
 
-	/**
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public void setGroup(String newGroup) {
+    String oldGroup = group;
+    group = newGroup;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__GROUP, oldGroup, group));
+  }
+
+		/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -370,8 +303,6 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         return ((InternalEList<?>)getWeaveDirectives()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__OPTIONS:
         return ((InternalEList<?>)getOptions()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__REF:
-        return ((InternalEList<?>)getRef()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -393,16 +324,12 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         return getWeaveDirectives();
       case KpPackage.KERMETA_PROJECT__OPTIONS:
         return getOptions();
-      case KpPackage.KERMETA_PROJECT__VERSION:
-        return getVersion();
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        return getGroup();
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         return getDefaultMainClass();
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         return getDefaultMainOperation();
-      case KpPackage.KERMETA_PROJECT__REF:
-        return getRef();
+      case KpPackage.KERMETA_PROJECT__GROUP:
+        return getGroup();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -433,21 +360,14 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         getOptions().clear();
         getOptions().addAll((Collection<? extends Option>)newValue);
         return;
-      case KpPackage.KERMETA_PROJECT__VERSION:
-        setVersion((String)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        setGroup((String)newValue);
-        return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         setDefaultMainClass((String)newValue);
         return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         setDefaultMainOperation((String)newValue);
         return;
-      case KpPackage.KERMETA_PROJECT__REF:
-        getRef().clear();
-        getRef().addAll((Collection<? extends KermetaProjectRef>)newValue);
+      case KpPackage.KERMETA_PROJECT__GROUP:
+        setGroup((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -474,20 +394,14 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
       case KpPackage.KERMETA_PROJECT__OPTIONS:
         getOptions().clear();
         return;
-      case KpPackage.KERMETA_PROJECT__VERSION:
-        setVersion(VERSION_EDEFAULT);
-        return;
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        setGroup(GROUP_EDEFAULT);
-        return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         setDefaultMainClass(DEFAULT_MAIN_CLASS_EDEFAULT);
         return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         setDefaultMainOperation(DEFAULT_MAIN_OPERATION_EDEFAULT);
         return;
-      case KpPackage.KERMETA_PROJECT__REF:
-        getRef().clear();
+      case KpPackage.KERMETA_PROJECT__GROUP:
+        setGroup(GROUP_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -510,16 +424,12 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         return weaveDirectives != null && !weaveDirectives.isEmpty();
       case KpPackage.KERMETA_PROJECT__OPTIONS:
         return options != null && !options.isEmpty();
-      case KpPackage.KERMETA_PROJECT__VERSION:
-        return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         return DEFAULT_MAIN_CLASS_EDEFAULT == null ? defaultMainClass != null : !DEFAULT_MAIN_CLASS_EDEFAULT.equals(defaultMainClass);
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         return DEFAULT_MAIN_OPERATION_EDEFAULT == null ? defaultMainOperation != null : !DEFAULT_MAIN_OPERATION_EDEFAULT.equals(defaultMainOperation);
-      case KpPackage.KERMETA_PROJECT__REF:
-        return ref != null && !ref.isEmpty();
+      case KpPackage.KERMETA_PROJECT__GROUP:
+        return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
     }
     return super.eIsSet(featureID);
   }
@@ -534,14 +444,12 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (version: ");
-    result.append(version);
-    result.append(", group: ");
-    result.append(group);
-    result.append(", defaultMainClass: ");
+    result.append(" (defaultMainClass: ");
     result.append(defaultMainClass);
     result.append(", defaultMainOperation: ");
     result.append(defaultMainOperation);
+    result.append(", group: ");
+    result.append(group);
     result.append(')');
     return result.toString();
   }

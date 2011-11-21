@@ -29,7 +29,7 @@ import org.kermeta.kp.NamedElement;
  *
  * @generated
  */
-public class NamedElementImpl extends EObjectImpl implements NamedElement {
+public abstract class NamedElementImpl extends EObjectImpl implements NamedElement {
 	/**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->

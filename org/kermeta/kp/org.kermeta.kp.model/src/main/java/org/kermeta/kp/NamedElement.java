@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.kermeta.kp.KpPackage#getNamedElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface NamedElement extends EObject {
@@ -36,7 +36,7 @@ public interface NamedElement extends EObject {
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.kermeta.kp.KpPackage#getNamedElement_Name()
-   * @model
+   * @model required="true"
    * @generated
    */
 	String getName();

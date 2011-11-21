@@ -66,19 +66,11 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
     {
       case KpPackage.KERMETA_PROJECT: return createKermetaProject();
       case KpPackage.DEPENDENCY: return createDependency();
-      case KpPackage.NAMED_ELEMENT: return createNamedElement();
       case KpPackage.SOURCE: return createSource();
-      case KpPackage.SOURCE_FOLDER: return createSourceFolder();
-      case KpPackage.SOURCE_FILE: return createSourceFile();
-      case KpPackage.SOURCE_NSURI: return createSourceNSURI();
-      case KpPackage.SOURCE_QUERY: return createSourceQuery();
       case KpPackage.WEAVE_DIRECTIVE: return createWeaveDirective();
       case KpPackage.OPTION: return createOption();
-      case KpPackage.EXPRESSION: return createExpression();
       case KpPackage.STRING_EXPRESSION: return createStringExpression();
       case KpPackage.MIX_EXPRESSION: return createMixExpression();
-      case KpPackage.KERMETA_PROJECT_REF: return createKermetaProjectRef();
-      case KpPackage.FREESTYLE_SOURCE: return createFreestyleSource();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -109,59 +101,9 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public NamedElement createNamedElement() {
-    NamedElementImpl namedElement = new NamedElementImpl();
-    return namedElement;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
 	public Source createSource() {
     SourceImpl source = new SourceImpl();
     return source;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public SourceFolder createSourceFolder() {
-    SourceFolderImpl sourceFolder = new SourceFolderImpl();
-    return sourceFolder;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public SourceFile createSourceFile() {
-    SourceFileImpl sourceFile = new SourceFileImpl();
-    return sourceFile;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public SourceNSURI createSourceNSURI() {
-    SourceNSURIImpl sourceNSURI = new SourceNSURIImpl();
-    return sourceNSURI;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public SourceQuery createSourceQuery() {
-    SourceQueryImpl sourceQuery = new SourceQueryImpl();
-    return sourceQuery;
   }
 
 	/**
@@ -189,16 +131,6 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public Expression createExpression() {
-    ExpressionImpl expression = new ExpressionImpl();
-    return expression;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
 	public StringExpression createStringExpression() {
     StringExpressionImpl stringExpression = new StringExpressionImpl();
     return stringExpression;
@@ -215,27 +147,6 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
   }
 
 	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public KermetaProjectRef createKermetaProjectRef() {
-    KermetaProjectRefImpl kermetaProjectRef = new KermetaProjectRefImpl();
-    return kermetaProjectRef;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FreestyleSource createFreestyleSource()
-  {
-    FreestyleSourceImpl freestyleSource = new FreestyleSourceImpl();
-    return freestyleSource;
-  }
-
-  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated

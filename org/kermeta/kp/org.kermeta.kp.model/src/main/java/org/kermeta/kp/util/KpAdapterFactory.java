@@ -96,31 +96,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
         return createSourceAdapter();
       }
       @Override
-      public Adapter caseSourceFolder(SourceFolder object)
-      {
-        return createSourceFolderAdapter();
-      }
-      @Override
-      public Adapter caseSourceFile(SourceFile object)
-      {
-        return createSourceFileAdapter();
-      }
-      @Override
-      public Adapter caseSourceNSURI(SourceNSURI object)
-      {
-        return createSourceNSURIAdapter();
-      }
-      @Override
-      public Adapter caseSourceQuery(SourceQuery object)
-      {
-        return createSourceQueryAdapter();
-      }
-      @Override
-      public Adapter caseImportedSource(ImportedSource object)
-      {
-        return createImportedSourceAdapter();
-      }
-      @Override
       public Adapter caseWeaveDirective(WeaveDirective object)
       {
         return createWeaveDirectiveAdapter();
@@ -144,16 +119,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
       public Adapter caseMixExpression(MixExpression object)
       {
         return createMixExpressionAdapter();
-      }
-      @Override
-      public Adapter caseKermetaProjectRef(KermetaProjectRef object)
-      {
-        return createKermetaProjectRefAdapter();
-      }
-      @Override
-      public Adapter caseFreestyleSource(FreestyleSource object)
-      {
-        return createFreestyleSourceAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -233,76 +198,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.SourceFolder <em>Source Folder</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.SourceFolder
-   * @generated
-   */
-	public Adapter createSourceFolderAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.SourceFile <em>Source File</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.SourceFile
-   * @generated
-   */
-	public Adapter createSourceFileAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.SourceNSURI <em>Source NSURI</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.SourceNSURI
-   * @generated
-   */
-	public Adapter createSourceNSURIAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.SourceQuery <em>Source Query</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.SourceQuery
-   * @generated
-   */
-	public Adapter createSourceQueryAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportedSource <em>Imported Source</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.ImportedSource
-   * @generated
-   */
-	public Adapter createImportedSourceAdapter() {
-    return null;
-  }
-
-	/**
    * Creates a new adapter for an object of class '{@link org.kermeta.kp.WeaveDirective <em>Weave Directive</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -373,35 +268,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.KermetaProjectRef <em>Kermeta Project Ref</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.KermetaProjectRef
-   * @generated
-   */
-	public Adapter createKermetaProjectRefAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.FreestyleSource <em>Freestyle Source</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.FreestyleSource
-   * @generated
-   */
-  public Adapter createFreestyleSourceAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for the default case.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null.

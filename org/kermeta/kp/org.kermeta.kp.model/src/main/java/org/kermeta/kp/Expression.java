@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see org.kermeta.kp.KpPackage#getExpression()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Expression extends EObject {

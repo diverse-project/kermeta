@@ -22,7 +22,7 @@ import org.kermeta.kp.KpPackage;
  *
  * @generated
  */
-public class ExpressionImpl extends EObjectImpl implements Expression {
+public abstract class ExpressionImpl extends EObjectImpl implements Expression {
 	/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

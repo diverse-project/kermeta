@@ -6,6 +6,8 @@
  */
 package org.kermeta.kp;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -15,10 +17,9 @@ package org.kermeta.kp;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.kp.Dependency#getGroup <em>Group</em>}</li>
- *   <li>{@link org.kermeta.kp.Dependency#getVersion <em>Version</em>}</li>
- *   <li>{@link org.kermeta.kp.Dependency#getDepRef <em>Dep Ref</em>}</li>
  *   <li>{@link org.kermeta.kp.Dependency#getUrl <em>Url</em>}</li>
+ *   <li>{@link org.kermeta.kp.Dependency#isIgnoreByteCode <em>Ignore Byte Code</em>}</li>
+ *   <li>{@link org.kermeta.kp.Dependency#isSourceOnly <em>Source Only</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,107 +29,73 @@ package org.kermeta.kp;
  */
 public interface Dependency extends NamedElement {
 	/**
-   * Returns the value of the '<em><b>Group</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Group</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Group</em>' attribute.
-   * @see #setGroup(String)
-   * @see org.kermeta.kp.KpPackage#getDependency_Group()
-   * @model
-   * @generated
-   */
-	String getGroup();
-
-	/**
-   * Sets the value of the '{@link org.kermeta.kp.Dependency#getGroup <em>Group</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Group</em>' attribute.
-   * @see #getGroup()
-   * @generated
-   */
-	void setGroup(String value);
-
-	/**
-   * Returns the value of the '<em><b>Version</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Version</em>' attribute.
-   * @see #setVersion(String)
-   * @see org.kermeta.kp.KpPackage#getDependency_Version()
-   * @model
-   * @generated
-   */
-	String getVersion();
-
-	/**
-   * Sets the value of the '{@link org.kermeta.kp.Dependency#getVersion <em>Version</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Version</em>' attribute.
-   * @see #getVersion()
-   * @generated
-   */
-	void setVersion(String value);
-
-	/**
-   * Returns the value of the '<em><b>Dep Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dep Ref</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Dep Ref</em>' reference.
-   * @see #setDepRef(KermetaProjectRef)
-   * @see org.kermeta.kp.KpPackage#getDependency_DepRef()
-   * @model required="true"
-   * @generated
-   */
-	KermetaProjectRef getDepRef();
-
-	/**
-   * Sets the value of the '{@link org.kermeta.kp.Dependency#getDepRef <em>Dep Ref</em>}' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Dep Ref</em>' reference.
-   * @see #getDepRef()
-   * @generated
-   */
-	void setDepRef(KermetaProjectRef value);
-
-	/**
-   * Returns the value of the '<em><b>Url</b></em>' attribute.
+   * Returns the value of the '<em><b>Url</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Url</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Url</em>' attribute.
-   * @see #setUrl(String)
+   * @return the value of the '<em>Url</em>' attribute list.
    * @see org.kermeta.kp.KpPackage#getDependency_Url()
-   * @model
+   * @model required="true"
    * @generated
    */
-	String getUrl();
+	EList<String> getUrl();
 
-	/**
-   * Sets the value of the '{@link org.kermeta.kp.Dependency#getUrl <em>Url</em>}' attribute.
+  /**
+   * Returns the value of the '<em><b>Ignore Byte Code</b></em>' attribute.
+   * The default value is <code>"false"</code>.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Url</em>' attribute.
-   * @see #getUrl()
+   * <p>
+   * If the meaning of the '<em>Ignore Byte Code</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ignore Byte Code</em>' attribute.
+   * @see #setIgnoreByteCode(boolean)
+   * @see org.kermeta.kp.KpPackage#getDependency_IgnoreByteCode()
+   * @model default="false"
    * @generated
    */
-	void setUrl(String value);
+  boolean isIgnoreByteCode();
+
+  /**
+   * Sets the value of the '{@link org.kermeta.kp.Dependency#isIgnoreByteCode <em>Ignore Byte Code</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ignore Byte Code</em>' attribute.
+   * @see #isIgnoreByteCode()
+   * @generated
+   */
+  void setIgnoreByteCode(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Source Only</b></em>' attribute.
+   * The default value is <code>"false"</code>.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Source Only</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Source Only</em>' attribute.
+   * @see #setSourceOnly(boolean)
+   * @see org.kermeta.kp.KpPackage#getDependency_SourceOnly()
+   * @model default="false"
+   * @generated
+   */
+  boolean isSourceOnly();
+
+  /**
+   * Sets the value of the '{@link org.kermeta.kp.Dependency#isSourceOnly <em>Source Only</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Source Only</em>' attribute.
+   * @see #isSourceOnly()
+   * @generated
+   */
+  void setSourceOnly(boolean value);
 
 } // Dependency

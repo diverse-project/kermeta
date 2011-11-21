@@ -44,15 +44,6 @@ public interface KpFactory extends EFactory {
 	Dependency createDependency();
 
 	/**
-   * Returns a new object of class '<em>Named Element</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Element</em>'.
-   * @generated
-   */
-	NamedElement createNamedElement();
-
-	/**
    * Returns a new object of class '<em>Source</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,42 +51,6 @@ public interface KpFactory extends EFactory {
    * @generated
    */
 	Source createSource();
-
-	/**
-   * Returns a new object of class '<em>Source Folder</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Source Folder</em>'.
-   * @generated
-   */
-	SourceFolder createSourceFolder();
-
-	/**
-   * Returns a new object of class '<em>Source File</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Source File</em>'.
-   * @generated
-   */
-	SourceFile createSourceFile();
-
-	/**
-   * Returns a new object of class '<em>Source NSURI</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Source NSURI</em>'.
-   * @generated
-   */
-	SourceNSURI createSourceNSURI();
-
-	/**
-   * Returns a new object of class '<em>Source Query</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Source Query</em>'.
-   * @generated
-   */
-	SourceQuery createSourceQuery();
 
 	/**
    * Returns a new object of class '<em>Weave Directive</em>'.
@@ -116,15 +71,6 @@ public interface KpFactory extends EFactory {
 	Option createOption();
 
 	/**
-   * Returns a new object of class '<em>Expression</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expression</em>'.
-   * @generated
-   */
-	Expression createExpression();
-
-	/**
    * Returns a new object of class '<em>String Expression</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,24 +89,6 @@ public interface KpFactory extends EFactory {
 	MixExpression createMixExpression();
 
 	/**
-   * Returns a new object of class '<em>Kermeta Project Ref</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Kermeta Project Ref</em>'.
-   * @generated
-   */
-	KermetaProjectRef createKermetaProjectRef();
-
-	/**
-   * Returns a new object of class '<em>Freestyle Source</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Freestyle Source</em>'.
-   * @generated
-   */
-  FreestyleSource createFreestyleSource();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

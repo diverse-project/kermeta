@@ -105,48 +105,6 @@ public class KpSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case KpPackage.SOURCE_FOLDER:
-      {
-        SourceFolder sourceFolder = (SourceFolder)theEObject;
-        T result = caseSourceFolder(sourceFolder);
-        if (result == null) result = caseSource(sourceFolder);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.SOURCE_FILE:
-      {
-        SourceFile sourceFile = (SourceFile)theEObject;
-        T result = caseSourceFile(sourceFile);
-        if (result == null) result = caseSource(sourceFile);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.SOURCE_NSURI:
-      {
-        SourceNSURI sourceNSURI = (SourceNSURI)theEObject;
-        T result = caseSourceNSURI(sourceNSURI);
-        if (result == null) result = caseImportedSource(sourceNSURI);
-        if (result == null) result = caseSource(sourceNSURI);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.SOURCE_QUERY:
-      {
-        SourceQuery sourceQuery = (SourceQuery)theEObject;
-        T result = caseSourceQuery(sourceQuery);
-        if (result == null) result = caseImportedSource(sourceQuery);
-        if (result == null) result = caseSource(sourceQuery);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.IMPORTED_SOURCE:
-      {
-        ImportedSource importedSource = (ImportedSource)theEObject;
-        T result = caseImportedSource(importedSource);
-        if (result == null) result = caseSource(importedSource);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case KpPackage.WEAVE_DIRECTIVE:
       {
         WeaveDirective weaveDirective = (WeaveDirective)theEObject;
@@ -183,22 +141,6 @@ public class KpSwitch<T> extends Switch<T> {
         MixExpression mixExpression = (MixExpression)theEObject;
         T result = caseMixExpression(mixExpression);
         if (result == null) result = caseExpression(mixExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.KERMETA_PROJECT_REF:
-      {
-        KermetaProjectRef kermetaProjectRef = (KermetaProjectRef)theEObject;
-        T result = caseKermetaProjectRef(kermetaProjectRef);
-        if (result == null) result = caseNamedElement(kermetaProjectRef);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.FREESTYLE_SOURCE:
-      {
-        FreestyleSource freestyleSource = (FreestyleSource)theEObject;
-        T result = caseFreestyleSource(freestyleSource);
-        if (result == null) result = caseSource(freestyleSource);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -263,81 +205,6 @@ public class KpSwitch<T> extends Switch<T> {
    * @generated
    */
 	public T caseSource(Source object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Source Folder</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Source Folder</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseSourceFolder(SourceFolder object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Source File</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Source File</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseSourceFile(SourceFile object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Source NSURI</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Source NSURI</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseSourceNSURI(SourceNSURI object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Source Query</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Source Query</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseSourceQuery(SourceQuery object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Imported Source</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Imported Source</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseImportedSource(ImportedSource object) {
     return null;
   }
 
@@ -417,37 +284,6 @@ public class KpSwitch<T> extends Switch<T> {
   }
 
 	/**
-   * Returns the result of interpreting the object as an instance of '<em>Kermeta Project Ref</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Kermeta Project Ref</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseKermetaProjectRef(KermetaProjectRef object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Freestyle Source</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Freestyle Source</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFreestyleSource(FreestyleSource object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;

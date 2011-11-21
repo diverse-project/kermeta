@@ -143,31 +143,13 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT__OPTIONS = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-   * The feature id for the '<em><b>Version</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT__VERSION = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-   * The feature id for the '<em><b>Group</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT__GROUP = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
    * The feature id for the '<em><b>Default Main Class</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int KERMETA_PROJECT__DEFAULT_MAIN_CLASS = NAMED_ELEMENT_FEATURE_COUNT + 6;
+  int KERMETA_PROJECT__DEFAULT_MAIN_CLASS = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Default Main Operation</b></em>' attribute.
@@ -176,25 +158,25 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-  int KERMETA_PROJECT__DEFAULT_MAIN_OPERATION = NAMED_ELEMENT_FEATURE_COUNT + 7;
+  int KERMETA_PROJECT__DEFAULT_MAIN_OPERATION = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
   /**
-   * The feature id for the '<em><b>Ref</b></em>' containment reference list.
+   * The feature id for the '<em><b>Group</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__REF = NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int KERMETA_PROJECT__GROUP = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
-	/**
+		/**
    * The number of structural features of the '<em>Kermeta Project</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int KERMETA_PROJECT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.DependencyImpl <em>Dependency</em>}' class.
@@ -216,49 +198,40 @@ public interface KpPackage extends EPackage {
 	int DEPENDENCY__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-   * The feature id for the '<em><b>Group</b></em>' attribute.
+   * The feature id for the '<em><b>Url</b></em>' attribute list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int DEPENDENCY__GROUP = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int DEPENDENCY__URL = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-   * The feature id for the '<em><b>Version</b></em>' attribute.
+   * The feature id for the '<em><b>Ignore Byte Code</b></em>' attribute.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int DEPENDENCY__VERSION = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  int DEPENDENCY__IGNORE_BYTE_CODE = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
-	/**
-   * The feature id for the '<em><b>Dep Ref</b></em>' reference.
+  /**
+   * The feature id for the '<em><b>Source Only</b></em>' attribute.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int DEPENDENCY__DEP_REF = NAMED_ELEMENT_FEATURE_COUNT + 2;
+  int DEPENDENCY__SOURCE_ONLY = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int DEPENDENCY__URL = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
+  /**
    * The number of structural features of the '<em>Dependency</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int DEPENDENCY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int DEPENDENCY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.SourceImpl <em>Source</em>}' class.
@@ -280,207 +253,22 @@ public interface KpPackage extends EPackage {
 	int SOURCE__URL = 0;
 
 	/**
+   * The feature id for the '<em><b>Byte Code From ADependency</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SOURCE__BYTE_CODE_FROM_ADEPENDENCY = 1;
+
+  /**
    * The number of structural features of the '<em>Source</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int SOURCE_FEATURE_COUNT = 1;
-
-	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.SourceFolderImpl <em>Source Folder</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.SourceFolderImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getSourceFolder()
-   * @generated
-   */
-	int SOURCE_FOLDER = 4;
-
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_FOLDER__URL = SOURCE__URL;
-
-	/**
-   * The feature id for the '<em><b>Folder Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_FOLDER__FOLDER_NAME = SOURCE_FEATURE_COUNT + 0;
-
-	/**
-   * The number of structural features of the '<em>Source Folder</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_FOLDER_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 1;
-
-	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.SourceFileImpl <em>Source File</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.SourceFileImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getSourceFile()
-   * @generated
-   */
-	int SOURCE_FILE = 5;
-
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_FILE__URL = SOURCE__URL;
-
-	/**
-   * The feature id for the '<em><b>File Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_FILE__FILE_NAME = SOURCE_FEATURE_COUNT + 0;
-
-	/**
-   * The number of structural features of the '<em>Source File</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_FILE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 1;
-
-	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.ImportedSourceImpl <em>Imported Source</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.ImportedSourceImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getImportedSource()
-   * @generated
-   */
-	int IMPORTED_SOURCE = 8;
-
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int IMPORTED_SOURCE__URL = SOURCE__URL;
-
-	/**
-   * The feature id for the '<em><b>From</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int IMPORTED_SOURCE__FROM = SOURCE_FEATURE_COUNT + 0;
-
-	/**
-   * The number of structural features of the '<em>Imported Source</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int IMPORTED_SOURCE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 1;
-
-	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.SourceNSURIImpl <em>Source NSURI</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.SourceNSURIImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getSourceNSURI()
-   * @generated
-   */
-	int SOURCE_NSURI = 6;
-
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_NSURI__URL = IMPORTED_SOURCE__URL;
-
-	/**
-   * The feature id for the '<em><b>From</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_NSURI__FROM = IMPORTED_SOURCE__FROM;
-
-	/**
-   * The number of structural features of the '<em>Source NSURI</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_NSURI_FEATURE_COUNT = IMPORTED_SOURCE_FEATURE_COUNT + 0;
-
-	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.SourceQueryImpl <em>Source Query</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.SourceQueryImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getSourceQuery()
-   * @generated
-   */
-	int SOURCE_QUERY = 7;
-
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_QUERY__URL = IMPORTED_SOURCE__URL;
-
-	/**
-   * The feature id for the '<em><b>From</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_QUERY__FROM = IMPORTED_SOURCE__FROM;
-
-	/**
-   * The feature id for the '<em><b>Query</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_QUERY__QUERY = IMPORTED_SOURCE_FEATURE_COUNT + 0;
-
-	/**
-   * The number of structural features of the '<em>Source Query</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int SOURCE_QUERY_FEATURE_COUNT = IMPORTED_SOURCE_FEATURE_COUNT + 1;
+	int SOURCE_FEATURE_COUNT = 2;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.WeaveDirectiveImpl <em>Weave Directive</em>}' class.
@@ -490,7 +278,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getWeaveDirective()
    * @generated
    */
-	int WEAVE_DIRECTIVE = 9;
+	int WEAVE_DIRECTIVE = 4;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -536,7 +324,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getOption()
    * @generated
    */
-	int OPTION = 10;
+	int OPTION = 5;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -573,7 +361,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getExpression()
    * @generated
    */
-	int EXPRESSION = 11;
+	int EXPRESSION = 6;
 
 	/**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -592,7 +380,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getStringExpression()
    * @generated
    */
-	int STRING_EXPRESSION = 12;
+	int STRING_EXPRESSION = 7;
 
 	/**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -620,7 +408,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getMixExpression()
    * @generated
    */
-	int MIX_EXPRESSION = 13;
+	int MIX_EXPRESSION = 8;
 
 	/**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -650,91 +438,6 @@ public interface KpPackage extends EPackage {
 	int MIX_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.KermetaProjectRefImpl <em>Kermeta Project Ref</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.KermetaProjectRefImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getKermetaProjectRef()
-   * @generated
-   */
-	int KERMETA_PROJECT_REF = 14;
-
-	/**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT_REF__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-   * The feature id for the '<em><b>Group</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT_REF__GROUP = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-   * The feature id for the '<em><b>Version</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT_REF__VERSION = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT_REF__URL = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-   * The number of structural features of the '<em>Kermeta Project Ref</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT_REF_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-
-	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.FreestyleSourceImpl <em>Freestyle Source</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.FreestyleSourceImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getFreestyleSource()
-   * @generated
-   */
-  int FREESTYLE_SOURCE = 15;
-
-  /**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FREESTYLE_SOURCE__URL = SOURCE__URL;
-
-  /**
-   * The number of structural features of the '<em>Freestyle Source</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FREESTYLE_SOURCE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 0;
-
-
-  /**
    * Returns the meta object for class '{@link org.kermeta.kp.KermetaProject <em>Kermeta Project</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -789,28 +492,6 @@ public interface KpPackage extends EPackage {
 	EReference getKermetaProject_Options();
 
 	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getVersion <em>Version</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Version</em>'.
-   * @see org.kermeta.kp.KermetaProject#getVersion()
-   * @see #getKermetaProject()
-   * @generated
-   */
-	EAttribute getKermetaProject_Version();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getGroup <em>Group</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Group</em>'.
-   * @see org.kermeta.kp.KermetaProject#getGroup()
-   * @see #getKermetaProject()
-   * @generated
-   */
-	EAttribute getKermetaProject_Group();
-
-	/**
    * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -833,17 +514,17 @@ public interface KpPackage extends EPackage {
   EAttribute getKermetaProject_DefaultMainOperation();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getRef <em>Ref</em>}'.
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getGroup <em>Group</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ref</em>'.
-   * @see org.kermeta.kp.KermetaProject#getRef()
+   * @return the meta object for the attribute '<em>Group</em>'.
+   * @see org.kermeta.kp.KermetaProject#getGroup()
    * @see #getKermetaProject()
    * @generated
    */
-	EReference getKermetaProject_Ref();
+	EAttribute getKermetaProject_Group();
 
-	/**
+		/**
    * Returns the meta object for class '{@link org.kermeta.kp.Dependency <em>Dependency</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -854,43 +535,10 @@ public interface KpPackage extends EPackage {
 	EClass getDependency();
 
 	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#getGroup <em>Group</em>}'.
+   * Returns the meta object for the attribute list '{@link org.kermeta.kp.Dependency#getUrl <em>Url</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Group</em>'.
-   * @see org.kermeta.kp.Dependency#getGroup()
-   * @see #getDependency()
-   * @generated
-   */
-	EAttribute getDependency_Group();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#getVersion <em>Version</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Version</em>'.
-   * @see org.kermeta.kp.Dependency#getVersion()
-   * @see #getDependency()
-   * @generated
-   */
-	EAttribute getDependency_Version();
-
-	/**
-   * Returns the meta object for the reference '{@link org.kermeta.kp.Dependency#getDepRef <em>Dep Ref</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Dep Ref</em>'.
-   * @see org.kermeta.kp.Dependency#getDepRef()
-   * @see #getDependency()
-   * @generated
-   */
-	EReference getDependency_DepRef();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#getUrl <em>Url</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Url</em>'.
+   * @return the meta object for the attribute list '<em>Url</em>'.
    * @see org.kermeta.kp.Dependency#getUrl()
    * @see #getDependency()
    * @generated
@@ -898,6 +546,28 @@ public interface KpPackage extends EPackage {
 	EAttribute getDependency_Url();
 
 	/**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#isIgnoreByteCode <em>Ignore Byte Code</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Ignore Byte Code</em>'.
+   * @see org.kermeta.kp.Dependency#isIgnoreByteCode()
+   * @see #getDependency()
+   * @generated
+   */
+  EAttribute getDependency_IgnoreByteCode();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#isSourceOnly <em>Source Only</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Source Only</em>'.
+   * @see org.kermeta.kp.Dependency#isSourceOnly()
+   * @see #getDependency()
+   * @generated
+   */
+  EAttribute getDependency_SourceOnly();
+
+  /**
    * Returns the meta object for class '{@link org.kermeta.kp.NamedElement <em>Named Element</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -940,100 +610,17 @@ public interface KpPackage extends EPackage {
 	EAttribute getSource_Url();
 
 	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.SourceFolder <em>Source Folder</em>}'.
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.Source#isByteCodeFromADependency <em>Byte Code From ADependency</em>}'.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Source Folder</em>'.
-   * @see org.kermeta.kp.SourceFolder
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Byte Code From ADependency</em>'.
+   * @see org.kermeta.kp.Source#isByteCodeFromADependency()
+   * @see #getSource()
    * @generated
    */
-	EClass getSourceFolder();
+  EAttribute getSource_ByteCodeFromADependency();
 
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.SourceFolder#getFolderName <em>Folder Name</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Folder Name</em>'.
-   * @see org.kermeta.kp.SourceFolder#getFolderName()
-   * @see #getSourceFolder()
-   * @generated
-   */
-	EAttribute getSourceFolder_FolderName();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.SourceFile <em>Source File</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Source File</em>'.
-   * @see org.kermeta.kp.SourceFile
-   * @generated
-   */
-	EClass getSourceFile();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.SourceFile#getFileName <em>File Name</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>File Name</em>'.
-   * @see org.kermeta.kp.SourceFile#getFileName()
-   * @see #getSourceFile()
-   * @generated
-   */
-	EAttribute getSourceFile_FileName();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.SourceNSURI <em>Source NSURI</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Source NSURI</em>'.
-   * @see org.kermeta.kp.SourceNSURI
-   * @generated
-   */
-	EClass getSourceNSURI();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.SourceQuery <em>Source Query</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Source Query</em>'.
-   * @see org.kermeta.kp.SourceQuery
-   * @generated
-   */
-	EClass getSourceQuery();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.SourceQuery#getQuery <em>Query</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Query</em>'.
-   * @see org.kermeta.kp.SourceQuery#getQuery()
-   * @see #getSourceQuery()
-   * @generated
-   */
-	EAttribute getSourceQuery_Query();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.ImportedSource <em>Imported Source</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Imported Source</em>'.
-   * @see org.kermeta.kp.ImportedSource
-   * @generated
-   */
-	EClass getImportedSource();
-
-	/**
-   * Returns the meta object for the reference '{@link org.kermeta.kp.ImportedSource#getFrom <em>From</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>From</em>'.
-   * @see org.kermeta.kp.ImportedSource#getFrom()
-   * @see #getImportedSource()
-   * @generated
-   */
-	EReference getImportedSource_From();
-
-	/**
+  /**
    * Returns the meta object for class '{@link org.kermeta.kp.WeaveDirective <em>Weave Directive</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1150,59 +737,6 @@ public interface KpPackage extends EPackage {
 	EReference getMixExpression_Right();
 
 	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.KermetaProjectRef <em>Kermeta Project Ref</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Kermeta Project Ref</em>'.
-   * @see org.kermeta.kp.KermetaProjectRef
-   * @generated
-   */
-	EClass getKermetaProjectRef();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProjectRef#getGroup <em>Group</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Group</em>'.
-   * @see org.kermeta.kp.KermetaProjectRef#getGroup()
-   * @see #getKermetaProjectRef()
-   * @generated
-   */
-	EAttribute getKermetaProjectRef_Group();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProjectRef#getVersion <em>Version</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Version</em>'.
-   * @see org.kermeta.kp.KermetaProjectRef#getVersion()
-   * @see #getKermetaProjectRef()
-   * @generated
-   */
-	EAttribute getKermetaProjectRef_Version();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProjectRef#getUrl <em>Url</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Url</em>'.
-   * @see org.kermeta.kp.KermetaProjectRef#getUrl()
-   * @see #getKermetaProjectRef()
-   * @generated
-   */
-	EAttribute getKermetaProjectRef_Url();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.FreestyleSource <em>Freestyle Source</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Freestyle Source</em>'.
-   * @see org.kermeta.kp.FreestyleSource
-   * @generated
-   */
-  EClass getFreestyleSource();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1267,22 +801,6 @@ public interface KpPackage extends EPackage {
 		EReference KERMETA_PROJECT__OPTIONS = eINSTANCE.getKermetaProject_Options();
 
 		/**
-     * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute KERMETA_PROJECT__VERSION = eINSTANCE.getKermetaProject_Version();
-
-		/**
-     * The meta object literal for the '<em><b>Group</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute KERMETA_PROJECT__GROUP = eINSTANCE.getKermetaProject_Group();
-
-		/**
      * The meta object literal for the '<em><b>Default Main Class</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1299,14 +817,14 @@ public interface KpPackage extends EPackage {
     EAttribute KERMETA_PROJECT__DEFAULT_MAIN_OPERATION = eINSTANCE.getKermetaProject_DefaultMainOperation();
 
     /**
-     * The meta object literal for the '<em><b>Ref</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Group</b></em>' attribute feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EReference KERMETA_PROJECT__REF = eINSTANCE.getKermetaProject_Ref();
+		EAttribute KERMETA_PROJECT__GROUP = eINSTANCE.getKermetaProject_Group();
 
-		/**
+				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.DependencyImpl <em>Dependency</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1317,31 +835,7 @@ public interface KpPackage extends EPackage {
 		EClass DEPENDENCY = eINSTANCE.getDependency();
 
 		/**
-     * The meta object literal for the '<em><b>Group</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute DEPENDENCY__GROUP = eINSTANCE.getDependency_Group();
-
-		/**
-     * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute DEPENDENCY__VERSION = eINSTANCE.getDependency_Version();
-
-		/**
-     * The meta object literal for the '<em><b>Dep Ref</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference DEPENDENCY__DEP_REF = eINSTANCE.getDependency_DepRef();
-
-		/**
-     * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Url</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
@@ -1349,6 +843,22 @@ public interface KpPackage extends EPackage {
 		EAttribute DEPENDENCY__URL = eINSTANCE.getDependency_Url();
 
 		/**
+     * The meta object literal for the '<em><b>Ignore Byte Code</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DEPENDENCY__IGNORE_BYTE_CODE = eINSTANCE.getDependency_IgnoreByteCode();
+
+    /**
+     * The meta object literal for the '<em><b>Source Only</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DEPENDENCY__SOURCE_ONLY = eINSTANCE.getDependency_SourceOnly();
+
+    /**
      * The meta object literal for the '{@link org.kermeta.kp.impl.NamedElementImpl <em>Named Element</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1385,88 +895,14 @@ public interface KpPackage extends EPackage {
 		EAttribute SOURCE__URL = eINSTANCE.getSource_Url();
 
 		/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.SourceFolderImpl <em>Source Folder</em>}' class.
+     * The meta object literal for the '<em><b>Byte Code From ADependency</b></em>' attribute feature.
      * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.SourceFolderImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getSourceFolder()
+     * <!-- end-user-doc -->
      * @generated
      */
-		EClass SOURCE_FOLDER = eINSTANCE.getSourceFolder();
+    EAttribute SOURCE__BYTE_CODE_FROM_ADEPENDENCY = eINSTANCE.getSource_ByteCodeFromADependency();
 
-		/**
-     * The meta object literal for the '<em><b>Folder Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute SOURCE_FOLDER__FOLDER_NAME = eINSTANCE.getSourceFolder_FolderName();
-
-		/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.SourceFileImpl <em>Source File</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.SourceFileImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getSourceFile()
-     * @generated
-     */
-		EClass SOURCE_FILE = eINSTANCE.getSourceFile();
-
-		/**
-     * The meta object literal for the '<em><b>File Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute SOURCE_FILE__FILE_NAME = eINSTANCE.getSourceFile_FileName();
-
-		/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.SourceNSURIImpl <em>Source NSURI</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.SourceNSURIImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getSourceNSURI()
-     * @generated
-     */
-		EClass SOURCE_NSURI = eINSTANCE.getSourceNSURI();
-
-		/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.SourceQueryImpl <em>Source Query</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.SourceQueryImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getSourceQuery()
-     * @generated
-     */
-		EClass SOURCE_QUERY = eINSTANCE.getSourceQuery();
-
-		/**
-     * The meta object literal for the '<em><b>Query</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute SOURCE_QUERY__QUERY = eINSTANCE.getSourceQuery_Query();
-
-		/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.ImportedSourceImpl <em>Imported Source</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.ImportedSourceImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getImportedSource()
-     * @generated
-     */
-		EClass IMPORTED_SOURCE = eINSTANCE.getImportedSource();
-
-		/**
-     * The meta object literal for the '<em><b>From</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference IMPORTED_SOURCE__FROM = eINSTANCE.getImportedSource_From();
-
-		/**
+    /**
      * The meta object literal for the '{@link org.kermeta.kp.impl.WeaveDirectiveImpl <em>Weave Directive</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1563,50 +999,6 @@ public interface KpPackage extends EPackage {
      * @generated
      */
 		EReference MIX_EXPRESSION__RIGHT = eINSTANCE.getMixExpression_Right();
-
-		/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.KermetaProjectRefImpl <em>Kermeta Project Ref</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.KermetaProjectRefImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getKermetaProjectRef()
-     * @generated
-     */
-		EClass KERMETA_PROJECT_REF = eINSTANCE.getKermetaProjectRef();
-
-		/**
-     * The meta object literal for the '<em><b>Group</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute KERMETA_PROJECT_REF__GROUP = eINSTANCE.getKermetaProjectRef_Group();
-
-		/**
-     * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute KERMETA_PROJECT_REF__VERSION = eINSTANCE.getKermetaProjectRef_Version();
-
-		/**
-     * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute KERMETA_PROJECT_REF__URL = eINSTANCE.getKermetaProjectRef_Url();
-
-    /**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.FreestyleSourceImpl <em>Freestyle Source</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.FreestyleSourceImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getFreestyleSource()
-     * @generated
-     */
-    EClass FREESTYLE_SOURCE = eINSTANCE.getFreestyleSource();
 
 	}
 

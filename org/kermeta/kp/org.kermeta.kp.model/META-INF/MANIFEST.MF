@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.kp.impl;uses:="org.eclipse.emf.ecore,org.k
- ermeta.kp,org.eclipse.emf.common.notify,org.eclipse.emf.ecore.impl,or
- g.eclipse.emf.ecore.util,org.eclipse.emf.common.util,org.eclipse.emf.
+Export-Package: org.kermeta.kp.impl;uses:="org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore,org.kermeta.kp,org.eclipse.emf.common.util,org.
+ eclipse.emf.common.notify,org.eclipse.emf.ecore.impl,org.eclipse.emf.
  ecore.plugin,org.eclipse.emf.ecore.resource",org.kermeta.kp;uses:="or
- g.eclipse.emf.ecore,org.eclipse.emf.common.util,org.kermeta.kp.impl",
+ g.eclipse.emf.common.util,org.eclipse.emf.ecore,org.kermeta.kp.impl",
  org.kermeta.kp.util;uses:="org.eclipse.emf.ecore,org.kermeta.kp,org.e
  clipse.emf.common.notify,org.eclipse.emf.common.notify.impl,org.eclip
  se.emf.ecore.util"
@@ -15,7 +15,7 @@ Bundle-Name: kp.model :: KP MODEL
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_17
 Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1319545839378
+Bnd-LastModified: 1321518547589
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

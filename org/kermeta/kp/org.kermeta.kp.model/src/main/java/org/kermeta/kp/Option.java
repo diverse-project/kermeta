@@ -35,7 +35,7 @@ public interface Option extends NamedElement {
    * @return the value of the '<em>Value</em>' attribute.
    * @see #setValue(String)
    * @see org.kermeta.kp.KpPackage#getOption_Value()
-   * @model
+   * @model required="true"
    * @generated
    */
 	String getValue();
