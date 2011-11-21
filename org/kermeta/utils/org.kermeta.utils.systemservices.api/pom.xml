@@ -56,6 +56,10 @@
 								org.eclipse.ui.workbench,
                     			org.eclipse.emf.ecore
                         	</Require-Bundle>
+                        	<Import-Package>
+                        		org.kermeta.utils.helpers,
+                        		org.kermeta.utils.helpers.emf
+                        	</Import-Package>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
