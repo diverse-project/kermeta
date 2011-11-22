@@ -456,8 +456,8 @@ public class KermetaCompiler {
 					if(findSourceUsingDependency(kp,dep) != null){
 						logger.debug("\tdependency used at least for one require", LOG_MESSAGE_GROUP);
 					}
-					else{
-						logger.logProblem(MessagingSystem.Kind.UserWARNING, "dependency neither contains a kp file nor is used in a require, maybe you use it as a binary classpath complement only ? ", 
+					else if(!dep.isByteCodeOnly()){
+						logger.logProblem(MessagingSystem.Kind.UserWARNING, "dependency neither contains a kp file nor is used in a require. If you use it as a binary classpath complement only, please add the byteCodeOnly modifier. ", 
 								KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(dep));
 					}
 				} else {
