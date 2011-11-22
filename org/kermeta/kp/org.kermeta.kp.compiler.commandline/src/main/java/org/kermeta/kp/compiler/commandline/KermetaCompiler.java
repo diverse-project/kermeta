@@ -644,38 +644,41 @@ public class KermetaCompiler {
 		// TODO currently deal only with dependencies on the disk (no mvn:/ dependencies)
 		List<Dependency> dependencies = kp.getDependencies();
 		for (Dependency dep : dependencies) {
-			// for each dependency use the first URL that works			
-			for(String dependencyURLWithVariable : dep.getUrl()){
-				String dependencyURL = varExpander.expandSimpleVariables(dependencyURLWithVariable);
-				// try to convert it into a file URI
-				java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURL));
-				if(fileURI != null){					
-					dependencyURL = fileURI.toString();
-				}
-				if (dependencyURLWithVariable.contains("${")) {
-					// deal with variable expansion
-					logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", LOG_MESSAGE_GROUP);
-				} else {
-					logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-				}
-				URL jarURL = new URL(dependencyURL);
-				if( jarURL.getProtocol().equals("file")){
-					File theFile;
-					try {
-						theFile = new File(jarURL.toURI());
-						if (theFile!=null) {
-							if(theFile.exists()){
-								result.add(theFile.getAbsolutePath());
+			// ignore dependencies that are used only for importing sources or for importing a merged km
+			if(! dep.isIgnoreByteCode() && !dep.isSourceOnly()){
+				// for each dependency use the first URL that works			
+				for(String dependencyURLWithVariable : dep.getUrl()){
+					String dependencyURL = varExpander.expandSimpleVariables(dependencyURLWithVariable);
+					// try to convert it into a file URI
+					java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURL));
+					if(fileURI != null){					
+						dependencyURL = fileURI.toString();
+					}
+					if (dependencyURLWithVariable.contains("${")) {
+						// deal with variable expansion
+						logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", LOG_MESSAGE_GROUP);
+					} else {
+						logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+					}
+					URL jarURL = new URL(dependencyURL);
+					if( jarURL.getProtocol().equals("file")){
+						File theFile;
+						try {
+							theFile = new File(jarURL.toURI());
+							if (theFile!=null) {
+								if(theFile.exists()){
+									result.add(theFile.getAbsolutePath());
+								}
+								else{
+									// try next URL fo this dependency
+									continue;
+								}
 							}
-							else{
-								// try next URL fo this dependency
-								continue;
-							}
+						} catch (URISyntaxException e) {
+							// ignore URI that cannot be translated into a local file ...
+							continue;
+							// TODO deal with mvn url in convertSpecialURItoFileURI
 						}
-					} catch (URISyntaxException e) {
-						// ignore URI that cannot be translated into a local file ...
-						continue;
-						// TODO deal with mvn url in convertSpecialURItoFileURI
 					}
 				}
 			}
