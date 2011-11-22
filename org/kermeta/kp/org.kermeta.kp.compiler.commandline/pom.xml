@@ -67,7 +67,9 @@
 							org.ops4j.pax.url.mvn
                         </Require-Bundle>
                         <Import-Package>
-							scala.tools.nsc
+							scala.tools.nsc,
+							org.kermeta.kp.editor,
+							org.kermeta.kp.editor.mopp
                         </Import-Package>
 		            </manifestEntries>		            
 		          </archive>

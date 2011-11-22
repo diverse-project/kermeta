@@ -424,7 +424,8 @@ public class KermetaCompiler {
 				kpSources.add(FileHelpers.StringToURL(sourceURL));
 			}
 			catch(IOException e){
-				logger.logProblem(Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), LOG_MESSAGE_GROUP,e, new FileReference(FileHelpers.StringToURL(kpFileUrl)));
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), 
+						KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(src));
 			}
 		}
 
@@ -438,7 +439,7 @@ public class KermetaCompiler {
 				boolean isDirectory = false;
 				try{
 					URI depURI = URI.createURI(baseUriForDependency+"/");
-					if(depURI.isPlatformResource() && ! depURI.fileExtension().equals("jar")){
+					if((depURI.isPlatformResource() && depURI.fileExtension() == null) || (depURI.isPlatformResource() && ! depURI.fileExtension().equals("jar"))){
 						isDirectory = true;
 					}
 				}catch( Exception e){
@@ -456,7 +457,8 @@ public class KermetaCompiler {
 						logger.debug("\tdependency used at least for one require", LOG_MESSAGE_GROUP);
 					}
 					else{
-						logger.log(MessagingSystem.Kind.UserWARNING, "\tdependency neither contains a kp file nor is used in a require, maybe you use it as a binary classpath complement only ? ", LOG_MESSAGE_GROUP);
+						logger.logProblem(MessagingSystem.Kind.UserWARNING, "dependency neither contains a kp file nor is used in a require, maybe you use it as a binary classpath complement only ? ", 
+								KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(dep));
 					}
 				} else {
 					String dependencyMergedKMUrl;
@@ -467,91 +469,8 @@ public class KermetaCompiler {
 						dependencyMergedKMUrl = baseUriForDependency + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
 					}
 					kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
-					break; // no need to try other url of this dependency
 				}
 				
-				
-				
-				
-				// for each dependency use the first URL that works
-				/*for(String dependencyURLWithVariable : dep.getUrl()){
-					String dependencyURLString = varExpander.expandSimpleVariables(dependencyURLWithVariable);
-					if (dependencyURLWithVariable.contains("${")) {
-						// deal with variable expansion
-						logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURLString + ")", LOG_MESSAGE_GROUP);
-					} else {
-						logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-					}
-	
-					KermetaProject dependencyKP = null;
-	
-					// deal with URL : might be a Jar or a folder
-					// is this a folder ?
-					URI dependencyKPURI = null;
-					boolean isDirectory = false;
-					try{
-						URI depURI = URI.createURI(dependencyURLString);
-						if(depURI.isPlatformResource() && ! depURI.fileExtension().equals("jar")){
-							dependencyKPURI = EMFUriHelper.convertToEMFUri(fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURLString+DEFAULT_KP_LOCATION_IN_FOLDER)));
-							logger.debug("fileSystemConverter.convertSpecialURItoFileURI = "+dependencyKPURI, LOG_MESSAGE_GROUP);
-							isDirectory = true;
-							// check that this folder exists ...
-							File d = new File(fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURLString)));
-							if(!d.exists()){
-								logger.logProblem(MessagingSystem.Kind.UserWARNING, "Dependency "+dependencyURLString+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
-								continue; // try next
-							}
-						}
-					}catch( Exception e){
-						logger.error(e.toString()+ " on " +URI.createURI(dependencyURLString).toFileString(), LOG_MESSAGE_GROUP,e);
-					}
-					if(!isDirectory){
-						// let's try as a zip
-						URL jar = new URL(dependencyURLString);
-						try {
-							ZipInputStream zip = new ZipInputStream(jar.openStream());
-							ZipEntry ze;
-							while ((ze = zip.getNextEntry()) != null) {
-								if (("/" + ze.getName()).equals(DEFAULT_KP_LOCATION_IN_JAR)) {
-	
-									dependencyKPURI = URI.createURI("jar:" + dependencyURLString + "!/" + ze.getName());
-								}
-							}
-	
-						} catch (Exception e) {
-							logger.logProblem(MessagingSystem.Kind.UserWARNING, "Dependency "+dependencyURLString+" not found", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
-							continue; // try next
-						}
-					}
-					if(dependencyKPURI != null){
-						// load dependencyKP
-						logger.debug("loading dependency kp : "+dependencyKPURI.toString(), LOG_MESSAGE_GROUP);
-						ldr = new KpLoaderImpl();				
-						dependencyKP = ldr.loadKp(dependencyKPURI);
-					}
-					if (dependencyKP == null) {
-						if(findSourceUsingDependency(kp,dep) != null){
-							logger.debug("dependency used at least for one require", LOG_MESSAGE_GROUP);
-						}
-						else{
-							logger.log(MessagingSystem.Kind.UserWARNING, "   dependency neither contains a kp file nor is used in a require, maybe you use it as a binary classpath complement only ? ", LOG_MESSAGE_GROUP);
-						}
-					} else {
-						String dependencyMergedKMUrl;
-						if(isDirectory){
-							if(runInEclipse){
-								// TODO read an optional preference about where the binary are really located in this specific eclipse project
-								dependencyMergedKMUrl = dependencyURLString + DEFAULT_BINARY_LOCATION_IN_ECLIPSE +DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-							} else {
-								dependencyMergedKMUrl = dependencyURLString + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-							}
-						} else {
-							dependencyMergedKMUrl = "jar:" + dependencyURLString + "!" + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-						}
-						kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
-						break; // no need to try other url of this dependency
-					}
-				}*/
 			}
 		}
 		return kpSources;

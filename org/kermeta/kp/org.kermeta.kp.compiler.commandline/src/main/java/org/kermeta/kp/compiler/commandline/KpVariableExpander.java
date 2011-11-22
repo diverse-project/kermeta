@@ -22,8 +22,10 @@ import java.util.zip.ZipInputStream;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+import org.kermeta.utils.systemservices.api.reference.FileReference;
 
 /**
  * Expand string with variables (${...} ) into string without variable
@@ -40,6 +42,7 @@ public class KpVariableExpander {
 	public static String PROJECT_BASEURI_VARIABLE = "project"+BASEURI_VARIABLE;
 	
 	protected String projectUri;
+	protected String kpFileURL;
 	protected KermetaProject kp;
 	protected LocalFileConverter fileSystemConverter;
 	protected MessagingSystem logger;
@@ -47,6 +50,7 @@ public class KpVariableExpander {
 	protected HashMap<String,String> possibleDependencyVariableReplacements = new HashMap<String,String>();
 
 	public KpVariableExpander(String kpFileURL, KermetaProject kp, LocalFileConverter fileSystemConverter, MessagingSystem logger) {
+		this.kpFileURL = kpFileURL;
 		File f = new File(kpFileURL);
 		projectUri = f.getParentFile().toURI().toString();
 		projectUri = projectUri.substring(0, projectUri.length()-1); // remove the trailing slash because we want the user to add it manually (more readable)
@@ -112,7 +116,9 @@ public class KpVariableExpander {
 				
 			}
 			if(!foundFile){
-				logger.warn("Cannot find physical local file or open url stream for dependency " + dep.getName() + ". The variable ${"+dep.getName()+BASEURI_VARIABLE+"} cannot be used." , KermetaCompiler.LOG_MESSAGE_GROUP);
+				String msg = "Cannot find physical local file or open url stream for dependency " + dep.getName() + ". The variable ${"+dep.getName()+BASEURI_VARIABLE+"} cannot be used.";
+				logger.logProblem(MessagingSystem.Kind.UserERROR, msg, 
+							KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(dep));
 			}
 		}
 		
