@@ -273,6 +273,15 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EAttribute getDependency_ByteCodeOnly() {
+    return (EAttribute)dependencyEClass.getEStructuralFeatures().get(3);
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	public EClass getNamedElement() {
     return namedElementEClass;
   }
@@ -454,6 +463,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEAttribute(dependencyEClass, DEPENDENCY__URL);
     createEAttribute(dependencyEClass, DEPENDENCY__IGNORE_BYTE_CODE);
     createEAttribute(dependencyEClass, DEPENDENCY__SOURCE_ONLY);
+    createEAttribute(dependencyEClass, DEPENDENCY__BYTE_CODE_ONLY);
 
     namedElementEClass = createEClass(NAMED_ELEMENT);
     createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
@@ -528,6 +538,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEAttribute(getDependency_Url(), ecorePackage.getEString(), "url", null, 1, -1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDependency_IgnoreByteCode(), ecorePackage.getEBoolean(), "ignoreByteCode", "false", 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDependency_SourceOnly(), ecorePackage.getEBoolean(), "sourceOnly", "false", 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDependency_ByteCodeOnly(), ecorePackage.getEBoolean(), "byteCodeOnly", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

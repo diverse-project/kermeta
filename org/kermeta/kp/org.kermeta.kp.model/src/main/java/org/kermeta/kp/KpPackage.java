@@ -225,13 +225,22 @@ public interface KpPackage extends EPackage {
   int DEPENDENCY__SOURCE_ONLY = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>Byte Code Only</b></em>' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int DEPENDENCY__BYTE_CODE_ONLY = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+		/**
    * The number of structural features of the '<em>Dependency</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int DEPENDENCY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int DEPENDENCY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.SourceImpl <em>Source</em>}' class.
@@ -568,6 +577,17 @@ public interface KpPackage extends EPackage {
   EAttribute getDependency_SourceOnly();
 
   /**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#isByteCodeOnly <em>Byte Code Only</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Byte Code Only</em>'.
+   * @see org.kermeta.kp.Dependency#isByteCodeOnly()
+   * @see #getDependency()
+   * @generated
+   */
+	EAttribute getDependency_ByteCodeOnly();
+
+		/**
    * Returns the meta object for class '{@link org.kermeta.kp.NamedElement <em>Named Element</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -859,6 +879,14 @@ public interface KpPackage extends EPackage {
     EAttribute DEPENDENCY__SOURCE_ONLY = eINSTANCE.getDependency_SourceOnly();
 
     /**
+     * The meta object literal for the '<em><b>Byte Code Only</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EAttribute DEPENDENCY__BYTE_CODE_ONLY = eINSTANCE.getDependency_ByteCodeOnly();
+
+				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.NamedElementImpl <em>Named Element</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

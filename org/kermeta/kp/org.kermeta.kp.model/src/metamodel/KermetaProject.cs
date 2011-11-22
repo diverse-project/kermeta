@@ -63,7 +63,7 @@ RULES{
     
     Dependency::=  
     !2"dependency" name['"','"']  (("=")|("URLs" "="))  url['"','"']("," url['"','"'])*  
-    (ignoreByteCode["ignoreByteCode":""] | sourceOnly["sourceOnly":""])?
+    (ignoreByteCode["ignoreByteCode":""] | sourceOnly["sourceOnly":""] | byteCodeOnly["byteCodeOnly":""])?
     ;
     
     WeaveDirective::= 

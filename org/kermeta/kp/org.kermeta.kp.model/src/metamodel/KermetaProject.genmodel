@@ -22,6 +22,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/url"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/ignoreByteCode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/sourceOnly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/byteCodeOnly"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//NamedElement/name"/>

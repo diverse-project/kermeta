@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.kp.Dependency#getUrl <em>Url</em>}</li>
  *   <li>{@link org.kermeta.kp.Dependency#isIgnoreByteCode <em>Ignore Byte Code</em>}</li>
  *   <li>{@link org.kermeta.kp.Dependency#isSourceOnly <em>Source Only</em>}</li>
+ *   <li>{@link org.kermeta.kp.Dependency#isByteCodeOnly <em>Byte Code Only</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,5 +98,31 @@ public interface Dependency extends NamedElement {
    * @generated
    */
   void setSourceOnly(boolean value);
+
+		/**
+   * Returns the value of the '<em><b>Byte Code Only</b></em>' attribute.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Byte Code Only</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Byte Code Only</em>' attribute.
+   * @see #setByteCodeOnly(boolean)
+   * @see org.kermeta.kp.KpPackage#getDependency_ByteCodeOnly()
+   * @model
+   * @generated
+   */
+	boolean isByteCodeOnly();
+
+		/**
+   * Sets the value of the '{@link org.kermeta.kp.Dependency#isByteCodeOnly <em>Byte Code Only</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Byte Code Only</em>' attribute.
+   * @see #isByteCodeOnly()
+   * @generated
+   */
+	void setByteCodeOnly(boolean value);
 
 } // Dependency

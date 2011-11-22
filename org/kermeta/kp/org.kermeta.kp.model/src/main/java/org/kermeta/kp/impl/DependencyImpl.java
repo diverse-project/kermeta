@@ -29,6 +29,7 @@ import org.kermeta.kp.KpPackage;
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#isIgnoreByteCode <em>Ignore Byte Code</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#isSourceOnly <em>Source Only</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.DependencyImpl#isByteCodeOnly <em>Byte Code Only</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +84,26 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
   protected boolean sourceOnly = SOURCE_ONLY_EDEFAULT;
 
   /**
+   * The default value of the '{@link #isByteCodeOnly() <em>Byte Code Only</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #isByteCodeOnly()
+   * @generated
+   * @ordered
+   */
+	protected static final boolean BYTE_CODE_ONLY_EDEFAULT = false;
+
+		/**
+   * The cached value of the '{@link #isByteCodeOnly() <em>Byte Code Only</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #isByteCodeOnly()
+   * @generated
+   * @ordered
+   */
+	protected boolean byteCodeOnly = BYTE_CODE_ONLY_EDEFAULT;
+
+		/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -165,6 +186,27 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public boolean isByteCodeOnly() {
+    return byteCodeOnly;
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public void setByteCodeOnly(boolean newByteCodeOnly) {
+    boolean oldByteCodeOnly = byteCodeOnly;
+    byteCodeOnly = newByteCodeOnly;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__BYTE_CODE_ONLY, oldByteCodeOnly, byteCodeOnly));
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID)
@@ -175,6 +217,8 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
         return isIgnoreByteCode();
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         return isSourceOnly();
+      case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
+        return isByteCodeOnly();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -199,6 +243,9 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         setSourceOnly((Boolean)newValue);
         return;
+      case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
+        setByteCodeOnly((Boolean)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -221,6 +268,9 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         setSourceOnly(SOURCE_ONLY_EDEFAULT);
         return;
+      case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
+        setByteCodeOnly(BYTE_CODE_ONLY_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -240,6 +290,8 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
         return ignoreByteCode != IGNORE_BYTE_CODE_EDEFAULT;
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         return sourceOnly != SOURCE_ONLY_EDEFAULT;
+      case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
+        return byteCodeOnly != BYTE_CODE_ONLY_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -260,6 +312,8 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
     result.append(ignoreByteCode);
     result.append(", sourceOnly: ");
     result.append(sourceOnly);
+    result.append(", byteCodeOnly: ");
+    result.append(byteCodeOnly);
     result.append(')');
     return result.toString();
   }

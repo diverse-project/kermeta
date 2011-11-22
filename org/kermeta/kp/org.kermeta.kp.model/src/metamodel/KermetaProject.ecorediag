@@ -43,6 +43,10 @@
         <element xmi:type="ecore:EAttribute" href="KermetaProject.ecore#//Dependency/sourceOnly"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_H9angQ-kEeGXZbWY0F1P7A"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_aARN4RUTEeGS2_kzmDqvew" type="2001">
+        <element xmi:type="ecore:EAttribute" href="KermetaProject.ecore#//Dependency/byteCodeOnly"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aARN4hUTEeGS2_kzmDqvew"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_7EZhgWmlEd-gR-fD9BiKKw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_7EZhgmmlEd-gR-fD9BiKKw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_7EZhg2mlEd-gR-fD9BiKKw"/>
