@@ -31,6 +31,7 @@ TOKENSTYLES{
     //"weaver-directive" COLOR #007F55, BOLD;
     "byteCodeFromADependency" COLOR #CC8000, BOLD;
     "ignoreByteCode" COLOR #CC8000, BOLD;
+    "byteCodeOnly" COLOR #CC8000, BOLD;
     "sourceOnly" COLOR #CC8000, BOLD;
     "SL_COMMENT" COLOR #348017;
     "ML_COMMENT" COLOR #348017;
