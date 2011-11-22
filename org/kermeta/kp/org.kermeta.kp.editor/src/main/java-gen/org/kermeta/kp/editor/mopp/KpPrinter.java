@@ -660,7 +660,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
@@ -670,6 +670,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		printCountingMap.put("ignoreByteCode", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY));
 		printCountingMap.put("sourceOnly", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__BYTE_CODE_ONLY));
+		printCountingMap.put("byteCodeOnly", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		boolean iterate = true;
@@ -822,6 +824,11 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			alt = 1;
 			matches = tempMatchCount;
 		}
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"byteCodeOnly"		));
+		if (tempMatchCount > matches) {
+			alt = 2;
+			matches = tempMatchCount;
+		}
 		switch(alt) {
 			case 1:			{
 				// DEFINITION PART BEGINS (BooleanTerminal)
@@ -831,6 +838,17 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 					if (o != null) {
 					}
 					printCountingMap.put("sourceOnly", count - 1);
+				}
+			}
+			break;
+			case 2:			{
+				// DEFINITION PART BEGINS (BooleanTerminal)
+				count = printCountingMap.get("byteCodeOnly");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__BYTE_CODE_ONLY));
+					if (o != null) {
+					}
+					printCountingMap.put("byteCodeOnly", count - 1);
 				}
 			}
 			break;

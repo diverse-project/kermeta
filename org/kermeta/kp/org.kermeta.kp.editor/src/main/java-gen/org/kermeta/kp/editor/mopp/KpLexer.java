@@ -31,6 +31,7 @@ public class KpLexer extends Lexer {
     public static final int T__32=32;
     public static final int T__33=33;
     public static final int T__34=34;
+    public static final int T__35=35;
     public static final int QUOTED_34_34=4;
     public static final int SL_COMMENT=5;
     public static final int ML_COMMENT=6;
@@ -461,10 +462,10 @@ public class KpLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:35:7: ( 'weaver-directive' )
-            // Kp.g:35:9: 'weaver-directive'
+            // Kp.g:35:7: ( 'byteCodeOnly' )
+            // Kp.g:35:9: 'byteCodeOnly'
             {
-            match("weaver-directive"); 
+            match("byteCodeOnly"); 
 
 
             }
@@ -482,10 +483,10 @@ public class KpLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:36:7: ( 'option' )
-            // Kp.g:36:9: 'option'
+            // Kp.g:36:7: ( 'weaver-directive' )
+            // Kp.g:36:9: 'weaver-directive'
             {
-            match("option"); 
+            match("weaver-directive"); 
 
 
             }
@@ -503,10 +504,10 @@ public class KpLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:37:7: ( 'value' )
-            // Kp.g:37:9: 'value'
+            // Kp.g:37:7: ( 'option' )
+            // Kp.g:37:9: 'option'
             {
-            match("value"); 
+            match("option"); 
 
 
             }
@@ -524,10 +525,11 @@ public class KpLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:38:7: ( '(' )
-            // Kp.g:38:9: '('
+            // Kp.g:38:7: ( 'value' )
+            // Kp.g:38:9: 'value'
             {
-            match('('); 
+            match("value"); 
+
 
             }
 
@@ -544,10 +546,10 @@ public class KpLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:39:7: ( ')' )
-            // Kp.g:39:9: ')'
+            // Kp.g:39:7: ( '(' )
+            // Kp.g:39:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -559,20 +561,40 @@ public class KpLexer extends Lexer {
     }
     // $ANTLR end "T__34"
 
+    // $ANTLR start "T__35"
+    public final void mT__35() throws RecognitionException {
+        try {
+            int _type = T__35;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Kp.g:40:7: ( ')' )
+            // Kp.g:40:9: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__35"
+
     // $ANTLR start "SL_COMMENT"
     public final void mSL_COMMENT() throws RecognitionException {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2201:11: ( ( '//' (~ ( '\\n' | '\\r' ) )* ) )
-            // Kp.g:2202:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
+            // Kp.g:2293:11: ( ( '//' (~ ( '\\n' | '\\r' ) )* ) )
+            // Kp.g:2294:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
             {
-            // Kp.g:2202:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
-            // Kp.g:2202:3: '//' (~ ( '\\n' | '\\r' ) )*
+            // Kp.g:2294:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
+            // Kp.g:2294:3: '//' (~ ( '\\n' | '\\r' ) )*
             {
             match("//"); 
 
-            // Kp.g:2202:7: (~ ( '\\n' | '\\r' ) )*
+            // Kp.g:2294:7: (~ ( '\\n' | '\\r' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -585,7 +607,7 @@ public class KpLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // Kp.g:2202:8: ~ ( '\\n' | '\\r' )
+            	    // Kp.g:2294:8: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -625,15 +647,15 @@ public class KpLexer extends Lexer {
         try {
             int _type = ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2205:11: ( ( '/*' ( . )* '*/' ) )
-            // Kp.g:2206:2: ( '/*' ( . )* '*/' )
+            // Kp.g:2297:11: ( ( '/*' ( . )* '*/' ) )
+            // Kp.g:2298:2: ( '/*' ( . )* '*/' )
             {
-            // Kp.g:2206:2: ( '/*' ( . )* '*/' )
-            // Kp.g:2206:3: '/*' ( . )* '*/'
+            // Kp.g:2298:2: ( '/*' ( . )* '*/' )
+            // Kp.g:2298:3: '/*' ( . )* '*/'
             {
             match("/*"); 
 
-            // Kp.g:2206:7: ( . )*
+            // Kp.g:2298:7: ( . )*
             loop2:
             do {
                 int alt2=2;
@@ -658,7 +680,7 @@ public class KpLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // Kp.g:2206:7: .
+            	    // Kp.g:2298:7: .
             	    {
             	    matchAny(); 
 
@@ -692,13 +714,13 @@ public class KpLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2209:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
-            // Kp.g:2210:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Kp.g:2301:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
+            // Kp.g:2302:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
             {
-            // Kp.g:2210:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // Kp.g:2210:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // Kp.g:2302:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Kp.g:2302:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // Kp.g:2210:3: ( '-' )?
+            // Kp.g:2302:3: ( '-' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -707,7 +729,7 @@ public class KpLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Kp.g:2210:4: '-'
+                    // Kp.g:2302:4: '-'
                     {
                     match('-'); 
 
@@ -716,7 +738,7 @@ public class KpLexer extends Lexer {
 
             }
 
-            // Kp.g:2210:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Kp.g:2302:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -734,16 +756,16 @@ public class KpLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Kp.g:2210:10: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Kp.g:2302:10: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Kp.g:2210:10: ( '1' .. '9' )
-                    // Kp.g:2210:11: '1' .. '9'
+                    // Kp.g:2302:10: ( '1' .. '9' )
+                    // Kp.g:2302:11: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // Kp.g:2210:21: ( '0' .. '9' )*
+                    // Kp.g:2302:21: ( '0' .. '9' )*
                     loop4:
                     do {
                         int alt4=2;
@@ -756,7 +778,7 @@ public class KpLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // Kp.g:2210:22: '0' .. '9'
+                    	    // Kp.g:2302:22: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -772,7 +794,7 @@ public class KpLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Kp.g:2210:35: '0'
+                    // Kp.g:2302:35: '0'
                     {
                     match('0'); 
 
@@ -782,7 +804,7 @@ public class KpLexer extends Lexer {
             }
 
             match('.'); 
-            // Kp.g:2210:44: ( '0' .. '9' )+
+            // Kp.g:2302:44: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -796,7 +818,7 @@ public class KpLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // Kp.g:2210:45: '0' .. '9'
+            	    // Kp.g:2302:45: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -832,13 +854,13 @@ public class KpLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2213:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
-            // Kp.g:2214:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Kp.g:2305:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
+            // Kp.g:2306:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
             {
-            // Kp.g:2214:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // Kp.g:2214:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Kp.g:2306:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Kp.g:2306:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // Kp.g:2214:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Kp.g:2306:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt7=0;
             loop7:
             do {
@@ -896,11 +918,11 @@ public class KpLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2217:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Kp.g:2218:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Kp.g:2309:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Kp.g:2310:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
-            // Kp.g:2218:2: ( ( ' ' | '\\t' | '\\f' ) )
-            // Kp.g:2218:3: ( ' ' | '\\t' | '\\f' )
+            // Kp.g:2310:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Kp.g:2310:3: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -931,13 +953,13 @@ public class KpLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2221:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Kp.g:2222:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Kp.g:2313:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Kp.g:2314:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Kp.g:2222:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Kp.g:2222:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Kp.g:2314:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Kp.g:2314:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Kp.g:2222:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Kp.g:2314:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -961,7 +983,7 @@ public class KpLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // Kp.g:2222:4: '\\r\\n'
+                    // Kp.g:2314:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -969,14 +991,14 @@ public class KpLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Kp.g:2222:13: '\\r'
+                    // Kp.g:2314:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Kp.g:2222:20: '\\n'
+                    // Kp.g:2314:20: '\\n'
                     {
                     match('\n'); 
 
@@ -1005,20 +1027,20 @@ public class KpLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Kp.g:2225:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Kp.g:2226:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Kp.g:2317:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Kp.g:2318:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Kp.g:2226:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Kp.g:2226:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Kp.g:2318:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Kp.g:2318:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
             {
-            // Kp.g:2226:3: ( '\"' )
-            // Kp.g:2226:4: '\"'
+            // Kp.g:2318:3: ( '\"' )
+            // Kp.g:2318:4: '\"'
             {
             match('\"'); 
 
             }
 
-            // Kp.g:2226:8: (~ ( '\"' ) )*
+            // Kp.g:2318:8: (~ ( '\"' ) )*
             loop9:
             do {
                 int alt9=2;
@@ -1031,7 +1053,7 @@ public class KpLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // Kp.g:2226:9: ~ ( '\"' )
+            	    // Kp.g:2318:9: ~ ( '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1051,8 +1073,8 @@ public class KpLexer extends Lexer {
                 }
             } while (true);
 
-            // Kp.g:2226:17: ( '\"' )
-            // Kp.g:2226:18: '\"'
+            // Kp.g:2318:17: ( '\"' )
+            // Kp.g:2318:18: '\"'
             {
             match('\"'); 
 
@@ -1073,8 +1095,8 @@ public class KpLexer extends Lexer {
     // $ANTLR end "QUOTED_34_34"
 
     public void mTokens() throws RecognitionException {
-        // Kp.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | SL_COMMENT | ML_COMMENT | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 )
-        int alt10=31;
+        // Kp.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | SL_COMMENT | ML_COMMENT | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 )
+        int alt10=32;
         alt10 = dfa10.predict(input);
         switch (alt10) {
             case 1 :
@@ -1246,49 +1268,56 @@ public class KpLexer extends Lexer {
                 }
                 break;
             case 25 :
-                // Kp.g:1:154: SL_COMMENT
+                // Kp.g:1:154: T__35
+                {
+                mT__35(); 
+
+                }
+                break;
+            case 26 :
+                // Kp.g:1:160: SL_COMMENT
                 {
                 mSL_COMMENT(); 
 
                 }
                 break;
-            case 26 :
-                // Kp.g:1:165: ML_COMMENT
+            case 27 :
+                // Kp.g:1:171: ML_COMMENT
                 {
                 mML_COMMENT(); 
 
                 }
                 break;
-            case 27 :
-                // Kp.g:1:176: FLOAT
+            case 28 :
+                // Kp.g:1:182: FLOAT
                 {
                 mFLOAT(); 
 
                 }
                 break;
-            case 28 :
-                // Kp.g:1:182: TEXT
+            case 29 :
+                // Kp.g:1:188: TEXT
                 {
                 mTEXT(); 
 
                 }
                 break;
-            case 29 :
-                // Kp.g:1:187: WHITESPACE
+            case 30 :
+                // Kp.g:1:193: WHITESPACE
                 {
                 mWHITESPACE(); 
 
                 }
                 break;
-            case 30 :
-                // Kp.g:1:198: LINEBREAK
+            case 31 :
+                // Kp.g:1:204: LINEBREAK
                 {
                 mLINEBREAK(); 
 
                 }
                 break;
-            case 31 :
-                // Kp.g:1:208: QUOTED_34_34
+            case 32 :
+                // Kp.g:1:214: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 
@@ -1306,12 +1335,13 @@ public class KpLexer extends Lexer {
         "\26\4\uffff\13\26\2\uffff\1\26\1\uffff\25\26\1\112\13\26\1\uffff"+
         "\1\26\1\130\4\26\1\137\1\141\5\26\1\uffff\1\26\1\150\2\26\1\153"+
         "\1\26\1\uffff\1\155\1\uffff\2\26\1\160\3\26\1\uffff\2\26\1\uffff"+
-        "\1\26\1\uffff\2\26\1\uffff\15\26\1\u0087\1\u0088\7\26\2\uffff\7"+
-        "\26\1\u0098\7\26\1\uffff\4\26\1\u00a4\5\26\1\u00aa\1\uffff\2\26"+
-        "\1\u00ad\2\26\1\uffff\1\u00b0\1\26\1\uffff\1\u00b2\1\26\1\uffff"+
-        "\1\26\1\uffff\5\26\1\u00ba\1\26\1\uffff\2\26\1\u00be\1\uffff";
+        "\1\26\1\uffff\2\26\1\uffff\16\26\1\u0089\1\u008a\10\26\2\uffff\10"+
+        "\26\1\u009c\3\26\1\u00a0\4\26\1\uffff\3\26\1\uffff\1\26\1\u00a9"+
+        "\5\26\1\u00af\1\uffff\2\26\1\u00b2\2\26\1\uffff\1\u00b5\1\26\1\uffff"+
+        "\1\u00b7\1\26\1\uffff\1\26\1\uffff\5\26\1\u00bf\1\26\1\uffff\2\26"+
+        "\1\u00c3\1\uffff";
     static final String DFA10_eofS =
-        "\u00bf\uffff";
+        "\u00c4\uffff";
     static final String DFA10_minS =
         "\1\11\1\145\1\162\1\uffff\1\145\2\uffff\1\157\1\160\2\145\1\171"+
         "\1\122\1\uffff\1\147\1\141\2\uffff\1\52\1\60\2\56\4\uffff\1\162"+
@@ -1323,13 +1353,14 @@ public class KpLexer extends Lexer {
         "\55\1\151\1\55\1\145\1\144\1\102\1\uffff\1\120\1\55\1\115\1\156"+
         "\1\55\1\156\1\uffff\1\55\1\uffff\1\162\1\144\1\55\1\145\1\171\1"+
         "\162\1\uffff\1\141\1\143\1\uffff\1\154\1\uffff\1\145\1\151\1\uffff"+
-        "\1\106\1\164\1\157\2\151\1\171\1\143\2\162\1\145\1\152\1\156\1\145"+
-        "\2\55\1\164\1\145\1\157\1\103\1\145\1\103\1\163\2\uffff\1\151\1"+
-        "\143\1\155\1\157\1\143\1\154\1\160\1\55\1\166\1\164\1\101\1\144"+
-        "\1\164\1\141\1\145\1\uffff\1\145\1\151\1\104\1\145\1\55\1\163\1"+
-        "\162\1\163\1\166\1\145\1\55\1\uffff\1\163\1\141\1\55\1\145\1\160"+
-        "\1\uffff\1\55\1\164\1\uffff\1\55\1\145\1\uffff\1\151\1\uffff\1\156"+
-        "\1\157\1\144\1\156\1\145\1\55\1\156\1\uffff\1\143\1\171\1\55\1\uffff";
+        "\1\106\1\164\1\157\2\151\1\171\1\143\2\162\1\156\1\145\1\152\1\156"+
+        "\1\145\2\55\1\164\1\145\1\157\1\154\1\103\1\145\1\103\1\163\2\uffff"+
+        "\1\151\1\143\1\155\1\171\1\157\1\143\1\154\1\160\1\55\1\166\1\164"+
+        "\1\101\1\55\1\144\1\164\1\141\1\145\1\uffff\1\145\1\151\1\104\1"+
+        "\uffff\1\145\1\55\1\163\1\162\1\163\1\166\1\145\1\55\1\uffff\1\163"+
+        "\1\141\1\55\1\145\1\160\1\uffff\1\55\1\164\1\uffff\1\55\1\145\1"+
+        "\uffff\1\151\1\uffff\1\156\1\157\1\144\1\156\1\145\1\55\1\156\1"+
+        "\uffff\1\143\1\171\1\55\1\uffff";
     static final String DFA10_maxS =
         "\1\175\1\145\1\162\1\uffff\1\145\2\uffff\1\157\1\160\2\145\1\171"+
         "\1\122\1\uffff\1\147\1\141\2\uffff\1\57\2\71\1\56\4\uffff\1\162"+
@@ -1341,23 +1372,23 @@ public class KpLexer extends Lexer {
         "\151\1\55\1\145\1\144\1\102\1\uffff\1\120\1\172\1\115\1\156\1\172"+
         "\1\156\1\uffff\1\172\1\uffff\1\162\1\144\1\172\1\145\1\171\1\162"+
         "\1\uffff\1\141\1\143\1\uffff\1\154\1\uffff\1\145\1\151\1\uffff\1"+
-        "\106\1\164\1\157\1\151\2\171\1\143\2\162\1\145\1\152\1\156\1\145"+
-        "\2\172\1\164\1\145\1\157\1\103\1\145\1\117\1\163\2\uffff\1\151\1"+
-        "\143\1\155\1\157\1\143\1\154\1\160\1\172\1\166\1\164\1\101\1\144"+
-        "\1\164\1\141\1\145\1\uffff\1\145\1\151\1\104\1\145\1\172\1\163\1"+
-        "\162\1\163\1\166\1\145\1\172\1\uffff\1\163\1\141\1\172\1\145\1\160"+
-        "\1\uffff\1\172\1\164\1\uffff\1\172\1\145\1\uffff\1\151\1\uffff\1"+
-        "\156\1\157\1\144\1\156\1\145\1\172\1\156\1\uffff\1\143\1\171\1\172"+
-        "\1\uffff";
+        "\117\1\164\1\157\1\151\2\171\1\143\2\162\1\156\1\145\1\152\1\156"+
+        "\1\145\2\172\1\164\1\145\1\157\1\154\1\103\1\145\1\117\1\163\2\uffff"+
+        "\1\151\1\143\1\155\1\171\1\157\1\143\1\154\1\160\1\172\1\166\1\164"+
+        "\1\101\1\172\1\144\1\164\1\141\1\145\1\uffff\1\145\1\151\1\104\1"+
+        "\uffff\1\145\1\172\1\163\1\162\1\163\1\166\1\145\1\172\1\uffff\1"+
+        "\163\1\141\1\172\1\145\1\160\1\uffff\1\172\1\164\1\uffff\1\172\1"+
+        "\145\1\uffff\1\151\1\uffff\1\156\1\157\1\144\1\156\1\145\1\172\1"+
+        "\156\1\uffff\1\143\1\171\1\172\1\uffff";
     static final String DFA10_acceptS =
-        "\3\uffff\1\3\1\uffff\1\7\1\10\6\uffff\1\21\2\uffff\1\27\1\30\4"+
-        "\uffff\1\34\1\35\1\36\1\37\13\uffff\1\31\1\32\1\uffff\1\33\41\uffff"+
-        "\1\20\15\uffff\1\26\6\uffff\1\15\1\uffff\1\25\6\uffff\1\2\2\uffff"+
-        "\1\11\1\uffff\1\12\2\uffff\1\14\26\uffff\1\17\1\23\17\uffff\1\6"+
-        "\13\uffff\1\1\5\uffff\1\22\2\uffff\1\13\2\uffff\1\4\1\uffff\1\24"+
-        "\7\uffff\1\5\3\uffff\1\16";
+        "\3\uffff\1\3\1\uffff\1\7\1\10\6\uffff\1\21\2\uffff\1\30\1\31\4"+
+        "\uffff\1\35\1\36\1\37\1\40\13\uffff\1\32\1\33\1\uffff\1\34\41\uffff"+
+        "\1\20\15\uffff\1\27\6\uffff\1\15\1\uffff\1\26\6\uffff\1\2\2\uffff"+
+        "\1\11\1\uffff\1\12\2\uffff\1\14\30\uffff\1\17\1\23\21\uffff\1\6"+
+        "\3\uffff\1\24\10\uffff\1\1\5\uffff\1\22\2\uffff\1\13\2\uffff\1\4"+
+        "\1\uffff\1\25\7\uffff\1\5\3\uffff\1\16";
     static final String DFA10_specialS =
-        "\u00bf\uffff}>";
+        "\u00c4\uffff}>";
     static final String[] DFA10_transitionS = {
             "\1\27\1\30\1\uffff\1\27\1\30\22\uffff\1\27\1\uffff\1\31\5\uffff"+
             "\1\20\1\21\2\uffff\1\15\1\23\1\uffff\1\22\1\25\11\24\3\uffff"+
@@ -1484,12 +1515,11 @@ public class KpLexer extends Lexer {
             "\1\167",
             "\1\170",
             "",
-            "\1\171",
-            "\1\172",
+            "\1\171\10\uffff\1\172",
             "\1\173",
             "\1\174",
-            "\1\175\17\uffff\1\176",
-            "\1\177",
+            "\1\175",
+            "\1\176\17\uffff\1\177",
             "\1\u0080",
             "\1\u0081",
             "\1\u0082",
@@ -1497,78 +1527,85 @@ public class KpLexer extends Lexer {
             "\1\u0084",
             "\1\u0085",
             "\1\u0086",
+            "\1\u0087",
+            "\1\u0088",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
-            "\1\u0089",
-            "\1\u008a",
             "\1\u008b",
             "\1\u008c",
             "\1\u008d",
-            "\1\u008e\13\uffff\1\u008f",
+            "\1\u008e",
+            "\1\u008f",
             "\1\u0090",
-            "",
-            "",
-            "\1\u0091",
-            "\1\u0092",
+            "\1\u0091\13\uffff\1\u0092",
             "\1\u0093",
+            "",
+            "",
             "\1\u0094",
             "\1\u0095",
             "\1\u0096",
             "\1\u0097",
-            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
-            "\26",
+            "\1\u0098",
             "\1\u0099",
             "\1\u009a",
             "\1\u009b",
-            "\1\u009c",
+            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
+            "\26",
             "\1\u009d",
             "\1\u009e",
             "\1\u009f",
-            "",
-            "\1\u00a0",
+            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
+            "\26",
             "\1\u00a1",
             "\1\u00a2",
             "\1\u00a3",
-            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
-            "\26",
+            "\1\u00a4",
+            "",
             "\1\u00a5",
             "\1\u00a6",
             "\1\u00a7",
+            "",
             "\1\u00a8",
-            "\1\u00a9",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
-            "",
+            "\1\u00aa",
             "\1\u00ab",
             "\1\u00ac",
-            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
-            "\26",
+            "\1\u00ad",
             "\1\u00ae",
-            "\1\u00af",
-            "",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
-            "\1\u00b1",
             "",
+            "\1\u00b0",
+            "\1\u00b1",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
             "\1\u00b3",
-            "",
             "\1\u00b4",
             "",
-            "\1\u00b5",
-            "\1\u00b6",
-            "\1\u00b7",
-            "\1\u00b8",
-            "\1\u00b9",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
-            "\1\u00bb",
+            "\1\u00b6",
             "",
+            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
+            "\26",
+            "\1\u00b8",
+            "",
+            "\1\u00b9",
+            "",
+            "\1\u00ba",
+            "\1\u00bb",
             "\1\u00bc",
             "\1\u00bd",
+            "\1\u00be",
+            "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
+            "\26",
+            "\1\u00c0",
+            "",
+            "\1\u00c1",
+            "\1\u00c2",
             "\1\26\2\uffff\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32"+
             "\26",
             ""
@@ -1604,7 +1641,7 @@ public class KpLexer extends Lexer {
             this.transition = DFA10_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | SL_COMMENT | ML_COMMENT | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | SL_COMMENT | ML_COMMENT | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 );";
         }
     }
  
