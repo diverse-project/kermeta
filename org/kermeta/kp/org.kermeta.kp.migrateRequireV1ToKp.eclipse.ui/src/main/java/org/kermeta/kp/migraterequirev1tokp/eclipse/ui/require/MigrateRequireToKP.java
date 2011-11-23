@@ -279,7 +279,7 @@ public class MigrateRequireToKP {
 		// Add dependency to library core
 		Dependency dep = KpFactory.eINSTANCE.createDependency();
 		dep.setName("language.model");
-		dep.setUrl("mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT");
+		dep.getUrl().add("mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT");
 		kp.getDependencies().add(dep);
 		
 		// Add kp to the resource
