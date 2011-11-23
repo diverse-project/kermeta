@@ -25,7 +25,7 @@ class Main
 		var myB : B init B.new
 
 
-		myB.att := myA.ref //interdit
+		myA.att := myB.ref //interdit
 		 
 		
 		
