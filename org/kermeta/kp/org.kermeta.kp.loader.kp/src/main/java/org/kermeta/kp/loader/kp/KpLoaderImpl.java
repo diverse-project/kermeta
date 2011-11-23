@@ -37,7 +37,8 @@ public class KpLoaderImpl implements KpLoader{
 	 * @param uriKpResource
 	 */
 	public KermetaProject loadKp(String uriKpResource) {
-		return loadKp(URI.createURI(uriKpResource));
+		return loadKp(URI.createFileURI(uriKpResource));
+		//return loadKp(URI.createURI(uriKpResource));
 	}
 	
 	/**
