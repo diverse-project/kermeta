@@ -176,6 +176,11 @@
 			<version>[3.5.1.0,)</version>
 		</dependency>
 		<dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.equinox.preferences</artifactId>
+            <version>[3.2.301.R35x_v20091117,)</version>
+        </dependency>
+		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.registry</artifactId>
 			<version>[3.4.100.0,)</version>
