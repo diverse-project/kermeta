@@ -1,27 +1,31 @@
-KermetaProject :"language.sample.class2rdbms" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language.sample" 
-defaultMainClass :"class2RDBMS::Main"
-defaultMainOperation : "main"
-{ 
-	
-	source = "${project.baseUri}/src/main/kmt/Class2RDBMS.kmt"  
-	source = "${project.baseUri}/src/main/kmt/trace.kmt"
-	source = "${project.baseUri}/src/main/ecore/ClassMM.ecore" 
-	//srcQuery ="model/ClassMM.ecore" from "classmm.model"
-	source = "${project.baseUri}/src/main/ecore/RDBMSMM.ecore" 
-	//srcQuery ="model/RDBMSMM.ecore" from "rdbmsmm.model"
-	source = "${project.baseUri}/src/main/kmt/RDBMSMM_aspect.kmt" 
-	
-	// depends on library.core	
-	//dependency "language.model" URL="platform:/resource/org.kermeta.language.library.core"
-    //dependency "language.model" URL="platform:/resource/org.kermeta.language.library.core/target/language.library.core-2.0.1-SNAPSHOT.jar"
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"  
-	//dependency "utils.helpers" URL="mvn:org.kermeta.utils/utils.helpers/2.0.1-SNAPSHOT" 
-	
-	//dependency "classmm.model" URL="mvn:org.kermeta.language.sample/language.sample.class2rdbms.classmm.model/2.0.1-SNAPSHOT" 
-	dependency "classmm.model" URL="${project.baseUri}/lib/classmm.jar"
-	dependency "rdbmsmm.model" URL="${project.baseUri}/lib/rdbmsmm.jar"	 
-} 
+KermetaProject "language.sample.class2rdbms" 
+	//version :  "2.0.1-SNAPSHOT" 
+	groupId ="org.kermeta.language.sample" 
+	defaultMainClass ="class2RDBMS::Main"
+	defaultMainOperation = "main"
+	sources={ 
+		
+		require  "${project.baseUri}/src/main/kmt/Class2RDBMS.kmt"  
+		require "${project.baseUri}/src/main/kmt/trace.kmt"
+		require "${project.baseUri}/src/main/ecore/ClassMM.ecore" 
+		
+		//srcQuery ="model/ClassMM.ecore" from "classmm.model"
+		//require "${classmm.model.baseUri}/model/ClassMM.ecore"
+		
+		require "${project.baseUri}/src/main/ecore/RDBMSMM.ecore" 
+		//srcQuery ="model/RDBMSMM.ecore" from "rdbmsmm.model"
+		require "${project.baseUri}/src/main/kmt/RDBMSMM_aspect.kmt" 
+	}	
+	dependencies={
+		// depends on library.core	
+		//dependency "language.model" URL="platform:/resource/org.kermeta.language.library.core"
+	    //dependency "language.model" URL="platform:/resource/org.kermeta.language.library.core/target/language.library.core-2.0.1-SNAPSHOT.jar"
+		dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"  
+		//dependency "utils.helpers" URL="mvn:org.kermeta.utils/utils.helpers/2.0.1-SNAPSHOT" 
+		
+		//dependency "classmm.model" URL="mvn:org.kermeta.language.sample/language.sample.class2rdbms.classmm.model/2.0.1-SNAPSHOT" 
+		dependency "classmm.model" URLs="${project.baseUri}/lib/classmm.jar" byteCodeOnly
+		dependency "rdbmsmm.model" URLs="${project.baseUri}/lib/rdbmsmm.jar" byteCodeOnly	 
+	} 
 
  
