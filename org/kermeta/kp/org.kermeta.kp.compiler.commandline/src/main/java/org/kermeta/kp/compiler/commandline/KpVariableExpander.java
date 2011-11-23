@@ -53,7 +53,7 @@ public class KpVariableExpander {
 		this.kpFileURL = kpFileURL;
 		File f = new File(kpFileURL); 
 		projectUri = f.getParent();
-		if(projectUri.endsWith("/")){
+		if(projectUri.endsWith("/") || projectUri.endsWith("\\") ){
 			projectUri = projectUri.substring(0, projectUri.length()-1); // remove the trailing slash because we want the user to add it manually (more readable)
 		}
 		this.kp = kp;
