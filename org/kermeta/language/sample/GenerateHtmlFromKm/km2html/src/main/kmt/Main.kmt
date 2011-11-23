@@ -1,0 +1,34 @@
+using kermeta
+using kermeta::standard
+using org::kermeta::language::structure
+using kermeta::emfpersistence
+
+
+package mainpackage{
+	class MainClass
+	{
+		//@main ""
+		operation mainOperation() : Void is do 
+			var path : String init "file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
+			//var path : String init "platform:/resource/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
+			var repository : ResourceSet init ResourceSet.new
+			var resource : Resource init repository.createResource(path)
+			kermeta::io::StdIO.writeln("beginning my prog")
+			resource.load(void) 
+			
+			// Retrieve km rooot
+			//var mu : ModelingUnit init resource.getContents().first
+			from var it : Iterator<Object> init resource.getContents.iterator
+	       until it.isOff
+	       loop
+	           var next : Object init it.next
+	           if (next.isInstanceOf(ModelingUnit)) then                 
+	           		var mu : ModelingUnit
+	           		mu ?= next
+	           		mu.generateHtml("file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/KermetaDoc/doc/")
+	           end
+	       end
+			//mu.generateHtml()
+		end
+	}
+}

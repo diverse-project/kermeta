@@ -1,0 +1,14 @@
+KermetaProject "km2html"
+groupId  = "group"
+defaultMainClass =  "mainpackage::MainClass"
+defaultMainOperation =  "mainOperation"
+
+sources = {
+	require "${project.baseUri}/src/main/kmt/Main.kmt"
+	require "${project.baseUri}/src/main/kmt/Km2Html.kmt"
+}
+  
+dependencies = { 
+
+	dependency "language.model" URLs ="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+}

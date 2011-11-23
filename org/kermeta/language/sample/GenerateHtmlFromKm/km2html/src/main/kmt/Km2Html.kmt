@@ -1,0 +1,62 @@
+	using kermeta::standard
+	using kermeta
+	using kermeta::io::StdIO => stdio
+	using org::kermeta::language::structure
+	using kermeta::io
+	
+
+package org::kermeta::language::structure{
+
+
+
+aspect class ModelingUnit {
+
+
+	operation generateHtml( baseFolder : String) : Void is do
+		stdio.writeln ("Html file generated Modeling Unit")
+		var path : String init baseFolder + "/" + self.name + ".html"
+		var contents : String init self.createHtml ()
+		
+		// Create html file
+		stdio.writeTextFile(path, contents)
+		
+	end 
+	
+	/** Create an html page for Modeling unit */
+	operation createHtml () : String is do
+		var html : String init "<html><head><title>"
+		html:= html + "Modeling Unit : " + self.name 
+		html := html + "</title></head><body> <p><div> paragraph </div></p> </body></html>"
+		result := html
+	end
+
+}
+
+/*
+aspect class Package {
+
+	operation generateHtml() : Void is do
+		stdio.writeln ("Html file generated Package")
+		
+	end 
+
+}
+
+
+aspect class Class  {
+
+	operation generateHtml() : Void is do
+		stdio.writeln ("Html file generated Class")
+	end 
+
+
+}
+
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+		end
+	}
+	*/
+}

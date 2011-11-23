@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="mainpackage">
+    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;110;1161"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainpackage/MainClass/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;132;1159"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta" toName=""/>
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="org::kermeta::language::structure" toName=""/>
+        <usings fromQName="kermeta::emfpersistence" toName=""/>
+      </containedType>
+      <ownedOperation name="mainOperation" type="//mainpackage/MainClass/mainOperation/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;166;1157"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta" toName=""/>
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="org::kermeta::language::structure" toName=""/>
+          <usings fromQName="kermeta::emfpersistence" toName=""/>
+        </containedType>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;202;1157"/>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="path">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;209;439"/>
+            <initialization xsi:type="org_kermeta_language_behavior:StringLiteral" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/KermetaDoc/target/beforeCheckingforScopeMERGED.km">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;232;439"/>
+            </initialization>
+            <type name="String" type="//mainpackage/MainClass/mainOperation/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="repository">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;439;492"/>
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;484;492"/>
+              <usings fromQName="kermeta" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::emfpersistence" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="ResourceSet">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;473;484"/>
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </target>
+            </initialization>
+            <type name="ResourceSet" type="//mainpackage/MainClass/mainOperation/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ResourceSet">
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="resource">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;492;556"/>
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;531;556"/>
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="path">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;547;551"/>
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </parameters>
+              <usings fromQName="kermeta" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::emfpersistence" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="repository">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;521;531"/>
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </target>
+            </initialization>
+            <type name="Resource" type="//mainpackage/MainClass/mainOperation/@body/@statement.2/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Resource">
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;574;607"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="beginning my prog">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;583;602"/>
+            </parameters>
+            <usings fromQName="kermeta" toName=""/>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::emfpersistence" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::io::StdIO">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;556;574"/>
+              <usings fromQName="kermeta" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::emfpersistence" toName=""/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="load" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;615;720"/>
+            <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;621;625"/>
+            </parameters>
+            <usings fromQName="kermeta" toName=""/>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="org::kermeta::language::structure" toName=""/>
+            <usings fromQName="kermeta::emfpersistence" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="resource">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;607;615"/>
+              <usings fromQName="kermeta" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::emfpersistence" toName=""/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Loop">
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;720;1152"/>
+            <initialization xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="it">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;725;794"/>
+              <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="iterator">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;776;794"/>
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getContents">
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;764;776"/>
+                  <usings fromQName="kermeta" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="org::kermeta::language::structure" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="resource">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;756;764"/>
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  </target>
+                </target>
+              </initialization>
+              <type name="Iterator&lt;Object>" type="//mainpackage/MainClass/mainOperation/@body/@statement.5/@initialization/@type/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//mainpackage/MainClass/mainOperation/@body/@statement.5/@initialization/@type/@containedType.0/@containedType.0" typeIdentifier="Iterator">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  </containedType>
+                  <usings fromQName="kermeta" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="org::kermeta::language::structure" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                </containedType>
+              </type>
+            </initialization>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="next">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;834;877"/>
+                <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="next">
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;859;877"/>
+                  <usings fromQName="kermeta" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="org::kermeta::language::structure" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="it">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;857;859"/>
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  </target>
+                </initialization>
+                <type name="Object" type="//mainpackage/MainClass/mainOperation/@body/@statement.5/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  </containedType>
+                </type>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;877;1123"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="mu">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;950;986"/>
+                    <type name="ModelingUnit" type="//mainpackage/MainClass/mainOperation/@body/@statement.5/@body/@statement.1/@thenBody/@statement.0/@type/@containedType.0" isOrdered="true">
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ModelingUnit">
+                        <usings fromQName="kermeta" toName=""/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="org::kermeta::language::structure" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      </containedType>
+                    </type>
+                  </statement>
+                  <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mu">
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;986;989"/>
+                      <usings fromQName="kermeta" toName=""/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="org::kermeta::language::structure" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    </target>
+                    <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="next">
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;992;1011"/>
+                      <usings fromQName="kermeta" toName=""/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="org::kermeta::language::structure" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="generateHtml" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;1013;1111"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/KermetaDoc/doc/">
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;1027;1097"/>
+                    </parameters>
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mu">
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;1011;1013"/>
+                      <usings fromQName="kermeta" toName=""/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="org::kermeta::language::structure" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    </target>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;885;912"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;880;914"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="ModelingUnit">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;899;911"/>
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="org::kermeta::language::structure" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="next">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;881;885"/>
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+            <stopCondition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isOff">
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;802;817"/>
+              <usings fromQName="kermeta" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="org::kermeta::language::structure" toName=""/>
+              <usings fromQName="kermeta::emfpersistence" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="it">
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Main.kmt;800;802"/>
+                <usings fromQName="kermeta" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="org::kermeta::language::structure" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+              </target>
+            </stopCondition>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>
