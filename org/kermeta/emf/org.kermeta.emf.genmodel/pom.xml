@@ -1,0 +1,90 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.kermeta.emf</groupId>
+    <artifactId>emf.genmodel</artifactId>
+    <packaging>jar</packaging>
+    <name>Kermeta :: Emf :: GenModel</name>
+    <url>http://maven.apache.org</url>
+
+    <version>2.0.1-SNAPSHOT</version>
+	
+	<properties>
+		<emf.version.range>[2.5.0.0,)</emf.version.range>
+		<kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
+	</properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <!--<encoding>${project.build.sourceEncoding}</encoding> -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <!-- <encoding>${project.build.sourceEncoding}</encoding> -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+	<dependencies>
+
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.emf.codegen</artifactId>
+            <version>${emf.version.range}</version>
+        </dependency>
+		<dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+            <version>${emf.version.range}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.emf.common</artifactId>
+            <version>${emf.version.range}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.emf.ecore</artifactId>
+            <version>${emf.version.range}</version>
+        </dependency>
+         <dependency>
+            <groupId>org.kermeta.eclipse</groupId>
+            <artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+            <version>${emf.version.range}</version>
+        </dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.systemservices.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+        
+	</dependencies>
+	<distributionManagement>
+        <repository>
+            <id>kermeta-public-release</id>
+            <name>Kermeta public release repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>kermeta-public-snapshot</id>
+            <name>Kermeta public snapshot repository on maven.irisa.fr</name>
+            <url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
