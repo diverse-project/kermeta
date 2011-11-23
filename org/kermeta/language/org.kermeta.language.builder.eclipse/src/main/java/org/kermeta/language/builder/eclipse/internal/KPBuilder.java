@@ -74,10 +74,14 @@ public class KPBuilder {
 		this.kpProjectFile = kpProjectFile;
 		needBuildVisitor = new KPNeedBuildDeltaVisitor(kpProjectFile);
 		//FileHelpers.
-		kpFileURL = kpProjectFile.getRawLocation().toString();
-		File f = new File(kpFileURL);
+		//kpFileURL = kpProjectFile.getRawLocation().toString(); //
+		kpFileURL = kpProjectFile.getLocationURI().toString();
+		String kpFilePath = kpProjectFile.getRawLocation().toString();
+		File f = new File(kpFilePath); // file need a system path
+		//kpFileURL = kpProjectFile.getLocationURI().toString(); // need a file:/ uri
 		try {
-			String projectUri = f.getParentFile().getCanonicalPath();
+			
+			String projectUri = f.getParentFile().toString();//.getCanonicalPath(); f.exists()
 			outputFolder = projectUri+File.separatorChar+"target";
 			outputResourceFolder = outputFolder+"/resources";
 			//compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),false,outputFolder, true, true, false);
