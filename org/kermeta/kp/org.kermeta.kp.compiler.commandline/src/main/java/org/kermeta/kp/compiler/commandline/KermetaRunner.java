@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,8 @@ public class KermetaRunner {
 	        //scala.tools.nsc.MainGenericRunner.class.getClassLoader().getResource("/");
 	        String scalaToolJarCP = "";
 	        try { // get classpath for scala compiler from current classpath (we suppose that it should run if run in the same VM using EmbeddedScalaRunner)
-	        	scalaToolJarCP = scala.tools.nsc.MainGenericRunner.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-	        	scalaToolJarCP += File.pathSeparator+scala.ScalaObject.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+	        	scalaToolJarCP = (new URI(scala.tools.nsc.MainGenericRunner.class.getProtectionDomain().getCodeSource().getLocation().toString().replace(" ", "%20"))).getPath();
+	        	scalaToolJarCP += File.pathSeparator+(new URI(scala.ScalaObject.class.getProtectionDomain().getCodeSource().getLocation().toString().replace(" ", "%20"))).getPath();
 			} catch (URISyntaxException e1) {
 				this.logger.error(e1.toString(), KermetaCompiler.LOG_MESSAGE_GROUP, e1);
 			} 
