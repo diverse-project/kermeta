@@ -52,8 +52,8 @@ public class KpVariableExpander {
 	public KpVariableExpander(String kpFileURL, KermetaProject kp, LocalFileConverter fileSystemConverter, MessagingSystem logger) {
 		this.kpFileURL = kpFileURL;
 		File f = new File(kpFileURL); 
-		projectUri = f.getParent();
-		if(projectUri.endsWith("/") || projectUri.endsWith("\\") ){
+		projectUri = f.getParent().replaceAll("\\\\", "/"); // get the parent using a uniform unix /
+		if(projectUri.endsWith("/")  ){
 			projectUri = projectUri.substring(0, projectUri.length()-1); // remove the trailing slash because we want the user to add it manually (more readable)
 		}
 		this.kp = kp;
