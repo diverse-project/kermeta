@@ -16,17 +16,23 @@ trait StringLiteralAspect extends KermetaModelElementAspect {
     
                 var stringlit = this.getValue
                 var stringlitRes = new StringBuilder
+                
+                
+                /*
                 for (i <- 0 until stringlit.size) {
                   stringlit.charAt(i) match {
                     case '"'=> stringlitRes.append("\\");stringlitRes.append("\"")
                     case '\\' => stringlitRes.append("\\");stringlitRes.append("\\")
-                    case '\n' => stringlitRes.append("\\n");
+                    //case '\n' => stringlitRes.append("\\n");
                     case '\t' => stringlitRes.append("\\t");
                     case _ @ c => stringlitRes.append(c)
         
         
                   }
                 }
+                */
+                stringlitRes.append(this.getValue)
+                
     
 		res.append(stringlitRes.toString)//.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t") )
 		res.append("\"")
