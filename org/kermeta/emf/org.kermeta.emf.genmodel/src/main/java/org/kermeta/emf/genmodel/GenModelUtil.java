@@ -26,15 +26,25 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 /**
  *
  * @author ffouquet
  */
-public class Util {
+public class GenModelUtil {
 
-    private final static String outputfileName = "emfoutput";
+	
+	
+    private final String outputfileName = "emfoutput";
 
+    public MessagingSystem logger;
+    
+    public GenModelUtil(MessagingSystem logger){
+    	this.logger = logger;
+    }
+    
+    
     public static boolean deleteDirectory(File path) {
         if (path.exists()) {
             File[] files = path.listFiles();
@@ -49,7 +59,7 @@ public class Util {
         return (path.delete());
     }
 
-    public static void createGenModel(File ecore, File genmodel, File sourcePath, Log log,Boolean bool) {
+    public void createGenModel(File ecore, File genmodel, File sourcePath, Boolean bool) {
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
                 put("ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
@@ -95,21 +105,21 @@ public class Util {
             try {
                 genModelResource.save(Collections.EMPTY_MAP);
             } catch (IOException e) {
-                log.debug("GenModelSave Error", e);
+                logger.error("GenModelSave Error", getClass().getName(), e);
             }
         }
 
         if(bool) {
-            log.info("Clear output directory , "+sourcePath.getAbsolutePath());
+            logger.info("Clear output directory , "+sourcePath.getAbsolutePath(), getClass().getName());
             deleteDirectory(sourcePath);
         }
         sourcePath.mkdir();
         EcorePlugin.getPlatformResourceMap().put(outputfileName, URI.createFileURI(sourcePath.getAbsolutePath() + "/"));
-        Util.generate(genModelModel, log);
+        this.generate(genModelModel);
 
     }
 
-    public static void generate(GenModel genModel, Log log) {
+    public void generate(GenModel genModel) {
         //Generate Code
         genModel.setCanGenerate(true);
         GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
@@ -120,8 +130,8 @@ public class Util {
         // Generator model code.
         Diagnostic d = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.out));
 
+        
 
-
-        log.info(d.getMessage());
+        logger.info(d.getMessage(), getClass().getName());
     }
 }
