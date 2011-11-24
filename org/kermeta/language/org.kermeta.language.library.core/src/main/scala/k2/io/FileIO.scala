@@ -7,7 +7,7 @@ package k2.io
  
 import java.io._
 
-object FileIO  extends k2.standard.EObjectImplForPrimitive{
+class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
 
   def writeTextFile(file : String, text : String) : Unit = {
     var filename = ""
@@ -52,4 +52,6 @@ object FileIO  extends k2.standard.EObjectImplForPrimitive{
     return res.toString
   }
 
+}
+object FileIOIO extends FileIOClass{
 }

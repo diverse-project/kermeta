@@ -23,7 +23,7 @@ package io{
  * <img src="platform:/plugin/org.kermeta.documentation/src/figures/io_package.png"/>
  */
 @CompilerIgnore "true"
-class FileIO
+singleton FileIO
 {
 	/**
 	 * Writes a String in a text file
