@@ -11,6 +11,7 @@ package org::kermeta::language::structure;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/SearchCallResult.kmt"
 
 aspect class Constraint
 {
@@ -31,4 +32,13 @@ aspect class Constraint
 		true
 	end
 	
+	/**
+	 * No CallResult allowed there
+	 */
+	@Scope "RESOLVED"
+	inv no_call_result is do
+		stdio.writeln("Evaluating no_call_result on invariant " + self.name)
+		not(self.body.searchCallResult)
+		//true
+	end
 }
