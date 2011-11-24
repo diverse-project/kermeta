@@ -1,0 +1,24 @@
+using kermeta::standard
+using kermeta::io
+
+package mainPackage{
+	class MainClass
+	{
+		operation main() : Void is do 
+
+		//it works and should
+			var c : C<Integer,String> init C<Integer ,String>.new
+			c.x:=1
+			StdIO.writeln(test(c).toString)
+		end
+		
+		operation test<Z> (x : A<Z,String>) : Z is do
+			result:=x.x
+		end
+	}
+		
+	
+	class A<X,Y>{reference x: X}
+	class C<U,V> inherits A<V,U> {}
+	
+}
