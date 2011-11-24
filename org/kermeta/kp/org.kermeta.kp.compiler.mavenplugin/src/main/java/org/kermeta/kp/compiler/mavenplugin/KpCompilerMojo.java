@@ -21,6 +21,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
@@ -168,7 +169,9 @@ public class KpCompilerMojo extends AbstractMojo {
 	
 	        this.getLog().info("Generating sources in "+sourceOutputDirectory.getAbsolutePath());
 	        this.getLog().info("Generating other resources in "+resourceOutputDirectory.getAbsolutePath());
-	        
+	        String kpFileURL = kp.toURI().toString();
+	        this.getLog().info("kpFileURL= "+kpFileURL);
+	        ;
 	        checkFile(kp.getAbsolutePath().toString());
 	        
 	        List<String> mavenClassPathList = project.getCompileClasspathElements();
@@ -189,7 +192,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        		checkingEnabled,
 	        		stopOnError);
 			
-			compiler.kp2bytecode(kp.toString(), targetDirectory.toString(), sourceOutputDirectory.toString(), resourceOutputDirectory.toString(), classPathList, generateKmOnly);
+			compiler.kp2bytecode(kpFileURL, targetDirectory.toString(), sourceOutputDirectory.toString(), resourceOutputDirectory.toString(), classPathList, generateKmOnly);
 		if(compiler.hasFailed)	{
                     throw new MojoExecutionException(compiler.errorMessage);
                 }
