@@ -18,7 +18,8 @@ aspect class ModelingUnit {
 		var contents : String init self.createHtml ()
 		
 		// Create html file
-		stdio.writeTextFile(path, contents)
+		var fileIO : FileIO init FileIO.new
+		fileIO.writeTextFile(path, contents)
 		
 	end 
 	

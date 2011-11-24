@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="org">
-    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;138;1178"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;138;1217"/>
     <nestedPackage name="kermeta">
       <nestedPackage name="language">
         <nestedPackage name="structure">
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="ModelingUnit" superType="//org/kermeta/language/structure/ModelingUnit/@containedType.0" isAspect="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;184;1176"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;184;1215"/>
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
               <usings fromQName="kermeta::standard" toName=""/>
               <usings fromQName="kermeta" toName=""/>
@@ -15,7 +15,7 @@
               <usings fromQName="kermeta::io" toName=""/>
             </containedType>
             <ownedOperation name="generateHtml" type="//org/kermeta/language/structure/ModelingUnit/generateHtml/@containedType.0" isOrdered="true" isAbstract="false">
-              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;215;560"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;215;599"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
                 <usings fromQName="kermeta::standard" toName=""/>
                 <usings fromQName="kermeta" toName=""/>
@@ -33,7 +33,7 @@
                 </containedType>
               </ownedParameter>
               <body xsi:type="org_kermeta_language_behavior:Block">
-                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;270;560"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;270;599"/>
                 <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
                   <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;280;329"/>
                   <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Html file generated Modeling Unit">
@@ -134,10 +134,38 @@
                     </containedType>
                   </type>
                 </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="fileIO">
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;466;504"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;497;504"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <usings fromQName="org::kermeta::language::structure" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="FileIO">
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;491;497"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      <usings fromQName="org::kermeta::language::structure" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                    </target>
+                  </initialization>
+                  <type name="FileIO" type="//org/kermeta/language/structure/ModelingUnit/generateHtml/@body/@statement.3/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="FileIO">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      <usings fromQName="org::kermeta::language::structure" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                    </containedType>
+                  </type>
+                </statement>
                 <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeTextFile" isCalledWithParenthesis="true">
-                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;471;506"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;510;545"/>
                   <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="path">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;486;490"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;525;529"/>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
                     <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -145,7 +173,7 @@
                     <usings fromQName="kermeta::io" toName=""/>
                   </parameters>
                   <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="contents">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;492;500"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;531;539"/>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
                     <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -157,8 +185,8 @@
                   <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
                   <usings fromQName="org::kermeta::language::structure" toName=""/>
                   <usings fromQName="kermeta::io" toName=""/>
-                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="stdio">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;466;471"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fileIO">
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;504;510"/>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
                     <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -169,7 +197,7 @@
               </body>
             </ownedOperation>
             <ownedOperation name="createHtml" type="//org/kermeta/language/structure/ModelingUnit/createHtml/@containedType.0" isOrdered="true" isAbstract="false">
-              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;560;803"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;599;842"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
                 <usings fromQName="kermeta::standard" toName=""/>
                 <usings fromQName="kermeta" toName=""/>
@@ -178,11 +206,11 @@
                 <usings fromQName="kermeta::io" toName=""/>
               </containedType>
               <body xsi:type="org_kermeta_language_behavior:Block">
-                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;596;803"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;635;842"/>
                 <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="html">
-                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;601;648"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;640;687"/>
                   <initialization xsi:type="org_kermeta_language_behavior:StringLiteral" value="&lt;html>&lt;head>&lt;title>">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;624;648"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;663;687"/>
                   </initialization>
                   <type name="String" type="//org/kermeta/language/structure/ModelingUnit/createHtml/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                     <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
@@ -196,7 +224,7 @@
                 </statement>
                 <statement xsi:type="org_kermeta_language_behavior:Assignment">
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="html">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;648;652"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;687;691"/>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
                     <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -205,14 +233,14 @@
                   </target>
                   <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
                     <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="name">
-                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;687;696"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;726;735"/>
                       <usings fromQName="kermeta::standard" toName=""/>
                       <usings fromQName="kermeta" toName=""/>
                       <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
                       <usings fromQName="org::kermeta::language::structure" toName=""/>
                       <usings fromQName="kermeta::io" toName=""/>
                       <target xsi:type="org_kermeta_language_behavior:SelfExpression">
-                        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;683;687"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;722;726"/>
                       </target>
                     </parameters>
                     <usings fromQName="kermeta::standard" toName=""/>
@@ -222,7 +250,7 @@
                     <usings fromQName="kermeta::io" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
                       <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Modeling Unit : ">
-                        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;662;681"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;701;720"/>
                       </parameters>
                       <usings fromQName="kermeta::standard" toName=""/>
                       <usings fromQName="kermeta" toName=""/>
@@ -230,7 +258,7 @@
                       <usings fromQName="org::kermeta::language::structure" toName=""/>
                       <usings fromQName="kermeta::io" toName=""/>
                       <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="html">
-                        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;655;660"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;694;699"/>
                         <usings fromQName="kermeta::standard" toName=""/>
                         <usings fromQName="kermeta" toName=""/>
                         <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -242,7 +270,7 @@
                 </statement>
                 <statement xsi:type="org_kermeta_language_behavior:Assignment">
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="html">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;696;701"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;735;740"/>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
                     <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -251,7 +279,7 @@
                   </target>
                   <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
                     <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="&lt;/title>&lt;/head>&lt;body> &lt;p>&lt;div> paragraph &lt;/div>&lt;/p> &lt;/body>&lt;/html>">
-                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;711;782"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;750;821"/>
                     </parameters>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
@@ -259,7 +287,7 @@
                     <usings fromQName="org::kermeta::language::structure" toName=""/>
                     <usings fromQName="kermeta::io" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="html">
-                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;704;709"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;743;748"/>
                       <usings fromQName="kermeta::standard" toName=""/>
                       <usings fromQName="kermeta" toName=""/>
                       <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -270,10 +298,10 @@
                 </statement>
                 <statement xsi:type="org_kermeta_language_behavior:Assignment">
                   <target xsi:type="org_kermeta_language_behavior:CallResult">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;782;789"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;821;828"/>
                   </target>
                   <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="html">
-                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;792;798"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/km2html/src/main/kmt/Km2Html.kmt;831;837"/>
                     <usings fromQName="kermeta::standard" toName=""/>
                     <usings fromQName="kermeta" toName=""/>
                     <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
