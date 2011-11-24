@@ -1,0 +1,9 @@
+KermetaProject "022_typeParamOperationAndInheritance"
+//version :  "0.0.1"
+groupId ="group"
+
+dependencies = {
+dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"}
+sources = {
+require "${project.baseUri}/src/main/kmt/new_file.kmt"
+}

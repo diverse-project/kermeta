@@ -3,16 +3,15 @@
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
- *            irisa
+ *            xdolques 
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
+
 
 
 package root_package;
 
 
-require kermeta
+using kermeta::io
 using kermeta::standard
 
 
@@ -33,14 +32,10 @@ class Main
 		//it doesn't and should
 		var e : E<String,Integer> init E<String,Integer>.new
 		e.x:=1
-		//it doesn't and shouldn't
-		var f : E<Integer,String> init E<Integer,String>.new
-		f.x:="1"
-		stdio.writeln(test(b).toString)
-		stdio.writeln(test(c).toString)
-		stdio.writeln(test(d).toString)
-		stdio.writeln(test(e).toString)
-		stdio.writeln(test(f).toString)
+		StdIO.writeln(test(b).toString)
+		StdIO.writeln(test(c).toString)
+		StdIO.writeln(test(d).toString)
+		StdIO.writeln(test(e).toString)
 		
 		
 	end
