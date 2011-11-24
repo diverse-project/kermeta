@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package test {
+	class Main
+	{
+		
+		operation main() : Void 
+		post testPostcond is do
+			result:=false
+		end
+		
+		is do 
+			//StdIO.writeln("Hello world")
+		end
+		
+		
+		
+	}
+	
+
+}
+

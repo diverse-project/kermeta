@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package test {
+	class Main
+	{
+		
+		
+		operation main() : Void 
+		pre testPrecond is do
+			do
+				if (true)
+				then
+					result:=true
+				else
+					false
+				end
+			end
+		end
+		is do 
+			//StdIO.writeln("Hello world")
+		end
+		
+		
+		
+	}
+	
+
+}
+

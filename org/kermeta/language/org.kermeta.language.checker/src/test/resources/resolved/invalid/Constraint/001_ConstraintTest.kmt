@@ -1,0 +1,28 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package test {
+	class Main
+	{
+		
+		
+		inv testInvariant is do
+			do
+				result:=true
+			end
+		end
+		
+		
+
+		
+	}
+	
+
+}
+
