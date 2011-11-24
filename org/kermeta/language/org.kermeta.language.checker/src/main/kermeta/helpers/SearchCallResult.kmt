@@ -1,0 +1,211 @@
+/* $Id:$ 
+ * Creation : November 23, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::behavior;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class Expression
+{
+	operation searchCallResult() : Boolean is abstract
+		// TODO: implement 'main' operation
+}
+
+aspect class Block {
+	
+	method searchCallResult() : Boolean is do
+		
+		result := self.statement.exists{ s | s.searchCallResult } or
+					self.rescueBlock.exists{ rb | rb.body.exists{ exp | exp.searchCallResult} }
+	end
+}
+
+aspect class Conditional {
+
+	method searchCallResult() : Boolean is do
+		
+		result:=( self.thenBody.searchCallResult or 
+					if (not(self.elseBody.isVoid))
+					then
+						self.elseBody.searchCallResult
+					else
+						false
+					end
+				)
+	end
+}
+
+aspect class Raise {
+	
+	method searchCallResult() : Boolean is do
+		result:=self.expression.searchCallResult
+	end
+
+}
+
+aspect class EmptyExpression {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class SelfExpression {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class Loop {
+	
+	method searchCallResult() : Boolean is do
+		result:=if (not(self.body.isVoid))
+		then
+			self.body.searchCallResult
+		else
+			false
+		end
+	end
+
+}
+aspect class Assignment {
+	
+	method searchCallResult() : Boolean is do
+		result:=if (not(self.target.isVoid))
+				then
+					self.target.searchCallResult
+				else
+					false
+				end
+
+	end
+
+}
+aspect class UnresolvedCall {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class CallVariable {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+
+	end
+
+}
+aspect class CallResult {
+	
+	method searchCallResult() : Boolean is do
+		result:=true
+	end
+
+}
+aspect class CallEnumLiteral {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class CallFeature {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+
+	end
+
+}
+aspect class CallProperty {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class CallOperation {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class CallSuperOperation {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+
+aspect class LambdaExpression {
+	
+	method searchCallResult() : Boolean is do
+		result:=self.body.searchCallResult
+	end
+
+}
+aspect class JavaStaticCall {
+	
+	method searchCallResult() : Boolean is do
+		result:=self.parameters.exists{p| p.searchCallResult}
+	end
+
+}
+aspect class VariableDecl {
+	
+	method searchCallResult() : Boolean is do
+		//result:=false
+		result:= if (not(self.initialization.isVoid)) 
+				 then self.initialization.searchCallResult 
+				 else false 
+				 end
+	end
+
+}
+aspect class IntegerLiteral {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class StringLiteral {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class VoidLiteral {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class BooleanLiteral {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
+aspect class CallTypeLiteral {
+	
+	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+}
