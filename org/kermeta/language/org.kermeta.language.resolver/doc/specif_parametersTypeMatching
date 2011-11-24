@@ -1,0 +1,85 @@
+problem 1 : 
+class Collection<G> {
+operation collect<X> (f : <G->X>) : Sequence<X> is do end}
+
+var c : Collection<Integer>
+c.collect{x|(x+x).toString}
+
+
+when calling collect like in the last line, the staticType of the callOperation
+will be a Sequence<String> because the type of the typeVariable will be inferred by the 
+return type of the fonction. So in order to statically type a call to collect, we need 
+to resolve its parameters and use their type to infer the type of X
+
+So in the example we need to find that X is String from the staticType <Integer-> String> 
+that is to be compared with <G->X>
+
+solution 1
+In this case, a simple structure match would suffice but is it the case every time ??
+
+problem 2 : 
+
+class A<X,Y>{reference x: X}
+class C<U,V> inherits A<V,U>
+class B<T> inherits C<T,Integer> {}
+
+operation test<X> (x : A<X,String>) : X is do result:=x.x end
+
+//it doesn't and should
+var b : B<String> init B<String>.new
+b.x:=1
+stdio.writeln(test(b).toString)
+
+Here we need to find that X is Integer from the staticType B<String> that is to be
+ compared with A<X,String>. In this case a simple structure match is clearly not enough 
+ as the type we are looking for cannot even be found in the staticType given
+
+solution 2 : 
+
+we have to compare the given staticType and see if it matches the expected type and 
+bind the type variable when possible.
+
+ matching B<String> to A<X,String> is equivalent to matching C<String,Integer> to 
+ A<X,String> which is by itself equivalent to matching A<Integer,String> to A<X,String>
+ 
+So the first thing to do would be to find the inheritance path from B to A. This can 
+only be done by looking for A starting from B considering all the possible inheritance paths
+ 
+Once we have the Sequence  [C, A ] we start from B keeping in mind that (T, String) is an existing binding
+looking for C in the supertypes we create an instance C<String, Integer
+class Class{
+operation correspondingSuperTypes(superPath : Sequence<TypeDefinition>) : Class 
+//from B<String> the type definition is B
+var typeDef : TypeDefinition init typeDefinition
+var superType : Type init superType.detect{t|t.typeDefinition==superPath.first}
+//here we recreate a superType considering the bindings from the definition and the bindings from the static Type 
+var superClass?=superType
+
+var correspondingSuperClass : Class 
+correspondingSuperClass := superType.asType(Class).cloneWithBindings(self.typeParamBindings)
+result:=correspondingSuperClass.correspondingSuperTypes(superPath.select{x|x!=self.typeDefinition}
+end
+//for the class C<X> if we want to clone C<Y> where (Y,String) it would give C<String>
+operation cloneWithBindings ( bindings : Sequence<TypeVariableBinding>) : Class is do
+	
+	result:= Class.new
+	result.typeDefinition:=self.typeDefinition
+	self.typeParamBinding.each{tvb|
+		var newTVB : TypeVariableBinding init TypeVariableBinding.new
+		newTVB.variable:=tvb.variable
+		if tvb.type.isInstanceOf(TypeVariable) then
+			var binding : TypeVariableBinding init bindings.detect{b|b.variable==tvb.type}
+			if binding.isVoid.~not then
+				newTVB.type:=binding.Type
+			end
+		else 
+			if tvb.type.isInstanceOf(Class) then
+				newTVB.type:=tvb.type.cloneWithBindings(bindings)
+			end
+		end
+		}
+
+end
+
+Once we have the comparison between A<Integer,String> and A<X,String> all the bindings are supposed to be 
+strictly of the same type except that a type variable from the expected type has been replaced by something else

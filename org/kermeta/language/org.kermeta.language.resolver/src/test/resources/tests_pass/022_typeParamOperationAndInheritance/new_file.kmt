@@ -1,0 +1,73 @@
+/* $Id:$ 
+ * Creation : November 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            irisa
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+using kermeta::standard
+
+
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+		//it doesn't and should
+		var b : B<String> init B<String>.new
+		b.x:=1
+		//it works and should
+		var c : C<Integer, String> init C<Integer,String>.new
+		c.x:=1
+		//it doesn't and should
+		var d : D<String,Integer> init D<String,Integer>.new
+		d.x:=1
+		//it doesn't and should
+		var e : E<String,Integer> init E<String,Integer>.new
+		e.x:=1
+		//it doesn't and shouldn't
+		var f : E<Integer,String> init E<Integer,String>.new
+		f.x:="1"
+		stdio.writeln(test(b).toString)
+		stdio.writeln(test(c).toString)
+		stdio.writeln(test(d).toString)
+		stdio.writeln(test(e).toString)
+		stdio.writeln(test(f).toString)
+		
+		
+	end
+	
+	
+	operation test<X> (x : A<X,String>) : X is do
+		result:=x.x
+	end
+}
+
+
+class A<X,Y>
+{
+
+reference x: X
+}
+
+class B<T> inherits A<Integer,T> {
+
+}
+
+class C<U,V> inherits A<U,V> {
+
+}
+class D<U,V> inherits C<V,U> {
+
+}
+
+class E<U,V> inherits A<V,U> {
+}
