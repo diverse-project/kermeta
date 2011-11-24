@@ -11,6 +11,8 @@ package org::kermeta::language::structure;
 require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/SearchCallResult.kmt"
+
 
 aspect class Property {
 	
@@ -58,6 +60,23 @@ aspect class Property {
 	end
 	
 	
-
+	/**
+	 * No CallResult are allowed in a derived property setter
+	 */
+	@Scope "RESOLVED"
+	inv no_call_result_in_setter is do
+		//stdio.writeln("no_call_result_in_setter for Property : " + self.name )
+		if (self.isDerived)
+		then
+			if (not(self.setterBody.isVoid))
+			then
+				not(self.setterBody.searchCallResult)
+			else
+				true
+			end
+		else
+			true
+		end
+	end
 	
 }
