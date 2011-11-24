@@ -24,8 +24,8 @@ aspect class Assignment
 	@Scope "RESOLVED"
 	inv no_internal_reflexive_collection_att_overwrite is do
 	
-		stdio.writeln("Checking assignment : " + self.toString)
-		stdio.writeln(" the target : " + self.target.toString)
+		//stdio.writeln("Checking assignment : " + self.toString)
+		//stdio.writeln(" the target : " + self.target.toString)
 		// Does the assignment concern a CallFeature ?
 		if (self.target.isInstanceOf(CallProperty))
 		then
