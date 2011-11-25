@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.kermeta.emf</groupId>
     <artifactId>emf.genmodel</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>Kermeta :: Emf :: GenModel</name>
     <url>http://maven.apache.org</url>
 
@@ -13,6 +13,7 @@
 	<properties>
 		<emf.version.range>[2.5.0.0,)</emf.version.range>
 		<kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
+		<bundle.vendor>IRISA/INRIA</bundle.vendor>
 	</properties>
 
     <build>
@@ -35,6 +36,26 @@
                     <!-- <encoding>${project.build.sourceEncoding}</encoding> -->
                 </configuration>
             </plugin>
+            <plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.5</version>
+				<extensions>true</extensions>
+
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Export-Package>
+							org.kermeta.emf.genmodel.*
+						</Export-Package>
+					</instructions>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 
