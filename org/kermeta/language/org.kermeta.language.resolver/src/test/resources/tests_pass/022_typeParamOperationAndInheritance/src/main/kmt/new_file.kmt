@@ -32,11 +32,12 @@ class Main
 		//it doesn't and should
 		var e : E<String,Integer> init E<String,Integer>.new
 		e.x:=1
-		StdIO.writeln(test(b).toString)
-		StdIO.writeln(test(c).toString)
-		StdIO.writeln(test(d).toString)
-		StdIO.writeln(test(e).toString)
-		
+
+		StdIO.writeln((test(b)*1).toString)
+		StdIO.writeln((test(c)*1).toString)
+		StdIO.writeln((test(d)*1).toString)
+		StdIO.writeln((test(e)*1).toString)
+
 		
 	end
 	

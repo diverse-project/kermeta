@@ -2,19 +2,19 @@
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="022_typeParamOperationAndInheritance" namespacePrefix="">
   <packages name="root_package">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//root_package/Main/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;190;837"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;190;852"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::io" toName=""/>
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedOperation name="main" type="//root_package/Main/main/@containedType.0" isOrdered="true" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;204;768"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;204;783"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::io" toName=""/>
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;231;768"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;231;783"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="b">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;301;340"/>
             <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
@@ -204,105 +204,137 @@
               </target>
             </target>
             <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;614;618"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;614;619"/>
             </value>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;623;652"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;624;657"/>
             <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;639;648"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;644;653"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
-              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;632;639"/>
-                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="b">
-                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;637;638"/>
-                  <usings fromQName="kermeta::io" toName=""/>
-                  <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mult">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;633;644"/>
+                <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;642;643"/>
                 </parameters>
                 <usings fromQName="kermeta::io" toName=""/>
                 <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;634;641"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="b">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;639;640"/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
               </target>
             </parameters>
             <usings fromQName="kermeta::io" toName=""/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="StdIO">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;618;623"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;619;624"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;657;686"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;662;695"/>
             <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;673;682"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;682;691"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
-              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;666;673"/>
-                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
-                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;671;672"/>
-                  <usings fromQName="kermeta::io" toName=""/>
-                  <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mult">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;671;682"/>
+                <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;680;681"/>
                 </parameters>
                 <usings fromQName="kermeta::io" toName=""/>
                 <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;672;679"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;677;678"/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
               </target>
             </parameters>
             <usings fromQName="kermeta::io" toName=""/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="StdIO">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;652;657"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;657;662"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;691;720"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;700;733"/>
             <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;707;716"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;720;729"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
-              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;700;707"/>
-                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="d">
-                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;705;706"/>
-                  <usings fromQName="kermeta::io" toName=""/>
-                  <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mult">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;709;720"/>
+                <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;718;719"/>
                 </parameters>
                 <usings fromQName="kermeta::io" toName=""/>
                 <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;710;717"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="d">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;715;716"/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
               </target>
             </parameters>
             <usings fromQName="kermeta::io" toName=""/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="StdIO">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;686;691"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;695;700"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;725;759"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;738;774"/>
             <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;741;750"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;758;767"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
-              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;734;741"/>
-                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="e">
-                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;739;740"/>
-                  <usings fromQName="kermeta::io" toName=""/>
-                  <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mult">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;747;758"/>
+                <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;756;757"/>
                 </parameters>
                 <usings fromQName="kermeta::io" toName=""/>
                 <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;748;755"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="e">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;753;754"/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
               </target>
             </parameters>
             <usings fromQName="kermeta::io" toName=""/>
             <usings fromQName="kermeta::standard" toName=""/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="StdIO">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;720;725"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;733;738"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
             </target>
@@ -310,7 +342,7 @@
         </body>
       </ownedOperation>
       <ownedOperation name="test" type="//root_package/Main/test/@containedType.1" isOrdered="true" isAbstract="false" typeParameter="//root_package/Main/test/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;768;833"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;783;848"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
           <usings fromQName="kermeta::io" toName=""/>
@@ -331,17 +363,17 @@
           </containedType>
         </ownedParameter>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;811;833"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;826;848"/>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
             <target xsi:type="org_kermeta_language_behavior:CallResult">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;816;822"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;831;837"/>
             </target>
             <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
-              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;825;829"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;840;844"/>
               <usings fromQName="kermeta::io" toName=""/>
               <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
-                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;824;825"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;839;840"/>
                 <usings fromQName="kermeta::io" toName=""/>
                 <usings fromQName="kermeta::standard" toName=""/>
               </target>
@@ -351,7 +383,7 @@
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//root_package/A/@containedType.2" isAspect="false" typeParameter="//root_package/A/X //root_package/A/Y">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;837;871"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;852;886"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
@@ -359,7 +391,7 @@
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
       <ownedAttribute name="x" type="//root_package/A/x/@containedType.0" isOrdered="true">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;853;868"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;868;883"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
           <usings fromQName="kermeta::io" toName=""/>
           <usings fromQName="kermeta::standard" toName=""/>
@@ -367,7 +399,7 @@
       </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//root_package/B/@containedType.1" isAspect="false" typeParameter="//root_package/B/T">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;871;910"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;886;925"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/B/@containedType.1/@containedType.0 //root_package/B/@containedType.1/@containedType.1" typeIdentifier="A">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
@@ -383,7 +415,7 @@
       </containedType>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="C" superType="//root_package/C/@containedType.2" isAspect="false" typeParameter="//root_package/C/U //root_package/C/V">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;910;944"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;925;959"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="U"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/C/@containedType.2/@containedType.0 //root_package/C/@containedType.2/@containedType.1" typeIdentifier="A">
@@ -400,7 +432,7 @@
       </containedType>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="D" superType="//root_package/D/@containedType.2" isAspect="false" typeParameter="//root_package/D/U //root_package/D/V">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;944;979"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;959;994"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="U"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/D/@containedType.2/@containedType.0 //root_package/D/@containedType.2/@containedType.1" typeIdentifier="C">
@@ -417,7 +449,7 @@
       </containedType>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="E" superType="//root_package/E/@containedType.2" isAspect="false" typeParameter="//root_package/E/U //root_package/E/V">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;979;1012"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/022_typeParamOperationAndInheritance/src/main/kmt/new_file.kmt;994;1027"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="U"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/E/@containedType.2/@containedType.0 //root_package/E/@containedType.2/@containedType.1" typeIdentifier="A">
