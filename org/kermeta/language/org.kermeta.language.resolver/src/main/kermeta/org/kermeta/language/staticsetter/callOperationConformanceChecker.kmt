@@ -11,10 +11,12 @@ package org::kermeta::language;
 
 
 require "StaticSetter_kermeta_aspect.kmt"
+require "../resolver/ResolverException.kmt"
 require kermeta
 using kermeta::standard
 using kermeta::utils
 using org::kermeta::language::staticsetter
+using org::kermeta::language::resolver
 package behavior{
 	aspect class CallOperation 
 	{
@@ -35,7 +37,7 @@ package behavior{
 			until i==self.parameters.size() loop
 				
 				if not self.parameters.elementAt(i).staticType.isVoid then
-					self.parameters.elementAt(i).staticType.compareToDefinition(staticOperation.ownedParameter.elementAt(i).type,typeVariableToSet)
+					self.parameters.elementAt(i).staticType.compareToExpectedType(staticOperation.ownedParameter.elementAt(i).type,typeVariableToSet, context)
 				end
 				i:=i+1
 			end
@@ -57,13 +59,13 @@ package structure{
 	
 	aspect class Type
 	{
-		//if the current type from definition is a type variable, then add the binding
+		//if the current type from expectedType is a type variable, then add the binding
 		//if not, it's only important if self is a class or a function type
-		operation compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+		operation compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			stdio.writeln("compare a type with something")
 			
-			if definition.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
-				typeVariableToSet.put(definition.asType(TypeVariable), self)
+			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			
 			end
 			
@@ -74,28 +76,112 @@ package structure{
 	
 	aspect class Class
 	{
-		method compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+		method compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			stdio.writeln("compare a class with something")
-			stdio.writeln("is it a typeVariable ? "+definition.isInstanceOf(TypeVariable).toString)
+			stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
 			
-			if definition.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(definition.asType(TypeVariable)).toString) typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
-				typeVariableToSet.put(definition.asType(TypeVariable), self)
+			if expectedType.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 				
 			else
-				if definition.isInstanceOf(Class) then
-					// they are both of type class with the same number of type parameters, then all type parameters should be checked
-					// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the definition
-					if	self.typeParamBinding.size==definition.asType(Class).typeParamBinding.size
-					then
-						from var i : Integer init 0
-						until i==self.typeParamBinding.size
-						loop
-							 self.typeParamBinding.elementAt(i).type.compareToDefinition(definition.asType(Class).typeParamBinding.elementAt(i).type
-																							,typeVariableToSet)
-							i:=i+1
+				if expectedType.isInstanceOf(Class) then
+					
+					var comparableClass : Class init self.getComparableClass(expectedType.asType(Class), context)
+					
+					if not comparableClass.isVoid then
+						// they are both of type class with the same number of type parameters, then all type parameters should be checked
+						// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the expectedType
+						if	comparableClass.typeParamBinding.size==expectedType.asType(Class).typeParamBinding.size
+						then
+							from var i : Integer init 0
+							until i==comparableClass.typeParamBinding.size
+							loop
+								 comparableClass.typeParamBinding.elementAt(i).type.compareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
+																								,typeVariableToSet
+																								,context)
+								i:=i+1
+							end
 						end
 					end			
 				end
+			end
+			
+		end
+		
+		/**
+			returns the sequence of typedefinition separing self to typeToSearch in the Type hierarchy
+		*/
+		operation findPathToType(typeToSearch : ClassDefinition, typeDefAlreadyVisited : Sequence<ClassDefinition>) : Sequence<Class> is do
+			typeDefAlreadyVisited.add(self.typeDefinition.asType(ClassDefinition))
+			result:=void
+			if typeToSearch==self.typeDefinition then
+				result:=Sequence<Class>.new
+				result.add(self)
+			else
+				self.typeDefinition.superType.detect{t|
+					if not typeDefAlreadyVisited.contains(t.asType(Class).typeDefinition.asType(ClassDefinition)) then
+						result:= t.asType(Class).findPathToType(typeToSearch,typeDefAlreadyVisited)
+						if not result.isVoid then
+							result.addAt(0, self)
+						end
+					end
+					//stop condition
+					result.isVoid.~not()
+					}
+			end
+		end
+		
+		/**
+			returns a clone of the current class but with the type of the different bindings replaced according to the parameter bindings
+		*/
+		
+		operation cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Class is do
+	
+			result:= Class.new
+			result.typeDefinition:=self.typeDefinition
+			self.typeParamBinding.each{tvb|
+				var newTVB : TypeVariableBinding init TypeVariableBinding.new
+				newTVB.variable:=tvb.variable
+				if tvb.type.isInstanceOf(TypeVariable) then
+					var binding : TypeVariableBinding init bindings.detect{b|b.variable==tvb.type}
+					if binding.isVoid.~not then
+						newTVB.type:=binding.type
+					end
+				else 
+					if tvb.type.isInstanceOf(Class) then
+						newTVB.type:=tvb.type.asType(Class).cloneWithBindings(bindings)
+					end
+				end
+				result.typeParamBinding.add(newTVB)
+				}
+
+		end
+		
+		
+		
+		
+		/**
+			return a class that is structurally comparable to typeExpected
+		*/
+		operation getComparableClass(typeExpected : Class, context : StaticSetterContext ) : Class is do 
+			var inheritancePath : Sequence<Class>
+			inheritancePath:=findPathToType(typeExpected.typeDefinition.asType(ClassDefinition), Sequence<ClassDefinition>.new)
+			result:=void
+			if inheritancePath.isVoid then
+				context.errors.add(ResolverException.new.initialize("parameter not of the expected type", self))
+			else
+				//the supertype of the current Class that is of the same level than typeExpected 
+				var selfSuperType : Class init inheritancePath.elementAt(0)
+				from var i : Integer init 0
+				until i == inheritancePath.size - 1
+				loop
+					var superSuperType : Class 
+					superSuperType:=inheritancePath.elementAt(i+1).cloneWithBindings(selfSuperType.typeParamBinding)
+					
+					selfSuperType:=superSuperType
+					i:=i+1
+				end
+				result:=selfSuperType
 			end
 			
 		end
@@ -103,14 +189,14 @@ package structure{
 	
 	aspect class FunctionType
 	{
-		method compareToDefinition(definition : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+		method compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			stdio.writeln("compare a FunctionType with something")
-			if definition.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(definition.asType(TypeVariable))} then
-				typeVariableToSet.put(definition.asType(TypeVariable), self)
+			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else
 				//only the right part may be used to infer a typeParameter
-				if definition.isInstanceOf(FunctionType) and not self.right.isVoid and not definition.asType(FunctionType).right.isVoid then
-					self.right.compareToDefinition(definition.asType(FunctionType).right, typeVariableToSet)
+				if expectedType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.asType(FunctionType).right.isVoid then
+					self.right.compareToExpectedType(expectedType.asType(FunctionType).right, typeVariableToSet, context)
 				end
 			end	
 		end
