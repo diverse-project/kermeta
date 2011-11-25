@@ -208,7 +208,7 @@ class Main
         var resourceSet : ResourceSet init ResourceSet.new
         //repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
         var resource : Resource init 
-        	resourceSet.createResource("platform:/resource/language.sample.class2rdbms/src/main/models/out.xmi", 
+        	resourceSet.createResource("platform:/resource/language.sample.class2rdbms/target/results/out.xmi", 
         							 					 "platform:/resource/language.sample.class2rdbms/src/main/ecore/RDBMSMM.ecore")
 			//resourceSet.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/out.xmi", 
         	//						 					 "file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/RDBMSMM.ecore")       							 					
