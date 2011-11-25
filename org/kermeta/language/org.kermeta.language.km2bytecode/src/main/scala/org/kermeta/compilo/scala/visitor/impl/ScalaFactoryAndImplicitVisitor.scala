@@ -281,23 +281,17 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
         //}
 
-        res.append("\t\t//read system.property for an optional urimap file that need to be loaded\n")
-        res.append("\t\tval urimapFileLocation = sys.props.get(\"urimap.file.location\")\n")
-        res.append("\t\turimapFileLocation match {\n")
-        res.append("\t\t\tcase Some(location) => println(\"urimap.file.location=\" + location)\n")
-        res.append("\t\t\t\tval fis = new java.io.FileInputStream(location)\n")
-        res.append("\t\t\t\tval props = new java.util.Properties().load(fis)\n")
-        res.append("\t\t\t\tfis.close\n")
-        res.append("\t\t\t\t//TODO send map entries to the URIMap\n")
-        res.append("\t\t\tcase None => \n")
-        res.append("\t\t}\n")
-        /*val fis = new java.io.FileInputStream("test.txt")
-        val props = new java.util.Properties().load(fis)
-       props.
-        fis.close*/
-
 
         res.append("\t\tinit() \n")
+        
+        /* res.append("\t\t//read system.property for an optional urimap file that need to be loaded\n")
+        res.append("\t\tval urimapFileLocation = sys.props.get(\"urimap.file.location\")\n")
+        res.append("\t\turimapFileLocation match {\n")
+        res.append("\t\t\tcase Some(location) => println(\"urimap.file.location=\" + location)\n")        
+        res.append("\t\t\tcase None => \n")
+        res.append("\t\t}\n") */
+        res.append("\t\torg.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
+        
         res.append("\t\ttry {\n")
         res.append("\t\t\t"+"_root_." )
         if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
