@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class ExtensibleURIConverterImplURIMapHelper {
 	
+	public static String URIMAP_LOCATION_SYSTEM_PROPERTY = "urimap.file.location";
+	
 	/**
 	 * fill the ExtensibleURIConverterImpl.URI_MAP with the file referenced by the system property "urimap.file.location"
 	 * @param ignorePlatformResource if true, will not add in the map an entry key platform:/resource (useful if this entry is used by EcorePlugin.java instead)
@@ -47,7 +49,7 @@ public class ExtensibleURIConverterImplURIMapHelper {
 	}
 	
 	public static Properties getMapFromSystemProperty(){
-		String fileLocation = System.getProperties().getProperty("urimap.file.location");
+		String fileLocation = System.getProperties().getProperty(URIMAP_LOCATION_SYSTEM_PROPERTY);
 		if (fileLocation == null) return null;
 		Properties props = new Properties();
 		try {
