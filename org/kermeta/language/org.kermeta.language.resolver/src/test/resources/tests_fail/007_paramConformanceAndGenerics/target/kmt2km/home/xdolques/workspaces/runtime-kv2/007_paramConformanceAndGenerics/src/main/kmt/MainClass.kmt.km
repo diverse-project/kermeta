@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="root_package">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//root_package/Main/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;234;609"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::io" toName=""/>
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedOperation name="main" type="//root_package/Main/main/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;250;526"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta::io" toName=""/>
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;277;526"/>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="seqB">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;284;473"/>
+            <type name="Sequence&lt;B&lt;String>>" type="//root_package/Main/main/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/Main/main/@body/@statement.0/@type/@containedType.0/@containedType.0" typeIdentifier="Sequence">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/Main/main/@body/@statement.0/@type/@containedType.0/@containedType.0/@containedType.0" typeIdentifier="B">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </containedType>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </containedType>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;478;517"/>
+            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;501;510"/>
+              <usings fromQName="kermeta::io" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mult">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;487;501"/>
+                <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;499;500"/>
+                </parameters>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="test" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;488;498"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="seqB">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;493;497"/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
+              </target>
+            </parameters>
+            <usings fromQName="kermeta::io" toName=""/>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="StdIO">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;473;478"/>
+              <usings fromQName="kermeta::io" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="test" type="//root_package/Main/test/@containedType.1" isOrdered="true" isAbstract="false" typeParameter="//root_package/Main/test/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;526;605"/>
+        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
+          <usings fromQName="kermeta::io" toName=""/>
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+        <ownedParameter name="x" type="//root_package/Main/test/@ownedParameter.0/@containedType.0" isOrdered="true">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/Main/test/@ownedParameter.0/@containedType.0/@containedType.0" typeIdentifier="Sequence">
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/Main/test/@ownedParameter.0/@containedType.0/@containedType.0/@containedType.0 //root_package/Main/test/@ownedParameter.0/@containedType.0/@containedType.0/@containedType.1" typeIdentifier="A">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+              <usings fromQName="kermeta::io" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <usings fromQName="kermeta::io" toName=""/>
+            <usings fromQName="kermeta::standard" toName=""/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;579;605"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;584;590"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;597;601"/>
+              <usings fromQName="kermeta::io" toName=""/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="one">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;593;597"/>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="x">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;592;593"/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//root_package/A/@containedType.2" isAspect="false" typeParameter="//root_package/A/X //root_package/A/Y">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;609;643"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::io" toName=""/>
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+      <ownedAttribute name="x" type="//root_package/A/x/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;625;640"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
+          <usings fromQName="kermeta::io" toName=""/>
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//root_package/B/@containedType.1" isAspect="false" typeParameter="//root_package/B/T">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/007_paramConformanceAndGenerics/src/main/kmt/MainClass.kmt;643;682"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/B/@containedType.1/@containedType.0 //root_package/B/@containedType.1/@containedType.1" typeIdentifier="A">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+          <usings fromQName="kermeta::io" toName=""/>
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="T">
+          <usings fromQName="kermeta::io" toName=""/>
+          <usings fromQName="kermeta::standard" toName=""/>
+        </containedType>
+        <usings fromQName="kermeta::io" toName=""/>
+        <usings fromQName="kermeta::standard" toName=""/>
+      </containedType>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

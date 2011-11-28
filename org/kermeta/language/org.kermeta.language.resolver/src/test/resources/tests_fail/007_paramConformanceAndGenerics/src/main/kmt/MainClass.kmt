@@ -1,0 +1,47 @@
+/* $Id:$ 
+ * Creation : November 22, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            xdolques 
+ */
+
+
+
+package root_package;
+
+
+using kermeta::io
+using kermeta::standard
+
+//alias MyString : kermeta::standard::String;
+class Main
+{
+	
+	operation main() : Void is do 
+
+		var seqB : Sequence<B<String>> 
+		//this shouldn't work as Sequence<B<String>> is not a subtype of Sequence<A<Integer,String>>
+		//even though B<String> is a subtype of A<Integer,String>
+		StdIO.writeln((test(seqB)*1).toString)
+
+		
+	end
+	
+	
+	operation test<X> (x : Sequence<A<X,String>>) : X is do
+		result:=x.one.x
+	end
+}
+
+
+class A<X,Y>
+{
+
+reference x: X
+}
+
+class B<T> inherits A<Integer,T> {
+
+}
+
