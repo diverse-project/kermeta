@@ -8,4 +8,4 @@ KermetaProject "006_TypeParamOperationAndInheritance"
 	dependencies = {
 		//default dependency to kermeta framework (SNAPSHOT = use the last development version)
 		dependency "library.core" ="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
-	}
+	} 

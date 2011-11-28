@@ -9,7 +9,7 @@ package mainPackage{
 		//it works and should
 			var c : C<Integer,String> init C<Integer ,String>.new
 			c.x:=1
-			StdIO.writeln(test(c).toString)
+			StdIO.writeln((test(c)*1).toString)
 		end
 		
 		operation test<Z> (x : A<Z,String>) : Z is do
