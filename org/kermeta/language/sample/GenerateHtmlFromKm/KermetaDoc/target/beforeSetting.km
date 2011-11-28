@@ -1141,7 +1141,7 @@
     <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt;114;3801"/>
     <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/exceptions/exceptions.kmt;130;2504"/>
     <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt;130;446"/>
-    <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;93;1628"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;93;1632"/>
     <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/utils/hashtable.kmt;554;2212"/>
     <nestedPackage name="standard">
       <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/standard/baseType.kmt;224;47528"/>
@@ -6794,13 +6794,13 @@
       </ownedTypeDefinition>
     </nestedPackage>
     <nestedPackage name="io">
-      <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;110;1625"/>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/FileIO/@kOwnedTags.1" name="FileIO" superType="//kermeta/io/FileIO/@containedType.0" isAspect="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;614;1044"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;110;1629"/>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/FileIO/@kOwnedTags.1" name="FileIO" superType="//kermeta/io/FileIO/@containedType.0" isAspect="false" isSingleton="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;614;1048"/>
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/io/FileIO"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
         <ownedOperation name="writeTextFile" type="//kermeta/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;676;831"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;680;835"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="filename" type="//kermeta/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
@@ -6809,12 +6809,12 @@
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/FileIO/writeTextFile/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;744;831"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;748;835"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="writeTextFileWithEncoding" type="//kermeta/io/FileIO/writeTextFileWithEncoding/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;831;975"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;835;979"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="filename" type="//kermeta/io/FileIO/writeTextFileWithEncoding/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
@@ -6826,78 +6826,78 @@
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/FileIO/writeTextFileWithEncoding/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;930;975"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;934;979"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="readTextFile" type="//kermeta/io/FileIO/readTextFile/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;975;1040"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;979;1044"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           <ownedParameter name="filename" type="//kermeta/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/FileIO/readTextFile/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1029;1040"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1033;1044"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//kermeta/io/StdIO/@kOwnedTags.1" name="StdIO" superType="//kermeta/io/StdIO/@containedType.0" isAspect="false" isSingleton="true">
-        <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1067;1623"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1071;1627"/>
         <kOwnedTags name="CompilerIgnore" value="true" object="//kermeta/io/StdIO"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Object"/>
         <ownedOperation name="write" type="//kermeta/io/StdIO/write/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1138;1243"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1142;1247"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="object" type="//kermeta/io/StdIO/write/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/StdIO/write/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1181;1243"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1185;1247"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="errorln" type="//kermeta/io/StdIO/errorln/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1243;1349"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1247;1353"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="object" type="//kermeta/io/StdIO/errorln/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/StdIO/errorln/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1288;1349"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1292;1353"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="error" type="//kermeta/io/StdIO/error/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1349;1457"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1353;1461"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="object" type="//kermeta/io/StdIO/error/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/StdIO/error/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1392;1457"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1396;1461"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="writeln" type="//kermeta/io/StdIO/writeln/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1457;1564"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1461;1568"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           <ownedParameter name="object" type="//kermeta/io/StdIO/writeln/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/StdIO/writeln/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1502;1564"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1506;1568"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
         <ownedOperation name="read" type="//kermeta/io/StdIO/read/@containedType.0" isOrdered="true" isAbstract="false">
-          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1564;1619"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1568;1623"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           <ownedParameter name="prompt" type="//kermeta/io/StdIO/read/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/String"/>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" staticType="//kermeta/io/StdIO/read/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1608;1619"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/kermeta/io/io.kmt;1612;1623"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//kermeta/standard/Void"/>
           </body>
         </ownedOperation>
