@@ -71,6 +71,18 @@ package structure{
 			
 		end
 		
+		//structural comparison is used when types are supposed to be equals
+		
+		operation structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+			stdio.writeln("compare a type with something")
+			
+			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+			
+			end
+			
+		end
+		
 		
 	}
 	
@@ -96,7 +108,7 @@ package structure{
 							from var i : Integer init 0
 							until i==comparableClass.typeParamBinding.size
 							loop
-								 comparableClass.typeParamBinding.elementAt(i).type.compareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
+								 comparableClass.typeParamBinding.elementAt(i).type.structurallyCompareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
 																								,typeVariableToSet
 																								,context)
 								i:=i+1
@@ -107,6 +119,39 @@ package structure{
 			end
 			
 		end
+		
+		method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+			
+			
+			stdio.writeln("compare a class with something")
+			stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
+			
+			if expectedType.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+				
+			else
+				if expectedType.isInstanceOf(Class) then
+					
+					// they are both of type class with the same number of type parameters, then all type parameters should be checked
+					// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the expectedType
+					if	self.typeParamBinding.size==expectedType.asType(Class).typeParamBinding.size
+					then
+						from var i : Integer init 0
+						until i==self.typeParamBinding.size
+						loop
+							 self.typeParamBinding.elementAt(i).type.structurallyCompareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
+																							,typeVariableToSet
+																							,context)
+							i:=i+1
+						end
+					end
+							
+				end
+			end
+			
+		end
+		
+		
 		
 		/**
 			returns the sequence of typedefinition separing self to typeToSearch in the Type hierarchy
@@ -197,6 +242,18 @@ package structure{
 				//only the right part may be used to infer a typeParameter
 				if expectedType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.asType(FunctionType).right.isVoid then
 					self.right.compareToExpectedType(expectedType.asType(FunctionType).right, typeVariableToSet, context)
+				end
+			end	
+		end
+		
+		method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+			stdio.writeln("compare a FunctionType with something")
+			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+			else
+				//only the right part may be used to infer a typeParameter
+				if expectedType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.asType(FunctionType).right.isVoid then
+					self.right.structurallyCompareToExpectedType(expectedType.asType(FunctionType).right, typeVariableToSet, context)
 				end
 			end	
 		end
