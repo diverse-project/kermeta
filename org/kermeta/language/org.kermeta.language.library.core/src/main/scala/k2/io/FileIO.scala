@@ -53,5 +53,5 @@ class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
   }
 
 }
-object FileIO extends FileIOClass{
+object FileIO extends FileIOClass{ 
 }
