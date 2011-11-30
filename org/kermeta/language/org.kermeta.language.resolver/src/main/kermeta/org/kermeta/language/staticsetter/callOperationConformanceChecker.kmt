@@ -36,8 +36,8 @@ package behavior{
 			from var i : Integer init 0
 			until i==self.parameters.size() loop
 				
-				if not self.parameters.elementAt(i).staticType.isVoid then
-					self.parameters.elementAt(i).staticType.compareToExpectedType(staticOperation.ownedParameter.elementAt(i).type,typeVariableToSet, context)
+				if not self.parameters.elementAt(i).staticType.isVoid and not self.parameters.elementAt(i).isInstanceOf(VoidLiteral) then
+						self.parameters.elementAt(i).staticType.compareToExpectedType(staticOperation.ownedParameter.elementAt(i).type,typeVariableToSet, context)
 				end
 				i:=i+1
 			end
