@@ -268,8 +268,8 @@ public class KPBuilder {
 					kp_last_modelingunit = result;
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 					// copy resources to classes folder in order to ease the run ...
-					IPath destFolder = kpProjectFile.getProject().findMember("target/classes").getFullPath();
-					for ( IResource res : ((IFolder)(kpProjectFile.getProject().findMember("target/resources"))).members()){
+					IPath destFolder = kpProjectFile.getParent().findMember("target/classes").getFullPath();
+					for ( IResource res : ((IFolder)(kpProjectFile.getParent().findMember("target/resources"))).members()){
 						res.copy(destFolder.append("/"+res.getName()), true, new NullProgressMonitor());
 					}					
 				}
