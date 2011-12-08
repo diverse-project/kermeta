@@ -15,7 +15,7 @@ import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
-import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+//import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -32,7 +32,7 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
  *
  * @author ffouquet
  */
-public class GenModelUtil {
+public class GenModelHelper {
 
 	
 	
@@ -40,7 +40,7 @@ public class GenModelUtil {
 
     public MessagingSystem logger;
     
-    public GenModelUtil(MessagingSystem logger){
+    public GenModelHelper(MessagingSystem logger){
     	this.logger = logger;
     }
     
@@ -59,7 +59,9 @@ public class GenModelUtil {
         return (path.delete());
     }
 
-    public void createGenModel(File ecore, File genmodel, File sourcePath, Boolean bool) {
+    public void createGenModel(File ecore, File genmodel, File sourcePath, Boolean clearOutputDir) {
+    	// TODO see why we don't use org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil ?
+    	
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
                 put("ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
@@ -109,7 +111,7 @@ public class GenModelUtil {
             }
         }
 
-        if(bool) {
+        if(clearOutputDir) {
             logger.info("Clear output directory , "+sourcePath.getAbsolutePath(), getClass().getName());
             deleteDirectory(sourcePath);
         }
