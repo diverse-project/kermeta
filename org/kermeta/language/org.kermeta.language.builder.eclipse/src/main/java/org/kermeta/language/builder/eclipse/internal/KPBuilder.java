@@ -265,7 +265,7 @@ public class KPBuilder {
 						((IFolder)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
 				}
 				if( kpProjectFile.getParent() instanceof IProject){
-					if(!((IFolder)kpProjectFile.getParent()).getFolder("target").exists())
+					if(!((IProject)kpProjectFile.getParent()).getFolder("target").exists())
 						((IProject)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
 				}
 				
