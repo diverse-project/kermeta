@@ -6,7 +6,9 @@ package org.kermeta.emf.genmodel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 //import org.eclipse.core.runtime.IPath;
 //import org.eclipse.core.runtime.Path;
@@ -36,14 +38,28 @@ public class GenModelHelper {
 
 	
 	
-    private final String outputfileName = "emfoutput";
+    private String eclipseProjectName = "emfoutput";
 
     public MessagingSystem logger;
+
+	private boolean runInEclipse = false;
+    
+    
+    //attention s'execute depuis eclipse donc faire attention au outputfilename =le projet actuel
+    //et src dir
+    
+    
     
     public GenModelHelper(MessagingSystem logger){
     	this.logger = logger;
     }
     
+    
+    public GenModelHelper(MessagingSystem logger, String eclipseProject){
+    	this.logger = logger;
+    	this.runInEclipse  = true;
+    	eclipseProjectName = eclipseProject;
+    }
     
     public static boolean deleteDirectory(File path) {
         if (path.exists()) {
@@ -60,6 +76,11 @@ public class GenModelHelper {
     }
 
     public void createGenModel(File ecore, File genmodel, File sourcePath, Boolean clearOutputDir) {
+    	List<File> ecoreFiles = new ArrayList<File>();
+    	createGenModel(ecoreFiles, sourcePath, sourcePath, clearOutputDir);
+    	
+    }
+    public void createGenModel(List<File> ecoreFiles, File genmodel, File sourcePath, Boolean clearOutputDir) {
     	// TODO see why we don't use org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil ?
     	
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
@@ -72,37 +93,61 @@ public class GenModelHelper {
         resourceSet.getPackageRegistry().put("http://www.eclipse.org/emf/2002/GenModel", GenModelPackage.eINSTANCE);
 
         resourceSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());
-        URI ecoreURI = URI.createFileURI(ecore.getAbsolutePath());
-        Resource resource = resourceSet.getResource(ecoreURI, true);
-        EPackage ePackage = (EPackage) resource.getContents().get(0);
+       
+        
 
         GenModel genModelModel = null;
+        String modelDirectory = "/" + eclipseProjectName;
+        if (runInEclipse){
+        	String srcPathInProject = "src";
+        	int index = sourcePath.getPath().indexOf(eclipseProjectName);
+        	if(index != -1){
+        		srcPathInProject = sourcePath.getPath().substring(index+eclipseProjectName.length()+1).replaceAll("\\\\", "/");
+        	}
+        	modelDirectory ="/" + eclipseProjectName+"/"+srcPathInProject;
+        }
+        
 
         if (genmodel != null && genmodel.exists()) {
+        	
             Resource resourceGenModel = resourceSet.getResource(URI.createFileURI(genmodel.getAbsolutePath()), true);
             genModelModel = (GenModel) resourceGenModel.getContents().get(0);
-            genModelModel.setModelDirectory("/" + outputfileName);
-            genModelModel.getForeignModel().add(ecore.getAbsolutePath());
-            genModelModel.initialize(Collections.singleton(ePackage));
-
+            genModelModel.setModelDirectory(modelDirectory);
+            ArrayList<EPackage> ePackages = new ArrayList<EPackage>();
+            for(File ecoreFile : ecoreFiles){
+        		URI ecoreURI = URI.createFileURI(ecoreFile.getAbsolutePath());
+    	        Resource resource = resourceSet.getResource(ecoreURI, true);
+    	        ePackages.add((EPackage) resource.getContents().get(0));	// TODO maybe think about ecore models with multiple root packages ?
+                genModelModel.getForeignModel().add(ecoreFile.getAbsolutePath());
+            }
+            genModelModel.initialize(ePackages);
         } else {
             if(genmodel == null){
-                genmodel = new File("outputfileName");
+                genmodel = new File(eclipseProjectName+".genmodel");
             }
 
             URI genModelURI = URI.createFileURI(genmodel.getAbsolutePath());
 
-            System.out.println(genModelURI);
+            logger.debug("Creating "+genModelURI, getClass().getName());
 
+            
             Resource genModelResource = Resource.Factory.Registry.INSTANCE.getFactory(genModelURI).createResource(genModelURI);
 
             genModelModel = GenModelFactory.eINSTANCE.createGenModel();
             genModelResource.getContents().add(genModelModel);
             resourceSet.getResources().add(genModelResource);
-            genModelModel.setModelDirectory("/" + outputfileName);
-            genModelModel.getForeignModel().add(ecore.getAbsolutePath());
-            genModelModel.initialize(Collections.singleton(ePackage));
+            genModelModel.setModelDirectory(modelDirectory);
+
+            ArrayList<EPackage> ePackages = new ArrayList<EPackage>();
+            for(File ecoreFile : ecoreFiles){
+        		URI ecoreURI = URI.createFileURI(ecoreFile.getAbsolutePath());
+    	        Resource resource = resourceSet.getResource(ecoreURI, true);
+    	        ePackages.add((EPackage) resource.getContents().get(0));	// TODO maybe think about ecore models with multiple root packages ?
+                genModelModel.getForeignModel().add(ecoreFile.getAbsolutePath());
+            }
+            genModelModel.initialize(ePackages);
             genModelModel.setModelName(genModelURI.trimFileExtension().lastSegment());
+            genModelModel.setUpdateClasspath(false);
 
             try {
                 genModelResource.save(Collections.EMPTY_MAP);
@@ -112,11 +157,13 @@ public class GenModelHelper {
         }
 
         if(clearOutputDir) {
-            logger.info("Clear output directory , "+sourcePath.getAbsolutePath(), getClass().getName());
+            logger.debug("Clear output directory , "+sourcePath.getAbsolutePath(), getClass().getName());
             deleteDirectory(sourcePath);
         }
-        sourcePath.mkdir();
-        EcorePlugin.getPlatformResourceMap().put(outputfileName, URI.createFileURI(sourcePath.getAbsolutePath() + "/"));
+        if (!runInEclipse){
+        	sourcePath.mkdir();
+        	EcorePlugin.getPlatformResourceMap().put("/"+eclipseProjectName, URI.createFileURI(sourcePath.getAbsolutePath() + "/")); // works only if run in standalone mode
+        }
         this.generate(genModelModel);
 
     }
@@ -131,9 +178,7 @@ public class GenModelHelper {
         generator.requestInitialize();
         // Generator model code.
         Diagnostic d = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.out));
-
         
-
         logger.info(d.getMessage(), getClass().getName());
     }
 }
