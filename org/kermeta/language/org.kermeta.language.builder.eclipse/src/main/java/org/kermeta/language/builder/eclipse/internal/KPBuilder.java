@@ -257,7 +257,16 @@ public class KPBuilder {
 				impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
 				KermetaBuilder.flushProblems(impactedFiles);
 
-				updateCompilerPreferences();		
+				updateCompilerPreferences();	
+				
+				// make sure that the outputfolder exist and is known by eclipse
+				if( kpProjectFile.getParent() instanceof IFolder){
+					((IFolder)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
+				}
+				if( kpProjectFile.getParent() instanceof IProject){
+					((IProject)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
+				}
+				
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
 				
 				// generate urimap file
