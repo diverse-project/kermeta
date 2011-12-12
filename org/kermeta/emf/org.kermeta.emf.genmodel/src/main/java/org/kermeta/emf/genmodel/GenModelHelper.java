@@ -14,9 +14,11 @@ import java.util.List;
 //import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenRuntimeVersion;
 //import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
@@ -97,14 +99,14 @@ public class GenModelHelper {
         
 
         GenModel genModelModel = null;
-        String modelDirectory = "/" + eclipseProjectName;
+        String modelDirectory = File.separatorChar + eclipseProjectName;
         if (runInEclipse){
         	String srcPathInProject = "src";
         	int index = sourcePath.getPath().indexOf(eclipseProjectName);
         	if(index != -1){
         		srcPathInProject = sourcePath.getPath().substring(index+eclipseProjectName.length()+1).replaceAll("\\\\", "/");
         	}
-        	modelDirectory ="/" + eclipseProjectName+"/"+srcPathInProject;
+        	modelDirectory =File.separatorChar+ eclipseProjectName+File.separatorChar+srcPathInProject;
         }
         
 
@@ -148,6 +150,9 @@ public class GenModelHelper {
             genModelModel.initialize(ePackages);
             genModelModel.setModelName(genModelURI.trimFileExtension().lastSegment());
             genModelModel.setUpdateClasspath(false);
+            
+			genModelModel.setComplianceLevel(GenJDKLevel.JDK60_LITERAL);
+			genModelModel.setRuntimeVersion(GenRuntimeVersion.EMF26); // TODO switch to 2.7 ?
 
             try {
                 genModelResource.save(Collections.EMPTY_MAP);
