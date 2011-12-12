@@ -73,9 +73,10 @@ public class Ecore2Bytecode {
 	/**
 	 * 
 	 * @param ecoreForGenerationURLs list of ecore that need to be generated
-	 * @return
+	 * @return may return null if there is nothing to do (ie. no input ecore to process)
 	 */
 	public Future<Boolean> ecore2java(ExecutorService threadExector){
+		if(ecoreForGenerationURLs.size() == 0) return null;
 		logger.initProgress(getMainProgressGroup(), "Generating java code for "+ecoreForGenerationURLs.size()+ " ecore file(s)...", KermetaCompiler.LOG_MESSAGE_GROUP, 2);;
 		// launch ecore threads
 		/* ArrayList<Future<Boolean>> genmodelFutures = new ArrayList<Future<Boolean>>();
@@ -97,6 +98,7 @@ public class Ecore2Bytecode {
 				
 	}
 	public Future<Boolean> ecorejava2bytecode(Future<Boolean> genmodelFuture, ExecutorService threadExector){
+		if(genmodelFuture == null) return null;
 		// join the previously launched ecore2java()
 		try {
 			/*Boolean res =*/ genmodelFuture.get();
@@ -139,6 +141,7 @@ public class Ecore2Bytecode {
 	}
 	
 	public boolean processDiagnostic(Future<Boolean> ecorejava2bytecodeFuture){
+		if(ecorejava2bytecodeFuture == null) return false;
 		// join the previously launched ecore2java()
 		try {
 			/* Boolean res =*/ ecorejava2bytecodeFuture.get();
