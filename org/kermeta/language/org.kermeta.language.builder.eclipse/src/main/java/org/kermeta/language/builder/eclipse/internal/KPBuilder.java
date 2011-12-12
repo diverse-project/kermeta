@@ -302,18 +302,23 @@ public class KPBuilder {
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 					// copy resources to classes folders in order to ease the run ...
 					IPath destScalaBinFolder = kpProjectFile.getParent().findMember("target/"+DEFAULT_SCALABIN_LOCATION).getFullPath();
-					IPath destEmfBinFolder = kpProjectFile.getParent().findMember("target/"+DEFAULT_EMFBIN_LOCATION).getFullPath();
+					IPath destEmfBinFolder = null;
+					if(kpProjectFile.getParent().findMember("target/"+DEFAULT_EMFBIN_LOCATION) != null){
+						destEmfBinFolder =kpProjectFile.getParent().findMember("target/"+DEFAULT_EMFBIN_LOCATION).getFullPath();
+					}
 					for ( IResource res : ((IFolder)(kpProjectFile.getParent().findMember("target/"+DEFAULT_RESOURCE_LOCATION))).members()){
 						IResource targetScalaBinFolder =  kpProjectFile.getWorkspace().getRoot().findMember(destScalaBinFolder.append("/"+res.getName()));
 						if(targetScalaBinFolder != null && targetScalaBinFolder.exists()){
 							targetScalaBinFolder.delete(true, null);
 						}
 						res.copy(destScalaBinFolder.append("/"+res.getName()), true, new NullProgressMonitor());
-						IResource targetEmfBinFolder =  kpProjectFile.getWorkspace().getRoot().findMember(destEmfBinFolder.append("/"+res.getName()));
-						if(targetEmfBinFolder != null && targetEmfBinFolder.exists()){
-							targetEmfBinFolder.delete(true, null);
+						if(destEmfBinFolder != null){
+							IResource targetEmfBinFolder =  kpProjectFile.getWorkspace().getRoot().findMember(destEmfBinFolder.append("/"+res.getName()));						
+							if(targetEmfBinFolder != null && targetEmfBinFolder.exists()){
+								targetEmfBinFolder.delete(true, null);
+							}
+							res.copy(destEmfBinFolder.append("/"+res.getName()), true, new NullProgressMonitor());
 						}
-						res.copy(destEmfBinFolder.append("/"+res.getName()), true, new NullProgressMonitor());
 					}					
 				}
 			}
