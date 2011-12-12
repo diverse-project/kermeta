@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -64,10 +65,20 @@ public class KPBuilder {
 	public HashMap<String,KPFilesContainer> kpFiles = new HashMap<String,KPFilesContainer>();	
 	
 	private String outputResourceFolder;
-	private String outputFolder;
+	private String outputRootFolder;
+	private String outputScalaFolder;
+	private String outputScalaBinaryFolder;
+	private String outputEMFJavaFolder;
+	private String outputGenmodelFolder;
+	private String outputEMFBinaryFolder;
 	private String kpFileURL;
 	
-	 
+	public static final String DEFAULT_RESOURCE_LOCATION =  "resources";
+	public static final String DEFAULT_SCALASOURCE_LOCATION =  "scala";
+	public static final String DEFAULT_SCALABIN_LOCATION =  "scalaclasses";
+	public static final String DEFAULT_GENMODEL_LOCATION =  "genmodel";
+	public static final String DEFAULT_EMFSOURCES_LOCATION =  "emfjava";
+	public static final String DEFAULT_EMFBIN_LOCATION =  "emfclasses";
 	
 	public KPBuilder(IFile kpProjectFile) {
 		super();
@@ -79,11 +90,19 @@ public class KPBuilder {
 		try {
 			
 			String projectUri = f.getParentFile().toString();//.getCanonicalPath(); f.exists()
-			outputFolder = projectUri+File.separatorChar+"target";
-			outputResourceFolder = outputFolder+"/resources";
+			outputRootFolder = projectUri+File.separatorChar+"target";
+			outputResourceFolder = outputRootFolder+File.separatorChar+DEFAULT_RESOURCE_LOCATION;
+			outputScalaFolder = outputRootFolder+File.separatorChar+DEFAULT_SCALASOURCE_LOCATION;
+			outputScalaBinaryFolder  = outputRootFolder+File.separatorChar+DEFAULT_SCALABIN_LOCATION;
+			outputEMFJavaFolder  = outputRootFolder+File.separatorChar+DEFAULT_EMFSOURCES_LOCATION;
+			outputGenmodelFolder  = outputRootFolder+File.separatorChar+DEFAULT_GENMODEL_LOCATION;
+			outputEMFBinaryFolder  = outputRootFolder+File.separatorChar+DEFAULT_EMFBIN_LOCATION;
+			
+			
 			//compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),false,outputFolder, true, true, false);
 			boolean saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
-			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles,outputFolder, true, true, false);
+			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles, true, true, false);
+			compiler.initializeTargetFolders(outputRootFolder, outputRootFolder, outputScalaFolder, outputScalaBinaryFolder, outputGenmodelFolder, outputEMFJavaFolder, outputEMFBinaryFolder, outputResourceFolder);
 			refreshFileIndex();
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
@@ -126,7 +145,7 @@ public class KPBuilder {
 			*/
 			// for reflexivity set the bundle context
 			updateCompilerPreferences();		
-			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(),outputFolder,outputFolder,outputResourceFolder, additionalCalssPath,true);
+			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,true);
 			if (result != null) {
 				kp_last_modelingunit = result;
 			}
@@ -187,7 +206,7 @@ public class KPBuilder {
 			
 			long timeStampOfClasses = 0;
 
-			IResource theConcernedPath = kpProjectFile.getParent().findMember(File.separatorChar+"target"+File.separatorChar+"classes"+File.separatorChar);
+			IResource theConcernedPath = kpProjectFile.getParent().findMember(File.separatorChar+"target"+File.separatorChar+DEFAULT_SCALABIN_LOCATION+File.separatorChar);
 			if (theConcernedPath != null) {
 				if (theConcernedPath instanceof IFolder) {
 					theConcernedPath.refreshLocal(IResource.DEPTH_INFINITE, null);
@@ -249,6 +268,7 @@ public class KPBuilder {
 			ArrayList<String> fullClassPath = new ArrayList<String>();
 			fullClassPath.addAll(additionalClassPath);
 			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
+			fullClassPath.add(outputEMFBinaryFolder);
 			
 			ModelingUnit result = null;
 			
@@ -269,19 +289,31 @@ public class KPBuilder {
 						((IProject)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
 				}
 				
-				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),outputFolder,outputFolder,outputResourceFolder,additionalClassPath,false);
+				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,false);
 				
 				// generate urimap file
 				// TODO may be we can do that in background because we may have to update it if the user has opened or closed some projects
-				generateURIMapFile(outputFolder);
+				generateURIMapFile(outputRootFolder);
 				
-				if (result != null) {
+				if (result != null && !compiler.hasFailed) {
 					kp_last_modelingunit = result;
+					
+					
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
-					// copy resources to classes folder in order to ease the run ...
-					IPath destFolder = kpProjectFile.getParent().findMember("target/classes").getFullPath();
-					for ( IResource res : ((IFolder)(kpProjectFile.getParent().findMember("target/resources"))).members()){
-						res.copy(destFolder.append("/"+res.getName()), true, new NullProgressMonitor());
+					// copy resources to classes folders in order to ease the run ...
+					IPath destScalaBinFolder = kpProjectFile.getParent().findMember("target/"+DEFAULT_SCALABIN_LOCATION).getFullPath();
+					IPath destEmfBinFolder = kpProjectFile.getParent().findMember("target/"+DEFAULT_EMFBIN_LOCATION).getFullPath();
+					for ( IResource res : ((IFolder)(kpProjectFile.getParent().findMember("target/"+DEFAULT_RESOURCE_LOCATION))).members()){
+						IResource targetScalaBinFolder =  kpProjectFile.getWorkspace().getRoot().findMember(destScalaBinFolder.append("/"+res.getName()));
+						if(targetScalaBinFolder != null && targetScalaBinFolder.exists()){
+							targetScalaBinFolder.delete(true, null);
+						}
+						res.copy(destScalaBinFolder.append("/"+res.getName()), true, new NullProgressMonitor());
+						IResource targetEmfBinFolder =  kpProjectFile.getWorkspace().getRoot().findMember(destEmfBinFolder.append("/"+res.getName()));
+						if(targetEmfBinFolder != null && targetEmfBinFolder.exists()){
+							targetEmfBinFolder.delete(true, null);
+						}
+						res.copy(destEmfBinFolder.append("/"+res.getName()), true, new NullProgressMonitor());
 					}					
 				}
 			}
@@ -294,12 +326,12 @@ public class KPBuilder {
 				
 				
 				
-				KermetaRunner runner = new KermetaRunner(outputFolder+File.separator+"classes", kp.getGroup()+"."+kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
+				KermetaRunner runner = new KermetaRunner(outputScalaBinaryFolder, kp.getGroup()+"."+ kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
 				if (isBuildNeeded && result == null) {
 					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).error("Error in build, cannot run "+kpFileURL, this.getClass().getName());
 				}
 				else{
-					runner.runK2Program(params,outputFolder+File.separator+"urimap.properties");
+					runner.runK2Program(params,outputRootFolder+File.separator+"urimap.properties");
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null); // refresh local project in case a file is created there
 				}
 				
