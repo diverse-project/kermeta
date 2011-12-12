@@ -92,7 +92,7 @@ public class Ecore2Bytecode {
 		for(URL ecoreURL : ecoreForGenerationURLs){
 			inputEcoreFiles.add(new File(ecoreURL.getFile()));
 		}
-		File genmodelFile = new File(targetGenmodelFolder+kp.getName()+"internalEcores.genmodel");
+		File genmodelFile = new File(targetGenmodelFolder+File.separator+kp.getName()+"internalEcores.genmodel");
 		File generatedSourcePath = new File(targetGeneratedJavaFolder);
 		return threadExector.submit(new CallableGenmodelGenerator(logger, inputEcoreFiles, genmodelFile, generatedSourcePath, kp.getName()));
 				
