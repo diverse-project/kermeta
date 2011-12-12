@@ -39,6 +39,7 @@ import org.kermeta.diagnostic.ModelReference;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.Source;
+import org.kermeta.kp.compiler.commandline.callable.CallableGenmodelGenerator;
 import org.kermeta.kp.compiler.commandline.callable.CallableLogProblem;
 import org.kermeta.kp.compiler.commandline.callable.CallableModelingUnitLoader;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
@@ -78,9 +79,11 @@ public class KermetaCompiler {
 	public final static String LOG_MESSAGE_GROUP = "org.kermeta.kp.compiler.commandline";
 	
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
+	public static String DEFAULT_REFLEXIVITY_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
 	public static String DEFAULT_KP_LOCATION_IN_FOLDER = "/project.kp";
-	public static String DEFAULT_BINARY_LOCATION_IN_ECLIPSE = "/target/classes";
+	public static String DEFAULT_BINARY_LOCATION_IN_ECLIPSE = "/target/scalaclasses";
+	public static String DEFAULT_EMFBINARY_LOCATION_IN_ECLIPSE = "/target/emfclasses";
 	public static String INTERMEDIATE_SUBFOLDER = "";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
@@ -108,6 +111,16 @@ public class KermetaCompiler {
 	
 	private ExecutorService threadExector = Executors.newCachedThreadPool();
 	private ExecutorService singleThreadExector = Executors.newSingleThreadExecutor();
+	
+	
+	
+	protected String targetRootFolder; 
+	protected String targetGeneratedScalaSourceFolder; 
+	protected String targetScalaBinaryFolder; 
+	protected String targetGeneratedGenmodelFolder; 
+	protected String targetGeneratedEMFSourceFolder; 
+	protected String targetEMFBinaryFolder; 
+	protected  String targetGeneratedResourcesFolder;
 
 	/**
 	 * Simple constructor
@@ -152,13 +165,12 @@ public class KermetaCompiler {
 	 *            indicates wether the process should be stopped when an error
 	 *            occurs or not
 	 */
-	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, LocalFileConverter uriPhysicalConverter,  Boolean saveIntermediateFiles, String targetIntermediateFolder, Boolean willRunInEclipse, Boolean checkingEnabled, Boolean stopOnError) {
+	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, LocalFileConverter uriPhysicalConverter,  Boolean saveIntermediateFiles,  Boolean willRunInEclipse, Boolean checkingEnabled, Boolean stopOnError) {
 		super();
 		System.err.println("checking enabled (" + checkingEnabled + ") stop on error (" + stopOnError + ")");
 		this.logger = logger;
 		this.fileSystemConverter = uriPhysicalConverter;
 		this.saveIntermediateFiles = saveIntermediateFiles;
-		this.targetIntermediateFolder = targetIntermediateFolder;
 		this.runInEclipse = willRunInEclipse;
 		this.checkingEnabled = checkingEnabled;
 		this.stopOnError = stopOnError;
@@ -204,6 +216,37 @@ public class KermetaCompiler {
 
 	}
 
+	
+	
+	
+	
+	/**
+	 * This method must be called to initialize all the folders where the compilation will take place
+	 * @param targetRootFolder
+	 * @param targetGeneratedScalaSourceFolder
+	 * @param targetScalaBinaryFolder
+	 * @param targetGeneratedGenmodelFolder
+	 * @param targetGeneratedEMFSourceFolder
+	 * @param targetEMFBinaryFolder
+	 * @param targetGeneratedResourcesFolder
+	 */
+	public void initializeTargetFolders(String targetRootFolder,
+			String targetIntermediateFolder,
+			String targetGeneratedScalaSourceFolder,
+			String targetScalaBinaryFolder,
+			String targetGeneratedGenmodelFolder,
+			String targetGeneratedEMFSourceFolder,
+			String targetEMFBinaryFolder, String targetGeneratedResourcesFolder) {
+		this.targetRootFolder = targetRootFolder;
+		this.targetIntermediateFolder = targetIntermediateFolder;
+		this.targetGeneratedScalaSourceFolder = targetGeneratedScalaSourceFolder;
+		this.targetScalaBinaryFolder = targetScalaBinaryFolder;
+		this.targetGeneratedGenmodelFolder = targetGeneratedGenmodelFolder;
+		this.targetGeneratedEMFSourceFolder = targetGeneratedEMFSourceFolder;
+		this.targetEMFBinaryFolder = targetEMFBinaryFolder;
+		this.targetGeneratedResourcesFolder = targetGeneratedResourcesFolder;
+	}
+
 	/*
 	 * public KermetaCompiler(String targetFolder){ // make sure initialize has
 	 * been call : note that if some other EMF related things have // been done
@@ -211,7 +254,7 @@ public class KermetaCompiler {
 	 * this.targetFolder = targetFolder; }
 	 */
 
-	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
 		try {
 			lock.lock();
 			flushProblems(FileHelpers.StringToURL(kpFileURL));
@@ -329,7 +372,7 @@ public class KermetaCompiler {
 	
 			// save resolvedUnit to the META-INF/kermeta/merged.km
 			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + projectName + ".km");
+			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
 			if (!mergedFile.getParentFile().exists()) {
 				mergedFile.getParentFile().mkdirs();
 			}
@@ -343,15 +386,31 @@ public class KermetaCompiler {
 			kermeta.standard.JavaConversions.cleanCache();
 			
 			if (!generateKmOnly) {
+
+				List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
+				fullBinaryDependencyClassPath.addAll(additionalClassPath);
+				// generating 
+				ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
+				Ecore2Bytecode ecore2Bytecode = new Ecore2Bytecode(logger, getMainProgressGroup(), kp, ecoreForGenerationURLs, targetGeneratedGenmodelFolder, targetGeneratedEMFSourceFolder, targetEMFBinaryFolder, additionalClassPath);
+				Future<Boolean> genmodelFuture = ecore2Bytecode.ecore2java(singleThreadExector);
+				Future<Boolean> ecorejava2bytecode = ecore2Bytecode.ecorejava2bytecode(genmodelFuture, threadExector);
+				
+				
+				
 				// deal with km to scala
 				// compiler require a file location not an URL
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
 				logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
 				String fileLocation = mergedFile.toURI().toURL().getFile();
-				km2Scala(kp, varExpander, fileLocation, targetGeneratedSourceFolder, targetFolder);
+				km2Scala(kp, varExpander, fileLocation, targetGeneratedScalaSourceFolder, targetRootFolder);
+				
+				
+				
+				// process java diagnostic and ensure this thread is finished
+				ecore2Bytecode.processDiagnostic(ecorejava2bytecode);
+
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
-				List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
-				fullBinaryDependencyClassPath.addAll(additionalClassPath);
+				fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder);
 				// deal with scala to bytecode
 				int result =scala2bytecode(fullBinaryDependencyClassPath);
 				if(result != 0){
@@ -377,8 +436,8 @@ public class KermetaCompiler {
 	 * @param kpFileURL
 	 * @throws IOException
 	 */
-	public ModelingUnit kp2bytecode(String kpFileURL, String targetFolder, String targetGeneratedSourceFolder, String targetGeneratedResourcesFolder, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
-		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(), targetFolder, targetGeneratedSourceFolder, targetGeneratedResourcesFolder, additionalClassPath, generateKmOnly);
+	public ModelingUnit kp2bytecode(String kpFileURL, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(), additionalClassPath, generateKmOnly);
 	}
 
 	public ModelingUnit parse(URL uri) {
@@ -708,8 +767,39 @@ public class KermetaCompiler {
 		return convertedModelingUnit;
 	}
 
+	
+	
+	private ArrayList<URL> getEcoreNeedingGeneration(KermetaProject kp,KpVariableExpander varExpander){
+		List<Source> srcs = kp.getSources();
+		ArrayList<URL> ecoreURLs = new ArrayList<URL>();
+		for (Source src : srcs) {
+			if(!src.isByteCodeFromADependency()){
+				try{
+					String sourceURLWithVariable = src.getUrl();
+					sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
+					String sourceURLString = varExpander.expandSourceVariables(sourceURLWithVariable);
+					if (sourceURLWithVariable.contains("${")) {
+						// deal with variable expansion
+					//	logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURLString + ")", LOG_MESSAGE_GROUP);
+					} else {
+					//	logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
+					}
+					URL sourceURL = FileHelpers.StringToURL(sourceURLString);
+					if(sourceURL.getFile().endsWith(".ecore"))
+						ecoreURLs.add(sourceURL);
+				}
+				catch(IOException e){
+					//logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+src.getUrl()+ " "+e.getMessage(), 
+					//		KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(src));
+				}
+			}
+		}
+		return ecoreURLs;
+	}
+	
+	
 	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder) {
-		initializeforBuilding(kp, targetGeneratedSourceFolder, targetFolder);
+		initializeforBuilding(kp, targetFolder, targetFolder);
 		/*
 		 * if(packageEquivalences != null){ for (int i = 0; i <
 		 * packageEquivalences.length; i++) { PackageEquivalence equivalence =
@@ -726,11 +816,12 @@ public class KermetaCompiler {
 	}
 
 	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder) {
+		
 		GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SCALA_SUBFOLDER);
 		GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SUBFOLDER);
 		//If classes is modified, please impact it on method checkIfBuildIsNeeded on KPBuilder.java
 		//*************
-		GlobalConfiguration.outputBinFolder_$eq(targetFolder + "/classes");
+		GlobalConfiguration.outputBinFolder_$eq(targetScalaBinaryFolder);
 		//*************
 		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getGroup() + "." + kp.getName());
 		GlobalConfiguration.props_$eq(new Properties());
@@ -1131,7 +1222,8 @@ public class KermetaCompiler {
 		}
 		return result;
 	}
-
+	
+	
 	public void createJar(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder){
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		KermetaProject kp = ldr.loadKp(kpFileURL);

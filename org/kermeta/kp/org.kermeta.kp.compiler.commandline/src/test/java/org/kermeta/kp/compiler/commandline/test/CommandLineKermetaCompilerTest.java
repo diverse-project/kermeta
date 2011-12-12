@@ -47,8 +47,11 @@ public class CommandLineKermetaCompilerTest extends TestCase {
 		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.library.core", "2.0.1-BETA1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
 		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.model", "2.0.1-BETA1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
 		
-		
-		compiler.kp2bytecode(kpFile, targetFolder, targetFolder, targetFolder,additionalClassPath, false);
+		compiler.initializeTargetFolders(targetFolder, targetFolder,
+				targetFolder+"scala/", targetFolder+"classes/", 
+				targetFolder+"genmodel/", 
+				targetFolder+"java/", targetFolder+"emfclasses/", targetFolder+"resources/");
+		compiler.kp2bytecode(kpFile,additionalClassPath, false);
 				
 		assertTrue("Failure = " + compiler.errorMessage, !compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?

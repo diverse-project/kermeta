@@ -187,12 +187,11 @@ public class KpCompilerMojo extends AbstractMojo {
 	        		new StdioSimpleMessagingSystem(),
 	        		new SimpleLocalFileConverter(),
 	        		intermediateFilesRequired,
-	        		sourceOutputDirectory.toString(),
 	        		false,
 	        		checkingEnabled,
 	        		stopOnError);
-			
-			compiler.kp2bytecode(kpFileURL, targetDirectory.toString(), sourceOutputDirectory.toString(), resourceOutputDirectory.toString(), classPathList, generateKmOnly);
+			compiler.initializeTargetFolders(targetDirectory.toString(), sourceOutputDirectory.toString(), sourceOutputDirectory.toString(), targetDirectory.toString()+"/classes", targetDirectory.toString()+"/genmodel", sourceOutputDirectory.toString(), targetDirectory.toString()+"/classes", resourceOutputDirectory.toString());
+			compiler.kp2bytecode(kpFileURL,  classPathList, generateKmOnly);
 		if(compiler.hasFailed)	{
                     throw new MojoExecutionException(compiler.errorMessage);
                 }

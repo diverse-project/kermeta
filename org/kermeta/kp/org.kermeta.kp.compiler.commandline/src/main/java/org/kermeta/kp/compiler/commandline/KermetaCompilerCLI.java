@@ -52,7 +52,8 @@ public class KermetaCompilerCLI {
 		
 	private void run() throws IOException {
 		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
-		compiler.kp2bytecode(kpFile, outputFolder,outputFolder,outputFolder,new java.util.ArrayList<String>(), false);
+		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"scala/", outputFolder+"classes/", outputFolder+"genmode/", outputFolder+"java/", outputFolder+"emfclasses/", outputFolder+"resources/");
+		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), false);
 	}
 
 	public KermetaCompilerCLI(){
