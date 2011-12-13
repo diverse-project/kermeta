@@ -4,7 +4,7 @@ KermetaProject "language.sample.class2rdbms"
 	defaultMainClass ="class2RDBMS::Main"
 	defaultMainOperation = "main"
 	sources={ 
-		
+	
 		require  "${project.baseUri}/src/main/kmt/Class2RDBMS.kmt"  
 		require "${project.baseUri}/src/main/kmt/trace.kmt"
 		require "${project.baseUri}/src/main/ecore/ClassMM.ecore" 
@@ -15,7 +15,7 @@ KermetaProject "language.sample.class2rdbms"
 		require "${project.baseUri}/src/main/ecore/RDBMSMM.ecore" 
 		//srcQuery ="model/RDBMSMM.ecore" from "rdbmsmm.model"
 		require "${project.baseUri}/src/main/kmt/RDBMSMM_aspect.kmt" 
-	}	
+	}
 	dependencies={
 		// depends on library.core	
 		//dependency "language.model" URL="platform:/resource/org.kermeta.language.library.core"
@@ -24,8 +24,8 @@ KermetaProject "language.sample.class2rdbms"
 		//dependency "utils.helpers" URL="mvn:org.kermeta.utils/utils.helpers/2.0.1-SNAPSHOT" 
 		
 		//dependency "classmm.model" URL="mvn:org.kermeta.language.sample/language.sample.class2rdbms.classmm.model/2.0.1-SNAPSHOT" 
-		dependency "classmm.model" URLs="${project.baseUri}/lib/classmm.jar" byteCodeOnly
-		dependency "rdbmsmm.model" URLs="${project.baseUri}/lib/rdbmsmm.jar" byteCodeOnly	 
+		// dependency "classmm.model" URLs="${project.baseUri}/lib/classmm.jar" byteCodeOnly
+		//dependency "rdbmsmm.model" URLs="${project.baseUri}/lib/rdbmsmm.jar" byteCodeOnly	 
 	} 
 
  
