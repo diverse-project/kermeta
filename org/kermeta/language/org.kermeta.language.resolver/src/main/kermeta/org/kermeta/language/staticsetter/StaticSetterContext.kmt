@@ -37,7 +37,7 @@ class StaticSetterContext
 	 	result := self
 	 	currentModelingUnit := mu
 	 	waitingContext:=Sequence<ToBeResolvedLater>.new
-	 	verbose := true
+	 	verbose := false
 	end
 	
 	operation saveWaitingContext(current : Expression) : Void is do

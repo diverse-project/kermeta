@@ -3,6 +3,7 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 require "TypeAwareMergerContext.kmt"
 require "TypeRebind.kmt"
 using kermeta::standard
@@ -27,6 +28,7 @@ aspect class ClassDefinition {
 
 	method typeAwareMerge(context : TypeAwareMergerContext) is do
 		cleanDoublonForInheritedClasses(context)
+		addObjectInheritance(context)
 		mergeOperations(context)
 		mergeProperties(context)
 	end
@@ -61,6 +63,23 @@ aspect class ClassDefinition {
 			}
 		classesToRemove.each{c|superType.remove(c) containedType.remove(c)}
 	end
+	
+	/**
+	 * add inheritance to kermeta::standard::Object if not already inherited (directly or indirectly)
+	 */
+	operation addObjectInheritance(context : TypeAwareMergerContext) is do
+		if superType.size == 0 then
+			if getQualifiedName != "kermeta::standard::Object" then
+				var objectClass : Class init Class.new
+				objectClass.initializeFromAClassDefinition(
+					self.getRootContainer.asType(ModelingUnit).getTypeDefinitionByQualifiedName(
+						"kermeta::standard::Object").asType(ClassDefinition))
+				self.containedType.add(objectClass)
+				self.superType.add(objectClass)
+			end
+		end		
+	end
+	
 	operation mergeProperties(context: TypeAwareMergerContext) is do
 		var propsToMerge : Sequence<Property> init Sequence<Property>.new
 		propsToMerge.addAll(ownedAttribute)

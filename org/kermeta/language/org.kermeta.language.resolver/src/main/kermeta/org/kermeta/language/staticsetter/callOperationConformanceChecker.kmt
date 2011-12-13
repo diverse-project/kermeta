@@ -213,7 +213,9 @@ package structure{
 			inheritancePath:=findPathToType(typeExpected.typeDefinition.asType(ClassDefinition), Sequence<ClassDefinition>.new)
 			result:=void
 			if inheritancePath.isVoid then
-				context.errors.add(ResolverException.new.initialize("parameter not of the expected type", self))
+				
+				context.errors.add(ResolverException.new.initialize("Parameter not of the expected type. Provided type : "+
+				self.getQualifiedName + ", Expected type : "+typeExpected.getQualifiedName, self))
 			else
 				//the supertype of the current Class that is of the same level than typeExpected 
 				var selfSuperType : Class init inheritancePath.elementAt(0)
