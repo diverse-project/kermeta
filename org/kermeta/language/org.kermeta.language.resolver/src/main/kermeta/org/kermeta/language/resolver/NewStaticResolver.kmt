@@ -82,6 +82,7 @@ class FullStaticResolver
 	operation doTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		//init of context
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedModelingUnit)
+		ctxt.verbose := false
 		unresolvedModelingUnit.resolveStructureInheritance(ctxt)
 		result:=unresolvedModelingUnit
 	end

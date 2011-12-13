@@ -59,10 +59,13 @@ aspect class LanguageVisitorContext {
 	
 	attribute typedefTable : Hashtable<String, Sequence<MapEntryTypeDef>>
 	
+	attribute verbose : Boolean
+	
 	operation initialize(mu : ModelingUnit) : LanguageVisitorContext is do
 		errors := OrderedSet<ResolverException>.new
 		currentModelingUnit:=mu
 		//TODO initialize the table of Type definitions 
+	 	verbose := false
 		result := self
 	end
 	
