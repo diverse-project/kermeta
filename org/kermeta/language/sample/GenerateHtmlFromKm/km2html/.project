@@ -5,6 +5,11 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>fr.irisa.triskell.kermeta.kpm.kpmBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>

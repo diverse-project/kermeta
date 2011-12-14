@@ -1,8 +1,17 @@
-	using kermeta::standard
-	using kermeta
-	using kermeta::io::StdIO => stdio
-	using org::kermeta::language::structure
-	using kermeta::io
+using kermeta::standard
+using kermeta
+using kermeta::io::StdIO => stdio
+using org::kermeta::language::structure
+using kermeta::io
+using kermeta::utils::FileIO
+using kermeta
+using kermeta::standard
+using org::kermeta::language::structure
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::utils
+using kermeta::io
+	
 	
 
 package org::kermeta::language::structure{
@@ -10,31 +19,156 @@ package org::kermeta::language::structure{
 
 
 aspect class ModelingUnit {
-
-
+	//attribute defaultPath : String init "file:/C:/CodeCamp/Workspace/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
 	operation generateHtml( baseFolder : String) : Void is do
 		stdio.writeln ("Html file generated Modeling Unit")
+		stdio.writeln ("sfs" + self.name)
 		var path : String init baseFolder + "/" + self.name + ".html"
-		var contents : String init self.createHtml ()
+		var contents : String init self.createHtml (baseFolder)
 		
+		//create Toc page for ModelingUnit page
+		self.createTocpage(baseFolder)
 		// Create html file
 		FileIO.writeTextFile(path, contents)
 		
 	end 
 	
 	/** Create an html page for Modeling unit */
-	operation createHtml () : String is do
+	operation createHtml (baseFolder:String) : String is do
 		var html : String init "<html><head><title>"
 		html:= html + "Modeling Unit : " + self.name 
-		html := html + "</title></head><body> <p><div> paragraph </div></p> </body></html>"
+		stdio.writeln (self.name)
+		
+		html := html + "</title></head>"+
+		"<frameset cols=20%,80%>" +
+				"<frame src=toc.html name= &quot; TOC &quot; noresize>" +
+				"<frame src=contents.html name= &quot; MODELDoc &quot; noresize>" +
+			"</frameset>" +
+		"<body> <p><div> paragraph </div></p> </body></html>"
 		result := html
 	end
-
+	
+	
+	/**create Toc page for the ModelingUnit page*/
+	operation createTocpage(baseFolder:String) : Void is do
+		var path : String init baseFolder + "/" + "Toc.html"
+		var contents : String init String.new
+		var links : String init String.new
+		
+		//create links list of the packages, should add calls to the operations for creating the pages for packages
+		packages.each{pack | links := links + "<a href:= &quot;" + pack.name + ".html&quot;>" + pack.name + "</a>" + "<br>" 
+		pack.generateHtml(baseFolder)}
+		
+		
+		//set package list of the Toc page
+		//if links != "" then
+		contents := contents +
+			"<html>" +
+			"<body>" + "<h3>Packages: " + "</h3>" +
+				"<center>" +
+					links
+				"</center>" +
+			"</body>" +
+		"</html>"
+		//end
+		links := ""
+		
+		//create links list of the requires 
+		requires.each{r | links := links + "<a href:=" + r.uri + ".html" + "target = &quot; MODELDoc &quot;>" + r.uri + "</a>" + "<br/>"}
+		//set package list of the Toc page
+		//if links != "" then
+		contents := contents +
+			"<html>" +
+			"<body>" + "<h3>Requires: " + "</h3>" +
+				"<center>" +
+					links
+				"</center>" +
+			"</body>" +
+		"</html>"
+		//end
+		links := ""
+		
+		//create links list of the TypeDefinition
+		ownedTypeDefinition.each{type | links := links + "<a href:=" + type.name + ".html" + "target = &quot; MODELDoc &quot;>" + type.name + "</a>" + "<br/>"}
+		//set TypeDefinitionContainner list of the Toc page
+		//if links !="" then
+		contents := contents +
+			"<html>" +
+			"<body>" + "<h3>Requires: " + "</h3>" +
+				"<center>" +
+					links
+				"</center>" +
+			"</body>" +
+		"</html>"
+		//end
+		links := ""
+		
+		
+		FileIO.writeTextFile(path, contents)
+		 
+	end
+	
+	
 }
 
+aspect class Package{
+	operation generateHtml(baseFolder:String) : Void is do
+		stdio.writeln ("Html file generated Package")
+		stdio.writeln ("sfs" + self.name)
+		var path : String init baseFolder + "/" + self.name + ".html"
+		
+		//create TypeDefinition page here
+		
+		var contents : String init self.createHtml (baseFolder)
+		// Create html file
+		FileIO.writeTextFile(path, contents)
+	
+	end
+	
+	/** Create an html page for Package */
+	operation createHtml (baseFolder:String) : String is do
+		var links: String init String.new
+		var contents : String init String.new
+		var html : String init "<html><head><title>"
+		html:= html + "Package : " + self.name 
+		stdio.writeln ("create the package page of" + self.name)
+		html := html + "</title></head>"
+
+		//create subpackage list of the Package
+		nestedPackage.each{NestedP | links := links + "<a href:=" + NestedP.name + ".html" + "target = &quot; MODELDoc &quot;>" + NestedP.name + "</a>" + "<br/>"}
+		//set subpackage list of the Package
+		//if html != "" then
+			html := 
+				html + "<h3>Nested packages: " + "</h3>" +
+					"<center>" +
+						links +
+					"</center>" 
+		//end		
+		links := ""
+		
+		//create links list of the TypeDefinition
+		ownedTypeDefinition.each{type | links := links + "<a href:=" + type.name + ".html" + "target = &quot; MODELDoc &quot;>" + type.name + "</a>" + "<br/>"}
+		//set TypeDefinitionContainner list of the Toc page
+		//if html != "" then
+			html := html +   
+				"<html>" +
+				"<body>" + "<h3>Type definitions: " + "</h3>" +
+					"<center>" +
+						links
+					"</center>" +
+				"</body>" +
+			"</html>"
+		//end
+		links := ""
+		
+		
+		html := html + "</html>"
+		result := html
+	end
+	 
+}
 /*
 aspect class Package {
-
 	operation generateHtml() : Void is do
 		stdio.writeln ("Html file generated Package")
 		

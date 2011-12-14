@@ -2,14 +2,22 @@ using kermeta
 using kermeta::standard
 using org::kermeta::language::structure
 using kermeta::emfpersistence
-
+require "helpers/EcoreUtil.kmt"
+require "helpers/ecore_behavior.kmt"
+require "helpers/EcoreDocHelper.kmt"
+using kermeta::standard
+using kermeta::utils
+using kermeta::io
+using ecore
+using EcoreUtil
+using EcoreDocHelper
 
 package mainpackage{
 	class MainClass
 	{
 		//@main ""
 		operation mainOperation() : Void is do 
-			var path : String init "file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
+			var path : String init "file:/C:/CodeCamp/Workspace/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
 			//var path : String init "platform:/resource/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
 			var repository : ResourceSet init ResourceSet.new
 			var resource : Resource init repository.createResource(path)
@@ -25,10 +33,13 @@ package mainpackage{
 	           if (next.isInstanceOf(ModelingUnit)) then                 
 	           		var mu : ModelingUnit
 	           		mu ?= next
-	           		mu.generateHtml("file:/E:/W/workspaceK2CVL/runtime-EclipseApplication/KermetaDoc/doc/")
+	           		mu.generateHtml("file:/C:/CodeCamp/Workspace/KermetaDoc/")
+	           		
 	           end
 	       end
 			//mu.generateHtml()
 		end
+		
+		
 	}
 }
