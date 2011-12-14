@@ -77,12 +77,13 @@ public class GenModelHelper {
         return (path.delete());
     }
 
-    public void createGenModel(File ecore, File genmodel, File sourcePath, Boolean clearOutputDir) {
-    	List<File> ecoreFiles = new ArrayList<File>();
+    public void createGenModel(java.net.URI ecore, File genmodel, File sourcePath, Boolean clearOutputDir) {
+    	List<java.net.URI> ecoreFiles = new ArrayList<java.net.URI>();
+    	ecoreFiles.add(ecore);
     	createGenModel(ecoreFiles, sourcePath, sourcePath, clearOutputDir);
     	
     }
-    public void createGenModel(List<File> ecoreFiles, File genmodel, File sourcePath, Boolean clearOutputDir) {
+    public void createGenModel(List<java.net.URI> ecoreFiles, File genmodel, File sourcePath, Boolean clearOutputDir) {
     	// TODO see why we don't use org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil ?
     	
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().
@@ -116,11 +117,11 @@ public class GenModelHelper {
             genModelModel = (GenModel) resourceGenModel.getContents().get(0);
             genModelModel.setModelDirectory(modelDirectory);
             ArrayList<EPackage> ePackages = new ArrayList<EPackage>();
-            for(File ecoreFile : ecoreFiles){
-        		URI ecoreURI = URI.createFileURI(ecoreFile.getAbsolutePath());
+            for(java.net.URI ecoreFile : ecoreFiles){
+        		URI ecoreURI = URI.createFileURI(ecoreFile.toString());
     	        Resource resource = resourceSet.getResource(ecoreURI, true);
     	        ePackages.add((EPackage) resource.getContents().get(0));	// TODO maybe think about ecore models with multiple root packages ?
-                genModelModel.getForeignModel().add(ecoreFile.getAbsolutePath());
+                genModelModel.getForeignModel().add(ecoreFile.toString());
             }
             genModelModel.initialize(ePackages);
         } else {
@@ -141,11 +142,11 @@ public class GenModelHelper {
             genModelModel.setModelDirectory(modelDirectory);
 
             ArrayList<EPackage> ePackages = new ArrayList<EPackage>();
-            for(File ecoreFile : ecoreFiles){
-        		URI ecoreURI = URI.createFileURI(ecoreFile.getAbsolutePath());
+            for(java.net.URI ecoreFile : ecoreFiles){
+        		URI ecoreURI = org.eclipse.emf.common.util.URI.createURI(ecoreFile.toString());
     	        Resource resource = resourceSet.getResource(ecoreURI, true);
     	        ePackages.add((EPackage) resource.getContents().get(0));	// TODO maybe think about ecore models with multiple root packages ?
-                genModelModel.getForeignModel().add(ecoreFile.getAbsolutePath());
+                genModelModel.getForeignModel().add(ecoreFile.toString());
             }
             genModelModel.initialize(ePackages);
             genModelModel.setModelName(genModelURI.trimFileExtension().lastSegment());

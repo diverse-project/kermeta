@@ -88,9 +88,14 @@ public class Ecore2Bytecode {
 			// TODO EMF isn't thread safe, cannot even run the same transfo in parallel ! => singleThreadExecutor
 			genmodelFutures.add(singleThreadExector.submit(new CallableGenmodelGenerator(logger, inputEcoreFile, genmodelFile, generatedSourcePath)));
 		}*/
-		ArrayList<File> inputEcoreFiles = new ArrayList<File>();
+		ArrayList<java.net.URI> inputEcoreFiles = new ArrayList<java.net.URI>();
 		for(URL ecoreURL : ecoreForGenerationURLs){
-			inputEcoreFiles.add(new File(ecoreURL.getFile()));
+			try{
+				inputEcoreFiles.add(ecoreURL.toURI());
+			}
+			catch(java.net.URISyntaxException e){
+				logger.error(e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
+			}
 		}
 		File genmodelFile = new File(targetGenmodelFolder+File.separator+kp.getName()+"internalEcores.genmodel");
 		File generatedSourcePath = new File(targetGeneratedJavaFolder);

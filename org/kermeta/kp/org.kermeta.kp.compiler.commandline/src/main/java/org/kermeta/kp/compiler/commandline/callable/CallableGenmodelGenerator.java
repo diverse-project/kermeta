@@ -18,12 +18,12 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class CallableGenmodelGenerator implements Callable<Boolean> {
 	public MessagingSystem logger;
-	public List<File> inputEcoreFiles;
+	public List<java.net.URI> inputEcoreFiles;
 	public File genmodelFile;
 	public File generatedSourcePath;
 	public String eclipseProject;
 	
-	public CallableGenmodelGenerator(MessagingSystem logger, List<File> inputEcoreFiles, File genmodelFile, File generatedSourcePath, String eclipseProject) {
+	public CallableGenmodelGenerator(MessagingSystem logger, List<java.net.URI> inputEcoreFiles, File genmodelFile, File generatedSourcePath, String eclipseProject) {
 		super();
 		this.logger = logger;
 		this.generatedSourcePath = generatedSourcePath;
