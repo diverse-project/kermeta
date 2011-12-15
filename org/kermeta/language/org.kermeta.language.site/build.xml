@@ -181,6 +181,9 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/utils/utils.systemservices.eclipse/${kermeta.language.version}/utils.systemservices.eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/emf/emf.genmodel/${kermeta.language.version}/emf.genmodel-${kermeta.language.version}.jar" 
+					dest="${source.bundles}"
+					usetimestamp="true"/>
 		
 		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.model/${kermeta.language.version}/kp.model-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
