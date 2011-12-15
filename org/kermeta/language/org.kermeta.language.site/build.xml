@@ -147,6 +147,9 @@
 		<get src="${kermeta.maven.repsitory}/fr/irisa/triskell/kermeta/kermeta.model/${k1.model.version}/kermeta.model-${k1.model.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_3_0/${emftext.commons.version}/commons.antlr3_3_0-${emftext.commons.version}.jar" 
+					dest="${source.bundles}"
+					usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/scala-compiler/${k1.compiler.version}/scala-compiler-${k1.compiler.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
