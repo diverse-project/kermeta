@@ -1,0 +1,12 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			var x : Collection<String> init Sequence<String>.new
+			x.asType(Sequence<String>)
+		end
+	}
+}
