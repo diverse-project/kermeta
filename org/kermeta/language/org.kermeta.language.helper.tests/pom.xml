@@ -6,12 +6,13 @@
 		<version>2.0.1-BETA3</version>
 	</parent>
 	<!-- workaround bug apt !? -->
-	<groupId>org.kermeta.language</groupId> 
+	<!-- <groupId>org.kermeta.language</groupId> 
 	<version>2.0.1-BETA3</version> 
 	<properties> 
 		<kermeta.version>2.0.1-SNAPSHOT</kermeta.version> 
 		<art2.version>2.2.1-beta2</art2.version> 
 	</properties>
+	-->
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>language.helper.tests</artifactId>
 	<packaging>jar</packaging>
