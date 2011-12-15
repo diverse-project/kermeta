@@ -1,0 +1,19 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			//var o : String init ""
+			var o : Object init kermeta::standard::Sequence<Object>.new
+			
+			if (o.isInstanceOf(kermeta::standard::Sequence<Object>))
+			then 
+				stdio.writeln("org.kermeta.language.sample.list  : o is a sequence" )
+			else
+				stdio.writeln("org.kermeta.language.sample.list  : o is not a sequence" )
+			end
+		end
+	}
+}
