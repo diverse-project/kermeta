@@ -6,7 +6,7 @@ package mainPackage{
 	{
 		operation mainOperation() : Void is do 
 			var x : Collection<String> init Sequence<String>.new
-			x.asType(Sequence<String>)
+			x.asType(Sequence)
 		end
 	}
 }
