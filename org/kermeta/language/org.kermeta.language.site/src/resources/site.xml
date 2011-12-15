@@ -7,5 +7,5 @@
       <category name="Kermeta2 Tools"/>
    </feature>
    <category-def name="Kermeta2Language" label="Kermeta 2 language"/>
-   <category-def name="Kermeta2 Tools" label="Kermeta2 Tools"/>
+   <category-def name="Kermeta2 Tools" label="Kermeta 2 Tools"/>
 </site>
