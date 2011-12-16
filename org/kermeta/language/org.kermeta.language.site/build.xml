@@ -20,7 +20,7 @@
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
 	<property name="deploy.server" value="kermeta.org"/>
 	<property name="deploy.user" value="web-kermeta"/>
-	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2_snapshot/update"/>
+	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2/update"/>
 	
 
 	<property name="kermeta.maven.repsitory" value="http://maven.irisa.fr/artifactory/repo"/>
@@ -152,13 +152,13 @@
 		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_3_0/${emftext.commons.version}/commons.antlr3_3_0-${emftext.commons.version}.jar" 
 					dest="${source.bundles}"
 					usetimestamp="true"/>
-		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr/${extra.antlr.version}/extra.antlr-${extra.antlr.version}.jar" 
+	<!--	<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr/${extra.antlr.version}/extra.antlr-${extra.antlr.version}.jar" 
 					dest="${source.bundles}"
 					usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr.stringtemplate/${extra.antlr.stringtemplate.version}/extra.antlr.stringtemplate-${extra.antlr.stringtemplate.version}.jar" 
 							dest="${source.bundles}"
 							usetimestamp="true"/>
-		
+		-->
 		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/scala-compiler/${k1.compiler.version}/scala-compiler-${k1.compiler.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
