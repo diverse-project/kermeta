@@ -32,6 +32,8 @@
 	<property name="traceability.version" value="2.0.2-BETA1"/>
 	<property name="emftext.commons.version" value="1.0.0"/>
 	<property name="scala.version" value="2.9.0-1"/>
+	<property name="extra.antlr.version" value="2.7.7"/>
+	<property name="extra.antlr.stringtemplate.version" value="3.7.1"/>
 	
 	<target name="all" depends="clean_result, deploy">
 	</target>
@@ -150,6 +152,13 @@
 		<get src="${kermeta.maven.repsitory}/org/emftext/commons/commons.antlr3_3_0/${emftext.commons.version}/commons.antlr3_3_0-${emftext.commons.version}.jar" 
 					dest="${source.bundles}"
 					usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr/${extra.antlr.version}/extra.antlr-${extra.antlr.version}.jar" 
+					dest="${source.bundles}"
+					usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr.stringtemplate/${extra.antlr.stringtemplate.version}/extra.antlr-${extra.antlr.stringtemplate.version}.jar" 
+							dest="${source.bundles}"
+							usetimestamp="true"/>
+		
 		<get src="${kermeta.maven.repsitory}/org/kermeta/scala/scala-compiler/${k1.compiler.version}/scala-compiler-${k1.compiler.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
