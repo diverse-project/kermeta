@@ -28,7 +28,7 @@ public class CommandLineTestSuite extends TestSuite {
 		
 		for(File file : files) {
 			System.out.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
-			suite.addTest(new CommandLineKermetaCompilerTest("file:/"+file.getPath(), "file:/"+file.getParent()));
+			suite.addTest(new CommandLineKermetaCompilerTest(file.getPath(), file.getParent()+System.getProperty("file.separator")));
 		}
 		
         return suite;

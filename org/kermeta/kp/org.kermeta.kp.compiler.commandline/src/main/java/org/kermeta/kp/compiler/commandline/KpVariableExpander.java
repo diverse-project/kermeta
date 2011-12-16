@@ -76,6 +76,9 @@ public class KpVariableExpander {
 			for(String dependencyURLWithVariable : dep.getUrl()){
 				String dependencyURL = this.expandSimpleVariables(dependencyURLWithVariable);
 				// try to convert it into a file URI
+				if(fileSystemConverter == null){
+					logger.error("fileSystemConverter not correctly initialized", KermetaCompiler.LOG_MESSAGE_GROUP, new Exception());
+				}
 				java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURL));
 				if(fileURI != null){					
 					dependencyURL = fileURI.toString();

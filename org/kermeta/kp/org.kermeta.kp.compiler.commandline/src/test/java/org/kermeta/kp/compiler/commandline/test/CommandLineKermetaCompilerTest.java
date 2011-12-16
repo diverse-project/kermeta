@@ -40,18 +40,22 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         // Phase 1 : compiles without crashing
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
                 
+        String currentKermetaVersion = "2.0.1-SNAPSHOT";
+        String mavenRepository = "http://maven.irisa.fr/artifactory/repo";
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
         
 		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
 		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
-		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.library.core", "2.0.1-BETA1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
-		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.model", "2.0.1-BETA1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.library.core", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.language", "language.model", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.utils", "utils.helpers", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		additionalClassPath.add(AetherUtil.resolveDeployUnit("org.kermeta.utils", "utils.systemservices.api", currentKermetaVersion, mavenRepository).getAbsolutePath());
 		
 		compiler.initializeTargetFolders(targetFolder, targetFolder,
 				targetFolder+"scala/", targetFolder+"classes/", 
 				targetFolder+"genmodel/", 
 				targetFolder+"java/", targetFolder+"emfclasses/", targetFolder+"resources/");
-		compiler.kp2bytecode(kpFile,additionalClassPath, false);
+		compiler.kp2bytecode("file:/"+kpFile,additionalClassPath, false);
 				
 		assertTrue("Failure = " + compiler.errorMessage, !compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?

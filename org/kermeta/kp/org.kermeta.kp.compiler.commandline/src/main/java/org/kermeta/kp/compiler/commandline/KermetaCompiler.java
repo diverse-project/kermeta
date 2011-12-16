@@ -135,6 +135,11 @@ public class KermetaCompiler {
 	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, LocalFileConverter uriPhysicalConverter, Boolean willRunInEclipse) {
 		super();
 		this.logger = logger;
+		this.fileSystemConverter = uriPhysicalConverter;
+		this.saveIntermediateFiles = false;
+		this.runInEclipse = willRunInEclipse;
+		this.checkingEnabled = true;
+		this.stopOnError = true;
 		if (registerProtocols) {
 			registerMVNUrlHandler();
 		}
