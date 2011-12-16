@@ -1,14 +1,15 @@
-KermetaProject :"language.sample.arab2roman" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language.sample" 
-defaultMainClass :"root_package::Main"
-defaultMainOperation : "main"
-{ 
+KermetaProject "language.sample.arab2roman" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="org.kermeta.language.sample" 
+defaultMainClass="root_package::Main"
+defaultMainOperation="main"
+sources={ 
 	  
-	source = "${project.baseUri}/src/main/kmt/arab2roman.kmt" 
-	
+	require "${project.baseUri}/src/main/kmt/arab2roman.kmt" 
+}
+dependencies={	
 	// depends on library.core	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
 		 
 } 
 
