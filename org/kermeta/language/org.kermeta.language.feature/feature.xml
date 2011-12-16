@@ -6,9 +6,9 @@
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
-      Kermeta 2 Studio : a DSL and a workbench dedicated to metamodel engineering. 
-      Kermeta allows to weave behavior into metamodels.
-      "Breathe life into your metamodels" 
+Kermeta 2 Studio : a DSL and a workbench dedicated to metamodel engineering. 
+Kermeta allows to weave behavior into metamodels.
+"Breathe life into your metamodels" 
    </description>
 
    <copyright>
