@@ -440,7 +440,9 @@ package behavior {
 				end
 			end
 		end
-	
+		/**
+			check if the current unresolved call should be resolved as a CallTypeLiteral with the type being a TypeVariable. Return void if not the case
+		*/
 		operation resolveCallToTypeVariable(context : StaticSetterContext) : CallTypeLiteral is do
 			if target.isVoid then
 				var typeVar :TypeVariable 
@@ -465,7 +467,9 @@ package behavior {
 				result:=void
 			end
 		end
-		
+		/**
+			check if the current unresolved call should be resolved as a CallTypeLiteral. Return void if not the case
+		*/
 		operation resolveCallToTypeLiteral(context : StaticSetterContext) : CallTypeLiteral is do
 			if target.isVoid then
 				var typeDef : TypeDefinition 
@@ -480,6 +484,32 @@ package behavior {
 						callTypeLiteral.typeref.type := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(typeDef.asType(ClassDefinition))
 						callTypeLiteral.typeref.containedType.add(callTypeLiteral.typeref.type)				
 						// TODO deal with generics
+						if typeDef.asType(ClassDefinition).typeParameter.isEmpty.~not() then
+							
+							if generics.size()==typeDef.asType(ClassDefinition).typeParameter.size() then
+								
+								from var i : Integer init 0
+								until i==generics.size
+								loop
+								
+									var typeVar : TypeVariable init typeDef.asType(ClassDefinition).typeParameter.elementAt(i)
+									var varType : Type init self.generics.elementAt(i)
+									var tvb : TypeVariableBinding init TypeVariableBinding.new
+									tvb.variable:=typeVar
+									tvb.type:=varType
+									if varType.isInstanceOf(DataType).~not() then
+										tvb.containedType.add(varType)
+									end
+									callTypeLiteral.typeref.type.asType(Class).typeParamBinding.add(tvb)
+									
+									i:=i+1
+								end
+							
+							else
+								context.errors.add(ResolverException.new.initialize("The classDefinition "+typeDef.getQualifiedName()+"must have "+typeDef.asType(ClassDefinition).typeParameter.size().toString()+" type parameters. Given :"+generics.size().toString() , self))
+							end
+						end
+						
 										
 						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
 					end
@@ -489,6 +519,8 @@ package behavior {
 										
 						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Enumeration"))
 					end
+					//TODO deal with function types
+					
 					//	this is the CallTypeLiteral that must replace this UnresolvedCall
 					result := callTypeLiteral
 				else
