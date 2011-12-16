@@ -155,7 +155,7 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr/${extra.antlr.version}/extra.antlr-${extra.antlr.version}.jar" 
 					dest="${source.bundles}"
 					usetimestamp="true"/>
-		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr.stringtemplate/${extra.antlr.stringtemplate.version}/extra.antlr-${extra.antlr.stringtemplate.version}.jar" 
+		<get src="${kermeta.maven.repsitory}/org/kermeta/extra/extra.antlr.stringtemplate/${extra.antlr.stringtemplate.version}/extra.antlr.stringtemplate-${extra.antlr.stringtemplate.version}.jar" 
 							dest="${source.bundles}"
 							usetimestamp="true"/>
 		
