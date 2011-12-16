@@ -110,10 +110,7 @@ public class Ecore2Bytecode {
 	public Future<Boolean> ecorejava2bytecode(Future<Boolean> genmodelFuture, ExecutorService threadExector){
 		if(genmodelFuture == null) return null;
 		
-		if(compiler == null){
-			logger.error("Eclipse run using a JRE instead of JDK, cannot compile generated emf java code.\n"+
-		"support for external JDK declaration not implemented yet, please run eclipse using a JDK (-vm option in eclipse.ini)", KermetaCompiler.LOG_MESSAGE_GROUP);
-		}
+		
 		
 		// join the previously launched ecore2java()
 		try {
@@ -126,6 +123,12 @@ public class Ecore2Bytecode {
 		}
 		logger.progress(getMainProgressGroup(), "Java code has been generated from "+ecoreForGenerationURLs.size()+" ecore(s)", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
 
+		if(compiler == null){
+			logger.error("Eclipse run using a JRE instead of JDK, cannot compile generated emf java code.\n"+
+		"support for external JDK declaration not implemented yet, please run eclipse using a JDK (-vm option in eclipse.ini)", KermetaCompiler.LOG_MESSAGE_GROUP);
+			return null;
+		}
+		
 		// launch javac		
 	    Iterable<? extends JavaFileObject> compilationUnits =
 	            fileManager.getJavaFileObjectsFromFiles(getJavaSources(new File(targetGeneratedJavaFolder)));
