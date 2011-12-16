@@ -22,9 +22,9 @@
    </url>
 
    <requires>
-      <import feature="org.emftext.commons.antlr3_3_0"/>
-      <import feature="org.emftext.sdk"/>
-   </requires>
+      <import plugin="org.emftext.commons.antlr3_3_0"/>
+      <!--<import feature="org.emftext.sdk"/>-->
+   </requires> 
 
    <plugin
          id="fr.irisa.triskell.cache.utilities"
