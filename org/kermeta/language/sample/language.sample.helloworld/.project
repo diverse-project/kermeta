@@ -5,14 +5,8 @@
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.kermeta.kp.editor.builder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>
-		<nature>org.kermeta.kp.editor.nature</nature>
 	</natures>
 </projectDescription>
