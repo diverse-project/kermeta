@@ -475,7 +475,8 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
     def isLowerOrEqual(other : Integer) :Boolean={return  value<=other.intValue}
     def toInt() : Int = {return value}
 	
-    def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
+//    def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
+    def times(func : java.lang.Integer => Unit):Unit ={ for(i <- 0 until value){func(i)} }
     override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
     override def getValue():Object = new java.lang.Integer(value)		
     //def isNotEqual(other : Any) :Boolean = this.equals(other)
