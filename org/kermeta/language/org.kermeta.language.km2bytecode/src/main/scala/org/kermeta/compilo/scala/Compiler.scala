@@ -13,7 +13,6 @@ import _root_.java.util.concurrent.TimeUnit
 import _root_.java.util.concurrent.Executors
 import _root_.java.io.File
 import org.k2.compilo.scala.loader.LoadModelHelper
-import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 
 class Compiler extends LogAspect {
 
@@ -24,13 +23,11 @@ class Compiler extends LogAspect {
         Util.cleanFolder(GlobalConfiguration.outputProject + File.separator + "target")
         /* Init Factory Step */
         var t: LoadModelHelper = new LoadModelHelper()
-        BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
-        StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
         Util.threadExecutor = Executors.newCachedThreadPool() /* Init new Thread Pool */
 
         /* Loading Model KM Step */
         var startTime = System.currentTimeMillis
-        var v : IVisitable = t.loadKM(url).asInstanceOf[IVisitable] /* Load KM Model */
+        var v : IVisitable = new AcceptableModelingUnit(t.loadKM(url).asInstanceOf[ModelingUnit]) /* Load KM Model */
 
         //println(GlobalConfiguration.outputFolder)
         var fi  = new File(url);

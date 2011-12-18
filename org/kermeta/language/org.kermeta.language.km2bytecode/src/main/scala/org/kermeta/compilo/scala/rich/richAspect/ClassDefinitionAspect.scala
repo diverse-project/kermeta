@@ -7,32 +7,47 @@ import org.eclipse.emf.common.util.EList
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala._
 import org.kermeta.language._
-import org.kermeta.language.structure._
+import org.kermeta.language.structure._ 
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
-import org.kermeta.compilo.scala.rich.RichAspectImplicit._
-import _root_.java.util.ArrayList
+import java.util.ArrayList
 
-trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
+trait ClassDefinitionAspect extends ObjectVisitor{
 	
-    override def accept(visitor : IVisitor){
-        visitor.visit(this)
-    }
+
 	
-    override def generateScalaCode(res : StringBuilder) : Unit = {
+    /*class BAspect(wrappee:test.B) extends AAspect(wrappee) {
+	
+	override def foo() : B ={
+	  return null;
+	}
+   
+	 def fuu() : B ={
+	  return null;
+	} 
+    
+	 override  def getWrappee() : test.B = {
+	  return wrappee;
+	} 
+}*/
+    
+    
+     def visitClassDefinition(thi: ClassDefinition,res : StringBuilder) : Unit = {
         res.append("import "+ "_root_."+ GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName +"._\n")
-        if (Util.hasEcoreTag(this)){
+        if (Util.hasEcoreTag(thi)){
             res.append("trait ")
-            res.append(this.getName())
+            res.append(thi.getName())
             res.append("Aspect")
-            this.generateParamerterClass(res)
-            if (this.getSuperType.size == 0){
+            generateParamerterClass(thi,res)
+            if (thi.getSuperType.size == 0){
               res append " extends "
-               // res append Util.protectScalaKeyword(/*org.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(*/this.getQualifiedNameCompilo())
-                 res.append("_root_.k2.standard.KermetaObject")
+                res.append("_root_.k2.standard.KermetaObject")
+
+              //res append Util.protectScalaKeyword(/*k2.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(*/getQualifiedNameCompilo(thi))
+                
             } else {
                 var i = 0;
-                this.getSuperType.foreach(superC => {
+                thi.getSuperType.foreach(superC => {
                         if (i==0) {
                             res.append(" extends ")
                         } else {
@@ -41,89 +56,82 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
 					
                         var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						
-                       res.append(Util.protectScalaKeyword(Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition)))
-                        generateBindingParamerterClass(superC.asInstanceOf[Class],res)
+                       res.append(Util.protectScalaKeyword(getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition)))
+                        generateBindingParamerterClass(thi,superC.asInstanceOf[Class],res)
                         i=i+1
                     })
 				
-               // res append " with "+ /*org.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(*/this.getQualifiedNameCompilo()
+               // res append " with "+ /*org.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(*/getQualifiedNameCompilo(thi)
             }
             
             var param : StringBuilder = new  StringBuilder
-            this.generateParamerterClass(param)
-
-              res append " with "
-               // res append Util.protectScalaKeyword(/*org.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(*/this.getQualifiedNameCompilo())
-
-            if (!Util.hasEcoreFromAPITag(this)){
-                res append Util.protectScalaKeyword("_root_."+Util.getQualifiedNamedBase(this) + param.toString)
+            generateParamerterClass(thi,param)
+            if (!Util.hasEcoreFromAPITag(thi)){                
+                res append " with "+Util.protectScalaKeyword("_root_."+getQualifiedNamedBase(thi) + param.toString)                
             }
             else
-                res.append(
-                  Util.protectScalaKeyword("_root_."+this.eContainer.asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo) + ".itf."+ this.getName() +"Itf" + param.toString)
+                res.append(" with "+Util.protectScalaKeyword("_root_."+getQualifiedNameCompilo(thi.eContainer)) + ".itf."+ thi.getName() +"Itf" + param.toString)
 	    
             res.append("{\n")
 
 				
 				
-            this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
-            this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op) || op.getBody !=null) foreach(op=> op.generateScalaCode(res))
-            this.generateInvariants(res)
-            this.generategetQualifiedName(res)
+            thi.getOwnedAttribute foreach(a=> visit(a,res))
+            thi.getOwnedOperation filter(op=> !Util.hasEcoreTag(op) || op.getBody !=null) foreach(op=> visit(op,res))
+            this.generateInvariants(thi,res)
+            this.generategetQualifiedName(thi,res)
             res.append("}\n")
 
         }else{
             res.append("trait ")
-            res.append(this.getName())
+            res.append(thi.getName())
             res.append("Aspect")
-            this.generateParamerterClass(res)
+            generateParamerterClass(thi,res)
 
-            if (this.getSuperType.size == 0){
+            if (thi.getSuperType.size == 0){
                 //TODO extends a superClassAspect
             }else{
                 res.append(" ")
 				
                 var i = 0;
-                this.getSuperType.foreach(superC => {
+                thi.getSuperType.foreach(superC => {
                         if (i==0) {
                             res.append(" extends ")
                         } else {
                             res.append(" with ")
                         }
 
-            res.append("_root_."+Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
-                        generateBindingParamerterClass(superC.asInstanceOf[Class],res)
+            res.append("_root_."+getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
+                        generateBindingParamerterClass(thi,superC.asInstanceOf[Class],res)
                         i=i+1
                     })
             }
-            res append " with "+Util.protectScalaKeyword("_root_."+Util.getQualifiedNamedBase(this))
-            this.generateParamerterClass(res)
-
+            res append " with "+Util.protectScalaKeyword("_root_."+getQualifiedNamedBase(thi))
             res.append("{\n")
 
-            this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
-            this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
+            thi.getOwnedAttribute foreach(a=> visit(a,res))
+            thi.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> visit(op,res))
             
 				
             /* Generate Invariants */
-            this.generateInvariants(res)
-            this.generategetQualifiedName(res)
+            this.generateInvariants(thi,res)
+            this.generategetQualifiedName(thi,res)
       
 
             res.append("}\n")
-        } 
+        }
     }
 
 
-    def generategetQualifiedName(res:StringBuilder) = {
-        var qualifiedName = ReflexivityLoader.qualifiedName(this)
-        var template = new StringTemplate("override def getMetaClass():org.kermeta.language.structure.Class={\n var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure."+GlobalConfiguration.factoryName+".createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+    def generategetQualifiedName(thi:ClassDefinition,res:StringBuilder) = {
+        var qualifiedName = ReflexivityLoader.qualifiedName(thi)
+        var template = new StringTemplate("override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure."+GlobalConfiguration.factoryName+".createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
         template.setAttribute("ClassName", qualifiedName)
         res.append(template.toString)
     }
 
-    def generateInvariants(res1:StringBuilder) = {
-        var listInv = this.getAllInvariants
+    def generateInvariants(thi:ClassDefinition,res1:StringBuilder) = {
+        var listInv = this.getAllInvariants(thi)
 
         if(listInv.size() > 0){
             res1.append("override def checkInvariants(){\n")
@@ -133,7 +141,7 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
                     if(i != 0) res1.append(",")
                     res1.append("(")
                     res1.append("\""+a.getName+"\" -> (()=>")
-                    a.generateScalaCode(res1)
+                    visit(a,res1)
                     res1.append("))")
                     i = i + 1
                 })
@@ -156,7 +164,7 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
                     if(i != 0) res1.append(",")
                     res1.append("(")
                     res1.append("\""+a.getName+"\" -> (()=>")
-                    a.generateScalaCode(res1)
+                    visit(a,res1)
                     res1.append("))")
                     i = i + 1
                 })
@@ -179,7 +187,7 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
                     if(i != 0) res1.append(",")
                     res1.append("(")
                     res1.append("\""+a.getName+"\" -> (()=>")
-                    a.generateScalaCode(res1)
+                   visit(a,res1)
                     res1.append("))")
                     i = i + 1
                 })
@@ -198,13 +206,13 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
         }
     }
 
-    def getAllInvariants() : _root_.java.util.List[Constraint] =  {
-        var result = new _root_.java.util.ArrayList[Constraint]()
-      result.addAll(this.getInv)
-        this.getSuperType.foreach{st =>
+    def getAllInvariants(thi:ClassDefinition) : java.util.List[Constraint] =  {
+        var result = new ArrayList[Constraint]()
+      result.addAll(thi.getInv)
+        thi.getSuperType.foreach{st =>
             st match {
                 case cd:Class => {
-                            result.addAll(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getAllInvariants)
+                            result.addAll(getAllInvariants(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition]))
                     }
                 case _ => println("TOTO " + st)
             }
@@ -212,56 +220,30 @@ trait ClassDefinitionAspect extends KermetaModelElementAspect with IVisitable {
         return result
     }
 	
-    override def getQualifiedNameCompilo():String = {
 
-      var baseName : String = _root_.k2.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo() + "."+ this.getName())
-      return baseName
-
-    /*
-    if(baseName.contains("org.kermeta.language.structure.Object")){
-        log.error("=====INFO "+Util.hasEcoreTag(this)+" "+Util.hasEcoreTag(this.eContainer().asInstanceOf[Object]))
-      }
-
-        baseName = baseName match {
-        //case _ if(!Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => { "ScalaAspect."+baseName }
-        case _ if(Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => baseName
-        case _ if(!Util.hasEcoreTag(this) && !Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => baseName
-        case _ => { "ScalaAspect."+baseName }
-      }
-
-       return baseName*/
-
-
-    }
-
-    def getQualifiedNameKermeta():String ={
-        this.eContainer().asInstanceOf[PackageAspect].getQualifiedNameKermeta() + "::"+ this.getName();
-    }
 	
-    def generateParamerterClass(res1:StringBuilder) = {
-        if (this.getTypeParameter().size()>0){
+    def generateParamerterClass(thi:ClassDefinition,res1:StringBuilder) = {
+        if (thi.getTypeParameter().size()>0){
             var i = 0
             res1.append("[")
-            this.getTypeParameter().foreach{param =>
+            thi.getTypeParameter().foreach{param =>
                 if (i>0)
                     res1.append(",")
-                res1.append(param.getQualifiedNameCompilo())
+                res1.append(getQualifiedNameCompilo(param))
                 i=i+1
             }
             res1.append("]")
         }
     }
-    def generateBindingParamerterClass(superC:Class,res1:StringBuilder) = {
+    def generateBindingParamerterClass(thi:ClassDefinition,superC:Class,res1:StringBuilder) = {
         if (superC.getTypeParamBinding().size()>0){  res1.append("[")
                                                    var ii = 0;
                                                    superC.getTypeParamBinding.foreach{binding=>
                 if (ii>0) {res1.append(",")}
-                binding.getType.generateScalaCode(res1)
+                visit(binding.getType,res1)
                 ii= ii+1
             }
                                                    res1.append("]")
         }
     }
-    
-
 }

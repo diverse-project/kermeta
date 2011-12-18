@@ -4,6 +4,9 @@ import org.kermeta.compilo.scala.visitor._
 import org.kermeta.compilo.scala._
 import java.util.concurrent.Future
 
+
+
+
 class VisitorAsync extends IVisitorAsync {
 
   

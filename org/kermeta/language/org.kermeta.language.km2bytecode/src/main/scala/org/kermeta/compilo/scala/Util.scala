@@ -9,7 +9,7 @@
 package org.kermeta.compilo.scala
  
 import org.kermeta.language._
-import org.kermeta.language.structure._
+import org.kermeta.language.structure._ 
 import org.kermeta.language.behavior._
 import java.io.File
 import java.io.IOException
@@ -17,11 +17,8 @@ import java.util._
 import scala.collection.JavaConversions._
 import java.util.concurrent.Executors
 import java.util.concurrent.ExecutorService
-import org.kermeta.compilo.scala.rich.RichAspectImplicit._
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
-import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.common.util.BasicEList
 
 object Util extends LogAspect {
     /**
@@ -30,7 +27,7 @@ object Util extends LogAspect {
      * @return true if ecore tag is found
      */
     def hasEcoreTag(obj : KermetaModelElement) : Boolean = {
-        obj.getKOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
+        obj.getKOwnedTags().exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
     }
 
     /**
@@ -121,7 +118,7 @@ object Util extends LogAspect {
 	
     /*
      def getProtectedQualifiedName(p : Package) : String = {
-     var genpackageName = k2.utils.TypeEquivalence.getPackageEquivalence(p.getQualifiedNameCompilo)
+     var genpackageName = _root_.k2.utils.TypeEquivalence.getPackageEquivalence(p.getQualifiedNameCompilo)
      if (Util.hasEcoreTag(p)){
      //problem qualifiedname can finish by `
      if(genpackageName.endsWith("`")){
@@ -165,23 +162,22 @@ object Util extends LogAspect {
     var threadExecutor : ExecutorService = null
    
    
-    def generateScalaCodeEach[A <: KermetaModelElement](res : StringBuilder,list : Iterable[A],sep : String )={
+ /*   def generateScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
-                e.asInstanceOf[KermetaModelElementAspect].generateScalaCode(res)
+                e.asInstanceOf[ObjectAspect].generateScalaCode(res)
             })
     }
    
    
-    def generateProtectedScalaCodeEach[A <: KermetaModelElement](res : StringBuilder,list : Iterable[A],sep : String )={
+    def generateProtectedScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
                 var temp = new StringBuilder
-                e.asInstanceOf[KermetaModelElementAspect].generateScalaCode(temp)
-                // res.append(protectScalaKeyword(temp.toString)) // already protected
-             res.append(temp.toString)
+                e.asInstanceOf[ObjectAspect].generateScalaCode(temp)
+                res.append(protectScalaKeyword(temp.toString))
             })
         //TODO CAS INTERESSANT POUR LES FONCTIONS ANONYM
         /*
@@ -189,7 +185,7 @@ object Util extends LogAspect {
          if(i != 0) {res.append(sep) }
          list.get(i).generateScalaCode(res)
          }*/
-    }
+    }*/
 
     def createTempDirectory : File = {
         val temp = File.createTempFile("temp", System.nanoTime.toString )
@@ -218,47 +214,17 @@ object Util extends LogAspect {
         return hasToGenerate
     }
 
-
-    def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String = {
-        var baseName = typD.asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo
-
-        //if(baseName.equals("org.eclipse.emf.ecore.ENamedElementAspect")){
-        log.debug(baseName+" - "+Util.hasEcoreTag(typD)+" - "+Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]))
-        //}
-
-        baseName = baseName match {
-            //case _ if(!Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => { "ScalaAspect."+baseName }
-            //case _ if(Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => baseName
-            case _ if(!Util.hasEcoreTag(typD) && !Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement])) => baseName
-            case _ => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
-        }
-        return baseName+"Aspect"
-    }
-
-    def getQualifiedNamedBase(typD : GenericTypeDefinition) : String = {
-        var baseName = typD.asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo
-        baseName = baseName match {
-            case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List") ) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
-            case _ => { baseName }
-        }
-        return baseName
-    }
-
-    var lock : AnyRef = new Object()    // workaround problem on filter use this lock to prevent concurrency deadlock
+   
     def getEcoreRenameOperation(op1 : Operation): String={
-      lock.synchronized
-      {
-        val ownedOperations  = op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.toArray().toSeq
         if(   (Util.hasEcoreTag(op1) && op1.getBody !=null)||
-           (ownedOperations.filter( op => op.asInstanceOf[Operation].getName().equals("op_"+op1.getName()) ).size > 0 )){
+           (op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.filter( op => op.getName().equals("op_"+op1.getName()) ).size > 0 )){
             return "EMFRENAME" + op1.getName
-        }else if (op1.getSuperOperation != null && op1 != op1.getSuperOperation){
+        }else if (op1.getSuperOperation != null){
             return getEcoreRenameOperation(op1.getSuperOperation.asInstanceOf[Operation])
         }
         else{
             return op1.getName
         }
-      }
     }
     
 }

@@ -137,14 +137,19 @@ object Main extends LogAspect {
 
     
     var compilo = new Compiler
-
-
+    var time : Long = 0
+     var endtime : Long = 0
+     var endscalatime : Long = 0
     if(inputFile != ""){
       log.info("KM compilation begin on "+inputFile)
+     time = System.currentTimeMillis()
       compilo.compile(inputFile)
+      endtime = System.currentTimeMillis()
+      println("time to generate scala : " + (endtime-time))
     } else {
       log.warn("No Input File Found ! ")
     }
+    
     
     
 
@@ -166,33 +171,26 @@ object Main extends LogAspect {
         }
                 
         var compilationResult = EmbeddedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+        endscalatime = System.currentTimeMillis()
+        println("time to compile scala : " + (endscalatime - endtime))
+        println("time to compile km : " + (endscalatime - time))
+
         result = compilationResult
         //Scala runner
-        if(compilationResult == 0 && GlobalConfiguration.exec){
 
-          EmbeddedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
-        }
         if (GlobalConfiguration.createPackage ){
         	var fo =  new File(GlobalConfiguration.outputProject +File.separator + "target").getCanonicalFile
         	fo.mkdirs
         	_root_.org.kermeta.language.km2bytecode.embedded.scala.JarCreatorScala.run(GlobalConfiguration.outputBinFolder, GlobalConfiguration.outputProject + File.separator + "target" +  File.separator  + GlobalConfiguration.getScalaAspectPrefix+".jar", GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator + GlobalConfiguration.scalaAspectPrefix + "Reflexivity.km" );
         }
+        if(compilationResult == 0 && GlobalConfiguration.exec){
+
+          EmbeddedScalaRunner.run(classpath.mkString(File.pathSeparator)+File.pathSeparator+GlobalConfiguration.outputBinFolder, GlobalConfiguration.scalaAspectPrefix+ "runner.MainRunner", runnerParams)
+        }
         if (outputStream != null){
           System.setOut(new PrintStream(oldOut))
           System.setErr(new PrintStream(oldErr))
         }
-        var project = POMGeneratorHelper.initProject(GlobalConfiguration.standalone, additionalClassPath)
-        var rootDirectory = new java.io.File(GlobalConfiguration.outputProject);
-        var pomFile = new java.io.File(rootDirectory, "pom.xml");
-        try {
-            var fw = new FileWriter(pomFile);
-            project.writeModel(fw);
-            fw.flush();
-            fw.close();
-        } catch  {
-            case e:Exception=> e.printStackTrace()
-        }
-
         
       }else{
         result = EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
