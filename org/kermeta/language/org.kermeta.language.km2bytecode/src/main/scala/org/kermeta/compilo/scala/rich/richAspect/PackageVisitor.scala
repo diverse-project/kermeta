@@ -136,9 +136,16 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       case o: CallExpression => {
         visitCallExpression(o, res)
       }
+       case o: ObjectTypeVariable => {
+        visitObjectTypeVariable(o, res)
+      }
+
     }
   }
 
+  def visitObjectTypeVariable(thi: ObjectTypeVariable, res: StringBuilder) {
+	  res.append(thi.getName())	  
+  }
   def visitAssignement(thi: Assignment, res: StringBuilder) {
     log.debug("Assignment={}", thi.toString)
     if (thi.getIsCast()!= null && thi.getIsCast().booleanValue()) {
@@ -167,8 +174,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       }
     }
     
-    var rightClass: StringBuilder = new StringBuilder
-    //if(thi.getValue().isInstanceOf[VoidLiteral]){
+//    var rightClass: StringBuilder = new StringBuilder
+    /*if(thi.getValue().isInstanceOf[VoidLiteral]){
      visit(thi.getValue.getStaticType, rightClass)
     
     	
@@ -190,7 +197,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       res append ".toInt"
     }
     
-    
+    */
     
     /* Generate Cast if found */
     if (!targetClass.toString.equals("")) {
@@ -675,6 +682,9 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     thi match {
       case (p: Package) => {
         return k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi))
+      }
+      case (p: ObjectTypeVariable) => {
+        return p.getName()
       }
       case c: Class => {
         var res = new StringBuilder
