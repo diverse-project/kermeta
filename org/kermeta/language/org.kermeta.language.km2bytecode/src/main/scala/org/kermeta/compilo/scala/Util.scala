@@ -219,7 +219,7 @@ object Util extends LogAspect {
         if(   (Util.hasEcoreTag(op1) && op1.getBody !=null)||
            (op1.eContainer.asInstanceOf[ClassDefinition].getOwnedOperation.filter( op => op.getName().equals("op_"+op1.getName()) ).size > 0 )){
             return "EMFRENAME" + op1.getName
-        }else if (op1.getSuperOperation != null){
+        }else if (op1.getSuperOperation != null && op1.getSuperOperation() != op1){
             return getEcoreRenameOperation(op1.getSuperOperation.asInstanceOf[Operation])
         }
         else{

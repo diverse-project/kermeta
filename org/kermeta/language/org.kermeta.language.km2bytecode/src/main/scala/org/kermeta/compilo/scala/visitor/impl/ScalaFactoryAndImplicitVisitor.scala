@@ -256,6 +256,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     this.genetateUtilObject
 
     par.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
+    
+    
   }
 
   def visit(par: Package) {
@@ -299,8 +301,20 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
   }
 
+  //TODO à faire sauter quand bug héritage diamant résolu
+  var _list: java.util.List[String] = new java.util.ArrayList[String]();
+  def list() = _list
+  
   def visit(par: ClassDefinition) {
-
+    var s  =visitor.getQualifiedNameCompilo(par)
+    if (list.contains(s))
+      return
+     else
+    	list.add(s)
+    	
+    	
+	 
+    
     if (!Util.hasCompilerIgnoreTag(par)) {
       var genpackageName: StringBuilder = new StringBuilder
       var packageName: StringBuilder = new StringBuilder

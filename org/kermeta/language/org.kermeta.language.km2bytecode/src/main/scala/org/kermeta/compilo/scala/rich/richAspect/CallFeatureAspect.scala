@@ -50,6 +50,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     def generateTarget(thi:CallFeature,res : StringBuilder){
         if (thi.getTarget()!=null){
             res.append("(")
+//            log.debug(""+thi.getTarget())
             visit(thi.getTarget(),res)
             res.append(")")
         }else{
@@ -106,7 +107,8 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
             generateName(thi,res1)
             res.append("getByName(\""+res1.toString+"\")")
         }else{
-            generateName(thi,res)
+        	res.append(thi.getStaticEnumLiteral().getName())
+        //    generateName(thi,res)
         }
     }
 
@@ -184,7 +186,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     
 
          	def visitCallOperation(thi:CallOperation,res : StringBuilder) : Unit = {
-                log.debug("CallFeature={}",thi.getName())
+                log.debug("Operation={}",thi.getName())
                 thi.getName match {
                     case "clone" =>  { generateClone(thi,res)  }
       
@@ -219,9 +221,9 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                                 ||thi.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
                                     =>{generateTarget(thi,res);res.append(".");res.append("addAllUnique");generateParam(thi,res,"(",")")}
                     case "new" => generateNew(thi,res)
-                    case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {generateTarget(thi,res);res.append(".");generateOperationCall(thi,res);generateParam(thi,res,"(",")")}
-                    case _ if(thi.getTarget == null && thi.getStaticOperation!=null ) => {res.append(Util.getEcoreRenameOperation(thi.getStaticOperation));generateParam(thi,res,"(",")") }
-                    case _ if(thi.getTarget != null && thi.getStaticOperation==null ) => {generateTarget(thi,res);res.append(".");generateName(thi,res) }
+                    case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {log.debug("!!! Uncatch case 1");  generateTarget(thi,res);res.append(".");log.debug("!!! Uncatch case 2"); generateOperationCall(thi,res);generateParam(thi,res,"(",")");log.debug("!!! Uncatch case 3"); }
+                    case _ if(thi.getTarget == null && thi.getStaticOperation!=null ) => {log.debug("!!! Uncatch case 2");res.append(Util.getEcoreRenameOperation(thi.getStaticOperation));generateParam(thi,res,"(",")") }
+                    case _ if(thi.getTarget != null && thi.getStaticOperation==null ) => {log.debug("!!! Uncatch case 3");generateTarget(thi,res);res.append(".");generateName(thi,res) }
                     case _ => log.debug("!!! Uncatch case ")
  
                 }
