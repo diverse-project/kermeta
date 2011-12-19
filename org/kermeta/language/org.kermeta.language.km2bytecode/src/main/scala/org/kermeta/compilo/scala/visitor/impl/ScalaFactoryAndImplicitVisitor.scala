@@ -169,7 +169,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     	mainClassDef = par.eAllContents.filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => e.asInstanceOf[ClassDefinition].getName.equals(className)).toList.first
       mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter { e => e.getName.equals(mainOperation) }.first.asInstanceOf[Operation].getOwnedParameter.size
     } catch {
-      case e: java.util.NoSuchElementException => {}
+      case e: java.util.NoSuchElementException => {
+        mainClassDef = null
+        mainOperation =null
+      }
     }
 
     //TODO gérer le cas des package venant d'ecore
@@ -235,7 +238,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
     //}
     res.append("\t init() \n")
-    if (mainClassDef !=null){
+    if (mainClassDef !=null && mainOperation!= null){
     res.append("\t" + "_root_.")
     	if (packages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
     		res.append(GlobalConfiguration.scalaAspectPrefix + ".")
