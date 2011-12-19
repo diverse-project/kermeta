@@ -91,6 +91,7 @@ object TypeEquivalence {
                                                              typeEquivelence.put("int", "java.lang.Integer");
                                                              typeEquivelence.put("long", "java.lang.Long");
                                                              typeEquivelence.put("java.lang.Integer", "java.lang.Integer");
+                                                             typeEquivelence.put("k2.standard.Void", "scala.Unit");
 
                                                              typeEquivelence.put("double", "java.lang.Double");
                                                              typeEquivelence.put("float", "scala.Float");
