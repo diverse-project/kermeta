@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="024_inheritingOpWithGenericReturn" namespacePrefix="">
   <packages name="mainPackage">
-    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;59;464"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;59;541"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainPackage/MainClass/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;81;306"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;81;321"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
         <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
       </containedType>
       <ownedOperation name="mainOperation" type="//mainPackage/MainClass/mainOperation/@containedType.0" isOrdered="true" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;102;301"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;102;316"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;138;301"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;138;316"/>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
             <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;198;242"/>
             <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello from mainOperation">
@@ -64,7 +64,7 @@
             </target>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo" isCalledWithParenthesis="true">
-            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;287;296"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;287;297"/>
             <usings fromQName="kermeta::standard" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
@@ -78,29 +78,44 @@
               </target>
             </target>
           </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="foo" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;302;311"/>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;298;302"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="F">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;297;298"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+          </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//mainPackage/A/@containedType.1" isAspect="false" typeParameter="//mainPackage/A/G">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;306;363"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;321;378"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
         <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
       </containedType>
       <ownedOperation name="foo" type="//mainPackage/A/foo/@containedType.0" isOrdered="true" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;319;358"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;334;373"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="G">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;340;358"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;355;373"/>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//mainPackage/B/@containedType.1" isAspect="false" typeParameter="//mainPackage/B/H">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;363;402"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;378;417"/>
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="H"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//mainPackage/B/@containedType.1/@containedType.0" typeIdentifier="A">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="H">
@@ -112,7 +127,7 @@
       </containedType>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="C" superType="//mainPackage/C/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;402;437"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;417;450"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//mainPackage/C/@containedType.0/@containedType.0" typeIdentifier="A">
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
           <usings fromQName="kermeta::standard" toName=""/>
@@ -122,9 +137,32 @@
         <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
       </containedType>
     </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="E" superType="//mainPackage/E/@containedType.1" isAspect="false" typeParameter="//mainPackage/E/J">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;450;482"/>
+      <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="J"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//mainPackage/E/@containedType.1/@containedType.0" typeIdentifier="A">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="J">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+    </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="D" superType="//mainPackage/D/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;437;462"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="C">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;482;518"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//mainPackage/D/@containedType.0/@containedType.0" typeIdentifier="E">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="F" superType="//mainPackage/F/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/xdolques/workspaces/runtime-kv2/024_inheritingOpWithGenericReturn/src/main/kmt/MainClass.kmt;518;539"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="D">
         <usings fromQName="kermeta::standard" toName=""/>
         <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
       </containedType>

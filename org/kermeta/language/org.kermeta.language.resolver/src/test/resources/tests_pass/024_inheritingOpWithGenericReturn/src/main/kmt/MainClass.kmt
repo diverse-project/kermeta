@@ -11,6 +11,7 @@ package mainPackage{
 			B<String>.new.foo()
 			C.new.foo()		
 			D.new.foo()
+			F.new.foo()
 		end
 	}
 	
@@ -29,10 +30,14 @@ package mainPackage{
 	
 	}
 	
-	class C inherits A<Integer>{
+	class C inherits A<Integer>{}
+	
+	class E<J> inherits A<J>{
 	}
 	
-	class D inherits C{
+	class D inherits E<String>{
 	
 	}
+	
+	class F inherits D{}
 }
