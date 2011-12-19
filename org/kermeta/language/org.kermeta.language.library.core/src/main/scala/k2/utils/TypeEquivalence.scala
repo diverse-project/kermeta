@@ -144,15 +144,15 @@ object TypeEquivalence {
 		
 		
    		//methodEquivalence
-/*		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Str.put("size", "ksize");
-                Str.put("split", "ksplit");
+        //        Str.put("split", "ksplit");
 		methodEquivalence.put("_root_.k2.standard.String", Str);
 		methodEquivalence.put("_root_.String", Str);
 		methodEquivalence.put("java.lang.String", Str);
 		methodEquivalence.put("_root_.java.lang.String", Str);
 		
-	*/
+	
                                                                                          methodEquivalence
 
   };
