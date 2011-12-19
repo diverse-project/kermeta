@@ -524,7 +524,7 @@ class String {
 }
 
 @CompilerIgnore "true"
-class Integer inherits Numeric {        @CompilerIgnore "true"
+class Integer inherits Numeric<Integer> {        @CompilerIgnore "true"
          operation numberOfLeadingZeros(arg0:Integer) : Integer is do
 
           end
@@ -777,7 +777,7 @@ class Boolean {        @CompilerIgnore "true"
           
 }
 @CompilerIgnore "true"
-class Date inherits Comparable {        @CompilerIgnore "true"
+class Date inherits Comparable<Date> {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -911,7 +911,7 @@ class Date inherits Comparable {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Short inherits Numeric {        @CompilerIgnore "true"
+class Short inherits Numeric<Short> {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1008,7 +1008,7 @@ class Short inherits Numeric {        @CompilerIgnore "true"
 
 
 @CompilerIgnore "true"
-class Double inherits Numeric {        @CompilerIgnore "true"
+class Double inherits Numeric<Double> {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1122,7 +1122,7 @@ class Double inherits Numeric {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Float inherits Numeric {        @CompilerIgnore "true"
+class Float inherits Numeric<Float> {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1763,18 +1763,23 @@ class Character {
           end
 }
 
+/**
+ * The abstract class Summable defines a set of operation
+ * to sum instances of a class.
+ * Sub-classes only has to implement abstract operation plus.
+  */
 @CompilerIgnore "true"
-abstract class Summable {
-	operation plus(other : Summable) : Summable is abstract
-	operation minus(other : Summable) : Summable is abstract
-	operation mult(other : Summable) : Summable is abstract
-	operation div(other : Summable) : Summable is abstract
-	operation mod(other : Summable) : Summable is abstract
-	operation uminus(other : Summable) : Summable is abstract
+abstract class Summable<G> {
+	/**
+	 * Summarization method to be implemented by any summable class.
+	 * The parameter must have the same type (or one of its subtypes)
+	 *  than the current object .
+	 */
+	operation plus(other : G) : G is abstract
 }
 
 @CompilerIgnore "true"
-abstract class Comparable {
+abstract class Comparable<G> {
 	
 	/**
 	 * This method should be implemented by any class that inherits
@@ -1811,7 +1816,12 @@ abstract class Comparable {
 }
 @CompilerIgnore "true"
 //We propose to put a concrete Numeric in order to allow Numeric.new to create an implicit Float.new
-class Numeric inherits Summable,Comparable {
+class Numeric<G> inherits Summable<G>,Comparable<G> {
+	operation minus(other : G) : G is abstract
+	operation mult(other : G) : G is abstract
+	operation div(other : G) : G is abstract
+	operation mod(other : G) : G is abstract
+	operation uminus(other : G) : G is abstract
 }
 }
 }
