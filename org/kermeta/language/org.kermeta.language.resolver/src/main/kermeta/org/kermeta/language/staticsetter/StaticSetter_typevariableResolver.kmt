@@ -62,6 +62,12 @@ aspect class Class {
 					tvb.type:=localBindings.getValue(b.type.asType(TypeVariable))
 					result.add(tvb)
 				end
+			else
+				//if the variable is binded with a formal type, then add it directly to the bindings
+				var tvb : TypeVariableBinding init TypeVariableBinding.new
+				tvb.variable:=b.variable
+				tvb.type:=b.type
+				result.add(tvb)
 			end
 		}
 		/* stdio.writeln("Bindings for Class")
