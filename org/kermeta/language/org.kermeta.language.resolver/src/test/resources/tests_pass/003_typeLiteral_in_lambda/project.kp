@@ -1,11 +1,11 @@
-KermetaProject "test.pruner" 
+KermetaProject "003_typeliteral_in_lambda" 
 
-groupId ="kermeta::ki::kompren"
-defaultMainClass ="kermeta::ki::kompren::Test"
+groupId ="test"
+defaultMainClass ="root_package::Main"
 defaultMainOperation = "main"
 sources = {
 	require "${project.baseUri}/src/main/kmt003_typeLiteral_in_lambda.kmt"
 	}
 dependencies = {
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
 }
