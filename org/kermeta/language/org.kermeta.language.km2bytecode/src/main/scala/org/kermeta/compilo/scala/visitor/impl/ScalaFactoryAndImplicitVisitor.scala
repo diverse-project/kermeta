@@ -344,7 +344,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
         viewDefTemp.append(" with " + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + param.toString + " ")
 
         if (!visitor.getQualifiedNameCompilo(par.eContainer).contains("org.kermeta")) { //!IsObjectClassChildren(par)){
-          viewDefTemp.append("with " + "org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
+          viewDefTemp.append("with " + "k2.standard.KermetaObject")
           if (Util.hasEcoreFromAPITag(par))
             viewDefTemp.append(" with k2.standard.EObjectImplForPrimitive")
         }
