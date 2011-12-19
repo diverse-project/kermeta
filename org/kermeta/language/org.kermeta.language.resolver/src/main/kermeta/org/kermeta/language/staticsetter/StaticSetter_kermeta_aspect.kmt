@@ -596,7 +596,16 @@ package behavior {
 				end
 			end
 			if result.isVoid then
-				context.errors.add(ResolverException.new.initialize("The call " + name + " is undefined.", self))
+			
+				if target.isVoid then
+					context.errors.add(ResolverException.new.initialize("The call " + name + " is undefined.", self))
+				else
+					if not target.type.isVoid then
+						context.errors.add(ResolverException.new.initialize("The call " + name + " is undefined for type "+target.type.getQualifiedName, self))
+					else
+						context.errors.add(ResolverException.new.initialize("The call " + name + " is undefined.", self))
+					end
+				end
 				result := self		
 			end
 		end
