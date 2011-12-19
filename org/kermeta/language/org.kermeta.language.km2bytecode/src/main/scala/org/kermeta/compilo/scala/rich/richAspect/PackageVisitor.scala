@@ -18,6 +18,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       case o: Assignment => {
         visitAssignement(o, res)
       }
+      
       case o: Block => {
         visitBlock(o, res)
       }
@@ -252,10 +253,20 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       res.append(")")
     }
   }
+  
+  
 
   def visitCallVariable(thi: CallVariable, res: StringBuilder): Unit = {
+	
     res.append(Util.protectScalaKeyword(thi.getName()))
-    if (thi.getParameters() != null && thi.getParameters().size > 0) {
+    println (thi.getName() + " " + thi.getStaticType() )
+    if (thi.getStaticType().isInstanceOf[Class])
+      println(thi.getStaticType().asInstanceOf[Class].getTypeDefinition())
+    if (thi.getStaticType().isInstanceOf[Class] && "scala.Unit".equals(
+      getQualifiedNameCompilo(thi.getStaticType().asInstanceOf[Class].getTypeDefinition()))){
+     res append "()"
+    }
+    else if (thi.getParameters() != null && thi.getParameters().size > 0) {
       res append "("
       generateScalaCodeEach(res, thi.getParameters(), ",")
       res append ")"
