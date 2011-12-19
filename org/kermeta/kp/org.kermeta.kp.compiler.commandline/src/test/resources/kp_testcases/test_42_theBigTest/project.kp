@@ -1,22 +1,23 @@
-KermetaProject :"test_42_theBigTest" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language" 
-defaultMainClass : "root_package::Main"
-defaultMainOperation : "main"
-{ 
-	source = "${project.baseUri}/42_enum.kmt"
-	source = "${project.baseUri}/42_exception.kmt"
-	source = "${project.baseUri}/42_generic.kmt"
-	source = "${project.baseUri}/42_lambda.kmt"
-	source = "${project.baseUri}/42_loop.kmt"
-	source = "${project.baseUri}/42_multipleInheritance.kmt"
-	source = "${project.baseUri}/42_multiplicity.kmt"
+KermetaProject "test_42_theBigTest" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="org.kermeta.language" 
+defaultMainClass = "root_package::Main"
+defaultMainOperation =  "main"
+sources = { 
+	require"${project.baseUri}/42_enum.kmt"
+	require"${project.baseUri}/42_exception.kmt"
+	require"${project.baseUri}/42_generic.kmt"
+	require"${project.baseUri}/42_lambda.kmt"
+	require"${project.baseUri}/42_loop.kmt"
+	require"${project.baseUri}/42_multipleInheritance.kmt"
+	require"${project.baseUri}/42_multiplicity.kmt"
 	
 	
-	source = "${project.baseUri}/42_theBigTest_main.kmt"
-	
-	// import library.extended	
-	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"   
+	require"${project.baseUri}/42_theBigTest_main.kmt"
+	}
+dependencies = {	
+	// import library.extended
+	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"
 		 
 } 
 
