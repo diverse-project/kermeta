@@ -221,11 +221,12 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                                 ||thi.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
                                     =>{generateTarget(thi,res);res.append(".");res.append("addAllUnique");generateParam(thi,res,"(",")")}
                     case "new" => generateNew(thi,res)
-                    case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {log.debug("!!! Uncatch case 1");  generateTarget(thi,res);res.append(".");log.debug("!!! Uncatch case 2"); generateOperationCall(thi,res);generateParam(thi,res,"(",")");log.debug("!!! Uncatch case 3"); }
-                    case _ if(thi.getTarget == null && thi.getStaticOperation!=null ) => {log.debug("!!! Uncatch case 2");res.append(Util.getEcoreRenameOperation(thi.getStaticOperation));generateParam(thi,res,"(",")") }
-                    case _ if(thi.getTarget != null && thi.getStaticOperation==null ) => {log.debug("!!! Uncatch case 3");generateTarget(thi,res);res.append(".");generateName(thi,res) }
+                    case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {generateTarget(thi,res);res.append(".");generateOperationCall(thi,res);generateParam(thi,res,"(",")"); }
+                    case _ if(thi.getTarget == null && thi.getStaticOperation!=null ) => {res.append(Util.getEcoreRenameOperation(thi.getStaticOperation));generateParam(thi,res,"(",")") }
+                    case _ if(thi.getTarget != null && thi.getStaticOperation==null ) => {generateTarget(thi,res);res.append(".");generateName(thi,res) }
                     case _ => log.debug("!!! Uncatch case ")
- 
+
+                    
                 }
             }
          	def visitCallProperty(thi:CallProperty,res : StringBuilder) : Unit = {
