@@ -256,8 +256,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     this.genetateUtilObject
 
     par.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
-    
-    
+
   }
 
   def visit(par: Package) {
@@ -304,17 +303,14 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
   //TODO à faire sauter quand bug héritage diamant résolu
   var _list: java.util.List[String] = new java.util.ArrayList[String]();
   def list() = _list
-  
+
   def visit(par: ClassDefinition) {
-    var s  =visitor.getQualifiedNameCompilo(par)
+    var s = visitor.getQualifiedNameCompilo(par)
     if (list.contains(s))
       return
-     else
-    	list.add(s)
-    	
-    	
-	 
-    
+    else
+      list.add(s)
+
     if (!Util.hasCompilerIgnoreTag(par)) {
       var genpackageName: StringBuilder = new StringBuilder
       var packageName: StringBuilder = new StringBuilder
@@ -384,11 +380,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
         if (cd != null) {
           superClassName = visitor.getQualifiedNameCompilo(cd.eContainer().asInstanceOf[KermetaModelElement]) + "." + cd.getName
         }
+        
         if (!(classOf[Object].getCanonicalName.equals(superClassName)
           || classOf[org.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName))) {
-          viewDefTemp.append(" with " + "_root_.k2.standard.KermetaObject with k2.standard.EObjectImplForPrimitive")
+          viewDefTemp.append(" with " + "_root_.k2.standard.KermetaObject ")
+                      if (!IsAnExceptionChildren(par)) 
+        		  			viewDefTemp.append("with k2.standard.EObjectImplForPrimitive")
         } else {
-
           //println(cd.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo + "."+ cd.getName)
         }
         viewDefTemp.append(" \n")
