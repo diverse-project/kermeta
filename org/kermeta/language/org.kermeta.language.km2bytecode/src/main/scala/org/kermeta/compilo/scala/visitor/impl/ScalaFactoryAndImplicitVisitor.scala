@@ -163,10 +163,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     var mainOperation: String = GlobalConfiguration.baseOperation() // par.getKTag().filter{e=> "mainOperation".equals(e.getName)}.first.getValue
     var packageName: String = mainClass.substring(0, mainClass.lastIndexOf("::")).replace("::", ".")
     var className: String = mainClass.substring(mainClass.lastIndexOf("::") + 2).replace("::", ".")
-
-    var mainClassDef = par.eAllContents.filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => e.asInstanceOf[ClassDefinition].getName.equals(className)).toList.first
+    var mainClassDef:  org.eclipse.emf.ecore.EObject  = null
     var mainOperationSize = 0
     try {
+    	mainClassDef = par.eAllContents.filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => e.asInstanceOf[ClassDefinition].getName.equals(className)).toList.first
       mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter { e => e.getName.equals(mainOperation) }.first.asInstanceOf[Operation].getOwnedParameter.size
     } catch {
       case e: java.util.NoSuchElementException => {}
@@ -234,22 +234,24 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     //     res.append("\t org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.asInstanceOf[org.eclipse.emf.ecore.EcoreFactoryWrapper].setWrap("+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.eclipse.emf.ecore."+GlobalConfiguration.factoryName+") \n \t" )
     //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
     //}
-    res.append("\t init() \n\t" + "_root_.")
-    if (packages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
-      res.append(GlobalConfiguration.scalaAspectPrefix + ".")
+    res.append("\t init() \n")
+    if (mainClassDef !=null){
+    res.append("\t" + "_root_.")
+    	if (packages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
+    		res.append(GlobalConfiguration.scalaAspectPrefix + ".")
 
+    	}
+    	res.append(k2.utils.TypeEquivalence.getPackageEquivalence(packageName))
+
+    	res.append("." + GlobalConfiguration.factoryName + ".create" + className + "." + mainOperation)
+
+    	res.append("(")
+    	for (i <- 0 until mainOperationSize) {
+    		if (i != 0) { res.append(" , ") }
+    		res.append("args(" + i + ")")
+    	}
+    	res.append(")")
     }
-    res.append(k2.utils.TypeEquivalence.getPackageEquivalence(packageName))
-
-    res.append("." + GlobalConfiguration.factoryName + ".create" + className + "." + mainOperation)
-
-    res.append("(")
-    for (i <- 0 until mainOperationSize) {
-      if (i != 0) { res.append(" , ") }
-      res.append("args(" + i + ")")
-    }
-    res.append(")")
-
     res.append("\n}\n}")
 
     Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "MainRunner", res.toString())

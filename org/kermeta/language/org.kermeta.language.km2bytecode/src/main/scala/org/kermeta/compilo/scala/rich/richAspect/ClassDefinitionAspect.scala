@@ -107,6 +107,8 @@ trait ClassDefinitionAspect extends ObjectVisitor{
                     })
             }
             res append " with "+Util.protectScalaKeyword("_root_."+getQualifiedNamedBase(thi))
+            generateParamerterClass(thi,res)
+
             res.append("{\n")
 
             thi.getOwnedAttribute foreach(a=> visit(a,res))
