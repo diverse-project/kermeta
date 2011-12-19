@@ -1,0 +1,38 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			stdio.writeln("Hello from mainOperation")
+			
+			B<String>.new.foo()
+			C.new.foo()		
+			D.new.foo()
+		end
+	}
+	
+	class A<G>{
+	operation foo():G is do 
+	
+	end
+	
+	
+	
+	}
+	
+	class B<H> inherits A<H> {
+	
+	
+	
+	}
+	
+	class C inherits A<Integer>{
+	}
+	
+	class D inherits C{
+	
+	}
+}
