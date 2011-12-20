@@ -159,6 +159,7 @@
 			        <sourceInclude>**/*.scala</sourceInclude>
 			        <sourceInclude>**/*.java</sourceInclude>
 			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
 			    </configuration>
 			  </plugin>
 			<plugin>
