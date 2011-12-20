@@ -1,9 +1,11 @@
-KermetaProject :"test.memento.conditions" 
-version :  "2.0.1-SNAPSHOT" 
-group :"pkg"
-defaultMainClass :"pkg::Test"
-defaultMainOperation : "main"
-{
-	source = "${project.baseUri}/main.kmt"
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+KermetaProject "test.memento.conditions" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="pkg::Test"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/main.kmt"
+}
+dependencies={
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 }

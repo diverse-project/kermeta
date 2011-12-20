@@ -1,15 +1,15 @@
-KermetaProject :"test_037_lambda" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language" 
-defaultMainClass : "root_package_lambda::LambdaTester"
-defaultMainOperation : "mainTest"
-{ 
-	source = "${project.baseUri}/037_lambda.kmt"
+KermetaProject "test_037_lambda" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId "org.kermeta.language" 
+defaultMainClass = "root_package_lambda::LambdaTester"
+defaultMainOperation = "mainTest"
+sources={
+	require  "${project.baseUri}/037_lambda.kmt"
 	
-	
-	
+}
+dependencies={
 	// import library.extended	
-	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"   
+	dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"   
 		 
 } 
 

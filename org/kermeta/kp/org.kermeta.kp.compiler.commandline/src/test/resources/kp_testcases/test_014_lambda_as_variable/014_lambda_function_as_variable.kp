@@ -1,7 +1,11 @@
-KermetaProject :"014_lambda_function_as_variable" 
-version :  "someVersion" 
-group :"group" 
-{ 
-	source = "${project.baseUri}/014_lambda_function_as_variable.kmt" 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+KermetaProject "014_lambda_function_as_variable" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="pkg::Test"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/014_lambda_function_as_variable.kmt" 
+}
+dependencies={
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 } 

@@ -1,10 +1,11 @@
-KermetaProject :"language.sample.arab2roman" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language.sample" 
-defaultMainClass :"root_package::Main"
-defaultMainOperation : "main"
-{ 
-	source = "${project.baseUri}/main.kmt" 
-	// depends on library.core	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+KermetaProject "test.memento.conditions" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="root_package::Test"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/main.kmt" 
+}
+dependencies={
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 } 

@@ -1,7 +1,11 @@
-KermetaProject :"013_variable_visibility" 
-version :  "someVersion" 
-group :"group" 
-{ 
-	source = "${project.baseUri}/013_variable_visibility.kmt" 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
-} 
+KermetaProject "013_variable_visibility" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="pkg::Test"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/013_variable_visibility.kmt" 
+}
+dependencies={
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+}
