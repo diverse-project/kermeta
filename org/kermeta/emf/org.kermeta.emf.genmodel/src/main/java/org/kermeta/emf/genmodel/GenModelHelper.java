@@ -118,7 +118,7 @@ public class GenModelHelper {
             genModelModel.setModelDirectory(modelDirectory);
             ArrayList<EPackage> ePackages = new ArrayList<EPackage>();
             for(java.net.URI ecoreFile : ecoreFiles){
-        		URI ecoreURI = URI.createFileURI(ecoreFile.toString());
+        		URI ecoreURI = org.eclipse.emf.common.util.URI.createURI(ecoreFile.toString());
     	        Resource resource = resourceSet.getResource(ecoreURI, true);
     	        ePackages.add((EPackage) resource.getContents().get(0));	// TODO maybe think about ecore models with multiple root packages ?
                 genModelModel.getForeignModel().add(ecoreFile.toString());
