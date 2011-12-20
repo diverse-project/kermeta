@@ -51,6 +51,11 @@
             <version>1.11</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-aether-provider</artifactId>
+            <version>3.0.3</version>
+        </dependency>
 
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
@@ -85,14 +90,17 @@
                     <instructions>
                         <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
                         <Import-Package>!org.kermeta.utils.aether.*,*</Import-Package>
-                        <Export-Package>org.kermeta.utils.aether.*,
-                            org.sonatype.*,
-                            org.apache.maven.repository.*,
-                            org.apache.maven.model.*,
-                            org.apache.maven.artifact.*,
-                            org.codehaus.plexus.interpolation.*,
-                            org.codehaus.plexus.util.*,
-                            com.ning.http.*
+                        <Export-Package>org.kermeta.utils.aether.*,                                
+                        	    org.sonatype.*,
+                                org.apache.maven.repository.*,
+                                org.apache.maven.model.*,
+                                org.apache.maven.http.*,
+                                org.apache.maven.artifact.*,
+                                com.ning.*,
+                                org.jboss.netty.*,
+                                org.codehaus.plexus.interpolation.*,
+                                org.codehaus.plexus.util.*,
+                                org.apache.maven.wagon.*
                         </Export-Package>
                     </instructions>
                 </configuration>
@@ -140,7 +148,7 @@
 			        <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
 			      </buildcommands>
 			      <classpathContainers>
-			        <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER"</classpathContainer>
+			        <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
 			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
 			      </classpathContainers>
 			      <excludes>
