@@ -23,12 +23,14 @@ import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 public class CommandLineKermetaCompilerTest extends TestCase {
 	String kpFile;
 	String targetFolder;
+	String testName;
 
 
-    public CommandLineKermetaCompilerTest(String kpFile, String targetFolder) {
+    public CommandLineKermetaCompilerTest(String testName,String kpFile, String targetFolder) {
 		super();
 		this.kpFile = kpFile;
 		this.targetFolder = targetFolder;
+		this.testName = testName;
 	}
 
 
@@ -65,7 +67,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
     
     @Override
     public String getName() {
-        return kpFile;
+        return testName;
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -28,7 +29,9 @@ public class CommandLineTestSuite extends TestSuite {
 		
 		for(File file : files) {
 			System.out.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
-			suite.addTest(new CommandLineKermetaCompilerTest(file.getPath(), file.getParent()+System.getProperty("file.separator")));
+			String testName = file.getPath().replace(folderFullURI,"").replaceAll("\\\\", ".").replaceAll("/", ".").substring(1);
+			System.out.println(" test name = "+testName+" ("+folderFullURI+")");
+			suite.addTest(new CommandLineKermetaCompilerTest(testName, file.getPath(), file.getParent()+System.getProperty("file.separator")));
 		}
 		
         return suite;
