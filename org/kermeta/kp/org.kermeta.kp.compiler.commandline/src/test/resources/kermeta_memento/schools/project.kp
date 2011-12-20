@@ -1,10 +1,12 @@
-KermetaProject :"test.memento.CollegeMM" 
-version :  "2.0.1-SNAPSHOT" 
-group :"CollegeMM"
-defaultMainClass :"CollegeMM::Test"
-defaultMainOperation : "main"
-{
-	source = "${project.baseUri}/main.kmt"
-	source = "${project.baseUri}/CollegeMM.ecore"
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+KermetaProject "test.memento.CollegeMM" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="CollegeMM::Test"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/main.kmt"
+	require "${project.baseUri}/CollegeMM.ecore"
+}
+dependencies={
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 }
