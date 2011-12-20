@@ -30,7 +30,7 @@ public class CommandLineTestSuite extends TestSuite {
 		for(File file : files) {
 			System.out.println("Testing: " + file.getPath() + "\tto\t" + file.getParent());
 			String testName = file.getPath().replace(folderFullURI,"").replaceAll("\\\\", ".").replaceAll("/", ".").substring(1);
-			System.out.println(" test name = "+testName+" ("+folderFullURI+")");
+			// System.out.println(" test name = "+testName+" ("+folderFullURI+")");
 			suite.addTest(new CommandLineKermetaCompilerTest(testName, file.getPath(), file.getParent()+System.getProperty("file.separator")));
 		}
 		
