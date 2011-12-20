@@ -1,7 +1,11 @@
-KermetaProject :"004_testLibraryDependency" 
-version :  "someVersion" 
-group :"group" 
-{ 
-	source = "${project.baseUri}/004_HelloWorld.kmt" 
-	dependency "language.library.core" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+KermetaProject "004_HelloWorld" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="helloworld::HelloWorld"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/004_HelloWorld.kmt" 
+}
+dependencies={
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 } 

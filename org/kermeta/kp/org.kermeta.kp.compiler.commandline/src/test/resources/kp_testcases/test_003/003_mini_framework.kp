@@ -1,8 +1,12 @@
-KermetaProject :"003_testDependency" 
-version :  "someVersion" 
-group :"group" 
-{ 
-	source = "${project.baseUri}/003_mini_framework.kmt" 
-	srcQuery = "/src/main/ecore/kermeta.ecore" from "language.model"
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+KermetaProject "003_mini_framework" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="pkg::Test"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/003_mini_framework.kmt" 
+	require "${language.model.baseUri}/src/main/ecore/kermeta.ecore"
+}
+dependencies={
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 } 
