@@ -16,11 +16,13 @@ package org.kermeta.utils.aether
 
 import org.sonatype.aether.RepositorySystem
 import org.apache.maven.repository.internal.DefaultServiceLocator
-import org.sonatype.aether.spi.connector.RepositoryConnectorFactory
 import org.sonatype.aether.connector.file.FileRepositoryConnectorFactory
 import org.sonatype.aether.connector.async.AsyncRepositoryConnectorFactory
+import org.sonatype.aether.impl.internal.EnhancedLocalRepositoryManagerFactory
 import org.sonatype.aether.resolution.ArtifactRequest
 import org.sonatype.aether.resolution.ArtifactResult
+import org.sonatype.aether.spi.connector.RepositoryConnectorFactory
+import org.sonatype.aether.spi.localrepo.LocalRepositoryManagerFactory
 import org.sonatype.aether.util.artifact.DefaultArtifact
 import org.apache.maven.repository.internal.MavenRepositorySystemSession
 import java.io.File
@@ -38,7 +40,8 @@ import scala.collection.JavaConversions._
 object AetherUtil {
 
   val newRepositorySystem: RepositorySystem = {
-    val locator = new DefaultServiceLocator()
+    val locator = new DefaultServiceLocator()    
+    locator.addService(classOf[LocalRepositoryManagerFactory], classOf[EnhancedLocalRepositoryManagerFactory])
     locator.addService(classOf[RepositoryConnectorFactory], classOf[FileRepositoryConnectorFactory])
     locator.addService(classOf[RepositoryConnectorFactory], classOf[AsyncRepositoryConnectorFactory])
    // locator.addService(classOf[RepositoryConnectorFactory], classOf[WagonRepositoryConnectorFactory] )
@@ -55,7 +58,8 @@ object AetherUtil {
 
     if (repoURL != null) {
       val repo = new RemoteRepository
-      repo.setId("idRepo")
+      repo.setId(repoURL.trim.replace("http://","").replace(':', '_').replace('/', '_').replace('\\', '_'))
+      //repo.setUrl(repoURL.trim.replace(':', '_').replace('/', '_').replace('\\', '_'))
       repo.setUrl(repoURL)
       repo.setContentType("default")
       val repositoryPolicy = new RepositoryPolicy()
@@ -69,11 +73,7 @@ object AetherUtil {
     artifactRequest.setRepositories(repositories)
     var artefactResult: ArtifactResult = null;
 
-    try {
-      artefactResult = newRepositorySystem.resolveArtifact(newRepositorySystemSession, artifactRequest)
-    } catch {
-      case e:Exception => e.printStackTrace()
-    }
+    artefactResult = newRepositorySystem.resolveArtifact(newRepositorySystemSession, artifactRequest)
     artefactResult.getArtifact.getFile
   }
 
