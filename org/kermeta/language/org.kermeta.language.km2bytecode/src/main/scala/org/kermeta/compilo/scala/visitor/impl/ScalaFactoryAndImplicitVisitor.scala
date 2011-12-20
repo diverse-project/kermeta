@@ -238,6 +238,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
     //}
     res.append("\t init() \n")
+    res.append("\t\torg.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
     if (mainClassDef !=null && mainOperation!= null){
     res.append("\t" + "_root_.")
     	if (packages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
