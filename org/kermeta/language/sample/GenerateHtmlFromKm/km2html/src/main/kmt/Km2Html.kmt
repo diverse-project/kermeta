@@ -89,7 +89,7 @@ aspect class ModelingUnit {
 		links := ""
 		
 		//create links list of the TypeDefinition
-		ownedTypeDefinition.each{type | links := links + "<a href:=" + type.name + ".html" + "target = &quot; MODELDoc &quot;>" + type.name + "</a>" + "<br/>"}
+		ownedTypeDefinition.each{t | links := links + "<a href:=" + t.name + ".html" + "target = &quot; MODELDoc &quot;>" + t.name + "</a>" + "<br/>"}
 		//set TypeDefinitionContainner list of the Toc page
 		//if links !="" then
 		contents := contents +
@@ -147,7 +147,7 @@ aspect class Package{
 		links := ""
 		
 		//create links list of the TypeDefinition
-		ownedTypeDefinition.each{type | links := links + "<a href:=" + type.name + ".html" + "target = &quot; MODELDoc &quot;>" + type.name + "</a>" + "<br/>"}
+		ownedTypeDefinition.each{t | links := links + "<a href:=" + t.name + ".html" + "target = &quot; MODELDoc &quot;>" + t.name + "</a>" + "<br/>"}
 		//set TypeDefinitionContainner list of the Toc page
 		//if html != "" then
 			html := html +   
