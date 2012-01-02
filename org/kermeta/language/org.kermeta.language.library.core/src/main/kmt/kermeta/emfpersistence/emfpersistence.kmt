@@ -28,7 +28,7 @@ class Resource {        @CompilerIgnore "true"
 
           end
         @CompilerIgnore "true"
-         operation getURI() : String is do
+         operation getURI() : URI is do
 
           end
         @CompilerIgnore "true"
@@ -88,7 +88,7 @@ class Resource {        @CompilerIgnore "true"
 
           end
         @CompilerIgnore "true"
-         operation setURI(arg0:String) : Void is do
+         operation setURI(uri:URI) : Void is do
 
           end
         @CompilerIgnore "true"

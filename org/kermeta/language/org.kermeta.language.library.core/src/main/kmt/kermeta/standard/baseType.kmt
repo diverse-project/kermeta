@@ -511,6 +511,10 @@ class String {
         operation toBoolean() : Boolean is do
         end
 
+		@CompilerIgnore "true"
+        operation toURI() : URI is do
+        end
+		
 /*
         @CompilerIgnore "true"
         @CompilerIgnore "true"
@@ -1823,6 +1827,14 @@ class Numeric<G> inherits Summable<G>,Comparable<G> {
 	operation mod(other : G) : G is abstract
 	operation uminus(other : G) : G is abstract
 }
+
+@CompilerIgnore "true"
+class URI{
+	operation toString() : String is do end
+}
+
+
+
 }
 }
 
