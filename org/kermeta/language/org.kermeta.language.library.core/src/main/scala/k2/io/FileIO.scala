@@ -6,6 +6,7 @@
 package k2.io
  
 import java.io._
+import org.eclipse.emf.common.util.URI
 
 class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
 
@@ -52,6 +53,11 @@ class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
     return res.toString
   }
 
+  def getCurrentDir() : org.eclipse.emf.common.util.URI = {
+    val currentdir = System.getProperty("user.dir")
+    val dir = new File(currentdir);
+    return URI.createFileURI(dir.toString())
+  }
 }
 object FileIO extends FileIOClass{ 
 }
