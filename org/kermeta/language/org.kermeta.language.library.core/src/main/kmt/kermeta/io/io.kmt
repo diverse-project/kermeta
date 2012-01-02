@@ -45,6 +45,12 @@ singleton FileIO
 	operation readTextFile(filename : String) : String is do
 	
 	end
+	
+	/** 
+	 * Return the URI of the current directory
+	 */
+	operation getCurrentDir() : URI is do
+	end
 
 }
 

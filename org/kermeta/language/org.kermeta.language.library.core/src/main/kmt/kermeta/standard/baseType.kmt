@@ -1831,6 +1831,7 @@ class Numeric<G> inherits Summable<G>,Comparable<G> {
 @CompilerIgnore "true"
 class URI{
 	operation toString() : String is do end
+	operation appendSegment(pathSegment : String ) : URI is do end
 }
 
 
