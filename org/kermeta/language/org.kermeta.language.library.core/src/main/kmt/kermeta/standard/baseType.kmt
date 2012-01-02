@@ -411,11 +411,11 @@ class String {
 
           end
         @CompilerIgnore "true"
-         operation split(arg0:String,arg1:Integer) : Collection<String> is do
+         operation split(arg0:String,arg1:Integer) : Sequence<String> is do
 
           end
         @CompilerIgnore "true"
-         operation split(arg0:String) : Collection<String> is do
+         operation split(arg0:String) : Sequence<String> is do
 
           end
         @CompilerIgnore "true"
@@ -435,7 +435,7 @@ class String {
 
           end
         @CompilerIgnore "true"
-         operation toCharArray() : Collection<Character> is do
+         operation toCharArray() : Sequence<Character> is do
 
           end
         @CompilerIgnore "true"
