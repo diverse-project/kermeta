@@ -262,6 +262,7 @@ public class KermetaCompiler {
 	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
 		try {
 			lock.lock();
+			this.hasFailed = false;
 			flushProblems(FileHelpers.StringToURL(kpFileURL));
 			String projectName = "project";
 	
