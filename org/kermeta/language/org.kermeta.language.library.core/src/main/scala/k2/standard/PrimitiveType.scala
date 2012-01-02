@@ -697,6 +697,9 @@ class RichURI(value : org.eclipse.emf.common.util.URI)  extends RichValueType wi
     override def toString() :java.lang.String={return value.toString();
     }
 	def appendSegment(segmentPath : String) : org.eclipse.emf.common.util.URI = { return value.appendSegment(segmentPath)} 
+	def appendSegments(segmentPaths : java.util.List[String]) : org.eclipse.emf.common.util.URI = {	 
+	  return value.appendSegments(segmentPaths.toArray().asInstanceOf[Array[String]])
+	}
 }
 
 class RichUnknownJavaObject  extends Object {

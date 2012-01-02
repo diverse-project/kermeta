@@ -10,17 +10,8 @@ import org.eclipse.emf.common.util.URI
 
 class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
 
-  def writeTextFile(file : String, text : String) : Unit = {
-    var filename = ""
-    if(file.startsWith("file:")){
-      filename = file.replaceFirst("file:", "")
-    } else {
-      filename = file
-      println("toto")
-    }
-    //println("WriteTxt="+filename)
-
- 
+  def writeTextFile(fileURI : URI, text : String) : Unit = {
+    var filename = fileURI.toFileString()
     
     var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
     if(!repname.exists()){ repname.mkdirs }
@@ -29,14 +20,8 @@ class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
     finally{ fw.close }
   }
 
-  def writeTextFileWithEncoding(file : String, text : String, encoding : String ) : Unit = {
-    var filename = ""
-    if(file.startsWith("file:")){
-      filename = file.replaceFirst("file:", "")
-    } else {
-      filename = file
-    }
-    //println("WriteTxt="+filename)
+  def writeTextFileWithEncoding(fileURI : URI, text : String, encoding : String ) : Unit = {
+    var filename = fileURI.toFileString()
 
     var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
     if(!repname.exists()){ repname.mkdirs }
@@ -45,9 +30,9 @@ class FileIOClass  extends k2.standard.EObjectImplForPrimitive{
     finally{ fw.close }
   }
 
-  def readTextFile(filename : String) : String = {
+  def readTextFile(fileURI : URI) : String = {
     var res = new StringBuilder
-    val br = new BufferedReader(new FileReader(new File(filename)))
+    val br = new BufferedReader(new FileReader(new File(fileURI.toFileString())))
     try{ while(br.ready) res.append(br.readLine) }
     finally{ br.close }
     return res.toString
