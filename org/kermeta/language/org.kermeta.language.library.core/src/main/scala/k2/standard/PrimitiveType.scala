@@ -667,6 +667,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
    def replaceKeyword(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
    def toInteger() : Int = _root_.java.lang.Integer.parseInt(value)
    def toReal() : Double = _root_.java.lang.Double.parseDouble(value)
+   def toURI() : org.eclipse.emf.common.util.URI = org.eclipse.emf.common.util.URI.createURI(value)
    def toBoolean() : Boolean = _root_.java.lang.Boolean.parseBoolean(value)
 
 
@@ -689,7 +690,13 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
         return createMetaClass("kermeta::standard::String")
     }
 
-} 
+}
+class RichURI(value : org.eclipse.emf.common.util.URI)  extends RichValueType with EObjectImplForPrimitive {
+	override def getValue():Object = value
+    override def toString() :java.lang.String={return value.toString();
+    }
+}
+
 class RichUnknownJavaObject  extends Object {
     override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
     }
