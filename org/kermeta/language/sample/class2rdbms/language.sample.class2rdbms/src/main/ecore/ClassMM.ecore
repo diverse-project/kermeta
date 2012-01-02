@@ -14,10 +14,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Classifier"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_primary" eType="#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_primary" eType="#//Boolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//Classifier">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_persistent" eType="#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_persistent" eType="#//Boolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attrs" lowerBound="1" upperBound="-1"
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Class"/>
@@ -30,5 +32,5 @@
         eType="#//Association" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
 </ecore:EPackage>
