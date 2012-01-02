@@ -24,11 +24,12 @@ object PrimitiveConversion{
     implicit def integer2kermeta(x: Int) = new RichInteger(x)
     implicit def long2kermeta(x: Long) = new RichLong(x)
     implicit def short2kermeta(x: Short) = new RichShort(x)
-        implicit def float2kermeta(x: Float) = new RichFloat(x)
-  implicit def double2kermeta(x: Double) = new RichDouble(x)
-  implicit def date2kermeta(x: java.util.Date) = new RichDate(x)
-  implicit def resource2KerResource(x: org.eclipse.emf.ecore.resource.Resource) = new _root_.k2.persistence.RichResource(x)
-  implicit def resourceset2KerResourceset(x: org.eclipse.emf.ecore.resource.ResourceSet) = new _root_.k2.persistence.RichResourceSet(x)
+    implicit def float2kermeta(x: Float) = new RichFloat(x)
+    implicit def double2kermeta(x: Double) = new RichDouble(x)
+    implicit def date2kermeta(x: java.util.Date) = new RichDate(x)
+    implicit def uri2kermeta(x: org.eclipse.emf.common.util.URI) = new RichURI(x)
+    implicit def resource2KerResource(x: org.eclipse.emf.ecore.resource.Resource) = new _root_.k2.persistence.RichResource(x)
+    implicit def resourceset2KerResourceset(x: org.eclipse.emf.ecore.resource.ResourceSet) = new _root_.k2.persistence.RichResourceSet(x)
 
 
     implicit def character2kermeta(x: Char) = new RichCharacter(x)
@@ -41,7 +42,7 @@ object PrimitiveConversion{
 
 
 
-   implicit def IteratorEObject2IteratorKObject(x:  java.util.Iterator[org.eclipse.emf.ecore.EObject]) :java.util.Iterator[_root_.k2.standard.KermetaObject] = {
+    implicit def IteratorEObject2IteratorKObject(x:  java.util.Iterator[org.eclipse.emf.ecore.EObject]) :java.util.Iterator[_root_.k2.standard.KermetaObject] = {
         import k2.standard.JavaConversions._
         var res = new _root_.java.util.Iterator[_root_.k2.standard.KermetaObject]{
           def hasNext() : Boolean = x.hasNext
