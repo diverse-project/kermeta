@@ -19,7 +19,7 @@ public class FileHelpers {
 		// deal with windows \\ delimiter
 		String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/").replaceAll(" ", "%20");
 				
-		if(!unifiedSepratorResourcePath.startsWith("file:/") && !unifiedSepratorResourcePath.startsWith("jar:"))
+		if(!unifiedSepratorResourcePath.startsWith("file:/") && !unifiedSepratorResourcePath.startsWith("jar:") && !unifiedSepratorResourcePath.startsWith("platform:"))
 			unifiedSepratorResourcePath = "file:/" + unifiedSepratorResourcePath;
 			
 		return unifiedSepratorResourcePath;
