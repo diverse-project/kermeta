@@ -16,7 +16,7 @@ object PrimitiveConversion{
 
     implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)
     // implicit def boolean2javaboolean(x: java.lang.Boolean) : Boolean = {if (x== null) return false else return x.booleanValue()}
-    implicit def javaboolean2kermeta(x: java.lang.Boolean) = new RichJavaBoolean(x)
+    implicit def javaboolean2kermeta(x: java.lang.Boolean) :RichBoolean= {if (x== null) return new RichBoolean(false) else new RichBoolean(x.booleanValue())}
     implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
     implicit def iteratorEObject2kermeta(x:java.util.Iterator[_<: org.eclipse.emf.ecore.EObject]) :  _root_.java.util.Iterator[_root_.java.lang.Object] =x.asInstanceOf[_root_.java.util.Iterator[_root_.java.lang.Object]]
 
@@ -152,9 +152,9 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
     def and(other : Boolean) :Boolean={value && other}
     def toBoolean() : Boolean = {value}
     def andThen(func : Boolean => Boolean):Boolean ={ if (value) {return func(value) }else return false; }
-    def andThen(func : java.lang.Boolean => Boolean):Boolean ={ if (value) {return func(value) }else return false; }
+    def andThen(func : java.lang.Boolean => java.lang.Boolean):java.lang.Boolean ={ if (value) {return func(value) }else return false; }
     def orElse(func : Boolean => Boolean):Boolean ={ if (!value) {return func(value)}else return true; }
-    def orElse(func : java.lang.Boolean => Boolean):Boolean ={ if (!value) {return func(value)}else return true; }
+    def orElse(func : java.lang.Boolean => java.lang.Boolean):java.lang.Boolean ={ if (!value) {return func(value)}else return true; }
     override def getValue():Object = new java.lang.Boolean(value)
     override def getMetaClass():org.kermeta.language.structure.Class={
         return createMetaClass("kermeta::standard::Boolean")
@@ -362,7 +362,7 @@ class RichShort(value: Short) extends RichNumeric[Short] {
 
 }
 
-
+/*
 class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] {
 
   //generated
@@ -401,7 +401,7 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
  
 
 }
-
+*/
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
 class RichLong(value: Long)  extends RichNumeric[Long]{
