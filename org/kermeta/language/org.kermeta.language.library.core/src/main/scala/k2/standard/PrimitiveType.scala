@@ -152,7 +152,9 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
     def and(other : Boolean) :Boolean={value && other}
     def toBoolean() : Boolean = {value}
     def andThen(func : Boolean => Boolean):Boolean ={ if (value) {return func(value) }else return false; }
+    def andThen(func : java.lang.Boolean => Boolean):Boolean ={ if (value) {return func(value) }else return false; }
     def orElse(func : Boolean => Boolean):Boolean ={ if (!value) {return func(value)}else return true; }
+    def orElse(func : java.lang.Boolean => Boolean):Boolean ={ if (!value) {return func(value)}else return true; }
     override def getValue():Object = new java.lang.Boolean(value)
     override def getMetaClass():org.kermeta.language.structure.Class={
         return createMetaClass("kermeta::standard::Boolean")
@@ -388,7 +390,9 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
     def and(other : Boolean) :Boolean={value.booleanValue && other}
     def toBoolean() : Boolean = {value.booleanValue}
     def andThen(func : Boolean => Boolean):Boolean ={ if (value.booleanValue) {return func(value.booleanValue) }else return false; }
+    def andThen(func : java.lang.Boolean => Boolean):Boolean ={ if (value.booleanValue) {return func(value.booleanValue) }else return false; }
     def orElse(func : Boolean => Boolean):Boolean ={ if (!value.booleanValue) {return func(value.booleanValue)}else return true; }
+    def orElse(func : java.lang.Boolean => Boolean):Boolean ={ if (!value.booleanValue) {return func(value.booleanValue)}else return true; }
 
     override def getValue():Object = value 	
     override def getMetaClass():org.kermeta.language.structure.Class={
