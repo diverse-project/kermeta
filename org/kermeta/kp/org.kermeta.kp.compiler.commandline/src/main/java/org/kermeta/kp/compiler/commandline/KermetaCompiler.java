@@ -291,7 +291,7 @@ public class KermetaCompiler {
 
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
-			ArrayList<URL> kpSources = getSources(kp,kpFileURL, varExpander);
+			ArrayList<TracedURL> kpSources = getSources(kp,kpFileURL, varExpander);
 			if (kpSources.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				this.errorMessage = "Invalid kp file. No sources detected.";
@@ -458,21 +458,21 @@ public class KermetaCompiler {
 		return theParser.load(uri, content, logger);
 	}
 
-	public ArrayList<URL> getSources(String kpString) throws IOException {
+	public ArrayList<TracedURL> getSources(String kpString) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		KermetaProject kp = ldr.loadKp(kpString);
 		if (kp != null) {
 			return getSources(kp, kpString, new KpVariableExpander(kpString, kp,fileSystemConverter, logger));
 		} else {
-			return new ArrayList<URL>();
+			return new ArrayList<TracedURL>();
 		}
 	}
 
-	public ArrayList<URL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
+	public ArrayList<TracedURL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
-		ArrayList<URL> kpSources = new ArrayList<URL>();
+		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
 		for (Source src : srcs) {
 			String currentUrl=null;
 			try{
@@ -486,7 +486,7 @@ public class KermetaCompiler {
 					logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
 				}
 				currentUrl = sourceURL;
-				kpSources.add(FileHelpers.StringToURL(sourceURL));
+				kpSources.add(new TracedURL(src, FileHelpers.StringToURL(sourceURL)));
 			}
 			catch(IOException e){
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), 
@@ -533,7 +533,7 @@ public class KermetaCompiler {
 					} else {
 						dependencyMergedKMUrl = baseUriForDependency + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
 					}
-					kpSources.add(FileHelpers.StringToURL(dependencyMergedKMUrl));
+					kpSources.add(new TracedURL(dep, FileHelpers.StringToURL(dependencyMergedKMUrl)));
 				}
 				
 			}
@@ -555,19 +555,19 @@ public class KermetaCompiler {
 	
 	
 	
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, ArrayList<URL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) {
+	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, ArrayList<TracedURL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 
 		
 		// load similar compatible files in parallel
 		logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 3);
-		ArrayList<URL> ecoreURLs = new ArrayList<URL>();
-		ArrayList<URL> normalLoadURLs = new ArrayList<URL>();
-		for (URL oneURL : kpSources) {
+		ArrayList<TracedURL> ecoreURLs = new ArrayList<TracedURL>();
+		ArrayList<TracedURL> normalLoadURLs = new ArrayList<TracedURL>();
+		for (TracedURL oneURL : kpSources) {
 			if (dirtyMU.get(oneURL) != null) {
 				modelingUnits.add(dirtyMU.get(oneURL));
 			} else {
-				if(oneURL.getFile().endsWith(".ecore")){
+				if(oneURL.getUrl().getFile().endsWith(".ecore")){
 					ecoreURLs.add(oneURL);
 				}
 				else{
@@ -577,7 +577,7 @@ public class KermetaCompiler {
 		}
 		// launch ecore threads
 		ArrayList<Future<ModelingUnit>> ecoreFutures = new ArrayList<Future<ModelingUnit>>();
-		for(URL ecoreURL : ecoreURLs){
+		for(TracedURL ecoreURL : ecoreURLs){
 			// TODO EMF isn't thread safe, cannot even run the same transfo in parallel ! => singleThreadExecutor
 			ecoreFutures.add(singleThreadExector.submit(new CallableModelingUnitLoader(ecoreURL, this, kp, projectName)));
 		}
@@ -595,7 +595,7 @@ public class KermetaCompiler {
 		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+ecoreURLs.size()+" ecore loaded", LOG_MESSAGE_GROUP, 1);
 		// launch normalLoad threads
 		ArrayList<Future<ModelingUnit>> normalLoadFutures = new ArrayList<Future<ModelingUnit>>();
-		for(URL normalLoadURL : normalLoadURLs){
+		for(TracedURL normalLoadURL : normalLoadURLs){
 			normalLoadFutures.add(threadExector.submit(new CallableModelingUnitLoader(normalLoadURL, this, kp, projectName)));
 		}
 		// join
@@ -672,7 +672,7 @@ public class KermetaCompiler {
 	
 	
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
-		ArrayList<URL> kpSources = getSources(kp,kpFileURL, varExpander);
+		ArrayList<TracedURL> kpSources = getSources(kp,kpFileURL, varExpander);
 		return getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
 	}
 
@@ -1108,10 +1108,10 @@ public class KermetaCompiler {
 	/**
 	 * Flush the problems marker related to this kp
 	 */
-	protected void flushProblems(ArrayList<URL> kpSources) {
+	protected void flushProblems(ArrayList<TracedURL> kpSources) {
 
-		for (URL oneURL : kpSources) {
-			flushProblems(oneURL);
+		for (TracedURL oneURL : kpSources) {
+			flushProblems(oneURL.getUrl());
 		}
 	}
 	protected void flushProblems(URL kpSource) {
@@ -1249,5 +1249,6 @@ public class KermetaCompiler {
 	public String getMainProgressGroup(){
 		return "KermetaCompiler["+this.hashCode()+"]";
 	}
+
 	
 }

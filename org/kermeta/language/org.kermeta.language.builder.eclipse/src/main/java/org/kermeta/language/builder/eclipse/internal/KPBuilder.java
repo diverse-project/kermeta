@@ -40,6 +40,7 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
+import org.kermeta.kp.compiler.commandline.TracedURL;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
@@ -222,9 +223,9 @@ public class KPBuilder {
 				return true;
 			}
 			
-			ArrayList<URL> theSources = compiler.getSources(kpFileURL);
-			for (URL oneURL : theSources) {
-				IFile theFile = ResourceHelpers.getIFile(oneURL.toString());
+			ArrayList<TracedURL> theSources = compiler.getSources(kpFileURL);
+			for (TracedURL oneURL : theSources) {
+				IFile theFile = ResourceHelpers.getIFile(oneURL.getUrl().toString());
 				if (theFile != null) {
 					if (theFile.getLocalTimeStamp() > timeStampOfClasses) {
 						return true;
@@ -296,8 +297,8 @@ public class KPBuilder {
 				generateURIMapFile(outputRootFolder);
 				
 				if (result != null && !compiler.hasFailed) {
-					kp_last_modelingunit = result;
-					
+					//kp_last_modelingunit = result;
+					Activator.getDefault().getMessaggingSystem().debug("copy resources to class folders to ease the run from Eclipse", this.getClass().getName());
 					
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 					// copy resources to classes folders in order to ease the run ...
@@ -427,13 +428,13 @@ public class KPBuilder {
 	 * @throws IOException
 	 */
 	public void refreshFileIndex() throws IOException {
-		ArrayList<URL> kpSources = compiler.getSources(kpFileURL);
+		ArrayList<TracedURL> kpSources = compiler.getSources(kpFileURL);
 		//This list allow to preserve old files ever parsed
 		HashMap<String,KPFilesContainer> oldKpFiles = kpFiles;
 		kpFiles = new HashMap<String, KPFilesContainer>();
-		for (URL uneSource : kpSources) {
-			KPFilesContainer container = new KPFilesContainer(uneSource, false, null);
-			IFile resource = ResourceHelpers.getIFile(uneSource.toString());
+		for (TracedURL uneSource : kpSources) {
+			KPFilesContainer container = new KPFilesContainer(uneSource.getUrl(), false, null);
+			IFile resource = ResourceHelpers.getIFile(uneSource.getUrl().toString());
 			if (resource != null) {
 				//Adding new files only
 				if (oldKpFiles.get(KermetaBuilder.getDefault().generateIdentifier(resource)) != null) {
