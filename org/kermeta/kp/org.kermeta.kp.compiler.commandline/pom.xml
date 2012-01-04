@@ -101,6 +101,7 @@
 						<Import-Package>
 							!javax.*,
 							!org.kermeta.language.language.ecore2km.org.eclipse.emf.ecore,
+							!org.apache.commons.cli;version="[0,)",
 							*
 						</Import-Package>
 						<Private-Package>
