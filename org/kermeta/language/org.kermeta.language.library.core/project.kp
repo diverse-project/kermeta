@@ -10,6 +10,7 @@ sources ={
 	require "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
 	require "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
 	require "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
+	require "${project.baseUri}/src/main/kmt/kermeta/utils/MapEntry.kmt"
 	require "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
 	// import kermeta.ecore from the maven jar that distribute it officially
 	require "${language.model.baseUri}/src/main/ecore/kermeta.ecore" byteCodeFromADependency  
