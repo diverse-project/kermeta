@@ -132,7 +132,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     implicitDef append "object " + GlobalConfiguration.implicitConvTraitName + " {\n"
     implicitDef.append("implicit def richAspect(o : _root_.java.lang.Object)  =  o match {\n")
     implicitDef.append("  case s:String => new k2.standard.RichString(s)\n")
-    implicitDef.append("   case s : java.lang.Boolean => new k2.standard.RichJavaBoolean(s)\n")
+    implicitDef.append("   case s : java.lang.Boolean => new k2.standard.RichBoolean(s)\n")
     implicitDef.append("   case s : java.lang.Integer =>\n")
     implicitDef.append(" new k2.standard.RichInteger(s.intValue)\n")
     implicitDef.append("   case s : java.util.List[_] => new k2.standard.JavaConversions.RichKermetaList(s)\n")
