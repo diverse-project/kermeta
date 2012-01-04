@@ -31,6 +31,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	reference traceRegistry : TraceRegistry
 
+	attribute isProcessingEcoreItself : Boolean
 
 	/**
 	 * This main operation launches the conversion. Its uses: a modeling unit where 
@@ -42,6 +43,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		self.modelingUnit := modelingUnit
 		self.primitiveTypeMappings := primitiveTypeMappings
 		self.traceRegistry := traceRegistry
+		
+		isProcessingEcoreItself := pkg.nsURI == "http://www.eclipse.org/emf/2002/Ecore"
+		
 		// Launching the conversion.
 		pkg.accept(self)
 	end
@@ -177,7 +181,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 						typeName := "kermeta::standard::Object"
 					end 
 				else
-					if(type.hasInstanceClassName) then
+					if(type.hasInstanceClassName and not (type.getQualifiedName() =="ecore::EStringToStringMapEntry")) then
 						typeName := checkEObjectType(type.instanceClassName)
 					else
 						typeName := checkEObjectType(type.getQualifiedName())
@@ -185,6 +189,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				end
 
 				result := UnresolvedType.new.initialize(typeName)
+				
 				if(not genericType.isVoid) then
 					genericType.targetKermetaObject := result
 				end
@@ -196,7 +201,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			else
 				typeName := genericType.getQualifiedName()
 			end
-
+			
 			result := UnresolvedType.new.initialize(checkEObjectType(typeName))
 			genericType.targetKermetaObject := result
 		end
@@ -217,7 +222,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				var type : UnresolvedType init getUnresolvedType(genType, void)
 				
 				// It can be null, e.g. A<?>
-				if(not type.isVoid) then
+				if(not type.isVoid and not (object.targetKermetaObject.asType(UnresolvedType).typeIdentifier=="kermeta::standard::Object")) then
+					// ignore generic on unknown Type (ie. translated in kermeta::standard::Object)
 					// Mapping ecore to kermeta.
 					genType.targetKermetaObject := type
 					// Adding the created unresolved type to its parent.
@@ -304,7 +310,11 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	method visitEClass(eclass : EClass) : Void is do
 		// If the class has a instance class name or does not have a package, it is no created.
 		if((not eclass.ePackage.isVoid).andThen{ b | eclass.ePackage.targetKermetaObject.isKindOf(Package) and 
-			not eclass.hasInstanceClassName()}) then
+			((not eclass.hasInstanceClassName()) or 
+			  (eclass.hasInstanceClassName() and isProcessingEcoreItself))}) then
+			  // special cases : for EStringToStringMapEntry don't know how to do it in a clen way due to the generic / non generic mismatch
+			  
+			  
 			// Creation of the Kermeta class.
 			var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(eclass.name, false, eclass.~abstract, void)
 
@@ -326,6 +336,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			traceRegistry.addTraceFromObjects(eclass, kmClassDef, void)
 		end
 
+		
 		super(eclass)
 	end
 
@@ -353,16 +364,20 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		// Getting the classifier that contains the type parameter.
 		var classifier : EClassifier init typeParam.container().asType(EClassifier)
 
-		// Checking the target Kermeta object.
-		if(classifier.targetKermetaObject.isInstanceOf(GenericTypeDefinition)) then
-			var gtd : GenericTypeDefinition init classifier.targetKermetaObject.asType(GenericTypeDefinition)
-			// Creating the Kermeta object type variable.
-			var typeVar : ObjectTypeVariable init ObjectTypeVariable.new		
-			typeVar.name := typeParam.name
-			// Adding the type variable into the generic type definition.
-			gtd.typeParameter.add(typeVar)
-			gtd.containedType.add(typeVar)
-			traceRegistry.addTraceFromObjects(typeParam, typeVar, void)
+        if classifier.targetKermetaObject.isVoid then
+        	stdio.writeln("[visitETypeParameter.ERROR] applying a TypeParameter on a non generic EClassifier "+classifier.name)
+        else
+			// Checking the target Kermeta object.
+			if(classifier.targetKermetaObject.isInstanceOf(GenericTypeDefinition)) then
+				var gtd : GenericTypeDefinition init classifier.targetKermetaObject.asType(GenericTypeDefinition)
+				// Creating the Kermeta object type variable.
+				var typeVar : ObjectTypeVariable init ObjectTypeVariable.new		
+				typeVar.name := typeParam.name
+				// Adding the type variable into the generic type definition.
+				gtd.typeParameter.add(typeVar)
+				gtd.containedType.add(typeVar)
+				traceRegistry.addTraceFromObjects(typeParam, typeVar, void)
+			end
 		end
 	end
 

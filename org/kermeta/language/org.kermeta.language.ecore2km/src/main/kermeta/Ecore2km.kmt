@@ -72,6 +72,7 @@ class Ecore2km {
     	result.put("java.lang.Void","kermeta::standard::Void")
     	result.put("java.lang.Short","kermeta::standard::Integer")
     	result.put("java.lang.Byte","kermeta::standard::Integer")
+    	result.put("java.util.Map$Entry","kermeta::util::MapEntry")
 	end
 }
 

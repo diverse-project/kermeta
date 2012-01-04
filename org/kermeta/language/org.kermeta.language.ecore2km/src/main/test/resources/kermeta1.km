@@ -14,30 +14,34 @@
           <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure"/>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
               kTag="#//org/kermeta/language/structure/Constraint/@kOwnedTags.0" name="Constraint"
-              isAspect="false" isAbstract="false">
+              isAspect="false">
             <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/Constraint"/>
             <ownedAttribute kTag="#//org/kermeta/language/structure/Constraint/stereotype/@kOwnedTags.0"
                 name="stereotype" type="#//org/kermeta/language/structure/Constraint/stereotype/@containedType.0"
-                isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+                isOrdered="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/Constraint/stereotype"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
                   typeIdentifier="org::kermeta::language::structure::ConstraintType"/>
             </ownedAttribute>
             <ownedAttribute kTag="#//org/kermeta/language/structure/Constraint/language/@kOwnedTags.0"
                 name="language" type="#//org/kermeta/language/structure/Constraint/language/@containedType.0"
-                isOrdered="true" upper="1" isReadOnly="true" isComposite="true">
+                isOrdered="true" isComposite="true">
               <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/Constraint/language"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType"
                   typeIdentifier="org::kermeta::language::structure::ConstraintLanguage"/>
             </ownedAttribute>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration"
+              kTag="#//org/kermeta/language/structure/ConstraintLanguage/@kOwnedTags.0"
               name="ConstraintLanguage">
+            <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/ConstraintLanguage"/>
             <ownedLiteral name="kermeta"/>
             <ownedLiteral name="ocl"/>
           </ownedTypeDefinition>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration"
+              kTag="#//org/kermeta/language/structure/ConstraintType/@kOwnedTags.0"
               name="ConstraintType">
+            <kOwnedTags name="ecore" value="true" object="#//org/kermeta/language/structure/ConstraintType"/>
             <ownedLiteral name="inv"/>
             <ownedLiteral name="pre"/>
             <ownedLiteral name="post"/>
