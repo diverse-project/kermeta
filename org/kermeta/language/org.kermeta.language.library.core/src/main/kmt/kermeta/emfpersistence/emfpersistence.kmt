@@ -149,6 +149,10 @@ class ResourceSet {        @CompilerIgnore "true"
          operation eSetDeliver(arg0:Boolean) : Void is do
 
           end
+        @CompilerIgnore "true"
+         operation resolveAllProxies() : Void is do
+
+          end
 }
 
 }

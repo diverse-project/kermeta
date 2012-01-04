@@ -66,4 +66,5 @@ class RichResourceSet(value: ResourceSet) extends k2.standard.EObjectImplForKO{
 	 def eAdapters() : org.eclipse.emf.common.util.EList[_root_.org.eclipse.emf.common.notify.Adapter] = value.eAdapters()
 	 def eDeliver() : Boolean = value.eDeliver()
 	 def eSetDeliver(arg0:Boolean) : Unit = value.eSetDeliver(arg0)
+   def resolveAllProxies(arg0:Boolean) : Unit = org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(value)
 }
