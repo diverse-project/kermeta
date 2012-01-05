@@ -4,6 +4,8 @@ Two default environments can typically be used :
 1/ On command line with
 	"mvn install"
 2/ In Eclipse using mvn eclipse:eclipse
+	Prerequisite : scala ide must be installed
+	Optional (but recommanded) prerequisite : m2e is installed
 	Eclipse can be set up using the command 
 		"mvn eclipse:clean eclipse:eclipse"
 		then do a refresh on the project.
