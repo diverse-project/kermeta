@@ -181,7 +181,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 						typeName := "kermeta::standard::Object"
 					end 
 				else
-					if(type.hasInstanceClassName and not (type.getQualifiedName() =="ecore::EStringToStringMapEntry")) then
+					if(type.hasInstanceClassName /* and not ("ecore::EStringToStringMapEntry" == type.getQualifiedName())*/) then
 						typeName := checkEObjectType(type.instanceClassName)
 					else
 						typeName := checkEObjectType(type.getQualifiedName())

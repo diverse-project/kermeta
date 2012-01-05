@@ -21,7 +21,7 @@ using org::kermeta::language::structure
 
 class Test {
 	operation main() : Void is do
-		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/Ecore"
+		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/kermeta"
 		var ecore2km : Ecore2km init Ecore2km.new
 		stdio.writeln("Loading "+path + ".ecore...")
 		var pkgs : Bag<EPackage> init getEcoreModel(path + ".ecore")
