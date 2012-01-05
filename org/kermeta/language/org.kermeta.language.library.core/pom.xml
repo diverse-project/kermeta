@@ -107,7 +107,7 @@
 			        <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
 			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
 			      </classpathContainers>
-			      <excludes>
+			      <excludes> 
 			        <exclude>org.scala-lang:scala-library</exclude>
 			        <!-- <exclude>org.scala-lang:scala-compiler</exclude> -->
 			      </excludes>
