@@ -21,7 +21,7 @@ using org::kermeta::language::structure
 
 class Test {
 	operation main() : Void is do
-		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/kermeta"
+		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/Ecore"
 		var ecore2km : Ecore2km init Ecore2km.new
 		stdio.writeln("Loading "+path + ".ecore...")
 		var pkgs : Bag<EPackage> init getEcoreModel(path + ".ecore")
@@ -29,7 +29,7 @@ class Test {
 		var modelingUnit : ModelingUnit init ecore2km.convert(pkgs.one, "default")
 //		var visitor : MMVisitor init MMVisitor.new
 //		modelingUnit.accept(visitor)
-		saveKmModel(modelingUnit, path + "1.km")
+		saveKmModel(modelingUnit, path + ".km")
 		stdio.writeln("End.")
 	end
 	

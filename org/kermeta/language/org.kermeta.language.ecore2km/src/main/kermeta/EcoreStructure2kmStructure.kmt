@@ -106,6 +106,18 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			// Each ecore class must be associated a tag.
 			addEcoreTag(kmOp)
 			
+			if op.eContainingClass.isIncompatibleWithOtherFeature(op) then
+				// fix name and add tag if this operation conflicting according to Kermeta 2 resolver rules
+				var  sb : StringBuffer init 	StringBuffer.new
+				sb.append(op.name)	
+				sb.append("From")
+				op.eParameters.each{ param | sb.append(param.name)}
+				kmOp.name :=  sb.toString
+				var kmTag : Tag init Tag.new.initialize("ecore.name", op.name, kmOp)
+				kmOp.kTag.add(kmTag)
+				kmOp.kOwnedTags.add(kmTag)
+			end
+			
 			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
 			// Linking the Kermeta operation to the Ecore operation.
 			op.targetKermetaObject := kmOp
@@ -181,11 +193,19 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 						typeName := "kermeta::standard::Object"
 					end 
 				else
-					if(type.hasInstanceClassName /* and not ("ecore::EStringToStringMapEntry" == type.getQualifiedName())*/) then
-						typeName := checkEObjectType(type.instanceClassName)
+					if(type.hasInstanceClassName ) then
+						// workaround bug : cannot navigate in ecore.ecore model refered via nsUri
+						// ex of bug: a reference to http://www.eclipse.org/emf/2002/Ecore#//EObject
+						// in that case getQualifiedName doesn't work in compiled mode :-(
+						// this workaround, will work onl for types with a instanceClassName
+						// A cleaner solution would be to programmatically register Ecore.ecore from the file
+						typeName := primitiveTypeMappings.getValue(type.instanceClassName)
+						if typeName.isVoid then
+							typeName := checkEObjectType(type.getQualifiedName())
+						end
 					else
 						typeName := checkEObjectType(type.getQualifiedName())
-					end
+					end 
 				end
 
 				result := UnresolvedType.new.initialize(typeName)
@@ -308,10 +328,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	
 	
 	method visitEClass(eclass : EClass) : Void is do
-		// If the class has a instance class name or does not have a package, it is no created.
-		if((not eclass.ePackage.isVoid).andThen{ b | eclass.ePackage.targetKermetaObject.isKindOf(Package) and 
-			((not eclass.hasInstanceClassName()) or 
-			  (eclass.hasInstanceClassName() and isProcessingEcoreItself))}) then
+		// If does not have a package, it is no created.
+		if((not eclass.ePackage.isVoid).andThen{ b | eclass.ePackage.targetKermetaObject.isKindOf(Package) } ) then
 			  // special cases : for EStringToStringMapEntry don't know how to do it in a clen way due to the generic / non generic mismatch
 			  
 			  
@@ -334,6 +352,13 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			// The reference to the kermeta class is added to the ecore class.
 			eclass.targetKermetaObject := kmClassDef
 			traceRegistry.addTraceFromObjects(eclass, kmClassDef, void)
+			
+			// if the class has a instance class name, add a tag 
+			if eclass.hasInstanceClassName() then
+				var kmTag : Tag init Tag.new.initialize("ecore.instanceClassName", eclass.instanceClassName, kmClassDef)
+				kmClassDef.kTag.add(kmTag)
+				kmClassDef.kOwnedTags.add(kmTag)
+			end
 		end
 
 		

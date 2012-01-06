@@ -22,6 +22,17 @@ aspect class EClassifier {
 		result := (not instanceClassName.isVoid).andThen{b | instanceClassName!="" }
 	end
 }
+	
+aspect class EClass	{
+	
+	/**
+	 * @return true if the given EOperation cannot be used with the same name, due to Kermeta resolver restriction
+	 */
+	operation isIncompatibleWithOtherFeature(op : EOperation) : Boolean is do
+		result := eOperations.exists{ otherOp | (otherOp != op) and (otherOp.eParameters.size == op.eParameters.size) and (otherOp.name == op.name)} 
+		//result := result or (( op.eParameters.size == 0).andThen{b | eStructuralFeatures.exists{feat | feat.name == op.name} })
+	end
+}
 
 
 /**
