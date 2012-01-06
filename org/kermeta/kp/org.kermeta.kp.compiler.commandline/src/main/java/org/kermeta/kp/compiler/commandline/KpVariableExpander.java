@@ -80,8 +80,12 @@ public class KpVariableExpander {
 					logger.error("fileSystemConverter not correctly initialized", KermetaCompiler.LOG_MESSAGE_GROUP, new Exception());
 				}
 				java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURL));
+				logger.debug( dependencyURL.toString() + " is converted to " + fileURI, 	KermetaCompiler.LOG_MESSAGE_GROUP);
 				if(fileURI != null){					
 					dependencyURL = fileURI.toString();
+				}
+				else {
+					
 				}
 				if (dependencyURLWithVariable.contains("${")) {
 					// deal with variable expansion

@@ -8,6 +8,7 @@
 */
 package org.kermeta.utils.helpers.emf;
 
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
@@ -25,7 +26,7 @@ public class EMFUriHelper {
 		
 		public static org.eclipse.emf.common.util.URI normalize(org.eclipse.emf.common.util.URI emfUri){
 			
-			org.eclipse.emf.common.util.URI normalizedUri = new ExtensibleURIConverterImpl().normalize(emfUri);
+			org.eclipse.emf.common.util.URI normalizedUri = CommonPlugin.resolve(new ExtensibleURIConverterImpl().normalize(emfUri));
 			if(emfUri.isPlatformResource() && normalizedUri.isPlatformResource()){
 				// still a platform resource, try with EcorePlugin
 				//System.out.println("[EMFUriHelper] platform:/resource not normalized, trying to resolve");
