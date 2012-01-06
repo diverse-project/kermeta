@@ -38,8 +38,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"\t\trequire \"${project.baseUri}/src/main/kmt/${class.name}.kmt\"\n"+  
 				"\t}\n"+
 				"\tdependencies = {\n"+
-				"\t\t//default dependency to kermeta framework (SNAPSHOT = use the last development version)\n"+
-				"\t\tdependency \"library.core\" =\"mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT\"\n"+
+				"\t\t//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)\n"+
+				"\t\tdependency \"library.core\" =\"platform:/plugin/org.kermeta.language.library.core\",\"mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT\"\n"+
 				"\t}");
 		
 	}
