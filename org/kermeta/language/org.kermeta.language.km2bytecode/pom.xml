@@ -143,24 +143,18 @@
 							org.kermeta.compilo.scala.*,
 							org.kermeta.language.km2bytecode.*
 						</Export-Package>
+						<Require-Bundle>
+							org.kermeta.scala.scala-library,
+							org.kermeta.scala.scala-compiler
+						</Require-Bundle>
 						<Import-Package>
 							!org.apache.maven.*,
-							!javax.*,
 							!org.codehaus.plexus.*,
+							!scala.*,
 							org.antlr.stringtemplate.*,
-							antlr.*,
 							org.kermeta.language,
 							org.kermeta.language.structure.*,
 							org.kermeta.language.behavior.*,
-							scala,
-							scala.actors,
-							scala.collection.*,
-							scala.reflect,
-							scala.runtime,
-							scala.util.matching,
-							scala.util,
-							scala.tools.nsc,
-							scala.tools.nsc.reporters,
 							k2.io,
 							k2.standard,
 							k2.persistence,
