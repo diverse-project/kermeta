@@ -43,6 +43,14 @@ class Object
 	@CompilerIgnore "true"
 	operation container() : Object  is do
 	end
+	
+	/**
+	 * Removes the object from its containing emfpersistence::resource and/or its containing object.
+	 */
+	@CompilerIgnore "true"
+	operation removeFromContainer() : Void  is do
+	end
+	
 
 	/**
 	 * Runs checking of invariants defined for the metaclass of the Object
