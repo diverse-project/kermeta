@@ -33,6 +33,8 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def freeze() ={}
   //TODO
 	def containingResource() : RichResource = {null.asInstanceOf[RichResource]}
+	
+	def removeFromContainer()  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
   //TODO
 	def invoke(op:org.kermeta.language.structure.Operation , args:List[Object]) ={}
 
