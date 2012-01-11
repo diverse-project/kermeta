@@ -1,0 +1,39 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package test{
+	class MainClass
+	{
+		
+		operation bar ( f : <Boolean->Boolean>) : Boolean is do
+		result := f(true)
+		
+		end
+		
+		operation foobar ( f : <Integer->Integer>) : Integer is do
+		result := f(1)
+		
+		end
+		operation mainOperation() : Void is do 
+
+			
+			var main : MainClass init MainClass.new
+			
+			main.bar{x|x}		
+			main.bar{x|var test : Test init Test.new test.foo1:=true test.foo1}	
+			main.bar{x|var test : Test init Test.new test.foo2:=false test.foo2}	
+			
+			main.foobar{x|var test : Test init Test.new test.foo3:=2 test.foo3}
+			main.foobar{x|var test : Test init Test.new test.foo4:=2 test.foo4}
+			//main.foobar{x|var test : Test init Test.new test.foo5:=2 test.foo5}
+			//main.foobar{x|var test : Test init Test.new test.foo6:=2 test.foo6}
+			//main.foobar{x|var test : Test init Test.new test.foo7:=2 test.foo7}
+			//main.foobar{x|var test : Test init Test.new test.foo8:=2 test.foo8}
+			//main.foobar{x|var test : Test init Test.new test.foo9:=2 test.foo9}
+			//main.foobar{x|var test : Test init Test.new test.foo10:=2 test.foo10}
+			main.foobar{x|var test : Test init Test.new test.foo11:=2 test.foo11}
+
+			
+		end
+	}
+}
