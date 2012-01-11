@@ -12,8 +12,13 @@ using kermeta::standard::Integer => ks::Integer // another renaming
 
 using kermeta::standard::* => ks::*             // global renaming of a package
 
-
-
+@mytag "this is a tag"
+@mysecondtag "this is another tag"
+/** this must be a documentation tag */
 class toto {
+
+    @mytag "this is a tag"
+    @mysecondtag "this is another tag"
+    operation foo() : Void is do end
 
 }
