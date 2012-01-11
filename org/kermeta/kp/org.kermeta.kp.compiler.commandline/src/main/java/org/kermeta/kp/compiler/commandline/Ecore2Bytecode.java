@@ -11,6 +11,7 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +176,7 @@ public class Ecore2Bytecode {
 				.getDiagnostics()) {
 			try {
 				if(diagnostic.getSource() != null){
-					TextReference tr = new TextReference(diagnostic.getSource().toUri().toURL(), 
+					TextReference tr = new TextReference((new java.net.URI("file:///")).resolve(diagnostic.getSource().toUri()).toURL(), 
 							new Long(diagnostic.getStartPosition()).intValue(), 
 							new Long(diagnostic.getEndPosition()).intValue());
 					logger.logProblem(MessagingSystem.Kind.UserERROR, diagnostic.getMessage(null), KermetaCompiler.LOG_MESSAGE_GROUP, tr);
@@ -185,6 +186,8 @@ public class Ecore2Bytecode {
 					logger.info(diagnostic.getMessage(null), KermetaCompiler.LOG_MESSAGE_GROUP);
 				}
 			} catch (MalformedURLException e) {
+				logger.error(e.getMessage()+" on "+ diagnostic.getSource().getName(), KermetaCompiler.LOG_MESSAGE_GROUP, e );
+			} catch (URISyntaxException e) {
 				logger.error(e.getMessage()+" on "+ diagnostic.getSource().getName(), KermetaCompiler.LOG_MESSAGE_GROUP, e );
 			}
 		}
