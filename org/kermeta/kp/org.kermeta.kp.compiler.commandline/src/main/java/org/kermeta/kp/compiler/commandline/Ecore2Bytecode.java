@@ -185,7 +185,7 @@ public class Ecore2Bytecode {
 					logger.info(diagnostic.getMessage(null), KermetaCompiler.LOG_MESSAGE_GROUP);
 				}
 			} catch (MalformedURLException e) {
-				logger.error(e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
+				logger.error(e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e +" on "+ diagnostic.getSource().getName());
 			}
 		}
 		if(hasError){
