@@ -25,9 +25,7 @@ package test{
 			
 			main.foobar{x|var test : Test init Test.new test.foo3:=2 test.foo3}
 			main.foobar{x|var test : Test init Test.new test.foo4:=2 test.foo4}
-			//main.foobar{x|var test : Test init Test.new test.foo5:=2 test.foo5}
-			//main.foobar{x|var test : Test init Test.new test.foo6:=2 test.foo6}
-			//main.foobar{x|var test : Test init Test.new test.foo7:=2 test.foo7}
+			//to be uncommented when ecore2km is fixed
 			//main.foobar{x|var test : Test init Test.new test.foo8:=2 test.foo8}
 			//main.foobar{x|var test : Test init Test.new test.foo9:=2 test.foo9}
 			//main.foobar{x|var test : Test init Test.new test.foo10:=2 test.foo10}

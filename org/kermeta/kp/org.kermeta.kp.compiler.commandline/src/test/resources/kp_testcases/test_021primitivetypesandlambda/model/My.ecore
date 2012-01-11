@@ -4,14 +4,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="test"
     nsURI="http://test" nsPrefix="test">
   <eClassifiers xsi:type="ecore:EClass" name="Test">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
-        defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo4" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
-        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo4" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo8" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo9" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo10" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
