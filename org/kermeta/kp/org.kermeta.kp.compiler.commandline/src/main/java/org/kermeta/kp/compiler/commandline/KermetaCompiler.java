@@ -408,7 +408,12 @@ public class KermetaCompiler {
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
 				logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
 				String fileLocation = mergedFile.toURI().toURL().getFile();
-				km2Scala(kp, varExpander, fileLocation, targetGeneratedScalaSourceFolder, targetRootFolder);
+				StringBuilder fullBinaryDependencyClassPathSB = new StringBuilder(); 
+				for(String singlePath : fullBinaryDependencyClassPath){
+					fullBinaryDependencyClassPathSB.append(singlePath);
+					fullBinaryDependencyClassPathSB.append(System.getProperty("path.separator"));
+				}
+				km2Scala(kp, varExpander, fileLocation, targetGeneratedScalaSourceFolder, targetRootFolder, fullBinaryDependencyClassPathSB.toString());
 				
 				
 				
@@ -804,8 +809,8 @@ public class KermetaCompiler {
 	}
 	
 	
-	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder) {
-		initializeforBuilding(kp, targetFolder, targetFolder);
+	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) {
+		initializeforBuilding(kp, targetFolder, targetFolder, userAdditionalClassPath);
 		/*
 		 * if(packageEquivalences != null){ for (int i = 0; i <
 		 * packageEquivalences.length; i++) { PackageEquivalence equivalence =
@@ -821,7 +826,7 @@ public class KermetaCompiler {
 		km2ScalaCompiler.compile(kmFileURL);
 	}
 
-	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder) {
+	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) {
 		
 		GlobalConfiguration.outputFolder_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SCALA_SUBFOLDER);
 		GlobalConfiguration.outputProject_$eq(targetGeneratedSourceFolder + "/" + INTERMEDIATE_SUBFOLDER);
@@ -837,6 +842,8 @@ public class KermetaCompiler {
 		// GroupId and ArtifactId are used to prefix the generated code
 		GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
 		GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
+		
+		GlobalConfiguration.props().setProperty("user.additional.classpath",userAdditionalClassPath);
 
 		// default baseClass and baseOperation
 		if (kp.getDefaultMainClass() != null) {
@@ -1233,7 +1240,7 @@ public class KermetaCompiler {
 	public void createJar(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder){
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		KermetaProject kp = ldr.loadKp(kpFileURL);
-		initializeforBuilding(kp, targetGeneratedSourceFolder, targetFolder);
+		initializeforBuilding(kp, targetGeneratedSourceFolder, targetFolder, "");
 		if (GlobalConfiguration.createPackage()) {
 			File fo;
 			try {
@@ -1250,5 +1257,7 @@ public class KermetaCompiler {
 		return "KermetaCompiler["+this.hashCode()+"]";
 	}
 
+	
+	
 	
 }
