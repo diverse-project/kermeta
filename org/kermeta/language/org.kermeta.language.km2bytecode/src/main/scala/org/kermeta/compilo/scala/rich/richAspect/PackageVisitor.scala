@@ -259,9 +259,9 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   def visitCallVariable(thi: CallVariable, res: StringBuilder): Unit = {
 	
     res.append(Util.protectScalaKeyword(thi.getName()))
-    println (thi.getName() + " " + thi.getStaticType() )
+    log.debug (thi.getName() + " " + thi.getStaticType() )
     if (thi.getStaticType().isInstanceOf[Class])
-      println(thi.getStaticType().asInstanceOf[Class].getTypeDefinition())
+      log.debug(""+thi.getStaticType().asInstanceOf[Class].getTypeDefinition())
     if (thi.getStaticType().isInstanceOf[Class] && "scala.Unit".equals(
       getQualifiedNameCompilo(thi.getStaticType().asInstanceOf[Class].getTypeDefinition()))){
      res append "()"
@@ -389,7 +389,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
             case "Boolean" => "java.lang.Boolean"
             case "Integer" => "java.lang.Integer"
             case "UnlimitedNatural" => "java.lang.Integer"
-            case _ => { println("default " + thi.getName); "java.lang.Object" }
+            case _ => { log.debug("default " + thi.getName); "java.lang.Object" }
           }
         }
       //   println("primitive " + t)
