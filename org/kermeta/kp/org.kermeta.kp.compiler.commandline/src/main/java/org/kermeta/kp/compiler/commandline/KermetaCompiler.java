@@ -406,6 +406,9 @@ public class KermetaCompiler {
 				// deal with km to scala
 				// compiler require a file location not an URL
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
+				
+				fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder+"/"); // add the path to java code frome generated emf
+				
 				logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
 				String fileLocation = mergedFile.toURI().toURL().getFile();
 				StringBuilder fullBinaryDependencyClassPathSB = new StringBuilder(); 
@@ -421,7 +424,7 @@ public class KermetaCompiler {
 				ecore2Bytecode.processDiagnostic(ecorejava2bytecode);
 
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
-				fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder);
+				
 				// deal with scala to bytecode
 				int result =scala2bytecode(fullBinaryDependencyClassPath);
 				if(result != 0){

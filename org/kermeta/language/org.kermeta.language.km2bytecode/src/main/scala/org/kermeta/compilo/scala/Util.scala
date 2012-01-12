@@ -249,7 +249,7 @@ object Util extends LogAspect {
       	})
       } catch {
         case e: java.lang.ClassNotFoundException => {
-          log.debug(e.getMessage() + " in " + cl.getURLs().deepToString() + " cl.getURL.size=" + cl.getURLs().length)
+          log.debug(e + " in " + cl.getURLs().deepToString() + " cl.getURL.size=" + cl.getURLs().length)
           return false
         }
       }
