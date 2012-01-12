@@ -81,35 +81,44 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
     res.append("\n")
   }
-
+  
   def getGetter(thi: Property, s: StringBuilder, res: StringBuilder, prefix: String) = {
     var currentname: String = thi.getName
     if ("class".equals(currentname) && Util.hasEcoreTag(thi)) {
       currentname = currentname + "_"
     }
-
+  	//Cas des collections uml
+    if ((thi.getUpper > 1 || thi.getUpper == -1) && "uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) {
+      currentname = getUmlExtension(thi)
+    }
+    
     res.append("this.")
-    if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")) {
-      if (thi.getType().isInstanceOf[PrimitiveType]
-        && !("MARTE_Library.MARTE_PrimitivesTypes.Boolean".equals(whichBoolean(thi.getType().asInstanceOf[PrimitiveType])) ||
-          "org.kermeta.language.structure.Boolean".equals(whichBoolean(thi.getType().asInstanceOf[PrimitiveType])) ||
-          "org.eclipse.emf.ecore.EBoolean".equals(whichBoolean(thi.getType().asInstanceOf[PrimitiveType])) || "Ker".equals(prefix))) {
-        log.info("ECHO TYPE " + s + " " + getQualifiedNameCompilo(thi.getType()))
-        res.append(prefix + "get")
-      } else {
-
-        res.append(prefix + "is")
-      }
+   
+    val baseName = currentname.substring(0, 1).toUpperCase + currentname.substring(1, thi.getName.size)
+    var useIs = false	  
+    if (Util.hasEcoreTag(thi)){
+    	var s: StringBuilder = new StringBuilder
+    	visit(thi.getType(),s)
+    	if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") ||  s.toString.equals("_root_.java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")|| s.toString.equals("_root_.kermeta.standard.Boolean")) {
+    	  val classQualifiedName = getQualifiedNamedBase(thi.eContainer.asInstanceOf[ClassDefinition])
+    	  if(Util.doesMethodExists(classQualifiedName, "is"+baseName)) {
+	    	useIs = true
+	    	log.debug(classQualifiedName+"."+"is"+baseName + " found in additional classpath")
+    	  }
+    	  else{
+    		  log.debug(classQualifiedName+"."+"is"+baseName + " NOT found in additional classpath")
+    	  }
+    	}
+    }
+    if (useIs) {
+      res.append(prefix + "is")    
     } else {
       res.append(prefix + "get")
     }
 
-    //Cas des collections uml
-    if ((thi.getUpper > 1 || thi.getUpper == -1) && "uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) {
-      currentname = getUmlExtension(thi)
-    }
+    
 
-    res.append(currentname.substring(0, 1).toUpperCase() + currentname.substring(1, currentname.length) + "()")
+    res.append(baseName + "()")
 
   }
 

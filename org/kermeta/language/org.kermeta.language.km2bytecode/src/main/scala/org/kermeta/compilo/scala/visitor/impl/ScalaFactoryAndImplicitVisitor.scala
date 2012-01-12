@@ -352,7 +352,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
         viewDefTemp.append("\n")
 
         if ("EObject".equals(par.getName)) {
-          implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[k2.standard.Object]\n"
+          implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[k2.standard.KermetaObject]\n"
         } else if ("EGenericType".equals(par.getName)) {
           implicitDef.append(" implicit def richAspect(v : org.eclipse.emf.ecore.EGenericType) : " + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect = { \n")
           implicitDef.append(" if (v.isInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect])\n")
@@ -382,7 +382,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
           }
         }
         viewDefTemp.append(k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString + " with " + packageName.toString + "." + par.getName + "Aspect" + param.toString)
-        var superClassName: String = "k2.standard.Object"
+        var superClassName: String = "k2.standard.KermetaObject"
         if (cd != null) {
           superClassName = visitor.getQualifiedNameCompilo(cd.eContainer().asInstanceOf[KermetaModelElement]) + "." + cd.getName
         }

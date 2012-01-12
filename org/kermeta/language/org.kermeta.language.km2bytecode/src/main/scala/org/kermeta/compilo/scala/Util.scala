@@ -227,6 +227,35 @@ object Util extends LogAspect {
         }
     }
     
+    def getClassLoaderForClasspath(classpath : String): java.net.URLClassLoader={
+      var urls : scala.Array[java.net.URL] =  scala.Array[java.net.URL]()
+      var splittedclasspath = new RichIterable(classpath.split(System.getProperty("path.separator")))
+        splittedclasspath.foreachCtx((e,ctx) => {
+        		if(!e.isEmpty()){
+        			urls = urls :+ (new java.net.URL("file:///"+e)) // need 3 / with windows
+        		}
+        	}
+        )
+        
+      return new java.net.URLClassLoader(urls) //java.net.URLClassLoader.newInstance(urls) 
+    }
+    
+    def doesMethodExists(className: String, methodName : String) : Boolean = {
+      val cl = getClassLoaderForClasspath(GlobalConfiguration.props.getProperty("user.additional.classpath"))
+      try{
+      	val c = cl.loadClass(className)
+      	return c.getDeclaredMethods().exists( (m) => { 
+      	  m.getName().equals(methodName)
+      	})
+      } catch {
+        case e: java.lang.ClassNotFoundException => {
+          log.debug(e.getMessage() + " in " + cl.getURLs().deepToString() + " cl.getURL.size=" + cl.getURLs().length)
+          return false
+        }
+      }
+      return false
+    }
+    
 }
 
    
