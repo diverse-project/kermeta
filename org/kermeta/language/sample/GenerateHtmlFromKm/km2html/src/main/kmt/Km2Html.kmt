@@ -2,10 +2,12 @@ using kermeta::standard
 using kermeta
 using kermeta::io::StdIO => stdio
 using org::kermeta::language::structure
+using org::kermeta::language::behavior
 using kermeta::io
 using kermeta::utils::FileIO
 using kermeta
 using kermeta::standard
+using kermeta::standard::String
 using org::kermeta::language::structure
 using kermeta::emfpersistence
 using kermeta::standard
@@ -29,141 +31,550 @@ aspect class ModelingUnit {
 		//create Toc page for ModelingUnit page
 		self.createTocpage(baseFolder)
 		// Create html file
-		FileIO.writeTextFile(path, contents)
+		FileIO.writeTextFile(path.toURI(), contents)
 		
 	end 
 	
 	/** Create an html page for Modeling unit */
 	operation createHtml (baseFolder:String) : String is do
-		var html : String init "<html><head><title>"
-		html:= html + "Modeling Unit : " + self.name 
-		stdio.writeln (self.name)
+		var html : String init "<HTML>" + "<HEAD>"+ "<TITLE>" + self.name +"</TITLE>"
 		
-		html := html + "</title></head>"+
+		
+		html := html + "</HEAD>"+
+		
 		"<frameset cols=20%,80%>" +
-				"<frame src=toc.html name= &quot; TOC &quot; noresize>" +
-				"<frame src=contents.html name= &quot; MODELDoc &quot; noresize>" +
+				"<frame src=allclasses-frame.html name= TOC target = Content scrolling=yes>" +
+				"<frame src=contents.html name= Content scrolling=yes>" +
 			"</frameset>" +
-		"<body> <p><div> paragraph </div></p> </body></html>"
+		"</html>"
+		
+		
 		result := html
 	end
 	
 	
 	/**create Toc page for the ModelingUnit page*/
 	operation createTocpage(baseFolder:String) : Void is do
-		var path : String init baseFolder + "/" + "Toc.html"
-		var contents : String init String.new
-		var links : String init String.new
-		
+		var path : String init baseFolder + "/" + "allclasses-frame.html"
+		var contents : String init  "<h3>All Classes </h3>"
+		var html : String init String.new
+		contents := contents +
+			"<html>" +
+			"<body>"
 		//create links list of the packages, should add calls to the operations for creating the pages for packages
-		packages.each{pack | links := links + "<a href:= &quot;" + pack.name + ".html&quot;>" + pack.name + "</a>" + "<br>" 
-		pack.generateHtml(baseFolder)}
+		packages.each{pack | html:=html + pack.createClassesHtml(baseFolder)}
+		
 		
 		
 		//set package list of the Toc page
-		//if links != "" then
+		if html != "" then
 		contents := contents +
-			"<html>" +
-			"<body>" + "<h3>Packages: " + "</h3>" +
-				"<center>" +
-					links
-				"</center>" +
-			"</body>" +
-		"</html>"
-		//end
-		links := ""
-		
-		//create links list of the requires 
-		requires.each{r | links := links + "<a href:=" + r.uri + ".html" + "target = &quot; MODELDoc &quot;>" + r.uri + "</a>" + "<br/>"}
-		//set package list of the Toc page
-		//if links != "" then
-		contents := contents +
-			"<html>" +
-			"<body>" + "<h3>Requires: " + "</h3>" +
-				"<center>" +
-					links
-				"</center>" +
-			"</body>" +
-		"</html>"
-		//end
-		links := ""
-		
-		//create links list of the TypeDefinition
-		ownedTypeDefinition.each{t | links := links + "<a href:=" + t.name + ".html" + "target = &quot; MODELDoc &quot;>" + t.name + "</a>" + "<br/>"}
-		//set TypeDefinitionContainner list of the Toc page
-		//if links !="" then
-		contents := contents +
-			"<html>" +
-			"<body>" + "<h3>Requires: " + "</h3>" +
-				"<center>" +
-					links
-				"</center>" +
-			"</body>" +
-		"</html>"
-		//end
-		links := ""
+			 		html
+				 
+		end
+		html := ""
 		
 		
-		FileIO.writeTextFile(path, contents)
+		FileIO.writeTextFile(path.toURI, contents)
 		 
 	end
 	
 	
 }
 
-aspect class Package{
-	operation generateHtml(baseFolder:String) : Void is do
-		stdio.writeln ("Html file generated Package")
-		stdio.writeln ("sfs" + self.name)
-		var path : String init baseFolder + "/" + self.name + ".html"
-		
-		//create TypeDefinition page here
-		
-		var contents : String init self.createHtml (baseFolder)
-		// Create html file
-		FileIO.writeTextFile(path, contents)
+aspect class TypeDefinition {
 	
-	end
 	
-	/** Create an html page for Package */
+	/** Create html code */
 	operation createHtml (baseFolder:String) : String is do
-		var links: String init String.new
-		var contents : String init String.new
-		var html : String init "<html><head><title>"
-		html:= html + "Package : " + self.name 
-		stdio.writeln ("create the package page of" + self.name)
-		html := html + "</title></head>"
+			result := ""
+			end
+	/** Create classes html code */
+	operation createClassesHtml (baseFolder:String) : String is do
+		result:=""
+	end
+	/** generate html for contents page */
+	operation generateClassesHtml (baseFolder:String) : String is do
+		
+	end
+}
 
-		//create subpackage list of the Package
-		nestedPackage.each{NestedP | links := links + "<a href:=" + NestedP.name + ".html" + "target = &quot; MODELDoc &quot;>" + NestedP.name + "</a>" + "<br/>"}
-		//set subpackage list of the Package
-		//if html != "" then
-			html := 
-				html + "<h3>Nested packages: " + "</h3>" +
-					"<center>" +
-						links +
-					"</center>" 
-		//end		
-		links := ""
+
+aspect class ClassDefinition{
+	/** Create html code */
+	operation createClassesHtml (baseFolder:String) : String is do
+			var html : String init String.new	
+			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
+			result := html
+    end
+    
+    /** generate html for contents page */
+	operation generateClassesHtml (baseFolder:String) : String is do
+		var path : String init baseFolder + "/" + self.name + ".html"
+		var contents : String init String.new
+		contents := contents + "<html><head><title>" + self.name + "</title></head>"
+		contents := contents + "<body BGCOLOR = white>"
 		
-		//create links list of the TypeDefinition
-		ownedTypeDefinition.each{t | links := links + "<a href:=" + t.name + ".html" + "target = &quot; MODELDoc &quot;>" + t.name + "</a>" + "<br/>"}
-		//set TypeDefinitionContainner list of the Toc page
-		//if html != "" then
-			html := html +   
-				"<html>" +
-				"<body>" + "<h3>Type definitions: " + "</h3>" +
-					"<center>" +
-						links
-					"</center>" +
-				"</body>" +
-			"</html>"
-		//end
-		links := ""
+		// Start of Top NAVBAR
+contents := contents + "<A NAME=navbar_top><!-- --></A>"
+contents := contents + "<A HREF=#skip-navbar_top title=Skip navigation links></A>"
+contents := contents + "<TABLE BORDER=0 WIDTH=100% CELLPADDING=1 CELLSPACING=0 SUMMARY="">"
+contents := contents +"<TR>"
+contents := contents + "<TD COLSPAN=2 BGCOLOR=#EEEEFF CLASS=NavBarCell1>"
+contents := contents + "<A NAME=navbar_top_firstrow><!-- --></A>"
+contents := contents + "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=3 SUMMARY="">"
+ contents := contents + "<TR ALIGN=center VALIGN=top>"
+contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF= x.html><FONT CLASS=NavBarFont1><B>Package</B></FONT></A>&nbsp;</TD>"
+contents := contents +  "<TD BGCOLOR=#FFFFFF CLASS=NavBarCell1Rev> &nbsp;<FONT CLASS=NavBarFont1Rev><B>Class</B></FONT>&nbsp;</TD>"
+contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=SDZLevel.html><FONT CLASS=NavBarFont1><B>Use</B></FONT></A>&nbsp;</TD>"
+contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=package-tree.html><FONT CLASS=NavBarFont1><B>Tree</B></FONT></A>&nbsp;</TD>"
+contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=deprecated-list.html><FONT CLASS=NavBarFont1><B>Deprecated</B></FONT></A>&nbsp;</TD>"
+contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=index-1.html><FONT CLASS=NavBarFont1><B>Index</B></FONT></A>&nbsp;</TD>"
+contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=help-doc.html><FONT CLASS=NavBarFont1><B>Help</B></FONT></A>&nbsp;</TD>"
+contents := contents +  "</TR>"
+contents := contents + "</TABLE>"
+contents := contents + "</TD>"
+contents := contents + "<TD ALIGN=right VALIGN=top ROWSPAN=3><EM>"
+contents := contents + "</EM>"
+contents := contents + "</TD>"
+contents := contents + "</TR>"
+
+contents := contents + "<TR>"
+contents := contents + "<TD BGCOLOR=white CLASS=NavBarCell2><FONT SIZE=-2>"
+contents := contents + "&nbsp;PREV CLASS&nbsp;"
+contents := contents + "&nbsp;<A HREF=Zero.html title=javadoc><B>NEXT CLASS</B></A></FONT></TD>"
+contents := contents + "<TD BGCOLOR=white CLASS=NavBarCell2><FONT SIZE=-2>"
+contents := contents +  "<A HREF=SDZLevel.html target=_top><B>FRAMES</B></A>  &nbsp;"
+contents := contents + "&nbsp;<A HREF=SDZLevel.html target=_top><B>NO FRAMES</B></A>  &nbsp;"
+contents := contents + "&nbsp;"
+contents := contents + "</FONT></TD>"
+contents := contents + "</TR>"
+contents := contents + "<TR>"
+contents := contents + "<TD VALIGN=top CLASS=NavBarCell3><FONT SIZE=-2>"
+contents := contents +  "SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF=#enum_constant_summary>ENUM CONSTANTS</A>&nbsp;|&nbsp;<A HREF=#field_summary>FIELD</A>&nbsp;|&nbsp;<A HREF=#method_summary>METHOD</A></FONT></TD>"
+contents := contents + "<TD VALIGN=top CLASS=NavBarCell3><FONT SIZE=-2>"
+contents := contents + "DETAIL:&nbsp;<A HREF=#enum_constant_detail>ENUM CONSTANTS</A>&nbsp;|&nbsp;<A HREF=#field_detail>FIELD</A>&nbsp;|&nbsp;<A HREF=#method_detail>METHOD</A></FONT></TD>"
+contents := contents + "</TR>"
+contents := contents + "</TABLE>"
+
+contents := contents + "<A NAME=skip-navbar_top></A>"
+
+// end of TOP NAVBAR
+contents := contents + "<HR>"
+//Start of class data
+contents := contents + "<H2>"
+contents := contents + "<FONT SIZE=-1>"
+contents := contents + "fr.dworkin.sdz.javadoc</FONT>"
+contents := contents + "<BR>"
+contents := contents + "Enum SDZLevel</H2>"
+contents := contents + "<PRE>"
+contents := contents + "java.lang.Object"
+ contents := contents +  "<IMG SRC=inherit.gif ALT=extended by>java.lang.Enum&lt;<A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A>&gt;"
+  contents := contents +     "<IMG SRC=inherit.gif ALT=extended by ><B>fr.dworkin.sdz.javadoc.SDZLevel</B>"
+contents := contents + "</PRE>"
+contents := contents + "<DL>"
+contents := contents + "<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, java.lang.Comparable&lt;<A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A>&gt;</DD>"
+contents := contents + "</DL>"
+contents := contents + "<HR>"
+contents := contents + "<DL>"
+contents := contents + "<DT><PRE>public enum <B>SDZLevel</B><DT>extends java.lang.Enum&lt;<A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A>&gt;</DL>"
+contents := contents + "</PRE>"
+
+contents := contents + "<P>"
+contents := contents + "<HR>"
+
+contents := contents + "<P>"
+
+//Enum constant summury
+contents := contents + <A NAME="enum_constant_summary"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+contents := contents + <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+contents := contents + <B>Enum Constant Summary</B></FONT></TH>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#ADMIN">ADMIN</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#MODERATEUR">MODERATEUR</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#NEWSER">NEWSER</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#VALIDATEUR">VALIDATEUR</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#ZERO">ZERO</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + </TABLE>
+contents := contents + &nbsp;
+
+// Field Summury
+
+contents := contents + <A NAME="field_summary"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+contents := contents + <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+contents := contents + <B>Field Summary</B></FONT></TH>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+contents := contents + <CODE>private &nbsp;java.lang.String</CODE></FONT></TD>
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#nom">nom</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+contents := contents + <CODE>private &nbsp;int</CODE></FONT></TD>
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#valeur">valeur</A></B></CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + </TABLE>
+contents := contents + &nbsp;
+
+// Method Summury
+
+contents := contents + <A NAME="method_summary"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+contents := contents + <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+contents := contents + <B>Method Summary</B></FONT></TH>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+contents := contents + <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#getNom()">getNom</A></B>()</CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+contents := contents + <CODE>&nbsp;int</CODE></FONT></TD>
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#getValeur()">getValeur</A></B>()</CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+contents := contents + <CODE>static&nbsp;<A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A></CODE></FONT></TD>
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#valueOf(java.lang.String)">valueOf</A></B>(java.lang.String&nbsp;name)</CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the enum constant of this type with the specified name.</TD>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+contents := contents + <CODE>static&nbsp;<A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A>[]</CODE></FONT></TD>
+contents := contents + <TD><CODE><B><A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html#values()">values</A></B>()</CODE>
+
+contents := contents + <BR>
+contents := contents + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array containing the constants of this enum type, in
+contents := contents + the order they're declared.</TD>
+contents := contents + </TR>
+contents := contents + </TABLE>
+contents := contents + &nbsp;<A NAME="methods_inherited_from_class_java.lang.Enum"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+contents := contents + <TH ALIGN="left"><B>Methods inherited from class java.lang.Enum</B></TH>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE>clone, compareTo, equals, getDeclaringClass, hashCode, name, ordinal, toString, valueOf</CODE></TD>
+contents := contents + </TR>
+contents := contents + </TABLE>
+contents := contents + &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+contents := contents + <TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+contents := contents + </TR>
+contents := contents + <TR BGCOLOR="white" CLASS="TableRowColor">
+contents := contents + <TD><CODE>finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+contents := contents + </TR>
+contents := contents + </TABLE>
+contents := contents + &nbsp;
+contents := contents + <P>
+
+// Enum Constant Detail
+
+contents := contents + <A NAME="enum_constant_detail"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+contents := contents + <TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+contents := contents + <B>Enum Constant Detail</B></FONT></TH>
+contents := contents + </TR>
+contents := contents + </TABLE>
+
+contents := contents + <A NAME="ZERO"><!-- --></A><H3>
+contents := contents + ZERO</H3>
+contents := contents + <PRE>
+contents := contents + public static final <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A> <B>ZERO</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="NEWSER"><!-- --></A><H3>
+contents := contents + NEWSER</H3>
+contents := contents + <PRE>
+contents := contents + public static final <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A> <B>NEWSER</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="VALIDATEUR"><!-- --></A><H3>
+contents := contents + VALIDATEUR</H3>
+contents := contents + <PRE>
+contents := contents + public static final <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A> <B>VALIDATEUR</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="MODERATEUR"><!-- --></A><H3>
+contents := contents + MODERATEUR</H3>
+contents := contents + <PRE>
+contents := contents + public static final <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A> <B>MODERATEUR</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="ADMIN"><!-- --></A><H3>
+contents := contents + ADMIN</H3>
+contents := contents + <PRE>
+contents := contents + public static final <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A> <B>ADMIN</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+
+// Field Detail
+
+contents := contents + <A NAME="field_detail"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+contents := contents + <TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+contents := contents + <B>Field Detail</B></FONT></TH>
+contents := contents + </TR>
+contents := contents + </TABLE>
+
+contents := contents + <A NAME="nom"><!-- --></A><H3>
+contents := contents + nom</H3>
+contents := contents + <PRE>
+contents := contents + private java.lang.String <B>nom</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="valeur"><!-- --></A><H3>
+contents := contents + valeur</H3>
+contents := contents + <PRE>
+contents := contents + private int <B>valeur</B></PRE>
+contents := contents + <DL>
+contents := contents + <DL>
+contents := contents + </DL>
+contents := contents + </DL>
+
+// Method Detail
+
+contents := contents + <A NAME="method_detail"><!-- --></A>
+contents := contents + <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+contents := contents + <TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+contents := contents + <B>Method Detail</B></FONT></TH>
+contents := contents + </TR>
+contents := contents + </TABLE>
+
+contents := contents + <A NAME="values()"><!-- --></A><H3>
+contents := contents + values</H3>
+contents := contents + <PRE>
+contents := contents + public static final <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A>[] <B>values</B>()</PRE>
+contents := contents + <DL>
+contents := contents + <DD>Returns an array containing the constants of this enum type, in
+contents := contents + the order they're declared.  This method may be used to iterate
+contents := contents + over the constants as follows:
+contents := contents + <pre>
+contents := contents + for(SDZLevel c : SDZLevel.values())
+contents := contents +         System.out.println(c);
+contents := contents + </pre>
+contents := contents + <P>
+contents := contents + <DD><DL>
+
+contents := contents + <DT><B>Returns:</B><DD>an array containing the constants of this enum type, in
+contents := contents + the order they're declared</DL>
+contents := contents + </DD>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="valueOf(java.lang.String)"><!-- --></A><H3>
+contents := contents + valueOf</H3>
+contents := contents + <PRE>
+contents := contents + public static <A HREF="../../../../fr/dworkin/sdz/javadoc/SDZLevel.html" title="enum in fr.dworkin.sdz.javadoc">SDZLevel</A> <B>valueOf</B>(java.lang.String&nbsp;name)</PRE>
+contents := contents + <DL>
+contents := contents + <DD>Returns the enum constant of this type with the specified name.
+contents := contents + The string must match <I>exactly</I> an identifier used to declare an
+contents := contents + enum constant in this type.  (Extraneous whitespace characters are 
+contents := contents + not permitted.)
+contents := contents + <P>
+contents := contents + <DD><DL>
+contents := contents + <DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the enum constant to be returned.
+contents := contents + <DT><B>Returns:</B><DD>the enum constant with the specified name
+contents := contents + <DT><B>Throws:</B>
+contents := contents + <DD><CODE>java.lang.IllegalArgumentException</CODE> - if this enum type has no constant
+contents := contents + with the specified name</DL>
+contents := contents + </DD>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="getNom()"><!-- --></A><H3>
+contents := contents + getNom</H3>
+contents := contents + <PRE>
+contents := contents + public java.lang.String <B>getNom</B>()</PRE>
+contents := contents + <DL>
+contents := contents + <DD><DL>
+contents := contents + </DL>
+contents := contents + </DD>
+contents := contents + </DL>
+contents := contents + <HR>
+
+contents := contents + <A NAME="getValeur()"><!-- --></A><H3>
+contents := contents + getValeur</H3>
+contents := contents + <PRE>
+contents := contents + public int <B>getValeur</B>()</PRE>
+contents := contents + <DL>
+contents := contents + <DD><DL>
+contents := contents + </DL>
+contents := contents + </DD>
+contents := contents + </DL>
+
+// End of Class Data
+contents := contents + <HR>
+//Start of bottom NavBar
+contents := contents + <A NAME="navbar_bottom"><!-- --></A>
+contents := contents + <A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+contents := contents + <TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+contents := contents + <TR>
+contents := contents + <TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+contents := contents + <A NAME="navbar_bottom_firstrow"><!-- --></A>
+contents := contents + <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+ contents := contents +  <TR ALIGN="center" VALIGN="top">
+contents := contents +   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../fr/dworkin/sdz/javadoc/package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+contents := contents +   <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+contents := contents +   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/SDZLevel.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+contents := contents +   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+contents := contents +   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+contents := contents +   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-files/index-1.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+contents := contents +   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+contents := contents +   </TR>
+contents := contents + </TABLE>
+contents := contents + </TD>
+contents := contents + <TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+contents := contents + </EM>
+contents := contents + </TD>
+contents := contents + </TR>
+
+contents := contents + <TR>
+contents := contents + <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+contents := contents + &nbsp;PREV CLASS&nbsp;
+contents := contents + &nbsp;<A HREF="../../../../fr/dworkin/sdz/javadoc/Zero.html" title="class in fr.dworkin.sdz.javadoc"><B>NEXT CLASS</B></A></FONT></TD>
+contents := contents + <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+contents := contents +   <A HREF="../../../../index.html?fr/dworkin/sdz/javadoc/SDZLevel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+contents := contents + &nbsp;<A HREF="SDZLevel.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+
+contents := contents + </FONT></TD>
+contents := contents + </TR>
+contents := contents + <TR>
+contents := contents + <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+contents := contents +   SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#enum_constant_summary">ENUM CONSTANTS</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+contents := contents + <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+contents := contents + DETAIL:&nbsp;<A HREF="#enum_constant_detail">ENUM CONSTANTS</A>&nbsp;|&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+contents := contents + </TR>
+contents := contents + </TABLE>
+contents := contents + <A NAME="skip-navbar_bottom"></A>
+
+// End of bottom NAVBAR
+contents := contents + <HR>
+
+
+contents := contents + "</body></html>"
+		 
 		
 		
-		html := html + "</html>"
-		result := html
+		
+		FileIO.writeTextFile(path.toURI(), contents)
+	end
+}
+
+aspect class ModelType {
+	/** Create html code */
+	operation createHtml (baseFolder:String) : String is do
+			var html : String init String.new	
+			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
+			result := html
+    end
+}
+
+aspect class PrimitiveType{
+	/** Create html code */
+	operation createHtml (baseFolder:String) : String is do
+			var html : String init String.new	
+			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
+    		result:=html
+    end
+}
+
+aspect class Enumeration{
+	/** Create html code */
+	operation createHtml (baseFolder:String) : String is do
+			var html : String init String.new	
+			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
+    		result:=html
+    end
+}
+
+aspect class Package{
+		
+	/** Create html code */
+	operation createClassesHtml (baseFolder:String) : String is do
+			var html : String init String.new	
+			html:= html + "<h4>"self.name "</h4>"
+			
+			ownedTypeDefinition.each{otd | html:= html + otd.createClassesHtml(baseFolder)
+			otd.generateClassesHtml(baseFolder)
+			}
+			nestedPackage.each {subPack | html := html + subPack.createClassesHtml(baseFolder)}
+			
+		
+			result:=html
+    
 	end
 	 
 }
