@@ -1,0 +1,19 @@
+KermetaProject "test_022_ecoreTransformation"
+	groupId = "my.group"
+	defaultMainClass = "mainPackage::MainClass"
+	defaultMainOperation = "mainOperation"
+	sources = {
+		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+		//require "platform:/plugin/org.eclipse.emf.ecore//model/Ecore.ecore" byteCodeFromADependency
+		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
+		//require "platform:/resource/language.sample.class2rdbms/src/main/ecore/ClassMM.ecore"
+		//require "${rdbms.baseUri}/src/main/ecore/ClassMM.ecore"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (SNAPSHOT = use the last development version)
+		//dependency "library.core" ="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core"
+		//dependency "rdbms" ="platform:/resource/language.sample.class2rdbms"
+		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore/" 
+	// DVK
+	}

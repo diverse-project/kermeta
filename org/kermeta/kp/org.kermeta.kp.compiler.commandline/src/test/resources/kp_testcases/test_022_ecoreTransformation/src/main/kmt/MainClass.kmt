@@ -1,0 +1,29 @@
+using kermeta::standard
+using kermeta::emfpersistence
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			//true.andThen{x|false}
+			/*var repository : ResourceSet init ResourceSet.new
+	   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+	   		var resource : Resource init repository.createResource("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore",
+	   															   "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore")
+	   		//var resource : Resource init repository.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
+	   		//																							"file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/ClassMM.ecore")
+	       	resource.load(void)      
+	       	       
+	       from var it : Iterator<Object> init resource.getContents.iterator
+	       until it.isOff
+	       loop
+	           var next : Object init it.next
+	      */    /* if (next.isInstanceOf(ClassModel)) then                 
+	           		result ?= next
+	           end */
+	      /*     stdio.writeln(next.toString)
+	       end */
+		end 
+	}
+}
