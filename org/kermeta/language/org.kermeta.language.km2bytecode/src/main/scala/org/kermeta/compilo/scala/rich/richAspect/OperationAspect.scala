@@ -158,14 +158,14 @@ res append "  }\n}\n"
       }
 
       visit(thi.getType(),res1)
-      res.append(getLocalTypeEquivalence(res1.toString))
+      res.append(res1.toString)
       res.append("]")
 
     } else {
 
 
     	visit(thi.getType(),res1)
-    	res.append(getLocalTypeEquivalence(res1.toString))
+    	res.append(res1.toString)
 
     }
 
@@ -182,31 +182,31 @@ res append "  }\n}\n"
         res.append("org.eclipse.emf.common.util.EList[")
       }
       visit(param.getType(),res1)
-      res.append(getLocalTypeEquivalence(res1.toString))
+      res.append(res1.toString)
       res.append("]")
     } else {
       visit(param.getType(),res1)
-      res.append(getLocalTypeEquivalence(res1.toString))
+      res.append(res1.toString)
     }
 
 
   }
 
-  def getLocalTypeEquivalence(t : String ) : String = {
+ /* def getLocalTypeEquivalence(t : String ) : String = {
     val booleanRegex = ".*Boolean".r
     t match {
         case "k2.standard.Void" => "Unit"
-        case "Int" => "java.lang.Integer"
+        //case "Int" => "java.lang.Integer"
         //TO Improve
                 /*case booleanRegex() if (this.getType().isInstanceOf[PrimitiveType]
                     && (
                         "org.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) ||
                         "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) )
                 ) => "Boolean"*/
-        case booleanRegex() => "java.lang.Boolean"
+        //case booleanRegex() => "java.lang.Boolean"
         case _ => t
     }
-  }
+  }*/
 
 
 }
