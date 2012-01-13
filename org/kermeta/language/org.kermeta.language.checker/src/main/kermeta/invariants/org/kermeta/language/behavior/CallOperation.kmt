@@ -1,0 +1,47 @@
+/* $Id:$ 
+ * Creation : January 12, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::behavior;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+using org::kermeta::language::structure
+
+aspect class CallOperation
+{
+
+	/**
+	 * Type mismatch. The parameters' types are not those expected.
+	 */
+	inv callOperation_parameters_conformance is do 
+		
+		if (self.parameters.size != self.staticOperation.ownedParameter.size)
+		then
+			// Error
+			false
+		else
+			
+			// init a Sequence of TypeVariableBindings
+			var typeVariableBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new 
+			
+		
+			// Check wether the CallOperation's staticOperation has type parameters or not
+			if (self.staticOperation.typeParameter.size > 0)
+			then
+				self.staticOperation.typeParameter.each{ tv | 1
+				}
+			end
+			self.parameters.each{ param | stdio.writeln("test")}
+		
+			true
+		end
+	end
+}
