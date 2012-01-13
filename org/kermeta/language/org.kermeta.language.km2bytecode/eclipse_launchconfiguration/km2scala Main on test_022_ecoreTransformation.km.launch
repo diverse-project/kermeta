@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="scala.application">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/org.kermeta.language.km2bytecode/src/main/scala/org/kermeta/compilo/scala/Main.scala"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.kermeta.compilo.scala.Main"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-input ${workspace_loc:org.kermeta.language.km2bytecode}\src\test\resources\test_022_ecoreTransformation\beforeCheckingforScopeRESOLVED.km -property ${workspace_loc:org.kermeta.language.km2bytecode}\src\test\resources\test_022_ecoreTransformation\kermetaCompiler.properties"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.kermeta.language.km2bytecode"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dlog4j.configuration=&quot;log4j.properties&quot;"/>
+</launchConfiguration>
