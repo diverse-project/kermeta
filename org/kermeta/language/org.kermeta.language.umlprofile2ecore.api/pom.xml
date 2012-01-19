@@ -1,0 +1,71 @@
+<!-- $Id: pom.xml 14766 2011-03-31 07:30:48Z jfalcou $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.language.umlprofile2ecore.api -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Jacques falcou <jacques.falcou@inria.fr> --> 
+
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+  	<modelVersion>4.0.0</modelVersion>
+  	<name>language.umlprofile2ecore.api :: API for Uml Profile to Ecore</name>
+  	<artifactId>language.umlprofile2ecore.api</artifactId>
+	<packaging>jar</packaging>
+  	
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>language.model</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.systemservices.api</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.uml2.uml</artifactId>
+			<version>[3.1.0,)</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+		          <archive>
+		            <manifestEntries>
+						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+ 						<Bundle-Localization>plugin</Bundle-Localization>
+ 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>					
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Export-Package>
+							org.kermeta.language.umlprofile2ecore.api
+                       </Export-Package>
+                        <Require-Bundle>
+            				org.kermeta.language.model,
+            				org.kermeta.utils.systemservices.api
+                        </Require-Bundle>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
