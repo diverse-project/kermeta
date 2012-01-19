@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Umlprofile2ecore
+Bundle-SymbolicName: org.kermeta.language.umlprofile2ecore
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.kermeta.language.umlprofile2ecore
+Import-Package: org.osgi.framework
