@@ -33,12 +33,8 @@ class SlicerVisitor {
 	end
 }
 
-aspect class Clazz inherits SlicerVisitor {
+aspect class Clazz inherits SlicerVisitor, Feedable {
 	reference superClassesOpposite : Clazz[0..*]
-
-	operation feedOpposites() : Void is do
-		self.~superClasses.each{theClazz | theClazz.superClassesOpposite.add(self) }
-	end
 
 	method visitToAddClasses(theInvertedClassModelSlicer : InvertedClassModelSlicer) : Void is do
 		checkInitialisation()
@@ -63,6 +59,10 @@ aspect class Clazz inherits SlicerVisitor {
 					theInvertedClassModelSlicer.addedsuperClassesOpposite.add(ClasssuperClassesOpposite.new.initialise(self, theClazz)) end }
 			self.visitedPass := false
 		end
+	end
+	
+	method feedOpposites() : Void is do
+		self.~superClasses.each{theClazz | theClazz.superClassesOpposite.add(self) }
 	end
 }
 
