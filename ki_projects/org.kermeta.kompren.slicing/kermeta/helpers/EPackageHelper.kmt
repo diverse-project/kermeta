@@ -16,8 +16,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 
 using kermeta::standard
 
-aspect class EPackage
-{
+aspect class EPackage {
 	/** retreives the qualified name of a Package */
 	operation getQualifiedName(delimiter : String) : String is do
 	    if (self.eSuperPackage != void) then
@@ -25,5 +24,12 @@ aspect class EPackage
 		else
 			result := self.name
 		end
+	end
+	
+	
+	operation getAllClasses() : Bag<EClass> is do
+		result := Bag<EClass>.new
+		eClassifiers.each{classifier | if(classifier.isInstanceOf(EClass)) then result.add(classifier.asType(EClass)) end }
+		eSubpackages.each{pkg | result.addAll(pkg.getAllClasses()) }
 	end
 }

@@ -8,7 +8,7 @@ package ecore;
 
 
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
+require "./EPackageHelper.kmt"
 
 using kermeta::standard
 
@@ -27,6 +27,15 @@ aspect class EClass {
 			if(not result) then
 				result := clazz.eSuperTypes.exists{st | self.isSuperTypeOf(st) }
 			end
+		end
+	end
+	
+	
+	operation getQualifiedName() : String is do
+		result := name
+		
+		if((not container.isVoid).andThen{b | container.isInstanceOf(EPackage)}) then
+			result := container.asType(EPackage).getQualifiedName("::") + "::" + name 
 		end
 	end
 }

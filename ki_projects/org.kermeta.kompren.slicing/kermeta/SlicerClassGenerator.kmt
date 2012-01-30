@@ -41,6 +41,11 @@ class SlicerClassGenerator inherits Generator {
 				generatedCode := generatedCode + "\tattribute consider" + elt.domain.name + " : Boolean\n\n"
 			end
 		}
+		
+		// This attribute must useful only if there are opposites to create.
+		if(slicerGenerator.hasOpposite) then
+			generatedCode := generatedCode +"\treference model : " + slicerGenerator.rootClass.name + "\n\n"
+		end
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
@@ -107,6 +112,11 @@ class SlicerClassGenerator inherits Generator {
 	// Generates the "launch" operation.
 	operation generateLaunchOperation() : String is do
 		result := "\toperation launch() : Void is do\n"
+		
+		if(slicerGenerator.hasOpposite) then
+			result := result + "\t\tself.model.feedOpposites()\n"
+		end
+
 		if(not slicerGenerator.slicerModel.onStart.isVoid) then
 			result := result + "\t\tonStart()\n"
 		end
@@ -174,9 +184,17 @@ class SlicerClassGenerator inherits Generator {
 				result := result + ", consider" + rel.domain.name + " : Boolean"
 			end
 		}
+		
+		if(slicerGenerator.hasOpposite) then
+			result := result + ", model : " + slicerGenerator.rootClass.name
+		end
 
 		result := result + ") : " + slicerGenerator.slicerModel.name + " is do\n"
 		result := result + "\t\tresult := self\n"
+
+		if(slicerGenerator.hasOpposite) then
+			result := result + "\t\tself.model := model\n"
+		end
 
 		slicerGenerator.slicerModel.slicedClasses.each{clazz |
 			result := result + "\t\tself." + clazz.domain.getAddedAttributeName() + " := Bag<" + clazz.domain.name + ">.new\n"

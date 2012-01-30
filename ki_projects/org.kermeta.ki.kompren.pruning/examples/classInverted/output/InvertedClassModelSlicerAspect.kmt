@@ -60,21 +60,16 @@ aspect class Clazz inherits SlicerVisitor, Feedable {
 			self.visitedPass := false
 		end
 	end
-	
-	method feedOpposites() : Void is do
+	method feedOpposites() from Feedable is do
 		self.~superClasses.each{theClazz | theClazz.superClassesOpposite.add(self) }
 	end
 }
 
-
+aspect class ClassModel inherits Feedable {
+	method feedOpposites() from Feedable is do
+		self.classes.each{theclasses | theclasses.feedOpposites() }
+	end
+}
 abstract class Feedable {
 	operation feedOpposites() is abstract
 }
-
-
-aspect class ClassModel inherits Feedable {
-	method feedOpposites() from Feedable is do
-		classes.each{clazz | clazz.feedOpposites() }
-	end
-}
-

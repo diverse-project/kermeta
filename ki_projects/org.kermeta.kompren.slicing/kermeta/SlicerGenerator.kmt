@@ -34,10 +34,19 @@ class SlicerGenerator {
 
 	attribute slicerClassGenerator : SlicerClassGenerator
 	
+	attribute hasOpposite : Boolean
+	
+	attribute allClasses : Bag<EClass>
+	
+	reference rootClass : EClass
+	
 	
 	
 	operation initialise(slicerModel : Slicer, metamodel : EPackage, modelURI : String) : SlicerGenerator is do
 		result := self
+		self.allClasses := metamodel.getAllClasses()
+		self.rootClass := computeRootClass()
+		self.hasOpposite := false
 		self.requiredAspectFiles := Hashtable<String, String>.new
 		self.slicerModel := slicerModel
 		self.metamodel   := metamodel
@@ -49,7 +58,8 @@ class SlicerGenerator {
 			if(se.isInstanceOf(SlicedProperty)) then
 				var rel : SlicedProperty init se.asType(SlicedProperty)
 				if(not rel.opposite.isVoid) then
-					// We change the pruning data to use of the opposite.
+					hasOpposite := true
+					// We change the slicing data to use of the opposite.
 					var ref : EReference init EReference.new
 					var relation : SlicedProperty init SlicedProperty.new
 					ref.name := rel.domain.name + "Opposite"
@@ -71,6 +81,24 @@ class SlicerGenerator {
 		}
 		
 		defineClassesToAspectise()
+	end
+	
+	
+	// Computes the root class of the metamodel.
+	operation computeRootClass() : EClass is do
+		var roots : Sequence<EClass> init allClasses.select{clazz | allClasses.exists{clazz2 | 
+			clazz2.eStructuralFeatures.exists{sf | sf.isInstanceOf(EReference).andThen{b | sf.asType(EReference).eType!=clazz} } } }
+		
+		if(roots.isEmpty()) then
+			result := void
+			stdio.writeln("ERROR: NO ROOT CLASS DETECTED!")
+		else
+			if(roots.size()>1) then
+				stdio.writeln("ERROR: SEVERAL POSSIBLE ROOT CLASS DETECTED!")
+				roots.each{clazz | stdio.writeln(clazz.name) }
+			end
+			result := roots.one()
+		end
 	end
 	
 	
