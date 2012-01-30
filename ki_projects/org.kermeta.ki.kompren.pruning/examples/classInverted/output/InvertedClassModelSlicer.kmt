@@ -25,13 +25,8 @@ class InvertedClassModelSlicer {
 	end
 	
 	
-	operation feedOpposites() is do
-		model.feedOpposites()
-	end
-	
-
 	operation launch() : Void is do
-		self.feedOpposites()
+		self.model.feedOpposites()
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
