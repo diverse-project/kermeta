@@ -6,14 +6,12 @@
  */
 package org::kermeta::kompren::slicing;
 
-
 //require kermeta
 require "./SlicerHelpers.kmt"
 require "ECoreSlicingAspect.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
+require "./helpers/EPackageHelper.kmt"
 require "./SlicerClassGenerator.kmt"
 require "./SlicerAspectGenerator.kmt"
-
 
 using ecore
 using kermeta::utils

@@ -20,8 +20,8 @@ using ecore
 
 class Test {
 	operation main() : Void is do
-		generateKevoree
-		// generateInvertedClassModel
+		// generateKevoree
+		generateInvertedClassModel
 		// generateClassSlicer
 	end
 

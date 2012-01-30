@@ -1,0 +1,32 @@
+/*
+ * Creation : November 22, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+
+
+aspect class EClass {
+	/**
+	 * @param clazz The class to test.
+	 * @return True: If the calling class is a super type of the given class.
+	*/
+	operation isSuperTypeOf(clazz : EClass) : Boolean is do
+		result := not clazz.isVoid
+		
+		if(result) then
+			result := clazz.eSuperTypes.contains(self)
+
+			if(not result) then
+				result := clazz.eSuperTypes.exists{st | self.isSuperTypeOf(st) }
+			end
+		end
+	end
+}

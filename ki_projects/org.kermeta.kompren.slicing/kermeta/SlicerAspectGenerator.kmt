@@ -111,7 +111,7 @@ class SlicerAspectGenerator inherits Generator {
 		result := "aspect class " + eclass.name
 
 		if(not slicerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass) }) then
-			result := result + " inherits PruningVisitorAspect"
+			result := result + " inherits SlicerVisitor"
 		end
 		result := result + " {\n"
 
@@ -307,7 +307,7 @@ class SlicerAspectGenerator inherits Generator {
 
 	operation generateVisitAspect() : String is do
 		var prunerVarName : String init "the" + slicerGenerator.slicerModel.name
-		result := "aspect class PruningVisitorAspect {\n\tattribute visitedPass : Boolean\n\n\t" + 
+		result := "class SlicerVisitor {\n\tattribute visitedPass : Boolean\n\n\t" + 
 				"attribute visitedForRelations : Boolean\n\n\tattribute addedToPruner : Boolean\n\n\t" +
 				"operation initialiseAttributes() : Void is do\n\t\tself.visitedPass := false\n\t\t" +
 				"self.addedToPruner := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +

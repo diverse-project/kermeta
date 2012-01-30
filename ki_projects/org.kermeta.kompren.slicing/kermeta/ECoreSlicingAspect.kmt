@@ -7,7 +7,7 @@
 package ecore;
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EClassHelper.kmt"
+require "./helpers/EClassHelper.kmt"
 require "../metamodel/slicing.kmt"
 
 using kermeta::standard
