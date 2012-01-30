@@ -7,27 +7,12 @@
 @mainClass "ex::classModel::Test"
 @mainOperation "main"
 
-
 package ex::classModel;
 
-
 require kermeta
-require "./output/InvertedClassModelPruner.kmt"
+require "./output/InvertedClassModelSlicer.kmt"
 
 using kermeta::standard
-
-
-class PrintClassModelPruning inherits InvertedClassModelPruner {
-	method onClazzAdded(clazz : Clazz) : Void is do
-		stdio.writeln("Clazz: " + clazz.name)
-	end
-
-
-	method onsuperClassesOppositeAdded(theClazzSrc : Clazz, theClazzTar : Clazz) : Void is do
-		stdio.writeln("opposite Inheritance: " + theClazzSrc.name + " " + theClazzTar.name)
-	end
-}
-
 
 
 class Test {
@@ -35,7 +20,7 @@ class Test {
 		var requiredClazzs : Bag<Clazz> init Bag<Clazz>.new
 		var cm : ClassModel init createClassModel(requiredClazzs)
 
-		var pruning : PrintClassModelPruning init PrintClassModelPruning.new.initialise(requiredClazzs).asType(PrintClassModelPruning)
+		var pruning : InvertedClassModelSlicer init InvertedClassModelSlicer.new.initialise(requiredClazzs, cm)
 
 		pruning.launch()
 	end

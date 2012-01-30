@@ -4,7 +4,7 @@ require "platform:/resource/org.kermeta.kompren.slicing/examples/class/ClassMode
 require "InvertedClassModelSlicer.kmt"
 using kermeta::standard
 using kermeta::utils
-aspect class PruningVisitorAspect {
+class SlicerVisitor {
 	attribute visitedPass : Boolean
 
 	attribute visitedForRelations : Boolean
@@ -33,10 +33,10 @@ aspect class PruningVisitorAspect {
 	end
 }
 
-aspect class Clazz inherits PruningVisitorAspect {
+aspect class Clazz inherits SlicerVisitor {
 	reference superClassesOpposite : Clazz[0..*]
 
-	operation initialisesuperClassesOpposite() : Void is do
+	operation feedOpposites() : Void is do
 		self.~superClasses.each{theClazz | theClazz.superClassesOpposite.add(self) }
 	end
 
@@ -63,6 +63,12 @@ aspect class Clazz inherits PruningVisitorAspect {
 					theInvertedClassModelSlicer.addedsuperClassesOpposite.add(ClasssuperClassesOpposite.new.initialise(self, theClazz)) end }
 			self.visitedPass := false
 		end
+	end
+}
+
+aspect class ClassModel {
+	operation feedOpposites() is do
+		classes.each{clazz | clazz.feedOpposites() }
 	end
 }
 

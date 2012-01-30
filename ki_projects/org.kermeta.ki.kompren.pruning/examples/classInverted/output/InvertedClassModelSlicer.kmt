@@ -5,21 +5,33 @@ require "InvertedClassModelSlicerAspect.kmt"
 
 using kermeta::standard
 using kermeta::utils
+using ecore
+
 class InvertedClassModelSlicer {
 	reference requiredClazzs : Clazz[0..*]
 
 	reference addedClazzs : Bag<Clazz>
 
 	reference addedsuperClassesOpposite : Bag<ClasssuperClassesOpposite>
+	
+	reference model : ClassModel
 
-	operation initialise(requiredClazzs : bag Clazz[0..*]) : InvertedClassModelSlicer is do
+	operation initialise(requiredClazzs : bag Clazz[0..*], model : ClassModel) : InvertedClassModelSlicer is do
 		result := self
 		self.addedClazzs := Bag<Clazz>.new
 		self.addedsuperClassesOpposite := Bag<ClasssuperClassesOpposite>.new
 		self.requiredClazzs.addAll(requiredClazzs)
+		self.model := model
 	end
+	
+	
+	operation feedOpposites() is do
+		model.feedOpposites()
+	end
+	
 
 	operation launch() : Void is do
+		self.feedOpposites()
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
