@@ -4,7 +4,7 @@ require "platform:/resource/org.kermeta.kompren.slicing/examples/class/ClassMode
 require "InheritanceSlicer.kmt"
 using kermeta::standard
 using kermeta::utils
-aspect class PruningVisitorAspect {
+class SlicerVisitor {
 	attribute visitedPass : Boolean
 
 	attribute visitedForRelations : Boolean
@@ -33,7 +33,7 @@ aspect class PruningVisitorAspect {
 	end
 }
 
-aspect class Clazz inherits PruningVisitorAspect {
+aspect class Clazz inherits SlicerVisitor {
 	method visitToAddClasses(theInheritanceSlicer : InheritanceSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
