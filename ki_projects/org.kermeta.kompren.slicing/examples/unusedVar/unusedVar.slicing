@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.kermeta.kompren.slicing:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicing="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing" name="UnusedVarDetector" uriMetamodel="./kermeta.ecore" helper="&#x9;reference varDecls : VariableDecl[0..*]&#xA;&#x9;&#xA;&#x9;reference params : Parameter[0..*]" onEnd="&#x9;&#x9;varDecls.each{varD | stdio.writeln(&quot;Variable unused: &quot; + varD.identifier) }&#xA;&#x9;&#x9;params.each{param | stdio.writeln(&quot;Parameter unused: &quot; + param.name) }">
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;&#x9;varDecls.add(varDecl)">
+    <ctx varName="varDecl">
+      <type href="kermeta.ecore#//kermeta/language/behavior/VariableDecl"/>
+    </ctx>
+    <domain href="kermeta.ecore#//kermeta/language/behavior/VariableDecl"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;&#x9;if(not callVar.staticType.isVoid) then&#xA;&#x9;&#x9;&#x9;var varDecl : VariableDecl init varDecls.detect{varD |&#xA;&#x9;&#x9;&#x9;&#x9;varD.containedType.contains(callVar.staticType)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(varDecl.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;var varParam : Parameter init params.detect{param | param.type==callVar.staticType }&#xA;&#x9;&#x9;&#x9;&#x9;if(not varParam.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;params.remove(varParam)&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;varDecls.remove(varDecl)&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end">
+    <ctx varName="callVar">
+      <type href="kermeta.ecore#//kermeta/language/behavior/CallVariable"/>
+    </ctx>
+    <domain href="kermeta.ecore#//kermeta/language/behavior/CallVariable"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;&#x9;if(param.~operation.superOperation.isVoid) then&#xA;&#x9;&#x9;&#x9;params.add(param)&#xA;&#x9;&#x9;end">
+    <ctx varName="param">
+      <type href="kermeta.ecore#//kermeta/language/structure/Parameter"/>
+    </ctx>
+    <domain href="kermeta.ecore#//kermeta/language/structure/Parameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Block/statement"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Conditional/elseBody"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Conditional/thenBody"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Raise/expression"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Loop/initialization"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Loop/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/LambdaExpression/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Rescue/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/CallExpression/parameters"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/behavior/Assignment/value"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/structure/Operation/ownedParameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="kermeta.ecore#//kermeta/language/structure/Operation/body"/>
+  </slicedElements>
+  <inputClasses href="kermeta.ecore#//kermeta/language/structure/Operation"/>
+</org.kermeta.kompren.slicing:Slicer>

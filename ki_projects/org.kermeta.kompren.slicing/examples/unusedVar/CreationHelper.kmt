@@ -1,0 +1,342 @@
+/*
+ * Creation : November 08, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Mickael Clavreul
+ *			  Arnaud Blouin
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "./kermeta.ecore"
+
+using kermeta::standard
+using org::kermeta::language::structure
+
+
+aspect class PrimitiveType {
+	operation initialize(name : String, type : Type) : PrimitiveType is do
+		self.name := name
+		if(not type.isVoid) then
+			self.containedType.add(type)
+		end
+		result := self
+	end
+}
+
+
+aspect class EnumerationLiteral {
+	operation initialize(name : String, ~enumeration : Enumeration) : EnumerationLiteral is do
+		self.name := name
+		self.~enumeration := ~enumeration
+		~enumeration.ownedLiteral.add(self)
+		result := self
+	end
+}
+
+
+aspect class Enumeration {
+	operation initialize(name : String) : Enumeration is do
+		self.name := name
+		result := self
+	end
+}
+
+
+aspect class Parameter {
+	operation initialize(name : String, lower : Integer, upper : Integer, op : Operation, type : Type) : Parameter is do
+		self.name  := name
+		self.lower := lower
+		self.upper := upper
+		self.~operation := op
+		
+		if(not type.isVoid) then
+			self.containedType.add(type)
+			self.type := type
+		end
+		
+		result := self
+	end
+}
+
+aspect class Tag {
+	operation initialize(name : String, ~value : String, object : KermetaModelElement) : Tag is do
+		self.name 	:= name
+		self.~value := ~value
+		self.object.add(object)
+		result := self
+	end
+}
+
+
+aspect class UnresolvedProperty {
+	/**
+	 * Initialises the calling UnresolvedProperty instance using the property identifier.
+	 */
+	operation initialize(propertyIdentifier : String) : UnresolvedProperty is do
+		self.propertyIdentifier := propertyIdentifier
+		result := self
+	end
+}
+
+
+
+aspect class UnresolvedType {
+	/**
+	 * Initialises the calling UnresolvedType instance using the type identifier.
+	 */
+	operation initialize(typeIdentifier : String) : UnresolvedType is do
+		if typeIdentifier.isVoid then 
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "cannot create an UnresolvedType with void typeIdentifier" 
+			raise e
+		end
+		if typeIdentifier == "" then 
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "cannot create an UnresolvedType with empty string typeIdentifier"
+			raise e
+		end
+		self.typeIdentifier := typeIdentifier
+		result := self
+	end
+}
+
+
+aspect class ClassDefinition {
+	/**
+	 * Creates a new ClassDefinition
+	 * 
+	 * @param name
+	 *            the name of the classDefinition
+	 * @param isAspect
+	 *            is the ClassDefinition an aspect or not
+	 * @param parent
+	 *            the parent of the ClassDefinition
+	 */
+	operation initialize(name : String, isAspect : Boolean, isAbstract : Boolean, parent : ClassDefinition) : ClassDefinition is do
+		self.name := name
+		self.isAbstract := isAbstract
+		self.isAspect := isAspect
+		if not(parent.isVoid()) then
+			var p : Type init Class.new.initializeFromAClassDefinition(parent)
+			self.superType.add(p)
+			self.containedType.add(p)
+		end
+		result := self 
+	end
+	
+	/**
+	 * Gets an operation from the ClassDefinition
+	 * 
+	 * @param opName
+	 *            the name of the operation to look for
+	 */
+	operation getOperation(opName : String) : Set<kermeta::standard::Object> is do
+		var t : Set<kermeta::standard::Object> init Set<kermeta::standard::Object>.new
+		self.ownedOperation.each{o|
+			if o.name.equals(opName) then
+				t.add(o)
+			end
+		}
+		result := t
+	end
+	
+	/**
+	 * Gets a property from the ClassDefinition
+	 * 
+	 * @param pName
+	 *            the name of the property to look for
+	 */
+	operation getProperty(pName : String) : kermeta::standard::Object is do
+		var t : Set<kermeta::standard::Object> init Set<kermeta::standard::Object>.new
+		self.ownedAttribute.each{o|
+			if o.name.equals(pName) then
+				t.add(o)
+			end
+		}
+		result := t.one
+	end
+}
+
+aspect class Operation {
+	/**
+	 * Creates a new Operation
+	 * 
+	 * @param name
+	 *            the name of the Operation
+	 * @param returnType
+	 *            the type returned by the Operation
+	 * @param parent
+	 *            the parent of the Operation
+	 */
+	operation initialize(name : String, returnType : Type, parent : Operation) : Operation is do
+		self.name := name
+		self.superOperation := parent
+		if(not returnType.isVoid) then
+			self.containedType.add(returnType)
+			self.type := returnType
+		end
+		result := self
+	end
+}
+
+aspect class Require {
+	/**
+	 * Creates a new Require
+	 * 
+	 * @param uri
+	 *            uri of the Require
+	 */
+	operation initialize(uri : String) : Require is do
+		self.uri := uri
+		result := self
+	end
+}
+
+aspect class Class {
+	/**
+	 * Creates a new Class
+	 * 
+	 * @param cd
+	 *            the classDefinition this class refers to
+	 */
+	operation initializeFromAClassDefinition(cd : ClassDefinition) : Class is do
+		self.typeDefinition := cd
+		result := self
+	end
+	
+	/**
+	 * Creates a new Class using generics
+	 * uses the typesForBinding types for the generics
+	 * note : the passed types, will be contained by the constructed Class
+	 * Warning, in the current implementation, it doesn't check the correctness between bindings and the ClassDefinition
+	 */
+	operation initializeFromAGenericClassDefinition(cd : ClassDefinition, typesForBinding : Sequence<Type>) : Class is do
+		self.typeDefinition := cd
+		if( not typesForBinding.isVoid) then
+			var index : Integer init 0
+			typesForBinding.each{ t |
+				stdio.writeln("typeforbinding "+t.toString)
+				var tvb : TypeVariableBinding init  TypeVariableBinding.new
+				tvb.type := t
+				if t.container.isVoid then
+					tvb.containedType.add(t)
+				end
+				tvb.variable := cd.typeParameter.at(index)
+				self.typeParamBinding.add(tvb)
+				index := index +1
+			}			
+		end
+		result := self
+	end
+}
+
+aspect class FunctionType {
+	/**
+	 * Creates a new FunctionType with left and right elements
+	 * 
+	 * @param left
+	 *            type of the left member
+	 * @param right
+	 *            type of the right member
+	 */
+	operation initialize(left : Type, right : Type) : FunctionType is do
+		self.initializeLeft(left)
+		self.initializeRight(right)
+		result := self
+	end
+	
+	/**
+	 * Creates a new FunctionType with left element only
+	 * 
+	 * @param left
+	 *            type of the left member
+	 */
+	operation initializeLeft(left : Type) : FunctionType is do
+		self.left := left
+		self.containedType.add(left)
+		result := self
+	end
+	
+	/**
+	 * Creates a new FunctionType with right element only
+	 * 
+	 * @param right
+	 *            type of the right member
+	 */
+	operation initializeRight(right : Type) : FunctionType is do
+		self.right := right
+		self.containedType.add(right)
+		result := self
+	end
+}
+
+aspect class ProductType {
+	/**
+	 * Creates a new ProductType
+	 * 
+	 * @param type
+	 *            type of the ProductType
+	 */
+	operation initialize(type : Type) : ProductType is do
+		self.type.add(type)
+		self.containedType.add(type)
+		result := self
+	end
+}
+
+aspect class Property {
+	/**
+	 * Test if the property is a collection
+	 * 
+	 * @return true
+	 *            if its lower or upper bounds are not 1 or 0
+	 */
+	operation isMany() : Boolean is do
+		result := false
+		if (self.lower > 1).orElse{e|self.upper != 1} then
+			result := true
+		end
+	end
+	
+	/**
+	 * Creates a new Property
+	 * 
+	 * @param name
+	 *            name of the Property
+	 * @param type
+	 *            type of the Property
+	 * @param lower
+	 *            lower multiplicity of the Property
+	 * @param upper
+	 *            upper multiplicity of the Property
+	 */
+	operation initialize(name : String, type : Type, lower : Integer, upper : Integer) : Property is do
+		self.name := name
+		self.type := type
+		if(not type.isVoid) then
+			self.containedType.add(type)
+		end
+		self.lower := lower
+		self.upper := upper
+		result := self
+	end
+}
+
+aspect class Package {
+
+	/**
+	 * Creates a new Package
+	 * 
+	 * @param name
+	 *            name of the Package
+	 * @param uri
+	 *            type of the Package
+	 */
+	operation initialize(name : String, uri : String) : Package is do
+		self.name := name
+		self.uri := uri
+		result := self
+	end
+}
