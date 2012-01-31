@@ -1,0 +1,29 @@
+package ex::stateMachine;
+require kermeta
+require "platform:/resource/org.kermeta.kompren.slicing/examples/stateMachine/StateMachine.ecore"
+require "StateMachineSlicerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class StateMachineSlicer {
+	reference requiredStates : State[0..*]
+
+	reference addedStates : Bag<State>
+
+	reference addedTransitions : Bag<Transition>
+
+	operation initialise(requiredStates : bag State[0..*]) : StateMachineSlicer is do
+		result := self
+		self.addedStates := Bag<State>.new
+		self.addedTransitions := Bag<Transition>.new
+		self.requiredStates.addAll(requiredStates)
+	end
+
+	operation launch() : Void is do
+		self.requiredStates.each{theState | theState.visitToAddClasses(self) }
+		self.requiredStates.each{theState | theState.visitToAddRelations(self) }
+		self.addedStates.each{theState | onStateAdded(theState) }
+		self.addedTransitions.each{theTransition | onTransitionAdded(theTransition) }
+	end
+
+}
