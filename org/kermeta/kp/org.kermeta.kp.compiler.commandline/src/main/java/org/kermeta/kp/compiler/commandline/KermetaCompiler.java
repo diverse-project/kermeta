@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -571,6 +572,9 @@ public class KermetaCompiler {
 		logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 3);
 		ArrayList<TracedURL> ecoreURLs = new ArrayList<TracedURL>();
 		ArrayList<TracedURL> normalLoadURLs = new ArrayList<TracedURL>();
+	
+		ArrayList<TracedURL> umlProfilesURLs = new ArrayList<TracedURL>();
+		
 		for (TracedURL oneURL : kpSources) {
 			if (dirtyMU.get(oneURL) != null) {
 				modelingUnits.add(dirtyMU.get(oneURL));
@@ -578,22 +582,59 @@ public class KermetaCompiler {
 				if(oneURL.getUrl().getFile().endsWith(".ecore")){
 					ecoreURLs.add(oneURL);
 				}
+				else if (oneURL.getUrl().getFile().endsWith(".profile.uml")){
+					umlProfilesURLs.add(oneURL);
+				}
 				else{
 					normalLoadURLs.add(oneURL);
 				}
 			}
 		}
+		
+		
+		// launch uml profile threads
+		ArrayList<Future<Collection<ModelingUnit>>> umlprofileFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
+		for (TracedURL umlprofileURL : umlProfilesURLs) {
+			umlprofileFutures.add(singleThreadExector.submit(new CallableModelingUnitLoader(umlprofileURL, this, kp, projectName)));
+		}
+		// join
+		for(Future<Collection<ModelingUnit>> future : umlprofileFutures){
+			try {
+				Collection<ModelingUnit> mus = future.get();
+				//ModelingUnit mu = future.get();
+				//if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread
+				if (mus!=null) {
+					for (ModelingUnit mu : mus) {
+						modelingUnits.add(mu);
+					}
+				}
+			} catch (InterruptedException e) {
+				logger.error("Load of an UML Profile interrupted", LOG_MESSAGE_GROUP, e);
+			} catch (ExecutionException e) {
+				logger.error("Load of an UML Profile failed "+ e, LOG_MESSAGE_GROUP, e);
+			}
+		}
+		logger.doneProgress(getMainProgressGroup()+".getSourceModelingUnits", "All "+umlProfilesURLs.size()+" UML profile loaded.", LOG_MESSAGE_GROUP);
+
+				
+		
 		// launch ecore threads
-		ArrayList<Future<ModelingUnit>> ecoreFutures = new ArrayList<Future<ModelingUnit>>();
+		ArrayList<Future<Collection<ModelingUnit>>> ecoreFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
 		for(TracedURL ecoreURL : ecoreURLs){
 			// TODO EMF isn't thread safe, cannot even run the same transfo in parallel ! => singleThreadExecutor
 			ecoreFutures.add(singleThreadExector.submit(new CallableModelingUnitLoader(ecoreURL, this, kp, projectName)));
 		}
 		// join
-		for(Future<ModelingUnit> future : ecoreFutures){
+		for(Future<Collection<ModelingUnit>> future : ecoreFutures){
 			try {
-				ModelingUnit mu = future.get();
-				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread
+				Collection<ModelingUnit> mus = future.get();
+				if (mus!=null) {
+					for (ModelingUnit mu : mus) {
+						modelingUnits.add(mu);
+					}
+				}
+				/*ModelingUnit mu = future.get();
+				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread*/
 			} catch (InterruptedException e) {
 				logger.error("Load of an Ecore ModelingUnit interrupted", LOG_MESSAGE_GROUP, e);
 			} catch (ExecutionException e) {
@@ -602,15 +643,21 @@ public class KermetaCompiler {
 		}
 		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+ecoreURLs.size()+" ecore loaded", LOG_MESSAGE_GROUP, 1);
 		// launch normalLoad threads
-		ArrayList<Future<ModelingUnit>> normalLoadFutures = new ArrayList<Future<ModelingUnit>>();
+		ArrayList<Future<Collection<ModelingUnit>>> normalLoadFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
 		for(TracedURL normalLoadURL : normalLoadURLs){
 			normalLoadFutures.add(threadExector.submit(new CallableModelingUnitLoader(normalLoadURL, this, kp, projectName)));
 		}
 		// join
-		for(Future<ModelingUnit> future : normalLoadFutures){
+		for(Future<Collection<ModelingUnit>> future : normalLoadFutures){
 			try {
-				ModelingUnit mu = future.get();
-				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread
+				Collection<ModelingUnit> mus = future.get();
+				if (mus!=null) {
+					for (ModelingUnit mu : mus) {
+						modelingUnits.add(mu);
+					}
+				}
+				/*ModelingUnit mu = future.get();
+				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread*/
 			} catch (InterruptedException e) {
 				logger.error("Load of a ModelingUnit interrupted", LOG_MESSAGE_GROUP, e);
 			} catch (ExecutionException e) {

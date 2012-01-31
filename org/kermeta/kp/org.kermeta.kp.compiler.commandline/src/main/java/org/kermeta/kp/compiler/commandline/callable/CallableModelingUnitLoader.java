@@ -10,6 +10,7 @@ package org.kermeta.kp.compiler.commandline.callable;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +25,7 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 
 
-public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
+public class CallableModelingUnitLoader implements Callable<Collection<ModelingUnit>> {
 
 	public TracedURL urlToLoad;
 	public KermetaCompiler compiler;
@@ -39,9 +40,31 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 	}
 	
 	@Override
-	public ModelingUnit call() throws Exception {
+	public /*ModelingUnit*/ Collection<ModelingUnit> call() throws Exception {
 		try {
 			ModelingUnitLoader muLoader = new ModelingUnitLoader(compiler.logger, compiler.runInEclipse, compiler.saveIntermediateFiles, compiler.targetIntermediateFolder);
+			
+			Collection<ModelingUnit> mus = muLoader.loadModelingUnitFromURL(urlToLoad.getUrl().toString());
+			
+			if (mus != null) {
+				if (mus.size()>0) {
+					for (ModelingUnit mu : mus) {
+						if (mu.getName() == null) {
+							// force ModelingUnit name to the one provided in the kp
+							mu.setName(urlToLoad.getUrl().toString());
+						}
+						return mus;
+					}
+				}
+				else {
+					compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.lastLoadErrorMessage, KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+				}
+			}
+			else {
+				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.lastLoadErrorMessage, KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+			}
+			
+			/*
 			ModelingUnit mu = muLoader.loadModelingUnitFromURL(urlToLoad.getUrl().toString());
 			if (mu != null) {
 				if (mu.getName() == null) {
@@ -51,7 +74,7 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 				return mu;
 			} else {
 				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.lastLoadErrorMessage, KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
-			}
+			}*/
 		} catch( java.io.FileNotFoundException fnfe) {
 			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Source "+urlToLoad.getUrl()+" not found", KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(urlToLoad.getSource()));
 			
