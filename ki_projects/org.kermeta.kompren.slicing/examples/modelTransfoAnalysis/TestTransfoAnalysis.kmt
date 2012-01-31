@@ -12,11 +12,12 @@ package test;
 
 require kermeta
 require "./kermeta.ecore"
-//require "output/KermetaStaticAnalysis.kmt"
+require "output/KermetaStaticAnalysis.kmt"
 
 using kermeta::persistence
 using kermeta::standard
 using kermeta::utils
+using org::kermeta::language::behavior
 
 
 class Test {
@@ -31,9 +32,9 @@ class Test {
 		stdio.writeln(inputRes.one.toString)
 		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
 		requiredMU.add(mu)
-	//	var pruning : KermetaPruner init KermetaPruner.new.initialise(requiredMU)
+		var pruning : KermetaStaticAnalysis init KermetaStaticAnalysis.new.initialise(requiredMU)
 		
-	//	pruning.launch()
+		pruning.launch()
 	end
 }
 
