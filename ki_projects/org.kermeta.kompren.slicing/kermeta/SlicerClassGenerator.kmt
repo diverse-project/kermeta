@@ -49,8 +49,13 @@ class SlicerClassGenerator inherits Generator {
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
-						 generateAddOperations() + generateOnEndMethod() + generateOnStartMethod() + "}\n" +
-						 generateRelationClasses()
+						 generateAddOperations() + generateOnEndMethod() + generateOnStartMethod()
+						 
+		if(not slicerGenerator.slicerModel.strict and not slicerGenerator.slicerModel.helper.isVoid) then
+			generatedCode := generatedCode + slicerGenerator.slicerModel.helper + "\n"
+		end
+		
+		generatedCode := generatedCode + "}\n" + generateRelationClasses()
 	end
 	
 	
