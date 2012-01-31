@@ -89,8 +89,8 @@ class SlicerGenerator {
 	
 	// Computes the root class of the metamodel.
 	operation computeRootClass() : EClass is do
-		var roots : Sequence<EClass> init allClasses.select{clazz | allClasses.exists{clazz2 | 
-			clazz2.eStructuralFeatures.exists{sf | sf.isInstanceOf(EReference).andThen{b | sf.asType(EReference).eType!=clazz} } } }
+		var roots : Sequence<EClass> init allClasses.select{clazz | allClasses.exists{clazz2 | (not clazz2.~abstract).andThen{b |
+			clazz2.eStructuralFeatures.exists{sf | sf.isInstanceOf(EReference).andThen{b | sf.asType(EReference).eType!=clazz}} } } }
 		
 		if(roots.isEmpty()) then
 			result := void
