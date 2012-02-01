@@ -300,6 +300,53 @@ class SlicerAspectGenerator inherits Generator {
 		var name : String init relation.eContainingClass.getVarNameClassifier()
 		result := "\t\tself.~" + relation.name.split("Opposite").first() + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }\n"
 	end
+	
+	
+	operation generateRelationCall(ref : EReference, isOption : Boolean, visitMethodName : String, 
+									nameVarPruner : String, classVisit : Boolean) : String is do
+		result := ""
+		
+		var radiusCode : String
+		var relName : String init ref.getValidKermetaName()
+
+		if(not slicerGenerator.slicerModel.radius.isVoid) then
+			if(slicerGenerator.slicerModel.radius.focusedClasses.exists{cl |
+				ref.eContainingClass==cl or cl.domain.isSuperTypeOf(ref.eContainingClass) or 
+				ref.eContainingClass.isSuperTypeOf(cl.domain)}) then
+				radiusCode := ", currentRadius+1"
+			else
+				radiusCode := ", currentRadius"
+			end
+		else radiusCode := "" end
+
+		result := result + "\t\t\t"
+
+		if(isOption) then
+			result := result + "if(" + nameVarPruner + ".consider" + ref.name + ") then "
+		end
+
+		if(ref.upperBound==1) then
+			if(ref.lowerBound==0) then
+				result := result + "if(not self." + relName + ".isVoid) then " 
+			end
+			result := result + "self." + relName + "." + visitMethodName + "(" + nameVarPruner +
+					radiusCode + ")" + generateAddRelations(classVisit, ref.asType(EReference))
+
+			if(ref.lowerBound==0) then
+				result := result + " end"
+			end
+		else
+			var nameVar : String init ref.eType.asType(EClass).getVarNameClassifier()
+
+			result := result + "self." + relName + ".each{" + nameVar + " | " + nameVar + 
+					"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
+					generateAddRelations(classVisit, ref.asType(EReference)) + "}"
+		end
+
+		if(isOption) then result := result + " end" end
+		result := result + "\n"
+	end
+
 
 
 	operation generateRelationCalls(eclass : EClass, classVisit : Boolean) : String is do
@@ -314,49 +361,19 @@ class SlicerAspectGenerator inherits Generator {
 
 		result := ""
 
+		// Generating calls for relation to slice as specified in the slicer model.
 		eclass.outputFocusedRelations.each{relation |
 			if(relation.domain.isInstanceOf(EReference)) then//TODO manage EAttribute
-				var radiusCode : String
-				var relName : String init relation.domain.getValidKermetaName()
-	
-				if(not slicerGenerator.slicerModel.radius.isVoid) then
-					if(slicerGenerator.slicerModel.radius.focusedClasses.exists{cl |
-						relation.domain.eContainingClass==cl or cl.domain.isSuperTypeOf(relation.domain.eContainingClass) or 
-						relation.domain.eContainingClass.isSuperTypeOf(cl.domain)}) then
-						radiusCode := ", currentRadius+1"
-					else
-						radiusCode := ", currentRadius"
-					end
-				else radiusCode := "" end
-	
-				result := result + "\t\t\t"
-	
-				if(relation.isOption) then
-					result := result + "if(" + nameVarPruner + ".consider" + relation.domain.name + ") then "
-				end
-	
-				if(relation.domain.upperBound==1) then
-					if(relation.domain.lowerBound==0) then
-						result := result + "if(not self." + relName + ".isVoid) then " 
-					end
-					result := result + "self." + relName + "." + visitMethodName + "(" + nameVarPruner +
-							radiusCode + ")" + generateAddRelations(classVisit, relation.domain.asType(EReference))
-	
-					if(relation.domain.lowerBound==0) then
-						result := result + " end"
-					end
-				else
-					var nameVar : String init relation.domain.eType.asType(EClass).getVarNameClassifier()
-	
-					result := result + "self." + relName + ".each{" + nameVar + " | " + nameVar + 
-							"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
-							generateAddRelations(classVisit, relation.domain.asType(EReference)) + "}"
-				end
-	
-				if(relation.isOption) then result := result + " end" end
-				result := result + "\n"
+				result := result + generateRelationCall(relation.domain.asType(EReference), relation.isOption, visitMethodName, nameVarPruner, classVisit)
 			end
 		}
+		
+		// Generating calls for relation to slice as specified in the metamodel (relation 1). Only for strict slicers.
+		if(slicerGenerator.slicerModel.strict) then
+			eclass.eStructuralFeatures.select{sf | sf.isInstanceOf(EReference) and not eclass.outputFocusedRelations.exists{ofr | ofr.domain==sf }}.each{sf |
+				result := result + generateRelationCall(sf.asType(EReference), false, visitMethodName, nameVarPruner, classVisit)
+			}
+		end
 	end
 
 
