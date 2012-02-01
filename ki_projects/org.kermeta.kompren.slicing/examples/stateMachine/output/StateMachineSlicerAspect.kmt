@@ -64,7 +64,8 @@ aspect class Transition inherits SlicerVisitor {
 				self.addedToPruner := true
 			end
 			self.visitedPass := true
-			if(not self.target.isVoid) then self.target.visitToAddClasses(theStateMachineSlicer) end
+			self.source.visitToAddClasses(theStateMachineSlicer)
+			self.target.visitToAddClasses(theStateMachineSlicer)
 			self.visitedPass := false
 		end
 	end
@@ -73,7 +74,8 @@ aspect class Transition inherits SlicerVisitor {
 			super(theStateMachineSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			if(not self.target.isVoid) then self.target.visitToAddRelations(theStateMachineSlicer) end
+			self.source.visitToAddRelations(theStateMachineSlicer)
+			self.target.visitToAddRelations(theStateMachineSlicer)
 			self.visitedPass := false
 		end
 	end

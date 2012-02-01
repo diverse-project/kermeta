@@ -9,8 +9,5 @@
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
     <domain xsi:type="ecore:EReference" href="StateMachine.ecore#//stateMachine/OutputState/outgoingTransitions"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
-    <domain xsi:type="ecore:EReference" href="StateMachine.ecore#//stateMachine/Transition/target"/>
-  </slicedElements>
   <inputClasses href="StateMachine.ecore#//stateMachine/State"/>
 </org.kermeta.kompren.slicing:Slicer>

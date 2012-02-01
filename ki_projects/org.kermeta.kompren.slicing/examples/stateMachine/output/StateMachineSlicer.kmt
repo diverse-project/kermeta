@@ -26,4 +26,13 @@ class StateMachineSlicer {
 		self.addedTransitions.each{theTransition | onTransitionAdded(theTransition) }
 	end
 
+
+	operation onStateAdded(state : State) is do
+		stdio.writeln(state.name)
+	end
+	
+	
+	operation onTransitionAdded(transition : Transition) is do
+		stdio.writeln(transition.source.name + " " + transition.target.name)
+	end
 }
