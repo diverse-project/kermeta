@@ -152,8 +152,13 @@ object TypeEquivalence {
 		methodEquivalence.put("java.lang.String", Str);
 		methodEquivalence.put("_root_.java.lang.String", Str);
 		
-	
-                                                                                         methodEquivalence
+		
+		var Resource : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		Resource.put("getContents", "kgetContents");
+		methodEquivalence.put("_root_.k2.persistence.Resource", Resource);
+		methodEquivalence.put("_root_.org.eclipse.emf.ecore.resource.Resource", Resource);
+		
+        methodEquivalence
 
   };
 	 

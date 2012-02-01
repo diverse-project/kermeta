@@ -309,6 +309,7 @@ object JavaConversions {
 
 
         def  toArray [T](x$1: Array[T with java.lang.Object]) : Array[T with java.lang.Object]={
+        	// FIXME
             return null;//value.toArray(x$1)
         }
 
@@ -518,6 +519,7 @@ object JavaConversions {
     implicit def asCol[A](l : ju.Collection[A]) = new RichKermetaCol(l)//l match {
   	
   
+    
   
 }
 
