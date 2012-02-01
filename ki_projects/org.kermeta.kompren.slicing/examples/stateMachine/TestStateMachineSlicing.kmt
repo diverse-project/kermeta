@@ -81,6 +81,6 @@ class Test {
 		s2.outgoingTransitions.add(transition)
 		terminal.ingoingTransitions.add(transition)
 		
-		requiredStates.add(initState)
+		requiredStates.add(s2)
 	end 
 }
