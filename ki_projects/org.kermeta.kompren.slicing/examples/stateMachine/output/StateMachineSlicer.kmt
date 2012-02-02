@@ -8,10 +8,16 @@ using kermeta::utils
 class StateMachineSlicer {
 	reference requiredStates : State[0..*]
 
+	reference addedInputStates : Bag<InputState>
+
+	reference addedOutputStates : Bag<OutputState>
+
 	reference addedTransitions : Bag<Transition>
 
 	operation initialise(requiredStates : bag State[0..*]) : StateMachineSlicer is do
 		result := self
+		self.addedInputStates := Bag<InputState>.new
+		self.addedOutputStates := Bag<OutputState>.new
 		self.addedTransitions := Bag<Transition>.new
 		self.requiredStates.addAll(requiredStates)
 	end
@@ -19,11 +25,17 @@ class StateMachineSlicer {
 	operation launch() : Void is do
 		self.requiredStates.each{theState | theState.visitToAddClasses(self) }
 		self.requiredStates.each{theState | theState.visitToAddRelations(self) }
+		self.addedInputStates.each{theInputState | onInputStateAdded(theInputState) }
+		self.addedOutputStates.each{theOutputState | onOutputStateAdded(theOutputState) }
 		self.addedTransitions.each{theTransition | onTransitionAdded(theTransition) }
 	end
 
 
-	operation onStateAdded(state : State) is do
+	operation onInputStateAdded(state : InputState) is do
+		stdio.writeln(state.name)
+	end
+
+	operation onOutputStateAdded(state : OutputState) is do
 		stdio.writeln(state.name)
 	end
 	

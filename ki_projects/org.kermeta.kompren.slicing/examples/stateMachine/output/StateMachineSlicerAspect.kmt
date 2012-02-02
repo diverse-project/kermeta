@@ -38,6 +38,10 @@ aspect class OutputState {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
+			if(not self.addedToPruner) then
+				theStateMachineSlicer.addedOutputStates.add(self)
+				self.addedToPruner := true
+			end
 			self.visitedPass := true
 			self.outgoingTransitions.each{theTransition | theTransition.visitToAddClasses(theStateMachineSlicer)}
 			self.visitedPass := false
@@ -86,10 +90,6 @@ aspect class State inherits SlicerVisitor {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
-			if(not self.addedToPruner) then
-				theStateMachineSlicer.addedStates.add(self)
-				self.addedToPruner := true
-			end
 			self.visitedPass := true
 			self.visitedPass := false
 		end
@@ -99,6 +99,31 @@ aspect class State inherits SlicerVisitor {
 			super(theStateMachineSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class InputState {
+	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStateMachineSlicer)
+			if(not self.addedToPruner) then
+				theStateMachineSlicer.addedInputStates.add(self)
+				self.addedToPruner := true
+			end
+			self.visitedPass := true
+			self.ingoingTransitions.each{theTransition | theTransition.visitToAddClasses(theStateMachineSlicer)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) : Void is do
+		if(not self.visitedPass) then
+			super(theStateMachineSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ingoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)}
 			self.visitedPass := false
 		end
 	end

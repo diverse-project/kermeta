@@ -49,6 +49,7 @@ class SlicerGenerator {
 		self.slicerModel := slicerModel
 		self.metamodel   := metamodel
 		self.modelURI 	 := modelURI
+		checkClassesToSlice()
 		slicerAspectGenerator:= SlicerAspectGenerator.new.initialise(self)
 		slicerClassGenerator := SlicerClassGenerator.new.initialise(self)
 		
@@ -83,6 +84,36 @@ class SlicerGenerator {
 		if(hasOpposite) then
 			self.allClasses := metamodel.getAllClasses()
 			self.rootClass := computeRootClass()
+		end
+	end
+	
+	
+	// This operation check that if a sliced class has relations with 1 cardinality, the type of these
+	// relation must be sliced too.
+	// This process occurs only when the slicer is defined as strict.
+	operation checkClassesToSlice() is do
+		if(slicerModel.strict) then
+			var coll : Bag<SlicedElement> init Bag<SlicedElement>.new
+			var newSlicedClass : SlicedClass
+			var ref : EReference
+
+			slicerModel.slicedClasses.each{sc | sc.domain.eStructuralFeatures.each{sf |
+				if(sf.isInstanceOf(EReference)) then
+					ref:= sf.asType(EReference)
+
+					if((ref.lowerBound==1).andThen{b | not slicerModel.slicedClasses.exists{cl | cl.domain==ref.eType} }) then
+						newSlicedClass := SlicedClass.new
+						newSlicedClass.domain := ref.eType.asType(EClass)
+						coll.add(newSlicedClass)
+					end
+				end
+			}}
+			
+			if(not coll.empty) then
+				coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
+				// We must re-call this operation to check required relation of the added classes.
+				checkClassesToSlice()
+			end
 		end
 	end
 	
