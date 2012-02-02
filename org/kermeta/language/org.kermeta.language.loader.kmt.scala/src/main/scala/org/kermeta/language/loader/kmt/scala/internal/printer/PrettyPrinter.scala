@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import scala.collection.JavaConversions._
+import java.util.regex.Pattern
 
 
 object PrettyPrinter {
@@ -268,7 +269,12 @@ object PrettyPrinter {
         res.append(i.getValue)
       }
       case i: StringLiteral => {
-        res.append("\"" + i.getValue + "\"")
+        var lit = i.getValue.replaceAll("\\\\","\\\\\\\\")        
+        lit = lit.replaceAll("\n","\\\\n")
+        lit = lit.replaceAll("\t","\\\\t")
+        lit = lit.replaceAll("\r","\\\\r")
+        lit = lit.replaceAll("\f","\\\\f")
+        res.append("\"" + lit + "\"")
       }
       case i: BooleanLiteral => {
         res.append(i.getValue)

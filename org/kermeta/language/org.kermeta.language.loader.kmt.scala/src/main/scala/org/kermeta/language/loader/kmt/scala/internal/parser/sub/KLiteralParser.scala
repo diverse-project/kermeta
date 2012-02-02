@@ -15,6 +15,7 @@ import org.kermeta.language.behavior._
 import org.kermeta.language.structure.impl._
 import org.kermeta.language.behavior.impl._
 import scala.collection.JavaConversions._
+import java.util.regex.Pattern
 
 /**
  * Sub parser dedicated to parse Literal expression in KMT textual syntax
@@ -35,7 +36,16 @@ trait KLiteralParser extends KAbstractParser {
   //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
   private def fVoidLiteral : Parser[Expression] = ( "void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
   private def fresultLiteral : Parser[Expression] = ( "result" ) ^^^ { BehaviorFactory.eINSTANCE.createCallResult }
-  private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
+  private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => 
+    	var newo =BehaviorFactory.eINSTANCE.createStringLiteral;
+    	var lit = e.toString.replaceAll(Pattern.quote("\\n"),"\n")
+    	lit = lit.replaceAll(Pattern.quote("\\t"),"\\t")
+    	lit = lit.replaceAll(Pattern.quote("\\r"),"\\r")
+    	lit = lit.replaceAll(Pattern.quote("\\f"),"\\f")
+    	lit = lit.replaceAll("\\\\\\\\","\\\\")
+    	newo.setValue(lit);newo  
+  	} 
+  )
   private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
   private def fValueLiteral : Parser[Expression] = ( "value" ^^^ {BehaviorFactory.eINSTANCE.createCallValue()} )
 }
