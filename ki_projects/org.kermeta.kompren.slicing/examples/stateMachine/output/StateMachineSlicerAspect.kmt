@@ -5,6 +5,8 @@ require "StateMachineSlicer.kmt"
 using kermeta::standard
 using kermeta::utils
 class SlicerVisitor {
+	attribute clone : Object
+
 	attribute visitedPass : Boolean
 
 	attribute visitedForRelations : Boolean
@@ -34,12 +36,16 @@ class SlicerVisitor {
 }
 
 aspect class OutputState {
+	operation createFrom() : OutputState is abstract
+
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
+			
 			if(not self.sliced) then
-				theStateMachineSlicer.addedOutputStates.add(self)
+				self.clone := self.createFrom()
+				theStateMachineSlicer.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -52,19 +58,29 @@ aspect class OutputState {
 			super(theStateMachineSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.outgoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)}
+			self.outgoingTransitions.each{theTransition | 
+				theTransition.visitToAddRelations(theStateMachineSlicer)
+				if(not clone.isVoid and theTransition.sliced) then
+					clone.asType(OutputState).outgoingTransitions.add(theTransition.clone.asType(Transition))
+				end
+			}
 			self.visitedPass := false
 		end
 	end
 }
 
 aspect class Transition inherits SlicerVisitor {
+	operation createFrom() : Transition is do
+		result := Transition.new
+	end	
+	
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			if(not self.sliced) then
-				theStateMachineSlicer.addedTransitions.add(self)
+				self.clone := self.createFrom()
+				theStateMachineSlicer.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -79,7 +95,13 @@ aspect class Transition inherits SlicerVisitor {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.source.visitToAddRelations(theStateMachineSlicer)
+			if(self.source.sliced) then
+				self.clone.asType(Transition).source := self.source.clone.asType(OutputState)
+			end
 			self.target.visitToAddRelations(theStateMachineSlicer)
+			if(self.target.sliced) then
+				self.clone.asType(Transition).target := self.target.clone.asType(InputState)
+			end
 			self.visitedPass := false
 		end
 	end
@@ -105,12 +127,15 @@ aspect class State inherits SlicerVisitor {
 }
 
 aspect class InputState {
+	operation createFrom() : InputState is abstract
+
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			if(not self.sliced) then
-				theStateMachineSlicer.addedInputStates.add(self)
+				self.clone := self.createFrom()
+				theStateMachineSlicer.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -123,9 +148,37 @@ aspect class InputState {
 			super(theStateMachineSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.ingoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)}
+			self.ingoingTransitions.each{theTransition | 
+				theTransition.visitToAddRelations(theStateMachineSlicer)
+				if(not clone.isVoid and theTransition.sliced) then
+					clone.asType(InputState).ingoingTransitions.add(theTransition.clone.asType(Transition))
+				end
+			}
 			self.visitedPass := false
 		end
+	end
+}
+
+
+aspect class InitState {
+	method createFrom() : OutputState from OutputState is do
+		result := InitState.new
+		result.name := self.name
+	end	
+}
+
+
+aspect class StandardState {
+	method createFrom() : InputState from InputState is do
+		result := StandardState.new
+		result.name := self.name
+	end
+}
+
+aspect class TerminalState {
+	method createFrom() : InputState from InputState is do
+		result := TerminalState.new
+		result.name := self.name
 	end
 }
 
