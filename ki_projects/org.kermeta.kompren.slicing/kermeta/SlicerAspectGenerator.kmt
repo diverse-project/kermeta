@@ -224,7 +224,7 @@ class SlicerAspectGenerator inherits Generator {
 			result := result + ")\n"
 
 			if(slicerGenerator.slicerModel.slicedClasses.exists{sc | sc.domain==eclass}) then
-				result := result + "\t\t\tif(not self.addedToPruner"
+				result := result + "\t\t\tif(not self.sliced"
 				if(not slicerGenerator.slicerModel.radius.isVoid) then
 					if(slicerGenerator.slicerModel.radius.focusedClasses.exists{fc | fc.domain==eclass} or
 						slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | cl.domain.isSuperTypeOf(eclass)}) then
@@ -232,7 +232,7 @@ class SlicerAspectGenerator inherits Generator {
 					end
 				end
 				result := result + ") then\n\t\t\t\t" + prunerVarName + "." + eclass.getAddedAttributeName() + 
-						".add(self)\n\t\t\t\tself.addedToPruner := true\n\t\t\tend\n"
+						".add(self)\n\t\t\t\tself.sliced := true\n\t\t\tend\n"
 			end
 
 			result := result + "\t\t\tself.visitedPass := true\n" + 
@@ -270,7 +270,7 @@ class SlicerAspectGenerator inherits Generator {
 				result := "\tmethod checkCanReallyBeAdded() : Boolean is do\n"
 	
 				if(slicerGenerator.slicerModel.radius.focusedClasses.exists{fc | fc.domain==clazz}) then
-					result := result + "\t\tresult := self.addedToPruner\n"
+					result := result + "\t\tresult := self.sliced\n"
 				else
 					result := result + "\t\tresult := super()"
 					if(not slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | cl.domain.isSuperTypeOf(clazz)}) then
@@ -392,9 +392,9 @@ class SlicerAspectGenerator inherits Generator {
 	operation generateVisitAspect() : String is do
 		var prunerVarName : String init "the" + slicerGenerator.slicerModel.name
 		result := "class SlicerVisitor {\n\tattribute visitedPass : Boolean\n\n\t" + 
-				"attribute visitedForRelations : Boolean\n\n\tattribute addedToPruner : Boolean\n\n\t" +
+				"attribute visitedForRelations : Boolean\n\n\tattribute sliced : Boolean\n\n\t" +
 				"operation initialiseAttributes() : Void is do\n\t\tself.visitedPass := false\n\t\t" +
-				"self.addedToPruner := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
+				"self.sliced := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
 				"operation visitToAddClasses(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 		if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", currentRadius : Integer" end
 		result := result + ") : Void is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
