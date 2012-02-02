@@ -86,12 +86,15 @@ class KMLexical extends Lexical with KTokens {
     if(in.first == '\\') {
       backslashFound = true
     }
-    elems += in.first
     var tok = in.rest
+
+    if (!(in.first == '\"')) {
+      elems += in.first
     while(!  ((tok.first=='"'&&(!backslashFound))||(tok.first == EofCh))   ){
-      backslashFound = ( tok.first == '\\')
+      backslashFound = ( tok.first == '\\'&&(!backslashFound))
       elems += tok.first
       tok = tok.rest
+    }
     }
     //elems += tok.first
     println("stringLiteralBody found : " + elems.toList)
@@ -104,12 +107,15 @@ class KMLexical extends Lexical with KTokens {
     if(in.first == '\\') {
       backslashFound = true
     }
-    elems += in.first
     var tok = in.rest
+    if (!(in.first == '\"')) {
+      elems += in.first
+
     while(!  ((tok.first=='\''&&(!backslashFound))||(tok.first == EofCh))   ){
-      backslashFound = ( tok.first == '\\')
+      backslashFound = ( tok.first == '\\'&&(!backslashFound))
       elems += tok.first
       tok = tok.rest
+    }
     }
     //elems += tok.first
     println("stringLiteralBody found : " + elems.toList)
