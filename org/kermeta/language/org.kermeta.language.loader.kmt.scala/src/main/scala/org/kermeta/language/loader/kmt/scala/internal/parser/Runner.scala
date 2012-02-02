@@ -50,7 +50,7 @@ object Runner {
       //case Some(_ @ res )=> println(res)
       //case Some(_ @ res) => LoadSaveKM.saveKmModelingUnit("parsed.km", res) //new Interpreter(res).run
       case Some(_@res) => {
-        LoadSaveKM.saveKmModelingUnit("parsed.km", res)
+        LoadSaveKM.saveKmModelingUnit("target/parsed.km", res)
 
         val buffer = new StringBuffer()
         PrettyPrinter.print(res, buffer)
