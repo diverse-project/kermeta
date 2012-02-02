@@ -274,6 +274,8 @@ object PrettyPrinter {
         lit = lit.replaceAll("\t","\\\\t")
         lit = lit.replaceAll("\r","\\\\r")
         lit = lit.replaceAll("\f","\\\\f")
+        lit = lit.replaceAll("\"","\\\\\"")
+        lit = lit.replaceAll("\'","\\\\\'")
         res.append("\"" + lit + "\"")
       }
       case i: BooleanLiteral => {

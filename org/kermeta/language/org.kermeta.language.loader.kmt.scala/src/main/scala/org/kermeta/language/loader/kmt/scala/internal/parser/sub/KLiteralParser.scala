@@ -39,9 +39,11 @@ trait KLiteralParser extends KAbstractParser {
   private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => 
     	var newo =BehaviorFactory.eINSTANCE.createStringLiteral;
     	var lit = e.toString.replaceAll(Pattern.quote("\\n"),"\n")
-    	lit = lit.replaceAll(Pattern.quote("\\t"),"\\t")
-    	lit = lit.replaceAll(Pattern.quote("\\r"),"\\r")
-    	lit = lit.replaceAll(Pattern.quote("\\f"),"\\f")
+    	lit = lit.replaceAll(Pattern.quote("\\t"),"\t")
+    	lit = lit.replaceAll(Pattern.quote("\\r"),"\r")
+    	lit = lit.replaceAll(Pattern.quote("\\f"),"\f")
+    	lit = lit.replaceAll(Pattern.quote("\\\""),"\"")
+      lit = lit.replaceAll(Pattern.quote("\\\'"),"\'")
     	lit = lit.replaceAll("\\\\\\\\","\\\\")
     	newo.setValue(lit);newo  
   	} 
