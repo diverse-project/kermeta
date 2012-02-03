@@ -7,6 +7,7 @@ package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
+import java.util.regex.Pattern
 
 trait KTagParser extends KAbstractParser {
 
@@ -21,12 +22,17 @@ trait KTagParser extends KAbstractParser {
       newo
   }
 
-  def documentation : Parser[Tag] = "/**" ~ stringLit ~ "*/" ^^ { case _ ~ st1 ~ _ =>
+  def documentation : Parser[Tag] = docComment  ^^ { case  st1  =>
       println("Found documentation tag !!")
       var newt = StructureFactory.eINSTANCE.createTag
       newt.setName("documentation")
-      newt.setValue(st1.toString)
+      // remove * that starts the line
+      val s = st1.toString.replaceAll("\\n\\p{Blank}*\\*", "\n")
+     // also remove leading and trailing /** */
+      newt.setValue(s.substring(3,s.toString().length()-2))
       newt
   }
+  
+  
 
 }

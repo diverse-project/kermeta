@@ -130,7 +130,7 @@ class KMLexical extends Lexical with KTokens {
  // def mlSuite : Parser[String] =  commentBody ~ endML ^^ { case bodyml ~endml =>
   //    bodyml+"*/"
  // }
-  def beginML = '/' ~ '*' // ~ /*chrExcept('*')*/whitespaceChar
+  def beginML = '/' ~ '*'  ~ chrExcept('*') //whitespaceChar
   def docML = '/' ~ '*' ~ '*'
 
   //def endML = '*' ~ '/'
@@ -166,7 +166,7 @@ class KMLexical extends Lexical with KTokens {
   def token: Parser[KToken] = (
     positioned( '~' ~ identChar ~ rep( identChar | digit ) ^^ { case _ ~ first ~ rest => Identifier(first :: rest mkString "") } )
     | positioned( identChar ~ rep( identChar | digit ) ^^ { case first ~ rest => kident(first :: rest mkString "") } )
-    | positioned(docComment ^^ { case c => c } )
+    | positioned(docComment ^^ { case c => MLDocumentation(c.toString()) } )
     | positioned(comment ^^{ case c => c })
     | positioned(digit ~ rep( digit )                              ^^ { case first ~ rest => NumericLit(first :: rest mkString "") })
     //| positioned('\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") })

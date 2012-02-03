@@ -58,6 +58,10 @@ trait KAbstractParser extends TokenParsers {
   /** A parser which matches a string literal */
   def stringLit: Parser[String] =
     elem("string literal", _.isInstanceOf[StringLit]) ^^ (_.chars)
+    
+  /** A parser which matches a string literal */
+  def docComment: Parser[String] =
+    elem("documentation comment", _.isInstanceOf[MLDocumentation]) ^^ (_.chars)
 
   /** A parser which matches an identifier */
   def ident: Parser[String] =
