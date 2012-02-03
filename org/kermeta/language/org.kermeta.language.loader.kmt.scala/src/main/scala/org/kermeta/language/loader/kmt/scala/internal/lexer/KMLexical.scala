@@ -88,16 +88,19 @@ class KMLexical extends Lexical with KTokens {
     }
     var tok = in.rest
 
-    if (!(in.first == '\"')) {
-      elems += in.first
-    while(!  ((tok.first=='"'&&(!backslashFound))||(tok.first == EofCh))   ){
-      backslashFound = ( tok.first == '\\'&&(!backslashFound))
-      elems += tok.first
-      tok = tok.rest
+    if (in.first == '"') {
+    	// empty String literal, so we just go back, this parser should absorb only the final "
+    	tok = in
     }
+    else{
+    	elems += in.first
+	    while(!  ((tok.first=='"'&&(!backslashFound))||(tok.first == EofCh))   ){
+	      backslashFound = ( tok.first == '\\'&&(!backslashFound))
+	      elems += tok.first
+	      tok = tok.rest
+	    }
     }
-    //elems += tok.first
-    println("stringLiteralBody found : " + elems.toList)
+    println("stringLiteralBody found : " + elems.toList + " rest=" + tok.rest.first+";")
     Success(elems.toList, tok.rest)
   }
 
@@ -108,17 +111,19 @@ class KMLexical extends Lexical with KTokens {
       backslashFound = true
     }
     var tok = in.rest
-    if (!(in.first == '\"')) {
-      elems += in.first
-
-    while(!  ((tok.first=='\''&&(!backslashFound))||(tok.first == EofCh))   ){
-      backslashFound = ( tok.first == '\\'&&(!backslashFound))
-      elems += tok.first
-      tok = tok.rest
+    if (in.first == '"') {
+    	tok = in
     }
+    else{
+    	elems += in.first
+	   while(!  ((tok.first=='\''&&(!backslashFound))||(tok.first == EofCh))   ){
+	      backslashFound = ( tok.first == '\\'&&(!backslashFound))
+	      elems += tok.first
+	      tok = tok.rest
+	    }
     }
     //elems += tok.first
-    println("stringLiteralBody found : " + elems.toList)
+    println("stringLiteralQuoteBody found : " + elems.toList)
     Success(elems.toList, tok.rest)
   }
 
@@ -167,7 +172,7 @@ class KMLexical extends Lexical with KTokens {
     //| positioned('\'' ~ rep( chrExcept('\'', '\n', EofCh) ) ~ '\'' ^^ { case '\'' ~ chars ~ '\'' => StringLit(chars mkString "") })
     //| positioned('\"' ~ rep( chrExcept('\"', '\n', EofCh) ) ~ '\"' ^^ { case '\"' ~ chars ~ '\"' => StringLit(chars mkString "") })
     | positioned('\'' ~ stringLiteralQuoteBody  /*~ '\"'*/ ^^ { case '\'' ~ chars /*~ '\"' */=> StringLit(chars mkString "") })
-    | positioned('\"' ~ stringLiteralBody  /*~ '\"'*/ ^^ { case '\"' ~ chars /*~ '\"' */=> StringLit(chars mkString "") })
+    | positioned('\"' ~ stringLiteralBody  /*~ '\"'*/ ^^ { case '\"' ~ chars /*~ '\"'*/ => StringLit(chars mkString "") })
     | positioned(eof ^^ {case _ => KEOF() })
     | positioned('\'' ^^ {case c =>KIncomplet(c.toString,"unclosed string literal")}) // ~> failure("unclosed string literal") )
     | positioned('\"' ^^ {case c =>KIncomplet(c.toString,"unclosed string literal")}) //~> failure("unclosed string literal") )
