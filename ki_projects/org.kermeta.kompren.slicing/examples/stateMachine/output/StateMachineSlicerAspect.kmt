@@ -33,16 +33,21 @@ class SlicerVisitor {
 		self.visitedPass := true
 		result := true
 	end
+
+	operation createFrom() : Object is abstract
 }
 
 aspect class OutputState {
-	operation createFrom() : OutputState is abstract
+	method createFrom() : Object is do
+		var theOutputState : OutputState init self.getMetaClass().new.asType(OutputState)
+		theOutputState.name := self.name
+		result := theOutputState
+	end
 
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
-			
 			if(not self.sliced) then
 				self.clone := self.createFrom()
 				theStateMachineSlicer.addToRoot(self.clone)
@@ -58,8 +63,7 @@ aspect class OutputState {
 			super(theStateMachineSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.outgoingTransitions.each{theTransition | 
-				theTransition.visitToAddRelations(theStateMachineSlicer)
+			self.outgoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)
 				if(not clone.isVoid and theTransition.sliced) then
 					clone.asType(OutputState).outgoingTransitions.add(theTransition.clone.asType(Transition))
 				end
@@ -70,10 +74,11 @@ aspect class OutputState {
 }
 
 aspect class Transition inherits SlicerVisitor {
-	operation createFrom() : Transition is do
-		result := Transition.new
-	end	
-	
+	method createFrom() : Object is do
+		var theTransition : Transition init self.getMetaClass().new.asType(Transition)
+		result := theTransition
+	end
+
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -98,16 +103,24 @@ aspect class Transition inherits SlicerVisitor {
 			if(self.source.sliced) then
 				self.clone.asType(Transition).source := self.source.clone.asType(OutputState)
 			end
+
 			self.target.visitToAddRelations(theStateMachineSlicer)
 			if(self.target.sliced) then
 				self.clone.asType(Transition).target := self.target.clone.asType(InputState)
 			end
+
 			self.visitedPass := false
 		end
 	end
 }
 
 aspect class State inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theState : State init self.getMetaClass().new.asType(State)
+		theState.name := self.name
+		result := theState
+	end
+
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -127,7 +140,11 @@ aspect class State inherits SlicerVisitor {
 }
 
 aspect class InputState {
-	operation createFrom() : InputState is abstract
+	method createFrom() : Object is do
+		var theInputState : InputState init self.getMetaClass().new.asType(InputState)
+		theInputState.name := self.name
+		result := theInputState
+	end
 
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) : Void is do
 		checkInitialisation()
@@ -148,37 +165,13 @@ aspect class InputState {
 			super(theStateMachineSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.ingoingTransitions.each{theTransition | 
-				theTransition.visitToAddRelations(theStateMachineSlicer)
+			self.ingoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)
 				if(not clone.isVoid and theTransition.sliced) then
 					clone.asType(InputState).ingoingTransitions.add(theTransition.clone.asType(Transition))
 				end
 			}
 			self.visitedPass := false
 		end
-	end
-}
-
-
-aspect class InitState {
-	method createFrom() : OutputState from OutputState is do
-		result := InitState.new
-		result.name := self.name
-	end	
-}
-
-
-aspect class StandardState {
-	method createFrom() : InputState from InputState is do
-		result := StandardState.new
-		result.name := self.name
-	end
-}
-
-aspect class TerminalState {
-	method createFrom() : InputState from InputState is do
-		result := TerminalState.new
-		result.name := self.name
 	end
 }
 

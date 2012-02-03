@@ -50,6 +50,7 @@ class SlicerGenerator {
 		self.metamodel   := metamodel
 		self.modelURI 	 := modelURI
 		checkClassesToSlice()
+		updateModelForStrictSlicing()
 		slicerAspectGenerator:= SlicerAspectGenerator.new.initialise(self)
 		slicerClassGenerator := SlicerClassGenerator.new.initialise(self)
 		
@@ -86,6 +87,28 @@ class SlicerGenerator {
 			self.rootClass := computeRootClass()
 		end
 	end
+	
+	
+	
+	operation updateModelForStrictSlicing() is do
+		if(slicerModel.strict) then
+			slicerModel.onEnd := "		var repository : EMFRepository init EMFRepository.new
+		var resource : EMFResource 
+ 		resource ?= repository.createResource(\"./slice.xmi\", \"" + slicerModel.uriMetamodel + "\")
+ 		
+ 		resource.addAll(sliceRoots)
+ 		resource.save()"
+ 		
+ 			slicerModel.helper := "	operation addToRoot(obj : Object) is do
+		var cont : Object init obj.container
+
+		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | not cont.asType(SlicerVisitor).sliced}}) then
+			sliceRoots.add(obj)
+		end
+	end"
+		end
+	end
+	
 	
 	
 	// This operation check that if a sliced class has relations with 1 cardinality, the type of these
