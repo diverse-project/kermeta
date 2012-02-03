@@ -23,7 +23,6 @@ trait KTagParser extends KAbstractParser {
   }
 
   def documentation : Parser[Tag] = docComment  ^^ { case  st1  =>
-      println("Found documentation tag !!")
       var newt = StructureFactory.eINSTANCE.createTag
       newt.setName("documentation")
       // remove * that starts the line

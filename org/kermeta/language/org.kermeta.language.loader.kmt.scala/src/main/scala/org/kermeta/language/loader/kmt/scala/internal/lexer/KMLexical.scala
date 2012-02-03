@@ -40,13 +40,13 @@ class KMLexical extends Lexical with KTokens {
 
 
   def docComment : Parser[KToken] =  docML ~ commentBody ^^ { case _ ~ body =>
-    println("Lexer found a documentation comment (/**" + body.mkString + ")")
+    //println("Lexer found a documentation comment (/**" + body.mkString + ")")
     MLDocumentation("/**" + body.mkString)
   }
 
   def comment : Parser[KToken] = (
     positioned('/' ~> '/' ~> rep( chrExcept(EofCh, '\n') ) ^^ { case content =>
-      println("Lexer found a comment (//" + content.mkString + ")" )
+      //println("Lexer found a comment (//" + content.mkString + ")" )
       Comment(content.mkString) })
     |
     //positioned(docML ~ commentBody ^^ { case _ ~ body =>
@@ -56,7 +56,7 @@ class KMLexical extends Lexical with KTokens {
     //docComment
     //|
     positioned(beginML ~ commentBody ^^ {case _ ~ body =>
-      println("Lexer found a multiline comment (/*" + body.mkString  + ")")
+      //println("Lexer found a multiline comment (/*" + body.mkString  + ")")
       MLComment("/*"+body.mkString)})
     
   )
@@ -100,7 +100,6 @@ class KMLexical extends Lexical with KTokens {
 	      tok = tok.rest
 	    }
     }
-    println("stringLiteralBody found : " + elems.toList + " rest=" + tok.rest.first+";")
     Success(elems.toList, tok.rest)
   }
 
@@ -122,8 +121,6 @@ class KMLexical extends Lexical with KTokens {
 	      tok = tok.rest
 	    }
     }
-    //elems += tok.first
-    println("stringLiteralQuoteBody found : " + elems.toList)
     Success(elems.toList, tok.rest)
   }
 
