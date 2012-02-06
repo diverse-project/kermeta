@@ -75,6 +75,8 @@ package kermeta
 
 				attribute expression : ecore::EString
 
+				attribute expOnRemove : ecore::EString
+
 			}
 			class VarDecl
 			{
