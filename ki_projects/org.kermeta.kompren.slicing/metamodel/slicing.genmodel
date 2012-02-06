@@ -7,9 +7,12 @@
     complianceLevel="6.0" copyrightFields="false" providerRootExtendsClass="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>slicing.ecore</foreignModel>
   <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="slicing.ecore#/">
-    <nestedGenPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="slicing.ecore#//kermeta">
-      <nestedGenPackages prefix="Kompren" disposableProviderFactory="true" ecorePackage="slicing.ecore#//kermeta/kompren">
-        <nestedGenPackages prefix="Slicing" disposableProviderFactory="true" ecorePackage="slicing.ecore#//kermeta/kompren/slicing">
+    <nestedGenPackages prefix="Kermeta" basePackage="org" disposableProviderFactory="true"
+        ecorePackage="slicing.ecore#//kermeta">
+      <nestedGenPackages prefix="Kompren" basePackage="org.kermeta" disposableProviderFactory="true"
+          ecorePackage="slicing.ecore#//kermeta/kompren">
+        <nestedGenPackages prefix="Slicing" basePackage="org.kermeta.kompren" disposableProviderFactory="true"
+            ecorePackage="slicing.ecore#//kermeta/kompren/slicing">
           <genClasses ecoreClass="slicing.ecore#//kermeta/kompren/slicing/Slicer">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute slicing.ecore#//kermeta/kompren/slicing/Slicer/name"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute slicing.ecore#//kermeta/kompren/slicing/Slicer/uriMetamodel"/>
@@ -50,6 +53,7 @@
           <genClasses image="false" ecoreClass="slicing.ecore#//kermeta/kompren/slicing/SlicedElement">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute slicing.ecore#//kermeta/kompren/slicing/SlicedElement/isOption"/>
             <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute slicing.ecore#//kermeta/kompren/slicing/SlicedElement/expression"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute slicing.ecore#//kermeta/kompren/slicing/SlicedElement/expOnRemove"/>
           </genClasses>
           <genClasses ecoreClass="slicing.ecore#//kermeta/kompren/slicing/VarDecl">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute slicing.ecore#//kermeta/kompren/slicing/VarDecl/varName"/>
