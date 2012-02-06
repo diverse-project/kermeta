@@ -427,6 +427,15 @@ public class SlicingPackageImpl extends EPackageImpl implements SlicingPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSlicedElement_ExpOnRemove() {
+		return (EAttribute)slicedElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVarDecl() {
 		return varDeclEClass;
 	}
@@ -513,6 +522,7 @@ public class SlicingPackageImpl extends EPackageImpl implements SlicingPackage {
 		slicedElementEClass = createEClass(SLICED_ELEMENT);
 		createEAttribute(slicedElementEClass, SLICED_ELEMENT__IS_OPTION);
 		createEAttribute(slicedElementEClass, SLICED_ELEMENT__EXPRESSION);
+		createEAttribute(slicedElementEClass, SLICED_ELEMENT__EXP_ON_REMOVE);
 
 		varDeclEClass = createEClass(VAR_DECL);
 		createEAttribute(varDeclEClass, VAR_DECL__VAR_NAME);
@@ -590,6 +600,7 @@ public class SlicingPackageImpl extends EPackageImpl implements SlicingPackage {
 		initEClass(slicedElementEClass, SlicedElement.class, "SlicedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSlicedElement_IsOption(), ecorePackage.getEBoolean(), "isOption", null, 0, 1, SlicedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSlicedElement_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, SlicedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSlicedElement_ExpOnRemove(), ecorePackage.getEString(), "expOnRemove", null, 0, 1, SlicedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclEClass, VarDecl.class, "VarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVarDecl_VarName(), ecorePackage.getEString(), "varName", null, 1, 1, VarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

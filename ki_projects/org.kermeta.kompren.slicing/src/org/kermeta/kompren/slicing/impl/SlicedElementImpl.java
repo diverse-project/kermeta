@@ -25,6 +25,7 @@ import org.kermeta.kompren.slicing.SlicingPackage;
  * <ul>
  *   <li>{@link org.kermeta.kompren.slicing.impl.SlicedElementImpl#isIsOption <em>Is Option</em>}</li>
  *   <li>{@link org.kermeta.kompren.slicing.impl.SlicedElementImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.kermeta.kompren.slicing.impl.SlicedElementImpl#getExpOnRemove <em>Exp On Remove</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +71,26 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @ordered
 	 */
 	protected String expression = EXPRESSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExpOnRemove() <em>Exp On Remove</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpOnRemove()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXP_ON_REMOVE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExpOnRemove() <em>Exp On Remove</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpOnRemove()
+	 * @generated
+	 * @ordered
+	 */
+	protected String expOnRemove = EXP_ON_REMOVE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,6 +158,27 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getExpOnRemove() {
+		return expOnRemove;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExpOnRemove(String newExpOnRemove) {
+		String oldExpOnRemove = expOnRemove;
+		expOnRemove = newExpOnRemove;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SlicingPackage.SLICED_ELEMENT__EXP_ON_REMOVE, oldExpOnRemove, expOnRemove));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -144,6 +186,8 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 				return isIsOption();
 			case SlicingPackage.SLICED_ELEMENT__EXPRESSION:
 				return getExpression();
+			case SlicingPackage.SLICED_ELEMENT__EXP_ON_REMOVE:
+				return getExpOnRemove();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,6 +205,9 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 				return;
 			case SlicingPackage.SLICED_ELEMENT__EXPRESSION:
 				setExpression((String)newValue);
+				return;
+			case SlicingPackage.SLICED_ELEMENT__EXP_ON_REMOVE:
+				setExpOnRemove((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,6 +227,9 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 			case SlicingPackage.SLICED_ELEMENT__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
 				return;
+			case SlicingPackage.SLICED_ELEMENT__EXP_ON_REMOVE:
+				setExpOnRemove(EXP_ON_REMOVE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +246,8 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 				return isOption != IS_OPTION_EDEFAULT;
 			case SlicingPackage.SLICED_ELEMENT__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case SlicingPackage.SLICED_ELEMENT__EXP_ON_REMOVE:
+				return EXP_ON_REMOVE_EDEFAULT == null ? expOnRemove != null : !EXP_ON_REMOVE_EDEFAULT.equals(expOnRemove);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,6 +266,8 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 		result.append(isOption);
 		result.append(", expression: ");
 		result.append(expression);
+		result.append(", expOnRemove: ");
+		result.append(expOnRemove);
 		result.append(')');
 		return result.toString();
 	}
