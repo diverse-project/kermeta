@@ -3,6 +3,7 @@ package org{
 		package language{ 
 			package structure{
 				aspect class Class inherits ParameterizedType{
+					@CompilerIgnore "true"
 					operation new() : org::kermeta::language::structure::Class is do
 					end
 				} 
