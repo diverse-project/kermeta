@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.kermeta.kompren.slicing:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicing="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing" name="FeatureDiagramSlicer" uriMetamodel="./featureDiagram.ecore">
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+    <ctx varName="feature"/>
+    <domain href="featureDiagram.ecore#//Feature"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+    <ctx varName="featDiag"/>
+    <domain href="featureDiagram.ecore#//FeatureDiagram"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+    <ctx varName="cnfExp"/>
+    <domain href="featureDiagram.ecore#//CNFExp"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//NotCNF/exp"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//OrCNF/left"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//AndCNF/left"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//OrCNF/right"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//AndCNF/right"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//Feature/operator"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//Operator/features"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <opposite name="atomicCNFs"/>
+    <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//AtomicCNF/feature"/>
+  </slicedElements>
+  <inputClasses href="featureDiagram.ecore#//Feature"/>
+</org.kermeta.kompren.slicing:Slicer>

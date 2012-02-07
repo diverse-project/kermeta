@@ -1,0 +1,71 @@
+package featureDiagram;
+require kermeta
+require "platform:/resource/org.kermeta.kompren.slicing/examples/featureModel/featureDiagram.ecore"
+require "FeatureDiagramSlicerAspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+class FeatureDiagramSlicer {
+	reference model : FeatureDiagram
+
+	reference requiredFeatures : Feature[0..*]
+
+	reference addedFeatures : Bag<Feature>
+
+	reference addedFeatureDiagrams : Bag<FeatureDiagram>
+
+	reference addedCNFExps : Bag<CNFExp>
+
+	operation initialise(requiredFeatures : bag Feature[0..*], model : FeatureDiagram) : FeatureDiagramSlicer is do
+		result := self
+		self.model := model
+		self.addedFeatures := Bag<Feature>.new
+		self.addedFeatureDiagrams := Bag<FeatureDiagram>.new
+		self.addedCNFExps := Bag<CNFExp>.new
+		self.requiredFeatures.addAll(requiredFeatures)
+	end
+
+	operation launch() : Void is do
+		self.model.feedOpposites()
+		self.requiredFeatures.each{theFeature | theFeature.visitToAddClasses(self) }
+		self.requiredFeatures.each{theFeature | theFeature.visitToAddRelations(self) }
+		self.addedFeatures.each{theFeature | onFeatureAdded(theFeature) }
+		self.addedFeatureDiagrams.each{theFeatureDiagram | onFeatureDiagramAdded(theFeatureDiagram) }
+		self.addedCNFExps.each{theCNFExp | onCNFExpAdded(theCNFExp) }
+	end
+
+	operation onFeatureAdded(feature : Feature) : Void is do
+
+	end
+	operation onFeatureDiagramAdded(featDiag : FeatureDiagram) : Void is do
+
+	end
+	operation onCNFExpAdded(cnfExp : CNFExp) : Void is do
+
+	end
+	operation onexpAdded(varName : NotCNF, varName : CNFExp) : Void is do
+
+	end
+	operation onleft1Added(varName : OrCNF, varName : CNFExp) : Void is do
+
+	end
+	operation onleft2Added(varName : AndCNF, varName : CNFExp) : Void is do
+
+	end
+	operation onright1Added(varName : OrCNF, varName : CNFExp) : Void is do
+
+	end
+	operation onright2Added(varName : AndCNF, varName : CNFExp) : Void is do
+
+	end
+	operation onoperatorAdded(varName : Feature, varName : Operator) : Void is do
+
+	end
+	operation onfeaturesAdded(varName : Operator, varName : Feature) : Void is do
+
+	end
+	operation onfeatureOppositeAdded(varName : Feature, varName : AtomicCNF) : Void is do
+
+	end
+
+}

@@ -77,10 +77,8 @@ class SlicerAspectGenerator inherits Generator {
 			 
 		coll.each{clazz | 
 			result := result + "aspect class " + clazz.name + " inherits Feedable {\n\tmethod feedOpposites() from Feedable is do\n" +
-						generateVisitFeedCallBlock(clazz)
+						generateVisitFeedCallBlock(clazz) + "\tend\n}\n"
 		}
-		
-		result := result + "\tend\n}\n"
 	end
 	
 	
@@ -169,7 +167,7 @@ class SlicerAspectGenerator inherits Generator {
 
 		// Supporting attributes of superclasses.
 		if(doSuper) then
-			eclass.eSuperTypes.each{st | result := result + generateCopyOfRequiredAttributesOfClass(st, varName) }
+			eclass.eSuperTypes.each{st | result := result + generateCopyOfRequiredAttributesOfClass(st, varName, doSuper) }
 		end
 	end
 	
@@ -178,7 +176,7 @@ class SlicerAspectGenerator inherits Generator {
 		if(slicerGenerator.slicerModel.strict) then
 			result := "\tmethod createFrom() : Object is do\n\t\tvar the" + eclass.name + " : " + 
 						eclass.name + " init " + "self.getMetaClass().new.asType(" + eclass.name + ")\n" + 
-						generateCopyOfRequiredAttributesOfClass(eclass, "the"+eclass.name, not hasSuper) + 
+						generateCopyOfRequiredAttributesOfClass(eclass, "the"+eclass.name, true) + // not hasSuper) + 
 						"\t\tresult := the" + eclass.name + "\n\tend\n\n"
 			//TODO var hasSuper : Boolean init detect a super class which is a VisitorSlicer and use ti
 		else

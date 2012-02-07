@@ -58,8 +58,13 @@ class SlicerClassGenerator inherits Generator {
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
-						 generateAddOperations() + generateOnEndMethod() + generateOnStartMethod() + 
-						 slicerGenerator.slicerModel.helper + "\n" + "}\n" + generateRelationClasses()
+						 generateAddOperations() + generateOnEndMethod() + generateOnStartMethod()
+						 
+		if(not slicerGenerator.slicerModel.helper.isVoid) then
+			generatedCode := generatedCode + slicerGenerator.slicerModel.helper
+		end
+		
+		generatedCode := generatedCode + "\n" + "}\n" + generateRelationClasses()
 	end
 	
 	
@@ -100,20 +105,36 @@ class SlicerClassGenerator inherits Generator {
 		result := ""
 
 		slicerGenerator.slicerModel.slicedClasses.each{clazz |
+			var varName : String
+ 
+			if(clazz.ctx.isVoid) then varName := "varName" else varName := clazz.ctx.varName end
+			
+			result := result + "\toperation on" + clazz.domain.name + "Added(" + 
+					varName + " : " + clazz.domain.name + ") : Void is do\n"
+					
 			if(not clazz.expression.isVoid) then
-				result := result + "\toperation on" + clazz.domain.name + "Added(" + 
-						clazz.ctx.varName + " : " + clazz.domain.name + ") : Void is do\n" +
-						clazz.expression + "\n\tend\n"
+				result := result + clazz.expression
 			end
+
+			result := result + "\n\tend\n"
 		}
 
 		slicerGenerator.slicerModel.slicedProperties.each{rel |
+			var varNameSrc : String
+			var varNameTar : String
+ 
+			if(rel.src.isVoid) then varNameSrc := "varName" else varNameSrc := rel.src.varName end
+			if(rel.tgt.isVoid) then varNameTar := "varName" else varNameTar := rel.tgt.varName end
+			
+			var type : EClass init rel.domain.eType.asType(EClass)
+			result := result + "\toperation on" + rel.domain.name + "Added(" + varNameSrc + " : " + 
+					rel.domain.eContainingClass.name + ", " + varNameTar + " : " + type.name + ") : Void is do\n"
+			
 			if(not rel.expression.isVoid) then
-				var type : EClass init rel.domain.eType.asType(EClass)
-				result := result + "\toperation on" + rel.domain.name + "Added(" + rel.src.varName + " : " + 
-						rel.domain.eContainingClass.name + ", " + rel.tgt.varName + " : " + type.name + ") : Void is do\n" +
-						rel.expression + "\n\tend\n"
+				result := result + rel.expression
 			end
+			
+			result := result + "\n\tend\n"
 		}
 	end
 
