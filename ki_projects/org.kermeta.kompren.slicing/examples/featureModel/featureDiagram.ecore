@@ -10,8 +10,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//Feature" containment="true" eOpposite="#//Feature/owningFeatureDiagram"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Feature"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintEdges" upperBound="-1"
-        eType="#//ConstraintEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cnfExps" upperBound="-1"
+        eType="#//CNFExp" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//FeatureElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -33,15 +33,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveFeature" eSuperTypes="#//Feature"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdge" eSuperTypes="#//FeatureElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        upperBound="-1" eType="#//Feature"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//Constraint"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        upperBound="-1" eType="#//Feature"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operator" eSuperTypes="#//FeatureElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CNFExp" abstract="true" eSuperTypes="#//FeatureElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true" eSuperTypes="#//FeatureElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFeature" eType="#//Feature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" lowerBound="1"
         upperBound="-1" eType="#//Feature" eOpposite="#//Feature/owningOperator"/>
@@ -55,11 +48,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true" eSuperTypes="#//FeatureElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningCE" eType="#//ConstraintEdge"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//Constraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mutex" eSuperTypes="#//Constraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
@@ -72,5 +60,25 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFeature" eType="#//Feature"
         eOpposite="#//Feature/attributes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrCNF" eSuperTypes="#//CNFExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//CNFExp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//CNFExp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotCNF" eSuperTypes="#//CNFExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" lowerBound="1" eType="#//CNFExp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndCNF" eSuperTypes="#//CNFExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//CNFExp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//CNFExp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicCNF" eSuperTypes="#//CNFExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//Feature"/>
   </eClassifiers>
 </ecore:EPackage>
