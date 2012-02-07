@@ -15,7 +15,6 @@ package helloworld {
 			//c.each{e | kermeta::io::StdIO.writeln(e)}
 			
 			var test : Boolean init true
-			var testBis : A
 			
 			
 			if (test)
