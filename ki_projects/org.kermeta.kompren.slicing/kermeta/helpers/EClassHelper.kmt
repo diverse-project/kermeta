@@ -30,9 +30,10 @@ aspect class EClass {
 	*/
 	operation isSuperTypeOf(clazz : EClass) : Boolean is do
 		result := not clazz.isVoid
-		
+		var qualifiedName : String init getQualifiedName
+
 		if(result) then
-			result := clazz.eSuperTypes.contains(self)
+			result := clazz.eSuperTypes.exists{cl | cl.getQualifiedName.equals(qualifiedName)}
 
 			if(not result) then
 				result := clazz.eSuperTypes.exists{st | self.isSuperTypeOf(st) }

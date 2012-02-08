@@ -64,9 +64,10 @@ class SlicerGenerator {
 					var relation : SlicedProperty init SlicedProperty.new
 					ref.name := rel.domain.name + "Opposite"
 					ref.eType:= rel.domain.eContainingClass
+					ref.eOpposite := rel.domain.asType(EReference)
 					rel.domain.eType.asType(EClass).eStructuralFeatures.add(ref)
-					ref.lowerBound := rel.domain.lowerBound
-					ref.upperBound := rel.domain.upperBound
+					ref.lowerBound := 0
+					ref.upperBound := -1
 					ref.containment := false
 					relation.domain := ref
 					relation.opposite := void

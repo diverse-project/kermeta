@@ -53,7 +53,7 @@ class SlicerAspectGenerator inherits Generator {
 			var packageName : String init eclass.ePackage.getQualifiedName("::")
 
 			if(packageName==mainPackageName) then
-				generatedCode := generatedCode + generateAspect(eclass)
+				generatedCode := generatedCode + generateAspect(eclass, true)
 			else
 				packages.add(packageName)
 				// Otherwise, the code of the aspect must be write into another file dedicated to its package.
@@ -75,10 +75,7 @@ class SlicerAspectGenerator inherits Generator {
 		var coll : Collection<EClass> init slicerGenerator.allClasses.select{clazz |
 			 not slicerGenerator.aspectisedClasses.exists{cl | cl.getQualifiedName().equals(clazz.getQualifiedName()) } }
 			 
-		coll.each{clazz | 
-			result := result + "aspect class " + clazz.name + " inherits Feedable {\n\tmethod feedOpposites() from Feedable is do\n\t\tsuper()\n" +
-						generateVisitFeedCallBlock(clazz) + "\tend\n}\n"
-		}
+		coll.each{clazz | result := result + generateAspect(clazz, false) }
 	end
 	
 	
@@ -144,7 +141,7 @@ class SlicerAspectGenerator inherits Generator {
 		end
 		
 		// Adding the class code of the apsect.
-		codeAspect := codeAspect + generateAspect(clazz)
+		codeAspect := codeAspect + generateAspect(clazz, true)
 		// Adding the new code to the hashmap with as key the qualified name of the package.
 		slicerGenerator.requiredAspectFiles.put(namePackage, codeAspect)
 	end
@@ -185,8 +182,9 @@ class SlicerAspectGenerator inherits Generator {
 	end
 	
 
-
-	operation generateAspect(eclass : EClass) : String is do
+	// Generates an aspect on the given eclass. considerSlicerVisitor defines if the aspect will be a visitor
+	// used for slicing classes and relations.
+	operation generateAspect(eclass : EClass, considerSlicerVisitor : Boolean) : String is do
 		var prunerVarName : String init "the" + slicerGenerator.slicerModel.name
 		var paramCode : String init ""
 		var feedOppositeMethod : String init ""
@@ -200,13 +198,18 @@ class SlicerAspectGenerator inherits Generator {
 */
 		result := "aspect class " + eclass.name
 
-		if(not slicerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass) }) then
+		if(considerSlicerVisitor.andThen{b| not slicerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass) }}) then
 			result := result + " inherits SlicerVisitor"
 
 			if(slicerGenerator.hasOpposite) then
 				result := result + ", Feedable"
 			end
+		else
+			if(slicerGenerator.hasOpposite) then
+				result := result + " inherits Feedable"
+			end
 		end
+		
 		result := result + " {\n"
 		
 		// Must write the implementation of the operation createFrom
@@ -223,7 +226,7 @@ class SlicerAspectGenerator inherits Generator {
 				var etype : EClass init rel.domain.eType.asType(EClass)
 
 				// Attributes corresponding to the opposites to create are now added to the aspect class.
-				if(cl==eclass or cl.isSuperTypeOf(eclass)) then
+				if(cl.getQualifiedName.equals(eclass.getQualifiedName)) then
 					result := result + "\treference " + rel.domain.name +
 							  " : " + rel.domain.eType.asType(EClass).name + "[" + rel.domain.lowerBound.toString + ".."
 					if(rel.domain.upperBound==-1) then
@@ -236,15 +239,16 @@ class SlicerAspectGenerator inherits Generator {
 				end
 
 				// Initialisation methods must be added to the aspect clazz that contains the attributes which opposites are created.
-				if((etype==eclass or etype.isSuperTypeOf(eclass)) and rel.domain.isInstanceOf(EReference)) then
+				if((etype.getQualifiedName.equals(eclass.getQualifiedName) or etype.isSuperTypeOf(eclass)) and rel.domain.isInstanceOf(EReference)) then
 					feedOppositeMethod := feedOppositeMethod + generateInitialiseOppositeOperation(rel.domain.asType(EReference))
 				end
 			end
 		}
 
-		if(not eclass.outputFocusedRelations.empty() or slicerGenerator.slicerModel.inputClasses.contains(eclass) or
+		// Generating methods dedicated to the visit of the class and its relations.
+		if(considerSlicerVisitor.andThen{b | not eclass.outputFocusedRelations.empty() or slicerGenerator.slicerModel.inputClasses.contains(eclass) or
 			slicerGenerator.slicerModel.slicedClasses.exists{sc | sc.domain==eclass} or
-			slicerGenerator.slicerModel.slicedProperties.exists{sp | sp.domain.eContainingClass==eclass}) then
+			slicerGenerator.slicerModel.slicedProperties.exists{sp | sp.domain.eContainingClass==eclass}}) then
 			result := result + "\tmethod visitToAddClasses(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
@@ -340,8 +344,19 @@ class SlicerAspectGenerator inherits Generator {
 
 	// Generates the operation that initialises a created opposite.
 	operation generateInitialiseOppositeOperation(relation : EReference) : String is do
-		var name : String init relation.eContainingClass.getVarNameClassifier()
-		result := "\t\tself.~" + relation.name.split("Opposite").first() + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }\n"
+		var selfNameVar : String init "self.~" + relation.name.split("Opposite").first()
+		
+		result := "\t\t"
+		if(relation.eOpposite.upperBound==-1 or relation.eOpposite.upperBound>1) then
+			var name : String init relation.eContainingClass.getVarNameClassifier()
+			result := result + selfNameVar + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }"
+		else
+			if(relation.eOpposite.lowerBound==0) then result := result + "if(not " + selfNameVar + "isVoid) then " end
+			result := result + selfNameVar + "." +  relation.name + ".add(self)"
+			if(relation.eOpposite.lowerBound==0) then result := result + " end" end
+		end
+		
+		result := result + "\n"
 	end
 	
 	
