@@ -135,7 +135,25 @@ object PrettyPrinter {
           res.append("\t\t")
           print(tag, res)
         }
-        res.append("\t\toperation " + op.getName + "(")
+        res.append("\t\toperation " + op.getName)
+
+        if (op.getTypeParameter.size()>0) {
+          res.append("<")
+          var i=0
+          op.getTypeParameter.foreach( tp => {
+            if (i!=0)
+              res.append(", ")
+            res.append(tp.getName)
+            tp.getSupertype match {
+              case urt : UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
+              case (_) =>
+            }
+            i=i+1
+          })
+          res.append(">")
+        }
+
+        res.append("(")
         var i = 0
         op.getOwnedParameter.foreach(p => {
           if (i != 0)
