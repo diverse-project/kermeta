@@ -33,7 +33,7 @@ class SlicerVisitor {
 	end
 }
 
-aspect class NotCNF {
+aspect class NotCNF inherits Feedable {
 	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -84,7 +84,7 @@ aspect class CNFExp inherits SlicerVisitor, Feedable {
 	end
 }
 
-aspect class OrCNF {
+aspect class OrCNF inherits Feedable {
 	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -112,7 +112,7 @@ aspect class OrCNF {
 	end
 }
 
-aspect class AndCNF {
+aspect class AndCNF inherits Feedable {
 	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -141,7 +141,7 @@ aspect class AndCNF {
 }
 
 aspect class Feature inherits SlicerVisitor, Feedable {
-	reference featureOpposite : AtomicCNF[1..1]
+	reference featureOpposite : AtomicCNF[0..*]
 
 	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
 		checkInitialisation()
@@ -153,7 +153,7 @@ aspect class Feature inherits SlicerVisitor, Feedable {
 			end
 			self.visitedPass := true
 			self.operator.each{theOperator | theOperator.visitToAddClasses(theFeatureDiagramSlicer)}
-			self.featureOpposite.visitToAddClasses(theFeatureDiagramSlicer)
+			self.featureOpposite.each{theAtomicCNF | theAtomicCNF.visitToAddClasses(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -163,7 +163,7 @@ aspect class Feature inherits SlicerVisitor, Feedable {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.operator.each{theOperator | theOperator.visitToAddRelations(theFeatureDiagramSlicer)}
-			self.featureOpposite.visitToAddRelations(theFeatureDiagramSlicer)
+			self.featureOpposite.each{theAtomicCNF | theAtomicCNF.visitToAddRelations(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -232,51 +232,62 @@ aspect class PrimitiveFeature inherits Feedable {
 		super()
 	end
 }
+
 aspect class Opt inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class And inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class Or inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class Xor inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class Card inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class Model inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class FeatureElement inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class Attribute inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
 }
+
 aspect class AtomicCNF inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
+		self.~feature.featureOpposite.add(self)
 	end
 }
+
 abstract class Feedable {
 	operation feedOpposites() is do end
 }

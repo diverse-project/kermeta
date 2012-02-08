@@ -35,37 +35,11 @@ class FeatureDiagramSlicer {
 	end
 
 	operation onFeatureAdded(feature : Feature) : Void is do
-
+		stdio.writeln("Feature sliced: " + feature.name)
 	end
 	operation onFeatureDiagramAdded(featDiag : FeatureDiagram) : Void is do
-
 	end
 	operation onCNFExpAdded(cnfExp : CNFExp) : Void is do
-
+		stdio.writeln("CNFExp sliced: " + cnfExp.toString)
 	end
-	operation onNotCNFexpAdded(varName : NotCNF, varName : CNFExp) : Void is do
-
-	end
-	operation onOrCNFleftAdded(varName : OrCNF, varName : CNFExp) : Void is do
-
-	end
-	operation onAndCNFleftAdded(varName : AndCNF, varName : CNFExp) : Void is do
-
-	end
-	operation onOrCNFrightAdded(varName : OrCNF, varName : CNFExp) : Void is do
-
-	end
-	operation onAndCNFrightAdded(varName : AndCNF, varName : CNFExp) : Void is do
-
-	end
-	operation onFeatureoperatorAdded(varName : Feature, varName : Operator) : Void is do
-
-	end
-	operation onOperatorfeaturesAdded(varName : Operator, varName : Feature) : Void is do
-
-	end
-	operation onFeaturefeatureOppositeAdded(varName : Feature, varName : AtomicCNF) : Void is do
-
-	end
-
 }
