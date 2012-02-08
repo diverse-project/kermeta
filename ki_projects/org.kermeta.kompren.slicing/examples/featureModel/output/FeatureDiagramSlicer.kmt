@@ -50,7 +50,7 @@ class FeatureDiagramSlicer {
 		stdio.writeln("Feature sliced: " + feature.name)
 	end
 	operation onCNFExpAdded(cnfExp : CNFExp) : Void is do
-		if not cnfExp.container.isInstanceOf(CNFExp) and cnfExp.isFullySliced() then
+		if not cnfExp.container.isInstanceOf(CNFExp) then // and cnfExp.isFullySliced() then
 			var cnfExpFormula : String init cnfExp.getExpFormula()
 			if cnfExps.isVoid then cnfExps := Bag<String>.new end
 			
@@ -61,7 +61,7 @@ class FeatureDiagramSlicer {
 		end
 	end
 	operation onAndAdded(andOp : And) : Void is do
-//	stdio.writeln(andOp.features.size.toString)
+	//	stdio.writeln(andOp.features.size.toString)
 	end
 	operation onXorAdded(xorOp : Xor) : Void is do
 //	stdio.writeln(xorOp.features.size.toString)
@@ -70,5 +70,5 @@ class FeatureDiagramSlicer {
 //	stdio.writeln(orOp.features.size.toString)
 	end
 
-attribute cnfExps : Bag<String>
+	attribute cnfExps : Bag<String>
 }

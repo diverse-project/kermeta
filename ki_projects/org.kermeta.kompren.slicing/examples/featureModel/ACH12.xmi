@@ -6,7 +6,7 @@
     <operator xsi:type="featureDiagram:Opt" features="//@features.3"/>
   </features>
   <features name="P" owningOperator="//@features.0/@operator.0">
-    <operator xsi:type="featureDiagram:Or" features="//@features.4 //@features.5"/>
+    <operator xsi:type="featureDiagram:Or" owningFeature="//@features.1" features="//@features.4 //@features.5"/>
   </features>
   <features name="T" owningOperator="//@features.0/@operator.1">
     <operator xsi:type="featureDiagram:Opt" features="//@features.6"/>
