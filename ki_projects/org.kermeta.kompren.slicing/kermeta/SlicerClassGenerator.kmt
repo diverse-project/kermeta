@@ -127,7 +127,7 @@ class SlicerClassGenerator inherits Generator {
 			if(rel.tgt.isVoid) then varNameTar := "varName" else varNameTar := rel.tgt.varName end
 			
 			var type : EClass init rel.domain.eType.asType(EClass)
-			result := result + "\toperation on" + rel.domain.name + "Added(" + varNameSrc + " : " + 
+			result := result + "\toperation on" + rel.domain.eContainingClass.name + rel.domain.name + "Added(" + varNameSrc + " : " + 
 					rel.domain.eContainingClass.name + ", " + varNameTar + " : " + type.name + ") : Void is do\n"
 			
 			if(not rel.expression.isVoid) then
