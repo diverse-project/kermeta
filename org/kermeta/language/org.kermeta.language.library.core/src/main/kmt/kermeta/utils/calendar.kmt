@@ -1,0 +1,19 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package kermeta::utils{
+
+	/** Calendar object similar to java.util.Calendar */
+	@CompilerIgnore "true"
+	class Calendar
+	{
+		/** Returns a Date object representing this Calendar's time value (millisecond offset from the Epoch). */
+		@CompilerIgnore "true"
+		operation getTime() : kermeta::standard::Date is do
+		end
+		/** Returns a Date object representing this Calendar's time value (millisecond offset from the Epoch). */
+		@CompilerIgnore "true"
+		operation setTime(date : kermeta::standard::Date) : Void is do
+		end
+	}
+}
