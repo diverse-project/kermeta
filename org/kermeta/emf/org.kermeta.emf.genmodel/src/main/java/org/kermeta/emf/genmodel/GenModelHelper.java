@@ -193,7 +193,7 @@ public class GenModelHelper {
     
     protected void  reportDiagnostic(Diagnostic d, String indentation){
     	if(d.getSeverity() != Diagnostic.OK){
-        	logger.error(d.getMessage(), getClass().getName(), d.getException());
+        	logger.error(indentation+d.getMessage(), getClass().getName());
         	for(Diagnostic cd : d.getChildren()){
         		if(cd.getSeverity() != Diagnostic.OK){
                 	reportDiagnostic(cd,indentation+"   ");
