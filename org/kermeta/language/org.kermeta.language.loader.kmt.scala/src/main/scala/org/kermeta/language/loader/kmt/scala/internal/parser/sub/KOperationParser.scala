@@ -69,10 +69,16 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
         case Some(params) => {
             params.foreach{param =>
               var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
-              ovar.setName(param)
+              ovar.setName(param._1)
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
-              
+              if (param._2 != null) {
+                var newu = StructureFactory.eINSTANCE.createUnresolvedType()
+                newu.setTypeIdentifier(param._2)
+                ovar.setSupertype(newu)
+                ovar.getContainedType.add(newu)
+              }
+
             }
           }
       }
@@ -123,7 +129,20 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
       newo
   }
 
-  private def operationGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  private def operationGenericParems = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+
+
+  private def genericDef : Parser[Tuple2[String, String] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
+    var resTuple : Tuple2[String, String] = (null,  null)
+    genType match {
+      case Some(typ) => resTuple = (id, typ)
+      case None => resTuple = (id, null)
+    }
+    resTuple
+  }
+
+  private def genericType = ":" ~ ident ^^ { case k1 ~ ident => ident}
+
 
   def operationParameter : Parser[Parameter] = ident ~ ":" ~ multiplicityType ^^ { case id ~ _ ~ unresolveType =>
       var newo = StructureFactory.eINSTANCE.createParameter
