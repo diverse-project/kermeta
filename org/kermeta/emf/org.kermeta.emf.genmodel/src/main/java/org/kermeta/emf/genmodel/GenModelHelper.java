@@ -184,7 +184,21 @@ public class GenModelHelper {
         generator.requestInitialize();
         // Generator model code.
         Diagnostic d = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.out));
-        
+        if(d.getSeverity() != Diagnostic.OK){
+        	// TODO should stop the process !?
+        	reportDiagnostic(d,"");
+        }
         logger.info(d.getMessage(), getClass().getName());
+    }
+    
+    protected void  reportDiagnostic(Diagnostic d, String indentation){
+    	if(d.getSeverity() != Diagnostic.OK){
+        	logger.error(d.getMessage(), getClass().getName(), d.getException());
+        	for(Diagnostic cd : d.getChildren()){
+        		if(cd.getSeverity() != Diagnostic.OK){
+                	reportDiagnostic(cd,indentation+"   ");
+        		}
+        	}
+        }
     }
 }
