@@ -33,32 +33,17 @@ class SlicerVisitor {
 	end
 }
 
-aspect class NotCNF inherits Feedable {
-	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
-		checkInitialisation()
-		if(not self.visitedPass) then
-			super(theFeatureDiagramSlicer)
-			self.visitedPass := true
-			self.exp.visitToAddClasses(theFeatureDiagramSlicer)
-			self.visitedPass := false
-		end
-	end
-	method visitToAddRelations(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
-		if(not self.visitedPass) then
-			super(theFeatureDiagramSlicer)
-			self.visitedPass := true
-			self.visitedForRelations := true
-			self.exp.visitToAddRelations(theFeatureDiagramSlicer)
-			self.visitedPass := false
-		end
-	end
-	method feedOpposites() from Feedable is do
-		super()
-		self.exp.feedOpposites()
-	end
-}
-
 aspect class CNFExp inherits SlicerVisitor, Feedable {
+	reference notOpp : NotCNF[0..*]
+
+	reference orLeftOpp : OrCNF[0..*]
+
+	reference andLeftOpp : AndCNF[0..*]
+
+	reference orRightOpp : OrCNF[0..*]
+
+	reference andRightOpp : AndCNF[0..*]
+
 	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -68,6 +53,11 @@ aspect class CNFExp inherits SlicerVisitor, Feedable {
 				self.sliced := true
 			end
 			self.visitedPass := true
+			self.notOpp.each{theNotCNF | theNotCNF.visitToAddClasses(theFeatureDiagramSlicer)}
+			self.orLeftOpp.each{theOrCNF | theOrCNF.visitToAddClasses(theFeatureDiagramSlicer)}
+			self.andLeftOpp.each{theAndCNF | theAndCNF.visitToAddClasses(theFeatureDiagramSlicer)}
+			self.orRightOpp.each{theOrCNF | theOrCNF.visitToAddClasses(theFeatureDiagramSlicer)}
+			self.andRightOpp.each{theAndCNF | theAndCNF.visitToAddClasses(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -76,72 +66,21 @@ aspect class CNFExp inherits SlicerVisitor, Feedable {
 			super(theFeatureDiagramSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
+			self.notOpp.each{theNotCNF | theNotCNF.visitToAddRelations(theFeatureDiagramSlicer)}
+			self.orLeftOpp.each{theOrCNF | theOrCNF.visitToAddRelations(theFeatureDiagramSlicer)}
+			self.andLeftOpp.each{theAndCNF | theAndCNF.visitToAddRelations(theFeatureDiagramSlicer)}
+			self.orRightOpp.each{theOrCNF | theOrCNF.visitToAddRelations(theFeatureDiagramSlicer)}
+			self.andRightOpp.each{theAndCNF | theAndCNF.visitToAddRelations(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
 	method feedOpposites() from Feedable is do
 		super()
-	end
-}
-
-aspect class OrCNF inherits Feedable {
-	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
-		checkInitialisation()
-		if(not self.visitedPass) then
-			super(theFeatureDiagramSlicer)
-			self.visitedPass := true
-			self.left.visitToAddClasses(theFeatureDiagramSlicer)
-			self.right.visitToAddClasses(theFeatureDiagramSlicer)
-			self.visitedPass := false
-		end
-	end
-	method visitToAddRelations(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
-		if(not self.visitedPass) then
-			super(theFeatureDiagramSlicer)
-			self.visitedPass := true
-			self.visitedForRelations := true
-			self.left.visitToAddRelations(theFeatureDiagramSlicer)
-			self.right.visitToAddRelations(theFeatureDiagramSlicer)
-			self.visitedPass := false
-		end
-	end
-	method feedOpposites() from Feedable is do
-		super()
-		self.left.feedOpposites()
-		self.right.feedOpposites()
-	end
-}
-
-aspect class AndCNF inherits Feedable {
-	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
-		checkInitialisation()
-		if(not self.visitedPass) then
-			super(theFeatureDiagramSlicer)
-			self.visitedPass := true
-			self.left.visitToAddClasses(theFeatureDiagramSlicer)
-			self.right.visitToAddClasses(theFeatureDiagramSlicer)
-			self.visitedPass := false
-		end
-	end
-	method visitToAddRelations(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
-		if(not self.visitedPass) then
-			super(theFeatureDiagramSlicer)
-			self.visitedPass := true
-			self.visitedForRelations := true
-			self.left.visitToAddRelations(theFeatureDiagramSlicer)
-			self.right.visitToAddRelations(theFeatureDiagramSlicer)
-			self.visitedPass := false
-		end
-	end
-	method feedOpposites() from Feedable is do
-		super()
-		self.left.feedOpposites()
-		self.right.feedOpposites()
 	end
 }
 
 aspect class Feature inherits SlicerVisitor, Feedable {
-	reference featureOpposite : AtomicCNF[0..*]
+	reference atomicCNFs : AtomicCNF[0..*]
 
 	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
 		checkInitialisation()
@@ -153,7 +92,7 @@ aspect class Feature inherits SlicerVisitor, Feedable {
 			end
 			self.visitedPass := true
 			self.operator.each{theOperator | theOperator.visitToAddClasses(theFeatureDiagramSlicer)}
-			self.featureOpposite.each{theAtomicCNF | theAtomicCNF.visitToAddClasses(theFeatureDiagramSlicer)}
+			self.atomicCNFs.each{theAtomicCNF | theAtomicCNF.visitToAddClasses(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -163,7 +102,7 @@ aspect class Feature inherits SlicerVisitor, Feedable {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.operator.each{theOperator | theOperator.visitToAddRelations(theFeatureDiagramSlicer)}
-			self.featureOpposite.each{theAtomicCNF | theAtomicCNF.visitToAddRelations(theFeatureDiagramSlicer)}
+			self.atomicCNFs.each{theAtomicCNF | theAtomicCNF.visitToAddRelations(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -227,6 +166,84 @@ aspect class FeatureDiagram inherits SlicerVisitor, Feedable {
 	end
 }
 
+aspect class And inherits Feedable {
+	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theFeatureDiagramSlicer)
+			if(not self.sliced) then
+				theFeatureDiagramSlicer.addedAnds.add(self)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
+		if(not self.visitedPass) then
+			super(theFeatureDiagramSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+	method feedOpposites() from Feedable is do
+		super()
+	end
+}
+
+aspect class Xor inherits Feedable {
+	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theFeatureDiagramSlicer)
+			if(not self.sliced) then
+				theFeatureDiagramSlicer.addedXors.add(self)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
+		if(not self.visitedPass) then
+			super(theFeatureDiagramSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+	method feedOpposites() from Feedable is do
+		super()
+	end
+}
+
+aspect class Or inherits Feedable {
+	method visitToAddClasses(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theFeatureDiagramSlicer)
+			if(not self.sliced) then
+				theFeatureDiagramSlicer.addedOrs.add(self)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theFeatureDiagramSlicer : FeatureDiagramSlicer) : Void is do
+		if(not self.visitedPass) then
+			super(theFeatureDiagramSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+	method feedOpposites() from Feedable is do
+		super()
+	end
+}
+
 aspect class PrimitiveFeature inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
@@ -234,24 +251,6 @@ aspect class PrimitiveFeature inherits Feedable {
 }
 
 aspect class Opt inherits Feedable {
-	method feedOpposites() from Feedable is do
-		super()
-	end
-}
-
-aspect class And inherits Feedable {
-	method feedOpposites() from Feedable is do
-		super()
-	end
-}
-
-aspect class Or inherits Feedable {
-	method feedOpposites() from Feedable is do
-		super()
-	end
-}
-
-aspect class Xor inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
 	end
@@ -281,10 +280,38 @@ aspect class Attribute inherits Feedable {
 	end
 }
 
+aspect class OrCNF inherits Feedable {
+	method feedOpposites() from Feedable is do
+		super()
+		self.left.feedOpposites()
+		self.right.feedOpposites()
+		self.left.~orLeftOpp.add(self)
+		self.right.~orRightOpp.add(self)
+	end
+}
+
+aspect class NotCNF inherits Feedable {
+	method feedOpposites() from Feedable is do
+		super()
+		self.exp.feedOpposites()
+		self.exp.~notOpp.add(self)
+	end
+}
+
+aspect class AndCNF inherits Feedable {
+	method feedOpposites() from Feedable is do
+		super()
+		self.left.feedOpposites()
+		self.right.feedOpposites()
+		self.left.~andLeftOpp.add(self)
+		self.right.~andRightOpp.add(self)
+	end
+}
+
 aspect class AtomicCNF inherits Feedable {
 	method feedOpposites() from Feedable is do
 		super()
-		self.~feature.featureOpposite.add(self)
+		self.feature.~atomicCNFs.add(self)
 	end
 }
 

@@ -1,0 +1,53 @@
+/* $Id:$ 
+ * Creation : February 8, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package featureDiagram;
+
+require kermeta
+require "platform:/resource/org.kermeta.kompren.slicing/examples/featureModel/featureDiagram.ecore"
+
+using kermeta::standard
+
+aspect class CNFExp {
+	operation getExpFormula() : String is abstract
+}
+
+aspect class OrCNF {
+	method getExpFormula() : String is do
+		result := left.getExpFormula + " or " + right.getExpFormula
+
+		if not container.isVoid and container.isInstanceOf(CNFExp) then
+			result := "(" + result + ")"
+		end
+	end
+}
+
+aspect class AndCNF {
+	method getExpFormula() : String is do
+		result := left.getExpFormula + " and " + right.getExpFormula
+
+		if not container.isVoid and container.isInstanceOf(CNFExp) then
+			result := "(" + result + ")"
+		end
+	end
+}
+
+aspect class NotCNF {
+	method getExpFormula() : String is do
+		result := "not " + exp.getExpFormula
+
+		if not container.isVoid and container.isInstanceOf(CNFExp) then
+			result := "(" + result + ")"
+		end
+	end
+}
+
+aspect class AtomicCNF {
+	method getExpFormula() : String is do
+		result := feature.name
+	end
+}

@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <org.kermeta.kompren.slicing:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicing="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing" name="FeatureDiagramSlicer" uriMetamodel="./featureDiagram.ecore">
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;&#x9;stdio.writeln(&quot;Feature sliced: &quot; + feature.name)">
-    <ctx varName="feature"/>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;&#x9;if feature.owningOperator.isVoid then&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Feature sliced: &quot; + feature.name)&#xA;&#x9;&#x9;end">
+    <ctx varName="feature">
+      <type href="featureDiagram.ecore#//Feature"/>
+    </ctx>
     <domain href="featureDiagram.ecore#//Feature"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
-    <ctx varName="featDiag"/>
+    <ctx varName="featDiag">
+      <type href="featureDiagram.ecore#//FeatureDiagram"/>
+    </ctx>
     <domain href="featureDiagram.ecore#//FeatureDiagram"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;&#x9;stdio.writeln(&quot;CNFExp sliced: &quot; + cnfExp.toString)">
-    <ctx varName="cnfExp"/>
+    <ctx varName="cnfExp">
+      <type href="featureDiagram.ecore#//CNFExp"/>
+    </ctx>
     <domain href="featureDiagram.ecore#//CNFExp"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <opposite name="notOpp"/>
     <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//NotCNF/exp"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <opposite name="orLeftOpp"/>
     <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//OrCNF/left"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <opposite name="andLeftOpp"/>
     <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//AndCNF/left"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <opposite name="orRightOpp"/>
     <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//OrCNF/right"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
+    <opposite name="andRightOpp"/>
     <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//AndCNF/right"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
@@ -36,6 +47,24 @@
   <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty">
     <opposite name="atomicCNFs"/>
     <domain xsi:type="ecore:EReference" href="featureDiagram.ecore#//AtomicCNF/feature"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;stdio.writeln(andOp.feature.size.toString)">
+    <ctx varName="andOp">
+      <type href="featureDiagram.ecore#//And"/>
+    </ctx>
+    <domain href="featureDiagram.ecore#//And"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;stdio.writeln(xorOp.feature.size.toString)">
+    <ctx varName="xorOp">
+      <type href="featureDiagram.ecore#//Xor"/>
+    </ctx>
+    <domain href="featureDiagram.ecore#//Xor"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass" expression="&#x9;stdio.writeln(orOp.feature.size.toString)">
+    <ctx varName="orOp">
+      <type href="featureDiagram.ecore#//Or"/>
+    </ctx>
+    <domain href="featureDiagram.ecore#//Or"/>
   </slicedElements>
   <inputClasses href="featureDiagram.ecore#//Feature"/>
 </org.kermeta.kompren.slicing:Slicer>
