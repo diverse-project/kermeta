@@ -240,7 +240,7 @@ class SlicerAspectGenerator inherits Generator {
 
 				// Initialisation methods must be added to the aspect clazz that contains the attributes which opposites are created.
 				if((etype.getQualifiedName.equals(eclass.getQualifiedName) or etype.isSuperTypeOf(eclass)) and rel.domain.isInstanceOf(EReference)) then
-					feedOppositeMethod := feedOppositeMethod + generateInitialiseOppositeOperation(rel.domain.asType(EReference))
+					feedOppositeMethod := feedOppositeMethod + generateInitialiseOppositeOperation(rel)
 				end
 			end
 		}
@@ -343,16 +343,17 @@ class SlicerAspectGenerator inherits Generator {
 
 
 	// Generates the operation that initialises a created opposite.
-	operation generateInitialiseOppositeOperation(relation : EReference) : String is do
-		var selfNameVar : String init "self.~" + relation.name.split("Opposite").first()
+	operation generateInitialiseOppositeOperation(slicedProp : SlicedProperty) : String is do
+		var relation : EReference init slicedProp.domain.asType(EReference)
+		var selfNameVar : String init "self." + relation.eOpposite.name 
 		
 		result := "\t\t"
 		if(relation.eOpposite.upperBound==-1 or relation.eOpposite.upperBound>1) then
 			var name : String init relation.eContainingClass.getVarNameClassifier()
-			result := result + selfNameVar + ".each{" + name + " | " + name + "." +  relation.name + ".add(self) }"
+			result := result + selfNameVar + ".each{" + name + " | " + name + ".~" +  relation.name + ".add(self) }"
 		else
 			if(relation.eOpposite.lowerBound==0) then result := result + "if(not " + selfNameVar + "isVoid) then " end
-			result := result + selfNameVar + "." +  relation.name + ".add(self)"
+			result := result + selfNameVar + ".~" + relation.name + ".add(self)"
 			if(relation.eOpposite.lowerBound==0) then result := result + " end" end
 		end
 		

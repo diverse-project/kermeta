@@ -62,7 +62,7 @@ class SlicerGenerator {
 					// We change the slicing data to use of the opposite.
 					var ref : EReference init EReference.new
 					var relation : SlicedProperty init SlicedProperty.new
-					ref.name := rel.domain.name + "Opposite"
+					ref.name := rel.opposite.name
 					ref.eType:= rel.domain.eContainingClass
 					ref.eOpposite := rel.domain.asType(EReference)
 					rel.domain.eType.asType(EClass).eStructuralFeatures.add(ref)
