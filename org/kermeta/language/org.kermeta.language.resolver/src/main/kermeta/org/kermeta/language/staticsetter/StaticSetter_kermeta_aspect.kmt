@@ -143,6 +143,23 @@ package behavior {
 		
 	}
 	
+	
+	aspect class JavaStaticCall {
+		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do 
+			var newParameters : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+			self.parameters.each{ oldParameter |
+				newParameters.add(oldParameter.resolveCallAndInferStatic(context))
+			}
+			self.parameters.clear
+			
+			// self.parameters.addAll(newParameters)
+			newParameters.each{ p | self.parameters.add(p) }
+			
+			result := self
+		end
+		
+	}
+	
 	aspect class Block
 	{
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do

@@ -20,6 +20,10 @@ using org::kermeta::language::resolver
 package behavior{
 	aspect class CallOperation 
 	{
+		
+		/**Infer the type of type variable from the staticOperation using the type of parameters of the call
+		* e.g. if operation foo<X>(x: Collection<X>): X and a call foo(Sequence<String>.new) then X->String
+		*/
 		operation inferTypeVariableFromParameters(context : StaticSetterContext) is do 
 			stdio.writeln("inferTypeVariableFromParameters for "+self.name)
 			
@@ -51,6 +55,8 @@ package behavior{
 			
 		end
 	}
+	
+	
 }
 
 package structure{
