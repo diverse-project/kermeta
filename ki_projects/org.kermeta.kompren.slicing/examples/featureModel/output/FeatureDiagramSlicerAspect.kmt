@@ -120,7 +120,6 @@ aspect class Operator inherits SlicerVisitor, Feedable {
 		if(not self.visitedPass) then
 			super(theFeatureDiagramSlicer)
 			self.visitedPass := true
-			self.features.each{theFeature | theFeature.visitToAddClasses(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -129,7 +128,6 @@ aspect class Operator inherits SlicerVisitor, Feedable {
 			super(theFeatureDiagramSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.features.each{theFeature | theFeature.visitToAddRelations(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -176,6 +174,7 @@ aspect class And inherits Feedable {
 				self.sliced := true
 			end
 			self.visitedPass := true
+			self.features.each{theFeature | theFeature.visitToAddClasses(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -184,6 +183,7 @@ aspect class And inherits Feedable {
 			super(theFeatureDiagramSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
+			self.features.each{theFeature | theFeature.visitToAddRelations(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -202,6 +202,7 @@ aspect class Xor inherits Feedable {
 				self.sliced := true
 			end
 			self.visitedPass := true
+			self.features.first().visitToAddClasses(theFeatureDiagramSlicer)
 			self.visitedPass := false
 		end
 	end
@@ -210,6 +211,7 @@ aspect class Xor inherits Feedable {
 			super(theFeatureDiagramSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
+			self.features.first().visitToAddRelations(theFeatureDiagramSlicer)
 			self.visitedPass := false
 		end
 	end
@@ -228,6 +230,7 @@ aspect class Or inherits Feedable {
 				self.sliced := true
 			end
 			self.visitedPass := true
+			self.features.each{theFeature | theFeature.visitToAddClasses(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -236,6 +239,7 @@ aspect class Or inherits Feedable {
 			super(theFeatureDiagramSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
+			self.features.each{theFeature | theFeature.visitToAddRelations(theFeatureDiagramSlicer)}
 			self.visitedPass := false
 		end
 	end

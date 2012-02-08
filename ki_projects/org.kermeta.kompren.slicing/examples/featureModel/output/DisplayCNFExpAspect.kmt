@@ -8,15 +8,23 @@
 package featureDiagram;
 
 require kermeta
-require "platform:/resource/org.kermeta.kompren.slicing/examples/featureModel/featureDiagram.ecore"
+require "./FeatureDiagramSlicerAspect.kmt"
 
 using kermeta::standard
 
 aspect class CNFExp {
+	operation isFullySliced() : Boolean is do
+		result := (not sliced.isVoid).andThen{b | sliced }
+	end
+
 	operation getExpFormula() : String is abstract
 }
 
 aspect class OrCNF {
+	method isFullySliced() : Boolean is do
+		result := super and left.isFullySliced() and right.isFullySliced()
+	end
+
 	method getExpFormula() : String is do
 		result := left.getExpFormula + " or " + right.getExpFormula
 
@@ -27,6 +35,10 @@ aspect class OrCNF {
 }
 
 aspect class AndCNF {
+	method isFullySliced() : Boolean is do
+		result := super and left.isFullySliced() and right.isFullySliced()
+	end
+	
 	method getExpFormula() : String is do
 		result := left.getExpFormula + " and " + right.getExpFormula
 
@@ -37,6 +49,10 @@ aspect class AndCNF {
 }
 
 aspect class NotCNF {
+	method isFullySliced() : Boolean is do
+		result := super and exp.isFullySliced()
+	end
+
 	method getExpFormula() : String is do
 		result := "not " + exp.getExpFormula
 

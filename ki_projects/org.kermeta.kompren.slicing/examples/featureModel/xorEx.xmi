@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featureDiagram:FeatureDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featureDiagram="http://www.kermeta.org/featureDiagram" xsi:schemaLocation="http://www.kermeta.org/featureDiagram featureDiagram.ecore" root="//@features.0">
+  <features name="R">
+    <operator xsi:type="featureDiagram:And" owningFeature="//@features.0" features="//@features.1"/>
+  </features>
+  <features name="A" owningOperator="//@features.0/@operator.0">
+    <operator xsi:type="featureDiagram:Xor" owningFeature="//@features.1" features="//@features.2 //@features.3"/>
+    <operator xsi:type="featureDiagram:Opt" owningFeature="//@features.1" features="//@features.7"/>
+    <operator xsi:type="featureDiagram:And" owningFeature="//@features.1" features="//@features.6"/>
+  </features>
+  <features name="B" owningOperator="//@features.1/@operator.0">
+    <operator xsi:type="featureDiagram:And" owningFeature="//@features.2" features="//@features.4"/>
+  </features>
+  <features name="C" owningOperator="//@features.1/@operator.0">
+    <operator xsi:type="featureDiagram:Opt" owningFeature="//@features.3" features="//@features.5"/>
+  </features>
+  <features name="D" owningOperator="//@features.2/@operator.0"/>
+  <features name="E" owningOperator="//@features.3/@operator.0"/>
+  <features name="F" owningOperator="//@features.1/@operator.2"/>
+  <features name="G" owningOperator="//@features.1/@operator.1"/>
+</featureDiagram:FeatureDiagram>
