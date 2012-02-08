@@ -16,12 +16,7 @@ package standard{
 @CompilerIgnore "true"
 class Void {
 } 
-/**
- * TODO : miss operations 
- */
-@CompilerIgnore "true"
-class Long {
-}
+
 @CompilerIgnore "true"
 class Object
 {
@@ -1017,6 +1012,27 @@ class Short inherits Numeric<Short> {        @CompilerIgnore "true"
           end
 }
 
+/**
+ * TODO : miss operations 
+ */
+@CompilerIgnore "true"
+class Long inherits Numeric<Short> {
+	@CompilerIgnore "true"
+    operation intValue() : Integer is do end
+    
+    /** Parses the string argument as a signed decimal long. */
+    @CompilerIgnore "true"
+    operation parseShort(s:String) : Short is do end
+    
+    /** Parses the string argument as a signed long in the radix specified by the second argument. */
+	@CompilerIgnore "true"
+    operation parseShort(s:String, radix:Integer) : Short is do end
+    
+    /**  Returns the value of this Long as a short. */
+    @CompilerIgnore "true"
+    operation shortValue() : Integer is do end
+    
+}
 
 
 @CompilerIgnore "true"

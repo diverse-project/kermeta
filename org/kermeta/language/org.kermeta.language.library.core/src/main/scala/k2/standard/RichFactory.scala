@@ -7,6 +7,8 @@ object KerRichFactory {
  def createString : String = { new String }
  def createDouble : Double = { 0.0 }
  def createInteger : Int = { 0 }
+ def createLong : Long = { 0 }
+ def createShort : Short = { 0 }
  def createBoolean : java.lang.Boolean = { true }
  def createCharacter : Char = { return ' ' }
  
@@ -15,6 +17,9 @@ object KerRichFactory {
 		res = o.asInstanceOf[EObjectImplForPrimitive].isVoid
 	}
 	return res;
+ }
+ def createDate : java.util.Date = {
+   new java.util.Date
  }
 }
 
