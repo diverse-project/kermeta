@@ -125,7 +125,7 @@ public class KermetaScanner implements KermetaTokenScanner {
             style = SWT.ITALIC;
         }
         else if (tokenName.equals("MLDocumentation")) {
-            color = new RGB(0, 0, 255);
+            color = new RGB(0, 0, 128);
             style = SWT.ITALIC;
         }
         else if (tokenName.equals("KIncomplet") || tokenName.equals("KError")) {
