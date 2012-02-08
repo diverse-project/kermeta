@@ -105,36 +105,30 @@ class SlicerClassGenerator inherits Generator {
 		result := ""
 
 		slicerGenerator.slicerModel.slicedClasses.each{clazz |
-			var varName : String
- 
-			if(clazz.ctx.isVoid) then varName := "varName" else varName := clazz.ctx.varName end
-			
-			result := result + "\toperation on" + clazz.domain.name + "Added(" + 
-					varName + " : " + clazz.domain.name + ") : Void is do\n"
-					
 			if(not clazz.expression.isVoid) then
-				result := result + clazz.expression
+				result := result + "\toperation on" + clazz.domain.name + "Added(" + 
+						clazz.ctx.varName + " : " + clazz.domain.name + ") : Void is do\n"
+						
+				if(not clazz.expression.isVoid) then
+					result := result + clazz.expression
+				end
+	
+				result := result + "\n\tend\n"
 			end
-
-			result := result + "\n\tend\n"
 		}
 
 		slicerGenerator.slicerModel.slicedProperties.each{rel |
-			var varNameSrc : String
-			var varNameTar : String
- 
-			if(rel.src.isVoid) then varNameSrc := "varName" else varNameSrc := rel.src.varName end
-			if(rel.tgt.isVoid) then varNameTar := "varName" else varNameTar := rel.tgt.varName end
-			
-			var type : EClass init rel.domain.eType.asType(EClass)
-			result := result + "\toperation on" + rel.domain.eContainingClass.name + rel.domain.name + "Added(" + varNameSrc + " : " + 
-					rel.domain.eContainingClass.name + ", " + varNameTar + " : " + type.name + ") : Void is do\n"
-			
 			if(not rel.expression.isVoid) then
-				result := result + rel.expression
+				var type : EClass init rel.domain.eType.asType(EClass)
+				result := result + "\toperation on" + rel.domain.eContainingClass.name + rel.domain.name + "Added(" + rel.src.varName + " : " + 
+						rel.domain.eContainingClass.name + ", " + rel.tgt.varName + " : " + type.name + ") : Void is do\n"
+				
+				if(not rel.expression.isVoid) then
+					result := result + rel.expression
+				end
+				
+				result := result + "\n\tend\n"
 			end
-			
-			result := result + "\n\tend\n"
 		}
 	end
 
@@ -165,19 +159,21 @@ class SlicerClassGenerator inherits Generator {
 		
 		if(not slicerGenerator.slicerModel.strict) then
 			slicerGenerator.slicerModel.slicedClasses.each{eclass |
-				var varName : String init eclass.domain.getVarNameClassifier()
-				var endCode : String init ""
-	
-				result := result + "\t\tself." + eclass.domain.getAddedAttributeName() + ".each{" + varName + " | "
-	
-				if(not slicerGenerator.slicerModel.radius.isVoid) then
-					if(not slicerGenerator.slicerModel.radius.focusedClasses.contains(eclass)) then
-						result := result + "if(" + varName + ".checkCanReallyBeAdded()) then "
-						endCode := " end"
+				if(not eclass.expression.isVoid) then
+					var varName : String init eclass.domain.getVarNameClassifier()
+					var endCode : String init ""
+		
+					result := result + "\t\tself." + eclass.domain.getAddedAttributeName() + ".each{" + varName + " | "
+		
+					if(not slicerGenerator.slicerModel.radius.isVoid) then
+						if(not slicerGenerator.slicerModel.radius.focusedClasses.contains(eclass)) then
+							result := result + "if(" + varName + ".checkCanReallyBeAdded()) then "
+							endCode := " end"
+						end
 					end
+		
+					result := result + "on" + eclass.domain.name + "Added(" + varName + ")" + endCode + " }\n"
 				end
-	
-				result := result + "on" + eclass.domain.name + "Added(" + varName + ")" + endCode + " }\n"
 			}
 			slicerGenerator.slicerModel.slicedProperties.each{rel |
 				if(not rel.expression.isVoid) then
