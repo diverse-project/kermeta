@@ -20,18 +20,45 @@ class SlicerClassGenerator inherits Generator {
 	end
 
 	method generateCode() : Void is do
+		var linedHelper : Sequence<String>
+		
+		if slicerGenerator.slicerModel.helper.isVoid then linedHelper := void
+		else linedHelper := slicerGenerator.slicerModel.helper.split("\n") end
+		
 		generatedCode := slicerGenerator.getPackageFromClasses(slicerGenerator.aspectisedClasses)
-		generatedCode := generatedCode + "require kermeta\nrequire \"" + slicerGenerator.modelURI + "\"\nrequire \"" +
-						 slicerGenerator.slicerModel.name + "Aspect.kmt\"\n" +
-   					     slicerGenerator.getRequiresFromClasses(slicerGenerator.aspectisedClasses)
+		generatedCode := generatedCode + "require kermeta\nrequire \"" + slicerGenerator.modelURI + "\"\nrequire \"" + 
+						slicerGenerator.slicerModel.name + "Aspect.kmt\"\n" + slicerGenerator.getRequiresFromClasses(slicerGenerator.aspectisedClasses)
+						
+		// The helper may contain 'require' statements that must be placed at this place.
+		if not linedHelper.isVoid then
+			var requireStr : String init "require \""
+			linedHelper.collect{str | 
+				if str.contains(requireStr) then
+					generatedCode := generatedCode + str + "\n"
+					slicerGenerator.slicerModel.helper := slicerGenerator.slicerModel.helper.replace(str, "")
+				end
+			}
+		end
    					     
 		if(slicerGenerator.slicerModel.strict) then
 			generatedCode := generatedCode + "using kermeta::persistence" 
 		end
    					     
    		generatedCode := generatedCode + "\nusing kermeta::standard\nusing kermeta::utils\n" +
-						 slicerGenerator.getUsingsFromClasses(slicerGenerator.aspectisedClasses) +
-						 "class " + slicerGenerator.slicerModel.name + " {\n"
+						 slicerGenerator.getUsingsFromClasses(slicerGenerator.aspectisedClasses)
+		
+		// The helper may contain 'using' statements that must be placed at this place.
+		if not linedHelper.isVoid then
+			var usingStr : String init "using "
+			linedHelper.collect{str | 
+				if str.contains(usingStr) then
+					generatedCode := generatedCode + str + "\n"
+					slicerGenerator.slicerModel.helper := slicerGenerator.slicerModel.helper.replace(str, "")
+				end
+			}
+		end					 
+						 
+		generatedCode := generatedCode + "class " + slicerGenerator.slicerModel.name + " {\n"
 
 		if(slicerGenerator.slicerModel.strict) then
 			generatedCode := generatedCode + "\treference sliceRoots : Bag<Object>\n"
