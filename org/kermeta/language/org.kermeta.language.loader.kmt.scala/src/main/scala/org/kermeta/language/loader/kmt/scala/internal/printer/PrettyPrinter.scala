@@ -477,6 +477,22 @@ object PrettyPrinter {
         res.append(t.getValue)
         res.append("\"\n")
       }
+
+      case j : JavaStaticCall => {
+        res.append("extern ")
+        res.append(j.getJclass)
+        res.append(".")
+        res.append(j.getJmethod)
+        res.append("(")
+        var i=0
+        j.getParameters.foreach( p => {
+          if (i != 0)
+            res.append(", ")
+          print(p, res)
+          i=i+1
+        })
+        res.append(")")
+      }
       case o:EObject => res.append("todo " + o.getClass )
     }
     return ;
