@@ -70,7 +70,7 @@ public class KermetaScanner implements KermetaTokenScanner {
     public void setFileHasError(boolean fileHasError) {
         this.fileHasError = fileHasError;
     }
-
+ /** */
     //	@Override
     public IToken nextToken() {
         // try {
@@ -125,6 +125,10 @@ public class KermetaScanner implements KermetaTokenScanner {
             style = SWT.ITALIC;
         }
 
+        if (tokenName.equals("MLDocumentation")) {
+            color = new RGB(0, 0, 255);
+            style = SWT.ITALIC;
+        }
         if (tokenName.equals("KIncomplet") || tokenName.equals("KError")) {
 
             color = new RGB(255, 0, 0);
