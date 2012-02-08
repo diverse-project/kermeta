@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="Math">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Math" superType="//Math/Math/@containedType.0" isAspect="false">
+      <kOwnedTags name="traceability_text_reference" value="114;734"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        <usings fromQName="kermeta::standard::Float" toName="Real"/>
+      </containedType>
+      <ownedOperation name="sin" type="//Math/Math/sin/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="131;248"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+          <usings fromQName="kermeta::standard::Float" toName="Real"/>
+        </containedType>
+        <ownedParameter name="a" type="//Math/Math/sin/@ownedParameter.0/@containedType.0" isOrdered="true">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <usings fromQName="kermeta::standard::Float" toName="Real"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="165;248"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="176;183"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:JavaStaticCall" jclass="org::kermeta::kmLogo::wrapper::Math" jmethod="sin">
+              <kOwnedTags name="traceability_text_reference" value="186;240"/>
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                <kOwnedTags name="traceability_text_reference" value="233;234"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <usings fromQName="kermeta::standard::Float" toName="Real"/>
+              </parameters>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="cos" type="//Math/Math/cos/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="248;365"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+          <usings fromQName="kermeta::standard::Float" toName="Real"/>
+        </containedType>
+        <ownedParameter name="a" type="//Math/Math/cos/@ownedParameter.0/@containedType.0" isOrdered="true">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <usings fromQName="kermeta::standard::Float" toName="Real"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="282;365"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="293;300"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:JavaStaticCall" jclass="org::kermeta::kmLogo::wrapper::Math" jmethod="cos">
+              <kOwnedTags name="traceability_text_reference" value="303;357"/>
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                <kOwnedTags name="traceability_text_reference" value="350;351"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <usings fromQName="kermeta::standard::Float" toName="Real"/>
+              </parameters>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="pi" type="//Math/Math/pi/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="365;479"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+          <usings fromQName="kermeta::standard::Float" toName="Real"/>
+        </containedType>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="390;479"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="401;408"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:JavaStaticCall" jclass="org::kermeta::kmLogo::wrapper::Math" jmethod="pi">
+              <kOwnedTags name="traceability_text_reference" value="411;467"/>
+              <parameters xsi:type="org_kermeta_language_behavior:SelfExpression">
+                <kOwnedTags name="traceability_text_reference" value="457;461"/>
+              </parameters>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="toDegrees" type="//Math/Math/toDegrees/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="479;608"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+          <usings fromQName="kermeta::standard::Float" toName="Real"/>
+        </containedType>
+        <ownedParameter name="a" type="//Math/Math/toDegrees/@ownedParameter.0/@containedType.0" isOrdered="true">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <usings fromQName="kermeta::standard::Float" toName="Real"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="519;608"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="530;537"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:JavaStaticCall" jclass="org::kermeta::kmLogo::wrapper::Math" jmethod="toDegrees">
+              <kOwnedTags name="traceability_text_reference" value="540;600"/>
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                <kOwnedTags name="traceability_text_reference" value="593;594"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <usings fromQName="kermeta::standard::Float" toName="Real"/>
+              </parameters>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="toRadians" type="//Math/Math/toRadians/@containedType.0" isOrdered="true" isAbstract="false">
+        <kOwnedTags name="traceability_text_reference" value="608;733"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+          <usings fromQName="kermeta::standard::Float" toName="Real"/>
+        </containedType>
+        <ownedParameter name="a" type="//Math/Math/toRadians/@ownedParameter.0/@containedType.0" isOrdered="true">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <usings fromQName="kermeta::standard::Float" toName="Real"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="648;733"/>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+            <target xsi:type="org_kermeta_language_behavior:CallResult">
+              <kOwnedTags name="traceability_text_reference" value="659;666"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:JavaStaticCall" jclass="org::kermeta::kmLogo::wrapper::Math" jmethod="toRadians">
+              <kOwnedTags name="traceability_text_reference" value="669;729"/>
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
+                <kOwnedTags name="traceability_text_reference" value="722;723"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <usings fromQName="kermeta::standard::Float" toName="Real"/>
+              </parameters>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>
