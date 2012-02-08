@@ -30,7 +30,7 @@
             id="org.kermeta.kompren.slicing.presentation.SlicingEditorID"
             name="%_UI_SlicingEditor_label"
             icon="icons/full/obj16/SlicingModelFile.gif"
-            extensions="slicing"
+            extensions="slicer"
             class="org.kermeta.kompren.slicing.presentation.SlicingEditor"
             contributorClass="org.kermeta.kompren.slicing.presentation.SlicingActionBarContributor">
       </editor>
