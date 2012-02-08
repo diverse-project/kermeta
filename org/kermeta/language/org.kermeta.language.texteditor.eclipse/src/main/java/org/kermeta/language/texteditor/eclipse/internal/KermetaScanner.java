@@ -109,27 +109,26 @@ public class KermetaScanner implements KermetaTokenScanner {
         if (tokenName.equals("StringLit")) {
             color = new RGB(0, 0, 255);
         }
-        if (tokenName.equals("NumericLit")) {
+        else if (tokenName.equals("NumericLit")) {
             color = new RGB(0, 0, 255);
         }
-        if (tokenName.equals("Keyword")) {
+        else if (tokenName.equals("Keyword")) {
             color = new RGB(128, 0, 0);
             style = SWT.BOLD;
         }
-        if (tokenName.equals("Delimiter")) {
+        else if (tokenName.equals("Delimiter")) {
             color = new RGB(64, 64, 64);
             style = SWT.UNDERLINE_SINGLE;
         }
-        if (tokenName.equals("Comment") || tokenName.equals("MLComment")) {
+        else if (tokenName.equals("Comment") || tokenName.equals("MLComment")) {
             color = new RGB(0, 128, 0);
             style = SWT.ITALIC;
         }
-
-        if (tokenName.equals("MLDocumentation")) {
+        else if (tokenName.equals("MLDocumentation")) {
             color = new RGB(0, 0, 255);
             style = SWT.ITALIC;
         }
-        if (tokenName.equals("KIncomplet") || tokenName.equals("KError")) {
+        else if (tokenName.equals("KIncomplet") || tokenName.equals("KError")) {
 
             color = new RGB(255, 0, 0);
             style = SWT.BOLD;
