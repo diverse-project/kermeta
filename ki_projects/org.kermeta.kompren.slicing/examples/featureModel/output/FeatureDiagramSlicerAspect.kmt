@@ -53,6 +53,7 @@ aspect class NotCNF {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 		self.exp.feedOpposites()
 	end
 }
@@ -79,6 +80,7 @@ aspect class CNFExp inherits SlicerVisitor, Feedable {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 
@@ -104,6 +106,7 @@ aspect class OrCNF {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 		self.left.feedOpposites()
 		self.right.feedOpposites()
 	end
@@ -131,6 +134,7 @@ aspect class AndCNF {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 		self.left.feedOpposites()
 		self.right.feedOpposites()
 	end
@@ -164,6 +168,7 @@ aspect class Feature inherits SlicerVisitor, Feedable {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 		self.operator.each{theoperator | theoperator.feedOpposites() }
 		self.models.each{themodels | themodels.feedOpposites() }
 		self.attributes.each{theattributes | theattributes.feedOpposites() }
@@ -190,6 +195,7 @@ aspect class Operator inherits SlicerVisitor, Feedable {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 
@@ -215,6 +221,7 @@ aspect class FeatureDiagram inherits SlicerVisitor, Feedable {
 		end
 	end
 	method feedOpposites() from Feedable is do
+		super()
 		self.features.each{thefeatures | thefeatures.feedOpposites() }
 		self.cnfExps.each{thecnfExps | thecnfExps.feedOpposites() }
 	end
@@ -222,44 +229,54 @@ aspect class FeatureDiagram inherits SlicerVisitor, Feedable {
 
 aspect class PrimitiveFeature inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class Opt inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class And inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class Or inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class Xor inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class Card inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class Model inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class FeatureElement inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class Attribute inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 aspect class AtomicCNF inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 	end
 }
 abstract class Feedable {
-	operation feedOpposites() is abstract
+	operation feedOpposites() is do end
 }

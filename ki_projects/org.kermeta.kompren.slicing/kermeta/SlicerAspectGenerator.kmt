@@ -63,7 +63,7 @@ class SlicerAspectGenerator inherits Generator {
 		
 		if(slicerGenerator.hasOpposite) then
 			generatedCode := generatedCode + generateAspectFeedableOtherClasses()
-			generatedCode := generatedCode + "abstract class Feedable {\n\toperation feedOpposites() is abstract\n}\n"
+			generatedCode := generatedCode + "abstract class Feedable {\n\toperation feedOpposites() is do end\n}\n"
 		end
 	end
 	
@@ -76,7 +76,7 @@ class SlicerAspectGenerator inherits Generator {
 			 not slicerGenerator.aspectisedClasses.exists{cl | cl.getQualifiedName().equals(clazz.getQualifiedName()) } }
 			 
 		coll.each{clazz | 
-			result := result + "aspect class " + clazz.name + " inherits Feedable {\n\tmethod feedOpposites() from Feedable is do\n" +
+			result := result + "aspect class " + clazz.name + " inherits Feedable {\n\tmethod feedOpposites() from Feedable is do\n\t\tsuper()\n" +
 						generateVisitFeedCallBlock(clazz) + "\tend\n}\n"
 		}
 	end
@@ -213,7 +213,7 @@ class SlicerAspectGenerator inherits Generator {
 		result := result + createImplementationOperationCreateFrom(eclass)
 		
 		if(slicerGenerator.hasOpposite) then
-			feedOppositeMethod := "\tmethod feedOpposites() from Feedable is do\n" + generateVisitFeedCallBlock(eclass)
+			feedOppositeMethod := "\tmethod feedOpposites() from Feedable is do\n\t\tsuper()\n" + generateVisitFeedCallBlock(eclass)
 		end
 
 		// Generating the opposite attributes or initialisation methods.
