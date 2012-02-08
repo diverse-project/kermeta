@@ -43,28 +43,28 @@ class FeatureDiagramSlicer {
 	operation onCNFExpAdded(cnfExp : CNFExp) : Void is do
 
 	end
-	operation onexpAdded(varName : NotCNF, varName : CNFExp) : Void is do
+	operation onNotCNFexpAdded(varName : NotCNF, varName : CNFExp) : Void is do
 
 	end
-	operation onleft1Added(varName : OrCNF, varName : CNFExp) : Void is do
+	operation onOrCNFleftAdded(varName : OrCNF, varName : CNFExp) : Void is do
 
 	end
-	operation onleft2Added(varName : AndCNF, varName : CNFExp) : Void is do
+	operation onAndCNFleftAdded(varName : AndCNF, varName : CNFExp) : Void is do
 
 	end
-	operation onright1Added(varName : OrCNF, varName : CNFExp) : Void is do
+	operation onOrCNFrightAdded(varName : OrCNF, varName : CNFExp) : Void is do
 
 	end
-	operation onright2Added(varName : AndCNF, varName : CNFExp) : Void is do
+	operation onAndCNFrightAdded(varName : AndCNF, varName : CNFExp) : Void is do
 
 	end
-	operation onoperatorAdded(varName : Feature, varName : Operator) : Void is do
+	operation onFeatureoperatorAdded(varName : Feature, varName : Operator) : Void is do
 
 	end
-	operation onfeaturesAdded(varName : Operator, varName : Feature) : Void is do
+	operation onOperatorfeaturesAdded(varName : Operator, varName : Feature) : Void is do
 
 	end
-	operation onfeatureOppositeAdded(varName : Feature, varName : AtomicCNF) : Void is do
+	operation onFeaturefeatureOppositeAdded(varName : Feature, varName : AtomicCNF) : Void is do
 
 	end
 
