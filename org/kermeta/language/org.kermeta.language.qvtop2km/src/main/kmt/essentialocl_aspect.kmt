@@ -29,7 +29,7 @@ aspect class IteratorExp {
 		if output==void then
 		
 		
-		var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 		
 		output:=out
 		if name =="collect" then
@@ -174,7 +174,7 @@ aspect class OperationCallExp {
 					source.range2domain(context)
 					out.target?=source.output
 				else
-					var transfoCall : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
+					var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
 					out.target:=transfoCall
 				end
 				if (referredOperation !=void) then
@@ -225,12 +225,12 @@ aspect class VariableExp {
 				out:= org::kermeta::language::behavior::SelfExpression.new
 			else
 				if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then
-					var transfoContext : org::kermeta::language::behavior::CallProperty init org::kermeta::language::behavior::CallProperty.new.callToTransfoContextSingleton(context)
+					var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::CallProperty.new.callToTransfoContextSingleton(context)
 					out := org::kermeta::language::behavior::CallProperty.new
-					out.asType(org::kermeta::language::behavior::CallFeature).target:=transfoContext
+					out.asType(org::kermeta::language::behavior::CallProperty).target:=transfoContext
 					referredVariable.range2domain(context)
 					out.asType(org::kermeta::language::behavior::CallProperty).staticProperty?= referredVariable.output
-					out.asType(org::kermeta::language::behavior::CallFeature).name:=out.asType(org::kermeta::language::behavior::CallProperty).staticProperty.name
+					out.asType(org::kermeta::language::behavior::CallProperty).name:=out.asType(org::kermeta::language::behavior::CallProperty).staticProperty.name
 					
 				else
 					out := org::kermeta::language::behavior::CallVariable.new
@@ -273,7 +273,7 @@ aspect class Variable {
 			out.addDocumentationTag("initialized from initExpression does it need a new ?")
 		else
 			//initialization of the variable
-			var newFeat : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var newFeat : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			
 			out.initialization:=newFeat
@@ -317,7 +317,7 @@ aspect class Variable {
 aspect class CollectionItem {
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-			var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var out : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			output:=out
 			out.name:="add"
 			
@@ -445,7 +445,7 @@ aspect class TupleLiteralExp {
 			part.each{p |
 				var assign : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
 				out.statement.add(assign)
-				var callProp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var callProp : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 				assign.target:=callProp
 				callProp.name:=p.~attribute.name
 				var callvar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
@@ -613,12 +613,11 @@ aspect class TypeExp {
 
 
 /** Real literals, they don't exists in kermeta*/
-
 aspect class RealLiteralExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
-			var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var out : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			output:=out
 			out.name:="toReal"
 			

@@ -15,7 +15,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		
 		//StdIO.writeln("ImperativeIterateExp")
 	
-		var iterateCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var iterateCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 		
 		if (name =="xcollect") 
 		then

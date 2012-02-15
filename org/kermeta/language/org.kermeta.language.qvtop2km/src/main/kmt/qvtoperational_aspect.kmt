@@ -186,13 +186,13 @@ aspect class ImperativeOperation {
 		//StdIO.writeln("MappingOperation::getTransformation")
 		var o : kermeta::standard::Object
 		
-		from  var x : kermeta::standard::Object init o:=self.container
+		/*from  o:=self.container
 		until o.isInstanceOf(OperationalTransformation) or o==void
 		loop
 		    o:=o.container
 		end
 
-		result?=o
+		result?=o*/
 		//StdIO.writeln("MappingOperation::getTransformation-end")
 	end
 
@@ -1045,7 +1045,7 @@ aspect class MappingCallExp
 				source.range2domain(context)
 				out.target?=source.output
 			else
-				var transfoCall : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
+				var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
 				out.target:=transfoCall
 			end
 			if (referredOperation !=void) then

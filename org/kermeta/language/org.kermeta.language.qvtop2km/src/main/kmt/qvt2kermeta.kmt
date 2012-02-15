@@ -56,7 +56,7 @@ operation main() : Void is do
 		//srcModel := sourceRepository.createResource("../test/UML2RDBMS.qvtoperational", "../models/api2.ecore")
 		srcModel := sourceRepository.createResource("../../org.topcased.simulation.sam.control/transformation/org.topcased.simulation.sam.control.sam2samdynamic.qvtoperational", "../models/api2.ecore")
 		srcModel.load(void)
-		sourceRepository.getResources().each{r|StdIO.writeln(r.asType(Resource).getURI())}
+		sourceRepository.getResources().each{r|StdIO.writeln(r.asType(Resource).getURI().toString())}
 		
 		
 		context.qvtContext.load(sourceRepository.getResource("pathmap://models/essentialocl/oclstdlib.essentialocl",true))

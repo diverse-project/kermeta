@@ -74,9 +74,9 @@ reference parts : seq TuplePartPair [0..*]
 		beware, the string may not be unique, although unlikely to appear twice
 	*/
 	operation stringSignature ()  : String is do
-		var s : StringBuffer init StringBuffer.new
-		parts.each{x| s.append("n_"+x.name+"_v_"+x.type.name+"_")}
-		result:= s.toString
+		var s : String init String.new
+		parts.each{x| s:=s+"n_"+x.name+"_v_"+x.type.name+"_"}
+		result:= s
 	end
 }
 

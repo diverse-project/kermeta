@@ -118,27 +118,28 @@ package behavior {
 	
 		//generate a call to the singleton transformationtionContext
 		//root_package::TransformationContext.getDefault.asType(root_package::TransformationContext)
-		operation callToTransfoContextSingleton(context : Qvt2KermetaContext) : org::kermeta::language::behavior::CallFeature is do
+		operation callToTransfoContextSingleton(context : Qvt2KermetaContext) : org::kermeta::language::behavior::UnresolvedCall is do
 			result:= self
 			
 			result.name:="asType"
 			
-			var transfoContextCD : org::kermeta::language::structure::ClassDefinition
-			transfoContextCD ?= context
-					.kmtContext
-					.getFromQualifiedName("root_package::TransformationContext")
+			//var transfoContextCD : org::kermeta::language::structure::ClassDefinition
+			//transfoContextCD ?= context
+			//		.kmtContext
+			//		.getFromQualifiedName("root_package::TransformationContext")
 			
-			var tl_tracetype : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			var tl_tracetype : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			result.parameters.add(tl_tracetype)
-			tl_tracetype.typeref:=transfoContextCD.generateTypeRef()
-			
-			var cf_getDefault : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			//tl_tracetype.typeref:=transfoContextCD.generateTypeRef()
+			tl_tracetype.name:="root_package::TransformationContext"
+			var cf_getDefault : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			result.target:=cf_getDefault
 			cf_getDefault.name:="getDefault"
 			
-			var tl_getDefault : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			var tl_getDefault : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			cf_getDefault.target:=tl_getDefault
-			tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
+			//tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
+			tl_getDefault.name:="root_package::TransformationContext"
 		end
 	
 	}
