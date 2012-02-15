@@ -71,43 +71,43 @@ object TypeEquivalence {
 	
 	
   var typeEquivelence :  java.util.HashMap[String,String] = {typeEquivelence = new java.util.HashMap[String,String]()
-                                                             typeEquivelence.put("k2.utils.Hashtable", "java.util.HashMap");
-    typeEquivelence.put("k2.standard.Object", "k2.standard.KermetaObject");
-                                                             typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
-                                                             typeEquivelence.put("k2.utils.Stack", "java.util.Stack");
-                                                             typeEquivelence.put("k2.utils.StringBuffer", "scala.StringBuilder");
-                                                             typeEquivelence.put("k2.utils.Hashtable", "java.util.HashMap");
-                                                             typeEquivelence.put("k2.standard.Iterator", "java.util.Iterator");
-                                                             typeEquivelence.put("k2.standard.Collection", "java.util.List");
-                                                             typeEquivelence.put("k2.standard.Set", "java.util.List");
-                                                             typeEquivelence.put("k2.standard.OrderedSet", "java.util.List");
-                                                             typeEquivelence.put("k2.standard.Sequence", "java.util.List");
-                                                             typeEquivelence.put("k2.standard.Bag", "java.util.List");
-                                                             typeEquivelence.put("k2.standard.String", "java.lang.String");
-                                                             typeEquivelence.put("k2.standard.Date", "java.util.Date");
-                                                             typeEquivelence.put("k2.standard.Double", "java.lang.Double");
-                                                             typeEquivelence.put("k2.standard.Float", "java.lang.Double");
-                                                             typeEquivelence.put("k2.standard.Short", "java.lang.Short");
-                                                             //typeEquivelence.put(" org.k2.language.structure.String", "java.lang.String");
-                                                             typeEquivelence.put("k2.standard.Integer", "java.lang.Integer");
-                                                             typeEquivelence.put("k2.standard.Real", "java.lang.Double");
-                                                             typeEquivelence.put("k2.standard.Character", "java.lang.Character");
-                                                             typeEquivelence.put("int", "java.lang.Integer");
-                                                             typeEquivelence.put("long", "java.lang.Long");
-                                                             typeEquivelence.put("k2.standard.Long", "java.lang.Long");
-                                                             typeEquivelence.put("java.lang.Integer", "java.lang.Integer");
-                                                             typeEquivelence.put("k2.standard.Void", "scala.Unit");
-
-                                                             typeEquivelence.put("double", "java.lang.Double");
-                                                             typeEquivelence.put("float", "scala.Float");
-                                                             typeEquivelence.put("boolean", "java.lang.Boolean");
-                                                             typeEquivelence.put("k2.standard.Boolean", "java.lang.Boolean");
-                                                             typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
-                                                             typeEquivelence.put("k2.persistence.ResourceSet","org.eclipse.emf.ecore.resource.ResourceSet")
-                                                             typeEquivelence.put("k2.persistence.Resource","org.eclipse.emf.ecore.resource.Resource")
-                                                             
-                                                             typeEquivelence.put( k2.utils.UTilScala.scalaAspectPrefix + ".org.kermeta.language.ReflectiveSequence", "java.util.List")
-                                                             typeEquivelence.put("org.k2.language.ReflectiveSequence", "java.util.List")
+		  		 typeEquivelence.put("int", "java.lang.Integer");
+				 typeEquivelence.put("k2.utils.Hashtable", "java.util.HashMap");
+				 typeEquivelence.put("k2.standard.Object", "k2.standard.KermetaObject");
+				 typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
+				 typeEquivelence.put("k2.utils.Stack", "java.util.Stack");
+				 typeEquivelence.put("k2.utils.StringBuffer", "scala.StringBuilder");
+				 typeEquivelence.put("k2.utils.Hashtable", "java.util.HashMap");
+				 typeEquivelence.put("k2.standard.Iterator", "java.util.Iterator");
+				 typeEquivelence.put("k2.standard.Collection", "java.util.List");
+				 typeEquivelence.put("k2.standard.Set", "java.util.List");
+				 typeEquivelence.put("k2.standard.OrderedSet", "java.util.List");
+				 typeEquivelence.put("k2.standard.Sequence", "java.util.List");
+				 typeEquivelence.put("k2.standard.Bag", "java.util.List");
+				 typeEquivelence.put("k2.standard.String", "java.lang.String");
+				 typeEquivelence.put("k2.standard.Date", "java.util.Date");
+				 typeEquivelence.put("k2.standard.Double", "java.lang.Double");
+				 typeEquivelence.put("k2.standard.Float", "java.lang.Float");
+				 typeEquivelence.put("k2.standard.Short", "java.lang.Short");
+				 //typeEquivelence.put(" org.k2.language.structure.String", "java.lang.String");
+				 typeEquivelence.put("k2.standard.Integer", "java.lang.Integer");
+				 typeEquivelence.put("k2.standard.Real", "java.lang.Double");
+				 typeEquivelence.put("k2.standard.Character", "java.lang.Character");
+				 typeEquivelence.put("long", "java.lang.Long");
+				 typeEquivelence.put("k2.standard.Long", "java.lang.Long");
+				 typeEquivelence.put("java.lang.Integer", "java.lang.Integer");
+				 typeEquivelence.put("k2.standard.Void", "scala.Unit");
+				
+				 typeEquivelence.put("double", "java.lang.Double");
+				 typeEquivelence.put("float", "scala.Float");
+				 typeEquivelence.put("boolean", "java.lang.Boolean");
+				 typeEquivelence.put("k2.standard.Boolean", "java.lang.Boolean");
+				 typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
+				 typeEquivelence.put("k2.persistence.ResourceSet","org.eclipse.emf.ecore.resource.ResourceSet")
+				 typeEquivelence.put("k2.persistence.Resource","org.eclipse.emf.ecore.resource.Resource")
+				 
+				 typeEquivelence.put( k2.utils.UTilScala.scalaAspectPrefix + ".org.kermeta.language.ReflectiveSequence", "java.util.List")
+				 typeEquivelence.put("org.k2.language.ReflectiveSequence", "java.util.List")
 //                                                             typeEquivelence.put("org.k2.language.structure.Object","java.lang.Object")
                                                                typeEquivelence;
   };
