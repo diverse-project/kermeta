@@ -86,6 +86,7 @@ object TypeEquivalence {
                                                              typeEquivelence.put("k2.standard.String", "java.lang.String");
                                                              typeEquivelence.put("k2.standard.Date", "java.util.Date");
                                                              typeEquivelence.put("k2.standard.Double", "java.lang.Double");
+                                                             typeEquivelence.put("k2.standard.Float", "java.lang.Double");
                                                              typeEquivelence.put("k2.standard.Short", "java.lang.Short");
                                                              //typeEquivelence.put(" org.k2.language.structure.String", "java.lang.String");
                                                              typeEquivelence.put("k2.standard.Integer", "java.lang.Integer");
