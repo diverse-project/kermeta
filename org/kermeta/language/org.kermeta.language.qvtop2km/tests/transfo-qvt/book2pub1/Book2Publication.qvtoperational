@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <qvtoperational:OperationalTransformation name="Book2Publication" uri="http://www.example.com/Book2Publication" isBlackbox="false" usedModelType="/1 /2">
+    <ownedOperation xsi:type="qvtoperational:EntryOperation" name="main">
+      <body>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.2">
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.1" isStrict="false">
+            <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.0/@iterator.0">
+              <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+          </iterator>
+        </content>
+      </body>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="book_to_publication" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.1/@result.0">
+          <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+          <instantiatedClass href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+                </source>
+                <referredProperty href="../../../modelLibrary/PUB.emof#_0.@ownedType.0.@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
+                  <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+                </source>
+                <referredProperty href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1.@ownedAttribute.0"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+                </source>
+                <referredProperty href="../../../modelLibrary/PUB.emof#_0.@ownedType.0.@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.1">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
+                      <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+                    </source>
+                    <referredProperty href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1.@ownedAttribute.1"/>
+                  </source>
+                  <body xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.1/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.0"/>
+                    </source>
+                    <referredProperty href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.0.@ownedAttribute.1"/>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.0"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o92"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+      </result>
+    </ownedOperation>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Chapter)">
+      <elementType xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(EInt)">
+      <elementType xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Book)">
+      <elementType xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Publication)">
+      <elementType xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
+    </ownedType>
+    <ownedVariable name="this" type="/0"/>
+    <modelParameter name="bookModel" type="/1"/>
+    <modelParameter name="pubModel" type="/2" kind="out"/>
+  </qvtoperational:OperationalTransformation>
+  <qvtoperational:ModelType name="BOOKS">
+    <metamodel href="../../../modelLibrary/BOOKS.emof#_0"/>
+  </qvtoperational:ModelType>
+  <qvtoperational:ModelType name="PUB">
+    <metamodel href="../../../modelLibrary/PUB.emof#_0"/>
+  </qvtoperational:ModelType>
+</xmi:XMI>

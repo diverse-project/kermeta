@@ -1,0 +1,134 @@
+@uri "http://schema.omg.org/spec/QVT/1.0/emof.xml"
+package emof;
+
+require "kermeta"
+class Class inherits Type
+{
+	attribute ownedAttribute : Property[0..*]#~class
+
+	attribute ownedOperation : Operation[0..*]#~class
+
+	reference superClass : Class[0..*]
+
+	attribute isAbstract : Boolean
+
+}
+
+
+alias Boolean : kermeta::standard::Boolean;
+class DataType inherits Type
+{
+}
+abstract class Type inherits NamedElement
+{
+	reference ~package : Package[1..1]#ownedType
+
+}
+abstract class Element inherits Object
+{
+	reference tag : Tag[0..*]#element
+
+	attribute ownedComment : Comment[0..*]
+
+}
+class Tag inherits Element
+{
+	reference element : Element[0..*]#tag
+
+	attribute ~value : String
+
+	attribute name : String
+
+}
+alias String : kermeta::standard::String;
+class Enumeration inherits DataType
+{
+	attribute ownedLiteral : EnumerationLiteral[0..*]#~enumeration
+
+}
+abstract class NamedElement inherits Element
+{
+	attribute name : String
+
+}
+class Extent inherits Object
+{
+}
+class Object
+{
+}
+class Operation inherits MultiplicityElement, TypedElement
+{
+	reference ~class : Class[1..1]#ownedOperation
+
+	attribute ownedParameter : Parameter[0..*]#~operation
+
+	reference raisedException : Type[0..*]
+
+}
+abstract class MultiplicityElement
+{
+	attribute isOrdered : Boolean
+
+	attribute isUnique : Boolean
+
+	attribute lower : Integer
+
+	attribute upper : UnlimitedNatural
+
+}
+alias Integer : kermeta::standard::Integer;
+alias UnlimitedNatural : kermeta::standard::Integer;
+class Package inherits NamedElement
+{
+	attribute ownedType : Type[0..*]#~package
+
+	reference nestedPackage : Package[0..*]
+
+	attribute uri : String
+
+}
+class Parameter inherits MultiplicityElement, TypedElement
+{
+	reference ~operation : Operation#ownedParameter
+
+}
+class EnumerationLiteral inherits NamedElement
+{
+	reference ~enumeration : Enumeration#ownedLiteral
+
+}
+class Property inherits MultiplicityElement, TypedElement
+{
+	reference ~class : Class[1..1]#ownedAttribute
+
+	reference opposite : Property
+
+	attribute isReadOnly : Boolean
+
+	attribute isDerived : Boolean
+
+	attribute isComposite : Boolean
+
+	attribute isId : Boolean
+
+	attribute default : String
+
+}
+abstract class TypedElement inherits NamedElement
+{
+	reference type : Type
+
+}
+class PrimitiveType inherits DataType
+{
+}
+class URIExtent inherits Extent
+{
+}
+alias Real : kermeta::standard::Real;
+class Comment inherits Element
+{
+	reference annotatedElement : NamedElement[0..*]
+
+}

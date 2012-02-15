@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleUML="http:///SimpleUML.ecore">
+  <SimpleUML:Class name="Address" kind="persistent">
+    <attribute name="street" type="/5"/>
+    <attribute name="number" type="/4"/>
+  </SimpleUML:Class>
+  <SimpleUML:Class name="Bank" kind="persistent">
+    <attribute name="name" kind="primary" type="/5"/>
+    <attribute name="address" kind="primary" type="/0"/>
+  </SimpleUML:Class>
+  <SimpleUML:Class name="Client" kind="persistent">
+    <attribute name="name" type="/4"/>
+    <attribute name="homeaddress" type="/0"/>
+    <attribute name="officeadress" type="/0"/>
+    <attribute name="countid" kind="primary" type="/4"/>
+  </SimpleUML:Class>
+  <SimpleUML:Association name="Bank_Client" source="/1" destination="/2"/>
+  <SimpleUML:PrimitiveDataType name="int"/>
+  <SimpleUML:PrimitiveDataType name="string"/>
+</xmi:XMI>

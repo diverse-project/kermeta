@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+  <emof:Package xmi:id="_0" name="PrimitiveTypes">
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_0.@ownedType.0" name="Boolean"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_0.@ownedType.1" name="String"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_0.@ownedType.2" name="UnlimitedNatural"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_0.@ownedType.3" name="Integer"/>
+  </emof:Package>
+  <emof:Package xmi:id="_1" name="emof">
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.0" name="Class"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.1" name="Tag"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.2" name="Enumeration"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.3" name="NamedElement"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.4" name="Extent"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.5" name="MultiplicityElement"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.6" name="Package"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.7" name="Type"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.8" name="PrimitiveType"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.9" name="Comment"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_1.@ownedType.10" name="String"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_1.@ownedType.11" name="UnlimitedNatural"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_1.@ownedType.12" name="Real"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.13" name="URIExtent"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_1.@ownedType.14" name="Integer"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.15" name="DataType"/>
+    <ownedType xmi:type="emof:PrimitiveType" xmi:id="_1.@ownedType.16" name="Boolean"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.17" name="EnumerationLiteral"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.18" name="TypedElement"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.19" name="Parameter"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.20" name="Element"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.21" name="Object"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.22" name="Operation"/>
+    <ownedType xmi:type="emof:Class" xmi:id="_1.@ownedType.23" name="Property"/>
+  </emof:Package>
+</xmi:XMI>

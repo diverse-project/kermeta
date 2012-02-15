@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <qvtoperational:OperationalTransformation name="Book2Publication2" uri="http://www.example.com/Book2Publication2" isBlackbox="false" usedModelType="/1 /2">
+    <ownedOperation xsi:type="qvtoperational:EntryOperation" name="main">
+      <body>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect">
+          <type xsi:type="essentialocl:SequenceType" href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0/@ownedType.3"/>
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect">
+            <type xsi:type="essentialocl:SetType" href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0/@ownedType.2"/>
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.0/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+            </source>
+            <referredOperation href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0/@ownedOperation.1"/>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+          </iterator>
+        </content>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect">
+          <type xsi:type="essentialocl:SequenceType" href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0/@ownedType.3"/>
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect">
+            <type xsi:type="essentialocl:SetType" href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0/@ownedType.2"/>
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.1" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+          </iterator>
+        </content>
+      </body>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="book_to_publication2" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" referredObject="/0/@ownedOperation.1/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+                  </source>
+                  <referredProperty href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1/@ownedAttribute.0"/>
+                </source>
+                <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="2">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/BOOKS.emof#//@ownedType.1"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/PUB.emof#//@ownedType.0"/>
+      </result>
+      <inherited href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0/@ownedOperation.1"/>
+    </ownedOperation>
+    <moduleImport>
+      <importedModule href="platform:/resource/org.kermeta.qvt.examples/qvt_examples/book2pub1/Book2Publication.qvtoperational#/0"/>
+    </moduleImport>
+    <ownedVariable name="this" type="/0"/>
+    <modelParameter name="bookModel" type="/1"/>
+    <modelParameter name="pubModel" type="/2" kind="out"/>
+  </qvtoperational:OperationalTransformation>
+  <qvtoperational:ModelType name="BOOKS">
+    <metamodel href="platform:/resource/modelLibrary/BOOKS.emof#/"/>
+  </qvtoperational:ModelType>
+  <qvtoperational:ModelType name="PUB">
+    <metamodel href="platform:/resource/modelLibrary/PUB.emof#/"/>
+  </qvtoperational:ModelType>
+</xmi:XMI>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtast:TopLevelAst xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtast="http://smartqvt.elibel.tm.fr/models/mm/qvtast/" start="262" length="272" offset="0">
+  <m_unit_element xsi:type="qvtast:TransformationDeclAst" start="262" length="69" offset="0">
+    <p_transformation_header start="262" length="68" offset="0">
+      <p_identifier start="277" length="16" offset="0" value="Book2Publication"/>
+      <p_transformation_signature start="293" length="37" offset="0">
+        <p_simple_signature start="293" length="37" offset="0">
+          <m_param start="294" length="18" offset="0">
+            <p_param_direction xsi:type="qvtast:InParamDirectionAst" start="294" length="2" offset="0"/>
+            <p_simple_declarator start="297" length="15" offset="0">
+              <p_scoped_identifier start="297" length="9" offset="0">
+                <m_identifier start="297" length="9" offset="0" value="bookModel"/>
+              </p_scoped_identifier>
+              <p_typespec start="307" length="5" offset="0">
+                <p_type_reference xsi:type="qvtast:ScopedIdentifierTypeReferenceAst" start="307" length="5" offset="0">
+                  <p_scoped_identifier start="307" length="5" offset="0">
+                    <m_identifier start="307" length="5" offset="0" value="BOOKS"/>
+                  </p_scoped_identifier>
+                </p_type_reference>
+              </p_typespec>
+            </p_simple_declarator>
+          </m_param>
+          <m_param start="313" length="16" offset="0">
+            <p_param_direction xsi:type="qvtast:OutParamDirectionAst" start="313" length="3" offset="0"/>
+            <p_simple_declarator start="317" length="12" offset="0">
+              <p_scoped_identifier start="317" length="8" offset="0">
+                <m_identifier start="317" length="8" offset="0" value="pubModel"/>
+              </p_scoped_identifier>
+              <p_typespec start="326" length="3" offset="0">
+                <p_type_reference xsi:type="qvtast:ScopedIdentifierTypeReferenceAst" start="326" length="3" offset="0">
+                  <p_scoped_identifier start="326" length="3" offset="0">
+                    <m_identifier start="326" length="3" offset="0" value="PUB"/>
+                  </p_scoped_identifier>
+                </p_type_reference>
+              </p_typespec>
+            </p_simple_declarator>
+          </m_param>
+        </p_simple_signature>
+      </p_transformation_signature>
+    </p_transformation_header>
+  </m_unit_element>
+  <m_unit_element xsi:type="qvtast:EntryDefAst" start="335" length="70" offset="0">
+    <p_entry_header start="335" length="6" offset="0">
+      <p_simple_signature start="339" length="2" offset="0"/>
+    </p_entry_header>
+    <p_expression_block start="342" length="63" offset="0">
+      <p_expression_list start="347" length="53" offset="0">
+        <m_expression xsi:type="qvtast:ArgListPostfixExpAst" start="347" length="52" offset="0">
+          <p_postfix_exp xsi:type="qvtast:RuleCallExpAccessPostfixExpAst" start="347" length="50" offset="0">
+            <p_postfix_exp xsi:type="qvtast:ExpressionPostfixExpAst" start="347" length="25" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ArgListPostfixExpAst" start="347" length="19" offset="0">
+                <p_postfix_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="347" length="17" offset="0">
+                  <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="347" length="9" offset="0">
+                    <p_scoped_identifier start="347" length="9" offset="0">
+                      <m_identifier start="347" length="9" offset="0" value="bookModel"/>
+                    </p_scoped_identifier>
+                  </p_postfix_exp>
+                  <p_access_op xsi:type="qvtast:DotAccessOpAst" start="356" length="1" offset="0"/>
+                  <p_scoped_identifier start="357" length="7" offset="0">
+                    <m_identifier start="357" length="7" offset="0" value="objects"/>
+                  </p_scoped_identifier>
+                </p_postfix_exp>
+              </p_postfix_exp>
+              <p_expression xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="367" length="4" offset="0">
+                <p_scoped_identifier start="367" length="4" offset="0">
+                  <m_identifier start="367" length="4" offset="0" value="Book"/>
+                </p_scoped_identifier>
+              </p_expression>
+            </p_postfix_exp>
+            <p_access_op xsi:type="qvtast:ArrowAccessOpAst" start="372" length="2" offset="0"/>
+            <p_rule_call_exp xsi:type="qvtast:MapRuleCallExpAst" start="374" length="23" offset="0">
+              <p_scoped_identifier start="378" length="19" offset="0">
+                <m_identifier start="378" length="19" offset="0" value="book_to_publication"/>
+              </p_scoped_identifier>
+            </p_rule_call_exp>
+          </p_postfix_exp>
+        </m_expression>
+      </p_expression_list>
+    </p_expression_block>
+  </m_unit_element>
+  <m_unit_element xsi:type="qvtast:MappingDefAst" start="409" length="125" offset="0">
+    <p_mapping_full_header start="409" length="50" offset="0">
+      <p_mapping_header start="409" length="50" offset="0">
+        <p_scoped_identifier start="417" length="25" offset="0">
+          <m_identifier start="417" length="4" offset="0" value="Book"/>
+          <m_identifier start="423" length="19" offset="0" value="book_to_publication"/>
+        </p_scoped_identifier>
+        <p_complete_signature start="443" length="16" offset="0">
+          <p_simple_signature start="443" length="2" offset="0"/>
+          <m_param start="448" length="11" offset="0">
+            <p_simple_declarator start="448" length="11" offset="0">
+              <p_typespec start="448" length="11" offset="0">
+                <p_type_reference xsi:type="qvtast:ScopedIdentifierTypeReferenceAst" start="448" length="11" offset="0">
+                  <p_scoped_identifier start="448" length="11" offset="0">
+                    <m_identifier start="448" length="11" offset="0" value="Publication"/>
+                  </p_scoped_identifier>
+                </p_type_reference>
+              </p_typespec>
+            </p_simple_declarator>
+          </m_param>
+        </p_complete_signature>
+      </p_mapping_header>
+    </p_mapping_full_header>
+    <p_mapping_body start="465" length="65" offset="0">
+      <p_population_section xsi:type="qvtast:ExpressionListPopulationSectionAst" start="465" length="65" offset="0">
+        <p_expression_list start="465" length="65" offset="0">
+          <m_expression xsi:type="qvtast:ExpressionAssignAssignExpAst" start="465" length="19" offset="0">
+            <p_unary_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="465" length="5" offset="0">
+              <p_scoped_identifier start="465" length="5" offset="0">
+                <m_identifier start="465" length="5" offset="0" value="title"/>
+              </p_scoped_identifier>
+            </p_unary_exp>
+            <p_assign_op xsi:type="qvtast:XEqAssignOpAst" start="471" length="2" offset="0"/>
+            <p_expression xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="474" length="10" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="474" length="4" offset="0">
+                <p_scoped_identifier start="474" length="4" offset="0">
+                  <m_identifier start="474" length="4" offset="0" value="self"/>
+                </p_scoped_identifier>
+              </p_postfix_exp>
+              <p_access_op xsi:type="qvtast:DotAccessOpAst" start="478" length="1" offset="0"/>
+              <p_scoped_identifier start="479" length="5" offset="0">
+                <m_identifier start="479" length="5" offset="0" value="title"/>
+              </p_scoped_identifier>
+            </p_expression>
+          </m_expression>
+          <m_expression xsi:type="qvtast:ExpressionAssignAssignExpAst" start="489" length="40" offset="0">
+            <p_unary_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="489" length="7" offset="0">
+              <p_scoped_identifier start="489" length="7" offset="0">
+                <m_identifier start="489" length="7" offset="0" value="nbPages"/>
+              </p_scoped_identifier>
+            </p_unary_exp>
+            <p_assign_op xsi:type="qvtast:XEqAssignOpAst" start="497" length="2" offset="0"/>
+            <p_expression xsi:type="qvtast:ArgListPostfixExpAst" start="500" length="29" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="500" length="27" offset="0">
+                <p_postfix_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="500" length="22" offset="0">
+                  <p_postfix_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="500" length="13" offset="0">
+                    <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="500" length="4" offset="0">
+                      <p_scoped_identifier start="500" length="4" offset="0">
+                        <m_identifier start="500" length="4" offset="0" value="self"/>
+                      </p_scoped_identifier>
+                    </p_postfix_exp>
+                    <p_access_op xsi:type="qvtast:DotAccessOpAst" start="504" length="1" offset="0"/>
+                    <p_scoped_identifier start="505" length="8" offset="0">
+                      <m_identifier start="505" length="8" offset="0" value="chapters"/>
+                    </p_scoped_identifier>
+                  </p_postfix_exp>
+                  <p_access_op xsi:type="qvtast:ArrowAccessOpAst" start="513" length="2" offset="0"/>
+                  <p_scoped_identifier start="515" length="7" offset="0">
+                    <m_identifier start="515" length="7" offset="0" value="nbPages"/>
+                  </p_scoped_identifier>
+                </p_postfix_exp>
+                <p_access_op xsi:type="qvtast:ArrowAccessOpAst" start="522" length="2" offset="0"/>
+                <p_scoped_identifier start="524" length="3" offset="0">
+                  <m_identifier start="524" length="3" offset="0" value="sum"/>
+                </p_scoped_identifier>
+              </p_postfix_exp>
+            </p_expression>
+          </m_expression>
+        </p_expression_list>
+      </p_population_section>
+    </p_mapping_body>
+  </m_unit_element>
+</qvtast:TopLevelAst>

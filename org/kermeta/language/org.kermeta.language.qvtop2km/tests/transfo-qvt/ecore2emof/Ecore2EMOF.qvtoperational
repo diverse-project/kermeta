@@ -1,0 +1,1683 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <qvtoperational:OperationalTransformation name="Ecore2EMOF" uri="http://www.example.com/Ecore2EMOF" isBlackbox="false" usedModelType="/1 /2">
+    <ownedOperation xsi:type="qvtoperational:EntryOperation" name="main">
+      <body>
+        <content xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.1" isStrict="false">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+        </content>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.18">
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.23">
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.4" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+          </iterator>
+        </content>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.18">
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.23">
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.10" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.2/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+          </iterator>
+        </content>
+      </body>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="createPrimitiveTypesPackage" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.1/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:StringLiteralExp" stringSymbol="PrimitiveTypes">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.1/@body/@content.0/@body/@content.1/@value.0/@body/@variable.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <body>
+                  <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                    <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    <left xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.1/@value.0/@body/@variable.0">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                    </left>
+                    <value xsi:type="essentialocl:StringLiteralExp" stringSymbol="Boolean">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </value>
+                  </content>
+                  <variable name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                  </variable>
+                </body>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="false">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.1/@body/@content.0/@body/@content.2/@value.0/@body/@variable.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <body>
+                  <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                    <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    <left xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.2/@value.0/@body/@variable.0">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                    </left>
+                    <value xsi:type="essentialocl:StringLiteralExp" stringSymbol="Integer">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </value>
+                  </content>
+                  <variable name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                  </variable>
+                </body>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="false">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.1/@body/@content.0/@body/@content.3/@value.0/@body/@variable.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <body>
+                  <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                    <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    <left xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.3/@value.0/@body/@variable.0">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                    </left>
+                    <value xsi:type="essentialocl:StringLiteralExp" stringSymbol="String">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </value>
+                  </content>
+                  <variable name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                  </variable>
+                </body>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="false">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.1/@body/@content.0/@body/@content.4/@value.0/@body/@variable.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                <body>
+                  <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                    <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    <left xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.4/@value.0/@body/@variable.0">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                    </left>
+                    <value xsi:type="essentialocl:StringLiteralExp" stringSymbol="UnlimitedNatural">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </value>
+                  </content>
+                  <variable name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                  </variable>
+                </body>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="namedElement" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.2/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="datatype_" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.3/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+          <body/>
+        </content>
+        <initSection xsi:type="imperativeocl:LogExp">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <argument xsi:type="essentialocl:PropertyCallExp">
+            <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+            </source>
+            <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+          </argument>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="_package" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.4/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.4">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.2">
+                    <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.1">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12/@ownedAttribute.3"/>
+                    </source>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    </iterator>
+                    <condition xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                    </condition>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.5" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@body/@content.0/@body/@content.0/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                    </source>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="false">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.7">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.6">
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.5">
+                    <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.1">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12/@ownedAttribute.3"/>
+                    </source>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    </iterator>
+                    <condition xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+                    </condition>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.3" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@body/@content.0/@body/@content.1/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+                    </source>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="class_" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.5/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.8">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.8">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.10">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.9">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.7"/>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.6" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@body/@content.0/@body/@content.0/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+                    </source>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="false">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.8">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.8">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.10">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.11">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.6"/>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.7" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@body/@content.0/@body/@content.1/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+                    </source>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.12">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.12">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.14">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.13">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.3"/>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.8" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@body/@content.0/@body/@content.2/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+                    </source>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.0"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.0"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="attribute" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.6/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.0"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:BooleanLiteralExp" booleanSymbol="false">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.4"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.8/@ownedAttribute.3"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.39"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@context">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.3"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="reference" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.7/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.0"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.7/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.7/@context">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14/@ownedAttribute.0"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.4"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.7/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.8/@ownedAttribute.3"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.39"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.7/@context">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.3"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="operation" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.8/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.15">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.8/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.15">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.17">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.16">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.8/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11/@ownedAttribute.2"/>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.9" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.8/@body/@content.0/@body/@content.0/@value.0/@source/@iterator.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.13"/>
+                    </source>
+                  </body>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.13"/>
+                  </iterator>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="parameter" isUnique="false" lower="0" inherited="/0/@ownedOperation.2">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.9/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+          <body/>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.13"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="packageRef" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.10/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          <body/>
+        </content>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.10/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+            <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.18" isDeferred="false" isInverse="false" one="false">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.10/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+              </source>
+              <target name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+              </target>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+          </value>
+        </initSection>
+        <initSection xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.2">
+            <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.1">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.10/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+              </source>
+              <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12/@ownedAttribute.3"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.11" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.10/@body/@initSection.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+          </iterator>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="classRef" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.11/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.20">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0/@ownedAttribute.3"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.4">
+                <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.3">
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+                    <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.2"/>
+                    </source>
+                    <body xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.3" isDeferred="false" isInverse="false" one="false">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@body/@content.0/@body/@content.0/@value.0/@source/@source/@iterator.0">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                      </source>
+                      <target name="autoGenVar">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+                      </target>
+                    </body>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+                    </iterator>
+                  </source>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o146"/>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+          </body>
+        </content>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+            <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.3" isDeferred="false" isInverse="false" one="false">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+              </source>
+              <target name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+              </target>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+          </value>
+        </initSection>
+        <initSection xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.19">
+          <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.9">
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+            </source>
+            <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.7"/>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.14" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@body/@initSection.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+          </iterator>
+        </initSection>
+        <initSection xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.10">
+          <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.11">
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+            </source>
+            <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.6"/>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.12" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@body/@initSection.2/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+          </iterator>
+        </initSection>
+        <initSection xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.14">
+          <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.13">
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+            </source>
+            <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2/@ownedAttribute.3"/>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.13" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.11/@body/@initSection.3/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+          </iterator>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="referenceRef" isUnique="false" lower="0" inherited="/0/@ownedOperation.14">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.12/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.12/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15/@ownedAttribute.6"/>
+              </left>
+              <value xsi:type="qvtoperational:ResolveExp" isDeferred="false" isInverse="false" one="true">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                <source xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.12/@context">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14/@ownedAttribute.3"/>
+                </source>
+                <target name="autoGenVar">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </target>
+              </value>
+            </content>
+          </body>
+        </content>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.12/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+            <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.10" isDeferred="false" isInverse="false" one="false">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.12/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+              </source>
+              <target name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+              </target>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+          </value>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="operationRef" isUnique="false" lower="0" inherited="/0/@ownedOperation.14">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.13/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+          <body/>
+        </content>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.13/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+            <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.14" isDeferred="false" isInverse="false" one="false">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.13/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+              </source>
+              <target name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+              </target>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+          </value>
+        </initSection>
+        <initSection xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.19">
+          <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.16">
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.13/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+            </source>
+            <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11/@ownedAttribute.2"/>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.14" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.13/@body/@initSection.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.13"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.13"/>
+          </iterator>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="typedElementRef" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.14/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:IfExp">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                <condition xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                  </source>
+                  <argument xsi:type="essentialocl:TypeExp">
+                    <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+                  </argument>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o24"/>
+                </condition>
+                <elseExpression xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                  <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.22" isDeferred="false" isInverse="false" one="false">
+                    <source xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                    </source>
+                    <target name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                    </target>
+                  </source>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+                </elseExpression>
+                <thenExpression xsi:type="essentialocl:IfExp">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                  <condition xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                    <source xsi:type="qvtoperational:ResolveExp" isDeferred="false" isInverse="false" one="true">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      <source xsi:type="essentialocl:PropertyCallExp">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                        <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                        </source>
+                        <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                      </source>
+                      <target name="autoGenVar">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      </target>
+                    </source>
+                    <argument xsi:type="essentialocl:NullLiteralExp">
+                      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    </argument>
+                    <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o4"/>
+                  </condition>
+                  <elseExpression xsi:type="qvtoperational:ResolveExp" isDeferred="false" isInverse="false" one="true">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                    <source xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                    </source>
+                    <target name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                    </target>
+                  </elseExpression>
+                  <thenExpression xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                    <source xsi:type="essentialocl:IteratorExp" name="select" type="/0/@ownedType.6">
+                      <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.6">
+                        <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.22">
+                          <source xsi:type="essentialocl:IteratorExp" name="collect" type="/0/@ownedType.22">
+                            <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.21">
+                              <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.21">
+                                <source xsi:type="essentialocl:OperationCallExp">
+                                  <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+                                  <source xsi:type="essentialocl:VariableExp" type="/2" referredVariable="/0/@modelParameter.1"/>
+                                  <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+                                </source>
+                                <iterator name="autoGenVar">
+                                  <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+                                </iterator>
+                                <condition xsi:type="essentialocl:TypeExp">
+                                  <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                                  <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                                </condition>
+                              </source>
+                              <iterator name="autoGenVar">
+                                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                              </iterator>
+                              <condition xsi:type="essentialocl:OperationCallExp">
+                                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                                <source xsi:type="essentialocl:PropertyCallExp">
+                                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@body/@content.0/@body/@content.0/@value.0/@thenExpression/@thenExpression/@source/@source/@source/@source/@source/@iterator.0">
+                                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                                  </source>
+                                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                                </source>
+                                <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="PrimitiveTypes">
+                                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                                </argument>
+                                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+                              </condition>
+                            </source>
+                            <body xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@body/@content.0/@body/@content.0/@value.0/@thenExpression/@thenExpression/@source/@source/@source/@source/@iterator.0">
+                                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                              </source>
+                              <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12/@ownedAttribute.2"/>
+                            </body>
+                            <iterator name="e">
+                              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+                            </iterator>
+                          </source>
+                          <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o146"/>
+                        </source>
+                        <iterator name="autoGenVar">
+                          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                        </iterator>
+                        <condition xsi:type="essentialocl:TypeExp">
+                          <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                          <referredType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                        </condition>
+                      </source>
+                      <body xsi:type="essentialocl:OperationCallExp">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                        <source xsi:type="essentialocl:PropertyCallExp">
+                          <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@body/@content.0/@body/@content.0/@value.0/@thenExpression/@thenExpression/@source/@iterator.0">
+                            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                          </source>
+                          <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                        </source>
+                        <argument xsi:type="essentialocl:OperationCallExp" referredOperation="/0/@ownedOperation.15">
+                          <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                          <source xsi:type="essentialocl:PropertyCallExp">
+                            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                            </source>
+                            <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                          </source>
+                        </argument>
+                        <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+                      </body>
+                      <iterator name="f">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+                      </iterator>
+                    </source>
+                    <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+                  </thenExpression>
+                </thenExpression>
+              </value>
+            </content>
+          </body>
+        </content>
+        <endSection xsi:type="imperativeocl:AssertExp">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <assertion xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+              </source>
+              <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20/@ownedAttribute.0"/>
+            </source>
+            <argument xsi:type="essentialocl:NullLiteralExp">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            </argument>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o2"/>
+          </assertion>
+          <log>
+            <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <argument xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              <source xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                  </source>
+                  <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol=" not typed. ">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  </argument>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </source>
+              <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol=" ; ">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+            </argument>
+            <argument xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+              </source>
+              <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+            </argument>
+          </log>
+        </endSection>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.19" isDeferred="false" isInverse="false" one="false">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+              </source>
+              <target name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+              </target>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+          </value>
+        </initSection>
+        <initSection xsi:type="imperativeocl:AssertExp">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <assertion xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            </source>
+            <argument xsi:type="essentialocl:NullLiteralExp">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            </argument>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o2"/>
+          </assertion>
+          <log>
+            <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <argument xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              <source xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="result is null for ">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </source>
+              <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol=" ; ">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+            </argument>
+            <argument xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+            </argument>
+          </log>
+        </initSection>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          </left>
+          <value xsi:type="essentialocl:IfExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            <condition xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+              </source>
+              <argument xsi:type="essentialocl:NullLiteralExp">
+                <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o4"/>
+            </condition>
+            <elseExpression xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@result.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            </elseExpression>
+            <thenExpression xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.14/@body/@initSection.2/@value.0/@thenExpression/@body/@variable.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+              <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+              <body>
+                <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                  <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                  <left xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@body/@initSection.2/@value.0/@thenExpression/@body/@variable.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                  </left>
+                  <value xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="x_">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </source>
+                    <argument xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.14/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                    </argument>
+                    <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                  </value>
+                </content>
+                <variable name="autoGenVar">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </variable>
+              </body>
+            </thenExpression>
+          </value>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:Helper" name="getEmofName" isUnique="false" lower="0">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <body>
+        <content xsi:type="imperativeocl:ReturnExp">
+          <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+          <value xsi:type="essentialocl:IfExp">
+            <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+            <condition xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+              <source xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.15/@context">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+              </source>
+              <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="EString">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+            </condition>
+            <elseExpression xsi:type="essentialocl:IfExp">
+              <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+              <condition xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                <source xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.15/@context">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                </source>
+                <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="EBoolean">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+              </condition>
+              <elseExpression xsi:type="essentialocl:IfExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <condition xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.15/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                  </source>
+                  <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="EInt">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  </argument>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+                </condition>
+                <elseExpression xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.15/@context">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                </elseExpression>
+                <thenExpression xsi:type="essentialocl:StringLiteralExp" stringSymbol="Integer">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </thenExpression>
+              </elseExpression>
+              <thenExpression xsi:type="essentialocl:StringLiteralExp" stringSymbol="Boolean">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </thenExpression>
+            </elseExpression>
+            <thenExpression xsi:type="essentialocl:StringLiteralExp" stringSymbol="String">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+            </thenExpression>
+          </value>
+        </content>
+      </body>
+      <context name="self">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+      </context>
+      <result name="result" isUnique="false" lower="0" kind="out">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="typedElementCheck" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.16/@result.0">
+          <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+                </source>
+                <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.22" isDeferred="false" isInverse="false" one="false">
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                  </source>
+                  <target name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+                  </target>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+              </value>
+            </content>
+          </body>
+        </content>
+        <endSection xsi:type="imperativeocl:AssertExp">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <assertion xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+              </source>
+              <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20/@ownedAttribute.0"/>
+            </source>
+            <argument xsi:type="essentialocl:NullLiteralExp">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            </argument>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o2"/>
+          </assertion>
+          <log>
+            <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <argument xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              <source xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  <source xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="typedElementCheck(): ">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </source>
+                    <argument xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                    </argument>
+                    <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                  </source>
+                  <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol=" not typed. ">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  </argument>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </source>
+              <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol=" ; ">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+            </argument>
+            <argument xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+              </source>
+              <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16/@ownedAttribute.6"/>
+            </argument>
+          </log>
+        </endSection>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            <source xsi:type="qvtoperational:ResolveExp" type="/0/@ownedType.19" isDeferred="false" isInverse="false" one="false">
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+              </source>
+              <target name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+              </target>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o148"/>
+          </value>
+        </initSection>
+        <initSection xsi:type="imperativeocl:AssertExp">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <assertion xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            </source>
+            <argument xsi:type="essentialocl:NullLiteralExp">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            </argument>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o2"/>
+          </assertion>
+          <log>
+            <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <argument xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              <source xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="typedElementCheck(): result is null for ">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                    <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                  </source>
+                  <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </source>
+              <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol=" ; ">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+            </argument>
+            <argument xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+            </argument>
+          </log>
+        </initSection>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+          </left>
+          <value xsi:type="essentialocl:IfExp">
+            <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            <condition xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+                <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+              </source>
+              <argument xsi:type="essentialocl:NullLiteralExp">
+                <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              </argument>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o4"/>
+            </condition>
+            <elseExpression xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@result.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+            </elseExpression>
+            <thenExpression xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.16/@body/@initSection.2/@value.0/@thenExpression/@body/@variable.0">
+              <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+              <instantiatedClass href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+              <body>
+                <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                  <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                  <left xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@body/@initSection.2/@value.0/@thenExpression/@body/@variable.0">
+                      <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                    </source>
+                    <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9/@ownedAttribute.0"/>
+                  </left>
+                  <value xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="x_">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </source>
+                    <argument xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.16/@context">
+                        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+                      </source>
+                      <referredProperty href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.9/@ownedAttribute.0"/>
+                    </argument>
+                    <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                  </value>
+                </content>
+                <variable name="autoGenVar">
+                  <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+                </variable>
+              </body>
+            </thenExpression>
+          </value>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.16"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+      </result>
+    </ownedOperation>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Type)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EClassifier)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.3"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EClass)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Class)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Class)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EDataType)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.4"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(PrimitiveType)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(PrimitiveType)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.14"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Property)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EAttribute)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Property)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EReference)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.14"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Operation)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EOperation)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.11"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Operation)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Parameter)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(EParameter)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.13"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Parameter)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Package)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(TypedElement)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.20"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Class)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Package)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Type)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(EPackage)">
+      <elementType xsi:type="emof:Class" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.12"/>
+    </ownedType>
+    <ownedVariable name="this" type="/0"/>
+    <modelParameter name="ecoremodel" type="/1"/>
+    <modelParameter name="emofmodel" type="/2" kind="out"/>
+  </qvtoperational:OperationalTransformation>
+  <qvtoperational:ModelType name="Ecore">
+    <metamodel href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0"/>
+  </qvtoperational:ModelType>
+  <qvtoperational:ModelType name="emof">
+    <metamodel href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#/"/>
+  </qvtoperational:ModelType>
+</xmi:XMI>

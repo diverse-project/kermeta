@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleRdbms="http:///SimpleRdbms.ecore">
+  <SimpleRdbms:Table name="t_Address">
+    <column name="street" type="VARCHAR"/>
+    <column name="number" type="NUMBER"/>
+    <key name="k_Address"/>
+  </SimpleRdbms:Table>
+  <SimpleRdbms:Table name="t_Bank">
+    <column name="name" kind="primary" type="VARCHAR"/>
+    <column name="address_street" kind="primary" type="VARCHAR"/>
+    <column name="address_number" kind="primary" type="NUMBER"/>
+    <key name="k_Bank" column="/1/@column.0 /1/@column.1 /1/@column.2"/>
+  </SimpleRdbms:Table>
+  <SimpleRdbms:Table name="t_Client">
+    <column name="name" type="NUMBER"/>
+    <column name="homeaddress_street" type="VARCHAR"/>
+    <column name="homeaddress_number" type="NUMBER"/>
+    <column name="officeadress_street" type="VARCHAR"/>
+    <column name="officeadress_number" type="NUMBER"/>
+    <column name="countid" kind="primary" type="NUMBER"/>
+    <column name="Bank_name" kind="foreign" type="VARCHAR"/>
+    <column name="Bank_address_street" kind="foreign" type="VARCHAR"/>
+    <column name="Bank_address_number" kind="foreign" type="NUMBER"/>
+    <key name="k_Client" column="/2/@column.5"/>
+    <foreignKey name="f_Bank_Client" column="/2/@column.6 /2/@column.7 /2/@column.8" refersTo="/1/@key"/>
+  </SimpleRdbms:Table>
+</xmi:XMI>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:message="http://smartqvt.elibel.tm.fr/models/mm/message/">
+  <message:Warning start="2799" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>
+  <message:Warning start="2815" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>
+  <message:Warning start="3423" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>
+  <message:Warning start="4468" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>
+  <message:Warning start="1654" length="7" value="Ambigous type name: PrimitiveTypes::Boolean OclLib::Boolean"/>
+  <message:Warning start="1449" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>
+  <message:Warning start="1465" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>
+</xmi:XMI>

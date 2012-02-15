@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uml"
+    nsURI="uml" nsPrefix="uml">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElements" upperBound="-1"
+        eType="#//PackageableElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generalization" upperBound="-1"
+        eType="#//Generalization" containment="true" eOpposite="#//Generalization/specific"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="powertypeExtent" upperBound="-1"
+        eType="#//GeneralizationSet" eOpposite="#//GeneralizationSet/powertype"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" lowerBound="1"
+        eType="#//identifier" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEnd" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberEnd" lowerBound="2"
+        upperBound="-1" eType="#//Property"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationClass" eSuperTypes="#//Association #//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralizationSet" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCovering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDisjoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="powertype" eType="#//Class"
+        eOpposite="#//Class/powertypeExtent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generalization" upperBound="-1"
+        eType="#//Generalization" eOpposite="#//Generalization/generalizationSet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Generalization">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specific" eType="#//Class"
+        eOpposite="#//Class/generalization"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="general" eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generalizationSet" upperBound="-1"
+        eType="#//GeneralizationSet" eOpposite="#//GeneralizationSet/generalization"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
+      eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="identifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" lowerBound="1"
+        eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="#//Property"/>
+  </eClassifiers>
+</ecore:EPackage>

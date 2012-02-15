@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+  <emof:Package name="PrimitiveTypes">
+    <ownedType xsi:type="emof:PrimitiveType" name="Boolean"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="Integer"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="String"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="UnlimitedNatural"/>
+  </emof:Package>
+  <emof:Package name="emof">
+    <ownedType xsi:type="emof:Class" name="Class" superClass="/1/@ownedType.11">
+      <ownedAttribute name="isAbstract" type="/1/@ownedType.19"/>
+      <ownedAttribute name="ownedAttribute" type="/1/@ownedType.14" upper="-1" isComposite="true" opposite="/1/@ownedType.14/@ownedAttribute.5"/>
+      <ownedAttribute name="ownedOperation" type="/1/@ownedType.8" upper="-1" isComposite="true" opposite="/1/@ownedType.8/@ownedAttribute.0"/>
+      <ownedAttribute name="superClass" type="/1/@ownedType.0" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="DataType" superClass="/1/@ownedType.11"/>
+    <ownedType xsi:type="emof:Class" name="Element" isAbstract="true" superClass="/1/@ownedType.7">
+      <ownedAttribute name="tag" type="/1/@ownedType.3" upper="-1" opposite="/1/@ownedType.3/@ownedAttribute.2"/>
+      <ownedAttribute name="ownedComment" type="/1/@ownedType.18" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Tag" superClass="/1/@ownedType.2">
+      <ownedAttribute name="value" type="/1/@ownedType.20"/>
+      <ownedAttribute name="name" type="/1/@ownedType.20"/>
+      <ownedAttribute name="element" type="/1/@ownedType.2" upper="-1" opposite="/1/@ownedType.2/@ownedAttribute.0"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Enumeration" superClass="/1/@ownedType.1">
+      <ownedAttribute name="ownedLiteral" type="/1/@ownedType.13" upper="-1" isComposite="true" opposite="/1/@ownedType.13/@ownedAttribute.0"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="NamedElement" isAbstract="true" superClass="/1/@ownedType.2">
+      <ownedAttribute name="name" type="/1/@ownedType.20"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Extent" superClass="/1/@ownedType.7"/>
+    <ownedType xsi:type="emof:Class" name="Object"/>
+    <ownedType xsi:type="emof:Class" name="Operation" superClass="/1/@ownedType.9 /1/@ownedType.15">
+      <ownedAttribute name="class" type="/1/@ownedType.0" opposite="/1/@ownedType.0/@ownedAttribute.2"/>
+      <ownedAttribute name="ownedParameter" type="/1/@ownedType.12" upper="-1" isComposite="true" opposite="/1/@ownedType.12/@ownedAttribute.0"/>
+      <ownedAttribute name="raisedException" type="/1/@ownedType.11" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="MultiplicityElement" isAbstract="true">
+      <ownedAttribute name="isOrdered" type="/1/@ownedType.19"/>
+      <ownedAttribute name="isUnique" type="/1/@ownedType.19"/>
+      <ownedAttribute name="lower" type="/1/@ownedType.22"/>
+      <ownedAttribute name="upper" type="/1/@ownedType.21"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Package" superClass="/1/@ownedType.5">
+      <ownedAttribute name="uri" type="/1/@ownedType.20"/>
+      <ownedAttribute name="ownedType" type="/1/@ownedType.11" upper="-1" isComposite="true" opposite="/1/@ownedType.11/@ownedAttribute.0"/>
+      <ownedAttribute name="nestedPackage" type="/1/@ownedType.10" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Type" isAbstract="true" superClass="/1/@ownedType.5">
+      <ownedAttribute name="package" type="/1/@ownedType.10" opposite="/1/@ownedType.10/@ownedAttribute.1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Parameter" superClass="/1/@ownedType.9 /1/@ownedType.15">
+      <ownedAttribute name="operation" type="/1/@ownedType.8" opposite="/1/@ownedType.8/@ownedAttribute.1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EnumerationLiteral" superClass="/1/@ownedType.5">
+      <ownedAttribute name="enumeration" type="/1/@ownedType.4" opposite="/1/@ownedType.4/@ownedAttribute.0"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Property" superClass="/1/@ownedType.9 /1/@ownedType.15">
+      <ownedAttribute name="isReadOnly" type="/1/@ownedType.19"/>
+      <ownedAttribute name="isDerived" type="/1/@ownedType.19"/>
+      <ownedAttribute name="isComposite" type="/1/@ownedType.19"/>
+      <ownedAttribute name="isId" type="/1/@ownedType.19"/>
+      <ownedAttribute name="default" type="/1/@ownedType.20"/>
+      <ownedAttribute name="class" type="/1/@ownedType.0" opposite="/1/@ownedType.0/@ownedAttribute.1"/>
+      <ownedAttribute name="opposite" type="/1/@ownedType.14"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="TypedElement" isAbstract="true" superClass="/1/@ownedType.5">
+      <ownedAttribute name="type" type="/1/@ownedType.11"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="PrimitiveType" superClass="/1/@ownedType.1"/>
+    <ownedType xsi:type="emof:Class" name="URIExtent" superClass="/1/@ownedType.6"/>
+    <ownedType xsi:type="emof:Class" name="Comment" superClass="/1/@ownedType.2">
+      <ownedAttribute name="annotatedElement" type="/1/@ownedType.5" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:PrimitiveType" name="Boolean"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="String"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="UnlimitedNatural"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="Integer"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="Real"/>
+  </emof:Package>
+</xmi:XMI>

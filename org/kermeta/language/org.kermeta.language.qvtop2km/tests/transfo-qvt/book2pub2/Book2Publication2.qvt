@@ -1,0 +1,20 @@
+--metamodel BOOKS {
+--  class Chapter;
+--  class Book {title: String; composes chapters: Sequence(Chapter);}
+--  class Chapter {title : String; nbPages : Integer;}
+--}
+
+--metamodel PUB {
+--  class Publication {title : String; nbPages : Integer;}
+--}
+
+transformation Book2Publication2(in bookModel:BOOKS,out pubModel:PUB) extends Book2Publication;
+
+main() {
+  bookModel.objects()[Book]->map book_to_publication();
+  bookModel.objects()[Book]->map book_to_publication2();
+  }
+
+mapping Book::book_to_publication2 () : Publication inherits book_to_publication {
+  title := self.title+"2";
+}

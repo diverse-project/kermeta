@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="ASCII"?>
+<message:Warning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:message="http://smartqvt.elibel.tm.fr/models/mm/message/" start="4019" length="6" value="Ambigous type name: PrimitiveTypes::String OclLib::String QvtLib::String"/>

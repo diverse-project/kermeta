@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<RDBMSMM:RDBMSModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:RDBMSMM="platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore"
+    xsi:schemaLocation="platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore RDBMSMM.ecore"/>

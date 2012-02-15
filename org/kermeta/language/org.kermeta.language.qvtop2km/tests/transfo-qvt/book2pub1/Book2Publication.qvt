@@ -1,0 +1,20 @@
+--metamodel BOOKS {
+--  class Chapter;
+--  class Book {title: String; composes chapters: Sequence(Chapter);}
+--  class Chapter {title : String; nbPages : Integer;}
+--}
+
+--metamodel PUB {
+--  class Publication {title : String; nbPages : Integer;}
+--}
+ 
+transformation Book2Publication(in bookModel:BOOKS,out pubModel:PUB);
+
+main() {
+  bookModel.objects()[Book]->map book_to_publication();
+  }
+
+mapping Book::book_to_publication () : Publication {
+  title := self.title;
+  nbPages := self.chapters->nbPages->sum(); 
+}

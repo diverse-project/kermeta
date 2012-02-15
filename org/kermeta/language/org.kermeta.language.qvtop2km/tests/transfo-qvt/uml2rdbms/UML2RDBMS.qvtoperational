@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <qvtoperational:OperationalTransformation name="Uml2Rdb" uri="http://www.example.com/Uml2Rdb" isBlackbox="false" usedModelType="/1 /2 /4" intermediateClass="/3/@ownedType.0" intermediateProperty="/0/@ownedAttribute.0">
+    <ownedAttribute xsi:type="qvtoperational:ContextualProperty" name="leafAttributes" type="/3/@ownedType.0" isOrdered="true" isUnique="false" lower="0" upper="-1">
+      <context href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+    </ownedAttribute>
+    <ownedOperation xsi:type="qvtoperational:Helper" name="isPersistent" isUnique="false" lower="0">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <body>
+        <content xsi:type="essentialocl:OperationCallExp">
+          <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+          <source xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+              <source xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.1"/>
+              </source>
+              <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2/@ownedAttribute.0"/>
+            </source>
+            <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="persistent">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+            </argument>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+          </source>
+          <argument xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+              <source xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.2"/>
+              </source>
+              <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2/@ownedAttribute.0"/>
+            </source>
+            <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="persistent">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+            </argument>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+          </argument>
+          <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o184"/>
+        </content>
+      </body>
+      <context name="self">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+      </context>
+      <result name="result" isUnique="false" lower="0" kind="out">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:EntryOperation" name="main">
+      <body>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.6">
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.5">
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.2" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+          </iterator>
+        </content>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.6">
+          <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.7">
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="essentialocl:SetType" href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o142"/>
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o8"/>
+            </source>
+            <iterator name="autoGenVar">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+            </iterator>
+            <condition xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+            </condition>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.5" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+          </iterator>
+        </content>
+      </body>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="class2table" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.2/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="t_">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                  </source>
+                  <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0/@ownedAttribute.0"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.2">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0" referredProperty="/0/@ownedAttribute.0">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                    </source>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.4" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                    <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.2/@body/@content.0/@body/@content.1/@value.0/@source/@iterator.0"/>
+                    <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </argument>
+                  </body>
+                  <iterator name="autoGenVar" type="/3/@ownedType.0"/>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.2/@body/@content.0/@body/@content.2/@value.0/@body/@variable.0">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                <instantiatedClass href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                <body>
+                  <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                    <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    <left xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@body/@content.0/@body/@content.2/@value.0/@body/@variable.0">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2/@ownedAttribute.0"/>
+                    </left>
+                    <value xsi:type="essentialocl:OperationCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                      <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="k_">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                      </source>
+                      <argument xsi:type="essentialocl:PropertyCallExp">
+                        <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                        <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                        </source>
+                        <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0/@ownedAttribute.0"/>
+                      </argument>
+                      <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                    </value>
+                  </content>
+                  <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                    <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                    <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@body/@content.0/@body/@content.2/@value.0/@body/@variable.0">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2/@ownedAttribute.1"/>
+                    </left>
+                    <value xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.2">
+                      <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                        <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                        </source>
+                        <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.1"/>
+                      </source>
+                      <iterator name="autoGenVar">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                      </iterator>
+                      <condition xsi:type="essentialocl:OperationCallExp">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                        <source xsi:type="essentialocl:PropertyCallExp">
+                          <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@body/@content.0/@body/@content.2/@value.0/@body/@content.1/@value.0/@iterator.0">
+                            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                          </source>
+                          <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1/@ownedAttribute.1"/>
+                        </source>
+                        <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="primary">
+                          <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                        </argument>
+                        <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+                      </condition>
+                    </value>
+                  </content>
+                  <variable name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                  </variable>
+                </body>
+              </value>
+            </content>
+          </body>
+        </content>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0" referredProperty="/0/@ownedAttribute.0">
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+            </source>
+          </left>
+          <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.0">
+            <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.0">
+              <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.1">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2/@ownedAttribute.1"/>
+              </source>
+              <body xsi:type="qvtoperational:MappingCallExp" type="/0/@ownedType.0" referredOperation="/0/@ownedOperation.3" isStrict="false">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@body/@initSection.0/@value.0/@source/@iterator.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                </source>
+                <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </argument>
+                <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </argument>
+              </body>
+              <iterator name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+              </iterator>
+            </source>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o146"/>
+          </value>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+      </result>
+      <when xsi:type="essentialocl:OperationCallExp">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+        <source xsi:type="essentialocl:PropertyCallExp">
+          <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+          </source>
+          <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2/@ownedAttribute.0"/>
+        </source>
+        <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="persistent">
+          <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+        </argument>
+        <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+      </when>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="attr2LeafAttrs" type="/3/@ownedType.0" isOrdered="true" isUnique="false" lower="0" upper="-1">
+      <ownedParameter xsi:type="qvtoperational:MappingParameter" name="prefix" isUnique="false" lower="0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <ownedParameter xsi:type="qvtoperational:MappingParameter" name="pkind" isUnique="false" lower="0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <body xsi:type="qvtoperational:MappingBody">
+        <initSection xsi:type="imperativeocl:VariableInitExp" withResult="false">
+          <referredVariable name="k">
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+            <initExpression xsi:type="essentialocl:IfExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              <condition xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@ownedParameter.1">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </source>
+                <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+              </condition>
+              <elseExpression xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@ownedParameter.1">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </elseExpression>
+              <thenExpression xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1/@ownedAttribute.1"/>
+              </thenExpression>
+            </initExpression>
+          </referredVariable>
+        </initSection>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" type="/0/@ownedType.0" referredVariable="/0/@ownedOperation.3/@result.0"/>
+          <value xsi:type="essentialocl:IfExp" type="/0/@ownedType.0">
+            <condition xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+              <source xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1/@ownedAttribute.2"/>
+              </source>
+              <argument xsi:type="essentialocl:TypeExp">
+                <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.4"/>
+              </argument>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o123"/>
+            </condition>
+            <elseExpression xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.0">
+              <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.1">
+                  <source xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                    <source xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1/@ownedAttribute.2"/>
+                    </source>
+                    <argument xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                    </argument>
+                    <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o118"/>
+                  </source>
+                  <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2/@ownedAttribute.1"/>
+                </source>
+                <body xsi:type="qvtoperational:MappingCallExp" type="/0/@ownedType.0" referredOperation="/0/@ownedOperation.3" isStrict="false">
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@body/@initSection.1/@value.0/@elseExpression/@source/@iterator.0">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                  </source>
+                  <argument xsi:type="essentialocl:OperationCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    <source xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1/@ownedAttribute.0"/>
+                    </source>
+                    <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="_">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                    </argument>
+                    <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                  </argument>
+                  <argument xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@body/@initSection.0/@referredVariable">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  </argument>
+                </body>
+                <iterator name="autoGenVar">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                </iterator>
+              </source>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o146"/>
+            </elseExpression>
+            <thenExpression xsi:type="essentialocl:CollectionLiteralExp" type="/0/@ownedType.0" kind="Sequence">
+              <part xsi:type="essentialocl:CollectionItem" type="/3/@ownedType.0">
+                <item xsi:type="qvtoperational:ObjectExp" type="/3/@ownedType.0" extent="/0/@modelParameter.2" instantiatedClass="/3/@ownedType.0" referredObject="/0/@ownedOperation.3/@body/@initSection.1/@value.0/@thenExpression/@part.0/@item/@body/@variable.0">
+                  <body>
+                    <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                      <left xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.2">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                        <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.3/@body/@initSection.1/@value.0/@thenExpression/@part.0/@item/@body/@variable.0"/>
+                      </left>
+                      <value xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                      </value>
+                    </content>
+                    <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                      <left xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.0">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                        <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.3/@body/@initSection.1/@value.0/@thenExpression/@part.0/@item/@body/@variable.0"/>
+                      </left>
+                      <value xsi:type="essentialocl:OperationCallExp">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                        <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@ownedParameter.0">
+                          <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                        </source>
+                        <argument xsi:type="essentialocl:PropertyCallExp">
+                          <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                          </source>
+                          <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1/@ownedAttribute.0"/>
+                        </argument>
+                        <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                      </value>
+                    </content>
+                    <content xsi:type="imperativeocl:AssignExp" isReset="true">
+                      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+                      <left xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.1">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                        <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.3/@body/@initSection.1/@value.0/@thenExpression/@part.0/@item/@body/@variable.0"/>
+                      </left>
+                      <value xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@body/@initSection.0/@referredVariable">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                      </value>
+                    </content>
+                    <variable name="autoGenVar" type="/3/@ownedType.0"/>
+                  </body>
+                </item>
+              </part>
+            </thenExpression>
+          </value>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" type="/3/@ownedType.0" isOrdered="true" isUnique="false" lower="0" upper="-1" kind="out" extent="/0/@modelParameter.2"/>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="leafAttr2OrdinaryColumn" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+      <ownedParameter xsi:type="qvtoperational:MappingParameter" name="prefix" isUnique="false" lower="0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.4/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@ownedParameter.0">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.0">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.4/@context"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.1">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.4/@context"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.4/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="essentialocl:IfExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <condition xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                    <source xsi:type="essentialocl:PropertyCallExp">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0"/>
+                      <source xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.2">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+                        <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.4/@context"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1/@ownedAttribute.2"/>
+                    </source>
+                    <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0/@ownedAttribute.0"/>
+                  </source>
+                  <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="int">
+                    <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                  </argument>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+                </condition>
+                <elseExpression xsi:type="essentialocl:StringLiteralExp" stringSymbol="VARCHAR">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </elseExpression>
+                <thenExpression xsi:type="essentialocl:StringLiteralExp" stringSymbol="NUMBER">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </thenExpression>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" type="/3/@ownedType.0" extent="/0/@modelParameter.2"/>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="asso2table" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.5/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.4">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.3"/>
+              </left>
+              <value xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.6" isStrict="false">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                </source>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.2">
+                <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.3">
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+                    <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.4">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.3"/>
+                    </source>
+                    <body xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                      <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@body/@content.0/@body/@content.1/@value.0/@source/@source/@iterator.0">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+                      </source>
+                      <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3/@ownedAttribute.1"/>
+                    </body>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+                    </iterator>
+                  </source>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o146"/>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+          </body>
+        </content>
+        <initSection xsi:type="imperativeocl:AssignExp" isReset="true">
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <left xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@result.0">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+          </left>
+          <value xsi:type="qvtoperational:ResolveExp" isDeferred="false" isInverse="false" one="true">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:PropertyCallExp">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+              <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+              </source>
+              <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.2"/>
+            </source>
+            <target name="autoGenVar">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+            </target>
+          </value>
+        </initSection>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+      </result>
+      <when xsi:type="essentialocl:OperationCallExp" referredOperation="/0/@ownedOperation.0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+        <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.5/@context">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+        </source>
+      </when>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="asso2ForeignKey" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.6/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                <source xsi:type="essentialocl:StringLiteralExp" stringSymbol="f_">
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                </source>
+                <argument xsi:type="essentialocl:PropertyCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@context">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                  </source>
+                  <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.0"/>
+                </argument>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.2"/>
+                <source xsi:type="qvtoperational:ResolveExp" isDeferred="false" isInverse="false" one="true">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                  <source xsi:type="essentialocl:PropertyCallExp">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@context">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                    </source>
+                    <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.1"/>
+                  </source>
+                  <target name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+                  </target>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0/@ownedAttribute.2"/>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.2">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.2">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.3">
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.0">
+                    <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0" referredProperty="/0/@ownedAttribute.0">
+                      <source xsi:type="essentialocl:PropertyCallExp">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                        <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@context">
+                          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                        </source>
+                        <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.1"/>
+                      </source>
+                    </source>
+                    <iterator name="autoGenVar" type="/3/@ownedType.0"/>
+                    <condition xsi:type="essentialocl:OperationCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+                      <source xsi:type="essentialocl:PropertyCallExp" referredProperty="/3/@ownedType.0/@ownedAttribute.1">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                        <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.6/@body/@content.0/@body/@content.2/@value.0/@source/@source/@iterator.0"/>
+                      </source>
+                      <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="primary">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                      </argument>
+                      <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o21"/>
+                    </condition>
+                  </source>
+                  <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.7" isStrict="false">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                    <source xsi:type="essentialocl:VariableExp" type="/3/@ownedType.0" referredVariable="/0/@ownedOperation.6/@body/@content.0/@body/@content.2/@value.0/@source/@iterator.0"/>
+                    <argument xsi:type="essentialocl:OperationCallExp">
+                      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                      <source xsi:type="essentialocl:PropertyCallExp">
+                        <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                        <source xsi:type="essentialocl:PropertyCallExp">
+                          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+                          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.6/@context">
+                            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+                          </source>
+                          <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3/@ownedAttribute.1"/>
+                        </source>
+                        <referredProperty href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.0/@ownedAttribute.0"/>
+                      </source>
+                      <argument xsi:type="essentialocl:StringLiteralExp" stringSymbol="_">
+                        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+                      </argument>
+                      <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o180"/>
+                    </argument>
+                  </body>
+                  <iterator name="autoGenVar" type="/3/@ownedType.0"/>
+                </source>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o133"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="leafAttr2ForeignColumn" isUnique="false" lower="0" inherited="/0/@ownedOperation.4">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+      <ownedParameter xsi:type="qvtoperational:MappingParameter" name="prefix" isUnique="false" lower="0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.7/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.7/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="essentialocl:StringLiteralExp" stringSymbol="foreign">
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" type="/3/@ownedType.0" extent="/0/@modelParameter.2"/>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+      </result>
+    </ownedOperation>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(LeafAttribute)" elementType="/3/@ownedType.0"/>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Attribute)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Column)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Column)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(ForeignKey)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.3"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Class)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.2"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Table)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleRdbms.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Association)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.3"/>
+    </ownedType>
+    <ownedTag name="alias" value="key"/>
+    <ownedVariable name="this" type="/0"/>
+    <modelParameter name="srcModel" type="/1"/>
+    <modelParameter name="dest" type="/2" kind="out"/>
+    <modelParameter name="_intermediate" type="/4" kind="out"/>
+  </qvtoperational:OperationalTransformation>
+  <qvtoperational:ModelType name="UML">
+    <metamodel href="platform:/resource/modelLibrary/SimpleUML.emof#/"/>
+  </qvtoperational:ModelType>
+  <qvtoperational:ModelType name="RDBMS">
+    <metamodel href="platform:/resource/modelLibrary/SimpleRdbms.emof#/"/>
+  </qvtoperational:ModelType>
+  <emof:Package name="_INTERMEDIATE">
+    <ownedType xsi:type="emof:Class" name="LeafAttribute">
+      <ownedAttribute name="name" isUnique="false" lower="0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedAttribute>
+      <ownedAttribute name="kind" isUnique="false" lower="0">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedAttribute>
+      <ownedAttribute name="attr" isUnique="false" lower="0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/SimpleUML.emof#//@ownedType.1"/>
+      </ownedAttribute>
+    </ownedType>
+  </emof:Package>
+  <qvtoperational:ModelType name="_INTERMEDIATE" metamodel="/3"/>
+</xmi:XMI>

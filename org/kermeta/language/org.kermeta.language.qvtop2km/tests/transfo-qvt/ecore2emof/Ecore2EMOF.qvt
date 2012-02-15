@@ -1,0 +1,143 @@
+-- Copyright (c) 2006 France Telecom
+-- All rights reserved.
+--
+-- This software is published under the terms of the EPL (http://www.eclipse.org/legal/epl-v10.html)
+-- in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+-- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.transformation UML22Ecore(in qvtModel:qvtoperational, out descriptionModel:ModelBus);
+
+transformation Ecore2EMOF(in ecoremodel:Ecore, out emofmodel:emof);
+
+main() {
+	map createPrimitiveTypesPackage();
+	ecoremodel.objects()[Ecore::EPackage]->map _package();
+	ecoremodel.objects()[Ecore::EPackage]->map packageRef();
+	--ecoremodel.objects()[Ecore::ETypedElement]->map typedElementCheck();
+}
+
+mapping createPrimitiveTypesPackage() : Package{
+	name := "PrimitiveTypes";
+	ownedType := object PrimitiveType {
+		name := "Boolean";
+	};
+	ownedType += object PrimitiveType {
+		name := "Integer";
+	};
+	ownedType += object PrimitiveType {
+		name := "String";
+	};
+	ownedType += object PrimitiveType {
+		name := "UnlimitedNatural";
+	};
+}
+
+mapping ENamedElement::namedElement() : NamedElement {
+	name := self.name;
+}
+
+mapping EDataType::datatype_() : PrimitiveType inherits namedElement {
+	init {log (self.name); }
+}
+
+mapping EPackage::_package() : Package inherits namedElement {
+	ownedType := self.eClassifiers[EClass]->map class_()->asOrderedSet();
+	ownedType += self.eClassifiers[EDataType]->map datatype_()->asOrderedSet();
+}
+
+mapping EClass::class_() : Class inherits namedElement {
+	ownedAttribute := self.eAttributes->map attribute()->asOrderedSet();
+	ownedAttribute += self.eReferences->map reference()->asOrderedSet();
+	ownedOperation := self.eOperations->map operation()->asOrderedSet();
+	isAbstract := self.abstract_;
+}
+
+mapping EAttribute::attribute() : Property inherits namedElement{
+	isComposite := false;
+	upper := self.upperBound;
+}
+
+mapping EReference::reference() : Property inherits namedElement{
+	isComposite := self.containment;
+	upper := self.upperBound;
+}
+
+mapping EOperation::operation() : Operation inherits namedElement{
+	ownedParameter := self.eParameters->map parameter()->asOrderedSet();
+}
+
+mapping EParameter::parameter() : Parameter inherits namedElement{
+}
+
+-----------------------------------------------------------------------------
+mapping EPackage::packageRef() : Package{
+	init{
+		result := self.resolve(Package)->first();
+		self.eClassifiers[EClass]->map classRef();
+	}
+}
+
+mapping EClass::classRef() : Class{
+	init{
+		result := self.resolve(Class)->first();
+		self.eAttributes->map typedElementRef();
+		self.eReferences->map referenceRef();
+		self.eOperations->map operationRef();
+	}
+	superClass := self.eSuperTypes->resolve(Class)->flatten()->asOrderedSet();
+}
+
+mapping EReference::referenceRef() : Property inherits typedElementRef{
+	init{
+		result := self.resolve(Property)->first();
+	}
+	opposite := self.eOpposite.resolveone(Property);
+}
+
+mapping EOperation::operationRef() : Operation inherits typedElementRef{
+	init{
+		result := self.resolve(Operation)->first();
+		self.eParameters->map typedElementRef();
+	}
+}
+
+mapping ETypedElement::typedElementRef() : TypedElement{
+	init {
+		result := self.resolve(TypedElement)->first();
+		assert(result<>null) with log("result is null for "+self.name+" ; ",self);
+		result := if result=null then object Property {name:="x_"+self.name;} else result endif;
+	}
+	type := if (self.eType.oclIsKindOf(EDataType)) then 
+			if self.eType.resolveone(PrimitiveType)==null 
+				then
+					emofmodel.objects()[Package][name="PrimitiveTypes"]
+					->collect(e|e.ownedType)->flatten()[PrimitiveType]->select(f|f.name=self.eType.getEmofName())
+					->first()
+				else
+					self.eType.resolveone(PrimitiveType)
+				endif
+		else 
+			self.eType.resolve(Type)->first()
+		endif;
+	end{
+		assert(result.type<>null) with log(self.name+" not typed. "+self.eType.name+" ; ",self.eType);
+	}
+}
+
+helper EClassifier::getEmofName() : String{
+	return if self.name="EString" then "String" else
+		if self.name="EBoolean" then "Boolean" else
+		if self.name="EInt" then "Integer" else
+		self.name
+		endif endif endif;
+}
+---------------------------------------------------------------------
+mapping ETypedElement::typedElementCheck() : TypedElement{
+	init {
+		result := self.resolve(TypedElement)->first();
+		assert(result<>null) with log("typedElementCheck(): result is null for "+self.name+" ; ",self);
+		result := if result=null then object Property {name:="x_"+self.name;} else result endif;
+	}
+	type := self.eType.resolve(Type)->first();
+	end{
+		assert(result.type<>null) with log("typedElementCheck(): "+self.name+" not typed. "+self.eType.name+" ; ",self.eType);
+	}
+}
