@@ -107,8 +107,8 @@ object TypeEquivalence {
 				 typeEquivelence.put("org.k2.language.ReflectiveSequence", "java.util.List")
 				 typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
 				 
-//                                                             typeEquivelence.put("org.k2.language.structure.Object","java.lang.Object")
-                                                               typeEquivelence;
+//               typeEquivelence.put("org.k2.language.structure.Object","java.lang.Object")
+                 typeEquivelence;
   };
 		
 	def getTypeEquivalence(key:String):String={
