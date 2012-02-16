@@ -171,7 +171,7 @@ class SlicerAspectGenerator inherits Generator {
 	
 	
 	operation createImplementationOperationCreateFrom(eclass : EClass) : String is do
-		if(slicerGenerator.slicerModel.strict) then
+		if(slicerGenerator.slicerModel.strict and not eclass.~abstract) then
 			result := "\tmethod createFrom() : Object is do\n\t\tvar the" + eclass.name + " : " + 
 						eclass.name + " init " + "self.getMetaClass().new.asType(" + eclass.name + ")\n" + 
 						generateCopyOfRequiredAttributesOfClass(eclass, "the"+eclass.name, true) + // not hasSuper) + 
