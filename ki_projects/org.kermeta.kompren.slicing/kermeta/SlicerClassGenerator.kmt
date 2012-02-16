@@ -206,7 +206,7 @@ class SlicerClassGenerator inherits Generator {
 				if(not rel.expression.isVoid) then
 					var varName : String init "the" + rel.domain.name
 					result := result + "\t\tself.added" + rel.domain.name + ".each{" + varName + " | self.on" +
-							rel.domain.name + "Added(" + varName + ".src, " + varName + ".tar) }\n"
+							rel.domain.eContainingClass.name + rel.domain.name + "Added(" + varName + ".src, " + varName + ".tar) }\n"
 				end
 			}
 		end

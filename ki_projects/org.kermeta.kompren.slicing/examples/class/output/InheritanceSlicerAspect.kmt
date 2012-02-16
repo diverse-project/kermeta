@@ -9,11 +9,11 @@ class SlicerVisitor {
 
 	attribute visitedForRelations : Boolean
 
-	attribute addedToPruner : Boolean
+	attribute sliced : Boolean
 
 	operation initialiseAttributes() : Void is do
 		self.visitedPass := false
-		self.addedToPruner := false
+		self.sliced := false
 		self.visitedForRelations := false
 	end
 
@@ -38,9 +38,9 @@ aspect class Clazz inherits SlicerVisitor {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theInheritanceSlicer)
-			if(not self.addedToPruner) then
+			if(not self.sliced) then
 				theInheritanceSlicer.addedClazzs.add(self)
-				self.addedToPruner := true
+				self.sliced := true
 			end
 			self.visitedPass := true
 			self.superClasses.each{theClazz | theClazz.visitToAddClasses(theInheritanceSlicer)}

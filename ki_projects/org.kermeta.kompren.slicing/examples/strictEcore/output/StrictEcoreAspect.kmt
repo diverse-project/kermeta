@@ -48,6 +48,11 @@ aspect class EClass {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
 			self.visitedPass := true
 			self.eSuperTypes.each{theEClass | theEClass.visitToAddClasses(theStrictEcore)}
 			self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visitToAddClasses(theStrictEcore)}
@@ -116,6 +121,11 @@ aspect class EOperation {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
 			self.visitedPass := true
 			self.eParameters.each{theEParameter | theEParameter.visitToAddClasses(theStrictEcore)}
 			self.visitedPass := false
@@ -136,6 +146,36 @@ aspect class EOperation {
 	end
 }
 
+aspect class EParameter {
+	method createFrom() : Object is do
+		var theEParameter : EParameter init self.getMetaClass().new.asType(EParameter)
+		theEParameter.name := self.name
+		result := theEParameter
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
 aspect class EEnum {
 	method createFrom() : Object is do
 		var theEEnum : EEnum init self.getMetaClass().new.asType(EEnum)
@@ -147,6 +187,11 @@ aspect class EEnum {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
 			self.visitedPass := true
 			self.eLiterals.each{theEEnumLiteral | theEEnumLiteral.visitToAddClasses(theStrictEcore)}
 			self.visitedPass := false
@@ -167,42 +212,22 @@ aspect class EEnum {
 	end
 }
 
-aspect class EAttribute inherits SlicerVisitor {
+aspect class EEnumLiteral {
 	method createFrom() : Object is do
-		var theEAttribute : EAttribute init self.getMetaClass().new.asType(EAttribute)
-		theEAttribute.name := self.name
-		result := theEAttribute
+		var theEEnumLiteral : EEnumLiteral init self.getMetaClass().new.asType(EEnumLiteral)
+		theEEnumLiteral.name := self.name
+		result := theEEnumLiteral
 	end
-	
+
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStrictEcore)
-			self.visitedPass := true
-			self.visitedPass := false
-		end
-	end
-	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
-		if(not self.visitedPass) then
-			super(theStrictEcore)
-			self.visitedPass := true
-			self.visitedForRelations := true
-			self.visitedPass := false
-		end
-	end
-}
-
-
-aspect class EReference inherits SlicerVisitor {
-	method createFrom() : Object is do
-		var theEReference : EReference init self.getMetaClass().new.asType(EReference)
-		theEReference.name := self.name
-		result := theEReference
-	end
-	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
-		checkInitialisation()
-		if(not self.visitedPass) then
-			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
 			self.visitedPass := true
 			self.visitedPass := false
 		end
@@ -218,6 +243,192 @@ aspect class EReference inherits SlicerVisitor {
 }
 
 aspect class ENamedElement inherits SlicerVisitor {
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EFactory inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theEFactory : EFactory init self.getMetaClass().new.asType(EFactory)
+		result := theEFactory
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.ePackage.visitToAddClasses(theStrictEcore)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ePackage.visitToAddRelations(theStrictEcore)
+			if(self.ePackage.sliced) then
+				self.clone.asType(EFactory).ePackage := self.ePackage.clone.asType(EPackage)
+			end
+
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EAttribute {
+	method createFrom() : Object is do
+		var theEAttribute : EAttribute init self.getMetaClass().new.asType(EAttribute)
+		theEAttribute.name := self.name
+		result := theEAttribute
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EDataType {
+	method createFrom() : Object is do
+		var theEDataType : EDataType init self.getMetaClass().new.asType(EDataType)
+		theEDataType.name := self.name
+		result := theEDataType
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EPackage {
+	method createFrom() : Object is do
+		var theEPackage : EPackage init self.getMetaClass().new.asType(EPackage)
+		theEPackage.name := self.name
+		result := theEPackage
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.eFactoryInstance.visitToAddClasses(theStrictEcore)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.eFactoryInstance.visitToAddRelations(theStrictEcore)
+			if(self.eFactoryInstance.sliced) then
+				self.clone.asType(EPackage).eFactoryInstance := self.eFactoryInstance.clone.asType(EFactory)
+			end
+
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EReference {
+	method createFrom() : Object is do
+		var theEReference : EReference init self.getMetaClass().new.asType(EReference)
+		theEReference.name := self.name
+		result := theEReference
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.clone := self.createFrom()
+				theStrictEcore.addToRoot(self.clone)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ETypeParameter {
+	method createFrom() : Object is do
+		var theETypeParameter : ETypeParameter init self.getMetaClass().new.asType(ETypeParameter)
+		theETypeParameter.name := self.name
+		result := theETypeParameter
+	end
+
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then

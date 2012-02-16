@@ -24,14 +24,14 @@ class InheritanceSlicer {
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
-		self.addedsuperClasses.each{thesuperClasses | self.onsuperClassesAdded(thesuperClasses.src, thesuperClasses.tar) }
+		self.addedsuperClasses.each{thesuperClasses | self.onClazzsuperClassesAdded(thesuperClasses.src, thesuperClasses.tar) }
 		onEnd()
 	end
 
 	operation onClazzAdded(clazz : Clazz) : Void is do
 stdio.writeln("Clazz: " + clazz.name)
 	end
-	operation onsuperClassesAdded(srcClass : Clazz, tgtClass : Clazz) : Void is do
+	operation onClazzsuperClassesAdded(srcClass : Clazz, tgtClass : Clazz) : Void is do
 stdio.writeln("Inheritance: " + srcClass.name + " " + tgtClass.name)
 	end
 	operation onEnd() : Void is do
@@ -40,6 +40,7 @@ stdio.writeln("Slicing ended")
 	operation onStart() : Void is do
 stdio.writeln("Slicing starting")
 	end
+
 }
 class ClasssuperClasses {
 	reference src : Clazz

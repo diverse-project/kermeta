@@ -63,4 +63,5 @@ class UnusedVarDetector {
 	end
 	reference varDecls : VariableDecl[0..*]
 	
-	reference params : Parameter[0..*]}
+	reference params : Parameter[0..*]
+}

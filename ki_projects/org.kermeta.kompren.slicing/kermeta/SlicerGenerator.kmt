@@ -84,7 +84,7 @@ class SlicerGenerator {
 		defineClassesToAspectise()
 		
 		if(hasOpposite) then
-			self.allClasses := metamodel.getAllClasses()
+			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
 			self.rootClass := computeRootClass()
 		end
 	end
@@ -113,31 +113,50 @@ class SlicerGenerator {
 	
 	
 	// This operation check that if a sliced class has relations with 1 cardinality, the type of these
-	// relation must be sliced too.
-	// This process occurs only when the slicer is defined as strict.
+	// relation must be sliced too. This process occurs only when the slicer is defined as strict.
+	// This operation also checks that if an abstract class is sliced, all its concrete sub-types are sliced as well.
 	operation checkClassesToSlice() is do
+		var coll : Bag<SlicedElement> init Bag<SlicedElement>.new
+	
 		if(slicerModel.strict) then
-			var coll : Bag<SlicedElement> init Bag<SlicedElement>.new
 			var newSlicedClass : SlicedClass
 			var ref : EReference
 
 			slicerModel.slicedClasses.each{sc | sc.domain.eStructuralFeatures.each{sf |
 				if(sf.isInstanceOf(EReference)) then
 					ref:= sf.asType(EReference)
-
-					if((ref.lowerBound==1).andThen{b | not slicerModel.slicedClasses.exists{cl | cl.domain==ref.eType} }) then
+					if((ref.lowerBound==1).andThen{b | not slicerModel.slicedClasses.exists{cl |
+					 cl.domain.getQualifiedName==ref.eType.getQualifiedName} }) then
 						newSlicedClass := SlicedClass.new
 						newSlicedClass.domain := ref.eType.asType(EClass)
 						coll.add(newSlicedClass)
 					end
 				end
 			}}
-			
-			if(not coll.empty) then
-				coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
-				// We must re-call this operation to check required relation of the added classes.
-				checkClassesToSlice()
-			end
+		end
+		
+		var slicedClassesToRemove : Sequence<SlicedElement> init Sequence<SlicedElement>.new
+
+		slicerModel.slicedClasses.select{sc | sc.domain.~abstract}.each{sc |
+			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
+
+			slicedClassesToRemove.add(sc)
+			var sub : Sequence<EClass> init sc.domain.getConcreteSubClasses(allClasses)
+			sub.each{subClass |
+				if(not slicerModel.slicedClasses.exists{sc2 | sc2.domain.getQualifiedName==subClass.getQualifiedName}) then
+					var slicedClass : SlicedClass init SlicedClass.new
+					slicedClass.domain := subClass
+					coll.add(slicedClass)
+				end
+			}
+		}
+		
+		slicedClassesToRemove.each{cl | slicerModel.slicedElements.remove(cl)}
+		
+		if(not coll.empty) then
+			coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
+			// We must re-call this operation to check required relation of the added classes.
+			checkClassesToSlice()
 		end
 	end
 	
@@ -162,23 +181,23 @@ class SlicerGenerator {
 	operation defineClassesToAspectise() : Void is do
 		// Extracting the classes from the relations to focus on.
 		slicerModel.slicedProperties.each{rel |
-			if(not aspectisedClasses.contains(rel.domain.eContainingClass)) then
+			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==rel.domain.eContainingClass.getQualifiedName}) then
 				aspectisedClasses.add(rel.domain.eContainingClass)
 			end
 			if(rel.domain.eType.isKindOf(EClass)) then
 				var eclass : EClass init rel.domain.eType.asType(EClass)
-				if(not aspectisedClasses.contains(eclass)) then
+				if(not aspectisedClasses.exists{cl | cl.getQualifiedName==eclass.getQualifiedName}) then
 					aspectisedClasses.add(eclass)
 				end
 			end
 		}
 		slicerModel.inputClasses.each{eclass |
-			if(not aspectisedClasses.contains(eclass)) then
+			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==eclass.getQualifiedName}) then
 				aspectisedClasses.add(eclass)
 			end
 		}
 		slicerModel.slicedClasses.each{clazz |
-			if(not aspectisedClasses.contains(clazz.domain)) then
+			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==clazz.domain.getQualifiedName}) then
 				aspectisedClasses.add(clazz.domain)
 			end
 		}
@@ -189,7 +208,7 @@ class SlicerGenerator {
 			if(eclass.outputFocusedRelations.empty() and
 				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass)} and
 				not slicerModel.inputClasses.contains(eclass) and
-				not slicerModel.slicedClasses.exists{sc | sc.domain==eclass}) then
+				not slicerModel.slicedClasses.exists{sc | sc.domain.getQualifiedName==eclass.getQualifiedName}) then
 				aspectisedClasses.remove(eclass)
 			end
 		}
@@ -207,13 +226,13 @@ class SlicerGenerator {
 
 		if(classes.size>1) then
 			var packagesName : Bag<String> init Bag<String>.new
-			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
+			packagesName.add(classes.last().ePackage.getQualifiedName())
 
 			from var i : Integer init classes.size()-2
 			// Skipping the first element which has been converted as the default package.
 			until i<0
 			loop
-				var name : String init classes.at(i).ePackage.getQualifiedName("::")
+				var name : String init classes.at(i).ePackage.getQualifiedName()
 
 				if(not packagesName.contains(name)) then
 					packagesName.add(name)
@@ -231,13 +250,13 @@ class SlicerGenerator {
 
 		if(classes.size>1) then
 			var packagesName : Bag<String> init Bag<String>.new
-			packagesName.add(classes.last().ePackage.getQualifiedName("::"))
+			packagesName.add(classes.last().ePackage.getQualifiedName())
 
 			from var i : Integer init classes.size()-2
 			// Skipping the first element which has been converted as the default package.
 			until i<0
 			loop
-				var name : String init classes.at(i).ePackage.getQualifiedName("::")
+				var name : String init classes.at(i).ePackage.getQualifiedName()
 
 				if(not packagesName.contains(name)) then
 					packagesName.add(name)
@@ -254,7 +273,7 @@ class SlicerGenerator {
 		if(classes.empty()) then
 			result := ""
 		else
-			result := "package " + classes.last().ePackage.getQualifiedName("::") + ";\n"
+			result := "package " + classes.last().ePackage.getQualifiedName() + ";\n"
 		end
 	end
 	

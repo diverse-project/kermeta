@@ -5,11 +5,7 @@
  * Authors  : 
  *            dvojtise
  */
-
-
-
 package ecore;
-
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
@@ -17,16 +13,6 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::standard
 
 aspect class EPackage {
-	/** retreives the qualified name of a Package */
-	operation getQualifiedName(delimiter : String) : String is do
-	    if (self.eSuperPackage != void) then
-			result := self.eSuperPackage.getQualifiedName(delimiter) + delimiter + self.name			
-		else
-			result := self.name
-		end
-	end
-	
-	
 	operation getAllClasses() : Bag<EClass> is do
 		result := Bag<EClass>.new
 		eClassifiers.each{classifier | if(classifier.isInstanceOf(EClass)) then result.add(classifier.asType(EClass)) end }

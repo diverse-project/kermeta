@@ -11,11 +11,11 @@ class SlicerVisitor {
 
 	attribute visitedForRelations : Boolean
 
-	attribute addedToPruner : Boolean
+	attribute sliced : Boolean
 
 	operation initialiseAttributes() : Void is do
 		self.visitedPass := false
-		self.addedToPruner := false
+		self.sliced := false
 		self.visitedForRelations := false
 	end
 
@@ -215,9 +215,9 @@ aspect class VariableDecl {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theUnusedVarDetector)
-			if(not self.addedToPruner) then
+			if(not self.sliced) then
 				theUnusedVarDetector.addedVariableDecls.add(self)
-				self.addedToPruner := true
+				self.sliced := true
 			end
 			self.visitedPass := true
 			self.visitedPass := false
@@ -238,9 +238,9 @@ aspect class CallVariable {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theUnusedVarDetector)
-			if(not self.addedToPruner) then
+			if(not self.sliced) then
 				theUnusedVarDetector.addedCallVariables.add(self)
-				self.addedToPruner := true
+				self.sliced := true
 			end
 			self.visitedPass := true
 			self.visitedPass := false

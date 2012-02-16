@@ -32,9 +32,9 @@ aspect class Parameter inherits SlicerVisitor {
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theUnusedVarDetector)
-			if(not self.addedToPruner) then
+			if(not self.sliced) then
 				theUnusedVarDetector.addedParameters.add(self)
-				self.addedToPruner := true
+				self.sliced := true
 			end
 			self.visitedPass := true
 			self.visitedPass := false
