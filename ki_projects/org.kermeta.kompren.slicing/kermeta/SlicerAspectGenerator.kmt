@@ -443,7 +443,8 @@ class SlicerAspectGenerator inherits Generator {
 		
 		// Generating calls for relation to slice as specified in the metamodel (relation 1). Only for strict slicers.
 		if(slicerGenerator.slicerModel.strict) then
-			eclass.eStructuralFeatures.select{sf | sf.isInstanceOf(EReference) and not eclass.outputFocusedRelations.exists{ofr | ofr.domain==sf }}.each{sf |
+			eclass.eStructuralFeatures.select{sf | sf.isInstanceOf(EReference).andThen{b|sf.lowerBound==1}.andThen{b| 
+											not eclass.outputFocusedRelations.exists{ofr | ofr.domain==sf}}}.each{sf |
 				result := result + generateRelationCall(sf.asType(EReference), false, visitMethodName, nameVarPruner, classVisit)
 			}
 		end
