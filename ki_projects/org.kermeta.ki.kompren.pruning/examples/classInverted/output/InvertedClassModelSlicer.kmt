@@ -12,13 +12,13 @@ class InvertedClassModelSlicer {
 
 	reference addedClazzs : Bag<Clazz>
 
-	reference addedsuperClassesOpposite : Bag<ClasssuperClassesOpposite>
+	reference addedlowerType : Bag<ClasslowerType>
 
 	operation initialise(requiredClazzs : bag Clazz[0..*], model : ClassModel) : InvertedClassModelSlicer is do
 		result := self
 		self.model := model
 		self.addedClazzs := Bag<Clazz>.new
-		self.addedsuperClassesOpposite := Bag<ClasssuperClassesOpposite>.new
+		self.addedlowerType := Bag<ClasslowerType>.new
 		self.requiredClazzs.addAll(requiredClazzs)
 	end
 
@@ -27,20 +27,21 @@ class InvertedClassModelSlicer {
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
-		self.addedsuperClassesOpposite.each{thesuperClassesOpposite | self.onsuperClassesOppositeAdded(thesuperClassesOpposite.src, thesuperClassesOpposite.tar) }
+		self.addedlowerType.each{thelowerType | self.onClazzlowerTypeAdded(thelowerType.src, thelowerType.tar) }
 	end
 
 	operation onClazzAdded(clazz : Clazz) : Void is do
 stdio.writeln("class: " + clazz.name)
 	end
-	operation onsuperClassesOppositeAdded(src : Clazz, tgt : Clazz) : Void is do
+	operation onClazzlowerTypeAdded(src : Clazz, tgt : Clazz) : Void is do
 stdio.writeln(tgt.name + "subclass of" + src.name)
 	end
+
 }
-class ClasssuperClassesOpposite {
+class ClasslowerType {
 	reference src : Clazz
 	reference tar : Clazz
-	operation initialise(src : Clazz, tar : Clazz) : ClasssuperClassesOpposite is do
+	operation initialise(src : Clazz, tar : Clazz) : ClasslowerType is do
 		result := self
 		self.src := src
 		self.tar := tar

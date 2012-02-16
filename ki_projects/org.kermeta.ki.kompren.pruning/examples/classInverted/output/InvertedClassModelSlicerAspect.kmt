@@ -9,11 +9,11 @@ class SlicerVisitor {
 
 	attribute visitedForRelations : Boolean
 
-	attribute addedToPruner : Boolean
+	attribute sliced : Boolean
 
 	operation initialiseAttributes() : Void is do
 		self.visitedPass := false
-		self.addedToPruner := false
+		self.sliced := false
 		self.visitedForRelations := false
 	end
 
@@ -34,18 +34,18 @@ class SlicerVisitor {
 }
 
 aspect class Clazz inherits SlicerVisitor, Feedable {
-	reference superClassesOpposite : Clazz[0..*]
+	reference lowerType : Clazz[0..*]
 
 	method visitToAddClasses(theInvertedClassModelSlicer : InvertedClassModelSlicer) : Void is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theInvertedClassModelSlicer)
-			if(not self.addedToPruner) then
+			if(not self.sliced) then
 				theInvertedClassModelSlicer.addedClazzs.add(self)
-				self.addedToPruner := true
+				self.sliced := true
 			end
 			self.visitedPass := true
-			self.superClassesOpposite.each{theClazz | theClazz.visitToAddClasses(theInvertedClassModelSlicer)}
+			self.lowerType.each{theClazz | theClazz.visitToAddClasses(theInvertedClassModelSlicer)}
 			self.visitedPass := false
 		end
 	end
@@ -54,22 +54,25 @@ aspect class Clazz inherits SlicerVisitor, Feedable {
 			super(theInvertedClassModelSlicer)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.superClassesOpposite.each{theClazz | theClazz.visitToAddRelations(theInvertedClassModelSlicer)
+			self.lowerType.each{theClazz | theClazz.visitToAddRelations(theInvertedClassModelSlicer)
 				if(self.visitedForRelations and theClazz.visitedForRelations) then
-					theInvertedClassModelSlicer.addedsuperClassesOpposite.add(ClasssuperClassesOpposite.new.initialise(self, theClazz)) end }
+					theInvertedClassModelSlicer.addedlowerType.add(ClasslowerType.new.initialise(self, theClazz)) end }
 			self.visitedPass := false
 		end
 	end
 	method feedOpposites() from Feedable is do
-		self.~superClasses.each{theClazz | theClazz.superClassesOpposite.add(self) }
+		super()
+		self.superClasses.each{theClazz | theClazz.~lowerType.add(self) }
 	end
 }
 
 aspect class ClassModel inherits Feedable {
 	method feedOpposites() from Feedable is do
+		super()
 		self.classes.each{theclasses | theclasses.feedOpposites() }
 	end
 }
+
 abstract class Feedable {
-	operation feedOpposites() is abstract
+	operation feedOpposites() is do end
 }
