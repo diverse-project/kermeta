@@ -285,9 +285,14 @@ class SlicerAspectGenerator inherits Generator {
 				result := result + "\n\t\t\t\tself.sliced := true\n\t\t\tend\n"
 			end
 
-			result := result + "\t\t\tself.visitedPass := true\n" + 
-			 		generateRelationCalls(eclass, true) + "\t\t\tself.visitedPass := false\n\t\tend\n\tend\n" +
-					"\tmethod visitToAddRelations(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
+			var relationCalls : String init generateRelationCalls(eclass, true)
+			
+			if(relationCalls.size>0) then
+				result := result + "\t\t\tself.visitedPass := true\n" + generateRelationCalls(eclass, true) + "\t\t\tself.visitedPass := false\n"
+			end
+
+			result := result + "\t\tend\n\tend\n\tmethod visitToAddRelations(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
+
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
