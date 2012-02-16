@@ -25,9 +25,9 @@ class Test {
 		// generateClassSlicer
 		// generateUnusedVarDetector
 		// generateKermetaTransfoAnalyser
-		 generateStateMachineSlicer
+		// generateStateMachineSlicer
 		// generateFeatureDiagramSlicer
-		// generateStrictEcoreSlicer
+		 generateStrictEcoreSlicer
 	end
 
 

@@ -277,7 +277,7 @@ class SlicerAspectGenerator inherits Generator {
 				result := result + ") then\n\t\t\t\t"
 				
 				if(slicerGenerator.slicerModel.strict) then
-					result := result + "self.clone := self.createFrom()\n\t\t\t\t" + prunerVarName + ".addToRoot(self.clone)"
+					result := result + "self.clone := self.createFrom()"
 				else
 					result := result + prunerVarName + "." + eclass.getAddedAttributeName() + ".add(self)"
 				end
@@ -387,6 +387,8 @@ class SlicerAspectGenerator inherits Generator {
 			if(isOption) then
 				result := result + "if(" + nameVarPruner + ".consider" + ref.name + ") then "
 			end
+			
+			var prunerVarName : String init "the" + slicerGenerator.slicerModel.name
 	
 			if(ref.upperBound==1) then
 				if(ref.lowerBound==0) then
@@ -398,7 +400,8 @@ class SlicerAspectGenerator inherits Generator {
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
 					result := result + "\n\t\t\tif(self." + ref.name + ".sliced) then\n\t\t\t\tself.clone.asType(" + 
 							ref.container().asType(EClassifier).name + ")." + ref.name + " := self." + 
-							ref.name + ".clone.asType(" + ref.eType.name + ")\n\t\t\tend\n"
+							ref.name + ".clone.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self."
+							+ ref.name + ".clone)\n\t\t\tend\n"
 				end
 	
 				if(ref.lowerBound==0) then
@@ -414,7 +417,8 @@ class SlicerAspectGenerator inherits Generator {
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
 					result := result + "\n\t\t\t\tif(not clone.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
 								"clone.asType(" + ref.container().asType(EClassifier).name + ")." + ref.name + 
-								".add(" + nameVar +".clone.asType(" + ref.eType.name + "))\n\t\t\t\tend\n\t\t\t"
+								".add(" + nameVar +".clone.asType(" + ref.eType.name + "))\n\t\t\t\t\t" + prunerVarName + ".addToRoot(" 
+								+ nameVar + ".clone)\n\t\t\t\tend\n\t\t\t"
 				end
 						
 				result := result + "}"
@@ -473,7 +477,7 @@ class SlicerAspectGenerator inherits Generator {
 		result := "class SlicerVisitor {\n"
 		
 		if(slicerGenerator.slicerModel.strict) then
-			result := result + "\tattribute clone : Object\n\n"
+			result := result + "\treference clone : Object\n\n"
 		end
 		
 		result := result + "\tattribute visitedPass : Boolean\n\n\t" + 

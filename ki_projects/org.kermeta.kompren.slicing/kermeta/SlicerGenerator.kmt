@@ -102,8 +102,8 @@ class SlicerGenerator {
  		
  			slicerModel.helper := "	operation addToRoot(obj : Object) is do
 		var cont : Object init obj.container
-
-		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | not cont.asType(SlicerVisitor).sliced}}) then
+		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | 
+			(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
 			sliceRoots.add(obj)
 		end
 	end"

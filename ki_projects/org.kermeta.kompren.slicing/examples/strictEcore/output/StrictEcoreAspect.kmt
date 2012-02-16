@@ -297,11 +297,11 @@ aspect class EFactory inherits SlicerVisitor {
 	end
 }
 
-aspect class EAttribute {
+aspect class ETypeParameter {
 	method createFrom() : Object is do
-		var theEAttribute : EAttribute init self.getMetaClass().new.asType(EAttribute)
-		theEAttribute.name := self.name
-		result := theEAttribute
+		var theETypeParameter : ETypeParameter init self.getMetaClass().new.asType(ETypeParameter)
+		theETypeParameter.name := self.name
+		result := theETypeParameter
 	end
 
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
@@ -326,11 +326,11 @@ aspect class EAttribute {
 	end
 }
 
-aspect class EDataType {
+aspect class EReference {
 	method createFrom() : Object is do
-		var theEDataType : EDataType init self.getMetaClass().new.asType(EDataType)
-		theEDataType.name := self.name
-		result := theEDataType
+		var theEReference : EReference init self.getMetaClass().new.asType(EReference)
+		theEReference.name := self.name
+		result := theEReference
 	end
 
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
@@ -383,6 +383,7 @@ aspect class EPackage {
 			self.eFactoryInstance.visitToAddRelations(theStrictEcore)
 			if(self.eFactoryInstance.sliced) then
 				self.clone.asType(EPackage).eFactoryInstance := self.eFactoryInstance.clone.asType(EFactory)
+				theStrictEcore.addToRoot(self.eFactoryInstance.clone)
 			end
 
 			self.visitedPass := false
@@ -390,11 +391,11 @@ aspect class EPackage {
 	end
 }
 
-aspect class EReference {
+aspect class EDataType {
 	method createFrom() : Object is do
-		var theEReference : EReference init self.getMetaClass().new.asType(EReference)
-		theEReference.name := self.name
-		result := theEReference
+		var theEDataType : EDataType init self.getMetaClass().new.asType(EDataType)
+		theEDataType.name := self.name
+		result := theEDataType
 	end
 
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
@@ -419,11 +420,11 @@ aspect class EReference {
 	end
 }
 
-aspect class ETypeParameter {
+aspect class EAttribute {
 	method createFrom() : Object is do
-		var theETypeParameter : ETypeParameter init self.getMetaClass().new.asType(ETypeParameter)
-		theETypeParameter.name := self.name
-		result := theETypeParameter
+		var theEAttribute : EAttribute init self.getMetaClass().new.asType(EAttribute)
+		theEAttribute.name := self.name
+		result := theEAttribute
 	end
 
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
