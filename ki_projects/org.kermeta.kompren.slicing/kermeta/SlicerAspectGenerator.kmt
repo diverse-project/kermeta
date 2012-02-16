@@ -366,59 +366,61 @@ class SlicerAspectGenerator inherits Generator {
 									nameVarPruner : String, classVisit : Boolean) : String is do
 		result := ""
 		
-		var radiusCode : String
-		var relName : String init ref.getValidKermetaName()
-
-		if(not slicerGenerator.slicerModel.radius.isVoid) then
-			if(slicerGenerator.slicerModel.radius.focusedClasses.exists{cl |
-				ref.eContainingClass==cl or cl.domain.isSuperTypeOf(ref.eContainingClass) or 
-				ref.eContainingClass.isSuperTypeOf(cl.domain)}) then
-				radiusCode := ", currentRadius+1"
+		if(not ref.derived) then
+			var radiusCode : String
+			var relName : String init ref.getValidKermetaName()
+	
+			if(not slicerGenerator.slicerModel.radius.isVoid) then
+				if(slicerGenerator.slicerModel.radius.focusedClasses.exists{cl |
+					ref.eContainingClass==cl or cl.domain.isSuperTypeOf(ref.eContainingClass) or 
+					ref.eContainingClass.isSuperTypeOf(cl.domain)}) then
+					radiusCode := ", currentRadius+1"
+				else
+					radiusCode := ", currentRadius"
+				end
+			else radiusCode := "" end
+	
+			result := result + "\t\t\t"
+	
+			if(isOption) then
+				result := result + "if(" + nameVarPruner + ".consider" + ref.name + ") then "
+			end
+	
+			if(ref.upperBound==1) then
+				if(ref.lowerBound==0) then
+					result := result + "if(not self." + relName + ".isVoid) then " 
+				end
+				result := result + "self." + relName + "." + visitMethodName + "(" + nameVarPruner +
+						radiusCode + ")" + generateAddRelations(classVisit, ref.asType(EReference))
+	
+				if(slicerGenerator.slicerModel.strict and not classVisit) then
+					result := result + "\n\t\t\tif(self." + ref.name + ".sliced) then\n\t\t\t\tself.clone.asType(" + 
+							ref.container().asType(EClassifier).name + ")." + ref.name + " := self." + 
+							ref.name + ".clone.asType(" + ref.eType.name + ")\n\t\t\tend\n"
+				end
+	
+				if(ref.lowerBound==0) then
+					result := result + " end"
+				end
 			else
-				radiusCode := ", currentRadius"
+				var nameVar : String init ref.eType.asType(EClass).getVarNameClassifier()
+	
+				result := result + "self." + relName + ".each{" + nameVar + " | " + nameVar + 
+						"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
+						generateAddRelations(classVisit, ref.asType(EReference))
+						
+				if(slicerGenerator.slicerModel.strict and not classVisit) then
+					result := result + "\n\t\t\t\tif(not clone.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
+								"clone.asType(" + ref.container().asType(EClassifier).name + ")." + ref.name + 
+								".add(" + nameVar +".clone.asType(" + ref.eType.name + "))\n\t\t\t\tend\n\t\t\t"
+				end
+						
+				result := result + "}"
 			end
-		else radiusCode := "" end
-
-		result := result + "\t\t\t"
-
-		if(isOption) then
-			result := result + "if(" + nameVarPruner + ".consider" + ref.name + ") then "
+	
+			if(isOption) then result := result + " end" end
+			result := result + "\n"
 		end
-
-		if(ref.upperBound==1) then
-			if(ref.lowerBound==0) then
-				result := result + "if(not self." + relName + ".isVoid) then " 
-			end
-			result := result + "self." + relName + "." + visitMethodName + "(" + nameVarPruner +
-					radiusCode + ")" + generateAddRelations(classVisit, ref.asType(EReference))
-
-			if(slicerGenerator.slicerModel.strict and not classVisit) then
-				result := result + "\n\t\t\tif(self." + ref.name + ".sliced) then\n\t\t\t\tself.clone.asType(" + 
-						ref.container().asType(EClassifier).name + ")." + ref.name + " := self." + 
-						ref.name + ".clone.asType(" + ref.eType.name + ")\n\t\t\tend\n"
-			end
-
-			if(ref.lowerBound==0) then
-				result := result + " end"
-			end
-		else
-			var nameVar : String init ref.eType.asType(EClass).getVarNameClassifier()
-
-			result := result + "self." + relName + ".each{" + nameVar + " | " + nameVar + 
-					"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
-					generateAddRelations(classVisit, ref.asType(EReference))
-					
-			if(slicerGenerator.slicerModel.strict and not classVisit) then
-				result := result + "\n\t\t\t\tif(not clone.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
-							"clone.asType(" + ref.container().asType(EClassifier).name + ")." + ref.name + 
-							".add(" + nameVar +".clone.asType(" + ref.eType.name + "))\n\t\t\t\tend\n\t\t\t"
-			end
-					
-			result := result + "}"
-		end
-
-		if(isOption) then result := result + " end" end
-		result := result + "\n"
 	end
 
 
