@@ -5,7 +5,7 @@ require "StrictEcore.kmt"
 using kermeta::standard
 using kermeta::utils
 class SlicerVisitor {
-	attribute clone : Object
+	reference clone : Object
 
 	attribute visitedPass : Boolean
 
@@ -50,7 +50,6 @@ aspect class EClass {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -68,16 +67,19 @@ aspect class EClass {
 			self.eSuperTypes.each{theEClass | theEClass.visitToAddRelations(theStrictEcore)
 				if(not clone.isVoid and theEClass.sliced) then
 					clone.asType(EClass).eSuperTypes.add(theEClass.clone.asType(EClass))
+					theStrictEcore.addToRoot(theEClass.clone)
 				end
 			}
 			self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visitToAddRelations(theStrictEcore)
 				if(not clone.isVoid and theEStructuralFeature.sliced) then
 					clone.asType(EClass).eStructuralFeatures.add(theEStructuralFeature.clone.asType(EStructuralFeature))
+					theStrictEcore.addToRoot(theEStructuralFeature.clone)
 				end
 			}
 			self.eOperations.each{theEOperation | theEOperation.visitToAddRelations(theStrictEcore)
 				if(not clone.isVoid and theEOperation.sliced) then
 					clone.asType(EClass).eOperations.add(theEOperation.clone.asType(EOperation))
+					theStrictEcore.addToRoot(theEOperation.clone)
 				end
 			}
 			self.visitedPass := false
@@ -103,6 +105,7 @@ aspect class ETypedElement {
 			if(not self.eType.isVoid) then self.eType.visitToAddRelations(theStrictEcore)
 			if(self.eType.sliced) then
 				self.clone.asType(ETypedElement).eType := self.eType.clone.asType(EClassifier)
+				theStrictEcore.addToRoot(self.eType.clone)
 			end
  end
 			self.visitedPass := false
@@ -123,7 +126,6 @@ aspect class EOperation {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -139,6 +141,7 @@ aspect class EOperation {
 			self.eParameters.each{theEParameter | theEParameter.visitToAddRelations(theStrictEcore)
 				if(not clone.isVoid and theEParameter.sliced) then
 					clone.asType(EOperation).eParameters.add(theEParameter.clone.asType(EParameter))
+					theStrictEcore.addToRoot(theEParameter.clone)
 				end
 			}
 			self.visitedPass := false
@@ -159,7 +162,6 @@ aspect class EParameter {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -189,7 +191,6 @@ aspect class EEnum {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -205,6 +206,7 @@ aspect class EEnum {
 			self.eLiterals.each{theEEnumLiteral | theEEnumLiteral.visitToAddRelations(theStrictEcore)
 				if(not clone.isVoid and theEEnumLiteral.sliced) then
 					clone.asType(EEnum).eLiterals.add(theEEnumLiteral.clone.asType(EEnumLiteral))
+					theStrictEcore.addToRoot(theEEnumLiteral.clone)
 				end
 			}
 			self.visitedPass := false
@@ -225,7 +227,6 @@ aspect class EEnumLiteral {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -273,7 +274,6 @@ aspect class EFactory inherits SlicerVisitor {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -289,6 +289,7 @@ aspect class EFactory inherits SlicerVisitor {
 			self.ePackage.visitToAddRelations(theStrictEcore)
 			if(self.ePackage.sliced) then
 				self.clone.asType(EFactory).ePackage := self.ePackage.clone.asType(EPackage)
+				theStrictEcore.addToRoot(self.ePackage.clone)
 			end
 
 			self.visitedPass := false
@@ -309,7 +310,6 @@ aspect class EAttribute {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -339,7 +339,6 @@ aspect class EDataType {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -369,7 +368,6 @@ aspect class EPackage {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -405,7 +403,6 @@ aspect class EReference {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
@@ -435,7 +432,6 @@ aspect class ETypeParameter {
 			super(theStrictEcore)
 			if(not self.sliced) then
 				self.clone := self.createFrom()
-				theStrictEcore.addToRoot(self.clone)
 				self.sliced := true
 			end
 			self.visitedPass := true
