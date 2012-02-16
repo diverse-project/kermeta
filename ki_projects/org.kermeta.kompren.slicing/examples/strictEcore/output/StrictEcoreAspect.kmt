@@ -167,6 +167,56 @@ aspect class EEnum {
 	end
 }
 
+aspect class EAttribute inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theEAttribute : EAttribute init self.getMetaClass().new.asType(EAttribute)
+		theEAttribute.name := self.name
+		result := theEAttribute
+	end
+	
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+
+aspect class EReference inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theEReference : EReference init self.getMetaClass().new.asType(EReference)
+		theEReference.name := self.name
+		result := theEReference
+	end
+	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) : Void is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
 aspect class ENamedElement inherits SlicerVisitor {
 	method visitToAddClasses(theStrictEcore : StrictEcore) : Void is do
 		checkInitialisation()

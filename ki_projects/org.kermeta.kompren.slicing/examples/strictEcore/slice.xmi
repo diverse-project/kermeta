@@ -4,17 +4,4 @@
   <ecore:EClass name="Command" eSuperTypes="/2"/>
   <ecore:EClass name="FMLAbstractCommand"/>
   <ecore:EClass name="FMCommand" eSuperTypes="/2"/>
-  <ecore:EAttribute name="root" eType="/5"/>
-  <ecore:EDataType name="EString"/>
-  <ecore:EReference name="features" eType="/7"/>
-  <ecore:EClass name="Production"/>
-  <ecore:EAttribute name="name" eType="/5"/>
-  <ecore:EReference name="features" eType="/10"/>
-  <ecore:EClass name="Child"/>
-  <ecore:EReference name="expr" eType="/12"/>
-  <ecore:EClass name="CNF"/>
-  <ecore:EReference name="file" eType="/14"/>
-  <ecore:EClass name="StringExpr" eSuperTypes="/1 /15"/>
-  <ecore:EClass name="StrCommand"/>
-  <ecore:EAttribute name="val" eType="/5"/>
 </xmi:XMI>
