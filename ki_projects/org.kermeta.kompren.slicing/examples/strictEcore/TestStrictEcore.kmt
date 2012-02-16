@@ -1,0 +1,41 @@
+/* $Id:$ 
+ * Creation : December 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "test::Test"
+@mainOperation "main"
+
+package test;
+
+require kermeta
+require "output/StrictEcore.kmt"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::utils
+using ecore
+
+
+class Test {
+	operation main() : Void is do
+		var inputRep : EMFRepository init EMFRepository.new
+		var inputRes : EMFResource
+		inputRes ?= inputRep.createResource("./FML.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+		inputRes.load()
+		var mu : EPackage
+		mu ?= inputRes.one
+		var requiredClazz : Bag<EClass> init Bag<EClass>.new
+		
+		var clazz : EClass init mu.eClassifiers.detect{clazz | clazz.isInstanceOf(EClass).andThen{b | clazz.asType(EClass).name=="FeatureModel"}}.asType(EClass)
+		requiredClazz.add(clazz)
+		var slicer : StrictEcore init StrictEcore.new.initialise(requiredClazz)
+		
+		slicer.launch()
+	end
+}
+
+
+
