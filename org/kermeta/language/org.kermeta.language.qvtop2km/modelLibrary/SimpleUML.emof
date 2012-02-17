@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="SimpleUML" uri="http:///SimpleUML.ecore">
+  <ownedType xsi:type="emof:Class" name="Classifier">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Attribute">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="kind" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="type" type="//@ownedType.0" isOrdered="true"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Class" superClass="//@ownedType.0">
+    <ownedAttribute name="kind" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="attribute" type="//@ownedType.1" isOrdered="true" upper="-1" isComposite="true"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Association">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="source" type="//@ownedType.2" isOrdered="true"/>
+    <ownedAttribute name="destination" type="//@ownedType.2" isOrdered="true"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="PrimitiveDataType" superClass="//@ownedType.0"/>
+</emof:Package>

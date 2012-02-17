@@ -8,7 +8,7 @@ package emof
 	
 		aspect class Object
 		{
-			reference output : Object
+			reference output : kermeta::standard::Object
 
 			operation domain2range(context : Qvt2KermetaContext) : ~Void is
 				abstract

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="SimpleRdbms" uri="http:///SimpleRdbms.ecore">
+  <ownedType xsi:type="emof:Class" name="Table">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="column" type="//@ownedType.1" isOrdered="true" upper="-1" isComposite="true"/>
+    <ownedAttribute name="key" type="//@ownedType.2" isOrdered="true" isComposite="true"/>
+    <ownedAttribute name="foreignKey" type="//@ownedType.3" isOrdered="true" upper="-1" isComposite="true"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Column">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="kind" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="type" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Key">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="column" type="//@ownedType.1" isOrdered="true" upper="-1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ForeignKey">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute name="column" type="//@ownedType.1" isOrdered="true" upper="-1"/>
+    <ownedAttribute name="refersTo" type="//@ownedType.2" isOrdered="true"/>
+  </ownedType>
+</emof:Package>

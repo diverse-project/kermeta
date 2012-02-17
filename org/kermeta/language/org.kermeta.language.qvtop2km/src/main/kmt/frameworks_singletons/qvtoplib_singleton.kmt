@@ -12,7 +12,7 @@ operation load(lib : Resource ) : Void is do
 	libs.add(lib)
 end
 
-
+	/**take a qvt qualified name and look for the corresponding object in the libs*/
 	operation getFromQVTID(qvtid : String) : Object is do
 		
 		var resourcesToSearch : Sequence<Resource> init libs.asSequence
@@ -25,12 +25,14 @@ end
 			
 			var toSearch : Sequence<Object> init Sequence<Object>.new
 		
+			//start looking from the root of the lib
 			toSearch.add(lib.getContents().one)
 			
-			from var current : emof::Object  
+			
+			from var current : emof::Object //all the content of the libs is supposed to be of type emof::Object  
 			until toSearch.empty
 			loop
-				current:=toSearch.first
+				current?=toSearch.first
 				toSearch.removeAt(0)
 				
 				if current!=void then
@@ -41,9 +43,24 @@ end
 							toSearch.clear
 						else
 							if (qvtid.contains(current.getQVTID)) then
-								//stdio.writeln("contains!!")
+								//if the current element is on the path to the searched element, prune all the other search branches
 								toSearch.clear
-								var cd : org::kermeta::language::structure::ClassDefinition 
+								
+								//TODO an if -else if syntax would be more readable
+								if current.isInstanceOf(emof::Package) then
+									current.asType(emof::Package).nestedPackage.each{p|toSearch.add(p)}
+									current.asType(emof::Package).ownedType.each{t|toSearch.add(t)}
+								end
+								if current.isInstanceOf(emof::Class) then
+									current.asType(emof::Class).ownedAttribute.each{a|toSearch.add(a)}
+									current.asType(emof::Class).ownedOperation.each{o|toSearch.add(o)}
+								end
+								
+								if current.isInstanceOf(emof::Enumeration) then
+									current.asType(emof::Enumeration).ownedLiteral.each{l|toSearch.add(l)}
+								end
+								
+								/*var cd : org::kermeta::language::structure::ClassDefinition 
 								cd?= current.getMetaClass.typeDefinition
 								//stdio.writeln("all attributes "+ cd.allAttribute.size.toString)
 								cd.allAttribute.each{att|
@@ -54,7 +71,7 @@ end
 											current.get(att).asType(Collection<Object>).each{y|toSearch.add(y)}
 										end
 									end
-									}
+									}*/
 							end
 						end
 					end	

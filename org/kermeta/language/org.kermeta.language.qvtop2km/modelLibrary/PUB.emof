@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="_0"
+    name="PUB" uri="http:///PUB.ecore">
+  <ownedType xmi:type="emof:Class" xmi:id="_0.@ownedType.0" name="Publication">
+    <ownedAttribute xmi:id="_0.@ownedType.0.@ownedAttribute.0" name="title" isOrdered="true">
+      <type xmi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_0.@ownedType.0.@ownedAttribute.1" name="nbPages" isOrdered="true">
+      <type xmi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+</emof:Package>

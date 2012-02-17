@@ -756,6 +756,7 @@ aspect class OperationalTransformation {
 	operation genClassDefinition(context : Qvt2KermetaContext) : Void is do
 		//StdIO.writeln("OperationalTransformation::genClassDefinition") 
 		ownedOperation.each{op | 
+				StdIO.writeln("genClassDef")
 				if op.isInstanceOf(qvtoperational::ImperativeOperation)
 					.andThen{x|op.asType(ImperativeOperation).context!=void} then
 					createTypeDefinition(op.asType(ImperativeOperation).context.type, context) 
@@ -765,12 +766,13 @@ aspect class OperationalTransformation {
 	end
 
 	operation createTypeDefinition(type : emof::Type, context : Qvt2KermetaContext) : Void is do 
-		//StdIO.writeln("OperationalTransformation::createTypeDefinition")
-		//StdIO.writeln("createContext "+type.name)
+		StdIO.writeln("OperationalTransformation::createTypeDefinition")
+		StdIO.writeln("createContext "+type.toString)
+		StdIO.writeln("name"+type.name)
 		createPackage(type.container.asType(emof::Package), context)
 		type.range2domain(context)
 		type.container.asType(emof::Package).output.asType(org::kermeta::language::structure::Package).ownedTypeDefinition.add(type.output.asType(org::kermeta::language::structure::TypeDefinition))
-		//StdIO.writeln("OperationalTransformation::createTypeDefinition-end")
+		StdIO.writeln("OperationalTransformation::createTypeDefinition-end")
 	end
 
 	operation createPackage(pack : emof::Package, context : Qvt2KermetaContext) : Void is do
@@ -973,15 +975,17 @@ aspect class ModelType {
 
 method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
 	if output==void then
-		//StdIO.writeln("ModelType::range2domain")
+		StdIO.writeln("ModelType::range2domain")
 		
 		var out : org::kermeta::language::structure::ModelingUnit init org::kermeta::language::structure::ModelingUnit.new
 		output:=out
+		StdIO.writeln("mt1")
 		metamodel.each{x|
 				x.asType(emof::Object).range2domain(context) 
+				StdIO.writeln("mt2")
 				out.packages.add(x.output.asType(org::kermeta::language::structure::Package))
 				}
-		//StdIO.writeln("ModelType::range2domain-end")
+		StdIO.writeln("ModelType::range2domain-end")
 	end	
 
 end

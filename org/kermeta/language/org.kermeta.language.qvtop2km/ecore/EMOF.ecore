@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="EMOF"
+    name="emof" nsURI="http://schema.omg.org/spec/QVT/1.0/emof.xml" nsPrefix="emof">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Class" name="Class" eSuperTypes="#EMOF.Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Class.isAbstract"
+        name="isAbstract" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.ownedAttribute"
+        name="ownedAttribute" upperBound="-1" eType="#EMOF.Property" containment="true"
+        eOpposite="#EMOF.Property.class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.ownedOperation"
+        name="ownedOperation" upperBound="-1" eType="#EMOF.Operation" containment="true"
+        eOpposite="#EMOF.Operation.class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Class.superClass"
+        name="superClass" ordered="false" upperBound="-1" eType="#EMOF.Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Comment" name="Comment" eSuperTypes="#EMOF.Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Comment.annotatedElement"
+        name="annotatedElement" ordered="false" upperBound="-1" eType="#EMOF.NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Comment.body" name="body"
+        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.DataType" name="DataType" eSuperTypes="#EMOF.Type"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Element" name="Element" abstract="true"
+      eSuperTypes="#EMOF.Object">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Element.ownedComment"
+        name="ownedComment" ordered="false" upperBound="-1" eType="#EMOF.Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Enumeration" name="Enumeration"
+      eSuperTypes="#EMOF.DataType">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Enumeration.ownedLiteral"
+        name="ownedLiteral" upperBound="-1" eType="#EMOF.EnumerationLiteral" containment="true"
+        eOpposite="#EMOF.EnumerationLiteral.enumeration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.EnumerationLiteral" name="EnumerationLiteral"
+      eSuperTypes="#EMOF.NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.EnumerationLiteral.enumeration"
+        name="enumeration" ordered="false" eType="#EMOF.Enumeration" transient="true"
+        eOpposite="#EMOF.Enumeration.ownedLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Extent" name="Extent" eSuperTypes="#EMOF.Object"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Factory" name="Factory" eSuperTypes="#EMOF.Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Factory.package"
+        name="package" ordered="false" lowerBound="1" eType="#EMOF.Package"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.MultiplicityElement" name="MultiplicityElement"
+      abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.isOrdered"
+        name="isOrdered" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.isUnique"
+        name="isUnique" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.lower"
+        name="lower" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Integer"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.MultiplicityElement.upper"
+        name="upper" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.UnlimitedNatural"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.NamedElement" name="NamedElement"
+      abstract="true" eSuperTypes="#EMOF.Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.NamedElement.name"
+        name="name" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Object" name="Object"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Operation" name="Operation" eSuperTypes="#EMOF.TypedElement #EMOF.MultiplicityElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.class"
+        name="class" ordered="false" eType="#EMOF.Class" transient="true" eOpposite="#EMOF.Class.ownedOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.ownedParameter"
+        name="ownedParameter" upperBound="-1" eType="#EMOF.Parameter" containment="true"
+        eOpposite="#EMOF.Parameter.operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Operation.raisedException"
+        name="raisedException" ordered="false" upperBound="-1" eType="#EMOF.Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Package" name="Package" eSuperTypes="#EMOF.NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.nestedPackage"
+        name="nestedPackage" ordered="false" upperBound="-1" eType="#EMOF.Package"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Package.ownedType"
+        name="ownedType" ordered="false" upperBound="-1" eType="#EMOF.Type" containment="true"
+        eOpposite="#EMOF.Type.package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Package.uri" name="uri"
+        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Parameter" name="Parameter" eSuperTypes="#EMOF.TypedElement #EMOF.MultiplicityElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Parameter.operation"
+        name="operation" ordered="false" eType="#EMOF.Operation" transient="true"
+        eOpposite="#EMOF.Operation.ownedParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.PrimitiveType" name="PrimitiveType"
+      eSuperTypes="#EMOF.DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Property" name="Property" eSuperTypes="#EMOF.TypedElement #EMOF.MultiplicityElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.class"
+        name="class" ordered="false" eType="#EMOF.Class" transient="true" eOpposite="#EMOF.Class.ownedAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.default"
+        name="default" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isComposite"
+        name="isComposite" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isDerived"
+        name="isDerived" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isID" name="isID"
+        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Property.isReadOnly"
+        name="isReadOnly" eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Property.opposite"
+        name="opposite" ordered="false" eType="#EMOF.Property"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.ReflectiveCollection" name="ReflectiveCollection"
+      eSuperTypes="#EMOF.Object"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.ReflectiveSequence" name="ReflectiveSequence"
+      eSuperTypes="#EMOF.ReflectiveCollection"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Tag" name="Tag" eSuperTypes="#EMOF.Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Tag.element" name="element"
+        ordered="false" upperBound="-1" eType="#EMOF.Element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Tag.name" name="name"
+        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="EMOF.Tag.value" name="value"
+        eType="ecore:EDataType PrimitiveTypes.ecore#PrimitiveTypes.String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.Type" name="Type" abstract="true"
+      eSuperTypes="#EMOF.NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.Type.package" name="package"
+        ordered="false" eType="#EMOF.Package" transient="true" eOpposite="#EMOF.Package.ownedType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.TypedElement" name="TypedElement"
+      abstract="true" eSuperTypes="#EMOF.NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="EMOF.TypedElement.type"
+        name="type" ordered="false" eType="#EMOF.Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="EMOF.URIExtent" name="URIExtent" eSuperTypes="#EMOF.Extent"/>
+</ecore:EPackage>
