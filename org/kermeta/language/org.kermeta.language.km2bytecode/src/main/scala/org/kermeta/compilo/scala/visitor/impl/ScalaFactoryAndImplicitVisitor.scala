@@ -358,7 +358,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
           implicitDef.append(" if (v.isInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect])\n")
           implicitDef.append("  return v.asInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect]\n")
           implicitDef.append(" else\n")
-          implicitDef.append("  return utils.ConvertGenericType.convert(v).asInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect]\n")
+          implicitDef.append("  return k2.utils.ConvertGenericType.convert(v).asInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect]\n")
           implicitDef.append("  }\n")
 
         } else {
