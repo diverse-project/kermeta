@@ -94,7 +94,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     
     res.append("this.")
    
-    val baseName = currentname.substring(0, 1).toUpperCase + currentname.substring(1, thi.getName.size)
+    val baseName = currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
     var useIs = false	  
     if (Util.hasEcoreTag(thi)){
     	var s: StringBuilder = new StringBuilder
