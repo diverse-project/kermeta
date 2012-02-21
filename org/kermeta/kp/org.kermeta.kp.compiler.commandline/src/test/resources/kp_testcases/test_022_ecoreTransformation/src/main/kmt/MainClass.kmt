@@ -7,23 +7,34 @@ package mainPackage{
 	{
 		operation mainOperation() : Void is do 
 			//true.andThen{x|false}
-			/*var repository : ResourceSet init ResourceSet.new
+			var repository : ResourceSet init ResourceSet.new
 	   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
 	   		var resource : Resource init repository.createResource("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore",
 	   															   "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore")
 	   		//var resource : Resource init repository.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
 	   		//																							"file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/ClassMM.ecore")
 	       	resource.load(void)      
-	       	       
-	       from var it : Iterator<Object> init resource.getContents.iterator
-	       until it.isOff
-	       loop
-	           var next : Object init it.next
-	      */    /* if (next.isInstanceOf(ClassModel)) then                 
-	           		result ?= next
-	           end */
-	      /*     stdio.writeln(next.toString)
-	       end */
+	       	
+	       	
+	       	stdio.writeln(resource.getContents.one.toString)
+	       	var pack : ecore::EPackage init resource.getContents.one.asType(ecore::EPackage)
+	        pack.eClassifiers.each{c |
+	        	stdio.writeln(c.name)
+	        }
+	       
+	       
 		end 
 	}
+	
+	
+    class MainClass2
+    {
+        attribute x : Boolean
+        operation mainOperation() : Void is do
+            var z : MainClass2  init MainClass2.new
+            z.x
+
+        end
+    }
+
 }
