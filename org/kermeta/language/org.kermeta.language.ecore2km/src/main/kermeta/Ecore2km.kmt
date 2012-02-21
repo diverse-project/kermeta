@@ -3,6 +3,7 @@
  * Licence  : EPL
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
+ *			  Didier Vojtisek
  */
 @mainClass "org::kermeta::language::ecore2km::Ecore2km"
 @mainOperation "foo"

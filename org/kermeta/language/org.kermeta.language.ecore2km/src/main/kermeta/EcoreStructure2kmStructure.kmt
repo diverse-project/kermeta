@@ -184,7 +184,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		if(isDataType or genericType.isVoid.orElse{b | genericType.eTypeParameter.isVoid and 
 		   (genericType.eClassifier.isVoid or genericType.eClassifier==type)}) then
 			if(type.isVoid) then
-				result := void
+				result := void				
 			else // If there is a return type, an unresolved type is created.
 				// If the type is a data type, we check if the data type has an equivalent Kermeta primitive type.
 				var typeName : String
@@ -231,6 +231,21 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			result := UnresolvedType.new.initialize(checkEObjectType(typeName))
 			genericType.targetKermetaObject := result
 		end
+		if(not genericType.isVoid) then
+			
+			genericType.eTypeArguments.each{ ta |
+				var unresolvedTypeArgument : UnresolvedType init getUnresolvedType(ta, void)
+				// When it is null, e.g. A<?> we need to add a unresolved to Object, 
+				// otherwise the case is taken into account by the normal visitor
+				if (unresolvedTypeArgument.isVoid) then
+					unresolvedTypeArgument := UnresolvedType.new.initialize("kermeta::standard::Object")
+					result.generics.add( unresolvedTypeArgument)
+					result.containedType.add(unresolvedTypeArgument)
+				end
+				
+			}
+		end
+		
 	end
 
 
@@ -395,6 +410,13 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 					var kmTag : Tag init Tag.new.initialize("ecore.EDataType_instanceClassName", dataType.instanceClassName, kmClassDef)
 					kmClassDef.kTag.add(kmTag)
 					kmClassDef.kOwnedTags.add(kmTag)
+					
+					// also add a compilerIgnore tag until we find a way to use Trait on any java class ...
+					// currently the compiler will always use the instanceClassName instead of a kermeta aware trait
+					var kmTag2 : Tag init Tag.new.initialize("CompilerIgnore", "true", kmClassDef)
+					kmClassDef.kTag.add(kmTag2)
+					kmClassDef.kOwnedTags.add(kmTag2)
+					
 					// The Kermeta class is added to its Kermeta package. This package is found using the reference
 					// of the ecore package that contains the given ecore class.
 					dataType.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmClassDef)
