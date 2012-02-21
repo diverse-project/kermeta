@@ -28,9 +28,9 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   //TODO
 	def isSet(property : org.kermeta.language.structure.Property) : Boolean =false
   //TODO
-	def isFrozen() : Boolean = false
+	//def isKFrozen() : Boolean 
   //TODO
-  def freeze() ={}
+  //def kfreeze() 
   //TODO
 	def containingResource() : RichResource = {null.asInstanceOf[RichResource]}
 	
