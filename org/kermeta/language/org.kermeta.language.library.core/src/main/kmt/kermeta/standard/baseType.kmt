@@ -172,13 +172,13 @@ class Object
 	operation toString() : String is do
 	end
 
-	/**
+	/* *
 	 * Returns a Boolean stating whether the Object is currently in a
 	 * frozen state
 	 */
-	@CompilerIgnore "true"
+	/* @CompilerIgnore "true"
 	operation isFrozen() : Boolean is do
-	end
+	end */
 
 	/**
 	 * Returns a Boolean stating whether the Object is Void
@@ -196,12 +196,12 @@ class Object
 	operation hashcode() : Integer is do		
 	end
 
-	/**
+	/* *
 	 * Freeze the Object
 	 */
-	@CompilerIgnore "true"
+	/* @CompilerIgnore "true"
 	operation freeze() : Void is do
-	end
+	end */
 
 	/**
 	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
