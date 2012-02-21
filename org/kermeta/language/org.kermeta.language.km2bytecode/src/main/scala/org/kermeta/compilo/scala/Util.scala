@@ -29,6 +29,23 @@ object Util extends LogAspect {
     def hasEcoreTag(obj : KermetaModelElement) : Boolean = {
         obj.getKOwnedTags().exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
     }
+    
+    /**
+     * Check if a model element has an ecore.EDataType_instanceClassName Tag
+     * @param obj model element to test
+     * @return true if ecore tag is found
+     */
+    def hasEcoreEDataTypeInstanceClassNameTag(obj : KermetaModelElement) : Boolean = {
+        obj.getKOwnedTags().exists(e=> "ecore.EDataType_instanceClassName".equals(e.asInstanceOf[Tag].getName()))
+    }
+    /**
+     * Check if a model element has an ecore.EDataType_instanceClassName Tag
+     * @param obj model element to test
+     * @return true if ecore tag is found
+     */
+    def getEcoreEDataTypeInstanceClassNameTag(obj : KermetaModelElement) : String = {
+        obj.getKOwnedTags().find(e=> "ecore.EDataType_instanceClassName".equals(e.asInstanceOf[Tag].getName())).get.getValue()
+    }
 
     /**
      * Check if a model element has an EcoreFromAPI Tag

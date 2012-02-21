@@ -698,11 +698,18 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         return p.getName()
       }
       case c: Class => {
-        var res = new StringBuilder
-        var typename = Util.protectScalaKeyword(getQualifiedNamedBase(c.getTypeDefinition))
-        if (typename.contains(".")) res.append("_root_.")
-        res.append(typename)
-
+        
+        if (Util.hasEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)) {
+        	// special case for types that are mapped to java types in Ecore
+        	return Util.getEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)
+        }
+        else {
+        	var res = new StringBuilder
+	        var typename = Util.protectScalaKeyword(getQualifiedNamedBase(c.getTypeDefinition))
+	        if (typename.contains(".")) res.append("_root_.")
+	        res.append(typename)
+	        return res.toString
+        }
         /*if (this.getTypeParamBinding.size>0){
 	         var i = 0;
 	         res.append("[")
@@ -714,7 +721,6 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 	         res.append("]")
 	
 	         }*/
-        return res.toString
 
       }
       case (pt: PrimitiveType) => {
