@@ -134,6 +134,11 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		if((not eAttr.eContainingClass.targetKermetaObject.isVoid).andThen{b | eAttr.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
 			var prop : Property init addProperty(true, eAttr.name, eAttr.ordered, eAttr.derived, not eAttr.changeable, eAttr.eType, 
 												 eAttr.eGenericType, eAttr.lowerBound, eAttr.upperBound)
+			if eAttr.transient then
+				var kmTag : Tag init Tag.new.initialize("ecore.isTransient", "true", prop)
+				prop.kTag.add(kmTag)
+				prop.kOwnedTags.add(kmTag)												 
+			end
 			// Adding the created Kermeta property to its class definition.
 			eAttr.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedAttribute.add(prop)
 			// Linking the created Kermeta property to the Ecore attribute.
@@ -189,8 +194,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 					if typeName.isVoid then 
 						// If the type is not a kermeta-like primitype type, the type is kermeta::standard::Object.
-						stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
-						typeName := "kermeta::standard::Object"
+						//stdio.writeln("DataType " + type.name + " not mapped in Kermeta; using Object instead")
+						//typeName := "kermeta::standard::Object"
+						typeName := checkEObjectType(type.getQualifiedName())
 					end 
 				else
 					if(type.hasInstanceClassName ) then
@@ -283,6 +289,13 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			
 			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
 												 ref.eGenericType, ref.lowerBound, ref.upperBound)
+												 
+			if ref.transient then
+				var kmTag : Tag init Tag.new.initialize("ecore.isTransient", "true", prop)
+				prop.kTag.add(kmTag)
+				prop.kOwnedTags.add(kmTag)												 
+			end												 
+												 
 			var classDef : ClassDefinition init ref.eContainingClass.targetKermetaObject.asType(ClassDefinition)
 			
 			// Adding the created Kermeta property to its class definition.
@@ -365,6 +378,37 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		super(eclass)
 	end
 
+	method visitEDataType(dataType : EDataType) : Void is do
+		// If does not have a package, it is no created.
+		if((not dataType.ePackage.isVoid).andThen{ b | dataType.ePackage.targetKermetaObject.isKindOf(Package) } ) then
+			if dataType.hasInstanceClassName() then
+				// deal only with well formed DataType : ie. those with an instanceclassName
+				var typeName : String
+				typeName := primitiveTypeMappings.getValue(dataType.instanceClassName)
+				if typeName.isVoid then 
+					// If the type is not a kermeta-like primitype type, then create a ClassDefintion to hold its data.
+					// Creation of the Kermeta class.
+					var kmClassDef : ClassDefinition init ClassDefinition.new.initialize(dataType.name, false, false, void)
+					// Each ecore class must be associated a tag.
+					addEcoreTag(kmClassDef)
+					// if the class has a instance class name, add a tag
+					var kmTag : Tag init Tag.new.initialize("ecore.EDataType_instanceClassName", dataType.instanceClassName, kmClassDef)
+					kmClassDef.kTag.add(kmTag)
+					kmClassDef.kOwnedTags.add(kmTag)
+					// The Kermeta class is added to its Kermeta package. This package is found using the reference
+					// of the ecore package that contains the given ecore class.
+					dataType.ePackage.targetKermetaObject.asType(Package).ownedTypeDefinition.add(kmClassDef)
+					// The reference to the kermeta class is added to the ecore class.
+					dataType.targetKermetaObject := kmClassDef
+					traceRegistry.addTraceFromObjects(dataType, kmClassDef, void)
+					
+				end 
+			else
+				stdio.writeln("Ignoring illformed DataType " + dataType.name + " because it has no instanceClassName")
+			end
+		end
+		super(dataType)
+	end
 
 
 	method visitEAnnotation(annot : EAnnotation) : Void is do
