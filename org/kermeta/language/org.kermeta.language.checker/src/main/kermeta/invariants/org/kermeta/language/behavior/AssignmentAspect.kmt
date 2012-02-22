@@ -45,12 +45,13 @@ aspect class Assignment
 	inv type_mismatch is do
 		
 		//stdio.writeln("Assignment type_mismatch check")
-		if (self.isCast)
+		if (self.isCast.isVoid.andThen{b|not(self.isCast)})
 		then
-			true
-		else
 			var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
 			self.~value.staticType.isSubTypeOf(self.target.staticType,typeVariableToSet)
+		else
+			true
+			
 		end
 		
 	end
