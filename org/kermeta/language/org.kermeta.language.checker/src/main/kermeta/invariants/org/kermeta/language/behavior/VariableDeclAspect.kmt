@@ -12,6 +12,13 @@ package org::kermeta::language::behavior;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+//require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
+using org::kermeta::language::structure
+using kermeta::utils
 
 aspect class VariableDecl
 {
@@ -22,15 +29,44 @@ aspect class VariableDecl
 	@Scope "MERGED"
 	inv no_nested_init is do
 		
-		stdio.writeln("Checking no_nested_init for " + self.toString)
+		//stdio.writeln("Checking no_nested_init for " + self.toString)
 		
 		if not(self.initialization.isVoid)
 		then
-			stdio.writeln("  init:" + self.initialization.toString)
+			//stdio.writeln("  init:" + self.initialization.toString)
 			not(self.initialization.isInstanceOf(VariableDecl))
 		else
 			true
 		end
+	end
+	
+	/**
+	 * Type mismatch. Value does not match the variable's type
+	 */
+	@Scope "RESOLVED"
+	inv type_mismatch is do
+		
+		//stdio.writeln("VariableDecl TypeMismatchInv check")
+		
+		// self.initialization.staticType must be a subtype of self.type.type
+		if (self.initialization.isVoid)
+		then
+			//no init -> true
+			true	
+		else
+			//stdio.writeln(" init -> self.initialization.staticType : " + self.initialization.staticType.toString)
+			//stdio.writeln(" init ->     			self.type.type : " + self.type.type.toString)
+			if (self.initialization.staticType.isKindOf(Class) and self.type.type.isKindOf(Class))
+			then
+				//var cl : Class init self.initialization.staticType.asType(Class).getComparableClass(self.type.type.asType(Class))
+				//stdio.writeln(" cl found : " + cl.toString)
+				var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+				self.initialization.staticType.isSubTypeOf(self.type.type, typeVariableToSet)
+			else
+				false
+			end
+		end 
+		
 	end
 	
 }
