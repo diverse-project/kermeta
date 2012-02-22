@@ -13,7 +13,10 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
 using org::kermeta::language::structure
+using kermeta::utils
 
 aspect class Assignment
 {
@@ -26,7 +29,6 @@ aspect class Assignment
 	
 		//stdio.writeln("Checking assignment : " + self.toString)
 		//stdio.writeln(" the target : " + self.target.toString)
-		// Does the assignment concern a CallFeature ?
 		if (self.target.isInstanceOf(CallProperty))
 		then
 			stdio.writeln(self.target.asType(CallProperty).staticProperty.upper.toString)
@@ -36,5 +38,15 @@ aspect class Assignment
 		end
 	end
 
-
+	/**
+	 * Type mismatch. Value does not match the variable's type
+	 */
+	@Scope "RESOLVED"
+	inv type_mismatch is do
+		
+		//stdio.writeln("Assignment type_mismatch check")
+		var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+		self.~value.staticType.isSubTypeOf(self.target.staticType,typeVariableToSet)
+		
+	end
 }
