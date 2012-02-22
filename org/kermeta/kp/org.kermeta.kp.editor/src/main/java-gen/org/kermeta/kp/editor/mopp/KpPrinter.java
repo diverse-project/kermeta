@@ -59,6 +59,10 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			print_org_kermeta_kp_Source((org.kermeta.kp.Source) element, globaltab, out);
 			return;
 		}
+		if (element instanceof org.kermeta.kp.PackageEquivalence) {
+			print_org_kermeta_kp_PackageEquivalence((org.kermeta.kp.PackageEquivalence) element, globaltab, out);
+			return;
+		}
 		if (element instanceof org.kermeta.kp.Dependency) {
 			print_org_kermeta_kp_Dependency((org.kermeta.kp.Dependency) element, globaltab, out);
 			return;
@@ -126,7 +130,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(8);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(9);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
@@ -144,6 +148,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		printCountingMap.put("defaultMainOperation", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__GROUP));
 		printCountingMap.put("group", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES));
+		printCountingMap.put("packageEquivalences", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		boolean iterate = true;
@@ -235,6 +241,11 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			alt = 6;
 			matches = tempMatchCount;
 		}
+		tempMatchCount = 		0;
+		if (tempMatchCount > matches) {
+			alt = 7;
+			matches = tempMatchCount;
+		}
 		switch(alt) {
 			case 1:			{
 				// DEFINITION PART BEGINS (CompoundDefinition)
@@ -264,6 +275,11 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			case 6:			{
 				// DEFINITION PART BEGINS (CompoundDefinition)
 				print_org_kermeta_kp_KermetaProject_0_0_6(element, localtab, out, printCountingMap);
+			}
+			break;
+			case 7:			{
+				// DEFINITION PART BEGINS (CompoundDefinition)
+				print_org_kermeta_kp_KermetaProject_0_0_7(element, localtab, out, printCountingMap);
 			}
 			break;
 			default:			// DEFINITION PART BEGINS (CompoundDefinition)
@@ -406,7 +422,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("sources");
+		out.print("packageEquivalences");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CsString)
 		out.print("=");
@@ -444,9 +460,9 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
-		count = printCountingMap.get("sources");
+		count = printCountingMap.get("packageEquivalences");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__SOURCES));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES));
 			java.util.List<?> list = (java.util.List<?>) o;
 			int index = list.size() - count;
 			if (index >= 0) {
@@ -457,7 +473,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			if (o != null) {
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
-			printCountingMap.put("sources", count - 1);
+			printCountingMap.put("packageEquivalences", count - 1);
 		}
 	}
 	
@@ -468,7 +484,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("options");
+		out.print("sources");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CsString)
 		out.print("=");
@@ -506,9 +522,9 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
-		count = printCountingMap.get("options");
+		count = printCountingMap.get("sources");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__OPTIONS));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__SOURCES));
 			java.util.List<?> list = (java.util.List<?>) o;
 			int index = list.size() - count;
 			if (index >= 0) {
@@ -519,7 +535,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			if (o != null) {
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
-			printCountingMap.put("options", count - 1);
+			printCountingMap.put("sources", count - 1);
 		}
 	}
 	
@@ -530,7 +546,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("weaveDirectives");
+		out.print("options");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CsString)
 		out.print("=");
@@ -565,6 +581,68 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 	}
 	
 	public void print_org_kermeta_kp_KermetaProject_0_0_6_0(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("options");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__OPTIONS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("options", count - 1);
+		}
+	}
+	
+	public void print_org_kermeta_kp_KermetaProject_0_0_7(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("weaveDirectives");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("{");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_org_kermeta_kp_KermetaProject_0_0_7_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (LineBreak)
+		localtab += "	";
+		out.println();
+		out.print(localtab);
+		// DEFINITION PART BEGINS (CsString)
+		out.print("}");
+		out.print(" ");
+	}
+	
+	public void print_org_kermeta_kp_KermetaProject_0_0_7_0(org.kermeta.kp.KermetaProject element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
@@ -653,6 +731,63 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 	}
 	
 	
+	public void print_org_kermeta_kp_PackageEquivalence(org.kermeta.kp.PackageEquivalence element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.PACKAGE_EQUIVALENCE__ECORE_PACKAGE));
+		printCountingMap.put("ecorePackage", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.PACKAGE_EQUIVALENCE__JAVA_PACKAGE));
+		printCountingMap.put("javaPackage", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (LineBreak)
+		localtab += "		";
+		out.println();
+		out.print(localtab);
+		// DEFINITION PART BEGINS (CsString)
+		out.print("packageEquivalence");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("ecorePackage");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.PACKAGE_EQUIVALENCE__ECORE_PACKAGE));
+			if (o != null) {
+				org.kermeta.kp.editor.IKpTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.PACKAGE_EQUIVALENCE__ECORE_PACKAGE), element));
+				out.print(" ");
+			}
+			printCountingMap.put("ecorePackage", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_org_kermeta_kp_PackageEquivalence_0(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("javaPackage");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.PACKAGE_EQUIVALENCE__JAVA_PACKAGE));
+			if (o != null) {
+				org.kermeta.kp.editor.IKpTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.PACKAGE_EQUIVALENCE__JAVA_PACKAGE), element));
+				out.print(" ");
+			}
+			printCountingMap.put("javaPackage", count - 1);
+		}
+	}
+	
+	public void print_org_kermeta_kp_PackageEquivalence_0(org.kermeta.kp.PackageEquivalence element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+	}
+	
+	
 	public void print_org_kermeta_kp_Dependency(org.kermeta.kp.Dependency element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -660,7 +795,7 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(6);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
@@ -670,6 +805,8 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		printCountingMap.put("ignoreByteCode", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__SOURCE_ONLY));
 		printCountingMap.put("sourceOnly", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__GENMODEL));
+		printCountingMap.put("genmodel", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__BYTE_CODE_ONLY));
 		printCountingMap.put("byteCodeOnly", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -748,6 +885,19 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_org_kermeta_kp_Dependency_3(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 	}
 	
 	public void print_org_kermeta_kp_Dependency_0(org.kermeta.kp.Dependency element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
@@ -814,6 +964,28 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 	}
 	
 	public void print_org_kermeta_kp_Dependency_2(org.kermeta.kp.Dependency element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("genmodel");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("genmodel");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__GENMODEL));
+			if (o != null) {
+				org.kermeta.kp.editor.IKpTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.DEPENDENCY__GENMODEL), element));
+				out.print(" ");
+			}
+			printCountingMap.put("genmodel", count - 1);
+		}
+	}
+	
+	public void print_org_kermeta_kp_Dependency_3(org.kermeta.kp.Dependency element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		int alt = -1;
 		alt = 0;

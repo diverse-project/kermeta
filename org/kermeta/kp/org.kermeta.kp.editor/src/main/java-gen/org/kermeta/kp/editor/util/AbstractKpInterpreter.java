@@ -58,6 +58,12 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
+		if (object instanceof org.kermeta.kp.PackageEquivalence) {
+			result = interprete_org_kermeta_kp_PackageEquivalence((org.kermeta.kp.PackageEquivalence) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.kermeta.kp.MixExpression) {
 			result = interprete_org_kermeta_kp_MixExpression((org.kermeta.kp.MixExpression) object, context);
 		}
@@ -148,6 +154,10 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_org_kermeta_kp_MixExpression(org.kermeta.kp.MixExpression object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_PackageEquivalence(org.kermeta.kp.PackageEquivalence object, ContextType context) {
 		return null;
 	}
 	

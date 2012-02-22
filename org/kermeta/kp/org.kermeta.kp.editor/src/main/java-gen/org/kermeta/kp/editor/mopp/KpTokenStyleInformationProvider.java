@@ -15,9 +15,6 @@ public class KpTokenStyleInformationProvider {
 		if ("ignoreByteCode".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0xCC, 0x80, 0x00}, null, true, false, false, false);
 		}
-		if ("byteCodeOnly".equals(tokenName)) {
-			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0xCC, 0x80, 0x00}, null, true, false, false, false);
-		}
 		if ("sourceOnly".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0xCC, 0x80, 0x00}, null, true, false, false, false);
 		}
@@ -42,6 +39,9 @@ public class KpTokenStyleInformationProvider {
 		if ("dependencies".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("packageEquivalences".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("sources".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
@@ -57,10 +57,16 @@ public class KpTokenStyleInformationProvider {
 		if ("source".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("packageEquivalence".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("dependency".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("URLs".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("genmodel".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("weaver-directive".equals(tokenName)) {

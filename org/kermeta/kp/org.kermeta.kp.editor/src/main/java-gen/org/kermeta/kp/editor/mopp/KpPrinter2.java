@@ -117,24 +117,28 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Dependency) {
+		if (element instanceof org.kermeta.kp.PackageEquivalence) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.WeaveDirective) {
+		if (element instanceof org.kermeta.kp.Dependency) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Option) {
+		if (element instanceof org.kermeta.kp.WeaveDirective) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.StringExpression) {
+		if (element instanceof org.kermeta.kp.Option) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.MixExpression) {
+		if (element instanceof org.kermeta.kp.StringExpression) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6, foundFormattingElements);
+			return;
+		}
+		if (element instanceof org.kermeta.kp.MixExpression) {
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7, foundFormattingElements);
 			return;
 		}
 		
