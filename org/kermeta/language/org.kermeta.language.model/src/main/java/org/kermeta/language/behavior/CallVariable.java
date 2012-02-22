@@ -32,6 +32,7 @@ package org.kermeta.language.behavior;
 public interface CallVariable extends CallExpression {
 	/**
 	 * Returns the value of the '<em><b>Is Atpre</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -40,7 +41,7 @@ public interface CallVariable extends CallExpression {
 	 * @return the value of the '<em>Is Atpre</em>' attribute.
 	 * @see #setIsAtpre(Boolean)
 	 * @see org.kermeta.language.behavior.BehaviorPackage#getCallVariable_IsAtpre()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean" required="true"
 	 * @generated
 	 */
 	Boolean getIsAtpre();

@@ -155,7 +155,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_ID_EDEFAULT = null;
+	protected static final Boolean IS_ID_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
@@ -195,7 +195,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_GETTER_ABSTRACT_EDEFAULT = null;
+	protected static final Boolean IS_GETTER_ABSTRACT_EDEFAULT = Boolean.TRUE;
 
 	/**
 	 * The cached value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
@@ -215,7 +215,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_SETTER_ABSTRACT_EDEFAULT = null;
+	protected static final Boolean IS_SETTER_ABSTRACT_EDEFAULT = Boolean.TRUE;
 
 	/**
 	 * The cached value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.

@@ -36,6 +36,7 @@ import org.eclipse.emf.common.util.EList;
 public interface TypeDefinition extends NamedElement, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Is Aspect</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Aspect</em>' attribute isn't clear,
@@ -45,7 +46,7 @@ public interface TypeDefinition extends NamedElement, TypeContainer {
 	 * @return the value of the '<em>Is Aspect</em>' attribute.
 	 * @see #setIsAspect(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getTypeDefinition_IsAspect()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean"
 	 * @generated
 	 */
 	Boolean getIsAspect();

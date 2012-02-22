@@ -175,6 +175,7 @@ public interface Property extends MultiplicityElement, AbstractProperty {
 
 	/**
 	 * Returns the value of the '<em><b>Is ID</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -183,7 +184,7 @@ public interface Property extends MultiplicityElement, AbstractProperty {
 	 * @return the value of the '<em>Is ID</em>' attribute.
 	 * @see #setIsID(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getProperty_IsID()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean"
 	 * @generated
 	 */
 	Boolean getIsID();
@@ -250,6 +251,7 @@ public interface Property extends MultiplicityElement, AbstractProperty {
 
 	/**
 	 * Returns the value of the '<em><b>Is Getter Abstract</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -258,7 +260,7 @@ public interface Property extends MultiplicityElement, AbstractProperty {
 	 * @return the value of the '<em>Is Getter Abstract</em>' attribute.
 	 * @see #setIsGetterAbstract(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getProperty_IsGetterAbstract()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="true" dataType="org.kermeta.language.structure.Boolean"
 	 * @generated
 	 */
 	Boolean getIsGetterAbstract();
@@ -275,6 +277,7 @@ public interface Property extends MultiplicityElement, AbstractProperty {
 
 	/**
 	 * Returns the value of the '<em><b>Is Setter Abstract</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -283,7 +286,7 @@ public interface Property extends MultiplicityElement, AbstractProperty {
 	 * @return the value of the '<em>Is Setter Abstract</em>' attribute.
 	 * @see #setIsSetterAbstract(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getProperty_IsSetterAbstract()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="true" dataType="org.kermeta.language.structure.Boolean"
 	 * @generated
 	 */
 	Boolean getIsSetterAbstract();

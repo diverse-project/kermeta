@@ -84,6 +84,7 @@ public interface Assignment extends Expression {
 
 	/**
 	 * Returns the value of the '<em><b>Is Cast</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -92,7 +93,7 @@ public interface Assignment extends Expression {
 	 * @return the value of the '<em>Is Cast</em>' attribute.
 	 * @see #setIsCast(Boolean)
 	 * @see org.kermeta.language.behavior.BehaviorPackage#getAssignment_IsCast()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean" required="true"
 	 * @generated
 	 */
 	Boolean getIsCast();

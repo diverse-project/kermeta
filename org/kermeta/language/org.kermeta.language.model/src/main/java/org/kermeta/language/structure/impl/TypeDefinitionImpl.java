@@ -84,7 +84,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_ASPECT_EDEFAULT = null;
+	protected static final Boolean IS_ASPECT_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.

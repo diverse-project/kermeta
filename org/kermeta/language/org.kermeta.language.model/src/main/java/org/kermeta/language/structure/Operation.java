@@ -43,6 +43,7 @@ import org.kermeta.language.behavior.Expression;
 public interface Operation extends MultiplicityElement, AbstractOperation {
 	/**
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -51,7 +52,7 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(Boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getOperation_IsAbstract()
-	 * @model dataType="org.kermeta.language.structure.Boolean"
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean" required="true"
 	 * @generated
 	 */
 	Boolean getIsAbstract();
@@ -248,6 +249,11 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The uniqueName of an Operation is a calculated value. It returns a value that will be unique for this Operation
+	 * even if the name of the operation itself is shared by several Operation in the context of operation overloading.
+	 * Currently, the value is calculated using the number of parameters. (TODO should be more precise but this implies that we really support operation overloading in all kermeta workflow)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Unique Name</em>' attribute.
 	 * @see #setUniqueName(String)
 	 * @see org.kermeta.language.structure.StructurePackage#getOperation_UniqueName()

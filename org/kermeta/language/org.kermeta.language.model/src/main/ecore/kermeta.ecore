@@ -40,7 +40,8 @@
               <details key="documentation" value="Value to be assigned, as a KerMeta expression"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="#//kermeta/language/structure/Boolean">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" lowerBound="1"
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="false">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Boolean stating whether current assignment corresponds to a cast operation "/>
             </eAnnotations>
@@ -100,7 +101,8 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="We call &quot;CallVariable&quot; the use of a variable in a statement.&#xA;in &lt;code>i := j + 1&lt;/code>, i and j are 2 CallVariables."/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="#//kermeta/language/structure/Boolean">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" lowerBound="1"
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="false">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Tells whether this CallVariable represents a call to @pre in a postcondition"/>
             </eAnnotations>
@@ -116,7 +118,8 @@
               <details key="documentation" value="Target Expression (the owner of the feature)"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="#//kermeta/language/structure/Boolean">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" lowerBound="1"
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="false">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Tells whether this CallFeature represents a call to @pre in a postcondition"/>
             </eAnnotations>
@@ -374,7 +377,8 @@
               <details key="documentation" value="Target Expression (the owner of the feature)"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="#//kermeta/language/structure/Boolean">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" lowerBound="1"
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="false">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Tells whether this CallFeature represents a call to @pre in a postcondition"/>
             </eAnnotations>
@@ -448,7 +452,8 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Every one knows what an operation is."/>
           </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//kermeta/language/structure/Boolean">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="false">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Boolean stating whether the Operation is abstract"/>
             </eAnnotations>
@@ -544,7 +549,8 @@
               <details key="documentation" value="If True, the value of the property is not stored but computed from other properties"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="#//kermeta/language/structure/Boolean">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="#//kermeta/language/structure/Boolean"
+              defaultValueLiteral="false">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Boolean stating whether the property allows to identify its containing Object"/>
             </eAnnotations>
@@ -562,13 +568,13 @@
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGetterAbstract"
-              eType="#//kermeta/language/structure/Boolean">
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Boolean stating wether the getter is abstract."/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSetterAbstract"
-              eType="#//kermeta/language/structure/Boolean">
+              eType="#//kermeta/language/structure/Boolean" defaultValueLiteral="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="Boolean stating wether the setter is abstract."/>
             </eAnnotations>
@@ -690,7 +696,8 @@
               <details key="documentation" value="These mappings define how we can substitute the target Type with this TypeDefinition "/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//kermeta/language/structure/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//kermeta/language/structure/Boolean"
+              defaultValueLiteral="false"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//kermeta/language/structure/ParameterizedType">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

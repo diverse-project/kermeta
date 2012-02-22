@@ -63,7 +63,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_CAST_EDEFAULT = null;
+	protected static final Boolean IS_CAST_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsCast() <em>Is Cast</em>}' attribute.

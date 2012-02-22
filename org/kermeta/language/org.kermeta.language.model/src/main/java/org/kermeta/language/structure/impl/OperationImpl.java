@@ -63,7 +63,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_ABSTRACT_EDEFAULT = null;
+	protected static final Boolean IS_ABSTRACT_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.

@@ -147,7 +147,7 @@ public class UnresolvedCallImpl extends UnresolvedImpl implements UnresolvedCall
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_ATPRE_EDEFAULT = null;
+	protected static final Boolean IS_ATPRE_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
