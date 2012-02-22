@@ -175,21 +175,22 @@ aspect class Operation
 			if (returnType.isVoid)
 			then
 				stdio.writeln("returntype is void")
-			else
-			stdio.writeln("qualifiedName : " + returnType.getQualifiedName)
-			if (returnType.getQualifiedName.equals("kermeta::standard::Void"))
-			then
-				// nothing to do
 				true
 			else
-				// There has to be a properly set CallResult in the operation's body
-				if (self.body.isVoid)
+				stdio.writeln("qualifiedName : " + returnType.getQualifiedName)
+				if (returnType.getQualifiedName.equals("kermeta::standard::Void"))
 				then
-					false
+					// nothing to do
+					true
 				else
-					self.body.checkCallResults()
+					// There has to be a properly set CallResult in the operation's body
+					if (self.body.isVoid)
+					then
+						false
+					else
+						self.body.checkCallResults()
+					end
 				end
-			end
 			end
 		else
 			true
