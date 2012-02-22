@@ -12,6 +12,9 @@ package org::kermeta::language::behavior;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+
 using kermeta::standard
 using org::kermeta::language::structure
 
@@ -28,18 +31,44 @@ aspect class CallOperation
 			// Error
 			false
 		else
-			
+			var myresult : Boolean init true
 			// init a Sequence of TypeVariableBindings
 			var typeVariableBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new 
 			
 		
 			// Check wether the CallOperation's staticOperation has type parameters or not
-			if (self.staticOperation.typeParameter.size > 0)
-			then
-				self.staticOperation.typeParameter.each{ tv | 1
-				}
+			from var i : Integer init 0
+			until i==self.staticOperation.typeParameter.size
+			loop
+				var tvb : TypeVariableBinding init TypeVariableBinding.new
+				tvb.variable:=self.staticOperation.typeParameter.at(i)
+				tvb.type:=self.staticTypeVariableBindings.at(i)
+				typeVariableBindings.add(tvb)
+				i:=i+1
 			end
-			self.parameters.each{ param | stdio.writeln("test")}
+			
+			// The operation's owning class may have type parameters as well
+			var cd : ClassDefinition init self.target.staticType.asType(Class).typeDefinition.asType(ClassDefinition)
+			from var i : Integer init 0
+			until i == cd.typeParameter.size
+			loop
+				var tvb : TypeVariableBinding init TypeVariableBinding.new
+				tvb.variable := self.target.staticType.asType(Class).typeParamBinding.at(i).variable
+				tvb.type := self.target.staticType.asType(Class).typeParamBinding.at(i).type
+			end
+			
+			// Now for each parameter
+		
+			from var i : Integer init 0
+			until i == self.parameters.size
+			loop
+				var paramClass : Class init self.parameters.at(i).staticType.asType(Class)
+							.getComparableClass(self.staticOperation.ownedParameter.at(i).type.asType(Class))
+							
+				//myresult := myresult and (paramClass.typeEquivalence(self.staticOperation.ownedParameter.at(i).type.asType(Class), typeVariableBindings) )							
+							
+			end
+			
 		
 			true
 		end
