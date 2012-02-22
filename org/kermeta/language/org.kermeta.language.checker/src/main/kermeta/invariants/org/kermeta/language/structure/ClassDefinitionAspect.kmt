@@ -18,11 +18,37 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
 // To retrieve a qualified name
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+// To check type equality
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 
 using kermeta::utils
 using kermeta::standard
 
+aspect class Class {
+
+	operation getSuperTypes() : Sequence<Class> is do
+	
+		var typeDef : TypeDefinition init self.typeDefinition
+		result:= Sequence<Class>.new
+		
+		typeDef.superType.each{ sType |
+			
+			var newClass : Class init Class.new
+			newClass.typeDefinition:=sType.asType(Class).typeDefinition
+			
+			
+			result.add(newClass)
+		}
+		
+		
+	end
+
+}
+
+
 aspect class ClassDefinition {
+
+
 
 	/*
 	 * An operation cannot be defined twice in the same class
@@ -41,6 +67,122 @@ aspect class ClassDefinition {
 		}
 	end
 	*/
+	
+	operation log(msg : String) : Void is do
+		if (self.name=="A")
+		then
+			stdio.writeln(msg)
+		end
+	end
+	
+	/**
+	 * Test
+	 */
+	@Scope "RESOLVED"
+	inv type_parameters_consistency_in_heritance_tree is do
+		
+		var allTypesToBrowse : Sequence<Class> init Sequence<Class>.new
+		var allBrowsedTypes : Sequence<Class> init Sequence<Class>.new
+		var res : Boolean init true
+		log("Checking type parameter consistency for ClassDefinition " + self.name)
+		
+		// Build the base Class
+		var selfClass : Class init Class.new
+		selfClass.typeDefinition:=self
+		
+		self.typeParameter.each{ tp |
+			log(" - type parameter : " + tp.toString)
+			var binding : TypeVariableBinding init TypeVariableBinding.new
+			binding.variable := tp
+			binding.type := tp
+			selfClass.typeParamBinding.add(binding)
+		}
+		
+		allTypesToBrowse.add(selfClass)
+		
+		from var currentClass : Class
+		until (allTypesToBrowse.isEmpty() or not(res))
+		loop
+			currentClass := allTypesToBrowse.one
+			log("------------------------------\nCurrentClass is " + currentClass.name)
+			log("allTypesToBrowse size : " + allTypesToBrowse.size.toString)
+			allTypesToBrowse.each{ t | log(" - " + t.name) }
+			log("allBrowsedTypes size : " + allBrowsedTypes.size.toString)
+			allBrowsedTypes.each{ t | log(" - " + t.name) }
+			allTypesToBrowse.remove(currentClass)
+			
+			if (allBrowsedTypes.exists{c| c.typeDefinition == currentClass.typeDefinition})
+			then
+				log("Already browsed ! ")
+				if (allBrowsedTypes.exists{c | c.typeDefinition == currentClass.typeDefinition and
+												c.typeEquals(currentClass)})
+				then
+					log("result=false!")
+					res:=false
+				end
+			else
+				allBrowsedTypes.add(currentClass)
+				allTypesToBrowse.addAll(currentClass.getSuperTypes)
+			end
+		end
+		
+		// Has this ClassDefinition type parameters ?
+		/*if (self.typeParameter.size > 0 )
+		then
+			var selfClass : Class init Class.new
+			
+			selfClass.typeDefinition := self
+	
+	
+			if (self.name == "A") then stdio.writeln("The ClassDefinition has type parameters") end
+			
+			self.typeParameter.each{ tp | 
+				if (self.name == "A") then stdio.writeln(" - " + tp.toString) end
+				var tpb : TypeVariableBinding init TypeVariableBinding.new
+				tpb.variable := tp
+				tpb.type := tp
+				selfClass.typeParamBinding.add(tpb) 
+			}
+			
+			// supertypes ?
+			if (self.superType.size > 0)
+			then
+				self.superType.each{t|
+					// has t already been found in the inheritance tree ?
+					if (self.name == "A") then stdio.writeln(" SuperType " + t.toString) end
+					allTypesFound.add(t)
+					// has t type parameters ?
+					if (t.asType(Class).typeDefinition.typeParameter.size > 0)
+					then
+						t.asType(Class).typeDefinition.typeParameter.each{ tp |
+							if (self.name == "A") then stdio.writeln("  - " + tp.toString) end
+						}
+					end
+				}
+			else
+				if (self.name == "A") then stdio.writeln(" No SuperType...") end
+			end
+			 
+		else
+			true
+		end
+			
+		
+		/*
+		self.getAllSuperTypes().each{ type |
+			if (type.isInstanceOf(Class))
+			then
+				var qName : String init type.asType(Class).typeDefinition.getQualifiedName
+				
+				then
+					stdio.writeln(" super type : " + qName)
+				end
+			end
+		}
+		*/
+		
+		true
+	end
 	
 	/**
 	 * A class cannot inherit twice the same generic class with 2 different bindings.
@@ -126,14 +268,16 @@ aspect class ClassDefinition {
 	end
 	
 	
-	/**
+	/*
 	 * Fake one for testing purposes */
+	/*
 	@Scope "MERGED"
 	inv no_helloworld is do
 	
 		not (self.name.equals("HelloWorld"))
 		
 	end
+	*/
 	
 	/*
 	 * Bug 1784
