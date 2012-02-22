@@ -31,7 +31,6 @@ TOKENSTYLES{
     //"weaver-directive" COLOR #007F55, BOLD;
     "byteCodeFromADependency" COLOR #CC8000, BOLD;
     "ignoreByteCode" COLOR #CC8000, BOLD;
-    "byteCodeOnly" COLOR #CC8000, BOLD;
     "sourceOnly" COLOR #CC8000, BOLD;
     "SL_COMMENT" COLOR #348017;
     "ML_COMMENT" COLOR #348017;
@@ -48,6 +47,7 @@ RULES{
 	    	("defaultMainClass"  "="   defaultMainClass['"','"']  ) |
 	    	("defaultMainOperation"  "="  defaultMainOperation['"','"']  ) |
 	    	("dependencies"  "=" "{" (dependencies)* !1 "}" ) |
+	    	("packageEquivalences"  "=" "{" (packageEquivalences)* !1 "}" ) |
 	    	("sources"  "=" "{" (sources)* !1 "}" ) |
 	    	("options"  "=" "{" (options)* !1 "}" ) |
 	    	("weaveDirectives"  "=" "{" (weaveDirectives)* !1 "}" )
@@ -59,12 +59,14 @@ RULES{
     !2( "require" | "source")   url['"','"'] byteCodeFromADependency["byteCodeFromADependency":""]
     ;
     
-    
-   
+    PackageEquivalence::=
+   	!2"packageEquivalence" ecorePackage['"','"']  ("=")  javaPackage['"','"'] 
+    ;
     
     Dependency::=  
-    !2"dependency" name['"','"']  (("=")|("URLs" "="))  url['"','"']("," url['"','"'])*  
-    (ignoreByteCode["ignoreByteCode":""] | sourceOnly["sourceOnly":""] | byteCodeOnly["byteCodeOnly":""])?
+    !2"dependency" name['"','"']  (("=")|("URLs" "="))  url['"','"']("," url['"','"'])*
+    ("genmodel" "=" genmodel['"','"'])?  
+    (ignoreByteCode["ignoreByteCode":""] | sourceOnly["sourceOnly":""]| byteCodeOnly["byteCodeOnly":""])?
     ;
     
     WeaveDirective::= 

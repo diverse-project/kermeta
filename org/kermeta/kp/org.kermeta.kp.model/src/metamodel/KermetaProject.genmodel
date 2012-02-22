@@ -17,11 +17,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainOperation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/group"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/packageEquivalences"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//Dependency">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/url"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/ignoreByteCode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/sourceOnly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/genmodel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/byteCodeOnly"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//NamedElement">
@@ -45,6 +47,10 @@
     <genClasses ecoreClass="KermetaProject.ecore#//MixExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//MixExpression/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//MixExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//PackageEquivalence">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/ecorePackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/javaPackage"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
