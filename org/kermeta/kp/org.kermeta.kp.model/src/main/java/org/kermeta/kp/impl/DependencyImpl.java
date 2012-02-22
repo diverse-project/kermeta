@@ -10,14 +10,18 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KpPackage;
+import org.kermeta.kp.PackageEquivalence;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +33,7 @@ import org.kermeta.kp.KpPackage;
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#isIgnoreByteCode <em>Ignore Byte Code</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#isSourceOnly <em>Source Only</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.DependencyImpl#getGenmodel <em>Genmodel</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.DependencyImpl#isByteCodeOnly <em>Byte Code Only</em>}</li>
  * </ul>
  * </p>
@@ -84,6 +89,26 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
   protected boolean sourceOnly = SOURCE_ONLY_EDEFAULT;
 
   /**
+   * The default value of the '{@link #getGenmodel() <em>Genmodel</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getGenmodel()
+   * @generated
+   * @ordered
+   */
+	protected static final String GENMODEL_EDEFAULT = null;
+
+		/**
+   * The cached value of the '{@link #getGenmodel() <em>Genmodel</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getGenmodel()
+   * @generated
+   * @ordered
+   */
+	protected String genmodel = GENMODEL_EDEFAULT;
+
+		/**
    * The default value of the '{@link #isByteCodeOnly() <em>Byte Code Only</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,6 +211,27 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public String getGenmodel() {
+    return genmodel;
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public void setGenmodel(String newGenmodel) {
+    String oldGenmodel = genmodel;
+    genmodel = newGenmodel;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.DEPENDENCY__GENMODEL, oldGenmodel, genmodel));
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	public boolean isByteCodeOnly() {
     return byteCodeOnly;
   }
@@ -217,6 +263,8 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
         return isIgnoreByteCode();
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         return isSourceOnly();
+      case KpPackage.DEPENDENCY__GENMODEL:
+        return getGenmodel();
       case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
         return isByteCodeOnly();
     }
@@ -243,6 +291,9 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         setSourceOnly((Boolean)newValue);
         return;
+      case KpPackage.DEPENDENCY__GENMODEL:
+        setGenmodel((String)newValue);
+        return;
       case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
         setByteCodeOnly((Boolean)newValue);
         return;
@@ -268,6 +319,9 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         setSourceOnly(SOURCE_ONLY_EDEFAULT);
         return;
+      case KpPackage.DEPENDENCY__GENMODEL:
+        setGenmodel(GENMODEL_EDEFAULT);
+        return;
       case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
         setByteCodeOnly(BYTE_CODE_ONLY_EDEFAULT);
         return;
@@ -290,6 +344,8 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
         return ignoreByteCode != IGNORE_BYTE_CODE_EDEFAULT;
       case KpPackage.DEPENDENCY__SOURCE_ONLY:
         return sourceOnly != SOURCE_ONLY_EDEFAULT;
+      case KpPackage.DEPENDENCY__GENMODEL:
+        return GENMODEL_EDEFAULT == null ? genmodel != null : !GENMODEL_EDEFAULT.equals(genmodel);
       case KpPackage.DEPENDENCY__BYTE_CODE_ONLY:
         return byteCodeOnly != BYTE_CODE_ONLY_EDEFAULT;
     }
@@ -312,6 +368,8 @@ public class DependencyImpl extends NamedElementImpl implements Dependency {
     result.append(ignoreByteCode);
     result.append(", sourceOnly: ");
     result.append(sourceOnly);
+    result.append(", genmodel: ");
+    result.append(genmodel);
     result.append(", byteCodeOnly: ");
     result.append(byteCodeOnly);
     result.append(')');

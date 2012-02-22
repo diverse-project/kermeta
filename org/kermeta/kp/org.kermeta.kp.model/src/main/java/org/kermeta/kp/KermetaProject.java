@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getGroup <em>Group</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getPackageEquivalences <em>Package Equivalences</em>}</li>
  * </ul>
  * </p>
  *
@@ -173,5 +174,21 @@ public interface KermetaProject extends NamedElement {
    * @generated
    */
 	void setGroup(String value);
+
+		/**
+   * Returns the value of the '<em><b>Package Equivalences</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.PackageEquivalence}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Package Equivalences</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Package Equivalences</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_PackageEquivalences()
+   * @model containment="true"
+   * @generated
+   */
+	EList<PackageEquivalence> getPackageEquivalences();
 
 } // KermetaProject

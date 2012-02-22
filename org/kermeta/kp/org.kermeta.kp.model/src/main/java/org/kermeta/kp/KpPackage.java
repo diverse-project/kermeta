@@ -170,13 +170,22 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT__GROUP = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 		/**
+   * The feature id for the '<em><b>Package Equivalences</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int KERMETA_PROJECT__PACKAGE_EQUIVALENCES = NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+		/**
    * The number of structural features of the '<em>Kermeta Project</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int KERMETA_PROJECT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.DependencyImpl <em>Dependency</em>}' class.
@@ -225,13 +234,22 @@ public interface KpPackage extends EPackage {
   int DEPENDENCY__SOURCE_ONLY = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>Genmodel</b></em>' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int DEPENDENCY__GENMODEL = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+		/**
    * The feature id for the '<em><b>Byte Code Only</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int DEPENDENCY__BYTE_CODE_ONLY = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int DEPENDENCY__BYTE_CODE_ONLY = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 		/**
    * The number of structural features of the '<em>Dependency</em>' class.
@@ -240,7 +258,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int DEPENDENCY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int DEPENDENCY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.SourceImpl <em>Source</em>}' class.
@@ -447,6 +465,43 @@ public interface KpPackage extends EPackage {
 	int MIX_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+   * The meta object id for the '{@link org.kermeta.kp.impl.PackageEquivalenceImpl <em>Package Equivalence</em>}' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see org.kermeta.kp.impl.PackageEquivalenceImpl
+   * @see org.kermeta.kp.impl.KpPackageImpl#getPackageEquivalence()
+   * @generated
+   */
+	int PACKAGE_EQUIVALENCE = 9;
+
+	/**
+   * The feature id for the '<em><b>Ecore Package</b></em>' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_EQUIVALENCE__ECORE_PACKAGE = 0;
+
+	/**
+   * The feature id for the '<em><b>Java Package</b></em>' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_EQUIVALENCE__JAVA_PACKAGE = 1;
+
+	/**
+   * The number of structural features of the '<em>Package Equivalence</em>' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_EQUIVALENCE_FEATURE_COUNT = 2;
+
+	/**
    * Returns the meta object for class '{@link org.kermeta.kp.KermetaProject <em>Kermeta Project</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -534,6 +589,17 @@ public interface KpPackage extends EPackage {
 	EAttribute getKermetaProject_Group();
 
 		/**
+   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getPackageEquivalences <em>Package Equivalences</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Package Equivalences</em>'.
+   * @see org.kermeta.kp.KermetaProject#getPackageEquivalences()
+   * @see #getKermetaProject()
+   * @generated
+   */
+	EReference getKermetaProject_PackageEquivalences();
+
+		/**
    * Returns the meta object for class '{@link org.kermeta.kp.Dependency <em>Dependency</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -577,6 +643,17 @@ public interface KpPackage extends EPackage {
   EAttribute getDependency_SourceOnly();
 
   /**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#getGenmodel <em>Genmodel</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Genmodel</em>'.
+   * @see org.kermeta.kp.Dependency#getGenmodel()
+   * @see #getDependency()
+   * @generated
+   */
+	EAttribute getDependency_Genmodel();
+
+		/**
    * Returns the meta object for the attribute '{@link org.kermeta.kp.Dependency#isByteCodeOnly <em>Byte Code Only</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -757,6 +834,38 @@ public interface KpPackage extends EPackage {
 	EReference getMixExpression_Right();
 
 	/**
+   * Returns the meta object for class '{@link org.kermeta.kp.PackageEquivalence <em>Package Equivalence</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Package Equivalence</em>'.
+   * @see org.kermeta.kp.PackageEquivalence
+   * @generated
+   */
+	EClass getPackageEquivalence();
+
+	/**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.PackageEquivalence#getEcorePackage <em>Ecore Package</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Ecore Package</em>'.
+   * @see org.kermeta.kp.PackageEquivalence#getEcorePackage()
+   * @see #getPackageEquivalence()
+   * @generated
+   */
+	EAttribute getPackageEquivalence_EcorePackage();
+
+	/**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.PackageEquivalence#getJavaPackage <em>Java Package</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Java Package</em>'.
+   * @see org.kermeta.kp.PackageEquivalence#getJavaPackage()
+   * @see #getPackageEquivalence()
+   * @generated
+   */
+	EAttribute getPackageEquivalence_JavaPackage();
+
+	/**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -845,6 +954,14 @@ public interface KpPackage extends EPackage {
 		EAttribute KERMETA_PROJECT__GROUP = eINSTANCE.getKermetaProject_Group();
 
 				/**
+     * The meta object literal for the '<em><b>Package Equivalences</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference KERMETA_PROJECT__PACKAGE_EQUIVALENCES = eINSTANCE.getKermetaProject_PackageEquivalences();
+
+				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.DependencyImpl <em>Dependency</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -879,6 +996,14 @@ public interface KpPackage extends EPackage {
     EAttribute DEPENDENCY__SOURCE_ONLY = eINSTANCE.getDependency_SourceOnly();
 
     /**
+     * The meta object literal for the '<em><b>Genmodel</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EAttribute DEPENDENCY__GENMODEL = eINSTANCE.getDependency_Genmodel();
+
+				/**
      * The meta object literal for the '<em><b>Byte Code Only</b></em>' attribute feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1027,6 +1152,32 @@ public interface KpPackage extends EPackage {
      * @generated
      */
 		EReference MIX_EXPRESSION__RIGHT = eINSTANCE.getMixExpression_Right();
+
+		/**
+     * The meta object literal for the '{@link org.kermeta.kp.impl.PackageEquivalenceImpl <em>Package Equivalence</em>}' class.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @see org.kermeta.kp.impl.PackageEquivalenceImpl
+     * @see org.kermeta.kp.impl.KpPackageImpl#getPackageEquivalence()
+     * @generated
+     */
+		EClass PACKAGE_EQUIVALENCE = eINSTANCE.getPackageEquivalence();
+
+		/**
+     * The meta object literal for the '<em><b>Ecore Package</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EAttribute PACKAGE_EQUIVALENCE__ECORE_PACKAGE = eINSTANCE.getPackageEquivalence_EcorePackage();
+
+		/**
+     * The meta object literal for the '<em><b>Java Package</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EAttribute PACKAGE_EQUIVALENCE__JAVA_PACKAGE = eINSTANCE.getPackageEquivalence_JavaPackage();
 
 	}
 

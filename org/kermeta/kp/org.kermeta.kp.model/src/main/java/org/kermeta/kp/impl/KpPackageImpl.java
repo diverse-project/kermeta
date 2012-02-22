@@ -21,6 +21,7 @@ import org.kermeta.kp.KpPackage;
 import org.kermeta.kp.MixExpression;
 import org.kermeta.kp.NamedElement;
 import org.kermeta.kp.Option;
+import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.StringExpression;
 import org.kermeta.kp.WeaveDirective;
@@ -94,6 +95,13 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
    * @generated
    */
 	private EClass mixExpressionEClass = null;
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	private EClass packageEquivalenceEClass = null;
 
 	/**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -235,6 +243,15 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EReference getKermetaProject_PackageEquivalences() {
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(7);
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	public EClass getDependency() {
     return dependencyEClass;
   }
@@ -273,8 +290,17 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EAttribute getDependency_ByteCodeOnly() {
+	public EAttribute getDependency_Genmodel() {
     return (EAttribute)dependencyEClass.getEStructuralFeatures().get(3);
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EAttribute getDependency_ByteCodeOnly() {
+    return (EAttribute)dependencyEClass.getEStructuralFeatures().get(4);
   }
 
 		/**
@@ -427,6 +453,33 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EClass getPackageEquivalence() {
+    return packageEquivalenceEClass;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EAttribute getPackageEquivalence_EcorePackage() {
+    return (EAttribute)packageEquivalenceEClass.getEStructuralFeatures().get(0);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EAttribute getPackageEquivalence_JavaPackage() {
+    return (EAttribute)packageEquivalenceEClass.getEStructuralFeatures().get(1);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	public KpFactory getKpFactory() {
     return (KpFactory)getEFactoryInstance();
   }
@@ -458,11 +511,13 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_CLASS);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_OPERATION);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__GROUP);
+    createEReference(kermetaProjectEClass, KERMETA_PROJECT__PACKAGE_EQUIVALENCES);
 
     dependencyEClass = createEClass(DEPENDENCY);
     createEAttribute(dependencyEClass, DEPENDENCY__URL);
     createEAttribute(dependencyEClass, DEPENDENCY__IGNORE_BYTE_CODE);
     createEAttribute(dependencyEClass, DEPENDENCY__SOURCE_ONLY);
+    createEAttribute(dependencyEClass, DEPENDENCY__GENMODEL);
     createEAttribute(dependencyEClass, DEPENDENCY__BYTE_CODE_ONLY);
 
     namedElementEClass = createEClass(NAMED_ELEMENT);
@@ -487,6 +542,10 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     mixExpressionEClass = createEClass(MIX_EXPRESSION);
     createEReference(mixExpressionEClass, MIX_EXPRESSION__LEFT);
     createEReference(mixExpressionEClass, MIX_EXPRESSION__RIGHT);
+
+    packageEquivalenceEClass = createEClass(PACKAGE_EQUIVALENCE);
+    createEAttribute(packageEquivalenceEClass, PACKAGE_EQUIVALENCE__ECORE_PACKAGE);
+    createEAttribute(packageEquivalenceEClass, PACKAGE_EQUIVALENCE__JAVA_PACKAGE);
   }
 
 	/**
@@ -533,12 +592,14 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEAttribute(getKermetaProject_DefaultMainClass(), ecorePackage.getEString(), "defaultMainClass", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_DefaultMainOperation(), ecorePackage.getEString(), "defaultMainOperation", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_Group(), ecorePackage.getEString(), "group", "default", 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getKermetaProject_PackageEquivalences(), this.getPackageEquivalence(), null, "packageEquivalences", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dependencyEClass, Dependency.class, "Dependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDependency_Url(), ecorePackage.getEString(), "url", null, 1, -1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDependency_IgnoreByteCode(), ecorePackage.getEBoolean(), "ignoreByteCode", "false", 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDependency_SourceOnly(), ecorePackage.getEBoolean(), "sourceOnly", "false", 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getDependency_ByteCodeOnly(), ecorePackage.getEBoolean(), "byteCodeOnly", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDependency_Genmodel(), ecorePackage.getEString(), "genmodel", null, 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDependency_ByteCodeOnly(), ecorePackage.getEBoolean(), "byteCodeOnly", "false", 0, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -562,6 +623,10 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEClass(mixExpressionEClass, MixExpression.class, "MixExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMixExpression_Left(), this.getExpression(), null, "left", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMixExpression_Right(), this.getExpression(), null, "right", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(packageEquivalenceEClass, PackageEquivalence.class, "PackageEquivalence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPackageEquivalence_EcorePackage(), ecorePackage.getEString(), "ecorePackage", null, 1, 1, PackageEquivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPackageEquivalence_JavaPackage(), ecorePackage.getEString(), "javaPackage", null, 1, 1, PackageEquivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

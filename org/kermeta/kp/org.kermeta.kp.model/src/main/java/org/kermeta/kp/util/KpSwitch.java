@@ -144,6 +144,13 @@ public class KpSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case KpPackage.PACKAGE_EQUIVALENCE:
+      {
+        PackageEquivalence packageEquivalence = (PackageEquivalence)theEObject;
+        T result = casePackageEquivalence(packageEquivalence);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -280,6 +287,21 @@ public class KpSwitch<T> extends Switch<T> {
    * @generated
    */
 	public T caseMixExpression(MixExpression object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Package Equivalence</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Package Equivalence</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T casePackageEquivalence(PackageEquivalence object) {
     return null;
   }
 

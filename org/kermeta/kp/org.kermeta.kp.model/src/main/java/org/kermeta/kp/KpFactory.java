@@ -89,6 +89,15 @@ public interface KpFactory extends EFactory {
 	MixExpression createMixExpression();
 
 	/**
+   * Returns a new object of class '<em>Package Equivalence</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Package Equivalence</em>'.
+   * @generated
+   */
+	PackageEquivalence createPackageEquivalence();
+
+	/**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -25,6 +25,7 @@ import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpPackage;
 import org.kermeta.kp.Option;
+import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.WeaveDirective;
 
@@ -42,6 +43,7 @@ import org.kermeta.kp.WeaveDirective;
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getGroup <em>Group</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getPackageEquivalences <em>Package Equivalences</em>}</li>
  * </ul>
  * </p>
  *
@@ -147,6 +149,16 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
    * @ordered
    */
 	protected String group = GROUP_EDEFAULT;
+
+		/**
+   * The cached value of the '{@link #getPackageEquivalences() <em>Package Equivalences</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getPackageEquivalences()
+   * @generated
+   * @ordered
+   */
+	protected EList<PackageEquivalence> packageEquivalences;
 
 		/**
    * <!-- begin-user-doc -->
@@ -291,6 +303,19 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EList<PackageEquivalence> getPackageEquivalences() {
+    if (packageEquivalences == null)
+    {
+      packageEquivalences = new EObjectContainmentEList<PackageEquivalence>(PackageEquivalence.class, this, KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES);
+    }
+    return packageEquivalences;
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
     switch (featureID)
@@ -303,6 +328,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         return ((InternalEList<?>)getWeaveDirectives()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__OPTIONS:
         return ((InternalEList<?>)getOptions()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
+        return ((InternalEList<?>)getPackageEquivalences()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -330,6 +357,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         return getDefaultMainOperation();
       case KpPackage.KERMETA_PROJECT__GROUP:
         return getGroup();
+      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
+        return getPackageEquivalences();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -369,6 +398,10 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
       case KpPackage.KERMETA_PROJECT__GROUP:
         setGroup((String)newValue);
         return;
+      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
+        getPackageEquivalences().clear();
+        getPackageEquivalences().addAll((Collection<? extends PackageEquivalence>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -403,6 +436,9 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
       case KpPackage.KERMETA_PROJECT__GROUP:
         setGroup(GROUP_EDEFAULT);
         return;
+      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
+        getPackageEquivalences().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -430,6 +466,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
         return DEFAULT_MAIN_OPERATION_EDEFAULT == null ? defaultMainOperation != null : !DEFAULT_MAIN_OPERATION_EDEFAULT.equals(defaultMainOperation);
       case KpPackage.KERMETA_PROJECT__GROUP:
         return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
+      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
+        return packageEquivalences != null && !packageEquivalences.isEmpty();
     }
     return super.eIsSet(featureID);
   }
