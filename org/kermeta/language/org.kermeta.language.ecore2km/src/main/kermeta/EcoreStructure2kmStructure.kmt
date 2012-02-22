@@ -221,20 +221,22 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				end
 			end
 		else // If there is a return generic type, an unresolved type is created.
+		
+				
 			var typeName : String
 			if(genericType.eTypeParameter.isVoid) then
 				typeName := genericType.eClassifier.getQualifiedName()
 			else
 				typeName := genericType.getQualifiedName()
 			end
-			
+			//stdio.writeln(" creating UnresolvedType "+typeName + " isDataType="+isDataType.toString+" eDataType="+eDataType.toString)
 			result := UnresolvedType.new.initialize(checkEObjectType(typeName))
 			genericType.targetKermetaObject := result
 		end
 		if(not genericType.isVoid) then
 			
-			genericType.eTypeArguments.each{ ta |
-				var unresolvedTypeArgument : UnresolvedType init getUnresolvedType(ta, void)
+			genericType.eTypeArguments.each{ ta |				
+				var unresolvedTypeArgument : UnresolvedType init getUnresolvedType(ta, ta.eClassifier)
 				// When it is null, e.g. A<?> we need to add a unresolved to Object, 
 				// otherwise the case is taken into account by the normal visitor
 				if (unresolvedTypeArgument.isVoid) then
@@ -260,7 +262,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			// Checking that the corresponding kermeta objet has been created and mapped.
 			if((not object.targetKermetaObject.isVoid).andThen{b | object.targetKermetaObject.isInstanceOf(UnresolvedType)}) then
 				// Creating the unresolved type.
-				var type : UnresolvedType init getUnresolvedType(genType, void)
+				var type : UnresolvedType init getUnresolvedType(genType, genType.eClassifier)
 				
 				// It can be null, e.g. A<?>
 				if(not type.isVoid and not (object.targetKermetaObject.asType(UnresolvedType).typeIdentifier=="kermeta::standard::Object")) then
