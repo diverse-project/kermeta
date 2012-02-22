@@ -13,20 +13,36 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+// used to browse through expressions in order to retrieve CallResults
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/SearchCallResult.kmt"
+
 // use Kermeta MDK to retrive qualified names
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+
+// use Kermeta MDK to compare types
+//require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
+
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
-
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
-
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
 
 using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::behavior
 
 aspect class Operation
 {
+
+	operation log(msg : String) : Void is do
+		if (self.name=="test")
+		then
+			stdio.writeln(msg)
+		end
+	end
+
 	/**
 	 * The information in the super (or lack of information in super)
 	 * must point to one and only one Operation
@@ -63,7 +79,7 @@ aspect class Operation
 	
 		if self.kOwnedTags.exists{ t | t.name.equals("main") }
 		then
-			//stdio.writeln("Checking main_tag_validity on operation " + self.name)
+			stdio.writeln("Checking main_tag_validity on operation " + self.name)
 
 			var nbParameter : Integer init self.ownedParameter.size
 			res:=false
@@ -73,13 +89,16 @@ aspect class Operation
 				//stdio.writeln("no parameter -> OK")
 				res:=true
 			else
+				stdio.writeln("There are " + nbParameter.toString + " parameters ...")
 		  		// retrieve the modelingunit and String TypeDefinition
 		  		var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
 		  		var stringTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::String")
 		  		
+		  		stdio.writeln("stringTypeDef retrieved : "+ stringTypeDef.toString)
+		  		
 				res:=self.ownedParameter.forAll{p|
 					// All parameters must be kermeta::standard::String
-					//stdio.writeln("------------------\nChecking parameter : " + p.toString)
+					stdio.writeln("Checking parameter : " + p.toString)
 					if (not p.type.isVoid())
 					then
 						//stdio.writeln("p.type : " + p.type.toString)
@@ -87,6 +106,7 @@ aspect class Operation
 						if (p.type.isInstanceOf(ParameterizedType))
 						then
 							var typeDef : TypeDefinition init p.type.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
+							stdio.writeln(" -> typeDef : " + typeDef.toString)
 							typeDef.equals(stringTypeDef)
 							
 						else
@@ -98,8 +118,11 @@ aspect class Operation
 					end				
 				}
 				
+				stdio.writeln("res="+res.toString)
+				
 				if (res==false and nbParameter==1)
 				then
+					stdio.writeln("checking wether the parameter is Collection<String>")
 					// In this case, the parameter must be Collection<String>
 					var param : Parameter init self.ownedParameter.one
 					if (not(param.containedType.isVoid))
@@ -117,8 +140,8 @@ aspect class Operation
 				  								typeSeq)
 
 				  				//stdio.writeln("   stringCollType : " + StringCollectionType.toString)
-				  				res:=t.asType(ParameterizedType).typeEquals(StringCollectionType)
-				  				
+				  				//res:=t.asType(ParameterizedType).typeEquals(StringCollectionType)
+				  				res:=t.isSubTypeOf(StringCollectionType, Hashtable<TypeVariable, Type>.new)
 				  				
 			  				end 
 							
@@ -128,13 +151,103 @@ aspect class Operation
 				
 			end
 			
-			//stdio.writeln("res=" + res.toString + "\n-----------------------------------")
-
+			stdio.writeln("final res=" + res.toString)
 		end
+		
 		
 		res
 	end
+
+	/**
+	 * Return value may not be initialized
+	 */
+	@Scope "RESOLVED"
+	@IsWarning "true"
+	inv check_callresult is do
+		
+		// Do not check abstract operations, operations with tag @CompilerIgnore "true"
+		// and operations whose owning class are tagged @CompilerIgnore "true" 
+		if (not(self.isAbstract) and not(self.kOwnedTags.exists{ t | t.name.equals("CompilerIgnore") and t.~value.equals("true") }
+										or self.owningClass.kOwnedTags.exists{t| t.name.equals("CompilerIgnore") and t.~value.equals("true") }))
+		then
+			var returnType : Type init self.type
+			if (returnType.getQualifiedName.equals("kermeta::standard::Void"))
+			then
+				// nothing to do
+				true
+			else
+				// There has to be a properly set CallResult in the operation's body
+				if (self.body.isVoid)
+				then
+					false
+				else
+					self.body.checkCallResults()
+				end
+			end
+		else
+			true
+		end
+		
+	end	
+	
+	/* 
+	 * Test
+	 */
+	/*@Scope "RESOLVED"
+	inv return_type_conformance is do
+		
+		
+		log("Checking return_type_conformance for operation " + self.name + " - isAbstract : " + self.isAbstract.toString())
+		
+		if (not(self.body.isVoid))
+		then
+			// Get operation's return type
+			var returnType : Type init self.type
+			log("- return type : " + returnType.toString)
+			log("  -> qualified name : " + returnType.getQualifiedName())
+			// Retrieve all the operation's CallResults
+
+
+			var allCallResults : Collection<CallResult>	init self.body.retrieveAllCallResults
+			log("- CallResult found : " + allCallResults.size.toString)
+			allCallResults.each{ cr | log(" -> CR:" + cr.toString)}
+			//log("End of Checking return_type_conformance for operation " + self.name)
+			
+			
+			// Comparing qualified names is not the best way to do
+			// but it is "easier", especially when comparing to Void...
+			if (returnType.getQualifiedName.equals("kermeta::standard::Void"))
+			then
+				// All CallResult must have the same staticType
+				log("All CallResult must have the same staticType (kermeta::standard::Void)")
+				allCallResults.forAll{ cr | 
+					cr.staticType.getQualifiedName.equals("kermeta::standard::Void")
+				}
+			else
+				log("returnType is not instanceOf Void")
+				allCallResults.forAll{ cr |
+				
+					var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new 
+					cr.staticType.isSubTypeOf(returnType, typeVariableToSet)
+
+				}
+			end
+			
+
+			
+			//true
+		else
+			// it means that the operation is abstract
+			true
+		end
+		
+	end*/
+
+
 }	
+	
+	
+	
 	
 	/*
 	 * Check use of deprecated
