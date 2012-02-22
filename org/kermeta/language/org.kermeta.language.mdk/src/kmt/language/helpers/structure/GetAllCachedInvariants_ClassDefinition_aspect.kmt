@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : October 12, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class ClassDefinition
+{
+
+	attribute allCachedInvariants : Collection<kermeta::language::structure::Constraint>	
+
+	operation getAllCachedInvariants() : Collection<kermeta::language::structure::Constraint> is do
+	
+		if (self.allCachedInvariants.isVoid)
+		then
+			self.allCachedInvariants := Set<kermeta::language::structure::Constraint>.new
+			
+			//retrieve the ClassDefinition invariants
+			self.~inv.each{ invariant |
+				self.allCachedInvariants.add(invariant)
+			}
+		end
+	
+		result:=self.allCachedInvariants
+	end
+
+}
