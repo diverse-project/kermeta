@@ -1,0 +1,218 @@
+/* $Id:$ 
+ * Creation : January 11, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+
+// use Kermeta MDK to retrive qualified names
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+aspect class Type {
+
+	//if the current type from expectedType is a type variable, then add the binding
+	//if not, it's only important if self is a class or a function type
+	operation compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) is do
+		stdio.writeln("compare a type with something")
+			
+		if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+			typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+			
+		end
+			
+	end
+
+	//structural comparison is used when types are supposed to be equals
+	operation structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) is do
+		stdio.writeln("compare a type with something")
+			
+		if expectedType.isInstanceOf(TypeVariable).andThen{x|
+			typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} 
+		then
+			typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+			
+		end
+			
+	end
+	
+	operation isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+		result:=true
+	end
+}
+
+aspect class Class
+{
+
+
+	/**
+	 *	returns the sequence of typedefinition separing self to typeToSearch in the Type hierarchy
+	 */
+	operation findPathToType(typeToSearch : ClassDefinition, typeDefAlreadyVisited : Sequence<ClassDefinition>) : Sequence<Class> is do
+		result:=void
+		typeDefAlreadyVisited.add(self.typeDefinition.asType(ClassDefinition))
+		
+		if ( typeToSearch==self.typeDefinition.asType(ClassDefinition) )
+		then
+			result:=Sequence<Class>.new
+			result.add(self)
+		else
+			self.typeDefinition.superType.detect{ t |
+				if not typeDefAlreadyVisited.contains(t.asType(Class).typeDefinition.asType(ClassDefinition)) 
+				then
+					result:= t.asType(Class).findPathToType(typeToSearch,typeDefAlreadyVisited)
+					if not result.isVoid then
+						result.addAt(0, self)
+					end
+				end
+					//stop condition
+				result.isVoid.~not()
+				
+			}
+		end
+	end
+
+	/**
+	 * returns a clone of the current class but with the type of the different 
+	 * bindings replaced according to the parameter bindings
+	 */
+	operation cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Class is do
+	
+		result:= Class.new
+		result.typeDefinition:=self.typeDefinition
+		self.typeParamBinding.each{tvb|
+			var newTVB : TypeVariableBinding init TypeVariableBinding.new
+			newTVB.variable:=tvb.variable
+			if tvb.type.isInstanceOf(TypeVariable) then
+				var binding : TypeVariableBinding init bindings.detect{b|b.variable==tvb.type}
+				if binding.isVoid.~not then
+					newTVB.type:=binding.type
+				end
+			else 
+				if tvb.type.isInstanceOf(Class) then
+					newTVB.type:=tvb.type.asType(Class).cloneWithBindings(bindings)
+				end
+			end
+			result.typeParamBinding.add(newTVB)
+		}
+
+	end
+
+	/**
+	 * returns a class that is structurally comparable to typeExpected
+	 */
+	operation getComparableClass(typeExpected : Class) : Class is do 
+		
+//		stdio.writeln(">> getComparableClass for " + self.typeDefinition.name + ", expected is " + typeExpected.typeDefinition.name)
+		
+		var inheritancePath : Sequence<Class>
+		inheritancePath:=findPathToType(typeExpected.typeDefinition.asType(ClassDefinition), Sequence<ClassDefinition>.new)
+		result:=void
+		if inheritancePath.isVoid then
+			//result remains void, because self cannot be a subtype of typeExpected
+			//
+		else
+			//the supertype of the current Class that is of the same level than typeExpected 
+			var selfSuperType : Class init inheritancePath.elementAt(0)
+			from var i : Integer init 0
+			until i == inheritancePath.size - 1
+			loop
+				var superSuperType : Class 
+				superSuperType:=inheritancePath.elementAt(i+1).cloneWithBindings(selfSuperType.typeParamBinding)
+				
+				selfSuperType:=superSuperType
+				i:=i+1
+			end
+			result:=selfSuperType
+		end
+
+//		stdio.writeln("<< getComparableClass for " + self.typeDefinition.name + ", expected is " + typeExpected.typeDefinition.name)
+			
+	end
+	
+	
+	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+		
+		// First of all, check if self is kermeta::standard::void 
+		if (self.getQualifiedName.equals("kermeta::standard::Void"))
+		then
+			result:=true
+		else
+			stdio.writeln("ifSubTypeOf for class " + self.name + ", compare with " + expectedType.toString)
+			result:=true			
+			if ( expectedType.isInstanceOf(Class) ) 
+			then
+					
+				stdio.writeln("expectedType isInstanceOf Class")
+				var comparableClass : Class init self.getComparableClass(expectedType.asType(Class))
+				//comparableClass := self.getComparableClass(expectedType.asType(Class))
+			
+			
+				if (comparableClass.isVoid)
+				then
+					result:=false
+				else
+					result:= comparableClass.typeEquals(expectedType.asType(Class))
+				end
+			
+			else
+				stdio.writeln("expectedType is not InstanceOf Class")
+			
+			end
+			
+			/*
+			stdio.writeln("isSubTypeOf result = " + result.toString)
+			stdio.writeln(" -> typeVariableToSet.size : " + typeVariableToSet.size.toString)
+			typeVariableToSet.keys.each{ k |
+				stdio.writeln("   - key : " + k.toString)
+				stdio.writeln("     val : " + typeVariableToSet.getValue(k).toString) 
+			}
+			*/
+		
+		end
+		
+		
+		
+	end
+
+	method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
+		
+		stdio.writeln("compare a class with something")
+		stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
+		// It should not be a typeVariable ...
+			
+			/*if expectedType.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+				
+			else*/
+		
+		if expectedType.isInstanceOf(Class) 
+		then
+			// they are both of type class with the same number of type parameters, then all type parameters should be checked
+			// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the expectedType
+			if	self.typeParamBinding.size==expectedType.asType(Class).typeParamBinding.size
+			then
+				from var i : Integer init 0
+				until i==self.typeParamBinding.size
+				loop
+					self.typeParamBinding.elementAt(i).type.structurallyCompareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
+																							,typeVariableToSet
+																							/*,context*/)
+					i:=i+1
+				end
+			end
+							
+		end
+	end
+			
+	
+	
+}
