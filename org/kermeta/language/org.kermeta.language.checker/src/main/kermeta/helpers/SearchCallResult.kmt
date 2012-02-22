@@ -15,8 +15,13 @@ using kermeta::standard
 
 aspect class Expression
 {
+	// This operation checks wether there is at least one CallResult in an operation body
 	operation searchCallResult() : Boolean is abstract
-		// TODO: implement 'main' operation
+
+	operation retrieveAllCallResults() : Collection<CallResult> is abstract	
+	
+	// This operation checks wether a CallResult is always reached in an operation
+	operation checkCallResults() : Boolean is abstract
 }
 
 aspect class Block {
@@ -25,6 +30,25 @@ aspect class Block {
 		
 		result := self.statement.exists{ s | s.searchCallResult } or
 					self.rescueBlock.exists{ rb | rb.body.exists{ exp | exp.searchCallResult} }
+	end
+	
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		
+		self.statement.each{ s |
+			coll.addAll(s.retrieveAllCallResults) 
+		}
+		self.rescueBlock.each{rb|
+			rb.body.each{ exp | coll.addAll(exp.retrieveAllCallResults) }
+		}
+		
+		result:=coll
+	end
+	
+	method checkCallResults() : Boolean is do
+		
+		result:= self.statement.exists{ s | s.checkCallResults }
+
 	end
 }
 
@@ -41,6 +65,26 @@ aspect class Conditional {
 					end
 				)
 	end
+	
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		coll.addAll(self.thenBody.retrieveAllCallResults)
+		if (not(self.elseBody.isVoid))
+		then
+			coll.addAll(self.elseBody.retrieveAllCallResults)
+		end	
+		result:=coll
+	end
+	
+	method checkCallResults() : Boolean is do
+	
+		if (elseBody.isVoid)
+		then
+			result:=false
+		else
+			result:= self.thenBody.checkCallResults() and self.elseBody.checkCallResults()
+		end
+	end
 }
 
 aspect class Raise {
@@ -49,6 +93,15 @@ aspect class Raise {
 		result:=self.expression.searchCallResult
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		coll.addAll(self.expression.retrieveAllCallResults)
+		result:=coll
+	end
+	
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
 }
 
 aspect class EmptyExpression {
@@ -57,10 +110,26 @@ aspect class EmptyExpression {
 		result:=false
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
 aspect class SelfExpression {
 	
 	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=false
 	end
 
@@ -76,6 +145,20 @@ aspect class Loop {
 		end
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		if (not(self.body.isVoid))
+		then
+			coll.addAll(self.body.retrieveAllCallResults)
+		end
+		result:=coll
+	end
+
+	// You cannot be sure that you will get inside the loop ...
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
 aspect class Assignment {
 	
@@ -89,12 +172,39 @@ aspect class Assignment {
 
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		if (not(self.target.isVoid))
+		then
+			coll.addAll(self.target.retrieveAllCallResults)
+		end
+		result:=coll
+	end
+	
+	method checkCallResults() : Boolean is do
+		result:=if (not(self.target.isVoid))
+				then
+					self.target.checkCallResults
+				else
+					false
+				end
+	end
+
 }
 aspect class UnresolvedCall {
 	
 	method searchCallResult() : Boolean is do
 		result:=false
 	end
+	
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+	
 
 }
 aspect class CallVariable {
@@ -104,10 +214,28 @@ aspect class CallVariable {
 
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
 aspect class CallResult {
 	
 	method searchCallResult() : Boolean is do
+		result:=true
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		coll.add(self)
+		result:=coll
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=true
 	end
 
@@ -117,6 +245,15 @@ aspect class CallEnumLiteral {
 	method searchCallResult() : Boolean is do
 		result:=false
 	end
+	
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 
 }
 aspect class CallFeature {
@@ -126,10 +263,27 @@ aspect class CallFeature {
 
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+	
+	
 }
 aspect class CallProperty {
 	
 	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=false
 	end
 
@@ -140,10 +294,27 @@ aspect class CallOperation {
 		result:=false
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
+
 aspect class CallSuperOperation {
 	
 	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=false
 	end
 
@@ -155,6 +326,18 @@ aspect class LambdaExpression {
 		result:=self.body.searchCallResult
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		coll.addAll(self.body.retrieveAllCallResults)	
+		result:=coll
+	end
+	
+	// cannot be sure to reach the body of a lambda expression
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+	
+	
 }
 aspect class JavaStaticCall {
 	
@@ -162,6 +345,19 @@ aspect class JavaStaticCall {
 		result:=self.parameters.exists{p| p.searchCallResult}
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		self.parameters.each{ p |
+			coll.addAll(p.retrieveAllCallResults)
+		}
+		result:=coll
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+	
+	
 }
 aspect class VariableDecl {
 	
@@ -173,10 +369,32 @@ aspect class VariableDecl {
 				 end
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		var coll : Collection<CallResult> init Sequence<CallResult>.new
+		if (not(self.initialization.isVoid))
+		then
+			coll.addAll(self.initialization.retrieveAllCallResults)
+		end
+		result:=coll
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
+
 aspect class IntegerLiteral {
 	
 	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=false
 	end
 
@@ -187,10 +405,26 @@ aspect class StringLiteral {
 		result:=false
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
 aspect class VoidLiteral {
 	
 	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=false
 	end
 
@@ -201,10 +435,26 @@ aspect class BooleanLiteral {
 		result:=false
 	end
 
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
+		result:=false
+	end
+
 }
 aspect class CallTypeLiteral {
 	
 	method searchCallResult() : Boolean is do
+		result:=false
+	end
+
+	method retrieveAllCallResults() : Collection<CallResult> is do
+		result:=Sequence<CallResult>.new
+	end
+
+	method checkCallResults() : Boolean is do
 		result:=false
 	end
 
