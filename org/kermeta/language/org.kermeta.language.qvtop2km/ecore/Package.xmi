@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" 
+xsi:schemaLocation="http://schema.omg.org/spec/QVT/1.0/emof.xml EMOF.ecore#EMOF">
+  <ownedType xsi:type="emof:Class" name="x">
+    <ownedAttribute/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="y">
+    <ownedAttribute/>
+  </ownedType>
+</emof:Package>

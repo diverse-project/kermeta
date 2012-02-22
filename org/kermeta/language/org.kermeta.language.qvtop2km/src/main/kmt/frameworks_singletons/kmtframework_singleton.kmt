@@ -2,6 +2,7 @@ package root_package;
 using org::kermeta::language::structure
 using kermeta::emfpersistence
 using kermeta::standard
+using kermeta::io
 using kermeta::utils
 class KmtLib {
 
@@ -96,13 +97,13 @@ end
 
 operation getFromQualifiedName(qualifiedName : String) : kermeta::standard::Object is do
 
-	
+	StdIO.writeln("KmtLib::getFromQualifiedName")
 	var resourcesToSearch : Sequence<Resource> init libs.asSequence
 	
 	if cacheName==qualifiedName then
 	result:=cacheValue
 	end
-	
+	StdIO.writeln("1")
 	from var lib : Resource 
 	until result != void or resourcesToSearch.isEmpty
 	loop
@@ -110,12 +111,13 @@ operation getFromQualifiedName(qualifiedName : String) : kermeta::standard::Obje
 		resourcesToSearch.removeAt(0)
 		
 		var toSearch : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
-	
+		StdIO.writeln("2")
 		toSearch.add(lib.getContents().one)
 		
 		from var current : kermeta::standard::Object  
 		until toSearch.empty
 		loop
+			StdIO.writeln("3")
 			current:=toSearch.first
 			toSearch.removeAt(0)
 			
@@ -169,7 +171,7 @@ operation getFromQualifiedName(qualifiedName : String) : kermeta::standard::Obje
 	//StdIO.writeln("getFromQualifiedName : "+qualifiedName+" "+result.toString)
 	cacheName:=qualifiedName
 	cacheValue:=result
-	
+	StdIO.writeln("end KmtLib::getFromQualifiedName")
 end
 
 

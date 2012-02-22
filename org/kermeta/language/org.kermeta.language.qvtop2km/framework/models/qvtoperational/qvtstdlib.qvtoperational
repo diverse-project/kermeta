@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<qvtoperational:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml" xmi:id="o0" name="QvtLib">
+  <ownedType xsi:type="emof:Class" xmi:id="o1" name="Exception"/>
+  <ownedType xsi:type="emof:Class" xmi:id="o2" name="Model">
+    <ownedOperation xmi:id="o3" name="asTransformation" type="o13">
+      <ownedParameter xmi:id="o4" name="" type="o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o5" name="objectsOfType" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o6" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o7" name="createEmptyModel" type="o2"/>
+    <ownedOperation xmi:id="o8" name="objects" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o9" name="rootObjects" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o10" name="copy">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o11" name="removeElement">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o12" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+      </ownedParameter>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o13" name="Transformation">
+    <ownedOperation xmi:id="o14" name="parallelTransform" type="o18"/>
+    <ownedOperation xmi:id="o15" name="transform" type="o18"/>
+    <ownedOperation xmi:id="o16" name="wait" type="o18">
+      <ownedParameter xmi:id="o17" name="" type="o18" isOrdered="true" isUnique="false" upper="-1"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o18" name="Status">
+    <ownedOperation xmi:id="o19" name="raisedException" type="o1"/>
+    <ownedOperation xmi:id="o20" name="failed">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o21" name="succeeded">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o22" name="List">
+    <ownedOperation xmi:id="o23" name="insertAt">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o24" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="o25" name="">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o26" name="add">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o27" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o28" name="joinfields">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o29" name="sep">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="o30" name="begin">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="o31" name="end">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o32" name="append">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o33" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o34" name="prepend">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o35" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      </ownedParameter>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o36" name="Dictionary">
+    <ownedOperation xmi:id="o37" name="get">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o38" name="" type="o54"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o39" name="keys" type="o54" isOrdered="true" isUnique="false" upper="-1"/>
+    <ownedOperation xmi:id="o40" name="clear">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o41" name="repr">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o42" name="defaultget">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o43" name="" type="o54"/>
+      <ownedParameter xmi:id="o44" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o45" name="values" isOrdered="true" isUnique="false" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o46" name="put">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o47" name="" type="o54"/>
+      <ownedParameter xmi:id="o48" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o49" name="isEmpty">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o50" name="hasKey">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o51" name="" type="o54"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o52" name="size">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o53" name="AnonymousTuple"/>
+  <ownedType xsi:type="emof:Class" xmi:id="o54" name="KeyT"/>
+  <ownedType xsi:type="emof:Class" xmi:id="o55" name="String">
+    <ownedOperation xmi:id="o56" name="trim">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o57" name="quotify">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o58" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o59" name="replace">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o60" name="m1">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="o61" name="m2">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o62" name="startStrCounter">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o63" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o64" name="equalsIgnoreCase">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o65" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o66" name="find">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o67" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o68" name="size">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o69" name="startsWith">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o70" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o71" name="substringBefore">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o72" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o73" name="toLower">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o74" name="asInteger">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o75" name="length">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o76" name="restartAllStrCounter">
+      <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+      <ownedParameter xmi:id="o77" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o78" name="asFloat">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o79" name="incrStrCounter">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o80" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o81" name="format">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o82" name="value">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o83" name="indexOf">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o84" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o85" name="matchFloat">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o86" name="unquotify">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o87" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o88" name="firstToLower">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o89" name="matchBoolean">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o90" name="getStrCounter">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o91" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o92" name="asBoolean">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o93" name="rfind">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o94" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o95" name="substringAfter">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      <ownedParameter xmi:id="o96" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o97" name="isQuoted">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o98" name="s">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o99" name="matchIdentifier">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o100" name="endsWith">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o101" name="match">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o102" name="normalizeSpace">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o103" name="toUpper">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o104" name="matchInteger">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o105" name="firstToUpper">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o106" name="addSuffixNumber">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o107" name="OclElement">
+    <ownedOperation xmi:id="o108" name="subobjects" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o109" name="deepClone">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o110" name="allSubobjectsOfType" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o111" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o112" name="subobjectsOfKind" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o113" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o114" name="isInvalid">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o115" name="allSubobjects" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o116" name="allSubobjectsOfKind" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o117" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o118" name="asType">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o119" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o120" name="markedAs">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o121" name="">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o122" name="_globalId">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o123" name="isKindOf">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o124" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o125" name="stereotypedBy">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o126" name="">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o127" name="isTypeOf">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+      <ownedParameter xmi:id="o128" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o129" name="_localId">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o130" name="markValue">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o131" name="metaClassName">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o132" name="clone">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o133" name="subobjectsOfType" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+      <ownedParameter xmi:id="o134" name="">
+        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="o135" name="isUndefined">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o136" name="Integer">
+    <ownedOperation xmi:id="o137" name="range" isOrdered="true" isUnique="false" upper="-1">
+      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+      <ownedParameter xmi:id="o138" name="start">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="o139" name="end">
+        <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o2"/>
+      </ownedParameter>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" xmi:id="o140" name="OclObject">
+    <ownedOperation xmi:id="o141" name="repr">
+      <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="essentialocl:SetType" xmi:id="o142" name="Set(OclElement)">
+    <elementType xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+  </ownedType>
+  <ownedType xsi:type="imperativeocl:ListType" xmi:id="o143" name="List(Status)" elementType="o18"/>
+  <ownedType xsi:type="imperativeocl:ListType" xmi:id="o144" name="List(KeyT)" elementType="o54"/>
+  <ownedType xsi:type="imperativeocl:ListType" xmi:id="o145" name="List(T)">
+    <elementType xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o172"/>
+  </ownedType>
+  <ownedType xsi:type="imperativeocl:ListType" xmi:id="o146" name="List(OclElement)">
+    <elementType xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o6"/>
+  </ownedType>
+</qvtoperational:Library>

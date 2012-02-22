@@ -40,14 +40,14 @@
             <content xsi:type="imperativeocl:AssignExp" isReset="true">
               <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <left xsi:type="essentialocl:PropertyCallExp">
-                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.50"/>
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.50"/>
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
                   <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
                 </source>
                 <referredProperty href="../../../modelLibrary/PUB.emof#_0.@ownedType.0.@ownedAttribute.0"/>
               </left>
               <value xsi:type="essentialocl:PropertyCallExp">
-                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.50"/>
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.50"/>
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
                   <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>
                 </source>
@@ -57,14 +57,14 @@
             <content xsi:type="imperativeocl:AssignExp" isReset="true">
               <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <left xsi:type="essentialocl:PropertyCallExp">
-                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@result.0">
                   <type xsi:type="emof:Class" href="../../../modelLibrary/PUB.emof#_0.@ownedType.0"/>
                 </source>
                 <referredProperty href="../../../modelLibrary/PUB.emof#_0.@ownedType.0.@ownedAttribute.1"/>
               </left>
               <value xsi:type="essentialocl:OperationCallExp">
-                <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+                <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
                 <source xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.1">
                   <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
                     <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
@@ -73,7 +73,7 @@
                     <referredProperty href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1.@ownedAttribute.1"/>
                   </source>
                   <body xsi:type="essentialocl:PropertyCallExp">
-                    <type xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+                    <type xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
                     <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.1/@value.0/@source/@iterator.0">
                       <type xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.0"/>
                     </source>
@@ -100,7 +100,7 @@
       <elementType xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.0"/>
     </ownedType>
     <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(EInt)">
-      <elementType xsi:type="emof:PrimitiveType" href="../../../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
+      <elementType xsi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#_0.@ownedType.39"/>
     </ownedType>
     <ownedType xsi:type="essentialocl:SetType" name="Set(Book)">
       <elementType xsi:type="emof:Class" href="../../../modelLibrary/BOOKS.emof#_0.@ownedType.1"/>

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="ASCII"?>
 <emof:Package xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/MOF/2.0/emof.xml" xmi:id="_0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmi:id="_0"
     name="BOOKS" uri="http:///BOOKS.ecore">
   <ownedType xmi:type="emof:Class" xmi:id="_0.@ownedType.0" name="Chapter">
     <ownedAttribute xmi:id="_0.@ownedType.0.@ownedAttribute.0" name="title" isOrdered="true">
-      <type xmi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      <type xmi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_0.@ownedType.0.@ownedAttribute.1" name="nbPages" isOrdered="true">
-      <type xmi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.39"/>
+      <type xmi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.39"/>
     </ownedAttribute>
   </ownedType>
   <ownedType xmi:type="emof:Class" xmi:id="_0.@ownedType.1" name="Book">
     <ownedAttribute xmi:id="_0.@ownedType.1.@ownedAttribute.0" name="title" isOrdered="true">
-      <type xmi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      <type xmi:type="emof:PrimitiveType" href="platform:/plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_0.@ownedType.1.@ownedAttribute.1" name="chapters" type="_0.@ownedType.0"
         isOrdered="true" upper="-1" isComposite="true"/>

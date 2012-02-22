@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml">
+<emof:Package xmi:id="o0" name="OclLib">
+  <ownedType xmi:id="o1" xsi:type="emof:Class" name="OclObject">
+    <ownedOperation xmi:id="o2" xsi:type="emof:Operation" name="&lt;&gt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o3" xsi:type="emof:Parameter" name="" type="o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o4" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o5" xsi:type="emof:Parameter" name="" type="o1"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o6" xsi:type="emof:Class" name="OclElement">
+    <ownedOperation xmi:id="o7" xsi:type="emof:Operation" name="&lt;&gt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o8" xsi:type="emof:Parameter" name="" type="o6"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o9" xsi:type="emof:Operation" name="container" type="o6"/>
+    <ownedOperation xmi:id="o10" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o11" xsi:type="emof:Parameter" name="" type="o6"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o12" xsi:type="emof:Class" name="OclAny">
+    <ownedOperation xmi:id="o13" xsi:type="emof:Operation" name="&lt;&gt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o14" xsi:type="emof:Parameter" name="" type="o12"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o15" xsi:type="emof:Operation" name="oclAsType" type="o172">
+      <ownedParameter xmi:id="o16" xsi:type="emof:Parameter" name="" type="o28"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o17" xsi:type="emof:Operation" name="oclIsTypeOf" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o18" xsi:type="emof:Parameter" name="" type="o28"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o19" xsi:type="emof:Operation" name="oclIsUndefined" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    <ownedOperation xmi:id="o20" xsi:type="emof:Operation" name="oclIsInvalid" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    <ownedOperation xmi:id="o21" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o22" xsi:type="emof:Parameter" name="" type="o12"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o23" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="allInstances" type="o172"/>
+    <ownedOperation xmi:id="o24" xsi:type="emof:Operation" name="oclIsKindOf" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o25" xsi:type="emof:Parameter" name="" type="o28"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o26" xsi:type="essentialocl:VoidType" name="OclVoid"/>
+  <ownedType xmi:id="o27" xsi:type="essentialocl:InvalidType" name="OclInvalid"/>
+  <ownedType xmi:id="o28" xsi:type="emof:Class" name="OclType">
+    <ownedOperation xmi:id="o29" xsi:type="emof:Operation" name="&lt;&gt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o30" xsi:type="emof:Parameter" name="" type="o28"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o31" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o32" xsi:type="emof:Parameter" name="" type="o28"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o33" xsi:type="emof:Class" name="Real">
+    <ownedOperation xmi:id="o34" xsi:type="emof:Operation" name="&gt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o35" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o36" xsi:type="emof:Operation" name="&lt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o37" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o38" xsi:type="emof:Operation" name="round" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    <ownedOperation xmi:id="o39" xsi:type="emof:Operation" name="/" type="o33">
+      <ownedParameter xmi:id="o40" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o41" xsi:type="emof:Operation" name="floor" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    <ownedOperation xmi:id="o42" xsi:type="emof:Operation" name="&lt;=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o43" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o44" xsi:type="emof:Operation" name="max" type="o33">
+      <ownedParameter xmi:id="o45" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o46" xsi:type="emof:Operation" name="min" type="o33">
+      <ownedParameter xmi:id="o47" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o48" xsi:type="emof:Operation" name="&gt;=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o49" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o50" xsi:type="emof:Operation" name="-" type="o33"/>
+    <ownedOperation xmi:id="o51" xsi:type="emof:Operation" name="abs" type="o33"/>
+    <ownedOperation xmi:id="o52" xsi:type="emof:Operation" name="*" type="o33">
+      <ownedParameter xmi:id="o53" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o54" xsi:type="emof:Operation" name="-" type="o33">
+      <ownedParameter xmi:id="o55" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o56" xsi:type="emof:Operation" name="+" type="o33">
+      <ownedParameter xmi:id="o57" xsi:type="emof:Parameter" name="r" type="o33"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o58" xsi:type="emof:Class" name="Set">
+    <ownedOperation xmi:id="o59" xsi:type="emof:Operation" name="count" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o60" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o61" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="excluding" type="o172">
+      <ownedParameter xmi:id="o62" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o63" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="asSequence" type="o172"/>
+    <ownedOperation xmi:id="o64" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="union" type="o172">
+      <ownedParameter xmi:id="o65" xsi:type="emof:Parameter" isOrdered="false" isUnique="true" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o66" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="union" type="o172">
+      <ownedParameter xmi:id="o67" xsi:type="emof:Parameter" isOrdered="false" isUnique="false" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o68" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="asOrderedSet" type="o172"/>
+    <ownedOperation xmi:id="o69" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="asBag" type="o172"/>
+    <ownedOperation xmi:id="o70" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o71" xsi:type="emof:Parameter" isOrdered="false" isUnique="true" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o72" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="including" type="o172">
+      <ownedParameter xmi:id="o73" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o74" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="flatten" type="o173"/>
+    <ownedOperation xmi:id="o75" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="intersection" type="o172">
+      <ownedParameter xmi:id="o76" xsi:type="emof:Parameter" isOrdered="false" isUnique="true" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o77" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="intersection" type="o172">
+      <ownedParameter xmi:id="o78" xsi:type="emof:Parameter" isOrdered="false" isUnique="false" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o79" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="asSet" type="o172"/>
+    <ownedOperation xmi:id="o80" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="symmetricDifference" type="o172">
+      <ownedParameter xmi:id="o81" xsi:type="emof:Parameter" isOrdered="false" isUnique="true" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o82" xsi:type="emof:Class" name="Collection">
+    <ownedOperation xmi:id="o83" xsi:type="emof:Operation" name="count" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o84" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o85" xsi:type="emof:Operation" name="excludes" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o86" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o87" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="product" type="o171">
+      <ownedParameter xmi:id="o88" xsi:type="emof:Parameter" isOrdered="true" isUnique="false" upper="-1" name="c2" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o89" xsi:type="emof:Operation" name="notEmpty" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    <ownedOperation xmi:id="o90" xsi:type="emof:Operation" name="excludesAll" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o91" xsi:type="emof:Parameter" isOrdered="true" isUnique="false" upper="-1" name="c2" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o92" xsi:type="emof:Operation" name="sum" type="o172"/>
+    <ownedOperation xmi:id="o93" xsi:type="emof:Operation" name="includes" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o94" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o95" xsi:type="emof:Operation" name="isEmpty" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    <ownedOperation xmi:id="o96" xsi:type="emof:Operation" name="includesAll" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o97" xsi:type="emof:Parameter" isOrdered="true" isUnique="false" upper="-1" name="c2" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o98" xsi:type="emof:Operation" name="size" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+  </ownedType>
+  <ownedType xmi:id="o99" xsi:type="emof:Class" name="Bag">
+    <ownedOperation xmi:id="o100" xsi:type="emof:Operation" name="count" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o101" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o102" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="excluding" type="o172">
+      <ownedParameter xmi:id="o103" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o104" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="asSequence" type="o172"/>
+    <ownedOperation xmi:id="o105" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="union" type="o172">
+      <ownedParameter xmi:id="o106" xsi:type="emof:Parameter" isOrdered="false" isUnique="true" upper="-1" name="set" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o107" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="union" type="o172">
+      <ownedParameter xmi:id="o108" xsi:type="emof:Parameter" isOrdered="false" isUnique="false" upper="-1" name="bag" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o109" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="asOrderedSet" type="o172"/>
+    <ownedOperation xmi:id="o110" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="asBag" type="o172"/>
+    <ownedOperation xmi:id="o111" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o112" xsi:type="emof:Parameter" isOrdered="false" isUnique="false" upper="-1" name="bag" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o113" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="including" type="o172">
+      <ownedParameter xmi:id="o114" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o115" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="flatten" type="o173"/>
+    <ownedOperation xmi:id="o116" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="intersection" type="o172">
+      <ownedParameter xmi:id="o117" xsi:type="emof:Parameter" isOrdered="false" isUnique="true" upper="-1" name="set" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o118" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="intersection" type="o172">
+      <ownedParameter xmi:id="o119" xsi:type="emof:Parameter" isOrdered="false" isUnique="false" upper="-1" name="bag" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o120" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="asSet" type="o172"/>
+  </ownedType>
+  <ownedType xmi:id="o121" xsi:type="emof:Class" name="Sequence">
+    <ownedOperation xmi:id="o122" xsi:type="emof:Operation" name="count" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o123" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o124" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="insertAt" type="o172">
+      <ownedParameter xmi:id="o125" xsi:type="emof:Parameter" name="index" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o126" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o127" xsi:type="emof:Operation" name="last" type="o172"/>
+    <ownedOperation xmi:id="o128" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="excluding" type="o172">
+      <ownedParameter xmi:id="o129" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o130" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="asSequence" type="o172"/>
+    <ownedOperation xmi:id="o131" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="union" type="o172">
+      <ownedParameter xmi:id="o132" xsi:type="emof:Parameter" isOrdered="true" isUnique="false" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o133" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="asOrderedSet" type="o172"/>
+    <ownedOperation xmi:id="o134" xsi:type="emof:Operation" isOrdered="false" isUnique="false" upper="-1" name="asBag" type="o172"/>
+    <ownedOperation xmi:id="o135" xsi:type="emof:Operation" name="=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o136" xsi:type="emof:Parameter" isOrdered="true" isUnique="false" upper="-1" name="s" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o137" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="prepend" type="o172">
+      <ownedParameter xmi:id="o138" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o139" xsi:type="emof:Operation" name="indexOf" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o140" xsi:type="emof:Parameter" name="obj" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o141" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="subSequence" type="o172">
+      <ownedParameter xmi:id="o142" xsi:type="emof:Parameter" name="lower" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o143" xsi:type="emof:Parameter" name="upper" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o144" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="including" type="o172">
+      <ownedParameter xmi:id="o145" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o146" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="flatten" type="o173"/>
+    <ownedOperation xmi:id="o147" xsi:type="emof:Operation" isOrdered="false" isUnique="true" upper="-1" name="asSet" type="o172"/>
+    <ownedOperation xmi:id="o148" xsi:type="emof:Operation" name="first" type="o172"/>
+    <ownedOperation xmi:id="o149" xsi:type="emof:Operation" isOrdered="true" isUnique="false" upper="-1" name="append" type="o172">
+      <ownedParameter xmi:id="o150" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o151" xsi:type="emof:Operation" name="at" type="o172">
+      <ownedParameter xmi:id="o152" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o153" xsi:type="emof:Class" name="OrderedSet">
+    <ownedOperation xmi:id="o154" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="insertAt" type="o172">
+      <ownedParameter xmi:id="o155" xsi:type="emof:Parameter" name="index" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o156" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o157" xsi:type="emof:Operation" name="last" type="o172"/>
+    <ownedOperation xmi:id="o158" xsi:type="emof:Operation" name="indexOf" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o159" xsi:type="emof:Parameter" name="obj" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o160" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="append" type="o172">
+      <ownedParameter xmi:id="o161" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o162" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="prepend" type="o172">
+      <ownedParameter xmi:id="o163" xsi:type="emof:Parameter" name="object" type="o172"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o164" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="flatten" type="o173"/>
+    <ownedOperation xmi:id="o165" xsi:type="emof:Operation" name="first" type="o172"/>
+    <ownedOperation xmi:id="o166" xsi:type="emof:Operation" isOrdered="true" isUnique="true" upper="-1" name="subOrderedSet" type="o172">
+      <ownedParameter xmi:id="o167" xsi:type="emof:Parameter" name="lower" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o168" xsi:type="emof:Parameter" name="upper" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o169" xsi:type="emof:Operation" name="at" type="o172">
+      <ownedParameter xmi:id="o170" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o171" xsi:type="emof:Class" name="Tuple"/>
+  <ownedType xmi:id="o172" xsi:type="emof:Class" name="T"/>
+  <ownedType xmi:id="o173" xsi:type="emof:Class" name="T2"/>
+  <ownedType xmi:id="o174" xsi:type="emof:Class" name="String">
+    <ownedOperation xmi:id="o175" xsi:type="emof:Operation" name="substring" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o3">
+      <ownedParameter xmi:id="o176" xsi:type="emof:Parameter" name="lower" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+      <ownedParameter xmi:id="o177" xsi:type="emof:Parameter" name="upper" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o178" xsi:type="emof:Operation" name="toInteger" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    <ownedOperation xmi:id="o179" xsi:type="emof:Operation" name="toReal" type="o33"/>
+    <ownedOperation xmi:id="o180" xsi:type="emof:Operation" name="concat" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o3">
+      <ownedParameter xmi:id="o181" xsi:type="emof:Parameter" name="s" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o3"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o182" xsi:type="emof:Operation" name="size" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+  </ownedType>
+  <ownedType xmi:id="o183" xsi:type="emof:Class" name="Boolean">
+    <ownedOperation xmi:id="o184" xsi:type="emof:Operation" name="and" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o185" xsi:type="emof:Parameter" name="b" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o186" xsi:type="emof:Operation" name="not" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    <ownedOperation xmi:id="o187" xsi:type="emof:Operation" name="xor" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o188" xsi:type="emof:Parameter" name="b" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o189" xsi:type="emof:Operation" name="or" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o190" xsi:type="emof:Parameter" name="b" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o191" xsi:type="emof:Operation" name="implies" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o192" xsi:type="emof:Parameter" name="b" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o193" xsi:type="emof:Class" name="Integer">
+    <ownedOperation xmi:id="o194" xsi:type="emof:Operation" name="&gt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o195" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o196" xsi:type="emof:Operation" name="&lt;" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o197" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o198" xsi:type="emof:Operation" name="/" type="o33">
+      <ownedParameter xmi:id="o199" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o200" xsi:type="emof:Operation" name="min" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o201" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o202" xsi:type="emof:Operation" name="max" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o203" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o204" xsi:type="emof:Operation" name="&lt;=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o205" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o206" xsi:type="emof:Operation" name="&gt;=" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o1">
+      <ownedParameter xmi:id="o207" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o208" xsi:type="emof:Operation" name="-" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o209" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o210" xsi:type="emof:Operation" name="abs" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    <ownedOperation xmi:id="o211" xsi:type="emof:Operation" name="*" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o212" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o213" xsi:type="emof:Operation" name="div" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o214" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o215" xsi:type="emof:Operation" name="-" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    <ownedOperation xmi:id="o216" xsi:type="emof:Operation" name="+" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o217" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="o218" xsi:type="emof:Operation" name="mod" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2">
+      <ownedParameter xmi:id="o219" xsi:type="emof:Parameter" name="i" type="emof:PrimitiveType pathmap://models/emof/primitivetypes.emof#o2"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:id="o220" xsi:type="essentialocl:SetType" name="Set(T)" elementType="o172"/>
+  <ownedType xmi:id="o221" xsi:type="essentialocl:SequenceType" name="Sequence(T)" elementType="o172"/>
+  <ownedType xmi:id="o222" xsi:type="essentialocl:BagType" name="Bag(T)" elementType="o172"/>
+  <ownedType xmi:id="o223" xsi:type="essentialocl:OrderedSetType" name="OrderedSet(T)" elementType="o172"/>
+  <ownedType xmi:id="o224" xsi:type="essentialocl:SetType" name="Set(T2)" elementType="o173"/>
+  <ownedType xmi:id="o225" xsi:type="essentialocl:SetType" name="Set(Tuple)" elementType="o171"/>
+  <ownedType xmi:id="o226" xsi:type="essentialocl:BagType" name="Bag(T2)" elementType="o173"/>
+  <ownedType xmi:id="o227" xsi:type="essentialocl:SequenceType" name="Sequence(T2)" elementType="o173"/>
+  <ownedType xmi:id="o228" xsi:type="essentialocl:OrderedSetType" name="OrderedSet(T2)" elementType="o173"/>
+</emof:Package>
+</xmi:XMI>

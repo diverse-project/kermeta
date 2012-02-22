@@ -359,11 +359,11 @@ aspect class MappingBody {
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
 		
 		if output==void then
-			//StdIO.writeln("MappingBody::range2domain")
+			StdIO.writeln("MappingBody::range2domain")
 			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 			output:=out
 			
-			
+			StdIO.writeln("MappingBody::range2domain-0")
 			//before initialization, the guard should be checked
 			if ~operation.asType(MappingOperation).when!=void then
 				var whenCond : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
@@ -390,7 +390,7 @@ aspect class MappingBody {
 				
 				whenCond.thenBody:=raiseExcep
 			end
-			
+			StdIO.writeln("MappingBody::range2domain-1")
 			
 			//before initialization, result should get its value from the result parameter in case of inherit call
 			do 
@@ -402,13 +402,18 @@ aspect class MappingBody {
 				initRes.~value:=resultVar
 				resultVar.name:="result"
 			end
-			
+			StdIO.writeln("MappingBody::range2domain-2")
 			//start initialization section
 			do
 				var initBlock : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+				StdIO.writeln("MappingBody::range2domain-200")
 				out.statement.add(initBlock)
+				StdIO.writeln("MappingBody::range2domain-201"+initSection.toString)
+				StdIO.writeln("size"+initSection.size.toString)
 				initSection.each{oclexp|
+					StdIO.writeln("MappingBody::range2domain-20")
 					oclexp.range2domain(context)
+					StdIO.writeln("MappingBody::range2domain-21")
 					if not oclexp.output.isVoid() then
 						initBlock.statement.add(oclexp.output.asType(org::kermeta::language::behavior::Expression) )
 					else
@@ -419,6 +424,7 @@ aspect class MappingBody {
 				//init parameters that are still null
 				out.statement.add(createInit(context))
 			end
+			StdIO.writeln("MappingBody::range2domain-3")
 			//add inheritance calls
 			do
 				~operation.asType(MappingOperation).inherited.each{
@@ -437,13 +443,14 @@ aspect class MappingBody {
 					callInheritedOp.parameters.add(isStrictVal)
 				}
 			end
-			
+			StdIO.writeln("MappingBody::range2domain-4")
 			//create trace
 			do
 				var trace : org::kermeta::language::behavior::Expression init createTrace(context)
 				out.statement.add(trace)
 				trace.addDocumentationTag("trace generation")
 			end
+			StdIO.writeln("MappingBody::range2domain-5")
 			//create all content
 			content.each{oclexp|
 				oclexp.range2domain(context)
@@ -455,7 +462,7 @@ aspect class MappingBody {
 				}
 			//generate the usual rescues
 			genDefaultRescues(context)
-			
+			StdIO.writeln("MappingBody::range2domain-end")
 		end	
 	end
 

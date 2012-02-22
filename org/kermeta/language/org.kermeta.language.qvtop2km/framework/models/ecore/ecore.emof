@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+  <emof:Package name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+    <ownedType xsi:type="emof:Class" name="EAttribute" superClass="/0/@ownedType.15">
+      <ownedAttribute name="iD" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="eAttributeType" type="/0/@ownedType.4" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EAnnotation" superClass="/0/@ownedType.8">
+      <ownedAttribute name="source" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="details" type="/0/@ownedType.17" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="eModelElement" type="/0/@ownedType.8" isOrdered="true" opposite="/0/@ownedType.8/@ownedAttribute.0"/>
+      <ownedAttribute name="contents" type="/0/@ownedType.10" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="references" type="/0/@ownedType.10" isOrdered="true" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EClass" superClass="/0/@ownedType.3">
+      <ownedAttribute name="abstract" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="interface" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="eSuperTypes" type="/0/@ownedType.2" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eOperations" type="/0/@ownedType.11" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.11/@ownedAttribute.0"/>
+      <ownedAttribute name="eAllAttributes" type="/0/@ownedType.0" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eAllReferences" type="/0/@ownedType.14" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eReferences" type="/0/@ownedType.14" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eAttributes" type="/0/@ownedType.0" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eAllContainments" type="/0/@ownedType.14" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eAllOperations" type="/0/@ownedType.11" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eAllStructuralFeatures" type="/0/@ownedType.15" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eAllSuperTypes" type="/0/@ownedType.2" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eIDAttribute" type="/0/@ownedType.0" isOrdered="true"/>
+      <ownedAttribute name="eStructuralFeatures" type="/0/@ownedType.15" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.15/@ownedAttribute.7"/>
+      <ownedAttribute name="eGenericSuperTypes" type="/0/@ownedType.18" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="eAllGenericSuperTypes" type="/0/@ownedType.18" isOrdered="true" upper="-1"/>
+      <ownedOperation name="isSuperTypeOf" type="/0/@ownedType.22">
+        <ownedParameter name="someClass" type="/0/@ownedType.2"/>
+      </ownedOperation>
+      <ownedOperation name="getFeatureCount" type="/0/@ownedType.39"/>
+      <ownedOperation name="getEStructuralFeature" type="/0/@ownedType.15">
+        <ownedParameter name="featureID" type="/0/@ownedType.39"/>
+      </ownedOperation>
+      <ownedOperation name="getFeatureID" type="/0/@ownedType.39">
+        <ownedParameter name="feature" type="/0/@ownedType.15"/>
+      </ownedOperation>
+      <ownedOperation name="getEStructuralFeature" type="/0/@ownedType.15">
+        <ownedParameter name="featureName" type="/0/@ownedType.50"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EClassifier" isAbstract="true" superClass="/0/@ownedType.9">
+      <ownedAttribute name="instanceClassName" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="instanceClass" type="/0/@ownedType.41" isOrdered="true"/>
+      <ownedAttribute name="defaultValue" type="/0/@ownedType.42" isOrdered="true"/>
+      <ownedAttribute name="instanceTypeName" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="ePackage" type="/0/@ownedType.12" isOrdered="true" opposite="/0/@ownedType.12/@ownedAttribute.3"/>
+      <ownedAttribute name="eTypeParameters" type="/0/@ownedType.19" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedOperation name="isInstance" type="/0/@ownedType.22">
+        <ownedParameter name="object" type="/0/@ownedType.42"/>
+      </ownedOperation>
+      <ownedOperation name="getClassifierID" type="/0/@ownedType.39"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EDataType" superClass="/0/@ownedType.3">
+      <ownedAttribute name="serializable" type="/0/@ownedType.22" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EEnum" superClass="/0/@ownedType.4">
+      <ownedAttribute name="eLiterals" type="/0/@ownedType.6" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.6/@ownedAttribute.3"/>
+      <ownedOperation name="getEEnumLiteral" type="/0/@ownedType.6">
+        <ownedParameter name="name" type="/0/@ownedType.50"/>
+      </ownedOperation>
+      <ownedOperation name="getEEnumLiteral" type="/0/@ownedType.6">
+        <ownedParameter name="value" type="/0/@ownedType.39"/>
+      </ownedOperation>
+      <ownedOperation name="getEEnumLiteralByLiteral" type="/0/@ownedType.6">
+        <ownedParameter name="literal" type="/0/@ownedType.50"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EEnumLiteral" superClass="/0/@ownedType.9">
+      <ownedAttribute name="value" type="/0/@ownedType.39" isOrdered="true"/>
+      <ownedAttribute name="instance" type="/0/@ownedType.34" isOrdered="true"/>
+      <ownedAttribute name="literal" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="eEnum" type="/0/@ownedType.5" isOrdered="true" opposite="/0/@ownedType.5/@ownedAttribute.0"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EFactory" superClass="/0/@ownedType.8">
+      <ownedAttribute name="ePackage" type="/0/@ownedType.12" isOrdered="true" opposite="/0/@ownedType.12/@ownedAttribute.2"/>
+      <ownedOperation name="create" type="/0/@ownedType.10">
+        <ownedParameter name="eClass" type="/0/@ownedType.2"/>
+      </ownedOperation>
+      <ownedOperation name="createFromString" type="/0/@ownedType.42">
+        <ownedParameter name="eDataType" type="/0/@ownedType.4"/>
+        <ownedParameter name="literalValue" type="/0/@ownedType.50"/>
+      </ownedOperation>
+      <ownedOperation name="convertToString" type="/0/@ownedType.50">
+        <ownedParameter name="eDataType" type="/0/@ownedType.4"/>
+        <ownedParameter name="instanceValue" type="/0/@ownedType.42"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EModelElement" isAbstract="true" superClass="/0/@ownedType.10">
+      <ownedAttribute name="eAnnotations" type="/0/@ownedType.1" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.1/@ownedAttribute.2"/>
+      <ownedOperation name="getEAnnotation" type="/0/@ownedType.1">
+        <ownedParameter name="source" type="/0/@ownedType.50"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ENamedElement" isAbstract="true" superClass="/0/@ownedType.8">
+      <ownedAttribute name="name" type="/0/@ownedType.50" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EObject">
+      <ownedOperation name="eClass" type="/0/@ownedType.2"/>
+      <ownedOperation name="eIsProxy" type="/0/@ownedType.22"/>
+      <ownedOperation name="eResource" type="/0/@ownedType.46"/>
+      <ownedOperation name="eContainer" type="/0/@ownedType.10"/>
+      <ownedOperation name="eContainingFeature" type="/0/@ownedType.15"/>
+      <ownedOperation name="eContainmentFeature" type="/0/@ownedType.14"/>
+      <ownedOperation name="eContents" type="/0/@ownedType.33"/>
+      <ownedOperation name="eAllContents" type="/0/@ownedType.51"/>
+      <ownedOperation name="eCrossReferences" type="/0/@ownedType.33"/>
+      <ownedOperation name="eGet" type="/0/@ownedType.42">
+        <ownedParameter name="feature" type="/0/@ownedType.15"/>
+      </ownedOperation>
+      <ownedOperation name="eGet" type="/0/@ownedType.42">
+        <ownedParameter name="feature" type="/0/@ownedType.15"/>
+        <ownedParameter name="resolve" type="/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="eSet">
+        <ownedParameter name="feature" type="/0/@ownedType.15"/>
+        <ownedParameter name="newValue" type="/0/@ownedType.42"/>
+      </ownedOperation>
+      <ownedOperation name="eIsSet" type="/0/@ownedType.22">
+        <ownedParameter name="feature" type="/0/@ownedType.15"/>
+      </ownedOperation>
+      <ownedOperation name="eUnset">
+        <ownedParameter name="feature" type="/0/@ownedType.15"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EOperation" superClass="/0/@ownedType.16">
+      <ownedAttribute name="eContainingClass" type="/0/@ownedType.2" isOrdered="true" opposite="/0/@ownedType.2/@ownedAttribute.3"/>
+      <ownedAttribute name="eTypeParameters" type="/0/@ownedType.19" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="eParameters" type="/0/@ownedType.13" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.13/@ownedAttribute.0"/>
+      <ownedAttribute name="eExceptions" type="/0/@ownedType.3" isOrdered="true" upper="-1"/>
+      <ownedAttribute name="eGenericExceptions" type="/0/@ownedType.18" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EPackage" superClass="/0/@ownedType.9">
+      <ownedAttribute name="nsURI" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="nsPrefix" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="eFactoryInstance" type="/0/@ownedType.7" isOrdered="true" opposite="/0/@ownedType.7/@ownedAttribute.0"/>
+      <ownedAttribute name="eClassifiers" type="/0/@ownedType.3" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.3/@ownedAttribute.4"/>
+      <ownedAttribute name="eSubpackages" type="/0/@ownedType.12" isOrdered="true" upper="-1" isComposite="true" opposite="/0/@ownedType.12/@ownedAttribute.5"/>
+      <ownedAttribute name="eSuperPackage" type="/0/@ownedType.12" isOrdered="true" opposite="/0/@ownedType.12/@ownedAttribute.4"/>
+      <ownedOperation name="getEClassifier" type="/0/@ownedType.3">
+        <ownedParameter name="name" type="/0/@ownedType.50"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EParameter" superClass="/0/@ownedType.16">
+      <ownedAttribute name="eOperation" type="/0/@ownedType.11" isOrdered="true" opposite="/0/@ownedType.11/@ownedAttribute.2"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EReference" superClass="/0/@ownedType.15">
+      <ownedAttribute name="containment" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="container" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="resolveProxies" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="eOpposite" type="/0/@ownedType.14" isOrdered="true"/>
+      <ownedAttribute name="eReferenceType" type="/0/@ownedType.2" isOrdered="true"/>
+      <ownedAttribute name="eKeys" type="/0/@ownedType.0" isOrdered="true" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EStructuralFeature" isAbstract="true" superClass="/0/@ownedType.16">
+      <ownedAttribute name="changeable" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="volatile" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="transient" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="defaultValueLiteral" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="defaultValue" type="/0/@ownedType.42" isOrdered="true"/>
+      <ownedAttribute name="unsettable" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="derived" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="eContainingClass" type="/0/@ownedType.2" isOrdered="true" opposite="/0/@ownedType.2/@ownedAttribute.13"/>
+      <ownedOperation name="getFeatureID" type="/0/@ownedType.39"/>
+      <ownedOperation name="getContainerClass" type="/0/@ownedType.41"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ETypedElement" isAbstract="true" superClass="/0/@ownedType.9">
+      <ownedAttribute name="ordered" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="unique" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="lowerBound" type="/0/@ownedType.39" isOrdered="true"/>
+      <ownedAttribute name="upperBound" type="/0/@ownedType.39" isOrdered="true"/>
+      <ownedAttribute name="many" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="required" type="/0/@ownedType.22" isOrdered="true"/>
+      <ownedAttribute name="eType" type="/0/@ownedType.3" isOrdered="true"/>
+      <ownedAttribute name="eGenericType" type="/0/@ownedType.18" isOrdered="true" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EStringToStringMapEntry">
+      <ownedAttribute name="key" type="/0/@ownedType.50" isOrdered="true"/>
+      <ownedAttribute name="value" type="/0/@ownedType.50" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="EGenericType" superClass="/0/@ownedType.10">
+      <ownedAttribute name="eUpperBound" type="/0/@ownedType.18" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="eTypeArguments" type="/0/@ownedType.18" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="eRawType" type="/0/@ownedType.3" isOrdered="true"/>
+      <ownedAttribute name="eLowerBound" type="/0/@ownedType.18" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="eTypeParameter" type="/0/@ownedType.19" isOrdered="true"/>
+      <ownedAttribute name="eClassifier" type="/0/@ownedType.3" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ETypeParameter" superClass="/0/@ownedType.9">
+      <ownedAttribute name="eBounds" type="/0/@ownedType.18" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:PrimitiveType" name="EBigDecimal"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EBigInteger"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EBoolean"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EBooleanObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EByte"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EByteArray"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EByteObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EChar"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="ECharacterObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EDate"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EDiagnosticChain"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EDouble"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EDoubleObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EEList"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EEnumerator"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EFeatureMap"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EFeatureMapEntry"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EFloat"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EFloatObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EInt"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EIntegerObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EJavaClass"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EJavaObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="ELong"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="ELongObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EMap"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EResource"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EResourceSet"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EShort"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EShortObject"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="EString"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="ETreeIterator"/>
+  </emof:Package>
+  <emof:Tag element="/0/@ownedType.20" name="classInstanceName" value="java.math.BigDecimal"/>
+  <emof:Tag element="/0/@ownedType.21" name="classInstanceName" value="java.math.BigInteger"/>
+  <emof:Tag element="/0/@ownedType.22" name="classInstanceName" value="boolean"/>
+  <emof:Tag element="/0/@ownedType.23" name="classInstanceName" value="java.lang.Boolean"/>
+  <emof:Tag element="/0/@ownedType.24" name="classInstanceName" value="byte"/>
+  <emof:Tag element="/0/@ownedType.25" name="classInstanceName" value="byte[]"/>
+  <emof:Tag element="/0/@ownedType.26" name="classInstanceName" value="java.lang.Byte"/>
+  <emof:Tag element="/0/@ownedType.27" name="classInstanceName" value="char"/>
+  <emof:Tag element="/0/@ownedType.28" name="classInstanceName" value="java.lang.Character"/>
+  <emof:Tag element="/0/@ownedType.29" name="classInstanceName" value="java.util.Date"/>
+  <emof:Tag element="/0/@ownedType.30" name="classInstanceName" value="org.eclipse.emf.common.util.DiagnosticChain"/>
+  <emof:Tag element="/0/@ownedType.31" name="classInstanceName" value="double"/>
+  <emof:Tag element="/0/@ownedType.32" name="classInstanceName" value="java.lang.Double"/>
+  <emof:Tag element="/0/@ownedType.33" name="classInstanceName" value="org.eclipse.emf.common.util.EList"/>
+  <emof:Tag element="/0/@ownedType.34" name="classInstanceName" value="org.eclipse.emf.common.util.Enumerator"/>
+  <emof:Tag element="/0/@ownedType.35" name="classInstanceName" value="org.eclipse.emf.ecore.util.FeatureMap"/>
+  <emof:Tag element="/0/@ownedType.36" name="classInstanceName" value="org.eclipse.emf.ecore.util.FeatureMap$Entry"/>
+  <emof:Tag element="/0/@ownedType.37" name="classInstanceName" value="float"/>
+  <emof:Tag element="/0/@ownedType.38" name="classInstanceName" value="java.lang.Float"/>
+  <emof:Tag element="/0/@ownedType.39" name="classInstanceName" value="int"/>
+  <emof:Tag element="/0/@ownedType.40" name="classInstanceName" value="java.lang.Integer"/>
+  <emof:Tag element="/0/@ownedType.41" name="classInstanceName" value="java.lang.Class"/>
+  <emof:Tag element="/0/@ownedType.42" name="classInstanceName" value="java.lang.Object"/>
+  <emof:Tag element="/0/@ownedType.43" name="classInstanceName" value="long"/>
+  <emof:Tag element="/0/@ownedType.44" name="classInstanceName" value="java.lang.Long"/>
+  <emof:Tag element="/0/@ownedType.45" name="classInstanceName" value="java.util.Map"/>
+  <emof:Tag element="/0/@ownedType.46" name="classInstanceName" value="org.eclipse.emf.ecore.resource.Resource"/>
+  <emof:Tag element="/0/@ownedType.47" name="classInstanceName" value="org.eclipse.emf.ecore.resource.ResourceSet"/>
+  <emof:Tag element="/0/@ownedType.48" name="classInstanceName" value="short"/>
+  <emof:Tag element="/0/@ownedType.49" name="classInstanceName" value="java.lang.Short"/>
+  <emof:Tag element="/0/@ownedType.50" name="classInstanceName" value="java.lang.String"/>
+  <emof:Tag element="/0/@ownedType.51" name="classInstanceName" value="org.eclipse.emf.common.util.TreeIterator"/>
+</xmi:XMI>

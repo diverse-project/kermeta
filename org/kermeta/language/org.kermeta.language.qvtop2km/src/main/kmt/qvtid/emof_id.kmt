@@ -3,28 +3,30 @@ package emof;
 require "../qvt2kermeta.kmt"
 require "kermeta_id.kmt"
 require kermeta
-
+using kermeta::standard
+using kermeta::io
 
 
 
 aspect class Class {
 
 method getQVTID(): kermeta::standard::String is do 
-	
-	
-	
-	
+	StdIO.writeln("C::getQVTID")
 	result:=~package.getQVTID() + "::"+name
-	
-
+	StdIO.writeln("end C::getQVTID")
 end
 }
 
 aspect class Property {
 
 method getQVTID(): kermeta::standard::String is do 
-
+	StdIO.writeln("P::getQVTID")
+	StdIO.writeln(name.toString)
+	StdIO.writeln(~class.isVoid.toString)
+	StdIO.writeln(~class.toString)
+	
 	result:=~class.getQVTID() + "::"+name
+	StdIO.writeln("end getQVTID")
 end
 }
 

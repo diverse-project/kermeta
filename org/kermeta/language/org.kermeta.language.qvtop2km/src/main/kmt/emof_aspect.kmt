@@ -66,16 +66,19 @@ aspect class Class {
 				else*/
 					out.isAspect:=false
 				//end
-				
+				StdIO.writeln("0")
 				ownedAttribute.each{etubirttAdenwo | do
 						var elt : org::kermeta::language::structure::Property
 						
 						if out.isAspect then
 							elt?=context.kmtContext.getFromQualifiedName(etubirttAdenwo.getQVTID)
 						end
+						StdIO.writeln("01")
 						if elt!=void then
+							StdIO.writeln("02")
 							etubirttAdenwo.output:= elt
 						else
+							StdIO.writeln("03")
 							etubirttAdenwo.range2domain(context)
 							elt ?= etubirttAdenwo.output
 							if elt.isNotEqual(void) then
@@ -83,6 +86,7 @@ aspect class Class {
 							end
 						end
 					end}
+				StdIO.writeln("1")
 				superClass.each{ssalCrepus | do
 						var elt : org::kermeta::language::structure::Type
 						ssalCrepus.range2domain(context)
@@ -128,13 +132,15 @@ aspect class Property
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
-				//StdIO.writeln("Property::range2domain")
+				StdIO.writeln("Property::range2domain")
 				var existing : org::kermeta::language::structure::Property
-				
+				StdIO.writeln("0")
 				existing ?= context.kmtContext.getFromQualifiedName(getQVTID)
 				if existing != void then
+					StdIO.writeln("1")
 					output:=existing
 				else
+					StdIO.writeln("2")
 					var out : org::kermeta::language::structure::Property init org::kermeta::language::structure::Property.new
 					output := out
 					out.default := default
@@ -147,11 +153,13 @@ aspect class Property
 					out.upper := upper
 					
 					if opposite.isNotEqual(void) then
+						StdIO.writeln("3")
 						opposite.range2domain(context)
 						out.opposite ?= opposite.output
 	
 					end
 					if type.isNotEqual(void) then
+						StdIO.writeln("4")
 						out.type := type.generateType(context)
 							if (out.type!=void).andThen{x| not out.type.isInstanceOf(org::kermeta::language::structure::PrimitiveType)} then
 								out.containedType.add(out.type)
@@ -161,7 +169,7 @@ aspect class Property
 							end
 						
 					end
-					//StdIO.writeln("Property::range2domain-end")
+					StdIO.writeln("Property::range2domain-end")
 				end
 			end	
 		end

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+<emof:Package xmi:id="o0" name="PrimitiveTypes">
+  <ownedType xmi:id="o1" xsi:type="emof:PrimitiveType" name="Boolean"/>
+  <ownedType xmi:id="o2" xsi:type="emof:PrimitiveType" name="Integer"/>
+  <ownedType xmi:id="o3" xsi:type="emof:PrimitiveType" name="String"/>
+  <ownedType xmi:id="o4" xsi:type="emof:PrimitiveType" name="UnlimitedNatural"/>
+  <ownedType xmi:id="o5" xsi:type="emof:PrimitiveType" name="Real"/>
+</emof:Package>
+</xmi:XMI>
