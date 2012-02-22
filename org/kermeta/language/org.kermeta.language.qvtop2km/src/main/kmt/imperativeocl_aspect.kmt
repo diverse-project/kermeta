@@ -48,7 +48,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			
 			condition.range2domain(context)
 			if condition.isInstanceOf(essentialocl::TypeExp) then 
-				var typeCheckCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var typeCheckCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 				typeCheckCall.name:="isInstanceOf"
 				typeCheckCall.parameters.add(condition.output.asType(org::kermeta::language::behavior::Expression))
 				typeCheckCall.target:=org::kermeta::language::behavior::CallVariable.new.initName(lambdaExp.parameters.one.name)
@@ -69,15 +69,15 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			//a sequence<X> cannot be casted as a sequence<Y> even if X>Y
 			//hence we created the deferred sequences
 			
-			var deferredcast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var deferredcast : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			deferredcast.name:="fromSeq"
 			
-			var dSeqInit : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var dSeqInit : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			deferredcast.target:=dSeqInit
 			dSeqInit.name:="new"
 			
-			var dseqCD : org::kermeta::language::structure::ClassDefinition 
-			dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
+			var dseqType : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new 
+			dseqType.typeIdentifier:="kermeta::standard::DeferredSequence"
 			
 			var paramTypeCD : org::kermeta::language::structure::ClassDefinition
 			condition.asType(essentialocl::TypeExp).referredType.range2domain(context)
@@ -85,7 +85,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			
 			var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 			dSeqInit.target:=dseqLit
-			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(paramTypeCD)
+			dseqLit.typeref:=dseqType.generateParameterizedTypeRef(paramTypeCD)
 			
 			deferredcast.parameters.add(iterateCall)
 			

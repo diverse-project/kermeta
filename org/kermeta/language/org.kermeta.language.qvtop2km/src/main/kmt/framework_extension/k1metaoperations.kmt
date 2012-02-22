@@ -6,7 +6,7 @@ package org{
 				aspect class ClassDefinition{
 				
 				operation allAttribute() : Set<Property> is do 
-				
+				result:=void
 				end
 				
 				}
@@ -14,7 +14,7 @@ package org{
 				aspect class NamedElement{
 				
 				operation qualifiedName() : String is do
-				
+				result := void
 				end
 				
 				}

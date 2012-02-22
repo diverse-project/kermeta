@@ -121,7 +121,9 @@ end
 aspect class Operation {
 
 method range2domain(context : Qvt2KermetaContext) : Void is do
-
+StdIO.writeln("Operation::range2domain")
+StdIO.writeln(self.toString)
+StdIO.writeln(self.name.isVoid.toString)
 StdIO.writeln("operation "+name)
 
 end

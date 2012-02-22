@@ -99,7 +99,7 @@ operation getFromQualifiedName(qualifiedName : String) : kermeta::standard::Obje
 
 	StdIO.writeln("KmtLib::getFromQualifiedName")
 	var resourcesToSearch : Sequence<Resource> init libs.asSequence
-	
+	result:=void
 	if cacheName==qualifiedName then
 	result:=cacheValue
 	end

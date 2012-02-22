@@ -16,7 +16,7 @@ end
 	operation getFromQVTID(qvtid : String) : Object is do
 		
 		var resourcesToSearch : Sequence<Resource> init libs.asSequence
-		
+		result:=void
 		from var lib : Resource 
 		until result != void or resourcesToSearch.isEmpty
 		loop

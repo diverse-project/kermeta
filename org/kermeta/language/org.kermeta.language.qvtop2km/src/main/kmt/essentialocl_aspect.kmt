@@ -16,7 +16,7 @@ aspect class PropertyCallExp{
 		source.range2domain(context)
 		out.target?=source.output
 		output:=out
-	
+		StdIO.writeln("PropertyCallExp::range2domain-end")
 	end
 
 }
@@ -76,9 +76,9 @@ aspect class OperationCallExp {
 			//either the operation is coming from the initial framework
 			var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 			output:=out
-			
+			StdIO.writeln("OperationCallExp::range2domain-0")
 			if context.qvtContext.libs.contains(referredOperation.containingResource()) and referredOperation.output==void then
-				
+				StdIO.writeln("OperationCallExp::range2domain-1")
 				//in kermeta the flatten operation from sequence return a bag of objects
 				//should return flatten.asSequence.asType(Sequence<X>) where X is the type of the flatten operation in qvt
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
@@ -95,7 +95,7 @@ aspect class OperationCallExp {
 					var dseqCD : org::kermeta::language::structure::ClassDefinition 
 					dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
 					
-					
+					StdIO.writeln("OperationCallExp::range2domain-2")
 					/*
 					//here the sequence type is transformed in a class with the appropriated generic type so we shouldn't use
 					//the generateTypeRef method
@@ -147,7 +147,7 @@ aspect class OperationCallExp {
 					source.range2domain(context)
 					out.target?=source.output
 				end
-
+				StdIO.writeln("OperationCallExp::range2domain-3")
 				if referredOperation.getQVTID() =="::QvtLib::Model::objectsOfType" then
 					out.name:="objectsOfType"
 					source.range2domain(context)
@@ -167,17 +167,19 @@ aspect class OperationCallExp {
 				StdIO.writeln(" referredOperation name : "+ referredOperation.getQVTID)
 			else
 				//or not
-				StdIO.writeln("OperationCallExp")
+				StdIO.writeln("OperationCallExp::range2domain-4")
 				
 				//if there is a source model
 				if source!=void then
 					source.range2domain(context)
 					out.target?=source.output
 				else
-					var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
+					var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 					out.target:=transfoCall
 				end
+				StdIO.writeln("OperationCallExp::range2domain-5")
 				if (referredOperation !=void) then
+					
 					referredOperation.range2domain(context)
 					out.staticOperation?=referredOperation.output
 					if out.staticOperation==void then
@@ -187,6 +189,7 @@ aspect class OperationCallExp {
 					end
 					StdIO.writeln("referredOperation name : "+ referredOperation.name)
 				end
+				StdIO.writeln("OperationCallExp::range2domain-6")
 				argument.each{x|
 						x.range2domain(context) 
 						if x.output!=void then 
@@ -225,7 +228,7 @@ aspect class VariableExp {
 				out:= org::kermeta::language::behavior::SelfExpression.new
 			else
 				if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then
-					var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::CallProperty.new.callToTransfoContextSingleton(context)
+					var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 					out := org::kermeta::language::behavior::CallProperty.new
 					out.asType(org::kermeta::language::behavior::CallProperty).target:=transfoContext
 					referredVariable.range2domain(context)

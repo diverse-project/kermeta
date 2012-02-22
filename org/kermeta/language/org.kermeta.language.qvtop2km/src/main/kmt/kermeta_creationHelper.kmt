@@ -27,6 +27,35 @@ package structure{
 	
 	}
 	
+	aspect class UnresolvedType {
+		method generateTypeRef() : org::kermeta::language::behavior::TypeReference is do
+			result:=org::kermeta::language::behavior::TypeReference.new
+			result.lower:=0
+			result.upper:=1
+			result.isUnique:=true
+			result.type:=self
+			result.containedType.add(self)
+			
+		
+		end
+		//TODO this doesn't allow to use parameterized type as parameter
+		operation generateParameterizedTypeRef(parameter : ClassDefinition) : org::kermeta::language::behavior::TypeReference is do
+			result:= generateTypeRef()
+			
+			//var varBinding : TypeVariableBinding init TypeVariableBinding.new
+			//result.type.asType(ParameterizedType).typeParamBinding.add(varBinding)
+			//varBinding.variable:=self.typeParameter.one
+			var paramType : Class init Class.new
+			paramType.typeDefinition:=parameter
+			
+			//varBinding.type:=paramType
+			self.generics.add(paramType)
+			self.containedType.add(paramType)
+			//varBinding.containedType.add(paramType)
+		
+		end
+	}
+	
 	aspect class Class{
 	
 		method generateTypeRef() : org::kermeta::language::behavior::TypeReference is do
@@ -114,11 +143,12 @@ package behavior {
 		end
 	}
 	
-	aspect class CallFeature {
+	aspect class UnresolvedCall {
 	
 		//generate a call to the singleton transformationtionContext
 		//root_package::TransformationContext.getDefault.asType(root_package::TransformationContext)
 		operation callToTransfoContextSingleton(context : Qvt2KermetaContext) : org::kermeta::language::behavior::UnresolvedCall is do
+			StdIO.writeln("CallFeature::callToTransfoContextSingleton")
 			result:= self
 			
 			result.name:="asType"
@@ -140,6 +170,7 @@ package behavior {
 			cf_getDefault.target:=tl_getDefault
 			//tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
 			tl_getDefault.name:="root_package::TransformationContext"
+			StdIO.writeln("CallFeature::callToTransfoContextSingleton-end")
 		end
 	
 	}

@@ -92,7 +92,7 @@ aspect class OperationBody {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then
-			//StdIO.writeln("OperationBody::range2domain")
+			StdIO.writeln("OperationBody::range2domain")
 			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 			output:=out
 			
@@ -116,41 +116,52 @@ aspect class OperationBody {
 					}
 			genDefaultRescues(context)
 			end
-			//StdIO.writeln("OperationBody::range2domain-end")
+			StdIO.writeln("OperationBody::range2domain-end")
 		end
 	end
 
 	operation genDefaultRescues(context : Qvt2KermetaContext) : Void is do
+		StdIO.writeln("OperationBody::genDefaultRescues")
 		var bodyBlock : org::kermeta::language::behavior::Block
 		bodyBlock?=output
+		StdIO.writeln("OperationBody::genDefaultRescues-0")
+		
 		//rescue for return
 		do 
 			var returnRescue : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
 			bodyBlock.rescueBlock.add(returnRescue)
 			returnRescue.exceptionName := "e"
-			var returnExpCD : org::kermeta::language::structure::ClassDefinition
-			returnExpCD?=context.kmtContext.getFromQualifiedName("root_package::ReturnException")
-			returnRescue.exceptionType:=returnExpCD.generateTypeRef()
 			
+			var returnExpType: org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new 
+			returnExpType.typeIdentifier:="root_package::ReturnException"
+			//var returnExpCD : org::kermeta::language::structure::ClassDefinition
+			//returnExpCD?=context.kmtContext.getFromQualifiedName("root_package::ReturnException")
+			StdIO.writeln("OperationBody::genDefaultRescues-01")
+			StdIO.writeln("exceptionType"+returnRescue.exceptionType.toString)
+			returnRescue.exceptionType:=returnExpType.generateTypeRef()
+			StdIO.writeln("OperationBody::genDefaultRescues-1")
+		
 			var voidTest : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
 			returnRescue.body.add(voidTest)
 			var hasValueCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 			voidTest.condition:=hasValueCall
 			hasValueCall.name:="hasValue"
 			hasValueCall.target:=org::kermeta::language::behavior::CallVariable.new.initName("e")
-			
+			StdIO.writeln("OperationBody::genDefaultRescues-2")
+		
 			var assignResult : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
 			voidTest.thenBody:=assignResult
 			assignResult.isCast:=true
 			assignResult.target:=org::kermeta::language::behavior::CallResult.new
-			
+			StdIO.writeln("OperationBody::genDefaultRescues-3")
+		
 			var callresultValue :org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 			assignResult.~value:=callresultValue
 			callresultValue.name:="returnValue"
 			callresultValue.target:=org::kermeta::language::behavior::CallVariable.new.initName("e")
 		end
 		
-		
+		StdIO.writeln("OperationBody::genDefaultRescues-end")
 	end
 }
 
@@ -185,7 +196,7 @@ aspect class ImperativeOperation {
 	operation getTransformation() : OperationalTransformation is do
 		//StdIO.writeln("MappingOperation::getTransformation")
 		var o : kermeta::standard::Object
-		
+		result:=void
 		/*from  o:=self.container
 		until o.isInstanceOf(OperationalTransformation) or o==void
 		loop
@@ -420,9 +431,12 @@ aspect class MappingBody {
 						//StdIO.writeln( "a statement in initSection is void "+oclexp.getMetaClass().name)
 					end
 					}
+				StdIO.writeln("MappingBody::range2domain-22")
 				initBlock.addDocumentationTag("initSection")
+				StdIO.writeln("MappingBody::range2domain-23")
 				//init parameters that are still null
 				out.statement.add(createInit(context))
+				StdIO.writeln("MappingBody::range2domain-24")
 			end
 			StdIO.writeln("MappingBody::range2domain-3")
 			//add inheritance calls
@@ -477,9 +491,9 @@ aspect class MappingBody {
 			var violatedGuardRescue : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
 			bodyBlock.rescueBlock.add(violatedGuardRescue)
 			violatedGuardRescue.exceptionName:="e"
-			var violatedGuardCD : org::kermeta::language::structure::ClassDefinition
-			violatedGuardCD?=context.kmtContext.getFromQualifiedName("root_package::ViolatedGuardException")
-			violatedGuardRescue.exceptionType := violatedGuardCD.generateTypeRef()
+			var violatedGuardType : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+			violatedGuardType.typeIdentifier:="root_package::ViolatedGuardException"
+			violatedGuardRescue.exceptionType := violatedGuardType.generateTypeRef()
 			
 			var strictTest : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
 			violatedGuardRescue.body.add(strictTest)
@@ -514,7 +528,7 @@ aspect class MappingBody {
 		traceContext.~value:=~operation.name
 		cf_trace.parameters.add(traceContext)
 		
-		cf_trace.target:=org::kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
+		cf_trace.target:=org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 		
 		/*var cf_cast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 		cf_cast.name:="asType"
@@ -545,6 +559,8 @@ aspect class MappingBody {
 		initialize a mapping parameter if it is void and add it to the right model
 	*/
 	operation initializeFromParameter(vp : qvtoperational::VarParameter, context : Qvt2KermetaContext) : org::kermeta::language::behavior::Expression is do 
+		StdIO.writeln("MappingBody::initializeFromParameter")
+		result:=void
 		if vp!=void then 
 			
 			//create condition
@@ -626,7 +642,7 @@ aspect class MappingBody {
 				mp.extent.range2domain(context)
 				var callModelParam : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				callModelParam.name:=mp.extent.output.asType(org::kermeta::language::structure::Property).name
-				callModelParam.target := org::kermeta::language::behavior::CallFeature.new.callToTransfoContextSingleton(context)
+				callModelParam.target := org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 				var callExtent : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 				callExtent.name:="extent"
 				callExtent.target:=callModelParam
@@ -646,6 +662,7 @@ aspect class MappingBody {
 				thenBlock.statement.add(callAddInstance)
 			end
 		end
+		StdIO.writeln("MappingBody::initializeFromParameter-end")
 	end
 	
 	
@@ -656,7 +673,7 @@ aspect class MappingBody {
 	*/
 	
 	operation createInit(context : Qvt2KermetaContext) : org::kermeta::language::behavior::Block is do
-		//StdIO.writeln("MappingBody::createInit")
+		StdIO.writeln("MappingBody::createInit")
 		
 		var block: org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 		
@@ -678,9 +695,8 @@ aspect class MappingBody {
 					end
 					}
 		
-		
 		result:=block
-		//StdIO.writeln("MappingBody::createInit-end")
+		StdIO.writeln("MappingBody::createInit-end")
 	end
 	
 	//return the equivalent of the operation return type in terms of collection depending on the cardinality, unicity and order
@@ -1056,7 +1072,7 @@ aspect class MappingCallExp
 				source.range2domain(context)
 				out.target?=source.output
 			else
-				var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::CallOperation.new.callToTransfoContextSingleton(context)
+				var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 				out.target:=transfoCall
 			end
 			if (referredOperation !=void) then
