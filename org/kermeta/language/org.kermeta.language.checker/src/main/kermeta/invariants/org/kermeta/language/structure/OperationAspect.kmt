@@ -167,17 +167,17 @@ aspect class Operation
 		
 		// Do not check abstract operations, operations with tag @CompilerIgnore "true"
 		// and operations whose owning class are tagged @CompilerIgnore "true" 
-		if (not(self.isAbstract) and not(self.kOwnedTags.exists{ t | t.name.equals("CompilerIgnore") and t.~value.equals("true") }
+		if (not(self.isAbstract) and not(self.kOwnedTags.exists{ t | (t.name.equals("CompilerIgnore") and t.~value.equals("true")) or (t.name.equals("ecore") and t.~value.equals("true")) }
 										or self.owningClass.kOwnedTags.exists{t| t.name.equals("CompilerIgnore") and t.~value.equals("true") }))
 		then
 			var returnType : Type init self.type
 			
 			if (returnType.isVoid)
 			then
-				stdio.writeln("returntype is void")
+				//stdio.writeln("returntype is void")
 				true
 			else
-				stdio.writeln("qualifiedName : " + returnType.getQualifiedName)
+				//stdio.writeln("qualifiedName : " + returnType.getQualifiedName)
 				if (returnType.getQualifiedName.equals("kermeta::standard::Void"))
 				then
 					// nothing to do
