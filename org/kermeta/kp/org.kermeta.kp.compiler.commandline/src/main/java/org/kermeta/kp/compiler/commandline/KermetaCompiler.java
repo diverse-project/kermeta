@@ -39,6 +39,7 @@ import org.kermeta.diagnostic.InvariantProxy;
 import org.kermeta.diagnostic.ModelReference;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
+import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.Source;
 import org.kermeta.kp.compiler.commandline.callable.CallableGenmodelGenerator;
 import org.kermeta.kp.compiler.commandline.callable.CallableLogProblem;
@@ -872,6 +873,17 @@ public class KermetaCompiler {
 		 * ().put(equivalence.getEcorePackageName(),
 		 * equivalence.getJavaPackageName()); } }
 		 */
+		for( PackageEquivalence packEquivalence : kp.getPackageEquivalences()){
+			if(packEquivalence.getEcorePackage() !=  null && packEquivalence.getJavaPackage() !=  null &&
+					(!packEquivalence.getEcorePackage().isEmpty()) && (!packEquivalence.getJavaPackage().isEmpty()))	{
+				logger.debug("\tadding package equivalence "+packEquivalence.getEcorePackage() +"="+ packEquivalence.getJavaPackage(), LOG_MESSAGE_GROUP);
+				k2.utils.TypeEquivalence.packageEquivelence().put(packEquivalence.getEcorePackage(), packEquivalence.getJavaPackage());
+			}
+			else{
+				logger.warn("ignoring invalid (empty) package equivalence", LOG_MESSAGE_GROUP);
+			}
+			
+		}
 		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
 		km2ScalaCompiler.compile(kmFileURL);
 	}
