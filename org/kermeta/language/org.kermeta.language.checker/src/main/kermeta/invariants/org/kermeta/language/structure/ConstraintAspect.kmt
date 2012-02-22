@@ -37,7 +37,7 @@ aspect class Constraint
 	 */
 	@Scope "RESOLVED"
 	inv no_call_result is do
-		stdio.writeln("Evaluating no_call_result on invariant " + self.name)
+		//stdio.writeln("Evaluating no_call_result on invariant " + self.name)
 		not(self.body.searchCallResult)
 		//true
 	end
