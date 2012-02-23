@@ -10,33 +10,13 @@
     <packaging>jar</packaging>
     <name>language.prettyprinter :: a little prettyprinter for k2</name>
 
-    <dependencies>    
-        <dependency>
-            <groupId>${project.groupId}</groupId>
+    <dependencies>   
+    	 <dependency>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
-        <dependency>
-            <groupId>fr.irisa.triskell.kermeta</groupId>
-            <artifactId>kermeta.model</artifactId>
-            <version>${kermeta.model.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>${scala.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.language</groupId>
-            <artifactId>language.framework.scala</artifactId>
-            <version>${framework.scala.version}</version>
-            <scope>compile</scope>
-        </dependency>
-		<dependency>
-			<groupId>org.kermeta.emf</groupId>
-			<artifactId>emf.lib</artifactId>
-			<version>${emf.version}</version>
-		</dependency>
+        
     </dependencies>
     
     <build>
@@ -47,11 +27,10 @@
 		  </resources>
         <plugins>
             <!-- Kermeta Compiler plugin -->
-            
-             <plugin>
-                <groupId>org.kermeta.language</groupId>
-                <artifactId>language.compiler.mavenplugin</artifactId>
-                <version>${language.compiler.version}</version>
+            <plugin>
+                <groupId>org.kermeta.kp</groupId>
+                <artifactId>kp.compiler.mavenplugin</artifactId>
+                <version>2.0.1-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -59,37 +38,22 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <model>src/generated/km/PrettyPrinter.km</model>
+                            <kp>org.kermeta.language.prettyprinter.kp</kp>
+                            <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
+                            <generateKmOnly>false</generateKmOnly>
+                            <checkingEnabled>false</checkingEnabled>
+                            <intermediateFilesRequired>false</intermediateFilesRequired>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-     
-            <!-- Add generated source to build cycle -->
-             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/kermeta</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-		  	<plugin>
+            </plugin> 
+             <!-- package into a jar for OSGI -->
+            <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-jar-plugin</artifactId>		        
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.1</version>
 		        <configuration>
 		          <archive>
 		            <manifestEntries>
@@ -97,35 +61,20 @@
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
-						<Bundle-Activator>org.kermeta.language.prettyprinter.internal.Activator</Bundle-Activator>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                        <Export-Package>
-			org.kermeta.language.prettyprinter
-                        </Export-Package>
                         <Require-Bundle>
-			org.kermeta.scala.scala-library,
-            fr.irisa.triskell.kermeta.model,
-            org.kermeta.language.model,        
-            org.kermeta.language.framework.scala
                         </Require-Bundle>
+                        <Export-Package>
+                        </Export-Package>
                         <Import-Package>
-            kermeta.persistence,
-			org.eclipse.emf.common.notify,
-			org.eclipse.emf.common.util,
-			org.eclipse.emf.ecore,
-			org.eclipse.emf.ecore.impl,
-			org.eclipse.emf.ecore.resource,
-			org.eclipse.emf.ecore.util,
-			org.eclipse.emf.ecore.xmi,
-			org.eclipse.emf.ecore.xmi.impl,
-			org.kermeta.language.structure,
-			org.osgi.framework;version="[1.5,2)"
-                        </Import-Package>
+						</Import-Package>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
       		</plugin>
+            
+             
         </plugins>
     </build>
 </project>

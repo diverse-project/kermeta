@@ -5,37 +5,39 @@
  * Authors  : 
  *            cbouhour
  */
-@mainClass "org::kermeta::language::prettyprinter::PrettyPrinter"
-@mainOperation "testMain"
+/*@mainClass "org::kermeta::language::prettyprinter::PrettyPrinter"
+@mainOperation "testMain"*/
 
 
 package org::kermeta::language::prettyprinter;
 
-require kermeta
+/*require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "PrettyPrinterAspect.kmt"
-
+*/
 using kermeta::standard
-using kermeta::persistence
-
+using kermeta::emfpersistence
+using kermeta::io
+using kermeta::utils::FileIO
 class PrettyPrinter
 {
 	operation testMain() : Void is do 
-		var repository : EMFRepository init EMFRepository.new
-		var folder : String init "platform:/resource/org.kermeta.language.prettyprinter/src/tests/"
-		var baseFileName : String init "toPrettyPrint"
-		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
-		var theModelResource : Resource init repository.getResource(folder+baseFileName+".km")
-       	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
+		var repository : ResourceSet init ResourceSet.new
+		var folder : String init "platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-km/book2pub1/"
+		var baseFileName : String init "Book2Publication"
+		//repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		var theModelResource : Resource init repository.createResource(folder+baseFileName+".km","http://www.kermeta.org/kermeta/2_0_0/")
+       	theModelResource.load(void)
+       	StdIO.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
 		       	
        	var theModelingUnit : org::kermeta::language::structure::ModelingUnit
-       	theModelingUnit ?= theModelResource.one
-       	
-       	stdio.writeln(prettyPrint(theModelingUnit))
+       	theModelingUnit ?= theModelResource.getContents.one
+       	FileIO.writeTextFile((folder+baseFileName+".kmt").toURI, prettyPrint(theModelingUnit))
+       	//StdIO.writeln(prettyPrint(theModelingUnit))
        	
 	end
 	
 	operation prettyPrint(aModelingUnit : org::kermeta::language::structure::ModelingUnit) : String is do
-		result := aModelingUnit.prettyPrint()
+		result := aModelingUnit.prettyPrint(0)
 	end
 }
