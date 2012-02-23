@@ -80,7 +80,7 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 			
 		}
 		catch (Exception e) {				
-			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Problem loading "+urlToLoad.getUrl()+" "+e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(urlToLoad.getSource()));			
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Problem loading "+urlToLoad.getUrl()+" "+e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e, KpResourceHelper.createFileReference(urlToLoad.getSource()));			
 			
 		}
 		return null;
