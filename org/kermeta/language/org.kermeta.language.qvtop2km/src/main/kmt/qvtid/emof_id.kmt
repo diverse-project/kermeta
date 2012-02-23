@@ -16,6 +16,14 @@ method getQVTID(): kermeta::standard::String is do
 	StdIO.writeln("end C::getQVTID")
 end
 }
+aspect class PrimitiveType {
+
+method getQVTID(): kermeta::standard::String is do 
+	StdIO.writeln("PT::getQVTID")
+	result:=~package.getQVTID() + "::"+name
+	StdIO.writeln("end PT::getQVTID")
+end
+}
 
 aspect class Property {
 
