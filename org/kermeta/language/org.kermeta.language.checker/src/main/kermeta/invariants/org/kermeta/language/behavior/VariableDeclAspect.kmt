@@ -56,14 +56,20 @@ aspect class VariableDecl
 		else
 			//stdio.writeln(" init -> self.initialization.staticType : " + self.initialization.staticType.toString)
 			//stdio.writeln(" init ->     			self.type.type : " + self.type.type.toString)
-			if (self.initialization.staticType.isKindOf(Class) and self.type.type.isKindOf(Class))
+			if (self.initialization.staticType.isVoid)
 			then
-				//var cl : Class init self.initialization.staticType.asType(Class).getComparableClass(self.type.type.asType(Class))
-				//stdio.writeln(" cl found : " + cl.toString)
-				var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
-				self.initialization.staticType.isSubTypeOf(self.type.type, typeVariableToSet)
-			else
 				false
+			else
+			
+				if (self.initialization.staticType.isKindOf(Class) and self.type.type.isKindOf(Class))
+				then
+					//var cl : Class init self.initialization.staticType.asType(Class).getComparableClass(self.type.type.asType(Class))
+					//stdio.writeln(" cl found : " + cl.toString)
+					var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+					self.initialization.staticType.isSubTypeOf(self.type.type, typeVariableToSet)
+				else
+					false
+				end
 			end
 		end 
 		
