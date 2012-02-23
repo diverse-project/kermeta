@@ -94,8 +94,9 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     
     res.append("this.")
    
-    val baseName = currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
-    var useIs = false	  
+    var baseName = currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+    var useIs = false
+    var useGet = true
     if (Util.hasEcoreTag(thi)){
     	var s: StringBuilder = new StringBuilder
     	visit(thi.getType(),s)
@@ -106,13 +107,23 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 	    	log.debug(classQualifiedName+"."+"is"+baseName + " found in additional classpath")
     	  }
     	  else{
-    		  log.debug(classQualifiedName+"."+"is"+baseName + " NOT found in additional classpath")
+    	    if(Util.doesMethodExists(classQualifiedName, "get"+baseName)) {
+		    	useGet = true
+		    	log.debug(classQualifiedName+"."+"get"+baseName + " found in additional classpath")
+    	    }
+    	    else{
+    	      useGet = false
+    	      // probably a UML case
+    		  log.debug("neither " +classQualifiedName+"."+"is"+baseName + " nor "+classQualifiedName+"."+"get"+baseName + " found in additional classpath")
+    		  // use to original attribute name
+    		  baseName = currentname
+    	    }
     	  }
     	}
     }
     if (useIs) {
       res.append(prefix + "is")    
-    } else {
+    } else if (useGet) {
       res.append(prefix + "get")
     }
 
