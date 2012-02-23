@@ -43,6 +43,8 @@
                         </Export-Package>
 						<Require-Bundle>
 							org.kermeta.scala.scala-library,
+							org.kermeta.scala.scala-compiler,
+							org.kermeta.language.km2bytecode,
 							org.kermeta.utils.systemservices.api,
 							org.kermeta.utils.helpers,
             				fr.irisa.triskell.kermeta.model,
@@ -67,7 +69,6 @@
 							org.ops4j.pax.url.mvn
                         </Require-Bundle>
                         <Import-Package>
-							scala.tools.nsc,
 							org.kermeta.kp.editor,
 							org.kermeta.kp.editor.mopp,
 							org.kermeta.emf.genmodel,
