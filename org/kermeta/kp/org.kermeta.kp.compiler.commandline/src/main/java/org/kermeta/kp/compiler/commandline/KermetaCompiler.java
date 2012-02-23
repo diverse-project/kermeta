@@ -23,7 +23,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.ZipEntry;
@@ -111,7 +113,12 @@ public class KermetaCompiler {
 	private static final Lock lock = new ReentrantLock();
 	
 	
-	private ExecutorService threadExector = Executors.newCachedThreadPool();
+	//private ExecutorService threadExector = Executors.newCachedThreadPool();
+	// this kind of executor should be able to queue any number of parallel tasks and run them on the available Threads in the pool
+	// it is tuned to accept a burst of request and process them ...
+	// see http://docs.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ThreadPoolExecutor.html
+	private ExecutorService threadExector = new ThreadPoolExecutor(16, 16, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+	
 	private ExecutorService singleThreadExector = Executors.newSingleThreadExecutor();
 	
 	
@@ -145,8 +152,8 @@ public class KermetaCompiler {
 		if (registerProtocols) {
 			registerMVNUrlHandler();
 		}
-		if (threadExector instanceof ThreadPoolExecutor)
-		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);
+		/*if (threadExector instanceof ThreadPoolExecutor)
+		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);*/
 		
 		this.runInEclipse = willRunInEclipse;
 	}
@@ -184,8 +191,8 @@ public class KermetaCompiler {
 		if (registerProtocols) {
 			registerMVNUrlHandler();
 		}
-		if (threadExector instanceof ThreadPoolExecutor)
-		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);
+		/*if (threadExector instanceof ThreadPoolExecutor)
+		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);*/
 	}
 
 	private void registerMVNUrlHandler() {
