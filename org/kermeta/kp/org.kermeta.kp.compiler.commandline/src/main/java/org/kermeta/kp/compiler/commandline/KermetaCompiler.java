@@ -504,6 +504,7 @@ public class KermetaCompiler {
 				}
 				currentUrl = sourceURL;
 				kpSources.add(new TracedURL(src, FileHelpers.StringToURL(sourceURL)));
+				logger.debug("     FileHelpers.StringToURL(sourceURL) : " + FileHelpers.StringToURL(sourceURL), LOG_MESSAGE_GROUP);
 			}
 			catch(IOException e){
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), 
@@ -708,7 +709,11 @@ public class KermetaCompiler {
 						logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
 					}
 					URL jarURL = new URL(dependencyURL);
-					if( jarURL.getProtocol().equals("file")){
+					if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
+						// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
+						jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
+					}
+					if( jarURL.getProtocol().equals("file")){ 
 						File theFile;
 						try {
 							theFile = new File(jarURL.toURI());
