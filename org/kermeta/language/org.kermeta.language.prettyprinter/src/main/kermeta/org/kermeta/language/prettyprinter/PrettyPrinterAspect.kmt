@@ -152,7 +152,7 @@ package structure{
 	aspect class UnresolvedType{
 		method typePrettyPrint(indent : Integer) : String is do
 			result := typeIdentifier
-			if not generics.isVoid then
+			if generics.size!=0 then
 				result := result+"<"
 				var first :Boolean init true
 				generics.each{g|
@@ -211,6 +211,40 @@ package behavior {
 		method prettyPrint(indent : Integer) : String is do
 			result := ""
 		end
+	}
+	
+	aspect class CallTypeLiteral {
+		method prettyPrint(indent : Integer) : String is do
+			result:=typeref.prettyPrint(indent)
+		end
+	
+	}
+	
+	aspect class TypeReference {
+	
+		method prettyPrint(indent : Integer) : String is do
+		if upper!=1 then
+			if isOrdered and isUnique then
+				result:="oset "
+			end
+			if isOrdered and not isUnique then
+				result:="seq "
+			end
+			if isUnique and not isOrdered then
+				result:="set "
+			end
+			if (not isUnique) and not isOrdered then
+				result:="bag "
+			end
+		else
+			result:=""	
+		end
+		result:=result+type.typePrettyPrint(indent)
+		if upper!=1 then
+			result:=result+"["+lower+","+"*]"
+		end
+		end
+	
 	}
 	
 	aspect class Block {
