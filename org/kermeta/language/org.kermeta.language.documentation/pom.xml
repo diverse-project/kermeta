@@ -18,15 +18,24 @@
 	<build>
    		<resources>
         	<resource>
+        		<!-- due to a bug in the highlighting, only the toc.xml and the index is taken from the generate-eclipse
+        			the rest is taken from the generate-html-multi which is supposed to be chunked with the same level  
+        		-->
                 <directory>target/docbkx/eclipse/</directory>
                  <filtering>false</filtering>
                   <includes>
                      <include>**/index.xml</include>
                      <include>**/toc.xml</include>
-                     <include>**/*.html</include>
-                     <include>**/*.gif</include>
-                     <include>**/*.css</include>
-                     <include>**/*.png</include>
+                 </includes>
+        	</resource>
+        	<resource>
+        		<!-- due to a bug in the highlighting, only the toc.xml is taken from the generate-eclipse
+        			the rest is taken from the generate-html-multi which is supposed to be chunked with the same level  
+        		-->
+                <directory>target/docbkx/html/</directory>
+                 <filtering>false</filtering>
+                  <includes>
+                     <include>**/*</include>
                  </includes>
         	</resource>
         	<resource>
@@ -50,15 +59,15 @@
 			<!-- exemple : http://www.springsurf.org/sites/1.0.0-RC2/spring-surf-devtools/spring-surf-doc-plugin/examples/springsurf.html -->
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>2.0.13</version>
+				<version>2.0.14</version>
 				<executions>
-					<execution>
+					<!--  <execution>
 						<id>single-page</id>
 						<goals>
 							<goal>generate-html</goal>
 						</goals>
 						<configuration>
-							<!-- <htmlCustomization>${basedir}/src/docbkx/resources/xsl/html.xsl</htmlCustomization> 
+						-->	<!-- <htmlCustomization>${basedir}/src/docbkx/resources/xsl/html.xsl</htmlCustomization> 
 								<postProcess> <move todir="${basedir}/target/site/reference/html-single"> 
 								<fileset dir="${basedir}/target/docbkx/html"> <include name="index.html" 
 								/> </fileset> </move> <copy todir="${basedir}/target/site/reference/html-single"> 
@@ -74,7 +83,7 @@
 							<calloutGraphics>1</calloutGraphics>
 							<calloutGraphicsPath>gfx/callouts/</calloutGraphicsPath>
 							-->
-							<highlightSource>1</highlightSource>
+				<!-- 			<highlightSource>1</highlightSource>
 							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
 							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.single.xsl</htmlCustomization>
 							<base.dir></base.dir>
@@ -88,8 +97,8 @@
 							</preProcess>
 						</configuration>
 						<phase>compile</phase>
-					</execution>
-					<execution>
+					</execution> -->
+					<!-- <execution>
 						<id>single-pdf</id>
 						<goals>
 							<goal>generate-pdf</goal>
@@ -97,12 +106,17 @@
 						<configuration>
 							<imgSrcPath>src/docbkx/</imgSrcPath>
 							<admonGraphicsPath>src/docbkx/resources/admonitions/</admonGraphicsPath>
-							<!-- <postProcess> <copy file="${basedir}/target/docbkx/pdf/index.pdf" 
+						-->	<!-- <postProcess> <copy file="${basedir}/target/docbkx/pdf/index.pdf" 
 								tofile="${basedir}/target/site/reference/pdf/spring-surf-docs.pdf" failonerror="false" 
 								/> </postProcess> -->
-						</configuration>
+					<!-- 	</configuration>
 						<phase>compile</phase>
-					</execution>
+					</execution>-->
+					
+					
+					
+					
+					
 					<execution>
 						<id>multi-page-eclipse</id>
 						<goals>
@@ -110,27 +124,46 @@
 						</goals>
 						<configuration>
 							<chunkedOutput>true</chunkedOutput>
-							<highlightSource>1</highlightSource>
+							<highlightSource>true</highlightSource>
 							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
+							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.html-base.xsl</htmlCustomization>
+							<base.dir></base.dir>
+						</configuration>
+						<phase>generate-resources</phase>
+					</execution>
+					<execution>
+						<id>multi-page-html</id>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<configuration>
+							<chunkedOutput>true</chunkedOutput>
+							<highlightSource>true</highlightSource>
+							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
+							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.html-base.xsl</htmlCustomization>
+							<base.dir></base.dir>
 							<preProcess>
-								<copy todir="target/docbkx/eclipse/Kermeta-Manual.docb/Kermeta-Manual_figures">
+								<copy todir="target/docbkx/html/Kermeta-Manual.docb/Kermeta-Manual_figures">
 									<fileset dir="src/docbkx/Kermeta-Manual_figures" />
 								</copy>
-								<copy todir="target/docbkx/eclipse/Kermeta-Manual.docb">
+								<copy todir="target/docbkx/html/Kermeta-Manual.docb">
 									<fileset dir="src/docbkx/resources" />
 								</copy>
 							</preProcess>
 						</configuration>
 						<phase>generate-resources</phase>
 					</execution>
-					<execution>
+					
+					
+					
+					<!-- <execution>
 						<id>multi-page</id>
 						<goals>
 							<goal>generate-html</goal>
 						</goals>
 						<configuration>
 							<chunkedOutput>true</chunkedOutput>
-							<!-- <htmlCustomization>${basedir}/src/docbkx/resources/xsl/html_chunk.xsl</htmlCustomization> 
+						-->	<!-- <htmlCustomization>${basedir}/src/docbkx/resources/xsl/html_chunk.xsl</htmlCustomization> 
 								<postProcess> <move todir="${basedir}/target/site/reference"> <fileset dir="${basedir}/target/docbkx"> 
 								<include name="**/*.html" /> </fileset> </move> <copy todir="${basedir}/target/site/reference/html"> 
 								<fileset dir="${basedir}/src/docbkx/resources"> <include name="**/*.css" 
@@ -139,9 +172,9 @@
 								<fileset dir="${basedir}/src/site/docbook/reference"> <include name="**/*.png" 
 								/> <include name="**/*.gif" /> <include name="**/*.jpg" /> </fileset> </copy> 
 								</postProcess> -->
-						</configuration>
+					<!-- 	</configuration>
 						<phase>compile</phase>
-					</execution>
+					</execution>-->
 					<!-- <execution> <goals> <goal>generate-html</goal> <goal>generate-pdf</goal> 
 						<goal>generate-eclipse</goal> </goals> <phase>pre-site</phase> <configuration> 
 						<includes>*.docb.xml</includes> -->
@@ -160,6 +193,13 @@
        			</configuration>
 				<dependencies>
 					<dependency>
+					  <groupId>net.sf.docbook</groupId>
+					  <artifactId>docbook-xml</artifactId>
+					  <version>5.0-all</version>
+					  <type>zip</type>
+					  <classifier>resources</classifier>
+					</dependency>
+					<dependency>
 						<groupId>org.docbook</groupId>
 						<artifactId>docbook-xml</artifactId>
 						<version>4.4</version>
@@ -169,6 +209,18 @@
 						<groupId>org.apache.xmlgraphics</groupId>
 						<artifactId>fop</artifactId>
 						<version>1.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sf.saxon</groupId>
+						<artifactId>saxon</artifactId>
+						<version>8.7</version>
+					</dependency>
+					<dependency>
+					  <groupId>net.sf.docbook</groupId>
+					  <artifactId>docbook-xsl</artifactId>
+					  <version>1.75.2</version>
+					  <type>zip</type>
+					  <classifier>ns-resources</classifier>
 					</dependency>
 					<dependency>
 			           <groupId>net.sf.xslthl</groupId>
