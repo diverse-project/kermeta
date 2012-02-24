@@ -31,22 +31,40 @@ package structure{
 		end
 	}
 	
-	aspect class NamedElement{
-		operation qualifiedName() : String is do
-			result:=""
+	aspect class ClassDefinition{
+		method prettyPrint(indent : Integer) : String is do
 			if not name.isVoid then
-				if  container.isVoid.~not.andThen{x|container.isInstanceOf(NamedElement) and not container.isInstanceOf(ModelingUnit)} then
-					result:=container.asType(NamedElement).qualifiedName+"::"+name
-				else
-					result:=name
-				end
-			else
-				StdIO.writeln("namedElement without name")
-				StdIO.writeln(self.toString)
+				result :=printIndent(indent)+ "class "+self.name+" {\n"
+				self.ownedAttribute.each{att|
+					result := result + att.prettyPrint(indent +1)
 				
+				}
+				result := result + "\n"
+				self.ownedOperation.each{op|
+					result := result + op.prettyPrint(indent +1)
+				}
+				
+				result := result + printIndent(indent)+"}\n"
+			else
+				result:=""
+				StdIO.writeln("classdef with no name")
 			end
 		end
 	}
+	aspect class Class {
+		method typePrettyPrint(indent : Integer) : String is do
+			if not typeDefinition.isVoid then
+				result := typeDefinition.qualifiedName
+				
+			else
+				result:=""
+				StdIO.writeln("class with no typedef")
+			end
+					
+		
+		end
+	}
+	
 
 	aspect class KermetaModelElement{
 		operation prettyPrint(indent : Integer) : String is do
@@ -74,6 +92,22 @@ package structure{
 		end
 	}
 	
+	aspect class NamedElement{
+		operation qualifiedName() : String is do
+			result:=""
+			if not name.isVoid then
+				if  container.isVoid.~not.andThen{x|container.isInstanceOf(NamedElement) and not container.isInstanceOf(ModelingUnit)} then
+					result:=container.asType(NamedElement).qualifiedName+"::"+name
+				else
+					result:=name
+				end
+			else
+				StdIO.writeln("namedElement without name")
+				StdIO.writeln(self.toString)
+				
+			end
+		end
+	}
 	aspect class Package{
 		method prettyPrint(indent : Integer) : String is do
 			result :=printIndent(indent)+ "package "+self.name+" {\n"
@@ -88,36 +122,35 @@ package structure{
 		end
 	}
 	
-	aspect class ClassDefinition{
+	aspect class Operation{
 		method prettyPrint(indent : Integer) : String is do
-			if not name.isVoid then
-				result :=printIndent(indent)+ "class "+self.name+" {\n"
-				self.ownedAttribute.each{att|
-					result := result + att.prettyPrint(indent +1)
-				
+			
+			result :=printIndent(indent)+ "operation "+self.name()+"("
+			if (not self.ownedParameter.isVoid) then
+				var i : Integer init 0
+				self.ownedParameter.each{ oneParam |
+					if (i!=0) then
+						result := result + ","
+					end 
+					if oneParam.name.isVoid.~not then
+						result := result + Helper.new.keywordEscape(oneParam.name) + ":" + oneParam.type.typePrettyPrint(indent)
+					else
+						StdIO.writeln("param with no name")
+					end
+					i := i + 1
 				}
-				self.ownedOperation.each{op|
-					result := result + op.prettyPrint(indent +1)
-				}
-				
-				result := result + printIndent(indent)+"}\n"
-			else
-				result:=""
-				StdIO.writeln("classdef with no name")
 			end
-		end
-	}
-	aspect class Class {
-		method typePrettyPrint(indent : Integer) : String is do
-			if not typeDefinition.isVoid then
-				result := typeDefinition.qualifiedName
-				
+			result := result + ")"
+			if not type.isVoid then
+				result := result + ":" + self.type.typePrettyPrint(indent)
 			else
-				result:=""
-				StdIO.writeln("class with no typedef")
+				StdIO.writeln("op with no type"+name)
 			end
-					
-		
+			result := result + " is\n"
+			if (not self.body.isVoid) then
+				result := result +printIndent(indent+1)+ self.body.prettyPrint(indent +1)
+			end
+			result := result + "\n"
 		end
 	}
 	
@@ -149,6 +182,7 @@ package structure{
 		end
 	
 	}
+	
 	aspect class UnresolvedType{
 		method typePrettyPrint(indent : Integer) : String is do
 			result := typeIdentifier
@@ -156,7 +190,7 @@ package structure{
 				result := result+"<"
 				var first :Boolean init true
 				generics.each{g|
-					result := result+g.prettyPrint(indent)
+					result := result+g.typePrettyPrint(indent)
 					if first then
 						first:=false
 					else
@@ -170,46 +204,63 @@ package structure{
 	
 	}
 	
-	
-	aspect class Operation{
-		method prettyPrint(indent : Integer) : String is do
-			
-			result :=printIndent(indent)+ "operation "+self.name()+"("
-			if (not self.ownedParameter.isVoid) then
-				var i : Integer init 0
-				self.ownedParameter.each{ oneParam |
-					if (i!=0) then
-						result := result + ","
-					end 
-					if oneParam.name.isVoid.~not then
-						result := result + Helper.new.keywordEscape(oneParam.name) + ":" + oneParam.type.typePrettyPrint(indent)
-					else
-						StdIO.writeln("param with no name")
-					end
-					i := i + 1
-				}
-			end
-			result := result + ")"
-			if not type.isVoid then
-				result := result + ":" + self.type.typePrettyPrint(indent)
-			else
-				StdIO.writeln("op with no type"+name)
-			end
-			result := result + " is\n"
-			if (not self.body.isVoid) then
-				result := result + self.body.prettyPrint(indent +1)
-			end
-			result := result + "\n"
-		end
-	}
-	
 }
 
 package behavior {
-	
-	aspect class Expression {
+
+	aspect class Block {
 		method prettyPrint(indent : Integer) : String is do
-			result := ""
+			result := "do\n"
+			if (not self.statement.isVoid) then
+				self.statement.each{ one |
+					result := result + printIndent(indent+1)+ one.prettyPrint(indent+1)+"\n"
+				}
+			end
+			result := result +printIndent(indent)+ "end"
+		end
+	}
+	
+	aspect class BooleanLiteral {
+		method prettyPrint(indent : Integer) : String is do
+			result := self.~value.toString()
+		end
+	}
+	
+	
+	
+	aspect class CallFeature {
+		method prettyPrint(indent : Integer) : String is do
+			if not self.name.isVoid then
+				if target.isVoid then
+					result := Helper.new.keywordEscape(self.name)
+				else
+					result :=target.prettyPrint(indent)+"\n"+printIndent(indent+1)+"."+Helper.new.keywordEscape(self.name)
+				end
+				if (not self.parameters.isVoid) then
+					result := result + "("
+					var i : Integer init 0
+					self.parameters.each{ oneParam |
+						if (i!=0) then
+							result := result + ",\n"+printIndent(indent+2)
+						end 
+						result := result + oneParam.prettyPrint(indent+1)
+						i := i + 1
+					}
+					
+					result := result + ")"
+				end
+				
+			else
+				result:=""
+				StdIO.writeln("call expression without name")
+			end
+		end
+	}
+	
+	
+	aspect class CallResult {
+		method prettyPrint(indent : Integer) : String is do
+			result := "result"
 		end
 	}
 	
@@ -218,8 +269,107 @@ package behavior {
 			result:=typeref.prettyPrint(indent)
 		end
 	
+	}	
+	
+	aspect class CallVariable {
+		method prettyPrint(indent : Integer) : String is do
+			if not name.isVoid then
+				result := Helper.new.keywordEscape(name)
+			else
+				result:=""
+				StdIO.writeln("CallVariable without name")
+			end
+		end
 	}
 	
+	aspect class Conditional {
+		method prettyPrint(indent : Integer) : String is do
+			
+			result := "if ("+self.condition.prettyPrint(indent)+") then\n"
+			result := result + printIndent(indent+1)+self.thenBody.prettyPrint(indent+1)
+			if (not self.elseBody.isVoid) then
+				result := result + printIndent(indent)+ "else\n"
+				result := result + self.elseBody.prettyPrint(indent+1)
+			end
+			result :=result + printIndent(indent)+ "end\n" 
+		end
+	}
+	
+	
+	aspect class Expression {
+		method prettyPrint(indent : Integer) : String is do
+			result := ""
+		end
+	}
+	
+	
+	aspect class IntegerLiteral {
+		method prettyPrint(indent : Integer) : String is do
+			result := self.~value.toString() 
+		end
+	}
+	
+	aspect class LambdaExpression {
+		method prettyPrint(indent : Integer) :String is do
+			result :="function {"
+			var first : Boolean init true
+			parameters.each{p|
+				if not first then
+					result := result+ ","
+				else
+					first:=false
+				end
+				if not p.name.isVoid then
+					result := result+ Helper.new.keywordEscape(p.name)
+					if not p.type.isVoid then
+						result := result+" : "+p.type.prettyPrint(indent)
+					end
+				else
+					StdIO.writeln("param with no name")
+				end
+				
+				}
+			result := result+"|\n"+printIndent(indent+1)
+			result := result+body.prettyPrint(indent+1)
+			result := result +"}"
+		end
+	}
+	
+	
+	
+	
+	
+	
+	aspect class Loop {
+		method prettyPrint(indent : Integer) : String is do
+			if (not self.initialization.isVoid) then
+				result := printIndent(indent)+"from "+self.initialization.prettyPrint(indent)
+			else
+				result:=""
+			end
+			result := result+printIndent(indent)+" until "+self.stopCondition.prettyPrint(indent)+" loop\n"
+			if (not self.body.isVoid) then
+				result := result + self.body.prettyPrint(indent+1)
+			end
+			result := printIndent(indent)+result + "\n"
+		end
+	}
+	
+	
+	
+	
+	aspect class SelfExpression {
+		method prettyPrint(indent : Integer) : String is do
+			result := "self"
+		end
+	}
+	
+	aspect class StringLiteral {
+		method prettyPrint(indent : Integer) : String is do
+			result := "\""+self.~value +"\""
+		end
+	}
+		
 	aspect class TypeReference {
 	
 		method prettyPrint(indent : Integer) : String is do
@@ -247,20 +397,27 @@ package behavior {
 	
 	}
 	
-	aspect class Block {
-		method prettyPrint(indent : Integer) : String is do
-			if not container.isInstanceOf(Block) then
-				result := printIndent(indent)
-			else
-				result:=""
+	aspect class UnresolvedCall {
+		method prettyPrint(indent : Integer) : String from org::kermeta::language::behavior::CallFeature is do
+			result := ""
+			if not self.target.isVoid then
+				result := self.target.prettyPrint(indent)+"\n"+printIndent(indent+1)+"."
 			end
-			result := result+"do\n"
-			if (not self.statement.isVoid) then
-				self.statement.each{ one |
-					result := result + printIndent(indent+1)+ one.prettyPrint(indent+1)+"\n"
+			result := result + Helper.new.keywordEscape(self.name)
+			if isCalledWithParenthesis or not self.parameters.empty then
+				result:=result+"("
+				var first : Boolean init true
+				parameters.each{p|
+					if first then
+						first:=false
+					else
+						result:=result+" ,\n"+printIndent(indent+2)
+					end
+					result:=result+p.prettyPrint(indent+1)
 				}
-			end
-			result := result +printIndent(indent)+ "end\n"
+				
+				result:=result+")"
+			end	
 		end
 	}
 	
@@ -279,132 +436,9 @@ package behavior {
 		end
 	}
 	
-	aspect class Conditional {
-		method prettyPrint(indent : Integer) : String is do
-			if not container.isInstanceOf(Block) then
-				result := printIndent(indent)
-			else
-				result:=""
-			end
-			result := result +"if ("+self.condition.prettyPrint(indent)+") then\n"
-			result := result + self.thenBody.prettyPrint(indent+1)
-			if (not self.elseBody.isVoid) then
-				result := result + printIndent(indent)+ "else\n"
-				result := result + self.elseBody.prettyPrint(indent+1)
-			end
-			result :=result + printIndent(indent)+ "end\n" 
-		end
-	}
-	
-	aspect class Loop {
-		method prettyPrint(indent : Integer) : String is do
-			if (not self.initialization.isVoid) then
-				result := printIndent(indent)+"from "+self.initialization.prettyPrint(indent)
-			else
-				result:=""
-			end
-			result := result+printIndent(indent)+" until "+self.stopCondition.prettyPrint(indent)+" loop\n"
-			if (not self.body.isVoid) then
-				result := result + self.body.prettyPrint(indent+1)
-			end
-			result := printIndent(indent)+result + "\n"
-		end
-	}
-	
-	aspect class LambdaExpression{
-		method prettyPrint(indent : Integer) : String is do
-			result := "{ "
-			
-			if (not self.parameters.isVoid) then
-				var i : Integer init 0
-				self.parameters.each{ oneParam |
-					if (i!=0) then
-						result := result + ","
-					end 
-					result := result + oneParam.name() + ":" + oneParam.type.toString()
-					i := i + 1
-				}
-			end
-			
-			result := result + " | \n"
-			
-			result := result + self.body.prettyPrint(indent)
-			
-			result := result + "}"
-		end
-	}
-	
-	aspect class IntegerLiteral {
-		method prettyPrint(indent : Integer) : String is do
-			result := self.~value.toString() 
-		end
-	}
-	
-	aspect class StringLiteral {
-		method prettyPrint(indent : Integer) : String is do
-			result := "\""+self.~value +"\""
-		end
-	}
-	
-	aspect class BooleanLiteral {
-		method prettyPrint(indent : Integer) : String is do
-			result := self.~value.toString()
-		end
-	}
-	
 	aspect class VoidLiteral {
 		method prettyPrint(indent : Integer) : String is do
-			result := "Void"
-		end
-	}
-	
-	aspect class CallFeature {
-		method prettyPrint(indent : Integer) : String is do
-			if not self.name.isVoid then
-				if target.isVoid then
-					result := Helper.new.keywordEscape(self.name)
-				else
-					result :=target.prettyPrint(indent)+"."+Helper.new.keywordEscape(self.name)
-				end
-				if (not self.parameters.isVoid) then
-					result := result + "("
-					var i : Integer init 0
-					self.parameters.each{ oneParam |
-						if (i!=0) then
-							result := result + ","
-						end 
-						result := result + oneParam.prettyPrint(indent)
-						i := i + 1
-					}
-					
-					result := result + ")"
-				end
-				
-			else
-				result:=""
-				StdIO.writeln("call expression without name")
-			end
-		end
-	}
-	aspect class CallResult {
-		method prettyPrint(indent : Integer) : String is do
-			result := "result"
-		end
-	}
-	
-	aspect class SelfExpression {
-		method prettyPrint(indent : Integer) : String is do
-			result := "self"
-		end
-	}
-	
-	aspect class UnresolvedCall {
-		method prettyPrint(indent : Integer) : String from org::kermeta::language::behavior::CallFeature is do
-			result := ""
-			if (not self.target.isVoid) then
-				result := self.target.prettyPrint(indent)+"."
-			end
-			result := result + self.name
+			result := "void"
 		end
 	}
 }
