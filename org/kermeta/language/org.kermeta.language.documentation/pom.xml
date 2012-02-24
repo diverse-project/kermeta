@@ -4,7 +4,7 @@
 
 	<groupId>org.kermeta.language</groupId>
 	<artifactId>language.documentation</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>2.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>language.documentation</name>
@@ -13,11 +13,39 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 	<dependencies>
 	</dependencies>
 	<build>
+   		<resources>
+        	<resource>
+                <directory>target/docbkx/eclipse/</directory>
+                 <filtering>false</filtering>
+                  <includes>
+                     <include>**/index.xml</include>
+                     <include>**/toc.xml</include>
+                     <include>**/*.html</include>
+                     <include>**/*.gif</include>
+                     <include>**/*.css</include>
+                     <include>**/*.png</include>
+                 </includes>
+        	</resource>
+        	<resource>
+                <directory>src/main/resources</directory>
+                 <filtering>false</filtering>
+                  <includes>
+                     <include>**/*</include>
+                 </includes>
+        	</resource>
+        	<resource>
+                <directory>src/main/resources-filtered</directory>
+                 <filtering>true</filtering>
+                  <includes>
+                     <include>**/*</include>
+                 </includes>
+        	</resource>
+    	</resources>
 		<plugins>
+		<!-- docbook generation part -->
 			<plugin>
 			<!-- exemple : http://www.springsurf.org/sites/1.0.0-RC2/spring-surf-devtools/spring-surf-doc-plugin/examples/springsurf.html -->
 				<groupId>com.agilejava.docbkx</groupId>
@@ -49,6 +77,7 @@
 							<highlightSource>1</highlightSource>
 							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
 							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.single.xsl</htmlCustomization>
+							<base.dir></base.dir>
 							<preProcess>
 								<copy todir="target/docbkx/html/KerMeta-Manual_figures">
 									<fileset dir="src/docbkx/KerMeta-Manual_figures" />
@@ -73,6 +102,26 @@
 								/> </postProcess> -->
 						</configuration>
 						<phase>compile</phase>
+					</execution>
+					<execution>
+						<id>multi-page-eclipse</id>
+						<goals>
+							<goal>generate-eclipse</goal>
+						</goals>
+						<configuration>
+							<chunkedOutput>true</chunkedOutput>
+							<highlightSource>1</highlightSource>
+							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
+							<preProcess>
+								<copy todir="target/docbkx/eclipse/KerMeta-Manual.docb/KerMeta-Manual_figures">
+									<fileset dir="src/docbkx/KerMeta-Manual_figures" />
+								</copy>
+								<copy todir="target/docbkx/eclipse/KerMeta-Manual.docb">
+									<fileset dir="src/docbkx/resources" />
+								</copy>
+							</preProcess>
+						</configuration>
+						<phase>generate-resources</phase>
 					</execution>
 					<execution>
 						<id>multi-page</id>
@@ -106,6 +155,9 @@
 					<!-- <htmlStylesheet>css/ow2-style.css</htmlStylesheet> <imgSrcPath>images/</imgSrcPath> -->
 					<!-- </configuration> </execution> -->
 				</executions>
+				<configuration>
+          			<highlightSource>1</highlightSource>
+       			</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.docbook</groupId>
@@ -125,6 +177,51 @@
 			           <scope>runtime</scope>
 			        </dependency>
 				</dependencies>
+			</plugin>
+			<!-- Workaround docbokk generation, the toc.xml are gerenated in the same folder and navigation fails  -->
+			<plugin>
+	           <groupId>com.google.code.maven-replacer-plugin</groupId>
+	           <artifactId>maven-replacer-plugin</artifactId>
+	           <version>1.4.1</version>
+	           <executions>
+	               <execution>
+	                   <phase>prepare-package</phase>
+	                   <goals>
+	                       <goal>replace</goal>
+	                   </goals>                   
+	               </execution>
+	           </executions>
+	           <configuration>
+	               <file>target/classes/KerMeta-Manual.docb/toc.xml</file>	              
+	               <regex>false</regex>	               
+	               <replacements>
+	                   <replacement>
+	                       <token>href="</token>
+	                       <value>href="KerMeta-Manual.docb/</value>
+	                   </replacement>         
+	               </replacements>
+	           </configuration>
+	       </plugin>
+			<!-- calculate the bundle version from the project version : replace - by . -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>regex-property</id>
+						<goals>
+							<goal>regex-property</goal>
+						</goals>
+						<configuration>
+							<name>bundle.version</name>
+							<value>${project.version}</value>
+							<regex>-</regex>
+							<replacement>\.</replacement>
+							<failIfNoMatch>yes</failIfNoMatch>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -151,6 +248,28 @@
 										<goals>
 											<goal>generate-html</goal>
 											<goal>generate-pdf</goal>
+											<goal>
+												generate-eclipse
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											build-helper-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.7,)
+										</versionRange>
+										<goals>
+											<goal>regex-property</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
