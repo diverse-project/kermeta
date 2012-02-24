@@ -22,7 +22,57 @@ package structure{
 	class Helper {
 	
 		operation keywordEscape(s : String):String is do
-			if s.equals("operation") or s.equals("result") or s.equals("value") or s.equals("class") or s.equals("abstract") then
+			if s.equals("abstract") 
+				or s.equals("and")
+				or s.equals("alias")//still true ?
+				or s.equals("attribute")
+				or s.equals("bag")
+				or s.equals("class")
+				or s.equals("do")
+				or s.equals("else")
+				or s.equals("end")
+				or s.equals("enumeration")
+				or s.equals("extern")
+				or s.equals("false")
+				or s.equals("from")
+				or s.equals("function")
+				or s.equals("getter")
+				or s.equals("if")
+				or s.equals("inherits")
+				or s.equals("init")
+				or s.equals("inv")
+				or s.equals("is")
+				or s.equals("loop")
+				or s.equals("method")
+				or s.equals("not")
+				or s.equals("operation")
+				or s.equals("or")
+				or s.equals("oset")
+				or s.equals("package")
+				or s.equals("post")
+				or s.equals("pre")
+				or s.equals("property")
+				or s.equals("raise")
+				or s.equals("raises")//still true ?
+				or s.equals("readonly")//still true ?
+				or s.equals("reference")
+				or s.equals("require")
+				or s.equals("rescue")
+				or s.equals("result")
+				or s.equals("self")
+				or s.equals("seq")
+				or s.equals("set")
+				or s.equals("setter")
+				or s.equals("super")
+				or s.equals("singleton")
+				or s.equals("then")
+				or s.equals("true")
+				or s.equals("until")
+				or s.equals("using") 
+				or s.equals("value")
+				or s.equals("var")
+				or s.equals("void")
+				then
 				result:="~"+s
 			else
 				result:=s
@@ -208,14 +258,16 @@ package structure{
 
 package behavior {
 
+	
+
 	aspect class Block {
 		method prettyPrint(indent : Integer) : String is do
 			result := "do\n"
-			if (not self.statement.isVoid) then
-				self.statement.each{ one |
+			self.statement.each{ one |
 					result := result + printIndent(indent+1)+ one.prettyPrint(indent+1)+"\n"
 				}
-			end
+			self.rescueBlock.each{r|
+				result := result + printIndent(indent) +r.prettyPrint(indent)+"\n" }
 			result := result +printIndent(indent)+ "end"
 		end
 	}
@@ -286,7 +338,11 @@ package behavior {
 		method prettyPrint(indent : Integer) : String is do
 			
 			result := "if ("+self.condition.prettyPrint(indent)+") then\n"
-			result := result + printIndent(indent+1)+self.thenBody.prettyPrint(indent+1)
+			if (not self.thenBody.isVoid) then
+				result := result + printIndent(indent+1)+self.thenBody.prettyPrint(indent+1)+"\n"
+			else
+				StdIO.writeln("if without thenbody")
+			end
 			if (not self.elseBody.isVoid) then
 				result := result + printIndent(indent)+ "else\n"
 				result := result + self.elseBody.prettyPrint(indent+1)
@@ -355,7 +411,16 @@ package behavior {
 		end
 	}
 	
+	aspect class Rescue {
+		method prettyPrint(indent : Integer) : String is do
+			result := "rescue ("+exceptionName+" : "+exceptionType.prettyPrint(indent)+")\n"
+			body.each{e|
+				result:= result+printIndent(indent+1)+e.prettyPrint(indent+1)+"\n"
+			}
+		
+		end
 	
+	}
 	
 	
 	aspect class SelfExpression {
