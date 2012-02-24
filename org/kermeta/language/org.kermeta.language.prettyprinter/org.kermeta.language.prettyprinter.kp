@@ -4,8 +4,8 @@ groupId = "theGroup"
 defaultMainClass = "org::kermeta::language::prettyprinter::PrettyPrinter"
 defaultMainOperation = "testMain"
 sources = {
-	require "${project.baseUri}/src/main/kermeta/org/kermeta/language/prettyprinter/PrettyPrinter.kmt"
-	require "${project.baseUri}/src/main/kermeta/org/kermeta/language/prettyprinter/PrettyPrinterAspect.kmt"
+	require "${project.baseUri}/src/main/kmt/PrettyPrinter.kmt"
+	require "${project.baseUri}/src/main/kmt/PrettyPrinterAspect.kmt"
 
 	
  }

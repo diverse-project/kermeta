@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="BOOKS" uri="http:///BOOKS.ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" isAspect="false">
+      <ownedAttribute name="title" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="nbPages" type="//ecore/EInt" lower="1" isID="false"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" isAspect="false">
+      <ownedAttribute name="title" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="chapters" type="//BOOKS/@ownedTypeDefinition.1/chapters/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//BOOKS/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedOperation kTag="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@kOwnedTags.0" name="book_to_publication" type="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@containedType.0" isUnique="false">
+        <kOwnedTags name="documentation" value="gen from a MappingOperation" object="//BOOKS/@ownedTypeDefinition.1/book_to_publication"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//PUB/@ownedTypeDefinition.0"/>
+        <ownedParameter name="result" type="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@ownedParameter.0/@containedType.0" isUnique="false">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//PUB/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <ownedParameter name="isStrict" type="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" name="result"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block" kTag="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@statement.1/@kOwnedTags.0">
+            <kOwnedTags name="documentation" value="initSection" object="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@statement.1"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <value xsi:type="org_kermeta_language_behavior:CallFeature" name="new">
+                    <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@statement.2/@statement.0/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//PUB/@ownedTypeDefinition.0"/>
+                      </typeref>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:CallFeature" name="add">
+                  <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <target xsi:type="org_kermeta_language_behavior:CallFeature" name="extent">
+                    <target xsi:type="org_kermeta_language_behavior:CallFeature" name="pubModel">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </statement>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="equals">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </condition>
+            </statement>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:CallFeature" kTag="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@statement.3/@kOwnedTags.0" name="addTrace">
+            <kOwnedTags name="documentation" value="trace generation" object="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@statement.3"/>
+            <parameters xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+            <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="book_to_publication"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:CallProperty" name="title" staticProperty="//PUB/@ownedTypeDefinition.0/title">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </target>
+              <value xsi:type="org_kermeta_language_behavior:CallProperty" name="title" staticProperty="//BOOKS/@ownedTypeDefinition.1/title">
+                <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+              </value>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:CallProperty" name="nbPages" staticProperty="//PUB/@ownedTypeDefinition.0/nbPages">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </target>
+              <value xsi:type="org_kermeta_language_behavior:CallOperation" name="sum">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="autoGenVar"/>
+                    <body xsi:type="org_kermeta_language_behavior:CallProperty" name="nbPages" staticProperty="//BOOKS/@ownedTypeDefinition.0/nbPages">
+                      <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                    </body>
+                  </parameters>
+                  <target xsi:type="org_kermeta_language_behavior:CallProperty" name="chapters" staticProperty="//BOOKS/@ownedTypeDefinition.1/chapters">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:CallResult" name="result"/>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <condition xsi:type="org_kermeta_language_behavior:CallVariable" name="isStrict"/>
+            </body>
+            <exceptionType type="//BOOKS/@ownedTypeDefinition.1/book_to_publication/@body/@rescueBlock.1/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ViolatedGuardException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="PUB" uri="http:///PUB.ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" isAspect="false">
+      <ownedAttribute name="title" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="nbPages" type="//ecore/EInt" lower="1" isID="false"/>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="root_package">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="TransformationContext" isAspect="true">
+      <ownedAttribute name="bookModel" type="//root_package/TransformationContext/bookModel/@containedType.0" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:Class"/>
+      </ownedAttribute>
+      <ownedAttribute name="pubModel" type="//root_package/TransformationContext/pubModel/@containedType.0" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:Class"/>
+      </ownedAttribute>
+      <ownedOperation kTag="//root_package/TransformationContext/main/@kOwnedTags.0" name="main" lower="1">
+        <kOwnedTags name="documentation" value="gen from an entry operation" object="//root_package/TransformationContext/main"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+            <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+              <parameters name="autoGenVar"/>
+              <body xsi:type="org_kermeta_language_behavior:CallOperation" name="book_to_publication" staticOperation="//BOOKS/@ownedTypeDefinition.1/book_to_publication">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+              </body>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fromSeq">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="select">
+                <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                  <parameters name="autoGenVar"/>
+                  <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf">
+                    <parameters xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//root_package/TransformationContext/main/@body/@statement.0/@target/@parameters.0/@parameters.0/@body/@parameters.0/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//BOOKS/@ownedTypeDefinition.1"/>
+                      </typeref>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                  </body>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:CallOperation" name="objects">
+                  <target xsi:type="org_kermeta_language_behavior:CallProperty" name="bookModel" staticProperty="//root_package/TransformationContext/bookModel">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                      </target>
+                    </target>
+                  </target>
+                </target>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                  <typeref type="//root_package/TransformationContext/main/@body/@statement.0/@target/@target/@target/@typeref/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//root_package/TransformationContext/main/@body/@statement.0/@target/@target/@target/@typeref/@containedType.0/@containedType.0" typeIdentifier="kermeta::standard::DeferredSequence">
+                      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//BOOKS/@ownedTypeDefinition.1"/>
+                    </containedType>
+                  </typeref>
+                </target>
+              </target>
+            </target>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//root_package/TransformationContext/main/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="primitivetypes" uri="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Boolean" instanceType="//primitivetypes/Boolean/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Integer" instanceType="//primitivetypes/Integer/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Real" instanceType="//primitivetypes/Real/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="String" instanceType="//primitivetypes/String/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="UnlimitedNatural" instanceType="//primitivetypes/UnlimitedNatural/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.0/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.15"/>
+      <ownedAttribute name="iD" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="eAttributeType" type="//ecore/@ownedTypeDefinition.0/eAttributeType/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.4"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.1/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.8"/>
+      <ownedAttribute name="source" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="details" type="//ecore/@ownedTypeDefinition.1/details/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.17"/>
+      </ownedAttribute>
+      <ownedAttribute name="eModelElement" type="//ecore/@ownedTypeDefinition.1/eModelElement/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.8/eAnnotations" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.8"/>
+      </ownedAttribute>
+      <ownedAttribute name="contents" type="//ecore/@ownedTypeDefinition.1/contents/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.10"/>
+      </ownedAttribute>
+      <ownedAttribute name="references" type="//ecore/@ownedTypeDefinition.1/references/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.10"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.2/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      <ownedAttribute name="abstract" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="interface" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="eSuperTypes" type="//ecore/@ownedTypeDefinition.2/eSuperTypes/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="eOperations" type="//ecore/@ownedTypeDefinition.2/eOperations/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.11/eContainingClass" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.11"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllAttributes" type="//ecore/@ownedTypeDefinition.2/eAllAttributes/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllReferences" type="//ecore/@ownedTypeDefinition.2/eAllReferences/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedAttribute name="eReferences" type="//ecore/@ownedTypeDefinition.2/eReferences/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAttributes" type="//ecore/@ownedTypeDefinition.2/eAttributes/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllContainments" type="//ecore/@ownedTypeDefinition.2/eAllContainments/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllOperations" type="//ecore/@ownedTypeDefinition.2/eAllOperations/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.11"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllStructuralFeatures" type="//ecore/@ownedTypeDefinition.2/eAllStructuralFeatures/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.15"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllSuperTypes" type="//ecore/@ownedTypeDefinition.2/eAllSuperTypes/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="eIDAttribute" type="//ecore/@ownedTypeDefinition.2/eIDAttribute/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="eStructuralFeatures" type="//ecore/@ownedTypeDefinition.2/eStructuralFeatures/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.15/eContainingClass" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.15"/>
+      </ownedAttribute>
+      <ownedAttribute name="eGenericSuperTypes" type="//ecore/@ownedTypeDefinition.2/eGenericSuperTypes/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+      <ownedAttribute name="eAllGenericSuperTypes" type="//ecore/@ownedTypeDefinition.2/eAllGenericSuperTypes/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.3/@containedType.0" isAspect="false" isAbstract="true">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="instanceClassName" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="instanceClass" type="//ecore/EJavaClass" lower="1" isID="false"/>
+      <ownedAttribute name="defaultValue" type="//ecore/EJavaObject" lower="1" isID="false"/>
+      <ownedAttribute name="instanceTypeName" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="ePackage" type="//ecore/@ownedTypeDefinition.3/ePackage/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.12/eClassifiers" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.12"/>
+      </ownedAttribute>
+      <ownedAttribute name="eTypeParameters" type="//ecore/@ownedTypeDefinition.3/eTypeParameters/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.19"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.4/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      <ownedAttribute name="serializable" type="//ecore/EBoolean" lower="1" isID="false"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.5/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.4"/>
+      <ownedAttribute name="eLiterals" type="//ecore/@ownedTypeDefinition.5/eLiterals/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.6/eEnum" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.6"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.6/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="value" type="//ecore/EInt" lower="1" isID="false"/>
+      <ownedAttribute name="instance" type="//ecore/EEnumerator" lower="1" isID="false"/>
+      <ownedAttribute name="literal" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="eEnum" type="//ecore/@ownedTypeDefinition.6/eEnum/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.5/eLiterals" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.5"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.7/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.8"/>
+      <ownedAttribute name="ePackage" type="//ecore/@ownedTypeDefinition.7/ePackage/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.12/eFactoryInstance" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.12"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.8/@containedType.0" isAspect="false" isAbstract="true">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.10"/>
+      <ownedAttribute name="eAnnotations" type="//ecore/@ownedTypeDefinition.8/eAnnotations/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.1/eModelElement" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.9/@containedType.0" isAspect="false" isAbstract="true">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.8"/>
+      <ownedAttribute name="name" type="//ecore/EString" lower="1" isID="false"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" isAspect="false"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.11/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.16"/>
+      <ownedAttribute name="eContainingClass" type="//ecore/@ownedTypeDefinition.11/eContainingClass/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.2/eOperations" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="eTypeParameters" type="//ecore/@ownedTypeDefinition.11/eTypeParameters/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.19"/>
+      </ownedAttribute>
+      <ownedAttribute name="eParameters" type="//ecore/@ownedTypeDefinition.11/eParameters/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.13/eOperation" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.13"/>
+      </ownedAttribute>
+      <ownedAttribute name="eExceptions" type="//ecore/@ownedTypeDefinition.11/eExceptions/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      </ownedAttribute>
+      <ownedAttribute name="eGenericExceptions" type="//ecore/@ownedTypeDefinition.11/eGenericExceptions/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.12/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="nsURI" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="nsPrefix" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="eFactoryInstance" type="//ecore/@ownedTypeDefinition.12/eFactoryInstance/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.7/ePackage" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.7"/>
+      </ownedAttribute>
+      <ownedAttribute name="eClassifiers" type="//ecore/@ownedTypeDefinition.12/eClassifiers/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.3/ePackage" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      </ownedAttribute>
+      <ownedAttribute name="eSubpackages" type="//ecore/@ownedTypeDefinition.12/eSubpackages/@containedType.0" lower="1" upper="-1" opposite="//ecore/@ownedTypeDefinition.12/eSuperPackage" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.12"/>
+      </ownedAttribute>
+      <ownedAttribute name="eSuperPackage" type="//ecore/@ownedTypeDefinition.12/eSuperPackage/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.12/eSubpackages" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.12"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.13/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.16"/>
+      <ownedAttribute name="eOperation" type="//ecore/@ownedTypeDefinition.13/eOperation/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.11/eParameters" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.11"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.14/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.15"/>
+      <ownedAttribute name="containment" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="container" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="resolveProxies" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="eOpposite" type="//ecore/@ownedTypeDefinition.14/eOpposite/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedAttribute name="eReferenceType" type="//ecore/@ownedTypeDefinition.14/eReferenceType/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="eKeys" type="//ecore/@ownedTypeDefinition.14/eKeys/@containedType.0" lower="1" upper="-1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.15/@containedType.0" isAspect="false" isAbstract="true">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.16"/>
+      <ownedAttribute name="changeable" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="volatile" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="transient" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="defaultValueLiteral" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="defaultValue" type="//ecore/EJavaObject" lower="1" isID="false"/>
+      <ownedAttribute name="unsettable" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="derived" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="eContainingClass" type="//ecore/@ownedTypeDefinition.15/eContainingClass/@containedType.0" lower="1" opposite="//ecore/@ownedTypeDefinition.2/eStructuralFeatures" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.16/@containedType.0" isAspect="false" isAbstract="true">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="ordered" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="unique" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="lowerBound" type="//ecore/EInt" lower="1" isID="false"/>
+      <ownedAttribute name="upperBound" type="//ecore/EInt" lower="1" isID="false"/>
+      <ownedAttribute name="many" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="required" type="//ecore/EBoolean" lower="1" isID="false"/>
+      <ownedAttribute name="eType" type="//ecore/@ownedTypeDefinition.16/eType/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      </ownedAttribute>
+      <ownedAttribute name="eGenericType" type="//ecore/@ownedTypeDefinition.16/eGenericType/@containedType.0" lower="1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" isAspect="false">
+      <ownedAttribute name="key" type="//ecore/EString" lower="1" isID="false"/>
+      <ownedAttribute name="value" type="//ecore/EString" lower="1" isID="false"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.18/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.10"/>
+      <ownedAttribute name="eUpperBound" type="//ecore/@ownedTypeDefinition.18/eUpperBound/@containedType.0" lower="1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+      <ownedAttribute name="eTypeArguments" type="//ecore/@ownedTypeDefinition.18/eTypeArguments/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+      <ownedAttribute name="eRawType" type="//ecore/@ownedTypeDefinition.18/eRawType/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      </ownedAttribute>
+      <ownedAttribute name="eLowerBound" type="//ecore/@ownedTypeDefinition.18/eLowerBound/@containedType.0" lower="1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+      <ownedAttribute name="eTypeParameter" type="//ecore/@ownedTypeDefinition.18/eTypeParameter/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.19"/>
+      </ownedAttribute>
+      <ownedAttribute name="eClassifier" type="//ecore/@ownedTypeDefinition.18/eClassifier/@containedType.0" lower="1" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.3"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" superType="//ecore/@ownedTypeDefinition.19/@containedType.0" isAspect="false">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="eBounds" type="//ecore/@ownedTypeDefinition.19/eBounds/@containedType.0" lower="1" upper="-1" isComposite="true" isID="false">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//ecore/@ownedTypeDefinition.18"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBigDecimal" instanceType="//ecore/EBigDecimal/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBigInteger" instanceType="//ecore/EBigInteger/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBoolean" instanceType="//ecore/EBoolean/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBooleanObject" instanceType="//ecore/EBooleanObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByte" instanceType="//ecore/EByte/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByteArray" instanceType="//ecore/EByteArray/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByteObject" instanceType="//ecore/EByteObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EChar" instanceType="//ecore/EChar/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ECharacterObject" instanceType="//ecore/ECharacterObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDate" instanceType="//ecore/EDate/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDiagnosticChain" instanceType="//ecore/EDiagnosticChain/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDouble" instanceType="//ecore/EDouble/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDoubleObject" instanceType="//ecore/EDoubleObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EEList" instanceType="//ecore/EEList/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EEnumerator" instanceType="//ecore/EEnumerator/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFeatureMap" instanceType="//ecore/EFeatureMap/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFeatureMapEntry" instanceType="//ecore/EFeatureMapEntry/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFloat" instanceType="//ecore/EFloat/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFloatObject" instanceType="//ecore/EFloatObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EInt" instanceType="//ecore/EInt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EIntegerObject" instanceType="//ecore/EIntegerObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EJavaClass" instanceType="//ecore/EJavaClass/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EJavaObject" instanceType="//ecore/EJavaObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ELong" instanceType="//ecore/ELong/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ELongObject" instanceType="//ecore/ELongObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EMap" instanceType="//ecore/EMap/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EResource" instanceType="//ecore/EResource/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EResourceSet" instanceType="//ecore/EResourceSet/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EShort" instanceType="//ecore/EShort/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EShortObject" instanceType="//ecore/EShortObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EString" instanceType="//ecore/EString/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ETreeIterator" instanceType="//ecore/ETreeIterator/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <requires uri="platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.kmt"/>
+  <requires uri="platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.kmt"/>
+</org_kermeta_language_structure:ModelingUnit>
