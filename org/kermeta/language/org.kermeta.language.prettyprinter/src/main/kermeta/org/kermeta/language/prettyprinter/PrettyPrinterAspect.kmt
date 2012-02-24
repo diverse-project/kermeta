@@ -118,6 +118,7 @@ package structure{
 
 	aspect class KermetaModelElement{
 		operation prettyPrint(indent : Integer) : String is do
+			StdIO.writeln("TODO "+self.toString)
 			result := ""
 		end
 		
@@ -258,7 +259,24 @@ package structure{
 
 package behavior {
 
+	aspect class Assignment {
+		method prettyPrint(indent : Integer) : String is do
+			result:=""
+			if not (target.isVoid or ~value.isVoid) then
+				result := target.prettyPrint(indent)
+				if isCast then
+					result := result +" ?= "
+				else
+					result := result +" := "
+				end
+				result := ~value.prettyPrint(indent)
+			else
+				StdIO.writeln("Assignment without target or value")	
+			end
+		
+		end
 	
+	}
 
 	aspect class Block {
 		method prettyPrint(indent : Integer) : String is do
