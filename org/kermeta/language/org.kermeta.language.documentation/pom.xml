@@ -79,8 +79,8 @@
 							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.single.xsl</htmlCustomization>
 							<base.dir></base.dir>
 							<preProcess>
-								<copy todir="target/docbkx/html/KerMeta-Manual_figures">
-									<fileset dir="src/docbkx/KerMeta-Manual_figures" />
+								<copy todir="target/docbkx/html/Kermeta-Manual_figures">
+									<fileset dir="src/docbkx/Kermeta-Manual_figures" />
 								</copy>
 								<copy todir="target/docbkx/html">
 									<fileset dir="src/docbkx/resources" />
@@ -113,10 +113,10 @@
 							<highlightSource>1</highlightSource>
 							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
 							<preProcess>
-								<copy todir="target/docbkx/eclipse/KerMeta-Manual.docb/KerMeta-Manual_figures">
-									<fileset dir="src/docbkx/KerMeta-Manual_figures" />
+								<copy todir="target/docbkx/eclipse/Kermeta-Manual.docb/Kermeta-Manual_figures">
+									<fileset dir="src/docbkx/Kermeta-Manual_figures" />
 								</copy>
-								<copy todir="target/docbkx/eclipse/KerMeta-Manual.docb">
+								<copy todir="target/docbkx/eclipse/Kermeta-Manual.docb">
 									<fileset dir="src/docbkx/resources" />
 								</copy>
 							</preProcess>
@@ -192,12 +192,12 @@
 	               </execution>
 	           </executions>
 	           <configuration>
-	               <file>target/classes/KerMeta-Manual.docb/toc.xml</file>	              
+	               <file>target/classes/Kermeta-Manual.docb/toc.xml</file>	              
 	               <regex>false</regex>	               
 	               <replacements>
 	                   <replacement>
 	                       <token>href="</token>
-	                       <value>href="KerMeta-Manual.docb/</value>
+	                       <value>href="Kermeta-Manual.docb/</value>
 	                   </replacement>         
 	               </replacements>
 	           </configuration>
