@@ -251,6 +251,9 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.checker/${kermeta.language.version}/language.checker-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.documentation/${kermeta.language.version}/language.documentation-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.ecore2km.api/${kermeta.language.version}/language.ecore2km.api-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
@@ -284,6 +287,15 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse.nature/${kermeta.language.version}/language.texteditor.eclipse.nature-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+		
+
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.umlprofile2ecore/${kermeta.language.version}/language.umlprofile2ecore-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.umlprofile2ecore.api/${kermeta.language.version}/language.umlprofile2ecore.api-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
+		
 		<get src="${kermeta.maven.repsitory}/org/kermeta/kp/kp.launcher.eclipse/${kermeta.language.version}/kp.launcher.eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
