@@ -38,8 +38,13 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<start>/*</start>
 		<end>*/</end>
 	</highlighter>
-	<highlighter type="oneline-comment">//</highlighter>
-	<highlighter type="string" style="none">
+	<highlighter type="oneline-comment" >//</highlighter>
+	<!-- <highlighter type="regex">	
+		<pattern>^(\[.+\]\s*)$</pattern>
+		<style>keyword</style>
+		<flags>MULTILINE</flags>
+	</highlighter>-->
+	<highlighter type="string" >
 		<string>"</string>
 		<escape>\</escape>
 	</highlighter>
@@ -47,7 +52,7 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<string>'</string>
 		<escape>\</escape>
 	</highlighter> -->
-	<highlighter type="annotation">
+	<highlighter type="annotation" >
 		<start>@</start>
 		<valueStart>"</valueStart>
 		<valueEnd>"</valueEnd>
@@ -97,7 +102,7 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>raises</keyword>
 		<keyword>readonly</keyword>
 		<keyword>reference</keyword>
-		<!--<keyword>require</keyword>-->
+		<keyword>require</keyword>
 		<keyword>rescue</keyword>
 		<keyword>result</keyword>
 		<keyword>setter</keyword>
@@ -108,12 +113,12 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>then</keyword>
 		<keyword>true</keyword>
 		<keyword>until</keyword>
-		<!--<keyword>using</keyword>-->
+		<keyword>using</keyword>
 		<keyword>value</keyword>
 		<keyword>var</keyword>
 		<keyword>void</keyword>
 	</highlighter>
-	<highlighter type="keywords">
+	<!-- <highlighter type="keywords">
 		<keyword>require</keyword>
 		<keyword>using</keyword>    
 		<style>filekeyword</style>
@@ -138,5 +143,5 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>oid</keyword>    
 		<keyword>clone</keyword> 
 		<style>specialoperation</style>
-	</highlighter>
+	</highlighter>-->
 </highlighters>

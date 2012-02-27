@@ -10,7 +10,6 @@
     			extension-element-prefixes="s6hl xslthl">-->
                   
 
-  <!-- <xsl:import href="customized.hl.xsl"/>-->
   <xsl:import href="urn:docbkx:stylesheet"/>
   <xsl:import href="urn:docbkx:stylesheet/highlight.xsl"/>
   <!--  <xsl:import href="urn:docbkx:stylesheet"/>
@@ -18,15 +17,6 @@
 	<xsl:include href="./highlight.xsl"/>
 	<xsl:param name="highlight.xslthl.config">file:////C:/Users/dvojtise/workspaces/kermetaV2_scala/org.kermeta.language.documentation/src/docbkx/custom/highlighters/xslthl-config.xml</xsl:param>
   -->
-<xsl:template match="xslthl:comment">
-    <b class="hl-comment"><xsl:apply-templates/></b>
-</xsl:template>
-<xsl:template match="truc">
-    <b class="hl-truc"><xsl:apply-templates/></b>
-</xsl:template>
-<xsl:template match="xslthl:truc">
-    <b class="hl-truc"><xsl:apply-templates/></b>
-</xsl:template>
   
 <xsl:param name="table.borders.with.css" select="1"/>
 <xsl:param name="html.stylesheet">css/docbook.css</xsl:param>
@@ -61,13 +51,13 @@ task after
 
 
 <xsl:template match="xslthl:comment">
-    <b class="hl-comment"><xsl:apply-templates/></b>
+    <i class="hl-comment"><xsl:apply-templates/></i>
 </xsl:template>
 <xsl:template match="xslthl:multiline-comment">
-    <b class="hl-comment"><xsl:apply-templates/></b>
+    <i class="hl-comment"><xsl:apply-templates/></i>
 </xsl:template>  
 <xsl:template match="xslthl:oneline-comment">
-    <b class="hl-comment"><xsl:apply-templates/></b>
+    <i class="hl-comment"><xsl:apply-templates/></i>
 </xsl:template> 
   
 <xsl:template match='xslthl:keyword'>

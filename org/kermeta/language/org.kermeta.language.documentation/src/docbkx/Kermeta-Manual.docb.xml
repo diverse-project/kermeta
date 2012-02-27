@@ -64,7 +64,7 @@
   <preface id="preface.link">
     <title id="preface.title.link">Preface<phrase
     id="preface"></phrase></title>
-
+	<warning><title>Text not verified for kermeta 2</title></warning>
     <para>Kermeta is a Domain Specific Language dedicated to metamodel
     engineering. It fills the gap let by MOF which defines only the structure
     of meta-models, by adding a way to specify static semantic (similar to
@@ -115,7 +115,7 @@
     <section id="sec_introduction_presentation.link">
       <title
       id="sec_introduction_presentation.title.link">Presentation</title>
-
+	<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta is a metamodeling language which allows describing both
       the structure and the behavior of models. It has been designed to be
       compliant with the OMG metamodeling language EMOF (part of the MOF 2.0
@@ -183,7 +183,7 @@
 
     <section>
       <title>An imperative syntax</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta is an imperative language for modeling, with a basic
       syntax inspired from Eiffel. Code is statically type checked, and
       execution is made by an interpreter (a compiler is on the way, for
@@ -269,7 +269,7 @@ end
 
     <section>
       <title>An object-oriented language</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Users of modern programming languages, like Java, would feel
       easy with object-oriented features in Kermeta: classes, inheritance,
       exceptions, and even genericity.</para>
@@ -358,7 +358,7 @@ class Child inherits Reader {
 
     <section>
       <title>A model-oriented language</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>As explained in the <xref endterm="preface.title.link"
       linkend="preface.link" /> and in <xref
       endterm="section_architecture.title.link"
@@ -540,7 +540,7 @@ smithBooks.addAll(
     </section>
     <section>
     	<title>Aspect-oriented language</title>
-    	
+<warning><title>Text not verified for kermeta 2</title></warning>    	
 		<para>Since Kermeta is an extension of MOF, a MOF meta-model can conversely be seen as a valid 
     	Kermeta program that just declares packages, classes and so on but does nothing. 
     	Kermeta can then be used to breath life into this meta-model by incrementally 
@@ -574,7 +574,7 @@ smithBooks.addAll(
     </section>
     <section>
       <title>Some "advanced" features</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta implements several "less common" or advanced features that
       helps in many situations.</para>
       <para> Typically, lambda
@@ -671,7 +671,7 @@ end</programlisting>
     <section id="section_comments.link">
       <title id="section_comments.title.link">Comments<phrase
       id="section_comments"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <warning><para>
          Comments are a little bit particular in the Kermeta language because they are not all ignored by the interpreter. There are two kinds of comments: the first (syntax : // foo , /* bar * 
 
@@ -755,7 +755,7 @@ class MyClass {
     <section id="section_reserved_keywords.link">
       <title id="section_reserved_keywords.title.link">Escaping reserved
       keywords<phrase id="section_keywords"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta textual syntax uses several keywords like
       <literal>class</literal>, <literal>attribute</literal>,
       <literal>reference</literal>, <literal>result</literal>, etc. (Please
@@ -781,7 +781,7 @@ class ~class {
     <section id="section_operators.link">
       <title id="section_operators.title.link">Operators<phrase
       id="section_operators"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <informaltable>
         <tgroup cols="4">
           <colspec colname="c1" colwidth="1.4cm" />
@@ -1041,7 +1041,7 @@ class ~class {
     <section id="section_statements.link">
       <title id="section_statements.title.link">Statements : block, condition,
       loop<phrase id="section_statements"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <section>
         <title>Block statement</title>
 
@@ -1145,7 +1145,7 @@ end</programlisting>
     <section>
       <title>File dependency : structuring code<phrase
       id="section_files"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta code can be quite large, and invloves many classes in
       different metamodels. The main mechanism used to organise your code is
       the <literal>require</literal> statement.</para>
@@ -1280,7 +1280,7 @@ class C inherits subPackage1::A
     <section id="section_variables.link">
       <title id="section_variables.title.link">Using
       Variables<phrase></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Whenever you need a data locally to a block because it doesn't
       goes into a class attribute or reference, you can use a local
       variable.</para>
@@ -1320,7 +1320,7 @@ end</programlisting>
 
     <section id="section_basic_types.link">
       <title id="section_basic_types.title.link">Basic types</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <section>
         <title>Primitive types</title>
 
@@ -1464,7 +1464,7 @@ end</programlisting>
     <section id="section_classesandmethods.link">
       <title id="section_classesandmethods.title.link">Classes and
       methods<phrase id="section_classes"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <section>
         <title>Classes</title>
 
@@ -1713,7 +1713,7 @@ aspect class ClassFromMyEcore {
     <section id="section_inheritance.link">
       <title id="section_inheritance.title.link">Inheritance<phrase
       id="section_inheritance"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>As Kermeta is object-oriented, it supports inheritance. Like its
       basis EMOF, it support both, simple and multiple inheritance.</para>
 
@@ -2188,7 +2188,7 @@ class C {
     <section id="section_genericity.link">
       <title id="section_genericity.title.link">Genericity<phrase
       id="section_genericity"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>One of the core characteristics of Kermeta is to be statically
       typed. In order to allow static typing of OCL-like expressions, a few
       modifications had to be made to the EMOF type system (Please refer to
@@ -2289,7 +2289,7 @@ class C {
     <section id="section_exceptions.link">
       <title id="section_exceptions.title.link">Exception handling<phrase
       id="section_exceptions"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta provides also an exception mechanism. You can define a
       "rescue" block to manage errors occurring during the execution of
       another block. Exception mechanism is very close to the Java Exception
@@ -2333,7 +2333,7 @@ class C {
     <section id="section_loadingsaving_models.link">
       <title id="section_loadingsaving_models.title.link">Loading and saving
       models<phrase id="section_serialization"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>This section explains how to load and save (deserialize and
       serialize) an EMF model in Kermeta. For this purpose, we will use the
       following small example :</para>
@@ -2491,7 +2491,7 @@ operation main() is do
     <section id="section_packages.link">
       <title id="section_packages.title.link">Packages<phrase
       id="section_packages"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <section>
         <title>Definition</title>
 
@@ -2619,7 +2619,7 @@ class C inherits A
     <section id="section_collections.link">
       <title id="section_collections.title.link">Collections<phrase
       id="section_collections"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Collections are widely used in Kermeta not only because of their
       usual usage for collecting data in variables but also because they are
       used to represent <link linkend="section_properties.link">class
@@ -2884,7 +2884,7 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
     <section id="section_properties.link">
       <title id="section_properties.title.link">Class properties<phrase
       id="section_properties"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>A property of a (meta)class can be expressed in three ways : as a
       reference, an attribute, or a derived property. In Kermeta, each kind of
       these properties has a specific behavior and a dedicated syntax, which
@@ -3399,7 +3399,7 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
     <section id="section_object_comparison.link">
       <title id="section_object_comparison.title.link">Objects
       comparison<phrase id="section_objects_comparison"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta users could be confused about <literal>==</literal>
       operator and <literal>equals</literal> method. Unlike, Java they do the
       same and redefining the equals to compare the content also affects the
@@ -3565,7 +3565,7 @@ end
     <section id="section_lambda_expression.link">
       <title id="section_lambda_expression.title.link">Lambda Expressions and
       functions<phrase id="section_lambda_expressions"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para><phrase id="section_lambda_expression"></phrase>Kermeta proposes an
       implementation of lambda expressions, that is mainly useful for
       implementing OCL-like functions.</para>
@@ -3788,7 +3788,7 @@ sequence := init_set.collect { element | element*10}</programlisting>
       <title id="section_dynamic_expressions.title.link">Dynamic evaluation of
       Kermeta expressions<phrase
       id="section_dynamic_expressions"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para><phrase id="dynamic_expression"></phrase>Kermeta allow you to
       evaluate dynamically a Kermeta Expression with a specific
       context.</para>
@@ -3862,7 +3862,7 @@ and op.name.indexOf("All")==-1}
     <section id="section_contracts.link">
       <title id="section_contracts.title.link">Design by contract (pre, post,
       inv contraints)<phrase id="section_contracts"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>In Kermeta, a contract is specified by "pre" and "post" conditions
       and by the "invariant" constraint too.</para>
 
@@ -4010,7 +4010,7 @@ and op.name.indexOf("All")==-1}
     <section id="section_weaving.link">
       <title id="section_weaving.title.link">Weaving Kermeta code<phrase
       id="section_weaving"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Since version 0.4.1, it is possible to write Kermeta code using a
       simplified Aspect Oriented approach.</para>
 
@@ -4282,7 +4282,7 @@ aspect abstract class A {
 
     <section id="section_modeltype.link">
       <title id="section_modeltype.title.link">Model type</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <warning><para>
          In current version of Kermeta(v1.1.0), ModelType is still a prototype. Any help, feedback, contribution is welcome to help us to finalize it. 
       </para></warning>
@@ -4439,7 +4439,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
     <section id="section_java_code.link">
       <title id="section_java_code.title.link">Using existing java code in
       Kermeta</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>If you have existing code that you want to run in a Kermeta
       program, you can use one of those two mechanisms : extern call or
       seamless require.</para>
@@ -4652,7 +4652,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
     <section>
       <title>Cloning objects<phrase id="section_cloning"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>As we saw in previous sections, class properties can be defined as
       attribute or reference. An attribute cannot be shared between two or
       more objects whereas a reference can be. Let's consider a class
@@ -4718,7 +4718,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
   <chapter id="section_kermeta_metamodel.link">
     <title id="section_kermeta_metamodel.title.link">Kermeta Metamodel<phrase
     id="chapter_kermeta_mm"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
     <para>As Kermeta is designed to be used in a model driven environment, its
     structure is given as a model. This section presents the metamodel of
     Kermeta which corresponds to the abstract syntax of Kermeta.</para>
@@ -4746,7 +4746,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
     <section id="section_architecture.link">
       <title id="section_architecture.title.link">Architecture</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta has been designed to be fully compatible with the OMG
       standard meta-data language EMOF. The metamodel of Kermeta is divided
       into two packages :</para>
@@ -4799,7 +4799,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
     <section>
       <title>Structure package</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <figure id="refIllustration10">
         <title>Structure package</title>
 
@@ -4878,7 +4878,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
     <section>
       <title>Behavior package</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <figure id="refIllustration11">
         <title>Behavior package</title>
 
@@ -5107,7 +5107,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
     <section>
       <title>Viewing Kermeta metamodel</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
       <para>In Kermeta, you can view its metamodel by several ways.</para>
 
       <para>First, the ecore file kermeta_java.ecore is available in the lib
@@ -5136,7 +5136,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
   <chapter>
     <title>Kermeta framework<phrase id="chapter_framework"></phrase></title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
     <para>Kermeta is bundled with a framework that provides the base
     functionalities for metamodel engineering.</para>
 
@@ -5278,7 +5278,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
   <appendix id="appendix_keywords.link">
     <title id="appendix_keywords.title.link">Language keywords</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
     <para>The following keywords are used by Kermeta textual syntax.</para>
 
     <note>
@@ -5644,7 +5644,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
   </appendix>
   <appendix id="appendix_knowntags.link">
     <title id="appendix_knowntags.title.link">Known Kermeta tags</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
     <para>This annex collect the use of known tags. 
     They are generally used as an extension on Kermeta in these typically uses :</para>
     <itemizedlist>
@@ -5768,7 +5768,7 @@ class MyMainClass
 
   <appendix id="appendix_KermetaEcore.link">
     <title id="appendix_KermetaEcore.title.link">Kermeta / Ecore mapping</title>
-
+<warning><title>Text not verified for kermeta 2</title></warning>
 	<para>Kermeta natively integrates Ecore defintions, however it uses an internal mapping in order to import ecore model as Kermeta models.
 	In the other way round a Kermeta model can be translated into a pure ecore model. (for example in the compiler)</para>
     <para>This annex indicates how Kermeta models are translated into Ecore models and vice versa.</para>
