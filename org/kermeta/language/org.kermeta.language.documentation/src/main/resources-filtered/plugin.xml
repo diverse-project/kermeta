@@ -6,12 +6,12 @@
    </requires>
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>
-    <toc file="KerMeta-Manual.docb/toc.xml" />
+    <toc file="Kermeta-Manual.docb/toc.xml" />
     <!--<toc file="build/eclipse.help/KermetaArchitectureGuide/toc.xml" />-->
     <!--<toc file="build/eclipse.help/KerMeta-MetaModel/toc.xml" />-->
   </extension>
   
    <extension point="org.eclipse.help.index">
-      <index file="KerMeta-Manual.docb/index.xml"/>
+      <index file="Kermeta-Manual.docb/index.xml"/>
    </extension>
 </plugin>
