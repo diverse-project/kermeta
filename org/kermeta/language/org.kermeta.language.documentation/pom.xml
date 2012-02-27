@@ -4,12 +4,17 @@
 
 	<groupId>org.kermeta.language</groupId>
 	<artifactId>language.documentation</artifactId>
-	<version>2.0.1-SNAPSHOT</version>
+	<version>2.0.1-BETA4</version>
 	<packaging>jar</packaging>
 
 	<name>language.documentation</name>
-	<url>http://maven.apache.org</url>
+	<url>http://www.kermeta.org</url>
 
+	<parent>
+		<artifactId>kermeta.root</artifactId>
+		<groupId>org.kermeta</groupId>
+		<version>2.0-SNAPSHOT</version>
+	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
