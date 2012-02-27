@@ -1,0 +1,27 @@
+using kermeta::standard
+using kermeta::emfpersistence
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			stdio.writeln("Hello from mainOperation")
+			var repository : ResourceSet init ResourceSet.new
+	   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+	   		//var resource : Resource init repository.createResource("platform:/resource/test_023_UMLTransformation/src/test/resources/My.uml",
+	   		//													   "platform:/resource/org.eclipse.uml2.uml/model/UML.ecore")
+	   		var resource : Resource init repository.createResource("platform:/resource/test_023_UMLTransformation/src/test/resources/My.uml")
+	   		//var resource : Resource init repository.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
+	   		//																							"file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/ClassMM.ecore")
+	       	resource.load(void)      
+	       	
+	       	
+	       	stdio.writeln(resource.getContents.one.toString)
+	       	var pack : uml::Package init resource.getContents.one.asType(uml::Package)
+	        pack.nestedPackage.each{c |
+	        	stdio.writeln(c.name)
+	        }
+		end
+	}
+}
