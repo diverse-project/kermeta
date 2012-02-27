@@ -20,11 +20,11 @@
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
 	<property name="deploy.server" value="kermeta.org"/>
 	<property name="deploy.user" value="web-kermeta"/>
-	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2/update"/>
+	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2_snapshot/update"/>
 	
 
 	<property name="kermeta.maven.repsitory" value="http://maven.irisa.fr/artifactory/repo"/>
-	<property name="kermeta.language.version" value="2.0.1-BETA4"/>
+	<property name="kermeta.language.version" value="2.0.1-SNAPSHOT"/>
 	<property name="k1.model.version" value="1.4.0"/>
 	<property name="k1.framework.version" value="1.4.3-BETA1"/>
 	<property name="k1.compiler.version" value="2.9.0-1"/>
