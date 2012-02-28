@@ -103,7 +103,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
         par.getOwnedOperation.foreach{op : Operation =>
           visitor.generateSignature(op,res1)
         }
-        res1.append("}\n")
+        res1.append("\n}\n")
         /*
          par.getOwnedAttribute.foreach{at : Attribute
 
@@ -111,6 +111,19 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
          */
         //GENERATE ATTRIBUTE SIGNATURE
 
+        // GENERATE SINGLETON
+        if (par.getIsSingleton()){
+          // create companion object
+        	res1.append("object ")
+        	res1.append(par.getName())
+        	visitor.generateParamerterClass(par,res1);
+        	res1.append(" extends ")
+        	res1.append(par.getName())
+        	res1.append(" with _root_."+visitor.getQualifiedNameCompilo(par.eContainer)+".")
+        	res1.append(par.getName())
+        	res1.append("Aspect with _root_.k2.standard.EObjectImplForPrimitive")
+        	res1.append("{}\n")
+        }
         //res1.append("trait " + par.getName + " extends "+superQualifiedName+" with org.kermeta.scala.framework.language.structure.ObjectAspect")
         Util.generateFile(genpackageName.toString, par.getName, res1.toString())
       }
