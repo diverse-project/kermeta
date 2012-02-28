@@ -249,6 +249,7 @@ public class KPBuilder {
 			// full build required so clear the consoles
 			Activator.getDefault().getMessaggingSystem().clearLog();
 			org.kermeta.utils.systemservices.eclipse.Activator.getDefault().getMessaggingSystem().clearLog();
+			org.kermeta.utils.systemservices.eclipse.Activator.getDefault().clearConsole();
 			
 			if (andRun) {
 				isBuildNeeded = checkIfBuildIsNeeded();

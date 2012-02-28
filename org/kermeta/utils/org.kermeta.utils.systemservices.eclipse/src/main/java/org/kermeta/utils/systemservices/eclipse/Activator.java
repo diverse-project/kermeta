@@ -89,6 +89,9 @@ public class Activator extends AbstractUIPlugin {
 		return messaggingSystem;
 	}
 
+	public void clearConsole(){
+		getConsoleIO().clear();
+	}
 	public ConsoleIO getConsoleIO() {
 		return consoleIO;
 	}
