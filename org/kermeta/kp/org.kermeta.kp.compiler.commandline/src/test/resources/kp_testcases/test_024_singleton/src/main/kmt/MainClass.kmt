@@ -1,0 +1,18 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			MySingletonClass.writeHello()
+			
+		end
+	}
+	
+	singleton MySingletonClass {
+		operation writeHello() : Void is do
+			stdio.writeln("Hello from singleton "+ self.toString)
+		end
+	}
+}
