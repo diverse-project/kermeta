@@ -246,6 +246,10 @@ public class KPBuilder {
 		try {		
 			boolean isBuildNeeded = !andRun;
 			
+			// full build required so clear the consoles
+			Activator.getDefault().getMessaggingSystem().clearLog();
+			org.kermeta.utils.systemservices.eclipse.Activator.getDefault().getMessaggingSystem().clearLog();
+			
 			if (andRun) {
 				isBuildNeeded = checkIfBuildIsNeeded();
 			}
@@ -324,6 +328,8 @@ public class KPBuilder {
 				}
 			}
 			if (andRun) {
+				// full build required so clear the consoles
+				Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).clearLog();
 				//k2.io.StdIO._messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 				/* k2.io.StdIO$.MODULE$.messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 				Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");

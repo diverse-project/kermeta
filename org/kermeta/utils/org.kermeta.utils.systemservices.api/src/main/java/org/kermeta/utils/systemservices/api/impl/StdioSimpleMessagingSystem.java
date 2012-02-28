@@ -25,6 +25,10 @@ import org.kermeta.utils.systemservices.api.reference.Reference;
 public class StdioSimpleMessagingSystem extends MessagingSystem {
 
 	@Override
+	public void clearLog(){
+	}
+	
+	@Override
 	public void log(Kind msgKind, String message, String messageGroup) {
 		System.out.println(getKindString(msgKind) + " [" +messageGroup + "] " + message +" "+getCallerString());
 	}

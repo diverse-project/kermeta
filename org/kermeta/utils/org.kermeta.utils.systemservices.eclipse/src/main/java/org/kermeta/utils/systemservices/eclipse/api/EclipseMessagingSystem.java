@@ -112,6 +112,11 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	}
 
 	@Override
+	public void clearLog(){
+		this.consoleIO.clear();
+	}
+	
+	@Override
 	public void log(Kind msgKind, String message, String messageGroup) {
 		
 		// some error message should go to the eclipse error view

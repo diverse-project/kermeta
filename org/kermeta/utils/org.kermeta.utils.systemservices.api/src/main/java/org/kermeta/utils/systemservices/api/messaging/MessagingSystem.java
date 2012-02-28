@@ -26,6 +26,9 @@ public abstract class MessagingSystem {
 	
 	public static int UNKNOWN_NBWORKUNIT = -1;
 	
+	/** remove old log message from the user view if any */
+	public abstract void clearLog();
+	
 	public abstract void log(Kind msgKind, String message, String messageGroup);
 	public abstract void log(Kind msgKind, String message, String messageGroup, Throwable senderTrace);
 	public abstract void logProblem(Kind msgKind, String message, String messageGroup, Reference causeObject);
