@@ -43,6 +43,10 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	
 	protected ConsoleIO consoleIO; 
 	
+	public ConsoleIO getConsoleIO() {
+		return consoleIO;
+	}
+
 	protected Hashtable<String,Long> progressStartTimeTable = new Hashtable<String,Long>();
 	
 	protected Integer consoleLogLevel = ConsoleLogLevel.DEV_DEBUG;
