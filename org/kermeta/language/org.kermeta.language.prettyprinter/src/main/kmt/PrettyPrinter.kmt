@@ -23,16 +23,23 @@ class PrettyPrinter
 {
 	operation testMain() : Void is do 
 		var repository : ResourceSet init ResourceSet.new
-		var folder : String init "platform:/resource/QVTtest/src/main/kmt"
+		//var path : String init arg
+		var folder : String init "platform:/resource/QVTtest/src/main/kmt/"
 		var baseFileName : String init "Book2Publication"
+		//var folder : String init "platform:/resource/QVTtest/target/"
+		//var baseFileName : String init "beforeResolving"
+		
+		
 		//repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var theModelResource : Resource init repository.createResource(folder+baseFileName+".km","http://www.kermeta.org/kermeta/2_0_0/")
+		//var theModelResource : Resource init repository.createResource(path,"http://www.kermeta.org/kermeta/2_0_0/")
        	theModelResource.load(void)
-       	StdIO.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
+       	//StdIO.writeln("	********************* " + path + " loaded ************************")
 		       	
        	var theModelingUnit : org::kermeta::language::structure::ModelingUnit
        	theModelingUnit ?= theModelResource.getContents.one
        	FileIO.writeTextFile((folder+baseFileName+".kmt").toURI, prettyPrint(theModelingUnit))
+       	//FileIO.writeTextFile((path+"t").toURI, prettyPrint(theModelingUnit))
        	//StdIO.writeln(prettyPrint(theModelingUnit))
        	
 	end

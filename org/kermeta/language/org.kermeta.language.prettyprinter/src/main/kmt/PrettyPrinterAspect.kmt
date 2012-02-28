@@ -184,7 +184,27 @@ package structure{
 						result := result + ","
 					end 
 					if oneParam.name.isVoid.~not then
-						result := result + Helper.new.keywordEscape(oneParam.name) + ":" + oneParam.type.typePrettyPrint(indent)
+						result := result + Helper.new.keywordEscape(oneParam.name) + ":"
+						if upper!=1 then
+							if isOrdered and isUnique then
+								result:=result+" oset "
+							end
+							if isOrdered and not isUnique then
+								result:=result+" seq "
+							end
+							if isUnique and not isOrdered then
+								result:=result+" set "
+							end
+							if (not isUnique) and not isOrdered then
+								result:=result+" bag "
+							end
+						end						
+						
+						result:=result +oneParam.type.typePrettyPrint(indent)
+						
+						if upper!=1 then
+							result:=result+" ["+lower+".."+"*]"
+						end
 					else
 						StdIO.writeln("param with no name")
 					end
@@ -218,7 +238,28 @@ package structure{
 					propertyType:="reference " 
 				end
 				
-				result := printIndent(indent)+ propertyType +Helper.new.keywordEscape(self.name)+" : "+self.type.typePrettyPrint(indent) + "\n"
+				result := printIndent(indent)+ propertyType+Helper.new.keywordEscape(self.name)+" : "
+				
+				if upper!=1 then
+					if isOrdered and isUnique then
+						result:=result+" oset "
+					end
+					if isOrdered and not isUnique then
+						result:=result+" seq "
+					end
+					if isUnique and not isOrdered then
+						result:=result+" set "
+					end
+					if (not isUnique) and not isOrdered then
+						result:=result+" bag "
+					end
+				end
+
+				result:=result +self.type.typePrettyPrint(indent)
+				if upper!=1 then
+					result:=result+" ["+lower+".."+"*]"
+				end
+				result:= result + "\n"
 
 			else
 				result:=""
@@ -385,7 +426,7 @@ package behavior {
 	
 	aspect class LambdaExpression {
 		method prettyPrint(indent : Integer) :String is do
-			result :="function {"
+			result :=" {"
 			var first : Boolean init true
 			parameters.each{p|
 				if not first then
@@ -474,7 +515,7 @@ package behavior {
 		end
 		result:=result+type.typePrettyPrint(indent)
 		if upper!=1 then
-			result:=result+"["+lower+","+"*]"
+			result:=result+"["+lower+".."+"*]"
 		end
 		end
 	
