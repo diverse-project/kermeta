@@ -437,8 +437,10 @@ public class KermetaCompiler {
 				// deal with scala to bytecode
 				int result =scala2bytecode(fullBinaryDependencyClassPath);
 				if(result != 0){
-					logger.logProblem(MessagingSystem.Kind.UserERROR, "Error detected during bytecode generation. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 					this.errorMessage = "Error detected during bytecode generation. Compilation not complete for this project.";
+					logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					// this error is important enough to be reported in the logger
+					logger.error(this.errorMessage, LOG_MESSAGE_GROUP);
 					this.hasFailed = true;
 				}
 			} else {
