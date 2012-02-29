@@ -386,7 +386,16 @@ package behavior {
 						self.resolvedCall.parameters.addAll(self.parameters)
 						
 						//TODO check if parameters have the good type and if they must be used to infer a type parameter
-						self.resolvedCall.asType(CallOperation).inferTypeVariableFromParameters(context)
+						if not self.generics.isEmpty then
+							if self.generics.size == self.resolvedCall.asType(CallOperation).staticOperation.typeParameter.size then
+								self.resolvedCall.staticTypeVariableBindings.addAll(self.generics)
+								self.resolvedCall.containedType.addAll(self.containedType)
+							else
+								context.errors.add(ResolverException.new.initialize("Number of type parameters different from the operation definition", resolvedCall))
+							end
+						else
+							self.resolvedCall.asType(CallOperation).inferTypeVariableFromParameters(context)
+						end
 						self.resolvedCall.asType(CallOperation).target := self.target 
 						
 						// The static type of the call operation must be infered.
