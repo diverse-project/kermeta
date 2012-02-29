@@ -198,7 +198,7 @@ public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 		    		getProjectLocationText().setText(getProjectLocationText().getText());
 		    	}
 		    }
-		    
+		    getArgumentsText().setText(configuration.getAttribute(KermetaLauncherConfiguration.KM_LAUNCH_PARAMETERS, ""));
 		    canSave();
 		}
 		catch (CoreException e)
