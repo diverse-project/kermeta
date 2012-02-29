@@ -28,6 +28,13 @@ package structure{
 	}
 	
 	aspect class UnresolvedType {
+	
+		operation initialize(ti : String) : UnresolvedType is do
+			result:=self
+			self.typeIdentifier:=ti
+		
+		end
+	
 		method generateTypeRef() : org::kermeta::language::behavior::TypeReference is do
 			result:=org::kermeta::language::behavior::TypeReference.new
 			result.lower:=0
@@ -171,6 +178,14 @@ package behavior {
 			//tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
 			tl_getDefault.name:="root_package::TransformationContext"
 			StdIO.writeln("CallFeature::callToTransfoContextSingleton-end")
+		end
+		
+		
+		operation initialize (name : String , isCalledWithParenthesis:Boolean): UnresolvedCall is do
+			result:=self
+			self.isCalledWithParenthesis := isCalledWithParenthesis
+			self.name:=name
+		
 		end
 	
 	}

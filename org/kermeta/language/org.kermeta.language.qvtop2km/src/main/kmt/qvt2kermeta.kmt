@@ -78,7 +78,7 @@ operation main() : Void is do
         //tgtModel := targetRepository.createResource("../test/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
         //tgtModel := targetRepository.createResource("../test/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("../test/UML2RDBMS.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		tgtModel := targetRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-km/book2pub1/Book2Publication.km" , "http://www.kermeta.org/kermeta/2_0_0/")
+		tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Book2Publication.km" , "http://www.kermeta.org/kermeta/2_0_0/")
 		StdIO.writeln("6")
 		
 		

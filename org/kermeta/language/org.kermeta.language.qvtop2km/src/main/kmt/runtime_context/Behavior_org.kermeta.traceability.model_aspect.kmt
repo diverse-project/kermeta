@@ -10,11 +10,13 @@
 
 
 @uri "http://www.kermeta.org/Traceability/2.0.0//org/kermeta/traceability"
-package org::kermeta::traceability;
-require "traceability.kmt"
-require "kermeta"
+package traceability;
+//require "traceability.kmt"
+//require "kermeta"
+using org::kermeta::language::structure
 using kermeta::standard
-using kermeta::language::structure
+using kermeta::emfpersistence
+using kermeta::io
 
 
 aspect class Trace
@@ -210,7 +212,7 @@ aspect class TracePackage {
 		result :=0 
 		references.each{refer| 
 			if refer == void then
-				stdio.writeln("the ref is void")
+				StdIO.writeln("the ref is void")
 			else
 				result :=result + refer.target.size()
 			end }
@@ -228,7 +230,7 @@ aspect abstract class FileReference inherits Reference{
 	 */
 	method isSameAs(obj: Object) : Boolean is do
 		result := false
-		if(obj != void and FileReference.isInstance(obj)) then
+		if(obj != void and obj.isInstanceOf(FileReference)) then
 			var fileRef : FileReference
 			fileRef ?= obj
 			result := self.fileURI == fileRef.fileURI and self.timeStamp == fileRef.timeStamp

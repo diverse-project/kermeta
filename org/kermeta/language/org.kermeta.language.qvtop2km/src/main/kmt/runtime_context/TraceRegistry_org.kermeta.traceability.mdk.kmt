@@ -5,19 +5,19 @@
  * Authors  : 
  *            xdolques
  */
-@mainClass "org::kermeta::traceability::TraceRegistry"
-@mainOperation "size"
+//@mainClass "org::kermeta::traceability::TraceRegistry"
+//@mainOperation "size"
 
 
-package org::kermeta::traceability;
+package traceability;
 
-require "Behavior_org.kermeta.traceability.model_aspect.kmt"
+//require "Behavior_org.kermeta.traceability.model_aspect.kmt"
 
-require kermeta
+//require kermeta
+using org::kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
-using kermeta::language::structure
-
+using kermeta::emfpersistence
 
 
 class TraceRegistry
@@ -67,8 +67,8 @@ class TraceRegistry
 	end
 	
 		
-	operation addTraceFromObjects(src : kermeta::language::structure::Object, tar : kermeta::language::structure::Object, 
-								  context : kermeta::language::structure::Object) : Void is do
+	operation addTraceFromObjects(src : Object, tar : Object, 
+								  context : Object) : Void is do
 		var srcRef : ModelReference init ModelReference.new
 		var tarRef : ModelReference init ModelReference.new
 		srcRef.refObject ?= src

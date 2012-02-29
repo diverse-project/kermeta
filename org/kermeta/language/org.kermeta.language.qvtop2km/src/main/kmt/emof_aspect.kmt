@@ -2,54 +2,6 @@ package emof;
 using root_package
 using kermeta::standard
 using kermeta::io
-aspect class Type{
-
-	method range2domain(context : Qvt2KermetaContext) : Void is do 
-	
-	
-	end
-	
-	operation generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
-		StdIO.writeln("Type generateType")
-		result:=void
-	end
-}
-
-aspect class Package
-{
-	/**
-		trigger the transformation of nested packages
-		and of the typedefinitions of the package
-	*/
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
-		do
-			if output.equals(void) then
-				var out : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new
-				output := out
-				nestedPackage.each{egakcaPdetsen | do
-						var elt : org::kermeta::language::structure::Package
-						egakcaPdetsen.range2domain(context)
-						elt ?= egakcaPdetsen.output
-						if elt.isNotEqual(void) then
-							out.nestedPackage.add(elt)
-						end
-					end}
-				out.uri := uri
-				out.name := name
-				ownedType.each{epyTdenwo | 
-						var elt : org::kermeta::language::structure::TypeDefinition
-						epyTdenwo.range2domain(context)
-						elt ?= epyTdenwo.output
-						if elt.isNotEqual(void) then
-							//StdIO.writeln("add a type definition in package : "+elt.name)
-							out.ownedTypeDefinition.add(elt)
-						end
-					}
-
-			end
-		end
-
-}
 
 aspect class Class {
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
@@ -112,10 +64,6 @@ method generateType(context : Qvt2KermetaContext) : org::kermeta::language::stru
 	//StdIO.writeln("Class::generateType-end")
 end
 
-
-
-
-
 }
 
 aspect class Operation {
@@ -129,54 +77,43 @@ StdIO.writeln("operation "+name)
 end
 }
 
-aspect class Property
+
+aspect class Package
 {
+	/**
+		trigger the transformation of nested packages
+		and of the typedefinitions of the package
+	*/
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output.equals(void) then
-				StdIO.writeln("Property::range2domain")
-				var existing : org::kermeta::language::structure::Property
-				StdIO.writeln("0")
-				existing ?= context.kmtContext.getFromQualifiedName(getQVTID)
-				if existing != void then
-					StdIO.writeln("1")
-					output:=existing
-				else
-					StdIO.writeln("2")
-					var out : org::kermeta::language::structure::Property init org::kermeta::language::structure::Property.new
-					output := out
-					out.default := default
-					out.isComposite := isComposite
-					out.isReadOnly := isReadOnly
-					out.isID := isID
-					out.isDerived := isDerived
-					out.name := name
-					out.lower := lower
-					out.upper := upper
-					
-					if opposite.isNotEqual(void) then
-						StdIO.writeln("3")
-						opposite.range2domain(context)
-						out.opposite ?= opposite.output
-	
-					end
-					if type.isNotEqual(void) then
-						StdIO.writeln("4")
-						out.type := type.generateType(context)
-							if (out.type!=void).andThen{x| not out.type.isInstanceOf(org::kermeta::language::structure::PrimitiveType)} then
-								out.containedType.add(out.type)
-								StdIO.writeln("emof::Property create type "+type.name)
-							else
-								StdIO.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
-							end
-						
-					end
-					StdIO.writeln("Property::range2domain-end")
-				end
-			end	
+				var out : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new
+				output := out
+				nestedPackage.each{egakcaPdetsen | do
+						var elt : org::kermeta::language::structure::Package
+						egakcaPdetsen.range2domain(context)
+						elt ?= egakcaPdetsen.output
+						if elt.isNotEqual(void) then
+							out.nestedPackage.add(elt)
+						end
+					end}
+				out.uri := uri
+				out.name := name
+				ownedType.each{epyTdenwo | 
+						var elt : org::kermeta::language::structure::TypeDefinition
+						epyTdenwo.range2domain(context)
+						elt ?= epyTdenwo.output
+						if elt.isNotEqual(void) then
+							//StdIO.writeln("add a type definition in package : "+elt.name)
+							out.ownedTypeDefinition.add(elt)
+						end
+					}
+
+			end
 		end
 
 }
+
 
 aspect class PrimitiveType
 {
@@ -262,9 +199,87 @@ method generateType(context : Qvt2KermetaContext) : org::kermeta::language::stru
 		range2domain(context)
 	end
 	//result:=output.asType(org::kermeta::language::structure::Type)
-	var t : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
-	t.typeIdentifier:=self.getQVTID
-	result:=t 
+	
+	if self.name=="EString" or self.name=="String" then
+		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::String")		 
+	end
+	if self.name=="EInt" or self.name=="Integer" or self.name=="UnlimitedNatural" then
+		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Integer")
+	end
+	if self.name=="EBoolean" or self.name=="Boolean" then
+		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
+	end
+	if self.name=="EFloat" or self.name=="Real" then
+		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Float")
+	end
+	
+	if result.isVoid then
+		var t : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+		t.typeIdentifier:=self.getQVTID
+		result:=t
+	end 
 	
 end
+}
+
+aspect class Property
+{
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+		do
+			if output.equals(void) then
+				StdIO.writeln("Property::range2domain")
+				var existing : org::kermeta::language::structure::Property
+				StdIO.writeln("0")
+				existing ?= context.kmtContext.getFromQualifiedName(getQVTID)
+				if existing != void then
+					StdIO.writeln("1")
+					output:=existing
+				else
+					StdIO.writeln("2")
+					var out : org::kermeta::language::structure::Property init org::kermeta::language::structure::Property.new
+					output := out
+					out.default := default
+					out.isComposite := isComposite
+					out.isReadOnly := isReadOnly
+					out.isID := isID
+					out.isDerived := isDerived
+					out.name := name
+					out.lower := lower
+					out.upper := upper
+					
+					if opposite.isNotEqual(void) then
+						StdIO.writeln("3")
+						opposite.range2domain(context)
+						out.opposite ?= opposite.output
+	
+					end
+					if type.isNotEqual(void) then
+						StdIO.writeln("4")
+						out.type := type.generateType(context)
+							if (out.type!=void).andThen{x| not out.type.isInstanceOf(org::kermeta::language::structure::PrimitiveType)} then
+								out.containedType.add(out.type)
+								StdIO.writeln("emof::Property create type "+type.name)
+							else
+								StdIO.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
+							end
+						
+					end
+					StdIO.writeln("Property::range2domain-end")
+				end
+			end	
+		end
+
+}
+
+aspect class Type{
+
+	method range2domain(context : Qvt2KermetaContext) : Void is do 
+	
+	
+	end
+	
+	operation generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
+		StdIO.writeln("Type generateType")
+		result:=void
+	end
 }

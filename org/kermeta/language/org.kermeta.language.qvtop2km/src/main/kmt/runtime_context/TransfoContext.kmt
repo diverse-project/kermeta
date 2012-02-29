@@ -9,22 +9,26 @@
 
 
 package root_package;
-require kermeta
-require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"
-require "platform:/resource/qvt-kermeta/transformation/traceability/TraceRegistry_org.kermeta.traceability.mdk.kmt"
+//require kermeta
+//require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"
+//require "platform:/resource/qvt-kermeta/transformation/traceability/TraceRegistry_org.kermeta.traceability.mdk.kmt"
 
 
 using kermeta::standard
-using kermeta::persistence
-using org::kermeta::traceability
+using kermeta::emfpersistence
+using traceability
 using org::kermeta::language::structure
 
 
-class TransformationContext
+aspect singleton TransformationContext
 {
 	//attribute srcModel: Resource
 	//attribute tgtModel: Resource
 	attribute traceRegistry : TraceRegistry
+
+	operation getDefault(): Object is do
+		result:=self
+	end
 	
 	operation addTrace(source : Object, target : Object, context : Object) : Void is do
 		var srcModelRef : ModelReference init ModelReference.new
@@ -34,6 +38,7 @@ class TransformationContext
 		traceRegistry.addTraceFromReferences(srcModelRef,tgtModelRef,context)
 		
 	end
+
 
 	
 	operation resolveAllTargets(source : Object) : Object[0..*] is do
@@ -73,7 +78,7 @@ class ModelParameter {
 	operation save() : Void is do 
 		extent.each{ x|
 				if x.container == void then
-					modelResource.add(x)
+					modelResource.getContents.add(x)
 				end
 				}
 	
@@ -81,7 +86,7 @@ class ModelParameter {
 	
 	operation initialize(initRes : Resource) : Void is do
 		modelResource := initRes
-		extent.addAll(modelResource.contents)
+		extent.addAll(modelResource.getContents)
 	end
 
 	operation objects() : Set<Object> is do

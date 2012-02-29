@@ -3,6 +3,102 @@ using root_package
 using kermeta::standard
 using kermeta::io
 
+aspect class CollectionItem {
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then
+			var out : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			output:=out
+			out.name:="add"
+			
+			
+			var collection : essentialocl::CollectionLiteralExp
+			collection ?=container
+			
+			var collectionVar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+			out.target:=collectionVar
+			collectionVar.name:=collection.collectionTmpId
+			item.range2domain(context)
+			out.parameters.add(item.output.asType(org::kermeta::language::behavior::Expression))
+			
+			
+		
+		end
+	end
+
+}
+	
+	
+	
+/** definition inlined of a collection in qvt*/
+aspect class CollectionLiteralExp {
+	
+	reference collectionTmpId : kermeta::standard::String
+	
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then
+			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			output:=out
+			out.addDocumentationTag("gen from essentialocl::CollectionLiteralExp")
+			
+			//variable declaration of the Collection
+			var vDecl : org::kermeta::language::behavior::VariableDecl init org::kermeta::language::behavior::VariableDecl.new
+			out.statement.add(vDecl)
+						//TODO find a way to generate random identifiers that won't collide with existing identifiers
+			vDecl.identifier:="collectionliteral"
+			collectionTmpId:=vDecl.identifier
+			type.range2domain(context)
+			var seqClass : org::kermeta::language::structure::Class
+			seqClass?=type.output
+			
+			vDecl.containedType.add(seqClass)
+			/*	TODO remove if the following call to generateTypeRef works well 
+			var tRef : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+			tRef.lower:=0
+			tRef.upper:=1
+			tRef.type?=type.output
+			if (tRef.type.isInstanceOf(org::kermeta::language::structure::Class)) then
+				tRef.name:=tRef.type.asType(org::kermeta::language::structure::Class).name
+			end*/
+			
+			vDecl.type:=type.output.asType(org::kermeta::language::structure::Type).generateTypeRef
+			
+			//init
+			
+			var callNew : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
+			vDecl.initialization:=callNew
+			callNew.name:="new"
+			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			callNew.target:=typeLit
+			
+			typeLit.typeref:=seqClass.cloneClass.generateTypeRef			
+			
+
+			
+			
+			
+			//add all the collection items
+			part.each{x|
+					x.range2domain(context)
+					out.statement.add(x.output.asType(org::kermeta::language::behavior::Expression))
+					}
+				
+			var returnVariable : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+			returnVariable.name:=collectionTmpId
+			
+			out.statement.add(returnVariable)
+			
+			//var vnew : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				
+				
+		end
+	end
+	
+}
+
+
+
+
+
 /**call to a Property*/
 aspect class PropertyCallExp{
 
@@ -316,98 +412,6 @@ aspect class Variable {
 	end
 }
 	
-
-aspect class CollectionItem {
-	method range2domain(context : Qvt2KermetaContext) : Void is do
-		if output==void then
-			var out : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			output:=out
-			out.name:="add"
-			
-			
-			var collection : essentialocl::CollectionLiteralExp
-			collection ?=container
-			
-			var collectionVar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
-			out.target:=collectionVar
-			collectionVar.name:=collection.collectionTmpId
-			item.range2domain(context)
-			out.parameters.add(item.output.asType(org::kermeta::language::behavior::Expression))
-			
-			
-		
-		end
-	end
-
-}
-	
-	
-	
-/** definition inlined of a collection in qvt*/
-aspect class CollectionLiteralExp {
-	
-	reference collectionTmpId : kermeta::standard::String
-	
-	method range2domain(context : Qvt2KermetaContext) : Void is do
-		if output==void then
-			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
-			output:=out
-			out.addDocumentationTag("gen from essentialocl::CollectionLiteralExp")
-			
-			//variable declaration of the Collection
-			var vDecl : org::kermeta::language::behavior::VariableDecl init org::kermeta::language::behavior::VariableDecl.new
-			out.statement.add(vDecl)
-						//TODO find a way to generate random identifiers that won't collide with existing identifiers
-			vDecl.identifier:="collectionliteral"
-			collectionTmpId:=vDecl.identifier
-			type.range2domain(context)
-			var seqClass : org::kermeta::language::structure::Class
-			seqClass?=type.output
-			
-			vDecl.containedType.add(seqClass)
-			/*	TODO remove if the following call to generateTypeRef works well 
-			var tRef : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
-			tRef.lower:=0
-			tRef.upper:=1
-			tRef.type?=type.output
-			if (tRef.type.isInstanceOf(org::kermeta::language::structure::Class)) then
-				tRef.name:=tRef.type.asType(org::kermeta::language::structure::Class).name
-			end*/
-			
-			vDecl.type:=type.output.asType(org::kermeta::language::structure::Type).generateTypeRef
-			
-			//init
-			
-			var callNew : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
-			vDecl.initialization:=callNew
-			callNew.name:="new"
-			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
-			callNew.target:=typeLit
-			
-			typeLit.typeref:=seqClass.cloneClass.generateTypeRef			
-			
-
-			
-			
-			
-			//add all the collection items
-			part.each{x|
-					x.range2domain(context)
-					out.statement.add(x.output.asType(org::kermeta::language::behavior::Expression))
-					}
-				
-			var returnVariable : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
-			returnVariable.name:=collectionTmpId
-			
-			out.statement.add(returnVariable)
-			
-			//var vnew : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-				
-				
-		end
-	end
-	
-}
 
 
 

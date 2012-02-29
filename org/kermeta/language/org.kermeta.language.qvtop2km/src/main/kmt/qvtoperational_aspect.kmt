@@ -270,10 +270,11 @@ aspect class MappingOperation {
 			resStrict.upper:=1
 			//resStrict.isOrdered:=true
 			//resStrict.isUnique:=false
-			var boolType : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
-			resStrict.type:=boolType
-			boolType.typeDefinition?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
-			resStrict.containedType.add(boolType)
+			//var boolType : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			//resStrict.type:=boolType
+			resStrict.type:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
+			//boolType.typeDefinition?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
+			resStrict.containedType.add(resStrict.type)
 			
 			
 			//set owning class of output operation
@@ -829,11 +830,12 @@ aspect class ModelParameter {
 			out.upper:=1
 			out.isComposite:=true
 			out.name:=name
-			var classDef : org::kermeta::language::structure::ClassDefinition
-			classDef?=context.kmtContext.getFromQualifiedName("root_package::ModelParameter")
+			//var classDef : org::kermeta::language::structure::ClassDefinition
+			//classDef?=context.kmtContext.getFromQualifiedName("root_package::ModelParameter")
 			
-			out.type:= org::kermeta::language::structure::Class.new
-			out.type.asType(org::kermeta::language::structure::Class).typeDefinition:=classDef
+			//out.type:= org::kermeta::language::structure::Class.new
+			//out.type.asType(org::kermeta::language::structure::Class).typeDefinition:=classDef
+			out.type:=org::kermeta::language::structure::UnresolvedType.new.initialize("root_package::ModelParameter")
 			out.containedType.add(out.type)
 			
 		
