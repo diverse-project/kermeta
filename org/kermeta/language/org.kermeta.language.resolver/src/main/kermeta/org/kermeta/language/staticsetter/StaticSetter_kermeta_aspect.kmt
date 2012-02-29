@@ -777,9 +777,14 @@ package behavior {
 					if not self.elseBody.staticType.typeEquals(self.thenBody.staticType) then
 						// use Object as common super type
 						staticTypeOfIF:= context.createTypeFromQualifiedName("kermeta::standard::Object")
+					else
+						staticTypeOfIF:=self.elseBody.staticType	
+				
 					end
 					// TODO staticTypeOfIF:= getNearestCommonSuperType(self.thenBody.staticType, self.elseBody.staticType)
 				end
+			else
+				staticTypeOfIF:=self.thenBody.staticType	
 				
 			end
 			
