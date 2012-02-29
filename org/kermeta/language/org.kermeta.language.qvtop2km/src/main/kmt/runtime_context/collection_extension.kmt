@@ -1,0 +1,23 @@
+package kermeta::standard;
+
+require kermeta 
+
+singleton CollectionExtension{	
+	operation clearAndAddAll<G>(collection : kermeta::standard::Collection<G>, elements : kermeta::standard::Collection<Object>) : Void is do
+		collection.clear()
+		qvtAddAll(collection,elements)
+		
+	end
+
+	operation clearAndAdd<G>(collection : kermeta::standard::Collection<G>, element : G) : Void is do
+		collection.add(element)
+	end
+	
+	operation qvtAddAll<G>(collection : kermeta::standard::Collection <G>, elements : kermeta::standard::Collection<Object>) : Void is do
+		elements.each{x|collection.add(x.asType(G))}
+	end 
+	
+	
+
+}
+
