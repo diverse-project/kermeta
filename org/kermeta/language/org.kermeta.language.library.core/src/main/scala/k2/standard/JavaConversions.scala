@@ -85,7 +85,7 @@ object JavaConversions {
         }
 	 
 	
-        def asSetType[B]() :java.util.List[B]={
+        def asSequenceType[B]() :java.util.List[B]={
             var res : java.util.List[B] = new java.util.ArrayList[B];
             this.each{e=> res.add(e.asInstanceOf[B])}
             return res
@@ -227,6 +227,13 @@ object JavaConversions {
             value.remove(value.get(index))
         }
 
+        def addSafe(e:java.lang.Object) :Boolean= {
+          if (e.isInstanceOf[A])
+            return value.add(e.asInstanceOf[A])
+          else
+            return false;
+        }
+        
         def add(e:A) :Boolean= {
             return value.add(e);
         }
@@ -411,7 +418,7 @@ object JavaConversions {
 	  
 	      
 	
-        def asSetType[B]() :java.util.List[B]={
+        def asSequenceType[B]() :java.util.List[B]={
             var res : java.util.List[B] = new java.util.ArrayList[B];
             this.each(e=> res.add(e.asInstanceOf[B]))
             return res
@@ -424,6 +431,13 @@ object JavaConversions {
         def countElement(element : A) :java.lang.Integer={
             return this.select(e => e.equals(element)).size
         }
+        def addSafe(e:java.lang.Object) :Boolean= {
+          if (e.isInstanceOf[A])
+            return value.add(e.asInstanceOf[A])
+          else
+            return false;
+        }
+        
         //TODO
         def excludes(element : A) :java.lang.Boolean={return true;}
         def one() : A={

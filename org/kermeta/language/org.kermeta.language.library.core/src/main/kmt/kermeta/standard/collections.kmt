@@ -44,6 +44,15 @@ abstract class Collection<G>
 	 * Returns a new Set built from the Collection
 	 */
 	operation asSet() : Set<G> is abstract
+	
+	/**
+	 * Returns a new Sequence built from the Collection and filtering only the elements of type Y
+	 * This is a more efficient version of 
+	 * e.select{ elem | elem.isInstanceOf(Y) }.collect{elem | elem.asType(Y) }
+	 */
+	operation asSequenceType<Y>() : Sequence<Y> is do 
+		
+	end
 
 	/**
 	 * Returns a new OrderedSet built from the Collection
@@ -77,8 +86,12 @@ abstract class Collection<G>
 	 * Adds an element in the Collection (default implementation)
 	 */
 	operation add(element : G) : Void is do
-
-
+	end
+	
+	/**
+	 * Adds an element in the Collection if it is of compatible with the collection content
+	 */
+	operation addSafe(element : Object) : Void is do
 	end
 	
 	/**
