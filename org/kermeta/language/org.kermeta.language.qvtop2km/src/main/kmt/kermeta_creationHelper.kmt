@@ -3,6 +3,7 @@ package org::kermeta;
 
 using org::kermeta::language::behavior
 using org::kermeta::language::structure
+using org::kermeta::language
 using kermeta::standard
 using kermeta::io
 using root_package
@@ -185,6 +186,15 @@ package behavior {
 			result:=self
 			self.isCalledWithParenthesis := isCalledWithParenthesis
 			self.name:=name
+		
+		end
+		
+		
+		operation createProxySequence(t: Type) : behavior::UnresolvedCall is do
+			result:=self
+			self.name:="asSequenceType"
+			self.generics.add(t)
+			self.containedType.add(t)
 		
 		end
 	
