@@ -394,7 +394,7 @@ public class KPBuilder {
 				value = resolvedURL.toString();
 				props.put(key, value);
 			} catch (Exception e) {
-				Activator.getDefault().getMessaggingSystem().warn("Failed to find local file for bundle "+bundle.getSymbolicName()+". Will not be added to the urimap used to simulate Eclipse URI in standalone mode. Cause: "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, null);
+				Activator.getDefault().getMessaggingSystem().log(Kind.UserINFO,"Ignoring bundle "+bundle.getSymbolicName()+". Will not be added to the urimap used to simulate Eclipse URI in standalone mode. Cause: "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, null);
 			}
 			
 		}
