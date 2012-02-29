@@ -43,15 +43,20 @@ aspect class Assignment
 	 */
 	@Scope "RESOLVED"
 	inv type_mismatch is do
-		
-		//stdio.writeln("Assignment type_mismatch check")
-		if ((not(self.isCast.isVoid)).andThen{b| not(self.isCast)})
+
+		if (self.~value.staticType.isVoid() or self.target.staticType.isVoid() )
 		then
-			var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
-			self.~value.staticType.isSubTypeOf(self.target.staticType,typeVariableToSet)
+			// Another invariant on ClassDefinition Expression will raise an error
+			true 
 		else
-			true
-			
+			//stdio.writeln("Assignment type_mismatch check")
+			if ((not(self.isCast.isVoid)).andThen{b| not(self.isCast)})
+			then
+				var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+				self.~value.staticType.isSubTypeOf(self.target.staticType,typeVariableToSet)
+			else
+				true
+			end
 		end
 		
 	end
