@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : February 29, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::behavior;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class Expression
+{
+	/**
+	 * The expression's type could not be set
+	 */
+	@Scope "RESOLVED"
+	inv staticType_must_be_set is do
+		not (self.staticType.isVoid)
+	end
+	
+}
