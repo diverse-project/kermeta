@@ -66,7 +66,12 @@ public class KermetaRunner {
 			} catch (URISyntaxException e1) {
 				this.logger.error(e1.toString(), KermetaCompiler.LOG_MESSAGE_GROUP, e1);
 			} 
-	        
+	        StringBuilder argsParams = new StringBuilder();
+	        argsParams.append("");
+	        for (int i = 0; i < params.size(); i++) {
+	        	if(i != 0) argsParams.append(" ");
+	        	argsParams.append("\""+params.get(i)+"\"");
+			}
 	        ProcessBuilder builder = new ProcessBuilder(
 	        		getJavaVMbin(), "-cp", scalaToolJarCP,
 	        		"-Durimap.file.location="+(uriMapFileLocation!=null?uriMapFileLocation:""),
@@ -74,7 +79,7 @@ public class KermetaRunner {
 	        		"-savecompiled",
 	                "-classpath",f.toString() + outputBinFolder,
 	                scalaAspectPrefix + "runner.MainRunner", 
-	                params.toString());
+	                argsParams.toString());
 	        this.logger.debug("starting new process with command " +builder.command().toString(), KermetaCompiler.LOG_MESSAGE_GROUP);
 	       // builder.redirectErrorStream(true); // debug version: merge output and error stream
 	        Process process;
