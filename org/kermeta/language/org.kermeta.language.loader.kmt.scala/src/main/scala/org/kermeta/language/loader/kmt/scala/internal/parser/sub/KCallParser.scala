@@ -28,13 +28,23 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
   //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
 
 
-  def nCall = "." ~> ident ~ (callFeatureParams ?) ^^ {
-    case id ~ params =>
+  def nCall = "." ~> ident ~ opt(opGenericParems) ~ (callFeatureParams ?) ^^ {
+    case id ~ genparams ~ params =>
       val newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
+
       newo.setName(id)
       params match {
         case Some(_@par) => for (p <- par) newo.getParameters().add(p)
         case None =>
+      }
+      genparams match {
+        case None =>
+        case Some(params) => {
+            params.foreach{ param =>
+              newo.getGenerics().add(param)
+              newo.getContainedType().add(param)
+            }
+        }
       }
       newo.setIsCalledWithParenthesis( params match {
                 case Some(par) =>  true
@@ -74,5 +84,8 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
 
 
   def callFeatureParams = "(" ~> repsep(fStatement, ",") <~ ")" | (fLambda ^^ {case l => List(l)})
+
+  def opGenericParems = "[" ~ rep1sep(genericQualifiedTypeObject,",") ~ "]" ^^{case _ ~ params ~ _ => params }
+
 
 }
