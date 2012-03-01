@@ -165,9 +165,9 @@ operation transform(context : Qvt2KermetaContext) : Void is do
 	transfoContextRequire.uri := "platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.kmt"
 	kRoot.requires.add(transfoContextRequire)
 	
-	var deferredColRequire : org::kermeta::language::structure::Require init org::kermeta::language::structure::Require.new
-	deferredColRequire.uri := "platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.kmt"
-	kRoot.requires.add(deferredColRequire)
+	//var deferredColRequire : org::kermeta::language::structure::Require init org::kermeta::language::structure::Require.new
+	//deferredColRequire.uri := "platform:/resource/qvt-kermeta/transformation/collectioncast/SequenceCast.kmt"
+	//kRoot.requires.add(deferredColRequire)
 	
 	tgtModel.getContents().add(kRoot)
 	

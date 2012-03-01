@@ -43,20 +43,20 @@ aspect abstract class Traceable
 	end
 	
 	
-	operation resolveOne(t:Class) : Traceable is do
+	/*operation resolveOne<t>() : Traceable is do
 		
 		from var i : Integer init 0
 			until target.size() <= i
 				loop
 		
-    			if target.elementAt(i).targetElem.isKindOf(t) then 
+    			if target.elementAt(i).targetElem.isDirectInstanceOf(t) then 
     	
     				result:=target.elementAt(i).targetElem
     				i:=target.size()
     			end
     			i:=i+1
 			end
-	end
+	end*/
 	
 	
 	operation resolveIn(aContext : Object) : Sequence<Traceable> is do
@@ -68,15 +68,15 @@ aspect abstract class Traceable
 	end
 	
 	
-	operation invResolveOne(t:Class) : Traceable is do
+	/*operation invResolveOne<t>() : Traceable is do
 		from var i : Integer init 0
 			until source.size() == i
 				loop
-    			if source.elementAt(i).sourceElem.isKindOf(t) then 
+    			if source.elementAt(i).sourceElem.isDirectInstanceOf(t) then 
     				result:=source.elementAt(i).sourceElem
     				end
 			end
-	end
+	end*/
 	
 	operation invResolveIn(aContext : Object) : Sequence<Traceable> is do
 		result:=source.select{trace|trace.context.equals(aContext)}.collect{x|x.sourceElem}

@@ -92,11 +92,11 @@ class ModelParameter {
 	operation objects() : Set<Object> is do
 		result:=extent.asSet()
 	end
-
+/*
 	operation objectsOfType(type : Type) : Set<Object> is do
 		result:=extent.select{x|x.isInstanceOf(type)}.asSet()
 	end
-
+*/
 }
 
 /**Exception used to simulate a return operation*/

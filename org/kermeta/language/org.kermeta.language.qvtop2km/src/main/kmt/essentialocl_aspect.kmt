@@ -2,7 +2,7 @@ package essentialocl;
 using root_package
 using kermeta::standard
 using kermeta::io
-
+using org::kermeta::language
 aspect class CollectionItem {
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
@@ -180,7 +180,18 @@ aspect class OperationCallExp {
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
 				if referredOperation.getQVTID()=="OclLib::Sequence::flatten" then
 					
-					var deferredcast : org::kermeta::language::behavior::CallOperation
+					var operationType : essentialocl::SequenceType init self.type.asType(essentialocl::SequenceType)
+					operationType.elementType.range2domain(context)
+
+					var asSeqType : behavior::UnresolvedCall init behavior::UnresolvedCall.new.createProxySequence(operationType.elementType.generateType(context))
+					
+					var flattenFeature : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("flatten",true)
+					asSeqType.target :=flattenFeature
+					
+					source.range2domain(context)
+					flattenFeature.target?=source.output
+					
+					/*var deferredcast : org::kermeta::language::behavior::CallOperation
 					deferredcast:=out
 					deferredcast.name:="fromSeq"
 			
@@ -191,7 +202,7 @@ aspect class OperationCallExp {
 					var dseqCD : org::kermeta::language::structure::ClassDefinition 
 					dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
 					
-					StdIO.writeln("OperationCallExp::range2domain-2")
+					StdIO.writeln("OperationCallExp::range2domain-2")*/
 					/*
 					//here the sequence type is transformed in a class with the appropriated generic type so we shouldn't use
 					//the generateTypeRef method
@@ -205,15 +216,13 @@ aspect class OperationCallExp {
 					operationTypeTR.isUnique:=false
 					
 					*/
-					var operationType : essentialocl::SequenceType init self.type.asType(essentialocl::SequenceType)
-					operationType.elementType.range2domain(context)
 					
 					
 					
 					
 					
 					
-					var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+					/*var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
 					dSeqInit.target:=dseqLit
 					dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(operationType.elementType.output.asType(org::kermeta::language::structure::ClassDefinition))
 
@@ -230,7 +239,7 @@ aspect class OperationCallExp {
 											.kmtContext
 											.getFromQualifiedName("kermeta::standard::Sequence::flatten")
 											.asType(org::kermeta::language::structure::Operation)
-					
+					*/
 					//get the parameter from the type of the operation which is a sequenceType
 					
 					/*var typeLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new

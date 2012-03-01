@@ -1,5 +1,5 @@
-package kermeta::standard;
-
+package qvt::utils;
+using kermeta::standard
 require kermeta 
 
 singleton CollectionExtension{	
