@@ -4,34 +4,8 @@ using root_package
 using kermeta::standard
 using kermeta::io
 
-aspect class ObjectExp {
+using org::kermeta::language
 
-	/* beware ! it will work if body is not modified anywhere else*/
-	method range2domain(context : Qvt2KermetaContext) : Void is do
-		if output==void then
-			//StdIO.writeln("ObjectExp::range2domain")
-			var out : org::kermeta::language::behavior::Block
-			body.range2domain(context)
-			out?=body.output
-			if out==void then
-				out:=org::kermeta::language::behavior::Block.new
-			end
-			output:=out
-			//this call variable is added for the objectexp block to return the object once created
-			//TODO workaround for result
-			
-			var cv : org::kermeta::language::behavior::CallVariable 
-			if referredObject.name=="result" then
-				cv:=org::kermeta::language::behavior::CallResult.new
-			else		
-				cv:=org::kermeta::language::behavior::CallVariable.new
-			end
-			cv.name:=referredObject.name
-			out.statement.add(cv)
-			//StdIO.writeln("ObjectExp::range2domain-end")
-		end
-	end
-}
 
 
 
@@ -40,7 +14,7 @@ aspect class ConstructorBody {
 	method range2domain(context : Qvt2KermetaContext)  : Void from emof::Object is do
 		if output==void then
 			//StdIO.writeln("ConstructorBody::range2domain")
-			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var out : behavior::Block init behavior::Block.new
 			output:=out
 			variable.each{v|
 					out.statement.add(v.toVariableDecl(context))
@@ -48,7 +22,7 @@ aspect class ConstructorBody {
 			content.each{oclexp|
 					oclexp.range2domain(context)
 					if not oclexp.output.isVoid() then 
-						out.statement.add(oclexp.output.asType(org::kermeta::language::behavior::Expression) )
+						out.statement.add(oclexp.output.asType(behavior::Expression) )
 					else
 						StdIO.writeln( "a statement in content is void")
 					end
@@ -59,12 +33,55 @@ aspect class ConstructorBody {
 
 }
 
+
+aspect class ContextualProperty
+{
+	/* TODO implement "initExpression" and "overriden" */
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
+		if output==void then
+			//StdIO.writeln("ContextualProperty::range2domain")
+			var out : structure::Property init structure::Property.new
+			output := out
+			out.default := default
+			out.isComposite := isComposite
+			out.isReadOnly := isReadOnly
+			out.isID := isID
+			out.isDerived := isDerived
+			out.name := name
+			out.lower := lower
+			out.upper := upper
+			
+			self.context.range2domain(context)
+			out.owningClass?=self.context.output
+			
+			if opposite.isNotEqual(void) then
+				opposite.range2domain(context)
+				out.opposite ?= opposite.output
+			end
+
+			if type.isNotEqual(void) then
+				out.type := type.generateType(context)
+				if (out.type!=void) then
+					out.containedType.add(out.type)
+					StdIO.writeln("create a type "+type.name )
+				else
+					StdIO.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
+				end
+				
+			end
+			//StdIO.writeln("ContextualProperty::range2domain-end")
+		end
+	end
+
+}
+
+
 aspect class EntryOperation {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
 		do
 			if output==void then
-				var out : org::kermeta::language::structure::Operation init org::kermeta::language::structure::Operation.new
+				var out : structure::Operation init structure::Operation.new
 				output:=out
 				out.name:="main"
 				out.lower:=lower
@@ -88,82 +105,6 @@ aspect class EntryOperation {
 }
 
 
-aspect class OperationBody {
-
-	method range2domain(context : Qvt2KermetaContext) : Void is do 
-		if output==void then
-			StdIO.writeln("OperationBody::range2domain")
-			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
-			output:=out
-			
-			if ~operation.isInstanceOf(Helper)
-					.andThen{x|~operation.asType(Helper).isQuery==void}
-					.andThen{x|content.size==1} then
-				content.one.range2domain(context)
-				var resAssign : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
-				resAssign.target:=org::kermeta::language::behavior::CallResult.new
-				resAssign.~value?=content.one.output
-				out.statement.add(resAssign)
-			
-			else
-			content.each{oclexp|
-					oclexp.range2domain(context)
-					if not oclexp.output.isVoid() then 
-						out.statement.add(oclexp.output.asType(org::kermeta::language::behavior::Expression) )
-					else
-						StdIO.writeln( "a statement in content is void")
-					end
-					}
-			genDefaultRescues(context)
-			end
-			StdIO.writeln("OperationBody::range2domain-end")
-		end
-	end
-
-	operation genDefaultRescues(context : Qvt2KermetaContext) : Void is do
-		StdIO.writeln("OperationBody::genDefaultRescues")
-		var bodyBlock : org::kermeta::language::behavior::Block
-		bodyBlock?=output
-		StdIO.writeln("OperationBody::genDefaultRescues-0")
-		
-		//rescue for return
-		do 
-			var returnRescue : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
-			bodyBlock.rescueBlock.add(returnRescue)
-			returnRescue.exceptionName := "e"
-			
-			var returnExpType: org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new 
-			returnExpType.typeIdentifier:="root_package::ReturnException"
-			//var returnExpCD : org::kermeta::language::structure::ClassDefinition
-			//returnExpCD?=context.kmtContext.getFromQualifiedName("root_package::ReturnException")
-			StdIO.writeln("OperationBody::genDefaultRescues-01")
-			StdIO.writeln("exceptionType"+returnRescue.exceptionType.toString)
-			returnRescue.exceptionType:=returnExpType.generateTypeRef()
-			StdIO.writeln("OperationBody::genDefaultRescues-1")
-		
-			var voidTest : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
-			returnRescue.body.add(voidTest)
-			var hasValueCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-			voidTest.condition:=hasValueCall
-			hasValueCall.name:="hasValue"
-			hasValueCall.target:=org::kermeta::language::behavior::CallVariable.new.initName("e")
-			StdIO.writeln("OperationBody::genDefaultRescues-2")
-		
-			var assignResult : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
-			voidTest.thenBody:=assignResult
-			assignResult.isCast:=true
-			assignResult.target:=org::kermeta::language::behavior::CallResult.new
-			StdIO.writeln("OperationBody::genDefaultRescues-3")
-		
-			var callresultValue :org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-			assignResult.~value:=callresultValue
-			callresultValue.name:="returnValue"
-			callresultValue.target:=org::kermeta::language::behavior::CallVariable.new.initName("e")
-		end
-		
-		StdIO.writeln("OperationBody::genDefaultRescues-end")
-	end
-}
 
 
 aspect class MappingParameter {
@@ -171,7 +112,7 @@ aspect class MappingParameter {
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then
 			//StdIO.writeln("MappingParameter::range2domain")
-			var out : org::kermeta::language::structure::Parameter init org::kermeta::language::structure::Parameter.new
+			var out : structure::Parameter init structure::Parameter.new
 			output:=out
 			
 			out.name:=name
@@ -182,7 +123,7 @@ aspect class MappingParameter {
 		
 			type.range2domain(context)
 			out.type:=type.generateType(context)
-			if out.type.isInstanceOf(org::kermeta::language::structure::Class) then
+			if out.type.isInstanceOf(structure::Class) then
 				out.containedType.add(out.type)
 			end
 			//StdIO.writeln("MappingParameter::range2domain-end")
@@ -228,7 +169,7 @@ aspect class MappingOperation {
 		if output==void then
 			//StdIO.writeln("MappingOperation::range2domain")
 			StdIO.writeln("\nmapping operation "+name+" id "+oid.toString)
-			var out : org::kermeta::language::structure::Operation init org::kermeta::language::structure::Operation.new
+			var out : structure::Operation init structure::Operation.new
 			output:=out
 			out.name:=name
 			out.lower:=lower
@@ -237,7 +178,7 @@ aspect class MappingOperation {
 			out.isUnique:=isUnique
 			
 			//parameters
-			ownedParameter.each{x|x.range2domain(context) out.ownedParameter.add(x.output.asType(org::kermeta::language::structure::Parameter))}
+			ownedParameter.each{x|x.range2domain(context) out.ownedParameter.add(x.output.asType(structure::Parameter))}
 			
 			//two parameters should be added : the result parameter, that can be used for mapping inheritance
 			//the isStrict parameter that should tell the behavior of the guard
@@ -251,7 +192,7 @@ aspect class MappingOperation {
 				
 				end
 				
-				var resParam : org::kermeta::language::structure::Parameter init org::kermeta::language::structure::Parameter.new
+				var resParam : structure::Parameter init structure::Parameter.new
 				out.ownedParameter.add(resParam)
 				resParam.name:="result"
 				resParam.lower:=~result.one.lower
@@ -263,16 +204,16 @@ aspect class MappingOperation {
 			end
 			
 			
-			var resStrict : org::kermeta::language::structure::Parameter init org::kermeta::language::structure::Parameter.new
+			var resStrict : structure::Parameter init structure::Parameter.new
 			out.ownedParameter.add(resStrict)
 			resStrict.name:="isStrict"
 			resStrict.lower:=0
 			resStrict.upper:=1
 			//resStrict.isOrdered:=true
 			//resStrict.isUnique:=false
-			//var boolType : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			//var boolType : structure::Class init structure::Class.new
 			//resStrict.type:=boolType
-			resStrict.type:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
+			resStrict.type:=structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
 			//boolType.typeDefinition?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
 			resStrict.containedType.add(resStrict.type)
 			
@@ -318,7 +259,7 @@ aspect class Helper
 			if output==void then
 				//StdIO.writeln("MappingOperation::range2domain")
 				StdIO.writeln("\nhelper "+name+" id "+oid.toString)
-				var out : org::kermeta::language::structure::Operation init org::kermeta::language::structure::Operation.new
+				var out : structure::Operation init structure::Operation.new
 				output:=out
 				out.name:=name
 				out.lower:=lower
@@ -327,7 +268,7 @@ aspect class Helper
 				out.isUnique:=isUnique
 				
 				//parameters
-				ownedParameter.each{x|x.range2domain(context) out.ownedParameter.add(x.output.asType(org::kermeta::language::structure::Parameter))}
+				ownedParameter.each{x|x.range2domain(context) out.ownedParameter.add(x.output.asType(structure::Parameter))}
 				
 				//set owning class of output operation
 				if (context!=void).andThen{x|self.context.type.isInstanceOf(emof::Class)} then
@@ -372,30 +313,30 @@ aspect class MappingBody {
 		
 		if output==void then
 			StdIO.writeln("MappingBody::range2domain")
-			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var out : behavior::Block init behavior::Block.new
 			output:=out
 			
 			StdIO.writeln("MappingBody::range2domain-0")
 			//before initialization, the guard should be checked
 			if ~operation.asType(MappingOperation).when!=void then
-				var whenCond : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+				var whenCond : behavior::Conditional init behavior::Conditional.new
 				out.statement.add(whenCond)
 				~operation.asType(MappingOperation).when.range2domain(context)
-				var notCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var notCall : behavior::CallFeature init behavior::CallFeature.new
 				notCall.name:="not"
 				notCall.target?=~operation.asType(MappingOperation).when.output
 				whenCond.condition:=notCall
 				
 				//call violated guard exception
-				var raiseExcep : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
+				var raiseExcep : behavior::Raise init behavior::Raise.new
 				
-				var newCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var newCall : behavior::CallFeature init behavior::CallFeature.new
 				raiseExcep.expression:=newCall
 				newCall.name:="new"
 
-				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+				var exceptionLiteral : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 				newCall.target:=exceptionLiteral
-				var exceptionCD : org::kermeta::language::structure::ClassDefinition
+				var exceptionCD : structure::ClassDefinition
 				
 				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ViolatedGuardException")
 				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
@@ -406,18 +347,18 @@ aspect class MappingBody {
 			
 			//before initialization, result should get its value from the result parameter in case of inherit call
 			do 
-				var initRes : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				var initRes : behavior::Assignment init behavior::Assignment.new
 				out.statement.add(initRes)
-				initRes.target:=org::kermeta::language::behavior::CallResult.new
+				initRes.target:=behavior::CallResult.new
 				
-				var resultVar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+				var resultVar : behavior::CallVariable init behavior::CallVariable.new
 				initRes.~value:=resultVar
 				resultVar.name:="result"
 			end
 			StdIO.writeln("MappingBody::range2domain-2")
 			//start initialization section
 			do
-				var initBlock : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+				var initBlock : behavior::Block init behavior::Block.new
 				StdIO.writeln("MappingBody::range2domain-200")
 				out.statement.add(initBlock)
 				StdIO.writeln("MappingBody::range2domain-201"+initSection.toString)
@@ -427,7 +368,7 @@ aspect class MappingBody {
 					oclexp.range2domain(context)
 					StdIO.writeln("MappingBody::range2domain-21")
 					if not oclexp.output.isVoid() then
-						initBlock.statement.add(oclexp.output.asType(org::kermeta::language::behavior::Expression) )
+						initBlock.statement.add(oclexp.output.asType(behavior::Expression) )
 					else
 						//StdIO.writeln( "a statement in initSection is void "+oclexp.getMetaClass().name)
 					end
@@ -444,16 +385,16 @@ aspect class MappingBody {
 			do
 				~operation.asType(MappingOperation).inherited.each{
 					op|
-					var callInheritedOp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+					var callInheritedOp : behavior::CallFeature init behavior::CallFeature.new
 					out.statement.add(callInheritedOp)	
-					callInheritedOp.target:=org::kermeta::language::behavior::SelfExpression.new
+					callInheritedOp.target:=behavior::SelfExpression.new
 					callInheritedOp.name:=op.name
 					~operation.ownedParameter.each{param|
-						var callParam : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+						var callParam : behavior::CallVariable init behavior::CallVariable.new
 						callParam.name:=param.name
 						callInheritedOp.parameters.add(callParam)}
-					callInheritedOp.parameters.add(org::kermeta::language::behavior::CallResult.new)
-					var isStrictVal : org::kermeta::language::behavior::BooleanLiteral init org::kermeta::language::behavior::BooleanLiteral.new
+					callInheritedOp.parameters.add(behavior::CallResult.new)
+					var isStrictVal : behavior::BooleanLiteral init behavior::BooleanLiteral.new
 					isStrictVal.~value:=false
 					callInheritedOp.parameters.add(isStrictVal)
 				}
@@ -461,7 +402,7 @@ aspect class MappingBody {
 			StdIO.writeln("MappingBody::range2domain-4")
 			//create trace
 			do
-				var trace : org::kermeta::language::behavior::Expression init createTrace(context)
+				var trace : behavior::Expression init createTrace(context)
 				out.statement.add(trace)
 				trace.addDocumentationTag("trace generation")
 			end
@@ -470,7 +411,7 @@ aspect class MappingBody {
 			content.each{oclexp|
 				oclexp.range2domain(context)
 				if not oclexp.output.isVoid() then 
-				out.statement.add(oclexp.output.asType(org::kermeta::language::behavior::Expression) )
+				out.statement.add(oclexp.output.asType(behavior::Expression) )
 				else
 				StdIO.writeln( "a statement in content is void")
 				end
@@ -485,20 +426,20 @@ aspect class MappingBody {
 	method genDefaultRescues(context : Qvt2KermetaContext) : Void is do
 		
 		super(context)		
-		var bodyBlock : org::kermeta::language::behavior::Block
+		var bodyBlock : behavior::Block
 		bodyBlock?=output
 		//rescue for violated guard
 		do
-			var violatedGuardRescue : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
+			var violatedGuardRescue : behavior::Rescue init behavior::Rescue.new
 			bodyBlock.rescueBlock.add(violatedGuardRescue)
 			violatedGuardRescue.exceptionName:="e"
-			var violatedGuardType : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+			var violatedGuardType : structure::UnresolvedType init structure::UnresolvedType.new
 			violatedGuardType.typeIdentifier:="root_package::ViolatedGuardException"
 			violatedGuardRescue.exceptionType := violatedGuardType.generateTypeRef()
 			
-			var strictTest : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+			var strictTest : behavior::Conditional init behavior::Conditional.new
 			violatedGuardRescue.body.add(strictTest)
-			var isStrictCall : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+			var isStrictCall : behavior::CallVariable init behavior::CallVariable.new
 			strictTest.condition:=isStrictCall
 			isStrictCall.name:="isStrict"
 			
@@ -509,27 +450,27 @@ aspect class MappingBody {
 
 
 	//generate the trace of the mapping
-	operation createTrace(context : Qvt2KermetaContext) : org::kermeta::language::behavior::Expression is do
+	operation createTrace(context : Qvt2KermetaContext) : behavior::Expression is do
 		//StdIO.writeln("MappingBody::createTrace")
-		var cf_trace :  org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var cf_trace :  behavior::CallFeature init behavior::CallFeature.new
 		result := cf_trace
 		cf_trace.name:="addTrace"
 
-		var call_source : org::kermeta::language::behavior::SelfExpression init org::kermeta::language::behavior::SelfExpression.new
+		var call_source : behavior::SelfExpression init behavior::SelfExpression.new
 		cf_trace.parameters.add(call_source)
 		//var call_source : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
 		//call_source.name:="self"
 		
-		var call_target : org::kermeta::language::behavior::CallResult init org::kermeta::language::behavior::CallResult.new
+		var call_target : behavior::CallResult init behavior::CallResult.new
 		cf_trace.parameters.add(call_target)
 		//var call_target : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
 		//call_target.name:="result"
 
-		var traceContext : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		var traceContext : behavior::StringLiteral init behavior::StringLiteral.new
 		traceContext.~value:=~operation.name
 		cf_trace.parameters.add(traceContext)
 		
-		cf_trace.target:=org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+		cf_trace.target:=behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 		
 		/*var cf_cast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
 		cf_cast.name:="asType"
@@ -559,48 +500,48 @@ aspect class MappingBody {
 	/**
 		initialize a mapping parameter if it is void and add it to the right model
 	*/
-	operation initializeFromParameter(vp : qvtoperational::VarParameter, context : Qvt2KermetaContext) : org::kermeta::language::behavior::Expression is do 
+	operation initializeFromParameter(vp : qvtoperational::VarParameter, context : Qvt2KermetaContext) : behavior::Expression is do 
 		StdIO.writeln("MappingBody::initializeFromParameter")
 		result:=void
 		if vp!=void then 
 			
 			//create condition
-			var voidCondition  : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+			var voidCondition  : behavior::Conditional init behavior::Conditional.new
 			result :=voidCondition
-			var callEquals : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var callEquals : behavior::CallFeature init behavior::CallFeature.new
 			voidCondition.condition:=callEquals
 			callEquals.name:="equals"
-			var callX : org::kermeta::language::behavior::CallVariable 
+			var callX : behavior::CallVariable 
 			if vp.name!="result" then
-				callX:=org::kermeta::language::behavior::CallVariable.new
+				callX:=behavior::CallVariable.new
 				callX.name:=vp.name
 			else
-				callX:=org::kermeta::language::behavior::CallResult.new
+				callX:=behavior::CallResult.new
 			end	
 			callEquals.target:=callX
-			callEquals.parameters.add(org::kermeta::language::behavior::VoidLiteral.new)
+			callEquals.parameters.add(behavior::VoidLiteral.new)
 
 			//then block
-			var thenBlock : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var thenBlock : behavior::Block init behavior::Block.new
 			voidCondition.thenBody:=thenBlock
 			
 			//add assignment
-			var assign : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+			var assign : behavior::Assignment init behavior::Assignment.new
 			thenBlock.statement.add(assign)
 
-			var callAssignee : org::kermeta::language::behavior::CallVariable 
+			var callAssignee : behavior::CallVariable 
 			if vp.name!="result" then
-				callAssignee:=org::kermeta::language::behavior::CallVariable.new
+				callAssignee:=behavior::CallVariable.new
 				callAssignee.name:=vp.name
 			else
-				callAssignee:= org::kermeta::language::behavior::CallResult.new
+				callAssignee:= behavior::CallResult.new
 			end
 			
 			assign.target:=callAssignee
 			
-			var newFeat : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
-			var typeR : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+			var newFeat : behavior::CallFeature init behavior::CallFeature.new
+			var typeLit : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
+			var typeR : behavior::TypeReference init behavior::TypeReference.new
 		
 			assign.~value:=newFeat
 			newFeat.name:="new"
@@ -609,11 +550,11 @@ aspect class MappingBody {
 			if vp.name == "result" then
 				if ~operation.upper==1 then
 					typeR.type:=~operation.type.generateType(context)
-					if typeR.type.isInstanceOf(org::kermeta::language::structure::Class) then
+					if typeR.type.isInstanceOf(structure::Class) then
 						typeR.containedType.add(typeR.type)
-						typeR.name:=typeR.type.asType(org::kermeta::language::structure::Class).name
+						typeR.name:=typeR.type.asType(structure::Class).name
 					else
-						typeR.name:=typeR.type.asType(org::kermeta::language::structure::NamedElement).name
+						typeR.name:=typeR.type.asType(structure::NamedElement).name
 					end
 					
 					typeR.upper:=1//~operation.upper
@@ -623,11 +564,11 @@ aspect class MappingBody {
 				end
 			else
 				typeR.type:=vp.type.generateType(context)
-				if typeR.type.isInstanceOf(org::kermeta::language::structure::Class) then
+				if typeR.type.isInstanceOf(structure::Class) then
 					typeR.containedType.add(typeR.type)
-					typeR.name:=typeR.type.asType(org::kermeta::language::structure::Class).name
+					typeR.name:=typeR.type.asType(structure::Class).name
 				else
-					typeR.name:=typeR.type.asType(org::kermeta::language::structure::NamedElement).name
+					typeR.name:=typeR.type.asType(structure::NamedElement).name
 				end
 				typeR.upper:=1
 				typeR.lower:=0
@@ -641,23 +582,23 @@ aspect class MappingBody {
 				var mp : qvtoperational::MappingParameter
 				mp?=vp
 				mp.extent.range2domain(context)
-				var callModelParam : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-				callModelParam.name:=mp.extent.output.asType(org::kermeta::language::structure::Property).name
-				callModelParam.target := org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
-				var callExtent : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var callModelParam : behavior::CallFeature init behavior::CallFeature.new
+				callModelParam.name:=mp.extent.output.asType(structure::Property).name
+				callModelParam.target := behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+				var callExtent : behavior::CallFeature init behavior::CallFeature.new
 				callExtent.name:="extent"
 				callExtent.target:=callModelParam
 				
-				var callAddInstance : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var callAddInstance : behavior::CallFeature init behavior::CallFeature.new
 				callAddInstance.target:=callExtent
 				callAddInstance.name:="add"
 				
-				var callInstance : org::kermeta::language::behavior::CallVariable 
+				var callInstance : behavior::CallVariable 
 				if vp.name!="result" then
-					callInstance:=org::kermeta::language::behavior::CallVariable.new
+					callInstance:=behavior::CallVariable.new
 					callInstance.name:=vp.name
 				else
-					callInstance:= org::kermeta::language::behavior::CallResult.new
+					callInstance:= behavior::CallResult.new
 				end
 				callAddInstance.parameters.add(callInstance)
 				thenBlock.statement.add(callAddInstance)
@@ -673,10 +614,10 @@ aspect class MappingBody {
 		all the out parameters declared in the mapping that still don't have value
 	*/
 	
-	operation createInit(context : Qvt2KermetaContext) : org::kermeta::language::behavior::Block is do
+	operation createInit(context : Qvt2KermetaContext) : behavior::Block is do
 		StdIO.writeln("MappingBody::createInit")
 		
-		var block: org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+		var block: behavior::Block init behavior::Block.new
 		
 		
 		~operation.ownedParameter.each{x|
@@ -701,12 +642,12 @@ aspect class MappingBody {
 	end
 	
 	//return the equivalent of the operation return type in terms of collection depending on the cardinality, unicity and order
-	operation resultType(context : Qvt2KermetaContext) : org::kermeta::language::behavior::TypeReference is do
+	operation resultType(context : Qvt2KermetaContext) : behavior::TypeReference is do
 			//StdIO.writeln("MappingBody::resultType") 
-			result:=org::kermeta::language::behavior::TypeReference.new
+			result:=behavior::TypeReference.new
 			result.lower:=0
 			result.upper:=1
-			var classdef : org::kermeta::language::structure::ClassDefinition
+			var classdef : structure::ClassDefinition
 			
 			if (~operation.isOrdered and ~operation.isUnique) then
 				//orderedset
@@ -725,16 +666,16 @@ aspect class MappingBody {
 				classdef ?= context.kmtContext.getFromQualifiedName("kermeta::standard::Bag")
 			end
 			
-			var collectionClass : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			var collectionClass : structure::Class init structure::Class.new
 			result.type:=collectionClass
 			result.containedType.add(result.type)
 			collectionClass.typeDefinition:=classdef
 			
-			var tvarBinding : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
+			var tvarBinding : structure::TypeVariableBinding init structure::TypeVariableBinding.new
 			collectionClass.typeParamBinding.add(tvarBinding)		
 			tvarBinding.variable:=classdef.typeParameter.one
 			tvarBinding.type:=~operation.type.generateType(context)
-			if tvarBinding.type.isInstanceOf(org::kermeta::language::structure::Class) then 
+			if tvarBinding.type.isInstanceOf(structure::Class) then 
 				tvarBinding.containedType.add(tvarBinding.type)
 			end
 			//StdIO.writeln("MappingBody::resultType-end")
@@ -742,8 +683,217 @@ aspect class MappingBody {
 }
 
 
+/**
+*	ModelTypes in qvt are the metamodels of the transformation
+*	they consist in packages
+*/
+aspect class ModelType {
+
+method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
+	if output==void then
+		StdIO.writeln("ModelType::range2domain")
+		
+		var out : structure::ModelingUnit init structure::ModelingUnit.new
+		output:=out
+		StdIO.writeln("mt1")
+		metamodel.each{x|
+				x.asType(emof::Object).range2domain(context) 
+				StdIO.writeln("mt2")
+				out.packages.add(x.output.asType(structure::Package))
+				}
+		StdIO.writeln("ModelType::range2domain-end")
+	end	
+
+end
+}
+
+/**Mapping Call Exp behaves differently from OperationCallExp in two ways :
+*	1) It requires to add a parameter giving an init value for the result of the mapping (usually this value will be void)
+*	2) It requires a boolean parameter to state if the call to the mapping is strict or not
+*/
+
+aspect class MappingCallExp
+{
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then
+			var out : behavior::CallOperation init behavior::CallOperation.new
+			output:=out
+			
+			//if there is a source model
+			if source!=void then
+				source.range2domain(context)
+				out.target?=source.output
+			else
+				var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+				out.target:=transfoCall
+			end
+			if (referredOperation !=void) then
+				referredOperation.range2domain(context)
+				out.staticOperation?=referredOperation.output
+				if out.staticOperation==void then
+					out.name:=referredOperation.name
+				else
+					out.name:=out.staticOperation.name
+				end
+				StdIO.writeln("referredOperation name : "+ referredOperation.name)
+			end
+			argument.each{x|
+					x.range2domain(context) 
+					if x.output!=void then 
+						out.parameters.add(x.output.asType(behavior::Expression)) 
+					else 
+						//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
+					end
+					}
+			//add result value
+			var resultVal : behavior::VoidLiteral init behavior::VoidLiteral.new
+			out.parameters.add(resultVal)
+			
+			//add isStrict value
+			var isStrict : behavior::BooleanLiteral init behavior::BooleanLiteral.new
+			isStrict.~value:=self.isStrict
+			out.parameters.add(isStrict)
+			
+		end
+	end
+}
 
 
+
+
+
+
+aspect class ObjectExp {
+
+	/* beware ! it will work if body is not modified anywhere else*/
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output==void then
+			//StdIO.writeln("ObjectExp::range2domain")
+			var out : behavior::Block
+			body.range2domain(context)
+			out?=body.output
+			if out==void then
+				out:=behavior::Block.new
+			end
+			output:=out
+			//this call variable is added for the objectexp block to return the object once created
+			//TODO workaround for result
+			
+			var cv : behavior::CallVariable 
+			if referredObject.name=="result" then
+				cv:=behavior::CallResult.new
+			else		
+				cv:=behavior::CallVariable.new
+			end
+			cv.name:=referredObject.name
+			out.statement.add(cv)
+			//StdIO.writeln("ObjectExp::range2domain-end")
+		end
+	end
+}
+
+aspect class OperationBody {
+
+	method range2domain(context : Qvt2KermetaContext) : Void is do 
+		if output==void then
+			StdIO.writeln("OperationBody::range2domain")
+			var out : behavior::Block init behavior::Block.new
+			output:=out
+			
+			if ~operation.isInstanceOf(Helper)
+					.andThen{x|~operation.asType(Helper).isQuery==void}
+					.andThen{x|content.size==1} then
+				content.one.range2domain(context)
+				var resAssign : behavior::Assignment init behavior::Assignment.new
+				resAssign.target:=behavior::CallResult.new
+				resAssign.~value?=content.one.output
+				out.statement.add(resAssign)
+			
+			else
+			content.each{oclexp|
+					oclexp.range2domain(context)
+					if not oclexp.output.isVoid() then 
+						out.statement.add(oclexp.output.asType(behavior::Expression) )
+					else
+						StdIO.writeln( "a statement in content is void")
+					end
+					}
+			genDefaultRescues(context)
+			end
+			StdIO.writeln("OperationBody::range2domain-end")
+		end
+	end
+
+	operation genDefaultRescues(context : Qvt2KermetaContext) : Void is do
+		StdIO.writeln("OperationBody::genDefaultRescues")
+		var bodyBlock : behavior::Block
+		bodyBlock?=output
+		StdIO.writeln("OperationBody::genDefaultRescues-0")
+		
+		//rescue for return
+		do 
+			var returnRescue : behavior::Rescue init behavior::Rescue.new
+			bodyBlock.rescueBlock.add(returnRescue)
+			returnRescue.exceptionName := "e"
+			
+			var returnExpType: structure::UnresolvedType init structure::UnresolvedType.new 
+			returnExpType.typeIdentifier:="root_package::ReturnException"
+			//var returnExpCD : org::kermeta::language::structure::ClassDefinition
+			//returnExpCD?=context.kmtContext.getFromQualifiedName("root_package::ReturnException")
+			StdIO.writeln("OperationBody::genDefaultRescues-01")
+			StdIO.writeln("exceptionType"+returnRescue.exceptionType.toString)
+			returnRescue.exceptionType:=returnExpType.generateTypeRef()
+			StdIO.writeln("OperationBody::genDefaultRescues-1")
+		
+			var voidTest : behavior::Conditional init behavior::Conditional.new
+			returnRescue.body.add(voidTest)
+			var hasValueCall : behavior::CallFeature init behavior::CallFeature.new
+			voidTest.condition:=hasValueCall
+			hasValueCall.name:="hasValue"
+			hasValueCall.target:=behavior::CallVariable.new.initName("e")
+			StdIO.writeln("OperationBody::genDefaultRescues-2")
+		
+			var assignResult : behavior::Assignment init behavior::Assignment.new
+			voidTest.thenBody:=assignResult
+			assignResult.isCast:=true
+			assignResult.target:=behavior::CallResult.new
+			StdIO.writeln("OperationBody::genDefaultRescues-3")
+		
+			var callresultValue :behavior::CallFeature init behavior::CallFeature.new
+			assignResult.~value:=callresultValue
+			callresultValue.name:="returnValue"
+			callresultValue.target:=behavior::CallVariable.new.initName("e")
+		end
+		
+		StdIO.writeln("OperationBody::genDefaultRescues-end")
+	end
+}
+
+aspect class ModelParameter {
+
+	method range2domain(context : Qvt2KermetaContext) : Void is do
+		if output == void then 
+			var out : structure::Property init structure::Property.new
+			output:=out
+			out.isUnique:=true
+			out.lower:=0
+			out.upper:=1
+			out.isComposite:=true
+			out.name:=name
+			//var classDef : org::kermeta::language::structure::ClassDefinition
+			//classDef?=context.kmtContext.getFromQualifiedName("root_package::ModelParameter")
+			
+			//out.type:= org::kermeta::language::structure::Class.new
+			//out.type.asType(org::kermeta::language::structure::Class).typeDefinition:=classDef
+			out.type:=structure::UnresolvedType.new.initialize("root_package::ModelParameter")
+			out.containedType.add(out.type)
+			
+		
+		
+		end
+	end
+
+}
 
 /**
 in qvt operations are separated from classes definition which is not the case in kermeta
@@ -754,15 +904,15 @@ aspect class OperationalTransformation {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do 
 		if output==void then 
-			var out : org::kermeta::language::structure::ModelingUnit init org::kermeta::language::structure::ModelingUnit.new
+			var out : structure::ModelingUnit init structure::ModelingUnit.new
 			output:=out
 			
 			//creation of package where will be stored all needed elements to run the transformation
-			var execEnvPack : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new			
+			var execEnvPack : structure::Package init structure::Package.new			
 			out.packages.add(execEnvPack)
 			execEnvPack.name:="root_package"
 			
-			var transfoContextCD : org::kermeta::language::structure::ClassDefinition init org::kermeta::language::structure::ClassDefinition.new
+			var transfoContextCD : structure::ClassDefinition init structure::ClassDefinition.new
 			context.transfoContextCD:=transfoContextCD
 			execEnvPack.ownedTypeDefinition.add(transfoContextCD)
 			transfoContextCD.name:="TransformationContext"
@@ -770,8 +920,10 @@ aspect class OperationalTransformation {
 			
 			modelParameter.each{x|
 				x.range2domain(context)
-				transfoContextCD.ownedAttribute.add(x.output.asType(org::kermeta::language::structure::Property))
+				transfoContextCD.ownedAttribute.add(x.output.asType(structure::Property))
 			}
+			
+			transfoContextCD.ownedOperation.add(generateInitOperation(context))
 		
 		end
 	end
@@ -795,7 +947,7 @@ aspect class OperationalTransformation {
 		StdIO.writeln("name"+type.name)
 		createPackage(type.container.asType(emof::Package), context)
 		type.range2domain(context)
-		type.container.asType(emof::Package).output.asType(org::kermeta::language::structure::Package).ownedTypeDefinition.add(type.output.asType(org::kermeta::language::structure::TypeDefinition))
+		type.container.asType(emof::Package).output.asType(structure::Package).ownedTypeDefinition.add(type.output.asType(structure::TypeDefinition))
 		StdIO.writeln("OperationalTransformation::createTypeDefinition-end")
 	end
 
@@ -804,12 +956,12 @@ aspect class OperationalTransformation {
 			//StdIO.writeln("OperationalTransformation::createPackage")
 			pack.range2domain(context)
 			if pack.container.isInstanceOf(kermeta::emfpersistence::Resource) then
-				output.asType(org::kermeta::language::structure::ModelingUnit).packages.add(pack.output.asType(org::kermeta::language::structure::Package))
+				output.asType(structure::ModelingUnit).packages.add(pack.output.asType(structure::Package))
 			else
 				if (pack.container.asType(emof::Object).output==void).andThen{x|pack.container.isInstanceOf(emof::Package)} then
 					createPackage(pack.container.asType(emof::Package),context)
-					pack.container.asType(emof::Object).output.asType(org::kermeta::language::structure::Package).nestedPackage
-						.add(pack.output.asType(org::kermeta::language::structure::Package))
+					pack.container.asType(emof::Object).output.asType(structure::Package).nestedPackage
+						.add(pack.output.asType(structure::Package))
 				end
 			end
 			//StdIO.writeln("OperationalTransformation::createPackage-end")
@@ -817,33 +969,118 @@ aspect class OperationalTransformation {
 	end
 	
 	
-}
-
-aspect class ModelParameter {
-
-	method range2domain(context : Qvt2KermetaContext) : Void is do
-		if output == void then 
-			var out : org::kermeta::language::structure::Property init org::kermeta::language::structure::Property.new
-			output:=out
-			out.isUnique:=true
-			out.lower:=0
-			out.upper:=1
-			out.isComposite:=true
-			out.name:=name
-			//var classDef : org::kermeta::language::structure::ClassDefinition
-			//classDef?=context.kmtContext.getFromQualifiedName("root_package::ModelParameter")
+	/**
+	create the main operation of the transformation which load the parameters of the transformations
+	
+	*/
+	
+	operation generateInitOperation(context : Qvt2KermetaContext) : structure::Operation is do
+		var initOp : structure::Operation init structure::Operation.new
+		initOp.name := "kermetaInit"
+		initOp.upper:=1
+		initOp.type:=structure::UnresolvedType.new.initialize("kermeta::standard::Void")
+		initOp.containedType.add(initOp.type)
+		var paramNumber : Integer init 1
+		//each modelParameter correspond to 2 parameters, one for the path to the model, the other for the path to the metamodel
+		modelParameter.each{param|
+			var model : structure::Parameter init structure::Parameter.new
+			model.name := "model" + paramNumber.toString
+			model.upper := 1
+			model.type:=structure::UnresolvedType.new.initialize("kermeta::standard::String")
+			model.containedType.add(model.type)
+			initOp.ownedParameter.add(model)
 			
-			//out.type:= org::kermeta::language::structure::Class.new
-			//out.type.asType(org::kermeta::language::structure::Class).typeDefinition:=classDef
-			out.type:=org::kermeta::language::structure::UnresolvedType.new.initialize("root_package::ModelParameter")
-			out.containedType.add(out.type)
+
+			var metaModel : structure::Parameter init structure::Parameter.new
+			metaModel.name := "mmodel" + paramNumber.toString
+			metaModel.type:=structure::UnresolvedType.new.initialize("kermeta::standard::String")
+			metaModel.containedType.add(metaModel.type)
+			initOp.ownedParameter.add(metaModel)
+			paramNumber:=paramNumber+1
+		}
+		var opBlock : behavior::Block init behavior::Block.new
+		initOp.body:=opBlock
+		
+		//create var decl for the resourceset ofeach model
+		paramNumber:=1
+		modelParameter.each{param|
+			var rSetDecl : behavior::VariableDecl init behavior::VariableDecl.new
+			
+			rSetDecl.identifier:= "rSet"+paramNumber
+			rSetDecl.type:=structure::UnresolvedType.new.initialize("kermeta::emfpersistence::ResourceSet").generateTypeRef()
 			
 		
+			var rSetInitCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
+			rSetInitCall.target:=behavior::UnresolvedCall.new.initialize("kermeta::emfpersistence::ResourceSet",false)
+			
+			rSetDecl.initialization:=rSetInitCall
+			opBlock.statement.add(rSetDecl)
+			
+			paramNumber:=paramNumber+1
+		}
 		
-		end
+		//create a resource for each parameter
+		paramNumber:=1
+		modelParameter.each{param|
+			
+			//rSet$x.createResource(model$x,metaModel$x)
+			var callCreateResource : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("createResource",true)
+			callCreateResource.target:= behavior::UnresolvedCall.new.initialize("rSet"+paramNumber,false)
+			callCreateResource.parameters.add(behavior::UnresolvedCall.new.initialize("model"+paramNumber,false))
+			callCreateResource.parameters.add(behavior::UnresolvedCall.new.initialize("metaModel"+paramNumber,false))
+			
+			//$modelParameter := root_package::ModelParameter.new.initialize($callCreateResource)
+			var assign : behavior::Assignment init behavior::Assignment.new
+			
+			var currentModelParam : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(param.name,false)
+			currentModelParam.target:=behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+			assign.target:=currentModelParam
+			
+			var initializeCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("initialize",true)
+			initializeCall.target := behavior::UnresolvedCall.new.initialize("new",false)
+			initializeCall.target.asType(behavior::UnresolvedCall).target := behavior::UnresolvedCall.new.initialize("root_package::ModelParameter",false)
+			initializeCall.parameters.add(callCreateResource)
+			assign.~value:=initializeCall
+			
+			opBlock.statement.add(assign)
+			paramNumber:=paramNumber+1
+		}
+		//load parameters which are input parameters
+		//root_package::TransformationContext.$(param.name).load()
+		paramNumber:=1
+		modelParameter.each{param|
+			if param.kind==DirectionKind.in or param.kind==DirectionKind.inout then
+				StdIO.writeln("DirectionKind "+param.kind.toString+" "+(param.kind==DirectionKind.in).toString)
+				var callLoad : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("load",true)
+				callLoad.target:= behavior::UnresolvedCall.new.initialize(param.name,false)
+				callLoad.target.asType(behavior::UnresolvedCall).target:= behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+				
+				opBlock.statement.add(callLoad)
+			end
+			StdIO.writeln("DirectionKind "+param.kind.toString+" "+(param.kind==DirectionKind.in).toString)
+			paramNumber:=paramNumber+1
+		}
+		
+		opBlock.statement.add(behavior::UnresolvedCall.new.initialize("main",true))
+		
+		//save parameters which are out parameters
+		//root_package::TransformationContext.$(param.name).load()
+		modelParameter.each{param|
+			if param.kind==DirectionKind.out or param.kind==DirectionKind.inout then
+				var callSave : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("save",true)
+				callSave.target:= behavior::UnresolvedCall.new.initialize(param.name,false)
+				callSave.target.asType(behavior::UnresolvedCall).target:= behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+				
+				opBlock.statement.add(callSave)
+			end
+			
+			paramNumber:=paramNumber+1
+		}
+		result:=initOp
 	end
-
+	
 }
+
 
 
 
@@ -856,84 +1093,84 @@ aspect class ResolveExp {
 method range2domain(context : Qvt2KermetaContext) : Void is do
 	if output==void then
 		//StdIO.writeln("ResolveExp::range2domain")
-		var cf_resolve :  org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var cf_resolve :  behavior::CallFeature init behavior::CallFeature.new
 		//if one is true and there is no condition then it's simply a detect on the type of target
 		//if one is false then it's a select on the type that should return a sequence of the type
 
-			var detectCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var detectCall : behavior::CallFeature init behavior::CallFeature.new
 		
 		//type of the found object
 		if one then
-			var detectCast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var detectCast : behavior::CallFeature init behavior::CallFeature.new
 			output:=detectCast
 			detectCast.name:="asType"
 			target.type.range2domain(context)
-			var castLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			var castLiteral : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 		
-			castLiteral.typeref:=target.type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef()
+			castLiteral.typeref:=target.type.output.asType(structure::ClassDefinition).generateTypeRef()
 			detectCast.parameters.add(castLiteral)
 			detectCast.target:=detectCall
 			detectCall.name:="detect"
 		else
-			var deferredcast : org::kermeta::language::behavior::CallFeature  init org::kermeta::language::behavior::CallFeature.new
+			var deferredcast : behavior::CallFeature  init behavior::CallFeature.new
 			output:=deferredcast
 			deferredcast.name:="fromSeq"
 	
-			var dSeqInit : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var dSeqInit : behavior::CallFeature init behavior::CallFeature.new
 			deferredcast.target:=dSeqInit
 			dSeqInit.name:="new"
 			
-			var dseqCD : org::kermeta::language::structure::ClassDefinition 
+			var dseqCD : structure::ClassDefinition 
 			dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
 			
-			var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			var dseqLit : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 			dSeqInit.target:=dseqLit
-			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(self.target.type.output.asType(org::kermeta::language::structure::ClassDefinition))
+			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(self.target.type.output.asType(structure::ClassDefinition))
 			
 			deferredcast.parameters.add(detectCall)
 			detectCall.name:="select"
 			
 		end
 		
-		var lambdaExp : org::kermeta::language::behavior::LambdaExpression init org::kermeta::language::behavior::LambdaExpression.new
+		var lambdaExp : behavior::LambdaExpression init behavior::LambdaExpression.new
 		detectCall.parameters.add(lambdaExp)
-		var lambdaParam : org::kermeta::language::behavior::LambdaParameter init org::kermeta::language::behavior::LambdaParameter.new	
+		var lambdaParam : behavior::LambdaParameter init behavior::LambdaParameter.new	
 		lambdaExp.parameters.add(lambdaParam)
 		lambdaParam.name:=target.name
 		
 		
 		
-		var andCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var andCall : behavior::CallFeature init behavior::CallFeature.new
 		lambdaExp.body:=andCall
 		andCall.name:="and"
-		var typeTestCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var typeTestCall : behavior::CallFeature init behavior::CallFeature.new
 		andCall.target:=typeTestCall
 		typeTestCall.name:="isInstanceOf"
 		
 					
-		var boolClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+		var boolClass: structure::Class init structure::Class.new
 		typeTestCall.staticType:=boolClass
 		typeTestCall.containedType.add(boolClass)
 		boolClass.typeDefinition?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
 		
-		var xCall : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+		var xCall : behavior::CallVariable init behavior::CallVariable.new
 		typeTestCall.target:=xCall
 		xCall.name:=target.name
 		
 		if condition==void then
-			var truelit : org::kermeta::language::behavior::BooleanLiteral init org::kermeta::language::behavior::BooleanLiteral.new
+			var truelit : behavior::BooleanLiteral init behavior::BooleanLiteral.new
 			andCall.parameters.add(truelit)
 			truelit.~value:=true
 		else
-			var exp : org::kermeta::language::behavior::Expression 
+			var exp : behavior::Expression 
 			condition.range2domain(context)
 			exp?=condition.output
 			andCall.parameters.add(exp)
 		end
 		
-		var typeToTest : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+		var typeToTest : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 		
-		typeToTest.typeref:=target.type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef() //range2domain already done earlier
+		typeToTest.typeref:=target.type.output.asType(structure::ClassDefinition).generateTypeRef() //range2domain already done earlier
 		typeTestCall.parameters.add(typeToTest)
 		
 		detectCall.target:=cf_resolve
@@ -945,40 +1182,40 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		end
 		
 		source.range2domain(context)
-		cf_resolve.parameters.add(source.output.asType(org::kermeta::language::behavior::Expression))
+		cf_resolve.parameters.add(source.output.asType(behavior::Expression))
 		
 		//target.toVariableDecl()
 		//cf_resolve.parameters.add(target.output.asType(org::kermeta::language::behavior::Expression))
 		
-		var cf_cast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var cf_cast : behavior::CallFeature init behavior::CallFeature.new
 		cf_resolve.target:=cf_cast
 		
 		cf_cast.name:="asType"
 		
-		var tl_tracetype : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+		var tl_tracetype : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 		cf_cast.parameters.add(tl_tracetype)
 		
 		
 		tl_tracetype.typeref:=context.kmtContext
 			.getFromQualifiedName("root_package::TransformationContext")
-			.asType(org::kermeta::language::structure::ClassDefinition)
+			.asType(structure::ClassDefinition)
 			.generateTypeRef()
 		
 		
-		var cf_getDefault : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+		var cf_getDefault : behavior::CallFeature init behavior::CallFeature.new
 		cf_cast.target:=cf_getDefault
 		
 		
 		cf_getDefault.name:="getDefault"
 		
 		
-		var tl_getDefault : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+		var tl_getDefault : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 		cf_getDefault.target:=tl_getDefault
 		
 		
 		tl_getDefault.typeref:=context.kmtContext
 			.getFromQualifiedName("root_package::TransformationContext")
-			.asType(org::kermeta::language::structure::ClassDefinition)
+			.asType(structure::ClassDefinition)
 			.generateTypeRef()
 		
 		//StdIO.writeln("ResolveExp::range2domain-end")
@@ -991,122 +1228,3 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 end
 
 }
-
-/**
-*	ModelTypes in qvt are the metamodels of the transformation
-*	they consist in packages
-*/
-aspect class ModelType {
-
-method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
-	if output==void then
-		StdIO.writeln("ModelType::range2domain")
-		
-		var out : org::kermeta::language::structure::ModelingUnit init org::kermeta::language::structure::ModelingUnit.new
-		output:=out
-		StdIO.writeln("mt1")
-		metamodel.each{x|
-				x.asType(emof::Object).range2domain(context) 
-				StdIO.writeln("mt2")
-				out.packages.add(x.output.asType(org::kermeta::language::structure::Package))
-				}
-		StdIO.writeln("ModelType::range2domain-end")
-	end	
-
-end
-}
-
-aspect class ContextualProperty
-{
-	/* TODO implement "initExpression" and "overriden" */
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
-		if output==void then
-			//StdIO.writeln("ContextualProperty::range2domain")
-			var out : org::kermeta::language::structure::Property init org::kermeta::language::structure::Property.new
-			output := out
-			out.default := default
-			out.isComposite := isComposite
-			out.isReadOnly := isReadOnly
-			out.isID := isID
-			out.isDerived := isDerived
-			out.name := name
-			out.lower := lower
-			out.upper := upper
-			
-			self.context.range2domain(context)
-			out.owningClass?=self.context.output
-			
-			if opposite.isNotEqual(void) then
-				opposite.range2domain(context)
-				out.opposite ?= opposite.output
-			end
-
-			if type.isNotEqual(void) then
-				out.type := type.generateType(context)
-				if (out.type!=void) then
-					out.containedType.add(out.type)
-					StdIO.writeln("create a type "+type.name )
-				else
-					StdIO.writeln("type not created for "+type.name+ type.isInstanceOf(emof::DataType).toString)
-				end
-				
-			end
-			//StdIO.writeln("ContextualProperty::range2domain-end")
-		end
-	end
-
-}
-
-/**Mapping Call Exp behaves differently from OperationCallExp in two ways :
-*	1) It requires to add a parameter giving an init value for the result of the mapping (usually this value will be void)
-*	2) It requires a boolean parameter to state if the call to the mapping is strict or not
-*/
-
-aspect class MappingCallExp
-{
-	method range2domain(context : Qvt2KermetaContext) : Void is do
-		if output==void then
-			var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
-			output:=out
-			
-			//if there is a source model
-			if source!=void then
-				source.range2domain(context)
-				out.target?=source.output
-			else
-				var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
-				out.target:=transfoCall
-			end
-			if (referredOperation !=void) then
-				referredOperation.range2domain(context)
-				out.staticOperation?=referredOperation.output
-				if out.staticOperation==void then
-					out.name:=referredOperation.name
-				else
-					out.name:=out.staticOperation.name
-				end
-				StdIO.writeln("referredOperation name : "+ referredOperation.name)
-			end
-			argument.each{x|
-					x.range2domain(context) 
-					if x.output!=void then 
-						out.parameters.add(x.output.asType(org::kermeta::language::behavior::Expression)) 
-					else 
-						//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
-					end
-					}
-			//add result value
-			var resultVal : org::kermeta::language::behavior::VoidLiteral init org::kermeta::language::behavior::VoidLiteral.new
-			out.parameters.add(resultVal)
-			
-			//add isStrict value
-			var isStrict : org::kermeta::language::behavior::BooleanLiteral init org::kermeta::language::behavior::BooleanLiteral.new
-			isStrict.~value:=self.isStrict
-			out.parameters.add(isStrict)
-			
-		end
-	end
-}
-
-
-

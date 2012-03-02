@@ -84,6 +84,11 @@ class ModelParameter {
 	
 	end
 	
+	operation load() : Void is do
+	
+		modelResource.load(void)
+	end
+	
 	operation initialize(initRes : Resource) : Void is do
 		modelResource := initRes
 		extent.addAll(modelResource.getContents)

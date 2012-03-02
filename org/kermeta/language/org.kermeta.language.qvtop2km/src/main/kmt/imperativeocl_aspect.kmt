@@ -4,6 +4,7 @@ package imperativeocl;
 using root_package
 using kermeta::standard
 using kermeta::io
+using org::kermeta::language
 /**
 * iteration on a collection similar to collect or select
 * TODO : what if there are more iterator ?
@@ -68,7 +69,11 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			
 			//a sequence<X> cannot be casted as a sequence<Y> even if X>Y
 			//hence we created the deferred sequences
+			condition.asType(essentialocl::TypeExp).referredType.range2domain(context)
+			var asSeqType : behavior::UnresolvedCall init behavior::UnresolvedCall.new.createProxySequence(condition.asType(essentialocl::TypeExp).referredType.generateType(context))
+			asSeqType.target:=iterateCall
 			
+			/*
 			var deferredcast : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			deferredcast.name:="fromSeq"
 			
@@ -88,8 +93,8 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			dseqLit.typeref:=dseqType.generateParameterizedTypeRef(paramTypeCD)
 			
 			deferredcast.parameters.add(iterateCall)
-			
-			output:=deferredcast
+			*/
+			output:=asSeqType
 			
 			/*
 			var castCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
