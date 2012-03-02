@@ -375,7 +375,7 @@ package org::kermeta::language{
 					else
 						result := result +" := "
 					end
-					result := ~value.prettyPrint(indent)
+					result := result+~value.prettyPrint(indent+1)
 				else
 					StdIO.writeln("Assignment without target or value")	
 				end
@@ -633,9 +633,9 @@ package org::kermeta::language{
 				else
 					result:=""
 				end
-				result := result +"var "+self.identifier+" : "+self.type.toString()
+				result := result +"var "+self.identifier+" : "+self.type.prettyPrint(indent)
 				if (not self.initialization.isVoid) then
-					result := result + " init " + self.initialization.prettyPrint(indent)
+					result := result +"\n"+printIndent(indent+1)+ " init " + self.initialization.prettyPrint(indent+1)
 				end
 				result := result + "\n"
 			end
