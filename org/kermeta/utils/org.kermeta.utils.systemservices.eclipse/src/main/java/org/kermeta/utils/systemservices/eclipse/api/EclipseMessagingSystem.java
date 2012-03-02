@@ -28,7 +28,6 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
-import org.kermeta.utils.systemservices.eclipse.internal.ProgressWrapper;
 import org.kermeta.utils.systemservices.eclipse.internal.console.ConsoleIO;
 import org.kermeta.utils.systemservices.eclipse.internal.console.EclipseConsoleIOFactory;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.ConsoleMessage;
