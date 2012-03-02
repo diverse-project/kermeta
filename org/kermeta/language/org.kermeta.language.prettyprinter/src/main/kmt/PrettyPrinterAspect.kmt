@@ -528,6 +528,22 @@ package behavior {
 				result := self.target.prettyPrint(indent)+"\n"+printIndent(indent+1)+"."
 			end
 			result := result + Helper.new.keywordEscape(self.name)
+			
+			if not generics.empty then
+				result := result+"<"
+				var first : Boolean init true
+				generics.each{g|
+					if first then
+						first:=false
+					else
+						result:=result+" , "
+					end	
+					result := result +g.typePrettyPrint(indent)
+				}
+				result:=result+">"
+				
+			end
+			
 			if isCalledWithParenthesis or not self.parameters.empty then
 				result:=result+"("
 				var first : Boolean init true
