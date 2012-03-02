@@ -322,6 +322,18 @@ object PrettyPrinter {
           print(u.getTarget, res)
         res.append("." )}
         res.append(         u.getName)
+
+        var j = 0
+        if (u.getGenerics.size>0)
+          res.append("[")
+        u.getGenerics.foreach(p => {
+          if (j!=0) res.append(", ")
+          print(p, res)
+          j = j+1
+        })
+        if (u.getGenerics.size>0)
+          res.append("]")
+
         var i = 0
         if (u.getParameters.size > 0)
           res.append("(")
