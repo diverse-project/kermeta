@@ -15,7 +15,7 @@ using kermeta::io
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
 using printer
-/*package printer{
+package printer{
 		singleton Helper {
 		
 			operation keywordEscape(s : String):String is do
@@ -82,10 +82,10 @@ using printer
 
 
 
-}*/
+}
 package org::kermeta::language{
 	package structure{
-	singleton Helper {
+	/*singleton Helper {
 		
 			operation keywordEscape(s : String):String is do
 				if s.equals("abstract") 
@@ -145,7 +145,7 @@ package org::kermeta::language{
 				end
 				
 			end
-			}
+			}*/
 		aspect class ClassDefinition{
 			method prettyPrint(indent : Integer) : String is do
 				if not name.isVoid then
