@@ -129,7 +129,9 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
       newo
   }
 
-  private def operationGenericParems = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  private def operationGenericParems = operationGenericParemsWithChevrons | operationGenericParemsWithBrackets
+  private def operationGenericParemsWithChevrons = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  private def operationGenericParemsWithBrackets = "[" ~ rep1sep(genericDef,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 
 
   private def genericDef : Parser[Tuple2[String, String] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>

@@ -33,6 +33,8 @@ trait KGenericTypeParser extends KAbstractParser with KLambdaParser {
       newType
   }
 
-  def genericParams : Parser[List[Type]] = "<" ~ rep1sep(genericQualifiedType,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  def genericParams : Parser[List[Type]] = genericParamsWithChevrons | genericParamsWithBrackets
+  def genericParamsWithChevrons : Parser[List[Type]] = "<" ~ rep1sep(genericQualifiedType,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  def genericParamsWithBrackets : Parser[List[Type]] = "[" ~ rep1sep(genericQualifiedType,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 
 }

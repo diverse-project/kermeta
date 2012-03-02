@@ -115,7 +115,10 @@ trait KClassDefinitionParser extends KAbstractParser
   }
 
   //private def classGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
-  private def classGenericParems = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  private def classGenericParems = classGenericParemsWithChevrons | classGenericParemsWithBrackets
+  private def classGenericParemsWithChevrons = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
+  private def classGenericParemsWithBrackets = "[" ~ rep1sep(genericDef,",") ~ "]" ^^{case _ ~ params ~ _ => params }
+
 
   private def genericDef : Parser[Tuple2[String, String] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
     var resTuple : Tuple2[String, String] = (null,  null)
