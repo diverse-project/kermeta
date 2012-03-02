@@ -100,9 +100,9 @@ object TypeEquivalence {
 				 typeEquivelence.put("k2.standard.Sequence", 	"java.util.List");
 				 typeEquivelence.put("k2.standard.Short", 		"java.lang.Short");
 				 typeEquivelence.put("k2.standard.String", 		"java.lang.String");
+				 typeEquivelence.put("k2.standard.StringBuffer","java.lang.StringBuilder");
 				 typeEquivelence.put("k2.standard.Void", 		"scala.Unit");
 				 typeEquivelence.put("k2.utils.Stack", 			"java.util.Stack");
-				 typeEquivelence.put("k2.utils.StringBuffer", 	"scala.StringBuilder");
 				 typeEquivelence.put("k2.utils.Hashtable", 		"java.util.HashMap");
 				 typeEquivelence.put("k2.utils.Hashtable", 		"java.util.HashMap");
 				 //typeEquivelence.put(" org.k2.language.structure.String", "java.lang.String");
