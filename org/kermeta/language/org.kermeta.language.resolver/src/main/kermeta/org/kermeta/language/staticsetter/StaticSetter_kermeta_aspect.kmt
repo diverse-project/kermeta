@@ -154,7 +154,7 @@ package behavior {
 			
 			// self.parameters.addAll(newParameters)
 			newParameters.each{ p | self.parameters.add(p) }
-			
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Object"))
 			result := self
 		end
 		
