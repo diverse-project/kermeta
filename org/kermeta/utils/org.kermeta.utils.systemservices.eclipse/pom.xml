@@ -120,6 +120,7 @@
 		            <manifestEntries>
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
+						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Manifest-Version>1.0</Manifest-Version>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>

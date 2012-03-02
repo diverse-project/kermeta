@@ -78,10 +78,34 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	@Override
 public synchronized void runFromKP(final String kpIdentifier, final ArrayList<String> params) {
 		
-		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
+		Job job = new Job("Running "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
-					kpBuilders.get(kpIdentifier).build(true,params);
+					Job buildJob = new Job("Build before run "+ kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
+						protected IStatus run(IProgressMonitor monitor) {
+							try {
+								if (kpBuilders.get(kpIdentifier).build(true,params, monitor)) return Status.OK_STATUS;
+								else return Status.CANCEL_STATUS;
+							} catch (Exception e) {
+								try {
+									Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+								} catch (Exception u) {
+									e.printStackTrace();
+								}
+								return Status.CANCEL_STATUS;
+							}
+						}
+					};
+					buildJob.setPriority(Job.LONG);
+					buildJob.schedule();
+					buildJob.join();
+					if(buildJob.getResult() == Status.OK_STATUS){					
+						kpBuilders.get(kpIdentifier).runKP(params, monitor);
+					}
+					else{
+						Activator.getDefault().getMessaggingSystem4Runner(kpIdentifier).logProblem(MessagingSystem.Kind.UserERROR, "Cannot run. The project has build error\n ", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+					}
+					
 				} catch (Exception e) {
 					try {
 						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
@@ -93,16 +117,16 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 	        }
 	    };
 	    job.setPriority(Job.LONG);
-	    job.schedule();	
+	    job.schedule();
 	}
 	
 	@Override
 	public synchronized void buildFromKP(final String kpIdentifier) {
 		
-		Job job = new Job("Kermeta builder job for "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
+		Job job = new Job("Building "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
-					kpBuilders.get(kpIdentifier).build();
+					kpBuilders.get(kpIdentifier).build(monitor);
 				} catch (Exception e) {
 					try {
 						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
@@ -120,13 +144,13 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 	@Override
 	public void compileFromKP(String kpIdentifier) {
 		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>(lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
-		theRunner.start();
+		theRunner.schedule();
 	}
 
 	@Override
 	public void parseSpecificFile(IResource toParse, String content) {
 		KermetaRunner<IResource,String> theRunner = new KermetaRunner<IResource,String>(lockForParse, parsingInPending, parsingInProgress, toParse, content, new KermetaParser());
-		theRunner.start();		
+		theRunner.schedule();		
 	}
 
 	@Override

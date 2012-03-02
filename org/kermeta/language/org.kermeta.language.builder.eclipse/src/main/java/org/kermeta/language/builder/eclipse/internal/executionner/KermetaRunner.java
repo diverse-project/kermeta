@@ -3,7 +3,12 @@ package org.kermeta.language.builder.eclipse.internal.executionner;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
-public class KermetaRunner<G,H> extends Thread{
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+
+public class KermetaRunner<G,H> extends Job{
 	
 	final private Map<G,H> waitingList;
 	final private Map<G,H> runningList;
@@ -23,6 +28,7 @@ public class KermetaRunner<G,H> extends Thread{
 	 * @param concernedExecution KermetaExecutionned containing the execution
 	 */
 	public KermetaRunner(Lock theLocker,Map<G,H> waitingList,Map<G,H> runningList,G concernedResource,H concernedElement,KermetaExecutionner<G,H> concernedExecution) {
+		super("KermetaRunner");
 		this.waitingList = waitingList;
 		this.runningList = runningList;
 		this.concernedResource = concernedResource;
@@ -32,7 +38,7 @@ public class KermetaRunner<G,H> extends Thread{
 	}
 
 	@Override
-	public void run() {
+	public IStatus run(IProgressMonitor monitor) {
 		
 		H currentElement = concernedElement;
 		if (waitingList.containsKey(concernedResource)) {
@@ -47,7 +53,7 @@ public class KermetaRunner<G,H> extends Thread{
 					while (!endProcess) {
 						try {
 							runningList.put(concernedResource, currentElement);
-							concernedExecution.execute(concernedResource,currentElement);
+							concernedExecution.execute(concernedResource,currentElement, monitor);
 						} finally {
 							if (! waitingList.containsKey(concernedResource)) {
 								runningList.remove(concernedResource);
@@ -63,7 +69,8 @@ public class KermetaRunner<G,H> extends Thread{
 				}
 			}
 		}
-		
+
+		return Status.OK_STATUS;
 	}
 
 }

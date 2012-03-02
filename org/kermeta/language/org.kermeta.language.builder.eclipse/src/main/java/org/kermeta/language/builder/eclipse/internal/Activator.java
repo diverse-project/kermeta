@@ -43,11 +43,11 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	private BundleContext myContext = null;
 	
-	protected MessagingSystem messaggingSystem;
+	protected EclipseMessagingSystem messaggingSystem;
 	
 	// currently wer run in only one JVM, so we can accept to use only one messagingSystem when running a kermeta program
 	// when we will support several JVM, we'll need to use a smarter strategy
-	protected MessagingSystem messaggingSystem4Runner;
+	protected EclipseMessagingSystem messaggingSystem4Runner;
 
 	private WorkspaceResourceChangeListener workspaceResourceChangeListener;
 	
@@ -93,11 +93,11 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	public MessagingSystem getMessaggingSystem() {
+	public EclipseMessagingSystem getMessaggingSystem() {
 		return messaggingSystem;
 	}
 	
-	public MessagingSystem getMessaggingSystem4Runner(String runnerName) {
+	public EclipseMessagingSystem getMessaggingSystem4Runner(String runnerName) {
 		return messaggingSystem4Runner;
 	}
 

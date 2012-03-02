@@ -126,7 +126,7 @@ public class KPBuilder {
 		if(isBuildNeeded(delta)){
 			Job job = new Job("Kermeta builder job") {
 				protected IStatus run(IProgressMonitor monitor) {
-					compile();
+					compile(monitor);
 					return Status.OK_STATUS;
 				}
 			};
@@ -135,17 +135,19 @@ public class KPBuilder {
 		}
 	}
 	
-	synchronized public void compile(){
+	synchronized public void compile(IProgressMonitor monitor){
 		try {		
-			ArrayList<String> additionalCalssPath = new ArrayList<String>();		
-			Activator.getDefault().getMessaggingSystem().initProgress(KermetaBuilder.LOG_MESSAGE_GROUP, "Starting km generation of "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP, 0);
+			ArrayList<String> additionalCalssPath = new ArrayList<String>();
+			compiler.setContributedProgressGroup(getProgressGroup());
+			Activator.getDefault().getMessaggingSystem().addProgressMonitor(getProgressGroup(),monitor);
+			Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Starting km generation of "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP, 5);
 
 			/*ArrayList<URL> impactedFiles = new ArrayList<URL>();
 			impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
 			KermetaBuilder.flushProblems(impactedFiles);
 			*/
 			// for reflexivity set the bundle context
-			updateCompilerPreferences();		
+			updateCompilerPreferences();	
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,true);
 			if (result != null) {
 				kp_last_modelingunit = result;
@@ -161,7 +163,7 @@ public class KPBuilder {
 				e.printStackTrace();
 			}
 		}
-		Activator.getDefault().getMessaggingSystem().doneProgress(KermetaBuilder.LOG_MESSAGE_GROUP, "End of km generation for "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP);
+		Activator.getDefault().getMessaggingSystem().doneProgress(getProgressGroup(), "End of km generation for "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP);
 	}
 
 
@@ -242,41 +244,68 @@ public class KPBuilder {
 		
 	}
 	
-	synchronized public void build(boolean andRun, ArrayList<String> params){
+	public ArrayList<String> getBuildAdditionalClassPath(){
+		ArrayList<String> additionalClassPath = new ArrayList<String>();
+		
+		findBundleLocationForClassPath("org.kermeta.scala.scala-library", additionalClassPath);
+		findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
+		findBundleLocationForClassPath("org.kermeta.utils.systemservices.api", additionalClassPath);
+		findBundleLocationForClassPath("org.eclipse.emf.common", additionalClassPath);
+		findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
+		findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
+		findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
+		findBundleLocationForClassPath("org.kermeta.utils.helpers", additionalClassPath);
+		return additionalClassPath;
+	}
+	
+	public ArrayList<String> getFullClassPath() throws IOException{
+		// add resolvable kp depencies in classpath
+		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
+		
+		// Load KP file
+		KermetaProject kp = ldr.loadKp(kpFileURL);
+		ArrayList<String> fullClassPath = new ArrayList<String>();
+		fullClassPath.addAll(getBuildAdditionalClassPath());
+		fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
+		fullClassPath.add(outputEMFBinaryFolder);
+		
+		return fullClassPath;
+	}
+	
+	synchronized public boolean build(boolean andRun, ArrayList<String> params, IProgressMonitor monitor){
+		boolean isBuildNeeded = !andRun;
+		ModelingUnit result = null;
 		try {		
-			boolean isBuildNeeded = !andRun;
 			
 			// full build required so clear the consoles
 			Activator.getDefault().getMessaggingSystem().clearLog();
 			org.kermeta.utils.systemservices.eclipse.Activator.getDefault().getMessaggingSystem().clearLog();
 			org.kermeta.utils.systemservices.eclipse.Activator.getDefault().clearConsole();
 			
+
+			compiler.setContributedProgressGroup(getProgressGroup());
+			Activator.getDefault().getMessaggingSystem().addProgressMonitor(getProgressGroup(),monitor);
+			
 			if (andRun) {
 				isBuildNeeded = checkIfBuildIsNeeded();
+				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building before run "+kpFileURL, this.getClass().toString(), 5);				
 			}
+			else{
+				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building "+kpFileURL, this.getClass().toString(), 5);				
+			}
+
 			
-			ArrayList<String> additionalClassPath = new ArrayList<String>();
 			
-			findBundleLocationForClassPath("org.kermeta.scala.scala-library", additionalClassPath);
-			findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
-			findBundleLocationForClassPath("org.kermeta.utils.systemservices.api", additionalClassPath);
-			findBundleLocationForClassPath("org.eclipse.emf.common", additionalClassPath);
-			findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
-			findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
-			findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
-			findBundleLocationForClassPath("org.kermeta.utils.helpers", additionalClassPath);
+			ArrayList<String> additionalClassPath = getBuildAdditionalClassPath();
 			
 			// add resolvable kp depencies in classpath
-			KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
+			//KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
 			
 			// Load KP file
-			KermetaProject kp = ldr.loadKp(kpFileURL);
-			ArrayList<String> fullClassPath = new ArrayList<String>();
-			fullClassPath.addAll(additionalClassPath);
-			fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
-			fullClassPath.add(outputEMFBinaryFolder);
+			//KermetaProject kp = ldr.loadKp(kpFileURL);
+			//ArrayList<String> fullClassPath = getFullClassPath();
 			
-			ModelingUnit result = null;
+			
 			
 			if (isBuildNeeded) {
 				ArrayList<URL> impactedFiles = new ArrayList<URL>();
@@ -294,6 +323,7 @@ public class KPBuilder {
 					if(!((IProject)kpProjectFile.getParent()).getFolder("target").exists())
 						((IProject)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
 				}
+				
 				
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,false);
 				
@@ -328,7 +358,8 @@ public class KPBuilder {
 					}					
 				}
 			}
-			if (andRun) {
+			
+		/*	if (andRun) {
 				// full build required so clear the consoles
 				Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).clearLog();
 				//k2.io.StdIO._messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
@@ -338,7 +369,7 @@ public class KPBuilder {
 				
 				
 				
-				
+			/*	
 				KermetaRunner runner = new KermetaRunner(outputScalaBinaryFolder, kp.getGroup()+"."+ kp.getName(),fullClassPath,Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
 				if (isBuildNeeded && result == null) {
 					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).error("Error in build, cannot run "+kpFileURL, this.getClass().getName());
@@ -348,7 +379,7 @@ public class KPBuilder {
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null); // refresh local project in case a file is created there
 				}
 				
-			}
+			}*/
 		} catch (Exception e) {
 			try {
 				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Build failed : "+(e.getMessage()!= null ? e.getMessage() : e.toString()), 
@@ -361,8 +392,43 @@ public class KPBuilder {
 						e);
 			}
 		}
+		finally{
+			Activator.getDefault().getMessaggingSystem().doneProgress(getProgressGroup(), "kpFileURL", this.getClass().toString());
+		}
+		if (isBuildNeeded && result == null) {
+			return false;
+		}
+		else return true;
 	}
-	
+	synchronized public void runKP( ArrayList<String> params, IProgressMonitor monitor){
+		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
+		
+		// Load KP file
+		KermetaProject kp = ldr.loadKp(kpFileURL);
+		// full build required so clear the consoles
+		Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).clearLog();
+		//k2.io.StdIO._messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
+		/* k2.io.StdIO$.MODULE$.messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
+		Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");
+		k2.io.StdIO$.MODULE$.writeln("test message");*/
+		
+		
+		try {
+			KermetaRunner runner = new KermetaRunner(outputScalaBinaryFolder, kp.getGroup()+"."+ kp.getName(),getFullClassPath(),Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
+			runner.runK2Program(params,outputRootFolder+File.separator+"urimap.properties");
+			kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null); // refresh local project in case a file is created there
+			
+		} catch (IOException e) {
+			Activator.getDefault().getMessaggingSystem().error( "Run failed "+kpFileURL+ " due to"+e.getMessage(), 
+					KermetaBuilder.LOG_MESSAGE_GROUP, 
+					e);
+		} catch (CoreException e) {
+			Activator.getDefault().getMessaggingSystem().error( "Run failed "+kpFileURL+ " due to"+e.getMessage(), 
+					KermetaBuilder.LOG_MESSAGE_GROUP, 
+					e);
+		}
+		
+	}
 	
 	
 	private void generateURIMapFile(String outputFolder) {
@@ -412,8 +478,8 @@ public class KPBuilder {
 	}
 
 
-	synchronized public void build(){
-		build(false, new ArrayList<String>());
+	synchronized public void build(IProgressMonitor monitor){
+		build(false, new ArrayList<String>(), monitor);
 	}
 
 

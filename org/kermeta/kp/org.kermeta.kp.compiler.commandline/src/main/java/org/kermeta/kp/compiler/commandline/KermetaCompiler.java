@@ -112,7 +112,16 @@ public class KermetaCompiler {
 	public String errorMessage = "";
 	private static final Lock lock = new ReentrantLock();
 	
+	protected String contributedProgressGroup = ""; 
 	
+	public String getContributedProgressGroup() {
+		return contributedProgressGroup;
+	}
+
+	public void setContributedProgressGroup(String contributedProgressGroup) {
+		this.contributedProgressGroup = contributedProgressGroup;
+	}
+
 	//private ExecutorService threadExector = Executors.newCachedThreadPool();
 	// this kind of executor should be able to queue any number of parallel tasks and run them on the available Threads in the pool
 	// it is tuned to accept a burst of request and process them ...
@@ -1330,7 +1339,10 @@ public class KermetaCompiler {
 	}
 	
 	public String getMainProgressGroup(){
-		return "KermetaCompiler["+this.hashCode()+"]";
+		if(contributedProgressGroup.equals(""))
+			return "KermetaCompiler["+this.hashCode()+"]";
+		else
+			return contributedProgressGroup+".KermetaCompiler["+this.hashCode()+"]";
 	}
 
 	

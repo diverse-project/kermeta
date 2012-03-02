@@ -11,16 +11,24 @@ package org.kermeta.utils.systemservices.eclipse.api;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.progress.IProgressService;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.Reference;
 import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.internal.EclipseReporter;
+import org.kermeta.utils.systemservices.eclipse.internal.ProgressWrapper;
 import org.kermeta.utils.systemservices.eclipse.internal.console.ConsoleIO;
 import org.kermeta.utils.systemservices.eclipse.internal.console.EclipseConsoleIOFactory;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.ConsoleMessage;
@@ -43,11 +51,19 @@ public class EclipseMessagingSystem extends MessagingSystem {
 	
 	protected ConsoleIO consoleIO; 
 	
+	
+	
+
+	protected int progressBarMaxDepth = 1;
+	protected long progressBarIdleTime = 100;
+	protected int progressBarScale = 1000;
+	
 	public ConsoleIO getConsoleIO() {
 		return consoleIO;
 	}
 
 	protected Hashtable<String,Long> progressStartTimeTable = new Hashtable<String,Long>();
+	protected Hashtable<String, IProgressMonitor> progressMonitorTable = new Hashtable<String,IProgressMonitor>();
 	
 	protected Integer consoleLogLevel = ConsoleLogLevel.DEV_DEBUG;
 	
@@ -75,9 +91,31 @@ public class EclipseMessagingSystem extends MessagingSystem {
 
 	@Override
 	public void doneProgress(String progressGroup, String msg, String msgGroup) {
-		// TODO Auto-generated method stub
+
+		boolean mustLog = false;
+		IProgressMonitor progressMonitor =  getProgressMonitor(progressGroup);
+		
+		if(progressMonitor != null){
+			progressMonitor.subTask(msg);
+			progressMonitor.done();
+			
+			if(progressMonitor != null){
+				releaseProgressMonitor(progressGroup);
+			}
+		}
+		else{
+			mustLog = true;
+		}
+		
+		
+		
 		// for the moment forward all messages to usual log
-		this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
+		if(mustLog){
+			this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
+		}
+		else{
+			this.log(Kind.DevDEBUG, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
+		}
 		
 	}
 
@@ -104,12 +142,87 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		}
 		return elapsedTime;
 	}
+	
+	private IProgressMonitor releaseProgressMonitor(String progressGroup){
+		synchronized(this) {
+	        return this.progressMonitorTable.remove(progressGroup);
+	    }
+	}
+	private IProgressMonitor getProgressMonitor(String progressGroup){
+		synchronized(this) {
+	        return this.progressMonitorTable.get(progressGroup);
+	    }
+	}
+	public void addProgressMonitor(String progressGroup, IProgressMonitor progressMonitor){
+		synchronized(this) {
+	        this.progressMonitorTable.put(progressGroup, progressMonitor);
+	    }
+	}
+	
+	private IProgressMonitor getParentProgressMonitor(String progressGroup){
+		if(progressGroup.contains(".")){
+			String parentProgressGroup = progressGroup.substring(0, progressGroup.lastIndexOf("."));
+			IProgressMonitor result = this.progressMonitorTable.get(parentProgressGroup);
+			if(result != null ) return result;		
+			return getParentProgressMonitor(parentProgressGroup);
+		}
+		return null;
+	}
 
 	@Override
 	public void initProgress(String progressGroup, String msg, String msgGroup, int unitToWork) {
-		// TODO Auto-generated method stub
-		// for the moment forward all messages to usual log
-		this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg, msgGroup);
+
+		boolean mustLog = false;
+		if(this.progressBarMaxDepth > 0){
+			IProgressMonitor progressMonitor = getProgressMonitor(progressGroup);
+			if(progressMonitor != null){
+				progressMonitor.beginTask(msg, unitToWork * progressBarScale);			
+			}
+			else {
+				IProgressMonitor parentProgressMonitor = getParentProgressMonitor(progressGroup);
+				if (parentProgressMonitor!= null){
+					progressMonitor = new SubProgressMonitor(parentProgressMonitor, 1*progressBarScale);
+					addProgressMonitor(progressGroup, progressMonitor);
+					progressMonitor.beginTask(msg, unitToWork * progressBarScale);
+				}
+				else{ mustLog = true; }
+			}
+			
+			
+			/*
+			ProgressWrapper progressWrapper = getProgressWrapper(progressGroup);
+			IProgressMonitor progressMonitor = null;
+			if(progressWrapper != null){
+				// TODO must stop the previous and recreate a new one !!!
+			}
+			progressWrapper = getParentProgressWrapper(progressGroup);
+			if(progressWrapper != null){
+				// TODO must provision a new subProgressMonitor in the wrapper 
+			}
+			else {
+				progressWrapper = new ProgressWrapper(progressGroup, this.progressBarIdleTime, this);
+				org.eclipse.ui.progress.UIJob uiJob = new ProgressWrapperStarter(progressWrapper, progressMonitor, this);
+				uiJob.schedule();
+				try {
+					uiJob.join();
+					progressMonitor = progressWrapper.getProgressMonitor();
+					progressMonitor.beginTask(msg, unitToWork * progressBarScale);
+				} catch (InterruptedException e) {
+					this.log(Kind.DevWARNING, "["+progressGroup+"] cannot create progress monitor, => log only. "+e.getMessage(), msgGroup, e);
+					mustLog = true;
+				}
+			}
+			*/
+		}
+		else {
+			mustLog = true;
+		}
+		
+		if(mustLog){
+			// forward message to usual log
+			this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg, msgGroup);
+		}
+
 		if(progressGroup!= null){
 			progressStartTimeTable.put(progressGroup, Long.valueOf(System.currentTimeMillis()));
 		}
@@ -231,9 +344,20 @@ public class EclipseMessagingSystem extends MessagingSystem {
 
 	@Override
 	public void progress(String progressGroup, String msg, String msgGroup, int workedUnit) {
-		// TODO Auto-generated method stub
+		boolean mustLog = false;
+		IProgressMonitor progressMonitor = getProgressMonitor(progressGroup);		
+		if(progressMonitor != null){
+			progressMonitor.subTask(msg);
+			progressMonitor.worked(workedUnit*progressBarScale);
+		}
+		else{
+			mustLog = true;
+		}
+		
 		// for the moment forward all messages to usual log
-		this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getIntermediateElapsedTime(progressGroup), msgGroup);
+		if(mustLog){
+			this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getIntermediateElapsedTime(progressGroup), msgGroup);
+		}
 	}
 
 	@Override
@@ -286,5 +410,56 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		return consoleIO.getReader();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getProgressBarMaxDepth() {
+		return progressBarMaxDepth;
+	}
+
+	/**
+	 * set the maximum depth for wich progress bar must be created
+	 * if 0, no progress bar will be created
+	 * @return
+	 */
+	public void setProgressBarMaxDepth(int progressBarMaxDepth) {
+		this.progressBarMaxDepth = progressBarMaxDepth;
+	}
+	
+	
+	/*
+	class ProgressWrapperStarter extends org.eclipse.ui.progress.UIJob{
+		ProgressWrapper progressWrapper; 
+		IProgressMonitor progressMonitor;
+		EclipseMessagingSystem logger;
+		
+		public ProgressWrapperStarter(ProgressWrapper progressWrapper, IProgressMonitor progressMonitor, EclipseMessagingSystem logger){
+			super("adding progress monitor");
+			this.progressMonitor = progressMonitor;
+			this.progressWrapper = progressWrapper;
+			this.logger = logger;
+		}
+		@Override
+		public IStatus runInUIThread(IProgressMonitor arg0) {
+			try {
+
+				IWorkbench wb = PlatformUI.getWorkbench();
+				IProgressService ps = wb.getProgressService();
+				ps.busyCursorWhile(progressWrapper);
+
+				logger.log(Kind.DevINFO, "["+this.getClass()+"]progressWrapper created" , this.getClass().toString());
+			} catch (InvocationTargetException e) {
+				logger.log(Kind.DevWARNING, "["+progressWrapper.getRootProgressGroup()+"] cannot create progress monitor, => log only. "+e.getMessage(), progressWrapper.getRootProgressGroup(), e);
+				//mustLog = true;
+			} catch (InterruptedException e) {
+				logger.log(Kind.DevWARNING, "["+progressWrapper.getRootProgressGroup()+"] cannot create progress monitor, => log only. "+e.getMessage(), progressWrapper.getRootProgressGroup(), e);
+				//mustLog = true;
+			}
+			return null;
+		}
+		
+	}
+	*/
 	
 }

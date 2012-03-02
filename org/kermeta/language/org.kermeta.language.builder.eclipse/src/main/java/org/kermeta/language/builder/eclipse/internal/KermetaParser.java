@@ -3,6 +3,7 @@ package org.kermeta.language.builder.eclipse.internal;
 import java.net.MalformedURLException;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecutionner;
@@ -16,7 +17,7 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 public class KermetaParser extends KermetaExecutionner<IResource,String> {
 	
 	@Override
-	public void execute(IResource concernedResource, String content) {
+	public void execute(IResource concernedResource, String content, IProgressMonitor monitor) {
 		KermetaCompiler theCompiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(), true);
 		ModelingUnit freshModelingUnit = null;
 		if (content.equals("")) {

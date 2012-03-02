@@ -66,7 +66,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 
 			Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
 				protected IStatus run(IProgressMonitor monitor) {
-					aBuilder.compile();
+					aBuilder.compile(monitor);
 					return Status.OK_STATUS;
 				}
 			};
@@ -95,6 +95,11 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 	// ****************** INNER CLASSES ****
 	
 	class KPFileDeltaVisitor implements IResourceDeltaVisitor {
+
+		IProgressMonitor monitor;
+		public KPFileDeltaVisitor(IProgressMonitor monitor) {
+			this.monitor = monitor;
+		}
 
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			// Flag stating whether to continue the visit or not.
@@ -158,7 +163,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 									if (builder != null) {
 										try {
 											builder.refreshFileIndex();
-											builder.compile();
+											builder.compile(monitor);
 										} catch (IOException e) {
 											Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for " + resource.getFullPath(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
 										}
@@ -267,7 +272,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 				protected IStatus run(IProgressMonitor monitor) {
 					// see if the event need a refresh of the kpBuilders
 					try {
-						delta.accept(new KPFileDeltaVisitor());
+						delta.accept(new KPFileDeltaVisitor(monitor));
 					} catch (CoreException e) {
 						Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.ERROR, "failed to process delta with KPFileDeltaVisitor", e));
 					}
