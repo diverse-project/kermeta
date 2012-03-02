@@ -86,7 +86,7 @@ trait KLambdaParser extends KAbstractParser {
       newType.setTypeIdentifier(name)
       List(newType)
   }
-  def lambdaTypeParam : Parser[List[Type]] = "[" ~ rep1sep(genericQualifiedType,",") ~ "]" ^^ { case _ ~ unresolvedType ~ _ =>
+  def lambdaTypeParam : Parser[List[Type]] = "[" ~ repsep(genericQualifiedType,",") ~ "]" ^^ { case _ ~ unresolvedType ~ _ =>
     unresolvedType
   }
 
