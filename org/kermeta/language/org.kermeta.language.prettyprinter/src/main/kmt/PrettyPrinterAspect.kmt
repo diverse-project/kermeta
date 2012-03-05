@@ -85,71 +85,21 @@ package printer{
 }
 package org::kermeta::language{
 	package structure{
-	/*singleton Helper {
-		
-			operation keywordEscape(s : String):String is do
-				if s.equals("abstract") 
-					or s.equals("and")
-					or s.equals("alias")//still true ?
-					or s.equals("attribute")
-					or s.equals("bag")
-					or s.equals("class")
-					or s.equals("do")
-					or s.equals("else")
-					or s.equals("end")
-					or s.equals("enumeration")
-					or s.equals("extern")
-					or s.equals("false")
-					or s.equals("from")
-					or s.equals("function")
-					or s.equals("getter")
-					or s.equals("if")
-					or s.equals("inherits")
-					or s.equals("init")
-					or s.equals("inv")
-					or s.equals("is")
-					or s.equals("loop")
-					or s.equals("method")
-					or s.equals("not")
-					or s.equals("operation")
-					or s.equals("or")
-					or s.equals("oset")
-					or s.equals("package")
-					or s.equals("post")
-					or s.equals("pre")
-					or s.equals("property")
-					or s.equals("raise")
-					or s.equals("raises")//still true ?
-					or s.equals("readonly")//still true ?
-					or s.equals("reference")
-					or s.equals("require")
-					or s.equals("rescue")
-					or s.equals("result")
-					or s.equals("self")
-					or s.equals("seq")
-					or s.equals("set")
-					or s.equals("setter")
-					or s.equals("super")
-					or s.equals("singleton")
-					or s.equals("then")
-					or s.equals("true")
-					or s.equals("until")
-					or s.equals("using") 
-					or s.equals("value")
-					or s.equals("var")
-					or s.equals("void")
-					then
-					result:="~"+s
-				else
-					result:=s
-				end
-				
-			end
-			}*/
+	
+			
+		//TODO add inheritance
 		aspect class ClassDefinition{
 			method prettyPrint(indent : Integer) : String is do
 				if not name.isVoid then
-					result :=printIndent(indent)+ "class "+self.name+" {\n"
+					result :=printIndent(indent)
+					if isAspect then
+						result:=result +"aspect "
+					end
+					if isSingleton then
+						result:=result + "singleton "+self.name+" {\n"
+					else
+						result:=result + "class "+self.name+" {\n"
+					end
 					self.ownedAttribute.each{att|
 						result := result + att.prettyPrint(indent +1)
 					
@@ -595,7 +545,7 @@ package org::kermeta::language{
 				result := result + Helper.keywordEscape(self.name)
 				
 				if not generics.empty then
-					result := result+"<"
+					result := result+"["
 					var first : Boolean init true
 					generics.each{g|
 						if first then
@@ -605,7 +555,7 @@ package org::kermeta::language{
 						end	
 						result := result +g.typePrettyPrint(indent)
 					}
-					result:=result+">"
+					result:=result+"]"
 					
 				end
 				
