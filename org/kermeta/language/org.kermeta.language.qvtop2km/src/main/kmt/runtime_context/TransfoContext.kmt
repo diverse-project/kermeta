@@ -81,15 +81,18 @@ class ModelParameter {
 					modelResource.getContents.add(x)
 				end
 				}
+		modelResource.save(void)
 	
 	end
 	
 	operation load() : Void is do
 	
 		modelResource.load(void)
+		extent.addAll(modelResource.getContents)
 	end
 	
-	operation initialize(initRes : Resource) : Void is do
+	operation initialize(initRes : Resource) : ModelParameter is do
+		result:=self
 		modelResource := initRes
 		extent.addAll(modelResource.getContents)
 	end

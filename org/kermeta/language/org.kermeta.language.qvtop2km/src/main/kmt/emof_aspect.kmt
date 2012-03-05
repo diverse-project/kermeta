@@ -12,32 +12,27 @@ aspect class Class {
 				output := out
 				out.name := name
 				out.isAbstract := isAbstract
-				/*StdIO.writeln("test for isAspect "+getQVTID)
-				if KmtLib.getDefault.asType(KmtLib).getFromQualifiedName(getQVTID)!=void then
-					out.isAspect:=true
-				else*/
+				
+				//a classdef should be aspect if it is already defined in the metamodel otherwise if it's an intermediate class it is a nonaspect
+				//an intermediate class is a class contained by the _INTERMEDIATE package
+				if 	container.isInstanceOf(emof::Package).andThen{x|container.asType(emof::Package).name=="_INTERMEDIATE"}
+				then
 					out.isAspect:=false
-				//end
+				else
+					out.isAspect:=true
+				end
 				StdIO.writeln("0")
-				ownedAttribute.each{etubirttAdenwo | do
-						var elt : org::kermeta::language::structure::Property
-						
-						if out.isAspect then
-							elt?=context.kmtContext.getFromQualifiedName(etubirttAdenwo.getQVTID)
-						end
-						StdIO.writeln("01")
-						if elt!=void then
-							StdIO.writeln("02")
-							etubirttAdenwo.output:= elt
-						else
-							StdIO.writeln("03")
+				ownedAttribute.each{etubirttAdenwo | 
+						//if etubirttAdenwo.isInstanceOf(qvtoperational::ContextualProperty) then
 							etubirttAdenwo.range2domain(context)
+							var elt : org::kermeta::language::structure::Property
 							elt ?= etubirttAdenwo.output
 							if elt.isNotEqual(void) then
 								out.ownedAttribute.add(elt)						
 							end
-						end
-					end}
+						//end
+						
+					}
 				StdIO.writeln("1")
 				superClass.each{ssalCrepus | do
 						var elt : org::kermeta::language::structure::Type

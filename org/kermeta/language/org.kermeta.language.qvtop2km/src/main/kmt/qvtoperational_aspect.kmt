@@ -917,6 +917,7 @@ aspect class OperationalTransformation {
 			execEnvPack.ownedTypeDefinition.add(transfoContextCD)
 			transfoContextCD.name:="TransformationContext"
 			transfoContextCD.isAspect:=true
+			transfoContextCD.isSingleton:=true
 			
 			modelParameter.each{x|
 				x.range2domain(context)
@@ -980,8 +981,11 @@ aspect class OperationalTransformation {
 		initOp.upper:=1
 		initOp.type:=structure::UnresolvedType.new.initialize("kermeta::standard::Void")
 		initOp.containedType.add(initOp.type)
-		var paramNumber : Integer init 1
+
+		
+		
 		//each modelParameter correspond to 2 parameters, one for the path to the model, the other for the path to the metamodel
+		var paramNumber : Integer init 1
 		modelParameter.each{param|
 			var model : structure::Parameter init structure::Parameter.new
 			model.name := "model" + paramNumber.toString
@@ -1000,6 +1004,18 @@ aspect class OperationalTransformation {
 		}
 		var opBlock : behavior::Block init behavior::Block.new
 		initOp.body:=opBlock
+		
+		//initialize the traceregistry root_package::TransformationContext:=traceability::TraceRegistry.new
+		var assignRegistry : behavior::Assignment init behavior::Assignment.new
+		var newRegistry : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
+		newRegistry.target:=behavior::UnresolvedCall.new.initialize("traceability::TraceRegistry",false)
+		assignRegistry.~value := newRegistry
+		
+		var registryCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("traceRegistry",false)
+		registryCall.target:=behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+		assignRegistry.target := registryCall
+		opBlock.statement.add(assignRegistry)
+		
 		
 		//create var decl for the resourceset ofeach model
 		paramNumber:=1
@@ -1027,7 +1043,7 @@ aspect class OperationalTransformation {
 			var callCreateResource : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("createResource",true)
 			callCreateResource.target:= behavior::UnresolvedCall.new.initialize("rSet"+paramNumber,false)
 			callCreateResource.parameters.add(behavior::UnresolvedCall.new.initialize("model"+paramNumber,false))
-			callCreateResource.parameters.add(behavior::UnresolvedCall.new.initialize("metaModel"+paramNumber,false))
+			callCreateResource.parameters.add(behavior::UnresolvedCall.new.initialize("mmodel"+paramNumber,false))
 			
 			//$modelParameter := root_package::ModelParameter.new.initialize($callCreateResource)
 			var assign : behavior::Assignment init behavior::Assignment.new
@@ -1049,12 +1065,14 @@ aspect class OperationalTransformation {
 		//root_package::TransformationContext.$(param.name).load()
 		paramNumber:=1
 		modelParameter.each{param|
-			if param.kind==DirectionKind.in or param.kind==DirectionKind.inout then
+			//TODO change the test when enumeration from ecore are fixed
+			//if param.kind==DirectionKind.in or param.kind==DirectionKind.inout then
+			if param.kind.toString=="in" or param.kind.toString=="inout" then
 				StdIO.writeln("DirectionKind "+param.kind.toString+" "+(param.kind==DirectionKind.in).toString)
 				var callLoad : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("load",true)
 				callLoad.target:= behavior::UnresolvedCall.new.initialize(param.name,false)
 				callLoad.target.asType(behavior::UnresolvedCall).target:= behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
-				
+				//callLoad.parameters.add(behavior::VoidLiteral.new)
 				opBlock.statement.add(callLoad)
 			end
 			StdIO.writeln("DirectionKind "+param.kind.toString+" "+(param.kind==DirectionKind.in).toString)
@@ -1066,11 +1084,13 @@ aspect class OperationalTransformation {
 		//save parameters which are out parameters
 		//root_package::TransformationContext.$(param.name).load()
 		modelParameter.each{param|
-			if param.kind==DirectionKind.out or param.kind==DirectionKind.inout then
+			//TODO change the test when enumeration from ecore are fixed
+			//if param.kind==DirectionKind.out or param.kind==DirectionKind.inout then
+			if param.kind.toString=="out" or param.kind.toString=="inout" then
 				var callSave : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("save",true)
 				callSave.target:= behavior::UnresolvedCall.new.initialize(param.name,false)
 				callSave.target.asType(behavior::UnresolvedCall).target:= behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
-				
+				//callSave.parameters.add(behavior::VoidLiteral.new)
 				opBlock.statement.add(callSave)
 			end
 			
