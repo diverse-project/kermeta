@@ -208,7 +208,7 @@ trait KStructuralParser extends KAbstractParser {
   
   private def attributeBound : Parser[Tuple2[Int,Int]] = "[" ~ ( numericLit | "*" ) ~ "]" ^^ { case _ ~ bound ~ _ =>
       bound match {
-        case "*" => (-1,-1)
+        case "*" => (0,-1)
         case s : String => (Integer.parseInt(s),Integer.parseInt(s))
       }
 
