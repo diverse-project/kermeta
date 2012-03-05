@@ -143,13 +143,13 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 	
 	@Override
 	public void compileFromKP(String kpIdentifier) {
-		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>(lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
+		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>("Compiling "+kpIdentifier,lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
 		theRunner.schedule();
 	}
 
 	@Override
 	public void parseSpecificFile(IResource toParse, String content) {
-		KermetaRunner<IResource,String> theRunner = new KermetaRunner<IResource,String>(lockForParse, parsingInPending, parsingInProgress, toParse, content, new KermetaParser());
+		KermetaRunner<IResource,String> theRunner = new KermetaRunner<IResource,String>("Parsing "+toParse.getName(), lockForParse, parsingInPending, parsingInProgress, toParse, content, new KermetaParser());
 		theRunner.schedule();		
 	}
 

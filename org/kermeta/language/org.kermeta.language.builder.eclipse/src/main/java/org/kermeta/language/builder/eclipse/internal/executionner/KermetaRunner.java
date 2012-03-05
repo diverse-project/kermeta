@@ -27,8 +27,8 @@ public class KermetaRunner<G,H> extends Job{
 	 * @param concernedElement Object representing data needed by the execution
 	 * @param concernedExecution KermetaExecutionned containing the execution
 	 */
-	public KermetaRunner(Lock theLocker,Map<G,H> waitingList,Map<G,H> runningList,G concernedResource,H concernedElement,KermetaExecutionner<G,H> concernedExecution) {
-		super("KermetaRunner");
+	public KermetaRunner(String name, Lock theLocker,Map<G,H> waitingList,Map<G,H> runningList,G concernedResource,H concernedElement,KermetaExecutionner<G,H> concernedExecution) {
+		super(name);
 		this.waitingList = waitingList;
 		this.runningList = runningList;
 		this.concernedResource = concernedResource;
