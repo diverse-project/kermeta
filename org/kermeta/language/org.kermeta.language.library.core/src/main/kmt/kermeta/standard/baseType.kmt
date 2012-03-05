@@ -1849,7 +1849,7 @@ class Numeric<G> inherits Summable<G>,Comparable<G> {
 	operation mult(other : G) : G is abstract
 	operation div(other : G) : G is abstract
 	operation mod(other : G) : G is abstract
-	operation uminus(other : G) : G is abstract
+	operation uminus() : G is abstract
 }
 
 @CompilerIgnore "true"
