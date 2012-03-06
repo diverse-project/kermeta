@@ -59,7 +59,8 @@ operation main() : Void is do
 		//srcModel := sourceRepository.createResource("../../org.topcased.simulation.sam.control/transformation/org.topcased.simulation.sam.control.sam2samdynamic.qvtoperational", "../models/api2.ecore")
 		StdIO.writeln("0")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub1/Book2Publication.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
-		srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub2/Book2Publication2.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
+		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub2/Book2Publication2.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
+		srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/ecore2emof/Ecore2EMOF.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		StdIO.writeln("00")
 		srcModel.load(void)
 		sourceRepository.resolveAllProxies()
@@ -79,7 +80,7 @@ operation main() : Void is do
         //tgtModel := targetRepository.createResource("../test/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
         //tgtModel := targetRepository.createResource("../test/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("../test/UML2RDBMS.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Book2Publication.km" , "http://www.kermeta.org/kermeta/2_0_0/")
+		tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/ecore2emof.km" , "http://www.kermeta.org/kermeta/2_0_0/")
 		StdIO.writeln("6")
 		
 		

@@ -267,24 +267,20 @@ aspect class ReturnExp {
 
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-				var out : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
-				output:=out
-				
-				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-				newExp.name:="new"
+			var out : behavior::Raise init behavior::Raise.new
+			output:=out
+			
+			var newExp : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
+			
 
-				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
-				newExp.target:=exceptionLiteral
-				var exceptionCD : org::kermeta::language::structure::ClassDefinition
+			var exceptionLiteral : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::ReturnException",false)
+			newExp.target:=exceptionLiteral
 				
-				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ReturnException")
-				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
 				
 				
 			if ~value!=void then
-				var returnValueAssign : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
+				var returnValueAssign : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("returnWithValue",true)
 				out.expression:=returnValueAssign
-				returnValueAssign.name:="returnWithValue"
 				returnValueAssign.target:=newExp
 				~value.range2domain(context)
 				returnValueAssign.parameters.add(~value.output.asType(org::kermeta::language::behavior::Expression))
@@ -304,15 +300,10 @@ aspect class BreakExp {
 				var out : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 				output:=out
 				
-				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-				newExp.name:="new"
-
-				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
-				newExp.target:=exceptionLiteral
-				var exceptionCD : org::kermeta::language::structure::ClassDefinition
+				var newExp : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
 				
-				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::BreakException")
-				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
+				var exceptionLiteral :behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::BreakException",false)
+				newExp.target:=exceptionLiteral
 				
 				out.expression:=newExp				
 			
@@ -329,15 +320,10 @@ aspect class ContinueExp {
 				var out : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 				output:=out
 				
-				var newExp : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-				newExp.name:="new"
+				var newExp : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
 
-				var exceptionLiteral : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+				var exceptionLiteral :behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::ContinueException",false)
 				newExp.target:=exceptionLiteral
-				var exceptionCD : org::kermeta::language::structure::ClassDefinition
-				
-				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ContinueException")
-				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
 				
 				out.expression:=newExp				
 			
@@ -438,9 +424,9 @@ aspect class DictLiteralExp {
 			//add values
 			
 			part.each{ p|
-				var callPut : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var callPut : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("put",true)
 				out.statement.add(callPut)
-				callPut.name:="put"
+				
 				var callTable : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
 				callPut.target:=callPut
 				callTable.name:=varDec.identifier
