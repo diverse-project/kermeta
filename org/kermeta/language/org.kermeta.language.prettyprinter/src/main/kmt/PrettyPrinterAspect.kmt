@@ -111,7 +111,7 @@ package org::kermeta::language{
 					
 					result := result + printIndent(indent)+"}\n"
 				else
-					result:=""
+					result:="/*classdef with no name*/"
 					StdIO.writeln("classdef with no name")
 				end
 			end
@@ -122,7 +122,7 @@ package org::kermeta::language{
 					result := typeDefinition.qualifiedName
 					
 				else
-					result:=""
+					result:="/*class with no typedef*/"
 					StdIO.writeln("class with no typedef")
 				end
 						
@@ -222,6 +222,7 @@ package org::kermeta::language{
 							end
 						else
 							StdIO.writeln("param with no name")
+							result :=result + "/*param with no name*/"
 						end
 						i := i + 1
 					}
@@ -230,6 +231,7 @@ package org::kermeta::language{
 				if not type.isVoid then
 					result := result + ":" + self.type.typePrettyPrint(indent)
 				else
+					result := result +"/*missing type*/"
 					StdIO.writeln("op with no type"+name)
 				end
 				result := result + " is\n"
@@ -277,7 +279,7 @@ package org::kermeta::language{
 					result:= result + "\n"
 	
 				else
-					result:=""
+					result:="/*property with no name or type*/"
 					StdIO.writeln("property with no name or type")
 				end
 			end
@@ -327,7 +329,8 @@ package org::kermeta::language{
 					end
 					result := result+~value.prettyPrint(indent+1)
 				else
-					StdIO.writeln("Assignment without target or value")	
+					StdIO.writeln("Assignment without target or value")
+					result := "/*Assignment without target or value*/"	
 				end
 			
 			end
@@ -377,7 +380,7 @@ package org::kermeta::language{
 					end
 					
 				else
-					result:=""
+					result:="/*call expression without name*/"
 					StdIO.writeln("call expression without name")
 				end
 			end
@@ -402,7 +405,7 @@ package org::kermeta::language{
 				if not name.isVoid then
 					result := Helper.keywordEscape(name)
 				else
-					result:=""
+					result:="/*CallVariable without name*/"
 					StdIO.writeln("CallVariable without name")
 				end
 			end
@@ -415,11 +418,12 @@ package org::kermeta::language{
 				if (not self.thenBody.isVoid) then
 					result := result + printIndent(indent+1)+self.thenBody.prettyPrint(indent+1)+"\n"
 				else
+					result := result + printIndent(indent+1)+ "/* missing thenbody*/\n"
 					StdIO.writeln("if without thenbody")
 				end
 				if (not self.elseBody.isVoid) then
 					result := result + printIndent(indent)+ "else\n"
-					result := result + self.elseBody.prettyPrint(indent+1)
+					result := result + printIndent(indent+1)+self.elseBody.prettyPrint(indent+1)+"\n"
 				end
 				result :=result + printIndent(indent)+ "end\n" 
 			end
@@ -455,12 +459,17 @@ package org::kermeta::language{
 							result := result+" : "+p.type.prettyPrint(indent)
 						end
 					else
+						result := result+" /*missing param name*/ "
 						StdIO.writeln("param with no name")
 					end
 					
 					}
 				result := result+"|\n"+printIndent(indent+1)
-				result := result+body.prettyPrint(indent+1)
+				if not body.isVoid then
+					result := result+body.prettyPrint(indent+1)
+				else
+					result := result+" /*missing body*/ "
+				end
 				result := result +"}"
 			end
 		}
