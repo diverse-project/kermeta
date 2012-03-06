@@ -181,7 +181,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       }
       res.append("}")
     } else {
-      res.append("var result : ")
+      res.append("var `~result` : ")
       getListorType(thi, res)
       //res append "Any"
       res.append(" = null.asInstanceOf[")
@@ -189,7 +189,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       res.append("]; \n")
 
       res.append(visit(thi.getGetterBody, res))
-      res append " \n return result\n}"
+      res append " \n return `~result`\n}"
 
       //            res.append("\n}")
     }
@@ -240,7 +240,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       //println(thi.getName)
       res.append("def " + GlobalConfiguration.scalaPrefix)
       res.append(thi.getName + "_=(")
-      res.append("value : ")
+      res.append("`~value` : ")
       var listType = new StringBuilder
       getListorType(thi, listType)
       res.append(listType.toString)
@@ -254,11 +254,11 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           }
           res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().clear\n")
           if (listType.toString.equals("java.util.List[_root_.java.lang.Object]") && Util.hasEcoreTag(thi))
-            res.append("value.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n")
+            res.append("`~value`.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n")
           else
-            res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().addAll(value)\n")
+            res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().addAll(`~value`)\n")
         } else {
-          res.append("this." + prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "(value)")
+          res.append("this." + prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "(`~value`)")
         }
       } else {
         if (thi.getSetterBody != null) {

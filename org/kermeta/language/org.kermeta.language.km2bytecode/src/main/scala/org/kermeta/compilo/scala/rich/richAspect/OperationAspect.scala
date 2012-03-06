@@ -95,7 +95,7 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
       }
       //this.getType.generateScalaCode(res)
         res.append(" = {\n")
-        res.append("var result : ")
+        res.append("var `~result` : ")
         this.getListorType(thi,res)
         //   this.getType.generateScalaCode(res)
         //res append "Any"
@@ -123,7 +123,7 @@ res append "  }\n}\n"
       else{
              //   println(res1.toString())
 
-          res append " return result\n}\n"
+          res append " return `~result`\n}\n"
       }
         //this.getType.generateScalaCode(res)
         //res append "]\n}\n"

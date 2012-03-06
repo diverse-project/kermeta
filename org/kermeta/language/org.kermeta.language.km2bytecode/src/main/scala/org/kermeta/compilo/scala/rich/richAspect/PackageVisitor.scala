@@ -242,11 +242,16 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitCallResult(thi: CallResult, res: StringBuilder): Unit = {
-    res.append("result")
+    res.append("`~result`")
+    if (thi.getParameters().size > 0) {
+      res.append("(")
+      thi.getParameters().foreach(par => visit(par, res))
+      res.append(")")
+    }
   }
 
   def visitCallValue(thi: CallValue, res: StringBuilder): Unit = {
-    res.append(Util.protectScalaKeyword(thi.getName()))
+    res.append("`~value`")
     if (thi.getParameters().size > 0) {
       res.append("(")
       thi.getParameters().foreach(par => visit(par, res))
