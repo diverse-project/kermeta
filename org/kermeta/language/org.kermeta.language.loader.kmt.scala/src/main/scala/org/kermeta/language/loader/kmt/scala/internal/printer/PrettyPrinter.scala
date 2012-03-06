@@ -53,6 +53,16 @@ object PrettyPrinter {
         p.getOwnedTypeDefinition.foreach(e => print(e, res))
         res.append("\n}\n")
       }
+      case pt: PrimitiveType =>{
+        pt.getKOwnedTags.foreach{tag =>
+          res.append("\t")
+          print(tag, res)
+        }
+        res.append("\t")
+        res.append("alias " + pt.getName() + " : ")
+        print(pt.getInstanceType, res)
+        res.append("\n")
+      }
       case c: ClassDefinition => {
         c.getKOwnedTags.foreach{tag =>
           res.append("\t")

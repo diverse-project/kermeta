@@ -21,7 +21,7 @@ import scala.util.parsing.input.Positional
 /**
  * Sub parser dedicated to parse ModelingUnit in KMT textual syntax  
  */
-trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingParser  {
+trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingParser with KAliasParser {
 	
   case class NameSpacePrefix(name : String) extends Positional
   case class ExpressionWrapper(expr : Expression) extends Positional
@@ -172,7 +172,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   }
 
 
-  def annotableElement = kpositioned (subPackageDecl | classDecl | enumDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
+  def annotableElement = kpositioned (subPackageDecl | classDecl | enumDecl | aliasStmt)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
 
   def subPackageDecl = "package" ~ rep1sep(ident,"::") ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage
@@ -199,6 +199,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
           case cdef : ClassDefinition => currentPackage.getOwnedTypeDefinition.add(cdef)
           case enum : Enumeration => currentPackage.getOwnedTypeDefinition.add(enum)
           case subPack : Package => currentPackage.getNestedPackage.add(subPack);subPack.setNestingPackage(currentPackage)
+          case alias : PrimitiveType => currentPackage.getOwnedTypeDefinition.add(alias)
           case _ => println("unknow subelem")
               /*
               case cdef : ClassDefinition => newp.getOwnedTypeDefinition.add(cdef)
