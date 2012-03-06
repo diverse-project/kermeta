@@ -5,6 +5,8 @@
 		<topic label="Kermeta manual" href="Kermeta-Manual.docb/Kermeta-Manual.docb.html"> 
 			<link toc="Kermeta-Manual.docb/toc.xml" />
 		</topic>
+		<topic label="Kermeta 1 to Kermeta 2 migration guide (Online)" href="http://www.kermeta.org/documents/dev/kermeta2/migrationguide">
+		</topic>
 	<!--	<topic label="KerMeta user interface" href="build/eclipse.help/KerMeta-UI-UserGuide/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
 		</topic> -->
