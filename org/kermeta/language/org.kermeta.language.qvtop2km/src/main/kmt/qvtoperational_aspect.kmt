@@ -184,7 +184,6 @@ aspect class MappingOperation {
 			//the isStrict parameter that should tell the behavior of the guard
 			if (self.~result != void) then
 				
-				
 				//TODO check if it is still useful
 				if self.~result.one.type.output==void then
 					StdIO.writeln("createTypedefinition "+self.~result.one.type.name)
@@ -203,18 +202,12 @@ aspect class MappingOperation {
 				resParam.containedType.add(resParam.type)
 			end
 			
-			
 			var resStrict : structure::Parameter init structure::Parameter.new
 			out.ownedParameter.add(resStrict)
 			resStrict.name:="isStrict"
 			resStrict.lower:=0
 			resStrict.upper:=1
-			//resStrict.isOrdered:=true
-			//resStrict.isUnique:=false
-			//var boolType : structure::Class init structure::Class.new
-			//resStrict.type:=boolType
 			resStrict.type:=structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
-			//boolType.typeDefinition?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
 			resStrict.containedType.add(resStrict.type)
 			
 			
@@ -231,13 +224,8 @@ aspect class MappingOperation {
 				if self.~result.size>1 then
 					raise QvtNotImplementedException.new.initialize("Mappings with multiple results")
 				end
-				
-				
 				out.type:=self.~result.one.type.generateType(context)
 				out.containedType.add(out.type)
-				/* org::kermeta::language::structure::Class.new
-				out.containedType.add(out.type)
-				out.type.asType(org::kermeta::language::structure::ParameterizedType).typeDefinition?=self.~result.one.type.output*/
 			end
 			
 			//set body of output operation
@@ -330,16 +318,17 @@ aspect class MappingBody {
 				//call violated guard exception
 				var raiseExcep : behavior::Raise init behavior::Raise.new
 				
-				var newCall : behavior::CallFeature init behavior::CallFeature.new
-				raiseExcep.expression:=newCall
-				newCall.name:="new"
+				var newCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
+				//raiseExcep.expression:=newCall
+				//newCall.name:="new"
 
-				var exceptionLiteral : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
-				newCall.target:=exceptionLiteral
-				var exceptionCD : structure::ClassDefinition
+				newCall.target:=behavior::UnresolvedCall.new.initialize("root_package::ViolatedGuardException", false)
+				//var exceptionLiteral : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
+				//newCall.target:=exceptionLiteral
+				//var exceptionCD : structure::ClassDefinition
 				
-				exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ViolatedGuardException")
-				exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
+				//exceptionCD?= context.kmtContext.getFromQualifiedName("root_package::ViolatedGuardException")
+				//exceptionLiteral.typeref:=exceptionCD.generateTypeRef()
 				
 				whenCond.thenBody:=raiseExcep
 			end
@@ -356,6 +345,7 @@ aspect class MappingBody {
 				resultVar.name:="result"
 			end
 			StdIO.writeln("MappingBody::range2domain-2")
+			
 			//start initialization section
 			do
 				var initBlock : behavior::Block init behavior::Block.new
@@ -381,6 +371,7 @@ aspect class MappingBody {
 				StdIO.writeln("MappingBody::range2domain-24")
 			end
 			StdIO.writeln("MappingBody::range2domain-3")
+			
 			//add inheritance calls
 			do
 				~operation.asType(MappingOperation).inherited.each{
@@ -400,12 +391,14 @@ aspect class MappingBody {
 				}
 			end
 			StdIO.writeln("MappingBody::range2domain-4")
+			
 			//create trace
 			do
 				var trace : behavior::Expression init createTrace(context)
 				out.statement.add(trace)
 				trace.addDocumentationTag("trace generation")
 			end
+			
 			StdIO.writeln("MappingBody::range2domain-5")
 			//create all content
 			content.each{oclexp|
@@ -442,58 +435,30 @@ aspect class MappingBody {
 			var isStrictCall : behavior::CallVariable init behavior::CallVariable.new
 			strictTest.condition:=isStrictCall
 			isStrictCall.name:="isStrict"
-			
-			
 		end
-		
 	end
 
 
 	//generate the trace of the mapping
 	operation createTrace(context : Qvt2KermetaContext) : behavior::Expression is do
 		//StdIO.writeln("MappingBody::createTrace")
-		var cf_trace :  behavior::CallFeature init behavior::CallFeature.new
+		var cf_trace :  behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("addTrace", true)
 		result := cf_trace
-		cf_trace.name:="addTrace"
+		
 
 		var call_source : behavior::SelfExpression init behavior::SelfExpression.new
 		cf_trace.parameters.add(call_source)
-		//var call_source : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
-		//call_source.name:="self"
 		
 		var call_target : behavior::CallResult init behavior::CallResult.new
 		cf_trace.parameters.add(call_target)
-		//var call_target : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
-		//call_target.name:="result"
-
+		
 		var traceContext : behavior::StringLiteral init behavior::StringLiteral.new
 		traceContext.~value:=~operation.name
 		cf_trace.parameters.add(traceContext)
 		
 		cf_trace.target:=behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 		
-		/*var cf_cast : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-		cf_cast.name:="asType"
 		
-		var transfoContextCD : org::kermeta::language::structure::ClassDefinition
-		transfoContextCD ?= KmtLib
-				.getDefault
-				.asType(root_package::KmtLib)
-				.getFromQualifiedName("root_package::TransformationContext")
-		
-		var tl_tracetype : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
-		cf_cast.parameters.add(tl_tracetype)
-		tl_tracetype.typeref:=transfoContextCD.generateTypeRef()
-		
-		var cf_getDefault : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-		cf_cast.target:=cf_getDefault
-		cf_getDefault.name:="getDefault"
-		
-		var tl_getDefault : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
-		cf_getDefault.target:=tl_getDefault
-		tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
-		//StdIO.writeln("MappingBody::createTrace-end")
-		*/
 	end
 	
 	
@@ -508,13 +473,11 @@ aspect class MappingBody {
 			//create condition
 			var voidCondition  : behavior::Conditional init behavior::Conditional.new
 			result :=voidCondition
-			var callEquals : behavior::CallFeature init behavior::CallFeature.new
+			var callEquals : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("equals", true)
 			voidCondition.condition:=callEquals
-			callEquals.name:="equals"
-			var callX : behavior::CallVariable 
+			var callX : behavior::CallExpression
 			if vp.name!="result" then
-				callX:=behavior::CallVariable.new
-				callX.name:=vp.name
+				callX:=behavior::UnresolvedCall.new.initialize(vp.name,false)
 			else
 				callX:=behavior::CallResult.new
 			end	
@@ -539,12 +502,12 @@ aspect class MappingBody {
 			
 			assign.target:=callAssignee
 			
-			var newFeat : behavior::CallFeature init behavior::CallFeature.new
+			var newFeat : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
 			var typeLit : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 			var typeR : behavior::TypeReference init behavior::TypeReference.new
 		
 			assign.~value:=newFeat
-			newFeat.name:="new"
+			//newFeat.name:="new"
 			newFeat.target:=typeLit
 			
 			if vp.name == "result" then
@@ -552,9 +515,13 @@ aspect class MappingBody {
 					typeR.type:=~operation.type.generateType(context)
 					if typeR.type.isInstanceOf(structure::Class) then
 						typeR.containedType.add(typeR.type)
-						typeR.name:=typeR.type.asType(structure::Class).name
-					else
 						typeR.name:=typeR.type.asType(structure::NamedElement).name
+					else
+						if typeR.type.isInstanceOf(structure::UnresolvedType) then
+							typeR.containedType.add(typeR.type)
+						else
+							typeR.name:=typeR.type.asType(structure::NamedElement).name
+						end
 					end
 					
 					typeR.upper:=1//~operation.upper
@@ -568,7 +535,11 @@ aspect class MappingBody {
 					typeR.containedType.add(typeR.type)
 					typeR.name:=typeR.type.asType(structure::Class).name
 				else
-					typeR.name:=typeR.type.asType(structure::NamedElement).name
+					if typeR.type.isInstanceOf(structure::UnresolvedType) then
+						typeR.containedType.add(typeR.type)
+					else
+						typeR.name:=typeR.type.asType(structure::NamedElement).name
+					end
 				end
 				typeR.upper:=1
 				typeR.lower:=0
@@ -582,21 +553,17 @@ aspect class MappingBody {
 				var mp : qvtoperational::MappingParameter
 				mp?=vp
 				mp.extent.range2domain(context)
-				var callModelParam : behavior::CallFeature init behavior::CallFeature.new
-				callModelParam.name:=mp.extent.output.asType(structure::Property).name
+				var callModelParam : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(mp.extent.output.asType(structure::Property).name,false)
 				callModelParam.target := behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
-				var callExtent : behavior::CallFeature init behavior::CallFeature.new
-				callExtent.name:="extent"
+				var callExtent : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("extent",false)
 				callExtent.target:=callModelParam
 				
-				var callAddInstance : behavior::CallFeature init behavior::CallFeature.new
+				var callAddInstance : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("add",true)
 				callAddInstance.target:=callExtent
-				callAddInstance.name:="add"
 				
-				var callInstance : behavior::CallVariable 
+				var callInstance : behavior::CallExpression
 				if vp.name!="result" then
-					callInstance:=behavior::CallVariable.new
-					callInstance.name:=vp.name
+					callInstance:=behavior::UnresolvedCall.new.initialize(vp.name,false)
 				else
 					callInstance:= behavior::CallResult.new
 				end
@@ -641,7 +608,7 @@ aspect class MappingBody {
 		StdIO.writeln("MappingBody::createInit-end")
 	end
 	
-	//return the equivalent of the operation return type in terms of collection depending on the cardinality, unicity and order
+	/**return the equivalent of the operation return type in terms of collection depending on the cardinality, unicity and order*/
 	operation resultType(context : Qvt2KermetaContext) : behavior::TypeReference is do
 			//StdIO.writeln("MappingBody::resultType") 
 			result:=behavior::TypeReference.new

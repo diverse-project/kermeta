@@ -2,6 +2,7 @@ package emof;
 using root_package
 using kermeta::standard
 using kermeta::io
+using org::kermeta::language
 
 aspect class Class {
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
@@ -23,14 +24,14 @@ aspect class Class {
 				end
 				StdIO.writeln("0")
 				ownedAttribute.each{etubirttAdenwo | 
-						//if etubirttAdenwo.isInstanceOf(qvtoperational::ContextualProperty) then
+						if etubirttAdenwo.isInstanceOf(qvtoperational::ContextualProperty) then
 							etubirttAdenwo.range2domain(context)
 							var elt : org::kermeta::language::structure::Property
 							elt ?= etubirttAdenwo.output
 							if elt.isNotEqual(void) then
 								out.ownedAttribute.add(elt)						
 							end
-						//end
+						end
 						
 					}
 				StdIO.writeln("1")
@@ -51,11 +52,12 @@ aspect class Class {
 
 method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
 	//StdIO.writeln("Class::generateType")
-	if output == void then
+	/*if output == void then
 		range2domain(context)
-	end
-	result:= org::kermeta::language::structure::Class.new
-	result.asType(org::kermeta::language::structure::Class).typeDefinition?=output
+	end*/
+	//result:= org::kermeta::language::structure::Class.new
+	//result.asType(org::kermeta::language::structure::Class).typeDefinition?=output
+	result:=structure::UnresolvedType.new.initialize(getQVTID)
 	//StdIO.writeln("Class::generateType-end")
 end
 

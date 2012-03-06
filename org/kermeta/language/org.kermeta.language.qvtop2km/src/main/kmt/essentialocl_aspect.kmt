@@ -104,11 +104,11 @@ aspect class PropertyCallExp{
 
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		StdIO.writeln("PropertyCallExp::range2domain")
-		var out : org::kermeta::language::behavior::CallProperty init org::kermeta::language::behavior::CallProperty.new
-		referredProperty.range2domain(context)
+		var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(referredProperty.name,false)
+		/*referredProperty.range2domain(context)
 		out.staticProperty?=referredProperty.output
 		out.name:=referredProperty.name
-		
+		*/
 		source.range2domain(context)
 		out.target?=source.output
 		output:=out

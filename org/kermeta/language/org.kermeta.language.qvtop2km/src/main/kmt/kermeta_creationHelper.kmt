@@ -98,6 +98,18 @@ package structure{
 	}
 	
 	aspect class ClassDefinition {
+	
+		/** at the end of the transformation a classdef is considered as useless if it's an aspect and no attributes or operation have been added
+		
+		*/
+		operation isUseless() : Boolean is do
+			result:=isAspect and ownedAttribute.isEmpty and ownedOperation.isEmpty
+			StdIO.writeln("class removed "+name)
+			StdIO.writeln(isAspect.toString)
+			StdIO.writeln(ownedAttribute.isEmpty.toString)
+			StdIO.writeln(ownedOperation.isEmpty.toString)
+			StdIO.writeln(result.toString)
+		end
 		operation generateTypeRef() : org::kermeta::language::behavior::TypeReference is do
 			result:=org::kermeta::language::behavior::TypeReference.new
 			result.lower:=0
@@ -125,6 +137,18 @@ package structure{
 			varBinding.containedType.add(paramType)
 		
 		end
+	}
+	
+	aspect class Package {
+	
+		operation removeEmptyClasses() is do
+			
+			var toRemove : Collection[TypeDefinition] init ownedTypeDefinition.select{td|td.isInstanceOf(ClassDefinition).andThen{x|td.asType(ClassDefinition).isUseless}}
+			toRemove.each{x|ownedTypeDefinition.remove(x)}
+			nestedPackage.each{p|p.removeEmptyClasses}
+		
+		end
+	
 	}
 	
 	aspect class PrimitiveType {
