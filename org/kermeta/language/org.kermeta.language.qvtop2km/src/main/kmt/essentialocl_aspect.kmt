@@ -381,13 +381,17 @@ aspect class Variable {
 			out.addDocumentationTag("initialized from initExpression does it need a new ?")
 		else
 			//initialization of the variable
-			var newFeat : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			var newFeat : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.initialize("new",false)
+			//var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			type.range2domain(context)
 			
 			out.initialization:=newFeat
-			newFeat.name:="new"
-			newFeat.target:=typeLit
-			type.range2domain(context)
+			//TODO should work in most case, but maybe not for types from qvtlib nor for collections
+			newFeat.target:=behavior::UnresolvedCall.new.initialize(type.getQVTID,false)
+			//newFeat.target:=typeLit
+			
+			
+			/*
 			if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
 				typeLit.typeref:=type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef()
 			else
@@ -400,12 +404,15 @@ aspect class Variable {
 					typeLit.typeref.containedType.add(type.output.asType(org::kermeta::language::structure::Class))
 					end
 				end
-			end
+			end*/
 		end
 		
 		type.range2domain(context)
-		if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+		//TODO should work in most case, but maybe not for types from qvtlib nor for collections
+		out.type:=structure::UnresolvedType.new.initialize(type.getQVTID).generateTypeRef()
+		/*if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
 			out.type:=type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef()
+			
 		else
 			if type.output.isInstanceOf(org::kermeta::language::structure::PrimitiveType) then
 				out.type:=type.output.asType(org::kermeta::language::structure::PrimitiveType).generateTypeRef()
@@ -416,7 +423,7 @@ aspect class Variable {
 					//out.containedType.add(type.output.asType(org::kermeta::language::structure::Class))
 				end
 			end
-		end
+		end*/
 		
 	end
 }
@@ -494,21 +501,17 @@ aspect class SequenceType {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			var out : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			var out : structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Sequence")
 			output:=out
-			var cd : org::kermeta::language::structure::ClassDefinition
-			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::Sequence")
-			out.typeDefinition:=cd 
-			var tvarBinding : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
-			tvarBinding.variable :=cd.typeParameter.one
-			out.typeParamBinding.add(tvarBinding)
-			
+			 
 			elementType.range2domain(context)
-			tvarBinding.type:=elementType.generateType(context)
-			
-			if tvarBinding.type.container==void then 
-				tvarBinding.containedType.add(tvarBinding.type)
+			var generic : structure::Type init elementType.generateType(context)
+			out.generics.add(generic)
+			if not generic.isInstanceOf(structure::TypeDefinition) then 
+				out.containedType.add(generic)
 			end
+			
+			
 			
 		end
 	end

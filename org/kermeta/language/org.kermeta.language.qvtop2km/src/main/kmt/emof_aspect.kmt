@@ -118,52 +118,37 @@ aspect class PrimitiveType
 		//StdIO.writeln("PrimitiveType::range2domain")
 		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
 		if output==void then
-			var out : org::kermeta::language::structure::PrimitiveType init org::kermeta::language::structure::PrimitiveType.new
+			var out : structure::PrimitiveType init structure::PrimitiveType.new
 			out.name:=name
 			output:=out
 			
 			if self.name=="EString" or self.name=="String" then
-				var stringCD : org::kermeta::language::structure::ClassDefinition 
+						
 				
-				stringCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::String")
-				var stringClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
-				stringClass.typeDefinition := stringCD
-				
+				var stringClass: structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::String")
+							
 				out.instanceType := stringClass
 				out.containedType.add(stringClass)
 				
 				
 			end
 			if self.name=="EInt" or self.name=="Integer" or self.name=="UnlimitedNatural" then
-				var integerCD : org::kermeta::language::structure::ClassDefinition 
-				
-				integerCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Integer")
-				var integerClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
-				integerClass.typeDefinition := integerCD
+				var integerClass: structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Integer")
 				
 				out.instanceType := integerClass
 				out.containedType.add(integerClass)
 			end
 			if self.name=="EBoolean" or self.name=="Boolean" then
-				StdIO.writeln("Primitive type boolean : "+name+" "+out.toString)
-				var pack : emof::Package 
-				pack?= self.container()
-				StdIO.writeln(pack.name)
-				var boolCD : org::kermeta::language::structure::ClassDefinition 
 				
-				boolCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
-				var boolClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
-				boolClass.typeDefinition := boolCD
+				
+				var boolClass: structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
 				
 				out.instanceType := boolClass
 				out.containedType.add(boolClass)
 			end
 			if self.name=="EFloat" or self.name=="Real" then
-				var realCD : org::kermeta::language::structure::ClassDefinition 
 				
-				realCD ?=context.kmtContext.getFromQualifiedName("kermeta::standard::Real")
-				var realClass: org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
-				realClass.typeDefinition := realCD
+				var realClass: structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Float")
 				
 				out.instanceType := realClass
 				out.containedType.add(realClass)
@@ -171,8 +156,8 @@ aspect class PrimitiveType
 			end
 			
 			if out.instanceType ==void then
-				var anyClass : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
-				anyClass.typeDefinition ?= context.kmtContext.getFromQualifiedName("org::kermeta::language::structure::Object")
+				var anyClass : structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Object")
+				
 				out.instanceType := anyClass
 				out.containedType.add(anyClass)
 			end			
@@ -253,7 +238,7 @@ aspect class Property
 					if type.isNotEqual(void) then
 						StdIO.writeln("4")
 						out.type := type.generateType(context)
-							if (out.type!=void).andThen{x| not out.type.isInstanceOf(org::kermeta::language::structure::PrimitiveType)} then
+							if (out.type!=void).andThen{x| not out.type.isInstanceOf(structure::PrimitiveType)} then
 								out.containedType.add(out.type)
 								StdIO.writeln("emof::Property create type "+type.name)
 							else
