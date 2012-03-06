@@ -1,0 +1,40 @@
+/* $Id:$ 
+ * Creation : March 6, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+aspect class PrimitiveType
+{
+	// This invariant will never be evaluated when building and executing a kermeta project
+	// because there is no way of specifying a superType for a PrimitiveType in Kermeta
+	// However, it may be useful when checking an external km file, where a user could have
+	// specified by hand a superType in a km.
+	/**
+	 * No super types allowed for primitive types
+	 */
+	@Scope "TOTAL"
+	inv no_supertype is do 
+		if (self.superType.isVoid)
+		then
+			true
+		else
+			if (self.superType.size>0)
+			then
+				false
+			else
+				true
+			end
+		end
+	end
+}
