@@ -401,10 +401,15 @@ class String {
          operation regionMatches(arg0:Boolean,arg1:Integer,arg2:String,arg3:Integer,arg4:Integer) : Boolean is do
 
           end
-        /*@CompilerIgnore "true"
-         operation replace(arg0:Character,arg1:Character) : String is do
+          /**
+            * create a new string where all  occurences of arg0 are replaced by arg1
+            * deprecated please use replaceAll instead
+            */ 
+        @CompilerIgnore "true"
+        @deprecated "please use replaceAll instead of replace"
+         operation replace(arg0:String,arg1:String) : String is do
 
-          end*/
+          end
         @CompilerIgnore "true"
          operation replaceAll(arg0:String,arg1:String) : String is do
 
@@ -491,12 +496,7 @@ class String {
         @CompilerIgnore "true"
         operation elementAt(index : Integer) : Character is do
         end
-/*
-        //@CompilerIgnore "true"
-        @Deprecated "true"
-        operation replace(str1 : String, str2 : String) : String is do
-        end
-*/
+
         @CompilerIgnore "true"
         operation toInteger() : Integer is do
         end
