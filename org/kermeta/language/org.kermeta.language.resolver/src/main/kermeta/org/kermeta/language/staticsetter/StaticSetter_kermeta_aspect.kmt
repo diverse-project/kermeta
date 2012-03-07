@@ -105,7 +105,7 @@ package structure {
 			context.currentOperation := self
 			context.pushContext()
 			self.ownedParameter.each{ param | 				
-				context.addSymbol( param.name, param.type)
+				context.addSymbol( param.name, context.createTypeFromMultiplicityElement(param))
 			}			
 			super(context)
 			context.popContext()
