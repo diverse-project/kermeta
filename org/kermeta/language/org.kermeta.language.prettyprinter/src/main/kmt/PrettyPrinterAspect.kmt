@@ -191,7 +191,7 @@ package org::kermeta::language{
 		aspect class Operation{
 			method prettyPrint(indent : Integer) : String is do
 				
-				result :=printIndent(indent)+ "operation "+self.name()+"("
+				result :=printIndent(indent)+ "operation "+ Helper.keywordEscape(self.name())+"("
 				if (not self.ownedParameter.isVoid) then
 					var i : Integer init 0
 					self.ownedParameter.each{ oneParam |
@@ -577,7 +577,7 @@ package org::kermeta::language{
 						else
 							result:=result+" ,\n"+printIndent(indent+2)
 						end
-						result:=result+p.prettyPrint(indent+1)
+						result:=result+p.prettyPrint(indent+2)
 					}
 					
 					result:=result+")"
