@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:stateMachine="htpp://pruning.org/SM.stateMachine">
+  <stateMachine:Transition source="/6" target="/2"/>
+  <stateMachine:Transition source="/2" target="/6"/>
+  <stateMachine:StandardState name="s1" outgoingTransitions="/1"/>
+  <stateMachine:Transition source="/6" target="/6"/>
+  <stateMachine:Transition source="/6" target="/5"/>
+  <stateMachine:TerminalState name="end"/>
+  <stateMachine:StandardState name="s2" outgoingTransitions="/0 /3 /4"/>
+</xmi:XMI>

@@ -1,0 +1,54 @@
+/*
+ * Creation : November 22, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+using kermeta::standard
+
+
+aspect class ENamedElement {
+	operation getQualifiedName() : String is do
+		result := name
+		
+		if((not container.isVoid).andThen{b | container.isInstanceOf(ENamedElement)}) then
+			result := container.asType(ENamedElement).getQualifiedName() + "::" + name 
+		end
+	end
+}
+
+aspect class EClass {
+	operation getConcreteSubClasses(allClasses : Bag<EClass>) : Sequence<EClass> is do
+		result := allClasses.select{clazz | (not clazz.~abstract).andThen{b | self.isSuperTypeOf(clazz) }}
+	end
+
+
+	operation canBeRootClass(allClasses : Bag<EClass>) : Boolean is do
+		result := (not ~abstract).andThen{b | eStructuralFeatures.exists{st | st.isInstanceOf(EReference).andThen{b2| st.asType(EReference).containment}}}.andThen{b|
+				not allClasses.exists{clazz | (self!=clazz).andThen{b2| clazz.hasStructFeatureWithType(self) }}}
+	end
+	
+	operation hasStructFeatureWithType(clazz : EClass) : Boolean is do
+		result := eStructuralFeatures.exists{st | st.isInstanceOf(EReference).andThen{b3 | st.asType(EReference).containment.andThen{b2 |
+		 (st.eType.getQualifiedName==clazz.getQualifiedName).orElse{b | st.eType.isInstanceOf(EClass).andThen{b2 | st.eType.asType(EClass).isSuperTypeOf(clazz) }}}}}
+	end
+
+	/**
+	 * @param clazz The class to test.
+	 * @return True: If the calling class is a super type of the given class.
+	*/
+	operation isSuperTypeOfBis(clazz : EClass) : Boolean is do
+		result := not clazz.isVoid
+		var qualifiedName : String init getQualifiedName
+
+		if(result) then
+			result := clazz.eSuperTypes.exists{cl | cl.getQualifiedName.equals(qualifiedName)}
+
+			if(not result) then
+				result := clazz.eSuperTypes.exists{st | self.isSuperTypeOfBis(st) }
+			end
+		end
+	end
+}

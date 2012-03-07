@@ -1,0 +1,86 @@
+/*
+ * Creation : November 24, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "ex::stateMachine::Test"
+@mainOperation "main"
+
+
+package ex::stateMachine;
+
+require kermeta
+require "./output/StateMachineSlicer.kmt"
+
+using kermeta::standard
+
+
+class Test {
+	operation main() : Void is do
+		var requiredStates : Bag<State> init Bag<State>.new
+		var sm : StateMachine init createStateMachineModel(requiredStates)
+		
+		var pruning : StateMachineSlicer init StateMachineSlicer.new.initialise(requiredStates)
+		
+		pruning.launch()
+	end
+	
+	
+	operation createStateMachineModel(requiredStates : Bag<State>) : StateMachine is do
+		result := StateMachine.new
+		
+		var initState : InitState init InitState.new
+		var s1 : StandardState init StandardState.new
+		var s2 : StandardState init StandardState.new
+		var terminal : TerminalState init TerminalState.new
+		var transition : Transition init Transition.new
+		
+		initState.name := "init"
+		s1.name := "s1"
+		s2.name := "s2"
+		terminal.name := "end"
+		
+		result.initState := initState
+		result.states.add(initState)
+		result.states.add(s1)
+		result.states.add(s2)
+		result.states.add(terminal)
+		
+		transition.source := initState
+		transition.target := s1
+		result.transitions.add(transition)
+		initState.outgoingTransitions.add(transition)
+		s1.ingoingTransitions.add(transition)
+		
+		transition := Transition.new
+		transition.source := s1
+		transition.target := s2
+		result.transitions.add(transition)
+		s1.outgoingTransitions.add(transition)
+		s2.ingoingTransitions.add(transition)
+		
+		transition := Transition.new
+		transition.source := s2
+		transition.target := s1
+		result.transitions.add(transition)
+		s2.outgoingTransitions.add(transition)
+		s1.ingoingTransitions.add(transition)
+		
+		transition := Transition.new
+		transition.source := s2
+		transition.target := s2
+		result.transitions.add(transition)
+		s2.outgoingTransitions.add(transition)
+		s2.ingoingTransitions.add(transition)
+		
+		transition := Transition.new
+		transition.source := s2
+		transition.target := terminal
+		result.transitions.add(transition)
+		s2.outgoingTransitions.add(transition)
+		terminal.ingoingTransitions.add(transition)
+		
+		requiredStates.add(s2)
+	end 
+}

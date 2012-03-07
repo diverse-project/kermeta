@@ -1,0 +1,296 @@
+/*
+ * Creation : December 8, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package org2::kermeta::kompren::slicing;
+
+using ecore
+using kermeta::utils
+using kermeta::standard
+using kermeta::io
+using kermeta::io::StdIO => stdio
+
+
+class SlicerGenerator {
+	reference metamodel : EPackage
+
+	attribute modelURI : String
+
+	attribute requiredAspectFiles : Hashtable<String, String>
+	
+	reference slicerModel : Slicer
+	
+	reference aspectisedClasses : EClass[0..*]
+	
+	attribute slicerAspectGenerator : SlicerAspectGenerator
+
+	attribute slicerClassGenerator : SlicerClassGenerator
+	
+	attribute hasOpposite : Boolean
+	
+	attribute allClasses : Bag<EClass>
+	
+	reference rootClass : EClass
+	
+	
+	
+	operation initialise(slicerModel : Slicer, metamodel : EPackage, modelURI : String) : SlicerGenerator is do
+		result := self
+		self.hasOpposite := false
+		self.requiredAspectFiles := Hashtable<String, String>.new
+		self.slicerModel := slicerModel
+		self.metamodel   := metamodel
+		self.modelURI 	 := modelURI
+		checkClassesToSlice()
+		updateModelForStrictSlicing()
+		slicerAspectGenerator:= SlicerAspectGenerator.new.initialise(self)
+		slicerClassGenerator := SlicerClassGenerator.new.initialise(self)
+		
+		self.slicerModel.slicedElements.each{se |
+			if(se.isInstanceOf(SlicedProperty)) then
+				var rel : SlicedProperty init se.asType(SlicedProperty)
+				if(not rel.opposite.isVoid) then
+					hasOpposite := true
+					// We change the slicing data to use of the opposite.
+					var ref : EReference init EReference.new
+					var relation : SlicedProperty init SlicedProperty.new
+					ref.name := rel.opposite.name
+					ref.eType:= rel.domain.eContainingClass
+					ref.eOpposite := rel.domain.asType(EReference)
+					rel.domain.eType.asType(EClass).eStructuralFeatures.add(ref)
+					ref.lowerBound := 0
+					ref.upperBound := -1
+					ref.containment := false
+					relation.domain := ref
+					relation.opposite := void
+					relation.isOption := false
+					ref.eContainingClass.outputFocusedRelations.add(relation)
+					rel.domain := ref
+					//FIXME and about expression?
+				else
+					rel.domain.eContainingClass.outputFocusedRelations.add(rel)
+				end
+			end
+		}
+		
+		defineClassesToAspectise()
+		
+		if(hasOpposite) then
+			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
+			self.rootClass := computeRootClass()
+		end
+	end
+	
+	
+	
+	operation updateModelForStrictSlicing() is do
+		if(slicerModel.strict) then
+			slicerModel.onEnd := "		var repository : EMFRepository init EMFRepository.new
+		var resource : EMFResource 
+ 		resource ?= repository.createResource(\"./slice.xmi\", \"" + slicerModel.uriMetamodel + "\")
+ 		
+ 		resource.addAll(sliceRoots)
+ 		resource.save()"
+ 		
+ 			slicerModel.helper := "	operation addToRoot(obj : Object) is do
+		var cont : Object init obj.container
+		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | 
+			(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
+			sliceRoots.add(obj)
+		end
+	end"
+		end
+	end
+	
+	
+	
+	// This operation check that if a sliced class has relations with 1 cardinality, the type of these
+	// relation must be sliced too. This process occurs only when the slicer is defined as strict.
+	// This operation also checks that if an abstract class is sliced, all its concrete sub-types are sliced as well.
+	operation checkClassesToSlice() is do
+		var coll : Bag<SlicedElement> init Bag<SlicedElement>.new
+	
+		if(slicerModel.strict) then
+			var newSlicedClass : SlicedClass
+			var ref : EReference
+
+			slicerModel.slicedClasses.each{sc | sc.domain.eStructuralFeatures.each{sf |
+				if(sf.isInstanceOf(EReference)) then
+					ref:= sf.asType(EReference)
+					if((ref.lowerBound==1).andThen{b | not slicerModel.slicedClasses.exists{cl |
+					 cl.domain.getQualifiedName==ref.eType.getQualifiedName} }) then
+						newSlicedClass := SlicedClass.new
+						newSlicedClass.domain := ref.eType.asType(EClass)
+						coll.add(newSlicedClass)
+					end
+				end
+			}}
+		end
+		
+		var slicedClassesToRemove : Sequence<SlicedElement> init Sequence<SlicedElement>.new
+
+		slicerModel.slicedClasses.select{sc | sc.domain.~abstract}.each{sc |
+			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
+
+			slicedClassesToRemove.add(sc)
+			var sub : Sequence<EClass> init sc.domain.getConcreteSubClasses(allClasses)
+			sub.each{subClass |
+				if(not slicerModel.slicedClasses.exists{sc2 | sc2.domain.getQualifiedName==subClass.getQualifiedName}) then
+					var slicedClass : SlicedClass init SlicedClass.new
+					slicedClass.domain := subClass
+					coll.add(slicedClass)
+				end
+			}
+		}
+		
+		slicedClassesToRemove.each{cl | slicerModel.slicedElements.remove(cl)}
+		
+		if(not coll.empty) then
+			coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
+			// We must re-call this operation to check required relation of the added classes.
+			checkClassesToSlice()
+		end
+	end
+	
+	
+	// Computes the root class of the metamodel.
+	operation computeRootClass() : EClass is do
+		var roots : Sequence<EClass> init allClasses.select{clazz | clazz.canBeRootClass(allClasses) }
+		
+		if(roots.isEmpty()) then
+			result := void
+			stdio.writeln("ERROR: NO ROOT CLASS DETECTED!")
+		else
+			if(roots.size()>1) then
+				stdio.writeln("ERROR: SEVERAL POSSIBLE ROOT CLASS DETECTED!")
+				roots.each{clazz | stdio.writeln(clazz.name) }
+			end
+			result := roots.one()
+		end
+	end
+	
+	
+	operation defineClassesToAspectise() : Void is do
+		// Extracting the classes from the relations to focus on.
+		slicerModel.slicedProperties.each{rel |
+			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==rel.domain.eContainingClass.getQualifiedName}) then
+				aspectisedClasses.add(rel.domain.eContainingClass)
+			end
+			if(rel.domain.eType.isDirectInstanceOf(EClass)) then
+				var eclass : EClass init rel.domain.eType.asType(EClass)
+				if(not aspectisedClasses.exists{cl | cl.getQualifiedName==eclass.getQualifiedName}) then
+					aspectisedClasses.add(eclass)
+				end
+			end
+		}
+		slicerModel.inputClasses.each{eclass |
+			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==eclass.getQualifiedName}) then
+				aspectisedClasses.add(eclass)
+			end
+		}
+		slicerModel.slicedClasses.each{clazz |
+			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==clazz.domain.getQualifiedName}) then
+				aspectisedClasses.add(clazz.domain)
+			end
+		}
+		// Removing the classes that are only types of relations unless they
+		// are a supertype upon the gathered classes or they are required or
+		// they must notify when visiting them.
+		aspectisedClasses.each{eclass |
+			if(eclass.outputFocusedRelations.empty() and
+				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOfBis(eclass)} and
+				not slicerModel.inputClasses.contains(eclass) and
+				not slicerModel.slicedClasses.exists{sc | sc.domain.getQualifiedName==eclass.getQualifiedName}) then
+				aspectisedClasses.remove(eclass)
+			end
+		}
+	end
+	
+	
+	operation generateSlicer() : Void is do
+		slicerAspectGenerator.generateCode()
+		slicerClassGenerator.generateCode()
+	end
+	
+	
+	operation getRequiresFromClasses(classes : EClass[0..*]) : String is do
+		result := ""
+
+		if(classes.size>1) then
+			var packagesName : Bag<String> init Bag<String>.new
+			packagesName.add(classes.last().ePackage.getQualifiedName())
+
+			from var i : Integer init classes.size()-2
+			// Skipping the first element which has been converted as the default package.
+			until i<0
+			loop
+				var name : String init classes.at(i).ePackage.getQualifiedName()
+
+				if(not packagesName.contains(name)) then
+					packagesName.add(name)
+					result := result + "require \"" + classes.at(i).ePackage.name + "PruningAspect.kmt\"\n"
+				end
+				i := i - 1
+			end
+		end
+	end
+	
+	
+	
+	operation getUsingsFromClasses(classes : EClass[0..*]) : String is do
+		result := ""
+
+		if(classes.size>1) then
+			var packagesName : Bag<String> init Bag<String>.new
+			packagesName.add(classes.last().ePackage.getQualifiedName())
+
+			from var i : Integer init classes.size()-2
+			// Skipping the first element which has been converted as the default package.
+			until i<0
+			loop
+				var name : String init classes.at(i).ePackage.getQualifiedName()
+
+				if(not packagesName.contains(name)) then
+					packagesName.add(name)
+					result := result + "using " + name + "\n"
+				end
+				i := i - 1
+			end
+		end
+	end
+	
+	
+	
+	operation getPackageFromClasses(classes : EClass[0..*]) : String is do
+		if(classes.empty()) then
+			result := ""
+		else
+			result := "package " + classes.last().ePackage.getQualifiedName() + ";\n"
+		end
+	end
+	
+	
+	
+	operation saveCode(path : String) : Void is do
+		var file : FileIO init FileIO.new
+		file.writeTextFile(path + slicerModel.name + "Aspect.kmt",slicerAspectGenerator.generatedCode)
+		file.writeTextFile(path + slicerModel.name + ".kmt", slicerClassGenerator.generatedCode)
+		
+		requiredAspectFiles.keys.each{key |
+			var subPkgs : Sequence<String> init key.split("::")
+			file.writeTextFile(path + subPkgs.last() + "PruningAspect.kmt", requiredAspectFiles.getValue(key))
+		}
+	end
+}
+
+abstract class Generator {
+	reference slicerGenerator : SlicerGenerator
+
+	attribute generatedCode : String
+
+	operation generateCode() : Void is abstract
+}
+
+

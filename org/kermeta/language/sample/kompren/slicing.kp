@@ -1,0 +1,25 @@
+KermetaProject "slicing"
+	groupId = "my.group"
+	defaultMainClass = "org2::kermeta::kompren::slicing::Test"
+	defaultMainOperation = "main"
+	sources = {
+		require "${project.baseUri}/kermeta/Test.kmt"
+		require "${project.baseUri}/kermeta/ECoreSlicingAspect.kmt"
+		require "${project.baseUri}/kermeta/SlicerAspectGenerator.kmt"
+		require "${project.baseUri}/kermeta/SlicerClassGenerator.kmt"
+		require "${project.baseUri}/kermeta/SlicerGenerator.kmt"
+		require "${project.baseUri}/kermeta/SlicerHelpers.kmt"
+		require "${project.baseUri}/kermeta/helpers/EClassHelper.kmt"
+		require "${project.baseUri}/kermeta/helpers/EPackageHelper.kmt"
+		require "${project.baseUri}/metamodel/slicing.ecore"
+		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
+	}	packageEquivalences={
+		// indicates the real java name of a given package
+		// useful for deployed thirdparty metamodels
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+	}

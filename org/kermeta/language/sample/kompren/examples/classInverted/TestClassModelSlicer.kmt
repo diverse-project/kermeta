@@ -1,0 +1,56 @@
+/*
+ * Creation : November 25, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "ex::classModel::Test"
+@mainOperation "main"
+
+package ex::classModel;
+
+require kermeta
+require "./output/InvertedClassModelSlicer.kmt"
+
+using kermeta::standard
+
+
+class Test {
+	operation main() : Void is do
+		var requiredClazzs : Bag<Clazz> init Bag<Clazz>.new
+		var cm : ClassModel init createClassModel(requiredClazzs)
+
+		var pruning : InvertedClassModelSlicer init InvertedClassModelSlicer.new.initialise(requiredClazzs, cm)
+
+		pruning.launch()
+	end
+	
+	
+	operation createClassModel(requiredClazzs : Bag<Clazz>) : ClassModel is do
+		result := ClassModel.new
+		
+		var c1 : Clazz init Clazz.new
+		var c2 : Clazz init Clazz.new
+		var c3 : Clazz init Clazz.new
+		var c4 : Clazz init Clazz.new
+		var c5 : Clazz init Clazz.new
+		
+		c1.name := "c1"
+		result.classes.add(c1)
+		c2.name := "c2"
+		result.classes.add(c2)
+		c3.name := "c3"
+		result.classes.add(c3)
+		c4.name := "c4"
+		result.classes.add(c4)
+		c5.name := "c5"
+		result.classes.add(c5)
+		
+		c1.superClasses.add(c2)
+		c2.superClasses.add(c3)
+		c3.superClasses.add(c4)
+		c4.superClasses.add(c5)
+
+		requiredClazzs.add(c5)
+	end 
+}

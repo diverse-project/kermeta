@@ -1,0 +1,51 @@
+/*
+ * Creation : November 23, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package ecore;
+
+using kermeta::standard
+using org2::kermeta::kompren::slicing
+
+aspect class EStructuralFeature {
+	operation getValidKermetaName() : String is do
+		result := name
+		
+		if(name=="result" or name=="is" or name=="class" or name=="aspect" or
+			name=="inherits" or name=="do" or name=="value" or name=="if" or
+			name=="then" or name=="else" or name=="loop" or name=="until" or
+			name=="operation" or name=="method" or name=="end" or name=="reference" or
+			name=="attribute" or name=="package" or name=="using" or name=="require" or
+			name=="self" or name=="bag" or name=="Void" or name=="not" or name=="oset" or
+			name=="from" or name=="super" or name=="init" or name=="true" or name=="false" or
+			name=="var" or name=="raise" or name=="rescue" or name=="getter" or
+			name=="setter" or name=="property" or name=="abstract" or name=="enumeration" or
+			name=="set" or name=="inv" or name=="extern") then
+			result := "~" + result
+		end
+	end
+}
+
+aspect class EClass {
+	reference outputFocusedRelations : SlicedProperty[0..*]
+
+
+	operation getVarNameClassifier() : String is do
+		result := getVarName(name, false)
+	end
+
+	operation getVarName(name : String, withS : Boolean) : String is do
+		result := "the" + name
+		if(withS) then result := result + "s" end
+	end
+
+	operation getRequiredAttributeName() : String is do
+		result := "required" + name + "s"
+	end
+
+	operation getAddedAttributeName() : String is do
+		result := "added" + name + "s"
+	end
+}
