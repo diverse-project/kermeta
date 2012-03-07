@@ -13,6 +13,7 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+using kermeta::standard
 
 aspect class ModelingUnit
 {
@@ -38,4 +39,30 @@ aspect class ModelingUnit
 		self.kOwnedTags.exists{ t | t.name=="mainOperation"} )
 		
 	end
+	
+	/**
+	 * The ModelingUnit has two sub packages with the same name.
+	 * This might be due to packages having the same name but
+	 * different nsUris coming from different files in the project.
+	 */
+	@Scope "MERGED"
+	inv no_subpackages_with_same_name is do
+		
+		stdio.writeln("checking ModelingUnit " + self.name + " for no_subpackages_with_same_name")
+		
+		var names : Collection<String> init Sequence<String>.new
+		var invResult : Boolean init true
+
+		self.packages.each{ p | 
+			if (names.contains(p.name))
+			then
+				invResult:=false
+			else
+				names.add(p.name)
+			end
+				
+		}
+		invResult
+	end
+	
 }
