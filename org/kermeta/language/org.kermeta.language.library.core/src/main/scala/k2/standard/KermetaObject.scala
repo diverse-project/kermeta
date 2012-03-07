@@ -24,19 +24,20 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def equals(element : Any) : Boolean
 	//def isNotEqual(element : Any) : Boolean = !this.equals(element)
 
+	def isSet(property : org.kermeta.language.structure.Property) : Boolean ={
+		return this.get(property)!=null
+	}
 
-  //TODO
-	def isSet(property : org.kermeta.language.structure.Property) : Boolean =false
-  //TODO
-	//def isKFrozen() : Boolean 
-  //TODO
-  //def kfreeze() 
-  //TODO
-	def containingResource() : RichResource = {null.asInstanceOf[RichResource]}
+	def containingResource() : RichResource = {
+	  return new RichResource(eResource())
+	}
 	
 	def removeFromContainer()  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
+	
   //TODO
-	def invoke(op:org.kermeta.language.structure.Operation , args:List[Object]) ={}
+	def invoke(op:org.kermeta.language.structure.Operation , args:List[Object]) ={
+	  throw new RuntimeException("Operation invoke is not yet implemented.")
+	}
 
 
   var ownedTags : org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag] = new org.eclipse.emf.common.util.BasicEList[org.kermeta.language.structure.Tag]
@@ -44,7 +45,6 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
   def getOwnedTags():org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag]=ownedTags;
   def getTag():org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag]=tags;
-  //TODO
 
   def ScalaownedTags = getOwnedTags
   def Scalatag = getTag
@@ -81,7 +81,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   //def ScalaclassDefinition = classDefinition
   def typedefinition = this
   def container() = this.eContainer().asInstanceOf[KermetaObject]
-  //override def equals(o : Any) : Boolean = o == this /*TODO*/
+  //override def equals(o : Any) : Boolean = o == this /*TODO Need clearer explanations*/
   def equals(o : KermetaObject):java.lang.Boolean = o == this
 
   def isNotEqual(o : Any) : Boolean = !equals(o)
@@ -158,13 +158,11 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
     //this.eUnset(structuralF);
   }
   def unset(prop : EStructuralFeature) = this.eUnset(prop);
-  def oid() : Int = this.hashCode() /*TODO*/
+  def oid() : Int = this.hashCode()
   override def toString : String = super.toString()//"["+this.eClass().getName()+":"+oid.toString()+"]"
-  //def isFrozen : Boolean  /*TODO*/
   def isVoid() : Boolean = false
   def hashcode : Int = this.hashCode()
   def getKerMetaClass(): java.lang.Class[_] =this.getClass
-  //def freeze  /*TODO*/
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
   //def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
 	/*
@@ -188,7 +186,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
   /* Default Method Overloaded in by each class definition */
   def checkInvariants() = {
-
+	  //TODO
   }
   def checkAllInvariants() = { /*TODO*/ //println("todo checkAllInvariant") }
 

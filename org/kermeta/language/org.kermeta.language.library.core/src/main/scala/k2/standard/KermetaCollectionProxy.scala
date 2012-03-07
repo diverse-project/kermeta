@@ -94,9 +94,22 @@ class KermetaListProxy[A <: _root_.k2.standard.KermetaObject] ( value : ju.List[
   def toArray(): Array[Object] = {
     return value.toArray();
   }
+  
+  /*
+   * Copy from the toArray operation in RichKermetaList (JavaConversions.scala)
+   */
   def  toArray [T](x$1: Array[T with java.lang.Object]) : Array[T with java.lang.Object]={
-     // FIXME
-     return null;//value.toArray(x$1)
+     var result : Array[T with java.lang.Object] = new Array[T with java.lang.Object](value.size())
+        	var i : ju.Iterator[A] = iterator()
+        	var index : Integer = 0
+        	while (i.hasNext()) {
+        		var current : A = i.next()
+        		if (current.isInstanceOf[T with java.lang.Object]) {
+        			result(index) = current.asInstanceOf[T with java.lang.Object]
+        			index = index + 1
+        		}
+        	}
+            return result
   }
 }
 
