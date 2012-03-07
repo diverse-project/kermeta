@@ -41,7 +41,7 @@ package behavior{
 			until i==self.parameters.size() loop
 				
 				if not self.parameters.elementAt(i).staticType.isVoid and not self.parameters.elementAt(i).isInstanceOf(VoidLiteral) then
-						self.parameters.elementAt(i).staticType.compareToExpectedType(staticOperation.ownedParameter.elementAt(i).type,typeVariableToSet, context)
+						self.parameters.elementAt(i).staticType.compareToExpectedType(context.createTypeFromMultiplicityElement(staticOperation.ownedParameter.elementAt(i)),typeVariableToSet, context)
 				end
 				i:=i+1
 			end
