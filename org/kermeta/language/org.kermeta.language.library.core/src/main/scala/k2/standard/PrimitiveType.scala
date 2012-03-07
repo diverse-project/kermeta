@@ -650,7 +650,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	 def offsetByCodePoints(arg0:Int,arg1:Int) : Integer = value.offsetByCodePoints(arg0,arg1)
 	 def regionMatches(arg0:Int,arg1:java.lang.String,arg2:Int,arg3:Int) : Boolean = value.regionMatches(arg0,arg1,arg2,arg3)
 	 def regionMatches(arg0:Boolean,arg1:Int,arg2:java.lang.String,arg3:Int,arg4:Int) : Boolean = value.regionMatches(arg0,arg1,arg2,arg3,arg4)
-	 def replace(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
+	 //def replace(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
 	 def replaceAll(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
 	 def replaceFirst(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceFirst(arg0,arg1)
 	 def split(arg0:java.lang.String,arg1:Int) : Array[java.lang.String] = value.split(arg0,arg1)
