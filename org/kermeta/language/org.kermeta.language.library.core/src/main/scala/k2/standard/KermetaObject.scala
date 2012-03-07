@@ -40,16 +40,6 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	}
 
 
-  var ownedTags : org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag] = new org.eclipse.emf.common.util.BasicEList[org.kermeta.language.structure.Tag]
-  var tags : org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag] = new org.eclipse.emf.common.util.BasicEList[org.kermeta.language.structure.Tag]
-
-  def getOwnedTags():org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag]=ownedTags;
-  def getTag():org.eclipse.emf.common.util.EList[org.kermeta.language.structure.Tag]=tags;
-
-  def ScalaownedTags = getOwnedTags
-  def Scalatag = getTag
-
-
 
   def isSuperTypeOf(cl : org.kermeta.language.structure.Type):Boolean = {
     if (!(this.isInstanceOf[org.kermeta.language.structure.Class]  ))
@@ -165,20 +155,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def getKerMetaClass(): java.lang.Class[_] =this.getClass
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
   //def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
-	/*
-  def Scalatag : java.util.List[org.k2.language.structure.Tag]={this.getTag()}
-  def Scalatag_=(arg : java.util.List[org.k2.language.structure.Tag])={this.getTag().clear
-                                                                                          this.getTag().addAll(arg)
-  }
-  def ScalaownedTags : java.util.List[org.k2.language.structure.Tag]={this.getOwnedTags()}
-  def ScalaownedTags_=(arg : java.util.List[org.k2.language.structure.Tag])={this.getOwnedTags().clear
-                                                                                                this.getOwnedTags().addAll(arg)
-  }*/
- //def ScalaownedTags : java.util.List[org.k2.language.structure.Tag]={this.asInstanceOf[EModelElement].getEAnnotations}
- // this.asInstanceOf[EModelElement].e
- //
- //
- //
+	
 
 
 
