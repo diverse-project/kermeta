@@ -170,7 +170,7 @@ aspect class OperationCallExp {
 		if output==void then
 			StdIO.writeln("OperationCallExp::range2domain")
 			//either the operation is coming from the initial framework
-			var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
+			var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new
 			output:=out
 			StdIO.writeln("OperationCallExp::range2domain-0")
 			if context.qvtContext.libs.contains(referredOperation.containingResource()) and referredOperation.output==void then
@@ -191,67 +191,15 @@ aspect class OperationCallExp {
 					source.range2domain(context)
 					flattenFeature.target?=source.output
 					
-					/*var deferredcast : org::kermeta::language::behavior::CallOperation
-					deferredcast:=out
-					deferredcast.name:="fromSeq"
-			
-					var dSeqInit : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
-					deferredcast.target:=dSeqInit
-					dSeqInit.name:="new"
-					
-					var dseqCD : org::kermeta::language::structure::ClassDefinition 
-					dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
-					
-					StdIO.writeln("OperationCallExp::range2domain-2")*/
-					/*
-					//here the sequence type is transformed in a class with the appropriated generic type so we shouldn't use
-					//the generateTypeRef method
-					var operationTypeTR : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
-					typeLit.typeref:= operationTypeTR
-					
-					operationTypeTR.type:=operationType.generateType()
-					operationTypeTR.containedType.add(operationTypeTR.type)
-					operationTypeTR.upper:=1
-					operationTypeTR.lower:=0
-					operationTypeTR.isUnique:=false
-					
-					*/
-					
-					
-					
-					
-					
-					
-					/*var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
-					dSeqInit.target:=dseqLit
-					dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(operationType.elementType.output.asType(org::kermeta::language::structure::ClassDefinition))
-
-					var asSequenceFeature : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
-					deferredcast.parameters.add(asSequenceFeature)
-					asSequenceFeature.name:="asSequence"
-					
-					var flattenFeature : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
-					asSequenceFeature.target :=flattenFeature
-					flattenFeature.name:="flatten"
-					source.range2domain(context)
-					flattenFeature.target?=source.output
-					flattenFeature.staticOperation:=context
-											.kmtContext
-											.getFromQualifiedName("kermeta::standard::Sequence::flatten")
-											.asType(org::kermeta::language::structure::Operation)
-					*/
-					//get the parameter from the type of the operation which is a sequenceType
-					
-					/*var typeLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
-					out.parameters.add(typeLit)
-					operationType.range2domain()*/
 				end
+				
 				//why this qvtid starts with :: is still a mystery
 				if referredOperation.getQVTID()=="::QvtLib::Model::objects" then
 					out.name:="extent"
 					source.range2domain(context)
 					out.target?=source.output
 				end
+				
 				StdIO.writeln("OperationCallExp::range2domain-3")
 				if referredOperation.getQVTID() =="::QvtLib::Model::objectsOfType" then
 					out.name:="objectsOfType"
@@ -266,8 +214,6 @@ aspect class OperationCallExp {
 						end
 						}
 				end
-				
-	
 				StdIO.write("THIS IS A STANDARD METHOD")
 				StdIO.writeln(" referredOperation name : "+ referredOperation.getQVTID)
 			else
@@ -279,20 +225,17 @@ aspect class OperationCallExp {
 					source.range2domain(context)
 					out.target?=source.output
 				else
-					var transfoCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+					var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
 					out.target:=transfoCall
 				end
 				StdIO.writeln("OperationCallExp::range2domain-5")
 				if (referredOperation !=void) then
-					
-					referredOperation.range2domain(context)
-					out.staticOperation?=referredOperation.output
-					if out.staticOperation==void then
-						out.name:=referredOperation.name
+					if context.frameworkOperationMap.containsKey(referredOperation.getQVTID) then
+						out.name:=context.frameworkOperationMap.getValue(referredOperation.getQVTID)
 					else
-						out.name:=out.staticOperation.name
+						referredOperation.range2domain(context)
+						out.name:=referredOperation.name
 					end
-					StdIO.writeln("referredOperation name : "+ referredOperation.name)
 				end
 				StdIO.writeln("OperationCallExp::range2domain-6")
 				argument.each{x|
@@ -613,17 +556,17 @@ aspect class TypeExp {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
-			var out : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			referredType.range2domain(context)
+			var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(referredType.getQVTID,false)
 			output:=out
 		
-			referredType.range2domain(context)
-			if referredType.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+			/*if referredType.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
 				out.typeref:=referredType.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef()
 			else
 				if referredType.output.isInstanceOf(org::kermeta::language::structure::PrimitiveType) then
 					out.typeref:=referredType.output.asType(org::kermeta::language::structure::PrimitiveType).generateTypeRef()
 				end
-			end
+			end*/
 		end
 	end
 

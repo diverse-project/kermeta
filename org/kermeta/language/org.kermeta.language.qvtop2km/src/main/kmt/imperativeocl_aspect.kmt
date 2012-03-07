@@ -145,12 +145,13 @@ end
 					//or
 				//left.isInstanceOf(essentialocl::VariableExp).andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} 
 				
-				var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new
 				output:=out
 				
 				left.range2domain(context)
-				out.target?=left.output
+				out.parameters.add(left.output.asType(behavior::Expression))
 				
+				out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::CollectionExtension",false)
 				self.~value.each{x|x.range2domain(context)}
 				//TODO take care of multivalued assignement
 				StdIO.writeln("value size : "+~value.size.toString)
@@ -222,12 +223,13 @@ aspect class LogExp {
 				condition.range2domain(context)
 				out.condition?=condition.output
 			end
-			var block : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var block : behavior::Block init behavior::Block.new
 			out.thenBody:=block
 			
 			
 			//print the message
-			var writelnFeature : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+			var writelnFeature : behavior::UnresolvedCall init behavior::UnresolvedCall.new
+			writelnFeature.isCalledWithParenthesis:=true
 			block.statement.add(writelnFeature)
 			if argument.size>1 then
 				writelnFeature.name:="write"
@@ -235,26 +237,25 @@ aspect class LogExp {
 				writelnFeature.name:="writeln"
 			end
 			
-			var StdIOVar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+			var StdIOVar : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("kermeta::io::StdIO",false)
 			writelnFeature.target:=StdIOVar
-			StdIOVar.name:="StdIO"
+			
 			
 			argument.one.range2domain(context)
 			writelnFeature.parameters.add(argument.one.output.asType(org::kermeta::language::behavior::Expression))
 			
 			//print the second argument
 			if argument.size>1 then
-				var writelnFeature2 : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				var writelnFeature2 : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("writeln",true)
 				block.statement.add(writelnFeature2)
-				writelnFeature2.name:="writeln"
 				
-				var StdIOVar2 : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
+				
+				var StdIOVar2 : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("kermeta::io::StdIO",false)
 				writelnFeature2.target:=StdIOVar2
-				StdIOVar2.name:="StdIO"
 				
-				var toStringFeature : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
+				
+				var toStringFeature : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("toString",true)
 				writelnFeature2.parameters.add(toStringFeature)
-				toStringFeature.name:="toString"
 				argument.elementAt(2).range2domain(context)
 				toStringFeature.target?=argument.elementAt(2).output
 			end

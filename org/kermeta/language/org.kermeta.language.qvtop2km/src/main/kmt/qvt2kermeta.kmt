@@ -211,19 +211,19 @@ operation mapFrameworks(context : Qvt2KermetaContext) : Void is do
 
 	context.frameworkOperationMap := Hashtable<String,String>.new
 	
-	context.frameworkOperationMap.put("OclLib::String::concat","kermeta::standard::String::plus")
+	context.frameworkOperationMap.put("OclLib::String::concat","plus")
 	
-	context.frameworkOperationMap.put("OclLib::OclAny::=","kermeta::standard::Object::equals")
-	context.frameworkOperationMap.put("OclLib::OclObject::=","kermeta::standard::Object::equals")
-	context.frameworkOperationMap.put("OclLib::OclAny::oclIsKindOf","kermeta::standard::Object::isInstanceOf")
-	context.frameworkOperationMap.put("::QvtLib::OclElement::isKindOf","kermeta::standard::Object::isInstanceOf" )
-	context.frameworkOperationMap.put("::QvtLib::OclElement::asType","kermeta::standard::Object::asType")
+	context.frameworkOperationMap.put("OclLib::OclAny::=","equals")
+	context.frameworkOperationMap.put("OclLib::OclObject::=","equals")
+	context.frameworkOperationMap.put("OclLib::OclAny::oclIsKindOf","isInstanceOf")
+	context.frameworkOperationMap.put("::QvtLib::OclElement::isKindOf","isInstanceOf" )
+	context.frameworkOperationMap.put("::QvtLib::OclElement::asType","asType")
 	
-	context.frameworkOperationMap.put("OclLib::Collection::isEmpty","kermeta::standard::Collection::isEmpty")
-	context.frameworkOperationMap.put("OclLib::Sequence::asOrderedSet","kermeta::standard::Collection::asOrderedSet")
-	context.frameworkOperationMap.put("OclLib::Sequence::first","kermeta::standard::OrderedCollection::first")
-	context.frameworkOperationMap.put("OclLib::Boolean::and","kermeta::standard::Boolean::and")
-	context.frameworkOperationMap.put("OclLib::Boolean::not","kermeta::standard::Boolean::not")
+	context.frameworkOperationMap.put("OclLib::Collection::isEmpty","isEmpty")
+	context.frameworkOperationMap.put("OclLib::Sequence::asOrderedSet","asOrderedSet")
+	context.frameworkOperationMap.put("OclLib::Sequence::first","first")
+	context.frameworkOperationMap.put("OclLib::Boolean::and","and")
+	context.frameworkOperationMap.put("OclLib::Boolean::not","not")
 end
 /* TODO code mort
 operation map2FrameworkObjects(source: String, target : String, context : Qvt2KermetaContext) : Void is do

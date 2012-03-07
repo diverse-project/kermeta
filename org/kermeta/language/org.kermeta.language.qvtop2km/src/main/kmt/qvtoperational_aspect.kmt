@@ -1082,7 +1082,6 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		//StdIO.writeln("ResolveExp::range2domain")
 		var cf_resolve :  behavior::UnresolvedCall init behavior::UnresolvedCall.new
 		//if one is true and there is no condition then it's simply a detect on the type of target
-		//if one is false then it's a select on the type that should return a sequence of the type
 
 			var detectCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new
 		
@@ -1096,29 +1095,14 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			detectCast.target:=detectCall
 			detectCall.name:="detect"
 		else
-			/*var deferredcast : behavior::CallFeature  init behavior::CallFeature.new
-			output:=deferredcast
-			deferredcast.name:="fromSeq"
-	
-			var dSeqInit : behavior::CallFeature init behavior::CallFeature.new
-			deferredcast.target:=dSeqInit
-			dSeqInit.name:="new"
-			
-			var dseqCD : structure::ClassDefinition 
-			dseqCD?=context.kmtContext.getFromQualifiedName("kermeta::standard::DeferredSequence")
-			
-			var dseqLit : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
-			dSeqInit.target:=dseqLit
-			dseqLit.typeref:=dseqCD.generateParameterizedTypeRef(self.target.type.output.asType(structure::ClassDefinition))
-			
-			deferredcast.parameters.add(detectCall)
-			detectCall.name:="select"*/
+		//if one is false then it's a select on the type that should return a sequence of the type
 			
 			var seqProxy : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("asSequenceType",false)
+			output:=seqProxy
 			seqProxy.target:=detectCall
 			var generic : structure::Type init self.target.type.generateType(context)
 			seqProxy.generics.add(generic)
-			if generic.isInstanceOf(structure::TypeDefinition) then
+			if not generic.isInstanceOf(structure::TypeDefinition) then
 				seqProxy.containedType.add(generic)
 			end
 			detectCall.name:="select"
@@ -1213,7 +1197,7 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		
 		//var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature
 		//var out : org::kermeta::language::behavior::VoidLiteral  init org::kermeta::language::behavior::VoidLiteral.new
-		output:=cf_resolve
+		//output:=cf_resolve
 		//out.addDocumentationTag("ResolveExp mapping to be implemented")
 	end
 end
