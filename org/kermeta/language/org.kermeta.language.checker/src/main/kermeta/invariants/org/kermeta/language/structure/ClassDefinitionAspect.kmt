@@ -48,6 +48,17 @@ aspect class Class {
 
 aspect class ClassDefinition {
 
+	/** 
+	 * This class is defined as an aspect but it doesn't reopen an existing class.
+	 * Check the class name and its containing packages
+	 */
+	@Scope "MERGED"
+	@IsWarning "true"
+	inv aspect_class_must_reopen_existing_one is do
+	
+		not(self.isAspect)
+		
+	end
 
 
 	/*
@@ -84,14 +95,14 @@ aspect class ClassDefinition {
 		var allTypesToBrowse : Sequence<Class> init Sequence<Class>.new
 		var allBrowsedTypes : Sequence<Class> init Sequence<Class>.new
 		var res : Boolean init true
-		log("Checking type parameter consistency for ClassDefinition " + self.name)
+		//log("Checking type parameter consistency for ClassDefinition " + self.name)
 		
 		// Build the base Class
 		var selfClass : Class init Class.new
 		selfClass.typeDefinition:=self
 		
 		self.typeParameter.each{ tp |
-			log(" - type parameter : " + tp.toString)
+			//log(" - type parameter : " + tp.toString)
 			var binding : TypeVariableBinding init TypeVariableBinding.new
 			binding.variable := tp
 			binding.type := tp
@@ -104,20 +115,20 @@ aspect class ClassDefinition {
 		until (allTypesToBrowse.isEmpty() or not(res))
 		loop
 			currentClass := allTypesToBrowse.one
-			log("------------------------------\nCurrentClass is " + currentClass.name)
-			log("allTypesToBrowse size : " + allTypesToBrowse.size.toString)
-			allTypesToBrowse.each{ t | log(" - " + t.name) }
-			log("allBrowsedTypes size : " + allBrowsedTypes.size.toString)
-			allBrowsedTypes.each{ t | log(" - " + t.name) }
+			//log("------------------------------\nCurrentClass is " + currentClass.name)
+			//log("allTypesToBrowse size : " + allTypesToBrowse.size.toString)
+			//allTypesToBrowse.each{ t | log(" - " + t.name) }
+			//log("allBrowsedTypes size : " + allBrowsedTypes.size.toString)
+			//allBrowsedTypes.each{ t | log(" - " + t.name) }
 			allTypesToBrowse.remove(currentClass)
 			
 			if (allBrowsedTypes.exists{c| c.typeDefinition == currentClass.typeDefinition})
 			then
-				log("Already browsed ! ")
+				//log("Already browsed ! ")
 				if (allBrowsedTypes.exists{c | c.typeDefinition == currentClass.typeDefinition and
 												c.typeEquals(currentClass)})
 				then
-					log("result=false!")
+					//log("result=false!")
 					res:=false
 				end
 			else
