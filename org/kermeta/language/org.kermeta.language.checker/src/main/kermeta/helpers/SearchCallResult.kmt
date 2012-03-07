@@ -20,7 +20,7 @@ aspect class Expression
 
 	operation retrieveAllCallResults() : Collection<CallResult> is abstract	
 	
-	// This operation checks wether a CallResult is always reached in an operation
+	// This operation checks wether a CallResult is always assigned in an operation
 	operation checkCallResults() : Boolean is abstract
 }
 
@@ -182,9 +182,24 @@ aspect class Assignment {
 	end
 	
 	method checkCallResults() : Boolean is do
+		
+		/*
+		
 		result:=if (not(self.target.isVoid))
 				then
 					self.target.checkCallResults
+				else
+					false
+				end
+		*/
+		result:=if (not(self.target.isVoid))
+				then
+					if (self.target.isInstanceOf(CallResult))
+					then
+						true
+					else
+						false
+					end
 				else
 					false
 				end
@@ -236,7 +251,7 @@ aspect class CallResult {
 	end
 
 	method checkCallResults() : Boolean is do
-		result:=true
+		result:=false
 	end
 
 }
