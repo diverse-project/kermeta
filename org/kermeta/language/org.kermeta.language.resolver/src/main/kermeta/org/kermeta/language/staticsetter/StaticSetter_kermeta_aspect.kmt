@@ -967,8 +967,10 @@ package behavior {
 					var prodType : ProductType init ProductType.new
 					funcType.containedType.add(prodType)
 					funcType.left:=prodType
+					var i : Integer init 0
 					parameters.each{ p |
-						prodType.type.add(context.createTypeFromMultiplicityElement(parameters.one.type))
+						prodType.type.add(context.createTypeFromMultiplicityElement(parameters.elementAt(i).type))
+						i:=i+1
 					}
 					prodType.type.each{t|
 						if t.container.isVoid then
