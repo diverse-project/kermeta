@@ -275,12 +275,12 @@ class SlicerGenerator {
 	
 	operation saveCode(path : String) : Void is do
 		var file : FileIO init FileIO.new
-		file.writeTextFile(path + slicerModel.name + "Aspect.kmt",slicerAspectGenerator.generatedCode)
-		file.writeTextFile(path + slicerModel.name + ".kmt", slicerClassGenerator.generatedCode)
+		file.writeTextFile((path + slicerModel.name + "Aspect.kmt").toURI,slicerAspectGenerator.generatedCode)
+		file.writeTextFile((path + slicerModel.name + ".kmt").toURI, slicerClassGenerator.generatedCode)
 		
 		requiredAspectFiles.keys.each{key |
 			var subPkgs : Sequence<String> init key.split("::")
-			file.writeTextFile(path + subPkgs.last() + "PruningAspect.kmt", requiredAspectFiles.getValue(key))
+			file.writeTextFile((path + subPkgs.last() + "PruningAspect.kmt").toURI, requiredAspectFiles.getValue(key))
 		}
 	end
 }

@@ -109,7 +109,7 @@ class Test {
 	operation getEcoreModel(uriEcoreModel : String) : Bag<EPackage> is do
 		var uriMM : String init "http://www.eclipse.org/emf/2002/Ecore"
    		var repository : ResourceSet init ResourceSet.new
-   		repository.registerEcoreFile(uriMM)          
+   		//repository.registerEcoreFile(uriMM)          
    		var resource : Resource init repository.createResource(uriEcoreModel, uriMM)
        	resource.load(void)
 		
@@ -127,11 +127,11 @@ class Test {
 	operation getSlicerModel(uriSlicerModel : String) : Slicer is do
 		var uriSlicerMM : String init "platform:/resource/slicing/metamodel/slicing.ecore"
    		var repository : ResourceSet init ResourceSet.new
-   		repository.registerEcoreFile(uriSlicerMM)          
+   		//repository.registerEcoreFile(uriSlicerMM)          
    		var resource : Resource init repository.createResource(uriSlicerModel, uriSlicerMM)
        	resource.load(void)
 
-		from var it : Iterator<Object> init resource.instances.iterator
+		from var it : Iterator<Object> init resource.getContents.iterator
 		until it.isOff
 		loop
 			var next : Object init it.next
