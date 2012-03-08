@@ -96,7 +96,9 @@ package structure {
 	aspect class Property {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
 			context.currentProperty := self
+			context.pushContext()
 			super(context)
+			context.popContext()
 			context.currentProperty := void
 		end
 	}

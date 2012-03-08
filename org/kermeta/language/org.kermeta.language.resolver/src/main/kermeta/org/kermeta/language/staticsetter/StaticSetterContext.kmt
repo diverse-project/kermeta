@@ -51,6 +51,7 @@ class StaticSetterContext
 		newContext.currentModelingUnit:=currentModelingUnit
 		newContext.currentClassDefinition:=currentClassDefinition
 		newContext.currentOperation:=currentOperation
+		newContext.currentProperty:=currentProperty
 		contextFrames.each{ f|
 			newContext.contextFrames.add(f.copy())}
 
