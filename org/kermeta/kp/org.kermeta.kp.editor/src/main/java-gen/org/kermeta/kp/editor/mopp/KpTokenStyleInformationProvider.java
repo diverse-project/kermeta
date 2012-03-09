@@ -12,6 +12,9 @@ public class KpTokenStyleInformationProvider {
 		if ("byteCodeFromADependency".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0xCC, 0x80, 0x00}, null, true, false, false, false);
 		}
+		if ("byteCodeOnly".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0xCC, 0x80, 0x00}, null, true, false, false, false);
+		}
 		if ("ignoreByteCode".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0xCC, 0x80, 0x00}, null, true, false, false, false);
 		}
