@@ -53,7 +53,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 		}
 	}
 	
-	private void createBuilder(IResource resource) {
+	private void createBuilder(IResource resource, boolean mustBuild) {
 		// add a new visitor dedicated to this
 		// Kermeta project file
 		// ignore if kp file is in target folder 
@@ -63,15 +63,16 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 			final KPBuilder aBuilder = new KPBuilder((IFile) resource);
 
 			kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource), aBuilder);
-
-			Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
-				protected IStatus run(IProgressMonitor monitor) {
-					aBuilder.compile(monitor);
-					return Status.OK_STATUS;
-				}
-			};
-			job.setPriority(Job.LONG);
-			job.schedule();
+			if(mustBuild){
+				Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
+					protected IStatus run(IProgressMonitor monitor) {
+						aBuilder.compile(monitor);
+						return Status.OK_STATUS;
+					}
+				};
+				job.setPriority(Job.LONG);
+				job.schedule();
+			}
 		}
 	}
 
@@ -116,7 +117,9 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 
 							for (IFile aKPFile : theKP) {
 								if (!kermetaBuilder.kpBuilders.containsKey(kermetaBuilder.generateIdentifier(aKPFile))) {
-									createBuilder(aKPFile);
+									boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									createBuilder(aKPFile, mustBuild);
+									processResourceChildren = false;
 								}
 							}
 						} catch (CoreException e) {
@@ -136,7 +139,8 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 						try {
 							if (resource.getProject() != null) {
 								if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
-									createBuilder(resource);
+									boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									createBuilder(resource, mustBuild);
 								}
 							}
 						} catch (CoreException e) {
@@ -168,7 +172,8 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 											Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for " + resource.getFullPath(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
 										}
 									} else {
-										createBuilder(resource);
+										boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
+										createBuilder(resource, mustBuild);
 									}
 
 								}
@@ -246,7 +251,8 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 						case IResource.FILE:
 							if (resource.getFileExtension() != null) {
 								if (resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION)) {
-									createBuilder(resource);
+									boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									createBuilder(resource, mustBuild);
 								}
 							}
 							processResourceChildren = false;

@@ -90,9 +90,20 @@ public class KermetaPreferencePage
 						 { "Generate bytecode", PreferenceToBuildAction.GENERATE_BYTECODE}}, 
 				getFieldEditorParent()));
 		
-		/*addField(
-			new StringFieldEditor(PreferenceConstants.P_STRING, "A &text preference:", getFieldEditorParent()));
-			*/
+		addField(new ComboFieldEditor(
+				PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING, 
+				"KP editor on save action",  
+				new String[][] { { "None", PreferenceToBuildAction.NONE}, 
+						 { "Generate KM", PreferenceToBuildAction.GENERATE_KM },
+						 /*{ "Generate bytecode", PreferenceToBuildAction.GENERATE_BYTECODE}*/}, 
+				getFieldEditorParent()));
+		addField(new ComboFieldEditor(
+				PreferenceConstants.P_PROJECT_ONOPEN_STRING, 
+				"project on open action",  
+				new String[][] { { "None", PreferenceToBuildAction.NONE}, 
+						 { "Generate KM", PreferenceToBuildAction.GENERATE_KM },
+						 /*{ "Generate bytecode", PreferenceToBuildAction.GENERATE_BYTECODE}*/}, 
+				getFieldEditorParent()));
 	}
 
 	/* (non-Javadoc)

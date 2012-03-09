@@ -13,11 +13,12 @@ public class PreferenceConstants {
 	public static final String P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE = "runnerConsoleLogLevelPreference";
 	
 	public static final String P_KMT_EDITOR_ONKEYSTRIKE_STRING = "kmtEditorOnKeyStrikePreference";
-	public static final String P_KMT_EDITOR_ONKEYSTRIKE_IGNORECHECK_BOOLEAN = "kmtEditorOnKeyStrikeIgnoreCheckPreference";
 	
 	public static final String P_KMT_EDITOR_ONSAVE_STRING = "kmtEditorOnSavePreference";
-	public static final String P_KMT_EDITOR_ONSAVE_IGNORECHECK_BOOLEAN = "kmtEditorOnSaveIgnoreCheckPreference";
+	
+	public static final String P_KP_EDITOR_ONSAVE_STRING = "kpEditorOnSavePreference";
 
+	public static final String P_PROJECT_ONOPEN_STRING = "projectOnOpenPreference";
 	//public static final String P_STRING = "stringPreference";
 	
 }

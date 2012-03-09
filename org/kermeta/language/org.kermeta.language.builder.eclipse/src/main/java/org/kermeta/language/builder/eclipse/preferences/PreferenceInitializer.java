@@ -24,6 +24,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		
 		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONKEYSTRIKE_STRING, PreferenceToBuildAction.NONE);
 		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING, PreferenceToBuildAction.GENERATE_KM);
+		
+		store.setDefault(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING, PreferenceToBuildAction.GENERATE_KM);
+		store.setDefault(PreferenceConstants.P_PROJECT_ONOPEN_STRING, PreferenceToBuildAction.NONE);
 		/*store.setDefault(PreferenceConstants.P_STRING,
 				"Default value");*/
 	}
