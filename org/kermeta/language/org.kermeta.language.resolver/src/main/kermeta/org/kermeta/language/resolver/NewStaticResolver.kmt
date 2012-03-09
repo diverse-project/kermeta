@@ -70,7 +70,7 @@ class FullStaticResolver
        	end
 	end
 	
-	operation getErrors() : OrderedSet<ResolverException> is do
+	operation getErrors() : Sequence<ResolverException> is do
 		result := ctxt.errors
 	end
 

@@ -23,6 +23,6 @@ using kermeta::standard
 
 class TypeAwareMergerContext 
 {
-	reference errors : OrderedSet<ResolverException>
+	reference errors : Sequence<ResolverException>
 
 }

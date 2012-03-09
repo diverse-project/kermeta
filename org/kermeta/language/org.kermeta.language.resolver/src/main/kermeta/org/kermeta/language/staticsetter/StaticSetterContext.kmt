@@ -26,7 +26,7 @@ using org::kermeta::language::resolver
 
 class StaticSetterContext
 {
-	reference errors : OrderedSet<ResolverException>
+	reference errors : Sequence<ResolverException>
 	
 	//used to store context for late resolving of lambdaexpressions
 	reference waitingContext : Sequence<ToBeResolvedLater>

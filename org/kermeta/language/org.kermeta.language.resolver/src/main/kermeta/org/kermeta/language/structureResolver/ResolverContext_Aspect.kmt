@@ -31,7 +31,7 @@ class MapEntryTypeDef {
 }
 
 aspect class LanguageVisitorContext {
-	attribute errors : OrderedSet<ResolverException>
+	attribute errors : Sequence<ResolverException>
 	//Modeling unit the UnresolvedFinder is currently visiting
 	reference currentModelingUnit : ModelingUnit
 	//Package the UnresolvedFinder is currently visiting
@@ -62,7 +62,7 @@ aspect class LanguageVisitorContext {
 	attribute verbose : Boolean
 	
 	operation initialize(mu : ModelingUnit) : LanguageVisitorContext is do
-		errors := OrderedSet<ResolverException>.new
+		errors := Sequence<ResolverException>.new
 		currentModelingUnit:=mu
 		//TODO initialize the table of Type definitions 
 	 	verbose := false

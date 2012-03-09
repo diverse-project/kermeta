@@ -148,7 +148,7 @@ package behavior {
 	
 	aspect class JavaStaticCall {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do 
-			var newParameters : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+			var newParameters : kermeta::standard::Sequence<Expression> init kermeta::standard::Sequence<Expression>.new
 			self.parameters.each{ oldParameter |
 				newParameters.add(oldParameter.resolveCallAndInferStatic(context))
 			}
@@ -170,7 +170,7 @@ package behavior {
 			
 			// possibly replace all the statement by resolved ones
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Block") end
-			var newStatements : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+			var newStatements : kermeta::standard::Sequence<Expression> init kermeta::standard::Sequence<Expression>.new
 			
 			context.pushContext()
 			self.statement.each{ oldStatement |
@@ -201,7 +201,7 @@ package behavior {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallExpression") end
 			
-			var newParameters : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+			var newParameters : kermeta::standard::Sequence<Expression> init kermeta::standard::Sequence<Expression>.new
 			self.parameters.each{ oldParameter |
 				newParameters.add(oldParameter.resolveCallAndInferStatic(context))
 			}
@@ -994,7 +994,7 @@ package behavior {
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Rescue") end
 				
 			context.addSymbol(exceptionName,exceptionType.type)				
-			var newBody : kermeta::standard::OrderedSet<Expression> init kermeta::standard::OrderedSet<Expression>.new
+			var newBody : kermeta::standard::Sequence<Expression> init kermeta::standard::Sequence<Expression>.new
 
 			self.body.each{rb |
 				newBody.add(rb.resolveCallAndInferStatic(context))
