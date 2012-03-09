@@ -15,11 +15,47 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+
+
 using kermeta::standard
 using org::kermeta::language::structure
 
 aspect class CallOperation
 {
+	
+	/**
+	 * You are not allowed to call new on a singleton class
+	 */
+	@Scope "RESOLVED"
+	inv no_new_on_a_singleton is do
+	
+		if (self.name.equals("new"))
+		then
+			// Check that it is called on a Class
+		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
+			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+			
+			if (self.staticOperation.owningClass.equals(classTypeDef))
+			then
+				// Now check that it is not a singleton
+				if (self.target.isInstanceOf(CallTypeLiteral))
+				then
+					not(self.target.asType(CallTypeLiteral).typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isSingleton)
+					//false
+				else
+					true
+				end
+			else
+				true
+			end
+		else
+			true
+		end
+	
+	end
+
 
 	/**
 	 * Type mismatch. The parameters' types are not those expected.
