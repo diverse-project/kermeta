@@ -2,6 +2,9 @@ package k2.persistence
 
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.EPackage
+import k2.io.StdIO
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.ecore.EObject
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,10 +28,32 @@ object EcorePackages{
 
 
 class RichResource(value: _root_.org.eclipse.emf.ecore.resource.Resource) extends k2.standard.EObjectImplForKO{
-	 def load(arg0:java.util.Map[Object,Object]) : Any = value.load(arg0)
-	 def save(arg0:java.util.Map[Object,Object]) : Any = value.save(arg0)
+	 def load(options : java.util.Map[Object,Object]) : Any = value.load(options)
+	 def save(options : java.util.Map[Object,Object]) : Any = {
+	   // safe safe, automatically patch the resulting resource
+	   try {
+			value.save( options);
+		}
+	   catch {
+	   		case e : java.lang.Exception => {
+	   			StdIO.errorln("Received Exception while saving "+e)
+	   			val unresolvedMap = EcoreUtil.ExternalCrossReferencer.find(value);
+	   			val i : java.util.Iterator[EObject] = unresolvedMap.keySet().iterator
+	   			while (i.hasNext){
+	   				val myEobject = i.next
+	   				StdIO.errorln("Patching dangling element "+myEobject+ 
+						" referenced by "+unresolvedMap.get(myEobject) +
+						"\nthe dangling element is added to the root of the resource for debug purpose")
+					value.getContents().add(myEobject);
+	   			}				
+	   			StdIO.writeln("Retrying to save .... ")
+	   			value.save( options);
+	   		}
+	 		case e => { throw e}
+		}
+	 }
 	 def load() : Any = value.load(new java.util.HashMap[Any,Any]())
-	 def save() : Any = value.save(new java.util.HashMap[Any,Any]())
+	 def save() : Any = this.save(new java.util.HashMap[Object,Object]())
 	 def delete(arg0:java.util.Map[Object,Object]) : Any = value.delete(arg0)
 	 def unload() : Any = value.unload()
 	 def getURI() : org.eclipse.emf.common.util.URI = value.getURI()

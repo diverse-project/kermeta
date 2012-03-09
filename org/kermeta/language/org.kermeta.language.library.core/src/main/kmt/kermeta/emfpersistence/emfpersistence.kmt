@@ -15,6 +15,9 @@ class Resource {        @CompilerIgnore "true"
          operation load(arg0:Map<Object,Object>) : Void is do
 
           end
+          /** Saves the resource using the specified options.
+           * save is "safe" in the sense that unlike the original EMF version, if the user creates dangling in it, the save will automatically try to patch the resulting xmi file by adding the dangling element at the root of the resource
+           */
         @CompilerIgnore "true"
          operation save(arg0:Map<Object,Object>) : Void is do
 
