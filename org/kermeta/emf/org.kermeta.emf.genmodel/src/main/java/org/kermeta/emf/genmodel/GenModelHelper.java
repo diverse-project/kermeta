@@ -174,7 +174,8 @@ public class GenModelHelper {
 
     }
 
-    public void generate(GenModel genModel) {
+    public boolean generate(GenModel genModel) {
+    	boolean success = true;
         //Generate Code
         genModel.setCanGenerate(true);
         GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
@@ -182,13 +183,35 @@ public class GenModelHelper {
         Generator generator = new Generator();
         generator.setInput(genModel);
         generator.requestInitialize();
-        // Generator model code.
-        Diagnostic d = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.out));
-        if(d.getSeverity() != Diagnostic.OK){
-        	// TODO should stop the process !?
-        	reportDiagnostic(d,"");
+        
+        
+        
+        if(genModel.getMissingPackages().size() != 0){
+
+        	logger.error("Invalid : cannot generate java code from "+genModel.eResource().getURI().toString(), getClass().getName());
+        	for( EPackage p : genModel.getMissingPackages()){
+            	logger.error("  Missing EPackage "+p.getName()+". Ie. the genmodel doesn't know how to retreive or build it.", getClass().getName());
+            }
+        	success =  false;
         }
-        logger.info(d.getMessage(), getClass().getName());
+        else{
+	        // Generator model code.
+	        if(generator.canGenerate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE)){
+		        Diagnostic d = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor.Printing(System.out));
+		        if(d.getSeverity() != Diagnostic.OK){
+		        	// TODO should stop the process !?
+		        	reportDiagnostic(d,"");
+		        	success = false;
+		        }
+		        logger.info(d.getMessage(), getClass().getName());
+	        }
+	        else{
+	        	
+	        	logger.error("Invalid : cannot generate "+genModel.toString(), getClass().getName());
+	        	success = false;
+	        }
+        }
+        return success;
     }
     
     protected void  reportDiagnostic(Diagnostic d, String indentation){
