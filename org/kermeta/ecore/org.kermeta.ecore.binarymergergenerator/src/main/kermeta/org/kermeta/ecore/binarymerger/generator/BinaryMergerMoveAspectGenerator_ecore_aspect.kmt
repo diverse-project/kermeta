@@ -119,6 +119,9 @@ aspect class EClass {
 		content.append("if (not mergedModelElement.isVoid) then")
 		context.pushIndent
 		content.append(context.indentString)
+		content.append("do")
+		context.pushIndent
+		content.append(context.indentString)
 		content.append("//stdio.writeln(\"Merging content of a " + self.name + "\")")						
 		self.eachOwnedElement{ e |
 				content.append(e.binaryMergerMoveAspectKmtPrinter(context))
@@ -145,9 +148,12 @@ aspect class EClass {
 					end
 				end
 			}
-		end		
-		
+		end	
 			
+		context.popIndent
+		content.append(context.indentString+"rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)")
+		content.append(context.indentString+"   context.errors.add(mergeException)")
+		content.append(context.indentString+"end")	
 		context.popIndent
 	/*
 		content.append(context.indentString)
@@ -182,11 +188,17 @@ aspect class EClass {
 			
 			// call eachOwnedElement only if there is no super that have already done it
 			content.append(context.indentString)		
-			content.append("self.eachOwnedElement{ e | e")
+			content.append("self.eachOwnedElement{ e | do ")
+			content.append(context.indentString+ "      e")
 			if (not context.isMMReflexiveKermeta) then
 				content.append(".asType(Mergeable)")
 			end
-			content.append(".binaryMerger_MoveToMergedModel(context)}")
+			content.append(".binaryMerger_MoveToMergedModel(context)")
+			content.append(context.indentString+"   rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)")
+			content.append(context.indentString+"      context.errors.add(mergeException)")
+			content.append(context.indentString+"   end")
+			content.append(context.indentString+"   e")
+			content.append(context.indentString+"}")
 		end
 		// return self in order to workaround a compiler bug
 		content.append(context.indentString)

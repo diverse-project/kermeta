@@ -12,6 +12,7 @@ package org::kermeta::ecore::binarymerger;
 
 require kermeta
 require "Mergeable.kmt"
+require "BinaryMergerException.kmt"
 
 using kermeta::standard
 
@@ -28,6 +29,11 @@ class BinaryMergerContext
 	 * this isn't a bag because add from MergerMove, but an element may be added several times (one per valid reference)
 	 */
 	reference elementsNeedingReferenceMerge : Mergeable[0..*]
+	
+	/** errors that have already occured in this merge
+	 *
+	 */
+	reference errors : org::kermeta::ecore::binarymerger::BinaryMergerException[*]
 	
 	operation initialize() : BinaryMergerContext is do
 	 	result := self

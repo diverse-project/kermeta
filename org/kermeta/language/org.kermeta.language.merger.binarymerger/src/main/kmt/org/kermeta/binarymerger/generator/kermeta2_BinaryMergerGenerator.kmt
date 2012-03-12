@@ -44,14 +44,14 @@ class Main
 			"km",
 			"") 
 			*/ 
-		binaryMergerReferenceFixerAspectGenerator.generateBinaryMergerReferenceFixerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
+		/*binaryMergerReferenceFixerAspectGenerator.generateBinaryMergerReferenceFixerAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
 			"km",
 			"require \"platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt\"\n"+
 			"require \"platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerSignatureAspect.kmt\"\n"	+
 			"require \"platform:/lookup/org.kermeta.language.merger.binarymerger/src/main/kmt/org/kermeta/language/merger/binarymerger/km_BinaryMergerPropertyResolverAspect.kmt\"\n"
 			)
-			
+			*/
 		// use the user version of the signature (the generated file above is for sample only)
 		binaryMergerMoveAspectGenerator.generateBinaryMergerMoveAspect("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore",
 			"platform:/resource/org.kermeta.language.merger.binarymerger/src/generated/kmt/org/kermeta/language/merger/binarymerger",
