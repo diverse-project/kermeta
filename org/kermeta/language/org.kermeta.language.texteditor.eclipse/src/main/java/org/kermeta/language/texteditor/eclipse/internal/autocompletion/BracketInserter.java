@@ -1,6 +1,7 @@
 package org.kermeta.language.texteditor.eclipse.internal.autocompletion;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.events.VerifyEvent;
@@ -36,23 +37,23 @@ public class BracketInserter implements VerifyKeyListener {
 				final int offset= selection.x;
 				final int length= selection.y;
 				
-				if (event.character == '{') {		
+				if (event.character == '{'&& checkNextChar(sourceViewer.getDocument(), offset)) {		
 					if (countCouple(completeText,'{','}') == 0) {
 						sourceViewer.getDocument().replace(offset, length, "}");
 					}
 				}
-				if (event.character == '[') {			
+				if (event.character == '['&& checkNextChar(sourceViewer.getDocument(), offset)) {			
 					if (countCouple(completeText,'[',']') == 0) {
 						sourceViewer.getDocument().replace(offset, length, "]");
 					}
 				}
-				if (event.character == '\"') {			
+				if (event.character == '\"'&& checkNextChar(sourceViewer.getDocument(), offset)) {			
 					if ((countCouple(completeText,'"','\0') % 2) == 0){
 						sourceViewer.getDocument().replace(offset, length, "\"");
 					}
 				}
 				if (event.character == '(') {			
-					if (countCouple(completeText,'(',')') == 0){
+					if (countCouple(completeText,'(',')') == 0 && checkNextChar(sourceViewer.getDocument(), offset)){
 						sourceViewer.getDocument().replace(offset, length, ")");
 					}
 				}
@@ -84,6 +85,18 @@ public class BracketInserter implements VerifyKeyListener {
 		}
 		
 		return numberOpen - numberClose;
+	}
+	
+	// Return true if we next character allows automatic insertion
+	private boolean checkNextChar(IDocument document, int offset) throws BadLocationException{
+		if (document.getChar(offset) == ' ') 
+			return true;
+		else if (document.getChar(offset) == '\n') 
+				return true;
+
+		else if (document.getChar(offset) == '\t') 
+				return true;
+		else return false;
 	}
 	
 }
