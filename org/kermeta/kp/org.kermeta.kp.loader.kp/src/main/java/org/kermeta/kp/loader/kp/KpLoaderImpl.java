@@ -65,7 +65,7 @@ public class KpLoaderImpl implements KpLoader{
 			
 			while (i.hasNext()){
 				EObject o = i.next();
-				System.out.println(o.toString());
+				//System.out.println(o.toString());
 				if (o instanceof KermetaProject){
 					result = (KermetaProject) o;
 				}
