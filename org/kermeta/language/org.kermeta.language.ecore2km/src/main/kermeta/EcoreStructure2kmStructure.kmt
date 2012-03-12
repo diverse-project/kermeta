@@ -308,7 +308,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		// If the target kermeta object is null, it means that is has not been created. Thus, the reference must be ignored.
 		if((not ref.eContainingClass.targetKermetaObject.isVoid).andThen{b | ref.eContainingClass.targetKermetaObject.isKindOf(ClassDefinition)}) then
 			
-			var prop : Property init addProperty(false, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
+			var prop : Property init addProperty(ref.containment, ref.name, ref.ordered, ref.derived, not ref.changeable, ref.eType, 
 												 ref.eGenericType, ref.lowerBound, ref.upperBound)
 												 
 			if ref.transient then
