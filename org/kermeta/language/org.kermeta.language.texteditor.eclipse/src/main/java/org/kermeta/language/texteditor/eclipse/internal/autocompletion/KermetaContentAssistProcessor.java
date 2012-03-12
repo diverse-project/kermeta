@@ -323,10 +323,10 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				int cursor = aPackage.length();
 				if (lastQualifier.length() > 0) {
 					if (aPackage.startsWith(lastQualifier)) {
-						propList.add(new KermetaCompletionProposal(aPackage+"::", documentOffset - qlen, qlen, cursor+2, KermetaImage.getImage("/icons/red/package.png"),aPackage,null,null));
+						propList.add(new KermetaCompletionProposal(aPackage, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/red/package.png"),aPackage,null,null));
 					}					   
 				} else {			   
-					propList.add(new KermetaCompletionProposal(aPackage+"::", documentOffset - qlen, qlen, cursor+2, KermetaImage.getImage("/icons/red/package.png"),aPackage,null,null));
+					propList.add(new KermetaCompletionProposal(aPackage, documentOffset - qlen, qlen, cursor, KermetaImage.getImage("/icons/red/package.png"),aPackage,null,null));
 				}
 			}
 		}
