@@ -102,7 +102,7 @@ public class KPBuilder {
 			
 			//compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(),false,outputFolder, true, true, false);
 			boolean saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
-			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles, true, true, false);
+			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles, true, true, true);
 			compiler.initializeTargetFolders(outputRootFolder, outputRootFolder, outputScalaFolder, outputScalaBinaryFolder, outputGenmodelFolder, outputEMFJavaFolder, outputEMFBinaryFolder, outputResourceFolder);
 			refreshFileIndex();
 		} catch (IOException e) {
