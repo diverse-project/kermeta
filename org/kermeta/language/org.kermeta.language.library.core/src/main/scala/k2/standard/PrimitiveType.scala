@@ -614,11 +614,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
     def toLowerCase() :java.lang.String={return value.toLowerCase()}
     def substring(startIndex : Int, endIndex : Int) :java.lang.String={return value.substring(startIndex,endIndex)}
     override def toString() :java.lang.String={if (value != null) {return value.toString} else { return null}}
-    def ksplit(delimiter : String) :java.util.List[String]={
-        var list: java.util.List[String] = new java.util.ArrayList[String]()
-        value.split(delimiter).foreach{e=>list.add(e)}
-        return list;
-    }*/
+*/
    //override def equals(arg0:Any) : Boolean = value.equals(arg0)
 	 override def toString() : java.lang.String = value.toString()
 	 override def hashCode() : Int = value.hashCode()
@@ -653,8 +649,8 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	 //def replace(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
 	 def replaceAll(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
 	 def replaceFirst(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceFirst(arg0,arg1)
-	 def split(arg0:java.lang.String,arg1:Int) : java.util.List[java.lang.String] = java.util.Arrays.asList(value.split(arg0,arg1): _*)
-	 def split(arg0:java.lang.String) : java.util.List[java.lang.String] = java.util.Arrays.asList(value.split(arg0): _*)
+	 def ksplit(arg0:java.lang.String,arg1:Int) : java.util.List[java.lang.String] = java.util.Arrays.asList(value.split(arg0,arg1): _*)
+     def ksplit(delimiter : String) :java.util.List[String] = java.util.Arrays.asList(value.split(delimiter): _*)
 	 def startsWith(arg0:java.lang.String,arg1:Int) : Boolean = value.startsWith(arg0,arg1)
 	 def startsWith(arg0:java.lang.String) : Boolean = value.startsWith(arg0)
 	 def substring(arg0:Int) : java.lang.String = value.substring(arg0)

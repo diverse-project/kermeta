@@ -150,30 +150,25 @@ object TypeEquivalence {
 		ClassDefinition.put("allAttribute", "eAllAttributes")
 		methodEquivalence.put("_root_.org.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
 		
-		
    		//methodEquivalence
-		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-		Str.put("size", "ksize");
-        //        Str.put("split", "ksplit");
-		methodEquivalence.put("_root_.k2.standard.String", Str);
-		methodEquivalence.put("_root_.String", Str);
-		methodEquivalence.put("java.lang.String", Str);
-		methodEquivalence.put("_root_.java.lang.String", Str);
+		val str = new java.util.HashMap[String,String]
+		str.put("size", "ksize");
+        str.put("split", "ksplit");
+		methodEquivalence.put("_root_.k2.standard.String", str);
+		methodEquivalence.put("_root_.String", str);
+		methodEquivalence.put("java.lang.String", str);
+		methodEquivalence.put("_root_.java.lang.String", str);
 		
-		
-		var Resource : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-		Resource.put("getContents", "kgetContents");
-		methodEquivalence.put("_root_.k2.persistence.Resource", Resource);
-		methodEquivalence.put("_root_.org.eclipse.emf.ecore.resource.Resource", Resource);
+		val resource = new java.util.HashMap[String,String]
+		resource.put("getContents", "kgetContents");
+		methodEquivalence.put("_root_.k2.persistence.Resource", resource);
+		methodEquivalence.put("_root_.org.eclipse.emf.ecore.resource.Resource", resource);
 		
         methodEquivalence
-
   };
-	 
+
+
   def getMethodEquivalence(classN:String,methodName:String):String={
-
-   // println("hello")
-
     var className :String = classN
     if (methodName.contains("split")){
        println("getMethodEquivalence " + className + " " + methodName )
