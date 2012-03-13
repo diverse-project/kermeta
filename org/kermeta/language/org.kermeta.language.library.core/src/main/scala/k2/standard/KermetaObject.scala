@@ -40,27 +40,21 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	}
 
 
+  //FIXME GENERICS
+  def isSuperTypeOf(ty : org.kermeta.language.structure.Type) : java.lang.Boolean = {
+	if(this.isInstanceOf[org.kermeta.language.structure.Class] && ty.isInstanceOf[org.kermeta.language.structure.Class]) {
+	      val thisclass = this.asInstanceOf[org.kermeta.language.structure.Class]
+	      val clclass   = ty.asInstanceOf[org.kermeta.language.structure.Class]
 
-  def isSuperTypeOf(cl : org.kermeta.language.structure.Type):Boolean = {
-    if (!(this.isInstanceOf[org.kermeta.language.structure.Class]  ))
-      return false
-    else
-    {
-      if (!cl .isInstanceOf[org.kermeta.language.structure.Class]){
-        return false
-      }
-      var thisclass : org.kermeta.language.structure.Class =this.asInstanceOf[org.kermeta.language.structure.Class]
-      var clclass : org.kermeta.language.structure.Class = cl.asInstanceOf[org.kermeta.language.structure.Class]
-
-      if (k2.utils.UTilScala.getQualifiedNameClassKermeta( clclass.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition,"::").equals( k2.utils.UTilScala.getQualifiedNameClassKermeta(thisclass.getTypeDefinition,"::") ))
-        return true
-      else
-        return clclass.getTypeDefinition.asInstanceOf[org.kermeta.language.structure.ClassDefinition].getSuperType.exists(e=> this.isSuperTypeOf(e))
-      return false
-    }
-
+          k2.utils.UTilScala.getQualifiedNameClassKermeta(clclass.getTypeDefinition,"::")==
+          k2.utils.UTilScala.getQualifiedNameClassKermeta(thisclass.getTypeDefinition,"::") match {
+	    	  case true => true
+	    	  case false => clclass.getTypeDefinition.asInstanceOf[org.kermeta.language.structure.ClassDefinition].
+	    	  				getSuperType.exists(e=> this.isSuperTypeOf(e))
+	      }
+	}
+	false
   }
-
 
 
 //	 def getOwnedTags():org.eclipse.emf.common.util.EList[org.k2.language.structure.Tag]=null;
@@ -76,9 +70,21 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
   def isNotEqual(o : Any) : Boolean = !equals(o)
 
-  def isDirectInstanceOf(cl : EClass) : Boolean = this.eClass().equals(cl)
+  def isDirectInstanceOf(cl : org.kermeta.language.structure.Class) : java.lang.Boolean = {//FIXME GENERICS
+	  this match {
+		  case thisClass : org.kermeta.language.structure.Class =>
+		  k2.utils.UTilScala.getQualifiedNameClassKermeta(cl.getTypeDefinition,"::")==
+		  k2.utils.UTilScala.getQualifiedNameClassKermeta(this.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition,"::")
+		  case _ => false
+	  }
+  }
 
-  def isKindOf(cl : EClass) : Boolean = this.eClass().equals(cl)
+  def isKindOf(cl : org.kermeta.language.structure.Class) : java.lang.Boolean = {//FIXME GENERICS
+	  if(this.isInstanceOf[org.kermeta.language.structure.Class] && cl.isInstanceOf[KermetaObject])
+		  cl.asInstanceOf[KermetaObject].isSuperTypeOf(this.asInstanceOf[org.kermeta.language.structure.Class])
+
+	  false
+  }
 
   def get(prop : org.kermeta.language.structure.Property) :java.lang.Object= {
     if (prop == null){
