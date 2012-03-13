@@ -406,27 +406,25 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
 class RichLong(value: Long)  extends RichNumeric[Long]{
-  override  def isVoid():Boolean = false;
-      def plus(other : Long) :Long={value+other}
-      def mult(other : Long) :Long={value*other}
-      def minus(other : Long) :Long={return value-other}
-      def mod(other : Long) :Long={return value % other}
-      def div(other : Long) :Long={return value/other}
-      def uminus() :Long={return value * (-1);}
+  override  def isVoid() = false
+  def plus(other : Long) : Long = value+other
+  def mult(other : Long) : Long = value*other
+  def minus(other : Long) : Long = value-other
+  def mod(other : Long) : Long = value % other
+  def div(other : Long) : Long = value/other
+  def uminus() : Long = value * (-1)
 
-      override def isLower(other : Long) :Boolean={value<other}
-      override def equals(other : Any) :Boolean={if (other.isInstanceOf[Long]) return value==other.asInstanceOf[Long]; else false}
-      def equals(other : Long) :Boolean={value==other}
-      def compareTo(other : Long) :Int={return value.compare(other.intValue)}
-      override def isGreater(other : Long) :Boolean={return value>other}
-      override def isGreaterOrEqual(other : Long) :Boolean={value>=other}
-      override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
-      def isLowerOrEqual(other : Long) :Boolean={return  value<=other.intValue}
+  override def isLower(other : Long) = value<other
+  override def equals(other : Any) : Boolean={if (other.isInstanceOf[Long]) return value==other.asInstanceOf[Long]; else false}
+  def equals(other : Long) = value==other
+  def compareTo(other : Long) : Int = value.compare(other.intValue)
+  override def isGreater(other : Long) : Boolean = value>other
+  override def isGreaterOrEqual(other : Long) = value>=other
+  override def isNotEqual(other : Any) = !this.equals(other)
+  def isLowerOrEqual(other : Long) = value<=other.intValue
 
-  override def getValue():Object = new java.lang.Long(value)
-  override def getMetaClass():org.kermeta.language.structure.Class={
-      return createMetaClass("kermeta::standard::Long")
-  }
+  override def getValue() : Object = new java.lang.Long(value)
+  override def getMetaClass() : org.kermeta.language.structure.Class = createMetaClass("kermeta::standard::Long")
 
   //generated
    	 override def toString() : java.lang.String = value.toString()
@@ -437,10 +435,9 @@ class RichLong(value: Long)  extends RichNumeric[Long]{
 	   def floatValue() : Float = value.floatValue()
 	   def doubleValue() : Double = value.doubleValue()
     //end generated
-
-
-
 }
+
+
 
 class RichInteger(value: Int)  extends RichNumeric[Int]{
     override  def isVoid():Boolean = false;

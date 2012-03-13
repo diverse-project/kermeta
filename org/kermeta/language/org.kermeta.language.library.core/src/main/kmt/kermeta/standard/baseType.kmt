@@ -1016,27 +1016,36 @@ class Short inherits Numeric<Short> {        @CompilerIgnore "true"
  * TODO : miss operations 
  */
 @CompilerIgnore "true"
-class Long inherits Numeric<Short> {
+class Long inherits Numeric<Long> {
+	@CompilerIgnore "true"
+    operation equals(obj : Object) : Boolean is do end
+          
+    @CompilerIgnore "true"
+    operation hashCode() : Integer is do end
+         
+    @CompilerIgnore "true"
+    operation toString() : String is do end
+         
 	@CompilerIgnore "true"
     operation intValue() : Integer is do end
     
-    /** Parses the string argument as a signed decimal long. */
     @CompilerIgnore "true"
-    operation parseShort(s:String) : Short is do end
+    operation shortValue() : Short is do end
     
-    /** Parses the string argument as a signed long in the radix specified by the second argument. */
-	@CompilerIgnore "true"
-    operation parseShort(s:String, radix:Integer) : Short is do end
-    
-    /**  Returns the value of this Long as a short. */
     @CompilerIgnore "true"
-    operation shortValue() : Integer is do end
+    operation longValue() : Long is do end
     
+    @CompilerIgnore "true"
+    operation floatValue() : Float is do end
+    
+    @CompilerIgnore "true"
+    operation doubleValue() : Double is do end
 }
 
 
 @CompilerIgnore "true"
-class Double inherits Numeric<Double> {        @CompilerIgnore "true"
+class Double inherits Numeric<Double> {        
+		 @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1150,7 +1159,8 @@ class Double inherits Numeric<Double> {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Float inherits Numeric<Float> {        @CompilerIgnore "true"
+class Float inherits Numeric<Float> {        
+		 @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
