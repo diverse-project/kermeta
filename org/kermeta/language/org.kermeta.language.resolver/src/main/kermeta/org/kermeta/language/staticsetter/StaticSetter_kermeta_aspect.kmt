@@ -322,8 +322,10 @@ package behavior {
 					// this is a TypeLiteral  
 					// if this is a singleteton, try to look in the typereference
 					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
-					ops := callTypeLiteral.typeref.type.getAllCallableOperations.select{o|o.name==self.name}
-					
+					if 	callTypeLiteral.typeref.type.isInstanceOf(Class)
+						.andThen{x|callTypeLiteral.typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isSingleton} then
+						ops := callTypeLiteral.typeref.type.getAllCallableOperations.select{o|o.name==self.name}
+					end
 				end
 				//Here we must look into Object which is the implicit superclass of everything
 				if ops.isEmpty then
