@@ -41,6 +41,7 @@ package k2.standard;
  *  @since  2.8
  */
 import org.eclipse.emf.common.util.EList
+import scala.collection.immutable.ListSet
 
 object JavaConversions {
     import java.{ lang => jl, util => ju }
@@ -48,10 +49,48 @@ object JavaConversions {
     import scala.collection.{ generic, immutable, mutable, Traversable }
     import scala.reflect.ClassManifest
   
-    class RichKermetaList[A] ( value : ju.List[A]) extends   EObjectImplForPrimitive with EList[A] with  _root_.k2.standard.KermetaObject{
+    class RichKermetaList[A] ( value : ju.List[A]) extends EObjectImplForPrimitive with EList[A] with _root_.k2.standard.KermetaObject {
 	
-        
-     
+        /*def flatten():Set[_] = {
+            
+        	if (A.isSubtypeOf(Collection)) {
+          
+	        	var result : Set[Object] = new ListSet[Object]()
+	        	var i : ju.Iterator[A] = value.iterator()
+	        	while (i.hasNext()) {
+	        		var current : Collection[_] = i.next().asInstanceOf[Collection[_]]
+	        		var icurrent : ju.Iterator[Object] = current.iterator()
+	        	}
+        		return result
+        	}
+        	else {
+        		
+        	}
+        }*/
+
+        def intersection(elements : ju.Collection[A]) : ju.Collection[A] = {
+    		var result : ju.Collection[A] = new ju.ArrayList[A]()
+    		var tmpSet : ju.Set[A] = new ju.HashSet[A]()
+    		var richElements : RichKermetaCol[A] = new RichKermetaCol[A](elements)
+    		var i : ju.Iterator[A] = value.iterator()
+    		while (i.hasNext()) {
+    			var elem : A = i.next()
+    			if (elements.contains(elem)) {
+    				tmpSet.add(elem)
+    			}
+    		}
+    		i = tmpSet.iterator()
+    		while (i.hasNext()) {
+    			var elem : A = i.next()
+    			var nbElem : Int = Math.min(countElement(elem), richElements.countElement(elem))
+    			val range = 0.until(nbElem)
+    			for (j <- range) {
+    				result.add(elem)
+    			}    			
+    		}
+    		return result
+    	}
+      
         def first():A = {
             if (value.size>0)  
                 return value.get(0)
@@ -449,10 +488,49 @@ object JavaConversions {
         override def isVoid() :Boolean= {value == null}
     }
 
-    class RichKermetaSet[A] ( value : ju.Set[A]) extends RichKermetaCol[A] ( value )
+    class RichKermetaSet[A] ( value : ju.Set[A]) extends RichKermetaCol[A] ( value ) {
+    	     
+    	def intersection(elements : ju.Set[A]) : ju.Set[A] = {
+    		var result : ju.Set[A] = new ju.HashSet[A]()
+    		var i : ju.Iterator[A] = value.iterator()
+    		while (i.hasNext()) {
+    			var elem : A = i.next()
+    			if (elements.contains(elem)) {
+    				result.add(elem)
+    			}
+    		}
+    		return result
+    	}
+    }
 
     class RichKermetaCol[A] ( value : ju.Collection[A]) {
 	  
+    	def intersection(elements : ju.Collection[A]) : ju.Collection[A] = {
+    		var result : ju.Collection[A] = new ju.ArrayList[A]()
+    		var tmpSet : ju.Set[A] = new ju.HashSet[A]()
+    		var richElements : RichKermetaCol[A] = new RichKermetaCol[A](elements)
+    		var i : ju.Iterator[A] = value.iterator()
+    		while (i.hasNext()) {
+    			var elem : A = i.next()
+    			if (elements.contains(elem)) {
+    				tmpSet.add(elem)
+    			}
+    		}
+    		i = tmpSet.iterator()
+    		while (i.hasNext()) {
+    			var elem : A = i.next()
+    			var nbElem : Int = Math.min(countElement(elem), richElements.countElement(elem))
+    			val range = 0.until(nbElem)
+    			for (j <- range) {
+    				result.add(elem)
+    			}
+    			
+    		}
+    		return result
+    	}
+    	
+    	
+      
         def asSequenceType[B]() :java.util.List[B]={
             var res : java.util.List[B] = new java.util.ArrayList[B];
             this.each(e=> res.add(e.asInstanceOf[B]))
