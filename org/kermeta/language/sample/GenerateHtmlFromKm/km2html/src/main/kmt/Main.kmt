@@ -13,11 +13,15 @@ using EcoreUtil
 using EcoreDocHelper
 
 package mainpackage{
+	/** 
+	 * test documentation on MainClass 
+	 */
+	
 	class MainClass
 	{
 		//@main ""
 		operation mainOperation() : Void is do 
-			var path : String init "file:/C:/CodeCamp/Workspace/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
+			var path : String init "platform:/resource/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
 			//var path : String init "platform:/resource/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
 			var repository : ResourceSet init ResourceSet.new
 			var resource : Resource init repository.createResource(path)
@@ -33,7 +37,7 @@ package mainpackage{
 	           if (next.isInstanceOf(ModelingUnit)) then                 
 	           		var mu : ModelingUnit
 	           		mu ?= next
-	           		mu.generateHtml("file:/C:/CodeCamp/Workspace/KermetaDoc/")
+	           		mu.generateHtml("platform:/resource/KermetaDoc/target/html/")
 	           		
 	           end
 	       end

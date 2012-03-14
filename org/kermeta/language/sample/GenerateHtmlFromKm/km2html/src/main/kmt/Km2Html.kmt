@@ -37,58 +37,44 @@ aspect class ModelingUnit {
 	
 	/** Create an html page for Modeling unit */
 	operation createHtml (baseFolder:String) : String is do
-		var html : String init "<HTML>" + "<HEAD>"+ "<TITLE>" + self.name +"</TITLE>"
-		
-		
-		html := html + "</HEAD>"+
-		
-		"<frameset cols=20%,80%>" +
-				"<frame src=allclasses-frame.html name= TOC target = Content scrolling=yes>" +
-				"<frame src=contents.html name= Content scrolling=yes>" +
-			"</frameset>" +
-		"</html>"
-		
-		
-		result := html
+		var html : StringBuffer init StringBuffer.new
+		html.append("<HTML>" + "<HEAD>"+ "<TITLE>" + self.name +"</TITLE>")
+		html.append("</HEAD>")
+		html.append("<frameset cols=20%,80%>")
+		html.append("<frame src=allclasses-frame.html name= TOC target = Content scrolling=yes>")
+		html.append("<frame src=contents.html name= Content scrolling=yes>")
+		html.append("</frameset>")
+		html.append("</html>")
+				
+		result := html.toString
 	end
 	
 	
 	/**create Toc page for the ModelingUnit page*/
 	operation createTocpage(baseFolder:String) : Void is do
 		var path : String init baseFolder + "/" + "allclasses-frame.html"
-		var contents : String init  "<h3>All Classes </h3>"
-		var html : String init String.new
-		contents := contents +
-			"<html>" +
-			"<body>"
+		var contents : StringBuffer init StringBuffer.new
+		contents.append("<h3>All Classes </h3>")
+		var html : StringBuffer init StringBuffer.new
+		contents.append("<html>" + "<body>")
 		//create links list of the packages, should add calls to the operations for creating the pages for packages
-		packages.each{pack | html:=html + pack.createClassesHtml(baseFolder)}
-		
-		
-		
+		packages.each{pack | html.append(pack.createClassesHtml(baseFolder))}
+				
 		//set package list of the Toc page
-		if html != "" then
-		contents := contents +
-			 		html
-				 
+		if html.toString != "" then
+			contents.append(html.toString)
 		end
-		html := ""
-		
-		
-		FileIO.writeTextFile(path.toURI, contents)
-		 
+				
+		FileIO.writeTextFile(path.toURI, contents.toString)
 	end
-	
-	
 }
 
 aspect class TypeDefinition {
 	
-	
 	/** Create html code */
 	operation createHtml (baseFolder:String) : String is do
-			result := ""
-			end
+		result := ""
+		end
 	/** Create classes html code */
 	operation createClassesHtml (baseFolder:String) : String is do
 		result:=""
@@ -110,349 +96,274 @@ aspect class ClassDefinition{
     
     /** generate html for contents page */
 	operation generateClassesHtml (baseFolder:String, packageName : String) : String is do
-		var path : String init baseFolder + "/" + self.name + ".html"
-		var contents : String init String.new
-		contents := contents + "<html><head><title>" + self.name + "</title></head>"
-		contents := contents + "<body BGCOLOR = white>"
+	
+	var path : String init baseFolder + "/" + self.name + ".html"
+	var contents : StringBuffer init StringBuffer.new
+	contents.append("<html><head><title>" + self.name + "</title></head>\n")
+	contents.append("<body BGCOLOR = white>")
 		
-		// Start of Top NAVBAR
-contents := contents + "<A NAME=navbar_top><!-- --></A>"
-contents := contents + "<A HREF=#skip-navbar_top title=Skip navigation links></A>"
-
-contents := contents + "<TABLE BORDER=0 WIDTH=100% CELLPADDING=1 CELLSPACING=0 SUMMARY="">"
-contents := contents +"<TR>"
-
-contents := contents + "<TD COLSPAN=2 BGCOLOR=#EEEEFF CLASS=NavBarCell1>"
-contents := contents + "<A NAME=navbar_top_firstrow><!-- --></A>"
-contents := contents + "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=3 SUMMARY="">"
-//the linking words on the first ligne navbar
- contents := contents + "<TR ALIGN=center VALIGN=top>"
- // link to the page of packages
-contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF= x.html><FONT CLASS=NavBarFont1><B>Package</B></FONT></A>&nbsp;</TD>"
-// link to the page of classes
-contents := contents +  "<TD BGCOLOR=#FFFFFF CLASS=NavBarCell1Rev> &nbsp;<FONT CLASS=NavBarFont1Rev><B>Class</B></FONT>&nbsp;</TD>"
-//link to help and index pages
-contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=index-1.html><FONT CLASS=NavBarFont1><B>Index</B></FONT></A>&nbsp;</TD>"
-contents := contents +  "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=help-doc.html><FONT CLASS=NavBarFont1><B>Help</B></FONT></A>&nbsp;</TD>"
-contents := contents +  "</TR>"
-contents := contents + "</TABLE>"
-contents := contents + "</TD>"
-contents := contents + "<TD ALIGN=right VALIGN=top ROWSPAN=3><EM>"
-contents := contents + "</EM>"
-contents := contents + "</TD>"
-contents := contents + "</TR>"
-// seconde part of navbar
-contents := contents + "<TR>"
-contents := contents + "<TD BGCOLOR=white CLASS=NavBarCell2><FONT SIZE=-2>"
-contents := contents + "&nbsp;PREV CLASS&nbsp;"
-contents := contents + "&nbsp;<A HREF=Zero.html title=javadoc><B>NEXT CLASS</B></A></FONT></TD>"
-contents := contents + "</TR>"
-//links to different parts of the class
-contents := contents + "<TR>"
-contents := contents + "<TD VALIGN=top CLASS=NavBarCell3><FONT SIZE=-2>"
-contents := contents +  "SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF=#constraint_summary>CONSTRAINT</A>&nbsp;|&nbsp;<A HREF=#field_summary>PROPERTY</A>&nbsp;|&nbsp;<A HREF=#method_summary>OPERATION</A></FONT></TD>"
-contents := contents + "<TD VALIGN=top CLASS=NavBarCell3><FONT SIZE=-2>"
-contents := contents + "DETAIL:&nbsp;<A HREF=#constraint_detail>CONSTRAINT</A>&nbsp;|&nbsp;<A HREF=#field_detail>PROPERTY</A>&nbsp;|&nbsp;<A HREF=#method_detail>OPERATION</A></FONT></TD>"
-contents := contents + "</TR>"
-contents := contents + "</TABLE>"
-
-contents := contents + "<A NAME=skip-navbar_top></A>"
-
-// end of TOP NAVBAR
-contents := contents + "<HR>"
-//Start of class data
-
-contents := contents + "<H2>"
-contents := contents + "<FONT SIZE=-1>"
-contents := contents + packageName + "</FONT>"
-contents := contents + "<BR>"
-contents := contents + self.name + "</H2>"
-
-contents := contents + "<DL>"
-contents := contents + "<DT><B>isAbstract :"  + isAbstract.toString() + "</B>"
- + "<DT><B>isSingleton : " + isSingleton.toString() + "</B>"
-contents := contents + "</DL>"
-contents := contents + "<HR>"
-
-
-contents := contents + "<P>"
-contents := contents + "<HR>"
-
-contents := contents + "<P>"
-
-//Constraint summury
-contents := contents + "<A NAME=constraint_summary><!-- --></A>"
-contents := contents + "<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR BGCOLOR=#CCCCFF CLASS=TableHeadingColor>"
-contents := contents + "<TH ALIGN=left COLSPAN=2><FONT SIZE=+2>"
-contents := contents + "<B>Constraint Summary</B></FONT></TH>"
-contents := contents + "</TR>"
-		// list of constraint
-//invOwned.each{oa | contents:= contents + oa.createCodeHtml(self.name)}
-//end of Constraint Summury
-contents := contents + "</TABLE>"
-contents := contents + "&nbsp;"
-
-
-// Field Summury
-
-contents := contents + "<A NAME=field_summary><!-- --></A>"
-contents := contents + "<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR BGCOLOR=#CCCCFF CLASS=TableHeadingColor>"
-contents := contents + "<TH ALIGN=left COLSPAN=2><FONT SIZE=+2>"
-contents := contents + "<B>Property Summary</B></FONT></TH>"
-contents := contents + "</TR>"
-		// list of properties
-ownedAttribute.each{oa | contents:= contents + oa.createCodeHtml(self.name)}
-//end of Field Summury
-contents := contents + "</TABLE>"
-contents := contents + "&nbsp;"
-
-// Method Summury
-contents := contents + "<A NAME=method_summary><!-- --></A>"
-contents := contents + "<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR BGCOLOR=#CCCCFF CLASS=TableHeadingColor>"
-contents := contents + "<TH ALIGN=left COLSPAN=2><FONT SIZE=+2>"
-contents := contents + "<B>Method Summary</B></FONT></TH>"
-contents := contents + "</TR>"
-
+	
+	
+	//Start of class data
+	contents.append("<H2>\n")
+	contents.append("<FONT SIZE=-1>\n")
+	contents.append(packageName + "</FONT>\n")
+	contents.append("<BR>\n")
+	contents.append("Class ")
+	if isAbstract == true then
+		contents.append("Abstract ")
+	end
+	if isSingleton == true then
+		contents.append("Singleton ")
+	end
+	contents.append(self.name + "</H2>\n")
+	contents.append("<HR>\n")
+	
+	//specification of classes, get tag properties
+	self.kTag.each{tag | 
+		if tag.name == "documentation" then
+			contents.append(tag.~value + "\n")
+		else 
+			contents.append("@")
+			contents.append(tag.name)
+			contents.append ( "\"")
+			contents.append(tag.~value)
+			contents.append ("\"\n")
+		end
+	}
+	
+  	contents.append("<HR>\n")
+	// Method Summury
+	if ownedOperation.size != 0 then
+		contents.append("<A NAME=method_summary><!-- --></A>\n")
+		contents.append("<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY=>\n")
+		contents.append("<TR BGCOLOR=#CCCCFF>\n")
+		contents.append("<TH ALIGN=left COLSPAN=2><FONT SIZE=+2>\n")
+		contents.append("<B>Method Summary</B></FONT></TH>\n")
+		contents.append("</TR>\n")
 		// list of operations
-ownedOperation.each{oa | contents:= contents + oa.createCodeHtml(self.name)}
-//end of Field Summury
-contents := contents + "</TABLE>"
-contents := contents + "&nbsp;"
-contents := contents + "<P>"
-
-// Enum Constant Detail
-
-contents := contents + "<A NAME=constraint_detail><!-- --></A>"
-contents := contents + "<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR BGCOLOR=#CCCCFF CLASS=TableHeadingColor>"
-contents := contents + "<TH ALIGN=left COLSPAN=1><FONT SIZE=+2>"
-contents := contents + "<B>Enum Constant Detail</B></FONT></TH>"
-contents := contents + "</TR>"
-contents := contents + "</TABLE>"
-
-contents := contents + "<A NAME=ZERO><!-- --></A><H3>"
-contents := contents + "ZERO</H3>"
-contents := contents + "<PRE>"
-contents := contents + "public static final <A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A> <B>ZERO</B></PRE>"
-contents := contents + "<DL>"
-contents := contents + "<DL>"
-contents := contents + "</DL>"
-contents := contents + "</DL>"
-contents := contents + "<HR>"
-
-contents := contents + "<A NAME=NEWSER><!-- --></A><H3>"
-contents := contents + "NEWSER</H3>"
-contents := contents + "<PRE>"
-contents := contents + "public static final <A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A> <B>NEWSER</B></PRE>"
-contents := contents + "<DL>"
-contents := contents + "<DL>"
-contents := contents + "</DL>"
-contents := contents + "</DL>"
-contents := contents + "<HR>"
-
-contents := contents + "<A NAME=VALIDATEUR><!-- --></A><H3>"
-contents := contents + "VALIDATEUR</H3>"
-contents := contents + "<PRE>"
-contents := contents + "public static final <A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A> <B>VALIDATEUR</B></PRE>"
-contents := contents + "<DL>"
-contents := contents + "<DL>"
-contents := contents + "</DL>"
-contents := contents + "</DL>"
-contents := contents + "<HR>"
-
-contents := contents + "<A NAME=MODERATEUR><!-- --></A><H3>"
-contents := contents + "MODERATEUR</H3>"
-contents := contents + "<PRE>"
-contents := contents + "public static final <A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A> <B>MODERATEUR</B></PRE>"
-contents := contents + "<DL>"
-contents := contents + "<DL>"
-contents := contents + "</DL>"
-contents := contents + "</DL>"
-contents := contents + "<HR>"
-
-contents := contents + "<A NAME=ADMIN><!-- --></A><H3>"
-contents := contents + "ADMIN</H3>"
-contents := contents + "<PRE>"
-contents := contents + "public static final <A HREF=SDZLevel.html title=enum in fr.dworkin.sdz.javadoc>SDZLevel</A> <B>ADMIN</B></PRE>"
-contents := contents + "<DL>"
-contents := contents + "<DL>"
-contents := contents + "</DL>"
-contents := contents + "</DL>"
-
-// Field Detail
-
-contents := contents + "<A NAME=field_detail><!-- --></A>"
-contents := contents + "<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR BGCOLOR=#CCCCFF CLASS=TableHeadingColor>"
-contents := contents + "<TH ALIGN=left COLSPAN=1><FONT SIZE=+2>"
-contents := contents + "<B>Field Detail</B></FONT></TH>"
-contents := contents + "</TR>"
-contents := contents + "</TABLE>"
-
-// list of property detail
-ownedAttribute.each{oa | contents:= contents + oa.createPropertyDetail()}
-
-// Method Detail
-
-contents := contents + "<A NAME=method_detail><!-- --></A>"
-contents := contents + "<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR BGCOLOR=#CCCCFF CLASS=TableHeadingColor>"
-contents := contents + "<TH ALIGN=left COLSPAN=1><FONT SIZE=+2>"
-contents := contents + "<B>Method Detail</B></FONT></TH>"
-contents := contents + "</TR>"
-contents := contents + "</TABLE>"
-
-ownedOperation.each{oa | contents:= contents + oa.createOperationDetail()}
-
-// End of Class Data
-contents := contents + "<HR>"
-//Start of bottom NavBar
-contents := contents + "<A NAME=navbar_bottom><!-- --></A>"
-contents := contents + "<A HREF=#skip-navbar_bottom title=Skip navigation links></A>"
-contents := contents + "<TABLE BORDER=0 WIDTH=100% CELLPADDING=1 CELLSPACING=0 SUMMARY="">"
-contents := contents + "<TR>"
-contents := contents + "<TD COLSPAN=2 BGCOLOR=#EEEEFF CLASS=NavBarCell1>"
-contents := contents + "<A NAME=navbar_bottom_firstrow><!-- --></A>"
-contents := contents + "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=3 SUMMARY="">"
- contents := contents +  "<TR ALIGN=center VALIGN=top>"
-contents := contents +   "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=package-summary.html><FONT CLASS=NavBarFont1><B>Package</B></FONT></A>&nbsp;</TD>"
-contents := contents +   "<TD BGCOLOR=#FFFFFF CLASS=NavBarCell1Rev> &nbsp;<FONT CLASS=NavBarFont1Rev><B>Class</B></FONT>&nbsp;</TD>"
-contents := contents +   "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=class-use/SDZLevel.html><FONT CLASS=NavBarFont1><B>Use</B></FONT></A>&nbsp;</TD>"
-contents := contents +   "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=package-tree.html><FONT CLASS=NavBarFont1><B>Tree</B></FONT></A>&nbsp;</TD>"
-contents := contents +   "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=deprecated-list.html><FONT CLASS=NavBarFont1><B>Deprecated</B></FONT></A>&nbsp;</TD>"
-contents := contents +   "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=index-1.html><FONT CLASS=NavBarFont1><B>Index</B></FONT></A>&nbsp;</TD>"
-contents := contents +   "<TD BGCOLOR=#EEEEFF CLASS=NavBarCell1>    <A HREF=help-doc.html><FONT CLASS=NavBarFont1><B>Help</B></FONT></A>&nbsp;</TD>"
-contents := contents +   "</TR>"
-contents := contents + "</TABLE>"
-contents := contents + "</TD>"
-contents := contents + "<TD ALIGN=right VALIGN=top ROWSPAN=3><EM>"
-contents := contents + "</EM>"
-contents := contents + "</TD>"
-contents := contents + "</TR>"
-
-contents := contents + "<TR>"
-contents := contents + "<TD BGCOLOR=white CLASS=NavBarCell2><FONT SIZE=-2>"
-contents := contents + "&nbsp;PREV CLASS&nbsp;"
-contents := contents + "&nbsp;<A HREF=Zero.html title=class in fr.dworkin.sdz.javadoc><B>NEXT CLASS</B></A></FONT></TD>"
-contents := contents + "<TD BGCOLOR=white CLASS=NavBarCell2><FONT SIZE=-2>"
-contents := contents +   "<A HREF=SDZLevel.html target=_top><B>FRAMES</B></A>  &nbsp;"
-contents := contents + "&nbsp;<A HREF=SDZLevel.html target=_top><B>NO FRAMES</B></A>  &nbsp;"
-
-contents := contents + "</FONT></TD>"
-contents := contents + "</TR>"
-contents := contents + "<TR>"
-contents := contents + "<TD VALIGN=top CLASS=NavBarCell3><FONT SIZE=-2>"
-contents := contents +   "SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF=#constraint_summary>ENUM CONSTANTS</A>&nbsp;|&nbsp;<A HREF=#field_summary>FIELD</A>&nbsp;|&nbsp;<A HREF=#method_summary>METHOD</A></FONT></TD>"
-contents := contents + "<TD VALIGN=top CLASS=NavBarCell3><FONT SIZE=-2>"
-contents := contents + "DETAIL:&nbsp;<A HREF=#constraint_detail>ENUM CONSTANTS</A>&nbsp;|&nbsp;<A HREF=#field_detail>FIELD</A>&nbsp;|&nbsp;<A HREF=#method_detail>METHOD</A></FONT></TD>"
-contents := contents + "</TR>"
-contents := contents + "</TABLE>"
-contents := contents + "<A NAME=skip-navbar_bottom></A>"
-
-// End of bottom NAVBAR
-contents := contents + "<HR>"
-
-
-contents := contents + "</body></html>"
-		 
+		ownedOperation.each{oa | contents.append(oa.createCodeHtml(self.name))}
+		contents.append("</TABLE>\n")
 		
+	end
+	            
+// Field Summury
+	if ownedAttribute.size != 0 then
+	contents.append("<A NAME=field_summary><!-- --></A>\n")
+	contents.append("<TABLE BORDER=1 WIDTH=100% CELLPADDING=3 CELLSPACING=0 SUMMARY=>\n")
+	contents.append("<TR BGCOLOR=#CCCCFF>\n")
+	contents.append("<TH ALIGN=left COLSPAN=2><FONT SIZE=+2>\n")
+	contents.append("<B>Property Summary</B></FONT></TH>\n")
+	contents.append("</TR>\n")
+	// list of properties
+	ownedAttribute.each{oa | contents.append(oa.createCodeHtml(self.name))}
+	//end of Field Summury
+	contents.append("</TABLE>\n")
+	end
+			
+	if ownedOperation.size !=0 then
+		contents.append("<HR>")
+		contents.append("<FONT SIZE=+2> <B> Details of properties and operations </B></FONT></TH>\n")
+		contents.append("<HR>")
+	// list of property detail
+		ownedOperation.each{oa | contents.append(oa.createOperationDetail())}
+	end
+	
+
+	contents.append("</body></html>\n")
+	FileIO.writeTextFile(path.toURI(), contents.toString)
+	result := ""
+end
+}
+
+aspect class Type {
+	operation gettypeDefinition() : String is do
+	
+		var s : String init ""
 		
+		result:= s
+	end
+}
+
+aspect class ParameterizedType{
+	operation gettypeDefinition() : String is do
+		var s : String init ""
 		
-		FileIO.writeTextFile(path.toURI(), contents)
+		result:= s
+	end
+}
+
+aspect class Class {
+	
+	operation gettypeDefinition() : String is do
+		
+		result := self.typeDefinition.name
+		stdio.writeln(typeDefinition.toString)		
 	end
 }
 
 aspect class Property{
 /** create html code of a property **/
 	operation createCodeHtml(className : String) : String is do
-		var html: String init String.new
-		html := html +  "<TR BGCOLOR=white CLASS=TableRowColor>"
- + "<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>"
- + "<CODE>"
- + self.type.toString()
- + "</CODE></FONT></TD>"
- + "<TD><CODE><B><A HREF=" + className +".html#" + self.name + ">" + self.name +"</A></B></CODE>"
- + "<BR>"
- + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>"
- + "</TR>"
- 
-		 result:= html
+		
+		var typeString : String init ""
+		if type.isVoid then typeString :="<Not Set>"
+		else
+			typeString := type.gettypeDefinition
+		end
+		
+		var html: StringBuffer init StringBuffer.new
+		html.append("<TR BGCOLOR=white CLASS=TableRowColor>\n")
+		html.append("<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>\n")
+		html.append("<CODE>\n")
+		html.append(typeString)
+		html.append("</CODE></FONT></TD>\n")
+		
+		html.append("<TD><CODE><B><A HREF=" + className +".html#" + self.name + ">")
+		html.append("<FONT COLOR=RED> attribute </FONT>")
+		if isReadOnly == true then
+			html.append("<FONT COLOR=RED> readonly </FONT>")
+		end 
+		html.append(self.name + "[" + lower.toString + ".." + upper.toString + "]" + "</A></B></CODE>\n")
+		html.append("<br>")
+		self.kTag.each{tag | 
+			
+		if tag.name == "documentation" then
+			html.append(tag.~value + "\n")
+		else 
+			html.append("@")
+			html.append(tag.name)
+			html.append ( "\"\n")
+			html.append(tag.~value)
+			html.append ("\"\n")
+		end
+	}
+		html.append("<BR>\n")
+		html.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>\n")
+		html.append("</TR>\n")
+ 		result:= html.toString
 	end
 	
 /** creat html code for property detail field */
 	operation createPropertyDetail(): String is do 
-		var html : String init String.new
-		html:= html + "<A NAME="+ self.name + "><!-- --></A><H3>"
-+ self.name +"</H3>"
-+ "<PRE>"
-+ self.type.toString()+ "<B> "+ self.name + "</B></PRE>"
-+ "<DL>" + self.isReadOnly.toString()
- + "<DL>"
- + "</DL>"
- + "</DL>"
- + "<HR>"
-		result:= html
+		var typeString : String init String.new
+		if type.isVoid then typeString :="<Not Set>"
+		else
+			typeString := type.gettypeDefinition
+		end
+		var html : StringBuffer init StringBuffer.new
+		html.append("<A NAME="+ self.name + "><!-- --></A><H3>\n")
+		html.append(self.name +"</H3>\n")
+		html.append("<PRE>\n")
+		html.append(typeString + "<B> "+ self.name + "</B></PRE>\n")
+		html.append(typeString + "<B> " + "isReadOnly </B>: " + self.isReadOnly.toString() + "</PRE>\n")
+		html.append("<B> " + "default : </B>" + self.default.toString()+ "</PRE>\n")
+		html.append("<B> " + "isComposite: </B>" + self.isComposite.toString()+ "</PRE>\n")
+		html.append("<B> " + "isDerived : </B>" + self.isDerived.toString()+ "</PRE>\n")
+		html.append("<B> " + "isID : </B>" + self.isID.toString()+ "</PRE>\n")
+		html.append("<B> " + "isGetterAbstract :</B>" + self.isGetterAbstract.toString()+ "</PRE>\n")
+		html.append("<B> " + "isSetterAbstract :</B>" + self.isSetterAbstract.toString()+ "</PRE>\n")
+		html.append("<HR>")
+		result:= html.toString
 	end	
 }
 
 aspect class Operation {
 	/** create html code of an Operation **/
 	operation createCodeHtml(className : String) : String is do
-		var html: String init String.new
-		html := html +  "<TR BGCOLOR=white CLASS=TableRowColor>"
- + "<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>"
- + "<CODE>"
- + self.type.toString()
- + "</CODE></FONT></TD>"
- + "<TD><CODE><B><A HREF=" + className +".html#"+ self.name + ">" + self.name +"</A></B></CODE>"
- + "<BR>"
- + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>"
- + "</TR>"
- 
-	result:= html
+		var typeString : String init ""
+	
+		if type.isVoid then typeString :="<Not Set>"
+		else
+			typeString := type.gettypeDefinition
+		end
+		
+		var html: StringBuffer init StringBuffer.new
+		html.append("<TR BGCOLOR=white CLASS=TableRowColor>\n")
+		html.append("<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>\n")
+		html.append("<CODE>\n")
+		html.append(typeString)
+		html.append("</CODE></FONT></TD>\n")
+		html.append("<TD><CODE><B><A HREF=" + className +".html#" + self.name + ">") 
+		html.append(self.name+ "(")
+		ownedParameter.each{op | var paraType : String init String.new
+								 if op.type.isVoid then paraType :="<Not Set>"
+								 else
+									paraType := op.type.gettypeDefinition
+								 end
+								 html.append(paraType + ",")}
+		html.append(")</A></B></CODE>\n")
+		
+		self.kTag.each{tag | 
+		if tag.name == "documentation" then
+			html.append(tag.~value + "\n")
+		else 
+			html.append("@")
+			html.append(tag.name)
+			html.append ( "\"")
+			html.append(tag.~value)
+			html.append ("\"")
+		end
+	}	
+		html.append("<BR>\n")
+		html.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>\n")
+		html.append("</TR>\n")
+ 		result:= html.toString
 	end
 	
 	/** creat html code for Operation detail */
 	operation createOperationDetail(): String is do 
-		var html : String init String.new
-		html:= html + "<A NAME="+ self.name + "><!-- --></A><H3>"
-+ "nom</H3>"
-+ "<PRE>"
-+ self.type.toString()+ "<B>"+ self.name + "</B></PRE>"
-+ "<DL>"
- + "<DL>"
- + "</DL>"
- + "</DL>"
- + "<HR>"
-		result:= html
+		var typeString : String init String.new
+		if type.isVoid then typeString :="<Not Set>"
+		else
+			typeString := type.gettypeDefinition
+		end
+		var html : StringBuffer init StringBuffer.new
+		html.append("<A NAME="+ self.name + "><!-- --></A><H3>\n")
+		html.append(self.name +"</H3>\n")
+		html.append("<PRE>\n")
+		html.append(typeString + "<B> ")
+		if isAbstract == true then
+		html.append("<FONT COLOR = RED> Abstract </FONT>")
+		end
+		html.append(self.name + "(")
+		ownedParameter.each{op | var paraType : String init String.new
+								 if op.type.isVoid then paraType :="<Not Set>"
+								 else
+									paraType := op.type.gettypeDefinition
+								 end
+								 html.append(paraType + ",")}
+		
+	//	invConstraint.each{in | html.append("<FONT COLOR = RED>" + in.stereotype.toString() + " "+ in.name + "</FONT>")}
+		
+		html.append( ")"+ "</B></PRE>\n")
+		html.append("<HR>")
+		result:= html.toString
 	end	
 }
 
 aspect class Constraint {
 	/** create html code of an Operation **/
 	operation createCodeHtml(className : String) : String is do
-		var html: String init String.new
-		html := html +  "<TR BGCOLOR=white CLASS=TableRowColor>"
- + "<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>"
- + "<CODE>"
- + self.stereotype.toString()
- + "</CODE></FONT></TD>"
- + "<TD><CODE><B><A HREF=" + className +".html#constraint_detail>" + self.name +"</A></B></CODE>"
- + "<BR>"
- + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>"
- + "</TR>"
+		var html: StringBuffer init StringBuffer.new
+		html.append("<TR BGCOLOR=white CLASS=TableRowColor>\n")
+ 		html.append("<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>\n")
+		html.append("<CODE>\n")
+		html.append(self.stereotype.toString())
+		html.append("</CODE></FONT></TD>\n")
+		html.append("<TD><CODE><B><A HREF=" + className +".html#constraint_detail>" + self.name +"</A></B></CODE>\n")
+		html.append("<BR>\n")
+		html.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>\n")
+		html.append("</TR>\n")
  
-	result:= html
+	result:= html.toString
 	end
 	
 	/** creat html code for Operation detail */
 	operation createPeropertyDetail(): String is do 
-		var html : String init String.new
+		var html : StringBuffer init StringBuffer.new
 		
-		result:= html
+		result:= html.toString
 	end	
 }
 
@@ -460,27 +371,30 @@ aspect class Constraint {
 aspect class ModelType {
 	/** Create html code */
 	operation createHtml (baseFolder:String) : String is do
-			var html : String init String.new	
-			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
-			result := html
+		var html : StringBuffer init StringBuffer.new	
+		html.append(" <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>")
+		
+		result := html.toString
     end
 }
 
 aspect class PrimitiveType{
 	/** Create html code */
 	operation createHtml (baseFolder:String) : String is do
-			var html : String init String.new	
-			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
-    		result:=html
+		var html : StringBuffer init StringBuffer.new	
+		html.append(" <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>")
+    		
+    	result:=html.toString
     end
 }
 
 aspect class Enumeration{
 	/** Create html code */
 	operation createHtml (baseFolder:String) : String is do
-			var html : String init String.new	
-			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
-    		result:=html
+		var html : StringBuffer init StringBuffer.new	
+		html.append(" <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>")
+    	
+    	result:=html.toString
     end
 }
 
@@ -488,16 +402,15 @@ aspect class Package{
 		
 	/** Create html code */
 	operation createClassesHtml (baseFolder:String) : String is do
-			var html : String init String.new	
-			html:= html + "<h4>"self.name "</h4>"
+		var html : StringBuffer init StringBuffer.new	
+		html.append("<h4>"+self.name+ "</h4>")
 			
-			ownedTypeDefinition.each{otd | html:= html + otd.createClassesHtml(baseFolder)
-			otd.generateClassesHtml(baseFolder,self.name)
-			}
-			nestedPackage.each {subPack | html := html + subPack.createClassesHtml(baseFolder)}
-			
-		
-			result:=html
+		ownedTypeDefinition.each{otd | html.append(otd.createClassesHtml(baseFolder))
+		otd.generateClassesHtml(baseFolder,self.name)
+		}
+		nestedPackage.each {subPack | html.append(subPack.createClassesHtml(baseFolder))}
+				
+		result:=html.toString
     
 	end
 	 
