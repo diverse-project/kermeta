@@ -7,6 +7,7 @@
 package org.kermeta.diagnostic.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -126,6 +127,26 @@ public class DiagnosticModelImpl extends EObjectImpl implements DiagnosticModel 
 			constraints = new EObjectResolvingEList<Constraint>(Constraint.class, this, DiagnosticPackage.DIAGNOSTIC_MODEL__CONSTRAINTS);
 		}
 		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean containsErrors() {
+		if(this.diagnostics.size() == 0){
+			return false;
+		}
+		else{
+			Iterator<ConstraintDiagnostic> it  = this.diagnostics.iterator();
+			while(it.hasNext()){
+				ConstraintDiagnostic cd = it.next();
+				if(!cd.isIsWarning()) return true;
+			}
+			// there are only warning
+			return false;
+		}
 	}
 
 	/**

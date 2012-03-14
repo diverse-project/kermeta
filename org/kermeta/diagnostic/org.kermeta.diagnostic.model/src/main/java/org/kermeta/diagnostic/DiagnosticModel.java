@@ -77,4 +77,15 @@ public interface DiagnosticModel extends EObject {
 	 */
 	EList<Constraint> getConstraints();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Convenient operation to check if it contains ConstraintDiagnostic that aren't warning only
+	 * <!-- end-model-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean containsErrors();
+
 } // DiagnosticModel

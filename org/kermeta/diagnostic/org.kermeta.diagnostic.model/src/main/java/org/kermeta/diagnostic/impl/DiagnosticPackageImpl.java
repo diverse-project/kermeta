@@ -454,6 +454,8 @@ public class DiagnosticPackageImpl extends EPackageImpl implements DiagnosticPac
 		initEReference(getDiagnosticModel_References(), this.getReference(), null, "references", null, 0, -1, DiagnosticModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDiagnosticModel_Constraints(), this.getConstraint(), null, "constraints", null, 0, -1, DiagnosticModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(diagnosticModelEClass, ecorePackage.getEBoolean(), "containsErrors", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(constraintDiagnosticEClass, ConstraintDiagnostic.class, "ConstraintDiagnostic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConstraintDiagnostic_AppliesTo(), this.getReference(), null, "appliesTo", null, 1, 1, ConstraintDiagnostic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConstraintDiagnostic_FailedConstraint(), this.getConstraint(), null, "failedConstraint", null, 1, 1, ConstraintDiagnostic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

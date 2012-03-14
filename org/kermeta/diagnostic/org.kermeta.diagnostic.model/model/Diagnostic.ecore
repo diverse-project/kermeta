@@ -7,6 +7,11 @@
     <eSubpackages name="diagnostic" nsURI="http://diagnostic/1.0/org/kermeta/diagnostic"
         nsPrefix="org_kermeta_diagnostic">
       <eClassifiers xsi:type="ecore:EClass" name="DiagnosticModel">
+        <eOperations name="containsErrors" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Convenient operation to check if it contains ConstraintDiagnostic that aren't warning only"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="diagnostics" upperBound="-1"
             eType="#//kermeta/diagnostic/ConstraintDiagnostic" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
