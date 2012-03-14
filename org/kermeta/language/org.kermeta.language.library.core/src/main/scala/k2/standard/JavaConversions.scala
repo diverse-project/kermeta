@@ -56,7 +56,10 @@ object JavaConversions {
     	 * the result is the list containing all the elements of all the elements of self.
     	 * See also OCL function flatten
     	 */
-    	// TODO Are we sure that collection element of value is of type ju.Collection?
+    	/* TODO: Is there any way to compare directly two types in Scala, to know if A <: Collection?
+    	 * This would enable to return value without iterating in the case of a collection containing collections and other objects 
+    	 * and would prevent from testing "current.isInstanceOf[ju.Collection[_]]" for each element of value
+    	 */
         def flatten() : ju.Collection[_] = {
         	var result : ju.Collection[Object] = new ju.ArrayList[Object]()
 	        var i : ju.Iterator[A] = value.iterator()
@@ -503,7 +506,10 @@ object JavaConversions {
     	 * the result is the set containing all the elements of all the elements of self.
     	 * See also OCL function flatten
     	 */
-    	// TODO Are we sure that collection element of value is of type ju.Collection?
+    	/* TODO: Is there any way to compare directly two types in Scala, to know if A <: Collection?
+    	 * This would enable to return value without iterating in the case of a collection containing collections and other objects 
+    	 * and would prevent from testing "current.isInstanceOf[ju.Collection[_]]" for each element of value
+    	 */
     	override def flatten() : ju.Collection[_] = {
         	var result : ju.Set[Object] = new ju.HashSet[Object]()
 	        var i : ju.Iterator[A] = value.iterator()
@@ -542,7 +548,10 @@ object JavaConversions {
     	 * the result is the collection containing all the elements of all the elements of self.
     	 * See also OCL function flatten
     	 */
-    	// TODO Are we sure that collection element of value is of type ju.Collection?
+    	/* TODO: Is there any way to compare directly two types in Scala, to know if A <: Collection?
+    	 * This would enable to return value without iterating in the case of a collection containing collections and other objects 
+    	 * and would prevent from testing "current.isInstanceOf[ju.Collection[_]]" for each element of value
+    	 */
         def flatten() : ju.Collection[_] = {
         	var result : ju.Collection[Object] = new ju.ArrayList[Object]()
 	        var i : ju.Iterator[A] = value.iterator()
