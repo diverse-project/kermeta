@@ -51,23 +51,31 @@ object JavaConversions {
   
     class RichKermetaList[A] ( value : ju.List[A]) extends EObjectImplForPrimitive with EList[A] with _root_.k2.standard.KermetaObject {
 	
-        /*def flatten():Set[_] = {
-            
-        	if (A.isSubtypeOf(Collection)) {
-          
-	        	var result : Set[Object] = new ListSet[Object]()
-	        	var i : ju.Iterator[A] = value.iterator()
-	        	while (i.hasNext()) {
-	        		var current : Collection[_] = i.next().asInstanceOf[Collection[_]]
-	        		var icurrent : ju.Iterator[Object] = current.iterator()
+    	/**
+    	 * If the element type is not a collection type, this results in the same self. If the element type is a collection type,
+    	 * the result is the list containing all the elements of all the elements of self.
+    	 * See also OCL function flatten
+    	 */
+    	// TODO Are we sure that collection element of value is of type ju.Collection?
+        def flatten() : ju.Collection[_] = {
+        	var result : ju.Collection[Object] = new ju.ArrayList[Object]()
+	        var i : ju.Iterator[A] = value.iterator()
+	        while (i.hasNext()) {
+	        	var current : A = i.next()
+	        	if (current.isInstanceOf[ju.Collection[_]]) {
+	        		result.addAll(current.asInstanceOf[ju.Collection[_ <: Object]])
 	        	}
-        		return result
-        	}
-        	else {
-        		
-        	}
-        }*/
+	        	else {
+	        		return value
+	        	}	        	
+	        }
+        	return result
+        }
 
+        /**
+         * Multiset intersection: The result collection references each element "elem" from elements a number of times equals to
+         * the minimum of the multiplicities of "elem" in value and in elements (min 0)
+         */
         def intersection(elements : ju.Collection[A]) : ju.Collection[A] = {
     		var result : ju.Collection[A] = new ju.ArrayList[A]()
     		var tmpSet : ju.Set[A] = new ju.HashSet[A]()
@@ -82,7 +90,7 @@ object JavaConversions {
     		i = tmpSet.iterator()
     		while (i.hasNext()) {
     			var elem : A = i.next()
-    			var nbElem : Int = Math.min(countElement(elem), richElements.countElement(elem))
+    			var nbElem : Int = Math.min(this.countElement(elem), richElements.countElement(elem))
     			val range = 0.until(nbElem)
     			for (j <- range) {
     				result.add(elem)
@@ -489,7 +497,31 @@ object JavaConversions {
     }
 
     class RichKermetaSet[A] ( value : ju.Set[A]) extends RichKermetaCol[A] ( value ) {
-    	     
+      
+    	/**
+    	 * If the element type is not a collection type, this results in the same self. If the element type is a collection type,
+    	 * the result is the set containing all the elements of all the elements of self.
+    	 * See also OCL function flatten
+    	 */
+    	// TODO Are we sure that collection element of value is of type ju.Collection?
+    	override def flatten() : ju.Collection[_] = {
+        	var result : ju.Set[Object] = new ju.HashSet[Object]()
+	        var i : ju.Iterator[A] = value.iterator()
+	        while (i.hasNext()) {
+	        	var current : A = i.next()
+	        	if (current.isInstanceOf[ju.Collection[_]]) {
+	        		result.addAll(current.asInstanceOf[ju.Collection[_ <: Object]])
+	        	}
+	        	else {
+	        		return value
+	        	}	        	
+	        }
+        	return result
+        }
+    	
+    	/**
+    	 * Set intersection: The result set contains each elements contained by both value and elements
+    	 */
     	def intersection(elements : ju.Set[A]) : ju.Set[A] = {
     		var result : ju.Set[A] = new ju.HashSet[A]()
     		var i : ju.Iterator[A] = value.iterator()
@@ -505,6 +537,31 @@ object JavaConversions {
 
     class RichKermetaCol[A] ( value : ju.Collection[A]) {
 	  
+    	/**
+    	 * If the element type is not a collection type, this results in the same self. If the element type is a collection type,
+    	 * the result is the collection containing all the elements of all the elements of self.
+    	 * See also OCL function flatten
+    	 */
+    	// TODO Are we sure that collection element of value is of type ju.Collection?
+        def flatten() : ju.Collection[_] = {
+        	var result : ju.Collection[Object] = new ju.ArrayList[Object]()
+	        var i : ju.Iterator[A] = value.iterator()
+	        while (i.hasNext()) {
+	        	var current : A = i.next()
+	        	if (current.isInstanceOf[ju.Collection[_]]) {
+	        		result.addAll(current.asInstanceOf[ju.Collection[_ <: Object]])
+	        	}
+	        	else {
+	        		return value
+	        	}	        	
+	        }
+        	return result
+        }
+      
+        /**
+         * Multiset intersection: The result collection references each element "elem" from elements a number of times equals to
+         * the minimum of the multiplicities of "elem" in value and in elements (min 0)
+         */
     	def intersection(elements : ju.Collection[A]) : ju.Collection[A] = {
     		var result : ju.Collection[A] = new ju.ArrayList[A]()
     		var tmpSet : ju.Set[A] = new ju.HashSet[A]()
