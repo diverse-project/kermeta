@@ -46,7 +46,12 @@ public class KermetaPreferencePage
 				PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN,
 				"&Save intermediate build files",
 				getFieldEditorParent()));
-
+		
+		addField(
+				new BooleanFieldEditor(
+					PreferenceConstants.P_IGNORE_BUILD_ERROR_BOOLEAN,
+					"Ignore build error (NOT recommanded)",
+					getFieldEditorParent()));
 		
 		addField(new RadioGroupFieldEditor(
 				PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE,

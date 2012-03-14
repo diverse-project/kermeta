@@ -324,7 +324,7 @@ public class KPBuilder {
 						((IProject)kpProjectFile.getParent()).getFolder("target").create(true, true, null);
 				}
 				
-				
+				compiler.stopOnError = !Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_IGNORE_BUILD_ERROR_BOOLEAN);
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,false);
 				
 				// generate urimap file

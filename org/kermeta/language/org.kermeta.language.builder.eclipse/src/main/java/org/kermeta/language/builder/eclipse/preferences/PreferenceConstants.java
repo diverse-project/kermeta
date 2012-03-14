@@ -19,6 +19,7 @@ public class PreferenceConstants {
 	public static final String P_KP_EDITOR_ONSAVE_STRING = "kpEditorOnSavePreference";
 
 	public static final String P_PROJECT_ONOPEN_STRING = "projectOnOpenPreference";
-	//public static final String P_STRING = "stringPreference";
+	
+	public static final String P_IGNORE_BUILD_ERROR_BOOLEAN = "ignoreBuildErrorPreference";
 	
 }

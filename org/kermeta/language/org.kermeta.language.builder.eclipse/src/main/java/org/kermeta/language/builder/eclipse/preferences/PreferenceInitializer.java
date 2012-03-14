@@ -27,6 +27,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		
 		store.setDefault(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING, PreferenceToBuildAction.GENERATE_KM);
 		store.setDefault(PreferenceConstants.P_PROJECT_ONOPEN_STRING, PreferenceToBuildAction.NONE);
+		
+		store.setDefault(PreferenceConstants.P_IGNORE_BUILD_ERROR_BOOLEAN, false);
+		
 		/*store.setDefault(PreferenceConstants.P_STRING,
 				"Default value");*/
 	}
