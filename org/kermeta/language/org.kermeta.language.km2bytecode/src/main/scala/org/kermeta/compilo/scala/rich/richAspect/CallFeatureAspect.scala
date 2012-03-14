@@ -38,7 +38,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                     res.append("null.asInstanceOf[" + getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) + "]")
                 }
             }else{
-                res.append("utils.UTilScala.newInstance(")
+                res.append("_root_.k2.utils.UTilScala.newInstance(")
                 visit(thi.getTarget,res)
                 res.append(")")
 
@@ -158,7 +158,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
             res.append("]")
         }
         else{
-            res.append("utils.UTilScala.isInstanceOf(")
+            res.append("_root_.k2.utils.UTilScala.isInstanceOf(")
 
             generateTarget(thi,res);
             res.append(",");
