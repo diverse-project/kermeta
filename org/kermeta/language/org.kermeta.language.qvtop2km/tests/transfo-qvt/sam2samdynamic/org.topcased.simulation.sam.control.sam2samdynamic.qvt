@@ -1,0 +1,69 @@
+------------------------------------------------------------------------------
+--
+-- org.topcased.simulation.sam.control.sam2samdynamic.qvt
+-- 
+-- Copyright (c) 2005-2008 TOPCASED consortium.
+--
+-- Contributors:
+--  bmaggi Atos Origin benoit.maggi@atosorigin.com
+--    
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+-------------------------------------------------------------------------------
+transformation sam2samdynamic(in samModel:sam, out samdynamicModel:samdynamic);
+
+
+--------------------------------------------------------------------------------
+-------------------------- helper ----------------------------------------------
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+-------------------------- mapping ---------------------------------------------
+--------------------------------------------------------------------------------
+
+-- the main mapping
+-- The mapping is launch on the root element : sam::Model
+main() {
+	var lmodelSet:Set(sam::Model) := samModel.objectsOfType(sam::Model);
+	if (not(lmodelSet->isEmpty()))
+	{
+		lmodelSet -> map Model();
+	}
+	else
+	{
+		var lsystemSet:Set(sam::System) :=samModel.objectsOfType(sam::System);
+		if (not(lsystemSet->isEmpty()))
+		{
+			lsystemSet![System].map System2DynamicSystem();
+		}
+		else
+		{
+			samModel.objectsOfType(sam::Automaton)![Automaton].map Automaton2DynamicAutomaton();
+		}
+	}
+	--samModel.objectsOfType(sam::Model) -> map Model();
+	
+}
+
+-- Model() 
+-- Mapping of the sam::Model element
+mapping sam::Model::Model() : sam::Model {
+	(self.modelContent![Automaton]) -> map Automaton2DynamicAutomaton();	
+	(self.modelContent![System]) -> map System2DynamicSystem();	
+}
+
+------------------------System--------
+mapping sam::System::System2DynamicSystem() : DynamicSystem 
+{
+	result.childs := (self.listElements)[Automaton] -> map Automaton2DynamicAutomaton();
+	result.childs += (self.listElements)[System] -> map System2DynamicSystem();
+	result.reference := self;
+}
+
+mapping sam::Automaton::Automaton2DynamicAutomaton() : DynamicAutomaton 
+{
+	result.reference := self;
+}

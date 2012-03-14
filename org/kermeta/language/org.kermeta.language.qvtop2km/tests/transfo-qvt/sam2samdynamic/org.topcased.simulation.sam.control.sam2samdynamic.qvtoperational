@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <qvtoperational:OperationalTransformation name="sam2samdynamic" uri="http://www.example.com/sam2samdynamic" isBlackbox="false" usedModelType="/1 /2">
+    <ownedOperation xsi:type="qvtoperational:EntryOperation" name="main">
+      <body>
+        <content xsi:type="imperativeocl:VariableInitExp" withResult="false">
+          <referredVariable name="lmodelSet" type="/0/@ownedType.9">
+            <initExpression xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.9">
+              <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+              <argument xsi:type="essentialocl:TypeExp">
+                <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+              </argument>
+              <referredOperation href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+            </initExpression>
+          </referredVariable>
+        </content>
+        <content xsi:type="essentialocl:IfExp">
+          <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <condition xsi:type="essentialocl:OperationCallExp">
+            <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+            <source xsi:type="essentialocl:OperationCallExp">
+              <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+              <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.9" referredVariable="/0/@ownedOperation.0/@body/@content.0/@referredVariable"/>
+              <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o95"/>
+            </source>
+            <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o186"/>
+          </condition>
+          <elseExpression xsi:type="imperativeocl:BlockExp">
+            <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <body xsi:type="imperativeocl:VariableInitExp" withResult="false">
+              <referredVariable name="lsystemSet" type="/0/@ownedType.3">
+                <initExpression xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.3">
+                  <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+                  <argument xsi:type="essentialocl:TypeExp">
+                    <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                  </argument>
+                  <referredOperation href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+                </initExpression>
+              </referredVariable>
+            </body>
+            <body xsi:type="essentialocl:IfExp">
+              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <condition xsi:type="essentialocl:OperationCallExp">
+                <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+                <source xsi:type="essentialocl:OperationCallExp">
+                  <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+                  <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.3" referredVariable="/0/@ownedOperation.0/@body/@content.1/@elseExpression/@body.0/@referredVariable"/>
+                  <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o95"/>
+                </source>
+                <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o186"/>
+              </condition>
+              <elseExpression xsi:type="imperativeocl:BlockExp">
+                <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+                <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.3" isStrict="false">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="selectOne">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                    <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.1">
+                      <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+                      <argument xsi:type="essentialocl:TypeExp">
+                        <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                        <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                      </argument>
+                      <referredOperation href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+                    </source>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                    </iterator>
+                    <condition xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                    </condition>
+                  </source>
+                </body>
+              </elseExpression>
+              <thenExpression xsi:type="imperativeocl:BlockExp">
+                <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+                <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.2" isStrict="false">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                  <source xsi:type="imperativeocl:ImperativeIterateExp" name="selectOne">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.3" referredVariable="/0/@ownedOperation.0/@body/@content.1/@elseExpression/@body.0/@referredVariable"/>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    </iterator>
+                    <condition xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    </condition>
+                  </source>
+                </body>
+              </thenExpression>
+            </body>
+          </elseExpression>
+          <thenExpression xsi:type="imperativeocl:BlockExp">
+            <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <body xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.10">
+              <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.9" referredVariable="/0/@ownedOperation.0/@body/@content.0/@referredVariable"/>
+              <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.1" isStrict="false">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.1/@thenExpression/@body.0/@iterator.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+                </source>
+              </body>
+              <iterator name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+              </iterator>
+            </body>
+          </thenExpression>
+        </content>
+      </body>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="Model" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.0" referredObject="/0/@ownedOperation.1/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.2">
+              <source xsi:type="essentialocl:CollectionLiteralExp" type="/0/@ownedType.1">
+                <part xsi:type="essentialocl:CollectionItem">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                  <item xsi:type="imperativeocl:ImperativeIterateExp" name="selectOne">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                    <source xsi:type="essentialocl:CollectionLiteralExp" type="/0/@ownedType.0">
+                      <part xsi:type="essentialocl:CollectionItem">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                        <item xsi:type="essentialocl:PropertyCallExp">
+                          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
+                            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+                          </source>
+                          <referredProperty href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0/@ownedAttribute.0"/>
+                        </item>
+                      </part>
+                    </source>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                    </iterator>
+                    <condition xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                    </condition>
+                  </item>
+                </part>
+              </source>
+              <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.3" isStrict="false">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.0/@iterator.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                </source>
+              </body>
+              <iterator name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+              </iterator>
+            </content>
+            <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.4">
+              <source xsi:type="essentialocl:CollectionLiteralExp" type="/0/@ownedType.3">
+                <part xsi:type="essentialocl:CollectionItem">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                  <item xsi:type="imperativeocl:ImperativeIterateExp" name="selectOne">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    <source xsi:type="essentialocl:CollectionLiteralExp" type="/0/@ownedType.0">
+                      <part xsi:type="essentialocl:CollectionItem">
+                        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                        <item xsi:type="essentialocl:PropertyCallExp">
+                          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                          <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
+                            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+                          </source>
+                          <referredProperty href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0/@ownedAttribute.0"/>
+                        </item>
+                      </part>
+                    </source>
+                    <iterator name="autoGenVar">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                    </iterator>
+                    <condition xsi:type="essentialocl:TypeExp">
+                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    </condition>
+                  </item>
+                </part>
+              </source>
+              <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.2" isStrict="false">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@body/@content.0/@body/@content.1/@iterator.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                </source>
+              </body>
+              <iterator name="autoGenVar">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+              </iterator>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="System2DynamicSystem" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.2/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.5">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.2">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.7">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.6">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    </source>
+                    <referredProperty href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3/@ownedAttribute.3"/>
+                  </source>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                  </iterator>
+                  <condition xsi:type="essentialocl:TypeExp">
+                    <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                  </condition>
+                </source>
+                <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.3" isStrict="false">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@body/@content.0/@body/@content.0/@value.0/@iterator.0">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                  </source>
+                </body>
+                <iterator name="autoGenVar">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                </iterator>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="false">
+              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.5">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0/@ownedAttribute.1"/>
+              </left>
+              <value xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.4">
+                <source xsi:type="imperativeocl:ImperativeIterateExp" name="xselect" type="/0/@ownedType.8">
+                  <source xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.6">
+                    <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                    </source>
+                    <referredProperty href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3/@ownedAttribute.3"/>
+                  </source>
+                  <iterator name="autoGenVar">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+                  </iterator>
+                  <condition xsi:type="essentialocl:TypeExp">
+                    <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                  </condition>
+                </source>
+                <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.2" isStrict="false">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                  <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@body/@content.0/@body/@content.1/@value.0/@iterator.0">
+                    <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                  </source>
+                </body>
+                <iterator name="autoGenVar">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                </iterator>
+              </value>
+            </content>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="Automaton2DynamicAutomaton" isUnique="false" lower="0">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.1" referredObject="/0/@ownedOperation.3/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@result.0">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1/@ownedAttribute.2"/>
+              </left>
+              <value xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@context">
+                <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" isUnique="false" lower="0" kind="out" extent="/0/@modelParameter.1">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+      </result>
+    </ownedOperation>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(ModelContent)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Automaton)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(DynamicAutomaton)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(System)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(DynamicSystem)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(DynamicModel)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.2"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(ModelContent)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Automaton)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(System)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(Model)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(Model)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
+    </ownedType>
+    <ownedVariable name="this" type="/0"/>
+    <modelParameter name="samModel" type="/1"/>
+    <modelParameter name="samdynamicModel" type="/2" kind="out"/>
+  </qvtoperational:OperationalTransformation>
+  <qvtoperational:ModelType name="sam">
+    <metamodel href="platform:/resource/modelLibrary/sam.emof#/0"/>
+  </qvtoperational:ModelType>
+  <qvtoperational:ModelType name="samdynamic">
+    <metamodel href="platform:/resource/modelLibrary/samdynamic.emof#/"/>
+  </qvtoperational:ModelType>
+</xmi:XMI>
