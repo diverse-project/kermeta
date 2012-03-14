@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="umldynamic"
+    nsURI="http://www.topcased.org/simulation/uml/umldynamic/1.0.0" nsPrefix="umldynamic">
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//InstanceSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicInstance" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//InstanceSpecification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventPool" lowerBound="1"
+        eType="#//EventPool" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancesSM" upperBound="-1"
+        eType="#//InstanceSM" containment="true" eOpposite="#//InstanceSM/instance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activityExecution" upperBound="-1"
+        eType="#//ActivityExecution" containment="true" eOpposite="#//ActivityExecution/instance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicModel" lowerBound="1"
+        eType="#//DynamicModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actif" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ActExecList" upperBound="-1"
+        eType="#//ActivityExecutionList" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceSM">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//StateMachine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fireables" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentStates" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
+        eType="#//DynamicInstance" eOpposite="#//DynamicInstance/instancesSM"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventPool">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventOcc" upperBound="-1"
+        eType="#//EventOccurence" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventOccurence">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventParameters" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ValueSpecification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simEvent" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//SimEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityExecution">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
+        eType="#//DynamicInstance" eOpposite="#//DynamicInstance/activityExecution"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" lowerBound="1"
+        upperBound="-1" eType="#//Token" containment="true" eOpposite="#//Token/activityExecution"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1"
+        eType="#//Context" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callingActivity" eType="#//ActivityExecution"
+        eOpposite="#//ActivityExecution/subActivity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callingNode" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//CallAction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enabledNodes" upperBound="-1"
+        eType="#//EnabledNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subActivity" upperBound="-1"
+        eType="#//ActivityExecution" eOpposite="#//ActivityExecution/callingActivity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activity" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//ActivityExecutionList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Context">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//VariableInstance" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Token" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activityExecution" lowerBound="1"
+        eType="#//ActivityExecution" eOpposite="#//ActivityExecution/tokens"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlToken" eSuperTypes="#//Token">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ActivityNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enabledFlows" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ControlFlow"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectToken" eSuperTypes="#//Token">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ValueSpecification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectNode" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ActivityNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enabledFlows" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ObjectFlow"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ValueSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnabledNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ActivityNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simEvent" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//SimEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityExecutionList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nextActivities" upperBound="-1"
+        eType="#//ActivityExecution" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceSM" eType="#//InstanceSM"/>
+  </eClassifiers>
+</ecore:EPackage>

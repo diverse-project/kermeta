@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="scenario"
+    nsURI="http://www.topcased.org/simulation/scenario/1.0.0" nsPrefix="scenario">
+  <eClassifiers xsi:type="ecore:EClass" name="Scenario">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traces" upperBound="-1"
+        eType="#//Trace" eOpposite="#//Trace/scenario"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simEvents" upperBound="-1"
+        eType="#//SimEvent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scenario" lowerBound="1"
+        eType="#//Scenario" eOpposite="#//Scenario/traces"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="internal" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractEvent" eSuperTypes="#//SimEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subEvent" upperBound="-1"
+        eType="#//AbstractEvent" containment="true" eOpposite="#//AbstractEvent/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//AbstractEvent"
+        eOpposite="#//AbstractEvent/subEvent"/>
+  </eClassifiers>
+</ecore:EPackage>

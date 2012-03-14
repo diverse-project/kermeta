@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="samdynamic"
+    nsURI="http://www.topcased.org/simulation/sam/samdynamic/1.0.0" nsPrefix="samdynamic">
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicSystem" eSuperTypes="#//DynamicModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.topcased.sam/model/SAM.ecore#//System"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childs" upperBound="-1"
+        eType="#//DynamicModel" containment="true" eOpposite="#//DynamicModel/parent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicAutomaton" eSuperTypes="#//DynamicModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fireables" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.topcased.sam/model/SAM.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.topcased.sam/model/SAM.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.topcased.sam/model/SAM.ecore#//Automaton"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="computed" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.topcased.sam/model/SAM.ecore#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actived" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.topcased.sam/model/SAM.ecore#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//DynamicSystem" eOpposite="#//DynamicSystem/childs"/>
+  </eClassifiers>
+</ecore:EPackage>

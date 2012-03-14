@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="umlevent"
+    nsURI="http://www.topcased.org/simulation/uml/umlevent/1.0.0" nsPrefix="umlevent">
+  <eClassifiers xsi:type="ecore:EClass" name="TimeTriggerEvent" eSuperTypes="platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//AbstractEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeTrigger" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Trigger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StopSimEvent" eSuperTypes="platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//AbstractEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InjectSimEvent" eSuperTypes="platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//AbstractEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//StateMachine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceSpecifications"
+        lowerBound="1" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//InstanceSpecification"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PeriodicSimEvent" eSuperTypes="platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//AbstractEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="period" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simEvent" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//SimEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDate" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InjectActionEvent" eSuperTypes="platform:/plugin/org.topcased.simulation.scenario/model/scenario.ecore#//AbstractEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ActivityNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activityExecution" eType="ecore:EClass platform:/plugin/org.topcased.simulation.uml.umldynamic/model/umldynamic.ecore#//ActivityExecution"/>
+  </eClassifiers>
+</ecore:EPackage>
