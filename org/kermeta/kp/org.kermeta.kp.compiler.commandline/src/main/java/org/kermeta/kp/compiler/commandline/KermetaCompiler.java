@@ -352,7 +352,8 @@ public class KermetaCompiler {
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
 					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 		
-					if (stopOnError && results.getDiagnostics().size() > 0) {
+					
+					if (stopOnError && results.containsErrors()) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The merged result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						this.errorMessage = "The merged result is not valid. Compilation not complete for this project.";
 						this.hasFailed = true;
@@ -385,7 +386,7 @@ public class KermetaCompiler {
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
 					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 					
-					if (stopOnError && results.getDiagnostics().size() > 0) {
+					if (stopOnError && results.containsErrors()) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
 						this.hasFailed = true;
