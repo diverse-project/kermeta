@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="samdynamic" uri="http://www.topcased.org/simulation/sam/samdynamic/1.0.0">
+  <ownedType xsi:type="emof:Class" name="DynamicSystem" superClass="//@ownedType.2">
+    <ownedAttribute name="reference" isOrdered="true">
+      <type xsi:type="emof:Class" href="sam.emof#/0/@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="childs" type="//@ownedType.2" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.2/@ownedAttribute.2"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="DynamicAutomaton" superClass="//@ownedType.2">
+    <ownedAttribute name="fireables" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="sam.emof#/0/@ownedType.10"/>
+    </ownedAttribute>
+    <ownedAttribute name="currentState" isOrdered="true">
+      <type xsi:type="emof:Class" href="sam.emof#/0/@ownedType.9"/>
+    </ownedAttribute>
+    <ownedAttribute name="reference" isOrdered="true">
+      <type xsi:type="emof:Class" href="sam.emof#/0/@ownedType.2"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="DynamicModel">
+    <ownedAttribute name="computed" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="sam.emof#/0/@ownedType.12"/>
+    </ownedAttribute>
+    <ownedAttribute name="actived" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="sam.emof#/0/@ownedType.12"/>
+    </ownedAttribute>
+    <ownedAttribute name="parent" type="//@ownedType.0" isOrdered="true" opposite="//@ownedType.0/@ownedAttribute.1"/>
+  </ownedType>
+</emof:Package>

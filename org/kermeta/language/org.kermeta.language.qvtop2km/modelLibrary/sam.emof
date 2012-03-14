@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+  <emof:Package name="sam" uri="http://www.topcased.org/SAM/1.3">
+    <ownedType xsi:type="emof:Class" name="Model">
+      <ownedAttribute name="modelContent" type="/0/@ownedType.1" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="flowGroups" type="/0/@ownedType.5" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="requirementModel" isOrdered="true">
+        <type xsi:type="emof:Class" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.10"/>
+      </ownedAttribute>
+      <superClass href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.8"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ModelContent" isAbstract="true" superClass="/0/@ownedType.4">
+      <ownedAttribute name="listMultiPort" type="/0/@ownedType.11" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="listPorts" type="/0/@ownedType.12" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="comments" type="/0/@ownedType.41" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedOperation name="getAllPorts" type="/0/@ownedType.12" isOrdered="true" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Automaton" superClass="/0/@ownedType.1">
+      <ownedAttribute name="isModesAutomaton" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedAttribute>
+      <ownedAttribute name="listTransitions" type="/0/@ownedType.10" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="listStates" type="/0/@ownedType.6" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="isInstanceOf" type="/0/@ownedType.2" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="System" superClass="/0/@ownedType.1">
+      <ownedAttribute name="listStorages" type="/0/@ownedType.28" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="listGates" type="/0/@ownedType.29" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="listFlows" type="/0/@ownedType.24" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="listElements" type="/0/@ownedType.1" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="isInstanceOf" type="/0/@ownedType.3" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="NamedItem" isAbstract="true">
+      <ownedAttribute name="name" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      </ownedAttribute>
+      <ownedAttribute name="comment" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      </ownedAttribute>
+      <ownedOperation name="getQualifiedName" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      </ownedOperation>
+      <ownedOperation name="getQualifiedName" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+        <ownedParameter name="root">
+          <type xsi:type="emof:Class" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.8"/>
+        </ownedParameter>
+        <ownedParameter name="typed">
+          <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        </ownedParameter>
+      </ownedOperation>
+      <superClass href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.8"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="FlowGroup" superClass="/0/@ownedType.4">
+      <ownedOperation name="getFlows" type="/0/@ownedType.24" isOrdered="true" upper="-1"/>
+      <ownedOperation name="isInternal" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="getProducers" type="/0/@ownedType.1" isOrdered="true" upper="-1"/>
+      <ownedOperation name="getConsumers" type="/0/@ownedType.1" isOrdered="true" upper="-1"/>
+      <ownedOperation name="getKind" isOrdered="true">
+        <type xsi:type="emof:Class" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.2"/>
+      </ownedOperation>
+      <ownedOperation name="isInput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="isOutput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="getSubscribers" type="/0/@ownedType.1" isOrdered="true" upper="-1"/>
+      <ownedOperation name="isInput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        <ownedParameter name="boundary" type="/0/@ownedType.1"/>
+      </ownedOperation>
+      <ownedOperation name="isOutput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        <ownedParameter name="boundary" type="/0/@ownedType.1"/>
+      </ownedOperation>
+      <ownedOperation name="isInternal" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        <ownedParameter name="boundary" type="/0/@ownedType.1"/>
+      </ownedOperation>
+      <ownedOperation name="getComponents" type="/0/@ownedType.5" isOrdered="true" upper="-1"/>
+      <ownedOperation name="isStored" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="AbstractState" isAbstract="true" superClass="/0/@ownedType.4">
+      <ownedAttribute name="activeElements" type="/0/@ownedType.4" isOrdered="true" upper="-1"/>
+      <ownedOperation name="getOutLink" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.33"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="InitialState" superClass="/0/@ownedType.9"/>
+    <ownedType xsi:type="emof:Class" name="MacroState" superClass="/0/@ownedType.6">
+      <ownedAttribute name="composition" type="/0/@ownedType.6" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="comments" type="/0/@ownedType.41" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="State" superClass="/0/@ownedType.6">
+      <ownedOperation name="getInLink" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.33"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Transition" superClass="/0/@ownedType.4">
+      <ownedAttribute name="condition" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      </ownedAttribute>
+      <ownedAttribute name="emission" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      </ownedAttribute>
+      <ownedAttribute name="priority" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.39"/>
+      </ownedAttribute>
+      <ownedAttribute name="dest" type="/0/@ownedType.9" isOrdered="true"/>
+      <ownedAttribute name="source" type="/0/@ownedType.6" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="MultiPort" superClass="/0/@ownedType.4">
+      <ownedAttribute name="listPort" type="/0/@ownedType.12" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="isInstanceOf" type="/0/@ownedType.11" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Port" isAbstract="true" superClass="/0/@ownedType.4">
+      <ownedAttribute name="isInstanceOf" type="/0/@ownedType.12" isOrdered="true"/>
+      <ownedOperation name="isSink" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="getInputFlow" type="/0/@ownedType.24" isOrdered="true"/>
+      <ownedOperation name="getOutputFlow" type="/0/@ownedType.24" isOrdered="true"/>
+      <ownedOperation name="isOutputPort" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="isInputPort" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="getDirectFlowGroup" type="/0/@ownedType.5" isOrdered="true"/>
+      <ownedOperation name="getFlowGroup" type="/0/@ownedType.5" isOrdered="true"/>
+      <ownedOperation name="getRealContainer" type="/0/@ownedType.4" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="InputPort" isAbstract="true" superClass="/0/@ownedType.12">
+      <ownedAttribute name="sink" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedAttribute>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="OutputPort" isAbstract="true" superClass="/0/@ownedType.12"/>
+    <ownedType xsi:type="emof:Class" name="DataPort" isAbstract="true" superClass="/0/@ownedType.12">
+      <ownedAttribute name="type" type="/0/@ownedType.49" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="InDataPort" superClass="/0/@ownedType.15 /0/@ownedType.13"/>
+    <ownedType xsi:type="emof:Class" name="OutDataPort" superClass="/0/@ownedType.15 /0/@ownedType.14"/>
+    <ownedType xsi:type="emof:Class" name="ControlPort" isAbstract="true" superClass="/0/@ownedType.12"/>
+    <ownedType xsi:type="emof:Class" name="InControlPort" superClass="/0/@ownedType.18 /0/@ownedType.13"/>
+    <ownedType xsi:type="emof:Class" name="OutControlPort" superClass="/0/@ownedType.18 /0/@ownedType.14"/>
+    <ownedType xsi:type="emof:Class" name="MessagePort" isAbstract="true" superClass="/0/@ownedType.12"/>
+    <ownedType xsi:type="emof:Class" name="InMessagePort" superClass="/0/@ownedType.21 /0/@ownedType.13"/>
+    <ownedType xsi:type="emof:Class" name="OutMessagePort" superClass="/0/@ownedType.21 /0/@ownedType.14"/>
+    <ownedType xsi:type="emof:Class" name="Flow" isAbstract="true" superClass="/0/@ownedType.4">
+      <ownedAttribute name="group" type="/0/@ownedType.5" isOrdered="true"/>
+      <ownedOperation name="getSource" type="/0/@ownedType.12" isOrdered="true"/>
+      <ownedOperation name="getDest" type="/0/@ownedType.12" isOrdered="true"/>
+      <ownedOperation name="getSubscribers" type="/0/@ownedType.1" isOrdered="true" upper="-1"/>
+      <ownedOperation name="getProducers" type="/0/@ownedType.1" isOrdered="true" upper="-1"/>
+      <ownedOperation name="getConsumers" type="/0/@ownedType.1" isOrdered="true" upper="-1"/>
+      <ownedOperation name="isInternal" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="isInput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="isOutput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+      <ownedOperation name="isInput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        <ownedParameter name="boundary" type="/0/@ownedType.1"/>
+      </ownedOperation>
+      <ownedOperation name="isOutput" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        <ownedParameter name="boundary" type="/0/@ownedType.1"/>
+      </ownedOperation>
+      <ownedOperation name="isInternal" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+        <ownedParameter name="boundary" type="/0/@ownedType.1"/>
+      </ownedOperation>
+      <ownedOperation name="getComponents" type="/0/@ownedType.5" isOrdered="true" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="DataFlow" superClass="/0/@ownedType.24">
+      <ownedAttribute name="source" type="/0/@ownedType.15" isOrdered="true"/>
+      <ownedAttribute name="dest" type="/0/@ownedType.15" isOrdered="true"/>
+      <ownedOperation name="isStored" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.22"/>
+      </ownedOperation>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ControlFlow" superClass="/0/@ownedType.24">
+      <ownedAttribute name="source" type="/0/@ownedType.18" isOrdered="true"/>
+      <ownedAttribute name="dest" type="/0/@ownedType.18" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="MessageFlow" superClass="/0/@ownedType.24">
+      <ownedAttribute name="source" type="/0/@ownedType.21" isOrdered="true"/>
+      <ownedAttribute name="dest" type="/0/@ownedType.21" isOrdered="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="DataStorage" superClass="/0/@ownedType.4">
+      <ownedAttribute name="in" type="/0/@ownedType.16" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.17" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="isInstanceOf" type="/0/@ownedType.28" isOrdered="true"/>
+      <ownedOperation name="getAllPorts" type="/0/@ownedType.12" isOrdered="true" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Gate" isAbstract="true" superClass="/0/@ownedType.4">
+      <ownedOperation name="getFlowGroup" type="/0/@ownedType.5" isOrdered="true">
+        <ownedParameter name="startingPoint" type="/0/@ownedType.12"/>
+      </ownedOperation>
+      <ownedOperation name="getAllPorts" type="/0/@ownedType.12" isOrdered="true" upper="-1"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Broadcast" isAbstract="true" superClass="/0/@ownedType.29"/>
+    <ownedType xsi:type="emof:Class" name="DataBroadcast" superClass="/0/@ownedType.30">
+      <ownedAttribute name="in" type="/0/@ownedType.16" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.17" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ControlBroadcast" superClass="/0/@ownedType.30">
+      <ownedAttribute name="in" type="/0/@ownedType.19" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.20" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="MessageBroadcast" superClass="/0/@ownedType.30">
+      <ownedAttribute name="in" type="/0/@ownedType.22" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.23" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Composition" superClass="/0/@ownedType.29">
+      <ownedAttribute name="in" type="/0/@ownedType.16" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.17" isOrdered="true" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Decomposition" superClass="/0/@ownedType.29">
+      <ownedAttribute name="in" type="/0/@ownedType.16" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.17" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="MessageSplit" superClass="/0/@ownedType.29">
+      <ownedAttribute name="in" type="/0/@ownedType.22" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="outData" type="/0/@ownedType.17" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="outControl" type="/0/@ownedType.20" isOrdered="true" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Merge" isAbstract="true" superClass="/0/@ownedType.29"/>
+    <ownedType xsi:type="emof:Class" name="DataMerge" superClass="/0/@ownedType.37">
+      <ownedAttribute name="in" type="/0/@ownedType.16" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.17" isOrdered="true" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ControlMerge" superClass="/0/@ownedType.37">
+      <ownedAttribute name="in" type="/0/@ownedType.19" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.20" isOrdered="true" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="MessageMerge" superClass="/0/@ownedType.37">
+      <ownedAttribute name="in" type="/0/@ownedType.22" isOrdered="true" upper="-1" isComposite="true"/>
+      <ownedAttribute name="out" type="/0/@ownedType.23" isOrdered="true" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Comment">
+      <ownedAttribute name="body" isOrdered="true">
+        <type xsi:type="emof:PrimitiveType" href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.50"/>
+      </ownedAttribute>
+      <ownedAttribute name="annotatedItem" type="/0/@ownedType.4" isOrdered="true" upper="-1"/>
+      <superClass href="../../plugin/fr.tm.elibel.smartqvt.external/ecore/ecore.emof#/0/@ownedType.8"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="Channel" superClass="/0/@ownedType.24">
+      <ownedAttribute name="port" type="/0/@ownedType.43" isOrdered="true" upper="2"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ChannelPort" superClass="/0/@ownedType.12">
+      <ownedOperation name="getChannels" type="/0/@ownedType.42" isOrdered="true" upper="2"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ChannelHub" superClass="/0/@ownedType.29">
+      <ownedAttribute name="port" type="/0/@ownedType.43" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ChannelTermination" isAbstract="true" superClass="/0/@ownedType.29">
+      <ownedAttribute name="channel" type="/0/@ownedType.43" isOrdered="true" isComposite="true"/>
+      <ownedAttribute name="ports" type="/0/@ownedType.12" isOrdered="true" upper="-1" isComposite="true"/>
+    </ownedType>
+    <ownedType xsi:type="emof:Class" name="ChannelComposition" superClass="/0/@ownedType.45"/>
+    <ownedType xsi:type="emof:Class" name="ChannelDecomposition" superClass="/0/@ownedType.45"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="FlowGroupInconsistencyException"/>
+    <ownedType xsi:type="emof:Enumeration" name="DataType">
+      <ownedLiteral name="Integer"/>
+      <ownedLiteral name="Real"/>
+      <ownedLiteral name="Float"/>
+      <ownedLiteral name="Double"/>
+      <ownedLiteral name="Boolean"/>
+    </ownedType>
+  </emof:Package>
+  <emof:Tag element="/0/@ownedType.48" name="classInstanceName" value="org.topcased.sam.exception.FlowGroupInconsistencyException"/>
+</xmi:XMI>
