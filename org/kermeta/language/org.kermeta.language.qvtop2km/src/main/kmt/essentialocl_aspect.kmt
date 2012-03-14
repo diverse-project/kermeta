@@ -36,7 +36,7 @@ aspect class CollectionLiteralExp {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
-			var out : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var out : behavior::Block init behavior::Block.new
 			output:=out
 			out.addDocumentationTag("gen from essentialocl::CollectionLiteralExp")
 			
@@ -47,30 +47,21 @@ aspect class CollectionLiteralExp {
 			vDecl.identifier:="collectionliteral"
 			collectionTmpId:=vDecl.identifier
 			type.range2domain(context)
-			var seqClass : org::kermeta::language::structure::Class
-			seqClass?=type.output
-			
-			vDecl.containedType.add(seqClass)
-			/*	TODO remove if the following call to generateTypeRef works well 
-			var tRef : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
-			tRef.lower:=0
-			tRef.upper:=1
-			tRef.type?=type.output
-			if (tRef.type.isInstanceOf(org::kermeta::language::structure::Class)) then
-				tRef.name:=tRef.type.asType(org::kermeta::language::structure::Class).name
-			end*/
-			
-			vDecl.type:=type.output.asType(org::kermeta::language::structure::Type).generateTypeRef
+			var seqClass : structure::Type init type.generateType(context)
+			if seqClass.container.isVoid then
+				vDecl.containedType.add(seqClass)
+			end
+		
+			vDecl.type:=type.generateType(context).generateTypeRef
 			
 			//init
 			
-			var callNew : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
+			var callNew : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("new",false)
 			vDecl.initialization:=callNew
-			callNew.name:="new"
-			var typeLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
+			var typeLit : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
 			callNew.target:=typeLit
 			
-			typeLit.typeref:=seqClass.cloneClass.generateTypeRef			
+			typeLit.typeref:=type.generateType(context).generateTypeRef
 			
 
 			
@@ -168,13 +159,17 @@ aspect class OperationCallExp {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
 		if output==void then
-			StdIO.writeln("OperationCallExp::range2domain")
+			StdIO.writeln("OperationCallExp::range2domain "+referredOperation.getQVTID())
+			StdIO.writeln("containingResource "+referredOperation.containingResource.getURI.toString)
+			StdIO.writeln("containingResource "+referredOperation.containingResource.toString)
 			//either the operation is coming from the initial framework
 			var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new
 			output:=out
-			StdIO.writeln("OperationCallExp::range2domain-0")
-			if context.qvtContext.libs.contains(referredOperation.containingResource()) and referredOperation.output==void then
-				StdIO.writeln("OperationCallExp::range2domain-1")
+			
+			var resourceUri : String init referredOperation.containingResource.getURI.toString
+			
+			if  (resourceUri=="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational" or resourceUri=="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/essentialocl/oclstdlib.essentialocl") and referredOperation.output==void then
+				
 				//in kermeta the flatten operation from sequence return a bag of objects
 				//should return flatten.asSequence.asType(Sequence<X>) where X is the type of the flatten operation in qvt
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
@@ -194,41 +189,52 @@ aspect class OperationCallExp {
 				end
 				
 				//why this qvtid starts with :: is still a mystery
-				if referredOperation.getQVTID()=="::QvtLib::Model::objects" then
+				if referredOperation.getQVTID()=="QvtLib::Model::objects" then
 					out.name:="extent"
 					source.range2domain(context)
 					out.target?=source.output
 				end
 				
-				StdIO.writeln("OperationCallExp::range2domain-3")
-				if referredOperation.getQVTID() =="::QvtLib::Model::objectsOfType" then
+				
+				//the equivalent to objectsOfType takes a type parameter e.g. extent.objectsOfType[T]
+				if referredOperation.getQVTID() =="QvtLib::Model::objectsOfType" then
 					out.name:="objectsOfType"
 					source.range2domain(context)
 					out.target?=source.output
-					argument.each{x|
-						x.range2domain(context) 
-						if x.output!=void then 
+					
+					
+					
+					argument.each{paramoot|
+						paramoot.range2domain(context) 
+						if paramoot.isInstanceOf(essentialocl::TypeExp) then
+							var generic : structure::Type init paramoot.asType(essentialocl::TypeExp).referredType.generateType(context)
+							out.generics.add(generic)
+							if generic.container.isVoid then
+								out.containedType.add(generic)
+							end
+						end
+						/*if x.output!=void then 
 							out.parameters.add(x.output.asType(org::kermeta::language::behavior::Expression)) 
 						else 
 							//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
-						end
+						end*/
 						}
 				end
 				StdIO.write("THIS IS A STANDARD METHOD")
 				StdIO.writeln(" referredOperation name : "+ referredOperation.getQVTID)
 			else
 				//or not
-				StdIO.writeln("OperationCallExp::range2domain-4")
+				
 				
 				//if there is a source model
 				if source!=void then
 					source.range2domain(context)
 					out.target?=source.output
 				else
-					var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+					var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 					out.target:=transfoCall
 				end
-				StdIO.writeln("OperationCallExp::range2domain-5")
+				
 				if (referredOperation !=void) then
 					if context.frameworkOperationMap.containsKey(referredOperation.getQVTID) then
 						out.name:=context.frameworkOperationMap.getValue(referredOperation.getQVTID)
@@ -237,7 +243,7 @@ aspect class OperationCallExp {
 						out.name:=referredOperation.name
 					end
 				end
-				StdIO.writeln("OperationCallExp::range2domain-6")
+				
 				argument.each{x|
 						x.range2domain(context) 
 						if x.output!=void then 
@@ -276,7 +282,7 @@ aspect class VariableExp {
 				out:= org::kermeta::language::behavior::SelfExpression.new
 			else
 				if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then
-					var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+					var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 					out := org::kermeta::language::behavior::CallProperty.new
 					out.asType(org::kermeta::language::behavior::CallProperty).target:=transfoContext
 					referredVariable.range2domain(context)
@@ -351,22 +357,24 @@ aspect class Variable {
 		end
 		
 		type.range2domain(context)
-		//TODO should work in most case, but maybe not for types from qvtlib nor for collections
-		out.type:=structure::UnresolvedType.new.initialize(type.getQVTID).generateTypeRef()
-		/*if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
-			out.type:=type.output.asType(org::kermeta::language::structure::ClassDefinition).generateTypeRef()
+		
+		if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+			out.type:=structure::UnresolvedType.new.initialize(type.getQVTID).generateTypeRef()
+			
 			
 		else
 			if type.output.isInstanceOf(org::kermeta::language::structure::PrimitiveType) then
 				out.type:=type.output.asType(org::kermeta::language::structure::PrimitiveType).generateTypeRef()
 			else
-				if type.output.isInstanceOf(org::kermeta::language::structure::Class) then
-					out.type?=type.output.asType(org::kermeta::language::structure::Class).generateTypeRef()
-					//type is already a container…					
-					//out.containedType.add(type.output.asType(org::kermeta::language::structure::Class))
+				if type.output.isInstanceOf(structure::UnresolvedType) then
+					out.type?=type.output.asType(structure::UnresolvedType).generateTypeRef()
+					
+					
+						
+					
 				end
 			end
-		end*/
+		end
 		
 	end
 }
@@ -439,6 +447,9 @@ aspect class TupleLiteralExp {
 aspect class SequenceType {
 	
 	method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do
+		if output.isVoid then
+			range2domain(context)
+		end
 		result?=output
 	end
 	
@@ -465,25 +476,24 @@ aspect class SequenceType {
 aspect class BagType {
 	
 	method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do
+		if output.isVoid then
+			range2domain(context)
+		end
 		result?=output
 	end
 	
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			var out : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			var out : structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Bag")
 			output:=out
-			var cd : org::kermeta::language::structure::ClassDefinition
-			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::Bag")
-			out.typeDefinition:=cd 
-			var tvarBinding : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
-			tvarBinding.variable :=cd.typeParameter.one
-			out.typeParamBinding.add(tvarBinding)
 			
+					
 			elementType.range2domain(context)
-			tvarBinding.type:=elementType.generateType(context)
+			var generic : structure::Type init elementType.generateType(context)
+			out.generics.add(generic)
 			
-			if tvarBinding.type.container==void then 
-				tvarBinding.containedType.add(tvarBinding.type)
+			if  not generic.isInstanceOf(structure::TypeDefinition) then 
+				out.containedType.add(generic)
 			end
 			
 		end
@@ -495,25 +505,24 @@ aspect class BagType {
 aspect class SetType {
 	
 	method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do
+		if output.isVoid then
+			range2domain(context)
+		end
 		result?=output
 	end
 	
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			var out : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			var out : structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::Set")
 			output:=out
-			var cd : org::kermeta::language::structure::ClassDefinition
-			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::Set")
-			out.typeDefinition:=cd 
-			var tvarBinding : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
-			tvarBinding.variable :=cd.typeParameter.one
-			out.typeParamBinding.add(tvarBinding)
 			
+					
 			elementType.range2domain(context)
-			tvarBinding.type:=elementType.generateType(context)
+			var generic : structure::Type init elementType.generateType(context)
+			out.generics.add(generic)
 			
-			if tvarBinding.type.container==void then 
-				tvarBinding.containedType.add(tvarBinding.type)
+			if  not generic.isInstanceOf(structure::TypeDefinition) then 
+				out.containedType.add(generic)
 			end
 			
 		end
@@ -524,25 +533,24 @@ aspect class SetType {
 aspect class OrderedSetType {
 	
 	method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do
+		if output.isVoid then
+			range2domain(context)
+		end
 		result?=output
 	end
 	
 	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then 
-			var out : org::kermeta::language::structure::Class init org::kermeta::language::structure::Class.new
+			var out : structure::UnresolvedType init structure::UnresolvedType.new.initialize("kermeta::standard::OrderedSet")
 			output:=out
-			var cd : org::kermeta::language::structure::ClassDefinition
-			cd?=context.kmtContext.getFromQualifiedName("kermeta::standard::OrderedSet")
-			out.typeDefinition:=cd 
-			var tvarBinding : org::kermeta::language::structure::TypeVariableBinding init org::kermeta::language::structure::TypeVariableBinding.new
-			tvarBinding.variable :=cd.typeParameter.one
-			out.typeParamBinding.add(tvarBinding)
 			
+					
 			elementType.range2domain(context)
-			tvarBinding.type:=elementType.generateType(context)
+			var generic : structure::Type init elementType.generateType(context)
+			out.generics.add(generic)
 			
-			if tvarBinding.type.container==void then 
-				tvarBinding.containedType.add(tvarBinding.type)
+			if  not generic.isInstanceOf(structure::TypeDefinition) then 
+				out.containedType.add(generic)
 			end
 			
 		end

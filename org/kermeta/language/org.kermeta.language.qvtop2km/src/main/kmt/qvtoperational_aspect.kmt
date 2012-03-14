@@ -456,7 +456,7 @@ aspect class MappingBody {
 		traceContext.~value:=~operation.name
 		cf_trace.parameters.add(traceContext)
 		
-		cf_trace.target:=behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+		cf_trace.target:=behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 		
 		
 	end
@@ -554,7 +554,7 @@ aspect class MappingBody {
 				mp?=vp
 				mp.extent.range2domain(context)
 				var callModelParam : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(mp.extent.output.asType(structure::Property).name,false)
-				callModelParam.target := behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+				callModelParam.target := behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 				var callExtent : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("extent",false)
 				callExtent.target:=callModelParam
 				
@@ -691,7 +691,7 @@ aspect class MappingCallExp
 				source.range2domain(context)
 				out.target?=source.output
 			else
-				var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.callToTransfoContextSingleton(context)
+				var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 				out.target:=transfoCall
 			end
 			if (referredOperation !=void) then

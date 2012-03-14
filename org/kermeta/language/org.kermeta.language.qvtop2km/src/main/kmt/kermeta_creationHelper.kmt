@@ -104,11 +104,7 @@ package structure{
 		*/
 		operation isUseless() : Boolean is do
 			result:=isAspect and ownedAttribute.isEmpty and ownedOperation.isEmpty
-			StdIO.writeln("class removed "+name)
-			StdIO.writeln(isAspect.toString)
-			StdIO.writeln(ownedAttribute.isEmpty.toString)
-			StdIO.writeln(ownedOperation.isEmpty.toString)
-			StdIO.writeln(result.toString)
+			
 		end
 		operation generateTypeRef() : org::kermeta::language::behavior::TypeReference is do
 			result:=org::kermeta::language::behavior::TypeReference.new
@@ -177,33 +173,7 @@ package behavior {
 	
 	aspect class UnresolvedCall {
 	
-		//generate a call to the singleton transformationtionContext
-		//root_package::TransformationContext.getDefault.asType(root_package::TransformationContext)
-		operation callToTransfoContextSingleton(context : Qvt2KermetaContext) : org::kermeta::language::behavior::UnresolvedCall is do
-			StdIO.writeln("CallFeature::callToTransfoContextSingleton")
-			result:= self
-			
-			result.name:="asType"
-			
-			//var transfoContextCD : org::kermeta::language::structure::ClassDefinition
-			//transfoContextCD ?= context
-			//		.kmtContext
-			//		.getFromQualifiedName("root_package::TransformationContext")
-			
-			var tl_tracetype : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			result.parameters.add(tl_tracetype)
-			//tl_tracetype.typeref:=transfoContextCD.generateTypeRef()
-			tl_tracetype.name:="root_package::TransformationContext"
-			var cf_getDefault : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			result.target:=cf_getDefault
-			cf_getDefault.name:="getDefault"
-			
-			var tl_getDefault : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			cf_getDefault.target:=tl_getDefault
-			//tl_getDefault.typeref:=transfoContextCD.generateTypeRef()
-			tl_getDefault.name:="root_package::TransformationContext"
-			StdIO.writeln("CallFeature::callToTransfoContextSingleton-end")
-		end
+		
 		
 		
 		operation initialize (name : String , isCalledWithParenthesis:Boolean): UnresolvedCall is do

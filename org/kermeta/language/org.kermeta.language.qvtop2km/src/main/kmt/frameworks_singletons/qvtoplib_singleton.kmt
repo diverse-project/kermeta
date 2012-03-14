@@ -10,6 +10,7 @@ reference libs : Resource [0..*]
 
 operation load(lib : Resource ) : Void is do
 	libs.add(lib)
+	StdIO.writeln("load a qvt lib "+ lib.toString)
 end
 
 	/**take a qvt qualified name and look for the corresponding object in the libs*/

@@ -67,9 +67,7 @@ aspect class Operation {
 
 method range2domain(context : Qvt2KermetaContext) : Void is do
 StdIO.writeln("Operation::range2domain")
-StdIO.writeln(self.toString)
-StdIO.writeln(self.name.isVoid.toString)
-StdIO.writeln("operation "+name)
+
 
 end
 }
@@ -176,29 +174,28 @@ aspect class PrimitiveType
 		
 	end
 
-method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
+method generateType(context : Qvt2KermetaContext) :structure::Type is do 
+	result:=void
 	if output == void then
 		range2domain(context)
 	end
 	//result:=output.asType(org::kermeta::language::structure::Type)
 	
 	if self.name=="EString" or self.name=="String" then
-		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::String")		 
+		result:=structure::UnresolvedType.new.initialize("kermeta::standard::String")		 
 	end
 	if self.name=="EInt" or self.name=="Integer" or self.name=="UnlimitedNatural" then
-		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Integer")
+		result:=structure::UnresolvedType.new.initialize("kermeta::standard::Integer")
 	end
 	if self.name=="EBoolean" or self.name=="Boolean" then
-		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
+		result:=structure::UnresolvedType.new.initialize("kermeta::standard::Boolean")
 	end
 	if self.name=="EFloat" or self.name=="Real" then
-		result:=org::kermeta::language::structure::UnresolvedType.new.initialize("kermeta::standard::Float")
+		result:=structure::UnresolvedType.new.initialize("kermeta::standard::Float")
 	end
 	
 	if result.isVoid then
-		var t : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
-		t.typeIdentifier:=self.getQVTID
-		result:=t
+		result:= structure::UnresolvedType.new.initialize(self.getQVTID)
 	end 
 	
 end

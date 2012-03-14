@@ -20,7 +20,7 @@ using traceability
 using org::kermeta::language::structure
 
 
-aspect singleton TransformationContext
+singleton TransformationContext
 {
 	//attribute srcModel: Resource
 	//attribute tgtModel: Resource
@@ -100,11 +100,13 @@ class ModelParameter {
 	operation objects() : Set<Object> is do
 		result:=extent.asSet()
 	end
-/*
-	operation objectsOfType(type : Type) : Set<Object> is do
-		result:=extent.select{x|x.isInstanceOf(type)}.asSet()
+
+	operation objectsOfType[T]() : Set<T> is do
+		result := Set<T>.new
+		extent.each{x|if x.isInstanceOf(T) then result.add(x) end}
+		//result:=extent.select{x|x.isInstanceOf(T)}.asSet()
 	end
-*/
+
 }
 
 /**Exception used to simulate a return operation*/
