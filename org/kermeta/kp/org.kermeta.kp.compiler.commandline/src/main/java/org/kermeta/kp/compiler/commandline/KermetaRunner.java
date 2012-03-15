@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaRunner;
@@ -66,20 +67,15 @@ public class KermetaRunner {
 			} catch (URISyntaxException e1) {
 				this.logger.error(e1.toString(), KermetaCompiler.LOG_MESSAGE_GROUP, e1);
 			} 
-	        StringBuilder argsParams = new StringBuilder();
-	        argsParams.append("");
-	        for (int i = 0; i < params.size(); i++) {
-	        	if(i != 0) argsParams.append(" ");
-	        	argsParams.append("\""+params.get(i)+"\"");
-			}
-	        ProcessBuilder builder = new ProcessBuilder(
-	        		getJavaVMbin(), "-cp", scalaToolJarCP,
-	        		"-Durimap.file.location="+(uriMapFileLocation!=null?uriMapFileLocation:""),
-	        		"scala.tools.nsc.MainGenericRunner", 
-	        		"-savecompiled",
-	                "-classpath",f.toString() + outputBinFolder,
-	                scalaAspectPrefix + "runner.MainRunner", 
-	                argsParams.toString());
+	        ArrayList<String> processBuilderParams = 
+	        		new ArrayList<String>(Arrays.asList(getJavaVMbin(), "-cp", scalaToolJarCP,
+	        				"-Durimap.file.location="+(uriMapFileLocation!=null?uriMapFileLocation:""),
+	        				"scala.tools.nsc.MainGenericRunner", 
+	        				"-savecompiled",
+	        				"-classpath",f.toString() + outputBinFolder,
+	        				scalaAspectPrefix + "runner.MainRunner"));
+	        processBuilderParams.addAll(params);
+	        ProcessBuilder builder = new ProcessBuilder(processBuilderParams);
 	        this.logger.debug("starting new process with command " +builder.command().toString(), KermetaCompiler.LOG_MESSAGE_GROUP);
 	       // builder.redirectErrorStream(true); // debug version: merge output and error stream
 	        Process process;
