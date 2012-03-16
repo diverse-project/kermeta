@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.core.internal.resources.Workspace;
@@ -414,7 +415,11 @@ public class KPBuilder {
 		
 		
 		try {
-			KermetaRunner runner = new KermetaRunner(outputScalaBinaryFolder, kp.getGroup()+"."+ kp.getName(),getFullClassPath(),Activator.getDefault().getMessaggingSystem4Runner(kp.getName()) );
+			KermetaRunner runner = new ProgressCancellableKermetaRunner(outputScalaBinaryFolder, 
+					kp.getGroup()+"."+ kp.getName(),
+					getFullClassPath(),
+					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()), 
+					monitor);
 			runner.runK2Program(params,outputRootFolder+File.separator+"urimap.properties");
 			kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null); // refresh local project in case a file is created there
 			
@@ -430,6 +435,24 @@ public class KPBuilder {
 		
 	}
 	
+	/**
+	 * Implemnt the Runner that can be stopped using the monitor button
+	 *
+	 */
+	public class ProgressCancellableKermetaRunner extends KermetaRunner{
+
+		IProgressMonitor monitor;
+		public ProgressCancellableKermetaRunner(String outputBinFolder,
+				String scalaAspectPrefix, List<String> classpath,
+				MessagingSystem logger, IProgressMonitor monitor) {
+			super(outputBinFolder, scalaAspectPrefix, classpath, logger);
+			this.monitor = monitor;
+		}
+		@Override
+		public boolean mustCancelRun() {			
+			return  monitor.isCanceled();
+		}
+	}
 	
 	private void generateURIMapFile(String outputFolder) {
 		String localProgressGroup = getProgressGroup()+".generateURIMapFile";
