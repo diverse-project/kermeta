@@ -102,20 +102,20 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
         res.append(" = null.asInstanceOf[")
         this.getListorType(thi,res)
         //this.getType.generateScalaCode(res)
-        res.append("]; \n try { \n")
+        res.append("]; \n /*try*/ { \n")
       if (thi.getBody!= null){
 				
         visit(thi.getBody(),res)
       }
 res append "        }\n"
-res append "catch {\n"
+res append "/*catch {\n"
 res append "case e :_root_.k2.exceptions.Exception => {throw e}\n"
 res append "  case e => {\n"
 res append "    val tutu18 = _root_.k2.exceptions.KerRichFactory.createException;\n"
 res append "  	tutu18.message = \"error in kermeta code on operation " + getQualifiedNameCompilo(thi.eContainer) +"."+thi.getName +"\"\n"
 res append "  	  tutu18.setStackTrace(e.getStackTrace)\n"
 res append "  	  throw tutu18\n"
-res append "  }\n}\n"
+res append "  }\n}*/\n"
         
       if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString)){
         res append " \n}\n"
