@@ -40,6 +40,7 @@ public class KermetaRunner {
 	public String scalaAspectPrefix;
 	public List<String> classpath;
 	
+	
 	protected String javaVMbin;
 	public KermetaRunner(String outputBinFolder, String scalaAspectPrefix, List<String> classpath, MessagingSystem logger){
 		this.outputBinFolder = outputBinFolder;
@@ -87,19 +88,24 @@ public class KermetaRunner {
 				// redirect process System.out to logger.info
 				KermetaRunner.Stream2MessagingSystem out2ms = new KermetaRunner.Stream2MessagingSystem(process.getInputStream(),logger, false);
 				KermetaRunner.Stream2MessagingSystem err2ms = new KermetaRunner.Stream2MessagingSystem(process.getErrorStream(),logger, true);
+				CancelMonitor cancelMonitor = new CancelMonitor(process, this);
+				 
 				Thread in2StreamThread = new Thread(in2Stream);
 				Thread out2msThread = new Thread(out2ms);
 				Thread err2msThread = new Thread(err2ms);
+				Thread cancelMonitorThread = new Thread(cancelMonitor);
 				
 				in2StreamThread.start();
 				out2msThread.start();
 				err2msThread.start();
+				cancelMonitorThread.start();
 				
 				out2msThread.join();
 				err2msThread.join();
 				in2Stream.close();
 				in2StreamThread.interrupt();
 				int exitVal = process.waitFor();
+				cancelMonitorThread.interrupt();
 				this.logger.debug("stream threads have joined ", KermetaCompiler.LOG_MESSAGE_GROUP);
 				
 			} catch (IOException e) {
@@ -132,6 +138,13 @@ public class KermetaRunner {
 		this.javaVMbin = javaVMbin;
 	}
 	
+	/** subclasses might implement this operation to provide ad-hoc code that is able to detect if the run must be cancelled
+	 * 
+	 * @return
+	 */
+	public boolean mustCancelRun(){
+		return false;
+	}
 	
 	public static class Stream2MessagingSystem implements Runnable {
         private BufferedReader reader;
@@ -161,6 +174,9 @@ public class KermetaRunner {
                 }
         }
     }
+	
+
+	
 	
 	public static class BufferedReader2Stream implements Runnable {
         private BufferedReader reader;
