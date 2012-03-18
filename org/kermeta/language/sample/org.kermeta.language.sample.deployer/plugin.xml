@@ -13,7 +13,7 @@
       <wizard
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.kermeta.language.samples.category"
-            class="org.kermeta.language.sample.wizards.Class2RdbmsExampleWizard"
+            class="org.kermeta.language.sample.deployer.wizards.Class2RdbmsExampleWizard"
             finalPerspective="org.kermeta.language.texteditor.eclipse.nature.internal.KermetaPerspectiveID"
             hasPages="false"
             icon="icons/newkermetafile.png"

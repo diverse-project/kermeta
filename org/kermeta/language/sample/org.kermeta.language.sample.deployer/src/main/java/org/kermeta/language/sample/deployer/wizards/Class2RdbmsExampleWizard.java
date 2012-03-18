@@ -16,9 +16,6 @@ import java.util.List;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.language.sample.deployer.Activator;
 
-
-
-
 public class Class2RdbmsExampleWizard
 	extends AbstractExampleWizard {
 	
@@ -26,7 +23,7 @@ public class Class2RdbmsExampleWizard
 		// We need the statements example to be unzipped along with the
 		// EMF library example model, edit and editor examples
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
-		projects.add(new ProjectDescriptor("fr.irisa.triskell.kermeta", "zips/fr.irisa.triskell.kermeta.samples.zip", "fr.irisa.triskell.kermeta.samples"));
+		projects.add(new ProjectDescriptor("org.kermeta.language.sample.deployer", "zips/language.sample.class2rdbms.zip", "language.sample.class2rdbms"));
 		return projects;
 	}
 

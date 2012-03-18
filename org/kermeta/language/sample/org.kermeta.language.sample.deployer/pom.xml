@@ -7,7 +7,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>org.kermeta.language.sample.deployer</artifactId>
+	<artifactId>language.sample.deployer</artifactId>
 	<packaging>jar</packaging>
 	<name>Kermeta 2 sample deployer</name>
 
@@ -125,6 +125,10 @@
 	          		<include>plugin.xml</include>
 	        	</includes>
 	      	</resource>
+	      	<resource>
+	        	<directory>./icons</directory>
+	        	<targetPath>icons</targetPath>
+	      	</resource>
 	    </resources>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
@@ -165,18 +169,19 @@
 		          <archive>
 		            <manifestEntries>
 						<Manifest-Version>1.0</Manifest-Version>
-						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
-						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>						
+						<Bundle-SymbolicName>org.kermeta.sample.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>org.kermeta.sample.${project.artifactId}</Bundle-Name>						
 						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Bundle-Activator>org.kermeta.language.builder.eclipse.internal.Activator</Bundle-Activator>
+						<Bundle-Activator>org.kermeta.language.sample.deployer.Activator</Bundle-Activator>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>						
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Export-Package>
-							org.kermeta.language.sample.deployer
+							org.kermeta.language.sample.deployer,							
+							org.kermeta.language.sample.deployer.wizards
 						</Export-Package>
 						<Require-Bundle>
 							org.eclipse.core.runtime,
