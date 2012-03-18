@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kermetat 2 sample deployer
+Bundle-SymbolicName: org.kermeta.language.sample.deployer
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.language.sample.deployer.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
