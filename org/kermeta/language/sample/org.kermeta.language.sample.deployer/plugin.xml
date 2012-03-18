@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+
+
+	<extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.kermeta.language.samples.category"
+            name="Kermeta 2 samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.kermeta.language.samples.category"
+            class="org.kermeta.language.sample.wizards.Class2RdbmsExampleWizard"
+            finalPerspective="org.kermeta.language.texteditor.eclipse.nature.internal.KermetaPerspectiveID"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="org.kermeta.language.samples.wizard"
+            name="Kermeta 2 Class2Rdbms sample"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
+ 
+</plugin>
