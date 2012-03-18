@@ -136,13 +136,14 @@
 				<execution>
 					<phase>initialize</phase>
 					<goals>
-						<goal>execute</goal>
+						<goal>run</goal>
 					</goals>
             		<configuration>
 						<tasks>
-		                <mkdir dir="${project.build.outputDirectory}"/>
+		                <mkdir dir="${project.build.outputDirectory}/zips"/>
 		                
-		                <zip destfile="${project.build.directory}/${project.build.finalName}.zip">
+		                <zip destfile="${project.build.outputDirectory}/zips/language.sample.class2rdbms.zip">
+		                	<fileset dir="${basedir}/src/main/imported_samples/language.sample.class2rdbms/"/>
 		                </zip>
 		              	</tasks>
             		</configuration>
