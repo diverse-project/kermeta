@@ -8,7 +8,7 @@
  * Authors : 
  *    Cyril Faucher
  */
-package fr.irisa.triskell.eclipse.wizard;
+package org.kermeta.language.sample.deployer.wizards;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermetat 2 sample deployer
-Bundle-SymbolicName: org.kermeta.language.sample.deployer
+Bundle-SymbolicName: org.kermeta.language.sample.deployer;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.kermeta.language.sample.deployer.Activator
 Bundle-Vendor: IRISA/INRIA
