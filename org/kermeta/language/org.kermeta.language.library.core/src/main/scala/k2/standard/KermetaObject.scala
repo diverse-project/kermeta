@@ -35,8 +35,27 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def removeFromContainer()  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
 	
   //TODO
-	def invoke(op:org.kermeta.language.structure.Operation , args:List[Object]) ={
-	  throw new RuntimeException("Operation invoke is not yet implemented.")
+	def invoke(op:org.kermeta.language.structure.Operation , args:java.util.List[k2.standard.KermetaObject]) ={
+//		throw new RuntimeException("Operation invoke is not yet implemented.")
+		if(args.length != 0)
+		  throw new RuntimeException("Invoking operations with multiple arguments is not yet implemented.")
+		var optionMeth : Option[java.lang.reflect.Method] = this.getClass().getMethods.find(m => m.getName() == op.getName()
+		    && m.getParameterTypes().length == args.length)
+		optionMeth match{
+		  case Some(meth) => {meth.invoke(this)}
+		  case None => {throw new NoSuchMethodException}
+		}
+		//TODO
+		/* code for taking multiple argument
+		var optionMeth : Option[java.lang.reflect.Method] = this.getClass().getMethods.find(m => m.getName() == op.getName()
+		    && m.getParameterTypes().length == args.length)
+		optionMeth match{
+		  case None => {throw new NoSuchMethodException}
+		  case Some(meth) => {
+			  var argsTab : Array[AnyRef] = args.toArray()
+		      meth.invoke(this, argsTab) //not working
+		  }
+		}*/
 	}
 
 
