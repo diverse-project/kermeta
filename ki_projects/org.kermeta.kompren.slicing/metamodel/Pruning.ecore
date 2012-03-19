@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="prunerGenerator"
+    nsURI="http://pruningGenerator.org" nsPrefix="prunerGenerator">
+  <eClassifiers xsi:type="ecore:EClass" name="Slicer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="slicedElements" upperBound="-1"
+        eType="#//SlicedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredClasses" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classesToNotify" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputClasses" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="helper" eType="ecore:EClass kermeta.ecore#//kermeta/language/behavior/Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onStart" eType="ecore:EClass kermeta.ecore#//kermeta/language/behavior/Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onEnd" eType="ecore:EClass kermeta.ecore#//kermeta/language/behavior/Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="radius" eType="#//Radius"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uriMetamodel" lowerBound="1"
+        eType="ecore:EDataType Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strict" eType="ecore:EDataType Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="active" eType="ecore:EDataType Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlicedProperty" eSuperTypes="#//SlicedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
+        eType="ecore:EClass Ecore.ecore#//EStructuralFeature.1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" eType="#//VarDecl"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tgt" eType="#//VarDecl"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//OppositeCreation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="ecore:EClass kermeta.ecore#//kermeta/language/behavior/Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Radius">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="focusedClasses" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="focusedClasses" upperBound="-1"
+        eType="#//SlicedClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlicedClass" eSuperTypes="#//SlicedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
+        eType="ecore:EClass Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ctx" eType="#//VarDecl"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlicedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass kermeta.ecore#//kermeta/language/behavior/Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOption" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expOnRemove" eType="ecore:EClass kermeta.ecore#//kermeta/language/behavior/Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarDecl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" eType="ecore:EDataType Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass Ecore.ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OppositeCreation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eSubpackages name="ecore"/>
+  <eSubpackages name="slicer"/>
+  <eSubpackages name="kermeta"/>
+</ecore:EPackage>
