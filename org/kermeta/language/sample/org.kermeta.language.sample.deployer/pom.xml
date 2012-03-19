@@ -146,8 +146,8 @@
 						<tasks>
 		                <mkdir dir="${project.build.outputDirectory}/zips"/>
 		                
-		                <zip destfile="${project.build.outputDirectory}/zips/language.sample.class2rdbms.zip">
-		                	<fileset dir="${basedir}/src/main/imported_samples/language.sample.class2rdbms/"/>
+		                <zip destfile="${project.build.outputDirectory}/zips/org.kermeta.language.sample.class2rdbms.zip">
+		                	<fileset dir="${basedir}/src/main/imported_samples/org.kermeta.language.sample.class2rdbms/"/>
 		                </zip>
 		              	</tasks>
             		</configuration>
