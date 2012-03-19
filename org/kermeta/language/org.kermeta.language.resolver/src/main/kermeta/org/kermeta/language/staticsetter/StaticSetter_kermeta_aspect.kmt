@@ -114,6 +114,14 @@ package structure {
 			context.currentOperation := void
 		end		
 	}
+	
+	aspect class Constraint {
+		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
+			if not body.isVoid then 
+				body.inferContainedExpressionStatic(context)
+			end
+		end
+	}
 }
 
 package behavior {
