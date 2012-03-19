@@ -1,0 +1,435 @@
+package ecore;
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+class SlicerVisitor {
+	reference dup : Object
+
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute sliced : Boolean
+
+	operation initialiseAttributes() is do
+		self.visitedPass := false
+		self.sliced := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theStrictEcore : StrictEcore) is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theStrictEcore : StrictEcore) is do
+	end
+
+	operation checkInitialisation() is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
+
+	operation createFrom() : Object is abstract
+}
+
+aspect class EClass {
+	method createFrom() : Object is do
+		var theEClass : EClass init EClass.new
+		theEClass.name := self.name
+		result := theEClass
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.eSuperTypes.each{theEClass | theEClass.visitToAddClasses(theStrictEcore)}
+			self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visitToAddClasses(theStrictEcore)}
+			self.eOperations.each{theEOperation | theEOperation.visitToAddClasses(theStrictEcore)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.eSuperTypes.each{theEClass | theEClass.visitToAddRelations(theStrictEcore)
+				if(not dup.isVoid and theEClass.sliced) then
+					dup.asType(EClass).eSuperTypes.add(theEClass.dup.asType(EClass))
+					theStrictEcore.addToRoot(theEClass.dup)
+				end
+			}
+			self.eStructuralFeatures.each{theEStructuralFeature | theEStructuralFeature.visitToAddRelations(theStrictEcore)
+				if(not dup.isVoid and theEStructuralFeature.sliced) then
+					dup.asType(EClass).eStructuralFeatures.add(theEStructuralFeature.dup.asType(EStructuralFeature))
+					theStrictEcore.addToRoot(theEStructuralFeature.dup)
+				end
+			}
+			self.eOperations.each{theEOperation | theEOperation.visitToAddRelations(theStrictEcore)
+				if(not dup.isVoid and theEOperation.sliced) then
+					dup.asType(EClass).eOperations.add(theEOperation.dup.asType(EOperation))
+					theStrictEcore.addToRoot(theEOperation.dup)
+				end
+			}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ETypedElement {
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			if(not self.eType.isVoid) then self.eType.visitToAddClasses(theStrictEcore) end
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.eType.isVoid) then self.eType.visitToAddRelations(theStrictEcore)
+			if(self.eType.sliced) then
+				self.dup.asType(ETypedElement).eType := self.eType.dup.asType(EClassifier)
+				theStrictEcore.addToRoot(self.eType.dup)
+			end
+ end
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EOperation {
+	method createFrom() : Object is do
+		var theEOperation : EOperation init EOperation.new
+		theEOperation.name := self.name
+		result := theEOperation
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.eParameters.each{theEParameter | theEParameter.visitToAddClasses(theStrictEcore)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.eParameters.each{theEParameter | theEParameter.visitToAddRelations(theStrictEcore)
+				if(not dup.isVoid and theEParameter.sliced) then
+					dup.asType(EOperation).eParameters.add(theEParameter.dup.asType(EParameter))
+					theStrictEcore.addToRoot(theEParameter.dup)
+				end
+			}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EParameter {
+	method createFrom() : Object is do
+		var theEParameter : EParameter init EParameter.new
+		theEParameter.name := self.name
+		result := theEParameter
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EEnum {
+	method createFrom() : Object is do
+		var theEEnum : EEnum init EEnum.new
+		theEEnum.name := self.name
+		result := theEEnum
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.eLiterals.each{theEEnumLiteral | theEEnumLiteral.visitToAddClasses(theStrictEcore)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.eLiterals.each{theEEnumLiteral | theEEnumLiteral.visitToAddRelations(theStrictEcore)
+				if(not dup.isVoid and theEEnumLiteral.sliced) then
+					dup.asType(EEnum).eLiterals.add(theEEnumLiteral.dup.asType(EEnumLiteral))
+					theStrictEcore.addToRoot(theEEnumLiteral.dup)
+				end
+			}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EEnumLiteral {
+	method createFrom() : Object is do
+		var theEEnumLiteral : EEnumLiteral init EEnumLiteral.new
+		theEEnumLiteral.name := self.name
+		result := theEEnumLiteral
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ENamedElement inherits SlicerVisitor {
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EFactory inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theEFactory : EFactory init EFactory.new
+		result := theEFactory
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.ePackage.visitToAddClasses(theStrictEcore)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ePackage.visitToAddRelations(theStrictEcore)
+			if(self.ePackage.sliced) then
+				self.dup.asType(EFactory).ePackage := self.ePackage.dup.asType(EPackage)
+				theStrictEcore.addToRoot(self.ePackage.dup)
+			end
+
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ETypeParameter {
+	method createFrom() : Object is do
+		var theETypeParameter : ETypeParameter init ETypeParameter.new
+		theETypeParameter.name := self.name
+		result := theETypeParameter
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EReference {
+	method createFrom() : Object is do
+		var theEReference : EReference init EReference.new
+		theEReference.name := self.name
+		result := theEReference
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EPackage {
+	method createFrom() : Object is do
+		var theEPackage : EPackage init EPackage.new
+		theEPackage.name := self.name
+		result := theEPackage
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.eFactoryInstance.visitToAddClasses(theStrictEcore)
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.eFactoryInstance.visitToAddRelations(theStrictEcore)
+			if(self.eFactoryInstance.sliced) then
+				self.dup.asType(EPackage).eFactoryInstance := self.eFactoryInstance.dup.asType(EFactory)
+				theStrictEcore.addToRoot(self.eFactoryInstance.dup)
+			end
+
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EDataType {
+	method createFrom() : Object is do
+		var theEDataType : EDataType init EDataType.new
+		theEDataType.name := self.name
+		result := theEDataType
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class EAttribute {
+	method createFrom() : Object is do
+		var theEAttribute : EAttribute init EAttribute.new
+		theEAttribute.name := self.name
+		result := theEAttribute
+	end
+
+	method visitToAddClasses(theStrictEcore : StrictEcore) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStrictEcore : StrictEcore) is do
+		if(not self.visitedPass) then
+			super(theStrictEcore)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.visitedPass := false
+		end
+	end
+}
+
