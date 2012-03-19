@@ -59,6 +59,7 @@ import org.osgi.framework.Bundle;
 public class KPBuilder {
 	
 	protected KermetaCompiler compiler = null;
+	protected URIMapFileBuilder uriMapFileBuilder = null;
 	protected IFile kpProjectFile;
 	
 	protected KPNeedBuildDeltaVisitor needBuildVisitor;
@@ -109,6 +110,7 @@ public class KPBuilder {
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
 		}
+		uriMapFileBuilder = new URIMapFileBuilder(getProgressGroup());
 	}
 
 
@@ -330,7 +332,7 @@ public class KPBuilder {
 				
 				// generate urimap file
 				// TODO may be we can do that in background because we may have to update it if the user has opened or closed some projects
-				generateURIMapFile(outputRootFolder);
+				uriMapFileBuilder.generateURIMapFile(outputRootFolder);
 				
 				if (result != null && !compiler.hasFailed) {
 					//kp_last_modelingunit = result;
@@ -454,53 +456,6 @@ public class KPBuilder {
 		}
 	}
 	
-	private void generateURIMapFile(String outputFolder) {
-		String localProgressGroup = getProgressGroup()+".generateURIMapFile";
-		Properties props = new Properties();
-		// fill map
-		Activator.getDefault().getMessaggingSystem().initProgress(localProgressGroup, 
-				"Generating urimap.properties...",  
-				KermetaBuilder.LOG_MESSAGE_GROUP,
-				3);
-		
-		// TODO maybe we can use EcorePlugin.getPlatformResourceMap instead of this ad hoc code ...
-		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Retreiving workbench projects...", KermetaBuilder.LOG_MESSAGE_GROUP, 0);
-		for( IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()){
-			String key = "platform:/resource"+project.getFullPath().toString();
-			String value = project.getLocationURI().toString();
-			props.put(key, value);
-		}
-		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Retreiving platform plugins...", KermetaBuilder.LOG_MESSAGE_GROUP, 0);
-		for(Bundle bundle : Activator.getDefault().getMyContext().getBundles()){
-			
-			String key = "platform:/plugin/"+bundle.getSymbolicName()+"/";
-			// String value = new LocalFileConverterForEclipse().convertSpecialURItoFileURI(java.net.URI.create(key)).toString();
-			String value;
-			try {
-				//value = FileLocator.toFileURL(new java.net.URL(key)).toString();
-				URL resolvedURL = FileLocator.resolve(new java.net.URL(key));
-				//URL resolvedURL = Platform.resolve(new java.net.URL(key));
-				value = resolvedURL.toString();
-				props.put(key, value);
-			} catch (Exception e) {
-				Activator.getDefault().getMessaggingSystem().log(Kind.UserINFO,"Ignoring bundle "+bundle.getSymbolicName()+". Will not be added to the urimap used to simulate Eclipse URI in standalone mode. Cause: "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, null);
-			}
-			
-		}
-		
-		Activator.getDefault().getMessaggingSystem().progress(localProgressGroup, "Saving property file...", KermetaBuilder.LOG_MESSAGE_GROUP, 1);		
-		FileOutputStream fos;
-		try {
-			fos = new FileOutputStream(outputFolder+File.separator+"urimap.properties");
-			props.store(fos, "Simulating resolution of eclipse workbench URIs resolution using URI map translation");
-			fos.close();
-		} catch (Exception e) {
-			Activator.getDefault().getMessaggingSystem().error("cannot generate "+outputFolder+File.separator+"urimap.properties", KermetaBuilder.LOG_MESSAGE_GROUP, e);
-		}
-		Activator.getDefault().getMessaggingSystem().doneProgress(localProgressGroup, "End of urimap.properties generation", KermetaBuilder.LOG_MESSAGE_GROUP);
-	}
-
-
 	synchronized public void build(IProgressMonitor monitor){
 		build(false, new ArrayList<String>(), monitor);
 	}
