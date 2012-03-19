@@ -206,10 +206,10 @@ class Main
         var outputModel : RDBMSModel init tranfo.transform(inputModel)
         
         var resourceSet : ResourceSet init ResourceSet.new
-        //repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+        //repository.registerEcoreFile("platform:/resource/org.kermeta.language.sample.class2rdbms/src/main/ecore/RDBMSMM.ecore")
         var resource : Resource init 
-        	resourceSet.createResource("platform:/resource/language.sample.class2rdbms/target/results/out.xmi", 
-        							 					 "platform:/resource/language.sample.class2rdbms/src/main/ecore/RDBMSMM.ecore")
+        	resourceSet.createResource("platform:/resource/org.kermeta.language.sample.class2rdbms/target/results/out.xmi", 
+        							 					 "platform:/resource/org.kermeta.language.sample.class2rdbms/src/main/ecore/RDBMSMM.ecore")
 			//resourceSet.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/out.xmi", 
         	//						 					 "file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/RDBMSMM.ecore")       							 					
 	 	// Define a Root ...
@@ -222,9 +222,9 @@ class Main
     
     operation loadClassModel() : ClassModel is do             
    		var repository : ResourceSet init ResourceSet.new
-   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
-   		var resource : Resource init repository.createResource("platform:/resource/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
-   																									"platform:/resource/language.sample.class2rdbms/src/main/ecore/ClassMM.ecore")
+   		//repository.registerEcoreFile("platform:/resource/org.kermeta.language.sample.class2rdbms/src/main/ecore/ClassMM.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.language.sample.class2rdbms/src/main/models/ClassModel.xmi",
+   																									"platform:/resource/org.kermeta.language.sample.class2rdbms/src/main/ecore/ClassMM.ecore")
    		//var resource : Resource init repository.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
    		//																							"file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/ClassMM.ecore")
        	resource.load(void)      
