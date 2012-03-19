@@ -1,0 +1,42 @@
+/* $Id:$ 
+ * Creation : December 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "test::Test"
+@mainOperation "main"
+
+package test;
+
+require kermeta
+require "./kermeta.ecore"
+require "output/KermetaStaticAnalysis.kmt"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::behavior
+
+
+class Test {
+	operation main() : Void is do
+		var inputRep : EMFRepository init EMFRepository.new
+		var inputRes : EMFResource
+		inputRes ?= inputRep.createResource("./AfterResolving__HelloWorldMiniframework.km", 
+							"platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+		inputRes.load()
+		var mu : org::kermeta::language::structure::ModelingUnit
+		mu ?= inputRes.one
+		stdio.writeln(inputRes.one.toString)
+		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
+		requiredMU.add(mu)
+		var pruning : KermetaStaticAnalysis init KermetaStaticAnalysis.new.initialise(requiredMU)
+		
+		pruning.launch()
+	end
+}
+
+
+
