@@ -54,6 +54,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 		  case Some(meth) => {
 			  var argsTab : Array[AnyRef] = args.toArray()
 		      meth.invoke(this, argsTab) //not working
+		      //TODO : take into account the special case of arguments inheriting from RichValueType and RichEnum
 		  }
 		}*/
 	}
