@@ -4,22 +4,17 @@
  * Copyright: INRIA Rennes, Triskell Team
  * Authors  : Arnaud Blouin
  */
-@mainClass "org::kermeta::kompren::slicing::Test"
-@mainOperation "main"
-
-package org::kermeta::kompren::slicing;
-
-require kermeta
-require "./SlicerGenerator.kmt"
+package org2::kermeta::kompren::slicing;
 
 using kermeta::standard
-using kermeta::persistence
+using kermeta::emfpersistence
 using kermeta::io
 using ecore
-
+using kermeta::io::StdIO => stdio
 
 class Test {
-	operation main() : Void is do
+	operation main() is do
+		var start : Long init Date.new.getTime()
 		// generateKevoree
 		// generateInvertedClassModel
 		// generateClassSlicer
@@ -27,102 +22,103 @@ class Test {
 		// generateKermetaTransfoAnalyser
 		// generateStateMachineSlicer
 		// generateFeatureDiagramSlicer
-		 generateStrictEcoreSlicer
+		generateStrictEcoreSlicer
+//		stdio.writeln(time.toString)
+//		stdio.writeln(Date.new.getTime().toString)
+		stdio.writeln((Date.new.getTime()-start).toString)
 	end
 
 
 
-	operation generateStrictEcoreSlicer() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/strictEcore/Ecore.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/strictEcore/strictEcore.slicer")
+	operation generateStrictEcoreSlicer() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/strictEcore/Ecore.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/slicing/examples/strictEcore/strictEcore.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/strictEcore/output/")
+		slicer.saveCode("/examples.strictEcore/")
 	end
 
-	operation generateFeatureDiagramSlicer() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/featureModel/featureDiagram.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/featureModel/featureModel.slicer")
+	operation generateFeatureDiagramSlicer() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/featureModel/featureDiagram.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/slicing/examples/featureModel/featureModel.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/featureModel/output/")
+		slicer.saveCode("platform:/resource/slicing/examples/featureModel/output/")
 	end
 
-	operation generateStateMachineSlicer() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/stateMachine/StateMachine.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/stateMachine/sm.slicer")
+	operation generateStateMachineSlicer() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/stateMachine/StateMachine.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/slicing/examples/stateMachine/sm.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/stateMachine/output/")
+		slicer.saveCode("/examples.stateMachine/")
 	end
 
-	operation generateKermetaTransfoAnalyser() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/modelTransfoAnalysis/kermeta.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/modelTransfoAnalysis/modelTransfo.slicer")
+	operation generateKermetaTransfoAnalyser() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/modelTransfoAnalysis/kermeta.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/slicing/examples/modelTransfoAnalysis/modelTransfo.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/modelTransfoAnalysis/output/")
+		slicer.saveCode("/examples.modelTransfoAnalysis/")
 	end
 
-	operation generateUnusedVarDetector() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/unusedVar/kermeta.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/unusedVar/unusedVar.slicer")
+	operation generateUnusedVarDetector() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/unusedVar/kermeta.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/slicing/examples/unusedVar/unusedVar.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/unusedVar/output/")
+		slicer.saveCode("/examples.unusedVar/")
 	end
 
-	operation generateKevoree() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/kevoree/kevoree.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/kevoree/kevoree.slicer")
+	operation generateKevoree() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/kevoree/kevoree.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/slicing/examples/kevoree/kevoree.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/kevoree/output/")
+		slicer.saveCode("platform:/resource/slicing/examples/kevoree/output/")
 	end
 
-	operation generateInvertedClassModel() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/class/ClassModel.ecore"
-		var slicerModel	: Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/classInverted/classInverted.slicer")
+	operation generateInvertedClassModel() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/class/ClassModel.ecore"
+		var slicerModel	: Slicer init getSlicerModel("platform:/resource/slicing/examples/classInverted/classInverted.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/classInverted/output/")
+		slicer.saveCode("/examples.clazzInverted/")
 	end
 
-	operation generateClassSlicer() : Void is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicing/examples/class/ClassModel.ecore"
-		var slicerModel	: Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicing/examples/class/class.slicer")
+	operation generateClassSlicer() is do
+		var modelURI	: String init "platform:/resource/slicing/examples/class/ClassModel.ecore"
+		var slicerModel	: Slicer init getSlicerModel("platform:/resource/slicing/examples/class/class.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
 		slicer.generateSlicer()
-		slicer.saveCode("../examples/class/output/")
+		slicer.saveCode("/examples.clazz/")
 	end
 	
 	operation getEcoreModel(uriEcoreModel : String) : Bag<EPackage> is do
-		var uriMM : String init "http://www.eclipse.org/emf/2002/Ecore"
-   		var repository : EMFRepository init EMFRepository.new
-   		repository.registerEcoreFile(uriMM)          
-   		var resource : Resource init repository.createResource(uriEcoreModel, uriMM)
-       	resource.load()
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource(uriEcoreModel, "http://www.eclipse.org/emf/2002/Ecore")
+       	resource.load(void)
 		
 		result := Bag<EPackage>.new
 		
-		resource.contents.each{obj |
-			if(EPackage.isInstance(obj)) then
+		resource.getContents().each{obj |
+			if(obj.isInstanceOf(EPackage)) then
 				result.add(obj.asType(EPackage))        
 			end
 		}
@@ -131,17 +127,17 @@ class Test {
 	
 	
 	operation getSlicerModel(uriSlicerModel : String) : Slicer is do
-		var uriSlicerMM : String init "platform:/resource/org.kermeta.kompren.slicing/metamodel/slicing.ecore"
-   		var repository : EMFRepository init EMFRepository.new
-   		repository.registerEcoreFile(uriSlicerMM)          
-   		var resource : Resource init repository.createResource(uriSlicerModel, uriSlicerMM)
-       	resource.load()
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource(uriSlicerModel, "platform:/resource/slicing/metamodel/slicing.ecore")
+       	resource.load(void)
+       	
+       	result := void
 
-		from var it : Iterator<Object> init resource.instances.iterator
+		from var it : Iterator<Object> init resource.getContents.iterator
 		until it.isOff
 		loop
 			var next : Object init it.next
-			if(Slicer.isInstance(next)) then                 
+			if(next.isInstanceOf(Slicer)) then                 
 				result ?= next
 			end
 		end

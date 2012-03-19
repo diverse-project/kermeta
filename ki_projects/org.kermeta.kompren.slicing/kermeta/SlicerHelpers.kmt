@@ -1,7 +1,4 @@
-package org::kermeta::kompren::slicing;
-
-require kermeta
-require "../metamodel/slicing.kmt"
+package org2::kermeta::kompren::slicing;
 
 using kermeta::standard
 

@@ -4,15 +4,12 @@
  * Copyright: INRIA Rennes, Triskell Team
  * Authors  : Arnaud Blouin
  */
-package org::kermeta::kompren::slicing;
-
-require kermeta
-require "./SlicerGenerator.kmt"
-require "./helpers/EClassHelper.kmt"
+package org2::kermeta::kompren::slicing;
 
 using kermeta::standard
 using kermeta::utils
 using ecore
+using kermeta::io::StdIO => stdio
 
 class SlicerAspectGenerator inherits Generator {
 	operation initialise(slicer : SlicerGenerator) : SlicerAspectGenerator is do
@@ -20,7 +17,7 @@ class SlicerAspectGenerator inherits Generator {
 		result := self
 	end
 
-	method generateCode() : Void is do
+	method generateCode() is do
 		var mainPackageName : String init slicerGenerator.aspectisedClasses.last().ePackage.getQualifiedName()
 		// "packages" contains the packages correspondeing to the all the packages used by the pruner.
 		// These packages will be used to add "using" and "require" elements into files.
@@ -36,17 +33,14 @@ class SlicerAspectGenerator inherits Generator {
 
 		var codeUsing : String init ""
 		// Adding the header of the main aspect class.
-		generatedCode := slicerGenerator.getPackageFromClasses(slicerGenerator.aspectisedClasses) + 
-						"require kermeta\nrequire \"" + slicerGenerator.modelURI + "\"\nrequire \"" + 
-						slicerGenerator.slicerModel.name + ".kmt\"\n"
+		generatedCode := slicerGenerator.getPackageFromClasses(slicerGenerator.aspectisedClasses)
+		
 		packages.each{pkg | 
-			var subPkgs : Sequence<String> init pkg.split("::")
-			generatedCode := generatedCode + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
 			// Adding the "using" elements that refers to the other packages.
 			codeUsing := codeUsing + "using " + pkg + "\n"
 		}
 
-		generatedCode := generatedCode + codeUsing + "using kermeta::standard\nusing kermeta::utils\n" + generateVisitAspect()
+		generatedCode := generatedCode + codeUsing + "using kermeta::standard\nusing kermeta::utils\nusing kermeta::io::StdIO => stdio\n" + generateVisitAspect()
 		packages.add(mainPackageName)
 
 		slicerGenerator.aspectisedClasses.each{eclass |
@@ -111,7 +105,7 @@ class SlicerAspectGenerator inherits Generator {
 	
 	
 	
-	operation generateExternAspect(clazz : EClass, mainPackageName : String, packages : Bag<String>) : Void is do
+	operation generateExternAspect(clazz : EClass, mainPackageName : String, packages : Bag<String>) is do
 		var namePackage : String init clazz.ePackage.getQualifiedName()
 		var codeAspect : String
 		
@@ -119,14 +113,11 @@ class SlicerAspectGenerator inherits Generator {
 		if(slicerGenerator.requiredAspectFiles.getValue(namePackage).isVoid) then
 			var codeUsing : String init ""
 			// Adding headers of the file.
-			codeAspect := "package " + namePackage + ";\n" + "require kermeta\n" + 
-							"require \"" + slicerGenerator.slicerModel.name + "Aspect.kmt\"\n"
+			codeAspect := "package " + namePackage + ";\n"
 	
 			// Adding the "require" elements that refer to the other created aspect files.
 	 		packages.each{pkg |
 	 			if(pkg!=namePackage and pkg!=mainPackageName) then
-					var subPkgs : Sequence<String> init pkg.split("::")
-					codeAspect := codeAspect + "require \"" + subPkgs.last() + "PruningAspect.kmt\"\n"
 					// Adding the "using" elements that refers to the other packages.
 					codeUsing := codeUsing + "using " + pkg + "\n"
 				end
@@ -174,7 +165,7 @@ class SlicerAspectGenerator inherits Generator {
 	operation createImplementationOperationCreateFrom(eclass : EClass) : String is do
 		if(slicerGenerator.slicerModel.strict and not eclass.~abstract) then
 			result := "\tmethod createFrom() : Object is do\n\t\tvar the" + eclass.name + " : " + 
-						eclass.name + " init " + "self.getMetaClass().new.asType(" + eclass.name + ")\n" + 
+						eclass.name + " init " + eclass.name + ".new\n" + 
 						generateCopyOfRequiredAttributesOfClass(eclass, "the"+eclass.name, true) + // not hasSuper) + 
 						"\t\tresult := the" + eclass.name + "\n\tend\n\n"
 			//TODO var hasSuper : Boolean init detect a super class which is a VisitorSlicer and use ti
@@ -193,14 +184,14 @@ class SlicerAspectGenerator inherits Generator {
 
 /* TODO
 		slicerGenerator.slicerModel.constraints.each{param |
-			if(param.element.eContainingClass==eclass or param.element.eContainingClass.isSuperTypeOf(eclass)) then
+			if(param.element.eContainingClass==eclass or param.element.eContainingClass.isSuperTypeOfBis(eclass)) then
 				paramCode := paramCode + " and (not " + prunerVarName + "." + param.name + " or self." + param.expression + ")"
 			end
 		}
 */
 		result := "aspect class " + eclass.name
 
-		if(considerSlicerVisitor.andThen{b| not slicerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass) }}) then
+		if(considerSlicerVisitor.andThen{b| not slicerGenerator.aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOfBis(eclass) }}) then
 			result := result + " inherits SlicerVisitor"
 
 			if(slicerGenerator.hasOpposite) then
@@ -241,7 +232,7 @@ class SlicerAspectGenerator inherits Generator {
 				end
 
 				// Initialisation methods must be added to the aspect clazz that contains the attributes which opposites are created.
-				if((etype.getQualifiedName.equals(eclass.getQualifiedName) or etype.isSuperTypeOf(eclass)) and rel.domain.isInstanceOf(EReference)) then
+				if((etype.getQualifiedName.equals(eclass.getQualifiedName) or etype.isSuperTypeOfBis(eclass)) and rel.domain.isInstanceOf(EReference)) then
 					feedOppositeMethod := feedOppositeMethod + generateInitialiseOppositeOperation(rel)
 				end
 			end
@@ -256,7 +247,7 @@ class SlicerAspectGenerator inherits Generator {
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") : Void is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass" + paramCode
+			result := result + ") is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass" + paramCode
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=(" + prunerVarName + ".radius+1))"
 			end
@@ -270,14 +261,14 @@ class SlicerAspectGenerator inherits Generator {
 				result := result + "\t\t\tif(not self.sliced"
 				if(not slicerGenerator.slicerModel.radius.isVoid) then
 					if(slicerGenerator.slicerModel.radius.focusedClasses.exists{fc | fc.domain.getQualifiedName==eclass.getQualifiedName} or
-						slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | cl.domain.isSuperTypeOf(eclass)}) then
+						slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | cl.domain.isSuperTypeOfBis(eclass)}) then
 							result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
 					end
 				end
 				result := result + ") then\n\t\t\t\t"
 				
 				if(slicerGenerator.slicerModel.strict) then
-					result := result + "self.clone := self.createFrom()"
+					result := result + "self.dup := self.createFrom()"
 				else
 					result := result + prunerVarName + "." + eclass.getAddedAttributeName() + ".add(self)"
 				end
@@ -296,7 +287,7 @@ class SlicerAspectGenerator inherits Generator {
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") : Void is do\n\t\t" + "if(not self.visitedPass" + paramCode
+			result := result + ") is do\n\t\t" + "if(not self.visitedPass" + paramCode
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
 			end
@@ -321,14 +312,14 @@ class SlicerAspectGenerator inherits Generator {
 		result := ""
 
 		if(not slicerGenerator.slicerModel.radius.isVoid) then
-			if(not slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | clazz.isSuperTypeOf(cl.domain)}) then
+			if(not slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | clazz.isSuperTypeOfBis(cl.domain)}) then
 				result := "\tmethod checkCanReallyBeAdded() : Boolean is do\n"
 	
 				if(slicerGenerator.slicerModel.radius.focusedClasses.exists{fc | fc.domain.getQualifiedName==clazz.getQualifiedName}) then
 					result := result + "\t\tresult := self.sliced\n"
 				else
 					result := result + "\t\tresult := super()"
-					if(not slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | cl.domain.isSuperTypeOf(clazz)}) then
+					if(not slicerGenerator.slicerModel.radius.focusedClasses.exists{cl | cl.domain.isSuperTypeOfBis(clazz)}) then
 						clazz.outputFocusedRelations.each{rel |
 							var relName : String init rel.domain.getValidKermetaName
 							result := result + " and "
@@ -379,8 +370,8 @@ class SlicerAspectGenerator inherits Generator {
 	
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				if(slicerGenerator.slicerModel.radius.focusedClasses.exists{cl |
-					ref.eContainingClass==cl or cl.domain.isSuperTypeOf(ref.eContainingClass) or 
-					ref.eContainingClass.isSuperTypeOf(cl.domain)}) then
+					ref.eContainingClass==cl or cl.domain.isSuperTypeOfBis(ref.eContainingClass) or 
+					ref.eContainingClass.isSuperTypeOfBis(cl.domain)}) then
 					radiusCode := ", currentRadius+1"
 				else
 					radiusCode := ", currentRadius"
@@ -403,10 +394,10 @@ class SlicerAspectGenerator inherits Generator {
 						radiusCode + ")" + generateAddRelations(classVisit, ref.asType(EReference))
 	
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
-					result := result + "\n\t\t\tif(self." + ref.name + ".sliced) then\n\t\t\t\tself.clone.asType(" + 
+					result := result + "\n\t\t\tif(self." + ref.name + ".sliced) then\n\t\t\t\tself.dup.asType(" + 
 							ref.container().asType(EClassifier).name + ")." + ref.name + " := self." + 
-							ref.name + ".clone.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self."
-							+ ref.name + ".clone)\n\t\t\tend\n"
+							ref.name + ".dup.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self."
+							+ ref.name + ".dup)\n\t\t\tend\n"
 				end
 	
 				if(ref.lowerBound==0) then
@@ -420,10 +411,10 @@ class SlicerAspectGenerator inherits Generator {
 						generateAddRelations(classVisit, ref.asType(EReference))
 						
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
-					result := result + "\n\t\t\t\tif(not clone.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
-								"clone.asType(" + ref.container().asType(EClassifier).name + ")." + ref.name + 
-								".add(" + nameVar +".clone.asType(" + ref.eType.name + "))\n\t\t\t\t\t" + prunerVarName + ".addToRoot(" 
-								+ nameVar + ".clone)\n\t\t\t\tend\n\t\t\t"
+					result := result + "\n\t\t\t\tif(not dup.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
+								"dup.asType(" + ref.container().asType(EClassifier).name + ")." + ref.name + 
+								".add(" + nameVar +".dup.asType(" + ref.eType.name + "))\n\t\t\t\t\t" + prunerVarName + ".addToRoot(" 
+								+ nameVar + ".dup)\n\t\t\t\tend\n\t\t\t"
 				end
 						
 				result := result + "}"
@@ -482,19 +473,19 @@ class SlicerAspectGenerator inherits Generator {
 		result := "class SlicerVisitor {\n"
 		
 		if(slicerGenerator.slicerModel.strict) then
-			result := result + "\treference clone : Object\n\n"
+			result := result + "\treference dup : Object\n\n"
 		end
 		
 		result := result + "\tattribute visitedPass : Boolean\n\n\t" + 
 				"attribute visitedForRelations : Boolean\n\n\tattribute sliced : Boolean\n\n\t" +
-				"operation initialiseAttributes() : Void is do\n\t\tself.visitedPass := false\n\t\t" +
+				"operation initialiseAttributes() is do\n\t\tself.visitedPass := false\n\t\t" +
 				"self.sliced := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
 				"operation visitToAddClasses(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 		if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", currentRadius : Integer" end
-		result := result + ") : Void is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
+		result := result + ") is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
 				"operation visitToAddRelations(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 		if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", currentRadius : Integer" end
-		result := result + ") : Void is do\n\tend\n\n\toperation checkInitialisation() : Void is do\n\t\t" +
+		result := result + ") is do\n\tend\n\n\toperation checkInitialisation() is do\n\t\t" +
 				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n\toperation checkCanReallyBeAdded() : Boolean is do\n" +
 				"\t\tself.visitedPass := true\n\t\tresult := true\n\tend\n"
 				

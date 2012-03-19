@@ -4,19 +4,13 @@
  * Copyright: INRIA Rennes, Triskell Team
  * Authors  : Arnaud Blouin
  */
-package org::kermeta::kompren::slicing;
-
-//require kermeta
-require "./SlicerHelpers.kmt"
-require "ECoreSlicingAspect.kmt"
-require "./helpers/EPackageHelper.kmt"
-require "./SlicerClassGenerator.kmt"
-require "./SlicerAspectGenerator.kmt"
+package org2::kermeta::kompren::slicing;
 
 using ecore
 using kermeta::utils
 using kermeta::standard
 using kermeta::io
+using kermeta::io::StdIO => stdio
 
 
 class SlicerGenerator {
@@ -93,12 +87,12 @@ class SlicerGenerator {
 	
 	operation updateModelForStrictSlicing() is do
 		if(slicerModel.strict) then
-			slicerModel.onEnd := "		var repository : EMFRepository init EMFRepository.new
-		var resource : EMFResource 
+			slicerModel.onEnd := "		var repository : ResourceSet init ResourceSet.new
+		var resource : Resource 
  		resource ?= repository.createResource(\"./slice.xmi\", \"" + slicerModel.uriMetamodel + "\")
  		
- 		resource.addAll(sliceRoots)
- 		resource.save()"
+ 		resource.getContents.addAll(sliceRoots)
+ 		resource.save(void)"
  		
  			slicerModel.helper := "	operation addToRoot(obj : Object) is do
 		var cont : Object init obj.container
@@ -178,13 +172,13 @@ class SlicerGenerator {
 	end
 	
 	
-	operation defineClassesToAspectise() : Void is do
+	operation defineClassesToAspectise() is do
 		// Extracting the classes from the relations to focus on.
 		slicerModel.slicedProperties.each{rel |
 			if(not aspectisedClasses.exists{cl | cl.getQualifiedName==rel.domain.eContainingClass.getQualifiedName}) then
 				aspectisedClasses.add(rel.domain.eContainingClass)
 			end
-			if(rel.domain.eType.isKindOf(EClass)) then
+			if(rel.domain.eType.isInstanceOf(EClass)) then
 				var eclass : EClass init rel.domain.eType.asType(EClass)
 				if(not aspectisedClasses.exists{cl | cl.getQualifiedName==eclass.getQualifiedName}) then
 					aspectisedClasses.add(eclass)
@@ -206,7 +200,7 @@ class SlicerGenerator {
 		// they must notify when visiting them.
 		aspectisedClasses.each{eclass |
 			if(eclass.outputFocusedRelations.empty() and
-				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOf(eclass)} and
+				aspectisedClasses.exists{eclass2 | eclass2.isSuperTypeOfBis(eclass)} and
 				not slicerModel.inputClasses.contains(eclass) and
 				not slicerModel.slicedClasses.exists{sc | sc.domain.getQualifiedName==eclass.getQualifiedName}) then
 				aspectisedClasses.remove(eclass)
@@ -215,7 +209,7 @@ class SlicerGenerator {
 	end
 	
 	
-	operation generateSlicer() : Void is do
+	operation generateSlicer() is do
 		slicerAspectGenerator.generateCode()
 		slicerClassGenerator.generateCode()
 	end
@@ -236,7 +230,7 @@ class SlicerGenerator {
 
 				if(not packagesName.contains(name)) then
 					packagesName.add(name)
-					result := result + "require \"" + classes.at(i).ePackage.name + "PruningAspect.kmt\"\n"
+					result := result + "require \"" + classes.at(i).ePackage.name + "SlicingAspect.kmt\"\n"
 				end
 				i := i - 1
 			end
@@ -278,15 +272,43 @@ class SlicerGenerator {
 	end
 	
 	
+	operation generateCodeKP(modelAspectFileName : String, slicerFileName : String, requiredAspectFileNames : Bag<String>) : String is do
+		var metamodelName : String init slicerModel.uriMetamodel.split("/").last()
+		var pkgName : String init getPackageFromClasses(aspectisedClasses).replaceAll(";\n", "::" + slicerModel.name).replaceAll("package ", "")
 	
-	operation saveCode(path : String) : Void is do
-		var file : FileIO init FileIO.new
-		file.writeTextFile(path + slicerModel.name + "Aspect.kmt",slicerAspectGenerator.generatedCode)
-		file.writeTextFile(path + slicerModel.name + ".kmt", slicerClassGenerator.generatedCode)
+		result := "KermetaProject \"" + slicerModel.name + "\"\n\tgroupId = \"my.group\"\n\t" +
+					"defaultMainClass =\"" + pkgName + "\"\n\t" +
+					"defaultMainOperation = \"launch\"\n\tsources = {\n\t\t" +
+					"require \"${project.baseUri}/" + modelAspectFileName + "\"\n\t\t" +
+					"require \"${project.baseUri}/" + slicerFileName + "\"\n\t\t"
+					
+		requiredAspectFileNames.each{name | result := result + "require \"${project.baseUri}/" + name + "\"\n\t\t" }
+		
+		result := result + "require \"${kompren.model.baseUri}/metamodel/slicing.ecore\" byteCodeFromADependency\n\t\t" +
+			"require \"${project.baseUri}/" + metamodelName + "\"\n\t}\n\tdependencies = {\n\t\t" +
+			"dependency \"library.core\" = \"platform:/plugin/org.kermeta.language.library.core\",\"mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT\"\n\t\t" +
+			"dependency \"kompren.model\" = \"platform:/resource/slicing/\"\n\t\t" +
+			"}	packageEquivalences={\n\t\tpackageEquivalence \"ecore\" = \"org.eclipse.emf.ecore\"\n\t}\n"	
+	end
+	
+	
+	
+	operation saveCode(path : String) is do
+		var aspectFileNames : Bag<String> init Bag<String>.new
 		
 		requiredAspectFiles.keys.each{key |
 			var subPkgs : Sequence<String> init key.split("::")
-			file.writeTextFile(path + subPkgs.last() + "PruningAspect.kmt", requiredAspectFiles.getValue(key))
+			aspectFileNames.add(path + subPkgs.last() + "SlicingAspect.kmt")
+		}
+		
+	//	FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + ".kp").toURI, 
+	//						generateCodeKP(slicerModel.name + "Aspect.kmt", slicerModel.name + ".kmt", aspectFileNames))
+		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + "Aspect.kmt").toURI, slicerAspectGenerator.generatedCode)
+		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + ".kmt").toURI, slicerClassGenerator.generatedCode)
+		
+		requiredAspectFiles.keys.each{key |
+			var subPkgs : Sequence<String> init key.split("::")
+			FileIO.writeTextFile(("platform:/resource" + path + subPkgs.last() + "SlicingAspect.kmt").toURI, requiredAspectFiles.getValue(key))
 		}
 	end
 }
@@ -296,7 +318,5 @@ abstract class Generator {
 
 	attribute generatedCode : String
 
-	operation generateCode() : Void is abstract
+	operation generateCode() is abstract
 }
-
-

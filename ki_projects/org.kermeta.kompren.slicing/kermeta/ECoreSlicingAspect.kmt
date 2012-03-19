@@ -6,12 +6,8 @@
  */
 package ecore;
 
-require kermeta
-require "./helpers/EClassHelper.kmt"
-require "../metamodel/slicing.kmt"
-
 using kermeta::standard
-using org::kermeta::kompren::slicing
+using org2::kermeta::kompren::slicing
 
 aspect class EStructuralFeature {
 	operation getValidKermetaName() : String is do
@@ -32,7 +28,7 @@ aspect class EStructuralFeature {
 	end
 }
 
-aspect class EClass {
+aspect class EClassifier {
 	reference outputFocusedRelations : SlicedProperty[0..*]
 
 

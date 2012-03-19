@@ -4,11 +4,7 @@
  * Copyright: INRIA Rennes, Triskell Team
  * Authors  : Arnaud Blouin
  */
-package org::kermeta::kompren::slicing;
-
-require kermeta
-require "SlicerGenerator.kmt"
-require "ECoreSlicingAspect.kmt"
+package org2::kermeta::kompren::slicing;
 
 using kermeta::standard
 using ecore
@@ -19,15 +15,13 @@ class SlicerClassGenerator inherits Generator {
 		result := self
 	end
 
-	method generateCode() : Void is do
+	method generateCode() is do
 		var linedHelper : Sequence<String>
 		
 		if slicerGenerator.slicerModel.helper.isVoid then linedHelper := void
 		else linedHelper := slicerGenerator.slicerModel.helper.split("\n") end
 		
 		generatedCode := slicerGenerator.getPackageFromClasses(slicerGenerator.aspectisedClasses)
-		generatedCode := generatedCode + "require kermeta\nrequire \"" + slicerGenerator.modelURI + "\"\nrequire \"" + 
-						slicerGenerator.slicerModel.name + "Aspect.kmt\"\n" + slicerGenerator.getRequiresFromClasses(slicerGenerator.aspectisedClasses)
 						
 		// The helper may contain 'require' statements that must be placed at this place.
 		if not linedHelper.isVoid then
@@ -39,12 +33,12 @@ class SlicerClassGenerator inherits Generator {
 				end
 			}
 		end
-   					     
+						
 		if(slicerGenerator.slicerModel.strict) then
-			generatedCode := generatedCode + "using kermeta::persistence" 
+			generatedCode := generatedCode + "using kermeta::emfpersistence" 
 		end
    					     
-   		generatedCode := generatedCode + "\nusing kermeta::standard\nusing kermeta::utils\n" +
+   		generatedCode := generatedCode + "\nusing kermeta::standard\nusing kermeta::utils\nusing kermeta::io::StdIO => stdio\n" +
 						 slicerGenerator.getUsingsFromClasses(slicerGenerator.aspectisedClasses)
 		
 		// The helper may contain 'using' statements that must be placed at this place.
@@ -99,7 +93,7 @@ class SlicerClassGenerator inherits Generator {
 		if(slicerGenerator.slicerModel.onEnd.isVoid) then
 			result := ""
 		else
-			result := "\toperation onEnd() : Void is do\n" + slicerGenerator.slicerModel.onEnd + "\n\tend\n"
+			result := "\toperation onEnd() is do\n" + slicerGenerator.slicerModel.onEnd + "\n\tend\n"
 		end
 	end
 	
@@ -107,7 +101,7 @@ class SlicerClassGenerator inherits Generator {
 		if(slicerGenerator.slicerModel.onStart.isVoid) then
 			result := ""
 		else
-			result := "\toperation onStart() : Void is do\n" + slicerGenerator.slicerModel.onStart + "\n\tend\n"
+			result := "\toperation onStart() is do\n" + slicerGenerator.slicerModel.onStart + "\n\tend\n"
 		end
 	end
 
@@ -134,7 +128,7 @@ class SlicerClassGenerator inherits Generator {
 		slicerGenerator.slicerModel.slicedClasses.each{clazz |
 			if(not clazz.expression.isVoid) then
 				result := result + "\toperation on" + clazz.domain.name + "Added(" + 
-						clazz.ctx.varName + " : " + clazz.domain.name + ") : Void is do\n"
+						clazz.ctx.varName + " : " + clazz.domain.name + ") is do\n"
 						
 				if(not clazz.expression.isVoid) then
 					result := result + clazz.expression
@@ -148,7 +142,7 @@ class SlicerClassGenerator inherits Generator {
 			if(not rel.expression.isVoid) then
 				var type : EClass init rel.domain.eType.asType(EClass)
 				result := result + "\toperation on" + rel.domain.eContainingClass.name + rel.domain.name + "Added(" + rel.src.varName + " : " + 
-						rel.domain.eContainingClass.name + ", " + rel.tgt.varName + " : " + type.name + ") : Void is do\n"
+						rel.domain.eContainingClass.name + ", " + rel.tgt.varName + " : " + type.name + ") is do\n"
 				
 				if(not rel.expression.isVoid) then
 					result := result + rel.expression
@@ -162,7 +156,7 @@ class SlicerClassGenerator inherits Generator {
 
 	// Generates the "launch" operation.
 	operation generateLaunchOperation() : String is do
-		result := "\toperation launch() : Void is do\n"
+		result := "\toperation launch() is do\n"
 		
 		if(slicerGenerator.hasOpposite) then
 			result := result + "\t\tself.model.feedOpposites()\n"
