@@ -1,0 +1,22 @@
+
+using kermeta::standard
+using kermeta::io
+
+package test {
+
+class MainClass
+{
+    
+    
+     operation assertSimilar(expected: String, actual: String): Void is
+        do  
+        
+        
+            expected := "tutu18"
+            //a:="tutu18"
+            
+        end
+   
+}
+
+}

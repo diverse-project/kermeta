@@ -20,6 +20,28 @@ using kermeta::utils
 
 aspect class Assignment
 {
+
+	/**
+	 * The parameter of an operation is immutable
+	 */
+	@Scope "RESOLVED"
+	inv op_parameters_are_immutable is do
+		
+		if (self.target.isInstanceOf(CallVariable))
+		then
+			var cv : CallVariable init self.target.asType(CallVariable)
+			
+			if (cv.staticType.typeContainer.isVoid)
+			then
+				true
+			else
+				not(cv.staticType.typeContainer.isInstanceOf(Parameter))
+			end
+		else
+			true
+		end
+	end
+
 	/**
 	 * You are trying to overwrite the internal reflective collection of the property.
 	 * Did you mean to use clear or addAll ?
