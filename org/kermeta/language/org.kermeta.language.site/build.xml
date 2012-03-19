@@ -281,6 +281,10 @@
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.autocompletion/${kermeta.language.version}/language.autocompletion-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
+
+		<get src="${kermeta.maven.repsitory}/org/kermeta/language/sample/language.sample.deployer/${kermeta.language.version}/language.sample.deployer-${kermeta.language.version}.jar" 
+			dest="${source.bundles}"
+			usetimestamp="true"/>
 		<get src="${kermeta.maven.repsitory}/org/kermeta/language/language.texteditor.eclipse/${kermeta.language.version}/language.texteditor.eclipse-${kermeta.language.version}.jar" 
 			dest="${source.bundles}"
 			usetimestamp="true"/>
