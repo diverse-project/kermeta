@@ -1,0 +1,1 @@
+no_new_on_abstract_class

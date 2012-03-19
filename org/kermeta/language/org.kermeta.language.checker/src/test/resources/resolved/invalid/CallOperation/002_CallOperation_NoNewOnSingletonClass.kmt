@@ -1,0 +1,17 @@
+
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::io
+using kermeta::io::StdIO => stdio
+
+package test{
+        
+    class A {
+    	operation test() :  Void is do
+    		
+    		var a : FileIO init FileIO.new
+    		
+    	end
+    }
+    
+}

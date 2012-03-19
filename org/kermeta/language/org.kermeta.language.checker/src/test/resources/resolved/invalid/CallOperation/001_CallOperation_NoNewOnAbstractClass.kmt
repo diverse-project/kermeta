@@ -1,0 +1,23 @@
+
+
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::io
+using kermeta::io::StdIO => stdio
+
+package test{
+    
+    abstract class A {
+    	
+    }
+    
+    class B {
+    	operation test() :  Void is do
+    		
+    		var a : A init A.new
+    		
+    	end
+    }
+    
+}
+
