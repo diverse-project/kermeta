@@ -1,0 +1,18 @@
+/* $Id:$ 
+ * Creation : January 5, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            dvojtise
+ */
+package ecore;
+
+using kermeta::standard
+
+aspect class EPackage {
+	operation getAllClasses() : Bag<EClass> is do
+		result := Bag<EClass>.new
+		eClassifiers.each{classifier | if(classifier.isInstanceOf(EClass)) then result.add(classifier.asType(EClass)) end }
+		eSubpackages.each{pkg | result.addAll(pkg.getAllClasses()) }
+	end
+}

@@ -1,0 +1,18 @@
+package org2::kermeta::kompren::slicing;
+
+using kermeta::standard
+
+aspect class Slicer {
+	property slicedClasses : SlicedClass[0..*]
+	getter is do
+		result := OrderedSet<SlicedClass>.new
+		slicedElements.each{se | if(se.isInstanceOf(SlicedClass)) then result.add(se.asType(SlicedClass)) end }
+	end
+	
+	
+	property slicedProperties : SlicedProperty[0..*]
+	getter is do
+		result := OrderedSet<SlicedProperty>.new
+		slicedElements.each{se | if(se.isInstanceOf(SlicedProperty)) then result.add(se.asType(SlicedProperty)) end }
+	end
+}
