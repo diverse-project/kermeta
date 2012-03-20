@@ -206,22 +206,7 @@ class StaticSetterContext
 		end
 	end
 	
-	// workaround compiler bug : issue when adding aspect on object
-	// put this method as helper that do the same, called by direct subclasses of KermetaModelElement
-	operation inferContainedExpressionStatic(obj : KermetaModelElement) is do
-						
-			// the algorithm is bottom up
-			// compute leaf then goes up in the container which can then reuse their results
-		
-			obj.eachOwnedElement{ e |
-				if ( e.isInstanceOf(Expression)) then
-					e.asType(Expression).resolveCallAndInferStatic(self)
-				else if ( e.isInstanceOf(KermetaModelElement)) then
-					e.asType(KermetaModelElement).inferContainedExpressionStatic(self)
-				end end
-				e // must return somthing for scala compiler to work
-			}
-		end
+	
 }
 
 class StaticSetterContextFrame

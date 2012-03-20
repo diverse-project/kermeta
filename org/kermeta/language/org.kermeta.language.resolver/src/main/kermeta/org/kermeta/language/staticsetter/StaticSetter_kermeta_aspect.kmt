@@ -34,12 +34,21 @@ using kermeta::standard
 package structure {
 	 aspect class KermetaModelElement {
 		operation inferContainedExpressionStatic(context : StaticSetterContext) is do
-						
+				
+				
+			self.eachOwnedElement{ e |
+				if ( e.isInstanceOf(Expression)) then
+					e.asType(Expression).resolveCallAndInferStatic(context)
+				else if ( e.isInstanceOf(KermetaModelElement)) then
+					e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
+				end end
+				e // must return somthing for scala compiler to work
+			}		
 			// the algorithm is bottom up
 			// compute leaf then goes up in the container which can then reuse their results
 			// workaround compiler bug : issue when adding aspect on object
 			// put this method as helper that do the same, called by direct subclasses of KermetaModelElement
-			context.inferContainedExpressionStatic(self)
+			//context.inferContainedExpressionStatic(self)
 		end
 		
 		
@@ -54,8 +63,8 @@ package structure {
 
 
 	aspect class ModelingUnit {
-		method inferContainedExpressionStatic(context : StaticSetterContext) is do
-			context.inferContainedExpressionStatic(self)
+		method inferContainedExpressionStatic(context : StaticSetterContext) from KermetaModelElement is do
+			super(context)
 			
 		end
 	
@@ -74,15 +83,15 @@ package structure {
 
 
 	aspect class NamedElement {
-		method inferContainedExpressionStatic(context : StaticSetterContext) is do
-			context.inferContainedExpressionStatic(self)
+		method inferContainedExpressionStatic(context : StaticSetterContext) from KermetaModelElement is do
+			super(context)
 		end
 	}
 
 
 	aspect class TypeContainer {
-		method inferContainedExpressionStatic(context : StaticSetterContext) is do
-			context.inferContainedExpressionStatic(self)
+		method inferContainedExpressionStatic(context : StaticSetterContext) from KermetaModelElement is do
+			super(context)
 		end
 	}
 	aspect class ClassDefinition {
@@ -97,19 +106,35 @@ package structure {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
 			context.currentProperty := self
 			context.pushContext()
-			super(context)
+			if not getterBody.isVoid then
+				//replacement of body is needed in the case of a body without block
+				getterBody:=getterBody.resolveCallAndInferStatic(context)
+			end
+			if not setterBody.isVoid then
+				//replacement of body is needed in the case of a body without block
+				setterBody:=setterBody.resolveCallAndInferStatic(context)
+			end
 			context.popContext()
 			context.currentProperty := void
 		end
 	}
 	aspect class Operation {
+		 
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement  is do
 			context.currentOperation := self
 			context.pushContext()
 			self.ownedParameter.each{ param | 				
 				context.addSymbol( param.name, context.createTypeFromMultiplicityElement(param))
 			}			
-			super(context)
+			
+			if not body.isVoid then
+				//replacement of body is needed in the case of a body without block
+				body:=body.resolveCallAndInferStatic(context)
+			end
+			~post.each{c|c.inferContainedExpressionStatic(context)}
+			~pre.each{c|c.inferContainedExpressionStatic(context)}
+
+			
 			context.popContext()
 			context.currentOperation := void
 		end		
@@ -117,9 +142,11 @@ package structure {
 	
 	aspect class Constraint {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
-			if not body.isVoid then 
-				body.inferContainedExpressionStatic(context)
+			if not body.isVoid then
+				//replacement of body is needed in the case of a body without block
+				body:=body.resolveCallAndInferStatic(context)
 			end
+			
 		end
 	}
 }
