@@ -25,6 +25,45 @@ using org::kermeta::language::structure
 aspect class CallOperation
 {
 	
+	/**
+	 * You are not allowed to call operations on a class which is not an singleton.
+	 * Either make your class a singleton or use an instance.
+	 */
+	@Scope "RESOLVED"
+	inv no_operation_calls_on_a_non_singleton_class is do
+	
+		stdio.writeln("Checking no_operation_calls_on_a_non_singleton_class on CallOperation")
+	
+		if (not(self.name.equals("new")) and not(self.staticOperation.isVoid)) 
+		//if self.staticOperation.isVoid, an error will be raised elsewhere ...
+		then
+			
+			//Check that it is called on a Class
+		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
+			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+
+			if (self.staticOperation.owningClass.equals(classTypeDef))
+			then
+				if (self.target.isInstanceOf(CallTypeLiteral))
+				then
+					var classDef : ClassDefinition init
+						self.target.asType(CallTypeLiteral).typeref.type.asType(Class).typeDefinition.asType(ClassDefinition)
+					
+					//is it a singleton
+					classDef.isSingleton
+				else
+					true
+				end
+			else
+				true
+			end
+
+		else
+			true
+		end
+	
+	end
+	
 	//TODO : this invariant should be merged with invariant
 	//no_new_on_a_singleton once a customizable error message
 	//will be in place for kermeta invariants 
