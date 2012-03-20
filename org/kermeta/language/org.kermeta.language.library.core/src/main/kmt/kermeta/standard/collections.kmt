@@ -312,6 +312,19 @@ abstract class Collection<G>
 	end
 	
 	/**
+	 * Returns a new Sequence containing one element of the Collection that
+	 * validates the selector function or an empty Sequence if no element
+	 * validates the selector function
+	 * example :
+	 * aCollection2 := aCollection.selectOne { e | 
+     *    \/* put here a condition that returns true for the element that must  be included in the resulting Collection *\/
+	 * }
+ 	 */
+ 	operation selectOne(selector : <G -> Boolean>) : Sequence<G>  is do
+ 	
+ 	end
+	
+	/**
 	 * Returns a new Sequence composed of elements of the Collection that
 	 * do not validate the rejector function
 	 * example :

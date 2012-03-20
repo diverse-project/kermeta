@@ -261,6 +261,13 @@ object JavaConversions {
             return res
 
         }
+        
+        def selectOne(selector : A=>scala.Boolean) : java.util.List[A]={
+        	var res : java.util.List[A] = new java.util.ArrayList[A];
+        	this.each(e=> if(selector(e)) {res.add(e); return res})
+        	return res
+        }
+        
         //override def size() :Int={return value.length}
         def each(func : A=> Unit):Unit ={
             var clone : ju.List[A] = new ju.ArrayList[A]
