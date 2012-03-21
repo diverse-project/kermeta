@@ -1,0 +1,20 @@
+KermetaProject "examples.stateMachine"
+	groupId = "my.group"
+	defaultMainClass ="ex::stateMachine::Test"
+	defaultMainOperation = "main"
+	sources = {
+		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
+		require "${kompren.model.baseUri}/metamodel/slicing.ecore" byteCodeFromADependency
+		require "${project.baseUri}/StateMachine.ecore"
+		require "${project.baseUri}/StateMachineSlicerAspect.kmt"
+		require "${project.baseUri}/StateMachineSlicer.kmt"
+		require "${project.baseUri}/TestStateMachineSlicer.kmt"
+	}
+	dependencies = {
+		dependency "library.core" = "platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		dependency "kompren.model" ="platform:/resource/slicing/lib/slicing.jar"
+		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
+		}
+	packageEquivalences={
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+	}
