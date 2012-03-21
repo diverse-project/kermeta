@@ -42,7 +42,13 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 		var optionMeth : Option[java.lang.reflect.Method] = this.getClass().getMethods.find(m => m.getName() == op.getName()
 		    && m.getParameterTypes().length == args.length)
 		optionMeth match{
-		  case Some(meth) => {meth.invoke(this)}
+		  case Some(meth) => {
+		    try{
+		      meth.invoke(this)
+		    } catch {
+		      case e:java.lang.reflect.InvocationTargetException => {throw e.getCause()}
+		    }
+		  }
 		  case None => {throw new NoSuchMethodException}
 		}
 		//TODO
@@ -53,8 +59,12 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 		  case None => {throw new NoSuchMethodException}
 		  case Some(meth) => {
 			  var argsTab : Array[AnyRef] = args.toArray()
+      		//TODO : take into account the special case of arguments inheriting from RichValueType and RichEnum
+		    try{
 		      meth.invoke(this, argsTab) //not working
-		      //TODO : take into account the special case of arguments inheriting from RichValueType and RichEnum
+		    } catch {
+		      case e:java.lang.reflect.InvocationTargetException => {throw e.getCause()}
+		    }
 		  }
 		}*/
 	}
