@@ -32,16 +32,14 @@ aspect class CallOperation
 	@Scope "RESOLVED"
 	inv no_operation_calls_on_a_non_singleton_class is do
 	
-		stdio.writeln("Checking no_operation_calls_on_a_non_singleton_class on CallOperation")
-	
 		if (not(self.name.equals("new")) and not(self.staticOperation.isVoid)) 
 		//if self.staticOperation.isVoid, an error will be raised elsewhere ...
 		then
-			
 			//Check that it is called on a Class
 		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
 			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
-
+			
+			stdio.writeln(" classTypeDef : " + classTypeDef.toString)
 			if (self.staticOperation.owningClass.equals(classTypeDef))
 			then
 				if (self.target.isInstanceOf(CallTypeLiteral))
@@ -73,7 +71,7 @@ aspect class CallOperation
 	@Scope "RESOLVED"
 	inv no_new_on_abstract_class is do
 	
-		if (self.name.equals("new"))
+		if (self.name.equals("new") and not(self.staticOperation.isVoid)) 
 		then
 			// Check that it is called on a Class
 		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
@@ -84,7 +82,12 @@ aspect class CallOperation
 				// Now check that it is not an abstract class
 				if (self.target.isInstanceOf(CallTypeLiteral))
 				then
-					not(self.target.asType(CallTypeLiteral).typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isAbstract)
+					if (self.target.asType(CallTypeLiteral).typeref.type.isInstanceOf(Class))
+					then
+						not(self.target.asType(CallTypeLiteral).typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isAbstract)
+					else
+						true
+					end
 				else
 					true
 				end
@@ -105,7 +108,7 @@ aspect class CallOperation
 	@Scope "RESOLVED"
 	inv no_new_on_a_singleton is do
 	
-		if (self.name.equals("new"))
+		if (self.name.equals("new") and not(self.staticOperation.isVoid))
 		then
 			// Check that it is called on a Class
 		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
@@ -116,8 +119,12 @@ aspect class CallOperation
 				// Now check that it is not a singleton
 				if (self.target.isInstanceOf(CallTypeLiteral))
 				then
-					not(self.target.asType(CallTypeLiteral).typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isSingleton)
-					//false
+					if (self.target.asType(CallTypeLiteral).typeref.type.isInstanceOf(Class))
+					then
+						not(self.target.asType(CallTypeLiteral).typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isSingleton)
+					else
+						true
+					end
 				else
 					true
 				end
