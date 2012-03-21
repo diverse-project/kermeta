@@ -52,12 +52,7 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 					context.errors.add(ResolverException.new.initialize("The current operation have too many super definition to call", self))
 				end
 			end
-			correspondingOperation := classFrom
-				.typeDefinition
-				.asType(ClassDefinition)
-				.ownedOperation
-				.detect{o|o.hasSameSignature(context.currentOperation)}
-			
+	
 		end
 		result:=correspondingOperation
 	
@@ -78,6 +73,7 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 					superOperation:=unresolvedOp.correspondingOperation
 					ownedUnresolvedOperations.remove(unresolvedOp)
 				else
+					
 					stdio.writeln("operation "+ getQualifiedName+ " cannot be resolved")
 				end
 			end
