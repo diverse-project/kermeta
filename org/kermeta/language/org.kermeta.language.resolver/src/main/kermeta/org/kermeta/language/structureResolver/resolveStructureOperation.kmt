@@ -96,7 +96,8 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 					self.superOperation := callableOps.one
 				else
 					if callableOps.size()!=0 then
-						context.errors.add(ResolverException.new.initialize("The current operation have too many super definition to call", self))
+						context.errors.add(ResolverException.new.initialize(
+							"The current operation in " + context.currentClassDef.name + " have too many super definition to call", self))
 					end
 				end	
 				
