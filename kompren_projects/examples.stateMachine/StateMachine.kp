@@ -12,7 +12,7 @@ KermetaProject "examples.stateMachine"
 	}
 	dependencies = {
 		dependency "library.core" = "platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
-		dependency "kompren.model" ="platform:/resource/slicing/lib/slicing.jar"
+		dependency "kompren.model" ="platform:/resource/org.kermeta.kompren.slicer.compiler/lib/org.kermeta.kompren.slicer.model.jar"
 		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
 		}
 	packageEquivalences={
