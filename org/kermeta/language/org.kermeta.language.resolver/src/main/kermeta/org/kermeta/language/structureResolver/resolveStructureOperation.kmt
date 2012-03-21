@@ -25,36 +25,55 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 		
 		var  classFrom: Class 
 		
-		if ~from.isVoid then
-			
-		else
+		if not ~from.isVoid then
 			classFrom?= ~from
 		end
+		
 		if context.verbose then 
 			stdio.writeln("from "+~from.toString)
 		end
+		
 		if not classFrom.isVoid then
 			if context.verbose then 
 				stdio.writeln("in typedef "+classFrom.typeDefinition.asType(ClassDefinition).name)
 			end
-			var cdFrom : ClassDefinition init classFrom.typeDefinition.asType(ClassDefinition)
-			var callableOperations : Set<Operation> init cdFrom.getAllCallableOperations()
-														 .select{op|op.hasSameSignature(context.currentOperation)}.asSet()
-			if callableOperations.size()==1 then
-				correspondingOperation := callableOperations.one
-			else
-				if callableOperations.size()==0 then
-					context.errors.add(ResolverException.new.initialize(
-							"Super Operation "+operationIdentifier+" cannot be resolved in " + cdFrom.name, self))
+
+			//we have a Class corresponding to the one indicated in the from statement
+			//we have to check if this class is a direct class to the current class
+			//TODO what do we do with generic class
+			
+			var isDirectSuperClass : Boolean 
+			isDirectSuperClass := context.currentClassDef.superType.exists{c|
+				if c.isInstanceOf(Class) then 
+					c.asType(Class).typeDefinition.equals(classFrom.typeDefinition) 
+				else 
+					false 
+				end }
+			if isDirectSuperClass then
+			
+				var cdFrom : ClassDefinition init classFrom.typeDefinition.asType(ClassDefinition)
+				var callableOperations : Set<Operation> init cdFrom.getAllCallableOperations()
+															 .select{op|op.hasSameSignature(context.currentOperation)}.asSet()
+				if callableOperations.size()==1 then
+					correspondingOperation := callableOperations.one
 				else
-					context.errors.add(ResolverException.new.initialize(
-							"The current operation in " + cdFrom.name + " have too many super definition to call", self))
+					if callableOperations.size()==0 then
+						context.errors.add(ResolverException.new.initialize(
+								"Super Operation "+operationIdentifier+" cannot be resolved in " + cdFrom.name, self))
+					else
+						context.errors.add(ResolverException.new.initialize(
+								"The current operation in " + cdFrom.name + " have too many super definition to call", self))
+					end
 				end
+		
+			
+				result:=correspondingOperation
+			
+			else
+				context.errors.add(ResolverException.new.initialize(
+								"'from' statement of "+operationIdentifier+ " is not a direct type of "+context.currentClassDef.name, self))
 			end
-	
 		end
-		result:=correspondingOperation
-	
 	end
 	
 	
