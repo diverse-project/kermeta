@@ -43,6 +43,48 @@ aspect class Operation
 		end
 	end
 
+	/*
+	 * The "from" keyword must refer to a direct supertype of the
+	 * operation's owning class
+	 */
+	/*
+	@Scope "RESOLVED"
+	inv from_must_refer_to_direct_supertype is do
+	
+		if (not(self.superOperation.isVoid))
+		then
+			
+			//
+			//var classDef : ClassDefinition init self.superOperation.owningClass
+			if (self.superOperation.isInstanceOf(Operation))
+			then
+				var classDef : ClassDefinition init self.superOperation.asType(Operation).owningClass
+				// this classdefinition must be a direct superType of
+				// the operation's owning class
+				if (not(
+					self.owningClass.superType.exists{ st | 
+						st.asType(Class).typeDefinition.asType(ClassDefinition).equals(classDef) }
+				
+				))
+				then
+				
+					stdio.writeln("Problem when checking from_must_refer_to_direct_supertype for operation " + self.name + " on class" + self.owningClass.name)
+					
+				end
+				
+				self.owningClass.superType.exists{ st | 
+					st.asType(Class).typeDefinition.asType(ClassDefinition).equals(classDef) }
+			else
+				// is it possible ???
+				true
+			end
+		else
+			// nothin to check
+			true
+		end
+	end
+	*/
+
 	/**
 	 * The information in the super (or lack of information in super)
 	 * must point to one and only one Operation
@@ -79,7 +121,7 @@ aspect class Operation
 	
 		if self.kOwnedTags.exists{ t | t.name.equals("main") }
 		then
-			stdio.writeln("Checking main_tag_validity on operation " + self.name)
+			//stdio.writeln("Checking main_tag_validity on operation " + self.name)
 
 			var nbParameter : Integer init self.ownedParameter.size
 			res:=false
@@ -89,16 +131,16 @@ aspect class Operation
 				//stdio.writeln("no parameter -> OK")
 				res:=true
 			else
-				stdio.writeln("There are " + nbParameter.toString + " parameters ...")
+				//stdio.writeln("There are " + nbParameter.toString + " parameters ...")
 		  		// retrieve the modelingunit and String TypeDefinition
 		  		var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
 		  		var stringTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::String")
 		  		
-		  		stdio.writeln("stringTypeDef retrieved : "+ stringTypeDef.toString)
+		  		//stdio.writeln("stringTypeDef retrieved : "+ stringTypeDef.toString)
 		  		
 				res:=self.ownedParameter.forAll{p|
 					// All parameters must be kermeta::standard::String
-					stdio.writeln("Checking parameter : " + p.toString)
+					//stdio.writeln("Checking parameter : " + p.toString)
 					if (not p.type.isVoid())
 					then
 						//stdio.writeln("p.type : " + p.type.toString)
@@ -106,7 +148,7 @@ aspect class Operation
 						if (p.type.isInstanceOf(ParameterizedType))
 						then
 							var typeDef : TypeDefinition init p.type.asType(ParameterizedType).typeDefinition.asType(TypeDefinition)
-							stdio.writeln(" -> typeDef : " + typeDef.toString)
+							//stdio.writeln(" -> typeDef : " + typeDef.toString)
 							typeDef.equals(stringTypeDef)
 							
 						else
@@ -118,11 +160,11 @@ aspect class Operation
 					end				
 				}
 				
-				stdio.writeln("res="+res.toString)
+				//stdio.writeln("res="+res.toString)
 				
 				if (res==false and nbParameter==1)
 				then
-					stdio.writeln("checking wether the parameter is Collection<String>")
+					//stdio.writeln("checking wether the parameter is Collection<String>")
 					// In this case, the parameter must be Collection<String>
 					var param : Parameter init self.ownedParameter.one
 					if (not(param.containedType.isVoid))
@@ -151,7 +193,7 @@ aspect class Operation
 				
 			end
 			
-			stdio.writeln("final res=" + res.toString)
+			//stdio.writeln("final res=" + res.toString)
 		end
 		
 		
