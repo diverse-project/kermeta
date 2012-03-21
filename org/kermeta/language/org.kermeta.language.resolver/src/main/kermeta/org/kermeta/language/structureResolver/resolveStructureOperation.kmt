@@ -37,19 +37,18 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 			if context.verbose then 
 				stdio.writeln("in typedef "+classFrom.typeDefinition.asType(ClassDefinition).name)
 			end
-			var  callableOperations : Set<Operation>
-			callableOperations:=classFrom.typeDefinition
-									.asType(ClassDefinition)
-									.getAllCallableOperations()
-									.select{op|op.hasSameSignature(context.currentOperation)}
-									.asSet()
+			var cdFrom : ClassDefinition init classFrom.typeDefinition.asType(ClassDefinition)
+			var callableOperations : Set<Operation> init cdFrom.getAllCallableOperations()
+														 .select{op|op.hasSameSignature(context.currentOperation)}.asSet()
 			if callableOperations.size()==1 then
 				correspondingOperation := callableOperations.one
 			else
 				if callableOperations.size()==0 then
-					context.errors.add(ResolverException.new.initialize("Super Operation "+operationIdentifier+" cannot be resolved", self))
+					context.errors.add(ResolverException.new.initialize(
+							"Super Operation "+operationIdentifier+" cannot be resolved in " + cdFrom.name, self))
 				else
-					context.errors.add(ResolverException.new.initialize("The current operation have too many super definition to call", self))
+					context.errors.add(ResolverException.new.initialize(
+							"The current operation in " + cdFrom.name + " have too many super definition to call", self))
 				end
 			end
 	
