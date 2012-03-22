@@ -1,0 +1,38 @@
+package org::kermeta::language::behavior;
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+using org::kermeta::language::structure
+class KermetaStaticAnalysis {
+	reference requiredModelingUnits : ModelingUnit[0..*]
+
+	reference addedClassDefinitions : Bag<ClassDefinition>
+
+	operation initialise(requiredModelingUnits : bag ModelingUnit[0..*]) : KermetaStaticAnalysis is do
+		result := self
+		self.addedClassDefinitions := Bag<ClassDefinition>.new
+		self.requiredModelingUnits.addAll(requiredModelingUnits)
+	end
+
+	operation launch() is do
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddClasses(self) }
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self) }
+		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
+		onEnd()
+	end
+
+	operation onClassDefinitionAdded(classDef : ClassDefinition) is do
+		if(usedClassDefs.isVoid) then
+			usedClassDefs := Set<ClassDefinition>.new
+		end
+
+		usedClassDefs.add(classDef)
+	end
+	operation onEnd() is do
+		if(not usedClassDefs.isVoid) then
+			usedClassDefs.each{classDef | stdio.writeln(classDef.name) }
+		end
+	end
+	reference usedClassDefs : Set<ClassDefinition>
+}

@@ -1,0 +1,185 @@
+package org::kermeta::language::structure;
+using kermeta::standard
+using org::kermeta::language::behavior
+using kermeta::io::StdIO => stdio
+
+aspect class ModelingUnit {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.packages.each{thePackage | thePackage.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.packages.each{thePackage | thePackage.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Package {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.nestedPackage.each{thePackage | thePackage.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class TypeDefinitionContainer inherits SlicerVisitor {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class TypeDefinition inherits SlicerVisitor {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.superType.each{theType | theType.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.superType.each{theType | theType.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class ClassDefinition {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			if(not self.sliced) then
+				theKermetaStaticAnalysis.addedClassDefinitions.add(self)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.ownedOperation.each{theOperation | theOperation.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ownedOperation.each{theOperation | theOperation.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theKermetaStaticAnalysis)}
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class Operation {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.ownedParameter.each{theParameter | theParameter.visitToAddClasses(theKermetaStaticAnalysis)}
+			if(not self.body.isVoid) then self.body.visitToAddClasses(theKermetaStaticAnalysis) end
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ownedParameter.each{theParameter | theParameter.visitToAddRelations(theKermetaStaticAnalysis)}
+			if(not self.body.isVoid) then self.body.visitToAddRelations(theKermetaStaticAnalysis) end
+			self.visitedPass := false
+		end
+	end
+}
+
+aspect class TypedElement inherits SlicerVisitor {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			//stdio.writeln(self.type.toString)
+			if(not self.type.isVoid) then self.type.visitToAddClasses(theKermetaStaticAnalysis) end
+		//	self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.type.isVoid) then self.type.visitToAddRelations(theKermetaStaticAnalysis) end
+		//	self.visitedPass := false
+		end
+	end
+}
+
+aspect class Type inherits SlicerVisitor {
+}
+
+aspect class ParameterizedType {
+	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.typeDefinition.visitToAddClasses(theKermetaStaticAnalysis)
+		//	self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
+		if(not self.visitedPass) then
+			super(theKermetaStaticAnalysis)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.typeDefinition.visitToAddRelations(theKermetaStaticAnalysis)
+		//	self.visitedPass := false
+		end
+	end
+}
+

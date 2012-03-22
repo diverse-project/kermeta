@@ -1,0 +1,20 @@
+KermetaProject "examples.modelTransfoAnalysis"
+	groupId = "my.group"
+	defaultMainClass ="ex::kermeta::TransfoAnalysis::Test"
+	defaultMainOperation = "main"
+	sources = {
+		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
+		require "${kompren.model.baseUri}/metamodel/slicing.ecore" byteCodeFromADependency
+		require "${project.baseUri}/KermetaStaticAnalysisAspect.kmt"
+		require "${project.baseUri}/structureSlicingAspect.kmt"
+		require "${project.baseUri}/KermetaStaticAnalysis.kmt"
+		require "${project.baseUri}/TestTransfoAnalysis.kmt"
+	}
+	dependencies = {
+		dependency "library.core" = "platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		dependency "kompren.model" ="platform:/resource/org.kermeta.kompren.slicer.compiler/lib/org.kermeta.kompren.slicer.model.jar"
+		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
+		}
+	packageEquivalences={
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+	}
