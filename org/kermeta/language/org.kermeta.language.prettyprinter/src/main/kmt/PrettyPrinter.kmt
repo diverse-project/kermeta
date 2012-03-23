@@ -26,7 +26,7 @@ class PrettyPrinter
 		//var path : String init arg
 		StdIO.writeln(arg)
 		var folder : String init "platform:/resource/QVTtest/src/main/kmt/"
-		var baseFileName : String init "Book2Publication"
+		var baseFileName : String init "sam2samdyn"
 		//var folder : String init "platform:/resource/QVTtest/target/"
 		//var baseFileName : String init "beforeResolving"
 		

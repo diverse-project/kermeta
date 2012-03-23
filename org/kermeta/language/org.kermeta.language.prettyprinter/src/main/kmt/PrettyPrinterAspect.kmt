@@ -546,7 +546,7 @@ package org::kermeta::language{
 		}
 		
 		aspect class UnresolvedCall {
-			method prettyPrint(indent : Integer) : String from org::kermeta::language::behavior::CallFeature is do
+			method prettyPrint(indent : Integer) : String from org::kermeta::language::behavior::CallExpression is do
 				result := ""
 				if not self.target.isVoid then
 					result := self.target.prettyPrint(indent)+"\n"+printIndent(indent+1)+"."
