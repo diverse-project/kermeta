@@ -103,7 +103,7 @@ class ModelParameter {
 
 	operation objectsOfType[T]() : Set<T> is do
 		result := Set<T>.new
-		extent.each{x|if x.isInstanceOf(T) then result.add(x) end}
+		extent.each{x|if x.isInstanceOf(T) then result.add(x.asType(T)) end}
 		//result:=extent.select{x|x.isInstanceOf(T)}.asSet()
 	end
 

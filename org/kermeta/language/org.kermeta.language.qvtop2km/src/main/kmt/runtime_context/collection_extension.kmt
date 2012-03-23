@@ -11,15 +11,17 @@ singleton CollectionExtension{
 
 	operation clearAndAdd<G>(collection : kermeta::standard::Collection<G>, element : G) : Void is do
 		collection.clear()
-		collection.add(element)
+		add(collection,element)
 	end
 	
 	operation add<G>(collection : kermeta::standard::Collection<G>, element : G) : Void is do
-		collection.add(element)
+		if not element.isVoid then
+			collection.add(element)
+		end
 	end
 	
 	operation qvtAddAll<G,H>(collection : kermeta::standard::Collection <G>, elements : kermeta::standard::Collection<H>) : Void is do
-		elements.each{x|collection.add(x.asType(G))}
+		elements.each{x|add(collection,x.asType(G))}
 	end 
 	
 	

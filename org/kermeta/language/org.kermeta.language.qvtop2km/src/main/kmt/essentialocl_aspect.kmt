@@ -9,13 +9,13 @@ aspect class CollectionItem {
 			var out : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			output:=out
 			out.name:="add"
-			
+			out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::CollectionExtension", false)
 			
 			var collection : essentialocl::CollectionLiteralExp
 			collection ?=container
 			
 			var collectionVar : org::kermeta::language::behavior::CallVariable init org::kermeta::language::behavior::CallVariable.new
-			out.target:=collectionVar
+			out.parameters.add(collectionVar)
 			collectionVar.name:=collection.collectionTmpId
 			item.range2domain(context)
 			out.parameters.add(item.output.asType(org::kermeta::language::behavior::Expression))
@@ -44,7 +44,8 @@ aspect class CollectionLiteralExp {
 			var vDecl : org::kermeta::language::behavior::VariableDecl init org::kermeta::language::behavior::VariableDecl.new
 			out.statement.add(vDecl)
 						//TODO find a way to generate random identifiers that won't collide with existing identifiers
-			vDecl.identifier:="collectionliteral"
+			vDecl.identifier:="kCollectionLiteral"+context.generatedID.toString
+			context.generatedID:=context.generatedID+1
 			collectionTmpId:=vDecl.identifier
 			type.range2domain(context)
 			var seqClass : structure::Type init type.generateType(context)
@@ -93,7 +94,7 @@ aspect class CollectionLiteralExp {
 /**call to a Property*/
 aspect class PropertyCallExp{
 
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		StdIO.writeln("PropertyCallExp::range2domain")
 		var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(referredProperty.name,false)
 		/*referredProperty.range2domain(context)
@@ -112,7 +113,7 @@ aspect class PropertyCallExp{
 
 aspect class IteratorExp {
 
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		if output==void then
 		
 		
@@ -157,7 +158,7 @@ aspect class IteratorExp {
 
 aspect class OperationCallExp {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		if output==void then
 			StdIO.writeln("OperationCallExp::range2domain "+referredOperation.getQVTID())
 			StdIO.writeln("containingResource "+referredOperation.containingResource.getURI.toString)
@@ -261,8 +262,18 @@ aspect class OperationCallExp {
 	
 	
 aspect abstract class OclExpression {
+	/**
+		return true if the type of the expression is a collection
+	*/
+	operation isMulti() : Boolean is do
+		
+			var t : emof::Type init self.type
+		
+			result:=t.isInstanceOf(essentialocl::CollectionType)
+		
+	end
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::TypedElement is do
 		//StdIO.writeln("oclexpression metaclass "+self.getMetaClass.name)
 		output:=void
 	end
@@ -273,7 +284,7 @@ aspect abstract class OclExpression {
 	
 aspect class VariableExp {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		var out: org::kermeta::language::behavior::Expression
 		if (referredVariable.name=="result") then
 			 out:= org::kermeta::language::behavior::CallResult.new
@@ -562,7 +573,7 @@ aspect class OrderedSetType {
 /** TypeExp is a call to a type for iskindof for instance*/
 aspect class TypeExp {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		if output==void then
 			referredType.range2domain(context)
 			var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(referredType.getQVTID,false)
@@ -585,7 +596,7 @@ aspect class TypeExp {
 /** Real literals, they don't exists in kermeta*/
 aspect class RealLiteralExp {
 
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void is do
 		if output==void then
 			var out : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 			output:=out

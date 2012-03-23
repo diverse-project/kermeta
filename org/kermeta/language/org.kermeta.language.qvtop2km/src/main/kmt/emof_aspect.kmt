@@ -5,7 +5,7 @@ using kermeta::io
 using org::kermeta::language
 
 aspect class Class {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from Type  is
 		do
 			if output.equals(void) then
 			StdIO.writeln("Class::range2domain")
@@ -50,7 +50,7 @@ aspect class Class {
 			end
 		end
 
-method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
+method generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type from Type is do 
 	//StdIO.writeln("Class::generateType")
 	/*if output == void then
 		range2domain(context)
@@ -65,7 +65,7 @@ end
 
 aspect class Operation {
 
-method range2domain(context : Qvt2KermetaContext) : Void is do
+method range2domain(context : Qvt2KermetaContext) : Void from TypedElement is do
 StdIO.writeln("Operation::range2domain")
 
 
@@ -79,7 +79,7 @@ aspect class Package
 		trigger the transformation of nested packages
 		and of the typedefinitions of the package
 	*/
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void  from NamedElement is
 		do
 			if output.equals(void) then
 				var out : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new
@@ -112,7 +112,7 @@ aspect class Package
 
 aspect class PrimitiveType
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  from DataType is do
 		//StdIO.writeln("PrimitiveType::range2domain")
 		//root_package::KmtLib.getDefault().asType(root_package::KmtLib).getFromQualifiedName("kermeta::standard::Boolean")
 		if output==void then
@@ -174,7 +174,7 @@ aspect class PrimitiveType
 		
 	end
 
-method generateType(context : Qvt2KermetaContext) :structure::Type is do 
+method generateType(context : Qvt2KermetaContext) :structure::Type from DataType is do 
 	result:=void
 	if output == void then
 		range2domain(context)
@@ -203,7 +203,7 @@ end
 
 aspect class Property
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from TypedElement is
 		do
 			if output.equals(void) then
 				StdIO.writeln("Property::range2domain")
@@ -252,12 +252,12 @@ aspect class Property
 
 aspect class Type{
 
-	method range2domain(context : Qvt2KermetaContext) : Void is do 
+	method range2domain(context : Qvt2KermetaContext) : Void from NamedElement is do 
 	
 	
 	end
 	
-	operation generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type is do 
+	operation generateType(context : Qvt2KermetaContext) : org::kermeta::language::structure::Type  is do 
 		StdIO.writeln("Type generateType")
 		result:=void
 	end

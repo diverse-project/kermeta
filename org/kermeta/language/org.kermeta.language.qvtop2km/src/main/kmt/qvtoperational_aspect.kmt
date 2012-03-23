@@ -11,7 +11,7 @@ using org::kermeta::language
 
 aspect class ConstructorBody {
 
-	method range2domain(context : Qvt2KermetaContext)  : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext)  : Void from OperationBody is do
 		if output==void then
 			//StdIO.writeln("ConstructorBody::range2domain")
 			var out : behavior::Block init behavior::Block.new
@@ -37,7 +37,7 @@ aspect class ConstructorBody {
 aspect class ContextualProperty
 {
 	/* TODO implement "initExpression" and "overriden" */
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
+	method range2domain(context : Qvt2KermetaContext) : Void from emof::Property is do 
 		if output==void then
 			//StdIO.writeln("ContextualProperty::range2domain")
 			var out : structure::Property init structure::Property.new
@@ -78,7 +78,7 @@ aspect class ContextualProperty
 
 aspect class EntryOperation {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from ImperativeOperation is
 		do
 			if output==void then
 				var out : structure::Operation init structure::Operation.new
@@ -242,7 +242,7 @@ aspect class MappingOperation {
 
 aspect class Helper
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void from ImperativeOperation is
 		do
 			if output==void then
 				//StdIO.writeln("MappingOperation::range2domain")
@@ -297,7 +297,7 @@ aspect class Helper
 
 aspect class MappingBody {
 	
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
+	method range2domain(context : Qvt2KermetaContext) : Void from OperationBody is do 
 		
 		if output==void then
 			StdIO.writeln("MappingBody::range2domain")
@@ -656,7 +656,7 @@ aspect class MappingBody {
 */
 aspect class ModelType {
 
-method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do 
+method range2domain(context : Qvt2KermetaContext) : Void from emof::Class is do 
 	if output==void then
 		StdIO.writeln("ModelType::range2domain")
 		
@@ -686,10 +686,12 @@ aspect class MappingCallExp
 			var out : behavior::CallOperation init behavior::CallOperation.new
 			output:=out
 			
-			//if there is a source model
+			//if there is a source 
 			if source!=void then
 				source.range2domain(context)
 				out.target?=source.output
+				//ugly hack: if the source is an imperativeiterateexp "selectOne" then 
+				
 			else
 				var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 				out.target:=transfoCall
@@ -862,6 +864,15 @@ aspect class ModelParameter {
 
 }
 
+aspect class Module {
+
+	method range2domain(context:Qvt2KermetaContext) : Void from emof::Class is do
+		super(context)
+	end
+
+}
+
+
 /**
 in qvt operations are separated from classes definition which is not the case in kermeta
 so it is needed to recreate the class hierarchy in kermeta to add operations
@@ -869,7 +880,7 @@ so it is needed to recreate the class hierarchy in kermeta to add operations
 
 aspect class OperationalTransformation {
 
-	method range2domain(context : Qvt2KermetaContext) : Void is do 
+	method range2domain(context : Qvt2KermetaContext) : Void  is do 
 		if output==void then 
 			var out : structure::ModelingUnit init structure::ModelingUnit.new
 			output:=out

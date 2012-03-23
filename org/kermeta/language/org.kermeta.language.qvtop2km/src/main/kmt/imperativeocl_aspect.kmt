@@ -73,49 +73,26 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 			var asSeqType : behavior::UnresolvedCall init behavior::UnresolvedCall.new.createProxySequence(condition.asType(essentialocl::TypeExp).referredType.generateType(context))
 			asSeqType.target:=iterateCall
 			
-			/*
-			var deferredcast : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			deferredcast.name:="fromSeq"
 			
-			var dSeqInit : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-			deferredcast.target:=dSeqInit
-			dSeqInit.name:="new"
-			
-			var dseqType : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new 
-			dseqType.typeIdentifier:="kermeta::standard::DeferredSequence"
-			
-			var paramTypeCD : org::kermeta::language::structure::ClassDefinition
-			condition.asType(essentialocl::TypeExp).referredType.range2domain(context)
-			paramTypeCD?=condition.asType(essentialocl::TypeExp).referredType.output
-			
-			var dseqLit : org::kermeta::language::behavior::CallTypeLiteral init org::kermeta::language::behavior::CallTypeLiteral.new
-			dSeqInit.target:=dseqLit
-			dseqLit.typeref:=dseqType.generateParameterizedTypeRef(paramTypeCD)
-			
-			deferredcast.parameters.add(iterateCall)
-			*/
 			output:=asSeqType
 			
-			/*
-			var castCall : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature.new
-			castCall.name := "asType"
-			var castLit : org::kermeta::language::behavior::TypeLiteral init org::kermeta::language::behavior::TypeLiteral.new
-			
-			var paramTypeCD : org::kermeta::language::structure::ClassDefinition
-			condition.asType(essentialocl::TypeExp).referredType.range2domain()
-			paramTypeCD?=condition.asType(essentialocl::TypeExp).referredType.output
-			
-			var seqCD : org::kermeta::language::structure::ClassDefinition
-			seqCD?=KmtLib.getDefault.asType(KmtLib).getFromQualifiedName("kermeta::standard::Sequence")
-			
-			castLit.typeref:=seqCD.generateParameterizedTypeRef(paramTypeCD)
-		
-			castCall.parameters.add(castLit)
-			castCall.target:=iterateCall
-			output:=castCall
-				*/		
+					
 		else
-			output:=iterateCall
+			if name =="selectOne" and
+			(condition!=void)
+			.andThen{x|condition.isInstanceOf(essentialocl::TypeExp)} then
+				condition.asType(essentialocl::TypeExp).referredType.range2domain(context)
+				var cast : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("asType",true)
+				var typeLit : behavior::CallTypeLiteral init behavior::CallTypeLiteral.new
+				typeLit.typeref:=condition.asType(essentialocl::TypeExp).referredType.generateType(context).generateTypeRef
+				cast.parameters.add(typeLit)
+				cast.target:=iterateCall
+				output:=cast
+			
+			else
+		
+				output:=iterateCall
+			end
 		end 
 		
 	end
@@ -126,13 +103,7 @@ end
 aspect class AssignExp {
 
 
-operation isMulti(x : essentialocl::OclExpression) : kermeta::standard::Boolean is do
-	var t : emof::Type init x.type
-	
-	result:=t.isInstanceOf(essentialocl::CollectionType)
-	
-	
-end
+
 
 
 	/** depends on multivaluation of left expression*/
@@ -156,7 +127,7 @@ end
 				//TODO take care of multivalued assignement
 				StdIO.writeln("value size : "+~value.size.toString)
 				out.parameters.add(self.~value.one.output.asType(org::kermeta::language::behavior::Expression))
-				if isMulti(self.~value.one) then
+				if self.~value.one.isMulti then
 					if isReset() then
 						out.name:="clearAndAddAll"
 					else
@@ -199,7 +170,7 @@ aspect class VariableInitExp {
 
 */
 
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		if output==void then
 			var out : org::kermeta::language::behavior::VariableDecl
 			out:=referredVariable.toVariableDecl(context)
@@ -210,7 +181,7 @@ aspect class VariableInitExp {
 }
 
 aspect class LogExp {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is do
+	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		if output==void then
 			//check condition if exists
 			var out : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new

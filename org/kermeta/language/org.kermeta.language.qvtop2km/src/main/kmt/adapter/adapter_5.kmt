@@ -3,7 +3,7 @@ using kermeta::standard
 using root_package
 aspect class IfExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void  is
 		do
 			if output.equals(void) then
 				var out : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
@@ -30,7 +30,7 @@ aspect class IfExp
 }
 aspect class StringLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void  is
 		do
 			if output.equals(void) then
 				var out : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
@@ -43,7 +43,7 @@ aspect class StringLiteralExp
 }
 aspect class BooleanLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void  is
 		do
 			if output.equals(void) then
 				var out : org::kermeta::language::behavior::BooleanLiteral init org::kermeta::language::behavior::BooleanLiteral.new
@@ -56,7 +56,7 @@ aspect class BooleanLiteralExp
 }
 aspect class IntegerLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void  is
 		do
 			if output.equals(void) then
 				var out : org::kermeta::language::behavior::IntegerLiteral init org::kermeta::language::behavior::IntegerLiteral.new
@@ -69,7 +69,7 @@ aspect class IntegerLiteralExp
 }
 aspect class NullLiteralExp
 {
-	method range2domain(context : Qvt2KermetaContext) : Void from emof::Object is
+	method range2domain(context : Qvt2KermetaContext) : Void  is
 		do
 			if output.equals(void) then
 				var out : org::kermeta::language::behavior::VoidLiteral init org::kermeta::language::behavior::VoidLiteral.new
