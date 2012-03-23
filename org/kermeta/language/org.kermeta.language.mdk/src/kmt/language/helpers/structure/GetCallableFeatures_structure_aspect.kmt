@@ -35,7 +35,7 @@ aspect class ClassDefinition {
 					if superT.asType(Class).typeDefinition!=self then
 						var superCallableOperations : Set<Operation> init superT.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations()
 						superCallableOperations.each{ superCallable|
-							if not result.exists{ op|
+							if not ownedOperation.exists{ op|
 											op.hasSameSignature(superCallable)} then
 								result.add(superCallable)
 							end

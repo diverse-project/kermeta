@@ -71,7 +71,7 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 			
 			else
 				context.errors.add(ResolverException.new.initialize(
-								"'from' statement of "+operationIdentifier+ " is not a direct type of "+context.currentClassDef.name, self))
+								"'from' statement of "+operationIdentifier+ " is not a direct super type of "+context.currentClassDef.name, self))
 			end
 		end
 	end
