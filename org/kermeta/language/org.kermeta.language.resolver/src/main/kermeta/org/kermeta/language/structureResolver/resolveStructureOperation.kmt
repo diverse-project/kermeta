@@ -58,11 +58,23 @@ aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeCon
 					correspondingOperation := callableOperations.one
 				else
 					if callableOperations.size()==0 then
+						var errorMessage : String init "Super Operation "+operationIdentifier+" cannot be resolved in " + cdFrom.name+". Direct super types are:"
+						context.currentClassDef.superType.each{c|
+							if c.isInstanceOf(Class) then 
+								errorMessage:=errorMessage+" "+c.asType(Class).typeDefinition.name
+							end }
 						context.errors.add(ResolverException.new.initialize(
-								"Super Operation "+operationIdentifier+" cannot be resolved in " + cdFrom.name, self))
+								errorMessage, self))
 					else
+						var errorMessage : String init "The current operation in " + cdFrom.name + " have too many super definition to call. Direct super types are:"
+						context.currentClassDef.superType.each{c|
+							if c.isInstanceOf(Class) then 
+								errorMessage:=errorMessage+" "+c.asType(Class).typeDefinition.name
+							end }
+				
+			
 						context.errors.add(ResolverException.new.initialize(
-								"The current operation in " + cdFrom.name + " have too many super definition to call", self))
+								errorMessage, self))
 					end
 				end
 		
