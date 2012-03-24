@@ -23,7 +23,7 @@ public class Class2RdbmsExampleWizard
 		// We need the statements example to be unzipped along with the
 		// EMF library example model, edit and editor examples
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
-		projects.add(new ProjectDescriptor("org.kermeta.language.sample.deployer", "zips/org.kermeta.language.sample.class2rdbms.zip", "org.kermeta.anguage.sample.class2rdbms"));
+		projects.add(new ProjectDescriptor("org.kermeta.language.sample.deployer", "zips/org.kermeta.language.sample.class2rdbms.zip", "org.kermeta.language.sample.class2rdbms"));
 		return projects;
 	}
 
