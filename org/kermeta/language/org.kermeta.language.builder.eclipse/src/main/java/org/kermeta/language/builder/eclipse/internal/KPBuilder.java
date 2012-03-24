@@ -206,9 +206,9 @@ public class KPBuilder {
 	
 	synchronized private boolean checkIfBuildIsNeeded() {
 		try {
-			if (kp_last_modelingunit == null) {
+			/*if (kp_last_modelingunit == null) {
 				return true;
-			}
+			}*/
 			
 			long timeStampOfClasses = 0;
 
@@ -335,7 +335,7 @@ public class KPBuilder {
 				uriMapFileBuilder.generateURIMapFile(outputRootFolder);
 				
 				if (result != null && !compiler.hasFailed) {
-					//kp_last_modelingunit = result;
+					kp_last_modelingunit = result;
 					Activator.getDefault().getMessaggingSystem().debug("copy resources to class folders to ease the run from Eclipse", this.getClass().getName());
 					
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
