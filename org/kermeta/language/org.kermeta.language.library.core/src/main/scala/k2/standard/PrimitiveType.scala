@@ -20,7 +20,7 @@ object PrimitiveConversion{
     implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
     implicit def iteratorEObject2kermeta(x:java.util.Iterator[_<: org.eclipse.emf.ecore.EObject]) :  _root_.java.util.Iterator[_root_.java.lang.Object] =x.asInstanceOf[_root_.java.util.Iterator[_root_.java.lang.Object]]
 
-	
+    implicit def random2kermeta(x: java.util.Random) = new RichRandom(x)
     implicit def integer2kermeta(x: Int) = new RichInteger(x)
     implicit def long2kermeta(x: Long) = new RichLong(x)
     implicit def short2kermeta(x: Short) = new RichShort(x)
@@ -162,6 +162,26 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
     }
 	
 }
+
+
+
+class RichRandom(value : java.util.Random) extends KermetaObject with EObjectImplForPrimitive {
+	override def isVoid() = value==null;
+	override def equals(arg0 : Any) = value.equals(arg0)
+	override def toString() = value.toString()
+	override def hashCode() : Int = value.hashCode()
+	
+	def nextBoolean() : Boolean = value.nextBoolean()
+	def nextDouble() : Double = value.nextDouble()
+	def nextFloat() : Float = value.nextFloat()
+	def nextGaussian() : Double = value.nextGaussian()
+	def nextInt() : Int = value.nextInt()
+	def nextInt(n : Int) : Int = value.nextInt(n)
+	def nextLong() : Long = value.nextLong()
+	def setSeed(s : Long) = value.setSeed(s)
+}
+
+
 
 class RichDate(value: java.util.Date) extends KermetaObject with EObjectImplForPrimitive {
   override  def isVoid():Boolean = value==null;

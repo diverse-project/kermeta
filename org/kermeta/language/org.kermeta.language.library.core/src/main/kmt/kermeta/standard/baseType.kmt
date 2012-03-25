@@ -783,6 +783,45 @@ class Boolean {        @CompilerIgnore "true"
           end
           
 }
+
+
+@CompilerIgnore "true"
+class Random {
+	@CompilerIgnore "true"
+	operation equals(arg0:Object) : Boolean is do end
+     
+	@CompilerIgnore "true"
+	operation toString() : String is do end
+     
+	@CompilerIgnore "true"
+	operation hashCode() : Integer is do end
+     
+    @CompilerIgnore "true"
+	operation nextBoolean() : Boolean is do end
+	
+	@CompilerIgnore "true"
+	operation nextDouble() : Double is do end
+	
+	@CompilerIgnore "true"
+	operation nextFloat() : Float is do end
+	
+	@CompilerIgnore "true"
+	operation nextGaussian() : Double is do end
+	
+	@CompilerIgnore "true"
+	operation nextInt() : Integer is do end
+	
+	@CompilerIgnore "true"
+	operation nextInt(n : Integer) : Integer is do end
+	
+	@CompilerIgnore "true"
+	operation nextLong() : Long is do end
+	
+	@CompilerIgnore "true"
+	operation setSeed(s : Long) is do end
+}
+
+
 @CompilerIgnore "true"
 class Date inherits Comparable<Date> {        @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do

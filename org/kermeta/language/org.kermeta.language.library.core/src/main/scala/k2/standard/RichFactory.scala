@@ -22,6 +22,8 @@ object KerRichFactory {
  def createDate : java.util.Date = {
    new java.util.Date
  }
+ 
+ def createRandom : java.util.Random = new java.util.Random
 }
 
  

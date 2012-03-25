@@ -88,6 +88,7 @@ object TypeEquivalence {
 				 typeEquivelence.put("k2.standard.Boolean", 	"java.lang.Boolean");
 				 typeEquivelence.put("k2.standard.Character", 	"java.lang.Character");
 				 typeEquivelence.put("k2.standard.Date", 		"java.util.Date");
+				 typeEquivelence.put("k2.standard.Random", 		"java.util.Random");
 				 typeEquivelence.put("k2.standard.Double", 		"java.lang.Double");
 				 typeEquivelence.put("k2.standard.Float", 		"java.lang.Float");
 				 typeEquivelence.put("k2.standard.Integer", 	"java.lang.Integer");
