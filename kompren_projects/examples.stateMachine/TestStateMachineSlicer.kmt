@@ -7,12 +7,23 @@
 package ex::stateMachine;
 
 using kermeta::standard
+using kermeta::emfpersistence
 
 
 class Test {
 	operation main() : Void is do
 		var requiredStates : Bag<State> init Bag<State>.new
-		var sm : StateMachine init createStateMachineModel(requiredStates)
+		var sm : StateMachine // init createStateMachineModel(requiredStates)
+		
+		var repository : ResourceSet init ResourceSet.new
+		var resource : Resource 
+ 		resource ?= repository.createResource("platform:/resource/genSM/model100.xmi", 
+ 						"platform:/resource/examples.stateMachine/StateMachine.ecore")
+ 						
+		resource.load(void)
+		sm ?= resource.getContents.one
+		
+		requiredStates.add(sm.initState)
 		
 		var pruning : StateMachineSlicer init StateMachineSlicer.new.initialise(requiredStates)
 		

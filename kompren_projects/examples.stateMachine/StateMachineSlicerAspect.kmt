@@ -107,14 +107,14 @@ aspect class State inherits SlicerVisitor {
 }
 
 aspect class StandardState {
-	method createFrom() : Object is do
+	method createFrom() : Object from OutputState is do
 		var theStandardState : StandardState init StandardState.new
 		theStandardState.name := self.name
 		theStandardState.name := self.name
 		result := theStandardState
 	end
 
-	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) is do
+	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
 		checkInitialisation()
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
@@ -124,7 +124,7 @@ aspect class StandardState {
 			end
 		end
 	end
-	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
+	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			self.visitedPass := true

@@ -22,7 +22,8 @@ class StateMachineSlicer {
 	operation onEnd() is do
 		var repository : ResourceSet init ResourceSet.new
 		var resource : Resource 
- 		resource ?= repository.createResource("./slice.xmi", "./StateMachine.ecore")
+ 		resource ?= repository.createResource("platform:/resource/examples.stateMachine/slice.xmi",
+ 											  "platform:/resource/examples.stateMachine/StateMachine.ecore")
  		
  		resource.getContents.addAll(sliceRoots)
  		resource.save(void)
