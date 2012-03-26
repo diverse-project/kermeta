@@ -127,7 +127,8 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
-			org.kermeta.language.resolver
+			org.kermeta.language.resolver,								
+			org.kermeta.language.language.resolver.org.kermeta.language.structure
                         </Export-Package>
                         <Require-Bundle>
 			org.kermeta.scala.scala-library,
