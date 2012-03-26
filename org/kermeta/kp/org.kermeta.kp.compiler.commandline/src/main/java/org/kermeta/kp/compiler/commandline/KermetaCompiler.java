@@ -63,6 +63,7 @@ import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
+import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.helpers.StringHelper;
@@ -374,6 +375,14 @@ public class KermetaCompiler {
 				this.hasFailed = true;
 				return null;
 			}
+			
+
+			// checking existence and conformance of the defaultMainClass and default MainOperation
+			new KpChecker(this).checkDefaultMain(kpFileURL, kp, resolvedUnit);
+			if(this.hasFailed){
+				return null;
+			}
+			
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
@@ -1321,6 +1330,8 @@ public class KermetaCompiler {
 		}
 		return result;
 	}
+	
+	
 	
 	
 	public void createJar(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder){
