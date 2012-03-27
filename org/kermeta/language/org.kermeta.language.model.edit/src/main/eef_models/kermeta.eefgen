@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eef-gen:EEFGenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eef-gen="http://www.eclipse.org/emf/eef/generation/1.0.0" genDirectory="/org.kermeta.language.model.edit/src/generated/java" author="Didier Vojtisek" license="/*&#xD;&#xA; * Licence : EPL&#xD;&#xA; * Copyright : IRISA/Inria&#xD;&#xA;*/">
+  <editionContexts basePackage="" descriptorsGenericPropertiesViews="true">
+    <PropertiesEditionContext href="kermeta.components#_kpOLgXdpEeGeTL-DRzePMg"/>
+  </editionContexts>
+  <editionContexts basePackage="org" descriptorsGenericPropertiesViews="true">
+    <PropertiesEditionContext href="kermeta.components#_kpOLg3dpEeGeTL-DRzePMg"/>
+  </editionContexts>
+  <editionContexts basePackage="org.kermeta" descriptorsGenericPropertiesViews="true">
+    <PropertiesEditionContext href="kermeta.components#_kpOLhXdpEeGeTL-DRzePMg"/>
+  </editionContexts>
+  <editionContexts basePackage="org.kermeta.language" descriptorsGenericPropertiesViews="true">
+    <PropertiesEditionContext href="kermeta.components#_kpOLh3dpEeGeTL-DRzePMg"/>
+  </editionContexts>
+  <editionContexts basePackage="org.kermeta.language" descriptorsGenericPropertiesViews="true">
+    <PropertiesEditionContext href="kermeta.components#_kpOMIXdpEeGeTL-DRzePMg"/>
+  </editionContexts>
+  <viewsRepositories basePackage="org.kermeta.language.behavior" swtViews="true" formViews="true">
+    <viewsRepository href="kermeta.components#_kpOM9HdpEeGeTL-DRzePMg"/>
+  </viewsRepositories>
+  <viewsRepositories basePackage="org.kermeta" swtViews="true" formViews="true">
+    <viewsRepository href="kermeta.components#_kpUSandpEeGeTL-DRzePMg"/>
+  </viewsRepositories>
+  <viewsRepositories basePackage="org.kermeta.language" swtViews="true" formViews="true">
+    <viewsRepository href="kermeta.components#_kpUSbHdpEeGeTL-DRzePMg"/>
+  </viewsRepositories>
+  <viewsRepositories basePackage="org.kermeta.language.structure" swtViews="true" formViews="true">
+    <viewsRepository href="kermeta.components#_kpUSbndpEeGeTL-DRzePMg"/>
+  </viewsRepositories>
+  <viewsRepositories basePackage="org" swtViews="true" formViews="true">
+    <viewsRepository href="kermeta.components#_kpUTYXdpEeGeTL-DRzePMg"/>
+  </viewsRepositories>
+</eef-gen:EEFGenModel>
