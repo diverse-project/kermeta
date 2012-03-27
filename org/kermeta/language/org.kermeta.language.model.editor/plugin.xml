@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.kermeta.language.behavior.presentation.BehaviorModelWizardID"
+            name="%_UI_BehaviorModelWizard_label"
+            class="org.kermeta.language.behavior.presentation.BehaviorModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/BehaviorModelFile.gif">
+         <description>%_UI_BehaviorModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.kermeta.language.behavior.presentation.BehaviorEditorID"
+            name="%_UI_BehaviorEditor_label"
+            icon="icons/full/obj16/BehaviorModelFile.gif"
+            extensions="behavior"
+            class="org.kermeta.language.behavior.presentation.BehaviorEditor"
+            contributorClass="org.kermeta.language.behavior.presentation.BehaviorActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.kermeta.language.structure.presentation.StructureModelWizardID"
+            name="%_UI_StructureModelWizard_label"
+            class="org.kermeta.language.structure.presentation.StructureModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/StructureModelFile.gif">
+         <description>%_UI_StructureModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.kermeta.language.structure.presentation.StructureEditorID"
+            name="%_UI_StructureEditor_label"
+            icon="icons/full/obj16/StructureModelFile.gif"
+            extensions="structure"
+            class="org.kermeta.language.structure.presentation.StructureEditor"
+            contributorClass="org.kermeta.language.structure.presentation.StructureActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
