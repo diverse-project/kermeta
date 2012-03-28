@@ -65,16 +65,24 @@
     <title id="preface.title.link">Preface<phrase
     id="preface"></phrase></title>
 	<warning><title>Text not verified for kermeta 2</title></warning>
-    <para>Kermeta is a Domain Specific Language dedicated to metamodel
-    engineering. It fills the gap let by MOF which defines only the structure
+    <para>Kermeta is workbench and an action language dedicated to metamodel
+    engineering.
+    </para>
+    <para> 
+    The action language is a Domain Specific Language (DLS) that fills the 
+    gap let by MOF which defines only the structure
     of meta-models, by adding a way to specify static semantic (similar to
     OCL) and dynamic semantic (using operational semantic in the operation of
     the metamodel). Kermeta uses the object-oriented paradigm like Java or
     Eiffel.</para>
+    <para>The workbench allows to mashup various languages that, like Kermeta, 
+    works at the MOF level. (For example, OCL, QVT, UML profiles, ...).
+    This means that, at design time, a user may decide to use a language adapted for a given task. 
+    The workbench will help to combine the various inputs in an efficient runtime.</para>
 
     <para>This document gives beginners an <link
     linkend="chapter_introduction.link">introduction</link> to the Kermeta
-    language, then it offers a <link
+    action language and to the workbench, then it offers a <link
     linkend="chapter_reference">reference</link> of all the aspects of the
     language, including the textual syntax, the metamodeling features and some
     more advanced features. Two other chapters present the <link
@@ -94,17 +102,13 @@
 
     <tip><para>
        The most update version of this document is available on line from 
-
       <ulink type=""
-      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
-
-       . 
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>  . 
     </para></tip>
   </preface>
 
   <chapter id="chapter_introduction.link">
-    <title id="chapter_introduction.title.link">Introduction to the
-    language<phrase></phrase></title>
+    <title id="chapter_introduction.title.link">Introduction to Kermeta</title>
 
     <para>This chapter aims to help you to have a quick overview of most of
     the features of Kermeta. Then, it gives the pointers to the detailed
@@ -182,12 +186,12 @@
     </section>
 
     <section>
-      <title>An imperative syntax</title>
+      <title>Action language : An imperative syntax</title>
 <warning><title>Text not verified for kermeta 2</title></warning>
-      <para>Kermeta is an imperative language for modeling, with a basic
+      <para>Th action language of Kermeta is an imperative language for modeling, with a basic
       syntax inspired from Eiffel. Code is statically type checked, and
-      execution is made by an interpreter (a compiler is on the way, for
-      exhausted performances).</para>
+      execution is made by a compiler in its version 2.x. The previous version of Kermeta (up to 1.x) 
+      were executed thanks to an interpreter.</para>
 
       <section id="section_first_program.link">
         <title id="section_first_program.title.link">First Program<phrase
@@ -268,7 +272,7 @@ end
     </section>
 
     <section>
-      <title>An object-oriented language</title>
+      <title>Action language : An object-oriented language</title>
 <warning><title>Text not verified for kermeta 2</title></warning>
       <para>Users of modern programming languages, like Java, would feel
       easy with object-oriented features in Kermeta: classes, inheritance,
@@ -357,7 +361,7 @@ class Child inherits Reader {
     </section>
 
     <section>
-      <title>A model-oriented language</title>
+      <title>Action Language : A model-oriented language</title>
 <warning><title>Text not verified for kermeta 2</title></warning>
       <para>As explained in the <xref endterm="preface.title.link"
       linkend="preface.link" /> and in <xref
@@ -539,39 +543,66 @@ smithBooks.addAll(
       </section>
     </section>
     <section>
-    	<title>Aspect-oriented language</title>
-<warning><title>Text not verified for kermeta 2</title></warning>    	
-		<para>Since Kermeta is an extension of MOF, a MOF meta-model can conversely be seen as a valid 
+    	<title>Mashup of metalanguages</title>
+    	<para>Since Kermeta is an extension of MOF, a MOF meta-model can conversely be seen as a valid 
     	Kermeta program that just declares packages, classes and so on but does nothing. 
     	Kermeta can then be used to breath life into this meta-model by incrementally 
     	introducing aspects for handling concerns of static semantics, dynamic semantics, 
     	or model transformations. </para>
-    	<para>One of the key features of Kermeta is the static composition operator <literal>require</literal> allows extending an existing meta-model with new elements 
-    	such as properties, operations, constraints or classes. This operator allows defining these various 
-    	aspects in separate units and integrating them automatically into the meta-model. The composition 
-    	is done statically and the composed model is typed-checked to ensure the safe integration of all units. 
-    	This mechanism makes it easy to reuse existing meta-models or to split meta-models into reusable pieces. 
-    	It can be compared to the open class paradigm. Consequently a meta-class that identifies a domain concept 
-    	can be extended without editing the meta-model directly. Open classes in Kermeta are used to organize 
-    	<literal>cross-cutting</literal> concerns separately from the meta-model to which they belong, a key 
-    	feature of aspect-oriented programming. With this mechanism, Kermeta can support the addition of new 
-    	meta-class, new subclasses, new methods, new properties, new contracts to existing meta-model. The 
-    	require mechanism also provides flexibility. For example, several operational semantics could be 
-    	defined in separate units for a single meta-model and then alternatively composed depending on 
-    	particular needs. This is the case for instance in the UML meta-model when several semantics 
-    	variation points are defined.
-    	</para><para>
-		Thank to this composition operator, Kermeta can remain a kernel platform to safely integrate all the 
-		concerns around a meta-model. This feature has proved to be extreemly useful in the context of 
-    	metamodel engineering. </para>
+    	<para>Kermeta allow to keep the concerns seprated at design time and then merge them to build a runable tool. 
+    	It uses a powerful mecanism of static introduction that works at the model level 
+    	and at the model element level.</para>
     	<section>
-        	<title>Corresponding section in the Reference chapter</title>
-	    	<para>
-	    	You'll find more details in the Reference chapter, more precisely in: <xref
-	          linkend="section_weaving.link" />
-	    	</para>
+    		<title>Model static introduction</title>
+    		<para>One of the key feature of the workbench is the static composition operator 
+    		<literal>require</literal>. This operator allows defining these various 
+	    	aspects in separate units and integrating them automatically into the meta-model. The composition 
+	    	is done statically and the composed model is typed-checked to ensure the safe integration of all units. 
+	    	This mechanism makes it easy to reuse existing meta-models or to split meta-models into reusable pieces.
+	    	It allows to compose the various files and models that will form
+    		the final tool.   
+    		</para>
+    		<para>The workbench will seamlessly convert and merge the various files into the final kermeta program.
+    		The classic inputs will be ecore files, kmt files or uml profiles files. The finala assembly will depend 
+    		on the capabilities of the inputs models. For example, a ecore model has a granularity at the class level 
+    		(ie. it will just add new classes) whereas Kermeta has a granularity at the feature level and thus can 
+    		add new features to a class(see next section <xref
+              linkend="intro_model_element_static_introduction.link" /> for more details)  
+    		 </para>
+    		<para>TODO add a sample</para>
     	</section>
-    </section>
+	    <section>
+	    	<title>Model element static introduction : Aspect-oriented language<phrase
+        id="intro_model_element_static_introduction.link"></phrase></title>
+	<warning><title>Text not verified for kermeta 2</title></warning>    	
+			
+	    	<para>One of the key features of Kermeta is the static composition operator <literal>require</literal> allows extending an existing meta-model with new elements 
+	    	such as properties, operations, constraints or classes. This operator allows defining these various 
+	    	aspects in separate units and integrating them automatically into the meta-model. The composition 
+	    	is done statically and the composed model is typed-checked to ensure the safe integration of all units. 
+	    	This mechanism makes it easy to reuse existing meta-models or to split meta-models into reusable pieces. 
+	    	It can be compared to the open class paradigm. Consequently a meta-class that identifies a domain concept 
+	    	can be extended without editing the meta-model directly. Open classes in Kermeta are used to organize 
+	    	<literal>cross-cutting</literal> concerns separately from the meta-model to which they belong, a key 
+	    	feature of aspect-oriented programming. With this mechanism, Kermeta can support the addition of new 
+	    	meta-class, new subclasses, new methods, new properties, new contracts to existing meta-model. The 
+	    	require mechanism also provides flexibility. For example, several operational semantics could be 
+	    	defined in separate units for a single meta-model and then alternatively composed depending on 
+	    	particular needs. This is the case for instance in the UML meta-model when several semantics 
+	    	variation points are defined.
+	    	</para><para>
+			Thank to this composition operator, Kermeta can remain a kernel platform to safely integrate all the 
+			concerns around a meta-model. This feature has proved to be extremly useful in the context of 
+	    	metamodel engineering. </para>
+	    	<section>
+	        	<title>Corresponding section in the Reference chapter</title>
+		    	<para>
+		    	You'll find more details in the Reference chapter, more precisely in: <xref
+		          linkend="section_weaving.link" />
+		    	</para>
+	    	</section>
+	    </section>
+	</section>
     <section>
       <title>Some "advanced" features</title>
 <warning><title>Text not verified for kermeta 2</title></warning>
