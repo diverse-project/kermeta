@@ -1,0 +1,76 @@
+package ex::classModel;
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+class SlicerVisitor {
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute sliced : Boolean
+
+	operation initialiseAttributes() is do
+		self.visitedPass := false
+		self.sliced := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theInvertedClassModelSlicer : InvertedClassModelSlicer) is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theInvertedClassModelSlicer : InvertedClassModelSlicer) is do
+	end
+
+	operation checkInitialisation() is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
+}
+
+aspect class Clazz inherits SlicerVisitor, Feedable {
+	reference lowerType : Clazz[0..*]
+
+	method visitToAddClasses(theInvertedClassModelSlicer : InvertedClassModelSlicer) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theInvertedClassModelSlicer)
+			if(not self.sliced) then
+				theInvertedClassModelSlicer.addedClazzs.add(self)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.lowerType.each{theClazz | theClazz.visitToAddClasses(theInvertedClassModelSlicer)}
+			self.visitedPass := false
+		end
+	end
+	method visitToAddRelations(theInvertedClassModelSlicer : InvertedClassModelSlicer) is do
+		if(not self.visitedPass) then
+			super(theInvertedClassModelSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.lowerType.each{theClazz | theClazz.visitToAddRelations(theInvertedClassModelSlicer)
+				if(self.visitedForRelations and theClazz.visitedForRelations) then
+					theInvertedClassModelSlicer.addedlowerType.add(ClasslowerType.new.initialise(self, theClazz)) end }
+			self.visitedPass := false
+		end
+	end
+	method feedOpposites() from Feedable is do
+		super()
+		self.superClasses.each{theClazz | theClazz.~lowerType.add(self) }
+	end
+}
+
+aspect class ClassModel inherits Feedable {
+	method feedOpposites() from Feedable is do
+		super()
+		self.classes.each{theclasses | theclasses.feedOpposites() }
+	end
+}
+
+abstract class Feedable {
+	operation feedOpposites() is do end
+}
