@@ -13,10 +13,12 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.structure.TypeVariableBinding;
 
 /**
  * <!-- begin-user-doc -->
@@ -179,10 +181,29 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
   public String getName()
   {
+	  	if (name == null) {
+	  		StringBuilder sb = new StringBuilder();
+	  		sb.append(this.getTypeDefinition().getName());
+	  		if(this.getTypeParamBinding().size() > 0){
+	  			sb.append("[");
+	  			boolean first = true;
+	  			for(TypeVariableBinding tpb : this.getTypeParamBinding()){
+	  				if(!first) {
+	  					sb.append(", ");
+	  					first = false;
+	  				}
+	  				if(tpb.getType() instanceof NamedElement){
+	  					sb.append(((NamedElement)tpb.getType()).getName());
+	  				}
+	  			}
+	  			sb.append("]");
+	  		}
+	  		name = sb.toString();
+	  	}
 		return name;
 	}
 
