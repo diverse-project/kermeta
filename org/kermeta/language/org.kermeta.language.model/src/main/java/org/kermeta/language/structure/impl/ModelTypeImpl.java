@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -31,6 +32,7 @@ import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
+import org.kermeta.language.structure.TypeDefinitionContainer;
 import org.kermeta.language.structure.TypeMapping;
 
 /**
@@ -45,7 +47,8 @@ import org.kermeta.language.structure.TypeMapping;
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getTypeMappings <em>Type Mappings</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getIsAspect <em>Is Aspect</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getContents <em>Contents</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getOwnedTypeDefinition <em>Owned Type Definition</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ModelTypeImpl#getTypeDefinitions <em>Type Definitions</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,14 +126,24 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	protected Boolean isAspect = IS_ASPECT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getContents() <em>Contents</em>}' reference list.
+	 * The cached value of the '{@link #getOwnedTypeDefinition() <em>Owned Type Definition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContents()
+	 * @see #getOwnedTypeDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<KermetaModelElement> contents;
+	protected EList<TypeDefinition> ownedTypeDefinition;
+
+	/**
+	 * The cached value of the '{@link #getTypeDefinitions() <em>Type Definitions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeDefinitions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeDefinition> typeDefinitions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,6 +223,30 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TypeDefinition> getOwnedTypeDefinition() {
+		if (ownedTypeDefinition == null) {
+			ownedTypeDefinition = new EObjectContainmentEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION);
+		}
+		return ownedTypeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeDefinition> getTypeDefinitions() {
+		if (typeDefinitions == null) {
+			typeDefinitions = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__TYPE_DEFINITIONS);
+		}
+		return typeDefinitions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Type> getSuperType() {
 		if (superType == null) {
 			superType = new EObjectResolvingEList<Type>(Type.class, this, StructurePackage.MODEL_TYPE__SUPER_TYPE);
@@ -227,18 +264,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			typeMappings = new EObjectContainmentWithInverseEList<TypeMapping>(TypeMapping.class, this, StructurePackage.MODEL_TYPE__TYPE_MAPPINGS, StructurePackage.TYPE_MAPPING__SOURCE_TYPE);
 		}
 		return typeMappings;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<KermetaModelElement> getContents() {
-		if (contents == null) {
-			contents = new EObjectResolvingEList<KermetaModelElement>(KermetaModelElement.class, this, StructurePackage.MODEL_TYPE__CONTENTS);
-		}
-		return contents;
 	}
 
 	/**
@@ -270,6 +295,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE__TYPE_MAPPINGS:
 				return ((InternalEList<?>)getTypeMappings()).basicRemove(otherEnd, msgs);
+			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
+				return ((InternalEList<?>)getOwnedTypeDefinition()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -292,8 +319,10 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				return getTypeMappings();
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				return getIsAspect();
-			case StructurePackage.MODEL_TYPE__CONTENTS:
-				return getContents();
+			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
+				return getOwnedTypeDefinition();
+			case StructurePackage.MODEL_TYPE__TYPE_DEFINITIONS:
+				return getTypeDefinitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -325,6 +354,14 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				setIsAspect((Boolean)newValue);
 				return;
+			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
+				getOwnedTypeDefinition().clear();
+				getOwnedTypeDefinition().addAll((Collection<? extends TypeDefinition>)newValue);
+				return;
+			case StructurePackage.MODEL_TYPE__TYPE_DEFINITIONS:
+				getTypeDefinitions().clear();
+				getTypeDefinitions().addAll((Collection<? extends TypeDefinition>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -352,6 +389,12 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
+			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
+				getOwnedTypeDefinition().clear();
+				return;
+			case StructurePackage.MODEL_TYPE__TYPE_DEFINITIONS:
+				getTypeDefinitions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -374,8 +417,10 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				return typeMappings != null && !typeMappings.isEmpty();
 			case StructurePackage.MODEL_TYPE__IS_ASPECT:
 				return IS_ASPECT_EDEFAULT == null ? isAspect != null : !IS_ASPECT_EDEFAULT.equals(isAspect);
-			case StructurePackage.MODEL_TYPE__CONTENTS:
-				return contents != null && !contents.isEmpty();
+			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
+				return ownedTypeDefinition != null && !ownedTypeDefinition.isEmpty();
+			case StructurePackage.MODEL_TYPE__TYPE_DEFINITIONS:
+				return typeDefinitions != null && !typeDefinitions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -407,9 +452,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				default: return -1;
 			}
 		}
-		if (baseClass == Model.class) {
+		if (baseClass == TypeDefinitionContainer.class) {
 			switch (derivedFeatureID) {
-				case StructurePackage.MODEL_TYPE__CONTENTS: return StructurePackage.MODEL__CONTENTS;
+				case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION: return StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
 				default: return -1;
 			}
 		}
@@ -443,9 +488,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				default: return -1;
 			}
 		}
-		if (baseClass == Model.class) {
+		if (baseClass == TypeDefinitionContainer.class) {
 			switch (baseFeatureID) {
-				case StructurePackage.MODEL__CONTENTS: return StructurePackage.MODEL_TYPE__CONTENTS;
+				case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION: return StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION;
 				default: return -1;
 			}
 		}

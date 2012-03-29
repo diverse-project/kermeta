@@ -2788,13 +2788,22 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Contents</b></em>' reference list.
+	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__CONTENTS = TYPE_FEATURE_COUNT + 5;
+	int MODEL_TYPE__OWNED_TYPE_DEFINITION = TYPE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Type Definitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_DEFINITIONS = TYPE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Model Type</em>' class.
@@ -2803,7 +2812,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 6;
+	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.
@@ -3783,6 +3792,893 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_INFERRED_TYPE_FEATURE_COUNT = UNRESOLVED_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedTypeVariableImpl <em>Unresolved Type Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.UnresolvedTypeVariableImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedTypeVariable()
+	 * @generated
+	 */
+	int UNRESOLVED_TYPE_VARIABLE = 43;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__KTAG = UNRESOLVED__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__KOWNED_TAGS = UNRESOLVED__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__KTYPE = UNRESOLVED__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__CONTAINED_TYPE = UNRESOLVED_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__TYPE_CONTAINER = UNRESOLVED_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__NAME = UNRESOLVED_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Supertype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE__SUPERTYPE = UNRESOLVED_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Type Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_VARIABLE_FEATURE_COUNT = UNRESOLVED_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedTypeDefinitionImpl <em>Unresolved Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.UnresolvedTypeDefinitionImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedTypeDefinition()
+	 * @generated
+	 */
+	int UNRESOLVED_TYPE_DEFINITION = 44;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__KTAG = UNRESOLVED__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__KOWNED_TAGS = UNRESOLVED__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__KTYPE = UNRESOLVED__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__NAME = UNRESOLVED_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__CONTAINED_TYPE = UNRESOLVED_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__SUPER_TYPE = UNRESOLVED_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Type Mappings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__TYPE_MAPPINGS = UNRESOLVED_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__IS_ASPECT = UNRESOLVED_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__USINGS = UNRESOLVED_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION__TYPE_DEFINITION_IDENTIFIER = UNRESOLVED_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_DEFINITION_FEATURE_COUNT = UNRESOLVED_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeBindingImpl <em>Model Type Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelTypeBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeBinding()
+	 * @generated
+	 */
+	int MODEL_TYPE_BINDING = 45;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TotalBindingImpl <em>Total Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.TotalBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTotalBinding()
+	 * @generated
+	 */
+	int TOTAL_BINDING = 46;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_BINDING__KTAG = MODEL_TYPE_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_BINDING__KOWNED_TAGS = MODEL_TYPE_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_BINDING__KTYPE = MODEL_TYPE_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_BINDING__OBJECT_TYPE_BINDINGS = MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The number of structural features of the '<em>Total Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_BINDING_FEATURE_COUNT = MODEL_TYPE_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PartialBindingImpl <em>Partial Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.PartialBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPartialBinding()
+	 * @generated
+	 */
+	int PARTIAL_BINDING = 47;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BINDING__KTAG = MODEL_TYPE_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BINDING__KOWNED_TAGS = MODEL_TYPE_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BINDING__KTYPE = MODEL_TYPE_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BINDING__OBJECT_TYPE_BINDINGS = MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>With Respect To</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BINDING__WITH_RESPECT_TO = MODEL_TYPE_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Partial Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BINDING_FEATURE_COUNT = MODEL_TYPE_BINDING_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.IsomorphicBindingImpl <em>Isomorphic Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.IsomorphicBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getIsomorphicBinding()
+	 * @generated
+	 */
+	int ISOMORPHIC_BINDING = 48;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ISOMORPHIC_BINDING__KTAG = MODEL_TYPE_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ISOMORPHIC_BINDING__KOWNED_TAGS = MODEL_TYPE_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ISOMORPHIC_BINDING__KTYPE = MODEL_TYPE_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ISOMORPHIC_BINDING__OBJECT_TYPE_BINDINGS = MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The number of structural features of the '<em>Isomorphic Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ISOMORPHIC_BINDING_FEATURE_COUNT = MODEL_TYPE_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.NonIsomorphicBindingImpl <em>Non Isomorphic Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.NonIsomorphicBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getNonIsomorphicBinding()
+	 * @generated
+	 */
+	int NON_ISOMORPHIC_BINDING = 49;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_ISOMORPHIC_BINDING__KTAG = MODEL_TYPE_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_ISOMORPHIC_BINDING__KOWNED_TAGS = MODEL_TYPE_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_ISOMORPHIC_BINDING__KTYPE = MODEL_TYPE_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_ISOMORPHIC_BINDING__OBJECT_TYPE_BINDINGS = MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The number of structural features of the '<em>Non Isomorphic Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_ISOMORPHIC_BINDING_FEATURE_COUNT = MODEL_TYPE_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TotalIsomorphicBindingImpl <em>Total Isomorphic Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.TotalIsomorphicBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTotalIsomorphicBinding()
+	 * @generated
+	 */
+	int TOTAL_ISOMORPHIC_BINDING = 50;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_ISOMORPHIC_BINDING__KTAG = TOTAL_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_ISOMORPHIC_BINDING__KOWNED_TAGS = TOTAL_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_ISOMORPHIC_BINDING__KTYPE = TOTAL_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_ISOMORPHIC_BINDING__OBJECT_TYPE_BINDINGS = TOTAL_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The number of structural features of the '<em>Total Isomorphic Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_ISOMORPHIC_BINDING_FEATURE_COUNT = TOTAL_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PartialIsomorphicBindingImpl <em>Partial Isomorphic Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.PartialIsomorphicBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPartialIsomorphicBinding()
+	 * @generated
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING = 51;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING__KTAG = PARTIAL_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING__KOWNED_TAGS = PARTIAL_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING__KTYPE = PARTIAL_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING__OBJECT_TYPE_BINDINGS = PARTIAL_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>With Respect To</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING__WITH_RESPECT_TO = PARTIAL_BINDING__WITH_RESPECT_TO;
+
+	/**
+	 * The number of structural features of the '<em>Partial Isomorphic Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_ISOMORPHIC_BINDING_FEATURE_COUNT = PARTIAL_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TotalNonIsomorphicBindingImpl <em>Total Non Isomorphic Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.TotalNonIsomorphicBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTotalNonIsomorphicBinding()
+	 * @generated
+	 */
+	int TOTAL_NON_ISOMORPHIC_BINDING = 52;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_NON_ISOMORPHIC_BINDING__KTAG = TOTAL_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_NON_ISOMORPHIC_BINDING__KOWNED_TAGS = TOTAL_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_NON_ISOMORPHIC_BINDING__KTYPE = TOTAL_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_NON_ISOMORPHIC_BINDING__OBJECT_TYPE_BINDINGS = TOTAL_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The number of structural features of the '<em>Total Non Isomorphic Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOTAL_NON_ISOMORPHIC_BINDING_FEATURE_COUNT = TOTAL_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PartialNonIsomorphicBindingImpl <em>Partial Non Isomorphic Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.PartialNonIsomorphicBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPartialNonIsomorphicBinding()
+	 * @generated
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING = 53;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING__KTAG = PARTIAL_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING__KOWNED_TAGS = PARTIAL_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING__KTYPE = PARTIAL_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Object Type Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING__OBJECT_TYPE_BINDINGS = PARTIAL_BINDING__OBJECT_TYPE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>With Respect To</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING__WITH_RESPECT_TO = PARTIAL_BINDING__WITH_RESPECT_TO;
+
+	/**
+	 * The number of structural features of the '<em>Partial Non Isomorphic Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_NON_ISOMORPHIC_BINDING_FEATURE_COUNT = PARTIAL_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ObjectTypeBindingImpl <em>Object Type Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ObjectTypeBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObjectTypeBinding()
+	 * @generated
+	 */
+	int OBJECT_TYPE_BINDING = 54;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
+	 * The number of structural features of the '<em>Object Type Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.DirectBindingImpl <em>Direct Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.DirectBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getDirectBinding()
+	 * @generated
+	 */
+	int DIRECT_BINDING = 55;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECT_BINDING__KTAG = OBJECT_TYPE_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECT_BINDING__KOWNED_TAGS = OBJECT_TYPE_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECT_BINDING__KTYPE = OBJECT_TYPE_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECT_BINDING__TARGET = OBJECT_TYPE_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECT_BINDING__SOURCE = OBJECT_TYPE_BINDING_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Direct Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECT_BINDING_FEATURE_COUNT = OBJECT_TYPE_BINDING_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.AdaptationBindingImpl <em>Adaptation Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.AdaptationBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getAdaptationBinding()
+	 * @generated
+	 */
+	int ADAPTATION_BINDING = 56;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_BINDING__KTAG = OBJECT_TYPE_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_BINDING__KOWNED_TAGS = OBJECT_TYPE_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_BINDING__KTYPE = OBJECT_TYPE_BINDING__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_BINDING__TARGET = OBJECT_TYPE_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_BINDING__SOURCE = OBJECT_TYPE_BINDING_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Adaptation Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_BINDING_FEATURE_COUNT = OBJECT_TYPE_BINDING_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3790,7 +4686,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 43;
+	int CONSTRAINT_LANGUAGE = 57;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -3800,7 +4696,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 44;
+	int CONSTRAINT_TYPE = 58;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -3810,7 +4706,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 45;
+	int STRING = 59;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -3820,7 +4716,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 46;
+	int BOOLEAN = 60;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -3829,7 +4725,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 47;
+	int INTEGER = 61;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -3838,7 +4734,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 48;
+	int UNLIMITED_NATURAL = 62;
 
 
 	/**
@@ -4957,6 +5853,17 @@ public interface StructurePackage extends EPackage {
 	EClass getModelType();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ModelType#getTypeDefinitions <em>Type Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Type Definitions</em>'.
+	 * @see org.kermeta.language.structure.ModelType#getTypeDefinitions()
+	 * @see #getModelType()
+	 * @generated
+	 */
+	EReference getModelType_TypeDefinitions();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeVariable <em>Model Type Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5304,6 +6211,234 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getUnresolvedInferredType();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedTypeVariable <em>Unresolved Type Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Type Variable</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedTypeVariable
+	 * @generated
+	 */
+	EClass getUnresolvedTypeVariable();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedTypeDefinition <em>Unresolved Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Type Definition</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedTypeDefinition
+	 * @generated
+	 */
+	EClass getUnresolvedTypeDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.UnresolvedTypeDefinition#getUsings <em>Usings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Usings</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedTypeDefinition#getUsings()
+	 * @see #getUnresolvedTypeDefinition()
+	 * @generated
+	 */
+	EReference getUnresolvedTypeDefinition_Usings();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.UnresolvedTypeDefinition#getTypeDefinitionIdentifier <em>Type Definition Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Definition Identifier</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedTypeDefinition#getTypeDefinitionIdentifier()
+	 * @see #getUnresolvedTypeDefinition()
+	 * @generated
+	 */
+	EAttribute getUnresolvedTypeDefinition_TypeDefinitionIdentifier();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeBinding <em>Model Type Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Type Binding</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeBinding
+	 * @generated
+	 */
+	EClass getModelTypeBinding();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeBinding#getObjectTypeBindings <em>Object Type Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Object Type Bindings</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeBinding#getObjectTypeBindings()
+	 * @see #getModelTypeBinding()
+	 * @generated
+	 */
+	EReference getModelTypeBinding_ObjectTypeBindings();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.TotalBinding <em>Total Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Total Binding</em>'.
+	 * @see org.kermeta.language.structure.TotalBinding
+	 * @generated
+	 */
+	EClass getTotalBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.PartialBinding <em>Partial Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Partial Binding</em>'.
+	 * @see org.kermeta.language.structure.PartialBinding
+	 * @generated
+	 */
+	EClass getPartialBinding();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.PartialBinding#getWithRespectTo <em>With Respect To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>With Respect To</em>'.
+	 * @see org.kermeta.language.structure.PartialBinding#getWithRespectTo()
+	 * @see #getPartialBinding()
+	 * @generated
+	 */
+	EReference getPartialBinding_WithRespectTo();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.IsomorphicBinding <em>Isomorphic Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Isomorphic Binding</em>'.
+	 * @see org.kermeta.language.structure.IsomorphicBinding
+	 * @generated
+	 */
+	EClass getIsomorphicBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.NonIsomorphicBinding <em>Non Isomorphic Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Non Isomorphic Binding</em>'.
+	 * @see org.kermeta.language.structure.NonIsomorphicBinding
+	 * @generated
+	 */
+	EClass getNonIsomorphicBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.TotalIsomorphicBinding <em>Total Isomorphic Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Total Isomorphic Binding</em>'.
+	 * @see org.kermeta.language.structure.TotalIsomorphicBinding
+	 * @generated
+	 */
+	EClass getTotalIsomorphicBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.PartialIsomorphicBinding <em>Partial Isomorphic Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Partial Isomorphic Binding</em>'.
+	 * @see org.kermeta.language.structure.PartialIsomorphicBinding
+	 * @generated
+	 */
+	EClass getPartialIsomorphicBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.TotalNonIsomorphicBinding <em>Total Non Isomorphic Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Total Non Isomorphic Binding</em>'.
+	 * @see org.kermeta.language.structure.TotalNonIsomorphicBinding
+	 * @generated
+	 */
+	EClass getTotalNonIsomorphicBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.PartialNonIsomorphicBinding <em>Partial Non Isomorphic Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Partial Non Isomorphic Binding</em>'.
+	 * @see org.kermeta.language.structure.PartialNonIsomorphicBinding
+	 * @generated
+	 */
+	EClass getPartialNonIsomorphicBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ObjectTypeBinding <em>Object Type Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Object Type Binding</em>'.
+	 * @see org.kermeta.language.structure.ObjectTypeBinding
+	 * @generated
+	 */
+	EClass getObjectTypeBinding();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.DirectBinding <em>Direct Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Direct Binding</em>'.
+	 * @see org.kermeta.language.structure.DirectBinding
+	 * @generated
+	 */
+	EClass getDirectBinding();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.DirectBinding#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.kermeta.language.structure.DirectBinding#getTarget()
+	 * @see #getDirectBinding()
+	 * @generated
+	 */
+	EReference getDirectBinding_Target();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.DirectBinding#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see org.kermeta.language.structure.DirectBinding#getSource()
+	 * @see #getDirectBinding()
+	 * @generated
+	 */
+	EReference getDirectBinding_Source();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.AdaptationBinding <em>Adaptation Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Adaptation Binding</em>'.
+	 * @see org.kermeta.language.structure.AdaptationBinding
+	 * @generated
+	 */
+	EClass getAdaptationBinding();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.AdaptationBinding#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Target</em>'.
+	 * @see org.kermeta.language.structure.AdaptationBinding#getTarget()
+	 * @see #getAdaptationBinding()
+	 * @generated
+	 */
+	EReference getAdaptationBinding_Target();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.AdaptationBinding#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Source</em>'.
+	 * @see org.kermeta.language.structure.AdaptationBinding#getSource()
+	 * @see #getAdaptationBinding()
+	 * @generated
+	 */
+	EReference getAdaptationBinding_Source();
 
 	/**
 	 * Returns the meta object for enum '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}'.
@@ -6280,6 +7415,14 @@ public interface StructurePackage extends EPackage {
 		EClass MODEL_TYPE = eINSTANCE.getModelType();
 
 		/**
+		 * The meta object literal for the '<em><b>Type Definitions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE__TYPE_DEFINITIONS = eINSTANCE.getModelType_TypeDefinitions();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6570,6 +7713,210 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EClass UNRESOLVED_INFERRED_TYPE = eINSTANCE.getUnresolvedInferredType();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedTypeVariableImpl <em>Unresolved Type Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedTypeVariableImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedTypeVariable()
+		 * @generated
+		 */
+		EClass UNRESOLVED_TYPE_VARIABLE = eINSTANCE.getUnresolvedTypeVariable();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedTypeDefinitionImpl <em>Unresolved Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedTypeDefinitionImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedTypeDefinition()
+		 * @generated
+		 */
+		EClass UNRESOLVED_TYPE_DEFINITION = eINSTANCE.getUnresolvedTypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Usings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNRESOLVED_TYPE_DEFINITION__USINGS = eINSTANCE.getUnresolvedTypeDefinition_Usings();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Definition Identifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNRESOLVED_TYPE_DEFINITION__TYPE_DEFINITION_IDENTIFIER = eINSTANCE.getUnresolvedTypeDefinition_TypeDefinitionIdentifier();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeBindingImpl <em>Model Type Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ModelTypeBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeBinding()
+		 * @generated
+		 */
+		EClass MODEL_TYPE_BINDING = eINSTANCE.getModelTypeBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Object Type Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS = eINSTANCE.getModelTypeBinding_ObjectTypeBindings();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.TotalBindingImpl <em>Total Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.TotalBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTotalBinding()
+		 * @generated
+		 */
+		EClass TOTAL_BINDING = eINSTANCE.getTotalBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.PartialBindingImpl <em>Partial Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.PartialBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPartialBinding()
+		 * @generated
+		 */
+		EClass PARTIAL_BINDING = eINSTANCE.getPartialBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>With Respect To</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_BINDING__WITH_RESPECT_TO = eINSTANCE.getPartialBinding_WithRespectTo();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.IsomorphicBindingImpl <em>Isomorphic Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.IsomorphicBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getIsomorphicBinding()
+		 * @generated
+		 */
+		EClass ISOMORPHIC_BINDING = eINSTANCE.getIsomorphicBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.NonIsomorphicBindingImpl <em>Non Isomorphic Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.NonIsomorphicBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getNonIsomorphicBinding()
+		 * @generated
+		 */
+		EClass NON_ISOMORPHIC_BINDING = eINSTANCE.getNonIsomorphicBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.TotalIsomorphicBindingImpl <em>Total Isomorphic Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.TotalIsomorphicBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTotalIsomorphicBinding()
+		 * @generated
+		 */
+		EClass TOTAL_ISOMORPHIC_BINDING = eINSTANCE.getTotalIsomorphicBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.PartialIsomorphicBindingImpl <em>Partial Isomorphic Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.PartialIsomorphicBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPartialIsomorphicBinding()
+		 * @generated
+		 */
+		EClass PARTIAL_ISOMORPHIC_BINDING = eINSTANCE.getPartialIsomorphicBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.TotalNonIsomorphicBindingImpl <em>Total Non Isomorphic Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.TotalNonIsomorphicBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTotalNonIsomorphicBinding()
+		 * @generated
+		 */
+		EClass TOTAL_NON_ISOMORPHIC_BINDING = eINSTANCE.getTotalNonIsomorphicBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.PartialNonIsomorphicBindingImpl <em>Partial Non Isomorphic Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.PartialNonIsomorphicBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPartialNonIsomorphicBinding()
+		 * @generated
+		 */
+		EClass PARTIAL_NON_ISOMORPHIC_BINDING = eINSTANCE.getPartialNonIsomorphicBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ObjectTypeBindingImpl <em>Object Type Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ObjectTypeBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getObjectTypeBinding()
+		 * @generated
+		 */
+		EClass OBJECT_TYPE_BINDING = eINSTANCE.getObjectTypeBinding();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.DirectBindingImpl <em>Direct Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.DirectBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getDirectBinding()
+		 * @generated
+		 */
+		EClass DIRECT_BINDING = eINSTANCE.getDirectBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIRECT_BINDING__TARGET = eINSTANCE.getDirectBinding_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIRECT_BINDING__SOURCE = eINSTANCE.getDirectBinding_Source();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.AdaptationBindingImpl <em>Adaptation Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.AdaptationBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getAdaptationBinding()
+		 * @generated
+		 */
+		EClass ADAPTATION_BINDING = eINSTANCE.getAdaptationBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADAPTATION_BINDING__TARGET = eINSTANCE.getAdaptationBinding_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADAPTATION_BINDING__SOURCE = eINSTANCE.getAdaptationBinding_Source();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

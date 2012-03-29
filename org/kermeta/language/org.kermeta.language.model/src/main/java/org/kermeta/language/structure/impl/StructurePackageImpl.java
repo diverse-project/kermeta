@@ -34,26 +34,35 @@ import org.kermeta.language.impl.LanguagePackageImpl;
 
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
+import org.kermeta.language.structure.AdaptationBinding;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.ConstraintLanguage;
 import org.kermeta.language.structure.ConstraintType;
 import org.kermeta.language.structure.DataType;
+import org.kermeta.language.structure.DirectBinding;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
+import org.kermeta.language.structure.IsomorphicBinding;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelTypeBinding;
 import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
+import org.kermeta.language.structure.NonIsomorphicBinding;
+import org.kermeta.language.structure.ObjectTypeBinding;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Parameter;
 import org.kermeta.language.structure.ParameterizedType;
+import org.kermeta.language.structure.PartialBinding;
+import org.kermeta.language.structure.PartialIsomorphicBinding;
+import org.kermeta.language.structure.PartialNonIsomorphicBinding;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
@@ -61,6 +70,9 @@ import org.kermeta.language.structure.Require;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
+import org.kermeta.language.structure.TotalBinding;
+import org.kermeta.language.structure.TotalIsomorphicBinding;
+import org.kermeta.language.structure.TotalNonIsomorphicBinding;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
@@ -74,6 +86,8 @@ import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
+import org.kermeta.language.structure.UnresolvedTypeDefinition;
+import org.kermeta.language.structure.UnresolvedTypeVariable;
 import org.kermeta.language.structure.Using;
 import org.kermeta.language.structure.VirtualType;
 import org.kermeta.language.structure.VoidType;
@@ -385,6 +399,104 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass unresolvedInferredTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedTypeVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedTypeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTypeBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass totalBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass isomorphicBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nonIsomorphicBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass totalIsomorphicBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialIsomorphicBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass totalNonIsomorphicBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialNonIsomorphicBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass objectTypeBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass directBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass adaptationBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1444,6 +1556,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModelType_TypeDefinitions() {
+		return (EReference)modelTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModelTypeVariable() {
 		return modelTypeVariableEClass;
 	}
@@ -1741,6 +1862,204 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnresolvedTypeVariable() {
+		return unresolvedTypeVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnresolvedTypeDefinition() {
+		return unresolvedTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnresolvedTypeDefinition_Usings() {
+		return (EReference)unresolvedTypeDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnresolvedTypeDefinition_TypeDefinitionIdentifier() {
+		return (EAttribute)unresolvedTypeDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelTypeBinding() {
+		return modelTypeBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeBinding_ObjectTypeBindings() {
+		return (EReference)modelTypeBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTotalBinding() {
+		return totalBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialBinding() {
+		return partialBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPartialBinding_WithRespectTo() {
+		return (EReference)partialBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIsomorphicBinding() {
+		return isomorphicBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNonIsomorphicBinding() {
+		return nonIsomorphicBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTotalIsomorphicBinding() {
+		return totalIsomorphicBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialIsomorphicBinding() {
+		return partialIsomorphicBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTotalNonIsomorphicBinding() {
+		return totalNonIsomorphicBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialNonIsomorphicBinding() {
+		return partialNonIsomorphicBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getObjectTypeBinding() {
+		return objectTypeBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDirectBinding() {
+		return directBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDirectBinding_Target() {
+		return (EReference)directBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDirectBinding_Source() {
+		return (EReference)directBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAdaptationBinding() {
+		return adaptationBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdaptationBinding_Target() {
+		return (EReference)adaptationBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdaptationBinding_Source() {
+		return (EReference)adaptationBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintLanguage() {
 		return constraintLanguageEEnum;
 	}
@@ -1950,6 +2269,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		objectTypeVariableEClass = createEClass(OBJECT_TYPE_VARIABLE);
 
 		modelTypeEClass = createEClass(MODEL_TYPE);
+		createEReference(modelTypeEClass, MODEL_TYPE__TYPE_DEFINITIONS);
 
 		modelTypeVariableEClass = createEClass(MODEL_TYPE_VARIABLE);
 		createEReference(modelTypeVariableEClass, MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
@@ -1997,6 +2317,42 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(typeMappingEClass, TYPE_MAPPING__MAPPING);
 
 		unresolvedInferredTypeEClass = createEClass(UNRESOLVED_INFERRED_TYPE);
+
+		unresolvedTypeVariableEClass = createEClass(UNRESOLVED_TYPE_VARIABLE);
+
+		unresolvedTypeDefinitionEClass = createEClass(UNRESOLVED_TYPE_DEFINITION);
+		createEReference(unresolvedTypeDefinitionEClass, UNRESOLVED_TYPE_DEFINITION__USINGS);
+		createEAttribute(unresolvedTypeDefinitionEClass, UNRESOLVED_TYPE_DEFINITION__TYPE_DEFINITION_IDENTIFIER);
+
+		modelTypeBindingEClass = createEClass(MODEL_TYPE_BINDING);
+		createEReference(modelTypeBindingEClass, MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS);
+
+		totalBindingEClass = createEClass(TOTAL_BINDING);
+
+		partialBindingEClass = createEClass(PARTIAL_BINDING);
+		createEReference(partialBindingEClass, PARTIAL_BINDING__WITH_RESPECT_TO);
+
+		isomorphicBindingEClass = createEClass(ISOMORPHIC_BINDING);
+
+		nonIsomorphicBindingEClass = createEClass(NON_ISOMORPHIC_BINDING);
+
+		totalIsomorphicBindingEClass = createEClass(TOTAL_ISOMORPHIC_BINDING);
+
+		partialIsomorphicBindingEClass = createEClass(PARTIAL_ISOMORPHIC_BINDING);
+
+		totalNonIsomorphicBindingEClass = createEClass(TOTAL_NON_ISOMORPHIC_BINDING);
+
+		partialNonIsomorphicBindingEClass = createEClass(PARTIAL_NON_ISOMORPHIC_BINDING);
+
+		objectTypeBindingEClass = createEClass(OBJECT_TYPE_BINDING);
+
+		directBindingEClass = createEClass(DIRECT_BINDING);
+		createEReference(directBindingEClass, DIRECT_BINDING__TARGET);
+		createEReference(directBindingEClass, DIRECT_BINDING__SOURCE);
+
+		adaptationBindingEClass = createEClass(ADAPTATION_BINDING);
+		createEReference(adaptationBindingEClass, ADAPTATION_BINDING__TARGET);
+		createEReference(adaptationBindingEClass, ADAPTATION_BINDING__SOURCE);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2079,7 +2435,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		objectTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		modelTypeEClass.getESuperTypes().add(this.getType());
 		modelTypeEClass.getESuperTypes().add(this.getTypeDefinition());
-		modelTypeEClass.getESuperTypes().add(this.getModel());
+		modelTypeEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
 		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
 		modelEClass.getESuperTypes().add(this.getKermetaModelElement());
@@ -2102,6 +2458,26 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeMappingEClass.getESuperTypes().add(this.getTypeContainer());
 		unresolvedInferredTypeEClass.getESuperTypes().add(this.getUnresolved());
 		unresolvedInferredTypeEClass.getESuperTypes().add(this.getType());
+		unresolvedTypeVariableEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
+		unresolvedTypeDefinitionEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+		modelTypeBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
+		totalBindingEClass.getESuperTypes().add(this.getModelTypeBinding());
+		partialBindingEClass.getESuperTypes().add(this.getModelTypeBinding());
+		isomorphicBindingEClass.getESuperTypes().add(this.getModelTypeBinding());
+		nonIsomorphicBindingEClass.getESuperTypes().add(this.getModelTypeBinding());
+		totalIsomorphicBindingEClass.getESuperTypes().add(this.getTotalBinding());
+		totalIsomorphicBindingEClass.getESuperTypes().add(this.getIsomorphicBinding());
+		partialIsomorphicBindingEClass.getESuperTypes().add(this.getPartialBinding());
+		partialIsomorphicBindingEClass.getESuperTypes().add(this.getIsomorphicBinding());
+		totalNonIsomorphicBindingEClass.getESuperTypes().add(this.getTotalBinding());
+		totalNonIsomorphicBindingEClass.getESuperTypes().add(this.getNonIsomorphicBinding());
+		partialNonIsomorphicBindingEClass.getESuperTypes().add(this.getPartialBinding());
+		partialNonIsomorphicBindingEClass.getESuperTypes().add(this.getNonIsomorphicBinding());
+		objectTypeBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
+		directBindingEClass.getESuperTypes().add(this.getObjectTypeBinding());
+		adaptationBindingEClass.getESuperTypes().add(this.getObjectTypeBinding());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kermetaModelElementEClass, KermetaModelElement.class, "KermetaModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2237,6 +2613,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class, "ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelType_TypeDefinitions(), this.getTypeDefinition(), null, "typeDefinitions", null, 0, -1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelTypeVariableEClass, ModelTypeVariable.class, "ModelTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelTypeVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_ModelType(), "virtualType", null, 0, -1, ModelTypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2284,6 +2661,42 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getTypeMapping_Mapping(), ecorePackage.getEObject(), null, "mapping", null, 0, 1, TypeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unresolvedInferredTypeEClass, UnresolvedInferredType.class, "UnresolvedInferredType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unresolvedTypeVariableEClass, UnresolvedTypeVariable.class, "UnresolvedTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unresolvedTypeDefinitionEClass, UnresolvedTypeDefinition.class, "UnresolvedTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnresolvedTypeDefinition_Usings(), this.getUsing(), null, "usings", null, 0, -1, UnresolvedTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnresolvedTypeDefinition_TypeDefinitionIdentifier(), this.getString(), "typeDefinitionIdentifier", null, 1, 1, UnresolvedTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelTypeBindingEClass, ModelTypeBinding.class, "ModelTypeBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelTypeBinding_ObjectTypeBindings(), this.getObjectTypeBinding(), null, "objectTypeBindings", null, 0, -1, ModelTypeBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(totalBindingEClass, TotalBinding.class, "TotalBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialBindingEClass, PartialBinding.class, "PartialBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPartialBinding_WithRespectTo(), this.getOperation(), null, "withRespectTo", null, 0, -1, PartialBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(isomorphicBindingEClass, IsomorphicBinding.class, "IsomorphicBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(nonIsomorphicBindingEClass, NonIsomorphicBinding.class, "NonIsomorphicBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(totalIsomorphicBindingEClass, TotalIsomorphicBinding.class, "TotalIsomorphicBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialIsomorphicBindingEClass, PartialIsomorphicBinding.class, "PartialIsomorphicBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(totalNonIsomorphicBindingEClass, TotalNonIsomorphicBinding.class, "TotalNonIsomorphicBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialNonIsomorphicBindingEClass, PartialNonIsomorphicBinding.class, "PartialNonIsomorphicBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(objectTypeBindingEClass, ObjectTypeBinding.class, "ObjectTypeBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(directBindingEClass, DirectBinding.class, "DirectBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDirectBinding_Target(), this.getTypeDefinition(), null, "target", null, 0, 1, DirectBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDirectBinding_Source(), this.getTypeDefinition(), null, "source", null, 0, 1, DirectBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(adaptationBindingEClass, AdaptationBinding.class, "AdaptationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAdaptationBinding_Target(), this.getTypeDefinition(), null, "target", null, 0, -1, AdaptationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdaptationBinding_Source(), this.getTypeDefinition(), null, "source", null, 0, -1, AdaptationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

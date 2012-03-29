@@ -16,10 +16,12 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.kermeta.language.structure.AdaptationBinding;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.ConstraintLanguage;
 import org.kermeta.language.structure.ConstraintType;
+import org.kermeta.language.structure.DirectBinding;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
@@ -32,6 +34,8 @@ import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Parameter;
+import org.kermeta.language.structure.PartialIsomorphicBinding;
+import org.kermeta.language.structure.PartialNonIsomorphicBinding;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
@@ -39,6 +43,8 @@ import org.kermeta.language.structure.Require;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
+import org.kermeta.language.structure.TotalIsomorphicBinding;
+import org.kermeta.language.structure.TotalNonIsomorphicBinding;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeDefinitionContainer;
 import org.kermeta.language.structure.TypeMapping;
@@ -47,6 +53,8 @@ import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
+import org.kermeta.language.structure.UnresolvedTypeDefinition;
+import org.kermeta.language.structure.UnresolvedTypeVariable;
 import org.kermeta.language.structure.Using;
 import org.kermeta.language.structure.VirtualType;
 import org.kermeta.language.structure.VoidType;
@@ -127,6 +135,14 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.VOID_TYPE: return createVoidType();
 			case StructurePackage.TYPE_MAPPING: return createTypeMapping();
 			case StructurePackage.UNRESOLVED_INFERRED_TYPE: return createUnresolvedInferredType();
+			case StructurePackage.UNRESOLVED_TYPE_VARIABLE: return createUnresolvedTypeVariable();
+			case StructurePackage.UNRESOLVED_TYPE_DEFINITION: return createUnresolvedTypeDefinition();
+			case StructurePackage.TOTAL_ISOMORPHIC_BINDING: return createTotalIsomorphicBinding();
+			case StructurePackage.PARTIAL_ISOMORPHIC_BINDING: return createPartialIsomorphicBinding();
+			case StructurePackage.TOTAL_NON_ISOMORPHIC_BINDING: return createTotalNonIsomorphicBinding();
+			case StructurePackage.PARTIAL_NON_ISOMORPHIC_BINDING: return createPartialNonIsomorphicBinding();
+			case StructurePackage.DIRECT_BINDING: return createDirectBinding();
+			case StructurePackage.ADAPTATION_BINDING: return createAdaptationBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -500,6 +516,86 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public UnresolvedInferredType createUnresolvedInferredType() {
 		UnresolvedInferredTypeImpl unresolvedInferredType = new UnresolvedInferredTypeImpl();
 		return unresolvedInferredType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedTypeVariable createUnresolvedTypeVariable() {
+		UnresolvedTypeVariableImpl unresolvedTypeVariable = new UnresolvedTypeVariableImpl();
+		return unresolvedTypeVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedTypeDefinition createUnresolvedTypeDefinition() {
+		UnresolvedTypeDefinitionImpl unresolvedTypeDefinition = new UnresolvedTypeDefinitionImpl();
+		return unresolvedTypeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TotalIsomorphicBinding createTotalIsomorphicBinding() {
+		TotalIsomorphicBindingImpl totalIsomorphicBinding = new TotalIsomorphicBindingImpl();
+		return totalIsomorphicBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialIsomorphicBinding createPartialIsomorphicBinding() {
+		PartialIsomorphicBindingImpl partialIsomorphicBinding = new PartialIsomorphicBindingImpl();
+		return partialIsomorphicBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TotalNonIsomorphicBinding createTotalNonIsomorphicBinding() {
+		TotalNonIsomorphicBindingImpl totalNonIsomorphicBinding = new TotalNonIsomorphicBindingImpl();
+		return totalNonIsomorphicBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialNonIsomorphicBinding createPartialNonIsomorphicBinding() {
+		PartialNonIsomorphicBindingImpl partialNonIsomorphicBinding = new PartialNonIsomorphicBindingImpl();
+		return partialNonIsomorphicBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DirectBinding createDirectBinding() {
+		DirectBindingImpl directBinding = new DirectBindingImpl();
+		return directBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdaptationBinding createAdaptationBinding() {
+		AdaptationBindingImpl adaptationBinding = new AdaptationBindingImpl();
+		return adaptationBinding;
 	}
 
 	/**

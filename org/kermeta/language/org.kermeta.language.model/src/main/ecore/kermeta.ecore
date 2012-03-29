@@ -1043,10 +1043,12 @@
             <details key="documentation" value="To be written"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//kermeta/language/structure/Type #//kermeta/language/structure/TypeDefinition #//kermeta/language/structure/Model">
+        <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//kermeta/language/structure/Type #//kermeta/language/structure/TypeDefinition #//kermeta/language/structure/TypeDefinitionContainer">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Type of a model, consisting of a set of included type definitions.&#xD;&#xA;For historical reason, this is both a type and a TypeDefinition, mainly due to the fact that a ModelDefinition isn't a GenericTypeDefinition (maybe this should be discussed again ?)&#xD;&#xA;"/>
           </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinitions"
+              upperBound="-1" eType="#//kermeta/language/structure/TypeDefinition"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="#//kermeta/language/structure/TypeVariable">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1189,6 +1191,54 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Special type reference which is still unresolved.&#xD;&#xA;However, we need to use a special inferrence algorithm in order  to create a real Type that points to a concrete TypeDefinition.&#xD;&#xA;Exemple :&#xD;&#xA;A typical use will be for the type of the lambda parameter i in :&#xD;&#xA;operation foo(f : &lt;Integer->Integer) is abstract&#xD;&#xA;...&#xD;&#xA;foo{i | i+1 }&#xD;&#xA;&#xD;&#xA;in that case, the type of i is an UnresolvedInferredType, the Resolver should find the appropriate operation foo (if there is no ambiguity)&#xD;&#xA;"/>
           </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedTypeVariable" eSuperTypes="#//kermeta/language/structure/Unresolved #//kermeta/language/structure/TypeVariable"/>
+        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedTypeDefinition" eSuperTypes="#//kermeta/language/structure/Unresolved #//kermeta/language/structure/TypeDefinition">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="usings" upperBound="-1"
+              eType="#//kermeta/language/structure/Using" containment="true">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="List of Using that can be used to complement the indentifer and resolve this UnresolvedType"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeDefinitionIdentifier"
+              lowerBound="1" eType="#//kermeta/language/structure/String">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="String that identifies the Type.&#xD;&#xA;The container of the UnresolvedType  is considered as the context."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ModelTypeBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="objectTypeBindings"
+              upperBound="-1" eType="#//kermeta/language/structure/ObjectTypeBinding"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TotalBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/ModelTypeBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="PartialBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/ModelTypeBinding">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="withRespectTo" upperBound="-1"
+              eType="#//kermeta/language/structure/Operation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IsomorphicBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/ModelTypeBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="NonIsomorphicBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/ModelTypeBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="TotalIsomorphicBinding" eSuperTypes="#//kermeta/language/structure/TotalBinding #//kermeta/language/structure/IsomorphicBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="PartialIsomorphicBinding" eSuperTypes="#//kermeta/language/structure/PartialBinding #//kermeta/language/structure/IsomorphicBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="TotalNonIsomorphicBinding" eSuperTypes="#//kermeta/language/structure/TotalBinding #//kermeta/language/structure/NonIsomorphicBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="PartialNonIsomorphicBinding" eSuperTypes="#//kermeta/language/structure/PartialBinding #//kermeta/language/structure/NonIsomorphicBinding"/>
+        <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/KermetaModelElement"/>
+        <eClassifiers xsi:type="ecore:EClass" name="DirectBinding" eSuperTypes="#//kermeta/language/structure/ObjectTypeBinding">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//kermeta/language/structure/TypeDefinition"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//kermeta/language/structure/TypeDefinition"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="AdaptationBinding" eSuperTypes="#//kermeta/language/structure/ObjectTypeBinding">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+              eType="#//kermeta/language/structure/TypeDefinition"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
+              eType="#//kermeta/language/structure/TypeDefinition"/>
         </eClassifiers>
       </eSubpackages>
     </eSubpackages>

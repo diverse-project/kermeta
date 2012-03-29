@@ -314,6 +314,78 @@ public interface StructureFactory extends EFactory {
 	UnresolvedInferredType createUnresolvedInferredType();
 
 	/**
+	 * Returns a new object of class '<em>Unresolved Type Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Type Variable</em>'.
+	 * @generated
+	 */
+	UnresolvedTypeVariable createUnresolvedTypeVariable();
+
+	/**
+	 * Returns a new object of class '<em>Unresolved Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Type Definition</em>'.
+	 * @generated
+	 */
+	UnresolvedTypeDefinition createUnresolvedTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Total Isomorphic Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Total Isomorphic Binding</em>'.
+	 * @generated
+	 */
+	TotalIsomorphicBinding createTotalIsomorphicBinding();
+
+	/**
+	 * Returns a new object of class '<em>Partial Isomorphic Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial Isomorphic Binding</em>'.
+	 * @generated
+	 */
+	PartialIsomorphicBinding createPartialIsomorphicBinding();
+
+	/**
+	 * Returns a new object of class '<em>Total Non Isomorphic Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Total Non Isomorphic Binding</em>'.
+	 * @generated
+	 */
+	TotalNonIsomorphicBinding createTotalNonIsomorphicBinding();
+
+	/**
+	 * Returns a new object of class '<em>Partial Non Isomorphic Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial Non Isomorphic Binding</em>'.
+	 * @generated
+	 */
+	PartialNonIsomorphicBinding createPartialNonIsomorphicBinding();
+
+	/**
+	 * Returns a new object of class '<em>Direct Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Direct Binding</em>'.
+	 * @generated
+	 */
+	DirectBinding createDirectBinding();
+
+	/**
+	 * Returns a new object of class '<em>Adaptation Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Adaptation Binding</em>'.
+	 * @generated
+	 */
+	AdaptationBinding createAdaptationBinding();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
