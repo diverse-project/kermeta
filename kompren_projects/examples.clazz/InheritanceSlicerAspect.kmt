@@ -42,7 +42,6 @@ aspect class Clazz inherits SlicerVisitor {
 			end
 			self.visitedPass := true
 			self.superClasses.each{theClazz | theClazz.visitToAddClasses(theInheritanceSlicer)}
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theInheritanceSlicer : InheritanceSlicer) is do
@@ -53,7 +52,6 @@ aspect class Clazz inherits SlicerVisitor {
 			self.superClasses.each{theClazz | theClazz.visitToAddRelations(theInheritanceSlicer)
 				if(self.visitedForRelations and theClazz.visitedForRelations) then
 					theInheritanceSlicer.addedsuperClasses.add(ClasssuperClasses.new.initialise(self, theClazz)) end }
-			self.visitedPass := false
 		end
 	end
 }
