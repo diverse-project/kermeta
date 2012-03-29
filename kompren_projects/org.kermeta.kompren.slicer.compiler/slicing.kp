@@ -1,6 +1,6 @@
 KermetaProject "org.kermeta.kompren.slicer.compiler"
 	groupId = "my.group"
-	defaultMainClass = "org2::kermeta::kompren::slicing::Test"
+	defaultMainClass = "org2::kermeta::kompren::slicing::Main"
 	defaultMainOperation = "main"
 	sources = {
 		require "${project.baseUri}/kermeta/Test.kmt"
