@@ -39,7 +39,6 @@ aspect class Block {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.statement.each{theExpression | theExpression.visitToAddClasses(theUnusedVarDetector)}
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -48,7 +47,6 @@ aspect class Block {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.statement.each{theExpression | theExpression.visitToAddRelations(theUnusedVarDetector)}
-			self.visitedPass := false
 		end
 	end
 }
@@ -64,7 +62,6 @@ aspect class Conditional {
 			self.visitedPass := true
 			if(not self.elseBody.isVoid) then self.elseBody.visitToAddClasses(theUnusedVarDetector) end
 			self.thenBody.visitToAddClasses(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -74,7 +71,6 @@ aspect class Conditional {
 			self.visitedForRelations := true
 			if(not self.elseBody.isVoid) then self.elseBody.visitToAddRelations(theUnusedVarDetector) end
 			self.thenBody.visitToAddRelations(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 }
@@ -86,7 +82,6 @@ aspect class Raise {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.expression.visitToAddClasses(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -95,7 +90,6 @@ aspect class Raise {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.expression.visitToAddRelations(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 }
@@ -108,7 +102,6 @@ aspect class Loop {
 			self.visitedPass := true
 			if(not self.initialization.isVoid) then self.initialization.visitToAddClasses(theUnusedVarDetector) end
 			if(not self.body.isVoid) then self.body.visitToAddClasses(theUnusedVarDetector) end
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -118,7 +111,6 @@ aspect class Loop {
 			self.visitedForRelations := true
 			if(not self.initialization.isVoid) then self.initialization.visitToAddRelations(theUnusedVarDetector) end
 			if(not self.body.isVoid) then self.body.visitToAddRelations(theUnusedVarDetector) end
-			self.visitedPass := false
 		end
 	end
 }
@@ -130,7 +122,6 @@ aspect class LambdaExpression {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.body.visitToAddClasses(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -139,7 +130,6 @@ aspect class LambdaExpression {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.body.visitToAddRelations(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 }
@@ -151,7 +141,6 @@ aspect class Rescue inherits SlicerVisitor {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.body.each{theExpression | theExpression.visitToAddClasses(theUnusedVarDetector)}
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -160,7 +149,6 @@ aspect class Rescue inherits SlicerVisitor {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.body.each{theExpression | theExpression.visitToAddRelations(theUnusedVarDetector)}
-			self.visitedPass := false
 		end
 	end
 }
@@ -172,7 +160,6 @@ aspect class CallExpression {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.parameters.each{theExpression | theExpression.visitToAddClasses(theUnusedVarDetector)}
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -181,7 +168,6 @@ aspect class CallExpression {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.parameters.each{theExpression | theExpression.visitToAddRelations(theUnusedVarDetector)}
-			self.visitedPass := false
 		end
 	end
 }
@@ -193,7 +179,6 @@ aspect class Assignment {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.~value.visitToAddClasses(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theUnusedVarDetector : UnusedVarDetector) is do
@@ -202,7 +187,6 @@ aspect class Assignment {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.~value.visitToAddRelations(theUnusedVarDetector)
-			self.visitedPass := false
 		end
 	end
 }
@@ -223,7 +207,6 @@ aspect class VariableDecl {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.visitedPass := false
 		end
 	end
 }
@@ -244,7 +227,6 @@ aspect class CallVariable {
 			super(theUnusedVarDetector)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.visitedPass := false
 		end
 	end
 }
