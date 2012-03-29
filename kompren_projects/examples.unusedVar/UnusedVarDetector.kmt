@@ -1,0 +1,64 @@
+package org::kermeta::language::behavior;
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+using org::kermeta::language::structure
+class UnusedVarDetector {
+	reference requiredOperations : Operation[0..*]
+
+	reference addedVariableDecls : Bag<VariableDecl>
+
+	reference addedCallVariables : Bag<CallVariable>
+
+	reference addedParameters : Bag<Parameter>
+
+	operation initialise(requiredOperations : bag Operation[0..*]) : UnusedVarDetector is do
+		result := self
+		self.addedVariableDecls := Bag<VariableDecl>.new
+		self.addedCallVariables := Bag<CallVariable>.new
+		self.addedParameters := Bag<Parameter>.new
+		self.requiredOperations.addAll(requiredOperations)
+	end
+
+	operation launch() is do
+		self.requiredOperations.each{theOperation | theOperation.visitToAddClasses(self) }
+		self.requiredOperations.each{theOperation | theOperation.visitToAddRelations(self) }
+		self.addedVariableDecls.each{theVariableDecl | onVariableDeclAdded(theVariableDecl) }
+		self.addedCallVariables.each{theCallVariable | onCallVariableAdded(theCallVariable) }
+		self.addedParameters.each{theParameter | onParameterAdded(theParameter) }
+		onEnd()
+	end
+
+	operation onVariableDeclAdded(varDecl : VariableDecl) is do
+		varDecls.add(varDecl)
+	end
+	operation onCallVariableAdded(callVar : CallVariable) is do
+		if(not callVar.staticType.isVoid) then
+			var varDecl : VariableDecl init varDecls.detect{varD |
+				varD.containedType.contains(callVar.staticType)
+			}
+			
+			if(varDecl.isVoid) then
+				var varParam : Parameter init params.detect{param | param.type==callVar.staticType }
+				if(not varParam.isVoid) then
+					params.remove(varParam)
+				end
+			else
+				varDecls.remove(varDecl)
+			end
+		end
+	end
+	operation onParameterAdded(param : Parameter) is do
+		if(param.~operation.superOperation.isVoid) then
+			params.add(param)
+		end
+	end
+	operation onEnd() is do
+		varDecls.each{varD | stdio.writeln("Variable unused: " + varD.identifier) }
+		params.each{param | stdio.writeln("Parameter unused: " + param.name) }
+	end
+	reference varDecls : VariableDecl[0..*]
+	
+	reference params : Parameter[0..*]
+}
