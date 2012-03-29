@@ -44,7 +44,6 @@ aspect class Clazz inherits SlicerVisitor, Feedable {
 			end
 			self.visitedPass := true
 			self.lowerType.each{theClazz | theClazz.visitToAddClasses(theInvertedClassModelSlicer)}
-			self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theInvertedClassModelSlicer : InvertedClassModelSlicer) is do
@@ -55,7 +54,6 @@ aspect class Clazz inherits SlicerVisitor, Feedable {
 			self.lowerType.each{theClazz | theClazz.visitToAddRelations(theInvertedClassModelSlicer)
 				if(self.visitedForRelations and theClazz.visitedForRelations) then
 					theInvertedClassModelSlicer.addedlowerType.add(ClasslowerType.new.initialise(self, theClazz)) end }
-			self.visitedPass := false
 		end
 	end
 	method feedOpposites() from Feedable is do
