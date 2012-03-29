@@ -11,24 +11,24 @@ using kermeta::emfpersistence
 using kermeta::io::StdIO => stdio
 
 class Test {
-	operation main(id : String, nbIns : String) : Void is do
+	operation main() is do //id : String, nbIns : String) is do
 		var requiredStates : Bag<State> init Bag<State>.new
-		var sm : StateMachine // init createStateMachineModel(requiredStates)
+		var sm : StateMachine  init createStateMachineModel(requiredStates)
 		
 		var repository : ResourceSet init ResourceSet.new
 		var resource : Resource 
- 		resource ?= repository.createResource("platform:/resource/genSM/" + nbIns + "/model" + id + ".xmi", 
- 						"platform:/resource/examples.stateMachine/StateMachine.ecore")
+ 		//resource ?= repository.createResource("platform:/resource/genSM/" + nbIns + "/model" + id + ".xmi", 
+ 		//				"platform:/resource/examples.stateMachine/StateMachine.ecore")
  						
-		resource.load(void)
-		sm ?= resource.getContents.one
+		//resource.load(void)
+		//sm ?= resource.getContents.one
 		
 		requiredStates.add(sm.initState)
 
-		var start : Long init Date.new.getTime()		
+//		var start : Long init Date.new.getTime()		
 		var pruning : StateMachineSlicer init StateMachineSlicer.new.initialise(requiredStates)
 		pruning.launch()
-		stdio.writeln((Date.new.getTime()-start).toString)
+//		stdio.writeln((Date.new.getTime()-start).toString)
 	end
 	
 	

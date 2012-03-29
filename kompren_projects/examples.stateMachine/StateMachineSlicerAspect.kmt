@@ -94,38 +94,12 @@ aspect class Transition inherits SlicerVisitor {
 				self.dup.asType(Transition).target := self.target.dup.asType(InputState)
 				theStateMachineSlicer.addToRoot(self.target.dup)
 			end
+
 		end
 	end
 }
 
 aspect class State inherits SlicerVisitor {
-}
-
-aspect class StandardState {
-	method createFrom() : Object from OutputState is do
-		var theStandardState : StandardState init StandardState.new
-		theStandardState.name := self.name
-		theStandardState.name := self.name
-		result := theStandardState
-	end
-
-	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
-		checkInitialisation()
-		if(not self.visitedPass) then
-			super(theStateMachineSlicer)
-			if(not self.sliced) then
-				self.dup := self.createFrom()
-				self.sliced := true
-			end
-		end
-	end
-	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
-		if(not self.visitedPass) then
-			super(theStateMachineSlicer)
-			self.visitedPass := true
-			self.visitedForRelations := true
-		end
-	end
 }
 
 aspect class InitState {
@@ -172,6 +146,33 @@ aspect class TerminalState {
 		end
 	end
 	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
+		if(not self.visitedPass) then
+			super(theStateMachineSlicer)
+			self.visitedPass := true
+			self.visitedForRelations := true
+		end
+	end
+}
+
+aspect class StandardState {
+	method createFrom() : Object from OutputState is do
+		var theStandardState : StandardState init StandardState.new
+		theStandardState.name := self.name
+		theStandardState.name := self.name
+		result := theStandardState
+	end
+
+	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theStateMachineSlicer)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			self.visitedPass := true
