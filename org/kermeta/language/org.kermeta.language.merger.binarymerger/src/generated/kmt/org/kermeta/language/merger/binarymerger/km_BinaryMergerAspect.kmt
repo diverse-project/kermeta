@@ -238,6 +238,48 @@ package kermeta {
 			aspect class UnresolvedInferredType inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
+			aspect class UnresolvedTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelTypeBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TotalBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class PartialBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class IsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class NonIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TotalIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class PartialIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class TotalNonIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class PartialNonIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ObjectTypeBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class DirectBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class AdaptationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
 		}
 
 
