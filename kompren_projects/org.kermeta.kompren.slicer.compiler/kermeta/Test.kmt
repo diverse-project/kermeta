@@ -12,9 +12,15 @@ using kermeta::io
 using ecore
 using kermeta::io::StdIO => stdio
 
-class Test {
-	operation main() is do
-		var start : Long init Date.new.getTime()
+class Main {
+	operation main(uriMM : String, uriSlicer : String, pathOutput : String) is do
+		var slicerModel : Slicer init getSlicerModel(uriSlicer)
+		var pkg 		: EPackage init getEcoreModel(uriMM).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, uriMM)
+
+		slicer.generateSlicer()
+		slicer.saveCode(pathOutput)
+		// var start : Long init Date.new.getTime()
 		// generateKevoree
 		// generateInvertedClassModel
 		// generateClassSlicer
@@ -24,12 +30,45 @@ class Test {
 		// generateFeatureDiagramSlicer
 		// generateStrictEcoreSlicer
 		// generateSemZoomSlicer
-		generateUMLCMSlicer
-		stdio.writeln((Date.new.getTime()-start).toString)
+		// generateUMLCMSlicer
+		// stdio.writeln((Date.new.getTime()-start).toString)
+	end
+	
+	
+	operation getEcoreModel(uriEcoreModel : String) : Bag<EPackage> is do
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource(uriEcoreModel, "http://www.eclipse.org/emf/2002/Ecore")
+       	resource.load(void)
+		
+		result := Bag<EPackage>.new
+		
+		resource.getContents().each{obj |
+			if(obj.isInstanceOf(EPackage)) then
+				result.add(obj.asType(EPackage))        
+			end
+		}
 	end
 
 
+	operation getSlicerModel(uriSlicerModel : String) : Slicer is do
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource(uriSlicerModel, "platform:/resource/org.kermeta.kompren.slicer.compiler/metamodel/slicing.ecore")
+       	resource.load(void)
+       	
+       	result := void
 
+		from var it : Iterator<Object> init resource.getContents.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(next.isInstanceOf(Slicer)) then                 
+				result ?= next
+			end
+		end
+	end
+
+
+/*
 	operation generateUMLCMSlicer() is do
 		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/umlClassModel/UML.ecore"
 		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/umlClassModel/umlCM.slicer")
@@ -42,8 +81,8 @@ class Test {
 
 
 	operation generateSemZoomSlicer() is do
-		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelTransfoAnalysis/kermeta.ecore"
-		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoom/semZoom.slicer")
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoom/Ecore.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoom/sem.slicer")
 		var pkg 		: EPackage init getEcoreModel(modelURI).one()
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
 
@@ -130,37 +169,5 @@ class Test {
 		slicer.generateSlicer()
 		slicer.saveCode("/examples.clazz/")
 	end
-	
-	operation getEcoreModel(uriEcoreModel : String) : Bag<EPackage> is do
-   		var repository : ResourceSet init ResourceSet.new
-   		var resource : Resource init repository.createResource(uriEcoreModel, "http://www.eclipse.org/emf/2002/Ecore")
-       	resource.load(void)
-		
-		result := Bag<EPackage>.new
-		
-		resource.getContents().each{obj |
-			if(obj.isInstanceOf(EPackage)) then
-				result.add(obj.asType(EPackage))        
-			end
-		}
-	end
-
-	
-	
-	operation getSlicerModel(uriSlicerModel : String) : Slicer is do
-   		var repository : ResourceSet init ResourceSet.new
-   		var resource : Resource init repository.createResource(uriSlicerModel, "platform:/resource/slicing/metamodel/slicing.ecore")
-       	resource.load(void)
-       	
-       	result := void
-
-		from var it : Iterator<Object> init resource.getContents.iterator
-		until it.isOff
-		loop
-			var next : Object init it.next
-			if(next.isInstanceOf(Slicer)) then                 
-				result ?= next
-			end
-		end
-	end
+*/
 }

@@ -279,7 +279,7 @@ class SlicerAspectGenerator inherits Generator {
 			var relationCalls : String init generateRelationCalls(eclass, true)
 			
 			if(relationCalls.size>0) then
-				result := result + "\t\t\tself.visitedPass := true\n" + generateRelationCalls(eclass, true) + "\t\t\tself.visitedPass := false\n"
+				result := result + "\t\t\tself.visitedPass := true\n" + generateRelationCalls(eclass, true)// + "\t\t\tself.visitedPass := false\n"
 			end
 
 			result := result + "\t\tend\n\tend\n\tmethod visitToAddRelations(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
@@ -297,7 +297,8 @@ class SlicerAspectGenerator inherits Generator {
 			end
 			result := result + ")\n\t\t\tself.visitedPass := true\n" +
 					"\t\t\tself.visitedForRelations := true\n" + generateRelationCalls(eclass, false) +
-					"\t\t\tself.visitedPass := false\n\t\tend\n\tend\n"
+					//"\t\t\tself.visitedPass := false\n" + 
+					"\t\tend\n\tend\n"
 		end
 
 		if(feedOppositeMethod.size>0) then
