@@ -3,7 +3,7 @@ package org.kermeta.kompren
 import org.kermeta.kompren.parser.KomprenParser
 import org.kermeta.kompren.parser.ParserUtil
 import org.kermeta.kompren.resolver.SlicerResolver
-import org.kermeta.kompren.slicing.Slicer
+import org2.kermeta.kompren.slicer.Slicer
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl

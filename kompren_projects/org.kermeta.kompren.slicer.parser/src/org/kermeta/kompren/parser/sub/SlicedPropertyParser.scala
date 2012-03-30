@@ -3,17 +3,17 @@ package org.kermeta.kompren.parser.sub
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.EReference
-import org.kermeta.kompren.slicing.SlicedProperty
-import org.kermeta.kompren.slicing.OppositeCreation
-import org.kermeta.kompren.slicing.VarDecl
-import org.kermeta.kompren.slicing.SlicingFactory
+import org2.kermeta.kompren.slicer.SlicedProperty
+import org2.kermeta.kompren.slicer.OppositeCreation
+import org2.kermeta.kompren.slicer.VarDecl
+import org2.kermeta.kompren.slicer.SlicerFactory
 
 
 trait SlicedPropertyParser extends KomprenAbstractParser with BlockParser {
 	def parseSlicedProperty : Parser[SlicedProperty] = "slicedProperty" ~ ":" ~ (pointedIdent | ident) ~ opt("option") ~ opt(parserOpposite) ~ 
 	opt(ident) ~ opt(ident) ~ opt(parseBlock) ~ opt(parseBlock) ^^ {
 	  case _ ~ _ ~ name ~ option ~ opp ~ nameVar1 ~ nameVar2 ~ exp ~ expOnRemove =>
-	    val slicedProp = SlicingFactory.eINSTANCE.createSlicedProperty
+	    val slicedProp = SlicerFactory.eINSTANCE.createSlicedProperty
 	    val ref : EReference = EcoreFactory.eINSTANCE.createEReference
 	    
 	    ref.setName(name)
@@ -24,7 +24,7 @@ trait SlicedPropertyParser extends KomprenAbstractParser with BlockParser {
 	    slicedProp.setIsOption(option.isDefined && option.get.equals("option"))
 
 	    if(nameVar1.isDefined) {
-	      val src = SlicingFactory.eINSTANCE.createVarDecl
+	      val src = SlicerFactory.eINSTANCE.createVarDecl
 	      val clazz : EClass = EcoreFactory.eINSTANCE.createEClass
 	      clazz.setName(name)
 	      src.setType(clazz)
@@ -33,7 +33,7 @@ trait SlicedPropertyParser extends KomprenAbstractParser with BlockParser {
 	    }
 	      
   	    if(nameVar2.isDefined) {
-  	      val tgt = SlicingFactory.eINSTANCE.createVarDecl
+  	      val tgt = SlicerFactory.eINSTANCE.createVarDecl
 	      val clazz : EClass = EcoreFactory.eINSTANCE.createEClass
 	      clazz.setName("#RESOLVE_OPPOSITE:" + name)
 	      tgt.setType(clazz)
@@ -47,7 +47,7 @@ trait SlicedPropertyParser extends KomprenAbstractParser with BlockParser {
 	
 	def parserOpposite : Parser[OppositeCreation] = "opposite" ~ opt("(" ~ ident ~ ")") ^^ {
 	  case _ ~ name =>
-	    val opp = SlicingFactory.eINSTANCE.createOppositeCreation
+	    val opp = SlicerFactory.eINSTANCE.createOppositeCreation
 	    
 	    name match {
 	      case Some(value) => value match { case "(" ~ nameOpp ~ ")" => opp.setName(nameOpp) }

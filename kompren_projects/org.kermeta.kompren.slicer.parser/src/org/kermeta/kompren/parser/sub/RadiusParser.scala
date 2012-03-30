@@ -2,9 +2,9 @@ package org.kermeta.kompren.parser.sub
 
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.EClass
-import org.kermeta.kompren.slicing.Radius
-import org.kermeta.kompren.slicing.SlicedClass
-import org.kermeta.kompren.slicing.SlicingFactory
+import org2.kermeta.kompren.slicer.Radius
+import org2.kermeta.kompren.slicer.SlicedClass
+import org2.kermeta.kompren.slicer.SlicerFactory
 import scala.collection.JavaConversions._
 
 trait RadiusParser extends KomprenAbstractParser {
@@ -13,7 +13,7 @@ trait RadiusParser extends KomprenAbstractParser {
 	    var slicedClasses : List[SlicedClass] = List()
 	    names.foreach{ name =>
 	      val clazz = EcoreFactory.eINSTANCE.createEClass
-	      val slicedClass = SlicingFactory.eINSTANCE.createSlicedClass
+	      val slicedClass = SlicerFactory.eINSTANCE.createSlicedClass
 	      
 	      clazz.setName(name)
 	      slicedClass.setCtx(null)
@@ -24,7 +24,7 @@ trait RadiusParser extends KomprenAbstractParser {
 	      slicedClasses = slicedClasses ++ List(slicedClass)
 	    }
 	    
-	    val radius = SlicingFactory.eINSTANCE.createRadius
+	    val radius = SlicerFactory.eINSTANCE.createRadius
 	    radius.getFocusedClasses().addAll(slicedClasses)
 	    
 	    radius

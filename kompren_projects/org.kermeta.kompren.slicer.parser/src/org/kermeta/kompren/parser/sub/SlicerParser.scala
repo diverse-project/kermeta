@@ -2,9 +2,9 @@ package org.kermeta.kompren.parser.sub
 
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EcoreFactory
-import org.kermeta.kompren.slicing.Slicer
-import org.kermeta.kompren.slicing.SlicedElement
-import org.kermeta.kompren.slicing.SlicingFactory
+import org2.kermeta.kompren.slicer.Slicer
+import org2.kermeta.kompren.slicer.SlicedElement
+import org2.kermeta.kompren.slicer.SlicerFactory
 import scala.collection.JavaConversions._
 
 trait SlicerParser extends KomprenAbstractParser 
@@ -17,7 +17,7 @@ with BlockParser {
 		  			opt(parseRadius) ~ (parseConstraints*) ~ (parseSlicedClass*) ~ (parseSlicedProperty*) ~ opt(parseOnStart) ~ 
 		  			opt(parseOnEnd) ~ opt(parseHelper) ~ "}" ^^ { 
     case _ ~ soft ~ active ~ name ~ _ ~ domain ~ inputs ~ radius ~ constraints ~ slicedClasses ~ slicedProps ~ onStart ~ onEnd ~ helper ~ _ =>
-    val slicer = SlicingFactory.eINSTANCE.createSlicer
+    val slicer = SlicerFactory.eINSTANCE.createSlicer
     var slicedElements : List[SlicedElement] = slicedClasses ++ slicedProps
     
     soft match {

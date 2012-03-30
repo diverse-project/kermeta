@@ -1,6 +1,6 @@
 package org.kermeta.kompren.parser
 
-import org.kermeta.kompren.slicing.Slicer
+import org2.kermeta.kompren.slicer.Slicer
 import org.kermeta.kompren.parser.sub.KomprenAbstractParser
 import org.kermeta.kompren.parser.sub.SlicerParser
 

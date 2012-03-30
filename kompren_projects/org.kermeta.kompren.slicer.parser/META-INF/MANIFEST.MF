@@ -1,17 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kompren Parser
+Bundle-Name: Kompren Slicer Parser
 Bundle-SymbolicName: org.kermeta.kompren.slicer.parser
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0
 Bundle-ClassPath: parser.jar
 Export-Package: org.kermeta.kompren,
  org.kermeta.kompren.lexer,
  org.kermeta.kompren.parser,
  org.kermeta.kompren.parser.sub,
  org.kermeta.kompren.resolver
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.7.0",
- org.kermeta.kompren.slicing;bundle-version="1.0.0",
- org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
- org.scala-ide.scala.library;bundle-version="2.9.1"
 Bundle-Vendor: INRIA/IRISA Triskell Team
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

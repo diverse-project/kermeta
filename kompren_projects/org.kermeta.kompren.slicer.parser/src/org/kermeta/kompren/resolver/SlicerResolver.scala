@@ -1,4 +1,5 @@
 package org.kermeta.kompren.resolver
+
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
@@ -14,9 +15,9 @@ import scala.collection.JavaConversions._
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EClassifier
-import org.kermeta.kompren.slicing.Slicer
-import org.kermeta.kompren.slicing.SlicedClass
-import org.kermeta.kompren.slicing.SlicedProperty
+import org2.kermeta.kompren.slicer.Slicer
+import org2.kermeta.kompren.slicer.SlicedClass
+import org2.kermeta.kompren.slicer.SlicedProperty
 import java.io.File
 
 
