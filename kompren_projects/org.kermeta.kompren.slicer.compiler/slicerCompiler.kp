@@ -12,7 +12,7 @@ KermetaProject "org.kermeta.kompren.slicer.compiler"
 		require "${project.baseUri}/kermeta/helpers/EClassHelper.kmt"
 		require "${project.baseUri}/kermeta/helpers/EPackageHelper.kmt"
 		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
-		require "${project.baseUri}/metamodel/slicing.ecore" byteCodeFromADependency
+		require "${project.baseUri}/metamodel/kompren.ecore" byteCodeFromADependency
 	}
 	dependencies = {
 		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
