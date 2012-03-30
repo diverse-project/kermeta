@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>language.root</artifactId>
+        <groupId>org.kermeta.language</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>language.prettyprinter</artifactId>
+    <packaging>jar</packaging>
+    <name>language.prettyprinter :: a little prettyprinter for k2</name>
+
+    <dependencies>   
+    	 <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>   
+    	 <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.library.core</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+		  <resources>
+		    <resource>
+		      <directory>${project.build.directory}/generated-sources/resources</directory>
+		    </resource>
+		  </resources>
+        <plugins>
+            <!-- Kermeta Compiler plugin -->
+            <plugin>
+                <groupId>org.kermeta.kp</groupId>
+                <artifactId>kp.compiler.mavenplugin</artifactId>
+                <version>2.0.1-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <kp>org.kermeta.language.prettyprinter.kp</kp>
+                            <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
+                            <targetGroupId>${project.groupId}</targetGroupId>
+                            <targetArtifactId>${project.artifactId}</targetArtifactId>
+                            <generateKmOnly>false</generateKmOnly>
+                            <checkingEnabled>false</checkingEnabled>
+                            <intermediateFilesRequired>false</intermediateFilesRequired>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
+             <!-- package into a jar for OSGI -->
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.1</version>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Require-Bundle>
+                        </Require-Bundle>
+                        <Export-Package>
+                        </Export-Package>
+                        <Import-Package>
+						</Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
+            
+             
+        </plugins>
+    </build>
+</project>
+
