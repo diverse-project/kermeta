@@ -19,6 +19,74 @@ aspect class Property {
 	/* SOME OTHER CONSTRAINTS IN PropertyChecker.java from fr.irisa.triskell.kermeta.io */
 
 	/**
+	 * derived properties can't have opposites
+	 */
+	@Scope "RESOLVED"
+	inv no_opposite_for_derived_properties is do
+		//It seems that the parser does not allow the opposite for
+		//a derived property (error message is "`setter' expected but # found")
+		//This invariant is therefore pretty useless... 
+		if (self.isDerived)
+		then
+			self.opposite.isVoid
+		else
+			true
+		end
+	end
+
+	/**
+	 * The attribute's opposite must be a reference
+	 */
+	@Scope "RESOLVED"
+	inv attribute_opposite_must_be_reference is do
+		if (self.isComposite)
+		then
+			if (self.opposite.isVoid())
+			then
+				// An error will be raised by another invariant
+				true
+			else
+				if (self.opposite.isInstanceOf(Property))
+				then
+					not(self.opposite.asType(Property).isComposite)
+				else
+					// Error raised elsewhere for UnresolvedProperty
+					true
+				end
+			end
+		else
+			true
+		end
+	end
+
+	/**
+	 * The current property's opposite's opposite must be the current property
+	 */
+	@Scope "RESOLVED"
+	inv property_opposite_opposite is do
+		
+		if (self.opposite.isVoid())
+		then
+			true
+		else
+			if (self.opposite.isInstanceOf(Property))
+			then
+				if (self.opposite.asType(Property).opposite.isVoid)
+				then
+					false
+				else
+					self.opposite.asType(Property).opposite.equals(self)
+				end
+			else
+				// Unresolved invariant will fail
+				true
+			end
+		end
+		
+	end
+
+
+	/**
 	 * A *not* derived property cannot have neither getterBody nor setterBody
 	 */ 
 	@Scope "MERGED"
