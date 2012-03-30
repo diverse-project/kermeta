@@ -7,17 +7,20 @@
 package org.kermeta.language.structure.impl;
 
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.kermeta.language.structure.Class;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeVariableBinding;
 
 /**
@@ -39,36 +42,6 @@ import org.kermeta.language.structure.TypeVariableBinding;
  */
 public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.language.structure.Class
 {
-  /**
-	 * The cached value of the '{@link #getOwnedAttribute() <em>Owned Attribute</em>}' reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getOwnedAttribute()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<Property> ownedAttribute;
-
-  /**
-	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getOwnedOperation()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<Operation> ownedOperation;
-
-  /**
-	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getSuperClass()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<org.kermeta.language.structure.Class> superClass;
-
   /**
 	 * The default value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -100,16 +73,6 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
   protected static final String NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected String name = NAME_EDEFAULT;
-
-  /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -130,43 +93,40 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 		return StructurePackage.Literals.CLASS;
 	}
 
-  /**
+    /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
-  public EList<Property> getOwnedAttribute()
-  {
-		if (ownedAttribute == null) {
-			ownedAttribute = new EObjectResolvingEList<Property>(Property.class, this, StructurePackage.CLASS__OWNED_ATTRIBUTE);
-		}
-		return ownedAttribute;
+  	public EList<Property> getOwnedAttribute()
+  	{
+	  return ((org.kermeta.language.structure.ClassDefinition)this.getTypeDefinition()).getOwnedAttribute();
+	}
+
+    /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+  	public EList<Operation> getOwnedOperation()
+	{
+		return ((org.kermeta.language.structure.ClassDefinition)this.getTypeDefinition()).getOwnedOperation();
 	}
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<Operation> getOwnedOperation()
-  {
-		if (ownedOperation == null) {
-			ownedOperation = new EObjectResolvingEList<Operation>(Operation.class, this, StructurePackage.CLASS__OWNED_OPERATION);
-		}
-		return ownedOperation;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<org.kermeta.language.structure.Class> getSuperClass()
-  {
-		if (superClass == null) {
-			superClass = new EObjectResolvingEList<org.kermeta.language.structure.Class>(org.kermeta.language.structure.Class.class, this, StructurePackage.CLASS__SUPER_CLASS);
-		}
-		return superClass;
+   * @generated NOT
+   */
+  	public EList<org.kermeta.language.structure.Class> getSuperClass()
+  	{
+  		BasicEList<org.kermeta.language.structure.Class> result = new BasicEList<org.kermeta.language.structure.Class>();
+  		for(Type t : this.getTypeDefinition().getSuperType()){
+  			if(t instanceof org.kermeta.language.structure.Class){
+  				result.add((Class) t);
+  			}
+  		}
+  		return result;
 	}
 
   /**
@@ -178,33 +138,31 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 		return isAbstract;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * Convenient method that returns the name of this Class calculated from the ClassDefinition and the optionnal type parameters
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-  public String getName()
-  {
-	  	if (name == null) {
-	  		StringBuilder sb = new StringBuilder();
-	  		sb.append(this.getTypeDefinition().getName());
-	  		if(this.getTypeParamBinding().size() > 0){
-	  			sb.append("[");
-	  			boolean first = true;
-	  			for(TypeVariableBinding tpb : this.getTypeParamBinding()){
-	  				if(!first) {
-	  					sb.append(", ");
-	  					first = false;
-	  				}
-	  				if(tpb.getType() instanceof NamedElement){
-	  					sb.append(((NamedElement)tpb.getType()).getName());
-	  				}
-	  			}
-	  			sb.append("]");
-	  		}
-	  		name = sb.toString();
-	  	}
-		return name;
+	public String getName()
+	{	  	
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getTypeDefinition().getName());
+		if(this.getTypeParamBinding().size() > 0){
+			sb.append("[");
+			boolean first = true;
+			for(TypeVariableBinding tpb : this.getTypeParamBinding()){
+				if(!first) {
+					sb.append(", ");
+					first = false;
+				}
+				if(tpb.getType() instanceof NamedElement){
+					sb.append(((NamedElement)tpb.getType()).getName());
+				}
+			}
+			sb.append("]");
+		}
+		return sb.toString();
 	}
 
   
@@ -242,15 +200,15 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
   {
 		switch (featureID) {
 			case StructurePackage.CLASS__OWNED_ATTRIBUTE:
-				return ownedAttribute != null && !ownedAttribute.isEmpty();
+				return !getOwnedAttribute().isEmpty();
 			case StructurePackage.CLASS__OWNED_OPERATION:
-				return ownedOperation != null && !ownedOperation.isEmpty();
+				return !getOwnedOperation().isEmpty();
 			case StructurePackage.CLASS__SUPER_CLASS:
-				return superClass != null && !superClass.isEmpty();
+				return !getSuperClass().isEmpty();
 			case StructurePackage.CLASS__IS_ABSTRACT:
 				return IS_ABSTRACT_EDEFAULT == null ? isAbstract != null : !IS_ABSTRACT_EDEFAULT.equals(isAbstract);
 			case StructurePackage.CLASS__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -258,7 +216,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
   @Override
   public String toString()
@@ -269,7 +227,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 		result.append(" (isAbstract: ");
 		result.append(isAbstract);
 		result.append(", name: ");
-		result.append(name);
+		result.append(getName());
 		result.append(')');
 		return result.toString();
 	}

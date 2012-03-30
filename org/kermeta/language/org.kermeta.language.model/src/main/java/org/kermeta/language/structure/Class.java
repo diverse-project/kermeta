@@ -40,12 +40,12 @@ public interface Class extends ParameterizedType {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Returns the Attributes, References, and derived Properties owned by
+	 * Convenient derived reference that returns the Attributes, References, and derived Properties owned by
 	 * the ClassDefinition of this Class.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Attribute</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getClass_OwnedAttribute()
-	 * @model changeable="false" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<Property> getOwnedAttribute();
@@ -56,11 +56,11 @@ public interface Class extends ParameterizedType {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Returns the Operations owned by the ClassDefinition of this Class.
+	 * Convenient derived reference that returns the Operations owned by the ClassDefinition of this Class.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Operation</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getClass_OwnedOperation()
-	 * @model changeable="false" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperation();
@@ -71,11 +71,11 @@ public interface Class extends ParameterizedType {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Returns the Classes of which the ClassDefinition of this Class inherits.
+	 * Convenient derived reference that returns the Classes of which the ClassDefinition of this Class inherits.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Class</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getClass_SuperClass()
-	 * @model changeable="false" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<Class> getSuperClass();
@@ -100,11 +100,11 @@ public interface Class extends ParameterizedType {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Returns the name of the ClassDefinition of this Class
+	 * Convenient derived attribute that returns the name of this Class calculated from the ClassDefinition and the optionnal type parameters
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see org.kermeta.language.structure.StructurePackage#getClass_Name()
-	 * @model dataType="org.kermeta.language.structure.String" changeable="false" derived="true"
+	 * @model dataType="org.kermeta.language.structure.String" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getName();

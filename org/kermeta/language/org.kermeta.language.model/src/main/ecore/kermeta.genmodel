@@ -276,7 +276,10 @@
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeVariable/supertype"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/ObjectTypeVariable"/>
-          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/ModelType"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/ModelType">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/ModelType/typeDefinitions"/>
+          </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/ModelTypeVariable">
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/ModelTypeVariable/virtualType"/>
           </genClasses>
@@ -326,6 +329,38 @@
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/TypeMapping/mapping"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedInferredType"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedTypeVariable"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedTypeDefinition">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/UnresolvedTypeDefinition/usings"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/UnresolvedTypeDefinition/typeDefinitionIdentifier"/>
+          </genClasses>
+          <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/ModelTypeBinding">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/ModelTypeBinding/objectTypeBindings"/>
+          </genClasses>
+          <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/TotalBinding"/>
+          <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/PartialBinding">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/PartialBinding/withRespectTo"/>
+          </genClasses>
+          <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/IsomorphicBinding"/>
+          <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/NonIsomorphicBinding"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/TotalIsomorphicBinding"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/PartialIsomorphicBinding"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/TotalNonIsomorphicBinding"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/PartialNonIsomorphicBinding"/>
+          <genClasses image="false" ecoreClass="kermeta.ecore#//kermeta/language/structure/ObjectTypeBinding"/>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/DirectBinding">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/DirectBinding/target"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/DirectBinding/source"/>
+          </genClasses>
+          <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/AdaptationBinding">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/AdaptationBinding/target"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/AdaptationBinding/source"/>
+          </genClasses>
         </nestedGenPackages>
       </nestedGenPackages>
     </nestedGenPackages>

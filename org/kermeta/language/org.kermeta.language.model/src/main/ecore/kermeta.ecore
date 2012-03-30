@@ -704,21 +704,24 @@
             <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
           </eAnnotations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-              eType="#//kermeta/language/structure/Property" changeable="false" derived="true">
+              eType="#//kermeta/language/structure/Property" changeable="false" volatile="true"
+              transient="true" derived="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="Returns the Attributes, References, and derived Properties owned by&#xA;the ClassDefinition of this Class."/>
+              <details key="documentation" value="Convenient derived reference that returns the Attributes, References, and derived Properties owned by&#xD;&#xA;the ClassDefinition of this Class."/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
-              eType="#//kermeta/language/structure/Operation" changeable="false" derived="true">
+              eType="#//kermeta/language/structure/Operation" changeable="false" volatile="true"
+              transient="true" derived="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="Returns the Operations owned by the ClassDefinition of this Class."/>
+              <details key="documentation" value="Convenient derived reference that returns the Operations owned by the ClassDefinition of this Class."/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1"
-              eType="#//kermeta/language/structure/Class" changeable="false" derived="true">
+              eType="#//kermeta/language/structure/Class" changeable="false" volatile="true"
+              transient="true" derived="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="Returns the Classes of which the ClassDefinition of this Class inherits."/>
+              <details key="documentation" value="Convenient derived reference that returns the Classes of which the ClassDefinition of this Class inherits."/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//kermeta/language/structure/Boolean"
@@ -728,9 +731,9 @@
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//kermeta/language/structure/String"
-              changeable="false" derived="true">
+              changeable="false" volatile="true" transient="true" derived="true">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="Returns the name of the ClassDefinition of this Class"/>
+              <details key="documentation" value="Convenient derived attribute that returns the name of this Class calculated from the ClassDefinition and the optionnal type parameters"/>
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
