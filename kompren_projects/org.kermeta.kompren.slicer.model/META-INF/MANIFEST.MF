@@ -7,9 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org2.kermeta.kompren.slicing,
- org2.kermeta.kompren.slicing.impl,
- org2.kermeta.kompren.slicing.util
+Export-Package: org2.kermeta.kompren.slicer,
+ org2.kermeta.kompren.slicer.impl,
+ org2.kermeta.kompren.slicer.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

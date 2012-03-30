@@ -10,8 +10,8 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing"
-            class="org2.kermeta.kompren.slicing.provider.SlicingItemProviderAdapterFactory"
+            uri="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer"
+            class="org2.kermeta.kompren.slicer.provider.SlicerItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider

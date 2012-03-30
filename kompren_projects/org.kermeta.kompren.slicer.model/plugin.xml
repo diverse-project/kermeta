@@ -10,8 +10,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing"
-            class="org2.kermeta.kompren.slicing.SlicingPackage"/>
+            uri="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer"
+            class="org2.kermeta.kompren.slicer.SlicerPackage"/>
    </extension>
 
 </plugin>

@@ -4,11 +4,11 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: kompren.slicer.edit;singleton:=true
 Bundle-Version: 2.0.0
 Bundle-ClassPath: .
-Bundle-Activator: org2.kermeta.kompren.slicing.provider.komprenEditPlugin$Implementation
+Bundle-Activator: org2.kermeta.kompren.slicer.provider.komprenEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org2.kermeta.kompren.slicing.provider
+Export-Package: org2.kermeta.kompren.slicer.provider
 Require-Bundle: org.eclipse.core.runtime,
  kompren.slicer.model;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,

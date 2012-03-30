@@ -13,24 +13,24 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="org2.kermeta.kompren.slicing.presentation.SlicingModelWizardID"
-            name="%_UI_SlicingModelWizard_label"
-            class="org2.kermeta.kompren.slicing.presentation.SlicingModelWizard"
+            id="org2.kermeta.kompren.slicer.presentation.SlicerModelWizardID"
+            name="%_UI_SlicerModelWizard_label"
+            class="org2.kermeta.kompren.slicer.presentation.SlicerModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/SlicingModelFile.gif">
-         <description>%_UI_SlicingModelWizard_description</description>
+            icon="icons/full/obj16/SlicerModelFile.gif">
+         <description>%_UI_SlicerModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            id="org2.kermeta.kompren.slicing.presentation.SlicingEditorID"
-            name="%_UI_SlicingEditor_label"
-            icon="icons/full/obj16/SlicingModelFile.gif"
+            id="org2.kermeta.kompren.slicer.presentation.SlicerEditorID"
+            name="%_UI_SlicerEditor_label"
+            icon="icons/full/obj16/SlicerModelFile.gif"
             extensions="kompren"
-            class="org2.kermeta.kompren.slicing.presentation.SlicingEditor"
-            contributorClass="org2.kermeta.kompren.slicing.presentation.SlicingActionBarContributor">
+            class="org2.kermeta.kompren.slicer.presentation.SlicerEditor"
+            contributorClass="org2.kermeta.kompren.slicer.presentation.SlicerActionBarContributor">
       </editor>
    </extension>
 
