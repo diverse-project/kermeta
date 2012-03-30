@@ -110,7 +110,9 @@ class SlicerGenerator {
 	// relation must be sliced too. This process occurs only when the slicer is defined as strict.
 	// This operation also checks that if an abstract class is sliced, all its concrete sub-types are sliced as well.
 	operation checkClassesToSlice() is do
-		var coll : Bag<SlicedElement> init Bag<SlicedElement>.new
+		var size : Integer init slicerModel.slicedElements.size
+		var coll : Bag<SlicedClass> init Bag<SlicedClass>.new
+		var slicedClassesToRemove : Sequence<SlicedClass> init Sequence<SlicedClass>.new
 	
 		if(slicerModel.strict) then
 			var newSlicedClass : SlicedClass
@@ -119,8 +121,10 @@ class SlicerGenerator {
 			slicerModel.slicedClasses.each{sc | sc.domain.eStructuralFeatures.each{sf |
 				if(sf.isInstanceOf(EReference)) then
 					ref:= sf.asType(EReference)
-					if((ref.lowerBound==1).andThen{b | not slicerModel.slicedClasses.exists{cl |
-					 cl.domain.getQualifiedName==ref.eType.getQualifiedName} }) then
+					var condi : Boolean init (ref.lowerBound==1).andThen{b | 
+						not slicerModel.slicedClasses.exists{cl | cl.domain.getQualifiedName==ref.eType.getQualifiedName}}.andThen{b2 |
+						not coll.exists{cl2 | cl2.domain.getQualifiedName==ref.eType.getQualifiedName}}
+					if(condi) then
 						newSlicedClass := SlicedClass.new
 						newSlicedClass.domain := ref.eType.asType(EClass)
 						coll.add(newSlicedClass)
@@ -128,27 +132,29 @@ class SlicerGenerator {
 				end
 			}}
 		end
-		
-		var slicedClassesToRemove : Sequence<SlicedElement> init Sequence<SlicedElement>.new
 
+		coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
+		coll.clear
+		
 		slicerModel.slicedClasses.select{sc | sc.domain.~abstract}.each{sc |
 			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
 
 			slicedClassesToRemove.add(sc)
 			var sub : Sequence<EClass> init sc.domain.getConcreteSubClasses(allClasses)
 			sub.each{subClass |
-				if(not slicerModel.slicedClasses.exists{sc2 | sc2.domain.getQualifiedName==subClass.getQualifiedName}) then
+				if((not slicerModel.slicedClasses.exists{sc2 | sc2.domain.getQualifiedName==subClass.getQualifiedName}).andThen{b2 |
+					not coll.exists{cl2 | cl2.domain.getQualifiedName==subClass.getQualifiedName}}) then
 					var slicedClass : SlicedClass init SlicedClass.new
 					slicedClass.domain := subClass
 					coll.add(slicedClass)
 				end
 			}
 		}
-		
-		slicedClassesToRemove.each{cl | slicerModel.slicedElements.remove(cl)}
-		
-		if(not coll.empty) then
-			coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
+
+		slicedClassesToRemove.each{cl | slicerModel.slicedElements.remove(cl) }
+		coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
+
+		if(size!=slicerModel.slicedElements.size) then
 			// We must re-call this operation to check required relation of the added classes.
 			checkClassesToSlice()
 		end
