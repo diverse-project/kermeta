@@ -46,7 +46,7 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
-                        	org2.kermeta.kompren.slicing.provider.*
+                        	org2.kermeta.kompren.slicer.provider.*
                         </Export-Package>
                         <Import-Package>
                         	org.eclipse.emf.*,
