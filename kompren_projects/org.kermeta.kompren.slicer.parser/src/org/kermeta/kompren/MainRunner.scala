@@ -13,7 +13,8 @@ import java.util.Collections
 
 object MainRunner {
   def main(args: Array[String]): Unit = {
-		  convertAsXMI("/home/ablouin/workspaceScala/org.kermeta.slicer.kompren.parser/examples/class/class.slicertxt")
+		 // convertAsXMI("/home/ablouin/workspaceScala/org.kermeta.slicer.kompren.parser/examples/class/class.slicertxt")
+		  convertAsXMI(args(0))
   }
   
   
