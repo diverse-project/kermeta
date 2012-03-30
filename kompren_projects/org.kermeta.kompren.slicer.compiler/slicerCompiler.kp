@@ -3,7 +3,7 @@ KermetaProject "org.kermeta.kompren.slicer.compiler"
 	defaultMainClass = "org2::kermeta::kompren::slicing::Main"
 	defaultMainOperation = "main"
 	sources = {
-		require "${project.baseUri}/kermeta/Test.kmt"
+		require "${project.baseUri}/kermeta/Main.kmt"
 		require "${project.baseUri}/kermeta/ECoreSlicingAspect.kmt"
 		require "${project.baseUri}/kermeta/SlicerAspectGenerator.kmt"
 		require "${project.baseUri}/kermeta/SlicerClassGenerator.kmt"
