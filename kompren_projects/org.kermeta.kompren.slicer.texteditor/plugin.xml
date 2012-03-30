@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Kompren Editor"
+            extensions="slicertxt"
+            icon="icons/sample.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="org.kermeta.kompren.texteditor.editors.KomprenEditor"
+            id="org.kermeta.kompren.texteditor.editors.KomprenEditor">
+      </editor>
+   </extension>
+
+</plugin>
