@@ -22,7 +22,7 @@ aspect class Type {
 	//if the current type from expectedType is a type variable, then add the binding
 	//if not, it's only important if self is a class or a function type
 	operation compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) is do
-		stdio.writeln("compare a type with something")
+		//stdio.writeln("compare a type with something")
 			
 		if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 			typeVariableToSet.put(expectedType.asType(TypeVariable), self)
@@ -33,7 +33,7 @@ aspect class Type {
 
 	//structural comparison is used when types are supposed to be equals
 	operation structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) is do
-		stdio.writeln("compare a type with something")
+		//stdio.writeln("compare a type with something")
 			
 		if expectedType.isInstanceOf(TypeVariable).andThen{x|
 			typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} 
@@ -46,6 +46,125 @@ aspect class Type {
 	
 	operation isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
 		result:=true
+	end
+}
+
+aspect class FunctionType
+{
+	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+
+		// ( <A->C> inherits <B->D> ) <=> ( ( C inherits D ) and ( B inherits A )
+
+		stdio.writeln("------------------------------\nisSubTypeOf for a FunctionType")
+		
+		//var hash : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+		result:=true
+
+		if (expectedType.isInstanceOf(FunctionType))
+		then // else false
+			// First, compare return types
+			// C->D
+			stdio.writeln("-expectedType is a FunctionType -> OK")
+			var expectedFunctionType : FunctionType init expectedType.asType(FunctionType)
+			
+			result:=self.right.isSubTypeOf(expectedFunctionType.right,typeVariableToSet)
+			
+			// Then compare left 
+			if (result)
+			then
+				if (self.left.isVoid)
+				then
+					stdio.writeln("self.left.isVoid")
+					//expectedType.left must be void
+					if not(expectedFunctionType.left.isVoid)
+					then // else it is ok, since return types are ok
+						// expectedFunctionType.left might be an empty ProductType
+						if (expectedFunctionType.left.isInstanceOf(ProductType))
+						then
+							//in this case it mustn't contain any type
+							result :=  (expectedFunctionType.left.asType(ProductType).type.size==0)
+						else
+							result:=false
+						end
+					end
+				else
+					// expectedType.left must be a subtype of self.left
+					stdio.writeln("self.left.is not Void")
+					stdio.writeln("expectedType.left:"+expectedFunctionType.left.toString)
+					result:= expectedFunctionType.left.isSubTypeOf(self.left, typeVariableToSet) 
+				end
+			end
+		else
+			result:=false
+		end
+		
+	end
+}
+
+aspect class ProductType {
+	
+	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+		//result:=false
+		
+		stdio.writeln(" - isSubTypeOf for productType")
+		stdio.writeln("  --> self     : " + self.toString)
+		stdio.writeln("  --> expected : " + expectedType.toString)
+		
+		
+		if(expectedType.isInstanceOf(ProductType))
+		then
+			// No problem, just compare the types inside both ProductTypes
+			// Check the cardinalities...
+			stdio.writeln("    expected is a productType -> OK")
+			var expectedProductType : ProductType init expectedType.asType(ProductType)
+			stdio.writeln("     card self      : " + self.type.size.toString())
+			stdio.writeln("     card expected  : " + expectedProductType.type.size.toString)
+			
+			if ( self.type.size != expectedProductType.type.size)
+			then
+				result:=false
+			else
+				var bool : Boolean init true
+				from var i : Integer init 0
+				until i == self.type.size
+				loop
+					stdio.writeln("      i="+i.toString+", bool=" + bool.toString)
+					stdio.writeln("       self.at(i) : " + self.type.elementAt(i).toString)
+					stdio.writeln("       expe.at(i) : " + expectedProductType.type.elementAt(i).toString)
+					bool := ( bool and self.type.elementAt(i).isSubTypeOf(expectedProductType.type.elementAt(i),typeVariableToSet) )
+    				i := i + 1
+				end
+				result:=bool
+			end
+		else
+			// Special checks in case self with a ProductType with 0 or 1 types inside
+			if (self.type.size == 0)
+			then
+				result:=expectedType.isVoid
+			else
+				if (self.type.size == 1)
+				then
+					result:= self.type.elementAt(0).isSubTypeOf(expectedType, typeVariableToSet)
+				else
+					result:=false
+				end
+			end
+		end	
+	end
+}
+
+aspect class Enumeration
+{
+
+	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+		
+		//stdio.writeln("isSubTypeOf for a Enumeration")
+		result:=false
+		if (expectedType.isInstanceOf(Enumeration))
+		then
+			result:=(self.equals(expectedType))
+		end
+		
 	end
 }
 
@@ -146,12 +265,12 @@ aspect class Class
 		then
 			result:=true
 		else
-			stdio.writeln("ifSubTypeOf for class " + self.name + ", compare with " + expectedType.toString)
 			result:=true			
 			if ( expectedType.isInstanceOf(Class) ) 
 			then
+				stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.asType(Class).typeDefinition.name)
 					
-				stdio.writeln("expectedType isInstanceOf Class")
+				//stdio.writeln("expectedType isInstanceOf Class")
 				var comparableClass : Class init self.getComparableClass(expectedType.asType(Class))
 				//comparableClass := self.getComparableClass(expectedType.asType(Class))
 			
@@ -164,8 +283,32 @@ aspect class Class
 				end
 			
 			else
-				stdio.writeln("expectedType is not InstanceOf Class")
-			
+				//stdio.writeln("expectedType is not InstanceOf Class")
+				//Check if the expectedType is a ProductType with just one type
+				if ( expectedType.isInstanceOf(ProductType) )
+				then
+					var expectedProductType : ProductType init expectedType.asType(ProductType)
+					if (expectedProductType.type.size != 1)
+					then
+						result:=false
+					else
+						if (expectedProductType.type.one.isInstanceOf(Class))
+						then
+							var comparableClass : Class init self.getComparableClass(expectedProductType.type.one.asType(Class))
+							if (comparableClass.isVoid)
+							then
+								result:=false
+							else
+								result:=comparableClass.typeEquals(expectedProductType.type.one.asType(Class))
+							end
+						else
+							result:=false
+						end	
+						
+					end
+				else
+					result:=false
+				end
 			end
 			
 			/*
@@ -178,15 +321,13 @@ aspect class Class
 			*/
 		
 		end
-		
-		
-		
+		stdio.writeln(" -> result : " + result.toString)
 	end
 
 	method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
 		
-		stdio.writeln("compare a class with something")
-		stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
+		//stdio.writeln("compare a class with something")
+		//stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
 		// It should not be a typeVariable ...
 			
 			/*if expectedType.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
