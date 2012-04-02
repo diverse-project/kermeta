@@ -6,7 +6,7 @@
          point="org.eclipse.ui.editors">
       <editor
             name="Kompren Editor"
-            extensions="slicertxt"
+            extensions="komprent"
             icon="icons/sample.gif"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="org.kermeta.kompren.texteditor.editors.KomprenEditor"
