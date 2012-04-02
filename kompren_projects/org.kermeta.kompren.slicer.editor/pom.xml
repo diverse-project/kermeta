@@ -1,6 +1,5 @@
 <!-- $Id: pom.xml 17173 2012-02-27 15:17:01Z dvojtise $ -->
 <!-- License    : EPL                                    -->
-<!-- Project    : org.kermeta.language.model -->
 <!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
 				
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -41,12 +40,13 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>org.kermeta.kompren.slicer.editor; singleton=true</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.kompren.slicer.texteditor; singleton=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
-                        	org2.kermeta.kompren.slicer.presentation.*
+                        	org2.kermeta.kompren.texteditor.*,
+                        	org2.kermeta.kompren.texteditor.editors.*
                         </Export-Package>
                         <Import-Package>
                         	org.eclipse.emf.*,

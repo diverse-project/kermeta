@@ -33,90 +33,30 @@
 		</resources>
 		
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
-        <configuration>
-          <argLine>-Xmx1024m</argLine>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-      <!-- Add generated source to build cycle -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>add-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
+         <!-- Creation of the bundle jar and its manifest -->
+        <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>2.1.0</version>
+            <extensions>true</extensions>
             <configuration>
-              <sources>
-                <source>../src/main/java-gen</source>
-              </sources>
+                <instructions>
+                    <Bundle-SymbolicName>org.kermeta.kompren.slicer.editor; singleton=true</Bundle-SymbolicName>
+                    <Bundle-Name>${project.name}</Bundle-Name>
+                    <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                    <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                    <Export-Package>
+                    	org2.kermeta.kompren.slicer.presentation.*
+                    </Export-Package>
+                    <Import-Package>
+                    	org.eclipse.emf.*,
+                    	org.osgi.framework;version="[1.5,2)",
+                    	*
+                    </Import-Package>
+                    <Bundle-ClassPath>.</Bundle-ClassPath>
+                </instructions>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>2.3.5</version>
-        <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
-            <Bundle-Name>${project.name}</Bundle-Name>
-            <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-            <Bundle-ClassPath>.</Bundle-ClassPath>
-             <!-- Dependency used for compiling all the bundle (with dependecy to org.eclipse.core.* -->
-             
-            <Require-Bundle>
-				org.eclipse.core.resources,
-				org.emftext.access;resolution:=optional,
-				org.eclipse.core.expressions,
-				org.eclipse.debug.core,
-				org.eclipse.debug.ui,
-				org.eclipse.emf,
-				org.eclipse.emf.codegen.ecore,
-				org.eclipse.emf.ecore,
-				org.eclipse.emf.ecore.edit,
-				org.eclipse.emf.edit.ui,
-				org.eclipse.emf.workspace,
-				org.eclipse.jface,
-				org.eclipse.jface.text,
-				org.eclipse.ui,
-				org.eclipse.ui.editors,
-				org.eclipse.ui.ide,
-				org.eclipse.ui.views,
-				org.kermeta.utils.systemservices.api,
-				org.kermeta.utils.systemservices.eclipse,
-				org.kermeta.kompren.slicer.parser,
-				org.kermeta.kompren.slicer.model
-            </Require-Bundle>
-            
-            <Export-Package>
-              org.kermeta.kompren.texteditor,
-              org.kermeta.kompren.texteditor.editors
-            </Export-Package>
-            <!--
-              specify the packages that should be imported to correctly build
-              the bundle (i.e <packaging>bundle<packaging> ".*" to also include
-              sub packages use the ! for avoiding to import some packages that
-              are already there with the Require-Bundle
-            -->
-            <Import-Package>
-              !org.eclipse.*,
-              !org.osgi.framework.*,
-              !org.kermeta.kompren.* 
-            </Import-Package>
-          </instructions>
-        </configuration>
-      </plugin>
+        </plugin>
     </plugins>
   </build>
   <dependencies>
