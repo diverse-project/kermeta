@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<org.kermeta.kompren.slicing:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicing="http://www.org.kermeta.kompren/org/kermeta/kompren/slicing" name="EcoreSemZoom" uriMetamodel="./Ecore.ecore">
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="EcoreSemZoom" uriMetamodel="./Ecore.ecore">
   <radius focusedClasses="//@slicedElements.2"/>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EAttribute"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EEnumLiteral"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EClass"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EDataType"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EEnum"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EOperation"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EPackage"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EParameter"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedClass">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
     <domain href="Ecore.ecore#//EReference"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EClass/eSuperTypes"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <opposite name="lowerTypes"/>
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EClass/eSuperTypes"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EClass/eStructuralFeatures"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EClass/eOperations"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EOperation/eParameters"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//ETypedElement/eType"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EClassifier/ePackage"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EPackage/eSubpackages"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EPackage/eSuperPackage"/>
   </slicedElements>
-  <slicedElements xsi:type="org.kermeta.kompren.slicing:SlicedProperty" isOption="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="Ecore.ecore#//EEnum/eLiterals"/>
   </slicedElements>
   <inputClasses href="Ecore.ecore#//EClassifier"/>
-</org.kermeta.kompren.slicing:Slicer>
+</org.kermeta.kompren.slicer:Slicer>
