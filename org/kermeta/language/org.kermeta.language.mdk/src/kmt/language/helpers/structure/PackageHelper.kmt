@@ -27,8 +27,9 @@ aspect class Package {
 	 * ie. a name that might contains :: in order to search in sub packages 
 	 */ 
 	operation getTypeDefinitionByRelativeQName(qname : String) : TypeDefinition is do
+		
 		// stdio.writeln( "        searching " + qname + " in " +self.name)
-		var set_qname : Sequence<String> init qname.split("::")
+		/*var set_qname : Sequence<String> init qname.split("::")
 		if set_qname.size()==1 then
 			result := self.ownedTypeDefinition.detect{ c | c.name == qname}
 		else
@@ -51,7 +52,41 @@ aspect class Package {
 			else			 
 				result := void
 			end
-		end
-		
+		end*/
+		var set_qname : Sequence<String> init qname.split("::")
+		result := getTypeDefinitionByRelativeSetQName(set_qname)
 	end
+
+	operation getTypeDefinitionByRelativeSetQName(set_qname : Sequence<String>) : TypeDefinition is do
+		var foundTypeDef : TypeDefinition
+		var mtContainer : ModelType
+		var nextPackage : Package
+		//If set_qname only contains one identifier, the TypeDefinition must be in this package
+		if set_qname.size()==1 then
+			foundTypeDef := self.ownedTypeDefinition.detect{td|
+				td.name == set_qname.at(0)
+			}
+		else
+			//If set_qname only contains two identifiers, the TypeDefinition may be referenced by a ModelType contained by this package
+			if set_qname.size() == 2 then
+				mtContainer := self.ownedTypeDefinition.detect{td|
+					td.name == set_qname.at(0) and td.isInstanceOf(ModelType)
+				}.asType(ModelType)
+				foundTypeDef := mtContainer.typeDefinitions.detect{td|
+					td.name == set_qname.at(1)
+				}
+			end
+			//Otherwise, the TypeDefinition is contained by a nested package
+			if foundTypeDef.isVoid() then
+				nextPackage := self.nestedPackage.detect{p|p.name == set_qname.at(0)}
+				if (not nextPackage.isVoid()) then
+					var nextQName : Sequence<String> init set_qname
+					nextQName.removeAt(0)
+					foundTypeDef := nextPackage.getTypeDefinitionByRelativeSetQName(nextQName)
+				end
+			end
+		end
+		result := foundTypeDef
+	end
+}
 }
