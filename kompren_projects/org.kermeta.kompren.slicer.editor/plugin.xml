@@ -10,23 +10,19 @@
 
    <extension point="org.eclipse.ui.newWizards">
       <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="org2.kermeta.kompren.slicer.presentation.SlicerModelWizardID"
-            name="%_UI_SlicerModelWizard_label"
-            class="org2.kermeta.kompren.slicer.presentation.SlicerModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/SlicerModelFile.gif">
-         <description>%_UI_SlicerModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
+            id="org.kermeta.kompren.wizard"
+            name="Kompren"/>
+	 <wizard category="org.kermeta.kompren.wizard" icon="icons/full/obj16/SlicerModelFile.gif" 
+	 	class="org2.kermeta.kompren.slicer.presentation.SlicerModelWizard" 
+	 	id="org.kermeta.kompren.KomprenModelWizard" name="Kompren Slicer Model">
+	 	<description>Create a new Kompren Slicer model</description>
+	 </wizard>
    </extension>
 
    <extension point="org.eclipse.ui.editors">
       <editor
             id="org2.kermeta.kompren.slicer.presentation.SlicerEditorID"
-            name="%_UI_SlicerEditor_label"
+            name="Kompren Slicer Model Editor"
             icon="icons/full/obj16/SlicerModelFile.gif"
             extensions="kompren"
             class="org2.kermeta.kompren.slicer.presentation.SlicerEditor"

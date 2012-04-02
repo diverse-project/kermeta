@@ -73,6 +73,26 @@ public class SlicerActionBarContributor
 	 */
 	protected ISelectionProvider selectionProvider;
 
+	
+	protected IAction generateMSFAction =
+		new Action(komprenEditorPlugin.INSTANCE.getString("_UI_Generate_MSF_menu_item")) {
+			@Override
+			public boolean isEnabled() {
+				return true;
+			}
+		
+			@Override
+			public void run() {
+				SlicerActionBarContributor.this.validateAction.run();
+//				try {
+					//TODO
+//				}
+//				catch (PartInitException exception) {
+//					komprenEditorPlugin.INSTANCE.log(exception);
+//				}
+			}
+		};
+	
 	/**
 	 * This action opens the Properties view.
 	 * <!-- begin-user-doc -->
@@ -405,13 +425,13 @@ public class SlicerActionBarContributor
 	 * This inserts global actions before the "additions-end" separator.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
-
+		generateMSFAction.setEnabled(generateMSFAction.isEnabled());
+		menuManager.insertAfter("ui-actions", generateMSFAction);
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
 
