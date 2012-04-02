@@ -527,17 +527,10 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitClass(thi: Class, res: StringBuilder): Unit = {
-    /*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName
-         pack=k2.utils.TypeEquivalence.getPackageEquivalence(pack);
-         var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName
-         //		if (Util.currentPackage.equals(pack))
-         //				res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
-         //		else
-         res.append(k2.utils.TypeEquivalence.getTypeEquivalence(s))*/
-    //                                                             typeEquivelence.put("org.kermeta.language.structure.Object","java.lang.Object")
-
+    
     var qualifiedName = getQualifiedNameCompilo(thi)
-    if (qualifiedName.contains("org.kermeta.language.structure.Object") && !qualifiedName.contains("ObjectTypeVariable")) {
+    //if (qualifiedName.contains("org.kermeta.language.structure.Object") && !qualifiedName.contains("ObjectTypeVariable")) {
+    if (qualifiedName.equals("org.kermeta.language.structure.Object") || qualifiedName.equals("_root_.org.kermeta.language.structure.Object")) {
       res.append(qualifiedName.replace("org.kermeta.language.structure.Object", "java.lang.Object"))
     } else {
       res.append(qualifiedName)
