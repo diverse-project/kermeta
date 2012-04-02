@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
+
 <plugin>
    <extension point="org.eclipse.ui.newWizards">
       <category
@@ -16,16 +17,14 @@
       </wizard> 
    </extension>
    
-   <extension
-         point="org.eclipse.ui.editors">
+   <extension point="org.eclipse.ui.editors">
       <editor
+      		id="org.kermeta.kompren.texteditor.editors.KomprenEditorID"
             name="Kompren Textual Editor"
-            extensions="komprent"
             icon="icons/sample.gif"
-            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="komprent"
             class="org.kermeta.kompren.texteditor.editors.KomprenEditor"
-            id="org.kermeta.kompren.texteditor.editors.KomprenTextualEditor">
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor">
       </editor>
    </extension>
-
 </plugin>
