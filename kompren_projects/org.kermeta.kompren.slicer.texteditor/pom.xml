@@ -6,7 +6,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 	<artifactId>kompren.slicer.texteditor</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>kompren.slicer.texteditor :: Kompren text editor</name>
 
     <parent>
@@ -33,31 +33,52 @@
 		</resources>
 		
     <plugins>
-         <!-- Creation of the bundle jar and its manifest -->
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.1.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>org.kermeta.kompren.slicer.texteditor; singleton=true</Bundle-SymbolicName>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.2</version>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                        <Export-Package>
-                        	org2.kermeta.kompren.texteditor.*,
-                        	org2.kermeta.kompren.texteditor.editors.*
-                        </Export-Package>
-                        <Import-Package>
-                        	org.eclipse.emf.*,
-                        	org.osgi.framework;version="[1.5,2)",
-                        	*
-                        </Import-Package>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                    </instructions>
-                </configuration>
-            </plugin>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Bundle-SymbolicName>org.kermeta.kompren.slicer.texteditor;singleton:=true</Bundle-SymbolicName>
+                        <Bundle-Activator>org.kermeta.kompren.texteditor.Activator</Bundle-Activator>
+						<Require-Bundle>
+			org.eclipse.emf.workspace,
+			org.eclipse.core.runtime,
+			org.eclipse.osgi,
+			org.eclipse.core.jobs,
+			org.eclipse.equinox.preferences,
+			org.eclipse.core.resources,
+			org.eclipse.core.commands,
+			org.eclipse.emf.edit,
+			org.eclipse.emf.ecore,
+			org.eclipse.ui,
+			org.eclipse.swt,
+			org.eclipse.jface,
+			org.eclipse.ui.workbench,
+			org.eclipse.ui.ide,
+			org.eclipse.ui.editors;bundle-version="3.6.1",
+			org.eclipse.core.filebuffers,
+			org.eclipse.jface.text;bundle-version="3.6.1",
+			org.eclipse.ui.views,
+			org.eclipse.ui.workbench.texteditor,
+			org.kermeta.kompren.slicer.parser
+                        </Require-Bundle>
+                        <Export-Package>
+        	org.kermeta.kompren.slicer.texteditor.wizards,
+        	org.kermeta.kompren.texteditor,
+        	org.kermeta.kompren.texteditor.editors
+                        </Export-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
     </plugins>
   </build>
   <dependencies>
@@ -84,11 +105,6 @@
 	<dependency>
 		<groupId>org.kermeta.eclipse</groupId>
 		<artifactId>org.eclipse.ui.editors</artifactId>
-		<version>[3.6.1.0,)</version>
-	</dependency>
-	<dependency>
-		<groupId>org.kermeta.eclipse</groupId>
-		<artifactId>org.eclipse.jface.text</artifactId>
 		<version>[3.6.1.0,)</version>
 	</dependency>
 	<dependency>
@@ -191,17 +207,5 @@
 		<artifactId>utils.systemservices.eclipse</artifactId>
 		<version>${kermeta.version}</version>
 	</dependency>
-		
-	<!--	
-	<dependency>
-		<groupId>org.kermeta.eclipse</groupId>
-		<artifactId>com.ibm.icu</artifactId>
-		<version>[4.2.1.0,)</version>
-	</dependency>
-	<dependency>
-		<groupId>org.kermeta.eclipse</groupId>
-		<artifactId>org.eclipse.jface.text.source</artifactId>
-		<version>[3.6.1.0,)</version>
-	</dependency> -->
   </dependencies>
 </project>

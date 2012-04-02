@@ -39,8 +39,8 @@ public class SampleNewWizardPage extends WizardPage {
 	 */
 	public SampleNewWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("Multi-page Editor File");
-		setDescription("This wizard creates a new file with *.komprent extension that can be opened by a multi-page editor.");
+		setTitle("Kompren Textual Model Editor");
+		setDescription("This wizard creates a new file with *.komprent extension that can be opened by the Kompren Textual Editor.");
 		this.selection = selection;
 	}
 

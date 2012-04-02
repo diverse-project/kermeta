@@ -118,13 +118,12 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 		monitor.worked(1);
 	}
 	
+	
 	/**
 	 * We will initialize file contents with a sample text.
 	 */
-
 	private InputStream openContentStream() {
-		String contents =
-			"This is the initial file contents for *.komprent file that should be word-sorted in the Preview page of the multi-page editor";
+		String contents = "slicer strict FooSlicer {\n\tdomain:\"\"\n\tinput:\n\tslicedClass:\n\tslicedRelation:\n}\n";
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 

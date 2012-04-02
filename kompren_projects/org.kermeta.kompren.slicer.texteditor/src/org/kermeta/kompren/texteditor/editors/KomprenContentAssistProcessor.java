@@ -14,7 +14,6 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.kermeta.kompren.lexer.KomprenLexer;
 import org.kermeta.kompren.lexer.KomprenTokens.KomprenToken;
 
-
 public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 //	private KomprenEditor editor;
 //	private Autocompletion myAutocompletion = null;

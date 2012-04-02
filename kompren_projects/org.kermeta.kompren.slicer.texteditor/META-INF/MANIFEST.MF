@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.emf.workspace,
  org.eclipse.jface.text;bundle-version="3.6.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.kermeta.kompren.texteditor.editors,
-  org.kermeta.kompren.texteditor
+Export-Package: org.kermeta.kompren.slicer.texteditor.wizards,
+ org.kermeta.kompren.texteditor,
+ org.kermeta.kompren.texteditor.editors

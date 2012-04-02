@@ -47,6 +47,7 @@ public class KomprenEditorConfiguration extends TextSourceViewerConfiguration {
 	   return assistant;
 	}
 
+	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 		

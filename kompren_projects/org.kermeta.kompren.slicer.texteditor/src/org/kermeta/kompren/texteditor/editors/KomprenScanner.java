@@ -29,8 +29,8 @@ public class KomprenScanner implements KomprenTokenScanner {
     }
 
     
-    public void setRange(IDocument document, int offset, int length) {
-
+    @Override
+	public void setRange(IDocument document, int offset, int length) {
         try {
             // Note: do not try to parse only this range, recheck the whole document (more reliable)
             String content = document.get(0, document.getLength());
@@ -45,11 +45,13 @@ public class KomprenScanner implements KomprenTokenScanner {
         }
     }
 
-    public void setFileHasError(boolean fileHasError) {
+    @Override
+	public void setFileHasError(boolean fileHasError) {
         this.fileHasError = fileHasError;
     }
 
-    public IToken nextToken() {
+    @Override
+	public IToken nextToken() {
         if (currentTokenPosition >= (tokens.size() - 1)) {
             return org.eclipse.jface.text.rules.Token.EOF;
         }
@@ -92,26 +94,27 @@ public class KomprenScanner implements KomprenTokenScanner {
     }
 
 
-    public int getTokenOffset() {
-        if (currentToken == null) {
+    @Override
+	public int getTokenOffset() {
+        if (currentToken == null)
             return 0;
-        }
 
         return currentToken.getOffset();
 
     }
 
 
-    public int getTokenLength() {
-        if (currentToken == null) {
+    @Override
+	public int getTokenLength() {
+        if (currentToken == null)
             return 0;
-        }
 
         return currentToken.getLength();
     }
 
     @Override
     public void notifyFileClear() {
+    	//
     }
 
     @Override
@@ -124,7 +127,8 @@ public class KomprenScanner implements KomprenTokenScanner {
         return fileHasError;
     }
     
-    public IFile getCurrentFile() {
+    @Override
+	public IFile getCurrentFile() {
     	return ((FileEditorInput)editor.getEditorInput()).getFile();
     }
 }

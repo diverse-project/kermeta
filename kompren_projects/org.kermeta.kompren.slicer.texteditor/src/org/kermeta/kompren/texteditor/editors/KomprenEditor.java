@@ -15,6 +15,9 @@ public class KomprenEditor extends TextEditor {
 		setSourceViewerConfiguration(new KomprenEditorConfiguration(this, colorManager));
 		setDocumentProvider(new TextFileDocumentProvider());
 	}
+	
+	
+	@Override
 	public void dispose() {
 		colorManager.dispose();
 		super.dispose();
@@ -22,10 +25,8 @@ public class KomprenEditor extends TextEditor {
 
 	
     public IFile getFile() {
-    	if( getEditorInput() instanceof IFileEditorInput ) {
-            IFileEditorInput input = (IFileEditorInput)getEditorInput();
-            return input.getFile();
-        }
+    	if( getEditorInput() instanceof IFileEditorInput )
+            return ((IFileEditorInput)getEditorInput()).getFile();
     	return null;
     }
 }

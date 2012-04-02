@@ -124,11 +124,13 @@ public class KomprenCompletionProposal implements ICompletionProposal, ICompleti
 	}
 	
 	@Override
-	public void selected(ITextViewer arg0, boolean arg1) {		
+	public void selected(ITextViewer arg0, boolean arg1) {	
+		//
 	}
 	
 	@Override
-	public void unselected(ITextViewer arg0) {	
+	public void unselected(ITextViewer arg0) {
+		//
 	}
 	
 	@Override
