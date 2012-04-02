@@ -31,32 +31,29 @@
 			</resource>
 		</resources>
         <plugins>
-
-            <!-- Creation of the bundle jar and its manifest -->
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.1.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>org.kermeta.kompren.slicer.texteditor; singleton=true</Bundle-SymbolicName>
-                        <Bundle-Name>${project.name}</Bundle-Name>
-                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                        <Export-Package>
-                        	org2.kermeta.kompren.texteditor.*,
-                        	org2.kermeta.kompren.texteditor.editors.*
-                        </Export-Package>
-                        <Import-Package>
-                        	org.eclipse.emf.*,
-                        	org.osgi.framework;version="[1.5,2)",
-                        	*
-                        </Import-Package>
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                    </instructions>
-                </configuration>
-            </plugin>
+        <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>2.1.0</version>
+            <extensions>true</extensions>
+            <configuration>
+                <instructions>
+                    <Bundle-SymbolicName>org.kermeta.kompren.slicer.editor; singleton=true</Bundle-SymbolicName>
+                    <Bundle-Name>${project.name}</Bundle-Name>
+                    <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                    <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                    <Export-Package>
+                    	org2.kermeta.kompren.slicer.presentation.*
+                    </Export-Package>
+                    <Import-Package>
+                    	org.eclipse.emf.*,
+                    	org.osgi.framework;version="[1.5,2)",
+                    	*
+                    </Import-Package>
+                    <Bundle-ClassPath>.</Bundle-ClassPath>
+                </instructions>
+            </configuration>
+        </plugin>
         </plugins>
     </build>
 
