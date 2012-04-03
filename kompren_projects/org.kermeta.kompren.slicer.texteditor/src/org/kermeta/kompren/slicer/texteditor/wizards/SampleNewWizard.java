@@ -25,11 +25,12 @@ import org.eclipse.ui.ide.IDE;
  * as a template) is registered for the same extension, it will
  * be able to open it.
  */
-
 public class SampleNewWizard extends Wizard implements INewWizard {
 	private SampleNewWizardPage page;
 	private ISelection selection;
 
+	
+	
 	/**
 	 * Constructor for SampleNewWizard.
 	 */
@@ -38,12 +39,16 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 		setNeedsProgressMonitor(true);
 	}
 	
+	
+	
 	@Override
 	public void addPages() {
 		page = new SampleNewWizardPage(selection);
 		addPage(page);
 	}
 
+	
+	
 	@Override
 	public boolean performFinish() {
 		final String containerName = page.getContainerName();
@@ -78,11 +83,7 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 	 * the editor on the newly created file.
 	 */
 
-	void doFinish(
-		String containerName,
-		String fileName,
-		IProgressMonitor monitor)
-		throws CoreException {
+	void doFinish(final  String containerName, final String fileName, final IProgressMonitor monitor) throws CoreException {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -94,11 +95,10 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 		final IFile file = container.getFile(new Path(fileName));
 		try {
 			InputStream stream = openContentStream();
-			if (file.exists()) {
+			if (file.exists())
 				file.setContents(stream, true, true, monitor);
-			} else {
+			 else
 				file.create(stream, true, monitor);
-			}
 			stream.close();
 		} catch (IOException e) { //
 		}
@@ -119,6 +119,7 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 	}
 	
 	
+	
 	/**
 	 * We will initialize file contents with a sample text.
 	 */
@@ -127,14 +128,18 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 
-	private void throwCoreException(String message) throws CoreException {
+	
+	
+	private void throwCoreException(final String message) throws CoreException {
 		IStatus status =
 			new Status(IStatus.ERROR, "org.kermeta.kompren.slicer.texteditor", IStatus.OK, message, null);
 		throw new CoreException(status);
 	}
 
+	
+	
 	@Override
-	public void init(IWorkbench workbench, IStructuredSelection select) {
+	public void init(final IWorkbench workbench, final IStructuredSelection select) {
 		this.selection = select;
 	}
 }

@@ -14,10 +14,11 @@ public class EditorTextHover implements ITextHover {
 
 	private KomprenEditor textEditor;
 
-	public EditorTextHover(KomprenEditor editor) {
+	public EditorTextHover(final KomprenEditor editor) {
 		super();
 		textEditor = editor;
 	}
+	
 	
 	private IFile getFile() {
 		return ((IFileEditorInput) textEditor.getEditorInput()).getFile();
@@ -25,7 +26,7 @@ public class EditorTextHover implements ITextHover {
 
 	
 	@Override
-	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+	public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
 
 		try {
 			IMarker[] markers = getFile().findMarkers(IMarker.PROBLEM, true, 2);
@@ -43,8 +44,10 @@ public class EditorTextHover implements ITextHover {
 	
 	}
 
+	
+	
 	@Override
-	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
+	public IRegion getHoverRegion(final ITextViewer textViewer, final int offset) {
 		return new Region(offset, 0);
 	}
 }

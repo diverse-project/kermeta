@@ -27,7 +27,7 @@ public interface KomprenTokenScanner extends ITokenScanner {
 	 * Set the status of the file to a new value
 	 * @param fileHasError the new boolean value
 	 */
-	void setFileHasError(boolean fileHasError);
+	void setFileHasError(final boolean fileHasError);
 	
 	/**
 	 * Return the current IFile

@@ -25,7 +25,7 @@ public class KomprenEditor extends TextEditor {
 
 	
     public IFile getFile() {
-    	if( getEditorInput() instanceof IFileEditorInput )
+    	if(getEditorInput() instanceof IFileEditorInput)
             return ((IFileEditorInput)getEditorInput()).getFile();
     	return null;
     }

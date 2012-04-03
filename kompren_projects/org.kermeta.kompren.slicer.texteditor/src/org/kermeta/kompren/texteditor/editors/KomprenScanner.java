@@ -23,14 +23,17 @@ public class KomprenScanner implements KomprenTokenScanner {
     private Integer currentTokenPosition = -1;
     private KomprenToken currentToken = null;
 
-    public KomprenScanner(ColorManager _colorManager, KomprenEditor _editor) {
-        colorManager = _colorManager;
-        editor = _editor;
+    
+    
+    public KomprenScanner(final ColorManager cm, final KomprenEditor ke) {
+    	super();
+        colorManager = cm;
+        editor = ke;
     }
 
     
     @Override
-	public void setRange(IDocument document, int offset, int length) {
+	public void setRange(final IDocument document, final int offset, final int length) {
         try {
             // Note: do not try to parse only this range, recheck the whole document (more reliable)
             String content = document.get(0, document.getLength());
@@ -45,28 +48,30 @@ public class KomprenScanner implements KomprenTokenScanner {
         }
     }
 
+    
+    
     @Override
-	public void setFileHasError(boolean fileHasError) {
+	public void setFileHasError(final boolean fileHasError) {
         this.fileHasError = fileHasError;
     }
 
+    
+    
     @Override
 	public IToken nextToken() {
-        if (currentTokenPosition >= (tokens.size() - 1)) {
+        if (currentTokenPosition >= (tokens.size() - 1))
             return org.eclipse.jface.text.rules.Token.EOF;
-        }
 
         currentToken = tokens.get(currentTokenPosition);
         currentTokenPosition++;
         
-        if (currentToken instanceof org.kermeta.kompren.lexer.KomprenTokens.KEOF)
+        if(currentToken instanceof org.kermeta.kompren.lexer.KomprenTokens.KEOF)
             return org.eclipse.jface.text.rules.Token.EOF;
 
         RGB color = new RGB(0, 0, 0);
         int style = org.eclipse.swt.SWT.NORMAL;
-        if (currentToken instanceof org.kermeta.kompren.lexer.KomprenTokens.StringLit) {
+        if(currentToken instanceof org.kermeta.kompren.lexer.KomprenTokens.StringLit)
             color = new RGB(0, 0, 255);
-        }
         else if (currentToken instanceof org.kermeta.kompren.lexer.KomprenTokens.Keyword) {
             color = new RGB(128, 0, 0);
             style = SWT.BOLD;
@@ -96,11 +101,9 @@ public class KomprenScanner implements KomprenTokenScanner {
 
     @Override
 	public int getTokenOffset() {
-        if (currentToken == null)
+        if(currentToken==null)
             return 0;
-
         return currentToken.getOffset();
-
     }
 
 
@@ -108,24 +111,27 @@ public class KomprenScanner implements KomprenTokenScanner {
 	public int getTokenLength() {
         if (currentToken == null)
             return 0;
-
         return currentToken.getLength();
     }
 
+    
     @Override
     public void notifyFileClear() {
     	//
     }
 
+    
     @Override
     public void notifyFileHasError() {
         // Already done by each token on error (see public IToken nextToken() method)
     }
+    
 
     @Override
     public boolean isFileOnError() {
         return fileHasError;
     }
+    
     
     @Override
 	public IFile getCurrentFile() {

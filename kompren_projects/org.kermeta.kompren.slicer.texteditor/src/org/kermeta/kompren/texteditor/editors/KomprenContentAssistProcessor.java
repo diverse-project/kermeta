@@ -21,12 +21,15 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 	private StringBuffer identation = new StringBuffer();
 	private List<String> reserved = new org.kermeta.kompren.lexer.KomprenLexical().getReserved();
 
+	
 	public KomprenContentAssistProcessor(KomprenEditor editor) {
+		super();
 //		this.editor = editor;
 	}
 
+	
 	@Override
-	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer,	int documentOffset) {
+	public ICompletionProposal[] computeCompletionProposals(final ITextViewer viewer, final int documentOffset) {
 		// Retrieve current document
 		doc = viewer.getDocument();
 
@@ -53,7 +56,7 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	
-	private void initializeIdentation(String line) {
+	private void initializeIdentation(final String line) {
 		this.identation = new StringBuffer();
 		for(int i=0;i<line.length();i++)
 			if(line.charAt(i) == '\u0020' || line.charAt(i) == '\t')
@@ -63,7 +66,7 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 	}
 		
 	
-	private List<KomprenToken> getQualifier(IDocument doc, int documentOffset) {
+	private List<KomprenToken> getQualifier(final IDocument doc, final int documentOffset) {
 		// Use string buffer to collect characters
 		StringBuffer currentLine = new StringBuffer();
 		try {
@@ -86,14 +89,14 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 		return temp;	
 	}
 
-//	private boolean isTerminatedbyKeyword(List<KomprenToken> qualifier) {
+//	private boolean isTerminatedbyKeyword(final List<KomprenToken> qualifier) {
 //		if (qualifier.get(qualifier.size()-1).getClass().getSimpleName().equals("Keyword")) {
 //			return true;
 //		}
 //		return false;
 //	}
 
-//	private String getDelimiter(List<KomprenToken> qualifier) {
+//	private String getDelimiter(final List<KomprenToken> qualifier) {
 //		int i = qualifier.size();
 //		while (--i >= 0) {
 //			if (qualifier.get(i).getClass().getSimpleName().equals("Delimiter")) {
@@ -104,19 +107,17 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 //		return "";
 //	}
 
-//	private KomprenToken getLast(List<KomprenToken> qualifier) {
+//	private KomprenToken getLast(final List<KomprenToken> qualifier) {
 //		return qualifier.get(qualifier.size()-1);
 //	}
 	
-	private String getLastIdentifier(List<KomprenToken> qualifier) {
-		if (qualifier.get(qualifier.size()-1).getClass().getSimpleName().equals("Identifier")) {
+	private String getLastIdentifier(final List<KomprenToken> qualifier) {
+		if(qualifier.get(qualifier.size()-1).getClass().getSimpleName().equals("Identifier"))
 			return qualifier.get(qualifier.size()-1).toString();
-		}
-
 		return "";
 	}
 
-//	private String getLastKeyword(List<KomprenToken> qualifier) {
+//	private String getLastKeyword(final List<KomprenToken> qualifier) {
 //		int i = qualifier.size();
 //		while (--i >= 0) {
 //			if (qualifier.get(i).getClass().getSimpleName().equals("Keyword")) {
@@ -127,7 +128,7 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 //		return "";
 //	}
 	
-//	private String getLastCompletePackageChain(List<KomprenToken> qualifier, boolean withTheLast) {
+//	private String getLastCompletePackageChain(final List<KomprenToken> qualifier, final boolean withTheLast) {
 //		StringBuffer result = new StringBuffer();
 //		boolean current = false;
 //		for (int i = 0;i<qualifier.size();i++) {
@@ -167,8 +168,7 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 //		return result.toString();
 //	}
 
-	private void computeProposals(List<KomprenToken> qualifier, int documentOffset, List<KomprenCompletionProposal> propList) { 
-
+	private void computeProposals(final List<KomprenToken> qualifier, final int documentOffset, final List<KomprenCompletionProposal> propList) { 
 		int qlen = getLastIdentifier(qualifier).length();
 
 //		List<String> theVariables = null;
@@ -212,7 +212,8 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 	}
 	
 
-	private void proposeKeywords(List<KomprenToken> qualifier, int documentOffset, List<KomprenCompletionProposal> propList, int qlen, List<String> reserved2) {
+	private void proposeKeywords(final List<KomprenToken> qualifier, final int documentOffset, final List<KomprenCompletionProposal> propList, 
+								final int qlen, final List<String> reserved2) {
 //		String lastQualifier = getLastIdentifier(qualifier);
 		
 		for (String oneWord : reserved2) {
@@ -378,7 +379,7 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 	
 
 	@Override
-	public IContextInformation[] computeContextInformation(ITextViewer arg0, int arg1) {
+	public IContextInformation[] computeContextInformation(final ITextViewer arg0, final int arg1) {
 		return null;
 	}
 

@@ -26,7 +26,6 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  * as the file name. The page will only accept file name without the extension
  * OR with the extension that matches the expected one (komprent).
  */
-
 public class SampleNewWizardPage extends WizardPage {
 	private Text containerText;
 
@@ -34,18 +33,22 @@ public class SampleNewWizardPage extends WizardPage {
 
 	private ISelection selection;
 
+	
+	
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 */
-	public SampleNewWizardPage(ISelection selection) {
+	public SampleNewWizardPage(final ISelection selection) {
 		super("wizardPage");
 		setTitle("Kompren Textual Model Editor");
 		setDescription("This wizard creates a new file with *.komprent extension that can be opened by the Kompren Textual Editor.");
 		this.selection = selection;
 	}
+	
+	
 
 	@Override
-	public void createControl(Composite parent) {
+	public void createControl(final Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
@@ -88,6 +91,8 @@ public class SampleNewWizardPage extends WizardPage {
 		dialogChanged();
 		setControl(container);
 	}
+	
+	
 
 	/**
 	 * Tests if the current workbench selection is a suitable container to use.
@@ -112,6 +117,8 @@ public class SampleNewWizardPage extends WizardPage {
 		fileText.setText("mySlicer.komprent");
 	}
 
+	
+	
 	/**
 	 * Uses the standard container selection dialog to choose the new value for
 	 * the container field.
@@ -119,48 +126,46 @@ public class SampleNewWizardPage extends WizardPage {
 
 	void handleBrowse() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(
-				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
-				"Select new file container");
+				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, "Select new file container");
 		if (dialog.open() == Window.OK) {
 			Object[] result = dialog.getResult();
-			if (result.length == 1) {
+			if(result.length == 1)
 				containerText.setText(((Path) result[0]).toString());
-			}
 		}
 	}
 
+	
+	
 	/**
 	 * Ensures that both text fields are set.
 	 */
-
 	void dialogChanged() {
-		IResource container = ResourcesPlugin.getWorkspace().getRoot()
-				.findMember(new Path(getContainerName()));
+		IResource container = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getContainerName()));
 		String fileName = getFileName();
 
-		if (getContainerName().length() == 0) {
+		if(getContainerName().length() == 0) {
 			updateStatus("File container must be specified");
 			return;
 		}
-		if (container == null
+		if(container == null
 				|| (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
 			updateStatus("File container must exist");
 			return;
 		}
-		if (!container.isAccessible()) {
+		if(!container.isAccessible()) {
 			updateStatus("Project must be writable");
 			return;
 		}
-		if (fileName.length() == 0) {
+		if(fileName.length() == 0) {
 			updateStatus("File name must be specified");
 			return;
 		}
-		if (fileName.replace('\\', '/').indexOf('/', 1) > 0) {
+		if(fileName.replace('\\', '/').indexOf('/', 1) > 0) {
 			updateStatus("File name must be valid");
 			return;
 		}
 		int dotLoc = fileName.lastIndexOf('.');
-		if (dotLoc != -1) {
+		if(dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
 			if (ext.equalsIgnoreCase("komprent") == false) {
 				updateStatus("File extension must be \"komprent\"");
@@ -170,14 +175,20 @@ public class SampleNewWizardPage extends WizardPage {
 		updateStatus(null);
 	}
 
-	private void updateStatus(String message) {
+	
+	
+	private void updateStatus(final String message) {
 		setErrorMessage(message);
 		setPageComplete(message == null);
 	}
+	
+	
 
 	public String getContainerName() {
 		return containerText.getText();
 	}
+	
+	
 
 	public String getFileName() {
 		return fileText.getText();

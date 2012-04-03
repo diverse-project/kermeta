@@ -13,7 +13,6 @@ import org.osgi.framework.BundleContext;
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
-
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.kermeta.kompren.texteditor"; //$NON-NLS-1$
 
@@ -25,6 +24,8 @@ public class Activator extends AbstractUIPlugin {
 	
 	protected MessagingSystem messaggingSystem;
 	
+	
+	
 	/**
 	 * The constructor
 	 */
@@ -34,7 +35,7 @@ public class Activator extends AbstractUIPlugin {
 
 	
 	@Override
-	public void start(BundleContext context) throws Exception {
+	public void start(final BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
 		messaggingSystem = new EclipseMessagingSystem("", "Kompren editor console");
@@ -42,11 +43,12 @@ public class Activator extends AbstractUIPlugin {
 
 	
 	@Override
-	public void stop(BundleContext context) throws Exception {
+	public void stop(final BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
 
+	
 	/**
 	 * Returns the shared instance
 	 *
@@ -66,6 +68,7 @@ public class Activator extends AbstractUIPlugin {
 //	public static ImageDescriptor getImageDescriptor(String path) {
 //		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 //	}
+	
 	
 	public MessagingSystem getMessaggingSystem() {
 		return messaggingSystem;

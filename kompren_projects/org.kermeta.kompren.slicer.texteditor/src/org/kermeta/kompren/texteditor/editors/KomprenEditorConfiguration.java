@@ -20,14 +20,15 @@ public class KomprenEditorConfiguration extends TextSourceViewerConfiguration {
 	// @param editor
 	// @param colorManager
 	///
-	public KomprenEditorConfiguration(KomprenEditor editor, ColorManager colorManager) {
+	public KomprenEditorConfiguration(final KomprenEditor editor, final ColorManager colorManager) {
+		super();
 		this.theEditor = editor;
 		this.colorManager = colorManager;
 	}
 	
+	
 	@Override
-	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-		
+	public IContentAssistant getContentAssistant(final ISourceViewer sourceViewer) {
 		// Create content assistant
 	   ContentAssistant assistant = new ContentAssistant();
 	   
@@ -46,16 +47,17 @@ public class KomprenEditorConfiguration extends TextSourceViewerConfiguration {
 	   // Return the content assistant   
 	   return assistant;
 	}
+	
 
 	@Override
-	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
+	public IPresentationReconciler getPresentationReconciler(final ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
-		
 		ScannerBasedDamagerRepairer repairer = new ScannerBasedDamagerRepairer(getScanner());
 		reconciler.setDamager(repairer, org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(repairer, org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;
 	}
+	
 	
 	// @param fileExtension
 	// @return
@@ -63,11 +65,11 @@ public class KomprenEditorConfiguration extends TextSourceViewerConfiguration {
 		return new KomprenScanner(colorManager,theEditor);
 	}
 	
+	
 	@Override
-	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-		if ( theEditor.getFile() == null )
+	public ITextHover getTextHover(final ISourceViewer sourceViewer, final String contentType) {
+		if(theEditor.getFile()==null)
 			return null;
 		return new EditorTextHover(theEditor);
 	}
-	
 }
