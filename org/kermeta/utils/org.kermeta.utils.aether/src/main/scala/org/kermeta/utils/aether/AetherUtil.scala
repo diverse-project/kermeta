@@ -125,27 +125,31 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     val session = new MavenRepositorySystemSession()
     session.setTransferListener(new TransferListener(){
       def transferInitiated(p1: TransferEvent) {
-        messagingSystem.debug("Transfert init for Artifact "+p1.getResource.getResourceName, baseMsgGroup)
+        messagingSystem.initProgress(msgGroup+session.hashCode(),"Transfert init for Artifact "+p1.getResource.getResourceName,msgGroup, 1 )
+        //messagingSystem.debug("Transfert init for Artifact "+p1.getResource.getResourceName, progressGroup)
       }
 
       def transferStarted(p1: TransferEvent) {
-        messagingSystem.debug("Transfert begin for Artifact "+p1.getResource.getResourceName, baseMsgGroup)
+        messagingSystem.debug("Transfert begin for Artifact "+p1.getResource.getResourceName, msgGroup)
       }
 
       def transferProgressed(p1: TransferEvent) {
-        messagingSystem.debug("Transfert in progress for Artifact "+p1.getResource.getResourceName, baseMsgGroup)
+        messagingSystem.debug("Transfert in progress for Artifact "+p1.getResource.getResourceName +"("+p1.getTransferredBytes()+"/"+p1.getDataLength()+")", msgGroup)
       }
 
       def transferCorrupted(p1: TransferEvent) {
-        messagingSystem.error("TransfertCorrupted : "+p1.getResource.getResourceName, baseMsgGroup)
+        messagingSystem.doneProgress(msgGroup+session.hashCode(), "TransfertCorrupted : "+p1.getResource.getResourceName, msgGroup)
+        messagingSystem.error("TransfertCorrupted : "+p1.getResource.getResourceName, msgGroup)
       }
 
       def transferSucceeded(p1: TransferEvent) {
-        messagingSystem.debug("Transfert succeeded for Artifact "+p1.getResource.getResourceName, baseMsgGroup)
+        messagingSystem.doneProgress(msgGroup+session.hashCode(), "Transfert succeeded for Artifact "+p1.getResource.getResourceName, msgGroup)
+        messagingSystem.debug("Transfert succeeded for Artifact "+p1.getResource.getResourceName, msgGroup)
       }
 
       def transferFailed(p1: TransferEvent) {
-        messagingSystem.error("TransferFailed : "+p1.getResource.getResourceName, baseMsgGroup)
+        messagingSystem.doneProgress(msgGroup+session.hashCode(), "TransferFailed : "+p1.getResource.getResourceName, msgGroup)
+        messagingSystem.error("TransferFailed : "+p1.getResource.getResourceName, msgGroup)
       }
     })
     session.setUpdatePolicy(RepositoryPolicy.UPDATE_POLICY_ALWAYS)
@@ -166,6 +170,13 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     session.getConfigProperties.put(ConfigurationProperties.REQUEST_TIMEOUT, 2000.asInstanceOf[java.lang.Integer])
     session.getConfigProperties.put(ConfigurationProperties.CONNECT_TIMEOUT, 1000.asInstanceOf[java.lang.Integer])
     session
+  }
+  
+  val msgGroup :String = {
+    if(baseMsgGroup.equals("")) 
+      this.getClass().getName()+hashCode()
+    else  
+      baseMsgGroup+"."+this.getClass().getName()+hashCode()
   }
 
 }
