@@ -16,7 +16,7 @@ class KomprenLexical extends Lexical with KomprenTokens {
   def eof = elem("eof", ch => ch == EofCh)
   protected def kident(name: String) : KomprenToken = if (reserved contains name) Keyword(name) else Identifier(name)
   override def whitespace: Parser[Any] = rep(whitespaceChar)
-  val reserved : HashSet[String] = HashSet("slicer","strict","soft","active","domain","input","slicedClass","slicedProperty","radius","constraint",
+  val reserved : HashSet[String] = HashSet("slicer","strict","active","domain","input","slicedClass","slicedProperty","radius","constraint",
       "onStart","onEnd","helper","option","opposite")
   val delimiters : HashSet[String] = HashSet(":","{","}",",","(",")","]]","[[")
 
