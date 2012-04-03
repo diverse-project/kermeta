@@ -214,20 +214,12 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	
+	
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if(eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (varName: ");
-		result.append(varName);
-		result.append(')');
-		return result.toString();
+		return varName;
 	}
-
-} //VarDeclImpl
+}

@@ -90,6 +90,31 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	protected SlicedPropertyImpl() {
 		super();
 	}
+	
+	
+	@Override
+	public String toString() {
+		final StringBuilder result = new StringBuilder("slicedProperty: ").append(domain.getName());
+		
+		if(isOption)
+			result.append(" option");
+		
+		if(opposite!=null)
+			result.append(' ').append(opposite);
+		
+		if(src!=null)
+			result.append(' ').append(src);
+		
+		if(tgt!=null)
+			result.append(' ').append(tgt);
+		
+		if(expression!=null && expression.length()>0)
+			result.append(" [[").append(expression).append("]]");
+		
+		return result.toString();
+	}
+	
+	
 
 	/**
 	 * <!-- begin-user-doc -->

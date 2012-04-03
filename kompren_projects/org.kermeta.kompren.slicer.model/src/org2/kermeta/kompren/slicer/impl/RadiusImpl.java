@@ -57,6 +57,22 @@ public class RadiusImpl extends EObjectImpl implements Radius {
 	protected RadiusImpl() {
 		super();
 	}
+	
+	
+	@Override
+	public String toString() {
+		final StringBuilder result = new StringBuilder("radius: ");
+		
+		if(!focusedClasses.isEmpty()) {
+			result.append(focusedClasses.get(0).getDomain().getName());
+			
+			for(int i=1, size=focusedClasses.size(); i<size; i++)
+				result.append(", ").append(focusedClasses.get(i).getDomain().getName());
+		}
+		
+		return result.toString();
+	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->

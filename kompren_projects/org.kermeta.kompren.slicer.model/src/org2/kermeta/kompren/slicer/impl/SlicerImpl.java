@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org2.kermeta.kompren.slicer.Constraint;
 import org2.kermeta.kompren.slicer.Radius;
+import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicedElement;
 import org2.kermeta.kompren.slicer.Slicer;
 import org2.kermeta.kompren.slicer.SlicerPackage;
@@ -663,31 +664,52 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if(eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", uriMetamodel: ");
-		result.append(uriMetamodel);
-		result.append(", active: ");
-		result.append(active);
-		result.append(", strict: ");
-		result.append(strict);
-		result.append(", helper: ");
-		result.append(helper);
-		result.append(", onStart: ");
-		result.append(onStart);
-		result.append(", onEnd: ");
-		result.append(onEnd);
-		result.append(')');
+		final StringBuilder result = new StringBuilder("slicer");
+		
+		if(strict) result.append(" strict");
+		if(active) result.append(" active");
+		result.append(' ').append(name).append('{').append('\n');
+		result.append("\tdomain: \"").append(uriMetamodel).append("\"\n");
+		
+		if(!inputClasses.isEmpty()) {
+			result.append("\tinput: ").append(inputClasses.get(0).getName());
+			
+			for(int i=1, size=inputClasses.size(); i<size; i++)
+				result.append(", ").append(inputClasses.get(i).getName());
+			
+			result.append('\n');
+		}
+		
+		if(radius!=null)
+			result.append('\t').append(radius).append('\n');
+		
+		for(final Constraint ct : constraints)
+			result.append('\t').append(ct).append('\n');
+		
+		for(final SlicedElement se : slicedElements)
+			if(se instanceof SlicedClass)
+				result.append('\t').append(se).append('\n');
+		
+		for(final SlicedElement se : slicedElements)
+			if(se instanceof SlicedElement)
+				result.append('\t').append(se).append('\n');
+
+		if(onStart!=null && onStart.length()>0)
+			result.append("\tonStart [[").append(onStart).append("]]\n");
+		
+		if(onEnd!=null && onEnd.length()>0)
+			result.append("\tonEnd [[").append(onEnd).append("]]\n");
+		
+		if(helper!=null && helper.length()>0)
+			result.append("\thelper [[").append(helper).append("]]\n");
+
+		result.append("}\n");
+		
 		return result.toString();
 	}
 

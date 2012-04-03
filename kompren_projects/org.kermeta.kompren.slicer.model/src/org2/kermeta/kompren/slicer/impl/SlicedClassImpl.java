@@ -66,6 +66,24 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	protected SlicedClassImpl() {
 		super();
 	}
+	
+	
+	@Override
+	public String toString() {
+		final StringBuilder result = new StringBuilder("slicedClass: ").append(domain.getName());
+		
+		if(isOption)
+			result.append(" option");
+		
+		if(ctx!=null)
+			result.append(' ').append(ctx);
+		
+		if(expression!=null && expression.length()>0)
+			result.append(" [[").append(expression).append("]]");
+		
+		return result.toString();
+	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->

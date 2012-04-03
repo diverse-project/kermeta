@@ -205,22 +205,12 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+
+	
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if(eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (expression: ");
-		result.append(expression);
-		result.append(", name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
+		return "constraint: " + name + "[[" + expression + "]]";
 	}
-
 } //ConstraintImpl
