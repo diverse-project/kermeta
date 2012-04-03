@@ -28,6 +28,14 @@
    <url>
       <discovery label="Kermeta 2 update site" url="http://www.kermeta.org/integration_build/kermeta2/update/"/>
    </url>
+   
+   <requires>
+      <import plugin="org.kermeta.language.model"/>
+      <import plugin="org.kermeta.scala.scala-library"/>
+      <import plugin="org.kermeta.scala.scala-compiler"/>
+      <import plugin="org.kermeta.scala.jline"/>
+      <import plugin="org.kermeta.language.library.core"/>
+   </requires>
 
    <plugin
          id="org.kermeta.kompren.slicer.parser"
