@@ -286,7 +286,10 @@ public class KermetaCompiler {
 			flushProblems(FileHelpers.StringToURL(kpFileURL));
 			String projectName = "project";
 	
-			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, 8);
+			int workUnit = 4;
+			if(checkingEnabled) workUnit = workUnit+4;
+			if(!generateKmOnly) workUnit = workUnit+2;
+			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, workUnit);
 			KpLoaderImpl ldr = new KpLoaderImpl(logger);
 	
 			// Load KP file
@@ -756,14 +759,22 @@ public class KermetaCompiler {
 					}
 					else if(jarURL.getProtocol().equals("mvn")){
 						File theFile;
+						//logger.debug("aether retreiveing : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
 						AetherUtil aetherUtil = new AetherUtil(logger,getMainProgressGroup());
-						theFile = aetherUtil.resolveMavenArtifact(jarURL.toString());
-						if(theFile.exists()){
-							result.add(theFile.getAbsolutePath());
+						try{
+							theFile = aetherUtil.resolveMavenArtifact(jarURL.toString(), "http://maven.inria.fr/artifactory/repo");
+							if(theFile.exists()){
+								result.add(theFile.getAbsolutePath());
+								//logger.debug("Retreived : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+							}
+							else{
+								logger.debug("File not found using aether : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+								// try next URL fo this dependency
+								continue;
+							}
 						}
-						else{
-							// try next URL fo this dependency
-							continue;
+						catch(Throwable e){
+							logger.error("File not found using aether : " + dependencyURLWithVariable +" "+e.getMessage(), LOG_MESSAGE_GROUP,e);
 						}
 					}
 				}

@@ -68,38 +68,45 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     		val urlids = url.substring(url.indexOf("!") + 1)
     		val part = urlids.split("/")
     		if (part.size == 3) {
-    			file = resolveMavenArtifact(part(1), part(0), part(2), List(repourl))
+    			file = resolveMavenArtifact(part(0), part(1), part(2), List(repourl))
     		} else { 
-    			throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version>")
+    			throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version> " +mavenurl)
     		}
     	}
     	if (file == null) {
-        val part = mavenurl.split("/")
-        if (part.size == 3) {
-          file = resolveMavenArtifact(part(1), part(0), part(2), repositoriesUrl)
-        } else {
-    		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version>")
-        }
-      }
+	        val part = url.split("/")
+	        if (part.size == 3) {
+	          file = resolveMavenArtifact(part(0), part(1), part(2), repositoriesUrl)
+	        } else {
+	    		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version> " +mavenurl)
+	        }
+    	}
     }
     else {
-		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version>")
+		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version> " +mavenurl)
     }
     file
   }
   
-  def resolveMavenArtifact(mavenurl: String): File = {
-    val repositoriesUrl :List[String] = List()
-    resolveMavenArtifact(mavenurl, repositoriesUrl)
+  def resolveMavenArtifact(mavenurl: String, repoURL: String): File = {
+    val repositoriesUrl :List[String] = List(repoURL)
+   // try{
+    	resolveMavenArtifact(mavenurl, repositoriesUrl)
+    /*} catch {
+        case _@e => {
+          e.printStackTrace()
+          null
+        }
+      }*/
   }
-  def resolveMavenArtifact4J(unitName: String, groupName: String, version: String, repositoriesUrl: java.util.List[String]): File =
-    resolveMavenArtifact(unitName, groupName, version, repositoriesUrl.toList)
+  def resolveMavenArtifact4J(groupID: String, artifactID: String, version: String, repositoriesUrl: java.util.List[String]): File =
+    resolveMavenArtifact(groupID, artifactID,  version, repositoriesUrl.toList)
   def resolveMavenArtifact4J(mavenurl: String, repositoriesUrl: java.util.List[String]): File =
     resolveMavenArtifact(mavenurl, repositoriesUrl.toList)
   
-  def resolveMavenArtifact(unitName: String, groupName: String, version: String, repoURL: String): File = {    
+  def resolveMavenArtifact(groupID: String, artifactID: String, version: String, repoURL: String): File = {    
     val repositoriesUrl :List[String] = List(repoURL)
-    resolveMavenArtifact(unitName, groupName, version, repositoriesUrl)
+    resolveMavenArtifact( groupID, artifactID, version, repositoriesUrl)
   }
   
   def resolveMavenArtifact(groupID: String, artifactID: String, version: String, repositoriesUrl: List[String]): File = {
@@ -134,8 +141,8 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     val session = new MavenRepositorySystemSession()
     session.setTransferListener(new TransferListener(){
       def transferInitiated(p1: TransferEvent) {
-        messagingSystem.initProgress(msgGroup+session.hashCode(),"Transfert init for Artifact "+p1.getResource.getResourceName,msgGroup, 1 )
-        //messagingSystem.debug("Transfert init for Artifact "+p1.getResource.getResourceName, progressGroup)
+        messagingSystem.initProgress(msgGroup+"."+session.hashCode(),"Transfert init for Artifact "+p1.getResource.getResourceName,msgGroup, 1 )
+        messagingSystem.debug("Transfert init for Artifact "+p1.getResource.getResourceName, msgGroup)
       }
 
       def transferStarted(p1: TransferEvent) {
@@ -152,12 +159,12 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
       }
 
       def transferSucceeded(p1: TransferEvent) {
-        messagingSystem.doneProgress(msgGroup+session.hashCode(), "Transfert succeeded for Artifact "+p1.getResource.getResourceName, msgGroup)
+        messagingSystem.doneProgress(msgGroup+"."+session.hashCode(), "Transfert succeeded for Artifact "+p1.getResource.getResourceName, msgGroup)
         messagingSystem.debug("Transfert succeeded for Artifact "+p1.getResource.getResourceName, msgGroup)
       }
 
       def transferFailed(p1: TransferEvent) {
-        messagingSystem.doneProgress(msgGroup+session.hashCode(), "TransferFailed : "+p1.getResource.getResourceName, msgGroup)
+        messagingSystem.doneProgress(msgGroup+"."+session.hashCode(), "TransferFailed : "+p1.getResource.getResourceName, msgGroup)
         messagingSystem.error("TransferFailed : "+p1.getResource.getResourceName, msgGroup)
       }
     })
@@ -170,12 +177,12 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
       val configRoot = scala.xml.XML.loadFile(configFile)
       configRoot.child.find(c => c.label == "localRepository").map {
         localRepo =>
-          //logger.info("Found localRepository value from settings.xml in user path => " + localRepo.text)
-          session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(localRepo.text)))
+    		messagingSystem.debug("Found localRepository value from settings.xml in user path => " + localRepo.text, msgGroup)
+    		session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(localRepo.text)))
       }
-    } /*else {
-      logger.debug("settings.xml not found")
-    }*/
+    } else {
+    	messagingSystem.debug("settings.xml not found", msgGroup)
+    }
     session.getConfigProperties.put(ConfigurationProperties.REQUEST_TIMEOUT, 2000.asInstanceOf[java.lang.Integer])
     session.getConfigProperties.put(ConfigurationProperties.CONNECT_TIMEOUT, 1000.asInstanceOf[java.lang.Integer])
     session
