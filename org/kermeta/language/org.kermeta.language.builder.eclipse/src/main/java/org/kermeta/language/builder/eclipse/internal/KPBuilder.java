@@ -291,10 +291,10 @@ public class KPBuilder {
 			
 			if (andRun) {
 				isBuildNeeded = checkIfBuildIsNeeded();
-				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building before run "+kpFileURL, this.getClass().toString(), 5);				
+				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building before run "+kpFileURL, this.getClass().toString(), 8);				
 			}
 			else{
-				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building "+kpFileURL, this.getClass().toString(), 5);				
+				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building "+kpFileURL, this.getClass().toString(), 8);				
 			}
 
 			
