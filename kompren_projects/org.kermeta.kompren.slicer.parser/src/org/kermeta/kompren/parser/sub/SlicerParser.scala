@@ -12,7 +12,7 @@ with RadiusParser
 with ConstraintParser 
 with SlicedClassParser 
 with SlicedPropertyParser {
-  def parseSlicer : Parser[Slicer] = "slicer" ~ ("soft" | "strict") ~ opt("active") ~ ident ~ "{" ~ parseDomain ~ parseInput ~ 
+  def parseSlicer : Parser[Slicer] = "slicer" ~ opt("strict") ~ opt("active") ~ ident ~ "{" ~ parseDomain ~ parseInput ~ 
 		  			opt(parseRadius) ~ (parseConstraints*) ~ (parseSlicedClass*) ~ (parseSlicedProperty*) ~ opt(parseOnStart) ~ 
 		  			opt(parseOnEnd) ~ opt(parseHelper) ~ "}" ^^ { 
     case _ ~ soft ~ active ~ name ~ _ ~ domain ~ inputs ~ radius ~ constraints ~ slicedClasses ~ slicedProps ~ onStart ~ onEnd ~ helper ~ _ =>
@@ -20,8 +20,8 @@ with SlicedPropertyParser {
     var slicedElements : List[SlicedElement] = slicedClasses ++ slicedProps
     
     soft match {
-	    case "strict" => slicer.setStrict(true)
-	    case "soft" => slicer.setStrict(false)
+	    case Some(_) => slicer.setStrict(true)
+	    case _ => slicer.setStrict(false)
     }
     
     slicer.setName(name)

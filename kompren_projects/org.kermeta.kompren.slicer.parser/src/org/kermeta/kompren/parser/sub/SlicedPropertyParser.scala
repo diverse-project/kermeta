@@ -11,8 +11,8 @@ import org2.kermeta.kompren.slicer.SlicerFactory
 
 trait SlicedPropertyParser extends KomprenAbstractParser {
 	def parseSlicedProperty : Parser[SlicedProperty] = "slicedProperty" ~ ":" ~ (pointedIdent | ident) ~ opt("option") ~ opt(parserOpposite) ~ 
-	opt(ident) ~ opt(ident) ~ opt(blockCode) ~ opt(blockCode) ^^ {
-	  case _ ~ _ ~ name ~ option ~ opp ~ nameVar1 ~ nameVar2 ~ exp ~ expOnRemove =>
+	opt(ident) ~ opt(ident) ~ opt(blockCode) ^^ {
+	  case _ ~ _ ~ name ~ option ~ opp ~ nameVar1 ~ nameVar2 ~ exp =>
 	    val slicedProp = SlicerFactory.eINSTANCE.createSlicedProperty
 	    val ref : EReference = EcoreFactory.eINSTANCE.createEReference
 	    
@@ -20,7 +20,6 @@ trait SlicedPropertyParser extends KomprenAbstractParser {
 	    slicedProp.setDomain(ref)
 	    slicedProp.setOpposite(if(opp.isDefined) opp.get else null)
 	    slicedProp.setExpression(if(exp.isDefined) exp.get else null)
-	    slicedProp.setExpOnRemove(if(expOnRemove.isDefined) expOnRemove.get else null)
 	    slicedProp.setIsOption(option.isDefined && option.get.equals("option"))
 
 	    if(nameVar1.isDefined) {
