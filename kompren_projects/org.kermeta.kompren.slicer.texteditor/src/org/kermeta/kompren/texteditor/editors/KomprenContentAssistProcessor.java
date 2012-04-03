@@ -66,14 +66,16 @@ public class KomprenContentAssistProcessor implements IContentAssistProcessor {
 	}
 		
 	
-	private List<KomprenToken> getQualifier(final IDocument doc, final int documentOffset) {
+	private List<KomprenToken> getQualifier(final IDocument document, final int documentOffset) {
 		// Use string buffer to collect characters
 		StringBuffer currentLine = new StringBuffer();
+		int offset = documentOffset;
+		
 		try {
-			char c = doc.getChar(--documentOffset);
+			char c = document.getChar(--offset);
 			while (c != '\n' && c != '\r') {
 				currentLine.append(c);
-				c = doc.getChar(--documentOffset);
+				c = document.getChar(--offset);
 			}
 		} catch (BadLocationException e1) {}
 

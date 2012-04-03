@@ -11,9 +11,9 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
 public class EditorTextHover implements ITextHover {
-
 	private KomprenEditor textEditor;
 
+	
 	public EditorTextHover(final KomprenEditor editor) {
 		super();
 		textEditor = editor;
@@ -21,27 +21,28 @@ public class EditorTextHover implements ITextHover {
 	
 	
 	private IFile getFile() {
-		return ((IFileEditorInput) textEditor.getEditorInput()).getFile();
+		return ((IFileEditorInput)textEditor.getEditorInput()).getFile();
 	}
 
 	
 	@Override
 	public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
+		try{
+			final IMarker[] markers = getFile().findMarkers(IMarker.PROBLEM, true, 2);
 
-		try {
-			IMarker[] markers = getFile().findMarkers(IMarker.PROBLEM, true, 2);
 			for (int i=0; i<markers.length; i++) {
 				int start = MarkerUtilities.getCharStart(markers[i]);
 				int end = MarkerUtilities.getCharEnd(markers[i]);
 				int offset = hoverRegion.getOffset();
-				if (offset >= start && offset <=end) return MarkerUtilities.getMessage(markers[i]);
+				
+				if(offset >= start && offset <=end) 
+					return MarkerUtilities.getMessage(markers[i]);
 			}
-		} catch (CoreException e) {
+		}catch(CoreException e) {
 			System.err.println("error computing hover info : " + e.getMessage());
 		}
 		
 		return null;
-	
 	}
 
 	
