@@ -63,7 +63,7 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     var file: File = null
     if (mavenurl.startsWith("mvn:")) {
     	val url = mavenurl.substring(4)
-    	if (url.startsWith("http://")) {
+    	if (url.contains("!")) {
     		val repourl = url.substring(0, url.indexOf("!"))
     		val urlids = url.substring(url.indexOf("!") + 1)
     		val part = urlids.split("/")
@@ -82,11 +82,20 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
         }
       }
     }
+    else {
+		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version>")
+    }
     file
   }
   
+  def resolveMavenArtifact(mavenurl: String): File = {
+    val repositoriesUrl :List[String] = List()
+    resolveMavenArtifact(mavenurl, repositoriesUrl)
+  }
   def resolveMavenArtifact4J(unitName: String, groupName: String, version: String, repositoriesUrl: java.util.List[String]): File =
     resolveMavenArtifact(unitName, groupName, version, repositoriesUrl.toList)
+  def resolveMavenArtifact4J(mavenurl: String, repositoriesUrl: java.util.List[String]): File =
+    resolveMavenArtifact(mavenurl, repositoriesUrl.toList)
   
   def resolveMavenArtifact(unitName: String, groupName: String, version: String, repoURL: String): File = {    
     val repositoriesUrl :List[String] = List(repoURL)

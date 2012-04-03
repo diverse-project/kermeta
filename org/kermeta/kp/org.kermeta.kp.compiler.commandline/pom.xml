@@ -259,8 +259,7 @@
 		<dependency> <!-- need to be before km2bytecode in order to ensure the version of maven for aether -->
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.aether</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
+			<version>${utils.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>

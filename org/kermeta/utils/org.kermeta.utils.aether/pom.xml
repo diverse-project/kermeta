@@ -94,9 +94,12 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
-                        <Import-Package>!org.kermeta.utils.aether.*,*</Import-Package>
-                        <Export-Package>org.kermeta.utils.aether.*,                                
+                        <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>                        
+                        <Export-Package>
+                        	org.kermeta.utils.aether.*
+                        </Export-Package>                        
+                        <Private-Package>
+                        		com.google.protobuf,                                
                         	    org.sonatype.*,
                                 org.apache.maven.repository.*,
                                 org.apache.maven.model.*,
@@ -107,7 +110,15 @@
                                 org.codehaus.plexus.interpolation.*,
                                 org.codehaus.plexus.util.*,
                                 org.apache.maven.wagon.*
-                        </Export-Package>
+                        </Private-Package>
+                        <Import-Package>
+                        	!org.kermeta.utils.aether.*,
+                        	!com.*,
+                        	!org.sonatype.*,
+                        	!org.codehaus.plexus.*,
+                            !org.jboss.logging.*,
+                        	*
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

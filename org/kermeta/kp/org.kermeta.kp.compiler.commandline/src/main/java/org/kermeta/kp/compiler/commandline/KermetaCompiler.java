@@ -64,6 +64,7 @@ import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeDefinition;
+import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.helpers.StringHelper;
@@ -751,6 +752,18 @@ public class KermetaCompiler {
 							// ignore URI that cannot be translated into a local file ...
 							continue;
 							// TODO deal with mvn url in convertSpecialURItoFileURI
+						}
+					}
+					else if(jarURL.getProtocol().equals("mvn")){
+						File theFile;
+						AetherUtil aetherUtil = new AetherUtil(logger,getMainProgressGroup());
+						theFile = aetherUtil.resolveMavenArtifact(jarURL.toString());
+						if(theFile.exists()){
+							result.add(theFile.getAbsolutePath());
+						}
+						else{
+							// try next URL fo this dependency
+							continue;
 						}
 					}
 				}
