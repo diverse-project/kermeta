@@ -25,6 +25,7 @@ import org2.kermeta.kompren.slicer.Constraint;
 import org2.kermeta.kompren.slicer.Radius;
 import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicedElement;
+import org2.kermeta.kompren.slicer.SlicedProperty;
 import org2.kermeta.kompren.slicer.Slicer;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 
@@ -690,13 +691,13 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 		
 		for(final Constraint ct : constraints)
 			result.append('\t').append(ct).append('\n');
-		
+
 		for(final SlicedElement se : slicedElements)
 			if(se instanceof SlicedClass)
 				result.append('\t').append(se).append('\n');
 		
 		for(final SlicedElement se : slicedElements)
-			if(se instanceof SlicedElement)
+			if(se instanceof SlicedProperty)
 				result.append('\t').append(se).append('\n');
 
 		if(onStart!=null && onStart.length()>0)
