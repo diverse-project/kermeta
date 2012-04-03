@@ -29,7 +29,7 @@ trait KomprenAbstractParser extends TokenParsers {
     elem("pointedIdentifier", _.isInstanceOf[PointedIdentifier]) ^^ (_.chars)
     
   def blockCode: Parser[String] =
-    elem("blockCode", _.isInstanceOf[BlockCode]) ^^ (_.chars)
+    elem("blockCode", _.isInstanceOf[MLCode]) ^^ (_.chars)
     
   //Error handling
   def orFailure[A](a:Parser[A],msg:String) : Parser[A] = ( a | failure(msg) )

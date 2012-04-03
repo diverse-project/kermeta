@@ -51,10 +51,11 @@ trait KomprenTokens extends Tokens with Parsers {
     override def toString = "\""+chars+"\""
   }
   
-  case class BlockCode(chars: String) extends KomprenToken() {
-    override def toString = "{ "+chars+" }"
+  /** The class of code literal tokens */
+  case class MLCode(chars: String) extends KomprenToken() {
+	  override def toString = "[["+chars+"]]"
   }
-
+  
   /** The class of identifier tokens */
   case class Identifier(chars: String) extends KomprenToken() {
     override def toString = chars

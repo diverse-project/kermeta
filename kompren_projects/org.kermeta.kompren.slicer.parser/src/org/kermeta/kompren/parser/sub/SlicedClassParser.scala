@@ -6,8 +6,8 @@ import org2.kermeta.kompren.slicer.SlicedClass
 import org2.kermeta.kompren.slicer.VarDecl
 import org2.kermeta.kompren.slicer.SlicerFactory
 
-trait SlicedClassParser extends KomprenAbstractParser with BlockParser {
-	def parseSlicedClass : Parser[SlicedClass] = "slicedClass" ~ ":" ~ (pointedIdent | ident) ~ opt("option") ~ opt(ident) ~ opt(parseBlock) ~ opt(parseBlock) ^^ {
+trait SlicedClassParser extends KomprenAbstractParser {
+	def parseSlicedClass : Parser[SlicedClass] = "slicedClass" ~ ":" ~ (pointedIdent | ident) ~ opt("option") ~ opt(ident) ~ opt(blockCode) ~ opt(blockCode) ^^ {
 	  case _ ~ _ ~ name ~ option ~ nameVar ~ exp ~ expOnRemove =>
 	    val slicedClass = SlicerFactory.eINSTANCE.createSlicedClass
 	    var clazz : EClass = EcoreFactory.eINSTANCE.createEClass

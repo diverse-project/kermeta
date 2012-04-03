@@ -9,9 +9,9 @@ import org2.kermeta.kompren.slicer.VarDecl
 import org2.kermeta.kompren.slicer.SlicerFactory
 
 
-trait SlicedPropertyParser extends KomprenAbstractParser with BlockParser {
+trait SlicedPropertyParser extends KomprenAbstractParser {
 	def parseSlicedProperty : Parser[SlicedProperty] = "slicedProperty" ~ ":" ~ (pointedIdent | ident) ~ opt("option") ~ opt(parserOpposite) ~ 
-	opt(ident) ~ opt(ident) ~ opt(parseBlock) ~ opt(parseBlock) ^^ {
+	opt(ident) ~ opt(ident) ~ opt(blockCode) ~ opt(blockCode) ^^ {
 	  case _ ~ _ ~ name ~ option ~ opp ~ nameVar1 ~ nameVar2 ~ exp ~ expOnRemove =>
 	    val slicedProp = SlicerFactory.eINSTANCE.createSlicedProperty
 	    val ref : EReference = EcoreFactory.eINSTANCE.createEReference

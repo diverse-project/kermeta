@@ -13,8 +13,8 @@ import java.util.Collections
 
 object MainRunner {
   def main(args: Array[String]): Unit = {
-		 // convertAsXMI("/home/ablouin/workspaceScala/org.kermeta.slicer.kompren.parser/examples/class/class.slicertxt")
-		  convertAsXMI(args(0))
+		 // convertAsXMI("/home/ablouin/workspaceScala/org.kermeta.kompren.slicer.parser/examples/class.komprent")
+		 convertAsXMI(args(0))
   }
   
   
@@ -28,7 +28,7 @@ object MainRunner {
       case Some(elt) =>
         SlicerResolver.resolve(elt, uri)
         println(elt)
-        saveAsXMI(elt, uri.replace(".slicertxt", ".slicer"))
+        saveAsXMI(elt, uri.replace(".komprent", ".kompren"))
     }
   }
   
@@ -36,7 +36,7 @@ object MainRunner {
   private def saveAsXMI(slicer : Slicer, uri : String) = {
 	  val map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
 	  val resSet = new ResourceSetImpl()
-	  map.put("slicer", new XMIResourceFactoryImpl())
+	  map.put("kompren", new XMIResourceFactoryImpl())
 	  val resource = resSet.createResource(URI.createFileURI(uri))
 	  resource.getContents.add(slicer)
 	  resource.save(Collections.EMPTY_MAP)

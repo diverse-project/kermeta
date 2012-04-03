@@ -11,8 +11,7 @@ trait SlicerParser extends KomprenAbstractParser
 with RadiusParser 
 with ConstraintParser 
 with SlicedClassParser 
-with SlicedPropertyParser 
-with BlockParser {
+with SlicedPropertyParser {
   def parseSlicer : Parser[Slicer] = "slicer" ~ ("soft" | "strict") ~ opt("active") ~ ident ~ "{" ~ parseDomain ~ parseInput ~ 
 		  			opt(parseRadius) ~ (parseConstraints*) ~ (parseSlicedClass*) ~ (parseSlicedProperty*) ~ opt(parseOnStart) ~ 
 		  			opt(parseOnEnd) ~ opt(parseHelper) ~ "}" ^^ { 

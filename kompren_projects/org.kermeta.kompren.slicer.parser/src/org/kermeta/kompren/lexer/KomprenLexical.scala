@@ -18,7 +18,7 @@ class KomprenLexical extends Lexical with KomprenTokens {
   override def whitespace: Parser[Any] = rep(whitespaceChar)
   val reserved : HashSet[String] = HashSet("slicer","strict","soft","active","domain","input","slicedClass","slicedProperty","radius","constraint",
       "onStart","onEnd","helper","option","opposite")
-  val delimiters : HashSet[String] = HashSet(":","{","}",",","(",")")
+  val delimiters : HashSet[String] = HashSet(":","{","}",",","(",")","]]","[[")
 
   
   def getReserved() : java.util.List[String] = reserved.toList
@@ -39,7 +39,13 @@ class KomprenLexical extends Lexical with KomprenTokens {
    )
    
    def blockCode : Parser[KomprenToken] = (
-       positioned('{' ~ rep( chrExcept('{', '}', EofCh) ) ~ '}' ^^ { case _ ~ foo ~ _ => BlockCode(foo.mkString)})
+       positioned('[' ~ '[' ~ mlCode ^^ { case _ ~ _ ~ fooCode => fooCode })
+   )
+   
+   protected def mlCode : Parser[MLCode] = (
+	   ']' ~ ']' ^^ { case _ => MLCode("") }
+	   |
+	   chrExcept(EofCh) ~ mlCode ^^ { case c ~ rc => var ml = MLCode(c+rc.chars) ; ml  }
    )
    
   protected def mlcomment: Parser[MLComment] = (
