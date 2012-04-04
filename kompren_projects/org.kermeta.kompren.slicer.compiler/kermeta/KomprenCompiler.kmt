@@ -12,7 +12,7 @@ using kermeta::io
 using ecore
 using kermeta::io::StdIO => stdio
 
-class Main {
+class KomprenCompiler {
 	operation main(uriMM : String, uriSlicer : String, pathOutput : String) is do
 		var slicerModel : Slicer init getSlicerModel(uriSlicer)
 		var pkg 		: EPackage init getEcoreModel(uriMM).one()
