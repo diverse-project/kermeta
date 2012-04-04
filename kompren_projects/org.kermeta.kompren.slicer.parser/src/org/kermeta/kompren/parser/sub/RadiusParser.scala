@@ -19,7 +19,6 @@ trait RadiusParser extends KomprenAbstractParser {
 	      slicedClass.setCtx(null)
 	      slicedClass.setIsOption(false)
 	      slicedClass.setDomain(clazz)
-	      slicedClass.setExpOnRemove(null)
 	      slicedClass.setExpression(null)
 	      slicedClasses = slicedClasses ++ List(slicedClass)
 	    }
