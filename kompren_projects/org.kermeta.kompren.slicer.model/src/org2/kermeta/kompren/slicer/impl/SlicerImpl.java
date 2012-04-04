@@ -691,7 +691,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 		result.append(' ').append(name).append('{').append('\n');
 		result.append("\tdomain: \"").append(uriMetamodel).append("\"\n");
 
-		if(!inputClasses.isEmpty()) {
+		if(inputClasses!=null && !inputClasses.isEmpty()) {
 			result.append("\tinput: ").append(inputClasses.get(0).getName());
 
 			for(int i=1, size=inputClasses.size(); i<size; i++)
@@ -703,16 +703,19 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 		if(radius!=null)
 			result.append('\t').append(radius).append('\n');
 
-		for(final Constraint ct : constraints)
-			result.append('\t').append(ct).append('\n');
+		if(constraints!=null)
+			for(final Constraint ct : constraints)
+				result.append('\t').append(ct).append('\n');
 
-		for(final SlicedElement se : slicedElements)
-			if(se instanceof SlicedClass)
-				result.append('\t').append(se).append('\n');
+		if(slicedElements!=null)
+			for(final SlicedElement se : slicedElements)
+				if(se instanceof SlicedClass)
+					result.append('\t').append(se).append('\n');
 
-		for(final SlicedElement se : slicedElements)
-			if(se instanceof SlicedProperty)
-				result.append('\t').append(se).append('\n');
+		if(slicedElements!=null)
+			for(final SlicedElement se : slicedElements)
+				if(se instanceof SlicedProperty)
+					result.append('\t').append(se).append('\n');
 
 		if(onStart!=null && onStart.length()>0)
 			result.append("\tonStart [[").append(onStart).append("]]\n");
