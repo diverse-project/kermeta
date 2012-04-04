@@ -19,7 +19,7 @@
     <packaging>pom</packaging>
     <version>${kermeta.version}</version>
     <name>language.root :: Root for kermeta language</name>
-	<profiles>
+	<!-- <profiles>
      <profile>
        <id>all_modules</id>
 		<modules>
@@ -47,5 +47,6 @@
 			<module>../org.kermeta.language.documentation</module>
 		</modules> 
       </profile>
-  </profiles>	
+  </profiles>
+  -->	
 </project>
