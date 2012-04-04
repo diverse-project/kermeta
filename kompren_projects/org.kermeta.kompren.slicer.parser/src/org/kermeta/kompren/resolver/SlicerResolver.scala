@@ -157,15 +157,20 @@ object SlicerResolver {
 	
 
 	private def resolveMetamodel(uri : String, uriSlicerTxtModel : String) : EList[EObject] = {
-	  val relativeUri = new java.net.URI(uriSlicerTxtModel).relativize(new java.net.URI(uri))
-	  val pathParent = new File(uriSlicerTxtModel).getParentFile().getPath
-	  
-	  val map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-	  map.put("ecore", new XMIResourceFactoryImpl())
-	  val resSet : ResourceSet = new ResourceSetImpl()
-	  val res : Resource = resSet.getResource(URI.createFileURI(pathParent + File.separator + relativeUri.getPath), true)
-	  
-	  res.getContents
+		val map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
+		map.put("ecore", new XMIResourceFactoryImpl())
+		val resSet : ResourceSet = new ResourceSetImpl()
+		var res : Resource = null
+		  
+		if(uri.startsWith("platform:/"))
+			res = resSet.getResource(URI.createURI(uri), true)
+		else {
+			val relativeUri = new java.net.URI(uriSlicerTxtModel).relativize(new java.net.URI(uri))
+			val pathParent = new File(uriSlicerTxtModel).getParentFile().getPath
+			res = resSet.getResource(URI.createFileURI(pathParent + File.separator + relativeUri.getPath), true)			
+		}
+			
+	  return res.getContents
 	}
 }
 
