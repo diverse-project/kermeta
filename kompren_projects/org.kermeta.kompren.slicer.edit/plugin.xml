@@ -19,5 +19,28 @@
                org.eclipse.emf.edit.provider.IItemLabelProvider
                org.eclipse.emf.edit.provider.IItemPropertySource"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="kompren.slicer.edit.contribution1"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="kompren.slicer.edit.menu1"
+               label="Kompren"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="kompren.slicer.edit.popup.actions.CreateKomprentFilesAction"
+               enablesFor="+"
+               id="kompren.slicer.edit.newAction"
+               label="Create komprent file"
+               menubarPath="kompren.slicer.edit.menu1/group1"
+               tooltip="Creates komprent files from the selected kompren ones.">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>

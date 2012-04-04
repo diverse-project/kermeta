@@ -36,13 +36,6 @@ import org2.kermeta.kompren.slicer.util.SlicerAdapterFactory;
  */
 public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "INRIA/IRISA\nTriskell Team";
-
-	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -247,6 +240,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -257,6 +251,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -305,6 +300,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -315,16 +311,17 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -339,6 +336,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		if (slicerItemProvider != null) slicerItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
@@ -348,5 +346,4 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 		if (oppositeCreationItemProvider != null) oppositeCreationItemProvider.dispose();
 		if (varDeclItemProvider != null) varDeclItemProvider.dispose();
 	}
-
 }

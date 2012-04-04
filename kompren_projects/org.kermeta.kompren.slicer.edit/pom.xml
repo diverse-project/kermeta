@@ -73,6 +73,16 @@
         </dependency>
      <dependency>
       <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.core.jobs</artifactId>
+      <version>[3.5.1.0,)</version>
+    </dependency> 
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+      <version>[2.5.0.0,)</version>
+    </dependency> 
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
       <artifactId>org.eclipse.emf.edit</artifactId>
       <version>[2.6.0.0,)</version>
     </dependency>  
@@ -84,8 +94,43 @@
      <dependency>
       <groupId>org.kermeta.eclipse</groupId>
       <artifactId>org.eclipse.core.runtime</artifactId>
-      <version>[3.5.0.0,)</version>
-    </dependency>   
+      <version>[3.6.0.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.ui</artifactId>
+      <version>[3.6.1.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.ui.workbench</artifactId>
+      <version>[3.6.1.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.core.resources</artifactId>
+      <version>[3.6.1.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.swt</artifactId>
+      <version>[3.6.1.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+      <version>[3.6.1.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.jface</artifactId>
+      <version>[3.6.1.0,)</version>
+    </dependency>
+     <dependency>
+      <groupId>org.kermeta.eclipse</groupId>
+      <artifactId>org.eclipse.equinox.common</artifactId>
+      <version>[3.6.0.0,)</version>
+    </dependency>
     <dependency>
         <groupId>org.osgi</groupId>
         <artifactId>org.osgi.core</artifactId>

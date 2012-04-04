@@ -10,22 +10,17 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org2.kermeta.kompren.slicer.Slicer;
 import org2.kermeta.kompren.slicer.SlicerFactory;
 import org2.kermeta.kompren.slicer.SlicerPackage;
@@ -40,7 +35,6 @@ public class SlicerItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
 		ITreeItemContentProvider,
 		IItemLabelProvider,
 		IItemPropertySource {
@@ -89,6 +83,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -111,6 +106,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addUriMetamodelPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -133,6 +129,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addActivePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -155,6 +152,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addStrictPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -177,6 +175,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addHelperPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -199,6 +198,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addOnStartPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -221,6 +221,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addOnEndPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
@@ -243,6 +244,7 @@ public class SlicerItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @param object
 	 */
 	protected void addInputClassesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
