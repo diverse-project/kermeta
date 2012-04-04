@@ -1,0 +1,57 @@
+/* $Id:$ 
+ * Creation : April 3, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package org::kermeta::language::structure;
+
+require kermeta
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
+using kermeta::utils
+
+aspect class Type {
+	
+	operation isSubstitutable() : Boolean is do 
+		result:=true
+	end
+}
+
+aspect class Class {
+
+	method isSubstitutable() : Boolean is do
+		
+		//stdio.writeln(" checking isSubstitutable on class instance of " + self.typeDefinition.name)
+		
+		// Does the class has typeParamBindings ?
+		if (self.typeParamBinding.size>0)
+		then
+			result := self.typeParamBinding.forAll{ tvb |
+				
+				//stdio.writeln("  binding on variable : " + tvb.variable.name )
+				
+				if (tvb.variable.supertype.isVoid)
+				then
+					//stdio.writeln("   no bounds on variable !" )
+					// Check that the binding's type is ok
+					tvb.type.isSubstitutable
+				else
+					//stdio.writeln("   there's a bound on variable : " + tvb.variable.supertype.toString )
+					var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+					// Check that the binding's type is a subtype of the variable's bound
+					tvb.type.isSubTypeOf(tvb.variable.supertype, typeVariableToSet)
+					and tvb.type.isSubstitutable
+				end
+			}
+		else
+			//stdio.writeln("  no typeParamBinding -> result=true")
+			result:=true
+		end
+	end
+}
