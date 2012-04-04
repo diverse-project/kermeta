@@ -35,10 +35,18 @@
          <action
                class="kompren.slicer.edit.popup.actions.CreateKomprentFilesAction"
                enablesFor="+"
-               id="kompren.slicer.edit.newAction"
+               id="kompren.slicer.edit.convertAsTextAction"
                label="Create komprent file"
                menubarPath="kompren.slicer.edit.menu1/group1"
-               tooltip="Creates komprent files from the selected kompren ones.">
+               tooltip="Creates komprent files from the selected kompren models.">
+         </action>
+         <action
+               class="kompren.slicer.edit.popup.actions.CreateKomprentModelsAction"
+               enablesFor="+"
+               id="kompren.slicer.edit.convertAsModelAction"
+               label="Create kompren file"
+               menubarPath="kompren.slicer.edit.menu1/group1"
+               tooltip="Creates kompren models from the selected komprent files.">
          </action>
       </objectContribution>
    </extension>
