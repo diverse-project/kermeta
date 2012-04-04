@@ -48,7 +48,7 @@ aspect class ModelingUnit
 	@Scope "MERGED"
 	inv no_subpackages_with_same_name is do
 		
-		stdio.writeln("checking ModelingUnit " + self.name + " for no_subpackages_with_same_name")
+		//stdio.writeln("checking ModelingUnit " + self.name + " for no_subpackages_with_same_name")
 		
 		var names : Collection<String> init Sequence<String>.new
 		var invResult : Boolean init true
