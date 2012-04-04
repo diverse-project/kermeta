@@ -1,7 +1,5 @@
-<!-- $Id: pom.xml 14766 2011-03-31 07:30:48Z dvojtise $ -->
-<!-- License    : EPL                                    -->
-<!-- Project    : org.kermeta.language.loader.kmt.scala -->
-<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- License    : EPL           -->
+<!-- Copyright  : IRISA / INRIA --> 
 
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
@@ -44,11 +42,15 @@
                             org.kermeta.scala.scala-library
                             </Require-Bundle>
                             <Import-Package>
+							org2.kermeta.kompren.slicer,
+							org2.kermeta.kompren.slicer.impl,
+							org2.kermeta.kompren.slicer.util,
 							org.eclipse.emf.common.notify,
 							org.eclipse.emf.common.util,
 							org.eclipse.emf.ecore,
 							org.eclipse.emf.ecore.impl,
 							org.eclipse.emf.ecore.resource,
+							org.eclipse.emf.ecore.resource.impl,
 							org.eclipse.emf.ecore.util,
 							org.eclipse.emf.ecore.xmi,
 							org.eclipse.emf.ecore.xmi.impl,
