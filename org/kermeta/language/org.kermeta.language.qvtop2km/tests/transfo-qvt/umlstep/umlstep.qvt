@@ -1,0 +1,1546 @@
+------------------------------------------------------------------------------
+--
+-- org.topcased.simulation.uml.qvtumlsemantics.step.qvt
+-- 
+-- Copyright (c) 2005-2008 TOPCASED consortium.
+--
+-- Contributors:
+--  dribeiro Atos Origin david.ribeirocampelo@atosorigin.com
+--  ludi Akue (Atos Origin Integration) ludi.akue@atosorigin.com - management of entry/exit activities  
+-- 
+--All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+transformation step(inout umldynamicModel:umldynamic, in eventModelin:umlevent,in umlModel:uml);
+  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------- queries & helpers ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  
+--blackboxes, see java code Pas.java
+
+-- get the slot value specification
+helper Slot::getValues() : Set(ValueSpecification) ;
+
+-- set the slot value specification
+helper Slot::setValue(pValueSpecification : ValueSpecification) : OclVoid  ;
+
+-- clear receiveEvent pool
+helper DynamicInstance::clearReceiveEvent() : OclVoid;
+
+-- handle increment/decrement tip
+helper DynamicInstance::eval(in OclExpresion:PrimitiveTypes::String) : ValueSpecification;
+
+-- evaluate the OCL Expression
+query DynamicInstance::evaluate(in OclExpresion:PrimitiveTypes::String, in tokenSpec:uml::ValueSpecification, in context:umldynamic::Context) : PrimitiveTypes::Boolean;
+
+query ReadStructuralFeatureAction::getObject() : ActionInputPin;
+
+query Action::isPrimitiveOperator() : Boolean;
+
+query Action::evaluatePrimiteOperator(in params:Sequence(ValueSpecification)) : ValueSpecification ;
+
+--end blackboxes
+
+-- check the boolean result of a guard evaluation, if there is no guard return true
+query DynamicInstance::possibleTransitionGuard(in pTransition:Transition) : PrimitiveTypes::Boolean{
+	
+	var res : PrimitiveTypes::Boolean := true;
+	if (pTransition.guard <> null){
+		var lOP : OpaqueExpression :=  pTransition.guard
+				->collect(g |g.specification)[OpaqueExpression]->asSequence()->first();
+		var b : PrimitiveTypes::Boolean :=  self->evaluate(lOP->collect(s | s.body)->asSequence()->first() , null, null)->first();
+		res :=  b or  pTransition.guard[Constraint]->isEmpty();
+	}
+	else{
+		var c : PrimitiveTypes::Boolean := true;
+		res :=  c;	
+	}
+	endif;
+	return res;
+}
+
+--check if the state is enclosed in another one
+query State::isSubstate () : PrimitiveTypes::Boolean {
+	var res : PrimitiveTypes::Boolean := false;
+	res := self.container.state<>null;
+	return res;	
+}
+
+--check if the state has an enty activity
+query State::hasEntry () : PrimitiveTypes::Boolean {
+	var res : PrimitiveTypes::Boolean := false;
+	res:= self.entry<>null;
+	return res;	
+}
+--check if the state has an exit activity
+query State::hasExit () : PrimitiveTypes::Boolean {
+	var res : PrimitiveTypes::Boolean := false;
+	res:=self.exit<>null;
+	return res;	
+}
+
+-- check if the transition is internal
+query Transition::isInternal () : PrimitiveTypes::Boolean {
+	var res : PrimitiveTypes::Boolean := false;
+	res := self.kind == TransitionKind::internal;
+	return res;
+}
+
+-- check if the transition has an effect
+query Transition::hasEffect () : PrimitiveTypes::Boolean {
+	var res : PrimitiveTypes::Boolean := false;
+	res:=self.effect<>null;
+	return res;	
+}
+
+
+-- get the parent state
+helper State::getParentState () : State {
+	return self.container.state;
+}
+
+-- get the initial substate, the topmost initial state after the pseudo state initial
+helper State::getInitialSubstate () : State {
+	var lInitialSubstate : State;
+	-- retrieve the initial pseudostate from the composite state
+	-- only one region is allowed
+	var lInitialPseudostate : Pseudostate := (((self.region->asSequence()->first()).subvertex->select(v : Vertex | v.oclIsKindOf(Pseudostate))[Pseudostate])->select(p: Pseudostate | p.kind == uml::PseudostateKind::initial))->asSequence()->first();
+	-- the initial substate is the unique target of its unique outgoing 
+	lInitialSubstate := lInitialPseudostate.outgoing->collect(target)->asSequence()->first()![State];
+	return lInitialSubstate;
+}
+
+-- get the current active substate of a composite state
+helper DynamicInstance::getActiveSubstate (pCompoState : State) : State {
+	var lCompoState:State := pCompoState;
+	var lActiveSubstate: State;
+	
+	-- retrieve the active state enclosed in the compo state, there should be only one state
+	lActiveSubstate := (self.instancesSM->collect(currentStates->select (s: State | s.getParentState()== lCompoState)))->flatten()->first()![State];
+	return lActiveSubstate;
+}
+-- execute activity nodes
+helper DynamicInstance::executeActivityNode(pActivityNode : ActivityNode, pBooleanPossibleEvent : PrimitiveTypes::Boolean,pInjectSimEvent : InjectSimEvent,lBooleanPossibleEvent : PrimitiveTypes::Boolean) : OclVoid{
+
+	var lEvent : Event := pInjectSimEvent.event;
+	-- if the current activity node is a SendSignalAction
+	if ( pActivityNode.oclIsKindOf(SendSignalAction)) {
+			self.spreadSendSignalAction( pActivityNode ! [SendSignalAction]);
+	} endif;
+	
+	-- if the current activity node is a CallOperationAction
+	if ( pActivityNode.oclIsKindOf(CallOperationAction)) {
+			self.executeCallOperationAction( pActivityNode ! [CallOperationAction]);
+	} endif;
+	
+	-- if the current activity node is a BroadcastSignalAction
+	if ( pActivityNode.oclIsKindOf(BroadcastSignalAction)) {
+			self.logTraceConso(pInjectSimEvent,lBooleanPossibleEvent);
+			self.spreadBroadcastSignalAction( pActivityNode ! [BroadcastSignalAction],lEvent);
+	} endif;
+	
+	-- if the current activity node is a AddStructuralFeatureValueAction
+	if ( pActivityNode.oclIsKindOf(AddStructuralFeatureValueAction)) {
+			self.executeAddStructuralFeatureValueAction( pActivityNode ! [AddStructuralFeatureValueAction]);
+	} endif;
+	
+	var lCurrentActivityEdge : ActivityEdge ;
+	if (pActivityNode.outgoing -> notEmpty()){
+		lCurrentActivityEdge := pActivityNode.outgoing->asSequence()->first();
+		self.executeActivityNode(lCurrentActivityEdge.target, lBooleanPossibleEvent,pInjectSimEvent,lBooleanPossibleEvent);
+	}
+}
+
+-- execute an AddStructuralFeatureValueAction
+helper DynamicInstance::executeAddStructuralFeatureValueAction(pAddStructuralFeatureValueAction : AddStructuralFeatureValueAction) : OclVoid{
+
+	var lProperty : Property := pAddStructuralFeatureValueAction.structuralFeature![Property];		
+	
+	var lActionInputPin : ActionInputPin := pAddStructuralFeatureValueAction.value![ActionInputPin];
+	
+	var lValueSpecificationAction : ValueSpecificationAction :=  lActionInputPin.fromAction![ValueSpecificationAction];
+	var lOpaqueExpression:OpaqueExpression :=lValueSpecificationAction.value! [OpaqueExpression];
+	
+	var lBody : PrimitiveTypes::String := lOpaqueExpression.body->asSequence()->first();
+	var lvalue: ValueSpecification := self.eval(lBody);
+	-- var lDynamicSlotSet : Set(DynamicSlot) := self.eventPool->select(lDynamicSlot|lDynamicSlot.reference.definingFeature.name == lProperty.name);
+	var lDynamicSlotSet : Set(Slot) := self.slot->select(lDynamicSlot|lDynamicSlot.definingFeature.name == lProperty.name);
+	var lDynamicSlot : Slot := lDynamicSlotSet->asSequence()->first();
+	lDynamicSlot.setValue(lvalue);
+}
+
+-- execute a CallOperationAction
+helper DynamicInstance::executeCallOperationAction(pCallOperationAction : CallOperationAction) : OclVoid{
+	
+		var lOperation : Operation :=pCallOperationAction.operation;
+		
+		var lCallEvent : CallEvent := umlModel.objects()[CallEvent]->select(c | c.operation.name = lOperation.name)->asSequence()->first();
+		
+		var lselfBoolean : PrimitiveTypes::Boolean := pCallOperationAction.target![ActionInputPin].fromAction![ReadStructuralFeatureAction].getObject().fromAction[ReadSelfAction]->notEmpty();
+		
+		if(lselfBoolean)
+		then
+		{
+		-- TODO : refactor code1 part2
+		var lProperty : Property := pCallOperationAction.target![ActionInputPin].fromAction![ReadStructuralFeatureAction].structuralFeature![Property];
+		var lInstanceSpecification : Set(InstanceSpecification) :=self.slot->select(s|s.definingFeature = lProperty)-> collect(s|s.getValues())![InstanceValue].instance[InstanceSpecification];
+		
+		var lNewInjectSimEvent : InjectSimEvent := lCallEvent-> map getInjectSimEvent()->first();
+				
+		var lTrueBoolean : PrimitiveTypes::Boolean := true;
+		
+		lNewInjectSimEvent.internal :=lTrueBoolean ;
+		
+		--lInstanceSpecification.logTraceOperation(lOperation,lTrueBoolean);
+		lNewInjectSimEvent.instanceSpecifications += lInstanceSpecification;
+		self.dynamicModel -> map DynamicModel2DynamicModel(lInstanceSpecification,lNewInjectSimEvent);
+		
+		--lInstanceSpecification.logTraceOperation(lOperation,false);
+		}
+		endif;
+	
+}
+
+-- execute a broadcast action (provide all instance with the event)
+helper DynamicInstance::spreadBroadcastSignalAction(pBroadcastSignalAction : BroadcastSignalAction,pEvent : Event):OclVoid{
+			
+	var lPossibleEventList := ((self.instancesSM->collect(i | i.fireables))
+							->select(tr | self->possibleTransitionGuard(tr)->first())
+							->collect(t |t.trigger))->collect(t1 |t1.event);				
+		
+	var lBooleanPossibleEvent : PrimitiveTypes::Boolean := lPossibleEventList->exists(lPossibleEvent | lPossibleEvent.name = pEvent.name);
+	
+	--Signal to send in broadcast
+	var lSignal : Signal := pBroadcastSignalAction.signal;
+	
+	-- if there are no effect there are no signal to send
+	var lReceiveEventBroadcast : Set(Event) := null;
+	if (lSignal<>null){
+		lReceiveEventBroadcast := umlModel.objectsOfType(SignalEvent)->select(se | se.signal.name=lSignal.name);
+	}
+	endif;
+
+	if (lBooleanPossibleEvent)
+	then 
+	{
+	umldynamicModel.objects()[DynamicInstance]->forEach(DynInst)
+		{
+			lReceiveEventBroadcast->forEach(evt) {
+				var evtOcc : EventOccurence;
+				var ise : InjectSimEvent;
+				ise.event := evt ;
+				evtOcc.simEvent := ise ;
+				evtOcc.event := evt;
+				DynInst.eventPool.eventOcc+=evtOcc;
+			}
+		--DynInst.receiveEvent+= lReceiveEventBroadcast
+		};
+	}
+	endif;
+}
+
+-- execute a SendSignalAction
+helper DynamicInstance::spreadSendSignalAction(pSendSignalAction : SendSignalAction):OclVoid{
+	
+	var lSignalSend : Signal := pSendSignalAction.signal;			
+					
+	var lReceiveEventSend : Set(Event) := umlModel.objectsOfType(SignalEvent)->select(se | se.signal.name=lSignalSend.name);
+	
+	var lselfBoolean : PrimitiveTypes::Boolean := pSendSignalAction.target![ActionInputPin].fromAction![ReadStructuralFeatureAction].getObject().fromAction[ReadSelfAction]->notEmpty();
+	
+	if(lselfBoolean)
+	then
+	{
+		-- TODO : refactor code1 part1	
+		var lProperty : Property := pSendSignalAction.target![ActionInputPin].fromAction![ReadStructuralFeatureAction].structuralFeature![Property];
+		var lInstanceSpecification : Set(InstanceSpecification) :=self.slot->select(s|s.definingFeature = lProperty)-> collect(s|s.getValues())![InstanceValue].instance[InstanceSpecification];
+		
+		var lDynamicInstance : DynamicInstance := umldynamicModel.objects()[DynamicInstance]->select(lDynInst | lInstanceSpecification->exists(lInstSpec |lInstSpec.name=lDynInst.name))->asSequence()->first();
+		
+		lReceiveEventSend->forEach(evt){
+			var evtOcc : EventOccurence ;
+			evtOcc.event := evt;
+			lDynamicInstance.eventPool.eventOcc += evtOcc ;
+		}
+	}
+	endif;
+
+}
+
+mapping ControlFlow::controlFlow2ControlToken(in pActivityExecution : ActivityExecution) : ControlToken {
+	node += self.source ;
+	enabledFlows += self ;
+	activityExecution := pActivityExecution ;
+}
+
+mapping ObjectFlow::objectFlow2ObjectToken(in pActivityExecution : ActivityExecution, in valueSpec : ValueSpecification) : ObjectToken {
+	objectNode += self.source.oclAsType(ActivityNode) ;
+	enabledFlows += self ;
+	activityExecution := pActivityExecution ;
+	value := valueSpec.CloneValueSpecification();
+}
+
+mapping Activity::activity2ActivityExecution (in pDynamicInstance : DynamicInstance, in parameters : Sequence(ObjectToken), in cActivity : ActivityExecution, in action : CallAction) : ActivityExecution {
+	activity := self ; 
+	tokens := self.node[InitialNode]->collect(outgoing).oclAsType(ControlFlow) -> map controlFlow2ControlToken(result) ;
+	instance := pDynamicInstance ;
+	context := object Context {
+		variables += self.variable-> map var2varInstances(); 
+		};
+	if (cActivity <> null) {
+			callingActivity := cActivity.oclAsType(ActivityExecution) ;
+	} endif ;
+	 if (action <> null) {
+		callingNode := action ;
+	} endif ;
+	if(parameters <> null){
+		var inputParameters : Sequence(ActivityParameterNode) = self.ownedElement[ActivityParameterNode]->select(p :ActivityParameterNode | p.parameter.direction = uml::ParameterDirectionKind::_in or p.parameter.direction = uml::ParameterDirectionKind::_inout);
+		var inputPins : Sequence(InputPin) := action.input ;
+		while( i := 0 ; i < inputParameters.size()){
+			var paramNode : ActivityParameterNode := inputParameters.at(i+1);
+			var inputPin : InputPin := inputPins.at(i+1);
+			var token : ObjectToken :=parameters->select(o : ObjectToken | o.enabledFlows->collect(target)->includes(inputPin))->first();
+			var newToken : ObjectToken ;
+			
+			var edge : Sequence(ObjectFlow) := paramNode.outgoing[ObjectFlow] ;
+			newToken := (edge -> map objectFlow2ObjectToken(result, token.oclAsType(ObjectToken).value))->first();
+			newToken.enabledFlows := edge ;
+			tokens += newToken ;
+			i := i + 1 ;
+		} ;
+	}endif ;
+}
+
+
+
+mapping Variable::var2varInstances() : VariableInstance {
+	result.variable := self ;
+}
+
+--refactor activities management for both entry, exit activities and effect behavior
+helper DynamicInstance::treatActivities (pActivity : Activity, pBooleanPossibleEvent : PrimitiveTypes::Boolean, pInjectSimEvent : InjectSimEvent) : Sequence(ActivityExecution) {
+	--Modif jeff
+	 return  pActivity -> map activity2ActivityExecution(self,null,null,null) ;
+	
+	--var actExec : ActivityExecution ;
+	--creation of tokens corresponding to initial nodes
+	--var lActivityInitialNodes : Set(ActivityNode) := pActivity.node[InitialNode] ;
+	--one token per init node
+	--lActivityInitialNodes->forEach(initNode) {
+		--one token epr outgoing control flow
+	--	initNode.outgoing[ControlFlow]->forEach(outgoingFlow) {
+	--		var ct : ControlToken ;
+	--		ct.node := initNode;
+	--		ct.activityExecution := actExec ;
+	--		ct.enabledFlows += outgoingFlow;
+	--		actExec.tokens += ct ;
+	--	};
+	--};
+	--self.activityExecution += actExec ;
+	--end Modif
+	
+	-- retrieve the activity nodes
+	--var lActivityNodeList : Sequence(ActivityNode)	:= pActivity.node;
+	
+	--if  ( lActivityNodeList -> notEmpty()){
+	
+	-- Check if this is a simple activity or a flow (the test is on existence of an InitialNode)
+	--if  ( lActivityNodeList -> exists ( tActivityNode | tActivityNode.oclIsKindOf(InitialNode) ) )  
+	--then {
+	-- we are on a flow of Activity node ( we suppose that there on initialNode and a FinalNode)
+			
+	-- here is supposed that there is only one initial node.
+	--	var lInitialNode : InitialNode := lActivityNodeList[InitialNode]->first();
+	--	var lBooleanStop : PrimitiveTypes::Boolean := true;
+						
+		-- we suppose there are no multi flow
+	--	var lCurrentActivityEdge : ActivityEdge ;
+	--	if (lInitialNode.outgoing -> notEmpty()){
+	--		lCurrentActivityEdge := lInitialNode.outgoing->asSequence()->first();
+	--		lBooleanStop := false;
+	--	}endif;
+	--	var lCurrentActivityNode : ActivityNode := lCurrentActivityEdge.target;
+	--	self.executeActivityNode(lCurrentActivityNode, pBooleanPossibleEvent,pInjectSimEvent,pBooleanPossibleEvent);
+	--	}else {
+	--		var lActivityNode : ActivityNode := lActivityNodeList->first();				
+	--		self.executeActivityNode(lActivityNode, pBooleanPossibleEvent,pInjectSimEvent,pBooleanPossibleEvent);
+	--	}endif;
+	--}endif;
+}
+
+-- treats exit activity
+
+helper DynamicInstance::handleExit ( pTransitionToFire:Transition, pBooleanPossibleEvent : PrimitiveTypes::Boolean, pInjectSimEvent : InjectSimEvent): Sequence(ActivityExecution) {
+var lTransitionToFire : Transition := pTransitionToFire;
+var res : Sequence(ActivityExecution)   ; 
+--ici res est une liste d'activityExecution
+if(lTransitionToFire.isInternal()==false) then {
+	
+	-- handle exit
+	
+	-- specifies the kind of activities, needed for the execution trace, here exit activity
+	var kind : PrimitiveTypes::String :="exit";
+	
+	var lSourceState:State :=lTransitionToFire.source![State];
+	var lTargetState:State :=lTransitionToFire.target![State];
+	
+	if(lSourceState.isSimple) then
+	{
+		if(lSourceState.hasExit()) then {
+			var lExitActivity : Activity :=lSourceState.exit![Activity];
+			res := self.treatActivities(lExitActivity, pBooleanPossibleEvent, pInjectSimEvent);
+			lSourceState.logTraceInternalActivities(kind);
+		}endif;
+	
+		if (lSourceState.isSubstate()) then { -- case of explicit exit
+			var lSourceParentState : State := lSourceState.getParentState();
+			if(lSourceParentState<>lTargetState.getParentState() and lSourceParentState.hasExit()) then { -- check if the transition exit the whole enclosing state
+			
+				var lParentStateExitActivity : Activity := lSourceParentState.exit![Activity];
+				var newActExecs : Sequence(ActivityExecution) := self.treatActivities(lParentStateExitActivity, pBooleanPossibleEvent, pInjectSimEvent);
+				newActExecs->forEach(ae){
+					res := res->append(ae) ;
+					} ;
+				lSourceParentState.logTraceInternalActivities(kind);
+			
+		}endif;
+	}endif;
+}
+	elif(lSourceState.isComposite) then --case of implicit exit
+	{
+	-- retrieve its current active substate to treat its exit activity
+		var lActiveSubstate: State := self.getActiveSubstate(lSourceState); 
+		
+		if(lActiveSubstate.hasExit()) then 
+		{
+			var lActiveSubstateExitActivity : Activity := lActiveSubstate.exit![Activity];
+			res := self.treatActivities(lActiveSubstateExitActivity, pBooleanPossibleEvent, pInjectSimEvent);
+			lActiveSubstate.logTraceInternalActivities(kind);
+		}endif;
+		
+			-- then treat the enclosing state exit activity
+		if(lSourceState.hasExit()) then
+		{
+			var lExitActivity : Activity :=lSourceState.exit![Activity];			
+			var newActExecs : Sequence(ActivityExecution) := self.treatActivities(lExitActivity, pBooleanPossibleEvent, pInjectSimEvent);
+			newActExecs->forEach(ae){
+				res := res->append(ae) ;
+			} ;	
+			lSourceState.logTraceInternalActivities(kind);
+		}endif;
+	}endif;
+}endif;
+return res ;
+}
+-- treats entry activity
+helper DynamicInstance::handleEntry (pTransitionToFire:Transition, pBooleanPossibleEvent : PrimitiveTypes::Boolean, pInjectSimEvent : InjectSimEvent):Sequence(ActivityExecution) {
+	var lTransitionToFire : Transition := pTransitionToFire;	
+	var res : Sequence(ActivityExecution)   ; 
+	--ICI res une liste d'activityExecution
+	if(lTransitionToFire.isInternal()==false) then {
+	
+		--specifies the kind of activities, needed for the execution trace, here entry activity
+		var kind : PrimitiveTypes::String :="entry";	
+	
+		var lSourceState:State :=lTransitionToFire.source![State];
+		var lTargetState:State :=lTransitionToFire.target![State];
+		
+		-- handle entry
+		
+		if(lTargetState.isSimple) then{
+		
+			-- first check if the target state is enclosed
+			if(lTargetState.isSubstate()) then { -- explicit entry
+		
+				-- check its parent state
+				var lParentState: State := lTargetState.getParentState();
+		
+				-- treat the parent state entry activity only if the transition is entering the whole enclosing state
+				if(lParentState<>lSourceState.getParentState() and lParentState.hasEntry()) then {
+					
+						var lParentStateEntryActivity: Activity := lParentState.entry![Activity];
+						res := self.treatActivities(lParentStateEntryActivity, pBooleanPossibleEvent, pInjectSimEvent);
+						lParentState.logTraceInternalActivities(kind);
+					
+				} endif;
+			}endif;
+			
+			if(lTargetState.hasEntry()) then {
+				var lEntryActivity:Activity := lTargetState.entry![Activity];
+				var newactset : Sequence(ActivityExecution) := self.treatActivities(lEntryActivity, pBooleanPossibleEvent, pInjectSimEvent);
+				newactset->forEach(ae){
+					res := res->append(ae) ;
+				} ;
+				lTargetState.logTraceInternalActivities(kind);
+			}endif;
+		}
+		
+		elif(lTargetState.isComposite) then{	  --implicit entry
+			
+			if(lTargetState.hasEntry()) then {
+				var lEntryActivity:Activity := lTargetState.entry![Activity];
+				res := self.treatActivities(lEntryActivity, pBooleanPossibleEvent, pInjectSimEvent);
+				lTargetState.logTraceInternalActivities(kind);
+			}endif;
+			
+			-- check its topmost initial state
+			var lInitialSubstate: State :=lTargetState.getInitialSubstate(); 
+			
+			if(lInitialSubstate.hasEntry()) then {
+				-- and treat the entry activity of the topmost initial state
+				var lInitialSubstateEntryActivity: Activity := lInitialSubstate.entry![Activity];
+				var newactset : Sequence(ActivityExecution) := self.treatActivities(lInitialSubstateEntryActivity, pBooleanPossibleEvent, pInjectSimEvent);
+				newactset->forEach(ae){
+					res := res->append(ae) ;
+				} ;
+				
+				lInitialSubstate.logTraceInternalActivities(kind);
+			} endif;
+		} endif;	
+	}endif;
+	return res ;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------- loggers -------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--log the execution trace
+helper DynamicInstance::logTraceConso(in  pInjectSimEvent : InjectSimEvent, in lBooleanPossibleEvent : PrimitiveTypes::Boolean) : OclVoid {
+	
+	var lPossibleTransition : Transition := ((self.instancesSM->collect(i | i.fireables))
+																		->select(tr | self->possibleTransitionGuard(tr)->first())
+																		->select(t |(t.trigger->collect(t1 |t1.event))
+																		->exists(f|f.name=pInjectSimEvent.event.name)))->first();	
+	
+	self.handleLogTraceConso(pInjectSimEvent,lBooleanPossibleEvent,lPossibleTransition,lPossibleTransition.source![State]);
+}
+
+helper DynamicInstance::handleLogTraceConso(in  pInjectSimEvent : SimEvent, in lBooleanPossibleEvent : PrimitiveTypes::Boolean, in lTransition : Transition, in lState : State) : OclVoid;
+
+helper SimEvent::logTraceInject() : OclVoid;
+	
+helper InstanceSpecification::logTraceOperation(in lOperation : Operation, in lStartEnd : PrimitiveTypes::Boolean) : OclVoid;
+
+helper Transition::logTraceEffect():OclVoid;	
+
+helper State::logTraceInternalActivities(in kind : PrimitiveTypes::String) : OclVoid;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------- main -----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- the main
+main() {
+	
+	var lInjectSimEvent : AbstractEvent := eventModelin.objects()[AbstractEvent]->asSequence()->first();
+	if(lInjectSimEvent.oclIsTypeOf(InjectSimEvent) )
+	{	
+		if ( lInjectSimEvent.oclAsType(InjectSimEvent).instanceSpecifications->isEmpty()){
+			lInjectSimEvent.oclAsType(InjectSimEvent).instanceSpecifications := umldynamicModel.objectsOfType(DynamicInstance);
+		} endif;
+	}
+	endif;
+	lInjectSimEvent.logTraceInject();
+	umldynamicModel.objectsOfType(DynamicModel) -> map DynamicModel2DynamicModel(umldynamicModel.objectsOfType(DynamicInstance),lInjectSimEvent);  
+  }
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------- mapping --------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--mapping on Dynamic Model : only DynamicModel active
+mapping inout umldynamic::DynamicModel::DynamicModel2DynamicModel(in pSetInstanceSpecification:Set(InstanceSpecification), in event:AbstractEvent ){
+	
+	--JEFF si InjectSimEvent alors mapping actuel si InjectActionEvent mapping des actions
+	if (event.oclIsTypeOf(InjectSimEvent)) {
+		self.instances->select(lInstSpec|lInstSpec.oclIsTypeOf(umldynamic::DynamicInstance)).oclAsType(umldynamic::DynamicInstance)->map DynamicInstance2DynamicInstance(pSetInstanceSpecification,event.oclAsType(InjectSimEvent));
+	} else {
+		event.oclAsType(InjectActionEvent).activityExecution.executeAction(event.oclAsType(InjectActionEvent));
+	}endif ;
+	self.instances->select(lInstSpec|lInstSpec.oclIsTypeOf(umldynamic::DynamicInstance)).oclAsType(umldynamic::DynamicInstance)->collect(activityExecution)->map tokens2enabledNodes(event);
+}
+
+helper ActivityExecution::executeAction(in event : InjectActionEvent):OclVoid {
+  --effacer enable node
+	self.enabledNodes := self.enabledNodes->select( eN : EnabledNode | eN.simEvent <> event) ;
+  --stocker les data tokens en local
+  
+  --effacer tous les control tokens en entrée
+	--on selectionne les tokens à effacer
+	--on l'ensemble des tokens tel que dans ses enabledFlows il y a  un des flots activant le noeud en cours d'execution 
+	var locTokenToDelete : OrderedSet(Token) := self.tokens[ControlToken]->select(token : ControlToken | token.enabledFlows->exists(f : ControlFlow | event.node.incoming->includes(f)));
+	
+	if (event.node.oclIsKindOf(Action)){
+		locTokenToDelete += self.tokens[ObjectToken]->select(token : ObjectToken | token.enabledFlows->exists(f : ObjectFlow | event.node.oclAsType(Action).input->collect(incoming)->includes(f)));
+	}  endif ;
+	
+	--conso de token un par un
+	while(i := 0 ; i < locTokenToDelete.size()){
+		if (locTokenToDelete.at(i).oclIsTypeOf(ObjectToken)){
+			var tempobjectTokenlist : Sequence(ObjectToken);
+			tempobjectTokenlist := locTokenToDelete[ObjectToken]
+			    ->select(t : ObjectToken | t.objectNode = locTokenToDelete.at(i).oclAsType(ObjectToken).objectNode 
+			      and t <> locTokenToDelete.at(i));
+			if (tempobjectTokenlist->size() > 0){
+					locTokenToDelete := locTokenToDelete->select(t : Token | not tempobjectTokenlist->includes(t));		
+			}endif ; 
+		} endif ; 
+		i := i +1 ;
+	} ;  
+	
+	--Dans le cas où un des flots utilisé passe par un join ou un fork il faut effacer tous les tokens arrivant sur ce noeud (devrait peut être être récursif)
+	var tempToken : OrderedSet(Token) ;
+	locTokenToDelete->forEach(token){
+		var joinNodes : Set(ActivityNode) ;
+		if (token.oclIsTypeOf(ControlToken)){
+			joinNodes := token.oclAsType(ControlToken).enabledFlows->collect(target)->select(n : ActivityNode | n.oclIsTypeOf(ForkNode) or n.oclIsTypeOf(JoinNode));
+		} else {
+			joinNodes := token.oclAsType(ObjectToken).enabledFlows->collect(target)->select(n : ActivityNode | n.oclIsTypeOf(ForkNode) or n.oclIsTypeOf(JoinNode));
+		} endif ;
+		joinNodes->forEach(node){
+			var incomingFlows : Set(ActivityEdge) := node.incoming;
+			incomingFlows->forEach(flow){
+				if (token.oclIsTypeOf(ControlToken)){
+					tempToken += self.tokens[ControlToken]->select(t : ControlToken | t.enabledFlows->includes(flow));
+				} else {
+					tempToken += self.tokens[ObjectToken]->select(t : ObjectToken | t.enabledFlows->includes(flow));
+				} endif ;
+			};
+		} ;
+	};
+	locTokenToDelete += tempToken ;
+	
+	--on duplique le token dans le cas où on passe un fork
+	locTokenToDelete->forEach(token){
+		var firstFlow : ActivityEdge ;
+		if (token.oclIsTypeOf(ControlToken)){
+			firstFlow  := token.oclAsType(ControlToken).enabledFlows->select(f : ControlFlow | token.oclAsType(ControlToken).node->collect(outgoing)->includes(f))->first();
+		} else {
+			firstFlow  := token.oclAsType(ObjectToken).enabledFlows->select(f : ObjectFlow | token.oclAsType(ObjectToken).objectNode->collect(outgoing)->includes(f))->first();
+		} endif ;
+		
+		self.createTokenForFork(firstFlow, token, event);
+	}; 		
+	
+	--si plusieurs flots entrant dans un merge sont activés, on n'en efface qu'un seul
+	--A revoir ne marche que pour un seul merge node
+	
+	--on selectionne les merge nodes
+	var mergeNodes : Sequence(ActivityNode) ;
+	mergeNodes := locTokenToDelete[ControlToken]->collect(enabledFlows)->collect(target)->select(node : ActivityNode | (node.oclIsTypeOf(DecisionNode) or  node.oclIsTypeOf(MergeNode) and node.incoming.size() > 1 ));
+	mergeNodes += locTokenToDelete[ObjectToken]->collect(enabledFlows)->collect(target)->select(node : ActivityNode | (node.oclIsTypeOf(DecisionNode) or  node.oclIsTypeOf(MergeNode) and node.incoming.size() > 1));
+	
+	var activatedEdges : Sequence(ActivityEdge) := locTokenToDelete[ControlToken]->collect(enabledFlows) ;
+	activatedEdges += locTokenToDelete[ObjectToken]->collect(enabledFlows) ;
+	var firstIcomingEdges : Sequence(ActivityEdge) := mergeNodes->collect(incoming)->select( edge :ActivityEdge | edge = edge.target->collect(incoming)->select(a : ActivityEdge | activatedEdges->includes(a))->first());
+	
+	var locControlTokenToDelete : Sequence(Token):= locTokenToDelete[ControlToken]->select(c : ControlToken | c.enabledFlows->collect(target)->excludesAll(mergeNodes) or
+	                                                           c.enabledFlows->exists(edge : ControlFlow | firstIcomingEdges[ControlFlow]->includes(edge)));
+	
+	var locObjectTokenToDelete : Sequence(Token):= locTokenToDelete[ObjectToken]->select(c : ObjectToken | c.enabledFlows->collect(target)->excludesAll(mergeNodes) or
+	                                                           c.enabledFlows->exists(edge : ObjectFlow | firstIcomingEdges[ObjectFlow]->includes(edge)));
+	
+	locTokenToDelete := locControlTokenToDelete;
+	
+	locTokenToDelete += locObjectTokenToDelete;
+
+	--on efface effectivement les tokens
+	self.tokens := self.tokens->select(token : Token | not locTokenToDelete->includes(token));
+ 
+	--interpretation de l'action
+	var outputTokens : Sequence(ObjectToken) ;
+	var inputTokens : Sequence(ObjectToken) := locTokenToDelete[ObjectToken] ;
+	self.interpretAction(event, inputTokens, outputTokens);
+	
+
+	var b : PrimitiveTypes::Boolean := true;
+	if (event.node.oclIsKindOf(CallAction)){
+		if (event.node.oclAsType(CallAction).isSynchronous)	{
+			b := false ;	
+		} endif ;
+	} 
+	else if (event.node.oclIsKindOf(FinalNode)) {
+		b := false ;
+	} endif ;
+	
+	
+	if (b){
+		--ajout des nouveaux object tokens
+		self.tokens += outputTokens ;
+		--production des nouveaux Control tokens
+		var newControlTokens : OrderedSet(ControlToken);
+		newControlTokens := event.node->collect(outgoing).oclAsType(ControlFlow) -> map controlFlow2ControlToken(self) ;
+		self.tokens += newControlTokens ;
+	} endif ;
+}
+
+helper ActivityExecution::interpretAction(in simEvent : InjectActionEvent, in inputTokens : Sequence(ObjectToken), out outputTokens : Sequence(ObjectToken)):OclVoid {
+	var node : ActivityNode := simEvent.node ;
+	if (node.oclIsTypeOf(ReadSelfAction)) {
+		//ReadSelfAction
+		var outputToken : ObjectToken;
+		outputToken := self.instance -> map instance2ObjectToken(self)->first() ;
+		outputToken.objectNode := node.oclAsType(ReadSelfAction).result ;
+		outputToken.enabledFlows := node.oclAsType(ReadSelfAction).result.outgoing.oclAsType(ObjectFlow) ;
+		outputTokens += outputToken ;	 
+	} else
+	if (node.oclIsKindOf(CallAction)) {
+			
+			var dynInst : DynamicInstance ; 
+			
+			if (node.oclIsTypeOf(CallBehaviorAction)) {
+				dynInst:= self.instance ;
+			}else {
+				--si onPort == null 
+				if (node.oclAsType(CallAction).onPort == null){
+					dynInst := (inputTokens->select (target : ObjectToken | target.enabledFlows->collect(target)->includes(node.oclAsType(CallOperationAction).target)))->first().oclAsType(InstanceValue).instance.oclAsType(DynamicInstance) ; 
+				} else {
+					--les instances possible devanat recevoir l'evt sont celles dont le type correspond à la classe propriétaire du port
+					var candidates : Set(InstanceSpecification) := self.instance.dynamicModel.instances->select(i :InstanceSpecification |
+						i.classifier->asSequence()->first() = node.oclAsType(CallAction).onPort.owner.oclAsType(Classifier)) ;
+					--On fait la liste de tous les types de connecteurs (associations) connectés au port
+					var connectorsTypes : Set(Association) := node.oclAsType(CallAction).onPort->collect(_end)->collect(owner).oclAsType(Connector)->collect(type).oclAsType(Association)
+					     ->select(a : Association | a.memberEnd->collect(type)->includes(self.instance.classifier)) ;
+					--on liste les instance d'association ayant un type inclu dans la liste précédente et dont une des extremité correspond à self
+					var links : Set(InstanceSpecification) := self.instance.dynamicModel.instances->select(i :InstanceSpecification |
+								connectorsTypes->includes(i.classifier->asSequence()->first()) and i.slot->collect(value).oclAsType(InstanceValue)->collect(instance)->includes(self.instance));
+					--on calcule l'ensemble des instances associées à self par l'ensemble des liens calculé précédemment ; on ne gare que les instance aussi présentes dans candidate
+					candidates := links->collect(slot)->select(s : Slot | s.value.oclAsType(InstanceValue)->collect(instance) <> self.instance)->collect(value).oclAsType(InstanceValue)->collect(instance)->select(i : InstanceSpecification | candidates->includes(i)) ;
+					--on espère qu'il n'y a qu'une seule solution
+					dynInst := candidates->asSequence()->first().oclAsType(DynamicInstance) ;
+			
+				} endif ; 	
+			
+			}endif ; 
+			
+			if(node.oclAsType(CallAction).isPrimitiveOperator()){
+				
+				
+				var inputPins : Sequence(InputPin) := node.oclAsType(CallBehaviorAction).input ;
+				var params : Sequence(ValueSpecification) ;
+				while(i := 0 ; i < inputPins.size()){
+					params := params->append(inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(inputPins.at(i+1).oclAsType(ActivityNode)))->collect(value))->flatten() ;
+					i := i + 1 ;
+				};	
+			
+				--var params : Sequence(ValueSpecification) := inputTokens->collect(value) ;
+				var res : ValueSpecification := node.oclAsType(CallAction).evaluatePrimiteOperator(params) ;
+			
+				var edge : Sequence(ObjectFlow) := node.oclAsType(CallAction).output->first().outgoing[ObjectFlow] ;
+				var newToken : ObjectToken := (edge -> map objectFlow2ObjectToken(self, res))->first();
+				newToken.enabledFlows := edge ;
+				self.tokens += newToken ;
+			
+			} else {
+				if (node.oclAsType(CallAction).isSynchronous){
+					if (node.oclIsTypeOf(CallBehaviorAction)){	
+						dynInst.activityExecution += node.oclAsType(CallBehaviorAction).behavior.oclAsType(Activity) -> map activity2ActivityExecution (dynInst, inputTokens, self, node.oclAsType(CallBehaviorAction));
+					} else {
+						dynInst.activityExecution += node.oclAsType(CallOperationAction).operation.method.oclAsType(Activity) -> map activity2ActivityExecution (dynInst, inputTokens, self, node.oclAsType(CallBehaviorAction));
+					} endif ;  
+				} else {
+					if (node.oclIsTypeOf(CallBehaviorAction)){	
+						dynInst.activityExecution += node.oclAsType(CallBehaviorAction).behavior.oclAsType(Activity) -> map activity2ActivityExecution (dynInst, inputTokens, null, null);
+					} else {
+						dynInst.activityExecution += node.oclAsType(CallOperationAction).operation.method.oclAsType(Activity) -> map activity2ActivityExecution (dynInst, inputTokens, null, null);
+					} endif ; 
+				} endif ;
+			} endif ; 	 
+		} else
+	if (node.oclIsTypeOf(ActivityFinalNode)){
+		if (self.callingNode <> null){
+			var outputPins : Sequence(OutputPin) := self.callingNode->collect(output) ;
+			var outParameters : Sequence(ActivityParameterNode) := node.activity.ownedElement[ActivityParameterNode]->select(p :ActivityParameterNode | p.parameter.direction = uml::ParameterDirectionKind::_out or p.parameter.direction = uml::ParameterDirectionKind::_inout);
+			
+			while(i := 0 ; i < outputPins.size()){
+				var outputPin : OutputPin := outputPins->at(i+1);
+				var outParameter : ActivityParameterNode := outParameters->at(i+1); 
+				var token : ObjectToken := self.tokens[ObjectToken]->select(o : ObjectToken | o.enabledFlows->collect(target)->includes(outParameter))->first();
+				
+				var edge : Sequence(ObjectFlow) := outputPin.outgoing[ObjectFlow] ;
+				var newToken : ObjectToken := (edge -> map objectFlow2ObjectToken(self.callingActivity, token.oclAsType(ObjectToken).value))->first();
+				newToken.enabledFlows := edge ;
+				self.callingActivity.tokens += newToken ;
+				i := i + 1 ;
+			};
+			--generer le control flow sortant de l'action appelante 
+			if (self.callingNode.isSynchronous){
+				var newControlTokens : OrderedSet(ControlToken);
+				newControlTokens := self.callingNode->collect(outgoing).oclAsType(ControlFlow) -> map controlFlow2ControlToken(self.callingActivity) ;
+				self.callingActivity.tokens += newControlTokens ;
+			} endif ; 
+		} endif ;
+		-- ICI
+		if (self.next <> null){
+			if (self.next.nextActivities->size() > 0){
+				var nextActivityExecution : ActivityExecution := self.next.nextActivities->first() ;
+				self.instance.activityExecution += nextActivityExecution ;
+				nextActivityExecution.next := self.next ;
+				self.next.nextActivities := self.next.nextActivities->select(ae : ActivityExecution | ae <> nextActivityExecution) ;
+			}
+			else {
+				var lFutureCurrentStates : Sequence(State);
+				lFutureCurrentStates +=  self.next.transition.target.oclAsType(State); 
+
+				-- treat that list to handle default entry
+				lFutureCurrentStates:=lFutureCurrentStates->iterate(s:State ; lTreated: Sequence(State)=Sequence{} |  if(s.isComposite) then lTreated->including(s.getInitialSubstate()) else lTreated->including(s) endif);
+	
+				--get  old current states
+				var lCurrentStates := self.next.instanceSM.currentStates ;
+				var lOldCurrentStates : Set(State) := lCurrentStates->select(s | s.outgoing
+				->exists(t | lFutureCurrentStates->exists(ns |ns = t.target)))[State];
+		
+				--in case of new current state being a substate
+				lOldCurrentStates +=lCurrentStates->select(s : State | (s->collect(outgoing)->exists(t: Transition | lFutureCurrentStates->exists(sub:State | sub.getParentState() == t.target))));
+	
+				--if a old current state a substate
+				lOldCurrentStates+=lCurrentStates->select (s : State | (s.getParentState()->collect(outgoing))->exists(t: Transition | (lFutureCurrentStates->exists(st : State | st == t.target))));
+	
+				-- update future current state with remaining ones
+				lFutureCurrentStates+=lCurrentStates->select(s : State |lOldCurrentStates->excludes(s));
+	
+				-- update current states with new future current states
+				self.next.instanceSM.currentStates := lFutureCurrentStates;
+
+				-- get fireables from new current states
+				self.next.instanceSM.fireables := self.next.instanceSM.currentStates->collect(s: State | s.outgoing);
+				-- Treat the case of composite currentstates, update fireables
+
+				self.next.instanceSM.fireables+=(self.next.instanceSM.currentStates->collect(s : State | s.getParentState()))-> collect( s : State | s.outgoing);
+				self.instance.ActExecList := self.instance.ActExecList->select(ael | ael <> self.next);
+			} endif ;  
+		}  endif  ;  
+		self.instance.activityExecution := self.instance.activityExecution->select(ae | ae <> self);
+	} else 
+	if (node.oclIsTypeOf(ReadLinkAction)){
+		var rla : ReadLinkAction := node.oclAsType(ReadLinkAction);
+		var targetProperty : Property ;
+		var sourceProperty : Property ;
+		var sourceObject : InstanceSpecification ;
+		if (rla.endData->asSequence().at(1).value <> null){
+			sourceProperty := rla.endData->asSequence().at(1)._end ;
+			var endNode : ActivityNode := rla.endData->asSequence().at(1).value ;
+			var endToken : ObjectToken := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(endNode))->first();
+			sourceObject := endToken.value.oclAsType(InstanceValue).instance ;
+			targetProperty := rla.endData->asSequence().at(2)._end ;
+		} 
+		else {
+			sourceProperty := rla.endData->asSequence().at(2)._end ;
+			sourceObject := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(rla.endData->asSequence().at(2).value))->first().value.oclAsType(InstanceValue).instance ;
+			targetProperty := rla.endData->asSequence().at(1)._end ;
+		} endif ; 
+		
+		var assoSet : Sequence(Association) := sourceObject.classifier->collect(namespace)->collect(ownedElement)[Association] ;
+		var asso : Association := assoSet->select(a : Association | a.ownedEnd->includes(targetProperty) and  a.ownedEnd->includes(sourceProperty))->first();
+		var links : Sequence(InstanceSpecification) := self.instance.dynamicModel.instances->select(is : InstanceSpecification | is.classifier->includes(asso)) ;
+		links := links->select(l : InstanceSpecification | l.slot->collect(definingFeature)->includes(sourceProperty) and l.slot->collect(definingFeature)->includes(targetProperty));
+		links := links->select(l : InstanceSpecification | l.slot->select(s : Slot | s.definingFeature = sourceProperty)->asSequence()->first().value.oclAsType(InstanceValue)->collect(instance) ->includes( sourceObject)) ;
+		 --and is.slot->exists(s1 : Slot | is.slot->exists(s2 : Slot | s1 <> s2 and s1.definingFeature = sourceProperty and
+		 --s2.definingFeature = targetProperty and s1.value = sourceObject) )) ;
+		var resObj : Sequence(InstanceSpecification) := links->collect(slot)->select(s : Slot | s.definingFeature = targetProperty)->collect(value).oclAsType(InstanceValue)->collect(instance) ;
+		
+		resObj->forEach(obj){
+			var newToken : ObjectToken := (obj -> map instance2ObjectToken(self))->first() ;
+			newToken.objectNode := rla.result ;
+			newToken.enabledFlows := rla.result.outgoing.oclAsType(ObjectFlow) ;
+			outputTokens += newToken ;
+		};
+		if (resObj->size() = 0 ) {
+			var newValueSpec : ValueSpecification := object LiteralNull {} ;
+			var flow : ObjectFlow := node.oclAsType(ReadLinkAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+			var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, newValueSpec)->first();
+			outputToken.enabledFlows := node.oclAsType(ReadLinkAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+			outputTokens += outputToken ;
+		} endif ; 
+		
+	} else 
+	if (node.oclIsTypeOf(CreateObjectAction)){
+		var classifier : Classifier := node.oclAsType(CreateObjectAction).classifier ;
+		var newInstance : InstanceSpecification ;
+		var newDynInstance : DynamicInstance ;
+		--a verifier pour les dataTypes
+		if (classifier.oclAsType(Class).classifierBehavior <> null){
+			newDynInstance := classifier -> map classifier2DynInstance()->first() ;
+			newDynInstance.dynamicModel := self.instance.dynamicModel ;
+			self.instance.dynamicModel.instances += newDynInstance ;
+			--nouveaux etats
+			var initial : Pseudostate = newDynInstance.instancesSM->first()->collect(type)->collect(region)->collect(subvertex)[Pseudostate]->select(p | p.kind == uml::PseudostateKind::initial)->first().oclAsType(Pseudostate) ;
+			var lInitialSubstate : State := initial.outgoing->collect(target)->asSequence()->first()![State];
+			newDynInstance.instancesSM->first().currentStates := lInitialSubstate ;
+			
+			newDynInstance.instancesSM->first().fireables := lInitialSubstate->collect(s: State | s.outgoing);
+			
+			var newValueSpec : ValueSpecification := object InstanceValue { instance := newDynInstance} ;
+			var flow : ObjectFlow := node.oclAsType(CreateObjectAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+			var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, newValueSpec)->first();
+			outputToken.enabledFlows := node.oclAsType(CreateObjectAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+			outputTokens += outputToken ;
+		} else { 
+			 newInstance := classifier -> map classifier2Instance()->first() ;
+			self.instance.dynamicModel.instances += newInstance ;
+			
+			var newValueSpec : ValueSpecification := object InstanceValue { instance := newInstance} ;
+			var flow : ObjectFlow := node.oclAsType(CreateObjectAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+			var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, newValueSpec)->first();
+			outputToken.enabledFlows := node.oclAsType(CreateObjectAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+			outputTokens += outputToken ;
+		} endif ;
+	}  else 
+	if (node.oclIsTypeOf(DestroyObjectAction)){
+		var obj : InstanceSpecification := inputTokens->first().value.oclAsType(InstanceValue).instance ;
+		self.instance.dynamicModel.instances := self.instance.dynamicModel.instances->select(i : InstanceSpecification | i <> obj);
+		--detruire récursivement tous les objets contenus ?????		
+	} else 
+	if (node.oclIsTypeOf(CreateLinkAction)){
+		var cla : CreateLinkAction := node.oclAsType(CreateLinkAction);
+		var targetProperty : Property ;
+		var sourceProperty : Property ;
+		var sourceObject : InstanceSpecification ;
+		var targetObject : InstanceSpecification ;
+		
+		sourceProperty := cla.endData->asSequence().at(1)._end ;
+		sourceObject := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(cla.endData->asSequence().at(1).value))->first().value.oclAsType(InstanceValue).instance ;
+		targetProperty := cla.endData->asSequence().at(2)._end ;
+		targetObject := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(cla.endData->asSequence().at(2).value))->first().value.oclAsType(InstanceValue).instance ;
+		var assoSet : Sequence(Association) := sourceObject.classifier->collect(namespace)->collect(ownedElement)[Association] ;
+		var asso : Association := assoSet->select(a : Association | a.ownedEnd->includes(targetProperty) and  a.ownedEnd->includes(sourceProperty))->first();
+		var link : InstanceSpecification := asso -> map asso2link(sourceProperty, sourceObject, targetProperty, targetObject)->first() ;
+		self.instance.dynamicModel.instances += link ;
+	} else 
+	if (node.oclIsTypeOf(ReadStructuralFeatureAction)){
+		var obj : InstanceSpecification := inputTokens->first().value.oclAsType(InstanceValue).instance ;
+		if (obj.classifier->includes(node.oclAsType(ReadStructuralFeatureAction).structuralFeature.owner)){
+		
+			var res : Sequence(ValueSpecification) := obj.slot->select(s : Slot | s.definingFeature = node.oclAsType(ReadStructuralFeatureAction).structuralFeature)->asSequence()->first().value ;
+			
+			res->forEach(vs){
+				var flow : ObjectFlow := node.oclAsType(ReadStructuralFeatureAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+				var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, vs)->first();
+				outputToken.enabledFlows := node.oclAsType(ReadStructuralFeatureAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+				outputTokens += outputToken ;
+			} ;
+			if (res->size() = 0 ){
+				var newValueSpec : ValueSpecification := object LiteralNull {} ;
+				var flow : ObjectFlow := node.oclAsType(ReadStructuralFeatureAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+				var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, newValueSpec)->first();
+				outputToken.enabledFlows := node.oclAsType(ReadStructuralFeatureAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+				outputTokens += outputToken ;
+			} endif ;
+		} else {
+			var rla : ReadStructuralFeatureAction := node.oclAsType(ReadStructuralFeatureAction);
+			var targetProperty : Property := rla.structuralFeature.oclAsType(Property) ;
+			var sourceObject : InstanceSpecification := inputTokens->first().value.oclAsType(InstanceValue).instance ;
+
+		
+			var assoSet : Sequence(Association) := sourceObject.classifier->collect(namespace)->collect(ownedElement)[Association] ;
+			
+			var asso : Association := assoSet->select(a : Association | a.ownedEnd->includes(targetProperty))->first();
+		
+			var links : Sequence(InstanceSpecification) := self.instance.dynamicModel.instances->select(is : InstanceSpecification | is.classifier->includes(asso)) ;
+			
+			--links := links->select(l : InstanceSpecification | l.slot->collect(definingFeature)->includes(targetProperty));
+			
+			links := links->select(l : InstanceSpecification | l.slot->collect(value).oclAsType(InstanceValue)->collect(instance)->includes( sourceObject)) ;
+			 --and is.slot->exists(s1 : Slot | is.slot->exists(s2 : Slot | s1 <> s2 and s1.definingFeature = sourceProperty and
+			 --s2.definingFeature = targetProperty and s1.value = sourceObject) )) ;
+			var resObj : Sequence(InstanceSpecification) := links->collect(slot)->select(s : Slot | s.definingFeature = targetProperty)->collect(value).oclAsType(InstanceValue)->collect(instance) ;
+			
+			resObj->forEach(obj){
+				var newToken : ObjectToken := (obj -> map instance2ObjectToken(self))->first() ;
+				newToken.objectNode := rla.result ;
+				newToken.enabledFlows := rla.result.outgoing.oclAsType(ObjectFlow) ;
+				outputTokens += newToken ;
+			};
+			if (resObj->size() = 0 ) {
+				var newValueSpec : ValueSpecification := object LiteralNull {} ;
+				var flow : ObjectFlow := node.oclAsType(ReadStructuralFeatureAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+				var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, newValueSpec)->first();
+				outputToken.enabledFlows := node.oclAsType(ReadStructuralFeatureAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+				outputTokens += outputToken ;
+			} endif ; 
+		}  endif ;
+  	} else 
+	if (node.oclIsTypeOf(AddStructuralFeatureValueAction)){
+		--var obj : InstanceSpecification := inputTokens->select(t : ObjectToken | t.objectNode->includes(node.oclAsType(AddStructuralFeatureValueAction)._object))->first().value.oclAsType(InstanceValue).instance ;
+		--var value : ValueSpecification := inputTokens->select(t : ObjectToken | t.objectNode->includes(node.oclAsType(AddStructuralFeatureValueAction).value))->first().value ;
+		var obj : InstanceSpecification := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(node.oclAsType(AddStructuralFeatureValueAction)._object))->first().value.oclAsType(InstanceValue).instance ;
+		
+		if( obj.classifier->includes(node.oclAsType(AddStructuralFeatureValueAction).structuralFeature.owner)){
+			var value : ValueSpecification := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(node.oclAsType(AddStructuralFeatureValueAction).value))->first().value ;
+			var slots : Sequence(Slot) := obj.slot->asSequence()->select(s : Slot | s.definingFeature = node.oclAsType(AddStructuralFeatureValueAction).structuralFeature) ;
+			var slot : Slot := slots->first() ;
+			if (node.oclAsType(AddStructuralFeatureValueAction).isReplaceAll){
+				slot.value := value.CloneValueSpecification() ;
+			}  else { 
+				slot.value += value.CloneValueSpecification() ;
+			} endif ;
+		}  else {  
+			var cla : AddStructuralFeatureValueAction := node.oclAsType(AddStructuralFeatureValueAction);
+			var targetProperty : Property ; 
+			var sourceObject : InstanceSpecification ;
+			var targetObject : InstanceSpecification ;
+		
+			
+			sourceObject := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(cla._object))->first().value.oclAsType(InstanceValue).instance ;
+		
+			targetProperty := cla.structuralFeature.oclAsType(Property) ; 
+	
+			targetObject := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(cla.value))->first().value.oclAsType(InstanceValue).instance ;
+		
+			var assoSet : Sequence(Association) := sourceObject.classifier->collect(namespace)->collect(ownedElement)[Association] ;
+		
+			var asso : Association := assoSet->select(a : Association | a.ownedEnd->includes(targetProperty))->first();
+			
+			var sourceProperty : Property := asso.ownedEnd->select(p | p <> targetProperty)->first(); 
+		
+			var link : InstanceSpecification := asso -> map asso2link(sourceProperty, sourceObject, targetProperty, targetObject)->first() ;
+		
+			self.instance.dynamicModel.instances += link ;
+		}  endif ; 
+	}  else 
+	if (node.oclIsTypeOf(ReadVariableAction)){
+		--var obj : InstanceSpecification := inputTokens->first().value.oclAsType(InstanceValue).instance ;
+		var res : Sequence(ValueSpecification) := self.context.variables->select(v : VariableInstance | v.variable = node.oclAsType(ReadVariableAction).variable)->asSequence()->first().value ;
+		res->forEach(vs){
+			var flow : ObjectFlow := node.oclAsType(ReadVariableAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+			var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, vs)->first();
+			outputToken.enabledFlows := node.oclAsType(ReadVariableAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+			outputTokens += outputToken ;
+		} ;
+		if (res->size() = 0 ){
+			var newValueSpec : ValueSpecification := object LiteralNull {} ;
+			var flow : ObjectFlow := node.oclAsType(ReadVariableAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+			var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, newValueSpec)->first();
+			outputToken.enabledFlows := node.oclAsType(ReadVariableAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+			outputTokens += outputToken ;
+		} endif ; 
+	} else 
+	if (node.oclIsTypeOf(AddVariableValueAction)){
+		--var obj : InstanceSpecification := inputTokens->select(t : ObjectToken | t.objectNode->includes(node.oclAsType(AddStructuralFeatureValueAction)._object))->first().value.oclAsType(InstanceValue).instance ;
+		--var value : ValueSpecification := inputTokens->select(t : ObjectToken | t.objectNode->includes(node.oclAsType(AddStructuralFeatureValueAction).value))->first().value ;
+		--var obj : InstanceSpecification := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(node.oclAsType(AddStructuralFeatureValueAction)._object))->first().value.oclAsType(InstanceValue).instance ;
+		var value : ValueSpecification := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(node.oclAsType(AddVariableValueAction).value))->first().value ;
+		var vars : Sequence(VariableInstance) := self.context.variables->asSequence()->select(v : VariableInstance | v.variable = node.oclAsType(ReadVariableAction).variable) ;
+		var varInst : VariableInstance := vars->first() ;
+		if (node.oclAsType(AddVariableValueAction).isReplaceAll){
+			varInst.value := value.CloneValueSpecification() ;
+		}  else { 
+			varInst.value += value.CloneValueSpecification() ;
+		} endif ;
+	}  else 
+	if (node.oclIsTypeOf(ValueSpecificationAction)){
+		var vs : ValueSpecification := node.oclAsType(ValueSpecificationAction).value ;
+		var flow : ObjectFlow := node.oclAsType(ValueSpecificationAction).result->collect(outgoing)->first().oclAsType(ObjectFlow) ;
+		var outputToken : ObjectToken := flow -> map objectFlow2ObjectToken(self, vs)->first();
+		outputToken.enabledFlows := node.oclAsType(ValueSpecificationAction).result->collect(outgoing).oclAsType(ObjectFlow) ;
+		outputTokens += outputToken ;
+	}
+	else 
+	if (node.oclIsTypeOf(SendSignalAction)){
+		var targetInst : InstanceSpecification ;
+		--si onPort == null
+		if (node.oclAsType(SendSignalAction).onPort == null){
+			var bp0 : Token ;
+            targetInst := inputTokens->select(t : ObjectToken | t.enabledFlows->collect(target)->includes(node.oclAsType(SendSignalAction).target))->first().value.oclAsType(InstanceValue).instance;			
+		} else {
+			--les instances possible devanat recevoir l'evt sont celles dont le type correspond à la classe propriétaire du port
+			var candidates : Set(InstanceSpecification) := self.instance.dynamicModel.instances->select(i :InstanceSpecification |
+						i.classifier->asSequence()->first() = node.oclAsType(SendSignalAction).onPort.owner.oclAsType(Classifier)) ;
+			--On fait la liste de tous les types de connecteurs (associations) connectés au port
+			var connectorsTypes : Set(Association) := node.oclAsType(SendSignalAction).onPort->collect(_end)->collect(owner).oclAsType(Connector)->collect(type).oclAsType(Association)
+			     ->select(a : Association | a.memberEnd->collect(type)->includes(self.instance.classifier)) ;
+			--on liste les instance d'association ayant un type inclu dans la liste précédente et dont une des extremité correspond à self
+			var links : Set(InstanceSpecification) := self.instance.dynamicModel.instances->select(i :InstanceSpecification |
+						connectorsTypes->includes(i.classifier->asSequence()->first()) and i.slot->collect(value).oclAsType(InstanceValue)->collect(instance)->includes(self.instance));
+			--on calcule l'ensemble des instances associées à self par l'ensemble des liens calculé précédemment ; on ne gare que les instance aussi présentes dans candidate
+			candidates := links->collect(slot)->select(s : Slot | s.value.oclAsType(InstanceValue)->collect(instance) <> self.instance)->collect(value).oclAsType(InstanceValue)->collect(instance)->select(i : InstanceSpecification | candidates->includes(i)) ;
+			--on espère qu'il n'y a qu'une seule solution
+			targetInst := candidates->asSequence()->first() ;
+			
+			--target := 
+			
+		} endif ; 	
+		var sig : Signal := node.oclAsType(SendSignalAction).signal; 
+		var lReceiveEventSend : Set(Event) := umlModel.objectsOfType(SignalEvent)->select(se | se.signal=sig);
+		var parameters : Sequence(ValueSpecification) := inputTokens->select(t : ObjectToken | node.oclAsType(SendSignalAction).argument->exists( ip : InputPin | t.enabledFlows->collect(target)->includes(ip)))->collect(value) ;
+
+		var newEventOccs : Sequence(EventOccurence) := lReceiveEventSend -> map event2eventOccurence(parameters, simEvent, targetInst) ;
+		
+		targetInst.oclAsType(DynamicInstance).eventPool.eventOcc += newEventOccs ;
+		
+	}    
+	else 
+	if (node.oclIsTypeOf(BroadcastSignalAction)){
+		var sig : Signal := node.oclAsType(BroadcastSignalAction).signal; 
+		var lReceiveEventSend : Set(Event) := umlModel.objectsOfType(SignalEvent)->select(se | se.signal=sig);
+		var parameters : Sequence(ValueSpecification) := inputTokens->select(t : ObjectToken | node.oclAsType(SendSignalAction).argument->exists( ip : InputPin | t.enabledFlows->collect(target)->includes(ip)))->collect(value) ;
+		var allTransitions : Sequence(Transition):= umlModel.objectsOfType(Transition);
+		var transitions : Sequence(Transition) := allTransitions->select(t :Transition | lReceiveEventSend -> exists (evt | t.trigger->collect(event)->includes(evt))) ;
+		var classes : Set(Class); 
+		transitions->forEach(trans){
+			classes+=trans.getClass() ;
+		} ;
+		
+		var classesInstances : Sequence(DynamicInstance) := self.instance.dynamicModel.instances[DynamicInstance]->select (di : DynamicInstance | classes->exists(c | di.classifier->includes(c))) ;
+		classesInstances->forEach(target){
+			var newEventOccs : Sequence(EventOccurence) := lReceiveEventSend -> map event2eventOccurence(parameters, simEvent, target) ;
+			target.eventPool.eventOcc += newEventOccs ;
+		}
+	}  
+	endif ; 
+}
+
+helper Element::getClass() : Class {
+	var ret :Class ;
+	if(self.owner.oclIsTypeOf(Class)){
+		ret := self.owner.oclAsType(Class);
+		return 	ret ;
+	} endif ; 
+	return self.owner.getClass() ;
+}
+
+mapping Event::event2eventOccurence(parameters : Sequence(ValueSpecification), inputEvent : InjectActionEvent, target : InstanceSpecification) : EventOccurence {
+	event := self ;
+	eventParameters := 	parameters ;
+	simEvent := (self -> map Event2InjectSimEvent(target, inputEvent))->first() ;
+}
+
+mapping Association::asso2link(sourceProperty : Property, sourceObject : InstanceSpecification, targetProperty: Property, targetObject: InstanceSpecification) : InstanceSpecification {
+	classifier := self ;
+	slot := object Slot{ 
+		definingFeature := sourceProperty ;
+		value := object InstanceValue {
+			instance := sourceObject ;
+		};
+	};
+	slot += object Slot{ 
+		definingFeature := targetProperty ;
+		value := object InstanceValue {
+			instance := targetObject ;
+		};
+	}; 
+} 
+
+mapping Classifier::classifier2DynInstance() : DynamicInstance {
+	name := self.name + "_instance";
+	classifier := self ;
+	slot := self.attribute -> map attribute2slot() ;
+	if (self.oclAsType(Class).classifierBehavior.oclIsTypeOf(StateMachine)){
+			eventPool := object EventPool {} ;
+			instancesSM := self.oclAsType(Class).classifierBehavior.oclAsType(StateMachine) -> map SM2SMDyn () ;
+	}  endif  ;  
+}  
+ 
+mapping StateMachine::SM2SMDyn() : InstanceSM{
+	type := self ;
+	--faut il completer????
+	--currentStates :=
+}
+
+mapping Classifier::classifier2Instance() : InstanceSpecification {
+	name := self.name + "_instance";
+	classifier := self ;
+	slot := self.attribute -> map attribute2slot() ;
+} 
+
+mapping Property::attribute2slot() : Slot {
+	definingFeature := self ;
+	if (self.defaultValue <> null) {
+		value := self.defaultValue.CloneValueSpecification() ;
+	} endif;
+}
+
+helper uml::ValueSpecification::CloneValueSpecification() : ValueSpecification {
+	--TODO à revoir
+	if (self.oclIsTypeOf(InstanceValue)){
+		var res : InstanceValue := object InstanceValue{
+			instance := self.oclAsType(InstanceValue).instance ;
+		} ;
+		return res ;
+	}endif ;
+	if (self.oclIsTypeOf(LiteralString)){
+		var res : LiteralString := object LiteralString{
+			value := self.oclAsType(LiteralString).value ;
+		} ;
+		return res ;
+	} endif ;
+	if (self.oclIsTypeOf(LiteralInteger)){
+		var res : LiteralInteger := object LiteralInteger{
+			value := self.oclAsType(LiteralInteger).value ;
+		} ;
+	return res ;
+	} endif ;
+	if (self.oclIsTypeOf(LiteralBoolean)){
+		var res : LiteralBoolean := object LiteralBoolean{
+			value := self.oclAsType(LiteralBoolean).value ;
+		} ;
+	return res ;
+	} endif ;
+	if (self.oclIsTypeOf(LiteralUnlimitedNatural)){
+		var res : LiteralUnlimitedNatural := object LiteralUnlimitedNatural{
+			value := self.oclAsType(LiteralUnlimitedNatural).value ;
+		} ;
+	return res ;
+	} endif ;
+	var res : LiteralNull := object LiteralNull{} ;
+	return res ;
+		
+}
+
+mapping InstanceSpecification::instance2ObjectToken(in actExec : ActivityExecution) : ObjectToken{
+	result.activityExecution := actExec ;
+	result.value := object InstanceValue {
+		instance := self ;		
+	}
+}
+
+helper ActivityExecution::descendant(f : ActivityEdge) : Set(ActivityNode){
+	var res : Set(ActivityNode) ;
+	if (f.target.oclIsKindOf(Action) or f.target.oclIsKindOf(FinalNode)){
+		res += f.target ;
+	} else if (f.target.oclIsKindOf(InputPin)){
+		res += f.target.oclAsType(InputPin).owner.oclAsType(ActivityNode) ;
+	} else {
+		f.target.outgoing[ControlFlow]->forEach (flow){
+			res += self.descendant(flow);
+		};
+	} endif ;
+	return res ;
+}
+
+helper ActivityExecution::createTokenForFork(firstFlow : ActivityEdge, token : Token, in event : InjectActionEvent) : OclVoid {
+	 if (firstFlow.target.oclIsKindOf(JoinNode) or firstFlow.target.oclIsKindOf(ForkNode)) {
+		if (token.oclIsTypeOf(ControlToken)){
+			var locFlows : OrderedSet(ControlFlow) := firstFlow.target.outgoing[ControlFlow]->select(f : ControlFlow | not self.descendant(f)->includes(event.node));
+			var newControlTokens : OrderedSet(ControlToken);
+			newControlTokens := locFlows -> map controlFlow2ControlToken(self) ;
+			newControlTokens->forEach(newControlToken){
+				self.tokens += newControlToken ;
+			}; 
+			var activatedFlows : Set(ControlFlow) := firstFlow.target.outgoing[ControlFlow]->select(f : ControlFlow | self.descendant(f)->includes(event.node));
+			activatedFlows->forEach(activatedFlow){
+				self.createTokenForFork(activatedFlow, token, event);
+			} ; 
+		} else {
+			var locFlows : OrderedSet(ObjectFlow) := firstFlow.target.outgoing[ObjectFlow]->select(f : ObjectFlow | not self.descendant(f)->includes(event.node));
+			var newObjectTokens : OrderedSet(ObjectToken);
+			var Val : ValueSpecification :=  token.oclAsType(ObjectToken).value ;
+			
+			newObjectTokens := locFlows -> map objectFlow2ObjectToken(self, Val) ;
+			newObjectTokens->forEach(newObjectToken){
+				self.tokens += newObjectToken ;
+			}; 
+			var activatedFlows : Set(ObjectFlow) := firstFlow.target.outgoing[ObjectFlow]->select(f : ObjectFlow | self.descendant(f)->includes(event.node));
+			activatedFlows->forEach(activatedFlow){
+				self.createTokenForFork(activatedFlow, token, event);
+			} ; 
+		} endif ;
+	}  else  {
+		if (firstFlow.target.oclIsKindOf(DecisionNode) or firstFlow.target.oclIsKindOf(MergeNode)) {
+			var locFlows : OrderedSet(ActivityEdge) := firstFlow.target.outgoing ;
+			locFlows->forEach(flow){
+				self.createTokenForFork(flow, token, event);
+			} ; 
+		} endif ;
+	}  endif;
+}
+
+--mapping on DynamicInstance : add events of activities (entry, exit, effect) in receiveEvent
+-- in fact executes a transition (its effects)
+mapping inout umldynamic::DynamicInstance::DynamicInstance2DynamicInstance(in pSetInstanceSpecification:Set(InstanceSpecification), in pInjectSimEvent:InjectSimEvent ) {
+	
+	-- if dynamic instance not active clean the receive event
+	if(self.actif=false){
+		self.clearReceiveEvent();
+	}
+	else{
+		-- is the instance a target of the step?
+		var lStepAllowed : PrimitiveTypes::Boolean := pSetInstanceSpecification->exists(is | is.name= self.name);
+		var lInjectSimEvent: InjectSimEvent := pInjectSimEvent;
+		-- is the instance a target of the event?
+		lStepAllowed := lStepAllowed and lInjectSimEvent.instanceSpecifications->exists(lInstanceSpecification| lInstanceSpecification.name = self.name);
+		-- executes a simulation step
+		if (lStepAllowed){
+						-- get the uml event to simulate 
+			var lEvent : Event := lInjectSimEvent.event;
+			-- remove the uml event from the receive list
+			--receiveEvent := receiveEvent->reject(tReceiveEvent | tReceiveEvent.name <> lEvent.name);
+			eventPool.eventOcc := eventPool.eventOcc->select(evt : EventOccurence |evt.simEvent <> pInjectSimEvent);	
+				
+			-- retrieve transitions to execute	if they exist				
+			var lTransitionList : Sequence(Transition) := (self.instancesSM->collect(i | i.fireables))
+							->select(tr | self.possibleTransitionGuard(tr))
+							->select(t |t->collect(t |t.trigger)->select(tTrigger|tTrigger.event<>null)
+							->exists(t1 |t1.event.name=lEvent.name));
+			
+			--check their existence
+			var lBooleanPossibleEvent : PrimitiveTypes::Boolean := lTransitionList->notEmpty();
+			if (lBooleanPossibleEvent) then {
+						
+				-- take the first transition to execute
+				var lTransitionToFire : Transition :=  lTransitionList -> first();
+				-- handle the exit activity	of its source state
+				
+				var actList : Sequence(ActivityExecution) ;
+				actList := self.handleExit(lTransitionToFire, lBooleanPossibleEvent, lInjectSimEvent);	
+ 			
+				--then get its effect 
+				if (lTransitionToFire.hasEffect()) {
+					var lActivityEffect : Activity :=  lTransitionToFire.effect![Activity];
+					var tempActList : Sequence(ActivityExecution) := self.treatActivities(lActivityEffect, lBooleanPossibleEvent,lInjectSimEvent);
+					tempActList->forEach(ae){
+						actList := actList->append(ae) ;
+					} ; 
+					lTransitionToFire.logTraceEffect();
+				} endif;
+
+				var tempActList : Sequence(ActivityExecution) := self.handleEntry(lTransitionToFire, lBooleanPossibleEvent, lInjectSimEvent);
+				tempActList->forEach(ae){
+					actList := actList->append(ae) ;
+				} ;
+				var newAEL : ActivityExecutionList ;
+				if (actList->size() > 0){
+					var fisrtActExec :ActivityExecution := actList->first();
+					actList := actList->select(ae : ActivityExecution | ae <> fisrtActExec);
+					 newAEL := object ActivityExecutionList {
+						nextActivities := actList ;
+						instanceSM := self.instancesSM->select(i | i.fireables->includes(lTransitionToFire))->first() ;
+						transition := lTransitionToFire ;
+					} ;
+					self.ActExecList += newAEL ;
+					fisrtActExec.next := newAEL ;
+					self.activityExecution += fisrtActExec ;
+				}  endif ; 
+		
+				-- handle the entry activity of its target state
+				
+				-- refresh current states and fireables transitions
+				result.instancesSM := instancesSM->map InstanceSM2InstanceSM(lInjectSimEvent, newAEL);	
+			} endif;			
+		} endif;			
+	} endif;
+}
+
+--mapping on InstanceSM : refresh of currentStates and fireables transitions
+mapping inout umldynamic::InstanceSM::InstanceSM2InstanceSM(in pInjectSimEvent:InjectSimEvent, newAEL : ActivityExecutionList) {
+	
+	-- get the injected SimEvent
+	var lEvent := pInjectSimEvent.event;
+
+	-- get the current states
+	var lCurrentStates := currentStates; -- one per region
+	
+	-- get future possible fireables
+	var lFutureTransitions : Sequence(Transition) :=lCurrentStates->collect(c |c.outgoing);
+		
+	--if the current state is a substate, get its parent state outgoing	
+	lFutureTransitions +=(lCurrentStates->collect(s : State | s.getParentState()))-> collect( s : State | s.outgoing);
+	
+	-- select the fireables related to the event 
+	lFutureTransitions:=lFutureTransitions->select(t |self.instance.possibleTransitionGuard(t));
+	lFutureTransitions:=lFutureTransitions->select(t:Transition | t.trigger->exists(tri|tri.event.name=lEvent.name));
+	-- ICI une transition n'est tirable que si elle n'a pas d'activitée pointant vers elle
+	lFutureTransitions:=lFutureTransitions->select(t:Transition | not self.instance.activityExecution->collect(next)->collect(transition)->includes(t));
+	
+	
+	
+	-- 	get their targets they will be the future current states
+	var lFutureCurrentStates : Sequence(State):=lFutureTransitions->collect(t2 | t2.target)[State];
+
+	-- treat that list to handle default entry
+	lFutureCurrentStates:=lFutureCurrentStates->iterate(s:State ; lTreated: Sequence(State)=Sequence{} |  if(s.isComposite) then lTreated->including(s.getInitialSubstate()) else lTreated->including(s) endif);
+	
+	--get  old current states
+	var lOldCurrentStates : Set(State) := lCurrentStates->select(s | s.outgoing
+	->exists(t | lFutureCurrentStates->exists(ns |ns = t.target)))[State];
+	
+	--in case of an activity is executing
+	if (newAEL <> null) {
+		lOldCurrentStates += newAEL.transition.source.oclAsType(State) ;	
+	}  endif ;
+	--in case of new current state being a substate
+	lOldCurrentStates +=lCurrentStates->select(s : State | (s->collect(outgoing)->exists(t: Transition | lFutureCurrentStates->exists(sub:State | sub.getParentState() == t.target))));
+	
+	--if a old current state a substate
+	lOldCurrentStates+=lCurrentStates->select (s : State | (s.getParentState()->collect(outgoing))->exists(t: Transition | (lFutureCurrentStates->exists(st : State | st == t.target))));
+	
+	-- update future current state with remaining ones
+	lFutureCurrentStates+=lCurrentStates->select(s : State |lOldCurrentStates->excludes(s));
+	
+	-- update current states with new future current states
+	currentStates := lFutureCurrentStates;
+
+	-- get fireables from new current states
+	fireables := currentStates->collect(s: State | s.outgoing);
+	-- Treat the case of composite currentstates, update fireables
+
+	self.fireables+=(currentStates->collect(s : State | s.getParentState()))-> collect( s : State | s.outgoing);
+	
+}
+
+mapping inout umldynamic::ActivityExecution::tokens2enabledNodes(inout pSimEvent : AbstractEvent) : ActivityExecution{
+	
+	var lTokens : OrderedSet(Token) := self.tokens ;
+	var lenabledFlowSeq : OrderedSet(ActivityEdge)  ;
+	var lenabledNodes : OrderedSet(ActivityNode);
+	
+	while(j := 0 ; j < lTokens->size()){
+		var ct : Token := lTokens->at(j+1);
+		var locEnabl :OrderedSet(ActivityEdge) ;
+		if (ct.oclIsTypeOf(ControlToken)){
+			locEnabl := ct.oclAsType(ControlToken).enabledFlows ;
+		}  else {
+			locEnabl := ct.oclAsType(ObjectToken).enabledFlows ;
+		}  endif ; 
+		 
+		var lOP : String;
+		var b : PrimitiveTypes::Boolean;
+		while (i := 0 ; i < locEnabl->size()){
+			var flow : ActivityEdge ;
+			flow := locEnabl->at(i+1);
+			i := i + 1  ;
+			
+ 			--if la guarde est vérifiée	
+			if (flow.guard<>null){
+				lOP :=  flow.guard.stringValue();
+				if (flow.oclIsTypeOf(ControlFlow)) {
+					b:=  self.instance->evaluate(lOP , null, self.context)->first();
+				}  else {
+					b:=  self.instance->evaluate(lOP , ct.oclAsType(ObjectToken).value, self.context)->first();
+				} endif ;  
+				
+			}
+			else
+			{
+				b:=true;
+			}endif;	
+					
+			if(b){
+				lenabledFlowSeq += flow ;
+				if (flow.target.oclIsKindOf(Action) or flow.target.oclIsKindOf(ActivityFinalNode)){
+					lenabledNodes += flow.target ;
+				} else if (flow.target.oclIsTypeOf(InputPin)) {
+					lenabledNodes += flow.target.oclAsType(InputPin).owner.oclAsType(ActivityNode) ;
+				} else {
+					self.interpretControlNode(flow, ct, lenabledFlowSeq);
+				} endif;
+				if (ct.oclIsTypeOf(ControlToken)){
+					locEnabl := ct.oclAsType(ControlToken).enabledFlows ;
+				}  else {
+					locEnabl := ct.oclAsType(ObjectToken).enabledFlows ;
+				}  endif ;
+			}endif;
+			--endif
+		};
+		
+		lTokens := self.tokens;
+		j := j + 1 ;
+	};
+
+	var finalEnabled : OrderedSet(ActivityNode) := 	lenabledNodes[ActivityFinalNode] ;
+	var actionEnabled : OrderedSet(ActivityNode) := lenabledNodes[Action]->select( act : Action | (lenabledFlowSeq->includesAll(act.incoming))
+														 and lenabledFlowSeq->includesAll(act.input->collect(incoming)));
+	lenabledNodes := finalEnabled;
+	lenabledNodes += actionEnabled ;
+	var alreadyenabledAcNodes : OrderedSet(ActivityNode);
+	alreadyenabledAcNodes := self.enabledNodes->collect(node) ;
+	var newlenabledAcNodes : OrderedSet(ActivityNode);
+	newlenabledAcNodes := lenabledNodes->select(eN : ActivityNode | not alreadyenabledAcNodes->includes(eN));
+	var eN : OrderedSet(EnabledNode) ;
+	// le reject bug
+	//append un seul element pas tous
+	eN := newlenabledAcNodes -> map activityNode2EnabledNode(self, pSimEvent);
+	eN->forEach(element){
+		result.enabledNodes := result.enabledNodes->append(element) ; 
+	} ;
+	result.enabledNodes := result.enabledNodes->select(eA : EnabledNode | lenabledNodes->includes(eA.node));  
+}
+
+mapping ActivityNode::activityNode2EnabledNode(in ae : ActivityExecution, in pSimEvent : AbstractEvent ) : EnabledNode{
+	node := self ;
+	simEvent := object InjectActionEvent {
+		node := self ;
+		activityExecution := ae  ;
+		internal := true ;
+		name := self.name + " ; " + ae.activity.name + " ; " + ae.instance.name;
+		if (pSimEvent.isTypeOf(InjectActionEvent)){
+			if (pSimEvent.oclAsType(InjectActionEvent).node.isKindOf(CallAction) and 
+				pSimEvent.oclAsType(InjectActionEvent).activityExecution <> ae){
+				parent := pSimEvent ;
+				pSimEvent.subEvent += result.simEvent.oclAsType(AbstractEvent) ;
+			}else {
+				if (pSimEvent.oclAsType(InjectActionEvent).node.isKindOf(FinalNode) and 
+					pSimEvent.oclAsType(InjectActionEvent).activityExecution <> ae){
+					parent := pSimEvent.parent.parent ;
+					pSimEvent.parent.parent.subEvent += result.simEvent.oclAsType(AbstractEvent) ;
+				}else {
+					parent := pSimEvent.parent ;
+					pSimEvent.parent.subEvent  += result.simEvent.oclAsType(AbstractEvent) ;
+				}endif;
+			}  endif ; 
+		}  else {
+			parent := pSimEvent ;
+			pSimEvent.subEvent += result.simEvent.oclAsType(AbstractEvent) ;
+		} endif;
+	}
+}
+
+  
+helper ActivityExecution::interpretControlNode(in flow:ActivityEdge, inout ct : Token, in enabledFlowSeq : OrderedSet(ActivityEdge)):OclVoid {
+	if (flow.target.oclIsTypeOf(JoinNode) or flow.target.oclIsTypeOf(ForkNode)){
+		if (enabledFlowSeq->includesAll(flow.target.incoming)){
+			//on ne prend pas en compte le cas du join mixant object flos et control flow
+			//lever des exception ce serait bien
+			if (ct.oclIsTypeOf(ControlToken)){
+				var newFlows : OrderedSet(ControlFlow) ;
+				newFlows := flow.target.outgoing.oclAsType(ControlFlow) ;
+				newFlows->forEach(newFlow){
+				ct.oclAsType(ControlToken).enabledFlows :=  ct.oclAsType(ControlToken).enabledFlows->append(newFlow) ;
+				} ;
+			}
+			else {
+				var newFlows : OrderedSet(ObjectFlow) ;
+				newFlows := flow.target.outgoing.oclAsType(ObjectFlow) ;
+				newFlows->forEach(newFlow){
+				ct.oclAsType(ObjectToken).enabledFlows :=  ct.oclAsType(ObjectToken).enabledFlows->append(newFlow) ;
+				} ;
+			} endif ;
+		} endif ;
+	} else {  
+		if (ct.oclIsTypeOf(ControlToken)){
+				var newFlows : OrderedSet(ControlFlow) ;
+				newFlows := flow.target.outgoing.oclAsType(ControlFlow) ;
+				newFlows->forEach(newFlow){
+				ct.oclAsType(ControlToken).enabledFlows :=  ct.oclAsType(ControlToken).enabledFlows->append(newFlow) ;
+				} ;
+			}
+			else {
+				var newFlows : OrderedSet(ObjectFlow) ;
+				newFlows := flow.target.outgoing.oclAsType(ObjectFlow) ;
+				newFlows->forEach(newFlow){
+				ct.oclAsType(ObjectToken).enabledFlows :=  ct.oclAsType(ObjectToken).enabledFlows->append(newFlow) ;
+				} ;
+			} endif ;
+	}  endif ; 
+}
+
+mapping CallEvent::getInjectSimEvent() : InjectSimEvent{
+  	event := self;
+}
+
+mapping Event::Event2InjectSimEvent(instanceSpec : InstanceSpecification, inputEvent : AbstractEvent) : InjectSimEvent{
+	event := self;
+	internal := true ;
+	name := self.name + " ; " + instanceSpec.name;
+	parent := inputEvent ;
+	inputEvent.subEvent += result ;
+	instanceSpecifications := instanceSpec ;
+	--le first semble etrange check l'utilisation de ce champ
+	stateMachine := instanceSpec.oclAsType(DynamicInstance).instancesSM->first().type;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sam:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sam="http://www.topcased.org/SAM/1.3" xmi:id="_8lR9ZFQWEd2c-copuvLPCg">
+  <modelContent xsi:type="sam:Automaton" xmi:id="_8lR9ZVQWEd2c-copuvLPCg" name="TestAutomatonAndOrXorNot">
+    <listPorts xsi:type="sam:InControlPort" xmi:id="_9A_pA1QWEd2c-copuvLPCg" name="E1"/>
+    <listPorts xsi:type="sam:InMessagePort" xmi:id="_9SIcU1QWEd2c-copuvLPCg" name="E2"/>
+    <listPorts xsi:type="sam:OutControlPort" xmi:id="_G-sBM1QXEd2c-copuvLPCg" name="S1"/>
+    <listTransitions xmi:id="__fd2llQWEd2c-copuvLPCg" name="Transition1" condition="E1 and E2" emission="S1" dest="_-0GlYFQWEd2c-copuvLPCg" source="_-pAIolQWEd2c-copuvLPCg"/>
+    <listTransitions xmi:id="__7LiNVQWEd2c-copuvLPCg" name="Transition2" condition="E1 or E2" emission="S1" dest="__NIwclQWEd2c-copuvLPCg" source="_-0GlYFQWEd2c-copuvLPCg"/>
+    <listTransitions xmi:id="_PhaQNVQXEd2c-copuvLPCg" name="Transition3" condition="E1 xor E2" emission="S1" dest="_O4IpslQXEd2c-copuvLPCg" source="__NIwclQWEd2c-copuvLPCg"/>
+    <listTransitions xmi:id="_PyjDhFQXEd2c-copuvLPCg" name="Transition4" condition="not E1" emission="S1" dest="_-pAIolQWEd2c-copuvLPCg" source="_O4IpslQXEd2c-copuvLPCg"/>
+    <listStates xsi:type="sam:InitialState" xmi:id="_-pAIolQWEd2c-copuvLPCg" name="InitialState1"/>
+    <listStates xsi:type="sam:State" xmi:id="_-0GlYFQWEd2c-copuvLPCg" name="State1"/>
+    <listStates xsi:type="sam:State" xmi:id="__NIwclQWEd2c-copuvLPCg" name="State2"/>
+    <listStates xsi:type="sam:State" xmi:id="_O4IpslQXEd2c-copuvLPCg" name="State3"/>
+  </modelContent>
+</sam:Model>

@@ -64,10 +64,6 @@ aspect class CollectionLiteralExp {
 			
 			typeLit.typeref:=type.generateType(context).generateTypeRef
 			
-
-			
-			
-			
 			//add all the collection items
 			part.each{x|
 					x.range2domain(context)
@@ -120,20 +116,16 @@ aspect class IteratorExp {
 		var out : org::kermeta::language::behavior::CallOperation init org::kermeta::language::behavior::CallOperation.new
 		
 		output:=out
-		if name =="collect" then
+		if name =="collect" then/*1*/
 			out.name:="collect"
+		else if name == "select" then/*2*/
+			out.name:="select"
+		else if name == "selectOne" then/*3*/
+			out.name:="detect"
 		else
-			if name == "select" then
-				out.name:="select"
-			else
-				if name == "selectOne" then
-					out.name:="detect"
-				else
-					out.name:=name
-					StdIO.writeln("name : "+name)
-				end
-			end
-		end
+			out.name:=name
+			StdIO.writeln("name : "+name)
+		end/*3*/ end/*2*/ end/*1*/
 		
 		var lambdaExp : org::kermeta::language::behavior::LambdaExpression init org::kermeta::language::behavior::LambdaExpression.new
 		
@@ -169,12 +161,12 @@ aspect class OperationCallExp {
 			
 			var resourceUri : String init referredOperation.containingResource.getURI.toString
 			
-			if  (resourceUri=="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational" or resourceUri=="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/essentialocl/oclstdlib.essentialocl") and referredOperation.output==void then
+			if  (resourceUri=="pathmap://models/qvtoperational/qvtstdlib.qvtoperational" or resourceUri=="pathmap://models/essentialocl/oclstdlib.essentialocl") and referredOperation.output==void then
 				
 				//in kermeta the flatten operation from sequence return a bag of objects
 				//should return flatten.asSequence.asType(Sequence<X>) where X is the type of the flatten operation in qvt
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
-				if referredOperation.getQVTID()=="OclLib::Sequence::flatten" then
+				if referredOperation.getQVTID()=="OclLib::Sequence::flatten" then /*1*/
 					
 					var operationType : essentialocl::SequenceType init self.type.asType(essentialocl::SequenceType)
 					operationType.elementType.range2domain(context)
@@ -186,25 +178,16 @@ aspect class OperationCallExp {
 					
 					source.range2domain(context)
 					flattenFeature.target?=source.output
-					
-				end
-				
-				//why this qvtid starts with :: is still a mystery
-				if referredOperation.getQVTID()=="QvtLib::Model::objects" then
+				else if referredOperation.getQVTID()=="QvtLib::Model::objects" then /*2*/
 					out.name:="extent"
 					source.range2domain(context)
 					out.target?=source.output
-				end
-				
 				
 				//the equivalent to objectsOfType takes a type parameter e.g. extent.objectsOfType[T]
-				if referredOperation.getQVTID() =="QvtLib::Model::objectsOfType" then
+				else if referredOperation.getQVTID() =="QvtLib::Model::objectsOfType" then /*3*/
 					out.name:="objectsOfType"
 					source.range2domain(context)
 					out.target?=source.output
-					
-					
-					
 					argument.each{paramoot|
 						paramoot.range2domain(context) 
 						if paramoot.isInstanceOf(essentialocl::TypeExp) then
@@ -214,13 +197,97 @@ aspect class OperationCallExp {
 								out.containedType.add(generic)
 							end
 						end
-						/*if x.output!=void then 
+						}
+						
+				else if referredOperation.getQVTID()=="QvtLib::OclElement::allSubobjectsOfType" then /*4*/
+					out.name:="allSubobjectsOfType"
+					out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::ElementExtension",false)
+					source.range2domain(context)
+					out.parameters.add(source.output.asType(behavior::Expression))
+					argument.each{paramoot|
+						paramoot.range2domain(context) 
+						if paramoot.isInstanceOf(essentialocl::TypeExp) then
+							var generic : structure::Type init paramoot.asType(essentialocl::TypeExp).referredType.generateType(context)
+							out.generics.add(generic)
+							if generic.container.isVoid then
+								out.containedType.add(generic)
+							end
+						end
+						}
+				else if referredOperation.getQVTID()=="QvtLib::OclElement::subobjectsOfType" then /*6*/
+					out.name:="subobjectsOfType"
+					out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::ElementExtension",false)
+					source.range2domain(context)
+					out.parameters.add(source.output.asType(behavior::Expression))
+					argument.each{paramoot|
+						paramoot.range2domain(context) 
+						if paramoot.isInstanceOf(essentialocl::TypeExp) then
+							var generic : structure::Type init paramoot.asType(essentialocl::TypeExp).referredType.generateType(context)
+							out.generics.add(generic)
+							if generic.container.isVoid then
+								out.containedType.add(generic)
+							end
+						end
+						}	
+				
+				else if referredOperation.getQVTID()=="QvtLib::OclElement::allSubobjectsOfKind" then /*7*/
+					out.name:="allSubobjectsOfKind"
+					out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::ElementExtension",false)
+					source.range2domain(context)
+					out.parameters.add(source.output.asType(behavior::Expression))
+					argument.each{paramoot|
+						paramoot.range2domain(context) 
+						if paramoot.isInstanceOf(essentialocl::TypeExp) then
+							var generic : structure::Type init paramoot.asType(essentialocl::TypeExp).referredType.generateType(context)
+							out.generics.add(generic)
+							if generic.container.isVoid then
+								out.containedType.add(generic)
+							end
+						end
+						}
+				else if referredOperation.getQVTID()=="QvtLib::OclElement::subobjectsOfKind" then /*8*/
+					out.name:="subobjectsOfKind"
+					out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::ElementExtension",false)
+					source.range2domain(context)
+					out.parameters.add(source.output.asType(behavior::Expression))
+					argument.each{paramoot|
+						paramoot.range2domain(context) 
+						if paramoot.isInstanceOf(essentialocl::TypeExp) then
+							var generic : structure::Type init paramoot.asType(essentialocl::TypeExp).referredType.generateType(context)
+							out.generics.add(generic)
+							if generic.container.isVoid then
+								out.containedType.add(generic)
+							end
+						end
+						}	
+					
+				else if (referredOperation !=void) then/*5*/
+					//if there is a source model
+					if source!=void then
+						source.range2domain(context)
+						out.target?=source.output
+					else
+						var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+						out.target:=transfoCall
+					end
+				
+					if context.frameworkOperationMap.containsKey(referredOperation.getQVTID) then
+						out.name:=context.frameworkOperationMap.getValue(referredOperation.getQVTID)
+					else
+						referredOperation.range2domain(context)
+						out.name:=referredOperation.name
+					end
+					
+					argument.each{x|
+						x.range2domain(context) 
+						if x.output!=void then 
 							out.parameters.add(x.output.asType(org::kermeta::language::behavior::Expression)) 
 						else 
 							//StdIO.writeln("output is void for a : "+ x.getMetaClass.name) 
-						end*/
+						end
 						}
-				end
+					
+				end/*5*/ end/*8*/ end/*7*/ end/*6*/ end/*4*/ end/*3*/ end/*2*/ end/*1*/
 				StdIO.write("THIS IS A STANDARD METHOD")
 				StdIO.writeln(" referredOperation name : "+ referredOperation.getQVTID)
 			else
@@ -236,13 +303,13 @@ aspect class OperationCallExp {
 					out.target:=transfoCall
 				end
 				
-				if (referredOperation !=void) then
-					if context.frameworkOperationMap.containsKey(referredOperation.getQVTID) then
+				if referredOperation !=void then
+					/*if context.frameworkOperationMap.containsKey(referredOperation.getQVTID) then
 						out.name:=context.frameworkOperationMap.getValue(referredOperation.getQVTID)
-					else
+					else*/
 						referredOperation.range2domain(context)
 						out.name:=referredOperation.name
-					end
+					//end
 				end
 				
 				argument.each{x|
@@ -286,27 +353,23 @@ aspect class VariableExp {
 	
 	method range2domain(context : Qvt2KermetaContext) : Void  is do
 		var out: org::kermeta::language::behavior::Expression
-		if (referredVariable.name=="result") then
-			 out:= org::kermeta::language::behavior::CallResult.new
+		if (referredVariable.name=="result") then/*1*/
+			out:= org::kermeta::language::behavior::CallResult.new
+			
+		else if (referredVariable.name=="self") then/*2*/
+			out:= org::kermeta::language::behavior::SelfExpression.new
+			
+		else if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then/*3*/
+			var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+			out := org::kermeta::language::behavior::CallProperty.new
+			out.asType(org::kermeta::language::behavior::CallProperty).target:=transfoContext
+			referredVariable.range2domain(context)
+			out.asType(org::kermeta::language::behavior::CallProperty).staticProperty?= referredVariable.output
+			out.asType(org::kermeta::language::behavior::CallProperty).name:=out.asType(org::kermeta::language::behavior::CallProperty).staticProperty.name
+		
 		else
-			if (referredVariable.name=="self") then
-				out:= org::kermeta::language::behavior::SelfExpression.new
-			else
-				if referredVariable.isInstanceOf(qvtoperational::ModelParameter) then
-					var transfoContext : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
-					out := org::kermeta::language::behavior::CallProperty.new
-					out.asType(org::kermeta::language::behavior::CallProperty).target:=transfoContext
-					referredVariable.range2domain(context)
-					out.asType(org::kermeta::language::behavior::CallProperty).staticProperty?= referredVariable.output
-					out.asType(org::kermeta::language::behavior::CallProperty).name:=out.asType(org::kermeta::language::behavior::CallProperty).staticProperty.name
-					
-				else
-					out := org::kermeta::language::behavior::CallVariable.new
-					out.asType(org::kermeta::language::behavior::CallVariable).name:=referredVariable.name
-				end
-				
-			end
-		end
+			out := org::kermeta::language::behavior::UnresolvedCall.new.initialize(referredVariable.name,false)
+		end/*3*/ end/*2*/ end/*1*/
 		output:=out
 	end
 }
@@ -369,24 +432,13 @@ aspect class Variable {
 		
 		type.range2domain(context)
 		
-		if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+		if type.output.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then /*1*/
 			out.type:=structure::UnresolvedType.new.initialize(type.getQVTID).generateTypeRef()
-			
-			
-		else
-			if type.output.isInstanceOf(org::kermeta::language::structure::PrimitiveType) then
-				out.type:=type.output.asType(org::kermeta::language::structure::PrimitiveType).generateTypeRef()
-			else
-				if type.output.isInstanceOf(structure::UnresolvedType) then
-					out.type?=type.output.asType(structure::UnresolvedType).generateTypeRef()
-					
-					
-						
-					
-				end
-			end
-		end
-		
+		else if type.output.isInstanceOf(org::kermeta::language::structure::PrimitiveType) then/*2*/
+			out.type:=type.output.asType(org::kermeta::language::structure::PrimitiveType).generateTypeRef()
+		else if type.output.isInstanceOf(structure::UnresolvedType) then/*3*/
+			out.type?=type.output.asType(structure::UnresolvedType).generateTypeRef()
+		end/*3*/ end/*2*/ end/*1*/
 	end
 }
 	

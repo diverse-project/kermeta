@@ -1,0 +1,88 @@
+package qvt::utils;
+using kermeta::standard
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+require kermeta 
+
+singleton ElementExtension{	
+	
+	operation metaClassName(element : Object) : String is do 
+		result := element.getMetaClass.typeDefinition.name
+	
+	end
+	
+	operation subobjects(element : Object) : Set[Object] is do
+		result := Set[Object].new
+		
+		var cd : ClassDefinition init element.getMetaClass.typeDefinition.asType(ClassDefinition)
+		
+		cd.ownedAttribute.each{att|
+				if att.isComposite then
+					if att.upper==1 then
+						result.add(element.get(att))
+					else
+						element.get(att).asType(Collection<Object>).each{y|result.add(y)}
+					end
+				end}
+	end
+	
+	 
+	
+	operation allSubobjects(element : Object) : Set[Object] is do
+	
+		result := Set[Object].new
+		
+		var toSearch : Sequence[Object] init Sequence[Object].new
+		subobjects(element).each{elt|toSearch.add(elt)}
+		
+		from var current : Object
+		until toSearch.isEmpty 
+		loop
+			current:=toSearch.one
+			if not result.contains(current) then
+			
+				result.add(current)
+				subobjects(current).each{elt|toSearch.add(elt)}
+			end
+			toSearch.remove(current)
+		end
+	end
+	
+	operation subobjectsOfType[T](element : Object) : Set[T] is do 
+	
+		result:=Set[T].new
+		subobjects(element).each{elt|if elt.isDirectInstanceOf(T) then
+			result.add(elt.asType(T))
+			end}
+	
+	end
+	
+	operation allSubobjectsOfType[T](element : Object) : Set[T] is do 
+	
+		result:=Set[T].new
+		allSubobjects(element).each{elt|if elt.isDirectInstanceOf(T) then
+			result.add(elt.asType(T))
+			end}
+	
+	end
+	
+	operation subobjectsOfKind[T](element : Object) : Set[T] is do 
+	
+		result:=Set[T].new
+		subobjects(element).each{elt|if elt.isInstanceOf(T) then
+			result.add(elt.asType(T))
+			end}
+	
+	end
+	
+	operation allSubobjectsOfKind[T](element : Object) : Set[T] is do 
+	
+		result:=Set[T].new
+		allSubobjects(element).each{elt|if elt.isInstanceOf(T) then
+			result.add(elt.asType(T))
+			end}
+	
+	end
+
+}
+

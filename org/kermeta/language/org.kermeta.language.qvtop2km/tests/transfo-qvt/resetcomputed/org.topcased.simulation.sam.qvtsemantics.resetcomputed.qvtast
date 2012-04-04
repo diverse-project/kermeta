@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtast:TopLevelAst xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtast="http://smartqvt.elibel.tm.fr/models/mm/qvtast/" start="628" length="784" offset="0">
+  <m_unit_element xsi:type="qvtast:TransformationDeclAst" start="628" length="63" offset="0">
+    <p_transformation_header start="628" length="62" offset="0">
+      <p_identifier start="643" length="13" offset="0" value="resetcomputed"/>
+      <p_transformation_signature start="656" length="34" offset="0">
+        <p_simple_signature start="656" length="34" offset="0">
+          <m_param start="657" length="32" offset="0">
+            <p_param_direction xsi:type="qvtast:InOutParamDirectionAst" start="657" length="5" offset="0"/>
+            <p_simple_declarator start="663" length="26" offset="0">
+              <p_scoped_identifier start="663" length="15" offset="0">
+                <m_identifier start="663" length="15" offset="0" value="samdynamicModel"/>
+              </p_scoped_identifier>
+              <p_typespec start="679" length="10" offset="0">
+                <p_type_reference xsi:type="qvtast:ScopedIdentifierTypeReferenceAst" start="679" length="10" offset="0">
+                  <p_scoped_identifier start="679" length="10" offset="0">
+                    <m_identifier start="679" length="10" offset="0" value="samdynamic"/>
+                  </p_scoped_identifier>
+                </p_type_reference>
+              </p_typespec>
+            </p_simple_declarator>
+          </m_param>
+        </p_simple_signature>
+      </p_transformation_signature>
+    </p_transformation_header>
+  </m_unit_element>
+  <m_unit_element xsi:type="qvtast:EntryDefAst" start="1023" length="193" offset="0">
+    <p_entry_header start="1023" length="6" offset="0">
+      <p_simple_signature start="1027" length="2" offset="0"/>
+    </p_entry_header>
+    <p_expression_block start="1030" length="186" offset="0">
+      <p_expression_list start="1034" length="179" offset="0">
+        <m_expression xsi:type="qvtast:ArgListPostfixExpAst" start="1034" length="84" offset="0">
+          <p_postfix_exp xsi:type="qvtast:RuleCallExpAccessPostfixExpAst" start="1034" length="82" offset="0">
+            <p_postfix_exp xsi:type="qvtast:ArgListPostfixExpAst" start="1034" length="56" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="1034" length="29" offset="0">
+                <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="1034" length="15" offset="0">
+                  <p_scoped_identifier start="1034" length="15" offset="0">
+                    <m_identifier start="1034" length="15" offset="0" value="samdynamicModel"/>
+                  </p_scoped_identifier>
+                </p_postfix_exp>
+                <p_access_op xsi:type="qvtast:DotAccessOpAst" start="1049" length="1" offset="0"/>
+                <p_scoped_identifier start="1050" length="13" offset="0">
+                  <m_identifier start="1050" length="13" offset="0" value="objectsOfType"/>
+                </p_scoped_identifier>
+              </p_postfix_exp>
+              <m_arg xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="1064" length="25" offset="0">
+                <p_scoped_identifier start="1064" length="25" offset="0">
+                  <m_identifier start="1064" length="10" offset="0" value="samdynamic"/>
+                  <m_identifier start="1076" length="13" offset="0" value="DynamicSystem"/>
+                </p_scoped_identifier>
+              </m_arg>
+            </p_postfix_exp>
+            <p_access_op xsi:type="qvtast:ArrowAccessOpAst" start="1091" length="2" offset="0"/>
+            <p_rule_call_exp xsi:type="qvtast:MapRuleCallExpAst" start="1094" length="22" offset="0">
+              <p_scoped_identifier start="1098" length="18" offset="0">
+                <m_identifier start="1098" length="18" offset="0" value="resetDynamicSystem"/>
+              </p_scoped_identifier>
+            </p_rule_call_exp>
+          </p_postfix_exp>
+        </m_expression>
+        <m_expression xsi:type="qvtast:ArgListPostfixExpAst" start="1122" length="90" offset="0">
+          <p_postfix_exp xsi:type="qvtast:RuleCallExpAccessPostfixExpAst" start="1122" length="88" offset="0">
+            <p_postfix_exp xsi:type="qvtast:ArgListPostfixExpAst" start="1122" length="59" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="1122" length="29" offset="0">
+                <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="1122" length="15" offset="0">
+                  <p_scoped_identifier start="1122" length="15" offset="0">
+                    <m_identifier start="1122" length="15" offset="0" value="samdynamicModel"/>
+                  </p_scoped_identifier>
+                </p_postfix_exp>
+                <p_access_op xsi:type="qvtast:DotAccessOpAst" start="1137" length="1" offset="0"/>
+                <p_scoped_identifier start="1138" length="13" offset="0">
+                  <m_identifier start="1138" length="13" offset="0" value="objectsOfType"/>
+                </p_scoped_identifier>
+              </p_postfix_exp>
+              <m_arg xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="1152" length="28" offset="0">
+                <p_scoped_identifier start="1152" length="28" offset="0">
+                  <m_identifier start="1152" length="10" offset="0" value="samdynamic"/>
+                  <m_identifier start="1164" length="16" offset="0" value="DynamicAutomaton"/>
+                </p_scoped_identifier>
+              </m_arg>
+            </p_postfix_exp>
+            <p_access_op xsi:type="qvtast:ArrowAccessOpAst" start="1182" length="2" offset="0"/>
+            <p_rule_call_exp xsi:type="qvtast:MapRuleCallExpAst" start="1185" length="25" offset="0">
+              <p_scoped_identifier start="1189" length="21" offset="0">
+                <m_identifier start="1189" length="21" offset="0" value="resetDynamicAutomaton"/>
+              </p_scoped_identifier>
+            </p_rule_call_exp>
+          </p_postfix_exp>
+        </m_expression>
+      </p_expression_list>
+    </p_expression_block>
+  </m_unit_element>
+  <m_unit_element xsi:type="qvtast:MappingDefAst" start="1220" length="91" offset="0">
+    <p_mapping_full_header start="1220" length="61" offset="0">
+      <p_mapping_header start="1220" length="61" offset="0">
+        <p_param_direction xsi:type="qvtast:InOutParamDirectionAst" start="1228" length="5" offset="0"/>
+        <p_scoped_identifier start="1234" length="45" offset="0">
+          <m_identifier start="1234" length="10" offset="0" value="samdynamic"/>
+          <m_identifier start="1246" length="13" offset="0" value="DynamicSystem"/>
+          <m_identifier start="1261" length="18" offset="0" value="resetDynamicSystem"/>
+        </p_scoped_identifier>
+        <p_complete_signature start="1279" length="2" offset="0">
+          <p_simple_signature start="1279" length="2" offset="0"/>
+        </p_complete_signature>
+      </p_mapping_header>
+    </p_mapping_full_header>
+    <p_mapping_body start="1286" length="22" offset="0">
+      <p_population_section xsi:type="qvtast:ExpressionListPopulationSectionAst" start="1286" length="22" offset="0">
+        <p_expression_list start="1286" length="22" offset="0">
+          <m_expression xsi:type="qvtast:ExpressionAssignAssignExpAst" start="1286" length="21" offset="0">
+            <p_unary_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="1286" length="13" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="1286" length="4" offset="0">
+                <p_scoped_identifier start="1286" length="4" offset="0">
+                  <m_identifier start="1286" length="4" offset="0" value="self"/>
+                </p_scoped_identifier>
+              </p_postfix_exp>
+              <p_access_op xsi:type="qvtast:DotAccessOpAst" start="1290" length="1" offset="0"/>
+              <p_scoped_identifier start="1291" length="8" offset="0">
+                <m_identifier start="1291" length="8" offset="0" value="computed"/>
+              </p_scoped_identifier>
+            </p_unary_exp>
+            <p_assign_op xsi:type="qvtast:XEqAssignOpAst" start="1300" length="2" offset="0"/>
+            <p_expression xsi:type="qvtast:NullLiteralSimpleAst" start="1303" length="4" offset="0"/>
+          </m_expression>
+        </p_expression_list>
+      </p_population_section>
+    </p_mapping_body>
+  </m_unit_element>
+  <m_unit_element xsi:type="qvtast:MappingDefAst" start="1315" length="97" offset="0">
+    <p_mapping_full_header start="1315" length="67" offset="0">
+      <p_mapping_header start="1315" length="67" offset="0">
+        <p_param_direction xsi:type="qvtast:InOutParamDirectionAst" start="1323" length="5" offset="0"/>
+        <p_scoped_identifier start="1329" length="51" offset="0">
+          <m_identifier start="1329" length="10" offset="0" value="samdynamic"/>
+          <m_identifier start="1341" length="16" offset="0" value="DynamicAutomaton"/>
+          <m_identifier start="1359" length="21" offset="0" value="resetDynamicAutomaton"/>
+        </p_scoped_identifier>
+        <p_complete_signature start="1380" length="2" offset="0">
+          <p_simple_signature start="1380" length="2" offset="0"/>
+        </p_complete_signature>
+      </p_mapping_header>
+    </p_mapping_full_header>
+    <p_mapping_body start="1387" length="22" offset="0">
+      <p_population_section xsi:type="qvtast:ExpressionListPopulationSectionAst" start="1387" length="22" offset="0">
+        <p_expression_list start="1387" length="22" offset="0">
+          <m_expression xsi:type="qvtast:ExpressionAssignAssignExpAst" start="1387" length="21" offset="0">
+            <p_unary_exp xsi:type="qvtast:ScopedIdentifierAccessPostfixExpAst" start="1387" length="13" offset="0">
+              <p_postfix_exp xsi:type="qvtast:ScopedIdentifierPrimaryExpAst" start="1387" length="4" offset="0">
+                <p_scoped_identifier start="1387" length="4" offset="0">
+                  <m_identifier start="1387" length="4" offset="0" value="self"/>
+                </p_scoped_identifier>
+              </p_postfix_exp>
+              <p_access_op xsi:type="qvtast:DotAccessOpAst" start="1391" length="1" offset="0"/>
+              <p_scoped_identifier start="1392" length="8" offset="0">
+                <m_identifier start="1392" length="8" offset="0" value="computed"/>
+              </p_scoped_identifier>
+            </p_unary_exp>
+            <p_assign_op xsi:type="qvtast:XEqAssignOpAst" start="1401" length="2" offset="0"/>
+            <p_expression xsi:type="qvtast:NullLiteralSimpleAst" start="1404" length="4" offset="0"/>
+          </m_expression>
+        </p_expression_list>
+      </p_population_section>
+    </p_mapping_body>
+  </m_unit_element>
+</qvtast:TopLevelAst>

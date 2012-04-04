@@ -1,0 +1,63 @@
+------------------------------------------------------------------------------
+--
+-- initmodel
+-- 
+-- Copyright (c) 2005-2008 TOPCASED consortium.
+--
+-- Contributors:
+--  bmaggi Atos Origin benoit.maggi@atosorigin.com
+--    
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+-------------------------------------------------------------------------------
+transformation initmodel(inout samdynamicModel:samdynamic,in samModel:sam);
+
+
+--------------------------------------------------------------------------------
+-------------------------- mapping ---------------------------------------------
+--------------------------------------------------------------------------------
+
+-- the main mapping
+-- The mapping is launch on the root element : sam::Model
+main() {
+	samdynamicModel.objectsOfType(samdynamic::DynamicSystem) -> map initDynamicSystem();
+	samdynamicModel.objectsOfType(samdynamic::DynamicAutomaton) -> map initDynamicAutomaton();
+}
+
+
+mapping inout samdynamic::DynamicSystem::initDynamicSystem() {
+	result.actived:= null;
+	result.computed:= null;
+	self.childs[DynamicSystem] -> map initDynamicSystem();
+	self.childs[DynamicAutomaton] -> map initDynamicAutomaton();
+}
+
+mapping inout samdynamic::DynamicAutomaton::initDynamicAutomaton() {
+	result.actived:= null;
+	result.computed:= null;
+
+	// update the current state 
+	var lInitialStateOrderedSet:OrderedSet(InitialState) :=self.reference.allSubobjectsOfType(InitialState);
+	result.currentState := lInitialStateOrderedSet->first();
+ 
+	// update the fireable transition
+	result.fireables := self.reference.listTransitions -> select(lTransition|lTransition.source == result.currentState );
+
+	var lMacroStateOrderedSet:OrderedSet(MacroState) := self.reference.allSubobjectsOfType(MacroState) ->select(lMacroState | lMacroState.allSubobjectsOfType(InitialState).includes(result.currentState ) ) ;
+	result.fireables += self.reference.listTransitions -> select(lTransition| lMacroStateOrderedSet.includes(lTransition.source)  );
+	
+	
+//	if (result.currentState.parentState <> null){
+//		result.fireables  +=  self.reference.listTransitions ->select(transition|transition.source.name == result.currentState.parentState.name);
+//	}
+
+	
+}
+
+
+
+
+

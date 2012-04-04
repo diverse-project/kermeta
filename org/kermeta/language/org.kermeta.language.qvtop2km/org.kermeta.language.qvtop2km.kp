@@ -6,6 +6,7 @@ defaultMainOperation = "main"
 sources = {
 	require "${project.baseUri}/src/main/kmt/adapter/adapter_5.kmt"
 	require "${project.baseUri}/src/main/kmt/adapter/kermeta_extension.kmt"
+	
 	require "${project.baseUri}/src/main/kmt/qvtoperational_aspect.kmt"
 
 	require "${project.baseUri}/src/main/kmt/qvt2kermeta.kmt"

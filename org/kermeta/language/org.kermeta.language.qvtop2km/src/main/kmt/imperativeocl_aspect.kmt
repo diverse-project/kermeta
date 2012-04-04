@@ -100,8 +100,11 @@ end
 
 }
 
+
 aspect class AssignExp {
 
+
+	
 
 
 
@@ -112,9 +115,11 @@ aspect class AssignExp {
 			//StdIO.writeln("AssignExp  -left type : "+left.getMetaClass.name)
 		
 			if left.isInstanceOf(essentialocl::PropertyCallExp)
-					.andThen{x|left.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} then 
-					//or
+					.andThen{x|left.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} 
+					.orThen{x|left.isInstanceOf(essentialocl::VariableExp)
+						.andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} }
 				//left.isInstanceOf(essentialocl::VariableExp).andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} 
+				then
 				
 				var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new
 				output:=out
@@ -158,6 +163,61 @@ aspect class AssignExp {
 				
 			end
 		end
+	end
+
+
+}
+singleton AssignmentHelper {
+
+	operation generateAssignement( leftPart : OclExpression , valuePart : OclExpression , context : Qvt2KermetaContext ) : behavior::Assignment is do 
+		result := behavior::Assignment
+		if leftPart.isInstanceOf(essentialocl::PropertyCallExp)
+				.andThen{x|leftPart.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} 
+				.orThen{x|leftPart.isInstanceOf(essentialocl::VariableExp)
+					.andThen{x| leftPart.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} }
+			//left.isInstanceOf(essentialocl::VariableExp).andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} 
+			then
+			
+			var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new
+			output:=out
+			
+			leftPart.range2domain(context)
+			out.parameters.add(leftPart.output.asType(behavior::Expression))
+			
+			out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::CollectionExtension",false)
+			valuePart.range2domain(context)
+			
+			out.parameters.add(self.~value.one.output.asType(org::kermeta::language::behavior::Expression))
+			if ~valuePart.isMulti then
+				if isReset() then
+					out.name:="clearAndAddAll"
+				else
+					out.name:="qvtAddAll"
+				end
+			else
+				if isReset() then
+					out.name:="clearAndAdd"
+				else
+					out.name:="add"
+				end
+			end
+		else		
+			
+			
+				
+			var out : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+			output:=out
+			
+			
+			//should be an add if type of left is a declared collection
+			leftPart.range2domain(context)
+			out.target?=leftPart.output
+			~valuePart.range2domain(context)
+			out.~value?=~valuePart.output
+			
+		end
+		
+	
 	end
 
 

@@ -907,8 +907,8 @@ aspect class OperationalTransformation {
 		end
 	end
 
-
-	operation genClassDefinition(context : Qvt2KermetaContext) : Void is do
+	/**generate the class definitions that are sources ('context' in the qvtop mm) of the imperative operations of the transformation*/
+	operation genClassDefinitions(context : Qvt2KermetaContext) : Void is do
 		//StdIO.writeln("OperationalTransformation::genClassDefinition") 
 		ownedOperation.each{op | 
 				StdIO.writeln("genClassDef")
@@ -919,17 +919,18 @@ aspect class OperationalTransformation {
 				}
 		//StdIO.writeln("OperationalTransformation::genClassDefinition-end")
 	end
-
+	/**helper method to create a type definition from an imperative operation*/
 	operation createTypeDefinition(type : emof::Type, context : Qvt2KermetaContext) : Void is do 
 		StdIO.writeln("OperationalTransformation::createTypeDefinition")
-		StdIO.writeln("createContext "+type.toString)
-		StdIO.writeln("name"+type.name)
+		//StdIO.writeln("createContext "+type.toString)
+		//StdIO.writeln("name"+type.name)
 		createPackage(type.container.asType(emof::Package), context)
 		type.range2domain(context)
 		type.container.asType(emof::Package).output.asType(structure::Package).ownedTypeDefinition.add(type.output.asType(structure::TypeDefinition))
 		StdIO.writeln("OperationalTransformation::createTypeDefinition-end")
 	end
-
+	
+	/**helper method to create a package*/
 	operation createPackage(pack : emof::Package, context : Qvt2KermetaContext) : Void is do
 		if pack.output==void then
 			//StdIO.writeln("OperationalTransformation::createPackage")
@@ -948,19 +949,13 @@ aspect class OperationalTransformation {
 	end
 	
 	
-	/**
-	create the main operation of the transformation which load the parameters of the transformations
-	
-	*/
-	
+	/**	create the main operation of the transformation which load the parameters of the transformations*/
 	operation generateInitOperation(context : Qvt2KermetaContext) : structure::Operation is do
 		var initOp : structure::Operation init structure::Operation.new
 		initOp.name := "kermetaInit"
 		initOp.upper:=1
 		initOp.type:=structure::UnresolvedType.new.initialize("kermeta::standard::Void")
 		initOp.containedType.add(initOp.type)
-
-		
 		
 		//each modelParameter correspond to 2 parameters, one for the path to the model, the other for the path to the metamodel
 		var paramNumber : Integer init 1
@@ -993,7 +988,6 @@ aspect class OperationalTransformation {
 		registryCall.target:=behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 		assignRegistry.target := registryCall
 		opBlock.statement.add(assignRegistry)
-		
 		
 		//create var decl for the resourceset ofeach model
 		paramNumber:=1
@@ -1050,7 +1044,6 @@ aspect class OperationalTransformation {
 				var callLoad : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("load",true)
 				callLoad.target:= behavior::UnresolvedCall.new.initialize(param.name,false)
 				callLoad.target.asType(behavior::UnresolvedCall).target:= behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
-				//callLoad.parameters.add(behavior::VoidLiteral.new)
 				opBlock.statement.add(callLoad)
 			end
 			StdIO.writeln("DirectionKind "+param.kind.toString+" "+(param.kind==DirectionKind.in).toString)
@@ -1078,9 +1071,6 @@ aspect class OperationalTransformation {
 	end
 	
 }
-
-
-
 
 /**
 * resolveExp is the operation that can require a link of traceability
@@ -1132,16 +1122,8 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		var typeTestCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("isInstanceOf",true)
 		andCall.target:=typeTestCall
 
-		
-					
-		/*var boolClass: structure::Class init structure::Class.new
-		typeTestCall.staticType:=boolClass
-		typeTestCall.containedType.add(boolClass)
-		boolClass.typeDefinition?=context.kmtContext.getFromQualifiedName("kermeta::standard::Boolean")
-		*/
 		var xCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(target.name, false)
 		typeTestCall.target:=xCall
-		
 		
 		if condition==void then
 			var truelit : behavior::BooleanLiteral init behavior::BooleanLiteral.new
@@ -1156,7 +1138,6 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		
 		var typeToTest : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize(target.type.getQVTID,false)
 		
-		//typeToTest.typeref:=target.type.output.asType(structure::ClassDefinition).generateTypeRef() //range2domain already done earlier
 		typeTestCall.parameters.add(typeToTest)
 		
 		detectCall.target:=cf_resolve
@@ -1170,46 +1151,11 @@ method range2domain(context : Qvt2KermetaContext) : Void is do
 		source.range2domain(context)
 		cf_resolve.parameters.add(source.output.asType(behavior::Expression))
 		
-		//target.toVariableDecl()
-		//cf_resolve.parameters.add(target.output.asType(org::kermeta::language::behavior::Expression))
-		
-		var cf_cast : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("asType",true)
-		cf_resolve.target:=cf_cast
-		
-		
-		
-		var tl_tracetype : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
-		cf_cast.parameters.add(tl_tracetype)
-		
-		
-		/*tl_tracetype.typeref:=context.kmtContext
-			.getFromQualifiedName("root_package::TransformationContext")
-			.asType(structure::ClassDefinition)
-			.generateTypeRef()*/
-		
-		
-		var cf_getDefault : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("getDefault",true)
-		cf_cast.target:=cf_getDefault
-		
-		
-		//cf_getDefault.name:="getDefault"
-		
-		
-		var tl_getDefault : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
-		cf_getDefault.target:=tl_getDefault
-		
-		
-		/*tl_getDefault.typeref:=context.kmtContext
-			.getFromQualifiedName("root_package::TransformationContext")
-			.asType(structure::ClassDefinition)
-			.generateTypeRef()*/
+		var transfoContextLit : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
+		cf_resolve.target:=transfoContextLit
 		
 		//StdIO.writeln("ResolveExp::range2domain-end")
 		
-		//var out : org::kermeta::language::behavior::CallFeature init org::kermeta::language::behavior::CallFeature
-		//var out : org::kermeta::language::behavior::VoidLiteral  init org::kermeta::language::behavior::VoidLiteral.new
-		//output:=cf_resolve
-		//out.addDocumentationTag("ResolveExp mapping to be implemented")
 	end
 end
 

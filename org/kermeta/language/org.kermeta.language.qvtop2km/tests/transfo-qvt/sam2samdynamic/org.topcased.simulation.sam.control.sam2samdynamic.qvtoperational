@@ -8,51 +8,51 @@
             <initExpression xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.9">
               <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
               <argument xsi:type="essentialocl:TypeExp">
-                <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                 <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.0"/>
               </argument>
-              <referredOperation href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+              <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
             </initExpression>
           </referredVariable>
         </content>
         <content xsi:type="essentialocl:IfExp">
-          <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+          <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
           <condition xsi:type="essentialocl:OperationCallExp">
-            <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+            <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
             <source xsi:type="essentialocl:OperationCallExp">
-              <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+              <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
               <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.9" referredVariable="/0/@ownedOperation.0/@body/@content.0/@referredVariable"/>
-              <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o95"/>
+              <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o95"/>
             </source>
-            <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o186"/>
+            <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o186"/>
           </condition>
           <elseExpression xsi:type="imperativeocl:BlockExp">
-            <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
             <body xsi:type="imperativeocl:VariableInitExp" withResult="false">
               <referredVariable name="lsystemSet" type="/0/@ownedType.3">
                 <initExpression xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.3">
                   <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
                   <argument xsi:type="essentialocl:TypeExp">
-                    <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                     <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
                   </argument>
-                  <referredOperation href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+                  <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
                 </initExpression>
               </referredVariable>
             </body>
             <body xsi:type="essentialocl:IfExp">
-              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <condition xsi:type="essentialocl:OperationCallExp">
-                <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+                <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
                 <source xsi:type="essentialocl:OperationCallExp">
-                  <type xsi:type="emof:PrimitiveType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/emof/primitivetypes.emof#o1"/>
+                  <type xsi:type="emof:PrimitiveType" href="pathmap://models/emof/primitivetypes.emof#o1"/>
                   <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.3" referredVariable="/0/@ownedOperation.0/@body/@content.1/@elseExpression/@body.0/@referredVariable"/>
-                  <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o95"/>
+                  <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o95"/>
                 </source>
-                <referredOperation href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o186"/>
+                <referredOperation href="pathmap://models/essentialocl/oclstdlib.essentialocl#o186"/>
               </condition>
               <elseExpression xsi:type="imperativeocl:BlockExp">
-                <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+                <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
                 <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.3" isStrict="false">
                   <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
                   <source xsi:type="imperativeocl:ImperativeIterateExp" name="selectOne">
@@ -60,23 +60,23 @@
                     <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.1">
                       <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
                       <argument xsi:type="essentialocl:TypeExp">
-                        <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                        <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                         <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
                       </argument>
-                      <referredOperation href="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+                      <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
                     </source>
                     <iterator name="autoGenVar">
                       <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
                     </iterator>
                     <condition xsi:type="essentialocl:TypeExp">
-                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                       <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
                     </condition>
                   </source>
                 </body>
               </elseExpression>
               <thenExpression xsi:type="imperativeocl:BlockExp">
-                <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+                <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
                 <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.2" isStrict="false">
                   <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
                   <source xsi:type="imperativeocl:ImperativeIterateExp" name="selectOne">
@@ -86,7 +86,7 @@
                       <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
                     </iterator>
                     <condition xsi:type="essentialocl:TypeExp">
-                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                       <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
                     </condition>
                   </source>
@@ -95,7 +95,7 @@
             </body>
           </elseExpression>
           <thenExpression xsi:type="imperativeocl:BlockExp">
-            <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+            <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
             <body xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.10">
               <source xsi:type="essentialocl:VariableExp" type="/0/@ownedType.9" referredVariable="/0/@ownedOperation.0/@body/@content.0/@referredVariable"/>
               <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.1" isStrict="false">
@@ -141,7 +141,7 @@
                       <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
                     </iterator>
                     <condition xsi:type="essentialocl:TypeExp">
-                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                       <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
                     </condition>
                   </item>
@@ -179,7 +179,7 @@
                       <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
                     </iterator>
                     <condition xsi:type="essentialocl:TypeExp">
-                      <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                      <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                       <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
                     </condition>
                   </item>
@@ -213,7 +213,7 @@
           <instantiatedClass href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
           <body>
             <content xsi:type="imperativeocl:AssignExp" isReset="true">
-              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.5">
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
                   <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
@@ -232,7 +232,7 @@
                     <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
                   </iterator>
                   <condition xsi:type="essentialocl:TypeExp">
-                    <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                     <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
                   </condition>
                 </source>
@@ -248,7 +248,7 @@
               </value>
             </content>
             <content xsi:type="imperativeocl:AssignExp" isReset="false">
-              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.5">
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
                   <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
@@ -267,7 +267,7 @@
                     <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.1"/>
                   </iterator>
                   <condition xsi:type="essentialocl:TypeExp">
-                    <type xsi:type="emof:Class" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o28"/>
+                    <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
                     <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
                   </condition>
                 </source>
@@ -283,7 +283,7 @@
               </value>
             </content>
             <content xsi:type="imperativeocl:AssignExp" isReset="true">
-              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <left xsi:type="essentialocl:PropertyCallExp">
                 <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.3"/>
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@result.0">
@@ -313,7 +313,7 @@
           <instantiatedClass href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
           <body>
             <content xsi:type="imperativeocl:AssignExp" isReset="true">
-              <type xsi:type="essentialocl:VoidType" href="platform:/resource/org.kermeta.language.qvtop2km/framework/models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
               <left xsi:type="essentialocl:PropertyCallExp">
                 <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.2"/>
                 <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.3/@result.0">

@@ -1,0 +1,51 @@
+------------------------------------------------------------------------------
+--
+-- org.topcased.simulation.uml.scenario.sequence2scenario.qvt
+-- 
+-- Copyright (c) 2005-2008 TOPCASED consortium.
+--
+-- Contributors:
+--  dribeiro Atos Origin david.ribeirocampelo@atosorigin.com
+--    
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+-------------------------------------------------------------------------------
+transformation sequence2scenario(in umlModel:uml, in scenarioModel:scenario, in umleventModel:umlevent);
+
+
+main() {
+	
+	umlModel.objectsOfType(Interaction) -> map Interaction2Scenario();
+  	
+	}
+
+--------------------------------------------------------------------------------
+-------------------------- mapping -------------------------------------------
+--------------------------------------------------------------------------------
+
+
+--mapping on Interaction : for all elements of the ordered set 
+--fragment of type MessageOccurrenceSpecification, select the ones that 
+--are sendEvent of a Message and map to an InjectSimEvent to put in the 
+--reference simEvent of the scenario
+mapping Interaction::Interaction2Scenario() : Scenario{
+
+	result.simEvents := (self.fragment[MessageOccurrenceSpecification]
+						->select(f | ((self.member[Message])
+									->collect(m | m.sendEvent))
+									->includes(f)))->map MOS2SimEvent();
+
+}
+
+
+--mapping on MessageOccurrenceSpecification : for a MessageOccurrenceSpecification
+--create an InjectSimEvent and copy the reference of the event
+mapping MessageOccurrenceSpecification::MOS2SimEvent() : InjectSimEvent{
+
+	result.event := self.event;
+
+
+}

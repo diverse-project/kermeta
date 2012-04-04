@@ -1,0 +1,41 @@
+------------------------------------------------------------------------------
+--
+-- resetcomputed
+-- Reset all the computed value of DynamicControlPort 
+--
+-- Copyright (c) 2005-2008 TOPCASED consortium.
+--
+-- Contributors:
+--  bmaggi Atos Origin benoit.maggi@atosorigin.com
+--    
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+-------------------------------------------------------------------------------
+transformation resetcomputed(inout samdynamicModel:samdynamic);
+
+--------------------------------------------------------------------------------
+-------------------------- mapping ---------------------------------------------
+--------------------------------------------------------------------------------
+
+-- the main mapping
+-- The mapping is launch on the root element : sam::Model
+main() {
+	samdynamicModel.objectsOfType(samdynamic::DynamicSystem) -> map resetDynamicSystem();
+	samdynamicModel.objectsOfType(samdynamic::DynamicAutomaton) -> map resetDynamicAutomaton();
+}
+
+mapping inout samdynamic::DynamicSystem::resetDynamicSystem() {
+	self.computed := null;
+}
+
+mapping inout samdynamic::DynamicAutomaton::resetDynamicAutomaton() {
+	self.computed := null;
+}
+
+
+
+
+

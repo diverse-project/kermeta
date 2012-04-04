@@ -1,0 +1,340 @@
+------------------------------------------------------------------------------
+--
+-- sammicrostep
+-- 
+-- Copyright (c) 2005-2008 TOPCASED consortium.
+--
+-- Contributors:
+--  bmaggi Atos Origin benoit.maggi@atosorigin.com
+--  dribero Atos Origin david.ribeirocampelo@atosorigin.com
+--  vmoyalam Atos Origin victoria.moyalamiel@atosorigin.com
+--  
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+-------------------------------------------------------------------------------
+transformation sammicrostep(in samModel:sam,inout samdynamicModel:samdynamic);
+
+
+--------------------------------------------------------------------------------
+--------------------------- helper ---------------------------------------------
+--------------------------------------------------------------------------------
+
+-- helper getTransitionToFire
+-- Determin the next transition of the automaton
+-- @return the transition to fire
+helper DynamicAutomaton::getTransitionToFire(): sam::Transition;
+
+-- helper executeEmission
+-- Execute the transition : computed all the targeted outputport
+-- @param the transition to fire
+helper DynamicAutomaton::executeEmission(pTransition: sam::Transition) : OclVoid ;
+
+-- helper isPortComputed
+-- Say if the port is computed or not
+-- @param the port
+-- @return boolean
+helper isPortComputed (pPort: sam::Port) : PrimitiveTypes::Boolean {
+	var lDynamicModelSequence:Sequence(DynamicModel) := samdynamicModel.objects()[DynamicModel];
+	lDynamicModelSequence := lDynamicModelSequence -> select( lDynamicModel | lDynamicModel.computed.includes(pPort));
+	return (not lDynamicModelSequence.isEmpty());
+}
+-- helper areAllPortsComputed
+-- Say if all ports in the list are computed or not
+-- @param the port list
+-- @return boolean
+helper areAllPortsComputed (pPortList: Sequence(sam::Port)) : PrimitiveTypes::Boolean {
+
+	var lareComputed : PrimitiveTypes::Boolean := true;
+	pPortList -> forEach(pPort){
+	lareComputed := lareComputed and isPortComputed(pPort);
+	};
+	return lareComputed;
+}
+
+-- helper isPortActived
+-- Say if the port is actived or not
+-- @param the port
+-- @return boolean
+helper isPortActived (pPort: sam::Port) : PrimitiveTypes::Boolean {
+	var lDynamicModelSequence:Sequence(DynamicModel) := samdynamicModel.objects()[DynamicModel];
+	lDynamicModelSequence := lDynamicModelSequence -> select( lDynamicModel | lDynamicModel.actived.includes(pPort));
+	return (not lDynamicModelSequence.isEmpty());
+}
+
+-- helper existsPortActived
+-- Say if at least a port in the list is computed or not
+-- @param the port list
+-- @return boolean
+helper existsPortActived (pPortList: Sequence(sam::Port)) : PrimitiveTypes::Boolean {
+
+	var lareActived : PrimitiveTypes::Boolean := false;
+	pPortList -> forEach(pPort){
+	lareActived := lareActived or isPortActived(pPort);
+	};
+	return lareActived;
+}
+
+
+--------------------------------------------------------------------------------
+-------------------------- mapping ---------------------------------------------
+--------------------------------------------------------------------------------
+-- All mapping must modify the reference actived before computed
+
+
+
+-- the main mapping
+-- The mapping is launch on the root element : sam::Model
+
+main() {
+	var lDynamicModelSequence:Sequence(DynamicModel) := samdynamicModel.objects()[DynamicModel];
+	var lDynamicModel:DynamicModel := lDynamicModelSequence -> first();
+ 		
+ 		if ( lDynamicModel.oclIsKindOf(DynamicSystem))
+ 		then{
+ 			lDynamicModel![DynamicSystem].map stepDynamicSystem() ;
+ 			}
+ 			else{
+ 			lDynamicModel![DynamicAutomaton].map stepDynamicAutomaton() ;
+ 			}
+ 		endif;
+}
+
+
+mapping inout samdynamic::DynamicSystem::stepDynamicSystem() {
+
+	// get all subSystem which inputport are computed
+	var lDynamicSystemList:Sequence(DynamicSystem) := self.childs[DynamicSystem] 
+	-> select(lDynamicSystem|lDynamicSystem.computed.includesAll(lDynamicSystem.reference.listPorts[InDataPort]) and 
+							 lDynamicSystem.computed.includesAll(lDynamicSystem.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort)[InDataPort]) and
+							 lDynamicSystem.computed.includesAll(lDynamicSystem.reference.listPorts[InControlPort]) and 
+							 lDynamicSystem.computed.includesAll(lDynamicSystem.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort)[InControlPort]) and 
+							 lDynamicSystem.computed.includesAll(lDynamicSystem.reference.listPorts[InMessagePort]) and
+							 lDynamicSystem.computed.includesAll(lDynamicSystem.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort)[InMessagePort]));
+	// get all subAutomaton which inputport are computed
+	var lDynamicAutomatonList:Sequence(DynamicAutomaton) := self.childs[DynamicAutomaton]
+	-> select(lDynamicAutomaton|lDynamicAutomaton.computed.includesAll(lDynamicAutomaton.reference.listPorts[InDataPort]) and 
+								lDynamicAutomaton.computed.includesAll(lDynamicAutomaton.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort)[InDataPort]) and 
+								lDynamicAutomaton.computed.includesAll(lDynamicAutomaton.reference.listPorts[InControlPort]) and 
+								lDynamicAutomaton.computed.includesAll(lDynamicAutomaton.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort)[InControlPort]) and 
+								lDynamicAutomaton.computed.includesAll(lDynamicAutomaton.reference.listPorts[InMessagePort]) and
+								lDynamicAutomaton.computed.includesAll(lDynamicAutomaton.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort)[InMessagePort]) and 
+								lDynamicAutomaton.computed[OutDataPort]->isEmpty() and lDynamicAutomaton.computed[OutControlPort]->isEmpty() and
+								lDynamicAutomaton.computed[OutMessagePort]->isEmpty());
+	
+	// get all flows which source ports are comuted
+	var lControlFlowList:Sequence(ControlFlow) := self.reference.listFlows[ControlFlow]->select(lControlFlow|isPortComputed(lControlFlow.source));
+	var lMessageFlowList:Sequence(MessageFlow) := self.reference.listFlows[MessageFlow]->select(lMessageFlow|isPortComputed(lMessageFlow.source));
+	var lDataFlowList:Sequence(DataFlow) := self.reference.listFlows[DataFlow]->select(lDataFlow|isPortComputed(lDataFlow.source));
+	
+	// lauch the step on AsynchronousGate, must be before mapping stepDataFlow()
+//	self.reference.listSynchronisation[DataMerge] -> select(lDataMerge|lDataMerge._in->exists(lPort|isPortComputed(lPort))) -> map stepDataMerge(self);
+	self.reference.listGates[DataMerge] -> map stepDataMerge(self);
+	self.reference.listGates[MessageMerge] -> map stepMessageMerge(self);
+	self.reference.listGates[ControlMerge] -> map stepControlMerge(self);
+	self.reference.listGates[MessageSplit] -> select(lMessageSplit|isPortComputed(lMessageSplit._in)) -> map stepMessageSplit(self);
+	self.reference.listGates[ControlBroadcast] -> map stepControlBroadcast(self);
+	self.reference.listGates[DataBroadcast] -> map stepDataBroadcast(self);
+	self.reference.listGates[MessageBroadcast] -> map stepMessageBroadcast(self);
+		
+	// launch mapping on flows which sources are actif
+	lControlFlowList -> map stepControlFlow() ;
+	lMessageFlowList -> map stepMessageFlow() ;
+	lDataFlowList -> map stepDataFlow() ;
+	
+	// map all actif system
+	 lDynamicSystemList -> map stepDynamicSystem();
+	
+	//  map all actif automaton 
+	 lDynamicAutomatonList -> map stepDynamicAutomaton();
+	
+}
+
+mapping inout samdynamic::DynamicAutomaton::stepDynamicAutomaton() {
+	// find the transition 
+	var lTransitionToFire : sam::Transition := self.getTransitionToFire();
+
+   // execute the transition 
+	self.executeEmission(lTransitionToFire);
+   
+	// update the current state
+	result.currentState := lTransitionToFire.dest;
+ 
+	// update the fireable transition
+	result.fireables := self.reference.listTransitions -> select(lTransition|lTransition.source == result.currentState );
+//	if (result.currentState.parentState <> null){
+//		result.fireables  +=  self.reference.listTransitions ->select(transition|transition.source.name == result.currentState.parentState.name);
+//	}		
+	
+	var lMacroStateOrderedSet:OrderedSet(MacroState) := self.reference.allSubobjectsOfType(MacroState) ->select(lMacroState | lMacroState.allSubobjectsOfType(InitialState).includes(result.currentState ) or  lMacroState.allSubobjectsOfType(State).includes(result.currentState ) ) ;
+	result.fireables += self.reference.listTransitions -> select(lTransition| lMacroStateOrderedSet.includes(lTransition.source)  );
+	
+	
+}
+
+
+// on execute la transfo
+mapping inout sam::ControlFlow::stepControlFlow() {	
+	self.dest ->forEach(lPortDest){
+	
+		var lAllDynamicModelSequence:Sequence(DynamicModel) := samdynamicModel.objects()[DynamicModel];
+		var lDynamicModelSequence:Sequence(DynamicModel) := lAllDynamicModelSequence[DynamicSystem] -> select(lDynamicSystem|lDynamicSystem.reference.listPorts.includes(lPortDest) or lDynamicSystem.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort).includes(lPortDest));
+		 lDynamicModelSequence += samdynamicModel.objects()[DynamicAutomaton]-> select(lDynamicAutomaton|lDynamicAutomaton.reference.listPorts.includes(lPortDest) or lDynamicAutomaton.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort).includes(lPortDest));
+		 lDynamicModelSequence += lAllDynamicModelSequence[DynamicSystem]->select(tDynamicSystem |tDynamicSystem.reference.listGates[ControlMerge]->asSequence()->exists(tControlMerge|tControlMerge._in.includes(lPortDest)));
+		 lDynamicModelSequence += lAllDynamicModelSequence[DynamicSystem]->select(tDynamicSystem |tDynamicSystem.reference.listGates[ControlBroadcast]->asSequence()->exists(tControlBroadcast|tControlBroadcast._in = (lPortDest)));
+		var lDynamicModel2 : DynamicModel := lDynamicModelSequence ->first();
+
+	    if ( isPortActived(self.source)){
+	    	lDynamicModel2.actived += lPortDest
+	     }
+	     endif;
+	 	lDynamicModel2.computed += lPortDest;
+ 	}; 
+}
+
+
+mapping inout sam::DataFlow::stepDataFlow() {
+	self.dest ->forEach(lPortDest){
+
+		var lDynamicModelSequence1:Sequence(DynamicModel) := samdynamicModel.objects()[DynamicSystem];
+		var lDynamicModelSequence2:Sequence(DynamicModel) := lDynamicModelSequence1[DynamicSystem]->select(lDynamicSystem | lDynamicSystem.reference.listPorts.includes(lPortDest) or lDynamicSystem.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort).includes(lPortDest));
+		lDynamicModelSequence2 += lDynamicModelSequence1[DynamicSystem]->select(lDynamicSystem |lDynamicSystem.reference.listGates[DataMerge]->asSequence()->exists(lDataMerge|lDataMerge._in.includes(lPortDest)));
+		lDynamicModelSequence2 += samdynamicModel.objects()[DynamicAutomaton]->select(lDynamicAutomaton|lDynamicAutomaton.reference.listPorts.includes(lPortDest) or lDynamicAutomaton.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort).includes(lPortDest));
+		lDynamicModelSequence2 += lDynamicModelSequence1[DynamicSystem]->select(tDynamicSystem |tDynamicSystem.reference.listGates[DataBroadcast]->asSequence()->exists(tDataBroadcast|tDataBroadcast._in = (lPortDest)));
+		
+		var lDynamicModel2 : DynamicModel := lDynamicModelSequence2 ->first();
+	    if ( isPortActived(self.source)){
+	    	lDynamicModel2.actived += lPortDest;
+	     }
+	    endif;
+		 lDynamicModel2.computed += lPortDest;
+
+
+ 	}; 
+}
+
+-- ne prends pas en compte les data
+mapping inout sam::MessageFlow::stepMessageFlow() {
+	self.dest ->forEach(lPortDest){
+		var lDynamicModelSequence1:Sequence(DynamicModel) := samdynamicModel.objects()[DynamicSystem];
+		var lDynamicModelSequence2:Sequence(DynamicModel) := lDynamicModelSequence1[DynamicSystem]->select(lDynamicSystem |lDynamicSystem.reference.listPorts.includes(lPortDest) or lDynamicSystem.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort).includes(lPortDest));
+		lDynamicModelSequence2 += lDynamicModelSequence1[DynamicSystem]->select(tDynamicSystem |tDynamicSystem.reference.listGates[MessageMerge]->asSequence()->exists(tMessageMerge|tMessageMerge._in.includes(lPortDest)));
+		lDynamicModelSequence2 += lDynamicModelSequence1[DynamicSystem]->select(lDynamicSystem |lDynamicSystem.reference.listGates[MessageSplit]->asSequence()->exists(lMessageSplit|lMessageSplit._in==(lPortDest)));
+		lDynamicModelSequence2 += samdynamicModel.objects()[DynamicAutomaton]-> select(lDynamicAutomaton|lDynamicAutomaton.reference.listPorts.includes(lPortDest) or lDynamicAutomaton.reference.listMultiPort->collect(tMultiPort | tMultiPort.listPort).includes(lPortDest));
+		lDynamicModelSequence2 += lDynamicModelSequence1[DynamicSystem]->select(tDynamicSystem |tDynamicSystem.reference.listGates[MessageBroadcast]->asSequence()->exists(tMessageBroadcast|tMessageBroadcast._in = (lPortDest)));
+				
+		var lDynamicModel2 : DynamicModel := lDynamicModelSequence2 ->first();
+
+
+	    if ( isPortActived(self.source)){
+	    	lDynamicModel2.actived += lPortDest;
+	     }
+	    endif;
+	    lDynamicModel2.computed += lPortDest;
+ 	}; 
+}
+
+mapping inout sam::MessageSplit::stepMessageSplit(pDynamicSystem:DynamicSystem) {
+	 if ( isPortActived(self._in)){
+    	pDynamicSystem.actived += self.outControl;
+     }
+    endif;
+	pDynamicSystem.computed += self.outControl;
+	pDynamicSystem.computed += self.outData;
+
+}
+     
+mapping inout sam::DataMerge::stepDataMerge(pDynamicSystem:DynamicSystem) {
+	var lPortList := self._in->asSequence();
+
+	if(areAllPortsComputed(lPortList))
+	{
+		if(existsPortActived(lPortList))
+		{
+			pDynamicSystem.actived += self._out;
+		}
+		endif;
+	
+	pDynamicSystem.computed += self._out;
+	}
+	endif;
+}
+
+
+mapping inout sam::MessageMerge::stepMessageMerge(pDynamicSystem:DynamicSystem) {
+	var lPortList := self._in->asSequence();
+
+	if(areAllPortsComputed(lPortList))
+	{
+		if(existsPortActived(lPortList))
+		{
+			pDynamicSystem.actived += self._out;
+		}
+		endif;
+	
+	pDynamicSystem.computed += self._out;
+	}
+	endif;
+}
+
+
+mapping inout sam::ControlMerge::stepControlMerge(pDynamicSystem:DynamicSystem) {
+	var lPortList := self._in->asSequence();
+
+	if(areAllPortsComputed(lPortList))
+	{
+		if(existsPortActived(lPortList))
+		{
+			pDynamicSystem.actived += self._out;
+		}
+		endif;
+	
+	pDynamicSystem.computed += self._out;
+	}
+	endif;
+}
+
+mapping inout sam::ControlBroadcast::stepControlBroadcast(pDynamicSystem:DynamicSystem) {
+	var lPortIn := self._in;
+	if(isPortComputed(lPortIn))
+	{
+		if(isPortActived(lPortIn))
+		{
+			pDynamicSystem.actived += self._out;
+		}
+		endif;
+	
+	pDynamicSystem.computed += self._out;
+	}
+	endif;
+}
+mapping inout sam::DataBroadcast::stepDataBroadcast(pDynamicSystem:DynamicSystem) {
+	var lPortIn := self._in;
+	if(isPortComputed(lPortIn))
+	{
+		if(isPortActived(lPortIn))
+		{
+			pDynamicSystem.actived += self._out;
+		}
+		endif;
+	
+	pDynamicSystem.computed += self._out;
+	}
+	endif;
+}
+mapping inout sam::MessageBroadcast::stepMessageBroadcast(pDynamicSystem:DynamicSystem) {
+	var lPortIn := self._in;
+	if(isPortComputed(lPortIn))
+	{
+		if(isPortActived(lPortIn))
+		{
+			pDynamicSystem.actived += self._out;
+		}
+		endif;
+	
+	pDynamicSystem.computed += self._out;
+	}
+	endif;
+}

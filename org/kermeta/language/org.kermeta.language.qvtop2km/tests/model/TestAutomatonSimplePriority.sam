@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sam:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sam="http://www.topcased.org/SAM/1.3" xmi:id="_6tp39FQXEd2c-copuvLPCg">
+  <modelContent xsi:type="sam:Automaton" xmi:id="_6tp39VQXEd2c-copuvLPCg" name="TestAutomatonSimplePriority">
+    <listPorts xsi:type="sam:OutControlPort" xmi:id="__uU8g1QXEd2c-copuvLPCg" name="S1"/>
+    <listPorts xsi:type="sam:OutControlPort" xmi:id="_3fXhk1QYEd2c-copuvLPCg" name="S2"/>
+    <listTransitions xmi:id="_8Ps5hlQXEd2c-copuvLPCg" name="Transition1" condition="" emission="S1" priority="1" dest="_7RQ7UlQXEd2c-copuvLPCg" source="_7ILQwlQXEd2c-copuvLPCg"/>
+    <listTransitions xmi:id="_8ixmhVQXEd2c-copuvLPCg" name="Transition2" condition="" emission="S2" priority="2" dest="_7fRiIlQXEd2c-copuvLPCg" source="_7ILQwlQXEd2c-copuvLPCg"/>
+    <listStates xsi:type="sam:InitialState" xmi:id="_7ILQwlQXEd2c-copuvLPCg" name="InitialState1"/>
+    <listStates xsi:type="sam:State" xmi:id="_7RQ7UlQXEd2c-copuvLPCg" name="OK"/>
+    <listStates xsi:type="sam:State" xmi:id="_7fRiIlQXEd2c-copuvLPCg" name="KO"/>
+  </modelContent>
+</sam:Model>

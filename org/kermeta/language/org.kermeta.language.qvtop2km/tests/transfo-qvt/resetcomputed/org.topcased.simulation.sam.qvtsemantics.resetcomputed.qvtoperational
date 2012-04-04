@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" xmlns:essentialocl="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" xmlns:imperativeocl="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" xmlns:qvtoperational="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <qvtoperational:OperationalTransformation name="resetcomputed" uri="http://www.example.com/resetcomputed" isBlackbox="false" usedModelType="/1">
+    <ownedOperation xsi:type="qvtoperational:EntryOperation" name="main">
+      <body>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.2">
+          <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.1">
+            <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+            <argument xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+            </argument>
+            <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.1" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.0/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+          </iterator>
+        </content>
+        <content xsi:type="imperativeocl:ImperativeIterateExp" name="xcollect" type="/0/@ownedType.4">
+          <source xsi:type="essentialocl:OperationCallExp" type="/0/@ownedType.3">
+            <source xsi:type="essentialocl:VariableExp" type="/1" referredVariable="/0/@modelParameter.0"/>
+            <argument xsi:type="essentialocl:TypeExp">
+              <type xsi:type="emof:Class" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o28"/>
+              <referredType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+            </argument>
+            <referredOperation href="pathmap://models/qvtoperational/qvtstdlib.qvtoperational#o5"/>
+          </source>
+          <body xsi:type="qvtoperational:MappingCallExp" referredOperation="/0/@ownedOperation.2" isStrict="false">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+            <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.0/@body/@content.1/@iterator.0">
+              <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+            </source>
+          </body>
+          <iterator name="autoGenVar">
+            <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+          </iterator>
+        </content>
+      </body>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="resetDynamicSystem">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.0" referredObject="/0/@ownedOperation.1/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.1/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.2/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:NullLiteralExp">
+                <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" kind="inout" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+      </result>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtoperational:MappingOperation" name="resetDynamicAutomaton">
+      <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+      <body xsi:type="qvtoperational:MappingBody">
+        <content xsi:type="qvtoperational:ObjectExp" extent="/0/@modelParameter.0" referredObject="/0/@ownedOperation.2/@result.0">
+          <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+          <instantiatedClass href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+          <body>
+            <content xsi:type="imperativeocl:AssignExp" isReset="true">
+              <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              <left xsi:type="essentialocl:PropertyCallExp" type="/0/@ownedType.0">
+                <source xsi:type="essentialocl:VariableExp" referredVariable="/0/@ownedOperation.2/@context">
+                  <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+                </source>
+                <referredProperty href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.2/@ownedAttribute.0"/>
+              </left>
+              <value xsi:type="essentialocl:NullLiteralExp">
+                <type xsi:type="essentialocl:VoidType" href="pathmap://models/essentialocl/oclstdlib.essentialocl#o26"/>
+              </value>
+            </content>
+          </body>
+        </content>
+      </body>
+      <context xsi:type="qvtoperational:MappingParameter" name="self" kind="inout" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+      </context>
+      <result xsi:type="qvtoperational:MappingParameter" name="result" extent="/0/@modelParameter.0">
+        <type xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+      </result>
+    </ownedOperation>
+    <ownedType xsi:type="essentialocl:OrderedSetType" name="OrderedSet(Port)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/sam.emof#/0/@ownedType.12"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(DynamicSystem)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(DynamicSystem)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.0"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SetType" name="Set(DynamicAutomaton)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+    </ownedType>
+    <ownedType xsi:type="essentialocl:SequenceType" name="Sequence(DynamicAutomaton)">
+      <elementType xsi:type="emof:Class" href="platform:/resource/modelLibrary/samdynamic.emof#//@ownedType.1"/>
+    </ownedType>
+    <ownedVariable name="this" type="/0"/>
+    <modelParameter name="samdynamicModel" type="/1" kind="inout"/>
+  </qvtoperational:OperationalTransformation>
+  <qvtoperational:ModelType name="samdynamic">
+    <metamodel href="platform:/resource/modelLibrary/samdynamic.emof#/"/>
+  </qvtoperational:ModelType>
+</xmi:XMI>
