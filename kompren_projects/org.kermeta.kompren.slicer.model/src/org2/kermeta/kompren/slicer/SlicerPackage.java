@@ -276,15 +276,6 @@ public interface SlicerPackage extends EPackage {
 	int SLICED_ELEMENT__EXPRESSION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Exp On Remove</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLICED_ELEMENT__EXP_ON_REMOVE = 2;
-
-	/**
 	 * The number of structural features of the '<em>Sliced Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -320,15 +311,6 @@ public interface SlicerPackage extends EPackage {
 	 * @ordered
 	 */
 	int SLICED_CLASS__EXPRESSION = SLICED_ELEMENT__EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Exp On Remove</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLICED_CLASS__EXP_ON_REMOVE = SLICED_ELEMENT__EXP_ON_REMOVE;
 
 	/**
 	 * The feature id for the '<em><b>Ctx</b></em>' containment reference.
@@ -384,15 +366,6 @@ public interface SlicerPackage extends EPackage {
 	 * @ordered
 	 */
 	int SLICED_PROPERTY__EXPRESSION = SLICED_ELEMENT__EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Exp On Remove</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLICED_PROPERTY__EXP_ON_REMOVE = SLICED_ELEMENT__EXP_ON_REMOVE;
 
 	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' containment reference.
@@ -829,17 +802,6 @@ public interface SlicerPackage extends EPackage {
 	EAttribute getSlicedElement_Expression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org2.kermeta.kompren.slicer.SlicedElement#getExpOnRemove <em>Exp On Remove</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Exp On Remove</em>'.
-	 * @see org2.kermeta.kompren.slicer.SlicedElement#getExpOnRemove()
-	 * @see #getSlicedElement()
-	 * @generated
-	 */
-	EAttribute getSlicedElement_ExpOnRemove();
-
-	/**
 	 * Returns the meta object for class '{@link org2.kermeta.kompren.slicer.VarDecl <em>Var Decl</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1146,14 +1108,6 @@ public interface SlicerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SLICED_ELEMENT__EXPRESSION = eINSTANCE.getSlicedElement_Expression();
-
-		/**
-		 * The meta object literal for the '<em><b>Exp On Remove</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SLICED_ELEMENT__EXP_ON_REMOVE = eINSTANCE.getSlicedElement_ExpOnRemove();
 
 		/**
 		 * The meta object literal for the '{@link org2.kermeta.kompren.slicer.impl.VarDeclImpl <em>Var Decl</em>}' class.

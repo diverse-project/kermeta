@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org2.kermeta.kompren.slicer.SlicedElement#isIsOption <em>Is Option</em>}</li>
  *   <li>{@link org2.kermeta.kompren.slicer.SlicedElement#getExpression <em>Expression</em>}</li>
- *   <li>{@link org2.kermeta.kompren.slicer.SlicedElement#getExpOnRemove <em>Exp On Remove</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,31 +82,4 @@ public interface SlicedElement extends EObject {
 	 * @generated
 	 */
 	void setExpression(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Exp On Remove</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Exp On Remove</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exp On Remove</em>' attribute.
-	 * @see #setExpOnRemove(String)
-	 * @see org2.kermeta.kompren.slicer.SlicerPackage#getSlicedElement_ExpOnRemove()
-	 * @model
-	 * @generated
-	 */
-	String getExpOnRemove();
-
-	/**
-	 * Sets the value of the '{@link org2.kermeta.kompren.slicer.SlicedElement#getExpOnRemove <em>Exp On Remove</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Exp On Remove</em>' attribute.
-	 * @see #getExpOnRemove()
-	 * @generated
-	 */
-	void setExpOnRemove(String value);
-
 } // SlicedElement

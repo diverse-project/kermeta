@@ -54,7 +54,6 @@
           <genClasses image="false" ecoreClass="kompren.ecore#//kermeta/kompren/slicer/SlicedElement">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/SlicedElement/isOption"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/SlicedElement/expression"/>
-            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/SlicedElement/expOnRemove"/>
           </genClasses>
           <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/VarDecl">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/VarDecl/varName"/>
