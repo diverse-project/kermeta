@@ -12,6 +12,8 @@ package org::kermeta::checker::invariants;
 
 require kermeta
 
+//specials (i.e. invariants involving multiple objects. In this case, one invariant per file)
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/special/GenericBoundsInv.kmt"
 
 //structure
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/ClassDefinitionAspect.kmt"
