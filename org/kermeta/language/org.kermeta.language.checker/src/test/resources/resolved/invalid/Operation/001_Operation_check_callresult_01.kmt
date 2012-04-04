@@ -1,0 +1,22 @@
+
+
+package test;
+
+using kermeta::standard
+
+class A {}
+
+class Test {
+
+	operation test() : Boolean is do
+		//result:=true
+		
+		from var i : Integer init 0
+		until i==10
+		loop
+			result:=false
+		end
+
+	end
+
+}
