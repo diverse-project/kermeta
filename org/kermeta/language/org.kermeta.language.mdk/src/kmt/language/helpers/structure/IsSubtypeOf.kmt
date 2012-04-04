@@ -55,7 +55,7 @@ aspect class FunctionType
 
 		// ( <A->C> inherits <B->D> ) <=> ( ( C inherits D ) and ( B inherits A )
 
-		stdio.writeln("------------------------------\nisSubTypeOf for a FunctionType")
+		//stdio.writeln("------------------------------\nisSubTypeOf for a FunctionType")
 		
 		//var hash : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
 		result:=true
@@ -64,7 +64,7 @@ aspect class FunctionType
 		then // else false
 			// First, compare return types
 			// C->D
-			stdio.writeln("-expectedType is a FunctionType -> OK")
+			//stdio.writeln("-expectedType is a FunctionType -> OK")
 			var expectedFunctionType : FunctionType init expectedType.asType(FunctionType)
 			
 			result:=self.right.isSubTypeOf(expectedFunctionType.right,typeVariableToSet)
@@ -74,7 +74,7 @@ aspect class FunctionType
 			then
 				if (self.left.isVoid)
 				then
-					stdio.writeln("self.left.isVoid")
+					//stdio.writeln("self.left.isVoid")
 					//expectedType.left must be void
 					if not(expectedFunctionType.left.isVoid)
 					then // else it is ok, since return types are ok
@@ -89,8 +89,8 @@ aspect class FunctionType
 					end
 				else
 					// expectedType.left must be a subtype of self.left
-					stdio.writeln("self.left.is not Void")
-					stdio.writeln("expectedType.left:"+expectedFunctionType.left.toString)
+					//stdio.writeln("self.left.is not Void")
+					//stdio.writeln("expectedType.left:"+expectedFunctionType.left.toString)
 					result:= expectedFunctionType.left.isSubTypeOf(self.left, typeVariableToSet) 
 				end
 			end
@@ -106,19 +106,19 @@ aspect class ProductType {
 	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
 		//result:=false
 		
-		stdio.writeln(" - isSubTypeOf for productType")
-		stdio.writeln("  --> self     : " + self.toString)
-		stdio.writeln("  --> expected : " + expectedType.toString)
+		//stdio.writeln(" - isSubTypeOf for productType")
+		//stdio.writeln("  --> self     : " + self.toString)
+		//stdio.writeln("  --> expected : " + expectedType.toString)
 		
 		
 		if(expectedType.isInstanceOf(ProductType))
 		then
 			// No problem, just compare the types inside both ProductTypes
 			// Check the cardinalities...
-			stdio.writeln("    expected is a productType -> OK")
+			//stdio.writeln("    expected is a productType -> OK")
 			var expectedProductType : ProductType init expectedType.asType(ProductType)
-			stdio.writeln("     card self      : " + self.type.size.toString())
-			stdio.writeln("     card expected  : " + expectedProductType.type.size.toString)
+			//stdio.writeln("     card self      : " + self.type.size.toString())
+			//stdio.writeln("     card expected  : " + expectedProductType.type.size.toString)
 			
 			if ( self.type.size != expectedProductType.type.size)
 			then
@@ -128,9 +128,9 @@ aspect class ProductType {
 				from var i : Integer init 0
 				until i == self.type.size
 				loop
-					stdio.writeln("      i="+i.toString+", bool=" + bool.toString)
-					stdio.writeln("       self.at(i) : " + self.type.elementAt(i).toString)
-					stdio.writeln("       expe.at(i) : " + expectedProductType.type.elementAt(i).toString)
+					//stdio.writeln("      i="+i.toString+", bool=" + bool.toString)
+					//stdio.writeln("       self.at(i) : " + self.type.elementAt(i).toString)
+					//stdio.writeln("       expe.at(i) : " + expectedProductType.type.elementAt(i).toString)
 					bool := ( bool and self.type.elementAt(i).isSubTypeOf(expectedProductType.type.elementAt(i),typeVariableToSet) )
     				i := i + 1
 				end
@@ -268,7 +268,7 @@ aspect class Class
 			result:=true			
 			if ( expectedType.isInstanceOf(Class) ) 
 			then
-				stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.asType(Class).typeDefinition.name)
+				//stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.asType(Class).typeDefinition.name)
 					
 				//stdio.writeln("expectedType isInstanceOf Class")
 				var comparableClass : Class init self.getComparableClass(expectedType.asType(Class))
@@ -321,7 +321,7 @@ aspect class Class
 			*/
 		
 		end
-		stdio.writeln(" -> result : " + result.toString)
+		//stdio.writeln(" -> result : " + result.toString)
 	end
 
 	method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> ) is do
