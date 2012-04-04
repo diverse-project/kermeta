@@ -6,12 +6,17 @@ package org2.kermeta.kompren.slicer.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org2.kermeta.kompren.slicer.*;
+import org2.kermeta.kompren.slicer.Constraint;
+import org2.kermeta.kompren.slicer.OppositeCreation;
+import org2.kermeta.kompren.slicer.Radius;
+import org2.kermeta.kompren.slicer.SlicedClass;
+import org2.kermeta.kompren.slicer.SlicedElement;
+import org2.kermeta.kompren.slicer.SlicedProperty;
+import org2.kermeta.kompren.slicer.Slicer;
+import org2.kermeta.kompren.slicer.SlicerPackage;
+import org2.kermeta.kompren.slicer.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +63,7 @@ public class SlicerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	@Override
-	public boolean isFactoryForType(Object object) {
+	public boolean isFactoryForType(final Object object) {
 		if (object == modelPackage) {
 			return true;
 		}
@@ -77,39 +82,39 @@ public class SlicerAdapterFactory extends AdapterFactoryImpl {
 	protected SlicerSwitch<Adapter> modelSwitch =
 		new SlicerSwitch<Adapter>() {
 			@Override
-			public Adapter caseSlicer(Slicer object) {
+			public Adapter caseSlicer(final Slicer object) {
 				return createSlicerAdapter();
 			}
 			@Override
-			public Adapter caseConstraint(Constraint object) {
+			public Adapter caseConstraint(final Constraint object) {
 				return createConstraintAdapter();
 			}
 			@Override
-			public Adapter caseRadius(Radius object) {
+			public Adapter caseRadius(final Radius object) {
 				return createRadiusAdapter();
 			}
 			@Override
-			public Adapter caseSlicedClass(SlicedClass object) {
+			public Adapter caseSlicedClass(final SlicedClass object) {
 				return createSlicedClassAdapter();
 			}
 			@Override
-			public Adapter caseSlicedProperty(SlicedProperty object) {
+			public Adapter caseSlicedProperty(final SlicedProperty object) {
 				return createSlicedPropertyAdapter();
 			}
 			@Override
-			public Adapter caseOppositeCreation(OppositeCreation object) {
+			public Adapter caseOppositeCreation(final OppositeCreation object) {
 				return createOppositeCreationAdapter();
 			}
 			@Override
-			public Adapter caseSlicedElement(SlicedElement object) {
+			public Adapter caseSlicedElement(final SlicedElement object) {
 				return createSlicedElementAdapter();
 			}
 			@Override
-			public Adapter caseVarDecl(VarDecl object) {
+			public Adapter caseVarDecl(final VarDecl object) {
 				return createVarDeclAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(final EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -123,7 +128,7 @@ public class SlicerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	@Override
-	public Adapter createAdapter(Notifier target) {
+	public Adapter createAdapter(final Notifier target) {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 

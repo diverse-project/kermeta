@@ -9,9 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org2.kermeta.kompren.slicer.Constraint;
 import org2.kermeta.kompren.slicer.OppositeCreation;
 import org2.kermeta.kompren.slicer.Radius;
@@ -121,7 +119,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SlicerPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -151,7 +149,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 		// Mark meta-data to indicate it can't be changed
 		theSlicerPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SlicerPackage.eNS_URI, theSlicerPackage);
 		return theSlicerPackage;
@@ -162,6 +160,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSlicer() {
 		return slicerEClass;
 	}
@@ -171,6 +170,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_Name() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(0);
 	}
@@ -180,6 +180,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_UriMetamodel() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(1);
 	}
@@ -189,6 +190,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_Active() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(2);
 	}
@@ -198,6 +200,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_Strict() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(3);
 	}
@@ -207,6 +210,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_Helper() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(4);
 	}
@@ -216,6 +220,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_OnStart() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(5);
 	}
@@ -225,6 +230,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicer_OnEnd() {
 		return (EAttribute)slicerEClass.getEStructuralFeatures().get(6);
 	}
@@ -234,6 +240,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicer_Constraints() {
 		return (EReference)slicerEClass.getEStructuralFeatures().get(7);
 	}
@@ -243,6 +250,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicer_Radius() {
 		return (EReference)slicerEClass.getEStructuralFeatures().get(8);
 	}
@@ -252,6 +260,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicer_SlicedElements() {
 		return (EReference)slicerEClass.getEStructuralFeatures().get(9);
 	}
@@ -261,6 +270,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicer_InputClasses() {
 		return (EReference)slicerEClass.getEStructuralFeatures().get(10);
 	}
@@ -270,6 +280,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstraint() {
 		return constraintEClass;
 	}
@@ -279,6 +290,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConstraint_Expression() {
 		return (EAttribute)constraintEClass.getEStructuralFeatures().get(0);
 	}
@@ -288,6 +300,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConstraint_Name() {
 		return (EAttribute)constraintEClass.getEStructuralFeatures().get(1);
 	}
@@ -297,6 +310,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRadius() {
 		return radiusEClass;
 	}
@@ -306,6 +320,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRadius_FocusedClasses() {
 		return (EReference)radiusEClass.getEStructuralFeatures().get(0);
 	}
@@ -315,6 +330,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSlicedClass() {
 		return slicedClassEClass;
 	}
@@ -324,6 +340,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicedClass_Ctx() {
 		return (EReference)slicedClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -333,6 +350,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicedClass_Domain() {
 		return (EReference)slicedClassEClass.getEStructuralFeatures().get(1);
 	}
@@ -342,6 +360,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSlicedProperty() {
 		return slicedPropertyEClass;
 	}
@@ -351,6 +370,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicedProperty_Opposite() {
 		return (EReference)slicedPropertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -360,6 +380,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicedProperty_Src() {
 		return (EReference)slicedPropertyEClass.getEStructuralFeatures().get(1);
 	}
@@ -369,6 +390,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicedProperty_Tgt() {
 		return (EReference)slicedPropertyEClass.getEStructuralFeatures().get(2);
 	}
@@ -378,6 +400,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSlicedProperty_Domain() {
 		return (EReference)slicedPropertyEClass.getEStructuralFeatures().get(3);
 	}
@@ -387,6 +410,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOppositeCreation() {
 		return oppositeCreationEClass;
 	}
@@ -396,6 +420,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOppositeCreation_Name() {
 		return (EAttribute)oppositeCreationEClass.getEStructuralFeatures().get(0);
 	}
@@ -405,6 +430,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSlicedElement() {
 		return slicedElementEClass;
 	}
@@ -414,6 +440,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicedElement_IsOption() {
 		return (EAttribute)slicedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -423,6 +450,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicedElement_Expression() {
 		return (EAttribute)slicedElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -432,6 +460,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSlicedElement_ExpOnRemove() {
 		return (EAttribute)slicedElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -441,6 +470,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVarDecl() {
 		return varDeclEClass;
 	}
@@ -450,6 +480,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVarDecl_VarName() {
 		return (EAttribute)varDeclEClass.getEStructuralFeatures().get(0);
 	}
@@ -459,6 +490,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVarDecl_Type() {
 		return (EReference)varDeclEClass.getEStructuralFeatures().get(1);
 	}
@@ -468,6 +500,7 @@ public class SlicerPackageImpl extends EPackageImpl implements SlicerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SlicerFactory getSlicerFactory() {
 		return (SlicerFactory)getEFactoryInstance();
 	}

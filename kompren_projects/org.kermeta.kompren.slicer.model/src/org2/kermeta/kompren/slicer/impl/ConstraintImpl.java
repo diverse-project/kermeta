@@ -5,12 +5,9 @@
 package org2.kermeta.kompren.slicer.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org2.kermeta.kompren.slicer.Constraint;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 
@@ -100,6 +97,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExpression() {
 		return expression;
 	}
@@ -109,7 +107,8 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(String newExpression) {
+	@Override
+	public void setExpression(final String newExpression) {
 		String oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
@@ -121,6 +120,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -130,7 +130,8 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
+	@Override
+	public void setName(final String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -143,7 +144,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				return getExpression();
@@ -159,7 +160,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				setExpression((String)newValue);
@@ -177,7 +178,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
@@ -195,7 +196,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
@@ -206,7 +207,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	}
 
 
-	
+
 	@Override
 	public String toString() {
 		if(eIsProxy()) return super.toString();

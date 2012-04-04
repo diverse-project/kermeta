@@ -6,13 +6,10 @@ package org2.kermeta.kompren.slicer.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org2.kermeta.kompren.slicer.OppositeCreation;
 import org2.kermeta.kompren.slicer.SlicedProperty;
 import org2.kermeta.kompren.slicer.SlicerPackage;
@@ -35,13 +32,6 @@ import org2.kermeta.kompren.slicer.VarDecl;
  * @generated
  */
 public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedProperty {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "INRIA/IRISA\nTriskell Team";
-
 	/**
 	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -90,31 +80,31 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	protected SlicedPropertyImpl() {
 		super();
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
 		final StringBuilder result = new StringBuilder("slicedProperty: ").append(domain.getName());
-		
+
 		if(isOption)
 			result.append(" option");
-		
+
 		if(opposite!=null)
 			result.append(' ').append(opposite);
-		
+
 		if(src!=null)
 			result.append(' ').append(src);
-		
+
 		if(tgt!=null)
 			result.append(' ').append(tgt);
-		
+
 		if(expression!=null && expression.length()>0)
 			result.append(" [[").append(expression).append("]]");
-		
+
 		return result.toString();
 	}
-	
-	
+
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -131,6 +121,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OppositeCreation getOpposite() {
 		return opposite;
 	}
@@ -140,7 +131,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOpposite(OppositeCreation newOpposite, NotificationChain msgs) {
+	public NotificationChain basicSetOpposite(final OppositeCreation newOpposite, NotificationChain msgs) {
 		OppositeCreation oldOpposite = opposite;
 		opposite = newOpposite;
 		if (eNotificationRequired()) {
@@ -155,7 +146,8 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOpposite(OppositeCreation newOpposite) {
+	@Override
+	public void setOpposite(final OppositeCreation newOpposite) {
 		if (newOpposite != opposite) {
 			NotificationChain msgs = null;
 			if (opposite != null)
@@ -174,6 +166,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarDecl getSrc() {
 		return src;
 	}
@@ -183,7 +176,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSrc(VarDecl newSrc, NotificationChain msgs) {
+	public NotificationChain basicSetSrc(final VarDecl newSrc, NotificationChain msgs) {
 		VarDecl oldSrc = src;
 		src = newSrc;
 		if (eNotificationRequired()) {
@@ -198,7 +191,8 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSrc(VarDecl newSrc) {
+	@Override
+	public void setSrc(final VarDecl newSrc) {
 		if (newSrc != src) {
 			NotificationChain msgs = null;
 			if (src != null)
@@ -217,6 +211,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarDecl getTgt() {
 		return tgt;
 	}
@@ -226,7 +221,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTgt(VarDecl newTgt, NotificationChain msgs) {
+	public NotificationChain basicSetTgt(final VarDecl newTgt, NotificationChain msgs) {
 		VarDecl oldTgt = tgt;
 		tgt = newTgt;
 		if (eNotificationRequired()) {
@@ -241,7 +236,8 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTgt(VarDecl newTgt) {
+	@Override
+	public void setTgt(final VarDecl newTgt) {
 		if (newTgt != tgt) {
 			NotificationChain msgs = null;
 			if (tgt != null)
@@ -260,6 +256,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EStructuralFeature getDomain() {
 		if (domain != null && domain.eIsProxy()) {
 			InternalEObject oldDomain = (InternalEObject)domain;
@@ -286,7 +283,8 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDomain(EStructuralFeature newDomain) {
+	@Override
+	public void setDomain(final EStructuralFeature newDomain) {
 		EStructuralFeature oldDomain = domain;
 		domain = newDomain;
 		if (eNotificationRequired())
@@ -299,7 +297,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(final InternalEObject otherEnd, final int featureID, final NotificationChain msgs) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_PROPERTY__OPPOSITE:
 				return basicSetOpposite(null, msgs);
@@ -317,7 +315,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_PROPERTY__OPPOSITE:
 				return getOpposite();
@@ -338,7 +336,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_PROPERTY__OPPOSITE:
 				setOpposite((OppositeCreation)newValue);
@@ -362,7 +360,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_PROPERTY__OPPOSITE:
 				setOpposite((OppositeCreation)null);
@@ -386,7 +384,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_PROPERTY__OPPOSITE:
 				return opposite != null;

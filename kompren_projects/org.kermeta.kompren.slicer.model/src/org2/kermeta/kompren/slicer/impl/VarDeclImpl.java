@@ -5,13 +5,10 @@
 package org2.kermeta.kompren.slicer.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org2.kermeta.kompren.slicer.SlicerPackage;
 import org2.kermeta.kompren.slicer.VarDecl;
 
@@ -91,6 +88,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVarName() {
 		return varName;
 	}
@@ -100,7 +98,8 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVarName(String newVarName) {
+	@Override
+	public void setVarName(final String newVarName) {
 		String oldVarName = varName;
 		varName = newVarName;
 		if (eNotificationRequired())
@@ -112,6 +111,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -138,7 +138,8 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(EClass newType) {
+	@Override
+	public void setType(final EClass newType) {
 		EClass oldType = type;
 		type = newType;
 		if (eNotificationRequired())
@@ -151,7 +152,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				return getVarName();
@@ -168,7 +169,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				setVarName((String)newValue);
@@ -186,7 +187,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				setVarName(VAR_NAME_EDEFAULT);
@@ -204,7 +205,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				return VAR_NAME_EDEFAULT == null ? varName != null : !VAR_NAME_EDEFAULT.equals(varName);
@@ -214,8 +215,8 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 		return super.eIsSet(featureID);
 	}
 
-	
-	
+
+
 	@Override
 	public String toString() {
 		if(eIsProxy()) return super.toString();

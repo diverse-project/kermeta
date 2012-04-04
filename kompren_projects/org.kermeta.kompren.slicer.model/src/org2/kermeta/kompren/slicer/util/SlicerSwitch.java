@@ -8,8 +8,15 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org2.kermeta.kompren.slicer.*;
+import org2.kermeta.kompren.slicer.Constraint;
+import org2.kermeta.kompren.slicer.OppositeCreation;
+import org2.kermeta.kompren.slicer.Radius;
+import org2.kermeta.kompren.slicer.SlicedClass;
+import org2.kermeta.kompren.slicer.SlicedElement;
+import org2.kermeta.kompren.slicer.SlicedProperty;
+import org2.kermeta.kompren.slicer.Slicer;
+import org2.kermeta.kompren.slicer.SlicerPackage;
+import org2.kermeta.kompren.slicer.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,7 +66,7 @@ public class SlicerSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
+	public T doSwitch(final EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -70,17 +77,12 @@ public class SlicerSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+	protected T doSwitch(final EClass theEClass, final EObject theEObject) {
+		if (theEClass.eContainer() == modelPackage)
 			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
+
+		List<EClass> eSuperTypes = theEClass.getESuperTypes();
+		return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0), theEObject);
 	}
 
 	/**
@@ -90,7 +92,7 @@ public class SlicerSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(final int classifierID, final EObject theEObject) {
 		switch (classifierID) {
 			case SlicerPackage.SLICER: {
 				Slicer slicer = (Slicer)theEObject;
@@ -157,7 +159,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSlicer(Slicer object) {
+	public T caseSlicer(final Slicer object) {
 		return null;
 	}
 
@@ -172,7 +174,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstraint(Constraint object) {
+	public T caseConstraint(final Constraint object) {
 		return null;
 	}
 
@@ -187,7 +189,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRadius(Radius object) {
+	public T caseRadius(final Radius object) {
 		return null;
 	}
 
@@ -202,7 +204,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSlicedClass(SlicedClass object) {
+	public T caseSlicedClass(final SlicedClass object) {
 		return null;
 	}
 
@@ -217,7 +219,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSlicedProperty(SlicedProperty object) {
+	public T caseSlicedProperty(final SlicedProperty object) {
 		return null;
 	}
 
@@ -232,7 +234,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOppositeCreation(OppositeCreation object) {
+	public T caseOppositeCreation(final OppositeCreation object) {
 		return null;
 	}
 
@@ -247,7 +249,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSlicedElement(SlicedElement object) {
+	public T caseSlicedElement(final SlicedElement object) {
 		return null;
 	}
 
@@ -262,7 +264,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVarDecl(VarDecl object) {
+	public T caseVarDecl(final VarDecl object) {
 		return null;
 	}
 
@@ -277,7 +279,7 @@ public class SlicerSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public T defaultCase(EObject object) {
+	public T defaultCase(final EObject object) {
 		return null;
 	}
 

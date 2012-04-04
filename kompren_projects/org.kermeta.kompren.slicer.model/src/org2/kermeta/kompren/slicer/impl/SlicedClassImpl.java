@@ -6,12 +6,9 @@ package org2.kermeta.kompren.slicer.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 import org2.kermeta.kompren.slicer.VarDecl;
@@ -31,13 +28,6 @@ import org2.kermeta.kompren.slicer.VarDecl;
  * @generated
  */
 public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "INRIA/IRISA\nTriskell Team";
-
 	/**
 	 * The cached value of the '{@link #getCtx() <em>Ctx</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -66,24 +56,24 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	protected SlicedClassImpl() {
 		super();
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
 		final StringBuilder result = new StringBuilder("slicedClass: ").append(domain.getName());
-		
+
 		if(isOption)
 			result.append(" option");
-		
+
 		if(ctx!=null)
 			result.append(' ').append(ctx);
-		
+
 		if(expression!=null && expression.length()>0)
 			result.append(" [[").append(expression).append("]]");
-		
+
 		return result.toString();
 	}
-	
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,6 +90,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarDecl getCtx() {
 		return ctx;
 	}
@@ -109,7 +100,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCtx(VarDecl newCtx, NotificationChain msgs) {
+	public NotificationChain basicSetCtx(final VarDecl newCtx, NotificationChain msgs) {
 		VarDecl oldCtx = ctx;
 		ctx = newCtx;
 		if (eNotificationRequired()) {
@@ -124,7 +115,8 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCtx(VarDecl newCtx) {
+	@Override
+	public void setCtx(final VarDecl newCtx) {
 		if (newCtx != ctx) {
 			NotificationChain msgs = null;
 			if (ctx != null)
@@ -143,6 +135,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomain() {
 		if (domain != null && domain.eIsProxy()) {
 			InternalEObject oldDomain = (InternalEObject)domain;
@@ -169,7 +162,8 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDomain(EClass newDomain) {
+	@Override
+	public void setDomain(final EClass newDomain) {
 		EClass oldDomain = domain;
 		domain = newDomain;
 		if (eNotificationRequired())
@@ -182,7 +176,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(final InternalEObject otherEnd, final int featureID, final NotificationChain msgs) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				return basicSetCtx(null, msgs);
@@ -196,7 +190,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				return getCtx();
@@ -213,7 +207,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				setCtx((VarDecl)newValue);
@@ -231,7 +225,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				setCtx((VarDecl)null);
@@ -249,7 +243,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				return ctx != null;

@@ -5,12 +5,9 @@
 package org2.kermeta.kompren.slicer.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org2.kermeta.kompren.slicer.SlicedElement;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 
@@ -121,6 +118,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsOption() {
 		return isOption;
 	}
@@ -130,7 +128,8 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsOption(boolean newIsOption) {
+	@Override
+	public void setIsOption(final boolean newIsOption) {
 		boolean oldIsOption = isOption;
 		isOption = newIsOption;
 		if (eNotificationRequired())
@@ -142,6 +141,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExpression() {
 		return expression;
 	}
@@ -151,7 +151,8 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(String newExpression) {
+	@Override
+	public void setExpression(final String newExpression) {
 		String oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
@@ -163,6 +164,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExpOnRemove() {
 		return expOnRemove;
 	}
@@ -172,7 +174,8 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpOnRemove(String newExpOnRemove) {
+	@Override
+	public void setExpOnRemove(final String newExpOnRemove) {
 		String oldExpOnRemove = expOnRemove;
 		expOnRemove = newExpOnRemove;
 		if (eNotificationRequired())
@@ -185,7 +188,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				return isIsOption();
@@ -203,7 +206,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				setIsOption((Boolean)newValue);
@@ -224,7 +227,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				setIsOption(IS_OPTION_EDEFAULT);
@@ -245,7 +248,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				return isOption != IS_OPTION_EDEFAULT;

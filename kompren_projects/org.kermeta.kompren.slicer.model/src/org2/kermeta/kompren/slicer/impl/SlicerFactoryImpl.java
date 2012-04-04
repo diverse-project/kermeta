@@ -7,12 +7,17 @@ package org2.kermeta.kompren.slicer.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org2.kermeta.kompren.slicer.*;
+import org2.kermeta.kompren.slicer.Constraint;
+import org2.kermeta.kompren.slicer.OppositeCreation;
+import org2.kermeta.kompren.slicer.Radius;
+import org2.kermeta.kompren.slicer.SlicedClass;
+import org2.kermeta.kompren.slicer.SlicedProperty;
+import org2.kermeta.kompren.slicer.Slicer;
+import org2.kermeta.kompren.slicer.SlicerFactory;
+import org2.kermeta.kompren.slicer.SlicerPackage;
+import org2.kermeta.kompren.slicer.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +41,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 */
 	public static SlicerFactory init() {
 		try {
-			SlicerFactory theSlicerFactory = (SlicerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.org.kermeta.kompren/org/kermeta/kompren/slicer"); 
+			SlicerFactory theSlicerFactory = (SlicerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.org.kermeta.kompren/org/kermeta/kompren/slicer");
 			if (theSlicerFactory != null) {
 				return theSlicerFactory;
 			}
@@ -63,7 +68,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * @generated
 	 */
 	@Override
-	public EObject create(EClass eClass) {
+	public EObject create(final EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SlicerPackage.SLICER: return createSlicer();
 			case SlicerPackage.CONSTRAINT: return createConstraint();
@@ -82,6 +87,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Slicer createSlicer() {
 		SlicerImpl slicer = new SlicerImpl();
 		return slicer;
@@ -92,6 +98,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constraint createConstraint() {
 		ConstraintImpl constraint = new ConstraintImpl();
 		return constraint;
@@ -102,6 +109,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Radius createRadius() {
 		RadiusImpl radius = new RadiusImpl();
 		return radius;
@@ -112,6 +120,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SlicedClass createSlicedClass() {
 		SlicedClassImpl slicedClass = new SlicedClassImpl();
 		return slicedClass;
@@ -122,6 +131,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SlicedProperty createSlicedProperty() {
 		SlicedPropertyImpl slicedProperty = new SlicedPropertyImpl();
 		return slicedProperty;
@@ -132,6 +142,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OppositeCreation createOppositeCreation() {
 		OppositeCreationImpl oppositeCreation = new OppositeCreationImpl();
 		return oppositeCreation;
@@ -142,6 +153,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarDecl createVarDecl() {
 		VarDeclImpl varDecl = new VarDeclImpl();
 		return varDecl;
@@ -152,6 +164,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SlicerPackage getSlicerPackage() {
 		return (SlicerPackage)getEPackage();
 	}

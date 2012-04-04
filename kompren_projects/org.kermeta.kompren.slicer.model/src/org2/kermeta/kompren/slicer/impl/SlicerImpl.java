@@ -8,19 +8,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org2.kermeta.kompren.slicer.Constraint;
 import org2.kermeta.kompren.slicer.Radius;
 import org2.kermeta.kompren.slicer.SlicedClass;
@@ -264,6 +259,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -273,7 +269,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
+	@Override
+	public void setName(final String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -285,6 +282,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUriMetamodel() {
 		return uriMetamodel;
 	}
@@ -294,7 +292,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUriMetamodel(String newUriMetamodel) {
+	@Override
+	public void setUriMetamodel(final String newUriMetamodel) {
 		String oldUriMetamodel = uriMetamodel;
 		uriMetamodel = newUriMetamodel;
 		if (eNotificationRequired())
@@ -306,6 +305,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isActive() {
 		return active;
 	}
@@ -315,7 +315,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActive(boolean newActive) {
+	@Override
+	public void setActive(final boolean newActive) {
 		boolean oldActive = active;
 		active = newActive;
 		if (eNotificationRequired())
@@ -327,6 +328,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStrict() {
 		return strict;
 	}
@@ -336,7 +338,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStrict(boolean newStrict) {
+	@Override
+	public void setStrict(final boolean newStrict) {
 		boolean oldStrict = strict;
 		strict = newStrict;
 		if (eNotificationRequired())
@@ -348,6 +351,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getHelper() {
 		return helper;
 	}
@@ -357,7 +361,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHelper(String newHelper) {
+	@Override
+	public void setHelper(final String newHelper) {
 		String oldHelper = helper;
 		helper = newHelper;
 		if (eNotificationRequired())
@@ -369,6 +374,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOnStart() {
 		return onStart;
 	}
@@ -378,7 +384,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOnStart(String newOnStart) {
+	@Override
+	public void setOnStart(final String newOnStart) {
 		String oldOnStart = onStart;
 		onStart = newOnStart;
 		if (eNotificationRequired())
@@ -390,6 +397,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOnEnd() {
 		return onEnd;
 	}
@@ -399,7 +407,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOnEnd(String newOnEnd) {
+	@Override
+	public void setOnEnd(final String newOnEnd) {
 		String oldOnEnd = onEnd;
 		onEnd = newOnEnd;
 		if (eNotificationRequired())
@@ -411,6 +420,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Constraint> getConstraints() {
 		if (constraints == null) {
 			constraints = new EObjectContainmentEList<Constraint>(Constraint.class, this, SlicerPackage.SLICER__CONSTRAINTS);
@@ -423,6 +433,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Radius getRadius() {
 		return radius;
 	}
@@ -432,7 +443,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRadius(Radius newRadius, NotificationChain msgs) {
+	public NotificationChain basicSetRadius(final Radius newRadius, NotificationChain msgs) {
 		Radius oldRadius = radius;
 		radius = newRadius;
 		if (eNotificationRequired()) {
@@ -447,7 +458,8 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRadius(Radius newRadius) {
+	@Override
+	public void setRadius(final Radius newRadius) {
 		if (newRadius != radius) {
 			NotificationChain msgs = null;
 			if (radius != null)
@@ -466,6 +478,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SlicedElement> getSlicedElements() {
 		if (slicedElements == null) {
 			slicedElements = new EObjectContainmentEList<SlicedElement>(SlicedElement.class, this, SlicerPackage.SLICER__SLICED_ELEMENTS);
@@ -478,6 +491,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EClass> getInputClasses() {
 		if (inputClasses == null) {
 			inputClasses = new EObjectResolvingEList<EClass>(EClass.class, this, SlicerPackage.SLICER__INPUT_CLASSES);
@@ -491,7 +505,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(final InternalEObject otherEnd, final int featureID, final NotificationChain msgs) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
@@ -509,7 +523,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				return getName();
@@ -544,7 +558,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(final int featureID, final Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				setName((String)newValue);
@@ -592,7 +606,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				setName(NAME_EDEFAULT);
@@ -637,7 +651,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(final int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
@@ -671,46 +685,46 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 		if(eIsProxy()) return super.toString();
 
 		final StringBuilder result = new StringBuilder("slicer");
-		
+
 		if(strict) result.append(" strict");
 		if(active) result.append(" active");
 		result.append(' ').append(name).append('{').append('\n');
 		result.append("\tdomain: \"").append(uriMetamodel).append("\"\n");
-		
+
 		if(!inputClasses.isEmpty()) {
 			result.append("\tinput: ").append(inputClasses.get(0).getName());
-			
+
 			for(int i=1, size=inputClasses.size(); i<size; i++)
 				result.append(", ").append(inputClasses.get(i).getName());
-			
+
 			result.append('\n');
 		}
-		
+
 		if(radius!=null)
 			result.append('\t').append(radius).append('\n');
-		
+
 		for(final Constraint ct : constraints)
 			result.append('\t').append(ct).append('\n');
 
 		for(final SlicedElement se : slicedElements)
 			if(se instanceof SlicedClass)
 				result.append('\t').append(se).append('\n');
-		
+
 		for(final SlicedElement se : slicedElements)
 			if(se instanceof SlicedProperty)
 				result.append('\t').append(se).append('\n');
 
 		if(onStart!=null && onStart.length()>0)
 			result.append("\tonStart [[").append(onStart).append("]]\n");
-		
+
 		if(onEnd!=null && onEnd.length()>0)
 			result.append("\tonEnd [[").append(onEnd).append("]]\n");
-		
+
 		if(helper!=null && helper.length()>0)
 			result.append("\thelper [[").append(helper).append("]]\n");
 
 		result.append("}\n");
-		
+
 		return result.toString();
 	}
 
