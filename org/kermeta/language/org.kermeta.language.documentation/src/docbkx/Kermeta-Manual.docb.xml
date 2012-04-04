@@ -201,13 +201,12 @@
         show the really interresting structures of the language, here is the
         traditional " Hello world " example you can find in every programming
         book.</para>
-
-        <programlisting language="kermeta">@mainClass "helloworld::HelloworldExample"
-@mainOperation "sayHello"
+		<example><title>MainClass.kmt</title>
+        <programlisting language="kermeta">
 package helloworld;
 
-require kermeta
-using kermeta::standard
+using kermeta::standard             // shorthand for standard types
+using kermeta::io::StdIO => stdio   // shorthand to kermeta::io::StdIO
 
 class HelloworldExample
 {
@@ -216,6 +215,21 @@ class HelloworldExample
         stdio.writeln("Hello world, ...")
     end
 }</programlisting>
+	</example>
+	<example><title>hello.kp</title>
+<programlisting language="kp">KermetaProject "hello"
+	groupId = "my.group"
+	defaultMainClass = "helloworld::HelloworldExample"
+	defaultMainOperation = "sayHello"
+	sources = {
+		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core",
+		                           "mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	}</programlisting>
+	  </example>
       </section>
 
       <section>
@@ -278,8 +292,7 @@ end
       easy with object-oriented features in Kermeta: classes, inheritance,
       exceptions, and even genericity.</para>
 
-      <programlisting language="kermeta">require "truc"
-// persons who write documents
+      <programlisting language="kermeta">// persons who write documents
 class Writer {
     attribute name : kermeta::standard::String
 }
@@ -622,9 +635,9 @@ smithBooks.addAll(
         implementing lambda expressions.</para>
 
         <para>This is typically used on <literal>Collection</literal> which
-        provides functions like : <literal>each</literal>,
+        provides operations that uses a function as parameter. For example : <literal>each</literal>,
         <literal>select</literal>, <literal>forAll</literal>,
-        <literal>detect</literal>, ...</para>
+        <literal>detect</literal>...</para>
 
         <para><emphasis role="strong">Example 1</emphasis>: the following code
         will build a collection of names of the operations that start with
