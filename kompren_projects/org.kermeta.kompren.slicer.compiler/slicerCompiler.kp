@@ -1,7 +1,7 @@
 KermetaProject "org.kermeta.kompren.slicer.compiler"
 	groupId = "my.group"
 	defaultMainClass = "org2::kermeta::kompren::slicer::KomprenCompiler"
-	defaultMainOperation = "main"
+	defaultMainOperation = "compile"
 	sources = {
 		require "${project.baseUri}/kermeta/KomprenCompiler.kmt"
 		require "${project.baseUri}/kermeta/ECoreSlicingAspect.kmt"
