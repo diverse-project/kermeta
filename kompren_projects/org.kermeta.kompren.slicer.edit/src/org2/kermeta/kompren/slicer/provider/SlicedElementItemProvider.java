@@ -61,7 +61,6 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 
 			addIsOptionPropertyDescriptor(object);
 			addExpressionPropertyDescriptor(object);
-			addExpOnRemovePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,28 +111,6 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 				 null));
 	}
 
-	/**
-	 * This adds a property descriptor for the Exp On Remove feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @param object
-	 */
-	protected void addExpOnRemovePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SlicedElement_expOnRemove_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SlicedElement_expOnRemove_feature", "_UI_SlicedElement_type"),
-				 SlicerPackage.Literals.SLICED_ELEMENT__EXP_ON_REMOVE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
 
 	/**
 	 * This returns the label text for the adapted class.
@@ -161,7 +138,6 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(SlicedElement.class)) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 			case SlicerPackage.SLICED_ELEMENT__EXPRESSION:
-			case SlicerPackage.SLICED_ELEMENT__EXP_ON_REMOVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
