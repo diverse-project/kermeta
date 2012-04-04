@@ -12,7 +12,12 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicerFactory;
@@ -24,14 +29,21 @@ import org2.kermeta.kompren.slicer.SlicerPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SlicedClassItemProvider extends SlicedElementItemProvider {
+public class SlicedClassItemProvider extends SlicedElementItemProvider implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "INRIA/IRISA\nTriskell Team";
+
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SlicedClassItemProvider(AdapterFactory adapterFactory) {
+	public SlicedClassItemProvider(final AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -42,7 +54,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(final Object object) {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -56,9 +68,8 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @param object
 	 */
-	protected void addDomainPropertyDescriptor(Object object) {
+	protected void addDomainPropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -83,7 +94,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(final Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SlicerPackage.Literals.SLICED_CLASS__CTX);
@@ -97,7 +108,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
+	protected EStructuralFeature getChildFeature(final Object object, final Object child) {
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -111,7 +122,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	public Object getImage(Object object) {
+	public Object getImage(final Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/SlicedClass"));
 	}
 
@@ -122,7 +133,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	public String getText(Object object) {
+	public String getText(final Object object) {
 		SlicedClass slicedClass = (SlicedClass)object;
 		return getString("_UI_SlicedClass_type") + " " + slicedClass.isIsOption();
 	}
@@ -135,7 +146,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	public void notifyChanged(Notification notification) {
+	public void notifyChanged(final Notification notification) {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(SlicedClass.class)) {
@@ -154,7 +165,7 @@ public class SlicedClassItemProvider extends SlicedElementItemProvider {
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(final Collection<Object> newChildDescriptors, final Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add

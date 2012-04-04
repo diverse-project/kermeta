@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 import org2.kermeta.kompren.slicer.VarDecl;
+import org2.kermeta.kompren.slicer.util.EcoreUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +61,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 
 	@Override
 	public String toString() {
-		final StringBuilder result = new StringBuilder("slicedClass: ").append(getDomain().getName());
+		final StringBuilder result = new StringBuilder("slicedClass: ").append(EcoreUtils.INSTANCE.getQualifiedName(getDomain(), "."));
 
 		if(isOption)
 			result.append(" option");
@@ -133,7 +134,6 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public EClass getDomain() {

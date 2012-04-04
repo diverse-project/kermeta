@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -30,7 +31,7 @@ import org2.kermeta.kompren.slicer.SlicerPackage;
  * @generated
  */
 public class SlicedElementItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,7 +45,7 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SlicedElementItemProvider(AdapterFactory adapterFactory) {
+	public SlicedElementItemProvider(final AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -55,7 +56,7 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(final Object object) {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -70,9 +71,8 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @param object
 	 */
-	protected void addIsOptionPropertyDescriptor(Object object) {
+	protected void addIsOptionPropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -93,9 +93,8 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @param object
 	 */
-	protected void addExpressionPropertyDescriptor(Object object) {
+	protected void addExpressionPropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -119,7 +118,7 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	public String getText(Object object) {
+	public String getText(final Object object) {
 		SlicedElement slicedElement = (SlicedElement)object;
 		return getString("_UI_SlicedElement_type") + " " + slicedElement.isIsOption();
 	}
@@ -132,7 +131,7 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	public void notifyChanged(Notification notification) {
+	public void notifyChanged(final Notification notification) {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(SlicedElement.class)) {
@@ -152,7 +151,7 @@ public class SlicedElementItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(final Collection<Object> newChildDescriptors, final Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

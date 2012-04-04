@@ -14,6 +14,7 @@ import org2.kermeta.kompren.slicer.OppositeCreation;
 import org2.kermeta.kompren.slicer.SlicedProperty;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 import org2.kermeta.kompren.slicer.VarDecl;
+import org2.kermeta.kompren.slicer.util.EcoreUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,7 +85,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 
 	@Override
 	public String toString() {
-		final StringBuilder result = new StringBuilder("slicedProperty: ").append(getDomain().getName());
+		final StringBuilder result = new StringBuilder("slicedProperty: ").append(EcoreUtils.INSTANCE.getQualifiedName(getDomain(), "."));
 
 		if(isOption)
 			result.append(" option");

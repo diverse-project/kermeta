@@ -282,7 +282,7 @@ public interface SlicerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLICED_ELEMENT_FEATURE_COUNT = 3;
+	int SLICED_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org2.kermeta.kompren.slicer.impl.SlicedClassImpl <em>Sliced Class</em>}' class.

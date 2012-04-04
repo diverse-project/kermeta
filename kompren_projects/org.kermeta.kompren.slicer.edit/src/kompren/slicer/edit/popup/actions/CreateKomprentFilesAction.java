@@ -23,8 +23,8 @@ import org2.kermeta.kompren.slicer.Slicer;
 
 public class CreateKomprentFilesAction implements IObjectActionDelegate {
 	private List<IFile> paths;
-	
-	
+
+
 	public CreateKomprentFilesAction() {
 		super();
 		paths = new ArrayList<IFile>();
@@ -36,42 +36,42 @@ public class CreateKomprentFilesAction implements IObjectActionDelegate {
 //		shell = targetPart.getSite().getShell();
 	}
 
-	
+
 	@Override
 	public void run(final IAction action) {
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("kompren", new XMIResourceFactoryImpl());
-		
+
 		for(final IFile file : paths)
 			convertKomprenFile(file);
 	}
-	
-	
-	
+
+
+
 	private void convertKomprenFile(final IFile file) {
 		final Resource resource = new ResourceSetImpl().getResource(URI.createFileURI(file.getLocation().toString()), true);
 		final String code = ((Slicer)resource.getContents().get(0)).toString();
 		final File fileOut = new File(file.getLocation().removeFileExtension().addFileExtension("komprent").toString());
 		FileWriter fw = null;
-		
+
 		try {
 			fw = new FileWriter(fileOut, false);
 			fw.write(code);
 		}catch(IOException ex) { ex.printStackTrace(System.err); }
-		
+
 		try { if(fw!=null) fw.close(); } catch(final IOException ex) { ex.printStackTrace(System.err); }
-			
+
 		try { file.getParent().refreshLocal(IResource.DEPTH_ONE, null); }
 		catch(final CoreException ex) { ex.printStackTrace(System.err); }
 	}
 
-	
-	
+
+
 	@Override
 	public void selectionChanged(final IAction action, final ISelection selection) {
 		paths.clear();
-		
+
 		if(selection!=null && !selection.isEmpty() && selection instanceof StructuredSelection) {
 			List<?> listSel = ((StructuredSelection)selection).toList();
 
@@ -79,7 +79,7 @@ public class CreateKomprentFilesAction implements IObjectActionDelegate {
 				if(obj instanceof IFile && ((IFile)obj).getFileExtension().equals("kompren"))
 					paths.add((IFile)obj);
 		}
-		
+
 		action.setEnabled(!paths.isEmpty());
 	}
 }

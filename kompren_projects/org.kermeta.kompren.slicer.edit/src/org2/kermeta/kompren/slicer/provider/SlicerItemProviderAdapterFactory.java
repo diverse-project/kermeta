@@ -10,7 +10,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -22,7 +21,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org2.kermeta.kompren.slicer.util.SlicerAdapterFactory;
 
 /**
@@ -35,6 +33,13 @@ import org2.kermeta.kompren.slicer.util.SlicerAdapterFactory;
  * @generated
  */
 public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "INRIA/IRISA\nTriskell Team";
+
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -252,7 +257,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * @generated
 	 */
 	@Override
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(final ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -262,7 +267,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * @generated
 	 */
 	@Override
-	public boolean isFactoryForType(Object type) {
+	public boolean isFactoryForType(final Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
 
@@ -273,7 +278,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * @generated
 	 */
 	@Override
-	public Adapter adapt(Notifier notifier, Object type) {
+	public Adapter adapt(final Notifier notifier, final Object type) {
 		return super.adapt(notifier, this);
 	}
 
@@ -283,7 +288,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * @generated
 	 */
 	@Override
-	public Object adapt(Object object, Object type) {
+	public Object adapt(final Object object, final Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
 			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
@@ -301,7 +306,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * @generated
 	 */
 	@Override
-	public void addListener(INotifyChangedListener notifyChangedListener) {
+	public void addListener(final INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
 
@@ -312,17 +317,18 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	 * @generated
 	 */
 	@Override
-	public void removeListener(INotifyChangedListener notifyChangedListener) {
+	public void removeListener(final INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
 
 	/**
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public void fireNotifyChanged(Notification notification) {
+	public void fireNotifyChanged(final Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
 		if (parentAdapterFactory != null) {
@@ -331,7 +337,7 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
+	 * This disposes all of the item providers created by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

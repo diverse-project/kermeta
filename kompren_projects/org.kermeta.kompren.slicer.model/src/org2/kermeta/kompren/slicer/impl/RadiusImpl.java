@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org2.kermeta.kompren.slicer.Radius;
 import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicerPackage;
+import org2.kermeta.kompren.slicer.util.EcoreUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,10 +61,10 @@ public class RadiusImpl extends EObjectImpl implements Radius {
 		final StringBuilder result = new StringBuilder("radius: ");
 
 		if(!focusedClasses.isEmpty()) {
-			result.append(focusedClasses.get(0).getDomain().getName());
+			result.append(EcoreUtils.INSTANCE.getQualifiedName(focusedClasses.get(0).getDomain(), "."));
 
 			for(int i=1, size=focusedClasses.size(); i<size; i++)
-				result.append(", ").append(focusedClasses.get(i).getDomain().getName());
+				result.append(", ").append(EcoreUtils.INSTANCE.getQualifiedName(focusedClasses.get(i).getDomain(), "."));
 		}
 
 		return result.toString();

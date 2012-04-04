@@ -23,6 +23,7 @@ import org2.kermeta.kompren.slicer.SlicedElement;
 import org2.kermeta.kompren.slicer.SlicedProperty;
 import org2.kermeta.kompren.slicer.Slicer;
 import org2.kermeta.kompren.slicer.SlicerPackage;
+import org2.kermeta.kompren.slicer.util.EcoreUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -692,10 +693,10 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 		result.append("\tdomain: \"").append(uriMetamodel).append("\"\n");
 
 		if(inputClasses!=null && !inputClasses.isEmpty()) {
-			result.append("\tinput: ").append(inputClasses.get(0).getName());
+			result.append("\tinput: ").append(EcoreUtils.INSTANCE.getQualifiedName(inputClasses.get(0), "."));
 
 			for(int i=1, size=inputClasses.size(); i<size; i++)
-				result.append(", ").append(inputClasses.get(i).getName());
+				result.append(", ").append(EcoreUtils.INSTANCE.getQualifiedName(inputClasses.get(i), "."));
 
 			result.append('\n');
 		}

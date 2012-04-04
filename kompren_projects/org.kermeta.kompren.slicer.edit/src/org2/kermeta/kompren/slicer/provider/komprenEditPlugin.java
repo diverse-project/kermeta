@@ -5,9 +5,7 @@
 package org2.kermeta.kompren.slicer.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 
 /**
@@ -38,7 +36,7 @@ public final class komprenEditPlugin extends EMFPlugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	static Implementation plugin;
+	private static Implementation plugin;
 
 	/**
 	 * Create the instance.
@@ -47,7 +45,10 @@ public final class komprenEditPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public komprenEditPlugin() {
-		super(new ResourceLocator [] { EcoreEditPlugin.INSTANCE, });
+		super
+		  (new ResourceLocator [] {
+		     EcoreEditPlugin.INSTANCE,
+		   });
 	}
 
 	/**
