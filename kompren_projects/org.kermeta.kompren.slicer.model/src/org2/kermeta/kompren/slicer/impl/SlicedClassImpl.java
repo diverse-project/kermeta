@@ -9,6 +9,8 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import org2.kermeta.kompren.slicer.SlicedClass;
 import org2.kermeta.kompren.slicer.SlicerPackage;
 import org2.kermeta.kompren.slicer.VarDecl;
@@ -60,7 +62,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 
 	@Override
 	public String toString() {
-		final StringBuilder result = new StringBuilder("slicedClass: ").append(domain.getName());
+		final StringBuilder result = new StringBuilder("slicedClass: ").append(getDomain().getName());
 
 		if(isOption)
 			result.append(" option");

@@ -259,25 +259,4 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 		}
 		return super.eIsSet(featureID);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isOption: ");
-		result.append(isOption);
-		result.append(", expression: ");
-		result.append(expression);
-		result.append(", expOnRemove: ");
-		result.append(expOnRemove);
-		result.append(')');
-		return result.toString();
-	}
-
 } //SlicedElementImpl

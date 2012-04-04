@@ -84,7 +84,7 @@ public class SlicedPropertyImpl extends SlicedElementImpl implements SlicedPrope
 
 	@Override
 	public String toString() {
-		final StringBuilder result = new StringBuilder("slicedProperty: ").append(domain.getName());
+		final StringBuilder result = new StringBuilder("slicedProperty: ").append(getDomain().getName());
 
 		if(isOption)
 			result.append(" option");
