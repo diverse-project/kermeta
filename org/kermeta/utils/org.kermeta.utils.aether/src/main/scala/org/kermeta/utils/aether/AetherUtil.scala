@@ -69,21 +69,27 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     		val part = urlids.split("/")
     		if (part.size == 3) {
     			file = resolveMavenArtifact(part(0), part(1), part(2), List(repourl))
-    		} else { 
-    			throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version> " +mavenurl)
+    		} else if (part.size == 2) {
+    		   file = resolveMavenArtifact(part(0), part(1), null, List(repourl))
+    		}
+    		else {
+    			throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID[/version]> " +mavenurl)
     		}
     	}
     	if (file == null) {
 	        val part = url.split("/")
 	        if (part.size == 3) {
 	          file = resolveMavenArtifact(part(0), part(1), part(2), repositoriesUrl)
-	        } else {
-	    		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version> " +mavenurl)
+	        } else if (part.size == 2) {
+    		   file = resolveMavenArtifact(part(0), part(1), null, repositoriesUrl)
+    		}
+    		else {
+	    		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID[/version]> " +mavenurl)
 	        }
     	}
     }
     else {
-		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID/version> " +mavenurl)
+		throw new MalformedURLException("Bad MVN URL <mvn:[repourl!]groupID/artefactID[/version]> " +mavenurl)
     }
     file
   }
