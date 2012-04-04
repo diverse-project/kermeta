@@ -38,15 +38,23 @@
                id="kompren.slicer.edit.convertAsTextAction"
                label="Create komprent file"
                menubarPath="kompren.slicer.edit.menu1/group1"
-               tooltip="Creates komprent files from the selected kompren models.">
+               tooltip="Creates Kompren textual models from the selected kompren models.">
          </action>
          <action
                class="kompren.slicer.edit.popup.actions.CreateKomprentModelsAction"
                enablesFor="+"
                id="kompren.slicer.edit.convertAsModelAction"
-               label="Create kompren file"
+               label="Create kompren model"
                menubarPath="kompren.slicer.edit.menu1/group1"
-               tooltip="Creates kompren models from the selected komprent files.">
+               tooltip="Creates Kompren models from the selected komprent files.">
+         </action>
+         <action
+               class="kompren.slicer.edit.popup.actions.CreateMSFAction"
+               enablesFor="+"
+               id="kompren.slicer.edit.createMSFAction"
+               label="Create model slicer function"
+               menubarPath="kompren.slicer.edit.menu1/group1"
+               tooltip="Compiles the selected Kompren models into model slicer functions.">
          </action>
       </objectContribution>
    </extension>

@@ -34,13 +34,6 @@ import org2.kermeta.kompren.slicer.util.SlicerAdapterFactory;
  */
 public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "INRIA/IRISA\nTriskell Team";
-
-	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -322,7 +315,6 @@ public class SlicerItemProviderAdapterFactory extends SlicerAdapterFactory imple
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

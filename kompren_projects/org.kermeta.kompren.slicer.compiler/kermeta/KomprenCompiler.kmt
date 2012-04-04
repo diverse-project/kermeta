@@ -13,10 +13,10 @@ using ecore
 using kermeta::io::StdIO => stdio
 
 class KomprenCompiler {
-	operation compile(uriMM : String, uriSlicer : String, pathOutput : String) is do
+	operation compile(uriSlicer : String, pathOutput : String) is do
 		var slicerModel : Slicer init getSlicerModel(uriSlicer)
-		var pkg 		: EPackage init getEcoreModel(uriMM).one()
-		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, uriMM)
+		var pkg 		: EPackage init getEcoreModel(slicerModel.uriMetamodel).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, slicerModel.uriMetamodel)
 
 		slicer.generateSlicer()
 		slicer.saveCode(pathOutput)
@@ -52,7 +52,7 @@ class KomprenCompiler {
 
 	operation getSlicerModel(uriSlicerModel : String) : Slicer is do
    		var repository : ResourceSet init ResourceSet.new
-   		var resource : Resource init repository.createResource(uriSlicerModel, "platform:/resource/org.kermeta.kompren.slicer.compiler/metamodel/slicing.ecore")
+   		var resource : Resource init repository.createResource(uriSlicerModel, "platform:/resource/org.kermeta.kompren.slicer.compiler/metamodel/kompren.ecore")
        	resource.load(void)
        	
        	result := void

@@ -3,8 +3,6 @@ package kompren.slicer.edit.popup.actions;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -15,25 +13,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
 import org2.kermeta.kompren.slicer.Slicer;
 
-public class CreateKomprentFilesAction implements IObjectActionDelegate {
-	private List<IFile> paths;
-
-
+public class CreateKomprentFilesAction extends KomprenAction {
+	
 	public CreateKomprentFilesAction() {
 		super();
-		paths = new ArrayList<IFile>();
-	}
-
-
-	@Override
-	public void setActivePart(final IAction action, final IWorkbenchPart targetPart) {
-//		shell = targetPart.getSite().getShell();
 	}
 
 
@@ -67,19 +52,8 @@ public class CreateKomprentFilesAction implements IObjectActionDelegate {
 	}
 
 
-
 	@Override
-	public void selectionChanged(final IAction action, final ISelection selection) {
-		paths.clear();
-
-		if(selection!=null && !selection.isEmpty() && selection instanceof StructuredSelection) {
-			List<?> listSel = ((StructuredSelection)selection).toList();
-
-			for(Object obj : listSel)
-				if(obj instanceof IFile && ((IFile)obj).getFileExtension().equals("kompren"))
-					paths.add((IFile)obj);
-		}
-
-		action.setEnabled(!paths.isEmpty());
+	protected boolean supportExtension(final IFile file) {
+		return file.getFileExtension().equals("kompren");
 	}
 }
