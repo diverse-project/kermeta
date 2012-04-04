@@ -1,0 +1,124 @@
+/* $Id:$ 
+ * Creation : April 3, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package org::kermeta::language;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/IsSubstitutable.kmt"
+
+package behavior {
+
+	aspect class TypeReference {
+	
+	
+		/**
+	 	 * The class's type parameter does not respect the bound
+	 	 * defined in the corresponding ClassDefinition 
+	 	 */
+		@Scope "RESOLVED"
+		inv type_parameter_substitutability is do
+			
+			//stdio.writeln("Checking invariant type_parameter_substitutability on TypeReference ...")
+			self.type.isSubstitutable
+			
+		end
+	
+	}
+}
+
+package structure {
+
+	aspect class ProductType {
+	
+		/**
+	 	 * In the ProductType definition, there is a type with type parameters which
+	 	 * does not respect the bound defined in the corresponding ClassDefinition 
+	 	 */
+		@Scope "RESOLVED"
+		inv type_parameter_substitutability is do
+			
+			//stdio.writeln("Checking invariant type_parameter_substitutability on ProductType ...")
+			self.type.forAll{ t | t.isSubstitutable }
+			
+		end
+
+	}
+	
+	aspect class FunctionType {
+	
+		/**
+		 * In the FunctionType definition, there is a type with type parameters which
+		 * does not respect the bound defined in the corresponding ClassDefinition
+		 */
+		@Scope "RESOLVED"
+		inv type_parameter_substitutability is do
+			
+			//stdio.writeln("Checking invariant type_parameter_substitutability on FunctionType ...")
+			
+			var res : Boolean init true
+			
+			if not(self.right.isVoid)
+			then
+				res:=self.right.isSubstitutable
+			end
+			
+			if not(self.left.isVoid)
+			then
+				res:=( res and self.left.isSubstitutable)
+			end
+			
+			res
+		end
+	}
+
+
+	aspect class TypedElement {
+		
+		/**
+		 * There is a type with type parameters which does not respect
+		 * the bound defined in the corresponding ClassDefinition
+		 */
+		@Scope "RESOLVED"
+		inv type_parameter_substitutability is do
+			
+			//stdio.writeln("Checking invariant type_parameter_substitutability on TypedElement ..." )
+			if (self.type.isVoid)
+			then
+				true
+			else
+				self.type.isSubstitutable
+			end
+			
+		end
+	}
+	
+	
+	aspect class Operation {
+
+		/**
+		 * The operation raises an exception whose type does not respect
+		 * the bound defined in the corresponding ClassDefinition
+		 */
+		@Scope "RESOLVED"
+		inv type_parameter_substitutability is do
+			
+			//stdio.writeln("Checking invariant type_parameter_substitutability on Operation ..." )
+			if (self.raisedException.size==0)
+			then
+				true
+			else
+				self.raisedException.forAll{ ex | ex.isSubstitutable }
+			end
+			
+		end
+	}
+	
+	}
+}
+
+
