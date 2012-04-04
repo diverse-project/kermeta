@@ -18,8 +18,9 @@ KermetaProject "org.kermeta.kompren.slicer.compiler"
 		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
 		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
-		dependency "slicing.model" ="platform:/plugin/org.kermeta.kompren.slicer.model","mvn:org.kermeta.kompren/kompren.slicer.model/2.0.0-SNAPSHOT"
-	}
+		//dependency "slicing.model" ="${project.baseUri}/lib/org.kermeta.kompren.slicer.model.jar"
+		dependency "slicing.model" ="mvn:org.kermeta.kompren/kompren.slicer.model/2.0.0-SNAPSHOT" byteCodeOnly //"platform:/plugin/org.kermeta.kompren.slicer.model"
+	} 
 	packageEquivalences={
 		// indicates the real java name of a given package
 		// useful for deployed thirdparty metamodels
