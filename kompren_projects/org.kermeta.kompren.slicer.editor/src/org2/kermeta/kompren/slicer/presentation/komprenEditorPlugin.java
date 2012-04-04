@@ -5,11 +5,8 @@
 package org2.kermeta.kompren.slicer.presentation;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 
 /**
@@ -25,7 +22,7 @@ public final class komprenEditorPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public static final String copyright = "INRIA/IRISA\nTriskell Team";
-	
+
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
@@ -33,7 +30,7 @@ public final class komprenEditorPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public static final komprenEditorPlugin INSTANCE = new komprenEditorPlugin();
-	
+
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
@@ -66,7 +63,7 @@ public final class komprenEditorPlugin extends EMFPlugin {
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
-	
+
 	/**
 	 * Returns the singleton instance of the Eclipse plugin.
 	 * <!-- begin-user-doc -->
@@ -77,7 +74,7 @@ public final class komprenEditorPlugin extends EMFPlugin {
 	public static Implementation getPlugin() {
 		return plugin;
 	}
-	
+
 	/**
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->
@@ -93,7 +90,7 @@ public final class komprenEditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-	
+
 			// Remember the static instance.
 			//
 			plugin = this;
