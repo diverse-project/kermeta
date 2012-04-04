@@ -27,7 +27,6 @@ object MainRunner {
       case None => println("Error"+parser.lastNoSuccess)
       case Some(elt) =>
         SlicerResolver.resolve(elt, uri)
-        println(elt)
         saveAsXMI(elt, uri.replace(".komprent", ".kompren"))
     }
   }
