@@ -30,7 +30,7 @@ aspect class TypeDefinition {
 	operation getAllSuperTypeDefinitions() : OrderedSet<TypeDefinition> is do
 		result := OrderedSet<TypeDefinition>.new
 		getAllSuperTypes.each{st|
-			result.add(st.getTypeDefinition())
+			result.add(st.getTypeDefinitionHelper())
 		}
 	end
 }

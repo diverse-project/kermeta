@@ -1,0 +1,41 @@
+/* $Id:$ 
+ * Creation : April 4, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+aspect class Type
+{
+	operation getTypeDefinitionHelper() : TypeDefinition is do 
+		result := void
+	end
+}
+
+aspect class ParameterizedType
+{
+	method getTypeDefinitionHelper() : TypeDefinition is do 
+		result := typeDefinition
+	end 
+}
+
+aspect class ModelType
+{
+	method getTypeDefinitionHelper() : TypeDefinition is do 
+		result := self
+	end
+}
+
+aspect class DataType
+{
+	method getTypeDefinitionHelper() : TypeDefinition is do 
+		result := self
+	end
+}
