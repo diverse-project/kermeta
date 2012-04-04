@@ -1,0 +1,24 @@
+slicer EcoreSemZoom{
+	domain: "./Ecore.ecore"
+	input: ecore.EClassifier
+	radius: ecore.EClass
+	slicedClass: ecore.EAttribute
+	slicedClass: ecore.EEnumLiteral
+	slicedClass: ecore.EClass
+	slicedClass: ecore.EDataType
+	slicedClass: ecore.EEnum
+	slicedClass: ecore.EOperation
+	slicedClass: ecore.EPackage
+	slicedClass: ecore.EParameter
+	slicedClass: ecore.EReference
+	slicedProperty: ecore.EClass.eSuperTypes option
+	slicedProperty: ecore.EClass.eSuperTypes option opposite(lowerTypes)
+	slicedProperty: ecore.EClass.eStructuralFeatures option
+	slicedProperty: ecore.EClass.eOperations option
+	slicedProperty: ecore.EOperation.eParameters option
+	slicedProperty: ecore.ETypedElement.eType option
+	slicedProperty: ecore.EClassifier.ePackage option
+	slicedProperty: ecore.EPackage.eSubpackages option
+	slicedProperty: ecore.EPackage.eSuperPackage option
+	slicedProperty: ecore.EEnum.eLiterals option
+}

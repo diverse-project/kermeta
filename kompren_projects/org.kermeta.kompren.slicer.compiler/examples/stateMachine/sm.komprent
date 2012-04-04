@@ -1,0 +1,6 @@
+slicer strict StateMachineSlicer{
+	domain: "./StateMachine.ecore"
+	input: ex.stateMachine.State
+	slicedClass: ex.stateMachine.Transition
+	slicedProperty: ex.stateMachine.OutputState.outgoingTransitions
+}

@@ -1,0 +1,39 @@
+slicer UnusedVarDetector{
+	domain: "./kermeta.ecore"
+	input: org.kermeta.language.structure.Operation
+	slicedClass: org.kermeta.language.behavior.VariableDecl varDecl [[		varDecls.add(varDecl)]]
+	slicedClass: org.kermeta.language.behavior.CallVariable callVar [[		if(not callVar.staticType.isVoid) then
+			var varDecl : VariableDecl init varDecls.detect{varD |
+				varD.containedType.contains(callVar.staticType)
+			}
+			
+			if(varDecl.isVoid) then
+				var varParam : Parameter init params.detect{param | param.type==callVar.staticType }
+				if(not varParam.isVoid) then
+					params.remove(varParam)
+				end
+			else
+				varDecls.remove(varDecl)
+			end
+		end]]
+	slicedClass: org.kermeta.language.structure.Parameter param [[		if(param.~operation.superOperation.isVoid) then
+			params.add(param)
+		end]]
+	slicedProperty: org.kermeta.language.behavior.Block.statement
+	slicedProperty: org.kermeta.language.behavior.Conditional.elseBody
+	slicedProperty: org.kermeta.language.behavior.Conditional.thenBody
+	slicedProperty: org.kermeta.language.behavior.Raise.expression
+	slicedProperty: org.kermeta.language.behavior.Loop.initialization
+	slicedProperty: org.kermeta.language.behavior.Loop.body
+	slicedProperty: org.kermeta.language.behavior.LambdaExpression.body
+	slicedProperty: org.kermeta.language.behavior.Rescue.body
+	slicedProperty: org.kermeta.language.behavior.CallExpression.parameters
+	slicedProperty: org.kermeta.language.behavior.Assignment.value
+	slicedProperty: org.kermeta.language.structure.Operation.ownedParameter
+	slicedProperty: org.kermeta.language.structure.Operation.body
+	onEnd [[		varDecls.each{varD | stdio.writeln("Variable unused: " + varD.identifier) }
+		params.each{param | stdio.writeln("Parameter unused: " + param.name) }]]
+	helper [[	reference varDecls : VariableDecl[0..*]
+	
+	reference params : Parameter[0..*]]]
+}

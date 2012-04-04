@@ -1,0 +1,42 @@
+slicer KermetaStaticAnalysis{
+	domain: "./kermeta.ecore"
+	input: org.kermeta.language.structure.ModelingUnit
+	slicedClass: org.kermeta.language.structure.ClassDefinition classDef [[		if(usedClassDefs.isVoid) then
+			usedClassDefs := Set<ClassDefinition>.new
+		end
+
+		usedClassDefs.add(classDef)]]
+	slicedProperty: org.kermeta.language.structure.ModelingUnit.packages
+	slicedProperty: org.kermeta.language.structure.Package.nestedPackage
+	slicedProperty: org.kermeta.language.structure.TypeDefinitionContainer.ownedTypeDefinition
+	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedOperation
+	slicedProperty: org.kermeta.language.structure.Operation.ownedParameter
+	slicedProperty: org.kermeta.language.structure.TypedElement.type
+	slicedProperty: org.kermeta.language.structure.ParameterizedType.typeDefinition
+	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedAttribute
+	slicedProperty: org.kermeta.language.structure.TypeDefinition.superType
+	slicedProperty: org.kermeta.language.structure.Operation.body
+	slicedProperty: org.kermeta.language.behavior.VariableDecl.type
+	slicedProperty: org.kermeta.language.behavior.CallTypeLiteral.typeref
+	slicedProperty: org.kermeta.language.behavior.LambdaExpression.parameters
+	slicedProperty: org.kermeta.language.behavior.LambdaExpression.body
+	slicedProperty: org.kermeta.language.behavior.LambdaParameter.type
+	slicedProperty: org.kermeta.language.behavior.Conditional.condition
+	slicedProperty: org.kermeta.language.behavior.Conditional.elseBody
+	slicedProperty: org.kermeta.language.behavior.Conditional.thenBody
+	slicedProperty: org.kermeta.language.behavior.Raise.expression
+	slicedProperty: org.kermeta.language.behavior.Loop.initialization
+	slicedProperty: org.kermeta.language.behavior.Loop.body
+	slicedProperty: org.kermeta.language.behavior.Loop.stopCondition
+	slicedProperty: org.kermeta.language.behavior.Block.statement
+	slicedProperty: org.kermeta.language.behavior.CallExpression.parameters
+	slicedProperty: org.kermeta.language.behavior.Assignment.target
+	slicedProperty: org.kermeta.language.behavior.Assignment.value
+	slicedProperty: org.kermeta.language.behavior.CallFeature.target
+	slicedProperty: org.kermeta.language.behavior.Block.rescueBlock
+	slicedProperty: org.kermeta.language.behavior.Rescue.body
+	onEnd [[		if(not usedClassDefs.isVoid) then
+			usedClassDefs.each{classDef | stdio.writeln(classDef.name) }
+		end]]
+	helper [[	reference usedClassDefs : Set<ClassDefinition>]]
+}
