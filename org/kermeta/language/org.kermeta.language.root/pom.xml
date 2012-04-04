@@ -19,36 +19,33 @@
     <packaging>pom</packaging>
     <version>${kermeta.version}</version>
     <name>language.root :: Root for kermeta language</name>
-	
-	<modules>
-		<module>../org.kermeta.language.model</module>
-		<module>../org.kermeta.language.loader.kmt.scala.api</module>
-		<module>../org.kermeta.language.loader.kmt.scala</module>
-		<module>../org.kermeta.language.framework.scala</module>
-		<module>../org.kermeta.language.merger.binarymerger.api</module>
-		<module>../org.kermeta.language.merger.binarymerger</module>
-		<module>../org.kermeta.language.resolver.api</module>
-		<module>../org.kermeta.language.resolver</module>
-		<module>../org.kermeta.language.checker.api</module>
-		<module>../org.kermeta.language.checker</module>
-		<module>../org.kermeta.language.ecore2km.api</module>
-		<module>../org.kermeta.language.ecore2km</module>
-		<module>../org.kermeta.language.library.core</module>
-		<module>../org.kermeta.language.km2bytecode</module>
-		<module>../org.kermeta.language.umlprofile2ecore.api</module>
-		<module>../org.kermeta.language.umlprofile2ecore</module>
-		<module>../org.kermeta.language.builder.api</module>
-		<module>../org.kermeta.language.builder.eclipse</module>
-		<module>../org.kermeta.language.autocompletion.api</module>
-		<module>../org.kermeta.language.autocompletion</module>
-		<module>../org.kermeta.language.texteditor.eclipse</module>
-		<module>../org.kermeta.language.documentation</module>
-	</modules>
 	<profiles>
      <profile>
-       <id>JENKINS_profile</id>
-          <modules>
-          </modules> 
+       <id>all_modules</id>
+		<modules>
+			<module>../org.kermeta.language.model</module>
+			<module>../org.kermeta.language.loader.kmt.scala.api</module>
+			<module>../org.kermeta.language.loader.kmt.scala</module>
+			<module>../org.kermeta.language.framework.scala</module>
+			<module>../org.kermeta.language.merger.binarymerger.api</module>
+			<module>../org.kermeta.language.merger.binarymerger</module>
+			<module>../org.kermeta.language.resolver.api</module>
+			<module>../org.kermeta.language.resolver</module>
+			<module>../org.kermeta.language.checker.api</module>
+			<module>../org.kermeta.language.checker</module>
+			<module>../org.kermeta.language.ecore2km.api</module>
+			<module>../org.kermeta.language.ecore2km</module>
+			<module>../org.kermeta.language.library.core</module>
+			<module>../org.kermeta.language.km2bytecode</module>
+			<module>../org.kermeta.language.umlprofile2ecore.api</module>
+			<module>../org.kermeta.language.umlprofile2ecore</module>
+			<module>../org.kermeta.language.builder.api</module>
+			<module>../org.kermeta.language.builder.eclipse</module>
+			<module>../org.kermeta.language.autocompletion.api</module>
+			<module>../org.kermeta.language.autocompletion</module>
+			<module>../org.kermeta.language.texteditor.eclipse</module>
+			<module>../org.kermeta.language.documentation</module>
+		</modules> 
       </profile>
   </profiles>	
 </project>
