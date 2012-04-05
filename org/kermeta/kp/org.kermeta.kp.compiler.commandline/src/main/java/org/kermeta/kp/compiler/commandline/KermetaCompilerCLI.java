@@ -26,6 +26,7 @@ public class KermetaCompilerCLI {
 	private static Options options = null; // Command line options
 	private static final String GENERATE_INTERMEDIATE_FILES_OPTION = "intermediate";
 	private static final String TARGET_LOCATION_OPTION = "target";
+	private static final String GENERATEKMONLY_OPTION = "generateKmOnly";
 
 	private static final String DEFAULT_TARGET_FOLDER = "target";
 	
@@ -34,6 +35,7 @@ public class KermetaCompilerCLI {
 	private String outputFolder = DEFAULT_TARGET_FOLDER;
 	private String kpFile;
 	private Boolean intermediateFilesRequired = false;
+	private Boolean generateKmOnly = false;
 
 	
 	
@@ -52,8 +54,8 @@ public class KermetaCompilerCLI {
 		
 	private void run() throws IOException {
 		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
-		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"scala/", outputFolder+"classes/", outputFolder+"genmode/", outputFolder+"java/", outputFolder+"emfclasses/", outputFolder+"resources/");
-		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), false);
+		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"/scala/", outputFolder+"/classes/", outputFolder+"/genmode/", outputFolder+"/java/", outputFolder+"/emfclasses/", outputFolder+"/resources/");
+		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), generateKmOnly);
 	}
 
 	public KermetaCompilerCLI(){
@@ -64,6 +66,7 @@ public class KermetaCompilerCLI {
 	protected void prepareOptions() {
 		options = new Options();
 		options.addOption(GENERATE_INTERMEDIATE_FILES_OPTION, false, "Generate intermediate files");
+		options.addOption(GENERATEKMONLY_OPTION, false, "Generate only the km");
 		options.addOption(TARGET_LOCATION_OPTION, true, "Output folder. " + DEFAULT_TARGET_FOLDER + " by default ");
 	}
 
@@ -90,6 +93,10 @@ public class KermetaCompilerCLI {
 		}
 		if (cmd.hasOption(GENERATE_INTERMEDIATE_FILES_OPTION)){
 			intermediateFilesRequired = true;			
+		}
+
+		if (cmd.hasOption(GENERATEKMONLY_OPTION)){
+			this.generateKmOnly = true;			
 		}
 		
 		if(cmd.getArgList().size() == 0){
