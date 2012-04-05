@@ -17,7 +17,12 @@ public class CreateMSFAction extends KomprenAction {
 	}
 	
 	
-	private void compile(final IFile file) {
+	protected void compile(final IFile file) {
+		if(file.getFileExtension().equals("komprent")) {
+			CreateKomprenModelsAction action = new CreateKomprenModelsAction();
+			action.convertKomprentFile(file);
+		}
+				
 		// org2.kermeta.kompren.slicer.KomprenCompiler compiler = new org2.kermeta.kompren.slicer.KomprenCompiler();
 		// compiler.compile(uriSlicer, "MSF"+file.getName());
 	}

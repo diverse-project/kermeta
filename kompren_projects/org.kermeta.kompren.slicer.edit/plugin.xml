@@ -41,7 +41,7 @@
                tooltip="Creates Kompren textual models from the selected kompren models.">
          </action>
          <action
-               class="kompren.slicer.edit.popup.actions.CreateKomprentModelsAction"
+               class="kompren.slicer.edit.popup.actions.CreateKomprenModelsAction"
                enablesFor="+"
                id="kompren.slicer.edit.convertAsModelAction"
                label="Create kompren model"

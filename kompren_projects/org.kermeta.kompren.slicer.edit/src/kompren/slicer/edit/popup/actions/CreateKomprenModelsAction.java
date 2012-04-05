@@ -6,9 +6,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 
-public class CreateKomprentModelsAction extends KomprenAction {
+public class CreateKomprenModelsAction extends KomprenAction {
 
-	public CreateKomprentModelsAction() {
+	public CreateKomprenModelsAction() {
 		super();
 	}
 
@@ -21,7 +21,7 @@ public class CreateKomprentModelsAction extends KomprenAction {
 
 
 
-	private void convertKomprentFile(final IFile file) {
+	protected void convertKomprentFile(final IFile file) {
 		org.kermeta.kompren.MainRunner.convertAsXMI(file.getLocation().toString());
 		try { file.getParent().refreshLocal(IResource.DEPTH_ONE, null); }
 		catch(final CoreException ex) { ex.printStackTrace(System.err); }

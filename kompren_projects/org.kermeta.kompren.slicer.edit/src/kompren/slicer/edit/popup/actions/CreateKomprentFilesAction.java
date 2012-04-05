@@ -34,7 +34,7 @@ public class CreateKomprentFilesAction extends KomprenAction {
 
 
 
-	private void convertKomprenFile(final IFile file) {
+	protected void convertKomprenFile(final IFile file) {
 		final Resource resource = new ResourceSetImpl().getResource(URI.createFileURI(file.getLocation().toString()), true);
 		final String code = ((Slicer)resource.getContents().get(0)).toString();
 		final File fileOut = new File(file.getLocation().removeFileExtension().addFileExtension("komprent").toString());
