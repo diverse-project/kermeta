@@ -46,7 +46,7 @@ trait KAttributeParser extends KAbstractParser with KMultiplicityParser{
   def getterSetterParser : Parser[Tuple2[Expression,Expression]] = (getterFirst | setterFirst)
 
 
-  def derivedProperty : Parser[Property] = propertyDeclKeyword ~ readonlyModifier ~ ident ~ ":" ~ multiplicityType ~ getterSetterParser ^^ { case _ ~ readonlyM ~ id ~ _ ~ mType ~ getSetM =>
+  def derivedProperty : Parser[Property] = propertyDeclKeyword ~ readonlyModifier ~ ident ~ ":" ~ multiplicityType ~ opt("#" ~> ident) ~ getterSetterParser ^^ { case _ ~ readonlyM ~ id ~ _ ~ mType ~ opposite ~ getSetM =>
     val newo = StructureFactory.eINSTANCE.createProperty
     newo.setName(id)
     newo.setIsComposite(false)
@@ -59,6 +59,16 @@ trait KAttributeParser extends KAbstractParser with KMultiplicityParser{
 
     // copy Type and multiplicity information in this Property
     mType.copyToKElem(newo)
+
+    opposite match {
+        case Some(opositeName)=>{
+          val unresolveProp = StructureFactory.eINSTANCE.createUnresolvedProperty()
+          unresolveProp.setPropertyIdentifier(opositeName)
+          newo.getOwnedUnresolvedProperties.add(unresolveProp)
+          newo.setOpposite(unresolveProp)
+        }
+        case None =>
+      }
 
     newo.setGetterBody(getSetM._1)
     newo.setSetterBody(getSetM._2)
