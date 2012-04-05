@@ -241,14 +241,14 @@
 		<repository>
 			<id>kermeta-public-release</id>
 			<name>Kermeta public release repository on maven.irisa.fr</name>
-			<url>http://maven.irisa.fr/artifactory/kermeta-public-release</url>
-			<uniqueVersion>false</uniqueVersion>
+			<url>http://maven.inria.fr/artifactory/kermeta-public-release</url>
+			<uniqueVersion>true</uniqueVersion>
 		</repository>
 		<snapshotRepository>
 			<id>kermeta-public-snapshot</id>
 			<name>Kermeta public snapshot repository on maven.irisa.fr</name>
-			<url>http://maven.irisa.fr/artifactory/kermeta-public-snapshot</url>
-			<uniqueVersion>false</uniqueVersion>
+			<url>http://maven.inria.fr/artifactory/kermeta-public-snapshot</url>
+			<uniqueVersion>true</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
 	<profiles>
