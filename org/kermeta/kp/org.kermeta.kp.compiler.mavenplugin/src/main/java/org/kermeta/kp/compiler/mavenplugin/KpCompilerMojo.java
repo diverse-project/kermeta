@@ -245,6 +245,7 @@ public class KpCompilerMojo extends AbstractMojo {
 				runner.runK2Program(  Arrays.asList(params),null);
 			}
 		}
+		*/
 	        // Add kp file and resolved km files in the resulting jar
 			// tell maven to include generated META-INF
 			Resource resource = new Resource();
@@ -257,11 +258,11 @@ public class KpCompilerMojo extends AbstractMojo {
 	        project.getResources().add(resource);
 	        
 	        // copy kp in the resources
-	        copyFile(kp, new File(resourceOutputDirectory, KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR));
+	        copyFile(kp, new File(resourceOutputDirectory, "/META-INF/kermeta"));
 	        
 	        
 	        
-	    */    
+	        
     	} catch (Exception e) {
 			this.getLog().error(e);
 			throw new MojoFailureException(e.toString());
