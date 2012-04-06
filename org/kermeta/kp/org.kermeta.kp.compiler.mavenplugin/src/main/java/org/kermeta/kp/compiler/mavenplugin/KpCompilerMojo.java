@@ -100,18 +100,7 @@ public class KpCompilerMojo extends AbstractMojo {
    private File targetDirectory;
 
 
-    /**
-     * GroupId : used to prefix generated code by the  Kermeta Compiler
-     *
-     * @parameter expression="${project.groupId}"
-     */
-    private String targetGroupId;
-    /**
-     * artifactId : used to prefix generated code by the  Kermeta Compiler
-     *
-     * @parameter expression="${project.artifactId}"
-     */
-    private String targetArtifactId;
+    
     
     /**
      * intermediateFilesRequired : write to disk the intermediate files (useful for debugging), default is true
@@ -128,12 +117,7 @@ public class KpCompilerMojo extends AbstractMojo {
      */
     private Boolean generateKmOnly;
 
-    /**
-     * run : run K2 programs, default is false
-     *
-     * @parameter expression="false"
-     */
-    private Boolean run;
+    
 
     
     /**
@@ -150,19 +134,9 @@ public class KpCompilerMojo extends AbstractMojo {
      */
     private Boolean stopOnError;
     
-    /**
-     * packageEquivalence : used to indicate when a package in the ecore is different from the generated java code
-     *
-     * @parameter 
-     */
-    private PackageEquivalence[] packageEquivalences;
+    
 
-    /**
-     * params : list of parameter strings that will be passed by default when running the kermeta program
-     *
-     * @parameter 
-     */
-    private String[] params;
+    
 
     
     public void execute() throws MojoExecutionException, MojoFailureException {
