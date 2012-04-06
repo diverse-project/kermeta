@@ -195,7 +195,8 @@ public class KpCompilerMojo extends AbstractMojo {
 	            
 	            Object compilerCLI = cls.newInstance();
 	            
-	            Method loadArgsMethod = cls.getMethod("loadArgs", String[].class);
+	            
+	            Method loadArgsMethod = cls.getDeclaredMethod("loadArgs", String[].class);
 	            ArrayList<String> paramsArray = new ArrayList<String>();
 
 	            if(generateKmOnly) paramsArray.add("-generateKmOnly");
