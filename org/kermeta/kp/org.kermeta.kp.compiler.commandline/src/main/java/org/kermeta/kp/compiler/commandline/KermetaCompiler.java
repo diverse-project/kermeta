@@ -93,7 +93,6 @@ public class KermetaCompiler {
 	public static String INTERMEDIATE_SUBFOLDER = "";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
-	public static String TRACEABILITY_TEXT_REFERENCE = "traceability_text_reference";
 
 	public boolean checkingEnabled = false;
 	public boolean stopOnError = true;
@@ -104,6 +103,9 @@ public class KermetaCompiler {
 	public String targetIntermediateFolder;
 	public MessagingSystem logger;
 	public LocalFileConverter fileSystemConverter;
+	public ErrorHandlingHelper errorHandlingHelper;
+	
+	
 	// public List<String> additionalClassPath = new
 	// java.util.ArrayList<String>();
 	// public String projectName = "project";
@@ -167,6 +169,7 @@ public class KermetaCompiler {
 		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);*/
 		
 		this.runInEclipse = willRunInEclipse;
+		errorHandlingHelper = new ErrorHandlingHelper(logger, LOG_MESSAGE_GROUP, getMainProgressGroup(), threadExector);
 	}
 
 	/**
@@ -204,6 +207,8 @@ public class KermetaCompiler {
 		}
 		/*if (threadExector instanceof ThreadPoolExecutor)
 		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);*/
+		
+		errorHandlingHelper = new ErrorHandlingHelper(logger, LOG_MESSAGE_GROUP, getMainProgressGroup(), threadExector);
 	}
 
 	private void registerMVNUrlHandler() {
@@ -338,7 +343,7 @@ public class KermetaCompiler {
 	
 			// Did errors occur during the merge ?
 			if (mergedUnit.getProblems().size() > 0) {
-				processErrors(mergedUnit);
+				errorHandlingHelper.processErrors(mergedUnit);
 				if (stopOnError) {
 					logger.logProblem(MessagingSystem.Kind.UserERROR, "Unable to merge the files. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 					this.errorMessage = "Unable to merge the files. Compilation not complete for this project.";
@@ -355,7 +360,7 @@ public class KermetaCompiler {
 				DiagnosticModel results = checkModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, CheckerScope.MERGED);
 				if (results != null) {
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
-					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
+					errorHandlingHelper.processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 		
 					
 					if (stopOnError && results.containsErrors()) {
@@ -397,7 +402,7 @@ public class KermetaCompiler {
 				DiagnosticModel results = checkModelingUnit(resolvedUnit, CheckerScope.RESOLVED);
 				if (results != null) {
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "Processing check diagnostic...", LOG_MESSAGE_GROUP, 1);
-					processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
+					errorHandlingHelper.processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 					
 					if (stopOnError && results.containsErrors()) {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -851,7 +856,7 @@ public class KermetaCompiler {
 
 		// Did errors occur during the resolving ?
 		if (resolvedMU.getProblems().size() > 0) {
-			processErrors(resolvedMU);
+			errorHandlingHelper.processErrors(resolvedMU);
 			if (stopOnError) {
 				logger.error("Errors have occured during resolving, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 				this.hasFailed = true; // message for the caller of the compiler
@@ -868,7 +873,7 @@ public class KermetaCompiler {
 
 			// Did errors occur during the resolving ?
 			if (staticsettedMU.getProblems().size() > 0) {
-				processErrors(staticsettedMU);
+				errorHandlingHelper.processErrors(staticsettedMU);
 				if (stopOnError) {
 					logger.error("Errors have occured during static setting, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 					this.hasFailed = true; // message for the caller of the compiler
@@ -1047,190 +1052,9 @@ public class KermetaCompiler {
 		return diags;
 	}
 
-	protected void processErrors(ErrorProneResult<ModelingUnit> eprMu) {
-		// TODO Retrieve faulty objects text reference and logProblem
-
-		ArrayList<Future<Boolean>> logProblemFutures = new ArrayList<Future<Boolean>>();
-		
-		for (ResultProblemMessage prob : eprMu.getProblems()) {
-			logger.log(MessagingSystem.Kind.DevERROR, prob.getMessage(), LOG_MESSAGE_GROUP);
-
-			// retrieve faulty object
-			// KermetaModelElement kme = (Kermeprob.getCauseObject();
-			if (prob.getCauseObject() != null) {
-				logger.log(Kind.DevDEBUG ,"faultyObject is : " + prob.getCauseObject().toString(),LOG_MESSAGE_GROUP);
-
-				org.kermeta.utils.systemservices.api.reference.ModelReference mref = (org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
-
-				if (mref.getModelRef() != null) {
-					logger.log(Kind.DevDEBUG ,mref.getModelRef().toString(),LOG_MESSAGE_GROUP);
-
-					// The object is a KermetaModelElement
-					try {
-						KermetaModelElement kme = (KermetaModelElement) mref.getModelRef();
 	
-						logger.log(Kind.DevDEBUG ,"The error involves " + kme.toString(), LOG_MESSAGE_GROUP);
-						//System.err.println("The error involves " + kme.toString());
+
 	
-						// Check if there is a sourceLocation tag
-						Boolean tagFound = false;
-	
-						for (Tag t : kme.getKOwnedTags()) {
-	
-							logger.log(Kind.DevDEBUG ,"Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")", LOG_MESSAGE_GROUP);
-	
-							// logger.log(MessagingSystem.Kind.UserINFO, "Tag : " +
-							// t.getName(), "");
-							if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
-								tagFound = true;
-								// logger.log(MessagingSystem.Kind.UserINFO,
-								// "   -> value :(" + t.getValue() +")   ", "");
-								TextReference ref = createTextReference(t);
-	
-								if (ref != null) {
-									logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP, ref)));
-								}
-							}
-						}
-						if (!tagFound) {
-							// Try to retrieve the model element's container
-							Tag t = searchForNearestTaggedContainingKME(kme);
-	
-							if (t == null) {
-								logger.log(MessagingSystem.Kind.DevWARNING,"Impossible to retrieve a container with text traceability", LOG_MESSAGE_GROUP);
-							} else {
-								TextReference ref = createTextReference(t);
-								if (ref != null) {
-									logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, prob.getMessage(), LOG_MESSAGE_GROUP, ref)));
-								}
-	
-							}
-	
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		// wait for all markers to be placed by eclipse // maybe we don't care until the end of the compilation ? (except for intermangling messages ?)
-		for(Future<Boolean> future : logProblemFutures){
-			try {
-				future.get();
-			} catch (InterruptedException e) {
-				logger.error("Marking interrupted", LOG_MESSAGE_GROUP, e);
-			} catch (ExecutionException e) {
-				logger.error("Marking failed "+ e, LOG_MESSAGE_GROUP, e);
-			}
-		}
-	}
-
-	protected void processCheckingDiagnostics(DiagnosticModel diags, URL kpFile) {
-
-		if (diags == null) {
-			return;
-		}
-		
-		// System.err.println("processing diagnostics : " +
-		// diags.getDiagnostics().size());
-		int nbDiagnostics = diags.getDiagnostics().size();
-		logger.initProgress(getMainProgressGroup()+".processCheckingDiagnostics", "Transforming "+ nbDiagnostics +" diagnostic into markers...", LOG_MESSAGE_GROUP, nbDiagnostics);
-		// Display check results
-		if (nbDiagnostics > 0) {
-			logger.log(MessagingSystem.Kind.UserINFO, "There are " + diags.getDiagnostics().size() + " failed constraints", LOG_MESSAGE_GROUP);
-		}
-
-		ArrayList<Future<Boolean>> logProblemFutures = new ArrayList<Future<Boolean>>();
-		
-		for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
-
-			String message = "";
-			Constraint failedConstraint = diag.getFailedConstraint();
-			if (failedConstraint instanceof InvariantProxy) {
-				message = message + "Invariant " + ((InvariantProxy) failedConstraint).getInvariantName() + " on object " + ((ModelReference) diag.getAppliesTo()).getReferencedObject().toString();
-			}
-			if (diag.isIsWarning()) {
-				logger.log(MessagingSystem.Kind.DevWARNING, message, LOG_MESSAGE_GROUP);
-			} else {
-				logger.log(MessagingSystem.Kind.DevERROR, message, LOG_MESSAGE_GROUP);
-			}
-
-			// retrieve the referenced EObject tag sourceLocation
-			EObject myObject = ((ModelReference) diag.getAppliesTo()).getReferencedObject();
-			KermetaModelElement kme = (KermetaModelElement) myObject;
-
-			InvariantProxy proxy = (InvariantProxy) failedConstraint;
-			String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
-			errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
-
-			// Check if there is a sourceLocation tag
-			Boolean tagFound = false;
-
-			for (Tag t : kme.getKOwnedTags()) {
-
-				// System.err.println("Tag found. Name : " + t.getName() +
-				// ", value : (" + t.getValue() + ")");
-
-				logger.log(MessagingSystem.Kind.DevDEBUG, "Tag : " + t.getName(), LOG_MESSAGE_GROUP);
-				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
-					tagFound = true;
-					logger.log(MessagingSystem.Kind.DevDEBUG, "   -> value :(" + t.getValue() + ")   ", LOG_MESSAGE_GROUP);
-					TextReference ref = createTextReference(t);
-					if (ref != null) {
-						if (diag.isIsWarning()) {
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref)));
-						} else {
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref)));
-						}
-					}
-				}
-			}
-
-			if (!tagFound) {
-				// Try to retrieve the model element's container
-				Tag t = searchForNearestTaggedContainingKME(kme);
-
-				if (t == null) {
-					logger.log(MessagingSystem.Kind.DevERROR, "Impossible to retrieve a container with text traceability", LOG_MESSAGE_GROUP);
-					// In this case, place the error on the kp file
-					FileReference ref = new FileReference(kpFile);
-					if (diag.isIsWarning()) {
-						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref)));
-						//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
-					} else {
-						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref)));
-					}
-					
-				} else {
-					TextReference ref = createTextReference(t);
-					if (ref != null) {
-						if (diag.isIsWarning()) {
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref)));
-							//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
-						} else {
-							//logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref)));
-						}
-					}
-
-				}
-
-			}
-
-		}
-		// wait for all markers to be placed by eclipse // maybe we don't care until the end of the compilation ? (except for intermangling messages ?)
-		for(Future<Boolean> future : logProblemFutures){
-			try {
-				future.get();
-			} catch (InterruptedException e) {
-				logger.error("Marking interrupted", LOG_MESSAGE_GROUP, e);
-			} catch (ExecutionException e) {
-				logger.error("Marking failed "+ e, LOG_MESSAGE_GROUP, e);
-			}
-		}
-		logger.doneProgress(getMainProgressGroup()+".processCheckingDiagnostics", "Transformed "+nbDiagnostics+" diagnostic into markers", LOG_MESSAGE_GROUP);
-	}
-
 	/**
 	 * Flush the problems marker related to this kp
 	 */
@@ -1253,61 +1077,9 @@ public class KermetaCompiler {
 		// flush scala2bytecode problems
 	}
 
-	protected Tag searchForNearestTaggedContainingKME(KermetaModelElement kme) {
+	
 
-		KermetaModelElement currentElement = null;
-		KermetaModelElement container = (KermetaModelElement) kme.eContainer();
 
-		while (container != null) {
-
-			for (Tag t : container.getKOwnedTags()) {
-				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
-					return t;
-				}
-			}
-			// Tag hasn't been found, keep on searching higher in the model
-
-			currentElement = container;
-			container = (KermetaModelElement) currentElement.eContainer();
-		}
-
-		return null;
-	}
-
-	private TextReference createTextReference(Tag tag) {
-
-		String value = tag.getValue();
-
-		// System.err.println(tag.getValue());
-
-		String[] values = value.split(";");
-
-		// logger.log(MessagingSystem.Kind.UserINFO, "Source File (" + values[0]
-		// + ")", "");
-		// logger.log(MessagingSystem.Kind.UserINFO, "beginOffset (" + values[1]
-		// + ")", "");
-		// logger.log(MessagingSystem.Kind.UserINFO, "endOffset   (" + values[2]
-		// + ")", "");
-
-		TextReference ref = null;
-
-		try {
-			ref = new TextReference(new URL(values[0]), new Integer(values[1]), new Integer(values[2]));
-			// ref.setBeginLine(new Integer(values[1]));
-			// ref.setBeginOffset(new Integer(values[2]));
-
-			// new TextReference()
-
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return ref;
-	}
 	
 	private int scala2bytecode(List<String> additionalClassPath) {
 
