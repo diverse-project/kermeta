@@ -59,7 +59,7 @@ public class KermetaCompilerCLI {
 	}
 		
 	public boolean run() throws IOException {
-		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
+		compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
 		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"/scala/", outputFolder+"/classes/", outputFolder+"/genmode/", outputFolder+"/java/", outputFolder+"/emfclasses/", outputFolder+"/resources/");
 		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), generateKmOnly);		
 		return compiler.hasFailed;
