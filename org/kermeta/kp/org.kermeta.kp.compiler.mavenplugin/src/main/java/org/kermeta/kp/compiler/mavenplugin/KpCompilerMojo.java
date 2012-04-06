@@ -221,18 +221,13 @@ public class KpCompilerMojo extends AbstractMojo {
 		}
 		*/
 	        // Add kp file and resolved km files in the resulting jar
-			// tell maven to include generated META-INF
+			// tell maven to include generated resources
 			Resource resource = new Resource();
-	        resource.setDirectory(resourceOutputDirectory.getPath() + "/META-INF");
-	        resource.setTargetPath("META-INF");
-	        project.getResources().add(resource);
-	        resource = new Resource();
-	        resource.setDirectory(sourceOutputDirectory.getPath() + "/META-INF");
-	        resource.setTargetPath("META-INF");
+	        resource.setDirectory(targetDirectory.getPath() + "/resources");
+	        resource.setTargetPath(".");
 	        project.getResources().add(resource);
 	        
-	        // copy kp in the resources
-	        copyFile(kp, new File(resourceOutputDirectory, "/META-INF/kermeta"));
+	        
 	        
 	        
 	        
