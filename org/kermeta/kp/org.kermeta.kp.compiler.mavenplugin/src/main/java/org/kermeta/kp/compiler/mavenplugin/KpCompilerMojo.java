@@ -193,16 +193,23 @@ public class KpCompilerMojo extends AbstractMojo {
 	            Class<?> cls = kjcl.loadClass("org.kermeta.kp.compiler.commandline.KermetaCompilerCLI");
 	            this.getLog().debug("cls.getName() = " + cls.getName());
 	            
-	            Method meth = cls.getMethod("main", String[].class);
+	            Object compilerCLI = cls.newInstance();
+	            
+	            Method loadArgsMethod = cls.getMethod("loadArgs", String[].class);
 	            ArrayList<String> paramsArray = new ArrayList<String>();
 
 	            if(generateKmOnly) paramsArray.add("-generateKmOnly");
 	            paramsArray.add(kpFileURL);
 	            String[] params = {};
 	            params = paramsArray.toArray(params);
+	            loadArgsMethod.invoke(compilerCLI, (Object) params);
 	            
-	            meth.invoke(null, (Object) params); // static method doesn't have an instance
-
+	            Method runMethod = cls.getMethod("run");
+	            boolean hasFailed = (Boolean)  runMethod.invoke(compilerCLI);
+	            if(hasFailed){
+	            	throw new MojoFailureException((String) cls.getMethod("getErrorMessage").invoke(compilerCLI));
+	            }
+	            
 	            
 	        } catch (Exception e) {
 	            e.printStackTrace();

@@ -37,7 +37,7 @@ public class KermetaCompilerCLI {
 	private Boolean intermediateFilesRequired = false;
 	private Boolean generateKmOnly = false;
 
-	
+	private KermetaCompiler compiler;
 	
 
 
@@ -49,13 +49,20 @@ public class KermetaCompilerCLI {
 		
 		KermetaCompilerCLI cliProg = new KermetaCompilerCLI();
 		cliProg.loadArgs(args);
-		cliProg.run();
+		if (cliProg.run()){
+			System.out.println(cliProg.getErrorMessage());
+		}
+	}
+	
+	public String getErrorMessage(){
+		return compiler.errorMessage;
 	}
 		
-	private void run() throws IOException {
+	public boolean run() throws IOException {
 		KermetaCompiler compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
 		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"/scala/", outputFolder+"/classes/", outputFolder+"/genmode/", outputFolder+"/java/", outputFolder+"/emfclasses/", outputFolder+"/resources/");
-		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), generateKmOnly);
+		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), generateKmOnly);		
+		return compiler.hasFailed;
 	}
 
 	public KermetaCompilerCLI(){
@@ -75,7 +82,7 @@ public class KermetaCompilerCLI {
 	 * Exit after printing usage if anything is astray
 	 * @param args String[] args as featured in public static void main()
 	 */
-	private void loadArgs(String[] args){
+	public void loadArgs(String[] args){
 		CommandLineParser parser = new GnuParser();
 		try {
 			cmd = parser.parse(options, args);
