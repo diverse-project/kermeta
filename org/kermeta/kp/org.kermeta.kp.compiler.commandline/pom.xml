@@ -267,8 +267,8 @@
 			<version>${kermeta.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
-                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>maven-classpath-plugin</artifactId>
+                    <groupId>com.github.joel1di1</groupId>
                 </exclusion>
             </exclusions>
 		</dependency>
