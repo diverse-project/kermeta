@@ -5,6 +5,7 @@ using root_package
 using kermeta::standard
 using kermeta::io
 using org::kermeta::language
+using essentialocl
 /**
 * iteration on a collection similar to collect or select
 * TODO : what if there are more iterator ?
@@ -116,7 +117,7 @@ aspect class AssignExp {
 		
 			if left.isInstanceOf(essentialocl::PropertyCallExp)
 					.andThen{x|left.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} 
-					.orThen{x|left.isInstanceOf(essentialocl::VariableExp)
+					.orElse{x|left.isInstanceOf(essentialocl::VariableExp)
 						.andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} }
 				//left.isInstanceOf(essentialocl::VariableExp).andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} 
 				then
@@ -166,20 +167,20 @@ aspect class AssignExp {
 	end
 
 
-}
+}/*
 singleton AssignmentHelper {
 
-	operation generateAssignement( leftPart : OclExpression , valuePart : OclExpression , context : Qvt2KermetaContext ) : behavior::Assignment is do 
-		result := behavior::Assignment
+	operation generateAssignement( leftPart : OclExpression , valuePart : OclExpression , context : Qvt2KermetaContext ) : behavior::Expression is do 
+		
 		if leftPart.isInstanceOf(essentialocl::PropertyCallExp)
 				.andThen{x|leftPart.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} 
-				.orThen{x|leftPart.isInstanceOf(essentialocl::VariableExp)
+				.orElse{x|leftPart.isInstanceOf(essentialocl::VariableExp)
 					.andThen{x| leftPart.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} }
 			//left.isInstanceOf(essentialocl::VariableExp).andThen{x| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1} 
 			then
 			
 			var out : behavior::UnresolvedCall init behavior::UnresolvedCall.new
-			output:=out
+			result:=out
 			
 			leftPart.range2domain(context)
 			out.parameters.add(leftPart.output.asType(behavior::Expression))
@@ -187,8 +188,8 @@ singleton AssignmentHelper {
 			out.target:=behavior::UnresolvedCall.new.initialize("qvt::utils::CollectionExtension",false)
 			valuePart.range2domain(context)
 			
-			out.parameters.add(self.~value.one.output.asType(org::kermeta::language::behavior::Expression))
-			if ~valuePart.isMulti then
+			out.parameters.add(valuePart.output.asType(org::kermeta::language::behavior::Expression))
+			if valuePart.isMulti then
 				if isReset() then
 					out.name:="clearAndAddAll"
 				else
@@ -221,7 +222,7 @@ singleton AssignmentHelper {
 	end
 
 
-}
+}*/
 
 aspect class VariableInitExp {
 
