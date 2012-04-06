@@ -99,15 +99,26 @@
                         	org.kermeta.utils.aether.*
                         </Export-Package>                        
                         <Private-Package>
+                        		com.google.protobuf,                                
+                        	    org.sonatype.*,
+                                org.apache.maven.repository.*,
+                                org.apache.maven.model.*,
+                                org.apache.maven.http.*,
+                                org.apache.maven.artifact.*,
+                                com.ning.*,
+                                org.jboss.netty.*,
+                                org.codehaus.plexus.interpolation.*,
+                                org.codehaus.plexus.util.*,
+                                org.apache.maven.wagon.*
                         </Private-Package>
-                        <Import-Package>                        	
-                        	*
-                        </Import-Package>
-                        <!-- !org.kermeta.utils.aether.*,
+                        <Import-Package>
+                        	!org.kermeta.utils.aether.*,
                         	!com.*,
                         	!org.sonatype.*,
                         	!org.codehaus.plexus.*,
-                            !org.jboss.logging.*, -->
+                            !org.jboss.logging.*,
+                        	*
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
