@@ -30,7 +30,7 @@
 
 				<configuration>
 					<instructions>
-						<Embed-Dependency>*;scope=compile|runtime;inline=true</Embed-Dependency>
+						<Embed-Dependency>*;scope=compile|runtime;inline=**.km|**.class</Embed-Dependency>
 						<Embed-Transitive>true</Embed-Transitive>					
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Name>${project.name}</Bundle-Name>
@@ -39,6 +39,7 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Main-Class>org.kermeta.kp.compiler.commandline.KermetaCompilerCLI</Main-Class>
 						<Export-Package>
 							org.kermeta.kp.compiler.commandline.*
 						</Export-Package>
