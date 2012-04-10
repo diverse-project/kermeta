@@ -104,13 +104,11 @@
                             org.apache.maven.http.*,
                             org.apache.maven.artifact.*,
                             com.ning.*,
-                            org.jboss.netty.*,
                             org.codehaus.plexus.interpolation.*,
                             org.codehaus.plexus.util.*,
                             org.apache.maven.wagon.*
                         </Export-Package>                        
                         <Import-Package>
-                        	!org.jboss.*,
                         	!org.codehaus.*,
                         	!org.apache.commons.*,
                         	!javax.servlet.*,
