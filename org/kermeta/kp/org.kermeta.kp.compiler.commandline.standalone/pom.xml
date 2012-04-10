@@ -12,7 +12,7 @@
 	<artifactId>kp.compiler.commandline.standalone</artifactId>
 	<version>2.0.1-SNAPSHOT</version>
 	<name>kp.compiler.commandline :: CommandLine interface for Kermeta 2 bytecode</name>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.kermeta.language</groupId>
@@ -22,7 +22,7 @@
 
 	<build>
 		<plugins>			
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<version>2.3.5</version>
@@ -57,7 +57,58 @@
 					</instructions>
 				</configuration>
 			</plugin>
-			
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.1</version>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+						<Manifest-Version>1.0</Manifest-Version>
+						<Main-Class>org.kermeta.kp.compiler.commandline.KermetaCompilerCLI</Main-Class>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-shade-plugin</artifactId>
+		        <version>1.6</version>
+		        <executions>
+		          <execution>
+		            <phase>package</phase>
+		            <goals>
+		              <goal>shade</goal>
+		            </goals>
+		            <configuration>
+		            	<artifactSet>
+			                <excludes>
+			                  <exclude>org.kermeta.eclipse:org.eclipse.emf.common</exclude>
+			                  <exclude>org.kermeta.eclipse:org.eclipse.emf.ecore</exclude>
+			                  <exclude>org.kermeta.eclipse:org.eclipse.emf.ecore.xmi</exclude>
+			                </excludes>
+			            </artifactSet>
+			            <filters>
+			              <filter>
+			                <artifact>org.kermeta.emf:emf.lib</artifact>
+			                <excludes>
+			                  <exclude>org/eclipse/emf/ecore/EcoreFactory*</exclude>
+			                  <exclude>org/eclipse/emf/ecore/impl/EcorePackageImpl*</exclude>
+			                </excludes>
+			              </filter>
+			              <filter>
+			                <artifact>*:*</artifact>
+			                <excludes>
+			                  <exclude>META-INF/ECLIPSEF.SF</exclude>
+			                  <exclude>META-INF/ECLIPSEF.RSA</exclude>
+			                </excludes>
+			              </filter>
+			            </filters>
+		            </configuration>
+		          </execution>
+		        </executions>
+		    </plugin>
 			<!-- <plugin>
 				<groupId>com.pyx4me</groupId>
 				<artifactId>proguard-maven-plugin</artifactId>
@@ -159,7 +210,12 @@
 	</build>
 
 	<dependencies>
-		<!-- be careful to the order this has impacts on the classpath !!! -->
+		<!-- be careful to the order this has impacts on the classpath !!! -->		
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.kp</groupId>
 			<artifactId>kp.compiler.commandline</artifactId>

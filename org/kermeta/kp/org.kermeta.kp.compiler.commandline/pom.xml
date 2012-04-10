@@ -205,6 +205,12 @@
 
 	<dependencies>
 		<!-- be careful to the order this has impacts on the classpath !!! -->
+		
+		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib.patched</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.ecore2km</artifactId>

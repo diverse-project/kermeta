@@ -42,15 +42,19 @@ public class KermetaCompilerCLI {
 
 
 	/**
-	 * @param args
-	 * @throws IOException 
+	 * @param args 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args)  {
 		
 		KermetaCompilerCLI cliProg = new KermetaCompilerCLI();
 		cliProg.loadArgs(args);
-		if (cliProg.run()){
-			System.out.println(cliProg.getErrorMessage());
+		try {
+			if (cliProg.run()){
+				System.out.println(cliProg.getErrorMessage());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -60,7 +64,7 @@ public class KermetaCompilerCLI {
 		
 	public boolean run() throws IOException {
 		compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
-		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"/scala/", outputFolder+"/classes/", outputFolder+"/genmode/", outputFolder+"/java/", outputFolder+"/emfclasses/", outputFolder+"/resources/");
+		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"/scala/", outputFolder+"/classes/", outputFolder+"/genmodel/", outputFolder+"/java/", outputFolder+"/emfclasses/", outputFolder+"/resources/");
 		compiler.kp2bytecode(kpFile, new java.util.ArrayList<String>(), generateKmOnly);		
 		return compiler.hasFailed;
 	}
