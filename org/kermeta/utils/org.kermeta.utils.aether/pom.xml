@@ -20,49 +20,50 @@
 
     <dependencies>
     
-        <dependency>
+    
+<dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-api</artifactId>
-            <version>1.11</version>
+            <version>1.13</version>
         </dependency>
         <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-spi</artifactId>
-            <version>1.11</version>
+            <version>1.13</version>
         </dependency>
         <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-util</artifactId>
-            <version>1.11</version>
+            <version>1.13</version>
         </dependency>
         <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-impl</artifactId>
-            <version>1.11</version>
+            <version>1.13</version>
         </dependency>
         <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-connector-file</artifactId>
-            <version>1.11</version>
+            <version>1.13</version>
         </dependency>
+
+
         <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-connector-asynchttpclient</artifactId>
-            <version>1.11</version>
+            <version>1.13</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>netty</artifactId>
+                    <groupId>org.jboss.netty</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-aether-provider</artifactId>
             <version>3.0.3</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-component-annotations</artifactId>
-            <version>1.5.5</version>
-        </dependency>
-
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -96,29 +97,27 @@
                     <instructions>
                         <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>                        
                         <Export-Package>
-                        	org.kermeta.utils.aether.*
+                        	org.kermeta.utils.aether.*,
+                            org.sonatype.*,
+                            org.apache.maven.repository.*,
+                            org.apache.maven.model.*,
+                            org.apache.maven.http.*,
+                            org.apache.maven.artifact.*,
+                            com.ning.*,
+                            org.jboss.netty.*,
+                            org.codehaus.plexus.interpolation.*,
+                            org.codehaus.plexus.util.*,
+                            org.apache.maven.wagon.*
                         </Export-Package>                        
-                        <Private-Package>
-                        		com.google.protobuf,                                
-                        	    org.sonatype.*,
-                                org.apache.maven.repository.*,
-                                org.apache.maven.model.*,
-                                org.apache.maven.http.*,
-                                org.apache.maven.artifact.*,
-                                com.ning.*,
-                                org.jboss.netty.*,
-                                org.codehaus.plexus.interpolation.*,
-                                org.codehaus.plexus.util.*,
-                                org.apache.maven.wagon.*
-                        </Private-Package>
                         <Import-Package>
+                        	!org.jboss.*,
+                        	!org.codehaus.*,
+                        	!org.apache.commons.*,
+                        	!javax.servlet.*,
+                        	!com.google.protobuf.*,
                         	!org.kermeta.utils.aether.*,
-                        	!com.*,
-                        	!org.sonatype.*,
-                        	!org.codehaus.plexus.*,
-                            !org.jboss.logging.*,
-                        	*
-                        </Import-Package>
+                        	*;resolution:=optional
+                        </Import-Package>                        
                     </instructions>
                 </configuration>
             </plugin>

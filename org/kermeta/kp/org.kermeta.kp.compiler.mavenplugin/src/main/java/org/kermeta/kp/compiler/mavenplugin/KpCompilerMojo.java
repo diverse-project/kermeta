@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.URI;
 //import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 //import org.kermeta.kp.compiler.commandline.KermetaRunner;
 //import org.kermeta.kp.loader.kp.KpLoaderImpl;
+import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kevoree.kcl.KevoreeJarClassLoader;
@@ -158,8 +160,17 @@ public class KpCompilerMojo extends AbstractMojo {
 	        }
 	        
 	        
+	        AetherUtil aetherUtil = new AetherUtil();
+	        File compilerJarFile = aetherUtil.resolveMavenArtifact("org.kermeta.kp", 
+	        		"kp.compiler.commandline.standalone", 
+	        		project.getVersion(), 
+	        		"http://maven.inria.fr/artifactory/repo");
+	        
+	        
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();
-	        kjcl.add(this.getClass().getResourceAsStream("/kp.compiler.commandline.standalone.jar"));
+	        kjcl.getParentLoader().setEnabled(false); // disable parent loader
+	        //kjcl.add(this.getClass().getResourceAsStream("/kp.compiler.commandline.standalone.jar"));
+	        kjcl.add(compilerJarFile.getAbsolutePath());
 	        
 	        try {
 	        	
@@ -295,5 +306,6 @@ public class KpCompilerMojo extends AbstractMojo {
         in.close();
         out.close();
     }
+        
     
 }
