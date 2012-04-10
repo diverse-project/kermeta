@@ -156,7 +156,7 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
       }
 
       def transferProgressed(p1: TransferEvent) {
-        messagingSystem.debug("Transfert in progress for Artifact "+p1.getResource.getResourceName +"("+p1.getTransferredBytes()+"/"+p1.getDataLength()+")", msgGroup)
+        messagingSystem.debug("Transfert in progress for Artifact "+p1.getResource.getResourceName +"("+p1.getTransferredBytes()+"/"+p1.getResource().getContentLength()+")", msgGroup)
       }
 
       def transferCorrupted(p1: TransferEvent) {
