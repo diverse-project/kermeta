@@ -5,28 +5,27 @@
     <groupId>org.kermeta.language</groupId>
     <artifactId>language.compiler.mavenplugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.4.3-SNAPSHOT</version>
-    <name>K2 :: Compiler :: MavenPlugin</name>
+    <version>1.4.4-SNAPSHOT</version>
+    <name>K1 :: Compiler :: MavenPlugin</name>
 
 
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>2.2.1</version>
+            <version>3.0.3</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
-            <artifactId>maven-project</artifactId>
-            <version>2.2.1</version>
-            <type>jar</type>
+            <artifactId>maven-core</artifactId>
+            <version>3.0.3</version>
         </dependency>
         
         <dependency>
             <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.compilo.scala</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
+            <version>1.4.4-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
