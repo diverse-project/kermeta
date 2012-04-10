@@ -159,12 +159,15 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	classPathList.addAll(mavenClassPathList.subList(1, mavenClassPathList.size()));
 	        }
 	        
+	        List<String> repositoryList = new ArrayList<String>();
+	        repositoryList.add("http://maven.inria.fr/artifactory/public-release");
+	        repositoryList.add("http://maven.inria.fr/artifactory/public-snapshot");
 	        
 	        AetherUtil aetherUtil = new AetherUtil();
-	        File compilerJarFile = aetherUtil.resolveMavenArtifact("org.kermeta.kp", 
+	        File compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
 	        		"kp.compiler.commandline.standalone", 
 	        		project.getVersion(), 
-	        		"http://maven.inria.fr/artifactory/repo");
+	        		repositoryList);
 	        
 	        
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();
