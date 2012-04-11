@@ -6,6 +6,7 @@
  *            dvojtise
  */
 
+using kermeta::standard
 
 package test {
 	class Main
