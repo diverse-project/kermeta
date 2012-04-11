@@ -39,7 +39,7 @@ aspect class CallOperation
 		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
 			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
 			
-			stdio.writeln(" classTypeDef : " + classTypeDef.toString)
+			//stdio.writeln(" classTypeDef : " + classTypeDef.toString)
 			if (self.staticOperation.owningClass.equals(classTypeDef))
 			then
 				if (self.target.isInstanceOf(CallTypeLiteral))
