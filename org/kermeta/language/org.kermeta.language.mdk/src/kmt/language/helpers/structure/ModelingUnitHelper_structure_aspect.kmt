@@ -27,34 +27,30 @@ aspect class ModelingUnit {
 			result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
 		else
 			var set_qname : Sequence<String> init qname.split("::")
+			if set_qname.size()==0 then
+				set_qname.add(qname)
+			end
 			
-			//MODELTYPE MODIFICATION			
-			if set_qname.size()==1 then
-				// search this qname in self.onwedTypeDefinition 
-				result := self.ownedTypeDefinition.detect{c|c.name == set_qname.at(0)}
-			else
-				//If set_qname only contains two identifiers, the TypeDefinition may be referenced by a ModelType contained by this mu
-				if set_qname.size()==2 then
-					var mtContainer : ModelType init self.ownedTypeDefinition.detect{td|
-						td.name == set_qname.at(0) and td.isInstanceOf(ModelType)
-					}.asType(ModelType)
-					result := mtContainer.typeDefinitions.detect{td|td.name == set_qname.at(1)}
-				end
-				//Otherwise search in the packages
-				if result.isVoid() then
-					var pack : Package init self.packages.detect{p|p.name == set_qname.at(0)}
-					if not pack.isVoid then
-						var nextQName : Sequence<String> init set_qname
-						nextQName.removeAt(0)
-						result := pack.getTypeDefinitionByRelativeSetQName(nextQName)
-					end
-				end
-				/*from var i : Integer init 1
+			var pack : TypeDefinitionContainer init self.packages.detect{ p |
+				p.name == set_qname.at(0)
+			}
+			if not pack.isVoid then
+				from var i : Integer init 1
 				until i>=(set_qname.size()-1) or pack.isVoid
 				loop
-					pack := pack.nestedPackage.detect{ p |
-						p.name == set_qname.at(i)
+					var oldpack : TypeDefinitionContainer init pack
+					if pack.isInstanceOf(Package) then
+						pack := pack.asType(Package).nestedPackage.detect{ p |
+							p.name == set_qname.at(i)
+						}
+					else
+						pack:=void
+					end
+					if pack.isVoid then
+						pack:= oldpack.ownedTypeDefinition.select{x|x.isInstanceOf(ModelType)}.collect{x|x.asType(ModelType)}.detect{ p |
+							p.name == set_qname.at(0)
 					}
+					end
 					i := i + 1
 				end
 				if pack.isVoid then
@@ -64,7 +60,10 @@ aspect class ModelingUnit {
 					result := pack.ownedTypeDefinition.detect{ c |
 						c.name == set_qname.at(set_qname.size()-1)
 					}
-				end*/
+				end
+			else			
+				// search this qname in self.onwedTypeDefinition 
+				result := self.ownedTypeDefinition.detect{ c | c.name == set_qname.at(0)}
 			end
 		end
 		
