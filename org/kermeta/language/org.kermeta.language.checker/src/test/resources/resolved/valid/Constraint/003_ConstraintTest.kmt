@@ -6,18 +6,20 @@
  *            dvojtise
  */
 
+using kermeta::standard
 
 package test {
 	class Main
 	{
 		
-		operation main() : Void 
+		operation main() : String 
 		post testPostcond is do
-			result:=false
+			result!=""
 		end
 		
 		is do 
 			//StdIO.writeln("Hello world")
+			result := "hello"
 		end
 		
 		
