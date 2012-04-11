@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.alfDsl.util;uses:="org.eclipse.emf.ecore,o
+ rg.kermeta.alfDsl,org.eclipse.emf.common.notify,org.eclipse.emf.commo
+ n.notify.impl,org.eclipse.emf.common.util",org.kermeta.alfDsl;uses:="
+ org.eclipse.emf.ecore,org.eclipse.emf.common.util,org.kermeta.alfDsl.
+ impl",org.kermeta.alfDsl.impl;uses:="org.eclipse.emf.ecore,org.kermet
+ a.alfDsl,org.eclipse.emf.common.notify,org.eclipse.emf.ecore.impl,org
+ .eclipse.emf.ecore.util,org.eclipse.emf.common.util,org.eclipse.emf.e
+ core.plugin,org.eclipse.emf.ecore.resource"
+Private-Package: alfDsl.util,model,alfDsl,.,alfDsl.impl
+Bundle-ClassPath: .
+Built-By: suresh
+Tool: Bnd-0.0.311
+Bundle-Name: alf.model :: ALF MODEL
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.7.0
+Bundle-Version: 2.0.1.SNAPSHOT
+Bnd-LastModified: 1334157669107
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
+ otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
+ pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
+ .resource,org.eclipse.emf.ecore.util
+Bundle-SymbolicName: org.kermeta.alf.model;singleton:=true
+
