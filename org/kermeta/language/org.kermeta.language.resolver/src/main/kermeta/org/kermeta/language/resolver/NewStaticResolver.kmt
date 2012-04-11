@@ -30,6 +30,13 @@ class FullStaticResolver
 {
 	attribute ctxt : LanguageVisitorContext
 
+	/* *
+		this is the operation you will want to launch if you want to launch the 
+		resolver with the interpreter of kermeta V1
+		to do so you just have to put a unresolved but merged km file named beforeResolving.km
+		in the folder "src/interperterTests"
+		After launching you will see the results in the folder "results" (how surprising)
+	*/
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/interpreterTests/"
@@ -70,15 +77,22 @@ class FullStaticResolver
        	end
 	end
 	
+	/* * 
+		obtain the list of errors from the context
+	*/
 	operation getErrors() : Sequence<ResolverException> is do
 		result := ctxt.errors
 	end
 
-
+	/* * 
+		launch the entire resolving process
+	*/
 	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		result := doStaticSetting(doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit))))
 	end
-
+	/* * 
+		launch only the unresolved types resolution after this step all unresolved types should be resolved 
+	*/
 	operation doTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		//init of context
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedModelingUnit)
@@ -87,6 +101,11 @@ class FullStaticResolver
 		result:=unresolvedModelingUnit
 	end
 	
+	
+	/* *
+		pass to launch only when there are no more unresolved types
+		merge the operations and properties that have the same signature (not possible if some types are unresolved)
+	*/
 	operation doTypeAwareMerging(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		var mergeCtxt : TypeAwareMergerContext init TypeAwareMergerContext.new
 		mergeCtxt.errors:=ctxt.errors
@@ -95,12 +114,25 @@ class FullStaticResolver
 	
 	end
 	
+	/* *
+		resolve the remaining of the unresolved parts of the structure 
+		i.e. : unresolved properties and unresolved operations
+		not possible until unresolved types are resolved 
+		(to resolve the super operation of from you have to resolve the super type where to find it first
+		to resolve an opposite, you have to resolve the type of the property first)
+		not possible until there is one unique definition for each operation and property (i.e. not possible before type aware merging) 
+		
+	*/
 	operation doStructureResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		//init of context
 		unresolvedModelingUnit.resolveStructure(ctxt)
 		result:=unresolvedModelingUnit
 	end
 
+
+	/* *
+	*	chain all the resolving passes for the structural part of the program
+	*/
 	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
        	/*var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
@@ -118,6 +150,9 @@ class FullStaticResolver
        	result := unresolvedModelingUnit
 	end
 	
+	/* *
+		resolve all the behavioral part and add static types
+	*/
 	operation doStaticSetting(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do      	
 		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
@@ -131,6 +166,9 @@ class FullStaticResolver
        	result := unresolvedModelingUnit
 	end
 	
+	/* * 
+		check if an unresolved element remains in the model
+	*/
 	operation checkUnresolved(aKermetaModelElement : org::kermeta::language::structure::KermetaModelElement) : Void is do
 		aKermetaModelElement.eachOwnedElement{p |
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedType) then

@@ -9,24 +9,13 @@ require "resolveStructureOperation.kmt"
 require "resolveStructureProperty.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
-
-aspect class ModelingUnit inherits TypeDefinitionContainer, KermetaModelElement {
-	/* *
-	*	The Structure resolving is done in 2 passes : first pass set all types	
-	*	and second pass set unresolved operations and unresolved properties
-	*	To resolve a superOperation, it is required that the whole inheritance hierarchy
-	*	is resolved
+/* *
+	*	The Structure resolving is done in 2 passes : 
+	*   -first pass set all types (resolveStructureInheritance)	
+	*	- second pass set unresolved operations and unresolved properties (resolveStructure)
+	*	The two passes cannot be chained because the type aware merger has to pass between them 
 	*/
-	/*operation resolveWholeStructure(context : LanguageVisitorContext) is do
-		
-		
-		self.resolveStructureInheritance(context)
-		self.resolveStructure(context)
-		
-	end*/
-	
 
-}
 
 aspect class KermetaModelElement{
 
