@@ -68,9 +68,14 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation{
 		super(context)
 		context.currentOperation:=void
 	end
+	
+	/**
+	* resolveStructure will only resolve the unresolvedOperation of an operation, so we should stop the visit here
+	*/
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentOperation:=self
-		super(context)
+		//super(context)
+		self.resolveStructureOperation(context)
 		context.currentOperation:=void
 	end
 }

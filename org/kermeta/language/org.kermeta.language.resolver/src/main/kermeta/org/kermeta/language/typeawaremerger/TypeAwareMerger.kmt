@@ -10,7 +10,10 @@ using kermeta::standard
 using org::kermeta::language::resolver
 using kermeta::utils
 
-
+/* *
+ 	The type aware merge will finish the process of merging after every unresolved type is resolved
+ 	It needs to merge operations, properties, and remove inheritance doublons
+*/
 
 aspect class KermetaModelElement{
 
@@ -226,7 +229,7 @@ aspect class Operation {
 	
 	two operations are mergeable if  : 
 	
-	-at least one of the body is void
+	- at least one of the body is void
 	- is abstract is equal
 	- all the MultiplicityElement attributes are equal (isOrdered, isUnique, lower, upper)
 	- name is equal

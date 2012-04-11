@@ -1,0 +1,18 @@
+package org::kermeta::language::structure;
+require kermeta
+require "structureResolver.kmt"
+aspect class PrimitiveType {
+
+reference referredType : Type 
+
+/**
+*	create in referredType the actual type referred by a primitive type without any primitive type in it
+*	this operation has to be aware that a cycle may exists between primitive types and should deal with it
+*/
+operation resolveReferredType () is do 
+
+
+
+end
+ 
+}
