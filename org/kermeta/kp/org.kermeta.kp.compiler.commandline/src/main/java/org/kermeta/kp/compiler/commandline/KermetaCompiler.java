@@ -395,6 +395,20 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
+			
+	
+			// save resolvedUnit to the META-INF/kermeta/merged.km
+			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
+			if (!mergedFile.getParentFile().exists()) {
+				mergedFile.getParentFile().mkdirs();
+			}
+			FileWriter writer = new FileWriter(mergedFile);
+	
+			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
+			writer.close();
+			
+			
 			// Check resolvedUnit for scope RESOLVED
 			if (checkingEnabled) {
 
@@ -412,17 +426,7 @@ public class KermetaCompiler {
 					}
 				}
 			}
-	
-			// save resolvedUnit to the META-INF/kermeta/merged.km
-			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
-			if (!mergedFile.getParentFile().exists()) {
-				mergedFile.getParentFile().mkdirs();
-			}
-			FileWriter writer = new FileWriter(mergedFile);
-	
-			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
-			writer.close();
+			
 			
 
 			// workaround cache problem in compiler
