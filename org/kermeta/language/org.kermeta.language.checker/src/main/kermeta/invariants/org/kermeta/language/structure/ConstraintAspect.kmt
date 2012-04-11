@@ -32,13 +32,17 @@ aspect class Constraint
 		true
 	end
 	
-	/**
+	/*
 	 * No CallResult allowed there
-	 */
+	 *
+	 
+	// No need for this invariant, the resolver will raise an error instead 
+
 	@Scope "RESOLVED"
 	inv no_call_result is do
 		//stdio.writeln("Evaluating no_call_result on invariant " + self.name)
 		not(self.body.searchCallResult)
 		//true
 	end
+	*/
 }
