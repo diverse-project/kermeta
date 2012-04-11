@@ -91,7 +91,9 @@ public class KmResolverOperations {
     	for (Object o : resolver.getErrors()) {
     		if (o instanceof ResolverException) {
     			ResolverException theError = (ResolverException) o;
-    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by "+theError.getObjectCause(), null,  null) ;
+    			ModelReference mref = null;
+    			if(theError.getObjectCause() != null && theError.getObjectCause() instanceof EObject) mref = new ModelReference((EObject)theError.getObjectCause());
+    			ResultProblemMessage pm = new ResultProblemMessage(Severity.ERROR,theError.message()+"\nCaused by "+theError.getObjectCause(), null,  mref) ;
     			result.getProblems().add(pm);
     		}
     	}
