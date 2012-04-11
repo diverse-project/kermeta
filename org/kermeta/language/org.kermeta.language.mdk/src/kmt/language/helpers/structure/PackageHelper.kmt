@@ -9,6 +9,7 @@ package org::kermeta::language::structure;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetTypeDefinitionByRelativeSetQName_TypeDefinitionContainer_Aspect.kmt"
 
 using kermeta::standard
 
@@ -55,38 +56,6 @@ aspect class Package {
 		end*/
 		var set_qname : Sequence<String> init qname.split("::")
 		result := getTypeDefinitionByRelativeSetQName(set_qname)
-	end
-
-	operation getTypeDefinitionByRelativeSetQName(set_qname : Sequence<String>) : TypeDefinition is do
-		var foundTypeDef : TypeDefinition
-		var mtContainer : ModelType
-		var nextPackage : Package
-		//If set_qname only contains one identifier, the TypeDefinition must be in this package
-		if set_qname.size()==1 then
-			foundTypeDef := self.ownedTypeDefinition.detect{td|
-				td.name == set_qname.at(0)
-			}
-		else
-			//If set_qname only contains two identifiers, the TypeDefinition may be referenced by a ModelType contained by this package
-			if set_qname.size() == 2 then
-				mtContainer := self.ownedTypeDefinition.detect{td|
-					td.name == set_qname.at(0) and td.isInstanceOf(ModelType)
-				}.asType(ModelType)
-				foundTypeDef := mtContainer.typeDefinitions.detect{td|
-					td.name == set_qname.at(1)
-				}
-			end
-			//Otherwise, the TypeDefinition is contained by a nested package
-			if foundTypeDef.isVoid() then
-				nextPackage := self.nestedPackage.detect{p|p.name == set_qname.at(0)}
-				if (not nextPackage.isVoid()) then
-					var nextQName : Sequence<String> init set_qname
-					nextQName.removeAt(0)
-					foundTypeDef := nextPackage.getTypeDefinitionByRelativeSetQName(nextQName)
-				end
-			end
-		end
-		result := foundTypeDef
 	end
 }
 }

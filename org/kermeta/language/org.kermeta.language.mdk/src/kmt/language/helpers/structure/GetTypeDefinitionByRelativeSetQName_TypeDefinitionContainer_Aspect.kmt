@@ -1,0 +1,43 @@
+/* $Id:$ 
+ * Creation : April 11, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class TypeDefinitionContainer
+{
+	operation getTypeDefinitionByRelativeSetQName(set_qname : Sequence<String>) : TypeDefinition is do
+		var foundTypeDef : TypeDefinition
+		var container : TypeDefinitionContainer
+		//If set_qname only contains one identifier, the TypeDefinition must be in this container
+		if set_qname.size()==1 then
+			foundTypeDef := self.ownedTypeDefinition.detect{td|
+				td.name == set_qname.at(0)
+			}
+		//Else the TypeDefinition may be referenced by a ModelType contained by this package, or by a nested package
+		else
+			container := self.ownedTypeDefinition.detect{td|
+				td.name == set_qname.at(0) and td.isInstanceOf(ModelType)
+			}.asType(ModelType)
+			//TODO: Model types will contain packages in the future, we should then remove the isInstanceOf test
+			if (container.isVoid() and self.isInstanceOf(Package)) then
+				container := self.asType(Package).nestedPackage.detect{p|p.name == set_qname.at(0)}
+			end
+			if (not container.isVoid()) then
+				var nextQName : Sequence<String> init set_qname
+				nextQName.removeAt(0)
+				foundTypeDef := container.getTypeDefinitionByRelativeSetQName(nextQName)
+			end
+		end
+		result := foundTypeDef
+	end
+}
