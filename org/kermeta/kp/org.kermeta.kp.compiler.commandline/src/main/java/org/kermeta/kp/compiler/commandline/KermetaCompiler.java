@@ -343,7 +343,7 @@ public class KermetaCompiler {
 	
 			// Did errors occur during the merge ?
 			if (mergedUnit.getProblems().size() > 0) {
-				errorHandlingHelper.processErrors(mergedUnit);
+				errorHandlingHelper.processErrors(mergedUnit, FileHelpers.StringToURL(kpFileURL));
 				if (stopOnError) {
 					logger.logProblem(MessagingSystem.Kind.UserERROR, "Unable to merge the files. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 					this.errorMessage = "Unable to merge the files. Compilation not complete for this project.";
@@ -376,7 +376,7 @@ public class KermetaCompiler {
 			kermeta.standard.JavaConversions.cleanCache();
 			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
-			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/);
+			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, kpFileURL);
 	
 			if (resolvedUnit == null) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -844,7 +844,7 @@ public class KermetaCompiler {
 		return mergedMU;
 	}
 
-	public ModelingUnit resolveModelingUnit(ModelingUnit mu) throws IOException {
+	public ModelingUnit resolveModelingUnit(ModelingUnit mu, String kpFileURL) throws IOException {
 		KmResolver theResolver;
 
 		if (runInEclipse) {
@@ -860,7 +860,7 @@ public class KermetaCompiler {
 
 		// Did errors occur during the resolving ?
 		if (resolvedMU.getProblems().size() > 0) {
-			errorHandlingHelper.processErrors(resolvedMU);
+			errorHandlingHelper.processErrors(resolvedMU, FileHelpers.StringToURL(kpFileURL));
 			if (stopOnError) {
 				logger.error("Errors have occured during resolving, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 				this.hasFailed = true; // message for the caller of the compiler
@@ -879,7 +879,7 @@ public class KermetaCompiler {
 
 			// Did errors occur during the resolving ?
 			if (staticsettedMU.getProblems().size() > 0) {
-				errorHandlingHelper.processErrors(staticsettedMU);
+				errorHandlingHelper.processErrors(staticsettedMU, FileHelpers.StringToURL(kpFileURL));
 				if (stopOnError) {
 					logger.error("Errors have occured during static setting, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 					this.hasFailed = true; // message for the caller of the compiler
@@ -1018,45 +1018,6 @@ public class KermetaCompiler {
 			this.hasFailed = true; // message for the caller of the compiler
 			this.errorMessage = "Internal error in the checker; " +e.getMessage();
 		}
-
-		/*
-		 * //Display check results
-		 * logger.log(MessagingSystem.Kind.UserINFO,"There are " +
-		 * diags.getDiagnostics().size() + " failed constraints",
-		 * LOG_MESSAGE_GROUP);
-		 * 
-		 * for (ConstraintDiagnostic diag : diags.getDiagnostics()) {
-		 * 
-		 * String message = ""; Constraint failedConstraint =
-		 * diag.getFailedConstraint(); if ( failedConstraint instanceof
-		 * InvariantProxy ) { message = message + "Invariant " +
-		 * ((InvariantProxy)failedConstraint).getInvariantName() + " on object "
-		 * +
-		 * ((ModelReference)diag.getAppliesTo()).getReferencedObject().toString
-		 * (); } //String message = diag.getFailedConstraint().; if
-		 * (diag.isIsWarning()) { logger.log(MessagingSystem.Kind.UserWARNING,
-		 * message, LOG_MESSAGE_GROUP); } else {
-		 * logger.log(MessagingSystem.Kind.UserERROR, message,
-		 * LOG_MESSAGE_GROUP); }
-		 * 
-		 * 
-		 * // retrieve the referenced EObject tag sourceLocation EObject
-		 * myObject =
-		 * ((ModelReference)diag.getAppliesTo()).getReferencedObject();
-		 * KermetaModelElement kme = (KermetaModelElement) myObject;
-		 * 
-		 * // Check if there is a sourceLocation tag for (Tag t :
-		 * kme.getKOwnedTags() ) {
-		 * 
-		 * //logger.log(MessagingSystem.Kind.UserINFO, "Tag : " + t.getName(),
-		 * ""); if (t.getName().equals("source.location")) {
-		 * //logger.log(MessagingSystem.Kind.UserINFO, "   -> value :(" +
-		 * t.getValue() +")   ", ""); createTextReference(t); } }
-		 * 
-		 * 
-		 * 
-		 * }
-		 */
 
 		return diags;
 	}

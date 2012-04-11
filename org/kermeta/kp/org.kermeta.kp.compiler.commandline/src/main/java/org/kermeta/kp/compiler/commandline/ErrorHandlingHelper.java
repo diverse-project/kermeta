@@ -43,7 +43,7 @@ public class ErrorHandlingHelper {
 	}
 
 	
-	protected void processErrors(ErrorProneResult<ModelingUnit> eprMu) {
+	protected void processErrors(ErrorProneResult<ModelingUnit> eprMu, URL kpFile) {
 		// TODO Retrieve faulty objects text reference and logProblem
 
 		ArrayList<Future<Boolean>> logProblemFutures = new ArrayList<Future<Boolean>>();
@@ -53,9 +53,10 @@ public class ErrorHandlingHelper {
 
 			// retrieve faulty object
 			// KermetaModelElement kme = (Kermeprob.getCauseObject();
-			if (prob.getCauseObject() != null) {
-				logger.log(Kind.DevDEBUG ,"faultyObject is : " + prob.getCauseObject().toString(),logMessageGroup);
+			logger.log(Kind.DevDEBUG ,"faultyObject is : " + prob.getCauseObject(),logMessageGroup);
 
+			if (prob.getCauseObject() != null) {
+				
 				org.kermeta.utils.systemservices.api.reference.ModelReference mref = (org.kermeta.utils.systemservices.api.reference.ModelReference) prob.getCauseObject();
 
 				if (mref.getModelRef() != null) {
@@ -68,41 +69,7 @@ public class ErrorHandlingHelper {
 						logger.log(Kind.DevDEBUG ,"The error involves " + kme.toString(), logMessageGroup);
 						//System.err.println("The error involves " + kme.toString());
 	
-						// Check if there is a sourceLocation tag
-						Boolean tagFound = false;
-	
-						for (Tag t : kme.getKOwnedTags()) {
-	
-							logger.log(Kind.DevDEBUG ,"Tag found. Name : " + t.getName() + ", value : (" + t.getValue() + ")", logMessageGroup);
-	
-							// logger.log(MessagingSystem.Kind.UserINFO, "Tag : " +
-							// t.getName(), "");
-							if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
-								tagFound = true;
-								// logger.log(MessagingSystem.Kind.UserINFO,
-								// "   -> value :(" + t.getValue() +")   ", "");
-								TextReference ref = createTextReference(t);
-	
-								if (ref != null) {
-									logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, prob.getMessage(), logMessageGroup, ref)));
-								}
-							}
-						}
-						if (!tagFound) {
-							// Try to retrieve the model element's container
-							Tag t = searchForNearestTaggedContainingKME(kme);
-	
-							if (t == null) {
-								logger.log(MessagingSystem.Kind.DevWARNING,"Impossible to retrieve a container with text traceability", logMessageGroup);
-							} else {
-								TextReference ref = createTextReference(t);
-								if (ref != null) {
-									logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, prob.getMessage(), logMessageGroup, ref)));
-								}
-	
-							}
-	
-						}
+						markProblemForElement(kme, prob.getMessage(), false,  kpFile, logProblemFutures);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -160,59 +127,7 @@ public class ErrorHandlingHelper {
 			String errorMsg = "Kermeta invariant " + proxy.getInvariantName() + " failed : ";
 			errorMsg += StringHelper.trimDocumentation(proxy.getMessage());
 
-			// Check if there is a sourceLocation tag
-			Boolean tagFound = false;
-
-			for (Tag t : kme.getKOwnedTags()) {
-
-				// System.err.println("Tag found. Name : " + t.getName() +
-				// ", value : (" + t.getValue() + ")");
-
-				logger.log(MessagingSystem.Kind.DevDEBUG, "Tag : " + t.getName(), logMessageGroup);
-				if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
-					tagFound = true;
-					logger.log(MessagingSystem.Kind.DevDEBUG, "   -> value :(" + t.getValue() + ")   ", logMessageGroup);
-					TextReference ref = createTextReference(t);
-					if (ref != null) {
-						if (diag.isIsWarning()) {
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, logMessageGroup, ref)));
-						} else {
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, logMessageGroup, ref)));
-						}
-					}
-				}
-			}
-
-			if (!tagFound) {
-				// Try to retrieve the model element's container
-				Tag t = searchForNearestTaggedContainingKME(kme);
-
-				if (t == null) {
-					logger.log(MessagingSystem.Kind.DevERROR, "Impossible to retrieve a container with text traceability", logMessageGroup);
-					// In this case, place the error on the kp file
-					FileReference ref = new FileReference(kpFile);
-					if (diag.isIsWarning()) {
-						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, logMessageGroup, ref)));
-						//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
-					} else {
-						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, logMessageGroup, ref)));
-					}
-					
-				} else {
-					TextReference ref = createTextReference(t);
-					if (ref != null) {
-						if (diag.isIsWarning()) {
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, logMessageGroup, ref)));
-							//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
-						} else {
-							//logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
-							logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, logMessageGroup, ref)));
-						}
-					}
-
-				}
-
-			}
+			markProblemForElement(kme, errorMsg, diag.isIsWarning(),  kpFile, logProblemFutures);
 
 		}
 		// wait for all markers to be placed by eclipse // maybe we don't care until the end of the compilation ? (except for intermangling messages ?)
@@ -228,6 +143,65 @@ public class ErrorHandlingHelper {
 		logger.doneProgress(mainProgressGroup+".processCheckingDiagnostics", "Transformed "+nbDiagnostics+" diagnostic into markers", logMessageGroup);
 	}
 
+	protected void markProblemForElement( KermetaModelElement kme, 
+								String errorMsg,
+								boolean isWarning, 
+								URL kpFile, 
+								ArrayList<Future<Boolean>> logProblemFutures){
+		// Check if there is a sourceLocation tag
+		Boolean tagFound = false;
+
+		for (Tag t : kme.getKOwnedTags()) {
+
+			// System.err.println("Tag found. Name : " + t.getName() +
+			// ", value : (" + t.getValue() + ")");
+
+			logger.log(MessagingSystem.Kind.DevDEBUG, "Tag : " + t.getName(), logMessageGroup);
+			if (t.getName().equals(TRACEABILITY_TEXT_REFERENCE)) {
+				tagFound = true;
+				logger.log(MessagingSystem.Kind.DevDEBUG, "   -> value :(" + t.getValue() + ")   ", logMessageGroup);
+				TextReference ref = createTextReference(t);
+				if (ref != null) {
+					if (isWarning) {
+						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, logMessageGroup, ref)));
+					} else {
+						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, logMessageGroup, ref)));
+					}
+				}
+			}
+		}
+
+		if (!tagFound) {
+			// Try to retrieve the model element's container
+			Tag t = searchForNearestTaggedContainingKME(kme);
+
+			if (t == null) {
+				logger.log(MessagingSystem.Kind.DevERROR, "Impossible to retrieve a container with text traceability", logMessageGroup);
+				// In this case, place the error on the kp file
+				FileReference ref = new FileReference(kpFile);
+				if (isWarning) {
+					logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, logMessageGroup, ref)));
+					//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+				} else {
+					logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, logMessageGroup, ref)));
+				}
+				
+			} else {
+				TextReference ref = createTextReference(t);
+				if (ref != null) {
+					if (isWarning) {
+						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserWARNING, errorMsg, logMessageGroup, ref)));
+						//logger.logProblem(MessagingSystem.Kind.UserWARNING, errorMsg, LOG_MESSAGE_GROUP, ref);
+					} else {
+						//logger.logProblem(MessagingSystem.Kind.UserERROR, errorMsg, LOG_MESSAGE_GROUP, ref);
+						logProblemFutures.add(threadExector.submit(new CallableLogProblem(logger, MessagingSystem.Kind.UserERROR, errorMsg, logMessageGroup, ref)));
+					}
+				}
+
+			}
+
+		}
+	}
 	
 	protected Tag searchForNearestTaggedContainingKME(KermetaModelElement kme) {
 
