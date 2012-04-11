@@ -395,20 +395,6 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
-			
-	
-			// save resolvedUnit to the META-INF/kermeta/merged.km
-			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
-			if (!mergedFile.getParentFile().exists()) {
-				mergedFile.getParentFile().mkdirs();
-			}
-			FileWriter writer = new FileWriter(mergedFile);
-	
-			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
-			writer.close();
-			
-			
 			// Check resolvedUnit for scope RESOLVED
 			if (checkingEnabled) {
 
@@ -426,6 +412,20 @@ public class KermetaCompiler {
 					}
 				}
 			}
+	
+			// save resolvedUnit to the META-INF/kermeta/merged.km
+			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
+			if (!mergedFile.getParentFile().exists()) {
+				mergedFile.getParentFile().mkdirs();
+			}
+			FileWriter writer = new FileWriter(mergedFile);
+	
+			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
+			writer.close();
+			
+			
+			
 			
 			
 
@@ -865,6 +865,8 @@ public class KermetaCompiler {
 				logger.error("Errors have occured during resolving, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 				this.hasFailed = true; // message for the caller of the compiler
 				this.errorMessage = "Errors have occured during resolving";
+				if(saveIntermediateFiles)
+					new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km", logger).convert(resolvedMU.getResult());
 				return null;
 			}
 		}
@@ -882,6 +884,9 @@ public class KermetaCompiler {
 					logger.error("Errors have occured during static setting, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 					this.hasFailed = true; // message for the caller of the compiler
 					this.errorMessage = "Errors have occured during static setting";
+					if(saveIntermediateFiles)
+						new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforebeforeCheckingforScopeRESOLVED.km", logger).convert(staticsettedMU.getResult());
+					
 					return null;
 				}
 			}
