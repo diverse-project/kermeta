@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : July 27, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using gna
+package test{
+    enum xxx{
+    a;
+    b;
+    c;
+    }
+
+	enum yyy{
+		a;
+		b;
+		c;
+	}
+
+    class MainClass
+    {
+        operation mainOperation() : Void is do
+
+
+            var y : xxx init xxx.a
+
+        end
+    }
+}
