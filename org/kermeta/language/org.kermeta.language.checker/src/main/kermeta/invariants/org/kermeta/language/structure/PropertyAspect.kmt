@@ -19,19 +19,29 @@ aspect class Property {
 	/* SOME OTHER CONSTRAINTS IN PropertyChecker.java from fr.irisa.triskell.kermeta.io */
 
 	/**
-	 * derived properties can't have opposites
+	 * The derived property's opposite must be derived
 	 */
 	@Scope "RESOLVED"
-	inv no_opposite_for_derived_properties is do
-		//It seems that the parser does not allow the opposite for
-		//a derived property (error message is "`setter' expected but # found")
-		//This invariant is therefore pretty useless... 
+	inv derived_property_opposite_must_be_derived is do
+		
 		if (self.isDerived)
 		then
-			self.opposite.isVoid
+			if (self.opposite.isVoid)
+			then
+				true
+			else
+				if (self.opposite.isInstanceOf(Property))
+				then
+					self.opposite.asType(Property).isDerived
+				else
+					// Error raised elsewhere for UnresolvedProperty
+					true				
+				end
+			end
 		else
 			true
-		end
+		end	
+	
 	end
 
 	/**
@@ -43,7 +53,6 @@ aspect class Property {
 		then
 			if (self.opposite.isVoid())
 			then
-				// An error will be raised by another invariant
 				true
 			else
 				if (self.opposite.isInstanceOf(Property))
