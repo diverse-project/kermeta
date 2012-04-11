@@ -327,15 +327,23 @@ public class KermetaCompiler {
 				return null;
 			}
 			
+			
 			flushProblems(kpSources);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
 			
 			List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
 	
 			if (modelingUnits.size() == 0) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Kermeta project invalid. There is no modeling unit to compile.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				this.errorMessage = "Kermeta project invalid.  There is no modeling unit to compile.";
+				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				logger.error(this.errorMessage, LOG_MESSAGE_GROUP);
 				this.hasFailed = true;
+				return null;
+			}
+			if(stopOnError && this.hasFailed){
+				this.errorMessage = "Not able to load all expected sources or dependencies. " +this.errorMessage;
+				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 				return null;
 			}
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
@@ -345,8 +353,9 @@ public class KermetaCompiler {
 			if (mergedUnit.getProblems().size() > 0) {
 				errorHandlingHelper.processErrors(mergedUnit, FileHelpers.StringToURL(kpFileURL));
 				if (stopOnError) {
-					logger.logProblem(MessagingSystem.Kind.UserERROR, "Unable to merge the files. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 					this.errorMessage = "Unable to merge the files. Compilation not complete for this project.";
+					logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 					this.hasFailed = true;
 					return null;
 				}
@@ -364,8 +373,9 @@ public class KermetaCompiler {
 		
 					
 					if (stopOnError && results.containsErrors()) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR, "The merged result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						this.errorMessage = "The merged result is not valid. Compilation not complete for this project.";
+						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 						this.hasFailed = true;
 						return null;
 					}
@@ -379,8 +389,9 @@ public class KermetaCompiler {
 			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, kpFileURL);
 	
 			if (resolvedUnit == null) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
+				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 				this.hasFailed = true;
 				return null;
 			}
@@ -405,8 +416,9 @@ public class KermetaCompiler {
 					errorHandlingHelper.processCheckingDiagnostics(results, FileHelpers.StringToURL(kpFileURL));
 					
 					if (stopOnError && results.containsErrors()) {
-						logger.logProblem(MessagingSystem.Kind.UserERROR, "The resolved result is not valid. Compilation not complete for this project.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
+						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 						this.hasFailed = true;
 						return null;
 					}
@@ -543,6 +555,8 @@ public class KermetaCompiler {
 			catch(IOException e){
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), 
 						KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(src));
+				this.hasFailed = true; // notify that something has gone wrong
+				if(this.errorMessage.isEmpty()) this.errorMessage = "Cannot load source "+currentUrl+ " "+e.getMessage(); // store first error
 			}
 		}
 
@@ -561,6 +575,8 @@ public class KermetaCompiler {
 					}
 				}catch( Exception e){
 					logger.error(e.toString()+ " on " +baseUriForDependency, LOG_MESSAGE_GROUP,e);
+					this.hasFailed = true; // notify that something has gone wrong
+					if(this.errorMessage.isEmpty()) this.errorMessage = e.getMessage(); // store first error
 				}
 				
 				
@@ -1123,6 +1139,10 @@ public class KermetaCompiler {
 			return contributedProgressGroup+".KermetaCompiler["+this.hashCode()+"]";
 	}
 
+	public void failWithMessage(String msg){
+		this.hasFailed = true;
+		this.errorMessage = msg;
+	}
 	
 	
 	

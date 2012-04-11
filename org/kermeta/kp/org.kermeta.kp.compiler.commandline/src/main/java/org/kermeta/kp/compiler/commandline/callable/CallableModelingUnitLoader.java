@@ -77,11 +77,11 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 			}*/
 		} catch( java.io.FileNotFoundException fnfe) {
 			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Source "+urlToLoad.getUrl()+" not found", KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(urlToLoad.getSource()));
-			
+			compiler.failWithMessage("Source "+urlToLoad.getUrl()+" not found");
 		}
 		catch (Exception e) {				
 			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Problem loading "+urlToLoad.getUrl()+" "+e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e, KpResourceHelper.createFileReference(urlToLoad.getSource()));			
-			
+			compiler.failWithMessage("Problem loading "+urlToLoad.getUrl()+" "+e.getMessage());
 		}
 		return null;
 	}
