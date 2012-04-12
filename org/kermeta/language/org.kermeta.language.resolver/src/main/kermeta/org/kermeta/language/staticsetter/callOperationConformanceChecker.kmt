@@ -25,7 +25,7 @@ package behavior{
 		* e.g. if operation foo<X>(x: Collection<X>): X and a call foo(Sequence<String>.new) then X->String
 		*/
 		operation inferTypeVariableFromParameters(context : StaticSetterContext) is do 
-			stdio.writeln("inferTypeVariableFromParameters for "+self.name)
+			if context.verbose then	stdio.writeln("inferTypeVariableFromParameters for "+self.name) end
 			
 			var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
 			
@@ -48,7 +48,7 @@ package behavior{
 			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
 				staticOperation.typeParameter.each{tv|
 						self.staticTypeVariableBindings.add(typeVariableToSet.getValue(tv))
-						stdio.writeln("binding found : "+tv.name+" - "+typeVariableToSet.getValue(tv).toString)
+						if context.verbose then stdio.writeln("binding found : "+tv.name+" - "+typeVariableToSet.getValue(tv).toString) end
 						//type should already be contained
 						}
 			end
@@ -68,7 +68,7 @@ package structure{
 		//if the current type from expectedType is a type variable, then add the binding
 		//if not, it's only important if self is a class or a function type
 		operation compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
-			stdio.writeln("compare a type with something")
+			if context.verbose then stdio.writeln("compare a type with something") end
 			
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
@@ -80,7 +80,7 @@ package structure{
 		//structural comparison is used when types are supposed to be equals
 		
 		operation structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
-			stdio.writeln("compare a type with something")
+			if context.verbose then stdio.writeln("compare a type with something") end
 			
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
@@ -95,10 +95,14 @@ package structure{
 	aspect class Class
 	{
 		method compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
-			stdio.writeln("compare a class with something")
-			stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
-			
-			if expectedType.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+			if context.verbose then
+				stdio.writeln("compare a class with something")
+				stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
+			end
+			if expectedType.isInstanceOf(TypeVariable)
+					.andThen{x| 
+						if context.verbose then stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) end 
+						typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 				
 			else
@@ -128,11 +132,13 @@ package structure{
 		
 		method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			
-			
-			stdio.writeln("compare a class with something")
-			stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
-			
-			if expectedType.isInstanceOf(TypeVariable).andThen{x| stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
+			if context.verbose then 
+				stdio.writeln("compare a class with something")
+				stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
+			end
+			if expectedType.isInstanceOf(TypeVariable).andThen{x| 
+					if context.verbose then stdio.writeln("is it an operation typeVariable ? "+typeVariableToSet.containsKey(expectedType.asType(TypeVariable)).toString) end 
+					typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 				
 			else
@@ -243,7 +249,7 @@ package structure{
 	aspect class FunctionType
 	{
 		method compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
-			stdio.writeln("compare a FunctionType with something")
+			if context.verbose then stdio.writeln("compare a FunctionType with something") end
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else
@@ -255,7 +261,7 @@ package structure{
 		end
 		
 		method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
-			stdio.writeln("compare a FunctionType with something")
+			if context.verbose then stdio.writeln("compare a FunctionType with something") end
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else

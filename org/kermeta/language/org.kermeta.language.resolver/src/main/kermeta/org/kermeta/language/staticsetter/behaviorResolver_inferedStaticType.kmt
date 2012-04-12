@@ -68,7 +68,7 @@ package behavior {
 				findBindings(context ,type, bindings)
 				self.staticType := type.resolveTypeVariables(context,bindings)
 				if(self.staticType.isVoid) then
-					stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType")					
+					if context.verbose then stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType") end					
 					self.staticType := context.createTypeFromQualifiedName("kermeta::standard::Void")
 				end
 				if(self.staticType.container.isVoid) then
@@ -91,7 +91,8 @@ package behavior {
 			super(context ,type, bindings)
 			from var i : Integer init 0
 			until i==self.staticTypeVariableBindings.size loop
-				stdio.writeln("add one binding for variable : "+self.staticOperation.typeParameter.elementAt(i).name)
+				
+				if context.verbose then stdio.writeln("add one binding for variable : "+self.staticOperation.typeParameter.elementAt(i).name) end
 				var tvb : TypeVariableBinding init TypeVariableBinding.new
 				tvb.variable:=self.staticOperation.typeParameter.elementAt(i)
 				tvb.type:=self.staticTypeVariableBindings.elementAt(i)

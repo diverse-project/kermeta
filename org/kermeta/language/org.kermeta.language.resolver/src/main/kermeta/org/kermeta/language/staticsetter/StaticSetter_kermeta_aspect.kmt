@@ -257,7 +257,7 @@ package behavior {
 				//set parameters
 				super(context)
 				//get super operation from the currentOperation
-				stdio.writeln("set staticOperation for a CallSuperOperation")
+				if context.verbose then stdio.writeln("set staticOperation for a CallSuperOperation") end
 				if context.currentOperation.superOperation.isVoid then
 					context.errors.add(ResolverException.new.initialize("No Super Operation found for"+context.currentOperation.name, self))
 				else
@@ -345,11 +345,12 @@ package behavior {
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" )
 					result:=void 
 			else
-				stdio.writeln((target.isVoid).orElse{x|target.staticType.isVoid}.toString())
-				stdio.writeln(target.toString)
-				stdio.writeln(target.staticType.toString)
-				stdio.writeln(target.staticType.getAllCallableOperations.toString)
-				
+				if context.verbose then
+					stdio.writeln((target.isVoid).orElse{x|target.staticType.isVoid}.toString())
+					stdio.writeln(target.toString)
+					stdio.writeln(target.staticType.toString)
+					stdio.writeln(target.staticType.getAllCallableOperations.toString)
+				end
 				var ops : Sequence<Operation> init target.staticType.getAllCallableOperations.select{o|o.name==self.name}
 				//Here we must look if target is a TypeLiteral and if the type is a singleton
 				if ops.isEmpty and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
@@ -947,7 +948,7 @@ package behavior {
 							if container.asType(UnresolvedCall).target.staticType.isInstanceOf(Class) then
 								bindings.addAll(container.asType(UnresolvedCall).target.staticType.asType(Class).getAllTypeVariableBindings())
 							end
-							stdio.writeln("lambda bindings.size : "+bindings.size.toString)
+							if context.verbose then stdio.writeln("lambda bindings.size : "+bindings.size.toString) end
 							
 							if self.parameters.size == funcParamTypes.size then
 								from var i : Integer init 0

@@ -127,7 +127,8 @@ aspect class ObjectTypeVariable{
 			result:=binding.type
 		else
 			result:=self
-			stdio.writeln("WARNING : binding not found : "+name)
+			
+			if context.verbose then stdio.writeln("WARNING : binding not found : "+name) end
 		end
 		
 		

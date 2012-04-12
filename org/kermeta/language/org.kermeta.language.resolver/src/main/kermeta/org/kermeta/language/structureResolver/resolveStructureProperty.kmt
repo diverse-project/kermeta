@@ -26,7 +26,9 @@ aspect class UnresolvedProperty inherits AbstractProperty, Unresolved {
 			stdio.writeln("correspondingPropertyClass is void")
 		else
 			var cd : ClassDefinition init correspondingPropertyClass.typeDefinition.asType(ClassDefinition)
+			if context.verbose then 
 			stdio.writeln("look for "+propertyIdentifier+" in "+cd.name)
+			end
 			correspondingProperty:=cd.ownedAttribute.detect{x|
 				x.name==propertyIdentifier
 				}
