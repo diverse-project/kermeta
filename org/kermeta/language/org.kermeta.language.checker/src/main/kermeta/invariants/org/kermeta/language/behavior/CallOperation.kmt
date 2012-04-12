@@ -138,18 +138,6 @@ aspect class CallOperation
 	end
 
 	/**
-	 * The operation is deprecated
-	 */
-	@IsWarning "true"
-	@Scope "RESOLVED"
-	inv called_operation_deprecated is do
-		
-		not(self.staticOperation.kOwnedTags.exists{ t | t.name.equals("deprecated")})
-		//true	
-	end
-
-
-	/**
 	 * Type mismatch. The parameters' types are not those expected.
 	 */
 	inv callOperation_parameters_conformance is do 
