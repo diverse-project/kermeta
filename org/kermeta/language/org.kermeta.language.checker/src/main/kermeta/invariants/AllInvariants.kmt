@@ -30,6 +30,7 @@ require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invarian
 
 //behavior
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/AssignmentAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/CallFeatureAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/CallOperation.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/ConditionalAspect.kmt"
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/behavior/ExpressionAspect.kmt"

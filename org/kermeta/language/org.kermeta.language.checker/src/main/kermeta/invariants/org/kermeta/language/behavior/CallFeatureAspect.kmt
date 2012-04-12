@@ -1,0 +1,37 @@
+/* $Id:$ 
+ * Creation : April 12, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package org::kermeta::language::behavior;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+
+using kermeta::standard
+
+aspect class CallFeature
+{
+
+	/**
+	 * This CallFeature is deprecated
+	 */
+	@IsWarning "true"
+	@Scope "RESOLVED"
+	inv called_feature_deprecated is do
+		
+		if (self.isInstanceOf(CallProperty))
+		then
+			not(self.asType(CallProperty).staticProperty.kOwnedTags.exists{ t | t.name.equals("deprecated")})
+		else
+			//It must be an operation
+			not(self.asType(CallOperation).staticOperation.kOwnedTags.exists{ t | t.name.equals("deprecated")})
+		end	
+	end
+	
+
+}
