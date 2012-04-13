@@ -135,7 +135,13 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
 	      repo.setPolicy(true, repositoryPolicy)
 	      repositories.add(repo)
     }
-
+    
+    // add default central repo
+    val centralRepo = new RemoteRepository
+    centralRepo.setId("central")
+    centralRepo.setUrl("http://repo1.maven.org/maven2")
+    centralRepo.setContentType("default")
+    repositories.add(centralRepo)
 
     artifactRequest.setRepositories(repositories)
     var artefactResult: ArtifactResult = null;
