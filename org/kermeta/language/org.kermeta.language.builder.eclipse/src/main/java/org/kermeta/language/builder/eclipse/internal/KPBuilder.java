@@ -9,25 +9,19 @@
 package org.kermeta.language.builder.eclipse.internal;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 
-import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -45,8 +39,6 @@ import org.kermeta.kp.compiler.commandline.TracedURL;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
-import org.kermeta.language.loader.kmt.scala.KMTparser;
-import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
@@ -54,7 +46,6 @@ import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
-import org.osgi.framework.Bundle;
 
 public class KPBuilder {
 	
@@ -151,7 +142,7 @@ public class KPBuilder {
 			*/
 			// for reflexivity set the bundle context
 			updateCompilerPreferences();	
-			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,true);
+			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,KermetaCompiler.PHASE_TYPE_SET);
 			if (result != null) {
 				kp_last_modelingunit = result;
 			}
@@ -328,13 +319,16 @@ public class KPBuilder {
 				}
 				
 				compiler.stopOnError = !Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_IGNORE_BUILD_ERROR_BOOLEAN);
-				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,false);
+				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,KermetaCompiler.PHASE_GENERATE_SCALA_BYTECODE);
 				
-				// generate urimap file
-				// TODO may be we can do that in background because we may have to update it if the user has opened or closed some projects
-				uriMapFileBuilder.generateURIMapFile(outputRootFolder);
+				
 				
 				if (result != null && !compiler.hasFailed) {
+					
+					// generate urimap file
+					// TODO may be we can do that in background because we may have to update it if the user has opened or closed some projects
+					uriMapFileBuilder.generateURIMapFile(outputRootFolder);
+					
 					kp_last_modelingunit = result;
 					Activator.getDefault().getMessaggingSystem().debug("copy resources to class folders to ease the run from Eclipse", this.getClass().getName());
 					

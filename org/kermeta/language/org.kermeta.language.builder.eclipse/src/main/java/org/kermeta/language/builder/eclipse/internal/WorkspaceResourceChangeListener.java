@@ -185,7 +185,6 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 				}
 				if ( (resource.getFileExtension() != null ) && 
 						(resource.getFileExtension().equals(KermetaBuilder.KMT_FILE_EXTENSION))) {
-					KPBuilder builder = null;
 					switch (delta.getKind()) {
 					case IResourceDelta.CHANGED:
 						if ((delta.getFlags() & IResourceDelta.CONTENT) == 0)
