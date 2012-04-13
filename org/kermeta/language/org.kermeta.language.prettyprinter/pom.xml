@@ -77,6 +77,7 @@
                         <Require-Bundle>
                         </Require-Bundle>
                         <Export-Package>
+                        	theGroup.org.kermeta.language.prettyprinterrunner
                         </Export-Package>
                         <Import-Package>
 						</Import-Package>
