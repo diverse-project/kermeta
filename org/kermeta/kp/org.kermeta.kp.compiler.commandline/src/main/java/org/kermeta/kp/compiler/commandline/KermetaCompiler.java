@@ -94,6 +94,16 @@ public class KermetaCompiler {
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
 
+	
+	public static String PHASE_COLLECT_SOURCES = "COLLECT_SOURCES";
+	public static String PHASE_MERGE = "MERGE";
+	public static String PHASE_RESOLVE = "RESOLVE";
+	public static String PHASE_TYPE_SET = "TYPE_SET";
+	public static String PHASE_GENERATE_LEGACY_SOURCE = "GENERATE_LEGACY_SOURCE";
+	public static String PHASE_GENERATE_LEGACY_SOURCE_BYTECODE = "GENERATE_LEGACY_SOURCE_BYTECODE";
+	public static String PHASE_GENERATE_SCALA = "GENERATE_SCALA";
+	public static String PHASE_GENERATE_SCALA_BYTECODE = "GENERATE_SCALA_BYTECODE";
+	
 	public boolean checkingEnabled = false;
 	public boolean stopOnError = true;
 
@@ -284,16 +294,18 @@ public class KermetaCompiler {
 	 * this.targetFolder = targetFolder; }
 	 */
 
-	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
+	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, List<String> additionalClassPath, String stopAfterPhase) throws IOException {
 		try {
 			lock.lock();
 			this.hasFailed = false;
 			flushProblems(FileHelpers.StringToURL(kpFileURL));
 			String projectName = "project";
-	
-			int workUnit = 4;
-			if(checkingEnabled) workUnit = workUnit+4;
-			if(!generateKmOnly) workUnit = workUnit+2;
+
+			int workUnit = phaseRank(stopAfterPhase)+1;
+			
+			if(checkingEnabled && phaseRank(stopAfterPhase) >= 2) workUnit+=1;
+			if(checkingEnabled && phaseRank(stopAfterPhase) >= 4) workUnit+=1;
+			
 			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Compiling " + kpFileURL, LOG_MESSAGE_GROUP, workUnit);
 			KpLoaderImpl ldr = new KpLoaderImpl(logger);
 	
@@ -345,7 +357,13 @@ public class KermetaCompiler {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 				return null;
+			}			
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_COLLECT_SOURCES)){
+				logger.debug("stopping after phase "+PHASE_COLLECT_SOURCES, LOG_MESSAGE_GROUP);
+				return null;
 			}
+			
+			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
 	
@@ -381,6 +399,10 @@ public class KermetaCompiler {
 					}
 				}
 			}
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_MERGE)){
+				logger.debug("stopping after phase "+PHASE_MERGE, LOG_MESSAGE_GROUP);
+				return null;
+			}
 	
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
@@ -395,14 +417,13 @@ public class KermetaCompiler {
 				this.hasFailed = true;
 				return null;
 			}
-			
 
 			// checking existence and conformance of the defaultMainClass and default MainOperation
 			new KpChecker(this).checkDefaultMain(kpFileURL, kp, resolvedUnit);
 			if(this.hasFailed){
 				return null;
 			}
-			
+						
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
@@ -424,7 +445,7 @@ public class KermetaCompiler {
 					}
 				}
 			}
-	
+				
 			// save resolvedUnit to the META-INF/kermeta/merged.km
 			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
 			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
@@ -436,7 +457,10 @@ public class KermetaCompiler {
 			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
 			writer.close();
 			
-			
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_TYPE_SET)){
+				logger.debug("stopping after phase "+PHASE_TYPE_SET, LOG_MESSAGE_GROUP);
+				return null;
+			}
 			
 			
 			
@@ -444,52 +468,69 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
-			if (!generateKmOnly) {
+			
 
-				List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
-				fullBinaryDependencyClassPath.addAll(additionalClassPath);
-				// generating 
-				ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
-				Ecore2Bytecode ecore2Bytecode = new Ecore2Bytecode(logger, getMainProgressGroup(), kp, ecoreForGenerationURLs, targetGeneratedGenmodelFolder, targetGeneratedEMFSourceFolder, targetEMFBinaryFolder, additionalClassPath);
-				Future<Boolean> genmodelFuture = ecore2Bytecode.ecore2java(singleThreadExector);
-				Future<Boolean> ecorejava2bytecode = ecore2Bytecode.ecorejava2bytecode(genmodelFuture, threadExector);
-				
-				
-				
-				// deal with km to scala
-				// compiler require a file location not an URL
-				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
-				
-				fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder+"/"); // add the path to java code frome generated emf
-				
-				logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
-				String fileLocation = mergedFile.toURI().toURL().getFile();
-				StringBuilder fullBinaryDependencyClassPathSB = new StringBuilder(); 
-				for(String singlePath : fullBinaryDependencyClassPath){
-					fullBinaryDependencyClassPathSB.append(singlePath);
-					fullBinaryDependencyClassPathSB.append(System.getProperty("path.separator"));
+			List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
+			fullBinaryDependencyClassPath.addAll(additionalClassPath);
+			// generating 
+			ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
+			Ecore2Bytecode ecore2Bytecode = new Ecore2Bytecode(logger, getMainProgressGroup(), kp, ecoreForGenerationURLs, targetGeneratedGenmodelFolder, targetGeneratedEMFSourceFolder, targetEMFBinaryFolder, additionalClassPath);
+			Future<Boolean> genmodelFuture = ecore2Bytecode.ecore2java(singleThreadExector);
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_LEGACY_SOURCE)){
+				// manually join the previously launched ecore2java() (this is normally done by ecorejava2bytecode)
+				try {
+					/*Boolean res =*/ genmodelFuture.get();
+					 
+				} catch (InterruptedException e) {
+					logger.error("Generation of java code from ecore interrupted", KermetaCompiler.LOG_MESSAGE_GROUP, e);
+				} catch (ExecutionException e) {
+					logger.error("Generation of java code from ecore failed "+ e, KermetaCompiler.LOG_MESSAGE_GROUP, e);
 				}
-				km2Scala(kp, varExpander, fileLocation, targetGeneratedScalaSourceFolder, targetRootFolder, fullBinaryDependencyClassPathSB.toString());
-				
-				
-				
-				// process java diagnostic and ensure this thread is finished
-				ecore2Bytecode.processDiagnostic(ecorejava2bytecode);
-
-				logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
-				
-				// deal with scala to bytecode
-				int result =scala2bytecode(fullBinaryDependencyClassPath);
-				if(result != 0){
-					this.errorMessage = "Error detected during bytecode generation. Compilation not complete for this project.";
-					logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
-					// this error is important enough to be reported in the logger
-					logger.error(this.errorMessage, LOG_MESSAGE_GROUP);
-					this.hasFailed = true;
-				}
-			} else {
-				logger.info("generateKmOnly flag set => Ignore scala generation", LOG_MESSAGE_GROUP);
+				logger.debug("stopping after phase "+PHASE_GENERATE_LEGACY_SOURCE, LOG_MESSAGE_GROUP);
+				return null;
 			}
+			Future<Boolean> ecorejava2bytecode = ecore2Bytecode.ecorejava2bytecode(genmodelFuture, threadExector);
+			// process java diagnostic and ensure this thread is finished
+			ecore2Bytecode.processDiagnostic(ecorejava2bytecode);
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_LEGACY_SOURCE_BYTECODE)){
+				logger.debug("stopping after phase "+PHASE_GENERATE_LEGACY_SOURCE_BYTECODE, LOG_MESSAGE_GROUP);
+				return null;
+			}
+			
+			// deal with km to scala
+			// compiler require a file location not an URL
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating scala...", LOG_MESSAGE_GROUP, 1);
+			
+			fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder+"/"); // add the path to java code frome generated emf
+			
+			logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
+			String fileLocation = mergedFile.toURI().toURL().getFile();
+			StringBuilder fullBinaryDependencyClassPathSB = new StringBuilder(); 
+			for(String singlePath : fullBinaryDependencyClassPath){
+				fullBinaryDependencyClassPathSB.append(singlePath);
+				fullBinaryDependencyClassPathSB.append(System.getProperty("path.separator"));
+			}
+			km2Scala(kp, varExpander, fileLocation, targetGeneratedScalaSourceFolder, targetRootFolder, fullBinaryDependencyClassPathSB.toString());
+			
+			
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_SCALA)){
+				logger.debug("stopping after phase "+PHASE_GENERATE_SCALA, LOG_MESSAGE_GROUP);
+				return null;
+			}
+			
+
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Generating bytecode...", LOG_MESSAGE_GROUP, 1);
+			
+			// deal with scala to bytecode
+			int result =scala2bytecode(fullBinaryDependencyClassPath);
+			if(result != 0){
+				this.errorMessage = "Error detected during bytecode generation. Compilation not complete for this project.";
+				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				// this error is important enough to be reported in the logger
+				logger.error(this.errorMessage, LOG_MESSAGE_GROUP);
+				this.hasFailed = true;
+			}
+			
 			return resolvedUnit;
 		} finally {
 			logger.doneProgress(getMainProgressGroup()+".kp2bytecode", "End of compilation for " +kpFileURL , LOG_MESSAGE_GROUP);
@@ -505,8 +546,8 @@ public class KermetaCompiler {
 	 * @param kpFileURL
 	 * @throws IOException
 	 */
-	public ModelingUnit kp2bytecode(String kpFileURL, List<String> additionalClassPath, Boolean generateKmOnly) throws IOException {
-		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(), additionalClassPath, generateKmOnly);
+	public ModelingUnit kp2bytecode(String kpFileURL, List<String> additionalClassPath, String stopAfterPhase) throws IOException {
+		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(), additionalClassPath, stopAfterPhase);
 	}
 
 	public ModelingUnit parse(URL uri) {
@@ -1144,6 +1185,17 @@ public class KermetaCompiler {
 		this.errorMessage = msg;
 	}
 	
+	public static  int phaseRank(String phase){
+		if(phase.equals(PHASE_COLLECT_SOURCES)) return 1;
+		if(phase.equals(PHASE_MERGE)) return 2;
+		if(phase.equals(PHASE_RESOLVE)) return 3;
+		if(phase.equals(PHASE_TYPE_SET)) return 4;
+		if(phase.equals(PHASE_GENERATE_LEGACY_SOURCE)) return 5;
+		if(phase.equals(PHASE_GENERATE_LEGACY_SOURCE_BYTECODE)) return 6;
+		if(phase.equals(PHASE_GENERATE_SCALA)) return 7;
+		if(phase.equals(PHASE_GENERATE_SCALA_BYTECODE)) return 8;
+		return 8;
+	}
 	
 	
 }

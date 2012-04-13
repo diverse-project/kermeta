@@ -57,7 +57,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
 				targetFolder+"scala/", targetFolder+"classes/", 
 				targetFolder+"genmodel/", 
 				targetFolder+"java/", targetFolder+"emfclasses/", targetFolder+"resources/");
-		compiler.kp2bytecode("file:/"+kpFile,additionalClassPath, false);
+		compiler.kp2bytecode("file:/"+kpFile,additionalClassPath, KermetaCompiler.PHASE_GENERATE_SCALA_BYTECODE);
 				
 		assertTrue("Failure = " + compiler.errorMessage, !compiler.hasFailed);
 		// TODO add more phase and assertions, ex: run the result if runnable ?

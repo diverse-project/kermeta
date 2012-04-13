@@ -102,39 +102,51 @@ public class KpCompilerMojo extends AbstractMojo {
    private File targetDirectory;
 
 
-    
+   /**
+    * stopAfterPhase : The compilation will stop after the given phase;
+    * Valid phase values are :
+    * 	COLLECT_SOURCES
+	*	MERGE
+	*	RESOLVE
+	*	TYPE_SET
+	*	GENERATE_LEGACY_SOURCE
+	*	GENERATE_LEGACY_SOURCE_BYTECODE
+	*	GENERATE_SCALA
+	*	GENERATE_SCALA_BYTECODE  
+    *
+    * @parameter default-value="GENERATE_SCALA_BYTECODE"
+    */
+    private String stopAfterPhase;
     
     /**
      * intermediateFilesRequired : write to disk the intermediate files (useful for debugging), default is true
-     *
+     * Recommanded for efficient incremental build.
      * @parameter expression="true"
      */
     private Boolean intermediateFilesRequired;
     
-    
     /**
-     * generateKmOnly : generate only the km, will not compile the final bytecode classes, default is false
-     *
-     * @parameter expression="false"
-     */
-    private Boolean generateKmOnly;
-
-    
-
-    
-    /**
-     * checkingEnabled : check modeling units
+     * checkingEnabled : check modeling units after phases MERGE and TYPE_SET 
      *
      * @parameter expression="true"
      */
     private Boolean checkingEnabled;
     
     /**
-     * stopOnError : stop compilation process when an error occurs
+     * continueOnError : stop compilation process when an error occurs
      * 
+     * @parameter expression="false"
+     */
+    private Boolean continueOnError;
+    
+    
+    /**
+     * useDefaultClasspath : if true, the final bytecode (phase GENERATE_SCALA_BYTECODE) will be compiled using the embedded scala library and kermeta dependencies
+     * if false, the maven project dependencies will be used to compute the classpath 
+     *
      * @parameter expression="true"
      */
-    private Boolean stopOnError;
+    private Boolean useDefaultClasspath;
     
     
 
@@ -194,12 +206,27 @@ public class KpCompilerMojo extends AbstractMojo {
 	            Method loadArgsMethod = cls.getDeclaredMethod("loadArgs", String[].class);
 	            ArrayList<String> paramsArray = new ArrayList<String>();
 
-	            if(generateKmOnly) paramsArray.add("-generateKmOnly");
+	            if(continueOnError) paramsArray.add("-continueOnError");
+	            paramsArray.add("-stopAfter");
+	            paramsArray.add(stopAfterPhase);
+	            if(intermediateFilesRequired) paramsArray.add("-intermediate");
+	            if(!checkingEnabled) paramsArray.add("-ignoreCheck");
+	            if(useDefaultClasspath){
+	            	paramsArray.add("-cp");
+	            	paramsArray.add(compilerJarFile.getAbsolutePath());
+	            }
+	            else {
+	            	// TODO use maven dependencies to build the classpath
+	            	// however, the preferred method is to stop after phase GENERATE_SCALA and then delegate the compilation to maven itself
+	            	throw new MojoFailureException("Feature not implemented yet");
+	            }
 	            paramsArray.add(kpFileURL);
+	            
+	            
+	            
 	            String[] params = {};
 	            params = paramsArray.toArray(params);
 	            loadArgsMethod.invoke(compilerCLI, (Object) params);
-	            
 	            Method runMethod = cls.getMethod("run");
 	            boolean hasFailed = (Boolean)  runMethod.invoke(compilerCLI);
 	            if(hasFailed){
@@ -208,7 +235,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	            
 	            
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	        	getLog().error(e);
 	            throw new MojoFailureException(e.toString());
 	        }
 	        
