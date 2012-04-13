@@ -46,7 +46,7 @@ public class LocalFileConverterForAether extends LocalFileConverter {
 				AetherUtil aetherUtil = new AetherUtil(logger,baseMsgGroup);
 				File theFile = aetherUtil.resolveMavenArtifact4J(javaUrl.toString(), repositoriesUrl);
 				if(theFile.exists())
-					return java.net.URI.create("file://"+theFile.getAbsolutePath());
+					return theFile.toURI();
 			}
 			
 			
