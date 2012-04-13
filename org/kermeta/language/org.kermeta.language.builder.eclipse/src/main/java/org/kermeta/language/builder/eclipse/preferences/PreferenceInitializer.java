@@ -19,8 +19,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		store.setDefault(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN, true);
-		store.setDefault(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE, ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_DEBUG));
-		store.setDefault(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE, ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_DEBUG));
+		store.setDefault(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE, ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_INFO));
+		store.setDefault(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE, ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_WARNING));
 		
 		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONKEYSTRIKE_STRING, PreferenceToBuildAction.NONE);
 		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING, PreferenceToBuildAction.GENERATE_KM);
