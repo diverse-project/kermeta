@@ -107,14 +107,13 @@ public class EclipseMessagingSystem extends MessagingSystem {
 		}
 		
 		
-		
 		// for the moment forward all messages to usual log
+		Kind logLevel;
 		if(mustLog){
-			this.log(Kind.DevINFO, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
+			logLevel = Kind.UserINFO;
 		}
-		else{
-			this.log(Kind.DevDEBUG, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);
-		}
+		else logLevel = Kind.DevINFO;
+		this.log(logLevel, "["+progressGroup+"]"+ msg+getElapsedTime(progressGroup), msgGroup);		
 		
 	}
 
