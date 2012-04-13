@@ -714,7 +714,7 @@ public class KermetaCompiler {
 				logger.error("Load of an UML Profile failed "+ e, LOG_MESSAGE_GROUP, e);
 			}
 		}
-		logger.doneProgress(getMainProgressGroup()+".getSourceModelingUnits", "All "+umlProfilesURLs.size()+" UML profile loaded.", LOG_MESSAGE_GROUP);
+		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+umlProfilesURLs.size()+" UML profile loaded.", LOG_MESSAGE_GROUP, 1);
 
 				
 		
