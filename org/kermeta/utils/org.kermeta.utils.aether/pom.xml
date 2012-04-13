@@ -21,7 +21,7 @@
     <dependencies>
     
     
-<dependency>
+		<dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-api</artifactId>
             <version>1.13</version>
@@ -74,6 +74,12 @@
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.api</artifactId>
 			<version>${kermeta.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>utils.helpers</artifactId>
+			<version>${utils.version}</version>			
 		</dependency>
        <!--
         <dependency>
