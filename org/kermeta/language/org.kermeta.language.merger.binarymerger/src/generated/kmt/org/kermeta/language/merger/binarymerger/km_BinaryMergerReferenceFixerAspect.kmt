@@ -61,7 +61,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var staticTypeVariableBindingsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.staticTypeVariableBindings.select{ o | not o.similarElementInMergedModel.isVoid }
 					staticTypeVariableBindingsToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute staticTypeVariableBindings)")
+						////stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute staticTypeVariableBindings)")
 						self.staticTypeVariableBindings.remove(o)
 						self.staticTypeVariableBindings.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -399,7 +399,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var genericsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.generics.select{ o | not o.similarElementInMergedModel.isVoid }
 					genericsToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute generics)")
+						////stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute generics)")
 						self.generics.remove(o)
 						self.generics.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -408,7 +408,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var staticTypeVariableBindingsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.staticTypeVariableBindings.select{ o | not o.similarElementInMergedModel.isVoid }
 					staticTypeVariableBindingsToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute staticTypeVariableBindings)")
+						////stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute staticTypeVariableBindings)")
 						self.staticTypeVariableBindings.remove(o)
 						self.staticTypeVariableBindings.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -546,7 +546,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var kTagToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Tag> init self.kTag.select{ o | not o.similarElementInMergedModel.isVoid }
 					kTagToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute kTag)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute kTag)")
 						self.kTag.remove(o)
 						self.kTag.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Tag))
 					}
@@ -584,7 +584,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var raisedExceptionToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.raisedException.select{ o | not o.similarElementInMergedModel.isVoid }
 					raisedExceptionToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute raisedException)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute raisedException)")
 						self.raisedException.remove(o)
 						self.raisedException.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -599,7 +599,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var typeParameterToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeVariable> init self.typeParameter.select{ o | not o.similarElementInMergedModel.isVoid }
 					typeParameterToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeParameter)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeParameter)")
 						self.typeParameter.remove(o)
 						self.typeParameter.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariable))
 					}
@@ -758,7 +758,7 @@ package kermeta {
 					// find referenced elements not in merged model
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
 						self.superType.remove(o)
 						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -802,7 +802,7 @@ package kermeta {
 					// find referenced elements not in merged model
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
 						self.superType.remove(o)
 						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -833,7 +833,7 @@ package kermeta {
 					// find referenced elements not in merged model
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
 						self.superType.remove(o)
 						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -909,7 +909,7 @@ package kermeta {
 					// find referenced elements not in merged model
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
 						self.superType.remove(o)
 						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -971,7 +971,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var objectToMove : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement> init self.object.select{ o | not o.similarElementInMergedModel.isVoid }
 					objectToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute object)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute object)")
 						self.object.remove(o)
 						self.object.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement))
 					}
@@ -1084,7 +1084,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var typeParameterToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeVariable> init self.typeParameter.select{ o | not o.similarElementInMergedModel.isVoid }
 					typeParameterToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeParameter)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeParameter)")
 						self.typeParameter.remove(o)
 						self.typeParameter.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeVariable))
 					}
@@ -1178,7 +1178,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var typeDefinitionsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeDefinition> init self.typeDefinitions.select{ o | not o.similarElementInMergedModel.isVoid }
 					typeDefinitionsToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeDefinitions)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute typeDefinitions)")
 						self.typeDefinitions.remove(o)
 						self.typeDefinitions.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeDefinition))
 					}
@@ -1186,7 +1186,7 @@ package kermeta {
 					// find referenced elements not in merged model
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
 						self.superType.remove(o)
 						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -1266,7 +1266,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var contentsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::KermetaModelElement> init self.contents.select{ o | not o.similarElementInMergedModel.isVoid }
 					contentsToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute contents)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute contents)")
 						self.contents.remove(o)
 						self.contents.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::KermetaModelElement))
 					}
@@ -1312,7 +1312,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var genericsToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.generics.select{ o | not o.similarElementInMergedModel.isVoid }
 					genericsToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute generics)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute generics)")
 						self.generics.remove(o)
 						self.generics.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -1408,7 +1408,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var typeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.type.select{ o | not o.similarElementInMergedModel.isVoid }
 					typeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute type)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute type)")
 						self.type.remove(o)
 						self.type.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -1549,7 +1549,7 @@ package kermeta {
 					// find referenced elements not in merged model
 					var superTypeToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Type> init self.superType.select{ o | not o.similarElementInMergedModel.isVoid }
 					superTypeToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute superType)")
 						self.superType.remove(o)
 						self.superType.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Type))
 					}
@@ -1607,7 +1607,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var withRespectToToMove : kermeta::standard::Sequence<org::kermeta::language::structure::Operation> init self.withRespectTo.select{ o | not o.similarElementInMergedModel.isVoid }
 					withRespectToToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute withRespectTo)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute withRespectTo)")
 						self.withRespectTo.remove(o)
 						self.withRespectTo.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::Operation))
 					}
@@ -1766,7 +1766,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var targetToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeDefinition> init self.target.select{ o | not o.similarElementInMergedModel.isVoid }
 					targetToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute target)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute target)")
 						self.target.remove(o)
 						self.target.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeDefinition))
 					}
@@ -1775,7 +1775,7 @@ package kermeta {
 					// warning order not ensured, TODO
 					var sourceToMove : kermeta::standard::Sequence<org::kermeta::language::structure::TypeDefinition> init self.source.select{ o | not o.similarElementInMergedModel.isVoid }
 					sourceToMove.each{ o |
-						stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute source)")
+						//stdio.writeln("[fixReferences]replacing "+o.toString+" by "+o.similarElementInMergedModel.toString+" (referenced by attribute source)")
 						self.source.remove(o)
 						self.source.add(o.similarElementInMergedModel.asType(org::kermeta::language::structure::TypeDefinition))
 					}
