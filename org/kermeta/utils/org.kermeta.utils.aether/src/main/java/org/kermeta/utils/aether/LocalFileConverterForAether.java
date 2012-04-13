@@ -11,7 +11,6 @@ package org.kermeta.utils.aether;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.kermeta.utils.aether.AetherUtil;
