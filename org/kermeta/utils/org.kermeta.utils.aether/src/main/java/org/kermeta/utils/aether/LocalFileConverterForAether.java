@@ -11,6 +11,8 @@ package org.kermeta.utils.aether;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.LocalFileConverter;
@@ -26,6 +28,11 @@ public class LocalFileConverterForAether extends LocalFileConverter {
 		this.baseMsgGroup = baseMsgGroup;
 		this.logger = messagingSystem;
 		this.repositoriesUrl = repositoriesUrl;
+	}
+	public LocalFileConverterForAether(MessagingSystem messagingSystem , String baseMsgGroup, String repositoryUrl){
+		this.baseMsgGroup = baseMsgGroup;
+		this.logger = messagingSystem;
+		this.repositoriesUrl = Arrays.asList(repositoryUrl);
 	}
 	
 	@Override
