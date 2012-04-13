@@ -52,9 +52,10 @@
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
-                            <generateKmOnly>false</generateKmOnly>
-                            <checkingEnabled>false</checkingEnabled>
-                            <intermediateFilesRequired>false</intermediateFilesRequired>
+                            <checkingEnabled>true</checkingEnabled>
+                            <continueOnError>false</continueOnError>
+                            <useDefaultClasspath>true</useDefaultClasspath>
+                            <intermediateFilesRequired>true</intermediateFilesRequired>
                         </configuration>
                     </execution>
                 </executions>
@@ -86,6 +87,42 @@
             
              
         </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									org.kermeta.kp
+        								</groupId>
+        								<artifactId>
+        									kp.compiler.mavenplugin
+        								</artifactId>
+        								<versionRange>
+        									[2.0.1-SNAPSHOT,)
+        								</versionRange>
+        								<goals>
+        									<goal>generate</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        								<!-- <execute></execute> -->
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
     </build>
 </project>
 
