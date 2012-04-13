@@ -51,11 +51,10 @@
                         <configuration>
                             <kp>slicerCompiler.kp</kp>
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
-                            <targetGroupId>${project.groupId}</targetGroupId>
-                            <targetArtifactId>${project.artifactId}</targetArtifactId>
-                            <generateKmOnly>false</generateKmOnly>
                             <checkingEnabled>true</checkingEnabled>
-                            <intermediateFilesRequired>false</intermediateFilesRequired>
+                            <continueOnError>false</continueOnError>
+                            <useDefaultClasspath>true</useDefaultClasspath>
+                            <intermediateFilesRequired>true</intermediateFilesRequired>
                         </configuration>
                     </execution>
                 </executions>
