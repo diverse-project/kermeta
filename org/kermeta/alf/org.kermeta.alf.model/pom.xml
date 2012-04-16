@@ -68,7 +68,7 @@
 					<instructions>
 						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Export-Package>org.kermeta.alfDsl.*</Export-Package>
+						<Export-Package>org.kermeta.alf.*</Export-Package>
 						<Import-Package>
 							!org.eclipse.core.*,
 							org.eclipse.emf.*

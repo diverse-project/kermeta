@@ -4,411 +4,415 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.alf.model/src"
     modelPluginID="org.kermeta.alf.model" modelName="Alf" importerID="org.eclipse.emf.importer.ecore"
     copyrightFields="false">
-  <foreignModel>../../Transformer/metamodel/Alf.ecore</foreignModel>
-  <genPackages prefix="AlfDsl" disposableProviderFactory="true" ecorePackage="Alf.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//BooleanValue">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//BooleanValue/TRUE"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//BooleanValue/FALSE"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//LinkOperationKind">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//LinkOperationKind/CREATE"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//LinkOperationKind/DESTROY"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//LinkOperationKind/CLEAR"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//SelectOrRejectOperator">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//SelectOrRejectOperator/SELECT"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//SelectOrRejectOperator/REJECT"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//CollectOrIterateOperator">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//CollectOrIterateOperator/COLLECT"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//CollectOrIterateOperator/ITERATE"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//ForAllOrExistsOrOneOperator">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//ForAllOrExistsOrOneOperator/FORALL"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//ForAllOrExistsOrOneOperator/EXISTS"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//ForAllOrExistsOrOneOperator/ONE"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//AnnotationKind">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AnnotationKind/ISOLATED"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AnnotationKind/DETERMINED"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AnnotationKind/ASSURED"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AnnotationKind/PARALLEL"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//AssignmentOperator">
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/ASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/PLUSASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/MINUSASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/MULTASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/MODASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/DIVASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/ANDASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/ORASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/XORASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/LSHIFTASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/RSHIFTASSIGN"/>
-      <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//AssignmentOperator/URSHIFTASSIGN"/>
-    </genEnums>
-    <genClasses ecoreClass="Alf.ecore#//CLASSSTRUCT">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//CLASSSTRUCT/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//CLASSSTRUCT/clsop"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//CLASSOP">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//CLASSOP/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//CLASSOP/stat"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//LITERAL">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LITERAL/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//BOOLEAN_LITERAL">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//BOOLEAN_LITERAL/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//NUMBER_LITERAL">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//NUMBER_LITERAL/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//INTEGER_LITERAL"/>
-    <genClasses ecoreClass="Alf.ecore#//UNLIMITED_LITERAL"/>
-    <genClasses ecoreClass="Alf.ecore#//STRING_LITERAL">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//STRING_LITERAL/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//NameExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//NameExpression/prefixOp"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NameExpression/path"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//NameExpression/id"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NameExpression/invocationCompletion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NameExpression/sequenceConstructionCompletion"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//NameExpression/postfixOp"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NameExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//QualifiedNamePath">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//QualifiedNamePath/namespace"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//UnqualifiedName">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//UnqualifiedName/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//UnqualifiedName/templateBinding"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//TemplateBinding">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//TemplateBinding/bindings"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//NamedTemplateBinding">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//NamedTemplateBinding/formal"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NamedTemplateBinding/actual"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//QualifiedNameWithBinding">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//QualifiedNameWithBinding/id"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//QualifiedNameWithBinding/binding"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//QualifiedNameWithBinding/remaining"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//Tuple">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//Tuple/tupleElements"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//TupleElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//TupleElement/argument"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//Expression"/>
-    <genClasses ecoreClass="Alf.ecore#//ConditionalTestExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ConditionalTestExpression/exp"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ConditionalTestExpression/whenTrue"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ConditionalTestExpression/whenFalse"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ConditionalOrExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ConditionalOrExpression/exp"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ConditionalAndExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ConditionalAndExpression/exp"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//InclusiveOrExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InclusiveOrExpression/exp"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ExclusiveOrExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ExclusiveOrExpression/exp"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AndExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AndExpression/exp"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//EqualityExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//EqualityExpression/exp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//EqualityExpression/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ClassificationExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationExpression/exp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//ClassificationExpression/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationExpression/typeName"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//RelationalExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//RelationalExpression/left"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//RelationalExpression/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//RelationalExpression/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ShiftExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ShiftExpression/exp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//ShiftExpression/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AdditiveExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AdditiveExpression/exp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//AdditiveExpression/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//MultiplicativeExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//MultiplicativeExpression/exp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//MultiplicativeExpression/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//UnaryExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//UnaryExpression/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//UnaryExpression/exp"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//PrimaryExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//PrimaryExpression/prefix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SuffixExpression"/>
-    <genClasses ecoreClass="Alf.ecore#//OperationCallExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//OperationCallExpression/operationName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//OperationCallExpression/tuple"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//OperationCallExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//OperationCallExpressionWithoutDot">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//OperationCallExpressionWithoutDot/operationName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//OperationCallExpressionWithoutDot/tuple"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//OperationCallExpressionWithoutDot/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//PropertyCallExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//PropertyCallExpression/propertyName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//PropertyCallExpression/index"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//PropertyCallExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//LinkOperationExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//LinkOperationExpression/kind"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LinkOperationExpression/tuple"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//LinkOperationTuple">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LinkOperationTuple/linkOperationTupleElement"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//LinkOperationTupleElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//LinkOperationTupleElement/objectOrRole"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LinkOperationTupleElement/roleIndex"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//LinkOperationTupleElement/object"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceOperationExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SequenceOperationExpression/operationName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceOperationExpression/tuple"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceOperationExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceReductionExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SequenceReductionExpression/isOrdered"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceReductionExpression/behavior"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceReductionExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceExpansionExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SequenceExpansionExpression/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceExpansionExpression/expr"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceExpansionExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SelectOrRejectOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SelectOrRejectOperation/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//CollectOrIterateOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//CollectOrIterateOperation/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ForAllOrExistsOrOneOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//ForAllOrExistsOrOneOperation/op"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//IsUniqueOperation"/>
-    <genClasses ecoreClass="Alf.ecore#//ValueSpecification"/>
-    <genClasses ecoreClass="Alf.ecore#//NonLiteralValueSpecification"/>
-    <genClasses ecoreClass="Alf.ecore#//ParenthesizedExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ParenthesizedExpression/expOrTypeCast"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ParenthesizedExpression/casted"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ParenthesizedExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//NullExpression"/>
-    <genClasses ecoreClass="Alf.ecore#//ThisExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ThisExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SuperInvocationExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SuperInvocationExpression/className"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SuperInvocationExpression/operationCallWithoutDot"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SuperInvocationExpression/operationCall"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//InstanceCreationExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InstanceCreationExpression/constructor"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InstanceCreationExpression/tuple"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InstanceCreationExpression/sequenceConstuctionCompletion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InstanceCreationExpression/suffix"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceConstructionOrAccessCompletion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SequenceConstructionOrAccessCompletion/multiplicityIndicator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceConstructionOrAccessCompletion/accessCompletion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceConstructionOrAccessCompletion/sequenceCompletion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceConstructionOrAccessCompletion/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AccessCompletion">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AccessCompletion/accessIndex"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//PartialSequenceConstructionCompletion">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//PartialSequenceConstructionCompletion/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceConstructionCompletion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//SequenceConstructionCompletion/multiplicityIndicator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceConstructionCompletion/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceConstructionExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceConstructionExpression/sequenceElement"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequenceConstructionExpression/rangeUpper"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequenceElement"/>
-    <genClasses ecoreClass="Alf.ecore#//ClassExtentExpression"/>
-    <genClasses ecoreClass="Alf.ecore#//Block">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//Block/sequence"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//StatementSequence">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//StatementSequence/statements"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//InlineStatement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//InlineStatement/langageName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//InlineStatement/body"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AnnotatedStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AnnotatedStatement/annotation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AnnotatedStatement/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//DocumentedStatement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//DocumentedStatement/comment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//DocumentedStatement/statement"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//Statement"/>
-    <genClasses ecoreClass="Alf.ecore#//Annotation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//Annotation/kind"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//Annotation/args"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//BlockStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//BlockStatement/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//EmptyStatement"/>
-    <genClasses ecoreClass="Alf.ecore#//LocalNameDeclarationStatement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//LocalNameDeclarationStatement/varName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LocalNameDeclarationStatement/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//LocalNameDeclarationStatement/multiplicityIndicator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LocalNameDeclarationStatement/init"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//IfStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//IfStatement/sequentialClausses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//IfStatement/finalClause"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SequentialClauses">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SequentialClauses/conccurentClauses"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ConcurrentClauses">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ConcurrentClauses/nonFinalClause"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//NonFinalClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NonFinalClause/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NonFinalClause/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//FinalClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//FinalClause/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SwitchStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchStatement/expression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchStatement/switchClause"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchStatement/defaultClause"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SwitchClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchClause/switchCase"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchClause/statementSequence"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SwitchCase">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchCase/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SwitchDefaultClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SwitchDefaultClause/statementSequence"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//NonEmptyStatementSequence">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//NonEmptyStatementSequence/statement"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//WhileStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//WhileStatement/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//WhileStatement/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//DoStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//DoStatement/block"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//DoStatement/condition"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ForStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ForStatement/control"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ForStatement/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ForControl">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ForControl/loopVariableDefinition"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//LoopVariableDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//LoopVariableDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LoopVariableDefinition/expression1"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LoopVariableDefinition/expression2"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LoopVariableDefinition/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//LoopVariableDefinition/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//BreakStatement"/>
-    <genClasses ecoreClass="Alf.ecore#//ReturnStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ReturnStatement/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AcceptStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AcceptStatement/clause"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AcceptStatement/simpleAccept"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AcceptStatement/compoundAccept"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SimpleAcceptStatementCompletion"/>
-    <genClasses ecoreClass="Alf.ecore#//CompoundAcceptStatementCompletion">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//CompoundAcceptStatementCompletion/block"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//CompoundAcceptStatementCompletion/acceptBlock"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AcceptBlock">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AcceptBlock/clause"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AcceptBlock/block"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AcceptClause">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//AcceptClause/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AcceptClause/qualifiedNameList"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ClassifyStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassifyStatement/expression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassifyStatement/clause"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ClassificationClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationClause/classifyFromClause"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationClause/classifyToClause"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationClause/reclassyAllClause"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ClassificationFromClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationFromClause/qualifiedNameList"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ClassificationToClause">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ClassificationToClause/qualifiedNameList"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ReclassifyAllClause"/>
-    <genClasses ecoreClass="Alf.ecore#//QualifiedNameList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//QualifiedNameList/qualifiedName"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//InvocationOrAssignementOrDeclarationStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InvocationOrAssignementOrDeclarationStatement/typePart_OR_assignedPart_OR_invocationPart"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InvocationOrAssignementOrDeclarationStatement/variableDeclarationCompletion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InvocationOrAssignementOrDeclarationStatement/assignmentCompletion"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//SuperInvocationStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//SuperInvocationStatement/_super"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//ThisInvocationStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ThisInvocationStatement/_this"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//ThisInvocationStatement/assignmentCompletion"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//InstanceCreationInvocationStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//InstanceCreationInvocationStatement/_new"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//VariableDeclarationCompletion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//VariableDeclarationCompletion/multiplicityIndicator"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//VariableDeclarationCompletion/variableName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//VariableDeclarationCompletion/initValue"/>
-    </genClasses>
-    <genClasses ecoreClass="Alf.ecore#//AssignmentCompletion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//AssignmentCompletion/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//AssignmentCompletion/rightHandSide"/>
-    </genClasses>
+  <foreignModel>Alf.ecore</foreignModel>
+  <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="Alf.ecore#/">
+    <nestedGenPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="Alf.ecore#//kermeta">
+      <nestedGenPackages prefix="Alf" disposableProviderFactory="true" ecorePackage="Alf.ecore#//kermeta/alf">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/AssignmentOperator">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/ASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/PLUSASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/MINUSASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/MULTASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/MODASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/DIVASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/ANDASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/ORASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/XORASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/LSHIFTASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/RSHIFTASSIGN"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AssignmentOperator/URSHIFTASSIGN"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/BooleanValue">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/BooleanValue/TRUE"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/BooleanValue/FALSE"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/LinkOperationKind">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/LinkOperationKind/CREATE"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/LinkOperationKind/DESTROY"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/LinkOperationKind/CLEAR"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/SelectOrRejectOperator">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/SelectOrRejectOperator/SELECT"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/SelectOrRejectOperator/REJECT"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/CollectOrIterateOperator">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/CollectOrIterateOperator/COLLECT"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/CollectOrIterateOperator/ITERATE"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/ForAllOrExistsOrOneOperator">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/ForAllOrExistsOrOneOperator/FORALL"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/ForAllOrExistsOrOneOperator/EXISTS"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/ForAllOrExistsOrOneOperator/ONE"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/AnnotationKind">
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AnnotationKind/ISOLATED"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AnnotationKind/DETERMINED"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AnnotationKind/ASSURED"/>
+          <genEnumLiterals ecoreEnumLiteral="Alf.ecore#//kermeta/alf/AnnotationKind/PARALLEL"/>
+        </genEnums>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/CLASSSTRUCT">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/CLASSSTRUCT/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/CLASSSTRUCT/clsop"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/CLASSOP">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/CLASSOP/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/CLASSOP/stat"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/LITERAL">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LITERAL/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/BOOLEAN_LITERAL">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/BOOLEAN_LITERAL/value"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NUMBER_LITERAL">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/NUMBER_LITERAL/value"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/INTEGER_LITERAL"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/UNLIMITED_LITERAL"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/STRING_LITERAL">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/STRING_LITERAL/value"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NameExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/NameExpression/prefixOp"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NameExpression/path"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/NameExpression/id"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NameExpression/invocationCompletion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NameExpression/sequenceConstructionCompletion"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/NameExpression/postfixOp"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NameExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/QualifiedNamePath">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/QualifiedNamePath/namespace"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/UnqualifiedName">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/UnqualifiedName/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/UnqualifiedName/templateBinding"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/TemplateBinding">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/TemplateBinding/bindings"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NamedTemplateBinding">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/NamedTemplateBinding/formal"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NamedTemplateBinding/actual"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/QualifiedNameWithBinding">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/QualifiedNameWithBinding/id"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/QualifiedNameWithBinding/binding"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/QualifiedNameWithBinding/remaining"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/Tuple">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/Tuple/tupleElements"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/TupleElement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/TupleElement/argument"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/Expression"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ConditionalTestExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ConditionalTestExpression/exp"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ConditionalTestExpression/whenTrue"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ConditionalTestExpression/whenFalse"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ConditionalOrExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ConditionalOrExpression/exp"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ConditionalAndExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ConditionalAndExpression/exp"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/InclusiveOrExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InclusiveOrExpression/exp"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ExclusiveOrExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ExclusiveOrExpression/exp"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AndExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AndExpression/exp"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/EqualityExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/EqualityExpression/exp"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/EqualityExpression/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ClassificationExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationExpression/exp"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/ClassificationExpression/op"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationExpression/typeName"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/RelationalExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/RelationalExpression/left"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/RelationalExpression/op"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/RelationalExpression/right"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ShiftExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ShiftExpression/exp"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/ShiftExpression/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AdditiveExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AdditiveExpression/exp"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/AdditiveExpression/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/MultiplicativeExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/MultiplicativeExpression/exp"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/MultiplicativeExpression/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/UnaryExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/UnaryExpression/op"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/UnaryExpression/exp"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/PrimaryExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/PrimaryExpression/prefix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SuffixExpression"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/OperationCallExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/OperationCallExpression/operationName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/OperationCallExpression/tuple"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/OperationCallExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/OperationCallExpressionWithoutDot">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/OperationCallExpressionWithoutDot/operationName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/OperationCallExpressionWithoutDot/tuple"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/OperationCallExpressionWithoutDot/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/PropertyCallExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/PropertyCallExpression/propertyName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/PropertyCallExpression/index"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/PropertyCallExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/LinkOperationExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/LinkOperationExpression/kind"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LinkOperationExpression/tuple"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/LinkOperationTuple">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LinkOperationTuple/linkOperationTupleElement"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/LinkOperationTupleElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/LinkOperationTupleElement/objectOrRole"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LinkOperationTupleElement/roleIndex"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/LinkOperationTupleElement/object"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceOperationExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SequenceOperationExpression/operationName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceOperationExpression/tuple"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceOperationExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceReductionExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SequenceReductionExpression/isOrdered"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceReductionExpression/behavior"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceReductionExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceExpansionExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SequenceExpansionExpression/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceExpansionExpression/expr"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceExpansionExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SelectOrRejectOperation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SelectOrRejectOperation/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/CollectOrIterateOperation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/CollectOrIterateOperation/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ForAllOrExistsOrOneOperation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/ForAllOrExistsOrOneOperation/op"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/IsUniqueOperation"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ValueSpecification"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NonLiteralValueSpecification"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ParenthesizedExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ParenthesizedExpression/expOrTypeCast"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ParenthesizedExpression/casted"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ParenthesizedExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NullExpression"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ThisExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ThisExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SuperInvocationExpression">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SuperInvocationExpression/className"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SuperInvocationExpression/operationCallWithoutDot"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SuperInvocationExpression/operationCall"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/InstanceCreationExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InstanceCreationExpression/constructor"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InstanceCreationExpression/tuple"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InstanceCreationExpression/sequenceConstuctionCompletion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InstanceCreationExpression/suffix"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceConstructionOrAccessCompletion">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SequenceConstructionOrAccessCompletion/multiplicityIndicator"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceConstructionOrAccessCompletion/accessCompletion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceConstructionOrAccessCompletion/sequenceCompletion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceConstructionOrAccessCompletion/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AccessCompletion">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AccessCompletion/accessIndex"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/PartialSequenceConstructionCompletion">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/PartialSequenceConstructionCompletion/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceConstructionCompletion">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/SequenceConstructionCompletion/multiplicityIndicator"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceConstructionCompletion/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceConstructionExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceConstructionExpression/sequenceElement"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequenceConstructionExpression/rangeUpper"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequenceElement"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ClassExtentExpression"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/Block">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/Block/sequence"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/StatementSequence">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/StatementSequence/statements"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/InlineStatement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/InlineStatement/langageName"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/InlineStatement/body"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AnnotatedStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AnnotatedStatement/annotation"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AnnotatedStatement/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/DocumentedStatement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/DocumentedStatement/comment"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/DocumentedStatement/statement"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/Statement"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/Annotation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/Annotation/kind"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/Annotation/args"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/BlockStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/BlockStatement/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/EmptyStatement"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/LocalNameDeclarationStatement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/LocalNameDeclarationStatement/varName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LocalNameDeclarationStatement/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/LocalNameDeclarationStatement/multiplicityIndicator"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LocalNameDeclarationStatement/init"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/IfStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/IfStatement/sequentialClausses"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/IfStatement/finalClause"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SequentialClauses">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SequentialClauses/conccurentClauses"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ConcurrentClauses">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ConcurrentClauses/nonFinalClause"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NonFinalClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NonFinalClause/condition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NonFinalClause/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/FinalClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/FinalClause/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SwitchStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchStatement/expression"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchStatement/switchClause"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchStatement/defaultClause"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SwitchClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchClause/switchCase"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchClause/statementSequence"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SwitchCase">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchCase/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SwitchDefaultClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SwitchDefaultClause/statementSequence"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/NonEmptyStatementSequence">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/NonEmptyStatementSequence/statement"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/WhileStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/WhileStatement/condition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/WhileStatement/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/DoStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/DoStatement/block"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/DoStatement/condition"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ForStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ForStatement/control"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ForStatement/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ForControl">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ForControl/loopVariableDefinition"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/LoopVariableDefinition">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/LoopVariableDefinition/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LoopVariableDefinition/expression1"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LoopVariableDefinition/expression2"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LoopVariableDefinition/type"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/LoopVariableDefinition/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/BreakStatement"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ReturnStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ReturnStatement/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AcceptStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AcceptStatement/clause"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AcceptStatement/simpleAccept"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AcceptStatement/compoundAccept"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SimpleAcceptStatementCompletion"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/CompoundAcceptStatementCompletion">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/CompoundAcceptStatementCompletion/block"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/CompoundAcceptStatementCompletion/acceptBlock"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AcceptBlock">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AcceptBlock/clause"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AcceptBlock/block"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AcceptClause">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/AcceptClause/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AcceptClause/qualifiedNameList"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ClassifyStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassifyStatement/expression"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassifyStatement/clause"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ClassificationClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationClause/classifyFromClause"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationClause/classifyToClause"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationClause/reclassyAllClause"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ClassificationFromClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationFromClause/qualifiedNameList"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ClassificationToClause">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ClassificationToClause/qualifiedNameList"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ReclassifyAllClause"/>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/QualifiedNameList">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/QualifiedNameList/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/InvocationOrAssignementOrDeclarationStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InvocationOrAssignementOrDeclarationStatement/typePart_OR_assignedPart_OR_invocationPart"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InvocationOrAssignementOrDeclarationStatement/variableDeclarationCompletion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InvocationOrAssignementOrDeclarationStatement/assignmentCompletion"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/SuperInvocationStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/SuperInvocationStatement/_super"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/ThisInvocationStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ThisInvocationStatement/_this"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/ThisInvocationStatement/assignmentCompletion"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/InstanceCreationInvocationStatement">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/InstanceCreationInvocationStatement/_new"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/VariableDeclarationCompletion">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/VariableDeclarationCompletion/multiplicityIndicator"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/VariableDeclarationCompletion/variableName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/VariableDeclarationCompletion/initValue"/>
+        </genClasses>
+        <genClasses ecoreClass="Alf.ecore#//kermeta/alf/AssignmentCompletion">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Alf.ecore#//kermeta/alf/AssignmentCompletion/op"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Alf.ecore#//kermeta/alf/AssignmentCompletion/rightHandSide"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>
