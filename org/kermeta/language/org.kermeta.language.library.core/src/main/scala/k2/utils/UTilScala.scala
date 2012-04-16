@@ -21,7 +21,7 @@ object UTilScala {
         return false;
     }
 
-    def newInstance(o:org.kermeta.language.structure.Class): org.kermeta.language.structure.KermetaModelElement ={
+    def newInstance(o:org.kermeta.language.structure.Class): k2.standard.KermetaObject ={
        // println("newInstance " + o + " " +o.getName)
         var name: _root_.java.lang.String = getQualifiedNamePackage(o.getTypeDefinition.eContainer.asInstanceOf[org.kermeta.language.structure.Package],".")
         var packName = k2.utils.TypeEquivalence.getPackageEquivalence(name)
@@ -31,19 +31,19 @@ object UTilScala {
           packName == "kermeta.persistence"||
           packName == "kermeta.standard"
         )){
-          packName = scalaAspectPrefix +"." + packName
+          //packName = scalaAspectPrefix +"." + packName
         }
 
 
 
         var factoryName = packName + ".KerRichFactory$"
         var methodName = "create" + o.getTypeDefinition.getName
-          val clazz = java.lang.Class.forName(factoryName)
+        val clazz = java.lang.Class.forName(factoryName)
         val obj = clazz.getField("MODULE$").get(clazz)
         var meth :_root_.java.lang.reflect.Method = clazz.getMethods.filter(m=> m.getName.equals(methodName)).first
         //println(meth.getName + " " + meth.getParameterTypes.size)
         val numbers = Array()
-        return meth.invoke(obj, numbers: _*).asInstanceOf[org.kermeta.language.structure.KermetaModelElement]
+        return meth.invoke(obj, numbers: _*).asInstanceOf[k2.standard.KermetaObject]
     }
 
  @scala.reflect.BeanProperty
