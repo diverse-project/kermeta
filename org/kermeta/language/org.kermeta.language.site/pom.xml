@@ -171,7 +171,11 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.kermeta.emf</groupId>
-					<artifactId>*</artifactId>
+					<artifactId>emf.lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.kermeta.emf</groupId>
+					<artifactId>emf.lib.patched</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.kermeta.eclipse</groupId>
@@ -221,6 +225,10 @@
 					<artifactId>*</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>org.kermeta.emf</groupId>
+					<artifactId>emf.lib</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>org.apache.maven</groupId>
 					<artifactId>*</artifactId>
 				</exclusion>
@@ -251,9 +259,99 @@
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.provisionner4eclipse</artifactId>
 			<version>${utils.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>org.kermeta.eclipse</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.osgi</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.slf4j.eclipse</artifactId>
+			<version>${utils.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.kermeta.kp</groupId>
+			<artifactId>kp.editor.ui</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.kermeta.eclipse</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.osgi</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.kp</groupId>
+			<artifactId>kp.launcher.eclipse</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.kermeta.kp</groupId>
+			<artifactId>kp.migrateRequireV1ToKp.eclipse.ui</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.kp</groupId>
+			<artifactId>kp.wizard.eclipse</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.documentation</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.autocompletion</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 	</dependencies>
