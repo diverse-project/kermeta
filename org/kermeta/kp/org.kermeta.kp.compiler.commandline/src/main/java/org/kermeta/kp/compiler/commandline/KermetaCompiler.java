@@ -10,15 +10,14 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,23 +27,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.kermeta.compilo.scala.GlobalConfiguration;
-import org.kermeta.diagnostic.Constraint;
-import org.kermeta.diagnostic.ConstraintDiagnostic;
 import org.kermeta.diagnostic.DiagnosticModel;
-import org.kermeta.diagnostic.InvariantProxy;
-import org.kermeta.diagnostic.ModelReference;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.Source;
-import org.kermeta.kp.compiler.commandline.callable.CallableGenmodelGenerator;
-import org.kermeta.kp.compiler.commandline.callable.CallableLogProblem;
 import org.kermeta.kp.compiler.commandline.callable.CallableModelingUnitLoader;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
@@ -60,19 +50,14 @@ import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
 import org.kermeta.language.resolver.KmResolverImpl;
 import org.kermeta.language.resolver.KmResolverImpl4Eclipse;
 import org.kermeta.language.resolver.api.KmResolver;
-import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.ModelingUnit;
-import org.kermeta.language.structure.Tag;
-import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.utils.aether.AetherUtil;
+import org.kermeta.utils.aether.LocalFileConverterForAether;
+import org.kermeta.utils.helpers.CompositeLocalFileConverter;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.LocalFileConverter;
-import org.kermeta.utils.helpers.StringHelper;
-import org.kermeta.utils.helpers.emf.EMFUriHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
-import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
-import org.kermeta.utils.systemservices.api.reference.TextReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
 
@@ -167,7 +152,9 @@ public class KermetaCompiler {
 	public KermetaCompiler(Boolean registerProtocols, MessagingSystem logger, LocalFileConverter uriPhysicalConverter, Boolean willRunInEclipse) {
 		super();
 		this.logger = logger;
-		this.fileSystemConverter = uriPhysicalConverter;
+		this.fileSystemConverter = new CompositeLocalFileConverter(new ArrayList<LocalFileConverter>(
+				Arrays.asList(uriPhysicalConverter, 
+						new LocalFileConverterForAether(logger,getMainProgressGroup(),"http://maven.inria.fr/artifactory/repo"))));
 		this.saveIntermediateFiles = false;
 		this.runInEclipse = willRunInEclipse;
 		this.checkingEnabled = true;
@@ -207,7 +194,8 @@ public class KermetaCompiler {
 		super();
 		System.err.println("checking enabled (" + checkingEnabled + ") stop on error (" + stopOnError + ")");
 		this.logger = logger;
-		this.fileSystemConverter = uriPhysicalConverter;
+		this.fileSystemConverter = new CompositeLocalFileConverter(Arrays.asList(uriPhysicalConverter, 
+			    							new LocalFileConverterForAether(logger,getMainProgressGroup(), "http://maven.inria.fr/artifactory/repo")));
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.runInEclipse = willRunInEclipse;
 		this.checkingEnabled = checkingEnabled;
