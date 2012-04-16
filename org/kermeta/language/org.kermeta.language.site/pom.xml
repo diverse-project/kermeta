@@ -247,5 +247,14 @@
 				<groupId>*</groupId><artifactId>*</artifactId>
 			</exclusion></exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.provisionner4eclipse</artifactId>
+			<version>${utils.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
+		
 	</dependencies>
 </project>
