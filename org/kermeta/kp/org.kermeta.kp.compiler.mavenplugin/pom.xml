@@ -84,15 +84,38 @@
         	<artifactId>org.kevoree.kcl</artifactId>
         	<version>1.6.0</version>
         </dependency>
+        <dependency>
+        	<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib.patched</artifactId>
+			<version>${emf.version}</version>
+			<exclusions>
+                <exclusion>
+                    <artifactId>org.kermeta.emf</artifactId>
+                    <groupId>emf.lib</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.api</artifactId>
 			<version>${utils.version}</version>
+			<exclusions>
+                <exclusion>
+                    <artifactId>org.kermeta.emf</artifactId>
+                    <groupId>emf.lib</groupId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.helpers</artifactId>
 			<version>${utils.version}</version>
+			<exclusions>
+                <exclusion>
+                    <artifactId>org.kermeta.emf</artifactId>
+                    <groupId>emf.lib</groupId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
             <groupId>org.scala-lang</groupId>

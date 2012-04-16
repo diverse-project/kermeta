@@ -161,7 +161,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        this.getLog().info("Generating other resources in "+resourceOutputDirectory.getAbsolutePath());
 	        String kpFileURL = kp.toURI().toString();
 	        this.getLog().info("kpFileURL= "+kpFileURL);
-	        ;
+	        
 	        checkFile(kp.getAbsolutePath().toString());
 	        
 	        List<String> mavenClassPathList = project.getCompileClasspathElements();
@@ -196,7 +196,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        
 	        try {
 	        	
-	        	this.getLog().debug(" kjcl.loadClass");
+	        	this.getLog().info(" kjcl.loadClass");
 	            Class<?> cls = kjcl.loadClass("org.kermeta.kp.compiler.commandline.KermetaCompilerCLI");
 	            this.getLog().debug("cls.getName() = " + cls.getName());
 	            
@@ -227,8 +227,12 @@ public class KpCompilerMojo extends AbstractMojo {
 	            String[] params = {};
 	            params = paramsArray.toArray(params);
 	            loadArgsMethod.invoke(compilerCLI, (Object) params);
+	            System.out.println("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ params);
+	            this.getLog().info("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ params);
 	            Method runMethod = cls.getMethod("run");
 	            boolean hasFailed = (Boolean)  runMethod.invoke(compilerCLI);
+	            System.out.println("runMethod.invoke(compilerCLI); " +compilerCLI);
+	            this.getLog().info("runMethod.invoke(compilerCLI); " +compilerCLI);
 	            if(hasFailed){
 	            	throw new MojoFailureException((String) cls.getMethod("getErrorMessage").invoke(compilerCLI));
 	            }
