@@ -313,7 +313,19 @@
 					<artifactId>*</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.autocompletion.api</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.documentation</artifactId>
 			<version>${kermeta.version}</version>
