@@ -36,6 +36,7 @@
 	<property name="extra.antlr.stringtemplate.version" value="3.2.1"/>
 	
 	<target name="all" depends="clean_result, deploy">
+		<echo>all </echo>
 	</target>
 	
 	<target name="deploy" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
@@ -44,10 +45,10 @@
 	
 	<target name="clean_result">
 			<delete dir="${updatesite.repository}" failonerror="false"/>
-			<delete dir="${source.features.and.bundles}" failonerror="false"/>
+			<!--<delete dir="${source.features.and.bundles}" failonerror="false"/>-->
 	</target>
 	
-	<target name="publish_features_and_bundles" depends="get_repository_source">
+	<target name="publish_features_and_bundles" > <!-- depends="get_repository_source"> -->
 		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 				           fork="true"
 				           failonerror="true"
