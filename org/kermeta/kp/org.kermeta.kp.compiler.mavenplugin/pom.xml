@@ -90,8 +90,8 @@
 			<version>${emf.version}</version>
 			<exclusions>
                 <exclusion>
-                    <artifactId>org.kermeta.emf</artifactId>
-                    <groupId>emf.lib</groupId>
+                    <artifactId>emf.lib</artifactId>
+                    <groupId>org.kermeta.emf</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -112,8 +112,8 @@
 			<version>${utils.version}</version>
 			<exclusions>
                 <exclusion>
-                    <artifactId>org.kermeta.emf</artifactId>
-                    <groupId>emf.lib</groupId>
+                    <artifactId>emf.lib</artifactId>
+                    <groupId>org.kermeta.emf</groupId>
                 </exclusion>
             </exclusions>
 		</dependency>
