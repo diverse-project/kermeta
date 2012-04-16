@@ -59,6 +59,11 @@
                 <directory>${basedir}/target/dependency/org/eclipse/emf</directory>
                 <targetPath>org/eclipse/emf</targetPath>
             </resource>
+            
+            <resource>
+                <directory>${basedir}/target/dependency/model</directory>
+                <targetPath>model</targetPath>
+            </resource>
         </resources>
     </build>
 
