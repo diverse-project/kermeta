@@ -105,13 +105,13 @@ public class KpCompilerMojo extends AbstractMojo {
    /**
     * stopAfterPhase : The compilation will stop after the given phase;
     * Valid phase values are :
-    * 	COLLECT_SOURCES
-	*	MERGE
-	*	RESOLVE
-	*	TYPE_SET
-	*	GENERATE_LEGACY_SOURCE
-	*	GENERATE_LEGACY_SOURCE_BYTECODE
-	*	GENERATE_SCALA
+    * 	COLLECT_SOURCES,
+	*	MERGE,
+	*	RESOLVE,
+	*	TYPE_SET,
+	*	GENERATE_LEGACY_SOURCE,
+	*	GENERATE_LEGACY_SOURCE_BYTECODE,
+	*	GENERATE_SCALA,
 	*	GENERATE_SCALA_BYTECODE  
     *
     * @parameter default-value="GENERATE_SCALA_BYTECODE"
