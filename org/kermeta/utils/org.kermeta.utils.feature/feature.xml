@@ -6,15 +6,17 @@
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
-Tools and utils useful for developping with Kermeta. 
+      Tools and utils libraries that are useful for developping with Kermeta.
+This includes : 
+	OSGI dynamic provisionner (allows to load osgi bundles via the user preferences. This tool supports maven urls)
    </description>
 
    <copyright>
-Copyright (c) 2005-2012 Triskell project, INRIA/IRISA, France 
+      Copyright (c) 2005-2012 Triskell project, INRIA/IRISA, France
    </copyright>
 
    <license url="">
-EPL V1.0, Copyright (c) 2005-2012 Triskell project, INRIA/IRISA 
+      EPL V1.0, Copyright (c) 2005-2012 Triskell project, INRIA/IRISA 
  
  All rights reserved. This program and the accompanying materials
  are made available under the terms of the Eclipse Public License v1.0 
@@ -25,7 +27,6 @@ EPL V1.0, Copyright (c) 2005-2012 Triskell project, INRIA/IRISA
    INRIA
    Université de Rennes 1, France 
       - initial API and implementation
-      
    </license>
 
    <plugin
