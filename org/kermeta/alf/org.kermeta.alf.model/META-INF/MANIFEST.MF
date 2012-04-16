@@ -7,7 +7,8 @@ Export-Package: org.kermeta.alf.util;uses:="org.eclipse.emf.ecore,org.
  on.util,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.resource",
  org.kermeta.alf;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.u
  til,org.kermeta.alf.impl"
-Private-Package: model,.
+Private-Package: model,org3.kermeta.alf.util,org3.kermeta.alf,.,org3.k
+ ermeta.alf.impl
 Bundle-ClassPath: .
 Built-By: suresh
 Tool: Bnd-0.0.311
@@ -15,7 +16,7 @@ Bundle-Name: alf.model :: ALF MODEL
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.7.0
 Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1334566460984
+Bnd-LastModified: 1334579004246
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

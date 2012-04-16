@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
-    nsURI="http://www.kermeta.org/alf/1_0_0/" nsPrefix="org">
-  <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/alf/1_0_0/org/kermeta/"
-      nsPrefix="org_kermeta">
-    <eSubpackages name="alf" nsURI="http://www.kermeta.org/alf/1_0_0/org/kermeta/alf"
-        nsPrefix="org_kermeta_alf">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org3"
+    nsURI="http://www.kermeta.org/alf/1_0_0/" nsPrefix="org3">
+  <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/alf/1_0_0/org3/kermeta/"
+      nsPrefix="org3_kermeta">
+    <eSubpackages name="alf" nsURI="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf"
+        nsPrefix="org3_kermeta_alf">
       <eClassifiers xsi:type="ecore:EEnum" name="AssignmentOperator">
         <eLiterals name="ASSIGN" literal="="/>
         <eLiterals name="PLUSASSIGN" value="1" literal="+="/>

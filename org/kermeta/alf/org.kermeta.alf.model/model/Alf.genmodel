@@ -5,7 +5,7 @@
     modelPluginID="org.kermeta.alf.model" modelName="Alf" importerID="org.eclipse.emf.importer.ecore"
     copyrightFields="false">
   <foreignModel>Alf.ecore</foreignModel>
-  <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="Alf.ecore#/">
+  <genPackages prefix="Org3" disposableProviderFactory="true" ecorePackage="Alf.ecore#/">
     <nestedGenPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="Alf.ecore#//kermeta">
       <nestedGenPackages prefix="Alf" disposableProviderFactory="true" ecorePackage="Alf.ecore#//kermeta/alf">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="Alf.ecore#//kermeta/alf/AssignmentOperator">
