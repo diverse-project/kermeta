@@ -117,7 +117,7 @@
 						<phase>process-classes</phase>
 						<configuration>
 							<outputDirectory>${project.build.directory}/classes</outputDirectory>
-							<includeGroupIds>org.kermeta.eclipse</includeGroupIds>
+							<includeGroupIds>org.kermeta.emf</includeGroupIds>
 							<excludeTransitive>true</excludeTransitive>
 							<!-- make sure to use our own classes -->
 							<!-- avoid plugin.xml (registration conflict with official emf in eclipse )-->
@@ -132,6 +132,44 @@
 			
 		</plugins>
 
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-dependency-plugin
+										</artifactId>
+										<versionRange>
+											[2.2,)
+										</versionRange>
+										<goals>
+											<goal>
+												unpack-dependencies
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<!-- <ignore></ignore> -->
+										<execute></execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<distributionManagement>
