@@ -2,13 +2,13 @@
 <feature
       id="org.kermeta.utils.feature"
       label="Kermeta utils"
-      version="2.0.1.BETA5"
+      version="2.0.1.SNAPSHOT"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
       Tools and utils libraries that are useful for developping with Kermeta.
 This includes : 
-	OSGI dynamic provisionner (allows to load osgi bundles via the user preferences. This tool supports maven urls)
+ OSGI dynamic provisionner (allows to load osgi bundles via the user preferences. This tool supports maven urls)
    </description>
 
    <copyright>
@@ -49,13 +49,6 @@ This includes :
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <!--<plugin
-         id="org.ops4j.pax.url.assembly"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>-->
 
    <plugin
          id="org.ops4j.pax.url.mvn"

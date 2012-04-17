@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.kermeta.language.feature_2.0.1.BETA5.jar" id="org.kermeta.language.feature" version="2.0.1.BETA5">
+   <feature url="features/org.kermeta.language.feature_2.0.1.SNAPSHOT.jar" id="org.kermeta.language.feature" version="2.0.1.SNAPSHOT">
       <category name="Kermeta2Language"/>
    </feature>
-   <feature url="features/org.kermeta.utils.feature_2.0.1.BETA5.jar" id="org.kermeta.utils.feature" version="2.0.1.BETA5">
+   <feature url="features/org.kermeta.utils.feature_2.0.1.SNAPSHOT.jar" id="org.kermeta.utils.feature" version="2.0.1.SNAPSHOT">
       <category name="Kermeta2 Tools"/>
    </feature>
    <category-def name="Kermeta2Language" label="Kermeta 2 language">
       <description>
-         Kermeta 2 workbench and action language
+         Kermeta 2 workbench and action language.
       </description>
    </category-def>
    <category-def name="Kermeta2 Tools" label="Kermeta 2 Tools">
       <description>
-         Additional tools useful for developping with Kermeta
+         Additional tools useful for developping with Kermeta.
       </description>
    </category-def>
 </site>
