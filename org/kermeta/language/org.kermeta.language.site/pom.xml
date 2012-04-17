@@ -115,6 +115,12 @@
 			                  <outputDirectory>${project.build.directory}/features_and_bundles/features</outputDirectory>
 			                </artifactItem>
 			              	<artifactItem>
+			                  <groupId>org.kermeta.language</groupId>
+			                  <artifactId>language.dev.feature</artifactId>
+			                  <version>${kermeta.version}</version>
+			                  <outputDirectory>${project.build.directory}/features_and_bundles/features</outputDirectory>
+			                </artifactItem>
+			              	<artifactItem>
 			                  <groupId>org.kermeta.utils</groupId>
 			                  <artifactId>utils.feature</artifactId>
 			                  <version>${kermeta.version}</version>
