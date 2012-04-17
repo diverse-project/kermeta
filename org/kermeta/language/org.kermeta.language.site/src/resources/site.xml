@@ -6,6 +6,14 @@
    <feature url="features/org.kermeta.utils.feature_2.0.1.BETA5.jar" id="org.kermeta.utils.feature" version="2.0.1.BETA5">
       <category name="Kermeta2 Tools"/>
    </feature>
-   <category-def name="Kermeta2Language" label="Kermeta 2 language"/>
-   <category-def name="Kermeta2 Tools" label="Kermeta 2 Tools"/>
+   <category-def name="Kermeta2Language" label="Kermeta 2 language">
+      <description>
+         Kermeta 2 workbench and action language
+      </description>
+   </category-def>
+   <category-def name="Kermeta2 Tools" label="Kermeta 2 Tools">
+      <description>
+         Additional tools useful for developping with Kermeta
+      </description>
+   </category-def>
 </site>
