@@ -153,12 +153,12 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     val session = new MavenRepositorySystemSession()
     session.setTransferListener(new TransferListener(){
       def transferInitiated(p1: TransferEvent) {
-        messagingSystem.initProgress(msgGroup+"."+session.hashCode(),"Transfert init : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(),msgGroup, 1 )
+        messagingSystem.initProgress(msgGroup+"."+session.hashCode(),"Transfert init    : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(),msgGroup, 1 )
         //messagingSystem.debug("Transfert init for Artifact "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
       }
 
       def transferStarted(p1: TransferEvent) {
-        messagingSystem.log(MessagingSystem.Kind.DevDEBUG,"Transfert begin : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
+        messagingSystem.log(MessagingSystem.Kind.DevDEBUG,           "Transfert begin    : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
       }
 
       def transferProgressed(p1: TransferEvent) {
@@ -166,17 +166,17 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
       }
 
       def transferCorrupted(p1: TransferEvent) {
-        messagingSystem.doneProgress(msgGroup+session.hashCode(), "TransfertCorrupted : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
+        messagingSystem.doneProgress(msgGroup+session.hashCode(),    "Transfert Corrupted: "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
         messagingSystem.error("TransfertCorrupted : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
       }
 
       def transferSucceeded(p1: TransferEvent) {
-        messagingSystem.doneProgress(msgGroup+"."+session.hashCode(), "Transfert succeeded : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
+        messagingSystem.doneProgress(msgGroup+"."+session.hashCode(), "Transfert success : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
         //messagingSystem.debug("Transfert succeeded for Artifact "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
       }
 
       def transferFailed(p1: TransferEvent) {
-        messagingSystem.doneProgress(msgGroup+"."+session.hashCode(), "TransferFailed : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
+        messagingSystem.doneProgress(msgGroup+"."+session.hashCode(), "Transfer Failed   : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
         //messagingSystem.debug("TransferFailed : "+p1.getResource.getResourceName+" from "+p1.getResource().getRepositoryUrl(), msgGroup)
       }
     })
