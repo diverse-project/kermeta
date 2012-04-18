@@ -26,7 +26,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="slicedElements" upperBound="-1"
               eType="#//kermeta/kompren/slicer/SlicedElement" containment="true"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="inputClasses" lowerBound="1"
-              upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+              upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Constraint">
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
@@ -42,7 +42,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="ctx" eType="#//kermeta/kompren/slicer/VarDecl"
               containment="true"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
-              eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+              eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SlicedProperty" eSuperTypes="#//kermeta/kompren/slicer/SlicedElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//kermeta/kompren/slicer/OppositeCreation"
@@ -52,7 +52,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="tgt" eType="#//kermeta/kompren/slicer/VarDecl"
               containment="true"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
-              eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
+              eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="OppositeCreation">
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
@@ -66,7 +66,7 @@
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" lowerBound="1"
               eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
-              eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+              eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
         </eClassifiers>
       </eSubpackages>
     </eSubpackages>
