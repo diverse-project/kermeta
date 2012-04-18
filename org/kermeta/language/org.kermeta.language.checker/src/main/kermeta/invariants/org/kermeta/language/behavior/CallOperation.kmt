@@ -20,6 +20,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 
 
 using kermeta::standard
+using kermeta::utils
 using org::kermeta::language::structure
 
 aspect class CallOperation
@@ -140,53 +141,80 @@ aspect class CallOperation
 	/**
 	 * Type mismatch. The parameters' types are not those expected.
 	 */
+	@Scope "RESOLVED"
 	inv callOperation_parameters_conformance is do 
 		
+		/*
+		stdio.writeln("Checking callOperation_parameters_conformance ...")
+		stdio.writeln("self.parameters.size : " + self.parameters.size.toString)
+		stdio.writeln("self.staticOperation.ownedParameter.size : " + self.staticOperation.ownedParameter.size.toString)
+		*/
 		if (self.parameters.size != self.staticOperation.ownedParameter.size)
 		then
 			// Error
 			false
 		else
 			var myresult : Boolean init true
-			// init a Sequence of TypeVariableBindings
-			var typeVariableBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new 
-			
-		
+
+			// Retrieve all the operation's and owning class type parameters' bindings
+			var typesToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new			
+
+			//stdio.writeln(" operation's type parameters ? " + self.staticOperation.typeParameter.size.toString)
 			// Check wether the CallOperation's staticOperation has type parameters or not
 			from var i : Integer init 0
 			until i==self.staticOperation.typeParameter.size
 			loop
+				/*
 				var tvb : TypeVariableBinding init TypeVariableBinding.new
 				tvb.variable:=self.staticOperation.typeParameter.at(i)
 				tvb.type:=self.staticTypeVariableBindings.at(i)
-				typeVariableBindings.add(tvb)
+				stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
+				*/
+				typesToSet.put(self.staticOperation.typeParameter.at(i), self.staticTypeVariableBindings.at(i))
 				i:=i+1
 			end
 			
 			// The operation's owning class may have type parameters as well
-			var cd : ClassDefinition init self.target.staticType.asType(Class).typeDefinition.asType(ClassDefinition)
-			from var i : Integer init 0
-			until i == cd.typeParameter.size
-			loop
-				var tvb : TypeVariableBinding init TypeVariableBinding.new
-				tvb.variable := self.target.staticType.asType(Class).typeParamBinding.at(i).variable
-				tvb.type := self.target.staticType.asType(Class).typeParamBinding.at(i).type
+			if (self.target.staticType.isInstanceOf(Class))
+			then
+			
+				var cd : ClassDefinition init self.target.staticType.asType(Class).typeDefinition.asType(ClassDefinition)
+				//stdio.writeln(" owning class's type parameters ? " + cd.typeParameter.size.toString)
+				from var i : Integer init 0
+				until i == cd.typeParameter.size
+				loop
+					/*
+					var tvb : TypeVariableBinding init TypeVariableBinding.new
+					tvb.variable := self.target.staticType.asType(Class).typeParamBinding.at(i).variable
+					tvb.type := self.target.staticType.asType(Class).typeParamBinding.at(i).type
+					stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
+					*/
+					typesToSet.put(self.target.staticType.asType(Class).typeParamBinding.at(i).variable,
+								   self.target.staticType.asType(Class).typeParamBinding.at(i).type)
+				
+					i:=i+1
+				end
 			end
 			
 			// Now for each parameter
-		
+			//stdio.writeln(" operation parameters ? " + self.parameters.size.toString)
 			from var i : Integer init 0
 			until i == self.parameters.size
 			loop
-				var paramClass : Class init self.parameters.at(i).staticType.asType(Class)
-							.getComparableClass(self.staticOperation.ownedParameter.at(i).type.asType(Class))
-							
-				//myresult := myresult and (paramClass.typeEquivalence(self.staticOperation.ownedParameter.at(i).type.asType(Class), typeVariableBindings) )							
+				/*
+				stdio.writeln(" - i=" + i.toString)
+				stdio.writeln("   self.parameters.staticType :" + self.parameters.at(i).staticType.toString)
+				stdio.writeln("   expected type              :" + self.staticOperation.ownedParameter.at(i).type.toString)
+				*/
+				
+				//var paramClass : Class init self.parameters.at(i).staticType.asType(Class)
+							//.getComparableClass(self.staticOperation.ownedParameter.at(i).type.asType(Class))
+				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(self.staticOperation.ownedParameter.at(i).type, typesToSet) )							
+				i:=i+1
 							
 			end
-			
-		
-			true
+
+			myresult
 		end
 	end
 }
