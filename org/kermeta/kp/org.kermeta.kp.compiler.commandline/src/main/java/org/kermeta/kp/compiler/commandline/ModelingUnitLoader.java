@@ -190,7 +190,7 @@ public class ModelingUnitLoader {
 				}
 				*/
 				EPackage rootPackage;
-				if(runInEclipse){
+				//if(runInEclipse){
 					// WORKAROUND problem of incomplete conversion if run in eclipse, the ecore.ecore from nsURI is loaded without using the new factory
 					// this fixes bug 1951
 					logger.log(Kind.DevINFO, "Applying ecore load workaround so it can load ecore model in registry", this.getClass().getName());
@@ -211,10 +211,10 @@ public class ModelingUnitLoader {
 					rootPackage = (EPackage) copiedObjects.toArray()[0];
 					// END OF WORKAROUND
 					
-				}
+				/*}
 				else{
 					rootPackage = pack;
-				}
+				}*/
 				result.add(ecoreConverter.convertPackage(rootPackage, ""));
 			}
 			
@@ -278,7 +278,7 @@ public class ModelingUnitLoader {
         //r.load();   
 		
 		EPackage rootPackage;
-		if(runInEclipse){
+		//if(runInEclipse){
 			// WORKAROUND problem of incomplete conversion if run in eclipse, the ecore.ecore from nsURI is loaded without using the new factory
 			// this fixes bug 1951
 			logger.log(Kind.DevINFO, "Applying ecore load workaround so it can load ecore model in registry", this.getClass().getName());
@@ -304,10 +304,10 @@ public class ModelingUnitLoader {
 			rootPackage = (EPackage) copiedObjects.toArray()[0];
 			// END OF WORKAROUND
 			
-		}
+		/*}
 		else{
 			rootPackage = (EPackage) resource.getContents().get(0);
-		}
+		}*/
 		
         return   converter.convertPackage(rootPackage, "");
 	}
