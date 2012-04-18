@@ -307,7 +307,21 @@ aspect class Class
 						
 					end
 				else
-					result:=false
+					// If expectedType is an ObjectTypeVariable, use the bindings HashTable to retrieve
+					// the correct Type.
+					if (expectedType.isInstanceOf(ObjectTypeVariable))
+					then
+						var reallyExpectedType : Type init typeVariableToSet.getValue(expectedType.asType(ObjectTypeVariable))
+						//result:=
+						if (reallyExpectedType.isVoid)
+						then
+							result:=false
+						else
+							result:=self.isSubTypeOf(reallyExpectedType,typeVariableToSet)
+						end
+					else
+						result:=false
+					end
 				end
 			end
 			
