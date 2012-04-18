@@ -787,15 +787,14 @@ public class KermetaCompiler {
 					} else {
 						logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
 					}
-					URL jarURL = new URL(dependencyURL);
-					if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
-						// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
-						jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
-					}
-					if( jarURL.getProtocol().equals("file")){ 
-						File theFile;
-						try {
-							theFile = new File(jarURL.toURI());
+					try {
+						URL jarURL = new URL(dependencyURL);
+						if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
+							// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
+							jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
+						}
+						if( jarURL.getProtocol().equals("file")){ 
+							File theFile = new File(jarURL.toURI());
 							if (theFile!=null) {
 								if(theFile.exists()){
 									result.add(theFile.getAbsolutePath());
@@ -805,31 +804,37 @@ public class KermetaCompiler {
 									continue;
 								}
 							}
-						} catch (URISyntaxException e) {
-							// ignore URI that cannot be translated into a local file ...
-							continue;
-							// TODO deal with mvn url in convertSpecialURItoFileURI
+						
 						}
+						else if(jarURL.getProtocol().equals("mvn")){
+							File theFile;
+							//logger.debug("aether retreiveing : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+							AetherUtil aetherUtil = new AetherUtil(logger,getMainProgressGroup());
+							try{
+								theFile = aetherUtil.resolveMavenArtifact(jarURL.toString(), "http://maven.inria.fr/artifactory/repo");
+								if(theFile.exists()){
+									result.add(theFile.getAbsolutePath());
+									//logger.debug("Retreived : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+								}
+								else{
+									logger.debug("File not found using aether : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+									// try next URL fo this dependency
+									continue;
+								}
+							}
+							catch(Throwable e){
+								logger.error("File not found using aether : " + dependencyURLWithVariable +" "+e.getMessage(), LOG_MESSAGE_GROUP,e);
+							}
+						}
+					} catch (URISyntaxException e) {
+						// ignore URI that cannot be translated into a local file ...
+						continue;
+						// TODO deal with mvn url in convertSpecialURItoFileURI
 					}
-					else if(jarURL.getProtocol().equals("mvn")){
-						File theFile;
-						//logger.debug("aether retreiveing : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-						AetherUtil aetherUtil = new AetherUtil(logger,getMainProgressGroup());
-						try{
-							theFile = aetherUtil.resolveMavenArtifact(jarURL.toString(), "http://maven.inria.fr/artifactory/repo");
-							if(theFile.exists()){
-								result.add(theFile.getAbsolutePath());
-								//logger.debug("Retreived : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-							}
-							else{
-								logger.debug("File not found using aether : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-								// try next URL fo this dependency
-								continue;
-							}
-						}
-						catch(Throwable e){
-							logger.error("File not found using aether : " + dependencyURLWithVariable +" "+e.getMessage(), LOG_MESSAGE_GROUP,e);
-						}
+					catch (java.net.MalformedURLException e) {
+						// ignore URI that cannot be translated into a local file ...
+						continue;
+						// TODO deal with mvn url in convertSpecialURItoFileURI
 					}
 				}
 			}
