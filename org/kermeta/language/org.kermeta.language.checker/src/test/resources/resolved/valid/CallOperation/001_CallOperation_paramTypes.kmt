@@ -1,0 +1,45 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package test {
+	class Main
+	{
+		
+		operation main() : Void	is do
+   		
+   			var a:A[C] init A[C].new
+   			var b : B init B.new
+   			var c : C init C.new
+   			
+   			
+   			a.foo[B](b, c, Ee.c)
+   		
+   		
+   		end
+	}
+
+	class A[X] {
+	
+		operation foo[Y](y:Y, x:X, e:Ee) : Void is do 
+		end 
+	}
+
+	class B  {
+	}
+
+	class C {
+	}
+
+	enum Ee {
+		a;b;c;
+	}
+
+}
