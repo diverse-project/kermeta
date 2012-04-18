@@ -104,8 +104,8 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     def generateEnumLiteralCall(thi:CallEnumLiteral,res : StringBuilder){
         if (Util.hasEcoreTag(thi.getStaticEnumLiteral.getEnumeration)){
             var res1 : StringBuilder = new StringBuilder
-            generateName(thi,res1)
-            res.append("getByName(\""+res1.toString+"\")")
+            //generateName(thi,res1)
+            res.append("getByName(\""+thi.getStaticEnumLiteral().getName()+"\")")
         }else{
         	res.append(thi.getStaticEnumLiteral().getName())
         //    generateName(thi,res)
