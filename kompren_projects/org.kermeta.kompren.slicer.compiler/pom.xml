@@ -59,7 +59,7 @@
                     </execution>
                 </executions>
             </plugin> 
-             <!-- package into a jar for OSGI -->
+             <!-- package into a jar with a manifest for running in OSGI -->
             <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-jar-plugin</artifactId>
@@ -72,12 +72,28 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                        <Require-Bundle>
-                        </Require-Bundle>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>                        
                         <Export-Package>
+                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compiler,
+                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compilerrunner
                         </Export-Package>
+                        
+                        <Require-Bundle>
+                        		org.kermeta.scala.scala-library,
+ 								org.kermeta.language.model,
+ 								org.kermeta.language.library.core,
+ 								org.kermeta.kompren.slicer.model
+                        </Require-Bundle>
                         <Import-Package>
+                        		org.eclipse.emf.common.notify,
+ 								org.eclipse.emf.common.util,
+ 								org.eclipse.emf.ecore,
+ 								org.eclipse.emf.ecore.impl,
+ 								org.eclipse.emf.ecore.resource,
+ 								org.eclipse.emf.ecore.util,
+ 								org.eclipse.emf.ecore.xmi,
+ 								org.eclipse.emf.ecore.xmi.impl,	
+ 								org.osgi.framework;version="[1.5,2)"
 						</Import-Package>
 		            </manifestEntries>		            
 		          </archive>
