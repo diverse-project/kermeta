@@ -329,11 +329,23 @@ aspect class Class
 					// the correct Type.
 					if (expectedType.isInstanceOf(ObjectTypeVariable))
 					then
+						//stdio.writeln(" isSubtypeOf : expectedType is an ObjectTypeVariable...")
 						var reallyExpectedType : Type init typeVariableToSet.getValue(expectedType.asType(ObjectTypeVariable))
 						//result:=
 						if (reallyExpectedType.isVoid)
 						then
-							result:=false
+							//result:=false
+							//One
+							//stdio.writeln("  -> no reallyExpectedType ... check the ObjectTypeVariable born")
+							if (expectedType.asType(ObjectTypeVariable).supertype.isVoid)
+							then
+								//no borns, result=true
+								//stdio.writeln("    no born")
+								result:=true
+							else
+								//stdio.writeln("    born : " + expectedType.asType(ObjectTypeVariable).supertype.toString)
+								result:=self.isSubTypeOf(expectedType.asType(ObjectTypeVariable).supertype, typeVariableToSet)
+							end
 						else
 							result:=self.isSubTypeOf(reallyExpectedType,typeVariableToSet)
 						end
