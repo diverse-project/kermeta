@@ -144,11 +144,12 @@ aspect class CallOperation
 	@Scope "RESOLVED"
 	inv callOperation_parameters_conformance is do 
 		
-		/*
-		stdio.writeln("Checking callOperation_parameters_conformance ...")
+		
+		/*stdio.writeln("Checking callOperation_parameters_conformance for " + self.name)
 		stdio.writeln("self.parameters.size : " + self.parameters.size.toString)
 		stdio.writeln("self.staticOperation.ownedParameter.size : " + self.staticOperation.ownedParameter.size.toString)
 		*/
+		
 		if (self.parameters.size != self.staticOperation.ownedParameter.size)
 		then
 			// Error
@@ -175,10 +176,20 @@ aspect class CallOperation
 			end
 			
 			// The operation's owning class may have type parameters as well
-			if (self.target.staticType.isInstanceOf(Class))
+			// Beware of CallSuperOperation that has no target (but in this case,
+			// the target is self
+			var lTarget : Expression
+			if (not(self.isInstanceOf(CallSuperOperation)))
+			then
+				lTarget:=self.target
+			else
+				lTarget:=self
+			end 
+			
+			if (lTarget.staticType.isInstanceOf(Class))
 			then
 			
-				var cd : ClassDefinition init self.target.staticType.asType(Class).typeDefinition.asType(ClassDefinition)
+				var cd : ClassDefinition init lTarget.staticType.asType(Class).typeDefinition.asType(ClassDefinition)
 				//stdio.writeln(" owning class's type parameters ? " + cd.typeParameter.size.toString)
 				from var i : Integer init 0
 				until i == cd.typeParameter.size
@@ -189,8 +200,8 @@ aspect class CallOperation
 					tvb.type := self.target.staticType.asType(Class).typeParamBinding.at(i).type
 					stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
 					*/
-					typesToSet.put(self.target.staticType.asType(Class).typeParamBinding.at(i).variable,
-								   self.target.staticType.asType(Class).typeParamBinding.at(i).type)
+					typesToSet.put(lTarget.staticType.asType(Class).typeParamBinding.at(i).variable,
+								   lTarget.staticType.asType(Class).typeParamBinding.at(i).type)
 				
 					i:=i+1
 				end
@@ -206,9 +217,6 @@ aspect class CallOperation
 				stdio.writeln("   self.parameters.staticType :" + self.parameters.at(i).staticType.toString)
 				stdio.writeln("   expected type              :" + self.staticOperation.ownedParameter.at(i).type.toString)
 				*/
-				
-				//var paramClass : Class init self.parameters.at(i).staticType.asType(Class)
-							//.getComparableClass(self.staticOperation.ownedParameter.at(i).type.asType(Class))
 				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(self.staticOperation.ownedParameter.at(i).type, typesToSet) )							
 				i:=i+1
 							
