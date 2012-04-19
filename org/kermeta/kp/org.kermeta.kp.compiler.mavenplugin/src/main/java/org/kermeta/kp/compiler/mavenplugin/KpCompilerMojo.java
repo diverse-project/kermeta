@@ -194,9 +194,11 @@ public class KpCompilerMojo extends AbstractMojo {
 	        //kjcl.add(this.getClass().getResourceAsStream("/kp.compiler.commandline.standalone.jar"));
 	        kjcl.add(compilerJarFile.getAbsolutePath());
 	        
+	        //kjcl.add(new java.io.FileInputStream(compilerJarFile));
+	        
 	        try {
 	        	
-	        	this.getLog().info(" kjcl.loadClass");
+	        	this.getLog().info(" kjcl.loadClass from "+compilerJarFile.getAbsolutePath());
 	            Class<?> cls = kjcl.loadClass("org.kermeta.kp.compiler.commandline.KermetaCompilerCLI");
 	            this.getLog().debug("cls.getName() = " + cls.getName());
 	            
