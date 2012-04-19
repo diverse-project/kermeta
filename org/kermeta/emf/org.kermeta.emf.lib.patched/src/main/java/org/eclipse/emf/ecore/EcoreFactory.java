@@ -24,6 +24,8 @@ public interface EcoreFactory extends EFactory
    * @generated
    */
   EcoreFactory eINSTANCE = new EcoreFactoryWrapper();
+  
+  String debug_control_jar = "";
 
   /**
    * Returns a new object of class '<em>EObject</em>'.
