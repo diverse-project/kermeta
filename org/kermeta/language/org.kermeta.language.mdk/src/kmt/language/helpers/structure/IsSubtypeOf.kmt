@@ -95,7 +95,12 @@ aspect class FunctionType
 				end
 			end
 		else
-			result:=false
+			if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+			then
+				result:=true
+			else		
+				result:=false
+			end
 		end
 		
 	end
@@ -137,18 +142,24 @@ aspect class ProductType {
 				result:=bool
 			end
 		else
-			// Special checks in case self with a ProductType with 0 or 1 types inside
-			if (self.type.size == 0)
+			if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
 			then
-				result:=expectedType.isVoid
+				result:=true
 			else
-				if (self.type.size == 1)
+				// Special checks in case self with a ProductType with 0 or 1 types inside
+				if (self.type.size == 0)
 				then
-					result:= self.type.elementAt(0).isSubTypeOf(expectedType, typeVariableToSet)
+					result:=expectedType.isVoid
 				else
-					result:=false
+					if (self.type.size == 1)
+					then
+						result:= self.type.elementAt(0).isSubTypeOf(expectedType, typeVariableToSet)
+					else
+						result:=false
+					end
 				end
-			end
+				
+			end 
 		end	
 	end
 }
@@ -163,6 +174,11 @@ aspect class Enumeration
 		if (expectedType.isInstanceOf(Enumeration))
 		then
 			result:=(self.equals(expectedType))
+		else
+			if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+			then
+				result:=true
+			end
 		end
 		
 	end
@@ -230,7 +246,7 @@ aspect class Class
 	 */
 	operation getComparableClass(typeExpected : Class) : Class is do 
 		
-//		stdio.writeln(">> getComparableClass for " + self.typeDefinition.name + ", expected is " + typeExpected.typeDefinition.name)
+		//stdio.writeln(">> getComparableClass for " + self.typeDefinition.name + ", expected is " + typeExpected.typeDefinition.name)
 		
 		var inheritancePath : Sequence<Class>
 		inheritancePath:=findPathToType(typeExpected.typeDefinition.asType(ClassDefinition), Sequence<ClassDefinition>.new)
@@ -252,9 +268,10 @@ aspect class Class
 			end
 			result:=selfSuperType
 		end
-
-//		stdio.writeln("<< getComparableClass for " + self.typeDefinition.name + ", expected is " + typeExpected.typeDefinition.name)
-			
+		
+		/*stdio.writeln("result:=" + result.toString())
+		stdio.writeln("<< getComparableClass")
+			*/
 	end
 	
 	
@@ -268,12 +285,13 @@ aspect class Class
 			result:=true			
 			if ( expectedType.isInstanceOf(Class) ) 
 			then
+				
 				//stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.asType(Class).typeDefinition.name)
 					
 				//stdio.writeln("expectedType isInstanceOf Class")
 				var comparableClass : Class init self.getComparableClass(expectedType.asType(Class))
 				//comparableClass := self.getComparableClass(expectedType.asType(Class))
-			
+				//stdio.writeln("comparableClass="+comparableClass.toString)
 			
 				if (comparableClass.isVoid)
 				then
