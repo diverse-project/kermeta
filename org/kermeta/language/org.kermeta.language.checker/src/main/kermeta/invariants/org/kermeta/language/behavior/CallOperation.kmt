@@ -141,15 +141,14 @@ aspect class CallOperation
 	/**
 	 * Type mismatch. The parameters' types are not those expected.
 	 */
-	//@Scope "RESOLVED"
+	@Scope "RESOLVED"
 	inv callOperation_parameters_conformance is do 
 		
 		
 		/*stdio.writeln("Checking callOperation_parameters_conformance for " + self.name)
-		stdio.writeln("self.parameters.size : " + self.parameters.size.toString)
-		stdio.writeln("self.staticOperation.ownedParameter.size : " + self.staticOperation.ownedParameter.size.toString)
+		stdio.writeln(" self.parameters.size : " + self.parameters.size.toString)
+		stdio.writeln(" self.staticOperation.ownedParameter.size : " + self.staticOperation.ownedParameter.size.toString)
 		*/
-		
 		if (self.parameters.size != self.staticOperation.ownedParameter.size)
 		then
 			// Error
@@ -221,7 +220,8 @@ aspect class CallOperation
 				i:=i+1
 							
 			end
-
+			
+			//stdio.writeln("myresult="+myresult.toString)
 			myresult
 		end
 	end
