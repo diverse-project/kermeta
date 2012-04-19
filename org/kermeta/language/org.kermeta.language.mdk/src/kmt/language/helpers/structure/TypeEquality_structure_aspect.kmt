@@ -13,6 +13,8 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 using kermeta::standard
 using kermeta::utils
 
+//require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
 class Binding{
 	
 	reference types : Set<TypeVariable>
@@ -65,6 +67,8 @@ aspect class TypeVariable inherits TypeContainer, Type, NamedElement {
 aspect class ParameterizedType inherits Type {
 	method typeEquivalence(other : Type, bindings : Sequence<Binding>) : Boolean is do
 		if not other.isVoid and other.isInstanceOf(ParameterizedType)  then
+			
+			
 			result := self.typeDefinition == other.asType(ParameterizedType).typeDefinition
 			
 			// Checking typeBindings
@@ -75,7 +79,22 @@ aspect class ParameterizedType inherits Type {
 					//stdio.writeln("i="+i.toString)
 					var t1 : Type init self.typeParamBinding().at(i).type
 					var t2 : Type init other.asType(ParameterizedType).typeParamBinding().at(i).type
-					result := result and t1.typeEquivalence(t2, bindings) 
+	
+					// If t2 is an ObjectTypeVariable that has no superType
+					// Then result is ok
+					// Otherwise, we must check that t1 is a subtype of t2.superType
+					if (t2.isInstanceOf(ObjectTypeVariable))
+					then
+						// Check the supertype
+						if (t2.asType(ObjectTypeVariable).supertype.isVoid)
+						then
+							//it is ok
+						//else
+							//result := result and (t1.isSubTypeOf(t2.superType,Hashtable<TypeVariable, Type>.new))
+						end
+					else
+						result := result and t1.typeEquivalence(t2, bindings) 
+					end
 					i := i+1
 				end
 			else result := false
