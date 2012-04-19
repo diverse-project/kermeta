@@ -1,11 +1,11 @@
-KermetaProject "km2html"
-groupId  = "group"
+KermetaProject "org.kermeta.language.gendoc.km2html"
+groupId  = "org.kermeta.language.gendoc"
 defaultMainClass =  "mainpackage::MainClass"
 defaultMainOperation =  "mainOperation"
 
 sources = {
 	require "${project.baseUri}/src/main/kmt/Main.kmt"
-	require "${project.baseUri}/src/main/kmt/Km2Html.kmt"
+	require "${project.baseUri}/src/main/kmt/Km2Html_structure_aspect.kmt"
 }
   
 dependencies = {  
