@@ -730,6 +730,14 @@ public class KermetaCompiler {
 			}
 		}
 		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+ecoreURLs.size()+" ecore loaded", LOG_MESSAGE_GROUP, 1);
+		
+		
+		// prepare the factory to be directly the one that will use our result (will save a few ms)
+		if (runInEclipse) {
+			new KmBinaryMergerImpl4Eclipse();
+		} else {
+			new KmBinaryMergerImpl();
+		}
 		// launch normalLoad threads
 		ArrayList<Future<Collection<ModelingUnit>>> normalLoadFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
 		for(TracedURL normalLoadURL : normalLoadURLs){
@@ -863,9 +871,15 @@ public class KermetaCompiler {
 			theMerger = new KmBinaryMergerImpl();
 		}
 
+		
+		
 		for (ModelingUnit mu : modelingUnits) {
-			convertedModellingUnits.add(muc.convert(mu));
+			// no need to preconvert and save, the merger already has a way to convert unit if necessary
+			// since we don't really use their serialized version now
+			//convertedModellingUnits.add(muc.convert(mu));			
+			convertedModellingUnits.add(mu);
 		}
+		
 		// merge
 		ErrorProneResult<ModelingUnit> mergedMU = new ErrorProneResult<ModelingUnit>(convertedModellingUnits.get(0));
 

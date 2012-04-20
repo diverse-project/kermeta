@@ -35,6 +35,9 @@ import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.umlprofile2ecore.UmlProfile2EcoreImpl;
 import org.kermeta.language.umlprofile2ecore.api.UmlProfile2Ecore;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
+import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl;
+import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl4Eclipse;
+import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
@@ -72,7 +75,8 @@ public class ModelingUnitLoader {
 	}
 	
 	
-	public /*ModelingUnit*/Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
+	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
+		ModelingUnitCacheHelper muCacheHelper = new ModelingUnitCacheHelper(logger);
 		lastLoadErrorMessage = "";
 		URI uri =  URI.createURI(urlString);
 		ModelingUnit mu = null;
@@ -103,15 +107,28 @@ public class ModelingUnitLoader {
 			}
 			
 		}else if (urlString.endsWith(".ecore")) {
-			
-			//org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
+			String outputCacheUrl = URI.createFileURI(targetIntermediateFolder+"/ecore2km"+uri.path()+".km").toString();
 			StructurePackage.eINSTANCE.getEFactoryInstance();
-			mu = this.loadEcore(urlString);
-			if(saveIntermediateFiles && mu != null){
-				URI targetIntermediateFolderuri =  URI.createURI(targetIntermediateFolder);
-				URI saveKMURI = URI.createFileURI(targetIntermediateFolder+"/ecore2km"+uri.path()+".km");
-				logger.debug(saveKMURI.toString(), this.getClass().getName());
-				new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
+			if(muCacheHelper.isCacheUpTodate(urlString, outputCacheUrl)){
+				this.logger.debug("Using cached version of "+urlString,this.getClass().getName());
+				if (runInEclipse) { // load this file to be ready for the merger
+					new KmBinaryMergerImpl4Eclipse();
+				} else {
+					new KmBinaryMergerImpl();
+				}
+				mu = muCacheHelper.getCachedModelingUnit(outputCacheUrl);
+				if(mu == null)
+					this.logger.debug("pb loading cache for "+urlString,this.getClass().getName());
+			}
+			else{
+				//org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
+				
+				mu = this.loadEcore(urlString);
+				if( mu != null){
+					URI saveKMURI = URI.createURI(outputCacheUrl);
+					logger.debug(saveKMURI.toString(), this.getClass().getName());
+					new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
+				}
 			}
 			if (mu != null) {
 				mus.add(mu);
@@ -144,8 +161,15 @@ public class ModelingUnitLoader {
 		}
 		return mus;
 	}
-	protected Collection<ModelingUnit> loadUMLProfile(String urlString) throws IOException {
-		// TODO Auto-generated method stub
+	
+	/**
+	 * Loader for UML profiles
+	 * returns a set of modeling unit since an UML model can contains several packages that are transformed in several ecore files
+	 * @param urlString
+	 * @return
+	 * @throws IOException
+	 */
+	protected Collection<ModelingUnit> loadUMLProfile(String urlString) throws IOException {		
 		
 		Collection<ModelingUnit> result = new ArrayList<ModelingUnit>();
 		
@@ -226,19 +250,17 @@ public class ModelingUnitLoader {
 		return result;
 
 	}
+	
+	/**
+	 * Loader for km files
+	 * @param uri
+	 * @return
+	 * @throws IOException
+	 */
 	protected ModelingUnit loadKM(String uri) throws IOException {
-		/*org.OrgPackage p1 = org.OrgPackage.eINSTANCE;
-    	org.kermeta.KmPackage p2 = org.kermeta.KmPackage.eINSTANCE;
-    	org.kermeta.language.LanguagePackage p3 = org.kermeta.language.LanguagePackage.eINSTANCE;
-    	org.kermeta.language.behavior.BehaviorPackage p4 = org.kermeta.language.behavior.BehaviorPackage.eINSTANCE;
-    	org.kermeta.language.structure.StructurePackage p5 = org.kermeta.language.structure.StructurePackage.eINSTANCE;
-    	*/
-		//StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
-		//BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
-
+		
 		Map<String, String> options = null;
-		// Call init;
-
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
 		resourceSet.getPackageRegistry().put(BehaviorPackage.eNS_URI, BehaviorPackage.eINSTANCE);
@@ -254,7 +276,15 @@ public class ModelingUnitLoader {
 		return (ModelingUnit) resource.getContents().get(0);
 	}
 
+	/**
+	 * Loader for ecore files
+	 * This loader is cached. If a target km file exist and is newer than the ecore file, it simply load the km files.
+	 * @param uri
+	 * @return
+	 * @throws IOException
+	 */
 	protected ModelingUnit loadEcore(String uri) throws IOException {
+				
 		// utils.UTilScala.scalaAspectPrefix_$eq("org.kermeta.language.language.ecore2km");
 		// org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
 		Ecore2KM converter;
@@ -321,6 +351,7 @@ public class ModelingUnitLoader {
 		//StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
 		//BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
 
+				
 		KMTparser parser = new KMTparser();		
 		Iterator<String> src = scala.io.Source.fromFile( new java.io.File(FileHelpers.StringToURI(fileuri)),
 				"UTF8").getLines();

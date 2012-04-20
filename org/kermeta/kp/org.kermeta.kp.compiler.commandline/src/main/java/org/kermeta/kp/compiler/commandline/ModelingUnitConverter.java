@@ -135,7 +135,27 @@ public class ModelingUnitConverter {
 		}
 		return outputStream;
 	}
+	/*
+	 * only save it 
+	 */
+	public void saveMu(ModelingUnit mu) throws IOException{
+		logger.initProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "Saving ModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
+		String prefix = "";
+		if(mu.getNamespacePrefix() != null && !mu.getNamespacePrefix().isEmpty()) prefix = mu.getNamespacePrefix() + ".";
+		URI uri = URI.createURI((prefix + mu.getName() + ".km_in_memory")
+				.replaceAll("::", "."));
+		if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
+			uri = mu.eResource().getURI();
+			
+		} 	
+		logger.debug("\t saving using uri "+uri+" getname="+mu.getName(), KermetaCompiler.LOG_MESSAGE_GROUP);
+		this.saveMu(mu, uri);
+		
 
+		logger.doneProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "ModelingUnit saved", KermetaCompiler.LOG_MESSAGE_GROUP);
+		
+	}
+	
 	public ModelingUnit LoadMu(ByteArrayOutputStream mu, URI uri) throws IOException {
 
 		Map<String, String> options = null;
