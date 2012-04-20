@@ -61,7 +61,8 @@ public class ModelingUnitCacheHelper {
 				File inputfile = new java.io.File(FileHelpers.StringToURI(inputfileUrl));
 				if (inputfile.lastModified() > cacheDate) return false;
 			}
-		} catch (URISyntaxException e) {
+		} catch (Exception e) {
+			logger.warn("cannot compute cache ", getClass().getName(), e);
 			return false;
 		}
 		return true;
@@ -76,7 +77,8 @@ public class ModelingUnitCacheHelper {
 			File inputfile = new java.io.File(FileHelpers.StringToURI(inputfileUrl));
 			if (inputfile.lastModified() > cacheDate) return false;
 			
-		} catch (URISyntaxException e) {
+		} catch (Exception e) {
+			logger.warn("cannot compute cache for "+inputfileUrl, getClass().getName(), e);
 			return false;
 		}
 		return true;
