@@ -107,6 +107,7 @@ public class ModelingUnitLoader {
 			}
 			
 		}else if (urlString.endsWith(".ecore")) {
+			//this.logger.debug("URI.createFileURI "+targetIntermediateFolder+"/ecore2km"+uri.path()+".km",this.getClass().getName());
 			String outputCacheUrl = URI.createFileURI(targetIntermediateFolder+"/ecore2km"+uri.path()+".km").toString();
 			StructurePackage.eINSTANCE.getEFactoryInstance();
 			if(muCacheHelper.isCacheUpTodate(urlString, outputCacheUrl)){
@@ -122,7 +123,7 @@ public class ModelingUnitLoader {
 			}
 			else{
 				//org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
-				
+				//this.logger.debug("loadEcore "+urlString,this.getClass().getName());
 				mu = this.loadEcore(urlString);
 				if( mu != null){
 					URI saveKMURI = URI.createURI(outputCacheUrl);
