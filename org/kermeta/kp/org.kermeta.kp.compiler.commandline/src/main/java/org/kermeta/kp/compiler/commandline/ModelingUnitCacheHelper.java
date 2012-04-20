@@ -58,6 +58,9 @@ public class ModelingUnitCacheHelper {
 			long cacheDate = outputCachefile.lastModified();
 		
 			for(String inputfileUrl : inputfilesUrls){
+				if(inputfileUrl.startsWith("jar:")&&inputfileUrl.contains("!")){
+					inputfileUrl = inputfileUrl.substring(4, inputfileUrl.indexOf("!"));
+				}
 				File inputfile = new java.io.File(FileHelpers.StringToURI(inputfileUrl));
 				if (inputfile.lastModified() > cacheDate) return false;
 			}
@@ -74,6 +77,9 @@ public class ModelingUnitCacheHelper {
 		
 			long cacheDate = outputCachefile.lastModified();
 		
+			if(inputfileUrl.startsWith("jar:")&&inputfileUrl.contains("!")){
+				inputfileUrl = inputfileUrl.substring(4, inputfileUrl.indexOf("!"));
+			}
 			File inputfile = new java.io.File(FileHelpers.StringToURI(inputfileUrl));
 			if (inputfile.lastModified() > cacheDate) return false;
 			
