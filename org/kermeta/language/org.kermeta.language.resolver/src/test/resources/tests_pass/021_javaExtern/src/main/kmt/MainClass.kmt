@@ -1,0 +1,17 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			stdio.writeln("Hello from mainOperation")
+		end
+		
+		operation sin(a : Double) : Double is do 
+        result ?= extern org::kermeta::kmLogo::wrapper::Math.sin(a) // pb here
+        extern org::kermeta::kmLogo::wrapper::Math.sin(a).asType(Double).plus(extern org::kermeta::kmLogo::wrapper::Math.sin(a))
+    end
+	}
+}
