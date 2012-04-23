@@ -1,0 +1,36 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+
+	class Class1 {
+        operation toto() : Void is do
+            stdio.writeln("class1")
+        end
+    }
+
+    class Class2 {
+        operation toto() : Void is do
+            stdio.writeln("class2")
+        end
+    }
+
+    class Class3 inherits Class1, Class2 {
+    	operation toto() : Void  is do
+            stdio.writeln("class4")
+        end
+    }
+
+    class Class4 inherits Class3 {
+        operation toto() : Void from Class3 is do
+            stdio.writeln("class4")
+        end
+    }
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			stdio.writeln("Hello from mainOperation")
+		end
+	}
+}
