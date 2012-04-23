@@ -1,0 +1,28 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+/* this test check the call to a super operation which is not in the direct super type*/
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			stdio.writeln("Hello from mainOperation")
+			D.new.foo()
+		end
+	}
+	
+	class A {
+	operation foo()  is do
+	stdio.writeln("Hello from A")
+	end
+	}
+	class B inherits A {
+	}
+	class C inherits B {
+	}
+	class D inherits C{
+		operation foo() from C is do 
+		super()
+		end
+	}
+}
