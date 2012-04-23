@@ -17,11 +17,13 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeCreationHelper.kmt"
 
 
 using kermeta::standard
 using kermeta::utils
 using org::kermeta::language::structure
+using org::kermeta::language::helpers::structure
 
 aspect class CallOperation
 {
@@ -208,6 +210,7 @@ aspect class CallOperation
 			
 			// Now for each parameter
 			//stdio.writeln(" operation parameters ? " + self.parameters.size.toString)
+			var helper : TypeCreationHelper init TypeCreationHelper.new
 			from var i : Integer init 0
 			until i == self.parameters.size
 			loop
@@ -216,7 +219,8 @@ aspect class CallOperation
 				stdio.writeln("   self.parameters.staticType :" + self.parameters.at(i).staticType.toString)
 				stdio.writeln("   expected type              :" + self.staticOperation.ownedParameter.at(i).type.toString)
 				*/
-				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(self.staticOperation.ownedParameter.at(i).type, typesToSet) )							
+				
+				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(helper.createTypeFromMultiplicityElement(self.staticOperation.ownedParameter.at(i)), typesToSet) )							
 				i:=i+1
 							
 			end
