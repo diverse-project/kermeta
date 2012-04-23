@@ -21,6 +21,13 @@
 	             label="Build Kermeta Project"
 	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
 	       </action>
+	       <action
+	             class="org.kermeta.kp.launcher.eclipse.internal.CleanBuildKP"
+	             id="org.kermeta.kp.launcher.eclipse.internal.CleanBuildKPID"
+	             icon="icons/kermeta.gif"
+	             label="Clean and Build Kermeta Project"
+	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+	       </action>
         <visibility>
          <and>
 		   <objectState name="projectNature" value="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID"/>

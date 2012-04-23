@@ -453,6 +453,21 @@ public class KPBuilder {
 	synchronized public void build(IProgressMonitor monitor){
 		build(false, new ArrayList<String>(), monitor);
 	}
+	synchronized public void clean(IProgressMonitor monitor) throws CoreException{
+		kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+		IFolder targetFolder = null;
+		if( kpProjectFile.getParent() instanceof IFolder){
+			targetFolder = ((IFolder)kpProjectFile.getParent()).getFolder("target");
+			
+		}
+		if( kpProjectFile.getParent() instanceof IProject){
+			targetFolder = ((IProject)kpProjectFile.getParent()).getFolder("target");
+		}
+		if(targetFolder != null && targetFolder.exists()){
+			targetFolder.delete(true, monitor);
+		}
+		
+	}
 
 
 	private void findBundleLocationForClassPath(String bundleSymbolicName, ArrayList<String> additionalClassPath) {

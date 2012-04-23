@@ -141,6 +141,28 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 	    job.schedule();	
 	}
 	
+	public synchronized void cleanBuildFromKP(final String kpIdentifier) {
+		
+		Job job = new Job("Full build of "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					KPBuilder builder = kpBuilders.get(kpIdentifier);
+					builder.clean(monitor);
+					builder.build(monitor);
+				} catch (Exception e) {
+					try {
+						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+					} catch (Exception u) {
+						e.printStackTrace();
+					}
+				}
+				return Status.OK_STATUS;
+	        }
+	    };
+	    job.setPriority(Job.LONG);
+	    job.schedule();	
+	}
+	
 	@Override
 	public void compileFromKP(String kpIdentifier) {
 		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>("Compiling "+kpIdentifier,lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
