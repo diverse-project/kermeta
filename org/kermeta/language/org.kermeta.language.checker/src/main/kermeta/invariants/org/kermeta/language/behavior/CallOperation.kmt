@@ -143,7 +143,7 @@ aspect class CallOperation
 	/**
 	 * Type mismatch. The parameters' types are not those expected.
 	 */
-	//@Scope "RESOLVED"
+	@Scope "RESOLVED"
 	inv callOperation_parameters_conformance is do 
 		
 		
