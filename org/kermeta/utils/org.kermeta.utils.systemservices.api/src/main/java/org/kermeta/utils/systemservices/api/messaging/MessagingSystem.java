@@ -60,6 +60,14 @@ public abstract class MessagingSystem {
 	/**
 	 * convenient operation for quicker call
 	 * Equivalent to
+	 * log(MessagingSystem.Kind.DevINFO, message, messageGroup)
+	 */
+	public void devInfo(String message, String messageGroup){
+		log(MessagingSystem.Kind.DevINFO, message, messageGroup);
+	}
+	/**
+	 * convenient operation for quicker call
+	 * Equivalent to
 	 * log(MessagingSystem.Kind.UserINFO, message, messageGroup)
 	 */
 	public void info(String message, String messageGroup){
