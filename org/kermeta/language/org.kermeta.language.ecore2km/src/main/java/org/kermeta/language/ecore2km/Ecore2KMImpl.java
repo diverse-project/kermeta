@@ -20,7 +20,7 @@ public class Ecore2KMImpl  implements org.kermeta.language.ecore2km.api.Ecore2KM
   
     
 	public Ecore2KMImpl(){
-    	org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();   	
+    	org.kermeta.language.language.ecore2kmrunner.MainRunner.init();   	
     }
     
 
