@@ -310,7 +310,7 @@ object JavaConversions {
             //return res
         }
 
-        def addAllUnique(a: ju.Collection[A]) :Unit = {
+        def addAllUnique(a: ju.Collection[_ <: A]) :Unit = {
             
            
             // create a temporary collection for safe iteration
