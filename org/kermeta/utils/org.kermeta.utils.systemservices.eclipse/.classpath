@@ -4,5 +4,21 @@
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/dvojtise/.m2/repository/org/kermeta/utils/utils.systemservices.api/2.0.1-SNAPSHOT/utils.systemservices.api-2.0.1-SNAPSHOT.jar">
+		<attributes>
+			<attribute name="maven.groupId" value="org.kermeta.utils"/>
+			<attribute name="maven.artifactId" value="utils.systemservices.api"/>
+			<attribute name="maven.version" value="2.0.1-SNAPSHOT"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dvojtise/.m2/repository/org/eclipse/equinox/common/3.3.0-v20070426/common-3.3.0-v20070426.jar">
+		<attributes>
+			<attribute name="maven.groupId" value="org.eclipse.equinox"/>
+			<attribute name="maven.artifactId" value="common"/>
+			<attribute name="maven.version" value="3.3.0-v20070426"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

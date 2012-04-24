@@ -11,7 +11,6 @@ package org.kermeta.utils.systemservices.eclipse.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-
 import org.kermeta.utils.systemservices.eclipse.Activator;
 
 /**
@@ -28,6 +27,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
 		store.setDefault(PreferenceConstants.P_CAPTURE_SYSTEM_ERROUT, true);
+		store.setDefault(PreferenceConstants.P_MAX_CONSOLE_OUTPUT, 80000);
+		
 	}
 
 }

@@ -16,5 +16,6 @@ public class PreferenceConstants {
 
 	
 	public static final String P_CAPTURE_SYSTEM_ERROUT = "capture_system_err_out_Preference";
+	public static final String P_MAX_CONSOLE_OUTPUT = "max_console_output_Preference";
 	
 }

@@ -21,15 +21,19 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IOConsoleOutputStream;
+import org.kermeta.utils.systemservices.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.ConsoleMessage;
 import org.kermeta.utils.systemservices.eclipse.internal.console.message.WarningMessage;
+import org.kermeta.utils.systemservices.eclipse.preferences.PreferenceConstants;
 
 
 
-public class EclipseConsoleIO extends ConsoleIO {
+public class EclipseConsoleIO extends ConsoleIO implements IPropertyChangeListener {
 
 	public boolean notAlreadyUsed = true;
 	
@@ -38,6 +42,8 @@ public class EclipseConsoleIO extends ConsoleIO {
 	
 	/** 	size for which we need to split the message before passing to the stream */
 	public static final int LARGE_MESSAGE_SIZE = 10000;
+	
+	public final static int MIN_CHARS = 1000;
 	
 	/**
 	 * The internal eclipse IOConsole instance.
@@ -49,7 +55,9 @@ public class EclipseConsoleIO extends ConsoleIO {
 	 * @param console
 	 */
 	public EclipseConsoleIO(org.eclipse.ui.console.IOConsole console) {
-		this.console = console;		
+		this.console = console;	
+		Activator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+		updateOutputLimit();
 	}
 	
 	/**
@@ -217,6 +225,13 @@ public class EclipseConsoleIO extends ConsoleIO {
 	}
 	
 
+	private void updateOutputLimit() 
+	{
+		int nMaxChars = Activator.getDefault().getPreferenceStore().getInt(PreferenceConstants.P_MAX_CONSOLE_OUTPUT);
+		int nMinChars = Math.min (MIN_CHARS, nMaxChars -1);
+		this.console.setWaterMarks (Math.max (-1, nMinChars), Math.max (-1, nMaxChars));
+	}
+	
 	//////////////////////////////////////
 	//////////////////////////////////////
 	//		End of Writing Methods		//
@@ -243,6 +258,11 @@ public class EclipseConsoleIO extends ConsoleIO {
 		}
 		
 		return justifiedMessage.toString();
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent arg0) {
+		updateOutputLimit();
 	}
 }
 
