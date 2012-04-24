@@ -59,7 +59,7 @@ public class EclipseMessagingSystemPreferencePage
 		addField(
 			new org.eclipse.jface.preference.BooleanFieldEditor(PreferenceConstants.P_CAPTURE_SYSTEM_ERROUT, "try to capture System.out and System.err in Kermeta default console:", getFieldEditorParent()));
 		addField(
-				new org.eclipse.jface.preference.IntegerFieldEditor(PreferenceConstants.P_MAX_CONSOLE_OUTPUT, "consoles buffer size (character)(-1 for no limit):", getFieldEditorParent()));
+				new org.eclipse.jface.preference.IntegerFieldEditor(PreferenceConstants.P_MAX_CONSOLE_OUTPUT, "consoles buffer size (characters)(0 for no limit):", getFieldEditorParent()));
 		
 	}
 
