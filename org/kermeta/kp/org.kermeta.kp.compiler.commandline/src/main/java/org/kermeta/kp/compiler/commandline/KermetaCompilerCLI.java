@@ -72,8 +72,10 @@ public class KermetaCompilerCLI {
 	}
 		
 	public boolean run() throws IOException {
+		
+		String outputFolderPath = new File(DEFAULT_TARGET_FOLDER).getCanonicalPath();
 		compiler = new KermetaCompiler( true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
-		compiler.initializeTargetFolders(outputFolder, outputFolder, outputFolder+"/scala/", outputFolder+"/classes/", outputFolder+"/genmodel/", outputFolder+"/java/", outputFolder+"/emfclasses/", outputFolder+"/resources/");
+		compiler.initializeTargetFolders(outputFolderPath, outputFolderPath, outputFolderPath+"/scala/", outputFolderPath+"/scalaclasses/", outputFolderPath+"/genmodel/", outputFolderPath+"/java/", outputFolderPath+"/emfclasses/", outputFolderPath+"/resources/");
 		ArrayList<String> classpath = new java.util.ArrayList<String>();
 		if(!additionalClasspath.isEmpty()){
 			if(additionalClasspath.contains(File.pathSeparator)){

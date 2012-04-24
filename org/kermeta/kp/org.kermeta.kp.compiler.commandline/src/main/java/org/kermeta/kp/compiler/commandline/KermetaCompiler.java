@@ -7,7 +7,9 @@
  */
 package org.kermeta.kp.compiler.commandline;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,6 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -121,6 +124,21 @@ public class KermetaCompiler {
 		this.contributedProgressGroup = contributedProgressGroup;
 	}
 
+	/**
+	 * @return the singleThreadExector
+	 */
+	public ExecutorService getSingleThreadExector() {
+		return singleThreadExector;
+	}
+
+	/**
+	 * @return the threadExector
+	 */
+	public ExecutorService getThreadExector() {
+		return threadExector;
+	}
+
+
 	//private ExecutorService threadExector = Executors.newCachedThreadPool();
 	// this kind of executor should be able to queue any number of parallel tasks and run them on the available Threads in the pool
 	// it is tuned to accept a burst of request and process them ...
@@ -166,7 +184,7 @@ public class KermetaCompiler {
 		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);*/
 		
 		this.runInEclipse = willRunInEclipse;
-		errorHandlingHelper = new ErrorHandlingHelper(logger, LOG_MESSAGE_GROUP, getMainProgressGroup(), threadExector);
+		errorHandlingHelper = new ErrorHandlingHelper(logger, LOG_MESSAGE_GROUP, getMainProgressGroup(), getThreadExector());
 	}
 
 	/**
@@ -206,7 +224,7 @@ public class KermetaCompiler {
 		/*if (threadExector instanceof ThreadPoolExecutor)
 		    ((ThreadPoolExecutor) threadExector).setMaximumPoolSize(32);*/
 		
-		errorHandlingHelper = new ErrorHandlingHelper(logger, LOG_MESSAGE_GROUP, getMainProgressGroup(), threadExector);
+		errorHandlingHelper = new ErrorHandlingHelper(logger, LOG_MESSAGE_GROUP, getMainProgressGroup(), getThreadExector());
 	}
 
 	private void registerMVNUrlHandler() {
@@ -317,9 +335,10 @@ public class KermetaCompiler {
 				projectName = kp.getName();
 			}
 
+			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
-			ArrayList<TracedURL> kpSources = getSources(kp,kpFileURL, varExpander);
+			ArrayList<TracedURL> kpSources = collectSourceHelper.getSources(kp,kpFileURL, varExpander);
 			if (kpSources.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				this.errorMessage = "Invalid kp file. No sources detected.";
@@ -328,12 +347,77 @@ public class KermetaCompiler {
 			}
 			
 			
-			flushProblems(kpSources);
-			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
+			// deal with preresolve process
+			logger.debug("Preparing preresolve : "+targetIntermediateFolder+"/preresolve/preresolved.km",LOG_MESSAGE_GROUP);
+			String preResolveCacheUrl = URI.createFileURI(targetIntermediateFolder+"/preresolve/preresolved.km").toString();
+			String preResolveSrcListUrl = URI.createFileURI(targetIntermediateFolder+"/preresolve/srcList.txt").toString();
+			ArrayList<TracedURL> kpPreResolveSources = collectSourceHelper.getAllButLastModifiedFile(kpSources);
+			logger.info("Preresolve all but : "+collectSourceHelper.getLastModifiedFile(kpSources).getUrl(),LOG_MESSAGE_GROUP);
+			ModelingUnit preResolvedUnit = null;
+			if( isPreresolveUpToDate(kpPreResolveSources, preResolveCacheUrl, preResolveSrcListUrl)){
+				logger.info("Reusing  : "+preResolveCacheUrl,LOG_MESSAGE_GROUP);
+				if (runInEclipse) {
+					new KmBinaryMergerImpl4Eclipse();
+				} else {
+					new KmBinaryMergerImpl();
+				}
+				ModelingUnitCacheHelper cacheHelper = new ModelingUnitCacheHelper(logger);
+				preResolvedUnit = cacheHelper.getCachedModelingUnit(preResolveCacheUrl);
+			}
+			else
+			{
+				flushProblems(kpPreResolveSources);
+				logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveLoading "+kpPreResolveSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
+				
+				if (kpPreResolveSources.size() != 0) {
+					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, kp.getName(), dirtyMU);				
+					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveMerging " + preresolveModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
+					ErrorProneResult<ModelingUnit> preresolvedMergedUnit = mergeModelingUnits(kp, preresolveModelingUnits);
 			
-			List<ModelingUnit> modelingUnits = getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
+					// Did errors occur during the merge ?
+					if (preresolvedMergedUnit.getProblems().size() > 0) {
+						errorHandlingHelper.processErrors(preresolvedMergedUnit, FileHelpers.StringToURL(kpFileURL));
+						if (stopOnError) {
+							this.errorMessage = "Unable to merge the files. Compilation not complete for this project.";
+							logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+							logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
+							this.hasFailed = true;
+							return null;
+						}
+					}
+
+					// workaround cache problem in compiler
+					kermeta.standard.JavaConversions.cleanCache();
+					
+					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreResolving...", LOG_MESSAGE_GROUP, 1);
+					preResolvedUnit = resolveModelingUnit(preresolvedMergedUnit.getResult(), kpFileURL, true);
+			
+					if (preResolvedUnit == null) {
+						this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
+						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
+						this.hasFailed = true;
+						return null;
+					}
+					else{
+						URI saveKMURI = URI.createURI(preResolveCacheUrl);
+						new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(preResolvedUnit, saveKMURI);
+						savePreResolveSrcList(preResolveSrcListUrl,kpPreResolveSources);
+					}
+			
+				}
+			}
+			
+			// deal with the remaining merge an resolve
+			ArrayList<TracedURL> remainingSources = new ArrayList<TracedURL>();
+			remainingSources.add(collectSourceHelper.getLastModifiedFile(kpSources));
+			
+			flushProblems(remainingSources);
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+remainingSources.size()+" remaining sources...", LOG_MESSAGE_GROUP, 1);
+			
+			List<ModelingUnit> modelingUnits = collectSourceHelper.getSourceModelingUnits(kp, remainingSources, kp.getName(), dirtyMU);
 	
-			if (modelingUnits.size() == 0) {
+			if (modelingUnits.size() == 0 && preResolvedUnit == null) {
 				this.errorMessage = "Kermeta project invalid.  There is no modeling unit to compile.";
 				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				logger.error(this.errorMessage, LOG_MESSAGE_GROUP);
@@ -351,7 +435,9 @@ public class KermetaCompiler {
 				return null;
 			}
 			
-			
+			if(preResolvedUnit!= null){
+				modelingUnits.add(preResolvedUnit);
+			}
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
 	
@@ -396,7 +482,7 @@ public class KermetaCompiler {
 			kermeta.standard.JavaConversions.cleanCache();
 			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
-			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult()/*convertedModelingUnit*/, kpFileURL);
+			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult(), kpFileURL, false);
 	
 			if (resolvedUnit == null) {
 				this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
@@ -528,6 +614,8 @@ public class KermetaCompiler {
 		}
 	}
 
+	
+
 	/**
 	 * Main process
 	 * 
@@ -550,222 +638,17 @@ public class KermetaCompiler {
 		return theParser.load(uri, content, logger);
 	}
 
+	/**
+	 * computes the list of the sources for this project
+	 * @param kpString
+	 * @return
+	 * @throws IOException
+	 */
 	public ArrayList<TracedURL> getSources(String kpString) throws IOException {
-		KpLoaderImpl ldr = new KpLoaderImpl(logger);
-		KermetaProject kp = ldr.loadKp(kpString);
-		if (kp != null) {
-			return getSources(kp, kpString, new KpVariableExpander(kpString, kp,fileSystemConverter, logger));
-		} else {
-			return new ArrayList<TracedURL>();
-		}
-	}
-
-	public ArrayList<TracedURL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
-		KpLoaderImpl ldr = new KpLoaderImpl(logger);
-		// Note that source is relative to the kp file not the jvm current dir
-		List<Source> srcs = kp.getSources();
-		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
-		for (Source src : srcs) {
-			String currentUrl=null;
-			try{
-				String sourceURLWithVariable = src.getUrl();
-				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
-				String sourceURL = varExpander.expandSourceVariables(sourceURLWithVariable);
-				if (sourceURLWithVariable.contains("${")) {
-					// deal with variable expansion
-					logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURL + ")", LOG_MESSAGE_GROUP);
-				} else {
-					logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
-				}
-				currentUrl = sourceURL;
-				kpSources.add(new TracedURL(src, FileHelpers.StringToURL(sourceURL)));
-				logger.debug("     FileHelpers.StringToURL(sourceURL) : " + FileHelpers.StringToURL(sourceURL), LOG_MESSAGE_GROUP);
-			}
-			catch(IOException e){
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+currentUrl+ " "+e.getMessage(), 
-						KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(src));
-				this.hasFailed = true; // notify that something has gone wrong
-				if(this.errorMessage.isEmpty()) this.errorMessage = "Cannot load source "+currentUrl+ " "+e.getMessage(); // store first error
-			}
-		}
-
-		// get km from dependencies
-		List<Dependency> dependencies = kp.getDependencies();
-		for (Dependency dep : dependencies) {
-			// ignore dependencies that are meant to be used in a require
-			if(!dep.isSourceOnly()){
-				
-				String baseUriForDependency = varExpander.expandSourceVariables("${"+dep.getName()+KpVariableExpander.BASEURI_VARIABLE+"}");
-				boolean isDirectory = false;
-				try{
-					URI depURI = URI.createURI(baseUriForDependency+"/");
-					if((depURI.isPlatformResource() && depURI.fileExtension() == null) || (depURI.isPlatformResource() && ! depURI.fileExtension().equals("jar"))){
-						isDirectory = true;
-					}
-				}catch( Exception e){
-					logger.error(e.toString()+ " on " +baseUriForDependency, LOG_MESSAGE_GROUP,e);
-					this.hasFailed = true; // notify that something has gone wrong
-					if(this.errorMessage.isEmpty()) this.errorMessage = e.getMessage(); // store first error
-				}
-				
-				
-				URI	dependencyKPURI = URI.createURI(baseUriForDependency+DEFAULT_KP_LOCATION_IN_JAR);
-				logger.debug("loading dependency kp : "+dependencyKPURI.toString(), LOG_MESSAGE_GROUP);
-				ldr = new KpLoaderImpl(logger);				
-				KermetaProject dependencyKP = ldr.loadKp(dependencyKPURI);
-				
-				if (dependencyKP == null) {
-					if(findSourceUsingDependency(kp,dep) != null){
-						logger.debug("\tdependency used at least for one require", LOG_MESSAGE_GROUP);
-					}
-					else if(!dep.isByteCodeOnly()){
-						logger.logProblem(MessagingSystem.Kind.UserWARNING, "dependency neither contains a kp file nor is used in a require. If you use it as a binary classpath complement only, please add the byteCodeOnly modifier. ", 
-								KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(dep));
-					}
-				} else {
-					String dependencyMergedKMUrl;
-					if(isDirectory && runInEclipse){
-						dependencyMergedKMUrl = baseUriForDependency + DEFAULT_BINARY_LOCATION_IN_ECLIPSE +DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-						
-					} else {
-						dependencyMergedKMUrl = baseUriForDependency + DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-					}
-					kpSources.add(new TracedURL(dep, FileHelpers.StringToURL(dependencyMergedKMUrl)));
-				}
-				
-			}
-		}
-		return kpSources;
-	}
-
-	// TODO move to a kp helper project/class
-	protected Source findSourceUsingDependency(KermetaProject kp, Dependency dep){
-		List<Source> srcs = kp.getSources();		
-		for (Source src : srcs) {
-			if(src.getUrl().contains("${"+dep.getName()+KpVariableExpander.BASEURI_VARIABLE+"}")){
-				return src;
-			}
-		}
-		return null;
+		CollectSourcesHelper sourceHelper = new CollectSourcesHelper(this, logger);
+		return sourceHelper.getSources(kpString);
 	}
 	
-	
-	
-	
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, ArrayList<TracedURL> kpSources, String projectName, HashMap<URL, ModelingUnit> dirtyMU) {
-		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
-
-		
-		// load similar compatible files in parallel
-		logger.initProgress(getMainProgressGroup()+".getSourceModelingUnits", "Loading "+kpSources.size()+" sources...", LOG_MESSAGE_GROUP, 3);
-		ArrayList<TracedURL> ecoreURLs = new ArrayList<TracedURL>();
-		ArrayList<TracedURL> normalLoadURLs = new ArrayList<TracedURL>();
-	
-		ArrayList<TracedURL> umlProfilesURLs = new ArrayList<TracedURL>();
-		
-		for (TracedURL oneURL : kpSources) {
-			if (dirtyMU.get(oneURL) != null) {
-				modelingUnits.add(dirtyMU.get(oneURL));
-			} else {
-				if(oneURL.getUrl().getFile().endsWith(".ecore")){
-					ecoreURLs.add(oneURL);
-				}
-				else if (oneURL.getUrl().getFile().endsWith(".profile.uml")){
-					umlProfilesURLs.add(oneURL);
-				}
-				else{
-					normalLoadURLs.add(oneURL);
-				}
-			}
-		}
-		
-		
-		// launch uml profile threads
-		ArrayList<Future<Collection<ModelingUnit>>> umlprofileFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
-		for (TracedURL umlprofileURL : umlProfilesURLs) {
-			umlprofileFutures.add(singleThreadExector.submit(new CallableModelingUnitLoader(umlprofileURL, this, kp, projectName)));
-		}
-		// join
-		for(Future<Collection<ModelingUnit>> future : umlprofileFutures){
-			try {
-				Collection<ModelingUnit> mus = future.get();
-				//ModelingUnit mu = future.get();
-				//if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread
-				if (mus!=null) {
-					for (ModelingUnit mu : mus) {
-						modelingUnits.add(mu);
-					}
-				}
-			} catch (InterruptedException e) {
-				logger.error("Load of an UML Profile interrupted", LOG_MESSAGE_GROUP, e);
-			} catch (ExecutionException e) {
-				logger.error("Load of an UML Profile failed "+ e, LOG_MESSAGE_GROUP, e);
-			}
-		}
-		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+umlProfilesURLs.size()+" UML profile loaded.", LOG_MESSAGE_GROUP, 1);
-
-				
-		
-		// launch ecore threads
-		ArrayList<Future<Collection<ModelingUnit>>> ecoreFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
-		for(TracedURL ecoreURL : ecoreURLs){
-			// TODO EMF isn't thread safe, cannot even run the same transfo in parallel ! => singleThreadExecutor
-			ecoreFutures.add(singleThreadExector.submit(new CallableModelingUnitLoader(ecoreURL, this, kp, projectName)));
-		}
-		// join
-		for(Future<Collection<ModelingUnit>> future : ecoreFutures){
-			try {
-				Collection<ModelingUnit> mus = future.get();
-				if (mus!=null) {
-					for (ModelingUnit mu : mus) {
-						modelingUnits.add(mu);
-					}
-				}
-				/*ModelingUnit mu = future.get();
-				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread*/
-			} catch (InterruptedException e) {
-				logger.error("Load of an Ecore ModelingUnit interrupted", LOG_MESSAGE_GROUP, e);
-			} catch (ExecutionException e) {
-				logger.error("Load of a ModelingUnit failed "+ e, LOG_MESSAGE_GROUP, e);
-			}
-		}
-		logger.progress(getMainProgressGroup()+".getSourceModelingUnits", "All "+ecoreURLs.size()+" ecore loaded", LOG_MESSAGE_GROUP, 1);
-		
-		
-		// prepare the factory to be directly the one that will use our result (will save a few ms)
-		if (runInEclipse) {
-			new KmBinaryMergerImpl4Eclipse();
-		} else {
-			new KmBinaryMergerImpl();
-		}
-		// launch normalLoad threads
-		ArrayList<Future<Collection<ModelingUnit>>> normalLoadFutures = new ArrayList<Future<Collection<ModelingUnit>>>();
-		for(TracedURL normalLoadURL : normalLoadURLs){
-			normalLoadFutures.add(threadExector.submit(new CallableModelingUnitLoader(normalLoadURL, this, kp, projectName)));
-		}
-		// join
-		for(Future<Collection<ModelingUnit>> future : normalLoadFutures){
-			try {
-				Collection<ModelingUnit> mus = future.get();
-				if (mus!=null) {
-					for (ModelingUnit mu : mus) {
-						modelingUnits.add(mu);
-					}
-				}
-				/*ModelingUnit mu = future.get();
-				if(mu!= null) modelingUnits.add(mu); // no need to log, this has been already done by the thread*/
-			} catch (InterruptedException e) {
-				logger.error("Load of a ModelingUnit interrupted", LOG_MESSAGE_GROUP, e);
-			} catch (ExecutionException e) {
-				logger.error("Load of a ModelingUnit failed "+ e, LOG_MESSAGE_GROUP, e);
-			}
-		}
-		logger.doneProgress(getMainProgressGroup()+".getSourceModelingUnits", "All "+kpSources.size()+" sources loaded.", LOG_MESSAGE_GROUP);
-
-		
-		
-		return modelingUnits;
-	}
 
 	/**
 	 * return a list of available jar on the file system corresponding to the kp dependencies
@@ -851,14 +734,6 @@ public class KermetaCompiler {
 	}
 	
 	
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
-		ArrayList<TracedURL> kpSources = getSources(kp,kpFileURL, varExpander);
-		return getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
-	}
-
-	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander) throws IOException {
-		return getSourceModelingUnits(kp, kpFileURL, varExpander, new HashMap<URL, ModelingUnit>());
-	}
 
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(KermetaProject kp, List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
@@ -908,7 +783,7 @@ public class KermetaCompiler {
 		return mergedMU;
 	}
 
-	public ModelingUnit resolveModelingUnit(ModelingUnit mu, String kpFileURL) throws IOException {
+	public ModelingUnit resolveModelingUnit(ModelingUnit mu, String kpFileURL, boolean isPreResolve) throws IOException {
 		KmResolver theResolver;
 
 		if (runInEclipse) {
@@ -917,44 +792,54 @@ public class KermetaCompiler {
 			theResolver = new KmResolverImpl(logger);
 		}
 
-		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeResolving.km", logger).convert(mu);
+		String nameAddition = isPreResolve ? "Preresolve" : "";
+		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Resolving.km", logger).convert(mu);
 
 		// Resolving
 		ErrorProneResult<ModelingUnit> resolvedMU = theResolver.doResolving(convertedModelingUnit);
 
-		// Did errors occur during the resolving ?
-		if (resolvedMU.getProblems().size() > 0) {
-			errorHandlingHelper.processErrors(resolvedMU, FileHelpers.StringToURL(kpFileURL));
-			if (stopOnError) {
-				logger.error("Errors have occured during resolving, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
-				this.hasFailed = true; // message for the caller of the compiler
-				this.errorMessage = "Errors have occured during resolving";
-				if(saveIntermediateFiles)
-					new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km", logger).convert(resolvedMU.getResult());
-				return null;
-			}
-		}
-
-		if (resolvedMU.getResult() != null) {
-			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km", logger).convert(resolvedMU.getResult());
-
-			// StaticSetting
-			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
-
+		if(! isPreResolve){
 			// Did errors occur during the resolving ?
-			if (staticsettedMU.getProblems().size() > 0) {
-				errorHandlingHelper.processErrors(staticsettedMU, FileHelpers.StringToURL(kpFileURL));
+			if (resolvedMU.getProblems().size() > 0) {
+				errorHandlingHelper.processErrors(resolvedMU, FileHelpers.StringToURL(kpFileURL));
 				if (stopOnError) {
-					logger.error("Errors have occured during static setting, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
+					logger.error("Errors have occured during resolving, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
 					this.hasFailed = true; // message for the caller of the compiler
-					this.errorMessage = "Errors have occured during static setting";
+					this.errorMessage = "Errors have occured during resolving";
 					if(saveIntermediateFiles)
-						new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforebeforeCheckingforScopeRESOLVED.km", logger).convert(staticsettedMU.getResult());
-					
+						new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeSetting.km", logger).convert(resolvedMU.getResult());
 					return null;
 				}
 			}
+		}
+		else{
+			// TODO can probably go further that just the resolve and also prepare the setter too.
+			// currently cannot prepare more than that because if we apply the Setter, 
+			// then a new run on the resolver will fail because it will forget to update the use of the types it will resolve now
+			//  
+			return resolvedMU.getResult();
+		}
 
+		if (resolvedMU.getResult() != null) {
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Setting.km", logger).convert(resolvedMU.getResult());
+
+			// StaticSetting
+			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
+			if(! isPreResolve){
+				// Did errors occur during the resolving ?
+				if (staticsettedMU.getProblems().size() > 0) {
+					errorHandlingHelper.processErrors(staticsettedMU, FileHelpers.StringToURL(kpFileURL));
+					if (stopOnError) {
+						logger.error("Errors have occured during static setting, stop compilation process", LOG_MESSAGE_GROUP, new Throwable());
+						this.hasFailed = true; // message for the caller of the compiler
+						this.errorMessage = "Errors have occured during static setting";
+						if(saveIntermediateFiles)
+							new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/beforeCheckingforScopeRESOLVED.km", logger).convert(staticsettedMU.getResult());
+						
+						return null;
+					}
+				}
+			}
 			// End of Resolving
 			return staticsettedMU.getResult();
 		}
@@ -1204,5 +1089,74 @@ public class KermetaCompiler {
 		return 8;
 	}
 	
+	
+	protected boolean isPreresolveUpToDate(ArrayList<TracedURL> kpPreResolveSources, String preResolveCacheUrl, String preResolveSrcListUrl){
+		try {
+			File preResolveSrcListfile = new java.io.File(FileHelpers.StringToURI(preResolveSrcListUrl));
+			File preResolveCachefile = new java.io.File(FileHelpers.StringToURI(preResolveCacheUrl));
+			if(preResolveSrcListfile.exists() && preResolveCachefile.exists()){
+				String olderOutFile;
+				if(preResolveSrcListfile.lastModified()<preResolveCachefile.lastModified()){
+					olderOutFile=preResolveSrcListUrl;					
+				}
+				else{
+					olderOutFile=preResolveCacheUrl;	
+				}
+				ModelingUnitCacheHelper cacheHelper = new ModelingUnitCacheHelper(logger);
+				ArrayList<String> inputfilesUrls = readPreviousPreResolveSrcList(preResolveSrcListUrl);
+				// if this list is the same as the previous one
+				if(inputfilesUrls.size() != kpPreResolveSources.size()){
+					return false;
+				}
+				for(TracedURL tracedUrl: kpPreResolveSources){
+					if(!inputfilesUrls.contains(tracedUrl.getUrl().toString())){
+						logger.debug("cannot reuse preresolved due to unmatched source for "+tracedUrl.getUrl(), LOG_MESSAGE_GROUP);
+						return false;
+					}
+				}
+				// check that non of the input file is newer
+				return cacheHelper.isCacheUpTodate(inputfilesUrls, olderOutFile);
+			}
+			return false;
+		} 
+		catch(Exception e){
+			return false;
+		}
+	}
+	
+	protected void savePreResolveSrcList(String preResolveSrcListUrl, ArrayList<TracedURL> kpPreResolveSources)  {
+		
+		try {
+			File f = new java.io.File(FileHelpers.StringToURI(preResolveSrcListUrl));
+			FileWriter fstream = new FileWriter(f);
+			BufferedWriter out = new BufferedWriter(fstream);
+			for(TracedURL tracedURL : kpPreResolveSources){
+				out.write(tracedURL.getUrl().toString()+"\n");
+			}
+			//Close the output stream
+			out.close();			
+		} catch (Exception e) {
+			logger.error("cannot save "+preResolveSrcListUrl, LOG_MESSAGE_GROUP, e);
+		}
+	}
+	protected ArrayList<String> readPreviousPreResolveSrcList(String preResolveSrcListUrl)  {
+		ArrayList<String> result = new ArrayList<String>();
+		try {
+			File f = new java.io.File(FileHelpers.StringToURI(preResolveSrcListUrl));
+			Scanner scanner = new Scanner(new FileInputStream(f));
+		    try {
+		      while (scanner.hasNextLine()){
+		    	  result.add(scanner.nextLine());
+		      }
+		    }
+		    finally{
+		      scanner.close();
+		    }	
+
+		} catch (Exception e) {
+			logger.error("cannot read "+preResolveSrcListUrl, LOG_MESSAGE_GROUP, e);
+		}
+	    return result;
+	}
 	
 }
