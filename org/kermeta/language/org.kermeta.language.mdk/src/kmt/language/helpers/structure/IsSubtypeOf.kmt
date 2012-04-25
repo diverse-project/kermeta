@@ -672,7 +672,7 @@ aspect class ObjectTypeVariable {
 			then
 				result:=true
 			else
-				if (self.supertype.isSubTypeOf(expectedType))
+				if (self.supertype.isVoid.~not.andThen{ x | (self.supertype.isSubTypeOf(expectedType)) })
 				then
 					result:=true
 				else
