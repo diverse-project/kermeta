@@ -169,7 +169,9 @@ public class KPBuilder {
 	private HashMap<URL,ModelingUnit> getDirtyFiles() {
 		HashMap<URL,ModelingUnit> dirtyFiles = new HashMap<URL,ModelingUnit>();
 		for (KPFilesContainer aKPFilesContainer : this.kpFiles.values()) {
-			dirtyFiles.put(aKPFilesContainer.filePath, aKPFilesContainer.modelingUnit);
+			if(aKPFilesContainer.dirtyFile && aKPFilesContainer.modelingUnit != null){
+				dirtyFiles.put(aKPFilesContainer.filePath, aKPFilesContainer.modelingUnit);
+			}
 		}
 		
 		return dirtyFiles;
