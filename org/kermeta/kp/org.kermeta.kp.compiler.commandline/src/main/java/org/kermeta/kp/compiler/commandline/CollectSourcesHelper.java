@@ -32,8 +32,14 @@ public class CollectSourcesHelper {
 		this.compiler = compiler;
 	}
 	
-	public TracedURL getLastModifiedFile(ArrayList<TracedURL> sourcesUrls){
-		
+	/**
+	 * If dirtyMU isn't empty, then return null
+	 * else, return the last modified file
+	 */
+	public TracedURL getLastModifiedFile(ArrayList<TracedURL> sourcesUrls, HashMap<URL, ModelingUnit> dirtyMU){
+		if (dirtyMU != null && !dirtyMU.isEmpty()) {
+			return null;
+		}
 		TracedURL result = null;
 		long newerDate = 0;
 		
@@ -61,14 +67,28 @@ public class CollectSourcesHelper {
 		}
 		return result;
 	}
-	public ArrayList<TracedURL> getAllButLastModifiedFile(ArrayList<TracedURL> sourcesUrls){
+	
+	/**
+	 * If dirtyMU isn't empty, then return all urls except those that are dirty (ie. being modified)
+	 * else, return the all but the last modified file
+	 */
+	public ArrayList<TracedURL> getAllButLastModifiedFile(ArrayList<TracedURL> sourcesUrls, HashMap<URL, ModelingUnit> dirtyMU){
 		
 		ArrayList<TracedURL> result = new ArrayList<TracedURL>();
-		TracedURL lastModified = getLastModifiedFile(sourcesUrls);
-		
-		for(TracedURL sourceUrl : sourcesUrls){
-			if(!sourceUrl.getUrl().equals(lastModified.getUrl())){
-				result.add(sourceUrl);
+		if (dirtyMU != null && !dirtyMU.isEmpty()) {
+			for(TracedURL sourceUrl : sourcesUrls){
+				if(!dirtyMU.containsKey(sourceUrl.getUrl())){
+					result.add(sourceUrl);
+				}
+			}
+		}
+		else{
+			TracedURL lastModified = getLastModifiedFile(sourcesUrls, dirtyMU);
+			
+			for(TracedURL sourceUrl : sourcesUrls){
+				if(!sourceUrl.getUrl().equals(lastModified.getUrl())){
+					result.add(sourceUrl);
+				}
 			}
 		}
 		return result;

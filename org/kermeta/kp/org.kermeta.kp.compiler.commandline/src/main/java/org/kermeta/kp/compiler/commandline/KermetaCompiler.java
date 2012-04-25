@@ -351,8 +351,15 @@ public class KermetaCompiler {
 			logger.debug("Preparing preresolve : "+targetIntermediateFolder+"/preresolve/preresolved.km",LOG_MESSAGE_GROUP);
 			String preResolveCacheUrl = URI.createFileURI(targetIntermediateFolder+"/preresolve/preresolved.km").toString();
 			String preResolveSrcListUrl = URI.createFileURI(targetIntermediateFolder+"/preresolve/srcList.txt").toString();
-			ArrayList<TracedURL> kpPreResolveSources = collectSourceHelper.getAllButLastModifiedFile(kpSources);
-			logger.info("Preresolve all but : "+collectSourceHelper.getLastModifiedFile(kpSources).getUrl(),LOG_MESSAGE_GROUP);
+			if(dirtyMU != null){
+				logger.info("dirty mode  "+dirtyMU.size()+" dirty modeling units (ie. unit being modified by the user)", LOG_MESSAGE_GROUP);
+				for(URL u : dirtyMU.keySet()){
+					logger.devInfo("   dirty file "+u, LOG_MESSAGE_GROUP);
+				}
+			}
+			
+			ArrayList<TracedURL> kpPreResolveSources = collectSourceHelper.getAllButLastModifiedFile(kpSources,dirtyMU);
+			logger.info("Preresolve all but : "+collectSourceHelper.getLastModifiedFile(kpSources,dirtyMU).getUrl(),LOG_MESSAGE_GROUP);
 			ModelingUnit preResolvedUnit = null;
 			if( isPreresolveUpToDate(kpPreResolveSources, preResolveCacheUrl, preResolveSrcListUrl)){
 				logger.info("Reusing  : "+preResolveCacheUrl,LOG_MESSAGE_GROUP);
@@ -410,7 +417,10 @@ public class KermetaCompiler {
 			
 			// deal with the remaining merge an resolve
 			ArrayList<TracedURL> remainingSources = new ArrayList<TracedURL>();
-			remainingSources.add(collectSourceHelper.getLastModifiedFile(kpSources));
+			TracedURL lastModifiedFileTracedUrl = collectSourceHelper.getLastModifiedFile(kpSources, dirtyMU);
+			if(lastModifiedFileTracedUrl!= null){
+				remainingSources.add(collectSourceHelper.getLastModifiedFile(kpSources, dirtyMU));
+			}
 			
 			flushProblems(remainingSources);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+remainingSources.size()+" remaining sources...", LOG_MESSAGE_GROUP, 1);
@@ -438,6 +448,14 @@ public class KermetaCompiler {
 			if(preResolvedUnit!= null){
 				modelingUnits.add(preResolvedUnit);
 			}
+			if(dirtyMU != null && ! dirtyMU.isEmpty()){
+				logger.info("adding  "+dirtyMU.size()+" dirty modeling units (ie. unit being modified by the user)", LOG_MESSAGE_GROUP);
+				for(URL u : dirtyMU.keySet()){
+					logger.devInfo("   dirty file "+u, LOG_MESSAGE_GROUP);
+				}
+				modelingUnits.addAll(dirtyMU.values());
+			}
+			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
 	
