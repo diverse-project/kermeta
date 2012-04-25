@@ -44,83 +44,179 @@ aspect class Type {
 			
 	end
 	
-	operation isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+	operation isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
 		result:=true
 	end
+	
+	/*
+	operation resolveBindings(typeVariablesToSet : Hashtable<TypeVariable, Type>) : Type is do
+		result:=self
+	end
+	*/
+	
+	operation cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
+		result:=self
+	end
+	
 }
+
+// 1. Pour tout les self, si expectedType = Object, alors true.
+
+
 
 aspect class FunctionType
 {
-	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
 
-		// ( <A->C> inherits <B->D> ) <=> ( ( C inherits D ) and ( B inherits A )
-
-		//stdio.writeln("------------------------------\nisSubTypeOf for a FunctionType")
+	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
+	
+		stdio.writeln("cloneWithBindings for FunctionType ...")
 		
-		//var hash : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
-		result:=true
+		var clone : FunctionType init FunctionType.new
+		clone.right:=self.right.cloneWithBindings(bindings)
+		
+		if not(self.left.isVoid)
+		then
+			stdio.writeln(" left not void...")
+			clone.left:=self.left.cloneWithBindings(bindings)
+		end
+		result:=clone
+	end
 
-		if (expectedType.isInstanceOf(FunctionType))
-		then // else false
-			// First, compare return types
-			// C->D
-			//stdio.writeln("-expectedType is a FunctionType -> OK")
-			var expectedFunctionType : FunctionType init expectedType.asType(FunctionType)
-			
-			result:=self.right.isSubTypeOf(expectedFunctionType.right,typeVariableToSet)
-			
-			// Then compare left 
-			if (result)
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
+
+		/*
+		1. si exp=Object -> OK
+		2. enum -> false
+		3. exp=PrimitiveType, depend de instanceType
+		4. exp=functionType, voir dessous
+		5. exp=ObjectTypeVariable, même raisonnement que pour Class (recup des bindings etc...)
+		6. exp=ProductType, si ProductType.type.size==1 et puis la suite
+		7. Faux pour les autres Enumeration, ModelType, VirtualType(?)
+		*/
+		
+		stdio.writeln("isSubtypeOf for FunctionType ...")
+		
+		result:=false
+		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+		then
+			result:=true
+		else
+			if (expectedType.isInstanceOf(PrimitiveType))
 			then
-				if (self.left.isVoid)
+				if (not(expectedType.asType(PrimitiveType).instanceType.isVoid))
 				then
-					//stdio.writeln("self.left.isVoid")
-					//expectedType.left must be void
-					if not(expectedFunctionType.left.isVoid)
-					then // else it is ok, since return types are ok
-						// expectedFunctionType.left might be an empty ProductType
-						if (expectedFunctionType.left.isInstanceOf(ProductType))
+					result:= self.isSubTypeOf(expectedType.asType(PrimitiveType).instanceType/*, typeVariableToSet*/)
+				end
+			else
+				if (expectedType.isInstanceOf(FunctionType))
+				then
+					stdio.writeln("expectedType is a FunctionType ...")
+					//( <A->C> inherits <B->D> ) <=> ( ( C inherits D ) and ( B inherits A )
+					var expectedFunctionType : FunctionType init expectedType.asType(FunctionType)
+					// First, compare return types C->D
+					result:= self.right.isSubTypeOf(expectedFunctionType.right/*, typeVariableToSet*/)
+					stdio.writeln("rights result : " + result.toString)
+					if (result)
+					then
+						stdio.writeln("self.left  : " + self.left.toString)
+						stdio.writeln("expe.left  : " + expectedFunctionType.left.toString)
+						
+						// If true, compare B->A
+						if (self.left.isVoid)
 						then
-							//in this case it mustn't contain any type
-							result :=  (expectedFunctionType.left.asType(ProductType).type.size==0)
+							stdio.writeln("self.left is void")
+						
+							// expected.left must be either void or an empty ProductType
+							if not(expectedFunctionType.left.isVoid)
+							then // else it is ok, since return types are ok
+								stdio.writeln("expe.left is not void")
+								if (expectedFunctionType.left.isInstanceOf(ProductType))
+								then
+									stdio.writeln("expe.left is a ProductType")
+									//in this case it mustn't contain any type
+									result :=  (expectedFunctionType.left.asType(ProductType).type.size==0)
+								else
+									stdio.writeln("expe.left is not a ProductType")
+									result:=false
+								end
+							end
 						else
-							result:=false
+							stdio.writeln("self.left is not void")
+							// Now, expected.left might be void
+							if (expectedFunctionType.isVoid)
+							then
+								stdio.writeln("expe.left is void")
+								// self.left must be an empty ProductType
+								if (self.left.isInstanceOf(ProductType))
+								then
+									//in this case it mustn't contain any type
+									result:= (self.left.asType(ProductType).type.size==0)
+								else
+									result:=false
+								end
+							else
+								stdio.writeln("expe.left is not void")
+								// Now, both ProductTypes are not empty, compare them
+								// We must compare them 
+								result:=expectedFunctionType.left.isSubTypeOf(self.left)
+							end 
 						end
 					end
 				else
-					// expectedType.left must be a subtype of self.left
-					//stdio.writeln("self.left.is not Void")
-					//stdio.writeln("expectedType.left:"+expectedFunctionType.left.toString)
-					result:= expectedFunctionType.left.isSubTypeOf(self.left, typeVariableToSet) 
+					if (expectedType.isInstanceOf(ObjectTypeVariable))
+					then
+					end
 				end
 			end
-		else
-			if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
-			then
-				result:=true
-			else		
-				result:=false
-			end
 		end
-		
+
+		stdio.writeln("isSubtypeOf for FunctionType result : " + result.toString)		
 	end
+	
+	/*
+	method resolveBindings(typeVariablesToSet : Hashtable<TypeVariable, Type>) : Type is do
+		//result:=self
+		if not(self.left.isVoid)
+		then
+			self.left.resolveBindings(typeVariablesToSet)
+		end
+		self.right.resolveBindings(typeVariablesToSet)
+		result:=self
+	end
+	*/
 }
 
 aspect class ProductType {
 	
-	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
+	
+		stdio.writeln("cloneWithBindings for ProductType ...")
+		var clone : ProductType init ProductType.new
+		self.type.each{ t |
+			stdio.writeln(" type:"+t.toString)
+			clone.type.add(t.cloneWithBindings(bindings))
+		}
+		result:=clone
+		stdio.writeln("cloneWithBindings for ProductType sortie")
+		
+	end
+	
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
 		//result:=false
 		
-		//stdio.writeln(" - isSubTypeOf for productType")
-		//stdio.writeln("  --> self     : " + self.toString)
-		//stdio.writeln("  --> expected : " + expectedType.toString)
+		/*
+		//@TODO : Ne pas faire d'aspect sur ProductType, tout traiter dans FunctionType
+		1. si un seul, lancer isSubType dessus.
+		2. si <> 1 : expected ne peut être qu'un productType 
 		
-		
+		*/
+		stdio.writeln(" isSubTypeOf for productType ...")
+			
 		if(expectedType.isInstanceOf(ProductType))
 		then
 			// No problem, just compare the types inside both ProductTypes
 			// Check the cardinalities...
-			//stdio.writeln("    expected is a productType -> OK")
+			stdio.writeln("    expected is a productType -> OK")
 			var expectedProductType : ProductType init expectedType.asType(ProductType)
 			//stdio.writeln("     card self      : " + self.type.size.toString())
 			//stdio.writeln("     card expected  : " + expectedProductType.type.size.toString)
@@ -136,7 +232,7 @@ aspect class ProductType {
 					//stdio.writeln("      i="+i.toString+", bool=" + bool.toString)
 					//stdio.writeln("       self.at(i) : " + self.type.elementAt(i).toString)
 					//stdio.writeln("       expe.at(i) : " + expectedProductType.type.elementAt(i).toString)
-					bool := ( bool and self.type.elementAt(i).isSubTypeOf(expectedProductType.type.elementAt(i),typeVariableToSet) )
+					bool := ( bool and self.type.elementAt(i).isSubTypeOf(expectedProductType.type.elementAt(i)/*,typeVariableToSet*/) )
     				i := i + 1
 				end
 				result:=bool
@@ -149,11 +245,11 @@ aspect class ProductType {
 				// Special checks in case self with a ProductType with 0 or 1 types inside
 				if (self.type.size == 0)
 				then
-					result:=expectedType.isVoid
+					result:=expectedType.getQualifiedName.equals("kermeta::standard::Void")
 				else
 					if (self.type.size == 1)
 					then
-						result:= self.type.elementAt(0).isSubTypeOf(expectedType, typeVariableToSet)
+						result:= self.type.elementAt(0).isSubTypeOf(expectedType/*, typeVariableToSet*/)
 					else
 						result:=false
 					end
@@ -162,24 +258,85 @@ aspect class ProductType {
 			end 
 		end	
 	end
+	
+/*	method resolveBindings(typeVariablesToSet : Hashtable<TypeVariable, Type>) : Type is do
+		//result:=self
+		self.type.each{type |
+			type:=type.resolveBindings(typeVariablesToSet)
+		}
+		result:=self
+	end
+	*/
 }
 
 aspect class Enumeration
 {
+/*
+	method resolveBindings(typeVariablesToSet : Hashtable<TypeVariable, Type>) : Type is do
+		result:=self
+	end
+*/
 
-	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
 		
-		//stdio.writeln("isSubTypeOf for a Enumeration")
 		result:=false
-		if (expectedType.isInstanceOf(Enumeration))
+		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
 		then
-			result:=(self.equals(expectedType))
+			result:=true
 		else
-			if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+			if (expectedType.isInstanceOf(Enumeration))
 			then
-				result:=true
+				result:=self.equals(expectedType)
+			else
+				if (expectedType.isInstanceOf(PrimitiveType))
+				then
+					if (expectedType.asType(PrimitiveType).instanceType.isVoid)
+					then
+						result:=false
+					else
+						result:=self.isSubTypeOf(expectedType.asType(PrimitiveType).instanceType/*, typeVariableToSet*/)
+					end
+				else
+					if (expectedType.isInstanceOf(ObjectTypeVariable))
+					then
+						// If expectedType is an ObjectTypeVariable, use the bindings HashTable to retrieve
+						// the correct Type.
+						var reallyExpectedType : Type //init typeVariableToSet.getValue(expectedType.asType(ObjectTypeVariable))
+						if (reallyExpectedType.isVoid)
+						then
+							// It is unlikely to reach this point.
+							// Just in case, result:=false
+							result:=false
+						else
+							// Si le binding est égal à l'original, alors il faut retourner false
+							//  ( if reallyExpectedType==expectedType ) ...
+							if ( reallyExpectedType.equals(expectedType))
+							then
+								result:=false
+							else
+								//@TODO ...
+								// There might be a problem there if there is a cycle in the bindings
+								result:=self.isSubTypeOf(reallyExpectedType/*,typeVariableToSet*/)
+							end
+						end
+					else
+						// Other cases are false
+						// ProductType can be compared only within
+						// FunctionType comparisons
+						result:=false
+					end
+				end
 			end
 		end
+		
+		/*
+		1. si expe=Object -> OK
+		2. si exp=Enumeration, then self==exp
+		3. si exp=PrimitiveType, then self==exp.instanceType
+		4. si exp=ObjectTypeVariable, same as Class
+		5. si exp=ProductType, same as Class
+		6. False if expectedType is FunctionType, ModelType and VirtualType(?)
+		*/
 		
 	end
 }
@@ -187,6 +344,49 @@ aspect class Enumeration
 aspect class Class
 {
 
+	operation getAllTypeVariableBindings() : Sequence<TypeVariableBinding> is do
+		result := Sequence<TypeVariableBinding>.new
+		
+		result.addAll(typeParamBinding)
+		
+		var localBindings : Hashtable<TypeVariable,Type> init Hashtable<TypeVariable,Type>.new
+		
+		result.each{ b|
+			localBindings.put(b.variable, b.type)	
+		}
+		
+		//get All the inherited bindings
+		var inheritedBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new
+		typeDefinition.superType.each{ c|
+			if c.isInstanceOf(Class) then
+				if c.asType(Class).typeDefinition !=typeDefinition then
+					inheritedBindings.addAll(c.asType(Class).getAllTypeVariableBindings())	
+				end
+			end
+		}
+		
+		//replace the variables in inherited Bindings according to local bindings
+		inheritedBindings.each{ b |
+			if b.type.isInstanceOf(TypeVariable) then
+				if localBindings.containsKey(b.type.asType(TypeVariable)) then
+					var tvb : TypeVariableBinding init TypeVariableBinding.new
+					tvb.variable:=b.variable
+					tvb.type:=localBindings.getValue(b.type.asType(TypeVariable))
+					result.add(tvb)
+				end
+			else
+				//if the variable is binded with a formal type, then add it directly to the bindings
+				var tvb : TypeVariableBinding init TypeVariableBinding.new
+				tvb.variable:=b.variable
+				tvb.type:=b.type
+				result.add(tvb)
+			end
+		}
+		/* stdio.writeln("Bindings for Class")
+		result.each{b |		
+			stdio.writeln("["+b.variable.prettyPrint + ", "+b.type.prettyPrint +"]")
+		}*/
+	end
 
 	/**
 	 *	returns the sequence of typedefinition separing self to typeToSearch in the Type hierarchy
@@ -196,7 +396,7 @@ aspect class Class
 		typeDefAlreadyVisited.add(self.typeDefinition.asType(ClassDefinition))
 		
 		if ( typeToSearch==self.typeDefinition.asType(ClassDefinition) )
-		then
+		then 
 			result:=Sequence<Class>.new
 			result.add(self)
 		else
@@ -219,16 +419,20 @@ aspect class Class
 	 * returns a clone of the current class but with the type of the different 
 	 * bindings replaced according to the parameter bindings
 	 */
-	operation cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Class is do
+	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
+	
+		stdio.writeln("cloneWithBindings for class : " + self.toString)
 	
 		result:= Class.new
-		result.typeDefinition:=self.typeDefinition
+		result.asType(Class).typeDefinition:=self.typeDefinition
+		
 		self.typeParamBinding.each{tvb|
 			var newTVB : TypeVariableBinding init TypeVariableBinding.new
 			newTVB.variable:=tvb.variable
 			if tvb.type.isInstanceOf(TypeVariable) then
 				var binding : TypeVariableBinding init bindings.detect{b|b.variable==tvb.type}
 				if binding.isVoid.~not then
+					stdio.writeln(" binding detected : " + binding.type.toString)
 					newTVB.type:=binding.type
 				end
 			else 
@@ -236,9 +440,9 @@ aspect class Class
 					newTVB.type:=tvb.type.asType(Class).cloneWithBindings(bindings)
 				end
 			end
-			result.typeParamBinding.add(newTVB)
+			result.asType(Class).typeParamBinding.add(newTVB)
 		}
-
+		stdio.writeln("cloneWithBindings result : " + result.toString)
 	end
 
 	/**
@@ -261,7 +465,7 @@ aspect class Class
 			until i == inheritancePath.size - 1
 			loop
 				var superSuperType : Class 
-				superSuperType:=inheritancePath.elementAt(i+1).cloneWithBindings(selfSuperType.typeParamBinding)
+				superSuperType:=inheritancePath.elementAt(i+1).cloneWithBindings(selfSuperType.typeParamBinding).asType(Class)
 				
 				selfSuperType:=superSuperType
 				i:=i+1
@@ -275,7 +479,10 @@ aspect class Class
 	end
 	
 	
-	method isSubTypeOf(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type>) : Boolean is do
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
+
+		stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.toString)
+		//TODO : rajouter le cas du expectedType=PrimitiveType
 		
 		// First of all, check if self is kermeta::standard::void 
 		if (self.getQualifiedName.equals("kermeta::standard::Void"))
@@ -286,7 +493,6 @@ aspect class Class
 			if ( expectedType.isInstanceOf(Class) ) 
 			then
 				
-				//stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.asType(Class).typeDefinition.name)
 					
 				//stdio.writeln("expectedType isInstanceOf Class")
 				var comparableClass : Class init self.getComparableClass(expectedType.asType(Class))
@@ -310,6 +516,7 @@ aspect class Class
 					then
 						result:=false
 					else
+						// TODO, lancer isSubTypeOf sur le contenu ...
 						if (expectedProductType.type.one.isInstanceOf(Class))
 						then
 							var comparableClass : Class init self.getComparableClass(expectedProductType.type.one.asType(Class))
@@ -329,41 +536,43 @@ aspect class Class
 					// the correct Type.
 					if (expectedType.isInstanceOf(ObjectTypeVariable))
 					then
-						//stdio.writeln(" isSubtypeOf : expectedType is an ObjectTypeVariable...")
-						var reallyExpectedType : Type init typeVariableToSet.getValue(expectedType.asType(ObjectTypeVariable))
+						stdio.writeln(" isSubtypeOf : expectedType is an ObjectTypeVariable : " +expectedType.asType(ObjectTypeVariable).name)
+						var reallyExpectedType : Type //init typeVariableToSet.getValue(expectedType.asType(ObjectTypeVariable))
 						//result:=
+						
 						if (reallyExpectedType.isVoid)
 						then
-							//result:=false
-							//One
-							//stdio.writeln("  -> no reallyExpectedType ... check the ObjectTypeVariable born")
+							// It is unlikely to reach this point.
+							// Just in case, result:=false
+							result:=false
+							/*
 							if (expectedType.asType(ObjectTypeVariable).supertype.isVoid)
 							then
 								//no borns, result=true
-								//stdio.writeln("    no born")
-								result:=true
+								stdio.writeln("    no born")
+								result:=false
 							else
-								//stdio.writeln("    born : " + expectedType.asType(ObjectTypeVariable).supertype.toString)
+								stdio.writeln("    born : " + expectedType.asType(ObjectTypeVariable).supertype.toString)
 								result:=self.isSubTypeOf(expectedType.asType(ObjectTypeVariable).supertype, typeVariableToSet)
 							end
+							*/
 						else
-							result:=self.isSubTypeOf(reallyExpectedType,typeVariableToSet)
+							// Si le binding est égal à l'original, alors il faut retourner false
+							//  ( if reallyExpectedType==expectedType ) ...
+							if ( reallyExpectedType.equals(expectedType))
+							then
+								result:=false
+							else
+								//@TODO ...
+								// There might be a problem there if there is a cycle in the bindings
+								result:=self.isSubTypeOf(reallyExpectedType/*,typeVariableToSet*/)
+							end
 						end
 					else
 						result:=false
 					end
 				end
 			end
-			
-			/*
-			stdio.writeln("isSubTypeOf result = " + result.toString)
-			stdio.writeln(" -> typeVariableToSet.size : " + typeVariableToSet.size.toString)
-			typeVariableToSet.keys.each{ k |
-				stdio.writeln("   - key : " + k.toString)
-				stdio.writeln("     val : " + typeVariableToSet.getValue(k).toString) 
-			}
-			*/
-		
 		end
 		//stdio.writeln(" -> result : " + result.toString)
 	end
@@ -397,7 +606,92 @@ aspect class Class
 							
 		end
 	end
-			
+
+}
+
+aspect class PrimitiveType {
+
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
+		
+		if (self.instanceType.isVoid)
+		then
+			result:=false
+		else
+			result:=self.instanceType.isSubTypeOf(expectedType/*, typeVariableToSet*/)
+		end
+		
+	end
 	
+	/*
+	method resolveBindings(typeVariableToSet : Hashtable<TypeVariable, Type>) : Type is do
+		if (self.instanceType.isVoid)
+		then
+			result:=self
+		else
+			result:=self.instanceType.resolveBindings(typeVariableToSet)
+		end
+	end
+	*/
+}
+
+aspect class VirtualType {
+
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
+		//@TODO pour Clement ;-)
+		result:=true
+	end
+}
+
+aspect class ModelType {
+
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
+		//@TODO pour Clement ;-)
+		result:=true
+	end
 	
+
+}
+
+
+aspect class ObjectTypeVariable {
+
+	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
+		
+		/*
+		1. si exp=Object -> OK
+		2. si pas borne (superType.isVoid)
+			- si exp=Class, alors il faut que exp==Object
+			- si exp=Enumeration
+		
+		*/
+		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+		then
+			result:=true
+		else
+			if (self.equals(expectedType))
+			then
+				result:=true
+			else
+				if (self.supertype.isSubTypeOf(expectedType))
+				then
+					result:=true
+				else
+					result:=false
+				end
+			end
+		end
+	end
+	
+	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
+		
+		stdio.writeln("cloneWithBindings for ObjectTypeVariable : " + self.name)
+		var tvb : TypeVariableBinding init bindings.detect{ x | x.variable.equals(self)}
+		if (tvb.isVoid)
+		then
+			result:=self
+		else
+			result:=tvb.type
+		end
+		stdio.writeln("cloneWithBindings for ObjectTypeVariable result : " + result.toString)
+	end	
 }
