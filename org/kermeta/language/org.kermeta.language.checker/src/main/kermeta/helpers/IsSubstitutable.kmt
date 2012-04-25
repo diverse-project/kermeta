@@ -43,9 +43,8 @@ aspect class Class {
 					tvb.type.isSubstitutable
 				else
 					//stdio.writeln("   there's a bound on variable : " + tvb.variable.supertype.toString )
-					var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
 					// Check that the binding's type is a subtype of the variable's bound
-					tvb.type.isSubTypeOf(tvb.variable.supertype, typeVariableToSet)
+					tvb.type.isSubTypeOf(tvb.variable.supertype)
 					and tvb.type.isSubstitutable
 				end
 			}
