@@ -1,0 +1,44 @@
+/* $Id:$ 
+ * Creation : December 29, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org::kermeta::language::structure
+
+package test {
+    class Main
+    {
+        operation main() : Void is do
+        	/*var b : B[String] init B[String].new
+        	b.foo(1)*/
+        end
+    }
+
+    class A[X] { // Ne pas effacer, doit repondre faux.
+    
+    	operation foo(f : <X->Void>) : Void is do end
+    
+    	operation bar(x : X) : Void is do
+    	
+    		var a : A[String] init A[String].new
+    		
+    		var g : <X->Void> 
+    		
+    		a.foo(g)
+    	end
+    }
+	
+
+	
+	
+	
+}
+
+
+
