@@ -38,7 +38,7 @@ class TypeCreationHelper
 		if (not(element.upper.isVoid))
 		then
 			currentModelingUnit:=element.getRootContainer.asType(ModelingUnit)
-		 	stdio.writeln("current ModelingUnit is " + currentModelingUnit.name)
+		 	//stdio.writeln("current ModelingUnit is " + currentModelingUnit.name)
 		 
 			// clone the type of the multiplicity element
 			var typeCopy : org::kermeta::language::structure::Type
