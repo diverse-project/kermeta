@@ -41,7 +41,7 @@ aspect class VariableDecl
 	end
 	
 	/**
-	 * Type mismatch. Value does not match the variable's type
+	 * Type mismatch. Init value does not match the variable's type
 	 */
 	@Scope "RESOLVED"
 	inv type_mismatch is do
@@ -60,26 +60,7 @@ aspect class VariableDecl
 			then
 				false
 			else
-				var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
-			
-				if (self.initialization.staticType.isKindOf(Class) and self.type.type.isKindOf(Class))
-				then
-					//var cl : Class init self.initialization.staticType.asType(Class).getComparableClass(self.type.type.asType(Class))
-					//stdio.writeln(" cl found : " + cl.toString)
-					self.initialization.staticType.isSubTypeOf(self.type.type, typeVariableToSet)
-				else
-					self.initialization.staticType.isSubTypeOf(self.type.type, typeVariableToSet)
-					/*
-					if (self.initialization.staticType.isKindOf(Enumeration))
-					then
-						stdio.writeln("Vardecl init is an Enumeration")
-						self.initialization.staticType.isSubTypeOf(self.type.type, typeVariableToSet)
-					else
-						if (self.initialization.staticType
-						false
-					end
-					*/
-				end
+				self.initialization.staticType.isSubTypeOf(self.type.type)
 			end
 		end 
 		

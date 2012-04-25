@@ -183,7 +183,7 @@ aspect class Operation
 
 				  				//stdio.writeln("   stringCollType : " + StringCollectionType.toString)
 				  				//res:=t.asType(ParameterizedType).typeEquals(StringCollectionType)
-				  				res:=t.isSubTypeOf(StringCollectionType, Hashtable<TypeVariable, Type>.new)
+				  				res:=t.isSubTypeOf(StringCollectionType/*, Hashtable<TypeVariable, Type>.new*/)
 				  				
 			  				end 
 							

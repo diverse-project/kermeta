@@ -147,8 +147,8 @@ aspect class CallOperation
 	inv callOperation_parameters_conformance is do 
 		
 		
-		/*stdio.writeln("Checking callOperation_parameters_conformance for " + self.name)
-		stdio.writeln(" self.parameters.size : " + self.parameters.size.toString)
+		stdio.writeln("Checking callOperation_parameters_conformance for " + self.name)
+		/*stdio.writeln(" self.parameters.size : " + self.parameters.size.toString)
 		stdio.writeln(" self.staticOperation.ownedParameter.size : " + self.staticOperation.ownedParameter.size.toString)
 		*/
 		if (self.parameters.size != self.staticOperation.ownedParameter.size)
@@ -159,20 +159,19 @@ aspect class CallOperation
 			var myresult : Boolean init true
 
 			// Retrieve all the operation's and owning class type parameters' bindings
-			var typesToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new			
+			var typesToSet : OrderedSet<TypeVariableBinding> init OrderedSet<TypeVariableBinding>.new			
 
 			//stdio.writeln(" operation's type parameters ? " + self.staticOperation.typeParameter.size.toString)
 			// Check wether the CallOperation's staticOperation has type parameters or not
 			from var i : Integer init 0
 			until i==self.staticOperation.typeParameter.size
 			loop
-				/*
+				
 				var tvb : TypeVariableBinding init TypeVariableBinding.new
 				tvb.variable:=self.staticOperation.typeParameter.at(i)
 				tvb.type:=self.staticTypeVariableBindings.at(i)
-				stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
-				*/
-				typesToSet.put(self.staticOperation.typeParameter.at(i), self.staticTypeVariableBindings.at(i))
+				//stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
+				typesToSet.add(tvb)
 				i:=i+1
 			end
 			
@@ -190,23 +189,29 @@ aspect class CallOperation
 			if (lTarget.staticType.isInstanceOf(Class))
 			then
 			
+				/*
 				var cd : ClassDefinition init lTarget.staticType.asType(Class).typeDefinition.asType(ClassDefinition)
 				//stdio.writeln(" owning class's type parameters ? " + cd.typeParameter.size.toString)
 				from var i : Integer init 0
 				until i == cd.typeParameter.size
 				loop
-					/*
+					
 					var tvb : TypeVariableBinding init TypeVariableBinding.new
-					tvb.variable := self.target.staticType.asType(Class).typeParamBinding.at(i).variable
-					tvb.type := self.target.staticType.asType(Class).typeParamBinding.at(i).type
-					stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
-					*/
-					typesToSet.put(lTarget.staticType.asType(Class).typeParamBinding.at(i).variable,
-								   lTarget.staticType.asType(Class).typeParamBinding.at(i).type)
+					tvb.variable := lTarget.staticType.asType(Class).typeParamBinding.at(i).variable
+					tvb.type := lTarget.staticType.asType(Class).typeParamBinding.at(i).type
+					//stdio.writeln("  - " + tvb.variable.name + " : " + tvb.type.toString)
+					
+					typesToSet.add(tvb)
 				
 					i:=i+1
-				end
+				end*/
+				typesToSet.addAll(lTarget.staticType.asType(Class).getAllTypeVariableBindings)
 			end
+			
+			stdio.writeln("All Type Variable bindings :")
+			typesToSet.each{tvb|
+				stdio.writeln(" - " + tvb.variable.name + " : " + tvb.type.toString)
+			}
 			
 			// Now for each parameter
 			//stdio.writeln(" operation parameters ? " + self.parameters.size.toString)
@@ -214,13 +219,12 @@ aspect class CallOperation
 			from var i : Integer init 0
 			until i == self.parameters.size
 			loop
-				/*
-				stdio.writeln(" - i=" + i.toString)
-				stdio.writeln("   self.parameters.staticType :" + self.parameters.at(i).staticType.toString)
-				stdio.writeln("   expected type              :" + self.staticOperation.ownedParameter.at(i).type.toString)
-				*/
 				
-				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(helper.createTypeFromMultiplicityElement(self.staticOperation.ownedParameter.at(i)), typesToSet) )							
+				stdio.writeln("--------")
+				stdio.writeln("calling isSubtypeOf on parameter : " + self.parameters.at(i).staticType.toString)
+				var expectedType : Type init helper.createTypeFromMultiplicityElement(self.staticOperation.ownedParameter.at(i))
+				stdio.writeln("                   expected type : " + expectedType.toString)
+				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(expectedType.cloneWithBindings(typesToSet)))							
 				i:=i+1
 							
 			end

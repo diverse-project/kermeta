@@ -74,8 +74,9 @@ aspect class Assignment
 			//stdio.writeln("Assignment type_mismatch check")
 			if ((not(self.isCast.isVoid)).andThen{b| not(self.isCast)})
 			then
-				var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
-				self.~value.staticType.isSubTypeOf(self.target.staticType,typeVariableToSet)
+				//TODO: Must retrieve all bindings on self.target and call
+				//cloneWithBindings on it before calling isSubTypeOf
+				self.~value.staticType.isSubTypeOf(self.target.staticType)
 			else
 				true
 			end
