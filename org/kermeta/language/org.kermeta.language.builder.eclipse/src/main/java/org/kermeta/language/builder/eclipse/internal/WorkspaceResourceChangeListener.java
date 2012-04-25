@@ -167,7 +167,10 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 									if (builder != null) {
 										try {
 											builder.refreshFileIndex();
-											builder.compile(monitor);
+											boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
+											if(mustBuild){
+												builder.compile(monitor);
+											}
 										} catch (IOException e) {
 											Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for " + resource.getFullPath(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
 										}
