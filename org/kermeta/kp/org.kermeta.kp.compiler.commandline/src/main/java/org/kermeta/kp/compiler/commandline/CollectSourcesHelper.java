@@ -55,11 +55,13 @@ public class CollectSourcesHelper {
 				else{
 					fileUri = sourceUrl.getUrl().toURI();
 				}
-				File file = new java.io.File(fileUri);
-				if(newerDate < file.lastModified()){
-					newerDate =  file.lastModified();
-					result = sourceUrl;
-				} 
+				if(!fileUri.toString().contains("language.library.core.km")){
+					File file = new java.io.File(fileUri);
+					if(newerDate < file.lastModified()){
+						newerDate =  file.lastModified();
+						result = sourceUrl;
+					} 
+				}
 			} catch (Exception e) {
 				logger.warn("cannot get lastModified of "+sourceUrl.getUrl(), getMessageGroup());
 			}
