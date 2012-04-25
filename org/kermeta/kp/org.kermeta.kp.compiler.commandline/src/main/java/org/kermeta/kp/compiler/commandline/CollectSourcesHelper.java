@@ -2,7 +2,6 @@ package org.kermeta.kp.compiler.commandline;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,9 +36,9 @@ public class CollectSourcesHelper {
 	 * else, return the last modified file
 	 */
 	public TracedURL getLastModifiedFile(ArrayList<TracedURL> sourcesUrls, HashMap<URL, ModelingUnit> dirtyMU){
-		/*if (dirtyMU != null && !dirtyMU.isEmpty()) {
+		if (dirtyMU != null && !dirtyMU.isEmpty()) {
 			return null;
-		}*/
+		}
 		TracedURL result = null;
 		long newerDate = 0;
 		
@@ -55,7 +54,7 @@ public class CollectSourcesHelper {
 				else{
 					fileUri = sourceUrl.getUrl().toURI();
 				}
-				if(!fileUri.toString().contains("language.library.core.km")){
+				if(!fileUri.toString().endsWith("language.library.core.km")){
 					File file = new java.io.File(fileUri);
 					if(newerDate < file.lastModified()){
 						newerDate =  file.lastModified();
@@ -77,14 +76,14 @@ public class CollectSourcesHelper {
 	public ArrayList<TracedURL> getAllButLastModifiedFile(ArrayList<TracedURL> sourcesUrls, HashMap<URL, ModelingUnit> dirtyMU){
 		
 		ArrayList<TracedURL> result = new ArrayList<TracedURL>();
-		/*if (dirtyMU != null && !dirtyMU.isEmpty()) {
+		if (dirtyMU != null && !dirtyMU.isEmpty()) {
 			for(TracedURL sourceUrl : sourcesUrls){
 				if(!dirtyMU.containsKey(sourceUrl.getUrl())){
 					result.add(sourceUrl);
 				}
 			}
 		}
-		else{*/
+		else{
 			TracedURL lastModified = getLastModifiedFile(sourcesUrls, dirtyMU);
 			
 			for(TracedURL sourceUrl : sourcesUrls){
@@ -92,7 +91,7 @@ public class CollectSourcesHelper {
 					result.add(sourceUrl);
 				}
 			}
-		//}
+		}
 		return result;
 	}
 	

@@ -26,7 +26,6 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.callable.CallableGenmodelGenerator;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;

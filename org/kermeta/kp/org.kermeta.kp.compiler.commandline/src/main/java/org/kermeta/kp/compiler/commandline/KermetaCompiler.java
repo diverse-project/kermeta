@@ -16,7 +16,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -38,7 +37,6 @@ import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.Source;
-import org.kermeta.kp.compiler.commandline.callable.CallableModelingUnitLoader;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.checker.CheckerImpl;
@@ -351,8 +349,8 @@ public class KermetaCompiler {
 			logger.debug("Preparing preresolve : "+targetIntermediateFolder+"/preresolve/preresolved.km",LOG_MESSAGE_GROUP);
 			String preResolveCacheUrl = URI.createFileURI(targetIntermediateFolder+"/preresolve/preresolved.km").toString();
 			String preResolveSrcListUrl = URI.createFileURI(targetIntermediateFolder+"/preresolve/srcList.txt").toString();
-			if(dirtyMU != null){
-				logger.info("dirty mode  "+dirtyMU.size()+" dirty modeling units (ie. unit being modified by the user)", LOG_MESSAGE_GROUP);
+			if (dirtyMU != null && !dirtyMU.isEmpty()){
+				logger.info("dirty mode  "+dirtyMU.size()+" dirty modeling units (ie. units being modified by the user)", LOG_MESSAGE_GROUP);
 				for(URL u : dirtyMU.keySet()){
 					logger.devInfo("   dirty file "+u, LOG_MESSAGE_GROUP);
 				}
@@ -400,7 +398,7 @@ public class KermetaCompiler {
 					preResolvedUnit = resolveModelingUnit(preresolvedMergedUnit.getResult(), kpFileURL, true);
 			
 					if (preResolvedUnit == null) {
-						this.errorMessage = "The resolved result is not valid. Compilation not complete for this project.";
+						this.errorMessage = "The preresolved result is not valid. Compilation not complete for this project.";
 						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 						this.hasFailed = true;
@@ -448,13 +446,13 @@ public class KermetaCompiler {
 			if(preResolvedUnit!= null){
 				modelingUnits.add(preResolvedUnit);
 			}
-			/*if(dirtyMU != null && ! dirtyMU.isEmpty()){
+			if(dirtyMU != null && ! dirtyMU.isEmpty()){
 				logger.info("adding  "+dirtyMU.size()+" dirty modeling units (ie. unit being modified by the user)", LOG_MESSAGE_GROUP);
 				for(URL u : dirtyMU.keySet()){
 					logger.devInfo("   dirty file "+u, LOG_MESSAGE_GROUP);
 				}
 				modelingUnits.addAll(dirtyMU.values());
-			}*/
+			}
 			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
