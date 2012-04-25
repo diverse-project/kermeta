@@ -448,13 +448,13 @@ public class KermetaCompiler {
 			if(preResolvedUnit!= null){
 				modelingUnits.add(preResolvedUnit);
 			}
-			if(dirtyMU != null && ! dirtyMU.isEmpty()){
+			/*if(dirtyMU != null && ! dirtyMU.isEmpty()){
 				logger.info("adding  "+dirtyMU.size()+" dirty modeling units (ie. unit being modified by the user)", LOG_MESSAGE_GROUP);
 				for(URL u : dirtyMU.keySet()){
 					logger.devInfo("   dirty file "+u, LOG_MESSAGE_GROUP);
 				}
 				modelingUnits.addAll(dirtyMU.values());
-			}
+			}*/
 			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + modelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, modelingUnits);
