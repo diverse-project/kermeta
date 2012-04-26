@@ -23,7 +23,7 @@ import scala.collection.JavaConversions._
 trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser {
 
 
-  def fCall: Parser[Expression] = nCall /*| firstCallLiteral*/ | firstCall
+  def fCall: Parser[Expression] = nCall /*| firstCallLiteral*/ | firstCall | superCall
 
   //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
 
@@ -54,11 +54,30 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       newo
   }
 
-  def firstCall: Parser[Expression] = (genericQualifiedTypeObject | "super") ~ (callFeatureParams ?) ^^ {
+  def superCall : Parser[Expression] = "super" ~ opt(opGenericParems) ~ (callFeatureParams ?) ^^ { case _ ~ genparams ~ params =>
+
+    val newo = BehaviorFactory.eINSTANCE.createCallSuperOperation()
+
+    params match {
+      case Some(_@par) => for (p <- par) newo.getParameters.add(p)
+      case None =>
+    }
+
+    genparams match {
+      case None =>
+      case Some(gparams) => {
+        newo.getContainedType.addAll(gparams)
+        newo.getStaticTypeVariableBindings.addAll(gparams)
+      }
+    }
+    newo
+  }
+
+  def firstCall: Parser[Expression] = (genericQualifiedTypeObject /*| "super"*/) ~ (callFeatureParams ?) ^^ {
     case unresType ~ params =>
 
       val newo = unresType match {
-        case "super" => BehaviorFactory.eINSTANCE.createCallSuperOperation()
+        //case "super" => BehaviorFactory.eINSTANCE.createCallSuperOperation()
         case typeRef: UnresolvedType => {
           val newoo = BehaviorFactory.eINSTANCE.createUnresolvedCall
           newoo.setName(typeRef.getTypeIdentifier())
