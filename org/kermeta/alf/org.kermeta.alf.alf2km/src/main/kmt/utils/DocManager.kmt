@@ -1,0 +1,313 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::io::FileIO => file
+
+using org3::kermeta::alf
+
+package org3 {
+package kermeta {
+package alf {
+package alf2km {
+package utils {
+
+	class DocManager
+	{
+		attribute TableHeader : String
+		attribute TableFooter : String
+		operation Init() : Void is do
+			TableHeader := "\begin{tabular}{|c|c|c|c|c|}" + "\n" + "\hline\nALF Element & Kermeta Element & Alf Reference & Alf Grammar & Comments\tabularnewline\n\hline\n"
+			TableFooter := "\end{tabular}"
+		end 
+		operation getHeader() : String is do 
+			var doc : String init ""
+			doc := doc + "\documentclass[english]{article}" + "\n"	
+			doc := doc + "\usepackage[T1]{fontenc}" + "\n"
+			doc := doc + "\usepackage[latin9]{inputenc}" + "\n"
+			doc := doc + "\usepackage[font={sf,footnotesize}]{floatrow}" + "\n"
+			doc := doc + "\usepackage{pdflscape}" + "\n"
+			doc := doc + "\makeatletter" + "\n"
+			//doc := doc + "\providecommand{\\tabularnewline}{\\}" + "\n"
+			doc := doc + "\makeatother" + "\n"
+			doc := doc + "\usepackage{babel}" + "\n"
+			doc := doc + "\begin{document}" + "\n"
+			result := doc
+		end
+		operation getFooter() : String is do
+			var doc : String init ""
+			doc := doc + "\end{document}" + "\n"	
+			result := doc
+		end
+		operation getConformance() : String is do
+			var doc : String init "\section{Conformance}\n"
+			doc := doc + "The ALF specification proposes two main conformance categories, that is syntactic conformance and semantic conformance.
+			In addition two more conformance levels is also proposed which are Template semantics and Library Implementation. However in this implementation
+			the focus has been on syntactic conformance. In terms of syntactic conformance it can be broken down into the following sections minimum conformance, 
+			full conformance and extended conformance. Full details of the conformance can be found in the ALF specification.
+			" 
+			result := doc
+		end
+		operation getLiteral() : String is do
+			var s1 : BOOLEAN_LITERAL init BOOLEAN_LITERAL.new
+			var s2 : NUMBER_LITERAL init NUMBER_LITERAL.new
+			var s3 : INTEGER_LITERAL init INTEGER_LITERAL.new
+			var s4 : UNLIMITED_LITERAL init UNLIMITED_LITERAL.new
+			//var s5 : UNBOUNDEDVALUE_LITERAL init UNBOUNDEDVALUE_LITERAL.new
+			var s6 : STRING_LITERAL init STRING_LITERAL.new
+			
+			var doc : String init "\subsection{Literals}\n"
+			doc := doc + s1.Document().FormatLine()
+			doc := doc + s2.Document().FormatLine()
+			doc := doc + s3.Document().FormatLine()
+			doc := doc + s4.Document().FormatLine()
+			//doc := doc + s5.Document().FormatLine()
+			doc := doc + s6.Document().FormatLine()
+			result := doc
+		end
+		
+		
+		operation getStatements() : String is do
+			var doc : String init "\subsection{Statements}\n"
+			doc := doc + "Statements are sequences of behaviour that are executed for their effect, thus they provide control and sequence co-ordination"
+			var s1 : AnnotatedStatement init AnnotatedStatement.new
+			var s2 : Annotation init Annotation.new
+			var s3 : InlineStatement init InlineStatement.new
+			var s4 : Block init Block.new
+			var s5 : BlockStatement init BlockStatement.new
+			var s6 : EmptyStatement init EmptyStatement.new
+			var s7 : LocalNameDeclarationStatement init LocalNameDeclarationStatement.new
+			var s8 : IfStatement init IfStatement.new
+			var s9 : SwitchStatement init SwitchStatement.new
+			doc := doc + s1.Document().FormatLine()
+			doc := doc + s2.Document().FormatLine()
+			doc := doc + s3.Document().FormatLine()
+			doc := doc + s4.Document().FormatLine()
+			doc := doc + s5.Document().FormatLine()
+			doc := doc + s6.Document().FormatLine()
+			doc := doc + s7.Document().FormatLine()
+			doc := doc + s8.Document().FormatLine()
+			doc := doc + s9.Document().FormatLine()
+			doc := doc + "\subsection{Expression Statement}\n"
+			doc := doc + "These are expression statements followed by a semi-colon. Referenced in 9.7 in ALF"
+			var s10 : WhileStatement init WhileStatement.new
+			var s11 : DoStatement init DoStatement.new
+			var s12 : ForStatement init ForStatement.new
+			var s13 : BreakStatement init BreakStatement.new
+			var s14 : ReturnStatement init ReturnStatement.new
+			var s15 : AcceptStatement init AcceptStatement.new
+			var s16 : ClassifyStatement init ClassifyStatement.new
+			doc := doc + s10.Document().FormatLine()
+			doc := doc + s11.Document().FormatLine()
+			doc := doc + s12.Document().FormatLine()
+			doc := doc + s13.Document().FormatLine()
+			doc := doc + s14.Document().FormatLine()
+			doc := doc + s15.Document().FormatLine()
+			doc := doc + s16.Document().FormatLine()
+			result := doc
+		end
+		
+		operation getExpression() : String is do
+			var doc : String init "\subsection{Primary Expression}\n"
+			var s1 : PrimaryExpression init PrimaryExpression.new
+			var s2 : NameExpression init NameExpression.new
+			var s3 : ParenthesizedExpression init ParenthesizedExpression.new
+			var s4 : PropertyCallExpression init PropertyCallExpression.new
+			doc := doc + s1.Document().FormatLine()
+			doc := doc + s2.Document().FormatLine()
+			doc := doc + s3.Document().FormatLine()
+			doc := doc + s4.Document().FormatLine()
+			
+			doc := doc + "\subsection{Invocation Expression}\n"
+			doc := doc + "An invocation expression invokes a behaviour, either as an operation call or sending a signal. Referenced in 8.3.7 in ALF"
+			var s5 : Tuple init Tuple.new
+			var s6 : TupleElement init TupleElement.new
+			doc := doc + s5.Document().FormatLine()
+			doc := doc + s6.Document().FormatLine()
+			
+			doc := doc + "\subsection{Behaviour Invocation Expression}\n"
+			doc := doc + "Implements a behaviour call either as an operation call or as sending a signal. Referenced in 8.3.9 in ALF"
+			var s7 : OperationCallExpression init OperationCallExpression.new
+			doc := doc + s7.Document().FormatLine()
+			doc := doc + "\subsection{Feature Invocation Expression}\n"
+			doc := doc + "Implements a behaviour call on a feature, and is defined as a primary expression. Similar to behaviour it 
+			can be an operation or a signal. Referenced in 8.3.10 in ALF. No need for grammar constructs as this would effect the semantics of the language"
+			var s8 : SuperInvocationExpression init SuperInvocationExpression.new
+			doc := doc + s8.Document().FormatLine()
+			var s9 : InstanceCreationExpression init InstanceCreationExpression.new
+			doc := doc + s9.Document().FormatLine()
+			
+			var s10 : LinkOperationExpression init LinkOperationExpression.new
+			var s11 : LinkOperationTuple init LinkOperationTuple.new
+			var s12 : LinkOperationTupleElement init LinkOperationTupleElement.new
+			var s13 : ClassExtentExpression init ClassExtentExpression.new
+			
+			doc := doc + s10.Document().FormatLine()
+			doc := doc + s11.Document().FormatLine()
+			doc := doc + s12.Document().FormatLine()
+			doc := doc + s13.Document().FormatLine()
+			
+			doc := doc + "\subsection{Sequence Construction Expression}\n"
+			doc := doc + "These expressions are used to group a sequence of elements of the same type." 
+			var s14 : NullExpression init NullExpression.new
+			//var s15 : SequenceAccessExpression init SequenceAccessExpression.new
+			
+			doc := doc + s14.Document().FormatLine()
+			//doc := doc + s15.Document().FormatLine()
+			
+			
+			var s16 : SequenceOperationExpression init SequenceOperationExpression.new
+			var s17 : SequenceReductionExpression init SequenceReductionExpression.new
+			var s18 : SequenceExpansionExpression init SequenceExpansionExpression.new
+			var s19 : SelectOrRejectOperation init SelectOrRejectOperation.new
+			var s20 : CollectOrIterateOperation init CollectOrIterateOperation.new
+			var s21 : ForAllOrExistsOrOneOperation init ForAllOrExistsOrOneOperation.new
+			var s22 : IsUniqueOperation init IsUniqueOperation.new
+			
+			doc := doc + s16.Document().FormatLine()
+			doc := doc + s17.Document().FormatLine()
+			doc := doc + s18.Document().FormatLine()
+			doc := doc + s19.Document().FormatLine()
+			doc := doc + s20.Document().FormatLine()
+			doc := doc + s21.Document().FormatLine()
+			doc := doc + s22.Document().FormatLine()
+						
+			doc := doc + "\subsection{Increment and decrement Expressions}\n"
+			doc := doc + "This operates on type Integer and can be applied as postfix or prefix operators refer to ALF 8.4."
+			var s23 : UnaryExpression init UnaryExpression.new
+			doc := doc + s23.Document().FormatLine()
+			
+			doc := doc + "\subsection{Binary Expressions}\n"
+			doc := doc + "Implementing a binary expression which has two operands as defined in ALF 8.6"
+			var s24 : AdditiveExpression init AdditiveExpression.new
+			var s25 : MultiplicativeExpression init MultiplicativeExpression.new
+			var s26 : ShiftExpression init ShiftExpression.new
+			var s27 : RelationalExpression init RelationalExpression.new
+			var s28 : ClassificationExpression init ClassificationExpression.new
+			var s29 : EqualityExpression init EqualityExpression.new
+			doc := doc + s24.Document().FormatLine()
+			doc := doc + s25.Document().FormatLine()
+			doc := doc + s26.Document().FormatLine()
+			doc := doc + s27.Document().FormatLine()
+			doc := doc + s28.Document().FormatLine()
+			doc := doc + s29.Document().FormatLine()
+			
+			doc := doc + "\subsection{Logical Expressions}\n"
+			doc := doc + "Logical expressions are binary expressions using and logical operator referenced in ALF 8.6.7"
+			var s30 : InclusiveOrExpression init InclusiveOrExpression.new
+			var s31 : ExclusiveOrExpression init ExclusiveOrExpression.new
+			var s32 : AndExpression init AndExpression.new
+			var s33 : ConditionalOrExpression init ConditionalOrExpression.new
+			var s34 : ConditionalAndExpression init ConditionalAndExpression.new
+			var s35 : ConditionalTestExpression init ConditionalTestExpression.new
+			var s36 : AssignmentCompletion init AssignmentCompletion.new
+			
+			doc := doc + s30.Document().FormatLine()
+			doc := doc + s31.Document().FormatLine()
+			doc := doc + s32.Document().FormatLine()
+			doc := doc + s33.Document().FormatLine()
+			doc := doc + s34.Document().FormatLine()
+			doc := doc + s35.Document().FormatLine()
+			doc := doc + s36.Document().FormatLine()
+			
+			result := doc
+		end
+		
+		operation getDocument() : String is do
+			var doc : String init ""
+			doc := doc + getHeader()
+			doc := doc + getConformance()
+			doc := doc + getLiteral()
+			doc := doc + getExpression()
+			doc := doc + getStatements()
+			doc := doc + getFooter()
+			//var uri : kermeta::standard::URI init kermeta::standard::URI.new
+			//uri.appendSegment("platform:/resource/Transformer/doc/alf-reportv1.tex") 
+			//file.writeTextFile(uri,doc)
+			result := doc
+		end 
+		operation Process() : Void is do 
+			var s0 : CLASSSTRUCT init CLASSSTRUCT.new
+			var s1 : CLASSOP init CLASSOP.new
+			//var s2 : LITERAL init LITERAL.new
+			
+			//var s7 : Expression init Expression.new
+			var s8 : ConditionalTestExpression init ConditionalTestExpression.new
+			var s9 : ConditionalOrExpression init ConditionalOrExpression.new
+			var s10 : ConditionalAndExpression init ConditionalAndExpression.new
+			var s11 : InclusiveOrExpression init InclusiveOrExpression.new
+			var s12 : ExclusiveOrExpression init ExclusiveOrExpression.new
+			var s13 : AndExpression init AndExpression.new
+			var s14 : EqualityExpression init EqualityExpression.new
+			var s15 : ClassificationExpression init ClassificationExpression.new
+			var s16 : RelationalExpression init RelationalExpression.new
+			var s17 : ShiftExpression init ShiftExpression.new
+			var s18 : AdditiveExpression init AdditiveExpression.new
+			var s19 : MultiplicativeExpression init MultiplicativeExpression.new
+			var s20 : UnaryExpression init UnaryExpression.new
+			var s21 : PrimaryExpression init PrimaryExpression.new
+			var s22 : AnnotatedStatement init AnnotatedStatement.new
+			var s23 : InlineStatement init InlineStatement.new
+			var s24 : BlockStatement init BlockStatement.new
+			var s25 : EmptyStatement init EmptyStatement.new
+			var s26 : LocalNameDeclarationStatement init LocalNameDeclarationStatement.new
+			var s27 : IfStatement init IfStatement.new
+			var s28 : SwitchStatement init SwitchStatement.new
+			var s29 : WhileStatement init WhileStatement.new
+			var s30 : DoStatement init DoStatement.new
+			var s31 : ForStatement init ForStatement.new
+			var s32 : BreakStatement init BreakStatement.new
+			var s33 : ReturnStatement init ReturnStatement.new
+			var s34 : AcceptStatement init AcceptStatement.new
+			var s35 : ClassifyStatement init ClassifyStatement.new
+			var s36 : InvocationOrAssignementOrDeclarationStatement init InvocationOrAssignementOrDeclarationStatement.new
+			var s37 : SuperInvocationStatement init SuperInvocationStatement.new
+			var s38 : ThisInvocationStatement init ThisInvocationStatement.new
+			var s39 : InstanceCreationInvocationStatement init InstanceCreationInvocationStatement.new
+		
+			var doc : String init ""
+			doc := doc + TableHeader + "\n"
+			doc := doc + s0.Document().FormatLine()
+			doc := doc + s1.Document().FormatLine()
+			//doc := doc + s2.Document().FormatLine()
+			
+			//doc := doc + s7.Document().FormatLine()
+			doc := doc + s8.Document().FormatLine()
+			doc := doc + s9.Document().FormatLine()
+			doc := doc + s10.Document().FormatLine()
+			doc := doc + s11.Document().FormatLine()
+			doc := doc + s12.Document().FormatLine()
+			doc := doc + s13.Document().FormatLine()
+			doc := doc + s14.Document().FormatLine()
+			doc := doc + s15.Document().FormatLine()
+			doc := doc + s16.Document().FormatLine()
+			doc := doc + s17.Document().FormatLine()
+			doc := doc + s18.Document().FormatLine()
+			doc := doc + s19.Document().FormatLine()
+			doc := doc + s20.Document().FormatLine()
+			doc := doc + s21.Document().FormatLine()
+			doc := doc + s22.Document().FormatLine()
+			doc := doc + s23.Document().FormatLine()
+			doc := doc + s24.Document().FormatLine()
+			doc := doc + s25.Document().FormatLine()
+			doc := doc + s26.Document().FormatLine()
+			doc := doc + s27.Document().FormatLine()
+			doc := doc + s28.Document().FormatLine()
+			doc := doc + s29.Document().FormatLine()
+			doc := doc + s30.Document().FormatLine()
+			doc := doc + s31.Document().FormatLine()
+			doc := doc + s32.Document().FormatLine()
+			doc := doc + s33.Document().FormatLine()
+			doc := doc + s34.Document().FormatLine()
+			doc := doc + s35.Document().FormatLine()
+			doc := doc + s36.Document().FormatLine()
+			doc := doc + s37.Document().FormatLine()
+			doc := doc + s38.Document().FormatLine()
+			doc := doc + s39.Document().FormatLine()
+			doc := doc + TableFooter + "\n"
+			stdio.writeln(doc)
+		end
+	}
+}
+}
+}
+}
+}

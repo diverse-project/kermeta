@@ -1,0 +1,131 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+aspect class BOOLEAN_LITERAL {
+	operation Transform() : org::kermeta::language::behavior::BooleanLiteral is do
+		var obj : org::kermeta::language::behavior::BooleanLiteral init org::kermeta::language::behavior::BooleanLiteral.new
+		if self.~value == 0 then
+				obj.~value := true
+			else
+				obj.~value := false
+		end
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.alfName := "BOOLEAN LITERAL"
+		obj.implName := "org::kermeta::language::behavior::BooleanLiteral"
+		obj.alfRef := "7.7.1"
+		obj.alfGrammar := "BOOLEAN LITERAL : value = BooleanValue (suffix = SuffixExpression) ? ;"
+		obj.refinedGrammar := "BOOLEAN LITERAL : value = BooleanValue;"
+		obj.comments := "The suffix expression allows the construction of more complex expression using the boolean literal."
+		obj.synconfLevel := "Minimum"
+		//obj.description := "This references the " + obj.implName + " in " + obj.implLanguage + "which defines a Boolean as true or false"
+		result := obj
+	end
+}
+aspect class NUMBER_LITERAL {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		if self.isInstanceOf(INTEGER_LITERAL) then
+				result := self.asType(INTEGER_LITERAL).Transform()
+			else
+				result := self.asType(UNLIMITED_LITERAL).Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.alfName := "NUMBER LITERAL"
+		obj.implName := "isAbstract"
+		obj.alfRef := "7.7.2"
+		obj.alfGrammar := "NUMBER LITERAL :
+	INTEGER LITERAL | UNLIMITED LITERAL ;"
+		obj.comments := "The is an abstract class which represents the natural literals in the specification non-negative integers"
+		obj.synconfLevel := "Minimum"
+		result := obj
+	end
+}
+aspect class INTEGER_LITERAL {
+	operation Transform() : org::kermeta::language::behavior::IntegerLiteral is do
+		var obj : org::kermeta::language::behavior::IntegerLiteral init org::kermeta::language::behavior::IntegerLiteral.new
+		obj.~value := self.~value.toInteger
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.alfName := "INTEGER LITERAL"
+		obj.implName := "IntegerLiteral"
+		obj.alfRef := "7.7.2"
+		obj.alfGrammar := "INTEGER LITERAL : value = IntegerValue (suffix = SuffixExpression) ? ;"
+		obj.comments := "This represents the integer value followed by a suffix expression"
+		obj.synconfLevel := "Minimum"
+		result := obj
+	end
+}
+aspect class UNLIMITED_LITERAL {
+	operation Transform() : org::kermeta::language::behavior::StringLiteral is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := '*'
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.alfName := "UNLIMITED LITERAL"
+		obj.implName := "StringLiteral"
+		obj.alfRef := "7.7.2"
+		obj.alfGrammar := "UNLIMITED LITERAL :
+	value = '*' (suffix = SuffixExpression) ? ;"
+		obj.comments := "Not implemented, this can be used to represent a decimal (base 10), binary (base 2), octal (base 8) or hexadecimal
+(base 16)"
+		obj.synconfLevel := "None"
+		result := obj
+	end
+}
+/*
+aspect class UNBOUNDEDVALUE_LITERAL {
+	operation Transform() : org::kermeta::language::behavior::StringLiteral is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := '*'
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.alfName := "UNBOUNDEDVALUE LITERAL"
+		obj.implName := "StringLiteral"
+		obj.alfRef := "7.7.3"
+		obj.alfGrammar := "UNBOUNDEDVALUE LITERAL : value = '*'"
+		obj.comments := "Not implemented, could be used to implement negative numbers"
+		obj.synconfLevel := "None"
+		result := obj
+	end
+}
+*/
+aspect class STRING_LITERAL {
+	operation Transform() : org::kermeta::language::behavior::StringLiteral is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := self.~value
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.alfName := "STRING LITERAL"
+		obj.implName := "StringLiteral"
+		obj.alfRef := "7.7.4"
+		obj.alfGrammar := "value = STRING (suffix = SuffixExpression) ?;"
+		obj.comments := "Implements a string followed by a suffix expression"
+		result := obj
+	end
+}
+}
+}
+}

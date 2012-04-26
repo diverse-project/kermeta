@@ -1,0 +1,79 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>alf.alf2km</artifactId>
+    <packaging>jar</packaging>
+    <name>ALF2KM</name>
+
+    <parent>
+        <groupId>org.kermeta.alf</groupId>
+        <artifactId>alf.root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <plugins>
+           <!-- Kermeta Compiler plugin -->
+            <plugin>
+                <groupId>org.kermeta.kp</groupId>
+                <artifactId>kp.compiler.mavenplugin</artifactId>
+                <version>${kermeta.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <kp>org.kermeta.alf.alf2km.kp</kp>
+                            <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
+                            <targetGroupId>${project.groupId}</targetGroupId>
+                            <targetArtifactId>${project.artifactId}</targetArtifactId>
+                            <generateKmOnly>true</generateKmOnly>
+                            <checkingEnabled>false</checkingEnabled>
+                            <intermediateFilesRequired>false</intermediateFilesRequired>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- package into a jar for OSGI -->
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-jar-plugin</artifactId>
+		        <version>2.3.1</version>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Require-Bundle>
+                        </Require-Bundle>
+                        <Export-Package>
+                        </Export-Package>
+                        <Import-Package>
+						</Import-Package>
+		            </manifestEntries>		            
+		          </archive>
+		        </configuration>
+      		</plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+    	<dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.model</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+    	<dependency>
+    		<groupId>org.kermeta.alf</groupId>
+    		<artifactId>alf.model</artifactId>
+    		<version>2.0.1-SNAPSHOT</version>
+    	</dependency>
+    </dependencies>
+</project>

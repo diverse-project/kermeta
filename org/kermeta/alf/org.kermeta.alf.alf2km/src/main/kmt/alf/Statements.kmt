@@ -1,0 +1,1020 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+		aspect class AnnotatedStatement {
+		operation Transform() : org::kermeta::language::behavior::Block is do
+			stdio.writeln("Processing AnnotatedStatement")
+			var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var tag : org::kermeta::language::structure::Tag init org::kermeta::language::structure::Tag.new
+			tag.name := "ALF-Transformation"
+			tag.~value := self.annotation.Transform()
+			obj := self.block.Transform()
+			obj.kOwnedTags.add(tag)
+			tag.object.add(obj)
+			result := obj
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: AnnotatedStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "Block"
+			obj.implName := "org::kermeta::language::behavior::Block"
+			obj.alfRef := "9.2"
+			obj.alfGrammar := "AnnotatedStatement :
+	'//@' annotation = Annotation block = Block 
+;"
+			obj.comments := "Implemented as a Block, Annotations not implemented"
+			obj.status := false
+			obj.description := "Need to implement annotations"
+			result := obj
+		end
+	}
+	aspect class Annotation {
+		operation Transform() : String is do
+			stdio.writeln("Processing Annotation")
+			var obj : String init String.new
+			stdio.writeln("Value of Kind: " + self.kind.toString())
+			if self.kind == "isolated" then obj := obj + "@isolated" end
+			if self.kind == "determined" then obj := obj + "@determined" end
+			if self.kind == "assured" then obj := obj + "@assured" end
+			if self.kind == "parallel" then obj := obj + "@parallel" end
+			if self.args != void then
+				obj := obj + "("
+				self.args.each{s|
+					obj := obj + " " + s 
+				}
+				obj := obj + ")"
+			end
+			
+			result := obj
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: Annotation")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "Annotation"
+			obj.implName := "String"
+			obj.alfRef := ""
+			obj.alfGrammar := "Annotation :
+	kind = AnnotationKind ('('args += ID (',' args += ID)* ')')?;
+enum AnnotationKind :
+	ISOLATED = 'isolated' |
+	DETERMINED = 'determined' |
+	ASSURED = 'assured' |
+	PARALLEL = 'parallel'
+;"
+			obj.comments := "Annotations are provided in Table 9-6 of clause 9.2"
+			obj.status := false
+			obj.description := "Need to implement annotations"
+			result := obj
+		end
+	}
+	
+	aspect class InlineStatement {
+		operation Transform() : org::kermeta::language::behavior::JavaStaticCall is do
+			var obj : org::kermeta::language::behavior::JavaStaticCall init org::kermeta::language::behavior::JavaStaticCall.new
+			if self.langageName == "java" then 
+				obj.jmethod := self.body 
+			end
+			result := obj
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: InlineStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "InlineStatement"
+			obj.implName := "JavaStaticCall"
+			obj.alfRef := "9.3"
+			obj.alfGrammar := "InlineStatement :
+	'/*@' 'inline' langageName = ID body = STRING '*/'
+;"
+			obj.comments := "Implemented only for Java"
+			obj.status := false
+			obj.description := "Implemented only for Java"
+			result := obj
+		end
+	}
+	aspect class Block {
+		operation Transform() : org::kermeta::language::behavior::Block is do
+			var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			if self.sequence != void then
+				var fd : Integer init 0
+				self.sequence.statements.each{s|
+					if s.isInstanceOf(BreakStatement) then
+							fd := 1
+							var newCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+							newCall.name := "new"
+							var excepCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+							excepCall.name := "Exception"
+							newCall.target := excepCall
+							
+							var rs : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
+							rs.expression := newCall
+							obj.statement.add(rs)
+						else
+							obj.statement.add(s.Transform())
+					end
+				}
+				if fd == 1 then
+					// Need to add a Rescue Statement
+					var rc : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
+					rc.exceptionName := "alfException"
+					
+					var exceptype : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+					exceptype.typeIdentifier := "Exception"
+					
+					var ut : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+					ut.name := "Exception"
+					ut.containedType.add(exceptype)
+					
+					rc.exceptionType := ut
+					obj.rescueBlock.add(rc)
+				end
+			end
+			result := obj
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: Block")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "Block"
+			obj.implName := "org::kermeta::language::behavior::Block"
+			obj.alfRef := "9.4"
+			obj.alfGrammar := "Block :
+	'{' {Block}(sequence = StatementSequence)? '}'
+;"
+			obj.comments := "Block also contains a clause to allow exception handling, this provides a means to handle break points and return type statements"
+			result := obj
+		end
+	}
+	aspect class BlockStatement {
+		operation Transform() : org::kermeta::language::behavior::Block is do
+			result := self.block.Transform()
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: Block")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "BlockStatement"
+			obj.implName := "org::kermeta::language::behavior::Block"
+			obj.alfRef := "9.4"
+			obj.alfGrammar := "BlockStatement :
+	block = Block
+;
+"
+			obj.comments := "Implemented using the Block"
+			result := obj
+		end
+	}
+	
+	aspect class EmptyStatement {
+		operation Transform() : org::kermeta::language::behavior::EmptyExpression is do
+			var obj : org::kermeta::language::behavior::EmptyExpression init org::kermeta::language::behavior::EmptyExpression.new
+			result := obj
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: EmptyStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "EmptyStatement"
+			obj.implName := "org::kermeta::language::behavior::EmptyExpression"
+			obj.alfRef := "9.5"
+			obj.alfGrammar := "EmptyStatement :
+	{EmptyStatement} ';'
+;"
+			obj.comments := "Transform into the EmptyExpression"
+			result := obj
+		end
+	}
+	aspect class LocalNameDeclarationStatement {
+		operation Transform() : org::kermeta::language::behavior::VariableDecl is do
+			var obj : org::kermeta::language::behavior::VariableDecl init  org::kermeta::language::behavior::VariableDecl.new
+			obj.identifier := self.varName
+			if self.multiplicityIndicator != void then
+				var tr : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+				var ut : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+				ut.typeIdentifier := self.type.Transform()
+				tr.lower := 0
+				tr.upper := -1
+				tr.isUnique := true
+				tr.isOrdered := false
+				tr.type := ut
+				obj.type := tr
+				obj.initialization := self.~init.Transform()
+				result := obj
+			else
+				var tr : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+				var ut : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+				ut.typeIdentifier := self.type.Transform()
+				tr.lower := 0
+				tr.upper := 1
+				tr.type := ut
+				obj.type := tr
+				obj.initialization := self.~init.Transform()
+				result := obj
+			end
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: LocalNameDeclarationStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "LocalNameDeclarationStatement"
+			obj.implName := "VariableDecl"
+			obj.alfRef := "9.6"
+			obj.alfGrammar := "'let' varName = ID ':' 
+			type = QualifiedNameWithBinding  
+			(multiplicityIndicator?='[' ']')?
+			'=' init = Expression ';'"
+			obj.comments := "Implemented multiplicity operator as a sequence"
+			obj.status := true
+			obj.description := ""
+			result := obj
+		end
+	}
+	
+	//********************************************************************************************************************************
+	// Expression Statements
+	aspect class IfStatement {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing If Statement")
+		var obj : org::kermeta::language::behavior::Expression
+		stdio.writeln("Processing If Statement: Then Part")
+		var fb : org::kermeta::language::behavior::Block
+		if self.finalClause != void then
+			fb := self.finalClause.Transform()
+		end
+		obj := self.sequentialClausses.Transform(fb)
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: IfStatement")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "IfStatement"
+		obj.implName := "Conditional"
+		obj.alfRef := "9.8"
+		obj.alfGrammar := ""
+		obj.comments := ""
+		obj.status := true
+		obj.description := ""
+		result := obj
+	end
+}
+
+aspect class SequentialClauses {
+	operation Transform(fb : org::kermeta::language::behavior::Block) : org::kermeta::language::behavior::Expression is do
+		if self.conccurentClauses.size() > 1 then 
+			stdio.writeln("Processing SequentialClauses: Multiple")
+			var lt : oset ConcurrentClauses[0..*] //init OrderedSet<ConcurrentClauses>.new
+			self.conccurentClauses.each{c|
+				lt.add(c)
+			}
+			var currCl : ConcurrentClauses
+			currCl := lt.at(0)
+			lt.remove(currCl)
+			result := currCl.TransformElse(lt,fb)
+		else
+			stdio.writeln("Processing SequentialClauses: Single")
+			result := self.conccurentClauses.first.TransformOr(fb)
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "SequentialClauses"
+		obj.implName := "Conditional"
+		obj.alfRef := ""
+		obj.alfGrammar := ""
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class ConcurrentClauses {
+	operation TransformElse(list : OrderedSet<ConcurrentClauses>,fb : org::kermeta::language::behavior::Block) : org::kermeta::language::behavior::Expression is do
+		if list.size() > 0 then 
+				var expr : org::kermeta::language::behavior::Expression
+				expr := TransformOr(fb)
+				if expr.isInstanceOf(org::kermeta::language::behavior::Conditional) then
+					var currCl : ConcurrentClauses
+					currCl := list.at(0)
+					list.remove(currCl)
+					expr.asType(org::kermeta::language::behavior::Conditional).elseBody := currCl.TransformElse(list,fb)
+				end
+				result := expr
+			else
+				result := TransformOr(fb)
+		end
+	end
+	operation TransformOr(fb : org::kermeta::language::behavior::Block) : org::kermeta::language::behavior::Expression is do
+		if self.nonFinalClause.size() > 1 then
+			// becomes or statements
+			var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			self.nonFinalClause.each{c|
+				obj.statement.add(c.TransformMult())
+			}
+			if fb != void then
+				obj.statement.add(fb)
+			end
+			// Add the Rescue statement
+			var rc : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
+			rc.exceptionName := "alfException"
+						
+			var exceptype : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+			exceptype.typeIdentifier := "Exception"
+						
+			var ut : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+			ut.name := "Exception"
+			ut.containedType.add(exceptype)
+						
+			rc.exceptionType := ut
+			obj.rescueBlock.add(rc)
+			result := obj
+		else
+			stdio.writeln("Processing ConcurrentClauses: Single")
+			result := self.nonFinalClause.first.Transform(fb)
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "ConcurrentClauses"
+		obj.implName := "Conditional"
+		obj.alfRef := ""
+		obj.alfGrammar := ""
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class NonFinalClause {
+	operation Transform(fb : org::kermeta::language::behavior::Block) : org::kermeta::language::behavior::Conditional is do
+		stdio.writeln("Processing NonFinalClause")
+		var obj : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+		obj.thenBody := self.block.Transform()
+		if self.condition.isInstanceOf(ConditionalTestExpression) then
+			obj.condition := self.condition.asType(ConditionalTestExpression).Transform()
+			if fb != void then
+				obj.elseBody := fb
+			end
+		else
+			var str : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			str.~value := "Error: Condition Statement"
+			obj.condition := str
+		end
+		result := obj
+	end
+	operation TransformMult() : org::kermeta::language::behavior::Conditional is do
+		stdio.writeln("Processing NonFinalClause: Multi Clauses")
+		var obj : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+		var body : org::kermeta::language::behavior::Block
+		body := self.block.Transform()
+		var newCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		newCall.name := "new"
+		var excepCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		excepCall.name := "Exception"
+		newCall.target := excepCall	
+		var rs : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
+		rs.expression := newCall
+		body.statement.add(rs)
+		obj.thenBody := body
+		if self.condition.isInstanceOf(ConditionalTestExpression) then
+			obj.condition := self.condition.asType(ConditionalTestExpression).Transform()
+		else
+			var str : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			str.~value := "Error: Condition Statement"
+			obj.condition := str
+		end
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "NonFinalClause"
+		obj.implName := "Conditional"
+		obj.alfRef := ""
+		obj.alfGrammar := ""
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class FinalClause {
+	operation Transform() : org::kermeta::language::behavior::Block is do
+		stdio.writeln("Processing FinalClause")
+		var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+		obj.statement.add(self.block.Transform())
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "FinalClause"
+		obj.implName := "Block"
+		obj.alfRef := ""
+		obj.alfGrammar := ""
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class SwitchStatement {
+	operation Transform() : org::kermeta::language::behavior::Block is do
+		//org::kermeta::language::behavior::Conditional
+		var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+		self.switchClause.each{s|
+			obj.statement.add(s.Transform(self.expression.Transform()))
+		}
+		// Add the default statement
+		if self.defaultClause != void then
+			obj.statement.add(self.defaultClause.statementSequence.Transform())
+		end
+		// Add the Rescue statement
+		var rc : org::kermeta::language::behavior::Rescue init org::kermeta::language::behavior::Rescue.new
+		rc.exceptionName := "alfException"
+					
+		var exceptype : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+		exceptype.typeIdentifier := "Exception"
+					
+		var ut : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
+		ut.name := "Exception"
+		ut.containedType.add(exceptype)
+					
+		rc.exceptionType := ut
+		obj.rescueBlock.add(rc)
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: SwitchStatement")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "SwitchStatement"
+		obj.implName := ""
+		obj.alfRef := "9.9"
+		obj.alfGrammar := "SwitchStatement : 
+	'switch' '(' expression = Expression ')' '{' 
+		( switchClause += SwitchClause )*
+		( defaultClause = SwitchDefaultClause )?
+	'}' ;
+	SwitchDefaultClause : 
+	'default' ':' statementSequence = NonEmptyStatementSequence ;"
+		obj.comments := "The switch statement is implemented as a sequence of if statements. In the case where there is more than one case on a line the if condition uses a or statement to concatenate the two case statements. Each if statement on completion throws an exception to be trapped at the end of the block, this avoids the execution of more than one true case statement. In the alternate case where no if statements is true, the execution continues to the end and executes the last statement in the block, which is the default case statement.
+"
+		obj.status := true
+		obj.description := "Implemented multiple case statements as a set of or statements"
+		result := obj
+	end
+}
+aspect class SwitchClause {
+	operation Transform(lhs : org::kermeta::language::behavior::Expression) : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing SwitchClause")
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "SwitchClause: problem invalid syntax"
+		result := obj
+		if self.switchCase.size == 1 then
+				var obj : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+				var uc : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				uc.name := "equals"
+				uc.target := lhs
+				uc.parameters.add(self.switchCase.first.expression.Transform())
+				// Create the block containing the if with the last statement throwing an exception
+				var blk : org::kermeta::language::behavior::Block
+				blk := self.statementSequence.Transform()
+				var newCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				newCall.name := "new"
+				var excepCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				excepCall.name := "Exception"
+				newCall.target := excepCall	
+				var rs : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
+				rs.expression := newCall
+				blk.statement.add(rs)
+				// Set the values for the if statement
+				obj.thenBody := blk
+				obj.condition := uc
+				result := obj
+			else 
+				var lst : oset SwitchCase[0..*]
+				self.switchCase.each{s|
+					lst.add(s)
+				}
+				result := chainOperation(lst,lhs)
+		end
+	end
+	operation chainOperation(lst : OrderedSet<SwitchCase>,lhs : org::kermeta::language::behavior::Expression) : org::kermeta::language::behavior::UnresolvedCall is do
+		if lst.size() > 1 then
+				var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				
+				var cs : SwitchCase
+				cs := lst.at(0)
+				var uc : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				uc.name := "equals"
+				uc.target := lhs
+				uc.parameters.add(cs.expression.Transform())
+				lst.remove(cs)	
+				
+				obj.name := "or"
+				obj.target := uc
+				obj.parameters.add(chainOperation(lst,lhs))
+				result := obj
+			else
+				var cs : SwitchCase
+				cs := lst.at(0)
+				var uc : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				uc.name := "equals"
+				uc.target := lhs
+				uc.parameters.add(cs.expression.Transform())
+				lst.remove(cs)	
+				result := uc
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "SwitchClause"
+		obj.implName := ""
+		obj.alfRef := ""
+		obj.alfGrammar := "SwitchClause : 
+	switchCase += SwitchCase ( switchCase += SwitchCase )* statementSequence = NonEmptyStatementSequence ;
+SwitchCase : 
+	'case' expression = Expression ':' ;
+"
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class NonEmptyStatementSequence {
+	operation Transform() : org::kermeta::language::behavior::Block is do
+		stdio.writeln("Processing SwitchClause")
+		var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+		self.statement.each{d|
+			obj.statement.add(d.Transform())
+		}
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "NonEmptyStatementSequence"
+		obj.implName := "org::kermeta::language::behavior::Block"
+		obj.alfRef := ""
+		obj.alfGrammar := "NonEmptyStatementSequence : 
+	( statement += DocumentedStatement )+ ;"
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class WhileStatement {
+	operation Transform() : org::kermeta::language::behavior::Loop is do
+		var obj : org::kermeta::language::behavior::Loop init org::kermeta::language::behavior::Loop.new
+		var voidLit : org::kermeta::language::behavior::VoidLiteral init org::kermeta::language::behavior::VoidLiteral.new 
+		obj.initialization := voidLit
+		//obj.stopCondition := self.condition.Transform()
+		if self.condition.isInstanceOf(ConditionalTestExpression) then
+			obj.stopCondition := self.condition.asType(ConditionalTestExpression).Transform()
+		else
+			var str : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			str.~value := "Unknown: Condition Statement"
+			obj.stopCondition := str
+		end
+		obj.body := self.block.Transform()
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: WhileStatement")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "WhileStatement"
+		obj.implName := "Loop"
+		obj.alfRef := "9.10"
+		obj.alfGrammar := "'while' '(' condition = Expression ')' block = Block ;"
+		obj.comments := "Implemented as a for loop in kermeta"
+		result := obj
+	end
+}
+aspect class DoStatement {
+		operation Transform() : org::kermeta::language::behavior::Expression is do
+			var blk : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+			var obj : org::kermeta::language::behavior::Loop init org::kermeta::language::behavior::Loop.new
+			var voidLit : org::kermeta::language::behavior::VoidLiteral init org::kermeta::language::behavior::VoidLiteral.new 
+			obj.initialization := voidLit
+			//obj.stopCondition := self.condition.Transform()
+			if self.condition.isInstanceOf(ConditionalTestExpression) then
+				obj.stopCondition := self.condition.asType(ConditionalTestExpression).Transform()
+			else
+				var str : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+				str.~value := "Condition Statement"
+				obj.stopCondition := str
+			end
+			obj.body := self.block.Transform()
+			blk.statement.add(self.block.Transform())
+			blk.statement.add(obj)
+			result := blk
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: DoStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "DoStatement"
+			obj.implName := "org::kermeta::language::behavior::Loop"
+			obj.alfRef := "9.11"
+			obj.alfGrammar := "DoStatement :
+	'do' block = Block 'while' '(' condition = Expression ')' ';' ;"
+			obj.comments := "Implemented as a for loop, however in this case we execute the body once before the loop as the while condition is tested at the end"
+			result := obj
+		end
+}
+aspect class ForStatement {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing ForStatement")
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		obj.name := "each"
+		obj.isCalledWithParenthesis := true
+		obj.parameters.add(self.control.Transform(obj,self.block.Transform())) 
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ForStatement")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ForStatement"
+		obj.implName := ""
+		obj.alfRef := "9.12"
+		obj.alfGrammar := "ForStatement : 
+	'for' '(' control = ForControl ')' block = Block ;"
+		obj.comments := "Need to implement the sequence as 1...10 type structures, not using the case where the type is included as kermeta can infer this information from the types"
+		obj.status := false
+		obj.description := "AlfHelper: Need to implement AlfHelper.createSeq(int,int) which returns a sequence so  as to deal with the
+		following notation 1...10 in alf"
+		result := obj
+	end
+}
+aspect class ForControl {
+	operation Transform(par : org::kermeta::language::behavior::UnresolvedCall,blk : org::kermeta::language::behavior::Block) : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing ForControl")
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "ForControl: parallel implementation"
+		result := obj
+		if self.loopVariableDefinition.size == 1 then 
+				result := self.loopVariableDefinition.first.Transform(par,blk)
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "ForControl"
+		obj.implName := ""
+		obj.alfRef := ""
+		obj.alfGrammar := "ForControl : 
+	loopVariableDefinition += LoopVariableDefinition( ',' loopVariableDefinition += LoopVariableDefinition )* ;"
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class LoopVariableDefinition {
+	operation Transform(par : org::kermeta::language::behavior::UnresolvedCall,blk : org::kermeta::language::behavior::Block) : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing LoopVariableDefinition")
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "LoopVariableDefinition: invalid syntax"
+		result := obj
+		if self.name != void and self.expression1 != void then
+			stdio.writeln("Processing LoopVariableDefinition: 1")
+			if self.expression2 == void then
+					stdio.writeln("Processing LoopVariableDefinition: 1.1")
+					var obj : org::kermeta::language::behavior::LambdaExpression init org::kermeta::language::behavior::LambdaExpression.new
+					var p : org::kermeta::language::behavior::LambdaParameter init org::kermeta::language::behavior::LambdaParameter.new
+					p.name :=  self.name 
+					obj.parameters.add(p)
+					obj.body := blk
+					par.target := self.expression1.Transform()
+					result := obj
+				else
+					stdio.writeln("Processing LoopVariableDefinition: 1.2")
+					// Need to implement a function to take two integers as parameters and return a sequence
+					var obj : org::kermeta::language::behavior::LambdaExpression init org::kermeta::language::behavior::LambdaExpression.new
+					var p : org::kermeta::language::behavior::LambdaParameter init org::kermeta::language::behavior::LambdaParameter.new
+					p.name :=  self.name 
+					obj.parameters.add(p)
+					obj.body := blk
+					var uc : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+					var sl : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+					sl.~value := "AlfHelper"
+					uc.target := sl
+					uc.name := "createSeq"
+					uc.parameters.add(self.expression1.Transform())
+					uc.parameters.add(self.expression2.Transform())
+					par.target := uc
+					result := obj	
+			end
+		end
+		if self.type != void and self.expression != void then
+			stdio.writeln("Processing LoopVariableDefinition: 1.3")
+			// Ignore the type as kermeta can infer the type
+			var obj : org::kermeta::language::behavior::LambdaExpression init org::kermeta::language::behavior::LambdaExpression.new
+			var p : org::kermeta::language::behavior::LambdaParameter init org::kermeta::language::behavior::LambdaParameter.new
+			p.name :=  self.name 
+			obj.parameters.add(p)
+			obj.body := blk
+			par.target := self.expression.Transform()
+			result := obj
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "ForControl"
+		obj.implName := ""
+		obj.alfRef := ""
+		obj.alfGrammar := "LoopVariableDefinition : 
+	(name = ID 'in' expression1 = Expression ( '..' expression2 = Expression )?)
+	| (type = QualifiedNameWithBinding name = ID ':' expression = Expression) ;"
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class BreakStatement {
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: BreakStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "BreakStatement"
+			obj.implName := ""
+			obj.alfRef := "9.13"
+			obj.alfGrammar := "BreakStatement : 
+	{BreakStatement}'break' ';' ;"
+			obj.comments := "Implemented directly in the Block Statement"
+			result := obj
+		end
+	}
+	aspect class ReturnStatement {
+		operation Transform() : org::kermeta::language::behavior::Expression is do
+			var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+			var cr : org::kermeta::language::behavior::CallResult init org::kermeta::language::behavior::CallResult.new
+			obj.target := cr
+			obj.~value := self.expression.Transform()
+			result := obj
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: ReturnStatement")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "ReturnStatement"
+			obj.implName := ""
+			obj.alfRef := "9.14"
+			obj.alfGrammar := "ReturnStatement : 
+	'return' expression = Expression ';' ;"
+			obj.comments := "Sets the result value, currently this does not terminate but continues to execute. To implement would need to define an 
+			enclosing block for it such as an operation call, at which point it would make sense and also an exception can be raised which would terminate the
+			current execution"
+			result := obj
+		end
+	}
+	aspect class AcceptStatement {
+	operation Transform() : org::kermeta::language::behavior::EmptyExpression is do
+		var obj : org::kermeta::language::behavior::EmptyExpression init org::kermeta::language::behavior::EmptyExpression.new
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: AcceptStatement")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "AcceptStatement"
+		obj.implName := "org::kermeta::language::behavior::EmptyExpression"
+		obj.alfRef := "9.15"
+		obj.alfGrammar := ""
+		obj.comments := "Not Implemented"
+		obj.status := false
+		obj.description := "Not Implemented"
+		result := obj
+	end
+}
+aspect class ClassifyStatement {
+	operation Transform() : org::kermeta::language::behavior::EmptyExpression is do
+		var obj : org::kermeta::language::behavior::EmptyExpression init org::kermeta::language::behavior::EmptyExpression.new
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ClassifyStatement")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "ClassifyStatement"
+		obj.implName := "org::kermeta::language::behavior::EmptyExpression"
+		obj.alfRef := "9.16"
+		obj.alfGrammar := ""
+		obj.comments := "Not Implemented"
+		obj.status := false
+		obj.description := "Not Implemented"
+		result := obj
+	end
+}
+
+// Classes used to support the Grammar and the transformation
+	aspect class DocumentedStatement {
+		operation Transform() : org::kermeta::language::behavior::Expression is do
+			if self.comment != void then
+				var obj : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+				obj.statement.add(self.statement.Transform())
+				var tag : org::kermeta::language::structure::Tag init org::kermeta::language::structure::Tag.new
+				tag.name := "ALF-Transformation"
+				tag.~value := "implement comment in DocumentedStatement"
+				obj.kOwnedTags.add(tag)
+				tag.object.add(obj)
+				result := obj
+			else 
+				result := self.statement.Transform()
+			end
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			obj.alfName := "DocumentedStatement"
+			obj.implName := "org::kermeta::language::behavior::Block"
+			obj.alfRef := ""
+			obj.alfGrammar := "DocumentedStatement :
+	(comment = (ML_COMMENT | SL_COMMENT))? statement = Statement 
+;"
+			obj.comments := "Need to implement"
+			result := obj
+		end
+	}
+	aspect class StatementSequence {
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			obj.alfName := "StatementSequence"
+			obj.implName := "StringLiteral"
+			obj.alfRef := ""
+			obj.alfGrammar := "StatementSequence :
+	(statements += DocumentedStatement)+
+;"
+			obj.comments := "Only used at the grammar level"
+			result := obj
+		end
+	}
+	
+
+	
+	
+	
+	aspect class InvocationOrAssignementOrDeclarationStatement {
+		operation Transform() : org::kermeta::language::behavior::Expression is do
+			stdio.writeln("Processing InvocationOrAssignementOrDeclarationStatement")
+			var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			obj.~value := "InvocationOrAssignementOrDeclarationStatement: need to implement"
+			result := obj
+			
+			if self.typePart_OR_assignedPart_OR_invocationPart != void then
+				if self.typePart_OR_assignedPart_OR_invocationPart.isInstanceOf(NameExpression) then
+					var tgt : org::kermeta::language::behavior::Expression
+					tgt := self.typePart_OR_assignedPart_OR_invocationPart.asType(NameExpression).Transform()
+					if self.variableDeclarationCompletion != void then
+					end
+					if self.assignmentCompletion != void then
+						if tgt.isInstanceOf(org::kermeta::language::behavior::CallExpression) then
+							stdio.writeln("InvocationOrAssignementOrDeclarationStatement: Creating a Calling Expression")
+							result := self.assignmentCompletion.Transform(tgt.asType(org::kermeta::language::behavior::CallExpression))
+						end
+					end
+				end
+			end
+			
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			obj.alfName := "InvocationOrAssignementOrDeclarationStatement"
+			obj.implName := ""
+			obj.alfRef := ""
+			obj.alfGrammar := "InvocationOrAssignementOrDeclarationStatement :
+	typePart_OR_assignedPart_OR_invocationPart = NameExpression
+	//(suffixCompletion = SuffixCompletion)?
+	((variableDeclarationCompletion = VariableDeclarationCompletion) |
+	 (assignmentCompletion = AssignmentCompletion))? ';'
+;"
+			obj.comments := ""
+			result := obj
+		end
+	}
+	
+
+
+
+
+aspect class SuperInvocationStatement {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing SuperInvocationStatement")
+		result := self._super.Transform()
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "SuperInvocationStatement"
+		obj.implName := ""
+		obj.alfRef := ""
+		obj.alfGrammar := "SuperInvocationStatement :
+	_super = SuperInvocationExpression ';'
+;"
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class ThisInvocationStatement {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing ThisInvocationStatement")
+		if self.assignmentCompletion != void then
+				result := self.assignmentCompletion.Transform(self._this.Transform().asType(org::kermeta::language::behavior::UnresolvedCall))
+			else
+				result := self._this.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "ThisInvocationStatement"
+		obj.implName := ""
+		obj.alfRef := ""
+		obj.alfGrammar := "ThisInvocationStatement :
+			_this = ThisExpression (assignmentCompletion = AssignmentCompletion)? ';' 
+		;"
+		obj.comments := ""
+		result := obj
+	end
+}
+aspect class InstanceCreationInvocationStatement {
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "InstanceCreationInvocationStatement"
+		obj.implName := ""
+		obj.alfRef := ""
+		obj.alfGrammar := "InstanceCreationInvocationStatement :
+	_new = InstanceCreationExpression ';' ;"
+		obj.comments := "Not Implemented"
+		result := obj
+	end
+}
+aspect class Statement {
+		operation Transform() : org::kermeta::language::behavior::Expression is do
+			stdio.writeln("Processing Statement")
+			var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			obj.~value := "Statement: problem invalid syntax"
+			result := obj
+			if self.isInstanceOf(AnnotatedStatement) then result := self.asType(AnnotatedStatement).Transform() end
+			if self.isInstanceOf(InlineStatement) then result := self.asType(InlineStatement).Transform() end
+			if self.isInstanceOf(BlockStatement) then result := self.asType(BlockStatement).Transform() end
+			if self.isInstanceOf(EmptyStatement) then result := self.asType(EmptyStatement).Transform() end
+			if self.isInstanceOf(LocalNameDeclarationStatement) then result := self.asType(LocalNameDeclarationStatement).Transform() end
+			if self.isInstanceOf(DoStatement) then result := self.asType(DoStatement).Transform() end
+			
+			if self.isInstanceOf(IfStatement) then result := self.asType(IfStatement).Transform() end
+			if self.isInstanceOf(SwitchStatement) then result := self.asType(SwitchStatement).Transform() end
+			if self.isInstanceOf(WhileStatement) then result := self.asType(WhileStatement).Transform() end
+			if self.isInstanceOf(ForStatement) then result := self.asType(ForStatement).Transform() end
+			//if self.isInstanceOf(BreakStatement) then result := self.asType(BreakStatement).Transform() end Dealt with in the Block
+			if self.isInstanceOf(ReturnStatement) then result := self.asType(ReturnStatement).Transform() end
+			if self.isInstanceOf(AcceptStatement) then result := self.asType(AcceptStatement).Transform() end
+			if self.isInstanceOf(ClassifyStatement) then result := self.asType(ClassifyStatement).Transform() end
+			if self.isInstanceOf(InvocationOrAssignementOrDeclarationStatement) then result := self.asType(InvocationOrAssignementOrDeclarationStatement).Transform() end
+			if self.isInstanceOf(SuperInvocationStatement) then result := self.asType(SuperInvocationStatement).Transform() end
+			if self.isInstanceOf(ThisInvocationStatement) then result := self.asType(ThisInvocationStatement).Transform() end
+			//if self.isInstanceOf(InstanceCreationInvocationStatement) then result := self.asType(InstanceCreationInvocationStatement).Transform() end
+			
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			obj.alfName := "Statement"
+			obj.implName := "org::kermeta::language::behavior::Expression"
+			obj.alfRef := ""
+			obj.alfGrammar := "Statement :
+	(AnnotatedStatement | 
+	InlineStatement |
+	BlockStatement |
+	EmptyStatement |
+	LocalNameDeclarationStatement |
+	IfStatement |
+	SwitchStatement |
+	WhileStatement |
+	DoStatement |
+	ForStatement |
+	BreakStatement |
+	ReturnStatement |
+	AcceptStatement |
+	ClassifyStatement |
+	InvocationOrAssignementOrDeclarationStatement |
+	SuperInvocationStatement |
+	ThisInvocationStatement |
+	InstanceCreationInvocationStatement)
+;"
+			obj.comments := ""
+			result := obj
+		end
+	}
+	
+}
+}
+}

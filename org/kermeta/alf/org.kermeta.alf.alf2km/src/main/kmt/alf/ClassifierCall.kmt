@@ -1,0 +1,388 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+
+aspect class SequenceOperationExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		obj.name := self.operationName
+		self.tuple.tupleElements.each{e|
+				obj.parameters.add(e.Transform())
+		}
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: SequenceOperationExpression")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "SequenceOperationExpression"
+		obj.implName := "org::kermeta::language::behavior::UnresolvedCall"
+		obj.alfGrammar := "SequenceOperationExpression : 
+	'->' operationName = ID tuple = Tuple (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.17"
+		obj.comments := "This provides a notation to apply a operation to each of the elements in a sequence"
+		obj.status := false
+		obj.description := "This needs a parameter which indicates which sequence is being dealt with"
+		result := obj
+	end
+}
+
+aspect class SequenceReductionExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		obj.name := "reduce"
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: SequenceReductionExpression")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "SequenceReductionExpression"
+		obj.implName := "org::kermeta::language::behavior::UnresolvedCall"
+		obj.alfGrammar := "SequenceReductionExpression :
+	'->' 'reduce' (isOrdered ?= 'ordered')? behavior = QualifiedNameWithBinding (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.18"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "Need to implement a reduce function based on the behavior function like binaryexpression"
+		result := obj
+	end
+}
+
+aspect class SequenceExpansionExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "SequenceExpansionExpression: Error must be a given type"
+		result := obj
+		if self.isInstanceOf(SelectOrRejectOperation) then
+			result := self.asType(SelectOrRejectOperation).Transform()
+		end
+		if self.isInstanceOf(CollectOrIterateOperation) then
+			result := self.asType(CollectOrIterateOperation).Transform()
+		end
+		if self.isInstanceOf(ForAllOrExistsOrOneOperation) then
+			result := self.asType(ForAllOrExistsOrOneOperation).Transform()
+		end
+		if self.isInstanceOf(IsUniqueOperation) then
+			result := self.asType(IsUniqueOperation).Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: SequenceExpansionExpression")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "SequenceExpansionExpression"
+		obj.implName := "org::kermeta::language::behavior::Expression"
+		obj.alfGrammar := "SequenceExpansionExpression :
+	SelectOrRejectOperation |
+	CollectOrIterateOperation |
+	ForAllOrExistsOrOneOperation |
+	IsUniqueOperation
+;"
+		obj.alfRef := "8.3.19"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "Need to implement"
+		result := obj
+	end
+}
+
+aspect class SelectOrRejectOperation {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		if self.op == "select" then 
+			obj.name := "select"
+		end
+		if self.op == "reject" then 
+			obj.name := "reject"
+		end
+		var nme : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		nme.~value := self.name
+		obj.target := nme
+		obj.parameters.add(self.expr.Transform())
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: SelectOrRejectOperation")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "SequenceReductionExpression"
+		obj.implName := "org::kermeta::language::behavior::UnresolvedCall"
+		obj.alfGrammar := "SelectOrRejectOperation :
+	'->' op = SelectOrRejectOperator name = ID '('expr=Expression')' (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.20"
+		obj.comments := "Fix Expression"
+		obj.status := false
+		obj.description := "Need to implement"
+		result := obj
+	end
+}
+
+aspect class CollectOrIterateOperation {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		if self.op == "collect" then 
+			obj.name := "collect"
+		end
+		if self.op == "iterate" then 
+			obj.name := "each"
+		end
+		obj.parameters.add(self.expr.Transform())
+		var nme : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		nme.~value := self.name
+		obj.target := nme
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: CollectOrIterateOperation")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "CollectOrIterateOperation"
+		obj.implName := "org::kermeta::language::behavior::UnresolvedCall"
+		obj.alfGrammar := "CollectOrIterateOperation :
+	'->' op = CollectOrIterateOperator name = ID '('expr=Expression')' (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.21"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "Need to implement"
+		result := obj
+	end
+}
+
+aspect class ForAllOrExistsOrOneOperation {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		if self.op == "forAll" then 
+			obj.name := "forAll"
+		end
+		if self.op == "exists" then 
+			obj.name := "exists"
+		end
+		if self.op == "one" then 
+			obj.name := "one"
+		end
+		obj.parameters.add(self.expr.Transform())
+		var nme : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		nme.~value := self.name
+		obj.target := nme
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ForAllOrExistsOrOneOperation")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "ForAllOrExistsOrOneOperation"
+		obj.implName := "org::kermeta::language::behavior::UnresolvedCall"
+		obj.alfGrammar := "ForAllOrExistsOrOneOperation :
+	'->' op = ForAllOrExistsOrOneOperator name = ID '('expr=Expression')' (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.22"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "Need to implement"
+		result := obj
+	end
+}
+
+aspect class IsUniqueOperation {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		obj.name := "isUnique"
+		obj.parameters.add(self.expr.Transform())
+		var nme : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		nme.~value := self.name
+		obj.target := nme
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: IsUniqueOperation")
+		obj.Init()
+		obj.synconfLevel := "Full"
+		obj.alfName := "IsUniqueOperation"
+		obj.implName := "org::kermeta::language::behavior::UnresolvedCall"
+		obj.alfGrammar := "IsUniqueOperation :
+	'->' 'isUnique' name = ID '('expr=Expression')' (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.23"
+		obj.comments := "Need to check for IsUnique"
+		obj.status := false
+		obj.description := "Need to implement"
+		result := obj
+	end
+}
+
+
+
+
+
+
+
+
+
+
+
+
+aspect class SuffixExpression {
+	operation Process(p : org::kermeta::language::behavior::UnresolvedCall) : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "SuffixExpression: need to implement"
+		result := obj
+		if self.isInstanceOf(OperationCallExpression) then
+			if p == void then
+				result := self.asType(OperationCallExpression).Transform()
+			else
+				var e : org::kermeta::language::behavior::Expression
+				var c : org::kermeta::language::behavior::UnresolvedCall
+				e := self.asType(OperationCallExpression).Transform()
+				if e.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+					c ?= e 
+					c.target := p
+					result := c
+				end
+			end
+		end
+		
+		if self.isInstanceOf(PropertyCallExpression) then
+			if p == void then
+				result := self.asType(PropertyCallExpression).Transform()
+			else
+				var e : org::kermeta::language::behavior::Expression
+				var c : org::kermeta::language::behavior::UnresolvedCall
+				e := self.asType(OperationCallExpression).Transform()
+				if e.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+					c ?= e 
+					c.target := p
+					result := c
+				end
+			end
+		end
+		if self.isInstanceOf(SequenceOperationExpression) then
+			if p == void then
+				result := self.asType(SequenceOperationExpression).Transform()
+			else
+				var e : org::kermeta::language::behavior::Expression
+				var c : org::kermeta::language::behavior::UnresolvedCall
+				e := self.asType(SequenceOperationExpression).Transform()
+				if e.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+					c ?= e 
+					c.target := p
+					result := c
+				end
+			end
+		end
+		
+		if self.isInstanceOf(SequenceReductionExpression) then
+			if p == void then
+				result := self.asType(SequenceReductionExpression).Transform()
+			else
+				var e : org::kermeta::language::behavior::Expression
+				var c : org::kermeta::language::behavior::UnresolvedCall
+				e := self.asType(SequenceReductionExpression).Transform()
+				if e.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+					c ?= e 
+					c.target := p
+					result := c
+				end
+			end
+		end
+		
+		if self.isInstanceOf(SequenceExpansionExpression) then
+			if p == void then
+				result := self.asType(SequenceExpansionExpression).Transform()
+			else
+				var e : org::kermeta::language::behavior::Expression
+				var c : org::kermeta::language::behavior::UnresolvedCall
+				e := self.asType(SequenceExpansionExpression).Transform()
+				if e.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+					c ?= e 
+					c.target := p
+					result := c
+				end
+			end
+		end
+		
+		if self.isInstanceOf(ClassExtentExpression) then
+			if p == void then
+				result := self.asType(ClassExtentExpression).Transform()
+			else
+				var e : org::kermeta::language::behavior::Expression
+				var c : org::kermeta::language::behavior::UnresolvedCall
+				e := self.asType(ClassExtentExpression).Transform()
+				if e.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
+					c ?= e 
+					c.target := p
+					result := c
+				end
+			end
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "SuffixExpression"
+		obj.implName := "Expression"
+		obj.alfGrammar := "SuffixExpression :
+	OperationCallExpression |
+	PropertyCallExpression |
+	LinkOperationExpression |
+	SequenceOperationExpression |
+	SequenceReductionExpression |
+	SequenceExpansionExpression | 
+	ClassExtentExpression
+;"
+		obj.alfRef := ""
+		obj.comments := ""
+		result := obj
+	end
+}
+
+}
+}
+}
+
+

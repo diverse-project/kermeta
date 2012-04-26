@@ -1,0 +1,81 @@
+/* $Id:$ 
+ * Creation : November 26, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            suresh
+ */
+
+require kermeta
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+
+aspect class CLASSSTRUCT {
+	operation Transform() : org::kermeta::language::structure::ClassDefinition is do
+		var obj : org::kermeta::language::structure::ClassDefinition init org::kermeta::language::structure::ClassDefinition.new
+		obj.name := name
+		self.clsop.each{ o | obj.ownedOperation.add(o.Transform()) }
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "CLASSSTRUCT"
+		obj.implName := "ClassDefinition"
+		obj.alfRef := ""
+		obj.alfGrammar := "'class' name=ID '{' (clsop+=CLASSOP)* '}';"
+		obj.comments := "Base Class Implementation"
+		result := obj
+	end
+}
+aspect class CLASSOP {
+	operation Transform() : org::kermeta::language::structure::Operation is do
+		var obj : org::kermeta::language::structure::Operation init org::kermeta::language::structure::Operation.new
+		obj.name := name
+		var blk : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
+		self.stat.each{ o | 
+			if o.isInstanceOf(Statement) then blk.statement.add(o.asType(Statement).Transform()) end 		 
+		}
+		obj.body := blk
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "CLASSOP"
+		obj.implName := "Operation"
+		obj.alfRef := ""
+		obj.alfGrammar := "'void ' name=ID '(){' (stat+=Statement)* '}'"
+		obj.comments := "An operation containing a list of statements"
+		result := obj 
+	end
+}
+
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

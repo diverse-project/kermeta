@@ -1,0 +1,50 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package org3 {
+	package kermeta {
+			package alf {
+				package alf2km {
+	class MainClass
+	{
+	/*
+		operation LoadModel(model : String) : CLASSSTRUCT is do
+			var res : utils::ResManager init utils::ResManager.new
+			result := res.LoadAlfModel(model)
+		end
+		operation SaveModel(cl : org::kermeta::language::structure::ClassDefinition) : Void is do
+			var res : utils::ResManager init utils::ResManager.new
+			var mu : org::kermeta::language::structure::ModelingUnit init org::kermeta::language::structure::ModelingUnit.new
+			var p : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new
+			p.name := "testPackage"
+			mu.packages.add(p)
+			p.ownedTypeDefinition.add(cl)
+			res.Save("platform:/resource/Transformer/model/output.km",mu)
+		end
+		
+		operation mainOperation() : Void is do 
+			//Document()
+			
+			stdio.writeln("Starting to Process Alf")
+			
+			var cl : CLASSSTRUCT init LoadModel("platform:/resource/Transformer/model/test.xmi")
+			var kcl : org::kermeta::language::structure::ClassDefinition
+			stdio.writeln("Start Transformation")
+			kcl := cl.Transform()
+			SaveModel(kcl)
+			stdio.writeln("End Transformation")
+			
+		end
+		operation Document() : Void is do
+			var dm : DocManager init DocManager.new
+			stdio.writeln(dm.getDocument())
+		end
+		*/
+		operation mainOperation() : Void is do 
+			stdio.writeln("Starting to Process Alf")
+		end
+	}
+	}
+	}
+	}
+}

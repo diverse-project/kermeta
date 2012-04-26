@@ -1,0 +1,38 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::emfpersistence
+using kermeta::exceptions
+
+
+package org3 {
+package kermeta {
+package alf {
+package alf2km {
+package utils {
+	class ResManager
+	{
+	   operation LoadAlfModel(modelName : String) : org3::kermeta::alf::CLASSSTRUCT is do 
+			 result := void
+			 var repository : ResourceSet init ResourceSet.new
+	         var resource : Resource init repository.createResource(modelName)
+	         do
+	            resource.load(void)
+	            if resource.getContents().size() > 0 then
+					result ?= resource.getContents().first
+			 	end
+	         rescue(e : ResourceLoadException)
+	           //stdio.writeln("Resource Load Exception")
+	         end
+		end
+		operation Save(modelName : String,m : org::kermeta::language::structure::ModelingUnit) : Void is do
+			var repository : ResourceSet init ResourceSet.new
+	        var resource : Resource init repository.createResource(modelName, "http://www.kermeta.org/kermeta/2_0_0/")
+	     	resource.getContents().add(m)
+	     	resource.save(void)
+		end
+	}
+}
+}
+}
+}
+}

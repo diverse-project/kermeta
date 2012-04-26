@@ -1,0 +1,83 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package org3 {
+package kermeta {
+package alf {
+package alf2km {
+package utils {
+	class ClassDoc
+	{
+		attribute alfName : String
+		attribute implName : String
+		attribute alfRef : String
+		attribute alfGrammar : String
+		attribute refinedGrammar : String
+		attribute comments : String
+		attribute status : Boolean
+		attribute description : String
+		attribute implLanguage : String
+		attribute synconfLevel : String
+		/*
+		operation FormatLine() : String is do
+			implLanguage := "Kermeta" 
+			var doc : String init "\hline\n"
+			doc := doc + alfName + " & "
+			doc := doc + implName + " & "
+			doc := doc + alfRef + " & "
+			doc := doc + alfGrammar + " & "
+			doc := doc + comments
+			doc := doc + "\n" + "$tabularnewline"
+			doc := doc + "\n"
+			result := doc
+		end
+		*/
+		operation getInputLine(label : String, field : String) : String is do
+			var doc : String init ""
+			doc := doc + "\item[" + label + "] "
+			doc := doc + field + "\n"
+			result := doc
+		end
+		operation Init() : Void is do
+			implLanguage := "Kermeta" 
+			synconfLevel := "Minimum"
+			status := true
+		end
+		/*
+		operation FormatLine() : String is do
+			var doc : String init "\\subsubsection{"
+			doc := doc + alfName + "}\n"
+			doc := doc + "\begin{description}\n"
+			doc := doc + getInputLine("Alf Reference","Clause " + alfRef)
+			doc := doc + getInputLine("Implementation in Kermeta",implName)
+			doc := doc + getInputLine("Alf Grammar",alfGrammar)
+			//doc := doc + getInputLine("Description","")
+			doc := doc + getInputLine("Comments",comments)
+			doc := doc + getInputLine("Conformance","Syntax " + synconfLevel)
+			doc := doc + "\end{description}"
+			//doc := doc.replace("_","\\_")
+			result := doc.toString()
+		end
+		*/
+		operation FormatLine() : String is do
+			if status == false then
+				var doc : String init "\\subsubsection{"
+				doc := doc + alfName + "}\n"
+				doc := doc + "\begin{description}\n"
+				doc := doc + getInputLine("Issue: ",description)
+				doc := doc + getInputLine("Conformance","Syntax " + synconfLevel)
+				doc := doc + getInputLine("Alf Grammar",alfGrammar)
+				doc := doc + getInputLine("Comments",comments)
+				doc := doc + "\end{description}"
+				//doc := doc.replace("_","\\_")
+				result := doc.toString()
+			else 
+				result := ""
+			end
+		end
+	}
+}
+}
+}
+}
+}

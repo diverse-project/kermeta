@@ -1,0 +1,545 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+	aspect class AssignmentCompletion {
+		operation Transform(tgt : org::kermeta::language::behavior::CallExpression) : org::kermeta::language::behavior::Expression is do
+			stdio.writeln("Processing AssignmentCompletion")
+			var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			obj.~value := "AssignmentCompletion: Not implemented for operator: " + self.op
+			result := obj
+			stdio.writeln("Processing operator: " + self.op)
+			if self.op.toString() == "=" and tgt != void then 
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				//var co : org::kermeta::language::behavior::CallExpression init org::kermeta::language::behavior::CallExpression.new 
+				
+				obj.target := tgt
+				obj.~value := rightHandSide.Transform()
+				result := obj
+			end
+			if self.op.toString() == "+=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "plus"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+			if self.op.toString() == "-=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "minus"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+			if self.op.toString() == "*=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "mult"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+			if self.op.toString() == "%=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "mod"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+			if self.op.toString() == "/=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "div"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+			if self.op.toString() == "&=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "and"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+			if self.op.toString() == "|=" and tgt != void then
+				var obj : org::kermeta::language::behavior::Assignment init org::kermeta::language::behavior::Assignment.new
+				obj.target := tgt
+				var add : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				add.name := "or"
+				add.target := tgt
+				add.parameters.add(rightHandSide.Transform())
+				obj.~value := add
+				result := obj
+			end
+		end
+		operation Document() : ClassDoc is do
+			var obj : ClassDoc init ClassDoc.new
+			stdio.writeln("Document: AssignmentCompletion")
+			obj.Init()
+			obj.synconfLevel := "Minimum"
+			obj.alfName := "AssignmentCompletion"
+			obj.implName := "UnresolvedCall"
+			obj.alfRef := "8.8"
+			obj.alfGrammar := "AssignmentCompletion : op=AssignmentOperator rightHandSide = Expression
+			enum AssignmentOperator :
+	ASSIGN = '=' |
+	PLUSASSIGN = '+=' |
+	MINUSASSIGN = '-=' |
+	MULTASSIGN = '*=' |
+	MODASSIGN = '%=' |
+	DIVASSIGN = '/=' |
+	ANDASSIGN = '\\&=' |
+	ORASSIGN = '|=' |
+	XORASSIGN = '\\^=' |
+	LSHIFTASSIGN = '<<=' |
+	RSHIFTASSIGN = '>>=' |
+	URSHIFTASSIGN = '>>>='
+;"
+			obj.comments := ""
+			obj.status := false
+			obj.description := "The following needs to be implemented XOR function and the shift operators"
+			result := obj
+		end
+	}
+	aspect class UnaryExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing UnaryExpression")
+		// TODO: Fix Unary Operator
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		var fd : Integer init 0
+		if self.op == "!" then
+			fd := 1
+			obj.name := "not"
+			obj.target := self.exp.Transform()
+			result := obj
+		end
+		if self.op == "+" then
+			fd := 1
+			result := self.exp.Transform()
+		end
+		if self.op == "-" then
+			fd := 1
+			var il : org::kermeta::language::behavior::IntegerLiteral init org::kermeta::language::behavior::IntegerLiteral.new 
+			il.~value := 0
+			obj.target := il
+			obj.name := "minus"
+			obj.parameters.add(self.exp.Transform())
+		end
+		if self.op == "~" then
+			fd := 1
+			obj.name := "notimpl"
+		end
+		if self.op == "$" then
+			fd := 1
+			obj.name := "notimpl"
+		end
+		result := obj
+		if fd == 0 then
+			result := self.exp.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: UnaryExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "UnaryExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.5,8.5.1,8.5.2,8.5.3,8.5.4,8.5.6(8.5.5 is supported by the ParenthesizedExpression which is the cst expression)"
+		obj.alfGrammar := "(op=('!'|'-'|'+'|'\$'|'\~'))? exp=PrimaryExpression ;"
+		obj.comments := "! negation for boolean values implemented as not function for booleans,
+		\~ bitwise complement on a bit string not implemented,
+		+ and - the + does nothing to the integer while the - negates the integer for - we use the minus function and (0-Integer)
+		\$ isolation not at the full conformance level
+		"
+		obj.status := false
+		obj.description := "Implement the different functions for unary expressions"
+		result := obj
+	end
+}
+aspect class AdditiveExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing AdditiveExpression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			if self.op.size() == 1 then 
+				if self.op.first() == "+" then
+					obj.name := "plus"
+				end
+				if self.op.first() == "-" then
+					obj.name := "minus"
+				end
+				var fd : Integer init 0
+				self.exp.each{e|
+					if fd == 0 then
+						fd := 1
+						obj.target := e.Transform()
+					else 
+						obj.parameters.add(e.Transform())	
+					end
+				}
+				result := obj
+			else 
+				var opList : Sequence[String] init Sequence[String].new
+				var expList : Sequence[MultiplicativeExpression] init Sequence[MultiplicativeExpression].new
+				self.op.each{e| opList.add(e)}
+				self.exp.each{e| expList.add(e)}
+				result := Process(opList,expList)
+			end 
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Process(opList : seq String[0..*],expList : seq MultiplicativeExpression[0..*]) : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("operator List: " + opList.size().toString())
+		stdio.writeln("Exp List: " + expList.size().toString())
+		if opList.size() > 1 then 
+				var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				var cop : String
+				cop := opList.first()
+				if cop == "+" then
+					obj.name := "plus"
+				end
+				if cop == "-" then
+					obj.name := "minus"
+				end
+				opList.removeAt(0)
+				obj.target := expList.first().Transform()
+				expList.removeAt(0)
+				obj.parameters.add(Process(opList,expList))
+				result := obj
+		else
+				if expList.size() == 2 then 
+						var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+						if opList.first() == "+" then
+							obj.name := "plus"
+						end
+						if opList.first() == "-" then
+							obj.name := "minus"
+						end
+						opList.removeAt(0)
+						obj.target := expList.first().Transform()
+						expList.removeAt(0)
+						obj.parameters.add(expList.first().Transform())
+						expList.removeAt(0)
+						result := obj
+					else
+						var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+						obj.~value := "Error in AdditiveExpression incorrect Arguments"
+						result := obj
+				end
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: AdditiveExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "AdditiveExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.2"
+		obj.alfGrammar := "exp+=MultiplicativeExpression (op+=('+' | '-') exp+=MultiplicativeExpression)*"
+		obj.comments := "Mathematical operators for addition and subtraction, note that in the case of + both operands can be either string or Integer. Need to test when compiling 
+		if the correct operands were used have we added a string to an Integer should raise an exception"
+		obj.status := false
+		obj.description := "Need to test it and in the case of + both operands can be either String or Integer. Kermeta would throw an error if this is not the case"
+		result := obj
+	end
+	
+}
+aspect class MultiplicativeExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing MultiplicativeExpression")
+		if self.exp.size() > 1 then
+			if self.op.size() == 1 then
+				var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				if self.op == "*" then
+					obj.name := "mult"
+				end
+				if self.op == "/" then
+					obj.name := "div"
+				end
+				if self.op == "%" then
+					obj.name := "mod"
+				end
+				var fd : Integer init 0
+				self.exp.each{e|
+					if fd == 0 then
+						fd := 1
+						obj.target := e.Transform()
+					else 
+						obj.parameters.add(e.Transform())	
+					end
+				}
+				result := obj
+			else
+				var opList : Sequence[String] init Sequence[String].new
+				var expList : Sequence[UnaryExpression] init Sequence[UnaryExpression].new
+				self.op.each{e| opList.add(e)}
+				self.exp.each{e| expList.add(e)}
+				result := Process(opList,expList)
+			end
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Process(opList : seq String[0..*],expList : seq UnaryExpression[0..*]) : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("operator List: " + opList.size().toString())
+		stdio.writeln("Exp List: " + expList.size().toString())
+		if opList.size() > 1 then 
+				var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				var cop : String
+				cop := opList.first()
+				if cop == "*" then
+					obj.name := "mult"
+				end
+				if cop == "/" then
+					obj.name := "div"
+				end
+				if cop == "%" then
+					obj.name := "mod"
+				end
+				opList.removeAt(0)
+				obj.target := expList.first().Transform()
+				expList.removeAt(0)
+				obj.parameters.add(Process(opList,expList))
+				result := obj
+		else
+				if expList.size() == 2 then 
+						var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+						if opList.first() == "*" then
+							obj.name := "mult"
+						end
+						if opList.first() == "/" then
+							obj.name := "div"
+						end
+						if opList.first() == "%" then
+							obj.name := "mod"
+						end
+						opList.removeAt(0)
+						obj.target := expList.first().Transform()
+						expList.removeAt(0)
+						obj.parameters.add(expList.first().Transform())
+						expList.removeAt(0)
+						result := obj
+					else
+						var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+						obj.~value := "Error in AdditiveExpression incorrect Arguments"
+						result := obj
+				end
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: MultiplicativeExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "MultiplicativeExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.2"
+		obj.alfGrammar := "exp+=UnaryExpression (op+=('*' | '/' | '%') exp+=UnaryExpression)* "
+		obj.comments := "Implemented as follows * uses mult, / uses div, % uses mod from numeric in kermeta"
+		obj.status := true
+		obj.description := "Need to test require functions mult,div and modulo"
+		result := obj
+	end
+}
+
+
+aspect class ShiftExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing ShiftExpression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			if self.op == "<<" then
+				obj.name := "lshift"
+			end
+			if self.op == ">>" then
+				obj.name := "rshift"
+			end
+			if self.op == ">>>" then
+				obj.name := "urshift"
+			end
+			var fd : Integer init 0
+			self.exp.each{e|
+				if fd == 0 then
+					fd := 1
+					obj.target := e.Transform()
+				else 
+					obj.parameters.add(e.Transform())	
+				end
+			}
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ShiftExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ShiftExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.3"
+		obj.alfGrammar := "exp+=AdditiveExpression (op=('<<' | '>>' | '>>>') exp+=AdditiveExpression)?"
+		obj.comments := "Supports the Left Shift, Right Shift and Unsigned Right Shift operators on bitstrings."
+		obj.status := false
+		obj.description := "Need to test require functions lshift,rshift and urshift"
+		result := obj
+	end
+}
+aspect class RelationalExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing RelationalExpression")
+		if self.op != void then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			if self.op == "<" then
+				obj.name := "isLower"
+			end
+			if self.op == ">" then
+				obj.name := "isGreater"
+			end
+			if self.op == "<=" then
+				obj.name := "isLowerOrEqual"
+			end
+			if self.op == ">=" then
+				obj.name := "isGreaterOrEqual"
+			end
+			stdio.writeln("Processing RelationalExpression: Left")
+			obj.target := self.left.Transform()
+			if self.right != void then
+				stdio.writeln("Processing RelationalExpression: Right")
+				obj.parameters.add(self.right.Transform())
+			end
+			result := obj
+		else
+			result := self.left.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: RelationalExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "RelationalExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.4"
+		obj.alfGrammar := "left=ShiftExpression (op=('<' | '>' | '<=' | '>=') right=ShiftExpression)?"
+		obj.comments := "Implements the relational operators and maps to the functions provided in kermeta
+		as follows isLower, isGreater, isLowerOrEqual, isGreaterOrEqual"
+		result := obj
+	end
+}
+
+aspect class ClassificationExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing ClassificationExpression")
+		if self.op != void then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			if self.op == "instanceof" then 
+				obj.name := "isInstanceOf"
+			end
+			if self.op == "hastype" then 
+				obj.name := "isInstanceOf"
+			end
+			obj.target := self.exp.Transform()
+			if self.typeName != void then
+				obj.parameters.add(self.typeName.Transform())
+			end
+			result := obj
+		else 
+			result := self.exp.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ClassificationExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ClassificationExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.5"
+		obj.alfGrammar := "exp=RelationalExpression (op=('instanceof' | 'hastype') typeName=NameExpression)?"
+		obj.comments := "Converting to a required type, kermeta would throw an exception if instance does not conform"
+		result := obj
+	end
+}
+aspect class EqualityExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing EqualityExpression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			if self.op == "==" then
+				obj.name := "equals"
+				var fd : Integer init 0
+				self.exp.each{e|
+					if fd == 0 then
+						fd := 1
+						obj.target := e.Transform()
+					else 
+						obj.parameters.add(e.Transform())	
+					end
+				}
+			end
+			if self.op == "!=" then
+				obj.name := "not"
+				var eq : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+				eq.name := "equals"
+				var fd : Integer init 0
+				self.exp.each{e|
+					if fd == 0 then
+						fd := 1
+						eq.target := e.Transform()
+					else 
+						eq.parameters.add(e.Transform())	
+					end
+				}
+				obj.target := eq
+			end
+			
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ClassificationExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "EqualityExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.6"
+		obj.alfGrammar := "exp+=ClassificationExpression (op+=('==' | '!=') exp+=ClassificationExpression)*"
+		obj.comments := "The == is implemented using the equals function and the != is implemented by 
+		applying the not function to the equals function"
+		obj.status := true
+		obj.description := ""
+		result := obj
+	end
+}
+
+	}
+	}
+}

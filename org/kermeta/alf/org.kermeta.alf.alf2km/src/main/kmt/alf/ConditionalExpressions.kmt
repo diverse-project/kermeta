@@ -1,0 +1,234 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+			
+aspect class Expression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing Expression")
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "Expression: Error non-existent expression"
+		result := obj
+		if self.isInstanceOf(ConditionalTestExpression) then
+			result := self.asType(ConditionalTestExpression).Transform()
+		end
+	end	
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "Expression"
+		obj.implName := "org::kermeta::language::behavior::Expression"
+		obj.alfRef := ""
+		obj.alfGrammar := "Expression :
+	ConditionalTestExpression
+;"
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class ConditionalTestExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing Conditional Test Expression")
+		var obj : org::kermeta::language::behavior::Conditional init org::kermeta::language::behavior::Conditional.new
+		if self.whenTrue != void and self.whenFalse != void then
+				obj.thenBody := self.whenTrue.Transform()
+				obj.elseBody := self.whenFalse.Transform()
+				stdio.writeln("Processing Conditional Test Expression2")
+				obj.condition := self.exp.Transform()
+				result := obj
+			else 
+				result := self.exp.Transform()
+		end
+		
+	end	
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ConditionalTestExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ConditionalTestExpression"
+		obj.implName := "Conditional"
+		obj.alfRef := "8.7"
+		obj.alfGrammar := "exp=ConditionalOrExpression ('?' whenTrue=ConditionalTestExpression ':' whenFalse=ConditionalTestExpression)?"
+		obj.comments := "Implemented as a conditional in kermeta"
+		obj.status := true
+		obj.description := "Need to find a function for this purpose as it would need to be used like an expression"
+		result := obj
+	end
+}
+
+
+aspect class InclusiveOrExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing InclusiveOrExpression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			obj.name := "InclusiveOr"
+			var sl : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			sl.~value := "AlfHelper"
+			self.exp.each{e|
+				obj.parameters.add(e.Transform())	
+			}
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: InclusiveOrExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "InclusiveOrExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.7"
+		obj.alfGrammar := "exp+=ExclusiveOrExpression ('|' exp+=ExclusiveOrExpression)*"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "AlfHelper: Need a InclusiveOr(false if both values are false otherwise true) function,
+		implement as AlfHelper.InclusiveOr(bool,bool) returning a bool"
+		result := obj
+	end
+}
+aspect class ExclusiveOrExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing ExclusiveOrExpression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			obj.name := "ExclusiveOr"
+			var sl : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			sl.~value := "AlfHelper"
+			self.exp.each{e|
+				obj.parameters.add(e.Transform())	
+			}
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ExclusiveOrExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ExclusiveOrExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.7"
+		obj.alfGrammar := "exp+=AndExpression ('\^' exp+=AndExpression)*"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "AlfHelper: Need a ExclusiveOr(true if the values are different) function
+		, implement as AlfHelper.ExclusiveOr(bool,bool) returning bool"
+		result := obj
+	end
+}
+aspect class AndExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing AndExpression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			obj.name := "and"
+			var fd : Integer init 0
+			self.exp.each{e|
+				if fd == 0 then
+					fd := 1
+					obj.target := e.Transform()
+				else 
+					obj.parameters.add(e.Transform())	
+				end
+			}
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: AndExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "AndExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.7"
+		obj.alfGrammar := "exp+=EqualityExpression ('\\&' exp+=EqualityExpression)*"
+		obj.comments := "Implemented using the boolean AND function in kermeta"
+		obj.status := true
+		obj.description := "Need to test the AND(single \\& both operators are always evaluated) function"
+		result := obj
+	end
+}
+
+aspect class ConditionalOrExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing Conditional Or Expression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			obj.name := "or"
+			var fd : Integer init 0
+			self.exp.each{e|
+				if fd == 0 then
+					fd := 1
+					obj.target := e.Transform()
+				else 
+					obj.parameters.add(e.Transform())	
+				end
+			}
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+		
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ConditionalOrExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ConditionalOrExpression"
+		obj.implName := "UnresolvedCall or"
+		obj.alfRef := "8.6.8"
+		obj.alfGrammar := "exp+=ConditionalAndExpression ('||' exp+=ConditionalAndExpression)*"
+		obj.comments := "Implements the conditional or"
+		result := obj
+	end
+}
+aspect class ConditionalAndExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing Conditional Or Expression")
+		if self.exp.size() > 1 then
+			var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+			obj.name := "and"
+			var fd : Integer init 0
+			self.exp.each{e|
+				if fd == 0 then
+					fd := 1
+					obj.target := e.Transform()
+				else 
+					obj.parameters.add(e.Transform())	
+				end
+			}
+			result := obj
+		else
+			result := self.exp.first.Transform()
+		end
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ConditionalAndExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ConditionalAndExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.6.8"
+		obj.alfGrammar := "exp+=InclusiveOrExpression ('\\&\\&' exp+=InclusiveOrExpression)*"
+		obj.comments := "Implements the conditional AND"
+		result := obj
+	end
+}
+}
+}
+}

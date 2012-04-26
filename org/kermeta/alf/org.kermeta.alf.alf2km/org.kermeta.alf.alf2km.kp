@@ -1,0 +1,32 @@
+KermetaProject "org.kermeta.alf.alf2km"
+	groupId = "my.group"
+	defaultMainClass = "org3::kermeta::alf::alf2km::MainClass"
+	defaultMainOperation = "mainOperation"
+	sources = {
+		require "${alf.model.baseUri}/model/Alf.ecore" byteCodeFromADependency
+		require "${project.baseUri}/src/main/kmt/utils/ResManager.kmt"
+		require "${project.baseUri}/src/main/kmt/utils/ClassDoc.kmt"
+		require "${project.baseUri}/src/main/kmt/utils/DocManager.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/Literals.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/ConditionalExpressions.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/NameCall.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/ClassifierCall.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/Statements.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/MathExpr.kmt"
+		require "${project.baseUri}/src/main/kmt/alf/Base.kmt"
+		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		//dependency "library.core"="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		//dependency "alf.model"="platform:/resource/org.kermeta.alf.model","mvn:org.kermeta.alf/alf.model/2.0.1-SNAPSHOT"
+		dependency "alf.model"="mvn:org.kermeta.alf/alf.model/2.0.1-SNAPSHOT" //sourceOnly
+	}	
+	packageEquivalences={
+		// indicates the real java name of a given package
+		// useful for deployed thirdparty metamodels
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+		packageEquivalence "uml2" = "org.eclipse.uml2.uml"
+		//packageEquivalence "alfDsl" = "org.kermeta.alfDsl"
+	}

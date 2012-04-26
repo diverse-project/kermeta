@@ -1,0 +1,647 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+using org3::kermeta::alf::alf2km::utils
+
+package org3 {
+	package kermeta {
+		package alf {
+
+aspect class PrimaryExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "PrimaryExpression: need to implement"
+		result := obj
+		
+		// ValueExpressions
+		// LITERAL
+		if self.prefix.isInstanceOf(STRING_LITERAL) then
+			result := self.prefix.asType(STRING_LITERAL).Transform()
+		end 
+		if self.prefix.isInstanceOf(NUMBER_LITERAL) then
+			result := self.prefix.asType(NUMBER_LITERAL).Transform()
+		end 
+		if self.prefix.isInstanceOf(BOOLEAN_LITERAL) then
+			result := self.prefix.asType(BOOLEAN_LITERAL).Transform()
+		end 
+		// NAMEEXPRESSION
+		if self.prefix.isInstanceOf(NameExpression) then
+			result := self.prefix.asType(NameExpression).Transform()
+		end 
+		
+		if self.prefix.isInstanceOf(ThisExpression) then
+			result := self.prefix.asType(ThisExpression).Transform()
+		end 
+		
+		if self.prefix.isInstanceOf(SuperInvocationExpression) then
+			result := self.prefix.asType(SuperInvocationExpression).Transform()
+		end 
+		/*
+		if self.prefix.isInstanceOf(InstanceCreationExpression) then
+			result := self.prefix.asType(InstanceCreationExpression).Transform()
+		end
+		*/ 
+		if self.prefix.isInstanceOf(ParenthesizedExpression) then
+			result := self.prefix.asType(ParenthesizedExpression).Transform()
+		end 
+		if self.prefix.isInstanceOf(NullExpression) then
+			result := self.prefix.asType(NullExpression).Transform()
+		end 
+		
+		
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: PrimaryExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "PrimaryExpression"
+		obj.implName := "Expression"
+		obj.alfGrammar := "prefix = ValueSpecification 
+		ValueSpecification :
+	NameExpression | 
+	LITERAL |
+	ThisExpression |
+	SuperInvocationExpression |
+	InstanceCreationExpression |
+	ParenthesizedExpression |
+	NullExpression
+	;"
+		obj.alfRef := "8.3"
+		obj.comments := "Primary Expressions represent the simplest of kinds of expressions. This construct is used primarily for the concrete syntax."
+		
+		result := obj
+	end
+}
+
+aspect class NameExpression {
+	operation ProcessSuffix(p : org::kermeta::language::behavior::UnresolvedCall, s : SuffixExpression) : org::kermeta::language::behavior::Expression is do
+		if s == void then
+				result := p
+			else
+				result := s.Process(p)
+		end
+	end
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		stdio.writeln("Processing NameExpression")
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "NameExpression: problem invalid syntax"
+		result := obj
+		
+		if self.prefixOp != void or self.id != void then
+				stdio.writeln("Processing prefixOp")
+				if self.prefixOp != void then
+					var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+					var operand : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new 
+					operand.~value := self.path.Transform() + self.id
+					obj.parameters.add(operand)
+					if self.prefixOp == "++" then
+						obj.name := "pref++"
+					end
+					if self.prefixOp == "--" then
+						obj.name := "pref--"
+					end
+					result := ProcessSuffix(obj,self.suffix)
+				end
+				if self.id != void and self.prefixOp == void then
+					if self.suffix != void then
+							var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+							obj.name := self.id
+							result := ProcessSuffix(obj,self.suffix)
+						else
+							var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+							obj.name := self.id
+							result := obj
+					end
+				end
+				
+			else 
+				if self.invocationCompletion != void then
+						stdio.writeln("Processing invocationCompletion")
+						var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+						obj.name := self.path.Transform() + self.id
+						if self.invocationCompletion.isInstanceOf(Tuple) then
+							self.invocationCompletion.asType(Tuple).tupleElements.each{e|obj.parameters.add(e.Transform())}
+						end
+						result := ProcessSuffix(obj,self.suffix)
+					else
+							if self.sequenceConstructionCompletion != void then
+									if self.sequenceConstructionCompletion.isInstanceOf(SequenceConstructionOrAccessCompletion) then
+										//self.sequenceConstructionCompletion.asType(SequenceConstructionOrAccessCompletion).Transform()
+										var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+										obj.~value := "NameExpression: sequenceConstructionCompletion need to implement"
+										result := obj
+										//result := ProcessSuffix(obj,self.suffix)
+									end
+								else
+									if self.postfixOp != void then
+											stdio.writeln("Processing postfixOp")
+											var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+											if self.postfixOp == "++" then
+												obj.name := "posf++"
+											end
+											if self.postfixOp == "--" then
+												obj.name := "posf--"
+											end
+											result := ProcessSuffix(obj,self.suffix)
+										else
+											stdio.writeln("Processing suffix")
+											if self.suffix != void then
+												if self.suffix.isInstanceOf(SuffixExpression) then
+													result := self.suffix.asType(SuffixExpression).Process(void)
+												end
+											end
+									end
+									
+							end
+							
+				end
+		end
+		
+	end
+	operation Document() : ClassDoc is do
+	stdio.writeln("Document: NameExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "NameExpression"
+		obj.implName := "Expression"
+		obj.alfRef := "8.3.3"
+		obj.alfGrammar := "(((prefixOp = ('++'|'--') (path=QualifiedNamePath)? id = ID)) 
+	|   
+	((path=QualifiedNamePath)? id = ID 
+		(invocationCompletion = Tuple 
+		| sequenceConstructionCompletion = SequenceConstructionOrAccessCompletion
+		| postfixOp = ('++'|'--'))?)) (suffix = SuffixExpression) ? 
+	;  "
+		obj.comments := "This evaluates to a name, which can be a local name, a parameter name or an enumeration literal"
+		result := obj
+	end
+}
+
+aspect class ThisExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		var this : org::kermeta::language::behavior::SelfExpression init org::kermeta::language::behavior::SelfExpression.new
+		obj.target := this
+		result := obj
+		if self.suffix != void then
+			result :=  self.suffix.Process(obj)
+		end
+		
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: ThisExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ThisExpression"
+		obj.implName := "SelfExpression"
+		obj.alfGrammar := "{ThisExpression}'this' (suffix = SuffixExpression)?"
+		obj.alfRef := "8.3.4"
+		obj.comments := "When 'this' is found in a classifier behaviour it refers to the classifier that contains the behaviour. In the case that that it is contained
+		in another behaviour than the context classfifier is the context of the owning behaviour"
+		result := obj
+	end
+}
+
+aspect class ParenthesizedExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		result := expOrTypeCast.Transform() 
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: ParenthesizedExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ParenthesizedExpression"
+		obj.implName := "org::kermeta::language::behavior::Expression"
+		obj.alfGrammar := "ParenthesizedExpression :
+	'('expOrTypeCast = Expression')' ((casted = NonLiteralValueSpecification) | (suffix = SuffixExpression))?
+;"
+		obj.alfRef := "8.3.5"
+		obj.comments := "Used like a normal expression need to validate, not sure how to deal with the NonLiteralValueSpecification and suffix in this implementation"
+		obj.status := false
+		obj.description := "Need to Fix"
+		result := obj
+	end
+}
+
+aspect class PropertyCallExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		if self.index != void then
+				var nme : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+				nme.~value := self.propertyName
+				obj.target := nme
+				obj.name := "at"
+				obj.parameters.add(self.index.Transform())
+			else
+				obj.name := self.propertyName
+		end
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: PropertyCallExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "PropertyCallExpression"
+		obj.implName := ""
+		obj.alfGrammar := "PropertyCallExpression : '.' propertyName = ID ('[' index=Expression ']')? (suffix = SuffixExpression)?;"
+		obj.alfRef := "8.3.6"
+		obj.comments := "Implements a property call eg. poleValue.im or this.node"
+		obj.status := true
+		obj.description := "Need to Implement the operator At in kermeta"
+		result := obj
+	end
+}
+
+
+
+aspect class Tuple {
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: Tuple")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "Tuple"
+		obj.implName := "Expression"
+		obj.alfRef := "8.3.8"
+		obj.alfGrammar := "Tuple :
+	{Tuple}'('(tupleElements += TupleElement (',' tupleElements+=TupleElement)*)?')'
+;"
+		obj.comments := "Represents a list of tuple elements"
+		result := obj
+	end
+}
+
+aspect class TupleElement {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		result := void
+		if self.argument != void then
+			if self.argument.isInstanceOf(ConditionalTestExpression) then
+				result := self.argument.asType(ConditionalTestExpression).Transform()
+			end
+		end
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: TupleElement")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "TupleElement"
+		obj.implName := "Expression"
+		obj.alfRef := "8.3.8"
+		obj.alfGrammar := "argument = Expression"
+		obj.comments := "A tuple element which represents an expression. A more precise grammar could be applied to support named 
+		parameters and also to take into account optional parameters. Further the implementation needs to implement the type of tuples such as 'in', 'inout', 'out' "
+		obj.status := false
+		obj.description := "Missing support for named parameters,tuple types 'in', 'inout', 'out' and optional parameters"
+		result := obj
+	end
+}
+
+
+aspect class OperationCallExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		obj.name := self.operationName
+		self.tuple.tupleElements.each{e|
+				obj.parameters.add(e.Transform())
+		}
+		result := obj
+		if self.suffix != void then 
+			if self.suffix.isInstanceOf(SuffixExpression) then
+				result := self.suffix.asType(SuffixExpression).Process(obj)
+			end
+		end	
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: OperationCallExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "OperationCallExpression/Behaviour Invocation Expression"
+		obj.implName := ""
+		obj.alfGrammar := "'.' operationName = ID tuple = Tuple (suffix = SuffixExpression)?"
+		obj.alfRef := "8.3.9"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "Need to handle association ends as well, as an operation can be invoked on an association end. Need 
+		to support this when applying to fUML and also take into account templates"
+		result := obj
+	end
+}
+
+aspect class SuperInvocationExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::CallSuperOperation init org::kermeta::language::behavior::CallSuperOperation.new
+		if className != void and  operationCallWithoutDot != void then
+			var nme : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+			nme.~value := className
+			obj.target := nme
+			obj.name := operationCallWithoutDot.operationName
+			operationCallWithoutDot.tuple.tupleElements.each{e|
+				obj.parameters.add(e.Transform())
+			}
+		end
+		if operationCall != void then
+			obj.name := operationCall.operationName
+			operationCall.tuple.tupleElements.each{e|
+				obj.parameters.add(e.Transform())
+			}
+		end
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		stdio.writeln("Document: SuperInvocationExpression")
+		var obj : ClassDoc init ClassDoc.new
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "SuperInvocationExpression"
+		obj.implName := "org::kermeta::language::behavior::Expression"
+		obj.alfGrammar := "SuperInvocationExpression :
+	//{SuperInvocationExpression} 'super' ('.' qualifiedNameRoot = ID '::' qualifiedNameRemaining = NameExpression)? //(suffix = SuffixExpression) ?
+	'super' ('.' className = ID '::' operationCallWithoutDot = OperationCallExpressionWithoutDot | operationCall = OperationCallExpression) 
+;"
+		obj.alfRef := "8.3.11"
+		obj.comments := "Calls the operation from the super class, in the class of multiple inheritance than the super class can be qualified"
+		result := obj
+	end
+}
+
+aspect class InstanceCreationExpression {
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: InstanceCreationExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "InstanceCreationExpression"
+		obj.implName := "org::kermeta::language::behavior::Expression"
+		obj.alfGrammar := "InstanceCreationExpression :
+	'new' constructor=QualifiedNameWithBinding 
+		(tuple = Tuple | sequenceConstuctionCompletion = SequenceConstructionCompletion) (suffix = SuffixExpression) ?
+;"
+		obj.alfRef := "8.3.12"
+		obj.comments := "Implemented at the statement level as variable initialisation and a function call, calling the constructor"
+		obj.status := false
+		obj.description := "Need to Implement and Fix as two lines"
+		result := obj
+	end
+} 
+
+aspect class LinkOperationExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
+		if self.kind == "createLink" then 
+			obj.name := "createLink"
+		end
+		if self.kind == "destroyLink" then 
+			obj.name := "destroyLink"
+		end
+		if self.kind == "clearAssoc" then 
+			obj.name := "clearAssoc"
+		end
+		self.tuple.linkOperationTupleElement.each{t|
+			obj.parameters.add(t.Transform())
+		}
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: LinkOperationExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "LinkOperationExpression"
+		obj.implName := "StringLiteral"
+		obj.alfGrammar := "8.3.13"
+		obj.alfRef := "LinkOperationExpression :
+	'.' kind = LinkOperationKind tuple = LinkOperationTuple
+;"
+		obj.comments := ""
+		obj.status := false
+		obj.description := "Need to implement the function createLink,destroyLink and clearAssoc"
+		result := obj
+	end
+}
+aspect class LinkOperationTuple {
+	operation Transform() : org::kermeta::language::behavior::StringLiteral is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "LinkOperationTuple: Not Implemented"
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: LinkOperationTuple")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "LinkOperationTuple"
+		obj.implName := "StringLiteral"
+		obj.alfGrammar := "8.3.13"
+		obj.alfRef := "LinkOperationTuple :
+	'('linkOperationTupleElement += LinkOperationTupleElement (',' linkOperationTupleElement += LinkOperationTupleElement)*')'
+;"
+		obj.comments := "Provides a structure to manage the list of parameters"
+		result := obj
+	end
+}
+
+aspect class LinkOperationTupleElement {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := self.object
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: LinkOperationTuple")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "LinkOperationTupleElement"
+		obj.implName := "StringLiteral"
+		obj.alfGrammar := "8.3.13"
+		obj.alfRef := "LinkOperationTupleElement :
+	objectOrRole = ID (('['roleIndex = Expression ']')? '=>' object = ID)?
+;"
+		obj.comments := "Implements the operation parameters as named parameters"
+		obj.status := false
+		obj.description := "How to implement named parameters in kermeta, and to validate the types"
+		result := obj
+	end
+}
+
+aspect class ClassExtentExpression {
+	operation Transform() : org::kermeta::language::behavior::Expression is do
+		var obj : org::kermeta::language::behavior::StringLiteral init org::kermeta::language::behavior::StringLiteral.new
+		obj.~value := "ClassExtentExpression: need to implement"
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: ClassExtentExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "ClassExtentExpression"
+		obj.implName := "org::kermeta::language::behavior::Expression"
+		obj.alfGrammar := "ClassExtentExpression :
+	{ClassExtentExpression} '.' 'allInstances' '(' ')'
+;"
+		obj.alfRef := "8.3.14"
+		obj.comments := "Returns a sequence of objects from the named class"
+		obj.status := false
+		obj.description := "Need to implement a function to return a sequence of elements from the named class such as Customers.allInstances() returns 
+		a sequence of customers"
+		result := obj
+	end
+}
+
+aspect class NullExpression {
+	operation Transform() : org::kermeta::language::behavior::VoidLiteral is do
+		var obj : org::kermeta::language::behavior::VoidLiteral init org::kermeta::language::behavior::VoidLiteral.new
+		result := obj
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: NullExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "NullExpression"
+		obj.implName := "org::kermeta::language::behavior::VoidLiteral"
+		obj.alfGrammar := "NullExpression : {NullExpression} 'null';"
+		obj.alfRef := "8.3.15"
+		obj.comments := "Implements the null expression"
+		result := obj
+	end
+}
+/*
+aspect class SequenceAccessExpression {
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		stdio.writeln("Document: SequenceAccessExpression")
+		obj.Init()
+		obj.synconfLevel := "Minimum"
+		obj.alfName := "SequenceAccessExpression"
+		obj.implName := "Not Implemented"
+		obj.alfGrammar := ""
+		obj.alfRef := "8.3.16"
+		obj.comments := "Implements the expression to access a given position value"
+		result := obj
+	end
+}
+*/
+aspect class QualifiedNamePath {
+	operation Transform() : String is do
+		var qn : String init ""
+		var fd : Integer init 0
+		self.namespace.each{n|
+			if fd != 0 then
+				fd := 1
+				qn := qn + "::"
+			end
+			qn := qn + n.Transform()
+		}
+		result := qn
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "QualifiedNamePath"
+		obj.implName := "String"
+		obj.alfRef := ""
+		obj.alfGrammar := "(namespace+=UnqualifiedName'::')+"
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class UnqualifiedName {
+	operation Transform() : String is do
+		// TODO: Need to Sort out Templates
+		if self.templateBinding != void then
+			var n : String init self.templateBinding.Transform()
+		end
+		result := self.name
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "UnqualifiedName"
+		obj.implName := "String"
+		obj.alfRef := ""
+		obj.alfGrammar := ""
+		obj.comments := "name = ID (templateBinding = TemplateBinding)?"
+		result := obj
+	end
+}
+
+aspect class TemplateBinding {
+	operation Transform() : String is do
+		var qn : String init "<"
+		var fd : Integer init 0
+		self.bindings.each{n|
+			if fd != 0 then
+				fd := 1
+				qn := qn + ","
+			end
+			qn := qn + n.Transform()
+		}
+		qn := qn + ">"
+		result := ""
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "TemplateBinding"
+		obj.implName := "String"
+		obj.alfRef := ""
+		obj.alfGrammar := "'<'bindings+=NamedTemplateBinding (',' bindings +=NamedTemplateBinding)*'>'"
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class NamedTemplateBinding {
+	operation Transform() : String is do
+		var nb : String init ""
+		nb := self.formal + "=>" + self.actual.Transform()
+		result := nb 
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "NamedTemplateBinding"
+		obj.implName := "String"
+		obj.alfRef := ""
+		obj.alfGrammar := "formal = ID '=>' actual = QualifiedNameWithBinding"
+		obj.comments := ""
+		result := obj
+	end
+}
+
+aspect class QualifiedNameWithBinding {
+	operation Transform() : String is do
+		var nb : String init ""
+		nb := self.id
+		if self.binding != void then
+			nb := nb + self.binding.Transform() 
+		end
+		if self.remaining != void then
+			nb := "::" + self.remaining.Transform()
+		end
+		result := nb
+	end
+	operation Document() : ClassDoc is do
+		var obj : ClassDoc init ClassDoc.new
+		obj.alfName := "QualifiedNameWithBinding"
+		obj.implName := "String"
+		obj.alfRef := ""
+		obj.alfGrammar := "id = ID (binding=TemplateBinding)? ('::' remaining=QualifiedNameWithBinding)?;"
+		obj.comments := ""
+		result := obj
+	end
+}
+}
+}
+}
