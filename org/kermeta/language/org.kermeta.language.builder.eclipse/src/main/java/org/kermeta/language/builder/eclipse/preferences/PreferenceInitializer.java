@@ -22,7 +22,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE, ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_INFO));
 		store.setDefault(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE, ConsoleLogLevel.level2String(ConsoleLogLevel.DEV_WARNING));
 		
-		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONKEYSTRIKE_STRING, PreferenceToBuildAction.NONE);
+		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONKEYSTRIKE_STRING, PreferenceToBuildAction.UNCHECKED_GENERATE_KM);
 		store.setDefault(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING, PreferenceToBuildAction.GENERATE_KM);
 		
 		store.setDefault(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING, PreferenceToBuildAction.GENERATE_KM);

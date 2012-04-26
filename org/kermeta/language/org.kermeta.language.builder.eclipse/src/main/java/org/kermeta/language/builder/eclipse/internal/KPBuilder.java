@@ -120,28 +120,29 @@ public class KPBuilder {
 		if(isBuildNeeded(delta)){
 			Job job = new Job("Kermeta builder job") {
 				protected IStatus run(IProgressMonitor monitor) {
-					compile(monitor);
+					compile(true, monitor);
 					return Status.OK_STATUS;
 				}
 			};
 		    job.setPriority(Job.LONG);
-		    job.schedule(); // start as soon as possibl
+		    job.schedule(); // start as soon as possible
 		}
 	}
 	
-	synchronized public void compile(IProgressMonitor monitor){
+	synchronized public void compile(boolean mustCheck, IProgressMonitor monitor){
 		try {		
 			ArrayList<String> additionalCalssPath = new ArrayList<String>();
 			compiler.setContributedProgressGroup(getProgressGroup());
 			Activator.getDefault().getMessaggingSystem().addProgressMonitor(getProgressGroup(),monitor);
-			Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Starting km generation of "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP, 5);
+			Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Starting km generation of "+kpFileURL, KermetaBuilder.LOG_MESSAGE_GROUP, 3);
 
 			/*ArrayList<URL> impactedFiles = new ArrayList<URL>();
 			impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
 			KermetaBuilder.flushProblems(impactedFiles);
 			*/
 			// for reflexivity set the bundle context
-			updateCompilerPreferences();	
+			updateCompilerPreferences();
+			compiler.checkingEnabled = mustCheck;
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,KermetaCompiler.PHASE_TYPE_SET);
 			if (result != null) {
 				kp_last_modelingunit = result;
@@ -284,10 +285,10 @@ public class KPBuilder {
 			
 			if (andRun) {
 				isBuildNeeded = checkIfBuildIsNeeded();
-				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building before run "+kpFileURL, this.getClass().toString(), 8);				
+				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building before run "+kpFileURL, this.getClass().toString(), 5);				
 			}
 			else{
-				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building "+kpFileURL, this.getClass().toString(), 8);				
+				Activator.getDefault().getMessaggingSystem().initProgress(getProgressGroup(), "Building "+kpFileURL, this.getClass().toString(), 5);				
 			}
 
 			
@@ -321,6 +322,7 @@ public class KPBuilder {
 				}
 				
 				compiler.stopOnError = !Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_IGNORE_BUILD_ERROR_BOOLEAN);
+				compiler.checkingEnabled = true;
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,KermetaCompiler.PHASE_GENERATE_SCALA_BYTECODE);
 				
 				

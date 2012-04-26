@@ -168,6 +168,11 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>("Compiling "+kpIdentifier,lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP());
 		theRunner.schedule();
 	}
+	@Override 
+	public void compileFromKP(String kpIdentifier, boolean checkEnabled) {
+		KermetaRunner<HashMap<String,KPBuilder>,String> theRunner = new KermetaRunner<HashMap<String,KPBuilder>,String>("Compiling "+kpIdentifier,lockForCompile,compilingInPending, compilingInProgress, kpBuilders, kpIdentifier, new CompilerFromKP(checkEnabled));
+		theRunner.schedule();
+	}
 
 	@Override
 	public void parseSpecificFile(IResource toParse, String content) {

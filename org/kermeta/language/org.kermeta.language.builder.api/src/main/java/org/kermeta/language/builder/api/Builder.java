@@ -16,6 +16,7 @@ public abstract class Builder {
 	public abstract void runFromKP(String kpIdentifier,ArrayList<String> params);
 	public abstract void buildFromKP(String kpIdentifier);
 	public abstract void compileFromKP(String kpIdentifier);
+	public abstract void compileFromKP(String kpIdentifier, boolean checkEnabled);
 	public abstract String findKPidentifierFromKMT(IResource kmt);
 	public abstract void setDirty(IResource kmt, boolean dirty);
 	

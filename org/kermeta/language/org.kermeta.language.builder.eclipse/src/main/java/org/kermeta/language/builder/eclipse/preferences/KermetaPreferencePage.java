@@ -84,14 +84,17 @@ public class KermetaPreferencePage
 		addField(new ComboFieldEditor(
 					PreferenceConstants.P_KMT_EDITOR_ONKEYSTRIKE_STRING, 
 					"KMT editor on key strike action", 
-					new String[][] { { "None", PreferenceToBuildAction.NONE}, 
-							 { "Generate KM (required by completion)",  PreferenceToBuildAction.GENERATE_KM }}, 
+					new String[][] { { "None", PreferenceToBuildAction.NONE},
+							 { "Parse only", PreferenceToBuildAction.PARSE_KMT },
+							 { "Unchecked Generate KM (minimum required by completion)", PreferenceToBuildAction.UNCHECKED_GENERATE_KM }, 
+							 { "Generate KM",  PreferenceToBuildAction.GENERATE_KM }}, 
 					getFieldEditorParent()));
 		addField(new ComboFieldEditor(
 				PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING, 
 				"KMT editor on save action",  
 				new String[][] { { "None", PreferenceToBuildAction.NONE}, 
-						 { "Generate KM (required by completion)", PreferenceToBuildAction.GENERATE_KM },
+						 { "Unchecked Generate KM", PreferenceToBuildAction.UNCHECKED_GENERATE_KM },
+						 { "Generate KM (recommanded)", PreferenceToBuildAction.GENERATE_KM },
 						 { "Generate bytecode", PreferenceToBuildAction.GENERATE_BYTECODE}}, 
 				getFieldEditorParent()));
 		

@@ -53,7 +53,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 		}
 	}
 	
-	private void createBuilder(IResource resource, boolean mustBuild) {
+	private void createBuilder(IResource resource, boolean mustBuild, boolean mustCheck) {
 		// add a new visitor dedicated to this
 		// Kermeta project file
 		// ignore if kp file is in target folder 
@@ -64,9 +64,10 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 
 			kermetaBuilder.kpBuilders.put(kermetaBuilder.generateIdentifier(resource), aBuilder);
 			if(mustBuild){
+				final boolean mustCheckF = mustCheck;
 				Job job = new Job("Kermeta builder initializer for " + aBuilder.getKpProjectFile().getRawLocation()) {
 					protected IStatus run(IProgressMonitor monitor) {
-						aBuilder.compile(monitor);
+						aBuilder.compile(mustCheckF, monitor);
 						return Status.OK_STATUS;
 					}
 				};
@@ -117,8 +118,9 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 
 							for (IFile aKPFile : theKP) {
 								if (!kermetaBuilder.kpBuilders.containsKey(kermetaBuilder.generateIdentifier(aKPFile))) {
-									boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
-									createBuilder(aKPFile, mustBuild);
+									boolean mustBuild = PreferenceToBuildAction.mustGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									boolean mustCheck = PreferenceToBuildAction.mustCheck((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));
+									createBuilder(aKPFile, mustBuild, mustCheck);
 									processResourceChildren = false;
 								}
 							}
@@ -139,8 +141,9 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 						try {
 							if (resource.getProject() != null) {
 								if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
-									boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
-									createBuilder(resource, mustBuild);
+									boolean mustBuild = PreferenceToBuildAction.mustGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									boolean mustCheck = PreferenceToBuildAction.mustCheck((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									createBuilder(resource, mustBuild, mustCheck);
 								}
 							}
 						} catch (CoreException e) {
@@ -167,16 +170,17 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 									if (builder != null) {
 										try {
 											builder.refreshFileIndex();
-											boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
+											boolean mustBuild = PreferenceToBuildAction.mustGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
 											if(mustBuild){
-												builder.compile(monitor);
+												builder.compile(true, monitor);
 											}
 										} catch (IOException e) {
 											Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR, "failed to refresh builder for " + resource.getFullPath(), KermetaBuilder.LOG_MESSAGE_GROUP, e);
 										}
 									} else {
-										boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
-										createBuilder(resource, mustBuild);
+										boolean mustBuild = PreferenceToBuildAction.mustGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
+										boolean mustCheck = PreferenceToBuildAction.mustCheck((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KP_EDITOR_ONSAVE_STRING)));										
+										createBuilder(resource, mustBuild, mustCheck);
 									}
 
 								}
@@ -202,10 +206,10 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 									if (kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)) != null) {
 										//kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)).kpFiles.get(kermetaBuilder.generateIdentifier(resource)).modelingUnit = freshModelingUnit;
 										if (kermetaBuilder.findKPidentifierFromKMT(resource) != null) {
-											if(PreferenceToBuildAction.musGenerateBytecode(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
+											if(PreferenceToBuildAction.mustGenerateBytecode(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
 												kermetaBuilder.buildFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
 											}
-											else if(PreferenceToBuildAction.musGenerateKM(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
+											else if(PreferenceToBuildAction.mustGenerateKM(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
 												kermetaBuilder.compileFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
 											}
 										} else {
@@ -253,8 +257,9 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 						case IResource.FILE:
 							if (resource.getFileExtension() != null) {
 								if (resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION)) {
-									boolean mustBuild = PreferenceToBuildAction.musGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
-									createBuilder(resource, mustBuild);
+									boolean mustBuild = PreferenceToBuildAction.mustGenerateKM((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									boolean mustCheck = PreferenceToBuildAction.mustCheck((Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_PROJECT_ONOPEN_STRING)));										
+									createBuilder(resource, mustBuild, mustCheck);
 								}
 							}
 							processResourceChildren = false;
