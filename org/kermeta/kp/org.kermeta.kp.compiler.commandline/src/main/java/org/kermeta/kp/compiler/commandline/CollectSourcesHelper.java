@@ -46,6 +46,7 @@ public class CollectSourcesHelper {
 			
 			try {
 				java.net.URI fileUri;
+				boolean isLibraryCore = sourceUrl.getUrl().toString().endsWith("language.library.core.km");
 				if(sourceUrl.getUrl().getProtocol().equals("jar")){
 					String jarUrl = sourceUrl.getUrl().toString();
 					fileUri =  java.net.URI.create(jarUrl.substring(4, jarUrl.indexOf("!")));
@@ -54,13 +55,20 @@ public class CollectSourcesHelper {
 				else{
 					fileUri = sourceUrl.getUrl().toURI();
 				}
-				if(!fileUri.toString().endsWith("language.library.core.km")){
-					File file = new java.io.File(fileUri);
-					if(newerDate < file.lastModified()){
+				
+				File file = new java.io.File(fileUri);
+				if(newerDate < file.lastModified()){
+					if(!isLibraryCore){
+						logger.debug("changed to newer file = "+fileUri.toString(), getMessageGroup());
 						newerDate =  file.lastModified();
 						result = sourceUrl;
-					} 
-				}
+					}
+					else{
+						logger.debug("ignoring library core from latest modified= "+fileUri.toString(), getMessageGroup());
+					}
+				} 
+				
+				
 			} catch (Exception e) {
 				logger.warn("cannot get lastModified of "+sourceUrl.getUrl(), getMessageGroup());
 			}
