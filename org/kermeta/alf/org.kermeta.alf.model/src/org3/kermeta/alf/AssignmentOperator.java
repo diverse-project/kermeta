@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,127 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class AssignmentOperator extends AbstractEnumerator {
+public enum AssignmentOperator implements Enumerator {
+	/**
+	 * The '<em><b>ASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ASSIGN(0, "ASSIGN", "="),
+
+	/**
+	 * The '<em><b>PLUSASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PLUSASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PLUSASSIGN(1, "PLUSASSIGN", "+="),
+
+	/**
+	 * The '<em><b>MINUSASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MINUSASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MINUSASSIGN(2, "MINUSASSIGN", "-="),
+
+	/**
+	 * The '<em><b>MULTASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MULTASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MULTASSIGN(3, "MULTASSIGN", "*="),
+
+	/**
+	 * The '<em><b>MODASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MODASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MODASSIGN(4, "MODASSIGN", "%="),
+
+	/**
+	 * The '<em><b>DIVASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DIVASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DIVASSIGN(5, "DIVASSIGN", "/="),
+
+	/**
+	 * The '<em><b>ANDASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ANDASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ANDASSIGN(6, "ANDASSIGN", "&="),
+
+	/**
+	 * The '<em><b>ORASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ORASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ORASSIGN(7, "ORASSIGN", "|="),
+
+	/**
+	 * The '<em><b>XORASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #XORASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	XORASSIGN(8, "XORASSIGN", "^="),
+
+	/**
+	 * The '<em><b>LSHIFTASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LSHIFTASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LSHIFTASSIGN(9, "LSHIFTASSIGN", "<<="),
+
+	/**
+	 * The '<em><b>RSHIFTASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RSHIFTASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	RSHIFTASSIGN(10, "RSHIFTASSIGN", ">>="),
+
+	/**
+	 * The '<em><b>URSHIFTASSIGN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #URSHIFTASSIGN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	URSHIFTASSIGN(11, "URSHIFTASSIGN", ">>>=");
+
 	/**
 	 * The '<em><b>ASSIGN</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -30,12 +150,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ASSIGN_LITERAL
+	 * @see #ASSIGN
 	 * @model literal="="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ASSIGN = 0;
+	public static final int ASSIGN_VALUE = 0;
 
 	/**
 	 * The '<em><b>PLUSASSIGN</b></em>' literal value.
@@ -45,12 +165,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #PLUSASSIGN_LITERAL
+	 * @see #PLUSASSIGN
 	 * @model literal="+="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PLUSASSIGN = 1;
+	public static final int PLUSASSIGN_VALUE = 1;
 
 	/**
 	 * The '<em><b>MINUSASSIGN</b></em>' literal value.
@@ -60,12 +180,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MINUSASSIGN_LITERAL
+	 * @see #MINUSASSIGN
 	 * @model literal="-="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MINUSASSIGN = 2;
+	public static final int MINUSASSIGN_VALUE = 2;
 
 	/**
 	 * The '<em><b>MULTASSIGN</b></em>' literal value.
@@ -75,12 +195,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MULTASSIGN_LITERAL
+	 * @see #MULTASSIGN
 	 * @model literal="*="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MULTASSIGN = 3;
+	public static final int MULTASSIGN_VALUE = 3;
 
 	/**
 	 * The '<em><b>MODASSIGN</b></em>' literal value.
@@ -90,12 +210,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MODASSIGN_LITERAL
+	 * @see #MODASSIGN
 	 * @model literal="%="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MODASSIGN = 4;
+	public static final int MODASSIGN_VALUE = 4;
 
 	/**
 	 * The '<em><b>DIVASSIGN</b></em>' literal value.
@@ -105,12 +225,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DIVASSIGN_LITERAL
+	 * @see #DIVASSIGN
 	 * @model literal="/="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIVASSIGN = 5;
+	public static final int DIVASSIGN_VALUE = 5;
 
 	/**
 	 * The '<em><b>ANDASSIGN</b></em>' literal value.
@@ -120,12 +240,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ANDASSIGN_LITERAL
+	 * @see #ANDASSIGN
 	 * @model literal="&="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ANDASSIGN = 6;
+	public static final int ANDASSIGN_VALUE = 6;
 
 	/**
 	 * The '<em><b>ORASSIGN</b></em>' literal value.
@@ -135,12 +255,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ORASSIGN_LITERAL
+	 * @see #ORASSIGN
 	 * @model literal="|="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ORASSIGN = 7;
+	public static final int ORASSIGN_VALUE = 7;
 
 	/**
 	 * The '<em><b>XORASSIGN</b></em>' literal value.
@@ -150,12 +270,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #XORASSIGN_LITERAL
+	 * @see #XORASSIGN
 	 * @model literal="^="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int XORASSIGN = 8;
+	public static final int XORASSIGN_VALUE = 8;
 
 	/**
 	 * The '<em><b>LSHIFTASSIGN</b></em>' literal value.
@@ -165,12 +285,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LSHIFTASSIGN_LITERAL
+	 * @see #LSHIFTASSIGN
 	 * @model literal="<<="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LSHIFTASSIGN = 9;
+	public static final int LSHIFTASSIGN_VALUE = 9;
 
 	/**
 	 * The '<em><b>RSHIFTASSIGN</b></em>' literal value.
@@ -180,12 +300,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RSHIFTASSIGN_LITERAL
+	 * @see #RSHIFTASSIGN
 	 * @model literal=">>="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RSHIFTASSIGN = 10;
+	public static final int RSHIFTASSIGN_VALUE = 10;
 
 	/**
 	 * The '<em><b>URSHIFTASSIGN</b></em>' literal value.
@@ -195,132 +315,12 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #URSHIFTASSIGN_LITERAL
+	 * @see #URSHIFTASSIGN
 	 * @model literal=">>>="
 	 * @generated
 	 * @ordered
 	 */
-	public static final int URSHIFTASSIGN = 11;
-
-	/**
-	 * The '<em><b>ASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator ASSIGN_LITERAL = new AssignmentOperator(ASSIGN, "ASSIGN", "=");
-
-	/**
-	 * The '<em><b>PLUSASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PLUSASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator PLUSASSIGN_LITERAL = new AssignmentOperator(PLUSASSIGN, "PLUSASSIGN", "+=");
-
-	/**
-	 * The '<em><b>MINUSASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MINUSASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator MINUSASSIGN_LITERAL = new AssignmentOperator(MINUSASSIGN, "MINUSASSIGN", "-=");
-
-	/**
-	 * The '<em><b>MULTASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MULTASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator MULTASSIGN_LITERAL = new AssignmentOperator(MULTASSIGN, "MULTASSIGN", "*=");
-
-	/**
-	 * The '<em><b>MODASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MODASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator MODASSIGN_LITERAL = new AssignmentOperator(MODASSIGN, "MODASSIGN", "%=");
-
-	/**
-	 * The '<em><b>DIVASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DIVASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator DIVASSIGN_LITERAL = new AssignmentOperator(DIVASSIGN, "DIVASSIGN", "/=");
-
-	/**
-	 * The '<em><b>ANDASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ANDASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator ANDASSIGN_LITERAL = new AssignmentOperator(ANDASSIGN, "ANDASSIGN", "&=");
-
-	/**
-	 * The '<em><b>ORASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ORASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator ORASSIGN_LITERAL = new AssignmentOperator(ORASSIGN, "ORASSIGN", "|=");
-
-	/**
-	 * The '<em><b>XORASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #XORASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator XORASSIGN_LITERAL = new AssignmentOperator(XORASSIGN, "XORASSIGN", "^=");
-
-	/**
-	 * The '<em><b>LSHIFTASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LSHIFTASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator LSHIFTASSIGN_LITERAL = new AssignmentOperator(LSHIFTASSIGN, "LSHIFTASSIGN", "<<=");
-
-	/**
-	 * The '<em><b>RSHIFTASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RSHIFTASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator RSHIFTASSIGN_LITERAL = new AssignmentOperator(RSHIFTASSIGN, "RSHIFTASSIGN", ">>=");
-
-	/**
-	 * The '<em><b>URSHIFTASSIGN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #URSHIFTASSIGN
-	 * @generated
-	 * @ordered
-	 */
-	public static final AssignmentOperator URSHIFTASSIGN_LITERAL = new AssignmentOperator(URSHIFTASSIGN, "URSHIFTASSIGN", ">>>=");
+	public static final int URSHIFTASSIGN_VALUE = 11;
 
 	/**
 	 * An array of all the '<em><b>Assignment Operator</b></em>' enumerators.
@@ -330,18 +330,18 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 */
 	private static final AssignmentOperator[] VALUES_ARRAY =
 		new AssignmentOperator[] {
-			ASSIGN_LITERAL,
-			PLUSASSIGN_LITERAL,
-			MINUSASSIGN_LITERAL,
-			MULTASSIGN_LITERAL,
-			MODASSIGN_LITERAL,
-			DIVASSIGN_LITERAL,
-			ANDASSIGN_LITERAL,
-			ORASSIGN_LITERAL,
-			XORASSIGN_LITERAL,
-			LSHIFTASSIGN_LITERAL,
-			RSHIFTASSIGN_LITERAL,
-			URSHIFTASSIGN_LITERAL,
+			ASSIGN,
+			PLUSASSIGN,
+			MINUSASSIGN,
+			MULTASSIGN,
+			MODASSIGN,
+			DIVASSIGN,
+			ANDASSIGN,
+			ORASSIGN,
+			XORASSIGN,
+			LSHIFTASSIGN,
+			RSHIFTASSIGN,
+			URSHIFTASSIGN,
 		};
 
 	/**
@@ -350,7 +350,7 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<AssignmentOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Assignment Operator</b></em>' literal with the specified literal value.
@@ -392,21 +392,42 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 */
 	public static AssignmentOperator get(int value) {
 		switch (value) {
-			case ASSIGN: return ASSIGN_LITERAL;
-			case PLUSASSIGN: return PLUSASSIGN_LITERAL;
-			case MINUSASSIGN: return MINUSASSIGN_LITERAL;
-			case MULTASSIGN: return MULTASSIGN_LITERAL;
-			case MODASSIGN: return MODASSIGN_LITERAL;
-			case DIVASSIGN: return DIVASSIGN_LITERAL;
-			case ANDASSIGN: return ANDASSIGN_LITERAL;
-			case ORASSIGN: return ORASSIGN_LITERAL;
-			case XORASSIGN: return XORASSIGN_LITERAL;
-			case LSHIFTASSIGN: return LSHIFTASSIGN_LITERAL;
-			case RSHIFTASSIGN: return RSHIFTASSIGN_LITERAL;
-			case URSHIFTASSIGN: return URSHIFTASSIGN_LITERAL;
+			case ASSIGN_VALUE: return ASSIGN;
+			case PLUSASSIGN_VALUE: return PLUSASSIGN;
+			case MINUSASSIGN_VALUE: return MINUSASSIGN;
+			case MULTASSIGN_VALUE: return MULTASSIGN;
+			case MODASSIGN_VALUE: return MODASSIGN;
+			case DIVASSIGN_VALUE: return DIVASSIGN;
+			case ANDASSIGN_VALUE: return ANDASSIGN;
+			case ORASSIGN_VALUE: return ORASSIGN;
+			case XORASSIGN_VALUE: return XORASSIGN;
+			case LSHIFTASSIGN_VALUE: return LSHIFTASSIGN;
+			case RSHIFTASSIGN_VALUE: return RSHIFTASSIGN;
+			case URSHIFTASSIGN_VALUE: return URSHIFTASSIGN;
 		}
 		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
@@ -415,7 +436,47 @@ public final class AssignmentOperator extends AbstractEnumerator {
 	 * @generated
 	 */
 	private AssignmentOperator(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+	
 } //AssignmentOperator

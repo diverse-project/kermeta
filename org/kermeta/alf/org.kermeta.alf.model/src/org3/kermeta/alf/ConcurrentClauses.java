@@ -38,9 +38,9 @@ public interface ConcurrentClauses extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Non Final Clause</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getConcurrentClauses_NonFinalClause()
-	 * @model type="org3.kermeta.alf.NonFinalClause" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getNonFinalClause();
+	EList<NonFinalClause> getNonFinalClause();
 
 } // ConcurrentClauses

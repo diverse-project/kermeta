@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,27 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class SelectOrRejectOperator extends AbstractEnumerator {
+public enum SelectOrRejectOperator implements Enumerator {
+	/**
+	 * The '<em><b>SELECT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SELECT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SELECT(0, "SELECT", "select"),
+
+	/**
+	 * The '<em><b>REJECT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #REJECT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	REJECT(1, "REJECT", "reject");
+
 	/**
 	 * The '<em><b>SELECT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -30,12 +50,12 @@ public final class SelectOrRejectOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SELECT_LITERAL
+	 * @see #SELECT
 	 * @model literal="select"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SELECT = 0;
+	public static final int SELECT_VALUE = 0;
 
 	/**
 	 * The '<em><b>REJECT</b></em>' literal value.
@@ -45,32 +65,12 @@ public final class SelectOrRejectOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #REJECT_LITERAL
+	 * @see #REJECT
 	 * @model literal="reject"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REJECT = 1;
-
-	/**
-	 * The '<em><b>SELECT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SELECT
-	 * @generated
-	 * @ordered
-	 */
-	public static final SelectOrRejectOperator SELECT_LITERAL = new SelectOrRejectOperator(SELECT, "SELECT", "select");
-
-	/**
-	 * The '<em><b>REJECT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #REJECT
-	 * @generated
-	 * @ordered
-	 */
-	public static final SelectOrRejectOperator REJECT_LITERAL = new SelectOrRejectOperator(REJECT, "REJECT", "reject");
+	public static final int REJECT_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Select Or Reject Operator</b></em>' enumerators.
@@ -80,8 +80,8 @@ public final class SelectOrRejectOperator extends AbstractEnumerator {
 	 */
 	private static final SelectOrRejectOperator[] VALUES_ARRAY =
 		new SelectOrRejectOperator[] {
-			SELECT_LITERAL,
-			REJECT_LITERAL,
+			SELECT,
+			REJECT,
 		};
 
 	/**
@@ -90,7 +90,7 @@ public final class SelectOrRejectOperator extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<SelectOrRejectOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Select Or Reject Operator</b></em>' literal with the specified literal value.
@@ -132,11 +132,32 @@ public final class SelectOrRejectOperator extends AbstractEnumerator {
 	 */
 	public static SelectOrRejectOperator get(int value) {
 		switch (value) {
-			case SELECT: return SELECT_LITERAL;
-			case REJECT: return REJECT_LITERAL;
+			case SELECT_VALUE: return SELECT;
+			case REJECT_VALUE: return REJECT;
 		}
 		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
@@ -145,7 +166,47 @@ public final class SelectOrRejectOperator extends AbstractEnumerator {
 	 * @generated
 	 */
 	private SelectOrRejectOperator(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+	
 } //SelectOrRejectOperator

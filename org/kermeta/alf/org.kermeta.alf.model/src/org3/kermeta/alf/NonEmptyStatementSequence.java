@@ -38,9 +38,9 @@ public interface NonEmptyStatementSequence extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statement</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getNonEmptyStatementSequence_Statement()
-	 * @model type="org3.kermeta.alf.DocumentedStatement" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getStatement();
+	EList<DocumentedStatement> getStatement();
 
 } // NonEmptyStatementSequence

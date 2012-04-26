@@ -38,9 +38,9 @@ public interface StatementSequence extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statements</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getStatementSequence_Statements()
-	 * @model type="org3.kermeta.alf.DocumentedStatement" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getStatements();
+	EList<DocumentedStatement> getStatements();
 
 } // StatementSequence

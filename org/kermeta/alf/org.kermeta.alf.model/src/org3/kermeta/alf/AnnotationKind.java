@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,47 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class AnnotationKind extends AbstractEnumerator {
+public enum AnnotationKind implements Enumerator {
+	/**
+	 * The '<em><b>ISOLATED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ISOLATED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ISOLATED(0, "ISOLATED", "isolated"),
+
+	/**
+	 * The '<em><b>DETERMINED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DETERMINED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DETERMINED(1, "DETERMINED", "determined"),
+
+	/**
+	 * The '<em><b>ASSURED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ASSURED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ASSURED(2, "ASSURED", "assured"),
+
+	/**
+	 * The '<em><b>PARALLEL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PARALLEL_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PARALLEL(3, "PARALLEL", "parallel");
+
 	/**
 	 * The '<em><b>ISOLATED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -30,12 +70,12 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ISOLATED_LITERAL
+	 * @see #ISOLATED
 	 * @model literal="isolated"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ISOLATED = 0;
+	public static final int ISOLATED_VALUE = 0;
 
 	/**
 	 * The '<em><b>DETERMINED</b></em>' literal value.
@@ -45,12 +85,12 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DETERMINED_LITERAL
+	 * @see #DETERMINED
 	 * @model literal="determined"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DETERMINED = 1;
+	public static final int DETERMINED_VALUE = 1;
 
 	/**
 	 * The '<em><b>ASSURED</b></em>' literal value.
@@ -60,12 +100,12 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ASSURED_LITERAL
+	 * @see #ASSURED
 	 * @model literal="assured"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ASSURED = 2;
+	public static final int ASSURED_VALUE = 2;
 
 	/**
 	 * The '<em><b>PARALLEL</b></em>' literal value.
@@ -75,52 +115,12 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #PARALLEL_LITERAL
+	 * @see #PARALLEL
 	 * @model literal="parallel"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARALLEL = 3;
-
-	/**
-	 * The '<em><b>ISOLATED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ISOLATED
-	 * @generated
-	 * @ordered
-	 */
-	public static final AnnotationKind ISOLATED_LITERAL = new AnnotationKind(ISOLATED, "ISOLATED", "isolated");
-
-	/**
-	 * The '<em><b>DETERMINED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DETERMINED
-	 * @generated
-	 * @ordered
-	 */
-	public static final AnnotationKind DETERMINED_LITERAL = new AnnotationKind(DETERMINED, "DETERMINED", "determined");
-
-	/**
-	 * The '<em><b>ASSURED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ASSURED
-	 * @generated
-	 * @ordered
-	 */
-	public static final AnnotationKind ASSURED_LITERAL = new AnnotationKind(ASSURED, "ASSURED", "assured");
-
-	/**
-	 * The '<em><b>PARALLEL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PARALLEL
-	 * @generated
-	 * @ordered
-	 */
-	public static final AnnotationKind PARALLEL_LITERAL = new AnnotationKind(PARALLEL, "PARALLEL", "parallel");
+	public static final int PARALLEL_VALUE = 3;
 
 	/**
 	 * An array of all the '<em><b>Annotation Kind</b></em>' enumerators.
@@ -130,10 +130,10 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 */
 	private static final AnnotationKind[] VALUES_ARRAY =
 		new AnnotationKind[] {
-			ISOLATED_LITERAL,
-			DETERMINED_LITERAL,
-			ASSURED_LITERAL,
-			PARALLEL_LITERAL,
+			ISOLATED,
+			DETERMINED,
+			ASSURED,
+			PARALLEL,
 		};
 
 	/**
@@ -142,7 +142,7 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<AnnotationKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Annotation Kind</b></em>' literal with the specified literal value.
@@ -184,13 +184,34 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 */
 	public static AnnotationKind get(int value) {
 		switch (value) {
-			case ISOLATED: return ISOLATED_LITERAL;
-			case DETERMINED: return DETERMINED_LITERAL;
-			case ASSURED: return ASSURED_LITERAL;
-			case PARALLEL: return PARALLEL_LITERAL;
+			case ISOLATED_VALUE: return ISOLATED;
+			case DETERMINED_VALUE: return DETERMINED;
+			case ASSURED_VALUE: return ASSURED;
+			case PARALLEL_VALUE: return PARALLEL;
 		}
 		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
@@ -199,7 +220,47 @@ public final class AnnotationKind extends AbstractEnumerator {
 	 * @generated
 	 */
 	private AnnotationKind(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+	
 } //AnnotationKind

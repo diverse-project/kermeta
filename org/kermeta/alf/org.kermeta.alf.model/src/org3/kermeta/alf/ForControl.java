@@ -38,9 +38,9 @@ public interface ForControl extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Loop Variable Definition</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getForControl_LoopVariableDefinition()
-	 * @model type="org3.kermeta.alf.LoopVariableDefinition" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getLoopVariableDefinition();
+	EList<LoopVariableDefinition> getLoopVariableDefinition();
 
 } // ForControl

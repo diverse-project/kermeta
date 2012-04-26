@@ -38,9 +38,9 @@ public interface ExclusiveOrExpression extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exp</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getExclusiveOrExpression_Exp()
-	 * @model type="org3.kermeta.alf.AndExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getExp();
+	EList<AndExpression> getExp();
 
 } // ExclusiveOrExpression

@@ -39,10 +39,10 @@ public interface ShiftExpression extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exp</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getShiftExpression_Exp()
-	 * @model type="org3.kermeta.alf.AdditiveExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getExp();
+	EList<AdditiveExpression> getExp();
 
 	/**
 	 * Returns the value of the '<em><b>Op</b></em>' attribute.

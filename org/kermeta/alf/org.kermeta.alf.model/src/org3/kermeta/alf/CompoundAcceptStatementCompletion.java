@@ -65,9 +65,9 @@ public interface CompoundAcceptStatementCompletion extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Accept Block</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getCompoundAcceptStatementCompletion_AcceptBlock()
-	 * @model type="org3.kermeta.alf.AcceptBlock" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getAcceptBlock();
+	EList<AcceptBlock> getAcceptBlock();
 
 } // CompoundAcceptStatementCompletion

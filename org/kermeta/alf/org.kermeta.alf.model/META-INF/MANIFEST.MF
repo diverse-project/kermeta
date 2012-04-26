@@ -1,12 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.alf.util;uses:="org.eclipse.emf.ecore,org.
- eclipse.emf.common.notify,org.kermeta.alf,org.eclipse.emf.common.noti
- fy.impl,org.eclipse.emf.common.util",org.kermeta.alf.impl;uses:="org.
- eclipse.emf.ecore,org.eclipse.emf.common.notify,org.eclipse.emf.ecore
- .impl,org.kermeta.alf,org.eclipse.emf.ecore.util,org.eclipse.emf.comm
- on.util,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.resource",
- org.kermeta.alf;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.u
- til,org.kermeta.alf.impl"
 Private-Package: model,org3.kermeta.alf.util,org3.kermeta.alf,.,org3.k
  ermeta.alf.impl
 Bundle-ClassPath: .
@@ -14,9 +6,9 @@ Built-By: suresh
 Tool: Bnd-0.0.311
 Bundle-Name: alf.model :: ALF MODEL
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.7.0
 Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1334579004246
+Build-Jdk: 1.7.0
+Bnd-LastModified: 1335429227458
 Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
  otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli

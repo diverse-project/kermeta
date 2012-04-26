@@ -64,10 +64,10 @@ public interface SwitchStatement extends Statement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Switch Clause</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getSwitchStatement_SwitchClause()
-	 * @model type="org3.kermeta.alf.SwitchClause" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getSwitchClause();
+	EList<SwitchClause> getSwitchClause();
 
 	/**
 	 * Returns the value of the '<em><b>Default Clause</b></em>' containment reference.

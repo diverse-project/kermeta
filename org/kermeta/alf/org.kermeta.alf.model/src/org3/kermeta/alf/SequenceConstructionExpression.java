@@ -37,10 +37,10 @@ public interface SequenceConstructionExpression extends SequenceElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sequence Element</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getSequenceConstructionExpression_SequenceElement()
-	 * @model type="org3.kermeta.alf.SequenceElement" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getSequenceElement();
+	EList<SequenceElement> getSequenceElement();
 
 	/**
 	 * Returns the value of the '<em><b>Range Upper</b></em>' containment reference.

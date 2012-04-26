@@ -71,6 +71,6 @@ public interface Annotation extends EObject {
 	 * @model unique="false"
 	 * @generated
 	 */
-	EList getArgs();
+	EList<String> getArgs();
 
 } // Annotation

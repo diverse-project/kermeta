@@ -38,9 +38,9 @@ public interface TemplateBinding extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bindings</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getTemplateBinding_Bindings()
-	 * @model type="org3.kermeta.alf.NamedTemplateBinding" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getBindings();
+	EList<NamedTemplateBinding> getBindings();
 
 } // TemplateBinding

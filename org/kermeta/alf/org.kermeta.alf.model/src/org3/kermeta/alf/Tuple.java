@@ -38,9 +38,9 @@ public interface Tuple extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tuple Elements</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getTuple_TupleElements()
-	 * @model type="org3.kermeta.alf.TupleElement" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getTupleElements();
+	EList<TupleElement> getTupleElements();
 
 } // Tuple

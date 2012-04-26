@@ -65,9 +65,9 @@ public interface CLASSOP extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Stat</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getCLASSOP_Stat()
-	 * @model type="org3.kermeta.alf.Statement" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getStat();
+	EList<Statement> getStat();
 
 } // CLASSOP

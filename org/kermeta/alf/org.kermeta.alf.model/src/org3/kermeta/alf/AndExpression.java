@@ -38,9 +38,9 @@ public interface AndExpression extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exp</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getAndExpression_Exp()
-	 * @model type="org3.kermeta.alf.EqualityExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getExp();
+	EList<EqualityExpression> getExp();
 
 } // AndExpression

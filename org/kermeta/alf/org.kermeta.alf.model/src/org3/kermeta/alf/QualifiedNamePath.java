@@ -38,9 +38,9 @@ public interface QualifiedNamePath extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Namespace</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getQualifiedNamePath_Namespace()
-	 * @model type="org3.kermeta.alf.UnqualifiedName" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getNamespace();
+	EList<UnqualifiedName> getNamespace();
 
 } // QualifiedNamePath

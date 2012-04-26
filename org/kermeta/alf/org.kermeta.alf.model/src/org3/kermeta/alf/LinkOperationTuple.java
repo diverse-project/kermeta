@@ -38,9 +38,9 @@ public interface LinkOperationTuple extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Link Operation Tuple Element</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getLinkOperationTuple_LinkOperationTupleElement()
-	 * @model type="org3.kermeta.alf.LinkOperationTupleElement" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getLinkOperationTupleElement();
+	EList<LinkOperationTupleElement> getLinkOperationTupleElement();
 
 } // LinkOperationTuple

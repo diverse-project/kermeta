@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,27 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class CollectOrIterateOperator extends AbstractEnumerator {
+public enum CollectOrIterateOperator implements Enumerator {
+	/**
+	 * The '<em><b>COLLECT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #COLLECT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	COLLECT(0, "COLLECT", "collect"),
+
+	/**
+	 * The '<em><b>ITERATE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ITERATE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ITERATE(1, "ITERATE", "iterate");
+
 	/**
 	 * The '<em><b>COLLECT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -30,12 +50,12 @@ public final class CollectOrIterateOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #COLLECT_LITERAL
+	 * @see #COLLECT
 	 * @model literal="collect"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COLLECT = 0;
+	public static final int COLLECT_VALUE = 0;
 
 	/**
 	 * The '<em><b>ITERATE</b></em>' literal value.
@@ -45,32 +65,12 @@ public final class CollectOrIterateOperator extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ITERATE_LITERAL
+	 * @see #ITERATE
 	 * @model literal="iterate"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ITERATE = 1;
-
-	/**
-	 * The '<em><b>COLLECT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #COLLECT
-	 * @generated
-	 * @ordered
-	 */
-	public static final CollectOrIterateOperator COLLECT_LITERAL = new CollectOrIterateOperator(COLLECT, "COLLECT", "collect");
-
-	/**
-	 * The '<em><b>ITERATE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ITERATE
-	 * @generated
-	 * @ordered
-	 */
-	public static final CollectOrIterateOperator ITERATE_LITERAL = new CollectOrIterateOperator(ITERATE, "ITERATE", "iterate");
+	public static final int ITERATE_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Collect Or Iterate Operator</b></em>' enumerators.
@@ -80,8 +80,8 @@ public final class CollectOrIterateOperator extends AbstractEnumerator {
 	 */
 	private static final CollectOrIterateOperator[] VALUES_ARRAY =
 		new CollectOrIterateOperator[] {
-			COLLECT_LITERAL,
-			ITERATE_LITERAL,
+			COLLECT,
+			ITERATE,
 		};
 
 	/**
@@ -90,7 +90,7 @@ public final class CollectOrIterateOperator extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<CollectOrIterateOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Collect Or Iterate Operator</b></em>' literal with the specified literal value.
@@ -132,11 +132,32 @@ public final class CollectOrIterateOperator extends AbstractEnumerator {
 	 */
 	public static CollectOrIterateOperator get(int value) {
 		switch (value) {
-			case COLLECT: return COLLECT_LITERAL;
-			case ITERATE: return ITERATE_LITERAL;
+			case COLLECT_VALUE: return COLLECT;
+			case ITERATE_VALUE: return ITERATE;
 		}
 		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
@@ -145,7 +166,47 @@ public final class CollectOrIterateOperator extends AbstractEnumerator {
 	 * @generated
 	 */
 	private CollectOrIterateOperator(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+	
 } //CollectOrIterateOperator

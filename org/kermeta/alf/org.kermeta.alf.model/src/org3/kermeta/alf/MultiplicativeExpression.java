@@ -39,10 +39,10 @@ public interface MultiplicativeExpression extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exp</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getMultiplicativeExpression_Exp()
-	 * @model type="org3.kermeta.alf.UnaryExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getExp();
+	EList<UnaryExpression> getExp();
 
 	/**
 	 * Returns the value of the '<em><b>Op</b></em>' attribute list.
@@ -58,6 +58,6 @@ public interface MultiplicativeExpression extends EObject {
 	 * @model unique="false"
 	 * @generated
 	 */
-	EList getOp();
+	EList<String> getOp();
 
 } // MultiplicativeExpression

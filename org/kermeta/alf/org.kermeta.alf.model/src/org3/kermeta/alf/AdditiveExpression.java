@@ -39,10 +39,10 @@ public interface AdditiveExpression extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exp</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getAdditiveExpression_Exp()
-	 * @model type="org3.kermeta.alf.MultiplicativeExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getExp();
+	EList<MultiplicativeExpression> getExp();
 
 	/**
 	 * Returns the value of the '<em><b>Op</b></em>' attribute list.
@@ -58,6 +58,6 @@ public interface AdditiveExpression extends EObject {
 	 * @model unique="false"
 	 * @generated
 	 */
-	EList getOp();
+	EList<String> getOp();
 
 } // AdditiveExpression

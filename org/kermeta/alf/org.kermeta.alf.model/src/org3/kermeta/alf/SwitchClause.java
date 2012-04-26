@@ -39,10 +39,10 @@ public interface SwitchClause extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Switch Case</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getSwitchClause_SwitchCase()
-	 * @model type="org3.kermeta.alf.SwitchCase" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getSwitchCase();
+	EList<SwitchCase> getSwitchCase();
 
 	/**
 	 * Returns the value of the '<em><b>Statement Sequence</b></em>' containment reference.

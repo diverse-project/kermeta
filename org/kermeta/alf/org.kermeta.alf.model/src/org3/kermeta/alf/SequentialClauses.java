@@ -38,9 +38,9 @@ public interface SequentialClauses extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Conccurent Clauses</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getSequentialClauses_ConccurentClauses()
-	 * @model type="org3.kermeta.alf.ConcurrentClauses" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getConccurentClauses();
+	EList<ConcurrentClauses> getConccurentClauses();
 
 } // SequentialClauses

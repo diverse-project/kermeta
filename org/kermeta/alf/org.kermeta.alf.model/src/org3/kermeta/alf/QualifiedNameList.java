@@ -38,9 +38,9 @@ public interface QualifiedNameList extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Qualified Name</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getQualifiedNameList_QualifiedName()
-	 * @model type="org3.kermeta.alf.QualifiedNameWithBinding" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getQualifiedName();
+	EList<QualifiedNameWithBinding> getQualifiedName();
 
 } // QualifiedNameList

@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,27 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class BooleanValue extends AbstractEnumerator {
+public enum BooleanValue implements Enumerator {
+	/**
+	 * The '<em><b>TRUE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TRUE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	TRUE(0, "TRUE", "true"),
+
+	/**
+	 * The '<em><b>FALSE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FALSE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FALSE(1, "FALSE", "false");
+
 	/**
 	 * The '<em><b>TRUE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -30,12 +50,12 @@ public final class BooleanValue extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TRUE_LITERAL
+	 * @see #TRUE
 	 * @model literal="true"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TRUE = 0;
+	public static final int TRUE_VALUE = 0;
 
 	/**
 	 * The '<em><b>FALSE</b></em>' literal value.
@@ -45,32 +65,12 @@ public final class BooleanValue extends AbstractEnumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #FALSE_LITERAL
+	 * @see #FALSE
 	 * @model literal="false"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FALSE = 1;
-
-	/**
-	 * The '<em><b>TRUE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TRUE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BooleanValue TRUE_LITERAL = new BooleanValue(TRUE, "TRUE", "true");
-
-	/**
-	 * The '<em><b>FALSE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FALSE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BooleanValue FALSE_LITERAL = new BooleanValue(FALSE, "FALSE", "false");
+	public static final int FALSE_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Boolean Value</b></em>' enumerators.
@@ -80,8 +80,8 @@ public final class BooleanValue extends AbstractEnumerator {
 	 */
 	private static final BooleanValue[] VALUES_ARRAY =
 		new BooleanValue[] {
-			TRUE_LITERAL,
-			FALSE_LITERAL,
+			TRUE,
+			FALSE,
 		};
 
 	/**
@@ -90,7 +90,7 @@ public final class BooleanValue extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<BooleanValue> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Boolean Value</b></em>' literal with the specified literal value.
@@ -132,11 +132,32 @@ public final class BooleanValue extends AbstractEnumerator {
 	 */
 	public static BooleanValue get(int value) {
 		switch (value) {
-			case TRUE: return TRUE_LITERAL;
-			case FALSE: return FALSE_LITERAL;
+			case TRUE_VALUE: return TRUE;
+			case FALSE_VALUE: return FALSE;
 		}
 		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
@@ -145,7 +166,47 @@ public final class BooleanValue extends AbstractEnumerator {
 	 * @generated
 	 */
 	private BooleanValue(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+	
 } //BooleanValue

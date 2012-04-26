@@ -65,9 +65,9 @@ public interface CLASSSTRUCT extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Clsop</em>' containment reference list.
 	 * @see org3.kermeta.alf.AlfPackage#getCLASSSTRUCT_Clsop()
-	 * @model type="org3.kermeta.alf.CLASSOP" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getClsop();
+	EList<CLASSOP> getClsop();
 
 } // CLASSSTRUCT
