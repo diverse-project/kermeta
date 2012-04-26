@@ -302,10 +302,12 @@ public class KermetaCompiler {
 		try {
 			lock.lock();
 			this.hasFailed = false;
-			flushProblems(FileHelpers.StringToURL(kpFileURL));
+			if(this.checkingEnabled){
+				flushProblems(FileHelpers.StringToURL(kpFileURL));
+			}
 			String projectName = "project";
 
-			int workUnit = phaseRank(stopAfterPhase)+1;
+			int workUnit = phaseRank(stopAfterPhase);
 			
 			if(checkingEnabled && phaseRank(stopAfterPhase) >= 2) workUnit+=1;
 			if(checkingEnabled && phaseRank(stopAfterPhase) >= 4) workUnit+=1;
@@ -357,7 +359,17 @@ public class KermetaCompiler {
 			}
 			
 			ArrayList<TracedURL> kpPreResolveSources = collectSourceHelper.getAllButLastModifiedFile(kpSources,dirtyMU);
-			logger.info("Preresolve all but : "+collectSourceHelper.getLastModifiedFile(kpSources,dirtyMU).getUrl(),LOG_MESSAGE_GROUP);
+			if (collectSourceHelper.getLastModifiedFile(kpSources,dirtyMU) != null){
+				logger.info("Preresolve all but : "+collectSourceHelper.getLastModifiedFile(kpSources,dirtyMU).getUrl(),LOG_MESSAGE_GROUP);
+			}
+			else{
+				StringBuilder dirtyUnits = new StringBuilder();
+				for(URL u : dirtyMU.keySet()){
+					dirtyUnits.append(u.toString());
+					dirtyUnits.append(", ");
+				}
+				logger.info("Preresolve all but dirty units: "+dirtyUnits,LOG_MESSAGE_GROUP);
+			}
 			ModelingUnit preResolvedUnit = null;
 			if( isPreresolveUpToDate(kpPreResolveSources, preResolveCacheUrl, preResolveSrcListUrl)){
 				logger.info("Reusing  : "+preResolveCacheUrl,LOG_MESSAGE_GROUP);
@@ -489,6 +501,9 @@ public class KermetaCompiler {
 					}
 				}
 			}
+			else{
+				logger.debug("Ignore checking of merged file ", LOG_MESSAGE_GROUP);
+			}
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_MERGE)){
 				logger.debug("stopping after phase "+PHASE_MERGE, LOG_MESSAGE_GROUP);
 				return null;
@@ -534,6 +549,9 @@ public class KermetaCompiler {
 						return null;
 					}
 				}
+			}
+			else{
+				logger.debug("Ignore checking of resolved file ", LOG_MESSAGE_GROUP);
 			}
 				
 			// save resolvedUnit to the META-INF/kermeta/merged.km
