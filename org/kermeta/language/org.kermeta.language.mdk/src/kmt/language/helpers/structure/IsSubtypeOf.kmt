@@ -69,14 +69,14 @@ aspect class FunctionType
 
 	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
 	
-		stdio.writeln("cloneWithBindings for FunctionType ...")
+		//stdio.writeln("cloneWithBindings for FunctionType ...")
 		
 		var clone : FunctionType init FunctionType.new
 		clone.right:=self.right.cloneWithBindings(bindings)
 		
 		if not(self.left.isVoid)
 		then
-			stdio.writeln(" left not void...")
+			//stdio.writeln(" left not void...")
 			clone.left:=self.left.cloneWithBindings(bindings)
 		end
 		result:=clone
@@ -94,7 +94,7 @@ aspect class FunctionType
 		7. Faux pour les autres Enumeration, ModelType, VirtualType(?)
 		*/
 		
-		stdio.writeln("isSubtypeOf for FunctionType ...")
+		//stdio.writeln("isSubtypeOf for FunctionType ...")
 		
 		result:=false
 		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
@@ -110,42 +110,33 @@ aspect class FunctionType
 			else
 				if (expectedType.isInstanceOf(FunctionType))
 				then
-					stdio.writeln("expectedType is a FunctionType ...")
+					//stdio.writeln("expectedType is a FunctionType ...")
 					//( <A->C> inherits <B->D> ) <=> ( ( C inherits D ) and ( B inherits A )
 					var expectedFunctionType : FunctionType init expectedType.asType(FunctionType)
 					// First, compare return types C->D
 					result:= self.right.isSubTypeOf(expectedFunctionType.right/*, typeVariableToSet*/)
-					stdio.writeln("rights result : " + result.toString)
+					//stdio.writeln("rights result : " + result.toString)
 					if (result)
 					then
-						stdio.writeln("self.left  : " + self.left.toString)
-						stdio.writeln("expe.left  : " + expectedFunctionType.left.toString)
 						
 						// If true, compare B->A
 						if (self.left.isVoid)
 						then
-							stdio.writeln("self.left is void")
-						
 							// expected.left must be either void or an empty ProductType
 							if not(expectedFunctionType.left.isVoid)
 							then // else it is ok, since return types are ok
-								stdio.writeln("expe.left is not void")
 								if (expectedFunctionType.left.isInstanceOf(ProductType))
 								then
-									stdio.writeln("expe.left is a ProductType")
 									//in this case it mustn't contain any type
 									result :=  (expectedFunctionType.left.asType(ProductType).type.size==0)
 								else
-									stdio.writeln("expe.left is not a ProductType")
 									result:=false
 								end
 							end
 						else
-							stdio.writeln("self.left is not void")
 							// Now, expected.left might be void
 							if (expectedFunctionType.isVoid)
 							then
-								stdio.writeln("expe.left is void")
 								// self.left must be an empty ProductType
 								if (self.left.isInstanceOf(ProductType))
 								then
@@ -155,7 +146,6 @@ aspect class FunctionType
 									result:=false
 								end
 							else
-								stdio.writeln("expe.left is not void")
 								// Now, both ProductTypes are not empty, compare them
 								// We must compare them 
 								result:=expectedFunctionType.left.isSubTypeOf(self.left)
@@ -170,7 +160,7 @@ aspect class FunctionType
 			end
 		end
 
-		stdio.writeln("isSubtypeOf for FunctionType result : " + result.toString)		
+		//stdio.writeln("isSubtypeOf for FunctionType result : " + result.toString)		
 	end
 	
 	/*
@@ -190,14 +180,11 @@ aspect class ProductType {
 	
 	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
 	
-		stdio.writeln("cloneWithBindings for ProductType ...")
 		var clone : ProductType init ProductType.new
 		self.type.each{ t |
-			stdio.writeln(" type:"+t.toString)
 			clone.type.add(t.cloneWithBindings(bindings))
 		}
 		result:=clone
-		stdio.writeln("cloneWithBindings for ProductType sortie")
 		
 	end
 	
@@ -210,13 +197,12 @@ aspect class ProductType {
 		2. si <> 1 : expected ne peut être qu'un productType 
 		
 		*/
-		stdio.writeln(" isSubTypeOf for productType ...")
+		//stdio.writeln(" isSubTypeOf for productType ...")
 			
 		if(expectedType.isInstanceOf(ProductType))
 		then
 			// No problem, just compare the types inside both ProductTypes
 			// Check the cardinalities...
-			stdio.writeln("    expected is a productType -> OK")
 			var expectedProductType : ProductType init expectedType.asType(ProductType)
 			//stdio.writeln("     card self      : " + self.type.size.toString())
 			//stdio.writeln("     card expected  : " + expectedProductType.type.size.toString)
@@ -421,7 +407,7 @@ aspect class Class
 	 */
 	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
 	
-		stdio.writeln("cloneWithBindings for class : " + self.toString)
+		//stdio.writeln("cloneWithBindings for class : " + self.toString)
 	
 		result:= Class.new
 		result.asType(Class).typeDefinition:=self.typeDefinition
@@ -432,7 +418,7 @@ aspect class Class
 			if tvb.type.isInstanceOf(TypeVariable) then
 				var binding : TypeVariableBinding init bindings.detect{b|b.variable==tvb.type}
 				if binding.isVoid.~not then
-					stdio.writeln(" binding detected : " + binding.type.toString)
+					//stdio.writeln(" binding detected : " + binding.type.toString)
 					newTVB.type:=binding.type
 				end
 			else 
@@ -442,7 +428,7 @@ aspect class Class
 			end
 			result.asType(Class).typeParamBinding.add(newTVB)
 		}
-		stdio.writeln("cloneWithBindings result : " + result.toString)
+		//stdio.writeln("cloneWithBindings result : " + result.toString)
 	end
 
 	/**
@@ -481,7 +467,7 @@ aspect class Class
 	
 	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
 
-		stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.toString)
+		//stdio.writeln("ifSubTypeOf for class " + self.typeDefinition.name + ", compare with " + expectedType.toString)
 		//TODO : rajouter le cas du expectedType=PrimitiveType
 		
 		// First of all, check if self is kermeta::standard::void 
@@ -536,7 +522,7 @@ aspect class Class
 					// the correct Type.
 					if (expectedType.isInstanceOf(ObjectTypeVariable))
 					then
-						stdio.writeln(" isSubtypeOf : expectedType is an ObjectTypeVariable : " +expectedType.asType(ObjectTypeVariable).name)
+						//stdio.writeln(" isSubtypeOf : expectedType is an ObjectTypeVariable : " +expectedType.asType(ObjectTypeVariable).name)
 						var reallyExpectedType : Type //init typeVariableToSet.getValue(expectedType.asType(ObjectTypeVariable))
 						//result:=
 						
@@ -684,7 +670,7 @@ aspect class ObjectTypeVariable {
 	
 	method cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Type is do
 		
-		stdio.writeln("cloneWithBindings for ObjectTypeVariable : " + self.name)
+		//stdio.writeln("cloneWithBindings for ObjectTypeVariable : " + self.name)
 		var tvb : TypeVariableBinding init bindings.detect{ x | x.variable.equals(self)}
 		if (tvb.isVoid)
 		then
@@ -692,6 +678,6 @@ aspect class ObjectTypeVariable {
 		else
 			result:=tvb.type
 		end
-		stdio.writeln("cloneWithBindings for ObjectTypeVariable result : " + result.toString)
+		//stdio.writeln("cloneWithBindings for ObjectTypeVariable result : " + result.toString)
 	end	
 }
