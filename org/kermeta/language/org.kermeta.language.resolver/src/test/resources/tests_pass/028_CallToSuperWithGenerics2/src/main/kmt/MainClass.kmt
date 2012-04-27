@@ -1,0 +1,30 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			stdio.writeln("Hello from mainOperation")
+
+		end
+	}
+
+	
+	class A[X] {
+		
+		operation foo[Z](x:X, z:Z) : Z is void
+		
+		
+	}
+	
+	class B[Y] inherits  A[Y]{
+	operation foo[T](x : Y, t:T) :T is do 
+		
+		
+		super(x,"")+""
+		result :=t
+
+	end
+	}
+}
