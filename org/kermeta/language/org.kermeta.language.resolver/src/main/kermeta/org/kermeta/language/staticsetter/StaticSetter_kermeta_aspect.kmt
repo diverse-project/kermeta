@@ -265,6 +265,28 @@ package behavior {
 						staticOperation:=context.currentOperation.superOperation.asType(Operation)
 					end
 				end
+				//retry to resolve lambda here, when staticOperation is known
+						
+				from var lambdaToBeResolved : ToBeResolvedLater
+				until context.waitingContext.isEmpty()
+				loop
+					if (context.verbose) then stdio.writeln("resolving a lambda") end
+					lambdaToBeResolved := context.waitingContext.first()
+					context.waitingContext.removeAt(0)
+					//if the container of the lambda is still unresolved then there is nothing to do
+					if lambdaToBeResolved.current.container.isInstanceOf(UnresolvedCall).andThen{x| lambdaToBeResolved.current.container.asType(UnresolvedCall).resolvedCall.isVoid} then
+						context.errors.add(ResolverException.new.initialize("The type of the lambda expression cannot be setted while its containing operation is not resolved", lambdaToBeResolved.current))
+					else							
+						lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
+					end
+				end
+				
+				if not staticOperation.isVoid then
+				
+					self.inferTypeVariableFromParameters(context)
+
+				end
+				
 				
 				// The static type of the call operation must be infered.
 				if context.currentOperation.superOperation.isInstanceOf(Operation) then
