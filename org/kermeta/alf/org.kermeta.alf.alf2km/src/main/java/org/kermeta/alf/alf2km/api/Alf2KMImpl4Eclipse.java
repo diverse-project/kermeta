@@ -1,6 +1,5 @@
-package org.kermeta.alf.alf2km;
+package org.kermeta.alf.alf2km.api;
 
-import org.kermeta.alf.alf2km.api.Alf2KM;
 import org.kermeta.language.structure.ModelingUnit;
 import org3.kermeta.alf.CLASSSTRUCT;
 
