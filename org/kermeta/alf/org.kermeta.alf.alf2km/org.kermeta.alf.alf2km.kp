@@ -1,6 +1,6 @@
 KermetaProject "org.kermeta.alf.alf2km"
 	groupId = "my.group"
-	defaultMainClass = "org3::kermeta::alf::alf2km::MainClass"
+	defaultMainClass = "org3::kermeta::alf::alf2km::ALF2KM"
 	defaultMainOperation = "mainOperation"
 	sources = {
 		require "${alf.model.baseUri}/model/Alf.ecore" byteCodeFromADependency
@@ -14,7 +14,7 @@ KermetaProject "org.kermeta.alf.alf2km"
 		require "${project.baseUri}/src/main/kmt/alf/Statements.kmt"
 		require "${project.baseUri}/src/main/kmt/alf/MathExpr.kmt"
 		require "${project.baseUri}/src/main/kmt/alf/Base.kmt"
-		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+		require "${project.baseUri}/src/main/kmt/ALF2KM.kmt"
 	}
 	dependencies = {
 		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)

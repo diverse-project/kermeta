@@ -1,0 +1,23 @@
+package org3::kermeta::alf::alf2km;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using org::kermeta::language::structure
+using org3::kermeta::alf
+
+class ALF2KM
+{
+		operation convert(cl : CLASSSTRUCT) : org::kermeta::language::structure::ModelingUnit is do 
+			var kcl : org::kermeta::language::structure::ClassDefinition
+			kcl := cl.Transform()
+			var mu : org::kermeta::language::structure::ModelingUnit init org::kermeta::language::structure::ModelingUnit.new
+			var p : org::kermeta::language::structure::Package init org::kermeta::language::structure::Package.new
+			p.name := "alfPackage"
+			p.ownedTypeDefinition.add(kcl)
+			mu.packages.add(p)
+			result := mu
+		end
+		operation mainOperation() : Void is do 
+			stdio.writeln("Starting to Process Alf")
+		end
+}
