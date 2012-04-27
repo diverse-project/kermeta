@@ -32,7 +32,7 @@
     <build>
 		  <resources>
 		    <resource>
-		      <directory>${project.build.directory}/generated-sources/resources</directory>
+		      <directory>${project.build.directory}/resources</directory>
 		    </resource>
 		  </resources>
         <plugins>
@@ -77,10 +77,29 @@
                         <Require-Bundle>
                         </Require-Bundle>
                         <Export-Package>
-                        	theGroup.org.kermeta.language.prettyprinterrunner
+                        	org.kermeta.language.org.kermeta.language.prettyprinterrunner
                         </Export-Package>
-                        <Import-Package>
-						</Import-Package>
+                        <Require-Bundle>
+								org.kermeta.scala.scala-library,
+								org.kermeta.language.model,
+								org.kermeta.language.library.core
+                       	</Require-Bundle>
+						<Import-Package>
+								kermeta.persistence,
+								org.eclipse.emf.common.notify,
+								org.eclipse.emf.common.util,
+								org.eclipse.emf.ecore,
+								org.eclipse.emf.ecore.impl,
+								org.eclipse.emf.ecore.resource,
+								org.eclipse.emf.ecore.util,
+								org.eclipse.emf.ecore.xmi,
+								org.eclipse.emf.ecore.xmi.impl,								
+								org.kermeta.utils.systemservices.api.messaging,
+								org.kermeta.utils.systemservices.api.result,
+								org.kermeta.language.structure,
+								org.osgi.framework;version="[1.5,2)",
+								org.slf4j;version="[1.5,2)"
+                        </Import-Package>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
