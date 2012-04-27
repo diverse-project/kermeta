@@ -42,7 +42,7 @@ public interface AlfPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.kermeta.org/alf/xtext/Alf";
+  String eNS_URI = "http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf";
 
   /**
    * The package namespace name.

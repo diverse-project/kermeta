@@ -2,11 +2,11 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.kermeta.alf.xtext.Alf" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="alf">
-      <ePackage href="http://www.kermeta.org/alf/xtext/Alf#/"/>
+      <ePackage href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="CLASSSTRUCT">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//CLASSSTRUCT"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CLASSSTRUCT"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="class"/>
@@ -22,7 +22,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CLASSOP">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//CLASSOP"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CLASSOP"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="void "/>
@@ -38,7 +38,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LITERAL">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//LITERAL"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LITERAL"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
@@ -48,7 +48,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="BOOLEAN_LITERAL">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//BOOLEAN_LITERAL"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BOOLEAN_LITERAL"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
@@ -61,22 +61,22 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="BooleanValue">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//BooleanValue"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BooleanValue"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//BooleanValue/TRUE"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BooleanValue/TRUE"/>
           <literal value="true"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//BooleanValue/FALSE"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BooleanValue/FALSE"/>
           <literal value="false"/>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NUMBER_LITERAL">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NUMBER_LITERAL"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NUMBER_LITERAL"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
@@ -85,7 +85,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="INTEGER_LITERAL">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//INTEGER_LITERAL"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//INTEGER_LITERAL"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
@@ -98,7 +98,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UNLIMITED_LITERAL">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//UNLIMITED_LITERAL"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//UNLIMITED_LITERAL"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
@@ -203,7 +203,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="STRING_LITERAL">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//STRING_LITERAL"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//STRING_LITERAL"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
@@ -216,7 +216,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NameExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NameExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NameExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Alternatives">
@@ -264,7 +264,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="QualifiedNamePath">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//QualifiedNamePath"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//QualifiedNamePath"/>
       </type>
       <alternatives xsi:type="xtext:Group" cardinality="+">
         <elements xsi:type="xtext:Assignment" feature="namespace" operator="+=">
@@ -275,7 +275,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnqualifiedName">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//UnqualifiedName"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//UnqualifiedName"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
@@ -288,7 +288,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TemplateBinding">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//TemplateBinding"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//TemplateBinding"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="&lt;"/>
@@ -306,7 +306,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NamedTemplateBinding">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NamedTemplateBinding"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NamedTemplateBinding"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="formal" operator="=">
@@ -320,7 +320,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="QualifiedNameWithBinding">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//QualifiedNameWithBinding"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//QualifiedNameWithBinding"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="id" operator="=">
@@ -339,12 +339,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Tuple">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Tuple"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Tuple"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Tuple"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Tuple"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="("/>
@@ -364,7 +364,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TupleElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//TupleElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//TupleElement"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="argument" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
@@ -372,13 +372,13 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Expression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Expression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ConditionalTestExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ConditionalTestExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ConditionalTestExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="=">
@@ -398,7 +398,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ConditionalOrExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ConditionalOrExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ConditionalOrExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -414,7 +414,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ConditionalAndExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ConditionalAndExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ConditionalAndExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -430,7 +430,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InclusiveOrExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//InclusiveOrExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//InclusiveOrExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -446,7 +446,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ExclusiveOrExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ExclusiveOrExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ExclusiveOrExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -462,7 +462,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AndExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AndExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AndExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -478,7 +478,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="EqualityExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//EqualityExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//EqualityExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -499,7 +499,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ClassificationExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassificationExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassificationExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="=">
@@ -520,7 +520,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RelationalExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//RelationalExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//RelationalExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="left" operator="=">
@@ -543,7 +543,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ShiftExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ShiftExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ShiftExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -565,7 +565,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AdditiveExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AdditiveExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AdditiveExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -586,7 +586,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="MultiplicativeExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//MultiplicativeExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//MultiplicativeExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="exp" operator="+=">
@@ -608,7 +608,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnaryExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//UnaryExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//UnaryExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="op" operator="=">
@@ -627,7 +627,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PrimaryExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//PrimaryExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//PrimaryExpression"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="prefix" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.51"/>
@@ -635,7 +635,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SuffixExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SuffixExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SuffixExpression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.34"/>
@@ -649,7 +649,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="OperationCallExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//OperationCallExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//OperationCallExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="."/>
@@ -666,7 +666,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="OperationCallExpressionWithoutDot">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//OperationCallExpressionWithoutDot"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//OperationCallExpressionWithoutDot"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="operationName" operator="=">
@@ -682,7 +682,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PropertyCallExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//PropertyCallExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//PropertyCallExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="."/>
@@ -703,7 +703,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LinkOperationExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="."/>
@@ -717,7 +717,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LinkOperationTuple">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationTuple"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationTuple"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="("/>
@@ -735,7 +735,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LinkOperationTupleElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationTupleElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationTupleElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="objectOrRole" operator="=">
@@ -758,26 +758,26 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="LinkOperationKind">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationKind"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationKind"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationKind/CREATE"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationKind/CREATE"/>
           <literal value="createLink"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationKind/DESTROY"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationKind/DESTROY"/>
           <literal value="destroyLink"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//LinkOperationKind/CLEAR"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LinkOperationKind/CLEAR"/>
           <literal value="clearAssoc"/>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceOperationExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceOperationExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceOperationExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -794,7 +794,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceReductionExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceReductionExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceReductionExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -812,7 +812,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceExpansionExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceExpansionExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceExpansionExpression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.44"/>
@@ -823,7 +823,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SelectOrRejectOperation">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SelectOrRejectOperation"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SelectOrRejectOperation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -845,22 +845,22 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="SelectOrRejectOperator">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//SelectOrRejectOperator"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SelectOrRejectOperator"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//SelectOrRejectOperator/SELECT"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SelectOrRejectOperator/SELECT"/>
           <literal value="select"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//SelectOrRejectOperator/REJECT"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SelectOrRejectOperator/REJECT"/>
           <literal value="reject"/>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CollectOrIterateOperation">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//CollectOrIterateOperation"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CollectOrIterateOperation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -882,22 +882,22 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="CollectOrIterateOperator">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//CollectOrIterateOperator"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CollectOrIterateOperator"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//CollectOrIterateOperator/COLLECT"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CollectOrIterateOperator/COLLECT"/>
           <literal value="collect"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//CollectOrIterateOperator/ITERATE"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CollectOrIterateOperator/ITERATE"/>
           <literal value="iterate"/>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ForAllOrExistsOrOneOperation">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ForAllOrExistsOrOneOperation"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForAllOrExistsOrOneOperation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -919,26 +919,26 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="ForAllOrExistsOrOneOperator">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//ForAllOrExistsOrOneOperator"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForAllOrExistsOrOneOperator"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//ForAllOrExistsOrOneOperator/FORALL"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForAllOrExistsOrOneOperator/FORALL"/>
           <literal value="forAll"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//ForAllOrExistsOrOneOperator/EXISTS"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForAllOrExistsOrOneOperator/EXISTS"/>
           <literal value="exists"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//ForAllOrExistsOrOneOperator/ONE"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForAllOrExistsOrOneOperator/ONE"/>
           <literal value="one"/>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="IsUniqueOperation">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//IsUniqueOperation"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//IsUniqueOperation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -958,7 +958,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ValueSpecification">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ValueSpecification"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ValueSpecification"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
@@ -972,7 +972,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NonLiteralValueSpecification">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NonLiteralValueSpecification"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NonLiteralValueSpecification"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
@@ -984,7 +984,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParenthesizedExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ParenthesizedExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ParenthesizedExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="("/>
@@ -1004,12 +1004,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NullExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NullExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NullExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NullExpression"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NullExpression"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="null"/>
@@ -1017,12 +1017,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ThisExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ThisExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ThisExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ThisExpression"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ThisExpression"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="this"/>
@@ -1033,7 +1033,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SuperInvocationExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SuperInvocationExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SuperInvocationExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="super"/>
@@ -1056,7 +1056,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InstanceCreationExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//InstanceCreationExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//InstanceCreationExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="new"/>
@@ -1078,7 +1078,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceConstructionOrAccessCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceConstructionOrAccessCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceConstructionOrAccessCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
@@ -1101,7 +1101,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AccessCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AccessCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AccessCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="accessIndex" operator="=">
@@ -1112,7 +1112,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PartialSequenceConstructionCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//PartialSequenceConstructionCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//PartialSequenceConstructionCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="]"/>
@@ -1123,7 +1123,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceConstructionCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceConstructionCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceConstructionCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Group" cardinality="?">
@@ -1139,7 +1139,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceConstructionExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceConstructionExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceConstructionExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="{"/>
@@ -1165,7 +1165,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequenceElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequenceElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequenceElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
@@ -1174,12 +1174,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ClassExtentExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassExtentExpression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassExtentExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassExtentExpression"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassExtentExpression"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="."/>
@@ -1190,13 +1190,13 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Block">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Block"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Block"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Block"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Block"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="sequence" operator="=">
@@ -1207,7 +1207,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="StatementSequence">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//StatementSequence"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//StatementSequence"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" cardinality="+" feature="statements" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.69"/>
@@ -1215,7 +1215,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InlineStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//InlineStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//InlineStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="/*@"/>
@@ -1231,7 +1231,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AnnotatedStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AnnotatedStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AnnotatedStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="//@"/>
@@ -1245,7 +1245,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="DocumentedStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//DocumentedStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//DocumentedStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="comment" operator="=">
@@ -1261,7 +1261,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Statement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Statement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Statement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.68"/>
@@ -1286,7 +1286,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Annotation">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//Annotation"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//Annotation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="kind" operator="=">
@@ -1309,30 +1309,30 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="AnnotationKind">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//AnnotationKind"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AnnotationKind"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AnnotationKind/ISOLATED"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AnnotationKind/ISOLATED"/>
           <literal value="isolated"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AnnotationKind/DETERMINED"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AnnotationKind/DETERMINED"/>
           <literal value="determined"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AnnotationKind/ASSURED"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AnnotationKind/ASSURED"/>
           <literal value="assured"/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AnnotationKind/PARALLEL"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AnnotationKind/PARALLEL"/>
           <literal value="parallel"/>
         </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="BlockStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//BlockStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BlockStatement"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="block" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.65"/>
@@ -1340,12 +1340,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="EmptyStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//EmptyStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//EmptyStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//EmptyStatement"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//EmptyStatement"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value=";"/>
@@ -1353,7 +1353,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LocalNameDeclarationStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//LocalNameDeclarationStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LocalNameDeclarationStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="let"/>
@@ -1379,7 +1379,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="IfStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//IfStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//IfStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="if"/>
@@ -1393,7 +1393,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SequentialClauses">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SequentialClauses"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SequentialClauses"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="conccurentClauses" operator="+=">
@@ -1410,7 +1410,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ConcurrentClauses">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ConcurrentClauses"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ConcurrentClauses"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="nonFinalClause" operator="+=">
@@ -1427,7 +1427,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NonFinalClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NonFinalClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NonFinalClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="("/>
@@ -1442,7 +1442,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FinalClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//FinalClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//FinalClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="else"/>
@@ -1453,7 +1453,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SwitchStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SwitchStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SwitchStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="switch"/>
@@ -1474,7 +1474,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SwitchClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SwitchClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SwitchClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="switchCase" operator="+=">
@@ -1490,7 +1490,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SwitchCase">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SwitchCase"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SwitchCase"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="case"/>
@@ -1502,7 +1502,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SwitchDefaultClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SwitchDefaultClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SwitchDefaultClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="default"/>
@@ -1514,7 +1514,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NonEmptyStatementSequence">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//NonEmptyStatementSequence"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//NonEmptyStatementSequence"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" cardinality="+" feature="statement" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.69"/>
@@ -1522,7 +1522,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="WhileStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//WhileStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//WhileStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="while"/>
@@ -1538,7 +1538,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="DoStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//DoStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//DoStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="do"/>
@@ -1556,7 +1556,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ForStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ForStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="for"/>
@@ -1572,7 +1572,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ForControl">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ForControl"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ForControl"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="loopVariableDefinition" operator="+=">
@@ -1588,7 +1588,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="LoopVariableDefinition">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//LoopVariableDefinition"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//LoopVariableDefinition"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
@@ -1622,12 +1622,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="BreakStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//BreakStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BreakStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//BreakStatement"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//BreakStatement"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="break"/>
@@ -1636,7 +1636,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ReturnStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ReturnStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ReturnStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="return"/>
@@ -1648,7 +1648,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AcceptStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AcceptStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AcceptStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="clause" operator="=">
@@ -1666,12 +1666,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SimpleAcceptStatementCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SimpleAcceptStatementCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SimpleAcceptStatementCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SimpleAcceptStatementCompletion"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SimpleAcceptStatementCompletion"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value=";"/>
@@ -1679,7 +1679,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CompoundAcceptStatementCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//CompoundAcceptStatementCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//CompoundAcceptStatementCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="block" operator="=">
@@ -1695,7 +1695,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AcceptBlock">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AcceptBlock"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AcceptBlock"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="clause" operator="=">
@@ -1708,7 +1708,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AcceptClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AcceptClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AcceptClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="accept"/>
@@ -1727,7 +1727,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ClassifyStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassifyStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassifyStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="classify"/>
@@ -1742,7 +1742,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ClassificationClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassificationClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassificationClause"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
@@ -1765,7 +1765,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ClassificationFromClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassificationFromClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassificationFromClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="from"/>
@@ -1776,7 +1776,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ClassificationToClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ClassificationToClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ClassificationToClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="to"/>
@@ -1787,12 +1787,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ReclassifyAllClause">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ReclassifyAllClause"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ReclassifyAllClause"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ReclassifyAllClause"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ReclassifyAllClause"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="from"/>
@@ -1801,7 +1801,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="QualifiedNameList">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//QualifiedNameList"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//QualifiedNameList"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="qualifiedName" operator="+=">
@@ -1817,7 +1817,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InvocationOrAssignementOrDeclarationStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//InvocationOrAssignementOrDeclarationStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//InvocationOrAssignementOrDeclarationStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="typePart_OR_assignedPart_OR_invocationPart" operator="=">
@@ -1836,7 +1836,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SuperInvocationStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//SuperInvocationStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//SuperInvocationStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="_super" operator="=">
@@ -1847,7 +1847,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ThisInvocationStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//ThisInvocationStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//ThisInvocationStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="_this" operator="=">
@@ -1861,7 +1861,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="InstanceCreationInvocationStatement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//InstanceCreationInvocationStatement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//InstanceCreationInvocationStatement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="_new" operator="=">
@@ -1872,7 +1872,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="VariableDeclarationCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//VariableDeclarationCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//VariableDeclarationCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Group" cardinality="?">
@@ -1891,7 +1891,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AssignmentCompletion">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentCompletion"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentCompletion"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="op" operator="=">
@@ -1904,55 +1904,55 @@
     </rules>
     <rules xsi:type="xtext:EnumRule" name="AssignmentOperator">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator"/>
+        <classifier xsi:type="ecore:EEnum" href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/ASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/ASSIGN"/>
           <literal value="="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/PLUSASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/PLUSASSIGN"/>
           <literal value="+="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/MINUSASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/MINUSASSIGN"/>
           <literal value="-="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/MULTASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/MULTASSIGN"/>
           <literal value="*="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/MODASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/MODASSIGN"/>
           <literal value="%="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/DIVASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/DIVASSIGN"/>
           <literal value="/="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/ANDASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/ANDASSIGN"/>
           <literal value="&amp;="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/ORASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/ORASSIGN"/>
           <literal value="|="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/XORASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/XORASSIGN"/>
           <literal value="^="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/LSHIFTASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/LSHIFTASSIGN"/>
           <literal value="&lt;&lt;="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/RSHIFTASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/RSHIFTASSIGN"/>
           <literal value=">>="/>
         </elements>
         <elements xsi:type="xtext:EnumLiteralDeclaration">
-          <enumLiteral href="http://www.kermeta.org/alf/xtext/Alf#//AssignmentOperator/URSHIFTASSIGN"/>
+          <enumLiteral href="http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf#//AssignmentOperator/URSHIFTASSIGN"/>
           <literal value=">>>="/>
         </elements>
       </alternatives>

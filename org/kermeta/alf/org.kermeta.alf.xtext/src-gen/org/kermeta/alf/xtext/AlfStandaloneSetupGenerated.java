@@ -27,8 +27,8 @@ public class AlfStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.kermeta.org/alf/xtext/Alf")) {
-		EPackage.Registry.INSTANCE.put("http://www.kermeta.org/alf/xtext/Alf", org.kermeta.alf.xtext.alf.AlfPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf")) {
+		EPackage.Registry.INSTANCE.put("http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf", org.kermeta.alf.xtext.alf.AlfPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

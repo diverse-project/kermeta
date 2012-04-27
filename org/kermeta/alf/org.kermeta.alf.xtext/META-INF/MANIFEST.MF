@@ -14,27 +14,40 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.0";visibility:=reexport,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.eclipse.xtext.util,
- 
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- 
  org.eclipse.xtext.common.types
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
- 
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend2.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.alf.xtext,
  org.kermeta.alf.xtext.services,
- org.kermeta.alf.xtext.alf,
- org.kermeta.alf.xtext.alf.impl,
- org.kermeta.alf.xtext.alf.util,
  org.kermeta.alf.xtext.serializer,
  org.kermeta.alf.xtext.parser.antlr,
  org.kermeta.alf.xtext.parser.antlr.internal,
  org.kermeta.alf.xtext.validation,
  org.kermeta.alf.xtext.scoping,
  org.kermeta.alf.xtext.generator,
- org.kermeta.alf.xtext.formatting
+ org.kermeta.alf.xtext.formatting,
+ org.kermeta.alf.xtext.org3,
+ org.kermeta.alf.xtext.org3.impl,
+ org.kermeta.alf.xtext.org3.util,
+ org3.kermeta.alf.xtext,
+ org3.kermeta.alf.xtext.services,
+ org3.kermeta.alf.xtext.org3,
+ org3.kermeta.alf.xtext.org3.impl,
+ org3.kermeta.alf.xtext.org3.util,
+ org3.kermeta.alf.xtext.serializer,
+ org3.kermeta.alf.xtext.parser.antlr,
+ org3.kermeta.alf.xtext.parser.antlr.internal,
+ org3.kermeta.alf.xtext.validation,
+ org3.kermeta.alf.xtext.scoping,
+ org3.kermeta.alf.xtext.generator,
+ org3.kermeta.alf.xtext.formatting,
+ org.kermeta.alf.xtext.alf,
+ org.kermeta.alf.xtext.alf.impl,
+ org.kermeta.alf.xtext.alf.util
+

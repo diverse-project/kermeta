@@ -1,6 +1,6 @@
 grammar org.kermeta.alf.xtext.Alf with org.eclipse.xtext.common.Terminals
 
-generate alf "http://www.kermeta.org/alf/xtext/Alf"
+generate alf "http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf"
 
 CLASSSTRUCT: 
 	'class' name=ID '{' (clsop+=CLASSOP)* '}';

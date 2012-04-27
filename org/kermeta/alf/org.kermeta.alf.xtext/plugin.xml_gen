@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.kermeta.org/alf/1_0_0/org3/kermeta/alf" 
+       class = "org.kermeta.alf.xtext.alf.AlfPackage"
+       genModel = "org/kermeta/alf/xtext/Alf.genmodel" /> 
+	
+  </extension>
+
+
+
+
+</plugin>
