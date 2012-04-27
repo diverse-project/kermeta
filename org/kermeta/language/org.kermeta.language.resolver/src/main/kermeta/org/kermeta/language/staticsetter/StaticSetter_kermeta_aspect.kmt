@@ -941,23 +941,30 @@ package behavior {
 				context.popContext()
 			//lambda parameters are implicitly typed
 			else
-				if container.isInstanceOf(UnresolvedCall).andThen{x| container.asType(UnresolvedCall).resolvedCall.isVoid} then
+				if container.isInstanceOf(UnresolvedCall).andThen{x| container.asType(UnresolvedCall).resolvedCall.isVoid}
+					.orElse{x|container.isInstanceOf(CallSuperOperation).andThen{x|container.asType(CallSuperOperation).staticOperation.isVoid}} then
 					context.saveWaitingContext(self)
 				//save the context and resolve the lambda expression later
 				else
 				//resolve it now
+				//can be a parameter of a calloperation(so unresolvedcall) or a call to super
 					if  container.isInstanceOf(UnresolvedCall).andThen{x| container.asType(UnresolvedCall).resolvedCall.isInstanceOf(CallOperation)}
+						.orElse{x|container.isInstanceOf(CallSuperOperation).andThen{x|container.asType(CallSuperOperation).staticOperation.isVoid.~not}}
 						 and staticType.isVoid 
 						
 						then
 						context.pushContext()
 						//find which parameter it is in the calloperation
-						var paramPosition : Integer init container.asType(UnresolvedCall).parameters.indexOf(self)
+						var paramPosition : Integer init container.asType(CallExpression).parameters.indexOf(self)
+						
 						
 						//find the parameter's definition in the operation definition
-						var paramDef : Parameter init container.asType(UnresolvedCall).resolvedCall.asType(CallOperation).staticOperation.ownedParameter.elementAt(paramPosition)
-						
-						
+						var paramDef : Parameter
+						if container.isInstanceOf(UnresolvedCall) then
+							paramDef:= container.asType(UnresolvedCall).resolvedCall.asType(CallOperation).staticOperation.ownedParameter.elementAt(paramPosition)
+						else
+							paramDef:= container.asType(CallSuperOperation).staticOperation.ownedParameter.elementAt(paramPosition)
+						end
 						//check if it's really a function with the good number of parameters
 						if paramDef.type.isInstanceOf(FunctionType) then
 							var funcParamTypes : Sequence<Type> init Sequence<Type>.new
@@ -969,9 +976,12 @@ package behavior {
 							
 							//get bindings from the type of the containing callOperation
 							var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-							if container.asType(UnresolvedCall).target.staticType.isInstanceOf(Class) then
+							if container.isInstanceOf(UnresolvedCall).andThen{x|container.asType(UnresolvedCall).target.staticType.isInstanceOf(Class)} then //#1
 								bindings.addAll(container.asType(UnresolvedCall).target.staticType.asType(Class).getAllTypeVariableBindings())
-							end
+							else if container.isInstanceOf(CallSuperOperation) then /*#2*/
+								bindings.addAll(container.asType(CallSuperOperation).getSelfType(context).getAllTypeVariableBindings())
+							end /*#2*/ end /*#1*/
+							
 							if context.verbose then stdio.writeln("lambda bindings.size : "+bindings.size.toString) end
 							
 							if self.parameters.size == funcParamTypes.size then
