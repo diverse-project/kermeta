@@ -13,13 +13,13 @@ package org::kermeta::language::resolver;
 
 
 require kermeta
-//require "Resolver.kmt"
+
 require "../staticsetter/StaticSetter_kermeta_aspect.kmt"
 require "../staticsetter/StaticSetterContext.kmt"
 require "ResolverException.kmt"
 require "../structureResolver/structureResolver.kmt"
 require "../typeawaremerger/TypeAwareMerger.kmt"
-//require "../structureResolver/ResolverContext_Aspect.kmt"
+
 using org::kermeta::language::staticsetter
 
 using org::kermeta::language::resolver
@@ -190,7 +190,7 @@ class FullStaticResolver
 				stdio.writeln("|-------------from: " + p.asType(org::kermeta::language::structure::UnresolvedOperation).~from.toString)
 			end
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedProperty) then
-				stdio.writeln("UNRESOLVED_PROPERTY -- peropertyIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedProperty).propertyIdentifier.toString)
+				stdio.writeln("UNRESOLVED_PROPERTY -- propertyIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedProperty).propertyIdentifier.toString)
 			end
 			if p.isInstanceOf(org::kermeta::language::behavior::UnresolvedCall) then
 				stdio.writeln("UNRESOLVED_CALL -- name: " + p.asType(org::kermeta::language::behavior::UnresolvedCall).name)
@@ -207,28 +207,5 @@ class FullStaticResolver
 		}
 	end
 
-	/*operation checkDangling(unresolvedModelResource : Resource) : Void is do
-		var report : Set<org::kermeta::language::resolver::DanglingDiagnosticBIS>
-	 	report := findDanglingModelElementsBIS(unresolvedModelResource)
-	 	report.each{ diag |
-	 		var danglingName : String init ""
-	 		var referencingName : String init ""
-	 		if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
-	 			danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
-	 		else
-	 			if diag.danglingElement.isInstanceOf(org::kermeta::language::structure::Class) then
-	 				danglingName := "(named " + diag.danglingElement.asType(org::kermeta::language::structure::Class).name() + ")"
-	 			end
-	 		end
-	 		if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::NamedElement) then
-	 			referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::NamedElement).name() + ")"
-	 		else
-	 			if diag.referencingElement.isInstanceOf(org::kermeta::language::structure::Class) then
-	 				referencingName := "(named " + diag.referencingElement.asType(org::kermeta::language::structure::Class).name() + ")"
-	 			end
-	 		end
-			stdio.writeln(diag.danglingElement.toString() + danglingName + " referenced by " + diag.referencingElement.toString + "." +
-			diag.referencingProperty.name + referencingName)
-		}
-	end*/	
+	
 }

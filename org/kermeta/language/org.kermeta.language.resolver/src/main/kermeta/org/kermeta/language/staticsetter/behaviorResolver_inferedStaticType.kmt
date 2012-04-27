@@ -21,6 +21,10 @@ using org::kermeta::language::resolver
 using org::kermeta::language::staticsetter
 using kermeta::utils
 
+/*
+In this file we define the method setInferedStaticType(context,aType) which will set the staticType of an expression to aType but considering the possible bindings
+*/
+
 package behavior {
 	aspect class Expression inherits TypeContainer
 	{
@@ -43,6 +47,7 @@ package behavior {
 	aspect class CallFeature inherits CallExpression
 	{
 	
+		/**in a CallFeature the list of bindings is obtained by getting all the bindings from the target*/
 		operation findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) is do
 			if not target.isVoid then
 				if target.staticType.isInstanceOf(Class) then
@@ -86,6 +91,7 @@ package behavior {
 	
 	aspect class CallOperation
 	{
+		/**in a CallFeature the list of bindings is obtained by getting all the bindings from the target (call to super) and from the staticTypeVariableBindings*/
 		method findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) from CallFeature is do
 		
 			super(context ,type, bindings)
@@ -103,5 +109,26 @@ package behavior {
 			
 		end
 	
+	}
+	
+	
+	aspect class CallSuperOperation {
+		/**in a CallSuperOperation the list of bindings is obtained by getting all the bindings from the target (super has no target), from the staticTypeVariableBindings (call to super) and from self */
+		method findBindings(context : StaticSetterContext, type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) from CallOperation is do
+			super(context ,type, bindings)
+			bindings.addAll(getSelfType(context).getAllTypeVariableBindings())
+		 end
+		/** return the type of self*/
+		operation getSelfType (context: StaticSetterContext) : Class is do 
+			result := Class.new
+			result.typeDefinition:=context.currentClassDefinition
+			context.currentClassDefinition.typeParameter.each{ tv|
+				var tvb : TypeVariableBinding init TypeVariableBinding.new
+				tvb.variable:= tv
+				tvb.type:=tv
+				result.typeParamBinding.add(tvb)
+				}
+		end
+		
 	}
 }

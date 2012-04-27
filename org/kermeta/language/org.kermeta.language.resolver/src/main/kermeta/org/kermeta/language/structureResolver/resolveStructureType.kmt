@@ -311,7 +311,29 @@ package behavior {
 			end
 		end
 	}
+	aspect class CallSuperOperation inherits CallOperation{
 	
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			// must maintain order	
+			from var i : Integer init 0
+			until i==staticTypeVariableBindings.size
+			loop
+				if staticTypeVariableBindings.at(i).isInstanceOf(UnresolvedType) then
+				
+					var unresolvedType : UnresolvedType init staticTypeVariableBindings.at(i).asType(UnresolvedType)
+					var resolvedType : Type
+					resolvedType:=unresolvedType.correspondingType
+					if not resolvedType.isVoid then
+						staticTypeVariableBindings.addAt(i,resolvedType)
+						staticTypeVariableBindings.remove(unresolvedType)
+					end		
+					//else
+					//	context.errors.add(ResolverException.new.initialize("Type "+t.name+" cannot be resolved", self))
+				end			
+				i:=i+1
+			end
+		end
+	}
 	aspect class TypeReference inherits MultiplicityElement{
 	
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
