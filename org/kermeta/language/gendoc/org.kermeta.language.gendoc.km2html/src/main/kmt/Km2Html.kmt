@@ -10,7 +10,7 @@ using kermeta::utils
 using kermeta::io
 using ecore
 using EcoreUtil
-using EcoreDocHelper
+using EcoreDocHelper  
 
 package mainpackage{
 	/** 

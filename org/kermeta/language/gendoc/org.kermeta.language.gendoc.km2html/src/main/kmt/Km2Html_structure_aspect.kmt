@@ -12,9 +12,9 @@ using org::kermeta::language::structure
 using kermeta::emfpersistence
 using kermeta::standard
 using kermeta::utils
-using kermeta::io
-	
-	
+using kermeta::io 
+	  
+  
 
 package org::kermeta::language::structure{
 
@@ -27,7 +27,7 @@ aspect class ModelingUnit {
 		stdio.writeln ("sfs" + self.name)
 		var path : String init baseFolder + "/" + self.name + ".html"
 		var contents : String init self.createHtml (baseFolder)
-		
+		   
 		//create Toc page for ModelingUnit page
 		self.createTocpage(baseFolder)
 		// Create html file
