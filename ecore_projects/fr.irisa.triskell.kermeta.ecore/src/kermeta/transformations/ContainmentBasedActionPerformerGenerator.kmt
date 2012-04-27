@@ -66,6 +66,7 @@ class ContainmentBasedActionPerformerGenerator
 		
 		root.eachOwnedElement{ e |
 			e.getHighLevelModelElement(highLevelModelElement)
+			e
 		}
 		
 		if highLevelModelElement.size() == 0 or highLevelModelElement.size() > 1 then
