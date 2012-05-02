@@ -20,6 +20,7 @@ aspect class CLASSSTRUCT {
 	operation Transform() : org::kermeta::language::structure::ClassDefinition is do
 		var obj : org::kermeta::language::structure::ClassDefinition init org::kermeta::language::structure::ClassDefinition.new
 		obj.name := name
+		obj.isAspect := true
 		self.clsop.each{ o | obj.ownedOperation.add(o.Transform()) }
 		result := obj
 	end
@@ -37,6 +38,12 @@ aspect class CLASSOP {
 	operation Transform() : org::kermeta::language::structure::Operation is do
 		var obj : org::kermeta::language::structure::Operation init org::kermeta::language::structure::Operation.new
 		obj.name := name
+		var ut : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
+		ut.typeIdentifier := "kermeta::standard::Void" 
+		obj.containedType.add(ut)
+		obj.type := ut
+		obj.lower := 0
+		obj.upper := 1
 		var blk : org::kermeta::language::behavior::Block init org::kermeta::language::behavior::Block.new
 		self.stat.each{ o | 
 			if o.isInstanceOf(Statement) then blk.statement.add(o.asType(Statement).Transform()) end 		 

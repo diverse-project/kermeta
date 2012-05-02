@@ -113,7 +113,7 @@ enum AnnotationKind :
 							var newCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 							newCall.name := "new"
 							var excepCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-							excepCall.name := "Exception"
+							excepCall.name := "kermeta::exxceptions::Exception"
 							newCall.target := excepCall
 							
 							var rs : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
@@ -129,10 +129,10 @@ enum AnnotationKind :
 					rc.exceptionName := "alfException"
 					
 					var exceptype : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
-					exceptype.typeIdentifier := "Exception"
+					exceptype.typeIdentifier := "kermeta::exxceptions::Exception"
 					
 					var ut : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
-					ut.name := "Exception"
+					ut.name := "kermeta::exxceptions::Exception"
 					ut.containedType.add(exceptype)
 					
 					rc.exceptionType := ut
@@ -205,10 +205,13 @@ enum AnnotationKind :
 				var tr : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
 				var ut : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
 				ut.typeIdentifier := self.type.Transform()
+				var us : org::kermeta::language::structure::Using init org::kermeta::language::structure::Using.new
+				us.fromQName := "kermeta::standard"
+				us.toName := ""
+				ut.usings.add(us)
 				tr.lower := 0
-				tr.upper := -1
-				tr.isUnique := true
-				tr.isOrdered := false
+				tr.upper := 1
+				tr.containedType.add(ut)
 				tr.type := ut
 				obj.type := tr
 				obj.initialization := self.~init.Transform()
@@ -217,8 +220,13 @@ enum AnnotationKind :
 				var tr : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
 				var ut : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
 				ut.typeIdentifier := self.type.Transform()
+				var us : org::kermeta::language::structure::Using init org::kermeta::language::structure::Using.new
+				us.fromQName := "kermeta::standard"
+				us.toName := ""
+				ut.usings.add(us)
 				tr.lower := 0
 				tr.upper := 1
+				tr.containedType.add(ut)
 				tr.type := ut
 				obj.type := tr
 				obj.initialization := self.~init.Transform()
@@ -333,10 +341,10 @@ aspect class ConcurrentClauses {
 			rc.exceptionName := "alfException"
 						
 			var exceptype : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
-			exceptype.typeIdentifier := "Exception"
+			exceptype.typeIdentifier := "kermeta::exceptions::Exception"
 						
 			var ut : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
-			ut.name := "Exception"
+			ut.name := "kermeta::exceptions::Exception"
 			ut.containedType.add(exceptype)
 						
 			rc.exceptionType := ut
@@ -382,7 +390,7 @@ aspect class NonFinalClause {
 		var newCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 		newCall.name := "new"
 		var excepCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-		excepCall.name := "Exception"
+		excepCall.name := "kermeta::exxceptions::Exception"
 		newCall.target := excepCall	
 		var rs : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 		rs.expression := newCall
@@ -441,10 +449,10 @@ aspect class SwitchStatement {
 		rc.exceptionName := "alfException"
 					
 		var exceptype : org::kermeta::language::structure::UnresolvedType init org::kermeta::language::structure::UnresolvedType.new
-		exceptype.typeIdentifier := "Exception"
+		exceptype.typeIdentifier := "kermeta::exxceptions::Exception"
 					
 		var ut : org::kermeta::language::behavior::TypeReference init org::kermeta::language::behavior::TypeReference.new
-		ut.name := "Exception"
+		ut.name := "kermeta::exxceptions::Exception"
 		ut.containedType.add(exceptype)
 					
 		rc.exceptionType := ut
@@ -491,7 +499,7 @@ aspect class SwitchClause {
 				var newCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
 				newCall.name := "new"
 				var excepCall : org::kermeta::language::behavior::UnresolvedCall init org::kermeta::language::behavior::UnresolvedCall.new
-				excepCall.name := "Exception"
+				excepCall.name := "kermeta::exxceptions::Exception"
 				newCall.target := excepCall	
 				var rs : org::kermeta::language::behavior::Raise init org::kermeta::language::behavior::Raise.new
 				rs.expression := newCall

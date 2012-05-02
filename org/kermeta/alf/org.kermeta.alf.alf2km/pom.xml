@@ -11,8 +11,15 @@
         <artifactId>alf.root</artifactId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
-
     <build>
+    	 <resources>
+			<resource>
+				<directory>${project.build.directory}/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
         <plugins>
            <!-- Kermeta Compiler plugin -->
             <plugin>
@@ -78,9 +85,15 @@
 		            </Require-Bundle>
 		            
 		            <Export-Package>
-		              org.kermeta.alf.alf2km.api
+		              org.kermeta.alf.alf2km.api,		              
+		            my.group.org.kermeta.alf.alf2km.org.*,
+		            my.group.org.kermeta.alf.alf2km.org3.*,
+		            my.group.org.kermeta.alf.alf2kmrunner,
+		            org3.kermeta.alf.alf2km.*,
+		            ScalaImplicit.my.group.org.kermeta.alf.alf2km,
 		            </Export-Package>
 		            <Private-Package>
+		            scalaUtil
 		            </Private-Package>
 		            <!--
 		              specify the packages that should be imported to correctly build
