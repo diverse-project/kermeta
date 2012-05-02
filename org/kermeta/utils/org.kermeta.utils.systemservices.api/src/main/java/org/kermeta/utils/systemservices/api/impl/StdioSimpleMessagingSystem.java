@@ -36,9 +36,12 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 	@Override
 	public void log(Kind msgKind, String message, String messageGroup,
 			Throwable throwable) {
+		String stackTrace = "";
 		StringWriter sw = new StringWriter();
-		throwable.printStackTrace(new PrintWriter(sw));
-		String stackTrace = sw.toString();
+		if(throwable != null){
+			throwable.printStackTrace(new PrintWriter(sw));
+			stackTrace = sw.toString();
+		}
 		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message + " "+getCallerString()+"\n"+ stackTrace);
 		
 	}
@@ -55,9 +58,12 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 	public void logProblem(Kind msgKind, String message, String messageGroup,
 			Throwable throwable, Reference causeObject) {
 
+		String stackTrace = "";
 		StringWriter sw = new StringWriter();
-		throwable.printStackTrace(new PrintWriter(sw));
-		String stackTrace = sw.toString();
+		if(throwable != null){
+			throwable.printStackTrace(new PrintWriter(sw));
+			stackTrace = sw.toString();
+		}
 		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message+ " " + causeObject + " "+getCallerString()+"\n"+ stackTrace);
 
 	}
