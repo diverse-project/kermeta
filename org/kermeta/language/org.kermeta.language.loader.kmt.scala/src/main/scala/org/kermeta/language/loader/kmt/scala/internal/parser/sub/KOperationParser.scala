@@ -15,6 +15,7 @@ import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
 import org.kermeta.language.behavior.Expression
 import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
+import org.kermeta.language.structure.Type
 
 trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   /* SUB PARSER CONTRACT */
@@ -73,10 +74,8 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
               if (param._2 != null) {
-                var newu = StructureFactory.eINSTANCE.createUnresolvedType()
-                newu.setTypeIdentifier(param._2)
-                ovar.setSupertype(newu)
-                ovar.getContainedType.add(newu)
+                ovar.setSupertype(param._2)
+                ovar.getContainedType.add(param._2)
               }
 
             }
@@ -134,8 +133,8 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   private def operationGenericParemsWithBrackets = "[" ~ rep1sep(genericDef,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 
 
-  private def genericDef : Parser[Tuple2[String, String] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
-    var resTuple : Tuple2[String, String] = (null,  null)
+  private def genericDef : Parser[Tuple2[String, Type] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
+    var resTuple : Tuple2[String, Type] = (null,  null)
     genType match {
       case Some(typ) => resTuple = (id, typ)
       case None => resTuple = (id, null)
@@ -143,7 +142,7 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
     resTuple
   }
 
-  private def genericType = ":" ~ ident ^^ { case k1 ~ ident => ident}
+  private def genericType = ":" ~ genericQualifiedType ^^ { case k1 ~ ident => ident}
 
 
   def operationParameter : Parser[Parameter] = ident ~ ":" ~ multiplicityType ^^ { case id ~ _ ~ unresolveType =>
