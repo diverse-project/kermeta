@@ -23,12 +23,12 @@ using kermeta::utils
 using EcoreHelpers
 using org::kermeta::binarymerger::generator
 
-/*aspect class EObject {
+aspect class EObject {
 	operation binaryMergerPropertyResolverAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		result := ""
 	end
 	
-}*/
+}
 aspect class EModelElement {
 	operation binaryMergerPropertyResolverAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		result := ""
@@ -47,7 +47,6 @@ aspect class EPackage {
 		
 		self.eachOwnedElement{ e |
 			content.append(e.binaryMergerPropertyResolverAspectKmtPrinter(context) + "\n")
-			e
 		}
 		
 		if not self.container.isVoid() then

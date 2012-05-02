@@ -23,12 +23,12 @@ using kermeta::utils
 using EcoreHelpers
 using org::kermeta::binarymerger::generator
 
-/*aspect class EObject {
+aspect class EObject {
 	operation binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		result := ""
 	end
 	
-}*/
+}
 aspect class EModelElement {
 	operation binaryMergerMoveAspectKmtPrinter(context : BinaryMergerGeneratorContext) : String is do
 		result := ""
@@ -47,7 +47,6 @@ aspect class EPackage {
 		
 		self.eachOwnedElement{ e |
 			content.append(e.binaryMergerMoveAspectKmtPrinter(context) + "\n")
-			e
 		}
 		
 		if not self.container.isVoid() then
@@ -126,7 +125,6 @@ aspect class EClass {
 		content.append("//stdio.writeln(\"Merging content of a " + self.name + "\")")						
 		self.eachOwnedElement{ e |
 				content.append(e.binaryMergerMoveAspectKmtPrinter(context))
-				e
 		}
 		
 		
@@ -139,7 +137,6 @@ aspect class EClass {
 				if (not allFirstSuperTypes.contains(s)) then
 					s.eachOwnedElement{ e |
 						content.append(e.binaryMergerMoveAspectKmtPrinter(context))
-						e
 					}
 				else					
 					if(self.eSuperTypes.first().name == "Object") then
@@ -147,7 +144,6 @@ aspect class EClass {
 						content.append("// workaround compiler V2 bug, embed code that should have been called via super \n")
 						s.eachOwnedElement{ e |
 							content.append(e.binaryMergerMoveAspectKmtPrinter(context))
-							e
 						}
 					end
 				end
