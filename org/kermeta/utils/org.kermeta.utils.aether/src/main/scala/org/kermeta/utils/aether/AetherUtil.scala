@@ -189,7 +189,7 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
       val configRoot = scala.xml.XML.loadFile(configFile)
       configRoot.child.find(c => c.label == "localRepository").map {
         localRepo =>
-    		messagingSystem.debug("Found localRepository value from settings.xml in user path => " + localRepo.text, msgGroup)
+    		messagingSystem.debug("Found localRepository value from settings.xml in user path => \"" + localRepo.text+"\"", msgGroup)
     		session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(localRepo.text)))
       }
     } else {
