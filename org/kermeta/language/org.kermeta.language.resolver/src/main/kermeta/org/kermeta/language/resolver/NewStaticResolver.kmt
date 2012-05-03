@@ -103,7 +103,7 @@ class FullStaticResolver
 	
 	
 	operation doPrimitiveTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		//init of context
+		stdio.writeln("doPrimitiveTypeResolving")
 		unresolvedModelingUnit.resolvePrimitiveTypeEquivalence(ctxt)
 		result:=unresolvedModelingUnit
 	end
@@ -146,7 +146,7 @@ class FullStaticResolver
 	
    		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)*/
    		
-   		doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit)))
+   		doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedModelingUnit))))
        	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
        	
        	//checkDangling(unresolvedModelingUnit.containingResource())       	

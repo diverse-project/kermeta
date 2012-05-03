@@ -279,10 +279,10 @@ aspect class Operation {
 
 				//stdio.writeln("2")
 				//create set of equivalent typevariables from typeParameters of the operations
-				var binding : Sequence<Binding> init Sequence<Binding>.new
+				var binding : Sequence<TypeEqualityBinding> init Sequence<TypeEqualityBinding>.new
 				from var i : Integer init 0
 				until i==self.typeParameter.size loop
-					var equivalentVars : Binding init Binding.new
+					var equivalentVars : TypeEqualityBinding init TypeEqualityBinding.new
 					equivalentVars.types:=Set<TypeVariable>.new
 					equivalentVars.types.add(self.typeParameter.elementAt(i))
 					equivalentVars.types.add(otherOperation.typeParameter.elementAt(i))

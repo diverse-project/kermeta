@@ -12,12 +12,13 @@ aspect class KermetaModelElement {
 	*/
 	
 	operation resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) is do 
-		
+		stdio.writeln("resolvePrimitiveTypeEquivalence KME")
 	end
 }
 
 aspect class Package{
 	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
+		stdio.writeln("resolvePrimitiveTypeEquivalence PCK")
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
 					e.asType(KermetaModelElement).resolvePrimitiveTypeEquivalence(context)
@@ -30,6 +31,7 @@ aspect class Package{
 
 aspect class ModelingUnit{
 	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
+		stdio.writeln("resolvePrimitiveTypeEquivalence MU")
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
 					e.asType(KermetaModelElement).resolvePrimitiveTypeEquivalence(context)
@@ -46,10 +48,12 @@ aspect class PrimitiveType {
 	reference referredType : Type 
 
 	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
+		
+		stdio.writeln("solvePrimitiveTypes")
 		if not referredType.isVoid then
 			result:=referredType
 		else
-			if currentlyBeingResolved then
+			if currentlyBeingResolved.isVoid.~not.andThen{x|currentlyBeingResolved} then
 				context.errors.add(ResolverException.new.initialize(
 								"loop in the definition of Primitive Type "+name
 								, self))
@@ -70,13 +74,14 @@ aspect class PrimitiveType {
 *	this operation has to be aware that a cycle may exists between primitive types and should deal with it
 */
 method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
-
-	currentlyBeingResolved:=true
-	
-	referredType:=instanceType.solvePrimitiveTypes(context)
-	
-	currentlyBeingResolved:=false
-
+	stdio.writeln("resolvePrimitiveTypeEquivalence")
+	if referredType.isVoid then
+		currentlyBeingResolved:=true
+		
+		referredType:=instanceType.solvePrimitiveTypes(context)
+		
+		currentlyBeingResolved:=false
+	end
 end
  
 }
