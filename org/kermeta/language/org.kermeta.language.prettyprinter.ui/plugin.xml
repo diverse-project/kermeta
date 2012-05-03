@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.language.prettyprinter.ui.contribution1"
+            nameFilter="*.km"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="Kermeta 2"
+               path="additions"
+               id="org.kermeta.language.prettyprinter.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="generate kmt"
+               class="org.kermeta.language.prettyprinter.ui.popup.actions.GenerateKMTAction"
+               menubarPath="org.kermeta.language.prettyprinter.ui.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.language.prettyprinter.ui.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
