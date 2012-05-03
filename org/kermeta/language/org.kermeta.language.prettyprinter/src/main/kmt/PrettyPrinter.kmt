@@ -48,4 +48,16 @@ class PrettyPrinter
 	operation prettyPrint(aModelingUnit : org::kermeta::language::structure::ModelingUnit) : String is do
 		result := aModelingUnit.prettyPrint(0)
 	end
+	
+	operation prettyPrintFile(inputFileUrl: String, outputFileUrl : String) : Void is do 
+		var repository : ResourceSet init ResourceSet.new
+		var theModelResource : Resource init repository.createResource(inputFileUrl,"http://www.kermeta.org/kermeta/2_0_0/")
+       	theModelResource.load(void)
+       	       	
+       	var theModelingUnit : org::kermeta::language::structure::ModelingUnit
+       	theModelingUnit ?= theModelResource.getContents.one
+       	FileIO.writeTextFile(outputFileUrl.toURI, prettyPrint(theModelingUnit))
+       	
+	end
+	
 }
