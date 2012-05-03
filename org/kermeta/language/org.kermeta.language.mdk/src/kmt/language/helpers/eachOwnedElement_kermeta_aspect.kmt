@@ -350,21 +350,6 @@ aspect class CallEnumLiteral {
 	end
 }
 
-aspect class CallAdaptationOperator inherits Expression {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::behavior::Expression is do
-		super(func)
-		self.forwardParameters.each{ e |
-			func(e)
-		}
-		self.backwardParameters.each{ e |
-			func(e)
-		}
-		self.containedType.each{ e |
-			func(e)
-		}
-	end
-}
-
 }
 
 package structure {
@@ -452,6 +437,9 @@ aspect class MultiplicityElement {
 aspect class TypeDefinition {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
 		super(func)
+		self.typeMappings.each{ e |
+			func(e)
+		}
 		self.containedType.each{ e |
 			func(e)
 		}
@@ -467,6 +455,9 @@ aspect class Class {
 aspect class DataType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
 		super(func)
+		self.typeMappings.each{ e |
+			func(e)
+		}
 		self.containedType.each{ e |
 			func(e)
 		}
@@ -477,6 +468,9 @@ aspect class Enumeration {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::DataType is do
 		super(func)
 		self.ownedLiteral.each{ e |
+			func(e)
+		}
+		self.typeMappings.each{ e |
 			func(e)
 		}
 		self.containedType.each{ e |
@@ -512,6 +506,9 @@ aspect class Parameter {
 aspect class PrimitiveType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::DataType is do
 		super(func)
+		self.typeMappings.each{ e |
+			func(e)
+		}
 		self.containedType.each{ e |
 			func(e)
 		}
@@ -629,7 +626,7 @@ aspect class ObjectTypeVariable {
 aspect class ModelType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
 		super(func)
-		self.ownedMatchings.each{ e |
+		self.typeMappings.each{ e |
 			func(e)
 		}
 		self.ownedTypeDefinition.each{ e |
@@ -728,6 +725,19 @@ aspect class VoidType {
 	end
 }
 
+aspect class TypeMapping {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeContainer is do
+		super(func)
+		if (not self.mapping.isVoid) then
+			func(self.mapping.asType(kermeta::standard::Object))
+		end
+	end
+}
+
+aspect class Object {
+	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	end
+}
 aspect class UnresolvedInferredType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Unresolved is do
 		super(func)
@@ -743,78 +753,93 @@ aspect class UnresolvedTypeVariable {
 	end
 }
 
-aspect class ModelTypeMatching {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+aspect class UnresolvedTypeDefinition {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Unresolved is do
 		super(func)
-		self.ownedTypeDefinitionBindings.each{ e |
+		self.usings.each{ e |
+			func(e)
+		}
+		self.typeMappings.each{ e |
+			func(e)
+		}
+		self.containedType.each{ e |
 			func(e)
 		}
 	end
 }
 
-aspect class TypeDefinitionBinding {
+aspect class ModelTypeBinding {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
 		super(func)
-		if (not self.adaptation.isVoid) then
-			func(self.adaptation.asType(kermeta::standard::Object))
-		end
-	end
-}
-
-aspect class ClassDefinitionBinding {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeDefinitionBinding is do
-		super(func)
-	end
-}
-
-aspect class EnumerationBinding {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeDefinitionBinding is do
-		super(func)
-	end
-}
-
-aspect class EnumLiteralBinding {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
-		super(func)
-	end
-}
-
-aspect class PropertyBinding {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
-		super(func)
-	end
-}
-
-aspect class OperationBinding {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
-		super(func)
-		self.ownedParameterBindings.each{ e |
+		self.objectTypeBindings.each{ e |
 			func(e)
 		}
 	end
 }
 
-aspect class ParameterBinding {
+aspect class TotalBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ModelTypeBinding is do
+		super(func)
+	end
+}
+
+aspect class PartialBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ModelTypeBinding is do
+		super(func)
+	end
+}
+
+aspect class IsomorphicBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ModelTypeBinding is do
+		super(func)
+	end
+}
+
+aspect class NonIsomorphicBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ModelTypeBinding is do
+		super(func)
+	end
+}
+
+aspect class TotalIsomorphicBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TotalBinding is do
+		super(func)
+	end
+}
+
+aspect class PartialIsomorphicBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::PartialBinding is do
+		super(func)
+	end
+}
+
+aspect class TotalNonIsomorphicBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TotalBinding is do
+		super(func)
+	end
+}
+
+aspect class PartialNonIsomorphicBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::PartialBinding is do
+		super(func)
+	end
+}
+
+aspect class ObjectTypeBinding {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
 		super(func)
 	end
 }
 
-aspect class AdaptationOperator inherits NamedElement {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::NamedElement is do
+aspect class DirectBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ObjectTypeBinding is do
 		super(func)
-		self.forwardParameter.each{ e |
-			func(e)
-		}
-		self.backwardParameter.each{ e |
-			func(e)
-		}
-		if (not self.forwardBody.isVoid) then
-			func(self.forwardBody.asType(kermeta::standard::Object))
-		end
-		if (not self.backwardBody.isVoid) then
-			func(self.backwardBody.asType(kermeta::standard::Object))
-		end
+	end
+}
+
+aspect class AdaptationBinding {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ObjectTypeBinding is do
+		super(func)
 	end
 }
 
