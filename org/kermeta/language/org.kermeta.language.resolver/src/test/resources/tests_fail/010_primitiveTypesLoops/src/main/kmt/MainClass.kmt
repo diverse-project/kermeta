@@ -1,0 +1,19 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	
+	alias myT : A[myU]
+	alias myU : A[myT]
+	class A[X]{}
+	
+	class B[Y]{}
+	
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			// TODO: implement 'mainOperation' operation
+			stdio.writeln("Hello from mainOperation")
+		end
+	}
+}
