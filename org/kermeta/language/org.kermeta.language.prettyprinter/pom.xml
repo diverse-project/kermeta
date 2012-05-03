@@ -81,50 +81,7 @@
 	          </execution>
 	        </executions>
 	      </plugin>
-             <!-- package into a jar for OSGI -->
-            <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-jar-plugin</artifactId>
-		        <version>2.3.1</version>
-		        <configuration>
-		          <archive>
-		            <manifestEntries>
-			            <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Name>${project.name}</Bundle-Name>
-                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
-						<Bundle-Version>${bundle.version}</Bundle-Version>
-                        <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                        <Require-Bundle>
-                        </Require-Bundle>
-                        <Export-Package>
-                        	org.kermeta.language.org.kermeta.language.prettyprinterrunner
-                        </Export-Package>
-                        <Require-Bundle>
-								org.kermeta.scala.scala-library,
-								org.kermeta.language.model,
-								org.kermeta.language.library.core
-                       	</Require-Bundle>
-						<Import-Package>
-								kermeta.persistence,
-								org.eclipse.emf.common.notify,
-								org.eclipse.emf.common.util,
-								org.eclipse.emf.ecore,
-								org.eclipse.emf.ecore.impl,
-								org.eclipse.emf.ecore.resource,
-								org.eclipse.emf.ecore.util,
-								org.eclipse.emf.ecore.xmi,
-								org.eclipse.emf.ecore.xmi.impl,								
-								org.kermeta.utils.systemservices.api.messaging,
-								org.kermeta.utils.systemservices.api.result,
-								org.kermeta.language.structure,
-								org.osgi.framework;version="[1.5,2)",
-								org.slf4j;version="[1.5,2)"
-                        </Import-Package>
-		            </manifestEntries>		            
-		          </archive>
-		        </configuration>
-      		</plugin>
+             
       		<!-- package into a jar for OSGI -->
        		<plugin>
                 <groupId>org.apache.felix</groupId>
