@@ -285,7 +285,19 @@ package structure{
 		end
 	}
 	
-
+/*	aspect class PrimitiveType inherits DataType {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do 
+			if not instanceType.isVoid then
+				if instanceType.isInstanceOf(UnresolvedType) then
+					if not instanceType.asType(UnresolvedType).correspondingType.isVoid then
+						instanceType:=instanceType.asType(UnresolvedType).correspondingType
+					end
+				end
+			
+			end
+		end
+	}
+*/
 }
 package behavior {
 	aspect class UnresolvedCall inherits Unresolved, CallExpression, TypeContainer{

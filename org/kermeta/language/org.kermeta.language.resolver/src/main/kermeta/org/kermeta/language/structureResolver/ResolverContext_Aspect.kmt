@@ -55,6 +55,8 @@ aspect class LanguageVisitorContext {
 	
 	attribute typedefTable : Hashtable<String, Sequence<MapEntryTypeDef>>
 	
+	attribute primitiveTypesTable : Hashtable<PrimitiveType, Type>
+	
 	attribute verbose : Boolean
 	
 	operation initialize(mu : ModelingUnit) : LanguageVisitorContext is do

@@ -88,7 +88,7 @@ class FullStaticResolver
 		launch the entire resolving process
 	*/
 	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		result := doStaticSetting(doStructureResolving(doTypeAwareMerging(doTypeResolving(unresolvedModelingUnit))))
+		result := doStaticSetting(doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedModelingUnit)))))
 	end
 	/* * 
 		launch only the unresolved types resolution after this step all unresolved types should be resolved 
@@ -102,6 +102,11 @@ class FullStaticResolver
 	end
 	
 	
+	operation doPrimitiveTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		//init of context
+		unresolvedModelingUnit.resolvePrimitiveTypeEquivalence(ctxt)
+		result:=unresolvedModelingUnit
+	end
 	/* *
 		pass to launch only when there are no more unresolved types
 		merge the operations and properties that have the same signature (not possible if some types are unresolved)

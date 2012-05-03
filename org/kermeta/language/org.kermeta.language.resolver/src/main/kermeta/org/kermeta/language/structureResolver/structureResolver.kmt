@@ -7,6 +7,7 @@ require "ResolverContext_Aspect.kmt"
 require "resolveStructureType.kmt"
 require "resolveStructureOperation.kmt"
 require "resolveStructureProperty.kmt"
+require "primitiveType_aspect.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
 /* *
@@ -32,6 +33,9 @@ aspect class KermetaModelElement{
 		self.resolveStructureType(context)
 		
 	end
+	
+
+	
 	/**
 	* resolve unresolvedOperation (with resolved from:unresolvedType) and unresolvedProperty 
 	*
@@ -60,6 +64,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition{
 		context.currentClassDef:=void
 	end
 }
+
 
 aspect class Operation inherits MultiplicityElement, AbstractOperation{
 

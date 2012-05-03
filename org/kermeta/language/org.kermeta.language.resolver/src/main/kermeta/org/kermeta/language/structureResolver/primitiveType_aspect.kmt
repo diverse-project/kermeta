@@ -1,18 +1,150 @@
 package org::kermeta::language::structure;
 require kermeta
 require "structureResolver.kmt"
+require "ResolverContext_Aspect.kmt"
+using org::kermeta::language::resolver
+
+
+aspect class KermetaModelElement {
+	/**
+	*	during this pass the resolver will extract the real type behind all the primitive types
+	*  and it will store them in the context.primitiveTypesTable
+	*/
+	
+	operation resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) is do 
+		
+	end
+}
+
+aspect class Package{
+	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
+		self.eachOwnedElement{ e|
+				if e.isInstanceOf(KermetaModelElement) then
+					e.asType(KermetaModelElement).resolvePrimitiveTypeEquivalence(context)
+				end
+			e}// must return somthing for scala compiler to work	
+		
+	end
+
+}
+
+aspect class ModelingUnit{
+	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
+		self.eachOwnedElement{ e|
+				if e.isInstanceOf(KermetaModelElement) then
+					e.asType(KermetaModelElement).resolvePrimitiveTypeEquivalence(context)
+				end
+			e}// must return somthing for scala compiler to work	
+		
+	end
+
+}
 aspect class PrimitiveType {
 
-reference referredType : Type 
+
+	reference currentlyBeingResolved : Boolean
+	reference referredType : Type 
+
+	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
+		if not referredType.isVoid then
+			result:=referredType
+		else
+			if currentlyBeingResolved then
+				context.errors.add(ResolverException.new.initialize(
+								"loop in the definition of Primitive Type "+name
+								, self))
+				result:=self
+			else
+				resolvePrimitiveTypeEquivalence(context)
+				result:=referredType
+			
+			end
+			
+			
+		end
+	end
+
 
 /**
 *	create in referredType the actual type referred by a primitive type without any primitive type in it
 *	this operation has to be aware that a cycle may exists between primitive types and should deal with it
 */
-operation resolveReferredType () is do 
+method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
 
-
+	currentlyBeingResolved:=true
+	
+	referredType:=instanceType.solvePrimitiveTypes(context)
+	
+	currentlyBeingResolved:=false
 
 end
  
+}
+
+aspect class Type {
+	
+	
+	/** replace all Primitive Types by their equivalent (this implementation will be used for all Type Definitions*/
+	operation solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
+		result:=self
+	end
+
+}
+
+aspect class Class {
+	
+	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
+		
+		var c : Class init Class.new
+		
+		from var i : Integer init 0
+		until i==typeParamBinding.size 
+		loop
+			var t : Type init typeParamBinding.elementAt(i).type
+			var tvb : TypeVariableBinding init TypeVariableBinding.new
+			tvb.variable:=typeParamBinding.elementAt(i).variable
+			tvb.type:=t.solvePrimitiveTypes(context)
+			c.typeParamBinding.add(tvb)
+			
+			i:=i+1
+		end
+		result:=c
+	end
+}
+
+aspect class FunctionType {
+	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do
+		var f : FunctionType init FunctionType.new	
+		if not left.isVoid then
+			
+			f.left:=left.solvePrimitiveTypes(context)
+		end
+		
+		if not right.isVoid then
+			f.right:=right.solvePrimitiveTypes(context)
+			
+		end
+		result:=f
+	end
+
+}
+
+
+aspect class ProductType{
+
+	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
+		
+		var pt : ProductType init ProductType.new
+		from var i : Integer init 0
+		until i==type.size 
+		loop
+			var t : Type init type.elementAt(i)
+			
+			pt.type.add(t.solvePrimitiveTypes(context))
+			
+			i:=i+1
+		end
+		result:=pt
+	end
+
 }
