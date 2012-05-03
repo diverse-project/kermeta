@@ -7,12 +7,12 @@ public class KM2KMTPrettyPrinterImpl4Eclipse implements KM2KMTPrettyPrinter {
     }
 	
 	@Override
-	public void prettyPrint(String modelURI) {
+	public void prettyPrintFile(String modelURI, String kmtURI) {
 		
 		org.kermeta.language.org.kermeta.language.prettyprinterrunner.MainRunner.init4eclipse();
 
 		org.kermeta.language.prettyprinter.PrettyPrinter printer = org.kermeta.language.prettyprinter.KerRichFactory.createPrettyPrinter();
-		printer.prettyPrintFile(modelURI, modelURI+".kmt");
+		printer.prettyPrintFile(modelURI, kmtURI);
 	}
 
 }
