@@ -45,7 +45,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"\t\t// indicates the real java name of a given package\n"+
 				"\t\t// useful for deployed thirdparty metamodels\n"+
 				"\t\tpackageEquivalence \"ecore\" = \"org.eclipse.emf.ecore\"\n"+
-				"\t\tpackageEquivalence \"uml2\" = \"org.eclipse.uml2.uml\"\n"+
+				"\t\tpackageEquivalence \"uml\" = \"org.eclipse.uml2.uml\"\n"+
 				"\t}"
 				);
 		
