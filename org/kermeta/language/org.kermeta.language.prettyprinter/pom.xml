@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>language.prettyprinter</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>language.prettyprinter :: a little prettyprinter for k2</name>
 
     <dependencies>   
@@ -30,11 +30,11 @@
     </dependencies>
     
     <build>
-		  <resources>
+		<resources>
 		    <resource>
 		      <directory>${project.build.directory}/resources</directory>
-		    </resource>
-		  </resources>
+			</resource>
+		</resources>
         <plugins>
             <!-- Kermeta Compiler plugin -->
             <plugin>
@@ -56,10 +56,31 @@
                             <continueOnError>false</continueOnError>
                             <useDefaultClasspath>true</useDefaultClasspath>
                             <intermediateFilesRequired>true</intermediateFilesRequired>
+                            <stopAfterPhase>GENERATE_SCALA</stopAfterPhase>
                         </configuration>
                     </execution>
                 </executions>
             </plugin> 
+            <!-- Add generated source to build cycle -->
+	      <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>build-helper-maven-plugin</artifactId>
+	        <version>1.7</version>
+	        <executions>
+	          <execution>
+	            <id>add-source</id>
+	            <phase>generate-sources</phase>
+	            <goals>
+	              <goal>add-source</goal>
+	            </goals>
+	            <configuration>
+	              <sources>
+	                <source>${project.build.directory}/scala</source>
+	              </sources>
+	            </configuration>
+	          </execution>
+	        </executions>
+	      </plugin>
              <!-- package into a jar for OSGI -->
             <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
@@ -104,9 +125,97 @@
 		          </archive>
 		        </configuration>
       		</plugin>
-            
-             
+      		<!-- package into a jar for OSGI -->
+       		<plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.5</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                    	<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+		            	<Bundle-Name>${project.name}</Bundle-Name>
+		            	<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+		            	<Bundle-ClassPath>.</Bundle-ClassPath>
+                        
+                        <!-- Dependency used for compiling all the bundle (with dependency to org.eclipse.core.* -->
+                    	<Require-Bundle>
+		            	</Require-Bundle>
+		            
+		            	<!-- note: imports k2 to workaround problem about loading reflexivity.km
+		            	     and reexport it to allow an external plugin (ui for ex) to set the messagingsystem of stdio -->
+                        <Export-Package>org.kermeta.language.prettyprinter,
+		            		org.kermeta.language.org.kermeta.language.prettyprinter.*,
+		            		org.kermeta.language.org.kermeta.language.prettyprinterrunner.*,
+		            		printer.*,
+		            		k2.utils.*,
+		            		k2.exceptions.*,
+		            		k2.io.*,
+		            		k2.persistence.*,
+		            		k2.standard.*,
+		            		org.k2.compilo.scala.loader.*,
+		            		org.k2.console.*
+		            	</Export-Package>
+		            	<Private-Package>
+		            		ScalaImplicit.org.kermeta.language.org.kermeta.language.prettyprinter.*,
+		            		scalaUtil
+		            	</Private-Package>
+		            	<!--
+		              		specify the packages that should be imported to correctly build
+		              		the bundle (i.e <packaging>bundle<packaging> ".*" to also include
+		              		sub packages use the ! for avoiding to import some packages that
+		              		are already there with the Require-Bundle
+			            -->
+		            	<Import-Package>
+		            	*
+		            	</Import-Package>		            
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.8</version>
+			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
+			    <configuration>
+			      <downloadSources>true</downloadSources>
+			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectnatures>
+			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+			      </projectnatures>
+			      <buildcommands>
+			        <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
+			      </buildcommands>
+			      <classpathContainers>
+			        <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
+			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			      </classpathContainers>
+			      <excludes>
+			        <exclude>org.scala-lang:scala-library</exclude>
+			        <!-- <exclude>org.scala-lang:scala-compiler</exclude> -->
+			      </excludes>
+			      <sourceIncludes>
+			        <sourceInclude>**/*.scala</sourceInclude>
+			        <sourceInclude>**/*.java</sourceInclude>
+			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
+			    </configuration>
+			</plugin>
+			<!-- make sure there is enough memory for scala compiler -->
+            <plugin>
+		        <groupId>org.scala-tools</groupId>
+		        <artifactId>maven-scala-plugin</artifactId>
+		        <configuration>
+		          <jvmArgs>
+		            <jvmArg>-Xss1m</jvmArg>
+		            <jvmArg>-Xmx1024m</jvmArg>
+		          </jvmArgs>
+		        </configuration>
+			</plugin>
         </plugins>
+        
         <pluginManagement>
         	<plugins>
         		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
