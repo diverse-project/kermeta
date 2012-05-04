@@ -41,7 +41,8 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 
       rootTag.foreach{elem => elem match {
           case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
-              case t : Tag => newp.getKTag.add(t);newp.getKOwnedTags.add(t)
+              case t : Tag => 	newp.getKTag.add(t);
+              					newp.getKOwnedTags.add(t)
               case _ @ elem => println("TODO unknow elem in rootTag:" + elem)
           } }
           case _ @ d => println("TODO modeling unit roottag content: "+d)

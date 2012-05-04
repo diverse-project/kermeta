@@ -139,7 +139,8 @@ trait KClassDefinitionParser extends KAbstractParser
       } */
       tags.foreach{elem => elem match {
           case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
-              case t : Tag => e1.getKOwnedTags.add(t);e1.getKOwnedTags.add(t)
+              case t : Tag => 	e1.getKOwnedTags.add(t);
+              					e1.getKTag().add(t)
               case _ @ elem => println("TODO unknow elem in tag:" + elem)
           } }
           case _ @ d => println("TODO modeling unit tag content: "+d)
