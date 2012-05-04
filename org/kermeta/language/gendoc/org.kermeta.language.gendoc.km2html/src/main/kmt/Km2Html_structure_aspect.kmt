@@ -24,7 +24,7 @@ aspect class ModelingUnit {
 	//attribute defaultPath : String init "file:/C:/CodeCamp/Workspace/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
 	operation generateHtml( baseFolder : String) : Void is do
 		stdio.writeln ("Html file generated Modeling Unit")
-		stdio.writeln ("sfs" + self.name)
+		stdio.writeln ( self.name)
 		var path : String init baseFolder + "/" + self.name + ".html"
 		var contents : String init self.createHtml (baseFolder)
 		   
@@ -81,7 +81,7 @@ aspect class TypeDefinition {
 	end
 	/** generate html for contents page */
 	operation generateClassesHtml (baseFolder:String, packageName:String) : String is do
-		
+		result :=""
 	end
 }
 
@@ -126,9 +126,9 @@ aspect class ClassDefinition{
 		else 
 			contents.append("@")
 			contents.append(tag.name)
-			contents.append ( "\"")
+			contents.append(" \"")
 			contents.append(tag.~value)
-			contents.append ("\"\n")
+			contents.append("\"<BR>\n")
 		end
 	}
 	
@@ -202,6 +202,12 @@ aspect class Class {
 	end
 }
 
+aspect class UnresolvedType{
+	operation gettypeDefinition() : String is do
+		result := self.typeIdentifier		
+	end
+}
+
 aspect class Property{
 /** create html code of a property **/
 	operation createCodeHtml(className : String) : String is do
@@ -220,25 +226,24 @@ aspect class Property{
 		html.append("</CODE></FONT></TD>\n")
 		
 		html.append("<TD><CODE><B><A HREF=" + className +".html#" + self.name + ">")
-		html.append("<FONT COLOR=RED> attribute </FONT>")
+		html.append("<FONT COLOR=RED> attribute</FONT> ")
 		if isReadOnly == true then
-			html.append("<FONT COLOR=RED> readonly </FONT>")
+			html.append("<FONT COLOR=RED>readonly</FONT> ")
 		end 
 		html.append(self.name + "[" + lower.toString + ".." + upper.toString + "]" + "</A></B></CODE>\n")
 		html.append("<br>")
 		self.kTag.each{tag | 
-			
-		if tag.name == "documentation" then
-			html.append(tag.~value + "\n")
-		else 
-			html.append("@")
-			html.append(tag.name)
-			html.append ( "\"\n")
-			html.append(tag.~value)
-			html.append ("\"\n")
-		end
-	}
-		html.append("<BR>\n")
+			if tag.name == "documentation" then
+				html.append(tag.~value + "<BR>\n")
+			else 
+				html.append("@")
+				html.append(tag.name)
+				html.append(" \"")
+				html.append(tag.~value)
+				html.append("\"<BR>\n")
+			end
+		}
+		//html.append("<BR>\n")
 		html.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>\n")
 		html.append("</TR>\n")
  		result:= html.toString
@@ -295,16 +300,11 @@ aspect class Operation {
 		html.append(")</A></B></CODE>\n")
 		
 		self.kTag.each{tag | 
-		if tag.name == "documentation" then
-			html.append(tag.~value + "\n")
-		else 
-			html.append("@")
-			html.append(tag.name)
-			html.append ( "\"")
-			html.append(tag.~value)
-			html.append ("\"")
-		end
-	}	
+			// print doc only, other annotations are left for the detailled entry
+			if tag.name == "documentation" then
+				html.append(tag.~value + "\n")
+			end
+		}	
 		html.append("<BR>\n")
 		html.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>\n")
 		html.append("</TR>\n")
@@ -324,7 +324,7 @@ aspect class Operation {
 		html.append("<PRE>\n")
 		html.append(typeString + "<B> ")
 		if isAbstract == true then
-		html.append("<FONT COLOR = RED> Abstract </FONT>")
+		html.append("<FONT COLOR = RED> Abstract</FONT> ")
 		end
 		html.append(self.name + "(")
 		ownedParameter.each{op | var paraType : String init String.new
@@ -336,7 +336,19 @@ aspect class Operation {
 		
 	//	invConstraint.each{in | html.append("<FONT COLOR = RED>" + in.stereotype.toString() + " "+ in.name + "</FONT>")}
 		
-		html.append( ")"+ "</B></PRE>\n")
+		html.append( ")"+ "</B><BR>\n")
+		self.kTag.each{tag | 
+			if tag.name == "documentation" then
+				html.append(tag.~value + "<BR>\n")
+			else 
+				html.append("@")
+				html.append(tag.name)
+				html.append(" \"")
+				html.append(tag.~value)
+				html.append("\"<BR>\n")
+			end
+		}
+		html.append("</PRE>\n")
 		html.append("<HR>")
 		result:= html.toString
 	end	
@@ -403,42 +415,27 @@ aspect class Package{
 	/** Create html code */
 	operation createClassesHtml (baseFolder:String) : String is do
 		var html : StringBuffer init StringBuffer.new	
-		html.append("<h4>"+self.name+ "</h4>")
+		html.append("<h4>"+self.getQualifiedName()+ "</h4>")
 			
 		ownedTypeDefinition.each{otd | html.append(otd.createClassesHtml(baseFolder))
-		otd.generateClassesHtml(baseFolder,self.name)
+		otd.generateClassesHtml(baseFolder,self.getQualifiedName())
 		}
 		nestedPackage.each {subPack | html.append(subPack.createClassesHtml(baseFolder))}
 				
 		result:=html.toString
     
 	end
+	
+	operation getQualifiedName() : String is do
+		var parent : String := ""
+		if(not container.isVoid) then
+			if(container.isInstanceOf(Package)) then
+				parent := container.asType(Package).getQualifiedName() + "::"
+			end
+		end
+		result := parent + name
+	end
 	 
 }
-/*
-aspect class Package {
-	operation generateHtml() : Void is do
-		stdio.writeln ("Html file generated Package")
-		
-	end 
 
-}
-
-
-aspect class Class  {
-
-	operation generateHtml() : Void is do
-		stdio.writeln ("Html file generated Class")
-	end 
-
-
-}
-
-	class MainClass
-	{
-		operation mainOperation() : Void is do 
-			// TODO: implement 'mainOperation' operation
-		end
-	}
-	*/
 }
