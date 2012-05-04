@@ -162,7 +162,8 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
 
   def operationExpressionBody = ( (annotation?) ~ fStatement) ^^ { case a1 ~ exp =>
       a1 match {
-        case Some(_ @ tag) => exp.getKTag.add(tag)
+        case Some(_ @ tag) => 	exp.getKTag.add(tag); 
+        						exp.getKOwnedTags().add(tag)
         case None =>
       }
       exp
