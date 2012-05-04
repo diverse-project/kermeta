@@ -12,37 +12,39 @@ using ecore
 using EcoreUtil
 using EcoreDocHelper  
 
-package mainpackage{
+package gendoc{
 	/** 
 	 * test documentation on MainClass 
 	 */
 	
-	class MainClass
+	class HtmlGenerator
 	{
 		//@main ""
-		operation mainOperation() : Void is do 
-			var path : String init "platform:/resource/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
-			//var path : String init "platform:/resource/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
+		operation generateHtml(inputModelUrl : String , outputFolderUrl : String) : Void is do 
+			
+			kermeta::io::StdIO.writeln("Generating Html from " + inputModelUrl)
 			var repository : ResourceSet init ResourceSet.new
-			var resource : Resource init repository.createResource(path)
-			kermeta::io::StdIO.writeln("beginning my prog")
+			var resource : Resource init repository.createResource(inputModelUrl)
 			resource.load(void) 
 			
 			// Retrieve km rooot
 			//var mu : ModelingUnit init resource.getContents().first
 			from var it : Iterator<Object> init resource.getContents.iterator
-	       until it.isOff
-	       loop
+	       	until it.isOff
+	       	loop
 	           var next : Object init it.next
 	           if (next.isInstanceOf(ModelingUnit)) then                 
 	           		var mu : ModelingUnit
 	           		mu ?= next
-	           		mu.generateHtml("platform:/resource/KermetaDoc/target/html/")
+	           		mu.generateHtml(outputFolderUrl)
+					kermeta::io::StdIO.writeln("Html generated in " + outputFolderUrl)
 	           		
 	           end
-	       end
+	       	end
 			//mu.generateHtml()
 		end
+		
+		
 		
 		
 	}

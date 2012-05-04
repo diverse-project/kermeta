@@ -3,6 +3,8 @@ package org.kermeta.language.prettyprinter.ui.popup.actions;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -54,6 +56,10 @@ public class GenerateKMTAction implements IObjectActionDelegate {
 					printer.prettyPrintFile(selectedfile.getLocationURI().toString(), selectedfile.getLocationURI().toString()+".kmt");
 					Activator.getDefault().getMessaggingSystem().debug("Done", Activator.PLUGIN_ID);
 				//}
+					try {
+						selectedfile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+					} catch (CoreException e) {
+					}
 	}
 
 	/**

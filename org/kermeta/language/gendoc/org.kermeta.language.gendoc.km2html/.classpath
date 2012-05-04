@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.scala|**/*.java|**/*.java" kind="src" path="src/main/java"/>
 	<classpathentry including="**/*.scala|**/*.java|**/*.java" kind="src" path="target/scala"/>
 	<classpathentry excluding="**/*.java" kind="src" path="target/resources"/>
-	<classpathentry kind="src" path="src/main/kmt"/>
+	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.1-SNAPSHOT/language.library.core-2.0.1-SNAPSHOT.jar"/>

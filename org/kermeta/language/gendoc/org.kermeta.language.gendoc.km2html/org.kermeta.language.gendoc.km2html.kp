@@ -1,7 +1,7 @@
 KermetaProject "org.kermeta.language.gendoc.km2html"
 groupId  = "org.kermeta.language.gendoc"
-defaultMainClass =  "mainpackage::MainClass"
-defaultMainOperation =  "mainOperation"
+defaultMainClass =  "gendoc::HtmlGenerator"
+defaultMainOperation =  "generateHtml"
 
 sources = {
 	require "${project.baseUri}/src/main/kmt/Km2Html.kmt"

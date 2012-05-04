@@ -5,9 +5,9 @@
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
-            id="org.kermeta.language.prettyprinter.ui.contribution1"
+            objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.km"
-            objectClass="org.eclipse.core.resources.IFile">
+            id="org.kermeta.language.gendoc.km2html.ui.contribution1">
          <menu
               icon="platform:/plugin/org.kermeta.kp.launcher.eclipse/icons/kermeta.gif"
               id="org.kermeta.language.ui.menu"
@@ -18,11 +18,11 @@
            <separator name="kermetagroup3"/>
         </menu>
          <action
-               label="generate kmt"
-               class="org.kermeta.language.prettyprinter.ui.popup.actions.GenerateKMTAction"
+               label="generate HTML documentation"
+               class="org.kermeta.language.gendoc.km2html.ui.popup.actions.GenerateHtmlAction"
                menubarPath="org.kermeta.language.ui.menu/kermetagroup1"
                enablesFor="1"
-               id="org.kermeta.language.prettyprinter.ui.GenerateKMTAction">
+               id="org.kermeta.language.gendoc.km2html.ui.GenerateHtmlAction">
          </action>
       </objectContribution>
    </extension>

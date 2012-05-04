@@ -6,9 +6,9 @@
         <version>2.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>language.prettyprinter</artifactId>
+    <artifactId>language.gendoc.km2html</artifactId>
     <packaging>bundle</packaging>
-    <name>language.prettyprinter :: a little prettyprinter for k2</name>
+    <name>language.gendoc.km2html :: a little doc printer for k2</name>
 
     <dependencies>   
     	 <dependency>
@@ -48,7 +48,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <kp>org.kermeta.language.prettyprinter.kp</kp>
+                            <kp>org.kermeta.language.gendoc.km2html.kp</kp>
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
@@ -102,10 +102,7 @@
 		            
 		            	<!-- note: imports k2 to workaround problem about loading reflexivity.km
 		            	     and reexport it to allow an external plugin (ui for ex) to set the messagingsystem of stdio -->
-                        <Export-Package>org.kermeta.language.prettyprinter,
-		            		org.kermeta.language.org.kermeta.language.prettyprinter.*,
-		            		org.kermeta.language.org.kermeta.language.prettyprinterrunner.*,
-		            		printer.*,
+                        <Export-Package>org.kermeta.language.gendoc.km2html,
 		            		k2.utils.*,
 		            		k2.exceptions.*,
 		            		k2.io.*,
@@ -115,7 +112,10 @@
 		            		org.k2.console.*
 		            	</Export-Package>
 		            	<Private-Package>
-		            		ScalaImplicit.org.kermeta.language.org.kermeta.language.prettyprinter.*,
+		            		gendoc,
+		            		org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2html.*,
+		            		org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2htmlrunner.*,
+		            		ScalaImplicit.org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2html.*,
 		            		scalaUtil
 		            	</Private-Package>
 		            	<!--
@@ -211,5 +211,6 @@
         	</plugins>
         </pluginManagement>
     </build>
+    <groupId>org.kermeta.language.gendoc</groupId>
 </project>
 
