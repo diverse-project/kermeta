@@ -8,25 +8,27 @@
             nameFilter="*.kp"
             objectClass="org.eclipse.core.resources.IFile">
 	        <menu
-	              icon="icons/kermeta.gif"
-	              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-	              label="Kermeta"
+	              icon="platform:/plugin/org.kermeta.kp.launcher.eclipse/icons/kermeta.gif"
+	              id="org.kermeta.language.ui.menu"
+	              label="Kermeta 2"
 	              path="additions">
+	           <separator name="kermetagroup1"/>
 	           <separator name="kermetagroup2"/>
+	           <separator name="kermetagroup3"/>
 	        </menu>
 	       <action
 	             class="org.kermeta.kp.launcher.eclipse.internal.BuildKP"
 	             id="org.kermeta.kp.launcher.eclipse.internal.BuildKPID"
-	             icon="icons/kermeta.gif"
+	             icon="platform:/plugin/org.kermeta.kp.launcher.eclipse/icons/kermeta.gif"
 	             label="Build Kermeta Project"
-	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+	             menubarPath="org.kermeta.language.ui.menu/kermetagroup1">
 	       </action>
 	       <action
 	             class="org.kermeta.kp.launcher.eclipse.internal.CleanBuildKP"
 	             id="org.kermeta.kp.launcher.eclipse.internal.CleanBuildKPID"
-	             icon="icons/kermeta.gif"
+	             icon="platform:/plugin/org.kermeta.kp.launcher.eclipse/icons/kermeta.gif"
 	             label="Clean and Build Kermeta Project"
-	             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+	             menubarPath="org.kermeta.language.ui.menu/kermetagroup1">
 	       </action>
         <visibility>
          <and>
