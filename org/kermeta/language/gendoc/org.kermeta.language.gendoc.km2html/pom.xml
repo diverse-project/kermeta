@@ -138,6 +138,7 @@
 			    <configuration>
 			      <downloadSources>true</downloadSources>
 			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
 			      <projectnatures>
 			        <projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature>
 			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
