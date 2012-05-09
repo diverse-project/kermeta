@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>language.loader.kmt.scala</name>
+  <name>org.kermeta.language.loader.kmt.scala</name>
   <comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects/>
   <buildSpec>
