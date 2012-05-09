@@ -12,9 +12,9 @@
 		</topic> -->
   		<anchor id="org.kermeta.KETAnchor"/>
 			
-	<!--	<topic label="Kermeta framework (generated doc)"
-		     href="build/html/KermetaFramework/framework.km.html">
-		</topic>				
+	    <topic label="Kermeta framework (generated doc)"
+		     href="library.core/language.library.core.html">
+		</topic><!--				
 		<topic label="Tutorials">
 		    <topic label="Building DSL with kermeta tutorials" >
 		    	<topic label="Building DSL main process"  href="build/eclipse.help/Kermeta-Tutorial-Process/index.html"> 

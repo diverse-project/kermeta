@@ -57,6 +57,14 @@
                      <include>**/*</include>
                  </includes>
         	</resource>
+        	
+        	<resource>
+                <directory>${project.build.directory}/kermetadoc</directory>
+                 <filtering>false</filtering>
+                  <includes>
+                     <include>**/*</include>
+                 </includes>
+        	</resource>
     	</resources>
 		<plugins>
 		<!-- docbook generation part -->
@@ -279,6 +287,50 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.kermeta.language.gendoc</groupId>
+				<artifactId>language.gendoc.mavenplugin</artifactId>
+				<version>${kermeta.version}</version>
+				<executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                        	<kmFile>${project.build.directory}/dependencies_km/META-INF/kermeta/language.library.core.km</kmFile>
+                        	<outputDirectory>${project.build.directory}/kermetadoc/library.core</outputDirectory>
+                        </configuration>
+                        
+                    </execution>
+                </executions>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-dependency-plugin</artifactId>
+		        <version>2.4</version>
+		        <executions>
+		          	<!-- manually copy some jar -->
+		          	<execution>
+		            	<id>unpack_dependencies_km</id>
+		            	<phase>generate-sources</phase>
+		            	<goals>
+		              		<goal>unpack</goal>
+		            	</goals>
+			            <configuration>
+			              <artifactItems>
+			              	<artifactItem>
+			                  <groupId>org.kermeta.language</groupId>
+			                  <artifactId>language.library.core</artifactId>
+			                  <version>${kermeta.version}</version>
+			                  <outputDirectory>${project.build.directory}/dependencies_km</outputDirectory>
+			                  <includes>**/*.km</includes>
+			                </artifactItem>			              	
+			              </artifactItems>
+			              <!-- other configurations here -->
+			        	</configuration>
+			    	</execution>
+		        </executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
