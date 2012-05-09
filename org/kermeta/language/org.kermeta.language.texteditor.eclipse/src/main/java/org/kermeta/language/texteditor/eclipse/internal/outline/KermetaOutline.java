@@ -121,8 +121,10 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 		
 		ILabelDecorator decorator = PlatformUI.getWorkbench().getDecoratorManager().getLabelDecorator();
 		treeViewer.setLabelProvider( new DecoratingLabelProvider( new OutlineLabelProvider(), decorator ) );
-		treeViewer.setInput(getInitialModel());
-		
+		OutlineItem root = getInitialModel();
+		if (root != null){
+			treeViewer.setInput(root);
+		}
 		
 		
 		treeViewer.addSelectionChangedListener(this);
@@ -133,17 +135,26 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 	}
 	public OutlineItem getInitialModel(){
 		if (this.KHelper == null){
-			this.KHelper = new KermetaOutlineHelper(loadResource());
+			ModelingUnit res = loadResource();
+			if (res != null){
+				this.KHelper = new KermetaOutlineHelper(res);
+			} else {
+				return null;
+			}
 		}
 		return this.KHelper.getRootStructure();
 	}
 	public ModelingUnit loadResource(){
 		IFile file = this.textEditor.getFile().getProject().getFile("target/beforeCheckingforScopeRESOLVED.km");
 		if (file != null){
-			ResourceSet resSet = new ResourceSetImpl();
-			Resource res = resSet.getResource(org.kermeta.utils.helpers.emf.EMFUriHelper.convertToEMFUri(file.getLocationURI()), true);
-			ModelingUnit rtNode = (ModelingUnit) res.getContents().get(0);	
-			return rtNode;
+			try {
+				ResourceSet resSet = new ResourceSetImpl();
+				Resource res = resSet.getResource(org.kermeta.utils.helpers.emf.EMFUriHelper.convertToEMFUri(file.getLocationURI()), true);
+				ModelingUnit rtNode = (ModelingUnit) res.getContents().get(0);	
+				return rtNode;
+			} catch(RuntimeException e){
+				return null;
+			}
 		}
 		return null;
 	}
