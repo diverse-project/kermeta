@@ -1,0 +1,115 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java|**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar" sourcepath="M2_REPO/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/gendoc/language.gendoc.km2html/2.0.1-SNAPSHOT/language.gendoc.km2html-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.1-SNAPSHOT/language.library.core-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.1-SNAPSHOT/language.model-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.15/log4j-1.2.15.jar" sourcepath="M2_REPO/log4j/log4j/1.2.15/log4j-1.2.15-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact/3.0.3/maven-artifact-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact/3.0.3/maven-artifact-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-artifact/3.0.3/maven-artifact-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact-manager/2.2.1/maven-artifact-manager-2.2.1.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact-manager/2.2.1/maven-artifact-manager-2.2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-artifact-manager/2.2.1/maven-artifact-manager-2.2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-plugin-api/3.0.3/maven-plugin-api-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-plugin-api/3.0.3/maven-plugin-api-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-plugin-api/3.0.3/maven-plugin-api-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-plugin-registry/2.2.1/maven-plugin-registry-2.2.1.jar" sourcepath="M2_REPO/org/apache/maven/maven-plugin-registry/2.2.1/maven-plugin-registry-2.2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-plugin-registry/2.2.1/maven-plugin-registry-2.2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-profile/2.2.1/maven-profile-2.2.1.jar" sourcepath="M2_REPO/org/apache/maven/maven-profile/2.2.1/maven-profile-2.2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-profile/2.2.1/maven-profile-2.2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-project/2.2.1/maven-project-2.2.1.jar" sourcepath="M2_REPO/org/apache/maven/maven-project/2.2.1/maven-project-2.2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-project/2.2.1/maven-project-2.2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-repository-metadata/2.2.1/maven-repository-metadata-2.2.1.jar" sourcepath="M2_REPO/org/apache/maven/maven-repository-metadata/2.2.1/maven-repository-metadata-2.2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-repository-metadata/2.2.1/maven-repository-metadata-2.2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.jar" sourcepath="M2_REPO/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar" sourcepath="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-classworlds/2.4/plexus-classworlds-2.4.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-classworlds/2.4/plexus-classworlds-2.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-classworlds/2.4/plexus-classworlds-2.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar" sourcepath="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/sisu/sisu-guice/2.9.4/sisu-guice-2.9.4-no_aop.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/sisu/sisu-inject-bean/2.1.1/sisu-inject-bean-2.1.1.jar" sourcepath="M2_REPO/org/sonatype/sisu/sisu-inject-bean/2.1.1/sisu-inject-bean-2.1.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.1.1/sisu-inject-bean-2.1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/sisu/sisu-inject-plexus/2.1.1/sisu-inject-plexus-2.1.1.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/2.1.1/sisu-inject-plexus-2.1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.1-SNAPSHOT/utils.helpers-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.1-SNAPSHOT/utils.systemservices.api-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-beta-6/wagon-provider-api-1.0-beta-6.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-beta-6/wagon-provider-api-1.0-beta-6-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/wagon/wagon-provider-api/1.0-beta-6/wagon-provider-api-1.0-beta-6-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>
