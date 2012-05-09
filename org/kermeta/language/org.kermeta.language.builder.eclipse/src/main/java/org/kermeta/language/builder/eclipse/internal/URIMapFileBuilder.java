@@ -18,6 +18,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 import org.osgi.framework.Bundle;

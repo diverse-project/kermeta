@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceToBuildAction;

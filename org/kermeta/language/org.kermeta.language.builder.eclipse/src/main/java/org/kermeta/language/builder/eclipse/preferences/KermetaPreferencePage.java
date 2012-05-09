@@ -3,7 +3,7 @@ package org.kermeta.language.builder.eclipse.preferences;
 import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
-import org.kermeta.language.builder.eclipse.internal.Activator;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 

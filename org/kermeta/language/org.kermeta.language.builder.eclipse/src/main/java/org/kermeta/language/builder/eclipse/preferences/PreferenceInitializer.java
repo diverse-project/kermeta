@@ -3,7 +3,7 @@ package org.kermeta.language.builder.eclipse.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import org.kermeta.language.builder.eclipse.internal.Activator;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 
 /**

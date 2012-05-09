@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 

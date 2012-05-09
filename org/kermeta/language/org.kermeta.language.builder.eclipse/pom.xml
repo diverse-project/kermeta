@@ -172,7 +172,7 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Bundle-Activator>org.kermeta.language.builder.eclipse.internal.Activator</Bundle-Activator>
+						<Bundle-Activator>org.kermeta.language.builder.eclipse.Activator</Bundle-Activator>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>						
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Export-Package>

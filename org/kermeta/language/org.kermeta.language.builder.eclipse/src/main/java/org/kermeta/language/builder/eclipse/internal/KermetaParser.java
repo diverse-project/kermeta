@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecutionner;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;

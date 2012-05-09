@@ -37,6 +37,7 @@ import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.compiler.commandline.TracedURL;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
+import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.language.structure.ModelingUnit;

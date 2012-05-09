@@ -1,7 +1,6 @@
 package org.kermeta.language.builder.eclipse;
 
 import org.eclipse.ui.IStartup;
-import org.kermeta.language.builder.eclipse.internal.Activator;
 
 public class BuilderEarlyStartup implements IStartup {
 

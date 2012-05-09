@@ -27,7 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.kermeta.language.builder.eclipse.internal.Activator;
 import org.kermeta.language.builder.eclipse.internal.CompilerFromKP;
 import org.kermeta.language.builder.eclipse.internal.KPBuilder;
 import org.kermeta.language.builder.eclipse.internal.KermetaParser;

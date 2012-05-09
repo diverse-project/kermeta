@@ -7,12 +7,17 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.language.builder.eclipse.internal;
+package org.kermeta.language.builder.eclipse;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.kermeta.language.builder.eclipse.KermetaBuilder;
+import org.kermeta.language.builder.eclipse.internal.WorkspaceResourceChangeListener;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
@@ -39,6 +44,12 @@ public class Activator extends AbstractUIPlugin {
 	protected EclipseMessagingSystem messaggingSystem4Runner;
 
 	private WorkspaceResourceChangeListener workspaceResourceChangeListener;
+	
+	
+	/**
+	 * List of KermetaBuilderEventListener that must be notified
+	 */
+	public Set<KermetaBuilderEventListener> kermetaBuilderEventListeners = new HashSet <KermetaBuilderEventListener> (); 
 	
 	/**
 	 * The constructor
@@ -72,7 +83,19 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
-
+	
+    public void fireCompiledEvent(IProject prj) {
+        Iterator<KermetaBuilderEventListener> it = kermetaBuilderEventListeners.iterator();
+        while(it.hasNext()){
+        	((KermetaBuilderEventListener)it.next()).projectCompiled(prj);
+        }        
+    }
+	public void registerListener(KermetaBuilderEventListener listener) {
+		kermetaBuilderEventListeners.add(listener);
+	}
+	public void unregisterListener(KermetaBuilderEventListener listener) {
+		kermetaBuilderEventListeners.remove(listener);
+	}
 	/**
 	 * Returns the shared instance
 	 *
