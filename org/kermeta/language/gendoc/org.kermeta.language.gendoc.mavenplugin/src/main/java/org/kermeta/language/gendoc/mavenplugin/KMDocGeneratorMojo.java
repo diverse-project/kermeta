@@ -21,7 +21,7 @@ import org.apache.maven.project.MavenProject;
  * Be careful annotations in the comments are used by maven...
  * 
  * @goal generate
- * @phase process-resources
+ * @phase generate-resources
  * @requiresDependencyResolution compile
  * @author <a href="mailto:ffouquet@irisa.fr">Francois Fouquet</a>
  * @author <a href="mailto:didier.vojtisek@inria.fr">Didier Vojtisek</a>
