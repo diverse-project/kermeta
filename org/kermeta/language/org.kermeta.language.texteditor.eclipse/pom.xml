@@ -64,6 +64,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.ui.views.source</artifactId>
+			<version>[3.4.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.ui.workbench</artifactId>
 			<version>[3.5.0.0,)</version>
 		</dependency>
@@ -75,6 +80,11 @@
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.jface</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.jface.source</artifactId>
 			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
@@ -98,6 +108,11 @@
 			<version>[3.5.0.0,)</version>
 		</dependency>
 		<dependency>
+			<groupId>org.kermeta.emf</groupId>
+			<artifactId>emf.lib.patched</artifactId>
+			<version>[2.7.0.0,)</version>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>language.loader.kmt.scala</artifactId>
 			<version>${kermeta.version}</version>
@@ -110,6 +125,11 @@
 		<dependency>
 			<groupId>org.kermeta.utils</groupId>
 			<artifactId>utils.systemservices.eclipse</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.helpers</artifactId>
 			<version>${kermeta.version}</version>
 		</dependency>
 		<dependency>
@@ -187,7 +207,9 @@
 							org.kermeta.language.model,
 							org.kermeta.language.autocompletion.api,
 							org.kermeta.language.autocompletion,
-							org.kermeta.language.texteditor.eclipse.nature
+							org.kermeta.language.texteditor.eclipse.nature,
+							org.eclipse.emf.ecore,
+							org.kermeta.utils.helpers
                         </Require-Bundle>
                         <Import-Packages>
                         	org.kermeta.language.structure,
