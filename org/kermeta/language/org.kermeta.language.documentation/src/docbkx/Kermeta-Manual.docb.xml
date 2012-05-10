@@ -11,8 +11,9 @@
 	</mediaobject>
     <title>Kermeta language</title>
 
-    <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <date>$LastChangedDate::                     $</date>
+    <pubdate>Build : &version; </pubdate>
+    <date>$Date::                     $</date>
+    
 
     <author>
       <firstname>Zoé</firstname>
