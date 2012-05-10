@@ -9,7 +9,7 @@
 	
 	<property name="deploy.server" value="kermeta.org"/>
 	<property name="deploy.user" value="web-kermeta"/>
-	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2_snapshot/documentation"/>
+	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/k2_docs"/>
 	
 
 	
