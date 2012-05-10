@@ -17,9 +17,12 @@
 	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+    	<buildNumber>${maven.build.timestamp}</buildNumber>
 	</properties>
 	<dependencies>
 	</dependencies>
+	
 	<build>
    		<resources>
         	<resource>
@@ -201,8 +204,18 @@
 					<!-- <htmlStylesheet>css/ow2-style.css</htmlStylesheet> <imgSrcPath>images/</imgSrcPath> -->
 					<!-- </configuration> </execution> -->
 				</executions>
-				<configuration>
+				<configuration> <!-- global configuration for all executions -->
           			<highlightSource>1</highlightSource>
+	          		<entities>
+			            <entity>
+			            	<name>version</name> <!-- replace occurence of &version; -->
+			            	<value>${version}</value>
+			        	</entity>
+			        	<entity>
+			            	<name>buildNumber</name> <!-- replace occurence of &build_time; -->
+			            	<value>${buildNumber}</value>
+			        	</entity>
+			    	</entities>
        			</configuration>
 				<dependencies>
 					<dependency>
@@ -253,19 +266,19 @@
 	                   <phase>prepare-package</phase>
 	                   <goals>
 	                       <goal>replace</goal>
-	                   </goals>                   
+	                   </goals>
+			           <configuration>
+			               <file>target/classes/Kermeta-Manual.docb/toc.xml</file>	              
+			               <regex>false</regex>	               
+			               <replacements>
+			                   <replacement>
+			                       <token>href="</token>
+			                       <value>href="Kermeta-Manual.docb/</value>
+			                   </replacement>         
+			               </replacements>
+			           </configuration>            
 	               </execution>
 	           </executions>
-	           <configuration>
-	               <file>target/classes/Kermeta-Manual.docb/toc.xml</file>	              
-	               <regex>false</regex>	               
-	               <replacements>
-	                   <replacement>
-	                       <token>href="</token>
-	                       <value>href="Kermeta-Manual.docb/</value>
-	                   </replacement>         
-	               </replacements>
-	           </configuration>
 	       </plugin>
 			<!-- calculate the bundle version from the project version : replace - by . -->
 			<plugin>

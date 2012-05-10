@@ -11,7 +11,7 @@
 	</mediaobject>
     <title>Kermeta language</title>
 
-    <pubdate>Build : &version; </pubdate>
+    <pubdate>Build : &version; &buildNumber;</pubdate>
     <date>$Date::                     $</date>
     
 
