@@ -103,10 +103,9 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>                        
                         <Export-Package>
-                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compiler,
+                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer,
                         	org.kermeta.kompren.org.kermeta.kompren.slicer.compilerrunner
                         </Export-Package>
-                        
                         <Require-Bundle>
                         		org.kermeta.scala.scala-library,
  								org.kermeta.language.model,
@@ -117,6 +116,7 @@
                         		k2.persistence,
                         		k2.standard,
                         		k2.utils,
+                        		k2.io,
                         		org.kermeta.utils.helpers.emf,
                         		org.eclipse.emf.common.notify,
  								org.eclipse.emf.common.util,
