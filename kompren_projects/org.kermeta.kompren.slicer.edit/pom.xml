@@ -51,6 +51,7 @@
                         <Import-Package>
                         	org.eclipse.emf.*,
                         	org.osgi.framework;version="[1.5,2)",
+                        	org.kermeta.kompren.org.kermeta.kompren.slicer.*,
                         	*
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
@@ -66,6 +67,11 @@
             <artifactId>emf.lib</artifactId>
             <version>${emf.version}</version>
         </dependency>
+     <dependency>
+        <groupId>org.kermeta.kompren</groupId>
+        <artifactId>kompren.slicer.compiler</artifactId>
+        <version>${kompren.version}</version>
+    </dependency>
         <dependency>
             <groupId>org.kermeta.kompren</groupId>
             <artifactId>kompren.slicer.parser</artifactId>

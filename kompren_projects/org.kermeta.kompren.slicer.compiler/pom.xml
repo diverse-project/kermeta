@@ -17,7 +17,11 @@
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency> -->
-        
+        <dependency>
+            <groupId>org.kermeta.kompren</groupId>
+            <artifactId>kompren.slicer.model</artifactId>
+            <version>${kompren.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -51,14 +55,39 @@
                         <configuration>
                             <kp>slicerCompiler.kp</kp>
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
+                            <targetGroupId>${project.groupId}</targetGroupId>
+                            <targetArtifactId>${project.artifactId}</targetArtifactId>
                             <checkingEnabled>true</checkingEnabled>
                             <continueOnError>false</continueOnError>
                             <useDefaultClasspath>true</useDefaultClasspath>
                             <intermediateFilesRequired>true</intermediateFilesRequired>
+                            <stopAfterPhase>GENERATE_SCALA</stopAfterPhase>
                         </configuration>
                     </execution>
                 </executions>
             </plugin> 
+            
+            <!-- Add generated source to build cycle -->
+	      <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>build-helper-maven-plugin</artifactId>
+	        <version>1.7</version>
+	        <executions>
+	          <execution>
+	            <id>add-source</id>
+	            <phase>generate-sources</phase>
+	            <goals>
+	              <goal>add-source</goal>
+	            </goals>
+	            <configuration>
+	              <sources>
+	                <source>${project.build.directory}/scala</source>
+	              </sources>
+	            </configuration>
+	          </execution>
+	        </executions>
+	      </plugin>
+            
              <!-- package into a jar with a manifest for running in OSGI -->
             <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
@@ -81,7 +110,6 @@
                         <Require-Bundle>
                         		org.kermeta.scala.scala-library,
  								org.kermeta.language.model,
- 								org.kermeta.language.library.core,
  								org.kermeta.kompren.slicer.model
                         </Require-Bundle>
                         <Import-Package>
@@ -99,8 +127,18 @@
 		          </archive>
 		        </configuration>
       		</plugin>
-            
-             
+
+			<!-- make sure there is enough memory for scala compiler -->
+            <plugin>
+		        <groupId>org.scala-tools</groupId>
+		        <artifactId>maven-scala-plugin</artifactId>
+		        <configuration>
+		          <jvmArgs>
+		            <jvmArg>-Xss1m</jvmArg>
+		            <jvmArg>-Xmx1024m</jvmArg>
+		          </jvmArgs>
+		        </configuration>
+			</plugin>
         </plugins>
     </build>
 </project>
