@@ -109,6 +109,7 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>self</keyword>
 		<keyword>seq</keyword>
 		<keyword>set</keyword>
+		<keyword>singleton</keyword>
 		<keyword>super</keyword>
 		<keyword>then</keyword>
 		<keyword>true</keyword>

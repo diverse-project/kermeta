@@ -132,7 +132,32 @@
 					
 					
 					
-					
+					<execution>
+						<id>single-page-html</id>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<configuration>
+							<chunkedOutput>false</chunkedOutput>
+							<highlightSource>true</highlightSource>
+							<highlightXslthlConfig>${basedir}/src/docbkx/custom/highlighters/xslthl-config.xml</highlightXslthlConfig> 
+							<htmlCustomization>${basedir}/src/docbkx/custom/xsl/customized.html-base.xsl</htmlCustomization>
+							<base.dir></base.dir>
+							<preProcess>
+								<copy todir="target/docbkx/html/Kermeta-Manual.docb/Kermeta-Manual_figures">
+									<fileset dir="src/docbkx/Kermeta-Manual_figures" />
+								</copy>
+								<copy todir="target/docbkx/html/Kermeta-Manual.docb">
+									<fileset dir="src/docbkx/resources" />
+								</copy>
+							</preProcess>
+							<postProcess>
+								<move 	file="target/docbkx/html/Kermeta-Manual.docb.html" 
+										tofile="target/docbkx/html/Kermeta-Manual.docb/Kermeta-Manual.docb.single.html"/>
+							</postProcess>
+						</configuration>
+						<phase>generate-resources</phase>
+					</execution>
 					<execution>
 						<id>multi-page-eclipse</id>
 						<goals>

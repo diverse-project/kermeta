@@ -366,6 +366,10 @@ class Child inherits Reader {
             <listitem>
               <para><xref linkend="section_properties.link" /></para>
             </listitem>
+            
+            <listitem>
+              <para><xref linkend="section_singleton_class.link" /></para>
+            </listitem>
 
             <listitem>
               <para><xref linkend="section_object_comparison.link" /></para>
@@ -3372,7 +3376,7 @@ assert(a5c.equals(a5))</programlisting></entry>
 
            operations. 
         </para></note>
-        <note><para>For the same reason,<literal>reference refA : OrderedSet&lt;String&gt;</literal>
+        <note><para>For the same reason, <literal>reference refA : OrderedSet&lt;String&gt;</literal>
         is different from <literal>reference refB  : String[0..*]</literal>. 
         If both can be navigated the same way (using add, each or any operation available on Collection), 
         <literal>refA</literal> needs to be created before use with <literal>refA := OrderedSet&lt;String&gt;.new</literal>.
@@ -3440,7 +3444,35 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
         </para></note>
       </section>
     </section>
-
+	<section id="section_singleton_class.link">
+      	<title id="section_singleton_class.title.link">Singleton class<phrase id="section_singleton_class"></phrase></title>
+      	<note><title><inlinemediaobject><imageobject>
+		            <imagedata fileref="gfx/fire.png" contentdepth="2em"/>
+		          </imageobject></inlinemediaobject>New in Kermeta 2</title><para></para></note>
+      	<para>It is possible to declare a class as a singleton. The singleton works like <literal>object</literal> in scala.
+      	Which means that only a single instance of the class exists in memory.
+    	</para>
+    	<para>Access to this instance is done directly via the class name.
+    	</para>
+    	<para>As any class, the singleton supports operations, attributes, references...
+    	</para>
+    	<example><title>StdIO singleton</title><para>For example, StdIO is now defined as a singleton like this :</para>
+    	<programlisting language="kermeta">singleton StdIO
+{
+	/**
+	 * Writeln the object to standard output
+	 */ 
+	operation writeln(object : String) : Void is do
+		// code for printing on console
+	end
+	// other operations in StdIO
+}</programlisting>
+		<para>It can be directly used like this :</para>
+		<programlisting language="kermeta">kermeta::io::StdIO.writeln("my message")</programlisting>
+		</example>
+		<caution><para>Be careful when deploying a code that use singleton in environment that uses multiple classpath. 
+		For example in OSGI and eclipse, you can (on purpose or not) create several classpathes that aren't shared and created several instances of the same singleton. </para></caution>
+    </section>
     <section id="section_object_comparison.link">
       <title id="section_object_comparison.title.link">Objects
       comparison<phrase id="section_objects_comparison"></phrase></title>
@@ -5629,6 +5661,10 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
             <entry align="left"><para> See <xref
             linkend="section_collections.link" /> </para></entry>
+          </row>
+          <row>
+            <entry><para>singleton</para></entry>
+            <entry align="left"><para>Defintion of a singleton class. See <xref linkend="section_singleton_class.link" /> </para></entry>
           </row>
 
           <row>
