@@ -39,12 +39,12 @@ aspect class ModelingUnit {
 	operation createHtml (baseFolder:String) : String is do
 		var html : StringBuffer init StringBuffer.new
 		html.append("<HTML>" + "<HEAD>"+ "<TITLE>" + self.name +"</TITLE>")
-		html.append("</HEAD>")
-		html.append("<frameset cols=20%,80%>")
-		html.append("<frame src=allclasses-frame.html name= TOC target = Content scrolling=yes>")
-		html.append("<frame src=contents.html name= Content scrolling=yes>")
-		html.append("</frameset>")
-		html.append("</html>")
+		html.append("</HEAD>\n")
+		html.append("<frameset cols=20%,80%>\n")
+		html.append("<frame src=allclasses-frame.html name= TOC target = Content scrolling=yes>\n")
+		html.append("<frame src=contents.html name= Content scrolling=yes>\n")
+		html.append("</frameset>\n")
+		html.append("</html>\n")
 				
 		result := html.toString
 	end
