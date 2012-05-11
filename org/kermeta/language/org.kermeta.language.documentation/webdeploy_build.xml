@@ -18,7 +18,7 @@
 		<echo>all </echo>
 	</target>
 	
-	<target name="deploy" depends="gather_site_content">
+	<target name="deploy" depends="gather_site_content, get_site_template">
 		<antcall target="upload" />
 	</target>
 	
@@ -38,7 +38,7 @@
 	</target>
 	<target name="get_site_template">
 		<copy todir="${site.folder}">
-			<fileset dir="${basedir}/src/main/resources" includes="**" >
+			<fileset dir="${basedir}/src/site/resources" includes="**" >
 				<!--<exclude name="readme.txt"/>
 				<exclude name="*_build.xml"/>-->
 			</fileset>	
