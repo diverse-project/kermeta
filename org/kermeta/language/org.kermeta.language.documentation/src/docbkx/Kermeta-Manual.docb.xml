@@ -2622,48 +2622,81 @@ class C
       
     </section>
     <section id="section_using.link">
-        <title id="section_using.title.link">Definition syntactic sugar<phrase
+        <title id="section_using.title.link"><literal>using</literal> keyword syntactic sugar<phrase
         id="section_using"></phrase></title>
-
+		<note><title><inlinemediaobject><imageobject>
+		            <imagedata fileref="gfx/fire.png" contentdepth="2em"/>
+		          </imageobject></inlinemediaobject>Changed in Kermeta 2</title><para></para></note>
 		<para>While coding in Kermeta you regularly need to refer to class definitions. 
 		For example to indicate the type of a paramzeter or a variable or to initialize an instance of it (ie. call new).</para>
 		<para>If the definition you want to use isn't defined in the package where you need to use it, the normal way to acces it is to use the full qualified name.</para>
 		<example><title>use of full qualified name</title>
-		<programlisting language="kermeta">var s : kermeta::standard::String
-		var e : kermeta::exceptions::
-		</programlisting>
+		<programlisting language="kermeta">...
+var s : kermeta::standard::Integer
+var e : kermeta::exceptions::NotImplementedException init kermeta::exceptions::NotImplementedException.new
+...</programlisting>
 		</example>
+		<para>Like the <literal>import</literal> statement in Java, Kermeta allows to defines shorcuts which allow you to specify classes from other packages that can be referenced without qualifying them with their full qualified name. 
+		The keyword used for that is <literal>using</literal>. It supports various syntax option in order to haheve either a fine or coarse grain resolution.</para>
+		<example><title>shorthand giving access to the full content of a package</title>
+<programlisting language="kermeta">using kermeta::standard::*	
+		// direct access to all definitions in Package kermeta::standard
+using kermeta::exceptions::*
+		// direct access to all definitions in Package kermeta::exceptions 
+...
+// allows to write :
+var s : Integer
+var e : NotImplementedException init NotImplementedException.new
+</programlisting>		
+		</example>
+		<note><para>For support of retro compatibilty with kermeta 1, the 2 following syntaxes have the same effect. However the second one raises a deprecation warning inviting you to use the first syntax.</para>
+		<programlisting language="kermeta">using kermeta::standard::*	// direct access to all definition of Package
+using kermeta::standard		// retro compatibility supported, exactly the same as above   (should raise a deprecation warning)</programlisting>
+</note>
+		
+		<example><title>shorthand giving access to a single definition with renaming</title>
+<programlisting language="kermeta">using kermeta::standard::Integer => MyInteger   // renaming
+using kermeta::exceptions::NotImplementedException => NIException   // renaming
+...
+// allows to write :
+var s : MyInteger
+var e : NIException init NIException.new</programlisting>		
+		</example>	
+		<example><title>shorthand giving access to a single definition with direct renaming</title>
+<programlisting language="kermeta">using kermeta::standard::{Integer}
+			// same as using kermeta::standard::Integer => Integer
+using kermeta::exceptions::{NotImplementedException} => NIException
+			// same as kermeta::exceptions::NotImplementedException => NotImplementedException
+...
+// allows to write :
+var s : Integer
+var e : NotImplementedException init NotImplementedException.new</programlisting>		
+		</example>
+		
+		<example><title>Other examples of renaming and shortcuts</title>
+<programlisting language="kermeta">using kermeta::standard::Integer => standard::Integer     // with renaming for direct access
+using kermeta::{standard::Integer}              // shortcut : same as above
+using kermeta::standard::Integer => ks::Integer // another renaming
 
-        <para>If a given file, when you want to use a class definition that is
-        not in the scope of the current package inside which you are working,
-        you have to provide the full path of this class definition to be able
-        to use it. However, you can also define shortcuts to make your code
-        clearer: the <literal>using</literal> primitive provides such a
-        shortcut. Taking the previous example, it becomes:</para>
+using kermeta::exceptions::* => ke::*             // global renaming of a package
+...
+// allows to write :
+var i1 : standard::Integer
+var i2 : ks::Integer		
+// note that i1 and i2 are actually of the same type kermeta::standard::Integer
 
-        <programlisting language="kermeta">// file : MyPackage-part2.kmt
-package MyPackage;
-
-require "MyPackage-part1.kmt"
-
-using subPackage1 // &lt;- "shortcut"! 
-
-class C inherits A 
-{
-// ...
-}</programlisting>
-
-        <para>The using statement is a syntactical shorcut, it has no
-        conterpart in Kermeta metamodel.</para>
-
+var e : ke::NotImplementedException init ke::NotImplementedException.new</programlisting>		
+		</example>
+		
         <note><para>
-           The using statement is different from the definition of a local datatype with an alias. (See 
-
+           The <literal>using</literal> statement is just a syntactic sugar used by the type resolver when building the Kermeta model of the program. 
+           This is different from the definition of a local datatype with an <literal>alias</literal>. (See 
           <xref endterm="section_alias.title.link"
-                linkend="section_alias.link" />
-
-           subsection ) 
+                linkend="section_alias.link" />   subsection ) 
         </para></note>
+        <para>Be careful when declaring your <literal>using</literal> statements if there is a risk of conflicting names. In such situation, 
+        the type resolver will first look into the current package, then try each <literal>using</literal> in the order they are defined 
+        and choose the first type definition that exists.</para>
       </section>
     <section id="section_collections.link">
       <title id="section_collections.title.link">Collections<phrase
