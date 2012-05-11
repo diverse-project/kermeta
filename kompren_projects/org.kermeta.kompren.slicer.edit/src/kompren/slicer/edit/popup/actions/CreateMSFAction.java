@@ -26,15 +26,15 @@ public class CreateMSFAction extends KomprenAction {
 	
 	protected void compile(final IFile fileCompil) {
 		IFile file = fileCompil;
+
 		if(file.getFileExtension().equals("komprent")) {
 			CreateKomprenModelsAction action = new CreateKomprenModelsAction();
 			action.convertKomprentFile(file);
 			file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(file.getFullPath().removeFileExtension().addFileExtension("kompren"));
 		}
 
-		String projectName = "MSF"+file.getName();
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IProject project = root.getProject(projectName);
+		String projectName = file.getName().replace(".kompren", "");
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		
 		try {
 			if(!project.exists()) {
@@ -50,7 +50,7 @@ public class CreateMSFAction extends KomprenAction {
 			org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.KomprenCompiler compiler =
 				org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.KerRichFactory.createKomprenCompiler();
 			
-			compiler.compile("platform:/resource"+file.getFullPath(), "/"+project.getName()+"/kermeta/");
+			compiler.compile("platform:/resource"+file.getFullPath(), "/"+projectName+"/kermeta/");
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		}catch(CoreException ex) { ex.printStackTrace(); }
 	}
