@@ -2541,9 +2541,7 @@ operation main() is do
       <title id="section_packages.title.link">Packages<phrase
       id="section_packages"></phrase></title>
 <warning><title>Text not verified for kermeta 2</title></warning>
-      <section>
-        <title>Definition</title>
-
+      
         <para>Kermeta provides package to structure models. So you can define
         packages and sub-package as deep as you want. There are two main ways
         to do this, as shown in examples 2 and 3 (below). If you want to
@@ -2601,19 +2599,7 @@ package subPackage2
         <para>In this example, we define a main package called "MyPackage"
         which contains 2 sub-packages "subPackage1" and "subPackage2". The
         first one contains the A class and the second one the B class.</para>
-      </section>
-
-      <section>
-        <title>Use of packages</title>
-
-        <para>TODO : example of use inside code (without the "using"
-        primitive)</para>
-      </section>
-
-      <section id="section_using.link">
-        <title id="section_using.title.link">Syntaxic sugars<phrase
-        id="section_using"></phrase></title>
-
+        
         <para>If you want, you can declare the same package in several files.
         You can also directly define subpackages in the package naming
         directive of your file (see example 1 above). In the following
@@ -2631,6 +2617,22 @@ class C
 {
 // ...
 }</programlisting>
+
+
+      
+    </section>
+    <section id="section_using.link">
+        <title id="section_using.title.link">Definition syntactic sugar<phrase
+        id="section_using"></phrase></title>
+
+		<para>While coding in Kermeta you regularly need to refer to class definitions. 
+		For example to indicate the type of a paramzeter or a variable or to initialize an instance of it (ie. call new).</para>
+		<para>If the definition you want to use isn't defined in the package where you need to use it, the normal way to acces it is to use the full qualified name.</para>
+		<example><title>use of full qualified name</title>
+		<programlisting language="kermeta">var s : kermeta::standard::String
+		var e : kermeta::exceptions::
+		</programlisting>
+		</example>
 
         <para>If a given file, when you want to use a class definition that is
         not in the scope of the current package inside which you are working,
@@ -2663,8 +2665,6 @@ class C inherits A
            subsection ) 
         </para></note>
       </section>
-    </section>
-
     <section id="section_collections.link">
       <title id="section_collections.title.link">Collections<phrase
       id="section_collections"></phrase></title>
