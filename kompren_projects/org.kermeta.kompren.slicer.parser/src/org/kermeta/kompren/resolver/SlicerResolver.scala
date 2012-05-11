@@ -1,25 +1,27 @@
 package org.kermeta.kompren.resolver
 
-import org.eclipse.emf.ecore.EcoreFactory
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import org.eclipse.emf.common.util.URI
-import java.util.Map
-import org.eclipse.emf.ecore.EPackage
-import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EClass
-import scala.collection.JavaConversions._
-import org.eclipse.emf.ecore.EStructuralFeature
-import org.eclipse.emf.ecore.ENamedElement
-import org.eclipse.emf.ecore.EClassifier
-import org2.kermeta.kompren.slicer.Slicer
-import org2.kermeta.kompren.slicer.SlicedClass
-import org2.kermeta.kompren.slicer.SlicedProperty
 import java.io.File
 
+import scala.collection.JavaConversions.asScalaBuffer
+import scala.collection.JavaConversions.asScalaIterator
+import scala.collection.JavaConversions.seqAsJavaList
+
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EClassifier
+import org.eclipse.emf.ecore.ENamedElement
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EStructuralFeature
+
+import org2.kermeta.kompren.slicer.SlicedClass
+import org2.kermeta.kompren.slicer.SlicedProperty
+import org2.kermeta.kompren.slicer.Slicer
 
 object SlicerResolver {
 	def resolve(slicer : Slicer, uriSlicerTxtModel : String) {
@@ -28,21 +30,16 @@ object SlicerResolver {
 	  resolveSlicedClasses(slicer, metamodel)
 	  resolveSlicedProperties(slicer, metamodel)
 	  resolveRadiuses(slicer)
-	  resolveInputs(slicer)
+	  resolveInputs(slicer, metamodel)
 	}
 	
 	
-	private def resolveInputs(slicer : Slicer) = {
+	private def resolveInputs(slicer : Slicer, metamodel : EList[EObject]) {
 	  var inputs = List[EClass]()
 	  
 	  slicer.getInputClasses.foreach{input =>
-		val res = slicer.getSlicedElements.find{_ match {
-		  case sc : SlicedClass => getQualifiedPath(sc.getDomain)==input.getName
-		  case _ => false
-		}}
-	    
-		res match {
-			case Some(elt) if(elt.isInstanceOf[SlicedClass]) => inputs = inputs ++ List(elt.asInstanceOf[SlicedClass].getDomain)
+		getResolvedEClass(metamodel, input.getName) match {
+			case Some(elt) => inputs = inputs ++ List(elt)
 			case _ => println("INPUT CLASS NOT RESOLVED: " + input.getName)
 		}
 	  }
@@ -52,7 +49,7 @@ object SlicerResolver {
 	}
 	
 	
-	private def resolveRadiuses(slicer : Slicer) = {
+	private def resolveRadiuses(slicer : Slicer) {
 	  var focusedClasses = List[SlicedClass]()
 	  
 	  if(slicer.getRadius!=null) {
@@ -94,7 +91,7 @@ object SlicerResolver {
 	
 	
 	
-	private def resolveSlicedProperties(slicer : Slicer, metamodel : EList[EObject]) = {
+	private def resolveSlicedProperties(slicer : Slicer, metamodel : EList[EObject]) {
 	  slicer.getSlicedElements.foreach{_ match {
 	    case sp : SlicedProperty =>
 		    val names = sp.getDomain.getName.split("\\.")
@@ -128,25 +125,34 @@ object SlicerResolver {
 	}
 	
 	
-	private def resolveSlicedClasses(slicer : Slicer, metamodel : EList[EObject]) = {
+	private def getResolvedEClass(metamodel : EList[EObject], fullclassName : String) : Option[EClass] = {
+	    val names = fullclassName.split("\\.")
+	    val size = names.size
+	    val className = names.last		
+
+	  	val res = metamodel.get(0).eAllContents().find{_ match {
+	  	  case eclass : EClass if(eclass.getName==className && isMatchingPackages(names, size-2, eclass.getEPackage)) => true
+	  	  case _ => false
+	  	}}
+
+	    if(res.isDefined)
+	    	Some(res.get.asInstanceOf[EClass])
+	    else
+	    	None
+	}
+	
+	
+	
+	private def resolveSlicedClasses(slicer : Slicer, metamodel : EList[EObject]) {
 	  slicer.getSlicedElements.foreach{_ match {
 	    case sc : SlicedClass =>
-		    val names = sc.getDomain.getName.split("\\.")
-		    val size = names.size
-		    val className = names.last
-		    
-		  	val res = metamodel.get(0).eAllContents().find{_ match {
-		  	  case eclass : EClass if(eclass.getName==className && isMatchingPackages(names, size-2, eclass.getEPackage)) => 
-		  	    			sc.setDomain(eclass)
-		  	    			if(sc.getCtx!=null)
-		  	    			  sc.getCtx.setType(eclass)
-		  	    			  
-		  	    			true
-		  	  case _ => false
-		  	}}
-		    
-		    if(!res.isDefined)
-		      println("SLICED CLASS NOT RESOLVED: " + sc.getDomain.getName)
+	    	getResolvedEClass(metamodel, sc.getDomain.getName) match {
+	    		case Some(value) =>
+	    			sc.setDomain(value)
+	    			if(sc.getCtx!=null)
+  	    				sc.getCtx.setType(value)
+	    		case None => println("SLICED CLASS NOT RESOLVED: " + sc.getDomain.getName)
+	    	}
 	    case _ =>
 	  }}
 	}
@@ -173,4 +179,3 @@ object SlicerResolver {
 	  return res.getContents
 	}
 }
-
