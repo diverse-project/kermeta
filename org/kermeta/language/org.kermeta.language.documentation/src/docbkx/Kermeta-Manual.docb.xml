@@ -2665,7 +2665,7 @@ var e : NIException init NIException.new</programlisting>
 		<example><title>shorthand giving access to a single definition with direct renaming</title>
 <programlisting language="kermeta">using kermeta::standard::{Integer}
 			// same as using kermeta::standard::Integer => Integer
-using kermeta::exceptions::{NotImplementedException} => NIException
+using kermeta::exceptions::{NotImplementedException}
 			// same as kermeta::exceptions::NotImplementedException => NotImplementedException
 ...
 // allows to write :
