@@ -3449,7 +3449,7 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
       	<note><title><inlinemediaobject><imageobject>
 		            <imagedata fileref="gfx/fire.png" contentdepth="2em"/>
 		          </imageobject></inlinemediaobject>New in Kermeta 2</title><para></para></note>
-      	<para>It is possible to declare a class as a singleton. The singleton works like <literal>object</literal> in scala.
+      	<para>It is possible to declare a class as a singleton. The singleton works like <literal>companion object</literal> in scala or is similar to a static class in java. 
       	Which means that only a single instance of the class exists in memory.
     	</para>
     	<para>Access to this instance is done directly via the class name.
