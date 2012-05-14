@@ -9,6 +9,7 @@
 */
 package org.kermeta.utils.provisionner4eclipse;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.provisionner4eclipse.preferences.PreferenceConstants;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -30,6 +32,7 @@ public class Provisionner {
 	 */
 	public void provisionFromPreferences(IProgressMonitor monitor){
 		String bundleList = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BUNDLE_URI_LIST);
+		Boolean offline = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_MVN_AETHER_OFFLINE);
 		String[] bundleRawURIs = bundleList.split("\n");
 		monitor.beginTask("Provisionning OSGI Bundles", bundleRawURIs.length*2 );
 		ArrayList<IStatus> statusChildren = new ArrayList<IStatus>();
@@ -58,7 +61,17 @@ public class Provisionner {
 				else{
 					try{
 						monitor.subTask("Installing "+bundleURI);
-						Bundle bundle = context.installBundle(bundleURI);
+						String resolvedURI = bundleURI;
+						if(bundleURI.startsWith("mvn:")){
+							AetherUtil aetherUtil = new AetherUtil();
+							aetherUtil.setOffline(offline);
+							File theFile = aetherUtil.resolveMavenArtifact(bundleURI, "http://maven.inria.fr/artifactory/repo");
+							if(theFile.exists()){
+								//result.add(theFile.getAbsolutePath());
+								resolvedURI = theFile.toURI().toString();
+							}
+						}
+						Bundle bundle = context.installBundle(resolvedURI);
 						bundleToStart.add(bundle);
 						hasProcessedAtLeastOne = true;
 						monitor.worked(1);

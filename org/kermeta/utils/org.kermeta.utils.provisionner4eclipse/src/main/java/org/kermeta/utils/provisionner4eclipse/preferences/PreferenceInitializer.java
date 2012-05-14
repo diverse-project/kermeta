@@ -36,6 +36,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"# mvn:org.kermeta.language/language.model\n"+
 				"# file:///c:/users/yourlogin/your.jar\n"+
 				"\n\n\n\n\n\n\n\n\n\n");
+		store.setDefault(PreferenceConstants.P_MVN_AETHER_OFFLINE,false);
+		
+		
 	}
 
 }

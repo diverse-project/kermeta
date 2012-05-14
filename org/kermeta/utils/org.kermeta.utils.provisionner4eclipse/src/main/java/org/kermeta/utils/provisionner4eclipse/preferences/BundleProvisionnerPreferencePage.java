@@ -56,6 +56,9 @@ public class BundleProvisionnerPreferencePage
 	 * restore itself.
 	 */
 	public void createFieldEditors() {
+		BooleanFieldEditor offlineField = new BooleanFieldEditor(PreferenceConstants.P_MVN_AETHER_OFFLINE, "Offline mode for maven aether", getFieldEditorParent());
+		addField(offlineField);
+		
 		HelpfulTextFieldEditor headerFE = new HelpfulTextFieldEditor(PreferenceConstants.P_BUNDLE_URI_LIST, 
 				"&Bundle URI List (one per line):\n", 
 				getFieldEditorParent());		

@@ -24,8 +24,9 @@ import org.osgi.framework.BundleException;
  */
 public class Activator extends AbstractUIPlugin {
 
-	public String[] requiredStartedBundleNames = {"org.ops4j.pax.url.mvn",
-			"org.ops4j.pax.url.assembly"};
+	//public String[] requiredStartedBundleNames = {"org.ops4j.pax.url.mvn",
+	//		"org.ops4j.pax.url.assembly"};
+	public String[] requiredStartedBundleNames = {};
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.kermeta.utils.provisionner.eclipse";
 

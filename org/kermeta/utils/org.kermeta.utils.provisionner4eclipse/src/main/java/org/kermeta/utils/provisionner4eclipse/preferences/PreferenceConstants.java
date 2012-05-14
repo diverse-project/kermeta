@@ -16,5 +16,6 @@ public class PreferenceConstants {
 
 	
 	public static final String P_BUNDLE_URI_LIST = "bundleURIListPreference";
+	public static final String P_MVN_AETHER_OFFLINE = "MVN_AETHER_OFFLINEPreference";
 	
 }
