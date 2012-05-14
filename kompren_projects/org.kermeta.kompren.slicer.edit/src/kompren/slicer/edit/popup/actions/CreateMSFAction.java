@@ -8,7 +8,11 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
+import org2.kermeta.kompren.slicer.Slicer;
 
 public class CreateMSFAction extends KomprenAction {
 
@@ -33,8 +37,9 @@ public class CreateMSFAction extends KomprenAction {
 			file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(file.getFullPath().removeFileExtension().addFileExtension("kompren"));
 		}
 
-		String projectName = file.getName().replace(".kompren", "");
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		final Resource resource = new ResourceSetImpl().getResource(URI.createFileURI(file.getLocation().toString()), true);
+		final Slicer slicer = (Slicer)resource.getContents().get(0);
+		final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(slicer.getName());
 		
 		try {
 			if(!project.exists()) {
@@ -50,7 +55,7 @@ public class CreateMSFAction extends KomprenAction {
 			org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.KomprenCompiler compiler =
 				org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.KerRichFactory.createKomprenCompiler();
 			
-			compiler.compile("platform:/resource"+file.getFullPath(), "/"+projectName+"/");
+			compiler.compile("platform:/resource"+file.getFullPath());
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		}catch(CoreException ex) { ex.printStackTrace(); }
 	}
