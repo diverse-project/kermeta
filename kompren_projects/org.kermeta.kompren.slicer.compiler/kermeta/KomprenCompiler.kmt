@@ -13,13 +13,13 @@ using ecore
 using kermeta::io::StdIO => stdio
 
 class KomprenCompiler {
-	operation compile(uriSlicer : String, pathOutput : String) is do
+	operation compile(uriSlicer : String) is do
 		var slicerModel : Slicer init getSlicerModel(uriSlicer)
-		var pkg 		: EPackage init getEcoreModel(slicerModel.uriMetamodel).one()
+		var pkg 		: EPackage init getEcoreModel(slicerModel.uriMetamodel).one
 		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, slicerModel.uriMetamodel)
 
-		slicer.generateSlicer()
-		slicer.saveCode(pathOutput)
+		slicer.generateSlicer
+		slicer.saveCode
 		// var start : Long init Date.new.getTime()
 		// generateKevoree
 		// generateInvertedClassModel
