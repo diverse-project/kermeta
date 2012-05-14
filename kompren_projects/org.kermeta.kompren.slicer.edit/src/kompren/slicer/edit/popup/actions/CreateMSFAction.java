@@ -50,7 +50,7 @@ public class CreateMSFAction extends KomprenAction {
 			org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.KomprenCompiler compiler =
 				org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.KerRichFactory.createKomprenCompiler();
 			
-			compiler.compile("platform:/resource"+file.getFullPath(), "/"+projectName);
+			compiler.compile("platform:/resource"+file.getFullPath(), "/"+projectName+"/");
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		}catch(CoreException ex) { ex.printStackTrace(); }
 	}
