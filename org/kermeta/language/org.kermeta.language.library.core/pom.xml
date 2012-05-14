@@ -105,8 +105,9 @@
 			      <downloadSources>true</downloadSources>
 			      <downloadJavadocs>true</downloadJavadocs>
 			      <projectnatures>
+			      	<projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature>
 			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
-			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>			        
 			      </projectnatures>
 			      <buildcommands>
 			        <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
