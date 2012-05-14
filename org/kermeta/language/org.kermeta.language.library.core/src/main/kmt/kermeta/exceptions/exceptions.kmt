@@ -7,6 +7,10 @@ package kermeta{
 package exceptions{
 
 @CompilerIgnore "true"
+/** Super class of all Exceptions in Kermeta. 
+ * Unlike in Kermata 1, where is was possible to"raise" any object, 
+ * in Kermeta 2 only objects that inherits from this kermeta::exceptions::Exception can be used in a "raise" statement. 
+ */
 class Exception
 {
     attribute message : String
@@ -69,15 +73,26 @@ class IOException inherits Exception {}
 class FileNotFoundException inherits IOException {}
 
 @CompilerIgnore "true"
+/** Special Exception raised when a constraint has been violated.
+ */
 class ConstraintViolatedException inherits Exception {}
 
 @CompilerIgnore "true"
+/** Special Exception raised when a precondition has been violated.
+ * This constraint is usually raised when the program is run in a mode where operation precondition check is activated 
+ */
 class ConstraintViolatedPre inherits ConstraintViolatedException {}
 
 @CompilerIgnore "true"
+/** Special Exception raised when a precondition has been violated.
+ * This constraint is usually raised when the program is run in a mode where operation postcondition check is activated 
+ */
 class ConstraintViolatedPost inherits ConstraintViolatedException {}
 
 @CompilerIgnore "true"
+/** Special Exception raised when an invariant has been violated.
+ * This constraint is usually raised by one of the following : checkInvariant, checkAllInvariants 
+ */
 class ConstraintViolatedInv inherits ConstraintViolatedException {}
 
 @CompilerIgnore "true"
