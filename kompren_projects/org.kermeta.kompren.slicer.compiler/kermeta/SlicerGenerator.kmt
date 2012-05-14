@@ -290,7 +290,7 @@ class SlicerGenerator {
 					
 		requiredAspectFileNames.each{name | result := result + "require \"${project.baseUri}/" + name + "\"\n\t\t" }
 		
-		result := result + "require "\"${kompren.compiler.baseUri}/kompren.ecore\" byteCodeFromADependency\"\n\t\t" +
+		result := result + "require \"${kompren.compiler.baseUri}/kompren.ecore\" byteCodeFromADependency\"\n\t\t" +
 			"require \"${project.baseUri}/" + metamodelName + "\"\n\t}\n\tdependencies = {\n\t\t" +
 			"dependency \"library.core\" = \"platform:/plugin/org.kermeta.language.library.core\",\"mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT\"\n\t\t" +
 			"dependency \"kompren.model\" =\"platform:/plugin/org.kermeta.kompren.slicer.model\",\"mvn:org.kermeta.kompren/kompren.slicer.model/2.0.0-SNAPSHOT\" byteCodeOnly\n\t\t" +
