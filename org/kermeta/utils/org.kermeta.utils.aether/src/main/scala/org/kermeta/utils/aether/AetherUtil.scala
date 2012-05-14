@@ -46,6 +46,7 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
   def this() = this(new StdioSimpleMessagingSystem(),"")
   
   
+  def setOffline(b : Boolean ) = {newRepositorySystemSession.setOffline(b)}
   
   val newRepositorySystem: RepositorySystem = {
     val locator = new DefaultServiceLocator()    
@@ -145,6 +146,7 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
 
     artifactRequest.setRepositories(repositories)
     var artefactResult: ArtifactResult = null;
+    
     artefactResult = newRepositorySystem.resolveArtifact(newRepositorySystemSession, artifactRequest)
     artefactResult.getArtifact.getFile
   }
