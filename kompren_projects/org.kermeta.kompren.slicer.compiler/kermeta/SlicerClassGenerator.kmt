@@ -29,7 +29,7 @@ class SlicerClassGenerator inherits Generator {
 			linedHelper.collect{str | 
 				if str.contains(requireStr) then
 					generatedCode := generatedCode + str + "\n"
-					slicerGenerator.slicerModel.helper := slicerGenerator.slicerModel.helper.replace(str, "")
+					slicerGenerator.slicerModel.helper := slicerGenerator.slicerModel.helper.replaceAll(str, "")
 				end
 			}
 		end
@@ -47,7 +47,7 @@ class SlicerClassGenerator inherits Generator {
 			linedHelper.collect{str | 
 				if str.contains(usingStr) then
 					generatedCode := generatedCode + str + "\n"
-					slicerGenerator.slicerModel.helper := slicerGenerator.slicerModel.helper.replace(str, "")
+					slicerGenerator.slicerModel.helper := slicerGenerator.slicerModel.helper.replaceAll(str, "")
 				end
 			}
 		end					 
