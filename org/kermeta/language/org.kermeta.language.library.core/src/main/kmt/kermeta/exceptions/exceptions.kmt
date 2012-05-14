@@ -23,12 +23,12 @@ class Exception
     attribute nestedException : Exception
     /**
 	 * provides information on the execution history and lists the names of the classes 
-	 * and methods that were called at the point when the exception occurred.
+	 * and methods that were called at the point when the exception was raised.
 	 */
     attribute stackTrace : String
     /**
      * Initialization method used to simplify the construction of new Exception
-     * ex: raise Exception.new.initialize("My custom excetion message")
+     * ex: raise kermeta::exceptions::Exception.new.initialize("My custom exception message")
      */
     operation initialize(message: String) : Exception is do
     	result := self
