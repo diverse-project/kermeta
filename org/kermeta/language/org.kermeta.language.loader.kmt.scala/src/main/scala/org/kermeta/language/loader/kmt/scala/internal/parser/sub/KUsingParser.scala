@@ -65,12 +65,13 @@ trait KUsingParser extends KAbstractParser {
 
   def simplifiedUsingRenameStatment : Parser[Tuple2[String,String]] =
       ident ~ rep(usingIdent) ~ "::" ~ "{"  ~ ident ~ rep(usingIdent) ~ "}" ^^ { case  startId ~ startIds  ~ _ ~ _ ~ endId ~ endIds ~ _  =>
-          var resTuple : Tuple2[String,String] = (startId,endId)
+          var resTuple : Tuple2[String,String] = (startId, endId)
           startIds.foreach{nid =>
-            resTuple = (resTuple._1+"::"+nid,resTuple._2)
+            resTuple = (resTuple._1+"::"+nid, resTuple._2)
           }
+          resTuple = (resTuple._1+"::"+endId, resTuple._2)
           endIds.foreach{nid =>
-            resTuple = (resTuple._1+"::"+nid,resTuple._2+"::"+nid)
+            resTuple = (resTuple._1+"::"+nid, resTuple._2+"::"+nid)
           }
           resTuple
       }
