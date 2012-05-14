@@ -14,9 +14,9 @@
 
 	<properties>
 		<kermeta.version>2.0.1-BETA5</kermeta.version>
-		<kompren.version>2.0.0-SNAPSHOT</kompren.version>
-		<utils.version>2.0.1-SNAPSHOT</utils.version>
-		<traceability.version>2.0.2-SNAPSHOT</traceability.version>
+		<kompren.version>2.0.0</kompren.version>
+		<utils.version>2.0.1-BETA5</utils.version>
+		<traceability.version>2.0.2-BETA5</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<emf.version>2.7.0</emf.version>
 		<scala.version>2.9.0-1</scala.version>
