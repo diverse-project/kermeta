@@ -5,7 +5,7 @@
     modelDirectory="/org.kermeta.kompren.slicer.model/src" editDirectory="/org.kermeta.kompren.slicer.edit/src"
     editorDirectory="/org.kermeta.kompren.slicer.editor/src" modelPluginID="kompren.slicer.model"
     modelName="kompren" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
-    editPluginID="kompren.slicer.edit" editorPluginID="kompren.slicer.editor" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    editPluginID="kompren.slicer.edit" editorPluginID="kompren.slicer.editor">
   <foreignModel>kompren.ecore</foreignModel>
   <genPackages prefix="Org2" disposableProviderFactory="true" ecorePackage="kompren.ecore#/">
     <nestedGenPackages prefix="Kermeta" basePackage="org2" disposableProviderFactory="true"
