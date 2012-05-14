@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -324,12 +325,7 @@ public class KermetaCompiler {
 				return null;
 			}
 	
-			if (kp.getName() == null) {
-				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. Missing project name", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
-				this.errorMessage = "Invalid kp file. Missing Project name";
-				this.hasFailed = true;
-				return null;
-			}
+			if (!checkKP(kp, kpFileURL) ) return null;
 			
 			if (!kp.getName().isEmpty()) {
 				projectName = kp.getName();
@@ -1081,7 +1077,40 @@ public class KermetaCompiler {
 	}
 	
 	
-	
+	public boolean  checkKP(KermetaProject kp, String kpFileURL) throws MalformedURLException{
+		//KpResourceHelper.createFileReference(kp.getName())
+		if (kp.getName() == null) {
+			this.errorMessage = "Invalid kp file. Missing project name";
+			this.hasFailed = true;
+		}
+		if (kp.getName().isEmpty()) {
+			this.errorMessage = "Invalid kp file. Missing project name";
+			this.hasFailed = true;
+		}
+
+		if (kp.getName().contains("-")) {
+			this.errorMessage = "Forbidden character '-' in project name";
+			this.hasFailed = true;
+		}
+		
+		if (kp.getName().contains(" ")) {
+			this.errorMessage = "Forbidden character ' ' in project name";
+			this.hasFailed = true;
+		}
+		
+		
+		String firstChar = kp.getName().substring(0, 1);
+		if ("0123456789".contains(firstChar)) {
+			this.errorMessage = "cannot use an integer as first character of the project name";
+			this.hasFailed = true;
+		}
+		if(this.hasFailed){
+			logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			
+			return false;
+		}
+		return true;
+	}
 	
 	public void createJar(String kpFileURL, String targetGeneratedSourceFolder, String targetFolder){
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
