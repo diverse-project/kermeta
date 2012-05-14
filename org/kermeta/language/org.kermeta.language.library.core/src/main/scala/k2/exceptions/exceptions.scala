@@ -14,40 +14,44 @@ import k2.standard.PrimitiveConversion._
  
 trait Exception extends ExceptionAspect with k2.standard.KermetaObject
 trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ecore.EObject{
-var message:String=null;
-var nestedException:Exception=null; 
-var stackTrace:String=null;
-def Scalamessage : _root_.java.lang.String={return this.message}
-def Scalamessage_=(arg : _root_.java.lang.String)={message  = arg}
-def ScalanestedException : Exception={return this.nestedException }
-def ScalanestedException_=(arg : Exception)={nestedException = arg}
-def ScalastackTrace : _root_.java.lang.String={return this.stackTrace }
-def ScalastackTrace_=(arg : _root_.java.lang.String)={stackTrace  = arg}
+	var message:String=null;
+	var nestedException:Exception=null; 
+	var stackTrace:String=null;
+	def Scalamessage : _root_.java.lang.String={return this.message}
+	def Scalamessage_=(arg : _root_.java.lang.String)={message  = arg}
+	def ScalanestedException : Exception={return this.nestedException }
+	def ScalanestedException_=(arg : Exception)={nestedException = arg}
+	def ScalastackTrace : _root_.java.lang.String={return this.stackTrace }
+	def ScalastackTrace_=(arg : _root_.java.lang.String)={stackTrace  = arg}
+	def initialize(message : String) : ExceptionAspect = {
+	  this.message = message
+	  return this;
+	}
 
 
-   def eClass():EClass =null
-   def eResource():Resource =null
-   def eContainer():EObject =null
-   def eContainingFeature():EStructuralFeature =null
-   def eContainmentFeature():EReference =null
-   override def eContents():EList[EObject] =null;
-   override def eAllContents():TreeIterator[EObject] =null;
-   def eIsProxy():Boolean =false;
-   override def eCrossReferences():EList[EObject] =null;
-   def eGet(feature:EStructuralFeature ) : Object=null;
-   def eGet(feature:EStructuralFeature , resolve:Boolean ):Object =null;
-   def eSet(feature:EStructuralFeature , newValue:Any   ) :Unit =null;
-   def eIsSet(feature:EStructuralFeature ) : Boolean = false;
-   override def eUnset( feature:EStructuralFeature) : Unit = null;
-   override def eAdapters(): EList[org.eclipse.emf.common.notify.Adapter] =null;
-   def eDeliver():Boolean =true;
-   def eSetDeliver(deliver:Boolean):Unit=null;
-   def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
-  def eInvoke(x1: org.eclipse.emf.ecore.EOperation,x2: org.eclipse.emf.common.util.EList[_]):_root_.java.lang.Object = null
+	def eClass():EClass =null
+	def eResource():Resource =null
+	def eContainer():EObject =null
+	def eContainingFeature():EStructuralFeature =null
+	def eContainmentFeature():EReference =null
+	override def eContents():EList[EObject] =null;
+	override def eAllContents():TreeIterator[EObject] =null;
+	def eIsProxy():Boolean =false;
+	override def eCrossReferences():EList[EObject] =null;
+	def eGet(feature:EStructuralFeature ) : Object=null;
+	def eGet(feature:EStructuralFeature , resolve:Boolean ):Object =null;
+	def eSet(feature:EStructuralFeature , newValue:Any   ) :Unit =null;
+	def eIsSet(feature:EStructuralFeature ) : Boolean = false;
+	override def eUnset( feature:EStructuralFeature) : Unit = null;
+	override def eAdapters(): EList[org.eclipse.emf.common.notify.Adapter] =null;
+	def eDeliver():Boolean =true;
+	def eSetDeliver(deliver:Boolean):Unit=null;
+	def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
+	def eInvoke(x1: org.eclipse.emf.ecore.EOperation,x2: org.eclipse.emf.common.util.EList[_]):_root_.java.lang.Object = null
    
 }  
 trait RuntimeErrorAspect extends Exception{
-var expression:Expression=null;
+	var expression:Expression=null;
 
 }
 trait RuntimeError extends RuntimeErrorAspect{
@@ -157,14 +161,14 @@ trait FileNotFoundException extends FileNotFoundExceptionAspect{
 
 
 trait ConstraintViolatedExceptionAspect extends Exception{
-var constraintAppliedTo:org.eclipse.emf.ecore.EObject = None.get;
-var failedConstraint:Constraint= None.get;
-def ScalaconstraintAppliedTo:org.eclipse.emf.ecore.EObject = constraintAppliedTo
-def ScalaconstraintAppliedTo_=(arg:org.eclipse.emf.ecore.EObject) = {constraintAppliedTo = arg}
-def ScalafailedConstraint:Constraint = failedConstraint
-def ScalafailedConstraint_=(arg:Constraint) = {failedConstraint = arg}
-
+	var constraintAppliedTo:org.eclipse.emf.ecore.EObject = None.get;
+	var failedConstraint:Constraint= None.get;
+	def ScalaconstraintAppliedTo:org.eclipse.emf.ecore.EObject = constraintAppliedTo
+	def ScalaconstraintAppliedTo_=(arg:org.eclipse.emf.ecore.EObject) = {constraintAppliedTo = arg}
+	def ScalafailedConstraint:Constraint = failedConstraint
+	def ScalafailedConstraint_=(arg:Constraint) = {failedConstraint = arg}
 }
+
 trait ConstraintViolatedException extends ConstraintViolatedExceptionAspect{
 }
 
@@ -242,22 +246,20 @@ trait ConstraintsDiagnosticAspect extends Exception{
 	
 	/* Initialize */
 	def initialize() : ConstraintsDiagnostic={
-            setConstraints = new _root_.java.util.ArrayList[ConstraintViolatedInv]
+		setConstraints = new _root_.java.util.ArrayList[ConstraintViolatedInv]
 		return this.asInstanceOf[ConstraintsDiagnostic];
-        }
+	}
 	
 	/* Adds a ConstraintViolatedInv object to setConstraints */	
 	def add(cons : ConstraintViolatedInv)={
-            setConstraints.add(cons)
-        }
+        setConstraints.add(cons)
+    }
 	
 	/* Prints the content */
 	def prettyPrint() ={
 		//stdio.writeln("Number of violated constraints : " + setConstraints.size.toString)
 	
 		//Clean the markers on the associated resources
-		
-		
 	}
 
 
