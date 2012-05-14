@@ -307,18 +307,18 @@ class SlicerGenerator {
 		
 		requiredAspectFiles.keys.each{key |
 			var subPkgs : Sequence<String> init key.split("::")
-			aspectFileNames.add(path + subPkgs.last() + "SlicingAspect.kmt")
+			aspectFileNames.add(path + subPkgs.last + "SlicingAspect.kmt")
 		}
 		
-		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + ".kp").toURI, 
+		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + ".kp").toURI, 
 							generateCodeKP(slicerModel.name + "Aspect.kmt", slicerModel.name + ".kmt", aspectFileNames))
-		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + "Aspect.kmt").toURI, slicerAspectGenerator.generatedCode)
-		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + ".kmt").toURI, slicerClassGenerator.generatedCode)
+		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + "Aspect.kmt").toURI, slicerAspectGenerator.generatedCode)
+		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + ".kmt").toURI, slicerClassGenerator.generatedCode)
 		copyMetamodel(path)
 		
 		requiredAspectFiles.keys.each{key |
 			var subPkgs : Sequence<String> init key.split("::")
-			FileIO.writeTextFile(("platform:/resource" + path + subPkgs.last() + "SlicingAspect.kmt").toURI, requiredAspectFiles.getValue(key))
+			FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + subPkgs.last + "SlicingAspect.kmt").toURI, requiredAspectFiles.getValue(key))
 		}
 	end
 }

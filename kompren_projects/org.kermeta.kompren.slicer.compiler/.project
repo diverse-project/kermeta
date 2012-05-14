@@ -13,6 +13,5 @@
 	</buildSpec>
 	<natures>
 		<nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>
-		<nature>org.kermeta.kp.editor.nature</nature>
 	</natures>
 </projectDescription>
