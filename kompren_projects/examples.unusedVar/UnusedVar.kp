@@ -3,8 +3,6 @@ KermetaProject "examples.unusedVar"
 	defaultMainClass ="ex::kermeta::unusedVar::Test"
 	defaultMainOperation = "main"
 	sources = {
-		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
-		require "${kompren.model.baseUri}/metamodel/slicing.ecore" byteCodeFromADependency
 		require "${project.baseUri}/UnusedVarDetector.kmt"
 		require "${project.baseUri}/UnusedVarDetectorAspect.kmt"
 		require "${project.baseUri}/CreationHelper.kmt"
@@ -12,10 +10,6 @@ KermetaProject "examples.unusedVar"
 		require "${project.baseUri}/TestUnusedVar.kmt"
 	}
 	dependencies = {
-		dependency "library.core" = "platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
-		dependency "kompren.model" ="platform:/resource/org.kermeta.kompren.slicer.compiler/lib/org.kermeta.kompren.slicer.model.jar"
-		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
-		}
-	packageEquivalences={
-		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+		dependency "kompren.model" ="platform:/plugin/org.kermeta.kompren.slicer.model","mvn:org.kermeta.kompren/kompren.slicer.model/2.0.0-SNAPSHOT" byteCodeOnly
+		dependency "kompren.compiler" ="platform:/plugin/org.kermeta.kompren.slicer.compiler","mvn:org.kermeta.kompren/kompren.slicer.compiler/2.0.0-SNAPSHOT"
 	}
