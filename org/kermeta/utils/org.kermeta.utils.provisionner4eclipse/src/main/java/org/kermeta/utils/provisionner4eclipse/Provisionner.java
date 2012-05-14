@@ -47,7 +47,7 @@ public class Provisionner {
 			}
 		}
 		for (int i = 0; i < repoRawURIs.length; i++) {
-			String repoUrl = bundleRawURIs[i].trim();
+			String repoUrl = repoRawURIs[i].trim();
 			if(!repoUrl.startsWith("#") && !repoUrl.isEmpty()){
 				repoToUse.add(repoUrl);
 			}
