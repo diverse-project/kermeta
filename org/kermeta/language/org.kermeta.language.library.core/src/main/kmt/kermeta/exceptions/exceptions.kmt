@@ -13,9 +13,26 @@ package exceptions{
  */
 class Exception
 {
+	/**
+	 * Message associated with this exception
+	 */
     attribute message : String
+    /**
+	 * Underlying Exception if this Exception has wrapped another one
+	 */
     attribute nestedException : Exception
+    /**
+	 * provides information on the execution history and lists the names of the classes 
+	 * and methods that were called at the point when the exception occurred.
+	 */
     attribute stackTrace : String
+    /**
+     * Initialization method used to simplify the construction of new Exception
+     * ex: raise Exception.new.initialize("My custom excetion message")
+     */
+    operation initialize(message: String) : Exception is do
+    	result := self
+    end
 }
 
 @CompilerIgnore "true"
