@@ -279,7 +279,7 @@ class SlicerGenerator {
 	
 	
 	operation generateCodeKP(modelAspectFileName : String, slicerFileName : String, requiredAspectFileNames : Bag<String>) : String is do
-		var metamodelName : String init slicerModel.uriMetamodel.split("/").last()
+		var metamodelName : String init slicerModel.uriMetamodel.split("/").last
 		var pkgName : String init getPackageFromClasses(aspectisedClasses).replaceAll(";\n", "::" + slicerModel.name).replaceAll("package ", "")
 	
 		result := "KermetaProject \"" + slicerModel.name + "\"\n\tgroupId = \"my.group\"\n\t" +
@@ -296,6 +296,11 @@ class SlicerGenerator {
 	end
 	
 	
+	operation copyMetamodel(path : String) is do
+		var metamodelName : String init slicerModel.uriMetamodel.split("/").last
+		FileIO.writeTextFile(("platform:/resource" + path + metamodelName).toURI, FileIO.readTextFile(slicerModel.uriMetamodel.toURI))
+	end 
+	
 	
 	operation saveCode(path : String) is do
 		var aspectFileNames : Bag<String> init Bag<String>.new
@@ -304,12 +309,12 @@ class SlicerGenerator {
 			var subPkgs : Sequence<String> init key.split("::")
 			aspectFileNames.add(path + subPkgs.last() + "SlicingAspect.kmt")
 		}
-		stdio.writeln(("platform:/resource" + path + slicerModel.name + ".kp").toURI.toString)
-		stdio.writeln(generateCodeKP(slicerModel.name + "Aspect.kmt", slicerModel.name + ".kmt", aspectFileNames))
+		
 		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + ".kp").toURI, 
 							generateCodeKP(slicerModel.name + "Aspect.kmt", slicerModel.name + ".kmt", aspectFileNames))
 		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + "Aspect.kmt").toURI, slicerAspectGenerator.generatedCode)
 		FileIO.writeTextFile(("platform:/resource" + path + slicerModel.name + ".kmt").toURI, slicerClassGenerator.generatedCode)
+		copyMetamodel(path)
 		
 		requiredAspectFiles.keys.each{key |
 			var subPkgs : Sequence<String> init key.split("::")
