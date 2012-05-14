@@ -26,7 +26,13 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		
+
+		store.setDefault(PreferenceConstants.P_MVN_AETHER_OFFLINE,false);
+		store.setDefault(PreferenceConstants.P_REPO_URL_LIST,
+				"# Add here the Urls of the repository where maven should look for artifacts. \n"+				
+				"http://maven.inria.fr/artifactory/public-release\n" +
+				"http://maven.inria.fr/artifactory/public-snapshot\n"+
+				"\n\n\n\n");
 		store.setDefault(PreferenceConstants.P_BUNDLE_URI_LIST,
 				"# Add here the URIs to the bundle \n"+
 				"# you want to dynamically add to this platform\n"+
@@ -36,7 +42,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"# mvn:org.kermeta.language/language.model\n"+
 				"# file:///c:/users/yourlogin/your.jar\n"+
 				"\n\n\n\n\n\n\n\n\n\n");
-		store.setDefault(PreferenceConstants.P_MVN_AETHER_OFFLINE,false);
 		
 		
 	}

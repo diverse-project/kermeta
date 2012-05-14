@@ -59,10 +59,17 @@ public class BundleProvisionnerPreferencePage
 		BooleanFieldEditor offlineField = new BooleanFieldEditor(PreferenceConstants.P_MVN_AETHER_OFFLINE, "Offline mode for maven aether", getFieldEditorParent());
 		addField(offlineField);
 		
+		HelpfulTextFieldEditor repoFE = new HelpfulTextFieldEditor(PreferenceConstants.P_REPO_URL_LIST, 
+				"&Maven Repositories (one per line):\n", 
+				getFieldEditorParent());		
+		Font font = new Font(this.getShell().getDisplay(), "Courier", 8, SWT.NORMAL);;
+		repoFE.getTextControl(getFieldEditorParent()).setFont(font);
+		repoFE.setToolTipText("Look for maven artifacts in the following repositories.\n");
+		addField(repoFE);
+		
 		HelpfulTextFieldEditor headerFE = new HelpfulTextFieldEditor(PreferenceConstants.P_BUNDLE_URI_LIST, 
 				"&Bundle URI List (one per line):\n", 
 				getFieldEditorParent());		
-		Font font = new Font(this.getShell().getDisplay(), "Courier", 8, SWT.NORMAL);;
 		headerFE.getTextControl(getFieldEditorParent()).setFont(font);
 		headerFE.setToolTipText("Add these bundles to your current Eclipse installation.\n");
 		addField(headerFE);

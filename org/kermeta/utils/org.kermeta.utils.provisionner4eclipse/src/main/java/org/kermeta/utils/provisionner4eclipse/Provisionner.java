@@ -23,6 +23,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 public class Provisionner {
+	protected List<String> repoToUse = new ArrayList<String>();
 	protected List<String> bundleToInstall = new ArrayList<String>();
 	protected List<Bundle> bundleToStart = new ArrayList<Bundle>();
 	
@@ -31,9 +32,11 @@ public class Provisionner {
 	 * @param monitor
 	 */
 	public void provisionFromPreferences(IProgressMonitor monitor){
+		String repoList = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_REPO_URL_LIST);
 		String bundleList = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BUNDLE_URI_LIST);
 		Boolean offline = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_MVN_AETHER_OFFLINE);
 		String[] bundleRawURIs = bundleList.split("\n");
+		String[] repoRawURIs = repoList.split("\n");
 		monitor.beginTask("Provisionning OSGI Bundles", bundleRawURIs.length*2 );
 		ArrayList<IStatus> statusChildren = new ArrayList<IStatus>();
 		boolean hasStartError = false;
@@ -43,6 +46,15 @@ public class Provisionner {
 				bundleToInstall.add(bundleURI);
 			}
 		}
+		for (int i = 0; i < repoRawURIs.length; i++) {
+			String repoUrl = bundleRawURIs[i].trim();
+			if(!repoUrl.startsWith("#") && !repoUrl.isEmpty()){
+				repoToUse.add(repoUrl);
+			}
+		}
+		
+		
+		
 		BundleContext context = Activator.getDefault().getBundle().getBundleContext();
 		
 		List<String> bundleLeftToInstall = new ArrayList<String>(bundleToInstall);
@@ -65,7 +77,7 @@ public class Provisionner {
 						if(bundleURI.startsWith("mvn:")){
 							AetherUtil aetherUtil = new AetherUtil();
 							aetherUtil.setOffline(offline);
-							File theFile = aetherUtil.resolveMavenArtifact(bundleURI, "http://maven.inria.fr/artifactory/repo");
+							File theFile = aetherUtil.resolveMavenArtifact4J(bundleURI, repoToUse);
 							if(theFile.exists()){
 								//result.add(theFile.getAbsolutePath());
 								resolvedURI = theFile.toURI().toString();

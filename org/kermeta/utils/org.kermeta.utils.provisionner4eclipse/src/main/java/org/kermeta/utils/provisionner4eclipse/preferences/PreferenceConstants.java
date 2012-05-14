@@ -14,7 +14,7 @@ package org.kermeta.utils.provisionner4eclipse.preferences;
  */
 public class PreferenceConstants {
 
-	
+	public static final String P_REPO_URL_LIST = "repoUrlListPreference";
 	public static final String P_BUNDLE_URI_LIST = "bundleURIListPreference";
 	public static final String P_MVN_AETHER_OFFLINE = "MVN_AETHER_OFFLINEPreference";
 	
