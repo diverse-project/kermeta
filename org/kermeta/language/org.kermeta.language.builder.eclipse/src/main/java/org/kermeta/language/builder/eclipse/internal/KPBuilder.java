@@ -10,6 +10,7 @@ package org.kermeta.language.builder.eclipse.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -131,7 +132,10 @@ public class KPBuilder {
 	}
 	
 	synchronized public void compile(boolean mustCheck, IProgressMonitor monitor){
-		try {		
+		try {
+
+			checkKPProjectName();
+			
 			ArrayList<String> additionalCalssPath = new ArrayList<String>();
 			compiler.setContributedProgressGroup(getProgressGroup());
 			Activator.getDefault().getMessaggingSystem().addProgressMonitor(getProgressGroup(),monitor);
@@ -309,6 +313,7 @@ public class KPBuilder {
 				ArrayList<URL> impactedFiles = new ArrayList<URL>();
 				impactedFiles.add(FileHelpers.StringToURL(kpFileURL));
 				KermetaBuilder.flushProblems(impactedFiles);
+				checkKPProjectName();
 
 				updateCompilerPreferences();	
 				
@@ -539,6 +544,34 @@ public class KPBuilder {
 			}
 		}
 		return "";
+	}
+	
+	public String getKPProjectName(){
+		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
+		if (ldr != null) {
+			KermetaProject kp = ldr.loadKp(kpFileURL);
+			if (kp != null) {
+				return kp.getName();
+			}
+		}
+		return "";
+	}
+	public void checkKPProjectName(){
+		try {
+			URL kpURL = FileHelpers.StringToURL(kpFileURL);
+			Activator.getDefault().getMessaggingSystem().flushProblem(KermetaBuilder.LOG_MESSAGE_GROUP+".eclipse", 
+					kpURL);
+			String name = getKPProjectName();
+		
+			if(!name.equals(kpProjectFile.getProject().getName())){
+					Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, 
+							"Project name in kp file ("+name+") must be equals to the eclipse project name ("+kpProjectFile.getName()+")", 
+							KermetaBuilder.LOG_MESSAGE_GROUP+".eclipse", 
+							new FileReference(kpURL));
+				
+			}
+		} catch (MalformedURLException e) {
+		}
 	}
 	
 	public String getProgressGroup(){
