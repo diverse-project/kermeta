@@ -99,7 +99,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public void setVarName(final String newVarName) {
+	public void setVarName(String newVarName) {
 		String oldVarName = varName;
 		varName = newVarName;
 		if (eNotificationRequired())
@@ -139,7 +139,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public void setType(final EClass newType) {
+	public void setType(EClass newType) {
 		EClass oldType = type;
 		type = newType;
 		if (eNotificationRequired())
@@ -152,7 +152,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				return getVarName();
@@ -169,7 +169,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				setVarName((String)newValue);
@@ -187,7 +187,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				setVarName(VAR_NAME_EDEFAULT);
@@ -205,7 +205,7 @@ public class VarDeclImpl extends EObjectImpl implements VarDecl {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.VAR_DECL__VAR_NAME:
 				return VAR_NAME_EDEFAULT == null ? varName != null : !VAR_NAME_EDEFAULT.equals(varName);

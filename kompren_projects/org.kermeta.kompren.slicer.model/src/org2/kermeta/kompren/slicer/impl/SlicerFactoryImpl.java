@@ -41,7 +41,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 */
 	public static SlicerFactory init() {
 		try {
-			SlicerFactory theSlicerFactory = (SlicerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.org.kermeta.kompren/org/kermeta/kompren/slicer");
+			SlicerFactory theSlicerFactory = (SlicerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.org.kermeta.kompren/org/kermeta/kompren/slicer"); 
 			if (theSlicerFactory != null) {
 				return theSlicerFactory;
 			}
@@ -68,7 +68,7 @@ public class SlicerFactoryImpl extends EFactoryImpl implements SlicerFactory {
 	 * @generated
 	 */
 	@Override
-	public EObject create(final EClass eClass) {
+	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SlicerPackage.SLICER: return createSlicer();
 			case SlicerPackage.CONSTRAINT: return createConstraint();

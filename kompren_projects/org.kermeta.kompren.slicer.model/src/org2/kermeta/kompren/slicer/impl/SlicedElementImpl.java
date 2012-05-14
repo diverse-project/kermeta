@@ -109,7 +109,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public void setIsOption(final boolean newIsOption) {
+	public void setIsOption(boolean newIsOption) {
 		boolean oldIsOption = isOption;
 		isOption = newIsOption;
 		if (eNotificationRequired())
@@ -132,7 +132,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public void setExpression(final String newExpression) {
+	public void setExpression(String newExpression) {
 		String oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
@@ -146,7 +146,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				return isIsOption();
@@ -162,7 +162,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				setIsOption((Boolean)newValue);
@@ -180,7 +180,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				setIsOption(IS_OPTION_EDEFAULT);
@@ -198,7 +198,7 @@ public abstract class SlicedElementImpl extends EObjectImpl implements SlicedEle
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_ELEMENT__IS_OPTION:
 				return isOption != IS_OPTION_EDEFAULT;

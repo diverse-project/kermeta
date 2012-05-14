@@ -108,7 +108,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public void setExpression(final String newExpression) {
+	public void setExpression(String newExpression) {
 		String oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
@@ -131,7 +131,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public void setName(final String newName) {
+	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -144,7 +144,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				return getExpression();
@@ -160,7 +160,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				setExpression((String)newValue);
@@ -178,7 +178,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
@@ -196,7 +196,7 @@ public class ConstraintImpl extends EObjectImpl implements Constraint {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.CONSTRAINT__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);

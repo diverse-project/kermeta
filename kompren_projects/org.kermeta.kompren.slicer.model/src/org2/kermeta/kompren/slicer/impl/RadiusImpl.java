@@ -100,7 +100,7 @@ public class RadiusImpl extends EObjectImpl implements Radius {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.RADIUS__FOCUSED_CLASSES:
 				return getFocusedClasses();
@@ -115,7 +115,7 @@ public class RadiusImpl extends EObjectImpl implements Radius {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.RADIUS__FOCUSED_CLASSES:
 				getFocusedClasses().clear();
@@ -131,7 +131,7 @@ public class RadiusImpl extends EObjectImpl implements Radius {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.RADIUS__FOCUSED_CLASSES:
 				getFocusedClasses().clear();
@@ -146,7 +146,7 @@ public class RadiusImpl extends EObjectImpl implements Radius {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.RADIUS__FOCUSED_CLASSES:
 				return focusedClasses != null && !focusedClasses.isEmpty();

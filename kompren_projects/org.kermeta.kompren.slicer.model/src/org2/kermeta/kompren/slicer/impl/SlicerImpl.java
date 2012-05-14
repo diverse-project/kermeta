@@ -271,7 +271,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setName(final String newName) {
+	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -294,7 +294,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setUriMetamodel(final String newUriMetamodel) {
+	public void setUriMetamodel(String newUriMetamodel) {
 		String oldUriMetamodel = uriMetamodel;
 		uriMetamodel = newUriMetamodel;
 		if (eNotificationRequired())
@@ -317,7 +317,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setActive(final boolean newActive) {
+	public void setActive(boolean newActive) {
 		boolean oldActive = active;
 		active = newActive;
 		if (eNotificationRequired())
@@ -340,7 +340,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setStrict(final boolean newStrict) {
+	public void setStrict(boolean newStrict) {
 		boolean oldStrict = strict;
 		strict = newStrict;
 		if (eNotificationRequired())
@@ -363,7 +363,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setHelper(final String newHelper) {
+	public void setHelper(String newHelper) {
 		String oldHelper = helper;
 		helper = newHelper;
 		if (eNotificationRequired())
@@ -386,7 +386,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setOnStart(final String newOnStart) {
+	public void setOnStart(String newOnStart) {
 		String oldOnStart = onStart;
 		onStart = newOnStart;
 		if (eNotificationRequired())
@@ -409,7 +409,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setOnEnd(final String newOnEnd) {
+	public void setOnEnd(String newOnEnd) {
 		String oldOnEnd = onEnd;
 		onEnd = newOnEnd;
 		if (eNotificationRequired())
@@ -444,7 +444,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRadius(final Radius newRadius, NotificationChain msgs) {
+	public NotificationChain basicSetRadius(Radius newRadius, NotificationChain msgs) {
 		Radius oldRadius = radius;
 		radius = newRadius;
 		if (eNotificationRequired()) {
@@ -460,7 +460,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void setRadius(final Radius newRadius) {
+	public void setRadius(Radius newRadius) {
 		if (newRadius != radius) {
 			NotificationChain msgs = null;
 			if (radius != null)
@@ -506,7 +506,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(final InternalEObject otherEnd, final int featureID, final NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
@@ -524,7 +524,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				return getName();
@@ -559,7 +559,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				setName((String)newValue);
@@ -607,7 +607,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				setName(NAME_EDEFAULT);
@@ -652,7 +652,7 @@ public class SlicerImpl extends EObjectImpl implements Slicer {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);

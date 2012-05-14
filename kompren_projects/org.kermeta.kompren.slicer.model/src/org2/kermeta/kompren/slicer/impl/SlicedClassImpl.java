@@ -101,7 +101,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCtx(final VarDecl newCtx, NotificationChain msgs) {
+	public NotificationChain basicSetCtx(VarDecl newCtx, NotificationChain msgs) {
 		VarDecl oldCtx = ctx;
 		ctx = newCtx;
 		if (eNotificationRequired()) {
@@ -117,7 +117,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public void setCtx(final VarDecl newCtx) {
+	public void setCtx(VarDecl newCtx) {
 		if (newCtx != ctx) {
 			NotificationChain msgs = null;
 			if (ctx != null)
@@ -163,7 +163,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public void setDomain(final EClass newDomain) {
+	public void setDomain(EClass newDomain) {
 		EClass oldDomain = domain;
 		domain = newDomain;
 		if (eNotificationRequired())
@@ -176,7 +176,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(final InternalEObject otherEnd, final int featureID, final NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				return basicSetCtx(null, msgs);
@@ -190,7 +190,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				return getCtx();
@@ -207,7 +207,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				setCtx((VarDecl)newValue);
@@ -225,7 +225,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				setCtx((VarDecl)null);
@@ -243,7 +243,7 @@ public class SlicedClassImpl extends SlicedElementImpl implements SlicedClass {
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.SLICED_CLASS__CTX:
 				return ctx != null;

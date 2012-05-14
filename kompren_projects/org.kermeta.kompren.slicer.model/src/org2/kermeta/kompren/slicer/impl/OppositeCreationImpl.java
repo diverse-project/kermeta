@@ -87,7 +87,7 @@ public class OppositeCreationImpl extends EObjectImpl implements OppositeCreatio
 	 * @generated
 	 */
 	@Override
-	public void setName(final String newName) {
+	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -100,7 +100,7 @@ public class OppositeCreationImpl extends EObjectImpl implements OppositeCreatio
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SlicerPackage.OPPOSITE_CREATION__NAME:
 				return getName();
@@ -114,7 +114,7 @@ public class OppositeCreationImpl extends EObjectImpl implements OppositeCreatio
 	 * @generated
 	 */
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SlicerPackage.OPPOSITE_CREATION__NAME:
 				setName((String)newValue);
@@ -129,7 +129,7 @@ public class OppositeCreationImpl extends EObjectImpl implements OppositeCreatio
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.OPPOSITE_CREATION__NAME:
 				setName(NAME_EDEFAULT);
@@ -144,7 +144,7 @@ public class OppositeCreationImpl extends EObjectImpl implements OppositeCreatio
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SlicerPackage.OPPOSITE_CREATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
