@@ -142,6 +142,7 @@
 						<Bundle-Localization>plugin</Bundle-Localization>
 		            	<Bundle-ClassPath>.</Bundle-ClassPath>
 		            	<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+		            	<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-Activator>org.kermeta.language.gendoc.km2html.ui.Activator</Bundle-Activator>						
 						
 		            	

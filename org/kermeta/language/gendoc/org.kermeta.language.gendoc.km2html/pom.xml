@@ -94,6 +94,7 @@
 		            	<Bundle-Name>${project.name}</Bundle-Name>
 		            	<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
 		            	<Bundle-ClassPath>.</Bundle-ClassPath>
                         
                         <!-- Dependency used for compiling all the bundle (with dependency to org.eclipse.core.* -->
