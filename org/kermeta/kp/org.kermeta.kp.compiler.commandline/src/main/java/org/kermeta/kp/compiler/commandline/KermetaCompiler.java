@@ -851,7 +851,12 @@ public class KermetaCompiler {
 		}
 
 		if (resolvedMU.getResult() != null) {
-			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Setting.km", logger).convert(resolvedMU.getResult());
+			if(saveIntermediateFiles){
+				// save only if required
+				new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Setting.km", logger).convert(resolvedMU.getResult());
+			}
+			// actually the setter relies on some data created by the resolver, so directly send the result to it (no optimisation is possible there)
+			convertedModelingUnit = resolvedMU.getResult();
 
 			// StaticSetting
 			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
