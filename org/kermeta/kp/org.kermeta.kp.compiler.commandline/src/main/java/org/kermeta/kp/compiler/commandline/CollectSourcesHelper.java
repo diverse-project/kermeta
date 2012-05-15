@@ -46,7 +46,7 @@ public class CollectSourcesHelper {
 			
 			try {
 				java.net.URI fileUri;
-				//boolean isLibraryCore = sourceUrl.getUrl().toString().endsWith("language.library.core.km");
+				boolean isLibraryCoreObject = sourceUrl.getUrl().toString().endsWith("baseType.kmt") && sourceUrl.getUrl().toString().contains("language.library.core");
 				
 				boolean isDependency = sourceUrl.getSource() instanceof Dependency;
 				if(sourceUrl.getUrl().getProtocol().equals("jar")){
@@ -60,13 +60,13 @@ public class CollectSourcesHelper {
 				
 				File file = new java.io.File(fileUri);
 				if(newerDate < file.lastModified()){
-					if(!isDependency){
+					if(!(isDependency || isLibraryCoreObject)){
 						logger.debug("changed to newer file = "+fileUri.toString(), getMessageGroup());
 						newerDate =  file.lastModified();
 						result = sourceUrl;
 					}
 					else{
-						logger.debug("ignoring dependency from latest modified= "+fileUri.toString(), getMessageGroup());
+						logger.debug("ignoring url that might contains Object from latest modified= "+fileUri.toString(), getMessageGroup());
 					}
 				} 
 				
