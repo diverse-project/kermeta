@@ -362,7 +362,39 @@
 				<groupId>*</groupId><artifactId>*</artifactId>
 			</exclusion></exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.prettyprinter</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.prettyprinter.ui</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
 		
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.gendoc.km2html</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.gendoc.km2html.ui</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.autocompletion</artifactId>

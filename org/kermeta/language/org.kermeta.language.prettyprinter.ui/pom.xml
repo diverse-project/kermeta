@@ -141,7 +141,8 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 		            	<Bundle-ClassPath>.</Bundle-ClassPath>
-		            	<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+		            	<Bundle-ManifestVersion>2</Bundle-ManifestVersion>		            	
+						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Bundle-Activator>org.kermeta.language.prettyprinter.ui.Activator</Bundle-Activator>						
 						
 		            	
@@ -179,6 +180,7 @@
 			    <configuration>
 			      <downloadSources>true</downloadSources>
 			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
 			      <projectnatures>
 			        <projectnature>org.eclipse.pde.PluginNature</projectnature>
 			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>

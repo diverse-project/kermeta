@@ -252,6 +252,18 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+	<plugin
+         id="org.kermeta.language.prettyprinter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+	<plugin
+         id="org.kermeta.language.prettyprinter.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.kermeta.language.resolver"

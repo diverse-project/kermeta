@@ -95,7 +95,7 @@
 		            	<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 		            	<Bundle-ClassPath>.</Bundle-ClassPath>
-                        
+						<Bundle-Version>${bundle.version}</Bundle-Version>
                         <!-- Dependency used for compiling all the bundle (with dependency to org.eclipse.core.* -->
                     	<Require-Bundle>
 		            	</Require-Bundle>
@@ -138,6 +138,7 @@
 			    <configuration>
 			      <downloadSources>true</downloadSources>
 			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
 			      <projectnatures>
 			        <projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature>
 			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
