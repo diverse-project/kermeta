@@ -29,7 +29,15 @@
     	<eclipse.repository.version>indigo</eclipse.repository.version>
 	</properties>
 	<build>
-		
+		<resources>
+			<resource>
+				<directory>src/filtered-resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/resources</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
@@ -90,7 +98,7 @@
 		        	<!--  use dependencies as input for plugins -->
 		        	<execution>
 		            	<id>copy-dependencies</id>
-		            	<phase>process-sources</phase>
+		            	<phase>generate-sources</phase>
 		            	<goals>
 		              		<goal>copy-dependencies</goal>
 		            	</goals>
@@ -107,7 +115,6 @@
 		              		<goal>copy</goal>
 		            	</goals>
 			            <configuration>
-			              <stripVersion>true</stripVersion>
 			              <artifactItems>
 			              	<artifactItem>
 			                  <groupId>org.kermeta.language</groupId>
@@ -133,6 +140,46 @@
 			    	</execution>
 		        </executions>
 			</plugin>
+			<!-- calculate the bundle version from the project version : replace -SNAPSHOT 
+				by .SNAPSHOT_${timestamp} -->
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>generate_feature_jar_version</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<source>								
+								//String bundleVersion = "${project.version}"
+								// workaround jenkins bug https://issues.jenkins-ci.org/browse/JENKINS-9693?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel
+								//String timestamp = "${maven.build.timestamp}".replaceAll("-","_") 
+								//bundleVersion = bundleVersion.replaceAll("-SNAPSHOT", "-SNAPSHOT_"+timestamp)
+								//bundleVersion = bundleVersion.replaceAll("-",".")
+								//project.properties.setProperty('bundle.version',bundleVersion)
+								
+								def dirString=/${project.build.directory}/								
+								dirString= dirString.replaceAll("\\\\","/")+"/features_and_bundles/features"
+								println "look into "+dirString + " for defining properties from jar names"
+								def dir = new File(dirString)
+								dir.eachFile { 
+								    if (it.isFile()) {
+								        String jarPropName = it.getName().substring(0,it.getName().indexOf(".feature-")) + ".feature.jar"
+	        							String propValue  = it.getName()
+	        							println "\${"+jarPropName + "} = " +propValue
+	        							project.properties.setProperty(jarPropName,propValue)
+								    }
+								}
+								
+							</source>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>	
 		</plugins>
 		<pluginManagement>
 			<plugins>

@@ -78,7 +78,7 @@
 	</target>
 	<target name="get_site_template">
 		<copy todir="${updatesite.repository}">
-			<fileset dir="${env.WORKSPACE}/src/resources" includes="**" >
+			<fileset dir="${env.WORKSPACE}/target/classes" includes="**" >
 				<!--<exclude name="readme.txt"/>
 				<exclude name="*_build.xml"/>-->
 			</fileset>	
