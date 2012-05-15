@@ -173,6 +173,11 @@
 	        							String propValue  = it.getName()
 	        							println "\${"+jarPropName + "} = " +propValue
 	        							project.properties.setProperty(jarPropName,propValue)
+	        							
+								        String versionPropName = it.getName().substring(0,it.getName().indexOf(".feature_")) + ".feature.version"
+								        String versionValue  = it.getName().substring(it.getName().indexOf(".feature_")+9,it.getName().indexOf(".jar"))
+	        							println "\${"+versionPropName + "} = " +versionValue
+	        							project.properties.setProperty(versionPropName,versionValue)
 								    }
 								}
 							</source>
