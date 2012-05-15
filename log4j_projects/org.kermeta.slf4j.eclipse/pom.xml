@@ -134,9 +134,7 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-SymbolicName>org.kermeta.slf4j.eclipse; singleton:=true</Bundle-SymbolicName>
                         <Bundle-Activator>org.kermeta.slf4j.eclipse.Activator</Bundle-Activator>                    	                                               
-                        <!-- add extra element in the manifest, copy them from this file
-                             ex: Bundle-ActivationPolicy: lazy -->
-                        <!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
+                        <Bundle-Version>${bundle.version}</Bundle-Version>
                     </instructions>
                 </configuration>
             </plugin>
