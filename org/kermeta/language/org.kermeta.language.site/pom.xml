@@ -45,19 +45,28 @@
 		        <version>1.3</version>
 		        <executions>
 					<execution>
-						<id>gen-site</id>
-						<phase>compile</phase>
-						
+						<id>gen-site-publish-feature-and-bundles</id>
+						<phase>process-sources</phase>
 						<configuration>
 							<tasks>
-								<ant antfile="build.xml" target="all" /> 
-							</tasks>
+								<ant antfile="build.xml" target="publish_jars" /> 
+							</tasks>							
 						</configuration>
-						<!-- <sourceRoot>${project.build.directory}/gen-src</sourceRoot>-->
 						<goals>
 							<goal>run</goal>
 						</goals>
-	            		
+		          	</execution>
+		          	<execution>
+						<id>gen-site-deploy</id>
+						<phase>compile</phase>
+						<configuration>
+							<tasks>
+								<ant antfile="build.xml" target="deploy" /> 
+							</tasks>							
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
 		          	</execution>
 		          </executions>
 		          <dependencies>
@@ -110,7 +119,7 @@
 		          	<!-- manually copy features -->
 		          	<execution>
 		            	<id>copy</id>
-		            	<phase>process-sources</phase>
+		            	<phase>generate-sources</phase>
 		            	<goals>
 		              		<goal>copy</goal>
 		            	</goals>
@@ -154,26 +163,18 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<source>								
-								//String bundleVersion = "${project.version}"
-								// workaround jenkins bug https://issues.jenkins-ci.org/browse/JENKINS-9693?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel
-								//String timestamp = "${maven.build.timestamp}".replaceAll("-","_") 
-								//bundleVersion = bundleVersion.replaceAll("-SNAPSHOT", "-SNAPSHOT_"+timestamp)
-								//bundleVersion = bundleVersion.replaceAll("-",".")
-								//project.properties.setProperty('bundle.version',bundleVersion)
-								
-								String dirString= "target/features_and_bundles/features"
+							<source>
+								String dirString= "target/updatesite/features"
 								println "look into "+dirString + " for defining properties from jar names"
 								def dir = new File(dirString)
 								dir.eachFile { 
 								    if (it.isFile()) {
-								        String jarPropName = it.getName().substring(0,it.getName().indexOf(".feature-")) + ".feature.jar"
+								        String jarPropName = it.getName().substring(0,it.getName().indexOf(".feature_")) + ".feature.jar"
 	        							String propValue  = it.getName()
 	        							println "\${"+jarPropName + "} = " +propValue
 	        							project.properties.setProperty(jarPropName,propValue)
 								    }
 								}
-								
 							</source>
 						</configuration>
 					</execution>

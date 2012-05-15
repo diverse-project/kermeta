@@ -25,13 +25,17 @@
 
 	
 	
-	<target name="all" depends="clean_result, deploy">
-		<echo>all </echo>
-	</target>
 	
-	<target name="deploy" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
+	
+
+	<target name="publish_jars" depends="clean_result, get_studio_base, publish_features_and_bundles">
+	</target>
+		
+	<target name="deploy" depends=" publish_categories, get_site_template">
 		<antcall target="upload" />
 	</target>
+	
+	
 	
 	<target name="clean_result">
 			<delete dir="${updatesite.repository}" failonerror="false"/>
