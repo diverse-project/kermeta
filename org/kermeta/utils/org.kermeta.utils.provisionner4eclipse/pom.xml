@@ -47,7 +47,8 @@
                     <instructions>  
                     	<Bundle-SymbolicName>org.kermeta.utils.provisionner4eclipse;singleton:=true</Bundle-SymbolicName> 
                     	<Bundle-Activator>org.kermeta.utils.provisionner4eclipse.Activator</Bundle-Activator>                    	                       
-                        <Export-Package>org.kermeta.utils.provisionner4eclipse.*</Export-Package>        
+                        <Export-Package>org.kermeta.utils.provisionner4eclipse.*</Export-Package>   
+                        <Bundle-Version>${bundle.version}</Bundle-Version>    
                     	<Bundle-ClassPath>.</Bundle-ClassPath>
                     	<!-- Use Require-Bundle dependencies only for bundles for we don't have control and that may introduce splitted package issue ex: org.eclipse.core.runtime -->
                         <Require-Bundle>
