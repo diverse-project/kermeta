@@ -107,6 +107,7 @@
 		              		<goal>copy</goal>
 		            	</goals>
 			            <configuration>
+			              <stripVersion>true</stripVersion>
 			              <artifactItems>
 			              	<artifactItem>
 			                  <groupId>org.kermeta.language</groupId>
@@ -228,7 +229,8 @@
 					<artifactId>*</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
 			<groupId>org.kermeta.kp</groupId>
 			<artifactId>kp.editor.ui</artifactId>
 			<version>${kermeta.version}</version>
