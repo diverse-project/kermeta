@@ -162,8 +162,7 @@
 								//bundleVersion = bundleVersion.replaceAll("-",".")
 								//project.properties.setProperty('bundle.version',bundleVersion)
 								
-								String dirString="${project.build.directory}"								
-								dirString= dirString.replaceAll("\\\\","/")+"/features_and_bundles/features"
+								String dirString= "target/features_and_bundles/features"
 								println "look into "+dirString + " for defining properties from jar names"
 								def dir = new File(dirString)
 								dir.eachFile { 

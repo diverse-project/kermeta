@@ -6,7 +6,7 @@
 	<property name="env.WORKSPACE" location="."/>
 	
 	<property name="updatesite.repository" location="${env.WORKSPACE}/target/updatesite"/>
-	<property name="category.definition" location="./src/resources/site.xml"/>
+	<property name="category.definition" location="./target/classes/site.xml"/>
 	<property name="source.features.and.bundles" location="${env.WORKSPACE}/target/features_and_bundles"/>	
 	<property name="source.features" location="${source.features.and.bundles}/features"/>
 	<property name="source.bundles" location="${source.features.and.bundles}/plugins"/>
