@@ -62,7 +62,7 @@
 	</target>
 	
 	
-	<target name="publish_categories" depends="publish_features_and_bundles">
+	<target name="publish_categories" depends="">
 			<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 					           fork="true"
 					           failonerror="true"
