@@ -1,5 +1,5 @@
 slicer EcoreSemZoom{
-	domain: "./Ecore.ecore"
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoom/Ecore.ecore"
 	input: ecore.EClassifier
 	radius: ecore.EClass
 	slicedClass: ecore.EAttribute
