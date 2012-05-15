@@ -19,7 +19,10 @@
         <artifactId>utils.root</artifactId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
-    
+    <properties>
+    	<maven.build.timestamp.format>yyyyMMdd_HHmm</maven.build.timestamp.format>
+    	<buildNumber>${maven.build.timestamp}</buildNumber>
+    </properties>
     <build>
     	<!-- Add resources from the plugin structure -->
         <resources>
