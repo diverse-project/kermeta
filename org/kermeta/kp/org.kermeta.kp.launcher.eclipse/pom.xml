@@ -112,7 +112,8 @@
 						<Manifest-Version>1.0</Manifest-Version>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
-						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>						
+						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-Version>${bundle.version}</Bundle-Version>						
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Require-Bundle>
 							org.eclipse.core.runtime,

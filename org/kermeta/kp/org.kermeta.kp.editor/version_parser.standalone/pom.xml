@@ -94,6 +94,7 @@
             <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+            <Bundle-Version>${bundle.version}</Bundle-Version>
             <Bundle-ClassPath>.</Bundle-ClassPath>
              <!-- Dependency used for compiling all the bundle (with dependecy to org.eclipse.core.* -->
             <!-- 
