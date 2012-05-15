@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.language.feature"
       label="Kermeta 2 Studio"
-      version="2.0.1.SNAPSHOT"
+      version="${bundle.version}"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
@@ -337,6 +337,13 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
          version="0.0.0"
          unpack="false"/>
 
+	<plugin
+         id="org.kermeta.utils.aether"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
    <plugin
          id="org.kermeta.utils.helpers"
          download-size="0"
