@@ -50,6 +50,7 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
 						<Export-Package>
 							org.kermeta.emf.genmodel.*
 						</Export-Package>

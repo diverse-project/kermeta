@@ -75,6 +75,7 @@
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Bundle-Version>${bundle.version}</Bundle-Version>
                         <Export-Package>
                         	org,
                         	org.kermeta,
