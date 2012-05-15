@@ -115,6 +115,7 @@
                         <Bundle-Activator>org.kermeta.kp.wizard.eclipse.Activator</Bundle-Activator>
                         <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                        <Bundle-Version>${bundle.version}</Bundle-Version>
                         <Export-Package>
                         	org.kermeta.kp.wizard.eclipse.*
                         </Export-Package>
