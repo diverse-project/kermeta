@@ -53,6 +53,7 @@
 				<version>1.0</version>
 				<executions>
 					<execution>
+						<id>generate_bundle_version</id>
 						<phase>initialize</phase>
 						<goals>
 							<goal>execute</goal>
