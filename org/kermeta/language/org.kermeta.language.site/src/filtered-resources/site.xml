@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.kermeta.${language.feature.jar}" id="org.kermeta.language.feature" version="2.0.1.SNAPSHOT">
+   <feature url="features/${org.kermeta.language.feature.jar}" id="org.kermeta.language.feature" version="2.0.1.SNAPSHOT">
       <category name="Kermeta2Language"/>
    </feature>
-   <feature url="features/org.kermeta.${utils.feature.jar}" id="org.kermeta.utils.feature" version="2.0.1.SNAPSHOT">
+   <feature url="features/${org.kermeta.utils.feature.jar}" id="org.kermeta.utils.feature" version="2.0.1.SNAPSHOT">
       <category name="Kermeta2Tools"/>
    </feature>
-   <feature url="features/org.kermeta.${language.dev.feature.jar}" id="org.kermeta.language.dev.feature" version="2.0.1.SNAPSHOT">
+   <feature url="features/${org.kermeta.language.dev.feature.jar}" id="org.kermeta.language.dev.feature" version="2.0.1.SNAPSHOT">
       <category name="Kermeta2Tools"/>
    </feature>
    <category-def name="Kermeta2Language" label="Kermeta 2 language">
