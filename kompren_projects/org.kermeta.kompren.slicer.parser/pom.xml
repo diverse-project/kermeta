@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.kermeta.kompren</groupId>
         <artifactId>kompren.root</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -21,7 +21,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
+				<version>2.4</version>
                 <configuration>
                     <archive>
                         <manifestEntries>
