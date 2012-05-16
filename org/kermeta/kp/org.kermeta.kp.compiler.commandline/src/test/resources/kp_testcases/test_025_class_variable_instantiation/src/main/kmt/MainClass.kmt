@@ -1,0 +1,26 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using org::kermeta::language::structure::{Class}
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			var myInstance : MyClass := MyClass.new
+			myInstance.getMetaclass
+			
+			var c:Class := myInstance.getMetaclass
+			stdio.writeln(MyClass.new.isDirectInstanceOf(MyClass).toString + "should be true")
+			stdio.writeln(c.new.isDirectInstanceOf(Object).toString + "should be true")
+			stdio.writeln(c.new.isDirectInstanceOf(MyClass).toString + "should be false")
+			
+			myInstance ?= c.new
+			myInstance := (c.new).asType(MyClass)
+			
+			c := MyClass
+			myInstance ?= c.new 
+		end
+	}
+	
+	class MyClass {}
+}
