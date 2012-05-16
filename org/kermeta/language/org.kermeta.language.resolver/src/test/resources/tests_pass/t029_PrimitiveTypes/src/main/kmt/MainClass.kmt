@@ -6,7 +6,7 @@ package mainPackage{
 	
 	alias MyB : B
 	
-	alias MyC : MyA
+	alias MyC : C
 	
 	
 	
@@ -31,9 +31,9 @@ package mainPackage{
 	{
 		operation mainOperation() : Void is do 
 		
-		var aA : MyA// init MyA.new
+		var aA : MyA init MyA.new
 		aA.isInstanceOf(MyA)
-		//aA//.foo//.bar.foobar.foobar
+		aA.foo.bar.foobar.foobar
 			// TODO: implement 'mainOperation' operation
 			stdio.writeln("Hello from mainOperation")
 		end
