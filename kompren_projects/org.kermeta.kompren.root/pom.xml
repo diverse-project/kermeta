@@ -9,7 +9,7 @@
 	<groupId>org.kermeta.kompren</groupId>
 	<artifactId>kompren.root</artifactId>
 	<packaging>pom</packaging>
-	<version>2.0.0</version>
+	<version>2.0.1-SNAPSHOT</version>
 	<name>kompren.root :: Root for the projects dedicated to Kompren</name>
 
 	<properties>
