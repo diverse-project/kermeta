@@ -4,7 +4,7 @@ package org{
 			package structure{
 				aspect class Class inherits ParameterizedType{
 					@CompilerIgnore "true"
-					operation new() : org::kermeta::language::structure::Class is do
+					operation new() : kermeta::standard::Object is do
 					end
 				} 
 			}
