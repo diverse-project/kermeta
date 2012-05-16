@@ -145,8 +145,11 @@
 						</Export-Package>
 						<Require-Bundle>
 							org.kermeta.scala.scala-library,
-							org.kermeta.scala.scala-compiler
+							org.kermeta.scala.scala-compiler,
+							org.kermeta.language.library.core
 						</Require-Bundle>
+						<!-- due to the workaround of reflexivity.loader used by gendoc and pretty printer, library.core classes are exported by several componet
+						we need to use Require-Bundle instead of Import-Package for the packages of the framework -->
 						<Import-Package>
 							!org.apache.maven.*,
 							!org.codehaus.plexus.*,
@@ -155,10 +158,6 @@
 							org.kermeta.language,
 							org.kermeta.language.structure.*,
 							org.kermeta.language.behavior.*,
-							k2.io,
-							k2.standard,
-							k2.persistence,
-							k2.exceptions,
 							k2.utils,
 							org.eclipse.emf.*,
 							org.slf4j;version="[0,2)",

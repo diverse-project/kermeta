@@ -73,10 +73,7 @@
                         	org.k2.console
                         </Export-Package>
                         <Import-Package>
-							k2.exceptions,
-							k2.persistence,
-							k2.standard,
-							k2.utils,org.eclipse.emf.common.notify,
+							org.eclipse.emf.common.notify,
 							org.eclipse.emf.common.util,
 							org.eclipse.emf.ecore,
 							org.eclipse.emf.ecore.impl,
