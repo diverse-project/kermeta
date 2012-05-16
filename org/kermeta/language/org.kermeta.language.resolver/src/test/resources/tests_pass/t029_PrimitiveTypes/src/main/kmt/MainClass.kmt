@@ -1,0 +1,41 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	alias MyA : A
+	
+	alias MyB : B
+	
+	alias MyC : MyA
+	
+	
+	
+	class A{
+	
+	operation foo() : MyB is result:=void
+	
+	
+	}
+	
+	class B {
+	
+	operation bar() : MyC is do result:=void end	
+	}
+	
+	
+	class C {
+	operation foobar() : MyC is result:=void
+	}
+	
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+		
+		var aA : MyA// init MyA.new
+		aA.isInstanceOf(MyA)
+		//aA//.foo//.bar.foobar.foobar
+			// TODO: implement 'mainOperation' operation
+			stdio.writeln("Hello from mainOperation")
+		end
+	}
+}
