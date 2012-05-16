@@ -326,18 +326,15 @@ package behavior {
 		
 		
 		operation resolveCallToEnumLiteral(context : StaticSetterContext) : CallEnumLiteral is do
-			stdio.writeln("1")
+			
 			if not target.isVoid and target.isInstanceOf(CallTypeLiteral) then
-			stdio.writeln("2")
 				var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
 				// maybe the typeLiteral is an enumeration and we are looking for the EnumerationLiteral
 				stdio.writeln(callTypeLiteral.typeref.type.toString)
 				if callTypeLiteral.typeref.type.isVoid.~not.andThen{x| callTypeLiteral.typeref.type.realInstanceType.isVoid.~not.andThen{y|callTypeLiteral.typeref.type.realInstanceType.isInstanceOf(Enumeration)}} then
-				stdio.writeln("3")
 					if (context.verbose) then stdio.writeln("target is an Enumeration") end
 					var enumLiteral : EnumerationLiteral init callTypeLiteral.typeref.type.getCallableEnumLiteralByName(self.name)
 					if not enumLiteral.isVoid then
-					stdio.writeln("4")
 						if (context.verbose) then stdio.writeln(" found EnumerationLiteral "+enumLiteral.name) end
 						var callEnumLiteral :  CallEnumLiteral init  CallEnumLiteral.new
 						callEnumLiteral.staticEnumLiteral := enumLiteral
@@ -359,11 +356,10 @@ package behavior {
 		
 		operation resolveCallToOperation(context : StaticSetterContext) : CallOperation is do
 			stdio.writeln("resolveCallToOperation "+ self.name)
-			if (target.isVoid).andThen{z|stdio.writeln("target.isVoid is true") true }.orElse{x|target.staticType.isVoid.andThen{z|stdio.writeln("target.staticType.isVoid is true") true }.orElse{y|target.staticType.realInstanceType.isVoid.andThen{z|stdio.writeln("target.staticType.realInstanceType.isVoid is true") true }}} then 
+			if (target.isVoid).orElse{x|target.staticType.isVoid.orElse{y|target.staticType.realInstanceType.isVoid}} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" )
 					result:=void 
 			else
-				stdio.writeln("target.staticType.realInstanceType "+target.staticType.realInstanceType.toString)
 				if context.verbose then
 					stdio.writeln((target.isVoid).orElse{x|target.staticType.isVoid}.toString())
 					stdio.writeln(target.toString)
@@ -396,8 +392,7 @@ package behavior {
 				//if we finally found at least one operation
 				if not ops.isEmpty then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
-					stdio.writeln("operation found")
-					
+										
 					
 					//check if there is only one
 					var op : Operation
@@ -474,8 +469,7 @@ package behavior {
 						result:=void
 					end
 				else
-				 	stdio.writeln("operation not found")
-					result:=void
+				 	result:=void
 				end
 			end
 		end

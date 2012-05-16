@@ -79,13 +79,6 @@ method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from Ke
 		currentlyBeingResolved:=true
 		
 		referredType:=instanceType.solvePrimitiveTypes(context)
-		if not referredType.isVoid then
-			stdio.writeln(name)
-			stdio.writeln(referredType.toString)
-			stdio.writeln("resolvePrimitiveType "+name+" with "+referredType.toString)
-		else
-			stdio.writeln("resolvePrimitiveType "+name+" with void")
-		end
 		currentlyBeingResolved:=false
 	end
 end
