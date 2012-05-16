@@ -64,8 +64,7 @@
 
   <preface id="preface.link">
     <title id="preface.title.link">Preface<phrase
-    id="preface"></phrase></title>
-	<warning><title>Text not verified for kermeta 2</title></warning>
+    id="preface"></phrase></title>	
     <para>Kermeta is workbench and an action language dedicated to metamodel
     engineering.
     </para>
@@ -98,7 +97,7 @@
         role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
 
-       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.4.1 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr)  
     </para></important>
 
     <tip><para>
@@ -106,6 +105,30 @@
       <ulink type=""
       url="http://www.kermeta.org/">http://www.kermeta.org</ulink>  . 
     </para></tip>
+    <simplesect><title>New or changed in Kermeta 2</title>
+    	<para>Kermeta has undergone a major refactorings between its version 1.x and 2.x. They apply both to the internal tooling and also on the language itself. 
+    	In order to help identify the major changes between these versions, you can look for notes like the following :</para>
+    	<note><title><inlinemediaobject><imageobject>
+		            <imagedata fileref="gfx/fire.png" contentdepth="2em"/>
+		          </imageobject></inlinemediaobject>New in Kermeta 2</title><para></para></note>
+		<para>
+			<itemizedlist>
+	            <listitem>
+	              <para><xref linkend="section_singleton_class.link" />,</para>
+	            </listitem>
+          	</itemizedlist>
+        </para>
+    	<note><title><inlinemediaobject><imageobject>
+		            <imagedata fileref="gfx/fire.png" contentdepth="2em"/>
+		          </imageobject></inlinemediaobject>Changed in Kermeta 2</title><para></para></note>
+		<para>
+			<itemizedlist>
+	            <listitem>
+	              <para><xref linkend="section_using.link" />,</para>
+	            </listitem>
+          	</itemizedlist>
+        </para>
+    </simplesect>
   </preface>
 
   <chapter id="chapter_introduction.link">
@@ -2651,7 +2674,8 @@ var e : NotImplementedException init NotImplementedException.new
 		</example>
 		<note><para>For support of retro compatibilty with kermeta 1, the 2 following syntaxes have the same effect. However the second one raises a deprecation warning inviting you to use the first syntax.</para>
 		<programlisting language="kermeta">using kermeta::standard::*	// direct access to all definition of Package
-using kermeta::standard		// retro compatibility supported, exactly the same as above   (should raise a deprecation warning)</programlisting>
+using kermeta::standard		// retro compatibility supported, exactly the same as above   
+                            // (should raise a deprecation warning)</programlisting>
 </note>
 		
 		<example><title>shorthand giving access to a single definition with renaming</title>
