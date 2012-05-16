@@ -1,13 +1,6 @@
 package org::kermeta::language::structure;
 require kermeta
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
-require "ResolverContext_Aspect.kmt"
-require "resolveStructureType.kmt"
-require "resolveStructureOperation.kmt"
-require "resolveStructureProperty.kmt"
-require "primitiveType_aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 using kermeta::standard
 using org::kermeta::language::resolver
 /* *

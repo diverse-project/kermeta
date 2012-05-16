@@ -7,10 +7,8 @@
  */
 
 package org::kermeta::language::resolver;
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-
-require "../resolver/ResolverException.kmt"
 
 using org::kermeta::language::structure
 using org::kermeta::language::resolver

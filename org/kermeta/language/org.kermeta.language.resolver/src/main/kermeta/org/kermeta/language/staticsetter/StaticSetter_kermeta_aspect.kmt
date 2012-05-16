@@ -12,18 +12,7 @@ package org::kermeta::language;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
-require "StaticSetterContext.kmt"
-require "../resolver/ResolverException.kmt"
-require "callOperationConformanceChecker.kmt"
-
-require "behaviorResolver_inferedStaticType.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/prettyprinters/PrettyPrinter_kermeta_aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 
 
 using org::kermeta::language::resolver
@@ -337,13 +326,18 @@ package behavior {
 		
 		
 		operation resolveCallToEnumLiteral(context : StaticSetterContext) : CallEnumLiteral is do
+			stdio.writeln("1")
 			if not target.isVoid and target.isInstanceOf(CallTypeLiteral) then
+			stdio.writeln("2")
 				var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
 				// maybe the typeLiteral is an enumeration and we are looking for the EnumerationLiteral
-				if callTypeLiteral.typeref.type.isInstanceOf(Enumeration) then
+				stdio.writeln(callTypeLiteral.typeref.type.toString)
+				if callTypeLiteral.typeref.type.isVoid.~not.andThen{x| callTypeLiteral.typeref.type.realInstanceType.isVoid.~not.andThen{y|callTypeLiteral.typeref.type.realInstanceType.isInstanceOf(Enumeration)}} then
+				stdio.writeln("3")
 					if (context.verbose) then stdio.writeln("target is an Enumeration") end
 					var enumLiteral : EnumerationLiteral init callTypeLiteral.typeref.type.getCallableEnumLiteralByName(self.name)
 					if not enumLiteral.isVoid then
+					stdio.writeln("4")
 						if (context.verbose) then stdio.writeln(" found EnumerationLiteral "+enumLiteral.name) end
 						var callEnumLiteral :  CallEnumLiteral init  CallEnumLiteral.new
 						callEnumLiteral.staticEnumLiteral := enumLiteral
@@ -364,26 +358,32 @@ package behavior {
 		end
 		
 		operation resolveCallToOperation(context : StaticSetterContext) : CallOperation is do
-			if (target.isVoid).orElse{x|target.staticType.isVoid} then 
+			stdio.writeln("resolveCallToOperation "+ self.name)
+			if (target.isVoid).andThen{z|stdio.writeln("target.isVoid is true") true }.orElse{x|target.staticType.isVoid.andThen{z|stdio.writeln("target.staticType.isVoid is true") true }.orElse{y|target.staticType.realInstanceType.isVoid.andThen{z|stdio.writeln("target.staticType.realInstanceType.isVoid is true") true }}} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" )
 					result:=void 
 			else
+				stdio.writeln("target.staticType.realInstanceType "+target.staticType.realInstanceType.toString)
 				if context.verbose then
 					stdio.writeln((target.isVoid).orElse{x|target.staticType.isVoid}.toString())
 					stdio.writeln(target.toString)
-					stdio.writeln(target.staticType.toString)
+					stdio.writeln(target.staticType.realInstanceType.toString)
 					stdio.writeln(target.staticType.getAllCallableOperations.toString)
 				end
-				var ops : Sequence<Operation> init target.staticType.getAllCallableOperations.select{o|o.name==self.name}
+				stdio.writeln(target.staticType.realInstanceType.toString)
+				if target.staticType.realInstanceType.isInstanceOf(UnresolvedType) then
+					stdio.writeln(target.staticType.realInstanceType.asType(UnresolvedType).typeIdentifier)
+				end
+				var ops : Sequence<Operation> init target.staticType.realInstanceType.getAllCallableOperations.select{o|o.name==self.name}
 				//Here we must look if target is a TypeLiteral and if the type is a singleton
 				if ops.isEmpty and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation1 of UnresolvedCall") end
 					// this is a TypeLiteral  
 					// if this is a singleteton, try to look in the typereference
 					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
-					if 	callTypeLiteral.typeref.type.isInstanceOf(Class)
-						.andThen{x|callTypeLiteral.typeref.type.asType(Class).typeDefinition.asType(ClassDefinition).isSingleton} then
-						ops := callTypeLiteral.typeref.type.getAllCallableOperations.select{o|o.name==self.name}
+					if 	callTypeLiteral.typeref.type.realInstanceType.isInstanceOf(Class)
+						.andThen{x|callTypeLiteral.typeref.type.realInstanceType.asType(Class).typeDefinition.asType(ClassDefinition).isSingleton} then
+						ops := callTypeLiteral.typeref.type.realInstanceType.getAllCallableOperations.select{o|o.name==self.name}
 					end
 				end
 				//Here we must look into Object which is the implicit superclass of everything
@@ -396,7 +396,7 @@ package behavior {
 				//if we finally found at least one operation
 				if not ops.isEmpty then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
-					
+					stdio.writeln("operation found")
 					
 					
 					//check if there is only one
@@ -473,26 +473,27 @@ package behavior {
 					else
 						result:=void
 					end
-				else 	
+				else
+				 	stdio.writeln("operation not found")
 					result:=void
 				end
 			end
 		end
 	
 		operation resolveCallToProperty(context : StaticSetterContext) : CallProperty is do
-			if (target.isVoid).orElse{x|target.staticType.isVoid} then 
+			if (target.isVoid).orElse{x|target.staticType.isVoid.orElse{y|target.staticType.realInstanceType.isVoid}} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a property. Probably due to a previous element that hasn't been resolved" )
 					result:=void 
 			else
 				if (context.verbose) then stdio.writeln("      target.staticType "+target.staticType.toString) end
-				var prop : Property init target.staticType.getCallablePropertyByName(self.name)
+				var prop : Property init target.staticType.realInstanceType.getCallablePropertyByName(self.name)
 				//Here we look if the target is a TypeLiteral in case of a singleton
 				if prop.isVoid and target.isInstanceOf(CallTypeLiteral) and not target.isVoid then
 					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Property1 of UnresolvedCall "+name) end
 					// this is a TypeLiteral  
 					// if this is a singleteton, try to look in the typereference
 					var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
-					prop := callTypeLiteral.typeref.type.getCallablePropertyByName(self.name)
+					prop := callTypeLiteral.typeref.type.realInstanceType.getCallablePropertyByName(self.name)
 				end
 				//Here we must look into Object which is the implicit superclass of everything
 				if (prop.isVoid) then
@@ -603,11 +604,16 @@ package behavior {
 										
 						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
 					end
-					if typeDef.isInstanceOf(Enumeration) then
+					if typeDef.isInstanceOf(DataType) then
 						if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found an Enumeration " + typeDef.name) end
-						callTypeLiteral.typeref.type := typeDef.asType(Enumeration)										
-										
-						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Enumeration"))
+						callTypeLiteral.typeref.type := typeDef.asType(DataType)										
+						if typeDef.asType(Type).realInstanceType.isInstanceOf(Class) then /*#1*/										
+							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+						else if typeDef.asType(Type).realInstanceType.isInstanceOf(Enumeration) then /*#2*/
+							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Enumeration"))
+						else if typeDef.asType(Type).realInstanceType.isInstanceOf(FunctionType) then /*#3*/
+							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::FunctionType"))
+						end /*#3*/ end /*#2*/ end /*#1*/
 					end
 					//TODO deal with function types
 					
@@ -838,7 +844,7 @@ package behavior {
 					stdio.writeln(" WARNING elseBody.staticType is void in " + self.container().asType(KermetaModelElement).prettyPrint)
 				else
 					// TODO temporary code
-					if not self.elseBody.staticType.typeEquals(self.thenBody.staticType) then
+					if not self.elseBody.staticType.realInstanceType.typeEquals(self.thenBody.staticType.realInstanceType) then
 						// use Object as common super type
 						staticTypeOfIF:= context.createTypeFromQualifiedName("kermeta::standard::Object")
 					else
@@ -966,9 +972,9 @@ package behavior {
 							paramDef:= container.asType(CallSuperOperation).staticOperation.ownedParameter.elementAt(paramPosition)
 						end
 						//check if it's really a function with the good number of parameters
-						if paramDef.type.isInstanceOf(FunctionType) then
+						if paramDef.type.realInstanceType.isInstanceOf(FunctionType) then
 							var funcParamTypes : Sequence<Type> init Sequence<Type>.new
-							if paramDef.type.asType(FunctionType).left.isInstanceOf(ProductType) then
+							if paramDef.type.realInstanceType.asType(FunctionType).left.isInstanceOf(ProductType) then
 								funcParamTypes.addAll(paramDef.type.asType(FunctionType).left.asType(ProductType).type)
 							else
 								funcParamTypes.add(paramDef.type.asType(FunctionType).left)
@@ -976,8 +982,8 @@ package behavior {
 							
 							//get bindings from the type of the containing callOperation
 							var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-							if container.isInstanceOf(UnresolvedCall).andThen{x|container.asType(UnresolvedCall).target.staticType.isInstanceOf(Class)} then //#1
-								bindings.addAll(container.asType(UnresolvedCall).target.staticType.asType(Class).getAllTypeVariableBindings())
+							if container.isInstanceOf(UnresolvedCall).andThen{x|container.asType(UnresolvedCall).target.staticType.realInstanceType.isInstanceOf(Class)} then //#1
+								bindings.addAll(container.asType(UnresolvedCall).target.staticType.realInstanceType.asType(Class).getAllTypeVariableBindings())
 							else if container.isInstanceOf(CallSuperOperation) then /*#2*/
 								bindings.addAll(container.asType(CallSuperOperation).getSelfType(context).getAllTypeVariableBindings())
 							end /*#2*/ end /*#1*/

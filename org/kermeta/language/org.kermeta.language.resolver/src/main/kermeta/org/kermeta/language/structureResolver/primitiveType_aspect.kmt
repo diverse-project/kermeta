@@ -1,7 +1,7 @@
 package org::kermeta::language::structure;
 require kermeta
-require "structureResolver.kmt"
-require "ResolverContext_Aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+
 using org::kermeta::language::resolver
 
 
@@ -12,13 +12,12 @@ aspect class KermetaModelElement {
 	*/
 	
 	operation resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) is do 
-		stdio.writeln("resolvePrimitiveTypeEquivalence KME")
+
 	end
 }
 
 aspect class Package{
 	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
-		stdio.writeln("resolvePrimitiveTypeEquivalence PCK")
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
 					e.asType(KermetaModelElement).resolvePrimitiveTypeEquivalence(context)
@@ -31,7 +30,6 @@ aspect class Package{
 
 aspect class ModelingUnit{
 	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
-		stdio.writeln("resolvePrimitiveTypeEquivalence MU")
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then
 					e.asType(KermetaModelElement).resolvePrimitiveTypeEquivalence(context)
@@ -45,11 +43,14 @@ aspect class PrimitiveType {
 
 
 	reference currentlyBeingResolved : Boolean
+	reference resolved : Boolean
 	reference referredType : Type 
-
+	method realInstanceType() :Type is do 
+		result:=referredType
+		
+	end
 	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
 		
-		stdio.writeln("solvePrimitiveTypes")
 		if not referredType.isVoid then
 			result:=referredType
 		else
@@ -74,12 +75,17 @@ aspect class PrimitiveType {
 *	this operation has to be aware that a cycle may exists between primitive types and should deal with it
 */
 method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
-	stdio.writeln("resolvePrimitiveTypeEquivalence")
 	if referredType.isVoid then
 		currentlyBeingResolved:=true
 		
 		referredType:=instanceType.solvePrimitiveTypes(context)
-		
+		if not referredType.isVoid then
+			stdio.writeln(name)
+			stdio.writeln(referredType.toString)
+			stdio.writeln("resolvePrimitiveType "+name+" with "+referredType.toString)
+		else
+			stdio.writeln("resolvePrimitiveType "+name+" with void")
+		end
 		currentlyBeingResolved:=false
 	end
 end
@@ -87,6 +93,10 @@ end
 }
 
 aspect class Type {
+	
+	operation realInstanceType() : Type is do 
+		result:=self
+	end
 	
 	
 	/** replace all Primitive Types by their equivalent (this implementation will be used for all Type Definitions*/
@@ -101,7 +111,7 @@ aspect class Class {
 	method solvePrimitiveTypes(context : LanguageVisitorContext) : Type is do 
 		
 		var c : Class init Class.new
-		
+		c.typeDefinition:=self.typeDefinition
 		from var i : Integer init 0
 		until i==typeParamBinding.size 
 		loop

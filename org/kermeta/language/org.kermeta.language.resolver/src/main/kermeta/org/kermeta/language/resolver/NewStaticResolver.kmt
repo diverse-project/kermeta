@@ -14,14 +14,40 @@ package org::kermeta::language::resolver;
 
 require kermeta
 
-require "../staticsetter/StaticSetter_kermeta_aspect.kmt"
-require "../staticsetter/StaticSetterContext.kmt"
-require "ResolverException.kmt"
-require "../structureResolver/structureResolver.kmt"
-require "../typeawaremerger/TypeAwareMerger.kmt"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/behaviorResolver_inferedStaticType.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/callOperationConformanceChecker.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/StaticSetter_kermeta_aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/StaticSetter_typevariableResolver.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/StaticSetterContext.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/primitiveType_aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureOperation.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureProperty.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureType.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/structureResolver.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/unresolvedType_Aspect.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeAwareMerger.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeAwareMergerContext.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeRebind.kmt"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/OperationSignatureEquivalence_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/prettyprinters/PrettyPrinter_kermeta_aspect.kmt"
 
 using org::kermeta::language::staticsetter
-
 using org::kermeta::language::resolver
 using kermeta::persistence
 using kermeta::standard
@@ -50,22 +76,29 @@ class FullStaticResolver
        	unresolvedModelingUnit ?= unresolvedModelResource.one
        	unresolvedModelingUnit.canUseCachedStructuralTypeDefinitions := true
        	//checkUnresolved(unresolvedModelingUnit)
-        resolvedModelingUnit := doResolving(unresolvedModelingUnit)
+        /*resolvedModelingUnit := doResolving(unresolvedModelingUnit)
         
         //workaround to remove cache before saving as it triggers errors in interpreted mode
        	var cache : org::kermeta::language::structure::internal::ModelingUnitCache init resolvedModelingUnit.cache
         resolvedModelingUnit.cache:=void
        	         
         stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
-       	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
-       	
+       	stdio.writeln("0")
+       //	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
+       	stdio.writeln("1")
        	//workaround to remove cache before saving as it triggers errors in interpreted mode
        	resolvedModelingUnit.cache:=cache
-       	
+        	stdio.writeln("2")      	
+
        	resolvedModelingUnit := unresolvedModelingUnit
+       	stdio.writeln("3")
        	checkUnresolved(resolvedModelingUnit)
+       	stdio.writeln("4")
        	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
-       	
+       	*/
+       	resolvedModelingUnit := resolve(unresolvedModelingUnit)
+       	checkUnresolved(resolvedModelingUnit)
+       	stdio.writeln("unresolved elements checked")
        	//workaround to remove cache before saving as it triggers errors in interpreted mode
        	resolvedModelingUnit.cache:=void
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
@@ -95,16 +128,20 @@ class FullStaticResolver
 	*/
 	operation doTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		//init of context
+		stdio.writeln("	********************* 666 Type Resolving *********************")
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedModelingUnit)
 		ctxt.verbose := false
 		unresolvedModelingUnit.resolveStructureInheritance(ctxt)
+		stdio.writeln("	********************* End of Type Resolving *********************")
 		result:=unresolvedModelingUnit
 	end
 	
 	
 	operation doPrimitiveTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		stdio.writeln("doPrimitiveTypeResolving")
+		//stdio.writeln("doPrimitiveTypeResolving")
+		stdio.writeln("	********************* Primitive Type Resolving *********************")
 		unresolvedModelingUnit.resolvePrimitiveTypeEquivalence(ctxt)
+		stdio.writeln("	********************* End of Primitive Type Resolving *********************")
 		result:=unresolvedModelingUnit
 	end
 	/* *
@@ -112,9 +149,11 @@ class FullStaticResolver
 		merge the operations and properties that have the same signature (not possible if some types are unresolved)
 	*/
 	operation doTypeAwareMerging(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+		stdio.writeln("	********************* Type Aware Merging  *********************")
 		var mergeCtxt : TypeAwareMergerContext init TypeAwareMergerContext.new
 		mergeCtxt.errors:=ctxt.errors
 		unresolvedModelingUnit.typeAwareMerge( mergeCtxt)
+		stdio.writeln("	********************* End of Type Aware Merging  *********************")
 		result:=unresolvedModelingUnit
 	
 	end
@@ -130,7 +169,9 @@ class FullStaticResolver
 	*/
 	operation doStructureResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
 		//init of context
+		stdio.writeln("	********************* Structure Resolving  *********************")
 		unresolvedModelingUnit.resolveStructure(ctxt)
+		stdio.writeln("	********************* End of Structure Resolving  *********************")
 		result:=unresolvedModelingUnit
 	end
 

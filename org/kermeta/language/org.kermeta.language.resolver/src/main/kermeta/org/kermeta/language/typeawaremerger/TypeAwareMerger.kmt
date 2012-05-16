@@ -1,11 +1,8 @@
 package org::kermeta::language::structure;
 require kermeta
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
-require "TypeAwareMergerContext.kmt"
-require "TypeRebind.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+
 using kermeta::standard
 using org::kermeta::language::resolver
 using kermeta::utils

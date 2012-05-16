@@ -9,7 +9,7 @@
 
 
 package org::kermeta::language::resolver;
-
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 
 require kermeta
 using kermeta::standard

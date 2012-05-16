@@ -11,8 +11,8 @@ package org::kermeta::language;
 
 
 require kermeta
-require "StaticSetter_kermeta_aspect.kmt"
-require "StaticSetter_typevariableResolver.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+
 using kermeta::standard
 
 using org::kermeta::language::structure
@@ -50,8 +50,8 @@ package behavior {
 		/**in a CallFeature the list of bindings is obtained by getting all the bindings from the target*/
 		operation findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) is do
 			if not target.isVoid then
-				if target.staticType.isInstanceOf(Class) then
-					bindings.addAll(target.staticType.asType(Class).getAllTypeVariableBindings())
+				if target.staticType.realInstanceType.isInstanceOf(Class) then
+					bindings.addAll(target.staticType.realInstanceType.asType(Class).getAllTypeVariableBindings())
 				end
 			end
 			if (context.verbose) then 

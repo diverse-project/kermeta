@@ -9,9 +9,7 @@
 
 package org::kermeta::language;
 
-
-require "StaticSetter_kermeta_aspect.kmt"
-require "../resolver/ResolverException.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 require kermeta
 using kermeta::standard
 using kermeta::utils
@@ -41,7 +39,7 @@ package behavior{
 			until i==self.parameters.size() loop
 				
 				if not self.parameters.elementAt(i).staticType.isVoid and not self.parameters.elementAt(i).isInstanceOf(VoidLiteral) then
-						self.parameters.elementAt(i).staticType.compareToExpectedType(context.createTypeFromMultiplicityElement(staticOperation.ownedParameter.elementAt(i)),typeVariableToSet, context)
+						self.parameters.elementAt(i).staticType.realInstanceType.compareToExpectedType(context.createTypeFromMultiplicityElement(staticOperation.ownedParameter.elementAt(i)),typeVariableToSet, context)
 				end
 				i:=i+1
 			end
@@ -71,7 +69,7 @@ package structure{
 			if context.verbose then stdio.writeln("compare a type with something") end
 			
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
-				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self.realInstanceType)
 			
 			end
 			
@@ -83,7 +81,7 @@ package structure{
 			if context.verbose then stdio.writeln("compare a type with something") end
 			
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
-				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
+				typeVariableToSet.put(expectedType.asType(TypeVariable), self.realInstanceType)
 			
 			end
 			
@@ -106,19 +104,19 @@ package structure{
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 				
 			else
-				if expectedType.isInstanceOf(Class) then
+				if expectedType.realInstanceType.isInstanceOf(Class) then
 					
-					var comparableClass : Class init self.getComparableClass(expectedType.asType(Class), context)
+					var comparableClass : Class init self.getComparableClass(expectedType.realInstanceType.asType(Class), context)
 					
 					if not comparableClass.isVoid then
 						// they are both of type class with the same number of type parameters, then all type parameters should be checked
 						// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the expectedType
-						if	comparableClass.typeParamBinding.size==expectedType.asType(Class).typeParamBinding.size
+						if	comparableClass.typeParamBinding.size==expectedType.realInstanceType.asType(Class).typeParamBinding.size
 						then
 							from var i : Integer init 0
 							until i==comparableClass.typeParamBinding.size
 							loop
-								 comparableClass.typeParamBinding.elementAt(i).type.structurallyCompareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
+								 comparableClass.typeParamBinding.elementAt(i).type.realInstanceType.structurallyCompareToExpectedType(expectedType.realInstanceType.asType(Class).typeParamBinding.elementAt(i).type
 																								,typeVariableToSet
 																								,context)
 								i:=i+1
@@ -142,16 +140,16 @@ package structure{
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 				
 			else
-				if expectedType.isInstanceOf(Class) then
+				if expectedType.realInstanceType.isInstanceOf(Class) then
 					
 					// they are both of type class with the same number of type parameters, then all type parameters should be checked
 					// the resolver only try to find the bindings, but it's the checker which will have to tell if the type is different from the expectedType
-					if	self.typeParamBinding.size==expectedType.asType(Class).typeParamBinding.size
+					if	self.typeParamBinding.size==expectedType.realInstanceType.asType(Class).typeParamBinding.size
 					then
 						from var i : Integer init 0
 						until i==self.typeParamBinding.size
 						loop
-							 self.typeParamBinding.elementAt(i).type.structurallyCompareToExpectedType(expectedType.asType(Class).typeParamBinding.elementAt(i).type
+							 self.typeParamBinding.elementAt(i).type.realInstanceType.structurallyCompareToExpectedType(expectedType.realInstanceType.asType(Class).typeParamBinding.elementAt(i).type
 																							,typeVariableToSet
 																							,context)
 							i:=i+1
@@ -176,8 +174,8 @@ package structure{
 				result.add(self)
 			else
 				self.typeDefinition.superType.detect{t|
-					if not typeDefAlreadyVisited.contains(t.asType(Class).typeDefinition.asType(ClassDefinition)) then
-						result:= t.asType(Class).findPathToType(typeToSearch,typeDefAlreadyVisited)
+					if not typeDefAlreadyVisited.contains(t.realInstanceType.asType(Class).typeDefinition.asType(ClassDefinition)) then
+						result:= t.realInstanceType.asType(Class).findPathToType(typeToSearch,typeDefAlreadyVisited)
 						if not result.isVoid then
 							result.addAt(0, self)
 						end
@@ -254,8 +252,8 @@ package structure{
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else
 				//only the right part may be used to infer a typeParameter
-				if expectedType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.asType(FunctionType).right.isVoid then
-					self.right.compareToExpectedType(expectedType.asType(FunctionType).right, typeVariableToSet, context)
+				if expectedType.realInstanceType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.realInstanceType.asType(FunctionType).right.isVoid then
+					self.right.realInstanceType.compareToExpectedType(expectedType.realInstanceType.asType(FunctionType).right, typeVariableToSet, context)
 				end
 			end	
 		end
@@ -266,8 +264,8 @@ package structure{
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else
 				//only the right part may be used to infer a typeParameter
-				if expectedType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.asType(FunctionType).right.isVoid then
-					self.right.structurallyCompareToExpectedType(expectedType.asType(FunctionType).right, typeVariableToSet, context)
+				if expectedType.realInstanceType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.realInstanceType.asType(FunctionType).right.isVoid then
+					self.right.realInstanceType.structurallyCompareToExpectedType(expectedType.realInstanceType.asType(FunctionType).right, typeVariableToSet, context)
 				end
 			end	
 		end

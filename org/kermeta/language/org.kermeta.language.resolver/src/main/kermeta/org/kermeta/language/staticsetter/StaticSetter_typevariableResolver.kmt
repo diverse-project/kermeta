@@ -13,7 +13,7 @@ package org::kermeta::language::structure;
 
 
 require kermeta
-require "StaticSetter_kermeta_aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 using kermeta::standard
 
 using org::kermeta::language::structure
@@ -46,9 +46,9 @@ aspect class Class {
 		//get All the inherited bindings
 		var inheritedBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new
 		typeDefinition.superType.each{ c|
-			if c.isInstanceOf(Class) then
-				if c.asType(Class).typeDefinition !=typeDefinition then
-					inheritedBindings.addAll(c.asType(Class).getAllTypeVariableBindings())	
+			if c.realInstanceType.isInstanceOf(Class) then
+				if c.realInstanceType.asType(Class).typeDefinition !=typeDefinition then
+					inheritedBindings.addAll(c.realInstanceType.asType(Class).getAllTypeVariableBindings())	
 				end
 			end
 		}
