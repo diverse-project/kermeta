@@ -276,6 +276,21 @@ object JavaConversions {
                 var i : ju.Iterator[A] = clone.iterator; while (i.hasNext){func(i.next)  }
             }
         }
+        
+        def indexedEach(func:(A,EachContext)=>Unit):Unit = {
+            var clone : ju.List[A] = new ju.ArrayList[A]
+            if (value != null){
+                clone.addAll(value)
+                var index : Integer = 0
+                var context : EachContext = new EachContext
+                var i : ju.Iterator[A] = clone.iterator
+                while (i.hasNext){
+                  context.initialize(index, index==0, index==size()-1);
+                  func(i.next, context);
+                  index+=1;
+                }
+            }
+        }
 
         def collect[B](collector : A=> B) :java.util.List[B]={var res = new ju.ArrayList[B](); this.each(e=> res.add(collector(e)))  ; return res  }
         def elementAt(arg:Int):A={
@@ -787,15 +802,28 @@ object JavaConversions {
 
         def isVoid() :Boolean= {this==null}
     }
-
-  
+    
     implicit def asBuffer[A](l : ju.List[A]) = new RichKermetaList(l)//l match {
     implicit def asSet[A](l : ju.Set[A]) = new RichKermetaSet(l)//l match {
     implicit def asCol[A](l : ju.Collection[A]) = new RichKermetaCol(l)//l match {
   	
-  
-    
-  
+}
+
+class EachContext {
+	var index:Integer = -1
+	var isFirst:Boolean = false
+	var isLast:Boolean = false
+	
+	def Scalaindex : Integer = this.index
+	def ScalaisFirst : Boolean = this.isFirst
+	def ScalaisLast : Boolean = this.isLast
+
+	def initialize(index:Integer, first:Boolean, last:Boolean) : EachContext = {
+	  this.index=index
+	  this.isFirst=first
+	  this.isLast=last
+	  return this;
+	}
 }
 
 
