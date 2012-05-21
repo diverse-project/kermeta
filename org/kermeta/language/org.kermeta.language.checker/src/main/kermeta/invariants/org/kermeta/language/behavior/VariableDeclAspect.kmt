@@ -16,9 +16,10 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
-
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeCreationHelper.kmt"
 using org::kermeta::language::structure
 using kermeta::utils
+using org::kermeta::language::helpers::structure
 
 aspect class VariableDecl
 {
@@ -60,7 +61,9 @@ aspect class VariableDecl
 			then
 				false
 			else
-				self.initialization.staticType.isSubTypeOf(self.type.type)
+				var helper : TypeCreationHelper init TypeCreationHelper.new
+			
+				self.initialization.staticType.isSubTypeOf(helper.createTypeFromMultiplicityElement(self.type))
 			end
 		end 
 		
