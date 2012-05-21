@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="lib" path="lib/zvtm/target/jcip-annotations-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/zvtm/target/timingframework-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/zvtm/target/xercesImpl-2.8.1.jar"/>
-	<classpathentry kind="lib" path="lib/zvtm/target/xml-apis-1.3.03.jar"/>
-	<classpathentry kind="lib" path="lib/zvtm/target/xmlParserAPIs-2.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/zvtm/target/zvtm-0.10.2.jar"/>
-	<classpathentry kind="output" path="bin"/>
+  <classpathentry kind="src" path="src" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+  <classpathentry kind="var" path="M2_REPO/org/malai/malai.core/0.2-SNAPSHOT/malai.core-0.2-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/fr/inria/zvtm/zvtm-core/0.11.0/zvtm-core-0.11.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/java/dev/timingframework/timingframework/1.0/timingframework-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar"/>
 </classpath>

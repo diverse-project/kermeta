@@ -49,6 +49,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.malai</groupId>
+            <artifactId>malai.core</artifactId>
+            <version>0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.kermeta.emf</groupId>
             <artifactId>emf.lib</artifactId>
             <version>${emf.version}</version>
