@@ -16,7 +16,7 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 	
-	protected EclipseMessagingSystem messaggingSystem;
+	protected EclipseMessagingSystem messaggingSystem = null;
 	
 	/**
 	 * The constructor
@@ -31,7 +31,6 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		messaggingSystem 		= new EclipseMessagingSystem(PLUGIN_ID, "K2 Html generator console");
 	}
 
 	/*
@@ -64,6 +63,9 @@ public class Activator extends AbstractUIPlugin {
 	}
 	
 	public EclipseMessagingSystem getMessaggingSystem() {
+		if(messaggingSystem ==  null){
+			messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "K2 Html generator console");
+		}
 		return messaggingSystem;
 	}
 }
