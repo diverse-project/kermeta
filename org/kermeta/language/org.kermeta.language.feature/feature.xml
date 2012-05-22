@@ -324,22 +324,17 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
          version="0.0.0"
          unpack="false"/>
 
+   
+
    <plugin
-         id="org.kermeta.scala.jline"
+         id="org.scala-ide.scala.compiler"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.kermeta.scala.scala-compiler"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.scala.scala-library"
+         id="org.scala-ide.scala.library"
          download-size="0"
          install-size="0"
          version="0.0.0"
