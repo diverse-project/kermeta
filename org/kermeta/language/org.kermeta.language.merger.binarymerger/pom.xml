@@ -155,7 +155,7 @@
 								org.kermeta.language.merger.binarymerger
                         	</Export-Package>
 							<Require-Bundle>
-								org.kermeta.scala.scala-library,
+                            	org.scala-ide.scala.library,
 								fr.irisa.triskell.kermeta.model,
 								org.kermeta.language.model,
 								org.kermeta.language.merger.binarymerger.api,

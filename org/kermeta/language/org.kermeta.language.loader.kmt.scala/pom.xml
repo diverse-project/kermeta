@@ -80,7 +80,7 @@
 							org.kermeta.language.loader.kmt.scala
                             </Export-Package>
                             <Require-Bundle>
-                            org.kermeta.scala.scala-library,
+                            org.scala-ide.scala.library,
             				org.kermeta.language.model,
             				org.kermeta.language.loader.kmt.scala.api,
             				org.kermeta.utils.systemservices.api

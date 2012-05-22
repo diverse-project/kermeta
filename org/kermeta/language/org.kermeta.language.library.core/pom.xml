@@ -61,7 +61,7 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Require-Bundle>
-                            org.kermeta.scala.scala-library
+                            org.scala-ide.scala.library
                         </Require-Bundle>
                         <Export-Package>
                         	k2.io,

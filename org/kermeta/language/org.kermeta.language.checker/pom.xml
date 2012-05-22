@@ -138,10 +138,11 @@
 								org.kermeta.language.language.checkerrunner,
 								<!-- org.kermeta.language.language.checker.fr.irisa.triskell.kermeta.language,
 								org.kermeta.language.language.checker.fr.irisa.triskell.kermeta.language.behavior, -->
-								org.kermeta.language.language.checker.fr.irisa.triskell.kermeta.language.structure
+								org.kermeta.language.language.checker.fr.irisa.triskell.kermeta.language.structure,								
+								org.kermeta.language.language.checker.org.kermeta.language.structure
                         	</Export-Package>
 							<Require-Bundle>
-								org.kermeta.scala.scala-library,
+                            	org.scala-ide.scala.library,
 								org.kermeta.diagnostic.model,
 								fr.irisa.triskell.kermeta.model,
 								org.kermeta.language.model,
