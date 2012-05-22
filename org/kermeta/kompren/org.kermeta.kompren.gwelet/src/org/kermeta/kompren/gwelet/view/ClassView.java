@@ -287,14 +287,13 @@ public class ClassView extends RectangleEntityView {
 		double textHeight  				= titleBounds.getHeight();
 		final double textHeaderHeight   = textHeight + HEIGHT_HEADER_GAP;
 		final double textWidth  		= titleBounds.getWidth();
-		final double halfWidth  = dim.width/2.;
-		final double halfHeight = dim.height/2.;
+		final double halfWidth  	= dim.width/2.;
+		final double halfHeight 	= dim.height/2.;
 		final double cx 		   	= centre.x;
 		final double cy 		   	= centre.y;
 		final double xAttr 	   		= cx-halfWidth + WIDTH_GAP;
 		double yAttr 		   		= cy+halfHeight - textHeaderHeight - HEIGHT_GAP;
 
-//		updateBoundPath(path, dim.width, dim.height, cx, cy);
 		boundPath.setColor(fillingColor);
 		boundPath.setBorderColor(lineColor);
 		updateBoundPath(boundPath, dim.width, dim.height, cx, cy);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.kompren.gwelet.view.ClassView;
+import org.kermeta.kompren.gwelet.view.InheritanceView;
 import org.malai.presentation.ConcretePresentation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,7 +45,16 @@ public class Canvas implements ConcretePresentation {
 		cv.addOperation("operation2", "Boolean", false);
 		cv.update();
 
+		ClassView cv2 = new ClassView("FOOOOoooooo");
+		cv2.addAttribute("attr1", "String");
+		cv2.addOperation("operation1", "Boolean", false);
+		cv2.move(200, 200);
+		cv2.update();
+
+		InheritanceView inhe = new InheritanceView(cv, cv2);
+
 		vs.addGlyph(cv.getGlyph());
+		vs.addGlyph(cv2.getGlyph());
 	}
 
 
