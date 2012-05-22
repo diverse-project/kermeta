@@ -9,7 +9,11 @@
 package org.kermeta.language.builder.eclipse.internal;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -248,14 +252,19 @@ public class KPBuilder {
 	
 	public ArrayList<String> getBuildAdditionalClassPath(){
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
-		
-		findBundleLocationForClassPath("org.kermeta.scala.scala-library", additionalClassPath);
-		findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
+
+		//problem the location of the bundle isn't enough for bundle containing jar into jar
+		// so extract it in a temp file
+		findBundleInternalJarLocationForClassPath("org.scala-ide.scala.library","/lib/scala-library.jar", additionalClassPath);
+		//new URI(scala.ScalaObject.class.getProtectionDomain().getCodeSource().getLocation().toString().replace(" ", "%20"))).getPath()
+
+
+		findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
+		//findBundleLocationForClassPath("org.kermeta.language.library.core", additionalClassPath);
 		findBundleLocationForClassPath("org.kermeta.utils.systemservices.api", additionalClassPath);
 		findBundleLocationForClassPath("org.eclipse.emf.common", additionalClassPath);
 		findBundleLocationForClassPath("org.eclipse.emf.ecore", additionalClassPath);
 		findBundleLocationForClassPath("org.eclipse.emf.ecore.xmi", additionalClassPath);
-		findBundleLocationForClassPath("org.kermeta.language.model", additionalClassPath);
 		findBundleLocationForClassPath("org.kermeta.utils.helpers", additionalClassPath);
 		return additionalClassPath;
 	}
@@ -479,19 +488,86 @@ public class KPBuilder {
 		
 	}
 
-
+	/**
+	 * locate the bundle jar to be used in a classpath
+	 * @param bundleSymbolicName
+	 * @param additionalClassPath
+	 */
 	private void findBundleLocationForClassPath(String bundleSymbolicName, ArrayList<String> additionalClassPath) {
 		try {
 			StringBuffer thePath = new StringBuffer(FileLocator.resolve(Platform.getBundle(bundleSymbolicName).getEntry("/")).getFile());
 			thePath = thePath.replace(thePath.length()-2, thePath.length(), "");
-			File theFile = new File(new URI(thePath.toString().replaceAll(" ", "%20")));
+			String fixedPath =	thePath.toString().replaceAll(" ", "%20");
+			File theFile = new File(new URI(fixedPath));
 			if (theFile!=null) {
-				additionalClassPath.add(theFile.getAbsolutePath());
+				if(theFile.getAbsolutePath().endsWith("bundlefile")){
+					//some version of scala compiler doesn't accept classpath to jar that doesn't end with .jar
+					File outFile = new File(new URI(fixedPath+".jar"));
+					if(!outFile.exists()){
+						// copy the file
+						InputStream inputStream = new FileInputStream(theFile);					
+						OutputStream out = new FileOutputStream(outFile);
+						 
+						int read = 0;
+						byte[] bytes = new byte[1024];
+					 
+						while ((read = inputStream.read(bytes)) != -1) {
+							out.write(bytes, 0, read);
+						}
+					 
+						inputStream.close();
+						out.flush();
+						out.close();
+					}
+					additionalClassPath.add(theFile.getAbsolutePath()+".jar");
+				}
+				else{
+					additionalClassPath.add(theFile.getAbsolutePath());
+				}
 			}
 		} catch (Exception e) {
 			Activator.getDefault().getMessaggingSystem().warn("cannot find local file location for bundle "+bundleSymbolicName,  KermetaBuilder.LOG_MESSAGE_GROUP, e);
 		}
 	}
+	
+	/**
+	 * extract an internal jar to a temp folder so it can be used by a classpath
+	 * @param bundleSymbolicName
+	 * @param internalJar
+	 * @param additionalClassPath
+	 */
+	private void findBundleInternalJarLocationForClassPath(String bundleSymbolicName, String internalJar, ArrayList<String> additionalClassPath) {
+		try {
+			
+			String tempFileLocation = Activator.getDefault().getStateLocation().toFile().getAbsolutePath() + "/internal_libs/" +bundleSymbolicName + internalJar;
+			tempFileLocation = tempFileLocation.replaceAll(" ", "%20");
+			File tempFile = new File(tempFileLocation);
+			if(!tempFile.exists()){
+				if (!tempFile.getParentFile().exists()){
+					tempFile.getParentFile().mkdirs();
+				}
+
+				InputStream inputStream = Platform.getBundle(bundleSymbolicName).getEntry(internalJar).openStream();
+				// write the inputStream to a FileOutputStream
+				OutputStream out = new FileOutputStream(tempFile);
+	 
+				int read = 0;
+				byte[] bytes = new byte[1024];
+			 
+				while ((read = inputStream.read(bytes)) != -1) {
+					out.write(bytes, 0, read);
+				}
+			 
+				inputStream.close();
+				out.flush();
+				out.close();
+			}
+			additionalClassPath.add(tempFileLocation);
+		} catch (Exception e) {
+			Activator.getDefault().getMessaggingSystem().warn("cannot create local file location for bundle "+bundleSymbolicName+internalJar,  KermetaBuilder.LOG_MESSAGE_GROUP, e);
+		}
+	}
+	
 	
 	/**
 	 * This operation refresh the files to compile.
