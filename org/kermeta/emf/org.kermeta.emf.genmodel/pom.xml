@@ -10,6 +10,8 @@
 
     <version>2.0.1-SNAPSHOT</version>
 	
+	
+	
 	<properties>
 		<emf.version.range>[2.5.0.0,)</emf.version.range>
 		<kermeta.version>2.0.1-SNAPSHOT</kermeta.version>
@@ -57,7 +59,69 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			<!-- calculate versions for some special cases -->
+			<!-- calculate the bundle version from the project version : replace -SNAPSHOT 
+				by .SNAPSHOT_${timestamp} -->
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>generate_bundle_version</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<source>								
+								String bundleVersion = "${project.version}"
+								// workaround jenkins bug https://issues.jenkins-ci.org/browse/JENKINS-9693?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel
+								String timestamp = "${maven.build.timestamp}".replaceAll("-","_") 
+								bundleVersion = bundleVersion.replaceAll("-SNAPSHOT", "-SNAPSHOT_"+timestamp)
+								bundleVersion = bundleVersion.replaceAll("-",".")
+								project.properties.setProperty('bundle.version',bundleVersion)
+							</source>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									org.codehaus.groovy.maven
+        								</groupId>
+        								<artifactId>
+        									gmaven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[1.0,)
+        								</versionRange>
+        								<goals>
+        									<goal>execute</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
     </build>
 
 	<dependencies>
