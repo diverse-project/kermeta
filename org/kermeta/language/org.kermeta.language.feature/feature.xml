@@ -264,13 +264,13 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
          version="0.0.0"
          unpack="false"/>
 	<plugin
-         id="org.kermeta.gendoc.km2html"
+         id="org.kermeta.language.gendoc.km2html"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 	<plugin
-         id="org.kermeta.gendoc.km2html.ui"
+         id="org.kermeta.language.gendoc.km2html.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
