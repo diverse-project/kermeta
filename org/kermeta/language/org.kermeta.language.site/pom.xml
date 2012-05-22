@@ -18,7 +18,7 @@
 		<traceability.version>2.0.2-SNAPSHOT</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<emf.version>2.7.0</emf.version>
-		<scala.version>2.9.0-1</scala.version>
+		<scala.version>[2.9.0,2.10.0)</scala.version>
 		<framework.scala.version>1.4.4-SNAPSHOT</framework.scala.version>
 		<kermeta.model.version>1.4.0</kermeta.model.version>
 		<language.compiler.version>1.4.4-SNAPSHOT</language.compiler.version>
@@ -380,7 +380,7 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.kermeta.language</groupId>
+			<groupId>org.kermeta.language.gendoc</groupId>
 			<artifactId>language.gendoc.km2html</artifactId>
 			<version>${kermeta.version}</version>
 			<exclusions><exclusion>
@@ -388,7 +388,7 @@
 			</exclusion></exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.language</groupId>
+			<groupId>org.kermeta.language.gendoc</groupId>
 			<artifactId>language.gendoc.km2html.ui</artifactId>
 			<version>${kermeta.version}</version>
 			<exclusions><exclusion>
@@ -461,53 +461,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.kermeta.scala</groupId>
-			<artifactId>scala-compiler</artifactId>
-			<version>${utils.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 		
 		<!-- use a deployable version of scala -->
 		<dependency>
-			<groupId>org.kermeta.scala</groupId>
-			<artifactId>scala-compiler</artifactId>
+			<groupId>org.scala-ide.scala</groupId>
+			<artifactId>compiler</artifactId>
 			<version>${scala.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.scala</groupId>
-			<artifactId>scala-library</artifactId>
+			<groupId>org.scala-ide.scala</groupId>
+			<artifactId>library</artifactId>
 			<version>${scala.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.kermeta.scala</groupId>
-			<artifactId>jline</artifactId>
-			<version>${scala.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		</dependency>		
 		
 	</dependencies>
 </project>
