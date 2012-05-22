@@ -167,6 +167,9 @@
 		              		are already there with the Require-Bundle
 			            -->
 		            	<Import-Package>
+		            		!org.kermeta.language.prettyprinter,
+		            		!org.kermeta.utils.systemservices.eclipse.api,
+		            		!org.eclipse.*,
 		              		*
 		            	</Import-Package>		            
                     </instructions>
