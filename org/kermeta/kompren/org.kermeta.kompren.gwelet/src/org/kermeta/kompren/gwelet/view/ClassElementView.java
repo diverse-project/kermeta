@@ -107,6 +107,7 @@ public abstract class ClassElementView extends ComponentView {
 
 	public void setPosition(final double x, final double y) {
 		position.setLocation(x, y);
+		glyphText.moveTo(x, y);
 	}
 
 

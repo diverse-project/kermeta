@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.font.TextLayout;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,8 @@ import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 
 import fr.inria.zvtm.glyphs.Composite;
-import fr.inria.zvtm.glyphs.DPath;
+import fr.inria.zvtm.glyphs.VRectangle;
+import fr.inria.zvtm.glyphs.VSegment;
 import fr.inria.zvtm.glyphs.VText;
 
 /**
@@ -45,11 +45,15 @@ public class ClassView extends RectangleEntityView {
 	/** Defines if the operations must be visible or not. */
 	protected boolean operationsVisible;
 
-	protected DPath boundPath;
+	protected VRectangle boundPath;
 
 	protected Composite glyphClass;
 
 	protected VText glyphTitle;
+
+	protected VSegment glyphSeparatorName;
+
+	protected VSegment glyphSeparatorAttrs;
 
 
 	/**
@@ -61,8 +65,10 @@ public class ClassView extends RectangleEntityView {
 		super(name);
 
 		glyphClass			= new Composite();
-		boundPath			= new DPath();
+		boundPath			= new VRectangle();
 		glyphTitle			= new VText(name);
+		glyphSeparatorName	= new VSegment(0, 0, 0, 0, 0, Color.BLACK);
+		glyphSeparatorAttrs	= new VSegment(0, 0, 0, 0, 0, Color.BLACK);
 		operationsVisible 	= true;
 		propertiesVisible	= true;
 		attributes	   		= new ArrayList<AttributeView>();
@@ -75,15 +81,11 @@ public class ClassView extends RectangleEntityView {
 
 
 	protected void initGlyphs() {
-		boundPath.jump(0, 0, true);
-		boundPath.addSegment(1, 0, true);
-		boundPath.addSegment(1, 1, true);
-		boundPath.addSegment(0, 1, true);
-		boundPath.addSegment(0, 0, true);
-
+		boundPath.setFilled(true);
 		glyphClass.addChild(boundPath);
 		glyphClass.addChild(glyphTitle);
-		glyphClass.setColor(Color.BLACK);
+		glyphClass.addChild(glyphSeparatorName);
+		glyphClass.addChild(glyphSeparatorAttrs);
 	}
 
 
@@ -128,8 +130,10 @@ public class ClassView extends RectangleEntityView {
 	 * @param attr The attribute to remove.
 	 */
 	public void removeAttribute(final AttributeView attr) {
-		if(attr!=null && attributes.remove(attr))
+		if(attr!=null && attributes.remove(attr)) {
+			glyphClass.removeChild(attr.getGlyphText());
 			update();
+		}
 	}
 
 
@@ -148,6 +152,7 @@ public class ClassView extends RectangleEntityView {
 		else {
 			op = new OperationView(opName, opTypeName, isAbs, this);
 			operations.add(op);
+			glyphClass.addChild(op.getGlyphText());
 		}
 
 		return op;
@@ -160,8 +165,10 @@ public class ClassView extends RectangleEntityView {
 	 * @param op The operation to remove.
 	 */
 	public void removeOperation(final OperationView op) {
-		if(operations.remove(op))
+		if(operations.remove(op)) {
+			glyphClass.removeChild(op.getGlyphText());
 			update();
+		}
 	}
 
 
@@ -277,42 +284,48 @@ public class ClassView extends RectangleEntityView {
 		final Rectangle2D oldBorders	= path.getBounds2D();
 		final Dimension dim    			= getPreferredSize();
 		final Rectangle2D titleBounds 	= getTitleBounds();
-		int textHeight  				= (int) titleBounds.getHeight();
-		final int textHeaderHeight   	= (int) (textHeight + HEIGHT_HEADER_GAP);
-		final float halfWidth  = dim.width/2f;
-		final float halfHeight = dim.height/2f;
-		final float cx 		   = (float) centre.x;
-		final float cy 		   = (float) centre.y;
-		final float xAttr 	   = cx-halfWidth + WIDTH_GAP;
-		float yAttr 		   = cy-halfHeight + textHeaderHeight + HEIGHT_GAP;
+		double textHeight  				= titleBounds.getHeight();
+		final double textHeaderHeight   = textHeight + HEIGHT_HEADER_GAP;
+		final double textWidth  		= titleBounds.getWidth();
+		final double halfWidth  = dim.width/2.;
+		final double halfHeight = dim.height/2.;
+		final double cx 		   	= centre.x;
+		final double cy 		   	= centre.y;
+		final double xAttr 	   		= cx-halfWidth + WIDTH_GAP;
+		double yAttr 		   		= cy+halfHeight - textHeaderHeight - HEIGHT_GAP;
 
 //		updateBoundPath(path, dim.width, dim.height, cx, cy);
+		boundPath.setColor(fillingColor);
+		boundPath.setBorderColor(lineColor);
 		updateBoundPath(boundPath, dim.width, dim.height, cx, cy);
-		path.moveTo(cx-halfWidth, cy-halfHeight+textHeaderHeight);
-		path.lineTo(cx+halfWidth, cy-halfHeight+textHeaderHeight);
 
-		glyphTitle.move(-titleBounds.getWidth()/2., 0);
+		glyphSeparatorName.setColor(getLineColor());
+		glyphSeparatorName.setEndPoints(cx-halfWidth, cy+halfHeight-textHeaderHeight, cx+halfWidth, cy+halfHeight-textHeaderHeight);
+
+		glyphTitle.moveTo(centre.x-textWidth/2, centre.y+getPreferredSize().height/2-textHeight-(textHeaderHeight-textHeight)/2.);
 		glyphTitle.setFont(getTitleFont());
 
 		if(propertiesVisible)
 			for(AttributeView attr : attributes) {
 				textHeight 	= (int) attr.getHeight();
-				yAttr 		+= textHeight;
+				yAttr 		-= textHeight;
 				attr.setPosition(xAttr, yAttr);
-				yAttr += HEIGHT_GAP;
+				attr.glyphText.setFont(attr.getFont());
+				yAttr -= HEIGHT_GAP;
 			}
 
 		if(operationsVisible) {
 			if(!operations.isEmpty() && visibility==Visibility.STANDARD) {
-				path.moveTo(cx-halfWidth, yAttr);
-				path.lineTo(cx+halfWidth, yAttr);
+				glyphSeparatorAttrs.setColor(getLineColor());
+				glyphSeparatorAttrs.setEndPoints(cx-halfWidth, yAttr, cx+halfWidth, yAttr);
 			}
 
 			for(OperationView op : operations) {
 				textHeight 	= (int) op.getHeight();
-				yAttr 		+= textHeight;
+				yAttr 		-= textHeight;
 				op.setPosition(xAttr, yAttr);
-				yAttr += HEIGHT_GAP;
+				op.glyphText.setFont(op.getFont());
+				yAttr -= HEIGHT_GAP;
 			}
 		}
 
@@ -321,13 +334,10 @@ public class ClassView extends RectangleEntityView {
 
 
 
-	private static void updateBoundPath(final DPath path, final double width, final double height, final double cx, final double cy) {
-		final double halfWidth  = width/2.;
-		final double halfHeight = height/2.;
-
-		path.edit(new Point2D.Double[]{new Point2D.Double(cx-halfWidth, cy-halfHeight), new Point2D.Double(cx+halfWidth, cy-halfHeight),
-				new Point2D.Double(cx+halfWidth, cy+halfHeight), new Point2D.Double(cx-halfWidth, cy+halfHeight),
-				new Point2D.Double(cx-halfWidth, cy-halfHeight)}, true);
+	private static void updateBoundPath(final VRectangle path, final double width, final double height, final double cx, final double cy) {
+		path.moveTo(cx, cy);
+		path.setWidth(width);
+		path.setHeight(height);
 	}
 
 
@@ -365,6 +375,9 @@ public class ClassView extends RectangleEntityView {
 	 */
 	public void setPropertiesVisible(final boolean propertiesVisible) {
 		this.propertiesVisible = propertiesVisible;
+
+		for(AttributeView attr : attributes)
+			attr.getGlyphText().setVisible(propertiesVisible);
 	}
 
 

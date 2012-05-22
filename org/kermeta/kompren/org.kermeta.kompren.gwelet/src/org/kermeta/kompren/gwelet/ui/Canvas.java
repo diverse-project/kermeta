@@ -30,6 +30,7 @@ public class Canvas implements ConcretePresentation {
 		cameras.add(detailCam);
 		view = VirtualSpaceManager.INSTANCE.addFrameView(cameras, "Gwelet", View.STD_VIEW, 800, 600, true);
 		view.setBackgroundColor(Color.WHITE);
+		view.setAntialiasing(true);
 
 		overviewCam.setAltitude(800f, true);
 		OverviewPortal p = new OverviewPortal(0, 0, 200, 150, overviewCam, detailCam);
@@ -38,6 +39,10 @@ public class Canvas implements ConcretePresentation {
 
 		ClassView cv = new ClassView("foo");
 		cv.addAttribute("attr1", "String");
+		cv.addAttribute("attr2", "Boolean");
+		cv.addOperation("op1", "Void", true);
+		cv.addOperation("operation2", "Boolean", false);
+		cv.update();
 
 		vs.addGlyph(cv.getGlyph());
 	}
