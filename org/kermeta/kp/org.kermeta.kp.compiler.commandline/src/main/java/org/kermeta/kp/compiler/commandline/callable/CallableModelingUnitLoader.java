@@ -18,6 +18,7 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KpResourceHelper;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoader;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
 import org.kermeta.kp.compiler.commandline.TracedURL;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
@@ -42,7 +43,25 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 	@Override
 	public /*ModelingUnit*/ Collection<ModelingUnit> call() throws Exception {
 		try {
-			ModelingUnitLoader muLoader = new ModelingUnitLoader(compiler.logger, compiler.runInEclipse, compiler.saveIntermediateFiles, compiler.targetIntermediateFolder);
+			ModelingUnitLoader muLoader = null; // = new ModelingUnitLoader(compiler.logger, compiler.runInEclipse, compiler.saveIntermediateFiles, compiler.targetIntermediateFolder);
+
+			// Search among the known file extensions one that matches the url to load
+			// Starts from the longest one to avoid conflict, 
+			// e.g. the .profile.uml loader will have higher priority than the .uml loader
+			String urlString = urlToLoad.getUrl().toString();
+			for(String key : compiler.muLoaders.descendingKeySet()){
+				if(urlString.endsWith(key)){
+					ModelingUnitLoaderFactory factory = compiler.muLoaders.get(key);
+					muLoader = factory.createModelingUnitLoader(compiler.logger, compiler.runInEclipse, compiler.saveIntermediateFiles, compiler.targetIntermediateFolder);
+					break;
+				}
+			}
+			
+			if(muLoader==null){
+				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Problem loading "+urlToLoad.getUrl()+" Unknown file extension", KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(urlToLoad.getSource()));			
+				compiler.failWithMessage("Problem loading "+urlToLoad.getUrl()+" Unknown file extension");
+				return null;
+			}
 			
 			Collection<ModelingUnit> mus = muLoader.loadModelingUnitFromURL(urlToLoad.getUrl().toString());
 			
@@ -57,11 +76,11 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 					}
 				}
 				else {
-					compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.lastLoadErrorMessage, KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+					compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.getLastLoadErrorMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
 				}
 			}
 			else {
-				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.lastLoadErrorMessage, KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
+				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.getLastLoadErrorMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
 			}
 			
 			/*

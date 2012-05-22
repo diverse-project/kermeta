@@ -18,8 +18,11 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -29,6 +32,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -40,6 +45,16 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoader;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForEcore;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKm;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKmt;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForUmlProfile;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForEcore;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForKm;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForKmt;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForUmlProfile;
 import org.kermeta.kp.compiler.commandline.TracedURL;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.Activator;
@@ -80,6 +95,8 @@ public class KPBuilder {
 	public static final String DEFAULT_EMFSOURCES_LOCATION =  "emfjava";
 	public static final String DEFAULT_EMFBIN_LOCATION =  "emfclasses";
 	
+	private NavigableMap<String,ModelingUnitLoaderFactory> muLoaders;
+	
 	public KPBuilder(IFile kpProjectFile) {
 		super();
 		this.kpProjectFile = kpProjectFile;
@@ -103,6 +120,8 @@ public class KPBuilder {
 			boolean saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
 			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles, true, true, true);
 			compiler.initializeTargetFolders(outputRootFolder, outputRootFolder, outputScalaFolder, outputScalaBinaryFolder, outputGenmodelFolder, outputEMFJavaFolder, outputEMFBinaryFolder, outputResourceFolder);
+			setModelingUnitLoaders();
+			compiler.setModelingUnitLoaders(muLoaders);
 			refreshFileIndex();
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
@@ -652,5 +671,59 @@ public class KPBuilder {
 	
 	public String getProgressGroup(){
 		return "KPBuilder"+this.hashCode();
+	}
+	
+	/**
+	 * Get the ModelingUnit loaders declared via the extension point mechanism
+	 */
+	private void setModelingUnitLoaders(){
+		setDefaultModelingUnitLoaders();
+		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID,"muLoaders").getExtensions();
+		for(IExtension extension : extensions){
+			for(IConfigurationElement element : extension.getConfigurationElements()){
+				try {
+					ModelingUnitLoaderFactory factory = (ModelingUnitLoaderFactory) element.createExecutableExtension("factory");
+					for(IConfigurationElement child : element.getChildren()){
+						muLoaders.put(child.getAttribute("fileExtension"),factory);
+					}
+				} catch (Exception e){
+					Activator.getDefault().getMessaggingSystem().log(
+							Kind.UserERROR,
+							"Couldn't load modeling unit factory " + element.getAttribute("factory"), 
+							this.getClass().getName(), e);
+				}
+			}
+		}
+	}
+
+	private void setDefaultModelingUnitLoaders(){
+		muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
+		muLoaders.put(".km", new ModelingUnitLoaderFactoryForKm());
+		muLoaders.put(".kmt", new ModelingUnitLoaderFactoryForKmt());
+		muLoaders.put(".ecore", new ModelingUnitLoaderFactoryForEcore());
+		muLoaders.put(".profile.uml", new ModelingUnitLoaderFactoryForUmlProfile());
+	}
+	
+	/**
+	 * A comparator for file extension, sorting them by length, then by alphabetical order.<br/>
+	 * It is consistent with equals.
+	 */
+	class FileExtensionComparator implements Comparator<String> {
+
+		/**
+		 * Compare two Strings according to their length.<br/>
+		 * If the two Strings have the same length, then compare them according to lexicographical order <br/>
+		 * <br/>
+		 * This method is consistent with equals (that is, compare(s0,s1)==0 iff s0.equals(s1)
+		 */
+		@Override
+		public int compare(String arg0, String arg1) {
+			// if same length, ensure consistency with equals
+			if(arg0.length()==arg1.length()){
+				return arg0.compareTo(arg1);
+			} else
+				return arg0.length()-arg1.length();
+		}
+		
 	}
 }

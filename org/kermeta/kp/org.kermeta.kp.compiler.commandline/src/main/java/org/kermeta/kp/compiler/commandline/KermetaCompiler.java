@@ -22,8 +22,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.SortedMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -97,6 +99,11 @@ public class KermetaCompiler {
 	public boolean checkingEnabled = false;
 	public boolean stopOnError = true;
 
+	/**
+	 * An ordered Map associating with each file extension its Modeling Unit loader.<br/>
+	 */
+	public NavigableMap<String,ModelingUnitLoaderFactory> muLoaders;
+	
 	public boolean runInEclipse = false;
 	public boolean runResultInSeparateVM = true;
 	public Boolean saveIntermediateFiles = false;
@@ -878,12 +885,7 @@ public class KermetaCompiler {
 		}
 
 		if (resolvedMU.getResult() != null) {
-			if(saveIntermediateFiles){
-				// save only if required
-				new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Setting.km", logger).convert(resolvedMU.getResult());
-			}
-			// actually the setter relies on some data created by the resolver, so directly send the result to it (no optimisation is possible there)
-			convertedModelingUnit = resolvedMU.getResult();
+			convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Setting.km", logger).convert(resolvedMU.getResult());
 
 			// StaticSetting
 			ErrorProneResult<ModelingUnit> staticsettedMU = theResolver.doStaticSetting(convertedModelingUnit);
@@ -1254,4 +1256,7 @@ public class KermetaCompiler {
 	    return result;
 	}
 	
+	public void setModelingUnitLoaders(NavigableMap<String,ModelingUnitLoaderFactory> muLoaders){
+		this.muLoaders = muLoaders;
+	}
 }
