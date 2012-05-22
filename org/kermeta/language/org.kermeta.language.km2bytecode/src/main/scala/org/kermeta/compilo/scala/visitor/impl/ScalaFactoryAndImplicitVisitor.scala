@@ -3,7 +3,6 @@ package org.kermeta.compilo.scala.visitor.impl
 
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
-import org.antlr.stringtemplate.StringTemplate
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala._
 import org.kermeta.language._
@@ -479,16 +478,19 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
   }
 
   def genetateUtilObject() = {
-    var template = new StringTemplate("package scalaUtil\n object Util {\n    def getMetaClass(t:String):org.kermeta.language.structure.Class={\n " +
-      "var cd : _root_.org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(t);\n" +
-      "if (cd !=null){\n" +
-      "            var cl = " + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure. " + GlobalConfiguration.factoryName + ".createClass\n" +
-      "            cl.setTypeDefinition(cd)\n" +
-      "          return cl\n" +
-      "        }else\n" +
-      "            return null;\n}\n" +
-      "    def clone(t:org.kermeta.language.structure.Class, o:Any):Any={return null;\n}\n"
-      + "}\n")
+    var template = new StringBuilder
+    template.append("package scalaUtil\n object Util {\n")
+    template.append("    def getMetaClass(t:String):org.kermeta.language.structure.Class={\n")
+    template.append("       var cd : _root_.org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(t);\n")
+    template.append("       if (cd !=null){\n")
+    template.append("            var cl = " + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure. " + GlobalConfiguration.factoryName + ".createClass\n")
+    template.append("            cl.setTypeDefinition(cd)\n")
+    template.append("            return cl\n" )
+    template.append("       } else\n" )
+    template.append("            return null;\n")
+    template.append("    }\n" )
+    template.append("    def clone(t:org.kermeta.language.structure.Class, o:Any):Any={return null;}\n")
+    template.append("}\n")
 
     Util.generateFile("scalaUtil", "Util", template.toString)
 

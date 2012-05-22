@@ -2,7 +2,6 @@ package org.kermeta.compilo.scala.rich.richAspect
 import org.kermeta.language.behavior._
 import org.kermeta.language.structure._
 import org.kermeta.compilo.scala.LogAspect
-import org.antlr.stringtemplate.StringTemplate
 import org.kermeta.compilo.scala.Util
 import org.kermeta.compilo.scala.rich.RichIterable
 import scala.collection.JavaConversions._
@@ -214,16 +213,17 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   def visitBlock(thi: Block, res: StringBuilder) = {
     log.debug("BlockAspect Generation ")
     res.append("\n\n")
-    var template = new StringTemplate("try {\n $body$ \n} catch {\n $catchBody$ }\n")
     var body, catchBody = new StringBuilder
 
     generateScalaCodeEach(body, thi.getStatement(), "\n") //BODY GEN
     thi.getRescueBlock().foreach(b => { visit(b, catchBody) }) //CATCH GEN
     //RESULT GEN
     if (thi.getRescueBlock().size() > 0) {
-      template.setAttribute("body", body.toString)
-      template.setAttribute("catchBody", catchBody)
-      res.append(template.toString)
+      res.append("try {\n ")
+      res.append( body.toString)
+      res.append(" \n} catch {\n ")
+      res.append(catchBody)
+      res.append(" }\n")
     } else {
       res.append("{\n" + body.toString + "}\n")
     }
@@ -479,18 +479,20 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitVariableDecl(thi: VariableDecl, res: StringBuilder) = {
-    var template = new StringTemplate("var $ident$ : $type$ = $init$;")
     var typeVal, initVal = new StringBuilder
     getListorType(thi, typeVal)
-    template.setAttribute("ident", Util.protectScalaKeyword(thi.getIdentifier))
-    template.setAttribute("type", typeVal.toString)
     if (thi.getInitialization != null) {
       visit(thi.getInitialization(), initVal)
     } else {
       initVal.append("null.asInstanceOf[" + typeVal.toString + "]")
     }
-    template.setAttribute("init", initVal.toString)
-    res.append(template.toString)
+    res.append("var ")
+    res.append(Util.protectScalaKeyword(thi.getIdentifier))
+    res.append(" : ")
+    res.append(typeVal.toString)
+    res.append(" = ")
+    res.append(initVal.toString)
+    res.append(";")
   }
 
   def getListorType(thi: VariableDecl, res: StringBuilder) = {

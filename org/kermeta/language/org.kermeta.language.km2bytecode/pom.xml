@@ -49,18 +49,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>stringtemplate</artifactId>
-            <version>3.2.1</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-<!--         <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
-            <version>RELEASE691</version>
-        </dependency> -->
         
         <dependency>
             <groupId>com.github.joel1di1</groupId>
@@ -154,7 +142,6 @@
 							!org.apache.maven.*,
 							!org.codehaus.plexus.*,
 							!scala.*,
-							org.antlr.stringtemplate.*,
 							org.kermeta.language,
 							org.kermeta.language.structure.*,
 							org.kermeta.language.behavior.*,

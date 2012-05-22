@@ -2,7 +2,6 @@ package org.kermeta.compilo.scala.rich.richAspect
 
 import org.kermeta.compilo.scala.rich._
 import _root_.k2.utils.ReflexivityLoader
-import org.antlr.stringtemplate.StringTemplate
 import org.eclipse.emf.common.util.EList
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala._
@@ -127,9 +126,11 @@ trait ClassDefinitionAspect extends ObjectVisitor{
 
     def generategetQualifiedName(thi:ClassDefinition,res:StringBuilder) = {
         var qualifiedName = ReflexivityLoader.qualifiedName(thi)
-        var template = new StringTemplate("override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure."+GlobalConfiguration.factoryName+".createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
-        template.setAttribute("ClassName", qualifiedName)
-        res.append(template.toString)
+        res.append("override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n")
+        res.append(" var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\""+qualifiedName+"\"); \n")
+        res.append("         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure."+GlobalConfiguration.factoryName+".createClass \n")
+        res.append(" cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+        
     }
 
     def generateInvariants(thi:ClassDefinition,res1:StringBuilder) = {
