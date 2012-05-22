@@ -337,6 +337,46 @@ public class TypeMappingItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createTotalIsomorphicBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createPartialIsomorphicBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createTotalNonIsomorphicBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createPartialNonIsomorphicBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createDirectBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
+				 StructureFactory.eINSTANCE.createAdaptationBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_MAPPING__MAPPING,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add

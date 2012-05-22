@@ -812,6 +812,190 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.UnresolvedTypeVariable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnresolvedTypeVariableItemProvider unresolvedTypeVariableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.UnresolvedTypeVariable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnresolvedTypeVariableAdapter() {
+		if (unresolvedTypeVariableItemProvider == null) {
+			unresolvedTypeVariableItemProvider = new UnresolvedTypeVariableItemProvider(this);
+		}
+
+		return unresolvedTypeVariableItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.UnresolvedTypeDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnresolvedTypeDefinitionItemProvider unresolvedTypeDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.UnresolvedTypeDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnresolvedTypeDefinitionAdapter() {
+		if (unresolvedTypeDefinitionItemProvider == null) {
+			unresolvedTypeDefinitionItemProvider = new UnresolvedTypeDefinitionItemProvider(this);
+		}
+
+		return unresolvedTypeDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.TotalIsomorphicBinding} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TotalIsomorphicBindingItemProvider totalIsomorphicBindingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.TotalIsomorphicBinding}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTotalIsomorphicBindingAdapter() {
+		if (totalIsomorphicBindingItemProvider == null) {
+			totalIsomorphicBindingItemProvider = new TotalIsomorphicBindingItemProvider(this);
+		}
+
+		return totalIsomorphicBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.PartialIsomorphicBinding} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PartialIsomorphicBindingItemProvider partialIsomorphicBindingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.PartialIsomorphicBinding}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPartialIsomorphicBindingAdapter() {
+		if (partialIsomorphicBindingItemProvider == null) {
+			partialIsomorphicBindingItemProvider = new PartialIsomorphicBindingItemProvider(this);
+		}
+
+		return partialIsomorphicBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.TotalNonIsomorphicBinding} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TotalNonIsomorphicBindingItemProvider totalNonIsomorphicBindingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.TotalNonIsomorphicBinding}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTotalNonIsomorphicBindingAdapter() {
+		if (totalNonIsomorphicBindingItemProvider == null) {
+			totalNonIsomorphicBindingItemProvider = new TotalNonIsomorphicBindingItemProvider(this);
+		}
+
+		return totalNonIsomorphicBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.PartialNonIsomorphicBinding} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PartialNonIsomorphicBindingItemProvider partialNonIsomorphicBindingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.PartialNonIsomorphicBinding}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPartialNonIsomorphicBindingAdapter() {
+		if (partialNonIsomorphicBindingItemProvider == null) {
+			partialNonIsomorphicBindingItemProvider = new PartialNonIsomorphicBindingItemProvider(this);
+		}
+
+		return partialNonIsomorphicBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.DirectBinding} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DirectBindingItemProvider directBindingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.DirectBinding}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDirectBindingAdapter() {
+		if (directBindingItemProvider == null) {
+			directBindingItemProvider = new DirectBindingItemProvider(this);
+		}
+
+		return directBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.AdaptationBinding} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AdaptationBindingItemProvider adaptationBindingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.AdaptationBinding}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAdaptationBindingAdapter() {
+		if (adaptationBindingItemProvider == null) {
+			adaptationBindingItemProvider = new AdaptationBindingItemProvider(this);
+		}
+
+		return adaptationBindingItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -942,6 +1126,14 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
 		if (typeMappingItemProvider != null) typeMappingItemProvider.dispose();
 		if (unresolvedInferredTypeItemProvider != null) unresolvedInferredTypeItemProvider.dispose();
+		if (unresolvedTypeVariableItemProvider != null) unresolvedTypeVariableItemProvider.dispose();
+		if (unresolvedTypeDefinitionItemProvider != null) unresolvedTypeDefinitionItemProvider.dispose();
+		if (totalIsomorphicBindingItemProvider != null) totalIsomorphicBindingItemProvider.dispose();
+		if (partialIsomorphicBindingItemProvider != null) partialIsomorphicBindingItemProvider.dispose();
+		if (totalNonIsomorphicBindingItemProvider != null) totalNonIsomorphicBindingItemProvider.dispose();
+		if (partialNonIsomorphicBindingItemProvider != null) partialNonIsomorphicBindingItemProvider.dispose();
+		if (directBindingItemProvider != null) directBindingItemProvider.dispose();
+		if (adaptationBindingItemProvider != null) adaptationBindingItemProvider.dispose();
 	}
 
 }

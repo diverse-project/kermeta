@@ -67,7 +67,7 @@ public class ModelTypeItemProvider
 			addNamePropertyDescriptor(object);
 			addSuperTypePropertyDescriptor(object);
 			addIsAspectPropertyDescriptor(object);
-			addContentsPropertyDescriptor(object);
+			addTypeDefinitionsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -139,22 +139,22 @@ public class ModelTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Contents feature.
+	 * This adds a property descriptor for the Type Definitions feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addContentsPropertyDescriptor(Object object) {
+	protected void addTypeDefinitionsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Model_contents_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Model_contents_feature", "_UI_Model_type"),
-				 StructurePackage.Literals.MODEL__CONTENTS,
+				 getString("_UI_ModelType_typeDefinitions_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelType_typeDefinitions_feature", "_UI_ModelType_type"),
+				 StructurePackage.Literals.MODEL_TYPE__TYPE_DEFINITIONS,
+				 true,
 				 false,
-				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
@@ -174,6 +174,7 @@ public class ModelTypeItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS);
+			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 		}
 		return childrenFeatures;
 	}
@@ -234,6 +235,7 @@ public class ModelTypeItemProvider
 				return;
 			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
 			case StructurePackage.MODEL_TYPE__TYPE_MAPPINGS:
+			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -313,8 +315,66 @@ public class ModelTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS,
 				 StructureFactory.eINSTANCE.createTypeMapping()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createEnumeration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createClassDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createModelType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeDefinition()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE ||
+			childFeature == StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

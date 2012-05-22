@@ -207,6 +207,11 @@ public class PackageItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.PACKAGE__NESTED_PACKAGE,
 				 StructureFactory.eINSTANCE.createPackage()));
 	}

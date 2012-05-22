@@ -228,6 +228,11 @@ public class ExpressionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedInferredType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
 	}
 
 	/**

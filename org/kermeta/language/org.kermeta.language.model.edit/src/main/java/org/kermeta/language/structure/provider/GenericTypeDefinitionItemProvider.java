@@ -154,6 +154,11 @@ public class GenericTypeDefinitionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
 				 StructureFactory.eINSTANCE.createVirtualType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
 	}
 
 	/**

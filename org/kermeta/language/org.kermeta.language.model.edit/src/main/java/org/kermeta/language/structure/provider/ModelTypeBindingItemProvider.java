@@ -23,18 +23,18 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.kermeta.language.structure.ModelTypeBinding;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.language.structure.TypeDefinitionContainer;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.TypeDefinitionContainer} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.ModelTypeBinding} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeDefinitionContainerItemProvider
-	extends NamedElementItemProvider
+public class ModelTypeBindingItemProvider
+	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -47,7 +47,7 @@ public class TypeDefinitionContainerItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeDefinitionContainerItemProvider(AdapterFactory adapterFactory) {
+	public ModelTypeBindingItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -78,7 +78,7 @@ public class TypeDefinitionContainerItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
+			childrenFeatures.add(StructurePackage.Literals.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS);
 		}
 		return childrenFeatures;
 	}
@@ -97,17 +97,6 @@ public class TypeDefinitionContainerItemProvider
 	}
 
 	/**
-	 * This returns TypeDefinitionContainer.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeDefinitionContainer"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,10 +104,7 @@ public class TypeDefinitionContainerItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TypeDefinitionContainer)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TypeDefinitionContainer_type") :
-			getString("_UI_TypeDefinitionContainer_type") + " " + label;
+		return getString("_UI_ModelTypeBinding_type");
 	}
 
 	/**
@@ -132,8 +118,8 @@ public class TypeDefinitionContainerItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeDefinitionContainer.class)) {
-			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
+		switch (notification.getFeatureID(ModelTypeBinding.class)) {
+			case StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -153,33 +139,13 @@ public class TypeDefinitionContainerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createTypeDefinition()));
+				(StructurePackage.Literals.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS,
+				 StructureFactory.eINSTANCE.createDirectBinding()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createEnumeration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createClassDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createUnresolvedTypeDefinition()));
+				(StructurePackage.Literals.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS,
+				 StructureFactory.eINSTANCE.createAdaptationBinding()));
 	}
 
 }

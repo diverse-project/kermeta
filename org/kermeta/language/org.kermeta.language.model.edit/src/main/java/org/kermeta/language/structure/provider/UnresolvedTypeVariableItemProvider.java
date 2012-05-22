@@ -27,16 +27,16 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.language.structure.TypeDefinition;
+import org.kermeta.language.structure.UnresolvedTypeVariable;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.TypeDefinition} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.UnresolvedTypeVariable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeDefinitionItemProvider
-	extends NamedElementItemProvider
+public class UnresolvedTypeVariableItemProvider
+	extends UnresolvedItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +49,7 @@ public class TypeDefinitionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeDefinitionItemProvider(AdapterFactory adapterFactory) {
+	public UnresolvedTypeVariableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,52 +64,52 @@ public class TypeDefinitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSuperTypePropertyDescriptor(object);
-			addIsAspectPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addSupertypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Super Type feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSuperTypePropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TypeDefinition_superType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_superType_feature", "_UI_TypeDefinition_type"),
-				 StructurePackage.Literals.TYPE_DEFINITION__SUPER_TYPE,
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Aspect feature.
+	 * This adds a property descriptor for the Supertype feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsAspectPropertyDescriptor(Object object) {
+	protected void addSupertypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TypeDefinition_isAspect_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_isAspect_feature", "_UI_TypeDefinition_type"),
-				 StructurePackage.Literals.TYPE_DEFINITION__IS_ASPECT,
+				 getString("_UI_TypeVariable_supertype_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariable_supertype_feature", "_UI_TypeVariable_type"),
+				 StructurePackage.Literals.TYPE_VARIABLE__SUPERTYPE,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
@@ -127,7 +127,6 @@ public class TypeDefinitionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS);
 		}
 		return childrenFeatures;
 	}
@@ -146,14 +145,14 @@ public class TypeDefinitionItemProvider
 	}
 
 	/**
-	 * This returns TypeDefinition.gif.
+	 * This returns UnresolvedTypeVariable.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeDefinition"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/UnresolvedTypeVariable"));
 	}
 
 	/**
@@ -164,10 +163,10 @@ public class TypeDefinitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TypeDefinition)object).getName();
+		String label = ((UnresolvedTypeVariable)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_TypeDefinition_type") :
-			getString("_UI_TypeDefinition_type") + " " + label;
+			getString("_UI_UnresolvedTypeVariable_type") :
+			getString("_UI_UnresolvedTypeVariable_type") + " " + label;
 	}
 
 	/**
@@ -181,12 +180,11 @@ public class TypeDefinitionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeDefinition.class)) {
-			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+		switch (notification.getFeatureID(UnresolvedTypeVariable.class)) {
+			case StructurePackage.UNRESOLVED_TYPE_VARIABLE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
-			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
+			case StructurePackage.UNRESOLVED_TYPE_VARIABLE__CONTAINED_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -268,11 +266,6 @@ public class TypeDefinitionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS,
-				 StructureFactory.eINSTANCE.createTypeMapping()));
 	}
 
 }

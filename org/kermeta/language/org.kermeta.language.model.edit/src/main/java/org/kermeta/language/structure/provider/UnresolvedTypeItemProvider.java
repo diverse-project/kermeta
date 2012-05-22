@@ -245,6 +245,11 @@ public class UnresolvedTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.UNRESOLVED_TYPE__USINGS,
 				 StructureFactory.eINSTANCE.createUsing()));
 
@@ -307,6 +312,11 @@ public class UnresolvedTypeItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
 				 StructureFactory.eINSTANCE.createUnresolvedInferredType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
 	}
 
 	/**

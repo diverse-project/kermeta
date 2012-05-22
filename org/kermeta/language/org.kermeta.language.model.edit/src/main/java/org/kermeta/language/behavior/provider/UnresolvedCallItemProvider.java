@@ -375,6 +375,11 @@ public class UnresolvedCallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -677,6 +682,11 @@ public class UnresolvedCallItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
 				 StructureFactory.eINSTANCE.createUnresolvedInferredType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
 	}
 
 	/**

@@ -279,6 +279,11 @@ public class DataTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS,
 				 StructureFactory.eINSTANCE.createTypeMapping()));
 	}
