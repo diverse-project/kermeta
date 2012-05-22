@@ -3,6 +3,7 @@
   <classpathentry kind="src" path="src" including="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+  <classpathentry kind="src" path="/org.kermeta.kompren.diagram"/>
   <classpathentry kind="var" path="M2_REPO/org/malai/malai.core/0.2-SNAPSHOT/malai.core-0.2-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/fr/inria/zvtm/zvtm-core/0.11.0/zvtm-core-0.11.0.jar"/>

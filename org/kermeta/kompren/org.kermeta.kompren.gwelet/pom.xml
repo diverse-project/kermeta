@@ -37,6 +37,7 @@
                         <Import-Package>
                         	org.eclipse.emf.*,
                         	org.kermeta.kompren.org.kermeta.kompren.slicer.*,
+                        	org.kermeta.kompren.diagram.*,
                         	fr.inria.zvtm.*,
                         	*
                         </Import-Package>

@@ -10,13 +10,13 @@ import org.malai.ui.UI;
 
 public class GweletFrame extends UI {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected Model model;
-	
+
 	protected Canvas canvas;
-	
+
 	protected JFrame proxiedFrame;
-	
+
 
 	public GweletFrame() {
 		super();
@@ -37,8 +37,8 @@ public class GweletFrame extends UI {
 		model = new Model();
 		canvas = new Canvas();
 	}
-	
-	
+
+
 	@Override
 	public void setVisible(final boolean visible) {
 		proxiedFrame.setVisible(visible);
