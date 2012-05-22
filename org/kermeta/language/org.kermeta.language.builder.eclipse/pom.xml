@@ -155,9 +155,9 @@
 	        	</includes>
 	      	</resource>
 	      	<resource>
-	      		<directory>schema</directory>
+	      		<directory>.</directory>
 	      		<includes>
-	      			<include>muLoaders.exsd</include>
+	      			<include>schema/*</include>
 	      		</includes>
 	      	</resource>
 	    </resources>
