@@ -22,7 +22,7 @@ public class GweletFrame extends UI {
 		super();
 		proxiedFrame = (JFrame) canvas.view.getFrame();
 		proxiedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		proxiedFrame.setExtendedState(proxiedFrame.getExtendedState() | Frame.MAXIMIZED_BOTH);
+		proxiedFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
 
 

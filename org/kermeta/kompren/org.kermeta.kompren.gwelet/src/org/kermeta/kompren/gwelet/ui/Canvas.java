@@ -28,7 +28,6 @@ public class Canvas implements ConcretePresentation {
 		overviewCam.setAltitude(800f, true);
 		cameras.add(detailCam);
 		view = VirtualSpaceManager.INSTANCE.addFrameView(cameras, "Gwelet", View.STD_VIEW, 800, 600, true);
-		System.out.println(view.getFrame());
 		view.setBackgroundColor(Color.WHITE);
 	}
 	

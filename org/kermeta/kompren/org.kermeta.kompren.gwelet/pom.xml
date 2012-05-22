@@ -27,7 +27,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>org.kermeta.kompren.slicer.edit; singleton=true</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.kompren.gwelet; singleton=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
@@ -48,6 +48,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.kermeta.kompren</groupId>
+            <artifactId>kompren.diagram</artifactId>
+            <version>${kompren.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.malai</groupId>
             <artifactId>malai.core</artifactId>
