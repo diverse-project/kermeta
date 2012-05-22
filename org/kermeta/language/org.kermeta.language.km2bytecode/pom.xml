@@ -144,8 +144,8 @@
 							org.kermeta.language.km2bytecode.*
 						</Export-Package>
 						<Require-Bundle>
-							org.kermeta.scala.scala-library,
-							org.kermeta.scala.scala-compiler,
+							org.scala-ide.scala.library,
+							org.scala-ide.scala.compiler,
 							org.kermeta.language.library.core
 						</Require-Bundle>
 						<!-- due to the workaround of reflexivity.loader used by gendoc and pretty printer, library.core classes are exported by several componet
