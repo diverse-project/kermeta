@@ -25,58 +25,57 @@ import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
  */
 public abstract class EntityView extends ComponentView implements IEntityView {
 	public static final int DEFAUT_OPACITY = 200;
-	
+
 	public static final FontMetrics FONT_METRICS;
-	
+
 	public static final FontRenderContext FONT_RENDER_CONT;
-	
+
 	static {
 		BufferedImage bufferImage = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics 	  = bufferImage.createGraphics();
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		FONT_METRICS 	 		  = graphics.getFontMetrics();
 		FONT_RENDER_CONT 		  = graphics.getFontRenderContext();
-		
+
 		bufferImage.flush();
 		bufferImage = null;
 	}
-	
-	
+
+
 	/** The name of the class. */
 	protected String name;
-	
+
 	/** The colour of the filling. */
 	protected Color fillingColor;
-	
+
 	/** The scale applied on the entity. Differs from the zoom: the scale is usually used to emphasise the entity. */
 	protected double scale;
-	
+
 	/** The centre of the entity. */
 	protected Point2D.Double centre;
-	
+
 	/** The name of the font used by the class. */
 	protected String fontName;
-	
+
 	/** The size of the font. */
 	protected double fontSize;
-	
+
 	/** The style of the font. */
 	protected int fontStyle;
-	
+
 	protected List<IAnchor> anchors;
-	
-	
-	
-	
+
+
+
 	/**
 	 * Initialises the entity.
 	 */
 	public EntityView(final String name) {
 		super();
-		
+
 		if(name==null)
 			throw new IllegalArgumentException();
-		
+
 		this.name	= name;
 		anchors		= new ArrayList<IAnchor>();
 		centre		= new Point2D.Double();
@@ -87,14 +86,14 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		updateLineColor(255);
 		setScale(1.);
 	}
-	
-	
+
+
 	@Override
 	public List<IAnchor> getAnchors() {
 		return anchors;
 	}
-	
-	
+
+
 	@Override
 	public String getName() {
 		return name;
@@ -106,20 +105,20 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		if(name!=null)
 			this.name = name;
 	}
-	
-	
+
+
 	protected abstract void initAnchors();
-	
-	
+
+
 	protected abstract IAnchor createMiddleAnchor(final IAnchor closestAnch, final IAnchor secondAnchor);
-	
-	
-	
+
+
+
 	@Override
 	public IAnchor getClosestFreeAnchor(final Point2D point, final boolean create) {
 		if(point==null)
 			return null;
-		
+
 		IAnchor closestAnch	= null;
 		double distMin		= Double.MAX_VALUE;
 		Point2D pos;
@@ -127,68 +126,68 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		final int nbAnchors = anchors.size();
 		IAnchor anchor;
 		int posClosestAnchor = 0;
-		
+
 		// Looking for the closest anchor.
 		for(int i=0; i<nbAnchors; i++) {
 			anchor = anchors.get(i);
 			pos    = anchor.getPosition();
 			dist   = pos.distance(point);
-			
+
 			if(dist<distMin) {
 				distMin 	= dist;
 				closestAnch = anchor;
 				posClosestAnchor = i;
 			}
 		}
-		
+
 		// If there is no anchor or if it is not free and we must not create a free anchor.
-		if(closestAnch==null || (!closestAnch.isFree() && !create))
+		if(closestAnch==null || !closestAnch.isFree() && !create)
 			return null;
-		
+
 		if(closestAnch.isFree())
 			return closestAnch;
-		
+
 		// Cannot create an anchor if we do not have two anchors.
 		if(anchors.size()<2)
 			return null;
-		
+
 		// Creating a new free anchor.
-		IAnchor secondAnchor = posClosestAnchor<(nbAnchors-1) ? anchors.get(posClosestAnchor+1) : null;
+		IAnchor secondAnchor = posClosestAnchor<nbAnchors-1 ? anchors.get(posClosestAnchor+1) : null;
 		IAnchor thirdAnchor  = posClosestAnchor>0 ? anchors.get(posClosestAnchor-1) : null;
 		IAnchor finalAnchor = null;
-		
+
 		if(secondAnchor==null) {
 			if(thirdAnchor!=null)
 				finalAnchor = thirdAnchor;
-		}else 
+		}else
 			if(thirdAnchor==null)
 				finalAnchor = secondAnchor;
 			else
-				finalAnchor = secondAnchor.getPosition().distance(point)<thirdAnchor.getPosition().distance(point) || 
-								(secondAnchor.isFree() && !thirdAnchor.isFree()) ? secondAnchor : thirdAnchor;
-		
-		
+				finalAnchor = secondAnchor.getPosition().distance(point)<thirdAnchor.getPosition().distance(point) ||
+								secondAnchor.isFree() && !thirdAnchor.isFree() ? secondAnchor : thirdAnchor;
+
+
 		if(finalAnchor!=null)
 			if(finalAnchor.isFree())
 				closestAnch = finalAnchor;
 			else
 				closestAnch = createMiddleAnchor(closestAnch, finalAnchor);
-		
+
 		return closestAnch;
 	}
-	
+
 
 	@Override
 	public void anchorRelation(final IRelationView relation, final IEntityView opposite, final boolean atEnd) {
 		IAnchor anchor;
-		
+
 		if(opposite==this) {
 			Point2D pt = anchors.get(0).getPosition();
 			anchor = getClosestFreeAnchor(new Point2D.Double(pt.getX(), pt.getY()), true);
 		}
 		else
 			anchor = getClosestFreeAnchor(new Line(centre, opposite.getCentre()).intersectionPoint(path, opposite.getCentre()), true);
-		
+
 //		if(anchor==null)
 //			throw new IllegalArgumentException();
 		if(anchor!=null) {
@@ -198,39 +197,39 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 			anchor.setFree(false);
 		}
 	}
-	
-	
+
+
 	@Override
 	public void move(final double x, final double y) {
 		translate(x-centre.getX(), y-centre.getY());
 	}
-	
-	
+
+
 	@Override
 	public void translate(final double tx, final double ty) {
 		centre.setLocation(centre.getX()+tx, centre.getY()+ty);
 		path.transform(AffineTransform.getTranslateInstance(tx, ty));
-		
+
 		for(final IAnchor anchor : anchors)
 			anchor.translate(tx, ty);
 	}
-	
-	
+
+
 	@Override
 	public boolean contains(final double x, final double y) {
 		return isVisible() && getBorders().contains(x, y) && path.contains(x, y);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public Rectangle2D getBorders() {
 		final Dimension dim = getPreferredSize();
 		return new Rectangle2D.Double(centre.x-dim.width/2., centre.y-dim.height/2, dim.width, dim.height);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public Point2D getCentre() {
 		return centre;
@@ -249,44 +248,44 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		if(fillingColor!=null)
 			this.fillingColor = fillingColor;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void setScale(final double scale) {
 		if(scale>0.)
 			this.scale = scale;
 	}
-	
-	
+
+
 	@Override
 	public double getX() {
 		return centre.x;
 	}
-	
+
 	@Override
 	public double getY() {
 		return centre.y;
 	}
-	
-	
+
+
 	@Override
 	public double getWidth() {
 		return getBorders().getWidth();
 	}
-	
-	
+
+
 	@Override
 	public double getHeight() {
 		return getBorders().getHeight();
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void onPruning(final boolean isHidePolicy) {
 		super.onPruning(isHidePolicy);
-		
+
 		if(!isHidePolicy) {
 			fillingColor = GRAYED_COLOR;
 			lineColor    = GRAYED_COLOR;
@@ -294,8 +293,8 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 			update();
 		}
 	}
-	
-	
+
+
 	@Override
 	public void onUnpruning() {
 		visibility = Visibility.STANDARD;
@@ -304,8 +303,8 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		updateFillingColor(DEFAUT_OPACITY);
 		update();
 	}
-	
-	
+
+
 	@Override
 	public void setFontName(final String fontName) {
 		if(fontName!=null)
@@ -317,10 +316,10 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	public String getFontName() {
 		return fontName;
 	}
-	
-	
+
+
 	@Override
-	public void setFontSize(double fontSize) {
+	public void setFontSize(final double fontSize) {
 		if(fontSize>0.)
 			this.fontSize = fontSize;
 	}
@@ -330,27 +329,27 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 	public double getFontSize() {
 		return fontSize;
 	}
-	
-	
+
+
 	@Override
-	public void setFontStyle(int fontStyle) {
+	public void setFontStyle(final int fontStyle) {
 		this.fontStyle = fontStyle;
 	}
-	
-	
+
+
 	@Override
 	public int getFontStyle() {
 		return fontStyle;
 	}
-	
-	
+
+
 	@Override
 	public Font getFont() {
 		return new Font(fontName, fontStyle, (int)fontSize);
 	}
-	
-	
-	
+
+
+
 	private boolean lookingForClosestSegment(final Point2D pt, final Point2D bestPoint1, final Point2D bestPoint2) {
 		PathIterator pi 		= getBoundPath().getPathIterator(null, .1);
 		final double[] coords	= new double[6];
@@ -361,19 +360,19 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		int typeSeg;
 		boolean ok;
 		double distance;
-		
+
 		if(pi.isDone() || pi.currentSegment(coords)!=PathIterator.SEG_MOVETO)
 			return false;
-		
+
 		// The first point will be used for the CLOSE segment.
 		firstPoint.setLocation(coords[0], coords[1]);
 		pt1.setLocation(coords[0], coords[1]);
 		pi.next();
-		
+
 		while(!pi.isDone()) {
 			typeSeg = pi.currentSegment(coords);
 			ok = false;
-			
+
 			switch(typeSeg) {
 				case PathIterator.SEG_LINETO:
 					// The second point of the line is set.
@@ -398,7 +397,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 				Line line = new Line(pt1, pt2);
 				// We compute the distance between the line and its parallel line composed of pt.
 				distance  = line.getDistance(line.getParallel(pt.getX(), pt.getY()));
-				
+
 				// The segment that has the smallest distance is the closest segment to the point pt.
 				if(!Double.isNaN(distance) && distance<minDistance) {
 					minDistance = distance;
@@ -406,24 +405,24 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 					bestPoint2.setLocation(pt2);
 				}
 			}
-			
+
 			if(typeSeg==PathIterator.SEG_LINETO)
 				pt1.setLocation(coords[0], coords[1]);
-			
+
 			pi.next();
 		}
-		
+
 		return true;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public Point2D getClosestPoint(final Point2D pt) {
 		Point2D.Double closest;
 		Point2D.Double bestPoint1 = new Point2D.Double();
 		Point2D.Double bestPoint2 = new Point2D.Double();
-		
+
 		// Searching a segment of the path which is perpendicular to the pt.
 		if(lookingForClosestSegment(pt, bestPoint1, bestPoint2)) {
 			// If there is a closest segment.
@@ -440,11 +439,11 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		}
 		else
 			closest = null;
-		
+
 		return closest;
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
 		return getClass().getCanonicalName() + '[' + getName() + ',' + getCentre() + ',' + getBorders() + ']';

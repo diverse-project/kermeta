@@ -34,74 +34,73 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 	/** The zoom applied on the diagram. */
 	protected double zoom;
-	
+
 	/** The scroll pane providing scrool bars. */
 	protected JScrollPane scrollPane;
-	
+
 	/** The entities of the diagram. */
 	protected List<IEntityView> entities;
-	
+
 	/** The relations of the diagram. */
 	protected List<IRelationView> relations;
-	
+
 	/** The selected objects. */
 	protected List<ISelectable> selection;
-	
+
 	/** The name of the font to use. */
 	protected String fontName;
-	
+
 	/** The strategy used to layout the diagram. */
 	protected ILayoutStrategy strategy;
-	
-	
+
+
 	/**
 	 * Initialises the diagram.
 	 */
 	public DiagramView(final boolean withScrollPane) {
 		super();
-		
 		zoom 			= 1.;
 		entities 		= new ArrayList<IEntityView>();
 		relations		= new ArrayList<IRelationView>();
 		selection		= new ArrayList<ISelectable>();
-		
+
 		if(withScrollPane)
 			scrollPane = new JScrollPane(this);
 	}
-	
-	
+
+
 	@Override
 	public List<IEntityView> getEntities() {
 		return entities;
 	}
 
-	
-	
+
+
 	@Override
 	public int getNbEntities() {
 		return entities.size();
 	}
-	
-	
+
+
 	@Override
 	public int getNbRelations() {
 		return relations.size();
 	}
-	
-	
+
+
 	@Override
 	public IEntityView getEntityAt(final int i) {
 		return entities.get(i);
 	}
-	
-	
+
+
 	@Override
 	public IRelationView getRelationAt(final int i) {
 		return relations.get(i);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void focusOnEntity(final IEntityView view) {
 		final Point2D centre = view.getCentre();
@@ -112,45 +111,45 @@ public class DiagramView extends JPanel implements IDiagramView {
 			final BoundedRangeModel model = vertSB.getModel();
 			final int value	= model.getValue();
 			final int cy 	= scrollPane.getHeight()/2 + value;
-			int newValue 	= value+((int)(centre.getY()*zoom))-cy;
-			
+			int newValue 	= value+(int)(centre.getY()*zoom)-cy;
+
 			if(newValue>model.getMaximum())
 				newValue = model.getMaximum();
 			else if(newValue<model.getMinimum())
 				newValue = model.getMinimum();
-			
+
 			model.setValue(newValue);
 		}
-		
+
 		if(horizSB.isVisible()) {
 			final BoundedRangeModel model = horizSB.getModel();
 			final int value	= model.getValue();
 			final int cx 	= scrollPane.getWidth()/2 + value;
-			int newValue 	= value+((int)(centre.getX()*zoom))-cx;
-			
+			int newValue 	= value+(int)(centre.getX()*zoom)-cx;
+
 			if(newValue>model.getMaximum())
 				newValue = model.getMaximum();
 			else if(newValue<model.getMinimum())
 				newValue = model.getMinimum();
-			
+
 			model.setValue(newValue);
 		}
 	}
 
-	
-	
-	
+
+
+
 	@Override
 	public void paint(final Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
-		
+
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
 		g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		
+
 		g2.setColor(Color.WHITE);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		g2.scale(zoom, zoom);
@@ -161,8 +160,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 		for(IRelationView relation : relations)
 			relation.paint(g2);
 	}
-	
-	
+
+
 
 	@Override
 	public String getFontName() {
@@ -174,7 +173,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public void setFontName(final String fontName) {
 		if(fontName!=null) {
 			this.fontName = fontName;
-			
+
 			for(IEntityView entity : entities)
 				entity.setFontName(fontName);
 		}
@@ -209,31 +208,31 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 
 	@Override
-	public Dimension getPreferredScrollableViewportSize() {	
+	public Dimension getPreferredScrollableViewportSize() {
 		return new Dimension(-100, 100);
 	}
 
-	
+
 	@Override
-	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
-        return (orientation == SwingConstants.VERTICAL) ? visibleRect.height : visibleRect.width;
+	public int getScrollableBlockIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
+        return orientation == SwingConstants.VERTICAL ? visibleRect.height : visibleRect.width;
 	}
-	
-	
+
+
 	@Override
 	public boolean getScrollableTracksViewportHeight() {
 		return getParent() instanceof JViewport ? ((JViewport)getParent()).getHeight() > getPreferredSize().height : false;
 	}
-	
+
 
 	@Override
 	public boolean getScrollableTracksViewportWidth() {
 		return getParent() instanceof JViewport ? ((JViewport)getParent()).getWidth() > getPreferredSize().width : false;
 	}
 
-	
+
 	@Override
-	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+	public int getScrollableUnitIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
 		return 4;
 	}
 
@@ -242,22 +241,22 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public JScrollPane getScrollPane() {
 		return scrollPane;
 	}
-	
-	
+
+
 	@Override
 	public void update() {
 		for(final IEntityView entity : entities)
 			entity.update();
-		
+
 		for(final IRelationView relation : relations)
 			relation.update();
-		
+
 		updatePreferredSize();
 		refresh();
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void recentre() {
 		Rectangle2D rec;
@@ -269,7 +268,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 			if(rec.getMinX() < xMin) xMin = rec.getMinX();
 			if(rec.getMinY() < yMin) yMin = rec.getMinY();
 		}
-		
+
 		for(final IRelationView relation : relations) {
 			rec = relation.getBorders();
 			if(rec.getMinX() < xMin) xMin = rec.getMinX();
@@ -278,39 +277,39 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 		xMin = 10-xMin;
 		yMin = 10-yMin;
-		
+
 		for(IEntityView entity : entities)
 			entity.translate(xMin, yMin);
-		
+
 		for(IRelationView relation : relations) {
 			relation.translate(xMin, yMin);
 			relation.update();
 		}
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void updatePreferredSize() {
 		double maxX = Double.MIN_VALUE;
 		double maxY = Double.MIN_VALUE;
 		Rectangle2D dim;
-		
+
 		for(IEntityView entity : entities)
 			if(entity.isVisible()) {
 				dim = entity.getBorders();
-				
+
 				if(dim.getMaxX()>maxX)
 					maxX = dim.getMaxX();
 				if(dim.getMaxY()>maxY)
 					maxY = dim.getMaxY();
 			}
-		
+
 		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
 	}
-	
-	
-	
+
+
+
 	@Override
 	public List<IEntityView> getRootEntities() {
 		return new ArrayList<IEntityView>();
@@ -327,20 +326,20 @@ public class DiagramView extends JPanel implements IDiagramView {
 	public ILayoutStrategy getLayoutStrategy() {
 		return strategy;
 	}
-	
-	
+
+
 	@Override
 	public boolean removeEntity(final IEntityView entity) {
 		return entities.remove(entity);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public boolean removeRelation(final IRelationView relation) {
 		return relations.remove(relation);
 	}
-	
+
 
 	@Override
 	public void addRelation(final int position, final IRelationView relation) {
@@ -349,8 +348,8 @@ public class DiagramView extends JPanel implements IDiagramView {
 			anchorRelation(relation);
 		}
 	}
-	
-	
+
+
 	@Override
 	public void addRelation(final IRelationView relation) {
 		if(relation!=null) {
@@ -358,16 +357,16 @@ public class DiagramView extends JPanel implements IDiagramView {
 			anchorRelation(relation);
 		}
 	}
-	
-	
-	
+
+
+
 	protected static void anchorRelation(final IRelationView relation) {
 		relation.getEntitySrc().anchorRelation(relation, relation.getEntityTar(), false);
 		relation.getEntityTar().anchorRelation(relation, relation.getEntitySrc(), true);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void addEntity(final int position, final IEntityView entity) {
 		if(entity!=null && position<entities.size() && position>=0)
@@ -405,11 +404,11 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 	@Override
 	public void zoomOut(final double decrement) {
-		if((zoom-decrement)>0.)
+		if(zoom-decrement>0.)
 			zoom -= decrement;
 	}
-	
-	
+
+
 	@Override
 	public void addToSelection(final IEntityView entity) {
 		if(entity!=null)
@@ -463,41 +462,41 @@ public class DiagramView extends JPanel implements IDiagramView {
 				if(sel!=null)
 					selection.add(sel);
 	}
-	
-	
+
+
 	@Override
 	public void moveEntity(final IEntityView entity, final double x, final double y) {
 		if(entity!=null)
 			translateEntity(entity, x-entity.getX(), y-entity.getY());
 	}
-	
-	
+
+
 	@Override
 	public void translateEntity(final IEntityView entity, final double tx, final double ty) {
 		if(entity!=null) {
 			Point2D pt;
-			
+
 			entity.translate(tx, ty);
-			
+
 			for(final IRelationView rel : relations)
 				if(rel.getEntitySrc()==entity || rel.getEntityTar()==entity) {
-					for(int i=0, nbSeg=rel.getNbSegment(); i<(nbSeg-1); i++) {
+					for(int i=0, nbSeg=rel.getNbSegment(); i<nbSeg-1; i++) {
 						pt = rel.getSegment(i).getPointTarget();
 						pt.setLocation(pt.getX()+tx, pt.getY()+ty);
 					}
-					
+
 					rel.update();
 				}
 		}
 	}
-	
-	
+
+
 	@Override
 	public void relayoutRelations() {
 		for(final IEntityView entity : entities)
 			for(final IAnchor anchor : entity.getAnchors())
 				anchor.setFree(true);
-		
+
 		for(final IRelationView relation : relations) {
 			anchorRelation(relation);
 			relation.update();

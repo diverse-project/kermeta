@@ -18,18 +18,18 @@ public class PolygonDecorationView extends PolylineDecorationView {
 	 */
 	public PolygonDecorationView(final ISegmentView segment, final boolean sourcePoint, final IRelationView relation, final Point2D ... pts) {
 		super(segment, sourcePoint, relation, pts);
-		
+
 		isFilled = true;
 	}
-	
+
 
 	@Override
 	public boolean setPath(final Point2D ... pts) {
 		final boolean ok = super.setPath(pts);
-		
+
 		if(ok)
 			path.closePath();
-		
+
 		return ok;
 	}
 }
