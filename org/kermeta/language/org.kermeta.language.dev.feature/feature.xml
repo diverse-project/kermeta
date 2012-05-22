@@ -28,15 +28,6 @@
       - initial API and implementation
       
    </license>
-
-   <url>
-      <discovery label="EMFText update site" url="http://www.emftext.org/update"/>
-   </url>
-
-   <requires>
-      <import plugin="org.emftext.commons.antlr3_3_0"/>
-      <import feature="org.emftext.sdk"/>
-   </requires>
    
    <plugin
          id="org.kermeta.language.texteditor.eclipse.nature"
