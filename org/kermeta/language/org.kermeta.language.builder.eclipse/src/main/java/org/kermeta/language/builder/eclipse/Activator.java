@@ -37,11 +37,11 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	private BundleContext myContext = null;
 	
-	protected EclipseMessagingSystem messaggingSystem;
+	protected EclipseMessagingSystem messaggingSystem = null;
 	
 	// currently wer run in only one JVM, so we can accept to use only one messagingSystem when running a kermeta program
 	// when we will support several JVM, we'll need to use a smarter strategy
-	protected EclipseMessagingSystem messaggingSystem4Runner;
+	protected EclipseMessagingSystem messaggingSystem4Runner = null;
 
 	private WorkspaceResourceChangeListener workspaceResourceChangeListener;
 	
@@ -65,11 +65,6 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		KermetaBuilder.getDefault();
 		plugin = this;
-		messaggingSystem 		= new EclipseMessagingSystem(PLUGIN_ID+".builder", "Kermeta builder console");
-		messaggingSystem4Runner = new EclipseMessagingSystem(PLUGIN_ID+".runner", "Kermeta runner  console");
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		((EclipseMessagingSystem) messaggingSystem).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE)));
-		((EclipseMessagingSystem) messaggingSystem4Runner).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE)));
 		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
 		this.setMyContext(context);
@@ -106,10 +101,20 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public EclipseMessagingSystem getMessaggingSystem() {
+		if(messaggingSystem ==  null){			
+			messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "K2 builder console");
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			((EclipseMessagingSystem) messaggingSystem).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE)));		
+		}
 		return messaggingSystem;
 	}
 	
 	public EclipseMessagingSystem getMessaggingSystem4Runner(String runnerName) {
+		if(messaggingSystem4Runner ==  null){			
+			messaggingSystem4Runner = new EclipseMessagingSystem(PLUGIN_ID, "K2 runner console");
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			((EclipseMessagingSystem) messaggingSystem4Runner).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE)));		
+		}
 		return messaggingSystem4Runner;
 	}
 
