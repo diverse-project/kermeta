@@ -98,16 +98,14 @@
       <documentation>
          Usage example:
 &lt;pre&gt;
- &lt;extension point=&quot;org.kermeta.language.builder.eclipse&quot;&gt;
-  &lt;factory class=&quot;myPackage.myFactory&quot;&gt;
-   &lt;fileExtension string=&quot;.ex&quot; /&gt;
-   &lt;fileExtension string=&quot;.ex.ext&quot; /&gt;
-  &lt;/factory&gt;
-  &lt;factory class=&quot;myPackage.myOtherFactory&quot;&gt;
-   &lt;fileExtension string=&quot;.exi&quot; /&gt;
-   &lt;fileExtension string=&quot;.exo&quot; /&gt;
-  &lt;/factory&gt;
- &lt;/extension&gt;
+   &lt;extension
+         point=&quot;org.kermeta.language.builder.eclipse.muLoaders&quot;&gt;
+      &lt;factory
+            factory=&quot;org.kermeta.alf.alf2km.api.AlfLoaderFactory&quot;&gt;
+         &lt;fileExtension
+               fileExtension=&quot;.alf.xmi&quot;&gt;&lt;/fileExtension&gt;
+      &lt;/factory&gt;
+   &lt;/extension&gt;
 &lt;/pre&gt;
       </documentation>
    </annotation>

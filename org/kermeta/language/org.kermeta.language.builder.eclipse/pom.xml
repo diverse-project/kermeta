@@ -124,6 +124,11 @@
 			<version>${utils.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.kermeta.utils</groupId>
+			<artifactId>utils.helpers</artifactId>
+			<version>${utils.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>fr.irisa.triskell.utilities</groupId>
 			<artifactId>cache.utilities</artifactId>
 			<version>0.1.0</version>
@@ -155,10 +160,8 @@
 	        	</includes>
 	      	</resource>
 	      	<resource>
-	      		<directory>.</directory>
-	      		<includes>
-	      			<include>schema/*</include>
-	      		</includes>
+	      		<directory>schema</directory>
+	      		<targetPath>schema</targetPath>
 	      	</resource>
 	    </resources>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -214,6 +217,32 @@
 		          </archive>
 		        </configuration>
 			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.8</version>
+			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
+			    <configuration>
+			      <downloadSources>true</downloadSources>
+			      <downloadJavadocs>true</downloadJavadocs>
+			 	  <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
+			      <projectnatures>
+			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+			      </projectnatures>
+			      <buildcommands>
+			      </buildcommands>
+			      <classpathContainers>
+			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			      </classpathContainers>
+			      <excludes>
+			      </excludes>
+			      <sourceIncludes>
+			        <sourceInclude>**/*.java</sourceInclude>
+			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
+			    </configuration>
+			  </plugin>
 		</plugins>
 	</build>
 </project>

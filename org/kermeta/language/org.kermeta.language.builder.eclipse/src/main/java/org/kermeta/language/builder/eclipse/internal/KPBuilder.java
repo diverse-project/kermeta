@@ -45,22 +45,18 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.KpVariableExpander;
-import org.kermeta.kp.compiler.commandline.ModelingUnitLoader;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForEcore;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKm;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKmt;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForUmlProfile;
-import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForEcore;
-import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForKm;
-import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForKmt;
-import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderForUmlProfile;
 import org.kermeta.kp.compiler.commandline.TracedURL;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
@@ -702,28 +698,5 @@ public class KPBuilder {
 		muLoaders.put(".kmt", new ModelingUnitLoaderFactoryForKmt());
 		muLoaders.put(".ecore", new ModelingUnitLoaderFactoryForEcore());
 		muLoaders.put(".profile.uml", new ModelingUnitLoaderFactoryForUmlProfile());
-	}
-	
-	/**
-	 * A comparator for file extension, sorting them by length, then by alphabetical order.<br/>
-	 * It is consistent with equals.
-	 */
-	class FileExtensionComparator implements Comparator<String> {
-
-		/**
-		 * Compare two Strings according to their length.<br/>
-		 * If the two Strings have the same length, then compare them according to lexicographical order <br/>
-		 * <br/>
-		 * This method is consistent with equals (that is, compare(s0,s1)==0 iff s0.equals(s1)
-		 */
-		@Override
-		public int compare(String arg0, String arg1) {
-			// if same length, ensure consistency with equals
-			if(arg0.length()==arg1.length()){
-				return arg0.compareTo(arg1);
-			} else
-				return arg0.length()-arg1.length();
-		}
-		
 	}
 }
