@@ -102,7 +102,7 @@ public class Activator extends AbstractUIPlugin {
 
 	public EclipseMessagingSystem getMessaggingSystem() {
 		if(messaggingSystem ==  null){			
-			messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID, "K2 builder console");
+			messaggingSystem = new EclipseMessagingSystem(PLUGIN_ID+".builder", "K2 builder console");
 			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 			((EclipseMessagingSystem) messaggingSystem).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_BUILDER_CONSOLE_LOG_LEVEL_CHOICE)));		
 		}
@@ -111,7 +111,7 @@ public class Activator extends AbstractUIPlugin {
 	
 	public EclipseMessagingSystem getMessaggingSystem4Runner(String runnerName) {
 		if(messaggingSystem4Runner ==  null){			
-			messaggingSystem4Runner = new EclipseMessagingSystem(PLUGIN_ID, "K2 runner console");
+			messaggingSystem4Runner = new EclipseMessagingSystem(PLUGIN_ID+".runner", "K2 runner console");
 			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 			((EclipseMessagingSystem) messaggingSystem4Runner).setConsoleLogLevel(ConsoleLogLevel.String2Level(store.getString(PreferenceConstants.P_RUNNER_CONSOLE_LOG_LEVEL_CHOICE)));		
 		}
