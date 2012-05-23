@@ -10,6 +10,8 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import org.apache.commons.cli.CommandLine;
@@ -18,6 +20,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
@@ -88,6 +91,7 @@ public class KermetaCompilerCLI {
 		compiler.stopOnError = !continueOnError;
 		compiler.checkingEnabled = !ignoreCheck;
 		compiler.saveIntermediateFiles = intermediateFilesRequired;
+		compiler.setModelingUnitLoaders(this.defaultMuLoaders());
 		compiler.kp2bytecode(kpFile, classpath, stopAfterPhase);		
 		return compiler.hasFailed;
 	}
@@ -163,6 +167,15 @@ public class KermetaCompilerCLI {
 				kpFile = cmd.getArgList().get(0).toString();
 			}
 		}
+	}
+	
+	private NavigableMap<String, ModelingUnitLoaderFactory> defaultMuLoaders(){
+		NavigableMap<String, ModelingUnitLoaderFactory> muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
+		muLoaders.put(".km", new ModelingUnitLoaderFactoryForKm());
+		muLoaders.put(".kmt", new ModelingUnitLoaderFactoryForKmt());
+		muLoaders.put(".ecore", new ModelingUnitLoaderFactoryForEcore());
+		muLoaders.put(".profile.uml", new ModelingUnitLoaderFactoryForUmlProfile());
+		return muLoaders;
 	}
 
 	

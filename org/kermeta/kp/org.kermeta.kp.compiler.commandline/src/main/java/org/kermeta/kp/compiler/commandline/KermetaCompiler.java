@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.NavigableMap;
 import java.util.Properties;
 import java.util.Scanner;
-import java.util.SortedMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -363,7 +362,7 @@ public class KermetaCompiler {
 					logger.devInfo("   dirty file "+u, LOG_MESSAGE_GROUP);
 				}
 			}
-			
+						
 			ArrayList<TracedURL> kpPreResolveSources = collectSourceHelper.getAllButLastModifiedFile(kpSources,dirtyMU);
 			if (collectSourceHelper.getLastModifiedFile(kpSources,dirtyMU) != null){
 				logger.info("Preresolve all but : "+collectSourceHelper.getLastModifiedFile(kpSources,dirtyMU).getUrl(),LOG_MESSAGE_GROUP);

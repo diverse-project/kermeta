@@ -8,12 +8,9 @@
 */
 package org.kermeta.kp.compiler.commandline.callable;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.ecore.EObject;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KpResourceHelper;
@@ -49,6 +46,7 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 			// Starts from the longest one to avoid conflict, 
 			// e.g. the .profile.uml loader will have higher priority than the .uml loader
 			String urlString = urlToLoad.getUrl().toString();
+			
 			for(String key : compiler.muLoaders.descendingKeySet()){
 				if(urlString.endsWith(key)){
 					ModelingUnitLoaderFactory factory = compiler.muLoaders.get(key);
