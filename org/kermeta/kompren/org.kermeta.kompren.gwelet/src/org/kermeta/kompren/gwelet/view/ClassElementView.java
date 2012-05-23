@@ -10,8 +10,6 @@ import java.awt.geom.Point2D;
 import org.kermeta.kompren.diagram.view.impl.ComponentView;
 import org.kermeta.kompren.diagram.view.impl.EntityView;
 
-import fr.inria.zvtm.glyphs.VText;
-
 
 public abstract class ClassElementView extends ComponentView {
 	/** The name of the element. */
@@ -22,8 +20,6 @@ public abstract class ClassElementView extends ComponentView {
 
 	/** The position of the element. */
 	protected Point2D.Double position;
-
-	protected VText glyphText;
 
 	/** The class that contains the element. */
 	protected ClassView entity;
@@ -44,13 +40,8 @@ public abstract class ClassElementView extends ComponentView {
 		this.typeName 	= typeName==null ? "" : typeName;
 		position  		= new Point2D.Double();
 		this.entity		= parent;
-		glyphText		= new VText(getFullText());
 	}
 
-
-	public VText getGlyphText() {
-		return glyphText;
-	}
 
 
 	@Override
@@ -107,7 +98,6 @@ public abstract class ClassElementView extends ComponentView {
 
 	public void setPosition(final double x, final double y) {
 		position.setLocation(x, y);
-		glyphText.moveTo(x, y);
 	}
 
 

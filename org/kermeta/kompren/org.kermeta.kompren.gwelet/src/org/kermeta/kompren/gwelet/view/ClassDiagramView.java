@@ -1,6 +1,5 @@
 package org.kermeta.kompren.gwelet.view;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,26 +7,13 @@ import org.kermeta.kompren.diagram.view.impl.DiagramView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.gwelet.view.RoleView.Cardinality;
-import org.malai.presentation.ConcretePresentation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
-import fr.inria.zvtm.engine.Camera;
-import fr.inria.zvtm.engine.View;
-import fr.inria.zvtm.engine.VirtualSpace;
-import fr.inria.zvtm.engine.VirtualSpaceManager;
-import fr.inria.zvtm.engine.portals.OverviewPortal;
-
-public class ClassDiagramView extends DiagramView implements ConcretePresentation {
+public class ClassDiagramView extends DiagramView {
 	private static final long serialVersionUID = 1L;
 
 	protected boolean operationsVisible;
 
 	protected boolean propertiesVisible;
-
-	protected VirtualSpace vs;
-
-	protected View view;
 
 
 	public ClassDiagramView(final boolean withScrollPane) {
@@ -35,57 +21,6 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 
 		operationsVisible = true;
 		propertiesVisible = true;
-
-		vs = VirtualSpaceManager.INSTANCE.addVirtualSpace("Gwelet");
-		List<Camera> cameras = new ArrayList<Camera>();
-		Camera detailCam = vs.addCamera();
-		Camera overviewCam = vs.addCamera();
-		cameras.add(detailCam);
-		view = VirtualSpaceManager.INSTANCE.addFrameView(cameras, "Gwelet", View.STD_VIEW, 800, 600, true);
-		view.setBackgroundColor(Color.WHITE);
-		view.setAntialiasing(true);
-
-		overviewCam.setAltitude(800f, true);
-		OverviewPortal p = new OverviewPortal(0, 0, 200, 150, overviewCam, detailCam);
-		p.setBorder(Color.BLACK);
-		VirtualSpaceManager.INSTANCE.addPortal(p, view);
-
-		ClassView cv = new ClassView("foo");
-		cv.addAttribute("attr1", "String");
-		cv.addAttribute("attr2", "Boolean");
-		cv.addOperation("op1", "Void", true);
-		cv.addOperation("operation2", "Boolean", false);
-		addEntity(cv);
-
-		ClassView cv2 = new ClassView("FOOOOoooooo");
-		cv2.addAttribute("attr1", "String");
-		cv2.addOperation("operation1", "Boolean", false);
-		addEntity(cv2);
-
-		InheritanceView inhe = new InheritanceView(cv, cv2);
-		addRelation(inhe);
-
-		setLayoutStrategy(new ClassModelBasicStrategy(this));
-		updateLayout();
-	}
-
-
-	@Override
-	public void addRelation(final IRelationView relation) {
-		super.addRelation(relation);
-
-		if(relation instanceof InheritanceView)
-			vs.addGlyph(((InheritanceView)relation).getGlyph());
-	}
-
-
-	@Override
-	public void addEntity(final IEntityView entity) {
-		if(entity!=null) {
-			entities.add(entity);
-			if(entity instanceof ClassView)
-				vs.addGlyph(((ClassView)entity).getGlyph());
-		}
 	}
 
 
@@ -140,7 +75,7 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 
 
 	public InheritanceView removeInheritanceView(final IEntityView src, final IEntityView tar) {
-		InheritanceView inView = null;
+		InheritanceView view = null;
 		boolean again	= true;
 		final int size	= relations.size();
 		int i			= 0;
@@ -150,11 +85,10 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 			link = relations.get(i);
 
 			if(link instanceof InheritanceView) {
-				inView = (InheritanceView) link;
+				view = (InheritanceView) link;
 
-				if(inView.getEntitySrc()==src && inView.getEntityTar()==tar) {
+				if(view.getEntitySrc()==src && view.getEntityTar()==tar) {
 					relations.remove(link);
-					vs.removeGlyph(inView.getGlyph());
 					again = false;
 				}
 			}
@@ -162,21 +96,19 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 			i++;
 		}
 
-		return again ? null : inView;
+		return again ? null : view;
 	}
 
 
 	public InheritanceView addInheritanceView(final IEntityView src, final IEntityView tar, final int position) {
-		final InheritanceView inView = new InheritanceView(src, tar);
+		final InheritanceView view = new InheritanceView(src, tar);
 
 		if(position==-1 || position==relations.size())
-			addRelation(inView);
+			addRelation(view);
 		else
-			addRelation(position, inView);
+			addRelation(position, view);
 
-		vs.addGlyph(inView.getGlyph());
-
-		return inView;
+		return view;
 	}
 
 
@@ -209,19 +141,19 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 				return null;
 		}
 
-		final IRelationView relView = new RelationClassView(srcClass, tarClass, isComposition, isCompoAtSrc, srcRole, targetRole,
+		final IRelationView view = new RelationClassView(srcClass, tarClass, isComposition, isCompoAtSrc, srcRole, targetRole,
 														 Cardinality.getCardinality(srcCard), Cardinality.getCardinality(targetCard));
 		if(position==-1 || position==relations.size())
-			addRelation(relView);
+			addRelation(view);
 		else
-			addRelation(position, relView);
+			addRelation(position, view);
 
-		return relView;
+		return view;
 	}
 
 
 	public IEntityView addEntity(final String name, final int position, final boolean isAspect) {
-		IEntityView entView = null;
+		IEntityView view = null;
 		double xMax = -Double.MAX_VALUE;
 		double x;
 		IEntityView maxEntity = null;
@@ -230,20 +162,20 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 			int i = 0;
 			final int size = entities.size();
 
-			while(entView==null && i<size) {
+			while(view==null && i<size) {
 				if(entities.get(i).getName().equals(name))
-					entView = entities.get(i);
+					view = entities.get(i);
 				else
 					i++;
 			}
 
-			if(entView==null)
-				System.err.println("ERROR: aspect added but not its reference class");
+			if(view==null)
+				System.err.println("ERROR KI: aspect added but not its reference class");
 
-			return entView;
+			return view;
 		}
 
-		ClassView clView = new ClassView(name);
+		view = new ClassView(name);
 
 		// entities must not located at the same position. Otherwise it may have problem
 		// during the anchoring of relations.
@@ -259,11 +191,10 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 
 		// The max coordinate plus a value is set to the view to be located
 		// at a unique position.
-		clView.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), clView.getCentre().getY());
-		addEntity(position, clView);
-		vs.addGlyph(clView.getGlyph());
+		view.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), view.getCentre().getY());
+		addEntity(position, view);
 
-		return entView;
+		return view;
 	}
 
 
@@ -274,49 +205,5 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 
 	public boolean isPropertiesVisible() {
 		return propertiesVisible;
-	}
-
-
-	@Override
-	public void save(final boolean generalPreferences, final String nsURI, final Document document, final Element root) {
-		// Nothing to do.
-	}
-
-	@Override
-	public void load(final boolean generalPreferences, final String nsURI, final Element meta) {
-		// Nothing to do.
-	}
-
-	@Override
-	public void setModified(final boolean modified) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public boolean isModified() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void reinit() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-	}
-
-
-
-	public VirtualSpace getVs() {
-		return vs;
-	}
-
-
-
-	public View getView() {
-		return view;
 	}
 }

@@ -7,37 +7,38 @@ import java.util.List;
 
 public class OperationView extends ClassElementView {
 	protected boolean method;
-
+	
 	protected boolean isAbstract;
-
+	
 	protected List<ParameterView> parameters;
-
-
-
-	public OperationView(final String name, final String typeName, final boolean isAbstract, final ClassView parent) {
+	
+	
+	
+	public OperationView(String name, String typeName, boolean isAbstract, ClassView parent) {
 		super(name, typeName, parent);
-
+		
 		parameters 		= new ArrayList<ParameterView>();
 		this.isAbstract = isAbstract;
+		
 		update();
 	}
-
-
+	
+	
 	public ParameterView addAttribute(final String attrName, final String attrTypeName) {
 		final ParameterView attr = new ParameterView(attrName, attrTypeName);
-
+		
 		parameters.add(attr);
 		update();
 		entity.update();
-
+		
 		return attr;
 	}
-
-
-
+	
+	
+	
 	@Override
 	protected String getFullText() {
-		return name + '(' + (parameters==null || parameters.isEmpty() ? "" : "...") + ')' + (typeName.length()==0 ? "" : " : " + typeName);
+		return name + '(' + (parameters.isEmpty() ? "" : "...") + ')' + (typeName.length()==0 ? "" : " : " + typeName);
 	}
 
 

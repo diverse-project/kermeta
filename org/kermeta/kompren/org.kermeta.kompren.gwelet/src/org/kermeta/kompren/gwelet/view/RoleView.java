@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import org.kermeta.kompren.diagram.view.impl.Number;
-
 
 public class RoleView {
 	public static enum Cardinality{
@@ -87,13 +85,13 @@ public class RoleView {
 		Rectangle2D entityBorder = source ? view.getEntitySrc().getBorders() : view.getEntityTar().getBorders();
 		Point2D ptRelation = source ? view.getPointSource() : view.getPointTarget();
 
-		if(Number.NUMBER.equals(ptRelation.getX(), entityBorder.getMinX(), 4)) {
+		if(org.kermeta.kompren.diagram.view.impl.Number.NUMBER.equals(ptRelation.getX(), entityBorder.getMinX(), 4)) {
 			tx = - GAP - border.getWidth();
 			ty = onLeft ? - GAP : GAP + border.getHeight();
-		}else if(Number.NUMBER.equals(ptRelation.getX(), entityBorder.getMaxX(), 4)) {
+		}else if(org.kermeta.kompren.diagram.view.impl.Number.NUMBER.equals(ptRelation.getX(), entityBorder.getMaxX(), 4)) {
 			tx = GAP;
 			ty = onLeft ? - GAP : GAP + border.getHeight();
-		}else if(Number.NUMBER.equals(ptRelation.getY(), entityBorder.getMinY(), 4)) {
+		}else if(org.kermeta.kompren.diagram.view.impl.Number.NUMBER.equals(ptRelation.getY(), entityBorder.getMinY(), 4)) {
 			tx = onLeft ? - GAP - border.getWidth() : GAP;
 			ty = - GAP;
 		}else {

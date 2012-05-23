@@ -7,7 +7,7 @@ import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
  * Defines a inheritance relation established between two classes.
  * @author Arnaud Blouin
  */
-public class InheritanceView extends ZVTMRelationView {
+public class InheritanceView extends RelationView {
 	/**
 	 * @see RelationView
 	 */
@@ -15,6 +15,5 @@ public class InheritanceView extends ZVTMRelationView {
 		super(src, target);
 
 		setTargetDecoration(new InheritanceDecorationView(this, getLastSegment(), false));
-		update();
 	}
 }

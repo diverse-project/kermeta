@@ -11,6 +11,9 @@ public class CompositionDecorationView extends PolygonDecorationView {
 	public static final Double DIAMOND_LGHT = 15.;
 
 
+	/**
+	 * @see PolygonDecorationView
+	 */
 	public CompositionDecorationView(final IRelationView relation, final ISegmentView segment, final boolean sourcePoint) {
 		super(segment, sourcePoint, relation, new Point2D.Double(0., 0.), new Point2D.Double(DIAMOND_LGHT, DIAMOND_LGHT/2.),
 				new Point2D.Double(DIAMOND_LGHT*2., 0.), new Point2D.Double(DIAMOND_LGHT, -DIAMOND_LGHT/2.));
