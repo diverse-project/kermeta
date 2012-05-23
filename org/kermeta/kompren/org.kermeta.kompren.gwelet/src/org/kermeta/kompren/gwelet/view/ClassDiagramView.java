@@ -1,5 +1,6 @@
 package org.kermeta.kompren.gwelet.view;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,26 @@ import org.kermeta.kompren.diagram.view.impl.DiagramView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.gwelet.view.RoleView.Cardinality;
+import org.malai.presentation.ConcretePresentation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
-public class ClassDiagramView extends DiagramView {
+import fr.inria.zvtm.engine.Camera;
+import fr.inria.zvtm.engine.View;
+import fr.inria.zvtm.engine.VirtualSpace;
+import fr.inria.zvtm.engine.VirtualSpaceManager;
+import fr.inria.zvtm.engine.portals.OverviewPortal;
+
+public class ClassDiagramView extends DiagramView implements ConcretePresentation {
 	private static final long serialVersionUID = 1L;
 
 	protected boolean operationsVisible;
 
 	protected boolean propertiesVisible;
+
+	protected VirtualSpace vs;
+
+	protected View view;
 
 
 	public ClassDiagramView(final boolean withScrollPane) {
@@ -21,6 +35,39 @@ public class ClassDiagramView extends DiagramView {
 
 		operationsVisible = true;
 		propertiesVisible = true;
+
+		vs = VirtualSpaceManager.INSTANCE.addVirtualSpace("Gwelet");
+		List<Camera> cameras = new ArrayList<Camera>();
+		Camera detailCam = vs.addCamera();
+		Camera overviewCam = vs.addCamera();
+		cameras.add(detailCam);
+		view = VirtualSpaceManager.INSTANCE.addFrameView(cameras, "Gwelet", View.STD_VIEW, 800, 600, true);
+		view.setBackgroundColor(Color.WHITE);
+		view.setAntialiasing(true);
+
+		overviewCam.setAltitude(800f, true);
+		OverviewPortal p = new OverviewPortal(0, 0, 200, 150, overviewCam, detailCam);
+		p.setBorder(Color.BLACK);
+		VirtualSpaceManager.INSTANCE.addPortal(p, view);
+
+		ClassView cv = new ClassView("foo");
+		cv.addAttribute("attr1", "String");
+		cv.addAttribute("attr2", "Boolean");
+		cv.addOperation("op1", "Void", true);
+		cv.addOperation("operation2", "Boolean", false);
+		cv.update();
+
+		ClassView cv2 = new ClassView("FOOOOoooooo");
+		cv2.addAttribute("attr1", "String");
+		cv2.addOperation("operation1", "Boolean", false);
+		cv2.move(200, 200);
+		cv2.update();
+
+		InheritanceView inhe = new InheritanceView(cv, cv2);
+
+		vs.addGlyph(cv.getGlyph());
+		vs.addGlyph(cv2.getGlyph());
+		vs.addGlyph(inhe.getGlyph());
 	}
 
 
@@ -75,7 +122,7 @@ public class ClassDiagramView extends DiagramView {
 
 
 	public InheritanceView removeInheritanceView(final IEntityView src, final IEntityView tar) {
-		InheritanceView view = null;
+		InheritanceView inView = null;
 		boolean again	= true;
 		final int size	= relations.size();
 		int i			= 0;
@@ -85,9 +132,9 @@ public class ClassDiagramView extends DiagramView {
 			link = relations.get(i);
 
 			if(link instanceof InheritanceView) {
-				view = (InheritanceView) link;
+				inView = (InheritanceView) link;
 
-				if(view.getEntitySrc()==src && view.getEntityTar()==tar) {
+				if(inView.getEntitySrc()==src && inView.getEntityTar()==tar) {
 					relations.remove(link);
 					again = false;
 				}
@@ -96,19 +143,19 @@ public class ClassDiagramView extends DiagramView {
 			i++;
 		}
 
-		return again ? null : view;
+		return again ? null : inView;
 	}
 
 
 	public InheritanceView addInheritanceView(final IEntityView src, final IEntityView tar, final int position) {
-		final InheritanceView view = new InheritanceView(src, tar);
+		final InheritanceView inView = new InheritanceView(src, tar);
 
 		if(position==-1 || position==relations.size())
-			addRelation(view);
+			addRelation(inView);
 		else
-			addRelation(position, view);
+			addRelation(position, inView);
 
-		return view;
+		return inView;
 	}
 
 
@@ -141,19 +188,19 @@ public class ClassDiagramView extends DiagramView {
 				return null;
 		}
 
-		final IRelationView view = new RelationClassView(srcClass, tarClass, isComposition, isCompoAtSrc, srcRole, targetRole,
+		final IRelationView relView = new RelationClassView(srcClass, tarClass, isComposition, isCompoAtSrc, srcRole, targetRole,
 														 Cardinality.getCardinality(srcCard), Cardinality.getCardinality(targetCard));
 		if(position==-1 || position==relations.size())
-			addRelation(view);
+			addRelation(relView);
 		else
-			addRelation(position, view);
+			addRelation(position, relView);
 
-		return view;
+		return relView;
 	}
 
 
 	public IEntityView addEntity(final String name, final int position, final boolean isAspect) {
-		IEntityView view = null;
+		IEntityView entView = null;
 		double xMax = -Double.MAX_VALUE;
 		double x;
 		IEntityView maxEntity = null;
@@ -162,20 +209,20 @@ public class ClassDiagramView extends DiagramView {
 			int i = 0;
 			final int size = entities.size();
 
-			while(view==null && i<size) {
+			while(entView==null && i<size) {
 				if(entities.get(i).getName().equals(name))
-					view = entities.get(i);
+					entView = entities.get(i);
 				else
 					i++;
 			}
 
-			if(view==null)
+			if(entView==null)
 				System.err.println("ERROR KI: aspect added but not its reference class");
 
-			return view;
+			return entView;
 		}
 
-		view = new ClassView(name);
+		entView = new ClassView(name);
 
 		// entities must not located at the same position. Otherwise it may have problem
 		// during the anchoring of relations.
@@ -191,10 +238,10 @@ public class ClassDiagramView extends DiagramView {
 
 		// The max coordinate plus a value is set to the view to be located
 		// at a unique position.
-		view.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), view.getCentre().getY());
-		addEntity(position, view);
+		entView.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), entView.getCentre().getY());
+		addEntity(position, entView);
 
-		return view;
+		return entView;
 	}
 
 
@@ -205,5 +252,49 @@ public class ClassDiagramView extends DiagramView {
 
 	public boolean isPropertiesVisible() {
 		return propertiesVisible;
+	}
+
+
+	@Override
+	public void save(final boolean generalPreferences, final String nsURI, final Document document, final Element root) {
+		// Nothing to do.
+	}
+
+	@Override
+	public void load(final boolean generalPreferences, final String nsURI, final Element meta) {
+		// Nothing to do.
+	}
+
+	@Override
+	public void setModified(final boolean modified) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean isModified() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void reinit() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+	}
+
+
+
+	public VirtualSpace getVs() {
+		return vs;
+	}
+
+
+
+	public View getView() {
+		return view;
 	}
 }

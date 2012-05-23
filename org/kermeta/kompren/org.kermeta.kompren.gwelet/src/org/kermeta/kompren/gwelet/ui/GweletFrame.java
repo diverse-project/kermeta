@@ -5,6 +5,7 @@ import java.awt.Frame;
 import javax.swing.JFrame;
 
 import org.kermeta.kompren.gwelet.model.Model;
+import org.kermeta.kompren.gwelet.view.ClassDiagramView;
 import org.malai.instrument.Instrument;
 import org.malai.ui.UI;
 
@@ -13,14 +14,14 @@ public class GweletFrame extends UI {
 
 	protected Model model;
 
-	protected Canvas canvas;
+	protected ClassDiagramView canvas;
 
 	protected JFrame proxiedFrame;
 
 
 	public GweletFrame() {
 		super();
-		proxiedFrame = (JFrame) canvas.view.getFrame();
+		proxiedFrame = (JFrame)canvas.getView().getFrame();
 		proxiedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		proxiedFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
@@ -35,7 +36,7 @@ public class GweletFrame extends UI {
 	@Override
 	public void initialisePresentations() {
 		model = new Model();
-		canvas = new Canvas();
+		canvas = new ClassDiagramView(false);
 	}
 
 
