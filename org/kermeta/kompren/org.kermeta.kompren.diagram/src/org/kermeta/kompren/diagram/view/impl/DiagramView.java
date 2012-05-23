@@ -278,8 +278,10 @@ public class DiagramView extends JPanel implements IDiagramView {
 		xMin = 10-xMin;
 		yMin = 10-yMin;
 
-		for(IEntityView entity : entities)
+		for(IEntityView entity : entities) {
 			entity.translate(xMin, yMin);
+			entity.update();
+		}
 
 		for(IRelationView relation : relations) {
 			relation.translate(xMin, yMin);
