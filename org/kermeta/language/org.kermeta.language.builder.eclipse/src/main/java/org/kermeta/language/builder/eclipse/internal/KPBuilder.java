@@ -91,8 +91,6 @@ public class KPBuilder {
 	public static final String DEFAULT_EMFSOURCES_LOCATION =  "emfjava";
 	public static final String DEFAULT_EMFBIN_LOCATION =  "emfclasses";
 	
-	private NavigableMap<String,ModelingUnitLoaderFactory> muLoaders;
-	
 	public KPBuilder(IFile kpProjectFile) {
 		super();
 		this.kpProjectFile = kpProjectFile;
@@ -116,8 +114,6 @@ public class KPBuilder {
 			boolean saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
 			compiler = new KermetaCompiler(false, Activator.getDefault().getMessaggingSystem(), new LocalFileConverterForEclipse(),saveIntermediateFiles, true, true, true);
 			compiler.initializeTargetFolders(outputRootFolder, outputRootFolder, outputScalaFolder, outputScalaBinaryFolder, outputGenmodelFolder, outputEMFJavaFolder, outputEMFBinaryFolder, outputResourceFolder);
-			setModelingUnitLoaders();
-			compiler.setModelingUnitLoaders(muLoaders);
 			refreshFileIndex();
 		} catch (IOException e) {
 			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
@@ -188,6 +184,7 @@ public class KPBuilder {
 
 	private void updateCompilerPreferences() {
 		compiler.saveIntermediateFiles = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_SAVE_BUILD_INTERMEDIATE_FILES_BOOLEAN);
+		setModelingUnitLoaders();
 	}
 
 
@@ -673,7 +670,7 @@ public class KPBuilder {
 	 * Get the ModelingUnit loaders declared via the extension point mechanism
 	 */
 	private void setModelingUnitLoaders(){
-		setDefaultModelingUnitLoaders();
+		NavigableMap<String, ModelingUnitLoaderFactory> muLoaders = setDefaultModelingUnitLoaders();
 		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID,"muLoaders").getExtensions();
 		for(IExtension extension : extensions){
 			for(IConfigurationElement element : extension.getConfigurationElements()){
@@ -690,13 +687,15 @@ public class KPBuilder {
 				}
 			}
 		}
+		compiler.setModelingUnitLoaders(muLoaders);
 	}
 
-	private void setDefaultModelingUnitLoaders(){
-		muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
+	private NavigableMap<String, ModelingUnitLoaderFactory> setDefaultModelingUnitLoaders(){
+		NavigableMap<String, ModelingUnitLoaderFactory> muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
 		muLoaders.put(".km", new ModelingUnitLoaderFactoryForKm());
 		muLoaders.put(".kmt", new ModelingUnitLoaderFactoryForKmt());
 		muLoaders.put(".ecore", new ModelingUnitLoaderFactoryForEcore());
 		muLoaders.put(".profile.uml", new ModelingUnitLoaderFactoryForUmlProfile());
+		return muLoaders;
 	}
 }
