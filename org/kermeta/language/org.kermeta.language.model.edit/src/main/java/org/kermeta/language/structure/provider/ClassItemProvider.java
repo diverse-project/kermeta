@@ -25,6 +25,11 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.language.structure.StructurePackage;
 
+import org.kermeta.language.structure.Class;
+import org.kermeta.language.structure.NamedElement;
+
+
+
 /**
  * This is the item provider adapter for a {@link org.kermeta.language.structure.Class} object.
  * <!-- begin-user-doc -->
@@ -194,14 +199,23 @@ public class ClassItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((org.kermeta.language.structure.Class)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Class_type") :
-			getString("_UI_Class_type") + " " + label;
+		// We get the label of the class definition that is referred by the given
+				// class
+				// a '->' is added to show the "reference" semantic
+				String label = "";
+			    if (object instanceof Class && ((Class) object).getTypeDefinition() != null) {
+			    	label = " -> " + ((Class) object).getTypeDefinition().getName();
+			    }
+			    String parent = "";
+			    if (object instanceof Class && ((Class) object).eContainer() instanceof NamedElement && ((NamedElement) ((Class) object).eContainer()).getName() != null) {
+			        parent = " owned by " + ((NamedElement) ((Class) object).eContainer()).getName();
+			    }
+
+			    return label == null || label.length() == 0 ? getString("_UI_Class_type") : getString("_UI_Class_type") + label + parent; 
 	}
 
 	/**

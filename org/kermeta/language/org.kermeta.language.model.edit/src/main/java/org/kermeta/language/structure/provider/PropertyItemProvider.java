@@ -290,10 +290,15 @@ public class PropertyItemProvider
 	 * This returns Property.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
+		if(((Property) object).getIsDerived()) 
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/Property_derived"));
+
+		if(((Property) object).getIsComposite())
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/Property_contained"));
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/Property"));
 	}
 
@@ -305,10 +310,13 @@ public class PropertyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Property)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Property_type") :
-			getString("_UI_Property_type") + " " + label;
+		String label = ((Property) object).getName();
+		String parent = ((Property) object).getOwningClass().getName();
+		// We get the label (ClassDefinition name) of the parent of the given
+		// Property
+		return label == null || label.length() == 0 ? getString("_UI_Property_type")
+				: /*getString("_UI_Property_type") + " " + */label + " owned by "
+						+ parent;
 	}
 
 	/**

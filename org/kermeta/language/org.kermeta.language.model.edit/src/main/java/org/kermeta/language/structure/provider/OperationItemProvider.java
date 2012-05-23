@@ -223,25 +223,29 @@ public class OperationItemProvider
 	 * This returns Operation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Operation"));
+		if(((Operation)object).getIsAbstract()){
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/Operation_abstract"));
+		}
+		else
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/Operation"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Operation)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Operation_type") :
-			getString("_UI_Operation_type") + " " + label;
+			/*getString("_UI_Operation_type") + " " + */label;
 	}
 
 	/**

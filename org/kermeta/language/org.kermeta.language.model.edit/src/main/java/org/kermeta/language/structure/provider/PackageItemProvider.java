@@ -136,14 +136,14 @@ public class PackageItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((org.kermeta.language.structure.Package)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Package_type") :
-			getString("_UI_Package_type") + " " + label;
+			/*getString("_UI_Package_type") + " " + */label;
 	}
 
 	/**
