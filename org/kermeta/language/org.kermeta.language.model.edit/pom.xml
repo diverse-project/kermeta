@@ -56,7 +56,7 @@
                         	org.provider, 
                         	org.kermeta.provider,
                         	org.kermeta.language.provider,
-                        	org.kermeta.language.struture.provider,
+                        	org.kermeta.language.structure.provider,
                         	org.kermeta.language.behavior.provider
                         </Export-Package>
                         <Require-Bundle>
