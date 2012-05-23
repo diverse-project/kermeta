@@ -672,9 +672,17 @@ public class KPBuilder {
 	private void setModelingUnitLoaders(){
 		NavigableMap<String, ModelingUnitLoaderFactory> muLoaders = setDefaultModelingUnitLoaders();
 		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID,"muLoaders").getExtensions();
+		Activator.getDefault().getMessaggingSystem().log(
+				Kind.DevDEBUG,
+				"setModelingUnitLoaders called and has " + extensions.length + " muLoaders extensions", 
+				this.getClass().getName());
 		for(IExtension extension : extensions){
 			for(IConfigurationElement element : extension.getConfigurationElements()){
 				try {
+					Activator.getDefault().getMessaggingSystem().log(
+							Kind.DevDEBUG,
+							"setModelingUnitLoaders calling on "+element.getName(), 
+							this.getClass().getName());
 					ModelingUnitLoaderFactory factory = (ModelingUnitLoaderFactory) element.createExecutableExtension("factory");
 					for(IConfigurationElement child : element.getChildren()){
 						muLoaders.put(child.getAttribute("fileExtension"),factory);
