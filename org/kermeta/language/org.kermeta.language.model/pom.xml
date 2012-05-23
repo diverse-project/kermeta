@@ -103,7 +103,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>org.kermeta.language.model; singleton=true</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.language.model;singleton=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
@@ -123,6 +123,61 @@
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
                 </configuration>
+            </plugin>
+            <!-- correctly configure eclipse project accordingly to the pom -->
+            <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.8</version>
+			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
+			    <configuration>
+			      <downloadSources>true</downloadSources>
+			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
+			      <projectnatures>
+			        <projectnature>org.eclipse.pde.PluginNature</projectnature>
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+			      </projectnatures>
+			      <buildcommands>
+			        <buildcommand>org.eclipse.pde.SchemaBuilder</buildcommand>
+			        <buildcommand>org.eclipse.pde.ManifestBuilder</buildcommand>
+			      </buildcommands>
+			      <classpathContainers>
+			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			        <classpathContainer>org.eclipse.pde.core.requiredPlugins</classpathContainer>
+			      </classpathContainers>
+			      <excludes> 
+			        <!-- <exclude>org.scala-lang:scala-library</exclude> -->
+			        <!-- <exclude>org.scala-lang:scala-compiler</exclude> -->
+			      </excludes>
+			      <sourceIncludes>
+			        <!-- <sourceInclude>**/*.scala</sourceInclude>-->
+			        <sourceInclude>**/*.java</sourceInclude>
+			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
+			    </configuration>
+			  </plugin>
+            <!-- copy the generated manifest to a place where eclipse expects it so it doesn't raise error -->
+			  <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <id>copy-manifest-for-eclipse-ide</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>META-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/classes/META-INF</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
