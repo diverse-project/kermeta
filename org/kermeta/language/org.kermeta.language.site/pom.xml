@@ -362,6 +362,23 @@
 				<groupId>*</groupId><artifactId>*</artifactId>
 			</exclusion></exclusions>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.model.edit</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta.language</groupId>
+			<artifactId>language.model.editor</artifactId>
+			<version>${kermeta.version}</version>
+			<exclusions><exclusion>
+				<groupId>*</groupId><artifactId>*</artifactId>
+			</exclusion></exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.prettyprinter</artifactId>

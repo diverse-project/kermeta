@@ -251,6 +251,18 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+    <plugin
+         id="org.kermeta.language.model.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+    <plugin
+         id="org.kermeta.language.model.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 	<plugin
          id="org.kermeta.language.prettyprinter"
          download-size="0"
