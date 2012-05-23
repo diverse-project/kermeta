@@ -9,7 +9,7 @@
 -->
 
 <plugin>
-
+<!--
    <extension point="org.eclipse.ui.newWizards">
       <category
             id="org.eclipse.emf.ecore.Wizard.category.ID"
@@ -35,7 +35,7 @@
             contributorClass="org.kermeta.language.behavior.presentation.BehaviorActionBarContributor">
       </editor>
    </extension>
-
+-->
    <extension point="org.eclipse.ui.newWizards">
       <category
             id="org.eclipse.emf.ecore.Wizard.category.ID"
@@ -45,7 +45,7 @@
             name="%_UI_StructureModelWizard_label"
             class="org.kermeta.language.structure.presentation.StructureModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/StructureModelFile.gif">
+            icon="icons/full/obj16/KmModelFile.gif">
          <description>%_UI_StructureModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
@@ -55,8 +55,8 @@
       <editor
             id="org.kermeta.language.structure.presentation.StructureEditorID"
             name="%_UI_StructureEditor_label"
-            icon="icons/full/obj16/StructureModelFile.gif"
-            extensions="structure"
+            icon="icons/full/obj16/KmModelFile.gif"
+            extensions="km"
             class="org.kermeta.language.structure.presentation.StructureEditor"
             contributorClass="org.kermeta.language.structure.presentation.StructureActionBarContributor">
       </editor>
