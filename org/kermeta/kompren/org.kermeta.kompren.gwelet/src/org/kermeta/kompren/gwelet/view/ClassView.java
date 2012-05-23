@@ -296,7 +296,7 @@ public class ClassView extends RectangleEntityView {
 
 		boundPath.setColor(fillingColor);
 		boundPath.setBorderColor(lineColor);
-		updateBoundPath(boundPath, dim.width, dim.height, cx, cy);
+		updateBoundPath(boundPath, path, dim.width, dim.height, cx, cy);
 
 		glyphSeparatorName.setColor(getLineColor());
 		glyphSeparatorName.setEndPoints(cx-halfWidth, cy+halfHeight-textHeaderHeight, cx+halfWidth, cy+halfHeight-textHeaderHeight);
@@ -333,10 +333,17 @@ public class ClassView extends RectangleEntityView {
 
 
 
-	private static void updateBoundPath(final VRectangle path, final double width, final double height, final double cx, final double cy) {
-		path.moveTo(cx, cy);
-		path.setWidth(width);
-		path.setHeight(height);
+	private static void updateBoundPath(final VRectangle rec, final GeneralPath path, final double width, final double height, final double cx, final double cy) {
+		rec.moveTo(cx, cy);
+		rec.setWidth(width);
+		rec.setHeight(height);
+
+		path.reset();
+		path.moveTo(cx-width/2., cy-height);
+		path.lineTo(cx+width/2., cy-height);
+		path.lineTo(cx+width/2., cy+height);
+		path.lineTo(cx-width/2., cy+height);
+		path.closePath();
 	}
 
 

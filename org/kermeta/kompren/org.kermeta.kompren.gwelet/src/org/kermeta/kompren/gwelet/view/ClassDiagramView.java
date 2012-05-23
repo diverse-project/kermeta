@@ -55,19 +55,37 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 		cv.addAttribute("attr2", "Boolean");
 		cv.addOperation("op1", "Void", true);
 		cv.addOperation("operation2", "Boolean", false);
-		cv.update();
+		addEntity(cv);
 
 		ClassView cv2 = new ClassView("FOOOOoooooo");
 		cv2.addAttribute("attr1", "String");
 		cv2.addOperation("operation1", "Boolean", false);
-		cv2.move(200, 200);
-		cv2.update();
+		addEntity(cv2);
 
 		InheritanceView inhe = new InheritanceView(cv, cv2);
+		addRelation(inhe);
 
-		vs.addGlyph(cv.getGlyph());
-		vs.addGlyph(cv2.getGlyph());
-		vs.addGlyph(inhe.getGlyph());
+		setLayoutStrategy(new ClassModelBasicStrategy(this));
+		updateLayout();
+	}
+
+
+	@Override
+	public void addRelation(final IRelationView relation) {
+		super.addRelation(relation);
+
+		if(relation instanceof InheritanceView)
+			vs.addGlyph(((InheritanceView)relation).getGlyph());
+	}
+
+
+	@Override
+	public void addEntity(final IEntityView entity) {
+		if(entity!=null) {
+			entities.add(entity);
+			if(entity instanceof ClassView)
+				vs.addGlyph(((ClassView)entity).getGlyph());
+		}
 	}
 
 
@@ -136,6 +154,7 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 
 				if(inView.getEntitySrc()==src && inView.getEntityTar()==tar) {
 					relations.remove(link);
+					vs.removeGlyph(inView.getGlyph());
 					again = false;
 				}
 			}
@@ -154,6 +173,8 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 			addRelation(inView);
 		else
 			addRelation(position, inView);
+
+		vs.addGlyph(inView.getGlyph());
 
 		return inView;
 	}
@@ -217,12 +238,12 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 			}
 
 			if(entView==null)
-				System.err.println("ERROR KI: aspect added but not its reference class");
+				System.err.println("ERROR: aspect added but not its reference class");
 
 			return entView;
 		}
 
-		entView = new ClassView(name);
+		ClassView clView = new ClassView(name);
 
 		// entities must not located at the same position. Otherwise it may have problem
 		// during the anchoring of relations.
@@ -238,8 +259,9 @@ public class ClassDiagramView extends DiagramView implements ConcretePresentatio
 
 		// The max coordinate plus a value is set to the view to be located
 		// at a unique position.
-		entView.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), entView.getCentre().getY());
-		addEntity(position, entView);
+		clView.move(maxEntity==null ? 0. : xMax+maxEntity.getWidth(), clView.getCentre().getY());
+		addEntity(position, clView);
+		vs.addGlyph(clView.getGlyph());
 
 		return entView;
 	}
