@@ -1,0 +1,17 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			var list : OrderedSet[String] := OrderedSet[String].new
+			list.add("toto")
+			list.add("tutu")
+			list.add("hey")
+			list.add("hello")
+			list.indexedEach{e,context|
+				stdio.writeln(e+" : "+context.index.toString+" "+context.isFirst.toString+" "+context.isLast.toString)}
+		end
+	}
+}
