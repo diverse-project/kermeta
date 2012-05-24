@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="qvtbase" uri="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml">
+  <ownedType xsi:type="emof:Class" name="Domain" isAbstract="true">
+    <ownedAttribute name="isCheckable" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="isEnforceable" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="rule" type="//@ownedType.5" opposite="//@ownedType.5/@ownedAttribute.0"/>
+    <ownedAttribute name="typedModel" type="//@ownedType.7"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Function">
+    <ownedAttribute name="queryExpression" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="FunctionParameter">
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Pattern">
+    <ownedAttribute name="bindsTo" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <ownedAttribute name="predicate" type="//@ownedType.4" upper="-1" isComposite="true" opposite="//@ownedType.4/@ownedAttribute.1"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Predicate">
+    <ownedAttribute name="conditionExpression" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="pattern" type="//@ownedType.3" opposite="//@ownedType.3/@ownedAttribute.1"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Rule" isAbstract="true">
+    <ownedAttribute name="domain" type="//@ownedType.0" upper="-1" isComposite="true" opposite="//@ownedType.0/@ownedAttribute.2"/>
+    <ownedAttribute name="overrides" type="//@ownedType.5"/>
+    <ownedAttribute name="transformation" type="//@ownedType.6" opposite="//@ownedType.6/@ownedAttribute.3"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Transformation">
+    <ownedAttribute name="extends" type="//@ownedType.6"/>
+    <ownedAttribute name="modelParameter" type="//@ownedType.7" upper="-1" isComposite="true" opposite="//@ownedType.7/@ownedAttribute.1"/>
+    <ownedAttribute name="ownedTag" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.18"/>
+    </ownedAttribute>
+    <ownedAttribute name="rule" type="//@ownedType.5" upper="-1" isComposite="true" opposite="//@ownedType.5/@ownedAttribute.2"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="TypedModel">
+    <ownedAttribute name="dependsOn" type="//@ownedType.7" upper="-1"/>
+    <ownedAttribute name="transformation" type="//@ownedType.6" opposite="//@ownedType.6/@ownedAttribute.1"/>
+    <ownedAttribute name="usedPackage" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.9"/>
+  </ownedType>
+</emof:Package>

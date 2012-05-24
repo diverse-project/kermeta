@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="emof" uri="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+  <ownedType xsi:type="emof:Class" name="Class" superClass="//@ownedType.19">
+    <ownedAttribute name="isAbstract" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="ownedAttribute" type="//@ownedType.15" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.15/@ownedAttribute.5"/>
+    <ownedAttribute name="ownedOperation" type="//@ownedType.11" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.11/@ownedAttribute.0"/>
+    <ownedAttribute name="superClass" type="//@ownedType.0" upper="-1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Comment" superClass="//@ownedType.3">
+    <ownedAttribute name="body" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="annotatedElement" type="//@ownedType.9" upper="-1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="DataType" superClass="//@ownedType.19"/>
+  <ownedType xsi:type="emof:Class" name="Element" isAbstract="true" superClass="//@ownedType.10">
+    <ownedAttribute name="ownedComment" type="//@ownedType.1" upper="-1" isComposite="true"/>
+    <ownedOperation name="container_" type="//@ownedType.3"/>
+    <ownedOperation name="equals">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+    <ownedOperation name="get" type="//@ownedType.10">
+      <ownedParameter name="property" type="//@ownedType.15"/>
+    </ownedOperation>
+    <ownedOperation name="getMetaClass" type="//@ownedType.0"/>
+    <ownedOperation name="isSet">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+      <ownedParameter name="property" type="//@ownedType.15"/>
+    </ownedOperation>
+    <ownedOperation name="set">
+      <ownedParameter name="property" type="//@ownedType.15"/>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+    <ownedOperation name="unset">
+      <ownedParameter name="property" type="//@ownedType.15"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Enumeration" superClass="//@ownedType.2">
+    <ownedAttribute name="ownedLiteral" type="//@ownedType.5" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.5/@ownedAttribute.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="EnumerationLiteral" superClass="//@ownedType.9">
+    <ownedAttribute name="enumeration" type="//@ownedType.4" opposite="//@ownedType.4/@ownedAttribute.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Extent" superClass="//@ownedType.10">
+    <ownedOperation name="elements" type="//@ownedType.17"/>
+    <ownedOperation name="useContainment">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Factory" superClass="//@ownedType.3">
+    <ownedAttribute name="package" type="//@ownedType.12"/>
+    <ownedOperation name="convertToString">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+      <ownedParameter name="dataType" type="//@ownedType.2"/>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+    <ownedOperation name="create" type="//@ownedType.3">
+      <ownedParameter name="metaClass" type="//@ownedType.0"/>
+    </ownedOperation>
+    <ownedOperation name="createFromString" type="//@ownedType.10">
+      <ownedParameter name="dataType" type="//@ownedType.2"/>
+      <ownedParameter name="string">
+        <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+      </ownedParameter>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="MultiplicityElement" isAbstract="true">
+    <ownedAttribute name="isOrdered" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="isUnique" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="lower" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.1"/>
+    </ownedAttribute>
+    <ownedAttribute name="upper" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.4"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="NamedElement" isAbstract="true" superClass="//@ownedType.3">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Object"/>
+  <ownedType xsi:type="emof:Class" name="Operation" superClass="//@ownedType.20 //@ownedType.8">
+    <ownedAttribute name="class" type="//@ownedType.0" opposite="//@ownedType.0/@ownedAttribute.2"/>
+    <ownedAttribute name="ownedParameter" type="//@ownedType.13" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.13/@ownedAttribute.0"/>
+    <ownedAttribute name="raisedException" type="//@ownedType.19" upper="-1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Package" superClass="//@ownedType.9">
+    <ownedAttribute name="uri" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="nestedPackage" type="//@ownedType.12" upper="-1" isComposite="true"/>
+    <ownedAttribute name="ownedType" type="//@ownedType.19" upper="-1" isComposite="true" opposite="//@ownedType.19/@ownedAttribute.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Parameter" superClass="//@ownedType.20 //@ownedType.8">
+    <ownedAttribute name="operation" type="//@ownedType.11" opposite="//@ownedType.11/@ownedAttribute.1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="PrimitiveType" superClass="//@ownedType.2"/>
+  <ownedType xsi:type="emof:Class" name="Property" superClass="//@ownedType.20 //@ownedType.8">
+    <ownedAttribute name="default" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="isComposite" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="isDerived" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="isID" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="isReadOnly" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="class" type="//@ownedType.0" opposite="//@ownedType.0/@ownedAttribute.1"/>
+    <ownedAttribute name="opposite" type="//@ownedType.15"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ReflectiveCollection" superClass="//@ownedType.10">
+    <ownedOperation name="add">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+    <ownedOperation name="addAll">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+      <ownedParameter name="objects" type="//@ownedType.17"/>
+    </ownedOperation>
+    <ownedOperation name="clear"/>
+    <ownedOperation name="remove">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+    <ownedOperation name="size">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.1"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ReflectiveSequence" superClass="//@ownedType.16">
+    <ownedOperation name="add">
+      <ownedParameter name="index">
+        <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.1"/>
+      </ownedParameter>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+    <ownedOperation name="get" type="//@ownedType.10">
+      <ownedParameter name="index">
+        <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="remove" type="//@ownedType.10">
+      <ownedParameter name="index">
+        <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="set" type="//@ownedType.10">
+      <ownedParameter name="index">
+        <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.1"/>
+      </ownedParameter>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Tag" superClass="//@ownedType.3">
+    <ownedAttribute name="name" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="value" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="element" type="//@ownedType.3" upper="-1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Type" isAbstract="true" superClass="//@ownedType.9">
+    <ownedAttribute name="package" type="//@ownedType.12" opposite="//@ownedType.12/@ownedAttribute.2"/>
+    <ownedOperation name="isInstance">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+      <ownedParameter name="object" type="//@ownedType.10"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="TypedElement" isAbstract="true" superClass="//@ownedType.9">
+    <ownedAttribute name="type" type="//@ownedType.19"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="URIExtent" superClass="//@ownedType.6">
+    <ownedOperation name="contextURI">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedOperation>
+    <ownedOperation name="element" type="//@ownedType.3">
+      <ownedParameter name="uri">
+        <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation name="uri">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+      <ownedParameter name="element" type="//@ownedType.3"/>
+    </ownedOperation>
+  </ownedType>
+</emof:Package>

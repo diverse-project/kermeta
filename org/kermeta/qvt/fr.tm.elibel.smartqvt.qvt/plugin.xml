@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+	<copyright>
+	Copyright (c) 2006 France Telecom
+	All rights reserved.
+	
+	This software is published under the terms of the EPL (http://www.eclipse.org/legal/epl-v10.html)
+	in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+	the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	</copyright>
+	
+	$Id$
+-->
+
+<plugin>
+
+		
+	
+	
+	
+	
+	
+	
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/emof.xml"
+			class="fr.tm.elibel.smartqvt.qvt.emof.EmofPackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml"
+			class="fr.tm.elibel.smartqvt.qvt.essentialocl.EssentialoclPackage"
+			genModel="model/QVT.genmodel" />
+	</extension>	
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml"
+			class="fr.tm.elibel.smartqvt.qvt.primitivetypes.PrimitivetypesPackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml"
+			class="fr.tm.elibel.smartqvt.qvt.qvtbase.QvtbasePackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml"
+			class="fr.tm.elibel.smartqvt.qvt.qvtcore.QvtcorePackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml"
+			class="fr.tm.elibel.smartqvt.qvt.qvtoperational.QvtoperationalPackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml"
+			class="fr.tm.elibel.smartqvt.qvt.qvtrelation.QvtrelationPackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package uri="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml"
+			class="fr.tm.elibel.smartqvt.qvt.qvttemplate.QvttemplatePackage"
+			genModel="model/QVT.genmodel" />
+	</extension>
+	
+	
+	<!-- extension id="fr.tm.elibel.smartqvt.qvt.emofmm.emof"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.emof"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/EMOF.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/emof.xml" />
+	</extension>
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.essentialocl"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.essentialocl"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/EssentialOCL.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/essentialocl.xml" />
+	</extension>
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.imperativeocl"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.imperativeocl"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/ImperativeOCL.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml" />
+	</extension>
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.primitivetypes"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.primitivetypes"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/PrimitiveTypes.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml" />
+	</extension>	
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.qvtbase"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.qvtbase"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/QVTBase.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/qvtbase.xml" />
+	</extension>		
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.qvtcore"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.qvtcore"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/QVTCore.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml" />
+	</extension>			
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.qvtoperational"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.qvtoperational"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/QVTOperational.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml" />
+	</extension>				
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.qvtrelation"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.qvtrelation"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/QVTRelation.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml" />
+	</extension>			
+	<extension id="fr.tm.elibel.smartqvt.qvt.emofmm.qvttemplate"
+		name="fr.tm.elibel.smartqvt.qvt.emofmm.qvttemplate"
+		point="fr.tm.elibel.smartqvt.modulesmanager.emof_registry">
+		<emof_registry
+			emof_uri="/model/QVTTemplate.emof"
+			nsURI="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml" />
+	</extension>			
+	
+	
+	
+	<extension point="org.eclipse.emf.ecore.uri_mapping">
+		<mapping source="pathmap://models/"
+			target="platform:/plugin/fr.tm.elibel.smartqvt.qvt/models/">
+		</mapping>
+	</extension-->
+	
+	
+	
+	
+	
+	
+	
+	
+</plugin>
+

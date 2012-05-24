@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="qvtrelation" uri="http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml">
+  <ownedType xsi:type="emof:Class" name="DomainPattern">
+    <ownedAttribute name="templateExpression" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTTemplate.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Key">
+    <ownedAttribute name="identifies">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="part" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedAttribute>
+    <ownedAttribute name="transformation" type="//@ownedType.7" opposite="//@ownedType.7/@ownedAttribute.0"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Relation">
+    <ownedAttribute name="isTopLevel" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="operationalImpl" type="//@ownedType.6" upper="-1" isComposite="true" opposite="//@ownedType.6/@ownedAttribute.2"/>
+    <ownedAttribute name="variable" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <ownedAttribute name="when" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="where" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.5"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RelationCallExp">
+    <ownedAttribute name="argument" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="referredRelation" type="//@ownedType.2"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RelationDomain">
+    <ownedAttribute name="defaultAssignment" type="//@ownedType.5" upper="-1" isComposite="true"/>
+    <ownedAttribute name="pattern" type="//@ownedType.0" isComposite="true"/>
+    <ownedAttribute name="rootVariable">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RelationDomainAssignment">
+    <ownedAttribute name="valueExp" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="variable">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RelationImplementation">
+    <ownedAttribute name="impl">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+    </ownedAttribute>
+    <ownedAttribute name="inDirectionOf">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.7"/>
+    </ownedAttribute>
+    <ownedAttribute name="relation" type="//@ownedType.2" opposite="//@ownedType.2/@ownedAttribute.1"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RelationalTransformation">
+    <ownedAttribute name="ownedKey" type="//@ownedType.1" upper="-1" isComposite="true" opposite="//@ownedType.1/@ownedAttribute.2"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.6"/>
+  </ownedType>
+</emof:Package>

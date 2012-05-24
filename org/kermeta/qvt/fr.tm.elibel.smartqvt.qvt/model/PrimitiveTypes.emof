@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml">
+  <emof:Package name="primitivetypes" uri="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml">
+    <ownedType xsi:type="emof:PrimitiveType" name="Boolean"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="Integer"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="Real"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="String"/>
+    <ownedType xsi:type="emof:PrimitiveType" name="UnlimitedNatural"/>
+  </emof:Package>
+  <emof:Tag element="/0/@ownedType.0" name="classInstanceName" value="java.lang.Boolean"/>
+  <emof:Tag element="/0/@ownedType.1" name="classInstanceName" value="java.lang.Integer"/>
+  <emof:Tag element="/0/@ownedType.2" name="classInstanceName" value="java.lang.Float"/>
+  <emof:Tag element="/0/@ownedType.3" name="classInstanceName" value="java.lang.String"/>
+  <emof:Tag element="/0/@ownedType.4" name="classInstanceName" value="java.lang.Integer"/>
+</xmi:XMI>

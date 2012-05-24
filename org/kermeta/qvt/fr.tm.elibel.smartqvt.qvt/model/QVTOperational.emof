@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="qvtoperational" uri="http://schema.omg.org/spec/QVT/1.0/qvtoperational.xml">
+  <ownedType xsi:type="emof:Class" name="Constructor" superClass="//@ownedType.6"/>
+  <ownedType xsi:type="emof:Class" name="ConstructorBody" superClass="//@ownedType.17"/>
+  <ownedType xsi:type="emof:Class" name="ContextualProperty">
+    <ownedAttribute name="context">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="initExpression" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="overridden">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="EntryOperation" superClass="//@ownedType.6"/>
+  <ownedType xsi:type="emof:Class" name="Helper" superClass="//@ownedType.6">
+    <ownedAttribute name="isQuery" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ImperativeCallExp">
+    <ownedAttribute name="isVirtual" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.25"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ImperativeOperation">
+    <ownedAttribute name="isBlackbox" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="body" type="//@ownedType.17" isComposite="true" opposite="//@ownedType.17/@ownedAttribute.1"/>
+    <ownedAttribute name="context" type="//@ownedType.21" isComposite="true" opposite="//@ownedType.21/@ownedAttribute.1"/>
+    <ownedAttribute name="overridden" type="//@ownedType.6"/>
+    <ownedAttribute name="result" type="//@ownedType.21" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.21/@ownedAttribute.2"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.11"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Library" superClass="//@ownedType.14"/>
+  <ownedType xsi:type="emof:Class" name="MappingBody" superClass="//@ownedType.17">
+    <ownedAttribute name="endSection" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="initSection" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="MappingCallExp" superClass="//@ownedType.5">
+    <ownedAttribute name="isStrict" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="MappingOperation" superClass="//@ownedType.6">
+    <ownedAttribute name="disjunct" type="//@ownedType.10" isOrdered="true" upper="-1"/>
+    <ownedAttribute name="inherited" type="//@ownedType.10" isOrdered="true" upper="-1"/>
+    <ownedAttribute name="merged" type="//@ownedType.10" isOrdered="true" upper="-1"/>
+    <ownedAttribute name="refinedRelation">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTRelation.emof#//@ownedType.2"/>
+    </ownedAttribute>
+    <ownedAttribute name="when" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="where" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="MappingParameter" superClass="//@ownedType.21">
+    <ownedAttribute name="extent" type="//@ownedType.12"/>
+    <ownedAttribute name="referredDomain">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTRelation.emof#//@ownedType.4"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ModelParameter" superClass="//@ownedType.21"/>
+  <ownedType xsi:type="emof:Class" name="ModelType">
+    <ownedAttribute name="conformanceKind" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <ownedAttribute name="additionalCondition" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="metamodel" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Module">
+    <ownedAttribute name="isBlackbox" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="configProperty" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedAttribute>
+    <ownedAttribute name="entry" type="//@ownedType.3"/>
+    <ownedAttribute name="moduleImport" type="//@ownedType.15" isOrdered="true" upper="-1" isComposite="true" opposite="//@ownedType.15/@ownedAttribute.3"/>
+    <ownedAttribute name="ownedTag" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.18"/>
+    </ownedAttribute>
+    <ownedAttribute name="ownedVariable" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <ownedAttribute name="usedModelType" type="//@ownedType.13" isOrdered="true" upper="-1"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.12"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ModuleImport">
+    <ownedAttribute name="kind" type="//@ownedType.23" isOrdered="true"/>
+    <ownedAttribute name="binding" type="//@ownedType.13" isOrdered="true" upper="-1"/>
+    <ownedAttribute name="importedModule" type="//@ownedType.14"/>
+    <ownedAttribute name="module" type="//@ownedType.14" opposite="//@ownedType.14/@ownedAttribute.3"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ObjectExp">
+    <ownedAttribute name="body" type="//@ownedType.1" isComposite="true"/>
+    <ownedAttribute name="referredObject">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/ImperativeOCL.emof#//@ownedType.15"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="OperationBody">
+    <ownedAttribute name="content" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="operation" type="//@ownedType.6" opposite="//@ownedType.6/@ownedAttribute.1"/>
+    <ownedAttribute name="variable" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="OperationalTransformation" superClass="//@ownedType.14">
+    <ownedAttribute name="intermediateClass" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="intermediateProperty" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedAttribute>
+    <ownedAttribute name="modelParameter" type="//@ownedType.12" isOrdered="true" upper="-1" isComposite="true"/>
+    <ownedAttribute name="refined">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTRelation.emof#//@ownedType.7"/>
+    </ownedAttribute>
+    <ownedAttribute name="relation" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTRelation.emof#//@ownedType.2"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ResolveExp">
+    <ownedAttribute name="isDeferred" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="isInverse" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="one" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="condition" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="target" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ResolveInExp" superClass="//@ownedType.19">
+    <ownedAttribute name="inMapping" type="//@ownedType.10"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="VarParameter">
+    <ownedAttribute name="kind" type="//@ownedType.22" isOrdered="true"/>
+    <ownedAttribute name="ctxOwner" type="//@ownedType.6" opposite="//@ownedType.6/@ownedAttribute.2"/>
+    <ownedAttribute name="resOwner" type="//@ownedType.6" opposite="//@ownedType.6/@ownedAttribute.4"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.13"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Enumeration" name="DirectionKind">
+    <ownedLiteral name="in"/>
+    <ownedLiteral name="inout"/>
+    <ownedLiteral name="out"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Enumeration" name="ImportKind">
+    <ownedLiteral name="extension"/>
+    <ownedLiteral name="access"/>
+  </ownedType>
+</emof:Package>

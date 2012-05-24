@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="qvtcore" uri="http://schema.omg.org/spec/QVT/1.0/qvtcore.xml">
+  <ownedType xsi:type="emof:Class" name="Area" isAbstract="true">
+    <ownedAttribute name="bottomPattern" type="//@ownedType.2" isComposite="true" opposite="//@ownedType.2/@ownedAttribute.0"/>
+    <ownedAttribute name="guardPattern" type="//@ownedType.6" isComposite="true" opposite="//@ownedType.6/@ownedAttribute.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Assignment">
+    <ownedAttribute name="isDefault" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="bottomPattern" type="//@ownedType.2" opposite="//@ownedType.2/@ownedAttribute.1"/>
+    <ownedAttribute name="slotExpression" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="value" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="BottomPattern" superClass="//@ownedType.4">
+    <ownedAttribute name="area" type="//@ownedType.0" opposite="//@ownedType.0/@ownedAttribute.0"/>
+    <ownedAttribute name="assignment" type="//@ownedType.1" upper="-1" isComposite="true" opposite="//@ownedType.1/@ownedAttribute.1"/>
+    <ownedAttribute name="enforcementOperation" type="//@ownedType.5" upper="-1" isComposite="true" opposite="//@ownedType.5/@ownedAttribute.1"/>
+    <ownedAttribute name="realizedVariable" type="//@ownedType.9" upper="-1" isComposite="true" opposite="//@ownedType.9/@ownedAttribute.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="CoreDomain">
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.0"/>
+    <superClass href="#//@ownedType.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="CorePattern">
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="EnforcementOperation">
+    <ownedAttribute name="enforcementMode" type="//@ownedType.11" isOrdered="true"/>
+    <ownedAttribute name="bottomPattern" type="//@ownedType.2" opposite="//@ownedType.2/@ownedAttribute.2"/>
+    <ownedAttribute name="operationCallExp">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.25"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="GuardPattern" superClass="//@ownedType.4">
+    <ownedAttribute name="area" type="//@ownedType.0" opposite="//@ownedType.0/@ownedAttribute.1"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Mapping">
+    <ownedAttribute name="context" type="//@ownedType.7" opposite="//@ownedType.7/@ownedAttribute.1"/>
+    <ownedAttribute name="local" type="//@ownedType.7" upper="-1" isComposite="true" opposite="//@ownedType.7/@ownedAttribute.0"/>
+    <ownedAttribute name="refinement" type="//@ownedType.7" upper="-1" opposite="//@ownedType.7/@ownedAttribute.3"/>
+    <ownedAttribute name="specification" type="//@ownedType.7" upper="-1" opposite="//@ownedType.7/@ownedAttribute.2"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/QVTBase.emof#//@ownedType.5"/>
+    <superClass href="#//@ownedType.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="PropertyAssignment" superClass="//@ownedType.1">
+    <ownedAttribute name="targetProperty">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RealizedVariable">
+    <ownedAttribute name="bottomPattern" type="//@ownedType.2" opposite="//@ownedType.2/@ownedAttribute.3"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="VariableAssignment" superClass="//@ownedType.1">
+    <ownedAttribute name="targetVariable">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Enumeration" name="EnforcementMode">
+    <ownedLiteral name="Creation"/>
+    <ownedLiteral name="Deletion"/>
+  </ownedType>
+</emof:Package>

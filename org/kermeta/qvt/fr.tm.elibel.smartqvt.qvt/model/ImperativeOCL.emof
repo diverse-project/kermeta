@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="imperativeocl" uri="http://schema.omg.org/spec/QVT/1.0/imperativeocl.xml">
+  <ownedType xsi:type="emof:Class" name="AltExp" superClass="//@ownedType.12">
+    <ownedAttribute name="body" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="condition" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="AssertExp" superClass="//@ownedType.12">
+    <ownedAttribute name="severity" type="//@ownedType.31" isOrdered="true"/>
+    <ownedAttribute name="assertion" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="log" type="//@ownedType.17" isComposite="true"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="AssignExp" superClass="//@ownedType.12">
+    <ownedAttribute name="isReset" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="defaultValue" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="left" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="value" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="BlockExp" superClass="//@ownedType.12">
+    <ownedAttribute name="body" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="BreakExp" superClass="//@ownedType.12"/>
+  <ownedType xsi:type="emof:Class" name="CatchExp" superClass="//@ownedType.12">
+    <ownedAttribute name="body" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="exception" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ComputeExp" superClass="//@ownedType.12">
+    <ownedAttribute name="body" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="returnedElement" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ContinueExp" superClass="//@ownedType.12"/>
+  <ownedType xsi:type="emof:Class" name="DictLiteralExp">
+    <ownedAttribute name="part" type="//@ownedType.9" upper="-1" isComposite="true"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.19"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="DictLiteralPart">
+    <ownedAttribute name="key" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="value" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="DictionaryType">
+    <ownedAttribute name="keyType">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.8"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ForExp" superClass="//@ownedType.14"/>
+  <ownedType xsi:type="emof:Class" name="ImperativeExpression" isAbstract="true">
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ImperativeIterateExp" superClass="//@ownedType.14">
+    <ownedAttribute name="target" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ImperativeLoopExp" isAbstract="true">
+    <ownedAttribute name="condition" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.20"/>
+    <superClass href="#//@ownedType.12"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="InstantiationExp" superClass="//@ownedType.12">
+    <ownedAttribute name="argument" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="extent">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <ownedAttribute name="instantiatedClass">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ListType">
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.8"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="LogExp">
+    <ownedAttribute name="condition" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.25"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="OrderedTupleLiteralExp">
+    <ownedAttribute name="part" type="//@ownedType.19" isOrdered="true" upper="-1" isComposite="true"/>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.19"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="OrderedTupleLiteralPart">
+    <ownedAttribute name="value" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="OrderedTupleType">
+    <ownedAttribute name="elementType" isOrdered="true" upper="-1">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="RaiseExp" superClass="//@ownedType.12">
+    <ownedAttribute name="argument" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="exception">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ReturnExp" superClass="//@ownedType.12">
+    <ownedAttribute name="value" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="SwitchExp" superClass="//@ownedType.12">
+    <ownedAttribute name="alternativePart" type="//@ownedType.0" isOrdered="true" upper="-1" isComposite="true"/>
+    <ownedAttribute name="elsePart" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="TemplateParameterType">
+    <ownedAttribute name="specification" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.3"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="TryExp" superClass="//@ownedType.12">
+    <ownedAttribute name="exceptClause" type="//@ownedType.5" isOrdered="true" upper="-1" isComposite="true"/>
+    <ownedAttribute name="tryBody" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="Typedef">
+    <ownedAttribute name="base">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.19"/>
+    </ownedAttribute>
+    <ownedAttribute name="condition" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="UnlinkExp" superClass="//@ownedType.12">
+    <ownedAttribute name="item" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="target" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="UnpackExp" superClass="//@ownedType.12">
+    <ownedAttribute name="source" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="targetVariable" isOrdered="true" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="VariableInitExp" superClass="//@ownedType.12">
+    <ownedAttribute name="withResult" isOrdered="true">
+      <type xsi:type="emof:PrimitiveType" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/PrimitiveTypes.emof#//@ownedType.0"/>
+    </ownedAttribute>
+    <ownedAttribute name="referredVariable" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="WhileExp" superClass="//@ownedType.12">
+    <ownedAttribute name="body" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="condition" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Enumeration" name="SeverityKind">
+    <ownedLiteral name="error"/>
+    <ownedLiteral name="warning"/>
+    <ownedLiteral name="fatal"/>
+  </ownedType>
+</emof:Package>

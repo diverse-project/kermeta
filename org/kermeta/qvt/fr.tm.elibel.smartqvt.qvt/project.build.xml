@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<project name="fr.tm.elibel.smartqvt.qvt" default="main" basedir=".">
+
+	<target name="main">
+		<emf.Ecore2Java genmodel="./model/QVT.genmodel" reconcileGenModel="keep" generateJavaCode="true" generateModelProject="true" generateEditProject="true" generateEditorProject="true">
+			<model file="./model/EMOF.ecore"/>
+			<model file="./model/EssentialOCL.ecore"/>
+			<model file="./model/ImperativeOCL.ecore"/>
+			<model file="./model/PrimitiveTypes.ecore"/>
+			<model file="./model/QVTBase.ecore"/>
+			<model file="./model/QVTCore.ecore"/>
+			<model file="./model/QVTOperational.ecore"/>
+			<model file="./model/QVTRelation.ecore"/>
+			<model file="./model/QVTTemplate.ecore"/>
+		</emf.Ecore2Java >
+	</target>
+
+</project>

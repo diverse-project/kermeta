@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://schema.omg.org/spec/QVT/1.0/emof.xml" name="qvttemplate" uri="http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml">
+  <ownedType xsi:type="emof:Class" name="CollectionTemplateExp" superClass="//@ownedType.3">
+    <ownedAttribute name="member" upper="-1" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <ownedAttribute name="referredCollectionType">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.8"/>
+    </ownedAttribute>
+    <ownedAttribute name="rest">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="ObjectTemplateExp" superClass="//@ownedType.3">
+    <ownedAttribute name="part" type="//@ownedType.2" upper="-1" isComposite="true" opposite="//@ownedType.2/@ownedAttribute.0"/>
+    <ownedAttribute name="referredClass">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.0"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="PropertyTemplateItem">
+    <ownedAttribute name="objContainer" type="//@ownedType.1" opposite="//@ownedType.1/@ownedAttribute.0"/>
+    <ownedAttribute name="referredProperty">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.15"/>
+    </ownedAttribute>
+    <ownedAttribute name="value" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EMOF.emof#//@ownedType.3"/>
+  </ownedType>
+  <ownedType xsi:type="emof:Class" name="TemplateExp" isAbstract="true">
+    <ownedAttribute name="bindsTo">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.39"/>
+    </ownedAttribute>
+    <ownedAttribute name="where" isComposite="true">
+      <type xsi:type="emof:Class" href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.24"/>
+    </ownedAttribute>
+    <superClass href="../../../plugin/fr.tm.elibel.smartqvt.qvt/model/EssentialOCL.emof#//@ownedType.19"/>
+  </ownedType>
+</emof:Package>

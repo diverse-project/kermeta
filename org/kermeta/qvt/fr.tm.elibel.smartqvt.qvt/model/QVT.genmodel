@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=""
+    modelDirectory="/fr.tm.elibel.smartqvt.qvt/src" editDirectory="/fr.tm.elibel.smartqvt.qvt.edit/src"
+    editorDirectory="/fr.tm.elibel.smartqvt.qvt.editor/src" modelPluginID="fr.tm.elibel.smartqvt.qvt"
+    templateDirectory="/fr.tm.elibel.smartqvt.qvt/templates" dynamicTemplates="true"
+    redirection="" forceOverwrite="true" modelName="QVT" modelPluginClass="" editPluginClass="fr.tm.elibel.smartqvt.qvt.imperativeocl.provider.QVTEditPlugin"
+    editorPluginClass="fr.tm.elibel.smartqvt.qvt.imperativeocl.presentation.QVTEditorPlugin"
+    importerID="org.eclipse.emf.importer.rose">
+  <genPackages prefix="Emof" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="EMOF.ecore#/">
+  </genPackages>
+    <genPackages prefix="Primitivetypes" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="PrimitiveTypes.ecore#/">
+  </genPackages>
+    <genPackages prefix="Essentialocl" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="EssentialOCL.ecore#/">
+  </genPackages>
+  <genPackages prefix="Imperativeocl" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="ImperativeOCL.ecore#/">
+  </genPackages>
+  <genPackages prefix="Qvtbase" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="QVTBase.ecore#/">
+  </genPackages>
+  <genPackages prefix="Qvttemplate" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="QVTTemplate.ecore#/">
+  </genPackages>
+  <genPackages prefix="Qvtrelation" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="QVTRelation.ecore#/">
+  </genPackages>
+  <genPackages prefix="Qvtcore" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="QVTCore.ecore#/">
+  </genPackages>
+  <genPackages prefix="Qvtoperational" basePackage="fr.tm.elibel.smartqvt.qvt" disposableProviderFactory="true"
+      ecorePackage="QVTOperational.ecore#/"></genPackages>
+</genmodel:GenModel>
