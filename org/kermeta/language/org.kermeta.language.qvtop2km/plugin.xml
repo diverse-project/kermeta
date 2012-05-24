@@ -4,9 +4,9 @@
 	<extension
 		point="org.kermeta.language.builder.eclipse.muLoaders">
 	      <factory
-            factory="org.kermeta.alf.alf2km.api.AlfLoaderFactory">
+            factory="org.kermeta.language.qvtop2km.api.QvtLoaderFactory">
          <fileExtension
-               fileExtension=".alf.xmi"></fileExtension>
+               fileExtension=".qvtoperational"></fileExtension>
       </factory>
 	</extension>
 </plugin>

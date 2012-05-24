@@ -31,12 +31,12 @@ sources = {
 	require "${qvt.baseUri}/model/QVTRelation.ecore" byteCodeFromADependency
 	require "${qvt.baseUri}/model/QVTTemplate.ecore" byteCodeFromADependency
  }
- dependencies ={
+ dependencies = {
 	//srcQuery= "/build/ecore/kermeta_java.ecore" from "kmtv1" 
  	//source= "${project.baseUri}/resources/My.ecore" //from "kmtv1"
  	//source= "${project.baseUri}/resources/plugins/kermeta_java.ecore" 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	dependency "language.model" ="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
 	//dependency "kmtv1" URL="${project.baseUri}/resources/fr.irisa.triskell.kermeta.model_1.4.0.jar"
 	//dependency "kmtv1" URL="${project.baseUri}/resources/plugins/kmtv1.jar" 
-	dependency "qvt" URL="${project.baseUri}/resources/fr.tm.elibel.smartqvt.qvt_0.2.4.jar"
+	dependency "qvt"="${project.baseUri}/resources/fr.tm.elibel.smartqvt.qvt_0.2.4.jar"
 }

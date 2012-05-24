@@ -96,6 +96,7 @@
 		            </Require-Bundle>
 		            
 		            <Export-Package>
+		            	org.kermeta.language.qvtop2km.api,
 		           		theGroup.org.kermeta.language.qvtop2km.*,
 		            	theGroup.org.kermeta.language.qvtop2kmrunner,
 		            	ScalaImplicit.theGroup.org.kermeta.language.qvtop2km,
