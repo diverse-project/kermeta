@@ -1,5 +1,3 @@
-
-
 package root_package;
 
 
@@ -58,9 +56,9 @@ reference tgtModel : Resource
 		
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub1/Book2Publication.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub2/Book2Publication2.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
-		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/ecore2emof/Ecore2EMOF.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
+		srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/ecore2emof/Ecore2EMOF.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/sam2samdynamic/org.topcased.simulation.sam.control.sam2samdynamic.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
-		srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/initmodel/org.topcased.simulation.sam.qvtsemantics.initmodel.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
+		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/initmodel/org.topcased.simulation.sam.qvtsemantics.initmodel.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		
 		srcModel.load(void)
 		sourceRepository.resolveAllProxies()
@@ -74,12 +72,12 @@ reference tgtModel : Resource
 		
 		/*create the resource for the target created kermeta model*/
 		var targetRepository : ResourceSet init ResourceSet.new
-        //tgtModel := targetRepository.createResource("../test/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
-        //tgtModel := targetRepository.createResource("../test/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+        //tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+        tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("../test/UML2RDBMS.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/ecore2emof.km" , "http://www.kermeta.org/kermeta/2_0_0/")
 		//tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/sam2samdyn.km" , "http://www.kermeta.org/kermeta/2_0_0/")
-		tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/initmodel.km" , "http://www.kermeta.org/kermeta/2_0_0/")
+		//tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/initmodel.km" , "http://www.kermeta.org/kermeta/2_0_0/")
 
 		/*initialize the known mappings between default operations in qvt and their counterpart in kermeta*/
 		mapFrameworks(context)
@@ -194,7 +192,7 @@ class QvtNotImplementedException inherits kermeta::exceptions::Exception {
 attribute notImplementedPart : String
 
 
-	operation initialize(missingPart : String) : QvtNotImplementedException is do
+	operation initialization(missingPart : String) : QvtNotImplementedException is do
 		message:=missingPart + " not yet implemented, wait for the final version."
 		result:=self
 	end

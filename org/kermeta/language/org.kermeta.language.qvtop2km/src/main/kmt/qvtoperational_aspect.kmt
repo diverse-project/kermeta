@@ -222,7 +222,7 @@ aspect class MappingOperation {
 			if (self.~result != void) then
 				
 				if self.~result.size>1 then
-					raise QvtNotImplementedException.new.initialize("Mappings with multiple results")
+					raise QvtNotImplementedException.new.initialization("Mappings with multiple results")
 				end
 				out.type:=self.~result.one.type.generateType(context)
 				out.containedType.add(out.type)
@@ -267,7 +267,7 @@ aspect class Helper
 				if (self.~result != void) then
 					
 					if self.~result.size>1 then
-						raise QvtNotImplementedException.new.initialize("Helpers with multiple results")
+						raise QvtNotImplementedException.new.initialization("Helpers with multiple results")
 					end
 					
 					/*if self.~result.one.type.output==void then
