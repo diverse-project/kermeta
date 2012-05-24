@@ -139,6 +139,7 @@
 			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
 			      </projectnatures>
 			      <buildcommands>
+			        <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
 			        <buildcommand>org.eclipse.pde.SchemaBuilder</buildcommand>
 			        <buildcommand>org.eclipse.pde.ManifestBuilder</buildcommand>
 			      </buildcommands>
