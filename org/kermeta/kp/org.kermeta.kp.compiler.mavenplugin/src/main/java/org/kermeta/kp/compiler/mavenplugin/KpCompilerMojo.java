@@ -203,12 +203,14 @@ public class KpCompilerMojo extends AbstractMojo {
 	        
 	        //kjcl.add(new java.io.FileInputStream(compilerJarFile));
 	        
-	        for(Dependency dep:dependencies){
-	        	File depJarFile = aetherUtil.resolveMavenArtifact4J(dep.getGroupId(), 
-		        		dep.getArtefactId(), 
-		        		dep.getVersion(), 
-		        		repositoryList);
-	        	kjcl.add(depJarFile.getAbsolutePath());
+	        if(dependencies!=null){
+	        	for(Dependency dep:dependencies){
+	        		File depJarFile = aetherUtil.resolveMavenArtifact4J(dep.getGroupId(), 
+	        				dep.getArtefactId(), 
+	        				dep.getVersion(), 
+	        				repositoryList);
+	        		kjcl.add(depJarFile.getAbsolutePath());
+	        	}
 	        }
 	        
 	        try {
@@ -237,9 +239,11 @@ public class KpCompilerMojo extends AbstractMojo {
 	            	// however, the preferred method is to stop after phase GENERATE_SCALA and then delegate the compilation to maven itself
 	            	throw new MojoFailureException("Feature not implemented yet");
 	            }
-	            for(ModelingUnitLoaderExtensionPoint point : modelingUnitLoaderExtensionPoints){
-	            	for(String fileExtension : point.getFileExtensions()){
-	            		paramsArray.add("-E"+fileExtension+","+point.getFactory());
+	            if(modelingUnitLoaderExtensionPoints!=null){
+	            	for(ModelingUnitLoaderExtensionPoint point : modelingUnitLoaderExtensionPoints){
+	            		for(String fileExtension : point.getFileExtensions()){
+	            			paramsArray.add("-E"+fileExtension+","+point.getFactory());
+	            		}
 	            	}
 	            }
 	            paramsArray.add(kpFileURL);
