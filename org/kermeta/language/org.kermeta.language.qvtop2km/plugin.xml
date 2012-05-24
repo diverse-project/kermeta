@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+		point="org.kermeta.language.builder.eclipse.muLoaders">
+	      <factory
+            factory="org.kermeta.alf.alf2km.api.AlfLoaderFactory">
+         <fileExtension
+               fileExtension=".alf.xmi"></fileExtension>
+      </factory>
+	</extension>
+</plugin>
