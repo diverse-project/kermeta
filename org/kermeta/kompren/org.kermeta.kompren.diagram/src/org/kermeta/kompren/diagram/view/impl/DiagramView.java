@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -12,11 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoundedRangeModel;
-import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-import javax.swing.SwingConstants;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
 import org.kermeta.kompren.diagram.view.interfaces.IAnchor;
@@ -24,19 +20,17 @@ import org.kermeta.kompren.diagram.view.interfaces.IDiagramView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.diagram.view.interfaces.ISelectable;
+import org.malai.widget.MPanel;
 
 /**
  * Implements a diagram that contains entities and relations.
  * @author Arnaud Blouin
  */
-public class DiagramView extends JPanel implements IDiagramView {
+public class DiagramView extends MPanel implements IDiagramView {
 	private static final long serialVersionUID = 1L;
 
 	/** The zoom applied on the diagram. */
 	protected double zoom;
-
-	/** The scroll pane providing scrool bars. */
-	protected JScrollPane scrollPane;
 
 	/** The entities of the diagram. */
 	protected List<IEntityView> entities;
@@ -58,14 +52,11 @@ public class DiagramView extends JPanel implements IDiagramView {
 	 * Initialises the diagram.
 	 */
 	public DiagramView(final boolean withScrollPane) {
-		super();
+		super(withScrollPane, true);
 		zoom 			= 1.;
 		entities 		= new ArrayList<IEntityView>();
 		relations		= new ArrayList<IRelationView>();
 		selection		= new ArrayList<ISelectable>();
-
-		if(withScrollPane)
-			scrollPane = new JScrollPane(this);
 	}
 
 
@@ -104,13 +95,13 @@ public class DiagramView extends JPanel implements IDiagramView {
 	@Override
 	public void focusOnEntity(final IEntityView view) {
 		final Point2D centre = view.getCentre();
-		final JScrollBar vertSB  = scrollPane.getVerticalScrollBar();
-		final JScrollBar horizSB = scrollPane.getHorizontalScrollBar();
+		final JScrollBar vertSB  = getScrollpane().getVerticalScrollBar();
+		final JScrollBar horizSB = getScrollpane().getHorizontalScrollBar();
 
 		if(vertSB.isVisible()) {
 			final BoundedRangeModel model = vertSB.getModel();
 			final int value	= model.getValue();
-			final int cy 	= scrollPane.getHeight()/2 + value;
+			final int cy 	= getScrollpane().getHeight()/2 + value;
 			int newValue 	= value+(int)(centre.getY()*zoom)-cy;
 
 			if(newValue>model.getMaximum())
@@ -124,7 +115,7 @@ public class DiagramView extends JPanel implements IDiagramView {
 		if(horizSB.isVisible()) {
 			final BoundedRangeModel model = horizSB.getModel();
 			final int value	= model.getValue();
-			final int cx 	= scrollPane.getWidth()/2 + value;
+			final int cx 	= getScrollpane().getWidth()/2 + value;
 			int newValue 	= value+(int)(centre.getX()*zoom)-cx;
 
 			if(newValue>model.getMaximum())
@@ -207,40 +198,34 @@ public class DiagramView extends JPanel implements IDiagramView {
 	}
 
 
-	@Override
-	public Dimension getPreferredScrollableViewportSize() {
-		return new Dimension(-100, 100);
-	}
-
-
-	@Override
-	public int getScrollableBlockIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
-        return orientation == SwingConstants.VERTICAL ? visibleRect.height : visibleRect.width;
-	}
-
-
-	@Override
-	public boolean getScrollableTracksViewportHeight() {
-		return getParent() instanceof JViewport ? ((JViewport)getParent()).getHeight() > getPreferredSize().height : false;
-	}
-
-
-	@Override
-	public boolean getScrollableTracksViewportWidth() {
-		return getParent() instanceof JViewport ? ((JViewport)getParent()).getWidth() > getPreferredSize().width : false;
-	}
-
-
-	@Override
-	public int getScrollableUnitIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
-		return 4;
-	}
-
-
-	@Override
-	public JScrollPane getScrollPane() {
-		return scrollPane;
-	}
+//	@Override
+//	public Dimension getPreferredScrollableViewportSize() {
+//		return new Dimension(-100, 100);
+//	}
+//
+//
+//	@Override
+//	public int getScrollableBlockIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
+//        return orientation == SwingConstants.VERTICAL ? visibleRect.height : visibleRect.width;
+//	}
+//
+//
+//	@Override
+//	public boolean getScrollableTracksViewportHeight() {
+//		return getParent() instanceof JViewport ? ((JViewport)getParent()).getHeight() > getPreferredSize().height : false;
+//	}
+//
+//
+//	@Override
+//	public boolean getScrollableTracksViewportWidth() {
+//		return getParent() instanceof JViewport ? ((JViewport)getParent()).getWidth() > getPreferredSize().width : false;
+//	}
+//
+//
+//	@Override
+//	public int getScrollableUnitIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
+//		return 4;
+//	}
 
 
 	@Override
@@ -393,25 +378,6 @@ public class DiagramView extends JPanel implements IDiagramView {
 
 
 	@Override
-	public void zoomDefault() {
-		zoom = 1.;
-	}
-
-
-	@Override
-	public void zoomIn(final double increment) {
-		zoom += increment;
-	}
-
-
-	@Override
-	public void zoomOut(final double decrement) {
-		if(zoom-decrement>0.)
-			zoom -= decrement;
-	}
-
-
-	@Override
 	public void addToSelection(final IEntityView entity) {
 		if(entity!=null)
 			selection.add(entity);
@@ -506,9 +472,24 @@ public class DiagramView extends JPanel implements IDiagramView {
 	}
 
 
+
 	@Override
-	public void setZoom(final int x, final int y, final double zoomLevel) {
-		if(zoomLevel>0)
-			zoom = zoomLevel;
+	public void setZoom(final double x, final double y, final double zoomingLevel) {
+		if(zoomingLevel>0)
+			zoom = zoomingLevel;
+	}
+
+
+	@Override
+	public Point2D getZoomedPoint(final double x, final double y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Point2D getZoomedPoint(final Point pt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

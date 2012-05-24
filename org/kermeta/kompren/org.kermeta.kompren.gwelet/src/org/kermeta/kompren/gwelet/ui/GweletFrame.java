@@ -1,5 +1,7 @@
 package org.kermeta.kompren.gwelet.ui;
 
+import java.awt.Frame;
+
 import javax.swing.JFrame;
 
 import org.kermeta.kompren.gwelet.model.Model;
@@ -7,6 +9,7 @@ import org.kermeta.kompren.gwelet.view.ClassDiagramView;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.ClassView;
 import org.malai.instrument.Instrument;
+import org.malai.instrument.library.Scroller;
 import org.malai.ui.UI;
 
 public class GweletFrame extends UI {
@@ -18,18 +21,24 @@ public class GweletFrame extends UI {
 
 	protected JFrame proxiedFrame;
 
+	protected Scroller scroller;
+
 
 	public GweletFrame() {
 		super();
 
-		getContentPane().add(canvas);
+		getContentPane().add(canvas.getScrollpane());
+		scroller = new Scroller(canvas);
+		scroller.addEventable(canvas);
+		scroller.setActivated(true);
 		pack();
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
 
 
 	@Override
 	public Instrument[] getInstruments() {
-		return new Instrument[]{};
+		return new Instrument[]{scroller};
 	}
 
 
@@ -92,6 +101,7 @@ public class GweletFrame extends UI {
 
 		diag.setLayoutStrategy(new ClassModelBasicStrategy(diag));
 		diag.updateLayout();
+		diag.updatePreferredSize();
 
 		return diag;
 	}
