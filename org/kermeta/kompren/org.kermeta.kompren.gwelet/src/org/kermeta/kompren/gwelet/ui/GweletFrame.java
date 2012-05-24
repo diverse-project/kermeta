@@ -4,10 +4,11 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 
+import org.kermeta.kompren.diagram.instrument.Hand;
 import org.kermeta.kompren.gwelet.model.Model;
-import org.kermeta.kompren.gwelet.view.ClassDiagramView;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.ClassView;
+import org.kermeta.kompren.gwelet.view.MetamodelView;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.library.Scroller;
 import org.malai.ui.UI;
@@ -17,11 +18,13 @@ public class GweletFrame extends UI {
 
 	protected Model model;
 
-	protected ClassDiagramView canvas;
+	protected MetamodelView canvas;
 
 	protected JFrame proxiedFrame;
 
 	protected Scroller scroller;
+
+	protected Hand hand;
 
 
 	public GweletFrame() {
@@ -31,6 +34,9 @@ public class GweletFrame extends UI {
 		scroller = new Scroller(canvas);
 		scroller.addEventable(canvas);
 		scroller.setActivated(true);
+		hand = new Hand(canvas);
+		hand.addEventable(canvas);
+		hand.setActivated(true);
 		pack();
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
@@ -38,7 +44,7 @@ public class GweletFrame extends UI {
 
 	@Override
 	public Instrument[] getInstruments() {
-		return new Instrument[]{scroller};
+		return new Instrument[]{scroller, hand};
 	}
 
 
@@ -51,8 +57,8 @@ public class GweletFrame extends UI {
 
 
 
-	public static ClassDiagramView createEcoreClassDiagram() {
-		ClassDiagramView diag 	= new ClassDiagramView(true);
+	public static MetamodelView createEcoreClassDiagram() {
+		MetamodelView diag 	= new MetamodelView(true);
 		ClassView eclass 		= (ClassView) diag.addEntity("EClass", -1, false);
 		ClassView eObject 		= (ClassView) diag.addEntity("EObject", -1, false);
 		ClassView eModelElement = (ClassView) diag.addEntity("EModelElement", -1, false);

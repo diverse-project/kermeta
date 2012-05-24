@@ -3,12 +3,12 @@ package org.kermeta.kompren.gwelet.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kermeta.kompren.diagram.view.impl.DiagramView;
+import org.kermeta.kompren.diagram.view.impl.ModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.gwelet.view.RoleView.Cardinality;
 
-public class ClassDiagramView extends DiagramView {
+public class MetamodelView extends ModelView {
 	private static final long serialVersionUID = 1L;
 
 	protected boolean operationsVisible;
@@ -16,7 +16,7 @@ public class ClassDiagramView extends DiagramView {
 	protected boolean propertiesVisible;
 
 
-	public ClassDiagramView(final boolean withScrollPane) {
+	public MetamodelView(final boolean withScrollPane) {
 		super(withScrollPane);
 
 		operationsVisible = true;

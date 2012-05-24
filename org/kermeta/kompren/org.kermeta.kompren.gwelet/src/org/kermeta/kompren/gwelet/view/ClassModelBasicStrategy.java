@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
-import org.kermeta.kompren.diagram.view.interfaces.IDiagramView;
+import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 
 public class ClassModelBasicStrategy implements ILayoutStrategy {
 	/** The diagram to layout. */
-	protected IDiagramView diagram;
+	protected IModelView diagram;
 
 
-	public ClassModelBasicStrategy(final IDiagramView diagram) {
+	public ClassModelBasicStrategy(final IModelView diagram) {
 		super();
 
 		setDiagram(diagram);
@@ -129,12 +129,12 @@ public class ClassModelBasicStrategy implements ILayoutStrategy {
 
 
 	@Override
-	public void setDiagram(final IDiagramView diagram) {
+	public void setDiagram(final IModelView diagram) {
 		this.diagram = diagram;
 	}
 
 	@Override
-	public IDiagramView getDiagram() {
+	public IModelView getDiagram() {
 		return diagram;
 	}
 

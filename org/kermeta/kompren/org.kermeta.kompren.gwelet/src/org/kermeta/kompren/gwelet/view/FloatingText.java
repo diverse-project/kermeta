@@ -6,9 +6,10 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import org.kermeta.kompren.diagram.view.impl.EntityView;
-import org.kermeta.kompren.diagram.view.interfaces.ISelectable;
+import org.kermeta.kompren.diagram.view.interfaces.Selectable;
+import org.malai.picking.Picker;
 
-public class FloatingText implements ISelectable {
+public class FloatingText implements Selectable {
 	protected String text;
 
 	protected RoleView role;
@@ -52,6 +53,7 @@ public class FloatingText implements ISelectable {
 	}
 
 
+	@Override
 	public boolean contains(final double x, final double y) {
 		if(text==null || text.length()==0)
 			return false;
@@ -72,8 +74,41 @@ public class FloatingText implements ISelectable {
 
 
 
+	@Override
 	public void translate(final double gapx, final double gapy) {
 		this.tx += gapx;
 		this.ty += gapy;
+	}
+
+
+
+	@Override
+	public Picker getPicker() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void setSelected(final boolean selected) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+
+	@Override
+	public boolean isSelected() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean isSelectable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -59,7 +59,7 @@ public abstract class ClassElementView extends ComponentView {
 	@Override
 	public void paint(final Graphics2D g) {
 		if(visibility==Visibility.STANDARD && entity.getVisibility()==Visibility.STANDARD) {
-			g.setColor(entity.getLineColor());
+			g.setColor(entity.getTextColor());
 			g.setFont(getFont());
 			g.drawString(textCache, (float)position.x, (float)position.y);
 		}

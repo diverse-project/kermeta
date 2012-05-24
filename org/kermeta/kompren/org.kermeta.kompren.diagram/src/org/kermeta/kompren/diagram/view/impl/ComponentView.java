@@ -1,6 +1,8 @@
 package org.kermeta.kompren.diagram.view.impl;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Stroke;
 
 import org.kermeta.kompren.diagram.view.interfaces.IComponentView;
 
@@ -15,6 +17,8 @@ public abstract class ComponentView extends View implements IComponentView {
 	/** The colour of the borders. */
 	protected Color lineColor;
 
+	protected Stroke lineStroke;
+
 
 	/**
 	 * Initialises the component.
@@ -24,6 +28,7 @@ public abstract class ComponentView extends View implements IComponentView {
 
 		visibility 	= Visibility.STANDARD;
 		lineColor	= Color.BLACK;
+		lineStroke = new BasicStroke(2f);
 	}
 
 
@@ -62,5 +67,10 @@ public abstract class ComponentView extends View implements IComponentView {
 	@Override
 	public Color getLineColor() {
 		return lineColor;
+	}
+
+
+	public Stroke getLineStroke() {
+		return lineStroke;
 	}
 }

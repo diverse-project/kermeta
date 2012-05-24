@@ -1,9 +1,11 @@
 package org.kermeta.kompren.gwelet.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
@@ -14,6 +16,7 @@ import java.util.List;
 import org.kermeta.kompren.diagram.view.impl.RectangleEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
+import org.malai.picking.Picker;
 
 /**
  * Defines an entity that corresponds to a class of a class diagram.
@@ -29,6 +32,8 @@ public class ClassView extends RectangleEntityView {
 	/** Used to add spaces around the name of the class. */
 	public static final float HEIGHT_HEADER_GAP = 10f;
 
+	private static final Stroke BASIC_STROKE = new BasicStroke(1f);
+
 	/** The views of the attributes of the class. */
 	protected List<AttributeView> attributes;
 
@@ -43,6 +48,10 @@ public class ClassView extends RectangleEntityView {
 
 	protected GeneralPath boundPath;
 
+	protected boolean selected;
+
+	protected Color textColor;
+
 
 
 	/**
@@ -56,8 +65,10 @@ public class ClassView extends RectangleEntityView {
 		boundPath			= new GeneralPath();
 		operationsVisible 	= true;
 		propertiesVisible	= true;
+		selected			= false;
 		attributes	   		= new ArrayList<AttributeView>();
 		operations	   		= new ArrayList<OperationView>();
+		setSelected(false);
 		update();
 		initAnchors();
 	}
@@ -207,7 +218,9 @@ public class ClassView extends RectangleEntityView {
 		g.setColor(fillingColor);
 		g.fill(path);
 		g.setColor(lineColor);
+		g.setStroke(lineStroke);
 		g.draw(path);
+		g.setStroke(BASIC_STROKE);
 		g.setColor(Color.BLACK);
 		g.setFont(getTitleFont());
 		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
@@ -303,7 +316,13 @@ public class ClassView extends RectangleEntityView {
 
 	@Override
 	public void updateLineColor(final int opacity) {
-		lineColor = new Color(0, 0, 0, opacity);
+		if(selected) {
+			lineColor = new Color(100, 100, 100, 75);
+		}else {
+			lineColor = new Color(0, 0, 0, opacity);
+		}
+
+		textColor = new Color(0, 0, 0, opacity);
 	}
 
 
@@ -363,5 +382,40 @@ public class ClassView extends RectangleEntityView {
 	@Override
 	public GeneralPath getBoundPath() {
 		return boundPath;
+	}
+
+
+	@Override
+	public Picker getPicker() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void setSelected(final boolean selected) {
+		this.selected = selected;
+		updateLineColor(DEFAUT_OPACITY);
+		if(selected)
+			lineStroke = new BasicStroke(5f);
+		else
+			lineStroke = new BasicStroke(1f);
+	}
+
+
+	public Color getTextColor() {
+		return textColor;
+	}
+
+
+	@Override
+	public boolean isSelected() {
+		return selected;
+	}
+
+
+	@Override
+	public boolean isSelectable() {
+		return !isPruned();
 	}
 }

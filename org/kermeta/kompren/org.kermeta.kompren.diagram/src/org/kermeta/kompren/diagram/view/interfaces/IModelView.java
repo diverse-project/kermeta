@@ -10,22 +10,22 @@ import org.malai.widget.Scrollable;
  * The interface of diagram classes.
  * @author Arnaud Blouin
  */
-public interface IDiagramView extends Scrollable, Zoomable {
+public interface IModelView extends Scrollable, Zoomable {
 	void relayoutRelations();
 
 	void moveEntity(final IEntityView entity, final double x, final double y);
 
 	void translateEntity(final IEntityView entity, final double tx, final double ty);
 
-	void setSelection(final ISelectable object);
+	void setSelection(final Selectable object);
 
-	void setSelection(final List<ISelectable> newSelection);
+	void setSelection(final List<Selectable> newSelection);
 
 	void removeSelection();
 
-	void removeFromSelection(final ISelectable object);
+	void removeFromSelection(final Selectable object);
 
-	List<ISelectable> getSelection();
+	List<Selectable> getSelection();
 
 	void addToSelection(final List<IEntityView> newSelection);
 

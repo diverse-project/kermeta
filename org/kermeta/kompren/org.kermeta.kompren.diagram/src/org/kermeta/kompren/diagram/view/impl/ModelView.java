@@ -16,17 +16,19 @@ import javax.swing.JScrollBar;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
 import org.kermeta.kompren.diagram.view.interfaces.IAnchor;
-import org.kermeta.kompren.diagram.view.interfaces.IDiagramView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
+import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
-import org.kermeta.kompren.diagram.view.interfaces.ISelectable;
+import org.kermeta.kompren.diagram.view.interfaces.Selectable;
+import org.malai.picking.Pickable;
+import org.malai.picking.Picker;
 import org.malai.widget.MPanel;
 
 /**
  * Implements a diagram that contains entities and relations.
  * @author Arnaud Blouin
  */
-public class DiagramView extends MPanel implements IDiagramView {
+public class ModelView extends MPanel implements IModelView {
 	private static final long serialVersionUID = 1L;
 
 	/** The zoom applied on the diagram. */
@@ -39,7 +41,7 @@ public class DiagramView extends MPanel implements IDiagramView {
 	protected List<IRelationView> relations;
 
 	/** The selected objects. */
-	protected List<ISelectable> selection;
+	protected List<Selectable> selection;
 
 	/** The name of the font to use. */
 	protected String fontName;
@@ -51,12 +53,12 @@ public class DiagramView extends MPanel implements IDiagramView {
 	/**
 	 * Initialises the diagram.
 	 */
-	public DiagramView(final boolean withScrollPane) {
+	public ModelView(final boolean withScrollPane) {
 		super(withScrollPane, true);
 		zoom 			= 1.;
 		entities 		= new ArrayList<IEntityView>();
 		relations		= new ArrayList<IRelationView>();
-		selection		= new ArrayList<ISelectable>();
+		selection		= new ArrayList<Selectable>();
 	}
 
 
@@ -379,56 +381,68 @@ public class DiagramView extends MPanel implements IDiagramView {
 
 	@Override
 	public void addToSelection(final IEntityView entity) {
-		if(entity!=null)
+		if(entity!=null) {
 			selection.add(entity);
+			entity.setSelected(true);
+		}
 	}
 
 
 	@Override
 	public void addToSelection(final List<IEntityView> newSelection) {
 		if(newSelection!=null)
-			for(IEntityView sh : newSelection)
-				if(sh!=null)
-					selection.add(sh);
+			for(IEntityView entity : newSelection)
+				if(entity!=null) {
+					selection.add(entity);
+					entity.setSelected(true);
+				}
 	}
 
 
 	@Override
-	public List<ISelectable> getSelection() {
+	public List<Selectable> getSelection() {
 		return selection;
 	}
 
 
 	@Override
-	public void removeFromSelection(final ISelectable entity) {
-		if(entity!=null)
+	public void removeFromSelection(final Selectable entity) {
+		if(entity!=null) {
 			selection.remove(entity);
+			entity.setSelected(false);
+		}
 	}
 
 
 	@Override
 	public void removeSelection() {
+		for(Selectable sel : selection)
+			sel.setSelected(false);
+
 		selection.clear();
 	}
 
 
 	@Override
-	public void setSelection(final ISelectable sel) {
-		selection.clear();
+	public void setSelection(final Selectable sel) {
+		removeSelection();
 
-		if(sel!=null)
+		if(sel!=null) {
 			selection.add(sel);
+			sel.setSelected(true);
+		}
 	}
 
 
 	@Override
-	public void setSelection(final List<ISelectable> newSelection) {
-		selection.clear();
+	public void setSelection(final List<Selectable> newSelection) {
+		removeSelection();
 
 		if(newSelection!=null)
-			for(ISelectable sel : newSelection)
-				if(sel!=null)
-					selection.add(sel);
+			for(Selectable sel : newSelection) {
+				selection.add(sel);
+				sel.setSelected(true);
+			}
 	}
 
 
@@ -469,6 +483,34 @@ public class DiagramView extends MPanel implements IDiagramView {
 			anchorRelation(relation);
 			relation.update();
 		}
+	}
+
+
+
+	@Override
+	public Pickable getPickableAt(final double x, final double y) {
+		Pickable pk = null;
+		IEntityView ent;
+
+		for(int i=0, size=entities.size(); i<size && pk==null; i++) {
+			ent = entities.get(i);
+			if(ent.isSelectable() && ent.contains(x, y))
+				pk = ent;
+		}
+
+		return pk;
+	}
+
+
+	@Override
+	public Picker getPickerAt(final double x, final double y) {
+		return null;
+	}
+
+
+	@Override
+	public boolean contains(final Object obj) {
+		return entities.contains(obj) || relations.contains(obj);
 	}
 
 
