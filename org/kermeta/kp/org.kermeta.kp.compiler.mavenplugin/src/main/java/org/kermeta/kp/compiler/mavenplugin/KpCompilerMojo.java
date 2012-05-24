@@ -148,8 +148,16 @@ public class KpCompilerMojo extends AbstractMojo {
      */
     private Boolean useDefaultClasspath;
     
+    /**
+     * Indicates couple of file extensions supported by factories
+     * @parameter
+     */
+    private ModelingUnitLoaderExtensionPoint[] modelingUnitLoaderExtensionPoints;
     
-
+    /**
+     * @parameter
+     */
+    private Dependency[] dependencies;
     
 
     
@@ -188,13 +196,20 @@ public class KpCompilerMojo extends AbstractMojo {
 	        		pluginVersion, 
 	        		repositoryList);
 	        
-	        
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();
 	        kjcl.getParentLoader().setEnabled(false); // disable parent loader
 	        //kjcl.add(this.getClass().getResourceAsStream("/kp.compiler.commandline.standalone.jar"));
 	        kjcl.add(compilerJarFile.getAbsolutePath());
 	        
 	        //kjcl.add(new java.io.FileInputStream(compilerJarFile));
+	        
+	        for(Dependency dep:dependencies){
+	        	File depJarFile = aetherUtil.resolveMavenArtifact4J(dep.getGroupId(), 
+		        		dep.getArtefactId(), 
+		        		dep.getVersion(), 
+		        		repositoryList);
+	        	kjcl.add(depJarFile.getAbsolutePath());
+	        }
 	        
 	        try {
 	        	
@@ -222,8 +237,12 @@ public class KpCompilerMojo extends AbstractMojo {
 	            	// however, the preferred method is to stop after phase GENERATE_SCALA and then delegate the compilation to maven itself
 	            	throw new MojoFailureException("Feature not implemented yet");
 	            }
+	            for(ModelingUnitLoaderExtensionPoint point : modelingUnitLoaderExtensionPoints){
+	            	for(String fileExtension : point.getFileExtensions()){
+	            		paramsArray.add("-E"+fileExtension+","+point.getFactory());
+	            	}
+	            }
 	            paramsArray.add(kpFileURL);
-	            
 	            
 	            
 	            String[] params = {};

@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NavigableMap;
+import java.util.Properties;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.kermeta.utils.helpers.FileExtensionComparator;
@@ -36,6 +38,7 @@ public class KermetaCompilerCLI {
 	private static final String IGNORECHECK_OPTION = "ignoreCheck";
 	private static final String CONTINUEONERROR_OPTION = "continueOnError";
 	private static final String CLASSPATH_OPTION = "cp";
+	private static final String EXTENSION_POINT_OPTION = "E";
 
 	private static final String DEFAULT_TARGET_FOLDER = "target";
 	
@@ -48,6 +51,7 @@ public class KermetaCompilerCLI {
 	private Boolean continueOnError = false;
 	private String stopAfterPhase = "GENERATE_SCALA_BYTECODE";
 	private String additionalClasspath = "";
+	private NavigableMap<String, ModelingUnitLoaderFactory> muLoaders;
 
 	private KermetaCompiler compiler;
 	
@@ -91,7 +95,7 @@ public class KermetaCompilerCLI {
 		compiler.stopOnError = !continueOnError;
 		compiler.checkingEnabled = !ignoreCheck;
 		compiler.saveIntermediateFiles = intermediateFilesRequired;
-		compiler.setModelingUnitLoaders(this.defaultMuLoaders());
+		compiler.setModelingUnitLoaders(muLoaders);
 		compiler.kp2bytecode(kpFile, classpath, stopAfterPhase);		
 		return compiler.hasFailed;
 	}
@@ -109,6 +113,14 @@ public class KermetaCompilerCLI {
 		options.addOption(CONTINUEONERROR_OPTION, false, "try to continue regardless of previous errors.");
 		options.addOption(TARGET_LOCATION_OPTION, true, "Output folder. " + DEFAULT_TARGET_FOLDER + " by default ");
 		options.addOption(CLASSPATH_OPTION, true, "addtional classpath.");
+		options.addOption(
+					OptionBuilder
+					.withArgName("fileExtension,factory")
+					.hasArgs(2)
+					.withValueSeparator(',')
+					.withDescription("Use factory for given file extension")
+					.create(EXTENSION_POINT_OPTION)
+					);
 	}
 
 	/**
@@ -150,6 +162,8 @@ public class KermetaCompilerCLI {
 			this.continueOnError = true;			
 		}
 		
+		setMuLoaders(cmd.getOptionProperties(EXTENSION_POINT_OPTION));
+		
 		if(cmd.getArgList().size() == 0){
 			System.out.println("Missing kp file.");
 			HelpFormatter formatter = new HelpFormatter();
@@ -169,13 +183,28 @@ public class KermetaCompilerCLI {
 		}
 	}
 	
-	private NavigableMap<String, ModelingUnitLoaderFactory> defaultMuLoaders(){
-		NavigableMap<String, ModelingUnitLoaderFactory> muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
+	private void setMuLoaders(Properties extensionPoints){
+		System.out.println("Setting muLoaders for "+extensionPoints.size()+" extension points");
+		setDefaultMuLoaders();
+		for(String fileExtension : extensionPoints.stringPropertyNames()){
+			String factoryName = extensionPoints.getProperty(fileExtension);
+			System.out.println("Adding factory "+factoryName+" for file extension " + fileExtension);
+			try{
+				ModelingUnitLoaderFactory factory = (ModelingUnitLoaderFactory) Class.forName(factoryName).newInstance();
+				muLoaders.put(fileExtension, factory);
+			} catch (Exception e) {
+				System.err.println("Unable to load factory " + factoryName);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void setDefaultMuLoaders(){
+		muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
 		muLoaders.put(".km", new ModelingUnitLoaderFactoryForKm());
 		muLoaders.put(".kmt", new ModelingUnitLoaderFactoryForKmt());
 		muLoaders.put(".ecore", new ModelingUnitLoaderFactoryForEcore());
 		muLoaders.put(".profile.uml", new ModelingUnitLoaderFactoryForUmlProfile());
-		return muLoaders;
 	}
 
 	
