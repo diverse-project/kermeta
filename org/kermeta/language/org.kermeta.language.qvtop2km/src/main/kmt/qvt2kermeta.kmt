@@ -42,7 +42,7 @@ class Qvt2Kermeta{
 reference srcModel : Resource
 reference tgtModel : Resource
 
-	operation main() : Void is do
+	operation main(uri : String) : structure::ModelingUnit is do
 		
 		
 		var context : Qvt2KermetaContext init Qvt2KermetaContext.new.initialize()
@@ -53,10 +53,10 @@ reference tgtModel : Resource
 		
 		/* load the qvt model*/
 		var sourceRepository     : ResourceSet init ResourceSet.new
-		
+		srcModel := sourceRepository.createResource(uri, "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub1/Book2Publication.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub2/Book2Publication2.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
-		srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/ecore2emof/Ecore2EMOF.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
+		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/ecore2emof/Ecore2EMOF.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/sam2samdynamic/org.topcased.simulation.sam.control.sam2samdynamic.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		//srcModel := sourceRepository.createResource("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/initmodel/org.topcased.simulation.sam.qvtsemantics.initmodel.qvtoperational", "platform:/resource/org.kermeta.language.qvtop2km/ecore/QVTOperational.ecore")
 		
@@ -72,8 +72,9 @@ reference tgtModel : Resource
 		
 		/*create the resource for the target created kermeta model*/
 		var targetRepository : ResourceSet init ResourceSet.new
+        tgtModel := targetRepository.createResource("" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
         //tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
-        tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+        //tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("../test/UML2RDBMS.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
 		//tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/ecore2emof.km" , "http://www.kermeta.org/kermeta/2_0_0/")
 		//tgtModel := targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/sam2samdyn.km" , "http://www.kermeta.org/kermeta/2_0_0/")
@@ -86,7 +87,8 @@ reference tgtModel : Resource
 		transform(context)
 		
 		/*save the result*/
-		tgtModel.save(void)
+		//tgtModel.save(void)
+		result?=tgtModel.getContents.elementAt(0)
 		StdIO.writeln("done")
 	end
 

@@ -160,9 +160,11 @@ aspect class OperationCallExp {
 			output:=out
 			
 			var resourceUri : String init referredOperation.containingResource.getURI.toString
-			
+			StdIO.writeln("ZEQVTID : "+referredOperation.getQVTID)
+			StdIO.writeln(resourceUri)
 			if  (resourceUri=="pathmap://models/qvtoperational/qvtstdlib.qvtoperational" or resourceUri=="pathmap://models/essentialocl/oclstdlib.essentialocl") and referredOperation.output==void then
 				
+				StdIO.writeln("from framework")
 				//in kermeta the flatten operation from sequence return a bag of objects
 				//should return flatten.asSequence.asType(Sequence<X>) where X is the type of the flatten operation in qvt
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
@@ -178,6 +180,7 @@ aspect class OperationCallExp {
 					
 					source.range2domain(context)
 					flattenFeature.target?=source.output
+					out:=asSeqType
 				else if referredOperation.getQVTID()=="QvtLib::Model::objects" then /*2*/
 					out.name:="extent"
 					source.range2domain(context)
@@ -270,7 +273,7 @@ aspect class OperationCallExp {
 						var transfoCall : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("root_package::TransformationContext",false)
 						out.target:=transfoCall
 					end
-				
+					
 					if context.frameworkOperationMap.containsKey(referredOperation.getQVTID) then
 						out.name:=context.frameworkOperationMap.getValue(referredOperation.getQVTID)
 					else
