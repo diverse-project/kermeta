@@ -1,6 +1,7 @@
 package org.kermeta.kp.compiler.commandline;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class ModelingUnitLoaderForEcore implements ModelingUnitLoader {
 	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
 		ModelingUnitCacheHelper muCacheHelper = new ModelingUnitCacheHelper(logger);
 		lastLoadErrorMessage = "";
-		URI uri =  URI.createURI(urlString);
+		URI uri =  URI.createURI(URLDecoder.decode(urlString,"UTF-8"));
 		ModelingUnit mu = null;
 		Collection<ModelingUnit> mus = new ArrayList<ModelingUnit>(); 
 		

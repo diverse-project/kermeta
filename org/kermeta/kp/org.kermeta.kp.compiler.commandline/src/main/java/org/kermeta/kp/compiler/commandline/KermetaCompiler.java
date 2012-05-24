@@ -15,9 +15,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -617,7 +619,7 @@ public class KermetaCompiler {
 			fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder+"/"); // add the path to java code frome generated emf
 			
 			logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
-			String fileLocation = mergedFile.toURI().toURL().getFile();
+			String fileLocation = mergedFile.toURI().toURL().getFile(); 
 			StringBuilder fullBinaryDependencyClassPathSB = new StringBuilder(); 
 			for(String singlePath : fullBinaryDependencyClassPath){
 				fullBinaryDependencyClassPathSB.append(singlePath);
@@ -943,8 +945,8 @@ public class KermetaCompiler {
 	}
 	
 	
-	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) {
-		initializeforBuilding(kp, targetFolder, targetFolder, userAdditionalClassPath);
+	synchronized public void km2Scala(KermetaProject kp, KpVariableExpander varExpander, String kmFileURL, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) throws UnsupportedEncodingException {
+		initializeforBuilding(kp, URLDecoder.decode(targetFolder,"UTF-8"), URLDecoder.decode(targetFolder,"UTF-8"), userAdditionalClassPath);
 		/*
 		 * if(packageEquivalences != null){ for (int i = 0; i <
 		 * packageEquivalences.length; i++) { PackageEquivalence equivalence =
@@ -968,7 +970,7 @@ public class KermetaCompiler {
 			
 		}
 		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
-		km2ScalaCompiler.compile(kmFileURL);
+		km2ScalaCompiler.compile(URLDecoder.decode(kmFileURL,"UTF-8"));
 	}
 
 	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) {

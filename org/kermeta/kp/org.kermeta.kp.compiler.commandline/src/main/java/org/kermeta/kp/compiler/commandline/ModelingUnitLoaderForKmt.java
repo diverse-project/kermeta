@@ -3,6 +3,7 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
@@ -38,7 +39,7 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 	
 	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
 		lastLoadErrorMessage = "";
-		URI uri =  URI.createURI(urlString);
+		URI uri =  URI.createURI(URLDecoder.decode(urlString,"UTF-8"));
 		ModelingUnit mu = null;
 		Collection<ModelingUnit> mus = new ArrayList<ModelingUnit>(); 
 		

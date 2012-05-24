@@ -1,6 +1,9 @@
 package org.kermeta.utils.systemservices.eclipse.internal;
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
@@ -98,8 +101,19 @@ public class EclipseReporter {
 	}
 
 	private String cleanString(URL toClean) {
-		String cleanString = FileHelpers.URLToStringWithoutFile(toClean);
-		return cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
+		try {
+			String decodedUrlString = URLDecoder.decode(toClean.toString(), "UTF-8");
+			String cleanString = FileHelpers.URLToStringWithoutFile(new URL(decodedUrlString));
+			return cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return toClean.toString();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return toClean.toString();
+		}
 	}
 	
 	private IFile check(IFile iFile, URL theRef) {

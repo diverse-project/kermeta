@@ -9,7 +9,9 @@
 package org.kermeta.utils.helpers.eclipse;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.core.resources.IResource;
@@ -24,6 +26,9 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 		
 	}
 	
+	/**
+	 * be careful java.net.URI uses RFC 2396 compliant string, which means that " " are enforced into "%20" for example
+	 */
 	@Override
 	public java.net.URI convertSpecialURItoFileURI(java.net.URI javaUri) {
 		org.eclipse.emf.common.util.URI emfUri = EMFUriHelper.convertToEMFUri(javaUri);
@@ -35,10 +40,15 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 			String platformString = emfUri.toPlatformString(true);
 			IResource res =ResourcesPlugin.getWorkspace().getRoot().findMember(platformString); 
 			if(res != null){
-				if(res.getRawLocationURI()!=null)
-					return java.net.URI.create(res.getRawLocationURI().toString());
-				else if(res.getLocationURI()!=null)
-					return java.net.URI.create(res.getLocationURI().toString());
+				try {
+					if(res.getRawLocationURI()!=null)
+						return java.net.URI.create(java.net.URLEncoder.encode(res.getRawLocationURI().toString(),"UTF-8"));
+					else if(res.getLocationURI()!=null)						
+						return java.net.URI.create(java.net.URLEncoder.encode(res.getLocationURI().toString(),"UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		// deal with platformPlugin
@@ -46,8 +56,7 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 			URL resolvedURL;
 			try {
 				resolvedURL = FileLocator.resolve(javaUri.toURL());
-				//URL resolvedURL = Platform.resolve(new java.net.URL(key));
-				return java.net.URI.create(resolvedURL.toString());
+				return java.net.URI.create(java.net.URLEncoder.encode(resolvedURL.toString(),"UTF-8"));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
