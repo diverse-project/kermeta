@@ -1,5 +1,7 @@
 package org.kermeta.kompren.diagram.instrument;
 
+import java.awt.Point;
+
 import org.kermeta.kompren.diagram.action.MoveElement;
 import org.kermeta.kompren.diagram.action.SelectElement;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
@@ -27,7 +29,7 @@ public class Hand extends Instrument {
 		try{
 			addLink(new Press2Select(this));
 //			addLink(new DnD2Select(this));
-//			addLink(new DnD2Move(this));
+			addLink(new DnD2Move(this));
 		}catch(final InstantiationException e){
 			e.printStackTrace();
 		}catch(final IllegalAccessException e){
@@ -83,7 +85,19 @@ public class Hand extends Instrument {
 
 		@Override
 		public void initAction() {
-			// TODO Auto-generated method stub
+			action.setModelView(canvas);
+		}
+
+
+		@Override
+		public void updateAction() {
+//			val startPt	= instrument.zoomer.zoomable.getZoomedPoint(interaction.getStartPt);
+//			val endPt	= zoomer.zoomable.getZoomedPoint(interaction.getEndPt);
+			Point startPt = interaction.getStartPt();
+			Point endPt = interaction.getEndPt();
+
+			action.setTx(endPt.getX() - startPt.getX());
+			action.setTy(endPt.getY() - startPt.getY());
 		}
 
 		@Override
