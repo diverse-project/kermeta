@@ -22,6 +22,7 @@ import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
 import org.malai.picking.Pickable;
 import org.malai.picking.Picker;
+import org.malai.properties.Zoomable;
 import org.malai.widget.MPanel;
 
 /**
@@ -152,6 +153,8 @@ public class ModelView extends MPanel implements IModelView {
 
 		for(IRelationView relation : relations)
 			relation.paint(g2);
+
+		g2.scale(1./zoom, 1./zoom);
 	}
 
 
@@ -339,13 +342,6 @@ public class ModelView extends MPanel implements IModelView {
 
 
 	@Override
-	public void setZoom(final double zoom) {
-		if(zoom>0)
-			this.zoom = zoom;
-	}
-
-
-	@Override
 	public void addToSelection(final IEntityView entity) {
 		if(entity!=null) {
 			selection.add(entity);
@@ -456,21 +452,21 @@ public class ModelView extends MPanel implements IModelView {
 
 	@Override
 	public void setZoom(final double x, final double y, final double zoomingLevel) {
-		if(zoomingLevel>0)
-			zoom = zoomingLevel;
+		if(zoomingLevel<=Zoomable.MAX_ZOOM && zoomingLevel>=Zoomable.MIN_ZOOM) {
+			this.zoom = zoomingLevel;
+			update();
+		}
 	}
 
 
 	@Override
 	public Point2D getZoomedPoint(final double x, final double y) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Point2D.Double(x/zoom, y/zoom);
 	}
 
 
 	@Override
 	public Point2D getZoomedPoint(final Point pt) {
-		// TODO Auto-generated method stub
-		return null;
+		return pt==null ? new Point2D.Double() : getZoomedPoint(pt.x, pt.y);
 	}
 }

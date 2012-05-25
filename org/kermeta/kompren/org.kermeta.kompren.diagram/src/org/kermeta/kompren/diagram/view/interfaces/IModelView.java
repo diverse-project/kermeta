@@ -37,8 +37,6 @@ public interface IModelView extends Scrollable, Zoomable {
 
 	boolean removeEntity(final IEntityView entity);
 
-	void setZoom(final double zoom);
-
 	int getNbEntities();
 
 	int getNbRelations();

@@ -10,6 +10,7 @@ import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.ClassView;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
 import org.malai.instrument.Instrument;
+import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
 import org.malai.ui.UI;
 
@@ -26,6 +27,8 @@ public class GweletFrame extends UI {
 
 	protected Hand hand;
 
+	protected BasicZoomer zoomer;
+
 
 	public GweletFrame() {
 		super();
@@ -34,17 +37,21 @@ public class GweletFrame extends UI {
 		scroller = new Scroller(canvas);
 		scroller.addEventable(canvas);
 		scroller.setActivated(true);
+		zoomer = new BasicZoomer(canvas);
+		zoomer.addEventable(canvas);
+		zoomer.setActivated(true);
 		hand = new Hand(canvas);
 		hand.addEventable(canvas);
 		hand.setActivated(true);
 		pack();
 		setExtendedState(Frame.MAXIMIZED_BOTH);
+		canvas.requestFocusInWindow();
 	}
 
 
 	@Override
 	public Instrument[] getInstruments() {
-		return new Instrument[]{scroller, hand};
+		return new Instrument[]{scroller, hand, zoomer};
 	}
 
 
