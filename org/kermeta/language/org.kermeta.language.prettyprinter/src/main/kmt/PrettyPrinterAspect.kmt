@@ -551,8 +551,11 @@ package org::kermeta::language{
 				if not self.target.isVoid then
 					result := self.target.prettyPrint(indent)+"\n"+printIndent(indent+1)+"."
 				end
-				result := result + Helper.keywordEscape(self.name)
-				
+				if not name.isVoid then
+					result := result + Helper.keywordEscape(self.name)
+				else
+					result := result + "/* unresolvedCall without name*/"
+				end			
 				if not generics.empty then
 					result := result+"["
 					var first : Boolean init true
