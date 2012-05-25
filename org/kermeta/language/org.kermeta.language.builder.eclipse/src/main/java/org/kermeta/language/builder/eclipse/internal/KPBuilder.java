@@ -72,6 +72,9 @@ public class KPBuilder {
 	
 	protected KPNeedBuildDeltaVisitor needBuildVisitor;
 	
+	/**
+	 * last modeling unit built, it may contains error
+	 */
 	public ModelingUnit kp_last_modelingunit = null;
 	public HashMap<String,KPFilesContainer> kpFiles = new HashMap<String,KPFilesContainer>();	
 	
@@ -351,7 +354,9 @@ public class KPBuilder {
 				compiler.stopOnError = !Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_IGNORE_BUILD_ERROR_BOOLEAN);
 				compiler.checkingEnabled = true;
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,KermetaCompiler.PHASE_GENERATE_SCALA_BYTECODE);
-				
+				if(result != null){
+					kp_last_modelingunit = result;
+				}
 				
 				
 				if (result != null && !compiler.hasFailed) {
@@ -360,7 +365,6 @@ public class KPBuilder {
 					// TODO may be we can do that in background because we may have to update it if the user has opened or closed some projects
 					uriMapFileBuilder.generateURIMapFile(outputRootFolder);
 					
-					kp_last_modelingunit = result;
 					Activator.getDefault().getMessaggingSystem().debug("copy resources to class folders to ease the run from Eclipse", this.getClass().getName());
 					
 					kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);

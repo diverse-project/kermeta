@@ -15,6 +15,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -213,12 +217,41 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 			ModelingUnit theCurrentMU = KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier); 
 			
-			if (theCurrentMU != null) {
+			if (theCurrentMU != null) {				
 				myAutocompletion = new AutocompletionImpl(Activator.getDefault().getMessaggingSystem(),KermetaBuilder.getDefault().getKpLastModelingunit(kpIdentifier));
 			}
+			/*else{ // time consuming ...
+				
+				IFile file = editor.getFile().getProject().getFile("target/beforeCheckingforScopeRESOLVED.km");
+				if (file != null){
+					try {
+						ResourceSet resSet = new ResourceSetImpl();
+						Resource res = resSet.getResource(org.kermeta.utils.helpers.emf.EMFUriHelper.convertToEMFUri(file.getLocationURI()), true);
+						ModelingUnit rtNode = (ModelingUnit) res.getContents().get(0);	
+						myAutocompletion =  new AutocompletionImpl(Activator.getDefault().getMessaggingSystem(),rtNode);
+					} catch(RuntimeException e){
+					}
+				}
+			}*/
 		}
 
-		if (getDelimiter(qualifier).equals("::") || getDelimiter(qualifier).equals(":") || getLastKeyword(qualifier).equals("init")) {
+		if (getLastKeyword(qualifier).equals("using")) {
+			if (getDelimiter(qualifier).equals("::") || getDelimiter(qualifier).equals(":") ) {
+				//Proposal of ClassDef
+				proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
+				propList.add(new KermetaCompletionProposal("*", documentOffset - qlen, qlen, 1, KermetaImage.getImage("/icons/kermeta.gif")));
+				proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
+			} else if(qualifier.size() == 1){
+				//Proposal of package or class def
+				proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
+				proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
+			} else if(getLast(qualifier).toString().equals("=>")){ 
+				proposeRenaming(qualifier, documentOffset, propList, qlen);
+			}
+			else {
+				propList.add(new KermetaCompletionProposal("=>", documentOffset, 0, 2, KermetaImage.getImage("/icons/kermeta.gif")));
+			}
+		} else if (getDelimiter(qualifier).equals("::") || getDelimiter(qualifier).equals(":") ) {
 			//Proposal of ClassDef
 			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 			proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
@@ -226,21 +259,21 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			proposeCallExpression(qualifier, documentOffset, propList, qlen);
 		} else if (! isTerminatedbyKeyword(qualifier)) {
 			//Proposal of Keywords and Variables
-			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 			proposeVariable(qualifier, documentOffset, propList, qlen, theVariables);
+			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
 			proposeKeywords(qualifier, documentOffset, propList, qlen, reserved);
-		} else {
-			if (getLastKeyword(qualifier).equals("reference")) {
-				//Proposal of ClassDef
-				proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
-				proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
-			} else if (getLastKeyword(qualifier).equals("init")) {
-				//Proposal of ClassDef
-				proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
-				proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
-				proposeVariable(qualifier, documentOffset, propList, qlen, theVariables);
-			}
+		} else  if (getLastKeyword(qualifier).equals("init")) {
+			//Proposal of ClassDef
+			proposePackages(qualifier, documentOffset, propList, qlen, thePackages);
+			proposeClassDefinition(qualifier, documentOffset, propList, qlen, theClassDefinition);
+			proposeVariable(qualifier, documentOffset, propList, qlen, theVariables);
 		}
+	}
+
+	
+	private void proposeRenaming(List<IKToken> qualifier, int documentOffset,
+		List<KermetaCompletionProposal> propList, int qlen) {
+		// TODO propose a smart new name based on using
 	}
 
 	private void proposeKeywords(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen, List<String> reserved) {
@@ -356,7 +389,11 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	
 	private void proposeCallExpression(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen) {
 		HashMap<String,ArrayList<String>> theCallExpression = null;
-		theCallExpression = myAutocompletion.getCallExpression(explodeCallExpression(qualifier), getLastCompletePackageChain(qualifier, true));
+		if (myAutocompletion != null) {
+			// disabled until we get a proper way to deal with it
+			// idea : have an operation that compute the closest preceding/containing element based on tracability information in the model  
+		//	theCallExpression = myAutocompletion.getCallExpression(explodeCallExpression(qualifier), getLastCompletePackageChain(qualifier, true));
+		}
 		if (theCallExpression != null) {
 			for (String currentMetaClass : theCallExpression.keySet()) {
 				Image theImage = KermetaImage.getImage("/icons/specific/EmptyExpression.gif");

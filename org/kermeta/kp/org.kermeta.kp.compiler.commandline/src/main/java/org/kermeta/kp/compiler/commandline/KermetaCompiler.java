@@ -310,6 +310,17 @@ public class KermetaCompiler {
 	 * this.targetFolder = targetFolder; }
 	 */
 
+	/**
+	 * returns the best modeling unit that has been computed
+	 * if there are error, we need to check for 
+	 * this.hasFailed
+	 * @param kpFileURL
+	 * @param dirtyMU
+	 * @param additionalClassPath
+	 * @param stopAfterPhase
+	 * @return
+	 * @throws IOException
+	 */
 	public synchronized ModelingUnit kp2bytecode(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, List<String> additionalClassPath, String stopAfterPhase) throws IOException {
 		try {
 			lock.lock();
@@ -406,7 +417,7 @@ public class KermetaCompiler {
 							logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 							logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 							this.hasFailed = true;
-							return null;
+							return preresolvedMergedUnit.getResult();
 						}
 					}
 
@@ -421,7 +432,7 @@ public class KermetaCompiler {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 						this.hasFailed = true;
-						return null;
+						return preResolvedUnit;
 					}
 					else{
 						URI saveKMURI = URI.createURI(preResolveCacheUrl);
@@ -484,7 +495,7 @@ public class KermetaCompiler {
 					logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 					logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 					this.hasFailed = true;
-					return null;
+					return mergedUnit.getResult();
 				}
 			}
 			// workaround cache problem in compiler
@@ -504,7 +515,7 @@ public class KermetaCompiler {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 						this.hasFailed = true;
-						return null;
+						return mergedUnit.getResult();
 					}
 				}
 			}
@@ -513,7 +524,7 @@ public class KermetaCompiler {
 			}
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_MERGE)){
 				logger.debug("stopping after phase "+PHASE_MERGE, LOG_MESSAGE_GROUP);
-				return null;
+				return mergedUnit.getResult();
 			}
 	
 			// workaround cache problem in compiler
@@ -527,13 +538,13 @@ public class KermetaCompiler {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 				this.hasFailed = true;
-				return null;
+				return resolvedUnit;
 			}
 
 			// checking existence and conformance of the defaultMainClass and default MainOperation
 			new KpChecker(this).checkDefaultMain(kpFileURL, kp, resolvedUnit);
 			if(this.hasFailed){
-				return null;
+				return resolvedUnit;
 			}
 						
 			// workaround cache problem in compiler
@@ -553,7 +564,7 @@ public class KermetaCompiler {
 						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
 						this.hasFailed = true;
-						return null;
+						return resolvedUnit;
 					}
 				}
 			}
@@ -574,7 +585,7 @@ public class KermetaCompiler {
 			
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_TYPE_SET)){
 				logger.debug("stopping after phase "+PHASE_TYPE_SET, LOG_MESSAGE_GROUP);
-				return null;
+				return resolvedUnit;
 			}
 			
 			
@@ -602,14 +613,14 @@ public class KermetaCompiler {
 					logger.error("Generation of java code from ecore failed "+ e, KermetaCompiler.LOG_MESSAGE_GROUP, e);
 				}
 				logger.debug("stopping after phase "+PHASE_GENERATE_LEGACY_SOURCE, LOG_MESSAGE_GROUP);
-				return null;
+				return resolvedUnit;
 			}
 			Future<Boolean> ecorejava2bytecode = ecore2Bytecode.ecorejava2bytecode(genmodelFuture, threadExector);
 			// process java diagnostic and ensure this thread is finished
 			ecore2Bytecode.processDiagnostic(ecorejava2bytecode);
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_LEGACY_SOURCE_BYTECODE)){
 				logger.debug("stopping after phase "+PHASE_GENERATE_LEGACY_SOURCE_BYTECODE, LOG_MESSAGE_GROUP);
-				return null;
+				return resolvedUnit;
 			}
 			
 			// deal with km to scala
@@ -630,7 +641,7 @@ public class KermetaCompiler {
 			
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_SCALA)){
 				logger.debug("stopping after phase "+PHASE_GENERATE_SCALA, LOG_MESSAGE_GROUP);
-				return null;
+				return resolvedUnit;
 			}
 			
 
