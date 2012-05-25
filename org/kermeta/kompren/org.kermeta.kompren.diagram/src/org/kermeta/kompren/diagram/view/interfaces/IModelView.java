@@ -13,10 +13,6 @@ import org.malai.widget.Scrollable;
 public interface IModelView extends Scrollable, Zoomable {
 	void relayoutRelations();
 
-	void moveEntity(final IEntityView entity, final double x, final double y);
-
-	void translateEntity(final IEntityView entity, final double tx, final double ty);
-
 	void setSelection(final Selectable object);
 
 	void setSelection(final List<Selectable> newSelection);

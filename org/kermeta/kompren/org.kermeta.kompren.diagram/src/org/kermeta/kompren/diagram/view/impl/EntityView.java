@@ -65,6 +65,8 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 
 	protected List<IAnchor> anchors;
 
+	protected List<IRelationView> outputRelations;
+
 
 
 	/**
@@ -82,6 +84,7 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 		fontName 	= "Arial";
 		fontSize	= 14.;
 		fontStyle	= Font.PLAIN;
+		outputRelations = new ArrayList<IRelationView>();
 		updateFillingColor(DEFAUT_OPACITY);
 		updateLineColor(255);
 		setScale(1.);
@@ -194,6 +197,9 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 			anchor.setPosition(pt);
 			anchor.setFree(false);
 		}
+
+		if(!atEnd && !outputRelations.contains(relation))
+			outputRelations.add(relation);
 	}
 
 
@@ -210,6 +216,9 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 
 		for(final IAnchor anchor : anchors)
 			anchor.translate(tx, ty);
+
+		for(final IRelationView rel : outputRelations)
+			rel.translate(tx, ty);
 	}
 
 
@@ -443,7 +452,13 @@ public abstract class EntityView extends ComponentView implements IEntityView {
 
 
 	@Override
+	public List<IRelationView> outputRelations() {
+		return outputRelations;
+	}
+
+
+	@Override
 	public String toString() {
-		return getClass().getCanonicalName() + '[' + getName() + ',' + getCentre() + ',' + getBorders() + ']';
+		return super.toString() + '[' + getName() + ',' + getCentre() + ',' + getBorders() + ']';
 	}
 }

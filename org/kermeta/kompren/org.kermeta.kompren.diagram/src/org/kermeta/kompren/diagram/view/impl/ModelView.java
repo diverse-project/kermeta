@@ -200,35 +200,6 @@ public class ModelView extends MPanel implements IModelView {
 	}
 
 
-//	@Override
-//	public Dimension getPreferredScrollableViewportSize() {
-//		return new Dimension(-100, 100);
-//	}
-//
-//
-//	@Override
-//	public int getScrollableBlockIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
-//        return orientation == SwingConstants.VERTICAL ? visibleRect.height : visibleRect.width;
-//	}
-//
-//
-//	@Override
-//	public boolean getScrollableTracksViewportHeight() {
-//		return getParent() instanceof JViewport ? ((JViewport)getParent()).getHeight() > getPreferredSize().height : false;
-//	}
-//
-//
-//	@Override
-//	public boolean getScrollableTracksViewportWidth() {
-//		return getParent() instanceof JViewport ? ((JViewport)getParent()).getWidth() > getPreferredSize().width : false;
-//	}
-//
-//
-//	@Override
-//	public int getScrollableUnitIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
-//		return 4;
-//	}
-
 
 	@Override
 	public void update() {
@@ -268,11 +239,6 @@ public class ModelView extends MPanel implements IModelView {
 		for(IEntityView entity : entities) {
 			entity.translate(xMin, yMin);
 			entity.update();
-		}
-
-		for(IRelationView relation : relations) {
-			relation.translate(xMin, yMin);
-			relation.update();
 		}
 	}
 
@@ -443,33 +409,6 @@ public class ModelView extends MPanel implements IModelView {
 				selection.add(sel);
 				sel.setSelected(true);
 			}
-	}
-
-
-	@Override
-	public void moveEntity(final IEntityView entity, final double x, final double y) {
-		if(entity!=null)
-			translateEntity(entity, x-entity.getX(), y-entity.getY());
-	}
-
-
-	@Override
-	public void translateEntity(final IEntityView entity, final double tx, final double ty) {
-		if(entity!=null) {
-			Point2D pt;
-
-			entity.translate(tx, ty);
-
-			for(final IRelationView rel : relations)
-				if(rel.getEntitySrc()==entity || rel.getEntityTar()==entity) {
-					for(int i=0, nbSeg=rel.getNbSegment(); i<nbSeg-1; i++) {
-						pt = rel.getSegment(i).getPointTarget();
-						pt.setLocation(pt.getX()+tx, pt.getY()+ty);
-					}
-
-					rel.update();
-				}
-		}
 	}
 
 

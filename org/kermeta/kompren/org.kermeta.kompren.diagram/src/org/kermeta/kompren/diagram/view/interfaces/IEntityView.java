@@ -159,4 +159,7 @@ public interface IEntityView extends IComponentView, Selectable {
 
 
 	List<IAnchor> getAnchors();
+
+
+	List<IRelationView> outputRelations();
 }

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
-import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
+import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 
 public class ClassModelBasicStrategy implements ILayoutStrategy {
@@ -78,7 +78,7 @@ public class ClassModelBasicStrategy implements ILayoutStrategy {
 			final double gapY = bounds.getMinY() - rec.getMinY() + bounds.getHeight() + 110;
 
 			for(IEntityView entity : subForest.get(level))
-				diagram.translateEntity(entity, gapX, -gapY);
+				entity.translate(gapX, -gapY);
 
 			bounds.setFrame(bounds.getX()+gapX, bounds.getY()-gapY, bounds.getWidth(), bounds.getHeight());
 		}
@@ -110,7 +110,7 @@ public class ClassModelBasicStrategy implements ILayoutStrategy {
 			if(entityDim.height>dim.height)
 				dim.height = entityDim.height;
 
-			diagram.moveEntity(entity, x2+entityDim.width/2., y+entityDim.height/2.);
+			entity.move(x2+entityDim.width/2., y+entityDim.height/2.);
 
 			x2 += entityDim.width;
 			dim.width += entityDim.width;

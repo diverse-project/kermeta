@@ -414,6 +414,6 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	@Override
 	public String toString() {
-		return getClass().getCanonicalName() + '[' + entitySrc + ',' + entityTar + ']';
+		return super.toString() + '[' + entitySrc + ',' + entityTar + ']';
 	}
 }
