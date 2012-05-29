@@ -45,7 +45,7 @@ public class GenerateHtmlAction implements IObjectActionDelegate {
 		Activator.getDefault().getMessaggingSystem().debug("Generating documentation for "+ selectedfile.getLocationURI().toString(), Activator.PLUGIN_ID);
 		org.kermeta.language.gendoc.km2html.Km2Html generator = new org.kermeta.language.gendoc.km2html.Km2HtmlImpl4Eclipse();
 		
-		generator.genHtmlDoc4File(selectedfile.getLocationURI().toString(), selectedfile.getParent().getLocationURI().toString()+"/html", "");
+		generator.genHtmlDoc4File(selectedfile.getLocationURI().toString(), selectedfile.getParent().getLocationURI().toString()+"/html", "", "GeneratedDocumentation");
 		Activator.getDefault().getMessaggingSystem().debug("Done", Activator.PLUGIN_ID);
 		try {
 			selectedfile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);

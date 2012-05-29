@@ -37,7 +37,7 @@ aspect class ModelingUnit {
 
 	operation generateXmlToc(baseFolder : String, excludePackages : String, documentName : String) : Void is do
 	var contents : StringBuffer init StringBuffer.new
-	var path : String init baseFolder + "/" + documentName + ".xml"
+	var path : String init baseFolder + "/toc.xml"
 	xmlToc(baseFolder, excludePackages, documentName)
 	contents.append("<toc label=\"Kermeta framework (generated doc)\" href = \""+ documentName +".html\">\n")
 	packages.each{pack | 
@@ -56,7 +56,7 @@ aspect class ModelingUnit {
 	operation xmlToc(baseFolder : String, excludePackages : String, documentName : String) : Void is do
 	var path : String init baseFolder + "/" + documentName + ".html"
 	var contents : StringBuffer init StringBuffer.new
-	contents.append("<HTML>" + "<HEAD>"+ "<TITLE>" + "The list of packages here?" +"</TITLE>")
+	contents.append("<HTML>" + "<HEAD>"+ "<TITLE>" + "The list of packages here ?" +"</TITLE>")
 	contents.append("</HEAD>\n")
 	packages.each{pack |
 						if (not excludePackages.contains(pack.name.trim)) then

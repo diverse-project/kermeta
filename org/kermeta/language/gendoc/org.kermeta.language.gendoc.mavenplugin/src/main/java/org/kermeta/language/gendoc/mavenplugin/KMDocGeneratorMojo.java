@@ -94,7 +94,7 @@ public class KMDocGeneratorMojo extends AbstractMojo {
 	        else excludedPackagesString.append("");
 	        
 	        
-			generator.genHtmlDoc4File(kmFileURL, outputDirectory.toURI().toString(), excludedPackagesString.toString().trim());	        
+			generator.genHtmlDoc4File(kmFileURL, outputDirectory.toURI().toString(), excludedPackagesString.toString().trim(), "GeneratedDocumentation");	        
 	        
     	} catch (Exception e) {
 			this.getLog().error(e);
