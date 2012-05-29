@@ -191,11 +191,20 @@ public class KpCompilerMojo extends AbstractMojo {
 	        repositoryList.add("http://maven.inria.fr/artifactory/public-snapshot");
 	        
 	        AetherUtil aetherUtil = new AetherUtil();
-	        File compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
-	        		"kp.compiler.commandline.standalone", 
-	        		pluginVersion, 
-	        		repositoryList);
-	        
+	        File compilerJarFile;
+	        try{
+		        compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
+		        		"kp.compiler.commandline.standalone", 
+		        		pluginVersion, 
+		        		repositoryList);
+	        }
+	        catch (org.sonatype.aether.resolution.ArtifactResolutionException e){
+	        	this.getLog().info("kp.compiler.commandline.standalone not found using same version trying previous one." + e);
+	        	compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
+		        		"kp.compiler.commandline.standalone", 
+		        		"2.0.1-SNAPSHOT", 
+		        		repositoryList);
+	        }
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();
 	        kjcl.getParentLoader().setEnabled(false); // disable parent loader
 	        //kjcl.add(this.getClass().getResourceAsStream("/kp.compiler.commandline.standalone.jar"));
