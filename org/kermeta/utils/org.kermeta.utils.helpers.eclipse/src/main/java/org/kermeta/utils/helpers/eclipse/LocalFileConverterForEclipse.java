@@ -40,23 +40,19 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 			String platformString = emfUri.toPlatformString(true);
 			IResource res =ResourcesPlugin.getWorkspace().getRoot().findMember(platformString); 
 			if(res != null){
-				try {
-					if(res.getRawLocationURI()!=null)
-						return java.net.URI.create(java.net.URLEncoder.encode(res.getRawLocationURI().toString(),"UTF-8"));
-					else if(res.getLocationURI()!=null)						
-						return java.net.URI.create(java.net.URLEncoder.encode(res.getLocationURI().toString(),"UTF-8"));
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				if(res.getRawLocationURI()!=null)
+					return java.net.URI.create(encodeSpecialChars(res.getRawLocationURI().toString()));
+				else if(res.getLocationURI()!=null)						
+					return java.net.URI.create(encodeSpecialChars(res.getLocationURI().toString()));
+				
 			}
 		}
 		// deal with platformPlugin
 		if(emfUri.isPlatformPlugin()){
 			URL resolvedURL;
 			try {
-				resolvedURL = FileLocator.resolve(javaUri.toURL());
-				return java.net.URI.create(java.net.URLEncoder.encode(resolvedURL.toString(),"UTF-8"));
+				resolvedURL = FileLocator.resolve(javaUri.toURL()); 
+				return java.net.URI.create(encodeSpecialChars(resolvedURL.toString()));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,5 +63,9 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 		}
 		return null;
 	}
-
+	public String encodeSpecialChars(String s){
+		// java.net.URLEncoder.encode(resolvedURL.toString(),"UTF-8") doesn't work properly because it also encodes the : or ! of the jar:file:/...!   urls
+		// let's go back to simpler encoding 
+		return s.toString().replaceAll(" ","%20");
+	}
 }
