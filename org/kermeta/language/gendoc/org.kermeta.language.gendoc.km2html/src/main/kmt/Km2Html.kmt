@@ -20,7 +20,7 @@ package gendoc{
 	class HtmlGenerator
 	{
 		//@main ""
-		operation generateHtml(inputModelUrl : String , outputFolderUrl : String, excludePackages : String) : Void is do 
+		operation generateHtml(inputModelUrl : String , outputFolderUrl : String, excludePackages : String, documentName : String) : Void is do 
 			
 			kermeta::io::StdIO.writeln("Generating Html from " + inputModelUrl)
 			var repository : ResourceSet init ResourceSet.new
@@ -37,7 +37,7 @@ package gendoc{
 	           		var mu : ModelingUnit
 	           		mu ?= next
 	           		mu.generateHtml(outputFolderUrl, excludePackages)
-	           		mu.generateXmlToc(outputFolderUrl, excludePackages)
+	           		mu.generateXmlToc(outputFolderUrl, excludePackages, documentName)
 					kermeta::io::StdIO.writeln("Html generated in " + outputFolderUrl)
 	           		
 	           end

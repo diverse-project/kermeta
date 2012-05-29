@@ -35,11 +35,11 @@ aspect class ModelingUnit {
 		
 	end 
 
-	operation generateXmlToc(baseFolder : String, excludePackages : String) : Void is do
+	operation generateXmlToc(baseFolder : String, excludePackages : String, documentName : String) : Void is do
 	var contents : StringBuffer init StringBuffer.new
-	var path : String init baseFolder + "/" + "KermetaFramework" + ".xml"
-	xmlToc(baseFolder, excludePackages)
-	contents.append("<toc label=\"Kermeta framework (generated doc)\"> \n")
+	var path : String init baseFolder + "/" + documentName + ".xml"
+	xmlToc(baseFolder, excludePackages, documentName)
+	contents.append("<toc label=\"Kermeta framework (generated doc)\" href = \""+ documentName +".html\">\n")
 	packages.each{pack | 
 						if (not excludePackages.contains(pack.name.trim)) then
 							contents.append("<topic label=\"" + pack.name +"\" href = \"" + baseFolder + "/" + pack.name + ".toc.html" + "\">\n")
@@ -53,8 +53,8 @@ aspect class ModelingUnit {
 	FileIO.writeTextFile(path.toURI,contents.toString)
 	end
 	
-	operation xmlToc(baseFolder : String, excludePackages : String) : Void is do
-	var path : String init baseFolder + "/" + "KermetaFramework" + ".html"
+	operation xmlToc(baseFolder : String, excludePackages : String, documentName : String) : Void is do
+	var path : String init baseFolder + "/" + documentName + ".html"
 	var contents : StringBuffer init StringBuffer.new
 	contents.append("<HTML>" + "<HEAD>"+ "<TITLE>" + "The list of packages here?" +"</TITLE>")
 	contents.append("</HEAD>\n")
