@@ -87,10 +87,11 @@ public class KMDocGeneratorMojo extends AbstractMojo {
 	        org.kermeta.language.gendoc.km2html.Km2Html generator = new org.kermeta.language.gendoc.km2html.Km2HtmlImpl4Eclipse();
 			
 	        StringBuilder excludedPackagesString = new StringBuilder();
-	        for(String excludedPack : excludedPackages){
-	        	excludedPackagesString.append(excludedPack+" ");
-	        }
-	        
+	        if(excludedPackages != null)
+		        for(String excludedPack : excludedPackages){
+		        	excludedPackagesString.append(excludedPack+" ");
+		        }
+	        else excludedPackagesString.append("");
 	        
 	        
 			generator.genHtmlDoc4File(kmFileURL, outputDirectory.toURI().toString(), excludedPackagesString.toString().trim());	        
