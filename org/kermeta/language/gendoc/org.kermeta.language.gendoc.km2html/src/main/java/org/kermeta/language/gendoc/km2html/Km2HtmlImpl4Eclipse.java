@@ -8,12 +8,12 @@ public class Km2HtmlImpl4Eclipse implements Km2Html {
     }
 	
 	@Override
-	public void genHtmlDoc4File(String modelURI, String destFolderURI) {
+	public void genHtmlDoc4File(String modelURI, String destFolderURI, String excludePackages) {
 		
 		org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2htmlrunner.MainRunner.init4eclipse();
 
 		gendoc.HtmlGenerator printer = gendoc.KerRichFactory.createHtmlGenerator();
-		printer.generateHtml(modelURI, destFolderURI);
+		printer.generateHtml(modelURI, destFolderURI, excludePackages);
 	}
 
 }
