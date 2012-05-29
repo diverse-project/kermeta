@@ -22,21 +22,54 @@ package org::kermeta::language::structure{
 
 aspect class ModelingUnit {
 	//attribute defaultPath : String init "file:/C:/CodeCamp/Workspace/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
-	operation generateHtml( baseFolder : String) : Void is do
+	operation generateHtml( baseFolder : String, excludePackages : String) : Void is do
 		stdio.writeln ("Html file generated Modeling Unit")
 		stdio.writeln ( self.name)
 		var path : String init baseFolder + "/" + self.name + ".html"
-		var contents : String init self.createHtml (baseFolder)
+		var contents : String init self.createHtml (baseFolder, excludePackages)
 		   
 		//create Toc page for ModelingUnit page
-		self.createTocpage(baseFolder)
+		self.createTocpage(baseFolder, excludePackages)
 		// Create html file
 		FileIO.writeTextFile(path.toURI(), contents)
 		
 	end 
+
+	operation generateXmlToc(baseFolder : String, excludePackages : String) : Void is do
+	var contents : StringBuffer init StringBuffer.new
+	var path : String init baseFolder + "/" + "KermetaFramework" + ".xml"
+	xmlToc(baseFolder, excludePackages)
+	contents.append("<toc label=\"Kermeta framework (generated doc)\"> \n")
+	packages.each{pack | 
+						if (not excludePackages.contains(pack.name.trim)) then
+							contents.append("<topic label=\"" + pack.name +"\" href = \"" + baseFolder + "/" + pack.name + ".toc.html" + "\">\n")
+							contents.append(pack.generateXmlToc(baseFolder, excludePackages))
+							contents.append("</topic>\n")
+						end
+	}
+
+	contents.append("</toc>\n")					
+					
+	FileIO.writeTextFile(path.toURI,contents.toString)
+	end
+	
+	operation xmlToc(baseFolder : String, excludePackages : String) : Void is do
+	var path : String init baseFolder + "/" + "KermetaFramework" + ".html"
+	var contents : StringBuffer init StringBuffer.new
+	contents.append("<HTML>" + "<HEAD>"+ "<TITLE>" + "The list of packages here?" +"</TITLE>")
+	contents.append("</HEAD>\n")
+	packages.each{pack |
+						if (not excludePackages.contains(pack.name.trim)) then
+							contents.append(pack.generateCodeForMainToc(baseFolder, excludePackages))
+						end
+				}		
+	contents.append("</html>\n")
+	
+	FileIO.writeTextFile(path.toURI,contents.toString)
+	end
 	
 	/** Create an html page for Modeling unit */
-	operation createHtml (baseFolder:String) : String is do
+	operation createHtml (baseFolder:String, excludePackages : String) : String is do
 		var html : StringBuffer init StringBuffer.new
 		html.append("<HTML>" + "<HEAD>"+ "<TITLE>" + self.name +"</TITLE>")
 		html.append("</HEAD>\n")
@@ -51,15 +84,18 @@ aspect class ModelingUnit {
 	
 	
 	/**create Toc page for the ModelingUnit page*/
-	operation createTocpage(baseFolder:String) : Void is do
+	operation createTocpage(baseFolder:String, excludePackages : String) : Void is do
 		var path : String init baseFolder + "/" + "allclasses-frame.html"
 		var contents : StringBuffer init StringBuffer.new
 		contents.append("<h3>All Classes </h3>")
 		var html : StringBuffer init StringBuffer.new
 		contents.append("<html>" + "<body>")
 		//create links list of the packages, should add calls to the operations for creating the pages for packages
-		packages.each{pack | html.append(pack.createClassesHtml(baseFolder))}
-				
+		packages.each{pack | 
+						if (not excludePackages.contains(pack.name.trim)) then
+							html.append(pack.createClassesHtml(baseFolder, excludePackages))
+						end
+						}
 		//set package list of the Toc page
 		if html.toString != "" then
 			contents.append(html.toString)
@@ -69,6 +105,7 @@ aspect class ModelingUnit {
 	end
 }
 
+
 aspect class TypeDefinition {
 	
 	/** Create html code */
@@ -76,7 +113,7 @@ aspect class TypeDefinition {
 		result := ""
 		end
 	/** Create classes html code */
-	operation createClassesHtml (baseFolder:String) : String is do
+	operation createClassesHtml (baseFolder:String, excludePackages : String) : String is do
 		result:=""
 	end
 	/** generate html for contents page */
@@ -88,7 +125,7 @@ aspect class TypeDefinition {
 
 aspect class ClassDefinition{
 	/** Create html code */
-	operation createClassesHtml (baseFolder:String) : String is do
+	operation createClassesHtml (baseFolder:String, excludePackages : String) : String is do
 			var html : String init String.new	
 			html := html + " <a href= " +self.name + ".html target = Content> " + self.name + "  </a>" + " <br>"
 			result := html
@@ -99,7 +136,7 @@ aspect class ClassDefinition{
 	
 	var path : String init baseFolder + "/" + self.name + ".html"
 	var contents : StringBuffer init StringBuffer.new
-	contents.append("<html><head><title>" + self.name + "</title></head>\n")
+	contents.append("<html><head><title>" + self.name  + "</title></head>\n")
 	contents.append("<body BGCOLOR = white>")
 		
 	
@@ -110,29 +147,61 @@ aspect class ClassDefinition{
 	contents.append(packageName + "</FONT>\n")
 	contents.append("<BR>\n")
 	contents.append("Class ")
+	
+	
+	
 	if isAbstract == true then
 		contents.append("Abstract ")
 	end
 	if isSingleton == true then
 		contents.append("Singleton ")
 	end
-	contents.append(self.name + "</H2>\n")
+	
+	contents.append(self.name)
+	//this code fragment is to show the type parameters of the Classes
+	if self.typeParameter.size != 0 then
+	contents.append("[")
+	self.typeParameter.indexedEach{e, eachContext| 
+						if eachContext.isLast then
+							contents.append(e.name)
+						else
+							contents.append(e.name + ", ")
+						end
+						}
+						
+	contents.append("]")
+	end
+	
+	contents.append("<FONT SIZE = 4 color = bleu> inherited from  </FONT>")
+	self.superType.indexedEach{e, eachContext| 
+								if eachContext.isLast then
+									//contents.append(e.getClassname)
+									contents.append(" <a href= " + e.gettypeDefinition + ".html target = Content> " + e.getClassname + "  </a>" + " <br>")
+								else
+									//contents.append(e.getClassname + ", ")
+									contents.append(" <a href= " + e.gettypeDefinition + ".html target = Content> " + e.getClassname + ", " +  "</a>" + " <br>")
+									
+								end
+								}
+	//contents.append(self.superType.typeDefinition.name)
 	contents.append("<HR>\n")
 	
-	//specification of classes, get tag properties
+		//specification of classes, get tag properties
+	
+		
 	self.kTag.each{tag | 
 		if tag.name == "documentation" then
 			contents.append(tag.~value + "\n")
 		else 
 			contents.append("@")
 			contents.append(tag.name)
+			self.superType.each{e| contents.append(e.getname)}
 			contents.append(" \"")
 			contents.append(tag.~value)
 			contents.append("\"<BR>\n")
 		end
 	}
 	
-  	contents.append("<HR>\n")
 	// Method Summury
 	if ownedOperation.size != 0 then
 		contents.append("<A NAME=method_summary><!-- --></A>\n")
@@ -169,7 +238,6 @@ aspect class ClassDefinition{
 		ownedOperation.each{oa | contents.append(oa.createOperationDetail())}
 	end
 	
-
 	contents.append("</body></html>\n")
 	FileIO.writeTextFile(path.toURI(), contents.toString)
 	result := ""
@@ -183,6 +251,18 @@ aspect class Type {
 		
 		result:= s
 	end
+	
+	operation getname() : String is do
+	
+	var s : String init ""
+	result:=s
+	end
+	
+	operation getClassname() : String is do
+	
+	var s : String init ""
+	result:=s
+	end
 }
 
 aspect class ParameterizedType{
@@ -191,6 +271,19 @@ aspect class ParameterizedType{
 		
 		result:= s
 	end
+	
+	
+}
+
+aspect class TypeVariable {
+	
+	operation getname() : String is do
+		
+		result := self.name
+		//stdio.writeln(typeDefinition.toString)		
+	end
+	
+	
 }
 
 aspect class Class {
@@ -198,7 +291,33 @@ aspect class Class {
 	operation gettypeDefinition() : String is do
 		
 		result := self.typeDefinition.name
-		stdio.writeln(typeDefinition.toString)		
+		//stdio.writeln(typeDefinition.toString)		
+	end
+	
+	operation getClassname() : String is do
+	
+	
+	result:=self.name
+	end
+}
+
+aspect class ObjectTypeVariable {
+	
+	operation getname() : String is do
+		
+		result := self.name
+		//stdio.writeln(typeDefinition.toString)		
+	end
+	
+	
+}
+
+aspect class ModelTypeVariable {
+	
+	operation getname() : String is do
+		
+		result := self.name
+		//stdio.writeln(typeDefinition.toString)		
 	end
 }
 
@@ -220,12 +339,14 @@ aspect class Property{
 		
 		var html: StringBuffer init StringBuffer.new
 		html.append("<TR BGCOLOR=white CLASS=TableRowColor>\n")
+		
 		html.append("<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>\n")
 		html.append("<CODE>\n")
-		html.append(typeString)
+		html.append(" <a href= " + typeString + ".html target = Content> " + typeString + "  </a>" + " <br>")
 		html.append("</CODE></FONT></TD>\n")
 		
-		html.append("<TD><CODE><B><A HREF=" + className +".html#" + self.name + ">")
+		
+		html.append("<TD><CODE><B><A HREF=" + className +".html target = Content>" + self.name + "</a>" + "<br>")
 		html.append("<FONT COLOR=RED> attribute</FONT> ")
 		if isReadOnly == true then
 			html.append("<FONT COLOR=RED>readonly</FONT> ")
@@ -280,23 +401,52 @@ aspect class Operation {
 	
 		if type.isVoid then typeString :="<Not Set>"
 		else
-			typeString := type.gettypeDefinition
+			typeString := type.getClassname
 		end
 		
 		var html: StringBuffer init StringBuffer.new
 		html.append("<TR BGCOLOR=white CLASS=TableRowColor>\n")
 		html.append("<TD ALIGN=right VALIGN=top WIDTH=1%><FONT SIZE=-1>\n")
 		html.append("<CODE>\n")
-		html.append(typeString)
+		html.append(" <a href= " + type.gettypeDefinition + ".html target = Content> " + typeString + "  </a>" + " <br>")
+		
 		html.append("</CODE></FONT></TD>\n")
+		
 		html.append("<TD><CODE><B><A HREF=" + className +".html#" + self.name + ">") 
-		html.append(self.name+ "(")
-		ownedParameter.each{op | var paraType : String init String.new
+		html.append(self.name)
+		
+		if self.typeParameter.size !=0 then
+		html.append("[") 
+		self.typeParameter.indexedEach{e, eachContext | 
+										if eachContext.isLast then
+											html.append(e.name)
+										else
+											html.append(e.name + ", ")
+										end
+										}
+		html.append("]")
+		end
+		
+		html.append("(")
+		
+			
+		
+		ownedParameter.indexedEach{op,eachIndex | var paraType : String init String.new
 								 if op.type.isVoid then paraType :="<Not Set>"
-								 else
+								 else  
 									paraType := op.type.gettypeDefinition
-								 end
-								 html.append(paraType + ",")}
+								 	if eachIndex.isLast then
+								 		html.append(paraType)
+								 	else
+								 		html.append(paraType + ",")				 	
+								  	end
+								  end
+								 	
+								 }
+		if html.lastIndexOf(",") !=-1 then
+			html.deleteCharAt(html.lastIndexOf(","))
+		end
+		
 		html.append(")</A></B></CODE>\n")
 		
 		self.kTag.each{tag | 
@@ -316,7 +466,7 @@ aspect class Operation {
 		var typeString : String init String.new
 		if type.isVoid then typeString :="<Not Set>"
 		else
-			typeString := type.gettypeDefinition
+			typeString := type.getClassname
 		end
 		var html : StringBuffer init StringBuffer.new
 		html.append("<A NAME="+ self.name + "><!-- --></A><H3>\n")
@@ -326,14 +476,37 @@ aspect class Operation {
 		if isAbstract == true then
 		html.append("<FONT COLOR = RED> Abstract</FONT> ")
 		end
-		html.append(self.name + "(")
-		ownedParameter.each{op | var paraType : String init String.new
-								 if op.type.isVoid then paraType :="<Not Set>"
-								 else
-									paraType := op.type.gettypeDefinition
-								 end
-								 html.append(paraType + ",")}
 		
+		html.append(self.name)
+		html.append("[")
+		if self.typeParameter.size !=0 then
+			self.typeParameter.indexedEach{e, eachContext | 
+										if eachContext.isLast then
+											html.append(e.name)
+										else
+											html.append(e.name + ", ")
+										end
+										}
+			html.append("]")
+		end
+		
+		html.append("(")
+		
+		ownedParameter.indexedEach{op,eachIndex | var paraType : String init String.new
+								 if op.type.isVoid then paraType :="<Not Set>"
+								 else  
+									paraType := op.type.gettypeDefinition
+								 	if eachIndex.isLast then
+								 		html.append(paraType)
+								 	else
+								 		html.append(paraType + ",")				 	
+								  	end
+								  end
+								 	
+								 }
+		if html.lastIndexOf(",") !=-1 then
+			html.deleteCharAt(html.lastIndexOf(","))
+		end
 	//	invConstraint.each{in | html.append("<FONT COLOR = RED>" + in.stereotype.toString() + " "+ in.name + "</FONT>")}
 		
 		html.append( ")"+ "</B><BR>\n")
@@ -413,15 +586,21 @@ aspect class Enumeration{
 aspect class Package{
 		
 	/** Create html code */
-	operation createClassesHtml (baseFolder:String) : String is do
+	operation createClassesHtml (baseFolder:String, excludePackages : String) : String is do
 		var html : StringBuffer init StringBuffer.new	
+		
 		html.append("<h4>"+self.getQualifiedName()+ "</h4>")
-			
-		ownedTypeDefinition.each{otd | html.append(otd.createClassesHtml(baseFolder))
-		otd.generateClassesHtml(baseFolder,self.getQualifiedName())
+		ownedTypeDefinition.each{otd | html.append(otd.createClassesHtml(baseFolder, excludePackages))
+									otd.generateClassesHtml(baseFolder,self.getQualifiedName())
+									
 		}
-		nestedPackage.each {subPack | html.append(subPack.createClassesHtml(baseFolder))}
-				
+		
+		
+		nestedPackage.each {subPack | 
+								if (not excludePackages.contains(subPack.name.trim)) then
+									html.append(subPack.createClassesHtml(baseFolder, excludePackages))
+								end
+								}
 		result:=html.toString
     
 	end
@@ -435,7 +614,54 @@ aspect class Package{
 		end
 		result := parent + name
 	end
-	 
+	
+	operation generateCodeForMainToc(baseFolder : String, excludePackages : String) : String is do
+	var contents : StringBuffer init StringBuffer.new
+	
+	ownedTypeDefinition.each{otd | 
+							contents.append(" <a href= " +otd.name + ".html> " + otd.name + "  </a>" + " <br>\n")
+							}
+	
+	
+	nestedPackage.each{pack | 
+						if (not excludePackages.contains(pack.name.trim)) then
+							
+							contents.append(pack.generateCodeForMainToc(baseFolder, excludePackages))
+							
+						end
+						}
+
+	
+	
+	result:= contents.toString
+	end 
+	
+	operation generateXmlToc(baseFolder : String, excludePackages : String) : String is do
+	var contents : StringBuffer init StringBuffer.new
+	
+	ownedTypeDefinition.each{otd | 
+							contents.append("	<topic label=\"" + otd.name +"\" href = \"" + baseFolder + "/" + otd.name + ".html" + "\">\n")
+							contents.append("	</topic>\n")
+							}
+	
+	
+	nestedPackage.each{pack | 
+						if (not excludePackages.contains(pack.name.trim)) then
+							contents.append("	<topic label=\"" + pack.name +"\" href = \"" + baseFolder + "/" + pack.name + ".toc.html" + "\">\n")
+							contents.append(pack.generateXmlToc(baseFolder, excludePackages))
+							contents.append("	</topic>\n")
+						end
+						}
+
+	
+	
+	result:= contents.toString
+	end 
+	
+	operation xmlToc(baseFolder : String, excludePackages : String) : Void is do
+	var xml : String init "content of pack.name.toc.htlm"
+	end
+
 }
 
 }
