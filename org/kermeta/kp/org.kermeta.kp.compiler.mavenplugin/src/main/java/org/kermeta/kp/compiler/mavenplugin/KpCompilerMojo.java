@@ -198,7 +198,7 @@ public class KpCompilerMojo extends AbstractMojo {
 		        		pluginVersion, 
 		        		repositoryList);
 	        }
-	        catch (org.sonatype.aether.resolution.ArtifactResolutionException e){
+	        catch (Exception e){
 	        	this.getLog().info("kp.compiler.commandline.standalone not found using same version trying previous one." + e);
 	        	compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
 		        		"kp.compiler.commandline.standalone", 
