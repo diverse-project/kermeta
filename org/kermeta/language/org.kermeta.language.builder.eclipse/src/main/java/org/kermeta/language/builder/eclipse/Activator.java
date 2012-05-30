@@ -22,7 +22,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.language.builder.eclipse.internal.WorkspaceResourceChangeListener;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
-import org.kermeta.utils.provisionner4eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 import org.osgi.framework.Bundle;
