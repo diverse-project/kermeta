@@ -3,13 +3,13 @@
 	<parent>
 		<artifactId>language.root</artifactId>
 		<groupId>org.kermeta.language</groupId>
-		<version>2.0.2</version>
+		<version>2.0.3-SNAPSHOT</version>
 	</parent>
 	<!-- workaround bug apt !? -->
 	<!-- <groupId>org.kermeta.language</groupId> 
-	<version>2.0.2</version> 
+	<version>2.0.3-SNAPSHOT</version> 
 	<properties> 
-		<kermeta.version>2.0.2</kermeta.version> 
+		<kermeta.version>2.0.3-SNAPSHOT</kermeta.version> 
 		<art2.version>2.2.1-beta2</art2.version> 
 	</properties>
 	-->
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.loader.kmt.scala</artifactId>
-			<version>2.0.1-SNAPSHOT</version> <!-- WARNING we have a cyclic dependency here ! need to either split the code (or duplicate used code) when used by the scala loader -->
+			<version>2.0.2</version> <!-- WARNING we have a cyclic dependency here ! need to either split the code (or duplicate used code) when used by the scala loader -->
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>

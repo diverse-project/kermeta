@@ -9,9 +9,9 @@
   <classpathentry kind="var" path="M2_REPO/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/gendoc/language.gendoc.km2html/2.0.1-SNAPSHOT/language.gendoc.km2html-2.0.1-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.1-SNAPSHOT/language.library.core-2.0.1-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.1-SNAPSHOT/language.model-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/gendoc/language.gendoc.km2html/2.0.2/language.gendoc.km2html-2.0.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.2/language.library.core-2.0.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.2/language.model-2.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.15/log4j-1.2.15.jar" sourcepath="M2_REPO/log4j/log4j/1.2.15/log4j-1.2.15-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact/3.0.3/maven-artifact-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact/3.0.3/maven-artifact-3.0.3-sources.jar">
     <attributes>
@@ -104,8 +104,8 @@
       <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/2.1.1/sisu-inject-plexus-2.1.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.1-SNAPSHOT/utils.helpers-2.0.1-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.1-SNAPSHOT/utils.systemservices.api-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.2/utils.helpers-2.0.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.2/utils.systemservices.api-2.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-beta-6/wagon-provider-api-1.0-beta-6.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-beta-6/wagon-provider-api-1.0-beta-6-sources.jar">
     <attributes>
       <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/wagon/wagon-provider-api/1.0-beta-6/wagon-provider-api-1.0-beta-6-javadoc.jar!/" name="javadoc_location"/>

@@ -42,12 +42,12 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         // Phase 1 : compiles without crashing
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
                 
-        String currentKermetaVersion = "2.0.1-SNAPSHOT";
+        String currentKermetaVersion = "2.0.2";
         String mavenRepository = "http://maven.irisa.fr/artifactory/repo";
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
 		AetherUtil aetherUtil = new AetherUtil();
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.irisa.fr/artifactory/kermeta-public-release").getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.irisa.fr/artifactory/public-release").getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.irisa.fr/artifactory/public-release").getAbsolutePath());
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.library.core", currentKermetaVersion, mavenRepository).getAbsolutePath());
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.model", currentKermetaVersion, mavenRepository).getAbsolutePath());
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.utils", "utils.helpers", currentKermetaVersion, mavenRepository).getAbsolutePath());

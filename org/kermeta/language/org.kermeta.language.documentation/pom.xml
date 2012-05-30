@@ -4,7 +4,7 @@
 
 	<groupId>org.kermeta.language</groupId>
 	<artifactId>language.documentation</artifactId>
-	<version>2.0.2</version>
+	<version>2.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>language.documentation</name>
@@ -339,6 +339,11 @@
                         <configuration>
                         	<kmFile>${project.build.directory}/dependencies_km/META-INF/kermeta/language.library.core.km</kmFile>
                         	<outputDirectory>${project.build.directory}/kermetadoc/library.core</outputDirectory>
+                        	<!-- <excludedPackages>
+                        		<excludedPackage>org</excludedPackage>
+                        		<excludedPackage>org::kermeta</excludedPackage>
+                        		<excludedPackage>org::kermeta::language</excludedPackage>
+                        	</excludedPackages>-->
                         </configuration>
                         
                     </execution>
