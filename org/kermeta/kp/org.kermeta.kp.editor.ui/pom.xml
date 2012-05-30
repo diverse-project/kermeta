@@ -56,8 +56,8 @@
 		          <archive>
 		            <manifestEntries>
 			            <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
-                        <Bundle-Name>${project.name}</Bundle-Name>
-                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-Name>${project.name}</Bundle-Name>					
+						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
@@ -66,27 +66,26 @@
                         <Export-Package>
                         	org.kermeta.kp.editor.ui
                         </Export-Package>
-                        <Require-Bundle>
-							org.eclipse.core.resources,
-							org.emftext.access;resolution:=optional,
-							org.eclipse.core.expressions,
-							org.eclipse.debug.core,
-							org.eclipse.debug.ui,
-							org.eclipse.emf,
-							org.eclipse.emf.codegen.ecore,
-							org.eclipse.emf.ecore,
-							org.eclipse.emf.ecore.edit,
-							org.eclipse.emf.edit.ui,
-							org.eclipse.emf.workspace,
-							org.eclipse.jface,
-							org.eclipse.jface.text,
-							org.eclipse.ui,
-							org.eclipse.ui.editors,
-							org.eclipse.ui.ide,
-							org.eclipse.ui.views,
-							org.kermeta.kp.editor,
-							org.emftext.commons.antlr3_3_0,
-							org.kermeta.kp.model
+                        <Require-Bundle>org.eclipse.core.resources,
+org.emftext.access;resolution:=optional,
+org.eclipse.core.expressions,
+org.eclipse.debug.core,
+org.eclipse.debug.ui,
+org.eclipse.emf,
+org.eclipse.emf.codegen.ecore,
+org.eclipse.emf.ecore,
+org.eclipse.emf.ecore.edit,
+org.eclipse.emf.edit.ui,
+org.eclipse.emf.workspace,
+org.eclipse.jface,
+org.eclipse.jface.text,
+org.eclipse.ui,
+org.eclipse.ui.editors,
+org.eclipse.ui.ide,
+org.eclipse.ui.views,
+org.kermeta.kp.editor,
+org.emftext.commons.antlr3_3_0,
+org.kermeta.kp.model
 						</Require-Bundle>
 		            </manifestEntries>		            
 		          </archive>
