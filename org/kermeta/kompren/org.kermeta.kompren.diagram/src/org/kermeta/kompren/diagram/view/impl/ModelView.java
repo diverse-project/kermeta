@@ -424,12 +424,14 @@ public class ModelView extends MPanel implements IModelView {
 
 	@Override
 	public Pickable getPickableAt(final double x, final double y) {
+		final double x2 = x/zoom;
+		final double y2 = y/zoom;
 		Pickable pk = null;
 		IEntityView ent;
 
 		for(int i=0, size=entities.size(); i<size && pk==null; i++) {
 			ent = entities.get(i);
-			if(ent.isSelectable() && ent.contains(x, y))
+			if(ent.isSelectable() && ent.contains(x2, y2))
 				pk = ent;
 		}
 

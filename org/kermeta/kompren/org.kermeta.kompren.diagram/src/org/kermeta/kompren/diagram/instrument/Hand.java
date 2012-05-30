@@ -1,6 +1,6 @@
 package org.kermeta.kompren.diagram.instrument;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import org.kermeta.kompren.diagram.action.MoveElement;
 import org.kermeta.kompren.diagram.action.SelectElement;
@@ -91,10 +91,8 @@ public class Hand extends Instrument {
 
 		@Override
 		public void updateAction() {
-//			val startPt	= instrument.zoomer.zoomable.getZoomedPoint(interaction.getStartPt);
-//			val endPt	= zoomer.zoomable.getZoomedPoint(interaction.getEndPt);
-			Point startPt = interaction.getStartPt();
-			Point endPt = interaction.getEndPt();
+			Point2D startPt	= canvas.getZoomedPoint(interaction.getStartPt());
+			Point2D endPt	= canvas.getZoomedPoint(interaction.getEndPt());
 
 			action.setTx(endPt.getX() - startPt.getX());
 			action.setTy(endPt.getY() - startPt.getY());
