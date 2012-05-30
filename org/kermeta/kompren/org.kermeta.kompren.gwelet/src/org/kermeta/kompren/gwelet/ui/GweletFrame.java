@@ -13,6 +13,7 @@ import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
 import org.malai.ui.UI;
+import org.malai.ui.UIManager;
 
 public class GweletFrame extends UI {
 	private static final long serialVersionUID = 1L;
@@ -46,6 +47,7 @@ public class GweletFrame extends UI {
 		pack();
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		canvas.requestFocusInWindow();
+		UIManager.INSTANCE.registerUI(this);
 	}
 
 
