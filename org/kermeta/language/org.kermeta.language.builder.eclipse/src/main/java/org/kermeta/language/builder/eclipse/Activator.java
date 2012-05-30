@@ -15,13 +15,19 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.language.builder.eclipse.internal.WorkspaceResourceChangeListener;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
+import org.kermeta.utils.provisionner4eclipse.Activator;
 import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 
 
 
@@ -30,6 +36,9 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
+	/** list of bundle that must be started before we really start ourself */
+	public String[] requiredStartedBundleNames = {"org.ops4j.pax.url.mvn"};
+	
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.kermeta.language.builder.eclipse"; //$NON-NLS-1$
 
@@ -62,6 +71,18 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+		
+		for (String requiredStartedBundleName : requiredStartedBundleNames) {
+			Bundle requiredbundle = Platform.getBundle(requiredStartedBundleName);
+			try {
+				if(requiredbundle.getState() != Bundle.ACTIVE){
+					requiredbundle.start();
+				}
+			} catch (BundleException e) {
+				Activator.getDefault().getLog().log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, 0, "failed to start "+requiredStartedBundleName +". Some URI protocols won't be available", e));
+			}
+		}
+		
 		super.start(context);
 		KermetaBuilder.getDefault();
 		plugin = this;
