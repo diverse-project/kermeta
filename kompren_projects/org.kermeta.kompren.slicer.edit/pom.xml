@@ -48,12 +48,15 @@
                         <Export-Package>
                         	org2.kermeta.kompren.slicer.provider.*
                         </Export-Package>
+                        <Require-Bundle>
+                        	org.eclipse.core.runtime,
+                        	org.eclipse.emf.edit;visibility:=reexport
+                        </Require-Bundle>
                         <Import-Package>
-                        	org.eclipse.emf.*,
+                        	!org.eclipse.emf.*,
                         	org.osgi.framework;version="[1.5,2)",
                         	org.kermeta.kompren.org.kermeta.kompren.slicer.*,
-                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.*,
-                        	*
+                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.*
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
