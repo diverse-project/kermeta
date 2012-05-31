@@ -215,31 +215,67 @@
 			<groupId>org.kermeta.kompren</groupId>
 			<artifactId>kompren.slicer.model</artifactId>
 			<version>${kompren.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.kompren</groupId>
 			<artifactId>kompren.slicer.edit</artifactId>
 			<version>${kompren.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.kompren</groupId>
 			<artifactId>kompren.slicer.editor</artifactId>
 			<version>${kompren.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.kompren</groupId>
 			<artifactId>kompren.slicer.texteditor</artifactId>
 			<version>${kompren.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.kompren</groupId>
 			<artifactId>kompren.slicer.parser</artifactId>
 			<version>${kompren.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.kermeta.kompren</groupId>
 			<artifactId>kompren.slicer.compiler</artifactId>
 			<version>${kompren.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>		
 	</dependencies>
 </project>
