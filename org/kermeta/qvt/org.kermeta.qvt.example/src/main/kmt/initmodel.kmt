@@ -1,0 +1,244 @@
+package samdynamic {
+ 
+	aspect class DynamicSystem {
+
+		operation initDynamicSystem(~result : samdynamic::DynamicSystem , isStrict : kermeta::standard::Boolean):samdynamic::DynamicSystem is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := samdynamic::DynamicSystem
+									.new
+							root_package::TransformationContext
+								.samdynamicModel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"initDynamicSystem")
+				do
+					qvt::utils::CollectionExtension
+						.clearAndAdd(result
+								.actived ,
+							void)
+					qvt::utils::CollectionExtension
+						.clearAndAdd(result
+								.computed ,
+							void)
+					self
+						.childs
+						.select( {autoGenVar|
+								autoGenVar
+									.isInstanceOf(samdynamic::DynamicSystem)})
+						.asSequenceType[samdynamic::DynamicSystem]
+						.collect( {autoGenVar|
+								autoGenVar
+									.initDynamicSystem(void,
+										false)})
+					self
+						.childs
+						.select( {autoGenVar|
+								autoGenVar
+									.isInstanceOf(samdynamic::DynamicAutomaton)})
+						.asSequenceType[samdynamic::DynamicAutomaton]
+						.collect( {autoGenVar|
+								autoGenVar
+									.initDynamicAutomaton(void,
+										false)})
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class DynamicAutomaton {
+
+		operation initDynamicAutomaton(~result : samdynamic::DynamicAutomaton , isStrict : kermeta::standard::Boolean):samdynamic::DynamicAutomaton is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := samdynamic::DynamicAutomaton
+									.new
+							root_package::TransformationContext
+								.samdynamicModel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"initDynamicAutomaton")
+				do
+					qvt::utils::CollectionExtension
+						.clearAndAdd(result
+								.actived ,
+							void)
+					qvt::utils::CollectionExtension
+						.clearAndAdd(result
+								.computed ,
+							void)
+					var lInitialStateOrderedSet : kermeta::standard::OrderedSet[sam::InitialState]
+						 init qvt::utils::ElementExtension
+							.allSubobjectsOfType[sam::InitialState](self
+									.~reference)
+
+					result
+						.currentState := lInitialStateOrderedSet
+							.first
+					qvt::utils::CollectionExtension
+						.clearAndAddAll(result
+								.fireables ,
+							self
+								.~reference
+								.listTransitions
+								.select( {lTransition|
+									lTransition
+										.source
+										.equals(result
+												.currentState)}))
+					var lMacroStateOrderedSet : kermeta::standard::OrderedSet[sam::MacroState]
+						 init qvt::utils::ElementExtension
+							.allSubobjectsOfType[sam::MacroState](self
+									.~reference)
+							.select( {lMacroState|
+								qvt::utils::ElementExtension
+									.allSubobjectsOfType[sam::InitialState](lMacroState)
+									.includes(result
+											.currentState)})
+
+					qvt::utils::CollectionExtension
+						.qvtAddAll(result
+								.fireables ,
+							self
+								.~reference
+								.listTransitions
+								.select( {lTransition|
+									lMacroStateOrderedSet
+										.includes(lTransition
+												.source)}))
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+}
+package sam {
+
+}
+package root_package {
+
+	aspect singleton TransformationContext {
+		attribute samdynamicModel : root_package::ModelParameter
+		attribute samModel : root_package::ModelParameter
+
+		operation kermetaInit(model1 : kermeta::standard::String , mmodel1 : kermeta::standard::String , model2 : kermeta::standard::String , mmodel2 : kermeta::standard::String):kermeta::standard::Void is
+			do
+				root_package::TransformationContext
+					.traceRegistry := traceability::TraceRegistry
+						.new
+				var rSet1 : kermeta::emfpersistence::ResourceSet
+					 init kermeta::emfpersistence::ResourceSet
+						.new
+
+				var rSet2 : kermeta::emfpersistence::ResourceSet
+					 init kermeta::emfpersistence::ResourceSet
+						.new
+
+				root_package::TransformationContext
+					.samdynamicModel := root_package::ModelParameter
+						.new
+						.initialize(rSet1
+								.createResource(model1 ,
+									mmodel1))
+				root_package::TransformationContext
+					.samModel := root_package::ModelParameter
+						.new
+						.initialize(rSet2
+								.createResource(model2 ,
+									mmodel2))
+				root_package::TransformationContext
+					.samdynamicModel
+					.load()
+				root_package::TransformationContext
+					.samModel
+					.load()
+				main()
+				root_package::TransformationContext
+					.samdynamicModel
+					.save()
+			end
+		operation main()/*missing type*/ is
+			do
+				root_package::TransformationContext
+					.samdynamicModel()
+					.objectsOfType[samdynamic::DynamicSystem]
+					.collect( {autoGenVar|
+							autoGenVar
+								.initDynamicSystem(void,
+									false)})
+				root_package::TransformationContext
+					.samdynamicModel()
+					.objectsOfType[samdynamic::DynamicAutomaton]
+					.collect( {autoGenVar|
+							autoGenVar
+								.initDynamicAutomaton(void,
+									false)})
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			end
+	}
+}
+package primitivetypes {
+
+}
+package ecore {
+
+}

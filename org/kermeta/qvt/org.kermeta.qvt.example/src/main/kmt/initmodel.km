@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="samdynamic" uri="http://www.topcased.org/simulation/sam/samdynamic/1.0.0">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="DynamicSystem" superType="//samdynamic/DynamicSystem/@containedType.0" isAspect="true">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicModel"/>
+      <ownedOperation kTag="//samdynamic/DynamicSystem/initDynamicSystem/@kOwnedTags.0" name="initDynamicSystem" type="//samdynamic/DynamicSystem/initDynamicSystem/@containedType.0" lower="1">
+        <kOwnedTags name="documentation" value="gen from a MappingOperation" object="//samdynamic/DynamicSystem/initDynamicSystem"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicSystem"/>
+        <ownedParameter name="result" type="//samdynamic/DynamicSystem/initDynamicSystem/@ownedParameter.0/@containedType.0" lower="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicSystem"/>
+        </ownedParameter>
+        <ownedParameter name="isStrict" type="//samdynamic/DynamicSystem/initDynamicSystem/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" name="result"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block" kTag="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.1/@kOwnedTags.0">
+            <kOwnedTags name="documentation" value="initSection" object="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.1"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.2/@statement.0/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicSystem"/>
+                      </typeref>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                  <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="extent">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamicModel">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                    </target>
+                  </target>
+                </statement>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </condition>
+            </statement>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.3/@kOwnedTags.0" name="addTrace" isCalledWithParenthesis="true">
+            <kOwnedTags name="documentation" value="trace generation" object="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.3"/>
+            <parameters xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+            <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="initDynamicSystem"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="clearAndAdd">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actived">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::CollectionExtension"/>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="clearAndAdd">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="computed">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::CollectionExtension"/>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+              <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                <parameters name="autoGenVar"/>
+                <body xsi:type="org_kermeta_language_behavior:CallOperation" name="initDynamicSystem" staticOperation="//samdynamic/DynamicSystem/initDynamicSystem">
+                  <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="autoGenVar"/>
+                </body>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asSequenceType" generics="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.4/@statement.2/@target/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicSystem"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="select">
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="autoGenVar"/>
+                    <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf">
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamic::DynamicSystem"/>
+                      <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                    </body>
+                  </parameters>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="childs">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </target>
+              </target>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+              <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                <parameters name="autoGenVar"/>
+                <body xsi:type="org_kermeta_language_behavior:CallOperation" name="initDynamicAutomaton" staticOperation="//samdynamic/DynamicAutomaton/initDynamicAutomaton">
+                  <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="autoGenVar"/>
+                </body>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asSequenceType" generics="//samdynamic/DynamicSystem/initDynamicSystem/@body/@statement.4/@statement.3/@target/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicAutomaton"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="select">
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="autoGenVar"/>
+                    <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf">
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamic::DynamicAutomaton"/>
+                      <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                    </body>
+                  </parameters>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="childs">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </target>
+              </target>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:CallResult" name="result"/>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//samdynamic/DynamicSystem/initDynamicSystem/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <condition xsi:type="org_kermeta_language_behavior:CallVariable" name="isStrict"/>
+            </body>
+            <exceptionType type="//samdynamic/DynamicSystem/initDynamicSystem/@body/@rescueBlock.1/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ViolatedGuardException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="DynamicAutomaton" superType="//samdynamic/DynamicAutomaton/@containedType.0" isAspect="true">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicModel"/>
+      <ownedOperation kTag="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@kOwnedTags.0" name="initDynamicAutomaton" type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@containedType.0" lower="1">
+        <kOwnedTags name="documentation" value="gen from a MappingOperation" object="//samdynamic/DynamicAutomaton/initDynamicAutomaton"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicAutomaton"/>
+        <ownedParameter name="result" type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@ownedParameter.0/@containedType.0" lower="1">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicAutomaton"/>
+        </ownedParameter>
+        <ownedParameter name="isStrict" type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" name="result"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block" kTag="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.1/@kOwnedTags.0">
+            <kOwnedTags name="documentation" value="initSection" object="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.1"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.2/@statement.0/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicAutomaton"/>
+                      </typeref>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                  <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="extent">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamicModel">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                    </target>
+                  </target>
+                </statement>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </condition>
+            </statement>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.3/@kOwnedTags.0" name="addTrace" isCalledWithParenthesis="true">
+            <kOwnedTags name="documentation" value="trace generation" object="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.3"/>
+            <parameters xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+            <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="initDynamicAutomaton"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="clearAndAdd">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actived">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::CollectionExtension"/>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="clearAndAdd">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="computed">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::CollectionExtension"/>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.2/@kOwnedTags.0" identifier="lInitialStateOrderedSet">
+              <kOwnedTags name="documentation" value="initialized from initExpression does it need a new ?" object="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.2"/>
+              <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="allSubobjectsOfType" generics="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.2/@initialization/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="sam::InitialState"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="reference">
+                  <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::ElementExtension"/>
+              </initialization>
+              <type type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.2/@type/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.2/@type/@containedType.0/@containedType.0" typeIdentifier="kermeta::standard::OrderedSet">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="sam::InitialState"/>
+                </containedType>
+              </type>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="currentState">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </target>
+              <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="first">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="lInitialStateOrderedSet"/>
+              </value>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="clearAndAddAll">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fireables">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:CallOperation" name="select">
+                <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                  <parameters name="lTransition"/>
+                  <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals">
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="currentState">
+                      <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="source">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="lTransition"/>
+                    </target>
+                  </body>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="listTransitions">
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="reference">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </target>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::CollectionExtension"/>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.5/@kOwnedTags.0" identifier="lMacroStateOrderedSet">
+              <kOwnedTags name="documentation" value="initialized from initExpression does it need a new ?" object="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.5"/>
+              <initialization xsi:type="org_kermeta_language_behavior:CallOperation" name="select">
+                <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                  <parameters name="lMacroState"/>
+                  <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="includes">
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="currentState">
+                      <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="allSubobjectsOfType" generics="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.5/@initialization/@parameters.0/@body/@target/@containedType.0">
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="sam::InitialState"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="lMacroState"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::ElementExtension"/>
+                    </target>
+                  </body>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="allSubobjectsOfType" generics="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.5/@initialization/@target/@containedType.0">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="sam::MacroState"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="reference">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </parameters>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::ElementExtension"/>
+                </target>
+              </initialization>
+              <type type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.5/@type/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@statement.4/@statement.5/@type/@containedType.0/@containedType.0" typeIdentifier="kermeta::standard::OrderedSet">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="sam::MacroState"/>
+                </containedType>
+              </type>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvtAddAll">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fireables">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:CallOperation" name="select">
+                <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                  <parameters name="lTransition"/>
+                  <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="includes">
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="source">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="lTransition"/>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="lMacroStateOrderedSet"/>
+                  </body>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="listTransitions">
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="reference">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </target>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="qvt::utils::CollectionExtension"/>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:CallResult" name="result"/>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <condition xsi:type="org_kermeta_language_behavior:CallVariable" name="isStrict"/>
+            </body>
+            <exceptionType type="//samdynamic/DynamicAutomaton/initDynamicAutomaton/@body/@rescueBlock.1/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ViolatedGuardException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="sam" uri="http://www.topcased.org/SAM/1.3">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="FlowGroupInconsistencyException" instanceType="//sam/FlowGroupInconsistencyException/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="root_package">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="TransformationContext" isAspect="true" isSingleton="true">
+      <ownedAttribute name="samdynamicModel" type="//root_package/TransformationContext/samdynamicModel/@containedType.0" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ModelParameter"/>
+      </ownedAttribute>
+      <ownedAttribute name="samModel" type="//root_package/TransformationContext/samModel/@containedType.0" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ModelParameter"/>
+      </ownedAttribute>
+      <ownedOperation name="kermetaInit" type="//root_package/TransformationContext/kermetaInit/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
+        <ownedParameter name="model1" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.0/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <ownedParameter name="mmodel1" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <ownedParameter name="model2" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.2/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <ownedParameter name="mmodel2" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.3/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="traceRegistry">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="traceability::TraceRegistry"/>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="rSet1">
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::emfpersistence::ResourceSet"/>
+            </initialization>
+            <type type="//root_package/TransformationContext/kermetaInit/@body/@statement.1/@type/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::emfpersistence::ResourceSet"/>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="rSet2">
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::emfpersistence::ResourceSet"/>
+            </initialization>
+            <type type="//root_package/TransformationContext/kermetaInit/@body/@statement.2/@type/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::emfpersistence::ResourceSet"/>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamicModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="initialize" isCalledWithParenthesis="true">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="model1"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mmodel1"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="rSet1"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::ModelParameter"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="initialize" isCalledWithParenthesis="true">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="model2"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mmodel2"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="rSet2"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::ModelParameter"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="load" isCalledWithParenthesis="true">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamicModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="load" isCalledWithParenthesis="true">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="main" isCalledWithParenthesis="true"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="save" isCalledWithParenthesis="true">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="samdynamicModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation kTag="//root_package/TransformationContext/main/@kOwnedTags.0" name="main" lower="1">
+        <kOwnedTags name="documentation" value="gen from an entry operation" object="//root_package/TransformationContext/main"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+            <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+              <parameters name="autoGenVar"/>
+              <body xsi:type="org_kermeta_language_behavior:CallOperation" name="initDynamicSystem" staticOperation="//samdynamic/DynamicSystem/initDynamicSystem">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="autoGenVar"/>
+              </body>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="objectsOfType" generics="//root_package/TransformationContext/main/@body/@statement.0/@target/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicSystem"/>
+              <target xsi:type="org_kermeta_language_behavior:CallProperty" name="samdynamicModel" staticProperty="//root_package/TransformationContext/samdynamicModel">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+            <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+              <parameters name="autoGenVar"/>
+              <body xsi:type="org_kermeta_language_behavior:CallOperation" name="initDynamicAutomaton" staticOperation="//samdynamic/DynamicAutomaton/initDynamicAutomaton">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="autoGenVar"/>
+              </body>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="objectsOfType" generics="//root_package/TransformationContext/main/@body/@statement.1/@target/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="samdynamic::DynamicAutomaton"/>
+              <target xsi:type="org_kermeta_language_behavior:CallProperty" name="samdynamicModel" staticProperty="//root_package/TransformationContext/samdynamicModel">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              </target>
+            </target>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//root_package/TransformationContext/main/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="primitivetypes" uri="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Boolean" instanceType="//primitivetypes/Boolean/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Integer" instanceType="//primitivetypes/Integer/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Real" instanceType="//primitivetypes/Real/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Float"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="String" instanceType="//primitivetypes/String/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="UnlimitedNatural" instanceType="//primitivetypes/UnlimitedNatural/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBigDecimal" instanceType="//ecore/EBigDecimal/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBigInteger" instanceType="//ecore/EBigInteger/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBoolean" instanceType="//ecore/EBoolean/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBooleanObject" instanceType="//ecore/EBooleanObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByte" instanceType="//ecore/EByte/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByteArray" instanceType="//ecore/EByteArray/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByteObject" instanceType="//ecore/EByteObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EChar" instanceType="//ecore/EChar/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ECharacterObject" instanceType="//ecore/ECharacterObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDate" instanceType="//ecore/EDate/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDiagnosticChain" instanceType="//ecore/EDiagnosticChain/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDouble" instanceType="//ecore/EDouble/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDoubleObject" instanceType="//ecore/EDoubleObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EEList" instanceType="//ecore/EEList/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EEnumerator" instanceType="//ecore/EEnumerator/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFeatureMap" instanceType="//ecore/EFeatureMap/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFeatureMapEntry" instanceType="//ecore/EFeatureMapEntry/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFloat" instanceType="//ecore/EFloat/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Float"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFloatObject" instanceType="//ecore/EFloatObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EInt" instanceType="//ecore/EInt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EIntegerObject" instanceType="//ecore/EIntegerObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EJavaClass" instanceType="//ecore/EJavaClass/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EJavaObject" instanceType="//ecore/EJavaObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ELong" instanceType="//ecore/ELong/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ELongObject" instanceType="//ecore/ELongObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EMap" instanceType="//ecore/EMap/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EResource" instanceType="//ecore/EResource/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EResourceSet" instanceType="//ecore/EResourceSet/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EShort" instanceType="//ecore/EShort/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EShortObject" instanceType="//ecore/EShortObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EString" instanceType="//ecore/EString/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ETreeIterator" instanceType="//ecore/ETreeIterator/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

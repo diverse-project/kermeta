@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="BOOKS" uri="http:///BOOKS.ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Book" isAspect="true">
+      <ownedOperation kTag="//BOOKS/Book/book_to_publication2/@kOwnedTags.0" name="book_to_publication2" type="//BOOKS/Book/book_to_publication2/@containedType.0" isUnique="false">
+        <kOwnedTags name="documentation" value="gen from a MappingOperation" object="//BOOKS/Book/book_to_publication2"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="PUB::Publication"/>
+        <ownedParameter name="result" type="//BOOKS/Book/book_to_publication2/@ownedParameter.0/@containedType.0" isUnique="false">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="PUB::Publication"/>
+        </ownedParameter>
+        <ownedParameter name="isStrict" type="//BOOKS/Book/book_to_publication2/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" name="result"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block" kTag="//BOOKS/Book/book_to_publication2/@body/@statement.1/@kOwnedTags.0">
+            <kOwnedTags name="documentation" value="initSection" object="//BOOKS/Book/book_to_publication2/@body/@statement.1"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//BOOKS/Book/book_to_publication2/@body/@statement.2/@statement.0/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="PUB::Publication"/>
+                      </typeref>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                  <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="extent">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="pubModel">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </statement>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </condition>
+            </statement>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:CallFeature" name="book_to_publication">
+            <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+            <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="//BOOKS/Book/book_to_publication2/@body/@statement.4/@kOwnedTags.0" name="addTrace" isCalledWithParenthesis="true">
+            <kOwnedTags name="documentation" value="trace generation" object="//BOOKS/Book/book_to_publication2/@body/@statement.4"/>
+            <parameters xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+            <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="book_to_publication2"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="title">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </target>
+              <value xsi:type="org_kermeta_language_behavior:CallOperation" name="concat">
+                <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="2"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="title">
+                  <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:CallResult" name="result"/>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//BOOKS/Book/book_to_publication2/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <condition xsi:type="org_kermeta_language_behavior:CallVariable" name="isStrict"/>
+            </body>
+            <exceptionType type="//BOOKS/Book/book_to_publication2/@body/@rescueBlock.1/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ViolatedGuardException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+      <ownedOperation kTag="//BOOKS/Book/book_to_publication/@kOwnedTags.0" name="book_to_publication" type="//BOOKS/Book/book_to_publication/@containedType.0" isUnique="false">
+        <kOwnedTags name="documentation" value="gen from a MappingOperation" object="//BOOKS/Book/book_to_publication"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="PUB::Publication"/>
+        <ownedParameter name="result" type="//BOOKS/Book/book_to_publication/@ownedParameter.0/@containedType.0" isUnique="false">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="PUB::Publication"/>
+        </ownedParameter>
+        <ownedParameter name="isStrict" type="//BOOKS/Book/book_to_publication/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" name="result"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block" kTag="//BOOKS/Book/book_to_publication/@body/@statement.1/@kOwnedTags.0">
+            <kOwnedTags name="documentation" value="initSection" object="//BOOKS/Book/book_to_publication/@body/@statement.1"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//BOOKS/Book/book_to_publication/@body/@statement.2/@statement.0/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="PUB::Publication"/>
+                      </typeref>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                  <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="extent">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="pubModel">
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </statement>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </condition>
+            </statement>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="//BOOKS/Book/book_to_publication/@body/@statement.3/@kOwnedTags.0" name="addTrace" isCalledWithParenthesis="true">
+            <kOwnedTags name="documentation" value="trace generation" object="//BOOKS/Book/book_to_publication/@body/@statement.3"/>
+            <parameters xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+            <parameters xsi:type="org_kermeta_language_behavior:CallResult"/>
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="book_to_publication"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <statement xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="title">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </target>
+              <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="title">
+                <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+              </value>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:Assignment">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="nbPages">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+              </target>
+              <value xsi:type="org_kermeta_language_behavior:CallOperation" name="sum">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="autoGenVar"/>
+                    <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="nbPages">
+                      <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                    </body>
+                  </parameters>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="chapters">
+                    <target xsi:type="org_kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:CallResult" name="result"/>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//BOOKS/Book/book_to_publication/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <condition xsi:type="org_kermeta_language_behavior:CallVariable" name="isStrict"/>
+            </body>
+            <exceptionType type="//BOOKS/Book/book_to_publication/@body/@rescueBlock.1/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ViolatedGuardException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="PUB" uri="http:///PUB.ecore"/>
+  <packages name="root_package">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="TransformationContext" isAspect="true" isSingleton="true">
+      <ownedAttribute name="bookModel" type="//root_package/TransformationContext/bookModel/@containedType.0" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ModelParameter"/>
+      </ownedAttribute>
+      <ownedAttribute name="pubModel" type="//root_package/TransformationContext/pubModel/@containedType.0" isComposite="true">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ModelParameter"/>
+      </ownedAttribute>
+      <ownedOperation name="kermetaInit" type="//root_package/TransformationContext/kermetaInit/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
+        <ownedParameter name="model1" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.0/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <ownedParameter name="mmodel1" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.1/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <ownedParameter name="model2" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.2/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <ownedParameter name="mmodel2" type="//root_package/TransformationContext/kermetaInit/@ownedParameter.3/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+        </ownedParameter>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="traceRegistry">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="traceability::TraceRegistry"/>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="rSet1">
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::emfpersistence::ResourceSet"/>
+            </initialization>
+            <type type="//root_package/TransformationContext/kermetaInit/@body/@statement.1/@type/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::emfpersistence::ResourceSet"/>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="rSet2">
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="kermeta::emfpersistence::ResourceSet"/>
+            </initialization>
+            <type type="//root_package/TransformationContext/kermetaInit/@body/@statement.2/@type/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::emfpersistence::ResourceSet"/>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="bookModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="initialize" isCalledWithParenthesis="true">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="model1"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mmodel1"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="rSet1"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::ModelParameter"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="pubModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="initialize" isCalledWithParenthesis="true">
+              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="model2"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="mmodel2"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="rSet2"/>
+              </parameters>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::ModelParameter"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="load" isCalledWithParenthesis="true">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="bookModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="main" isCalledWithParenthesis="true"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="save" isCalledWithParenthesis="true">
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="pubModel">
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation kTag="//root_package/TransformationContext/main/@kOwnedTags.0" name="main" lower="1">
+        <kOwnedTags name="documentation" value="gen from an entry operation" object="//root_package/TransformationContext/main"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+            <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+              <parameters name="autoGenVar"/>
+              <body xsi:type="org_kermeta_language_behavior:CallOperation" name="book_to_publication" staticOperation="//BOOKS/Book/book_to_publication">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+              </body>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asSequenceType" generics="//root_package/TransformationContext/main/@body/@statement.0/@target/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="BOOKS::Book"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="select">
+                <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                  <parameters name="autoGenVar"/>
+                  <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf">
+                    <parameters xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//root_package/TransformationContext/main/@body/@statement.0/@target/@target/@parameters.0/@body/@parameters.0/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//BOOKS/Book"/>
+                      </typeref>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                  </body>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:CallOperation" name="objects">
+                  <target xsi:type="org_kermeta_language_behavior:CallProperty" name="bookModel" staticProperty="//root_package/TransformationContext/bookModel">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                      </target>
+                    </target>
+                  </target>
+                </target>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="collect">
+            <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+              <parameters name="autoGenVar"/>
+              <body xsi:type="org_kermeta_language_behavior:CallOperation" name="book_to_publication2" staticOperation="//BOOKS/Book/book_to_publication2">
+                <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral"/>
+                <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false"/>
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+              </body>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asSequenceType" generics="//root_package/TransformationContext/main/@body/@statement.1/@target/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="BOOKS::Book"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="select">
+                <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                  <parameters name="autoGenVar"/>
+                  <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf">
+                    <parameters xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                      <typeref type="//root_package/TransformationContext/main/@body/@statement.1/@target/@target/@parameters.0/@body/@parameters.0/@typeref/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//BOOKS/Book"/>
+                      </typeref>
+                    </parameters>
+                    <target xsi:type="org_kermeta_language_behavior:CallVariable" name="autoGenVar"/>
+                  </body>
+                </parameters>
+                <target xsi:type="org_kermeta_language_behavior:CallOperation" name="objects">
+                  <target xsi:type="org_kermeta_language_behavior:CallProperty" name="bookModel" staticProperty="//root_package/TransformationContext/bookModel">
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType">
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getDefault">
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="root_package::TransformationContext"/>
+                      </target>
+                    </target>
+                  </target>
+                </target>
+              </target>
+            </target>
+          </statement>
+          <rescueBlock exceptionName="e">
+            <body xsi:type="org_kermeta_language_behavior:Conditional">
+              <thenBody xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                <target xsi:type="org_kermeta_language_behavior:CallResult"/>
+                <value xsi:type="org_kermeta_language_behavior:CallFeature" name="returnValue">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+                </value>
+              </thenBody>
+              <condition xsi:type="org_kermeta_language_behavior:CallFeature" name="hasValue">
+                <target xsi:type="org_kermeta_language_behavior:CallVariable" name="e"/>
+              </condition>
+            </body>
+            <exceptionType type="//root_package/TransformationContext/main/@body/@rescueBlock.0/@exceptionType/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="root_package::ReturnException"/>
+            </exceptionType>
+          </rescueBlock>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="primitivetypes" uri="http://schema.omg.org/spec/QVT/1.0/primitivetypes.xml">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Boolean" instanceType="//primitivetypes/Boolean/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Integer" instanceType="//primitivetypes/Integer/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="Real" instanceType="//primitivetypes/Real/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="String" instanceType="//primitivetypes/String/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="UnlimitedNatural" instanceType="//primitivetypes/UnlimitedNatural/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+  </packages>
+  <packages name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBigDecimal" instanceType="//ecore/EBigDecimal/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBigInteger" instanceType="//ecore/EBigInteger/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBoolean" instanceType="//ecore/EBoolean/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EBooleanObject" instanceType="//ecore/EBooleanObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByte" instanceType="//ecore/EByte/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByteArray" instanceType="//ecore/EByteArray/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EByteObject" instanceType="//ecore/EByteObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EChar" instanceType="//ecore/EChar/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ECharacterObject" instanceType="//ecore/ECharacterObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDate" instanceType="//ecore/EDate/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDiagnosticChain" instanceType="//ecore/EDiagnosticChain/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDouble" instanceType="//ecore/EDouble/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EDoubleObject" instanceType="//ecore/EDoubleObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EEList" instanceType="//ecore/EEList/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EEnumerator" instanceType="//ecore/EEnumerator/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFeatureMap" instanceType="//ecore/EFeatureMap/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFeatureMapEntry" instanceType="//ecore/EFeatureMapEntry/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFloat" instanceType="//ecore/EFloat/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EFloatObject" instanceType="//ecore/EFloatObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EInt" instanceType="//ecore/EInt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EIntegerObject" instanceType="//ecore/EIntegerObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EJavaClass" instanceType="//ecore/EJavaClass/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EJavaObject" instanceType="//ecore/EJavaObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ELong" instanceType="//ecore/ELong/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ELongObject" instanceType="//ecore/ELongObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EMap" instanceType="//ecore/EMap/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EResource" instanceType="//ecore/EResource/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EResourceSet" instanceType="//ecore/EResourceSet/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EShort" instanceType="//ecore/EShort/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EShortObject" instanceType="//ecore/EShortObject/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="EString" instanceType="//ecore/EString/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:PrimitiveType" name="ETreeIterator" instanceType="//ecore/ETreeIterator/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class"/>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <requires uri="platform:/resource/qvt-kermeta/transformation/kmt-transfocontext/TransfoContext.kmt"/>
+</org_kermeta_language_structure:ModelingUnit>

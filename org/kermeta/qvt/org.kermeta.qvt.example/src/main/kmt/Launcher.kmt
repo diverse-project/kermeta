@@ -1,0 +1,12 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package root_package{
+	class Launcher
+	{
+		operation launch() : Void is do 
+			//TransformationContext.kermetaInit("platform:/resource/org.kermeta.language.qvtop2km/tests/model/TestAutomatonAndOrXorNot.sam","platform:/plugin/org.topcased.sam/model/SAM.ecore","platform:/resource/org.kermeta.language.qvtop2km/tests/model/TestAutomatonAndOrXorNot.samdyn","platform:/plugin/org.topcased.simulation.sam.samdynamic/model/samdynamic.ecore")
+			TransformationContext.kermetaInit("platform:/resource/org.kermeta.language.qvtop2km/tests/model/My.books","http:///BOOKS.ecore","platform:/resource/org.kermeta.language.qvtop2km/tests/model/My4.pub","http:///PUB.ecore")
+		end
+	}
+}

@@ -1,0 +1,1091 @@
+package emof {
+
+}
+package root_package {
+
+	aspect singleton TransformationContext {
+		attribute ecoremodel : root_package::ModelParameter
+		attribute emofmodel : root_package::ModelParameter
+
+		operation kermetaInit(model1 : kermeta::standard::String , mmodel1 : kermeta::standard::String , model2 : kermeta::standard::String , mmodel2 : kermeta::standard::String):kermeta::standard::Void is
+			do
+				root_package::TransformationContext
+					.traceRegistry := traceability::TraceRegistry
+						.new
+				var rSet1 : kermeta::emfpersistence::ResourceSet
+					 init kermeta::emfpersistence::ResourceSet
+						.new
+
+				var rSet2 : kermeta::emfpersistence::ResourceSet
+					 init kermeta::emfpersistence::ResourceSet
+						.new
+
+				root_package::TransformationContext
+					.ecoremodel := root_package::ModelParameter
+						.new
+						.initialize(rSet1
+								.createResource(model1 ,
+									mmodel1))
+				root_package::TransformationContext
+					.emofmodel := root_package::ModelParameter
+						.new
+						.initialize(rSet2
+								.createResource(model2 ,
+									mmodel2))
+				root_package::TransformationContext
+					.ecoremodel
+					.load()
+				main()
+				root_package::TransformationContext
+					.emofmodel
+					.save()
+			end
+		operation createPrimitiveTypesPackage(~result : emof::Package , isStrict : kermeta::standard::Boolean):emof::Package is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Package
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"createPrimitiveTypesPackage")
+				do
+					result
+						.name := "PrimitiveTypes"
+					qvt::utils::CollectionExtension
+						.clearAndAdd(result
+								.ownedType ,
+							do
+								var autoGenVar : emof::PrimitiveType
+									 init emof::PrimitiveType
+										.new
+
+								autoGenVar
+									.name := "Boolean"
+								autoGenVar
+							end)
+					qvt::utils::CollectionExtension
+						.add(result
+								.ownedType ,
+							do
+								var autoGenVar : emof::PrimitiveType
+									 init emof::PrimitiveType
+										.new
+
+								autoGenVar
+									.name := "Integer"
+								autoGenVar
+							end)
+					qvt::utils::CollectionExtension
+						.add(result
+								.ownedType ,
+							do
+								var autoGenVar : emof::PrimitiveType
+									 init emof::PrimitiveType
+										.new
+
+								autoGenVar
+									.name := "String"
+								autoGenVar
+							end)
+					qvt::utils::CollectionExtension
+						.add(result
+								.ownedType ,
+							do
+								var autoGenVar : emof::PrimitiveType
+									 init emof::PrimitiveType
+										.new
+
+								autoGenVar
+									.name := "UnlimitedNatural"
+								autoGenVar
+							end)
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation main()/*missing type*/ is
+			do
+				root_package::TransformationContext
+					.createPrimitiveTypesPackage(void,
+						false)
+				root_package::TransformationContext
+					.ecoremodel()
+					.extent
+					.select( {autoGenVar|
+							autoGenVar
+								.isInstanceOf(ecore::EPackage)})
+					.asSequenceType[ecore::EPackage]
+					.collect( {autoGenVar|
+							autoGenVar
+								._package(void,
+									false)})
+				root_package::TransformationContext
+					.ecoremodel()
+					.extent
+					.select( {autoGenVar|
+							autoGenVar
+								.isInstanceOf(ecore::EPackage)})
+					.asSequenceType[ecore::EPackage]
+					.collect( {autoGenVar|
+							autoGenVar
+								.packageRef(void,
+									false)})
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			end
+	}
+}
+package primitivetypes {
+
+}
+package ecore {
+
+	aspect class EAttribute {
+
+		operation ~attribute(~result : emof::Property , isStrict : kermeta::standard::Boolean):emof::Property is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Property
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"attribute")
+				do
+					result
+						.isComposite := false
+					result
+						.upper := self
+							.upperBound
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class EClass {
+
+		operation class_(~result : emof::Class , isStrict : kermeta::standard::Boolean):emof::Class is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Class
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"class_")
+				do
+					qvt::utils::CollectionExtension
+						.clearAndAddAll(result
+								.ownedAttribute ,
+							self
+								.eAttributes
+								.collect( {autoGenVar|
+										autoGenVar
+											.~attribute(void,
+												false)})
+								.asOrderedSet)
+					qvt::utils::CollectionExtension
+						.qvtAddAll(result
+								.ownedAttribute ,
+							self
+								.eReferences
+								.collect( {autoGenVar|
+										autoGenVar
+											.~reference(void,
+												false)})
+								.asOrderedSet)
+					qvt::utils::CollectionExtension
+						.clearAndAddAll(result
+								.ownedOperation ,
+							self
+								.eOperations
+								.collect( {autoGenVar|
+										autoGenVar
+											.~operation(void,
+												false)})
+								.asOrderedSet)
+					result
+						.isAbstract := self
+							.~abstract
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation classRef(~result : emof::Class , isStrict : kermeta::standard::Boolean):emof::Class is
+			do
+				result := ~result
+				do
+					result := root_package::TransformationContext
+							.resolveAllTargets(self)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::Class)
+										.~and(true)})
+							.asSequenceType[emof::Class]
+							.first
+					self
+						.eAttributes
+						.collect( {autoGenVar|
+								autoGenVar
+									.typedElementRef(void,
+										false)})
+					self
+						.eReferences
+						.collect( {autoGenVar|
+								autoGenVar
+									.referenceRef(void,
+										false)})
+					self
+						.eOperations
+						.collect( {autoGenVar|
+								autoGenVar
+									.operationRef(void,
+										false)})
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Class
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"classRef")
+				do
+					qvt::utils::CollectionExtension
+						.clearAndAddAll(result
+								.superClass ,
+							self
+								.eSuperTypes
+								.collect( {autoGenVar|
+										root_package::TransformationContext
+											.resolveAllTargets(autoGenVar)
+											.select( {autoGenVar|
+													autoGenVar
+														.isInstanceOf(emof::Class)
+														.~and(true)})
+											.asSequenceType[emof::Class]})
+								.flatten()
+								.asSequenceType[emof::Class]
+								.asOrderedSet)
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class EClassifier {
+
+		operation getEmofName():kermeta::standard::String is
+			do
+				
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			end
+	}
+	aspect class EDataType {
+
+		operation datatype_(~result : emof::PrimitiveType , isStrict : kermeta::standard::Boolean):emof::PrimitiveType is
+			do
+				result := ~result
+				do
+					if (true) then
+						do
+							kermeta::io::StdIO
+								.writeln(self
+										.name)
+						end
+					end
+
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::PrimitiveType
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"datatype_")
+				do
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class ENamedElement {
+
+		operation namedElement(~result : emof::NamedElement , isStrict : kermeta::standard::Boolean):emof::NamedElement is
+			do
+				result := ~result
+				do
+				end
+				do
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"namedElement")
+				do
+					result
+						.name := self
+							.name
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class EOperation {
+
+		operation ~operation(~result : emof::Operation , isStrict : kermeta::standard::Boolean):emof::Operation is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Operation
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"operation")
+				do
+					qvt::utils::CollectionExtension
+						.clearAndAddAll(result
+								.ownedParameter ,
+							self
+								.eParameters
+								.collect( {autoGenVar|
+										autoGenVar
+											.parameter(void,
+												false)})
+								.asOrderedSet)
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation operationRef(~result : emof::Operation , isStrict : kermeta::standard::Boolean):emof::Operation is
+			do
+				result := ~result
+				do
+					result := root_package::TransformationContext
+							.resolveAllTargets(self)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::Operation)
+										.~and(true)})
+							.asSequenceType[emof::Operation]
+							.first
+					self
+						.eParameters
+						.collect( {autoGenVar|
+								autoGenVar
+									.typedElementRef(void,
+										false)})
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Operation
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.typedElementRef(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"operationRef")
+				do
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class EPackage {
+
+		operation _package(~result : emof::Package , isStrict : kermeta::standard::Boolean):emof::Package is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Package
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"_package")
+				do
+					qvt::utils::CollectionExtension
+						.clearAndAddAll(result
+								.ownedType ,
+							self
+								.eClassifiers
+								.select( {autoGenVar|
+										autoGenVar
+											.isInstanceOf(ecore::EClass)})
+								.asSequenceType[ecore::EClass]
+								.collect( {autoGenVar|
+										autoGenVar
+											.class_(void,
+												false)})
+								.asOrderedSet)
+					qvt::utils::CollectionExtension
+						.qvtAddAll(result
+								.ownedType ,
+							self
+								.eClassifiers
+								.select( {autoGenVar|
+										autoGenVar
+											.isInstanceOf(ecore::EDataType)})
+								.asSequenceType[ecore::EDataType]
+								.collect( {autoGenVar|
+										autoGenVar
+											.datatype_(void,
+												false)})
+								.asOrderedSet)
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation packageRef(~result : emof::Package , isStrict : kermeta::standard::Boolean):emof::Package is
+			do
+				result := ~result
+				do
+					result := root_package::TransformationContext
+							.resolveAllTargets(self)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::Package)
+										.~and(true)})
+							.asSequenceType[emof::Package]
+							.first
+					self
+						.eClassifiers
+						.select( {autoGenVar|
+								autoGenVar
+									.isInstanceOf(ecore::EClass)})
+						.asSequenceType[ecore::EClass]
+						.collect( {autoGenVar|
+								autoGenVar
+									.classRef(void,
+										false)})
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Package
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"packageRef")
+				do
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class EParameter {
+
+		operation parameter(~result : emof::Parameter , isStrict : kermeta::standard::Boolean):emof::Parameter is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Parameter
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"parameter")
+				do
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class EReference {
+
+		operation ~reference(~result : emof::Property , isStrict : kermeta::standard::Boolean):emof::Property is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Property
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.namedElement(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"reference")
+				do
+					result
+						.isComposite := self
+							.containment
+					result
+						.upper := self
+							.upperBound
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation referenceRef(~result : emof::Property , isStrict : kermeta::standard::Boolean):emof::Property is
+			do
+				result := ~result
+				do
+					result := root_package::TransformationContext
+							.resolveAllTargets(self)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::Property)
+										.~and(true)})
+							.asSequenceType[emof::Property]
+							.first
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := emof::Property
+									.new
+							root_package::TransformationContext
+								.emofmodel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.typedElementRef(result,
+						false)
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"referenceRef")
+				do
+					result
+						.opposite := root_package::TransformationContext
+							.resolveAllTargets(self
+									.eOpposite)
+							.detect( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::Property)
+										.~and(true)})
+							.asType(emof::Property)
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+	aspect class ETypedElement {
+
+		operation typedElementRef(~result : emof::TypedElement , isStrict : kermeta::standard::Boolean):emof::TypedElement is
+			do
+				result := ~result
+				do
+					result := root_package::TransformationContext
+							.resolveAllTargets(self)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::TypedElement)
+										.~and(true)})
+							.asSequenceType[emof::TypedElement]
+							.first
+					result := if (result
+							.equals(void)) then
+							do
+								var autoGenVar : emof::Property
+									 init emof::Property
+										.new
+
+								autoGenVar
+									.name := "x_"
+										.plus(self
+												.name)
+								autoGenVar
+							end
+						else
+							result
+						end
+
+				end
+				do
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"typedElementRef")
+				do
+					result
+						.type := if (self
+							.eType
+							.isInstanceOf(ecore::EDataType)) then
+							if (root_package::TransformationContext
+								.resolveAllTargets(self
+										.eType)
+								.detect( {autoGenVar|
+										autoGenVar
+											.isInstanceOf(emof::PrimitiveType)
+											.~and(true)})
+								.asType(emof::PrimitiveType)
+								.equals(void)) then
+								root_package::TransformationContext
+									.emofmodel()
+									.extent
+									.select( {autoGenVar|
+											autoGenVar
+												.isInstanceOf(emof::Package)})
+									.asSequenceType[emof::Package]
+									.select( {autoGenVar|
+											autoGenVar
+												.name
+												.equals("PrimitiveTypes")})
+									.collect( {e|
+										e
+											.ownedType})
+									.flatten()
+									.asSequenceType[emof::Type]
+									.select( {autoGenVar|
+											autoGenVar
+												.isInstanceOf(emof::PrimitiveType)})
+									.asSequenceType[emof::PrimitiveType]
+									.select( {f|
+										f
+											.name
+											.equals(self
+													.eType
+													.getEmofName)})
+									.first
+							else
+								root_package::TransformationContext
+									.resolveAllTargets(self
+											.eType)
+									.detect( {autoGenVar|
+											autoGenVar
+												.isInstanceOf(emof::PrimitiveType)
+												.~and(true)})
+									.asType(emof::PrimitiveType)
+							end
+
+						else
+							root_package::TransformationContext
+								.resolveAllTargets(self
+										.eType)
+								.select( {autoGenVar|
+										autoGenVar
+											.isInstanceOf(emof::Type)
+											.~and(true)})
+								.asSequenceType[emof::Type]
+								.first
+						end
+
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation typedElementCheck(~result : emof::TypedElement , isStrict : kermeta::standard::Boolean):emof::TypedElement is
+			do
+				result := ~result
+				do
+					result := root_package::TransformationContext
+							.resolveAllTargets(self)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::TypedElement)
+										.~and(true)})
+							.asSequenceType[emof::TypedElement]
+							.first
+					result := if (result
+							.equals(void)) then
+							do
+								var autoGenVar : emof::Property
+									 init emof::Property
+										.new
+
+								autoGenVar
+									.name := "x_"
+										.plus(self
+												.name)
+								autoGenVar
+							end
+						else
+							result
+						end
+
+				end
+				do
+				end
+				root_package::TransformationContext
+					.addTrace(self ,
+						result ,
+						"typedElementCheck")
+				do
+					result
+						.type := root_package::TransformationContext
+							.resolveAllTargets(self
+									.eType)
+							.select( {autoGenVar|
+									autoGenVar
+										.isInstanceOf(emof::Type)
+										.~and(true)})
+							.asSequenceType[emof::Type]
+							.first
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+}

@@ -1,0 +1,56 @@
+KermetaProject "QVTtest"
+	groupId = "my.group"
+	defaultMainClass = "root_package::Launcher"
+	defaultMainOperation = "launch"
+	sources = {
+		//require "${ecore.baseUri}/model/Ecore.ecore" byteCodeFromADependency
+		//require "${sam.baseUri}/model/SAM.ecore" byteCodeFromADependency
+		//require "${samdyn.baseUri}/model/samdynamic.ecore" byteCodeFromADependency
+		//require "${qvt2km.baseUri}/tests/metamodel/umldynamic.ecore"
+		//require "${qvt2km.baseUri}/tests/metamodel/umlevent.ecore"
+		//require "${qvt2km.baseUri}/tests/metamodel/scenario.ecore"
+		//require "${qvt2km.baseUri}/tests/metamodel/emof.ecore"
+		require "${qvt2km.baseUri}/tests/metamodel/PUB.ecore"
+		require "${qvt2km.baseUri}/tests/metamodel/BOOKS.ecore"
+		require "${project.baseUri}/src/main/kmt/Launcher.kmt"
+		
+		require "${project.baseUri}/src/main/kmt/Book2Publication.kmt"
+		//require "${project.baseUri}/src/main/kmt/sam2samdyn.kmt"
+		//require "${project.baseUri}/src/main/kmt/initmodel.kmt"
+		//require "${project.baseUri}/src/main/kmt/Ecore2EMOF.km.kmt"
+		
+		
+		//require "${project.baseUri}/../org.kermeta.language.qvtop2km/src/main/kmt/runtime_context/TransfoContext.kmt"
+		//require "${project.baseUri}/../org.kermeta.language.qvtop2km/src/main/kmt/runtime_context/Behavior_org.kermeta.traceability.model_aspect.kmt"
+		//require "${project.baseUri}/../org.kermeta.language.qvtop2km/src/main/kmt/runtime_context/collection_extension.kmt"
+		//require "${project.baseUri}/../org.kermeta.language.qvtop2km/src/main/kmt/runtime_context/element_extension.kmt"
+		//require "${project.baseUri}/../org.kermeta.language.qvtop2km/src/main/kmt/runtime_context/TraceRegistry_org.kermeta.traceability.mdk.kmt"
+		
+		
+		require "${qvt2km.baseUri}/src/main/kmt/runtime_context/TransfoContext.kmt"
+		require "${qvt2km.baseUri}/src/main/kmt/runtime_context/Behavior_org.kermeta.traceability.model_aspect.kmt"
+		require "${qvt2km.baseUri}/src/main/kmt/runtime_context/collection_extension.kmt"
+		require "${qvt2km.baseUri}/src/main/kmt/runtime_context/element_extension.kmt"
+		require "${qvt2km.baseUri}/src/main/kmt/runtime_context/TraceRegistry_org.kermeta.traceability.mdk.kmt"
+		
+		require "${qvt2km.baseUri}/resources/Traceability.ecore"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		dependency "qvt2km"="platform:/resource/org.kermeta.language.qvtop2km"
+		dependency "ecore"="platform:/plugin/org.eclipse.emf.ecore"
+		//dependency "sam"="platform:/plugin/org.topcased.sam"
+		//dependency "samdyn"="platform:/plugin/org.topcased.simulation.sam.samdynamic"
+		dependency ""="platform:/plugin/org.eclipse.emf.edit.ui" byteCodeOnly
+		dependency ""="platform:/plugin/org.eclipse.jface" byteCodeOnly
+		dependency ""="platform:/plugin/org.eclipse.emf.edit" byteCodeOnly
+		dependency ""="platform:/plugin/org.eclipse.equinox.common" byteCodeOnly
+	}	packageEquivalences={
+		// indicates the real java name of a given package
+		// useful for deployed thirdparty metamodels
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+		packageEquivalence "uml2" = "org.eclipse.uml2.uml"
+		packageEquivalence "sam" = "org.topcased.sam"
+		packageEquivalence "samdynamic" = "org.topcased.simulation.sam.samdynamic"
+	}

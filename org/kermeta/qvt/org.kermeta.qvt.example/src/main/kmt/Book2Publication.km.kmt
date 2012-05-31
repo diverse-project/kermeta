@@ -1,0 +1,200 @@
+package BOOKS {
+
+	aspect class Book {
+
+		operation book_to_publication2(~result : PUB::Publication , isStrict : kermeta::standard::Boolean):PUB::Publication is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := PUB::Publication
+									.new
+							root_package::TransformationContext
+								.getDefault
+								.asType(root_package::TransformationContext)
+								.pubModel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				self
+					.book_to_publication(result,
+						false)
+				root_package::TransformationContext
+					.getDefault
+					.asType(root_package::TransformationContext)
+					.addTrace(self ,
+						result ,
+						"book_to_publication2")
+				do
+					result
+						.title := self
+							.title
+							.concat("2")
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+		operation book_to_publication(~result : PUB::Publication , isStrict : kermeta::standard::Boolean):PUB::Publication is
+			do
+				result := ~result
+				do
+				end
+				do
+					if (result
+						.equals(void)) then
+						do
+							result := PUB::Publication
+									.new
+							root_package::TransformationContext
+								.getDefault
+								.asType(root_package::TransformationContext)
+								.pubModel
+								.extent
+								.add(result)
+						end
+					end
+
+				end
+				root_package::TransformationContext
+					.getDefault
+					.asType(root_package::TransformationContext)
+					.addTrace(self ,
+						result ,
+						"book_to_publication")
+				do
+					result
+						.title := self
+							.title
+					result
+						.nbPages := self
+							.chapters
+							.collect( {autoGenVar|
+									autoGenVar
+										.nbPages})
+							.sum()
+					result
+				end
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			rescue (e : root_package::ViolatedGuardException)
+				if (isStrict) then
+					/* missing thenbody*/
+				end
+
+
+			end
+	}
+}
+package PUB {
+
+}
+package root_package {
+
+	aspect singleton TransformationContext {
+		attribute bookModel : root_package::ModelParameter
+		attribute pubModel : root_package::ModelParameter
+
+		operation kermetaInit(model1 : kermeta::standard::String , mmodel1 : kermeta::standard::String , model2 : kermeta::standard::String , mmodel2 : kermeta::standard::String):kermeta::standard::Void is
+			do
+				root_package::TransformationContext
+					.traceRegistry := traceability::TraceRegistry
+						.new
+				var rSet1 : kermeta::emfpersistence::ResourceSet
+					 init kermeta::emfpersistence::ResourceSet
+						.new
+
+				var rSet2 : kermeta::emfpersistence::ResourceSet
+					 init kermeta::emfpersistence::ResourceSet
+						.new
+
+				root_package::TransformationContext
+					.bookModel := root_package::ModelParameter
+						.new
+						.initialize(rSet1
+								.createResource(model1 ,
+									mmodel1))
+				root_package::TransformationContext
+					.pubModel := root_package::ModelParameter
+						.new
+						.initialize(rSet2
+								.createResource(model2 ,
+									mmodel2))
+				root_package::TransformationContext
+					.bookModel
+					.load()
+				main()
+				root_package::TransformationContext
+					.pubModel
+					.save()
+			end
+		operation main()/*missing type*/ is
+			do
+				root_package::TransformationContext
+					.getDefault
+					.asType(root_package::TransformationContext)
+					.bookModel()
+					.objects()
+					.select( {autoGenVar|
+							autoGenVar
+								.isInstanceOf(BOOKS::Book)})
+					.asSequenceType[BOOKS::Book]
+					.collect( {autoGenVar|
+							autoGenVar
+								.book_to_publication(void,
+									false)})
+				root_package::TransformationContext
+					.getDefault
+					.asType(root_package::TransformationContext)
+					.bookModel()
+					.objects()
+					.select( {autoGenVar|
+							autoGenVar
+								.isInstanceOf(BOOKS::Book)})
+					.asSequenceType[BOOKS::Book]
+					.collect( {autoGenVar|
+							autoGenVar
+								.book_to_publication2(void,
+									false)})
+			rescue (e : root_package::ReturnException)
+				if (e
+					.hasValue()) then
+					result ?= e
+							.returnValue()
+				end
+
+
+			end
+	}
+}
+package primitivetypes {
+
+}
+package ecore {
+
+}
