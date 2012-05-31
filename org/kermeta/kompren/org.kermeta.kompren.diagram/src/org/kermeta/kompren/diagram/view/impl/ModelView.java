@@ -454,9 +454,18 @@ public class ModelView extends MPanel implements IModelView {
 
 	@Override
 	public void setZoom(final double x, final double y, final double zoomingLevel) {
-		if(zoomingLevel<=Zoomable.MAX_ZOOM && zoomingLevel>=Zoomable.MIN_ZOOM) {
+		if(zoomingLevel<=Zoomable.MAX_ZOOM && zoomingLevel>=Zoomable.MIN_ZOOM && zoomingLevel!=zoom) {
+			final double dx = (zoomingLevel-zoom)*x;
+			final double dy = (zoomingLevel-zoom)*y;
+			JScrollBar barVert = getScrollbar(true);
+			JScrollBar barHori = getScrollbar(false);
 			this.zoom = zoomingLevel;
-			update();
+
+			if(barHori.isVisible())
+				barHori.setValue((int)(barHori.getValue()+dx));
+
+			if(barVert.isVisible())
+				barVert.setValue((int)(barVert.getValue()+dy));
 		}
 	}
 
