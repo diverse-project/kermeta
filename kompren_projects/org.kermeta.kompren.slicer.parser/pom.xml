@@ -54,19 +54,7 @@
 							org.eclipse.emf.ecore.util,
 							org.eclipse.emf.ecore.xmi,
 							org.eclipse.emf.ecore.xmi.impl,
-							org.osgi.framework,
-							org2.kermeta.kompren.slicer.impl,
-							org2.kermeta.kompren.slicer.util,
-							org.eclipse.emf.common.notify,
-							org.eclipse.emf.common.util,
-							org.eclipse.emf.ecore,
-							org.eclipse.emf.ecore.impl,
-							org.eclipse.emf.ecore.resource,
-							org.eclipse.emf.ecore.resource.impl,
-							org.eclipse.emf.ecore.util,
-							org.eclipse.emf.ecore.xmi,
-							org.eclipse.emf.ecore.xmi.impl,
-							org.osgi.framework;version="[1.5,2)"
+							org.osgi.framework
                             </Import-Package>
                         </manifestEntries>		            
                     </archive>
