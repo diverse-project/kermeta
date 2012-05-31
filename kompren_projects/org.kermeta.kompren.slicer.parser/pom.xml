@@ -39,7 +39,7 @@
                             org.kermeta.kompren.resolver
                             </Export-Package>
                             <Require-Bundle>
-                            org.kermeta.scala.scala-library
+                            org.scala-ide.scala.library
                             </Require-Bundle>
                             <Import-Package>
 							org2.kermeta.kompren.slicer,

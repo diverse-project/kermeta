@@ -102,7 +102,7 @@
                         	org.kermeta.kompren.org.kermeta.kompren.slicer.compilerrunner
                         </Export-Package>
                         <Require-Bundle>
-                        		org.kermeta.scala.scala-library,
+                        		org.scala-ide.scala.library,
  								org.kermeta.language.model,
  								org.kermeta.kompren.slicer.model
                         </Require-Bundle>
