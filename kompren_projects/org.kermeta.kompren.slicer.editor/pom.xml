@@ -54,7 +54,9 @@
 				       org.eclipse.ui.ide;visibility:=reexport
                         </Require-Bundle>
                     <Import-Package>
-                    	!org.eclipse.emf.*,
+                    	!org.kermeta.kompren.*,
+                    	!org2.kermeta.kompren.*,
+                    	!org.eclipse.*,
                     	org.osgi.framework;version="[1.5,2)"
                     </Import-Package>
                     <Bundle-ClassPath>.</Bundle-ClassPath>
