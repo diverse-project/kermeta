@@ -1,0 +1,128 @@
+<project name="full_kermeta_studio_updatesite" default="all">
+	<!-- configuration properties -->		
+	<!-- project configuration -->
+	<property environment="env"/>
+
+	<property name="env.WORKSPACE" location="."/>
+	
+	<property name="updatesite.repository" location="${env.WORKSPACE}/target/updatesite"/>
+	<property name="category.definition" location="./target/classes/site.xml"/>
+	<property name="source.features.and.bundles" location="${env.WORKSPACE}/target/features_and_bundles"/>	
+	<property name="source.features" location="${source.features.and.bundles}/features"/>
+	<property name="source.bundles" location="${source.features.and.bundles}/plugins"/>
+	
+	<property name="studio.base.dir" location="${env.WORKSPACE}/target/studiobase/"/>
+	<property name="studio.archive.extension" value="tar.gz"/>
+	<property name="studio.eclipse.code.name" value="indigo"/>
+	<property name="studio.os.variant" value="linux_x86_64"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_${studio.eclipse.code.name}_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_${studio.eclipse.code.name}_bases_for_kermeta/build/kermeta_${studio.eclipse.code.name}_${studio.os.variant}_base.${studio.archive.extension}"/>
+	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
+	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
+	<property name="deploy.server" value="kermeta.org"/>
+	<property name="deploy.user" value="web-kermeta"/>
+	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kermeta2_snapshot/update"/>
+	<!--<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/k2/update"/> -->
+	
+
+	
+	
+	
+	
+
+	<target name="publish_jars" depends="clean_result, get_studio_base, publish_features_and_bundles">
+	</target>
+		
+	<target name="deploy" depends=" publish_categories, get_site_template">
+		<antcall target="upload" />
+	</target>
+	
+	
+	
+	<target name="clean_result">
+			<delete dir="${updatesite.repository}" failonerror="false"/>
+			<!--<delete dir="${source.features.and.bundles}" failonerror="false"/>-->
+	</target>
+	
+	<target name="publish_features_and_bundles" > 
+		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
+				           fork="true"
+				           failonerror="true"
+				           maxmemory="128m"
+				           >
+					<arg value="-application"/>
+					<arg value="org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher"/>
+					<arg value="-metadataRepository"/>
+					<arg value="file:/${updatesite.repository}"/>
+					<arg value="-artifactRepository"/>
+					<arg value="file:/${updatesite.repository}"/>
+					<arg value="-source"/>
+					<arg value="${source.features.and.bundles}"/>
+					<arg value="-compress"/>
+					<arg value="-publishArtifacts"/>
+				</java>	
+	</target>
+	
+	
+	<target name="publish_categories" depends="">
+			<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
+					           fork="true"
+					           failonerror="true"
+					           maxmemory="128m"
+					           >
+						<arg value="-console"/>
+						<arg value="-consolelog "/>
+						<arg value="-application"/>
+						<arg value="org.eclipse.equinox.p2.publisher.CategoryPublisher"/>
+						<arg value="-metadataRepository"/>
+						<arg value="file:/${updatesite.repository}"/>
+						<arg value="-categoryDefinition"/>
+						<arg value="file:/${category.definition}"/>
+						<arg value="-categoryQualifier"/>
+						<arg value="-compress"/>
+			</java>	
+	</target>
+	<target name="get_site_template">
+		<copy todir="${updatesite.repository}">
+			<fileset dir="${env.WORKSPACE}/target/classes" includes="**" >
+				<!--<exclude name="readme.txt"/>
+				<exclude name="*_build.xml"/>-->
+			</fileset>	
+		</copy>
+	</target>
+	<target name="upload">
+		<chmod perm="g+w">
+			<fileset dir="${updatesite.repository}">
+			    <include name="**/**"/>
+			 </fileset>
+		</chmod>
+		<sshexec host="${deploy.server}"
+		         username="${deploy.user}"
+				 keyfile="${key.file}"
+				 passphrase=""
+			     trust="yes"
+			     command="rm -Rf ${deploy.path};  
+						  mkdir -p ${deploy.path};"/>
+		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		    <fileset dir="${updatesite.repository}">
+		      <include name="**/**"/>
+		    </fileset>
+		</scp>
+		<!-- override the site.xml with the correct category.xml -->
+		<!--<scp file="category.xml" remoteTofile="${deploy.user}@${deploy.server}:${deploy.path}/site.xml"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		</scp>-->
+	</target>
+	<target name="get_studio_base">
+		<ant antfile="get_studio_base_build.xml">
+  			<property name="studio.base.url" value="${studio.base.url}"/>
+  			<property name="archive.extension" value="${studio.archive.extension}"/>
+			<property name="studio.base.dir" location="${studio.base.dir}"/>
+		</ant>
+	</target>
+	
+</project>
