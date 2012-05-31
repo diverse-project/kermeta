@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/${org.kermeta.language.feature.jar}" id="org.kermeta.language.feature" version="${org.kermeta.language.feature.version}">
-      <category name="Kermeta2Language"/>
+   <feature url="features/${org.kermeta.kompren.feature.jar}" id="org.kermeta.kompren.feature" version="${org.kermeta.kompren.feature.version}">
+      <category name="Kompren"/>
    </feature>
-   <feature url="features/${org.kermeta.utils.feature.jar}" id="org.kermeta.utils.feature" version="${org.kermeta.utils.feature.version}">
-      <category name="Kermeta2Tools"/>
-   </feature>
-   <feature url="features/${org.kermeta.language.dev.feature.jar}" id="org.kermeta.language.dev.feature" version="${org.kermeta.language.dev.feature.version}">
-      <category name="Kermeta2Tools"/>
-   </feature>
-   <category-def name="Kermeta2Language" label="Kermeta 2 language">
+   <category-def name="Kompren" label="Kompren">
       <description>
-         Kermeta 2 workbench and action language.
-      </description>
-   </category-def>
-   <category-def name="Kermeta2Tools" label="Kermeta 2 Tools">
-      <description>
-         Additional tools useful for developping with Kermeta.
+         Kompren tools
       </description>
    </category-def>
 </site>
