@@ -50,13 +50,17 @@
                         </Export-Package>
                         <Require-Bundle>
                         	org.eclipse.core.runtime,
-                        	org.eclipse.emf.edit;visibility:=reexport
+                        	org.eclipse.emf.edit;visibility:=reexport,
+                        	org.eclipse.ui.ide;visibility:=reexport,
+                        	org.kermeta.kompren.slicer.compiler,
+                        	org.kermeta.kompren.slicer.model,
+                        	org.kermeta.kompren.slicer.parser
                         </Require-Bundle>
                         <Import-Package>
-                        	!org.eclipse.emf.*,
-                        	org.osgi.framework;version="[1.5,2)",
-                        	org.kermeta.kompren.org.kermeta.kompren.slicer.*,
-                        	org.kermeta.kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slicer.*
+                        	!org.eclipse.*,
+                        	!org2.kermeta.kompren.*,
+                        	!org.kermeta.kompren.*,
+                        	org.osgi.framework;version="[1.5,2)"
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                     </instructions>
@@ -66,10 +70,15 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>org.kermeta.emf</groupId>
-            <artifactId>emf.lib</artifactId>
-            <version>${emf.version}</version>
+		<dependency>
+            <groupId>org.kermeta.kompren</groupId>
+            <artifactId>kompren.slicer.model</artifactId>
+            <version>${kompren.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>org.kermeta.kompren</groupId>
+            <artifactId>kompren.slicer.parser</artifactId>
+            <version>${kompren.version}</version>
         </dependency>
      <dependency>
         <groupId>org.kermeta.kompren</groupId>
@@ -77,15 +86,17 @@
         <version>${kompren.version}</version>
     </dependency>
         <dependency>
-            <groupId>org.kermeta.kompren</groupId>
-            <artifactId>kompren.slicer.parser</artifactId>
-            <version>${kompren.version}</version>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>runtime</artifactId>
+            <version>[3.5.0,4.0.0)</version>
         </dependency>
         <dependency>
-            <groupId>org.kermeta.kompren</groupId>
-            <artifactId>kompren.slicer.model</artifactId>
-            <version>${kompren.version}</version>
+            <groupId>org.kermeta.emf</groupId>
+            <artifactId>emf.lib</artifactId>
+            <version>${emf.version}</version>
         </dependency>
+        
+        
      <dependency>
       <groupId>org.kermeta.eclipse</groupId>
       <artifactId>org.eclipse.core.jobs</artifactId>
