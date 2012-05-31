@@ -45,10 +45,17 @@
                     <Export-Package>
                     	org2.kermeta.kompren.slicer.presentation.*
                     </Export-Package>
+					<Require-Bundle>
+                         org.eclipse.core.runtime,
+				         org.eclipse.core.resources;visibility:=reexport,
+				         org.kermeta.kompren.edit;visibility:=reexport,
+      					 org.eclipse.emf.ecore.xmi;visibility:=reexport,
+				       org.eclipse.emf.edit.ui;visibility:=reexport,
+				       org.eclipse.ui.ide;visibility:=reexport
+                        </Require-Bundle>
                     <Import-Package>
-                    	org.eclipse.emf.*,
-                    	org.osgi.framework;version="[1.5,2)",
-                    	*
+                    	!org.eclipse.emf.*,
+                    	org.osgi.framework;version="[1.5,2)"
                     </Import-Package>
                     <Bundle-ClassPath>.</Bundle-ClassPath>
                 </instructions>
