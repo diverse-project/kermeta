@@ -13,9 +13,9 @@
 	<name>Kermeta 2 site builder</name>
 
     <properties>
-		<kermeta.version>2.0.3-SNAPSHOT</kermeta.version>
-		<utils.version>2.0.3-SNAPSHOT</utils.version>
-		<traceability.version>2.0.3-SNAPSHOT</traceability.version>
+		<kermeta.version>2.0.2</kermeta.version>
+		<utils.version>2.0.2</utils.version>
+		<traceability.version>2.0.2</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<emf.version>2.7.0</emf.version>
 		<scala.version>[2.9.0,2.10.0)</scala.version>
@@ -126,21 +126,9 @@
 			            <configuration>
 			              <artifactItems>
 			              	<artifactItem>
-			                  <groupId>org.kermeta.language</groupId>
-			                  <artifactId>language.feature</artifactId>
-			                  <version>${kermeta.version}</version>
-			                  <outputDirectory>${project.build.directory}/features_and_bundles/features</outputDirectory>
-			                </artifactItem>
-			              	<artifactItem>
-			                  <groupId>org.kermeta.language</groupId>
-			                  <artifactId>language.dev.feature</artifactId>
-			                  <version>${kermeta.version}</version>
-			                  <outputDirectory>${project.build.directory}/features_and_bundles/features</outputDirectory>
-			                </artifactItem>
-			              	<artifactItem>
-			                  <groupId>org.kermeta.utils</groupId>
-			                  <artifactId>utils.feature</artifactId>
-			                  <version>${kermeta.version}</version>
+			                  <groupId>org.kermeta.kompren</groupId>
+			                  <artifactId>kompren.feature</artifactId>
+			                  <version>${kompren.version}</version>
 			                  <outputDirectory>${project.build.directory}/features_and_bundles/features</outputDirectory>
 			                </artifactItem>
 			              </artifactItems>
@@ -224,272 +212,34 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.kermeta.kp</groupId>
-			<artifactId>kp.compiler.commandline</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.kermeta.emf</groupId>
-					<artifactId>emf.lib</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.kermeta.emf</groupId>
-					<artifactId>emf.lib.patched</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.kermeta.eclipse</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.maven</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.commons</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-cli</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.osgi</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>antlr</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.antlr</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.sonatype.aether</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.scala-lang</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.kermeta.kompren</groupId>
+			<artifactId>kompren.slicer.model</artifactId>
+			<version>${kompren.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.kp</groupId>
-			<artifactId>kp.editor.ui</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.kermeta.eclipse</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.osgi</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.kermeta.emf</groupId>
-					<artifactId>emf.lib</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.kermeta.kompren</groupId>
+			<artifactId>kompren.slicer.edit</artifactId>
+			<version>${kompren.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.kp</groupId>
-			<artifactId>kp.wizard.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency><dependency>
-			<groupId>org.kermeta.kp</groupId>
-			<artifactId>kp.launcher.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency><dependency>
-			<groupId>org.kermeta.kp</groupId>
-			<artifactId>kp.migrateRequireV1ToKp.eclipse.ui</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency><dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.builder.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.kermeta.eclipse</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.kermeta.emf</groupId>
-					<artifactId>emf.lib</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.maven</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.osgi</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.kermeta.kompren</groupId>
+			<artifactId>kompren.slicer.editor</artifactId>
+			<version>${kompren.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.texteditor.eclipse</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.model.edit</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
+			<groupId>org.kermeta.kompren</groupId>
+			<artifactId>kompren.slicer.texteditor</artifactId>
+			<version>${kompren.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.model.editor</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
+			<groupId>org.kermeta.kompren</groupId>
+			<artifactId>kompren.slicer.parser</artifactId>
+			<version>${kompren.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.prettyprinter</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.prettyprinter.ui</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.kermeta.language.gendoc</groupId>
-			<artifactId>language.gendoc.km2html</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.language.gendoc</groupId>
-			<artifactId>language.gendoc.km2html.ui</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.autocompletion</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.autocompletion.api</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.documentation</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency><dependency>
-			<groupId>org.kermeta.language.sample</groupId>
-			<artifactId>language.sample.deployer</artifactId>
-			<version>${kermeta.version}</version>
-			<exclusions><exclusion>
-				<groupId>*</groupId><artifactId>*</artifactId>
-			</exclusion></exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.provisionner4eclipse</artifactId>
-			<version>${utils.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.kermeta.eclipse</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.osgi</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.kermeta.utils</groupId>
-			<artifactId>utils.slf4j.eclipse</artifactId>
-			<version>${utils.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<!-- use a deployable version of scala -->
-		<dependency>
-			<groupId>org.scala-ide.scala</groupId>
-			<artifactId>compiler</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.scala-ide.scala</groupId>
-			<artifactId>library</artifactId>
-			<version>${scala.version}</version>
+			<groupId>org.kermeta.kompren</groupId>
+			<artifactId>kompren.slicer.compiler</artifactId>
+			<version>${kompren.version}</version>
 		</dependency>		
-		
 	</dependencies>
 </project>
