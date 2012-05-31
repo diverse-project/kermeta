@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.kompren.feature"
       label="Kompren"
-      version="2.0.0.SNAPSHOT"
+      version="2.0.1.SNAPSHOT"
       provider-name="IRISA/INRIA">
 
    <description url="http://people.irisa.fr/Arnaud.Blouin/software_kompren.html">
@@ -26,7 +26,7 @@
    </license>
 
    <url>
-      <discovery label="Kermeta 2 update site" url="http://www.kermeta.org/integration_build/kermeta2/update/"/>
+      <discovery label="Kermeta 2 update site" url="http://www.kermeta.org/k2/update/"/>
    </url>
    
    <requires>
