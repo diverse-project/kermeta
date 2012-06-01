@@ -1,16 +1,10 @@
-<!-- $Id: pom.xml 14801 2011-04-06 13:27:44Z bouhours $ -->
-<!-- License    : EPL                                    -->
-<!-- Project    : org.kermeta.language.eclipse.builder -->
-<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
-<!-- Authors : Cédric Bouhours <cedric.bouhours@inria.fr> --> 
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.kermeta.language</groupId>
-	<artifactId>language.site</artifactId>
+	<groupId>org.kermeta.kompren</groupId>
+	<artifactId>kompren.site</artifactId>
 	<version>2.0.3-SNAPSHOT</version>
-	<name>Kermeta 2 site builder</name>
+	<name>Kompren site builder</name>
 
     <properties>
 		<kompren.version>2.0.1-SNAPSHOT</kompren.version>

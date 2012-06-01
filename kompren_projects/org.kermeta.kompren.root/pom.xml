@@ -31,12 +31,15 @@
 	<build>
 		<plugins>
 			<!-- calculate versions for some special cases -->
+			<!-- calculate the bundle version from the project version : replace -SNAPSHOT 
+				by .SNAPSHOT_${timestamp} -->
 			<plugin>
 				<groupId>org.codehaus.groovy.maven</groupId>
 				<artifactId>gmaven-plugin</artifactId>
 				<version>1.0</version>
 				<executions>
 					<execution>
+						<id>generate_bundle_version</id>
 						<phase>initialize</phase>
 						<goals>
 							<goal>execute</goal>
@@ -46,36 +49,20 @@
 								String scalaVersionNoSuffix = "${scala.version}"
 								int index = "${scala.version}".indexOf("-")
 								if(index!=-1)
-								scalaVersionNoSuffix = "${scala.version}".substring(0,index)
-								project.properties.setProperty('scala.version.nosuffix',
-								scalaVersionNoSuffix)
+									scalaVersionNoSuffix = "${scala.version}".substring(0,index)
+								project.properties.setProperty('scala.version.nosuffix', scalaVersionNoSuffix)
+								
+								String bundleVersion = "${project.version}"
+								// workaround jenkins bug https://issues.jenkins-ci.org/browse/JENKINS-9693?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel
+								String timestamp = "${maven.build.timestamp}".replaceAll("-","_") 
+								bundleVersion = bundleVersion.replaceAll("-SNAPSHOT", "-SNAPSHOT_"+timestamp)
+								bundleVersion = bundleVersion.replaceAll("-",".")
+								project.properties.setProperty('bundle.version',bundleVersion)
 							</source>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<!-- calculate the bundle version from the project version : replace - 
-				by . -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>regex-property</id>
-						<goals>
-							<goal>regex-property</goal>
-						</goals>
-						<configuration>
-							<name>bundle.version</name>
-							<value>${project.version}</value>
-							<regex>-</regex>
-							<replacement>\.</replacement>
-							<failIfNoMatch>false</failIfNoMatch>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			</plugin>	
 
 			<!-- Java compiler plugin -->
 			<plugin>

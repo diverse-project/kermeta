@@ -30,6 +30,7 @@
                         <Bundle-SymbolicName>org.kermeta.kompren.diagram; singleton=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+                        <Bundle-Version>${bundle.version}</Bundle-Version>
                         <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                         <Export-Package>
                         	org.kermeta.kompren.diagram.*
