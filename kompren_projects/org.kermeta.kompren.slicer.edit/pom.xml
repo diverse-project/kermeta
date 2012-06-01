@@ -51,18 +51,20 @@
                         	kompren.slicer.edit.popup.actions.*
                         </Export-Package>
                         <Require-Bundle>
-                        	org.eclipse.core.runtime,
-                        	org.eclipse.core.jobs,
-                        	org.eclipse.emf.ecore.xmi,
-                        	org.eclipse.emf.ecore.edit,
-                        	org.eclipse.ui,
-                        	org.eclipse.ui.workbench,
-                        	org.eclipse.core.resources,
+                        	org.eclipse.core.runtime;visibility:=reexport,
+                        	org.eclipse.core.jobs;visibility:=reexport,
+                        	org.eclipse.emf.ecore.xmi;visibility:=reexport,
+                        	org.eclipse.emf.ecore.edit;visibility:=reexport,
+                        	org.eclipse.ui;visibility:=reexport,
+                        	org.eclipse.ui.workbench;visibility:=reexport,
+                        	org.eclipse.core.resources;visibility:=reexport,
+                        	org.eclipse.jface;visibility:=reexport,
+                        	org.eclipse.swt;visibility:=reexport,
                         	org.eclipse.emf.edit;visibility:=reexport,
                         	org.eclipse.ui.ide;visibility:=reexport,
-                        	org.kermeta.kompren.slicer.compiler,
-                        	org.kermeta.kompren.slicer.model,
-                        	org.kermeta.kompren.slicer.parser
+                        	org.kermeta.kompren.slicer.compiler;visibility:=reexport,
+                        	org.kermeta.kompren.slicer.model;visibility:=reexport,
+                        	org.kermeta.kompren.slicer.parser;visibility:=reexport
                         </Require-Bundle>
                         <Import-Package>
                         	!org.eclipse.*,
