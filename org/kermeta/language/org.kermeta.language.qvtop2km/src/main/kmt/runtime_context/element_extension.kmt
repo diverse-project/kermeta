@@ -48,7 +48,7 @@ singleton ElementExtension{
 		end
 	end
 	
-	operation subobjectsOfType[T](element : Object) : Set[T] is do 
+	/*operation subobjectsOfType[T](element : Object) : Set[T] is do 
 	
 		result:=Set[T].new
 		subobjects(element).each{elt|if elt.isDirectInstanceOf(T) then
@@ -82,7 +82,7 @@ singleton ElementExtension{
 			result.add(elt.asType(T))
 			end}
 	
-	end
+	end*/
 
 }
 
