@@ -48,12 +48,16 @@
                     </Export-Package>
 					<Require-Bundle>
                          org.eclipse.core.runtime,
+                         org.eclipse.core.jobs,
                          org.eclipse.emf.edit,
+                         org.eclipse.emf.ecore.edit,
+                         org.eclipse.ui,
+                         org.eclipse.ui.workbench,
 				         org.eclipse.core.resources;visibility:=reexport,
 				         org.kermeta.kompren.slicer.edit;visibility:=reexport,
       					 org.eclipse.emf.ecore.xmi;visibility:=reexport,
-				       org.eclipse.emf.edit.ui;visibility:=reexport,
-				       org.eclipse.ui.ide;visibility:=reexport
+				         org.eclipse.emf.edit.ui;visibility:=reexport,
+				         org.eclipse.ui.ide;visibility:=reexport
                         </Require-Bundle>
                     <Import-Package>
                     	!org.kermeta.kompren.*,
