@@ -119,8 +119,8 @@ aspect class AssignExp {
 					.andThen{x|left.asType(essentialocl::PropertyCallExp).referredProperty.upper != 1} 
 					.orElse{x|left.isInstanceOf(essentialocl::VariableExp)
 						.andThen{y|
-									left.asType(essentialocl::VariableExp).referredVariable.representedParameter.isVoid
-										.orElse{z| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1
+									left.asType(essentialocl::VariableExp).referredVariable.representedParameter.isVoid.~not
+										.andThen{z| left.asType(essentialocl::VariableExp).referredVariable.representedParameter.upper  != 1
 										} 
 						} 
 					}

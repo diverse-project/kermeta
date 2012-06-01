@@ -42,6 +42,16 @@ class Qvt2Kermeta{
 reference srcModel : Resource
 reference tgtModel : Resource
 
+	operation main2() is do 
+	 var targetRepository : ResourceSet init ResourceSet.new
+     //var tgt : Resource init targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Ecore2EMOF.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+	 //tgt.getContents.add(main("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/ecore2emof/Ecore2EMOF.qvtoperational"))
+     var tgt : Resource init targetRepository.createResource("platform:/resource/QVTtest/src/main/kmt/Book2Publication.km" , "http://www.kermeta.org/kermeta/1_2_0//kermeta")
+	 tgt.getContents.add(main("platform:/resource/org.kermeta.language.qvtop2km/tests/transfo-qvt/book2pub1/Book2Publication.qvtoperational"))
+     tgt.save(void)
+        
+	end
+
 	operation main(uri : String) : structure::ModelingUnit is do
 		
 		

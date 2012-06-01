@@ -169,18 +169,18 @@ aspect class OperationCallExp {
 				//should return flatten.asSequence.asType(Sequence<X>) where X is the type of the flatten operation in qvt
 				//unfortunately, this kind of cast is not possible in kermeta and must be simulated using deferredsequence
 				if referredOperation.getQVTID()=="OclLib::Sequence::flatten" then /*1*/
-					
+					StdIO.writeln("flatten 101")
 					var operationType : essentialocl::SequenceType init self.type.asType(essentialocl::SequenceType)
 					operationType.elementType.range2domain(context)
 
-					var asSeqType : behavior::UnresolvedCall init behavior::UnresolvedCall.new.createProxySequence(operationType.elementType.generateType(context))
+					out.createProxySequence(operationType.elementType.generateType(context))
 					
 					var flattenFeature : behavior::UnresolvedCall init behavior::UnresolvedCall.new.initialize("flatten",true)
-					asSeqType.target :=flattenFeature
+					out.target :=flattenFeature
 					
 					source.range2domain(context)
 					flattenFeature.target?=source.output
-					out:=asSeqType
+					
 				else if referredOperation.getQVTID()=="QvtLib::Model::objects" then /*2*/
 					out.name:="extent"
 					source.range2domain(context)
