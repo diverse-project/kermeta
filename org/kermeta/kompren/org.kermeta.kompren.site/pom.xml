@@ -7,7 +7,7 @@
 	<name>Kompren site builder</name>
 
     <properties>
-		<kompren.version>2.0.1-SNAPSHOT</kompren.version>
+		<kompren.version>2.0.2</kompren.version>
 		<utils.version>2.0.2</utils.version>
 		<traceability.version>2.0.2</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -20,8 +20,8 @@
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
 	<property name="deploy.server" value="kermeta.org"/>
 	<property name="deploy.user" value="web-kermeta"/>
-	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kompren_snapshot/update"/>
-	<!--<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/kompren/update"/> -->
+	<!--<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/integration_build/kompren_snapshot/update"/>-->
+	<property name="deploy.path" value="/home/users/web-kermeta/www/kermeta.org/htdocs/kompren/update"/>
 	
 
 	
