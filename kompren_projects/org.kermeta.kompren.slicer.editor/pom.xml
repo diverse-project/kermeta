@@ -48,6 +48,7 @@
                     </Export-Package>
 					<Require-Bundle>
                          org.eclipse.core.runtime,
+                         org.eclipse.emf.edit,
 				         org.eclipse.core.resources;visibility:=reexport,
 				         org.kermeta.kompren.slicer.edit;visibility:=reexport,
       					 org.eclipse.emf.ecore.xmi;visibility:=reexport,
