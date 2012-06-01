@@ -49,7 +49,7 @@
 					<Require-Bundle>
                          org.eclipse.core.runtime,
 				         org.eclipse.core.resources;visibility:=reexport,
-				         org.kermeta.kompren.edit;visibility:=reexport,
+				         org.kermeta.kompren.slicer.edit;visibility:=reexport,
       					 org.eclipse.emf.ecore.xmi;visibility:=reexport,
 				       org.eclipse.emf.edit.ui;visibility:=reexport,
 				       org.eclipse.ui.ide;visibility:=reexport
