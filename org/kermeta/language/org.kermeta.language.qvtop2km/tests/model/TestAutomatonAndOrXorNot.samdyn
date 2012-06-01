@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<samdynamic:DynamicAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:samdynamic="http://www.topcased.org/simulation/sam/samdynamic/1.0.0">
+  <reference href="TestAutomatonAndOrXorNot.sam#_8lR9ZVQWEd2c-copuvLPCg"/>
+</samdynamic:DynamicAutomaton>

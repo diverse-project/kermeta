@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:PUB="http:///PUB.ecore">
+  <PUB:Publication title="MyTitle1" nbPages="2"/>
+  <PUB:Publication title="MyTitle12" nbPages="2"/>
+</xmi:XMI>

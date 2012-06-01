@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
-<message:Warning xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:message="http://smartqvt.elibel.tm.fr/models/mm/message/" start="532" length="11" value="Ambigous type name: PUB::Publication PUB::Publication"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:message="http://smartqvt.elibel.tm.fr/models/mm/message/">
+  <message:Error start="339" length="16" value="Module Book2Publication not found"/>
+  <message:Error start="553" length="19" value="Mapping not found"/>
+  <message:Error start="403" length="19" value="Mapping book_to_publication not found for a source of type Book"/>
+</xmi:XMI>
