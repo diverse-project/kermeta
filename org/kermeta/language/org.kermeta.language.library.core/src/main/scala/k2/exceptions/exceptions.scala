@@ -161,8 +161,8 @@ trait FileNotFoundException extends FileNotFoundExceptionAspect{
 
 
 trait ConstraintViolatedExceptionAspect extends Exception{
-	var constraintAppliedTo:org.eclipse.emf.ecore.EObject = None.get;
-	var failedConstraint:Constraint= None.get;
+	var constraintAppliedTo:org.eclipse.emf.ecore.EObject = _;
+	var failedConstraint:Constraint= _;
 	def ScalaconstraintAppliedTo:org.eclipse.emf.ecore.EObject = constraintAppliedTo
 	def ScalaconstraintAppliedTo_=(arg:org.eclipse.emf.ecore.EObject) = {constraintAppliedTo = arg}
 	def ScalafailedConstraint:Constraint = failedConstraint
@@ -257,8 +257,8 @@ trait ConstraintsDiagnosticAspect extends Exception{
 	
 	/* Prints the content */
 	def prettyPrint() ={
-		//stdio.writeln("Number of violated constraints : " + setConstraints.size.toString)
-	
+		k2.io.StdIO.writeln("Number of violated constraints : " + setConstraints.size.toString)
+		setConstraints.each(constraint => k2.io.StdIO.writeln("  "+constraint.Scalamessage))
 		//Clean the markers on the associated resources
 	}
 

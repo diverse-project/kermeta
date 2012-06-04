@@ -194,25 +194,86 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	
 
 
-
+  /* Contracted */
+  type Condition = () => Boolean
+  def checkParamInvariants(inv : scala.collection.immutable.HashMap[String,Condition]) = {
+    if(inv !=  null ){
+      for(cond <- inv){
+        if(!cond._2()){
+          var constraintException = k2.exceptions.KerRichFactory.createConstraintViolatedInvException
+          constraintException.message = "Contraint Invariant Exception "+cond._1
+          throw constraintException
+        }
+      }
+    }
+  }
+  def checkParamInvariants(inv : scala.collection.immutable.HashMap[String,Condition], diagnostic : k2.exceptions.ConstraintsDiagnostic) = {
+    if (diagnostic == null)
+      constraintDiagnostic = new Throwable with k2.exceptions.ConstraintsDiagnostic ;
+    if(inv !=  null ){
+      for(cond <- inv){
+        if(!cond._2()){
+          var constraintException = k2.exceptions.KerRichFactory.createConstraintViolatedInvException
+          constraintException.message = "Contraint Invariant Exception "+cond._1
+          constraintDiagnostic.add(constraintException)
+        }
+      }
+    }
+    if(constraintDiagnostic.ScalasetConstraints.size()>0)
+      constraintDiagnostic.prettyPrint()
+  }
 
 
   /* Default Method Overloaded in by each class definition */
-  def checkInvariants() = {
-	  //TODO
+  def checkInvariants(stopOnError : Boolean) : Unit = {
+    val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap[String,Condition]()
+    if(stopOnError)
+      checkParamInvariants(invariants)
+    else
+      checkParamInvariants(invariants,constraintDiagnostic)
+   
   }
-  def checkAllInvariants() = { /*TODO*/ //println("todo checkAllInvariant") }
 
-    checkInvariants()
-
+  def checkInvariants() : Unit = {
+    checkInvariants(true)
   }
+  
+  
+  /* Default Method Overloaded in by each class definition */
+  def getInvariants() :  scala.collection.immutable.HashMap[String,Condition]= {
+    val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap[String,Condition]()
+    return invariants;
+  }
+
+  def checkInvariant(invariant : org.kermeta.language.structure.Constraint) :Boolean  = {
+      var cond : Condition = getInvariants().get(invariant.getName).getOrElse(null);
+    if (cond == null)
+      return true
+    if (cond())
+      return true
+    else
+    {
+       var ex = k2.exceptions.KerRichFactory.createConstraintViolatedInvException
+      ex.failedConstraint =invariant
+      ex.constraintAppliedTo = this
+      throw ex
+    }
+  }    
+
+  /* Default Method Overloaded in by each class definition */
+  def checkAllInvariants(stopOnError : Boolean) : Unit = {
+    checkInvariants(stopOnError)
+  }
+  
+  def checkAllInvariants() : Unit = { /*TODO*/ //println("todo checkAllInvariant") }
+    checkAllInvariants(true)
+  }
+  
   var constraintDiagnostic : k2.exceptions.ConstraintsDiagnostic = _
 
   def getViolatedConstraints() : k2.exceptions.ConstraintsDiagnostic={
     /*TODO*/ println("todo getViolatedConstraints "+ constraintDiagnostic); return constraintDiagnostic;
   }
-
-
 
 }
 
