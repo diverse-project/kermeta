@@ -56,6 +56,14 @@ class Object
 	end
 	
 	/**
+	 * Runs checking of invariants defined for the metaclass of the Object
+	 * Also check the multiplicity of attributes (except derived and transient attributes)
+	 */
+	@CompilerIgnore "true"
+	operation checkInvariants(stopOnError:Boolean) : Void  is do
+	end
+	
+	/**
 	 * Recursively runs checking of invariants defined for the metaclass of the Object
 	 * and its supertypes
 	 * Ignores derived attributes. 
@@ -64,6 +72,15 @@ class Object
 	operation checkAllInvariants() : Void  is do
 	end
 
+ 	/**
+	 * Recursively runs checking of invariants defined for the metaclass of the Object
+	 * and its supertypes
+	 * Ignores derived attributes. 
+	 */	
+	@CompilerIgnore "true"
+	operation checkAllInvariants(stopOnError:Boolean) : Void  is do
+	end
+ 
     /**
      * Runs checking of a single invariant on the Object
      */
