@@ -1,0 +1,68 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			var car:Car3 := Car3.new
+			/*car.wheel := Wheel.new
+			car.wheel.size:=-1
+			*/
+			//car.wheels := OrderedSet[Wheel].new
+			car.wheels.add(void)
+			
+			var wheel:Wheel := Wheel.new
+			wheel.size := 2
+			car.wheels.add(wheel)
+			
+			wheel := Wheel.new
+			wheel.size := -1
+			car.wheels.add(wheel)
+			
+			wheel:=Wheel.new
+			wheel.size := 0
+			car.wheels.add(wheel)
+
+			car.checkAllInvariants(false)
+			do
+				car.checkAllInvariants
+			rescue(e : kermeta::exceptions::ConstraintViolatedInv)
+				stdio.writeln(e.message)
+			end
+		end
+	}
+	
+	class Car {
+		
+		reference name:String
+		
+		inv name_not_null is do
+			self.name != void
+		end
+	}
+	
+	class Car2 inherits Car {
+		
+		inv name_not_null_nor_empty is do
+			if(self.name!=void) then
+				self.name != ""
+			else
+				false
+			end
+		end
+	}
+	
+	class Car3 inherits Car2 {
+
+		reference wheels:Wheel[0..*]
+	}
+	
+	class Wheel {
+		attribute size:Integer
+		
+		inv size_positive is do
+			size>0
+		end
+	}
+}
