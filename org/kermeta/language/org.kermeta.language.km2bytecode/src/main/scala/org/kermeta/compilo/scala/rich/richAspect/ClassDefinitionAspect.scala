@@ -6,7 +6,7 @@ import org.eclipse.emf.common.util.EList
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala._
 import org.kermeta.language._
-import org.kermeta.language.structure._ 
+import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import java.util.ArrayList
@@ -137,7 +137,7 @@ trait ClassDefinitionAspect extends ObjectVisitor{
         var listInv = this.getAllInvariants(thi)
 
         if(listInv.size() > 0){
-            res1.append("override def checkInvariants(){\n")
+            res1.append("override def checkInvariants(stopOnError : Boolean){\n")
             res1.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
             var i = 0
             listInv.filter(b => !Util.hasCompilerIgnoreTag(b)  ).foreach(a => {
@@ -149,7 +149,8 @@ trait ClassDefinitionAspect extends ObjectVisitor{
                     i = i + 1
                 })
             res1.append(" )\n")
-            res1.append("checkParamInvariants(invariants)\n")
+            res1.append("if(stopOnError)\n  checkParamInvariants(invariants)\n"
+            		+"else\n  checkParamInvariants(invariants, constraintDiagnostic)\n")
             /*
              this.getSuperType.foreach(superC => {
              res.append("super[")
@@ -160,7 +161,7 @@ trait ClassDefinitionAspect extends ObjectVisitor{
             res1.append("}\n")
             /* End checkInvariants Generation  */
 
-            res1.append("override def checkAllInvariants(){\n")
+            res1.append("override def checkAllInvariants(stopOnError : Boolean){\n")
             res1.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
              i = 0
             listInv.filter(b => !Util.hasCompilerIgnoreTag(b)  ).foreach(a => {
@@ -172,8 +173,18 @@ trait ClassDefinitionAspect extends ObjectVisitor{
                     i = i + 1
                 })
             res1.append(" )\n")
-            res1.append("checkParamInvariants(invariants, constraintDiagnostic)\n")
-            
+            res1.append("if(stopOnError)\n  checkParamInvariants(invariants)\n"
+            		+"else\n  checkParamInvariants(invariants, constraintDiagnostic)\n")
+            /* Calling checkAllInvariants on composite properties */
+            thi.getOwnedAttribute().foreach(att=>
+              if(att.getIsComposite()){
+                if(att.getUpper() > 1 || att.getUpper()== -1)
+                  res1.append(att.getName()+".each(e=>\n  if(e!=null)\n    e.checkAllInvariants(stopOnError))\n")
+                else
+                  res1.append("if("+att.getName()+"!=null)\n  "
+                      +att.getName()+".checkAllInvariants(stopOnError)\n")
+              }
+            )
             /*
              this.getSuperType.foreach(superC => {
              res.append("super[")
