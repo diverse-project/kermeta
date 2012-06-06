@@ -50,6 +50,21 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.loader.km.api</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.language</groupId>
+            <artifactId>language.loader.km</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kermeta.kompren</groupId>
+            <artifactId>kompren.gwelet.slicer</artifactId>
+            <version>${kompren.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.kermeta.kompren</groupId>
             <artifactId>kompren.diagram</artifactId>
             <version>${kompren.version}</version>
@@ -58,11 +73,6 @@
             <groupId>org.malai</groupId>
             <artifactId>malai.core</artifactId>
             <version>0.2-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.emf</groupId>
-            <artifactId>emf.lib</artifactId>
-            <version>${emf.version}</version>
         </dependency>
     </dependencies>
 </project>
