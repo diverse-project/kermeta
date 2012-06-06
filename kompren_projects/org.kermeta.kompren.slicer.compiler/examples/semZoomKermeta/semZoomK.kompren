@@ -6,11 +6,23 @@
     </ctx>
     <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/Package"/>
   </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass" expression="&#xA;&#x9;&#x9;stdio.writeln(&quot;clazz: &quot; + cl.name)&#xA;&#x9;">
+    <ctx varName="cl">
+      <type href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+    </ctx>
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
     <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/Package/nestedPackage"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
     <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ModelingUnit/packages"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
   </slicedElements>
   <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
   <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ModelingUnit"/>

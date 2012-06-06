@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>kompren.slicer.compiler</name>
-  <comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects>
-    <project>kompren.slicer.model</project>
-    <project>org.kermeta.language.library.core</project>
-    <project>org.kermeta.language.model</project>
-    <project>org.kermeta.utils.systemservices.api</project>
-  </projects>
-  <buildSpec>
-    <buildCommand>
-      <name>org.kermeta.kp.editor.builder</name>
-    </buildCommand>
-    <buildCommand>
-      <name>org.eclipse.jdt.core.javabuilder</name>
-    </buildCommand>
-  </buildSpec>
-  <natures>
-    <nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>
-    <nature>org.eclipse.jdt.core.javanature</nature>
-  </natures>
+	<name>org.kermeta.kompren.slicer.compiler</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.kermeta.kp.editor.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</nature>
+		<nature>org.kermeta.kp.editor.nature</nature>
+	</natures>
 </projectDescription>
