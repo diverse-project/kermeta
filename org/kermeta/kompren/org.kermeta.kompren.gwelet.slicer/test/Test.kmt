@@ -16,9 +16,12 @@ class TestVisual {
 		var mu : org::kermeta::language::structure::ModelingUnit
 		mu ?= inputRes.getContents.one
 		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
-		requiredMU.add(mu)
+		//requiredMU.add(mu)
+		stdio.writeln(mu.packages.at(3).nestedPackage.at(0).nestedPackage.at(0).name)
+		
+		
 		var slicer : VisualiserKermetaModel init VisualiserKermetaModel.new.initialise(
 				Bag<org::kermeta::language::structure::ClassDefinition>.new, requiredMU, true)
-		slicer.launch()
+		//slicer.launch()
 	end
 }

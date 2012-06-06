@@ -114,6 +114,25 @@ aspect class TypeDefinition inherits SlicerVisitor {
 aspect class Type inherits SlicerVisitor {
 }
 
+aspect class ParameterizedType {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.typeDefinition.visitToAddClasses(theVisualiserKermetaModel)
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.typeDefinition.visitToAddRelations(theVisualiserKermetaModel)
+		end
+	end
+}
+
 aspect class ClassDefinition {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
 		checkInitialisation()
