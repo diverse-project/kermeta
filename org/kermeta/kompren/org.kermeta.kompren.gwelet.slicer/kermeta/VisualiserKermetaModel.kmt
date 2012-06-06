@@ -10,11 +10,17 @@ class VisualiserKermetaModel {
 
 	reference addedPackages : Bag<Package>
 
-	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*]) : VisualiserKermetaModel is do
+	reference addedClassDefinitions : Bag<ClassDefinition>
+	
+	attribute considersuperType : Boolean
+
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], considersuperType : Boolean) : VisualiserKermetaModel is do
 		result := self
 		self.addedPackages := Bag<Package>.new
+		self.addedClassDefinitions := Bag<ClassDefinition>.new
 		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
 		self.requiredModelingUnits.addAll(requiredModelingUnits)
+		self.considersuperType := considersuperType
 	end
 
 	operation launch() is do
@@ -23,11 +29,17 @@ class VisualiserKermetaModel {
 		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
 		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self) }
 		self.addedPackages.each{thePackage | onPackageAdded(thePackage) }
+		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
 	end
 
 	operation onPackageAdded(pkg : Package) is do
 
 		stdio.writeln("package: " + pkg.name)
+	
+	end
+	operation onClassDefinitionAdded(cl : ClassDefinition) is do
+
+		stdio.writeln("clazz: " + cl.name)
 	
 	end
 

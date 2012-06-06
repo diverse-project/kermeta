@@ -31,7 +31,7 @@ class SlicerVisitor {
 	end
 }
 
-aspect class Package inherits SlicerVisitor {
+aspect class Package {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -54,7 +54,7 @@ aspect class Package inherits SlicerVisitor {
 	end
 }
 
-aspect class ModelingUnit inherits SlicerVisitor {
+aspect class ModelingUnit {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
 		checkInitialisation()
 		if(not self.visitedPass) then
@@ -73,6 +73,64 @@ aspect class ModelingUnit inherits SlicerVisitor {
 	end
 }
 
-aspect class ClassDefinition inherits SlicerVisitor {
+aspect class TypeDefinitionContainer inherits SlicerVisitor {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theVisualiserKermetaModel)}
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddRelations(theVisualiserKermetaModel)}
+		end
+	end
+}
+
+aspect class TypeDefinition inherits SlicerVisitor {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			if(theVisualiserKermetaModel.considersuperType) then self.superType.each{theType | theType.visitToAddClasses(theVisualiserKermetaModel)} end
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(theVisualiserKermetaModel.considersuperType) then self.superType.each{theType | theType.visitToAddRelations(theVisualiserKermetaModel)} end
+		end
+	end
+}
+
+aspect class Type inherits SlicerVisitor {
+}
+
+aspect class ClassDefinition {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			if(not self.sliced) then
+				theVisualiserKermetaModel.addedClassDefinitions.add(self)
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+		end
+	end
 }
 
