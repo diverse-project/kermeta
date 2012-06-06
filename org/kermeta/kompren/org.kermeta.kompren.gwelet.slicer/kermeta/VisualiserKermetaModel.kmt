@@ -1,0 +1,34 @@
+package org::kermeta::language::structure;
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+class VisualiserKermetaModel {
+	reference requiredClassDefinitions : ClassDefinition[0..*]
+
+	reference requiredModelingUnits : ModelingUnit[0..*]
+
+	reference addedPackages : Bag<Package>
+
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*]) : VisualiserKermetaModel is do
+		result := self
+		self.addedPackages := Bag<Package>.new
+		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
+		self.requiredModelingUnits.addAll(requiredModelingUnits)
+	end
+
+	operation launch() is do
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self) }
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddClasses(self) }
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self) }
+		self.addedPackages.each{thePackage | onPackageAdded(thePackage) }
+	end
+
+	operation onPackageAdded(pkg : Package) is do
+
+		stdio.writeln("package: " + pkg.name)
+	
+	end
+
+}

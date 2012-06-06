@@ -1,0 +1,24 @@
+package org::kermeta::language::structure;
+
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::behavior
+using kermeta::io::StdIO => stdio
+
+class TestVisual {
+	operation main() : Void is do
+		var inputRep : ResourceSet init ResourceSet.new
+		var inputRes : Resource
+		inputRes ?= inputRep.createResource("platform:/resource/examples.modelTransfoAnalysis/beforeCheckingforScopeRESOLVED.km", 
+											"http://www.kermeta.org/kermeta/2_0_0/")
+		inputRes.load(void)
+		var mu : org::kermeta::language::structure::ModelingUnit
+		mu ?= inputRes.getContents.one
+		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
+		requiredMU.add(mu)
+		var slicer : VisualiserKermetaModel init VisualiserKermetaModel.new.initialise(
+				Bag<org::kermeta::language::structure::ClassDefinition>.new, requiredMU)
+		slicer.launch()
+	end
+}

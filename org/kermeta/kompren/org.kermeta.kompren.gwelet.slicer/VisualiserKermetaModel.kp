@@ -1,0 +1,13 @@
+KermetaProject "org.kermeta.kompren.gwelet.slicer"
+	groupId = "org.kermeta.kompren"
+	defaultMainClass ="org::kermeta::language::structure::TestVisual"
+	defaultMainOperation = "main"
+	sources = {
+		require "${project.baseUri}/kermeta/VisualiserKermetaModelAspect.kmt"
+		require "${project.baseUri}/kermeta/VisualiserKermetaModel.kmt"
+		require "${project.baseUri}/test/Test.kmt"
+	}
+	dependencies = {
+			//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
+	}

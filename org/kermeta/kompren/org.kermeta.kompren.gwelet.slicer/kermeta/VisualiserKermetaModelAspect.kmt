@@ -1,0 +1,78 @@
+package org::kermeta::language::structure;
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+class SlicerVisitor {
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute sliced : Boolean
+
+	operation initialiseAttributes() is do
+		self.visitedPass := false
+		self.sliced := false
+		self.visitedForRelations := false
+	end
+
+	operation visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	end
+
+	operation checkInitialisation() is do
+		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
+}
+
+aspect class Package inherits SlicerVisitor {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			if(not self.sliced) then
+				theVisualiserKermetaModel.addedPackages.add(self)
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel)}
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.nestedPackage.each{thePackage | thePackage.visitToAddRelations(theVisualiserKermetaModel)}
+		end
+	end
+}
+
+aspect class ModelingUnit inherits SlicerVisitor {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation()
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.packages.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel)}
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.packages.each{thePackage | thePackage.visitToAddRelations(theVisualiserKermetaModel)}
+		end
+	end
+}
+
+aspect class ClassDefinition inherits SlicerVisitor {
+}
+
