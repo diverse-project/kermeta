@@ -4,11 +4,18 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.kermeta.kompren.diagram.instrument.Hand;
 import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.ClassView;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
+import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
+import org.kermeta.kompren.org.kermeta.kompren.gwelet.slicerrunner.MainRunner;
+import org.kermeta.language.loader.km.KmLoaderImpl;
+import org.kermeta.language.structure.ClassDefinition;
+import org.kermeta.language.structure.ModelingUnit;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
@@ -61,6 +68,16 @@ public class GweletFrame extends UI {
 	public void initialisePresentations() {
 		model = new Model();
 //		canvas = new ClassDiagramView(false);
+
+		MainRunner.init();
+		ModelingUnit mu = new KmLoaderImpl().load("/home/ablouin/workspace/org.kermeta.kompren.gwelet/examples/beforeSetting.km");
+		GweletSlicer slicer = new GweletSlicer();
+		EList<ModelingUnit> listMu = new BasicEList<ModelingUnit>();
+		EList<ClassDefinition> listCd = new BasicEList<ClassDefinition>();
+		listMu.add(mu);
+		slicer.initialise(listCd, listMu);
+		slicer.launch();
+
 		canvas = createEcoreClassDiagram();
 	}
 
