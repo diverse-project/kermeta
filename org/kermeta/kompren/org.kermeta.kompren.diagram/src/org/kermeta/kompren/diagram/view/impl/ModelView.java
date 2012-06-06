@@ -24,6 +24,8 @@ import org.malai.picking.Pickable;
 import org.malai.picking.Picker;
 import org.malai.properties.Zoomable;
 import org.malai.widget.MPanel;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Implements a diagram that contains entities and relations.
@@ -479,5 +481,37 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public Point2D getZoomedPoint(final Point pt) {
 		return pt==null ? new Point2D.Double() : getZoomedPoint(pt.x, pt.y);
+	}
+
+
+	@Override
+	public void save(final boolean generalPreferences, final String nsURI, final Document document, final Element root) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+	@Override
+	public void load(final boolean generalPreferences, final String nsURI, final Element meta) {
+		// TODO Auto-generated method stub
+	}
+
+
+	@Override
+	public void setModified(final boolean modified) {
+		// TODO Auto-generated method stub
+	}
+
+
+	@Override
+	public boolean isModified() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public void reinit() {
+		// TODO Auto-generated method stub
 	}
 }
