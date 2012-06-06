@@ -11,4 +11,5 @@ slicer VisualiserKermetaModel {
 	slicedProperty: org.kermeta.language.structure.ModelingUnit.packages
 	slicedProperty: org.kermeta.language.structure.TypeDefinitionContainer.ownedTypeDefinition
 	slicedProperty: org.kermeta.language.structure.TypeDefinition.superType option
+	slicedProperty: org.kermeta.language.structure.ParameterizedType.typeDefinition
 }

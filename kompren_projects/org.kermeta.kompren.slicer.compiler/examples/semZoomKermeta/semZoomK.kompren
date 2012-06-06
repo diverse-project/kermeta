@@ -24,6 +24,9 @@
   <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
     <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
   </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </slicedElements>
   <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
   <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ModelingUnit"/>
 </org.kermeta.kompren.slicer:Slicer>
