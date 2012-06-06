@@ -67,7 +67,7 @@ class SlicerClassGenerator inherits Generator {
 		end
 
 		slicerGenerator.slicerModel.slicedProperties.each{elt |
-			if((not elt.isOption).andThen{b | elt.isOption}) then
+			if((not elt.isOption.isVoid).andThen{b | elt.isOption}) then
 				generatedCode := generatedCode + "\tattribute consider" + elt.domain.name + " : Boolean\n\n"
 			end
 		}
