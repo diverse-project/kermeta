@@ -118,10 +118,10 @@ public class GweletFrame extends UI {
 //		ClassView eStringToStringMapEntry 	= (ClassView) diag.addEntity("EStringToStringMapEntry", -1, false);
 		ClassView eGenericType 	= (ClassView) diag.addEntity("EGenericType", -1, false);
 
-		diag.addRelation(eclass, eclass, true, true, null, "supertypes", null, "0..*", -1);
-		diag.addRelation(eAnnotation, eObject, false, true, "references", null, "0..*", null, -1);
-		diag.addRelation(eAnnotation, eObject, true, true, "contents", null, "0..*", null, -1);
-		diag.addRelation(eAttribute, eDataType, false, true, "eAttributeType", null, "1", null, -1);
+		diag.addRelation(eclass, eclass, true, true, null, "supertypes", null, "0..*");
+		diag.addRelation(eAnnotation, eObject, false, true, "references", null, "0..*", null);
+		diag.addRelation(eAnnotation, eObject, true, true, "contents", null, "0..*", null);
+		diag.addRelation(eAttribute, eDataType, false, true, "eAttributeType", null, "1", null);
 		diag.addInheritanceView(eModelElement, eObject);
 		diag.addInheritanceView(eGenericType, eObject);
 

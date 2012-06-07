@@ -110,7 +110,7 @@ public class MetamodelView extends ModelView {
 
 
 	public IRelationView addRelation(final IEntityView srcClass, final IEntityView tarClass, final boolean isComposition, final boolean isCompoAtSrc,
-						final String srcRole, final String targetRole, final String srcCard, final String targetCard, final int position) {
+						final String srcRole, final String targetRole, final String srcCard, final String targetCard) {
 		if(targetRole!=null) {
 			//checking if the target relation has been already added by its opposite.
 			boolean again 	= true;
@@ -138,10 +138,7 @@ public class MetamodelView extends ModelView {
 
 		final IRelationView view = new RelationClassView(srcClass, tarClass, isComposition, isCompoAtSrc, srcRole, targetRole,
 														 Cardinality.getCardinality(srcCard), Cardinality.getCardinality(targetCard));
-		if(position==-1 || position==relations.size())
-			addRelation(view);
-		else
-			addRelation(position, view);
+		addRelation(view);
 
 		return view;
 	}
