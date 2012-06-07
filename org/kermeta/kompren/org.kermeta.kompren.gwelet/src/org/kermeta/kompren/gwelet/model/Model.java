@@ -1,26 +1,22 @@
 package org.kermeta.kompren.gwelet.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EPackage;
+import org.kermeta.language.structure.ModelingUnit;
 import org.malai.presentation.AbstractPresentation;
 
 public class Model implements AbstractPresentation {
-	protected List<EPackage> pkgs;
+	protected ModelingUnit unit;
 
-	
+
 	public Model() {
 		super();
-		pkgs = new ArrayList<EPackage>();
 	}
-	
-	
+
+
 	@Override
-	public void setModified(boolean modified) {
+	public void setModified(final boolean modified) {
 		// Nothing to do.
 	}
-	
+
 
 	@Override
 	public boolean isModified() {
@@ -30,5 +26,15 @@ public class Model implements AbstractPresentation {
 	@Override
 	public void reinit() {
 		// Nothing to do.
+	}
+
+
+	public ModelingUnit getUnit() {
+		return unit;
+	}
+
+
+	public void setUnit(final ModelingUnit unit) {
+		this.unit = unit;
 	}
 }

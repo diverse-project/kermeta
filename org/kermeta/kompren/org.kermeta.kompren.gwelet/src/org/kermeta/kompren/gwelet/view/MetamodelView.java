@@ -100,14 +100,9 @@ public class MetamodelView extends ModelView {
 	}
 
 
-	public InheritanceView addInheritanceView(final IEntityView src, final IEntityView tar, final int position) {
+	public InheritanceView addInheritanceView(final IEntityView src, final IEntityView tar) {
 		final InheritanceView view = new InheritanceView(src, tar);
-
-		if(position==-1 || position==relations.size())
-			addRelation(view);
-		else
-			addRelation(position, view);
-
+		addRelation(view);
 		return view;
 	}
 

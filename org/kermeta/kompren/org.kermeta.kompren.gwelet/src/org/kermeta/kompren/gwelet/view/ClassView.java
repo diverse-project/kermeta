@@ -418,4 +418,14 @@ public class ClassView extends RectangleEntityView {
 	public boolean isSelectable() {
 		return !isPruned();
 	}
+
+
+	public List<AttributeView> getAttributes() {
+		return attributes;
+	}
+
+
+	public List<OperationView> getOperations() {
+		return operations;
+	}
 }

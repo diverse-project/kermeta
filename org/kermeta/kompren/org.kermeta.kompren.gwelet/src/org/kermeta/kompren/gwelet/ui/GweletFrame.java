@@ -4,30 +4,25 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.kermeta.kompren.diagram.instrument.Hand;
 import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.ClassView;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
-import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
-import org.kermeta.kompren.org.kermeta.kompren.gwelet.slicerrunner.MainRunner;
-import org.kermeta.language.loader.km.KmLoaderImpl;
-import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.kompren.gwelet.view.ViewBuilder;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
+import org.malai.presentation.Presentation;
 import org.malai.ui.UI;
 import org.malai.ui.UIManager;
 
 public class GweletFrame extends UI {
 	private static final long serialVersionUID = 1L;
 
-	protected Model model;
+//	protected Model model;
 
-	protected MetamodelView canvas;
+//	protected MetamodelView canvas;
 
 	protected JFrame proxiedFrame;
 
@@ -37,10 +32,14 @@ public class GweletFrame extends UI {
 
 	protected BasicZoomer zoomer;
 
+	protected ViewBuilder viewBuilder;
+
 
 	public GweletFrame() {
 		super();
 
+		MetamodelView canvas = getCanvas();
+		canvas.setLayoutStrategy(new ClassModelBasicStrategy(canvas));
 		getContentPane().add(canvas.getScrollpane());
 		scroller = new Scroller(canvas);
 		scroller.addEventable(canvas);
@@ -51,6 +50,7 @@ public class GweletFrame extends UI {
 		hand = new Hand(canvas);
 		hand.addEventable(canvas);
 		hand.setActivated(true);
+		viewBuilder = new ViewBuilder(getPresentation(Model.class, MetamodelView.class));
 		pack();
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		canvas.requestFocusInWindow();
@@ -64,21 +64,33 @@ public class GweletFrame extends UI {
 	}
 
 
+	public MetamodelView getCanvas() {
+		return getPresentation(Model.class, MetamodelView.class).getConcretePresentation();
+	}
+
+
+	public Model getModel() {
+		return getPresentation(Model.class, MetamodelView.class).getAbstractPresentation();
+	}
+
+
 	@Override
 	public void initialisePresentations() {
-		model = new Model();
-//		canvas = new ClassDiagramView(false);
+		Model model  = new Model();
+		MetamodelView canvas = new MetamodelView(true);
 
-		MainRunner.init();
-		ModelingUnit mu = new KmLoaderImpl().load("/home/ablouin/workspace/org.kermeta.kompren.gwelet/examples/beforeSetting.km");
-		GweletSlicer slicer = new GweletSlicer();
-		EList<ModelingUnit> listMu = new BasicEList<ModelingUnit>();
-		EList<ClassDefinition> listCd = new BasicEList<ClassDefinition>();
-		listMu.add(mu);
-		slicer.initialise(listCd, listMu);
-		slicer.launch();
+		presentations.add(new Presentation<Model, MetamodelView>(model, canvas));
 
-		canvas = createEcoreClassDiagram();
+//		GweletSlicer slicer = new GweletSlicer();
+//		EList<ModelingUnit> listMu = new BasicEList<ModelingUnit>();
+//		EList<ClassDefinition> listCd = new BasicEList<ClassDefinition>();
+//		System.out.println(mu.getPackages().get(2).getNestedPackage().get(0).getNestedPackage().get(0).getNestedPackage().get(1).getOwnedTypeDefinition().get(21).getName());
+//		ClassDefinition cd = (ClassDefinition) mu.getPackages().get(2).getNestedPackage().get(0).getNestedPackage().get(0).getNestedPackage().get(1).getOwnedTypeDefinition().get(21);
+//		listCd.add(cd);
+//		slicer.initialise(listCd, listMu, true);
+//		slicer.launch();
+
+//		canvas = createEcoreClassDiagram();
 	}
 
 
@@ -110,8 +122,8 @@ public class GweletFrame extends UI {
 		diag.addRelation(eAnnotation, eObject, false, true, "references", null, "0..*", null, -1);
 		diag.addRelation(eAnnotation, eObject, true, true, "contents", null, "0..*", null, -1);
 		diag.addRelation(eAttribute, eDataType, false, true, "eAttributeType", null, "1", null, -1);
-		diag.addInheritanceView(eModelElement, eObject, -1);
-		diag.addInheritanceView(eGenericType, eObject, -1);
+		diag.addInheritanceView(eModelElement, eObject);
+		diag.addInheritanceView(eGenericType, eObject);
 
 		eObject.addOperation("eClass", "", true);
 		eObject.addOperation("eIsProxy", "EBoolean", true);
@@ -136,6 +148,11 @@ public class GweletFrame extends UI {
 		diag.updatePreferredSize();
 
 		return diag;
+	}
+
+
+	public ViewBuilder getViewBuilder() {
+		return viewBuilder;
 	}
 
 }
