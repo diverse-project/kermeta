@@ -1,5 +1,6 @@
 package org.kermeta.kompren.diagram.view.interfaces;
 
+import java.awt.Cursor;
 import java.util.List;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
@@ -45,6 +46,9 @@ public interface IModelView extends Scrollable, Zoomable, ConcretePresentation {
 	IEntityView getEntityAt(final int i);
 
 	IRelationView getRelationAt(final int i);
+
+
+	void setCursor(final Cursor cursor);
 
 
 	/**

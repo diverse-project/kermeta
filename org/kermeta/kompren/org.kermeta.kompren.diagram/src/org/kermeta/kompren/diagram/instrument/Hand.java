@@ -1,11 +1,14 @@
 package org.kermeta.kompren.diagram.instrument;
 
+import java.awt.Cursor;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
 import org.kermeta.kompren.diagram.action.MoveElement;
 import org.kermeta.kompren.diagram.action.SelectElement;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
+import org.malai.action.library.MoveCamera;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.Link;
 import org.malai.interaction.library.DnD;
@@ -29,12 +32,19 @@ public class Hand extends Instrument {
 		try{
 			addLink(new Press2Select(this));
 //			addLink(new DnD2Select(this));
-			addLink(new DnD2Move(this));
+			addLink(new DnD2MoveCamera(this));
+			addLink(new DnD2MoveElement(this));
 		}catch(final InstantiationException e){
 			e.printStackTrace();
 		}catch(final IllegalAccessException e){
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public void interimFeedback() {
+		canvas.setCursor(Cursor.getDefaultCursor());
 	}
 
 
@@ -78,8 +88,8 @@ public class Hand extends Instrument {
 	}
 
 
-	private class DnD2Move extends Link<MoveElement, DnD, Hand> {
-		protected DnD2Move(final Hand ins) throws InstantiationException, IllegalAccessException {
+	private class DnD2MoveElement extends Link<MoveElement, DnD, Hand> {
+		protected DnD2MoveElement(final Hand ins) throws InstantiationException, IllegalAccessException {
 			super(ins, true, MoveElement.class, DnD.class);
 		}
 
@@ -101,6 +111,40 @@ public class Hand extends Instrument {
 		@Override
 		public boolean isConditionRespected() {
 			return interaction.getStartObject()!=null;
+		}
+	}
+
+
+	private class DnD2MoveCamera extends Link<MoveCamera, DnD, Hand> {
+		protected DnD2MoveCamera(final Hand ins) throws InstantiationException, IllegalAccessException {
+			super(ins, true, MoveCamera.class, DnD.class);
+		}
+
+		@Override
+		public void initAction() {
+			action.setScrollPane(canvas.getScrollpane());
+		}
+
+
+		@Override
+		public void updateAction() {
+			Point2D startPt	= canvas.getZoomedPoint(interaction.getStartPt());
+			Point2D endPt	= canvas.getZoomedPoint(interaction.getEndPt());
+
+			action.setPx((int)(startPt.getX() - endPt.getX()));
+			action.setPy((int)(startPt.getY() - endPt.getY()));
+		}
+
+		@Override
+		public boolean isConditionRespected() {
+			return interaction.getButton()==MouseEvent.BUTTON1;
+		}
+
+
+		@Override
+		public void interimFeedback() {
+			super.interimFeedback();
+			instrument.canvas.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 		}
 	}
 }
