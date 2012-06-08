@@ -65,7 +65,7 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return true;
+			return interaction.getButton()==MouseEvent.BUTTON1;
 		}
 	}
 
@@ -83,7 +83,7 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return interaction.getStartObject()==null;
+			return interaction.getStartObject()==null && interaction.getButton()==MouseEvent.BUTTON1;
 		}
 	}
 
@@ -110,7 +110,7 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return interaction.getStartObject()!=null;
+			return interaction.getStartObject()!=null && interaction.getButton()==MouseEvent.BUTTON1;
 		}
 	}
 
@@ -137,7 +137,7 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return interaction.getButton()==MouseEvent.BUTTON1;
+			return interaction.getButton()==MouseEvent.BUTTON2;
 		}
 
 
