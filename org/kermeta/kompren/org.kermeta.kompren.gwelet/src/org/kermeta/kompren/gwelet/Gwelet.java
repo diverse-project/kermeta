@@ -8,6 +8,7 @@ public class Gwelet {
 		MainRunner.init();
 
 		GweletFrame frame = new GweletFrame();
+		frame.getComposer().compose(null);
 		frame.getViewBuilder().build("/home/ablouin/workspace/org.kermeta.kompren.gwelet/examples/beforeSetting.km");
 		frame.setVisible(true);
 	}

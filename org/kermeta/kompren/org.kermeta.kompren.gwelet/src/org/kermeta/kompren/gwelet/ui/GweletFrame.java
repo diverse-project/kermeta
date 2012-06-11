@@ -1,10 +1,10 @@
 package org.kermeta.kompren.gwelet.ui;
 
-import java.awt.Frame;
-
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 
 import org.kermeta.kompren.diagram.instrument.Hand;
+import org.kermeta.kompren.gwelet.instruments.VisualiserManager;
 import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.ClassView;
@@ -16,6 +16,7 @@ import org.malai.instrument.library.Scroller;
 import org.malai.presentation.Presentation;
 import org.malai.ui.UI;
 import org.malai.ui.UIManager;
+import org.malai.widget.MLayeredPane;
 
 public class GweletFrame extends UI {
 	private static final long serialVersionUID = 1L;
@@ -32,15 +33,24 @@ public class GweletFrame extends UI {
 
 	protected BasicZoomer zoomer;
 
+	protected VisualiserManager visualiserManager;
+
 	protected ViewBuilder viewBuilder;
+
+	/** The layered panel used to display widgets upon shapes (e.g. text setters). */
+	protected MLayeredPane layeredPanel;
 
 
 	public GweletFrame() {
 		super();
 
 		MetamodelView canvas = getCanvas();
+		layeredPanel = new MLayeredPane(false, false);
+		layeredPanel.add(canvas.getScrollpane(), JLayeredPane.DEFAULT_LAYER);
+		layeredPanel.addComponentsToResize(canvas.getScrollpane());
+
+		composer = new GweletUIBuilder(this);
 		canvas.setLayoutStrategy(new ClassModelBasicStrategy(canvas));
-		getContentPane().add(canvas.getScrollpane());
 		scroller = new Scroller(canvas);
 		scroller.addEventable(canvas);
 		scroller.setActivated(true);
@@ -50,10 +60,10 @@ public class GweletFrame extends UI {
 		hand = new Hand(canvas);
 		hand.addEventable(canvas);
 		hand.setActivated(true);
+		visualiserManager = new VisualiserManager(composer, layeredPanel);
+		visualiserManager.addEventable(canvas);
+		visualiserManager.setActivated(true);
 		viewBuilder = new ViewBuilder(getPresentation(Model.class, MetamodelView.class));
-		pack();
-		setExtendedState(Frame.MAXIMIZED_BOTH);
-		canvas.requestFocusInWindow();
 		UIManager.INSTANCE.registerUI(this);
 	}
 
@@ -155,4 +165,8 @@ public class GweletFrame extends UI {
 		return viewBuilder;
 	}
 
+
+	public MLayeredPane getLayeredPanel() {
+		return layeredPanel;
+	}
 }

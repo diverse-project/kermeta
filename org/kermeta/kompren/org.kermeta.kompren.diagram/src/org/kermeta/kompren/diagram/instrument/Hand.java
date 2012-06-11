@@ -48,6 +48,7 @@ public class Hand extends Instrument {
 	}
 
 
+
 	private class Press2Select extends Link<SelectElement, Press, Hand> {
 		protected Press2Select(final Hand ins) throws InstantiationException, IllegalAccessException {
 			super(ins, true, SelectElement.class, Press.class);
@@ -65,9 +66,10 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return interaction.getButton()==MouseEvent.BUTTON1;
+			return interaction.getButton()!=MouseEvent.BUTTON2;
 		}
 	}
+
 
 
 
@@ -83,9 +85,11 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return interaction.getStartObject()==null && interaction.getButton()==MouseEvent.BUTTON1;
+			return interaction.getStartObject()==null && interaction.getButton()!=MouseEvent.BUTTON2;
 		}
 	}
+
+
 
 
 	private class DnD2MoveElement extends Link<MoveElement, DnD, Hand> {
@@ -110,9 +114,11 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			return interaction.getStartObject()!=null && interaction.getButton()==MouseEvent.BUTTON1;
+			return interaction.getStartObject()!=null && interaction.getButton()!=MouseEvent.BUTTON2;
 		}
 	}
+
+
 
 
 	private class DnD2MoveCamera extends Link<MoveCamera, DnD, Hand> {
