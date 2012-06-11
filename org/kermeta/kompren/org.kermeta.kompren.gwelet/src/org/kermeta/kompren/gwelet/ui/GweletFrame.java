@@ -13,6 +13,7 @@ import org.kermeta.kompren.gwelet.view.ViewBuilder;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
+import org.malai.instrument.library.UndoRedoManager;
 import org.malai.presentation.Presentation;
 import org.malai.ui.UI;
 import org.malai.ui.UIManager;
@@ -39,6 +40,9 @@ public class GweletFrame extends UI {
 
 	protected ViewBuilder viewBuilder;
 
+	protected UndoRedoManager undoredoer;
+
+
 	/** The layered panel used to display widgets upon shapes (e.g. text setters). */
 	protected MLayeredPane layeredPanel;
 
@@ -54,28 +58,19 @@ public class GweletFrame extends UI {
 		composer = new GweletUIBuilder(this);
 		canvas.setLayoutStrategy(new ClassModelBasicStrategy(canvas));
 		viewBuilder = new ViewBuilder(getPresentation(Model.class, MetamodelView.class));
+		undoredoer = new UndoRedoManager(composer);
 		scroller = new Scroller(canvas);
-		scroller.addEventable(canvas);
-		scroller.setActivated(true);
 		zoomer = new BasicZoomer(canvas);
-		zoomer.addEventable(canvas);
-		zoomer.setActivated(true);
 		hand = new Hand(canvas);
-		hand.addEventable(canvas);
-		hand.setActivated(true);
 		visualiserManager = new VisualiserManager(composer, layeredPanel, canvas);
-		visualiserManager.addEventable(canvas);
-		visualiserManager.setActivated(true);
 		visualiser = new Visualiser(composer);
-		visualiser.addEventable(visualiserManager.getMenu());
-		visualiser.setActivated(true);
 		UIManager.INSTANCE.registerUI(this);
 	}
 
 
 	@Override
 	public Instrument[] getInstruments() {
-		return new Instrument[]{scroller, hand, zoomer, visualiserManager, visualiser};
+		return new Instrument[]{scroller, hand, zoomer, visualiserManager, visualiser, undoredoer};
 	}
 
 

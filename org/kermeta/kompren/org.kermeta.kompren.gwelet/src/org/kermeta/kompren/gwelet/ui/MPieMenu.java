@@ -1,4 +1,4 @@
-package org.kermeta.kompren.gwelet.visualisation;
+package org.kermeta.kompren.gwelet.ui;
 
 import java.awt.Color;
 import java.awt.Component;

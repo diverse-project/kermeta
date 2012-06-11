@@ -5,8 +5,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLayeredPane;
 
 import org.kermeta.kompren.gwelet.actions.SetVisibleComponent;
+import org.kermeta.kompren.gwelet.ui.MPieMenu;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
-import org.kermeta.kompren.gwelet.visualisation.MPieMenu;
 import org.malai.instrument.Link;
 import org.malai.instrument.WidgetInstrument;
 import org.malai.interaction.library.Press;

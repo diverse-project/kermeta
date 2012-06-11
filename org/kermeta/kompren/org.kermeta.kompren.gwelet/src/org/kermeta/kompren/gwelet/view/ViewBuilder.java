@@ -47,6 +47,16 @@ public class ViewBuilder {
 	}
 
 
+	public List<ClassDefinition> getClassDefinitionAdded() {
+		List<ClassDefinition> list = new ArrayList<ClassDefinition>();
+
+		for(List<ClassDefinition> l : cdAdded.values())
+			list.addAll(l);
+
+		return list;
+	}
+
+
 	public ClassDefinition getClassDefinition(final ClassView cv) {
 		return classMappingsInverted.get(cv);
 	}

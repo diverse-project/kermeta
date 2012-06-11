@@ -1,7 +1,6 @@
 package org.kermeta.kompren.gwelet.actions;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.kermeta.kompren.diagram.action.ModelViewAction;
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
 import org.kermeta.kompren.gwelet.view.ClassView;
 import org.kermeta.kompren.gwelet.view.ViewBuilder;
@@ -9,7 +8,7 @@ import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 
-public class ShowHierarchy extends ModelViewAction {
+public class ShowHierarchy extends VisualisationAction {
 	protected GweletSlicer slicer;
 
 	protected ViewBuilder builder;
@@ -24,13 +23,7 @@ public class ShowHierarchy extends ModelViewAction {
 
 
 	@Override
-	public boolean isRegisterable() {
-		return false;
-	}
-
-
-	@Override
-	protected void doActionBody() {
+	protected void doVisualisation() {
 		BasicEList<ClassDefinition> cds = new BasicEList<ClassDefinition>();
 
 		for(Selectable sel : canvas.getSelection())
@@ -61,5 +54,11 @@ public class ShowHierarchy extends ModelViewAction {
 
 	public void setSuperTypes(final boolean superTypes) {
 		this.superTypes = superTypes;
+	}
+
+
+	@Override
+	public String getUndoName() {
+		return superTypes ? "Show super-classes" : "Show lower-classes";
 	}
 }
