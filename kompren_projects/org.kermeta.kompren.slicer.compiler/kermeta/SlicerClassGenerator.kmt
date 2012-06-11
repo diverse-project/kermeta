@@ -272,6 +272,8 @@ class SlicerClassGenerator inherits Generator {
 		end
 
 		slicerGenerator.slicerModel.inputClasses.each{clazz |
+			// Need to clear the sets before their init (if the slicer is reused).
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".clear()\n"
 			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
 		}
 
