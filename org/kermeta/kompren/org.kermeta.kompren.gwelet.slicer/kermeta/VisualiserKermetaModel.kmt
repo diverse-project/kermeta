@@ -18,18 +18,29 @@ class VisualiserKermetaModel {
 		result := self
 		self.addedPackages := Bag<Package>.new
 		self.addedClassDefinitions := Bag<ClassDefinition>.new
+		self.requiredClassDefinitions.clear()
 		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
+		self.requiredModelingUnits.clear()
 		self.requiredModelingUnits.addAll(requiredModelingUnits)
 		self.considersuperType := considersuperType
 	end
 
 	operation launch() is do
+		onStart()
 		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self) }
 		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddClasses(self) }
 		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
 		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self) }
 		self.addedPackages.each{thePackage | onPackageAdded(thePackage) }
 		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
+		onEnd()
+	end
+	
+	operation onStart() is do
+	end
+
+	
+	operation onEnd() is do
 	end
 
 	operation onPackageAdded(pkg : Package) is do
