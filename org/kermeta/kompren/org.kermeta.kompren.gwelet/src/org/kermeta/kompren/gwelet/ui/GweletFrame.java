@@ -53,6 +53,7 @@ public class GweletFrame extends UI {
 
 		composer = new GweletUIBuilder(this);
 		canvas.setLayoutStrategy(new ClassModelBasicStrategy(canvas));
+		viewBuilder = new ViewBuilder(getPresentation(Model.class, MetamodelView.class));
 		scroller = new Scroller(canvas);
 		scroller.addEventable(canvas);
 		scroller.setActivated(true);
@@ -68,7 +69,6 @@ public class GweletFrame extends UI {
 		visualiser = new Visualiser(composer);
 		visualiser.addEventable(visualiserManager.getMenu());
 		visualiser.setActivated(true);
-		viewBuilder = new ViewBuilder(getPresentation(Model.class, MetamodelView.class));
 		UIManager.INSTANCE.registerUI(this);
 	}
 

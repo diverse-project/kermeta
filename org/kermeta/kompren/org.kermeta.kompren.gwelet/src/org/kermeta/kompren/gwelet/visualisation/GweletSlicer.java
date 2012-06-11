@@ -1,13 +1,23 @@
 package org.kermeta.kompren.gwelet.visualisation;
 
+import org.kermeta.kompren.diagram.view.interfaces.IComponentView;
+import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
+import org.kermeta.kompren.diagram.view.interfaces.IModelView;
+import org.kermeta.kompren.gwelet.view.ViewBuilder;
 import org.kermeta.kompren.org.kermeta.kompren.gwelet.slicer.org.kermeta.language.structure.RichVisualiserKermetaModel;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Package;
 
 public class GweletSlicer extends RichVisualiserKermetaModel {
+	protected IModelView view;
 
-	public GweletSlicer() {
+	protected ViewBuilder builder;
+
+
+	public GweletSlicer(final IModelView view, final ViewBuilder builder) {
 		super();
+		this.view = view;
+		this.builder = builder;
 	}
 
 
@@ -21,6 +31,22 @@ public class GweletSlicer extends RichVisualiserKermetaModel {
 
 	@Override
 	public void onClassDefinitionAdded(final ClassDefinition cl) {
-		System.out.println("Java cd added: " + cl.getName());
+		builder.getClassView(cl).setVisibility(IComponentView.Visibility.STANDARD);
+	}
+
+
+
+	@Override
+	public void onEnd() {
+		view.updateLayout();
+		view.update();
+	}
+
+
+
+	@Override
+	public void onStart() {
+		for(IEntityView ent : view.getEntities())
+			ent.setVisibility(IComponentView.Visibility.NONE);
 	}
 }

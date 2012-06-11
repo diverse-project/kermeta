@@ -26,6 +26,8 @@ public class ViewBuilder {
 
 	protected Map<ClassDefinition, ClassView> classMappings;
 
+	protected Map<ClassView, ClassDefinition> classMappingsInverted;
+
 	protected Map<String, InheritanceView> addedInheritances;
 
 
@@ -35,7 +37,18 @@ public class ViewBuilder {
 		this.presentation = presentation;
 		cdAdded = new HashMap<String, List<ClassDefinition>>();
 		classMappings = new HashMap<ClassDefinition, ClassView>();
+		classMappingsInverted = new HashMap<ClassView, ClassDefinition>();
 		addedInheritances = new HashMap<String, InheritanceView>();
+	}
+
+
+	public ClassView getClassView(final ClassDefinition cd) {
+		return classMappings.get(cd);
+	}
+
+
+	public ClassDefinition getClassDefinition(final ClassView cv) {
+		return classMappingsInverted.get(cv);
 	}
 
 
@@ -119,6 +132,7 @@ public class ViewBuilder {
 		}
 
 		classMappings.put(cd, cv);
+		classMappingsInverted.put(cv, cd);
 	}
 
 
