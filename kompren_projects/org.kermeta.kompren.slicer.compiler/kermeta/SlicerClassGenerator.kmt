@@ -90,19 +90,24 @@ class SlicerClassGenerator inherits Generator {
 	
 	
 	operation generateOnEndMethod() : String is do
-		if(slicerGenerator.slicerModel.onEnd.isVoid) then
-			result := ""
-		else
-			result := "\toperation onEnd() is do\n" + slicerGenerator.slicerModel.onEnd + "\n\tend\n"
+		result := "\toperation onEnd() is do\n"
+		
+		if(not slicerGenerator.slicerModel.onEnd.isVoid) then
+			result := result + slicerGenerator.slicerModel.onEnd +"\n"
 		end
+		
+		result := result + "\tend\n"
 	end
+
 	
 	operation generateOnStartMethod() : String is do
-		if(slicerGenerator.slicerModel.onStart.isVoid) then
-			result := ""
-		else
-			result := "\toperation onStart() is do\n" + slicerGenerator.slicerModel.onStart + "\n\tend\n"
+		result := "\toperation onStart() is do\n"
+		
+		if(not slicerGenerator.slicerModel.onStart.isVoid) then
+			result := result + slicerGenerator.slicerModel.onStart +"\n"
 		end
+		
+		result := result + "\tend\n"
 	end
 
 
@@ -162,9 +167,8 @@ class SlicerClassGenerator inherits Generator {
 			result := result + "\t\tself.model.feedOpposites()\n"
 		end
 
-		if(not slicerGenerator.slicerModel.onStart.isVoid) then
-			result := result + "\t\tonStart()\n"
-		end
+		result := result + "\t\tonStart()\n"
+		
 		slicerGenerator.slicerModel.inputClasses.each{clazz |
 			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
 					clazz.getVarNameClassifier() + ".visitToAddClasses(self"
@@ -205,10 +209,7 @@ class SlicerClassGenerator inherits Generator {
 			}
 		end
 
-		if(not slicerGenerator.slicerModel.onEnd.isVoid) then
-			result := result + "\t\tonEnd()\n"
-		end
-		result := result + "\tend\n"
+		result := result + "\t\tonEnd()\n\tend\n"
 	end
 
 
