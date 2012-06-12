@@ -1,5 +1,8 @@
 package org.kermeta.kompren.gwelet.actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
 import org.kermeta.kompren.gwelet.view.ClassView;
@@ -15,6 +18,8 @@ public class ShowHierarchy extends VisualisationAction {
 
 	protected boolean superTypes;
 
+	protected List<ClassView> classes;
+
 
 	public ShowHierarchy() {
 		super();
@@ -24,11 +29,17 @@ public class ShowHierarchy extends VisualisationAction {
 
 	@Override
 	protected void doVisualisation() {
+		if(classes==null) {
+			classes = new ArrayList<ClassView>();
+			for(Selectable sel : canvas.getSelection())
+				if(sel instanceof ClassView)
+					classes.add((ClassView) sel);
+		}
+
 		BasicEList<ClassDefinition> cds = new BasicEList<ClassDefinition>();
 
-		for(Selectable sel : canvas.getSelection())
-			if(sel instanceof ClassView)
-				cds.add(builder.getClassDefinition((ClassView)sel));
+		for(ClassView cl : classes)
+			cds.add(builder.getClassDefinition(cl));
 
 		slicer.initialise(cds, new BasicEList<ModelingUnit>(), superTypes);
 		slicer.launch();
