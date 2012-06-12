@@ -77,7 +77,7 @@ class SlicerClassGenerator inherits Generator {
 			generatedCode := generatedCode + "\treference model : " + slicerGenerator.rootClass.name + "\n\n"
 		end
 		
-		generatedCode := generatedCode + "\trattribute idPass : Integer\n\n"
+		generatedCode := generatedCode + "\tattribute idPass : Integer\n\n"
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
