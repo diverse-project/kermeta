@@ -20,8 +20,8 @@ class TestVisual {
 		stdio.writeln(mu.packages.at(3).nestedPackage.at(0).nestedPackage.at(0).name)
 		
 		
-		var slicer : VisualiserKermetaModel init VisualiserKermetaModel.new.initialise(
-				Bag<org::kermeta::language::structure::ClassDefinition>.new, requiredMU, true)
+	//	var slicer : VisualiserKermetaModel init VisualiserKermetaModel.new.initialise(
+	//			Bag<org::kermeta::language::structure::ClassDefinition>.new, requiredMU, true, true, true)
 		//slicer.launch()
 	end
 }

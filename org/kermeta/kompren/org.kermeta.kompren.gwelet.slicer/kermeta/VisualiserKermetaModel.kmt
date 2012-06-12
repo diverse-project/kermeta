@@ -6,6 +6,10 @@ using kermeta::io::StdIO => stdio
 class VisualiserKermetaModel {
 	attribute considersuperType : Boolean
 
+	attribute considerownedAttribute : Boolean
+
+	attribute considertype : Boolean
+
 	attribute idPass : Integer
 
 	reference requiredClassDefinitions : ClassDefinition[0..*]
@@ -16,7 +20,7 @@ class VisualiserKermetaModel {
 
 	reference addedClassDefinitions : Bag<ClassDefinition>
 
-	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], considersuperType : Boolean) : VisualiserKermetaModel is do
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], considersuperType : Boolean, considerownedAttribute : Boolean, considertype : Boolean) : VisualiserKermetaModel is do
 		result := self
 		self.addedPackages := Bag<Package>.new
 		self.addedClassDefinitions := Bag<ClassDefinition>.new
@@ -25,6 +29,8 @@ class VisualiserKermetaModel {
 		self.requiredModelingUnits.clear()
 		self.requiredModelingUnits.addAll(requiredModelingUnits)
 		self.considersuperType := considersuperType
+		self.considerownedAttribute := considerownedAttribute
+		self.considertype := considertype
 
 		if(idPass.isVoid) then idPass := 0
 		else idPass := idPass + 1 end

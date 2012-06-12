@@ -145,6 +145,8 @@ aspect class ClassDefinition {
 				theVisualiserKermetaModel.addedClassDefinitions.add(self)
 				self.sliced := true
 			end
+			self.visitedPass := true
+			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theVisualiserKermetaModel)} end
 		end
 	end
 	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
@@ -152,6 +154,26 @@ aspect class ClassDefinition {
 			super(theVisualiserKermetaModel)
 			self.visitedPass := true
 			self.visitedForRelations := true
+			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theVisualiserKermetaModel)} end
+		end
+	end
+}
+
+aspect class TypedElement inherits SlicerVisitor {
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			if(theVisualiserKermetaModel.considertype) then if(not self.type.isVoid) then self.type.visitToAddClasses(theVisualiserKermetaModel) end end
+		end
+	end
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+		if(not self.visitedPass) then
+			super(theVisualiserKermetaModel)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(theVisualiserKermetaModel.considertype) then if(not self.type.isVoid) then self.type.visitToAddRelations(theVisualiserKermetaModel) end end
 		end
 	end
 }
