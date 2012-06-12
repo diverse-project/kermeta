@@ -1,24 +1,12 @@
 package org.kermeta.kompren.gwelet.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.util.BasicEList;
-import org.kermeta.kompren.diagram.view.interfaces.Selectable;
 import org.kermeta.kompren.gwelet.view.ClassView;
-import org.kermeta.kompren.gwelet.view.ViewBuilder;
-import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 
-public class ShowHierarchy extends VisualisationAction {
-	protected GweletSlicer slicer;
-
-	protected ViewBuilder builder;
-
+public class ShowHierarchy extends SelectionBasedVisuAction {
 	protected boolean superTypes;
-
-	protected List<ClassView> classes;
 
 
 	public ShowHierarchy() {
@@ -29,19 +17,14 @@ public class ShowHierarchy extends VisualisationAction {
 
 	@Override
 	protected void doVisualisation() {
-		if(classes==null) {
-			classes = new ArrayList<ClassView>();
-			for(Selectable sel : canvas.getSelection())
-				if(sel instanceof ClassView)
-					classes.add((ClassView) sel);
-		}
+		super.doVisualisation();
 
-		BasicEList<ClassDefinition> cds = new BasicEList<ClassDefinition>();
+		final BasicEList<ClassDefinition> cds = new BasicEList<ClassDefinition>();
 
 		for(ClassView cl : classes)
 			cds.add(builder.getClassDefinition(cl));
 
-		slicer.initialise(cds, new BasicEList<ModelingUnit>(), superTypes);
+		slicer.initialise(cds, new BasicEList<ModelingUnit>(), superTypes, false, false);
 		slicer.launch();
 		canvas.update();
 	}
@@ -50,16 +33,6 @@ public class ShowHierarchy extends VisualisationAction {
 	@Override
 	public boolean canDo() {
 		return super.canDo() && !canvas.getSelection().isEmpty() && slicer!=null && builder!=null;
-	}
-
-
-	public void setSlicer(final GweletSlicer slicer) {
-		this.slicer = slicer;
-	}
-
-
-	public void setBuilder(final ViewBuilder builder) {
-		this.builder = builder;
 	}
 
 

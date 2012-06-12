@@ -2,6 +2,7 @@ package org.kermeta.kompren.gwelet.instruments;
 
 import javax.swing.ImageIcon;
 
+import org.kermeta.kompren.gwelet.actions.Prune;
 import org.kermeta.kompren.gwelet.actions.ShowHierarchy;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
@@ -46,6 +47,7 @@ public class Visualiser extends WidgetInstrument {
 	protected void initialiseLinks() {
 		try {
 			addLink(new Button2ShowHierarchy(this));
+			addLink(new Button2Prune(this));
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -82,6 +84,25 @@ public class Visualiser extends WidgetInstrument {
 
 	public MButton getFlat() {
 		return flat;
+	}
+
+
+	private class Button2Prune extends Link<Prune, ButtonPressed, Visualiser> {
+		public Button2Prune(final Visualiser ins) throws InstantiationException, IllegalAccessException {
+			super(ins, false, Prune.class, ButtonPressed.class);
+		}
+
+		@Override
+		public void initAction() {
+			action.setModelView(instrument.frame.getCanvas());
+			action.setBuilder(instrument.frame.getViewBuilder());
+			action.setSlicer(instrument.slicer);
+		}
+
+		@Override
+		public boolean isConditionRespected() {
+			return interaction.getButton()==instrument.pruning;
+		}
 	}
 
 
