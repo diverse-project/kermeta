@@ -8,11 +8,14 @@ class SlicerVisitor {
 	attribute visitedForRelations : Boolean
 
 	attribute sliced : Boolean
+	
+	attribute idPass : Integer
 
-	operation initialiseAttributes() is do
+	operation initialiseAttributes(pass : Integer) is do
 		self.visitedPass := false
 		self.sliced := false
 		self.visitedForRelations := false
+		self.idPass := pass
 	end
 
 	operation visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
@@ -22,18 +25,14 @@ class SlicerVisitor {
 	operation visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
 	end
 
-	operation checkInitialisation() is do
-		if(self.visitedPass.isVoid) then initialiseAttributes() end
-	end
-	operation checkCanReallyBeAdded() : Boolean is do
-		self.visitedPass := true
-		result := true
+	operation checkInitialisation(pass : Integer) is do
+		if(self.visitedPass.isVoid or self.idPass.isVoid.orElse{b | self.idPass!=pass}) then initialiseAttributes(pass) end
 	end
 }
 
 aspect class Package {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		checkInitialisation()
+		checkInitialisation(theVisualiserKermetaModel.idPass)
 		if(not self.visitedPass) then
 			super(theVisualiserKermetaModel)
 			if(not self.sliced) then
@@ -56,7 +55,7 @@ aspect class Package {
 
 aspect class ModelingUnit {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		checkInitialisation()
+		checkInitialisation(theVisualiserKermetaModel.idPass)
 		if(not self.visitedPass) then
 			super(theVisualiserKermetaModel)
 			self.visitedPass := true
@@ -75,7 +74,7 @@ aspect class ModelingUnit {
 
 aspect class TypeDefinitionContainer inherits SlicerVisitor {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		checkInitialisation()
+		checkInitialisation(theVisualiserKermetaModel.idPass)
 		if(not self.visitedPass) then
 			super(theVisualiserKermetaModel)
 			self.visitedPass := true
@@ -94,7 +93,7 @@ aspect class TypeDefinitionContainer inherits SlicerVisitor {
 
 aspect class TypeDefinition inherits SlicerVisitor {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		checkInitialisation()
+		checkInitialisation(theVisualiserKermetaModel.idPass)
 		if(not self.visitedPass) then
 			super(theVisualiserKermetaModel)
 			self.visitedPass := true
@@ -116,7 +115,7 @@ aspect class Type inherits SlicerVisitor {
 
 aspect class ParameterizedType {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		checkInitialisation()
+		checkInitialisation(theVisualiserKermetaModel.idPass)
 		if(not self.visitedPass) then
 			super(theVisualiserKermetaModel)
 			self.visitedPass := true
@@ -135,7 +134,7 @@ aspect class ParameterizedType {
 
 aspect class ClassDefinition {
 	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		checkInitialisation()
+		checkInitialisation(theVisualiserKermetaModel.idPass)
 		if(not self.visitedPass) then
 			super(theVisualiserKermetaModel)
 			if(not self.sliced) then

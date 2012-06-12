@@ -13,6 +13,9 @@ class VisualiserKermetaModel {
 	reference addedClassDefinitions : Bag<ClassDefinition>
 	
 	attribute considersuperType : Boolean
+	
+	attribute idPass : Integer
+	
 
 	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], considersuperType : Boolean) : VisualiserKermetaModel is do
 		result := self
@@ -23,6 +26,12 @@ class VisualiserKermetaModel {
 		self.requiredModelingUnits.clear()
 		self.requiredModelingUnits.addAll(requiredModelingUnits)
 		self.considersuperType := considersuperType
+		
+		if(idPass.isVoid) then
+			idPass := 0
+		else
+			idPass := idPass + 1
+		end
 	end
 
 	operation launch() is do
