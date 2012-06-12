@@ -33,9 +33,6 @@ public abstract class VisualisationAction extends ModelViewAction implements Und
 		xScrollbarPos = canvas.getScrollpane().getHorizontalScrollBar().getValue();
 		yScrollbarPos = canvas.getScrollpane().getVerticalScrollBar().getValue();
 
-		System.out.println("111>>" + canvas.getScrollpane().getHorizontalScrollBar().isVisible() + " " + xScrollbarPos + " " +
-				canvas.getScrollpane().getHorizontalScrollBar().getValue());
-
 		doVisualisation();
 		done();
 	}

@@ -69,7 +69,7 @@ public class GweletFrame extends UI {
 		hand = new Hand(canvas);
 		visualiserManager = new VisualiserManager(composer, layeredPanel, canvas);
 		visualiser = new Visualiser(composer);
-		reiniter = new ViewReiniter(composer);
+		reiniter = new ViewReiniter(canvas, composer);
 
 		MappingRegistry.REGISTRY.addMapping(new Selection2VisualiserMapping(canvas.getSelection(), visualiser));
 
