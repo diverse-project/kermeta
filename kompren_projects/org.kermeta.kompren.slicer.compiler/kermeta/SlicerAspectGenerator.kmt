@@ -481,7 +481,7 @@ class SlicerAspectGenerator inherits Generator {
 				"attribute visitedForRelations : Boolean\n\n\tattribute sliced : Boolean\n\n\t" +
 				"attribute idPass : Integer\n\n\t" +
 				"operation initialiseAttributes(pass : Integer) is do\n\t\tself.visitedPass := false\n\t\t" +
-				"self.sliced := false\n\t\tself.visitedForRelations := false\n\tself.idPass := pass\n\tend\n\n\t" +
+				"self.sliced := false\n\t\tself.visitedForRelations := false\n\t\tself.idPass := pass\n\tend\n\n\t" +
 				"operation visitToAddClasses(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 		if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", currentRadius : Integer" end
 		result := result + ") is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
