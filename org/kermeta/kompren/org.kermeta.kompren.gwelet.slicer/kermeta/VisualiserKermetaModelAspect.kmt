@@ -8,7 +8,7 @@ class SlicerVisitor {
 	attribute visitedForRelations : Boolean
 
 	attribute sliced : Boolean
-	
+
 	attribute idPass : Integer
 
 	operation initialiseAttributes(pass : Integer) is do
@@ -27,6 +27,10 @@ class SlicerVisitor {
 
 	operation checkInitialisation(pass : Integer) is do
 		if(self.visitedPass.isVoid or self.idPass.isVoid.orElse{b | self.idPass!=pass}) then initialiseAttributes(pass) end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
 	end
 }
 

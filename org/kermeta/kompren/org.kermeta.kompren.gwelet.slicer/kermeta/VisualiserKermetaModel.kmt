@@ -4,6 +4,10 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::io::StdIO => stdio
 class VisualiserKermetaModel {
+	attribute considersuperType : Boolean
+
+	rattribute idPass : Integer
+
 	reference requiredClassDefinitions : ClassDefinition[0..*]
 
 	reference requiredModelingUnits : ModelingUnit[0..*]
@@ -11,11 +15,6 @@ class VisualiserKermetaModel {
 	reference addedPackages : Bag<Package>
 
 	reference addedClassDefinitions : Bag<ClassDefinition>
-	
-	attribute considersuperType : Boolean
-	
-	attribute idPass : Integer
-	
 
 	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], considersuperType : Boolean) : VisualiserKermetaModel is do
 		result := self
@@ -26,12 +25,9 @@ class VisualiserKermetaModel {
 		self.requiredModelingUnits.clear()
 		self.requiredModelingUnits.addAll(requiredModelingUnits)
 		self.considersuperType := considersuperType
-		
-		if(idPass.isVoid) then
-			idPass := 0
-		else
-			idPass := idPass + 1
-		end
+
+		if(idPass.isVoid) then idPass := 0
+		else idPass := idPass + 1 end
 	end
 
 	operation launch() is do
@@ -44,13 +40,6 @@ class VisualiserKermetaModel {
 		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
 		onEnd()
 	end
-	
-	operation onStart() is do
-	end
-
-	
-	operation onEnd() is do
-	end
 
 	operation onPackageAdded(pkg : Package) is do
 
@@ -61,6 +50,10 @@ class VisualiserKermetaModel {
 
 		stdio.writeln("clazz: " + cl.name)
 	
+	end
+	operation onEnd() is do
+	end
+	operation onStart() is do
 	end
 
 }
