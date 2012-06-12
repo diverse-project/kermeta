@@ -20,6 +20,8 @@ import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
+import org.malai.mapping.ActiveArrayList;
+import org.malai.mapping.IActiveList;
 import org.malai.picking.Pickable;
 import org.malai.picking.Picker;
 import org.malai.properties.Zoomable;
@@ -38,13 +40,13 @@ public class ModelView extends MPanel implements IModelView {
 	protected double zoom;
 
 	/** The entities of the diagram. */
-	protected List<IEntityView> entities;
+	protected IActiveList<IEntityView> entities;
 
 	/** The relations of the diagram. */
-	protected List<IRelationView> relations;
+	protected IActiveList<IRelationView> relations;
 
 	/** The selected objects. */
-	protected List<Selectable> selection;
+	protected IActiveList<Selectable> selection;
 
 	/** The name of the font to use. */
 	protected String fontName;
@@ -59,14 +61,14 @@ public class ModelView extends MPanel implements IModelView {
 	public ModelView(final boolean withScrollPane) {
 		super(withScrollPane, true);
 		zoom 			= 1.;
-		entities 		= new ArrayList<IEntityView>();
-		relations		= new ArrayList<IRelationView>();
-		selection		= new ArrayList<Selectable>();
+		entities 		= new ActiveArrayList<IEntityView>();
+		relations		= new ActiveArrayList<IRelationView>();
+		selection		= new ActiveArrayList<Selectable>();
 	}
 
 
 	@Override
-	public List<IEntityView> getEntities() {
+	public IActiveList<IEntityView> getEntities() {
 		return entities;
 	}
 
@@ -193,7 +195,7 @@ public class ModelView extends MPanel implements IModelView {
 
 
 	@Override
-	public List<IRelationView> getRelations() {
+	public IActiveList<IRelationView> getRelations() {
 		return relations;
 	}
 
@@ -364,7 +366,7 @@ public class ModelView extends MPanel implements IModelView {
 
 
 	@Override
-	public List<Selectable> getSelection() {
+	public IActiveList<Selectable> getSelection() {
 		return selection;
 	}
 

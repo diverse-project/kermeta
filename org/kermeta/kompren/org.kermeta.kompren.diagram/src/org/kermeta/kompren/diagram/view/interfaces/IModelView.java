@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.util.List;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
+import org.malai.mapping.IActiveList;
 import org.malai.presentation.ConcretePresentation;
 import org.malai.properties.Zoomable;
 import org.malai.widget.Scrollable;
@@ -23,7 +24,7 @@ public interface IModelView extends Scrollable, Zoomable, ConcretePresentation {
 
 	void removeFromSelection(final Selectable object);
 
-	List<Selectable> getSelection();
+	IActiveList<Selectable> getSelection();
 
 	void addToSelection(final List<IEntityView> newSelection);
 
@@ -54,12 +55,12 @@ public interface IModelView extends Scrollable, Zoomable, ConcretePresentation {
 	/**
 	 * @return The entities of the diagram.
 	 */
-	List<IEntityView> getEntities();
+	IActiveList<IEntityView> getEntities();
 
 	/**
 	 * @return The relations of the diagram.
 	 */
-	List<IRelationView> getRelations();
+	IActiveList<IRelationView> getRelations();
 
 	/**
 	 * @return The name of the font.
