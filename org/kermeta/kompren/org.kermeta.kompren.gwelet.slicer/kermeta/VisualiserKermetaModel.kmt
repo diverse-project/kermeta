@@ -6,7 +6,7 @@ using kermeta::io::StdIO => stdio
 class VisualiserKermetaModel {
 	attribute considersuperType : Boolean
 
-	rattribute idPass : Integer
+	attribute idPass : Integer
 
 	reference requiredClassDefinitions : ClassDefinition[0..*]
 
