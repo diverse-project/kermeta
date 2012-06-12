@@ -74,8 +74,10 @@ class SlicerClassGenerator inherits Generator {
 		
 		// This attribute must useful only if there are opposites to create.
 		if(slicerGenerator.hasOpposite) then
-			generatedCode := generatedCode +"\treference model : " + slicerGenerator.rootClass.name + "\n\n"
+			generatedCode := generatedCode + "\treference model : " + slicerGenerator.rootClass.name + "\n\n"
 		end
+		
+		generatedCode := generatedCode + "\trattribute idPass : Integer\n\n"
 
 		generatedCode := generatedCode + generateRequiredAttributes() + generateAddedAttributes() + 
 						 generateIntialiseOperation() + generateLaunchOperation() + "\n" +
@@ -282,7 +284,8 @@ class SlicerClassGenerator inherits Generator {
 				result := result + "\t\tself.consider" + rel.domain.name + " := consider" + rel.domain.name + "\n"
 			end
 		}
-
+		
+		result := result + "\n\t\tif(idPass.isVoid) then idPass := 0\n\t\t\telse idPass := idPass + 1 end\n"
 		result := result + "\tend\n\n"
 	end
 

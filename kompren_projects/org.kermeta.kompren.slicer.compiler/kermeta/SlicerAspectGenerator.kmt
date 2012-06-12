@@ -247,7 +247,7 @@ class SlicerAspectGenerator inherits Generator {
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") is do\n\t\tcheckInitialisation()\n\t\tif(not self.visitedPass" + paramCode
+			result := result + ") is do\n\t\tcheckInitialisation(theVisualiserKermetaModel.idPass)\n\t\tif(not self.visitedPass" + paramCode
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=(" + prunerVarName + ".radius+1))"
 			end
@@ -479,15 +479,17 @@ class SlicerAspectGenerator inherits Generator {
 		
 		result := result + "\tattribute visitedPass : Boolean\n\n\t" + 
 				"attribute visitedForRelations : Boolean\n\n\tattribute sliced : Boolean\n\n\t" +
-				"operation initialiseAttributes() is do\n\t\tself.visitedPass := false\n\t\t" +
-				"self.sliced := false\n\t\tself.visitedForRelations := false\n\tend\n\n\t" +
+				"attribute idPass : Integer\n\n\t" +
+				"operation initialiseAttributes(pass : Integer) is do\n\t\tself.visitedPass := false\n\t\t" +
+				"self.sliced := false\n\t\tself.visitedForRelations := false\n\tself.idPass := pass\n\tend\n\n\t" +
 				"operation visitToAddClasses(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 		if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", currentRadius : Integer" end
 		result := result + ") is do\n\t\tself.visitedPass := true\n\tend\n\n\t" +
 				"operation visitToAddRelations(" + prunerVarName + " : " + slicerGenerator.slicerModel.name
 		if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", currentRadius : Integer" end
-		result := result + ") is do\n\tend\n\n\toperation checkInitialisation() is do\n\t\t" +
-				"if(self.visitedPass.isVoid) then initialiseAttributes() end\n\tend\n\toperation checkCanReallyBeAdded() : Boolean is do\n" +
+		result := result + ") is do\n\tend\n\n\toperation checkInitialisation(pass : Integer) is do\n\t\t" +
+				"if(self.visitedPass.isVoid or self.idPass.isVoid.orElse{b | self.idPass!=pass}) then initialiseAttributes(pass) end\n\t"+
+				"end\n\toperation checkCanReallyBeAdded() : Boolean is do\n" +
 				"\t\tself.visitedPass := true\n\t\tresult := true\n\tend\n"
 				
 		if(slicerGenerator.slicerModel.strict) then
