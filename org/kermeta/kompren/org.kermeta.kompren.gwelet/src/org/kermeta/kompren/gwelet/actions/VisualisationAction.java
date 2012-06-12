@@ -3,6 +3,8 @@ package org.kermeta.kompren.gwelet.actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import org.kermeta.kompren.diagram.action.ModelViewAction;
 import org.kermeta.kompren.diagram.view.interfaces.IComponentView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
@@ -31,6 +33,9 @@ public abstract class VisualisationAction extends ModelViewAction implements Und
 		xScrollbarPos = canvas.getScrollpane().getHorizontalScrollBar().getValue();
 		yScrollbarPos = canvas.getScrollpane().getVerticalScrollBar().getValue();
 
+		System.out.println("111>>" + canvas.getScrollpane().getHorizontalScrollBar().isVisible() + " " + xScrollbarPos + " " +
+				canvas.getScrollpane().getHorizontalScrollBar().getValue());
+
 		doVisualisation();
 		done();
 	}
@@ -55,8 +60,15 @@ public abstract class VisualisationAction extends ModelViewAction implements Und
 		canvas.updateLayout();
 		canvas.update();
 
-		canvas.getScrollpane().getHorizontalScrollBar().setValue(xScrollbarPos);
-		canvas.getScrollpane().getVerticalScrollBar().setValue(yScrollbarPos);
+        Runnable moveScrollbars = new Runnable() {
+            @Override
+			public void run() {
+            	getCanvas().getScrollpane().getHorizontalScrollBar().setValue(xScrollbarPos);
+            	getCanvas().getScrollpane().getVerticalScrollBar().setValue(yScrollbarPos);
+            }
+        };
+
+        SwingUtilities.invokeLater(moveScrollbars);
 	}
 
 

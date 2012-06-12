@@ -27,4 +27,9 @@ public abstract class ModelViewAction extends Action {
 	public void setModelView(final IModelView view) {
 		canvas = view;
 	}
+
+
+	public IModelView getCanvas() {
+		return canvas;
+	}
 }
