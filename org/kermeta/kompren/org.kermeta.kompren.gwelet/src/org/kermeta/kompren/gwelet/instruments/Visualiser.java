@@ -19,8 +19,6 @@ public class Visualiser extends WidgetInstrument {
 
 	protected MButton pruning;
 
-	protected MButton reinit;
-
 	protected MButton flat;
 
 	protected GweletFrame frame;
@@ -42,7 +40,6 @@ public class Visualiser extends WidgetInstrument {
 		pruning 		= new MButton(new ImageIcon("resources/prune.png"));
 		flat 			= new MButton(new ImageIcon("resources/flat.png"));
 		lowerClasses 	= new MButton("subCl");
-		reinit 			= new MButton("Reinit");
 	}
 
 	@Override
@@ -54,6 +51,17 @@ public class Visualiser extends WidgetInstrument {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public void setActivated(final boolean activated) {
+		super.setActivated(activated);
+
+		superClasses.setEnabled(activated);
+		lowerClasses.setEnabled(activated);
+		pruning.setEnabled(activated);
+		flat.setEnabled(activated);
 	}
 
 
@@ -69,11 +77,6 @@ public class Visualiser extends WidgetInstrument {
 
 	public MButton getPruning() {
 		return pruning;
-	}
-
-
-	public MButton getReinit() {
-		return reinit;
 	}
 
 

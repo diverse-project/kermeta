@@ -18,7 +18,7 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 	public void compose(final MProgressBar progressBar) {
 		MetamodelView mmv = widget.getCanvas();
 		MPieMenu menu = widget.visualiserManager.getMenu();
-		menu.add(widget.visualiser.getReinit());
+		menu.add(widget.reiniter.getReinit());
 		menu.add(widget.visualiser.getSuperClasses());
 		menu.add(widget.visualiser.getLowerClasses());
 		menu.add(widget.visualiser.getPruning());
@@ -35,6 +35,8 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		widget.visualiserManager.setActivated(true);
 		widget.visualiser.addEventable(widget.visualiserManager.getMenu());
 		widget.visualiser.setActivated(true);
+		widget.reiniter.addEventable(widget.visualiserManager.getMenu());
+		widget.reiniter.setActivated(true);
 		widget.undoredoer.addEventable(widget.visualiserManager.getMenu());
 		widget.zoomer.addEventable(mmv);
 		widget.zoomer.setActivated(true);

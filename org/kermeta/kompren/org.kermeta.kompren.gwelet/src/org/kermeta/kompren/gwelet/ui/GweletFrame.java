@@ -4,8 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import org.kermeta.kompren.diagram.instrument.Hand;
+import org.kermeta.kompren.gwelet.instruments.ViewReiniter;
 import org.kermeta.kompren.gwelet.instruments.Visualiser;
 import org.kermeta.kompren.gwelet.instruments.VisualiserManager;
+import org.kermeta.kompren.gwelet.mapping.Selection2VisualiserMapping;
 import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
@@ -14,6 +16,7 @@ import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
 import org.malai.instrument.library.UndoRedoManager;
+import org.malai.mapping.MappingRegistry;
 import org.malai.presentation.Presentation;
 import org.malai.ui.UI;
 import org.malai.ui.UIManager;
@@ -40,6 +43,8 @@ public class GweletFrame extends UI {
 
 	protected ViewBuilder viewBuilder;
 
+	protected ViewReiniter reiniter;
+
 	protected UndoRedoManager undoredoer;
 
 
@@ -64,13 +69,17 @@ public class GweletFrame extends UI {
 		hand = new Hand(canvas);
 		visualiserManager = new VisualiserManager(composer, layeredPanel, canvas);
 		visualiser = new Visualiser(composer);
+		reiniter = new ViewReiniter(composer);
+
+		MappingRegistry.REGISTRY.addMapping(new Selection2VisualiserMapping(canvas.getSelection(), visualiser));
+
 		UIManager.INSTANCE.registerUI(this);
 	}
 
 
 	@Override
 	public Instrument[] getInstruments() {
-		return new Instrument[]{scroller, hand, zoomer, visualiserManager, visualiser, undoredoer};
+		return new Instrument[]{scroller, hand, zoomer, visualiserManager, visualiser, undoredoer, reiniter};
 	}
 
 
