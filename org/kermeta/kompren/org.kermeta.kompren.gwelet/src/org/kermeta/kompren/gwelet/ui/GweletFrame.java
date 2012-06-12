@@ -25,10 +25,6 @@ import org.malai.widget.MLayeredPane;
 public class GweletFrame extends UI {
 	private static final long serialVersionUID = 1L;
 
-//	protected Model model;
-
-//	protected MetamodelView canvas;
-
 	protected JFrame proxiedFrame;
 
 	protected Scroller scroller;
@@ -99,15 +95,6 @@ public class GweletFrame extends UI {
 		MetamodelView canvas = new MetamodelView(true);
 
 		presentations.add(new Presentation<Model, MetamodelView>(model, canvas));
-
-//		GweletSlicer slicer = new GweletSlicer();
-//		EList<ModelingUnit> listMu = new BasicEList<ModelingUnit>();
-//		EList<ClassDefinition> listCd = new BasicEList<ClassDefinition>();
-//		System.out.println(mu.getPackages().get(2).getNestedPackage().get(0).getNestedPackage().get(0).getNestedPackage().get(1).getOwnedTypeDefinition().get(21).getName());
-//		ClassDefinition cd = (ClassDefinition) mu.getPackages().get(2).getNestedPackage().get(0).getNestedPackage().get(0).getNestedPackage().get(1).getOwnedTypeDefinition().get(21);
-//		listCd.add(cd);
-//		slicer.initialise(listCd, listMu, true);
-//		slicer.launch();
 
 //		canvas = createEcoreClassDiagram();
 	}

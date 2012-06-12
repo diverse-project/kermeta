@@ -33,7 +33,7 @@ public class VisualiserManager extends WidgetInstrument {
 
 	@Override
 	protected void initialiseWidgets() {
-		menu = new MPieMenu();
+		menu = new MPieMenu(mmView);
 		layeredPanel.add(menu, JLayeredPane.PALETTE_LAYER);
 		menu.setVisible(false);
 	}

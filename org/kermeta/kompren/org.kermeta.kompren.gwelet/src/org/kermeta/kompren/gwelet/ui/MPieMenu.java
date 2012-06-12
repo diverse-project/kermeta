@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
+import javax.swing.JComponent;
 import javax.swing.border.Border;
 
 import org.malai.widget.MPanel;
@@ -26,9 +27,13 @@ public class MPieMenu extends MPanel {
 
 	protected int thicknessBorder;
 
+	protected JComponent objToRequestFocus;
 
-	public MPieMenu() {
+
+	public MPieMenu(final JComponent objToFocus) {
 		super(false, true);
+
+		objToRequestFocus = objToFocus;
 		diameter = 200;
 		thicknessBorder = 1;
 
@@ -67,6 +72,8 @@ public class MPieMenu extends MPanel {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 				MPieMenu.this.setVisible(false);
+				if(objToRequestFocus!=null)
+					objToRequestFocus.requestFocusInWindow();
 			}
 		});
 	}
