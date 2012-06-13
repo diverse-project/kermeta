@@ -3,6 +3,9 @@ package org.kermeta.kompren.gwelet.actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+
 import org.kermeta.kompren.gwelet.ui.TextFieldCompletion;
 import org.malai.action.Action;
 
@@ -39,6 +42,10 @@ public class SetCompletionItems extends Action {
 
 			textField.setCompletionItems(items);
 			textField.setVisibleCompletionMenu(true);
+	    	try {
+	    		MenuSelectionManager.defaultManager().setSelectedPath(
+	    				new MenuElement[]{textField.getComponentPopupMenu(), textField.getComponentPopupMenu().getSubElements()[0]});
+	        }catch(Exception e) { /* */ }
 		}
 		done();
 	}
