@@ -470,6 +470,8 @@ public class ModelView extends MPanel implements IModelView {
 
 			if(barVert.isVisible())
 				barVert.setValue((int)(barVert.getValue()+dy));
+
+			update();
 		}
 	}
 
