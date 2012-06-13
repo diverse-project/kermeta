@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import org.kermeta.kompren.diagram.instrument.Hand;
+import org.kermeta.kompren.gwelet.instruments.Completioner;
 import org.kermeta.kompren.gwelet.instruments.ViewReiniter;
 import org.kermeta.kompren.gwelet.instruments.Visualiser;
 import org.kermeta.kompren.gwelet.instruments.VisualiserManager;
@@ -21,6 +22,7 @@ import org.malai.presentation.Presentation;
 import org.malai.ui.UI;
 import org.malai.ui.UIManager;
 import org.malai.widget.MLayeredPane;
+import org.malai.widget.MToolBar;
 
 public class GweletFrame extends UI {
 	private static final long serialVersionUID = 1L;
@@ -43,6 +45,10 @@ public class GweletFrame extends UI {
 
 	protected UndoRedoManager undoredoer;
 
+	protected Completioner completioner;
+
+	protected MToolBar toolbar;
+
 
 	/** The layered panel used to display widgets upon shapes (e.g. text setters). */
 	protected MLayeredPane layeredPanel;
@@ -52,6 +58,7 @@ public class GweletFrame extends UI {
 		super();
 
 		MetamodelView canvas = getCanvas();
+		toolbar = new MToolBar(true);
 		layeredPanel = new MLayeredPane(false, false);
 		layeredPanel.add(canvas.getScrollpane(), JLayeredPane.DEFAULT_LAYER);
 		layeredPanel.addComponentsToResize(canvas.getScrollpane());
@@ -66,6 +73,7 @@ public class GweletFrame extends UI {
 		visualiserManager = new VisualiserManager(composer, layeredPanel, canvas);
 		visualiser = new Visualiser(composer);
 		reiniter = new ViewReiniter(canvas, composer);
+		completioner = new Completioner(composer);
 
 		MappingRegistry.REGISTRY.addMapping(new Selection2VisualiserMapping(canvas.getSelection(), visualiser));
 
@@ -75,7 +83,7 @@ public class GweletFrame extends UI {
 
 	@Override
 	public Instrument[] getInstruments() {
-		return new Instrument[]{scroller, hand, zoomer, visualiserManager, visualiser, undoredoer, reiniter};
+		return new Instrument[]{scroller, hand, zoomer, visualiserManager, visualiser, undoredoer, reiniter, completioner};
 	}
 
 
@@ -163,5 +171,11 @@ public class GweletFrame extends UI {
 
 	public MLayeredPane getLayeredPanel() {
 		return layeredPanel;
+	}
+
+
+	public void open(final String path) {
+		viewBuilder.build(path);
+		completioner.setDatabase(viewBuilder.getClassDefinitionAdded());
 	}
 }

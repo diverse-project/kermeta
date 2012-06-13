@@ -1,5 +1,8 @@
 package org.kermeta.kompren.gwelet.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Frame;
 
 import org.kermeta.kompren.gwelet.view.MetamodelView;
@@ -26,6 +29,8 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		menu.add(widget.undoredoer.getRedoB());
 		menu.add(widget.undoredoer.getUndoB());
 
+		widget.completioner.setActivated(true);
+		widget.completioner.addEventable(widget.toolbar);
 		widget.undoredoer.setActivated(true);
 		widget.scroller.addEventable(mmv);
 		widget.scroller.setActivated(true);
@@ -41,7 +46,17 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		widget.zoomer.addEventable(mmv);
 		widget.zoomer.setActivated(true);
 
-		widget.getContentPane().add(widget.getLayeredPanel());
+		TextFieldCompletion field = widget.completioner.getTextField();
+		Dimension dim = new Dimension(250, 30);
+		field.setPreferredSize(dim);
+		field.setMaximumSize(dim);
+		widget.toolbar.add(field);
+		widget.setMinimumSize(new Dimension(800, 600));
+
+		Container pane = widget.getContentPane();
+		pane.setLayout(new BorderLayout());
+		pane.add(widget.toolbar, BorderLayout.NORTH);
+		pane.add(widget.getLayeredPanel(), BorderLayout.CENTER);
 		widget.pack();
 		widget.setExtendedState(Frame.MAXIMIZED_BOTH);
 		widget.getCanvas().requestFocusInWindow();
