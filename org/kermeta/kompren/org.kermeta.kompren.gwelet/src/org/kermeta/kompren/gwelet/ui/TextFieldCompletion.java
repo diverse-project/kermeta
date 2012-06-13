@@ -1,6 +1,9 @@
 package org.kermeta.kompren.gwelet.ui;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
+
+import javax.swing.KeyStroke;
 
 import org.malai.widget.MMenuItem;
 import org.malai.widget.MPopupMenu;
@@ -19,6 +22,9 @@ public class TextFieldCompletion extends MTextField {
 		setComponentPopupMenu(popupMenu);
 		popupMenu.setInvoker(this);
 		popupMenu.setFocusable(false);
+
+		getInputMap().remove(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+		getActionMap().remove(getActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0)));
 	}
 
 

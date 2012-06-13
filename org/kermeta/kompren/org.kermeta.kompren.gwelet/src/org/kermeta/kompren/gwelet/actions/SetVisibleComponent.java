@@ -26,6 +26,7 @@ public class SetVisibleComponent extends SetWidgetPosition {
 		component.repaint();
 		if(visible)
 			super.doActionBody();
+		done();
 	}
 
 

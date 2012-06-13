@@ -40,6 +40,7 @@ public class SetCompletionItems extends Action {
 			textField.setCompletionItems(items);
 			textField.setVisibleCompletionMenu(true);
 		}
+		done();
 	}
 
 

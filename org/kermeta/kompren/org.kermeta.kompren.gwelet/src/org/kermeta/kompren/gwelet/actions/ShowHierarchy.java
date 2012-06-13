@@ -29,6 +29,7 @@ public class ShowHierarchy extends SelectionBasedVisuAction {
 		slicer.initialise(cds, new BasicEList<ModelingUnit>(), superTypes, false, false);
 		slicer.launch();
 		canvas.update();
+		done();
 	}
 
 

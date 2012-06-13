@@ -52,6 +52,7 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		field.setPreferredSize(dim);
 		field.setMaximumSize(dim);
 		widget.toolbar.add(field);
+		field.removeActionListener(widget.toolbar.getEventManager());
 		widget.setMinimumSize(new Dimension(800, 600));
 
 		Container pane = widget.getContentPane();

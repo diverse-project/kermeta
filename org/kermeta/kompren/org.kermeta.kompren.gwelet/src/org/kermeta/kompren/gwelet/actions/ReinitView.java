@@ -19,5 +19,6 @@ public class ReinitView extends VisualisationAction {
 			ent.setVisibility(IComponentView.Visibility.STANDARD);
 		canvas.updateLayout();
 		canvas.update();
+		done();
 	}
 }

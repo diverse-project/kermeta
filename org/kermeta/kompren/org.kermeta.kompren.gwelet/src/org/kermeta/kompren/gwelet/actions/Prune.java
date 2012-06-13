@@ -38,6 +38,7 @@ public class Prune extends SelectionBasedVisuAction {
 		slicer.initialise(cds, new BasicEList<ModelingUnit>(), false, true, true);
 		slicer.launch();
 		canvas.update();
+		done();
 	}
 
 
