@@ -134,8 +134,8 @@ public class Hand extends Instrument {
 
 		@Override
 		public void updateAction() {
-			Point2D startPt	= canvas.getZoomedPoint(interaction.getStartPt());
-			Point2D endPt	= canvas.getZoomedPoint(interaction.getEndPt());
+			final Point2D startPt	= interaction.getStartPt();
+			final Point2D endPt		= interaction.getEndPt();
 
 			action.setPx((int)(startPt.getX() - endPt.getX()));
 			action.setPy((int)(startPt.getY() - endPt.getY()));
