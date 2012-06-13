@@ -44,6 +44,7 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		widget.reiniter.setActivated(true);
 		widget.undoredoer.addEventable(widget.visualiserManager.getMenu());
 		widget.zoomer.addEventable(mmv);
+		widget.zoomer.addEventable(widget.toolbar);
 		widget.zoomer.setActivated(true);
 
 		TextFieldCompletion field = widget.completioner.getTextField();
