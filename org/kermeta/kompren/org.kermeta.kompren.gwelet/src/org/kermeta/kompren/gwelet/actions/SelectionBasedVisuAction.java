@@ -5,15 +5,12 @@ import java.util.List;
 
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
 import org.kermeta.kompren.gwelet.view.ClassView;
-import org.kermeta.kompren.gwelet.view.ViewBuilder;
 import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
 
 public abstract class SelectionBasedVisuAction extends VisualisationAction {
 	protected List<ClassView> classes;
 
 	protected GweletSlicer slicer;
-
-	protected ViewBuilder builder;
 
 
 	public SelectionBasedVisuAction() {
@@ -37,7 +34,8 @@ public abstract class SelectionBasedVisuAction extends VisualisationAction {
 	}
 
 
-	public void setBuilder(final ViewBuilder builder) {
-		this.builder = builder;
+	@Override
+	public boolean canDo() {
+		return super.canDo() && slicer!=null;
 	}
 }

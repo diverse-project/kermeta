@@ -19,7 +19,9 @@ import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeDefinition;
 import org.malai.presentation.Presentation;
 
-public class ViewBuilder {
+public final class ModelViewMapper {
+	private static ModelViewMapper instance;
+
 	protected Presentation<Model, MetamodelView> presentation;
 
 	protected Map<String, List<ClassDefinition>> cdAdded;
@@ -31,7 +33,20 @@ public class ViewBuilder {
 	protected Map<String, InheritanceView> addedInheritances;
 
 
-	public ViewBuilder(final Presentation<Model, MetamodelView> presentation) {
+	public static ModelViewMapper getMapper() {
+		return instance;
+	}
+
+
+	public static void initMapper(final Presentation<Model, MetamodelView> presentation) {
+		if(instance!=null)
+			instance.flush();
+
+		instance = new ModelViewMapper(presentation);
+	}
+
+
+	private ModelViewMapper(final Presentation<Model, MetamodelView> presentation) {
 		super();
 
 		this.presentation = presentation;
@@ -40,6 +55,15 @@ public class ViewBuilder {
 		classMappingsInverted = new HashMap<ClassView, ClassDefinition>();
 		addedInheritances = new HashMap<String, InheritanceView>();
 	}
+
+
+	private void flush() {
+		cdAdded.clear();
+		classMappings.clear();
+		classMappingsInverted.clear();
+		addedInheritances.clear();
+	}
+
 
 
 	public ClassView getClassView(final ClassDefinition cd) {
@@ -78,7 +102,19 @@ public class ViewBuilder {
 	}
 
 
-	protected void createRelationsView(final MetamodelView view) {
+	public ClassView getClassView(final String qualifedName) {
+		List<ClassDefinition> cds = cdAdded.get(qualifedName);
+
+		if(cds!=null)
+			for(ClassDefinition cd : cds)
+				if(classMappings.get(cd)!=null)
+					return classMappings.get(cd);
+
+		return null;
+	}
+
+
+	private void createRelationsView(final MetamodelView view) {
 		for(List<ClassDefinition> list : cdAdded.values())
 			for(ClassDefinition cd : list) {
 				createInheritanceView(cd, ModelUtils.INSTANCE.getQualifiedName(cd), view);
@@ -88,7 +124,7 @@ public class ViewBuilder {
 
 
 
-	protected void createInheritanceView(final ClassDefinition cd, final String qname, final MetamodelView view) {
+	private void createInheritanceView(final ClassDefinition cd, final String qname, final MetamodelView view) {
 		String qname2;
 		InheritanceView in;
 
@@ -102,7 +138,7 @@ public class ViewBuilder {
 	}
 
 
-	protected void createPackageView(final Package pkg, final MetamodelView view) {
+	private void createPackageView(final Package pkg, final MetamodelView view) {
 		for(TypeDefinition td : pkg.getOwnedTypeDefinition())
 			if(td instanceof ClassDefinition)
 				createClassDefinition((ClassDefinition)td, view);
@@ -112,7 +148,7 @@ public class ViewBuilder {
 	}
 
 
-	protected void createClassDefinition(final ClassDefinition cd, final MetamodelView view) {
+	private void createClassDefinition(final ClassDefinition cd, final MetamodelView view) {
 		String qname = ModelUtils.INSTANCE.getQualifiedName(cd);
 		List<ClassDefinition> cdFirst = cdAdded.get(qname);
 		ClassView cv = null;

@@ -31,7 +31,7 @@ public class Visualiser extends WidgetInstrument {
 		super(composer);
 		initialiseWidgets();
 		frame 	= (GweletFrame) composer.getWidget();
-		slicer 	= new GweletSlicer(frame.getCanvas(), frame.getViewBuilder());
+		slicer 	= new GweletSlicer(frame.getCanvas());
 	}
 
 
@@ -95,7 +95,6 @@ public class Visualiser extends WidgetInstrument {
 		@Override
 		public void initAction() {
 			action.setModelView(instrument.frame.getCanvas());
-			action.setBuilder(instrument.frame.getViewBuilder());
 			action.setSlicer(instrument.slicer);
 		}
 
@@ -115,7 +114,6 @@ public class Visualiser extends WidgetInstrument {
 		@Override
 		public void initAction() {
 			action.setModelView(instrument.frame.getCanvas());
-			action.setBuilder(instrument.frame.getViewBuilder());
 			action.setSlicer(instrument.slicer);
 			action.setSuperTypes(interaction.getButton()==instrument.superClasses);
 		}

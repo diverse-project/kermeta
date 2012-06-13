@@ -2,6 +2,7 @@ package org.kermeta.kompren.gwelet.actions;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.kermeta.kompren.gwelet.view.ClassView;
+import org.kermeta.kompren.gwelet.view.ModelViewMapper;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 
@@ -20,20 +21,16 @@ public class ShowHierarchy extends SelectionBasedVisuAction {
 		super.doVisualisation();
 
 		final BasicEList<ClassDefinition> cds = new BasicEList<ClassDefinition>();
+		final ModelViewMapper mapper =  ModelViewMapper.getMapper();
 
 		for(ClassView cl : classes)
-			cds.add(builder.getClassDefinition(cl));
+			cds.add(mapper.getClassDefinition(cl));
 
 		slicer.initialise(cds, new BasicEList<ModelingUnit>(), superTypes, false, false);
 		slicer.launch();
 		canvas.update();
 	}
 
-
-	@Override
-	public boolean canDo() {
-		return super.canDo() && !canvas.getSelection().isEmpty() && slicer!=null && builder!=null;
-	}
 
 
 	public void setSuperTypes(final boolean superTypes) {

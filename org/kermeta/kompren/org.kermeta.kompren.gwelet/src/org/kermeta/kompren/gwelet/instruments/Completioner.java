@@ -1,28 +1,46 @@
 package org.kermeta.kompren.gwelet.instruments;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoundedRangeModel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+
 import org.kermeta.kompren.gwelet.actions.SetCompletionItems;
 import org.kermeta.kompren.gwelet.model.ModelUtils;
+import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.kermeta.kompren.gwelet.ui.TextFieldCompletion;
+import org.kermeta.kompren.gwelet.view.ClassView;
+import org.kermeta.kompren.gwelet.view.MetamodelView;
+import org.kermeta.kompren.gwelet.view.ModelViewMapper;
 import org.kermeta.language.structure.ClassDefinition;
+import org.malai.action.library.MoveCamera;
 import org.malai.instrument.Link;
 import org.malai.instrument.WidgetInstrument;
+import org.malai.instrument.library.BasicZoomer;
+import org.malai.interaction.library.MenuItemPressed;
 import org.malai.interaction.library.TextChanged;
 import org.malai.ui.UIComposer;
+import org.malai.widget.MPopupMenu;
 
 public class Completioner extends WidgetInstrument {
 	protected TextFieldCompletion textField;
 
+	protected BasicZoomer zoomer;
+
 	protected List<String> database;
 
 
-	public Completioner(final UIComposer<?> composer) {
+	public Completioner(final UIComposer<?> composer, final BasicZoomer zoomer) {
 		super(composer);
 
+		this.zoomer = zoomer;
 		database = new ArrayList<String>();
 		initialiseWidgets();
+		addEventable((MPopupMenu)textField.getComponentPopupMenu());
 	}
 
 
@@ -75,10 +93,72 @@ public class Completioner extends WidgetInstrument {
 	protected void initialiseLinks() {
 		try {
 			addLink(new TextChanged2SetCompletion(this));
+			addLink(new MenuItem2ZoomOn(this));
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
+		}
+	}
+
+
+
+	private class MenuItem2ZoomOn extends Link<MoveCamera, MenuItemPressed, Completioner> {
+		public MenuItem2ZoomOn(final Completioner ins) throws InstantiationException, IllegalAccessException {
+			super(ins, false, MoveCamera.class, MenuItemPressed.class);
+		}
+
+
+		@Override
+		public void initAction() {
+			final ClassView cv = ModelViewMapper.getMapper().getClassView(interaction.getMenuItem().getText());
+
+			if(cv!=null) {
+				MetamodelView canvas = ((GweletFrame)instrument.getComposer().getWidget()).getCanvas();
+				JScrollPane pane = canvas.getScrollpane();
+				double zoom = zoomer.getZoomable().getZoom();
+
+				action.setScrollPane(pane);
+
+				final Point2D centre = cv.getCentre();
+				final JScrollBar vertSB  = pane.getVerticalScrollBar();
+				final JScrollBar horizSB = pane.getHorizontalScrollBar();
+
+				if(vertSB.isVisible()) {
+					final BoundedRangeModel model = vertSB.getModel();
+					final int value	= model.getValue();
+					final int cy 	= pane.getHeight()/2 + value;
+					int newValue 	= value+(int)(centre.getY()*zoom)-cy;
+
+					if(newValue>model.getMaximum())
+						newValue = model.getMaximum();
+					else if(newValue<model.getMinimum())
+						newValue = model.getMinimum();
+
+					action.setPy(newValue);
+				}
+
+				if(horizSB.isVisible()) {
+					final BoundedRangeModel model = horizSB.getModel();
+					final int value	= model.getValue();
+					final int cx 	= pane.getWidth()/2 + value;
+					int newValue 	= value+(int)(centre.getX()*zoom)-cx;
+
+					if(newValue>model.getMaximum())
+						newValue = model.getMaximum();
+					else if(newValue<model.getMinimum())
+						newValue = model.getMinimum();
+
+					action.setPx(newValue);
+				}
+			}
+		}
+
+
+		@Override
+		public boolean isConditionRespected() {
+			JPopupMenu menu = instrument.textField.getComponentPopupMenu();
+			return menu!=null && menu.getComponentIndex(interaction.getMenuItem())!=-1;
 		}
 	}
 
@@ -107,15 +187,3 @@ public class Completioner extends WidgetInstrument {
 		return textField;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

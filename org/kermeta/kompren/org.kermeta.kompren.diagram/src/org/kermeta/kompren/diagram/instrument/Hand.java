@@ -4,6 +4,8 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
+import javax.swing.JScrollPane;
+
 import org.kermeta.kompren.diagram.action.MoveElement;
 import org.kermeta.kompren.diagram.action.SelectElement;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
@@ -136,9 +138,10 @@ public class Hand extends Instrument {
 		public void updateAction() {
 			final Point2D startPt	= interaction.getStartPt();
 			final Point2D endPt		= interaction.getEndPt();
+			final JScrollPane pane	= canvas.getScrollpane();
 
-			action.setPx((int)(startPt.getX() - endPt.getX()));
-			action.setPy((int)(startPt.getY() - endPt.getY()));
+			action.setPx(pane.getHorizontalScrollBar().getValue()+(int)(startPt.getX() - endPt.getX()));
+			action.setPy(pane.getVerticalScrollBar().getValue()+(int)(startPt.getY() - endPt.getY()));
 		}
 
 		@Override

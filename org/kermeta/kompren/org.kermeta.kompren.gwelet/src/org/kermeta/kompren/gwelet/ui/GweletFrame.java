@@ -12,7 +12,7 @@ import org.kermeta.kompren.gwelet.mapping.Selection2VisualiserMapping;
 import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
-import org.kermeta.kompren.gwelet.view.ViewBuilder;
+import org.kermeta.kompren.gwelet.view.ModelViewMapper;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
@@ -39,8 +39,6 @@ public class GweletFrame extends UI {
 
 	protected Visualiser visualiser;
 
-	protected ViewBuilder viewBuilder;
-
 	protected ViewReiniter reiniter;
 
 	protected UndoRedoManager undoredoer;
@@ -65,7 +63,7 @@ public class GweletFrame extends UI {
 
 		composer = new GweletUIBuilder(this);
 		canvas.setLayoutStrategy(new ClassModelBasicStrategy(canvas));
-		viewBuilder = new ViewBuilder(getPresentation(Model.class, MetamodelView.class));
+		ModelViewMapper.initMapper(getPresentation(Model.class, MetamodelView.class));
 		undoredoer = new UndoRedoManager(composer);
 		scroller = new Scroller(canvas);
 		zoomer = new BasicZoomer(canvas);
@@ -73,7 +71,7 @@ public class GweletFrame extends UI {
 		visualiserManager = new VisualiserManager(composer, layeredPanel, canvas);
 		visualiser = new Visualiser(composer);
 		reiniter = new ViewReiniter(canvas, composer);
-		completioner = new Completioner(composer);
+		completioner = new Completioner(composer, zoomer);
 
 		MappingRegistry.REGISTRY.addMapping(new Selection2VisualiserMapping(canvas.getSelection(), visualiser));
 
@@ -164,18 +162,13 @@ public class GweletFrame extends UI {
 //	}
 
 
-	public ViewBuilder getViewBuilder() {
-		return viewBuilder;
-	}
-
-
 	public MLayeredPane getLayeredPanel() {
 		return layeredPanel;
 	}
 
 
 	public void open(final String path) {
-		viewBuilder.build(path);
-		completioner.setDatabase(viewBuilder.getClassDefinitionAdded());
+		ModelViewMapper.getMapper().build(path);
+		completioner.setDatabase(ModelViewMapper.getMapper().getClassDefinitionAdded());
 	}
 }
