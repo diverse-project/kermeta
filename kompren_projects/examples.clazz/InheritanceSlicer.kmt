@@ -24,7 +24,7 @@ class InheritanceSlicer {
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
 		self.addedsuperClasses.each{thesuperClasses | self.onClazzsuperClassesAdded(thesuperClasses.src, thesuperClasses.tar) }
 		onEnd()
-	end
+	end 
 
 	operation onClazzAdded(clazz : Clazz) is do
 stdio.writeln("Clazz: " + clazz.name)
