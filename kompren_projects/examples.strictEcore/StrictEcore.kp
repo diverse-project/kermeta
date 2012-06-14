@@ -6,8 +6,9 @@ KermetaProject "examples.strictEcore"
 		require "${project.baseUri}/StrictEcore.kmt"
 		require "${project.baseUri}/StrictEcoreAspect.kmt"
 		require "${project.baseUri}/TestStrictEcore.kmt"
+		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
 	}
 	dependencies = {
-		dependency "kompren.model" ="platform:/plugin/org.kermeta.kompren.slicer.model","mvn:org.kermeta.kompren/kompren.slicer.model/2.0.0-SNAPSHOT" byteCodeOnly
-		dependency "kompren.compiler" ="platform:/plugin/org.kermeta.kompren.slicer.compiler","mvn:org.kermeta.kompren/kompren.slicer.compiler/2.0.0-SNAPSHOT"
+		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
+		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore"
 	}
