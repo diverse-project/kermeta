@@ -304,10 +304,7 @@ class SlicerGenerator {
 	operation saveCode() is do
 		var aspectFileNames : Bag<String> init Bag<String>.new
 		
-		requiredAspectFiles.keys.each{key |
-			var subPkgs : Sequence<String> init key.split("::")
-			aspectFileNames.add("/" + slicerModel.name + "/" + subPkgs.last + "SlicingAspect.kmt")
-		}
+		requiredAspectFiles.keys.each{key | aspectFileNames.add(key.split("::").last + "SlicingAspect.kmt") }
 
 		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + ".kp").toURI, 
 							generateCodeKP(slicerModel.name + "Aspect.kmt", slicerModel.name + ".kmt", aspectFileNames))
