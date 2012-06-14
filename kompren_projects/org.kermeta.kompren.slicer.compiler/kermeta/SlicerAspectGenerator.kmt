@@ -220,7 +220,7 @@ class SlicerAspectGenerator inherits Generator {
 
 				// Attributes corresponding to the opposites to create are now added to the aspect class.
 				if(cl.getQualifiedName.equals(eclass.getQualifiedName)) then
-					result := result + "\treference ~" + rel.domain.name +
+					result := result + "\treference " + rel.domain.getValidKermetaName +
 							  " : " + rel.domain.eType.asType(EClass).name + "[" + rel.domain.lowerBound.toString + ".."
 					if(rel.domain.upperBound==-1) then
 						result := result + "*"
@@ -396,7 +396,7 @@ class SlicerAspectGenerator inherits Generator {
 	
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
 					result := result + "\n\t\t\tif(self." + ref.getValidKermetaName + ".sliced) then\n\t\t\t\tself.dup.asType(" + 
-							ref.container().asType(EClassifier).name + ")." + ref.name + " := self." + 
+							ref.container().asType(EClassifier).name + ")." + ref.getValidKermetaName + " := self." + 
 							ref.getValidKermetaName + ".dup.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self."
 							+ ref.getValidKermetaName + ".dup)\n\t\t\tend\n"
 				end
@@ -413,7 +413,7 @@ class SlicerAspectGenerator inherits Generator {
 						
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
 					result := result + "\n\t\t\t\tif(not dup.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
-								"dup.asType(" + ref.container().asType(EClassifier).name + ")." + ref.name + 
+								"dup.asType(" + ref.container().asType(EClassifier).name + ")." + ref.getValidKermetaName + 
 								".add(" + nameVar +".dup.asType(" + ref.eType.name + "))\n\t\t\t\t\t" + prunerVarName + ".addToRoot(" 
 								+ nameVar + ".dup)\n\t\t\t\tend\n\t\t\t"
 				end
