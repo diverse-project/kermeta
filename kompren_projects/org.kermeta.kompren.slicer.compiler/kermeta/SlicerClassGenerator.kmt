@@ -172,13 +172,13 @@ class SlicerClassGenerator inherits Generator {
 		result := result + "\t\tonStart()\n"
 		
 		slicerGenerator.slicerModel.inputClasses.each{clazz |
-			result := result + "\t\tself.~" + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
 					clazz.getVarNameClassifier() + ".visitToAddClasses(self"
 			if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", 0" end
 			result := result + ") }\n"
 		}
 		slicerGenerator.slicerModel.inputClasses.each{clazz |
-			result := result + "\t\tself.~" + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".each{" + clazz.getVarNameClassifier() + " | " +
 					clazz.getVarNameClassifier() + ".visitToAddRelations(self"
 			if(not slicerGenerator.slicerModel.radius.isVoid) then result := result + ", 0" end
 			result := result + ") }\n"
@@ -190,7 +190,7 @@ class SlicerClassGenerator inherits Generator {
 					var varName : String init eclass.domain.getVarNameClassifier()
 					var endCode : String init ""
 		
-					result := result + "\t\tself.~" + eclass.domain.getAddedAttributeName() + ".each{" + varName + " | "
+					result := result + "\t\tself." + eclass.domain.getAddedAttributeName() + ".each{" + varName + " | "
 		
 					if(not slicerGenerator.slicerModel.radius.isVoid) then
 						if(not slicerGenerator.slicerModel.radius.focusedClasses.contains(eclass)) then
@@ -275,8 +275,8 @@ class SlicerClassGenerator inherits Generator {
 
 		slicerGenerator.slicerModel.inputClasses.each{clazz |
 			// Need to clear the sets before their init (if the slicer is reused).
-			result := result + "\t\tself.~" + clazz.getRequiredAttributeName() + ".clear()\n"
-			result := result + "\t\tself.~" + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".clear()\n"
+			result := result + "\t\tself." + clazz.getRequiredAttributeName() + ".addAll(" + clazz.getRequiredAttributeName() + ")\n"
 		}
 
 		slicerGenerator.slicerModel.slicedProperties.each{rel |

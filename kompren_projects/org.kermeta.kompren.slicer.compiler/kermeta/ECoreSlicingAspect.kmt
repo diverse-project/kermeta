@@ -20,7 +20,7 @@ aspect class EStructuralFeature {
 			name=="attribute" or name=="package" or name=="using" or name=="require" or
 			name=="self" or name=="bag" or name=="Void" or name=="not" or name=="oset" or
 			name=="from" or name=="super" or name=="init" or name=="true" or name=="false" or
-			name=="var" or name=="raise" or name=="rescue" or name=="getter" or
+			name=="var" or name=="raise" or name=="rescue" or name=="getter" or name=="pre" or name=="post" or
 			name=="setter" or name=="property" or name=="abstract" or name=="enumeration" or
 			name=="set" or name=="inv" or name=="extern") then
 			result := "~" + result
