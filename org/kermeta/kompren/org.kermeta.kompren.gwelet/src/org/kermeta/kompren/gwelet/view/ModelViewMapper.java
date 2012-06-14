@@ -5,8 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.model.ModelUtils;
+import org.kermeta.language.ecore2km.Ecore2KMImpl4Eclipse;
 import org.kermeta.language.loader.km.KmLoaderImpl;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.DataType;
@@ -86,22 +95,58 @@ public final class ModelViewMapper {
 	}
 
 
+	private ModelingUnit loadKm(final String uri) {
+		return new KmLoaderImpl().load(uri);
+	}
+
+
+	private ModelingUnit loadEcore(final String uri) {
+		try {
+			if(uri.indexOf(".ecore")!=-1) {
+				String path = uri.substring(0, uri.indexOf(".ecore")+".ecore".length()).replace("file:/", "");
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
+				ResourceSet rset = new ResourceSetImpl();
+				Resource resource = rset.createResource(URI.createFileURI(path));
+				resource.load(null);
+				EList<EObject> contents = resource.getContents();
+				EPackage root = (EPackage) (contents!=null && !contents.isEmpty() && contents.get(0) instanceof EPackage ?
+								contents.get(0) : null);
+
+				if(root!=null) {
+					Ecore2KMImpl4Eclipse ecore2km = new Ecore2KMImpl4Eclipse();
+					return ecore2km.convertPackage(root, null);
+				}
+			}
+		}catch(Exception ex) { ex.printStackTrace(); }
+		return null;
+	}
+
+
 	public void build(final String uriMetamodel) {
-		ModelingUnit mu = new KmLoaderImpl().load(uriMetamodel);
-		MetamodelView view = presentation.getConcretePresentation();
+		ModelingUnit mu = null;
 
-		flush();
-		presentation.getAbstractPresentation().setUnit(mu);
-		view.getEntities().clear();
-		view.getRelations().clear();
+		if(uriMetamodel.indexOf(".km")!=-1)
+			mu = loadKm(uriMetamodel.substring(0, uriMetamodel.indexOf(".km")+".km".length()));
+		else
+			if(uriMetamodel.indexOf(".ecore")!=-1)
+				mu = loadEcore(uriMetamodel);
 
-		for(Package pkg : mu.getPackages())
-			createPackageView(pkg, view);
+		if(mu!=null) {
+			final MetamodelView view = presentation.getConcretePresentation();
 
-		createRelationsView(view);
+			flush();
+			presentation.getAbstractPresentation().setUnit(mu);
+			view.getEntities().clear();
+			view.getRelations().clear();
 
-		view.updateLayout();
-		view.update();
+			for(Package pkg : mu.getPackages())
+				createPackageView(pkg, view);
+
+			createRelationsView(view);
+
+			view.updateLayout();
+			view.update();
+		}
 	}
 
 

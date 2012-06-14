@@ -203,17 +203,7 @@ public class GweletFrame extends UI {
 		            	Object obj = transferable.getTransferData(flavor);
 
 		            	if(obj instanceof String) {
-		            		String str = (String) obj;
-		            		String path = "";
-
-		            		if(str.indexOf(".km")!=-1) {
-		            			path = str.substring(0, str.indexOf(".km")+3);
-		            		}else {
-		            			if(str.indexOf(".ecore")!=-1) {
-		            				//TODO
-		            			}
-		            		}
-	            			GweletFrame.this.open(path);
+	            			GweletFrame.this.open((String)obj);
 	            			return ;
 		            	}
 		            }
