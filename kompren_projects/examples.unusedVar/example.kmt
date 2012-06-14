@@ -1,0 +1,15 @@
+
+package foobar::unusedVars;
+
+using kermeta::standard
+
+class Example {
+	operation foobar(param : String) is do
+		var v1 : String init ""
+		var v2 : String init ""
+		
+		if(false) then
+			v2 := v1
+		end
+	end
+}

@@ -46,8 +46,8 @@ class Test {
 		assign.~value := callF
 		ifStat.thenBody := assign 
 		block.statement.add(var1def)
-		block.statement.add(ifStat)
 		block.statement.add(var2def)
+		block.statement.add(ifStat)
 		op.body := block
 		var requiredOps : Bag<Operation> init Bag<Operation>.new
 		requiredOps.add(op)
