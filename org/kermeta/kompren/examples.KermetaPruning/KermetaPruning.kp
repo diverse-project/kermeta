@@ -1,5 +1,5 @@
 KermetaProject "examples.KermetaPruning"
-	groupId = "my.group"
+	groupId = "org.kermeta.kompren"
 	defaultMainClass ="org::kermeta::language::structure::KermetaPruning"
 	defaultMainOperation = "launch"
 	sources = {

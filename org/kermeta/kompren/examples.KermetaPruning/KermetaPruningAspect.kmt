@@ -16,7 +16,7 @@ class SlicerVisitor {
 		self.visitedPass := false
 		self.sliced := false
 		self.visitedForRelations := false
-	self.idPass := pass
+		self.idPass := pass
 	end
 
 	operation visitToAddClasses(theKermetaPruning : KermetaPruning) is do
@@ -36,50 +36,50 @@ class SlicerVisitor {
 }
 
 aspect class ModelingUnit {
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from TypeDefinitionContainer is do
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.packages.each{thePackage | thePackage.visitToAddClasses(theKermetaPruning)}
+			self.~packages.each{thePackage | thePackage.visitToAddClasses(theKermetaPruning)}
 		end
 	end
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from TypeDefinitionContainer is do
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.packages.each{thePackage | thePackage.visitToAddRelations(theKermetaPruning)}
+			self.~packages.each{thePackage | thePackage.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class Package {
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from TypeDefinitionContainer is do
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theKermetaPruning)}
+			self.~nestedPackage.each{thePackage | thePackage.visitToAddClasses(theKermetaPruning)}
 		end
 	end
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from TypeDefinitionContainer is do
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.nestedPackage.each{thePackage | thePackage.visitToAddRelations(theKermetaPruning)}
+			self.~nestedPackage.each{thePackage | thePackage.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class TypeDefinitionContainer {
 	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theKermetaPruning)}
+			self.~ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theKermetaPruning)}
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
@@ -87,38 +87,38 @@ aspect class TypeDefinitionContainer {
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddRelations(theKermetaPruning)}
+			self.~ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class TypeDefinition {
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from TypeContainer is do
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.superType.each{theType | theType.visitToAddClasses(theKermetaPruning)}
+			self.~superType.each{theType | theType.visitToAddClasses(theKermetaPruning)}
 		end
 	end
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from TypeContainer is do
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.superType.each{theType | theType.visitToAddRelations(theKermetaPruning)}
+			self.~superType.each{theType | theType.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class ClassDefinition {
 	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.ownedOperation.each{theOperation | theOperation.visitToAddClasses(theKermetaPruning)}
-			self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theKermetaPruning)}
+			self.~ownedOperation.each{theOperation | theOperation.visitToAddClasses(theKermetaPruning)}
+			self.~ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theKermetaPruning)}
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
@@ -126,73 +126,73 @@ aspect class ClassDefinition {
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.ownedOperation.each{theOperation | theOperation.visitToAddRelations(theKermetaPruning)}
-			self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theKermetaPruning)}
+			self.~ownedOperation.each{theOperation | theOperation.visitToAddRelations(theKermetaPruning)}
+			self.~ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class Operation {
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from MultiplicityElement is do
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.ownedParameter.each{theParameter | theParameter.visitToAddClasses(theKermetaPruning)}
-			if(not self.body.isVoid) then self.body.visitToAddClasses(theKermetaPruning) end
-			self.pre.each{theConstraint | theConstraint.visitToAddClasses(theKermetaPruning)}
-			self.post.each{theConstraint | theConstraint.visitToAddClasses(theKermetaPruning)}
-			self.ownedParameter.each{theParameter | theParameter.visitToAddClasses(theKermetaPruning)}
-			if(not self.owningClass.isVoid) then self.owningClass.visitToAddClasses(theKermetaPruning) end
-			self.raisedException.each{theType | theType.visitToAddClasses(theKermetaPruning)}
-			if(not self.superOperation.isVoid) then self.superOperation.visitToAddClasses(theKermetaPruning) end
-			self.typeParameter.each{theTypeVariable | theTypeVariable.visitToAddClasses(theKermetaPruning)}
+			self.~ownedParameter.each{theParameter | theParameter.visitToAddClasses(theKermetaPruning)}
+			if(not self.~body.isVoid) then self.~body.visitToAddClasses(theKermetaPruning) end
+			self.~pre.each{theConstraint | theConstraint.visitToAddClasses(theKermetaPruning)}
+			self.~post.each{theConstraint | theConstraint.visitToAddClasses(theKermetaPruning)}
+			self.~ownedParameter.each{theParameter | theParameter.visitToAddClasses(theKermetaPruning)}
+			if(not self.~owningClass.isVoid) then self.~owningClass.visitToAddClasses(theKermetaPruning) end
+			self.~raisedException.each{theType | theType.visitToAddClasses(theKermetaPruning)}
+			if(not self.~superOperation.isVoid) then self.~superOperation.visitToAddClasses(theKermetaPruning) end
+			self.~typeParameter.each{theTypeVariable | theTypeVariable.visitToAddClasses(theKermetaPruning)}
 		end
 	end
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from MultiplicityElement is do
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.ownedParameter.each{theParameter | theParameter.visitToAddRelations(theKermetaPruning)}
-			if(not self.body.isVoid) then self.body.visitToAddRelations(theKermetaPruning) end
-			self.pre.each{theConstraint | theConstraint.visitToAddRelations(theKermetaPruning)}
-			self.post.each{theConstraint | theConstraint.visitToAddRelations(theKermetaPruning)}
-			self.ownedParameter.each{theParameter | theParameter.visitToAddRelations(theKermetaPruning)}
-			if(not self.owningClass.isVoid) then self.owningClass.visitToAddRelations(theKermetaPruning) end
-			self.raisedException.each{theType | theType.visitToAddRelations(theKermetaPruning)}
-			if(not self.superOperation.isVoid) then self.superOperation.visitToAddRelations(theKermetaPruning) end
-			self.typeParameter.each{theTypeVariable | theTypeVariable.visitToAddRelations(theKermetaPruning)}
+			self.~ownedParameter.each{theParameter | theParameter.visitToAddRelations(theKermetaPruning)}
+			if(not self.~body.isVoid) then self.~body.visitToAddRelations(theKermetaPruning) end
+			self.~pre.each{theConstraint | theConstraint.visitToAddRelations(theKermetaPruning)}
+			self.~post.each{theConstraint | theConstraint.visitToAddRelations(theKermetaPruning)}
+			self.~ownedParameter.each{theParameter | theParameter.visitToAddRelations(theKermetaPruning)}
+			if(not self.~owningClass.isVoid) then self.~owningClass.visitToAddRelations(theKermetaPruning) end
+			self.~raisedException.each{theType | theType.visitToAddRelations(theKermetaPruning)}
+			if(not self.~superOperation.isVoid) then self.~superOperation.visitToAddRelations(theKermetaPruning) end
+			self.~typeParameter.each{theTypeVariable | theTypeVariable.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class TypedElement {
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from TypeContainer is do
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			if(not self.type.isVoid) then self.type.visitToAddClasses(theKermetaPruning) end
+			if(not self.~type.isVoid) then self.~type.visitToAddClasses(theKermetaPruning) end
 		end
 	end
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from TypeContainer is do
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			if(not self.type.isVoid) then self.type.visitToAddRelations(theKermetaPruning) end
+			if(not self.~type.isVoid) then self.~type.visitToAddRelations(theKermetaPruning) end
 		end
 	end
 }
 
 aspect class TypeContainer {
 	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.containedType.each{theType | theType.visitToAddClasses(theKermetaPruning)}
+			self.~containedType.each{theType | theType.visitToAddClasses(theKermetaPruning)}
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
@@ -200,18 +200,18 @@ aspect class TypeContainer {
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.containedType.each{theType | theType.visitToAddRelations(theKermetaPruning)}
+			self.~containedType.each{theType | theType.visitToAddRelations(theKermetaPruning)}
 		end
 	end
 }
 
 aspect class ParameterizedType {
 	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			self.visitedPass := true
-			self.typeDefinition.visitToAddClasses(theKermetaPruning)
+			self.~typeDefinition.visitToAddClasses(theKermetaPruning)
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
@@ -219,14 +219,14 @@ aspect class ParameterizedType {
 			super(theKermetaPruning)
 			self.visitedPass := true
 			self.visitedForRelations := true
-			self.typeDefinition.visitToAddRelations(theKermetaPruning)
+			self.~typeDefinition.visitToAddRelations(theKermetaPruning)
 		end
 	end
 }
 
 aspect class KermetaModelElement inherits SlicerVisitor {
 	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
-		checkInitialisation(theVisualiserKermetaModel.idPass)
+		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
 			if(not self.sliced) then
@@ -243,4 +243,3 @@ aspect class KermetaModelElement inherits SlicerVisitor {
 		end
 	end
 }
-

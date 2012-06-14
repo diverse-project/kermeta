@@ -5,7 +5,7 @@ using kermeta::utils
 using kermeta::io::StdIO => stdio
 using org::kermeta::language::behavior
 class KermetaPruning {
-	rattribute idPass : Integer
+	attribute idPass : Integer
 
 	reference requiredOperations : Operation[0..*]
 
@@ -14,17 +14,17 @@ class KermetaPruning {
 	operation initialise(requiredOperations : bag Operation[0..*]) : KermetaPruning is do
 		result := self
 		self.addedKermetaModelElements := Bag<KermetaModelElement>.new
-		self.requiredOperations.clear()
-		self.requiredOperations.addAll(requiredOperations)
+		self.~requiredOperations.clear()
+		self.~requiredOperations.addAll(requiredOperations)
 
 		if(idPass.isVoid) then idPass := 0
-			else idPass := idPass + 1 end
+		else idPass := idPass + 1 end
 	end
 
 	operation launch() is do
 		onStart()
-		self.requiredOperations.each{theOperation | theOperation.visitToAddClasses(self) }
-		self.requiredOperations.each{theOperation | theOperation.visitToAddRelations(self) }
+		self.~requiredOperations.each{theOperation | theOperation.visitToAddClasses(self) }
+		self.~requiredOperations.each{theOperation | theOperation.visitToAddRelations(self) }
 		onEnd()
 	end
 
