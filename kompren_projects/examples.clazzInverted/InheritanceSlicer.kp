@@ -9,6 +9,5 @@ KermetaProject "examples.clazzInverted"
 		require "${project.baseUri}/TestClassModelSlicer.kmt"
 	}
 	dependencies = {
-		dependency "kompren.model" ="platform:/plugin/org.kermeta.kompren.slicer.model","mvn:org.kermeta.kompren/kompren.slicer.model/2.0.0-SNAPSHOT" byteCodeOnly
-		dependency "kompren.compiler" ="platform:/plugin/org.kermeta.kompren.slicer.compiler","mvn:org.kermeta.kompren/kompren.slicer.compiler/2.0.0-SNAPSHOT"
+		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
 	}
