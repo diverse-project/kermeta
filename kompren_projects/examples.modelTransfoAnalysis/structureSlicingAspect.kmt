@@ -1,7 +1,6 @@
 package org::kermeta::language::structure;
 using kermeta::standard
 using org::kermeta::language::behavior
-using kermeta::io::StdIO => stdio
 
 aspect class ModelingUnit {
 	method visitToAddClasses(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
@@ -143,9 +142,7 @@ aspect class TypedElement inherits SlicerVisitor {
 		if(not self.visitedPass) then
 			super(theKermetaStaticAnalysis)
 			self.visitedPass := true
-			//stdio.writeln(self.type.toString)
 			if(not self.type.isVoid) then self.type.visitToAddClasses(theKermetaStaticAnalysis) end
-		//	self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
@@ -154,7 +151,6 @@ aspect class TypedElement inherits SlicerVisitor {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			if(not self.type.isVoid) then self.type.visitToAddRelations(theKermetaStaticAnalysis) end
-		//	self.visitedPass := false
 		end
 	end
 }
@@ -169,7 +165,6 @@ aspect class ParameterizedType {
 			super(theKermetaStaticAnalysis)
 			self.visitedPass := true
 			self.typeDefinition.visitToAddClasses(theKermetaStaticAnalysis)
-		//	self.visitedPass := false
 		end
 	end
 	method visitToAddRelations(theKermetaStaticAnalysis : KermetaStaticAnalysis) is do
@@ -178,8 +173,6 @@ aspect class ParameterizedType {
 			self.visitedPass := true
 			self.visitedForRelations := true
 			self.typeDefinition.visitToAddRelations(theKermetaStaticAnalysis)
-		//	self.visitedPass := false
 		end
 	end
 }
-
