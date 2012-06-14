@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : December 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package ex::kermeta::TransfoAnalysis;
+
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::behavior
+using kermeta::io::StdIO => stdio
+
+class Test {
+	operation main() : Void is do
+	stdio.writeln("STARTING")
+		var inputRep : ResourceSet init ResourceSet.new
+		var inputRes : Resource
+		inputRes ?= inputRep.createResource("platform:/resource/examples.modelTransfoAnalysis/beforeCheckingforScopeRESOLVED.km", 
+											"platform:/resource/examples.modelTransfoAnalysis/kermeta.ecore")
+		inputRes.load(void)
+		stdio.writeln("LOADED")
+		var mu : org::kermeta::language::structure::ModelingUnit
+		mu ?= inputRes.getContents.one
+		stdio.writeln(">>>" + inputRes.getContents.one.toString)
+		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
+		requiredMU.add(mu)
+		var slicer : KermetaStaticAnalysis init KermetaStaticAnalysis.new.initialise(requiredMU)
+		slicer.launch()
+	end
+}
+
+
+

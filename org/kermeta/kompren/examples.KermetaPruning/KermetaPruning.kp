@@ -1,14 +1,12 @@
-KermetaProject "KermetaPruning"
+KermetaProject "examples.KermetaPruning"
 	groupId = "my.group"
 	defaultMainClass ="org::kermeta::language::structure::KermetaPruning"
 	defaultMainOperation = "launch"
 	sources = {
 		require "${project.baseUri}/KermetaPruningAspect.kmt"
 		require "${project.baseUri}/KermetaPruning.kmt"
-		require "${project.baseUri}//KermetaPruning/behaviorSlicingAspect.kmt"
-		require "${project.baseUri}/kermeta.ecore"
+		require "${project.baseUri}/behaviorSlicingAspect.kmt"
 	}
 	dependencies = {
-		dependency "kompren.model" ="platform:/plugin/org.kermeta.kompren.slicer.model","mvn:org.kermeta.kompren/kompren.slicer.model/2.0.1-SNAPSHOT" byteCodeOnly
-		dependency "kompren.compiler" ="platform:/plugin/org.kermeta.kompren.slicer.compiler","mvn:org.kermeta.kompren/kompren.slicer.compiler/2.0.1-SNAPSHOT"
+		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
 	}
