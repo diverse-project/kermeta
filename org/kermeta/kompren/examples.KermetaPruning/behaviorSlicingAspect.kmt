@@ -1,0 +1,246 @@
+package org::kermeta::language::behavior;
+using kermeta::standard
+using org::kermeta::language::structure
+
+aspect class VariableDecl {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.type.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.type.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class CallTypeLiteral {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.typeref.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.typeref.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class LambdaExpression {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.parameters.each{theLambdaParameter | theLambdaParameter.visitToAddClasses(theKermetaPruning)}
+			self.body.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.parameters.each{theLambdaParameter | theLambdaParameter.visitToAddRelations(theKermetaPruning)}
+			self.body.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class LambdaParameter {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.type.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.type.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class Conditional {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.condition.visitToAddClasses(theKermetaPruning)
+			if(not self.elseBody.isVoid) then self.elseBody.visitToAddClasses(theKermetaPruning) end
+			self.thenBody.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.condition.visitToAddRelations(theKermetaPruning)
+			if(not self.elseBody.isVoid) then self.elseBody.visitToAddRelations(theKermetaPruning) end
+			self.thenBody.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class Raise {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.expression.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.expression.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class Loop {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			if(not self.initialization.isVoid) then self.initialization.visitToAddClasses(theKermetaPruning) end
+			if(not self.body.isVoid) then self.body.visitToAddClasses(theKermetaPruning) end
+			self.stopCondition.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.initialization.isVoid) then self.initialization.visitToAddRelations(theKermetaPruning) end
+			if(not self.body.isVoid) then self.body.visitToAddRelations(theKermetaPruning) end
+			self.stopCondition.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class Block {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.statement.each{theExpression | theExpression.visitToAddClasses(theKermetaPruning)}
+			self.rescueBlock.each{theRescue | theRescue.visitToAddClasses(theKermetaPruning)}
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.statement.each{theExpression | theExpression.visitToAddRelations(theKermetaPruning)}
+			self.rescueBlock.each{theRescue | theRescue.visitToAddRelations(theKermetaPruning)}
+		end
+	end
+}
+
+aspect class CallExpression {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.parameters.each{theExpression | theExpression.visitToAddClasses(theKermetaPruning)}
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.parameters.each{theExpression | theExpression.visitToAddRelations(theKermetaPruning)}
+		end
+	end
+}
+
+aspect class Assignment {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.target.visitToAddClasses(theKermetaPruning)
+			self.~value.visitToAddClasses(theKermetaPruning)
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.target.visitToAddRelations(theKermetaPruning)
+			self.~value.visitToAddRelations(theKermetaPruning)
+		end
+	end
+}
+
+aspect class CallFeature {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			if(not self.target.isVoid) then self.target.visitToAddClasses(theKermetaPruning) end
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			if(not self.target.isVoid) then self.target.visitToAddRelations(theKermetaPruning) end
+		end
+	end
+}
+
+aspect class Rescue {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theVisualiserKermetaModel.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.body.each{theExpression | theExpression.visitToAddClasses(theKermetaPruning)}
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			self.visitedForRelations := true
+			self.body.each{theExpression | theExpression.visitToAddRelations(theKermetaPruning)}
+		end
+	end
+}
+
