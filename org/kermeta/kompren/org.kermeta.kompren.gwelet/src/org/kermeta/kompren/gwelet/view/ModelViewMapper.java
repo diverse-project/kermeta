@@ -90,7 +90,10 @@ public final class ModelViewMapper {
 		ModelingUnit mu = new KmLoaderImpl().load(uriMetamodel);
 		MetamodelView view = presentation.getConcretePresentation();
 
+		flush();
 		presentation.getAbstractPresentation().setUnit(mu);
+		view.getEntities().clear();
+		view.getRelations().clear();
 
 		for(Package pkg : mu.getPackages())
 			createPackageView(pkg, view);

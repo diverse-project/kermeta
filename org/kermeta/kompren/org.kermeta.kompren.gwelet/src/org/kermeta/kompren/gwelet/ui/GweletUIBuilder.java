@@ -3,7 +3,6 @@ package org.kermeta.kompren.gwelet.ui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Frame;
 
 import org.kermeta.kompren.gwelet.view.MetamodelView;
 import org.malai.ui.UIComposer;
@@ -60,7 +59,8 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		pane.add(widget.toolbar, BorderLayout.NORTH);
 		pane.add(widget.getLayeredPanel(), BorderLayout.CENTER);
 		widget.pack();
-		widget.setExtendedState(Frame.MAXIMIZED_BOTH);
+		widget.setLocation(200, 200);
+//		widget.setExtendedState(Frame.MAXIMIZED_BOTH);
 		widget.getCanvas().requestFocusInWindow();
 	}
 }
