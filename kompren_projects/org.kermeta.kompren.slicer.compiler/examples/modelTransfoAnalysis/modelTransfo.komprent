@@ -1,21 +1,25 @@
-slicer KermetaStaticAnalysis{
-	domain: "./kermeta.ecore"
-	input: org.kermeta.language.structure.ModelingUnit
-	slicedClass: org.kermeta.language.structure.ClassDefinition classDef [[		if(usedClassDefs.isVoid) then
-			usedClassDefs := Set<ClassDefinition>.new
-		end
-
-		usedClassDefs.add(classDef)]]
+slicer KermetaPruning {
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelTransfoAnalysis/kermeta.ecore"
+	input: org.kermeta.language.structure.Operation
+	slicedClass: org.kermeta.language.structure.KermetaModelElement
 	slicedProperty: org.kermeta.language.structure.ModelingUnit.packages
 	slicedProperty: org.kermeta.language.structure.Package.nestedPackage
 	slicedProperty: org.kermeta.language.structure.TypeDefinitionContainer.ownedTypeDefinition
 	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedOperation
 	slicedProperty: org.kermeta.language.structure.Operation.ownedParameter
 	slicedProperty: org.kermeta.language.structure.TypedElement.type
+	slicedProperty: org.kermeta.language.structure.TypeContainer.containedType
 	slicedProperty: org.kermeta.language.structure.ParameterizedType.typeDefinition
 	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedAttribute
 	slicedProperty: org.kermeta.language.structure.TypeDefinition.superType
 	slicedProperty: org.kermeta.language.structure.Operation.body
+	slicedProperty: org.kermeta.language.structure.Operation.pre
+	slicedProperty: org.kermeta.language.structure.Operation.post
+	slicedProperty: org.kermeta.language.structure.Operation.ownedParameter
+	slicedProperty: org.kermeta.language.structure.Operation.owningClass
+	slicedProperty: org.kermeta.language.structure.Operation.raisedException
+	slicedProperty: org.kermeta.language.structure.Operation.superOperation
+	slicedProperty: org.kermeta.language.structure.Operation.typeParameter
 	slicedProperty: org.kermeta.language.behavior.VariableDecl.type
 	slicedProperty: org.kermeta.language.behavior.CallTypeLiteral.typeref
 	slicedProperty: org.kermeta.language.behavior.LambdaExpression.parameters
@@ -35,8 +39,4 @@ slicer KermetaStaticAnalysis{
 	slicedProperty: org.kermeta.language.behavior.CallFeature.target
 	slicedProperty: org.kermeta.language.behavior.Block.rescueBlock
 	slicedProperty: org.kermeta.language.behavior.Rescue.body
-	onEnd [[		if(not usedClassDefs.isVoid) then
-			usedClassDefs.each{classDef | stdio.writeln(classDef.name) }
-		end]]
-	helper [[	reference usedClassDefs : Set<ClassDefinition>]]
 }
