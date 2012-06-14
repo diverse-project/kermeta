@@ -88,7 +88,7 @@ class SlicerAspectGenerator inherits Generator {
 	
 	
 	operation generateVisitFeedCallExpression(ref : EReference) : String is do
-		result := "self." + ref.name + "."
+		result := "self.~" + ref.name + "."
 		
 		if(ref.upperBound==-1) then
 			result := result + "each{the" + ref.name + " | the" + ref.name + ".feedOpposites() }\n" 
@@ -96,7 +96,7 @@ class SlicerAspectGenerator inherits Generator {
 			result := result + "feedOpposites()"
 			
 			if(ref.lowerBound==0) then
-				result := "if not self." + ref.name + ".isVoid then " + result + " end\n"
+				result := "if not self.~" + ref.name + ".isVoid then " + result + " end\n"
 			else
 				result := result + "\n"
 			end
@@ -148,9 +148,9 @@ class SlicerAspectGenerator inherits Generator {
 				slicerGenerator.slicerModel.slicedElements.exists{elt | elt.isInstanceOf(SlicedProperty).andThen{b | 
 				elt.asType(SlicedProperty).domain.getQualifiedName==sf.getQualifiedName}}})) then
 				if(sf.upperBound==1) then
-					result := result + "\t\t" + varName + "." + sf.name + " := self." + sf.name + "\n"
+					result := result + "\t\t" + varName + ".~" + sf.name + " := self.~" + sf.name + "\n"
 				else
-					result := result + "\t\tself." + sf.name + ".each{attr | " + varName + "." + sf.name + ".add(attr) }\n"
+					result := result + "\t\tself.~" + sf.name + ".each{attr | " + varName + ".~" + sf.name + ".add(attr) }\n"
 				end
 			end
 		}
@@ -220,7 +220,7 @@ class SlicerAspectGenerator inherits Generator {
 
 				// Attributes corresponding to the opposites to create are now added to the aspect class.
 				if(cl.getQualifiedName.equals(eclass.getQualifiedName)) then
-					result := result + "\treference " + rel.domain.name +
+					result := result + "\treference ~" + rel.domain.name +
 							  " : " + rel.domain.eType.asType(EClass).name + "[" + rel.domain.lowerBound.toString + ".."
 					if(rel.domain.upperBound==-1) then
 						result := result + "*"
@@ -325,11 +325,11 @@ class SlicerAspectGenerator inherits Generator {
 							var relName : String init rel.domain.getValidKermetaName
 							result := result + " and "
 							if(rel.domain.upperBound==1) then
-								result := result + "(self." + relName + ".isVoid.orElse{b | self." + relName + 
-										".visitedPass.orElse{b | self." + relName + ".checkCanReallyBeAdded()}})"
+								result := result + "(self." + relName + ".isVoid.orElse{b | self.~" + relName + 
+										".visitedPass.orElse{b | self.~" + relName + ".checkCanReallyBeAdded()}})"
 							else
 								var varName : String init rel.domain.eType.asType(EClass).getVarNameClassifier()
-								result := result + "self." + relName + ".each{" + varName + " | " + varName + 
+								result := result + "self.~" + relName + ".each{" + varName + " | " + varName + 
 										".visitedPass.orElse{b | " + varName + ".checkCanReallyBeAdded()} }"
 							end
 						}
@@ -345,7 +345,7 @@ class SlicerAspectGenerator inherits Generator {
 	// Generates the operation that initialises a created opposite.
 	operation generateInitialiseOppositeOperation(slicedProp : SlicedProperty) : String is do
 		var relation : EReference init slicedProp.domain.asType(EReference)
-		var selfNameVar : String init "self." + relation.eOpposite.name 
+		var selfNameVar : String init "self.~" + relation.eOpposite.name 
 		
 		result := "\t\t"
 		if(relation.eOpposite.upperBound==-1 or relation.eOpposite.upperBound>1) then
@@ -389,15 +389,15 @@ class SlicerAspectGenerator inherits Generator {
 	
 			if(ref.upperBound==1) then
 				if(ref.lowerBound==0) then
-					result := result + "if(not self." + relName + ".isVoid) then " 
+					result := result + "if(not self.~" + relName + ".isVoid) then " 
 				end
-				result := result + "self." + relName + "." + visitMethodName + "(" + nameVarPruner +
+				result := result + "self.~" + relName + "." + visitMethodName + "(" + nameVarPruner +
 						radiusCode + ")" + generateAddRelations(classVisit, ref.asType(EReference))
 	
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
-					result := result + "\n\t\t\tif(self." + ref.name + ".sliced) then\n\t\t\t\tself.dup.asType(" + 
-							ref.container().asType(EClassifier).name + ")." + ref.name + " := self." + 
-							ref.name + ".dup.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self."
+					result := result + "\n\t\t\tif(self.~" + ref.name + ".sliced) then\n\t\t\t\tself.dup.asType(" + 
+							ref.container().asType(EClassifier).name + ")." + ref.name + " := self.~" + 
+							ref.name + ".dup.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self.~"
 							+ ref.name + ".dup)\n\t\t\tend\n"
 				end
 	
@@ -407,7 +407,7 @@ class SlicerAspectGenerator inherits Generator {
 			else
 				var nameVar : String init ref.eType.asType(EClass).getVarNameClassifier()
 	
-				result := result + "self." + relName + ".each{" + nameVar + " | " + nameVar + 
+				result := result + "self.~" + relName + ".each{" + nameVar + " | " + nameVar + 
 						"." + visitMethodName + "(" + nameVarPruner + radiusCode + ")" +
 						generateAddRelations(classVisit, ref.asType(EReference))
 						
