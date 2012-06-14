@@ -1,5 +1,5 @@
-slicer KermetaPruning {
-	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelTransfoAnalysis/kermeta.ecore"
+slicer strict KermetaPruning {
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore"
 	input: org.kermeta.language.structure.Operation
 	slicedClass: org.kermeta.language.structure.KermetaModelElement
 	slicedProperty: org.kermeta.language.structure.ModelingUnit.packages
