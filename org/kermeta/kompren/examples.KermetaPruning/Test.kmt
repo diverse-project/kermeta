@@ -5,30 +5,30 @@
  * Authors  : 
  *            ablouin
  */
-package ex::kermeta::TransfoAnalysis;
+package ex::kermeta::kompren::KermetaPruning;
 
 using kermeta::emfpersistence
 using kermeta::standard
 using kermeta::utils
-using org::kermeta::language::behavior
+using org::kermeta::language::structure
 using kermeta::io::StdIO => stdio
 
 class Test {
 	operation main() : Void is do
-	stdio.writeln("STARTING")
 		var inputRep : ResourceSet init ResourceSet.new
 		var inputRes : Resource
-		inputRes ?= inputRep.createResource("platform:/resource/examples.modelTransfoAnalysis/beforeCheckingforScopeRESOLVED.km", 
-											"platform:/resource/examples.modelTransfoAnalysis/kermeta.ecore")
+		inputRes ?= inputRep.createResource("platform:/resource/examples.KermetaPruning/beforeSetting.km", 
+											"platform:/resource/examples.KermetaPruning/kermeta.ecore")
 		inputRes.load(void)
-		stdio.writeln("LOADED")
 		var mu : org::kermeta::language::structure::ModelingUnit
 		mu ?= inputRes.getContents.one
-		stdio.writeln(">>>" + inputRes.getContents.one.toString)
-		var requiredMU : Bag<org::kermeta::language::structure::ModelingUnit> init Bag<org::kermeta::language::structure::ModelingUnit>.new
-		requiredMU.add(mu)
-		var slicer : KermetaStaticAnalysis init KermetaStaticAnalysis.new.initialise(requiredMU)
-		slicer.launch()
+		var requiredOp : Bag<org::kermeta::language::structure::Operation> init Bag<org::kermeta::language::structure::Operation>.new
+		var op : Operation init mu.packages.at(0).nestedPackage.at(0).ownedTypeDefinition.asOrderedSet.at(5).asType(ClassDefinition).ownedOperation.asOrderedSet.at(0)
+		requiredOp.add(op)
+		stdio.writeln(op.name)
+
+		var slicer : KermetaPruning init KermetaPruning.new.initialise(requiredOp)
+		slicer.launch
 	end
 }
 

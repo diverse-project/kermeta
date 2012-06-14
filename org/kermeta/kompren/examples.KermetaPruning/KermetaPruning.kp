@@ -1,11 +1,12 @@
 KermetaProject "examples.KermetaPruning"
 	groupId = "org.kermeta.kompren"
-	defaultMainClass ="org::kermeta::language::structure::KermetaPruning"
-	defaultMainOperation = "launch"
+	defaultMainClass ="ex::kermeta::kompren::KermetaPruning::Test"
+	defaultMainOperation = "main"
 	sources = {
 		require "${project.baseUri}/KermetaPruningAspect.kmt"
 		require "${project.baseUri}/KermetaPruning.kmt"
 		require "${project.baseUri}/behaviorSlicingAspect.kmt"
+		require "${project.baseUri}/Test.kmt"
 	}
 	dependencies = {
 		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
