@@ -45,9 +45,8 @@ aspect class OutputState {
 		end
 	end
 	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theStateMachineSlicer)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.outgoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)
 				if(not dup.isVoid and theTransition.sliced) then
@@ -79,9 +78,8 @@ aspect class Transition inherits SlicerVisitor {
 		end
 	end
 	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theStateMachineSlicer)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.source.visitToAddRelations(theStateMachineSlicer)
 			if(self.source.sliced) then
@@ -120,9 +118,8 @@ aspect class InitState {
 		end
 	end
 	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theStateMachineSlicer)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -146,9 +143,8 @@ aspect class TerminalState {
 		end
 	end
 	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theStateMachineSlicer)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -173,9 +169,8 @@ aspect class StandardState {
 		end
 	end
 	method visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theStateMachineSlicer)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
