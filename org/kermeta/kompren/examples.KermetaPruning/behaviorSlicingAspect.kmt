@@ -27,9 +27,8 @@ aspect class VariableDecl {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.type.visitToAddRelations(theKermetaPruning)
 			if(self.type.sliced) then
@@ -59,9 +58,8 @@ aspect class TypeReference {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -86,9 +84,8 @@ aspect class CallTypeLiteral {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.typeref.visitToAddRelations(theKermetaPruning)
 			if(self.typeref.sliced) then
@@ -120,9 +117,8 @@ aspect class LambdaExpression {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.parameters.each{theLambdaParameter | theLambdaParameter.visitToAddRelations(theKermetaPruning)
 				if(not dup.isVoid and theLambdaParameter.sliced) then
@@ -159,9 +155,8 @@ aspect class LambdaParameter {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.type.visitToAddRelations(theKermetaPruning)
 			if(self.type.sliced) then
@@ -194,9 +189,8 @@ aspect class Conditional {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.condition.visitToAddRelations(theKermetaPruning)
 			if(self.condition.sliced) then
@@ -239,9 +233,8 @@ aspect class Raise {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.expression.visitToAddRelations(theKermetaPruning)
 			if(self.expression.sliced) then
@@ -274,9 +267,8 @@ aspect class Loop {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			if(not self.initialization.isVoid) then self.initialization.visitToAddRelations(theKermetaPruning)
 			if(self.initialization.sliced) then
@@ -320,9 +312,8 @@ aspect class Block {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.statement.each{theExpression | theExpression.visitToAddRelations(theKermetaPruning)
 				if(not dup.isVoid and theExpression.sliced) then
@@ -350,9 +341,8 @@ aspect class CallExpression {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.parameters.each{theExpression | theExpression.visitToAddRelations(theKermetaPruning)
 				if(not dup.isVoid and theExpression.sliced) then
@@ -384,9 +374,8 @@ aspect class Assignment {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.target.visitToAddRelations(theKermetaPruning)
 			if(self.target.sliced) then
@@ -423,9 +412,8 @@ aspect class CallFeature {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			if(not self.target.isVoid) then self.target.visitToAddRelations(theKermetaPruning)
 			if(self.target.sliced) then
@@ -457,9 +445,8 @@ aspect class Rescue {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 			self.body.each{theExpression | theExpression.visitToAddRelations(theKermetaPruning)
 				if(not dup.isVoid and theExpression.sliced) then
@@ -494,9 +481,8 @@ aspect class CallEnumLiteral {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -519,9 +505,8 @@ aspect class CallProperty {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -544,9 +529,8 @@ aspect class CallOperation {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -569,9 +553,8 @@ aspect class UnresolvedCall {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) from CallExpression is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -594,9 +577,8 @@ aspect class SelfExpression {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -619,9 +601,8 @@ aspect class VoidLiteral {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -644,9 +625,8 @@ aspect class BooleanLiteral {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -669,9 +649,8 @@ aspect class StringLiteral {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -694,9 +673,8 @@ aspect class IntegerLiteral {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -719,9 +697,8 @@ aspect class JavaStaticCall {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -744,9 +721,8 @@ aspect class EmptyExpression {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -769,9 +745,8 @@ aspect class CallValue {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -794,9 +769,8 @@ aspect class CallResult {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -819,9 +793,8 @@ aspect class CallSuperOperation {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end
@@ -844,9 +817,8 @@ aspect class CallVariable {
 		end
 	end
 	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
-		if(not self.visitedPass) then
+		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
-			self.visitedPass := true
 			self.visitedForRelations := true
 		end
 	end

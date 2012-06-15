@@ -17,7 +17,7 @@ class Test {
 	operation main() : Void is do
 		var inputRep : ResourceSet init ResourceSet.new
 		var inputRes : Resource
-		inputRes ?= inputRep.createResource("platform:/resource/examples.KermetaPruning/beforeSetting.km", 
+		inputRes ?= inputRep.createResource("platform:/resource/examples.KermetaPruning/examples.examples.clazzReflexivity.km", 
 											"platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore")
 		inputRes.load(void)
 		var mu : org::kermeta::language::structure::ModelingUnit

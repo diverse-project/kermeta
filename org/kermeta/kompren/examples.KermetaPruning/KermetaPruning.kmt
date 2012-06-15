@@ -30,7 +30,8 @@ class KermetaPruning {
 	operation onEnd() is do
 		var repository : ResourceSet init ResourceSet.new
 		var resource : Resource 
- 		resource ?= repository.createResource("./slice.xmi", "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore")
+ 		resource ?= repository.createResource("platform:/resource/examples.KermetaPruning/slice.xmi", 
+ 												"platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore")
  		
  		resource.getContents.addAll(sliceRoots)
  		resource.save(void)
@@ -42,6 +43,7 @@ class KermetaPruning {
 		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | 
 			(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
 			sliceRoots.add(obj)
+			stdio.writeln(obj.toString)
 		end
 	end
 }
