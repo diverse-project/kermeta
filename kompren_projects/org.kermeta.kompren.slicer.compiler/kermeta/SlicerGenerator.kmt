@@ -136,10 +136,11 @@ class SlicerGenerator {
 		coll.each{sc | slicerModel.slicedElements.addAt(0, sc) }
 		coll.clear
 		
-		slicerModel.slicedClasses.select{sc | sc.domain.~abstract}.each{sc |
+		slicerModel.slicedClasses.each{sc |
 			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
 
-			slicedClassesToRemove.add(sc)
+			if(sc.domain.~abstract) then slicedClassesToRemove.add(sc) end
+			
 			var sub : Sequence<EClass> init sc.domain.getConcreteSubClasses(allClasses)
 			sub.each{subClass |
 				if((not slicerModel.slicedClasses.exists{sc2 | sc2.domain.getQualifiedName==subClass.getQualifiedName}).andThen{b2 |

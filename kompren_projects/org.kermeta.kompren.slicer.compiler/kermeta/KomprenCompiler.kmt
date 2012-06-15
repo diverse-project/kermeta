@@ -67,6 +67,16 @@ class KomprenCompiler {
 		end
 	end
 
+	operation generateKermetaPruningSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/modelTransfo.kompren")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer
+		slicer.saveCode
+	end
+	
 
 /*
 	operation generateUMLCMSlicer() is do

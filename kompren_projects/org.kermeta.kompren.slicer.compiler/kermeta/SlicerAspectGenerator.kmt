@@ -148,7 +148,7 @@ class SlicerAspectGenerator inherits Generator {
 				slicerGenerator.slicerModel.slicedElements.exists{elt | elt.isInstanceOf(SlicedProperty).andThen{b | 
 				elt.asType(SlicedProperty).domain.getQualifiedName==sf.getQualifiedName}}})) then
 				if(sf.upperBound==1) then
-					result := result + "\t\t" + varName + ".~" + sf.getValidKermetaName + " := self." + sf.getValidKermetaName + "\n"
+					result := result + "\t\t" + varName + "." + sf.getValidKermetaName + " := self." + sf.getValidKermetaName + "\n"
 				else
 					result := result + "\t\tself." + sf.getValidKermetaName + ".each{attr | " + varName + "." + sf.getValidKermetaName + ".add(attr) }\n"
 				end
