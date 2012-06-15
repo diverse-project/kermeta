@@ -13,8 +13,8 @@ class KermetaPruning {
 	operation initialise(requiredOperations : bag Operation[0..*]) : KermetaPruning is do
 		result := self
 		self.sliceRoots := Bag<Object>.new
-		self.~requiredOperations.clear()
-		self.~requiredOperations.addAll(requiredOperations)
+		self.requiredOperations.clear()
+		self.requiredOperations.addAll(requiredOperations)
 
 		if(idPass.isVoid) then idPass := 0
 		else idPass := idPass + 1 end
@@ -22,15 +22,15 @@ class KermetaPruning {
 
 	operation launch() is do
 		onStart()
-		self.~requiredOperations.each{theOperation | theOperation.visitToAddClasses(self) }
-		self.~requiredOperations.each{theOperation | theOperation.visitToAddRelations(self) }
+		self.requiredOperations.each{theOperation | theOperation.visitToAddClasses(self) }
+		self.requiredOperations.each{theOperation | theOperation.visitToAddRelations(self) }
 		onEnd()
 	end
 
 	operation onEnd() is do
 		var repository : ResourceSet init ResourceSet.new
 		var resource : Resource 
- 		resource ?= repository.createResource("platform:/resource/examples.KermetaPruning/slice.xmi", "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore")
+ 		resource ?= repository.createResource("./slice.xmi", "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore")
  		
  		resource.getContents.addAll(sliceRoots)
  		resource.save(void)
