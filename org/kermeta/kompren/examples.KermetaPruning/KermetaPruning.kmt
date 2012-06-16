@@ -43,7 +43,6 @@ class KermetaPruning {
 		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | 
 			(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
 			sliceRoots.add(obj)
-			stdio.writeln(obj.toString)
 		end
 	end
 }
