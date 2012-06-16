@@ -11,9 +11,9 @@
           eType="#//classModel/Clazz" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Clazz">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superClasses" upperBound="-1"
           eType="#//classModel/Clazz"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
