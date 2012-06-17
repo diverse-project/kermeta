@@ -4,6 +4,8 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::io::StdIO => stdio
 class InheritanceSlicer {
+	attribute idPass : Integer
+
 	reference requiredClazzs : Clazz[0..*]
 
 	reference addedClazzs : Bag<Clazz>
@@ -14,7 +16,11 @@ class InheritanceSlicer {
 		result := self
 		self.addedClazzs := Bag<Clazz>.new
 		self.addedsuperClasses := Bag<ClasssuperClasses>.new
+		self.requiredClazzs.clear()
 		self.requiredClazzs.addAll(requiredClazzs)
+
+		if(idPass.isVoid) then idPass := 0
+		else idPass := idPass + 1 end
 	end
 
 	operation launch() is do
@@ -24,7 +30,7 @@ class InheritanceSlicer {
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
 		self.addedsuperClasses.each{thesuperClasses | self.onClazzsuperClassesAdded(thesuperClasses.src, thesuperClasses.tar) }
 		onEnd()
-	end 
+	end
 
 	operation onClazzAdded(clazz : Clazz) is do
 stdio.writeln("Clazz: " + clazz.name)
