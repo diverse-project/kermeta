@@ -287,7 +287,7 @@ class SlicerAspectGenerator inherits Generator {
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") is do\n\t\t" + "if(not self.visitedPass" + paramCode
+			result := result + ") is do\n\t\t" + "if(not self.visitedForRelations" + paramCode
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=" + prunerVarName + ".radius)"
 			end
@@ -295,8 +295,7 @@ class SlicerAspectGenerator inherits Generator {
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius"
 			end
-			result := result + ")\n\t\t\tself.visitedPass := true\n" +
-					"\t\t\tself.visitedForRelations := true\n" + generateRelationCalls(eclass, false) +
+			result := result + ")\n\t\t\tself.visitedForRelations := true\n" + generateRelationCalls(eclass, false) +
 					//"\t\t\tself.visitedPass := false\n" + 
 					"\t\tend\n\tend\n"
 		end
