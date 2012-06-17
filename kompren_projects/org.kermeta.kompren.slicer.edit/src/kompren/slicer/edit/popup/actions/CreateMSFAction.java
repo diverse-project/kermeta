@@ -32,10 +32,7 @@ public class CreateMSFAction extends KomprenAction {
 		if(file.getFileExtension().equals("komprent")) {
 			CreateKomprenModelsAction action = new CreateKomprenModelsAction();
 			action.convertKomprentFile(file);
-
-			System.out.println(file.getFullPath() + " " + file.getFullPath().removeFileExtension().addFileExtension("kompren"));
 			file = ResourcesPlugin.getWorkspace().getRoot().getFile(file.getFullPath().removeFileExtension().addFileExtension("kompren"));
-			System.out.println(file);
 		}
 
 		final Resource resource = new ResourceSetImpl().getResource(URI.createFileURI(file.getLocation().toString()), true);
