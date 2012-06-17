@@ -247,7 +247,7 @@ class SlicerAspectGenerator inherits Generator {
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + ", currentRadius : Integer"
 			end
-			result := result + ") is do\n\t\tcheckInitialisation(theVisualiserKermetaModel.idPass)\n\t\tif(not self.visitedPass" + paramCode
+			result := result + ") is do\n\t\tcheckInitialisation(" + prunerVarName + ".idPass)\n\t\tif(not self.visitedPass" + paramCode
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				result := result + " and (" + prunerVarName + ".radius<=0 or currentRadius<=(" + prunerVarName + ".radius+1))"
 			end
