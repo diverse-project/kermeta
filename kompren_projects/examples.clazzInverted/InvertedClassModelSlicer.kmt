@@ -6,6 +6,8 @@ using kermeta::io::StdIO => stdio
 class InvertedClassModelSlicer {
 	reference model : ClassModel
 
+	attribute idPass : Integer
+
 	reference requiredClazzs : Clazz[0..*]
 
 	reference addedClazzs : Bag<Clazz>
@@ -17,15 +19,21 @@ class InvertedClassModelSlicer {
 		self.model := model
 		self.addedClazzs := Bag<Clazz>.new
 		self.addedlowerType := Bag<ClasslowerType>.new
+		self.requiredClazzs.clear()
 		self.requiredClazzs.addAll(requiredClazzs)
+
+		if(idPass.isVoid) then idPass := 0
+		else idPass := idPass + 1 end
 	end
 
 	operation launch() is do
 		self.model.feedOpposites()
+		onStart()
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddClasses(self) }
 		self.requiredClazzs.each{theClazz | theClazz.visitToAddRelations(self) }
 		self.addedClazzs.each{theClazz | onClazzAdded(theClazz) }
 		self.addedlowerType.each{thelowerType | self.onClazzlowerTypeAdded(thelowerType.src, thelowerType.tar) }
+		onEnd()
 	end
 
 	operation onClazzAdded(clazz : Clazz) is do
@@ -33,6 +41,10 @@ stdio.writeln("class: " + clazz.name)
 	end
 	operation onClazzlowerTypeAdded(src : Clazz, tgt : Clazz) is do
 stdio.writeln(tgt.name + "subclass of" + src.name)
+	end
+	operation onEnd() is do
+	end
+	operation onStart() is do
 	end
 
 }
