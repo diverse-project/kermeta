@@ -9,12 +9,12 @@
 	<groupId>org.kermeta.kompren</groupId>
 	<artifactId>kompren.root</artifactId>
 	<packaging>pom</packaging>
-	<version>2.0.4</version>
+	<version>2.0.5-SNAPSHOT</version>
 	<name>kompren.root :: Root for the projects dedicated to Kompren</name>
 
 	<properties>
 		<kermeta.version>2.0.2</kermeta.version>
-		<kompren.version>2.0.4</kompren.version>
+		<kompren.version>2.0.5-SNAPSHOT</kompren.version>
 		<utils.version>2.0.2</utils.version>
 		<traceability.version>2.0.2</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
