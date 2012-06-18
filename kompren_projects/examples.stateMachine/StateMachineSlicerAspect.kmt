@@ -51,7 +51,6 @@ aspect class OutputState {
 			self.outgoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)
 				if(not dup.isVoid and theTransition.sliced) then
 					dup.asType(OutputState).outgoingTransitions.add(theTransition.dup.asType(Transition))
-					theStateMachineSlicer.addToRoot(theTransition.dup)
 				end
 			}
 		end
@@ -71,6 +70,7 @@ aspect class Transition inherits SlicerVisitor {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theStateMachineSlicer.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.source.visitToAddClasses(theStateMachineSlicer)
@@ -84,13 +84,11 @@ aspect class Transition inherits SlicerVisitor {
 			self.source.visitToAddRelations(theStateMachineSlicer)
 			if(self.source.sliced) then
 				self.dup.asType(Transition).source := self.source.dup.asType(OutputState)
-				theStateMachineSlicer.addToRoot(self.source.dup)
 			end
 
 			self.target.visitToAddRelations(theStateMachineSlicer)
 			if(self.target.sliced) then
 				self.dup.asType(Transition).target := self.target.dup.asType(InputState)
-				theStateMachineSlicer.addToRoot(self.target.dup)
 			end
 
 		end
@@ -114,6 +112,7 @@ aspect class InitState {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theStateMachineSlicer.addToRoot(self.dup)
 			end
 		end
 	end
@@ -139,6 +138,7 @@ aspect class TerminalState {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theStateMachineSlicer.addToRoot(self.dup)
 			end
 		end
 	end
@@ -165,6 +165,7 @@ aspect class StandardState {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theStateMachineSlicer.addToRoot(self.dup)
 			end
 		end
 	end
