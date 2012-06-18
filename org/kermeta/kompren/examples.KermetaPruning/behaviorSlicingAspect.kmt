@@ -21,6 +21,7 @@ aspect class VariableDecl {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.type.visitToAddClasses(theKermetaPruning)
@@ -33,7 +34,6 @@ aspect class VariableDecl {
 			self.type.visitToAddRelations(theKermetaPruning)
 			if(self.type.sliced) then
 				self.dup.asType(VariableDecl).type := self.type.dup.asType(TypeReference)
-				theKermetaPruning.addToRoot(self.type.dup)
 			end
 
 		end
@@ -43,7 +43,7 @@ aspect class VariableDecl {
 aspect class TypeReference {
 	method createFrom() : Object is do
 		var theTypeReference : TypeReference init TypeReference.new
-		theTypeReference.~name := self.name
+		theTypeReference.name := self.name
 		result := theTypeReference
 	end
 
@@ -54,6 +54,7 @@ aspect class TypeReference {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -78,6 +79,7 @@ aspect class CallTypeLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.typeref.visitToAddClasses(theKermetaPruning)
@@ -90,7 +92,6 @@ aspect class CallTypeLiteral {
 			self.typeref.visitToAddRelations(theKermetaPruning)
 			if(self.typeref.sliced) then
 				self.dup.asType(CallTypeLiteral).typeref := self.typeref.dup.asType(TypeReference)
-				theKermetaPruning.addToRoot(self.typeref.dup)
 			end
 
 		end
@@ -110,6 +111,7 @@ aspect class LambdaExpression {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.parameters.each{theLambdaParameter | theLambdaParameter.visitToAddClasses(theKermetaPruning)}
@@ -129,7 +131,6 @@ aspect class LambdaExpression {
 			self.body.visitToAddRelations(theKermetaPruning)
 			if(self.body.sliced) then
 				self.dup.asType(LambdaExpression).body := self.body.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.body.dup)
 			end
 
 		end
@@ -149,6 +150,7 @@ aspect class LambdaParameter {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.type.visitToAddClasses(theKermetaPruning)
@@ -161,7 +163,6 @@ aspect class LambdaParameter {
 			self.type.visitToAddRelations(theKermetaPruning)
 			if(self.type.sliced) then
 				self.dup.asType(LambdaParameter).type := self.type.dup.asType(TypeReference)
-				theKermetaPruning.addToRoot(self.type.dup)
 			end
 
 		end
@@ -181,6 +182,7 @@ aspect class Conditional {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.condition.visitToAddClasses(theKermetaPruning)
@@ -195,19 +197,16 @@ aspect class Conditional {
 			self.condition.visitToAddRelations(theKermetaPruning)
 			if(self.condition.sliced) then
 				self.dup.asType(Conditional).condition := self.condition.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.condition.dup)
 			end
 
 			if(not self.elseBody.isVoid) then self.elseBody.visitToAddRelations(theKermetaPruning)
 			if(self.elseBody.sliced) then
 				self.dup.asType(Conditional).elseBody := self.elseBody.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.elseBody.dup)
 			end
  end
 			self.thenBody.visitToAddRelations(theKermetaPruning)
 			if(self.thenBody.sliced) then
 				self.dup.asType(Conditional).thenBody := self.thenBody.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.thenBody.dup)
 			end
 
 		end
@@ -227,6 +226,7 @@ aspect class Raise {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.expression.visitToAddClasses(theKermetaPruning)
@@ -239,7 +239,6 @@ aspect class Raise {
 			self.expression.visitToAddRelations(theKermetaPruning)
 			if(self.expression.sliced) then
 				self.dup.asType(Raise).expression := self.expression.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.expression.dup)
 			end
 
 		end
@@ -259,6 +258,7 @@ aspect class Loop {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			if(not self.initialization.isVoid) then self.initialization.visitToAddClasses(theKermetaPruning) end
@@ -273,19 +273,16 @@ aspect class Loop {
 			if(not self.initialization.isVoid) then self.initialization.visitToAddRelations(theKermetaPruning)
 			if(self.initialization.sliced) then
 				self.dup.asType(Loop).initialization := self.initialization.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.initialization.dup)
 			end
  end
 			if(not self.body.isVoid) then self.body.visitToAddRelations(theKermetaPruning)
 			if(self.body.sliced) then
 				self.dup.asType(Loop).body := self.body.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.body.dup)
 			end
  end
 			self.stopCondition.visitToAddRelations(theKermetaPruning)
 			if(self.stopCondition.sliced) then
 				self.dup.asType(Loop).stopCondition := self.stopCondition.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.stopCondition.dup)
 			end
 
 		end
@@ -305,6 +302,7 @@ aspect class Block {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.statement.each{theExpression | theExpression.visitToAddClasses(theKermetaPruning)}
@@ -367,6 +365,7 @@ aspect class Assignment {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.target.visitToAddClasses(theKermetaPruning)
@@ -380,13 +379,11 @@ aspect class Assignment {
 			self.target.visitToAddRelations(theKermetaPruning)
 			if(self.target.sliced) then
 				self.dup.asType(Assignment).target := self.target.dup.asType(CallExpression)
-				theKermetaPruning.addToRoot(self.target.dup)
 			end
 
 			self.~value.visitToAddRelations(theKermetaPruning)
 			if(self.~value.sliced) then
 				self.dup.asType(Assignment).~value := self.~value.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.~value.dup)
 			end
 
 		end
@@ -406,6 +403,7 @@ aspect class CallFeature {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			if(not self.target.isVoid) then self.target.visitToAddClasses(theKermetaPruning) end
@@ -418,7 +416,6 @@ aspect class CallFeature {
 			if(not self.target.isVoid) then self.target.visitToAddRelations(theKermetaPruning)
 			if(self.target.sliced) then
 				self.dup.asType(CallFeature).target := self.target.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.target.dup)
 			end
  end
 		end
@@ -438,6 +435,7 @@ aspect class Rescue {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.body.each{theExpression | theExpression.visitToAddClasses(theKermetaPruning)}
@@ -457,7 +455,6 @@ aspect class Rescue {
 			self.exceptionType.visitToAddRelations(theKermetaPruning)
 			if(self.exceptionType.sliced) then
 				self.dup.asType(Rescue).exceptionType := self.exceptionType.dup.asType(TypeReference)
-				theKermetaPruning.addToRoot(self.exceptionType.dup)
 			end
 
 		end
@@ -477,6 +474,7 @@ aspect class CallEnumLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -501,6 +499,7 @@ aspect class CallProperty {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -525,6 +524,7 @@ aspect class CallOperation {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -549,6 +549,7 @@ aspect class UnresolvedCall {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -573,6 +574,7 @@ aspect class SelfExpression {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -597,6 +599,7 @@ aspect class VoidLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -621,6 +624,7 @@ aspect class BooleanLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -645,6 +649,7 @@ aspect class StringLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -669,6 +674,7 @@ aspect class IntegerLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -693,6 +699,7 @@ aspect class JavaStaticCall {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -717,6 +724,7 @@ aspect class EmptyExpression {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -741,6 +749,7 @@ aspect class CallValue {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -765,6 +774,7 @@ aspect class CallResult {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -789,6 +799,7 @@ aspect class CallSuperOperation {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -813,6 +824,7 @@ aspect class CallVariable {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end

@@ -3,6 +3,21 @@ using org::kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using kermeta::io::StdIO => stdio
+
+aspect class TypeVariable {
+	method createFrom() : Object from Type is abstract
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from Type is abstract
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from Type is abstract
+}
+
+
+aspect class DataType {
+	method createFrom() : Object from TypeDefinition is abstract
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from TypeDefinition is abstract
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from TypeDefinition is abstract
+}
+
+
 class SlicerVisitor {
 	reference dup : Object
 
@@ -42,7 +57,7 @@ class SlicerVisitor {
 aspect class ModelingUnit {
 	method createFrom() : Object from TypeDefinitionContainer is do
 		var theModelingUnit : ModelingUnit init ModelingUnit.new
-		theModelingUnit.~name := self.name
+		theModelingUnit.name := self.name
 		result := theModelingUnit
 	end
 
@@ -53,6 +68,7 @@ aspect class ModelingUnit {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.packages.each{thePackage | thePackage.visitToAddClasses(theKermetaPruning)}
@@ -75,8 +91,8 @@ aspect class ModelingUnit {
 aspect class Package {
 	method createFrom() : Object from TypeDefinitionContainer is do
 		var thePackage : Package init Package.new
-		thePackage.~name := self.name
-		thePackage.~name := self.name
+		thePackage.name := self.name
+		thePackage.name := self.name
 		result := thePackage
 	end
 
@@ -87,6 +103,7 @@ aspect class Package {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theKermetaPruning)}
@@ -109,7 +126,7 @@ aspect class Package {
 aspect class TypeDefinitionContainer {
 	method createFrom() : Object is do
 		var theTypeDefinitionContainer : TypeDefinitionContainer init TypeDefinitionContainer.new
-		theTypeDefinitionContainer.~name := self.name
+		theTypeDefinitionContainer.name := self.name
 		result := theTypeDefinitionContainer
 	end
 
@@ -120,6 +137,7 @@ aspect class TypeDefinitionContainer {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theKermetaPruning)}
@@ -142,7 +160,7 @@ aspect class TypeDefinitionContainer {
 aspect class TypeDefinition {
 	method createFrom() : Object from TypeContainer is do
 		var theTypeDefinition : TypeDefinition init TypeDefinition.new
-		theTypeDefinition.~name := self.name
+		theTypeDefinition.name := self.name
 		result := theTypeDefinition
 	end
 
@@ -153,6 +171,7 @@ aspect class TypeDefinition {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.superType.each{theType | theType.visitToAddClasses(theKermetaPruning)}
@@ -175,7 +194,7 @@ aspect class TypeDefinition {
 aspect class ClassDefinition {
 	method createFrom() : Object is do
 		var theClassDefinition : ClassDefinition init ClassDefinition.new
-		theClassDefinition.~name := self.name
+		theClassDefinition.name := self.name
 		result := theClassDefinition
 	end
 
@@ -186,6 +205,7 @@ aspect class ClassDefinition {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.ownedOperation.each{theOperation | theOperation.visitToAddClasses(theKermetaPruning)}
@@ -215,7 +235,7 @@ aspect class ClassDefinition {
 aspect class Operation {
 	method createFrom() : Object from MultiplicityElement is do
 		var theOperation : Operation init Operation.new
-		theOperation.~name := self.name
+		theOperation.name := self.name
 		result := theOperation
 	end
 
@@ -226,6 +246,7 @@ aspect class Operation {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.ownedParameter.each{theParameter | theParameter.visitToAddClasses(theKermetaPruning)}
@@ -252,7 +273,6 @@ aspect class Operation {
 			if(not self.body.isVoid) then self.body.visitToAddRelations(theKermetaPruning)
 			if(self.body.sliced) then
 				self.dup.asType(Operation).body := self.body.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.body.dup)
 			end
  end
 			self.~pre.each{theConstraint | theConstraint.visitToAddRelations(theKermetaPruning)
@@ -276,7 +296,6 @@ aspect class Operation {
 			if(not self.owningClass.isVoid) then self.owningClass.visitToAddRelations(theKermetaPruning)
 			if(self.owningClass.sliced) then
 				self.dup.asType(Operation).owningClass := self.owningClass.dup.asType(ClassDefinition)
-				theKermetaPruning.addToRoot(self.owningClass.dup)
 			end
  end
 			self.raisedException.each{theType | theType.visitToAddRelations(theKermetaPruning)
@@ -288,7 +307,6 @@ aspect class Operation {
 			if(not self.superOperation.isVoid) then self.superOperation.visitToAddRelations(theKermetaPruning)
 			if(self.superOperation.sliced) then
 				self.dup.asType(Operation).superOperation := self.superOperation.dup.asType(AbstractOperation)
-				theKermetaPruning.addToRoot(self.superOperation.dup)
 			end
  end
 			self.typeParameter.each{theTypeVariable | theTypeVariable.visitToAddRelations(theKermetaPruning)
@@ -304,7 +322,7 @@ aspect class Operation {
 aspect class Parameter {
 	method createFrom() : Object is do
 		var theParameter : Parameter init Parameter.new
-		theParameter.~name := self.name
+		theParameter.name := self.name
 		result := theParameter
 	end
 
@@ -315,6 +333,7 @@ aspect class Parameter {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -322,7 +341,7 @@ aspect class Parameter {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -342,7 +361,6 @@ aspect class TypedElement {
 			if(not self.type.isVoid) then self.type.visitToAddRelations(theKermetaPruning)
 			if(self.type.sliced) then
 				self.dup.asType(TypedElement).type := self.type.dup.asType(Type)
-				theKermetaPruning.addToRoot(self.type.dup)
 			end
  end
 		end
@@ -388,7 +406,6 @@ aspect class ParameterizedType {
 			self.typeDefinition.visitToAddRelations(theKermetaPruning)
 			if(self.typeDefinition.sliced) then
 				self.dup.asType(ParameterizedType).typeDefinition := self.typeDefinition.dup.asType(GenericTypeDefinition)
-				theKermetaPruning.addToRoot(self.typeDefinition.dup)
 			end
 
 		end
@@ -398,7 +415,7 @@ aspect class ParameterizedType {
 aspect class Property {
 	method createFrom() : Object from MultiplicityElement is do
 		var theProperty : Property init Property.new
-		theProperty.~name := self.name
+		theProperty.name := self.name
 		result := theProperty
 	end
 
@@ -409,6 +426,7 @@ aspect class Property {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -416,14 +434,14 @@ aspect class Property {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class Constraint {
 	method createFrom() : Object is do
 		var theConstraint : Constraint init Constraint.new
-		theConstraint.~name := self.name
+		theConstraint.name := self.name
 		result := theConstraint
 	end
 
@@ -434,6 +452,7 @@ aspect class Constraint {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.body.visitToAddClasses(theKermetaPruning)
@@ -446,7 +465,6 @@ aspect class Constraint {
 			self.body.visitToAddRelations(theKermetaPruning)
 			if(self.body.sliced) then
 				self.dup.asType(Constraint).body := self.body.dup.asType(Expression)
-				theKermetaPruning.addToRoot(self.body.dup)
 			end
 
 		end
@@ -466,6 +484,7 @@ aspect class TypeMapping {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.targetType.visitToAddClasses(theKermetaPruning)
@@ -479,13 +498,11 @@ aspect class TypeMapping {
 			self.targetType.visitToAddRelations(theKermetaPruning)
 			if(self.targetType.sliced) then
 				self.dup.asType(TypeMapping).targetType := self.targetType.dup.asType(Type)
-				theKermetaPruning.addToRoot(self.targetType.dup)
 			end
 
 			self.sourceType.visitToAddRelations(theKermetaPruning)
 			if(self.sourceType.sliced) then
 				self.dup.asType(TypeMapping).sourceType := self.sourceType.dup.asType(TypeDefinition)
-				theKermetaPruning.addToRoot(self.sourceType.dup)
 			end
 
 		end
@@ -495,7 +512,7 @@ aspect class TypeMapping {
 aspect class Using {
 	method createFrom() : Object is do
 		var theUsing : Using init Using.new
-		theUsing.~fromQName := self.fromQName
+		theUsing.fromQName := self.fromQName
 		result := theUsing
 	end
 
@@ -506,6 +523,7 @@ aspect class Using {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -513,14 +531,14 @@ aspect class Using {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class UnresolvedOperation {
 	method createFrom() : Object from AbstractOperation is do
 		var theUnresolvedOperation : UnresolvedOperation init UnresolvedOperation.new
-		theUnresolvedOperation.~operationIdentifier := self.operationIdentifier
+		theUnresolvedOperation.operationIdentifier := self.operationIdentifier
 		result := theUnresolvedOperation
 	end
 
@@ -531,6 +549,7 @@ aspect class UnresolvedOperation {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -538,14 +557,14 @@ aspect class UnresolvedOperation {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class UnresolvedProperty {
 	method createFrom() : Object is do
 		var theUnresolvedProperty : UnresolvedProperty init UnresolvedProperty.new
-		theUnresolvedProperty.~propertyIdentifier := self.propertyIdentifier
+		theUnresolvedProperty.propertyIdentifier := self.propertyIdentifier
 		result := theUnresolvedProperty
 	end
 
@@ -556,6 +575,7 @@ aspect class UnresolvedProperty {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -563,7 +583,7 @@ aspect class UnresolvedProperty {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -580,6 +600,7 @@ aspect class Model {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -587,7 +608,7 @@ aspect class Model {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -604,6 +625,7 @@ aspect class Require {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -611,7 +633,7 @@ aspect class Require {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -628,6 +650,7 @@ aspect class Tag {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.object.each{theKermetaModelElement | theKermetaModelElement.visitToAddClasses(theKermetaPruning)}
@@ -650,7 +673,7 @@ aspect class Tag {
 aspect class MultiplicityElement {
 	method createFrom() : Object is do
 		var theMultiplicityElement : MultiplicityElement init MultiplicityElement.new
-		theMultiplicityElement.~name := self.name
+		theMultiplicityElement.name := self.name
 		result := theMultiplicityElement
 	end
 
@@ -661,6 +684,7 @@ aspect class MultiplicityElement {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -668,7 +692,7 @@ aspect class MultiplicityElement {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -685,6 +709,7 @@ aspect class TypeVariableBinding {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.variable.visitToAddClasses(theKermetaPruning)
@@ -698,13 +723,11 @@ aspect class TypeVariableBinding {
 			self.variable.visitToAddRelations(theKermetaPruning)
 			if(self.variable.sliced) then
 				self.dup.asType(TypeVariableBinding).variable := self.variable.dup.asType(TypeVariable)
-				theKermetaPruning.addToRoot(self.variable.dup)
 			end
 
 			self.type.visitToAddRelations(theKermetaPruning)
 			if(self.type.sliced) then
 				self.dup.asType(TypeVariableBinding).type := self.type.dup.asType(Type)
-				theKermetaPruning.addToRoot(self.type.dup)
 			end
 
 		end
@@ -714,7 +737,7 @@ aspect class TypeVariableBinding {
 aspect class EnumerationLiteral {
 	method createFrom() : Object is do
 		var theEnumerationLiteral : EnumerationLiteral init EnumerationLiteral.new
-		theEnumerationLiteral.~name := self.name
+		theEnumerationLiteral.name := self.name
 		result := theEnumerationLiteral
 	end
 
@@ -725,6 +748,7 @@ aspect class EnumerationLiteral {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -732,7 +756,7 @@ aspect class EnumerationLiteral {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -749,6 +773,7 @@ aspect class UnresolvedInferredType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -756,7 +781,7 @@ aspect class UnresolvedInferredType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -773,6 +798,7 @@ aspect class VoidType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -780,7 +806,7 @@ aspect class VoidType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -797,6 +823,7 @@ aspect class FunctionType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -804,7 +831,7 @@ aspect class FunctionType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -821,6 +848,7 @@ aspect class ProductType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -828,14 +856,14 @@ aspect class ProductType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class UnresolvedType {
 	method createFrom() : Object from Type is do
 		var theUnresolvedType : UnresolvedType init UnresolvedType.new
-		theUnresolvedType.~typeIdentifier := self.typeIdentifier
+		theUnresolvedType.typeIdentifier := self.typeIdentifier
 		result := theUnresolvedType
 	end
 
@@ -846,6 +874,7 @@ aspect class UnresolvedType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -853,14 +882,14 @@ aspect class UnresolvedType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class VirtualType {
 	method createFrom() : Object is do
 		var theVirtualType : VirtualType init VirtualType.new
-		theVirtualType.~name := self.name
+		theVirtualType.name := self.name
 		result := theVirtualType
 	end
 
@@ -871,6 +900,7 @@ aspect class VirtualType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.classDefinition.visitToAddClasses(theKermetaPruning)
@@ -884,13 +914,11 @@ aspect class VirtualType {
 			self.classDefinition.visitToAddRelations(theKermetaPruning)
 			if(self.classDefinition.sliced) then
 				self.dup.asType(VirtualType).classDefinition := self.classDefinition.dup.asType(ClassDefinition)
-				theKermetaPruning.addToRoot(self.classDefinition.dup)
 			end
 
 			self.modelType.visitToAddRelations(theKermetaPruning)
 			if(self.modelType.sliced) then
 				self.dup.asType(VirtualType).modelType := self.modelType.dup.asType(ModelTypeVariable)
-				theKermetaPruning.addToRoot(self.modelType.dup)
 			end
 
 		end
@@ -900,7 +928,7 @@ aspect class VirtualType {
 aspect class ModelTypeVariable {
 	method createFrom() : Object is do
 		var theModelTypeVariable : ModelTypeVariable init ModelTypeVariable.new
-		theModelTypeVariable.~name := self.name
+		theModelTypeVariable.name := self.name
 		result := theModelTypeVariable
 	end
 
@@ -911,6 +939,7 @@ aspect class ModelTypeVariable {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -918,14 +947,14 @@ aspect class ModelTypeVariable {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class ModelType {
 	method createFrom() : Object from TypeDefinition is do
 		var theModelType : ModelType init ModelType.new
-		theModelType.~name := self.name
+		theModelType.name := self.name
 		result := theModelType
 	end
 
@@ -936,6 +965,7 @@ aspect class ModelType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -943,20 +973,15 @@ aspect class ModelType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
-aspect class TypeVariable {
-	method createFrom() : Object from Type is abstract
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) from Type is abstract
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) from Type is abstract
-}
 
 aspect class ObjectTypeVariable {
 	method createFrom() : Object is do
 		var theObjectTypeVariable : ObjectTypeVariable init ObjectTypeVariable.new
-		theObjectTypeVariable.~name := self.name
+		theObjectTypeVariable.name := self.name
 		result := theObjectTypeVariable
 	end
 
@@ -967,6 +992,7 @@ aspect class ObjectTypeVariable {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -974,14 +1000,14 @@ aspect class ObjectTypeVariable {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class PrimitiveType {
 	method createFrom() : Object is do
 		var thePrimitiveType : PrimitiveType init PrimitiveType.new
-		thePrimitiveType.~name := self.name
+		thePrimitiveType.name := self.name
 		result := thePrimitiveType
 	end
 
@@ -992,6 +1018,7 @@ aspect class PrimitiveType {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -999,14 +1026,14 @@ aspect class PrimitiveType {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
 aspect class Enumeration {
 	method createFrom() : Object is do
 		var theEnumeration : Enumeration init Enumeration.new
-		theEnumeration.~name := self.name
+		theEnumeration.name := self.name
 		result := theEnumeration
 	end
 
@@ -1017,6 +1044,7 @@ aspect class Enumeration {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -1024,15 +1052,8 @@ aspect class Enumeration {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
+		end
 	end
-	end
-}
-
-
-aspect class DataType {
-	method createFrom() : Object from TypeDefinition is abstract
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) from TypeDefinition is abstract
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) from TypeDefinition is abstract
 }
 
 aspect class Class {
@@ -1048,6 +1069,7 @@ aspect class Class {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 		end
 	end
@@ -1055,7 +1077,7 @@ aspect class Class {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
@@ -1072,6 +1094,7 @@ aspect class KermetaModelElement inherits SlicerVisitor {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+								theKermetaPruning.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 		end
@@ -1080,7 +1103,7 @@ aspect class KermetaModelElement inherits SlicerVisitor {
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true
-	end
+		end
 	end
 }
 
