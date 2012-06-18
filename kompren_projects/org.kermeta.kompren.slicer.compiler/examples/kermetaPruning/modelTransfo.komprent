@@ -9,6 +9,7 @@ slicer strict KermetaPruning {
 	slicedProperty: org.kermeta.language.structure.Operation.ownedParameter
 	slicedProperty: org.kermeta.language.structure.TypedElement.type
 	slicedProperty: org.kermeta.language.structure.TypeContainer.containedType
+	slicedProperty: org.kermeta.language.structure.Type.typeContainer
 	slicedProperty: org.kermeta.language.structure.ParameterizedType.typeDefinition
 	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedAttribute
 	slicedProperty: org.kermeta.language.structure.TypeDefinition.superType

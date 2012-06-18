@@ -89,18 +89,24 @@ class SlicerGenerator {
 		if(slicerModel.strict) then
 			slicerModel.onEnd := "		var repository : ResourceSet init ResourceSet.new
 		var resource : Resource 
+		//TODO: replace ./slice.xmi by a valid path, as platform:/project/slice.xmi
  		resource ?= repository.createResource(\"./slice.xmi\", \"" + slicerModel.uriMetamodel + "\")
  		
+ 		var elts : OrderedSet<Object> init OrderedSet<Object>.new 
+ 		sliceRoots.each{elt |
+ 		 	var cont : Object init elt.container
+ 			if(cont.isVoid.orElse{b | cont.asType(SlicerVisitor).sliced.isVoid.orElse{b2 | not cont.asType(SlicerVisitor).sliced}}) then
+ 				elts.add(elt.dup)
+ 			end
+ 		}
  		resource.getContents.addAll(sliceRoots)
  		resource.save(void)"
  		
  			slicerModel.helper := "	operation addToRoot(obj : Object) is do
 		var cont : Object init obj.container
-		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | 
-			(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
+		if(cont.isVoid.orElse{b | cont.isInstanceOf(SlicerVisitor)}) then
 			sliceRoots.add(obj)
-		end
-	end"
+		end"
 		end
 	end
 	

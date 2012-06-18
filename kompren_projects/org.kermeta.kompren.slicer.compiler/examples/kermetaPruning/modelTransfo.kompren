@@ -25,6 +25,9 @@
     <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore#//kermeta/language/structure/TypeContainer/containedType"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore#//kermeta/language/structure/Type/typeContainer"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
     <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
   </slicedElements>
   <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">

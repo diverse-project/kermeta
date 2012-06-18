@@ -55,7 +55,7 @@ class SlicerClassGenerator inherits Generator {
 		generatedCode := generatedCode + "class " + slicerGenerator.slicerModel.name + " {\n"
 
 		if(slicerGenerator.slicerModel.strict) then
-			generatedCode := generatedCode + "\treference sliceRoots : Bag<Object>\n"
+			generatedCode := generatedCode + "\treference sliceRoots : Bag<SlicerVisitor>\n"
 		else
 			if(not slicerGenerator.slicerModel.radius.isVoid) then
 				generatedCode := generatedCode + "\tattribute radius : Integer\n\n"
@@ -253,7 +253,7 @@ class SlicerClassGenerator inherits Generator {
 		end
 
 		if(slicerGenerator.slicerModel.strict) then
-			result := result + "\t\tself.sliceRoots := Bag<Object>.new\n"
+			result := result + "\t\tself.sliceRoots := Bag<SlicerVisitor>.new\n"
 		else
 			slicerGenerator.slicerModel.slicedClasses.each{clazz |
 				result := result + "\t\tself." + clazz.domain.getAddedAttributeName() + " := Bag<" + clazz.domain.name + ">.new\n"

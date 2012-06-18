@@ -412,8 +412,7 @@ class SlicerAspectGenerator inherits Generator {
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
 					result := result + "\n\t\t\t\tif(not dup.isVoid and " + nameVar + ".sliced) then\n\t\t\t\t\t" + 
 								"dup.asType(" + ref.container().asType(EClassifier).name + ")." + ref.getValidKermetaName + 
-								".add(" + nameVar +".dup.asType(" + ref.eType.name + "))\n\t\t\t\t\t" + prunerVarName + ".addToRoot(" 
-								+ nameVar + ".dup)\n\t\t\t\tend\n\t\t\t"
+								".add(" + nameVar +".dup.asType(" + ref.eType.name + "))\n\t\t\t\tend\n\t\t\t"
 				end
 						
 				result := result + "}"
