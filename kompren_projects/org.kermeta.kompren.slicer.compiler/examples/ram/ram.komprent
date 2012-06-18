@@ -1,0 +1,8 @@
+slicer strict RAMSlicer {
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/ram/RAM.ecore"
+	input: ram.Aspect
+	slicedClass: ram.Aspect
+	slicedClass: ram.Instantiation
+	slicedProperty: ram.Aspect.instantiations
+	slicedProperty: ram.Instantiation.externalAspect
+}

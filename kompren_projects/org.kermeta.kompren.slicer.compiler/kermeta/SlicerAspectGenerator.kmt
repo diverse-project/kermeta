@@ -273,7 +273,8 @@ class SlicerAspectGenerator inherits Generator {
 					result := result + prunerVarName + "." + eclass.getAddedAttributeName() + ".add(self)"
 				end
 
-				result := result + "\n\t\t\t\tself.sliced := true\n\t\t\tend\n"
+				result := result + "\n\t\t\t\tself.sliced := true\n\t\t\t\t"+
+					"\t\t\t\t" + prunerVarName + ".addToRoot(self.dup)\n\t\t\tend\n"
 			end
 
 			var relationCalls : String init generateRelationCalls(eclass, true)
@@ -396,8 +397,7 @@ class SlicerAspectGenerator inherits Generator {
 				if(slicerGenerator.slicerModel.strict and not classVisit) then
 					result := result + "\n\t\t\tif(self." + ref.getValidKermetaName + ".sliced) then\n\t\t\t\tself.dup.asType(" + 
 							ref.container().asType(EClassifier).name + ")." + ref.getValidKermetaName + " := self." + 
-							ref.getValidKermetaName + ".dup.asType(" + ref.eType.name + ")\n\t\t\t\t" + prunerVarName + ".addToRoot(self."
-							+ ref.getValidKermetaName + ".dup)\n\t\t\tend\n"
+							ref.getValidKermetaName + ".dup.asType(" + ref.eType.name + ")\n\t\t\tend\n"
 				end
 	
 				if(ref.lowerBound==0) then
