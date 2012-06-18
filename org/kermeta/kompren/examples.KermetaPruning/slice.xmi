@@ -24,7 +24,7 @@
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="getMetaClass" type="/1/getMetaClass/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/23"/>
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="container" type="/1/container/@containedType.0">
@@ -46,7 +46,7 @@
     <ownedOperation name="checkInvariant" type="/1/checkInvariant/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="constraint" type="/1/checkInvariant/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/43"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/42"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -60,28 +60,28 @@
     <ownedOperation name="isDirectInstanceOf" type="/1/isDirectInstanceOf/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="cl" type="/1/isDirectInstanceOf/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/23"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="isKindOf" type="/1/isKindOf/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="cl" type="/1/isKindOf/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/23"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="get" type="/1/get/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
       <ownedParameter name="property" type="/1/get/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="set" type="/1/set/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="property" type="/1/set/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
       </ownedParameter>
       <ownedParameter name="element" type="/1/set/@ownedParameter.1/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
@@ -91,14 +91,14 @@
     <ownedOperation name="isSet" type="/1/isSet/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="property" type="/1/isSet/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="unset" type="/1/unset/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="property" type="/1/unset/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -117,25 +117,25 @@
     <ownedOperation name="asType" type="/1/asType/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
       <ownedParameter name="type" type="/1/asType/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/23"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="isInstanceOf" type="/1/isInstanceOf/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="type" type="/1/isInstanceOf/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="containingResource" type="/1/containingResource/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/49"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="invoke" type="/1/invoke/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="op" type="/1/invoke/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/45"/>
       </ownedParameter>
       <ownedParameter name="args" type="/1/invoke/@ownedParameter.1/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/17"/>
@@ -238,24 +238,14 @@
     <ownedOperation name="andThen" type="/2/andThen/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="func" type="/2/andThen/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-          </containedType>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="orElse" type="/2/orElse/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="func" type="/2/orElse/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-          </containedType>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -346,7 +336,7 @@
     <ownedOperation name="contentEquals" type="/3/contentEquals/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="arg0" type="/3/contentEquals/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -655,7 +645,7 @@
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="toURI" type="/3/toURI/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
@@ -890,12 +880,7 @@
     <ownedOperation name="times" type="/4/times/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="body" type="/4/times/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-          </containedType>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -1852,20 +1837,14 @@
     <ownedOperation name="forAllCpl" type="/13/forAllCpl/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="f" type="/13/forAllCpl/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="existsCpl" type="/13/existsCpl/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="f" type="/13/existsCpl/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -1952,42 +1931,28 @@
     <ownedOperation name="each" type="/13/each/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="func" type="/13/each/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="indexedEach" type="/13/indexedEach/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <ownedParameter name="func" type="/13/indexedEach/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
-          </containedType>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="forAll" type="/13/forAll/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="func" type="/13/forAll/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="exists" type="/13/exists/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="func" type="/13/exists/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -1995,9 +1960,7 @@
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/18"/>
       <ownedParameter name="collector" type="/13/collect/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -2005,48 +1968,34 @@
       <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="T"/>
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <ownedParameter name="collector" type="/13/isUnique/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="detect" type="/13/G">
       <ownedParameter name="detector" type="/13/detect/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="select" type="/13/select/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/18"/>
       <ownedParameter name="selector" type="/13/select/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="selectOne" type="/13/selectOne/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/18"/>
       <ownedParameter name="selector" type="/13/selectOne/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
     <ownedOperation name="reject" type="/13/reject/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/18"/>
       <ownedParameter name="rejector" type="/13/reject/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:FunctionType">
-          <containedType xsi:type="org_kermeta_language_structure:ProductType"/>
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-        </containedType>
+        <containedType xsi:type="org_kermeta_language_structure:FunctionType"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
@@ -2398,825 +2347,800 @@
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="EachContext" superType="/20/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="StringBuffer" superType="/20/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedAttribute name="index" type="/20/index/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-    </ownedAttribute>
-    <ownedAttribute name="isFirst" type="/20/isFirst/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="isLast" type="/20/isLast/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedOperation name="initialize" type="/20/initialize/@containedType.0">
+    <ownedOperation name="toString" type="/20/toString/@containedType.0" superOperation="/1/toString">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="append" type="/20/append/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
-      <ownedParameter name="i" type="/20/initialize/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="first" type="/20/initialize/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-      </ownedParameter>
-      <ownedParameter name="last" type="/20/initialize/@ownedParameter.2/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+      <ownedParameter name="arg0" type="/20/append/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
+    <ownedOperation name="indexOf" type="/20/indexOf/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/indexOf/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="indexOf" type="/20/indexOf.1/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/indexOf.1/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/indexOf.1/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="charAt" type="/20/charAt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/12"/>
+      <ownedParameter name="arg0" type="/20/charAt/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="codePointAt" type="/20/codePointAt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/codePointAt/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="codePointBefore" type="/20/codePointBefore/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/codePointBefore/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="codePointCount" type="/20/codePointCount/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/codePointCount/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/codePointCount/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="getChars" type="/20/getChars/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <ownedParameter name="arg0" type="/20/getChars/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/getChars/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg2" type="/20/getChars/@ownedParameter.2/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/13"/>
+      </ownedParameter>
+      <ownedParameter name="arg3" type="/20/getChars/@ownedParameter.3/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="lastIndexOf" type="/20/lastIndexOf/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/lastIndexOf/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="lastIndexOf" type="/20/lastIndexOf.1/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/lastIndexOf.1/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/lastIndexOf.1/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="size" type="/20/size/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="offsetByCodePoints" type="/20/offsetByCodePoints/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <ownedParameter name="arg0" type="/20/offsetByCodePoints/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/offsetByCodePoints/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="replace" type="/20/replace/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
+      <ownedParameter name="arg0" type="/20/replace/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/replace/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg2" type="/20/replace/@ownedParameter.2/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="substring" type="/20/substring/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      <ownedParameter name="arg0" type="/20/substring/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="substring" type="/20/substring.1/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      <ownedParameter name="arg0" type="/20/substring.1/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/substring.1/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="appendCodePoint" type="/20/appendCodePoint/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
+      <ownedParameter name="arg0" type="/20/appendCodePoint/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="capacity" type="/20/capacity/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="delete" type="/20/delete/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
+      <ownedParameter name="arg0" type="/20/delete/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/delete/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="deleteCharAt" type="/20/deleteCharAt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
+      <ownedParameter name="arg0" type="/20/deleteCharAt/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="ensureCapacity" type="/20/ensureCapacity/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <ownedParameter name="arg0" type="/20/ensureCapacity/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="insert" type="/20/insert/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
+      <ownedParameter name="arg0" type="/20/insert/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/insert/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="reverse" type="/20/reverse/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/20"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="setCharAt" type="/20/setCharAt/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <ownedParameter name="arg0" type="/20/setCharAt/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/setCharAt/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/12"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="setLength" type="/20/setLength/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <ownedParameter name="arg0" type="/20/setLength/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="trimToSize" type="/20/trimToSize/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="wait" type="/20/wait/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <ownedParameter name="arg0" type="/20/wait/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/9"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="wait" type="/20/wait.1/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <ownedParameter name="arg0" type="/20/wait.1/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/9"/>
+      </ownedParameter>
+      <ownedParameter name="arg1" type="/20/wait.1/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="wait" type="/20/wait.2/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="equals" type="/20/equals/@containedType.0" superOperation="/1/equals">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+      <ownedParameter name="arg0" type="/20/equals/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
+      </ownedParameter>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="hashCode" type="/20/hashCode/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="notify" type="/20/notify/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
+    <ownedOperation name="notifyAll" type="/20/notifyAll/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
+      <body xsi:type="org_kermeta_language_behavior:Block"/>
+    </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="StringBuffer" superType="/21/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="URI" superType="/21/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
     <ownedOperation name="toString" type="/21/toString/@containedType.0" superOperation="/1/toString">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="append" type="/21/append/@containedType.0">
+    <ownedOperation name="appendSegment" type="/21/appendSegment/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <ownedParameter name="arg0" type="/21/append/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="indexOf" type="/21/indexOf/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/indexOf/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="pathSegment" type="/21/appendSegment/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="indexOf" type="/21/indexOf.1/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/indexOf.1/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/indexOf.1/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="charAt" type="/21/charAt/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/12"/>
-      <ownedParameter name="arg0" type="/21/charAt/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="codePointAt" type="/21/codePointAt/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/codePointAt/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="codePointBefore" type="/21/codePointBefore/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/codePointBefore/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="codePointCount" type="/21/codePointCount/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/codePointCount/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/codePointCount/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="getChars" type="/21/getChars/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/21/getChars/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/getChars/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg2" type="/21/getChars/@ownedParameter.2/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/13"/>
-      </ownedParameter>
-      <ownedParameter name="arg3" type="/21/getChars/@ownedParameter.3/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="lastIndexOf" type="/21/lastIndexOf/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/lastIndexOf/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="lastIndexOf" type="/21/lastIndexOf.1/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/lastIndexOf.1/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/lastIndexOf.1/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="size" type="/21/size/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="offsetByCodePoints" type="/21/offsetByCodePoints/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <ownedParameter name="arg0" type="/21/offsetByCodePoints/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/offsetByCodePoints/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="replace" type="/21/replace/@containedType.0">
+    <ownedOperation name="appendSegments" type="/21/appendSegments/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <ownedParameter name="arg0" type="/21/replace/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/replace/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg2" type="/21/replace/@ownedParameter.2/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="substring" type="/21/substring/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      <ownedParameter name="arg0" type="/21/substring/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="substring" type="/21/substring.1/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      <ownedParameter name="arg0" type="/21/substring.1/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/substring.1/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="appendCodePoint" type="/21/appendCodePoint/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <ownedParameter name="arg0" type="/21/appendCodePoint/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="capacity" type="/21/capacity/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="delete" type="/21/delete/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <ownedParameter name="arg0" type="/21/delete/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/delete/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="deleteCharAt" type="/21/deleteCharAt/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <ownedParameter name="arg0" type="/21/deleteCharAt/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="ensureCapacity" type="/21/ensureCapacity/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/21/ensureCapacity/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="insert" type="/21/insert/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <ownedParameter name="arg0" type="/21/insert/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/insert/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="reverse" type="/21/reverse/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="setCharAt" type="/21/setCharAt/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/21/setCharAt/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/setCharAt/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/12"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="setLength" type="/21/setLength/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/21/setLength/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="trimToSize" type="/21/trimToSize/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="wait" type="/21/wait/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/21/wait/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/9"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="wait" type="/21/wait.1/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/21/wait.1/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/9"/>
-      </ownedParameter>
-      <ownedParameter name="arg1" type="/21/wait.1/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="wait" type="/21/wait.2/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="equals" type="/21/equals/@containedType.0" superOperation="/1/equals">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-      <ownedParameter name="arg0" type="/21/equals/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="hashCode" type="/21/hashCode/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="notify" type="/21/notify/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="notifyAll" type="/21/notifyAll/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="URI" superType="/22/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedOperation name="toString" type="/22/toString/@containedType.0" superOperation="/1/toString">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="appendSegment" type="/22/appendSegment/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
-      <ownedParameter name="pathSegment" type="/22/appendSegment/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      </ownedParameter>
-      <body xsi:type="org_kermeta_language_behavior:Block"/>
-    </ownedOperation>
-    <ownedOperation name="appendSegments" type="/22/appendSegments/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
-      <ownedParameter name="pathSegments" type="/22/appendSegments/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="pathSegments" type="/21/appendSegments/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/18"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Class" superType="/23/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
-    <ownedAttribute name="ownedAttribute" type="/23/ownedAttribute/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+  <org_kermeta_language_structure:ClassDefinition name="Class" superType="/22/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/23"/>
+    <ownedAttribute name="ownedAttribute" type="/22/ownedAttribute/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
     </ownedAttribute>
-    <ownedAttribute name="ownedOperation" type="/23/ownedOperation/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
+    <ownedAttribute name="ownedOperation" type="/22/ownedOperation/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/45"/>
     </ownedAttribute>
-    <ownedAttribute name="superClass" type="/23/superClass/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/23"/>
+    <ownedAttribute name="superClass" type="/22/superClass/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
     </ownedAttribute>
-    <ownedAttribute name="isAbstract" type="/23/isAbstract/@containedType.0">
+    <ownedAttribute name="isAbstract" type="/22/isAbstract/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="name" type="/23/name/@containedType.0">
+    <ownedAttribute name="name" type="/22/name/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
     </ownedAttribute>
-    <ownedOperation name="new" type="/23/new/@containedType.0">
+    <ownedOperation name="new" type="/22/new/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="ParameterizedType" superType="/24/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
-    <ownedAttribute name="virtualTypeBinding" type="/24/virtualTypeBinding/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/29"/>
-    </ownedAttribute>
-    <ownedAttribute name="typeParamBinding" type="/24/typeParamBinding/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/29"/>
-    </ownedAttribute>
-    <ownedAttribute name="typeDefinition" type="/24/typeDefinition/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/32"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Type" superType="/25/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-    <ownedAttribute name="typeContainer" type="/25/typeContainer/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="ParameterizedType" superType="/23/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    <ownedAttribute name="virtualTypeBinding" type="/23/virtualTypeBinding/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
     </ownedAttribute>
+    <ownedAttribute name="typeParamBinding" type="/23/typeParamBinding/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
+    </ownedAttribute>
+    <ownedAttribute name="typeDefinition" type="/23/typeDefinition/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/31"/>
+    </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="KermetaModelElement" superType="/26/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="Type" superType="/24/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <ownedAttribute name="typeContainer" type="/24/typeContainer/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="KermetaModelElement" superType="/25/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedAttribute name="kTag" type="/26/kTag/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
-    </ownedAttribute>
-    <ownedAttribute name="kOwnedTags" type="/26/kOwnedTags/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
-    </ownedAttribute>
-    <ownedAttribute name="kType" type="/26/kType/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Tag" superType="/27/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-    <ownedAttribute name="name" type="/27/name/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-    </ownedAttribute>
-    <ownedAttribute name="value" type="/27/value/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-    </ownedAttribute>
-    <ownedAttribute name="object" type="/27/object/@containedType.0">
+    <ownedAttribute name="kTag" type="/25/kTag/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
     </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="TypeContainer" superType="/28/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-    <ownedAttribute name="containedType" type="/28/containedType/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <ownedAttribute name="kOwnedTags" type="/25/kOwnedTags/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
+    </ownedAttribute>
+    <ownedAttribute name="kType" type="/25/kType/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="TypeVariableBinding" superType="/29/@containedType.0 /29/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-    <ownedAttribute name="variable" type="/29/variable/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
-    </ownedAttribute>
-    <ownedAttribute name="type" type="/29/type/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="TypeVariable" superType="/30/@containedType.0 /30/@containedType.1 /30/@containedType.2">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
+  <org_kermeta_language_structure:ClassDefinition name="Tag" superType="/26/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/31"/>
-    <ownedAttribute name="supertype" type="/30/supertype/@containedType.0">
+    <ownedAttribute name="name" type="/26/name/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+    </ownedAttribute>
+    <ownedAttribute name="value" type="/26/value/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+    </ownedAttribute>
+    <ownedAttribute name="object" type="/26/object/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="NamedElement" superType="/31/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-    <ownedAttribute name="name" type="/31/name/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="TypeContainer" superType="/27/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <ownedAttribute name="containedType" type="/27/containedType/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="TypeVariableBinding" superType="/28/@containedType.0 /28/@containedType.1">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <ownedAttribute name="variable" type="/28/variable/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/29"/>
+    </ownedAttribute>
+    <ownedAttribute name="type" type="/28/type/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="TypeVariable" superType="/29/@containedType.0 /29/@containedType.1 /29/@containedType.2">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
+    <ownedAttribute name="supertype" type="/29/supertype/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="NamedElement" superType="/30/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <ownedAttribute name="name" type="/30/name/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="GenericTypeDefinition" superType="/32/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/33"/>
-    <ownedAttribute name="typeParameter" type="/32/typeParameter/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
+  <org_kermeta_language_structure:ClassDefinition name="GenericTypeDefinition" superType="/31/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/32"/>
+    <ownedAttribute name="typeParameter" type="/31/typeParameter/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/29"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="TypeDefinition" superType="/33/@containedType.0 /33/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/31"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
-    <ownedAttribute name="superType" type="/33/superType/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+  <org_kermeta_language_structure:ClassDefinition name="TypeDefinition" superType="/32/@containedType.0 /32/@containedType.1">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <ownedAttribute name="superType" type="/32/superType/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
     </ownedAttribute>
-    <ownedAttribute name="typeMappings" type="/33/typeMappings/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
+    <ownedAttribute name="typeMappings" type="/32/typeMappings/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/33"/>
     </ownedAttribute>
-    <ownedAttribute name="isAspect" type="/33/isAspect/@containedType.0">
+    <ownedAttribute name="isAspect" type="/32/isAspect/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="TypeMapping" superType="/34/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
-    <ownedAttribute name="targetType" type="/34/targetType/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+  <org_kermeta_language_structure:ClassDefinition name="TypeMapping" superType="/33/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <ownedAttribute name="targetType" type="/33/targetType/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
     </ownedAttribute>
-    <ownedAttribute name="sourceType" type="/34/sourceType/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/33"/>
+    <ownedAttribute name="sourceType" type="/33/sourceType/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/32"/>
     </ownedAttribute>
-    <ownedAttribute name="mapping" type="/34/mapping/@containedType.0">
+    <ownedAttribute name="mapping" type="/33/mapping/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Property" superType="/35/@containedType.0 /35/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/36"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/38"/>
-    <ownedAttribute name="opposite" type="/35/opposite/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="Property" superType="/34/@containedType.0 /34/@containedType.1">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/37"/>
+    <ownedAttribute name="opposite" type="/34/opposite/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/37"/>
+    </ownedAttribute>
+    <ownedAttribute name="isReadOnly" type="/34/isReadOnly/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+    <ownedAttribute name="default" type="/34/default/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+    </ownedAttribute>
+    <ownedAttribute name="isComposite" type="/34/isComposite/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+    <ownedAttribute name="isDerived" type="/34/isDerived/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+    <ownedAttribute name="isID" type="/34/isID/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+    <ownedAttribute name="getterBody" type="/34/getterBody/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/38"/>
     </ownedAttribute>
-    <ownedAttribute name="isReadOnly" type="/35/isReadOnly/@containedType.0">
+    <ownedAttribute name="setterBody" type="/34/setterBody/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/38"/>
+    </ownedAttribute>
+    <ownedAttribute name="isGetterAbstract" type="/34/isGetterAbstract/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="default" type="/35/default/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-    </ownedAttribute>
-    <ownedAttribute name="isComposite" type="/35/isComposite/@containedType.0">
+    <ownedAttribute name="isSetterAbstract" type="/34/isSetterAbstract/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="isDerived" type="/35/isDerived/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="isID" type="/35/isID/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="getterBody" type="/35/getterBody/@containedType.0">
+    <ownedAttribute name="ownedUnresolvedProperties" type="/34/ownedUnresolvedProperties/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/39"/>
     </ownedAttribute>
-    <ownedAttribute name="setterBody" type="/35/setterBody/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/39"/>
-    </ownedAttribute>
-    <ownedAttribute name="isGetterAbstract" type="/35/isGetterAbstract/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="isSetterAbstract" type="/35/isSetterAbstract/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="ownedUnresolvedProperties" type="/35/ownedUnresolvedProperties/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/40"/>
-    </ownedAttribute>
-    <ownedAttribute name="owningClass" type="/35/owningClass/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/42"/>
+    <ownedAttribute name="owningClass" type="/34/owningClass/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/41"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="MultiplicityElement" superType="/36/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="MultiplicityElement" superType="/35/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/36"/>
+    <ownedAttribute name="isOrdered" type="/35/isOrdered/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+    <ownedAttribute name="isUnique" type="/35/isUnique/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+    <ownedAttribute name="lower" type="/35/lower/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+    </ownedAttribute>
+    <ownedAttribute name="upper" type="/35/upper/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="TypedElement" superType="/36/@containedType.0 /36/@containedType.1">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
+    <ownedAttribute name="type" type="/36/type/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="AbstractProperty" superType="/37/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="Expression" superType="/38/@containedType.0 /38/@containedType.1">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <ownedAttribute name="staticType" type="/38/staticType/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="UnresolvedProperty" superType="/39/@containedType.0 /39/@containedType.1">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/37"/>
-    <ownedAttribute name="isOrdered" type="/36/isOrdered/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="isUnique" type="/36/isUnique/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="lower" type="/36/lower/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-    </ownedAttribute>
-    <ownedAttribute name="upper" type="/36/upper/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/4"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="TypedElement" superType="/37/@containedType.0 /37/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/31"/>
-    <ownedAttribute name="type" type="/37/type/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="AbstractProperty" superType="/38/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Expression" superType="/39/@containedType.0 /39/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
-    <ownedAttribute name="staticType" type="/39/staticType/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="UnresolvedProperty" superType="/40/@containedType.0 /40/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/38"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/41"/>
-    <ownedAttribute name="propertyIdentifier" type="/40/propertyIdentifier/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/40"/>
+    <ownedAttribute name="propertyIdentifier" type="/39/propertyIdentifier/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Unresolved" superType="/41/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
+  <org_kermeta_language_structure:ClassDefinition name="Unresolved" superType="/40/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="ClassDefinition" superType="/42/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/32"/>
-    <ownedAttribute name="inv" type="/42/inv/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/43"/>
-    </ownedAttribute>
-    <ownedAttribute name="isAbstract" type="/42/isAbstract/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-    <ownedAttribute name="ownedAttribute" type="/42/ownedAttribute/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
-    </ownedAttribute>
-    <ownedAttribute name="ownedOperation" type="/42/ownedOperation/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
-    </ownedAttribute>
-    <ownedAttribute name="isSingleton" type="/42/isSingleton/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
-    </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Constraint" superType="/43/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="ClassDefinition" superType="/41/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/31"/>
-    <ownedAttribute name="body" type="/43/body/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/39"/>
-    </ownedAttribute>
-    <ownedAttribute name="stereotype" type="/44"/>
-    <ownedAttribute name="language" type="/45"/>
-    <ownedAttribute name="invOwner" type="/43/invOwner/@containedType.0">
+    <ownedAttribute name="inv" type="/41/inv/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/42"/>
     </ownedAttribute>
-    <ownedAttribute name="preOwner" type="/43/preOwner/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
+    <ownedAttribute name="isAbstract" type="/41/isAbstract/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="postOwner" type="/43/postOwner/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
+    <ownedAttribute name="ownedAttribute" type="/41/ownedAttribute/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/34"/>
+    </ownedAttribute>
+    <ownedAttribute name="ownedOperation" type="/41/ownedOperation/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/45"/>
+    </ownedAttribute>
+    <ownedAttribute name="isSingleton" type="/41/isSingleton/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="Constraint" superType="/42/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
+    <ownedAttribute name="body" type="/42/body/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/38"/>
+    </ownedAttribute>
+    <ownedAttribute name="stereotype" type="/43"/>
+    <ownedAttribute name="language" type="/44"/>
+    <ownedAttribute name="invOwner" type="/42/invOwner/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/41"/>
+    </ownedAttribute>
+    <ownedAttribute name="preOwner" type="/42/preOwner/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/45"/>
+    </ownedAttribute>
+    <ownedAttribute name="postOwner" type="/42/postOwner/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/45"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
   <org_kermeta_language_structure:Enumeration name="ConstraintType"/>
   <org_kermeta_language_structure:Enumeration name="ConstraintLanguage"/>
-  <org_kermeta_language_structure:ClassDefinition name="Operation" superType="/46/@containedType.0 /46/@containedType.1">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/36"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/47"/>
-    <ownedAttribute name="isAbstract" type="/46/isAbstract/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="Operation" superType="/45/@containedType.0 /45/@containedType.1">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
+    <ownedAttribute name="isAbstract" type="/45/isAbstract/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="raisedException" type="/46/raisedException/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+    <ownedAttribute name="raisedException" type="/45/raisedException/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
     </ownedAttribute>
-    <ownedAttribute name="ownedParameter" type="/46/ownedParameter/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/48"/>
-    </ownedAttribute>
-    <ownedAttribute name="pre" type="/46/pre/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/43"/>
-    </ownedAttribute>
-    <ownedAttribute name="post" type="/46/post/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/43"/>
-    </ownedAttribute>
-    <ownedAttribute name="body" type="/46/body/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/39"/>
-    </ownedAttribute>
-    <ownedAttribute name="superOperation" type="/46/superOperation/@containedType.0">
+    <ownedAttribute name="ownedParameter" type="/45/ownedParameter/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/47"/>
     </ownedAttribute>
-    <ownedAttribute name="ownedUnresolvedOperations" type="/46/ownedUnresolvedOperations/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/49"/>
-    </ownedAttribute>
-    <ownedAttribute name="owningClass" type="/46/owningClass/@containedType.0">
+    <ownedAttribute name="pre" type="/45/pre/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/42"/>
     </ownedAttribute>
-    <ownedAttribute name="typeParameter" type="/46/typeParameter/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/30"/>
+    <ownedAttribute name="post" type="/45/post/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/42"/>
     </ownedAttribute>
-    <ownedAttribute name="uniqueName" type="/46/uniqueName/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+    <ownedAttribute name="body" type="/45/body/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/38"/>
     </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="AbstractOperation" superType="/47/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/26"/>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Parameter" superType="/48/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/36"/>
-    <ownedAttribute name="operation" type="/48/operation/@containedType.0">
+    <ownedAttribute name="superOperation" type="/45/superOperation/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
     </ownedAttribute>
-  </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="UnresolvedOperation" superType="/49/@containedType.0 /49/@containedType.1 /49/@containedType.2">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/47"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/41"/>
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/28"/>
-    <ownedAttribute name="operationIdentifier" type="/49/operationIdentifier/@containedType.0">
+    <ownedAttribute name="ownedUnresolvedOperations" type="/45/ownedUnresolvedOperations/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/48"/>
+    </ownedAttribute>
+    <ownedAttribute name="owningClass" type="/45/owningClass/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/41"/>
+    </ownedAttribute>
+    <ownedAttribute name="typeParameter" type="/45/typeParameter/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/29"/>
+    </ownedAttribute>
+    <ownedAttribute name="uniqueName" type="/45/uniqueName/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
     </ownedAttribute>
-    <ownedAttribute name="from" type="/49/from/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="AbstractOperation" superType="/46/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/25"/>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="Parameter" superType="/47/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/35"/>
+    <ownedAttribute name="operation" type="/47/operation/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/45"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Resource" superType="/50/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="UnresolvedOperation" superType="/48/@containedType.0 /48/@containedType.1 /48/@containedType.2">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/46"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/40"/>
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/27"/>
+    <ownedAttribute name="operationIdentifier" type="/48/operationIdentifier/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
+    </ownedAttribute>
+    <ownedAttribute name="from" type="/48/from/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/24"/>
+    </ownedAttribute>
+  </org_kermeta_language_structure:ClassDefinition>
+  <org_kermeta_language_structure:ClassDefinition name="Resource" superType="/49/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedOperation name="load" type="/50/load/@containedType.0">
+    <ownedOperation name="load" type="/49/load/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/load/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/51"/>
+      <ownedParameter name="arg0" type="/49/load/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="save" type="/50/save/@containedType.0">
+    <ownedOperation name="save" type="/49/save/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/save/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/51"/>
+      <ownedParameter name="arg0" type="/49/save/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="delete" type="/50/delete/@containedType.0">
+    <ownedOperation name="delete" type="/49/delete/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/delete/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/51"/>
+      <ownedParameter name="arg0" type="/49/delete/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="unload" type="/50/unload/@containedType.0">
+    <ownedOperation name="unload" type="/49/unload/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getURI" type="/50/getURI/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
+    <ownedOperation name="getURI" type="/49/getURI/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="isLoaded" type="/50/isLoaded/@containedType.0">
+    <ownedOperation name="isLoaded" type="/49/isLoaded/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getAllContents" type="/50/getAllContents/@containedType.0">
+    <ownedOperation name="getAllContents" type="/49/getAllContents/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/19"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getContents" type="/50/getContents/@containedType.0">
+    <ownedOperation name="getContents" type="/49/getContents/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getEObject" type="/50/getEObject/@containedType.0">
+    <ownedOperation name="getEObject" type="/49/getEObject/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-      <ownedParameter name="arg0" type="/50/getEObject/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/49/getEObject/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getErrors" type="/50/getErrors/@containedType.0">
+    <ownedOperation name="getErrors" type="/49/getErrors/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getResourceSet" type="/50/getResourceSet/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/52"/>
+    <ownedOperation name="getResourceSet" type="/49/getResourceSet/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/51"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getTimeStamp" type="/50/getTimeStamp/@containedType.0">
+    <ownedOperation name="getTimeStamp" type="/49/getTimeStamp/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/9"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getURIFragment" type="/50/getURIFragment/@containedType.0">
+    <ownedOperation name="getURIFragment" type="/49/getURIFragment/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      <ownedParameter name="arg0" type="/50/getURIFragment/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/49/getURIFragment/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getWarnings" type="/50/getWarnings/@containedType.0">
+    <ownedOperation name="getWarnings" type="/49/getWarnings/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="isModified" type="/50/isModified/@containedType.0">
+    <ownedOperation name="isModified" type="/49/isModified/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="isTrackingModification" type="/50/isTrackingModification/@containedType.0">
+    <ownedOperation name="isTrackingModification" type="/49/isTrackingModification/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="setModified" type="/50/setModified/@containedType.0">
+    <ownedOperation name="setModified" type="/49/setModified/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/setModified/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/49/setModified/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="setTimeStamp" type="/50/setTimeStamp/@containedType.0">
+    <ownedOperation name="setTimeStamp" type="/49/setTimeStamp/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/setTimeStamp/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/49/setTimeStamp/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/9"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="setTrackingModification" type="/50/setTrackingModification/@containedType.0">
+    <ownedOperation name="setTrackingModification" type="/49/setTrackingModification/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/setTrackingModification/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/49/setTrackingModification/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="setURI" type="/50/setURI/@containedType.0">
+    <ownedOperation name="setURI" type="/49/setURI/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="uri" type="/50/setURI/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/22"/>
+      <ownedParameter name="uri" type="/49/setURI/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/21"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="eAdapters" type="/50/eAdapters/@containedType.0">
+    <ownedOperation name="eAdapters" type="/49/eAdapters/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="eDeliver" type="/50/eDeliver/@containedType.0">
+    <ownedOperation name="eDeliver" type="/49/eDeliver/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="eSetDeliver" type="/50/eSetDeliver/@containedType.0">
+    <ownedOperation name="eSetDeliver" type="/49/eSetDeliver/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/50/eSetDeliver/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/49/eSetDeliver/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Map" superType="/51/@containedType.2">
+  <org_kermeta_language_structure:ClassDefinition name="Map" superType="/50/@containedType.2">
     <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="K"/>
     <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="V"/>
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="ResourceSet" superType="/52/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="ResourceSet" superType="/51/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedOperation name="getResource" type="/52/getResource/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
-      <ownedParameter name="arg0" type="/52/getResource/@ownedParameter.0/@containedType.0">
+    <ownedOperation name="getResource" type="/51/getResource/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/49"/>
+      <ownedParameter name="arg0" type="/51/getResource/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
-      <ownedParameter name="arg1" type="/52/getResource/@ownedParameter.1/@containedType.0">
+      <ownedParameter name="arg1" type="/51/getResource/@ownedParameter.1/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getResources" type="/52/getResources/@containedType.0">
+    <ownedOperation name="getResources" type="/51/getResources/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getAllContents" type="/52/getAllContents/@containedType.0">
+    <ownedOperation name="getAllContents" type="/51/getAllContents/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/19"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getEObject" type="/52/getEObject/@containedType.0">
+    <ownedOperation name="getEObject" type="/51/getEObject/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-      <ownedParameter name="arg0" type="/52/getEObject/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/51/getEObject/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
-      <ownedParameter name="arg1" type="/52/getEObject/@ownedParameter.1/@containedType.0">
+      <ownedParameter name="arg1" type="/51/getEObject/@ownedParameter.1/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="createResource" type="/52/createResource/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
-      <ownedParameter name="arg0" type="/52/createResource/@ownedParameter.0/@containedType.0">
+    <ownedOperation name="createResource" type="/51/createResource/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/49"/>
+      <ownedParameter name="arg0" type="/51/createResource/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="createResource" type="/52/createResource.1/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
-      <ownedParameter name="arg0" type="/52/createResource.1/@ownedParameter.0/@containedType.0">
+    <ownedOperation name="createResource" type="/51/createResource.1/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/49"/>
+      <ownedParameter name="arg0" type="/51/createResource.1/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
-      <ownedParameter name="arg1" type="/52/createResource.1/@ownedParameter.1/@containedType.0">
+      <ownedParameter name="arg1" type="/51/createResource.1/@ownedParameter.1/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getAdapterFactories" type="/52/getAdapterFactories/@containedType.0">
+    <ownedOperation name="getAdapterFactories" type="/51/getAdapterFactories/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="getLoadOptions" type="/52/getLoadOptions/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/51"/>
+    <ownedOperation name="getLoadOptions" type="/51/getLoadOptions/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/50"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="eAdapters" type="/52/eAdapters/@containedType.0">
+    <ownedOperation name="eAdapters" type="/51/eAdapters/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/16"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="eDeliver" type="/52/eDeliver/@containedType.0">
+    <ownedOperation name="eDeliver" type="/51/eDeliver/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="eSetDeliver" type="/52/eSetDeliver/@containedType.0">
+    <ownedOperation name="eSetDeliver" type="/51/eSetDeliver/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="arg0" type="/52/eSetDeliver/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="arg0" type="/51/eSetDeliver/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="resolveAllProxies" type="/52/resolveAllProxies/@containedType.0">
+    <ownedOperation name="resolveAllProxies" type="/51/resolveAllProxies/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="ClassModel" superType="/53/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="ClassModel" superType="/52/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedAttribute name="classes" type="/53/classes/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedAttribute name="classes" type="/52/classes/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
     </ownedAttribute>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Clazz" superType="/54/@containedType.0">
-    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
-    <ownedAttribute name="name" type="/54/name/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="Clazz" superType="/53/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedAttribute name="name" type="/53/name/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
     </ownedAttribute>
-    <ownedAttribute name="superClasses" type="/54/superClasses/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedAttribute name="superClasses" type="/53/superClasses/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
     </ownedAttribute>
-    <ownedOperation name="visitToAddClasses" type="/54/visitToAddClasses/@containedType.0" superOperation="/55/visitToAddClasses">
+    <ownedOperation name="visitToAddClasses" type="/53/visitToAddClasses/@containedType.0" superOperation="/54/visitToAddClasses">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="theInheritanceSlicer" type="/54/visitToAddClasses/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/56"/>
+      <ownedParameter name="theInheritanceSlicer" type="/53/visitToAddClasses/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3257,7 +3181,7 @@
             <statement xsi:type="org_kermeta_language_behavior:CallOperation">
               <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
                 <parameters>
-                  <type/>
+                  <type type="/62/@containedType.0"/>
                 </parameters>
                 <body xsi:type="org_kermeta_language_behavior:Block">
                   <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3279,10 +3203,10 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="visitToAddRelations" type="/54/visitToAddRelations/@containedType.0" superOperation="/55/visitToAddRelations">
+    <ownedOperation name="visitToAddRelations" type="/53/visitToAddRelations/@containedType.0" superOperation="/54/visitToAddRelations">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="theInheritanceSlicer" type="/54/visitToAddRelations/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/56"/>
+      <ownedParameter name="theInheritanceSlicer" type="/53/visitToAddRelations/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Conditional">
@@ -3305,7 +3229,7 @@
             <statement xsi:type="org_kermeta_language_behavior:CallOperation">
               <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
                 <parameters>
-                  <type/>
+                  <type type="/63/@containedType.0"/>
                 </parameters>
                 <body xsi:type="org_kermeta_language_behavior:Block">
                   <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3320,8 +3244,8 @@
                           <parameters xsi:type="org_kermeta_language_behavior:CallVariable"/>
                           <target xsi:type="org_kermeta_language_behavior:CallOperation">
                             <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-                              <typeref type="/54/visitToAddRelations/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.1/@thenBody/@statement.0/@parameters.0/@target/@target/@typeref/@containedType.0">
-                                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/59"/>
+                              <typeref type="/53/visitToAddRelations/@body/@statement.0/@thenBody/@statement.3/@parameters.0/@body/@statement.1/@thenBody/@statement.0/@parameters.0/@target/@target/@typeref/@containedType.0">
+                                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
                               </typeref>
                             </target>
                           </target>
@@ -3356,18 +3280,18 @@
       </body>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="SlicerVisitor" superType="/55/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="SlicerVisitor" superType="/54/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedAttribute name="visitedPass" type="/55/visitedPass/@containedType.0">
+    <ownedAttribute name="visitedPass" type="/54/visitedPass/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="visitedForRelations" type="/55/visitedForRelations/@containedType.0">
+    <ownedAttribute name="visitedForRelations" type="/54/visitedForRelations/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedAttribute name="sliced" type="/55/sliced/@containedType.0">
+    <ownedAttribute name="sliced" type="/54/sliced/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
     </ownedAttribute>
-    <ownedOperation name="initialiseAttributes" type="/55/initialiseAttributes/@containedType.0">
+    <ownedOperation name="initialiseAttributes" type="/54/initialiseAttributes/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
@@ -3390,10 +3314,10 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="visitToAddClasses" type="/55/visitToAddClasses/@containedType.0">
+    <ownedOperation name="visitToAddClasses" type="/54/visitToAddClasses/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="theInheritanceSlicer" type="/55/visitToAddClasses/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/56"/>
+      <ownedParameter name="theInheritanceSlicer" type="/54/visitToAddClasses/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
@@ -3404,14 +3328,14 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="visitToAddRelations" type="/55/visitToAddRelations/@containedType.0">
+    <ownedOperation name="visitToAddRelations" type="/54/visitToAddRelations/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="theInheritanceSlicer" type="/55/visitToAddRelations/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/56"/>
+      <ownedParameter name="theInheritanceSlicer" type="/54/visitToAddRelations/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="checkInitialisation" type="/55/checkInitialisation/@containedType.0">
+    <ownedOperation name="checkInitialisation" type="/54/checkInitialisation/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Conditional">
@@ -3428,7 +3352,7 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="checkCanReallyBeAdded" type="/55/checkCanReallyBeAdded/@containedType.0">
+    <ownedOperation name="checkCanReallyBeAdded" type="/54/checkCanReallyBeAdded/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/2"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
@@ -3444,21 +3368,21 @@
       </body>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="InheritanceSlicer" superType="/56/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="InheritanceSlicer" superType="/55/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedAttribute name="requiredClazzs" type="/56/requiredClazzs/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedAttribute name="requiredClazzs" type="/55/requiredClazzs/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
     </ownedAttribute>
-    <ownedAttribute name="addedClazzs" type="/56/addedClazzs/@containedType.0">
+    <ownedAttribute name="addedClazzs" type="/55/addedClazzs/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/14"/>
     </ownedAttribute>
-    <ownedAttribute name="addedsuperClasses" type="/56/addedsuperClasses/@containedType.0">
+    <ownedAttribute name="addedsuperClasses" type="/55/addedsuperClasses/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/14"/>
     </ownedAttribute>
-    <ownedOperation name="initialise" type="/56/initialise/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/56"/>
-      <ownedParameter name="requiredClazzs" type="/56/initialise/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedOperation name="initialise" type="/55/initialise/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
+      <ownedParameter name="requiredClazzs" type="/55/initialise/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
@@ -3471,7 +3395,7 @@
           </target>
           <value xsi:type="org_kermeta_language_behavior:CallOperation">
             <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-              <typeref type="/56/initialise/@body/@statement.1/@value/@target/@typeref/@containedType.0">
+              <typeref type="/55/initialise/@body/@statement.1/@value/@target/@typeref/@containedType.0">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/14"/>
               </typeref>
             </target>
@@ -3483,7 +3407,7 @@
           </target>
           <value xsi:type="org_kermeta_language_behavior:CallOperation">
             <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-              <typeref type="/56/initialise/@body/@statement.2/@value/@target/@typeref/@containedType.0">
+              <typeref type="/55/initialise/@body/@statement.2/@value/@target/@typeref/@containedType.0">
                 <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/14"/>
               </typeref>
             </target>
@@ -3497,7 +3421,7 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="launch" type="/56/launch/@containedType.0">
+    <ownedOperation name="launch" type="/55/launch/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3506,7 +3430,7 @@
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
           <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
             <parameters>
-              <type type="/57"/>
+              <type type="/56/@containedType.0"/>
             </parameters>
             <body xsi:type="org_kermeta_language_behavior:Block">
               <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3522,7 +3446,7 @@
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
           <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
             <parameters>
-              <type/>
+              <type type="/57/@containedType.0"/>
             </parameters>
             <body xsi:type="org_kermeta_language_behavior:Block">
               <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3538,7 +3462,7 @@
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
           <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
             <parameters>
-              <type/>
+              <type type="/58/@containedType.0"/>
             </parameters>
             <body xsi:type="org_kermeta_language_behavior:Block">
               <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3554,7 +3478,7 @@
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
           <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
             <parameters>
-              <type type="/58"/>
+              <type type="/59/@containedType.0"/>
             </parameters>
             <body xsi:type="org_kermeta_language_behavior:Block">
               <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3577,10 +3501,10 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="onClazzAdded" type="/56/onClazzAdded/@containedType.0">
+    <ownedOperation name="onClazzAdded" type="/55/onClazzAdded/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="clazz" type="/56/onClazzAdded/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+      <ownedParameter name="clazz" type="/55/onClazzAdded/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3591,20 +3515,20 @@
             <target xsi:type="org_kermeta_language_behavior:StringLiteral"/>
           </parameters>
           <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-            <typeref type="/56/onClazzAdded/@body/@statement.0/@target/@typeref/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
+            <typeref type="/55/onClazzAdded/@body/@statement.0/@target/@typeref/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/61"/>
             </typeref>
           </target>
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="onClazzsuperClassesAdded" type="/56/onClazzsuperClassesAdded/@containedType.0">
+    <ownedOperation name="onClazzsuperClassesAdded" type="/55/onClazzsuperClassesAdded/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="srcClass" type="/56/onClazzsuperClassesAdded/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+      <ownedParameter name="srcClass" type="/55/onClazzsuperClassesAdded/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
       </ownedParameter>
-      <ownedParameter name="tgtClass" type="/56/onClazzsuperClassesAdded/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+      <ownedParameter name="tgtClass" type="/55/onClazzsuperClassesAdded/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3623,57 +3547,67 @@
             </target>
           </parameters>
           <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-            <typeref type="/56/onClazzsuperClassesAdded/@body/@statement.0/@target/@typeref/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
+            <typeref type="/55/onClazzsuperClassesAdded/@body/@statement.0/@target/@typeref/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/61"/>
             </typeref>
           </target>
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="onEnd" type="/56/onEnd/@containedType.0">
+    <ownedOperation name="onEnd" type="/55/onEnd/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
           <parameters xsi:type="org_kermeta_language_behavior:StringLiteral"/>
           <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-            <typeref type="/56/onEnd/@body/@statement.0/@target/@typeref/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
+            <typeref type="/55/onEnd/@body/@statement.0/@target/@typeref/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/61"/>
             </typeref>
           </target>
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="onStart" type="/56/onStart/@containedType.0">
+    <ownedOperation name="onStart" type="/55/onStart/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
           <parameters xsi:type="org_kermeta_language_behavior:StringLiteral"/>
           <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-            <typeref type="/56/onStart/@body/@statement.0/@target/@typeref/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
+            <typeref type="/55/onStart/@body/@statement.0/@target/@typeref/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/61"/>
             </typeref>
           </target>
         </statement>
       </body>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:Class typeDefinition="/54"/>
-  <org_kermeta_language_structure:Class typeDefinition="/59"/>
-  <org_kermeta_language_structure:ClassDefinition name="ClasssuperClasses" superType="/59/@containedType.0">
+  <org_kermeta_language_structure:TypeVariableBinding variable="/16/G" type="/56/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+  </org_kermeta_language_structure:TypeVariableBinding>
+  <org_kermeta_language_structure:TypeVariableBinding variable="/16/G" type="/57/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+  </org_kermeta_language_structure:TypeVariableBinding>
+  <org_kermeta_language_structure:TypeVariableBinding variable="/14/G" type="/58/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+  </org_kermeta_language_structure:TypeVariableBinding>
+  <org_kermeta_language_structure:TypeVariableBinding variable="/14/G" type="/59/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
+  </org_kermeta_language_structure:TypeVariableBinding>
+  <org_kermeta_language_structure:ClassDefinition name="ClasssuperClasses" superType="/60/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedAttribute name="src" type="/59/src/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedAttribute name="src" type="/60/src/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
     </ownedAttribute>
-    <ownedAttribute name="tar" type="/59/tar/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedAttribute name="tar" type="/60/tar/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
     </ownedAttribute>
-    <ownedOperation name="initialise" type="/59/initialise/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/59"/>
-      <ownedParameter name="src" type="/59/initialise/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+    <ownedOperation name="initialise" type="/60/initialise/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/60"/>
+      <ownedParameter name="src" type="/60/initialise/@ownedParameter.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
       </ownedParameter>
-      <ownedParameter name="tar" type="/59/initialise/@ownedParameter.1/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+      <ownedParameter name="tar" type="/60/initialise/@ownedParameter.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:Assignment">
@@ -3695,62 +3629,68 @@
       </body>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="StdIO" superType="/60/@containedType.0">
+  <org_kermeta_language_structure:ClassDefinition name="StdIO" superType="/61/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedOperation name="write" type="/60/write/@containedType.0">
+    <ownedOperation name="write" type="/61/write/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="object" type="/60/write/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="object" type="/61/write/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="errorln" type="/60/errorln/@containedType.0">
+    <ownedOperation name="errorln" type="/61/errorln/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="object" type="/60/errorln/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="object" type="/61/errorln/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="error" type="/60/error/@containedType.0">
+    <ownedOperation name="error" type="/61/error/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="object" type="/60/error/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="object" type="/61/error/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="writeln" type="/60/writeln/@containedType.0">
+    <ownedOperation name="writeln" type="/61/writeln/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
-      <ownedParameter name="object" type="/60/writeln/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="object" type="/61/writeln/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
-    <ownedOperation name="read" type="/60/read/@containedType.0">
+    <ownedOperation name="read" type="/61/read/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
-      <ownedParameter name="prompt" type="/60/read/@ownedParameter.0/@containedType.0">
+      <ownedParameter name="prompt" type="/61/read/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/3"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block"/>
     </ownedOperation>
   </org_kermeta_language_structure:ClassDefinition>
-  <org_kermeta_language_structure:ClassDefinition name="Test" superType="/61/@containedType.0">
+  <org_kermeta_language_structure:TypeVariableBinding variable="/16/G" type="/62/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+  </org_kermeta_language_structure:TypeVariableBinding>
+  <org_kermeta_language_structure:TypeVariableBinding variable="/16/G" type="/63/@containedType.0">
+    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+  </org_kermeta_language_structure:TypeVariableBinding>
+  <org_kermeta_language_structure:ClassDefinition name="Test" superType="/64/@containedType.0">
     <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1"/>
-    <ownedOperation name="main" type="/61/main/@containedType.0">
+    <ownedOperation name="main" type="/64/main/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0"/>
       <body xsi:type="org_kermeta_language_behavior:Block">
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="Bag&lt;Clazz>" type="/61/main/@body/@statement.0/@type/@containedType.0">
+          <type name="Bag&lt;Clazz>" type="/64/main/@body/@statement.0/@type/@containedType.0">
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/14"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="ClassModel" type="/61/main/@body/@statement.1/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+          <type name="ClassModel" type="/64/main/@body/@statement.1/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/52"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="InheritanceSlicer" type="/61/main/@body/@statement.2/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/56"/>
+          <type name="InheritanceSlicer" type="/64/main/@body/@statement.2/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/55"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:CallOperation">
@@ -3758,9 +3698,9 @@
         </statement>
       </body>
     </ownedOperation>
-    <ownedOperation name="createClassModel" type="/61/createClassModel/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
-      <ownedParameter name="requiredClazzs" type="/61/createClassModel/@ownedParameter.0/@containedType.0">
+    <ownedOperation name="createClassModel" type="/64/createClassModel/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/52"/>
+      <ownedParameter name="requiredClazzs" type="/64/createClassModel/@ownedParameter.0/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/14"/>
       </ownedParameter>
       <body xsi:type="org_kermeta_language_behavior:Block">
@@ -3768,35 +3708,35 @@
           <target xsi:type="org_kermeta_language_behavior:CallResult"/>
           <value xsi:type="org_kermeta_language_behavior:CallOperation">
             <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-              <typeref type="/61/createClassModel/@body/@statement.0/@value/@target/@typeref/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
+              <typeref type="/64/createClassModel/@body/@statement.0/@value/@target/@typeref/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/52"/>
               </typeref>
             </target>
           </value>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="Clazz" type="/61/createClassModel/@body/@statement.1/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+          <type name="Clazz" type="/64/createClassModel/@body/@statement.1/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="Clazz" type="/61/createClassModel/@body/@statement.2/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+          <type name="Clazz" type="/64/createClassModel/@body/@statement.2/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="Clazz" type="/61/createClassModel/@body/@statement.3/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+          <type name="Clazz" type="/64/createClassModel/@body/@statement.3/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="Clazz" type="/61/createClassModel/@body/@statement.4/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+          <type name="Clazz" type="/64/createClassModel/@body/@statement.4/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:VariableDecl">
-          <type name="Clazz" type="/61/createClassModel/@body/@statement.5/@type/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/54"/>
+          <type name="Clazz" type="/64/createClassModel/@body/@statement.5/@type/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/53"/>
           </type>
         </statement>
         <statement xsi:type="org_kermeta_language_behavior:Assignment">

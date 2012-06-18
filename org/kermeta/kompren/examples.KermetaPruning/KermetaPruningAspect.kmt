@@ -355,6 +355,28 @@ aspect class TypedElement {
 	end
 }
 
+aspect class Type {
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+		checkInitialisation(theKermetaPruning.idPass)
+		if(not self.visitedPass) then
+			super(theKermetaPruning)
+			self.visitedPass := true
+			if(not self.typeContainer.isVoid) then self.typeContainer.visitToAddClasses(theKermetaPruning) end
+		end
+	end
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+		if(not self.visitedForRelations) then
+			super(theKermetaPruning)
+			self.visitedForRelations := true
+			if(not self.typeContainer.isVoid) then self.typeContainer.visitToAddRelations(theKermetaPruning)
+			if(self.typeContainer.sliced) then
+				self.dup.asType(Type).typeContainer := self.typeContainer.dup.asType(TypeContainer)
+			end
+ end
+		end
+	end
+}
+
 aspect class TypeContainer {
 	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
 		checkInitialisation(theKermetaPruning.idPass)
@@ -752,7 +774,7 @@ aspect class UnresolvedInferredType {
 		result := theUnresolvedInferredType
 	end
 
-	method visitToAddClasses(theKermetaPruning : KermetaPruning) is do
+	method visitToAddClasses(theKermetaPruning : KermetaPruning) from Type is do
 		checkInitialisation(theKermetaPruning.idPass)
 		if(not self.visitedPass) then
 			super(theKermetaPruning)
@@ -763,7 +785,7 @@ aspect class UnresolvedInferredType {
 			end
 		end
 	end
-	method visitToAddRelations(theKermetaPruning : KermetaPruning) is do
+	method visitToAddRelations(theKermetaPruning : KermetaPruning) from Type is do
 		if(not self.visitedForRelations) then
 			super(theKermetaPruning)
 			self.visitedForRelations := true

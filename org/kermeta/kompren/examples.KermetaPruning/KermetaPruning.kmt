@@ -47,12 +47,7 @@ class KermetaPruning {
 	end
 	operation addToRoot(obj : SlicerVisitor) is do
 		var cont : Object init obj.container
-		if(obj.isDirectInstanceOf(Class)) then
-			var cl : Class init obj.asType(Class)
-			stdio.writeln(cl.name + " " + cl.container.toString)
-		end
-		if(cont.isVoid.orElse{b | cont.isInstanceOf(SlicerVisitor)}) then//.orElse{b2 | 
-			//(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
+		if(cont.isVoid.orElse{b | cont.isInstanceOf(SlicerVisitor)}) then
 			sliceRoots.add(obj)
 		end
 	end
