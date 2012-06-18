@@ -10,7 +10,7 @@ class Test {
 	operation main() : Void is do
 		var inputRep : ResourceSet init ResourceSet.new
 		var inputRes : Resource
-		inputRes ?= inputRep.createResource("platform:/resource/examples.RAMSlicer/models/design_patterns/Command.ram", 
+		inputRes ?= inputRep.createResource("platform:/resource/examples.RAMSlicer/models/workflow/Workflow.ram", 
 											"platform:/resource/examples.RAMSlicer/RAM.ecore")
 		inputRes.load(void)
 		var rootAspect : Aspect

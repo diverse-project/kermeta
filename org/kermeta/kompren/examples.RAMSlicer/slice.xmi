@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.0" name="Command">
-  <structuralView/>
-</ram:Aspect>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.0">
+  <ram:Aspect name="Workflow">
+    <structuralView/>
+    <instantiations externalAspect="/1"/>
+    <instantiations externalAspect="/2"/>
+    <instantiations externalAspect="/3"/>
+    <instantiations externalAspect="/3"/>
+    <instantiations externalAspect="/3"/>
+  </ram:Aspect>
+  <ram:Aspect name="Singleton">
+    <structuralView/>
+  </ram:Aspect>
+  <ram:Aspect name="Copyable">
+    <structuralView/>
+  </ram:Aspect>
+  <ram:Aspect name="ZeroToManyAssociation">
+    <structuralView/>
+  </ram:Aspect>
+</xmi:XMI>
