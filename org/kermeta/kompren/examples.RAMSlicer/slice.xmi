@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.0">
-  <ram:Aspect name="Workflow">
-    <structuralView/>
-    <instantiations externalAspect="/1"/>
-    <instantiations externalAspect="/2"/>
-    <instantiations externalAspect="/3"/>
-    <instantiations externalAspect="/3"/>
-    <instantiations externalAspect="/3"/>
-  </ram:Aspect>
-  <ram:Aspect name="Singleton">
-    <structuralView/>
-  </ram:Aspect>
-  <ram:Aspect name="Copyable">
-    <structuralView/>
-  </ram:Aspect>
-  <ram:Aspect name="ZeroToManyAssociation">
-    <structuralView/>
-  </ram:Aspect>
+  <ram:Aspect name="Workflow"/>
+  <ram:Instantiation externalAspect="/2"/>
+  <ram:Aspect name="Singleton"/>
+  <ram:StructuralView/>
+  <ram:Instantiation externalAspect="/5"/>
+  <ram:Aspect name="Copyable"/>
+  <ram:StructuralView/>
+  <ram:Instantiation externalAspect="/8"/>
+  <ram:Aspect name="ZeroToManyAssociation"/>
+  <ram:StructuralView/>
+  <ram:Instantiation externalAspect="/8"/>
+  <ram:Instantiation externalAspect="/8"/>
+  <ram:StructuralView/>
 </xmi:XMI>

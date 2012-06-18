@@ -2,7 +2,6 @@ package ram;
 using kermeta::standard
 using kermeta::utils
 using kermeta::io::StdIO => stdio
-
 class SlicerVisitor {
 	reference dup : Object
 
@@ -53,9 +52,9 @@ aspect class Aspect inherits SlicerVisitor {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theRAMSlicer.addToRoot(self.dup)
 			end
 			self.visitedPass := true
-			theRAMSlicer.addToRoot(self.dup)
 			self.instantiations.each{theInstantiation | theInstantiation.visitToAddClasses(theRAMSlicer)}
 			self.structuralView.visitToAddClasses(theRAMSlicer)
 		end
@@ -73,7 +72,6 @@ aspect class Aspect inherits SlicerVisitor {
 			self.structuralView.visitToAddRelations(theRAMSlicer)
 			if(self.structuralView.sliced) then
 				self.dup.asType(Aspect).structuralView := self.structuralView.dup.asType(StructuralView)
-				theRAMSlicer.addToRoot(self.structuralView.dup)
 			end
 
 		end
@@ -94,6 +92,7 @@ aspect class Instantiation inherits SlicerVisitor {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theRAMSlicer.addToRoot(self.dup)
 			end
 			self.visitedPass := true
 			self.externalAspect.visitToAddClasses(theRAMSlicer)
@@ -125,6 +124,7 @@ aspect class StructuralView inherits SlicerVisitor {
 			if(not self.sliced) then
 				self.dup := self.createFrom()
 				self.sliced := true
+				theRAMSlicer.addToRoot(self.dup)
 			end
 		end
 	end
