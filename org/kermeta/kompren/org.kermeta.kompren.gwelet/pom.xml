@@ -51,11 +51,6 @@
     <dependencies>
         <dependency>
             <groupId>org.kermeta.language</groupId>
-            <artifactId>language.loader.km.api</artifactId>
-            <version>${kermeta.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kermeta.language</groupId>
             <artifactId>language.ecore2km</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
