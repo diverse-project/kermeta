@@ -5,15 +5,22 @@ using kermeta::utils
 using kermeta::io::StdIO => stdio
 class StateMachineSlicer {
 	reference sliceRoots : Bag<Object>
+	attribute idPass : Integer
+
 	reference requiredStates : State[0..*]
 
 	operation initialise(requiredStates : bag State[0..*]) : StateMachineSlicer is do
 		result := self
 		self.sliceRoots := Bag<Object>.new
+		self.requiredStates.clear()
 		self.requiredStates.addAll(requiredStates)
+
+		if(idPass.isVoid) then idPass := 0
+		else idPass := idPass + 1 end
 	end
 
 	operation launch() is do
+		onStart()
 		self.requiredStates.each{theState | theState.visitToAddClasses(self) }
 		self.requiredStates.each{theState | theState.visitToAddRelations(self) }
 		onEnd()
@@ -27,6 +34,8 @@ class StateMachineSlicer {
  		
  		resource.getContents.addAll(sliceRoots)
  		resource.save(void)
+	end
+	operation onStart() is do
 	end
 	operation addToRoot(obj : Object) is do
 		var cont : Object init obj.container

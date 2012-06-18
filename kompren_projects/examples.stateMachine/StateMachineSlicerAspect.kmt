@@ -11,10 +11,13 @@ class SlicerVisitor {
 
 	attribute sliced : Boolean
 
-	operation initialiseAttributes() is do
+	attribute idPass : Integer
+
+	operation initialiseAttributes(pass : Integer) is do
 		self.visitedPass := false
 		self.sliced := false
 		self.visitedForRelations := false
+		self.idPass := pass
 	end
 
 	operation visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) is do
@@ -24,8 +27,8 @@ class SlicerVisitor {
 	operation visitToAddRelations(theStateMachineSlicer : StateMachineSlicer) is do
 	end
 
-	operation checkInitialisation() is do
-		if(self.visitedPass.isVoid) then initialiseAttributes() end
+	operation checkInitialisation(pass : Integer) is do
+		if(self.visitedPass.isVoid or self.idPass.isVoid.orElse{b | self.idPass!=pass}) then initialiseAttributes(pass) end
 	end
 	operation checkCanReallyBeAdded() : Boolean is do
 		self.visitedPass := true
@@ -37,7 +40,7 @@ class SlicerVisitor {
 
 aspect class OutputState {
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) is do
-		checkInitialisation()
+		checkInitialisation(theStateMachineSlicer.idPass)
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			self.visitedPass := true
@@ -51,6 +54,7 @@ aspect class OutputState {
 			self.outgoingTransitions.each{theTransition | theTransition.visitToAddRelations(theStateMachineSlicer)
 				if(not dup.isVoid and theTransition.sliced) then
 					dup.asType(OutputState).outgoingTransitions.add(theTransition.dup.asType(Transition))
+					theStateMachineSlicer.addToRoot(theTransition.dup)
 				end
 			}
 		end
@@ -64,7 +68,7 @@ aspect class Transition inherits SlicerVisitor {
 	end
 
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) is do
-		checkInitialisation()
+		checkInitialisation(theStateMachineSlicer.idPass)
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			if(not self.sliced) then
@@ -106,7 +110,7 @@ aspect class InitState {
 	end
 
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) is do
-		checkInitialisation()
+		checkInitialisation(theStateMachineSlicer.idPass)
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			if(not self.sliced) then
@@ -132,7 +136,7 @@ aspect class TerminalState {
 	end
 
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) is do
-		checkInitialisation()
+		checkInitialisation(theStateMachineSlicer.idPass)
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			if(not self.sliced) then
@@ -159,7 +163,7 @@ aspect class StandardState {
 	end
 
 	method visitToAddClasses(theStateMachineSlicer : StateMachineSlicer) from OutputState is do
-		checkInitialisation()
+		checkInitialisation(theStateMachineSlicer.idPass)
 		if(not self.visitedPass) then
 			super(theStateMachineSlicer)
 			if(not self.sliced) then
