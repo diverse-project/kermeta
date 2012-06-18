@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ram:Aspect xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ram="http://cs.mcgill.ca/sel/ram/2.0" xmi:id="_stle2XdvEeGm3uH8rYfPgw" name="Workflow">
+  <structuralView xmi:id="_stle2HdvEeGm3uH8rYfPgw">
+    <classes xsi:type="ram:Class" xmi:id="_stle2HdvEeGm3uH8rYfPgx" name="CustomizableNode" partial="true" superTypes="_Cl12KodWEeG0oPAT5BSQFQ">
+      <operations xmi:id="_Cl0A8IdWEeG0oPAT5BSQFQ" name="execute" visibility="private" returnType="_vtGtcX9xEeGhx8hfQRstDA" partial="true">
+        <parameters xmi:id="_Cl0A8YdWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl0A8odWEeG0oPAT5BSQFQ" name="Thread"/>
+    <classes xsi:type="ram:Class" xmi:id="_Cl0A84dWEeG0oPAT5BSQFQ" name="WorkflowExecutor" superTypes="_Cl0A8odWEeG0oPAT5BSQFQ">
+      <operations xmi:id="_Cl0oAIdWEeG0oPAT5BSQFQ" name="spawnExecution" visibility="package" returnType="_vtGtcX9xEeGhx8hfQRstDA" static="true">
+        <parameters xmi:id="_Cl0oAYdWEeG0oPAT5BSQFQ" name="start" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+        <parameters xmi:id="_Cl0oAodWEeG0oPAT5BSQFQ" name="myContext" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl0oA4dWEeG0oPAT5BSQFQ" name="getCurrecntExecutor" returnType="_Cl0A84dWEeG0oPAT5BSQFQ" static="true"/>
+      <operations xmi:id="_Cl0oBIdWEeG0oPAT5BSQFQ" name="scheduleNextNote" returnType="_vtGtcX9xEeGhx8hfQRstDA" static="true">
+        <parameters xmi:id="_Cl0oBYdWEeG0oPAT5BSQFQ" name="n" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl0oBodWEeG0oPAT5BSQFQ" name="getCurrentContext" returnType="_Cl2dOodWEeG0oPAT5BSQFQ" static="true"/>
+      <operations xmi:id="_Cl0oB4dWEeG0oPAT5BSQFQ" name="create" visibility="package" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl0oCIdWEeG0oPAT5BSQFQ" name="start" type="_Cl1PEIdWEeG0oPAT5BSQFQ"/>
+        <parameters xmi:id="_Cl0oCYdWEeG0oPAT5BSQFQ" name="myContext" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl0oCodWEeG0oPAT5BSQFQ" name="getMyContext" visibility="package" returnType="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      <operations xmi:id="_Cl0oC4dWEeG0oPAT5BSQFQ" name="setNext" visibility="private" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl0oDIdWEeG0oPAT5BSQFQ" name="next" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl0oDYdWEeG0oPAT5BSQFQ" name="run" returnType="_vtGtcX9xEeGhx8hfQRstDA"/>
+      <associationEnds xmi:id="_Cl0A9IdWEeG0oPAT5BSQFQ" name="start" lowerBound="1" assoc="_Cl2dPIdWEeG0oPAT5BSQFQ"/>
+      <associationEnds xmi:id="_Cl0A9YdWEeG0oPAT5BSQFQ" name="next" assoc="_Cl2dPYdWEeG0oPAT5BSQFQ"/>
+      <associationEnds xmi:id="_Cl0A9odWEeG0oPAT5BSQFQ" name="myContext" lowerBound="1" assoc="_Cl2dPodWEeG0oPAT5BSQFQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl1PEIdWEeG0oPAT5BSQFQ" name="Workflow">
+      <operations xmi:id="_Cl1PEYdWEeG0oPAT5BSQFQ" name="addNode" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl1PEodWEeG0oPAT5BSQFQ" name="n" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl1PE4dWEeG0oPAT5BSQFQ" name="getNodes" returnType="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      <operations xmi:id="_Cl1PFIdWEeG0oPAT5BSQFQ" name="addStartupNode" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl1PFYdWEeG0oPAT5BSQFQ" name="n" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl1PFodWEeG0oPAT5BSQFQ" name="getStartupNodes" returnType="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      <operations xmi:id="_Cl1PF4dWEeG0oPAT5BSQFQ" name="launch" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl1PGIdWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl1PGYdWEeG0oPAT5BSQFQ" name="WorkflowNode">
+      <operations xmi:id="_Cl1PHYdWEeG0oPAT5BSQFQ" name="depositToken" abstract="true" visibility="package" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl1PHodWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl12IIdWEeG0oPAT5BSQFQ" name="addNextNode" abstract="true" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl12IYdWEeG0oPAT5BSQFQ" name="n" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <associationEnds xmi:id="_Cl1PGodWEeG0oPAT5BSQFQ" name="" upperBound="-1" navigable="false" assoc="_Cl2dPIdWEeG0oPAT5BSQFQ"/>
+      <associationEnds xmi:id="_Cl1PG4dWEeG0oPAT5BSQFQ" name="" upperBound="-1" navigable="false" assoc="_Cl2dPYdWEeG0oPAT5BSQFQ"/>
+      <associationEnds xmi:id="_Cl1PHIdWEeG0oPAT5BSQFQ" name="" upperBound="-1" navigable="false" assoc="_Cl3EQIdWEeG0oPAT5BSQFQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl12IodWEeG0oPAT5BSQFQ" name="ControlFlowNode" abstract="true" superTypes="_Cl1PGYdWEeG0oPAT5BSQFQ">
+      <operations xmi:id="_Cl12I4dWEeG0oPAT5BSQFQ" name="depositToken" visibility="package" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl12JIdWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl12JYdWEeG0oPAT5BSQFQ" name="addNextNode" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl12JodWEeG0oPAT5BSQFQ" name="n" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl12J4dWEeG0oPAT5BSQFQ" name="getNextNodes" visibility="protected" returnType="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      <operations xmi:id="_Cl12KIdWEeG0oPAT5BSQFQ" name="chooseNextNodes" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl12KYdWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl12KodWEeG0oPAT5BSQFQ" name="SequenceNode" superTypes="_Cl1PGYdWEeG0oPAT5BSQFQ">
+      <operations xmi:id="_Cl2dMIdWEeG0oPAT5BSQFQ" name="depositToken" visibility="package" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl2dMYdWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <operations xmi:id="_Cl2dModWEeG0oPAT5BSQFQ" name="addNextNode" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl2dM4dWEeG0oPAT5BSQFQ" name="n" type="_Cl1PGYdWEeG0oPAT5BSQFQ"/>
+      </operations>
+      <associationEnds xmi:id="_Cl12K4dWEeG0oPAT5BSQFQ" name="next" assoc="_Cl3EQIdWEeG0oPAT5BSQFQ"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl2dNIdWEeG0oPAT5BSQFQ" name="EndNode" superTypes="_Cl12IodWEeG0oPAT5BSQFQ">
+      <operations xmi:id="_Cl2dNYdWEeG0oPAT5BSQFQ" name="chooseNextNodes" visibility="protected" returnType="_vtGtcX9xEeGhx8hfQRstDA">
+        <parameters xmi:id="_Cl2dNodWEeG0oPAT5BSQFQ" name="c" type="_Cl2dOodWEeG0oPAT5BSQFQ"/>
+      </operations>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl2dN4dWEeG0oPAT5BSQFQ" name="StartupNode" superTypes="_Cl12KodWEeG0oPAT5BSQFQ"/>
+    <classes xsi:type="ram:Class" xmi:id="_Cl2dOIdWEeG0oPAT5BSQFQ" name="GlobalContext">
+      <operations xmi:id="_Cl2dOYdWEeG0oPAT5BSQFQ" name="getGlobalContext" returnType="_Cl2dOIdWEeG0oPAT5BSQFQ" static="true"/>
+    </classes>
+    <classes xsi:type="ram:Class" xmi:id="_Cl2dOodWEeG0oPAT5BSQFQ" name="LocalContext">
+      <associationEnds xmi:id="_Cl2dO4dWEeG0oPAT5BSQFQ" name="" upperBound="-1" navigable="false" assoc="_Cl2dPodWEeG0oPAT5BSQFQ"/>
+    </classes>
+    <associations xmi:id="_Cl2dPIdWEeG0oPAT5BSQFQ" name="WFE_WFN_START_ASSOC" ends="_Cl0A9IdWEeG0oPAT5BSQFQ _Cl1PGodWEeG0oPAT5BSQFQ"/>
+    <associations xmi:id="_Cl2dPYdWEeG0oPAT5BSQFQ" name="WFE_WFN_NEXT_ASSOC" ends="_Cl0A9YdWEeG0oPAT5BSQFQ _Cl1PG4dWEeG0oPAT5BSQFQ"/>
+    <associations xmi:id="_Cl2dPodWEeG0oPAT5BSQFQ" name="WFE_LOCALCONTEXT_MYCONTEXT_ASSOC" ends="_Cl0A9odWEeG0oPAT5BSQFQ _Cl2dO4dWEeG0oPAT5BSQFQ"/>
+    <associations xmi:id="_Cl3EQIdWEeG0oPAT5BSQFQ" name="SN_WFN_NEXT_ASSOC" ends="_Cl12K4dWEeG0oPAT5BSQFQ _Cl1PHIdWEeG0oPAT5BSQFQ"/>
+    <types xsi:type="ram:RVoid" xmi:id="_vtGtcX9xEeGhx8hfQRstDA"/>
+    <types xsi:type="ram:RAny" xmi:id="_F-ZyoYtiEeGbPI3EiqtS7Q"/>
+    <types xsi:type="ram:RBoolean" xmi:id="_F-iVgItiEeGbPI3EiqtS7Q"/>
+    <types xsi:type="ram:RInt" xmi:id="_F-kxwItiEeGbPI3EiqtS7Q"/>
+    <types xsi:type="ram:RChar" xmi:id="_F-n1EItiEeGbPI3EiqtS7Q"/>
+    <types xsi:type="ram:RString" xmi:id="_F-q4YItiEeGbPI3EiqtS7Q"/>
+  </structuralView>
+  <instantiations xmi:id="_Cl3ESodWEeG0oPAT5BSQFQ">
+    <mappings xmi:id="_Cl3ES4dWEeG0oPAT5BSQFQ" maps="_Cl2dOYdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../design_patterns/Singleton.ram#_mRK_QIdYEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_Cl3ETIdWEeG0oPAT5BSQFQ" maps="_Cl2dOIdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../design_patterns/Singleton.ram#_stleMHdvEeGm3uH8rYfPgw"/>
+    </mappings>
+    <externalAspect href="../design_patterns/Singleton.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </instantiations>
+  <instantiations xmi:id="_Cl3ETYdWEeG0oPAT5BSQFQ">
+    <mappings xmi:id="_Cl3ETodWEeG0oPAT5BSQFQ" maps="_Cl2dOodWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/Copyable.ram#_stleMHdvEeGm3uH8rYfPgw"/>
+    </mappings>
+    <externalAspect href="../util/Copyable.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </instantiations>
+  <instantiations xmi:id="_b6xcoIfbEeG0oPAT5BSQFQ">
+    <mappings xmi:id="_wPhIMIfbEeG0oPAT5BSQFQ" maps="_Cl12IodWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/ZeroToMany.ram#_stleMHdvEeGm3uH8rYfPgw"/>
+    </mappings>
+    <mappings xmi:id="_wxZtQIfbEeG0oPAT5BSQFQ" maps="_Cl1PGYdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/ZeroToMany.ram#_R4j4oIdeEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_xIILMIfbEeG0oPAT5BSQFQ" maps="_Cl12J4dWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../util/ZeroToMany.ram#_FRO_wIfiEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_xccOUIfbEeG0oPAT5BSQFQ" maps="_Cl12JYdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../util/ZeroToMany.ram#_l14xcIdYEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <externalAspect href="../util/ZeroToMany.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </instantiations>
+  <instantiations xmi:id="_vf8aYYllEeG4NO-9ju_BDw">
+    <mappings xmi:id="_c4L_oIlmEeG4NO-9ju_BDw" maps="_Cl1PEIdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/ZeroToMany.ram#_stleMHdvEeGm3uH8rYfPgw"/>
+    </mappings>
+    <mappings xmi:id="_dSQsgIlmEeG4NO-9ju_BDw" maps="_Cl1PGYdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/ZeroToMany.ram#_R4j4oIdeEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_dmVfEIlmEeG4NO-9ju_BDw" maps="_Cl1PE4dWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../util/ZeroToMany.ram#_FRO_wIfiEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_d4QVgIlmEeG4NO-9ju_BDw" maps="_Cl1PEYdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../util/ZeroToMany.ram#_l14xcIdYEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <externalAspect href="../util/ZeroToMany.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </instantiations>
+  <instantiations xmi:id="_v8l6IIllEeG4NO-9ju_BDw">
+    <mappings xmi:id="_HR4ZAYl7EeGjM_WDPjgUfQ" maps="_Cl1PEIdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/ZeroToMany.ram#_stleMHdvEeGm3uH8rYfPgw"/>
+    </mappings>
+    <mappings xmi:id="_HtZ3YIl7EeGjM_WDPjgUfQ" maps="_Cl2dN4dWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Class" href="../util/ZeroToMany.ram#_R4j4oIdeEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_IGpd0Il7EeGjM_WDPjgUfQ" maps="_Cl1PFodWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../util/ZeroToMany.ram#_FRO_wIfiEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <mappings xmi:id="_If0y0Il7EeGjM_WDPjgUfQ" maps="_Cl1PFIdWEeG0oPAT5BSQFQ">
+      <sourceModelElement xsi:type="ram:Operation" href="../util/ZeroToMany.ram#_l14xcIdYEeG0oPAT5BSQFQ"/>
+    </mappings>
+    <externalAspect href="../util/ZeroToMany.ram#_stleYXdvEeGm3uH8rYfPgw"/>
+  </instantiations>
+  <layout xmi:id="_kA-gQbgWEeGVppnHQNK_SA">
+    <containers xmi:id="_kA-gQrgWEeGVppnHQNK_SA" key="_stle2HdvEeGm3uH8rYfPgw">
+      <value xmi:id="_kA-gQ7gWEeGVppnHQNK_SA" key="_Cl2dOodWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA-gRLgWEeGVppnHQNK_SA" x="1470.8147" y="751.76654"/>
+      </value>
+      <value xmi:id="_kA-gRbgWEeGVppnHQNK_SA" key="_stle2HdvEeGm3uH8rYfPgx">
+        <value xmi:id="_kA-gRrgWEeGVppnHQNK_SA" x="128.89618" y="1145.0677"/>
+      </value>
+      <value xmi:id="_kA_HULgWEeGVppnHQNK_SA" key="_Cl1PEIdWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HUbgWEeGVppnHQNK_SA" x="1480.4707" y="984.706"/>
+      </value>
+      <value xmi:id="_kA_HUrgWEeGVppnHQNK_SA" key="_Cl0A84dWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HU7gWEeGVppnHQNK_SA" x="1115.919" y="208.49231"/>
+      </value>
+      <value xmi:id="_kA_HVLgWEeGVppnHQNK_SA" key="_Cl1PGYdWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HVbgWEeGVppnHQNK_SA" x="439.97717" y="338.59286"/>
+      </value>
+      <value xmi:id="_kA_HVrgWEeGVppnHQNK_SA" key="_Cl2dOIdWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HV7gWEeGVppnHQNK_SA" x="468.05292" y="123.684654"/>
+      </value>
+      <value xmi:id="_kA_HWLgWEeGVppnHQNK_SA" key="_Cl2dN4dWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HWbgWEeGVppnHQNK_SA" x="626.86615" y="1144.0852"/>
+      </value>
+      <value xmi:id="_kA_HWrgWEeGVppnHQNK_SA" key="_Cl2dNIdWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HW7gWEeGVppnHQNK_SA" x="885.9071" y="1142.738"/>
+      </value>
+      <value xmi:id="_kA_HXLgWEeGVppnHQNK_SA" key="_Cl12KodWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HXbgWEeGVppnHQNK_SA" x="374.11536" y="819.45215"/>
+      </value>
+      <value xmi:id="_kA_HXrgWEeGVppnHQNK_SA" key="_Cl12IodWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HX7gWEeGVppnHQNK_SA" x="888.1541" y="788.9111"/>
+      </value>
+      <value xmi:id="_kA_HYLgWEeGVppnHQNK_SA" key="_Cl0A8odWEeG0oPAT5BSQFQ">
+        <value xmi:id="_kA_HYbgWEeGVppnHQNK_SA" x="1504.6245" y="35.880848"/>
+      </value>
+    </containers>
+  </layout>
+</ram:Aspect>

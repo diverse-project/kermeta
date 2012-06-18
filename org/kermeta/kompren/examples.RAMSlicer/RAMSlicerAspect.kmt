@@ -1,0 +1,138 @@
+package ram;
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+
+class SlicerVisitor {
+	reference dup : Object
+
+	attribute visitedPass : Boolean
+
+	attribute visitedForRelations : Boolean
+
+	attribute sliced : Boolean
+
+	attribute idPass : Integer
+
+	operation initialiseAttributes(pass : Integer) is do
+		self.visitedPass := false
+		self.sliced := false
+		self.visitedForRelations := false
+		self.idPass := pass
+	end
+
+	operation visitToAddClasses(theRAMSlicer : RAMSlicer) is do
+		self.visitedPass := true
+	end
+
+	operation visitToAddRelations(theRAMSlicer : RAMSlicer) is do
+	end
+
+	operation checkInitialisation(pass : Integer) is do
+		if(self.visitedPass.isVoid or self.idPass.isVoid.orElse{b | self.idPass!=pass}) then initialiseAttributes(pass) end
+	end
+	operation checkCanReallyBeAdded() : Boolean is do
+		self.visitedPass := true
+		result := true
+	end
+
+	operation createFrom() : Object is abstract
+}
+
+aspect class Aspect inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theAspect : Aspect init Aspect.new
+		theAspect.name := self.name
+		result := theAspect
+	end
+
+	method visitToAddClasses(theRAMSlicer : RAMSlicer) is do
+		checkInitialisation(theRAMSlicer.idPass)
+		if(not self.visitedPass) then
+			super(theRAMSlicer)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			theRAMSlicer.addToRoot(self.dup)
+			self.instantiations.each{theInstantiation | theInstantiation.visitToAddClasses(theRAMSlicer)}
+			self.structuralView.visitToAddClasses(theRAMSlicer)
+		end
+	end
+	method visitToAddRelations(theRAMSlicer : RAMSlicer) is do
+		if(not self.visitedForRelations) then
+			super(theRAMSlicer)
+			self.visitedForRelations := true
+			self.instantiations.each{theInstantiation | theInstantiation.visitToAddRelations(theRAMSlicer)
+				if(not dup.isVoid and theInstantiation.sliced) then
+					dup.asType(Aspect).instantiations.add(theInstantiation.dup.asType(Instantiation))
+					theRAMSlicer.addToRoot(theInstantiation.dup)
+				end
+			}
+			self.structuralView.visitToAddRelations(theRAMSlicer)
+			if(self.structuralView.sliced) then
+				self.dup.asType(Aspect).structuralView := self.structuralView.dup.asType(StructuralView)
+				theRAMSlicer.addToRoot(self.structuralView.dup)
+			end
+
+		end
+	end
+}
+
+aspect class Instantiation inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theInstantiation : Instantiation init Instantiation.new
+		theInstantiation.type := self.type
+		result := theInstantiation
+	end
+
+	method visitToAddClasses(theRAMSlicer : RAMSlicer) is do
+		checkInitialisation(theRAMSlicer.idPass)
+		if(not self.visitedPass) then
+			super(theRAMSlicer)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+			self.visitedPass := true
+			self.externalAspect.visitToAddClasses(theRAMSlicer)
+		end
+	end
+	method visitToAddRelations(theRAMSlicer : RAMSlicer) is do
+		if(not self.visitedForRelations) then
+			super(theRAMSlicer)
+			self.visitedForRelations := true
+			self.externalAspect.visitToAddRelations(theRAMSlicer)
+			if(self.externalAspect.sliced) then
+				self.dup.asType(Instantiation).externalAspect := self.externalAspect.dup.asType(Aspect)
+			end
+
+		end
+	end
+}
+
+aspect class StructuralView inherits SlicerVisitor {
+	method createFrom() : Object is do
+		var theStructuralView : StructuralView init StructuralView.new
+		result := theStructuralView
+	end
+
+	method visitToAddClasses(theRAMSlicer : RAMSlicer) is do
+		checkInitialisation(theRAMSlicer.idPass)
+		if(not self.visitedPass) then
+			super(theRAMSlicer)
+			if(not self.sliced) then
+				self.dup := self.createFrom()
+				self.sliced := true
+			end
+		end
+	end
+	method visitToAddRelations(theRAMSlicer : RAMSlicer) is do
+		if(not self.visitedForRelations) then
+			super(theRAMSlicer)
+			self.visitedForRelations := true
+		end
+	end
+}
+

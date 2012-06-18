@@ -1,0 +1,46 @@
+package ram;
+using kermeta::emfpersistence
+using kermeta::standard
+using kermeta::utils
+using kermeta::io::StdIO => stdio
+class RAMSlicer {
+	reference sliceRoots : Bag<Object>
+	attribute idPass : Integer
+
+	reference requiredAspects : Aspect[0..*]
+
+	operation initialise(requiredAspects : bag Aspect[0..*]) : RAMSlicer is do
+		result := self
+		self.sliceRoots := Bag<Object>.new
+		self.requiredAspects.clear()
+		self.requiredAspects.addAll(requiredAspects)
+
+		if(idPass.isVoid) then idPass := 0
+		else idPass := idPass + 1 end
+	end
+
+	operation launch() is do
+		onStart()
+		self.requiredAspects.each{theAspect | theAspect.visitToAddClasses(self) }
+		self.requiredAspects.each{theAspect | theAspect.visitToAddRelations(self) }
+		onEnd()
+	end
+
+	operation onEnd() is do
+		var repository : ResourceSet init ResourceSet.new
+		var resource : Resource 
+ 		resource ?= repository.createResource("platform:/resource/examples.RAMSlicer/slice.xmi", "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/ram/RAM.ecore")
+ 		
+ 		resource.getContents.addAll(sliceRoots)
+ 		resource.save(void)
+	end
+	operation onStart() is do
+	end
+	operation addToRoot(obj : Object) is do
+		var cont : Object init obj.container
+		if(cont.isVoid.orElse{b | (not cont.isInstanceOf(SlicerVisitor)).orElse{b2 | 
+			(not cont.asType(SlicerVisitor).sliced.isVoid).andThen{b3 | not cont.asType(SlicerVisitor).sliced}}}) then
+			sliceRoots.add(obj)
+		end
+	end
+}

@@ -1,0 +1,14 @@
+KermetaProject "examples.RAMSlicer"
+	groupId = "kompren.examples.ram"
+	//defaultMainClass ="ram::RAMSlicer"
+	defaultMainClass ="ex::kermeta::kompren::ram::Test"
+	defaultMainOperation = "main"
+	sources = {
+		require "${project.baseUri}/RAM.ecore"
+		require "${project.baseUri}/RAMSlicerAspect.kmt"
+		require "${project.baseUri}/RAMSlicer.kmt"
+		require "${project.baseUri}/Test.kmt"
+	}
+	dependencies = {
+		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
+	}
