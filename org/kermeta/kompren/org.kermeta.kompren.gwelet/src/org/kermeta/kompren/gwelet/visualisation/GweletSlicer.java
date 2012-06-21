@@ -3,6 +3,7 @@ package org.kermeta.kompren.gwelet.visualisation;
 import org.kermeta.kompren.diagram.view.interfaces.IComponentView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
+import org.kermeta.kompren.gwelet.model.ModelUtils;
 import org.kermeta.kompren.gwelet.view.ModelViewMapper;
 import org.kermeta.kompren.org.kermeta.kompren.gwelet.slicer.org.kermeta.language.structure.RichVisualiserKermetaModel;
 import org.kermeta.language.structure.ClassDefinition;
@@ -20,14 +21,18 @@ public class GweletSlicer extends RichVisualiserKermetaModel {
 
 	@Override
 	public void onPackageAdded(final Package pkg) {
-		System.out.println("Java pkg added: " + pkg.getName());
+		String qname = ModelUtils.INSTANCE.getQualifiedName(pkg);
+		if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta"))
+			System.out.println("Java pkg added: " + pkg.getName());
 	}
 
 
 
 	@Override
 	public void onClassDefinitionAdded(final ClassDefinition cl) {
-		ModelViewMapper.getMapper().getClassView(cl).setVisibility(IComponentView.Visibility.STANDARD);
+		String qname = ModelUtils.INSTANCE.getQualifiedName(cl);
+		if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta"))
+			ModelViewMapper.getMapper().getClassView(cl).setVisibility(IComponentView.Visibility.STANDARD);
 	}
 
 

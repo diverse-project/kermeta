@@ -165,8 +165,11 @@ public final class ModelViewMapper {
 	private void createRelationsView(final MetamodelView view) {
 		for(List<ClassDefinition> list : cdAdded.values())
 			for(ClassDefinition cd : list) {
-				createInheritanceView(cd, ModelUtils.INSTANCE.getQualifiedName(cd), view);
-				createAssociations(cd, view);
+				String qname = ModelUtils.INSTANCE.getQualifiedName(cd);//FIXME only for eval
+				if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta")) {//FIXME only for eval
+					createInheritanceView(cd, ModelUtils.INSTANCE.getQualifiedName(cd), view);
+					createAssociations(cd, view);
+				}
 			}
 	}
 
@@ -179,14 +182,20 @@ public final class ModelViewMapper {
 		for(Type type : cd.getSuperType()) {
 			qname2 = ModelUtils.INSTANCE.getTypeQualifiedName(type);
 			if(qname.length()>0 && qname2.length()>2 && addedInheritances.get(qname+","+qname2)==null) {
-				in = view.addInheritanceView(classMappings.get(cd), classMappings.get(cdAdded.get(qname2).get(0)));
-				addedInheritances.put(qname+","+qname2, in);
+				if(cdAdded.get(qname2)!=null && !cdAdded.get(qname2).isEmpty()) {//FIXME only for eval
+					in = view.addInheritanceView(classMappings.get(cd), classMappings.get(cdAdded.get(qname2).get(0)));
+					addedInheritances.put(qname+","+qname2, in);
+				}
 			}
 		}
 	}
 
 
 	private void createPackageView(final Package pkg, final MetamodelView view) {
+		String qname = ModelUtils.INSTANCE.getQualifiedName(pkg);//FIXME only for eval
+		if(qname.startsWith("org.kermeta") || qname.startsWith("kermeta"))//FIXME only for eval
+			return ;
+
 		for(TypeDefinition td : pkg.getOwnedTypeDefinition())
 			if(td instanceof ClassDefinition)
 				createClassDefinition((ClassDefinition)td, view);
@@ -197,7 +206,10 @@ public final class ModelViewMapper {
 
 
 	private void createClassDefinition(final ClassDefinition cd, final MetamodelView view) {
-		String qname = ModelUtils.INSTANCE.getQualifiedName(cd);
+		String qname = ModelUtils.INSTANCE.getQualifiedName(cd);//FIXME only for eval
+		if(qname.startsWith("org.kermeta") || qname.startsWith("kermeta"))//FIXME only for eval
+			return ;
+
 		List<ClassDefinition> cdFirst = cdAdded.get(qname);
 		ClassView cv = null;
 
