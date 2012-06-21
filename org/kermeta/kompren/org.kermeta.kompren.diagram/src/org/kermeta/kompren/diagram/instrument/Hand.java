@@ -8,17 +8,13 @@ import javax.swing.JScrollPane;
 
 import org.kermeta.kompren.diagram.action.MoveElement;
 import org.kermeta.kompren.diagram.action.SelectElement;
-import org.kermeta.kompren.diagram.action.ShowHandler;
-import org.kermeta.kompren.diagram.interaction.MoveNoDrag;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
-import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.diagram.view.interfaces.Selectable;
 import org.malai.action.library.MoveCamera;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.Link;
 import org.malai.interaction.library.DnD;
 import org.malai.interaction.library.Press;
-import org.malai.picking.Pickable;
 
 public class Hand extends Instrument {
 	protected IModelView canvas;
@@ -36,7 +32,7 @@ public class Hand extends Instrument {
 	@Override
 	protected void initialiseLinks() {
 		try{
-			addLink(new Move2ShowHandler(this));
+//			addLink(new Move2ShowHandler(this));
 			addLink(new Press2Select(this));
 //			addLink(new DnD2Select(this));
 			addLink(new DnD2MoveCamera(this));
@@ -79,26 +75,27 @@ public class Hand extends Instrument {
 
 
 
-	private class Move2ShowHandler extends Link<ShowHandler, MoveNoDrag, Hand> {
-		public Move2ShowHandler(final Hand ins) throws InstantiationException, IllegalAccessException {
-			super(ins, false, ShowHandler.class, MoveNoDrag.class);
-		}
 
-		@Override
-		public void initAction() {
-			Pickable pk = instrument.canvas.getPickableAt(interaction.getPoint().getX(), interaction.getPoint().getY());
-
-			if(pk instanceof IRelationView) {
-				action.setRel((IRelationView) pk);
-				action.setModelView(instrument.canvas);
-			}
-		}
-
-		@Override
-		public boolean isConditionRespected() {
-			return true;
-		}
-	}
+//	private class Move2ShowHandler extends Link<ShowHandler, MoveNoDrag, Hand> {
+//		public Move2ShowHandler(final Hand ins) throws InstantiationException, IllegalAccessException {
+//			super(ins, false, ShowHandler.class, MoveNoDrag.class);
+//		}
+//
+//		@Override
+//		public void initAction() {
+//			Pickable pk = instrument.canvas.getPickableAt(interaction.getPoint().getX(), interaction.getPoint().getY());
+//
+//			if(pk instanceof IRelationView) {
+//				action.setRel((IRelationView) pk);
+//				action.setModelView(instrument.canvas);
+//			}
+//		}
+//
+//		@Override
+//		public boolean isConditionRespected() {
+//			return true;
+//		}
+//	}
 
 
 //	private class DnD2Select extends Link<SelectElement, DnD, Hand> {
@@ -142,6 +139,7 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
+			System.out.println(interaction.getStartObject());
 			return interaction.getStartObject()!=null && interaction.getButton()!=MouseEvent.BUTTON2;
 		}
 	}

@@ -21,6 +21,9 @@ public class MetamodelView extends ModelView {
 
 		operationsVisible = true;
 		propertiesVisible = true;
+		FooHand foo = new FooHand(this);
+		addMouseListener(foo);
+		addMouseMotionListener(foo);
 	}
 
 
