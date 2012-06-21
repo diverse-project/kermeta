@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JScrollBar;
+import javax.swing.SwingUtilities;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
 import org.kermeta.kompren.diagram.view.interfaces.IAnchor;
@@ -208,14 +209,19 @@ public class ModelView extends MPanel implements IModelView {
 
 
 
-	@Override
-	public void update() {
+	protected void updateModelElements() {
 		for(final IEntityView entity : entities)
 			entity.update();
 
 		for(final IRelationView relation : relations)
 			relation.update();
+	}
 
+
+
+	@Override
+	public void update() {
+		updateModelElements();
 		updatePreferredSize();
 		refresh();
 	}
@@ -439,6 +445,12 @@ public class ModelView extends MPanel implements IModelView {
 				pk = ent;
 		}
 
+		if(pk==null)
+			for(int i=0, size=relations.size(); i<size && pk==null; i++) {
+				if(relations.get(i).contains(x2, y2))
+					pk = relations.get(i);
+			}
+
 		return pk;
 	}
 
@@ -461,17 +473,23 @@ public class ModelView extends MPanel implements IModelView {
 		if(zoomingLevel<=Zoomable.MAX_ZOOM && zoomingLevel>=Zoomable.MIN_ZOOM && zoomingLevel!=zoom) {
 			final double dx = (zoomingLevel-zoom)*x;
 			final double dy = (zoomingLevel-zoom)*y;
-			JScrollBar barVert = getScrollbar(true);
-			JScrollBar barHori = getScrollbar(false);
+			final JScrollBar barVert = getScrollbar(true);
+			final JScrollBar barHori = getScrollbar(false);
 			this.zoom = zoomingLevel;
 
-			if(barHori.isVisible())
-				barHori.setValue((int)(barHori.getValue()+dx));
+			updateModelElements();
+			updatePreferredSize();
+			revalidate();
 
-			if(barVert.isVisible())
-				barVert.setValue((int)(barVert.getValue()+dy));
+	        Runnable moveScrollbars = new Runnable() {
+	            @Override
+				public void run() {
+	            	barHori.setValue((int)(barHori.getValue()+dx/2.));
+	            	barVert.setValue((int)(barVert.getValue()+dy/2.));
+	            }
+	        };
 
-			update();
+	        SwingUtilities.invokeLater(moveScrollbars);
 		}
 	}
 

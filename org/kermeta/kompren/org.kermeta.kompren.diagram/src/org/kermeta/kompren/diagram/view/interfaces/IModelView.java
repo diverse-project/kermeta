@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
 import org.malai.mapping.IActiveList;
+import org.malai.picking.Picker;
 import org.malai.presentation.ConcretePresentation;
 import org.malai.properties.Zoomable;
 import org.malai.widget.Scrollable;
@@ -13,7 +14,7 @@ import org.malai.widget.Scrollable;
  * The interface of diagram classes.
  * @author Arnaud Blouin
  */
-public interface IModelView extends Scrollable, Zoomable, ConcretePresentation {
+public interface IModelView extends Scrollable, Zoomable, ConcretePresentation, Picker {
 	void relayoutRelations();
 
 	void setSelection(final Selectable object);

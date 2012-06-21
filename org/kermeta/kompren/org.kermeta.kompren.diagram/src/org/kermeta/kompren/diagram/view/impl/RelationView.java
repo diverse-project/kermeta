@@ -12,6 +12,8 @@ import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IHandler;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.diagram.view.interfaces.ISegmentView;
+import org.malai.picking.Pickable;
+import org.malai.picking.Picker;
 
 /**
  * A relation view can be established between two entities.
@@ -415,5 +417,40 @@ public class RelationView extends ComponentView implements IRelationView {
 	@Override
 	public String toString() {
 		return super.toString() + '[' + entitySrc + ',' + entityTar + ']';
+	}
+
+
+	@Override
+	public Pickable getPickableAt(final double x, final double y) {
+		for(final IHandler handler : handlers)
+			if(handler.contains(x, y))
+				return handler;
+		return null;
+	}
+
+
+	@Override
+	public Picker getPickerAt(final double x, final double y) {
+		return null;
+	}
+
+
+	@Override
+	public Point2D getRelativePoint(final double x, final double y, final Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean contains(final Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public Picker getPicker() {
+		return null;
 	}
 }
