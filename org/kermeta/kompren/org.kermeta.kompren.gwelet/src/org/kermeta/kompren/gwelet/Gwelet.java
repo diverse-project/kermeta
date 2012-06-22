@@ -9,7 +9,7 @@ public class Gwelet {
 	public static void main(final String[] args) {
 		MainRunner.init();
 
-		if(System.getProperty("os.name").contains("linux"))
+		if(System.getProperty("os.name").toLowerCase().contains("linux"))
 			try{
 				UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 			}catch(Exception e) { e.printStackTrace(); }
