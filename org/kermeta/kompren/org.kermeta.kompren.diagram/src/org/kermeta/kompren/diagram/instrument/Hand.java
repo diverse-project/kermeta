@@ -139,7 +139,6 @@ public class Hand extends Instrument {
 
 		@Override
 		public boolean isConditionRespected() {
-			System.out.println(interaction.getStartObject());
 			return interaction.getStartObject()!=null && interaction.getButton()!=MouseEvent.BUTTON2;
 		}
 	}
