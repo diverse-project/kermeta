@@ -137,6 +137,13 @@ public class ModelView extends MPanel implements IModelView {
 
 
 
+	@Override
+	public void setEnabled(final boolean enabled) {
+		super.setEnabled(enabled);
+		updatePreferredSize();
+		refresh();
+	}
+
 
 	@Override
 	public void paint(final Graphics g) {
@@ -151,15 +158,18 @@ public class ModelView extends MPanel implements IModelView {
 
 		g2.setColor(Color.WHITE);
 		g2.fillRect(0, 0, getWidth(), getHeight());
-		g2.scale(zoom, zoom);
 
-		for(IEntityView entity : entities)
-			entity.paint(g2);
+		if(isEnabled()) {
+			g2.scale(zoom, zoom);
 
-		for(IRelationView relation : relations)
-			relation.paint(g2);
+			for(IEntityView entity : entities)
+				entity.paint(g2);
 
-		g2.scale(1./zoom, 1./zoom);
+			for(IRelationView relation : relations)
+				relation.paint(g2);
+
+			g2.scale(1./zoom, 1./zoom);
+		}
 	}
 
 
@@ -259,21 +269,24 @@ public class ModelView extends MPanel implements IModelView {
 
 	@Override
 	public void updatePreferredSize() {
-		double maxX = Double.MIN_VALUE;
-		double maxY = Double.MIN_VALUE;
-		Rectangle2D dim;
+		if(isEnabled()) {
+			double maxX = Double.MIN_VALUE;
+			double maxY = Double.MIN_VALUE;
+			Rectangle2D dim;
 
-		for(IEntityView entity : entities)
-			if(entity.isVisible()) {
-				dim = entity.getBorders();
+			for(IEntityView entity : entities)
+				if(entity.isVisible()) {
+					dim = entity.getBorders();
 
-				if(dim.getMaxX()>maxX)
-					maxX = dim.getMaxX();
-				if(dim.getMaxY()>maxY)
-					maxY = dim.getMaxY();
-			}
+					if(dim.getMaxX()>maxX)
+						maxX = dim.getMaxX();
+					if(dim.getMaxY()>maxY)
+						maxY = dim.getMaxY();
+				}
 
-		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
+			setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
+		}
+		else setPreferredSize(new Dimension(0, 0));
 	}
 
 

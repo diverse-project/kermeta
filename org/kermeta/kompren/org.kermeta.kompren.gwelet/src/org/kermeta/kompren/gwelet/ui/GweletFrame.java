@@ -91,8 +91,6 @@ public class GweletFrame extends UI {
 
 
 	public void setActivated(final boolean activated) {
-		System.out.println(activated);
-
 		for(Instrument ins : getInstruments())
 			ins.setActivated(activated);
 		getCanvas().setEnabled(activated);
