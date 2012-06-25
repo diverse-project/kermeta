@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.kermeta.kompren.gwelet.actions.ReinitView;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.malai.widget.MToolBar;
 
@@ -165,6 +166,11 @@ public class QuestionsPanel extends JPanel {
 
 
 	public void setNextQuestion() {
+		ReinitView action = new ReinitView();
+		action.setModelView(frame.getCanvas());
+		if(action.canDo())
+			action.doIt();
+
 		currentNbQuestions++;
 		if(currentNbQuestions<questions.size())
 			setQuestionMode(questions.get(currentNbQuestions));
