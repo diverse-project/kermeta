@@ -42,7 +42,10 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
           }
           i=i + 1
         })
-      res.append(") : ")
+      res.append(")")
+      // generate implicit parameters for reified parameter types
+      generateImplicitParameter(thi,res)
+      res.append(":")
       var res1 = new StringBuilder
       this.getListorType(thi,res1)
       if ("_root_.k2.standard.Void".equals(res1.toString)){
@@ -83,7 +86,10 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
           }
           i=i + 1
         })
-      res.append("):")
+      res.append(")")
+      // generate implicit parameters for reified parameter types
+      generateImplicitParameter(thi,res)
+      res.append(":")
       /* Return Type Declaration */
      var res1 = new StringBuilder
       this.getListorType(thi,res1)
@@ -208,5 +214,43 @@ res append "  }\n}*/\n"
     }
   }*/
 
+  /**
+   * Adds the implicit manifest parameters required for having access to the erased type parameters
+   */
+  def generateImplicitParameter(thi:Operation,res:StringBuilder){
+      var i = 0 
+      // Gets qualified names for type parameters of the operation 
+      val parameterNames = thi.getTypeParameter().map(param=>getQualifiedNameCompilo(param))
+      // Add implicit parameters for corresponding manifests
+      if(parameterNames.size()>0){
+        res.append("(implicit ")
+        parameterNames.foreach{name=>
+          if(i>0){
+            res.append(",")
+          }
+          res.append("$"+name+":scala.reflect.Manifest["+name+"]")
+          i=i+1
+        }
+      }
+      // Add manifest parameters for type parameters coming from owningClass
+      if(thi.getOwningClass().getTypeParameter().size>0){
+        if(i==0){
+          res.append("(implicit ")
+        }
+        thi.getOwningClass().getTypeParameter().foreach{param =>
+          val name = getQualifiedNameCompilo(param)
+          if(!parameterNames.contains(name)){ // discard type parameters already declared by the operation
+        	  if(i>0){
+        		  res.append(",")
+        	  }
+        	  res.append("$"+name+":scala.reflect.Manifest["+name+"]")
+        	  i=i+1
+          }
+        }
+      }
+      if(i>0){
+        res.append(")")
+      }
+  }
 
 }

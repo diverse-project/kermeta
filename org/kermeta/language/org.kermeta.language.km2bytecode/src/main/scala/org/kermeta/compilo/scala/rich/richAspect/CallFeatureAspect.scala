@@ -34,8 +34,14 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                         res.append("]")
                     }
                 }
-                else{//TODO gérer l'initialisation des types paramétrés
-                    res.append("null.asInstanceOf[" + getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) + "]")
+                else{//TODO check parameter type initialization for complex cases (e.g. Array[String], ecore classes, etc.)
+                	res.append("_root_.k2.utils.UTilScala.newInstance(" +
+                	    "scalaUtil.Util.getMetaClass($" +
+                	    getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) +
+                	    ".erasure.getName" +
+                	    ")).asInstanceOf[" +
+                	    getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) +
+                	    "]")
                 }
             }else{
                 res.append("_root_.k2.utils.UTilScala.newInstance(")
