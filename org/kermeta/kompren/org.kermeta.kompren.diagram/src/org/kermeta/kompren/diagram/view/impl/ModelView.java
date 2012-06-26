@@ -459,10 +459,9 @@ public class ModelView extends MPanel implements IModelView {
 		}
 
 		if(pk==null)
-			for(int i=0, size=relations.size(); i<size && pk==null; i++) {
-				if(relations.get(i).contains(x2, y2))
+			for(int i=0, size=relations.size(); i<size && pk==null; i++)
+				if(relations.get(i).isVisible() && relations.get(i).contains(x2, y2))
 					pk = relations.get(i);
-			}
 
 		return pk;
 	}

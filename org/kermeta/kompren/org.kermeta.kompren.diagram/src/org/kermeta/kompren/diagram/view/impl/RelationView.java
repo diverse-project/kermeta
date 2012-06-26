@@ -453,4 +453,14 @@ public class RelationView extends ComponentView implements IRelationView {
 	public Picker getPicker() {
 		return null;
 	}
+
+
+	public void setEntitySrc(final IEntityView entitySrc) {
+		this.entitySrc = entitySrc;
+	}
+
+
+	public void setEntityTar(final IEntityView entityTar) {
+		this.entityTar = entityTar;
+	}
 }
