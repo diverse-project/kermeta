@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -218,11 +217,10 @@ public class QuestionsPanel extends JPanel {
 		Dimension dim = new Dimension(500, 500);
 		resultField.setPreferredSize(dim);
 		resultField.setMinimumSize(dim);
-		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		resultField.setText((int)screenSize.getWidth() + "\t" + (int)screenSize.getHeight() + "\n" + userInformations + "\n");
+		resultField.setText(userInformations + "\n");
 
 		for(Question q : questions)
-			resultField.setText(resultField.getText() + q);
+			resultField.setText(resultField.getText() + q + "\n");
 
 		try {
 			String fileName = "./data";
@@ -240,8 +238,7 @@ public class QuestionsPanel extends JPanel {
 			FileWriter fw = new FileWriter(fileName+ext);
 			PrintWriter out = new PrintWriter(fw);
 
-			for(Question q : questions)
-				out.print(q);
+			out.print(resultField.getText());
 
 			fw.flush();
 			fw.close();
