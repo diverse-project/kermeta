@@ -41,7 +41,7 @@ public class SetCompletionItems extends Action {
 					items.add(dbItem);
 
 			textField.setCompletionItems(items);
-			textField.setVisibleCompletionMenu(true);
+			textField.setVisibleCompletionMenu(!items.isEmpty());
 	    	try {
 	    		MenuSelectionManager.defaultManager().setSelectedPath(
 	    				new MenuElement[]{textField.getComponentPopupMenu(), textField.getComponentPopupMenu().getSubElements()[0]});

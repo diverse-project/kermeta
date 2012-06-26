@@ -43,24 +43,15 @@ public class Completioner extends WidgetInstrument {
 
 	protected BasicZoomer zoomer;
 
-	protected List<String> database;
-
 
 	public Completioner(final UIComposer<?> composer, final BasicZoomer zoomer) {
 		super(composer);
 
 		this.zoomer = zoomer;
-		database = new ArrayList<String>();
 		initialiseWidgets();
 		addEventable((MPopupMenu)textField.getComponentPopupMenu());
 	}
 
-
-	public void setDatabase(final List<ClassDefinition> cds) {
-		for(ClassDefinition clazz : cds)
-			if(!clazz.getIsAspect())
-				database.add(ModelUtils.INSTANCE.getQualifiedName(clazz));
-	}
 
 
 	@Override
@@ -257,15 +248,24 @@ public class Completioner extends WidgetInstrument {
 
 
 	private class TextChanged2SetCompletion extends Link<SetCompletionItems, TextChanged, Completioner> {
+		private List<String> database;
+
 		public TextChanged2SetCompletion(final Completioner ins) throws InstantiationException, IllegalAccessException {
 			super(ins, false, SetCompletionItems.class, TextChanged.class);
 		}
 
 		@Override
 		public void initAction() {
+			database = new ArrayList<String>();
+			ModelViewMapper mapper = ModelViewMapper.getMapper();
+
+			for(ClassDefinition clazz : mapper.getClassDefinitionAdded())
+				if(!clazz.getIsAspect() && mapper.getClassView(clazz).isVisible())
+					database.add(ModelUtils.INSTANCE.getQualifiedName(clazz));
+
 			action.setTextField(instrument.textField);
 			action.setTextReference(instrument.textField.getText());
-			action.setDatabase(instrument.database);
+			action.setDatabase(database);
 		}
 
 		@Override

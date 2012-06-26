@@ -188,7 +188,6 @@ public class GweletFrame extends UI {
 
 	public void open(final String path) {
 		ModelViewMapper.getMapper().build(path);
-		completioner.setDatabase(ModelViewMapper.getMapper().getClassDefinitionAdded());
 	}
 
 
