@@ -270,10 +270,10 @@ class SlicerAspectGenerator inherits Generator {
 				if(slicerGenerator.slicerModel.strict) then
 					result := result + "self.dup := self.createFrom()"
 				else
-					result := result + prunerVarName + "." + eclass.getAddedAttributeName() + ".add(self)"
+					result := result + prunerVarName + "." + eclass.getAddedAttributeName() + ".add(self)\n\t\t\t\t"+prunerVarName + ".addToRoot(self.dup)\n\t\t\t\t"
 				end
 
-				result := result + "\n\t\t\t\tself.sliced := true\n\t\t\t\t"+prunerVarName + ".addToRoot(self.dup)\n\t\t\tend\n"
+				result := result + "self.sliced := true\n\t\t\tend\n"
 			end
 
 			var relationCalls : String init generateRelationCalls(eclass, true)
