@@ -1,6 +1,7 @@
 package org.kermeta.kompren.gwelet.instruments;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import org.kermeta.kompren.gwelet.actions.Prune;
 import org.kermeta.kompren.gwelet.actions.ShowHierarchy;
@@ -11,6 +12,7 @@ import org.malai.instrument.WidgetInstrument;
 import org.malai.interaction.library.ButtonPressed;
 import org.malai.ui.UIComposer;
 import org.malai.widget.MButton;
+import org.malai.widget.MSpinner;
 
 public class Visualiser extends WidgetInstrument {
 
@@ -25,6 +27,8 @@ public class Visualiser extends WidgetInstrument {
 	protected GweletFrame frame;
 
 	protected GweletSlicer slicer;
+
+	protected MSpinner radius;
 
 
 	public Visualiser(final UIComposer<?> composer) {
@@ -41,6 +45,7 @@ public class Visualiser extends WidgetInstrument {
 		pruning 		= new MButton(new ImageIcon("resources/prune.png"));
 		flat 			= new MButton(new ImageIcon("resources/flat.png"));
 		lowerClasses 	= new MButton("subCl");
+		radius 			= new MSpinner(new MSpinner.MSpinnerNumberModel(0, 0, 1000, 1), new JLabel("Radius:"));
 	}
 
 	@Override
@@ -87,6 +92,12 @@ public class Visualiser extends WidgetInstrument {
 	}
 
 
+	public MSpinner getRadius() {
+		return radius;
+	}
+
+
+
 	private class Button2Prune extends Link<Prune, ButtonPressed, Visualiser> {
 		public Button2Prune(final Visualiser ins) throws InstantiationException, IllegalAccessException {
 			super(ins, false, Prune.class, ButtonPressed.class);
@@ -96,6 +107,7 @@ public class Visualiser extends WidgetInstrument {
 		public void initAction() {
 			action.setModelView(instrument.frame.getCanvas());
 			action.setSlicer(instrument.slicer);
+			action.setRadius((Integer)instrument.radius.getValue());
 		}
 
 		@Override
@@ -116,6 +128,7 @@ public class Visualiser extends WidgetInstrument {
 			action.setModelView(instrument.frame.getCanvas());
 			action.setSlicer(instrument.slicer);
 			action.setSuperTypes(interaction.getButton()==instrument.superClasses);
+			action.setRadius((Integer)instrument.radius.getValue());
 		}
 
 		@Override

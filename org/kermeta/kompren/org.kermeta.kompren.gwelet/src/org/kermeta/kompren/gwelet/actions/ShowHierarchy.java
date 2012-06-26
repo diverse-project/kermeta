@@ -7,12 +7,15 @@ import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 
 public class ShowHierarchy extends SelectionBasedVisuAction {
+	protected int radius;
+
 	protected boolean superTypes;
 
 
 	public ShowHierarchy() {
 		super();
 		superTypes = true;
+		radius = 0;
 	}
 
 
@@ -26,7 +29,7 @@ public class ShowHierarchy extends SelectionBasedVisuAction {
 		for(ClassView cl : classes)
 			cds.add(mapper.getClassDefinition(cl));
 
-		slicer.initialise(cds, new BasicEList<ModelingUnit>(), superTypes, false, false);
+		slicer.initialise(cds, new BasicEList<ModelingUnit>(), radius, superTypes, false, false);
 		slicer.launch();
 		canvas.update();
 		done();
@@ -42,5 +45,10 @@ public class ShowHierarchy extends SelectionBasedVisuAction {
 	@Override
 	public String getUndoName() {
 		return superTypes ? "Show super-classes" : "Show lower-classes";
+	}
+
+
+	public void setRadius(final int radius) {
+		this.radius = radius;
 	}
 }

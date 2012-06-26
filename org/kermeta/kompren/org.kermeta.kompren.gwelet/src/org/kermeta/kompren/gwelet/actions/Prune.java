@@ -7,7 +7,7 @@ import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 
 public class Prune extends SelectionBasedVisuAction {
-	protected int radius;//TODO
+	protected int radius;
 
 	protected boolean considerComposition;//TODO
 
@@ -34,8 +34,8 @@ public class Prune extends SelectionBasedVisuAction {
 
 		for(ClassView cl : classes)
 			cds.add(mapper.getClassDefinition(cl));
-
-		slicer.initialise(cds, new BasicEList<ModelingUnit>(), false, true, true);
+System.out.println(radius);
+		slicer.initialise(cds, new BasicEList<ModelingUnit>(), radius, false, true, true);
 		slicer.launch();
 		canvas.update();
 		done();
