@@ -20,12 +20,14 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		widget = frame;
 	}
 
+	public Formular formular;
+
 
 	@Override
 	public void compose(final MProgressBar progressBar) {
 		MetamodelView mmv = widget.getCanvas();
 		QuestionsPanel qpanel = new QuestionsPanel(widget, widget.toolbar);
-		Formular formular = new Formular(qpanel, mmv.getScrollpane(), new JPanel(), widget);
+		formular = new Formular(qpanel, mmv.getScrollpane(), new JPanel(), widget);
 		MPieMenu menu = widget.visualiserManager.getMenu();
 		menu.add(widget.reiniter.getReinit());
 		menu.add(widget.visualiser.getSuperClasses());
@@ -70,6 +72,7 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		pane.add(widget.getLayeredPanel(), BorderLayout.CENTER);
 		pane.add(qpanel, BorderLayout.EAST);
 		pane.add(formular, BorderLayout.SOUTH);
+		formular.setVisible(false);
 		widget.pack();
 		widget.setLocation(200, 200);
 		widget.setExtendedState(Frame.MAXIMIZED_BOTH);
