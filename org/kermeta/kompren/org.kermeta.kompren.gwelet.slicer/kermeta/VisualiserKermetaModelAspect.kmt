@@ -18,11 +18,11 @@ class SlicerVisitor {
 		self.idPass := pass
 	end
 
-	operation visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	operation visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		self.visitedPass := true
 	end
 
-	operation visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	operation visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 	end
 
 	operation checkInitialisation(pass : Integer) is do
@@ -35,146 +35,160 @@ class SlicerVisitor {
 }
 
 aspect class Package {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
 			if(not self.sliced) then
 				theVisualiserKermetaModel.addedPackages.add(self)
 				self.sliced := true
 			end
 			self.visitedPass := true
-			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel)}
+			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			self.nestedPackage.each{thePackage | thePackage.visitToAddRelations(theVisualiserKermetaModel)}
+			self.nestedPackage.each{thePackage | thePackage.visitToAddRelations(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
+//	method checkCanReallyBeAdded() : Boolean is do
+//		result := super() and self.nestedPackage.each{thePackage | thePackage.visitedPass.orElse{b | thePackage.checkCanReallyBeAdded()} }
+//	end
 }
 
 aspect class ModelingUnit {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedPass := true
-			self.packages.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel)}
+			self.packages.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			self.packages.each{thePackage | thePackage.visitToAddRelations(theVisualiserKermetaModel)}
+			self.packages.each{thePackage | thePackage.visitToAddRelations(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
+//	method checkCanReallyBeAdded() : Boolean is do
+//		result := super() and self.packages.each{thePackage | thePackage.visitedPass.orElse{b | thePackage.checkCanReallyBeAdded()} }
+//	end
 }
 
 aspect class TypeDefinitionContainer inherits SlicerVisitor {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedPass := true
-			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theVisualiserKermetaModel)}
+			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddClasses(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddRelations(theVisualiserKermetaModel)}
+			self.ownedTypeDefinition.each{theTypeDefinition | theTypeDefinition.visitToAddRelations(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
+//	method checkCanReallyBeAdded() : Boolean is do
+//		result := super() and self.ownedTypeDefinition.detect{theTypeDefinition | theTypeDefinition.visitedPass.orElse{b | theTypeDefinition.checkCanReallyBeAdded()} }
+//	end
 }
 
 aspect class TypeDefinition inherits SlicerVisitor {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedPass := true
-			if(theVisualiserKermetaModel.considersuperType) then self.superType.each{theType | theType.visitToAddClasses(theVisualiserKermetaModel)} end
+			if(theVisualiserKermetaModel.considersuperType) then self.superType.each{theType | theType.visitToAddClasses(theVisualiserKermetaModel, currentRadius+1)} end
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			if(theVisualiserKermetaModel.considersuperType) then self.superType.each{theType | theType.visitToAddRelations(theVisualiserKermetaModel)} end
+			if(theVisualiserKermetaModel.considersuperType) then self.superType.each{theType | theType.visitToAddRelations(theVisualiserKermetaModel, currentRadius+1)} end
 		end
 	end
 }
 
 aspect class Type inherits SlicerVisitor {
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super()
+	end
 }
 
 aspect class ParameterizedType {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedPass := true
-			self.typeDefinition.visitToAddClasses(theVisualiserKermetaModel)
+			self.typeDefinition.visitToAddClasses(theVisualiserKermetaModel, currentRadius)
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			self.typeDefinition.visitToAddRelations(theVisualiserKermetaModel)
+			self.typeDefinition.visitToAddRelations(theVisualiserKermetaModel, currentRadius)
 		end
+	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super() and (self.typeDefinition.isVoid.orElse{b | self.typeDefinition.visitedPass.orElse{b | self.typeDefinition.checkCanReallyBeAdded()}})
 	end
 }
 
 aspect class ClassDefinition {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			if(not self.sliced) then
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
+			if(not self.sliced and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
 				theVisualiserKermetaModel.addedClassDefinitions.add(self)
 				self.sliced := true
 			end
 			self.visitedPass := true
-			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theVisualiserKermetaModel)} end
+			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theVisualiserKermetaModel, currentRadius)} end
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theVisualiserKermetaModel)} end
+			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theVisualiserKermetaModel, currentRadius)} end
 		end
+	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := self.sliced
 	end
 }
 
 aspect class TypedElement inherits SlicerVisitor {
-	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel) is do
+	method visitToAddClasses(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		checkInitialisation(theVisualiserKermetaModel.idPass)
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
+		if(not self.visitedPass and (theVisualiserKermetaModel.radius<=0 or currentRadius<=(theVisualiserKermetaModel.radius+1))) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedPass := true
-			if(theVisualiserKermetaModel.considertype) then if(not self.type.isVoid) then self.type.visitToAddClasses(theVisualiserKermetaModel) end end
+			if(theVisualiserKermetaModel.considertype) then if(not self.type.isVoid) then self.type.visitToAddClasses(theVisualiserKermetaModel, currentRadius) end end
 		end
 	end
-	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel) is do
-		if(not self.visitedPass) then
-			super(theVisualiserKermetaModel)
-			self.visitedPass := true
+	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
+		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
+			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			if(theVisualiserKermetaModel.considertype) then if(not self.type.isVoid) then self.type.visitToAddRelations(theVisualiserKermetaModel) end end
+			if(theVisualiserKermetaModel.considertype) then if(not self.type.isVoid) then self.type.visitToAddRelations(theVisualiserKermetaModel, currentRadius) end end
 		end
+	end
+	method checkCanReallyBeAdded() : Boolean is do
+		result := super() and (self.type.isVoid.orElse{b | self.type.visitedPass.orElse{b | self.type.checkCanReallyBeAdded()}})
 	end
 }
 

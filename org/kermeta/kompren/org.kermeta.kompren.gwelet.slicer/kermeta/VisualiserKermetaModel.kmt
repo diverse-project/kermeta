@@ -4,6 +4,8 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::io::StdIO => stdio
 class VisualiserKermetaModel {
+	attribute radius : Integer
+
 	attribute considersuperType : Boolean
 
 	attribute considerownedAttribute : Boolean
@@ -20,10 +22,11 @@ class VisualiserKermetaModel {
 
 	reference addedClassDefinitions : Bag<ClassDefinition>
 
-	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], considersuperType : Boolean, considerownedAttribute : Boolean, considertype : Boolean) : VisualiserKermetaModel is do
+	operation initialise(requiredClassDefinitions : bag ClassDefinition[0..*], requiredModelingUnits : bag ModelingUnit[0..*], radius : Integer, considersuperType : Boolean, considerownedAttribute : Boolean, considertype : Boolean) : VisualiserKermetaModel is do
 		result := self
 		self.addedPackages := Bag<Package>.new
 		self.addedClassDefinitions := Bag<ClassDefinition>.new
+		self.radius := radius
 		self.requiredClassDefinitions.clear()
 		self.requiredClassDefinitions.addAll(requiredClassDefinitions)
 		self.requiredModelingUnits.clear()
@@ -38,11 +41,11 @@ class VisualiserKermetaModel {
 
 	operation launch() is do
 		onStart()
-		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self) }
-		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddClasses(self) }
-		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self) }
-		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self) }
-		self.addedPackages.each{thePackage | onPackageAdded(thePackage) }
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddClasses(self, 0) }
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddClasses(self, 0) }
+		self.requiredClassDefinitions.each{theClassDefinition | theClassDefinition.visitToAddRelations(self, 0) }
+		self.requiredModelingUnits.each{theModelingUnit | theModelingUnit.visitToAddRelations(self, 0) }
+		self.addedPackages.each{thePackage | if(thePackage.checkCanReallyBeAdded()) then onPackageAdded(thePackage) end }
 		self.addedClassDefinitions.each{theClassDefinition | onClassDefinitionAdded(theClassDefinition) }
 		onEnd()
 	end
