@@ -8,6 +8,8 @@ import org.kermeta.kompren.gwelet.view.OperationView;
 import org.kermeta.kompren.gwelet.view.RelationClassView;
 import org.kermeta.kompren.gwelet.view.RoleView;
 import org.kermeta.language.structure.ClassDefinition;
+import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.Type;
 
 
@@ -32,14 +34,15 @@ public class Flat extends SelectionBasedVisuAction {
 		ClassView cv = classes.get(0);
 		ClassDefinition cd = mapper.getClassDefinition(cv);
 
-		flat(cv, cd);
+		flat(cv, cd, cd);
+		cd.getSuperType().clear();
 		cv.update();
 		canvas.update();
 		done();
 	}
 
 
-	protected void flat(final ClassView cvRef, final ClassDefinition cdCurrent) {
+	protected void flat(final ClassView cvRef, final ClassDefinition cdRef, final ClassDefinition cdCurrent) {
 		ModelViewMapper mapper = ModelViewMapper.getMapper();
 		ClassDefinition cdSup;
 		ClassView cvSup;
@@ -57,9 +60,29 @@ public class Flat extends SelectionBasedVisuAction {
 						av.setEntity(cvRef);
 					}
 
+					while(!cdSup.getOwnedAttribute().isEmpty()) {
+						Property prop = cdSup.getOwnedAttribute().get(0);
+						if(cdRef.getOwnedAttribute().contains(prop))
+							cdSup.getOwnedAttribute().remove(0);
+						else {
+							cdRef.getOwnedAttribute().add(prop);
+							prop.setOwningClass(cdRef);
+						}
+					}
+
 					for(OperationView ov : cvSup.getOperations()) {
 						cvRef.getOperations().add(ov);
 						ov.setEntity(cvRef);
+					}
+
+					while(!cdSup.getOwnedOperation().isEmpty()) {
+						Operation op = cdSup.getOwnedOperation().get(0);
+						if(cdRef.getOwnedOperation().contains(op))
+							cdSup.getOwnedOperation().remove(0);
+						else {
+							cdRef.getOwnedOperation().add(op);
+							op.setOwningClass(cdRef);
+						}
 					}
 
 					for(RelationClassView rcv : cvSup.getRelations()) {
@@ -82,7 +105,7 @@ public class Flat extends SelectionBasedVisuAction {
 					cvSup.getAttributes().clear();
 					cvSup.getOperations().clear();
 
-					flat(cvRef, cdSup);
+					flat(cvRef, cdRef, cdSup);
 				}
 			}
 	}
