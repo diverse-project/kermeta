@@ -34,7 +34,7 @@ public class Prune extends SelectionBasedVisuAction {
 
 		for(ClassView cl : classes)
 			cds.add(mapper.getClassDefinition(cl));
-System.out.println(radius);
+
 		slicer.initialise(cds, new BasicEList<ModelingUnit>(), radius, false, true, true);
 		slicer.launch();
 		canvas.update();

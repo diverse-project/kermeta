@@ -46,6 +46,11 @@ public class Visualiser extends WidgetInstrument {
 		flat 			= new MButton(new ImageIcon("resources/flat.png"));
 		lowerClasses 	= new MButton("subCl");
 		radius 			= new MSpinner(new MSpinner.MSpinnerNumberModel(0, 0, 1000, 1), new JLabel("Radius:"));
+
+		superClasses.setToolTipText("Shows the super classes of the selected class.");
+		pruning.setToolTipText("Shows the classes in relation with the selected class.");
+		flat.setToolTipText("Shows all the inherited and native properties and operations of the selected class (by flattening its hierarchy).");
+		radius.setToolTipText("Sets the radius of the hierarchy and pruning slicing: 0, there is no radius; 1, only the direct classes are kept; etc.");
 	}
 
 	@Override

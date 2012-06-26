@@ -23,6 +23,7 @@ public class ViewReiniter extends WidgetInstrument {
 	@Override
 	protected void initialiseWidgets() {
 		reinit = new MButton("Reinit");
+		reinit.setToolTipText("Reinitialises the view.");
 	}
 
 	@Override

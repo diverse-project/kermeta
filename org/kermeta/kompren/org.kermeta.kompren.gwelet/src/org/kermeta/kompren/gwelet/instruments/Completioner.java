@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoundedRangeModel;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
@@ -38,6 +39,8 @@ import org.malai.widget.MPopupMenu;
 public class Completioner extends WidgetInstrument {
 	protected TextFieldCompletion textField;
 
+	protected JLabel label;
+
 	protected BasicZoomer zoomer;
 
 	protected List<String> database;
@@ -63,6 +66,8 @@ public class Completioner extends WidgetInstrument {
 	@Override
 	protected void initialiseWidgets() {
 		textField = new TextFieldCompletion();
+		textField.setToolTipText("Searches a class with its name and zooms on the class corresponding to the selected sub-menu.");
+		label = new JLabel("Search:");
 	}
 
 
@@ -272,5 +277,10 @@ public class Completioner extends WidgetInstrument {
 
 	public TextFieldCompletion getTextField() {
 		return textField;
+	}
+
+
+	public JLabel getLabel() {
+		return label;
 	}
 }

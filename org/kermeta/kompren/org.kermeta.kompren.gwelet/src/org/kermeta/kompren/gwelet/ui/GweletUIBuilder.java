@@ -57,6 +57,7 @@ public class GweletUIBuilder extends UIComposer<GweletFrame> {
 		Dimension dim = new Dimension(250, 30);
 		field.setPreferredSize(dim);
 		field.setMaximumSize(dim);
+		widget.toolbar.add(widget.completioner.getLabel());
 		widget.toolbar.add(field);
 		widget.toolbar.add(widget.visualiser.getRadius().getLabel());
 		widget.toolbar.add(widget.visualiser.getRadius());
