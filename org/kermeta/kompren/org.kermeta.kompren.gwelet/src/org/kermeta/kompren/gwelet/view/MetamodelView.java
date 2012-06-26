@@ -128,7 +128,7 @@ public class MetamodelView extends ModelView {
 				if(link.getEntitySrc()==tarClass && link.getEntityTar()==srcClass && link instanceof RelationClassView) {
 					role = ((RelationClassView)link).getRoleTar();
 
-					if(role!=null && role.name.text.equals(srcRole) && role.card.text.equals(srcCard))
+					if(role!=null && role.name.text.equals(srcRole) && role.cardText.text.equals(srcCard))
 						again = false;
 				}
 

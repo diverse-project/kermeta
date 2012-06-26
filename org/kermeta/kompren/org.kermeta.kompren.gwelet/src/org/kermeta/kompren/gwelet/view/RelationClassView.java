@@ -18,6 +18,8 @@ public class RelationClassView extends RelationView {
 	/** The role of the beginning of the relation. */
 	protected RoleView roleTar;
 
+	protected boolean isComposition;
+
 
 	/**
 	 * @see RelationView
@@ -25,6 +27,8 @@ public class RelationClassView extends RelationView {
 	public RelationClassView(final IEntityView src, final IEntityView target, final boolean isComposition, final boolean compositionAtStart,
 							final String srcRole, final String targetRole, final Cardinality srcCard, final Cardinality targetCard) {
 		super(src, target);
+
+		this.isComposition = isComposition;
 
 		if(isComposition)
 			if(compositionAtStart)
@@ -36,10 +40,30 @@ public class RelationClassView extends RelationView {
 			setTargetDecoration(new RelationDecorationView(this, getLastSegment(), false));
 
 		if(srcRole!=null && srcRole.length()>0 && srcCard!=null)
-			roleSrc = new RoleView(srcRole, srcCard, this, true, isComposition && !compositionAtStart);
+			roleSrc = new RoleView(srcRole, srcCard, this, false, isComposition && !compositionAtStart);
 
 		if(targetRole!=null && targetRole.length()>0 && targetCard!=null)
-			roleTar = new RoleView(targetRole, targetCard, this, false, isComposition && compositionAtStart);
+			roleTar = new RoleView(targetRole, targetCard, this, true, isComposition && compositionAtStart);
+	}
+
+
+	public boolean equalsValue(final RelationClassView rcv) {
+		if(rcv==null) return false;
+
+		boolean eq;
+
+		if(roleSrc==null)
+			eq = rcv.getRoleSrc()==null;
+		else
+			eq = roleSrc.equalsValue(rcv.getRoleSrc());
+
+		if(eq)
+			if(roleTar==null)
+				eq = rcv.getRoleTar()==null;
+			else
+				eq = roleTar.equalsValue(rcv.getRoleTar());
+
+		return eq;
 	}
 
 
@@ -114,5 +138,16 @@ public class RelationClassView extends RelationView {
 
 		if(roleTar!=null)
 			roleTar.reinitTextPositions();
+	}
+
+
+	public boolean isComposition() {
+		return isComposition;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }

@@ -51,7 +51,9 @@ public class RoleView {
 
 	protected FloatingText name;
 
-	protected FloatingText card;
+	protected Cardinality card;
+
+	protected FloatingText cardText;
 
 	protected RelationClassView view;
 
@@ -65,13 +67,19 @@ public class RoleView {
 
 		this.isComposition 	= isComposition;
 		this.name 			= new FloatingText(name, this);
-		this.card 			= new FloatingText(card.getText(), this);
+		this.card			= card;
+		this.cardText 		= new FloatingText(card.getText(), this);
 		this.view 			= view;
 		this.source 		= source;
 
 		reinitTextPositions();
 	}
 
+
+	public boolean equalsValue(final RoleView rv) {
+		if(rv==null) return false;
+		return card==rv.getCardinality() && name.getText().equals(rv.getName());
+	}
 
 
 	protected void initNamePosition(final FloatingText text, final boolean onLeft) {
@@ -115,22 +123,27 @@ public class RoleView {
 	}
 
 
-	public String getCard() {
-		return card.getText();
+	public Cardinality getCardinality() {
+		return card;
 	}
 
 
-	public void setCard(final String card) {
-		this.card.setText(card);
+	public String getCardText() {
+		return cardText.getText();
+	}
+
+
+	public void setCardText(final String card) {
+		this.cardText.setText(card);
 	}
 
 
 
 	public void paint(final Graphics2D g) {
-		if(view.isVisible() && name!=null && card!=null && (name.text.length()>0 || card.text.length()>0)) {
+		if(view.isVisible() && name!=null && cardText!=null && (name.text.length()>0 || cardText.text.length()>0)) {
 			g.setFont(view.getEntitySrc().getFont());
 			name.paint(g);
-			card.paint(g);
+			cardText.paint(g);
 		}
 	}
 
@@ -142,7 +155,7 @@ public class RoleView {
 
 	public void reinitTextPositions() {
 		initNamePosition(this.name, true);
-		initNamePosition(this.card, false);
+		initNamePosition(this.cardText, false);
 	}
 
 
@@ -150,8 +163,8 @@ public class RoleView {
 	public Rectangle2D getBorders() {
 		Rectangle2D border = null;
 
-		if(card!=null)
-			border = card.getBorders();
+		if(cardText!=null)
+			border = cardText.getBorders();
 
 		if(name!=null)
 			if(border==null)
@@ -160,5 +173,11 @@ public class RoleView {
 				border = border.createUnion(name.getBorders());
 
 		return border;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }

@@ -3,6 +3,7 @@ package org.kermeta.kompren.gwelet.instruments;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import org.kermeta.kompren.gwelet.actions.Flat;
 import org.kermeta.kompren.gwelet.actions.Prune;
 import org.kermeta.kompren.gwelet.actions.ShowHierarchy;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
@@ -58,6 +59,7 @@ public class Visualiser extends WidgetInstrument {
 		try {
 			addLink(new Button2ShowHierarchy(this));
 			addLink(new Button2Prune(this));
+			addLink(new Button2Flat(this));
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -99,6 +101,25 @@ public class Visualiser extends WidgetInstrument {
 
 	public MSpinner getRadius() {
 		return radius;
+	}
+
+
+
+	private class Button2Flat extends Link<Flat, ButtonPressed, Visualiser> {
+		public Button2Flat(final Visualiser ins) throws InstantiationException, IllegalAccessException {
+			super(ins, false, Flat.class, ButtonPressed.class);
+		}
+
+		@Override
+		public void initAction() {
+			action.setModelView(instrument.frame.getCanvas());
+			action.setSlicer(instrument.slicer);
+		}
+
+		@Override
+		public boolean isConditionRespected() {
+			return interaction.getButton()==instrument.flat;
+		}
 	}
 
 

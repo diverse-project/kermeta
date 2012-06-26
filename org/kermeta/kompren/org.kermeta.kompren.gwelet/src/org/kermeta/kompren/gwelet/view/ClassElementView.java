@@ -111,4 +111,16 @@ public abstract class ClassElementView extends ComponentView {
 	public void updateLineColor(final int opacity) {
 		lineColor = new Color(0, 0, 0, opacity);
 	}
+
+
+
+	public ClassView getEntity() {
+		return entity;
+	}
+
+
+
+	public void setEntity(final ClassView entity) {
+		this.entity = entity;
+	}
 }

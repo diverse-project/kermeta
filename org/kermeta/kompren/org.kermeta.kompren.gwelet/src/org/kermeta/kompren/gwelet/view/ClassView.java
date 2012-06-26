@@ -40,6 +40,8 @@ public class ClassView extends RectangleEntityView {
 	/** The views of the operations of the class. */
 	protected List<OperationView> operations;
 
+	protected List<RelationClassView> relations;
+
 	/** Defines if the attributes must be visible or not. */
 	protected boolean propertiesVisible;
 
@@ -68,6 +70,7 @@ public class ClassView extends RectangleEntityView {
 		selected			= false;
 		attributes	   		= new ArrayList<AttributeView>();
 		operations	   		= new ArrayList<OperationView>();
+		relations			= new ArrayList<RelationClassView>();
 		setSelected(false);
 		update();
 		initAnchors();
@@ -78,8 +81,11 @@ public class ClassView extends RectangleEntityView {
 	public void anchorRelation(final IRelationView relation, final IEntityView opposite, final boolean atEnd) {
 		super.anchorRelation(relation, opposite, atEnd);
 
-		if(relation instanceof RelationClassView)
+		if(relation instanceof RelationClassView) {
 			((RelationClassView)relation).reinitRoles();
+			if(!atEnd)
+				relations.add((RelationClassView)relation);
+		}
 	}
 
 
@@ -427,5 +433,10 @@ public class ClassView extends RectangleEntityView {
 
 	public List<OperationView> getOperations() {
 		return operations;
+	}
+
+
+	public List<RelationClassView> getRelations() {
+		return relations;
 	}
 }
