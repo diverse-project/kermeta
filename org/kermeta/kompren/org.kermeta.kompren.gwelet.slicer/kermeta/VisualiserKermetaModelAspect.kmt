@@ -42,9 +42,9 @@ aspect class Package {
 			if(not self.sliced) then
 				theVisualiserKermetaModel.addedPackages.add(self)
 				self.sliced := true
+				self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel, currentRadius)}
 			end
 			self.visitedPass := true
-			self.nestedPackage.each{thePackage | thePackage.visitToAddClasses(theVisualiserKermetaModel, currentRadius)}
 		end
 	end
 	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
@@ -154,16 +154,16 @@ aspect class ClassDefinition {
 			if(not self.sliced and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
 				theVisualiserKermetaModel.addedClassDefinitions.add(self)
 				self.sliced := true
+				if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theVisualiserKermetaModel, currentRadius+1)} end
 			end
 			self.visitedPass := true
-			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddClasses(theVisualiserKermetaModel, currentRadius)} end
 		end
 	end
 	method visitToAddRelations(theVisualiserKermetaModel : VisualiserKermetaModel, currentRadius : Integer) is do
 		if(not self.visitedForRelations and (theVisualiserKermetaModel.radius<=0 or currentRadius<=theVisualiserKermetaModel.radius)) then
 			super(theVisualiserKermetaModel, currentRadius)
 			self.visitedForRelations := true
-			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theVisualiserKermetaModel, currentRadius)} end
+			if(theVisualiserKermetaModel.considerownedAttribute) then self.ownedAttribute.each{theProperty | theProperty.visitToAddRelations(theVisualiserKermetaModel, currentRadius+1)} end
 		end
 	end
 	method checkCanReallyBeAdded() : Boolean is do
