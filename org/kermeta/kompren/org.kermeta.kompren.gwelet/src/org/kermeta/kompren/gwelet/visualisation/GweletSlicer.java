@@ -31,14 +31,19 @@ public class GweletSlicer extends RichVisualiserKermetaModel {
 	@Override
 	public void onClassDefinitionAdded(final ClassDefinition cl) {
 		String qname = ModelUtils.INSTANCE.getQualifiedName(cl);
-		if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta"))
-			ModelViewMapper.getMapper().getClassView(cl).setVisibility(IComponentView.Visibility.STANDARD);
+		if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta") &&
+			ModelViewMapper.getMapper().getClassView(cl).getVisibility()==IComponentView.Visibility.HIDE_START)
+				ModelViewMapper.getMapper().getClassView(cl).setVisibility(IComponentView.Visibility.STANDARD);
 	}
 
 
 
 	@Override
 	public void onEnd() {
+		for(IEntityView ent : view.getEntities())
+			if(ent.getVisibility()==IComponentView.Visibility.HIDE_START)
+				ent.setVisibility(IComponentView.Visibility.NONE);
+
 		view.updateLayout();
 		view.update();
 	}
@@ -48,6 +53,7 @@ public class GweletSlicer extends RichVisualiserKermetaModel {
 	@Override
 	public void onStart() {
 		for(IEntityView ent : view.getEntities())
-			ent.setVisibility(IComponentView.Visibility.NONE);
+			if(ent.getVisibility()==IComponentView.Visibility.STANDARD)
+				ent.setVisibility(IComponentView.Visibility.HIDE_START);
 	}
 }
