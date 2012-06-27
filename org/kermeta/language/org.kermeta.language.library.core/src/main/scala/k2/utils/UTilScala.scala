@@ -22,6 +22,8 @@ object UTilScala {
     }
 
     def newInstance(o:org.kermeta.language.structure.Class): k2.standard.KermetaObject ={
+      import k2.standard.PrimitiveConversion._
+      
        // println("newInstance " + o + " " +o.getName)
         var name: _root_.java.lang.String = getQualifiedNamePackage(o.getTypeDefinition.eContainer.asInstanceOf[org.kermeta.language.structure.Package],".")
         var packName = k2.utils.TypeEquivalence.getPackageEquivalence(name)
@@ -43,7 +45,20 @@ object UTilScala {
         var meth :_root_.java.lang.reflect.Method = clazz.getMethods.filter(m=> m.getName.equals(methodName)).first
         //println(meth.getName + " " + meth.getParameterTypes.size)
         val numbers = Array()
-        return meth.invoke(obj, numbers: _*).asInstanceOf[k2.standard.KermetaObject]
+        
+        meth.invoke(obj, numbers: _*) match {
+          case e:k2.standard.KermetaObject => return e
+          case e:java.lang.String => return string2kermeta(e)
+          case e:java.lang.Double => return double2kermeta(e)
+          case e:java.lang.Integer => return integer2kermeta(e)
+          case e:java.lang.Long => return long2kermeta(e)
+          case e:java.lang.Short => return short2kermeta(e)
+          case e:java.lang.Boolean => return boolean2kermeta(e)
+          case e:java.lang.Character => return character2kermeta(e)
+          case e:java.lang.StringBuilder => return stringbuffer2kermeta(e)
+          // default
+          case e => return e.asInstanceOf[k2.standard.KermetaObject] 
+        }
     }
 
  @scala.reflect.BeanProperty
