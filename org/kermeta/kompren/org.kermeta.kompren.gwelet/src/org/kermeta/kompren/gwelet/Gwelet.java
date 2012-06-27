@@ -18,7 +18,7 @@ public class Gwelet {
 		GweletFrame frame = new GweletFrame();
 		frame.getComposer().compose(null);
 		frame.setVisible(true);
-		frame.open("/home/ablouin/workspace/org.kermeta.kompren.gwelet/examples/UML.km");
+		frame.open("./examples/UML.km");
 		frame.getCanvas().requestFocusInWindow();
 		((GweletUIBuilder)frame.getComposer()).formular.setVisible(true);
 	}
