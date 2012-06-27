@@ -131,58 +131,6 @@ public class Completioner extends WidgetInstrument {
 
 
 
-	private abstract class Interaction2MoveCamera<I extends Interaction> extends Link<MoveCamera, I, Completioner> {
-		public Interaction2MoveCamera(final Completioner ins, final Class<I> clazzInteraction) throws InstantiationException, IllegalAccessException {
-			super(ins, false, MoveCamera.class, clazzInteraction);
-		}
-
-
-		protected void setAction(final String qualifiedPath) {
-			final ClassView cv = ModelViewMapper.getMapper().getClassView(qualifiedPath);
-
-			if(cv!=null) {
-				MetamodelView canvas = ((GweletFrame)instrument.getComposer().getWidget()).getCanvas();
-				JScrollPane pane = canvas.getScrollpane();
-				double zoom = zoomer.getZoomable().getZoom();
-
-				action.setScrollPane(pane);
-
-				final Point2D centre = cv.getCentre();
-				final JScrollBar vertSB  = pane.getVerticalScrollBar();
-				final JScrollBar horizSB = pane.getHorizontalScrollBar();
-
-				if(vertSB.isVisible()) {
-					final BoundedRangeModel model = vertSB.getModel();
-					final int value	= model.getValue();
-					final int cy 	= pane.getHeight()/2 + value;
-					int newValue 	= value+(int)(centre.getY()*zoom)-cy;
-
-					if(newValue>model.getMaximum())
-						newValue = model.getMaximum();
-					else if(newValue<model.getMinimum())
-						newValue = model.getMinimum();
-
-					action.setPy(newValue);
-				}
-
-				if(horizSB.isVisible()) {
-					final BoundedRangeModel model = horizSB.getModel();
-					final int value	= model.getValue();
-					final int cx 	= pane.getWidth()/2 + value;
-					int newValue 	= value+(int)(centre.getX()*zoom)-cx;
-
-					if(newValue>model.getMaximum())
-						newValue = model.getMaximum();
-					else if(newValue<model.getMinimum())
-						newValue = model.getMinimum();
-
-					action.setPx(newValue);
-				}
-			}
-		}
-	}
-
-
 	private class EnterEscape2HidePopupMenu extends Link<SetVisibleComponent, KeyPressure, Completioner> {
 		public EnterEscape2HidePopupMenu(final Completioner ins) throws InstantiationException, IllegalAccessException {
 			super(ins, false, SetVisibleComponent.class, KeyPressure.class);
@@ -202,9 +150,9 @@ public class Completioner extends WidgetInstrument {
 
 
 
-	private class EnterPressed2ZoomOn extends Interaction2MoveCamera<KeyPressure> {
+	private class EnterPressed2ZoomOn extends Interaction2MoveCamera<KeyPressure, Completioner> {
 		public EnterPressed2ZoomOn(final Completioner ins) throws InstantiationException, IllegalAccessException {
-			super(ins, KeyPressure.class);
+			super(ins, KeyPressure.class, ins.zoomer);
 		}
 
 
@@ -226,9 +174,9 @@ public class Completioner extends WidgetInstrument {
 
 
 
-	private class MenuItem2ZoomOn extends Interaction2MoveCamera<MenuItemPressed> {
+	private class MenuItem2ZoomOn extends Interaction2MoveCamera<MenuItemPressed, Completioner> {
 		public MenuItem2ZoomOn(final Completioner ins) throws InstantiationException, IllegalAccessException {
-			super(ins, MenuItemPressed.class);
+			super(ins, MenuItemPressed.class, ins.zoomer);
 		}
 
 
@@ -284,3 +232,61 @@ public class Completioner extends WidgetInstrument {
 		return label;
 	}
 }
+
+
+
+
+abstract class Interaction2MoveCamera<I extends Interaction, J extends WidgetInstrument> extends Link<MoveCamera, I, J> {
+	protected BasicZoomer zoomer;
+
+	public Interaction2MoveCamera(final J ins, final Class<I> clazzInteraction, final BasicZoomer zoomer) throws InstantiationException, IllegalAccessException {
+		super(ins, false, MoveCamera.class, clazzInteraction);
+		this.zoomer = zoomer;
+	}
+
+
+	protected void setAction(final String qualifiedPath) {
+		final ClassView cv = ModelViewMapper.getMapper().getClassView(qualifiedPath);
+
+		if(cv!=null) {
+			MetamodelView canvas = ((GweletFrame)instrument.getComposer().getWidget()).getCanvas();
+			JScrollPane pane = canvas.getScrollpane();
+			double zoom = zoomer.getZoomable().getZoom();
+
+			action.setScrollPane(pane);
+
+			final Point2D centre = cv.getCentre();
+			final JScrollBar vertSB  = pane.getVerticalScrollBar();
+			final JScrollBar horizSB = pane.getHorizontalScrollBar();
+
+			if(vertSB.isVisible()) {
+				final BoundedRangeModel model = vertSB.getModel();
+				final int value	= model.getValue();
+				final int cy 	= pane.getHeight()/2 + value;
+				int newValue 	= value+(int)(centre.getY()*zoom)-cy;
+
+				if(newValue>model.getMaximum())
+					newValue = model.getMaximum();
+				else if(newValue<model.getMinimum())
+					newValue = model.getMinimum();
+
+				action.setPy(newValue);
+			}
+
+			if(horizSB.isVisible()) {
+				final BoundedRangeModel model = horizSB.getModel();
+				final int value	= model.getValue();
+				final int cx 	= pane.getWidth()/2 + value;
+				int newValue 	= value+(int)(centre.getX()*zoom)-cx;
+
+				if(newValue>model.getMaximum())
+					newValue = model.getMaximum();
+				else if(newValue<model.getMinimum())
+					newValue = model.getMinimum();
+
+				action.setPx(newValue);
+			}
+		}
+	}
+}
+

@@ -6,7 +6,10 @@ import javax.swing.JLabel;
 import org.kermeta.kompren.gwelet.actions.Flat;
 import org.kermeta.kompren.gwelet.actions.Prune;
 import org.kermeta.kompren.gwelet.actions.ShowHierarchy;
+import org.kermeta.kompren.gwelet.model.ModelUtils;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
+import org.kermeta.kompren.gwelet.view.ClassView;
+import org.kermeta.kompren.gwelet.view.ModelViewMapper;
 import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
 import org.malai.instrument.Link;
 import org.malai.instrument.WidgetInstrument;
@@ -59,6 +62,7 @@ public class Visualiser extends WidgetInstrument {
 		try {
 			addLink(new Button2ShowHierarchy(this));
 			addLink(new Button2Prune(this));
+			addLink(new Button2FocusOnClass(this));
 			addLink(new Button2Flat(this));
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -122,6 +126,28 @@ public class Visualiser extends WidgetInstrument {
 		}
 	}
 
+
+
+	private class Button2FocusOnClass extends Interaction2MoveCamera<ButtonPressed, Visualiser> {
+		public Button2FocusOnClass(final Visualiser ins) throws InstantiationException, IllegalAccessException {
+			super(ins, ButtonPressed.class, ins.frame.getZoomer());
+		}
+
+		@Override
+		public void initAction() {
+			if(!instrument.frame.getCanvas().getSelection().isEmpty() &&
+				instrument.frame.getCanvas().getSelection().get(0) instanceof ClassView) {
+				ClassView cv = (ClassView) instrument.frame.getCanvas().getSelection().get(0);
+				String qname = ModelUtils.INSTANCE.getQualifiedName(ModelViewMapper.getMapper().getClassDefinition(cv));
+				setAction(qname);
+			}
+		}
+
+		@Override
+		public boolean isConditionRespected() {
+			return interaction.getButton()==instrument.pruning;
+		}
+	}
 
 
 	private class Button2Prune extends Link<Prune, ButtonPressed, Visualiser> {

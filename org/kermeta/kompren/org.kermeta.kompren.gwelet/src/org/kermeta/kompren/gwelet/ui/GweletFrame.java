@@ -232,4 +232,9 @@ public class GweletFrame extends UI {
 	    @Override
 	    public void dropActionChanged(final DropTargetDragEvent event) { /* */ }
 	}
+
+
+	public BasicZoomer getZoomer() {
+		return zoomer;
+	}
 }
