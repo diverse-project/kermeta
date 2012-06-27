@@ -2,6 +2,7 @@ package org.kermeta.kompren.gwelet.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,8 +61,8 @@ public final class ModelViewMapper {
 
 		this.presentation = presentation;
 		cdAdded = new HashMap<String, List<ClassDefinition>>();
-		classMappings = new HashMap<ClassDefinition, ClassView>();
-		classMappingsInverted = new HashMap<ClassView, ClassDefinition>();
+		classMappings = new IdentityHashMap<ClassDefinition, ClassView>();
+		classMappingsInverted = new IdentityHashMap<ClassView, ClassDefinition>();
 		addedInheritances = new HashMap<String, InheritanceView>();
 	}
 
