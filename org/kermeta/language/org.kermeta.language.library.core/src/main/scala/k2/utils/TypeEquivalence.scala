@@ -1,5 +1,6 @@
 package k2.utils
 
+
 object TypeEquivalence {
 	
 	 
@@ -115,7 +116,10 @@ object TypeEquivalence {
 //               typeEquivelence.put("org.k2.language.structure.Object","java.lang.Object")
                  typeEquivelence;
   };
-		
+	
+    /**
+     * Give the java type equivalent to the "key" kermeta type
+     */
 	def getTypeEquivalence(key:String):String={
 
     
@@ -128,6 +132,22 @@ object TypeEquivalence {
 			res = key
 		return res 
 	}
+	
+	/**
+	 * Returns the kermeta type equivalent to the "value" java type
+	 */
+	def getTypeEquivalenceReverse(value:String):String={
+	  // TODO : use a real equivalence list to improve performance
+		import scala.collection.JavaConversions._
+		typeEquivelence.foreach( (t2) => 
+			if((t2._1.startsWith("k2") || t2._1.startsWith("org")) && t2._2==value){
+			  return t2._1.replaceFirst("k2.persistence","kermeta.emfpersistence").replaceFirst("k2","kermeta")
+			}
+		)
+
+		return value
+	}
+	
 	var methodEquivalence :  java.util.HashMap[String,java.util.HashMap[String,String]] = {methodEquivalence = new java.util.HashMap[String,java.util.HashMap[String,String]]()
 		var Hashtable : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Hashtable.put("getValue", "get");

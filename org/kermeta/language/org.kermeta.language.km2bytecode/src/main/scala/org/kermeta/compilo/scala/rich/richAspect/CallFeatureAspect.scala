@@ -34,14 +34,21 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                         res.append("]")
                     }
                 }
-                else{//TODO check parameter type initialization for complex cases (e.g. Array[String], ecore classes, etc.)
-                	res.append("_root_.k2.utils.UTilScala.newInstance(" +
-                	    "scalaUtil.Util.getMetaClass($" +
-                	    getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) +
+                else{
+                	res.append("{")
+                	res.append("val name = " +
+                	    "_root_.k2.utils.TypeEquivalence.getTypeEquivalenceReverse(" +
+                	    "$"+getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) +
                 	    ".erasure.getName" +
-                	    ")).asInstanceOf[" +
-                	    getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) +
-                	    "]")
+                	    ")\n" +
+                	    "val c = scalaUtil.Util.getMetaClass(name)\n" +
+                	    "if (c!=null){\n" +
+                		"_root_.k2.utils.UTilScala.newInstance(c).asInstanceOf[" +
+                		getQualifiedNameCompilo(thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType()) +
+                	    "]\n" +
+                		"}")
+                	res.append("else throw new RuntimeException(\"Impossible to instantiate a type parameter which is not a class\")\n")
+                	res.append("}")
                 }
             }else{
                 res.append("_root_.k2.utils.UTilScala.newInstance(")
