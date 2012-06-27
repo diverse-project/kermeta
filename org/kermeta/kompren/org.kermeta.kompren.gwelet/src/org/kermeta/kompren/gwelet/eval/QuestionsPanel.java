@@ -21,6 +21,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import org.kermeta.kompren.gwelet.actions.ReinitView;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
@@ -199,6 +200,16 @@ public class QuestionsPanel extends JPanel {
 		frame.setActivated(true);
 		toolbar.setVisible(true);
 		helperLabel.setVisible(true);
+
+        Runnable moveScrollbars = new Runnable() {
+            @Override
+			public void run() {
+            	frame.getCanvas().getScrollpane().getHorizontalScrollBar().setValue(frame.getCanvas().getWidth()/2);
+            	frame.getCanvas().getScrollpane().getVerticalScrollBar().setValue(frame.getCanvas().getHeight()/2);
+            }
+        };
+
+        SwingUtilities.invokeLater(moveScrollbars);
 	}
 
 
