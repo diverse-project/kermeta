@@ -245,4 +245,24 @@ public class GweletFrame extends UI {
 	public BasicZoomer getZoomer() {
 		return zoomer;
 	}
+
+
+	public Hand getHand() {
+		return hand;
+	}
+
+
+	public Visualiser getVisualiser() {
+		return visualiser;
+	}
+
+
+	public UndoRedoManager getUndoredoer() {
+		return undoredoer;
+	}
+
+
+	public Completioner getCompletioner() {
+		return completioner;
+	}
 }

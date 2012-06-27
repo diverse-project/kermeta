@@ -1,28 +1,73 @@
 package org.kermeta.kompren.gwelet.eval;
 
-import java.awt.event.InputEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
+import org.malai.action.Action;
+import org.malai.action.ActionHandler;
+import org.malai.action.ActionsRegistry;
+import org.malai.action.library.Scroll;
+import org.malai.action.library.Zoom;
+import org.malai.undo.Undoable;
 
-public class Sniffer {
-	protected MetamodelView diag;
+public class Sniffer implements ActionHandler {
+	protected GweletFrame frame;
 
 	protected Question currentQuestion;
 
 
-	public Sniffer(final MetamodelView diag) {
+	public Sniffer(final GweletFrame frame) {
 		super();
 
-		this.diag = diag;
-		SniffScrollers sniffSc = new SniffScrollers();
+		ActionsRegistry.INSTANCE.addHandler(this);
+		this.frame = frame;
+//		SniffScrollers sniffSc = new SniffScrollers();
 
-		diag.getScrollpane().getVerticalScrollBar().addMouseMotionListener(sniffSc);
-		diag.getScrollpane().getHorizontalScrollBar().addMouseMotionListener(sniffSc);
+		MetamodelView diag = frame.getCanvas();
+//		diag.getScrollpane().getVerticalScrollBar().addMouseMotionListener(sniffSc);
+//		diag.getScrollpane().getHorizontalScrollBar().addMouseMotionListener(sniffSc);
 		diag.addMouseListener(new SniffPresses());
 		diag.addMouseMotionListener(new SniffMoves());
+
+		frame.getVisualiser().getFlat().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				currentQuestion.nbFlat++;
+			}
+		});
+
+		frame.getVisualiser().getPruning().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				currentQuestion.nbPruning++;
+			}
+		});
+
+		frame.getVisualiser().getSuperClasses().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				currentQuestion.nbHierachy++;
+			}
+		});
+
+		frame.getUndoredoer().getUndoB().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				currentQuestion.nbUndoRedo++;
+			}
+		});
+
+		frame.getUndoredoer().getRedoB().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				currentQuestion.nbUndoRedo++;
+			}
+		});
 	}
 
 
@@ -90,11 +135,11 @@ public class Sniffer {
 		private void process(final MouseEvent e) {
 			if(currentQuestion!=null) {
 				if(lastX==e.getXOnScreen() && lastY==e.getYOnScreen()) {// scroll
-					if(e.getModifiers()==0) // only scroll
-						currentQuestion.nbScrolls++;
-					else
-						if(e.getModifiers()==InputEvent.SHIFT_MASK || e.getModifiers()==InputEvent.CTRL_MASK)
-							currentQuestion.nbZooms++;
+//					if(e.getModifiers()==0) // only scroll
+//						currentQuestion.nbScrolls++;
+//					else
+//						if(e.getModifiers()==InputEvent.SHIFT_MASK || e.getModifiers()==InputEvent.CTRL_MASK)
+//							currentQuestion.nbZooms++;
 				}else
 					currentQuestion.nbMouseDistance++;
 			}
@@ -105,17 +150,68 @@ public class Sniffer {
 
 
 
-	class SniffScrollers implements MouseMotionListener {
-		@Override
-		public void mouseDragged(final MouseEvent e) {
-			if(currentQuestion!=null) {
-				currentQuestion.nbScrolls++;
-			}
-		}
+//	class SniffScrollers implements MouseMotionListener {
+//		@Override
+//		public void mouseDragged(final MouseEvent e) {
+//			if(currentQuestion!=null) {
+//				currentQuestion.nbScrolls++;
+//			}
+//		}
+//
+//		@Override
+//		public void mouseMoved(final MouseEvent e) {
+//			//
+//		}
+//	}
 
-		@Override
-		public void mouseMoved(final MouseEvent e) {
-			//
-		}
+
+	@Override
+	public void onUndoableAdded(final Undoable undoable) {
+		//
+	}
+
+
+	@Override
+	public void onUndoableUndo(final Undoable undoable) {
+		//
+	}
+
+
+	@Override
+	public void onUndoableRedo(final Undoable undoable) {
+		//
+	}
+
+
+	@Override
+	public void onActionCancelled(final Action action) {
+		//
+	}
+
+
+	@Override
+	public void onActionAdded(final Action action) {
+		//
+	}
+
+
+	@Override
+	public void onActionAborted(final Action action) {
+		//
+	}
+
+
+	@Override
+	public void onActionExecuted(final Action action) {
+		//
+	}
+
+
+	@Override
+	public void onActionDone(final Action action) {
+		if(action instanceof Zoom)
+			currentQuestion.nbZooms++;
+		if(action instanceof Scroll)
+			currentQuestion.nbScrolls++;
 	}
 }

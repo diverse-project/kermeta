@@ -28,7 +28,7 @@ import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.malai.widget.MToolBar;
 
 public class QuestionsPanel extends JPanel {
-	public static final TypeEval TYPE_EVAL = TypeEval.WITHOUT_VISU_TOOLS;
+	public static final TypeEval TYPE_EVAL = TypeEval.WITH_VISU_TOOLS;
 
 	public enum TypeEval {
 		WITH_VISU_TOOLS,
@@ -76,7 +76,7 @@ public class QuestionsPanel extends JPanel {
 		this.frame 		= frame;
 		this.toolbar	= toolbar;
 		userInformations= "";
-		sniffer 		= new Sniffer(frame.getCanvas());
+		sniffer 		= new Sniffer(frame);
 		questions 		= new ArrayList<Question>();
 		currentNbQuestions = -1;
 

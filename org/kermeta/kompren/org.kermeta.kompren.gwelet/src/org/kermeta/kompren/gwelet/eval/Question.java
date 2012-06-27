@@ -2,29 +2,37 @@ package org.kermeta.kompren.gwelet.eval;
 
 public class Question {
 	protected static int cpt = 0;
-	
+
 	protected String subject;
-	
+
 	protected String answer;
-	
+
 	protected String helper;
-	
+
 	protected double time;
-	
+
 	protected long nbMouseDistance;
-	
+
 	protected long nbMousePress;
-	
+
 	protected long nbScrolls;
-	
+
 	protected long nbZooms;
-	
+
+	protected long nbFlat = 0;
+
+	protected long nbUndoRedo = 0;
+
+	protected long nbPruning = 0;
+
+	protected long nbHierachy = 0;
+
 	protected int id;
-	
-	
+
+
 	public Question() {
 		super();
-		
+
 		id 				= cpt++;
 		subject 		= "";
 		answer 			= "";
@@ -40,11 +48,13 @@ public class Question {
 	public void computeTime(final long startTime, final long endTime) {
 		time = (endTime - startTime)/1000.;
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
-		return id + "\t" + nbMouseDistance + "\t" + nbMousePress + "\t" + nbScrolls + "\t" + nbZooms + "\t" + time + "\t\"" + answer + "\"\n";
+		return id + "\t" + nbFlat + "\t" + nbHierachy + "\t" + nbPruning + "\t" + nbUndoRedo + "\t" +
+		nbMouseDistance + "\t" + nbMousePress + "\t" + nbScrolls + "\t" + nbZooms +
+		"\t" + time + "\t\"" + answer + "\"\n";
 	}
 
 
