@@ -80,6 +80,8 @@ public class Visualiser extends WidgetInstrument {
 		lowerClasses.setEnabled(activated);
 		pruning.setEnabled(activated);
 		flat.setEnabled(activated);
+		radius.setEnabled(activated);
+		radius.setVisible(activated);
 	}
 
 

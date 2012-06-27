@@ -28,6 +28,13 @@ import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.malai.widget.MToolBar;
 
 public class QuestionsPanel extends JPanel {
+	public static final TypeEval TYPE_EVAL = TypeEval.WITHOUT_VISU_TOOLS;
+
+	public enum TypeEval {
+		WITH_VISU_TOOLS,
+		WITHOUT_VISU_TOOLS
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	protected EditorPaneAntiAlias questionArea;
@@ -100,8 +107,8 @@ public class QuestionsPanel extends JPanel {
 		answerLabel.setMaximumSize(new Dimension(120, 40));
 
 		answerArea = new EditorPaneAntiAlias(false);
-        answerArea.setPreferredSize(new Dimension(500, 250));
-		answerArea.setMaximumSize(new Dimension(500, 250));
+        answerArea.setPreferredSize(new Dimension(380, 250));
+		answerArea.setMaximumSize(new Dimension(380, 250));
 		answerArea.setAlignmentX(CENTER_ALIGNMENT);
 		answerArea.setBackground(Color.WHITE);
 
@@ -113,8 +120,8 @@ public class QuestionsPanel extends JPanel {
 		questionArea = new EditorPaneAntiAlias(true);
 		questionArea.setBackground(Color.WHITE);
 		questionArea.setEditable(false);
-		questionArea.setPreferredSize(new Dimension(500, 250));
-		questionArea.setMaximumSize(new Dimension(500, 250));
+		questionArea.setPreferredSize(new Dimension(380, 250));
+		questionArea.setMaximumSize(new Dimension(380, 250));
 		questionArea.setAlignmentX(CENTER_ALIGNMENT);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(questionLabel);
@@ -225,10 +232,10 @@ public class QuestionsPanel extends JPanel {
 		resultField.setVisible(true);
 		resultLabel.setVisible(true);
 		resultLabel.setText("<html><center>Return the results by mail to:<br><b>arnaud.blouin@inria.fr</b><br>A backup of the results called \"data.txt\"<br>has been created near the jar file you launch.</center></html>");
-		Dimension dim = new Dimension(500, 500);
+		Dimension dim = new Dimension(380, 500);
 		resultField.setPreferredSize(dim);
 		resultField.setMinimumSize(dim);
-		resultField.setText(userInformations + "\n");
+		resultField.setText(TYPE_EVAL + "\n" + userInformations + "\n");
 
 		for(Question q : questions)
 			resultField.setText(resultField.getText() + q + "\n");

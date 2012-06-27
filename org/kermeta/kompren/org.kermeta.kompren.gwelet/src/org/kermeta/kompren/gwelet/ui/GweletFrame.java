@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import org.kermeta.kompren.diagram.instrument.Hand;
+import org.kermeta.kompren.gwelet.eval.QuestionsPanel;
+import org.kermeta.kompren.gwelet.eval.QuestionsPanel.TypeEval;
 import org.kermeta.kompren.gwelet.instruments.Completioner;
 import org.kermeta.kompren.gwelet.instruments.ViewReiniter;
 import org.kermeta.kompren.gwelet.instruments.Visualiser;
@@ -93,6 +95,12 @@ public class GweletFrame extends UI {
 	public void setActivated(final boolean activated) {
 		for(Instrument ins : getInstruments())
 			ins.setActivated(activated);
+
+		if(QuestionsPanel.TYPE_EVAL==TypeEval.WITHOUT_VISU_TOOLS) {
+			visualiserManager.setActivated(false);
+			visualiser.setActivated(false);
+		}
+
 		getCanvas().setEnabled(activated);
 	}
 
