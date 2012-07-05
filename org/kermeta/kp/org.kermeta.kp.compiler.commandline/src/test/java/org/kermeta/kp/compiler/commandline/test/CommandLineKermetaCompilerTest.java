@@ -10,12 +10,20 @@ package org.kermeta.kp.compiler.commandline.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 import junit.framework.TestCase;
 
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForEcore;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKm;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKmt;
+import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForUmlProfile;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.aether.AetherUtil;
+import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 
 
@@ -28,8 +36,8 @@ public class CommandLineKermetaCompilerTest extends TestCase {
 
     public CommandLineKermetaCompilerTest(String testName,String kpFile, String targetFolder) {
 		super();
-		this.kpFile = kpFile;
-		this.targetFolder = targetFolder;
+		this.kpFile = kpFile.replaceAll("\\\\","/");
+		this.targetFolder = targetFolder.replaceAll("\\\\","/");
 		this.testName = testName;
 	}
 
@@ -57,6 +65,7 @@ public class CommandLineKermetaCompilerTest extends TestCase {
 				targetFolder+"scala/", targetFolder+"classes/", 
 				targetFolder+"genmodel/", 
 				targetFolder+"java/", targetFolder+"emfclasses/", targetFolder+"resources/");
+		compiler.setModelingUnitLoaders(getDefaultMuLoaders());
 		compiler.kp2bytecode("file:/"+kpFile,additionalClassPath, KermetaCompiler.PHASE_GENERATE_SCALA_BYTECODE);
 				
 		assertTrue("Failure = " + compiler.errorMessage, !compiler.hasFailed);
@@ -79,5 +88,15 @@ public class CommandLineKermetaCompilerTest extends TestCase {
     protected void tearDown() throws Exception {
         //
     }
+    
+    private NavigableMap<String, ModelingUnitLoaderFactory> getDefaultMuLoaders(){
+    	NavigableMap<String, ModelingUnitLoaderFactory> muLoaders;
+		muLoaders = new TreeMap<String, ModelingUnitLoaderFactory>(new FileExtensionComparator());
+		muLoaders.put(".km", new ModelingUnitLoaderFactoryForKm());
+		muLoaders.put(".kmt", new ModelingUnitLoaderFactoryForKmt());
+		muLoaders.put(".ecore", new ModelingUnitLoaderFactoryForEcore());
+		muLoaders.put(".profile.uml", new ModelingUnitLoaderFactoryForUmlProfile());
+		return muLoaders;
+	}
 }
 
