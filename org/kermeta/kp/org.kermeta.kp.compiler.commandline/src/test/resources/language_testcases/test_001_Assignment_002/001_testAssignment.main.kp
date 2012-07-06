@@ -1,9 +1,13 @@
-KermetaProject :"001_testHelloWorld_standalone" 
-version :  "someVersion" 
-group :"group" 
-{ 
-	source = "${project.baseUri}/001_testAssignment.main.kmt" 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
-} 
+KermetaProject "test_001_Assignment_002" 
+	groupId ="k2.test" 
+	defaultMainClass ="test_001_Assignment_002::Test_assignment"
+	defaultMainOperation = "main"
+	sources={ 
+ 
+		require "${project.baseUri}/001_testAssignment.main.kmt"
+	}
+	dependencies={ 
+		dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+	} 
 
  
