@@ -3,7 +3,6 @@ package org.kermeta.kompren.gwelet;
 import javax.swing.UIManager;
 
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
-import org.kermeta.kompren.gwelet.ui.GweletUIBuilder;
 import org.kermeta.kompren.org.kermeta.kompren.gwelet.slicerrunner.MainRunner;
 
 public class Gwelet {
@@ -24,6 +23,6 @@ public class Gwelet {
 		frame.setVisible(true);
 		frame.open("./examples/UML.km");
 		frame.getCanvas().requestFocusInWindow();
-		((GweletUIBuilder)frame.getComposer()).formular.setVisible(true);
+//		((GweletUIBuilder)frame.getComposer()).formular.setVisible(true);// EVAL
 	}
 }
