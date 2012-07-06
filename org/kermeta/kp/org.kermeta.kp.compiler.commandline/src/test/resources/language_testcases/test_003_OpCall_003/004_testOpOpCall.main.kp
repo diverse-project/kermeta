@@ -1,13 +1,13 @@
-KermetaProject "test.004_testOpOpCall" 
+KermetaProject "test_003_OpCall_003" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
-defaultMainClass ="pkg::Test"
-defaultMainOperation ="main"
+defaultMainClass ="testOpOpCall::Test_opopcall"
+defaultMainOperation ="operation1"
 sources={
 	require "${project.baseUri}/004_testOpOpCall.main.kmt" 
 }
 dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.3-SNAPSHOT"
 } 
 
  
