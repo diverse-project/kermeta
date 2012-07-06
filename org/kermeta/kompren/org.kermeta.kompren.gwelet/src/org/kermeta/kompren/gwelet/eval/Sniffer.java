@@ -209,9 +209,11 @@ public class Sniffer implements ActionHandler {
 
 	@Override
 	public void onActionDone(final Action action) {
-		if(action instanceof Zoom)
-			currentQuestion.nbZooms++;
-		if(action instanceof Scroll)
-			currentQuestion.nbScrolls++;
+		if(currentQuestion!=null) {
+			if(action instanceof Zoom)
+				currentQuestion.nbZooms++;
+			if(action instanceof Scroll)
+				currentQuestion.nbScrolls++;
+		}
 	}
 }

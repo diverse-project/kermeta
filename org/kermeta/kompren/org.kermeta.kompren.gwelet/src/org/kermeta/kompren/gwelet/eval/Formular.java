@@ -1,6 +1,7 @@
 package org.kermeta.kompren.gwelet.eval;
 
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -168,6 +169,7 @@ public class Formular extends JPanel {
 					"\t" + xpMdeCB.getSelectedItem().toString() + "\t" + xpUmlCB.getSelectedItem().toString() +
 					"\t" + mouse.getSelectedItem().toString() + "\t" + screen.getValue().toString() +
 					"\t" + dim.width + "\t" + dim.height);
+			Formular.this.frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		}
 
 	}

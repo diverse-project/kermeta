@@ -1,11 +1,15 @@
 package org.kermeta.kompren.gwelet.instruments;
 
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.kermeta.kompren.gwelet.actions.Flat;
 import org.kermeta.kompren.gwelet.actions.Prune;
 import org.kermeta.kompren.gwelet.actions.ShowHierarchy;
+import org.kermeta.kompren.gwelet.eval.QuestionsPanel;
+import org.kermeta.kompren.gwelet.eval.QuestionsPanel.TypeEval;
 import org.kermeta.kompren.gwelet.model.ModelUtils;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
 import org.kermeta.kompren.gwelet.view.ClassView;
@@ -45,9 +49,9 @@ public class Visualiser extends WidgetInstrument {
 
 	@Override
 	protected void initialiseWidgets() {
-		superClasses 	= new MButton(new ImageIcon("resources/hierar.png"));
-		pruning 		= new MButton(new ImageIcon("resources/prune.png"));
-		flat 			= new MButton(new ImageIcon("resources/flat.png"));
+		superClasses 	= new MButton(new ImageIcon(Class.class.getResource("/res/hierar.png")));
+		pruning 		= new MButton(new ImageIcon(Class.class.getResource("/res/prune.png")));
+		flat 			= new MButton(new ImageIcon(Class.class.getResource("/res/flat.png")));
 		lowerClasses 	= new MButton("subCl");
 		radius 			= new MSpinner(new MSpinner.MSpinnerNumberModel(0, 0, 1000, 1), new JLabel("Radius:"));
 
@@ -55,6 +59,11 @@ public class Visualiser extends WidgetInstrument {
 		pruning.setToolTipText("Shows the classes in relation with the selected class.");
 		flat.setToolTipText("Shows all the inherited and native properties and operations of the selected class (by flattening its hierarchy).");
 		radius.setToolTipText("Sets the radius of the hierarchy and pruning slicing: 0, there is no radius; 1, only the direct classes are kept; etc.");
+		radius.setMaximumSize(new Dimension(50, 40));
+		radius.setSize(new Dimension(50, 40));
+
+		if(QuestionsPanel.TYPE_EVAL==TypeEval.WITHOUT_VISU_TOOLS)
+			radius.setVisible(false);
 	}
 
 	@Override
@@ -80,8 +89,6 @@ public class Visualiser extends WidgetInstrument {
 		lowerClasses.setEnabled(activated);
 		pruning.setEnabled(activated);
 		flat.setEnabled(activated);
-		radius.setEnabled(activated);
-		radius.setVisible(activated);
 	}
 
 

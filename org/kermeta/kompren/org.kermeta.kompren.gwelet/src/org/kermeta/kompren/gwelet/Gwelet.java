@@ -14,6 +14,10 @@ public class Gwelet {
 			try{
 				UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 			}catch(Exception e) { e.printStackTrace(); }
+		if(System.getProperty("os.name").toLowerCase().contains("win"))
+			try{
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			}catch(Exception e) { e.printStackTrace(); }
 
 		GweletFrame frame = new GweletFrame();
 		frame.getComposer().compose(null);

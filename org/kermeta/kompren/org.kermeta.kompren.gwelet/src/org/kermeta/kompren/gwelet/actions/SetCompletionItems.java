@@ -37,7 +37,7 @@ public class SetCompletionItems extends Action {
 			List<String> items = new ArrayList<String>();
 
 			for(String dbItem : database)
-				if(dbItem.contains(textReference))
+				if(dbItem.toLowerCase().contains(textReference.toLowerCase()))
 					items.add(dbItem);
 
 			textField.setCompletionItems(items);

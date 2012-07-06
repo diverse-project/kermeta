@@ -54,9 +54,9 @@ public class ClassView extends RectangleEntityView {
 
 	protected Color textColor;
 
-	public static final int SUPP_SIZE = 6;
-
-	protected int sizeSupp = 0;
+//	public static final int SUPP_SIZE = 6;
+//
+//	protected int sizeSupp = 0;
 
 
 
@@ -89,7 +89,7 @@ public class ClassView extends RectangleEntityView {
 			((RelationClassView)relation).reinitRoles();
 			if(!atEnd)
 				relations.add((RelationClassView)relation);
-			sizeSupp += SUPP_SIZE;
+//			sizeSupp += SUPP_SIZE;
 		}
 	}
 
@@ -186,8 +186,8 @@ public class ClassView extends RectangleEntityView {
 				dim.height += op.getHeight()+HEIGHT_GAP;
 			}
 
-		dim.width  = (int) (Math.max(dim.width, 30)*scale) + sizeSupp;
-		dim.height = (int) (Math.max(dim.height, 20)*scale) + sizeSupp;
+		dim.width  = (int) (Math.max(dim.width, 30)*scale) ;//+ sizeSupp;
+		dim.height = (int) (Math.max(dim.height, 20)*scale) ;//+ sizeSupp;
 
 		return dim;
 	}
