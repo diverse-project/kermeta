@@ -51,11 +51,14 @@ public class CommandLineKermetaCompilerTest extends TestCase {
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
                 
         String currentKermetaVersion = "2.0.2";
-        String mavenRepository = "http://maven.irisa.fr/artifactory/repo";
+        String mavenRepository = "http://maven.inria.fr/artifactory/repo";
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
 		AetherUtil aetherUtil = new AetherUtil();
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.irisa.fr/artifactory/public-release").getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.irisa.fr/artifactory/public-release").getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.genmodel", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.eclipse.emf","codegen", "2.6.0-v20120130-0943", mavenRepository).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.eclipse.emf.codegen","ecore", "2.7.0-v20120130-0943", mavenRepository).getAbsolutePath());
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.library.core", currentKermetaVersion, mavenRepository).getAbsolutePath());
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.model", currentKermetaVersion, mavenRepository).getAbsolutePath());
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.utils", "utils.helpers", currentKermetaVersion, mavenRepository).getAbsolutePath());
