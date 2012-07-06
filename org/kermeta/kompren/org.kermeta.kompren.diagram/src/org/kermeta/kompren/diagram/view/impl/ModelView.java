@@ -25,7 +25,6 @@ import org.malai.mapping.ActiveArrayList;
 import org.malai.mapping.IActiveList;
 import org.malai.picking.Pickable;
 import org.malai.picking.Picker;
-import org.malai.properties.Zoomable;
 import org.malai.widget.MPanel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -482,7 +481,7 @@ public class ModelView extends MPanel implements IModelView {
 
 	@Override
 	public void setZoom(final double x, final double y, final double zoomingLevel) {
-		if(zoomingLevel<=Zoomable.MAX_ZOOM && zoomingLevel>=Zoomable.MIN_ZOOM && zoomingLevel!=zoom) {
+		if(zoomingLevel<=getMaxZoom() && zoomingLevel>=getMinZoom() && zoomingLevel!=zoom) {
 			final double dx = (zoomingLevel-zoom)*x;
 			final double dy = (zoomingLevel-zoom)*y;
 			final JScrollBar barVert = getScrollbar(true);
@@ -547,5 +546,23 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void reinit() {
 		// TODO Auto-generated method stub
+	}
+
+
+	@Override
+	public double getZoomIncrement() {
+		return 0.1;
+	}
+
+
+	@Override
+	public double getMaxZoom() {
+		return 10;
+	}
+
+
+	@Override
+	public double getMinZoom() {
+		return 0.1;
 	}
 }
