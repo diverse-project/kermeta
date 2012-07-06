@@ -1,15 +1,14 @@
-KermetaProject :"name.conflict" 
-version :  "2.0.1-SNAPSHOT" 
-group :"org.kermeta.language.sample" 
-defaultMainClass :"helloworld::HelloWorld"
-defaultMainOperation : "main"
-{ 
-	
-	source = "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"  
-	
-	// depends on library.core	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
-		 
-} 
+KermetaProject "language.sample.nameConflict" 
+//version :  "2.0.1-SNAPSHOT" 
+groupId ="pkg"
+defaultMainClass ="helloworld::HelloWorld"
+defaultMainOperation ="main"
+sources={
+	require "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"
+}
+dependencies={
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.3-SNAPSHOT"
+}
+ 
 
  
