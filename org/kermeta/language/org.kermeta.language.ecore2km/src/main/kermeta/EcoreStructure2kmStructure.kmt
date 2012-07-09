@@ -122,6 +122,24 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				kmOp.kOwnedTags.add(kmTag)
 			end
 			
+			// if the containing Class has multiple inheritance then add a From to the first inherited Class (bug #2142)
+			if op.eContainingClass.eGenericSuperTypes.size > 1 or op.eContainingClass.eSuperTypes.size > 1 then
+				var selectedGenericType : EGenericType 
+				if op.eContainingClass.eGenericSuperTypes.size > 1 then 
+					selectedGenericType := 	op.eContainingClass.eGenericSuperTypes.first()
+				end
+				var selectedType : EClassifier
+				if op.eContainingClass.eSuperTypes.size > 1 then
+					selectedType := op.eContainingClass.eSuperTypes.first()
+				end 
+				var selectedSuperClassForFrom : UnresolvedType init getUnresolvedType(selectedGenericType, selectedType)
+				var superUnresolvedOperation : UnresolvedOperation init UnresolvedOperation.new.initialize(selectedSuperClassForFrom,op.name)
+				superUnresolvedOperation.containedType.add(selectedSuperClassForFrom)
+				kmOp.superOperation := superUnresolvedOperation
+				kmOp.ownedUnresolvedOperations.add(superUnresolvedOperation)
+			
+			end  
+			
 			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
 			// Linking the Kermeta operation to the Ecore operation.
 			op.targetKermetaObject := kmOp

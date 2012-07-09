@@ -75,6 +75,8 @@ class Ecore2km {
     	result.put("java.lang.Short","kermeta::standard::Short")
     	result.put("java.lang.String", "kermeta::standard::String")
     	result.put("java.lang.Void","kermeta::standard::Void")
+    	result.put("short","kermeta::standard::Short")
+    	result.put("Short","kermeta::standard::Short")
     	result.put("string", "kermeta::standard::String")
     	result.put("String", "kermeta::standard::String")
     	result.put("org.eclipse.emf.ecore.EObject","kermeta::standard::Object")
