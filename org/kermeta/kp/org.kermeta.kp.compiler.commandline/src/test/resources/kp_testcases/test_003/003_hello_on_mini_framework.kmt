@@ -17,7 +17,7 @@ package helloworld {
 		
 		@main "Bonjour tout le monde"
 		operation main2(msg : kermeta::standard::String) : kermeta::standard::Void is do 
-			kermeta::io::StdIO.writeln(msg)
+			kermeta::io::StdIO.writeln(msg) 
 		end
 	}
 }
