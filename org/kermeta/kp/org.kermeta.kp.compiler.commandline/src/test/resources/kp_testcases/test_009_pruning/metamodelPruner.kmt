@@ -4,18 +4,20 @@
  * 
  * Method initialize must be call first to initialise the pruner.
  * Method transform can then be called to launch the pruner.
+ * This implementation suppose to work on Resolved Km models (for example opposites are resolved)
  * Creation : March 16, 2009
  * Licence  : EPL
  * Copyright: INRIA Rennes, Triskell
  * Authors  :
  *            Sagar Sen
  *            Arnaud Blouin
+ *			  Didier Vojtisek
  */
 package kermeta::pruning;
 
 using kermeta::standard
 using kermeta::utils
-using kermeta::language::structure
+using org::kermeta::language::structure
 
 class RequiredProperty {
 	attribute name: String
@@ -263,8 +265,11 @@ abstract class MetamodelPruner {
 			 	propEnum   := prop.type.isInstanceOf(Enumeration)
 			 	propPrim   := prop.type.isInstanceOf(PrimitiveType)
 			 	oppVoid    := prop.opposite.isVoid
-			 	propCD     := if(propClass) then prop.type.asType(Class).classDefinition else void end
-			 	oppPropCD  := if(not oppVoid and propClass) then prop.opposite.type.asType(Class).classDefinition else void end
+			 	propCD     ?= if(propClass) then prop.type.asType(Class).typeDefinition else void end
+			 	oppPropCD  ?= if(not oppVoid and propClass) then
+			 			// we suppose that the km is resolved 
+			 			prop.opposite.asType(Property).type.asType(Class).typeDefinition 
+			 		else void end
 			 	~enum	   := if(propEnum) then prop.type.asType(Enumeration) else void end
 			 	primTyp	   := if(propPrim) then prop.type.asType(PrimitiveType) else void end
 			 	
@@ -276,9 +281,10 @@ abstract class MetamodelPruner {
 						requiredKermetaMetaClasses.add(prop.owningClass)
 						
 						if not oppVoid then
-							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaProperties.add(prop.opposite.asType(Property))
 							requiredKermetaMetaClasses.add(oppPropCD)
-							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							// we suppose that the km is resolved
+							requiredKermetaMetaClasses.add(prop.opposite.asType(Property).owningClass)
 						end
 					end
 				end
@@ -299,14 +305,14 @@ abstract class MetamodelPruner {
 				end
 				
 				if not oppVoid then
-					if prop.opposite.isComposite then
+					if prop.opposite.asType(Property).isComposite then
 						requiredKermetaMetaProperties.add(prop)
 						requiredKermetaMetaClasses.add(propCD)
 						requiredKermetaMetaClasses.add(prop.owningClass)
 						
-						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaProperties.add(prop.opposite.asType(Property))
 						requiredKermetaMetaClasses.add(oppPropCD)
-						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						requiredKermetaMetaClasses.add(prop.opposite.asType(Property).owningClass)
 					end
 				end 
 				
@@ -316,9 +322,9 @@ abstract class MetamodelPruner {
 					requiredKermetaMetaClasses.add(prop.owningClass)
 					
 					if not oppVoid then
-						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaProperties.add(prop.opposite.asType(Property))
 						requiredKermetaMetaClasses.add(oppPropCD)
-						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						requiredKermetaMetaClasses.add(prop.opposite.asType(Property).owningClass)
 					end
 				end
 				
@@ -326,7 +332,7 @@ abstract class MetamodelPruner {
 					requiredKermetaMetaProperties.add(prop)
 					requiredKermetaMetaEnumerations.add(~enum)
 				end
-			
+				
 				//Add all required properties and their type
 				requiredMetaProperties.each{ p |
 					if p.name==prop.name and p.owningClassName == prop.owningClass.name then
@@ -341,9 +347,9 @@ abstract class MetamodelPruner {
 							requiredKermetaMetaClasses.add(prop.owningClass)
 							
 							if not oppVoid then
-								requiredKermetaMetaProperties.add(prop.opposite)
+								requiredKermetaMetaProperties.add(prop.opposite.asType(Property))
 								requiredKermetaMetaClasses.add(oppPropCD)
-								requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+								requiredKermetaMetaClasses.add(prop.opposite.asType(Property).owningClass)
 							end
 						else						
 						if propPrim then
@@ -378,9 +384,9 @@ abstract class MetamodelPruner {
 						requiredKermetaMetaClasses.add(prop.owningClass)
 						
 						if not oppVoid then
-							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaProperties.add(prop.opposite.asType(Property))
 							requiredKermetaMetaClasses.add(oppPropCD)
-							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							requiredKermetaMetaClasses.add(prop.opposite.asType(Property).owningClass)
 						end
 					end 
 				end
@@ -408,9 +414,9 @@ abstract class MetamodelPruner {
 						requiredKermetaMetaClasses.add(prop.owningClass)
 						
 						if not oppVoid then
-							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaProperties.add(prop.opposite.asType(Property))
 							requiredKermetaMetaClasses.add(oppPropCD)
-							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							requiredKermetaMetaClasses.add(prop.opposite.asType(Property).owningClass)
 						end
 					end 
 				end
@@ -421,6 +427,7 @@ abstract class MetamodelPruner {
 						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
+				
 			}
 		}
 		
@@ -440,7 +447,7 @@ abstract class MetamodelPruner {
 		classes.each { c |
 			c.superType.each { t | 
 				if t.isInstanceOf(Class) then
-					cd := t.asType(Class).classDefinition
+					cd := t.asType(Class).typeDefinition.asType(ClassDefinition)
 					
 					if isClassInMM(cd) then
 						requiredKermetaMetaClasses.add(cd)
@@ -563,8 +570,8 @@ abstract class MetamodelPruner {
 	
 	operation TagRemovalInPackage(aPackage : Package):Void is do
 		if (not aPackage.isVoid) then
-			aPackage.tag.each{ t | onTagPruned(t) }
-			aPackage.asType(TypeDefinitionContainer).ownedTags.each {
+			aPackage.kTag.each{ t | onTagPruned(t) }
+			aPackage.asType(TypeDefinitionContainer).kOwnedTags.each {
 				object | onTagPruned(object)
 			}
 		end
@@ -578,7 +585,7 @@ abstract class MetamodelPruner {
 
 	operation TagRemoval() : Void is do
 		//Remove all Tags for Modelling Unit
-		inputKermetaMetamodel.ownedTags.each {
+		inputKermetaMetamodel.kOwnedTags.each {
 			tag | onTagPruned(tag)
 		}
 		
@@ -601,8 +608,8 @@ abstract class MetamodelPruner {
 			 				onPropertyPruned(prop)
 		 					
 			 				if not prop.opposite.isVoid  then
-			 					if not prop.opposite.owningClass.isVoid then
-			 						onPropertyPruned(prop.opposite)
+			 					if not prop.opposite.asType(Property).owningClass.isVoid then
+			 						onPropertyPruned(prop.opposite.asType(Property))
 			 					end
 			 				end
 			 			end
@@ -815,7 +822,7 @@ abstract class MetamodelPruner {
 					
 					aClass.ownedAttribute.exists{oA |
 						if oA.type.isInstanceOf(Class) then
-							if oA.type.asType(Class).classDefinition == c then
+							if oA.type.asType(Class).typeDefinition == c then
 								result := true
 							end
 						end
