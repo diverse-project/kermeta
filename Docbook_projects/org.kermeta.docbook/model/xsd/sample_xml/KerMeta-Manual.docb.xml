@@ -2241,9 +2241,9 @@ class C {
       raising</para>
 
       <programlisting><emphasis role="strong">do</emphasis>
-    <emphasis role="strong">var</emphasis> excep : Exception
+    <emphasis role="strong">var</emphasis> excep : kermeta::exceptions::Exception
     
-    excep := Exception.new
+    excep := kermeta::exceptions::Exception.new
     stdio.writeln("Throwing an exception ! ")
     <emphasis role="strong">raise</emphasis> excep
 <emphasis role="strong">end</emphasis></programlisting>
@@ -2262,7 +2262,7 @@ class C {
 <emphasis role="strong">rescue</emphasis> (myConstraintError : kermeta::exceptions::ConstraintViolatedInv)
     // something with myConstraintError
     // ...
-<emphasis role="strong">rescue</emphasis> (myError : Exception)
+<emphasis role="strong">rescue</emphasis> (myError : kermeta::exceptions::Exception)
     // something with myError
     // ...
 <emphasis role="strong">end</emphasis></programlisting>
