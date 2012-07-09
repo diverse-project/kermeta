@@ -1,4 +1,4 @@
-KermetaProject "testcompilo_primitivesandlambda"
+KermetaProject "test_021_primitivetypesandlambda"
 	groupId = "my.group"
 	defaultMainClass = "test::MainClass"
 	defaultMainOperation = "mainOperation"
