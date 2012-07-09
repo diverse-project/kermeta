@@ -14,6 +14,14 @@ package org {
 	package kermeta {
 		package language {
 			package structure {
+				/*@CompilerIgnore "true"
+				aspect class AbstractProperty {
+				}
+				
+				@CompilerIgnore "true"
+				aspect class AbstractProperty {
+				}
+				
 				@CompilerIgnore "true"
 				aspect class Class {
 				}
@@ -21,6 +29,13 @@ package org {
 				@CompilerIgnore "true"
 				aspect class KermetaModelElement {
 				}
+				
+				@CompilerIgnore "true"
+				aspect class Rescue {
+				}
+				@CompilerIgnore "true"
+				aspect class Tag {
+				}*/
 			}
 		}
 	}
