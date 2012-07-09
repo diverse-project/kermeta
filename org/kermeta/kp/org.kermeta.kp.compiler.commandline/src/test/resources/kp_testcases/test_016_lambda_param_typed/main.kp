@@ -1,4 +1,4 @@
-KermetaProject "test.memento.conditions" 
+KermetaProject "test_016_lambda_param_typed" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
 defaultMainClass ="root_package::Foo"

@@ -1,3 +1,5 @@
+using kermeta::standard
+
 package root_package {
 
 	class Foo
