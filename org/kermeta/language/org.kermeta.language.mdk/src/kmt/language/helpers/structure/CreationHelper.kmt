@@ -102,6 +102,29 @@ aspect class UnresolvedType {
 	end
 }
 
+aspect class UnresolvedOperation {
+	/**
+	 * Initialises the calling UnresolvedOperation instance using the type identifier.
+	 * this is the responsability of the caller to decide weither the 
+	 * passes fromType must be owned or not by this UnresolvedOperation 
+	 */
+	operation initialize(fromType : Type, operationIdentifier : String) : UnresolvedOperation is do
+		if operationIdentifier.isVoid then 
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "cannot create an UnresolvedType with void operationIdentifier" 
+			raise e
+		end
+		if operationIdentifier == "" then 
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "cannot create an UnresolvedType with empty string operationIdentifier"
+			raise e
+		end
+		self.operationIdentifier := operationIdentifier
+		self.~from := fromType
+		result := self
+	end
+}
+
 
 aspect class ClassDefinition {
 	/**
