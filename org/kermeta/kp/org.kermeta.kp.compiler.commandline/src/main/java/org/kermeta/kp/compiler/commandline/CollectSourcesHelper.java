@@ -147,7 +147,7 @@ public class CollectSourcesHelper {
 		List<Dependency> dependencies = kp.getDependencies();
 		for (Dependency dep : dependencies) {
 			// ignore dependencies that are meant to be used in a require or as bytcode only
-			if(!(dep.isSourceOnly() || dep.isByteCodeOnly)){
+			if(!(dep.isSourceOnly() || dep.isByteCodeOnly())){
 				
 				String baseUriForDependency = varExpander.expandSourceVariables("${"+dep.getName()+KpVariableExpander.BASEURI_VARIABLE+"}");
 				boolean isDirectory = false;
