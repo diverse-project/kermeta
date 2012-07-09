@@ -14,16 +14,17 @@ class Test {
 		a := 3 - 6
 		a := 3.minus(6)
 		
-		var b : Float := 1
+		var b : Float := 1.floatValue
+		var c : Float := -3.floatValue
 		
-		b := b.plus(a)
-		b := b + a
-		b := b.minus(a)
-		b := b - a
-		b := b.div(a)
-		b := b / a
-		b := b.mult(a)
-		b := b * a
-		b := b.mod(a)
+		b := b.plus(c)
+		b := b + c
+		b := b.minus(c)
+		b := b - c
+		b := b.div(c)
+		b := b / c
+		b := b.mult(c)
+		b := b * c
+		b := b.mod(c)
 	end
 }

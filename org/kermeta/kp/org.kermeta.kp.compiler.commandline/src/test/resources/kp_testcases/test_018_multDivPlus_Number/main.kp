@@ -1,7 +1,7 @@
-KermetaProject "test.memento.conditions" 
+KermetaProject "test_018_multDivPlus_Number" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
-defaultMainClass ="root_package::Main"
+defaultMainClass ="root_package::Test"
 defaultMainOperation ="main"
 sources={
 	require "${project.baseUri}/main.kmt" 
