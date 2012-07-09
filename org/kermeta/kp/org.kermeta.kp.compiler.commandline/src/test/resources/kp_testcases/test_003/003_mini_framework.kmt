@@ -7,20 +7,7 @@
  */
 
 
-package helloworld {
-	class HelloWorld
-	{
-		@main ""
-		operation main() : kermeta::standard::Void is do 
-			kermeta::io::StdIO.writeln("Hello World!")
-		end
-		
-		@main "Bonjour tout le monde"
-		operation main(msg : kermeta::standard::String) : kermeta::standard::Void is do 
-			kermeta::io::StdIO.writeln(msg)
-		end
-	}
-}
+
 
 // for reflexivity
 package org {
@@ -28,11 +15,11 @@ package org {
 		package language {
 			package structure {
 				@CompilerIgnore "true"
-				class Class {
+				aspect class Class {
 				}
 				
 				@CompilerIgnore "true"
-				class KermetaModelElement {
+				aspect class KermetaModelElement {
 				}
 			}
 		}
