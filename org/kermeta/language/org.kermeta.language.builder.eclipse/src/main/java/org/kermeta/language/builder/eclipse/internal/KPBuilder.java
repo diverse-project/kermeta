@@ -119,7 +119,10 @@ public class KPBuilder {
 			compiler.initializeTargetFolders(outputRootFolder, outputRootFolder, outputScalaFolder, outputScalaBinaryFolder, outputGenmodelFolder, outputEMFJavaFolder, outputEMFBinaryFolder, outputResourceFolder);
 			refreshFileIndex();
 		} catch (IOException e) {
-			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed", this.getClass().getName(), e);
+			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed for project "+kpFileURL, this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			Activator.getDefault().getMessaggingSystem().log(Kind.DevERROR,"KPBuilder initialization failed for project "+kpFileURL, this.getClass().getName(), e);
 		}
 		uriMapFileBuilder = new URIMapFileBuilder(getProgressGroup());
 	}
