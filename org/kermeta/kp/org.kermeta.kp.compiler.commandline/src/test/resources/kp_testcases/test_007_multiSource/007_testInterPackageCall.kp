@@ -1,6 +1,6 @@
-KermetaProject "testInterPackage"
+KermetaProject "test_007_multiSource"
 //version :  "someVersion"
-group ="testInterPackage"
+groupId ="testInterPackage"
 defaultMainClass ="testInterPackage::TestIntercall"
 defaultMainOperation ="main"
 sources={

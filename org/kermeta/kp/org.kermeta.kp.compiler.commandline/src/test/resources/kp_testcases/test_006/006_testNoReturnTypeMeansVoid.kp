@@ -1,4 +1,4 @@
-KermetaProject "006_testNoReturnTypeMeansVoid" 
+KermetaProject "test_006" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
 defaultMainClass ="pkg::A"
