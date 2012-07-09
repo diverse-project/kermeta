@@ -2361,7 +2361,6 @@ class C {
     <section id="section_exceptions.link">
       <title id="section_exceptions.title.link">Exception handling<phrase
       id="section_exceptions"></phrase></title>
-<warning><title>Text not verified for kermeta 2</title></warning>
       <para>Kermeta provides also an exception mechanism. You can define a
       "rescue" block to manage errors occurring during the execution of
       another block. Exception mechanism is very close to the Java Exception
@@ -2371,9 +2370,9 @@ class C {
       raising</para>
 
       <programlisting><emphasis role="strong">do</emphasis>
-    <emphasis role="strong">var</emphasis> excep : Exception
+    <emphasis role="strong">var</emphasis> excep : kermeta::exceptions::Exception
     
-    excep := Exception.new
+    excep := kermeta::exceptions::Exception.new
     stdio.writeln("Throwing an exception ! ")
     <emphasis role="strong">raise</emphasis> excep
 <emphasis role="strong">end</emphasis></programlisting>
@@ -2392,7 +2391,7 @@ class C {
 <emphasis role="strong">rescue</emphasis> (myConstraintError : kermeta::exceptions::ConstraintViolatedInv)
     // something with myConstraintError
     // ...
-<emphasis role="strong">rescue</emphasis> (myError : Exception)
+<emphasis role="strong">rescue</emphasis> (myError : kermeta::exceptions::Exception)
     // something with myError
     // ...
 <emphasis role="strong">end</emphasis></programlisting>
