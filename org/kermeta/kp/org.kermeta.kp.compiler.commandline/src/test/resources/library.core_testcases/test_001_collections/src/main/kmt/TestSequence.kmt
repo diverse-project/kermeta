@@ -117,13 +117,10 @@ class TestSequence inherits TestCase {
 		c2.add("baba")
 		assertTrue(c2.size==5)
 		assertTrue(c.size==3)
-		
-		c2:=c.insertAt(2,"toto")
-		assertTrue(c2.equals(c))
-		c2.add("baba")
-		assertTrue(c2.size==4)
-		assertTrue(c.size==3)
 
+		c2:=c.insertAt(2,"toto")
+		assertTrue(c2.size==4)
+		
 		do
 			c.insertAt(-1,"baba")
 			assertTrue(false)
@@ -154,9 +151,9 @@ class TestSequence inherits TestCase {
 		assertTrue(c.size==3)
 		
 		c2:=c.append("toto")
-		assertTrue(c2.equals(c))
-		c2.add("baba")
 		assertTrue(c2.size==4)
+		c2.add("baba")
+		assertTrue(c2.size==5)
 		assertTrue(c.size==3)
 	end
 	
@@ -174,9 +171,9 @@ class TestSequence inherits TestCase {
 		assertTrue(c.size==3)
 		
 		c2:=c.prepend("toto")
-		assertTrue(c2.equals(c))
-		c2.add("baba")
 		assertTrue(c2.size==4)
+		c2.add("baba")
+		assertTrue(c2.size==5)
 		assertTrue(c.size==3)
 	end
 }
