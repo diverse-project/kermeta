@@ -20,7 +20,7 @@
 		<antcall target="checkout_log"/>
 		<antcall target="stats"/>
 		<antcall target="patch_gforge_cvsweb_links"/>
-		<antcall target="commit_cache"/>
+		<!-- <antcall target="commit_cache"/>-->
 	</target>
 	<target name="dummy">
 	</target>
