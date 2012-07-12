@@ -14,25 +14,25 @@
  *
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-package kermeta::kunit;
-
+package org::kermeta::kunit;
 
 using kermeta::standard
 using kermeta::utils
 using kermeta
 using org::kermeta::language::structure
-using kermeta::kunit
+using org::kermeta::kunit
+using kermeta::io::StdIO => stdio
 
 
 /**
  * This exception is rose if there is a problem on the name of the test method
  */
-class InvalidTestCaseNameException inherits kermeta::exceptions::Exception{}
+class InvalidTestCaseNameException inherits exceptions::Exception{}
 
 /**
  * This is for when we try to build a suite from a class that isn't a TestCase
  */
-class InvalidParameterException inherits kermeta::exceptions::Exception{}
+class InvalidParameterException inherits exceptions::Exception{}
 
 /**
  * This is represents the aspect of tests that they may go wrong.
@@ -65,7 +65,7 @@ abstract class Fallible inherits AbstractFallible
    * where failures will be put 
    */
   operation  getLog(): Log  
-  //	post logDefined is result != void 
+  	post logDefined is result != void
   	is abstract
   
    
@@ -84,7 +84,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-  method assert(condition: Boolean):Void is
+/*  method assert(condition: Boolean):Void is
 	  	do
 		  	var number : Integer init self.number()
 	  		if not condition then
@@ -98,6 +98,7 @@ abstract class Fallible inherits AbstractFallible
             	end	  				  				
 	  		end	  			  		
 	  	end
+*/ // workaround
   	
   /**
    * Log a failure if condition is false
@@ -134,10 +135,26 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-	method assertTrue(condition: Boolean): Void is
+/*	method assertTrue(condition: Boolean): Void is
 		do
 			assert(condition)
 		end
+*/
+	method assertTrue(condition: Boolean): Void is // workaround
+	  	do
+		  	var number : Integer init self.number()
+	  		if not condition then
+	  			var msg : String init "assertion number " + number.toString + " failed"
+	  			if mustStop then	
+		  			var exception : AssertionFailedError init AssertionFailedError.new
+	            	exception.message := msg
+	            	raise exception	
+	  			else
+	  				getLog.addFailure(self, msg)
+            	end	  				  				
+	  		end	  			  		
+	  	end
+
 		
   /**
    * Log a failure if condition is false
@@ -290,6 +307,7 @@ enumeration ErrorKind
  * Error represents an occurrence of an exception in setUp, tearDown or a test
  * and is stored in a failure log
  */
+
 class Error
 {
 	/**
@@ -400,8 +418,8 @@ abstract class Test
 	 * Initializes the log where failures and errors will be put
 	 */
 	operation setLog(log: Log): Void 
-	//	pre paramNotVoid is log != void
-	//	post logNotVoid is self.log != void
+		pre paramNotVoid is log != void
+		post logNotVoid is self.log != void 
 		is do
 			self.log := log
 		end
@@ -410,7 +428,7 @@ abstract class Test
 	 * Execute the test and verify its assertions
 	 */
 	operation run():Void 
-	//	pre logNotVoid is self.log != void
+		pre logNotVoid is self.log != void 
 		is  abstract
 }
 
@@ -432,7 +450,6 @@ abstract class Test
  *
  *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
  */
-
 class TestSuite inherits Test
 {
 	/**
@@ -455,17 +472,17 @@ class TestSuite inherits Test
 	  * Add to this suite, a set of test cases of type c, one for each
 	  * test method in class c. C must be a descendent of TestCase
 	  */
-   	operation addAllTestCasesFrom(testCaseClass: Class): TestSuite 
-   	//	pre testCaseClassIsATestCase is testCaseClass.superClass.contains(TestCase) 
+   	operation addAllTestCasesFrom(testCaseClass:Class): TestSuite  // workaround
+   		pre testCaseClassIsATestCase is testCaseClass.superClass.contains(TestCase)
    		is
  		do
- 			if not testCaseClass.superClass.exists{ sc | sc.equals(TestCase)} then
- 				var e : kermeta::exceptions::Exception init InvalidParameterException.new
- 				e.message :="Cannot build a suite from class: " + testCaseClass.name
+ 			if not testCaseClass.typeDefinition.superType.exists{ sc | sc.asType(Class).typeDefinition.equals(TestCase.typeDefinition)} then // workaround
+ 				var e : exceptions::Exception init InvalidParameterException.new
+ 				e.message :="Cannot build a suite from class: " + testCaseClass.typeDefinition.name // workaround
  				raise e
  			end
-
-			testCaseClass.ownedOperation.select { o |  
+			
+			testCaseClass.typeDefinition.asType(ClassDefinition).ownedOperation.select { o |  //workaround
 				if o.name.size>=4 then 
 					o.name.substring(0, 4)== "test"
 				else
@@ -477,6 +494,8 @@ class TestSuite inherits Test
 				testCase.setTestMethodName(o.name)
 				self.tests.add(testCase)
 			}
+			
+			tests.each{t| stdio.writeln(t.toString)}
 			
 			result := self
  		end
@@ -587,7 +606,7 @@ abstract class TestCase inherits Test, Fallible
 		if not log.failures.empty then
 			msg := "Failures: "
 			log.failures.each { f | msg := msg +"\n   " + f.toString 	}
-			var exception : AssertionFailedError init kermeta::kunit::AssertionFailedError.new
+			var exception : AssertionFailedError init org::kermeta::kunit::AssertionFailedError.new
 			exception.message := msg
 			raise exception
 		end
@@ -595,7 +614,7 @@ abstract class TestCase inherits Test, Fallible
 			log.errors.each { f | 
 				msg := "Errors: "
 				msg := msg +"\n   " + f.toString
-				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				var exception : exceptions::Exception init exceptions::Exception.new
 				exception.message := msg
 				raise exception 	
 			}
@@ -613,27 +632,31 @@ abstract class TestCase inherits Test, Fallible
 			do
 				setUp
 				do
-					var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
+					//TODO
+					/*var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
 					de.initializeDefaults
 					de.selfClass ?=  self.getMetaClass.typeDefinition
 					de.parse("self." + self.getTestMethodName )
-					de.execute(self, Hashtable<String, kermeta::standard::Object>.new)
+					de.execute(self, Hashtable<String, kermeta::standard::Object>.new)*/
+					var cd : ClassDefinition init self.getMetaClass.typeDefinition.asType(ClassDefinition)
+					var op : Operation init cd.ownedOperation.asOrderedSet.detect{op | op.name.equals(self.getTestMethodName)}
+					self.invoke(op,OrderedSet[Object].new)
 					do
 						tearDown
-					rescue (e : kermeta::exceptions::Exception)
+					rescue (e : exceptions::Exception)
 						getLog.addTearDownError(self, e)
 					end
-				rescue (afe:  kermeta::kunit::AssertionFailedError)
-					getLog.addFailure(self, afe.message + "\nstack trace:\n" +  afe.stackTrace)
-				rescue (e1 : kermeta::exceptions::Exception)
+				rescue (afe:  AssertionFailedError)
+					getLog.addFailure(self, afe.message/* + "\nstack trace:\n" +  afe.stackTrace*/) // workaround
+				rescue (e1 : exceptions::Exception)
 					getLog.addTestError(self,e1)
 					do
 						tearDown
-					rescue (e : kermeta::exceptions::Exception)
+					rescue (e : exceptions::Exception)
 						getLog.addTearDownError(self, e)
 					end
 				end
-			rescue (e : kermeta::exceptions::Exception)
+			rescue (e : exceptions::Exception)
 				getLog.addSetUpError(self, e)
 			end
 		end
@@ -643,7 +666,7 @@ abstract class TestCase inherits Test, Fallible
 	 */
 	method toString(): String is
 		do
-			result := self.getMetaClass.name + "." + getTestMethodName + "()"
+			result := self.getMetaClass.typeDefinition.asType(ClassDefinition).name + "." + getTestMethodName + "()" // workaround
 		end
 
 }
@@ -672,8 +695,8 @@ class TestRunner
 	 *  you can populate a suite with TestSuite.addAllTestCasesFrom
 	 */
 	 operation runTest(test:Test): Void 
-	//	pre testNotVoid is test != void
-	//	post logNotVoid is log != void
+		pre testNotVoid is test != void
+		post logNotVoid is log != void
 		is
 		do
 			log := Log.new
@@ -685,11 +708,11 @@ class TestRunner
 	  * For backwards compatibility with old kunit, this takes a test case class
 	  * and creates the necessary suite, and runs it. DEPRECATED
 	  */
-	operation run(testCaseClass: Class): Void 
-	//	pre cIsATestCase is testCaseClass.superClass.contains(TestCase) 
+	operation run(testCaseClass:Class): Void 
+		pre cIsATestCase is testCaseClass.superClass.contains(TestCase) 
 		is
 		do
-			runTest(TestSuite.new.addAllTestCasesFrom(testCaseClass))
+			runTest(TestSuite.new.addAllTestCasesFrom(testCaseClass)) // workaround
 		end
 		
 	/**
@@ -697,27 +720,27 @@ class TestRunner
 	 * Run some tests first.
 	 */
 	operation printTestResult() is do
-		Stdio.writeln(
+		stdio.writeln(
 		"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
 
 		if not log.failures.empty then
-			Stdio.writeln("\nFailures: ")
-			log.failures.each { f | Stdio.writeln("\n   " + f.toString) 	}
+			stdio.writeln("\nFailures: ")
+			log.failures.each { f | stdio.writeln("\n   " + f.toString) 	}
 		end
 		if not log.errors.empty then
-			Stdio.writeln("\nErrors: ")	
+			stdio.writeln("\nErrors: ")	
 			log.errors.each { e | 
-			Stdio.writeln("\n   " + e.toString) 	}
+			stdio.writeln("\n   " + e.toString) 	}
 		end
 		if not log.harnessErrors.empty then
-			Stdio.writeln("\nErrors from setUp or tearDown : ")	
-			log.harnessErrors.each { e | Stdio.writeln("\n   " + e.toString) 	}
+			stdio.writeln("\nErrors from setUp or tearDown : ")	
+			log.harnessErrors.each { e | stdio.writeln("\n   " + e.toString) 	}
 		end
-		Stdio.writeln("\n Summary: ")
-		Stdio.writeln("   Number of launched tests : " + log.runtests.toString)
-		Stdio.writeln("   Number of failures : " + log.failures.size.toString)
-		Stdio.writeln("   Number of errors : " +  log.errors.size.toString)
-		Stdio.writeln("   Number of errors in setUp or tearDown: " +  log.harnessErrors.size.toString)
-		Stdio.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n")
+		stdio.writeln("\n Summary: ")
+		stdio.writeln("   Number of launched tests : " + log.runtests.toString)
+		stdio.writeln("   Number of failures : " + log.failures.size.toString)
+		stdio.writeln("   Number of errors : " +  log.errors.size.toString)
+		stdio.writeln("   Number of errors in setUp or tearDown: " +  log.harnessErrors.size.toString)
+		stdio.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n")
 	end
 }

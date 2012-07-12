@@ -1,16 +1,21 @@
-KermetaProject "language.library.extended" 
+KermetaProject "org.kermeta.language.library.extended" 
 //version :  "2.0.1-SNAPSHOT" 
-groupId ="org.kermeta.language" 
-sources ={ 
-	require "${project.baseUri}/src/main/kmt/kunit/assert.kmt"
-}
+	groupId ="org.kermeta.language.library.extended"
+	isLibrary 
+	//defaultMainClass = "mainPackage::MainClass"
+	//defaultMainOperation = "mainOperation"
+	sources ={ 
+		//require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+		require "${project.baseUri}/src/main/kmt/kunit/assert.kmt"
+		require "${project.baseUri}/src/main/kmt/kunit/kunit.kmt"
+	}
 	// cannot be used like this due to dynamicExpression 
 	// source = "${project.baseUri}/src/main/kmt/kunit/kunit.kmt"
 	
 	// import library.core
-dependencies = {
-	dependency "library.core" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
-		 
-} 
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+	} 
 
  

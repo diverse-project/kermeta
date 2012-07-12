@@ -9,9 +9,7 @@
  * main features of the famous Unit test tool for Kermeta language
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-package kermeta::kunit;
-
-
+package org::kermeta::kunit;
 using kermeta::standard
 
 /**
@@ -21,9 +19,9 @@ abstract class AbstractFallible
 {
 
     /** process the given condition and react if it is not satisfied */
-    operation assert(condition: Boolean):Void is
+/*    operation assert(condition: Boolean):Void is
 	  	abstract
-  	
+*/ // workaround  	
     /**
      * process the given condition and react with the given message
      * if it is not satisfied
@@ -64,17 +62,17 @@ abstract class AbstractFallible
   /**
    * Log a failure if the two strings are not identical modulo-white-space
    */
- /*	operation assertSimilar(expected: String, actual: String): Void is
+ 	operation assertSimilar(expected: String, actual: String): Void is
 		do	
-			expected := distil(expected)
-			actual := distil(actual)
-			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual  \t:[" + actual + "]")
+			var expectedBis : String init distil(expected)
+			var actualBis : String init distil(actual)
+			assertWithMsg(expectedBis.equals(actualBis), "\nexpected\t:[" + expectedBis + "] != \nactual  \t:[" + actualBis + "]")
 		end
-	*/	
+		
 	/** 
 	 ** reduces all runs of white-space to a single space character
 	 **/
-	/* operation distil(s: String): String is
+	operation distil(s: String): String is
 		do
 			result := ""
 			var white: Boolean init false
@@ -98,7 +96,7 @@ abstract class AbstractFallible
 				i := i + 1
 			end
 		end
-	*/
+
 
 }
 
@@ -110,13 +108,13 @@ class Assert inherits AbstractFallible
 {
 
 	/** Fails if condition is false */
-	method assert(condition : Boolean) : Void is 
+/*	method assert(condition : Boolean) : Void is 
         do
             if not condition then 
             	fail("assert failed") 
             end
         end
-	
+*/ // workaround	
 	/** will fail if condition is false */
 	method assertTrue(condition : Boolean) : Void is 
         do
