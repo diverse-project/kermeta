@@ -7,7 +7,7 @@
 	<!-- use this value if not provided by hudson -->
 	<property name="env.WORKSPACE" location="/local/hudson/home/jobs/statsvn_kermeta/workspace"/>
 	
-	<property name="ssh.privatekey" location="/udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
+	<property name="ssh.privatekey" location="/home/kermeta_bot/.ssh/id_rsa_web"/>
 		
 	
 	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
