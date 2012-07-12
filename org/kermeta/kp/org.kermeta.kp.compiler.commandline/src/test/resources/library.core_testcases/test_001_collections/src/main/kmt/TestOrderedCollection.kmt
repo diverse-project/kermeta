@@ -1,0 +1,217 @@
+package testPackage;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using org::kermeta::kunit
+
+class TestOrderedCollection inherits TestCase {
+	
+	attribute c:OrderedCollection[String]
+
+	operation mainTest() : Void is do
+		var testRunner : TestRunner init TestRunner.new
+       	testRunner.run(self.getMetaClass)
+       	testRunner.printTestResult
+	end
+	
+	operation setUp():Void is do
+		c := OrderedCollectionStub[String].new
+	end
+	
+	operation testAdd():Void is do
+		c.add("toto")
+		c.add("tutu")
+		c.add("toto")
+		c.add("titi")
+		var i:Iterator[String] := c.iterator
+		assertTrue(i.next=="toto")
+		assertTrue(i.next=="tutu")
+		assertTrue(i.next=="toto")
+		assertTrue(i.next=="titi")
+	end
+
+	operation testAddAt() : Void is do
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		c.addAt(1,"tata")
+		assertTrue(c.size==4)
+		var i:Iterator[String] := c.iterator
+		assertTrue(i.next=="toto")
+		assertTrue(i.next=="tata")
+		assertTrue(i.next=="tutu")
+		
+		c.addAt(4,"toto")
+		assertTrue(c.size==5)
+		
+		do
+			c.addAt(-1,"baba")
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+		do
+			c.addAt(6,"baba")
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+	end
+	
+	operation testRemoveAt() : Void is do
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		c.removeAt(1)
+		assertTrue(c.size==2)
+		var i:Iterator[String] := c.iterator
+		assertTrue(i.next=="toto")
+		assertTrue(i.next=="titi")
+
+		do
+			c.removeAt(-1)
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+		do
+			c.removeAt(6)
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+	end
+	
+	operation testElementAt() : Void is do
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		assertTrue(c.elementAt(1)=="tutu")
+
+		do
+			c.elementAt(-1)
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+		do
+			c.elementAt(6)
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+	end
+	
+	operation testFirst() : Void is do
+		do
+			c.first
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::EmptyCollection)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		c.removeAt(0)
+		assertTrue(c.first=="tutu")
+	end
+	
+	operation testLast() : Void is do
+		do
+			c.last
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::EmptyCollection)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		c.removeAt(0)
+		assertTrue(c.last=="titi")
+	end
+
+	operation testEquals() : Void is do
+		c.add("toto")
+		c.add("titi")
+		c.add("tutu")
+		var c2:Collection[String]:=Set[String].new
+		c2.add("toto")
+		c2.add("titi")
+		c2.add("tutu")
+		assertTrue(!c.equals(c2))
+		
+		c2:=Bag[String].new
+		c2.add("toto")
+		c2.add("titi")
+		c2.add("tutu")
+		assertTrue(!c.equals(c2))
+
+		c2:=OrderedCollectionStub[String].new
+		c2.add("tutu")
+		c2.add("titi")
+		c2.add("toto")
+		assertTrue(!c.equals(c2))
+
+		c2:=OrderedCollectionStub[String].new
+		c2.add("toto")
+		c2.add("titi")
+		c2.add("tutu")
+		assertTrue(c.equals(c2))
+		
+		c.add("toto")
+		assertTrue(!c.equals(c2))
+		c2.add("toto")
+		c2.add("titi")
+		assertTrue(!c.equals(c2))
+		c.add("titi")
+		assertTrue(c.equals(c2))
+	
+		var c:OrderedCollection[Object]:=OrderedCollectionStub[Object].new
+		var c0:Collection[Object]:=OrderedCollectionStub[Object].new
+		c.add(AlwaysEqual.new)
+		c0.add(AlwaysEqual.new)
+		assertTrue(c.equals(c2))
+	end
+	
+	operation testIndexOf() : Void is do
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		assertTrue(c.indexOf("tutu")==1)
+		assertTrue(c.indexOf("tata")==-1)
+		
+		var c:OrderedCollection[Object]:=OrderedCollectionStub[Object].new
+		c.add(AlwaysEqual.new)
+		assertTrue(c.indexOf(AlwaysEqual.new)==0)
+	end
+
+	operation testAt() : Void is do
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		assertTrue(c.at(1)=="tutu")
+
+		do
+			c.at(-1)
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+		do
+			c.at(6)
+			assertTrue(false)
+		rescue(e:kermeta::exceptions::IndexOutOfBound)
+		rescue(e:kermeta::exceptions::Exception)
+			assertTrue(false)
+		end
+	end
+}
