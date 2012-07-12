@@ -1,0 +1,98 @@
+<!-- $Id: statsvn_build.xml,v 1.10 2008-08-01 10:24:29 dvojtise Exp $ -->
+<project name="Build StatSVN" default="all" basedir=".">
+	<description>
+       
+	</description>
+	
+	<!-- use this value if not provided by hudson -->
+	<property name="env.WORKSPACE" location="/local/hudson/home/jobs/statsvn_kermeta/workspace"/>
+	
+	<property name="ssh.privatekey" location="/udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
+		
+	
+	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
+	<property name="notes.txt" location="./notes_templates/report-notes.txt"/>
+	<property name="svn.log" location="./logfile.log"/>
+	<property name="output.dir" location="statsvn"/>
+        
+	
+	<target name="all">
+		<antcall target="checkout_log"/>
+		<antcall target="stats"/>
+		<antcall target="patch_gforge_cvsweb_links"/>
+	</target>
+	<target name="dummy">
+	</target>
+	<target name="checkout_log">
+		<!-- <cvs output="${cvs.log}">
+			<commandline>
+				<argument line="log src"/>
+			</commandline>
+		</cvs> -->
+		<exec executable="svn" output="${svn.log}">
+			<env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
+		    <arg value="log"/>
+		    <arg value="-v"/>
+		    <arg value="--xml"/>
+			<arg value="../kermeta_projects"/>
+		</exec>
+	</target>
+ 	<target name="stats"> 
+		<java jar="${statsvn.jar}"
+    	           fork="true"
+    	           failonerror="true"
+    	           maxmemory="256m"
+    	           >
+		    <env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
+			<arg value="-verbose"/> 			
+		    <arg value="-title"/>			
+			<arg value="Kermeta"/> 	
+			<arg value="-notes"/>			
+			<arg value="${notes.txt}"/> 			
+		    <arg value="-threads"/>			
+			<arg value="1"/>
+			<arg value="-tags"/>			
+			<arg value="(V|v|KERMETA_V|Kermeta_v).*"/>
+			<arg value="-cache-dir"/>			
+			<arg value="statsvn_cache"/>
+			<arg value="-viewvc"/>			
+			<arg value="http://gforge.inria.fr/plugins/scmsvn/viewcvs.php/?root=kermeta"/>
+		    <arg value="-exclude"/>			
+			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.simk;**/*.genmodel;**/*.ecoredi;**/*.ecorediag;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**;**/statsvn_cache/**"/>		
+		    <arg value="-output-dir"/>			
+			<arg value="${output.dir}"/>		
+			<arg value="${svn.log}"/>		
+			<arg value="../kermeta_projects"/>
+		</java>
+		    	
+<!--		    	      -exclude **/src/urncore/**;**/src/grl/**;**/src/ucm/**;**/src/urn/**;**/src/seg/jUCMNav/model/ucm/** \
+		    	      -output-dir ./stats c:\eclipse\workspace\seg.jUCMNav\svn.log c:\eclipse\workspace\seg.jUCMNav
+ 		<taskdef name="statsvn" classname="net.sf.statsvn.ant.StatSvnTask" classpath="${statsvn.jar}" />
+        <statsvn log="${svn.log}" 
+        	path="../kermeta_projects" 
+        	title="Kermeta"
+            outputDir="${output.dir}" 
+            notes="${notes.txt}" 
+            viewcvs="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/" 
+            exclude="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"
+            tags="(V|v|KERMETA_V|Kermeta_v).*"/>
+            -->
+    </target>
+    <target name="patch_gforge_cvsweb_links">    	
+   <!--     <replace dir="${output.dir}" >
+            <include name="**/*.html"/>
+            <replacetoken><![CDATA[" class="webrepository"]]></replacetoken>
+            <replacevalue><![CDATA[&amp;f=h&amp;cvsroot=kermeta" class="webrepository"]]></replacevalue>
+        </replace>
+    	<replace dir="${output.dir}" >
+            <include name="**/*.html"/>
+            <replacetoken><![CDATA[vnd.viewcvs-markup"]]></replacetoken>
+            <replacevalue><![CDATA[vnd.viewcvs-markup&amp;cvsroot=kermeta"]]></replacevalue>
+        </replace>-->
+    </target>
+	
+	<target name="init_local_mirror_repository">
+	</target>
+	<target name="sync_local_mirror_repository">
+	</target>
+</project>
