@@ -139,6 +139,14 @@ public class KpCompilerMojo extends AbstractMojo {
      */
     private Boolean continueOnError;
     
+    /**
+     * buildAsLibrary : if true this will build a km dedicated form being imported as a library
+     * If set to false, then it will create a normal kermeta application
+     * 
+     * @parameter default-value="false"
+     */
+    private Boolean buildAsLibrary;
+    
     
     /**
      * useDefaultClasspath : if true, the final bytecode (phase GENERATE_SCALA_BYTECODE) will be compiled using the embedded scala library and kermeta dependencies
@@ -235,6 +243,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	            ArrayList<String> paramsArray = new ArrayList<String>();
 
 	            if(continueOnError) paramsArray.add("-continueOnError");
+	            if(buildAsLibrary) paramsArray.add("-buildAsLibrary");
 	            paramsArray.add("-stopAfter");
 	            paramsArray.add(stopAfterPhase);
 	            if(intermediateFilesRequired) paramsArray.add("-intermediate");
