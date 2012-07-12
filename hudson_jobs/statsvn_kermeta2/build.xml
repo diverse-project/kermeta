@@ -41,7 +41,7 @@
 		<java jar="${statsvn.jar}"
     	           fork="true"
     	           failonerror="true"
-    	           maxmemory="256m"
+    	           maxmemory="768m"
     	           >
 		    <env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
 			<arg value="-verbose"/> 			
