@@ -333,7 +333,8 @@ abstract class Collection[G]
 	end
 	
 	/**
-	 * Sum the elements of the collection if they are summable (ie implement '+' operator by inheriting of the class Summable)
+	 * Sum the elements of the collection if they are summable (ie implement '+' operator by inheriting of the class Summable).
+	 * Returns void otherwise.
 	 */
 	operation sum(): G is do
 

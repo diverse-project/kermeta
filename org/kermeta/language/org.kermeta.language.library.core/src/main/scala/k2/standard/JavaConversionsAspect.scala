@@ -7,8 +7,6 @@ import scala.collection.JavaConversions._
   
     trait KermetaColAspect[A] extends EObjectImplForPrimitive with EList[A] with _root_.k2.standard.KermetaObject with KermetaCol[A]{
 	
-	// TODO : optimize by removing every intermediate collection created by the lambdas
-  
     	val value:ju.List[A]=new java.util.ArrayList[A]
     	
     	def add(e:A):Boolean={
@@ -16,6 +14,7 @@ import scala.collection.JavaConversions._
     	}
     	
         def addSafe(e:Any)(implicit m:Manifest[A]) :Unit= {
+          // TODO TypeTags
           if (m.erasure.isInstance(e))
             this.add(e.asInstanceOf[A])
         }
@@ -133,7 +132,11 @@ import scala.collection.JavaConversions._
         }
         
         def collect[T](collector:A=>T):KermetaSequence[T]={
-          new RichKermetaSequence[T](value.map(collector))
+          val res=new RichKermetaSequence[T]
+          value.foreach{e =>
+          	res.add(collector(e))
+          }
+          res
         }
 
         def isUnique[T](collector:A=>T):Boolean={
@@ -149,15 +152,32 @@ import scala.collection.JavaConversions._
         }
         
         def select(selector:A=>Boolean):KermetaSequence[A]={
-          new RichKermetaSequence[A](value.filter(selector))
+          val res=new RichKermetaSequence[A]
+          value.foreach{e=>
+          	if(selector(e))
+          	  res.add(e)
+          }
+          res
         }
         
         def selectOne(selector:A=>Boolean):KermetaSequence[A]={
-          new RichKermetaSequence[A](value.filter(selector).take(1))
+          val res=new RichKermetaSequence[A]
+          value.foreach{e=>
+          	if(selector(e)){
+          	  res.add(e)
+          	  return res
+          	}
+          }
+          res
         }
         
         def reject(rejector:A=>Boolean):KermetaSequence[A]={
-          new RichKermetaSequence[A](value.filterNot(rejector))
+          val res=new RichKermetaSequence[A]
+          value.foreach{e=>
+          	if(!rejector(e))
+          	  res.add(e)
+          }
+          res
         }
         
         def count(e:A):Int={
@@ -165,11 +185,11 @@ import scala.collection.JavaConversions._
         }
         
         def sum():A={
-          if(!value.forall(x=>x.isInstanceOf[Summable[A]]))
-            throw new IllegalStateException("Some elements of the collection are not summable")
-          else if(value.size==0)
-            throw new IllegalStateException("Cannot sum an empty collection")
-          value.reduceLeft((x,y)=>x.asInstanceOf[Summable[A]].plus(y))
+          try{
+            value.reduceLeft((x,y)=>x.asInstanceOf[Summable[A]].plus(y))
+          } catch {
+            case e:Exception => null.asInstanceOf[A]
+          }
         }
         
     	def asBag() : KermetaBag[A] = {
@@ -191,7 +211,15 @@ import scala.collection.JavaConversions._
         }
         
         def asSequenceType[T](implicit m:Manifest[T]):KermetaSequence[T]={
-          new RichKermetaSequence[T](value.collect{case x:T if m.erasure.isInstance(x) => x})
+          // TODO TypeTags
+          val res=new RichKermetaSequence[T]
+          value.foreach{
+            _ match{
+              case x:T if m.erasure.isInstance(x) => res.add(x)
+              case _ =>
+            }
+          }
+          res
         }
 
         def asOrderedSet() : KermetaOrderedSet[A] = {
@@ -346,20 +374,32 @@ import scala.collection.JavaConversions._
       
       def intersection(elts:KermetaCol[A]):KermetaSet[A]={
         val res=new RichKermetaSet[A]
-        res.unsafeAddAll(value.filter(elts.contains))
+        value.foreach{e=>
+          if(elts.contains(e))
+            res.unsafeAdd(e)
+        }
         res
       }
       
       def minus(elements:KermetaSet[A]):KermetaSet[A]={
         val res=new RichKermetaSet[A]
-        res.unsafeAddAll(value.filterNot(elements.contains))
+        value.foreach{e=>
+          if(!elements.contains(e))
+            res.unsafeAdd(e)
+        }
         res
       }
       
       def symmetricDifference(s:KermetaSet[A]):KermetaSet[A]={
         val res=new RichKermetaSet[A]
-        res.unsafeAddAll(value.filterNot(s.contains))
-        res.unsafeAddAll(s.select(x => !value.contains(x)))
+        value.foreach{e=>
+          if(!s.contains(e))
+            res.unsafeAdd(e)
+        }
+        s.each{e=>
+          if(!value.contains(e))
+            res.unsafeAdd(e)
+        }
         res
       }
       
