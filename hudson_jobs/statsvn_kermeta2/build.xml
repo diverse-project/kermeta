@@ -34,7 +34,7 @@
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
-			<arg value="monitored_svn_folders"/>
+			<arg value="monitored_svn_folders/language"/>
 		</exec>
 	</target>
  	<target name="stats"> 
