@@ -84,8 +84,8 @@ object TypeEquivalence {
 				 typeEquivelence.put("java.lang.Class",			"java.lang.Class[_]")
 				 typeEquivelence.put("k2.persistence.ResourceSet","org.eclipse.emf.ecore.resource.ResourceSet")
 				 typeEquivelence.put("k2.persistence.Resource",	"org.eclipse.emf.ecore.resource.Resource")
-				 typeEquivelence.put("k2.standard.Collection", 	"java.util.List");
-				 typeEquivelence.put("k2.standard.Bag", 		"java.util.List");
+				 typeEquivelence.put("k2.standard.Collection", 	"k2.standard.KermetaCol");
+				 typeEquivelence.put("k2.standard.Bag", 		"k2.standard.KermetaBag");
 				 typeEquivelence.put("k2.standard.Boolean", 	"java.lang.Boolean");
 				 typeEquivelence.put("k2.standard.Character", 	"java.lang.Character");
 				 typeEquivelence.put("k2.standard.Date", 		"java.util.Date");
@@ -96,10 +96,11 @@ object TypeEquivalence {
 				 typeEquivelence.put("k2.standard.Iterator", 	"java.util.Iterator");
 				 typeEquivelence.put("k2.standard.Long", 		"java.lang.Long");
 				 typeEquivelence.put("k2.standard.Object", 		"k2.standard.KermetaObject");
-				 typeEquivelence.put("k2.standard.OrderedSet", 	"java.util.List");
+				 typeEquivelence.put("k2.standard.OrderedCollection","k2.standard.KermetaOrderedCol");
+				 typeEquivelence.put("k2.standard.OrderedSet", 	"k2.standard.KermetaOrderedSet");
 				 typeEquivelence.put("k2.standard.Real", 		"java.lang.Double");
-				 typeEquivelence.put("k2.standard.Set", 		"java.util.List");
-				 typeEquivelence.put("k2.standard.Sequence", 	"java.util.List");
+				 typeEquivelence.put("k2.standard.Set", 		"k2.standard.KermetaSet");
+				 typeEquivelence.put("k2.standard.Sequence", 	"k2.standard.KermetaSequence");
 				 typeEquivelence.put("k2.standard.Short", 		"java.lang.Short");
 				 typeEquivelence.put("k2.standard.String", 		"java.lang.String");
 				 typeEquivelence.put("k2.standard.StringBuffer","java.lang.StringBuilder");

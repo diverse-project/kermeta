@@ -46,13 +46,29 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     res.append(" : ")
 
     if (thi.getUpper > 1 || thi.getUpper == -1) {
-      if (thi.getIsOrdered != null && thi.getIsOrdered) {
-        res.append("java.util.List[")
+      if (thi.getIsOrdered == null || thi.getIsOrdered) {
+        if(thi.getIsUnique() == null || thi.getIsUnique())
+          res.append("k2.standard.KermetaOrderedSet[")
+        else
+          res.append("k2.standard.KermetaSequence[")
       } else {
-        res.append("java.util.List[")
+        if(thi.getIsUnique() == null || thi.getIsUnique())
+          res.append("k2.standard.KermetaSet[")
+        else
+          res.append("k2.standard.KermetaBag[")
       }
       visit(thi.getType, res)
-      res.append("] = new java.util.ArrayList[")
+      if (thi.getIsOrdered == null || thi.getIsOrdered) {
+        if(thi.getIsUnique() == null || thi.getIsUnique())
+          res.append("] = k2.standard.KerRichFactory.createOrderedSet[")
+        else
+          res.append("] = k2.standard.KerRichFactory.createSequence[")
+      } else {
+        if(thi.getIsUnique() == null || thi.getIsUnique())
+          res.append("] = k2.standard.KerRichFactory.createSet[")
+        else
+          res.append("] = k2.standard.KerRichFactory.createBag[")
+      }
       visit(thi.getType, res)
       res.append("]")
 
@@ -156,10 +172,33 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(res1.toString)
           res.append(" == null ) ")
           res.append(res1.toString.replace("this.get", "this.set").replace("()", "("))
-          res.append("new _root_.java.util.ArrayList[" + s.toString + "]);")
+          if (thi.getIsOrdered == null || thi.getIsOrdered) {
+            if(thi.getIsUnique() == null || thi.getIsUnique())
+              res.append("k2.standard.KerRichFactory.createOrderedSet[")
+            else
+              res.append("k2.standard.KerRichFactory.createSequence[")
+          } else {
+            if(thi.getIsUnique() == null || thi.getIsUnique())
+              res.append("k2.standard.KerRichFactory.createSet[")
+            else
+              res.append("k2.standard.KerRichFactory.createBag[")
+          }
+          res.append(s.toString + "]);")
         }
-
-        res.append("new RichKermetaList(")
+        
+        if (thi.getIsOrdered == null || thi.getIsOrdered) {
+          if(thi.getIsUnique() == null || thi.getIsUnique())
+            res.append("new k2.standard.RichKermetaOrderedSet[")
+          else
+            res.append("new k2.standard.RichKermetaSequence[")
+        } else {
+          if(thi.getIsUnique() == null || thi.getIsUnique())
+            res.append("new k2.standard.RichKermetaSet[")
+          else
+            res.append("new k2.standard.RichKermetaBag[")
+        }
+        visit(thi.getType(),res)
+        res.append("](")
       }
 
       if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))) {
@@ -253,7 +292,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
             currentname = getUmlExtension(thi)
           }
           res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().clear\n")
-          if (listType.toString.equals("java.util.List[_root_.java.lang.Object]") && Util.hasEcoreTag(thi))
+          if (isCollectionOfObject(listType.toString) && Util.hasEcoreTag(thi))
             res.append("`~value`.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n")
           else
             res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().addAll(`~value`)\n")
@@ -271,14 +310,26 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
     }
   }
+  
+  def isCollectionOfObject(listType:String):Boolean={
+    listType.equals("k2.standard.KermetaOrderedSet[_root_.java.lang.Object]") ||
+      listType.equals("k2.standard.KermetaSequence[_root_.java.lang.Object]") ||
+      listType.equals("k2.standard.KermetaSet[_root_.java.lang.Object]") ||
+      listType.equals("k2.standard.KermetaBag[_root_.java.lang.Object]")
+  }
 
   def getListorType(thi: Property, res: StringBuilder) = {
     if (thi.getUpper > 1 || thi.getUpper == -1) {
-      if ((thi.getIsOrdered() != null && thi.getIsOrdered)) {
-        res.append("java.util.List[")
+      if (thi.getIsOrdered == null || thi.getIsOrdered) {
+        if(thi.getIsUnique() == null || thi.getIsUnique())
+          res.append("k2.standard.KermetaOrderedSet[")
+        else
+          res.append("k2.standard.KermetaSequence[")
       } else {
-        //TODO gestion des SETs
-        res.append("java.util.List[")
+        if(thi.getIsUnique() == null || thi.getIsUnique())
+          res.append("k2.standard.KermetaSet[")
+        else
+          res.append("k2.standard.KermetaBag[")
       }
       visit(thi.getType(),res)
       res.append("]")

@@ -223,16 +223,6 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
         
       
                     case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(thi,res);res.append(")");}
-                    case "add"
-                        if (thi.getTarget != null && thi.getTarget.getStaticType != null && thi.getTarget.getStaticType.isInstanceOf[org.kermeta.language.structure.Class]
-                            && (thi.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("OrderedSet")
-                                ||thi.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
-                                    =>{generateTarget(thi,res);res.append(".");res.append("addUnique");generateParam(thi,res,"(",")")}
-                    case "addAll"
-                        if (thi.getTarget != null && (thi.getTarget.getStaticType != null && thi.getTarget.getStaticType.isInstanceOf[org.kermeta.language.structure.Class]) //|| (thi.getStaticProperty != null && thi.getStaticProperty.getType.isInstanceOf[org.kermeta.language.structure.Class]))
-                            && (thi.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("OrderedSet")
-                                ||thi.getTarget.getStaticType.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
-                                    =>{generateTarget(thi,res);res.append(".");res.append("addAllUnique");generateParam(thi,res,"(",")")}
                     case "new" => generateNew(thi,res)
                     case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {generateTarget(thi,res);res.append(".");generateOperationCall(thi,res);generateParam(thi,res,"(",")"); }
                     case _ if(thi.getTarget == null && thi.getStaticOperation!=null ) => {res.append(Util.getEcoreRenameOperation(thi.getStaticOperation));generateParam(thi,res,"(",")") }

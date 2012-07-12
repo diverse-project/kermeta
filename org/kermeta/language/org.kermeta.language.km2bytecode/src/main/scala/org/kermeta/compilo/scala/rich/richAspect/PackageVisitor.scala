@@ -497,12 +497,18 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 
   def getListorType(thi: VariableDecl, res: StringBuilder) = {
     if (thi.getType.getUpper > 1 || thi.getType.getUpper == -1) {
-      if (thi.getType.getIsOrdered != null && thi.getType.getIsOrdered) {
-        res.append("java.util.List[")
+      if (thi.getType.getIsOrdered == null || thi.getType.getIsOrdered) {
+        if(thi.getType.getIsUnique() == null || thi.getType.getIsUnique())
+          res.append("k2.standard.KermetaOrderedSet[")
+        else
+          res.append("k2.standard.KermetaSequence[")
       } else {
-        res.append("java.util.List[")
+        if(thi.getType.getIsUnique() == null || thi.getType.getIsUnique())
+          res.append("k2.standard.KermetaSet[")
+        else
+          res.append("k2.standard.KermetaBag[")
       }
-      visit(thi.getType(), res)
+     visit(thi.getType(), res)
       res.append("]")
     } else {
       visit(thi.getType, res)

@@ -1,9 +1,9 @@
 package k2.standard
 object KerRichFactory {
- def createSet[A] : java.util.List[A] = { new java.util.ArrayList[A] }
- def createOrderedSet[A] : java.util.List[A] = { new java.util.ArrayList[A] }
- def createSequence[A] : java.util.List[A] = { new java.util.ArrayList[A] }
- def createBag[A] : java.util.List[A] = { new java.util.ArrayList[A] }
+ def createSet[A] : KermetaSet[A] = { new RichKermetaSet[A] }
+ def createOrderedSet[A] : KermetaOrderedSet[A] = { new RichKermetaOrderedSet[A] }
+ def createSequence[A] : KermetaSequence[A] = { new RichKermetaSequence[A] }
+ def createBag[A] : KermetaBag[A] = { new RichKermetaBag[A] }
  def createString : String = { new String }
  def createDouble : Double = { 0.0 }
  def createInteger : Int = { 0 }

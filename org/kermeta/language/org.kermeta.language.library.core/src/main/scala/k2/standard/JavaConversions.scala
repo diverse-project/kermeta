@@ -1,812 +1,262 @@
 package k2.standard;
 
-/** <p>
- *    A collection of implicit conversions supporting interoperability between
- *    Scala and Java collections.
- *  </p>
- *  <p>
- *    The following conversions are supported:
- *  </p>
- *  <ul>
- *    <li><code>scala.collection.Iterable</code> <=> <code>java.lang.Iterable</code></li>
- *    <li><code>scala.collection.Iterable</code> <=> <code>java.util.Collection</code></li>
- *    <li><code>scala.collection.Iterator</code> <=> <code>java.util.{ Iterator, Enumeration }</code></li>
- *    <li><code>scala.collection.mutable.Buffer</code> <=> <code>java.util.List</code></li>
- *    <li><code>scala.collection.mutable.Set</code> <=> <code>java.util.Set</code></li>
- *    <li><code>scala.collection.mutable.Map</code> <=> <code>java.util.Map</code></li>
- *  </ul>
- *  <p>
- *    In all cases, converting from a source type to a target type and back
- *    again will return the original source object, eg.
- *  </p>
- *  <pre>
- *    <b>import</b> scala.collection.JavaConversions._
- * 
- *    <b>val</b> sl = <b>new</b> scala.collection.mutable.ListBuffer[Int]
- *    <b>val</b> jl : java.util.List[Int] = sl
- *    <b>val</b> sl2 : scala.collection.mutable.Buffer[Int] = jl
- *    assert(sl eq sl2)g</pre>
- *  <p>
- *    Note that no conversion is provided from <code>scala.collection.immutable.List</code>
- *    to <code>java.util.List</code>. Instead it is convertible to an immutable
- *    <code>java.util.Collection</code> which provides size and interation
- *    capabilities, but not access by index as would be provided by
- *    <code>java.util.List</code>.<br/>
- *    This is intentional: in combination the implementation of
- *    <code>scala.collection.immutable.List</code> and the typical usage
- *    patterns of <code>java.util.List</code> would perform extremely poorly.
- *  </p>
- * 
- *  @author Miles Sabin
- *  @since  2.8
- */
+
 import org.eclipse.emf.common.util.EList
-import scala.collection.immutable.ListSet
-
-object JavaConversions {
-    import java.{ lang => jl, util => ju }
-    import java.util.{ concurrent => juc }
-    import scala.collection.{ generic, immutable, mutable, Traversable }
-    import scala.reflect.ClassManifest
+import java.{ util => ju , lang => jl}
+import scala.collection.JavaConversions._
   
-    class RichKermetaList[A] ( value : ju.List[A]) extends EObjectImplForPrimitive with EList[A] with _root_.k2.standard.KermetaObject {
+    trait KermetaCol[A] extends EObjectImplForPrimitive with EList[A] with _root_.k2.standard.KermetaObject {
 	
-    	/**
-    	 * If the element type is not a collection type, this results in the same self. If the element type is a collection type,
-    	 * the result is the list containing all the elements of all the elements of self.
-    	 * See also OCL function flatten
-    	 */
-    	/* TODO: Is there any way to compare directly two types in Scala, to know if A <: Collection?
-    	 * This would enable to return value without iterating in the case of a collection containing collections and other objects 
-    	 * and would prevent from testing "current.isInstanceOf[ju.Collection[_]]" for each element of value
-    	 */
-        def flatten() : ju.Collection[_] = {
-        	var result : ju.Collection[Object] = new ju.ArrayList[Object]()
-	        var i : ju.Iterator[A] = value.iterator()
-	        while (i.hasNext()) {
-	        	var current : A = i.next()
-	        	if (current.isInstanceOf[ju.Collection[_]]) {
-	        		result.addAll(current.asInstanceOf[ju.Collection[_ <: Object]])
-	        	}
-	        	else {
-	        		return value
-	        	}	        	
-	        }
-        	return result
-        }
+    	def add(e:A):Boolean
+    	
+        def addSafe(e:Any)(implicit m:Manifest[A]) :Unit
 
-        /**
-         * Multiset intersection: The result collection references each element "elem" from elements a number of times equals to
-         * the minimum of the multiplicities of "elem" in value and in elements (min 0)
+        def remove(e:A):Unit
+        
+        def clear() : Unit
+        
+        def addAll(elts:KermetaCol[A]):Unit
+        
+        def contains(e:Any):Boolean
+        
+        /** OCL compatibility:
+         * does the same than contains
          */
-        def intersection(elements : ju.Collection[A]) : ju.Collection[A] = {
-    		var result : ju.Collection[A] = new ju.ArrayList[A]()
-    		var tmpSet : ju.Set[A] = new ju.HashSet[A]()
-    		var richElements : RichKermetaCol[A] = new RichKermetaCol[A](elements)
-    		var i : ju.Iterator[A] = value.iterator()
-    		while (i.hasNext()) {
-    			var elem : A = i.next()
-    			if (elements.contains(elem)) {
-    				tmpSet.add(elem)
-    			}
-    		}
-    		i = tmpSet.iterator()
-    		while (i.hasNext()) {
-    			var elem : A = i.next()
-    			var nbElem : Int = Math.min(this.countElement(elem), richElements.countElement(elem))
-    			val range = 0.until(nbElem)
-    			for (j <- range) {
-    				result.add(elem)
-    			}    			
-    		}
-    		return result
-    	}
-      
-        def first():A = {
-            if (value.size>0)  
-                return value.get(0)
-            else
-                return null.asInstanceOf[A]
-        }
-
-        def last():A = {
-                        if (value.size>0)  
-                return   value.get(value.size-1)
-            else
-                return null.asInstanceOf[A]
-        }
-          
-
-        def move( newPosition : Int, o : A){
-            if(value.contains(o)){
-                value.remove(o)
-                value.add(newPosition, o)
-            }
-        }
+        def includes(e:A):Boolean
         
-        def removeOne( o : A){
-            if(value.contains(o)){
-                value.remove(o)
-            }
-        }
-
-        def move(newPos : Int , old : Int):A ={
-            move(newPos,value.get(old))
-            value.get(newPos)
-        }
-	 
-	
-        def asSequenceType[B]() :java.util.List[B]={
-            var res : java.util.List[B] = new java.util.ArrayList[B];
-            this.each{e=> res.add(e.asInstanceOf[B])}
-            return res
-        }
-        def reject(rejector: A => scala.Boolean) :java.util.List[A]={
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each(e=> if(!rejector(e)) {res.add(e)})
-            return res
-        }
-        def countElement(element : A) :java.lang.Integer={
-            return this.select(e => e.equals(element)).size
-        }
-
-        def excludes(element : A) :java.lang.Boolean={return !value.contains(element)}
-        def one():A ={
+        def containsAll(elts:KermetaCol[A]):Boolean
         
-            if (value.iterator.hasNext)
-                return  value.iterator.next
-            else
-                return null.asInstanceOf[A]
-        }
-
-        def sum() :A={
-        	var i : ju.Iterator[A] = value.iterator
-        	var result : A = i.next
-        	
-        	if (!result.isInstanceOf[Summable[A]]) {
-        		throw new RuntimeException("Collection contains elements which are not summable.")
-        	}
-        	
-        	while (i.hasNext()) {
-        		var current : A = i.next()
-        		if (current.isInstanceOf[Summable[A]]) {
-        			var summableCurrent : Summable[A] = current.asInstanceOf[Summable[A]]
-        			result = result.asInstanceOf[Summable[A]].plus(current)
-        		}
-        		else {
-        			throw new RuntimeException("Collection contains elements which are not summable.")
-        		}
-        	}
-        	return result
-        }
-        def includes(element : A) :Boolean={return value.contains(element)}
-        
-        def excludesAll(elements : ju.Collection[A]) :Boolean={
-        	var i : ju.Iterator[A] = value.iterator
-        	while (i.hasNext()) {
-        		if (value.contains(i.next)) {
-        			return false
-        		}
-        	}
-        	return true
-        }
-        def isUnique(a : A) :Boolean={return this.countElement(a)==1}
-        def any() :A={return one()}
-        def at(index:Int) :A={return value.get(index)}
-        
-        def empty() :Boolean={return value.size==0}
-
-        def forAllCpl(f : (A,A)=>Boolean) :Boolean={        	
-          this.forAll(
-              {(x : A)=>
-                	{this.forAll(
-                	      {(y : A) => {f(x, y)}}
-                	)}
-              }
-          )
-        }
-        
-        def forAll(f : A=>Boolean) :Boolean={
-        		var i : ju.Iterator[A] = value.iterator
-                while (i.hasNext) {
-                	if (!f(i.next())) {
-                		return false
-                	}
-                }
-                return true
-        }
-        
-        def exists(f : A=>Boolean) :Boolean={ 
-            var i : ju.Iterator[A] = value.iterator
-            while (i.hasNext) {
-                if (f(i.next()))
-                    return true
-            }
-            return false
-        }
-	
-        def existsCpl(f : (A,A)=>Boolean) :Boolean={
-          this.exists(
-              {(x : A)=>
-                	{this.exists(
-                	      {(y : A) => {f(x, y)}}
-                	)}
-              }
-          )
-        }
-        
-        
-        def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-        def detect(detector : A=> Boolean) :A={
-            //val res = this.select(e=> detector(e))
-            //if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
-            var it : ju.Iterator[A] = value.iterator
-            var elem : A = null.asInstanceOf[A]
-            while (it.hasNext) {
-              elem = it.next
-              if (detector(elem)) {
-                return elem
-              }
-            }
-            return null.asInstanceOf[A]
-        }
-        //def iterator() :java.laIterator[A]={return value.iterator}
-
-        def includesAll(elements : ju.Collection[A]) :Boolean={return containsAll(elements)}
-        
-        
-        def select(selector : A=> scala.Boolean) :java.util.List[A]={
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each(e=> if(selector(e)) {res.add(e)})
-            return res
-
-        }
-        
-        def selectOne(selector : A=>scala.Boolean) : java.util.List[A]={
-        	var res : java.util.List[A] = new java.util.ArrayList[A];
-        	this.each(e=> if(selector(e)) {res.add(e); return res})
-        	return res
-        }
-        
-        //override def size() :Int={return value.length}
-        def each(func : A=> Unit):Unit ={
-            var clone : ju.List[A] = new ju.ArrayList[A]
-            if (value != null){
-                clone.addAll(value)
-                var i : ju.Iterator[A] = clone.iterator; while (i.hasNext){func(i.next)  }
-            }
-        }
-        
-        def indexedEach(func:(A,EachContext)=>Unit):Unit = {
-            var clone : ju.List[A] = new ju.ArrayList[A]
-            if (value != null){
-                clone.addAll(value)
-                var index : Integer = 0
-                var context : EachContext = new EachContext
-                var i : ju.Iterator[A] = clone.iterator
-                while (i.hasNext){
-                  context.initialize(index, index==0, index==size()-1);
-                  func(i.next, context);
-                  index+=1;
-                }
-            }
-        }
-
-        def collect[B](collector : A=> B) :java.util.List[B]={var res = new ju.ArrayList[B](); this.each(e=> res.add(collector(e)))  ; return res  }
-        def elementAt(arg:Int):A={
-            return value.get(arg)
-        }
-        def asSet() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        def asOrderedSet() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        def asBag() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        def asSequence() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        def addUnique(a:A) :Unit = {
-            // println("addUnique " + a + value.size)
-            if (!value.contains(a))
-                value.add(a)
-            //var res : java.util.List[A] = new java.util.ArrayList[A];
-            //this.each{e=> res.add(e)}
-            //return res
-        }
-
-        def addAllUnique(a: ju.Collection[_ <: A]) :Unit = {
-            
-           
-            // create a temporary collection for safe iteration
-            var tempColl : java.util.List[A] = new java.util.ArrayList[A];
-            tempColl.addAll(a)
-            var i : ju.Iterator[A] = tempColl.iterator
-            while (i.hasNext){
-                var element:A  = i.next
-                if (!value.contains(element))
-                    value.add(element)
-            }
-            
-        }
-
-        def addAt(arg:Int,elem : A){
-            value.add(arg, elem)
-        }
-        def removeAt(index:Int){
-            value.remove(value.get(index))
-        }
-
-        def addSafe(e:java.lang.Object) :Boolean= {
-          if (e.isInstanceOf[A])
-            return value.add(e.asInstanceOf[A])
-          else
-            return false;
-        }
-        
-        def add(e:A) :Boolean= {
-            return value.add(e);
-        }
-
-
-        def add(index:Int, element:A) ={
-            value.add(index, element);
-        }
-
-
-        def addAll(c : ju.Collection[_ <: A]):Boolean ={
-
-            return value.addAll(c);
-        }
-
-
-        def addAll(index:Int, c: ju.Collection[_ <: A]):Boolean ={
-            return value.addAll(index, c);
-        }
-
-
-        def clear() ={
-
-            value.clear();
-        }
-
-
-        override def clone():Object = {
-
-            return null;
-        }
-
-
-        def contains( o:Object) :Boolean = {
-            if (value == null)
-                return false
-            else
-                return value.contains(o);
-        }
-
-
-
-
-        def get(index:Int) : A= {
-
-            return value.get(index);
-        }
-
-
-        def indexOf(o: Object):Int= {
-
-            return value.indexOf(o);
-        }
-
-
-        def  isEmpty() :Boolean = {
-
-            return value.isEmpty();
-        }
-
-
-        def lastIndexOf( o:Object):Int= {
-
-            return value.lastIndexOf(o);
-        }
-
-
-        def remove(obj:Int):A= {
-            this.remove(new java.lang.Integer(obj));
-            if(obj.isInstanceOf[A])
-            	return obj.asInstanceOf[A];
-            return null.asInstanceOf[A];
-        }
-
-
-        def remove( o:Object):Boolean= {
-                return value.remove(o);
-        }
-
-
-
-        def  toArray [T](x$1: Array[T with java.lang.Object]) : Array[T with java.lang.Object]={
-        	var result : Array[T with java.lang.Object] = new Array[T with java.lang.Object](value.size())
-        	var i : ju.Iterator[A] = value.iterator()
-        	var index : Integer = 0
-        	while (i.hasNext()) {
-        		var current : A = i.next()
-        		if (current.isInstanceOf[T with java.lang.Object]) {
-        			result(index) = current.asInstanceOf[T with java.lang.Object]
-        			index = index + 1
-        		}
-        	}
-            return result
-        }
-
-        def set(index:Int, element:A):A= {
-
-            return value.set(index, element);
-        }
-
-
-        def size() :Int = {
-
-            return value.size();
-        }
-
-
-        def toArray(): Array[Object] = {
-
-            return value.toArray();
-        }
-
-
-        def listIterator() : 	ju.ListIterator[A] ={
-
-            return value.listIterator();
-        }
-
-
-        def  listIterator( arg0:Int): ju.ListIterator[A]= {
-
-            return value.listIterator(arg0);
-        }
-
-
-        def subList(arg0:Int, arg1:Int) : ju.List[A] = {
-
-            return value.subList(arg0, arg1);
-        }
-
-        override def equals( arg0:Any) :Boolean = {
-
-            return value.equals(arg0);
-        }
-
-
-        override def hashCode() :Int= {
-
-            return value.hashCode();
-        }
-
-
-        def iterator() :ju.Iterator[A]={
-
-            return value.iterator();
-        }
-
-        def containsAll( arg0:ju.Collection[_]) :Boolean ={
-
-            return value.containsAll(arg0);
-        }
-
-
-        def removeAll( arg0 :ju.Collection[_] ) :Boolean= {
-
-            return value.removeAll(arg0);
-        }
-
-
-        def retainAll(arg0 :ju.Collection[_]) :Boolean = {
-
-            return value.retainAll(arg0);
-        }
-
-        override def isVoid() :Boolean= {value == null}
-    }
-
-    class RichKermetaSet[A] ( value : ju.Set[A]) extends RichKermetaCol[A] ( value ) {
-      
-    	/**
-    	 * If the element type is not a collection type, this results in the same self. If the element type is a collection type,
-    	 * the result is the set containing all the elements of all the elements of self.
-    	 * See also OCL function flatten
-    	 */
-    	/* TODO: Is there any way to compare directly two types in Scala, to know if A <: Collection?
-    	 * This would enable to return value without iterating in the case of a collection containing collections and other objects 
-    	 * and would prevent from testing "current.isInstanceOf[ju.Collection[_]]" for each element of value
-    	 */
-    	override def flatten() : ju.Collection[_] = {
-        	var result : ju.Set[Object] = new ju.HashSet[Object]()
-	        var i : ju.Iterator[A] = value.iterator()
-	        while (i.hasNext()) {
-	        	var current : A = i.next()
-	        	if (current.isInstanceOf[ju.Collection[_]]) {
-	        		result.addAll(current.asInstanceOf[ju.Collection[_ <: Object]])
-	        	}
-	        	else {
-	        		return value
-	        	}	        	
-	        }
-        	return result
-        }
-    	
-    	/**
-    	 * Set intersection: The result set contains each elements contained by both value and elements
-    	 */
-    	def intersection(elements : ju.Set[A]) : ju.Set[A] = {
-    		var result : ju.Set[A] = new ju.HashSet[A]()
-    		var i : ju.Iterator[A] = value.iterator()
-    		while (i.hasNext()) {
-    			var elem : A = i.next()
-    			if (elements.contains(elem)) {
-    				result.add(elem)
-    			}
-    		}
-    		return result
-    	}
-    }
-
-    class RichKermetaCol[A] ( value : ju.Collection[A]) {
-	  
-    	/**
-    	 * If the element type is not a collection type, this results in the same self. If the element type is a collection type,
-    	 * the result is the collection containing all the elements of all the elements of self.
-    	 * See also OCL function flatten
-    	 */
-    	/* TODO: Is there any way to compare directly two types in Scala, to know if A <: Collection?
-    	 * This would enable to return value without iterating in the case of a collection containing collections and other objects 
-    	 * and would prevent from testing "current.isInstanceOf[ju.Collection[_]]" for each element of value
-    	 */
-        def flatten() : ju.Collection[_] = {
-        	var result : ju.Collection[Object] = new ju.ArrayList[Object]()
-	        var i : ju.Iterator[A] = value.iterator()
-	        while (i.hasNext()) {
-	        	var current : A = i.next()
-	        	if (current.isInstanceOf[ju.Collection[_]]) {
-	        		result.addAll(current.asInstanceOf[ju.Collection[_ <: Object]])
-	        	}
-	        	else {
-	        		return value
-	        	}	        	
-	        }
-        	return result
-        }
-      
-        /**
-         * Multiset intersection: The result collection references each element "elem" from elements a number of times equals to
-         * the minimum of the multiplicities of "elem" in value and in elements (min 0)
+        /** OCL compatibility:
+         * does the same than containsall
          */
-    	def intersection(elements : ju.Collection[A]) : ju.Collection[A] = {
-    		var result : ju.Collection[A] = new ju.ArrayList[A]()
-    		var tmpSet : ju.Set[A] = new ju.HashSet[A]()
-    		var richElements : RichKermetaCol[A] = new RichKermetaCol[A](elements)
-    		var i : ju.Iterator[A] = value.iterator()
-    		while (i.hasNext()) {
-    			var elem : A = i.next()
-    			if (elements.contains(elem)) {
-    				tmpSet.add(elem)
-    			}
-    		}
-    		i = tmpSet.iterator()
-    		while (i.hasNext()) {
-    			var elem : A = i.next()
-    			var nbElem : Int = Math.min(countElement(elem), richElements.countElement(elem))
-    			val range = 0.until(nbElem)
-    			for (j <- range) {
-    				result.add(elem)
-    			}
-    			
-    		}
-    		return result
-    	}
-    	
-    	
-      
-        def asSequenceType[B]() :java.util.List[B]={
-            var res : java.util.List[B] = new java.util.ArrayList[B];
-            this.each(e=> res.add(e.asInstanceOf[B]))
-            return res
-        }
-        def reject(rejector: A => scala.Boolean) :java.util.List[A]={
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each(e=> if(!rejector(e)) {res.add(e)})
-            return res
-        }
-        def countElement(element : A) :java.lang.Integer={
-            return this.select(e => e.equals(element)).size
-        }
-        def addSafe(e:java.lang.Object) :Boolean= {
-          if (e.isInstanceOf[A])
-            return value.add(e.asInstanceOf[A])
-          else
-            return false;
-        }
+        def includesAll(elts:KermetaCol[A]):Boolean
         
-        def excludes(element : A) :java.lang.Boolean={
-        	return !value.contains(element)
-        }
-        def one() : A={
-
-            if (value.iterator.hasNext)
-                return  value.iterator.next
-            else
-                return null.asInstanceOf[A]
+        def excludes(e:A):Boolean
         
-
-        }
-
-        def containsAll(elts : ju.Collection[A]) :scala.Boolean={
-        	return value.containsAll(elts)
-        }
+        def excludesAll(elts:KermetaCol[A]):Boolean
         
-        def sum() :A={
-        	var i : ju.Iterator[A] = value.iterator
-        	var result : A = i.next
-        	
-        	if (!result.isInstanceOf[Summable[A]]) {
-        		throw new RuntimeException("Collection contains elements which are not summable.")
-        	}
-        	
-        	while (i.hasNext()) {
-        		var current : A = i.next()
-        		if (current.isInstanceOf[Summable[A]]) {
-        			var summableCurrent : Summable[A] = current.asInstanceOf[Summable[A]]
-        			result = result.asInstanceOf[Summable[A]].plus(current)
-        		}
-        		else {
-        			throw new RuntimeException("Collection contains elements which are not summable.")
-        		}
-        	}
-        	return result
-        }
+        def size():Int
         
-        def includes(element : A) :Boolean={
-        	return value.contains(element)
-        }
-
-        def excludesAll(elements : ju.Collection[A]) :Boolean={
-        	var i : ju.Iterator[A] = value.iterator
-        	while (i.hasNext()) {
-        		if (value.contains(i.next)) {
-        			return false
-        		}
-        	}
-        	return true
-        }
-        def isUnique(a : A) :Boolean={return this.countElement(a)==1}
+        def empty():Boolean
         
-        def any() : A={return one()}
-
-        def empty() :Boolean={return value.size==0}
-
-        def forAllCpl(f : (A,A)=>Boolean) :Boolean={
-          this.forAll(
-              {(x : A)=>
-                	{this.forAll(
-                	      {(y : A) => {f(x, y)}}
-                	)}
-              }
-          )
-        }
-        def forAll(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
-        	while (i.hasNext) {
-                if (!f(i.next())) {
-                    return false
-                }
-            }
-        	return true
-        }
-
-        def exists(f : A=>Boolean) :Boolean={
-        	var i : ju.Iterator[A] = value.iterator
-            while (i.hasNext) {
-            	if (f(i.next())) {
-            		return true
-            	}
-            }
-        	return false
-        }
-	
-        def existsCpl(f : (A,A)=>Boolean) :Boolean={
-        	this.exists(
-              {(x : A)=>
-                	{this.exists(
-                	      {(y : A) => {f(x, y)}}
-                	)}
-              }
-        	)
-        }
+        /** OCL compatibility:
+         * does the same than empty
+         */
+        def isEmpty():Boolean
         
-        def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
+        def isNotEmpty():Boolean
         
-        def detect(detector : A=> Boolean) :A={
-            val res = this.select(e=> detector(e))
-            if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
-        }
+        def iterator():ju.Iterator[A]
         
-        //def iterator() :java.laIterator[A]={return value.iterator}
+        def one() : A
         
-        def includesAll(elements : ju.Collection[A]) :Boolean={
-          return containsAll(elements)
-        }
+        def any():A
         
-        def select(selector : A=> scala.Boolean) :java.util.List[A]={
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each(e=> if(selector(e)) {res.add(e)})
-            return res
-        }
-        
-        //override def size() :Int={return value.length}
-        
-        def each(func : A=> Unit):Unit ={
-        	var clone : ju.List[A] = new ju.ArrayList[A]
-        	if (value != null){
-                clone.addAll(value)
-                var i : ju.Iterator[A] = clone.iterator;
-                while (i.hasNext){
-                  func(i.next)
-                }
-            }
-        }
+        /**
+         * each is protected against concurrent modification, 
+         * i.e. it is possible to modify the collection while iterating with each
+         */
+        def each(func : A=> Unit):Unit
   
-        def collect[B](collector : A=> B) :java.util.List[B]={
-        	var res = new ju.ArrayList[B]();
-        	this.each(e=> res.add(collector(e)));
-        	return res
-        }
-        
-        def getMetaClass():String={
-            return this.getClass().toString();
-        }
-        
-        def asSet() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        
-        def asOrderedSet() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        
-        def asBag() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
-        
-        def asSequence() :java.util.List[A] = {
-            var res : java.util.List[A] = new java.util.ArrayList[A];
-            this.each{e=> res.add(e)}
-            return res
-        }
+        /**
+         * indexedEach is not protected against concurrent modification, 
+         * i.e. it is possible to modify the collection while iterating with each
+         */
+        def indexedEach(func:(A,EachContext)=>Unit):Unit
 
-        def isVoid() :Boolean= {this==null}
+        def forAll(f : A=>Boolean) :Boolean
+
+        def forAllCpl(f : (A,A)=>Boolean) :Boolean
+        
+        def exists(func:A=>Boolean):Boolean
+        
+        def existsCpl(f:(A,A)=>Boolean):Boolean 
+        
+        def collect[T](collector:A=>T):KermetaSequence[T]
+
+        def isUnique[T](collector:A=>T):Boolean
+        
+        def detect(detector : A=>Boolean):A
+        
+        def select(selector:A=>Boolean):KermetaSequence[A]
+        
+        def selectOne(selector:A=>Boolean):KermetaSequence[A]
+        
+        def reject(rejector:A=>Boolean):KermetaSequence[A]
+        
+        def count(e:A):Int
+        
+        def sum():A
+        
+    	def asBag() : KermetaBag[A]
+    	
+    	def asSet() : KermetaSet[A]
+        
+        def asSequence() :KermetaSequence[A]
+        
+        def asSequenceType[T](implicit m:Manifest[T]):KermetaSequence[T]
+
+        def asOrderedSet() : KermetaOrderedSet[A]
+        
+        /////////////////////////////////////////////////////////////////////////////////////////
+        // The following methods are not part of the KermetaCol specification,
+        // but are necessary from an EList point of view
+        /////////////////////////////////////////////////////////////////////////////////////////
+        
+        override def add(index:Int,o:A):Unit
+        
+        override def addAll(c:ju.Collection[_<:A]):Boolean
+
+        override def addAll(index:Int,c:ju.Collection[_<:A]):Boolean
+        
+        override def containsAll(c:ju.Collection[_]):Boolean
+        
+        override def get(index:Int):A
+        
+        override def indexOf(o:Object):Int
+        
+        override def lastIndexOf(o:Object):Int
+        
+        override def listIterator():ju.ListIterator[A]
+        
+        override def listIterator(index:Int):ju.ListIterator[A]
+        
+        override def move(newPosition:Int, obj:A):Unit
+
+        override def move(oldPosition:Int,newPosition:Int):A
+        
+        override def remove(o:Object):Boolean
+        
+        override def remove(index:Int):A
+        
+        override def removeAll(c:ju.Collection[_]):Boolean
+        
+        override def retainAll(c:ju.Collection[_]):Boolean
+        
+        override def set(index:Int,o:A):A
+        
+        override def subList(fromIndex:Int,toIndex:Int):ju.List[A]
+        
+        override def toArray():Array[Object]
+        
+        override def toArray[T](a:Array[T with Object]):Array[T with Object]
+        
+        override def hashCode():Int
+        
+        ///////////////////////////////////////////////////////////////////////////////
+        // Optimization methods
+        // Handle with care
+        // Perform NO verification (of unicity for example)
+        ///////////////////////////////////////////////////////////////////////////////
+        
+        def unsafeAdd(e:A):Unit
+        
+        def unsafeAddAll(c:ju.Collection[_<:A]):Unit
     }
     
-    implicit def asBuffer[A](l : ju.List[A]) = new RichKermetaList(l)//l match {
-    implicit def asSet[A](l : ju.Set[A]) = new RichKermetaSet(l)//l match {
-    implicit def asCol[A](l : ju.Collection[A]) = new RichKermetaCol(l)//l match {
-  	
+    trait KermetaSet[A] extends KermetaCol[A] {
+      
+      override def add(e:A):Boolean
+      
+      override def remove(e:A):Unit
+      
+      override def equals(e:KermetaObject):jl.Boolean
+      
+      override def count(e:A):Int
+
+      override def asSet():KermetaSet[A]
+      
+      override def asOrderedSet():KermetaOrderedSet[A]
+
+      def union(elements:KermetaSet[A]):KermetaSet[A]
+      
+      def unionWithBag(elements:KermetaBag[A]):KermetaBag[A]
+      
+      def intersection(elts:KermetaCol[A]):KermetaSet[A]
+      
+      def minus(elements:KermetaSet[A]):KermetaSet[A]
+      
+      def symmetricDifference(s:KermetaSet[A]):KermetaSet[A]
+      
+      def flatten():KermetaSet[Any]
+      
+      def sortedBy(comparator:(A,A)=>Int):KermetaOrderedSet[A]
+      
+    }
+    
+    trait KermetaBag[A] extends KermetaCol[A]{
+      
+      override def equals(e:KermetaObject):jl.Boolean
+      
+      def union(elements:KermetaCol[A]):KermetaBag[A]
+      
+      def intersection(elements:KermetaCol[A]):KermetaBag[A]
+      
+      def intersectionWithSet(elements:KermetaSet[A]):KermetaSet[A]
+      
+      def removeFromOid(elementOid:Int):Unit
+      
+      def removeOne(element:A):Unit
+      
+      def including(element : A):KermetaBag[A]
+      
+      def excluding(element:A):KermetaBag[A]
+      
+      def flatten():KermetaBag[Any]
+      
+      def sortedBy(comparator:(A,A)=>Int):KermetaSequence[A]
+      
+    }
+    
+    trait KermetaOrderedCol[A] extends KermetaCol[A]{
+
+    	def addAt(index:Int,element:A):Unit
+    	
+    	def removeAt(index:Int):Unit
+    	
+    	def elementAt(index:Int):A
+    	
+    	def first():A
+    	
+    	def last():A
+    	
+    	override def equals(o:Any):Boolean
+    	
+    	// hashCode specified by ju.List
+    	override def hashCode():Int
+    	
+    	def index0f(element:A):Int
+
+        def at(index:Int):A
+    }
+    
+    trait KermetaOrderedSet[A] extends KermetaSet[A] with KermetaOrderedCol[A]{
+      
+      override def addAt(index:Int,element:A):Unit
+      
+      def subSet(min:Int,max:Int):KermetaOrderedSet[A]
+      
+      def append(element:A):KermetaOrderedSet[A]
+      
+      def prepend(element:A):KermetaOrderedSet[A]
+      
+      def insertAt(index:Int,element:A):KermetaOrderedSet[A]
+      
+    }
+    
+    trait KermetaSequence[A] extends KermetaBag[A] with KermetaOrderedCol[A]{
+      
+      def subSequence(min:Int,max:Int):KermetaSequence[A]
+      
+      def insertAt(index:Int,element:A):KermetaSequence[A]
+      
+      def append(element:A):KermetaSequence[A]
+      
+      def prepend(element:A):KermetaSequence[A]
+      
+    }
+    
+object JavaConversions {
 }
 
 class EachContext {

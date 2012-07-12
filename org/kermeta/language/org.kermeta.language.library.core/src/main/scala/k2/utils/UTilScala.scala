@@ -200,4 +200,284 @@ def convert(r : EClass):EClass ={
 
 }
 
+/**
+ * A List intended to be returned as a result of java.util.List::subList<br/>
+ */
+class SubList[E](val list:java.util.List[E],var fromIndex:Int,var toIndex:Int) extends java.util.List[E]{
+ // fromIndex is inclusive, and toIndex exclusive
+  
+  import java.{util=>ju}
+  import scala.collection.JavaConversions._
+  
+  if(toIndex>list.size()||fromIndex<0||fromIndex>toIndex)
+    throw new IndexOutOfBoundsException
+    
+  /**
+   * Returns always true, according to java.util.List::add specification
+   */
+  override def add(e:E):Boolean={
+    val oldsize = list.size()
+    list.add(toIndex,e)
+    toIndex+=list.size()-oldsize
+    true
+  }
+  
+  override def add(index:Int,e:E):Unit={
+    if(index<0||index>this.size)
+      throw new IndexOutOfBoundsException
+    val oldsize=list.size
+    list.add(index+fromIndex,e)
+    toIndex+=list.size-oldsize
+  }
+  
+  override def addAll(c:ju.Collection[_<:E]):Boolean={
+    val oldsize=list.size
+    val res=list.addAll(toIndex,c)
+    toIndex+=list.size()-oldsize
+    res
+  }
+  
+  override def addAll(index:Int,c:ju.Collection[_<:E]):Boolean={
+    if(index<0||index>this.size)
+      throw new IndexOutOfBoundsException
+    val oldsize=list.size
+    val res=list.addAll(index+fromIndex,c)
+    toIndex+=list.size-oldsize
+    res
+  }
+  
+  override def clear():Unit={
+    for(_ <- fromIndex until toIndex)
+      list.remove(fromIndex)
+    toIndex=fromIndex
+  }
+  
+  override def contains(o:Object):Boolean={
+    for(i <-fromIndex until toIndex){
+      val obj=list.get(i)
+      if(obj==null && o==null)
+        return true
+      else if(obj.equals(o))
+        return true
+    }
+    false
+  }
+  
+  override def containsAll(c:ju.Collection[_]):Boolean={
+    c.forall(this.contains(_))
+  }
+  
+  override def equals(o:Any):Boolean={
+    o match{
+      case o:ju.List[_] => o.size==this.size() && {
+        var test = true
+    	var i=0
+    	while(test && i<o.size()){
+    	  test = (list.get(fromIndex+i).equals(o.get(i)))
+    	  i+=1
+    	}
+    	test
+      }
+      case _ => false
+    }
+  }
+  
+  override def get(index:Int):E={
+    if(index<0||index>this.size)
+      throw new IndexOutOfBoundsException
+    list.get(fromIndex+index)
+  }
+  
+  override def hashCode():Int={
+    (fromIndex until toIndex).foldLeft(1){(acc,index) =>
+      val obj=list.get(index)
+      31*acc+{if(obj==null) 0 else obj.hashCode()}
+    }
+  }
+  
+  override def indexOf(o:Object):Int={
+    for(i <- fromIndex until toIndex){
+      val obj=list.get(i)
+      if((obj==null && o==null) || obj.equals(o))
+        return i-fromIndex
+    }
+    -1
+  }
+  
+  override def isEmpty():Boolean={
+    toIndex==fromIndex
+  }
+  
+  override def iterator():ju.Iterator[E]={
+    new ListIterator[E](this)
+  }
+  
+  override def lastIndexOf(o:Object):Int={
+    for(i <- (toIndex-1) to fromIndex){
+      val obj=list.get(i)
+      if((obj==null && o==null) || obj.equals(o))
+        return i-fromIndex
+    }
+    -1
+  }
+  
+  override def listIterator():ju.ListIterator[E]={
+    new ListIterator[E](this)
+  }
+  
+  override def listIterator(index:Int):ju.ListIterator[E]={
+    if(index<0||index>this.size)
+      throw new IndexOutOfBoundsException
+    new ListIterator[E](this,index)
+  }
+  
+  override def remove(index:Int):E={
+    if(index<0||index>this.size)
+      throw new IndexOutOfBoundsException
+    val res=list.remove(fromIndex+index)
+    toIndex-=1
+    res
+  }
+  
+  override def remove(o:Object):Boolean={
+	for(i <-fromIndex until toIndex){
+	  val obj=list.get(i)
+	  if((obj==null && o==null) || obj.equals(o)){
+	    list.remove(i)
+	    toIndex-=1
+	    return true
+	  }
+	}
+	false
+  }
+  
+  override def removeAll(c:ju.Collection[_]):Boolean={
+    val oldsize=list.size
+    c.foreach(o=>this.remove(o.asInstanceOf[Object]))
+    list.size!=oldsize
+  }
+  
+  override def retainAll(c:ju.Collection[_]):Boolean={
+    val oldsize=list.size
+    val i=list.listIterator(fromIndex)
+    while(i.hasNext && i.nextIndex()<toIndex){
+      if(!c.contains(i.next))
+        i.remove()
+    }
+    toIndex+=list.size()-oldsize
+    list.size()!=oldsize
+  }
+  
+  override def set(index:Int,element:E):E={
+    if(index<0||index>this.size())
+      throw new IndexOutOfBoundsException
+    list.set(fromIndex+index,element)
+  }
+  
+  override def size():Int={
+    toIndex-fromIndex
+  }
+  
+  override def subList(fromIndex:Int,toIndex:Int):ju.List[E]={
+    new SubList[E](this,fromIndex,toIndex)
+  }
+  
+  override def toArray():Array[Object]={
+    val res:Array[Object]=new Array[Object](this.size)
+    for(i<-fromIndex until toIndex)
+      res.update(i,list.get(i).asInstanceOf[Object])
+    res
+  }
+  
+  override def toArray[T](a:Array[T with Object])={
+    for(i<-fromIndex until toIndex){
+      if(!list.get(i).isInstanceOf[T with Object])
+        throw new ArrayStoreException
+    }
+    val res={
+      if(a.length < this.size()){
+        a(this.size)=null.asInstanceOf[T with Object]
+        a
+      } else if (a.length==this.size)
+        a
+      else
+        new Array[T with Object](this.size)
+    }
+    for(i<-0 until this.size)
+      res(i)=list.get(fromIndex+i).asInstanceOf[T with Object]
+    res
+  }
+  
+}
+
+/**
+ * A simple list iterator
+ */
+class ListIterator[E](list:java.util.List[E]) extends java.util.ListIterator[E]{
+  import java.{util=>ju}
+  
+  var cursor:Int=0
+  var last:Option[Int]=None
+  
+  def this(list:java.util.List[E],index:Int)={
+    this(list)
+    if(index<0||index>list.size)
+      throw new IndexOutOfBoundsException
+    cursor=index
+  }
+  
+  override def add(e:E):Unit={
+    list.add(cursor,e)
+    cursor+=1
+    last=None
+  }
+  
+  override def hasNext():Boolean={
+    cursor<list.size()
+  }
+  
+  override def hasPrevious():Boolean={
+    cursor > -1
+  }
+  
+  override def next():E={
+    if(cursor==list.size)
+      throw new ju.NoSuchElementException
+    last=Some(cursor)
+    cursor+=1
+    list.get(cursor-1)
+  }
+  
+  override def nextIndex():Int={
+    cursor
+  }
+  
+  override def previous():E={
+    if(cursor==0)
+      throw new ju.NoSuchElementException
+    cursor-=1
+    last=Some(cursor)
+    list.get(cursor)
+  }
+  
+  override def previousIndex():Int={
+    cursor-1
+  }
+  
+  override def remove():Unit={
+    last match{
+      case Some(index)=>list.remove(index)
+      case None => throw new IllegalStateException
+    }
+    last=None
+  }
+  
+  override def set(e:E):Unit={
+    last match{
+      case Some(index)=>list.set(index,e)
+      case None => throw new IllegalStateException
+    }
+  }
+}
+
 

@@ -26,62 +26,15 @@ package standard{
  * TODO : miss operations 
  */
 @CompilerIgnore "true"
-abstract class Map<K,V> 
+abstract class Map[K,V] 
 {
 }
 /**
  * Collection is the root abstract class for all kermeta collections
  */
 @CompilerIgnore "true"
-abstract class Collection<G> 
+abstract class Collection[G] 
 {
-	/**
-	 * Returns a new Bag built from the Collection
-	 */
-	operation asBag() : Bag<G> is abstract
-	
-	/**
-	 * Returns a new Set built from the Collection
-	 */
-	operation asSet() : Set<G> is abstract
-	
-	/**
-	 * Returns a new Sequence built from the Collection and filtering only the elements of type Y
-	 * This is a more efficient version of 
-	 * e.select{ elem | elem.isInstanceOf(Y) }.collect{elem | elem.asType(Y) }
-	 */
-	operation asSequenceType<Y>() : Sequence<Y> is do 
-		
-	end
-
-	/**
-	 * Returns a new OrderedSet built from the Collection
-	 */
-	operation asOrderedSet() : OrderedSet<G> is abstract
-
-	/**
-	 * Returns a new Sequence built from the Collection
-	 */
-	operation asSequence() : Sequence<G> is abstract
-	
-	/**
-	 * Combinaison of ForAll on two elements in the collection 
-	 * result := self.forAll{x | self.forAll {y | f(x,y)}}
-	 * (where x and y are 2 elements of the Collection)
-	 * typical use sample : ownedState.forAll{s1,s2| (s1.name==s2.name)implies(s1==s2)}
-	 */
-	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
-
-	end 
-
-	/**
-	 * Combinaison of exists on two elements in the collection
-	 * => result := self.exists{x | self.exists {y | f(x,y)}}
-	 */
-	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
-
-	end 
-	
 	/**
 	 * Adds an element in the Collection (default implementation)
 	 */
@@ -114,8 +67,9 @@ abstract class Collection<G>
 	
 	/**
 	 * Adds all elements from the Collection elements in the current Collection
+	 * Standard implementation relies on Collection[G].add(G)
 	 */
-	operation addAll(elements : Collection<G>) : Void is do
+	operation addAll[T:G](elements : Collection[T]) : Void is do
 
 
 	end
@@ -132,8 +86,9 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * OCL API alignment, doeas the same as contains
+	 * OCL API alignment, does the same as contains
 	 * See Collection<G>.contains(Object)
+	 * Standard implementation relies on Collection[G].contains(G)
 	 */
 	operation includes(element :G): Boolean is do
 
@@ -141,18 +96,21 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Returns true if current Collection contains all elements of Collection elements
-	 * See Collection<G>.contains(Object)
+	 * Returns true if current Collection contains at least one instance 
+	 * of each element of Collection elements
+	 * See Collection[G].contains(G)
+	 * Standard implementation relies on Collection[G].contains(G)
 	 */
-	operation containsAll(elements : Collection<G>) : Boolean is do
+	operation containsAll(elements : Collection[G]) : Boolean is do
 
 	end
 	
 	/**
 	 * OCL API alignment, does the same as containsAll
-	 * See Collection<G>.containsAll(Collection<G>)
+	 * See Collection<G>.containsAll(Collection[G])
+	 * Standard implementation relies on containsAll
 	 */
-	operation includesAll(elements : Collection<G>) : Boolean is do
+	operation includesAll(elements : Collection[G]) : Boolean is do
 
 	end
 	
@@ -165,8 +123,9 @@ abstract class Collection<G>
 	
 	/**
 	 * Returns true if the Collection contains no element of Collection elements
+	 * Standard implementation relies on excludes
 	 */
-	operation excludesAll(elements : Collection<G>) : Boolean is do
+	operation excludesAll(elements : Collection[G]) : Boolean is do
 
 	end
 	
@@ -186,7 +145,8 @@ abstract class Collection<G>
 	
 	/**
 	 * OCL alignment API, does the same as empty
-	 * See Collection<G>.empty()
+	 * See Collection[G].empty()
+	 * Standard implementation relies on Collection[G].empty())
 	 */
 	operation isEmpty() : Boolean is do
 
@@ -196,7 +156,8 @@ abstract class Collection<G>
 	 * OCL alignment API
 	 * Returns a Boolean stating whether the Collection contains at least
 	 * one element 
-	 * See also Collection<G>.contains(Object)
+	 * See also Collection[G].empty()
+	 * Standard implementation relies on Collection[G].empty()
 	 */
 	operation isNotEmpty() : Boolean is do
 
@@ -205,7 +166,7 @@ abstract class Collection<G>
 	/**
 	 * Returns an Iterator on the Collection
 	 */
-	operation iterator() : Iterator<G> is do
+	operation iterator() : Iterator[G] is do
 
 	end
 	
@@ -225,8 +186,11 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Runs function func on each element of the Collection
-	 * example : 
+	 * Runs function func on each element of the Collection.
+	 * Each is safe against concurrent modifications: even if the collection is modified by the function func,
+	 * the iteration will procede on the original collection safely.
+	 * 
+	 * Example : 
 	 * aCollection.each { e | \/* do something with each element e of this collection *\/ }
 	 */
 	operation each(func : <G -> Object>) : Void is do
@@ -234,14 +198,21 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Runs function func on each element of the Collection
-	 * the eachContext contains some information about the each process that can be used in the function, 
-	 *  for example the index represents the rank in the collection, start on 0
-	 *  or boolean to indicates weither we are processing the first and/or the last element of the collection
-	 *  note that this rank is relative to the processing order. this processing order is ensured only for sequence and ordered set
+	 * Runs function func on each element of the Collection.
+	 * The EachContext variable contains informations about the process that can be used in the function func.
+	 * The iteration order is guaranteed only for ordered collections.
+	 * IndexedEach is safe against concurrent modifications: even if the collection is modified by the lambda func,
+	 * the iteration will procede on the original collection safely.
 	 *
-	 * example : 
-	 * aCollection.indexedEach { e, eachContext | \/* do something with each element e of this collection *\/ }
+	 * Typical use:  
+	 * aCollection.indexedEach { e, eachContext | 
+	 *	stdio.write("element "+ eachContext.index.toString + ": " + e.toString)
+	 *  if(!eachContext.isLast) then stdio.writeln(",") end 
+	 * }
+	 * This example prints every element of the collection with its rank and adds a comma at the end of the line
+	 * only if it is relevant.
+	 *
+	 * See also EachContext.
 	 */
 	operation indexedEach(func : <[G , EachContext] -> Object>) : Void is do
 
@@ -257,6 +228,16 @@ abstract class Collection<G>
 
 	end
      
+	/**
+	 * Combinaison of ForAll on two elements in the collection 
+	 * result := self.forAll{x | self.forAll {y | f(x,y)}}
+	 * (where x and y are 2 elements of the Collection)
+	 * typical use sample : ownedState.forAllCpl{s1,s2| (s1.name==s2.name).implies(s1==s2)}
+	 */
+	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
+
+	end 
+
     /**
 	 * Returns a Boolean stating whether at least one element of the Collection
 	 * validates the condition specified by function func
@@ -268,29 +249,37 @@ abstract class Collection<G>
 	end
 	
 	/**
+	 * Combinaison of exists on two elements in the collection
+	 * result := self.exists{x | self.exists {y | f(x,y)}}
+	 */
+	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
+
+	end 
+
+	/**
 	 * Returns a new Sequence which content corresponds to the result
 	 * of running the collector function for each element of the Collection
 	 * The new collection size is the same as in the original collection, and which element types is the type of the result of the expression.
 	 * example :
 	 * aCollection2 := aCollection.collect { e | \/* put here an expression, for example e.name *\/ } 
 	 */
-	operation collect<T> (collector : <G -> T>) : Sequence<T> is do
+	operation collect[T] (collector : <G -> T>) : Sequence<T> is do
 	
 	end
 	
 	/**
-	 * Returns a Boolean stating whether the the collector function evaluates to a
+	 * Returns a Boolean stating whether the collector function evaluates to a
 	 * different value for each element of the Collection
 	 * example :
 	 * aCollection2 := aCollection.isUnique { e | \/* put here an expression that must be unique for all elements, for example e.name *\/ }
 	 */
-	operation isUnique<T> (collector : <G -> T>) : Boolean is do
+	operation isUnique[T] (collector : <G -> T>) : Boolean is do
 	
 	end
 	
 	/**
 	 * Returns an element of the Collection (usually the first) for which the detector function
-	 * is not false
+	 * is true
 	 * Returns void if no elements is validated by the detector function
 	 * example : 
 	 * anObject := aCollection.detect { e | \/* a condition *\/} // returns an element that fulfill the condition.
@@ -307,7 +296,7 @@ abstract class Collection<G>
      *    \/* put here a condition that returns true for elements that must  be included in the resulting Collection *\/
 	 * }
 	 */
-	operation select(selector : <G -> Boolean>) : Sequence<G>  is do
+	operation select(selector : <G -> Boolean>) : Sequence[G]  is do
 
 	end
 	
@@ -320,7 +309,7 @@ abstract class Collection<G>
      *    \/* put here a condition that returns true for the element that must  be included in the resulting Collection *\/
 	 * }
  	 */
- 	operation selectOne(selector : <G -> Boolean>) : Sequence<G>  is do
+ 	operation selectOne(selector : <G -> Boolean>) : Sequence[G]  is do
  	
  	end
 	
@@ -332,7 +321,7 @@ abstract class Collection<G>
      *     \/* put here a condition that returns true for elements that must  be exclude in the resulting Collection *\/
      * }
 	 */
-	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
+	operation reject(rejector : <G -> Boolean>) : Sequence[G]  is do
 
 	end
 	
@@ -344,56 +333,96 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)
+	 * Sum the elements of the collection if they are summable (ie implement '+' operator by inheriting of the class Summable)
 	 */
 	operation sum(): G is do
 
 	end
-}
-
-/**
- * context used in the indexedEach of Collection
- */
-@CompilerIgnore "true"
-class EachContext {
-	attribute index : Integer
-	attribute isFirst : Boolean
-	attribute isLast : Boolean
-	operation initialize(i : Integer, first : Boolean, last : Boolean) : EachContext is do
+		
+	/**
+	 * Returns a new Bag built from the Collection
+	 */
+	operation asBag() : Bag[G] is do
 
 	end
+	
+	/**
+	 * Returns a new Set built from the Collection
+	 */
+	operation asSet() : Set[G] is do
+
+	end
+	
+	/**
+	 * Returns a new Sequence built from the Collection and filtering only the elements of type Y
+	 * This is a more efficient version of 
+	 * e.select{ elem | elem.isInstanceOf(Y) }.collect{elem | elem.asType(Y) }
+	 */
+	operation asSequenceType[Y]() : Sequence[Y] is do 
+		
+	end
+
+	/**
+	 * Returns a new OrderedSet built from the Collection
+	 */
+	operation asOrderedSet() : OrderedSet[G] is do
+
+	end
+
+	/**
+	 * Returns a new Sequence built from the Collection
+	 */
+	operation asSequence() : Sequence[G] is do
+
+	end
+	
 }
+
 
 /**
  * A Set is a non-ordered collection that contains distinct elements
  * (with regards to the G.equals(Object) operation)
  */
 @CompilerIgnore "true"
-class Set<G> inherits Collection<G>
+class Set[G] inherits Collection[G]
 {
 	/**
-	 * Overrides Collection<G>.add(G)
-	 * Adds elt to the Set if it is not already contained by the
+	 * Overrides Collection[G].add(G)
+	 * Adds element to the Set if it is not already contained by the
 	 * Set, does nothing otherwise
 	 */
-	method add(element : G) : Void is do
+	operation add(element : G) : Void is do
 
 	end
 
 	/**
-	 * Overrides Collection<G>.remove(G)
+	 * Overrides Collection[G].remove(G)
 	 * Removes the element from the Set if it is contained by the Set
 	 */
-	method remove(element : G) : Void is do
+	operation remove(element : G) : Void is do
 
 	end
 
 	/**
 	 * Overrides Object.equals(Object)
 	 * Returns a Boolean stating whether the provided element is equal to
-	 * current Set
+	 * the current Set
+	 * The provided element is equal to the current Set if:<ul>
+	 * <li> it is not an OrderedColllection</li>
+	 * <li> it is a Collection (not necessarily a Set)</li>
+	 * <li> it contains exactly the same elements than the current Set, 
+	 *    with the same multiplicity</li>
+	 * </ul>
 	 */
-	method equals(element : Object) : Boolean is do
+	operation equals(element : Object) : Boolean is do
+
+	end
+	
+	/**
+	 * Overrides Collection[G].count(G)
+	 * Returns the number of instances of element in the Set
+	 */
+	operation count(element : G) : Integer is do
 
 	end
 	
@@ -401,7 +430,7 @@ class Set<G> inherits Collection<G>
 	 * Returns a new Set corresponding to the union of the Set elements
 	 * with the current Set
 	 */
-	operation union(elements : Set<G>) : Set<G> is do
+	operation union(elements : Set[G]) : Set[G] is do
 
 	end
 	
@@ -409,7 +438,7 @@ class Set<G> inherits Collection<G>
 	 * Returns a new Bag corresponding to the union of the Bag elements
 	 * with the current Set
 	 */
-	operation unionWithBag(elements : Bag<G>) : Bag<G> is do
+	operation unionWithBag(elements : Bag[G]) : Bag[G] is do
 
 	end
 	
@@ -417,7 +446,7 @@ class Set<G> inherits Collection<G>
 	 * Returns a new Set corresponding to the intersection of the Set elements
 	 * with the current Set
 	 */
-	operation intersection(elements : Collection<G>) : Set<G> is do
+	operation intersection(elements : Collection[G]) : Set[G] is do
 
 	end
 	
@@ -426,48 +455,34 @@ class Set<G> inherits Collection<G>
 	 * current Set and the Set elements, ie all elements contained by 
 	 * the current Set that do not appear in the elements Set 
 	 */
-	operation minus(elements : Set<G>) : Set<G> is do
+	operation minus(elements : Set[G]) : Set[G] is do
 
 	end
 	
 	/**
-	 * Overrides Collection<G>.asSet()
+	 * Overrides Collection[G].asSet()
 	 * Returns a new Set composed of all elements of current Set
+	 * More efficient version of Set[G].new.addAll(self)
 	 */
-	method asSet() : Set<G> is do
+	operation asSet() : Set[G] is do
 
 	end
 	
 	/**
-	 * Overrides Collection<G>.asOrderedSet()
+	 * Overrides Collection[G].asOrderedSet()
 	 * Returns a new OrderedSet that contains all elements of current Set
+	 * More efficient version of OrderedSet[G].new.addAll(self)
 	 */
-	method asOrderedSet() : OrderedSet<G> is do
+	operation asOrderedSet() : OrderedSet[G] is do
 
 	end
 
-	/**
-	 * Overrides Collection<G>.asBag()
-	 * Returns a new Bag composed of all elements of current Set
-	 */
-	method asBag() : Bag<G> is do
-
-	end
-
-	/**
-	 * Overrides Collection<G>.asSequence()
-	 * Returns a new Sequence composed of all elements of current Set
-	 */
-	method asSequence() : Sequence<G> is do
-
-	end
-	
 	/**
 	 * Returns a new Set which contents corresponds to the symmetric
 	 * difference between current Set and Set s, ie all elements of
 	 * each Set that do not appear in the other one
 	 */
-	operation symmetricDifference(s : Set<G>) : Set<G> is do
+	operation symmetricDifference(s : Set[G]) : Set[G] is do
 
 	end
 	
@@ -477,56 +492,19 @@ class Set<G> inherits Collection<G>
 	 * Set, as many elements as the Collection contains
 	 * Duplicates are removed
 	 */
-	operation flatten() : Set<Object> is do
+	operation flatten() : Set[Object] is do
 
 	end
 	
 	/**
-	 * Returns a ordered set of the bag elements sorted using the given comparator.
-	 * The comparator must return :<ul>
-	 *   <li>+1 if the second <G> element is greater than the first</li> 
-	 *   <li>0 if the second <G> element equals the first</li> 
-	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 * Returns an ordered set of the set elements sorted using the given comparator.
+	 * The comparator must return an integer n such that<ul>
+	 *   <li>n &gt; 0 if the second [G] element is greater than the first</li> 
+	 *   <li>n == 0 if the second [G] element equals the first</li> 
+	 *   <li>n &lt; 0 if the second [G] element is lower than the first</li>
+	 * </ul>
 	 */
-	/*operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet<G>  is do
-		result := quickSort(self.asOrderedSet, comparator) 
-	end*/
-	
-	/**
-	 * Recursive sort of the given (ordered) set using the given comparator.
-	 * The comparator must return :<ul>
-	 *   <li>+1 if the second <G> element is greater than the first</li> 
-	 *   <li>0 if the second <G> element equals the first</li> 
-	 *   <li>-1 if the second <G> element is lower than the first</li> 
-	 */
-	/*operation quickSort(q :OrderedSet<G>, comparator : <[G, G] -> Integer>) : OrderedSet<G> is do
-		 var less : OrderedSet<G> init OrderedSet<G>.new
-		 var pivotList : OrderedSet<G> init OrderedSet<G>.new
-		 var greater : OrderedSet<G> init OrderedSet<G>.new
-		   
-	     if (q.size <= 1) then   
-   		  	result := q
-	     else
-    	 	var pivot : G init q.one
-     		q.each{x| 
-     			if (comparator(x,pivot) == 1) then
-     		 		less.add(x)
-     		 	end
-     	 		if (comparator(x,pivot) == 0) then
-     	 			pivotList.add(x)
-	     	 	end
-   		  	 	if (comparator(x,pivot) == -1) then
-     		 		greater.add(x)
-     	 		end
-     	 	}
-	       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
-		end	
-	end*/
-	
-	/**
-	 * Internal concatenation tool for recursive 'quickSort()' method
-	 */
-	operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>): OrderedSet<G> is do
+	operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet[G]  is do
 
 	end
 }
@@ -536,14 +514,20 @@ class Set<G> inherits Collection<G>
  * Bag is a concrete non-ordered Collection allowing duplicates
  */
 @CompilerIgnore "true"
-class Bag<G> inherits Collection<G>
+class Bag[G] inherits Collection[G]
 {
 	/**
 	 * Overrides Object.equals(elt : Object)
 	 * Returns a Boolean stating whether the provided element is equal to
-	 * current Bag
+	 * current Bag.
+	 * The provided element is equal to the current Bag if:<ul>
+	 * <li> it is not an OrderedCollection</li>
+	 * <li> it is a Collection (not necessarily a Bag) </li>
+	 * <li> it contains exactly the same elements than the current Bag,
+	 *   with the same multiplicity</li>
+	 * </ul>
 	 */
-	method equals(element : Object) : Boolean is do
+	operation equals(element : Object) : Boolean is do
 
 	end
 
@@ -551,7 +535,7 @@ class Bag<G> inherits Collection<G>
 	 * Returns a new Bag corresponding to the union of elements and
 	 * current Bag
 	 */
-	operation union(elements : Collection<G>) : Bag<G> is do
+	operation union(elements : Collection[G]) : Bag[G] is do
 
 	end
 	
@@ -559,7 +543,7 @@ class Bag<G> inherits Collection<G>
 	 * Returns a new Bag corresponding to the intersection of elements
 	 * and the Bag
 	 */
-	operation intersection(elements : Bag<G>) : Bag<G> is do
+	operation intersection(elements : Collection[G]) : Bag[G] is do
 
 	end
 	
@@ -567,7 +551,7 @@ class Bag<G> inherits Collection<G>
 	 * Returns a new Set corresponding to the intersection of a Set of
 	 * elements and the Bag
 	 */
-	operation intersectionWithSet(elements : Set<G>) : Set<G> is do
+	operation intersectionWithSet(elements : Set[G]) : Set[G] is do
 
 	end
 	
@@ -587,42 +571,10 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	 * Overrides Collection<G>.asSet()
-	 * Returns a new Set containing elements of the Bag without duplicates
-	 */
-	method asSet() : Set<G> is do
-
-	end
-	
-	/**
-	 * Overrides Collection<G>.asOrderedSet()
-	 * Returns a new OrderedSet containing elements of the Bag without duplicates
-	 */
-	method asOrderedSet() : OrderedSet<G> is do
-
-	end
-
-	/**
-	 * Overrides Collection<G>.asBag()
-	 * Returns a new Bag containing all elements of current Bag	
-	 */
-	method asBag() : Bag<G> is do
-
-	end
-
-	/**
-	 * Overrides Collection<G>.asSequence()
-	 * Returns a new Sequence containing all elements of current Bag
-	 */
-	method asSequence() : Sequence<G> is do
-
-	end
-	
-	/**
 	 * Returns a new Bag which content includes the content of the
 	 * current Bag and the element object
 	 */
-	operation including(object :G) : Bag<G> is do
+	operation including(object :G) : Bag[G] is do
 
 	end
 
@@ -631,7 +583,7 @@ class Bag<G> inherits Collection<G>
 	 * current Bag from which all instances of object have been
 	 * removed
  	 */
-	operation excluding(object :G) : Bag<G> is do
+	operation excluding(object :G) : Bag[G] is do
 
 	end
 	
@@ -640,58 +592,22 @@ class Bag<G> inherits Collection<G>
 	 * of the current Set, and, for each Collection element of the current
 	 * Bag, as many elements as the Collection contains
 	 */
-	operation flatten() : Bag<Object> is do
+	operation flatten() : Bag[Object] is do
 
 	end
 	
 	/**
 	 * Returns a sequence of the bag elements sorted using the given comparator.
-	 * The comparator must return :<ul>
-	 *   <li>+1 if the second <G> element is greater than the first</li> 
-	 *   <li>0 if the second <G> element equals the first</li> 
-	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 * The comparator must return an integer n such that<ul>
+	 *   <li>n &gt; 0 if the second [G] element is greater than the first</li> 
+	 *   <li>n == 0 if the second [G] element equals the first</li> 
+	 *   <li>n &lt; 0 if the second [G] element is lower than the first</li>
+	 * </ul>
 	 */
-	/*operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence<G>  is do
-		result := quickSort(self.asSequence, comparator) 
-	end*/
-	
-	/**
-	 * Recursive sort of the given sequence using the given comparator.
-	 * The comparator must return :<ul>
-	 *   <li>+1 if the second <G> element is greater than the first</li> 
-	 *   <li>0 if the second <G> element equals the first</li> 
-	 *   <li>-1 if the second <G> element is lower than the first</li> 
-	 */
-	/*operation quickSort(q :Sequence<G>, comparator : <[G, G] -> Integer>) : Sequence<G> is do
-		 var less : Sequence<G> init Sequence<G>.new
-		 var pivotList : Sequence<G> init Sequence<G>.new
-		 var greater : Sequence<G> init Sequence<G>.new
-		 
-	    if (q.size <= 1) then   
-   		 	result := q
-	    else
-			var pivot : G init q.one
-	     	q.each{x| 
-    	 		if (comparator(x,pivot) == 1) then
-     		 		less.add(x)
-     	 		end
-	     	 	if (comparator(x,pivot) == 0) then
-    	 	 		pivotList.add(x)
-     		 	end
-	     	 	if (comparator(x,pivot) == -1) then
-     	 			greater.add(x)
-    	 	 	end
-			}
-			result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
-		end	
-	end*/
-	
-	/**
-	 * Internal concatenation tool for recursive 'quickSort()' method
-	 */
-	operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>): Sequence<G> is do
+	operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence[G]  is do
 
 	end
+	
 }
 
 
@@ -699,7 +615,7 @@ class Bag<G> inherits Collection<G>
  * An OrderedCollection is the root abstract class for all ordered Collections.
  */
 @CompilerIgnore "true"
-abstract class OrderedCollection<G> inherits Collection<G> {
+abstract class OrderedCollection[G] inherits Collection[G] {
 	
 	/**
 	 * Adds element in the OrderedCollection at rank index
@@ -749,16 +665,24 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current OrderedCollection
 	 */
-	method equals(element : Object) : Boolean is do
+	operation equals(element : Object) : Boolean is do
 
 	end
 	
 	/** 
 	 * Returns the index of the first instance of element in the OrderedCollection
 	 * or -1 if the element is not contained by the OrderedCollection
-	 * Raises an EmptyCollection exception if the OrderedCollection is empty
 	 */
 	operation indexOf(element : G) : Integer is do
+
+	end
+
+	/**
+	 * Returns element at rank index in the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+	operation at(index : Integer) : G is do
 
 	end
 }
@@ -768,84 +692,64 @@ abstract class OrderedCollection<G> inherits Collection<G> {
  * An OrderedSet is a Set that contained ordered distinct elements
  */
 @CompilerIgnore "true"
-class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
+class OrderedSet[G] inherits Set[G], OrderedCollection[G]
 {
-	/**
-	 * See Set<G>.add(G)
-	 */
-	method add(element : G) from Set<G> is do
-
-	end
-
 	/**
 	 * Overrides OrderedCollection<G>.addAt(Integer, G)
 	 * Adds element in the OrderedSet at rank index if the ordered set does
 	 * not already contain the element, does nothing otherwise
 	 */
-	method addAt(index : Integer, element : G) : Void is do
+	operation addAt(index : Integer, element : G) : Void is do
 
 	end
 	
 	/**
 	 * See OrderedCollection<G>.equals(Object) 
 	 */
-	method equals(element : Object) : Boolean from OrderedCollection<G> is do
+	operation equals(element : Object) : Boolean from OrderedCollection[G] is do
 
 	end
 	
 	/**
 	 * Builds and returns a new OrderedSet composed of elements of current ordered
-	 * set from rank min to rank max (order is respected)
+	 * set from rank min (included) to rank max (excluded).
+	 * The order is preserved.
 	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
 	 * the size of the ordered set or min is larger than max
 	 */
-	operation subSet(min : Integer, max : Integer) : OrderedSet<G> is do
+	operation subSet(min : Integer, max : Integer) : OrderedSet[G] is do
 
 	end
 
 	/**
 	 * Builds and returns a new OrderedSet from current one with element
-	 * inserted in head
+	 * inserted in tail if not already present, otherwise returns 
+	 * a copy of the current OrderedSet
 	 */
-	operation append(element : G ) : OrderedSet<G> is do
+	operation append(element : G ) : OrderedSet[G] is do
 
 	end
 	
 	/**
 	 * Builds and returns a new OrderedSet from current one with element
-	 * inserted in tail
+	 * inserted in head if not already present, otherwise returns 
+	 * a copy of the current OrderedSet
 	 */
-	operation preppend(element : G ) : OrderedSet<G> is do
+	operation prepend(element : G ) : OrderedSet[G] is do
 
 	end
 	
 	/**
 	 * Builds and returns a new OrderedSet from current one with element
-	 * inserted at rank index
-	 */
-	operation insertAt(index : Integer, subject : G ) : OrderedSet<G> is do
-
-	end
-	
-	/*
-	operation subOrderedSet(lower : Integer, upper : Integer ) : OrderedSet<G> is do
-		result := OrderedSet<G>.new
-		
-		from var i : Integer init lower until i<= upper
-		loop
-			result.add(self.at(i))
-		end
-	end
-	*/
-
-	/**
-	 * Returns element at rank index in the sequence
+	 * inserted at rank index if it not already present, otherwise returns 
+	 * a copy of the current OrderedSet
 	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
 	 * larger than the size of the OrderedSet
 	 */
-	operation at(index : Integer) : G is do
+	operation insertAt(index : Integer, subject : G ) : OrderedSet[G] is do
 
 	end
+	
 }
 
 
@@ -853,32 +757,35 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
  * A Sequence is an OrderedCollection of elements allowing duplicates
  */
 @CompilerIgnore "true"
-class Sequence<G> inherits Bag<G>, OrderedCollection<G>
+class Sequence[G] inherits Bag[G], OrderedCollection[G]
 {
 	/**
-	 * Overrides OrderedCollection<G>.equals(Object)
+	 * Overrides OrderedCollection[G].equals(Object)
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current Sequence	
 	 */
-	method equals(element : Object) : Boolean from OrderedCollection<G> is do
+	operation equals(element : Object) : Boolean from OrderedCollection[G] is do
 
 	end
 	
 	/**
 	 * Builds and returns a new Sequence composed of elements of current sequence
-	 * from rank min to rank max (order is respected)
+	 * from rank min (included) to rank max (excluded). 
+	 * The order is respected.
 	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
 	 * the size of the sequence or min is larger than max
 	 */
-	operation subSequence(min : Integer, max : Integer) : Sequence<G> is do
+	operation subSequence(min : Integer, max : Integer) : Sequence[G] is do
 
 	end
 	
 	/**
 	 * Builds and returns a new Sequence from current one with element
-	 * inserted in head
-	 */
-	operation append(element : G ) : Sequence<G> is do
+	 * inserted at rank index
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedSet
+	 */	
+	operation insertAt(index : Integer, element : G) : Sequence[G] is do
 
 	end
 	
@@ -886,24 +793,15 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 	 * Builds and returns a new Sequence from current one with element
 	 * inserted in tail
 	 */
-	operation preppend(element : G ) : Sequence<G> is do
-
-	end
-
-	/**
-	 * Builds and returns a new Sequence from current one with element
-	 * inserted at rank index
-	 */	
-	operation insertAt(index : Integer, element : G) : Sequence<G> is do
+	operation append(element : G ) : Sequence[G] is do
 
 	end
 	
 	/**
-	 * Returns element at rank index in the sequence
-	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
-	 * larger than the size of the Sequence
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in head
 	 */
-	operation at(index : Integer) : G is do
+	operation prepend(element : G ) : Sequence[G] is do
 
 	end
 }
@@ -911,7 +809,7 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 
 /**
  * Iterator to be used with Collection
- * See also Collection<G>.getIterator()
+ * See also Collection<G>.iterator()
  */
 @CompilerIgnore "true"
 class Iterator<G>
@@ -939,6 +837,24 @@ class Iterator<G>
 	 */
 	operation next() : G is do
 
+
+	end
+}
+
+/**
+ * Contains informations about the iteration process in an indexedEach. 
+ * The index attribute gives the number of element iterated over so far, starting with 0.
+ * The isFirst and isLast attributes say if the currently iterated element is the first or the last.
+ * The initialize operation is used by indexedEach and shouldn't be used generally speaking.
+ * 
+ * See also Collection[G].indexedEach
+ */
+@CompilerIgnore "true"
+class EachContext {
+	attribute index : Integer
+	attribute isFirst : Boolean
+	attribute isLast : Boolean
+	operation initialize(i : Integer, first : Boolean, last : Boolean) : EachContext is do
 
 	end
 }
