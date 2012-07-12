@@ -46,7 +46,7 @@
 		    <env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
 			<arg value="-verbose"/> 			
 		    <arg value="-title"/>			
-			<arg value="Kermeta"/> 	
+			<arg value="Kermeta2"/> 	
 			<arg value="-notes"/>			
 			<arg value="${notes.txt}"/> 			
 		    <arg value="-threads"/>			
@@ -98,7 +98,7 @@
 			</cvs> -->
 			<exec executable="svn" >
 				<env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
-			    <arg value="co"/>
+			    <arg value="commit"/>
 				<arg value="statsvn_cache"/>
 			</exec>
 		</target>
