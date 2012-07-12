@@ -104,7 +104,15 @@ public class CollectSourcesHelper {
 		}
 		return result;
 	}
-	
+	public ArrayList<TracedURL> getDirectSources(String kpString) throws IOException {
+		KpLoaderImpl ldr = new KpLoaderImpl(logger);
+		KermetaProject kp = ldr.loadKp(kpString);
+		if (kp != null) {
+			return getDirectSources(kp, kpString, new KpVariableExpander(kpString, kp,compiler.fileSystemConverter, logger));
+		} else {
+			return new ArrayList<TracedURL>();
+		}
+	}
 	public ArrayList<TracedURL> getSources(String kpString) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		KermetaProject kp = ldr.loadKp(kpString);
@@ -114,8 +122,8 @@ public class CollectSourcesHelper {
 			return new ArrayList<TracedURL>();
 		}
 	}
-	public ArrayList<TracedURL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
-		KpLoaderImpl ldr = new KpLoaderImpl(logger);
+	
+	public ArrayList<TracedURL> getDirectSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
 		// Note that source is relative to the kp file not the jvm current dir
 		List<Source> srcs = kp.getSources();
 		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
@@ -142,6 +150,21 @@ public class CollectSourcesHelper {
 				if(compiler.errorMessage.isEmpty()) compiler.errorMessage = "Cannot load source "+currentUrl+ " "+e.getMessage(); // store first error
 			}
 		}
+		return kpSources;
+	}
+	/**
+	 * Get all sources for the given project including dependencies
+	 * @param kp
+	 * @param kpFileUrl
+	 * @param varExpander
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<TracedURL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
+		KpLoaderImpl ldr = new KpLoaderImpl(logger);
+		// Note that source is relative to the kp file not the jvm current dir
+		List<Source> srcs = kp.getSources();
+		ArrayList<TracedURL> kpSources = getDirectSources(kp, kpFileUrl, varExpander);
 
 		// get km from dependencies
 		List<Dependency> dependencies = kp.getDependencies();

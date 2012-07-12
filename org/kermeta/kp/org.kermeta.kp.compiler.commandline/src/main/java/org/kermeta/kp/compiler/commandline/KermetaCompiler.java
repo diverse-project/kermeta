@@ -310,6 +310,89 @@ public class KermetaCompiler {
 	 * this.targetFolder = targetFolder; }
 	 */
 
+	
+	/**
+	 * Build a km suitable form being imported as a library (ie. doesn't includes the dependencies)
+	 * It merely only merge the sources files
+	 * @param kpFileURL
+	 * @param dirtyMU
+	 * @param additionalClassPath
+	 * @param stopAfterPhase
+	 * @return
+	 * @throws IOException
+	 */
+	public synchronized ModelingUnit kp2bytecode4library(String kpFileURL, HashMap<URL, ModelingUnit> dirtyMU, List<String> additionalClassPath, String stopAfterPhase) throws IOException {
+		try {
+			lock.lock();
+			this.hasFailed = false;
+			String projectName = "project";
+			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Building library from " + kpFileURL, LOG_MESSAGE_GROUP, 2);
+			KpLoaderImpl ldr = new KpLoaderImpl(logger);
+			// Load KP file
+			KermetaProject kp = ldr.loadKp(kpFileURL);
+			if (kp == null) {
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "Invalid kp file.";
+				this.hasFailed = true;
+				return null;
+			}
+	
+			if (!checkKP(kp, kpFileURL) ) return null;			
+			if (!kp.getName().isEmpty()) {
+				projectName = kp.getName();
+			}
+			
+			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
+			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
+			ArrayList<TracedURL> kpSources = collectSourceHelper.getDirectSources(kp,kpFileURL, varExpander);
+			if (kpSources.size() == 0) {
+				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				this.errorMessage = "Invalid kp file. No sources detected.";
+				this.hasFailed = true;
+				return null;
+			}
+			List<ModelingUnit> sourceModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);				
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + sourceModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
+			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, sourceModelingUnits);
+	
+			// Did errors occur during the merge ?
+			if (mergedUnit.getProblems().size() > 0) {
+				errorHandlingHelper.processErrors(mergedUnit, FileHelpers.StringToURL(kpFileURL));
+				if (stopOnError) {
+					this.errorMessage = "Unable to merge the files. Compilation not complete for this project.";
+					logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
+					this.hasFailed = true;
+					return mergedUnit.getResult();
+				}
+			}
+			
+			// TODO if we merge a dummy kmt file that only declares aspect class Object, the resolver should work and this we can provide this resolved km instead of only the merged km 
+			
+			ModelingUnit resultingUnit = mergedUnit.getResult();
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Saving merged file as a library...", LOG_MESSAGE_GROUP, 1);
+			
+			// save resolvedUnit to the META-INF/kermeta/merged.km
+			URI uri = URI.createURI(((resultingUnit.getNamespacePrefix() ==null|| resultingUnit.getNamespacePrefix().isEmpty() ?"":resultingUnit.getNamespacePrefix() + ".") + resultingUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
+			if (!mergedFile.getParentFile().exists()) {
+				mergedFile.getParentFile().mkdirs();
+			}
+			FileWriter writer = new FileWriter(mergedFile);
+	
+			writer.write(new ModelingUnitConverter(logger).saveMu(resultingUnit, uri).toString());
+			writer.close();
+			
+			return resultingUnit;
+		} finally {
+			logger.doneProgress(getMainProgressGroup()+".kp2bytecode", "End of compilation for " +kpFileURL , LOG_MESSAGE_GROUP);
+			// workaround cache problem in compiler
+			kermeta.standard.JavaConversions.cleanCache();
+			lock.unlock();
+		}
+	}
+	
 	/**
 	 * returns the best modeling unit that has been computed
 	 * if there are error, we need to check for 
@@ -677,7 +760,10 @@ public class KermetaCompiler {
 	public ModelingUnit kp2bytecode(String kpFileURL, List<String> additionalClassPath, String stopAfterPhase) throws IOException {
 		return kp2bytecode(kpFileURL, new HashMap<URL, ModelingUnit>(), additionalClassPath, stopAfterPhase);
 	}
-
+	public ModelingUnit kp2bytecode4library(String kpFileURL, List<String> additionalClassPath, String stopAfterPhase) throws IOException {
+		return kp2bytecode4library(kpFileURL, new HashMap<URL, ModelingUnit>(), additionalClassPath, stopAfterPhase);
+	}
+	
 	public ModelingUnit parse(URL uri) {
 		logger.flushProblem(KMTparser.LOG_MESSAGE_GROUP, uri);
 		KMTparser theParser = new KMTparser();

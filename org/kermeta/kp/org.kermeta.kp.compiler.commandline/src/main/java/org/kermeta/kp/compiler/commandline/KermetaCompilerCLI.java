@@ -37,6 +37,7 @@ public class KermetaCompilerCLI {
 	private static final String STOPAFTERPHASE_OPTION = "stopAfter";
 	private static final String IGNORECHECK_OPTION = "ignoreCheck";
 	private static final String CONTINUEONERROR_OPTION = "continueOnError";
+	private static final String BUILDASLIBRARY_OPTION = "buildAsLibrary";
 	private static final String CLASSPATH_OPTION = "cp";
 	private static final String EXTENSION_POINT_OPTION = "E";
 
@@ -49,6 +50,7 @@ public class KermetaCompilerCLI {
 	private Boolean intermediateFilesRequired = false;
 	private Boolean ignoreCheck = false;
 	private Boolean continueOnError = false;
+	private Boolean buildAsLibrary = false;
 	private String stopAfterPhase = "GENERATE_SCALA_BYTECODE";
 	private String additionalClasspath = "";
 	private NavigableMap<String, ModelingUnitLoaderFactory> muLoaders;
@@ -96,7 +98,12 @@ public class KermetaCompilerCLI {
 		compiler.checkingEnabled = !ignoreCheck;
 		compiler.saveIntermediateFiles = intermediateFilesRequired;
 		compiler.setModelingUnitLoaders(muLoaders);
-		compiler.kp2bytecode(kpFile, classpath, stopAfterPhase);		
+		if(!buildAsLibrary){
+			compiler.kp2bytecode(kpFile, classpath, stopAfterPhase);
+		}
+		else{
+			compiler.kp2bytecode4library(kpFile, classpath, stopAfterPhase);
+		}
 		return compiler.hasFailed;
 	}
 
@@ -110,6 +117,7 @@ public class KermetaCompilerCLI {
 		options.addOption(GENERATE_INTERMEDIATE_FILES_OPTION, false, "Generate intermediate files. (Recommanded for incremental build)");
 		options.addOption(STOPAFTERPHASE_OPTION,true, "Stop after the given phase. Available phases : COLLECT_SOURCES, MERGE, RESOLVE, TYPE_SET, GENERATE_LEGACY_SOURCE, GENERATE_LEGACY_SOURCE_BYTECODE, GENERATE_SCALA, [GENERATE_SCALA_BYTECODE]");
 		options.addOption(IGNORECHECK_OPTION, false, "do not run the checker after phase MERGE and phase TYPE_SET.");
+		options.addOption(BUILDASLIBRARY_OPTION, false, "Build the project as a library instead of an application.");
 		options.addOption(CONTINUEONERROR_OPTION, false, "try to continue regardless of previous errors.");
 		options.addOption(TARGET_LOCATION_OPTION, true, "Output folder. " + DEFAULT_TARGET_FOLDER + " by default ");
 		options.addOption(CLASSPATH_OPTION, true, "addtional classpath.");
@@ -157,6 +165,9 @@ public class KermetaCompilerCLI {
 		
 		if (cmd.hasOption(IGNORECHECK_OPTION)){
 			this.ignoreCheck = true;			
+		}
+		if (cmd.hasOption(BUILDASLIBRARY_OPTION)){
+			this.buildAsLibrary = true;			
 		}
 		if (cmd.hasOption(CONTINUEONERROR_OPTION)){
 			this.continueOnError = true;			
