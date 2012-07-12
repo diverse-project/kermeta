@@ -34,7 +34,7 @@
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
-			<arg value="monitored_svn_folders/language"/>
+			<arg value="monitored_svn_folders/org_kermeta"/>
 		</exec>
 	</target>
  	<target name="stats"> 
@@ -58,11 +58,11 @@
 			<arg value="-viewvc"/>			
 			<arg value="http://gforge.inria.fr/plugins/scmsvn/viewcvs.php/?root=kermeta"/>
 		    <arg value="-exclude"/>			
-			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.genmodel;**/*.ecoredi;**/*.ecorediag;**/*.umldi;**/statsvn_cache/**"/>		
+			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.genmodel;**/*.ecoredi;**/*.ecorediag;**/*.umldi;**/statsvn_cache/**;alf/**;archetype/**;emf/**;extra/**;kermeta1/**;kompren/**;qvt/**;scala/**"/>		
 		    <arg value="-output-dir"/>			
 			<arg value="${output.dir}"/>		
 			<arg value="${svn.log}"/>		
-			<arg value="monitored_svn_folders"/>
+			<arg value="monitored_svn_folders/org_kermeta"/>
 		</java>
 		    	
 <!--		    	      -exclude **/src/urncore/**;**/src/grl/**;**/src/ucm/**;**/src/urn/**;**/src/seg/jUCMNav/model/ucm/** \
