@@ -46,29 +46,13 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     res.append(" : ")
 
     if (thi.getUpper > 1 || thi.getUpper == -1) {
-      if (thi.getIsOrdered == null || thi.getIsOrdered) {
-        if(thi.getIsUnique() == null || thi.getIsUnique())
-          res.append("k2.standard.KermetaOrderedSet[")
-        else
-          res.append("k2.standard.KermetaSequence[")
-      } else {
-        if(thi.getIsUnique() == null || thi.getIsUnique())
-          res.append("k2.standard.KermetaSet[")
-        else
-          res.append("k2.standard.KermetaBag[")
-      }
+      res.append("k2.standard.Kermeta")
+      getCollectionType(thi,res)
+      res.append("[")
       visit(thi.getType, res)
-      if (thi.getIsOrdered == null || thi.getIsOrdered) {
-        if(thi.getIsUnique() == null || thi.getIsUnique())
-          res.append("] = k2.standard.KerRichFactory.createOrderedSet[")
-        else
-          res.append("] = k2.standard.KerRichFactory.createSequence[")
-      } else {
-        if(thi.getIsUnique() == null || thi.getIsUnique())
-          res.append("] = k2.standard.KerRichFactory.createSet[")
-        else
-          res.append("] = k2.standard.KerRichFactory.createBag[")
-      }
+      res.append("] = k2.standard.KerRichFactory.create")
+      getCollectionType(thi,res)
+      res.append("[")
       visit(thi.getType, res)
       res.append("]")
 
@@ -172,31 +156,15 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(res1.toString)
           res.append(" == null ) ")
           res.append(res1.toString.replace("this.get", "this.set").replace("()", "("))
-          if (thi.getIsOrdered == null || thi.getIsOrdered) {
-            if(thi.getIsUnique() == null || thi.getIsUnique())
-              res.append("k2.standard.KerRichFactory.createOrderedSet[")
-            else
-              res.append("k2.standard.KerRichFactory.createSequence[")
-          } else {
-            if(thi.getIsUnique() == null || thi.getIsUnique())
-              res.append("k2.standard.KerRichFactory.createSet[")
-            else
-              res.append("k2.standard.KerRichFactory.createBag[")
-          }
+          res.append("k2.standard.KerRichFactory.create")
+          getCollectionType(thi,res)
+          res.append("[")
           res.append(s.toString + "]);")
         }
         
-        if (thi.getIsOrdered == null || thi.getIsOrdered) {
-          if(thi.getIsUnique() == null || thi.getIsUnique())
-            res.append("new k2.standard.RichKermetaOrderedSet[")
-          else
-            res.append("new k2.standard.RichKermetaSequence[")
-        } else {
-          if(thi.getIsUnique() == null || thi.getIsUnique())
-            res.append("new k2.standard.RichKermetaSet[")
-          else
-            res.append("new k2.standard.RichKermetaBag[")
-        }
+        res.append("new k2.standard.RichKermeta")
+        getCollectionType(thi,res)
+        res.append("[")
         visit(thi.getType(),res)
         res.append("](")
       }
@@ -320,22 +288,32 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
   def getListorType(thi: Property, res: StringBuilder) = {
     if (thi.getUpper > 1 || thi.getUpper == -1) {
-      if (thi.getIsOrdered == null || thi.getIsOrdered) {
-        if(thi.getIsUnique() == null || thi.getIsUnique())
-          res.append("k2.standard.KermetaOrderedSet[")
-        else
-          res.append("k2.standard.KermetaSequence[")
-      } else {
-        if(thi.getIsUnique() == null || thi.getIsUnique())
-          res.append("k2.standard.KermetaSet[")
-        else
-          res.append("k2.standard.KermetaBag[")
-      }
+      res.append("k2.standard.Kermeta")
+      getCollectionType(thi,res)
+      res.append("[")
       visit(thi.getType(),res)
       res.append("]")
     } else {
       visit(thi.getType(),res)
     }
 
+  }
+  
+  /**
+   * Append the right collection type to res,
+   * based on unicity and orderedness
+   */
+  def getCollectionType(thi:Property,res:StringBuilder)={
+    if (thi.getIsOrdered == null || thi.getIsOrdered) {
+      if(thi.getIsUnique() == null || thi.getIsUnique())
+        res.append("OrderedSet")
+      else
+        res.append("Sequence")
+    } else {
+      if(thi.getIsUnique() == null || thi.getIsUnique())
+        res.append("Set")
+      else
+        res.append("Bag")
+    }
   }
 }
