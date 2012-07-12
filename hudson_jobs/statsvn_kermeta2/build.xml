@@ -91,11 +91,11 @@
         </replace>-->
     </target>
 	<target name="commit_cache">
-			<!-- <cvs output="${cvs.log}">
-				<commandline>
-					<argument line="log src"/>
-				</commandline>
-			</cvs> -->
+			<exec executable="svn" >
+				<env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
+			    <arg value="add"/>
+				<arg value="statsvn_cache/*"/>
+			</exec>
 			<exec executable="svn" >
 				<env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
 			    <arg value="commit"/>
