@@ -2,7 +2,7 @@
  * Creation date: February 19, 2007
  * License: EPL
  * Copyright:
- * Authors:  Franck Chauvel, Mark Skipper, Harry Lime
+ * Authors:  Franck Chauvel, Mark Skipper, Harry Lime, Jonathan Marchand
  */
  
 /**
@@ -366,22 +366,26 @@ class Error
 	 *   - the message
 	 *   - the stack trace
 	 */
-	method toString(): String is 
+	operation toString(): String is 
 		do 
 			if kind.equals(ErrorKind.testError) then
 				result := error.toString 
 			else
-				result := error.getMetaClass.name + "."
+				result := error.getMetaClass.name
 				if kind.equals(ErrorKind.setUpError) then
-					result := result + "setUp()"
+					result := result + "." + "setUp()"
 				else
-					result := result + "tearDown()"
+					result := result + "." + "tearDown()"
 				end
 			end
-			result := result	+ " raised " + exception.getMetaClass.name
+			if(exception.getMetaClass!=void) then
+				result := result	+ " raised " + exception.getMetaClass.name
+			else
+				result := result +" raised an uncaught exception"
+			end
 			
 			if exception.message != void then
-				result := result + "\n    Caused by: "+ exception.message
+				result := result + "\n    Message: "+ exception.message
 			else
 				result := result + "\n    (no message)"
 			end
@@ -494,8 +498,6 @@ class TestSuite inherits Test
 				testCase.setTestMethodName(o.name)
 				self.tests.add(testCase)
 			}
-			
-			tests.each{t| stdio.writeln(t.toString)}
 			
 			result := self
  		end
@@ -632,12 +634,6 @@ abstract class TestCase inherits Test, Fallible
 			do
 				setUp
 				do
-					//TODO
-					/*var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
-					de.initializeDefaults
-					de.selfClass ?=  self.getMetaClass.typeDefinition
-					de.parse("self." + self.getTestMethodName )
-					de.execute(self, Hashtable<String, kermeta::standard::Object>.new)*/
 					var cd : ClassDefinition init self.getMetaClass.typeDefinition.asType(ClassDefinition)
 					var op : Operation init cd.ownedOperation.asOrderedSet.detect{op | op.name.equals(self.getTestMethodName)}
 					self.invoke(op,OrderedSet[Object].new)
