@@ -4,6 +4,7 @@ package k2.standard;
 import org.eclipse.emf.common.util.EList
 import java.{ util => ju , lang => jl}
 import scala.collection.JavaConversions._
+import org.eclipse.emf.common.util.UniqueEList
   
     trait KermetaCol[A] extends EObjectImplForPrimitive with EList[A] with _root_.k2.standard.KermetaObject {
 	
@@ -257,6 +258,13 @@ import scala.collection.JavaConversions._
     }
     
 object JavaConversions {
+  implicit def julist2kermeta[G](value:ju.List[G]):KermetaSequence[G]={new RichKermetaSequence[G](value)}
+  implicit def elist2kermeta[G](value:EList[G]):KermetaOrderedCol[G]={
+    if(value.isInstanceOf[UniqueEList[G]]) 
+      new RichKermetaSet[G](value)
+    else
+      new RichKermetaSequence[G](value)
+  }
 }
 
 class EachContext {
