@@ -9,7 +9,7 @@
  * main features of the famous Unit test tool for Kermeta language
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-package org::kermeta::kunit;
+package kermeta::kunit;
 using kermeta::standard
 
 /**

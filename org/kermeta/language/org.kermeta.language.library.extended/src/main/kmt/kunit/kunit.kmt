@@ -14,13 +14,13 @@
  *
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-package org::kermeta::kunit;
+package kermeta::kunit;
 
 using kermeta::standard
 using kermeta::utils
 using kermeta
 using org::kermeta::language::structure
-using org::kermeta::kunit
+using kermeta::kunit
 using kermeta::io::StdIO => stdio
 
 
@@ -606,7 +606,7 @@ abstract class TestCase inherits Test, Fallible
 		if not log.failures.empty then
 			msg := "Failures: "
 			log.failures.each { f | msg := msg +"\n   " + f.toString 	}
-			var exception : AssertionFailedError init org::kermeta::kunit::AssertionFailedError.new
+			var exception : AssertionFailedError init kermeta::kunit::AssertionFailedError.new
 			exception.message := msg
 			raise exception
 		end
