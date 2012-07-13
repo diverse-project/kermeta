@@ -16,8 +16,9 @@ sources = {
 	require"${project.baseUri}/42_theBigTest_main.kmt"
 	}
 dependencies = {	
-	// import library.extended
-	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"
+	// import library.core and library.extended
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
+	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/LATEST"
 		 
 } 
 
