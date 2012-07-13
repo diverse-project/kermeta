@@ -3,56 +3,58 @@ import org.kermeta.language.structure._
 import org.kermeta._
 import org.kermeta.language._
 import org.kermeta.language.behavior._
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.common.notify.Notifier
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.common.util.TreeIterator
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore._
- 
 import k2.standard.JavaConversions._
 import k2.standard.PrimitiveConversion._
  
-trait Exception extends ExceptionAspect with k2.standard.KermetaObject
+trait Exception extends ExceptionAspect with k2.standard.KermetaObject with k2.standard.EObjectImplForPrimitive
 trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ecore.EObject{
-	var message:String=null;
+	var message:String="Exception";
 	var nestedException:Exception=null; 
-	var stackTrace:String=null;
+	var stackTrace:String={
+	  val res = new java.io.StringWriter
+	  this.printStackTrace(new java.io.PrintWriter(res))
+	  res.toString()
+	}
 	def Scalamessage : _root_.java.lang.String={return this.message}
 	def Scalamessage_=(arg : _root_.java.lang.String)={message  = arg}
 	def ScalanestedException : Exception={return this.nestedException }
 	def ScalanestedException_=(arg : Exception)={nestedException = arg}
-	def ScalastackTrace : _root_.java.lang.String={return this.stackTrace }
-	def ScalastackTrace_=(arg : _root_.java.lang.String)={stackTrace  = arg}
+	def ScalastackTrace : _root_.java.lang.String={return this.stackTrace}
+	def ScalastackTrace_=(arg: _root_.java.lang.String)={stackTrace=arg}
 	def initialize(message : String) : ExceptionAspect = {
 	  this.message = message
 	  return this;
 	}
-
-
-	def eClass():EClass =null
-	def eResource():Resource =null
-	def eContainer():EObject =null
-	def eContainingFeature():EStructuralFeature =null
-	def eContainmentFeature():EReference =null
-	override def eContents():EList[EObject] =null;
-	override def eAllContents():TreeIterator[EObject] =null;
-	def eIsProxy():Boolean =false;
-	override def eCrossReferences():EList[EObject] =null;
-	def eGet(feature:EStructuralFeature ) : Object=null;
-	def eGet(feature:EStructuralFeature , resolve:Boolean ):Object =null;
-	def eSet(feature:EStructuralFeature , newValue:Any   ) :Unit =null;
-	def eIsSet(feature:EStructuralFeature ) : Boolean = false;
-	override def eUnset( feature:EStructuralFeature) : Unit = null;
-	override def eAdapters(): EList[org.eclipse.emf.common.notify.Adapter] =null;
-	def eDeliver():Boolean =true;
-	def eSetDeliver(deliver:Boolean):Unit=null;
-	def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
-	def eInvoke(x1: org.eclipse.emf.ecore.EOperation,x2: org.eclipse.emf.common.util.EList[_]):_root_.java.lang.Object = null
-   
+	override def getCause():Exception={ScalanestedException}
+	override def getLocalizedMessage():String={Scalamessage}
+	override def getMessage():String={Scalamessage}
+	def initCause=ScalanestedException_= _
+	override def initCause(cause:Throwable)={
+	  cause match {
+	    case c:Exception => ScalanestedException_=(c)
+	    case c => super.initCause(c)
+	  }
+	  this
+	}
+	override def printStackTrace()={
+	  val writer=new java.io.StringWriter
+	  printStackTrace(new java.io.PrintWriter(writer))
+	  k2.io.StdIO.errorln(writer.toString())
+	}
+	def printStackTrace(s:java.lang.StringBuilder):Unit={
+	  val writer=new java.io.StringWriter
+	  printStackTrace(new java.io.PrintWriter(writer))
+	  s.append(writer)
+	}
+	def setStackTrace=ScalastackTrace_= _
 }  
 trait RuntimeErrorAspect extends Exception{
 	var expression:Expression=null;
-
 }
 trait RuntimeError extends RuntimeErrorAspect{
 }
@@ -131,12 +133,14 @@ trait StringFormatException extends StringFormatExceptionAspect{
 
 
 trait IndexOutOfBoundAspect extends Exception{
+  message = "IndexOutOfBound"
 }
 trait IndexOutOfBound extends IndexOutOfBoundAspect{
 }
 
 
 trait EmptyCollectionAspect extends Exception{
+  message="EmptyCollection"
 }
 trait EmptyCollection extends EmptyCollectionAspect{
 }
@@ -161,6 +165,7 @@ trait FileNotFoundException extends FileNotFoundExceptionAspect{
 
 
 trait ConstraintViolatedExceptionAspect extends Exception{
+	message="ConstraintViolatedException"
 	var constraintAppliedTo:org.eclipse.emf.ecore.EObject = _;
 	var failedConstraint:Constraint= _;
 	def ScalaconstraintAppliedTo:org.eclipse.emf.ecore.EObject = constraintAppliedTo
@@ -187,6 +192,7 @@ trait ConstraintViolatedPost extends ConstraintViolatedPostAspect{
 
 
 trait ConstraintViolatedInvAspect extends ConstraintViolatedException{
+  message="ConstraintViolatedInv"
 /*  var failedConstraint : Constraint = null;
   def ScalafailedConstraint : Constraint={return this.failedConstraint}
   def ScalafailedConstraint_=(arg : Constraint)={failedConstraint  = arg}*/
@@ -239,14 +245,15 @@ trait DynamicExpressionException extends DynamicExpressionExceptionAspect{
 }
 
 trait ConstraintsDiagnosticAspect extends Exception{
-    
-    var setConstraints : _root_.java.util.List[ConstraintViolatedInv] = new _root_.java.util.ArrayList[ConstraintViolatedInv]
-    def ScalasetConstraints : _root_.java.util.List[ConstraintViolatedInv]={return this.setConstraints}
-    def ScalasetConstraints_=(arg : _root_.java.util.List[ConstraintViolatedInv])={this.setConstraints.clear; this.setConstraints.addAll(arg)}
+    message="ConstraintsDiagnostic"
+      
+    var setConstraints : _root_.k2.standard.KermetaSequence[ConstraintViolatedInv] = new _root_.k2.standard.RichKermetaSequence[ConstraintViolatedInv]
+    def ScalasetConstraints : _root_.k2.standard.KermetaSequence[ConstraintViolatedInv]={return this.setConstraints}
+    def ScalasetConstraints_=(arg : _root_.k2.standard.KermetaSequence[ConstraintViolatedInv])={this.setConstraints.clear; this.setConstraints.addAll(arg)}
 	
 	/* Initialize */
 	def initialize() : ConstraintsDiagnostic={
-		setConstraints = new _root_.java.util.ArrayList[ConstraintViolatedInv]
+		setConstraints = new _root_.k2.standard.RichKermetaSequence[ConstraintViolatedInv]
 		return this.asInstanceOf[ConstraintsDiagnostic];
 	}
 	
@@ -257,8 +264,9 @@ trait ConstraintsDiagnosticAspect extends Exception{
 	
 	/* Prints the content */
 	def prettyPrint() ={
+		import scala.collection.JavaConversions._
 		k2.io.StdIO.writeln("Number of violated constraints : " + setConstraints.size.toString)
-		setConstraints.each(constraint => k2.io.StdIO.writeln("  "+constraint.Scalamessage))
+		setConstraints.foreach(constraint => k2.io.StdIO.writeln("  "+constraint.Scalamessage))
 		//Clean the markers on the associated resources
 	}
 
