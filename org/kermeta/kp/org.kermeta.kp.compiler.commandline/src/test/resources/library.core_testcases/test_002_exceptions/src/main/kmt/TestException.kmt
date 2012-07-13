@@ -1,0 +1,110 @@
+package rootPackage;
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::exceptions
+using kermeta::kunit
+
+class TestException inherits TestCase{
+		
+	operation mainTest() : Void is do
+		var testRunner : TestRunner init TestRunner.new
+       	testRunner.run(self.getMetaClass)
+       	testRunner.printTestResult
+	end
+
+	operation testRaise():Void is do
+		var e:Exception := MyException.new
+		e.message:="tutu18"
+		do
+			raise e
+			assertTrue(false)
+		rescue(e:MyException)
+			assertTrue(e.message=="tutu18")
+    		var string:String := e.stackTrace.split("\n",3).at(1)
+    		assertTrue(string.contains("TestException"))
+    		assertTrue(string.contains("testRaise"))
+		rescue(e:Exception)
+			assertTrue(false)
+		end
+	end
+	
+    operation testInitialize() : Void is do
+    	do
+    		raise Exception.new.initialize("tutu18")
+    	rescue(e:Exception)
+    		assertTrue(e.message=="tutu18")
+    	end
+    end
+    
+    operation testFillInStackTrace():Void is do
+    	var e:Exception := Exception.new
+    	var string:String := e.stackTrace.split("\n",3).at(1)
+    	assertTrue(string.contains("TestException"))
+    	assertTrue(string.contains("testFillInStackTrace"))
+    	
+    	e := MyException.new.create
+    	string := e.stackTrace.split("\n",3).at(1)
+    	assertTrue(string.contains("MyException"))
+    	assertTrue(string.contains("create("))
+    	
+    	var e2:Exception := e.fillInStackTrace
+    	assertTrue(e.oid==e2.oid)
+    	string := e.stackTrace.split("\n",3).at(1)
+    	assertTrue(string.contains("TestException"))
+    	assertTrue(string.contains("testFillInStackTrace"))
+    end
+
+    operation testGetCause():Void is do
+    	var e:Exception := Exception.new
+    	var e2:Exception := Exception.new
+    	e.nestedException := e2
+    	assertTrue(e.nestedException.oid==e2.oid)
+    	assertTrue(e.getCause.oid==e2.oid)
+   	end 
+    
+    operation testGetLocalizedMessage():Void is do
+    	var e:Exception := Exception.new
+    	e.message := "tutu18"
+    	assertTrue(e.getLocalizedMessage=="tutu18")
+    end 
+    
+    operation testGetMessage():Void is do
+    	var e:Exception := Exception.new
+    	e.message := "tutu18"
+    	assertTrue(e.getMessage=="tutu18")
+    end
+    
+    operation testInitCause():Void is do
+    	var e:Exception := Exception.new
+    	var e2:Exception := Exception.new
+    	e.initCause(e2)
+    	assertTrue(e.nestedException.oid==e2.oid)
+    	assertTrue(e.getCause.oid==e2.oid)
+    end
+    
+    operation testPrintStackTrace():Void is do
+    end 
+    
+    operation testPrintStackTraceStringBuffer():Void is do
+    	var s:StringBuffer:=StringBuffer.new
+    	Exception.new.printStackTrace(s)
+    	assertTrue(s.size>0)
+    	var string:String := s.toString.split("\n",3).at(1)
+    	assertTrue(string.contains("TestException"))
+    	assertTrue(string.contains("testPrintStackTraceStringBuffer"))
+    end 
+    
+    operation testSetStackTrace():Void is do
+    	var e:Exception := Exception.new
+    	e.setStackTrace("tutu18")
+    	assertTrue(e.stackTrace=="tutu18")
+    	e.fillInStackTrace
+    	var string:String := e.stackTrace.split("\n",3).at(1)
+    	assertTrue(string.contains("TestException"))
+    	assertTrue(string.contains("testSetStackTrace"))
+    	e.stackTrace := "toto"
+    	assertTrue(e.stackTrace=="toto")
+    	e.setStackTrace("tutu18")
+    	assertTrue(e.stackTrace=="tutu18")
+    end
+}

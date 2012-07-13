@@ -1,0 +1,13 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::exceptions
+using rootPackage
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do
+			TestException.new.mainTest
+		end
+	}
+}

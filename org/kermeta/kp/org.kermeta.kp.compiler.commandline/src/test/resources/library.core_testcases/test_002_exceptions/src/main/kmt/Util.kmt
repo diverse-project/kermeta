@@ -1,0 +1,11 @@
+package rootPackage;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+class MyException inherits kermeta::exceptions::Exception{
+
+	operation create():MyException is do
+		result := MyException.new
+	end
+}
