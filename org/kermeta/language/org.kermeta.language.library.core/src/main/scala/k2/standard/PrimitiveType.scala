@@ -24,6 +24,7 @@ object PrimitiveConversion{
     implicit def integer2kermeta(x: Int) = new RichInteger(x)
     implicit def long2kermeta(x: Long) = new RichLong(x)
     implicit def short2kermeta(x: Short) = new RichShort(x)
+    implicit def javashort2kermeta(x: java.lang.Short) = new RichShort(x)
     implicit def float2kermeta(x: Float) = new RichFloat(x)
     implicit def double2kermeta(x: Double) = new RichDouble(x)
     implicit def date2kermeta(x: java.util.Date) = new RichDate(x)
@@ -359,6 +360,8 @@ class RichShort(value: Short) extends RichNumeric[Short] {
       override def equals(other : Any) :Boolean={if (other.isInstanceOf[Short]) return value==other.asInstanceOf[Short]; else false}
       def equals(other : Short) :Boolean={value==other}
       def compareTo(other : Short) :Int={return value.compare(other)}
+      def compareTo(other : Int) :Int={return value.compare(other.shortValue())}
+      def compareTo(other : Integer) :Int={return value.compare(other.shortValue())}
       override def isGreater(other : Short) :Boolean={return value>other}
       override def isGreaterOrEqual(other : Short) :Boolean={value>=other}
       override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
@@ -476,16 +479,16 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
     def div(other : Int) :Int={return value/other}
     def div(other : Integer) :Int={return value/(other.intValue)}
 	 override def hashCode() : Int = value.hashCode()
-	 //def compareTo(arg0:java.lang.Integer) = value.compareTo(arg0)
-	 def shortValue() : Short = value.shortValue()
-	 def intValue() : Int = value.intValue()
-	 def longValue() : Long = value.longValue()
-	 def floatValue() : Float = value.floatValue()
-	 def doubleValue() : Double = value.doubleValue()
+	def kshortValue() : Short = value.shortValue()
+	def kintValue() : Int = value.intValue()
+	def klongValue() : Long = value.longValue()
+	def kfloatValue() : Float = value.floatValue()
+	def kdoubleValue() : Double = value.doubleValue()
 
-  def toReal() :Double={return value}
+    def toReal() :Double={return value}
     override def compareTo(other : Int) :Int={return value.compare(other) }
-    def compareTo(other : Integer) :Int={return value.compare(other.intValue)}
+    def kcompareTo(other : Int) :Int={return value.compare(other.intValue)}
+    def kcompareTo(other : Integer) :Int={return value.compare(other.intValue)}
     override def isGreater(other : Int) :Boolean={return value>other}
     def isGreater(other : Integer) :Boolean={return value>other.intValue}
     override def isGreaterOrEqual(other : Int) :Boolean={value>=other}
