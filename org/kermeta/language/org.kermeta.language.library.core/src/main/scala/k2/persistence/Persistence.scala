@@ -61,7 +61,7 @@ class RichResource(value: _root_.org.eclipse.emf.ecore.resource.Resource) extend
 	 
 	 // specific method that uses a proxy collection in order to retrurn the correct kermeta objects (otherwise we get compilation errors
 	 // when using the functions on such collection (ex: each)
-	 def kgetContents() : k2.standard.KermetaListProxy[_root_.k2.standard.KermetaObject] = new k2.standard.KermetaListProxy[_root_.k2.standard.KermetaObject](value.getContents())
+	 def kgetContents() : k2.standard.KermetaOrderedSet[EObject] = new k2.standard.RichKermetaOrderedSet[EObject](value.getContents())
 	 
 	 def getEObject(arg0:java.lang.String) : org.eclipse.emf.ecore.EObject = value.getEObject(arg0)
 	 def getErrors() : org.eclipse.emf.common.util.EList[_root_.org.eclipse.emf.ecore.resource.Resource.Diagnostic] = value.getErrors()
