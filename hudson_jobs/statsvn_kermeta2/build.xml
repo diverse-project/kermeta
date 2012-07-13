@@ -59,7 +59,7 @@
 			<arg value="-viewvc"/>			
 			<arg value="http://gforge.inria.fr/plugins/scmsvn/viewcvs.php/?root=kermeta"/>
 		    <arg value="-exclude"/>			
-			<arg value="**/*.jar;**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.genmodel;**/*.ecoredi;**/*.ecorediag;**/*.umldi;**/statsvn_cache/**;alf/**;archetype/**;emf/**;extra/**;kermeta1/**;kompren/**;qvt/**;scala/**"/>		
+			<arg value="**/*.jar;**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.genmodel;**/*.ecoredi;**/*.ecorediag;**/*.umldi;**/statsvn_cache/**;alf/**;archetype/**;emf/**;extra/**;kermeta1/**;kompren/**;qvt/**;scala/**;**/deprecated/**"/>		
 		    <arg value="-output-dir"/>			
 			<arg value="${output.dir}"/>		
 			<arg value="${svn.log}"/>		
