@@ -84,7 +84,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-/*  method assert(condition: Boolean):Void is
+  method assert(condition: Boolean):Void is
 	  	do
 		  	var number : Integer init self.number()
 	  		if not condition then
@@ -98,7 +98,7 @@ abstract class Fallible inherits AbstractFallible
             	end	  				  				
 	  		end	  			  		
 	  	end
-*/ // workaround
+
   	
   /**
    * Log a failure if condition is false

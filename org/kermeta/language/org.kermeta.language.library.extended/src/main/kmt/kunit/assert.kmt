@@ -19,9 +19,9 @@ abstract class AbstractFallible
 {
 
     /** process the given condition and react if it is not satisfied */
-/*    operation assert(condition: Boolean):Void is
+    operation assert(condition: Boolean):Void is
 	  	abstract
-*/ // workaround  	
+   	
     /**
      * process the given condition and react with the given message
      * if it is not satisfied
@@ -108,13 +108,13 @@ class Assert inherits AbstractFallible
 {
 
 	/** Fails if condition is false */
-/*	method assert(condition : Boolean) : Void is 
+	method assert(condition : Boolean) : Void is 
         do
             if not condition then 
             	fail("assert failed") 
             end
         end
-*/ // workaround	
+ 	
 	/** will fail if condition is false */
 	method assertTrue(condition : Boolean) : Void is 
         do
