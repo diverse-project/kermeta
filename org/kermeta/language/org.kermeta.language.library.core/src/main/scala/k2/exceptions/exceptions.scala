@@ -13,45 +13,73 @@ import k2.standard.PrimitiveConversion._
  
 trait Exception extends ExceptionAspect with k2.standard.KermetaObject with k2.standard.EObjectImplForPrimitive
 trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ecore.EObject{
+	// Constructor stuff
+    // removing junk internal call stack from init to fillInStackTrace
+    setStackTrace(getStackTrace().drop(4)) 
+    
 	var message:String="Exception";
 	var nestedException:Exception=null; 
+	
+	/**
+	 * StackTrace representation as a String, used by Kermeta.
+	 * DO NOT forget to keep it synchronized every time the stack trace is modified.
+	 */
 	var stackTrace:String={
 	  val res = new java.io.StringWriter
 	  this.printStackTrace(new java.io.PrintWriter(res))
 	  res.toString()
 	}
+	
 	def Scalamessage : _root_.java.lang.String={return this.message}
 	def Scalamessage_=(arg : _root_.java.lang.String)={message  = arg}
 	def ScalanestedException : Exception={return this.nestedException }
 	def ScalanestedException_=(arg : Exception)={nestedException = arg}
 	def ScalastackTrace : _root_.java.lang.String={return this.stackTrace}
 	def ScalastackTrace_=(arg: _root_.java.lang.String)={stackTrace=arg}
+	
 	def initialize(message : String) : ExceptionAspect = {
 	  this.message = message
 	  return this;
 	}
-	override def getCause():Exception={ScalanestedException}
-	override def getLocalizedMessage():String={Scalamessage}
-	override def getMessage():String={Scalamessage}
+	
+	// Throwable method redefined as aliases to Exception method
+	override def getLocalizedMessage=Scalamessage
+	override def getMessage=Scalamessage
 	def initCause=ScalanestedException_= _
+	def setStackTrace=ScalastackTrace_= _
+	
+	// Redefinition of return type
+	override def getCause():Exception=ScalanestedException
+	
 	override def initCause(cause:Throwable)={
 	  cause match {
 	    case c:Exception => ScalanestedException_=(c)
-	    case c => super.initCause(c)
+	    case _ => k2.io.StdIO.errorln("Trying to nest a Java exception in a Kermeta exception.") 
 	  }
 	  this
 	}
+	
 	override def printStackTrace()={
 	  val writer=new java.io.StringWriter
 	  printStackTrace(new java.io.PrintWriter(writer))
 	  k2.io.StdIO.errorln(writer.toString())
 	}
+	
 	def printStackTrace(s:java.lang.StringBuilder):Unit={
 	  val writer=new java.io.StringWriter
 	  printStackTrace(new java.io.PrintWriter(writer))
 	  s.append(writer)
 	}
-	def setStackTrace=ScalastackTrace_= _
+	
+	override def fillInStackTrace()={
+	  super.fillInStackTrace()
+	  // removing internal call stack of fillInStackTraces
+	  setStackTrace(getStackTrace().drop(3))
+	  val writer=new java.io.StringWriter
+	  printStackTrace(new java.io.PrintWriter(writer))
+	  ScalastackTrace_=(writer.toString())
+	  this
+	}
 }  
 trait RuntimeErrorAspect extends Exception{
 	var expression:Expression=null;

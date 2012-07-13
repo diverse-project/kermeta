@@ -367,6 +367,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   def visitRaise(thi: Raise, res: StringBuilder): Unit = {
     res.append("throw ")
     visit(thi.getExpression(), res)
+    res.append(".fillInStackTrace")
   }
 
   def visitRescue(thi: Rescue, res: StringBuilder): Unit = {

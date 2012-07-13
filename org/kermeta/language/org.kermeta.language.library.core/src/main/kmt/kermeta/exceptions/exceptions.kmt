@@ -25,7 +25,6 @@ class Exception
  	
  	/**
  	 * StackTrace of this Exception. 
- 	 * Shouldn't be modified.
  	 */
  	attribute stackTrace : String
  
@@ -38,8 +37,16 @@ class Exception
     end
     
     /**
-	 * Returns underlying Exception if this Exception has wrapped another one.
-	 * See also Exception.setCause(Exception)
+     * Fills the stack trace.
+     * Called internally when appropriate.
+     * Returns this exception.
+     */
+    operation fillInStackTrace():Exception is do
+    end
+
+    /**
+	 * Returns nestedException.
+     * Compatibility operation.
 	 */
     operation getCause():Exception is do
     end 
@@ -57,8 +64,8 @@ class Exception
     end
     
     /**
-     * Wraps another exception in this one.
-     * See Exception.getCause()
+     * Sets nestedException.
+     * Compatibility operation.
      */
     operation initCause(cause:Exception):Void is do
     end
@@ -76,25 +83,18 @@ class Exception
     end
     
     /**
-     * Set the stack trace.
+     * Sets the stackTrace.
      */
-     operation setStackTrace(s:String):Void is do
-     end
+    operation setStackTrace(s:String):Void is do
+    end
 
     /**
      * Internal operation.
      * Shouldn't be used nor overriden.
      * Use instead the attribute stackTrace.
+     * Compatibility operation.
      */
-    operation getStackTrace():String is do
-    end
-    
-    /**
-     * Fills the stack trace.
-     * Called internally when an exception is instantiated.
-     * Shouldn't be used nor overriden.
-     */
-    operation fillInStackTrace():Void is do
+    operation getStackTrace():Void is do
     end
 }
 
