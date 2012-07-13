@@ -1,4 +1,4 @@
-KermetaProject "004_HelloWorld" 
+KermetaProject "test_004" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
 defaultMainClass ="helloworld::HelloWorld"
