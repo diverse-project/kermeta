@@ -1,9 +1,0 @@
-KermetaProject :"001_testHelloWorld_standalone" 
-version :  "someVersion" 
-group :"group" 
-{ 
-	source = "${project.baseUri}/002_testArithm.main.kmt" 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/LATEST"	 
-} 
-
- 
