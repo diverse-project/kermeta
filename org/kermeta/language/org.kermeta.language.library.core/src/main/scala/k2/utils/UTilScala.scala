@@ -39,6 +39,13 @@ object UTilScala {
 
 
         var factoryName = packName + ".KerRichFactory$"
+        // Dirty patch, supposed to be temporary
+        // See bug 2188
+        try{
+          java.lang.Class.forName(factoryName)
+        } catch{
+          case e:java.lang.ClassNotFoundException => factoryName = scalaAspectPrefix +"." + factoryName
+        }
         var methodName = "create" + o.getTypeDefinition.getName
         val clazz = java.lang.Class.forName(factoryName)
         val obj = clazz.getField("MODULE$").get(clazz)
