@@ -8,5 +8,5 @@ KermetaProject "test_021_primitivetypesandlambda"
 	}
 	dependencies = {
 		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
-		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/LATEST"
 	}

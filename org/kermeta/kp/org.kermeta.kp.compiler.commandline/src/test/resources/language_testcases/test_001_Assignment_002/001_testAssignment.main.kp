@@ -7,7 +7,8 @@ KermetaProject "test_001_Assignment_002"
 		require "${project.baseUri}/001_testAssignment.main.kmt"
 	}
 	dependencies={ 
-		dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
+		dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST" 
+		dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/LATEST"
 	} 
 
  

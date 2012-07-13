@@ -11,7 +11,7 @@ package testAssignment {
 // Test simple assignments and casts on variables.
 // assignment of properties is covered by other tests
 
-class Test_assignment  {
+class Test_assignment  inherits org::kermeta::kunit::TestCase {
 
 	@main "main"
 	operation main() : kermeta::standard::Void is do 

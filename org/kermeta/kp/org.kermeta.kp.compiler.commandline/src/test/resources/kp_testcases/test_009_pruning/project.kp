@@ -7,5 +7,5 @@ sources={
 	require "${project.baseUri}/VisualMetamodelPruner.kmt"
 }
 dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.2"
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
 }
