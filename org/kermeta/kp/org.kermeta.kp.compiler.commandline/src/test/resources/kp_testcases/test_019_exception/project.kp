@@ -8,7 +8,8 @@ sources={
 dependencies={
 		
 	// import library.extended	
-	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/2.0.1-SNAPSHOT"   
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
+	dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/LATEST"   
 		 
 } 
 

@@ -11,5 +11,5 @@ sources={
 dependencies={
 	dependency "language.model" URLs="mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT" sourceOnly
 	// still reuse the real library.core bytecode because we don't want to rewrite everything for a simple test
-	dependency "dummy.livrary" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" byteCodeOnly
+	dependency "dummy.livrary" URLs="mvn:org.kermeta.language/language.library.core/LATEST" byteCodeOnly
 } 

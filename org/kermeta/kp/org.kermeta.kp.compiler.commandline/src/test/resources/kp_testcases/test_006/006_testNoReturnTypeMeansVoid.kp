@@ -7,5 +7,5 @@ sources={
 	require "${project.baseUri}/006_testNoReturnTypeMeansVoid.kmt"
 }
 dependencies={
-	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
 }

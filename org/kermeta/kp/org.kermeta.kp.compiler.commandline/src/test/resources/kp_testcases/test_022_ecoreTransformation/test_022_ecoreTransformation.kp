@@ -11,7 +11,7 @@ KermetaProject "test_022_ecoreTransformation"
 	}
 	dependencies = {
 		//default dependency to kermeta framework (SNAPSHOT = use the last development version)
-		//dependency "library.core" ="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
+		//dependency "library.core" ="mvn:org.kermeta.language/language.library.core/LATEST"
 		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core"
 		//dependency "rdbms" ="platform:/resource/language.sample.class2rdbms"
 		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore/" 

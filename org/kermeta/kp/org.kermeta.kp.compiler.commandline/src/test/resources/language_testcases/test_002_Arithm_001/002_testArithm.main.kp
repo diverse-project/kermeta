@@ -7,5 +7,5 @@ sources={
 	require "${project.baseUri}/002_testArithm.main.kmt"
 }
 dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.3-SNAPSHOT"
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
 }
