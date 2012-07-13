@@ -19,10 +19,7 @@ class Void {
 
 @CompilerIgnore "true"
 class Object
-{
-	@CompilerIgnore "true"
-	operation assert(test : Boolean) is do
-	end
+{	
 
 	/**
 	 * Returns the Class object that is the metaclass of current Object
