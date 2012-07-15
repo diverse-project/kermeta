@@ -39,15 +39,15 @@ object UTilScala {
 
 
         var factoryName = packName + ".KerRichFactory$"
+        var methodName = "create" + o.getTypeDefinition.getName
         // Dirty patch, supposed to be temporary
         // See bug 2188
-        try{
-          java.lang.Class.forName(factoryName)
-        } catch{
-          case e:java.lang.ClassNotFoundException => factoryName = scalaAspectPrefix +"." + factoryName
-        }
-        var methodName = "create" + o.getTypeDefinition.getName
-        val clazz = java.lang.Class.forName(factoryName)
+        val clazz = 
+          try{
+            java.lang.Class.forName(factoryName)
+          } catch{
+            case e:java.lang.ClassNotFoundException => java.lang.Class.forName(scalaAspectPrefix +"." + factoryName)
+          }
         val obj = clazz.getField("MODULE$").get(clazz)
         var meth :_root_.java.lang.reflect.Method = clazz.getMethods.filter(m=> m.getName.equals(methodName)).first
         //println(meth.getName + " " + meth.getParameterTypes.size)
