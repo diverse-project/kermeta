@@ -32,41 +32,22 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	  return new RichResource(eResource())
 	}
 	
-	def removeFromContainer()  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
+	def removeFromContainer():Unit  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
 	
-  //TODO
-	def invoke(op:org.kermeta.language.structure.Operation , args:java.util.List[k2.standard.KermetaObject]) ={
-//		throw new RuntimeException("Operation invoke is not yet implemented.")
-		if(args.length != 0)
-		  throw new RuntimeException("Invoking operations with multiple arguments is not yet implemented.")
-		var optionMeth : Option[java.lang.reflect.Method] = this.getClass().getMethods.find(m => m.getName() == op.getName()
+	def invoke(op:org.kermeta.language.structure.Operation , args:k2.standard.KermetaOrderedCol[_<:Any]) : k2.standard.KermetaObject ={
+		var optionMeth = this.getClass().getMethods.find(m => m.getName() == op.getName()
 		    && m.getParameterTypes().length == args.length)
 		optionMeth match{
-		  case Some(meth) => {
-		    try{
-		      meth.invoke(this)
-		    } catch {
-		      case e:java.lang.reflect.InvocationTargetException => {throw e.getCause()}
-		    }
-		  }
-		  case None => {throw new NoSuchMethodException}
-		}
-		//TODO
-		/* code for taking multiple argument
-		var optionMeth : Option[java.lang.reflect.Method] = this.getClass().getMethods.find(m => m.getName() == op.getName()
-		    && m.getParameterTypes().length == args.length)
-		optionMeth match{
-		  case None => {throw new NoSuchMethodException}
+		  case None => {throw new NoSuchMethodException(op.getName+" with "+args.length+" arguments")}
 		  case Some(meth) => {
 			  var argsTab : Array[AnyRef] = args.toArray()
-      		//TODO : take into account the special case of arguments inheriting from RichValueType and RichEnum
 		    try{
-		      meth.invoke(this, argsTab) //not working
+		      k2.standard.PrimitiveConversion.any2kermeta(meth.invoke(this, argsTab:_*))
 		    } catch {
 		      case e:java.lang.reflect.InvocationTargetException => {throw e.getCause()}
 		    }
 		  }
-		}*/
+		}
 	}
 
 
@@ -95,8 +76,6 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   //def ScalaclassDefinition = classDefinition
   def typedefinition = this
   def container() = this.eContainer().asInstanceOf[KermetaObject]
-  //override def equals(o : Any) : Boolean = o == this /*TODO Need clearer explanations*/
-  def equals(o : KermetaObject):java.lang.Boolean = o == this
 
   def isNotEqual(o : Any) : Boolean = !equals(o)
 
@@ -187,7 +166,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def oid() : Int = this.hashCode()
   override def toString : String = super.toString()//"["+this.eClass().getName()+":"+oid.toString()+"]"
   def isVoid() : Boolean = false
-  def hashcode : Int = this.hashCode()
+  override def hashCode : Int = this.hashCode()
   def getKerMetaClass(): java.lang.Class[_] =this.getClass
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
   //def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)

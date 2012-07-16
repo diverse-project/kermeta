@@ -331,7 +331,7 @@ import scala.collection.JavaConversions._
           }
       }
       
-      override def equals(e:KermetaObject):jl.Boolean={
+      override def equals(e:Any):Boolean={
         e match{
           case e:KermetaOrderedCol[_] => false
           case e:KermetaCol[A]=> e.size==value.size && value.forall(x => e.count(x)==1)
@@ -443,7 +443,7 @@ import scala.collection.JavaConversions._
     
     trait KermetaBagAspect[A] extends KermetaColAspect[A] with KermetaBag[A]{
       
-      override def equals(e:KermetaObject):jl.Boolean={
+      override def equals(e:Any):Boolean={
         e match {
         case e:KermetaOrderedCol[_] => false
         case e:KermetaSet[A] => e.equals(this)

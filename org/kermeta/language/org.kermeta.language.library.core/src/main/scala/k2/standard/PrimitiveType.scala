@@ -11,6 +11,27 @@ import k2.exceptions.ConstraintsDiagnostic
 
     
 object PrimitiveConversion{
+  
+  implicit def any2kermeta(o : Any)  =  o match {
+    case s:String => new k2.standard.RichString(s)
+    case s : java.lang.Boolean => new k2.standard.RichBoolean(s)
+    case s : java.lang.Integer => new k2.standard.RichInteger(s.intValue)
+    case s:  k2.standard.KermetaObject => s
+    case s: java.util.Iterator[_] => new k2.standard.RichIterator(s)
+    case s: java.lang.Double => new k2.standard.RichDouble(s)
+    case s: java.lang.Float => new k2.standard.RichFloat(s)
+    case s:java.lang.StringBuilder => new k2.standard.RichStringBuffer(s)
+    case s:java.lang.Short => new k2.standard.RichShort(s)
+    case s:java.lang.Long => new k2.standard.RichLong(s)
+    case s:java.lang.Character=> new k2.standard.RichCharacter(s)
+    case s:org.eclipse.emf.common.util.URI => new k2.standard.RichURI(s)
+    case _ =>  
+      if (o!=null)
+        new k2.standard.RichEnum(o.asInstanceOf[java.lang.Object])
+      else
+        null.asInstanceOf[k2.standard.EObjectImplForPrimitive]
+  }
+
     implicit def string2kermeta(x: String) = new RichString(x)
     implicit def stringbuffer2kermeta(x: java.lang.StringBuilder) = new RichStringBuffer(x)
 

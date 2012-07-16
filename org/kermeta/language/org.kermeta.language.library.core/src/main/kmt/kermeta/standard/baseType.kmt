@@ -207,7 +207,7 @@ class Object
 	 * for more information about hashcode
 	 */
 	@CompilerIgnore "true"
-	operation hashcode() : Integer is do		
+	operation hashCode() : Integer is do		
 	end
 
 	/* *
@@ -241,7 +241,7 @@ class Object
 	end
 	
 	@CompilerIgnore "true"
-	operation invoke(op:Operation,args:OrderedCollection<Object>) is do
+	operation invoke(op:Operation,args:OrderedCollection[Object]) : Object is do
 	end
 }
 @CompilerIgnore "true"

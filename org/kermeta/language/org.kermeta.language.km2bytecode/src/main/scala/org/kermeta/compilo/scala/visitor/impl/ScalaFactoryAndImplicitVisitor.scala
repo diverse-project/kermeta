@@ -129,7 +129,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     implicitDef = new StringBuilder
     implicitDef append "package " + GlobalConfiguration.frameworkGeneratedPackageName + "\n"
     implicitDef append "object " + GlobalConfiguration.implicitConvTraitName + " {\n"
-    implicitDef.append("implicit def richAspect(o : _root_.java.lang.Object)  =  o match {\n")
+/*    implicitDef.append("implicit def richAspect(o : _root_.java.lang.Object)  =  o match {\n")
     implicitDef.append("  case s:String => new k2.standard.RichString(s)\n")
     implicitDef.append("   case s : java.lang.Boolean => new k2.standard.RichBoolean(s)\n")
     implicitDef.append("   case s : java.lang.Integer =>\n")
@@ -140,7 +140,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     implicitDef.append("    else\n")
     implicitDef.append("       null.asInstanceOf[k2.standard.EObjectImplForPrimitive]\n")
     implicitDef.append(" }\n")
-
+*/
     factoryDefClass = new StringBuilder
   }
   var packages: java.util.List[Package] = _
@@ -340,13 +340,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
           viewDefTemp.append(" extends " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString + par.getName())) + param.toString)
         else
           viewDefTemp.append(" extends " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString + implName.substring(1, implName.size) + par.getName() + "Impl")) + param.toString)
-        viewDefTemp.append(" with " + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + param.toString + " ")
-
         if (!visitor.getQualifiedNameCompilo(par.eContainer).contains("org.kermeta")) { //!IsObjectClassChildren(par)){
-          viewDefTemp.append("with " + "k2.standard.KermetaObject")
+          viewDefTemp.append(" with " + "k2.standard.KermetaObject")
           if (Util.hasEcoreFromAPITag(par))
             viewDefTemp.append(" with k2.standard.EObjectImplForPrimitive")
         }
+        viewDefTemp.append(" with " + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + param.toString + " ")
+
         viewDefTemp.append("\n")
 
         if ("EObject".equals(par.getName)) {
@@ -374,25 +374,28 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
         //cd.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
         viewDefTemp.append(" class Rich" + par.getName() + param.toString + " extends ")
+        var swith=""
         if (!IsAnExceptionChildren(par)) {
           if (cd != null) {
-            viewDefTemp.append(visitor.getQualifiedNameCompilo(cd.eContainer().asInstanceOf[KermetaModelElement]) + ".impl." + cd.getName + "Impl with ")
+            viewDefTemp.append(swith + visitor.getQualifiedNameCompilo(cd.eContainer().asInstanceOf[KermetaModelElement]) + ".impl." + cd.getName + "Impl")
+            swith = " with "
           }
         }
-        viewDefTemp.append(k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString + " with " + packageName.toString + "." + par.getName + "Aspect" + param.toString)
         var superClassName: String = "k2.standard.KermetaObject"
         if (cd != null) {
           superClassName = visitor.getQualifiedNameCompilo(cd.eContainer().asInstanceOf[KermetaModelElement]) + "." + cd.getName
         }
-        
         if (!(classOf[Object].getCanonicalName.equals(superClassName)
           || classOf[org.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName))) {
-          viewDefTemp.append(" with " + "_root_.k2.standard.KermetaObject ")
-                      if (!IsAnExceptionChildren(par) && cd==null) 
-        		  			viewDefTemp.append("with k2.standard.EObjectImplForPrimitive")
+          viewDefTemp.append(swith + "_root_.k2.standard.KermetaObject ")
+          swith=" with "
+          if (!IsAnExceptionChildren(par) && cd==null) 
+        	viewDefTemp.append("with k2.standard.EObjectImplForPrimitive")
         } else {
           //println(cd.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo + "."+ cd.getName)
         }
+        viewDefTemp.append(swith + k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString + " with " + packageName.toString + "." + par.getName + "Aspect" + param.toString)
+        
         viewDefTemp.append(" \n")
 
         /*                if (cd == null)
