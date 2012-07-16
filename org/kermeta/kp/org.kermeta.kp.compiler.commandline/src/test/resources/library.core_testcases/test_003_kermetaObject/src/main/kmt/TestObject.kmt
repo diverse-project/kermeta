@@ -1,0 +1,67 @@
+package testPackage;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::kunit
+
+class TestObject inherits TestCase{
+
+	operation mainTest():Void is do
+		var testRunner:TestRunner init TestRunner.new
+		testRunner.run(self.getMetaClass)
+		testRunner.printTestResult
+	end
+	
+	operation testEquals():Void is do
+		var n0:NamedElement := NamedElement.new
+		var n1:NamedElement := NamedElement.new
+		assert(n0==n1)
+		n0.name:="n"
+		assertFalse(n0==n1)
+		n1.name:="n"
+		assert(n0==n1)
+	end
+	
+	operation testInvoke():Void is do
+		var cd : org::kermeta::language::structure::ClassDefinition init NamedElement.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition)
+		var operations : OrderedSet[org::kermeta::language::structure::Operation] init cd.ownedOperation.asOrderedSet 
+		var op : org::kermeta::language::structure::Operation
+		var args : OrderedSet[Object] init OrderedSet[Object].new
+		var n:NamedElement:=NamedElement.new
+		
+		op :=  operations.detect{op | op.name.equals("init")}
+		assert(n.name==void)
+		n.invoke(op,args)
+		assert(n.name=="")
+
+		op := operations.detect{op|op.name.equals("setName")}
+		args.add("tutu")
+		n.invoke(op,args)
+		assert(n.name=="tutu")
+		
+		op := operations.detect{op | op.name.equals("getName")}
+		args.clear
+		assert(n.invoke(op,args)=="tutu")
+
+		args.add("tutu")
+		do
+			n.invoke(op,args)
+			assert(false)
+		rescue(e:kermeta::exceptions::RuntimeError)
+		rescue(e:kermeta::exceptions::Exception)
+			assert(false)
+		end
+
+		args.clear
+		op := Dummy.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="dummy"}
+		do
+			n.invoke(op,args)
+			assert(false)
+		rescue(e:kermeta::exceptions::RuntimeError)
+		rescue(e:kermeta::exceptions::Exception)
+			assert(false)
+		end
+		
+	end
+	
+}

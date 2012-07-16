@@ -1,0 +1,34 @@
+package testPackage;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+class NamedElement {
+	attribute name:String
+	
+	operation equals(o:Object):Boolean is do
+		result := false
+		if(o.isInstanceOf(NamedElement)) then
+			result := (self.name == o.asType(NamedElement).name)
+		end
+	end
+	
+	operation ~init():Void is do
+		name:=""
+	end
+	
+	operation setName(n:Object):Void is do
+		name := n.toString
+	end
+	
+	operation getName() : String is do
+		result := name
+	end
+}
+
+class Dummy{
+	
+	operation dummy():Void is do
+	end
+	
+}
