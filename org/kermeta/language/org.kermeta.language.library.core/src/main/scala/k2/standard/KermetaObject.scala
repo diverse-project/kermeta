@@ -166,7 +166,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def oid() : Int = this.hashCode()
   override def toString : String = super.toString()//"["+this.eClass().getName()+":"+oid.toString()+"]"
   def isVoid() : Boolean = false
-  override def hashCode : Int = this.hashCode()
+  override def hashCode : Int = super.hashCode()
   def getKerMetaClass(): java.lang.Class[_] =this.getClass
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
   //def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
