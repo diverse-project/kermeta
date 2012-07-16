@@ -2,7 +2,7 @@ package testPackage;
 
 using kermeta::standard
 using kermeta::io::StdIO => stdio
-using org::kermeta::kunit
+using kermeta::kunit
 
 class TestBag inherits TestCase {
 	
