@@ -38,7 +38,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 		var optionMeth = this.getClass().getMethods.find(m => m.getName() == op.getName()
 		    && m.getParameterTypes().length == args.length)
 		optionMeth match{
-		  case None => {throw new NoSuchMethodException(op.getName+" with "+args.length+" arguments")}
+		  case None => {throw k2.exceptions.KerRichFactory.createRuntimeError.initialize(op.getName+" with "+args.length+" arguments in class "+this.getMetaClass().getName())}
 		  case Some(meth) => {
 			  var argsTab : Array[AnyRef] = args.toArray()
 		    try{

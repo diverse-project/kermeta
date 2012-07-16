@@ -82,7 +82,8 @@ trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ec
 	}
 }  
 trait RuntimeErrorAspect extends Exception{
-	var expression:Expression=null;
+  message="RuntimeError"
+  var expression:Expression=null;
 }
 trait RuntimeError extends RuntimeErrorAspect{
 }
