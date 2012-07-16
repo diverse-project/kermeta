@@ -25,6 +25,15 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
       //}else{
         res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
       //}
+        
+      // Generate special parameters for certain operations
+      if(thi.getName()=="equals" && thi.getOwnedParameter().size()==1){
+        res.append("(")
+        res.append(Util.protectScalaKeyword(thi.getOwnedParameter().get(0).getName()))
+        res.append(":Any):Boolean")
+        return
+      }
+        
       generateParamerterOp(thi, res)
       /* Default constructor declaration */
       res.append("(")
@@ -60,45 +69,7 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
     if (!Util.hasCompilerIgnoreTag(thi)){
       log.debug("Operation={}",thi.getName)
       res.append("\n   ")
-      if (thi.getSuperOperation()!=null          ){
-        res.append(" override")
-      }
-      res.append(" def ")
-      //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-      //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
-      //}else{
-        res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
-      //}
-      generateParamerterOp(thi, res)
-      /* Default constructor declaration */
-      res.append("(")
-      var i = 0;
-      thi.getOwnedParameter.foreach(par => {
-          if (i==0) {
-            res.append(Util.protectScalaKeyword(par.getName()))
-            res.append(" : ")
-            this.getListorType(par, res)//par.getType.generateScalaCode(res)
-          }else{
-            res.append(", ")
-            res.append(Util.protectScalaKeyword(par.getName()))
-            res.append(" : ")
-            this.getListorType(par, res)//					par.getType.generateScalaCode(res)
-          }
-          i=i + 1
-        })
-      res.append(")")
-      // generate implicit parameters for reified parameter types
-      generateImplicitParameter(thi,res)
-      res.append(":")
-      /* Return Type Declaration */
-     var res1 = new StringBuilder
-      this.getListorType(thi,res1)
-      if ("_root_.k2.standard.Void".equals(res1.toString)){
-        res.append("Unit")
-        
-      }else{
-        res.append(res1)
-      }
+      generateSignature(thi,res)
       //this.getType.generateScalaCode(res)
         res.append(" = {\n")
         res.append("var `~result` : ")
@@ -123,6 +94,8 @@ res append "  	  tutu18.setStackTrace(e.getStackTrace)\n"
 res append "  	  throw tutu18\n"
 res append "  }\n}*/\n"
         
+     var res1 = new StringBuilder
+      this.getListorType(thi,res1)
       if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString)){
         res append " \n}\n"
       } 
