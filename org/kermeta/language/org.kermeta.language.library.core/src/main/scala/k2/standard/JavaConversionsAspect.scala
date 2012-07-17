@@ -450,8 +450,8 @@ import scala.collection.JavaConversions._
         case e:KermetaBag[A] => {
           if(value.size()!=e.size)
             return false
-    	  val thisCount=this.asSet().map(e=>(e,this.count(e)))
-    	  val otherCount=e.asSet().map(e=>(e,this.count(e)))
+    	  val thisCount=this.asSet().map(x=>(x,this.count(x)))
+    	  val otherCount=e.asSet().map(x=>(x,e.count(x)))
     	  thisCount.forall(t2=>otherCount.contains(t2)) &&
     	  	otherCount.forall(t2=>thisCount.contains(t2))
         }
@@ -577,7 +577,7 @@ import scala.collection.JavaConversions._
     	  value.get(value.size-1)
     	}
     	
-    	override final def equals(o:Any):Boolean={
+    	override def equals(o:Any):Boolean={
     	  o match{
     	    case o:KermetaOrderedCol[_] => value.equals(o) // relies on ju.List.equals
     	    case _ => false
@@ -585,7 +585,7 @@ import scala.collection.JavaConversions._
     	}
     	
     	// hashCode specified by ju.List
-    	override final def hashCode():Int={
+    	override def hashCode():Int={
     	  value.foldLeft(1){(acc,e) => 
     	    31*acc+{
     	      if(e==null)

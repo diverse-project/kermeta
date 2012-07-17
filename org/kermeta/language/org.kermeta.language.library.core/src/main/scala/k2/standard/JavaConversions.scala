@@ -161,6 +161,8 @@ import org.eclipse.emf.common.util.UniqueEList
       
       override def remove(e:A):Unit
       
+      override def equals(e:Any):Boolean
+      
       override def count(e:A):Int
 
       override def asSet():KermetaSet[A]
@@ -185,6 +187,8 @@ import org.eclipse.emf.common.util.UniqueEList
     
     trait KermetaBag[A] extends KermetaCol[A]{
       
+      override def equals(e:Any):Boolean
+
       def union(elements:KermetaCol[A]):KermetaBag[A]
       
       def intersection(elements:KermetaCol[A]):KermetaBag[A]
