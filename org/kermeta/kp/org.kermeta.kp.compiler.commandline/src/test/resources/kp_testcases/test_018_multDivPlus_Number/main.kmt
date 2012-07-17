@@ -4,6 +4,12 @@ using kermeta::standard
 
 class Test {
 	operation main() is do
+		testOnInteger()
+		testOnFloat()
+		testOnDouble()
+	end
+	
+	operation testOnInteger() is do
 		var a : Integer := 1 + 0
 		a:= 1.plus(0)
 		a := 4 / 2
@@ -13,7 +19,9 @@ class Test {
 		a := 20.mod(4)
 		a := 3 - 6
 		a := 3.minus(6)
-		
+	end
+	
+	operation testOnFloat() is do
 		var b : Float := 1.floatValue
 		var c : Float := -3.floatValue
 		
@@ -26,5 +34,24 @@ class Test {
 		b := b.mult(c)
 		b := b * c
 		b := b.mod(c)
+	end
+	
+	operation testOnDouble() is do
+		var b : Double := 1.doubleValue
+		var c : Double := -3.doubleValue
+		
+		b := b.plus(c)
+		b := b + c
+		b := b.minus(c)
+		b := b - c
+		b := b.div(c)
+		b := b / c
+		b := b.mult(c)
+		b := b * c
+		b := b.mod(c)
+		
+		var d : Double
+        d :="9.5".toReal
+        d := d * ("1.3".toReal)
 	end
 }
