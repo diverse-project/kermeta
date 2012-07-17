@@ -164,9 +164,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         
         res.append("new k2.standard.RichKermeta")
         getCollectionType(thi,res)
-        res.append("[")
-        visit(thi.getType(),res)
-        res.append("](")
+        res.append("(")
       }
 
       if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))) {
