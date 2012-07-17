@@ -43,11 +43,15 @@ object PrimitiveConversion{
 
     implicit def random2kermeta(x: java.util.Random) = new RichRandom(x)
     implicit def integer2kermeta(x: Int) = new RichInteger(x)
+    implicit def javainteger2kermeta(x: java.lang.Integer) = new RichInteger(x)
     implicit def long2kermeta(x: Long) = new RichLong(x)
+    implicit def javalong2kermeta(x: java.lang.Long) = new RichLong(x)
     implicit def short2kermeta(x: Short) = new RichShort(x)
     implicit def javashort2kermeta(x: java.lang.Short) = new RichShort(x)
     implicit def float2kermeta(x: Float) = new RichFloat(x)
+    implicit def javafloat2kermeta(x: java.lang.Float) = new RichFloat(x)
     implicit def double2kermeta(x: Double) = new RichDouble(x)
+    implicit def javadouble2kermeta(x: java.lang.Double) = new RichDouble(x)
     implicit def date2kermeta(x: java.util.Date) = new RichDate(x)
     implicit def uri2kermeta(x: org.eclipse.emf.common.util.URI) = new RichURI(x)
     implicit def resource2KerResource(x: org.eclipse.emf.ecore.resource.Resource) = new _root_.k2.persistence.RichResource(x)
@@ -59,12 +63,6 @@ object PrimitiveConversion{
 	
     //implicit def toInt2(in:java.lang.Integer) : Int = in.intValue
     //implicit def toReal2(in:java.lang.Double) : Double = in.doubleValue
-    implicit def toDouble(in:java.lang.Double) : RichDouble = new RichDouble(in.doubleValue)
-    implicit def toFloat(in:java.lang.Float) : RichFloat = new RichFloat(in.floatValue)
-    implicit def toInt(in:java.lang.Integer) : RichInteger = new RichInteger(in.intValue)
-    implicit def toLong(in:java.lang.Long) : RichLong = new RichLong(in.longValue)    
-    implicit def toShort(in:java.lang.Short) : RichShort = new RichShort(in.shortValue)
-    //implicit def toReal(in:java.lang.Double) : RichReal = new RichReal(in.doubleValue)
 
 
 
