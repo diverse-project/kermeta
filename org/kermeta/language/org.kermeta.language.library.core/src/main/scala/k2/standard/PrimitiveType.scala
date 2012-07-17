@@ -31,6 +31,30 @@ object PrimitiveConversion{
       else
         null.asInstanceOf[k2.standard.EObjectImplForPrimitive]
   }
+  
+  /**
+   * Use only if really needed.
+   * Typical use: when using invoke (see bug 2189)
+   */
+  def rich2java(e:KermetaObject):Any= e match {
+    case s: k2.standard.RichString => s.toString()
+    case s : k2.standard.RichBoolean => s.booleanValue()
+    //case s : k2.standard.RichInteger => new k2.standard.RichInteger(s.intValue)
+    //case s:  k2.standard.KermetaObject => s
+    //case s: java.util.Iterator[_] => new k2.standard.RichIterator(s)
+    //case s: k2.standard.RichDouble => new k2.standard.RichDouble(s)
+    //case s: k2.standard.RichFloat => new k2.standard.RichFloat(s)
+    //case s:k2.standard.RichStringBuilder => new k2.standard.RichStringBuffer(s)
+    //case s:k2.standard.RichShort => new k2.standard.RichShort(s)
+    //case s:k2.standard.RichLong => new k2.standard.RichLong(s)
+    //case s:k2.standard.RichCharacter=> new k2.standard.RichCharacter(s)
+    //case s:org.eclipse.emf.common.util.URI => new k2.standard.RichURI(s)
+    case _ =>  
+      /*if (o!=null)
+        new k2.standard.RichEnum(o.asInstanceOf[Object])
+      else*/
+        null
+  }
 
     implicit def string2kermeta(x: String) = new RichString(x)
     implicit def stringbuffer2kermeta(x: java.lang.StringBuilder) = new RichStringBuffer(x)
@@ -254,7 +278,7 @@ class RichDouble(value: Double) extends RichNumeric[Double]{
   def compareTo(other : Double) :Int={return value.compare(other)}
   override def isGreater(other : Double) :Boolean={return value>other}
   override def isGreaterOrEqual(other : Double) :Boolean={value>=other}
-  override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
+  override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
   def isLowerOrEqual(other : Double) :Boolean={return  value<=other.intValue}
 
 override def getValue():Object = new java.lang.Double(value)
@@ -292,7 +316,7 @@ class RichFloat(value: Float)extends RichNumeric[Float] {
   def compareTo(other : Float) :Int={return value.compare(other)}
   override def isGreater(other : Float) :Boolean={return value>other}
   override def isGreaterOrEqual(other : Float) :Boolean={value>=other}
-  override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
+  override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
   def isLowerOrEqual(other : Float) :Boolean={return  value<=other.intValue}
 
 override def getValue():Object = new java.lang.Float(value)
@@ -385,7 +409,7 @@ class RichShort(value: Short) extends RichNumeric[Short] {
       def compareTo(other : Integer) :Int={return value.compare(other.shortValue())}
       override def isGreater(other : Short) :Boolean={return value>other}
       override def isGreaterOrEqual(other : Short) :Boolean={value>=other}
-      override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
+      override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
       def isLowerOrEqual(other : Short) :Boolean={return  value<=other.intValue}
 
   override def getValue():Object = new java.lang.Short(value)
@@ -524,7 +548,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
 	
 //    def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
     def times(func : java.lang.Integer => Unit):Unit ={ for(i <- 0 until value){func(i)} }
-    override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
+    override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
     override def getValue():Object = new java.lang.Integer(value)		
     //def isNotEqual(other : Any) :Boolean = this.equals(other)
     override def getMetaClass():org.kermeta.language.structure.Class={

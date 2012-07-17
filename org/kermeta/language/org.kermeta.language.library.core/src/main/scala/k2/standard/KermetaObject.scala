@@ -21,7 +21,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 		}
 	}*/
 
-	def equals(element : Any) : Boolean
+	override def equals(element : Any) : Boolean
 	//def isNotEqual(element : Any) : Boolean = !this.equals(element)
 
 	def isSet(property : org.kermeta.language.structure.Property) : Boolean ={
@@ -77,7 +77,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def typedefinition = this
   def container() = this.eContainer().asInstanceOf[KermetaObject]
 
-  def isNotEqual(o : Any) : Boolean = !equals(o)
+  def isNotEqual(o : Any) : java.lang.Boolean = !equals(o)
 
   def isDirectInstanceOf(cl : org.kermeta.language.structure.Class) : java.lang.Boolean = {//FIXME GENERICS
 	  this match {
