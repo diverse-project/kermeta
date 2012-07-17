@@ -92,7 +92,7 @@ class TestOrderedSet inherits TestCase {
 		var c0:Sequence[Object]:=Sequence[Object].new
 		c.add(AlwaysEqual.new)
 		c0.add(AlwaysEqual.new)
-		assertTrue(c.equals(c2))
+		assertTrue(c.equals(c0))
 	end
 	
 	operation testSubSet() :Void is do

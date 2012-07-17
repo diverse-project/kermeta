@@ -57,7 +57,7 @@ class TestBag inherits TestCase {
 		var c0:Collection[Object]:=Bag[Object].new
 		c.add(AlwaysEqual.new)
 		c0.add(AlwaysEqual.new)
-		assertTrue(c.equals(c2))
+		assertTrue(c.equals(c0))
 	end
 
 	operation testUnion() : Void is do
