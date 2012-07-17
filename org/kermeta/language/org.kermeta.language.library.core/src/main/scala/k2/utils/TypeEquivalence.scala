@@ -107,7 +107,6 @@ object TypeEquivalence {
 				 typeEquivelence.put("k2.standard.Void", 		"scala.Unit");
 				 typeEquivelence.put("k2.utils.Stack", 			"java.util.Stack");
 				 typeEquivelence.put("k2.utils.Hashtable", 		"java.util.HashMap");
-				 typeEquivelence.put("k2.utils.Hashtable", 		"java.util.HashMap");
 				 //typeEquivelence.put(" org.k2.language.structure.String", "java.lang.String");
 				 typeEquivelence.put("long", 					"java.lang.Long");
 				 typeEquivelence.put( k2.utils.UTilScala.scalaAspectPrefix + ".org.kermeta.language.ReflectiveSequence", "java.util.List")
