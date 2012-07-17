@@ -293,7 +293,7 @@ class TestSet inherits TestCase {
 		assertTrue(flatten.contains(flatten.contains("titi"))
 		assertTrue(flatten.contains(flatten.contains("tata") and flatten.contains("tete"))
 		*/
-		assertTrue(false) // bug Object -> Any for type parameters
+		assertTrue(false) // bug 2190
 
 		c.clear
 		var c0:Collection[Object]
