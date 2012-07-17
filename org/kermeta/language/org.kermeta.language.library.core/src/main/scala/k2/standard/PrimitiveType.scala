@@ -59,7 +59,11 @@ object PrimitiveConversion{
 	
     //implicit def toInt2(in:java.lang.Integer) : Int = in.intValue
     //implicit def toReal2(in:java.lang.Double) : Double = in.doubleValue
+    implicit def toDouble(in:java.lang.Double) : RichDouble = new RichDouble(in.doubleValue)
+    implicit def toFloat(in:java.lang.Float) : RichFloat = new RichFloat(in.floatValue)
     implicit def toInt(in:java.lang.Integer) : RichInteger = new RichInteger(in.intValue)
+    implicit def toLong(in:java.lang.Long) : RichLong = new RichLong(in.longValue)    
+    implicit def toShort(in:java.lang.Short) : RichShort = new RichShort(in.shortValue)
     //implicit def toReal(in:java.lang.Double) : RichReal = new RichReal(in.doubleValue)
 
 
@@ -506,7 +510,8 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
 	def kfloatValue() : Float = value.floatValue()
 	def kdoubleValue() : Double = value.doubleValue()
 
-    def toReal() :Double={return value}
+    def toReal() :Double={return value} // deprecated in kmt framework
+	def toDouble() :Double={return value}
     override def compareTo(other : Int) :Int={return value.compare(other) }
     def kcompareTo(other : Int) :Int={return value.compare(other.intValue)}
     def kcompareTo(other : Integer) :Int={return value.compare(other.intValue)}
@@ -709,7 +714,8 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
    def replace(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
    def replaceKeyword(arg0:java.lang.String,arg1:java.lang.String) : java.lang.String = value.replaceAll(arg0,arg1)
    def toInteger() : Int = _root_.java.lang.Integer.parseInt(value)
-   def toReal() : Double = _root_.java.lang.Double.parseDouble(value)
+   def toReal() : Double = _root_.java.lang.Double.parseDouble(value) // deprecated in framework
+   def toDouble() : Double = _root_.java.lang.Double.parseDouble(value)
    def toURI() : org.eclipse.emf.common.util.URI = org.eclipse.emf.common.util.URI.createURI(value)
    def toBoolean() : Boolean = _root_.java.lang.Boolean.parseBoolean(value)
 

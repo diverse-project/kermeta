@@ -521,7 +521,12 @@ class String {
         end
 
         @CompilerIgnore "true"
+        @Deprecated "Operation toReal is deprecated, use toDouble instead"
         operation toReal() : Double is do
+        end
+        
+        @CompilerIgnore "true"
+        operation toDouble() : Double is do
         end
 
         @CompilerIgnore "true"
@@ -706,6 +711,7 @@ class Integer inherits Numeric<Integer> {        @CompilerIgnore "true"
 
           // Add missing methods from V1
         @CompilerIgnore "true"
+        @deprecated "operation toReal is deprecated, please use doubleValue instead"
         operation toReal() : Double is do
         end
 
