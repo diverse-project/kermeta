@@ -32,30 +32,6 @@ object PrimitiveConversion{
         null.asInstanceOf[k2.standard.EObjectImplForPrimitive]
   }
   
-  /**
-   * Use only if really needed.
-   * Typical use: when using invoke (see bug 2189)
-   */
-  def rich2java(e:KermetaObject):Any= e match {
-    case s: k2.standard.RichString => s.toString()
-    case s : k2.standard.RichBoolean => s.booleanValue()
-    //case s : k2.standard.RichInteger => new k2.standard.RichInteger(s.intValue)
-    //case s:  k2.standard.KermetaObject => s
-    //case s: java.util.Iterator[_] => new k2.standard.RichIterator(s)
-    //case s: k2.standard.RichDouble => new k2.standard.RichDouble(s)
-    //case s: k2.standard.RichFloat => new k2.standard.RichFloat(s)
-    //case s:k2.standard.RichStringBuilder => new k2.standard.RichStringBuffer(s)
-    //case s:k2.standard.RichShort => new k2.standard.RichShort(s)
-    //case s:k2.standard.RichLong => new k2.standard.RichLong(s)
-    //case s:k2.standard.RichCharacter=> new k2.standard.RichCharacter(s)
-    //case s:org.eclipse.emf.common.util.URI => new k2.standard.RichURI(s)
-    case _ =>  
-      /*if (o!=null)
-        new k2.standard.RichEnum(o.asInstanceOf[Object])
-      else*/
-        null
-  }
-
     implicit def string2kermeta(x: String) = new RichString(x)
     implicit def stringbuffer2kermeta(x: java.lang.StringBuilder) = new RichStringBuffer(x)
 
