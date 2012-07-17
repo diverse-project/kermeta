@@ -8,7 +8,7 @@ using kermeta::standard
 using kermeta::exceptions
 
 using kermeta::io::StdIO => stdio
-
+ 
  class MyExceptionX inherits Exception {
  }
  class MyExceptionY inherits Exception {
