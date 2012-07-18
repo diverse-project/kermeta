@@ -8,18 +8,18 @@
         eType="#//ClassRoom" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
         eType="#//Student" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="matters" upperBound="-1"
-        eType="#//Matter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subjects" upperBound="-1"
+        eType="#//Subject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="teachers" upperBound="-1"
         eType="#//Teacher" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classroom" lowerBound="1"
         eType="#//ClassRoom"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="matter" lowerBound="1"
-        eType="#//Matter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
+        eType="#//Subject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="teacher" lowerBound="1"
         eType="#//Teacher"/>
   </eClassifiers>
@@ -32,14 +32,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Matter">
+  <eClassifiers xsi:type="ecore:EClass" name="Subject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="#//Level"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Teacher">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="teache" lowerBound="1"
-        upperBound="-1" eType="#//Matter"/>
+        upperBound="-1" eType="#//Subject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Level">
     <eLiterals name="beginner"/>
