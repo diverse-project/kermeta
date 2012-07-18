@@ -26,6 +26,9 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.callable.CallableGenmodelGenerator;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -56,7 +59,8 @@ public class Ecore2Bytecode {
 	
 	public Ecore2Bytecode(MessagingSystem logger, String baseProgressGroup,
 			KermetaProject kp, ArrayList<URL> ecoreForGenerationURLs,
-			String targetGenmodelFolder, String targetGeneratedJavaFolder, String targetClassesFolder, List<String> additionalClassPath) {
+			String rootFolder,
+			String targetGenmodelFolder, String targetGeneratedJavaFolder, String targetClassesFolder, List<String> additionalClassPath, boolean runInEclipse) {
 		super();
 		this.logger = logger;
 		this.baseProgressGroup = baseProgressGroup;
@@ -73,6 +77,11 @@ public class Ecore2Bytecode {
 		}
 		else{
 			fileManager = compiler.getStandardFileManager(diagnostics, null, null);
+		}
+		if(!runInEclipse){
+			logger.debug("runInEclipse = true", KermetaCompiler.LOG_MESSAGE_GROUP);
+			logger.debug("EcorePlugin.getPlatformResourceMap().put(\""+kp.getName()+"\", URI.createURI(\"file:///"+rootFolder.replaceAll("\\\\", "/")+"\"));", KermetaCompiler.LOG_MESSAGE_GROUP);
+			EcorePlugin.getPlatformResourceMap().put(kp.getName(), URI.createURI("file:///"+rootFolder.replaceAll("\\\\", "/")));
 		}
 	}
 	/**

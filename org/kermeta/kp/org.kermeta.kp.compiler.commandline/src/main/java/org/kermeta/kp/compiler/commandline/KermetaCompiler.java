@@ -301,6 +301,7 @@ public class KermetaCompiler {
 		this.targetGeneratedEMFSourceFolder = targetGeneratedEMFSourceFolder;
 		this.targetEMFBinaryFolder = targetEMFBinaryFolder;
 		this.targetGeneratedResourcesFolder = targetGeneratedResourcesFolder;
+		
 	}
 
 	/*
@@ -683,7 +684,7 @@ public class KermetaCompiler {
 			fullBinaryDependencyClassPath.addAll(additionalClassPath);
 			// generating 
 			ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
-			Ecore2Bytecode ecore2Bytecode = new Ecore2Bytecode(logger, getMainProgressGroup(), kp, ecoreForGenerationURLs, targetGeneratedGenmodelFolder, targetGeneratedEMFSourceFolder, targetEMFBinaryFolder, additionalClassPath);
+			Ecore2Bytecode ecore2Bytecode = new Ecore2Bytecode(logger, getMainProgressGroup(), kp, ecoreForGenerationURLs, targetRootFolder ,targetGeneratedGenmodelFolder, targetGeneratedEMFSourceFolder, targetEMFBinaryFolder, additionalClassPath, runInEclipse);
 			Future<Boolean> genmodelFuture = ecore2Bytecode.ecore2java(singleThreadExector);
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_LEGACY_SOURCE)){
 				// manually join the previously launched ecore2java() (this is normally done by ecorejava2bytecode)
