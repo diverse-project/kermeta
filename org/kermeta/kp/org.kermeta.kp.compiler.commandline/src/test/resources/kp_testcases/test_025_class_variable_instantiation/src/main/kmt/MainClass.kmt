@@ -10,9 +10,13 @@ package mainPackage{
 			myInstance.getMetaClass
 			
 			var c:Class := myInstance.getMetaClass
-			stdio.writeln(MyClass.new.isDirectInstanceOf(MyClass).toString + "should be true")
-			stdio.writeln(c.new.isDirectInstanceOf(Object).toString + "should be true")
-			stdio.writeln(c.new.isDirectInstanceOf(MyClass).toString + "should be false")
+			stdio.writeln(MyClass.new.isDirectInstanceOf(MyClass).toString + " should be true")
+			stdio.writeln(c.new.isDirectInstanceOf(Object).toString + " should be false")
+			stdio.writeln(c.new.isDirectInstanceOf(MyClass).toString + " should be false")
+			
+			stdio.writeln(MyClass.new.isInstanceOf(MyClass).toString + " should be true")
+			stdio.writeln(c.new.isInstanceOf(Object).toString + " should be true")
+			stdio.writeln(c.new.isInstanceOf(MyClass).toString + " should be true")
 			
 			myInstance ?= c.new
 			myInstance := (c.new).asType(MyClass)
