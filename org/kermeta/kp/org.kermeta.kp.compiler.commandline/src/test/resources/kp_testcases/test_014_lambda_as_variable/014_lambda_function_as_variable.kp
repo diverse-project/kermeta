@@ -1,7 +1,7 @@
-KermetaProject "test_014_lambda_function_as_variable" 
+KermetaProject "test_014_lambda_as_variable" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
-defaultMainClass ="pkg::Test"
+defaultMainClass ="root_package::Main"
 defaultMainOperation ="main"
 sources={
 	require "${project.baseUri}/014_lambda_function_as_variable.kmt" 
