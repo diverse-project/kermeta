@@ -1,3 +1,5 @@
+using kermeta::io::StdIO => stdio
+
 package my_package::subpackage {
 	class Main {
 		@main ""
