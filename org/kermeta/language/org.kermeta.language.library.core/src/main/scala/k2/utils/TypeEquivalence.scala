@@ -175,6 +175,7 @@ object TypeEquivalence {
 		val str = new java.util.HashMap[String,String]
 		str.put("size", "ksize");
         str.put("split", "ksplit");
+		str.put("toDouble", "ktoDouble");
 		methodEquivalence.put("_root_.k2.standard.String", str);
 		methodEquivalence.put("_root_.String", str);
 		methodEquivalence.put("java.lang.String", str);
