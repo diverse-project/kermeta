@@ -1,4 +1,4 @@
-KermetaProject "language.sample.arab2roman" 
+KermetaProject "org.kermeta.language.sample.arabic2roman" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="org.kermeta.language.sample" 
 defaultMainClass="root_package::Main"
@@ -9,7 +9,7 @@ sources={
 }
 dependencies={	
 	// depends on library.core	
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
+	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST" 
 		 
 } 
 
