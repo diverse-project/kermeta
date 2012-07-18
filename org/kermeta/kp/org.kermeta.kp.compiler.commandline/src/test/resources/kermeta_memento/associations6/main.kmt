@@ -14,7 +14,7 @@ package pkg {
 			a1.b.add(b1)
 			var bees : kermeta::standard::OrderedSet<pkg::B> init kermeta::standard::OrderedSet<pkg::B>.new
 			bees := a1.b
-			var aees : kermeta::standard::OrderedSet<pkg::A> init kermeta::standard::OrderedSet<pkg::B>.new
+			var aees : kermeta::standard::OrderedSet<pkg::A> init kermeta::standard::OrderedSet<pkg::A>.new
 			aees := b1.a
 		end
 	}
