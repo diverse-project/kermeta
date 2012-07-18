@@ -1,3 +1,5 @@
+using kermeta::standard::String => String
+
 package pkg {
 	class Main {
 		@main ""
@@ -20,6 +22,21 @@ package pkg {
 				rescue (err : kermeta::exceptions::ConstraintViolatedInv)
 				kermeta::io::StdIO.writeln("expected err " + err.toString)
 			end
+		end
+	}
+	
+	class StringTool {
+		attribute stringTable : kermeta::standard::Set<kermeta::standard::String>
+		
+		inv notable is stringTable != void
+		
+		
+		operation concatenate(s1 : String, s2 : String) : String 
+			pre paramnotvoid is do
+				s1 != void and s2 != void
+			end
+		is do
+			result := s1.append(s2)
 		end
 	}
 }
