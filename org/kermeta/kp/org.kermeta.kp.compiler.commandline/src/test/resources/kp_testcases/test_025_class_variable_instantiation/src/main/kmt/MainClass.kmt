@@ -7,9 +7,9 @@ package mainPackage{
 	{
 		operation mainOperation() : Void is do 
 			var myInstance : MyClass := MyClass.new
-			myInstance.getMetaclass
+			myInstance.getMetaClass
 			
-			var c:Class := myInstance.getMetaclass
+			var c:Class := myInstance.getMetaClass
 			stdio.writeln(MyClass.new.isDirectInstanceOf(MyClass).toString + "should be true")
 			stdio.writeln(c.new.isDirectInstanceOf(Object).toString + "should be true")
 			stdio.writeln(c.new.isDirectInstanceOf(MyClass).toString + "should be false")
