@@ -1,3 +1,4 @@
+using kermeta::standard
 package pkg{
 	// persons who write documents
 	class Writer {
@@ -38,13 +39,14 @@ package pkg{
 	class Main {
 		operation main() : Void is do
 			var writer : Writer init Writer.new
+			writer.name := "Herge"
 			var childBook : ChildBook init ChildBook.new
-			book.author := writer
-			book.minimalAge := 5
-			book.text := "coucou"
+			childBook.author := writer
+			childBook.minimalAge := 5
+			childBook.text := "coucou"
 			var child : Child init Child.new
 			child.initialize(10)
-			child.read(book)
+			child.read(childBook)
 		end
 	}
 }
