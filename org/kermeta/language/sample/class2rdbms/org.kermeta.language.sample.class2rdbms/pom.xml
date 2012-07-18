@@ -25,7 +25,7 @@
             <plugin>
                 <groupId>org.kermeta.kp</groupId>
                 <artifactId>kp.compiler.mavenplugin</artifactId>
-                <version>2.0.1-BETA3</version>
+                <version>2.0.3-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -37,26 +37,35 @@
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
+                            <continueOnError>true</continueOnError>
+                            <intermediateFilesRequired>true</intermediateFilesRequired>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             
             <!-- package into a jar for OSGI -->
-          <!--  <plugin>
+            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.1.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>kermeta.io,kermeta.standard,kermeta.utils,kermeta.exceptions</Export-Package>
-                        <Bundle-SymbolicName>org.kermeta.language.library.core</Bundle-SymbolicName>
-                        <Import-Package>!kermeta.io,*</Import-Package>
+                        <Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
+						<Bundle-Version>${bundle.version}</Bundle-Version>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>  
+                        <Export-Package>
+                        	kermeta.io,kermeta.standard,
+                        	kermeta.utils,kermeta.exceptions
+                        </Export-Package>
+                        <Import-Package>!kermeta.io,*</Import-Package>
                     </instructions>
                 </configuration>
-            </plugin> -->
+            </plugin>
         </plugins>
     </build>
 

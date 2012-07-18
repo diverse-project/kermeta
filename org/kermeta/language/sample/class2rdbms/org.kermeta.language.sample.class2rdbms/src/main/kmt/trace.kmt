@@ -16,15 +16,16 @@ class Trace<SRC, TGT>
 	
 	operation create() is do
 		src2tgt := Hashtable<SRC, TGT>.new
+		
 	end
-	
+	   
 	/**
 	 * get a target element
 	 */
 	operation getTargetElem(src : SRC) : TGT is do
 		result := src2tgt.getValue(src)
 	end
-	
+	 
 	/**
 	 * Store a trace
 	 */
@@ -42,13 +43,15 @@ class BidirectionalTrace<SRC, TGT> inherits Trace<SRC, TGT>
 	
 	method create() is do
 		tgt2src := Hashtable<TGT, SRC>.new
+		
 	end
-	
+	 
 	/**
 	 * Store a trace
 	 */
 	method storeTrace(src : SRC, tgt : TGT) is do
-		super(src, tgt) 
+		//super(src, tgt)
+		getTargetElem(src)   
 	 	tgt2src.put(tgt, src)
 	end
 	
@@ -57,5 +60,6 @@ class BidirectionalTrace<SRC, TGT> inherits Trace<SRC, TGT>
 	 */
 	operation getSourceElem(tgt : TGT) : SRC is do
 		result := tgt2src.getValue(tgt)
+		
 	end
 }

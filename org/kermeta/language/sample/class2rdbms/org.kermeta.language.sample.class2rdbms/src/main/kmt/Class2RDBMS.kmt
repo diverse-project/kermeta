@@ -228,7 +228,7 @@ class Main
    		//var resource : Resource init repository.createResource("file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/src/main/models/ClassModel.xmi",
    		//																							"file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/language.sample.class2rdbms/metamodels/ClassMM.ecore")
        	resource.load(void)      
-       
+       result := void // return void if nothing found
        from var it : Iterator<Object> init resource.getContents.iterator
        until it.isOff
        loop
