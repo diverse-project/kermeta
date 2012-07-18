@@ -210,7 +210,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	this.getLog().info("kp.compiler.commandline.standalone not found using same version trying previous one." + e);
 	        	compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
 		        		"kp.compiler.commandline.standalone", 
-		        		"2.0.1-SNAPSHOT", 
+		        		"2.0.3-SNAPSHOT", 
 		        		repositoryList);
 	        }
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();
