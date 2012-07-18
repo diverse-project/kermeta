@@ -3,9 +3,11 @@ using kermeta::emfpersistence
 using kermeta::io::StdIO => stdio
 
 package mainPackage{
-	class MainClass
+	class MainClass 
 	{
-		operation mainOperation() : Void is do 
+		operation mainOperation(arg1 : String, arg2 : String) : Void is do 
+			stdio.writeln(arg1)
+			stdio.writeln(arg2)
 			//true.andThen{x|false}
 			var repository : ResourceSet init ResourceSet.new
 	   		//repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
@@ -21,7 +23,13 @@ package mainPackage{
 	        pack.eClassifiers.each{c |
 	        	stdio.writeln(c.name)
 	        }
-	       
+	        
+	        var foo : MainClass2
+	        foo.mainOperation
+	        300.times{ i |
+	        	stdio.writeln(i.toString) 
+	        	1000000.times{j | j+i*30 }
+	        }
 	       
 		end 
 	}
