@@ -21,7 +21,7 @@ public class CompilationTestSuite extends TestSuite {
 				return pathname!=null && pathname.getAbsolutePath().endsWith(".kp");
 			}
 		};
-		final String folderFullURI 	= new File(CompilationTestSuite.class.getClassLoader().getResource("do_not_remove_CompilationTestSuite").getFile()).getParent();
+		final String folderFullURI 	= new File(CompilationTestSuite.class.getClassLoader().getResource("kp/compiler/commandline/CompilationTestSuite/do_not_remove").getFile()).getParent();
 		final List<File> files 		= new ArrayList<File>();
 		final TestSuite suite 		= new TestSuite("CompilationTestSuite");
 		
