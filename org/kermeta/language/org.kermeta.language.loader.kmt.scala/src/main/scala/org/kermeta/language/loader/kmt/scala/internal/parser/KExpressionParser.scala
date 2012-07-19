@@ -39,12 +39,12 @@ trait KExpressionParser extends KAbstractParser
   /**
    * extend the fExpression parser with sub parser
    */
-  override def fExpression : Parser[Expression] = kpositioned ( fExtern | fRaise | fBlock | pExpression | fVariableDecl | fLoop | fConditional | fLambda | fCall | fLiteral )
-  override def fStatement : Parser[Expression] = fAssignement
+  override def fExpression : Parser[Expression] =  kpositioned (fExtern | fRaise | fBlock | pExpression | fVariableDecl | fLoop | fConditional | fLambda |  fCall | fLiteral) 
+  override def fStatement : Parser[Expression] = kpositioned (fAssignement)
 
   def parseExpression(content : String) : Option[Expression] = {
     val tokens = new lexical.Scanner(content)
-    val result = phrase(fStatement)(tokens)
+    val result = phrase( fStatement)(tokens)
     result match {
       case Success(tree, _) => {Some(tree) }
       case e: NoSuccess => {println(e);None}

@@ -14,7 +14,7 @@ trait KExternParser extends KAbstractParser {
 
     def fExtern : Parser[Expression] = "extern" ~ packageName ~ "." ~ ident ~ "(" ~ repsep(fStatement, ",")  ~ ")" ^^ { case _ ~ pName ~ _ ~ fName ~ _ ~ params ~ _ =>
       var newo = BehaviorFactory.eINSTANCE.createJavaStaticCall()
-      println("found an extern call !!")
+      //println("found an extern call !!")
 
       newo.setJclass(pName)
       newo.setJmethod(fName)
@@ -26,12 +26,5 @@ trait KExternParser extends KAbstractParser {
 
       newo
     }
-
-  def fExternTest : Parser[Expression] = "extern" ^^ { case _  =>
-    var newo = BehaviorFactory.eINSTANCE.createJavaStaticCall()
-    println("found an extern call !!")
-    newo
-  }
-
 
 }
