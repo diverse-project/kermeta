@@ -29,7 +29,7 @@ package test{
 			//main.foobar{x|var test : Test init Test.new test.foo8:=2 test.foo8}
 			//main.foobar{x|var test : Test init Test.new test.foo9:=2 test.foo9}
 			//main.foobar{x|var test : Test init Test.new test.foo10:=2 test.foo10}
-			main.foobar{x|var test : Test init Test.new test.foo11:=2 test.foo11}
+			main.foobar{x|var test : Test init Test.new test.foo11:=2.shortValue test.foo11.intValue}
 
 			
 		end
