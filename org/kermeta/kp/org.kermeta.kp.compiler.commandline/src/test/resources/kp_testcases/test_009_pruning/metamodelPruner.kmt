@@ -270,8 +270,10 @@ abstract class MetamodelPruner {
 			 			// we suppose that the km is resolved 
 			 			prop.opposite.asType(Property).type.asType(Class).typeDefinition 
 			 		else void end
-			 	~enum	   := if(propEnum) then prop.type.asType(Enumeration) else void end
-			 	primTyp	   := if(propPrim) then prop.type.asType(PrimitiveType) else void end
+			 		
+			 	primTyp := prop.type.asType(PrimitiveType)
+			 	~enum	   := if(propEnum) then prop.type.asType(Enumeration) else void.asType(Enumeration) end
+			 	primTyp	   ?= if(propPrim) then prop.type.asType(PrimitiveType) else void.asType(Enumeration) end
 			 	
 				//Option 1
 				if propLower0 and propClass then
