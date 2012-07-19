@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="testSimpleAnnotations">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String" superType="//testSimpleAnnotations/String/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;79;95"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String" superType="//testSimpleAnnotations/String/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="79;95"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Integer" superType="//testSimpleAnnotations/Integer/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;95;112"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Integer" superType="//testSimpleAnnotations/Integer/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="95;112"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean" superType="//testSimpleAnnotations/Boolean/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;112;168"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean" superType="//testSimpleAnnotations/Boolean/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="112;168"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Class1" superType="//testSimpleAnnotations/Class1/@containedType.0" isAspect="false">
-      <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;168;496"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Class1" superType="//testSimpleAnnotations/Class1/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="168;518"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
-      <ownedOperation name="truc" type="//testSimpleAnnotations/Class1/truc/@containedType.0" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;187;242"/>
+      <ownedOperation name="truc" type="//testSimpleAnnotations/Class1/truc/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="187;220"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;207;242"/>
+          <kOwnedTags name="traceability_text_reference" value="207;220"/>
         </body>
       </ownedOperation>
-      <ownedOperation name="operation1" type="//testSimpleAnnotations/Class1/operation1/@containedType.0" isAbstract="false">
-        <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;267;451"/>
-        <kOwnedTags name="documentation" value=" Mon operation "/>
-        <kOwnedTags name="return" value="of the jedi"/>
-        <kOwnedTags name="documentation" value="ma doc"/>
+      <ownedOperation kTag="//testSimpleAnnotations/Class1/operation1/@kOwnedTags.1 //testSimpleAnnotations/Class1/operation1/@kOwnedTags.2 //testSimpleAnnotations/Class1/operation1/@kOwnedTags.3" name="operation1" type="//testSimpleAnnotations/Class1/operation1/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="290;474"/>
+        <kOwnedTags name="documentation" value=" Mon operation " object="//testSimpleAnnotations/Class1/operation1"/>
+        <kOwnedTags name="return" value="of the jedi" object="//testSimpleAnnotations/Class1/operation1"/>
+        <kOwnedTags name="documentation" value="ma doc" object="//testSimpleAnnotations/Class1/operation1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;293;451"/>
+          <kOwnedTags name="traceability_text_reference" value="316;474"/>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="v1">
-            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;333;352"/>
+            <kOwnedTags name="traceability_text_reference" value="356;375"/>
             <type name="Boolean" type="//testSimpleAnnotations/Class1/operation1/@body/@statement.0/@type/@containedType.0" isOrdered="true">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean"/>
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="v2">
-            <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;352;433"/>
+            <kOwnedTags name="traceability_text_reference" value="375;456"/>
             <type name="Boolean" type="//testSimpleAnnotations/Class1/operation1/@body/@statement.1/@type/@containedType.0" isOrdered="true">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean"/>
             </type>
@@ -48,6 +48,6 @@
     </ownedTypeDefinition>
   </packages>
   <requires uri="kermeta">
-    <kOwnedTags name="traceability_text_reference" value="file:/E:/W/workspaceKermetaIndigo2/runtime-New_configuration/annotation2/062_testSimpleAnnotations2.kmt;32;79"/>
+    <kOwnedTags name="traceability_text_reference" value="32;79"/>
   </requires>
 </org_kermeta_language_structure:ModelingUnit>

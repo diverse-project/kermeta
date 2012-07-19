@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="testSimpleAnnotations">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String" superType="//testSimpleAnnotations/String/@containedType.0" isAspect="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String" superType="//testSimpleAnnotations/String/@containedType.0">
       <kOwnedTags name="traceability_text_reference" value="80;96"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Integer" superType="//testSimpleAnnotations/Integer/@containedType.0" isAspect="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Integer" superType="//testSimpleAnnotations/Integer/@containedType.0">
       <kOwnedTags name="traceability_text_reference" value="96;113"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean" superType="//testSimpleAnnotations/Boolean/@containedType.0" isAspect="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean" superType="//testSimpleAnnotations/Boolean/@containedType.0">
       <kOwnedTags name="traceability_text_reference" value="113;169"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Class1" superType="//testSimpleAnnotations/Class1/@containedType.0" isAspect="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Class1" superType="//testSimpleAnnotations/Class1/@containedType.0">
       <kOwnedTags name="traceability_text_reference" value="169;460"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object"/>
-      <ownedOperation name="operation1" type="//testSimpleAnnotations/Class1/operation1/@containedType.0" isAbstract="false">
+      <ownedOperation kTag="//testSimpleAnnotations/Class1/operation1/@kOwnedTags.1 //testSimpleAnnotations/Class1/operation1/@kOwnedTags.2" name="operation1" type="//testSimpleAnnotations/Class1/operation1/@containedType.0">
         <kOwnedTags name="traceability_text_reference" value="232;416"/>
-        <kOwnedTags name="documentation" value=" Mon operation "/>
-        <kOwnedTags name="return" value="of the jedi"/>
+        <kOwnedTags name="documentation" value=" Mon operation " object="//testSimpleAnnotations/Class1/operation1"/>
+        <kOwnedTags name="return" value="of the jedi" object="//testSimpleAnnotations/Class1/operation1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
           <kOwnedTags name="traceability_text_reference" value="258;416"/>
