@@ -1,0 +1,48 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			
+			
+			var s : String 
+						
+			s := if (true) then " "	else void end
+			
+			var i : Integer
+			
+			i := if true then 1 else 2 end
+			i := if true then 3 else void end
+			
+			// i ?= if true then 1 else 2 end
+			// i ?= if true then 3 else void end
+			
+			
+			var a : A
+			var b : B
+			a := if true then A.new else void end
+			a ?= if true then A.new else void end 
+	
+	
+			a := if true then A.new else B.new end			
+			//b := if true then A.new else B.new end
+			
+		end
+		
+		
+		operation op2() is do
+			var a : A
+			var obj : Object
+			
+			a ?= obj
+		end
+	}
+	
+	class A {
+	}
+	
+	class B inherits A{
+	}
+}
