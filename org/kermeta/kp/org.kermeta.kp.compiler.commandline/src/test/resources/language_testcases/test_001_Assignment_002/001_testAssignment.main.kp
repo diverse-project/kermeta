@@ -1,6 +1,6 @@
 KermetaProject "test_001_Assignment_002" 
 	groupId ="k2.test" 
-	defaultMainClass ="test_001_Assignment_002::Test_assignment"
+	defaultMainClass ="testAssignment::TestAssignmentEnum"
 	defaultMainOperation = "main"
 	sources={ 
  

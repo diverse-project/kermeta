@@ -1,8 +1,8 @@
 KermetaProject "test_001_Assignment_001" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
-defaultMainClass ="testAssignment::Test_assignment"
-defaultMainOperation ="testoperation1"
+defaultMainClass ="testAssignment::Main"
+defaultMainOperation ="main"
 sources={
 	require "${project.baseUri}/001_testAssignment.main.kmt"
 }
