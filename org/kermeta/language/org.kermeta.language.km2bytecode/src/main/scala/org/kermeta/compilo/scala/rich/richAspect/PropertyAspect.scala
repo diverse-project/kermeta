@@ -49,11 +49,11 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       res.append("k2.standard.Kermeta")
       getCollectionType(thi,res)
       res.append("[")
-      visit(thi.getType, res)
+      visitTypeParam(thi.getType,res)
       res.append("] = k2.standard.KerRichFactory.create")
       getCollectionType(thi,res)
       res.append("[")
-      visit(thi.getType, res)
+      visitTypeParam(thi.getType, res)
       res.append("]")
 
     } else {
@@ -289,7 +289,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       res.append("k2.standard.Kermeta")
       getCollectionType(thi,res)
       res.append("[")
-      visit(thi.getType(),res)
+      visitTypeParam(thi.getType(),res)
       res.append("]")
     } else {
       visit(thi.getType(),res)

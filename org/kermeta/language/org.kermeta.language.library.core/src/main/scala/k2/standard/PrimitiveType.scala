@@ -39,7 +39,7 @@ object PrimitiveConversion{
     // implicit def boolean2javaboolean(x: java.lang.Boolean) : Boolean = {if (x== null) return false else return x.booleanValue()}
     implicit def javaboolean2kermeta(x: java.lang.Boolean) :RichBoolean= {if (x== null) return new RichBoolean(false) else new RichBoolean(x.booleanValue())}
     implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
-    implicit def iteratorEObject2kermeta(x:java.util.Iterator[_<: org.eclipse.emf.ecore.EObject]) :  _root_.java.util.Iterator[_root_.java.lang.Object] =x.asInstanceOf[_root_.java.util.Iterator[_root_.java.lang.Object]]
+    implicit def iteratorEObject2kermeta(x:java.util.Iterator[_<: org.eclipse.emf.ecore.EObject]) :  _root_.java.util.Iterator[Any] =x.asInstanceOf[_root_.java.util.Iterator[Any]]
 
     implicit def random2kermeta(x: java.util.Random) = new RichRandom(x)
     implicit def integer2kermeta(x: Int) = new RichInteger(x)
