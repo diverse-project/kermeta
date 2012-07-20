@@ -16,97 +16,104 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
       log.debug("Operation={}",thi.getName)
       res.append("\n   ")
       //TODO in fact it should limit this case to operation that come from Kermeta Object
-      if (thi.getSuperOperation()!=null   && !Util.hasEcoreTag( thi.getSuperOperation().asInstanceOf[Operation].getOwningClass )      ){
+      if (thi.getSuperOperation()!=null  && !Util.hasEcoreTag( thi.getSuperOperation().asInstanceOf[Operation].getOwningClass )     ){
                res.append(" override")
       }
-      res.append(" def ")
-      //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
-      //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
-      //}else{
-        res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
-      //}
-        
-      // Generate special parameters for certain operations
-      if(thi.getName()=="equals" && thi.getOwnedParameter().size()==1){
-        res.append("(")
-        res.append(Util.protectScalaKeyword(thi.getOwnedParameter().get(0).getName()))
-        res.append(":Any):Boolean")
-        return
-      }
-      if(thi.getName()=="hashCode"&&thi.getOwnedParameter().size()==0){
-        res.append("():Int")
-        return
-      }
-        
-      generateParamerterOp(thi, res)
-      /* Default constructor declaration */
-      res.append("(")
-      var i = 0;
-      thi.getOwnedParameter.foreach(par => {
-          if (i==0) {
-            res.append(Util.protectScalaKeyword(par.getName()))
-            res.append(" : ")
-            this.getListorType(par, res)//par.getType.generateScalaCode(res)
-          }else{
-            res.append(", ")
-            res.append(Util.protectScalaKeyword(par.getName()))
-            res.append(" : ")
-            this.getListorType(par, res)//					par.getType.generateScalaCode(res)
-          }
-          i=i + 1
-        })
-      res.append(")")
-      // generate implicit parameters for reified parameter types
-      generateImplicitParameter(thi,res)
-      res.append(":")
-      var res1 = new StringBuilder
-      this.getListorType(thi,res1)
-      if ("_root_.k2.standard.Void".equals(res1.toString)){
-        res.append("Unit")
-      }else{
-        res.append(res1)
-      }
+      generateSignatureWithoutOverride(thi,res)
     }
   }
 	
+  /**
+   * Generate the signature of an operation without checking for its super operations
+   */
+  def generateSignatureWithoutOverride(thi:Operation,res : StringBuilder) : Unit = {
+    res.append(" def ")
+    //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
+    //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+    //}else{
+      res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
+    //}
+      
+    // Generate special parameters for certain operations
+    if(thi.getName()=="equals" && thi.getOwnedParameter().size()==1){
+      res.append("(")
+      res.append(Util.protectScalaKeyword(thi.getOwnedParameter().get(0).getName()))
+      res.append(":Any):Boolean")
+      return
+    }
+    if(thi.getName()=="hashCode"&&thi.getOwnedParameter().size()==0){
+      res.append("():Int")
+      return
+    }
+      
+    generateParamerterOp(thi, res)
+    /* Default constructor declaration */
+    res.append("(")
+    var i = 0;
+    thi.getOwnedParameter.foreach(par => {
+      if (i==0) {
+        res.append(Util.protectScalaKeyword(par.getName()))
+        res.append(" : ")
+        this.getListorType(par, res)//par.getType.generateScalaCode(res)
+      }else{
+        res.append(", ")
+        res.append(Util.protectScalaKeyword(par.getName()))
+        res.append(" : ")
+        this.getListorType(par, res)//					par.getType.generateScalaCode(res)
+      }
+      i=i + 1
+    })
+    res.append(")")
+    // generate implicit parameters for reified parameter types
+    generateImplicitParameter(thi,res)
+    res.append(":")
+    var res1 = new StringBuilder
+    this.getListorType(thi,res1)
+    if ("_root_.k2.standard.Void".equals(res1.toString)){
+      res.append("Unit")
+    }else{
+      res.append(res1)
+    }
+  }
+  
   def visitOperation(thi:Operation,res : StringBuilder) : Unit = {
     if (!Util.hasCompilerIgnoreTag(thi)){
       log.debug("Operation={}",thi.getName)
       res.append("\n   ")
-      generateSignature(thi,res)
+      if (thi.getSuperOperation()!=null){
+        res.append(" override")
+      }
+      generateSignatureWithoutOverride(thi,res)
       //this.getType.generateScalaCode(res)
-        res.append(" = {\n")
-        res.append("var `~result` : ")
-        this.getListorType(thi,res)
-        //   this.getType.generateScalaCode(res)
-        //res append "Any"
-        res.append(" = null.asInstanceOf[")
-        this.getListorType(thi,res)
-        //this.getType.generateScalaCode(res)
-        res.append("]; \n /*try*/ { \n")
+      res.append(" = {\n")
+      res.append("var `~result` : ")
+      this.getListorType(thi,res)
+      //   this.getType.generateScalaCode(res)
+      //res append "Any"
+      res.append(" = null.asInstanceOf[")
+      this.getListorType(thi,res)
+      //this.getType.generateScalaCode(res)
+      res.append("]; \n /*try*/ { \n")
       if (thi.getBody!= null){
-				
         visit(thi.getBody(),res)
       }
-res append "        }\n"
-res append "/*catch {\n"
-res append "case e :_root_.k2.exceptions.Exception => {throw e}\n"
-res append "  case e => {\n"
-res append "    val tutu18 = _root_.k2.exceptions.KerRichFactory.createException;\n"
-res append "  	tutu18.message = \"error in kermeta code on operation " + getQualifiedNameCompilo(thi.eContainer) +"."+thi.getName +"\"\n"
-res append "  	  tutu18.setStackTrace(e.getStackTrace)\n"
-res append "  	  throw tutu18\n"
-res append "  }\n}*/\n"
+      res append "        }\n"
+      res append "/*catch {\n"
+      res append "case e :_root_.k2.exceptions.Exception => {throw e}\n"
+      res append "  case e => {\n"
+      res append "    val tutu18 = _root_.k2.exceptions.KerRichFactory.createException;\n"
+      res append "  	tutu18.message = \"error in kermeta code on operation " + getQualifiedNameCompilo(thi.eContainer) +"."+thi.getName +"\"\n"
+      res append "  	  tutu18.setStackTrace(e.getStackTrace)\n"
+      res append "  	  throw tutu18\n"
+      res append "  }\n}*/\n"
         
      var res1 = new StringBuilder
       this.getListorType(thi,res1)
       if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString)){
         res append " \n}\n"
-      } 
-      else{
-             //   println(res1.toString())
-
-          res append " return `~result`\n}\n"
+      } else {
+        //   println(res1.toString())
+        res append " return `~result`\n}\n"
       }
         //this.getType.generateScalaCode(res)
         //res append "]\n}\n"
@@ -116,6 +123,7 @@ res append "  }\n}*/\n"
       //}
     }
   }
+ 
   def generateParamerterOp(thi:Operation,res1:StringBuilder) = {
     if (thi.getTypeParameter().size()>0){  res1.append("[")
                                           var ii = 0;
