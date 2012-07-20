@@ -10,7 +10,7 @@
 package helloworld {
 	class HelloWorld
 	{ 
-		@main ""
+		@main "" 
 		operation main() : kermeta::standard::Void is do 
 			kermeta::io::StdIO.writeln("Hello World!")
 		end
