@@ -10,6 +10,8 @@ import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 public class KpChecker {
 
 	KermetaCompiler compiler;
@@ -20,6 +22,10 @@ public class KpChecker {
 		this.compiler = compiler;
 	}
 
+	public void checkAll(String kpFileURL, KermetaProject kp, ModelingUnit resolvedMU) throws MalformedURLException{
+		checkDefaultMain(kpFileURL,kp, resolvedMU);
+		checkGroupId(kpFileURL,kp, resolvedMU);
+	}
 
 	/*
 	 * Must be run with the checker Factory 
@@ -91,4 +97,14 @@ public class KpChecker {
 		}
 		
 	}
+	
+	public void checkGroupId(String kpFileURL, KermetaProject kp, ModelingUnit resolvedMU) throws MalformedURLException{
+		
+		if(kp.getGroup().contains(":")){
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "invalid character : in groupId", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			compiler.errorMessage = "Invalid kp file. invalid character : in groupId";
+			compiler.hasFailed = true;
+		}
+	}
+	
 }

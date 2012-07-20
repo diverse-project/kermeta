@@ -626,7 +626,7 @@ public class KermetaCompiler {
 			}
 
 			// checking existence and conformance of the defaultMainClass and default MainOperation
-			new KpChecker(this).checkDefaultMain(kpFileURL, kp, resolvedUnit);
+			new KpChecker(this).checkAll(kpFileURL, kp, resolvedUnit);
 			if(this.hasFailed){
 				return resolvedUnit;
 			}
