@@ -58,6 +58,7 @@ import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
 import org.kermeta.language.resolver.KmResolverImpl;
 import org.kermeta.language.resolver.KmResolverImpl4Eclipse;
 import org.kermeta.language.resolver.api.KmResolver;
+import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.aether.LocalFileConverterForAether;
@@ -507,6 +508,10 @@ public class KermetaCompiler {
 
 					// workaround cache problem in compiler
 					kermeta.standard.JavaConversions.cleanCache();
+
+					// adding kermeta::standard::Objet if necessary					
+					addStandardObjectIfRequired(preresolvedMergedUnit.getResult());
+					
 					
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreResolving...", LOG_MESSAGE_GROUP, 1);
 					preResolvedUnit = resolveModelingUnit(preresolvedMergedUnit.getResult(), kpFileURL, true);
@@ -1357,5 +1362,49 @@ public class KermetaCompiler {
 	
 	public void setModelingUnitLoaders(NavigableMap<String,ModelingUnitLoaderFactory> muLoaders){
 		this.muLoaders = muLoaders;
+	}
+	
+	/**
+	 * In case the modelingUnit doesn't have kermeta::standard::Object create it as aspect
+	 * @param mu
+	 * @return
+	 */
+	protected ModelingUnit addStandardObjectIfRequired(ModelingUnit mu){
+		org.kermeta.language.structure.Package kermetaPackage = null;
+		for(org.kermeta.language.structure.Package pack : mu.getPackages()){
+			if(pack.getName().equals("kermeta")) kermetaPackage = pack;
+		}
+		if(kermetaPackage == null) {
+			kermetaPackage = org.kermeta.language.structure.StructureFactory.eINSTANCE.createPackage();
+			kermetaPackage.setName("kermeta");
+			mu.getPackages().add(kermetaPackage);
+		}
+		org.kermeta.language.structure.Package standardPackage = null;
+		for(org.kermeta.language.structure.Package pack : kermetaPackage.getNestedPackage()){
+			if(pack.getName().equals("standard")) standardPackage = pack;
+		}
+		if(standardPackage == null) {
+			standardPackage = org.kermeta.language.structure.StructureFactory.eINSTANCE.createPackage();
+			standardPackage.setName("standard");
+			kermetaPackage.getNestedPackage().add(standardPackage);
+		}
+		
+		org.kermeta.language.structure.ClassDefinition objectCD = null;
+		for(org.kermeta.language.structure.TypeDefinition td : standardPackage.getOwnedTypeDefinition()){
+			if(td instanceof ClassDefinition){
+				if(((ClassDefinition)td).getName().equals("Object")){
+					objectCD = (ClassDefinition) td;
+				}
+			}
+		}
+		if(objectCD == null){
+			logger.debug("adding kermeta::standard::Objet to ModelingUnit that doesn't have it", LOG_MESSAGE_GROUP);
+			objectCD = org.kermeta.language.structure.StructureFactory.eINSTANCE.createClassDefinition();
+			objectCD.setName("Object");
+			objectCD.setIsAspect(true);
+			standardPackage.getOwnedTypeDefinition().add(objectCD);
+		}
+		
+		return mu;
 	}
 }
