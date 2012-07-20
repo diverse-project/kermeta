@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.UniqueEList
     	
         def addSafe(e:Any)(implicit m:Manifest[A]) :Unit
 
-        def remove(e:A):Unit
+        def remove(e:Any):Boolean
         
         def clear() : Unit
         
@@ -126,8 +126,6 @@ import org.eclipse.emf.common.util.UniqueEList
 
         override def move(oldPosition:Int,newPosition:Int):A
         
-        override def remove(o:Object):Boolean
-        
         override def remove(index:Int):A
         
         override def removeAll(c:ju.Collection[_]):Boolean
@@ -159,7 +157,7 @@ import org.eclipse.emf.common.util.UniqueEList
       
       override def add(e:A):Boolean
       
-      override def remove(e:A):Unit
+      override def remove(e:Any):Boolean
       
       override def equals(e:Any):Boolean
       

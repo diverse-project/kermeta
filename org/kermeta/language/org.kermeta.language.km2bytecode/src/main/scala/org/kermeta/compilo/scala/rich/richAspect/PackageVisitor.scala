@@ -517,7 +517,10 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitTypeVariableBinding(thi: TypeVariableBinding, res: StringBuilder) = {
-    visit(thi.getType, res)
+    if(getQualifiedNameCompilo(thi.getType())=="_root_.k2.standard.KermetaObject")
+      res.append("Any")
+    else
+      visit(thi.getType, res)
   }
 
   def visitUsing(thi: Using, res: StringBuilder) = {

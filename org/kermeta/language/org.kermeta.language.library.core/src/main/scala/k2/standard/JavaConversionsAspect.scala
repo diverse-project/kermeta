@@ -19,12 +19,14 @@ import scala.collection.JavaConversions._
             this.add(e.asInstanceOf[A])
         }
 
-        def remove(e:A):Unit={
+        override def remove(e:Any):Boolean={
+          val oldsize=value.size()
           val i=value.listIterator()
           while(i.hasNext()){
             if(i.next.equals(e)) 
               i.remove
           }
+          oldsize-value.size()!=0
         }
         
         def clear() : Unit ={
@@ -273,8 +275,6 @@ import scala.collection.JavaConversions._
           obj
         }
         
-        override def remove(o:Object):Boolean=value.remove(o)
-        
         override def remove(index:Int):A=value.remove(index)
         
         override def removeAll(c:ju.Collection[_]):Boolean=value.removeAll(c)
@@ -320,7 +320,7 @@ import scala.collection.JavaConversions._
           false
       }
       
-      override def remove(e:A):Unit={
+      override def remove(e:Any):Boolean={
           val i=value.listIterator()
           var found=false
           while(i.hasNext() && !found){
@@ -329,6 +329,7 @@ import scala.collection.JavaConversions._
               found = true
             }
           }
+          found
       }
       
       override def equals(e:Any):Boolean={
