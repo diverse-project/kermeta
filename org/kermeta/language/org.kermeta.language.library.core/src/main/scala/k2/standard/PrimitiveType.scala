@@ -143,7 +143,7 @@ trait Summable[G]  extends Object {
 class RichNotComparableException  extends Exception  {}
 
 class RichIterator (value: java.util.Iterator[_]) extends RichValueType[Boolean] {
-  override  def isVoid():Boolean = false;
+  override  def isVoid():java.lang.Boolean = false;
   def isOff():Boolean = {return !value.hasNext()}
     override def getValue():Object = value 
 }
@@ -157,7 +157,7 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 	 def booleanValue() : Boolean = value.booleanValue()
   //end generated
 
-    override def isVoid():Boolean = false;
+    override def isVoid():java.lang.Boolean = false;
 	
     def not() :Boolean={return !value}
     def xor(other : Boolean) :Boolean={(value || other) && !(value && other)}
@@ -208,7 +208,7 @@ class RichRandom(value : java.util.Random) extends KermetaObject with EObjectImp
 
 
 class RichDate(value: java.util.Date) extends KermetaObject with EObjectImplForPrimitive {
-  override  def isVoid():Boolean = value==null;
+  override  def isVoid():java.lang.Boolean = value==null;
     
   //generated
   override def equals(arg0:Any) : Boolean = value.equals(arg0)
@@ -242,7 +242,7 @@ class RichDate(value: java.util.Date) extends KermetaObject with EObjectImplForP
 }
 
 class RichDouble(value: Double) extends RichNumeric[Double]{
-  override  def isVoid():Boolean = false;
+  override  def isVoid():java.lang.Boolean = false;
     def plus(other : Double) :Double={value+other}
   def mult(other : Double) :Double={value*other}
   def minus(other : Double) :Double={return value-other}
@@ -280,7 +280,7 @@ override def getMetaClass():org.kermeta.language.structure.Class={
 }
 
 class RichFloat(value: Float)extends RichNumeric[Float] {
-  override  def isVoid():Boolean = false;
+  override  def isVoid():java.lang.Boolean = false;
    def plus(other : Float) :Float={value+other}
   def mult(other : Float) :Float={value*other}
   def minus(other : Float) :Float={return value-other}
@@ -317,7 +317,7 @@ override def getMetaClass():org.kermeta.language.structure.Class={
 }
 
 class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject with EObjectImplForPrimitive{
-  override  def isVoid():Boolean = value==null;
+  override  def isVoid():java.lang.Boolean = value==null;
   	 override def toString() : java.lang.String = value.toString()
 	 def append(arg0:java.lang.Object) : java.lang.StringBuilder = value.append(arg0)
 	 def append(arg0:java.lang.String) : java.lang.StringBuilder = value.append(arg0)
@@ -371,7 +371,7 @@ class RichShort(value: Short) extends RichNumeric[Short] {
 
 
 
-  override  def isVoid():Boolean = false;
+  override  def isVoid():java.lang.Boolean = false;
       def plus(other : Short) :Short={(value+other).toShort}
       def mult(other : Short) :Short={(value*other).toShort}
       def minus(other : Short) :Short={(value-other).toShort}
@@ -419,7 +419,7 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
 	 def booleanValue() : Boolean = value.booleanValue()
   //end generated
 
-    override  def isVoid():Boolean = value ==null;
+    override  def isVoid():java.lang.Boolean = value ==null;
 	    def not() :Boolean={return !value.booleanValue}
     def xor(other : Boolean) :Boolean={(value.booleanValue || other) && !(value.booleanValue && other)}
     //override def equals(other : Object) :Boolean={return true}
@@ -486,7 +486,7 @@ class RichLong(value: Long)  extends RichNumeric[Long]{
 
 
 class RichInteger(value: Int)  extends RichNumeric[Int]{
-    override  def isVoid():Boolean = false;
+    override  def isVoid():java.lang.Boolean = false;
     override def isLower(other : Int) :Boolean={value<other}
     def plus(other : Int) :Int={value+other}
     def plus(other : Integer) :Int={value+other.intValue}
@@ -554,7 +554,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int]{
     def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
     def isLowerOrEqual(other : Double) :Boolean={ value<=other }
     def isGreater(other : Double) :Boolean={ value>other }
-    override def isVoid():Boolean = false;
+    override def isVoid():java.lang.Boolean = false;
     override def getValue():Object = new java.lang.Double(value)	
     override def getMetaClass():org.k2.language.structure.Class={
         return createMetaClass("kermeta::standard::Real")
@@ -575,7 +575,7 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
     def compareTo(other : Object) :Int={//TODO
         0}
     override def toString() :java.lang.String={return ""+value}
-    override  def isVoid():Boolean = false;
+    override  def isVoid():java.lang.Boolean = false;
     override def getValue():Object = value
     override def getMetaClass():org.kermeta.language.structure.Class={
         return createMetaClass("kermeta::standard::Char")
@@ -585,7 +585,7 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
 
 
 class RichEnum(value:java.lang.Object)  extends  EObjectImplForPrimitive{
-    override  def isVoid():Boolean = value==null;
+    override  def isVoid():java.lang.Boolean = value==null;
     def getValue():java.lang.Object = value
     override def getMetaClass():org.kermeta.language.structure.Class={
         return createMetaClass("kermeta::language::structure::Enumeration")
@@ -617,7 +617,7 @@ trait EObjectImplForKO extends KermetaObject {
     def eResource() :   org.eclipse.emf.ecore.resource.Resource =null;
     def eClass() : org.eclipse.emf.ecore.EClass = null;
     def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
-    override  def isVoid():Boolean;
+    override  def isVoid():java.lang.Boolean;
     def eInvoke(x1: org.eclipse.emf.ecore.EOperation,x2: org.eclipse.emf.common.util.EList[_]):java.lang.Object = null
 
     def createMetaClass(name:String):org.kermeta.language.structure.Class={
@@ -718,7 +718,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
    def toBoolean() : Boolean = _root_.java.lang.Boolean.parseBoolean(value)
 
 
-  override def isVoid():Boolean = value ==null;
+  override def isVoid():java.lang.Boolean = value ==null;
     override def getValue():Object = value 		   
     override def equals(o:Any):Boolean ={
         if (o.isInstanceOf[String]){

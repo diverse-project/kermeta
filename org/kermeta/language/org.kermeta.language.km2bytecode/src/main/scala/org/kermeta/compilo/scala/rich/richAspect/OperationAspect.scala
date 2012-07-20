@@ -33,6 +33,10 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
         res.append(":Any):Boolean")
         return
       }
+      if(thi.getName()=="hashCode"&&thi.getOwnedParameter().size()==0){
+        res.append("():Int")
+        return
+      }
         
       generateParamerterOp(thi, res)
       /* Default constructor declaration */

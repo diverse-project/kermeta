@@ -163,9 +163,9 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
     //this.eUnset(structuralF);
   }
   def unset(prop : EStructuralFeature) = this.eUnset(prop);
-  def oid() : Int = this.hashCode()
+  def oid() : java.lang.Integer = this.hashCode()
   override def toString : String = super.toString()//"["+this.eClass().getName()+":"+oid.toString()+"]"
-  def isVoid() : Boolean = false
+  def isVoid() : java.lang.Boolean = false
   override def hashCode : Int = super.hashCode()
   def getKerMetaClass(): java.lang.Class[_] =this.getClass
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
@@ -224,7 +224,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
     return invariants;
   }
 
-  def checkInvariant(invariant : org.kermeta.language.structure.Constraint) :Boolean  = {
+  def checkInvariant(invariant : org.kermeta.language.structure.Constraint) :java.lang.Boolean  = {
       var cond : Condition = getInvariants().get(invariant.getName).getOrElse(null);
     if (cond == null)
       return true
