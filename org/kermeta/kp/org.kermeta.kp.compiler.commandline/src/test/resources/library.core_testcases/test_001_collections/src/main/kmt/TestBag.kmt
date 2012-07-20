@@ -203,13 +203,13 @@ class TestBag inherits TestCase {
 		c.add(c2)
 		c.add("tete")
 		
-		/*var flatten:Bag[Object]:=c.flatten
+		var flatten:Bag[Object]:=c.flatten
 		assertTrue(flatten.size==6)
 		assertTrue(flatten.count("toto")==2 and flatten.contains("tutu"))
-		assertTrue(flatten.contains(flatten.contains("titi"))
-		assertTrue(flatten.contains(flatten.contains("tata") and flatten.contains("tete"))
-		*/
-		assertTrue(false) // bug 2190
+		assertTrue(flatten.contains("titi"))
+		assertTrue(flatten.contains("tata") and flatten.contains("tete"))
+		
+		// assertTrue(false) // bug 2190
 	end
 	
 	operation testSortedBy() : Void  is do

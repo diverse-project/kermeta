@@ -287,13 +287,13 @@ class TestSet inherits TestCase {
 		c.add(c2)
 		c.add("tete")
 		
-		/*var flatten:Set[Object]:=c.flatten
+		var flatten:Set[Object]:=c.flatten
 		assertTrue(flatten.size==5)
 		assertTrue(flatten.contains("toto") and flatten.contains("tutu"))
-		assertTrue(flatten.contains(flatten.contains("titi"))
-		assertTrue(flatten.contains(flatten.contains("tata") and flatten.contains("tete"))
-		*/
-		assertTrue(false) // bug 2190
+		assertTrue(flatten.contains("titi"))
+		assertTrue(flatten.contains("tata") and flatten.contains("tete"))
+		
+		//assertTrue(false) // bug 2190
 
 		c.clear
 		var c0:Collection[Object]
@@ -304,10 +304,10 @@ class TestSet inherits TestCase {
 		c0.add(AlwaysEqual.new)
 		c.add(c0)
 		
-		/*flatten:=c.flatten
+		flatten:=c.flatten
 		assertTrue(flatten.size==1)
-		*/
-		assertTrue(false) // bug Object -> Any
+		
+		//assertTrue(false) // bug Object -> Any
 	end
 	
 	operation testSortedBy() : Void  is do
