@@ -153,6 +153,29 @@ class Test_arithm  inherits kermeta::kunit::TestCase{
 		s := 4.shortValue
 		assert(s.compareTo(4)==0)
 	end
+	
+	operation testCompareOperatorsNumeric() : Void is do
+		assert(true)
+		var i : Integer := 8
+		assertTrue(i < 9)
+		assertTrue(i < 9)
+		
+		var d : Double
+		d := 9.doubleValue
+		assert(d < 9)
+		
+		var f : Float
+		f := 7.floatValue
+		assert(f < 9)
+		
+		var l : Long
+		l := 7.longValue
+		assert(l < 9)
+		
+		var s : Short
+		s := 4.shortValue
+		assert(s < 9.shortValue)
+	end
 
 	// test plus
 	operation testPlus() : Void is do
