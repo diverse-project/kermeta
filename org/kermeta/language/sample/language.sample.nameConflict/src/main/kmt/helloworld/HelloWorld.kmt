@@ -6,8 +6,7 @@
  *            dvojtise
  */
 
-@mainClass "helloworld.HelloWorld"
-@mainOperation "main"
+
 
 package helloworld {
 	class HelloWorld
