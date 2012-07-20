@@ -47,4 +47,9 @@ class MyObject{
 		result := 1
 	end
 
+	
+	operation oid():Integer is do
+		called:=true
+		result := 1
+	end
 }

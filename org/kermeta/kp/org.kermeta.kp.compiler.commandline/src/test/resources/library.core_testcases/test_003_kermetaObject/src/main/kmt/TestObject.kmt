@@ -79,4 +79,11 @@ class TestObject inherits TestCase{
 		assert(myObject.hashCode==1)
 		assert(myObject.called)
 	end	
+
+	operation testOid():Void is do
+		var myObject:MyObject := MyObject.new
+		myObject.called:=false
+		myObject.oid
+		assert(myObject.called)
+	end
 }
