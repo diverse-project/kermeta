@@ -17,8 +17,8 @@ class NamedElement {
 		name:=""
 	end
 	
-	operation setName(n:Object):Void is do
-		name := n.toString
+	operation setName(n:String):Void is do
+		name := n
 	end
 	
 	operation getName() : String is do
