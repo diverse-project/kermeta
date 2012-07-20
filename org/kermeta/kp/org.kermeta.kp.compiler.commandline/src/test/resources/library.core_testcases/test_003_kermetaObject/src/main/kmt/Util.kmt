@@ -32,3 +32,19 @@ class Dummy{
 	end
 	
 }
+
+class MyObject{
+
+	attribute called:Boolean
+
+	operation isVoid():Boolean is do
+		called:=true
+		result:=false
+	end
+	
+	operation hashCode():Integer is do
+		called:=true
+		result := 1
+	end
+
+}
