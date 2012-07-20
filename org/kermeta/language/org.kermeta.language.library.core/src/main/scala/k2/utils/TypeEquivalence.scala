@@ -181,16 +181,16 @@ object TypeEquivalence {
 		methodEquivalence.put("java.lang.String", str);
 		methodEquivalence.put("_root_.java.lang.String", str);
 		
-		/*val intMethodEquivalence = new java.util.HashMap[String,String]
+		val intMethodEquivalence = new java.util.HashMap[String,String]
 		intMethodEquivalence.put("compareTo", "kcompareTo");
-		intMethodEquivalence.put("shortValue", "kshortValue");
+		/*intMethodEquivalence.put("shortValue", "kshortValue");
 		intMethodEquivalence.put("intValue", "kintValue");
 		intMethodEquivalence.put("longValue", "klongValue");
 		intMethodEquivalence.put("floatValue", "kfloatValue");
-		intMethodEquivalence.put("doubleValue", "kdoubleValue");
+		intMethodEquivalence.put("doubleValue", "kdoubleValue");*/
 		methodEquivalence.put("java.lang.Integer", intMethodEquivalence);
 		methodEquivalence.put("_root_.java.lang.Integer", intMethodEquivalence);
-		*/
+		
 		val resource = new java.util.HashMap[String,String]
 		resource.put("getContents", "kgetContents");
 		methodEquivalence.put("_root_.k2.persistence.Resource", resource);

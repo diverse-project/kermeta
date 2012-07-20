@@ -478,7 +478,7 @@ class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integ
     def toReal() : java.lang.Double={return value.doubleValue()} // deprecated in kmt framework
 	def toDouble() : java.lang.Double={return value.doubleValue()}
     override def compareTo(other : java.lang.Integer) :java.lang.Integer={return value.asInstanceOf[Int].compare(other) }
-    def compareTo(other : Int) :java.lang.Integer={return value.asInstanceOf[Int].compare(other.intValue)}
+    def kcompareTo(other : Int) :java.lang.Integer={return value.asInstanceOf[Int].compare(other.intValue)}
     
     def isGreater(other : Int) :java.lang.Boolean={return value>other}
     override def isGreater(other : java.lang.Integer) :java.lang.Boolean={return value>other.intValue}
