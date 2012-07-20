@@ -1,5 +1,5 @@
 KermetaProject "test_009_pruning" 
-groupId = "kermeta::ki::kompren"
+groupId = "kermeta.ki.kompren"
 defaultMainClass ="kermeta::ki::kompren::Test"
 defaultMainOperation ="main"
 sources={
