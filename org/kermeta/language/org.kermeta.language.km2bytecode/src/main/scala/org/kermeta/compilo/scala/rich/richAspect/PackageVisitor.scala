@@ -336,10 +336,10 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitLambdaParameter(thi: LambdaParameter, res: StringBuilder): Unit = {
-    res.append(thi.getName())
+    res.append(Util.protectScalaKeyword(thi.getName()))
     if (thi.getType() != null) {
       res.append(" : ")
-      visit(thi.getType(), res)
+      visitTypeRefParam(thi.getType(), res)
     }
   }
 
@@ -509,7 +509,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         else
           res.append("k2.standard.KermetaBag[")
       }
-     visit(thi.getType(), res)
+      visitTypeRefParam(thi.getType(), res)
       res.append("]")
     } else {
       visit(thi.getType, res)
@@ -521,6 +521,20 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       res.append("Any")
     else
       visit(thi.getType, res)
+  }
+  
+  def visitTypeParam(thi:org.kermeta.language.structure.Type,res:StringBuilder)={
+    if(getQualifiedNameCompilo(thi)=="_root_.k2.standard.KermetaObject")
+      res.append("Any")
+    else
+      visit(thi, res)
+  }
+  
+  def visitTypeRefParam(thi:org.kermeta.language.behavior.TypeReference,res:StringBuilder) ={
+    if(getQualifiedNameCompilo(thi.getType())=="_root_.k2.standard.KermetaObject")
+      res.append("Any")
+    else
+      visit(thi, res)
   }
 
   def visitUsing(thi: Using, res: StringBuilder) = {

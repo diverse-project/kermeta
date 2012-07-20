@@ -33,6 +33,6 @@ trait ObjectVisitor {
 	 
 	 def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String
         
-	 
+  def visitTypeParam(thi:org.kermeta.language.structure.Type,res:StringBuilder)
   
 }
