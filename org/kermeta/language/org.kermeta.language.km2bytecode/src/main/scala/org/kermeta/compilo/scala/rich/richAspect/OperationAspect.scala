@@ -4,7 +4,7 @@ import org.kermeta.compilo.scala.rich._
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala._
 import org.kermeta.language._
-import org.kermeta.language.structure._ 
+import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 
 trait OperationAspect extends ObjectVisitor with LogAspect {
@@ -31,10 +31,10 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
     //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
     //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
     //}else{
-    if(thi.getName.endsWith("isInstanceOf"))
-      res.append("k")
-    
-    res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
+    res.append(k2.utils.TypeEquivalence.getMethodEquivalence(
+        thi.getOwningClass().getName(),
+        Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi))
+    ))
     //}
       
     // Generate special parameters for certain operations
