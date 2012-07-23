@@ -35,10 +35,11 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def removeFromContainer():Unit  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
 	
 	def invoke(op:org.kermeta.language.structure.Operation , args:k2.standard.KermetaOrderedCol[_<:Any]) : k2.standard.KermetaObject ={
-		var optionMeth = this.getClass().getMethods.find(m => m.getName() == op.getName()
+	    var operationName = k2.utils.TypeEquivalence.getMethodEquivalence(op.getOwningClass().getName(),op.getName())
+		var optionMeth = this.getClass().getMethods.find(m => m.getName() == operationName
 		    && m.getParameterTypes().length == args.length)
 		optionMeth match{
-		  case None => {throw k2.exceptions.KerRichFactory.createRuntimeError.initialize(op.getName+" with "+args.length+" arguments in class "+this.getMetaClass().getName())}
+		  case None => {throw k2.exceptions.KerRichFactory.createRuntimeError.initialize(op.getName+" with "+args.length+" arguments in class "+this.getMetaClass().getName()+" not found")}
 		  case Some(meth) => {
 			  var argsTab : Array[AnyRef] = args.toArray()
 		    try{
@@ -94,6 +95,12 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
 	  false
   }
+  
+  def kisInstanceOf(cl:org.kermeta.language.structure.Class):java.lang.Boolean={
+    this.getMetaClass().getTypeDefinition()==cl.getTypeDefinition() || 
+	this.getMetaClass().getSuperClass().map(_.getTypeDefinition()).contains(cl.getTypeDefinition())
+  }
+
 
   def get(prop : org.kermeta.language.structure.Property) :java.lang.Object= {
     if (prop == null){

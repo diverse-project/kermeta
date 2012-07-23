@@ -31,7 +31,10 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
     //if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
     //  res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
     //}else{
-      res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
+    if(thi.getName.endsWith("isInstanceOf"))
+      res.append("k")
+    
+    res.append(Util.protectScalaKeyword(Util.getEcoreRenameOperation(thi)))
     //}
       
     // Generate special parameters for certain operations

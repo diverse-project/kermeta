@@ -213,6 +213,8 @@ object TypeEquivalence {
       res =  map.get(methodName)
     if (res ==null)
       res =methodName
+    if(methodName.endsWith("isInstanceOf"))
+      res="k"+res
     return res
   }
 	

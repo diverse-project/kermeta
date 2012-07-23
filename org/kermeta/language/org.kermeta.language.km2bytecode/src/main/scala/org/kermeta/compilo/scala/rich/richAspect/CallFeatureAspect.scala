@@ -219,9 +219,14 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                     case "isInstance" => {generateParam(thi,res,"","") ;res.append(".isInstanceOf");generateInstanceOf(thi,res, thi.getTarget)}
       
                     case "isKindOf" => generateTarget(thi,res);res.append(".Kermeta");generateOperationCall(thi,res);generateParam(thi,res,"(",")")
-                    case "isInstanceOf" => generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
-        
-      
+                    /*case x if(x.endsWith("isInstanceOf")) =>
+                      generateTarget(thi,res)
+                      res.append(".")
+                      res.append("k")
+                      gene
+                      generateParam(thi,res,"(",")")
+                        //generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
+      				*/
                     case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(thi,res);res.append(")");}
                     case "new" => generateNew(thi,res)
                     case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {generateTarget(thi,res);res.append(".");generateOperationCall(thi,res);generateParam(thi,res,"(",")"); }
