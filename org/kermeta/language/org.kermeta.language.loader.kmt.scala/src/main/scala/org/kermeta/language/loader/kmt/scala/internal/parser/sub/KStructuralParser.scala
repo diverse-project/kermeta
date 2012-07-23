@@ -80,6 +80,14 @@ trait KStructuralParser extends KAbstractParser {
                     Success(elems.toList, in0)
                   }
                 }
+              case cf: CallSuperOperation if (!cf.getTarget.isInstanceOf[NESTED_NEEDED]) => {
+                  if (elems.size == 0) {
+                    elems += x;
+                    applyp(rest)
+                  } else {
+                    Success(elems.toList, in0)
+                  }
+                }
               case _@e => {
                   if (elems.size > 0) {
                     Success(elems.toList, in0)
