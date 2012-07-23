@@ -62,6 +62,18 @@ class TestObject inherits TestCase{
 			assert(false)
 		end
 		
+		// test if invoke takes into account methodEquivalence
+		args.clear
+		args.add(MyObject)
+		var m:MyObject := MyObject.new
+		m.called := false
+		op := MyObject.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="isInstanceOf"}
+		m.invoke(op,args)
+		assert(m.called)
+		m.kcalled:=false
+		op := MyObject.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="kisInstanceOf"}
+		m.invoke(op,args)
+		assert(m.kcalled)
 	end
 
 	operation testIsVoid() : Void is do

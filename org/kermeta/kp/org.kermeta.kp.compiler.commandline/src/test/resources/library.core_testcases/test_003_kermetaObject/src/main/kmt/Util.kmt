@@ -36,6 +36,7 @@ class Dummy{
 class MyObject{
 
 	attribute called:Boolean
+	attribute kcalled:Boolean
 
 	operation isVoid():Boolean is do
 		called:=true
@@ -51,5 +52,13 @@ class MyObject{
 	operation oid():Integer is do
 		called:=true
 		result := 1
+	end
+	
+	operation isInstanceOf(cl:org::kermeta::language::structure::Class):Boolean is do
+		called:=true
+	end
+	
+	operation kisInstanceOf(cl:org::kermeta::language::structure::Class):Boolean is do
+		kcalled:=true
 	end
 }
