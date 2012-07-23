@@ -202,9 +202,6 @@ object TypeEquivalence {
 
   def getMethodEquivalence(classN:String,methodName:String):String={
     var className :String = classN
-    if (methodName.contains("split")){
-       println("getMethodEquivalence " + className + " " + methodName )
-    }
     var res :String = null
     if (className.contains("["))
       className = className.substring(0,className.indexOf("["))
@@ -213,7 +210,7 @@ object TypeEquivalence {
       res =  map.get(methodName)
     if (res ==null)
       res =methodName
-    if(methodName.endsWith("isInstanceOf"))
+    if(methodName.matches("""k*isInstanceOf"""))
       res="k"+res
     return res
   }
