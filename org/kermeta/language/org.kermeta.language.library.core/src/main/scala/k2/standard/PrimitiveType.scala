@@ -116,6 +116,10 @@ object PrimitiveConversion{
         //return l;
 return null;
     }
+    
+    implicit def kermetaCol2ColEObject(x:k2.standard.KermetaCol[_<:Any]):java.util.Collection[org.eclipse.emf.ecore.EObject]={
+      x.asInstanceOf[java.util.Collection[org.eclipse.emf.ecore.EObject]]
+    }
 
     implicit def throwable2kermeta(value:java.lang.Throwable):k2.exceptions.Exception = value.asInstanceOf[k2.exceptions.Exception]
 
