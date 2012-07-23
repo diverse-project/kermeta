@@ -128,7 +128,7 @@ trait ClassDefinitionAspect extends ObjectVisitor{
         var qualifiedName = ReflexivityLoader.qualifiedName(thi)
         res.append("override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n")
         res.append(" var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\""+qualifiedName+"\"); \n")
-        res.append("         if (cd !=null){ \n var cl = "+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure."+GlobalConfiguration.factoryName+".createClass \n")
+        res.append("         if (cd !=null){ \n var cl = _root_."+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.kermeta.language.structure."+GlobalConfiguration.factoryName+".createClass \n")
         res.append(" cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
         
     }
