@@ -8,17 +8,12 @@ import org.eclipse.emf.ecore._
 
 object UTilScala {
 
-    def isInstanceOf(o:_root_.java.lang.Object, typ:_root_.java.lang.Object):Boolean={
-        if (o.getClass.getName.equals(typ.getClass.getName))
-            return true
-        if (typ.isInstanceOf[org.kermeta.language.structure.PrimitiveType]){
-            if ( typ.asInstanceOf[org.kermeta.language.structure.PrimitiveType].getName.equals("EString") && o.getClass.getName.equals("kermeta.standard.RichString") )
-            	return true
-
-           // println("toto " + typ.asInstanceOf[org.kermeta.language.structure.PrimitiveType].getName)
-        }
-       // println(o + "" + typ)
-        return false;
+    def isInstanceOf(o:k2.standard.KermetaObject, typ:org.kermeta.language.structure.Type):Boolean={
+      try {
+        o.getMetaClass().getTypeDefinition()==typ.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition()
+      } catch {
+        case e:Exception => false
+      }
     }
 
     def newInstance(o:org.kermeta.language.structure.Class): k2.standard.KermetaObject ={
@@ -429,7 +424,7 @@ class ListIterator[E](list:java.util.List[E]) extends java.util.ListIterator[E]{
   def this(list:java.util.List[E],index:Int)={
     this(list)
     if(index<0||index>list.size)
-      throw new IndexOutOfBoundsException
+      throw k2.exceptions.KerRichFactory.createIndexOutOfBound
     cursor=index
   }
   

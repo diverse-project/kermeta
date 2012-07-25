@@ -159,13 +159,14 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
 
     }
   
-    /* TO MERGE */
     def generateIsInstanceOf(thi:CallFeature,res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
       o match {
-        case o : CallTypeLiteral => 
+        case o : CallTypeLiteral 
+          if(!(isCompiledToScalaType(o.getTyperef().getType())&&thi.getTarget.getStaticType()!=o.getTyperef().getType()))
+          =>
             generateTarget(thi,res);
             res.append(".isInstanceOf[")
-            generateScalaCodeForInstanceOf(o.asInstanceOf[CallTypeLiteral],res)
+            generateScalaCodeForInstanceOf(o,res)
             res.append("]")
         case o =>
             res.append("_root_.k2.utils.UTilScala.isInstanceOf(")
@@ -176,6 +177,26 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
         }
         //res.append("\n")    
     }  
+    
+    def isCompiledToScalaType(thi:org.kermeta.language.structure.Type):java.lang.Boolean={
+      Array(
+          "_root_.java.lang.String",
+          "_root_.java.lang.Integer",
+    	  "_root_.java.lang.Boolean",
+    	  "_root_.java.lang.Double",
+    	  "_root_.org.eclipse.emf.ecore.resource.ResourceSet",
+    	  "_root_.org.eclipse.emf.ecore.resource.Resource",
+    	  "_root_.java.lang.Character",
+    	  "_root_.java.util.Date",
+    	  "_root_.java.util.Random",
+    	  "_root_.java.lang.Float",
+    	  "_root_.java.util.Iterator",
+    	  "_root_.java.lang.Long",
+    	  "_root_.java.lang.StringBuilder",
+    	  "_root_.java.util.Stack",
+    	  "_root_.java.util.HashMap"
+      ).contains(getQualifiedNameCompilo(thi))
+    }
   
   
     def generateClone(thi:CallFeature,res:StringBuilder){
