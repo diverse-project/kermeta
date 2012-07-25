@@ -80,28 +80,16 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
   def isNotEqual(o : Any) : java.lang.Boolean = !equals(o)
 
-  def isDirectInstanceOf(cl : org.kermeta.language.structure.Class) : java.lang.Boolean = {//FIXME GENERICS
-	  this match {
-		  case thisClass : org.kermeta.language.structure.Class =>
-		  k2.utils.UTilScala.getQualifiedNameClassKermeta(cl.getTypeDefinition,"::")==
-		  k2.utils.UTilScala.getQualifiedNameClassKermeta(this.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition,"::")
-		  case _ => false
-	  }
-  }
-
-  def isKindOf(cl : org.kermeta.language.structure.Class) : java.lang.Boolean = {//FIXME GENERICS
-	  if(this.isInstanceOf[org.kermeta.language.structure.Class] && cl.isInstanceOf[KermetaObject])
-		  cl.asInstanceOf[KermetaObject].isSuperTypeOf(this.asInstanceOf[org.kermeta.language.structure.Class])
-
-	  false
+  def isDirectInstanceOf(ty : org.kermeta.language.structure.Type) : java.lang.Boolean = {
+    ty match {
+      case ty:org.kermeta.language.structure.Class => this.getMetaClass().getTypeDefinition()==ty.getTypeDefinition()
+      case ty => java.lang.Class.forName(k2.utils.UTilScala.getQualifiedNameTypeJava(ty,".")).isInstance(this)
+    }
   }
   
-  def kisInstanceOf(cl:org.kermeta.language.structure.Class):java.lang.Boolean={
-    this.getMetaClass().getTypeDefinition()==cl.getTypeDefinition() || 
-	this.getMetaClass().getSuperClass().map(_.getTypeDefinition()).contains(cl.getTypeDefinition())
-  }
-
-
+  @deprecated("isKindOf is deprecated, use isDirectInstanceOf instead","2.0.1")
+  def isKindOf=isDirectInstanceOf _
+  
   def get(prop : org.kermeta.language.structure.Property) :java.lang.Object= {
     if (prop == null){
       println ("prop est null aie")

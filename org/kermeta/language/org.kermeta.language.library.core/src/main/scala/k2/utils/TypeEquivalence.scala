@@ -210,8 +210,6 @@ object TypeEquivalence {
       res =  map.get(methodName)
     if (res ==null)
       res =methodName
-    if(methodName.matches("""k*isInstanceOf"""))
-      res="k"+res
     return res
   }
 	

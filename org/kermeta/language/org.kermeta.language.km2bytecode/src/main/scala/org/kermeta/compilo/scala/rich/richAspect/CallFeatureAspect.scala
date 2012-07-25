@@ -211,22 +211,12 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                     case "equals" => {res.append("(");generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")");res.append(")");}
                         //case "run" if(thi.getTarget != null) => generateKUnitCase(res)
         
-        
                     case "asType" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
-      
                     case "asKindOf" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
                     //case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, thi.getParameters.get(0))}
                     case "isInstance" => {generateParam(thi,res,"","") ;res.append(".isInstanceOf");generateInstanceOf(thi,res, thi.getTarget)}
-      
-                    case "isKindOf" => generateTarget(thi,res);res.append(".Kermeta");generateOperationCall(thi,res);generateParam(thi,res,"(",")")
-                    /*case x if(x.endsWith("isInstanceOf")) =>
-                      generateTarget(thi,res)
-                      res.append(".")
-                      res.append("k")
-                      gene
-                      generateParam(thi,res,"(",")")
-                        //generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
-      				*/
+                    case "isInstanceOf" => generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
+
                     case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(thi,res);res.append(")");}
                     case "new" => generateNew(thi,res)
                     case _ if(thi.getTarget != null && thi.getStaticOperation!=null ) => {generateTarget(thi,res);res.append(".");generateOperationCall(thi,res);generateParam(thi,res,"(",")"); }
