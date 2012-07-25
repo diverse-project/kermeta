@@ -458,17 +458,12 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
               res.append("_root_."+k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
            }else{
                 res.append("scalaUtil.Util.getMetaClass(\"")
-                res.append(k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
+                res.append(k2.utils.UTilScala.getQualifiedNameTypeKermeta(thi.getTyperef().getType, "."))
+                res.append("\")")
            }
         }else{
             res.append("_root_." + k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
         }
-        //this.getTyperef().getType.generateScalaCode(res)
-        if (thi.getTyperef().getType.isInstanceOf[Class] && !singleton){
-            res.append("\")")
-        }
-
-    
   }
 
   def generateScalaCodeForInstanceOf(thi: CallTypeLiteral, res: StringBuilder): Unit = {
