@@ -50,9 +50,10 @@ public class OutlineLabelProvider implements ILabelProvider{
 	public Image getImage(Object o) {
 		Image image = null;
 		if (o instanceof OutlineItem) {
-			URL url = Activator.getDefault().getBundle().getEntry("icons/package_blue_red.gif");
-			if ( url != null )
-				image = ImageDescriptor.createFromURL(url).createImage();
+			//URL url = Activator.getDefault().getBundle().getEntry("icons/package_blue_red.gif");
+			//if ( url != null )
+			//	image = ImageDescriptor.createFromURL(url).createImage();
+			return ((OutlineItem)o).getImage();
 		}
 		return image;
 	}

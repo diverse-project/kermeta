@@ -29,11 +29,16 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Image;
 import org.kermeta.language.autocompletion.AutocompletionImpl;
 import org.kermeta.language.autocompletion.api.Autocompletion;
+import org.kermeta.language.behavior.CallExpression;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.loader.kmt.scala.Lexer;
 import org.kermeta.language.loader.kmt.scala.api.IKToken;
+import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.KermetaModelElement;
+import org.kermeta.language.structure.Tag;
 import org.kermeta.language.texteditor.eclipse.internal.Activator;
+import org.kermeta.language.texteditor.eclipse.internal.ClosestElementFinder;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
 
 public class KermetaContentAssistProcessor implements IContentAssistProcessor {
@@ -389,12 +394,29 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	
 	private void proposeCallExpression(List<IKToken> qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen) {
 		HashMap<String,ArrayList<String>> theCallExpression = null;
-		if (myAutocompletion != null) {
+		//if (myAutocompletion != null) {
 			// disabled until we get a proper way to deal with it
 			// idea : have an operation that compute the closest preceding/containing element based on tracability information in the model  
 		//	theCallExpression = myAutocompletion.getCallExpression(explodeCallExpression(qualifier), getLastCompletePackageChain(qualifier, true));
+			
+			// 
+		/*int lastElemOffset = documentOffset;
+		if(getLast(qualifier).toString().equals(".") && qualifier.size() > 1){
+			// get previous element offset which has more chances to be in the modeling unit
+			lastElemOffset = qualifier.get(qualifier.size()-1).
+		}*/
+		
+		ClosestElementFinder finder = new ClosestElementFinder(editor, documentOffset-(qlen+2));
+		KermetaModelElement closestContainer = finder.findClosestContainerModelelement();
+		
+		if(closestContainer != null){
+			if(closestContainer instanceof CallExpression){
+				CallExpression ce = (CallExpression) closestContainer;
+				ce.getKType();
+			}
 		}
-		if (theCallExpression != null) {
+		//}
+		/*if (theCallExpression != null) {
 			for (String currentMetaClass : theCallExpression.keySet()) {
 				Image theImage = KermetaImage.getImage("/icons/specific/EmptyExpression.gif");
 				if (currentMetaClass.equals("Operation")) {
@@ -408,7 +430,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					propList.add(new KermetaCompletionProposal(anElement, documentOffset - qlen, qlen, cursor, theImage));
 				}
 			}
-		}
+		}*/
 	}
 
 	private boolean proposeStructure(String qualifier, int documentOffset, List<KermetaCompletionProposal> propList, int qlen) {
@@ -453,7 +475,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
 	@Override
 	public char[] getCompletionProposalAutoActivationCharacters() {
-		return new char[] { '.', ' ', ':'};
+		return new char[] { }; // user must ask for completion with ctrl+space
+		//return new char[] { '.', ' ', ':'};
 	}
 
 	@Override
@@ -470,5 +493,6 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	public String getErrorMessage() {
 		return "An error unables Kermeta to assist your content";
 	}
-
+	
+	
 }

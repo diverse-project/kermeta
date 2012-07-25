@@ -1,9 +1,181 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java|**/*.java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/aether/aether-api/1.13/aether-api-1.13.jar" sourcepath="M2_REPO/org/sonatype/aether/aether-api/1.13/aether-api-1.13-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/aether/aether-api/1.13/aether-api-1.13-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/aether/aether-connector-asynchttpclient/1.13/aether-connector-asynchttpclient-1.13.jar" sourcepath="M2_REPO/org/sonatype/aether/aether-connector-asynchttpclient/1.13/aether-connector-asynchttpclient-1.13-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/aether/aether-connector-asynchttpclient/1.13/aether-connector-asynchttpclient-1.13-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/aether/aether-connector-file/1.13/aether-connector-file-1.13.jar" sourcepath="M2_REPO/org/sonatype/aether/aether-connector-file/1.13/aether-connector-file-1.13-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/aether/aether-connector-file/1.13/aether-connector-file-1.13-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/aether/aether-impl/1.13/aether-impl-1.13.jar" sourcepath="M2_REPO/org/sonatype/aether/aether-impl/1.13/aether-impl-1.13-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/aether/aether-impl/1.13/aether-impl-1.13-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/aether/aether-spi/1.13/aether-spi-1.13.jar" sourcepath="M2_REPO/org/sonatype/aether/aether-spi/1.13/aether-spi-1.13-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/aether/aether-spi/1.13/aether-spi-1.13-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/sonatype/aether/aether-util/1.13/aether-util-1.13.jar" sourcepath="M2_REPO/org/sonatype/aether/aether-util/1.13/aether-util-1.13-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/sonatype/aether/aether-util/1.13/aether-util-1.13-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/ning/async-http-client/1.6.5/async-http-client-1.6.5.jar" sourcepath="M2_REPO/com/ning/async-http-client/1.6.5/async-http-client-1.6.5-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/com/ning/async-http-client/1.6.5/async-http-client-1.6.5-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/fr/irisa/triskell/utilities/cache.utilities/0.1.0/cache.utilities-0.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-cli/commons-cli/1.2/commons-cli-1.2.jar" sourcepath="M2_REPO/commons-cli/commons-cli/1.2/commons-cli-1.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/emftext/commons/commons.antlr3_3_0/1.0.0/commons.antlr3_3_0-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/diagnostic/diagnostic.model/2.0.3-SNAPSHOT/diagnostic.model-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.genmodel/2.0.3-SNAPSHOT/emf.genmodel-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib.patched/2.7.0/emf.lib.patched-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/fr/irisa/triskell/kermeta/kermeta.model/1.4.0/kermeta.model-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/kp/kp.compiler.commandline/2.0.3-SNAPSHOT/kp.compiler.commandline-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/kp/kp.loader.kp/2.0.3-SNAPSHOT/kp.loader.kp-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/kp/kp.loader.kp.api/2.0.3-SNAPSHOT/kp.loader.kp.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/kp/kp.model/2.0.3-SNAPSHOT/kp.model-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/kp/kp.parser.standalone/2.0.3-SNAPSHOT/kp.parser.standalone-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.autocompletion/2.0.3-SNAPSHOT/language.autocompletion-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.autocompletion.api/2.0.3-SNAPSHOT/language.autocompletion.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.builder.api/2.0.3-SNAPSHOT/language.builder.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.builder.eclipse/2.0.3-SNAPSHOT/language.builder.eclipse-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.checker/2.0.3-SNAPSHOT/language.checker-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.checker.api/2.0.3-SNAPSHOT/language.checker.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.ecore2km/2.0.3-SNAPSHOT/language.ecore2km-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.ecore2km.api/2.0.3-SNAPSHOT/language.ecore2km.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.framework.scala/1.4.4-SNAPSHOT/language.framework.scala-1.4.4-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.km2bytecode/2.0.3-SNAPSHOT/language.km2bytecode-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.3-SNAPSHOT/language.library.core-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala/2.0.3-SNAPSHOT/language.loader.kmt.scala-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala.api/2.0.3-SNAPSHOT/language.loader.kmt.scala.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.merger.binarymerger/2.0.3-SNAPSHOT/language.merger.binarymerger-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.merger.binarymerger.api/2.0.3-SNAPSHOT/language.merger.binarymerger.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.3-SNAPSHOT/language.model-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.resolver/2.0.3-SNAPSHOT/language.resolver-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.resolver.api/2.0.3-SNAPSHOT/language.resolver.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.texteditor.eclipse.nature/2.0.3-SNAPSHOT/language.texteditor.eclipse.nature-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.umlprofile2ecore/2.0.3-SNAPSHOT/language.umlprofile2ecore-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.umlprofile2ecore.api/2.0.3-SNAPSHOT/language.umlprofile2ecore.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.15/log4j-1.2.15.jar" sourcepath="M2_REPO/log4j/log4j/1.2.15/log4j-1.2.15-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-aether-provider/3.0.3/maven-aether-provider-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-aether-provider/3.0.3/maven-aether-provider-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-aether-provider/3.0.3/maven-aether-provider-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-model-builder/3.0.3/maven-model-builder-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-model-builder/3.0.3/maven-model-builder-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-model-builder/3.0.3/maven-model-builder-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-repository-metadata/3.0.3/maven-repository-metadata-3.0.3.jar" sourcepath="M2_REPO/org/apache/maven/maven-repository-metadata/3.0.3/maven-repository-metadata-3.0.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/apache/maven/maven-repository-metadata/3.0.3/maven-repository-metadata-3.0.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/jboss/netty/netty/3.2.5.Final/netty-3.2.5.Final.jar" sourcepath="M2_REPO/org/jboss/netty/netty/3.2.5.Final/netty-3.2.5.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.commands/3.6.0.I20100512-1500/org.eclipse.core.commands-3.6.0.I20100512-1500.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.jobs/3.5.1.R36x_v20100824/org.eclipse.core.jobs-3.5.1.R36x_v20100824.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.resources/3.6.1.R36x_v20110131-1630/org.eclipse.core.resources-3.6.1.R36x_v20110131-1630.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.runtime/3.6.0.v20100505/org.eclipse.core.runtime-3.6.0.v20100505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.debug.ui/3.6.3.v20101201_r362/org.eclipse.debug.ui-3.6.3.v20101201_r362.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.codegen/2.6.0.v20100914-1218/org.eclipse.emf.codegen-2.6.0.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.codegen.ecore/2.6.1.v20100914-1218/org.eclipse.emf.codegen.ecore-2.6.1.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.common/2.7.0.v20110605/org.eclipse.emf.common-2.7.0.v20110605.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.ecore/2.6.1.v20100914-1218/org.eclipse.emf.ecore-2.6.1.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.ecore.xmi/2.5.0.v20100521-1846/org.eclipse.emf.ecore.xmi-2.5.0.v20100521-1846.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.validation/1.4.0.v20100428-2315/org.eclipse.emf.validation-1.4.0.v20100428-2315.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.common/3.6.0.v20100503/org.eclipse.equinox.common-3.6.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.preferences/3.3.0.v20100503/org.eclipse.equinox.preferences-3.3.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.registry/3.5.0.v20100503/org.eclipse.equinox.registry-3.5.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jdt.ui/3.6.2.r362_v20110203/org.eclipse.jdt.ui-3.6.2.r362_v20110203.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jface/3.6.2.M20110210-1200/org.eclipse.jface-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jface.source/3.6.2.M20110210-1200/org.eclipse.jface.source-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jface.text/3.6.1.r361_v20100825-0800/org.eclipse.jface.text-3.6.1.r361_v20100825-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.swt/3.6.2.v3659c/org.eclipse.swt-3.6.2.v3659c.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.swt.gtk.linux.x86_64/3.6.2.v3659b/org.eclipse.swt.gtk.linux.x86_64-3.6.2.v3659b.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.text/3.5.0.v20100601-1300/org.eclipse.text-3.5.0.v20100601-1300.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui/3.6.2.M20110203-1100/org.eclipse.ui-3.6.2.M20110203-1100.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.console/3.5.0.v20100526/org.eclipse.ui.console-3.5.0.v20100526.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.editors/3.6.1.r361_v20100825-0800/org.eclipse.ui.editors-3.6.1.r361_v20100825-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.ide/3.6.2.M20101201-0800/org.eclipse.ui.ide-3.6.2.M20101201-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.views/3.5.1.M20110202-0800/org.eclipse.ui.views-3.5.1.M20110202-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.views.source/3.5.1.M20110202-0800/org.eclipse.ui.views.source-3.5.1.M20110202-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.workbench/3.6.2.M20110210-1200/org.eclipse.ui.workbench-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.workbench.texteditor/3.6.1.r361_v20100714-0800/org.eclipse.ui.workbench.texteditor-3.6.1.r361_v20100714-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.uml2.common/1.5.0.v201005031530/org.eclipse.uml2.common-1.5.0.v201005031530.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.uml2.uml/3.1.1.v201008191505/org.eclipse.uml2.uml-3.1.1.v201008191505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar" sourcepath="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/url/pax-url-mvn/1.2.5/pax-url-mvn-1.2.5.jar" sourcepath="M2_REPO/org/ops4j/pax/url/pax-url-mvn/1.2.5/pax-url-mvn-1.2.5-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/ops4j/pax/url/pax-url-mvn/1.2.5/pax-url-mvn-1.2.5-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/2.0.6/plexus-utils-2.0.6.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-utils/2.0.6/plexus-utils-2.0.6-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.6/plexus-utils-2.0.6-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-compiler/2.9.0-1/scala-compiler-2.9.0-1.jar" sourcepath="M2_REPO/org/scala-lang/scala-compiler/2.9.0-1/scala-compiler-2.9.0-1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar" sourcepath="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/traceability/traceability.model/2.0.3-SNAPSHOT/traceability.model-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.aether/2.0.3-SNAPSHOT/utils.aether-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.3-SNAPSHOT/utils.helpers-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers.eclipse/2.0.3-SNAPSHOT/utils.helpers.eclipse-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.3-SNAPSHOT/utils.systemservices.api-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.eclipse/2.0.3-SNAPSHOT/utils.systemservices.eclipse-2.0.3-SNAPSHOT.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 </classpath>

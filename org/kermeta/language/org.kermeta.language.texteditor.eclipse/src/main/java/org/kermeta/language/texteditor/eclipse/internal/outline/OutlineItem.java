@@ -24,11 +24,17 @@ public class OutlineItem {
 		Class,
 		Operation
 	}
+	
+	public enum LocalisationType {
+		Local,
+		External,
+		Mixed
+	}
 	protected String label;
 
 	protected Image image;
 	
-	private boolean isLocal = false;
+	private LocalisationType localisation = LocalisationType.External;
 	protected Object[] children;
 	protected OutlineItem parent;
 	protected String packageName;
@@ -84,10 +90,42 @@ public class OutlineItem {
 	    if ( isPartiallyImported() )
 	    	return KermetaSpecialIcons.PACKAGE_BLUE_RED;
 	    */
-	    if ( isLocal )
-	    	return Activator.getDefault().getImage(Activator.ImageTypes.LocalPackage);
-	    else
-	    	return Activator.getDefault().getImage(Activator.ImageTypes.ExtPackage);
+		switch(type){
+		case Package:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtPackage);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPackage);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.MixedPackage);
+			}
+		case Class:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtClass);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalClass);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.MixedClass);
+			}
+		case Operation:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtOperation);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalOperation);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.MixedOperation);
+			}
+		default:
+			URL url = Activator.getDefault().getBundle().getEntry("icons/specific/DummyClass.gif");
+			if ( url != null )
+				return ImageDescriptor.createFromURL(url).createImage();
+			else return null;
+		}
+		
+	    
 	}
 	public int getNoOfChildren(){
 		if (children != null ){

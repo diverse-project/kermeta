@@ -30,6 +30,13 @@ public class Activator extends AbstractUIPlugin {
 	public enum ImageTypes {
 		LocalPackage,
 		ExtPackage,
+		MixedPackage,
+		LocalClass,
+		ExtClass,
+		MixedClass,
+		LocalOperation,
+		ExtOperation,
+		MixedOperation,
 		Error,
 		Warning
 	}
@@ -100,9 +107,23 @@ public class Activator extends AbstractUIPlugin {
 		} else {
 			switch (name){
 			case LocalPackage:
-				return this.getImageFile("icons/package_blue_green.gif", ImageTypes.LocalPackage);
+				return this.getImageFile("icons/red/package.png", ImageTypes.LocalPackage);
 			case ExtPackage:
-				return this.getImageFile("icons/package_blue_red.gif", ImageTypes.ExtPackage);
+				return this.getImageFile("icons/blue/package.png", ImageTypes.ExtPackage);
+			case MixedPackage:
+				return this.getImageFile("icons/redblue/package.png", ImageTypes.MixedPackage);
+			case LocalClass:
+				return this.getImageFile("icons/red/class.png", ImageTypes.LocalClass);
+			case ExtClass:
+				return this.getImageFile("icons/blue/class.png", ImageTypes.ExtClass);
+			case MixedClass:
+				return this.getImageFile("icons/redblue/class.png", ImageTypes.MixedClass);
+			case LocalOperation:
+				return this.getImageFile("icons/red/operation.png", ImageTypes.LocalOperation);
+			case ExtOperation:
+				return this.getImageFile("icons/blue/operation.png", ImageTypes.ExtOperation);
+			case MixedOperation:
+				return this.getImageFile("icons/redblue/operation.png", ImageTypes.MixedOperation);
 			case Error:
 				return this.getImageFile("icons/error.gif", ImageTypes.Error);
 			case Warning:
