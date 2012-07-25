@@ -161,25 +161,20 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
   
     /* TO MERGE */
     def generateIsInstanceOf(thi:CallFeature,res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
-        if (o.isInstanceOf[CallTypeLiteral]){
+      o match {
+        case o : CallTypeLiteral => 
             generateTarget(thi,res);
-            res.append(".");
-    
-            res.append("isInstanceOf[")
-            //res.append("_root_.")
+            res.append(".isInstanceOf[")
             generateScalaCodeForInstanceOf(o.asInstanceOf[CallTypeLiteral],res)
             res.append("]")
-        }
-        else{
+        case o =>
             res.append("_root_.k2.utils.UTilScala.isInstanceOf(")
-
             generateTarget(thi,res);
             res.append(",");
-    
             visit(o,res)
             res.append(")")
         }
-        res.append("\n")    
+        //res.append("\n")    
     }  
   
   
@@ -212,9 +207,8 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                         //case "run" if(thi.getTarget != null) => generateKUnitCase(res)
         
                     case "asType" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
-                    case "asKindOf" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
-                    //case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, thi.getParameters.get(0))}
                     case "isInstance" => {generateParam(thi,res,"","") ;res.append(".isInstanceOf");generateInstanceOf(thi,res, thi.getTarget)}
+                    //case "asKindOf" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
                     case "isInstanceOf" => generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
 
                     case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(thi,res);res.append(")");}

@@ -472,7 +472,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def generateScalaCodeForInstanceOf(thi: CallTypeLiteral, res: StringBuilder): Unit = {
-    visit(thi.getTyperef().getType, res)
+    visitTypeParam(thi.getTyperef().getType, res)
   }
 
   def visitTypeReference(thi: TypeReference, res: StringBuilder): Unit = {
