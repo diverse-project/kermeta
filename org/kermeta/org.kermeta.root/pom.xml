@@ -65,13 +65,14 @@
 								if(index!=-1)
 									scalaVersionNoSuffix = "${scala.version}".substring(0,index)
 								project.properties.setProperty('scala.version.nosuffix', scalaVersionNoSuffix)
-								
+								println("scala.version.nosuffix="+scalaVersionNoSuffix)
 								String bundleVersion = "${project.version}"
 								// workaround jenkins bug https://issues.jenkins-ci.org/browse/JENKINS-9693?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel
 								String timestamp = "${maven.build.timestamp}".replaceAll("-","_") 
 								bundleVersion = bundleVersion.replaceAll("-SNAPSHOT", "-SNAPSHOT_"+timestamp)
 								bundleVersion = bundleVersion.replaceAll("-",".")
 								project.properties.setProperty('bundle.version',bundleVersion)
+								println("bundle.version="+bundleVersion)
 							</source>
 						</configuration>
 					</execution>
