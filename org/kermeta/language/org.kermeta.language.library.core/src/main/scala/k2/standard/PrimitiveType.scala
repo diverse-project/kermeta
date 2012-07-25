@@ -154,12 +154,12 @@ trait Summable[G]  extends Object {
     def plus(other : G) :G
     //def isNotEqual(other : Any) :Boolean = {!this.equals(other) }
 }
-class RichNotComparableException  extends Exception  {}
+//class RichNotComparableException  extends Exception  {}
 
-class RichIterator (value: java.util.Iterator[_]) extends RichValueType[Boolean] {
+class RichIterator (value: java.util.Iterator[_]) extends EObjectImplForPrimitive {
 	override  def isVoid(): java.lang.Boolean = false;
 	def isOff(): java.lang.Boolean = {return !value.hasNext()}
-	override def getValue():Object = value 
+	def getValue():Object = value 
 }
 
 
