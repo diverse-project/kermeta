@@ -114,12 +114,12 @@ class Object
 	 * This is the new version of the former isKindOf
 	 */
 	//@CompilerIgnore "true"
-	operation isDirectInstanceOf(cl : Class) : Boolean is do
+	operation isDirectInstanceOf(type : Type) : Boolean is do
 	end
 
 	@CompilerIgnore "true"
 	@Deprecated "Operation isKindOf is deprecated, use isDirectInstanceOf instead"
-	operation isKindOf(cl : Class) : Boolean is do
+	operation isKindOf(type : Type) : Boolean is do
 	end
 
 	/** 
@@ -221,12 +221,12 @@ class Object
 	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
 	 */
 	@CompilerIgnore "true"
-	operation asType(type : Class) : Object is do
+	operation asType(type : Type) : Object is do
 	end
 
 	/**
-	 * Returns a Boolean stating whether the current Object conforms to given Type
-	 * This means: is this object an instance of this type, or is it an instance of its subtype 
+	 * Returns true if the current Object is an instance of the given type or of one of its supertypes.
+	 * For a non-transitive check, see isDirectInstanceOf.
 	 */
 	@CompilerIgnore "true"
 	operation isInstanceOf(type : Type) : Boolean is do
