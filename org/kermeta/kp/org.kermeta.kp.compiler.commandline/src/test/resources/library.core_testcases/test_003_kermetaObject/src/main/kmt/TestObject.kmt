@@ -46,34 +46,25 @@ class TestObject inherits TestCase{
 		args.add("tutu")
 		do
 			n.invoke(op,args)
-			assert(false)
+			assertWithMsg(false,"Invoke exception 1")
 		rescue(e:kermeta::exceptions::RuntimeError)
 		rescue(e:kermeta::exceptions::Exception)
-			assert(false)
+			assertWithMsg(false,"Invoke exception 2")
 		end
 
 		args.clear
 		op := Dummy.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="dummy"}
 		do
 			n.invoke(op,args)
-			assert(false)
+			assertWithMsg(false,"Invoke exception 3")
 		rescue(e:kermeta::exceptions::RuntimeError)
 		rescue(e:kermeta::exceptions::Exception)
-			assert(false)
+			assertWithMsg(false,"Invoke exception 4")
 		end
 		
 		// test if invoke takes into account methodEquivalence
-		args.clear
-		args.add(MyObject)
-		var m:MyObject := MyObject.new
-		m.called := false
-		op := MyObject.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="isInstanceOf"}
-		m.invoke(op,args)
-		assert(m.called)
-		m.kcalled:=false
-		op := MyObject.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="kisInstanceOf"}
-		m.invoke(op,args)
-		assert(m.kcalled)
+		var s:String := "toto tutu"
+		assert(s.split(" ").isInstanceOf(Collection[String]))
 	end
 
 	operation testIsVoid() : Void is do
