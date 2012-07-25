@@ -4,7 +4,7 @@ import org.kermeta.compilo.scala.rich._
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala._
 import org.kermeta.language._
-import org.kermeta.language.structure._ 
+import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import java.util._
 
@@ -162,7 +162,8 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     def generateIsInstanceOf(thi:CallFeature,res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
       o match {
         case o : CallTypeLiteral 
-          if(!(isCompiledToScalaType(o.getTyperef().getType())&&thi.getTarget.getStaticType()!=o.getTyperef().getType()))
+          if(!(isCompiledToScalaType(o.getTyperef().getType()) && thi.getTarget.getStaticType()!=o.getTyperef().getType())
+              && !thi.getTarget().isInstanceOf[org.kermeta.language.behavior.Literal])
           =>
             generateTarget(thi,res);
             res.append(".isInstanceOf[")
