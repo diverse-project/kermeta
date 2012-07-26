@@ -23,6 +23,14 @@ public class OutlineItem {
 		Package,
 		Class,
 		Operation,
+		Attribute,
+		Reference,
+		DerivedProperty,
+		Enumeration,
+		EnumLiteral,
+		Invariant,
+		Precondition,
+		Postcondition,
 		DefaultType
 	}
 	
@@ -121,6 +129,78 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalOperation);
 			case Mixed:
 				return Activator.getDefault().getImage(Activator.ImageTypes.MixedOperation);
+			}
+		case Attribute:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtAttribute);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalAttribute);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalAttribute);
+			}
+		case Reference:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtReference);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalReference);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalReference);
+			}
+		case DerivedProperty:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtDerivedProp);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalDerivedProp);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalDerivedProp);
+			}
+		case Invariant:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtInvariant);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalInvariant);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalInvariant);
+			}
+		case Precondition:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtPre);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPre);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPre);
+			}
+		case Postcondition:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtPost);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPost);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPost);
+			}
+		case Enumeration:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtEnumeration);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalEnumeration);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalEnumeration);
+			}
+		case EnumLiteral:
+			switch(localisation){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtEnumLiteral);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalEnumLiteral);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalEnumLiteral);
 			}
 		default:
 			URL url = Activator.getDefault().getBundle().getEntry("icons/specific/DummyClass.gif");

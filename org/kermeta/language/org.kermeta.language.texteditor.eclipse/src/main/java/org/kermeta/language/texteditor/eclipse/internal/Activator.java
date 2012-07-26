@@ -37,6 +37,22 @@ public class Activator extends AbstractUIPlugin {
 		LocalOperation,
 		ExtOperation,
 		MixedOperation,
+		LocalInvariant,
+		ExtInvariant,
+		LocalPre,
+		ExtPre,
+		LocalPost,
+		ExtPost,
+		LocalAttribute,
+		ExtAttribute,
+		LocalReference,
+		ExtReference,
+		LocalDerivedProp,
+		ExtDerivedProp,
+		LocalEnumeration,
+		ExtEnumeration,
+		LocalEnumLiteral,
+		ExtEnumLiteral,
 		Error,
 		Warning
 	}
@@ -124,6 +140,38 @@ public class Activator extends AbstractUIPlugin {
 				return this.getImageFile("icons/blue/operation.png", ImageTypes.ExtOperation);
 			case MixedOperation:
 				return this.getImageFile("icons/redblue/operation.png", ImageTypes.MixedOperation);
+			case LocalInvariant:
+				return this.getImageFile("icons/inv.png", ImageTypes.LocalInvariant);
+			case ExtInvariant:
+				return this.getImageFile("icons/inv.png", ImageTypes.ExtInvariant);
+			case LocalPre:
+				return this.getImageFile("icons/pre.png", ImageTypes.LocalPre);
+			case ExtPre:
+				return this.getImageFile("icons/pre.png", ImageTypes.ExtPre);
+			case LocalPost:
+				return this.getImageFile("icons/post.png", ImageTypes.LocalPost);
+			case ExtPost:
+				return this.getImageFile("icons/post.png", ImageTypes.ExtPost);
+			case LocalReference:
+				return this.getImageFile("icons/red/property.png", ImageTypes.LocalReference);
+			case ExtReference:
+				return this.getImageFile("icons/blue/property.png", ImageTypes.ExtReference);
+			case LocalAttribute:
+				return this.getImageFile("icons/red/property_contained.png", ImageTypes.LocalAttribute);
+			case ExtAttribute:
+				return this.getImageFile("icons/blue/property_contained.png", ImageTypes.ExtAttribute);
+			case LocalDerivedProp:
+				return this.getImageFile("icons/red/property_derived.png", ImageTypes.LocalDerivedProp);
+			case ExtDerivedProp:
+				return this.getImageFile("icons/blue/property_derived.png", ImageTypes.ExtDerivedProp);
+			case LocalEnumeration:
+				return this.getImageFile("icons/red/enum.png", ImageTypes.LocalEnumeration);
+			case ExtEnumeration:
+				return this.getImageFile("icons/blue/enum.png", ImageTypes.ExtEnumeration);
+			case LocalEnumLiteral:
+				return this.getImageFile("icons/red/enum.png", ImageTypes.LocalEnumLiteral);
+			case ExtEnumLiteral:
+				return this.getImageFile("icons/blue/enum.png", ImageTypes.ExtEnumLiteral);
 			case Error:
 				return this.getImageFile("icons/error.gif", ImageTypes.Error);
 			case Warning:
