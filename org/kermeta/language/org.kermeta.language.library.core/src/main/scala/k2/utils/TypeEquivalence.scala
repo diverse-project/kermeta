@@ -112,6 +112,7 @@ object TypeEquivalence {
 				 typeEquivelence.put( k2.utils.UTilScala.scalaAspectPrefix + ".org.kermeta.language.ReflectiveSequence", "java.util.List")
 				 typeEquivelence.put("org.k2.language.ReflectiveSequence", "java.util.List")
 				 typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
+				 typeEquivelence.put("k2.standard.Numeric","k2.standard.RichNumeric")
 				 
 //               typeEquivelence.put("org.k2.language.structure.Object","java.lang.Object")
                  typeEquivelence;

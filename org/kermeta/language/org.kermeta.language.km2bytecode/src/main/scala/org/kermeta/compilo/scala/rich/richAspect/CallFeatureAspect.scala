@@ -195,7 +195,10 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     	  "_root_.java.lang.Long",
     	  "_root_.java.lang.StringBuilder",
     	  "_root_.java.util.Stack",
-    	  "_root_.java.util.HashMap"
+    	  "_root_.java.util.HashMap",
+    	  "_root_.k2.standard.RichNumeric",
+    	  "_root_.k2.standard.Comparable",
+    	  "_root_.k2.standard.Summable"
       ).contains(getQualifiedNameCompilo(thi))
     }
   
