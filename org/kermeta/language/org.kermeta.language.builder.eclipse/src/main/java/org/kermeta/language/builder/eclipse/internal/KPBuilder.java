@@ -172,6 +172,8 @@ public class KPBuilder {
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,KermetaCompiler.PHASE_TYPE_SET);
 			if (result != null) {
 				kp_last_modelingunit = result;
+				// notify that a new km file is ready for this project
+				Activator.getDefault().fireCompiledEvent(getKpProjectFile().getProject(), kp_last_modelingunit);
 			}
 			kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (Exception e) {
@@ -359,6 +361,8 @@ public class KPBuilder {
 				result = compiler.kp2bytecode(kpFileURL,new HashMap<URL, ModelingUnit>(),additionalClassPath,KermetaCompiler.PHASE_GENERATE_SCALA_BYTECODE);
 				if(result != null){
 					kp_last_modelingunit = result;
+					// notify that a new km file is ready for this project
+					Activator.getDefault().fireCompiledEvent(getKpProjectFile().getProject(), kp_last_modelingunit);
 				}
 				
 				
@@ -390,7 +394,9 @@ public class KPBuilder {
 							}
 							res.copy(destEmfBinFolder.append("/"+res.getName()), true, new NullProgressMonitor());
 						}
-					}					
+					}
+
+					
 				}
 			}
 			

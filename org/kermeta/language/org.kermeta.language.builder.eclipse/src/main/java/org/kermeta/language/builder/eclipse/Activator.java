@@ -22,6 +22,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.language.builder.eclipse.internal.WorkspaceResourceChangeListener;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
+import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.utils.systemservices.eclipse.api.ConsoleLogLevel;
 import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 import org.osgi.framework.Bundle;
@@ -99,10 +100,10 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 	
-    public void fireCompiledEvent(IProject prj) {
+    public void fireCompiledEvent(IProject prj, ModelingUnit lastCompiledModelingUnit) {
         Iterator<KermetaBuilderEventListener> it = kermetaBuilderEventListeners.iterator();
         while(it.hasNext()){
-        	((KermetaBuilderEventListener)it.next()).projectCompiled(prj);
+        	((KermetaBuilderEventListener)it.next()).projectCompiled(prj, lastCompiledModelingUnit);
         }        
     }
 	public void registerListener(KermetaBuilderEventListener listener) {
