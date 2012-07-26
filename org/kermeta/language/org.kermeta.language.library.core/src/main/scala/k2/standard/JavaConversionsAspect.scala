@@ -435,6 +435,8 @@ import scala.collection.JavaConversions._
     	res
       }
       
+      override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Set")
+
       //EList
      override def add(index:Int,o:A):Unit={
        if(!this.contains(o))
@@ -544,6 +546,8 @@ import scala.collection.JavaConversions._
     	res
       }
       
+      override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Bag")
+
     }
     
     trait KermetaOrderedColAspect[A] extends KermetaColAspect[A] with KermetaOrderedCol[A]{
@@ -647,6 +651,9 @@ import scala.collection.JavaConversions._
         res.addAt(index,element)
         res
       }
+
+      override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.OrderedSet")
+    
     }
     
     trait KermetaSequenceAspect[A] extends KermetaBagAspect[A] with KermetaOrderedColAspect[A]{
@@ -682,6 +689,8 @@ import scala.collection.JavaConversions._
         res
       }
       
+      override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Sequence")
+
     }
     
     class RichKermetaSet[A](override val value:ju.List[A]=new ju.ArrayList[A]) extends KermetaSet[A] with KermetaSetAspect[A]{
