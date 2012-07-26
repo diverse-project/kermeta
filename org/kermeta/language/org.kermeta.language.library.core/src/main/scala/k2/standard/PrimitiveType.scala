@@ -129,6 +129,7 @@ return null;
 class Void  extends  EObjectImplForPrimitive //with org.k2.scala.framework.emf.aspects.KermetaObjectAspect
 {
     override def toString() :java.lang.String={return  "<void>";}
+    override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Void")
 }
  
 abstract class RichValueType[G]  extends EObjectImplForPrimitive{
@@ -160,6 +161,8 @@ class RichIterator (value: java.util.Iterator[_]) extends EObjectImplForPrimitiv
 	override  def isVoid(): java.lang.Boolean = false;
 	def isOff(): java.lang.Boolean = {return !value.hasNext()}
 	def getValue():Object = value 
+	
+    override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Iterator")
 }
 
 
