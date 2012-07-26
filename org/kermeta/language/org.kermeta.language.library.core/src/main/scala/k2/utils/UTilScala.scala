@@ -13,10 +13,22 @@ object UTilScala {
         return true
       var metaClass = o.getMetaClass()
       typ match {
-        case typ:org.kermeta.language.structure.Class if(metaClass!=null) => typ.equals(metaClass)
+        case typ:org.kermeta.language.structure.Class if(metaClass!=null) => typ.equals(metaClass) || getAllSuperClasses(metaClass).contains(typ) 
         case typ:org.kermeta.language.structure.Class => false
         case typ => false
       }
+    }
+    
+    def getAllSuperClasses(cl:org.kermeta.language.structure.Class):java.util.List[org.kermeta.language.structure.Class]={
+      import scala.collection.JavaConversions._
+      if(cl.getSuperClass().size==0)
+        return new java.util.ArrayList[org.kermeta.language.structure.Class]
+      
+      val result = new java.util.ArrayList[org.kermeta.language.structure.Class]
+      cl.getSuperClass().foreach{sc => 
+        result.add(sc)
+        result.addAll(getAllSuperClasses(sc))}
+      result
     }
 
     def newInstance(o:org.kermeta.language.structure.Class): k2.standard.KermetaObject ={
