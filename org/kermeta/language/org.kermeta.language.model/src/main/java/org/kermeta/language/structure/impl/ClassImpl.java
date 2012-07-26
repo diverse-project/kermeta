@@ -249,9 +249,10 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 				&& (null != getTypeDefinition())
 				&& ((org.kermeta.language.structure.Class) o)
 						.getTypeDefinition().equals(getTypeDefinition())
-				&& ((org.kermeta.language.structure.Class) o)
-						.getTypeDefinition().getTypeParameter().isEmpty()
-				&& getTypeDefinition().getTypeParameter().isEmpty()) {
+				//&& ((org.kermeta.language.structure.Class) o)
+				//		.getTypeDefinition().getTypeParameter().isEmpty()
+				//&& getTypeDefinition().getTypeParameter().isEmpty()
+			) {
 			return true;
 		} else {
 			return false;
