@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.{EStructuralFeature, EClass}
 import org.eclipse.emf.ecore.EObject
 import k2.persistence.RichResource
+import k2.utils.ReflexivityLoader
 
 trait KermetaObjectAspect extends    KermetaObject
 trait KermetaObject extends org.eclipse.emf.ecore.EObject{
@@ -72,7 +73,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 //	 def getOwnedTags():org.eclipse.emf.common.util.EList[org.k2.language.structure.Tag]=null;
 //	 def getTag():org.eclipse.emf.common.util.EList[org.k2.language.structure.Tag]=null;
 
-  def getMetaClass() : org.kermeta.language.structure.Class= null//this.eClass()
+  def getMetaClass() : org.kermeta.language.structure.Class= k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Object")
   //def classDefinition = this.asInstanceOf[EClass]
   //def ScalaclassDefinition = classDefinition
   def typedefinition = this
@@ -162,7 +163,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   override def toString : String = super.toString()//"["+this.eClass().getName()+":"+oid.toString()+"]"
   def isVoid() : java.lang.Boolean = false
   override def hashCode : Int = super.hashCode()
-  def getKerMetaClass(): java.lang.Class[_] =this.getClass
+  //def getKerMetaClass(): java.lang.Class[_] =this.getClass
   //def asType(t : EClass) = this.asInstanceOf[t.getName]
   //def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
 	

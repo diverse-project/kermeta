@@ -9,7 +9,7 @@ import k2.exceptions.ConstraintsDiagnostic
 
 //import org.k2.language.behavior._
 
-    
+
 object PrimitiveConversion{
   
   implicit def any2kermeta(o : Any)  =  o match {
@@ -196,7 +196,7 @@ class RichBoolean (value: java.lang.Boolean) extends RichValueType[java.lang.Boo
     def orElse(func : java.lang.Boolean => java.lang.Boolean):java.lang.Boolean ={ if (!value) {return func(value)}else return true; }
     override def getValue():Object = new java.lang.Boolean(value)
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("kermeta::standard::Boolean")
+        return k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Boolean")
     }
 	
 }
@@ -217,6 +217,8 @@ class RichRandom(value : java.util.Random) extends KermetaObject with EObjectImp
 	def nextInt(n : java.lang.Integer) : java.lang.Integer = value.nextInt(n)
 	def nextLong() : java.lang.Long = value.nextLong()
 	def setSeed(s : java.lang.Long) = value.setSeed(s)
+	
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Random")
 }
 
 
@@ -252,7 +254,7 @@ class RichDate(value: java.util.Date) extends KermetaObject with EObjectImplForP
 	def toGMTString() : java.lang.String = value.toGMTString()
 	def toLocaleString() : java.lang.String = value.toLocaleString()
   //end generated
-
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Date")
 }
 
 class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
@@ -274,9 +276,7 @@ class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
 	def isLowerOrEqual(other : java.lang.Double) : java.lang.Boolean={return  value<=other.intValue}
 
 	override def getValue():Object = new java.lang.Double(value)
-	override def getMetaClass():org.kermeta.language.structure.Class={
-		  return createMetaClass("kermeta::standard::Double")
-	}
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Double")
 
    //generated
   //override def equals(arg0:Any) : Boolean = value.equals(arg0)
@@ -313,9 +313,7 @@ class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
   def isLowerOrEqual(other : java.lang.Float) : java.lang.Boolean={return  value<=other.intValue}
 
   override def getValue():Object = new java.lang.Float(value)
-  override def getMetaClass():org.kermeta.language.structure.Class={
-		  return createMetaClass("kermeta::standard::Float")
-  }
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Float")
      //generated
      // override def equals(arg0:Any) : Boolean = value.equals(arg0)
   override def toString() : java.lang.String = value.toString()
@@ -379,6 +377,7 @@ class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject wit
 	 def trimToSize() : Any = value.trimToSize()
 	 override 	 def equals(arg0:Any) : Boolean = value.equals(arg0)
 	 override 	 def hashCode() : Int = value.hashCode()
+	 override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.StringBuffer")
 }
 
 class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
@@ -402,9 +401,7 @@ class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
       def isLowerOrEqual(other : java.lang.Short) : java.lang.Boolean={return  value<=other.intValue}
 
       override def getValue():Object = new java.lang.Short(value)
-      override def getMetaClass():org.kermeta.language.structure.Class={
-    		  return createMetaClass("kermeta::standard::Short")
-      }
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Short")
 
      //generated
      //override def equals(arg0:Any) : Boolean = value.equals(arg0)
@@ -441,7 +438,7 @@ class RichLong(value: java.lang.Long)  extends RichNumeric[java.lang.Long]{
 	def isLowerOrEqual(other : java.lang.Long) = value<=other.intValue
 
 	override def getValue() : Object = new java.lang.Long(value)
-	override def getMetaClass() : org.kermeta.language.structure.Class = createMetaClass("kermeta::standard::Long")
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Long")
 
   	//generated
 	override def toString() : java.lang.String = value.toString()
@@ -501,9 +498,7 @@ class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integ
     override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
     override def getValue():Object = new java.lang.Integer(value)		
     //def isNotEqual(other : Any) :Boolean = this.equals(other)
-    override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("kermeta::standard::Integer")
-    }
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Integer")
 	
 }
 
@@ -523,9 +518,7 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
     override def toString() :java.lang.String={return ""+value}
     override  def isVoid(): java.lang.Boolean = false;
     override def getValue():Object = value
-    override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("kermeta::standard::Char")
-    }
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Character")
 
 }
 
@@ -533,9 +526,7 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
 class RichEnum(value:java.lang.Object)  extends  EObjectImplForPrimitive{
     override  def isVoid(): java.lang.Boolean = value==null;
     def getValue():java.lang.Object = value
-    override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("kermeta::language::structure::Enumeration")
-    }
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("org.kermeta.language.structure.Enumeration")
 
 }
 
@@ -565,24 +556,6 @@ trait EObjectImplForKO extends KermetaObject {
     def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
     override  def isVoid(): java.lang.Boolean;
     def eInvoke(x1: org.eclipse.emf.ecore.EOperation,x2: org.eclipse.emf.common.util.EList[_]):java.lang.Object = null
-
-    def createMetaClass(name:String):org.kermeta.language.structure.Class={
-        var factoryName = "ScalaAspect.org.k2.language.structure.RichFactory$"
-        var methodName = "createClass"
-        var methodNameClassDef = "createClassDefinition"
-        val clazz = java.lang.Class.forName(factoryName)
-        val obj = clazz.getField("MODULE$").get(clazz)
-        var meth :java.lang.reflect.Method = clazz.getMethods.filter(m=> m.getName.equals(methodName)).first
-        //println(meth.getName + " " + meth.getParameterTypes.size)
-        val numbers = Array()
-        var mclazz : org.kermeta.language.structure.Class = meth.invoke(obj, numbers: _*).asInstanceOf[org.kermeta.language.structure.Class]
-
-        var meth1 :java.lang.reflect.Method = clazz.getMethods.filter(m=> m.getName.equals(methodNameClassDef)).first
-        var mclazzDef : org.kermeta.language.structure.ClassDefinition = meth1.invoke(obj, numbers: _*).asInstanceOf[org.kermeta.language.structure.ClassDefinition]
-        mclazzDef.setName(name)
-        mclazz.setTypeDefinition(mclazzDef)        
-        return mclazz
-    }
 }
 
 class RichString(value: java.lang.String)  extends RichValueType with EObjectImplForPrimitive{
@@ -682,7 +655,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
   
 
     override def getMetaClass():org.kermeta.language.structure.Class={
-        return createMetaClass("kermeta::standard::String")
+        return k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.String")
     }
 
 }
@@ -694,6 +667,7 @@ class RichURI(value : org.eclipse.emf.common.util.URI)  extends RichValueType wi
 	def appendSegments(segmentPaths : java.util.List[String]) : org.eclipse.emf.common.util.URI = {	 
 	  return value.appendSegments(segmentPaths.toArray().asInstanceOf[Array[String]])
 	}
+	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.URI")
 }
 
 class RichUnknownJavaObject  extends Object {

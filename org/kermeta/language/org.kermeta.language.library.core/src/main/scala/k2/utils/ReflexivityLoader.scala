@@ -130,6 +130,24 @@ import _root_.org.osgi.framework.BundleContext
         else
             return null;
     }
+  
+      def createMetaClass(name:String):org.kermeta.language.structure.Class={
+        var cd = k2.utils.ReflexivityLoader.getMetaClass(name)
+        if(cd==null)
+          null
+        else{
+          var factory = java.lang.Class.forName(k2.utils.UTilScala.scalaAspectPrefix+".org.kermeta.language.structure.KerRichFactory$")
+          var methodName = "createClass"
+          val obj = factory.getField("MODULE$").get(factory)
+          var meth :_root_.java.lang.reflect.Method = factory.getMethods.filter(m=> m.getName.equals(methodName)).first
+          //println(meth.getName + " " + meth.getParameterTypes.size)
+          val numbers = Array()
+
+          var cl = meth.invoke(obj, numbers: _*).asInstanceOf[org.kermeta.language.structure.Class]
+          cl.setTypeDefinition(cd)
+          return cl
+        }
+    }
 
     def qualifiedName(classdef : ClassDefinition):java.lang.String = {
         return qualifiedName(classdef.eContainer.asInstanceOf[ org.kermeta.language.structure.Package])  + "." + classdef.getName

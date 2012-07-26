@@ -9,10 +9,13 @@ import org.eclipse.emf.ecore._
 object UTilScala {
 
     def isInstanceOf(o:k2.standard.KermetaObject, typ:org.kermeta.language.structure.Type):Boolean={
-      try {
-        o.getMetaClass().getTypeDefinition()==typ.asInstanceOf[org.kermeta.language.structure.Class].getTypeDefinition()
-      } catch {
-        case e:Exception => false
+      if(o==null)
+        return true
+      var metaClass = o.getMetaClass()
+      typ match {
+        case typ:org.kermeta.language.structure.Class if(metaClass!=null) => typ.equals(metaClass)
+        case typ:org.kermeta.language.structure.Class => false
+        case typ => false
       }
     }
 

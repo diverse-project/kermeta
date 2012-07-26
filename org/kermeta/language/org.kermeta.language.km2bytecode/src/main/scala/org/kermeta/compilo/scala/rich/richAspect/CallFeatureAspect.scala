@@ -162,8 +162,8 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     def generateIsInstanceOf(thi:CallFeature,res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
       o match {
         case o : CallTypeLiteral 
-          if(!(isCompiledToScalaType(o.getTyperef().getType()) && thi.getTarget.getStaticType()!=o.getTyperef().getType())
-              && !thi.getTarget().isInstanceOf[org.kermeta.language.behavior.Literal])
+          if(!(isCompiledToScalaType(o.getTyperef().getType()) && thi.getTarget.getStaticType()!=o.getTyperef().getType()) // Avoid problem  like var o:Object:="toto" ; o.isInstanceOf[String] => false because o is a RichString
+              && !thi.getTarget().isInstanceOf[org.kermeta.language.behavior.Literal]) // Scala cannot call isInstanceOf on boolean and integer literals, void literal should be an instance of everything, and callType literal call reflexivity layer anyway => special treatment for literals (anyway, who would ask "toto".isInstanceOf(String) in a real case scenario where speed matters?)
           =>
             generateTarget(thi,res);
             res.append(".isInstanceOf[")
