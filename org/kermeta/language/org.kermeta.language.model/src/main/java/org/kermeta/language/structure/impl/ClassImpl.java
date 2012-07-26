@@ -249,9 +249,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 				&& (null != getTypeDefinition())
 				&& ((org.kermeta.language.structure.Class) o)
 						.getTypeDefinition().equals(getTypeDefinition())
-				//&& ((org.kermeta.language.structure.Class) o)
-				//		.getTypeDefinition().getTypeParameter().isEmpty()
-				//&& getTypeDefinition().getTypeParameter().isEmpty()
+				&& Helper.equalsTypeParamBinding(this,(org.kermeta.language.structure.Class)o)
 			) {
 			return true;
 		} else {
@@ -265,16 +263,10 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 	 * @generated NOT
 	 */
 	public int hashCode() {
-		// If there are type parameters, all bets are off
-		if (!getTypeParamBinding().isEmpty()) {
-			return super.hashCode();
-		} else {
-			int code = 11;
-			code += null == getTypeDefinition() ? 0 : 31 * getTypeDefinition()
-					.hashCode();
-			return code;
-		}
-
+		int code = 11;
+		code += null == getTypeDefinition() ? 0 : 31 * getTypeDefinition()
+				.hashCode();
+		return code;
 	}
 
 
