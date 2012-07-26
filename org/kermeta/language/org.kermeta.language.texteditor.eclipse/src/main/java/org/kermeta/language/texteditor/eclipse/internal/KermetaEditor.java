@@ -15,6 +15,7 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.KermetaBuilderEventListener;
+import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.autocompletion.BracketInserter;
 import org.kermeta.language.texteditor.eclipse.internal.outline.KermetaOutline;
 
@@ -31,6 +32,7 @@ public class KermetaEditor extends TextEditor implements  KermetaBuilderEventLis
 
 		setSourceViewerConfiguration(new KermetaEditorConfiguration(this, colorManager));
 		setDocumentProvider(new org.eclipse.ui.editors.text.TextFileDocumentProvider());
+		
 	}
 	// Added by Suresh for the Outline
 	public Object getAdapter(Class adapter) {
@@ -85,10 +87,10 @@ public class KermetaEditor extends TextEditor implements  KermetaBuilderEventLis
     	return null;
     }
 	@Override
-	public void projectCompiled(IProject project) {
+	public void projectCompiled(IProject project, ModelingUnit lastCompiledKm) {
 		// TODO Need to check if file belongs to project than update
 		System.out.println("Project Compiled: " +  project.getName());
-		outline.update();
+		outline.update(lastCompiledKm);
 		/*
 		Job job = new Job("Outline") {		
 			@Override

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -81,6 +82,8 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 		initializeDefaultsPreference();	
 		currentOutlineItem = null;
 		KHelper = null;
+		
+		
 		
 	}
 	
@@ -179,10 +182,47 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 		}
 		return null;
 	}
-	public void update(){
+	public void update(final ModelingUnit lastCompiledKm){
 		System.out.println("Update Tree View for Outline");
-		this.KHelper = null;
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				// Do something in the user interface
+				TreeViewer treeViewer = getTreeViewer();
+				lazyContentProvider = new LazyTreeContentProvider(getTreeViewer());
+				treeViewer.setContentProvider(lazyContentProvider);
+				Object[] expandedElements =treeViewer.getExpandedElements();
+				KHelper = new KermetaOutlineHelper(lastCompiledKm);
+				KHelper.setOutlineForFile(textEditor.getFile().getLocationURI());
+				if (KHelper.getRootStructure() != null){
+					treeViewer.setInput(KHelper.getRootStructure());
+				}
+				
+				reexpandFromPreviousState(expandedElements, treeViewer, KHelper.getRootStructure().getChildren());
+				treeViewer.refresh();
+			}
+		});
+		
 	}
+	
+	
+	public void reexpandFromPreviousState(Object[] previouslyExpandedElements, TreeViewer treeViewerToExpand, Object[] possibleObjectsToExpand){
+		if(possibleObjectsToExpand == null || possibleObjectsToExpand.length ==0) return;
+		if(previouslyExpandedElements == null || previouslyExpandedElements.length ==0) return;
+		for(Object childO : possibleObjectsToExpand){
+			if(childO instanceof OutlineItem){
+				for(Object previouslyExpandedObject : previouslyExpandedElements){
+					if(((OutlineItem)childO).isSimilar((OutlineItem)previouslyExpandedObject)){
+						treeViewerToExpand.setExpandedState(childO, true);
+						break;
+					}
+				}
+				reexpandFromPreviousState(previouslyExpandedElements, treeViewerToExpand, ((OutlineItem)childO).getChildren());
+			}
+		}
+	}
+	
+	
 	public void check(){
 		this.getTreeViewer().setInput(getInitialModel());
 		this.getTreeViewer().refresh();
@@ -255,7 +295,6 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 
 	@Override
 	public void treeCollapsed(TreeExpansionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	

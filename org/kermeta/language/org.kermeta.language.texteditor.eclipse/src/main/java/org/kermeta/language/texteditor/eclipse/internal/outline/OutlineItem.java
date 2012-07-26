@@ -244,5 +244,8 @@ public class OutlineItem {
 		return parent;
 	}
 	
+	public boolean isSimilar(OutlineItem otherItem){
+		return otherItem.packageName.equals(packageName) && otherItem.label.equals(label);
+	}
 	
 }
