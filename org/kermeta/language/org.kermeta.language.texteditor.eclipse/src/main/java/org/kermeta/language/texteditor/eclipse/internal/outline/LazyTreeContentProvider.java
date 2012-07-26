@@ -21,7 +21,7 @@ public class LazyTreeContentProvider implements ILazyTreeContentProvider {
 
 	
 	private TreeViewer viewer;
-	private OutlineItem root = new OutlineItem("root");
+	//private OutlineItem root = new OutlineItem("root");
 	private Object input;
 
 	public LazyTreeContentProvider(TreeViewer viewer) {
@@ -46,8 +46,8 @@ public class LazyTreeContentProvider implements ILazyTreeContentProvider {
 
 	public void updateChildCount(Object element, int currentChildCount) {
 		if (element instanceof OutlineItem){
-			int length = ((OutlineItem)element).getNoOfChildren();
-			viewer.setChildCount(element, length);
+			viewer.setChildCount(element, ((OutlineItem)element).getNoOfChildren());
+			
 		}
 	}
 	
@@ -56,12 +56,17 @@ public class LazyTreeContentProvider implements ILazyTreeContentProvider {
 	public void updateElement(Object parent, int index) {
 		if (parent instanceof OutlineItem){
 			if (index < ((OutlineItem)parent).getNoOfChildren()){
+				System.out.println("  updateElement "+((OutlineItem)parent).getLabel()+ " at "+index);
 				OutlineItem node = (OutlineItem)parent;
-				OutlineItem element = (OutlineItem) node.children[index];
+				OutlineItem element = (OutlineItem) node.getChildren()[index];
 				viewer.replace(parent, index, element);
-				updateChildCount(element, -1);
+				updateChildCount(element, element.getNoOfChildren());				
+				//viewer.setHasChildren(element, element.getNoOfChildren() > 0);
 			}
 		}
 	}
 	
+	public void refreshViewer(){
+		viewer.refresh();
+	}
 }

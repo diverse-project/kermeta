@@ -32,8 +32,10 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TreeExpansionEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
@@ -79,6 +81,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 		initializeDefaultsPreference();	
 		currentOutlineItem = null;
 		KHelper = null;
+		
 	}
 	
 	/**
@@ -111,6 +114,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 	}
 	
 
+	
 	public void createControl(Composite parent) {
 		super.createControl(parent);
 		TreeViewer treeViewer = getTreeViewer();
@@ -121,15 +125,30 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 		
 		ILabelDecorator decorator = PlatformUI.getWorkbench().getDecoratorManager().getLabelDecorator();
 		treeViewer.setLabelProvider( new DecoratingLabelProvider( new OutlineLabelProvider(), decorator ) );
-		OutlineItem root = getInitialModel();
-		if (root != null){
-			treeViewer.setInput(root);
-		}
+		
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				// Do something in the user interface
+				TreeViewer treeViewer = getTreeViewer();
+				OutlineItem root = getInitialModel();
+				if (root != null){
+					treeViewer.setInput(root);
+				}
+				treeViewer.refresh();
+			}
+		});
+		
 		
 		
 		treeViewer.addSelectionChangedListener(this);
 		treeViewer.addDoubleClickListener(this);
-		treeViewer.refresh();
+		treeViewer.addTreeListener(this);
+		//treeViewer.refresh(root);
+		//treeViewer.update(root, null);
+		//treeViewer.refresh();
+		
 		
 		
 	}
@@ -138,6 +157,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 			ModelingUnit res = loadResource();
 			if (res != null){
 				this.KHelper = new KermetaOutlineHelper(res);
+				this.KHelper.setOutlineForFile(this.textEditor.getFile().getLocationURI());
 			} else {
 				return null;
 			}
@@ -151,6 +171,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 				ResourceSet resSet = new ResourceSetImpl();
 				Resource res = resSet.getResource(org.kermeta.utils.helpers.emf.EMFUriHelper.convertToEMFUri(file.getLocationURI()), true);
 				ModelingUnit rtNode = (ModelingUnit) res.getContents().get(0);	
+				
 				return rtNode;
 			} catch(RuntimeException e){
 				return null;
@@ -187,7 +208,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
-		if ( event.getSource() instanceof TreeViewer ){
+		/* if ( event.getSource() instanceof TreeViewer ){
 			if (currentOutlineItem != null){
 				if (currentOutlineItem.type == OutlineTypes.Package){
 					currentOutlineItem.children = this.KHelper.updatePackage(currentOutlineItem);
@@ -199,7 +220,42 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 				}
 				
 			}
+		}*/
+		
+	}
+	
+	@Override
+	public void treeExpanded(TreeExpansionEvent evt) {
+	/*	if ( evt.getSource() instanceof TreeViewer && evt.getElement() != null && evt.getElement() instanceof OutlineItem ){
+			OutlineItem item = (OutlineItem) evt.getElement();
+			for(Object child : item.children){
+				if(child instanceof OutlineItem){
+					OutlineItem subitem = (OutlineItem) child;
+					if(subitem.children == null){
+						if(subitem.type == OutlineTypes.Package){
+							subitem.children = this.KHelper.updatePackage(subitem);							
+						}
+						if(subitem.type == OutlineTypes.Class){
+							subitem.children = this.KHelper.updateClass(subitem);
+						}
+						lazyContentProvider.updateChildCount(subitem, subitem.getNoOfChildren());
+					}
+				}
+			}
+			lazyContentProvider.refreshViewer();
+			TreeViewer tv = (TreeViewer) evt.getSource();
+			
+			//tv.refresh();
+			tv.refresh(evt.getElement());
+			//getTreeViewer().refresh();
 		}
+		*/
+		
+	}
+
+	@Override
+	public void treeCollapsed(TreeExpansionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 	

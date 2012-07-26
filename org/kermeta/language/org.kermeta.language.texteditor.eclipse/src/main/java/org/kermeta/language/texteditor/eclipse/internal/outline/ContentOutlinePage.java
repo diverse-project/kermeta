@@ -17,8 +17,10 @@ import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ITreeViewerListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeExpansionEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -29,7 +31,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 
 public abstract class ContentOutlinePage extends Page implements
-	IContentOutlinePage, ISelectionChangedListener {
+	IContentOutlinePage, ISelectionChangedListener, ITreeViewerListener {
 	private ListenerList selectionChangedListeners = new ListenerList();
 	
 	private TreeViewer treeViewer;
@@ -142,15 +144,18 @@ public abstract class ContentOutlinePage extends Page implements
 	* Sets focus to a part in the page.
 	*/
 	public void setFocus() {
-	treeViewer.getControl().setFocus();
+		treeViewer.getControl().setFocus();
 	}
 	
 	/* (non-Javadoc)
 	* Method declared on ISelectionProvider.
 	*/
 	public void setSelection(ISelection selection) {
-	if (treeViewer != null) {
-		treeViewer.setSelection(selection);
+		if (treeViewer != null) {
+			treeViewer.setSelection(selection);
+		}
 	}
-	}
+
+	
+	
 }

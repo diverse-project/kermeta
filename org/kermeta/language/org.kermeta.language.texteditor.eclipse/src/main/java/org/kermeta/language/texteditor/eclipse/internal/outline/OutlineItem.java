@@ -22,7 +22,8 @@ public class OutlineItem {
 	public enum OutlineTypes {
 		Package,
 		Class,
-		Operation
+		Operation,
+		DefaultType
 	}
 	
 	public enum LocalisationType {
@@ -30,21 +31,24 @@ public class OutlineItem {
 		External,
 		Mixed
 	}
+	
+	protected KermetaOutlineHelper helper;
 	protected String label;
 
 	protected Image image;
 	
-	private LocalisationType localisation = LocalisationType.External;
-	protected Object[] children;
+	public LocalisationType localisation = LocalisationType.External;
+	private Object[] children;
 	protected OutlineItem parent;
 	protected String packageName;
 	protected String opParameters;
-	public OutlineTypes type;
+	public OutlineTypes type = OutlineTypes.DefaultType;
 
-	public OutlineItem() {
+	public OutlineItem(KermetaOutlineHelper helper) {
+		this.helper = helper;
 	}
 	
-	public OutlineItem(String text,OutlineItem parent) {
+	public OutlineItem(String text,OutlineItem parent, KermetaOutlineHelper helper) {
 		label = text;
 		this.parent = parent;
 		this.packageName = "";
@@ -58,16 +62,18 @@ public class OutlineItem {
 				} 
 			}
 		}
+		this.helper = helper;
 		
 	}
 	public void setParameters(String p){
 		this.opParameters = p;
 	}
-	public OutlineItem(String text) {
+	public OutlineItem(String text, KermetaOutlineHelper helper) {
 		label = text;
 		this.parent = null;
 		this.packageName = "";
 		this.opParameters = "";
+		this.helper = helper;
 	}
 	public String getLabel() {
 	    if (this.type == OutlineItem.OutlineTypes.Operation){
@@ -87,8 +93,6 @@ public class OutlineItem {
 		if (typeDefinitions.size() == 0)
 	        return KermetaSpecialIcons.PACKAGE_GRAY;
 	    
-	    if ( isPartiallyImported() )
-	    	return KermetaSpecialIcons.PACKAGE_BLUE_RED;
 	    */
 		switch(type){
 		case Package:
@@ -131,13 +135,34 @@ public class OutlineItem {
 		if (children != null ){
 			return children.length;
 		} else {
-			return 0;
+			switch(type){
+			case Package:
+				return helper.getPackageChildrenCount(this);
+			case Class:
+				return helper.getClassChildrenCount(this);
+			}			
 		}
+		return 0;
 	}
 	public Object[] getChildren() {
+		if(children == null){
+			switch(type){
+			case Package:
+				children = helper.updatePackage(this);
+				break;
+			case Class:
+				children = helper.updateClass(this);
+				break;
+			}
+		}
 		return children;
+	}
+	public void  setChildren(Object[] children) {
+		this.children = children;
 	}
 	public OutlineItem getParent(){
 		return parent;
 	}
+	
+	
 }
