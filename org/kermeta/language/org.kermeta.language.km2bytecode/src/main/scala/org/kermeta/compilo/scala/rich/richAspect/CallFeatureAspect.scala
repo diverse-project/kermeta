@@ -214,6 +214,19 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
       ).contains(getQualifiedNameCompilo(thi))
     }
   
+    def generateIsNotEqual(thi:CallFeature,res:StringBuilder) {
+      res.append("_root_.k2.utils.UTilScala.isNotEqual(")
+      generateTarget(thi,res)
+      res.append(",")
+      generateParam(thi,res,"","")
+      res.append(")")
+    }
+    
+    def generateToString(thi:CallFeature,res:StringBuilder) {
+      res.append("_root_.k2.utils.UTilScala.toString(")
+      generateTarget(thi,res)
+      res.append(")")
+    }
   
     def generateClone(thi:CallFeature,res:StringBuilder){
         res.append("(scalaUtil.Util.clone(");generateTarget(thi,res);res.append(","); visit(thi.getParameters.get(0),res);res.append("))"); 
@@ -236,9 +249,8 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                     case "clone" =>  { generateClone(thi,res)  }
       
                     case "and" =>  { res.append("(");generateTarget(thi,res);res.append(").and");generateParam(thi,res,"(",")"); }
-                    //case "toString" => { res.append("(");generateTarget(thi,res);res.append("+\"\")")  }
-                    case "isNotEqual" if(thi.getParameters().size()==1) => {generateTarget(thi,res);res.append(" != ");generateParam(thi,res,"(",")")}
-                    case "isEqual" if(thi.getParameters().size()==1)=> {generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")")}
+                    case "toString" if(thi.getParameters().size()==0) => generateToString(thi,res)
+                    case "isNotEqual" if(thi.getParameters().size()==1) => generateIsNotEqual(thi,res)
                     case "equals" if(thi.getParameters().size()==1)=> {res.append("(");generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")");res.append(")");}
                         //case "run" if(thi.getTarget != null) => generateKUnitCase(res)
         

@@ -87,6 +87,20 @@ object UTilScala {
           case e => return e.asInstanceOf[k2.standard.KermetaObject] 
         }
     }
+    
+    def isNotEqual(o:k2.standard.KermetaObject,o1:k2.standard.KermetaObject):java.lang.Boolean={
+      if(o==null)
+        o1==null
+      else
+        o.isNotEqual(o1)
+    }
+    
+    def toString(o:Any):java.lang.String={
+      if(o==null)
+        "void"
+      else
+        o.toString
+    }
 
  @scala.reflect.BeanProperty
  var scalaAspectPrefix : _root_.java.lang.String = "ScalaAspect"
