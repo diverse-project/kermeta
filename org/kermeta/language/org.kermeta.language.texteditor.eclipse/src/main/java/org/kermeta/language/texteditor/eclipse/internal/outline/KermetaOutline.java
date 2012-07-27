@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PlatformUI;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
+import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation.FileHighlight;
 import org.kermeta.language.texteditor.eclipse.internal.outline.OutlineItem.OutlineTypes;
 
 
@@ -257,6 +258,11 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 	           if ( o != null ){
 	        	   if (o instanceof OutlineItem){
 	        		   currentOutlineItem = (OutlineItem) o;
+	        		   // if possible open the editor to this location
+	        		   FileHighlight localHighlight = currentOutlineItem.localisation.localHighlight;
+	        		   if(localHighlight != null){
+	        			   textEditor.setHighlightRange(localHighlight.offset, localHighlight.length, true);
+	        		   }
 	        	   }
 	           }
 	     }

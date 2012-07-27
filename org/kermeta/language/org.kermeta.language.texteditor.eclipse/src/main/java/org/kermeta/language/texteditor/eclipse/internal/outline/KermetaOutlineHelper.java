@@ -26,7 +26,7 @@ import org.kermeta.language.structure.Package;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeDefinition;
-import org.kermeta.language.texteditor.eclipse.internal.outline.OutlineItem.LocalisationType;
+import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation.LocalisationType;
 import org.kermeta.language.texteditor.eclipse.internal.outline.OutlineItem.OutlineTypes;
 
 public class KermetaOutlineHelper {
@@ -45,7 +45,7 @@ public class KermetaOutlineHelper {
 		for (int i = 0; i < this.modelingUnit.getPackages().size(); i++) {
 			OutlineItem ele = new OutlineItem(this.modelingUnit.getPackages().get(i).getName(),base, this);
 			ele.type = OutlineTypes.Package;
-			ele.localisation = getLocalisationType(this.modelingUnit.getPackages().get(i));
+			ele.setLocalisation (new ItemLocalisation(outlineForFile.toString(), this.modelingUnit.getPackages().get(i)));
 			baseChildren[i] = ele;
 			hasChildren = true;
 			
@@ -71,7 +71,7 @@ public class KermetaOutlineHelper {
 						OutlineItem it = new OutlineItem(label,parent, this);
 						
 						it.type = OutlineTypes.Operation;
-						it.localisation = getLocalisationType(op);
+						it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), op));
 
 						it.setChildren(getOperationChildren(op, it));
 						
@@ -91,7 +91,7 @@ public class KermetaOutlineHelper {
 						}
 						else it.type = OutlineTypes.Reference;
 					}
-					it.localisation = getLocalisationType(prop);
+					it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), prop));
 					objs[cnt] = it;
 					cnt++;
 				}
@@ -99,7 +99,7 @@ public class KermetaOutlineHelper {
 					String label = opPrinter.convertToText(inv);
 					OutlineItem it = new OutlineItem(label,parent, this);
 					it.type = OutlineTypes.Invariant;
-					it.localisation = getLocalisationType(inv);
+					it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), inv));
 					objs[cnt] = it;
 					cnt++;
 				}
@@ -119,7 +119,7 @@ public class KermetaOutlineHelper {
 			String label = opPrinter.convertToText(pre);
 			OutlineItem it = new OutlineItem(label,parent, this);
 			it.type = OutlineTypes.Precondition;
-			it.localisation = getLocalisationType(pre);
+			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), pre));
 			
 			objs[cnt] = it;
 			cnt ++;
@@ -128,7 +128,7 @@ public class KermetaOutlineHelper {
 			String label = opPrinter.convertToText(post);
 			OutlineItem it = new OutlineItem(label,parent, this);
 			it.type = OutlineTypes.Postcondition;
-			it.localisation = getLocalisationType(post);
+			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), post));
 			
 			objs[cnt] = it;
 			cnt ++;
@@ -144,7 +144,7 @@ public class KermetaOutlineHelper {
 			OutlineItem it = new OutlineItem(p.getOwnedTypeDefinition().get(i).getName(),parent, this);
 			if (p.getOwnedTypeDefinition().get(i) instanceof ClassDefinition){
 				it.type = OutlineTypes.Class;
-				it.localisation = getLocalisationType(p.getOwnedTypeDefinition().get(i));
+				it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), p.getOwnedTypeDefinition().get(i)));
 			}
 			
 			objs[cnt] = it;
@@ -153,7 +153,7 @@ public class KermetaOutlineHelper {
 		for(int i=0; i < p.getNestedPackage().size(); i++){
 			OutlineItem it = new OutlineItem(p.getNestedPackage().get(i).getName(),parent, this);
 			it.type = OutlineTypes.Package;
-			it.localisation = getLocalisationType(p.getNestedPackage().get(i));
+			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), p.getNestedPackage().get(i)));
 			objs[cnt] = it;
 			cnt++;
 		}
@@ -199,22 +199,7 @@ public class KermetaOutlineHelper {
 	}
 	
 	
-	public LocalisationType getLocalisationType(KermetaModelElement elem){
-		boolean localFound = false;
-		boolean externalFound = false;
-		String localFile = outlineForFile.toString();
-		for(Tag tag : elem.getKOwnedTags()){
-			if(tag.getName().equals("traceability_text_reference")){
-				if(tag.getValue().contains(localFile))
-					localFound = true;
-				else
-					externalFound = true;
-			}
-		}
-		if(localFound && externalFound) return LocalisationType.Mixed;
-		else if(localFound) return LocalisationType.Local;
-		else return LocalisationType.External;
-	}
+	
 	public URI getOutlineForFile() {
 		return outlineForFile;
 	}

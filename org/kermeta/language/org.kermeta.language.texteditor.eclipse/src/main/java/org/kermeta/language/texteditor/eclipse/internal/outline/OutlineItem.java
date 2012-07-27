@@ -12,10 +12,13 @@
 package org.kermeta.language.texteditor.eclipse.internal.outline;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.kermeta.language.texteditor.eclipse.internal.Activator;
+import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation.LocalisationType;
 
 
 public class OutlineItem {
@@ -34,29 +37,28 @@ public class OutlineItem {
 		DefaultType
 	}
 	
-	public enum LocalisationType {
-		Local,
-		External,
-		Mixed
-	}
+	
 	
 	protected KermetaOutlineHelper helper;
 	protected String label;
 
 	protected Image image;
 	
-	public LocalisationType localisation = LocalisationType.External;
+	public LocalisationType localisationType = LocalisationType.External;
+	public ItemLocalisation localisation;
 	private Object[] children;
 	protected OutlineItem parent;
 	protected String packageName;
 	protected String opParameters;
 	public OutlineTypes type = OutlineTypes.DefaultType;
+	
+	
 
 	public OutlineItem(KermetaOutlineHelper helper) {
 		this.helper = helper;
 	}
 	
-	public OutlineItem(String text,OutlineItem parent, KermetaOutlineHelper helper) {
+	public OutlineItem(String text, OutlineItem parent, KermetaOutlineHelper helper) {
 		label = text;
 		this.parent = parent;
 		this.packageName = "";
@@ -104,7 +106,7 @@ public class OutlineItem {
 	    */
 		switch(type){
 		case Package:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtPackage);
 			case Local: 
@@ -113,7 +115,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.MixedPackage);
 			}
 		case Class:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtClass);
 			case Local: 
@@ -122,7 +124,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.MixedClass);
 			}
 		case Operation:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtOperation);
 			case Local: 
@@ -131,7 +133,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.MixedOperation);
 			}
 		case Attribute:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtAttribute);
 			case Local: 
@@ -140,7 +142,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalAttribute);
 			}
 		case Reference:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtReference);
 			case Local: 
@@ -149,7 +151,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalReference);
 			}
 		case DerivedProperty:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtDerivedProp);
 			case Local: 
@@ -158,7 +160,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalDerivedProp);
 			}
 		case Invariant:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtInvariant);
 			case Local: 
@@ -167,7 +169,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalInvariant);
 			}
 		case Precondition:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtPre);
 			case Local: 
@@ -176,7 +178,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPre);
 			}
 		case Postcondition:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtPost);
 			case Local: 
@@ -185,7 +187,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalPost);
 			}
 		case Enumeration:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtEnumeration);
 			case Local: 
@@ -194,7 +196,7 @@ public class OutlineItem {
 				return Activator.getDefault().getImage(Activator.ImageTypes.LocalEnumeration);
 			}
 		case EnumLiteral:
-			switch(localisation){
+			switch(localisationType){
 			case External:
 				return Activator.getDefault().getImage(Activator.ImageTypes.ExtEnumLiteral);
 			case Local: 
@@ -251,5 +253,12 @@ public class OutlineItem {
 	public String fullName(){
 		return packageName+label;
 	}
+	
+	public void setLocalisation(ItemLocalisation loc){
+		this.localisationType =  loc.localisationType;
+		this.localisation = loc;
+	}
+
+	
 	
 }
