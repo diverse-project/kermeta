@@ -248,4 +248,8 @@ public class OutlineItem {
 		return otherItem.packageName.equals(packageName) && otherItem.label.equals(label);
 	}
 	
+	public String fullName(){
+		return packageName+label;
+	}
+	
 }

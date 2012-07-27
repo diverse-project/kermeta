@@ -88,18 +88,10 @@ public class KermetaEditor extends TextEditor implements  KermetaBuilderEventLis
     }
 	@Override
 	public void projectCompiled(IProject project, ModelingUnit lastCompiledKm) {
-		// TODO Need to check if file belongs to project than update
-		System.out.println("Project Compiled: " +  project.getName());
-		outline.update(lastCompiledKm);
-		/*
-		Job job = new Job("Outline") {		
-			@Override
-			protected IStatus run(IProgressMonitor arg0) {
-				outline.update();
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		*/		
+		// Check if file belongs to project that update
+		// TODO the file may still be visible from another eclipse project via the kp require statement
+		if(getFile().getProject().getName().equals(project.getName())){
+			outline.update(lastCompiledKm);
+		}		
 	}
 }

@@ -48,6 +48,7 @@ public class KermetaOutlineHelper {
 			ele.localisation = getLocalisationType(this.modelingUnit.getPackages().get(i));
 			baseChildren[i] = ele;
 			hasChildren = true;
+			
 			// initial package must know their child in order to display the open arrow
 			//ele.setChildren(updatePackage(ele));
 			//updateAllChildren(ele);

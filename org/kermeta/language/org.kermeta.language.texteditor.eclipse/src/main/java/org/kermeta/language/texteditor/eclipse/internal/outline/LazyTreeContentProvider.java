@@ -60,8 +60,9 @@ public class LazyTreeContentProvider implements ILazyTreeContentProvider {
 				OutlineItem node = (OutlineItem)parent;
 				OutlineItem element = (OutlineItem) node.getChildren()[index];
 				viewer.replace(parent, index, element);
-				updateChildCount(element, element.getNoOfChildren());				
-				//viewer.setHasChildren(element, element.getNoOfChildren() > 0);
+				//updateChildCount(element, element.getNoOfChildren());				
+				viewer.setHasChildren(element, element.getNoOfChildren() > 0); // indicates that the real count will be updated later
+				
 			}
 		}
 	}
