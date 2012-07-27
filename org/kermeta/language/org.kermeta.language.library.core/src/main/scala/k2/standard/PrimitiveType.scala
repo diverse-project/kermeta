@@ -132,8 +132,7 @@ class Void  extends  EObjectImplForPrimitive //with org.k2.scala.framework.emf.a
     override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Void")
 }
  
-abstract class RichValueType[G]  extends EObjectImplForPrimitive{
-    def getValue():Object 
+abstract class RichValueType[G]  extends EObjectImplForPrimitive with ScalaWrapper{
     override def equals(o:Any):Boolean = {
         if (o.isInstanceOf[ RichValueType[G] ]){
             return getValue() == o.asInstanceOf[ RichValueType[G] ].getValue
@@ -157,10 +156,10 @@ trait Summable[G]  extends Object {
 }
 //class RichNotComparableException  extends Exception  {}
 
-class RichIterator (value: java.util.Iterator[_]) extends EObjectImplForPrimitive {
+class RichIterator (value: java.util.Iterator[_]) extends EObjectImplForPrimitive with ScalaWrapper{
 	override  def isVoid(): java.lang.Boolean = false;
 	def isOff(): java.lang.Boolean = {return !value.hasNext()}
-	def getValue():Object = value 
+	override def getValue():Object = value 
 	
     override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Iterator")
 }
@@ -206,11 +205,13 @@ class RichBoolean (value: java.lang.Boolean) extends RichValueType[java.lang.Boo
 
 
 
-class RichRandom(value : java.util.Random) extends KermetaObject with EObjectImplForPrimitive {
+class RichRandom(value : java.util.Random) extends EObjectImplForPrimitive with ScalaWrapper{
 	override def isVoid() = value==null;
 	override def equals(arg0 : Any) = value.equals(arg0)
 	override def toString() = value.toString()
 	override def hashCode() : Int = value.hashCode()
+	
+	override def getValue():Object = value
 	
 	def nextBoolean() : java.lang.Boolean = value.nextBoolean()
 	def nextDouble() : java.lang.Double = value.nextDouble()
@@ -226,7 +227,7 @@ class RichRandom(value : java.util.Random) extends KermetaObject with EObjectImp
 
 
 
-class RichDate(value: java.util.Date) extends KermetaObject with EObjectImplForPrimitive {
+class RichDate(value: java.util.Date) extends EObjectImplForPrimitive with ScalaWrapper{
 	override  def isVoid(): java.lang.Boolean = value==null;
     
   //generated
@@ -258,6 +259,7 @@ class RichDate(value: java.util.Date) extends KermetaObject with EObjectImplForP
 	def toLocaleString() : java.lang.String = value.toLocaleString()
   //end generated
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Date")
+	override def getValue():Object = value
 }
 
 class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
@@ -331,7 +333,7 @@ class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
    //end generated
 }
 
-class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject with EObjectImplForPrimitive{
+class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject with EObjectImplForPrimitive with ScalaWrapper{
 	 override  def isVoid() : java.lang.Boolean = value==null;
   	 override def toString() : java.lang.String = value.toString()
 	 def append(arg0:java.lang.Object) : java.lang.StringBuilder = value.append(arg0)
@@ -381,6 +383,7 @@ class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject wit
 	 override 	 def equals(arg0:Any) : Boolean = value.equals(arg0)
 	 override 	 def hashCode() : Int = value.hashCode()
 	 override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.StringBuffer")
+	 override def getValue():Object = value
 }
 
 class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
@@ -526,11 +529,10 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
 }
 
 
-class RichEnum(value:java.lang.Object)  extends  EObjectImplForPrimitive{
+class RichEnum(value:java.lang.Object)  extends  EObjectImplForPrimitive with ScalaWrapper{
     override  def isVoid(): java.lang.Boolean = value==null;
     def getValue():java.lang.Object = value
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("org.kermeta.language.structure.Enumeration")
-
 }
 
 trait EObjectImplForPrimitive extends EObjectImplForKO{
@@ -676,6 +678,10 @@ class RichURI(value : org.eclipse.emf.common.util.URI)  extends RichValueType wi
 class RichUnknownJavaObject  extends Object {
     override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
     }
+}
+
+trait ScalaWrapper {
+  def getValue():Object
 }
 
 
