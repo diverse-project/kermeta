@@ -160,14 +160,6 @@ object TypeEquivalence {
 		Stack.put("peek", "peek");
 		methodEquivalence.put("_root_.kermeta.utils.Stack", Stack);
 		
-		var Collection : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-		Collection.put("count", "countElement");
-		methodEquivalence.put("_root_.kermeta.standard.Collection", Collection);
-
-   /*             Collection  = new java.util.HashMap[String,String]
-		Collection.put("add", "addUnique");
-		Collection.put("addAll", "addAllUnique");
-		methodEquivalence.put("java.util.List", Collection);*/
 		var ClassDefinition : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		ClassDefinition.put("allAttribute", "eAllAttributes")
 		methodEquivalence.put("_root_.org.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
@@ -181,7 +173,8 @@ object TypeEquivalence {
 		methodEquivalence.put("_root_.String", str);
 		methodEquivalence.put("java.lang.String", str);
 		methodEquivalence.put("_root_.java.lang.String", str);
-		
+		methodEquivalence.put("kermeta.standard.String", str);
+
 		val intMethodEquivalence = new java.util.HashMap[String,String]
 		intMethodEquivalence.put("compareTo", "kcompareTo");
 		/*intMethodEquivalence.put("shortValue", "kshortValue");
@@ -191,11 +184,13 @@ object TypeEquivalence {
 		intMethodEquivalence.put("doubleValue", "kdoubleValue");*/
 		methodEquivalence.put("java.lang.Integer", intMethodEquivalence);
 		methodEquivalence.put("_root_.java.lang.Integer", intMethodEquivalence);
-		
+		methodEquivalence.put("kermeta.standard.Integer", intMethodEquivalence);
+
 		val resource = new java.util.HashMap[String,String]
 		resource.put("getContents", "kgetContents");
 		methodEquivalence.put("_root_.k2.persistence.Resource", resource);
 		methodEquivalence.put("_root_.org.eclipse.emf.ecore.resource.Resource", resource);
+		methodEquivalence.put("kermeta.persistence.Resource",resource)
 		
         methodEquivalence
   };

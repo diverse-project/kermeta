@@ -36,7 +36,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def removeFromContainer():Unit  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
 	
 	def invoke(op:org.kermeta.language.structure.Operation , args:k2.standard.KermetaOrderedCol[_<:Any]) : k2.standard.KermetaObject ={
-	    var operationName = k2.utils.TypeEquivalence.getMethodEquivalence(op.getOwningClass().getName(),op.getName())
+	    var operationName = k2.utils.TypeEquivalence.getMethodEquivalence(k2.utils.UTilScala.getQualifiedNameClassKermeta(op.getOwningClass(),"."),op.getName())
 		var optionMeth = this.getClass().getMethods.find(m => m.getName() == operationName
 		    && m.getParameterTypes().length == args.length)
 		optionMeth match{
