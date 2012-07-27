@@ -19,6 +19,16 @@ object UTilScala {
       }
     }
     
+    /**
+     * If the object is a ScalaWrapper, unpack it.
+     */
+    def getValue(o:k2.standard.KermetaObject):Object={
+      o match {
+        case o:k2.standard.ScalaWrapper => o.getValue()
+        case o => o
+      } 
+    }
+    
     def getAllSuperClasses(cl:org.kermeta.language.structure.Class):java.util.List[org.kermeta.language.structure.Class]={
       import scala.collection.JavaConversions._
       if(cl.getSuperClass().size==0)

@@ -162,7 +162,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     def generateIsInstanceOf(thi:CallFeature,res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
       o match {
         case o : CallTypeLiteral 
-          if(!(isCompiledToScalaType(o.getTyperef().getType()) && thi.getTarget.getStaticType()!=o.getTyperef().getType()) // Avoid problem  like var o:Object:="toto" ; o.isInstanceOf[String] => false because o is a RichString
+          if(!(isCompiledToScalaType(o.getTyperef().getType()) && thi.getTarget.getStaticType()!=o.getTyperef().getType()) // Avoid problem  like var o:Object:="toto" ; o.isInstanceOf[String] => false because o is a RichString and not a jl.String
               && !thi.getTarget().isInstanceOf[org.kermeta.language.behavior.Literal]) // Scala cannot call isInstanceOf on boolean and integer literals, void literal should be an instance of everything, and callType literal call reflexivity layer anyway => special treatment for literals (anyway, who would ask "toto".isInstanceOf(String) in a real case scenario where speed matters?)
           =>
             generateTarget(thi,res);
@@ -178,6 +178,26 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
         }
         //res.append("\n")    
     }  
+    
+    def generateAsType(thi:CallFeature,res:StringBuilder, o : org.kermeta.language.structure.KermetaModelElement)={
+      o match {
+        case o : CallTypeLiteral 
+          if(!(isCompiledToScalaType(o.getTyperef().getType()) && thi.getTarget.getStaticType()!=o.getTyperef().getType())) // Avoid problem  like var o:Object:="toto" ; var s:String := o.asType(String) => error because o is a RichString and not a jl.String
+          =>
+            generateTarget(thi,res);
+            res.append(".asInstanceOf[")
+            generateScalaCodeForInstanceOf(o,res)
+            res.append("]")
+        case o : CallTypeLiteral =>
+            res.append("_root_.k2.utils.UTilScala.getValue(")
+            generateTarget(thi,res);
+            res.append(").asInstanceOf[")
+            generateScalaCodeForInstanceOf(o,res)
+            res.append("]")
+        case _ => throw new Exception("asType must have a type literal as a parameter. Please report this bug.")
+        }
+        //res.append("\n")    
+    }
     
     def isCompiledToScalaType(thi:org.kermeta.language.structure.Type):java.lang.Boolean={
       Array(
@@ -231,10 +251,9 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                     case "equals" => {res.append("(");generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")");res.append(")");}
                         //case "run" if(thi.getTarget != null) => generateKUnitCase(res)
         
-                    case "asType" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
-                    case "isInstance" => {generateParam(thi,res,"","") ;res.append(".isInstanceOf");generateInstanceOf(thi,res, thi.getTarget)}
-                    //case "asKindOf" => {generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
-                    case "isInstanceOf" => generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
+                    case "asType" if(thi.getParameters().size()==1) => generateAsType(thi,res,thi.getParameters().get(0)) //{generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
+                    case "isInstance" if(thi.getParameters().size()==1) => {generateParam(thi,res,"","") ;res.append(".isInstanceOf");generateInstanceOf(thi,res, thi.getTarget)}
+                    case "isInstanceOf" if(thi.getParameters().size()==1) => generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
 
                     case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(thi,res);res.append(")");}
                     case "new" => generateNew(thi,res)
