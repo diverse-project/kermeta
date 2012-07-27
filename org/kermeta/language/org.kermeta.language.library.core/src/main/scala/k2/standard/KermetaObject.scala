@@ -83,7 +83,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 
   def isDirectInstanceOf(ty : org.kermeta.language.structure.Type) : java.lang.Boolean = {
     ty match {
-      case ty:org.kermeta.language.structure.Class => this.getMetaClass().getTypeDefinition()==ty.getTypeDefinition()
+      case ty:org.kermeta.language.structure.Class => this.getMetaClass()==ty
       case ty => java.lang.Class.forName(k2.utils.UTilScala.getQualifiedNameTypeJava(ty,".")).isInstance(this)
     }
   }
