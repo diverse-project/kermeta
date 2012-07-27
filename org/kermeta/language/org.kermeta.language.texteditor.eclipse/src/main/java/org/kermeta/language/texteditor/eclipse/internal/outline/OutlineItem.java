@@ -86,19 +86,16 @@ public class OutlineItem {
 		this.helper = helper;
 	}
 	public String getLabel() {
-		switch(this.type){
-		case Operation:
-		case Class:
-		case Package:
-		case Precondition:
-		case Postcondition:
-		case Enumeration:
-		case EnumLiteral:
-		case Invariant:
+		if (this.type == OutlineItem.OutlineTypes.Operation){
+	    	return label; 
+	    }
+		
+		if (this.getPackageName().compareTo("") == 0){
 			return label;
-		default:
+		} else {
 			return this.getPackageName() + "::" + label;
 		}
+		
 	    
 	}
 	public String getPackageName(){
