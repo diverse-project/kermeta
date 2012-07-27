@@ -79,7 +79,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
   def typedefinition = this
   def container() = this.eContainer().asInstanceOf[KermetaObject]
 
-  def isNotEqual(o : Any) : java.lang.Boolean = !equals(o)
+  def isNotEqual(o : KermetaObject) : java.lang.Boolean = !equals(o)
 
   def isDirectInstanceOf(ty : org.kermeta.language.structure.Type) : java.lang.Boolean = {
     ty match {

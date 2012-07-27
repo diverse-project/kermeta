@@ -140,7 +140,6 @@ abstract class RichValueType[G]  extends EObjectImplForPrimitive with ScalaWrapp
         return getValue().equals(o)
         
     }
-    //def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 }
 
 abstract class Comparable[G]  extends RichValueType[G] {
@@ -152,7 +151,6 @@ abstract class Comparable[G]  extends RichValueType[G] {
 }
 trait Summable[G]  extends Object {
     def plus(other : G) :G
-    //def isNotEqual(other : Any) :Boolean = {!this.equals(other) }
 }
 //class RichNotComparableException  extends Exception  {}
 
@@ -277,7 +275,6 @@ class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
 	def compareTo(other : java.lang.Double) : java.lang.Integer={return value.asInstanceOf[Double].compare(other)}
 	override def isGreater(other : java.lang.Double) : java.lang.Boolean={return value>other}
 	override def isGreaterOrEqual(other : java.lang.Double) : java.lang.Boolean={value>=other}
-	override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
 	def isLowerOrEqual(other : java.lang.Double) : java.lang.Boolean={return  value<=other.intValue}
 
 	override def getValue():Object = new java.lang.Double(value)
@@ -314,7 +311,6 @@ class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
   def compareTo(other : java.lang.Float) : java.lang.Integer={return value.asInstanceOf[Float].compare(other)}
   override def isGreater(other : java.lang.Float) : java.lang.Boolean={return value>other}
   override def isGreaterOrEqual(other : java.lang.Float) : java.lang.Boolean={value>=other}
-  override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
   def isLowerOrEqual(other : java.lang.Float) : java.lang.Boolean={return  value<=other.intValue}
 
   override def getValue():Object = new java.lang.Float(value)
@@ -403,7 +399,6 @@ class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
       def compareTo(other : Int) : java.lang.Integer={return value.asInstanceOf[Short].compare(other.shortValue())}
       override def isGreater(other : java.lang.Short) : java.lang.Boolean={return value>other}
       override def isGreaterOrEqual(other : java.lang.Short) : java.lang.Boolean={value>=other}
-      override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
       def isLowerOrEqual(other : java.lang.Short) : java.lang.Boolean={return  value<=other.intValue}
 
       override def getValue():Object = new java.lang.Short(value)
@@ -440,7 +435,6 @@ class RichLong(value: java.lang.Long)  extends RichNumeric[java.lang.Long]{
 	def compareTo(other : java.lang.Long) : java.lang.Integer = value.asInstanceOf[Long].compare(other.longValue)
 	override def isGreater(other : java.lang.Long) : java.lang.Boolean = value>other
 	override def isGreaterOrEqual(other : java.lang.Long) = value>=other
-	override def isNotEqual(other : Any) = !this.equals(other)
 	def isLowerOrEqual(other : java.lang.Long) = value<=other.intValue
 
 	override def getValue() : Object = new java.lang.Long(value)
@@ -501,9 +495,7 @@ class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integ
 	
 //    def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
     def times(func : java.lang.Integer => Unit):Unit ={ for(i <- 0 until value){func(i)} }
-    override def isNotEqual(other : Any) :java.lang.Boolean = {!this.equals(other)}
     override def getValue():Object = new java.lang.Integer(value)		
-    //def isNotEqual(other : Any) :Boolean = this.equals(other)
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Integer")
 	
 }
