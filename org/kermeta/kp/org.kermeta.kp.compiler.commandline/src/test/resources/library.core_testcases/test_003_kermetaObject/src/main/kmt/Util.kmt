@@ -24,6 +24,10 @@ class NamedElement {
 	operation getName() : String is do
 		result := name
 	end
+	
+	operation toString() : String is do
+		result := name
+	end
 }
 
 class Dummy{
@@ -52,4 +56,13 @@ class MyObject{
 		called:=true
 		result := 1
 	end
+	
+	operation isNotEqual(o:Object):Boolean is do
+		called:=true
+		result := !equals(o)
+	end
 }
+
+class A{}
+
+class B inherits A{}

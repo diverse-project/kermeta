@@ -43,6 +43,7 @@ class TestObject inherits TestCase{
 		args.clear
 		assert(n.invoke(op,args)=="tutu")
 
+		// invoke with wrong number of arguments
 		args.add("tutu")
 		do
 			n.invoke(op,args)
@@ -52,6 +53,7 @@ class TestObject inherits TestCase{
 			assertWithMsg(false,"Invoke exception 2")
 		end
 
+		// invoke with an operation not defined on the target
 		args.clear
 		op := Dummy.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="dummy"}
 		do
@@ -62,9 +64,13 @@ class TestObject inherits TestCase{
 			assertWithMsg(false,"Invoke exception 4")
 		end
 		
-		// test if invoke takes into account methodEquivalence
+		// test that invoke takes into account methodEquivalence
 		var s:String := "toto tutu"
 		assert(s.split(" ").isInstanceOf(Collection[String]))
+		op := String.typeDefinition.asType(org::kermeta::language::structure::ClassDefinition).ownedOperation.detect{op|op.name=="split"}
+		args.clear
+		args.add(" ")
+		assert(s.invoke(op,args).isInstanceOf(Collection[String]))
 	end
 
 	operation testIsVoid() : Void is do
@@ -88,5 +94,68 @@ class TestObject inherits TestCase{
 		myObject.called:=false
 		myObject.oid
 		assert(myObject.called)
+	end
+	
+	operation testIsNotEqual():Void is do
+		var myObject:MyObject := MyObject.new
+		myObject.called:=false
+		assert(myObject!=MyObject.new)
+		assert(myObject.called)
+		
+		var n0:NamedElement := NamedElement.new
+		var n1:NamedElement := NamedElement.new
+		assertFalse(n0 != n1)
+		n0.name:="n"
+		assert(n0 != n1)
+		n1.name:="n"
+		assertFalse(n0 != n1)
+	end
+	
+	operation testToString() : Void is do
+		assert(void.toString=="void")
+		var n:NamedElement := NamedElement.new
+		assert(n.toString==void)
+		n.name := "n"
+		assert(n.toString=="n")
+	end
+	
+	operation testIsInstanceOf():Void is do
+		assert(3.isInstanceOf(Integer))
+		assert(3.isInstanceOf(Numeric[Integer]))
+		assert("toto".isInstanceOf(String))
+		assert("toto".isInstanceOf(Object))
+		assert(3.isInstanceOf(Object))
+		assertFalse("toto".isInstanceOf(Integer))
+		
+		var o:Object := "toto"
+		assert(o.isInstanceOf(String))
+		
+		var i:Integer := 3
+		assert(i.isInstanceOf(Integer))
+		
+		assert(A.new.isInstanceOf(A))
+		assert(B.new.isInstanceOf(B))
+		assert(B.new.isInstanceOf(A))
+	end
+	
+	operation testAsType():Void is do
+		var o:Object := "toto"
+		var s:String := o.asType(String)
+		assert(s=="toto") // forces evaluation of s, to avoid scala lazy cast weirdness
+	end
+	
+	operation testIsDirectInstanceOf():Void is do
+		assert(A.new.isDirectInstanceOf(A))
+		assert(B.new.isDirectInstanceOf(B))
+		assertFalse(B.new.isDirectInstanceOf(A))
+		
+		assert(3.isDirectInstanceOf(Integer))
+		assertFalse(3.isDirectInstanceOf(Numeric[Integer]))
+
+		var o:Object := "toto"
+		assert(o.isDirectInstanceOf(String))
+		
+		var i:Integer := 3
+		assert(i.isDirectInstanceOf(Integer))
 	end
 }
