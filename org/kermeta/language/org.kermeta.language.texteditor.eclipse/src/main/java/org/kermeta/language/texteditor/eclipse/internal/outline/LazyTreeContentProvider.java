@@ -56,7 +56,7 @@ public class LazyTreeContentProvider implements ILazyTreeContentProvider {
 	public void updateElement(Object parent, int index) {
 		if (parent instanceof OutlineItem){
 			if (index < ((OutlineItem)parent).getNoOfChildren()){
-				System.out.println("  updateElement "+((OutlineItem)parent).getLabel()+ " at "+index);
+				//System.out.println("  updateElement "+((OutlineItem)parent).getLabel()+ " at "+index);
 				OutlineItem node = (OutlineItem)parent;
 				OutlineItem element = (OutlineItem) node.getChildren()[index];
 				viewer.replace(parent, index, element);

@@ -11,15 +11,26 @@
  */
 package org.kermeta.language.texteditor.eclipse.internal.outline;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.debug.core.sourcelookup.containers.LocalFileStorage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -37,11 +48,17 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.part.FileEditorInput;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
 import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation.FileHighlight;
 import org.kermeta.language.texteditor.eclipse.internal.outline.OutlineItem.OutlineTypes;
+import org.kermeta.language.texteditor.eclipse.internal.KLocalFileEditorInput;
+import org.kermeta.utils.helpers.FileHelpers;
 
 
 
@@ -270,20 +287,27 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
-		/* if ( event.getSource() instanceof TreeViewer ){
+		if ( event.getSource() instanceof TreeViewer ){
 			if (currentOutlineItem != null){
-				if (currentOutlineItem.type == OutlineTypes.Package){
-					currentOutlineItem.children = this.KHelper.updatePackage(currentOutlineItem);
-					getTreeViewer().refresh();
-				}
-				if (currentOutlineItem.type == OutlineTypes.Class){
-					currentOutlineItem.children = this.KHelper.updateClass(currentOutlineItem);
-					getTreeViewer().refresh();
-				}
-				
+
+				// if possible open a new editor on the first external file
+				for(FileHighlight extlHighlight : currentOutlineItem.localisation.extHighlight){					
+					URL url;
+					try {
+						url = new URL(extlHighlight.fileName);
+						IResource ifile= ResourcesPlugin.getWorkspace().getRoot().findMember(cleanString(url)); 
+						if(ifile != null && ifile instanceof IFile){
+							TextEditor editor = openEditor((IFile) ifile);
+							if ( editor != null ){
+								editor.setHighlightRange(extlHighlight.offset, extlHighlight.length, true);
+							}
+						}
+						break; // do not try to open other ext files
+					} catch (MalformedURLException e) {}
+				}     		  
 			}
-		}*/
-		
+		}
+
 	}
 	
 	@Override
@@ -336,6 +360,49 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 	      }
 	}
 	
+	
+	private TextEditor openEditor(File file) {
+		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor( file.toString() );
+		TextEditor editor;
+		try {
+			editor = (TextEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
+					new KLocalFileEditorInput( new LocalFileStorage(file) ),
+					desc.getId());
+			return editor;
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	private TextEditor openEditor(IFile file) {
+		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
+		try {
+			// Open an editor on that file
+			TextEditor editor = (TextEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
+			      new FileEditorInput(file),
+			      desc.getId());
+			return editor;
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		};		
+		return null;
+	}
+	
+	private String cleanString(URL toClean) {
+		try {
+			String decodedUrlString = URLDecoder.decode(toClean.toString(), "UTF-8");
+			String cleanString = FileHelpers.URLToStringWithoutFile(new URL(decodedUrlString));
+			return cleanString.replaceFirst(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return toClean.toString();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return toClean.toString();
+		}
+	}
 	   
 }
