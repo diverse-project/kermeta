@@ -87,24 +87,20 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     
         visit(thi.getTarget().getStaticType(),TargetType)
     
-        if(thi.getName.contains("split")){
-            println("call equivalence")
-            //println(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName)))
-        }
-    
-    
-        var ops : List[Operation] = thi.getTarget().getStaticType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getOwnedOperation.filter(op => op.getName.equals(thi.getName))
-        if (ops.size>0){
+        if(thi.getTarget().getStaticType().isInstanceOf[Class]){
+          var ops : List[Operation] = thi.getTarget().getStaticType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getOwnedOperation.filter(op => op.getName.equals(thi.getName))
+          if (ops.size>0){
             //if (ops.get(0).getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){
             //  res.append(Util.protectScalaKeyword(ops.get(0).getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
             //}else{
             res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName)))
 
             //}
-        }else{
+          }else{
             res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(thi.getStaticOperation))))
-
-        }
+          } 
+        } else
+          res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName)))
     }
 	
     def generateName(thi:CallExpression,res : StringBuilder){
@@ -123,10 +119,6 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
         	res.append(thi.getStaticEnumLiteral().getName())
         //    generateName(thi,res)
         }
-    }
-
-    def generateIsInstance(thi:CallFeature,res : StringBuilder){
-        res.append(thi.getName())
     }
 
     def generateKUnitCase(thi:CallFeature,res : StringBuilder){
@@ -198,7 +190,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
         }
         //res.append("\n")    
     }
-    
+
     def isCompiledToScalaType(thi:org.kermeta.language.structure.Type):java.lang.Boolean={
       Array(
           "_root_.java.lang.String",
@@ -244,15 +236,13 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                     case "clone" =>  { generateClone(thi,res)  }
       
                     case "and" =>  { res.append("(");generateTarget(thi,res);res.append(").and");generateParam(thi,res,"(",")"); }
-                        //case "isVoid" => { res.append("(");generateTarget(res);res.append("==null)")  }
-                    case "toString" => { res.append("(");generateTarget(thi,res);res.append("+\"\")")  }
-                    case "isNotEqual" => {generateTarget(thi,res);res.append(" != ");generateParam(thi,res,"(",")")}
-                    case "isEqual" => {generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")")}
-                    case "equals" => {res.append("(");generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")");res.append(")");}
+                    //case "toString" => { res.append("(");generateTarget(thi,res);res.append("+\"\")")  }
+                    case "isNotEqual" if(thi.getParameters().size()==1) => {generateTarget(thi,res);res.append(" != ");generateParam(thi,res,"(",")")}
+                    case "isEqual" if(thi.getParameters().size()==1)=> {generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")")}
+                    case "equals" if(thi.getParameters().size()==1)=> {res.append("(");generateTarget(thi,res);res.append(" == ");generateParam(thi,res,"(",")");res.append(")");}
                         //case "run" if(thi.getTarget != null) => generateKUnitCase(res)
         
                     case "asType" if(thi.getParameters().size()==1) => generateAsType(thi,res,thi.getParameters().get(0)) //{generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
-                    case "isInstance" if(thi.getParameters().size()==1) => {generateParam(thi,res,"","") ;res.append(".isInstanceOf");generateInstanceOf(thi,res, thi.getTarget)}
                     case "isInstanceOf" if(thi.getParameters().size()==1) => generateIsInstanceOf(thi,res,thi.getParameters.get(0) )
 
                     case "isVoid" => { res.append("_root_.k2.standard."+GlobalConfiguration.factoryName+".isVoid("); generateTarget(thi,res);res.append(")");}
