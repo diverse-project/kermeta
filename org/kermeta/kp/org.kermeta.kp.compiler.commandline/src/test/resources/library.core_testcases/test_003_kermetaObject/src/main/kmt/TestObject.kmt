@@ -75,7 +75,7 @@ class TestObject inherits TestCase{
 
 	operation testIsVoid() : Void is do
 		assert(void.isVoid)
-		assert(!NamedElement.isVoid)
+		assertFalse(NamedElement.new.isVoid)
 		var myObject:MyObject := MyObject.new
 		myObject.called:=false
 		assert(!myObject.isVoid)
