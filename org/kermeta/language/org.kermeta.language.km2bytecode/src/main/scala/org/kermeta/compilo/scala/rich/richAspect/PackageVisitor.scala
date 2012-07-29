@@ -615,6 +615,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 
     //SEARCH THE FIRST LEVEL SUPER TYPE WHERE OPERATION COMING FROM
     var superTrait = classFrom.getSuperType.filter({ s => isSubTypeOf(s, superClassFromName) }).head
+    var superTraitQualifiedName = getQualifiedNameCompilo(superTrait)
+    var superTraitName = superTraitQualifiedName.substring(superTraitQualifiedName.lastIndexOf(".")+1)
     /* var superTrait : Type = null
     var maxLevel : Int = 2
     classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).foreach{stype=>
@@ -634,8 +636,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     }*/
 
     log.debug("operation {} from {}", actualOperation.getName, superClassFromName)
-    log.debug(" => {}", superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
-    res.append("super[" + superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName + "Aspect]")
+    log.debug(" => {}", superTraitName)
+    res.append("super[" + superTraitName + "Aspect]")
     res.append("." + Util.getEcoreRenameOperation(actualOperation.getSuperOperation.asInstanceOf[Operation]))
     res.append("(")
     generateScalaCodeEach(res, thi.getParameters, ",")
