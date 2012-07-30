@@ -519,7 +519,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
   
   def visitTypeParam(thi:org.kermeta.language.structure.Type,res:StringBuilder)={
-    if(this.isInstanceOf[org.kermeta.language.structure.ClassDefinition] && getQualifiedNameCompilo(thi)=="_root_.k2.standard.KermetaObject")
+    if(thi.isInstanceOf[org.kermeta.language.structure.ClassDefinition] && getQualifiedNameCompilo(thi)=="_root_.k2.standard.KermetaObject")
       res.append("Any")
     else
       visit(thi, res)
