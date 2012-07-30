@@ -10,6 +10,6 @@ aspect class Operation {
 	//have the same signature. For now, as in kermeta 1, the signature is limited
 	//to the operation name. See bug 1916 for further details and planned changes
 	operation hasSameSignature(anotherOperation : Operation) : Boolean is do
-		result:= self.name==anotherOperation.name
+		result:= self.name==anotherOperation.name and self.ownedParameter.size==anotherOperation.ownedParameter.size
 	end
 }
