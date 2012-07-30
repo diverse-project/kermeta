@@ -160,7 +160,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     var targetClass: StringBuilder = new StringBuilder
     if (!(thi.getIsCast()!=null && thi.getIsCast())) {
       //if(thi.getValue().isInstanceOf[VoidLiteral]){
-      visit(thi.getTarget.getStaticType, targetClass)
+      visitTypeParam(thi.getTarget.getStaticType, targetClass)
       //}
     } else {
       if (thi.getTarget.getStaticType.isInstanceOf[Class] || thi.getTarget.getStaticType.isInstanceOf[PrimitiveType]) {
