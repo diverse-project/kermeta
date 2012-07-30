@@ -132,15 +132,7 @@ class Void  extends  EObjectImplForPrimitive //with org.k2.scala.framework.emf.a
     override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Void")
 }
  
-abstract class RichValueType[G]  extends EObjectImplForPrimitive with ScalaWrapper{
-    override def equals(o:Any):Boolean = {
-        if (o.isInstanceOf[ RichValueType[G] ]){
-            return getValue() == o.asInstanceOf[ RichValueType[G] ].getValue
-        }
-        return getValue().equals(o)
-        
-    }
-}
+abstract class RichValueType[G]  extends EObjectImplForPrimitive with ScalaWrapper{}
 
 abstract class Comparable[G]  extends RichValueType[G] {
     def isLower(other : G) : java.lang.Boolean
@@ -165,8 +157,6 @@ class RichIterator (value: java.util.Iterator[_]) extends EObjectImplForPrimitiv
 
 class RichBoolean (value: java.lang.Boolean) extends RichValueType[java.lang.Boolean] {
 	//generated
-	override def equals(arg0:Any) : Boolean = value.equals(arg0)
-	override def hashCode() : Int = value.hashCode()
 //	 def compareTo(arg0:java.lang.Boolean) : Int = value.compareTo(arg0)
 	def booleanValue() : java.lang.Boolean = value.booleanValue()
   //end generated
@@ -205,9 +195,6 @@ class RichBoolean (value: java.lang.Boolean) extends RichValueType[java.lang.Boo
 
 class RichRandom(value : java.util.Random) extends EObjectImplForPrimitive with ScalaWrapper{
 	override def isVoid() = value==null;
-	override def equals(arg0 : Any) = value.equals(arg0)
-	override def toString() = value.toString()
-	override def hashCode() : Int = value.hashCode()
 	
 	override def getValue():Object = value
 	
@@ -229,9 +216,6 @@ class RichDate(value: java.util.Date) extends EObjectImplForPrimitive with Scala
 	override  def isVoid(): java.lang.Boolean = value==null;
     
   //generated
-	override def equals(arg0:Any) : Boolean = value.equals(arg0)
-	override def toString() : java.lang.String = value.toString()
-	override def hashCode() : Int = value.hashCode()
 	override def clone() : AnyRef = value.clone
 	def compareTo(arg0:java.util.Date) : Int = value.compareTo(arg0)
 //	 def compareTo(arg0:AnyRef) : Int = value.compareTo(arg0)
@@ -270,8 +254,6 @@ class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
 	def uminus() : java.lang.Double={return (value * (-1)).toDouble}
 
 	override def isLower(other : java.lang.Double) : java.lang.Boolean={value<other}
-	override def equals(other : Any) :Boolean={if (other.isInstanceOf[java.lang.Double]) return value==other.asInstanceOf[java.lang.Double]; else false}
-	def equals(other : java.lang.Double) :Boolean={value==other}
 	def compareTo(other : java.lang.Double) : java.lang.Integer={return value.asInstanceOf[Double].compare(other)}
 	override def isGreater(other : java.lang.Double) : java.lang.Boolean={return value>other}
 	override def isGreaterOrEqual(other : java.lang.Double) : java.lang.Boolean={value>=other}
@@ -282,8 +264,6 @@ class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
 
    //generated
   //override def equals(arg0:Any) : Boolean = value.equals(arg0)
-	override def toString() : java.lang.String = value.toString()
-	override def hashCode() : Int = value.hashCode()
 	// def compareTo(arg0:java.lang.Double) : Int = value.compareTo(arg0)
 	//def shortValue() : java.lang.Short = value.shortValue()
 	//def intValue() : java.lang.Integer = value.intValue()
@@ -306,8 +286,6 @@ class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
   def uminus() : java.lang.Float={return (value * (-1)).toFloat}
 
   override def isLower(other : java.lang.Float) : java.lang.Boolean={value<other}
-  override def equals(other : Any) : Boolean={if (other.isInstanceOf[java.lang.Float]) return value==other.asInstanceOf[java.lang.Float]; else false}
-  def equals(other : java.lang.Float) : java.lang.Boolean={value==other}
   def compareTo(other : java.lang.Float) : java.lang.Integer={return value.asInstanceOf[Float].compare(other)}
   override def isGreater(other : java.lang.Float) : java.lang.Boolean={return value>other}
   override def isGreaterOrEqual(other : java.lang.Float) : java.lang.Boolean={value>=other}
@@ -317,8 +295,6 @@ class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Float")
      //generated
      // override def equals(arg0:Any) : Boolean = value.equals(arg0)
-  override def toString() : java.lang.String = value.toString()
-  override def hashCode() : Int = value.hashCode()
   //def shortValue() : java.lang.Short = value.shortValue()
   //def intValue() : java.lang.Integer = value.intValue()
   //def longValue() : java.lang.Long = value.longValue()
@@ -331,7 +307,6 @@ class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
 
 class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject with EObjectImplForPrimitive with ScalaWrapper{
 	 override  def isVoid() : java.lang.Boolean = value==null;
-  	 override def toString() : java.lang.String = value.toString()
 	 def append(arg0:java.lang.Object) : java.lang.StringBuilder = value.append(arg0)
 	 def append(arg0:java.lang.String) : java.lang.StringBuilder = value.append(arg0)
 	 def append(arg0:java.lang.StringBuffer) : java.lang.StringBuilder = value.append(arg0)
@@ -376,8 +351,6 @@ class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject wit
 	 def setCharAt(arg0 : java.lang.Integer,arg1: java.lang.Character) : Any = value.setCharAt(arg0,arg1)
 	 def setLength(arg0 : java.lang.Integer) : Any = value.setLength(arg0)
 	 def trimToSize() : Any = value.trimToSize()
-	 override 	 def equals(arg0:Any) : Boolean = value.equals(arg0)
-	 override 	 def hashCode() : Int = value.hashCode()
 	 override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.StringBuffer")
 	 override def getValue():Object = value
 }
@@ -392,8 +365,6 @@ class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
       def uminus() : java.lang.Short={return (value * (-1)).toShort}
 
       override def isLower(other : java.lang.Short) : java.lang.Boolean={value<other}
-      override def equals(other : Any) :Boolean={if (other.isInstanceOf[java.lang.Short]) return value==other.asInstanceOf[java.lang.Short]; else false}
-      def equals(other : java.lang.Short) :Boolean={value==other}
       def compareTo(other : java.lang.Short) : java.lang.Integer={return value.asInstanceOf[Short].compare(other)}
       def compareTo(other : java.lang.Integer) : java.lang.Integer={return value.asInstanceOf[Short].compare(other.shortValue())}
       def compareTo(other : Int) : java.lang.Integer={return value.asInstanceOf[Short].compare(other.shortValue())}
@@ -406,8 +377,6 @@ class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
 
      //generated
      //override def equals(arg0:Any) : Boolean = value.equals(arg0)
-	 override def toString() : java.lang.String = value.toString()
-	 override def hashCode() : Int = value.hashCode()
 	 //def compareTo(arg0:java.lang.Short) : Int = value.compareTo(arg0)
 	 //def shortValue() : java.lang.Short = value.shortValue()
 	 //def intValue() : java.lang.Integer = value.intValue()
@@ -430,8 +399,6 @@ class RichLong(value: java.lang.Long)  extends RichNumeric[java.lang.Long]{
 	def uminus() : java.lang.Long = value * (-1)
 
 	override def isLower(other : java.lang.Long) = value<other
-	override def equals(other : Any) : Boolean={if (other.isInstanceOf[java.lang.Long]) return value==other.asInstanceOf[java.lang.Long]; else false}
-	def equals(other : java.lang.Long) = value==other
 	def compareTo(other : java.lang.Long) : java.lang.Integer = value.asInstanceOf[Long].compare(other.longValue)
 	override def isGreater(other : java.lang.Long) : java.lang.Boolean = value>other
 	override def isGreaterOrEqual(other : java.lang.Long) = value>=other
@@ -441,8 +408,6 @@ class RichLong(value: java.lang.Long)  extends RichNumeric[java.lang.Long]{
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Long")
 
   	//generated
-	override def toString() : java.lang.String = value.toString()
-	override def hashCode() : Int = value.hashCode()
 	//def shortValue() : java.lang.Short = value.shortValue()
 	//def intValue() : java.lang.Integer = value.intValue()
 	//def longValue() : java.lang.Long = value.longValue()
@@ -462,14 +427,12 @@ class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integ
     def mult(other : java.lang.Integer) :java.lang.Integer={value*other.intValue}
     def minus(other : java.lang.Integer) :java.lang.Integer={return value-other.intValue}
     def minus(other : Int) :java.lang.Integer={return value-other}
-    override def equals(other : Any) :Boolean={if (other.isInstanceOf[Int]) return value==other.asInstanceOf[Int]; if (other.isInstanceOf[Integer]) return value==other.asInstanceOf[Integer].intValue;else false}
     def equals(other : Int) :Boolean={value==other}
     def equals(other : Integer) :Boolean={value == other.intValue}
     def mod(other : Int) :java.lang.Integer={return value % other}
     def mod(other : java.lang.Integer) :java.lang.Integer={return value % other.intValue}
     def div(other : Int) :java.lang.Integer={return value/other}
     def div(other : java.lang.Integer) :java.lang.Integer={return value/(other.intValue)}
-	override def hashCode() : Int = value.hashCode()
 	//def shortValue() : java.lang.Short = value.shortValue()
 	//def intValue() : java.lang.Integer = value.intValue()
 	//def longValue() : java.lang.Long = value.longValue()
@@ -488,7 +451,6 @@ class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integ
     def uminus() :Int={return value * (-1);}
     //TODO
     //def times(body : Integer=>Unit) :{}
-    override def toString() :java.lang.String={return ""+value}
     def isLowerOrEqual(other : Int) :java.lang.Boolean={return  value<=other}
     override def isLowerOrEqual(other : java.lang.Integer) :java.lang.Boolean={return  value<=other.intValue}
     def toInt() : java.lang.Integer = {return value}
@@ -503,8 +465,6 @@ class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integ
 
 class RichCharacter(value:java.lang.Character)  extends RichValueType with EObjectImplForPrimitive{
 	//generated
-	override 	 def equals(arg0:Any) : Boolean = value.equals(arg0)
-	override 	 def hashCode() : Int = value.hashCode()
 	def compareTo(arg0 : java.lang.Character) : java.lang.Integer = value.compareTo(arg0)
 	def charValue() : java.lang.Character = value.charValue()
   
@@ -513,7 +473,6 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
     //TODO
     def compareTo(other : Object) :Int={//TODO
         0}
-    override def toString() :java.lang.String={return ""+value}
     override  def isVoid(): java.lang.Boolean = false;
     override def getValue():Object = value
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Character")
@@ -576,8 +535,6 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
     override def toString() :java.lang.String={if (value != null) {return value.toString} else { return null}}
 */
    //override def equals(arg0:Any) : Boolean = value.equals(arg0)
-	 override def toString() : java.lang.String = value.toString()
-	 override def hashCode() : Int = value.hashCode()
 	 def plus(other : Object) : java.lang.String={return value + other.toString()}
 	 def compareTo(arg0:java.lang.String) : java.lang.Integer = value.compareTo(arg0)
 	 def indexOf(arg0:java.lang.Integer) : java.lang.Integer = value.indexOf(arg0)
@@ -638,16 +595,6 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 
 	override def isVoid() : java.lang.Boolean = value ==null;
     override def getValue():Object = value 		   
-    override def equals(o:Any):Boolean ={
-        if (o.isInstanceOf[String]){
-            return value == o.asInstanceOf[String]
-        }else        if (o.isInstanceOf[RichString]){
-            return value == o.asInstanceOf[RichString].getValue
-        }
-        return value.equals(o)
-
-        
-    }
 
   
 
@@ -672,8 +619,19 @@ class RichUnknownJavaObject  extends Object {
     }
 }
 
+/**
+ * Trait inherited by all wrappers.
+ * Redirect equals, hashCode and toString.
+ * Used by some util operations. 
+ */
 trait ScalaWrapper {
   def getValue():Object
+  override def equals(other : Any) :Boolean= other match {
+    case o:KermetaObject => getValue==k2.utils.UTilScala.getValue(o)
+    case o => getValue == o
+  }
+  override def hashCode() : Int = getValue.hashCode()
+  override def toString() : java.lang.String = getValue.toString
 }
 
 
