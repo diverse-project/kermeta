@@ -187,9 +187,10 @@ import scala.collection.JavaConversions._
         }
         
         def sum():A={
-          try{
-            value.reduceLeft((x,y)=>x.asInstanceOf[Summable[A]].plus(y))
-          } catch {
+          import k2.standard.PrimitiveConversion.any2kermeta
+          try
+            value.reduceLeft((x,y)=> any2kermeta(x).asInstanceOf[Summable[A]].plus(y))
+          catch {
             case e:Exception => null.asInstanceOf[A]
           }
         }
