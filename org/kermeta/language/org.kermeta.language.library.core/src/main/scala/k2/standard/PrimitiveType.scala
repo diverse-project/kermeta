@@ -469,6 +469,22 @@ class RichCharacter(value:java.lang.Character)  extends RichValueType with EObje
 	def charValue() : java.lang.Character = value.charValue()
   
   //end generated
+	
+	def ktoChars(arg0:java.lang.Integer,arg1:KermetaSequence[java.lang.Character],arg2:java.lang.Integer):java.lang.Integer={
+	  val temp = new Array[Char](arg1.size)
+	  val result = java.lang.Character.toChars(arg0,temp,arg2)
+	  if(result>0)
+	    arg1.addAt(arg2,temp(arg2))
+	  if(result>1)
+	    arg1.addAt(arg2+1,temp(arg2))
+	  result
+	}
+	
+	def ktoChars(arg0:java.lang.Integer) : KermetaSequence[java.lang.Character] = {
+	  val result = new RichKermetaSequence[java.lang.Character]
+	  java.lang.Character.toChars(arg0).toList.foreach(result.add(_))
+	  result
+	}
 
     //TODO
     def compareTo(other : Object) :Int={//TODO

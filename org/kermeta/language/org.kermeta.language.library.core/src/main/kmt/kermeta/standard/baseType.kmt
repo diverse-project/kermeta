@@ -1631,11 +1631,11 @@ class Character {
 
           end
         @CompilerIgnore "true"
-         operation toChars(arg0:Integer,arg1:Collection<Character>,arg2:Integer) : Integer is do
+         operation toChars(arg0:Integer,arg1:Sequence[Character],arg2:Integer) : Integer is do
 
           end
         @CompilerIgnore "true"
-         operation toChars(arg0:Integer) : Collection<Character> is do
+         operation toChars(arg0:Integer) : Sequence[Character] is do
 
           end
         @CompilerIgnore "true"

@@ -186,6 +186,12 @@ object TypeEquivalence {
 		methodEquivalence.put("java.lang.Integer", intMethodEquivalence);
 		methodEquivalence.put("_root_.java.lang.Integer", intMethodEquivalence);
 		methodEquivalence.put("kermeta.standard.Integer", intMethodEquivalence);
+		
+		val charMethodEquivalence = new java.util.HashMap[String,String]
+		charMethodEquivalence.put("toChars","ktoChars")
+		methodEquivalence.put("java.lang.Character",charMethodEquivalence)
+		methodEquivalence.put("_root_.java.lang.Character",charMethodEquivalence)
+		methodEquivalence.put("kermeta.standard.Character",charMethodEquivalence)
 
 		val resource = new java.util.HashMap[String,String]
 		resource.put("getContents", "kgetContents");
