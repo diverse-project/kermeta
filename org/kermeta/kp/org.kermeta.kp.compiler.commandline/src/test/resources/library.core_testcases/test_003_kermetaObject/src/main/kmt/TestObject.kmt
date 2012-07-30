@@ -20,6 +20,14 @@ class TestObject inherits TestCase{
 		assertFalse(n0==n1)
 		n1.name:="n"
 		assert(n0==n1)
+		
+		var o:Object := 3
+		var o1:Object := 3
+		assert(o==o1)
+		o1:=4
+		assertFalse(o==o1)
+		o1:=3.floatValue
+		assert(o==o1)
 	end
 	
 	operation testInvoke():Void is do
@@ -109,6 +117,14 @@ class TestObject inherits TestCase{
 		assert(n0 != n1)
 		n1.name:="n"
 		assertFalse(n0 != n1)
+		
+		var o:Object := 3
+		assert(o!=4)
+		assertFalse(o!=3)
+		
+		o:= "toto"
+		assert(o!="tutu")
+		assertFalse(o!="toto")
 	end
 	
 	operation testToString() : Void is do
@@ -120,6 +136,17 @@ class TestObject inherits TestCase{
 	end
 	
 	operation testIsInstanceOf():Void is do
+		assert(A.new.isInstanceOf(A))
+		assert(B.new.isInstanceOf(B))
+		assert(B.new.isInstanceOf(A))
+		var o:Object:=B.new
+		assert(o.isInstanceOf(A))
+		assert(o.isInstanceOf(B))
+		o:= A.new
+		assert(o.isInstanceOf(Object))
+		assert(o.isInstanceOf(A))
+		assertFalse(o.isInstanceOf(B))
+
 		assert(3.isInstanceOf(Integer))
 		assert(3.isInstanceOf(Numeric[Integer]))
 		assert("toto".isInstanceOf(String))
@@ -127,21 +154,27 @@ class TestObject inherits TestCase{
 		assert(3.isInstanceOf(Object))
 		assertFalse("toto".isInstanceOf(Integer))
 		
-		var o:Object := "toto"
+		o := "toto"
 		assert(o.isInstanceOf(String))
+		o:=3
+		assert(o.isInstanceOf(Integer))
+		assertFalse(o.isInstanceOf(String))
 		
 		var i:Integer := 3
 		assert(i.isInstanceOf(Integer))
-		
-		assert(A.new.isInstanceOf(A))
-		assert(B.new.isInstanceOf(B))
-		assert(B.new.isInstanceOf(A))
+		assert(i.isInstanceOf(Numeric[Integer]))
+		assertFalse(i.isInstanceOf(Double))
 	end
 	
 	operation testAsType():Void is do
 		var o:Object := "toto"
 		var s:String := o.asType(String)
 		assert(s=="toto") // forces evaluation of s, to avoid scala lazy cast weirdness
+		
+		o := "toto".asType(Object)
+		assert(o=="toto")
+		o := "toto".asType(String)
+		assert(o=="toto")
 	end
 	
 	operation testIsDirectInstanceOf():Void is do

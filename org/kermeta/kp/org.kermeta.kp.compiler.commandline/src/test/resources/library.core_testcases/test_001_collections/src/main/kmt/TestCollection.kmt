@@ -564,7 +564,14 @@ class TestCollection inherits TestCase {
 	end
 	
 	operation testSum():Void is do
-		assertTrue(false) // bug 2154
+		var c : Collection[Object] := CollectionStub[Object].new
+		c.add(3)
+		c.add(2)
+		assert(c.sum == 5)
+		c.add("toto")
+		assert(c.sum==void)
+		c.clear
+		assert(c.sum==void)
 	end
 		
 	operation testAsBag():Void is do
