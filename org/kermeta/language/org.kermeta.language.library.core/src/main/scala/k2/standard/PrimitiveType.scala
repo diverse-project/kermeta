@@ -574,13 +574,13 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	 def startsWith(arg0 : java.lang.String) : Boolean = value.startsWith(arg0)
 	 def substring(arg0 : java.lang.Integer) : java.lang.String = value.substring(arg0)
 	 def substring(arg0 : java.lang.Integer, arg1 : java.lang.Integer) : java.lang.String = value.substring(arg0,arg1)
-	 def toCharArray() : Array[Char] = value.toCharArray()
+	 def ktoCharArray() : KermetaSequence[Char] = new RichKermetaSequence[Char](value.toCharArray().toList)
 	 def toLowerCase() : java.lang.String = value.toLowerCase()
 	 def toUpperCase() : java.lang.String = value.toUpperCase()
 	 def trim() : java.lang.String = value.trim()
 
 	 //Add missing methods from Kermeta V1
-	 def allCharacters() : Array[Char] = value.toCharArray()
+     def allCharacters() = ktoCharArray 
 	def append(arg0:java.lang.String) : java.lang.String = {return value+arg0}
 	def contains(arg0 : java.lang.String) : java.lang.Boolean = value.contains(arg0)
 	def elementAt(arg0 : java.lang.Integer) : java.lang.Character = value.charAt(arg0)

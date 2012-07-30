@@ -169,6 +169,7 @@ object TypeEquivalence {
 		str.put("size", "ksize");
         str.put("split", "ksplit");
 		str.put("toDouble", "ktoDouble");
+		str.put("toCharArray","ktoCharArray")
 		methodEquivalence.put("_root_.k2.standard.String", str);
 		methodEquivalence.put("_root_.String", str);
 		methodEquivalence.put("java.lang.String", str);
