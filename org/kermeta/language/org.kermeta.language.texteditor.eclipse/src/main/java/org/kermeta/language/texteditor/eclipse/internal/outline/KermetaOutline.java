@@ -247,7 +247,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 					return;
 				}
 				// ignore branch with wrong package
-				if(((OutlineItem)childO.getData()).fullName().contains(previouslyExpandedItem.packageName)){
+				if(((OutlineItem)childO.getData()).fullName().contains(previouslyExpandedItem.namespace)){
 					reexpandFromPreviousState(previouslyExpandedItem, treeViewerToExpand, childO.getItems());					
 				}
 			}

@@ -58,7 +58,7 @@ public class KermetaOutlineHelper {
 	public OutlineItem[] getClassChildren(Package p,OutlineItem parent){
 		KMPrinter opPrinter = new KMPrinter();
 		for(int i=0; i < p.getOwnedTypeDefinition().size(); i++){
-			if ( p.getOwnedTypeDefinition().get(i).getName().compareTo(parent.label) == 0 &&
+			if ( p.getOwnedTypeDefinition().get(i).getName().compareTo(parent.getLabel()) == 0 &&
 				(p.getOwnedTypeDefinition().get(i) instanceof ClassDefinition)	){
 				ClassDefinition cn = (ClassDefinition) p.getOwnedTypeDefinition().get(i);
 				int size = getClassChildrenCount(cn);
@@ -192,10 +192,10 @@ public class KermetaOutlineHelper {
 		}
 	}
 	public OutlineItem[] updatePackage(OutlineItem it){
-		return getPackageChildren(findPackage(it.getLabel()),it);
+		return getPackageChildren(findPackage(it.fullName()),it);
 	}
 	public OutlineItem[] updateClass(OutlineItem it){
-		return getClassChildren(findPackage(it.getPackageName()),it);
+		return getClassChildren(findPackage(it.getNamespace()),it);
 	}
 	
 	
@@ -222,14 +222,14 @@ public class KermetaOutlineHelper {
 		
 	}
 	public int getPackageChildrenCount(OutlineItem outlineItem) {		
-		Package p = findPackage(outlineItem.getLabel());
+		Package p = findPackage(outlineItem.fullName());
 		return getPackageChildrenCount(p);
 		//return outlineItem.getChildren().length;
 	}
 	public int getClassChildrenCount(OutlineItem outlineItem) {		
-		Package p = findPackage(outlineItem.getLabel());
+		Package p = findPackage(outlineItem.fullName());
 		for(TypeDefinition td : p.getOwnedTypeDefinition()){
-			if ( td.getName().compareTo(outlineItem.label) == 0 && (td instanceof ClassDefinition)	){
+			if ( td.getName().compareTo(outlineItem.fullName()) == 0 && (td instanceof ClassDefinition)	){
 				ClassDefinition cn = (ClassDefinition) td;
 				return getClassChildrenCount(cn);
 			}

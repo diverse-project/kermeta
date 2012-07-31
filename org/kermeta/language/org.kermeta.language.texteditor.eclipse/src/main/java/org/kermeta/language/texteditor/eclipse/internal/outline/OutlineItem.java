@@ -48,7 +48,7 @@ public class OutlineItem {
 	public ItemLocalisation localisation;
 	private Object[] children;
 	protected OutlineItem parent;
-	protected String packageName;
+	protected String namespace;
 	protected String opParameters;
 	public OutlineTypes type = OutlineTypes.DefaultType;
 	
@@ -61,14 +61,14 @@ public class OutlineItem {
 	public OutlineItem(String text, OutlineItem parent, KermetaOutlineHelper helper) {
 		label = text;
 		this.parent = parent;
-		this.packageName = "";
+		this.namespace = "";
 		this.opParameters = "";
 		if (this.parent != null){
-			if (this.parent.getPackageName().compareTo("") != 0){
-				this.packageName = this.parent.getPackageName() + "::" + this.parent.label;
+			if (this.parent.getNamespace().compareTo("") != 0){
+				this.namespace = this.parent.getNamespace() + "::" + this.parent.label;
 			} else {
 				if (this.parent.label.compareTo("KermetaRoot") != 0){
-					this.packageName = this.parent.label;
+					this.namespace = this.parent.label;
 				} 
 			}
 		}
@@ -81,7 +81,7 @@ public class OutlineItem {
 	public OutlineItem(String text, KermetaOutlineHelper helper) {
 		label = text;
 		this.parent = null;
-		this.packageName = "";
+		this.namespace = "";
 		this.opParameters = "";
 		this.helper = helper;
 	}
@@ -89,17 +89,19 @@ public class OutlineItem {
 		if (this.type == OutlineItem.OutlineTypes.Operation){
 	    	return label; 
 	    }
-		
-		if (this.getPackageName().compareTo("") == 0){
+		/*if (this.type == OutlineItem.OutlineTypes.Class){
+	    	return label; 
+	    }*/
+		//if (this.getPackageName().compareTo("") == 0){
 			return label;
-		} else {
+		/*} else {
 			return this.getPackageName() + "::" + label;
-		}
+		}*/
 		
 	    
 	}
-	public String getPackageName(){
-		return this.packageName;
+	public String getNamespace(){
+		return this.namespace;
 	}
 	public Image getImage() {
 		/*
@@ -250,11 +252,16 @@ public class OutlineItem {
 	}
 	
 	public boolean isSimilar(OutlineItem otherItem){
-		return otherItem.packageName.equals(packageName) && otherItem.label.equals(label);
+		return otherItem.namespace.equals(namespace) && otherItem.label.equals(label);
 	}
 	
 	public String fullName(){
-		return packageName+label;
+		if(namespace != null && !namespace.isEmpty()){
+			return namespace+"::"+label;
+		}
+		else{
+			return label;
+		}
 	}
 	
 	public void setLocalisation(ItemLocalisation loc){
