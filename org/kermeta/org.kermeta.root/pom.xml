@@ -14,9 +14,9 @@
 	<name>kermeta.root :: Root for the projects dedicated to kermeta 2</name>
 
 	<properties>
-		<kermeta.version>2.0.4</kermeta.version>
-		<utils.version>2.0.4</utils.version>
-		<traceability.version>2.0.4</traceability.version>
+		<kermeta.version>2.0.5-SNAPSHOT</kermeta.version>
+		<utils.version>2.0.5-SNAPSHOT</utils.version>
+		<traceability.version>2.0.5-SNAPSHOT</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<emf.version>2.7.0</emf.version>
 		<scala.version>2.9.0-1</scala.version>
