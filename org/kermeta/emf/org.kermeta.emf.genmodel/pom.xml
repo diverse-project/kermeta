@@ -8,13 +8,13 @@
     <name>Kermeta :: Emf :: GenModel</name>
     <url>http://maven.apache.org</url>
 
-    <version>2.0.4</version>
+    <version>2.0.5-SNAPSHOT</version>
 	
 	
 	
 	<properties>
 		<emf.version.range>[2.5.0.0,)</emf.version.range>
-		<kermeta.version>2.0.4</kermeta.version>
+		<kermeta.version>2.0.5-SNAPSHOT</kermeta.version>
 		<bundle.vendor>IRISA/INRIA</bundle.vendor>
 	</properties>
 
