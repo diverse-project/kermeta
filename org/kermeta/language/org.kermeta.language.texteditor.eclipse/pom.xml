@@ -37,6 +37,12 @@
 			<artifactId>org.eclipse.core.resources</artifactId>
 			<version>[3.5.2.0,)</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.debug.core</artifactId>
+			<version>[3.5.0.0,)</version>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
@@ -200,6 +206,7 @@
 							org.eclipse.core.runtime,
 							org.eclipse.core.resources,
 							org.eclipse.core.commands,
+							org.eclipse.debug.core,
 							org.eclipse.equinox.registry,
 							org.eclipse.ui,
 							org.eclipse.ui.ide,
