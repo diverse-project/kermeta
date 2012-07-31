@@ -36,15 +36,21 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
 	def removeFromContainer():Unit  = {org.eclipse.emf.ecore.util.EcoreUtil.remove(this)}
 	
 	def invoke(op:org.kermeta.language.structure.Operation , args:k2.standard.KermetaOrderedCol[_<:Any]) : k2.standard.KermetaObject ={
+		var thi:java.lang.Object = this
 	    var operationName = k2.utils.TypeEquivalence.getMethodEquivalence(k2.utils.UTilScala.getQualifiedNameClassKermeta(op.getOwningClass(),"."),op.getName())
 		var optionMeth = this.getClass().getMethods.find(m => m.getName() == operationName
 		    && m.getParameterTypes().length == args.length)
+		if(optionMeth==None && this.isInstanceOf[ScalaWrapper]){
+		  thi = this.asInstanceOf[ScalaWrapper].getValue()
+		  optionMeth = thi.getClass().getMethods.find(m => m.getName() == operationName
+		    && m.getParameterTypes().length == args.length)
+		}
 		optionMeth match{
 		  case None => {throw k2.exceptions.KerRichFactory.createRuntimeError.initialize(op.getName+" with "+args.length+" arguments in class "+this.getMetaClass().getName()+" not found")}
 		  case Some(meth) => {
 			  var argsTab : Array[AnyRef] = args.toArray()
 		    try{
-		      k2.standard.PrimitiveConversion.any2kermeta(meth.invoke(this, argsTab:_*))
+		      k2.standard.PrimitiveConversion.any2kermeta(meth.invoke(thi, argsTab:_*))
 		    } catch {
 		      case e:java.lang.reflect.InvocationTargetException => {throw e.getCause()}
 		    }
