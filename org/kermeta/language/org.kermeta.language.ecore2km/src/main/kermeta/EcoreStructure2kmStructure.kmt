@@ -123,21 +123,33 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 			end
 			
 			// if the containing Class has multiple inheritance then add a From to the first inherited Class (bug #2142)
+			// do that only if the super class actully contains a matching operation
 			if op.eContainingClass.eGenericSuperTypes.size > 1 or op.eContainingClass.eSuperTypes.size > 1 then
+				var containsMatchingOp : Boolean init false
 				var selectedGenericType : EGenericType 
 				if op.eContainingClass.eGenericSuperTypes.size > 1 then 
 					selectedGenericType := 	op.eContainingClass.eGenericSuperTypes.first()
+					// TODO deal with generic classes 
+					// containsMatchingOp := selectedGenericType.eOperations.exists{ superOp | 
+					//	(superOp.name == op.name) and (superOp.eParameters.size == op.eParameters.size)
+					//}
 				end
-				var selectedType : EClassifier
+				var selectedType : EClass
 				if op.eContainingClass.eSuperTypes.size > 1 then
 					selectedType := op.eContainingClass.eSuperTypes.first()
+					containsMatchingOp := selectedType.eOperations.exists{ superOp | 
+						(superOp.name == op.name) and (superOp.eParameters.size == op.eParameters.size)
+					}
 				end 
-				var selectedSuperClassForFrom : UnresolvedType init getUnresolvedType(selectedGenericType, selectedType)
-				var superUnresolvedOperation : UnresolvedOperation init UnresolvedOperation.new.initialize(selectedSuperClassForFrom,op.name)
-				superUnresolvedOperation.containedType.add(selectedSuperClassForFrom)
-				kmOp.superOperation := superUnresolvedOperation
-				kmOp.ownedUnresolvedOperations.add(superUnresolvedOperation)
-			
+				
+				// only if the selected super class contains a matching operation							
+				if containsMatchingOp then
+					var selectedSuperClassForFrom : UnresolvedType init getUnresolvedType(selectedGenericType, selectedType)
+					var superUnresolvedOperation : UnresolvedOperation init UnresolvedOperation.new.initialize(selectedSuperClassForFrom,op.name)
+					superUnresolvedOperation.containedType.add(selectedSuperClassForFrom)
+					kmOp.superOperation := superUnresolvedOperation
+					kmOp.ownedUnresolvedOperations.add(superUnresolvedOperation)
+				end
 			end  
 			
 			op.eContainingClass.targetKermetaObject.asType(ClassDefinition).ownedOperation.add(kmOp)
