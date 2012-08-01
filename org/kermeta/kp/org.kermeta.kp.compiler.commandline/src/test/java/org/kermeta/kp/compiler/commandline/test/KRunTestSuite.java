@@ -39,13 +39,13 @@ public class KRunTestSuite extends TestSuite {
 			
 			boolean mustRun = false;
 			// executable project fileMarker
-			File executableProjectFileMarker = new File(file.getParent()+System.getProperty("file.separator")+"is_executable_test");
+			File executableProjectFileMarker = new File(file.getParent()+System.getProperty("file.separator")+"not_executable_test");
 			if(executableProjectFileMarker.exists()  ){
-					mustRun = true;
+					mustRun = false;
+					System.out.println("Ignoring non executable Test: " + file.getPath());
 			}
 			else{
-				System.out.println("Ignoring non executable Test: " + file.getPath());
-				
+				mustRun = true;
 			}
 			
 			if(singleTest!= null){

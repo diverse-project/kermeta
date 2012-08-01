@@ -39,8 +39,8 @@ public class CompilationTestSuite extends TestSuite {
 		for(File file : files) {
 			boolean mustRun = ! runnableTestOnly;
 			// executable project fileMarker
-			File executableProjectFileMarker = new File(file.getParent()+System.getProperty("file.separator")+"is_executable_test");
-			if(executableProjectFileMarker.exists()  ){
+			File executableProjectFileMarker = new File(file.getParent()+System.getProperty("file.separator")+"not_executable_test");
+			if(!executableProjectFileMarker.exists()  ){
 					mustRun = true;
 			}
 			String testName = file.getPath().replace(folderFullURI,"").replaceAll("\\\\", ".").replaceAll("/", ".").substring(1);
