@@ -28,13 +28,13 @@ import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 
 
 
-public class CommandLineKermetaCompilerTest extends TestCase {
+public class CompilationTest extends TestCase {
 	String kpFile;
 	String targetFolder;
 	String testName;
 
 
-    public CommandLineKermetaCompilerTest(String testName,String kpFile, String targetFolder) {
+    public CompilationTest(String testName,String kpFile, String targetFolder) {
 		super();
 		this.kpFile = kpFile.replaceAll("\\\\","/");
 		this.targetFolder = targetFolder.replaceAll("\\\\","/");
