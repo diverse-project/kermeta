@@ -124,7 +124,7 @@ object Util extends LogAspect {
                 if(!ctx.isFirst){ returnString.append(".") }
                 if(badChar.exists({p=>e.contains(p)}) || keywords.exists(p => p.equals(e))){
                     returnString append "`"+e+"`"
-                    log.debug("Reserved Scala Keyword : {}, backquote protection : ",e)
+                    //log.debug("Reserved Scala Keyword : {}, backquote protection : ",e)
                 } else {
                     returnString append e
                 }
