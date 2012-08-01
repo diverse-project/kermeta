@@ -9,6 +9,9 @@
 package org.kermeta.utils.helpers;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,4 +43,33 @@ public class FileHelpers {
 	public static String URLToStringWithoutFile(final URL url) {
 		return url.getFile();
 	}
+	
+	
+	public static void copyFile(File inputFile, File outputFile) throws IOException{
+    	outputFile.getParentFile().mkdirs();
+    	FileReader in = new FileReader(inputFile);
+        FileWriter out = new FileWriter(outputFile);
+        int c;
+
+        while ((c = in.read()) != -1)
+          out.write(c);
+
+        in.close();
+        out.close();
+    }
+	
+	public static void copyDirectory(File inputFolder, File outputFolder) throws IOException{
+		
+		outputFolder.getParentFile().mkdirs();
+		for(File innerFile : inputFolder.listFiles()){
+			if(innerFile.isDirectory()){
+				copyDirectory(innerFile, new File(outputFolder.getCanonicalPath()+"/"+innerFile.getName()));
+			}
+			if(innerFile.isFile()){
+				copyFile(innerFile, new File(outputFolder.getCanonicalPath()+"/"+innerFile.getName()));
+			}
+		}
+		
+    }
+	
 }
