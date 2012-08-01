@@ -116,13 +116,19 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 		Exception e = new Exception();
 		
 		StackTraceElement[] stackTraceElements = e.getStackTrace();
-		if (stackTraceElements.length > 2){
-			return stackTraceElements[2].toString();
+		
+		// return first caller which isn't getCallerString or log
+		for(StackTraceElement stackTraceElement : stackTraceElements){
+			if(! (	stackTraceElement.getMethodName().contains("log") || 
+					stackTraceElement.getClassName().contains("org.kermeta.utils.systemservices.api.messaging"))){
+				
+				return stackTraceElement.toString();
+			}
 		}
-		else {
-			// not able to get the caller 
-			return "";		
-		}
+		
+		
+		return "";		
+		
 	}
 
 	@Override
