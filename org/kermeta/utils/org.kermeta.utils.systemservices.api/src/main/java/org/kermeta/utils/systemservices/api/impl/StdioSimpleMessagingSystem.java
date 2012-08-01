@@ -120,7 +120,7 @@ public class StdioSimpleMessagingSystem extends MessagingSystem {
 		// return first caller which isn't getCallerString or log
 		for(StackTraceElement stackTraceElement : stackTraceElements){
 			if(! (	stackTraceElement.getMethodName().contains("log") || 
-					stackTraceElement.getClassName().contains("org.kermeta.utils.systemservices.api.messaging"))){
+					stackTraceElement.getClassName().contains("org.kermeta.utils.systemservices.api"))){
 				
 				return stackTraceElement.toString();
 			}
