@@ -267,7 +267,8 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
             res.append("this." + kergetName + "().addAll(`~value`)\n")
         } else {
           // Upper == 1
-          if(thi.getOpposite()!=null && thi.getOpposite().asInstanceOf[Property].getUpper()==1){
+          if(thi.getOpposite()!=null && thi.getOpposite().asInstanceOf[Property].getUpper()==1
+              && !Util.hasEcoreTag(thi)&& !Util.hasEcoreTag(thi.getOpposite())){
             var oppKersetName = prefix+"set"+thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase()+thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
             var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
             var oppType = new StringBuilder ; visit(thi.getOpposite().asInstanceOf[Property].getType(),oppType)
