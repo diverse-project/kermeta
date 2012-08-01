@@ -5,7 +5,12 @@ using kermeta::io::StdIO => stdio
 package mainPackage{
 	class MainClass 
 	{
-		operation mainOperation(arg1 : String, arg2 : String) : Void is do 
+		@main ""
+		operation mainOperation() : Void is do
+			 mainOperationWithArg("arg1", "arg2")
+		end
+		@main ""
+		operation mainOperationWithArg(arg1 : String, arg2 : String) : Void is do 
 			stdio.writeln(arg1)
 			stdio.writeln(arg2)
 			//true.andThen{x|false}
