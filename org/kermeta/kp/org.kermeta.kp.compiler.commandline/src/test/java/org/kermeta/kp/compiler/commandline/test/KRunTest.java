@@ -34,6 +34,7 @@ import org.kermeta.language.helper.tests.utils.ErrorAwareMessagingSystem;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.FileExtensionComparator;
+import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 
 
@@ -79,6 +80,9 @@ public class KRunTest extends TestCase {
 				targetFolder+"scala/", targetFolder+"classes/", 
 				targetFolder+"genmodel/", 
 				targetFolder+"java/", targetFolder+"emfclasses/", targetFolder+"resources/");
+		
+		// copy resources in class folder to enable reflexivity
+		FileHelpers.copyDirectory(new File(targetFolder+"resources/"), new File(targetFolder+"classes/"));
 		compiler.setModelingUnitLoaders(getDefaultMuLoaders());
 		
 		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
