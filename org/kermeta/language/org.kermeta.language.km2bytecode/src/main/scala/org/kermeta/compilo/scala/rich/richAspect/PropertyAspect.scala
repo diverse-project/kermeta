@@ -242,32 +242,48 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       } /*else if ("class_".equals(currentname)){
               currentname = "class"
               }*/
-      //println(thi.getName)
-      res.append("def " + GlobalConfiguration.scalaPrefix)
-      res.append(thi.getName + "_=(")
+
+      def kersetName : String = prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+      def kergetName : String = prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+      var scalaName = GlobalConfiguration.scalaPrefix+thi.getName()
+      
+      res.append("def " + scalaName + "_=(")
       res.append("`~value` : ")
       var listType = new StringBuilder
       getListorType(thi, listType)
       res.append(listType.toString)
-      res.append(")={")
+      res.append("):Unit={")
+      
       if (thi.getGetterBody == null && thi.getSetterBody == null) {
-        //res.append(")={thi.set" + thi.getName.substring(0,1).toUpperCase + thi.getName.substring(1,thi.getName.size) + "(arg)" + "}")
         if (thi.getUpper > 1 || thi.getUpper == -1) {
           //Cas des collections uml
           if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) {
             currentname = getUmlExtension(thi)
           }
-          res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().clear\n")
+          res.append("this." + kergetName + "().clear\n")
           if (isCollectionOfObject(listType.toString) && Util.hasEcoreTag(thi))
             res.append("`~value`.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n")
           else
-            res.append("this." + prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().addAll(`~value`)\n")
+            res.append("this." + kergetName + "().addAll(`~value`)\n")
         } else {
-          res.append("this." + prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "(`~value`)")
+          // Upper == 1
+          if(thi.getOpposite()!=null && thi.getOpposite().asInstanceOf[Property].getUpper()==1){
+            var oppKersetName = prefix+"set"+thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase()+thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
+            var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
+            var oppType = new StringBuilder ; visit(thi.getOpposite().asInstanceOf[Property].getType(),oppType)
+            
+            res.append("\n  if(this."+ kergetName +"!=null)\n")
+            res.append("    this."+ kergetName +"." + oppKersetName +"(null.asInstanceOf[" + oppType + "])\n")
+            res.append("  if(`~value`!=null){\n")
+            res.append("    `~value`."+ oppScalaName +"=null.asInstanceOf[" + oppType + "]\n")
+            res.append("    `~value`."+ oppKersetName +"(this)\n")
+            res.append("  }\n")
+            res.append("  ")
+          }
+          res.append("this." + kersetName + "(`~value`)")
         }
       } else {
         if (thi.getSetterBody != null) {
-
           visit(thi.getSetterBody, res)
         }
 
