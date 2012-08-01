@@ -42,7 +42,9 @@ public class ErrorAwareMessagingSystem extends StdioSimpleMessagingSystem {
 	public void log(Kind msgKind, String message, String messageGroup,
 			Throwable throwable) {
 		StringWriter sw = new StringWriter();
-		throwable.printStackTrace(new PrintWriter(sw));
+		if(throwable != null){
+			throwable.printStackTrace(new PrintWriter(sw));
+		}
 		String stackTrace = sw.toString();
 		System.out.println(getKindString(msgKind)+" [" +messageGroup + "] " + message + " "+getCallerString()+"\n"+ stackTrace);
 		switch (msgKind) {
