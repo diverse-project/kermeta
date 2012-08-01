@@ -1,7 +1,12 @@
 package pkg{
 	class MultiInherit{
 		@main ""
-		operation main(str : kermeta::standard::String) : kermeta::standard::Void is do
+		operation main() : kermeta::standard::Void is do
+			var ct : pkg::CapitalText init pkg::CapitalText.new
+			ct.addOp("coucou")
+		end
+		@main ""
+		operation main2(str : kermeta::standard::String) : kermeta::standard::Void is do
 			var ct : pkg::CapitalText init pkg::CapitalText.new
 			ct.addOp("coucou")
 		end
