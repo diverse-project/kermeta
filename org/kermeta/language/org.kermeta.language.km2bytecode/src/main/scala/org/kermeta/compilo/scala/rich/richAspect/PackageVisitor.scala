@@ -153,6 +153,10 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     }
     visit(thi.getTarget(), res)
     res.append(" = ")
+    if (thi.getIsCast()!= null && thi.getIsCast().booleanValue()) {
+      if(isCompiledToScalaType(thi.getTarget().getStaticType())&&thi.getValue().getStaticType()!=thi.getTarget().getStaticType)
+        res.append("_root_.k2.utils.UTilScala.getValue")
+    }
     res append "("
     visit(thi.getValue(), res)
     res append ")"
