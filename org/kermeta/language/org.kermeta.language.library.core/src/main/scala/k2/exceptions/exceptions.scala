@@ -17,7 +17,7 @@ trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ec
     // removing junk internal call stack from init to fillInStackTrace
     setStackTrace(getStackTrace().drop(4)) 
     
-	var message:String="Exception";
+	var message:String=null;
 	var nestedException:Exception=null; 
 	
 	/**
@@ -81,17 +81,20 @@ trait ExceptionAspect extends _root_.java.lang.Throwable with org.eclipse.emf.ec
 	  this
 	}
 }  
+class RichException extends Exception
+
 trait RuntimeErrorAspect extends Exception{
-  message="RuntimeError"
   var expression:Expression=null;
 }
 trait RuntimeError extends RuntimeErrorAspect{
 }
+class RichRuntimeError extends RuntimeError
 
 trait CallOnVoidTargetAspect extends Exception{
 }
 trait CallOnVoidTarget extends CallOnVoidTargetAspect{
 }
+class RichCallOnVoidTarget extends CallOnVoidTarget
 
 
 trait TypeCastErrorAspect extends Exception{
@@ -99,6 +102,7 @@ trait TypeCastErrorAspect extends Exception{
 
 trait TypeCastError extends TypeCastErrorAspect{
 }
+class RichTypeCastError extends TypeCastError
 
 
 trait NotImplementedExceptionAspect extends Exception{
@@ -106,6 +110,7 @@ trait NotImplementedExceptionAspect extends Exception{
 
 trait NotImplementedException extends NotImplementedExceptionAspect{
 }
+class RichNotImplementedException extends NotImplementedException
 
 
 trait UpperBoundReachedErrorAspect extends Exception{
@@ -113,6 +118,7 @@ trait UpperBoundReachedErrorAspect extends Exception{
 
 trait UpperBoundReachedError extends UpperBoundReachedErrorAspect{
 }
+class RichUpperBoundReachedError extends UpperBoundReachedError
 
 
 trait AbstractClassInstantiationErrorAspect extends Exception{
@@ -120,6 +126,7 @@ trait AbstractClassInstantiationErrorAspect extends Exception{
 
 trait AbstractClassInstantiationError extends AbstractClassInstantiationErrorAspect{
 }
+class RichAbstractClassInstantiationError extends AbstractClassInstantiationError
 
 
 trait IncompatibleTypeErrorAspect extends Exception{
@@ -127,6 +134,7 @@ trait IncompatibleTypeErrorAspect extends Exception{
 
 trait IncompatibleTypeError extends IncompatibleTypeErrorAspect{
 }
+class RichIncompatibleTypeError extends IncompatibleTypeError
 
 
 
@@ -135,62 +143,70 @@ trait DivisionByZeroAspect extends Exception{
 
 trait DivisionByZero extends DivisionByZeroAspect{
 }
+class RichDivisionByZero extends DivisionByZero
 
 
 trait OverflowErrorAspect extends Exception{
 }
 trait OverflowError extends OverflowErrorAspect{
 }
+class RichOverflowError extends OverflowError
 
 
 trait VoidOperandErrorAspect extends Exception{
 }
 trait VoidOperandError extends VoidOperandErrorAspect{
 }
+class RichVoidOperandError extends VoidOperandError
 
 
 trait StringIndexOutOfBoundAspect extends Exception{
 }
 trait StringIndexOutOfBound extends StringIndexOutOfBoundAspect{
 }
+class RichStringIndexOutOfBound extends StringIndexOutOfBound
 
 
 trait StringFormatExceptionAspect extends Exception{
 }
 trait StringFormatException extends StringFormatExceptionAspect{
 }
+class RichStringFormatException extends StringFormatException
 
 
 trait IndexOutOfBoundAspect extends Exception{
-  message = "IndexOutOfBound"
 }
 trait IndexOutOfBound extends IndexOutOfBoundAspect{
 }
+class RichIndexOutOfBound extends IndexOutOfBound
 
 
 trait EmptyCollectionAspect extends Exception{
-  message="EmptyCollection"
 }
 trait EmptyCollection extends EmptyCollectionAspect{
 }
+class RichEmptyCollection extends EmptyCollection
 
 
 trait IteratorIsOffAspect extends Exception{
 }
 trait IteratorIsOff extends IteratorIsOffAspect{
 }
+class RichIteratorIsOff extends IteratorIsOff
 
 
 trait IOExceptionAspect extends Exception{
 }
 trait IOException extends IOExceptionAspect{
 }
+class RichIOException extends IOException
 
 
 trait FileNotFoundExceptionAspect extends Exception{
 }
 trait FileNotFoundException extends FileNotFoundExceptionAspect{
 }
+class RichFileNotFoundException extends FileNotFoundException
 
 
 trait ConstraintViolatedExceptionAspect extends Exception{
@@ -205,6 +221,7 @@ trait ConstraintViolatedExceptionAspect extends Exception{
 
 trait ConstraintViolatedException extends ConstraintViolatedExceptionAspect{
 }
+class RichConstraintViolatedException extends ConstraintViolatedException
 
 
 
@@ -212,29 +229,28 @@ trait ConstraintViolatedPreAspect extends ConstraintViolatedException{
 }
 trait ConstraintViolatedPre extends ConstraintViolatedPreAspect{
 }
+class RichConstraintViolatedPre extends ConstraintViolatedPre
 
 
 trait ConstraintViolatedPostAspect extends ConstraintViolatedException{
 }
 trait ConstraintViolatedPost extends ConstraintViolatedPostAspect{
 }
+class RichConstraintViolatedPost extends ConstraintViolatedPost 
 
 
 trait ConstraintViolatedInvAspect extends ConstraintViolatedException{
-  message="ConstraintViolatedInv"
-/*  var failedConstraint : Constraint = null;
-  def ScalafailedConstraint : Constraint={return this.failedConstraint}
-  def ScalafailedConstraint_=(arg : Constraint)={failedConstraint  = arg}*/
 }
 
 trait ConstraintViolatedInv extends ConstraintViolatedInvAspect{
 }
-
+class RichConstraintViolatedInv extends ConstraintViolatedInv 
 
 trait ResourceLoadExceptionAspect extends Exception{
 }
 trait ResourceLoadException extends ResourceLoadExceptionAspect{
 }
+class RichResourceLoadException extends ResourceLoadException
 
 
 trait ResourceSaveExceptionAspect extends Exception{
@@ -242,36 +258,42 @@ var failedWhileSaving:Object= None.get;
 }
 trait ResourceSaveException extends ResourceSaveExceptionAspect{
 }
+class RichResourceSaveException extends ResourceSaveException
 
 
 trait ResourceMixedLevelsExceptionAspect extends Exception{
 }
 trait ResourceMixedLevelsException extends ResourceMixedLevelsExceptionAspect{
 }
+class RichResourceMixedLevelsException extends ResourceMixedLevelsException
 
 
 trait ResourceCreateExceptionAspect extends Exception{
 }
 trait ResourceCreateException extends ResourceCreateExceptionAspect{
 }
+class RichResourceCreateException extends ResourceCreateException
 
 
 trait ResourceUnconformityExceptionAspect extends Exception{
 }
 trait ResourceUnconformityException extends ResourceUnconformityExceptionAspect{
 }
+class RichResourceUnconformityException extends ResourceUnconformityException
 
 
 trait UnregisteredMetamodelExceptionAspect extends Exception{
 }
 trait UnregisteredMetamodelException extends UnregisteredMetamodelExceptionAspect{
 }
+class RichUnregisteredMetamodelException extends UnregisteredMetamodelException
 
 
 trait DynamicExpressionExceptionAspect extends Exception{
 }
 trait DynamicExpressionException extends DynamicExpressionExceptionAspect{
 }
+class RichDynamicExpressionException extends DynamicExpressionException
 
 trait ConstraintsDiagnosticAspect extends Exception{
     message="ConstraintsDiagnostic"
@@ -306,6 +328,6 @@ trait ConstraintsDiagnosticAspect extends Exception{
 trait ConstraintsDiagnostic extends ConstraintsDiagnosticAspect{
 
 }
-
+class RichConstraintsDiagnostic extends ConstraintsDiagnostic
 
 

@@ -181,7 +181,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
     if(inv !=  null ){
       for(cond <- inv){
         if(!cond._2()){
-          var constraintException = k2.exceptions.KerRichFactory.createConstraintViolatedInvException
+          var constraintException = k2.exceptions.KerRichFactory.createConstraintViolatedInv
           constraintException.message = "Contraint Invariant Exception "+cond._1
           throw constraintException
         }
@@ -194,7 +194,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
     if(inv !=  null ){
       for(cond <- inv){
         if(!cond._2()){
-          var constraintException = k2.exceptions.KerRichFactory.createConstraintViolatedInvException
+          var constraintException = k2.exceptions.KerRichFactory.createConstraintViolatedInv
           constraintException.message = "Contraint Invariant Exception "+cond._1
           constraintDiagnostic.add(constraintException)
         }
@@ -234,7 +234,7 @@ trait KermetaObject extends org.eclipse.emf.ecore.EObject{
       return true
     else
     {
-       var ex = k2.exceptions.KerRichFactory.createConstraintViolatedInvException
+       var ex = k2.exceptions.KerRichFactory.createConstraintViolatedInv
       ex.failedConstraint =invariant
       ex.constraintAppliedTo = this
       throw ex
