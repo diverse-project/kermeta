@@ -809,99 +809,106 @@ public class KermetaCompiler {
 			// ignore dependencies that are used only for importing sources or for importing a merged km
 			if(! dep.isIgnoreByteCode() && !dep.isSourceOnly()){
 				// for each dependency use the first URL that works			
-				for(String dependencyURLWithVariable : dep.getUrl()){
-					String dependencyURL = varExpander.expandSimpleVariables(dependencyURLWithVariable);
-					// try to convert it into a file URI
-					java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURL));
-					if(fileURI != null){					
-						dependencyURL = fileURI.toString();
-					}
-					if (dependencyURLWithVariable.contains("${")) {
-						// deal with variable expansion
-						logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", LOG_MESSAGE_GROUP);
-					} else {
-						logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-					}
-					try {
-						URL jarURL = new URL(dependencyURL);
-						if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
-							// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
-							jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
-						}
-						if( jarURL.getProtocol().equals("file")){ 
-							File theFile = new File(jarURL.toURI());
-							if (theFile!=null) {
-								if(theFile.exists()){
-									if(theFile.getName().equals("bundlefile")){
-										//some version of scala compiler doesn't accept classpath to jar that doesn't end with .jar
-										// so bundlefile that are used by OSGI doesn't works correctly
-										// create a copy with the correct name
-										
-										File outFile = new File(java.net.URI.create(jarURL+".jar"));
-										if(!outFile.exists()){
-											// copy the file to have the correct extension
-											InputStream inputStream = new FileInputStream(theFile);					
-											OutputStream out = new FileOutputStream(outFile);
-											 
-											int read = 0;
-											byte[] bytes = new byte[1024];
-										 
-											while ((read = inputStream.read(bytes)) != -1) {
-												out.write(bytes, 0, read);
-											}
-										 
-											inputStream.close();
-											out.flush();
-											out.close();
-										}
-										theFile = outFile;
-									}
-									result.add(theFile.getAbsolutePath());
-								}
-								else{
-									// try next URL fo this dependency
-									continue;
-								}
-							}
-						
-						}
-						else if(jarURL.getProtocol().equals("mvn")){
-							File theFile;
-							//logger.debug("aether retreiveing : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-							AetherUtil aetherUtil = new AetherUtil(logger,getMainProgressGroup());
-							try{
-								theFile = aetherUtil.resolveMavenArtifact(jarURL.toString(), "http://maven.inria.fr/artifactory/repo");
-								if(theFile.exists()){
-									result.add(theFile.getAbsolutePath());
-									//logger.debug("Retreived : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-								}
-								else{
-									logger.debug("File not found using aether : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
-									// try next URL fo this dependency
-									continue;
-								}
-							}
-							catch(Throwable e){
-								logger.error("File not found using aether : " + dependencyURLWithVariable +" "+e.getMessage(), LOG_MESSAGE_GROUP,e);
-							}
-						}
-					} catch (URISyntaxException e) {
-						// ignore URI that cannot be translated into a local file ...
-						continue;
-						// TODO deal with mvn url in convertSpecialURItoFileURI
-					}
-					catch (java.net.MalformedURLException e) {
-						// ignore URI that cannot be translated into a local file ...
-						continue;
-						// TODO deal with mvn url in convertSpecialURItoFileURI
-					}
+				String depResolvedURL = getResolvedDependencyURL(dep, varExpander);
+				if(depResolvedURL != null){
+					result.add(depResolvedURL);
 				}
 			}
 		}
 		return result;
 	}
 	
-	
+	public String getResolvedDependencyURL(Dependency dep,  KpVariableExpander varExpander)  throws IOException {
+		// for a dependency use the first URL that works			
+		for(String dependencyURLWithVariable : dep.getUrl()){
+			String dependencyURL = varExpander.expandSimpleVariables(dependencyURLWithVariable);
+			// try to convert it into a file URI
+			java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(dependencyURL));
+			if(fileURI != null){					
+				dependencyURL = fileURI.toString();
+			}
+			if (dependencyURLWithVariable.contains("${")) {
+				// deal with variable expansion
+				logger.debug("dependency : " + dependencyURLWithVariable + " ( expanded to : " + dependencyURL + ")", LOG_MESSAGE_GROUP);
+			} else {
+				logger.debug("dependency : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+			}
+			try {
+				URL jarURL = new URL(dependencyURL);
+				if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
+					// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
+					jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
+				}
+				if( jarURL.getProtocol().equals("file")){ 
+					File theFile = new File(jarURL.toURI());
+					if (theFile!=null) {
+						if(theFile.exists()){
+							if(theFile.getName().equals("bundlefile")){
+								//some version of scala compiler doesn't accept classpath to jar that doesn't end with .jar
+								// so bundlefile that are used by OSGI doesn't works correctly
+								// create a copy with the correct name
+								
+								File outFile = new File(java.net.URI.create(jarURL+".jar"));
+								if(!outFile.exists()){
+									// copy the file to have the correct extension
+									InputStream inputStream = new FileInputStream(theFile);					
+									OutputStream out = new FileOutputStream(outFile);
+									 
+									int read = 0;
+									byte[] bytes = new byte[1024];
+								 
+									while ((read = inputStream.read(bytes)) != -1) {
+										out.write(bytes, 0, read);
+									}
+								 
+									inputStream.close();
+									out.flush();
+									out.close();
+								}
+								theFile = outFile;
+							}
+							return theFile.getAbsolutePath();
+						}
+						else{
+							// try next URL fo this dependency
+							continue;
+						}
+					}
+				
+				}
+				else if(jarURL.getProtocol().equals("mvn")){
+					File theFile;
+					//logger.debug("aether retreiveing : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+					AetherUtil aetherUtil = new AetherUtil(logger,getMainProgressGroup());
+					try{
+						theFile = aetherUtil.resolveMavenArtifact(jarURL.toString(), "http://maven.inria.fr/artifactory/repo");
+						if(theFile.exists()){
+							return theFile.getAbsolutePath();
+							//logger.debug("Retreived : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+						}
+						else{
+							logger.debug("File not found using aether : " + dependencyURLWithVariable, LOG_MESSAGE_GROUP);
+							// try next URL fo this dependency
+							continue;
+						}
+					}
+					catch(Throwable e){
+						logger.error("File not found using aether : " + dependencyURLWithVariable +" "+e.getMessage(), LOG_MESSAGE_GROUP,e);
+					}
+				}
+			} catch (URISyntaxException e) {
+				// ignore URI that cannot be translated into a local file ...
+				continue;
+				// TODO deal with mvn url in convertSpecialURItoFileURI
+			}
+			catch (java.net.MalformedURLException e) {
+				// ignore URI that cannot be translated into a local file ...
+				continue;
+				// TODO deal with mvn url in convertSpecialURItoFileURI
+			}
+		}
+		return null;
+	}
 
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(KermetaProject kp, List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
