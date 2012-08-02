@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.kermeta.language</groupId>
         <artifactId>language.root</artifactId>
-        <version>2.0.1-BETA3</version>
+        <version>2.0.4</version>
     </parent>
 	<dependencies>
 		<dependency>
@@ -66,6 +66,58 @@
                     </instructions>
                 </configuration>
             </plugin>
+            
+            <!-- allow to synchronize eclipse project configuration with maven configuration -->
+            <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.9</version>
+			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
+			    <configuration>
+			      <downloadSources>true</downloadSources>
+			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
+			      <projectnatures>
+			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+			        <projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature>
+			      </projectnatures>
+			      <buildcommands>
+			        <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
+			      </buildcommands>
+			      <classpathContainers>
+			        <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
+			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			      </classpathContainers>
+			      <excludes>
+			        <exclude>org.scala-lang:scala-library</exclude>
+			        <!-- <exclude>org.scala-lang:scala-compiler</exclude> -->
+			      </excludes>
+			      <sourceIncludes>
+			        <sourceInclude>**/*.scala</sourceInclude>
+			        <sourceInclude>**/*.java</sourceInclude>
+			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
+			    </configuration>
+			  </plugin>
+			  <plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>build-helper-maven-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <id>add-source</id>
+		            <phase>generate-sources</phase>
+		            <goals>
+		              <goal>add-source</goal>
+		            </goals>
+		            <configuration>
+		              <sources>
+		                <source>src/main/scala</source>
+		              </sources>
+		            </configuration>
+		          </execution>
+		        </executions>
+		      </plugin>
         </plugins>
     </build>
 
