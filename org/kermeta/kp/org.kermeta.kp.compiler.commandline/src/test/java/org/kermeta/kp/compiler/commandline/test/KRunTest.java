@@ -101,6 +101,7 @@ public class KRunTest extends TestCase {
 		ArrayList<String> fullClassPath = new ArrayList<String>();
 		fullClassPath.addAll(additionalClassPath);
 		fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, varExpander));
+		fullClassPath.add(targetFolder+"emfclasses/");
 		
 		ErrorAwareMessagingSystem errorAwareLogger = new ErrorAwareMessagingSystem();
 		KermetaRunner runner = new KermetaRunner(targetFolder+"classes/", 
