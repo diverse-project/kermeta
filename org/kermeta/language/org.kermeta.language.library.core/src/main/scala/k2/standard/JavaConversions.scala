@@ -193,7 +193,7 @@ import org.eclipse.emf.common.util.UniqueEList
       
       def intersectionWithSet(elements:KermetaSet[A]):KermetaSet[A]
       
-      def removeFromOid(elementOid:Int):Unit
+      def removeFromOid(element : A):Unit
       
       def removeOne(element:A):Unit
       

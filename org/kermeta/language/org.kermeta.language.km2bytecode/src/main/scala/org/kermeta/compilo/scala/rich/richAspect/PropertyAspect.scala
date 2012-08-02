@@ -214,10 +214,10 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
       //            res.append("\n}")
     }
-    var typestring = new StringBuilder
+    /*var typestring = new StringBuilder
     getListorType(thi, typestring)
     res.append(".asInstanceOf[" + typestring.toString + "]")
-    res.append("\n")
+    */res.append("\n")
 
   }
 
@@ -297,12 +297,17 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
             res.append("    `~value`."+ oppKersetName +"(this)\n")
             res.append("  }\n")
             res.append("  ")
-          }
-          /*if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi)&& !Util.hasEcoreTag(thi.getOpposite())){
+          } else if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi)&& !Util.hasEcoreTag(thi.getOpposite())){
             // Opposite Upper > 1 or opposite Upper == -1
+            var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
+
             res.append("\n  if(this."+kergetName+"!=null)\n")
-            res.append("    this."+kergetName+"."+"remove=FromOid(this.oid)")
-          }*/
+            res.append("    this."+kergetName+"."+oppScalaName+".remove(this)\n")
+            res.append("  if(`~value`!=null)\n")
+            res.append("    `~value`."+oppScalaName+".add(this)\n")
+            res.append("  else\n")
+            res.append("    ")
+          }
           res.append("this." + kersetName + "(`~value`)")
         }
       } else {

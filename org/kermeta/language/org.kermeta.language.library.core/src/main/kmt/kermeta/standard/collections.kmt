@@ -559,7 +559,7 @@ class Bag[G] inherits Collection[G]
 	/**
 	 * Removes the element identified by the provided Oid from the Bag
 	 */
-	operation removeFromOid(elementOid : Integer) : Void 
+	operation removeFromOid(element : G) : Void 
 	is do
 
 	end
