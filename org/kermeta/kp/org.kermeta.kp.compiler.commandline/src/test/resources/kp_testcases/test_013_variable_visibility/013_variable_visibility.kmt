@@ -1,16 +1,51 @@
 using kermeta::standard
+using kermeta::io::StdIO => stdio
 package root_package{
 
-	class Foo
+	class Foo inherits kermeta::kunit::TestCase
 	{
 		reference x : Integer
+		
 		operation bar() : Void is do
-
+			x := 0
+			testReferenceCrossTypeVisibility()
+			testVarCrossTypeVisibility()
+			testRefVarVisibility()
+		end
+		
+		operation testReferenceCrossTypeVisibility() : Void is do
+			x := 1
 			do
 				var x:String
-			
+				x := "deux"
+				stdio.writeln("String x =  " + x.toString)
+				assert(x == "deux")
 			end 
-			x.plus(2)
+			x := x.plus(2)
+			stdio.writeln("Integer x =  " + x.toString)
+			assert(x == 3)
+		end
+		
+		operation testVarCrossTypeVisibility() : Void is do
+			var y : Integer := 1
+			do
+				var y:String
+				y := "deux"
+				stdio.writeln("String y =  " + y.toString)
+				assert(y == "deux")
+			end 
+			y := y.plus(2)
+			stdio.writeln("Integer y =  " + y.toString)
+			assert(y == 3)
+		end
+		
+		operation testRefVarVisibility() : Void is do
+			self.x := 0
+			var x : Integer := 1
+			assert(self.x == 0)
+			x := x + 2			
+			assert(x == 3)
+			assert(self.x == 0)
 		end
 	}
 }

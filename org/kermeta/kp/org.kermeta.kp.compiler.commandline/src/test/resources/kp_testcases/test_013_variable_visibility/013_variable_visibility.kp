@@ -8,4 +8,5 @@ sources={
 }
 dependencies={
 	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
+	dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/LATEST"
 }
