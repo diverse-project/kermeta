@@ -134,7 +134,7 @@ class LambdaTester inherits kermeta::kunit::Assert
 	do
 		var f: <Void -> Void>
 		var passed : Boolean init false
-		f := {i : Void | StdIO.writeln("testLambdaWithoutParam")
+		f := {i : Void | StdIO.writeln("testLambdaWithoutParam1")
 				passed := true
 				void
 			}       
@@ -149,7 +149,7 @@ class LambdaTester inherits kermeta::kunit::Assert
 	do
 		var f: <Void -> Void>
 		var passed : Boolean init false
-		f := {i : Void | StdIO.writeln("testLambdaWithoutParam")
+		f := {i : Void | StdIO.writeln("testLambdaWithoutParam2")
 				passed := true
 				void
 			}       
@@ -170,7 +170,7 @@ class LambdaTester inherits kermeta::kunit::Assert
 			}       
 				
 		f // "Hello" is not displayed
-		assertTrueWithMsg(passed,"function f not called !")
+		assertFalseWithMsg(passed,"function f must not be called ! (testLambdaWithoutParam3)")
 
 	end
 
