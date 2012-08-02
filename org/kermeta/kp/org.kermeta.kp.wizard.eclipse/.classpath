@@ -1,9 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src"/>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="icons"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="src" path="src" including="**/*.scala|**/*.java|**/*.java"/>
+  <classpathentry kind="src" path="." including="plugin.xml|plugin.properties" excluding="**/*.java"/>
+  <classpathentry kind="src" path="icons" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.texteditor.eclipse.nature/2.0.5-SNAPSHOT/language.texteditor.eclipse.nature-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.jobs/3.5.1.R36x_v20100824/org.eclipse.core.jobs-3.5.1.R36x_v20100824.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.resources/3.6.1.R36x_v20110131-1630/org.eclipse.core.resources-3.6.1.R36x_v20110131-1630.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.runtime/3.6.0.v20100505/org.eclipse.core.runtime-3.6.0.v20100505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.debug.ui/3.6.3.v20101201_r362/org.eclipse.debug.ui-3.6.3.v20101201_r362.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.common/3.6.0.v20100503/org.eclipse.equinox.common-3.6.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.preferences/3.3.0.v20100503/org.eclipse.equinox.preferences-3.3.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.registry/3.5.0.v20100503/org.eclipse.equinox.registry-3.5.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jdt.ui/3.6.2.r362_v20110203/org.eclipse.jdt.ui-3.6.2.r362_v20110203.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jface/3.6.2.M20110210-1200/org.eclipse.jface-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.swt/3.6.2.v3659c/org.eclipse.swt-3.6.2.v3659c.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.swt.gtk.linux.x86_64/3.6.2.v3659b/org.eclipse.swt.gtk.linux.x86_64-3.6.2.v3659b.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui/3.6.2.M20110203-1100/org.eclipse.ui-3.6.2.M20110203-1100.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.console/3.5.0.v20100526/org.eclipse.ui.console-3.5.0.v20100526.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.ide/3.6.2.M20101201-0800/org.eclipse.ui.ide-3.6.2.M20101201-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.workbench/3.6.2.M20110210-1200/org.eclipse.ui.workbench-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar" sourcepath="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers.eclipse.jface/2.0.5-SNAPSHOT/utils.helpers.eclipse.jface-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 </classpath>
