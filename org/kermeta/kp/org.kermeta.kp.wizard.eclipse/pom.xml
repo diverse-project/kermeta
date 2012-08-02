@@ -34,6 +34,10 @@
 				<directory>icons</directory>
 				<targetPath>icons</targetPath>
 			</resource>
+			<resource>
+				<directory>templates</directory>
+				<targetPath>templates</targetPath>
+			</resource>
 		</resources>
         <plugins>
 <!--
@@ -109,7 +113,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>org.kermeta.kp.wizard.eclipse; singleton=true</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.kermeta.kp.wizard.eclipse; singleton:=true</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
                         <Bundle-Activator>org.kermeta.kp.wizard.eclipse.Activator</Bundle-Activator>
@@ -133,6 +137,7 @@
                         	*
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
                     </instructions>
                 </configuration>
             </plugin>
@@ -262,6 +267,16 @@
         <dependency>
         	<groupId>org.kermeta.utils</groupId>
         	<artifactId>utils.helpers.eclipse.jface</artifactId>
+        	<version>${utils.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.kermeta.kp</groupId>
+        	<artifactId>kp.loader.kp</artifactId>
+        	<version>${kermeta.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.kermeta.utils</groupId>
+        	<artifactId>utils.systemservices.eclipse</artifactId>
         	<version>${utils.version}</version>
         </dependency>
     </dependencies>

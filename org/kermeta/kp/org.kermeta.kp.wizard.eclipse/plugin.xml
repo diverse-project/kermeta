@@ -39,5 +39,29 @@
             class="org.kermeta.kp.wizard.eclipse.preferences.PreferenceInitializer">
       </initializer>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.kp.wizard.eclipse.generatePOM"
+            nameFilter="*.kp"
+            objectClass="org.eclipse.core.resources.IFile">         
+         <menu
+              icon="platform:/plugin/org.kermeta.kp.launcher.eclipse/icons/kermeta.gif"
+              id="org.kermeta.language.ui.menu"
+              label="Kermeta 2"
+              path="additions">
+           <separator name="kermetagroup1"/>
+           <separator name="kermetagroup2"/>
+           <separator name="kermetagroup3"/>
+         </menu>
+         <action
+               class="org.kermeta.kp.wizard.eclipse.popup.actions.GeneratePOMAction"
+               enablesFor="1"
+               id="org.kermeta.kp.wizard.eclipse.newAction"
+               label="generate pom.xml"
+               menubarPath="org.kermeta.language.ui.menu/kermetagroup2">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>
