@@ -90,7 +90,7 @@ object UTilScala {
     
     def isNotEqual(o:k2.standard.KermetaObject,o1:k2.standard.KermetaObject):java.lang.Boolean={
       if(o==null)
-        o1==null
+        o1!=null
       else
         o.isNotEqual(o1)
     }
