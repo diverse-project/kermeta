@@ -142,8 +142,9 @@ class TestBag inherits TestCase {
 		n:=NamedElement.new
 		n.name:="toto"
 		c.add(n)
-		c.removeFromOid(n2.oid)
+		c.removeFromOid(n2)
 		assertTrue(c.size==2)
+		assert(c.detect{n|n.oid==n2.oid}==void)
 	end
 	
 	operation testRemoveOne() : Void is do
