@@ -143,7 +143,7 @@
     <section id="sec_introduction_presentation.link">
       <title
       id="sec_introduction_presentation.title.link">Presentation</title>
-	<warning><title>Text not verified for kermeta 2</title></warning>
+	<warning><title>Text not verified for kermeta 2</title><para></para></warning>
       <para>Kermeta is a metamodeling language which allows describing both
       the structure and the behavior of models. It has been designed to be
       compliant with the OMG metamodeling language EMOF (part of the MOF 2.0
@@ -211,7 +211,7 @@
 
     <section>
       <title>Action language : An imperative syntax</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
       <para>Th action language of Kermeta is an imperative language for modeling, with a basic
       syntax inspired from Eiffel. Code is statically type checked, and
       execution is made by a compiler in its version 2.x. The previous version of Kermeta (up to 1.x) 
@@ -311,7 +311,7 @@ end
 
     <section>
       <title>Action language : An object-oriented language</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
       <para>Users of modern programming languages, like Java, would feel
       easy with object-oriented features in Kermeta: classes, inheritance,
       exceptions, and even genericity.</para>
@@ -403,7 +403,7 @@ class Child inherits Reader {
 
     <section>
       <title>Action Language : A model-oriented language</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
       <para>As explained in the <xref endterm="preface.title.link"
       linkend="preface.link" /> and in <xref
       endterm="section_architecture.title.link"
@@ -615,7 +615,7 @@ smithBooks.addAll(
 	    <section>
 	    	<title>Model element static introduction : Aspect-oriented language<phrase
         id="intro_model_element_static_introduction.link"></phrase></title>
-	<warning><title>Text not verified for kermeta 2</title></warning>    	
+	<warning><title>Text not verified for kermeta 2</title><para></para></warning>    	
 			
 	    	<para>One of the key features of Kermeta is the static composition operator <literal>require</literal> allows extending an existing meta-model with new elements 
 	    	such as properties, operations, constraints or classes. This operator allows defining these various 
@@ -646,7 +646,7 @@ smithBooks.addAll(
 	</section>
     <section>
       <title>Some "advanced" features</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
       <para>Kermeta implements several "less common" or advanced features that
       helps in many situations.</para>
       <para> Typically, lambda
@@ -3696,38 +3696,92 @@ end
     </section>
 
     <section id="section_lambda_expression.link">
-      <title id="section_lambda_expression.title.link">Lambda Expressions and
-      functions<phrase id="section_lambda_expressions"></phrase></title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+      <title id="section_lambda_expression.title.link">Lambda Expressions and functions<phrase id="section_lambda_expressions"></phrase></title>
       <para><phrase id="section_lambda_expression"></phrase>Kermeta proposes an
-      implementation of lambda expressions, that is mainly useful for
+      implementation of lambda expressions, that is useful for example when
       implementing OCL-like functions.</para>
-
-      <note><para>
-         Limitations of lambda expressions usage:An operation with a function as parameter : if you define an operation which has a function as a parameter ( ex: 
-
-        <literal>operation op( func : &lt;Integer-&gt;Object&gt;)</literal>
-
-         ), then you cannot put more parameters : only one parameter is allowed in such a case. 
-      </para></note>
 
       <section id="section_function-syntax.link">
         <title id="section_function-syntax.title.link">Syntax<phrase
         id="sec:function-syntax"></phrase></title>
 
-        <para>Here is a definition of function syntax (this is not a formal
+		<para>Kermeta has a special type called "function type" that can be used in several places. The typical use is in the parameter of an operation.</para>
+        <para>When an operation has only one parameter of type "function", then a special shortcut syntax can apply for calling this operation.
+        Here is a definition of function syntax (this is not a formal
         representation)</para>
 
-        <itemizedlist>
-          <listitem>
-            <para>Signature of an operation defined as a function:</para>
 
-            <programlisting><emphasis>// With one parameter</emphasis>
-<emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;TYPE-&gt;RETURN_TYPE&gt; )
-<emphasis>// With many parameters</emphasis>
-<emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;[TYPE_1, TYPE_2, ...]-&gt;RETURN_TYPE&gt; )</programlisting>
+		
+		
+        <itemizedlist>
+        	<listitem>
+        		<para>Definition of the type of the function:</para>
+        		<para>This type can be used in all the location a type is expected, in operation parameter, 
+        		return type of an operation, variables, attributes, references. </para>
+				<programlisting><emphasis>// function type that takes one parameter as input</emphasis>
+&lt;TYPE-&gt;RETURN_TYPE&gt;
+<emphasis>// function type that takes several input parameters</emphasis>
+[TYPE_1, TYPE_2, ...]-&gt;RETURN_TYPE&gt; // replace here the ... with as many type you wish
+<emphasis>// function type that takes one input parameter of type Void can be called without parameter</emphasis>
+&lt;Void-&gt;RETURN_TYPE&gt;</programlisting>
+			</listitem>
+          <listitem>
+            <para>Examples of definition of operations that use only one function as parameter:</para>
+
+            <programlisting language="kermeta">// With one parameter
+operation operationWithOneLambdaParameter ( lambda : &lt;INPUT_TYPE-&gt;RETURN_TYPE&gt; ) : Void is do
+	var foo : INPUT_TYPE init INPUT_TYPE.new
+	lambda(foo) // will call the lambda with foo)
+end
+
+[...]
+	// example of call
+	// calling with the full syntax		
+	operationWithOneLambdaParameter({ i : INPUT_TYPE | /* do something on i and return something of kind RETURN_TYPE */})
+	// calling with the shortcut syntax : the type of i and the parenthesis can be ommitted
+	operationWithOneLambdaParameter{ i  | /* do something on i and return something of kind RETURN_TYPE */}</programlisting>
+<programlisting language="kermeta">
+// With several parameters, (the example use 2 parameters but you can use more than 2 ...)
+operation operationWithSeveralLambdaParameters ( lambda : &lt;INPUT_TYPE1, INPUT_TYPE2-&gt;RETURN_TYPE&gt; ) : Void is do
+	var foo : INPUT_TYPE1 init INPUT_TYPE1.new
+	var bar : INPUT_TYPE2 init INPUT_TYPE2.new
+	lambda(foo, bar) // will call the lambda
+end
+
+[...]
+	// example of call
+	// calling with the full syntax		
+	operationWithSeveralLambdaParameters({ x, y : INPUT_TYPE | /* do something on x and y and return something of kind RETURN_TYPE */})
+	// calling with the shortcut syntax : the type of i and the parenthesis can be ommitted
+	operationWithSeveralLambdaParameters{ x, y  | /* do something on  x and y  and return something of kind RETURN_TYPE */}</programlisting>
+	<note><title><inlinemediaobject><imageobject>
+		            <imagedata fileref="gfx/fire.png" contentdepth="2em"/>
+		          </imageobject></inlinemediaobject>New in Kermeta 2</title><para></para></note>
+<programlisting language="kermeta">
+// With 0 parameter
+operation operationWithSeveralLambdaParameters ( lambda : &lt;Void-&gt;RETURN_TYPE&gt; ) : Void is do
+	lambda(void) // will call the lambda
+	lambda()	// void can be ommitted to call the lambda, however the parenthesis are still mandatory
+end
+
+[...]
+	// example of call
+	// calling with the full syntax		
+	operationWithSeveralLambdaParameters({  | /* do something  and return something of kind RETURN_TYPE */})
+	// calling with the shortcut syntax : the type of i and the parenthesis can be ommitted
+	operationWithSeveralLambdaParameters{   | /* do something  and return something of kind RETURN_TYPE */}</programlisting>
+<programlisting language="kermeta">
+// TODO mixed parameters 
+operation  OPERATION_NAME ( LAMBDA_PARAM : &lt;[TYPE_1, TYPE_2, ...]-&gt;RETURN_TYPE&gt;, ANOTHER_PARAMETER : TYPE )</programlisting>
+
+			
+			
+
+
           </listitem>
 
+			
+		          
           <listitem>
             <para>Call of a function:</para>
 
@@ -5411,7 +5465,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
   <appendix id="appendix_keywords.link">
     <title id="appendix_keywords.title.link">Language keywords</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
     <para>The following keywords are used by Kermeta textual syntax.</para>
 
     <note>
@@ -5781,7 +5835,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
   </appendix>
   <appendix id="appendix_knowntags.link">
     <title id="appendix_knowntags.title.link">Known Kermeta tags</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
     <para>This annex collect the use of known tags. 
     They are generally used as an extension on Kermeta in these typically uses :</para>
     <itemizedlist>
@@ -5905,7 +5959,7 @@ class MyMainClass
 
   <appendix id="appendix_KermetaEcore.link">
     <title id="appendix_KermetaEcore.title.link">Kermeta / Ecore mapping</title>
-<warning><title>Text not verified for kermeta 2</title></warning>
+<warning><title>Text not verified for kermeta 2</title><para></para></warning>
 	<para>Kermeta natively integrates Ecore defintions, however it uses an internal mapping in order to import ecore model as Kermeta models.
 	In the other way round a Kermeta model can be translated into a pure ecore model. (for example in the compiler)</para>
     <para>This annex indicates how Kermeta models are translated into Ecore models and vice versa.</para>
