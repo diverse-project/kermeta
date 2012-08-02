@@ -24,6 +24,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"package "+"${package.name}"+"{\n"+
 		        "\tclass "+"${class.name}"+
 		        "\n\t{\n"+
+		        "\n\t@main \"\" // declares that operation as a possible entry point of the program\n"+
 		        "\t\toperation "+"${operation.name}"+"() : Void is do \n"+
 		        "\t\t\t// TODO: implement '"+"${operation.name}"+ "' operation\n"+
 		        "\t\t\tstdio.writeln(\"Hello from "+"${operation.name}"+ "\")\n"+
