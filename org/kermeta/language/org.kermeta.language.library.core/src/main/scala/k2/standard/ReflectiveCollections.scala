@@ -12,6 +12,8 @@ trait ReflectiveCollection[A,B] extends KermetaColAspect[B]{
   val oppositeScalaSetter : (B,A) => Unit = {(b:B,a:A)=>()}
   
   override def add(e:B):Boolean = {
+    if(e==null)
+      throw k2.exceptions.KerRichFactory.createRuntimeError.initialize("Illegal argument: cannot add void in a reflective collection")
     if(thisUpper != -1 && this.size >= thisUpper)
       throw k2.exceptions.KerRichFactory.createUpperBoundReachedError
     takeCareOfOppositeAdd(e)
@@ -27,6 +29,11 @@ trait ReflectiveCollection[A,B] extends KermetaColAspect[B]{
       oppositeScalaSetter(e,null.asInstanceOf[A])
       oppositeKerSetter(e,owner)
     }
+  }
+  
+  def takeCareOfOppositeRemove(e:B) : Unit = {
+    if(hasOpposite && oppositeUpper==1)
+      oppositeKerSetter(e,null.asInstanceOf[A])
   }
 }
 
@@ -52,7 +59,7 @@ class RichReflectiveSet[A,B](
 	  return false
 	  
     e match {
-      case e:B if hasOpposite => oppositeKerSetter(e,null.asInstanceOf[A])
+      case e:B if hasOpposite => takeCareOfOppositeRemove(e)
       case _ =>
     }
 	true
@@ -75,9 +82,9 @@ class RichReflectiveBag[A,B](
     import k2.standard.PrimitiveConversion.any2kermeta
     e match {
       case e:B if hasOpposite => 
-        val oldsize = this.size
-        removeFromOid(e)
-        this.size!=oldsize
+        val elts = this.select(elt => elt==e)
+        elts.each(this.removeFromOid)
+        elts.size!=0
       case _ => super[KermetaBagAspect].remove(e)
     }
   }
@@ -86,8 +93,10 @@ class RichReflectiveBag[A,B](
     val oldsize = this.size
     super.removeFromOid(e)
     if(this.size!=oldsize)
-      oppositeKerSetter(e,null.asInstanceOf[A])
+      takeCareOfOppositeRemove(e)
   }
+  
+  override def removeOne(e:B) : Unit = removeFromOid(e)
 
   override def clear() : Unit = super[ReflectiveCollection].clear
 }
@@ -97,8 +106,21 @@ trait ReflectiveOrderedCollection[A,B] extends ReflectiveCollection[A,B] with Ke
   override def add(e:B) : Boolean = super[ReflectiveCollection].add(e)
   
   override def addAt(index:Int,e:B) : Unit ={
+    if(e==null)
+      throw k2.exceptions.KerRichFactory.createRuntimeError.initialize("Illegal argument: cannot add void in a reflective collection")
+    if(thisUpper != -1 && this.size >= thisUpper)
+      throw k2.exceptions.KerRichFactory.createUpperBoundReachedError
 	takeCareOfOppositeAdd(e)
     super.addAt(index,e)
+  }
+  
+  override def removeAt(index:Int) : Unit = {
+    if(index<0||index>=this.size)
+      throw k2.exceptions.KerRichFactory.createIndexOutOfBound
+    val e = elementAt(index)
+    super.removeAt(index)
+    if(hasOpposite && e.isInstanceOf[B])
+      takeCareOfOppositeRemove(e.asInstanceOf[B])
   }
 
   override def clear() : Unit = super[ReflectiveCollection].clear
@@ -133,7 +155,7 @@ class RichReflectiveOrderedSet[A,B](
 	  return false
 	  
     e match {
-      case e:B if hasOpposite => oppositeKerSetter(e,null.asInstanceOf[A])
+      case e:B if hasOpposite => takeCareOfOppositeRemove(e)
       case _ =>
     }
 	true
@@ -156,9 +178,9 @@ class RichReflectiveSequence[A,B](
     import k2.standard.PrimitiveConversion.any2kermeta
     e match {
       case e:B if hasOpposite => 
-        val oldsize = this.size
-        removeFromOid(e)
-        this.size!=oldsize
+        val elts = this.select(elt => elt==e)
+        elts.each(this.removeFromOid)
+        elts.size!=0
       case _ => super[KermetaSequenceAspect].remove(e)
     }
   }
@@ -167,8 +189,10 @@ class RichReflectiveSequence[A,B](
     val oldsize = this.size
     super.removeFromOid(e)
     if(this.size!=oldsize)
-      oppositeKerSetter(e,null.asInstanceOf[A])
+      takeCareOfOppositeRemove(e)
   }
+  
+  override def removeOne(e:B) : Unit = removeFromOid(e)
 
   override def clear() : Unit = super[ReflectiveOrderedCollection].clear
 
