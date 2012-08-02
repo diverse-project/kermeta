@@ -141,7 +141,7 @@
             <plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-eclipse-plugin</artifactId>
-			    <version>2.8</version>
+			    <version>2.9</version>
 			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
 			    <configuration>
 			      <downloadSources>true</downloadSources>
@@ -149,10 +149,13 @@
 			      <projectnatures>
 			      	<!-- <projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature> -->
 			        <!-- <projectnature>org.scala-ide.sdt.core.scalanature</projectnature> -->
-			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>			        
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>	
+			        <projectnature>org.eclipse.pde.PluginNature</projectnature>		        
 			      </projectnatures>
 			      <buildcommands>
-			        <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
+			        <!-- <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>-->
+			        <buildcommand>org.eclipse.pde.ManifestBuilder</buildcommand>
+					<buildcommand>org.eclipse.pde.SchemaBuilder</buildcommand>
 			      </buildcommands>
 			      <classpathContainers>
 			        <!-- <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>-->

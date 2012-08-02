@@ -1,10 +1,10 @@
-#Thu Aug 02 13:21:39 CEST 2012
-encoding//src=UTF-8
-encoding//icons=UTF-8
+#Thu Aug 02 13:38:44 CEST 2012
+encoding/src/test/java=UTF-8
+encoding/icons=UTF-8
 org.eclipse.jdt.core.compiler.compliance=1.6
-encoding//src/test/resources=UTF-8
-encoding//src/test/java=UTF-8
-encoding/=UTF-8
+encoding/.=UTF-8
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
 eclipse.preferences.version=1
+encoding/src/test/resources=UTF-8
+encoding/src=UTF-8
 org.eclipse.jdt.core.compiler.source=1.6
