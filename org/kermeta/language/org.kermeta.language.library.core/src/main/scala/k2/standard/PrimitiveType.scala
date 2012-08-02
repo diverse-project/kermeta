@@ -122,6 +122,10 @@ return null;
     }
 
     implicit def throwable2kermeta(value:java.lang.Throwable):k2.exceptions.Exception = value.asInstanceOf[k2.exceptions.Exception]
+    
+    implicit def listEObject2listAny(x:java.util.List[org.eclipse.emf.ecore.EObject]):java.util.List[Any]={
+      x.asInstanceOf[java.util.List[Any]]
+    }
 
 }  
  
