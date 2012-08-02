@@ -17,9 +17,12 @@ import java.util.ArrayList;
 import java.util.NavigableMap;
 import java.util.Properties;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
+import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
@@ -93,10 +96,10 @@ public class KRunTest extends TestCase {
 			fail("Invalid kp file.");			
 		}
 		
-		createURIMapFile(kp);
 		
 		KpVariableExpander varExpander = new KpVariableExpander("file:/"+kpFile, kp, compiler.fileSystemConverter, compiler.logger);
-		
+
+		createURIMapFile(kp, varExpander, compiler);
 		
 		ArrayList<String> fullClassPath = new ArrayList<String>();
 		fullClassPath.addAll(additionalClassPath);
@@ -119,18 +122,72 @@ public class KRunTest extends TestCase {
     }
 	
 	
-	public void createURIMapFile(KermetaProject kp) throws IOException{
+	public void createURIMapFile(KermetaProject kp, KpVariableExpander varExpander, KermetaCompiler compiler) throws IOException{
 		Properties props = new Properties();
 		String key = "platform:/resource/"+kp.getName();
 		String value = "file:/"+targetFolder;
 		props.put(key, value);
+		
+		for(Dependency dep : kp.getDependencies()){
+			createURIMapEntryForDependency(props, dep, varExpander, compiler);
+		}
+		
 		FileOutputStream fos;
 		fos = new FileOutputStream(targetFolder+File.separator+"urimap.properties");
 		props.store(fos, "Simulating resolution of eclipse workbench URIs resolution using URI map translation");
 		fos.close();		
 	}
     
-    @Override
+    private void createURIMapEntryForDependency(Properties props, Dependency dep, KpVariableExpander varExpander, KermetaCompiler compiler) {
+		// if there is more than one url for a dependency we may try to create an uri map if one of them is a platform:/...
+    	if(dep.getUrl().size() > 1){
+			String platformUrl = null;
+			for(String url : dep.getUrl()){
+				if(url.startsWith("platform:/")){
+					platformUrl = url;
+				}
+			}
+			String resolvedURL;
+			try {
+				resolvedURL = compiler.getResolvedDependencyURL(dep,varExpander);
+				if(platformUrl != null && resolvedURL != null){
+					props.put(platformUrl, resolvedURL);
+					return;
+				}
+			} catch (IOException e) {}
+			
+		}
+    	
+    	// if one of the dependency comes from eclipse (ie. special name pattern in the maven group+artifact id) then we may consider it as a platform:/plugin
+    	String mvnUrl = null;
+		for(String url : dep.getUrl()){
+			if(url.startsWith("mvn:")){
+				mvnUrl = url;
+			}
+		}
+		if(mvnUrl != null){
+			Pattern pattern = Pattern.compile("mvn:([\\w\\.]*)/(\\w*)");
+			Matcher matcher = pattern.matcher(mvnUrl);
+			// Check all occurance
+			while (matcher.find()) {
+				String groupId = matcher.group(1);
+				String artefactId = matcher.group(2);
+				String resolvedURL;
+				try {
+					resolvedURL = compiler.getResolvedDependencyURL(dep,varExpander);
+					if(resolvedURL != null){
+						props.put("platform:/plugin/"+groupId+"."+artefactId, resolvedURL);
+						return;
+					}
+				} catch (IOException e) {}
+			}
+		}
+		
+	}
+
+
+
+	@Override
     public String getName() {
         return testName;
     }
