@@ -657,7 +657,7 @@ import scala.collection.JavaConversions._
     
     }
     
-    trait KermetaSequenceAspect[A] extends KermetaBagAspect[A] with KermetaOrderedColAspect[A]{
+    trait KermetaSequenceAspect[A] extends KermetaBagAspect[A] with KermetaOrderedColAspect[A] with KermetaSequence[A]{
       
       def subSequence(min:Int,max:Int):KermetaSequence[A]={
         if(min<0||max>value.size||min>max)
