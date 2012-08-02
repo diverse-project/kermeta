@@ -185,11 +185,19 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         getGetter(thi, s, res, prefix)
       } // For reflexivity
       if (thi.getUpper > 1 || thi.getUpper == -1) {
-    	/*if(thi.getOpposite()!=null){
+    	if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())){
     	  val opposite = thi.getOpposite().asInstanceOf[Property]
     	  res.append(",owner=this,hasOpposite=true,oppositeUpper=" + opposite.getUpper())
-    	  res.append(",oppositeKersetter={")
-    	}*/
+    	  res.append(",oppositeKerSetter={")
+    	  res.append("(opp:"+s+",thi:"+thi.getOwningClass().getName())
+    	  res.append(")=>opp.")
+    	  res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
+    	  res.append("(thi)}")
+    	  res.append(",oppositeScalaSetter={(opp:"+s+",thi:"+thi.getOwningClass().getName())
+    	  res.append(")=>opp.")
+    	  res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
+    	  res.append("=thi}")
+    	}
         res.append(")")
       }
       res.append("}")
