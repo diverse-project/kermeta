@@ -18,15 +18,8 @@ trait ReflectiveCollection[A,B] extends KermetaColAspect[B]{
     super.add(e)
   }
   
-  override def remove(e:Any):Boolean = {
-	if(!super.remove(e))
-	  return false
-	  
-    e match {
-      case e:B if hasOpposite => oppositeKerSetter(e,null.asInstanceOf[A])
-      case _ =>
-    }
-	true
+  override def clear():Unit ={
+    this.each(e=>this.remove(e))
   }
   
   def takeCareOfOppositeAdd(e:B) : Unit ={
@@ -45,7 +38,7 @@ class RichReflectiveSet[A,B](
   override val oppositeKerSetter : (B,A) => Unit = {(b:B,a:A)=>()},
   override val oppositeScalaSetter : (B,A) => Unit = {(b:B,a:A)=>()},
   override val value:java.util.List[B]
-) extends ReflectiveCollection[A,B] with KermetaSetAspect[B]{
+) extends KermetaSetAspect[B] with ReflectiveCollection[A,B]{
   
   override def add(e:B) : Boolean = {
     if(!this.contains(e))
@@ -54,7 +47,18 @@ class RichReflectiveSet[A,B](
       throw k2.exceptions.KerRichFactory.createRuntimeError.initialize("Trying to add an element in a reflective set where it already is")
   }
   
-  override def remove(e:Any) : Boolean = super[ReflectiveCollection].remove(e)
+  override def remove(e:Any):Boolean = {
+	if(!super[KermetaSetAspect].remove(e))
+	  return false
+	  
+    e match {
+      case e:B if hasOpposite => oppositeKerSetter(e,null.asInstanceOf[A])
+      case _ =>
+    }
+	true
+  }
+  
+  override def clear() : Unit = super[ReflectiveCollection].clear
 }
 
 class RichReflectiveBag[A,B]( 
@@ -85,6 +89,7 @@ class RichReflectiveBag[A,B](
       oppositeKerSetter(e,null.asInstanceOf[A])
   }
 
+  override def clear() : Unit = super[ReflectiveCollection].clear
 }
 
 trait ReflectiveOrderedCollection[A,B] extends ReflectiveCollection[A,B] with KermetaOrderedColAspect[B]{
@@ -95,9 +100,8 @@ trait ReflectiveOrderedCollection[A,B] extends ReflectiveCollection[A,B] with Ke
 	takeCareOfOppositeAdd(e)
     super.addAt(index,e)
   }
-  
-  override def remove(e:Any):Boolean = super[ReflectiveCollection].remove(e)
-  
+
+  override def clear() : Unit = super[ReflectiveCollection].clear
 }
 
 class RichReflectiveOrderedSet[A,B]( 
@@ -124,8 +128,18 @@ class RichReflectiveOrderedSet[A,B](
       throw k2.exceptions.KerRichFactory.createRuntimeError.initialize("Trying to add an element in a reflective set where it already is")
   }
   
-  override def remove(e:Any):Boolean = super[ReflectiveOrderedCollection].remove(e)
+  override def remove(e:Any):Boolean = {
+	if(!super[KermetaOrderedSetAspect].remove(e))
+	  return false
+	  
+    e match {
+      case e:B if hasOpposite => oppositeKerSetter(e,null.asInstanceOf[A])
+      case _ =>
+    }
+	true
+  }
 
+  override def clear() : Unit = super[ReflectiveOrderedCollection].clear
 }
 
 class RichReflectiveSequence[A,B]( 
@@ -156,5 +170,6 @@ class RichReflectiveSequence[A,B](
       oppositeKerSetter(e,null.asInstanceOf[A])
   }
 
+  override def clear() : Unit = super[ReflectiveOrderedCollection].clear
 
 }

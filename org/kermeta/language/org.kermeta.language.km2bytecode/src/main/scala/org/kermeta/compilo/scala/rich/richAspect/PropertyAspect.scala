@@ -167,7 +167,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         getCollectionType(thi,res)
         res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + ",")
         visitTypeParam(thi.getType(),res)
-        res.append("](value=")
+        res.append("](thisUpper = "+thi.getUpper+",value=")
       }
 
       if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))) {
@@ -199,6 +199,10 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     	  res.append("=thi}")
     	}
         res.append(")")
+      } else{
+        var typestring = new StringBuilder
+        getListorType(thi, typestring)
+        res.append(".asInstanceOf[" + typestring.toString + "]")
       }
       res.append("}")
     } else {
@@ -214,10 +218,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
       //            res.append("\n}")
     }
-    /*var typestring = new StringBuilder
-    getListorType(thi, typestring)
-    res.append(".asInstanceOf[" + typestring.toString + "]")
-    */res.append("\n")
+    res.append("\n")
 
   }
 
