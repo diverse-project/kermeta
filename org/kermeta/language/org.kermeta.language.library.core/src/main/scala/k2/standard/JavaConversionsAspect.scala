@@ -488,9 +488,10 @@ import scala.collection.JavaConversions._
       }
       
       def removeFromOid(elementOid:Int):Unit={
+        import k2.standard.PrimitiveConversion.any2kermeta
     	val it = value.listIterator()
     	while(it.hasNext()){
-    	  if(it.next().asInstanceOf[KermetaObject].oid==elementOid)
+    	  if(it.next.oid==elementOid)
     	    it.remove
     	}
       }
