@@ -7,6 +7,7 @@ import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import java.util._
+import scala.collection.mutable.StringBuilder
 
 trait PropertyAspect extends ObjectVisitor with LogAspect {
 
@@ -164,7 +165,9 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         
         res.append("new k2.standard.RichReflective")
         getCollectionType(thi,res)
-        res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + "," + s + "](value=")
+        res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + ",")
+        visitTypeParam(thi.getType(),res)
+        res.append("](value=")
       }
 
       if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))) {
@@ -182,6 +185,11 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         getGetter(thi, s, res, prefix)
       } // For reflexivity
       if (thi.getUpper > 1 || thi.getUpper == -1) {
+    	/*if(thi.getOpposite()!=null){
+    	  val opposite = thi.getOpposite().asInstanceOf[Property]
+    	  res.append(",owner=this,hasOpposite=true,oppositeUpper=" + opposite.getUpper())
+    	  res.append(",oppositeKersetter={")
+    	}*/
         res.append(")")
       }
       res.append("}")
