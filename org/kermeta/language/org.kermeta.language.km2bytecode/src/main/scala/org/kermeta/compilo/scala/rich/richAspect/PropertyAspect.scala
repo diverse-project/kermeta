@@ -162,9 +162,9 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(s.toString + "]);")
         }
         
-        res.append("new k2.standard.RichKermeta")
+        res.append("new k2.standard.RichReflective")
         getCollectionType(thi,res)
-        res.append("(")
+        res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + "," + s + "](value=")
       }
 
       if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))) {
