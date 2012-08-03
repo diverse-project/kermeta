@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://org.kermeta.diagnostic/1.0"
-            class="diagnostic.DiagnosticPackage"
+            class="org.kermeta.diagnostic.DiagnosticPackage"
             genModel="model/Diagnostic.genmodel"/>
    </extension>
 
