@@ -55,7 +55,7 @@ package mainPackage{
 	
 	class Car3 inherits Car2 {
 
-		reference wheels:Wheel[0..*]
+		reference wheels:Sequence[Wheel]
 	}
 	
 	class Wheel {
