@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="mainPackage">
+    <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;59;964"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainPackage/MainClass/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;81;559"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+      <ownedOperation name="mainOperation" type="//mainPackage/MainClass/mainOperation/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;102;554"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;138;554"/>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="car">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;145;174"/>
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;165;174"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;161;174"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Car3">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;161;165"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </initialization>
+            <type name="Car3" type="//mainPackage/MainClass/mainOperation/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Car3">
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="wheel">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;174;206"/>
+            <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;198;206"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;193;206"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Wheel">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;193;198"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </initialization>
+            <type name="Wheel" type="//mainPackage/MainClass/mainOperation/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Wheel">
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;206;225"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="size">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;211;217"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;206;211"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="2">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;220;225"/>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;235;254"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;225;254"/>
+            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;240;245"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;240;245"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheels">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;228;235"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="car">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;225;228"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;254;276"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;254;260"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;268;276"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Wheel">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;263;268"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;276;296"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="size">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;281;287"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;276;281"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="uminus">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;291;296"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;306;325"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;296;325"/>
+            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;311;316"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;311;316"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheels">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;299;306"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="car">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;296;299"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;325;345"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;325;330"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;337;345"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Wheel">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;332;337"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;345;364"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="size">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;350;356"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;345;350"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:IntegerLiteral">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;359;364"/>
+            </value>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;374;390"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;364;390"/>
+            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheel">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;379;384"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;379;384"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="wheels">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;367;374"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="car">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;364;367"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="checkAllInvariants" isCalledWithParenthesis="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;393;423"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;390;423"/>
+            <parameters xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;413;418"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;413;418"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="car">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;390;393"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Block">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;423;549"/>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="checkAllInvariants">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;433;456"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;430;456"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="car">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;430;433"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </target>
+            </statement>
+            <rescueBlock exceptionName="e">
+              <body xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="writeln" isCalledWithParenthesis="true">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;520;543"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;515;543"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="message">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;530;538"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;529;538"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="e">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;529;530"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </parameters>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="stdio">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;515;520"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                </target>
+              </body>
+              <exceptionType name="kermeta::exceptions::ConstraintViolatedInv" type="//mainPackage/MainClass/mainOperation/@body/@statement.11/@rescueBlock.0/@exceptionType/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::exceptions::ConstraintViolatedInv">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                </containedType>
+              </exceptionType>
+            </rescueBlock>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Car" superType="//mainPackage/Car/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;559;660"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+      <inv name="name_not_null">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;603;655"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;624;655"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isNotEqual">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;630;650"/>
+            <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;643;650"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="name">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;634;640"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:SelfExpression">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;630;634"/>
+              </target>
+            </target>
+          </statement>
+        </body>
+      </inv>
+      <ownedAttribute name="name" type="//mainPackage/Car/name/@containedType.0" isOrdered="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;576;603"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Car2" superType="//mainPackage/Car2/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;660;810"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Car">
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+      <inv name="name_not_null_nor_empty">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;691;805"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;722;805"/>
+          <statement xsi:type="org_kermeta_language_behavior:Conditional">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;728;800"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;728;800"/>
+            <thenBody xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isNotEqual">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;757;776"/>
+                <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;770;776"/>
+                </parameters>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="name">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;761;767"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:SelfExpression">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;757;761"/>
+                  </target>
+                </target>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;785;794"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;785;794"/>
+              </statement>
+            </elseBody>
+            <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isNotEqual">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;731;746"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;730;748"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;730;748"/>
+              <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;742;746"/>
+              </parameters>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="name">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;735;740"/>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                <target xsi:type="org_kermeta_language_behavior:SelfExpression">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;731;735"/>
+                </target>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </inv>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Car3" superType="//mainPackage/Car3/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;810;875"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Car2">
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+      <ownedAttribute name="wheels" type="//mainPackage/Car3/wheels/@containedType.0" isOrdered="true" upper="-1">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;840;870"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Wheel">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Wheel" superType="//mainPackage/Wheel/@containedType.0">
+      <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;875;962"/>
+      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+        <usings fromQName="kermeta::standard" toName=""/>
+        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+      </containedType>
+      <inv name="size_positive">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;919;960"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;940;960"/>
+          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isGreater">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;946;955"/>
+            <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;951;955"/>
+            </parameters>
+            <usings fromQName="kermeta::standard" toName=""/>
+            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="size">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;946;950"/>
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </target>
+          </statement>
+        </body>
+      </inv>
+      <ownedAttribute name="size" type="//mainPackage/Wheel/size/@containedType.0" isOrdered="true" isComposite="true">
+        <kOwnedTags name="traceability_text_reference" value="file:/home/jymarcha/Travail/workspace_kv2/test_027_invariant/src/main/kmt/MainClass.kmt;891;919"/>
+        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+          <usings fromQName="kermeta::standard" toName=""/>
+          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

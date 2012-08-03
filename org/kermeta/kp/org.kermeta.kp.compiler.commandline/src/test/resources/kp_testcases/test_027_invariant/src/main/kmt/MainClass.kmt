@@ -6,12 +6,7 @@ package mainPackage{
 	{
 		operation mainOperation() : Void is do 
 			var car:Car3 := Car3.new
-			/*car.wheel := Wheel.new
-			car.wheel.size:=-1
-			*/
-			//car.wheels := OrderedSet[Wheel].new
-			car.wheels.add(void)
-			
+
 			var wheel:Wheel := Wheel.new
 			wheel.size := 2
 			car.wheels.add(wheel)
@@ -55,7 +50,7 @@ package mainPackage{
 	
 	class Car3 inherits Car2 {
 
-		reference wheels:Sequence[Wheel]
+		reference wheels:Wheel[0..*]
 	}
 	
 	class Wheel {

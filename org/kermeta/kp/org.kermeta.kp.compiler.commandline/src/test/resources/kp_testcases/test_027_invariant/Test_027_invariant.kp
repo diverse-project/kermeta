@@ -1,4 +1,4 @@
-KermetaProject "Test_invariant"
+KermetaProject "Test_027_invariant"
 	groupId = "my.group"
 	defaultMainClass = "mainPackage::MainClass"
 	defaultMainOperation = "mainOperation"
