@@ -7,16 +7,26 @@ package pkg {
 	}
 
 
-	class Test {
+	class Test  inherits kermeta::kunit::TestCase {
 		@main ""
 		operation main() is do
 			var a1 : pkg::A init pkg::A.new
 			var b1 : pkg::B init pkg::B.new
 			a1.b := b1
-			var b2 : pkg::B
-			b2 := b2.a.b
+			assert(b1.a == a1)
+			
+			var b2 : pkg::B 
+			b2 := b1.a.b
+			assert(b2 == b1)
+			
 			var a2 : pkg::A
-			a2 := b1.a
+			a2 := b1.a			
+			assert(a2 == a1)
+			
+			b2 := pkg::B.new
+			b2.a := a1
+			assert(a1.b == b2)
+			assert(b1.a.isVoid)
 		end
 	}
 }

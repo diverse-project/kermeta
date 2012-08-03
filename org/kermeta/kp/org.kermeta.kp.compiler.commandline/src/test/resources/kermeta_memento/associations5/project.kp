@@ -1,4 +1,4 @@
-KermetaProject "test.memento.conditions" 
+KermetaProject "associations5" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
 defaultMainClass ="pkg::Test"
@@ -8,5 +8,6 @@ sources={
 }
 dependencies={
 	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
+	dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/LATEST"
 }
 
