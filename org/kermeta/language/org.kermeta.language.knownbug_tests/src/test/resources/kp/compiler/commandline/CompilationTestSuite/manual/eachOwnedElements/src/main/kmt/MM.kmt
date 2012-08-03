@@ -1,0 +1,22 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package rootPackage{
+	class NamedElement {
+		attribute name : String
+		operation initialize(s : String ) : NamedElement is do 
+			name := s 
+			result:=self 
+		end
+	}
+	class A inherits NamedElement {
+		attribute ownedAs : A[0..*]
+	}
+	class B inherits A {
+		attribute ownedBs : B[0..*]
+	}
+	class C inherits A {
+		attribute ownedBs : B[0..*]
+		attribute ownedC : C
+	}
+}

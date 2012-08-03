@@ -1,0 +1,37 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package rootPackage{
+	aspect class NamedElement {
+		operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+			// String attributes are value, so they aren't really "owned"  
+		end
+	}
+	aspect class A inherits NamedElement {
+		operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+			super(func)
+			self.ownedAs.each{ e |
+				func(e)
+			}
+		end
+	}
+	aspect class B inherits A {
+		operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+			super(func) // makes sure to call func on attributes inherited from A
+			self.ownedBs.each{ e |
+				func(e)
+			}
+		end
+	}
+	aspect class C inherits A {
+		operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+			super(func) // makes sure to call func on attributes inherited from A
+			self.ownedBs.each{ e |
+				func(e)
+			}
+			if(not ownedC.isVoid) then
+				func(ownedC)
+			end
+		end
+	}
+}

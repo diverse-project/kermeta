@@ -1,0 +1,39 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using rootPackage
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			var c : C := C.new
+			
+			c.ownedAs.add(C.new.initialize("foo").asType(C))
+			c.ownedAs.add(C.new.initialize("bar").asType(C))
+			
+			c.ownedAs.first.ownedAs.add(C.new.initialize("sub").asType(C)) 
+			
+			// write the name of all the elements directly  contained by a
+			c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
+			
+			// collect all the elements directly contained by a
+			var ownedElements : Sequence<Object> := Sequence<Object>.new
+			c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
+			stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)
+			
+			
+			// write the name of all the elements directly or indirectly contained by a
+			/*var printNameFunction : <NamedElement->Void> := 
+			c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name)
+				 aNamedElement
+			}
+			
+			// collect all the elements directly or indirectly contained by a
+			var allOwnedElements : Sequence<Object> := Sequence<Object>.new
+			c.eachOwnedElement{ aNamedElement | allOwnedElements.add(aNamedElement) }
+			stdio.writeln("allOwnedElements.size = "+ allOwnedElements.size.toString)
+			*/
+			
+		end
+	}
+}
