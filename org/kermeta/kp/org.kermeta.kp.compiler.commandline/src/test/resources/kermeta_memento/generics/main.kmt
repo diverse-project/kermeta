@@ -9,7 +9,7 @@ package pkg {
 	}
 	
 	class Queue<G> {
-		reference elements : kermeta::standard::OrderedSet<G>
+		reference elements : oset G[0..*]
 		operation enqueue(e : G) : kermeta::standard::Void is do
 			elements.add(e)
 		end
