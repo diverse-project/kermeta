@@ -50,7 +50,7 @@ package mainPackage{
 	
 	class Car3 inherits Car2 {
 
-		reference wheels:Wheel[0..*]
+		attribute wheels:Wheel[0..*]
 	}
 	
 	class Wheel {
