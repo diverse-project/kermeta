@@ -194,16 +194,21 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       if (thi.getUpper > 1 || thi.getUpper == -1) {
     	if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())){
     	  val opposite = thi.getOpposite().asInstanceOf[Property]
-    	  res.append(",owner=this,hasOpposite=true,oppositeUpper=" + opposite.getUpper())
-    	  res.append(",oppositeKerSetter={")
-    	  res.append("(opp:"+s+",thi:"+ getQualifiedNameCompilo(thi.getOwningClass))
-    	  res.append(")=>opp.")
-    	  res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
-    	  res.append("(thi)}")
-    	  res.append(",oppositeScalaSetter={(opp:"+s+",thi:"+getQualifiedNameCompilo(thi.getOwningClass))
-    	  res.append(")=>opp.")
-    	  res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
-    	  res.append("=thi}")
+    	  res.append(",owner=this,hasOpposite=true")
+    	  if(opposite.getUpper() == 1){
+    	    res.append(",oppositeKerSetter={")
+    	    res.append("(opp:"+s+",thi:"+ getQualifiedNameCompilo(thi.getOwningClass))
+    	    res.append(")=>opp.")
+    	    res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
+    	    res.append("(thi)}")
+    	    res.append(",oppositeScalaSetter={(opp:"+s+",thi:"+getQualifiedNameCompilo(thi.getOwningClass))
+    	    res.append(")=>opp.")
+    	    res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
+    	    res.append("=thi}")
+    	  } else {
+    	    res.append(",oppositeUpper= " + opposite.getUpper())
+    	    res.append(",oppositeScalaGetter={(opp:"+s+")=>opp."+GlobalConfiguration.scalaPrefix+opposite.getName()+"}")
+    	  }
     	}
         res.append(")")
       } else{
