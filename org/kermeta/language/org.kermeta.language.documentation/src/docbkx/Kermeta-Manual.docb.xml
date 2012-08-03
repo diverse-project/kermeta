@@ -5799,7 +5799,7 @@ var sequence : Sequence&lt;Integer&gt; := init_set.collect { element | element*1
 					When starting to use the lambda expression you can define some
 					useful design patterns. One of them is the ability to propose an
 					<literal>each</literal>
-					that traverse all the owned element of a given metamodel. For some
+					that traverses all the owned element of a given metamodel. For some
 					usage, this can be an interresting alternative to the visitor
 					design pattern.
 				</para>
@@ -5822,12 +5822,12 @@ class C inherits A {
 					following pattern:
 				</para>
 				<programlisting language="kermeta">aspect class NamedElement {
-	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+	operation eachOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do
 		// String attributes are value, so they aren't really "owned"  
 	end
 }
 aspect class A inherits NamedElement {
-	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+	operation eachOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do
 		super(func)
 		self.ownedAs.each{ e |
 			func(e)
@@ -5835,7 +5835,7 @@ aspect class A inherits NamedElement {
 	end
 }
 aspect class B inherits A {
-	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+	operation eachOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do
 		super(func) // makes sure to call func on attributes inherited from A
 		self.ownedBs.each{ e |
 			func(e)
@@ -5843,7 +5843,7 @@ aspect class B inherits A {
 	end
 }
 aspect class C inherits A {
-	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
+	operation eachOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do
 		super(func) // makes sure to call func on attributes inherited from A
 		self.ownedBs.each{ e |
 			func(e)
@@ -5861,7 +5861,7 @@ aspect class C inherits A {
 c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 
 // collect all the elements directly contained by c
-var ownedElements : Sequence<Object> := Sequence<Object>.new
+var ownedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
 c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
 stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)</programlisting>
 				<para>A small variant will ensure to traverse the directly and indirectly owned elements.
