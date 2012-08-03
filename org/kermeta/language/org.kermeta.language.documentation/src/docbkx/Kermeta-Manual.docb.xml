@@ -5545,12 +5545,21 @@ end
 	operationWithSeveralLambdaParameters({ void : Void | /* do something  and return something of kind RETURN_TYPE */})
 	// calling with the shortcut syntax : the type, the variable and the parenthesis can be ommitted
 	operationWithSeveralLambdaParameters{   | /* do something  and return something of kind RETURN_TYPE */}</programlisting>
-
+						<para>
+							The operation
+							<literal>indexedEach</literal>
+							and
+							<literal>forAllCpl</literal>
+							on
+							<literal>Collection</literal>
+							are examples of such lambda with several input parameters. (See section bellow).
+						</para>
 						<para>Using the full syntax you can create operations that use
 							parameters of mixed type including function type:
 						</para>
 						<programlisting language="kermeta">operation operationWithMixedParameters ( f : &lt;INPUT_TYPE-&gt;RETURN_TYPE&gt;, otherParam : String ) : Void is do
-	f(INPUT_TYPE.new) // will call the lambda
+	var foo : INPUT_TYPE init INPUT_TYPE.new
+	f(foo) // will call the lambda
 	// do something with otherParam
 end
 
@@ -5558,21 +5567,6 @@ end
 	// example of call
 	// only the full syntax is allowed		
 	operationWithSeveralLambdaParameters({ x : INPUT_TYPE | /* do something on x and return something of kind RETURN_TYPE */}, "hellow world")</programlisting>
-						<para>
-							The operation
-							<literal>indexedEach</literal>
-							on
-							<literal>Collection</literal>
-							is an example of such mixed parameters.
-						</para>
-
-
-					</listitem>
-					<listitem>
-						<para>Call of a function:</para>
-
-						<programlisting language="kermeta">anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
-anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
 					</listitem>
 
 					<listitem>
@@ -5775,7 +5769,7 @@ init_set.add(32)
 init_set.add(23)
 init_set.add(41)
 
-// This sequence equals : [320, 230, 41]
+// This sequence equals : [320, 230, 410]
 var sequence : Sequence&lt;Integer&gt; := init_set.collect { element | element*10}</programlisting>
 
 				<para>The code within the function can be as complex as you want,
@@ -5824,32 +5818,32 @@ class C inherits A {
 	attribute ownedC : C
 }</programlisting>
 				<para>It would be nice to be able to call a simple lambda on all the
-					owned elements. This can be done by adding an operation using the
+					elements directly owned by an element. This can be done by adding an operation using the
 					following pattern:
 				</para>
 				<programlisting language="kermeta">aspect class NamedElement {
-	operation eachOwnedElement(func : &lt;kermeta::standard::Object -&gt; kermeta::standard::Object&gt;) : Void is do
+	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
 		// String attributes are value, so they aren't really "owned"  
 	end
 }
 aspect class A inherits NamedElement {
-	operation eachOwnedElement(func : &lt;kermeta::standard::Object -&gt; kermeta::standard::Object&gt;) : Void is do
+	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
 		super(func)
 		self.ownedAs.each{ e |
 			func(e)
 		}
 	end
 }
-class B inherits A {
-	operation eachOwnedElement(func : &lt;kermeta::standard::Object -&gt; kermeta::standard::Object&gt;) : Void is do
+aspect class B inherits A {
+	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
 		super(func) // makes sure to call func on attributes inherited from A
 		self.ownedBs.each{ e |
 			func(e)
 		}
 	end
 }
-class C inherits A {
-	operation eachOwnedElement(func : &lt;kermeta::standard::Object -&gt; kermeta::standard::Object&gt;) : Void is do
+aspect class C inherits A {
+	operation eachOwnedElement(func : <NamedElement -> Void>) : Void is do
 		super(func) // makes sure to call func on attributes inherited from A
 		self.ownedBs.each{ e |
 			func(e)
@@ -5860,15 +5854,19 @@ class C inherits A {
 	end
 }</programlisting>
 				<para>Then a call like the following will ensure to traverse all the
-					elements.
+					directly owned elements.
 				</para>
-				<programlisting language="kermeta">var a : A := // initialize it with a complexe model :-)
-// write the name of all the elements directly or indirectly contained by a
-a.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement) }
+				<programlisting language="kermeta">var c : C := // initialize it with a complexe model :-)
+// write the name of all the elements directly  contained by c
+c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 
-// collect all the elements directly or indirectly contained by a
-var allOwnedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
-a.eachOwnedElement{ aNamedElement | allOwnedElements.add(aNamedElement) }</programlisting>
+// collect all the elements directly contained by c
+var ownedElements : Sequence<Object> := Sequence<Object>.new
+c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
+stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)</programlisting>
+				<para>A small variant will ensure to traverse the directly and indirectly owned elements.
+				</para>
+				<programlisting language="kermeta">TODO</programlisting>
 				<tip>
 					<para>Like any pattern, this task can be automated by using a model
 						transformation. The Ecore MDK offers such transformation that
