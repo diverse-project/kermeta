@@ -1,4 +1,4 @@
-KermetaProject "test.memento.conditions" 
+KermetaProject "test_015_var_visibility_if_loop" 
 //version :  "2.0.1-SNAPSHOT" 
 groupId ="pkg"
 defaultMainClass ="pkg::Test"
