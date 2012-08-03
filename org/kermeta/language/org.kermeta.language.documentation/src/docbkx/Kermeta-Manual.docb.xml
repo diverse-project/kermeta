@@ -5864,9 +5864,23 @@ c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 var ownedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
 c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
 stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)</programlisting>
-				<para>A small variant will ensure to traverse the directly and indirectly owned elements.
+				<para>It is then easy to extend this pattern to traverse the directly and indirectly owned elements.
 				</para>
-				<programlisting language="kermeta">TODO</programlisting>
+				<programlisting language="kermeta">aspect class NamedElement {
+	operation eachAllOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do			
+		eachOwnedElement{e|
+			func(e) 
+			e.eachAllOwnedElement{child|func(child)} 
+		}
+	end
+}</programlisting>
+<para>This new operation can be called in the same easy way:</para>
+<programlisting language="kermeta">// write the name of all the elements directly or indirectly contained by c
+c.eachAllOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
+
+// collect all the elements directly or indirectly contained by c
+var allownedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
+c.eachAllOwnedElement{ aNamedElement | allownedElements.add(aNamedElement) }</programlisting>
 				<tip>
 					<para>Like any pattern, this task can be automated by using a model
 						transformation. The Ecore MDK offers such transformation that
