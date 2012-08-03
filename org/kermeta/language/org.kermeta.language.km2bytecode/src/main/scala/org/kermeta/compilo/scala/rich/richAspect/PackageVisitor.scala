@@ -271,14 +271,13 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     log.debug (thi.getName() + " " + thi.getStaticType() )
     if (thi.getStaticType().isInstanceOf[Class])
       log.debug(""+thi.getStaticType().asInstanceOf[Class].getTypeDefinition())
-    if (thi.getStaticType().isInstanceOf[Class] && "scala.Unit".equals(
-      getQualifiedNameCompilo(thi.getStaticType().asInstanceOf[Class].getTypeDefinition()))){
-     res append "()"
-    }
-    else if (thi.getParameters() != null && thi.getParameters().size > 0) {
+    if (thi.getParameters() != null && thi.getParameters().size > 0) {
       res append "("
       generateScalaCodeEach(res, thi.getParameters(), ",")
       res append ")"
+    } else if (thi.getStaticType().isInstanceOf[Class] && "scala.Unit".equals(
+      getQualifiedNameCompilo(thi.getStaticType().asInstanceOf[Class].getTypeDefinition()))){
+     res append "()"
     }
   }
 
