@@ -3,7 +3,7 @@ using kermeta::io::StdIO => stdio
 using rootPackage
 
 package mainPackage{
-	class MainClass
+	class MainClass inherits kermeta::kunit::TestCase
 	{
 		operation mainOperation() : Void is do 
 			var c : C := C.new
@@ -20,7 +20,7 @@ package mainPackage{
 			var ownedElements : Sequence<Object> := Sequence<Object>.new
 			c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
 			stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)
-			
+			assert(ownedElements.size == 2)
 			
 			// write the name of all the elements directly or indirectly contained by c
 			c.eachAllOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
@@ -28,8 +28,8 @@ package mainPackage{
 			// collect all the elements directly or indirectly contained by c
 			var allownedElements : Sequence<Object> := Sequence<Object>.new
 			c.eachAllOwnedElement{ aNamedElement | allownedElements.add(aNamedElement) }
-			stdio.writeln("ownedElements.size = "+ allownedElements.size.toString)
-			
+			stdio.writeln("allownedElements.size = "+ allownedElements.size.toString)
+			assert(allownedElements.size == 3)
 			
 		end
 	}
