@@ -5856,7 +5856,7 @@ aspect class C inherits A {
 				<para>Then a call like the following will ensure to traverse all the
 					directly owned elements.
 				</para>
-				<programlisting language="kermeta">var c : C := // initialize it with a complexe model :-)
+				<programlisting language="kermeta">var c : C := // initialize it with a complex model :-)
 // write the name of all the elements directly  contained by c
 c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 
