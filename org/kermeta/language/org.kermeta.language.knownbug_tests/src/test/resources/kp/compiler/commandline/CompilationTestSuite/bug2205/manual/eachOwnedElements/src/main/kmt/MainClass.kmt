@@ -13,26 +13,23 @@ package mainPackage{
 			
 			c.ownedAs.first.ownedAs.add(C.new.initialize("sub").asType(C)) 
 			
-			// write the name of all the elements directly  contained by a
+			// write the name of all the elements directly  contained by c
 			c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 			
-			// collect all the elements directly contained by a
+			// collect all the elements directly contained by c
 			var ownedElements : Sequence<Object> := Sequence<Object>.new
 			c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
 			stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)
 			
 			
-			// write the name of all the elements directly or indirectly contained by a
-			/*var printNameFunction : <NamedElement->Void> := 
-			c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name)
-				 aNamedElement
-			}
+			// write the name of all the elements directly or indirectly contained by c
+			c.eachAllOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 			
-			// collect all the elements directly or indirectly contained by a
-			var allOwnedElements : Sequence<Object> := Sequence<Object>.new
-			c.eachOwnedElement{ aNamedElement | allOwnedElements.add(aNamedElement) }
-			stdio.writeln("allOwnedElements.size = "+ allOwnedElements.size.toString)
-			*/
+			// collect all the elements directly or indirectly contained by c
+			var allownedElements : Sequence<Object> := Sequence<Object>.new
+			c.eachAllOwnedElement{ aNamedElement | allownedElements.add(aNamedElement) }
+			stdio.writeln("ownedElements.size = "+ allownedElements.size.toString)
+			
 			
 		end
 	}
