@@ -50,8 +50,9 @@ public class ExtensibleURIConverterImplURIMapHelper {
 	
 	public static Properties getMapFromSystemProperty(){
 		String fileLocation = System.getProperties().getProperty(URIMAP_LOCATION_SYSTEM_PROPERTY);
-		if (fileLocation == null) return null;
 		Properties props = new Properties();
+		if (fileLocation == null) return props;
+		
 		try {
 			FileInputStream fis = new FileInputStream(fileLocation);
 			props.load(fis);
