@@ -142,7 +142,14 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     //        res.append(thi.getName+"")
     res.append(thi.getName + "")
     res.append(" : ")
-    getListorType(thi, res)
+    if(thi.getUpper()>1 || thi.getUpper() == -1){
+      res.append("k2.standard.Reflective")
+      getCollectionType(thi,res)
+      res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + ",")
+      visitTypeParam(thi.getType(),res)
+      res.append("]")
+    } else
+      visit(thi.getType(),res)
     res.append("={")
     if (thi.getGetterBody == null) {
       // For reflexivity
