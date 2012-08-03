@@ -50,7 +50,9 @@ class LambdaTester inherits kermeta::kunit::Assert
 		
 		testLambdaVarPriority
 		testLambdaInOperation
-		testOpWithLambdaAsParam
+		testOpWithLambdaAsParam1
+		testOpWithLambdaAsParam2
+		testOpWithSingleLambdaAsParam()
 		testintegerTimes
 		testintegerTimesToString
 		testFract
@@ -302,17 +304,50 @@ class LambdaTester inherits kermeta::kunit::Assert
 		assert(3.mult(lf1(2, 5))==21)
 	end
 	
-	operation testOpWithLambdaAsParam() : Void is do
+	operation testOpWithLambdaAsParam1() : Void is do
 		var lf1 : <Integer->Integer>
 		lf1 := { i : Integer | i.plus(54) }
 		assert(opWithLambdaAsParam(lf1, 3)==57)
+	end
+	
+	operation testOpWithLambdaAsParam2() : Void is do
+		
+		assert(opWithLambdaAsParam({ i : Integer | i.plus(54) }, 3)==57)
 	end
 	// TODO : lambda exp. as a parameter binding of a parametric class? 
 
 
 	/** an operation that takes a lambda exp. as param and simply executes it */
 	operation opWithLambdaAsParam(lambda : <Integer->Integer>, a : kermeta::standard::Integer) : Integer is do
+		lambda(a)
 		result := lambda(a)
+	end
+	
+	
+	operation testOpWithSingleLambdaAsParam() : Void is do
+		var passed : Boolean := false
+		//opWithSingleLambdaAsParam1{ aa : A | passed := true } // bug #2207
+		opWithSingleLambdaAsParam1{ aa : A | passed := true void} // workaround for bug  #2207
+		assert(passed)
+		passed := false
+		//opWithSingleLambdaAsParam2{ aa : A | passed := true } // bug #2207
+		opWithSingleLambdaAsParam2{ aa : A | passed := true void} // workaround for bug  #2207
+		assert(passed)
+	end
+	/** an operation that takes a lambda exp. as param and simply executes it */
+	operation opWithSingleLambdaAsParam1(lambda1 : <A->Void>) : Void is do
+		var a : A := A.new 
+		lambda1(a)	// bug #2205
+		var o : Object
+		o := lambda1(a)
+	end
+	
+	/** an operation that takes a lambda exp. as param and simply executes it */
+	operation opWithSingleLambdaAsParam2(lambda2 : <A->Object>) : Void is do
+		var a : A := A.new 
+		lambda2(a)	
+		var o : Object
+		o := lambda2(a)
 	end
 	
 	operation testintegerTimes() is do
@@ -340,4 +375,7 @@ class LambdaTester inherits kermeta::kunit::Assert
 		StdIO.writeln(fact(7).toString)
 	end
 	
+}
+
+class A {
 }
