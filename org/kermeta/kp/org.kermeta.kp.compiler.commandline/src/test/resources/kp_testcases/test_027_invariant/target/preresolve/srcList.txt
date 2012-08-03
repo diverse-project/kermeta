@@ -1,1 +1,0 @@
-jar:file:/home/jymarcha/local/kermeta2_dev/configuration/org.eclipse.osgi/bundles/39322/1/bundlefile!/META-INF/kermeta/language.library.core.km
