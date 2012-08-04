@@ -145,7 +145,12 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     if(thi.getUpper()>1 || thi.getUpper() == -1){
       res.append("k2.standard.Reflective")
       getCollectionType(thi,res)
-      res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + ",")
+      res.append("[") 
+      if(thi.getOpposite()!=null)
+        visit(thi.getOpposite().asInstanceOf[Property].getType(),res)
+      else
+        res.append("Any")
+      res.append(",")
       visitTypeParam(thi.getType(),res)
       res.append("]")
     } else
@@ -172,7 +177,12 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         
         res.append("new k2.standard.RichReflective")
         getCollectionType(thi,res)
-        res.append("["+ getQualifiedNameCompilo(thi.getOwningClass) + ",")
+        res.append("[")
+        if(thi.getOpposite()!=null)
+          visit(thi.getOpposite().asInstanceOf[Property].getType(),res)
+        else
+          res.append("Any")
+        res.append(",")
         visitTypeParam(thi.getType(),res)
         res.append("](thisUpper = "+thi.getUpper+",value=")
       }
