@@ -10,7 +10,6 @@ import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 
-import com.sun.org.apache.regexp.internal.RE;
 
 public class KpChecker {
 
@@ -37,7 +36,7 @@ public class KpChecker {
 				= (org.kermeta.language.language.resolver.org.kermeta.language.structure.RichModelingUnit) resolvedMU;
 			TypeDefinition td = mua.getTypeDefinitionByQualifiedName(kp.getDefaultMainClass());
 			if(td == null){
-				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				compiler.errorMessage = "Invalid kp file. Default main class not found";
 				compiler.hasFailed = true;
 			}
@@ -49,13 +48,13 @@ public class KpChecker {
 							=(org.kermeta.language.language.resolver.org.kermeta.language.structure.RichClassDefinition)cd;
 						List<Object> lo = cda.getOperation(kp.getDefaultMainOperation());
 						if(lo.size() > 1){
-							compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "More than one operation may correspond to the default main operation", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+							compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "More than one operation may correspond to the default main operation", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 							compiler.errorMessage = "Invalid kp file. More than one operation may correspond to the default main operation";
 							compiler.hasFailed = true;
 						}
 						else{
 							if(lo.size() == 0){
-								compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not found", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+								compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not found", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 								compiler.errorMessage = "Invalid kp file. Default main operation not found";
 								compiler.hasFailed = true;
 							}
@@ -67,13 +66,13 @@ public class KpChecker {
 										if(t instanceof org.kermeta.language.structure.Class){
 											org.kermeta.language.structure.Class c = (org.kermeta.language.structure.Class)t;
 											if (!c.getTypeDefinition().getName().equals("String")){
-												compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not usable due to invalid parameter type", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+												compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not usable due to invalid parameter type", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 												compiler.errorMessage = "Invalid kp file. Default main operation not usable due to invalid parameter type";
 												compiler.hasFailed = true;
 											}
 										}
 										else{
-											compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not usable due to invalid parameter type", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+											compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not usable due to invalid parameter type", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 											compiler.errorMessage = "Invalid kp file. Default main operation not usable due to invalid parameter type";
 											compiler.hasFailed = true;
 										}
@@ -84,7 +83,7 @@ public class KpChecker {
 					}
 				
 				else{
-					compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class isn't a ClassDefinition", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class isn't a ClassDefinition", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 					compiler.errorMessage = "Invalid kp file. Default main Class  isn't a ClassDefinition";
 					compiler.hasFailed = true;
 				}
@@ -93,7 +92,7 @@ public class KpChecker {
 			
 		}
 		else{
-			compiler.logger.log(MessagingSystem.Kind.DevWARNING,"cannot check defaultMain because "+resolvedMU.toString() + " is not instance of  org.kermeta.language.language.checker.org.kermeta.language.structure.RichModelingUnit", compiler.LOG_MESSAGE_GROUP);
+			compiler.logger.log(MessagingSystem.Kind.DevWARNING,"cannot check defaultMain because "+resolvedMU.toString() + " is not instance of  org.kermeta.language.language.checker.org.kermeta.language.structure.RichModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP);
 		}
 		
 	}
@@ -101,7 +100,7 @@ public class KpChecker {
 	public void checkGroupId(String kpFileURL, KermetaProject kp, ModelingUnit resolvedMU) throws MalformedURLException{
 		
 		if(kp.getGroup().contains(":")){
-			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "invalid character : in groupId", compiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "invalid character : in groupId", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 			compiler.errorMessage = "Invalid kp file. invalid character : in groupId";
 			compiler.hasFailed = true;
 		}

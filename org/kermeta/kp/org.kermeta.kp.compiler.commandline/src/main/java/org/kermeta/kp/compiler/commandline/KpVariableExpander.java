@@ -19,13 +19,10 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.eclipse.emf.common.util.URI;
 import org.kermeta.kp.Dependency;
 import org.kermeta.kp.KermetaProject;
-import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.LocalFileConverter;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
-import org.kermeta.utils.systemservices.api.reference.FileReference;
 
 /**
  * Expand string with variables (${...} ) into string without variable
@@ -222,7 +219,7 @@ public class KpVariableExpander {
 			if(replacement.equals(m.group())){
 				System.out.println("Failed to expand variable "+ m.group());
 				System.out.print("    known system properties : ");
-				for (Iterator iterator = System.getProperties().keySet().iterator(); iterator.hasNext();) {
+				for (Iterator<Object> iterator = System.getProperties().keySet().iterator(); iterator.hasNext();) {
 					String key = (String) iterator.next();
 					System.out.print(key);
 					if(iterator.hasNext()) System.out.print(", ");

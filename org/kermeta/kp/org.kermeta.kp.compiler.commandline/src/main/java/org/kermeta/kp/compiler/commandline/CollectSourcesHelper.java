@@ -163,7 +163,7 @@ public class CollectSourcesHelper {
 	public ArrayList<TracedURL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		// Note that source is relative to the kp file not the jvm current dir
-		List<Source> srcs = kp.getSources();
+		//List<Source> srcs = kp.getSources();
 		ArrayList<TracedURL> kpSources = getDirectSources(kp, kpFileUrl, varExpander);
 
 		// get km from dependencies

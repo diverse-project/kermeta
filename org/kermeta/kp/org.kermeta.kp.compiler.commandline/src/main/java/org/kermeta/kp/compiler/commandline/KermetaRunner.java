@@ -104,7 +104,7 @@ public class KermetaRunner {
 				err2msThread.join();
 				in2Stream.close();
 				in2StreamThread.interrupt();
-				int exitVal = process.waitFor();
+				/*int exitVal = */ process.waitFor();
 				cancelMonitorThread.interrupt();
 				this.logger.debug("stream threads have joined ", KermetaCompiler.LOG_MESSAGE_GROUP);
 				

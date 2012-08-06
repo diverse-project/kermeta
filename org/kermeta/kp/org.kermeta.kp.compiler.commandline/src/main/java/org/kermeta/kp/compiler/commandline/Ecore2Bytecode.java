@@ -28,7 +28,6 @@ import javax.tools.ToolProvider;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.callable.CallableGenmodelGenerator;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
