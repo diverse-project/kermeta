@@ -153,7 +153,7 @@ public class KRunTest extends TestCase {
 			}
 			String resolvedURL;
 			try {
-				resolvedURL = "file:/"+compiler.getResolvedDependencyURL(dep,varExpander);
+				resolvedURL = "file:///"+compiler.getResolvedDependencyURL(dep,varExpander);
 				if(resolvedURL.endsWith(".jar"))  resolvedURL= "jar:"+resolvedURL+"!/"; 
 				//platform\:/plugin/org.eclipse.emf.ecore/=jar\:file\:/C\:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar\!/
 				
@@ -181,7 +181,7 @@ public class KRunTest extends TestCase {
 				String artefactId = matcher.group(2);
 				String resolvedURL;
 				try {
-					resolvedURL = "jar:file:/"+compiler.getResolvedDependencyURL(dep,varExpander)+"!/";
+					resolvedURL = "jar:file:///"+compiler.getResolvedDependencyURL(dep,varExpander)+"!/";
 					if(resolvedURL != null){
 						props.put("platform:/plugin/"+groupId+"."+artefactId+"/", resolvedURL);
 						return;
