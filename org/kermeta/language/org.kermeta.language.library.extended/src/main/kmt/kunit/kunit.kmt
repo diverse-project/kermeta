@@ -720,16 +720,16 @@ class TestRunner
 		"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
 
 		if not log.failures.empty then
-			stdio.errorln("\nFailures: ")
+			stdio.errorln("\nFailures: ("+log.failures.size.toString+")")
 			log.failures.each { f | stdio.errorln("\n   " + f.toString) 	}
 		end
 		if not log.errors.empty then
-			stdio.errorln("\nErrors: ")	
+			stdio.errorln("\nErrors: ("+log.errors.size.toString+")")	
 			log.errors.each { e | 
 			stdio.errorln("\n   " + e.toString) 	}
 		end
 		if not log.harnessErrors.empty then
-			stdio.errorln("\nErrors from setUp or tearDown : ")	
+			stdio.errorln("\nErrors from setUp or tearDown : ("+log.harnessErrors.size.toString+")")	
 			log.harnessErrors.each { e | stdio.errorln("\n   " + e.toString) 	}
 		end
 		stdio.writeln("\n Summary: ")
