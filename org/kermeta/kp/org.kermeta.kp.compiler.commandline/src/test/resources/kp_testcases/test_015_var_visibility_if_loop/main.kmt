@@ -4,10 +4,16 @@ package pkg{
 		attribute foo2 : kermeta::standard::Integer
 	
 		operation main() is do
+			foo1 := 0
+			foo2 := 1
 			if(true) then
 				var foo1 : kermeta::standard::String
+				foo1 := "foo1"
+				foo2 := 3
 			else
 				var foo2 : kermeta::standard::String
+				foo1 := 2
+				foo2 := "foo2"
 			end
 			
 			foo1.plus(1)
@@ -15,8 +21,7 @@ package pkg{
 			
 			from
 			var foo1: kermeta::standard::String
-			until
-			foo1 == "coucou"
+			until foo1 == "coucou"
 			loop
 				foo1 := "coucou"
 			end
