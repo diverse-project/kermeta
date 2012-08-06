@@ -39,6 +39,7 @@ import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
+import org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper;
 
 
 
@@ -105,6 +106,9 @@ public class KRunTest extends TestCase {
 		fullClassPath.addAll(additionalClassPath);
 		fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, varExpander));
 		fullClassPath.add(targetFolder+"emfclasses/");
+		
+		// set location of urimap file
+		System.setProperty(ExtensibleURIConverterImplURIMapHelper.URIMAP_LOCATION_SYSTEM_PROPERTY, targetFolder+File.separator+"urimap.properties");
 		
 		ErrorAwareMessagingSystem errorAwareLogger = new ErrorAwareMessagingSystem();
 		KermetaRunner runner = new KermetaRunner(targetFolder+"classes/", 
