@@ -720,17 +720,17 @@ class TestRunner
 		"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
 
 		if not log.failures.empty then
-			stdio.writeln("\nFailures: ")
-			log.failures.each { f | stdio.writeln("\n   " + f.toString) 	}
+			stdio.errorln("\nFailures: ")
+			log.failures.each { f | stdio.errorln("\n   " + f.toString) 	}
 		end
 		if not log.errors.empty then
-			stdio.writeln("\nErrors: ")	
+			stdio.errorln("\nErrors: ")	
 			log.errors.each { e | 
-			stdio.writeln("\n   " + e.toString) 	}
+			stdio.errorln("\n   " + e.toString) 	}
 		end
 		if not log.harnessErrors.empty then
-			stdio.writeln("\nErrors from setUp or tearDown : ")	
-			log.harnessErrors.each { e | stdio.writeln("\n   " + e.toString) 	}
+			stdio.errorln("\nErrors from setUp or tearDown : ")	
+			log.harnessErrors.each { e | stdio.errorln("\n   " + e.toString) 	}
 		end
 		stdio.writeln("\n Summary: ")
 		stdio.writeln("   Number of launched tests : " + log.runtests.toString)
