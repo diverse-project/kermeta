@@ -204,6 +204,12 @@
 			<version>[3.6.0.0,)</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+        	<groupId>org.kermeta.language</groupId>
+        	<artifactId>language.helper.tests</artifactId>
+        	<version>${kermeta.version}</version>
+			<scope>test</scope>
+        </dependency>
 	</dependencies>
 </project>
 
