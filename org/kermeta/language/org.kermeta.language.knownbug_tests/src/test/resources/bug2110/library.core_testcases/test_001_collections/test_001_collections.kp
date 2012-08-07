@@ -1,0 +1,28 @@
+KermetaProject "test_001_collections"
+	groupId = "my.group"
+	defaultMainClass = "mainPackage::MainClass"
+	defaultMainOperation = "mainOperation"
+	sources = {
+		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+
+		// Tests
+		require "${project.baseUri}/src/main/kmt/Utils.kmt"
+		require "${project.baseUri}/src/main/kmt/TestCollectionWithoutKunit.kmt"
+		require "${project.baseUri}/src/main/kmt/TestSetWithoutKunit.kmt"
+		require "${project.baseUri}/src/main/kmt/TestCollection.kmt"
+		require "${project.baseUri}/src/main/kmt/TestSet.kmt"
+		require "${project.baseUri}/src/main/kmt/TestBag.kmt"
+		require "${project.baseUri}/src/main/kmt/TestOrderedCollection.kmt"
+		require "${project.baseUri}/src/main/kmt/TestOrderedSet.kmt"
+		require "${project.baseUri}/src/main/kmt/TestSequence.kmt"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/LATEST"
+		dependency "library.extended" ="mvn:org.kermeta.language/language.library.extended/LATEST"
+	}	packageEquivalences={
+		// indicates the real java name of a given package
+		// useful for deployed thirdparty metamodels
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+		packageEquivalence "uml" = "org.eclipse.uml2.uml"
+	}

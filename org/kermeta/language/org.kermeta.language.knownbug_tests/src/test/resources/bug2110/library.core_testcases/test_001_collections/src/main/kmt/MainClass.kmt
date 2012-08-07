@@ -1,0 +1,26 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using testPackage
+
+package mainPackage{
+	class MainClass
+	{
+		operation mainOperation() : Void is do 
+			/*
+			* Tests to call if kunit is down
+			* Print test results on stdout
+			* Uncomment in case of emergency
+			*/
+			//TestCollectionWithoutKunit.new.mainTest
+			//TestSetWithoutKunit.new.mainTest
+			
+			// Kunit tests
+			TestCollection.new.mainTest
+			TestSet.new.mainTest
+			TestBag.new.mainTest
+			TestOrderedCollection.new.mainTest
+			TestOrderedSet.new.mainTest
+			TestSequence.new.mainTest
+		end
+	}
+}

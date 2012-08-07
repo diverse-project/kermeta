@@ -1,0 +1,36 @@
+package testPackage;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using org::kermeta::kunit
+using kermeta::exceptions
+
+
+
+class CollectionStub[G] inherits Collection[G] {
+}
+
+class OrderedCollectionStub[G] inherits OrderedCollection[G] {
+}
+
+class AlwaysEqual {
+
+	operation equals(o:Object):Boolean is do
+		result:=false
+		if(o.isInstanceOf(AlwaysEqual)) then result := true end
+	end
+
+}
+
+class NamedElement{
+	
+	attribute name:String
+	operation equals(o:Object):Boolean is do
+		result := false
+		if(o.isInstanceOf(NamedElement)) then
+			if(o.asType(NamedElement).name==self.name) then
+				result := true
+			end
+		end
+	end
+}

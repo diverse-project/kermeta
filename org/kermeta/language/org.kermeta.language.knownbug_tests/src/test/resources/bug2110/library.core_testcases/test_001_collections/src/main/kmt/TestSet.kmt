@@ -1,0 +1,332 @@
+package testPackage;
+
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::kunit
+
+class TestSet inherits TestCase {
+	
+	attribute c:Set[String]
+
+	operation mainTest() : Void is do
+		var testRunner : TestRunner init TestRunner.new
+       	testRunner.run(self.getMetaClass)
+       	testRunner.printTestResult
+	end
+
+	operation setUp():Void is do
+		c := Set[String].new
+	end
+	
+	method testAdd() : Void is do
+		c.add("toto")
+		assertTrue(c.size==1)
+		c.add("tutu")
+		c.add("titi")
+		assertTrue(c.size==3)
+		c.add("toto")
+		assertTrue(c.size==3)
+
+		var c2:Collection[String]:=Bag[String].new
+		c2.add("toto")
+		assertTrue(c2.size==1)
+		c.addAll(c2)
+		assertTrue(c.size==3)
+		c2.add("tata")
+		c.addAll(c2)
+		assertTrue(c.size==4)
+		
+		var c:Set[Object]:=Set[Object].new
+		c.add(AlwaysEqual.new)
+		c.add(NamedElement.new)
+		c.add(AlwaysEqual.new)
+		c.add(NamedElement.new)
+		assertTrue(c.size==2)
+		var n:NamedElement
+		n:=NamedElement.new
+		n.name:="t"
+		c.add(n)
+		n:=NamedElement.new
+		n.name:="tu"
+		c.add(n)
+		c.add(NamedElement.new)
+		assertTrue(c.size==4)		
+	end
+
+	method testRemove() : Void is do
+		c.add("tutu")
+		c.add("titi")
+		c.add("toto")
+		assertTrue(c.contains("titi"))
+		c.remove("titi")
+		assertTrue(!c.contains("titi"))
+		
+		var c:Set[Object]:=Set[Object].new
+		c.add(NamedElement.new)
+		c.add(AlwaysEqual.new)
+		assertTrue(c.size==2)
+		c.remove(AlwaysEqual.new)
+		assertTrue(c.size==1 and !c.contains(AlwaysEqual.new))
+		var n:NamedElement
+		n:=NamedElement.new
+		n.name:="t"
+		c.add(n)
+		n:=NamedElement.new
+		n.name:="tu"
+		c.add(n)
+		c.add(NamedElement.new)
+		assertTrue(c.size==3)
+		n:=NamedElement.new
+		n.name:="t"
+		c.remove(n)
+		assertTrue(c.size==2)
+		c.remove(NamedElement.new)
+		n:=NamedElement.new
+		n.name:="tu"
+		assertTrue(c.size==1 and c.contains(n))
+	end
+
+	method testEquals() : Void is do
+		c.add("toto")
+		c.add("titi")
+		c.add("tutu")
+		var c2:Collection[String]:=Bag[String].new
+		c2.add("tutu")
+		c2.add("titi")
+		c2.add("toto")
+		assertTrue(c.equals(c2))
+		c2.add("toto")
+		assertTrue(!c.equals(c2))
+		
+		c2:=Set[String].new
+		c2.add("tutu")
+		c2.add("titi")
+		c2.add("toto")
+		assertTrue(c.equals(c2))
+		
+		c2:=OrderedSet[String].new
+		c2.add("tutu")
+		c2.add("titi")
+		c2.add("toto")
+		assertTrue(!c.equals(c2))
+
+		c2:=Sequence[String].new
+		c2.add("tutu")
+		c2.add("titi")
+		c2.add("toto")
+		assertTrue(!c.equals(c2))
+		
+		var c:Set[Object]:=Set[Object].new
+		var c0:Collection[Object]:=Bag[Object].new
+		c.add(AlwaysEqual.new)
+		c0.add(AlwaysEqual.new)
+		assertTrue(c.equals(c0))
+	end
+	
+	operation testCount() : Void is do
+		c.add("toto")
+		c.add("titi")
+		c.add("toto")
+		c.add("tutu")
+		assertTrue(c.count("toto")==1)
+		assertTrue(c.count("tata")==0)
+		
+		var c:Collection[Object]:=CollectionStub[Object].new
+		c.add(AlwaysEqual.new)
+		assertTrue(c.count(AlwaysEqual.new)==1)
+		
+	end
+	
+	operation testUnion() : Void is do
+		var c2:Set[String]:=Set[String].new
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		var union :Collection[String] := c.union(c2)
+		assertTrue(union.size==3 and c.containsAll(union) and union.containsAll(c))
+		c2.add("toto")
+		union := c.union(c2)
+		assertTrue(union.size==3 and c.containsAll(union) and union.containsAll(c))
+		c2.add("tata")
+		union := c.union(c2)
+		assertTrue(union.size==4 and !c.containsAll(union) and union.containsAll(c) and union.containsAll(c2))
+		
+		var c:Set[Object]:=Set[Object].new
+		var c0:Set[Object]:=Set[Object].new
+		c.add(AlwaysEqual.new)
+		c0.add(AlwaysEqual.new)
+		assertTrue(c.union(c0).size==1)
+	end
+	
+	operation testUnionWithBag() : Void is do
+		var c2:Bag[String]:=Bag[String].new
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		var union :Collection[String] := c.unionWithBag(c2)
+		assertTrue(union.size==3 and c.containsAll(union) and union.containsAll(c))
+		c2.add("toto")
+		union := c.unionWithBag(c2)
+		assertTrue(union.size==4 and c.containsAll(union) and union.containsAll(c))
+		c2.add("tata")
+		union := c.unionWithBag(c2)
+		assertTrue(union.size==5 and !c.containsAll(union) and union.containsAll(c) and union.containsAll(c2))
+	end
+	
+	operation testIntersection() : Void is do
+		var c2:Collection[String] := Bag[String].new
+		c.add("titi")
+		c.add("toto")
+		c.add("tutu")
+		var intersection:Collection[String]:=c.intersection(c2)
+		assertTrue(intersection.empty)
+		c2.add("toto")
+		intersection:=c.intersection(c2)
+		assertTrue(intersection.size==1 and intersection.contains("toto"))
+		c2.add("toto")
+		assertTrue(c2.size==2)
+		intersection:=c.intersection(c2)
+		assertTrue(intersection.size==1 and intersection.contains("toto"))
+		c2.add("tata")
+		intersection:=c.intersection(c2)
+		assertTrue(intersection.size==1 and intersection.contains("toto"))
+		
+		var c:Set[Object]:=Set[Object].new
+		var c0:Set[Object]:=Set[Object].new
+		c.add(AlwaysEqual.new)
+		c0.add(AlwaysEqual.new)
+		assertTrue(c.intersection(c0).size==1)
+	end
+	
+	operation testMinus() : Void is do
+		var c2:Set[String]:=Set[String].new
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		var diff :Collection[String] := c.minus(c2)
+		assertTrue(diff.size==3 and c.containsAll(diff) and diff.containsAll(c))
+		c2.add("toto")
+		diff := c.minus(c2)
+		assertTrue(diff.size==2 and c.containsAll(diff) and !diff.containsAll(c))
+		c2.add("tata")
+		diff := c.minus(c2)
+		assertTrue(diff.size==2 and diff.contains("tutu") and diff.contains("titi"))
+
+		var c:Set[Object]:=Set[Object].new
+		var c0:Set[Object]:=Set[Object].new
+		c.add(AlwaysEqual.new)
+		c0.add(AlwaysEqual.new)
+		assertTrue(c.minus(c0).size==0)
+	end
+	
+	method testAsSet() : Void is do
+		c.add("toto")
+		c.add("ba")
+		c.add("titi")
+		c.add("tutu")
+		c.add("tata")
+		assertTrue(c.size==5)
+		
+		var c2:Collection[String]
+		c2 := c.asSet
+		assertTrue(c2.isInstanceOf(Set[String]))
+		assertTrue(c2.size==5 and c2.containsAll(c))
+		c2.add("bubu")
+		assertTrue(!c.contains("bubu"))
+	end
+	
+	method testAsOrderedSet() : Void is do
+		c.add("toto")
+		c.add("ba")
+		c.add("titi")
+		c.add("tutu")
+		c.add("tata")
+		c.add("toto")
+		assertTrue(c.size==5)
+		
+		var c2:Collection[String]
+		c2 := c.asOrderedSet
+		assertTrue(c2.isInstanceOf(OrderedSet[String]))
+		assertTrue(c2.size==5 and c2.containsAll(c))
+		c2.add("bubu")
+		assertTrue(!c.contains("bubu"))
+	end
+
+	operation testSymmetricDifference() : Void is do
+		var c2:Set[String]:=Set[String].new
+		c.add("toto")
+		c.add("tutu")
+		c.add("titi")
+		var diff :Collection[String] := c.symmetricDifference(c2)
+		assertTrue(diff.size==3 and c.containsAll(diff) and diff.containsAll(c))
+		c2.add("toto")
+		diff := c.symmetricDifference(c2)
+		assertTrue(diff.size==2 and c.containsAll(diff) and !diff.containsAll(c))
+		c2.add("tata")
+		diff := c.symmetricDifference(c2)
+		assertTrue(diff.size==3 and diff.contains("tutu") and diff.contains("titi") and diff.contains("tata"))
+
+		var c:Set[Object]:=Set[Object].new
+		var c0:Set[Object]:=Set[Object].new
+		c.add(AlwaysEqual.new)
+		c0.add(AlwaysEqual.new)
+		assertTrue(c.symmetricDifference(c0).size==0)
+	end
+	
+	operation testFlatten() : Void is do
+		var c:Set[Object] := Set[Object].new
+		var c2:Collection[String]
+		c2:=Set[String].new
+		c2.add("toto")
+		c2.add("tutu") 
+		c.add(c2)
+		c.add("tata")
+		c2:=Bag[String].new
+		c2.add("toto")
+		c2.add("titi")
+		c.add(c2)
+		c.add("tete")
+		
+		var flatten:Set[Object]:=c.flatten
+		assertTrue(flatten.size==5)
+		assertTrue(flatten.contains("toto") and flatten.contains("tutu"))
+		assertTrue(flatten.contains("titi"))
+		assertTrue(flatten.contains("tata") and flatten.contains("tete"))
+		
+		//assertTrue(false) // bug 2190
+
+		c.clear
+		var c0:Collection[Object]
+		c0:=Bag[Object].new
+		c0.add(AlwaysEqual.new)
+		c.add(c0)
+		c0:=Bag[Object].new
+		c0.add(AlwaysEqual.new)
+		c.add(c0)
+		
+		flatten:=c.flatten
+		assertTrue(flatten.size==1)
+		
+		//assertTrue(false) // bug Object -> Any
+	end
+	
+	operation testSortedBy() : Void  is do
+		c.add("toto")
+		c.add("baba")
+		c.add("didi")
+		c.add("bibu")
+		c.add("tutu")
+		var sorted:OrderedSet[String] := c.sortedBy{x,y|y.charAt(0).toString.compareTo(x.charAt(0).toString)}
+		assertTrue(sorted.size==5)
+		var i:Iterator[String]:=sorted.iterator
+		var c2:Collection[String] := Bag[String].new
+		c2.add(i.next)
+		c2.add(i.next)
+		assertTrue(c2.contains("baba") and c2.contains("bibu"))
+		assertTrue(i.next=="didi")
+		c2.clear
+		c2.add(i.next)
+		c2.add(i.next)
+		assertTrue(c2.contains("toto") and c2.contains ("tutu"))
+	end
+}
