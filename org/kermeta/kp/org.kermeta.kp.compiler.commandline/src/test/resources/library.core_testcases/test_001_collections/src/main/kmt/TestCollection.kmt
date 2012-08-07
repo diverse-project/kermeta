@@ -621,10 +621,12 @@ class TestCollection inherits TestCase {
 		assertTrue(c.size==8)
 		
 		/*var c2:Collection[String]:=c.asSequenceType[String]
+		var test : Boolean := true
 		test := test and c2.isInstanceOf(Sequence[String])
 		test := test and c2.size==6 and c2.count("toto")==2 and c2.containsAll(c.select{e|e.isInstanceOf(String)}.asType(Sequence[String]))
+		
+		assertTrue(test) //bug 2110) // assertion disabled , the test is done in the known_bug project
 		*/
-		assertTrue(false) //bug 2110)
 	end
 
 	operation testAsOrderedSet():Void is do
