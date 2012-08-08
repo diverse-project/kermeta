@@ -1,0 +1,18 @@
+KermetaProject "test_ecoreutil_copy"
+	groupId = "my.group"
+	defaultMainClass = "mainPackage::MainClass"
+	defaultMainOperation = "mainOperation"
+	sources = {
+		require "${project.baseUri}/src/main/ecore/my.ecore"
+		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/LATEST"
+		dependency "library.extended" ="mvn:org.kermeta.language/language.library.extended/LATEST"
+	}	packageEquivalences={
+		// indicates the real java name of a given package
+		// useful for deployed thirdparty metamodels
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+		packageEquivalence "uml2" = "org.eclipse.uml2.uml"
+	}

@@ -1,0 +1,78 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using kermeta::kunit
+
+using my
+
+package mainPackage{
+	class MainClass  inherits TestCase
+	{
+		operation mainOperation() : Void is do 
+			var testRunner : TestRunner init TestRunner.new
+	       	testRunner.run(self.getMetaClass)
+	       	testRunner.printTestResult
+		end
+		
+		operation testEcoreUtilCopyOnPureEcore() is do
+			// TODO: implement 'mainOperation' operation
+			// B is pure ecore model element
+			var b1 : B init B.new
+			b1.name := "bfoo"
+			var b2 : B
+			b2 ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(b1)
+			stdio.writeln(b1.toString)
+			stdio.writeln(b2.toString)
+			assert(b1 != b2)
+			assert(b1.name == b2.name)
+			//b2 := (extern org::eclipse::emf::ecore::util::EcoreUtil.copy(b1)).asType(B)
+			//stdio.writeln(b2.toString)
+			
+		end
+		
+		operation testEcoreUtilCopyOnAspectizedEcore() is do	
+			// C is an aspectized ecore model element
+			var c1 : C init C.new
+			c1.name := "cfoo"
+			c1.name2 := "cfoo2"
+			var c2 : C
+			c2 ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(c1)
+			stdio.writeln(c1.toString + " " + c1.name2)
+			stdio.writeln(c2.toString + " " + c2.name2.toString)
+			assert(c1 != c2)
+			assert(c1.name == c2.name)
+			assert(c2.name2.isVoid)
+			//c2 := (extern org::eclipse::emf::ecore::util::EcoreUtil.copy(c1)).asType(C)
+			//stdio.writeln(c2.toString)
+			
+		end
+		
+		operation testEcoreUtilCopyOnPureKermeta() is do	
+			// A is a pure kermeta modelelement
+			var exceptionThrown : Boolean := false
+			var a1 : A init A.new
+			a1.name := "afoo"
+			var a2 : A
+			do
+				a2 ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(a1)
+			rescue (e : kermeta::exceptions::CallOnVoidTarget ) // cannot EcoreUtil.copy pure kermeta objects
+				stdio.writeln("Exception properly caught")
+				exceptionThrown := true
+			end
+			stdio.writeln(a1.toString)
+			stdio.writeln(a2.toString)
+			assert(exceptionThrown)
+			
+		end
+	}
+	
+	class A {
+		attribute name : String
+	}
+}
+
+package my{
+	aspect class C{
+		attribute name2 : String
+	}
+}
+
