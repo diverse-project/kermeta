@@ -17,7 +17,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       case o: Assignment => {
         visitAssignement(o, res)
       }
-      
+
       case o: Block => {
         visitBlock(o, res)
       }
@@ -127,16 +127,16 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       case o: CallEnumLiteral => {
         visitCallEnumLiteral(o, res)
       }
-       case o: Operation => {
+      case o: Operation => {
         visitOperation(o, res)
       }
-        case o: Property => {
+      case o: Property => {
         visitProperty(o, res)
       }
       case o: CallExpression => {
         visitCallExpression(o, res)
       }
-       case o: ObjectTypeVariable => {
+      case o: ObjectTypeVariable => {
         visitObjectTypeVariable(o, res)
       }
 
@@ -144,17 +144,17 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitObjectTypeVariable(thi: ObjectTypeVariable, res: StringBuilder) {
-	  res.append(thi.getName())	  
+    res.append(thi.getName())
   }
   def visitAssignement(thi: Assignment, res: StringBuilder) {
     log.debug("Assignment={}", thi.toString)
-    if (thi.getIsCast()!= null && thi.getIsCast().booleanValue()) {
+    if (thi.getIsCast() != null && thi.getIsCast().booleanValue()) {
       res append "try{\n"
     }
     visit(thi.getTarget(), res)
     res.append(" = ")
-    if (thi.getIsCast()!= null && thi.getIsCast().booleanValue()) {
-      if(isCompiledToScalaType(thi.getTarget().getStaticType())&&thi.getValue().getStaticType()!=thi.getTarget().getStaticType)
+    if (thi.getIsCast() != null && thi.getIsCast().booleanValue()) {
+      if (isCompiledToScalaType(thi.getTarget().getStaticType()) && thi.getValue().getStaticType() != thi.getTarget().getStaticType)
         res.append("_root_.k2.utils.UTilScala.getValue")
     }
     res append "("
@@ -162,7 +162,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     res append ")"
     /* Step looking for a cast */
     var targetClass: StringBuilder = new StringBuilder
-    if (!(thi.getIsCast()!=null && thi.getIsCast())) {
+    if (!(thi.getIsCast() != null && thi.getIsCast())) {
       //if(thi.getValue().isInstanceOf[VoidLiteral]){
       visitTypeParam(thi.getTarget.getStaticType, targetClass)
       //}
@@ -177,8 +177,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         }
       }
     }
-    
-//    var rightClass: StringBuilder = new StringBuilder
+
+    //    var rightClass: StringBuilder = new StringBuilder
     /*if(thi.getValue().isInstanceOf[VoidLiteral]){
      visit(thi.getValue.getStaticType, rightClass)
     
@@ -202,7 +202,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     }
     
     */
-    
+
     /* Generate Cast if found */
     if (!targetClass.toString.equals("")) {
       res append ".asInstanceOf[" + targetClass.toString + "]"
@@ -224,7 +224,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     //RESULT GEN
     if (thi.getRescueBlock().size() > 0) {
       res.append("try {\n ")
-      res.append( body.toString)
+      res.append(body.toString)
       res.append(" \n} catch {\n ")
       res.append(catchBody)
       res.append(" }\n")
@@ -262,22 +262,20 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       res.append(")")
     }
   }
-  
-  
 
   def visitCallVariable(thi: CallVariable, res: StringBuilder): Unit = {
-	
+
     res.append(Util.protectScalaKeyword(thi.getName()))
-    log.debug (thi.getName() + " " + thi.getStaticType() )
+    log.debug(thi.getName() + " " + thi.getStaticType())
     if (thi.getStaticType().isInstanceOf[Class])
-      log.debug(""+thi.getStaticType().asInstanceOf[Class].getTypeDefinition())
+      log.debug("" + thi.getStaticType().asInstanceOf[Class].getTypeDefinition())
     if (thi.getParameters() != null && thi.getParameters().size > 0) {
       res append "("
       generateScalaCodeEach(res, thi.getParameters(), ",")
       res append ")"
     } else if (thi.getStaticType().isInstanceOf[Class] && "scala.Unit".equals(
-      getQualifiedNameCompilo(thi.getStaticType().asInstanceOf[Class].getTypeDefinition()))){
-     res append "()"
+      getQualifiedNameCompilo(thi.getStaticType().asInstanceOf[Class].getTypeDefinition()))) {
+      res append "()"
     }
   }
 
@@ -452,21 +450,20 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitCallTypeLiteral(thi: CallTypeLiteral, res: StringBuilder): Unit = {
-          var singleton : scala.Boolean =false
-        if (thi.getTyperef().getType.isInstanceOf[Class]){
-         singleton=   thi.getTyperef().getType.asInstanceOf[Class]
-             .getTypeDefinition.asInstanceOf[ClassDefinition].getIsSingleton.booleanValue
-          if (singleton)
-           {
-              res.append("_root_."+k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
-           }else{
-                res.append("scalaUtil.Util.getMetaClass(\"")
-                res.append(k2.utils.UTilScala.getQualifiedNameTypeKermeta(thi.getTyperef().getType, "."))
-                res.append("\")")
-           }
-        }else{
-            res.append("_root_." + k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
-        }
+    var singleton: scala.Boolean = false
+    if (thi.getTyperef().getType.isInstanceOf[Class]) {
+      singleton = thi.getTyperef().getType.asInstanceOf[Class]
+        .getTypeDefinition.asInstanceOf[ClassDefinition].getIsSingleton.booleanValue
+      if (singleton) {
+        res.append("_root_." + k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
+      } else {
+        res.append("scalaUtil.Util.getMetaClass(\"")
+        res.append(k2.utils.UTilScala.getQualifiedNameTypeKermeta(thi.getTyperef().getType, "."))
+        res.append("\")")
+      }
+    } else {
+      res.append("_root_." + k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
+    }
   }
 
   def generateScalaCodeForInstanceOf(thi: CallTypeLiteral, res: StringBuilder): Unit = {
@@ -497,12 +494,12 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   def getListorType(thi: VariableDecl, res: StringBuilder) = {
     if (thi.getType.getUpper > 1 || thi.getType.getUpper == -1) {
       if (thi.getType.getIsOrdered == null || thi.getType.getIsOrdered) {
-        if(thi.getType.getIsUnique() == null || thi.getType.getIsUnique())
+        if (thi.getType.getIsUnique() == null || thi.getType.getIsUnique())
           res.append("k2.standard.KermetaOrderedSet[")
         else
           res.append("k2.standard.KermetaSequence[")
       } else {
-        if(thi.getType.getIsUnique() == null || thi.getType.getIsUnique())
+        if (thi.getType.getIsUnique() == null || thi.getType.getIsUnique())
           res.append("k2.standard.KermetaSet[")
         else
           res.append("k2.standard.KermetaBag[")
@@ -515,22 +512,22 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitTypeVariableBinding(thi: TypeVariableBinding, res: StringBuilder) = {
-    if(getQualifiedNameCompilo(thi.getType())=="_root_.k2.standard.KermetaObject")
+    if (getQualifiedNameCompilo(thi.getType()) == "_root_.k2.standard.KermetaObject")
       res.append("Any")
     else
       visit(thi.getType, res)
   }
-  
-  def visitTypeParam(thi:org.kermeta.language.structure.Type,res:StringBuilder)={
-    if((thi.isInstanceOf[org.kermeta.language.structure.ClassDefinition] || thi.isInstanceOf[org.kermeta.language.structure.Class])
-        && getQualifiedNameCompilo(thi)=="_root_.k2.standard.KermetaObject")
+
+  def visitTypeParam(thi: org.kermeta.language.structure.Type, res: StringBuilder) = {
+    if ((thi.isInstanceOf[org.kermeta.language.structure.ClassDefinition] || thi.isInstanceOf[org.kermeta.language.structure.Class])
+      && getQualifiedNameCompilo(thi) == "_root_.k2.standard.KermetaObject")
       res.append("Any")
     else
       visit(thi, res)
   }
-  
-  def visitTypeRefParam(thi:org.kermeta.language.behavior.TypeReference,res:StringBuilder) ={
-    if(getQualifiedNameCompilo(thi.getType())=="_root_.k2.standard.KermetaObject")
+
+  def visitTypeRefParam(thi: org.kermeta.language.behavior.TypeReference, res: StringBuilder) = {
+    if (getQualifiedNameCompilo(thi.getType()) == "_root_.k2.standard.KermetaObject")
       res.append("Any")
     else
       visit(thi, res)
@@ -552,7 +549,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitClass(thi: Class, res: StringBuilder): Unit = {
-    
+
     var qualifiedName = getQualifiedNameCompilo(thi)
     //if (qualifiedName.contains("org.kermeta.language.structure.Object") && !qualifiedName.contains("ObjectTypeVariable")) {
     if (qualifiedName.equals("org.kermeta.language.structure.Object") || qualifiedName.equals("_root_.org.kermeta.language.structure.Object")) {
@@ -620,7 +617,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     //SEARCH THE FIRST LEVEL SUPER TYPE WHERE OPERATION COMING FROM
     var superTrait = classFrom.getSuperType.filter({ s => isSubTypeOf(s, superClassFromName) }).head
     var superTraitQualifiedName = getQualifiedNameCompilo(superTrait)
-    var superTraitName = superTraitQualifiedName.substring(superTraitQualifiedName.lastIndexOf(".")+1)
+    var superTraitName = superTraitQualifiedName.substring(superTraitQualifiedName.lastIndexOf(".") + 1)
     /* var superTrait : Type = null
     var maxLevel : Int = 2
     classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).foreach{stype=>
@@ -723,17 +720,16 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         return p.getName()
       }
       case c: Class => {
-        
+
         if (Util.hasEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)) {
-        	// special case for types that are mapped to java types in Ecore
-        	return Util.getEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)
-        }
-        else {
-        	var res = new StringBuilder
-	        var typename = Util.protectScalaKeyword(getQualifiedNamedBase(c.getTypeDefinition))
-	        if (typename.contains(".")) res.append("_root_.")
-	        res.append(typename)
-	        return res.toString
+          // special case for types that are mapped to java types in Ecore
+          return Util.getEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)
+        } else {
+          var res = new StringBuilder
+          var typename = Util.protectScalaKeyword(getQualifiedNamedBase(c.getTypeDefinition))
+          if (typename.contains(".")) res.append("_root_.")
+          res.append(typename)
+          return res.toString
         }
         /*if (this.getTypeParamBinding.size>0){
 	         var i = 0;
@@ -757,7 +753,12 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         return getQualifiedNameCompilo(c.eContainer()) + "." + c.getName();
       }
       case c: ClassDefinition => {
-        return k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName())
+        var res = new StringBuilder
+        if (Util.isAMapEntry(c))
+          res.append(GlobalConfiguration.scalaAspectPrefix + ".")
+        res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        return res.toString()
+
       }
     }
   }

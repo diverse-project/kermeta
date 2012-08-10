@@ -25,7 +25,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           generateScalSet(thi, res, "Ker")
         }
 
-        //TODO générer getter et setter si property ajouté par un ecore
+        //TODO générer getter et setter si property ajoutée par un ecore
       }
       //		 		value.getGetterBody
       //		 		value.getSetterBody
@@ -48,11 +48,11 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
     if (thi.getUpper > 1 || thi.getUpper == -1) {
       res.append("k2.standard.Kermeta")
-      getCollectionType(thi,res)
+      getCollectionType(thi, res)
       res.append("[")
-      visitTypeParam(thi.getType,res)
+      visitTypeParam(thi.getType, res)
       res.append("] = k2.standard.KerRichFactory.create")
-      getCollectionType(thi,res)
+      getCollectionType(thi, res)
       res.append("[")
       visitTypeParam(thi.getType, res)
       res.append("]")
@@ -68,7 +68,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   def generateGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
     res.append("def ")
     var s: StringBuilder = new StringBuilder
-    visit(thi.getType(),s)
+    visit(thi.getType(), s)
     if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")) {
       res.append(prefix + "is")
     } else {
@@ -82,53 +82,52 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
     res.append("\n")
   }
-  
+
   def getGetter(thi: Property, s: StringBuilder, res: StringBuilder, prefix: String) = {
     var currentname: String = thi.getName
     if ("class".equals(currentname) && Util.hasEcoreTag(thi)) {
       currentname = currentname + "_"
     }
-  	//Cas des collections uml
+    //Cas des collections uml
     if ((thi.getUpper > 1 || thi.getUpper == -1) && "uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) {
       currentname = getUmlExtension(thi)
     }
-    
-    res.append("this.")
-   
+
+    if (Util.isAMapEntry(thi.getOwningClass()))
+      res.append("wrappedvalue.")
+    else
+      res.append("this.")
+
     var baseName = currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
     var useIs = false
     var useGet = true
-    if (Util.hasEcoreTag(thi)){
-    	var s: StringBuilder = new StringBuilder
-    	visit(thi.getType(),s)
-    	if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") ||  s.toString.equals("_root_.java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")|| s.toString.equals("_root_.kermeta.standard.Boolean")) {
-    	  val classQualifiedName = getQualifiedNamedBase(thi.eContainer.asInstanceOf[ClassDefinition])
-    	  if(Util.doesMethodExists(classQualifiedName, "is"+baseName)) {
-	    	useIs = true
-	    	log.debug(classQualifiedName+"."+"is"+baseName + " found in additional classpath")
-    	  }
-    	  else{
-    	    if(Util.doesMethodExists(classQualifiedName, "get"+baseName)) {
-		    	useGet = true
-		    	log.debug(classQualifiedName+"."+"get"+baseName + " found in additional classpath")
-    	    }
-    	    else{
-    	      useGet = false
-    	      // probably a UML case
-    		  log.debug("neither " +classQualifiedName+"."+"is"+baseName + " nor "+classQualifiedName+"."+"get"+baseName + " found in additional classpath")
-    		  // use to original attribute name
-    		  baseName = currentname
-    	    }
-    	  }
-    	}
+    if (Util.hasEcoreTag(thi)) {
+      var s: StringBuilder = new StringBuilder
+      visit(thi.getType(), s)
+      if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("_root_.java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean") || s.toString.equals("_root_.kermeta.standard.Boolean")) {
+        val classQualifiedName = getQualifiedNamedBase(thi.eContainer.asInstanceOf[ClassDefinition])
+        if (Util.doesMethodExists(classQualifiedName, "is" + baseName)) {
+          useIs = true
+          log.debug(classQualifiedName + "." + "is" + baseName + " found in additional classpath")
+        } else {
+          if (Util.doesMethodExists(classQualifiedName, "get" + baseName)) {
+            useGet = true
+            log.debug(classQualifiedName + "." + "get" + baseName + " found in additional classpath")
+          } else {
+            useGet = false
+            // probably a UML case
+            log.debug("neither " + classQualifiedName + "." + "is" + baseName + " nor " + classQualifiedName + "." + "get" + baseName + " found in additional classpath")
+            // use to original attribute name
+            baseName = currentname
+          }
+        }
+      }
     }
     if (useIs) {
-      res.append(prefix + "is")    
+      res.append(prefix + "is")
     } else if (useGet) {
       res.append(prefix + "get")
     }
-
-    
 
     res.append(baseName + "()")
 
@@ -154,7 +153,9 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     //        res.append(thi.getName+"")
     res.append(thi.getName + "")
     res.append(" : ")
-    if(thi.getUpper()>1 || thi.getUpper() == -1){
+    if (Util.isAMapEntry(thi.getType())){
+    	getListorType(thi, res)
+    } else if (thi.getUpper() > 1 || thi.getUpper() == -1) {
       res.append("k2.standard.Reflective")
       getCollectionType(thi,res)
       res.append("[" + ownerType.toString + ",")
@@ -181,12 +182,16 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append("[")
           res.append(thiType.toString + "]);")
         }
-        
+
         res.append("new k2.standard.RichReflective")
         getCollectionType(thi,res)
         res.append("[" + ownerType.toString + ",")
-        visitTypeParam(thi.getType(),res)
-        res.append("](thisUpper = "+thi.getUpper+",value=")
+         if (Util.isAMapEntry(thi.getType())){
+        	 res.append(Util.getQualifiedNameForMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true))        	 
+         } else {
+        	 visitTypeParam(thi.getType(), res)
+         }
+        res.append("](thisUpper = " + thi.getUpper + ",value=")
       }
 
       if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (thiType.toString.equals("Boolean") || thiType.toString.equals("java.lang.Boolean") || thiType.toString.equals("kermeta.standard.Boolean"))) {
@@ -204,29 +209,29 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         getGetter(thi, thiType, res, prefix)
       } // For reflexivity
       if (thi.getUpper > 1 || thi.getUpper == -1) {
-    	if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())){
-    	  val opposite = thi.getOpposite().asInstanceOf[Property]
-    	  
-    	  res.append(",owner=this.asInstanceOf["+ownerType.toString+"],hasOpposite=true")
-    	  if(opposite.getUpper() == 1){
-    	    // opposite upper == 1
-    	    res.append(",oppositeKerSetter={")
-    	    res.append("(opp:"+thiType+",thi:"+ ownerType.toString)
-    	    res.append(")=>opp.")
-    	    res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
-    	    res.append("(thi)}")
-    	    res.append(",oppositeScalaSetter={(opp:"+thiType+",thi:"+ ownerType.toString)
-    	    res.append(")=>opp.")
-    	    res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
-    	    res.append("=thi}")
-    	  } else {
-    	    // opposite upper > 1 or == -1
-    	    res.append(",oppositeUpper= " + opposite.getUpper())
-    	    res.append(",oppositeScalaGetter={(opp:"+thiType+")=>opp."+GlobalConfiguration.scalaPrefix+opposite.getName()+"}")
-    	  }
-    	}
+      	if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())){
+      	  val opposite = thi.getOpposite().asInstanceOf[Property]
+      	  
+      	  res.append(",owner=this.asInstanceOf["+ownerType.toString+"],hasOpposite=true")
+      	  if(opposite.getUpper() == 1){
+      	    // opposite upper == 1
+      	    res.append(",oppositeKerSetter={")
+      	    res.append("(opp:"+thiType+",thi:"+ ownerType.toString)
+      	    res.append(")=>opp.")
+      	    res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
+      	    res.append("(thi)}")
+      	    res.append(",oppositeScalaSetter={(opp:"+thiType+",thi:"+ ownerType.toString)
+      	    res.append(")=>opp.")
+      	    res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
+      	    res.append("=thi}")
+      	  } else {
+      	    // opposite upper > 1 or == -1
+      	    res.append(",oppositeUpper= " + opposite.getUpper())
+      	    res.append(",oppositeScalaGetter={(opp:"+thiType+")=>opp."+GlobalConfiguration.scalaPrefix+opposite.getName()+"}")
+      	  }
+      	}
         res.append(")")
-      } else{
+      } else {
         var typestring = new StringBuilder
         getListorType(thi, typestring)
         res.append(".asInstanceOf[" + typestring.toString + "]")
@@ -278,7 +283,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateScalSet(thi: Property, res: StringBuilder, prefix: String): Unit = {
-    if (!(thi.getIsReadOnly() != null &&thi.getIsReadOnly())) {
+    if (!(thi.getIsReadOnly() != null && thi.getIsReadOnly())) {
       var currentname: String = thi.getName
 
       if (("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) && ("class".equals(currentname))) {
@@ -287,17 +292,17 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
               currentname = "class"
               }*/
 
-      def kersetName : String = prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
-      def kergetName : String = prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
-      var scalaName = GlobalConfiguration.scalaPrefix+thi.getName()
-      
+      def kersetName: String = prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+      def kergetName: String = prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+      var scalaName = GlobalConfiguration.scalaPrefix + thi.getName()
+
       res.append("def " + scalaName + "_=(")
       res.append("`~value` : ")
       var listType = new StringBuilder
       getListorType(thi, listType)
       res.append(listType.toString)
       res.append("):Unit={")
-      
+
       if (thi.getGetterBody == null && thi.getSetterBody == null) {
         if (thi.getUpper > 1 || thi.getUpper == -1) {
           //Cas des collections uml
@@ -307,36 +312,83 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append("this." + kergetName + "().clear\n")
           if (isCollectionOfObject(listType.toString) && Util.hasEcoreTag(thi))
             res.append("`~value`.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n")
-          else
+          else if (Util.isAMapEntry(thi.getType())) {
+            if (Util.isAMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition].getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType) && (thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition].getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getUpper().equals(-1))) {
+              res.append("`~value`.each(e=>  {")
+              res.append("var v : org.eclipse.emf.common.util.EMap[")
+              var target: ClassDefinition = thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition].getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType.asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition]
+
+              var res1 = new StringBuilder
+
+              res1.append(this.getQualifiedNameCompilo(target.getOwnedAttribute().filter(e => e.getName.equals("key")).get(0).getType))
+              res1.append(",")
+              res1.append(this.getQualifiedNameCompilo(target.getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType))
+              res.append(res1.toString())
+              res.append("] =  new org.eclipse.emf.common.util.BasicEMap[")
+              res.append(res1.toString())
+              res.append("]\n v.putAll(e.wrappedvalue.getValue())\n")
+              res.append("this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().put(e.wrappedvalue.getKey(),v)})")
+            } else
+              res.append("`~value`.each(e=>  this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().put(e.wrappedvalue.getKey(),e.wrappedvalue.getValue()))")
+          } else
             res.append("this." + kergetName + "().addAll(`~value`)\n")
+        } else if (Util.isAMapEntry(thi.getOwningClass()) && thi.getName().equals("key")) {
+          res.append("wrappedvalue = new _root_.java.util.AbstractMap.SimpleEntry[")
+          var typekey = thi.getOwningClass().getOwnedAttribute().filter(e => e.getName.equals("key")).get(0).getType
+          var typevalue = thi.getOwningClass().getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType
+          var typekeystring: String = null
+          var typevaluestring: String = null
+          if (Util.isAMapEntry(typekey)) {
+            typekeystring = Util.getQualifiedNameForMapEntry(typekey.asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true)
+          } else {
+            typekeystring = this.getQualifiedNameCompilo(typekey)
+          }
+          if (Util.isAMapEntry(typevalue)) {
+            if (thi.getOwningClass().getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getUpper().equals(1))
+              typevaluestring = Util.getQualifiedNameForMapEntry(typevalue.asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true)
+            else
+              typevaluestring = Util.getQualifiedNameForMapEntry(typevalue.asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, false)
+
+          } else {
+            typevaluestring = this.getQualifiedNameCompilo(typevalue)
+          }
+
+          res.append(typekeystring)
+          res.append(",")
+          res.append(typevaluestring)
+          res.append("](`~value`, wrappedvalue.getValue())")
         } else {
           // Upper == 1
-          if(thi.getOpposite()!=null && thi.getOpposite().asInstanceOf[Property].getUpper()==1
-              && !Util.hasEcoreTag(thi)&& !Util.hasEcoreTag(thi.getOpposite())){
+          if (thi.getOpposite() != null && thi.getOpposite().asInstanceOf[Property].getUpper() == 1
+            && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
             // Opposite upper == 1
-            var oppKersetName = prefix+"set"+thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase()+thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
-            var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
-            var oppType = new StringBuilder ; visit(thi.getOpposite().asInstanceOf[Property].getType(),oppType)
-            
-            res.append("\n  if(this."+ kergetName +"!=null)\n")
-            res.append("    this."+ kergetName +"." + oppKersetName +"(null.asInstanceOf[" + oppType + "])\n")
+            var oppKersetName = prefix + "set" + thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase() + thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
+            var oppScalaName = GlobalConfiguration.scalaPrefix + thi.getOpposite().asInstanceOf[Property].getName()
+            var oppType = new StringBuilder; visit(thi.getOpposite().asInstanceOf[Property].getType(), oppType)
+
+            res.append("\n  if(this." + kergetName + "!=null)\n")
+            res.append("    this." + kergetName + "." + oppKersetName + "(null.asInstanceOf[" + oppType + "])\n")
             res.append("  if(`~value`!=null){\n")
             res.append("    `~value`."+ oppScalaName +"=null.asInstanceOf[" + oppType + "]\n")
             res.append("    `~value`."+ oppKersetName +"(this.asInstanceOf[" + oppType + "])\n")
             res.append("  }\n")
             res.append("  ")
-          } else if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi)&& !Util.hasEcoreTag(thi.getOpposite())){
+          } else if (thi.getOpposite() != null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
             // Opposite Upper > 1 or opposite Upper == -1
-            var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
+            var oppScalaName = GlobalConfiguration.scalaPrefix + thi.getOpposite().asInstanceOf[Property].getName()
 
-            res.append("\n  if(this."+kergetName+"!=null)\n")
-            res.append("    this."+kergetName+"."+oppScalaName+".remove(this)\n")
+            res.append("\n  if(this." + kergetName + "!=null)\n")
+            res.append("    this." + kergetName + "." + oppScalaName + ".remove(this)\n")
             res.append("  if(`~value`!=null)\n")
-            res.append("    `~value`."+oppScalaName+".add(this)\n")
+            res.append("    `~value`." + oppScalaName + ".add(this)\n")
             res.append("  else\n")
             res.append("    ")
           }
-          res.append("this." + kersetName + "(`~value`)")
+          if (Util.isAMapEntry(thi.getOwningClass()))
+            res.append("wrappedvalue.")
+          else
+            res.append("this.")
+          res.append(kersetName + "(`~value`)")
         }
       } else {
         if (thi.getSetterBody != null) {
@@ -348,8 +400,8 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
     }
   }
-  
-  def isCollectionOfObject(listType:String):Boolean={
+
+  def isCollectionOfObject(listType: String): Boolean = {
     listType.equals("k2.standard.KermetaOrderedSet[_root_.java.lang.Object]") ||
       listType.equals("k2.standard.KermetaSequence[_root_.java.lang.Object]") ||
       listType.equals("k2.standard.KermetaSet[_root_.java.lang.Object]") ||
@@ -359,28 +411,31 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   def getListorType(thi: Property, res: StringBuilder) = {
     if (thi.getUpper > 1 || thi.getUpper == -1) {
       res.append("k2.standard.Kermeta")
-      getCollectionType(thi,res)
+      getCollectionType(thi, res)
       res.append("[")
-      visitTypeParam(thi.getType(),res)
+      if (Util.isAMapEntry(thi.getType()))
+        res.append(Util.getQualifiedNameForMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true))
+      else
+        visitTypeParam(thi.getType(), res)
       res.append("]")
     } else {
-      visit(thi.getType(),res)
+      visit(thi.getType(), res)
     }
 
   }
-  
+
   /**
    * Append the right collection type to res,
    * based on unicity and orderedness
    */
-  def getCollectionType(thi:Property,res:StringBuilder)={
+  def getCollectionType(thi: Property, res: StringBuilder) = {
     if (thi.getIsOrdered == null || thi.getIsOrdered) {
-      if(thi.getIsUnique() == null || thi.getIsUnique())
+      if (thi.getIsUnique() == null || thi.getIsUnique())
         res.append("OrderedSet")
       else
         res.append("Sequence")
     } else {
-      if(thi.getIsUnique() == null || thi.getIsUnique())
+      if (thi.getIsUnique() == null || thi.getIsUnique())
         res.append("Set")
       else
         res.append("Bag")
