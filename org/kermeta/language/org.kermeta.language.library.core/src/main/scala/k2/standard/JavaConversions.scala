@@ -263,6 +263,13 @@ object JavaConversions {
     else
       new RichKermetaSequence[G](value)
   }
+  implicit def juSet2Kermeta[A](l: ju.Set[A]):KermetaSet[A] = {new RichKermetaSet(l) }
+  implicit def juCollection2Kermeta[A](l: ju.Collection[A]):KermetaCol[A] = {
+    if(l.isInstanceOf[ju.Set[A]]) 
+      new RichKermetaSet[A](l)
+    else
+      new RichKermetaSequence[A](l)
+  }
 }
 
 class EachContext {
