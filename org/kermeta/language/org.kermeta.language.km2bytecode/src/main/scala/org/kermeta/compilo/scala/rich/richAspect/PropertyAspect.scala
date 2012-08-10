@@ -448,7 +448,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           if(i!=0)
             res.append(",")
           if(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getType().isInstanceOf[TypeVariable])
-            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getType,res)
+            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getVariable,res)
           else
             visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i),res)
         }
