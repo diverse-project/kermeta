@@ -12,6 +12,7 @@ import scala.collection.JavaConversions._
 class ScalaAspectVisitor extends IVisitor with LogAspect {
 	
   def visit(par : ModelingUnit){
+    PreCompiler.visit(par)
     par.getPackages().foreach(p => (this.visit(p)))
   }
 
