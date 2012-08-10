@@ -12,4 +12,13 @@ package testPackage{
 		reference as:A # bs
 		reference ass:A[0..*]#bss
 	}
+	
+	// used for complex generics opposite properties relations
+	class C[G,H] {
+		reference refD : D[H,G][0..*] #refC
+	}
+	
+	class D[X,Y]{
+		reference refC : C[Y,X] #refD
+	}
 }

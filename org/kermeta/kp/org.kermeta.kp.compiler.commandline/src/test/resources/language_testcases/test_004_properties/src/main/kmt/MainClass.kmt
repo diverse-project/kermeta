@@ -53,6 +53,12 @@ package mainPackage{
 			b0.ass.remove(a0)
 			assertTrueWithMsg(a0.bss.size==1,"Test *-*, 4")
 			assertTrueWithMsg(b0.ass.size==0,"Test *-*, 5")
+			
+			// stdio.writeln("Test generics")
+			var c0 : C[String,Integer] := C[String,Integer].new
+			var d0 : D[Integer,String] := D[Integer,String].new
+			c0.refD.add(d0)
+			assertTrueWithMsg(d0.refC==c0,"Test generics, 1")
         end
 	}
 
