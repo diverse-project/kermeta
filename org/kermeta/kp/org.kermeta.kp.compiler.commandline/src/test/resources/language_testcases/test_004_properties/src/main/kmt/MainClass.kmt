@@ -1,0 +1,59 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+using org::kermeta::language::structure
+using kermeta::kunit
+using testPackage
+
+package mainPackage{
+	class MainClass inherits TestCase
+	{
+		operation mainOperation() : Void is do
+			var a0:A := A.new
+			var a1:A := A.new
+			var b0:B := B.new
+			var b1:B := B.new
+			
+			// stdio.writeln("Test 1-1")
+			a0.b := b0
+			a1.b := b1
+			assertTrueWithMsg(b0.a==a0,"Test 1-1, 1")
+			a0.b := b1
+			assertTrueWithMsg(b0.a==void,"Test 1-1, 2")
+			assertTrueWithMsg(b1.a==a0,"Test 1-1, 3")
+			assertTrueWithMsg(a1.b==void,"Test 1-1, 4")
+			
+			// stdio.writeln("Test 1-*")
+			a0.bs.add(b0)
+			a1.bs.add(b1)
+			assertTrueWithMsg(b0.as==a0,"Test 1-*, 1")
+			a0.bs.add(b1)
+			assertTrueWithMsg(b0.as==a0,"Test 1-*, 2")
+			assertTrueWithMsg(b1.as==a0,"Test 1-*, 3")
+			assertTrueWithMsg(a1.bs.size==0,"Test 1-*, 4")
+			
+			// stdio.writeln("Test *-1")
+			a0.bs.clear
+			a1.bs.clear
+			assertTrueWithMsg(b0.as==void,"Test *-1, 1")
+			b0.as := a0
+			b1.as := a1
+			assertTrueWithMsg(a0.bs.size==1,"Test *-1, 2")
+			b1.as := a0
+			assertTrueWithMsg(b0.as==a0,"Test *-1, 3")
+			assertTrueWithMsg(b1.as==a0,"Test *-1, 4")
+			assertTrueWithMsg(a1.bs.size==0,"Test *-1, 5")
+			
+			// stdio.writeln("Test *-*")
+			a0.bss.add(b0)
+			a1.bss.add(b1)
+			assertTrueWithMsg(b0.ass.size==1,"Test *-*, 1")
+			a0.bss.add(b1)
+			assertTrueWithMsg(a0.bss.size==2,"Test *-*, 2")
+			assertTrueWithMsg(b1.ass.size==2,"Test *-*, 3")
+			b0.ass.remove(a0)
+			assertTrueWithMsg(a0.bss.size==1,"Test *-*, 4")
+			assertTrueWithMsg(b0.ass.size==0,"Test *-*, 5")
+        end
+	}
+
+}

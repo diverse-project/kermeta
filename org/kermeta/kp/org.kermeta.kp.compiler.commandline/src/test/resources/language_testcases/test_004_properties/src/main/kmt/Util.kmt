@@ -1,0 +1,15 @@
+using kermeta::standard
+using kermeta::io::StdIO => stdio
+
+package testPackage{
+	class A{
+		reference b:B # a
+		reference bs : B[0..*] # as
+		reference bss : B[0..*]#ass
+	}
+	class B{
+		reference a:A # b
+		reference as:A # bs
+		reference ass:A[0..*]#bss
+	}
+}
