@@ -135,8 +135,20 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateScalGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
-    var s: StringBuilder = new StringBuilder
-    visit(thi.getType(),s)
+    
+    val thiType: StringBuilder = new StringBuilder // Contains the type of thi
+    visit(thi.getType(),thiType)
+    
+    val ownerType = new StringBuilder // Contains the type of thi owner, i.e. the type of opposite if there is one
+    if(thi.getOpposite()!= null)
+      // If there is an opposite, use it to get the type, associated with the right type parameters
+      visit(thi.getOpposite.asInstanceOf[Property].getType(),ownerType)
+    else {
+      // Otherwise just put type variables for type parameters
+      ownerType.append(getQualifiedNameCompilo(thi.getOwningClass))
+      generateParamerterClass(thi.getOwningClass(),ownerType)
+    }
+
 
     res.append("def " + GlobalConfiguration.scalaPrefix)
     //        res.append(thi.getName+"")
@@ -145,16 +157,11 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     if(thi.getUpper()>1 || thi.getUpper() == -1){
       res.append("k2.standard.Reflective")
       getCollectionType(thi,res)
-      res.append("[") 
-      if(thi.getOpposite()!=null)
-        visit(thi.getOpposite().asInstanceOf[Property].getType(),res)
-      else
-        res.append("Any")
-      res.append(",")
+      res.append("[" + ownerType.toString + ",")
       visitTypeParam(thi.getType(),res)
       res.append("]")
     } else
-      visit(thi.getType(),res)
+      res.append(thiType.toString)
     res.append("={")
     if (thi.getGetterBody == null) {
       // For reflexivity
@@ -165,29 +172,24 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         if (Util.hasEcoreFromAPITag(thi.eContainer.asInstanceOf[KermetaModelElement])) {
           res.append(" if (")
           var res1 = new StringBuilder
-          getGetter(thi, s, res1, prefix)
+          getGetter(thi, thiType, res1, prefix)
           res.append(res1.toString)
           res.append(" == null ) ")
           res.append(res1.toString.replace("this.get", "this.set").replace("()", "("))
-          res.append("k2.standard.KerRichFactory.create")
+          res.append("k2.standard.KerRichFactory.createKermeta")
           getCollectionType(thi,res)
           res.append("[")
-          res.append(s.toString + "]);")
+          res.append(thiType.toString + "]);")
         }
         
         res.append("new k2.standard.RichReflective")
         getCollectionType(thi,res)
-        res.append("[")
-        if(thi.getOpposite()!=null)
-          visit(thi.getOpposite().asInstanceOf[Property].getType(),res)
-        else
-          res.append("Any")
-        res.append(",")
+        res.append("[" + ownerType.toString + ",")
         visitTypeParam(thi.getType(),res)
         res.append("](thisUpper = "+thi.getUpper+",value=")
       }
 
-      if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean"))) {
+      if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName) && (thiType.toString.equals("Boolean") || thiType.toString.equals("java.lang.Boolean") || thiType.toString.equals("kermeta.standard.Boolean"))) {
         if (thi.getName.startsWith("is"))
           res.append("this." + thi.getName + "()")
         else if (thi.getUpper > 1 || thi.getUpper == -1) {
@@ -199,25 +201,28 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         }
 
       } else {
-        getGetter(thi, s, res, prefix)
+        getGetter(thi, thiType, res, prefix)
       } // For reflexivity
       if (thi.getUpper > 1 || thi.getUpper == -1) {
     	if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())){
     	  val opposite = thi.getOpposite().asInstanceOf[Property]
-    	  res.append(",owner=this,hasOpposite=true")
+    	  
+    	  res.append(",owner=this.asInstanceOf["+ownerType.toString+"],hasOpposite=true")
     	  if(opposite.getUpper() == 1){
+    	    // opposite upper == 1
     	    res.append(",oppositeKerSetter={")
-    	    res.append("(opp:"+s+",thi:"+ getQualifiedNameCompilo(thi.getOwningClass))
+    	    res.append("(opp:"+thiType+",thi:"+ ownerType.toString)
     	    res.append(")=>opp.")
     	    res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
     	    res.append("(thi)}")
-    	    res.append(",oppositeScalaSetter={(opp:"+s+",thi:"+getQualifiedNameCompilo(thi.getOwningClass))
+    	    res.append(",oppositeScalaSetter={(opp:"+thiType+",thi:"+ ownerType.toString)
     	    res.append(")=>opp.")
     	    res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
     	    res.append("=thi}")
     	  } else {
+    	    // opposite upper > 1 or == -1
     	    res.append(",oppositeUpper= " + opposite.getUpper())
-    	    res.append(",oppositeScalaGetter={(opp:"+s+")=>opp."+GlobalConfiguration.scalaPrefix+opposite.getName()+"}")
+    	    res.append(",oppositeScalaGetter={(opp:"+thiType+")=>opp."+GlobalConfiguration.scalaPrefix+opposite.getName()+"}")
     	  }
     	}
         res.append(")")
@@ -317,7 +322,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
             res.append("    this."+ kergetName +"." + oppKersetName +"(null.asInstanceOf[" + oppType + "])\n")
             res.append("  if(`~value`!=null){\n")
             res.append("    `~value`."+ oppScalaName +"=null.asInstanceOf[" + oppType + "]\n")
-            res.append("    `~value`."+ oppKersetName +"(this)\n")
+            res.append("    `~value`."+ oppKersetName +"(this.asInstanceOf[" + oppType + "])\n")
             res.append("  }\n")
             res.append("  ")
           } else if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi)&& !Util.hasEcoreTag(thi.getOpposite())){
