@@ -175,7 +175,22 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(thiType.toString + "]);")
         }
 
-        res.append("new k2.standard.RichReflective")
+        if (Util.isAMapEntry(thi.getType())){
+          val mapEntryQualifiedName = Util.getQualifiedNameForMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true)
+          res.append("  // force the convertion of Set of EObjects into list of KermetaObject")
+          res.append("\n  var l : java.util.List[")
+          res.append(mapEntryQualifiedName)
+          res.append("] = new java.util.ArrayList[")
+          res.append(mapEntryQualifiedName)
+          res.append("]()\n")
+          res.append("  l.addAll(")
+          getGetter(thi, thiType, res, prefix) // Note doesn't work for mapEntry using UML style ...
+          res.append(".entrySet().asInstanceOf[java.util.Set[")          
+          res.append(mapEntryQualifiedName)
+          res.append("]])\n")    
+        }
+        
+        res.append("  new k2.standard.RichReflective")
         getCollectionType(thi,res)
         res.append("[" + ownerType.toString + ",")
          if (Util.isAMapEntry(thi.getType())){
@@ -197,7 +212,10 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(thi.getName.substring(0, 1).toUpperCase() + thi.getName.substring(1, thi.getName.length) + "()")
         }
 
-      } else {
+      } else if (Util.isAMapEntry(thi.getType())){
+        res.append("l")
+      }
+      else {
         getGetter(thi, thiType, res, prefix)
       } // For reflexivity
       if (thi.getUpper > 1 || thi.getUpper == -1) {
@@ -312,9 +330,9 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
               var res1 = new StringBuilder
 
-              res1.append(this.getQualifiedNameCompilo(target.getOwnedAttribute().filter(e => e.getName.equals("key")).get(0).getType))
+              res1.append(this.getQualifiedNameEMap(target.getOwnedAttribute().filter(e => e.getName.equals("key")).get(0).getType))
               res1.append(",")
-              res1.append(this.getQualifiedNameCompilo(target.getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType))
+              res1.append(this.getQualifiedNameEMap(target.getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType))
               res.append(res1.toString())
               res.append("] =  new org.eclipse.emf.common.util.BasicEMap[")
               res.append(res1.toString())

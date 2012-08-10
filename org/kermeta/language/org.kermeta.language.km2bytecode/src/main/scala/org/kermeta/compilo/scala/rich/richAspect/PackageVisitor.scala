@@ -711,6 +711,14 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     return res;
   }
 
+   def getQualifiedNameEMap(thi: EObject): String = {
+	  var res = getQualifiedNameCompilo(thi)
+	  if (getQualifiedNameCompilo(thi) == "_root_.k2.standard.KermetaObject"){
+	      res = "org.eclipse.emf.ecore.EObject"
+	  }
+	  return res
+   }
+  
   def getQualifiedNameCompilo(thi: EObject): String = {
     thi match {
       case (p: Package) => {
