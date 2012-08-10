@@ -138,15 +138,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     val thiType: StringBuilder = new StringBuilder // Contains the type of thi
     visit(thi.getType(),thiType)
     
-    val ownerType = new StringBuilder // Contains the type of thi owner, i.e. the type of opposite if there is one
-    if(thi.getOpposite()!= null)
-      // If there is an opposite, use it to get the type, associated with the right type parameters
-      visit(thi.getOpposite.asInstanceOf[Property].getType(),ownerType)
-    else {
-      // Otherwise just put type variables for type parameters
-      ownerType.append(getQualifiedNameCompilo(thi.getOwningClass))
-      generateParamerterClass(thi.getOwningClass(),ownerType)
-    }
+    val ownerType = new StringBuilder; getOwnerType(thi,ownerType) // Contains the type of thi owner, i.e. the type of opposite if there is one
 
 
     res.append("def " + GlobalConfiguration.scalaPrefix)
@@ -362,12 +354,12 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           if (thi.getOpposite() != null && thi.getOpposite().asInstanceOf[Property].getUpper() == 1
             && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
             // Opposite upper == 1
-            var oppKersetName = prefix + "set" + thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase() + thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
-            var oppScalaName = GlobalConfiguration.scalaPrefix + thi.getOpposite().asInstanceOf[Property].getName()
-            var oppType = new StringBuilder; visit(thi.getOpposite().asInstanceOf[Property].getType(), oppType)
-
-            res.append("\n  if(this." + kergetName + "!=null)\n")
-            res.append("    this." + kergetName + "." + oppKersetName + "(null.asInstanceOf[" + oppType + "])\n")
+            var oppKersetName = prefix+"set"+thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase()+thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
+            var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
+            var oppType = new StringBuilder ; getOwnerType(thi,oppType)
+            
+            res.append("\n  if(this."+ kergetName +"!=null)\n")
+            res.append("    this."+ kergetName +"." + oppKersetName +"(null.asInstanceOf[" + oppType + "])\n")
             res.append("  if(`~value`!=null){\n")
             res.append("    `~value`."+ oppScalaName +"=null.asInstanceOf[" + oppType + "]\n")
             res.append("    `~value`."+ oppKersetName +"(this.asInstanceOf[" + oppType + "])\n")
@@ -439,6 +431,34 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         res.append("Set")
       else
         res.append("Bag")
+    }
+  }
+  
+  /** 
+   * Appends the type of thi owner, i.e. the type of opposite if there is one, to res
+   */
+  def getOwnerType(thi:Property,res:StringBuilder)={
+    if(thi.getOpposite()!= null){
+      // If there is an opposite, use it to get the type, associated with the right type parameters
+      res.append(getQualifiedNameCompilo(thi.getOpposite.asInstanceOf[Property].getType))
+      val typeParamNumber = thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.size
+      if(typeParamNumber>0){
+    	res.append("[")
+        for(i <-0 until typeParamNumber){
+          if(i!=0)
+            res.append(",")
+          if(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getType().isInstanceOf[TypeVariable])
+            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getType,res)
+          else
+            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i),res)
+        }
+    	res.append("]")
+      }
+      //visit(thi.getOpposite.asInstanceOf[Property].getType(),ownerType)
+    } else {
+      // Otherwise just put type variables for type parameters
+      res.append(getQualifiedNameCompilo(thi.getOwningClass))
+      generateParamerterClass(thi.getOwningClass(),res)
     }
   }
 }
