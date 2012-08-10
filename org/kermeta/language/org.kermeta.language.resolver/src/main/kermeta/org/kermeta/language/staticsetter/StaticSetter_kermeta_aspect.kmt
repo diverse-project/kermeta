@@ -355,7 +355,7 @@ package behavior {
 		end
 		
 		operation resolveCallToOperation(context : StaticSetterContext) : CallOperation is do
-			stdio.writeln("resolveCallToOperation "+ self.name)
+			if (context.verbose) then stdio.writeln("resolveCallToOperation "+ self.name) end
 			if (target.isVoid).orElse{x|target.staticType.isVoid.orElse{y|target.staticType.realInstanceType.isVoid}} then 
 					stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is an operation. Probably due to a previous element that hasn't been resolved" )
 					result:=void 
