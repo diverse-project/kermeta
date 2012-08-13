@@ -13,7 +13,7 @@ class TestOrderedSet inherits TestCase {
        	testRunner.run(self.getMetaClass)
        	testRunner.printTestResult
        	if(testRunner.log.failures.isNotEmpty or testRunner.log.errors.isNotEmpty or testRunner.log.harnessErrors.isNotEmpty) then
-       		raise Exception.new.initialize("Errors during test execution. See test results for more information.")
+       		raise kermeta::exceptions::Exception.new.initialize("Errors during test execution. See test results for more information.")
        	end
 	end
 	
