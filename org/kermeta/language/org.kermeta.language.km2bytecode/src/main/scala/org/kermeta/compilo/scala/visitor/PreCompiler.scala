@@ -14,7 +14,7 @@ object PreCompiler {
       o.getOwnedTypeDefinition().filter(_.isInstanceOf[ClassDefinition]).foreach(visit)
     case o:ClassDefinition => 
       o.getOwnedAttribute().toBuffer.foreach(visit) 
-    case o:Property if (o.getIsComposite() && o.getOpposite()==null && o.getType().isInstanceOf[Class] && !(Util.isValueType(o.getType.asInstanceOf[Class])))=> 
+    case o:Property if (o.getIsComposite() && o.getOpposite()==null && o.getType().isInstanceOf[Class] && !(Util.isValueType(o.getType.asInstanceOf[Class])) && !Util.hasCompilerIgnoreTag(o.getOwningClass) && !Util.hasCompilerIgnoreTag(o.getType.asInstanceOf[Class].getTypeDefinition))=> 
       val opp : Property = StructurePackage.eINSTANCE.getEFactoryInstance().asInstanceOf[StructureFactory].createProperty()
       opp.setOpposite(o)
       o.setOpposite(opp)
