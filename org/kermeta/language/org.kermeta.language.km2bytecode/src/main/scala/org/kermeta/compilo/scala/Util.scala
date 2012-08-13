@@ -304,6 +304,14 @@ object Util extends LogAspect {
     }
     return false
   }
+  
+  def isValueType(o:org.kermeta.language.structure.Class) : Boolean = {
+    val name = k2.utils.UTilScala.getQualifiedNameClassKermeta(o.getTypeDefinition,".")
+    return name == "kermeta.standard.Integer" || name == "kermeta.standard.String" || 
+    	name == "kermeta.standard.Boolean" || name == "kermeta.standard.Short" ||
+    	name == "kermeta.standard.Double" || name == "kermeta.standard.Long" ||
+    	name == "kermeta.standard.Float" || name == "kermeta.standard.Character"
+  }
 
 }
 
