@@ -85,6 +85,10 @@ class RichException extends Exception
 
 trait RuntimeErrorAspect extends Exception{
   var expression:Expression=null;
+  def KergetExpression() = expression
+  def KersetExpression(e:Expression)={expression=e}
+  def Scalaexpression = this.KergetExpression()
+  def Scalaexpression_=(e:Expression)=this.KersetExpression(e)
 }
 trait RuntimeError extends RuntimeErrorAspect{
 }
