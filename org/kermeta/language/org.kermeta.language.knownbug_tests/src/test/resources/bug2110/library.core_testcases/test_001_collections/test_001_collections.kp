@@ -7,14 +7,7 @@ KermetaProject "test_001_collections"
 
 		// Tests
 		require "${project.baseUri}/src/main/kmt/Utils.kmt"
-		require "${project.baseUri}/src/main/kmt/TestCollectionWithoutKunit.kmt"
-		require "${project.baseUri}/src/main/kmt/TestSetWithoutKunit.kmt"
 		require "${project.baseUri}/src/main/kmt/TestCollection.kmt"
-		require "${project.baseUri}/src/main/kmt/TestSet.kmt"
-		require "${project.baseUri}/src/main/kmt/TestBag.kmt"
-		require "${project.baseUri}/src/main/kmt/TestOrderedCollection.kmt"
-		require "${project.baseUri}/src/main/kmt/TestOrderedSet.kmt"
-		require "${project.baseUri}/src/main/kmt/TestSequence.kmt"
 	}
 	dependencies = {
 		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
