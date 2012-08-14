@@ -34,6 +34,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.language.structure.ClassDefinition#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link org.kermeta.language.structure.ClassDefinition#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link org.kermeta.language.structure.ClassDefinition#getIsSingleton <em>Is Singleton</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.ClassDefinition#getIsFinal <em>Is Final</em>}</li>
  * </ul>
  * </p>
  *
@@ -147,5 +148,32 @@ public interface ClassDefinition extends GenericTypeDefinition {
 	 * @generated
 	 */
 	void setIsSingleton(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Final</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Indicates wether this defintition can be subclassed. 
+	 * This has no effect on extension via aspect weaving.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Final</em>' attribute.
+	 * @see #setIsFinal(Boolean)
+	 * @see org.kermeta.language.structure.StructurePackage#getClassDefinition_IsFinal()
+	 * @model default="false" dataType="org.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	Boolean getIsFinal();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.ClassDefinition#getIsFinal <em>Is Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Final</em>' attribute.
+	 * @see #getIsFinal()
+	 * @generated
+	 */
+	void setIsFinal(Boolean value);
 
 } // ClassDefinition

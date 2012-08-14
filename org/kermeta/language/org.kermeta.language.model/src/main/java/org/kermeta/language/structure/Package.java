@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.language.structure.Package#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Package#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Package#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.Package#getOwnedAdaptationOperators <em>Owned Adaptation Operators</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,5 +100,21 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @generated
 	 */
 	void setUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Adaptation Operators</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.language.structure.AdaptationOperator}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Adaptation Operators</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Adaptation Operators</em>' containment reference list.
+	 * @see org.kermeta.language.structure.StructurePackage#getPackage_OwnedAdaptationOperators()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AdaptationOperator> getOwnedAdaptationOperators();
 
 } // Package

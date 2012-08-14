@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getKermetaModelElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface KermetaModelElement extends EObject {

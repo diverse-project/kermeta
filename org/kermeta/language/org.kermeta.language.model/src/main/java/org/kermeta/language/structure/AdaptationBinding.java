@@ -16,8 +16,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.AdaptationBinding#getTarget <em>Target</em>}</li>
- *   <li>{@link org.kermeta.language.structure.AdaptationBinding#getSource <em>Source</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.AdaptationBinding#getOwnedClassDefinitionBindings <em>Owned Class Definition Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.AdaptationBinding#getOwnedEnumerationBindings <em>Owned Enumeration Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.AdaptationBinding#getUsedAdaptationOperators <em>Used Adaptation Operators</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,37 +26,53 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AdaptationBinding extends ObjectTypeBinding {
+public interface AdaptationBinding extends ModelTypeBinding {
 	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.TypeDefinition}.
+	 * Returns the value of the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.language.structure.ClassDefinitionBinding}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Target</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Owned Class Definition Bindings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getAdaptationBinding_Target()
-	 * @model
+	 * @return the value of the '<em>Owned Class Definition Bindings</em>' containment reference list.
+	 * @see org.kermeta.language.structure.StructurePackage#getAdaptationBinding_OwnedClassDefinitionBindings()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TypeDefinition> getTarget();
+	EList<ClassDefinitionBinding> getOwnedClassDefinitionBindings();
 
 	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.TypeDefinition}.
+	 * Returns the value of the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.language.structure.EnumerationBinding}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Owned Enumeration Bindings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getAdaptationBinding_Source()
-	 * @model
+	 * @return the value of the '<em>Owned Enumeration Bindings</em>' containment reference list.
+	 * @see org.kermeta.language.structure.StructurePackage#getAdaptationBinding_OwnedEnumerationBindings()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TypeDefinition> getSource();
+	EList<EnumerationBinding> getOwnedEnumerationBindings();
+
+	/**
+	 * Returns the value of the '<em><b>Used Adaptation Operators</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.language.structure.UseAdaptationOperator}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Adaptation Operators</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Adaptation Operators</em>' containment reference list.
+	 * @see org.kermeta.language.structure.StructurePackage#getAdaptationBinding_UsedAdaptationOperators()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<UseAdaptationOperator> getUsedAdaptationOperators();
 
 } // AdaptationBinding

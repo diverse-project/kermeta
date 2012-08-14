@@ -6,9 +6,6 @@
  */
 package org.kermeta.language.behavior;
 
-import org.kermeta.language.structure.EnumerationLiteral;
-import org.kermeta.language.structure.Operation;
-import org.kermeta.language.structure.Property;
 
 /**
  * <!-- begin-user-doc -->

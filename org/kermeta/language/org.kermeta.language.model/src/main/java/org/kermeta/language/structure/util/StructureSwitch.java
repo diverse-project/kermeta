@@ -11,20 +11,26 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.Switch;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationBinding;
+import org.kermeta.language.structure.AdaptationOperator;
+import org.kermeta.language.structure.AdaptationParameter;
 import org.kermeta.language.structure.ClassDefinition;
+import org.kermeta.language.structure.ClassDefinitionBinding;
+import org.kermeta.language.structure.ComplexClassDefinitionBinding;
+import org.kermeta.language.structure.ComplexEnumerationBinding;
+import org.kermeta.language.structure.ComplexOperationBinding;
+import org.kermeta.language.structure.ComplexParameterBinding;
+import org.kermeta.language.structure.ComplexPropertyBinding;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.DataType;
-import org.kermeta.language.structure.DirectBinding;
+import org.kermeta.language.structure.EnumLiteralbinding;
 import org.kermeta.language.structure.Enumeration;
+import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
-import org.kermeta.language.structure.IsomorphicBinding;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
@@ -33,39 +39,42 @@ import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
-import org.kermeta.language.structure.NonIsomorphicBinding;
-import org.kermeta.language.structure.ObjectTypeBinding;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.OperationAdaptationOperator;
+import org.kermeta.language.structure.OperationBinding;
 import org.kermeta.language.structure.Parameter;
+import org.kermeta.language.structure.ParameterBinding;
 import org.kermeta.language.structure.ParameterizedType;
-import org.kermeta.language.structure.PartialBinding;
-import org.kermeta.language.structure.PartialIsomorphicBinding;
-import org.kermeta.language.structure.PartialNonIsomorphicBinding;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
+import org.kermeta.language.structure.PropertyAdaptationOperator;
+import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
+import org.kermeta.language.structure.SimpleBinding;
+import org.kermeta.language.structure.SimpleClassDefinitionBinding;
+import org.kermeta.language.structure.SimpleEnumerationBinding;
+import org.kermeta.language.structure.SimpleOperationBinding;
+import org.kermeta.language.structure.SimpleParameterBinding;
+import org.kermeta.language.structure.SimplePropertyBinding;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
-import org.kermeta.language.structure.TotalBinding;
-import org.kermeta.language.structure.TotalIsomorphicBinding;
-import org.kermeta.language.structure.TotalNonIsomorphicBinding;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeDefinitionContainer;
-import org.kermeta.language.structure.TypeMapping;
 import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
-import org.kermeta.language.structure.UnresolvedTypeDefinition;
 import org.kermeta.language.structure.UnresolvedTypeVariable;
+import org.kermeta.language.structure.UseAdaptationOperator;
 import org.kermeta.language.structure.Using;
 import org.kermeta.language.structure.VirtualType;
 import org.kermeta.language.structure.VoidType;
@@ -83,7 +92,7 @@ import org.kermeta.language.structure.VoidType;
  * @see org.kermeta.language.structure.StructurePackage
  * @generated
  */
-public class StructureSwitch<T> extends Switch<T> {
+public class StructureSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -105,16 +114,34 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Checks whether this is a switch for the given package.
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
-	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
+	public T doSwitch(EObject theEObject) {
+		return doSwitch(theEObject.eClass(), theEObject);
+	}
+
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch(eSuperTypes.get(0), theEObject);
+		}
 	}
 
 	/**
@@ -125,7 +152,6 @@ public class StructureSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	//@Override
-	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case StructurePackage.KERMETA_MODEL_ELEMENT: {
@@ -501,14 +527,6 @@ public class StructureSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.TYPE_MAPPING: {
-				TypeMapping typeMapping = (TypeMapping)theEObject;
-				T result = caseTypeMapping(typeMapping);
-				if (result == null) result = caseTypeContainer(typeMapping);
-				if (result == null) result = caseKermetaModelElement(typeMapping);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.UNRESOLVED_INFERRED_TYPE: {
 				UnresolvedInferredType unresolvedInferredType = (UnresolvedInferredType)theEObject;
 				T result = caseUnresolvedInferredType(unresolvedInferredType);
@@ -530,17 +548,6 @@ public class StructureSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.UNRESOLVED_TYPE_DEFINITION: {
-				UnresolvedTypeDefinition unresolvedTypeDefinition = (UnresolvedTypeDefinition)theEObject;
-				T result = caseUnresolvedTypeDefinition(unresolvedTypeDefinition);
-				if (result == null) result = caseUnresolved(unresolvedTypeDefinition);
-				if (result == null) result = caseTypeDefinition(unresolvedTypeDefinition);
-				if (result == null) result = caseNamedElement(unresolvedTypeDefinition);
-				if (result == null) result = caseTypeContainer(unresolvedTypeDefinition);
-				if (result == null) result = caseKermetaModelElement(unresolvedTypeDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.MODEL_TYPE_BINDING: {
 				ModelTypeBinding modelTypeBinding = (ModelTypeBinding)theEObject;
 				T result = caseModelTypeBinding(modelTypeBinding);
@@ -548,98 +555,180 @@ public class StructureSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.TOTAL_BINDING: {
-				TotalBinding totalBinding = (TotalBinding)theEObject;
-				T result = caseTotalBinding(totalBinding);
-				if (result == null) result = caseModelTypeBinding(totalBinding);
-				if (result == null) result = caseKermetaModelElement(totalBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PARTIAL_BINDING: {
-				PartialBinding partialBinding = (PartialBinding)theEObject;
-				T result = casePartialBinding(partialBinding);
-				if (result == null) result = caseModelTypeBinding(partialBinding);
-				if (result == null) result = caseKermetaModelElement(partialBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.ISOMORPHIC_BINDING: {
-				IsomorphicBinding isomorphicBinding = (IsomorphicBinding)theEObject;
-				T result = caseIsomorphicBinding(isomorphicBinding);
-				if (result == null) result = caseModelTypeBinding(isomorphicBinding);
-				if (result == null) result = caseKermetaModelElement(isomorphicBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.NON_ISOMORPHIC_BINDING: {
-				NonIsomorphicBinding nonIsomorphicBinding = (NonIsomorphicBinding)theEObject;
-				T result = caseNonIsomorphicBinding(nonIsomorphicBinding);
-				if (result == null) result = caseModelTypeBinding(nonIsomorphicBinding);
-				if (result == null) result = caseKermetaModelElement(nonIsomorphicBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TOTAL_ISOMORPHIC_BINDING: {
-				TotalIsomorphicBinding totalIsomorphicBinding = (TotalIsomorphicBinding)theEObject;
-				T result = caseTotalIsomorphicBinding(totalIsomorphicBinding);
-				if (result == null) result = caseTotalBinding(totalIsomorphicBinding);
-				if (result == null) result = caseIsomorphicBinding(totalIsomorphicBinding);
-				if (result == null) result = caseModelTypeBinding(totalIsomorphicBinding);
-				if (result == null) result = caseKermetaModelElement(totalIsomorphicBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PARTIAL_ISOMORPHIC_BINDING: {
-				PartialIsomorphicBinding partialIsomorphicBinding = (PartialIsomorphicBinding)theEObject;
-				T result = casePartialIsomorphicBinding(partialIsomorphicBinding);
-				if (result == null) result = casePartialBinding(partialIsomorphicBinding);
-				if (result == null) result = caseIsomorphicBinding(partialIsomorphicBinding);
-				if (result == null) result = caseModelTypeBinding(partialIsomorphicBinding);
-				if (result == null) result = caseKermetaModelElement(partialIsomorphicBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TOTAL_NON_ISOMORPHIC_BINDING: {
-				TotalNonIsomorphicBinding totalNonIsomorphicBinding = (TotalNonIsomorphicBinding)theEObject;
-				T result = caseTotalNonIsomorphicBinding(totalNonIsomorphicBinding);
-				if (result == null) result = caseTotalBinding(totalNonIsomorphicBinding);
-				if (result == null) result = caseNonIsomorphicBinding(totalNonIsomorphicBinding);
-				if (result == null) result = caseModelTypeBinding(totalNonIsomorphicBinding);
-				if (result == null) result = caseKermetaModelElement(totalNonIsomorphicBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PARTIAL_NON_ISOMORPHIC_BINDING: {
-				PartialNonIsomorphicBinding partialNonIsomorphicBinding = (PartialNonIsomorphicBinding)theEObject;
-				T result = casePartialNonIsomorphicBinding(partialNonIsomorphicBinding);
-				if (result == null) result = casePartialBinding(partialNonIsomorphicBinding);
-				if (result == null) result = caseNonIsomorphicBinding(partialNonIsomorphicBinding);
-				if (result == null) result = caseModelTypeBinding(partialNonIsomorphicBinding);
-				if (result == null) result = caseKermetaModelElement(partialNonIsomorphicBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.OBJECT_TYPE_BINDING: {
-				ObjectTypeBinding objectTypeBinding = (ObjectTypeBinding)theEObject;
-				T result = caseObjectTypeBinding(objectTypeBinding);
-				if (result == null) result = caseKermetaModelElement(objectTypeBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.DIRECT_BINDING: {
-				DirectBinding directBinding = (DirectBinding)theEObject;
-				T result = caseDirectBinding(directBinding);
-				if (result == null) result = caseObjectTypeBinding(directBinding);
-				if (result == null) result = caseKermetaModelElement(directBinding);
+			case StructurePackage.SIMPLE_BINDING: {
+				SimpleBinding simpleBinding = (SimpleBinding)theEObject;
+				T result = caseSimpleBinding(simpleBinding);
+				if (result == null) result = caseModelTypeBinding(simpleBinding);
+				if (result == null) result = caseKermetaModelElement(simpleBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.ADAPTATION_BINDING: {
 				AdaptationBinding adaptationBinding = (AdaptationBinding)theEObject;
 				T result = caseAdaptationBinding(adaptationBinding);
-				if (result == null) result = caseObjectTypeBinding(adaptationBinding);
+				if (result == null) result = caseModelTypeBinding(adaptationBinding);
 				if (result == null) result = caseKermetaModelElement(adaptationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.CLASS_DEFINITION_BINDING: {
+				ClassDefinitionBinding classDefinitionBinding = (ClassDefinitionBinding)theEObject;
+				T result = caseClassDefinitionBinding(classDefinitionBinding);
+				if (result == null) result = caseKermetaModelElement(classDefinitionBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.SIMPLE_CLASS_DEFINITION_BINDING: {
+				SimpleClassDefinitionBinding simpleClassDefinitionBinding = (SimpleClassDefinitionBinding)theEObject;
+				T result = caseSimpleClassDefinitionBinding(simpleClassDefinitionBinding);
+				if (result == null) result = caseClassDefinitionBinding(simpleClassDefinitionBinding);
+				if (result == null) result = caseKermetaModelElement(simpleClassDefinitionBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.COMPLEX_CLASS_DEFINITION_BINDING: {
+				ComplexClassDefinitionBinding complexClassDefinitionBinding = (ComplexClassDefinitionBinding)theEObject;
+				T result = caseComplexClassDefinitionBinding(complexClassDefinitionBinding);
+				if (result == null) result = caseClassDefinitionBinding(complexClassDefinitionBinding);
+				if (result == null) result = caseKermetaModelElement(complexClassDefinitionBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.ENUMERATION_BINDING: {
+				EnumerationBinding enumerationBinding = (EnumerationBinding)theEObject;
+				T result = caseEnumerationBinding(enumerationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.SIMPLE_ENUMERATION_BINDING: {
+				SimpleEnumerationBinding simpleEnumerationBinding = (SimpleEnumerationBinding)theEObject;
+				T result = caseSimpleEnumerationBinding(simpleEnumerationBinding);
+				if (result == null) result = caseEnumerationBinding(simpleEnumerationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.COMPLEX_ENUMERATION_BINDING: {
+				ComplexEnumerationBinding complexEnumerationBinding = (ComplexEnumerationBinding)theEObject;
+				T result = caseComplexEnumerationBinding(complexEnumerationBinding);
+				if (result == null) result = caseEnumerationBinding(complexEnumerationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PROPERTY_BINDING: {
+				PropertyBinding propertyBinding = (PropertyBinding)theEObject;
+				T result = casePropertyBinding(propertyBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.OPERATION_BINDING: {
+				OperationBinding operationBinding = (OperationBinding)theEObject;
+				T result = caseOperationBinding(operationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.SIMPLE_PROPERTY_BINDING: {
+				SimplePropertyBinding simplePropertyBinding = (SimplePropertyBinding)theEObject;
+				T result = caseSimplePropertyBinding(simplePropertyBinding);
+				if (result == null) result = casePropertyBinding(simplePropertyBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.COMPLEX_PROPERTY_BINDING: {
+				ComplexPropertyBinding complexPropertyBinding = (ComplexPropertyBinding)theEObject;
+				T result = caseComplexPropertyBinding(complexPropertyBinding);
+				if (result == null) result = casePropertyBinding(complexPropertyBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.SIMPLE_OPERATION_BINDING: {
+				SimpleOperationBinding simpleOperationBinding = (SimpleOperationBinding)theEObject;
+				T result = caseSimpleOperationBinding(simpleOperationBinding);
+				if (result == null) result = caseOperationBinding(simpleOperationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.COMPLEX_OPERATION_BINDING: {
+				ComplexOperationBinding complexOperationBinding = (ComplexOperationBinding)theEObject;
+				T result = caseComplexOperationBinding(complexOperationBinding);
+				if (result == null) result = caseOperationBinding(complexOperationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PARAMETER_BINDING: {
+				ParameterBinding parameterBinding = (ParameterBinding)theEObject;
+				T result = caseParameterBinding(parameterBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.SIMPLE_PARAMETER_BINDING: {
+				SimpleParameterBinding simpleParameterBinding = (SimpleParameterBinding)theEObject;
+				T result = caseSimpleParameterBinding(simpleParameterBinding);
+				if (result == null) result = caseParameterBinding(simpleParameterBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.COMPLEX_PARAMETER_BINDING: {
+				ComplexParameterBinding complexParameterBinding = (ComplexParameterBinding)theEObject;
+				T result = caseComplexParameterBinding(complexParameterBinding);
+				if (result == null) result = caseParameterBinding(complexParameterBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.ENUM_LITERALBINDING: {
+				EnumLiteralbinding enumLiteralbinding = (EnumLiteralbinding)theEObject;
+				T result = caseEnumLiteralbinding(enumLiteralbinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.ADAPTATION_OPERATOR: {
+				AdaptationOperator adaptationOperator = (AdaptationOperator)theEObject;
+				T result = caseAdaptationOperator(adaptationOperator);
+				if (result == null) result = caseNamedElement(adaptationOperator);
+				if (result == null) result = caseKermetaModelElement(adaptationOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.USE_ADAPTATION_OPERATOR: {
+				UseAdaptationOperator useAdaptationOperator = (UseAdaptationOperator)theEObject;
+				T result = caseUseAdaptationOperator(useAdaptationOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PROPERTY_ADAPTATION_OPERATOR: {
+				PropertyAdaptationOperator propertyAdaptationOperator = (PropertyAdaptationOperator)theEObject;
+				T result = casePropertyAdaptationOperator(propertyAdaptationOperator);
+				if (result == null) result = caseAdaptationOperator(propertyAdaptationOperator);
+				if (result == null) result = caseNamedElement(propertyAdaptationOperator);
+				if (result == null) result = caseKermetaModelElement(propertyAdaptationOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.UNRESOLVED_ADAPTATION_OPERATOR: {
+				UnresolvedAdaptationOperator unresolvedAdaptationOperator = (UnresolvedAdaptationOperator)theEObject;
+				T result = caseUnresolvedAdaptationOperator(unresolvedAdaptationOperator);
+				if (result == null) result = caseAdaptationOperator(unresolvedAdaptationOperator);
+				if (result == null) result = caseUnresolved(unresolvedAdaptationOperator);
+				if (result == null) result = caseNamedElement(unresolvedAdaptationOperator);
+				if (result == null) result = caseKermetaModelElement(unresolvedAdaptationOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.ADAPTATION_PARAMETER: {
+				AdaptationParameter adaptationParameter = (AdaptationParameter)theEObject;
+				T result = caseAdaptationParameter(adaptationParameter);
+				if (result == null) result = caseTypedElement(adaptationParameter);
+				if (result == null) result = caseTypeContainer(adaptationParameter);
+				if (result == null) result = caseNamedElement(adaptationParameter);
+				if (result == null) result = caseKermetaModelElement(adaptationParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.OPERATION_ADAPTATION_OPERATOR: {
+				OperationAdaptationOperator operationAdaptationOperator = (OperationAdaptationOperator)theEObject;
+				T result = caseOperationAdaptationOperator(operationAdaptationOperator);
+				if (result == null) result = caseAdaptationOperator(operationAdaptationOperator);
+				if (result == null) result = caseNamedElement(operationAdaptationOperator);
+				if (result == null) result = caseKermetaModelElement(operationAdaptationOperator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1263,21 +1352,6 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Mapping</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeMapping(TypeMapping object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Inferred Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1308,21 +1382,6 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unresolved Type Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnresolvedTypeDefinition(UnresolvedTypeDefinition object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Model Type Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1338,152 +1397,17 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Total Binding</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Total Binding</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Binding</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTotalBinding(TotalBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Partial Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Partial Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePartialBinding(PartialBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Isomorphic Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIsomorphicBinding(IsomorphicBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Non Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Non Isomorphic Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNonIsomorphicBinding(NonIsomorphicBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Total Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Total Isomorphic Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTotalIsomorphicBinding(TotalIsomorphicBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Partial Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Partial Isomorphic Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePartialIsomorphicBinding(PartialIsomorphicBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Total Non Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Total Non Isomorphic Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTotalNonIsomorphicBinding(TotalNonIsomorphicBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Partial Non Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Partial Non Isomorphic Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePartialNonIsomorphicBinding(PartialNonIsomorphicBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Object Type Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Object Type Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObjectTypeBinding(ObjectTypeBinding object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Direct Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Direct Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDirectBinding(DirectBinding object) {
+	public T caseSimpleBinding(SimpleBinding object) {
 		return null;
 	}
 
@@ -1503,6 +1427,336 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Definition Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Definition Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassDefinitionBinding(ClassDefinitionBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Class Definition Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Class Definition Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleClassDefinitionBinding(SimpleClassDefinitionBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Class Definition Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Class Definition Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexClassDefinitionBinding(ComplexClassDefinitionBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enumeration Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumerationBinding(EnumerationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Enumeration Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Enumeration Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleEnumerationBinding(SimpleEnumerationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Enumeration Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Enumeration Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexEnumerationBinding(ComplexEnumerationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyBinding(PropertyBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationBinding(OperationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Property Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Property Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimplePropertyBinding(SimplePropertyBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Property Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Property Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexPropertyBinding(ComplexPropertyBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Operation Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Operation Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleOperationBinding(SimpleOperationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Operation Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Operation Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexOperationBinding(ComplexOperationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterBinding(ParameterBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Parameter Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Parameter Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleParameterBinding(SimpleParameterBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Parameter Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Parameter Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexParameterBinding(ComplexParameterBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Literalbinding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Literalbinding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumLiteralbinding(EnumLiteralbinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Adaptation Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdaptationOperator(AdaptationOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Use Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Use Adaptation Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUseAdaptationOperator(UseAdaptationOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Adaptation Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyAdaptationOperator(PropertyAdaptationOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Adaptation Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolvedAdaptationOperator(UnresolvedAdaptationOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Adaptation Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Adaptation Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdaptationParameter(AdaptationParameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Adaptation Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationAdaptationOperator(OperationAdaptationOperator object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1514,7 +1768,6 @@ public class StructureSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	//@Override
-	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}

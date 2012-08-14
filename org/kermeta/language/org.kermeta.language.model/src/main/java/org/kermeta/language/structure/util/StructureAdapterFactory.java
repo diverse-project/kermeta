@@ -16,15 +16,23 @@ import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationBinding;
+import org.kermeta.language.structure.AdaptationOperator;
+import org.kermeta.language.structure.AdaptationParameter;
 import org.kermeta.language.structure.ClassDefinition;
+import org.kermeta.language.structure.ClassDefinitionBinding;
+import org.kermeta.language.structure.ComplexClassDefinitionBinding;
+import org.kermeta.language.structure.ComplexEnumerationBinding;
+import org.kermeta.language.structure.ComplexOperationBinding;
+import org.kermeta.language.structure.ComplexParameterBinding;
+import org.kermeta.language.structure.ComplexPropertyBinding;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.DataType;
-import org.kermeta.language.structure.DirectBinding;
+import org.kermeta.language.structure.EnumLiteralbinding;
 import org.kermeta.language.structure.Enumeration;
+import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
-import org.kermeta.language.structure.IsomorphicBinding;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
@@ -33,39 +41,42 @@ import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
-import org.kermeta.language.structure.NonIsomorphicBinding;
-import org.kermeta.language.structure.ObjectTypeBinding;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.OperationAdaptationOperator;
+import org.kermeta.language.structure.OperationBinding;
 import org.kermeta.language.structure.Parameter;
+import org.kermeta.language.structure.ParameterBinding;
 import org.kermeta.language.structure.ParameterizedType;
-import org.kermeta.language.structure.PartialBinding;
-import org.kermeta.language.structure.PartialIsomorphicBinding;
-import org.kermeta.language.structure.PartialNonIsomorphicBinding;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
+import org.kermeta.language.structure.PropertyAdaptationOperator;
+import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
+import org.kermeta.language.structure.SimpleBinding;
+import org.kermeta.language.structure.SimpleClassDefinitionBinding;
+import org.kermeta.language.structure.SimpleEnumerationBinding;
+import org.kermeta.language.structure.SimpleOperationBinding;
+import org.kermeta.language.structure.SimpleParameterBinding;
+import org.kermeta.language.structure.SimplePropertyBinding;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
-import org.kermeta.language.structure.TotalBinding;
-import org.kermeta.language.structure.TotalIsomorphicBinding;
-import org.kermeta.language.structure.TotalNonIsomorphicBinding;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeDefinitionContainer;
-import org.kermeta.language.structure.TypeMapping;
 import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
-import org.kermeta.language.structure.UnresolvedTypeDefinition;
 import org.kermeta.language.structure.UnresolvedTypeVariable;
+import org.kermeta.language.structure.UseAdaptationOperator;
 import org.kermeta.language.structure.Using;
 import org.kermeta.language.structure.VirtualType;
 import org.kermeta.language.structure.VoidType;
@@ -291,10 +302,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createVoidTypeAdapter();
 			}
 			@Override
-			public Adapter caseTypeMapping(TypeMapping object) {
-				return createTypeMappingAdapter();
-			}
-			@Override
 			public Adapter caseUnresolvedInferredType(UnresolvedInferredType object) {
 				return createUnresolvedInferredTypeAdapter();
 			}
@@ -303,56 +310,104 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createUnresolvedTypeVariableAdapter();
 			}
 			@Override
-			public Adapter caseUnresolvedTypeDefinition(UnresolvedTypeDefinition object) {
-				return createUnresolvedTypeDefinitionAdapter();
-			}
-			@Override
 			public Adapter caseModelTypeBinding(ModelTypeBinding object) {
 				return createModelTypeBindingAdapter();
 			}
 			@Override
-			public Adapter caseTotalBinding(TotalBinding object) {
-				return createTotalBindingAdapter();
-			}
-			@Override
-			public Adapter casePartialBinding(PartialBinding object) {
-				return createPartialBindingAdapter();
-			}
-			@Override
-			public Adapter caseIsomorphicBinding(IsomorphicBinding object) {
-				return createIsomorphicBindingAdapter();
-			}
-			@Override
-			public Adapter caseNonIsomorphicBinding(NonIsomorphicBinding object) {
-				return createNonIsomorphicBindingAdapter();
-			}
-			@Override
-			public Adapter caseTotalIsomorphicBinding(TotalIsomorphicBinding object) {
-				return createTotalIsomorphicBindingAdapter();
-			}
-			@Override
-			public Adapter casePartialIsomorphicBinding(PartialIsomorphicBinding object) {
-				return createPartialIsomorphicBindingAdapter();
-			}
-			@Override
-			public Adapter caseTotalNonIsomorphicBinding(TotalNonIsomorphicBinding object) {
-				return createTotalNonIsomorphicBindingAdapter();
-			}
-			@Override
-			public Adapter casePartialNonIsomorphicBinding(PartialNonIsomorphicBinding object) {
-				return createPartialNonIsomorphicBindingAdapter();
-			}
-			@Override
-			public Adapter caseObjectTypeBinding(ObjectTypeBinding object) {
-				return createObjectTypeBindingAdapter();
-			}
-			@Override
-			public Adapter caseDirectBinding(DirectBinding object) {
-				return createDirectBindingAdapter();
+			public Adapter caseSimpleBinding(SimpleBinding object) {
+				return createSimpleBindingAdapter();
 			}
 			@Override
 			public Adapter caseAdaptationBinding(AdaptationBinding object) {
 				return createAdaptationBindingAdapter();
+			}
+			@Override
+			public Adapter caseClassDefinitionBinding(ClassDefinitionBinding object) {
+				return createClassDefinitionBindingAdapter();
+			}
+			@Override
+			public Adapter caseSimpleClassDefinitionBinding(SimpleClassDefinitionBinding object) {
+				return createSimpleClassDefinitionBindingAdapter();
+			}
+			@Override
+			public Adapter caseComplexClassDefinitionBinding(ComplexClassDefinitionBinding object) {
+				return createComplexClassDefinitionBindingAdapter();
+			}
+			@Override
+			public Adapter caseEnumerationBinding(EnumerationBinding object) {
+				return createEnumerationBindingAdapter();
+			}
+			@Override
+			public Adapter caseSimpleEnumerationBinding(SimpleEnumerationBinding object) {
+				return createSimpleEnumerationBindingAdapter();
+			}
+			@Override
+			public Adapter caseComplexEnumerationBinding(ComplexEnumerationBinding object) {
+				return createComplexEnumerationBindingAdapter();
+			}
+			@Override
+			public Adapter casePropertyBinding(PropertyBinding object) {
+				return createPropertyBindingAdapter();
+			}
+			@Override
+			public Adapter caseOperationBinding(OperationBinding object) {
+				return createOperationBindingAdapter();
+			}
+			@Override
+			public Adapter caseSimplePropertyBinding(SimplePropertyBinding object) {
+				return createSimplePropertyBindingAdapter();
+			}
+			@Override
+			public Adapter caseComplexPropertyBinding(ComplexPropertyBinding object) {
+				return createComplexPropertyBindingAdapter();
+			}
+			@Override
+			public Adapter caseSimpleOperationBinding(SimpleOperationBinding object) {
+				return createSimpleOperationBindingAdapter();
+			}
+			@Override
+			public Adapter caseComplexOperationBinding(ComplexOperationBinding object) {
+				return createComplexOperationBindingAdapter();
+			}
+			@Override
+			public Adapter caseParameterBinding(ParameterBinding object) {
+				return createParameterBindingAdapter();
+			}
+			@Override
+			public Adapter caseSimpleParameterBinding(SimpleParameterBinding object) {
+				return createSimpleParameterBindingAdapter();
+			}
+			@Override
+			public Adapter caseComplexParameterBinding(ComplexParameterBinding object) {
+				return createComplexParameterBindingAdapter();
+			}
+			@Override
+			public Adapter caseEnumLiteralbinding(EnumLiteralbinding object) {
+				return createEnumLiteralbindingAdapter();
+			}
+			@Override
+			public Adapter caseAdaptationOperator(AdaptationOperator object) {
+				return createAdaptationOperatorAdapter();
+			}
+			@Override
+			public Adapter caseUseAdaptationOperator(UseAdaptationOperator object) {
+				return createUseAdaptationOperatorAdapter();
+			}
+			@Override
+			public Adapter casePropertyAdaptationOperator(PropertyAdaptationOperator object) {
+				return createPropertyAdaptationOperatorAdapter();
+			}
+			@Override
+			public Adapter caseUnresolvedAdaptationOperator(UnresolvedAdaptationOperator object) {
+				return createUnresolvedAdaptationOperatorAdapter();
+			}
+			@Override
+			public Adapter caseAdaptationParameter(AdaptationParameter object) {
+				return createAdaptationParameterAdapter();
+			}
+			@Override
+			public Adapter caseOperationAdaptationOperator(OperationAdaptationOperator object) {
+				return createOperationAdaptationOperatorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -949,20 +1004,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.TypeMapping <em>Type Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.TypeMapping
-	 * @generated
-	 */
-	public Adapter createTypeMappingAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedInferredType <em>Unresolved Inferred Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -991,20 +1032,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedTypeDefinition <em>Unresolved Type Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.UnresolvedTypeDefinition
-	 * @generated
-	 */
-	public Adapter createUnresolvedTypeDefinitionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTypeBinding <em>Model Type Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1019,142 +1046,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.TotalBinding <em>Total Binding</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleBinding <em>Simple Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.TotalBinding
+	 * @see org.kermeta.language.structure.SimpleBinding
 	 * @generated
 	 */
-	public Adapter createTotalBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.PartialBinding <em>Partial Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.PartialBinding
-	 * @generated
-	 */
-	public Adapter createPartialBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.IsomorphicBinding <em>Isomorphic Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.IsomorphicBinding
-	 * @generated
-	 */
-	public Adapter createIsomorphicBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.NonIsomorphicBinding <em>Non Isomorphic Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.NonIsomorphicBinding
-	 * @generated
-	 */
-	public Adapter createNonIsomorphicBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.TotalIsomorphicBinding <em>Total Isomorphic Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.TotalIsomorphicBinding
-	 * @generated
-	 */
-	public Adapter createTotalIsomorphicBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.PartialIsomorphicBinding <em>Partial Isomorphic Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.PartialIsomorphicBinding
-	 * @generated
-	 */
-	public Adapter createPartialIsomorphicBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.TotalNonIsomorphicBinding <em>Total Non Isomorphic Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.TotalNonIsomorphicBinding
-	 * @generated
-	 */
-	public Adapter createTotalNonIsomorphicBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.PartialNonIsomorphicBinding <em>Partial Non Isomorphic Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.PartialNonIsomorphicBinding
-	 * @generated
-	 */
-	public Adapter createPartialNonIsomorphicBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ObjectTypeBinding <em>Object Type Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ObjectTypeBinding
-	 * @generated
-	 */
-	public Adapter createObjectTypeBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.DirectBinding <em>Direct Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.DirectBinding
-	 * @generated
-	 */
-	public Adapter createDirectBindingAdapter() {
+	public Adapter createSimpleBindingAdapter() {
 		return null;
 	}
 
@@ -1169,6 +1070,314 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAdaptationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ClassDefinitionBinding <em>Class Definition Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ClassDefinitionBinding
+	 * @generated
+	 */
+	public Adapter createClassDefinitionBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding <em>Simple Class Definition Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding
+	 * @generated
+	 */
+	public Adapter createSimpleClassDefinitionBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding <em>Complex Class Definition Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding
+	 * @generated
+	 */
+	public Adapter createComplexClassDefinitionBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.EnumerationBinding <em>Enumeration Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.EnumerationBinding
+	 * @generated
+	 */
+	public Adapter createEnumerationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleEnumerationBinding <em>Simple Enumeration Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.SimpleEnumerationBinding
+	 * @generated
+	 */
+	public Adapter createSimpleEnumerationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexEnumerationBinding <em>Complex Enumeration Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ComplexEnumerationBinding
+	 * @generated
+	 */
+	public Adapter createComplexEnumerationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.PropertyBinding <em>Property Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.PropertyBinding
+	 * @generated
+	 */
+	public Adapter createPropertyBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.OperationBinding <em>Operation Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.OperationBinding
+	 * @generated
+	 */
+	public Adapter createOperationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimplePropertyBinding <em>Simple Property Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.SimplePropertyBinding
+	 * @generated
+	 */
+	public Adapter createSimplePropertyBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexPropertyBinding <em>Complex Property Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ComplexPropertyBinding
+	 * @generated
+	 */
+	public Adapter createComplexPropertyBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleOperationBinding <em>Simple Operation Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.SimpleOperationBinding
+	 * @generated
+	 */
+	public Adapter createSimpleOperationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexOperationBinding <em>Complex Operation Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ComplexOperationBinding
+	 * @generated
+	 */
+	public Adapter createComplexOperationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ParameterBinding <em>Parameter Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ParameterBinding
+	 * @generated
+	 */
+	public Adapter createParameterBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleParameterBinding <em>Simple Parameter Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.SimpleParameterBinding
+	 * @generated
+	 */
+	public Adapter createSimpleParameterBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexParameterBinding <em>Complex Parameter Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ComplexParameterBinding
+	 * @generated
+	 */
+	public Adapter createComplexParameterBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.EnumLiteralbinding <em>Enum Literalbinding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.EnumLiteralbinding
+	 * @generated
+	 */
+	public Adapter createEnumLiteralbindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.AdaptationOperator <em>Adaptation Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.AdaptationOperator
+	 * @generated
+	 */
+	public Adapter createAdaptationOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UseAdaptationOperator <em>Use Adaptation Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.UseAdaptationOperator
+	 * @generated
+	 */
+	public Adapter createUseAdaptationOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.PropertyAdaptationOperator <em>Property Adaptation Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.PropertyAdaptationOperator
+	 * @generated
+	 */
+	public Adapter createPropertyAdaptationOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedAdaptationOperator <em>Unresolved Adaptation Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.UnresolvedAdaptationOperator
+	 * @generated
+	 */
+	public Adapter createUnresolvedAdaptationOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.AdaptationParameter <em>Adaptation Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.AdaptationParameter
+	 * @generated
+	 */
+	public Adapter createAdaptationParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.OperationAdaptationOperator <em>Operation Adaptation Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.OperationAdaptationOperator
+	 * @generated
+	 */
+	public Adapter createOperationAdaptationOperatorAdapter() {
 		return null;
 	}
 

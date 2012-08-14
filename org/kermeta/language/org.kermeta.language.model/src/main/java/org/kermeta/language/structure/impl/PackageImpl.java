@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.kermeta.language.structure.AdaptationOperator;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeDefinitionContainer;
@@ -38,6 +39,7 @@ import org.kermeta.language.structure.TypeDefinitionContainer;
  *   <li>{@link org.kermeta.language.structure.impl.PackageImpl#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.PackageImpl#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.PackageImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.PackageImpl#getOwnedAdaptationOperators <em>Owned Adaptation Operators</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +85,16 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 	 * @ordered
 	 */
 	protected String uri = URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedAdaptationOperators() <em>Owned Adaptation Operators</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedAdaptationOperators()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AdaptationOperator> ownedAdaptationOperators;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,6 +206,18 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<AdaptationOperator> getOwnedAdaptationOperators() {
+		if (ownedAdaptationOperators == null) {
+			ownedAdaptationOperators = new EObjectContainmentEList<AdaptationOperator>(AdaptationOperator.class, this, StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS);
+		}
+		return ownedAdaptationOperators;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -222,6 +246,8 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
 			case StructurePackage.PACKAGE__NESTING_PACKAGE:
 				return basicSetNestingPackage(null, msgs);
+			case StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS:
+				return ((InternalEList<?>)getOwnedAdaptationOperators()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -256,6 +282,8 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 				return getNestingPackage();
 			case StructurePackage.PACKAGE__URI:
 				return getUri();
+			case StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS:
+				return getOwnedAdaptationOperators();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,6 +311,10 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 			case StructurePackage.PACKAGE__URI:
 				setUri((String)newValue);
 				return;
+			case StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS:
+				getOwnedAdaptationOperators().clear();
+				getOwnedAdaptationOperators().addAll((Collection<? extends AdaptationOperator>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -307,6 +339,9 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 			case StructurePackage.PACKAGE__URI:
 				setUri(URI_EDEFAULT);
 				return;
+			case StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS:
+				getOwnedAdaptationOperators().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -327,6 +362,8 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 				return getNestingPackage() != null;
 			case StructurePackage.PACKAGE__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS:
+				return ownedAdaptationOperators != null && !ownedAdaptationOperators.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

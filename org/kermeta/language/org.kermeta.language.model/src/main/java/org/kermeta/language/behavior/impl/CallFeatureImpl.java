@@ -8,19 +8,12 @@ package org.kermeta.language.behavior.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.CallFeature;
 import org.kermeta.language.behavior.Expression;
-
-import org.kermeta.language.structure.EnumerationLiteral;
-import org.kermeta.language.structure.Operation;
-import org.kermeta.language.structure.Property;
 
 /**
  * <!-- begin-user-doc -->

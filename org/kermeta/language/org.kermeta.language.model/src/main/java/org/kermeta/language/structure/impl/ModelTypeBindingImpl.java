@@ -6,20 +6,12 @@
  */
 package org.kermeta.language.structure.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.ModelTypeBinding;
-import org.kermeta.language.structure.ObjectTypeBinding;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
@@ -29,7 +21,7 @@ import org.kermeta.language.structure.StructurePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.ModelTypeBindingImpl#getObjectTypeBindings <em>Object Type Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ModelTypeBindingImpl#getBoundModelType <em>Bound Model Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,15 +29,14 @@ import org.kermeta.language.structure.StructurePackage;
  */
 public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl implements ModelTypeBinding {
 	/**
-	 * The cached value of the '{@link #getObjectTypeBindings() <em>Object Type Bindings</em>}' containment reference list.
+	 * The cached value of the '{@link #getBoundModelType() <em>Bound Model Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getObjectTypeBindings()
+	 * @see #getBoundModelType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ObjectTypeBinding> objectTypeBindings;
-
+	protected ModelType boundModelType;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,11 +61,16 @@ public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ObjectTypeBinding> getObjectTypeBindings() {
-		if (objectTypeBindings == null) {
-			objectTypeBindings = new EObjectContainmentEList<ObjectTypeBinding>(ObjectTypeBinding.class, this, StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS);
+	public ModelType getBoundModelType() {
+		if (boundModelType != null && boundModelType.eIsProxy()) {
+			InternalEObject oldBoundModelType = (InternalEObject)boundModelType;
+			boundModelType = (ModelType)eResolveProxy(oldBoundModelType);
+			if (boundModelType != oldBoundModelType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE, oldBoundModelType, boundModelType));
+			}
 		}
-		return objectTypeBindings;
+		return boundModelType;
 	}
 
 	/**
@@ -82,13 +78,20 @@ public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS:
-				return ((InternalEList<?>)getObjectTypeBindings()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public ModelType basicGetBoundModelType() {
+		return boundModelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBoundModelType(ModelType newBoundModelType) {
+		ModelType oldBoundModelType = boundModelType;
+		boundModelType = newBoundModelType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE, oldBoundModelType, boundModelType));
 	}
 
 	/**
@@ -99,8 +102,9 @@ public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS:
-				return getObjectTypeBindings();
+			case StructurePackage.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE:
+				if (resolve) return getBoundModelType();
+				return basicGetBoundModelType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,9 +118,8 @@ public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS:
-				getObjectTypeBindings().clear();
-				getObjectTypeBindings().addAll((Collection<? extends ObjectTypeBinding>)newValue);
+			case StructurePackage.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE:
+				setBoundModelType((ModelType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -130,8 +133,8 @@ public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS:
-				getObjectTypeBindings().clear();
+			case StructurePackage.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE:
+				setBoundModelType((ModelType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -145,8 +148,8 @@ public abstract class ModelTypeBindingImpl extends KermetaModelElementImpl imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.MODEL_TYPE_BINDING__OBJECT_TYPE_BINDINGS:
-				return objectTypeBindings != null && !objectTypeBindings.isEmpty();
+			case StructurePackage.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE:
+				return boundModelType != null;
 		}
 		return super.eIsSet(featureID);
 	}

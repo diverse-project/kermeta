@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ModelTypeVariable extends TypeVariable {
 	/**
-	 * Returns the value of the '<em><b>Virtual Type</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Virtual Type</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.VirtualType}.
 	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}'.
 	 * <!-- begin-user-doc -->
@@ -38,10 +38,10 @@ public interface ModelTypeVariable extends TypeVariable {
 	 * <!-- begin-model-doc -->
 	 * To be written
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Virtual Type</em>' containment reference list.
+	 * @return the value of the '<em>Virtual Type</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getModelTypeVariable_VirtualType()
 	 * @see org.kermeta.language.structure.VirtualType#getModelType
-	 * @model opposite="modelType" containment="true"
+	 * @model opposite="modelType"
 	 * @generated
 	 */
 	EList<VirtualType> getVirtualType();

@@ -57,27 +57,27 @@ public interface VirtualType extends ObjectTypeVariable {
 	void setClassDefinition(ClassDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>Model Type</b></em>' container reference.
+	 * Returns the value of the '<em><b>Model Type</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.ModelTypeVariable#getVirtualType <em>Virtual Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * To be written
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Model Type</em>' container reference.
+	 * @return the value of the '<em>Model Type</em>' reference.
 	 * @see #setModelType(ModelTypeVariable)
 	 * @see org.kermeta.language.structure.StructurePackage#getVirtualType_ModelType()
 	 * @see org.kermeta.language.structure.ModelTypeVariable#getVirtualType
-	 * @model opposite="virtualType" required="true" transient="false"
+	 * @model opposite="virtualType" required="true"
 	 * @generated
 	 */
 	ModelTypeVariable getModelType();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}' container reference.
+	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Model Type</em>' container reference.
+	 * @param value the new value of the '<em>Model Type</em>' reference.
 	 * @see #getModelType()
 	 * @generated
 	 */

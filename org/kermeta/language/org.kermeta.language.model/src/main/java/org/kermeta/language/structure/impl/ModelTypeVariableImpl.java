@@ -9,15 +9,11 @@ package org.kermeta.language.structure.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.VirtualType;
@@ -37,7 +33,7 @@ import org.kermeta.language.structure.VirtualType;
  */
 public class ModelTypeVariableImpl extends TypeVariableImpl implements ModelTypeVariable {
 	/**
-	 * The cached value of the '{@link #getVirtualType() <em>Virtual Type</em>}' containment reference list.
+	 * The cached value of the '{@link #getVirtualType() <em>Virtual Type</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getVirtualType()
@@ -72,7 +68,7 @@ public class ModelTypeVariableImpl extends TypeVariableImpl implements ModelType
 	 */
 	public EList<VirtualType> getVirtualType() {
 		if (virtualType == null) {
-			virtualType = new EObjectContainmentWithInverseEList<VirtualType>(VirtualType.class, this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE);
+			virtualType = new EObjectWithInverseResolvingEList<VirtualType>(VirtualType.class, this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE);
 		}
 		return virtualType;
 	}

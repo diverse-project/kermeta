@@ -17,15 +17,21 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.kermeta.language.structure.AdaptationBinding;
+import org.kermeta.language.structure.AdaptationOperator;
+import org.kermeta.language.structure.AdaptationParameter;
 import org.kermeta.language.structure.ClassDefinition;
+import org.kermeta.language.structure.ComplexClassDefinitionBinding;
+import org.kermeta.language.structure.ComplexEnumerationBinding;
+import org.kermeta.language.structure.ComplexOperationBinding;
+import org.kermeta.language.structure.ComplexParameterBinding;
+import org.kermeta.language.structure.ComplexPropertyBinding;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.ConstraintLanguage;
 import org.kermeta.language.structure.ConstraintType;
-import org.kermeta.language.structure.DirectBinding;
+import org.kermeta.language.structure.EnumLiteralbinding;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
-import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelType;
 import org.kermeta.language.structure.ModelTypeVariable;
@@ -33,28 +39,32 @@ import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.OperationAdaptationOperator;
 import org.kermeta.language.structure.Parameter;
-import org.kermeta.language.structure.PartialIsomorphicBinding;
-import org.kermeta.language.structure.PartialNonIsomorphicBinding;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
+import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.Require;
+import org.kermeta.language.structure.SimpleBinding;
+import org.kermeta.language.structure.SimpleClassDefinitionBinding;
+import org.kermeta.language.structure.SimpleEnumerationBinding;
+import org.kermeta.language.structure.SimpleOperationBinding;
+import org.kermeta.language.structure.SimpleParameterBinding;
+import org.kermeta.language.structure.SimplePropertyBinding;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
-import org.kermeta.language.structure.TotalIsomorphicBinding;
-import org.kermeta.language.structure.TotalNonIsomorphicBinding;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeDefinitionContainer;
-import org.kermeta.language.structure.TypeMapping;
 import org.kermeta.language.structure.TypeVariableBinding;
+import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
-import org.kermeta.language.structure.UnresolvedTypeDefinition;
 import org.kermeta.language.structure.UnresolvedTypeVariable;
+import org.kermeta.language.structure.UseAdaptationOperator;
 import org.kermeta.language.structure.Using;
 import org.kermeta.language.structure.VirtualType;
 import org.kermeta.language.structure.VoidType;
@@ -103,7 +113,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case StructurePackage.KERMETA_MODEL_ELEMENT: return createKermetaModelElement();
 			case StructurePackage.OPERATION: return createOperation();
 			case StructurePackage.PROPERTY: return createProperty();
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
@@ -133,16 +142,27 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.PRODUCT_TYPE: return createProductType();
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
 			case StructurePackage.VOID_TYPE: return createVoidType();
-			case StructurePackage.TYPE_MAPPING: return createTypeMapping();
 			case StructurePackage.UNRESOLVED_INFERRED_TYPE: return createUnresolvedInferredType();
 			case StructurePackage.UNRESOLVED_TYPE_VARIABLE: return createUnresolvedTypeVariable();
-			case StructurePackage.UNRESOLVED_TYPE_DEFINITION: return createUnresolvedTypeDefinition();
-			case StructurePackage.TOTAL_ISOMORPHIC_BINDING: return createTotalIsomorphicBinding();
-			case StructurePackage.PARTIAL_ISOMORPHIC_BINDING: return createPartialIsomorphicBinding();
-			case StructurePackage.TOTAL_NON_ISOMORPHIC_BINDING: return createTotalNonIsomorphicBinding();
-			case StructurePackage.PARTIAL_NON_ISOMORPHIC_BINDING: return createPartialNonIsomorphicBinding();
-			case StructurePackage.DIRECT_BINDING: return createDirectBinding();
+			case StructurePackage.SIMPLE_BINDING: return createSimpleBinding();
 			case StructurePackage.ADAPTATION_BINDING: return createAdaptationBinding();
+			case StructurePackage.SIMPLE_CLASS_DEFINITION_BINDING: return createSimpleClassDefinitionBinding();
+			case StructurePackage.COMPLEX_CLASS_DEFINITION_BINDING: return createComplexClassDefinitionBinding();
+			case StructurePackage.SIMPLE_ENUMERATION_BINDING: return createSimpleEnumerationBinding();
+			case StructurePackage.COMPLEX_ENUMERATION_BINDING: return createComplexEnumerationBinding();
+			case StructurePackage.SIMPLE_PROPERTY_BINDING: return createSimplePropertyBinding();
+			case StructurePackage.COMPLEX_PROPERTY_BINDING: return createComplexPropertyBinding();
+			case StructurePackage.SIMPLE_OPERATION_BINDING: return createSimpleOperationBinding();
+			case StructurePackage.COMPLEX_OPERATION_BINDING: return createComplexOperationBinding();
+			case StructurePackage.SIMPLE_PARAMETER_BINDING: return createSimpleParameterBinding();
+			case StructurePackage.COMPLEX_PARAMETER_BINDING: return createComplexParameterBinding();
+			case StructurePackage.ENUM_LITERALBINDING: return createEnumLiteralbinding();
+			case StructurePackage.ADAPTATION_OPERATOR: return createAdaptationOperator();
+			case StructurePackage.USE_ADAPTATION_OPERATOR: return createUseAdaptationOperator();
+			case StructurePackage.PROPERTY_ADAPTATION_OPERATOR: return createPropertyAdaptationOperator();
+			case StructurePackage.UNRESOLVED_ADAPTATION_OPERATOR: return createUnresolvedAdaptationOperator();
+			case StructurePackage.ADAPTATION_PARAMETER: return createAdaptationParameter();
+			case StructurePackage.OPERATION_ADAPTATION_OPERATOR: return createOperationAdaptationOperator();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -196,16 +216,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public KermetaModelElement createKermetaModelElement() {
-		KermetaModelElementImpl kermetaModelElement = new KermetaModelElementImpl();
-		return kermetaModelElement;
 	}
 
 	/**
@@ -503,16 +513,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeMapping createTypeMapping() {
-		TypeMappingImpl typeMapping = new TypeMappingImpl();
-		return typeMapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public UnresolvedInferredType createUnresolvedInferredType() {
 		UnresolvedInferredTypeImpl unresolvedInferredType = new UnresolvedInferredTypeImpl();
 		return unresolvedInferredType;
@@ -533,59 +533,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UnresolvedTypeDefinition createUnresolvedTypeDefinition() {
-		UnresolvedTypeDefinitionImpl unresolvedTypeDefinition = new UnresolvedTypeDefinitionImpl();
-		return unresolvedTypeDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TotalIsomorphicBinding createTotalIsomorphicBinding() {
-		TotalIsomorphicBindingImpl totalIsomorphicBinding = new TotalIsomorphicBindingImpl();
-		return totalIsomorphicBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PartialIsomorphicBinding createPartialIsomorphicBinding() {
-		PartialIsomorphicBindingImpl partialIsomorphicBinding = new PartialIsomorphicBindingImpl();
-		return partialIsomorphicBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TotalNonIsomorphicBinding createTotalNonIsomorphicBinding() {
-		TotalNonIsomorphicBindingImpl totalNonIsomorphicBinding = new TotalNonIsomorphicBindingImpl();
-		return totalNonIsomorphicBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PartialNonIsomorphicBinding createPartialNonIsomorphicBinding() {
-		PartialNonIsomorphicBindingImpl partialNonIsomorphicBinding = new PartialNonIsomorphicBindingImpl();
-		return partialNonIsomorphicBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DirectBinding createDirectBinding() {
-		DirectBindingImpl directBinding = new DirectBindingImpl();
-		return directBinding;
+	public SimpleBinding createSimpleBinding() {
+		SimpleBindingImpl simpleBinding = new SimpleBindingImpl();
+		return simpleBinding;
 	}
 
 	/**
@@ -596,6 +546,176 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public AdaptationBinding createAdaptationBinding() {
 		AdaptationBindingImpl adaptationBinding = new AdaptationBindingImpl();
 		return adaptationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimpleClassDefinitionBinding createSimpleClassDefinitionBinding() {
+		SimpleClassDefinitionBindingImpl simpleClassDefinitionBinding = new SimpleClassDefinitionBindingImpl();
+		return simpleClassDefinitionBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexClassDefinitionBinding createComplexClassDefinitionBinding() {
+		ComplexClassDefinitionBindingImpl complexClassDefinitionBinding = new ComplexClassDefinitionBindingImpl();
+		return complexClassDefinitionBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimpleEnumerationBinding createSimpleEnumerationBinding() {
+		SimpleEnumerationBindingImpl simpleEnumerationBinding = new SimpleEnumerationBindingImpl();
+		return simpleEnumerationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexEnumerationBinding createComplexEnumerationBinding() {
+		ComplexEnumerationBindingImpl complexEnumerationBinding = new ComplexEnumerationBindingImpl();
+		return complexEnumerationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimplePropertyBinding createSimplePropertyBinding() {
+		SimplePropertyBindingImpl simplePropertyBinding = new SimplePropertyBindingImpl();
+		return simplePropertyBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexPropertyBinding createComplexPropertyBinding() {
+		ComplexPropertyBindingImpl complexPropertyBinding = new ComplexPropertyBindingImpl();
+		return complexPropertyBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimpleOperationBinding createSimpleOperationBinding() {
+		SimpleOperationBindingImpl simpleOperationBinding = new SimpleOperationBindingImpl();
+		return simpleOperationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexOperationBinding createComplexOperationBinding() {
+		ComplexOperationBindingImpl complexOperationBinding = new ComplexOperationBindingImpl();
+		return complexOperationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimpleParameterBinding createSimpleParameterBinding() {
+		SimpleParameterBindingImpl simpleParameterBinding = new SimpleParameterBindingImpl();
+		return simpleParameterBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexParameterBinding createComplexParameterBinding() {
+		ComplexParameterBindingImpl complexParameterBinding = new ComplexParameterBindingImpl();
+		return complexParameterBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumLiteralbinding createEnumLiteralbinding() {
+		EnumLiteralbindingImpl enumLiteralbinding = new EnumLiteralbindingImpl();
+		return enumLiteralbinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdaptationOperator createAdaptationOperator() {
+		AdaptationOperatorImpl adaptationOperator = new AdaptationOperatorImpl();
+		return adaptationOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UseAdaptationOperator createUseAdaptationOperator() {
+		UseAdaptationOperatorImpl useAdaptationOperator = new UseAdaptationOperatorImpl();
+		return useAdaptationOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyAdaptationOperator createPropertyAdaptationOperator() {
+		PropertyAdaptationOperatorImpl propertyAdaptationOperator = new PropertyAdaptationOperatorImpl();
+		return propertyAdaptationOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedAdaptationOperator createUnresolvedAdaptationOperator() {
+		UnresolvedAdaptationOperatorImpl unresolvedAdaptationOperator = new UnresolvedAdaptationOperatorImpl();
+		return unresolvedAdaptationOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdaptationParameter createAdaptationParameter() {
+		AdaptationParameterImpl adaptationParameter = new AdaptationParameterImpl();
+		return adaptationParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationAdaptationOperator createOperationAdaptationOperator() {
+		OperationAdaptationOperatorImpl operationAdaptationOperator = new OperationAdaptationOperatorImpl();
+		return operationAdaptationOperator;
 	}
 
 	/**

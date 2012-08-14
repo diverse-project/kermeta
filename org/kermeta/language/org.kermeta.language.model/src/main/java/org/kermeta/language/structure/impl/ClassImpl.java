@@ -9,16 +9,11 @@ package org.kermeta.language.structure.impl;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.kermeta.language.structure.Class;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Property;
-import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeVariableBinding;

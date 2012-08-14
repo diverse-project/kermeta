@@ -26,15 +26,6 @@ public interface StructureFactory extends EFactory {
 	StructureFactory eINSTANCE = org.kermeta.language.structure.impl.StructureFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Kermeta Model Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Kermeta Model Element</em>'.
-	 * @generated
-	 */
-	KermetaModelElement createKermetaModelElement();
-
-	/**
 	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -296,15 +287,6 @@ public interface StructureFactory extends EFactory {
 	VoidType createVoidType();
 
 	/**
-	 * Returns a new object of class '<em>Type Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Mapping</em>'.
-	 * @generated
-	 */
-	TypeMapping createTypeMapping();
-
-	/**
 	 * Returns a new object of class '<em>Unresolved Inferred Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,58 +305,13 @@ public interface StructureFactory extends EFactory {
 	UnresolvedTypeVariable createUnresolvedTypeVariable();
 
 	/**
-	 * Returns a new object of class '<em>Unresolved Type Definition</em>'.
+	 * Returns a new object of class '<em>Simple Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unresolved Type Definition</em>'.
+	 * @return a new object of class '<em>Simple Binding</em>'.
 	 * @generated
 	 */
-	UnresolvedTypeDefinition createUnresolvedTypeDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Total Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Total Isomorphic Binding</em>'.
-	 * @generated
-	 */
-	TotalIsomorphicBinding createTotalIsomorphicBinding();
-
-	/**
-	 * Returns a new object of class '<em>Partial Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Partial Isomorphic Binding</em>'.
-	 * @generated
-	 */
-	PartialIsomorphicBinding createPartialIsomorphicBinding();
-
-	/**
-	 * Returns a new object of class '<em>Total Non Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Total Non Isomorphic Binding</em>'.
-	 * @generated
-	 */
-	TotalNonIsomorphicBinding createTotalNonIsomorphicBinding();
-
-	/**
-	 * Returns a new object of class '<em>Partial Non Isomorphic Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Partial Non Isomorphic Binding</em>'.
-	 * @generated
-	 */
-	PartialNonIsomorphicBinding createPartialNonIsomorphicBinding();
-
-	/**
-	 * Returns a new object of class '<em>Direct Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Direct Binding</em>'.
-	 * @generated
-	 */
-	DirectBinding createDirectBinding();
+	SimpleBinding createSimpleBinding();
 
 	/**
 	 * Returns a new object of class '<em>Adaptation Binding</em>'.
@@ -384,6 +321,159 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	AdaptationBinding createAdaptationBinding();
+
+	/**
+	 * Returns a new object of class '<em>Simple Class Definition Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Class Definition Binding</em>'.
+	 * @generated
+	 */
+	SimpleClassDefinitionBinding createSimpleClassDefinitionBinding();
+
+	/**
+	 * Returns a new object of class '<em>Complex Class Definition Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Class Definition Binding</em>'.
+	 * @generated
+	 */
+	ComplexClassDefinitionBinding createComplexClassDefinitionBinding();
+
+	/**
+	 * Returns a new object of class '<em>Simple Enumeration Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Enumeration Binding</em>'.
+	 * @generated
+	 */
+	SimpleEnumerationBinding createSimpleEnumerationBinding();
+
+	/**
+	 * Returns a new object of class '<em>Complex Enumeration Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Enumeration Binding</em>'.
+	 * @generated
+	 */
+	ComplexEnumerationBinding createComplexEnumerationBinding();
+
+	/**
+	 * Returns a new object of class '<em>Simple Property Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Property Binding</em>'.
+	 * @generated
+	 */
+	SimplePropertyBinding createSimplePropertyBinding();
+
+	/**
+	 * Returns a new object of class '<em>Complex Property Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Property Binding</em>'.
+	 * @generated
+	 */
+	ComplexPropertyBinding createComplexPropertyBinding();
+
+	/**
+	 * Returns a new object of class '<em>Simple Operation Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Operation Binding</em>'.
+	 * @generated
+	 */
+	SimpleOperationBinding createSimpleOperationBinding();
+
+	/**
+	 * Returns a new object of class '<em>Complex Operation Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Operation Binding</em>'.
+	 * @generated
+	 */
+	ComplexOperationBinding createComplexOperationBinding();
+
+	/**
+	 * Returns a new object of class '<em>Simple Parameter Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Parameter Binding</em>'.
+	 * @generated
+	 */
+	SimpleParameterBinding createSimpleParameterBinding();
+
+	/**
+	 * Returns a new object of class '<em>Complex Parameter Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Parameter Binding</em>'.
+	 * @generated
+	 */
+	ComplexParameterBinding createComplexParameterBinding();
+
+	/**
+	 * Returns a new object of class '<em>Enum Literalbinding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Literalbinding</em>'.
+	 * @generated
+	 */
+	EnumLiteralbinding createEnumLiteralbinding();
+
+	/**
+	 * Returns a new object of class '<em>Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Adaptation Operator</em>'.
+	 * @generated
+	 */
+	AdaptationOperator createAdaptationOperator();
+
+	/**
+	 * Returns a new object of class '<em>Use Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Use Adaptation Operator</em>'.
+	 * @generated
+	 */
+	UseAdaptationOperator createUseAdaptationOperator();
+
+	/**
+	 * Returns a new object of class '<em>Property Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Adaptation Operator</em>'.
+	 * @generated
+	 */
+	PropertyAdaptationOperator createPropertyAdaptationOperator();
+
+	/**
+	 * Returns a new object of class '<em>Unresolved Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Adaptation Operator</em>'.
+	 * @generated
+	 */
+	UnresolvedAdaptationOperator createUnresolvedAdaptationOperator();
+
+	/**
+	 * Returns a new object of class '<em>Adaptation Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Adaptation Parameter</em>'.
+	 * @generated
+	 */
+	AdaptationParameter createAdaptationParameter();
+
+	/**
+	 * Returns a new object of class '<em>Operation Adaptation Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Adaptation Operator</em>'.
+	 * @generated
+	 */
+	OperationAdaptationOperator createOperationAdaptationOperator();
 
 	/**
 	 * Returns the package supported by this factory.

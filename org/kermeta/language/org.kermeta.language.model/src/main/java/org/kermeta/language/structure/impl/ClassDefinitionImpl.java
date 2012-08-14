@@ -11,24 +11,17 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.language.structure.Type;
-import org.kermeta.language.structure.TypeContainer;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +35,7 @@ import org.kermeta.language.structure.TypeContainer;
  *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getIsSingleton <em>Is Singleton</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ClassDefinitionImpl#getIsFinal <em>Is Final</em>}</li>
  * </ul>
  * </p>
  *
@@ -117,6 +111,26 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @ordered
 	 */
 	protected Boolean isSingleton = IS_SINGLETON_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsFinal() <em>Is Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_FINAL_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsFinal() <em>Is Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isFinal = IS_FINAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -220,6 +234,27 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getIsFinal() {
+		return isFinal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsFinal(Boolean newIsFinal) {
+		Boolean oldIsFinal = isFinal;
+		isFinal = newIsFinal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.CLASS_DEFINITION__IS_FINAL, oldIsFinal, isFinal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -270,6 +305,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return getOwnedOperation();
 			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
 				return getIsSingleton();
+			case StructurePackage.CLASS_DEFINITION__IS_FINAL:
+				return getIsFinal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -301,6 +338,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
 				setIsSingleton((Boolean)newValue);
 				return;
+			case StructurePackage.CLASS_DEFINITION__IS_FINAL:
+				setIsFinal((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -328,6 +368,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
 				setIsSingleton(IS_SINGLETON_EDEFAULT);
 				return;
+			case StructurePackage.CLASS_DEFINITION__IS_FINAL:
+				setIsFinal(IS_FINAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -350,6 +393,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return ownedOperation != null && !ownedOperation.isEmpty();
 			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
 				return IS_SINGLETON_EDEFAULT == null ? isSingleton != null : !IS_SINGLETON_EDEFAULT.equals(isSingleton);
+			case StructurePackage.CLASS_DEFINITION__IS_FINAL:
+				return IS_FINAL_EDEFAULT == null ? isFinal != null : !IS_FINAL_EDEFAULT.equals(isFinal);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -368,6 +413,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 		result.append(isAbstract);
 		result.append(", isSingleton: ");
 		result.append(isSingleton);
+		result.append(", isFinal: ");
+		result.append(isFinal);
 		result.append(')');
 		return result.toString();
 	}

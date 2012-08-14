@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.ClassDefinition;
@@ -53,6 +52,16 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @ordered
 	 */
 	protected ClassDefinition classDefinition;
+
+	/**
+	 * The cached value of the '{@link #getModelType() <em>Model Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModelType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ModelTypeVariable modelType;
 
 	/**
 	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
@@ -127,8 +136,24 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @generated
 	 */
 	public ModelTypeVariable getModelType() {
-		if (eContainerFeatureID() != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE) return null;
-		return (ModelTypeVariable)eContainer();
+		if (modelType != null && modelType.eIsProxy()) {
+			InternalEObject oldModelType = (InternalEObject)modelType;
+			modelType = (ModelTypeVariable)eResolveProxy(oldModelType);
+			if (modelType != oldModelType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE, oldModelType, modelType));
+			}
+		}
+		return modelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelTypeVariable basicGetModelType() {
+		return modelType;
 	}
 
 	/**
@@ -137,7 +162,12 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @generated
 	 */
 	public NotificationChain basicSetModelType(ModelTypeVariable newModelType, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newModelType, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE, msgs);
+		ModelTypeVariable oldModelType = modelType;
+		modelType = newModelType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE, oldModelType, newModelType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -147,12 +177,10 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @generated
 	 */
 	public void setModelType(ModelTypeVariable newModelType) {
-		if (newModelType != eInternalContainer() || (eContainerFeatureID() != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE && newModelType != null)) {
-			if (EcoreUtil.isAncestor(this, newModelType))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newModelType != modelType) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (modelType != null)
+				msgs = ((InternalEObject)modelType).eInverseRemove(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
 			if (newModelType != null)
 				msgs = ((InternalEObject)newModelType).eInverseAdd(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
 			msgs = basicSetModelType(newModelType, msgs);
@@ -183,8 +211,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (modelType != null)
+					msgs = ((InternalEObject)modelType).eInverseRemove(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
 				return basicSetModelType((ModelTypeVariable)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -212,27 +240,14 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				return eInternalContainer().eInverseRemove(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
 				if (resolve) return getClassDefinition();
 				return basicGetClassDefinition();
 			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				return getModelType();
+				if (resolve) return getModelType();
+				return basicGetModelType();
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				return getTypeParamBinding();
 		}
@@ -294,7 +309,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
 				return classDefinition != null;
 			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				return getModelType() != null;
+				return modelType != null;
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				return typeParamBinding != null && !typeParamBinding.isEmpty();
 		}

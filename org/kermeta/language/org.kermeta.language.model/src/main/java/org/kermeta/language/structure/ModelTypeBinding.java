@@ -6,7 +6,6 @@
  */
 package org.kermeta.language.structure;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.ModelTypeBinding#getObjectTypeBindings <em>Object Type Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.ModelTypeBinding#getBoundModelType <em>Bound Model Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,19 +25,29 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ModelTypeBinding extends KermetaModelElement {
 	/**
-	 * Returns the value of the '<em><b>Object Type Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.ObjectTypeBinding}.
+	 * Returns the value of the '<em><b>Bound Model Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Object Type Bindings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Bound Model Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Object Type Bindings</em>' containment reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getModelTypeBinding_ObjectTypeBindings()
-	 * @model containment="true"
+	 * @return the value of the '<em>Bound Model Type</em>' reference.
+	 * @see #setBoundModelType(ModelType)
+	 * @see org.kermeta.language.structure.StructurePackage#getModelTypeBinding_BoundModelType()
+	 * @model required="true"
 	 * @generated
 	 */
-	EList<ObjectTypeBinding> getObjectTypeBindings();
+	ModelType getBoundModelType();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.ModelTypeBinding#getBoundModelType <em>Bound Model Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bound Model Type</em>' reference.
+	 * @see #getBoundModelType()
+	 * @generated
+	 */
+	void setBoundModelType(ModelType value);
 
 } // ModelTypeBinding

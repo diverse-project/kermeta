@@ -43,7 +43,7 @@ import org.kermeta.language.structure.Type;
  *
  * @generated
  */
-public class KermetaModelElementImpl extends EObjectImpl implements KermetaModelElement {
+public abstract class KermetaModelElementImpl extends EObjectImpl implements KermetaModelElement {
 	/**
 	 * The cached value of the '{@link #getKTag() <em>KTag</em>}' reference list.
 	 * <!-- begin-user-doc -->
