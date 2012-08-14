@@ -11,6 +11,6 @@ sources = {
  }
  dependencies ={
 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.2"
+	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/LATEST"
 	
 }
