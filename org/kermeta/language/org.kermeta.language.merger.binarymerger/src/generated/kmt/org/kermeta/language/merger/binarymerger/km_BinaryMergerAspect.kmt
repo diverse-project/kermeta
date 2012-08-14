@@ -232,52 +232,85 @@ package kermeta {
 			aspect class VoidType inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class TypeMapping inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
 			aspect class UnresolvedInferredType inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class UnresolvedTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class UnresolvedTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
 			aspect class ModelTypeBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class TotalBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class PartialBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class IsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class NonIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class TotalIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class PartialIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class TotalNonIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class PartialNonIsomorphicBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ObjectTypeBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class DirectBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class SimpleBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class AdaptationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SimpleClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ComplexClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class EnumerationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SimpleEnumerationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ComplexEnumerationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class PropertyBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class OperationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SimplePropertyBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ComplexPropertyBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SimpleOperationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ComplexOperationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ParameterBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class SimpleParameterBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ComplexParameterBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class EnumLiteralbinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class AdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UseAdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class PropertyAdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedAdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class AdaptationParameter inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class OperationAdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 		}

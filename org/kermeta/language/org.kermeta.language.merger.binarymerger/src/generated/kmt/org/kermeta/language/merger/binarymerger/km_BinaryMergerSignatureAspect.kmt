@@ -584,12 +584,18 @@ package kermeta {
 			aspect class Operation {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of Operation
+					/* disable merge of operation because we cannot correctly deal with its UnresolvedType
+					   the operations are duplicated, and resolved after , then a fusion is applied 
+					   (see bug 1962)
 					var aspectElement : org::kermeta::language::structure::Operation
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
 						
 						result := super( aspectElement)
+						*/
+						/* ignore abstract and body -> will raise an exception in case of conflict */
+					    /*
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 							result := result and self.body == aspectElement.body
 						end
@@ -599,18 +605,22 @@ package kermeta {
 						if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
 							result := result and self.uniqueName == aspectElement.uniqueName
 						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						*/
+					/*	if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-					else
+					else */
 						result := false
-					end
+					/* end */
 				end
 			}
 
 			aspect class Property {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of Property
+					/* disable merge of operation because we cannot correctly deal with its UnresolvedType
+					   the operations are duplicated, and resolved after, then a fusion is applied 
+					   (see bug 1962)
 					var aspectElement : org::kermeta::language::structure::Property
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
@@ -647,9 +657,9 @@ package kermeta {
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-					else
+					else */
 						result := false
-					end
+					//end
 				end
 			}
 
@@ -752,9 +762,11 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						/* Ignore isAspect attribute
 						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
 							result := result and self.isAspect == aspectElement.isAspect
 						end
+						*/
 					else
 						result := false
 					end
@@ -776,6 +788,8 @@ package kermeta {
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
+						
+						
 					else
 						result := false
 					end
@@ -988,12 +1002,14 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						/* removes isAbstract and isSingleton from signature
 						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 							result := result and self.isAbstract == aspectElement.isAbstract
 						end
 						if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
 							result := result and self.isSingleton == aspectElement.isSingleton
 						end
+						*/
 					else
 						result := false
 					end
@@ -1340,24 +1356,6 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeMapping {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
-					// TODO deal with aspectElementObj not a strict instance of TypeMapping
-					var aspectElement : org::kermeta::language::structure::TypeMapping
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.mapping.isVoid) and (not aspectElement.mapping.isVoid) then
-							result := result and self.mapping == aspectElement.mapping
-						end
-					else
-						result := false
-					end
-				end
-			}
-
 			aspect class UnresolvedInferredType {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedInferredType
@@ -1391,30 +1389,6 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedTypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Unresolved is do
-					// TODO deal with aspectElementObj not a strict instance of UnresolvedTypeDefinition
-					var aspectElement : org::kermeta::language::structure::UnresolvedTypeDefinition
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.typeDefinitionIdentifier.isVoid) and (not aspectElement.typeDefinitionIdentifier.isVoid) then
-							result := result and self.typeDefinitionIdentifier == aspectElement.typeDefinitionIdentifier
-						end
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-					else
-						result := false
-					end
-				end
-			}
-
 			aspect class ModelTypeBinding {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of ModelTypeBinding
@@ -1430,145 +1404,10 @@ package kermeta {
 				end
 			}
 
-			aspect class TotalBinding {
+			aspect class SimpleBinding {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeBinding is do
-					// TODO deal with aspectElementObj not a strict instance of TotalBinding
-					var aspectElement : org::kermeta::language::structure::TotalBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class PartialBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeBinding is do
-					// TODO deal with aspectElementObj not a strict instance of PartialBinding
-					var aspectElement : org::kermeta::language::structure::PartialBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class IsomorphicBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeBinding is do
-					// TODO deal with aspectElementObj not a strict instance of IsomorphicBinding
-					var aspectElement : org::kermeta::language::structure::IsomorphicBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class NonIsomorphicBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeBinding is do
-					// TODO deal with aspectElementObj not a strict instance of NonIsomorphicBinding
-					var aspectElement : org::kermeta::language::structure::NonIsomorphicBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TotalIsomorphicBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TotalBinding is do
-					// TODO deal with aspectElementObj not a strict instance of TotalIsomorphicBinding
-					var aspectElement : org::kermeta::language::structure::TotalIsomorphicBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class PartialIsomorphicBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::PartialBinding is do
-					// TODO deal with aspectElementObj not a strict instance of PartialIsomorphicBinding
-					var aspectElement : org::kermeta::language::structure::PartialIsomorphicBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class TotalNonIsomorphicBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TotalBinding is do
-					// TODO deal with aspectElementObj not a strict instance of TotalNonIsomorphicBinding
-					var aspectElement : org::kermeta::language::structure::TotalNonIsomorphicBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class PartialNonIsomorphicBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::PartialBinding is do
-					// TODO deal with aspectElementObj not a strict instance of PartialNonIsomorphicBinding
-					var aspectElement : org::kermeta::language::structure::PartialNonIsomorphicBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class ObjectTypeBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					// TODO deal with aspectElementObj not a strict instance of ObjectTypeBinding
-					var aspectElement : org::kermeta::language::structure::ObjectTypeBinding
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class DirectBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeBinding is do
-					// TODO deal with aspectElementObj not a strict instance of DirectBinding
-					var aspectElement : org::kermeta::language::structure::DirectBinding
+					// TODO deal with aspectElementObj not a strict instance of SimpleBinding
+					var aspectElement : org::kermeta::language::structure::SimpleBinding
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
@@ -1581,7 +1420,7 @@ package kermeta {
 			}
 
 			aspect class AdaptationBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeBinding is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeBinding is do
 					// TODO deal with aspectElementObj not a strict instance of AdaptationBinding
 					var aspectElement : org::kermeta::language::structure::AdaptationBinding
 					aspectElement ?= aspectElementObj
@@ -1589,6 +1428,354 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ClassDefinitionBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					// TODO deal with aspectElementObj not a strict instance of ClassDefinitionBinding
+					var aspectElement : org::kermeta::language::structure::ClassDefinitionBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class SimpleClassDefinitionBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ClassDefinitionBinding is do
+					// TODO deal with aspectElementObj not a strict instance of SimpleClassDefinitionBinding
+					var aspectElement : org::kermeta::language::structure::SimpleClassDefinitionBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ComplexClassDefinitionBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ClassDefinitionBinding is do
+					// TODO deal with aspectElementObj not a strict instance of ComplexClassDefinitionBinding
+					var aspectElement : org::kermeta::language::structure::ComplexClassDefinitionBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class EnumerationBinding {
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					// TODO deal with aspectElementObj not a strict instance of EnumerationBinding
+					var aspectElement : org::kermeta::language::structure::EnumerationBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class SimpleEnumerationBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::EnumerationBinding is do
+					// TODO deal with aspectElementObj not a strict instance of SimpleEnumerationBinding
+					var aspectElement : org::kermeta::language::structure::SimpleEnumerationBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ComplexEnumerationBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::EnumerationBinding is do
+					// TODO deal with aspectElementObj not a strict instance of ComplexEnumerationBinding
+					var aspectElement : org::kermeta::language::structure::ComplexEnumerationBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class PropertyBinding {
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					// TODO deal with aspectElementObj not a strict instance of PropertyBinding
+					var aspectElement : org::kermeta::language::structure::PropertyBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class OperationBinding {
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					// TODO deal with aspectElementObj not a strict instance of OperationBinding
+					var aspectElement : org::kermeta::language::structure::OperationBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class SimplePropertyBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::PropertyBinding is do
+					// TODO deal with aspectElementObj not a strict instance of SimplePropertyBinding
+					var aspectElement : org::kermeta::language::structure::SimplePropertyBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ComplexPropertyBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::PropertyBinding is do
+					// TODO deal with aspectElementObj not a strict instance of ComplexPropertyBinding
+					var aspectElement : org::kermeta::language::structure::ComplexPropertyBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class SimpleOperationBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::OperationBinding is do
+					// TODO deal with aspectElementObj not a strict instance of SimpleOperationBinding
+					var aspectElement : org::kermeta::language::structure::SimpleOperationBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ComplexOperationBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::OperationBinding is do
+					// TODO deal with aspectElementObj not a strict instance of ComplexOperationBinding
+					var aspectElement : org::kermeta::language::structure::ComplexOperationBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ParameterBinding {
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					// TODO deal with aspectElementObj not a strict instance of ParameterBinding
+					var aspectElement : org::kermeta::language::structure::ParameterBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class SimpleParameterBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterBinding is do
+					// TODO deal with aspectElementObj not a strict instance of SimpleParameterBinding
+					var aspectElement : org::kermeta::language::structure::SimpleParameterBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ComplexParameterBinding {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterBinding is do
+					// TODO deal with aspectElementObj not a strict instance of ComplexParameterBinding
+					var aspectElement : org::kermeta::language::structure::ComplexParameterBinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class EnumLiteralbinding {
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					// TODO deal with aspectElementObj not a strict instance of EnumLiteralbinding
+					var aspectElement : org::kermeta::language::structure::EnumLiteralbinding
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class AdaptationOperator {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					// TODO deal with aspectElementObj not a strict instance of AdaptationOperator
+					var aspectElement : org::kermeta::language::structure::AdaptationOperator
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class UseAdaptationOperator {
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					// TODO deal with aspectElementObj not a strict instance of UseAdaptationOperator
+					var aspectElement : org::kermeta::language::structure::UseAdaptationOperator
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := true
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class PropertyAdaptationOperator {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+					// TODO deal with aspectElementObj not a strict instance of PropertyAdaptationOperator
+					var aspectElement : org::kermeta::language::structure::PropertyAdaptationOperator
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.~getter.isVoid) and (not aspectElement.~getter.isVoid) then
+							result := result and self.~getter == aspectElement.~getter
+						end
+						if (not self.~setter.isVoid) and (not aspectElement.~setter.isVoid) then
+							result := result and self.~setter == aspectElement.~setter
+						end
+						if (not self.adder.isVoid) and (not aspectElement.adder.isVoid) then
+							result := result and self.adder == aspectElement.adder
+						end
+						if (not self.remover.isVoid) and (not aspectElement.remover.isVoid) then
+							result := result and self.remover == aspectElement.remover
+						end
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class UnresolvedAdaptationOperator {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+					// TODO deal with aspectElementObj not a strict instance of UnresolvedAdaptationOperator
+					var aspectElement : org::kermeta::language::structure::UnresolvedAdaptationOperator
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class AdaptationParameter {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
+					// TODO deal with aspectElementObj not a strict instance of AdaptationParameter
+					var aspectElement : org::kermeta::language::structure::AdaptationParameter
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class OperationAdaptationOperator {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+					// TODO deal with aspectElementObj not a strict instance of OperationAdaptationOperator
+					var aspectElement : org::kermeta::language::structure::OperationAdaptationOperator
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
 					else
 						result := false
 					end
