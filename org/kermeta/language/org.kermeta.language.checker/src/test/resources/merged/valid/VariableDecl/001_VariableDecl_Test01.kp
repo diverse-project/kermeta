@@ -1,0 +1,16 @@
+KermetaProject "VariableDecl"
+	groupId = "my.group"
+	defaultMainClass = "helloworld::A"
+	defaultMainOperation = "op"
+	sources = {
+		require "${project.baseUri}/001_VariableDecl_Test01.kmt"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.5-SNAPSHOT"
+	}	packageEquivalences={
+		// indicates the real java name of a given package
+		// useful for deployed thirdparty metamodels
+		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+		packageEquivalence "uml" = "org.eclipse.uml2.uml"
+	}
