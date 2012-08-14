@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="mainpackage">
-    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/primary/Primary.kmt;25;81"/>
-    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/aspect/Aspect.kmt;25;90"/>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainpackage/MainClass/@containedType.0 //mainpackage/MainClass/@containedType.1" isAspect="true">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/primary/Primary.kmt;47;79"/>
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/aspect/Aspect.kmt;47;88"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
-        <usings fromQName="kermeta::standard" toName=""/>
-      </containedType>
+    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/primary/Primary.kmt;25;81"/>
+    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/aspect/Aspect.kmt;25;90"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="MainClass" superType="//mainpackage/MainClass/@containedType.0" isAspect="true">
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/primary/Primary.kmt;47;79"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_Valid/valid_003_abstractClass_mismatch_3/aspect/Aspect.kmt;47;88"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
