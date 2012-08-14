@@ -16,7 +16,7 @@ sources ={
 	require "${language.model.baseUri}/src/main/ecore/kermeta.ecore" byteCodeFromADependency  
 }
 dependencies={	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.model/2.0.4" 
+	dependency "language.model" URL="mvn:org.kermeta.language/language.model/LATEST" 
 } 
 
  
