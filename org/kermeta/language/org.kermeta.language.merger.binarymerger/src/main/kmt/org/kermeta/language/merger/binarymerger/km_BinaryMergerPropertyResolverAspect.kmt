@@ -603,13 +603,6 @@ package kermeta {
 				end
 			}
 
-			aspect class TypeMapping inherits org::kermeta::language::structure::TypeContainer {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeContainer is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
 			aspect class UnresolvedInferredType inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::Type {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
 					
@@ -624,13 +617,6 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedTypeDefinition inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeDefinition {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
 			aspect class ModelTypeBinding inherits org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
@@ -638,78 +624,193 @@ package kermeta {
 				end
 			}
 
-			aspect class TotalBinding inherits org::kermeta::language::structure::ModelTypeBinding {
+			aspect class SimpleBinding inherits org::kermeta::language::structure::ModelTypeBinding {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeBinding is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class PartialBinding inherits org::kermeta::language::structure::ModelTypeBinding {
+			aspect class AdaptationBinding inherits org::kermeta::language::structure::ModelTypeBinding {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeBinding is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class IsomorphicBinding inherits org::kermeta::language::structure::ModelTypeBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class NonIsomorphicBinding inherits org::kermeta::language::structure::ModelTypeBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class TotalIsomorphicBinding inherits org::kermeta::language::structure::TotalBinding, org::kermeta::language::structure::IsomorphicBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TotalBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class PartialIsomorphicBinding inherits org::kermeta::language::structure::PartialBinding, org::kermeta::language::structure::IsomorphicBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::PartialBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class TotalNonIsomorphicBinding inherits org::kermeta::language::structure::TotalBinding, org::kermeta::language::structure::NonIsomorphicBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TotalBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class PartialNonIsomorphicBinding inherits org::kermeta::language::structure::PartialBinding, org::kermeta::language::structure::NonIsomorphicBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::PartialBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class ObjectTypeBinding inherits org::kermeta::language::structure::KermetaModelElement {
+			aspect class ClassDefinitionBinding inherits org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class DirectBinding inherits org::kermeta::language::structure::ObjectTypeBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ObjectTypeBinding is do
+			aspect class SimpleClassDefinitionBinding inherits org::kermeta::language::structure::ClassDefinitionBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ClassDefinitionBinding is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class AdaptationBinding inherits org::kermeta::language::structure::ObjectTypeBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ObjectTypeBinding is do
+			aspect class ComplexClassDefinitionBinding inherits org::kermeta::language::structure::ClassDefinitionBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ClassDefinitionBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class EnumerationBinding inherits Mergeable  {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class SimpleEnumerationBinding inherits org::kermeta::language::structure::EnumerationBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::EnumerationBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ComplexEnumerationBinding inherits org::kermeta::language::structure::EnumerationBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::EnumerationBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class PropertyBinding inherits Mergeable  {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class OperationBinding inherits Mergeable  {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class SimplePropertyBinding inherits org::kermeta::language::structure::PropertyBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::PropertyBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ComplexPropertyBinding inherits org::kermeta::language::structure::PropertyBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::PropertyBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class SimpleOperationBinding inherits org::kermeta::language::structure::OperationBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::OperationBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ComplexOperationBinding inherits org::kermeta::language::structure::OperationBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::OperationBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ParameterBinding inherits Mergeable  {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class SimpleParameterBinding inherits org::kermeta::language::structure::ParameterBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ParameterBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ComplexParameterBinding inherits org::kermeta::language::structure::ParameterBinding {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ParameterBinding is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class EnumLiteralbinding inherits Mergeable  {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class AdaptationOperator inherits org::kermeta::language::structure::NamedElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UseAdaptationOperator inherits Mergeable  {
+				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+					
+					result := primaryValue
+					// select non void value
+					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+						result := aspectValue
+					end
+				end
+			}
+
+			aspect class PropertyAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AdaptationOperator is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UnresolvedAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator, org::kermeta::language::structure::Unresolved {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AdaptationOperator is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class AdaptationParameter inherits org::kermeta::language::structure::TypedElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypedElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class OperationAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AdaptationOperator is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
