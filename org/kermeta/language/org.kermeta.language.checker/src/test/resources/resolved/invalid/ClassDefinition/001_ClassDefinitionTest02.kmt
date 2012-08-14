@@ -19,4 +19,7 @@ package helloworld {
 	
 	class C inherits A<Integer, String> {
 	}
+	class MainClass{
+		operation mainOperation() : Void is do end 
+	}
 }
