@@ -20,14 +20,16 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.kermeta.language.structure.UnresolvedAdaptationOperator;
+
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.TotalBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.UnresolvedAdaptationOperator} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TotalBindingItemProvider
-	extends ModelTypeBindingItemProvider
+public class UnresolvedAdaptationOperatorItemProvider
+	extends AdaptationOperatorItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -40,7 +42,7 @@ public class TotalBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TotalBindingItemProvider(AdapterFactory adapterFactory) {
+	public UnresolvedAdaptationOperatorItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -60,6 +62,17 @@ public class TotalBindingItemProvider
 	}
 
 	/**
+	 * This returns UnresolvedAdaptationOperator.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/UnresolvedAdaptationOperator"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,7 +80,10 @@ public class TotalBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_TotalBinding_type");
+		String label = ((UnresolvedAdaptationOperator)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_UnresolvedAdaptationOperator_type") :
+			getString("_UI_UnresolvedAdaptationOperator_type") + " " + label;
 	}
 
 	/**

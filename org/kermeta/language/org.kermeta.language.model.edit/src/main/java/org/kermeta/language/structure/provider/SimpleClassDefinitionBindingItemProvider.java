@@ -12,7 +12,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -20,18 +23,19 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.kermeta.language.structure.AdaptationBinding;
+
+import org.kermeta.language.structure.SimpleClassDefinitionBinding;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.AdaptationBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.SimpleClassDefinitionBinding} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AdaptationBindingItemProvider
-	extends ModelTypeBindingItemProvider
+public class SimpleClassDefinitionBindingItemProvider
+	extends ClassDefinitionBindingItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -44,7 +48,7 @@ public class AdaptationBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AdaptationBindingItemProvider(AdapterFactory adapterFactory) {
+	public SimpleClassDefinitionBindingItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,8 +63,54 @@ public class AdaptationBindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addSourcePropertyDescriptor(object);
+			addTargetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Source feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSourcePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimpleClassDefinitionBinding_source_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimpleClassDefinitionBinding_source_feature", "_UI_SimpleClassDefinitionBinding_type"),
+				 StructurePackage.Literals.SIMPLE_CLASS_DEFINITION_BINDING__SOURCE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Target feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimpleClassDefinitionBinding_target_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimpleClassDefinitionBinding_target_feature", "_UI_SimpleClassDefinitionBinding_type"),
+				 StructurePackage.Literals.SIMPLE_CLASS_DEFINITION_BINDING__TARGET,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -75,9 +125,8 @@ public class AdaptationBindingItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
-			childrenFeatures.add(StructurePackage.Literals.ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS);
-			childrenFeatures.add(StructurePackage.Literals.ADAPTATION_BINDING__USED_ADAPTATION_OPERATORS);
+			childrenFeatures.add(StructurePackage.Literals.SIMPLE_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.SIMPLE_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS);
 		}
 		return childrenFeatures;
 	}
@@ -96,14 +145,14 @@ public class AdaptationBindingItemProvider
 	}
 
 	/**
-	 * This returns AdaptationBinding.gif.
+	 * This returns SimpleClassDefinitionBinding.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/AdaptationBinding"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SimpleClassDefinitionBinding"));
 	}
 
 	/**
@@ -114,7 +163,7 @@ public class AdaptationBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_AdaptationBinding_type");
+		return getString("_UI_SimpleClassDefinitionBinding_type");
 	}
 
 	/**
@@ -128,10 +177,9 @@ public class AdaptationBindingItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AdaptationBinding.class)) {
-			case StructurePackage.ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS:
-			case StructurePackage.ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS:
-			case StructurePackage.ADAPTATION_BINDING__USED_ADAPTATION_OPERATORS:
+		switch (notification.getFeatureID(SimpleClassDefinitionBinding.class)) {
+			case StructurePackage.SIMPLE_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS:
+			case StructurePackage.SIMPLE_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -151,28 +199,13 @@ public class AdaptationBindingItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS,
-				 StructureFactory.eINSTANCE.createSimpleClassDefinitionBinding()));
+				(StructurePackage.Literals.SIMPLE_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS,
+				 StructureFactory.eINSTANCE.createSimplePropertyBinding()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS,
-				 StructureFactory.eINSTANCE.createComplexClassDefinitionBinding()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS,
-				 StructureFactory.eINSTANCE.createSimpleEnumerationBinding()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS,
-				 StructureFactory.eINSTANCE.createComplexEnumerationBinding()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.ADAPTATION_BINDING__USED_ADAPTATION_OPERATORS,
-				 StructureFactory.eINSTANCE.createUseAdaptationOperator()));
+				(StructurePackage.Literals.SIMPLE_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS,
+				 StructureFactory.eINSTANCE.createSimpleOperationBinding()));
 	}
 
 }

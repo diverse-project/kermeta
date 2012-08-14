@@ -13,24 +13,33 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.kermeta.language.structure.EnumerationBinding;
+import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
+import org.provider.KermetaEditPlugin;
+
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.PartialBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.EnumerationBinding} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PartialBindingItemProvider
-	extends ModelTypeBindingItemProvider
+public class EnumerationBindingItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -43,7 +52,7 @@ public class PartialBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PartialBindingItemProvider(AdapterFactory adapterFactory) {
+	public EnumerationBindingItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -58,31 +67,38 @@ public class PartialBindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addWithRespectToPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the With Respect To feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addWithRespectToPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PartialBinding_withRespectTo_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PartialBinding_withRespectTo_feature", "_UI_PartialBinding_type"),
-				 StructurePackage.Literals.PARTIAL_BINDING__WITH_RESPECT_TO,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(StructurePackage.Literals.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -93,7 +109,7 @@ public class PartialBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_PartialBinding_type");
+		return getString("_UI_EnumerationBinding_type");
 	}
 
 	/**
@@ -106,6 +122,12 @@ public class PartialBindingItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(EnumerationBinding.class)) {
+			case StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -119,6 +141,22 @@ public class PartialBindingItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS,
+				 StructureFactory.eINSTANCE.createEnumLiteralbinding()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

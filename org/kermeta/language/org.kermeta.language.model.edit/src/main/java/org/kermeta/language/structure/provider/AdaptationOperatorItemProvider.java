@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,16 +20,18 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
+import org.kermeta.language.structure.AdaptationOperator;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.ModelTypeBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.AdaptationOperator} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelTypeBindingItemProvider
-	extends KermetaModelElementItemProvider
+public class AdaptationOperatorItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -41,7 +44,7 @@ public class ModelTypeBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelTypeBindingItemProvider(AdapterFactory adapterFactory) {
+	public AdaptationOperatorItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -56,31 +59,42 @@ public class ModelTypeBindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addBoundModelTypePropertyDescriptor(object);
+			addParametersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Bound Model Type feature.
+	 * This adds a property descriptor for the Parameters feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addBoundModelTypePropertyDescriptor(Object object) {
+	protected void addParametersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelTypeBinding_boundModelType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelTypeBinding_boundModelType_feature", "_UI_ModelTypeBinding_type"),
-				 StructurePackage.Literals.MODEL_TYPE_BINDING__BOUND_MODEL_TYPE,
+				 getString("_UI_AdaptationOperator_parameters_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdaptationOperator_parameters_feature", "_UI_AdaptationOperator_type"),
+				 StructurePackage.Literals.ADAPTATION_OPERATOR__PARAMETERS,
 				 true,
 				 false,
 				 true,
 				 null,
 				 null,
 				 null));
+	}
+
+	/**
+	 * This returns AdaptationOperator.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AdaptationOperator"));
 	}
 
 	/**
@@ -91,7 +105,10 @@ public class ModelTypeBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ModelTypeBinding_type");
+		String label = ((AdaptationOperator)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_AdaptationOperator_type") :
+			getString("_UI_AdaptationOperator_type") + " " + label;
 	}
 
 	/**

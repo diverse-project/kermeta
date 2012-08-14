@@ -150,7 +150,6 @@ public class DataTypeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS);
 		}
 		return childrenFeatures;
 	}
@@ -199,7 +198,6 @@ public class DataTypeItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.DATA_TYPE__CONTAINED_TYPE:
-			case StructurePackage.DATA_TYPE__TYPE_MAPPINGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -281,11 +279,6 @@ public class DataTypeItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS,
-				 StructureFactory.eINSTANCE.createTypeMapping()));
 	}
 
 }

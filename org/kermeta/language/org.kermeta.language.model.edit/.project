@@ -4,6 +4,9 @@
   <projects/>
   <buildSpec>
     <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+    <buildCommand>
       <name>org.eclipse.pde.SchemaBuilder</name>
     </buildCommand>
     <buildCommand>

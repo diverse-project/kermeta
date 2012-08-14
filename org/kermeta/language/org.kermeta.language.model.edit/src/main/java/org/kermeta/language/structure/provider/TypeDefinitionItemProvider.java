@@ -127,7 +127,6 @@ public class TypeDefinitionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS);
 		}
 		return childrenFeatures;
 	}
@@ -186,7 +185,6 @@ public class TypeDefinitionItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.TYPE_DEFINITION__CONTAINED_TYPE:
-			case StructurePackage.TYPE_DEFINITION__TYPE_MAPPINGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -268,11 +266,6 @@ public class TypeDefinitionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS,
-				 StructureFactory.eINSTANCE.createTypeMapping()));
 	}
 
 }

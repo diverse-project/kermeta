@@ -67,7 +67,6 @@ public class ModelTypeItemProvider
 			addNamePropertyDescriptor(object);
 			addSuperTypePropertyDescriptor(object);
 			addIsAspectPropertyDescriptor(object);
-			addTypeDefinitionsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -139,28 +138,6 @@ public class ModelTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Type Definitions feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypeDefinitionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ModelType_typeDefinitions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelType_typeDefinitions_feature", "_UI_ModelType_type"),
-				 StructurePackage.Literals.MODEL_TYPE__TYPE_DEFINITIONS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -173,8 +150,9 @@ public class ModelTypeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
+			childrenFeatures.add(StructurePackage.Literals.MODEL_TYPE__OWNED_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.MODEL_TYPE__OWNED_PACKAGES);
 		}
 		return childrenFeatures;
 	}
@@ -234,8 +212,9 @@ public class ModelTypeItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.MODEL_TYPE__CONTAINED_TYPE:
-			case StructurePackage.MODEL_TYPE__TYPE_MAPPINGS:
 			case StructurePackage.MODEL_TYPE__OWNED_TYPE_DEFINITION:
+			case StructurePackage.MODEL_TYPE__OWNED_BINDINGS:
+			case StructurePackage.MODEL_TYPE__OWNED_PACKAGES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -320,11 +299,6 @@ public class ModelTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION__TYPE_MAPPINGS,
-				 StructureFactory.eINSTANCE.createTypeMapping()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createTypeDefinition()));
 
@@ -350,8 +324,18 @@ public class ModelTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createUnresolvedTypeDefinition()));
+				(StructurePackage.Literals.MODEL_TYPE__OWNED_BINDINGS,
+				 StructureFactory.eINSTANCE.createSimpleBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.MODEL_TYPE__OWNED_BINDINGS,
+				 StructureFactory.eINSTANCE.createAdaptationBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.MODEL_TYPE__OWNED_PACKAGES,
+				 StructureFactory.eINSTANCE.createPackage()));
 	}
 
 	/**

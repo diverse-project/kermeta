@@ -13,21 +13,26 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+
+import org.provider.KermetaEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.NonIsomorphicBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.ParameterBinding} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NonIsomorphicBindingItemProvider
-	extends ModelTypeBindingItemProvider
+public class ParameterBindingItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -40,7 +45,7 @@ public class NonIsomorphicBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NonIsomorphicBindingItemProvider(AdapterFactory adapterFactory) {
+	public ParameterBindingItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -67,7 +72,7 @@ public class NonIsomorphicBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_NonIsomorphicBinding_type");
+		return getString("_UI_ParameterBinding_type");
 	}
 
 	/**
@@ -93,6 +98,17 @@ public class NonIsomorphicBindingItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

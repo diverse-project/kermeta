@@ -104,6 +104,7 @@ public class PackageItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 			childrenFeatures.add(StructurePackage.Literals.PACKAGE__NESTED_PACKAGE);
+			childrenFeatures.add(StructurePackage.Literals.PACKAGE__OWNED_ADAPTATION_OPERATORS);
 		}
 		return childrenFeatures;
 	}
@@ -163,6 +164,7 @@ public class PackageItemProvider
 				return;
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			case StructurePackage.PACKAGE__NESTED_PACKAGE:
+			case StructurePackage.PACKAGE__OWNED_ADAPTATION_OPERATORS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -207,13 +209,28 @@ public class PackageItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createUnresolvedTypeDefinition()));
+				(StructurePackage.Literals.PACKAGE__NESTED_PACKAGE,
+				 StructureFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.PACKAGE__NESTED_PACKAGE,
-				 StructureFactory.eINSTANCE.createPackage()));
+				(StructurePackage.Literals.PACKAGE__OWNED_ADAPTATION_OPERATORS,
+				 StructureFactory.eINSTANCE.createAdaptationOperator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PACKAGE__OWNED_ADAPTATION_OPERATORS,
+				 StructureFactory.eINSTANCE.createPropertyAdaptationOperator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PACKAGE__OWNED_ADAPTATION_OPERATORS,
+				 StructureFactory.eINSTANCE.createUnresolvedAdaptationOperator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PACKAGE__OWNED_ADAPTATION_OPERATORS,
+				 StructureFactory.eINSTANCE.createOperationAdaptationOperator()));
 	}
 
 }

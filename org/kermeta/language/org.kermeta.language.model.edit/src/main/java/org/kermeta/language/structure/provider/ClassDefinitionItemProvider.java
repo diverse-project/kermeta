@@ -66,6 +66,7 @@ public class ClassDefinitionItemProvider
 
 			addIsAbstractPropertyDescriptor(object);
 			addIsSingletonPropertyDescriptor(object);
+			addIsFinalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -106,6 +107,28 @@ public class ClassDefinitionItemProvider
 				 getString("_UI_ClassDefinition_isSingleton_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassDefinition_isSingleton_feature", "_UI_ClassDefinition_type"),
 				 StructurePackage.Literals.CLASS_DEFINITION__IS_SINGLETON,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Final feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsFinalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ClassDefinition_isFinal_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassDefinition_isFinal_feature", "_UI_ClassDefinition_type"),
+				 StructurePackage.Literals.CLASS_DEFINITION__IS_FINAL,
 				 true,
 				 false,
 				 false,
@@ -189,6 +212,7 @@ public class ClassDefinitionItemProvider
 		switch (notification.getFeatureID(ClassDefinition.class)) {
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 			case StructurePackage.CLASS_DEFINITION__IS_SINGLETON:
+			case StructurePackage.CLASS_DEFINITION__IS_FINAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.CLASS_DEFINITION__INV:
