@@ -330,7 +330,7 @@ package behavior {
 			if not target.isVoid and target.isInstanceOf(CallTypeLiteral) then
 				var  callTypeLiteral : CallTypeLiteral init target.asType(CallTypeLiteral)
 				// maybe the typeLiteral is an enumeration and we are looking for the EnumerationLiteral
-				stdio.writeln(callTypeLiteral.typeref.type.toString)
+				if (context.verbose) then stdio.writeln(callTypeLiteral.typeref.type.toString) end
 				if callTypeLiteral.typeref.type.isVoid.~not.andThen{x| callTypeLiteral.typeref.type.realInstanceType.isVoid.~not.andThen{y|callTypeLiteral.typeref.type.realInstanceType.isInstanceOf(Enumeration)}} then
 					if (context.verbose) then stdio.writeln("target is an Enumeration") end
 					var enumLiteral : EnumerationLiteral init callTypeLiteral.typeref.type.getCallableEnumLiteralByName(self.name)
@@ -366,7 +366,7 @@ package behavior {
 					stdio.writeln(target.staticType.realInstanceType.toString)
 					stdio.writeln(target.staticType.getAllCallableOperations.toString)
 				end
-				stdio.writeln(target.staticType.realInstanceType.toString)
+				if (context.verbose) then stdio.writeln(target.staticType.realInstanceType.toString) end
 				if target.staticType.realInstanceType.isInstanceOf(UnresolvedType) then
 					stdio.writeln(target.staticType.realInstanceType.asType(UnresolvedType).typeIdentifier)
 				end

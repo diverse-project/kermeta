@@ -46,7 +46,7 @@ aspect class Property inherits MultiplicityElement, AbstractProperty{
 					opposite:=unresolvedP.correspondingProperty
 					ownedUnresolvedProperties.remove(unresolvedP)
 				else
-					stdio.writeln("no corresponding Property")
+					if (context.verbose) then stdio.writeln("no corresponding Property") end
 				end
 			end
 		end
