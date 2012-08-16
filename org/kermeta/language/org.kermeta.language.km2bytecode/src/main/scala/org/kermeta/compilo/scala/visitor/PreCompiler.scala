@@ -5,6 +5,10 @@ import org.kermeta.compilo.scala.Util
 
 object PreCompiler {
   
+  /**
+   * Visits the model to find containment properties.
+   * If one of those do not have an opposite, create one opposite and adds it.
+   */
   def visit(o:org.kermeta.language.structure.KermetaModelElement) : Unit = o match {
     case o:ModelingUnit => 
       o.getPackages().foreach(visit)
@@ -14,7 +18,8 @@ object PreCompiler {
       o.getOwnedTypeDefinition().filter(_.isInstanceOf[ClassDefinition]).foreach(visit)
     case o:ClassDefinition => 
       o.getOwnedAttribute().toBuffer.foreach(visit) 
-    case o:Property if (o.getIsComposite() && o.getOpposite()==null && o.getType().isInstanceOf[Class] && !(Util.isValueType(o.getType.asInstanceOf[Class])) && !Util.hasCompilerIgnoreTag(o.getOwningClass) && !Util.hasCompilerIgnoreTag(o.getType.asInstanceOf[Class].getTypeDefinition))=> 
+    case o:Property if (o.getIsComposite() && o.getOpposite()==null && o.getType().isInstanceOf[Class] && !(Util.isValueType(o.getType.asInstanceOf[Class])) && !Util.hasCompilerIgnoreTag(o.getOwningClass) && !Util.hasCompilerIgnoreTag(o.getType.asInstanceOf[Class].getTypeDefinition)
+        && !Util.hasEcoreTag(o))=> 
       val opp : Property = StructurePackage.eINSTANCE.getEFactoryInstance().asInstanceOf[StructureFactory].createProperty()
       opp.setOpposite(o)
       o.setOpposite(opp)
