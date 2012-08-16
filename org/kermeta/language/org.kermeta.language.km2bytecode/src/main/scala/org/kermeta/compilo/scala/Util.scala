@@ -46,8 +46,33 @@ object Util extends LogAspect {
   def getEcoreEDataTypeInstanceClassNameTag(obj: KermetaModelElement): String = {
     obj.getKOwnedTags().find(e => "ecore.EDataType_instanceClassName".equals(e.asInstanceOf[Tag].getName())).get.getValue()
   }
+  
+  
+  /**
+   * Check if a model element has an ecore.instanceClassName Tag
+   * @param obj model element to test
+   * @return true if ecore tag is found
+   */
+  def hasEcoreInstanceClassNameTag(obj: KermetaModelElement): Boolean = {
+    obj.getKOwnedTags().exists(e => "ecore.instanceClassName".equals(e.asInstanceOf[Tag].getName()))
+  }
+  /**
+   * Check if a model element has an ecore.instanceClassName Tag
+   * @param obj model element to test
+   * @return true if ecore tag is found
+   */
+  def getEcoreInstanceClassNameTag(obj: KermetaModelElement): String = {
+    obj.getKOwnedTags().find(e => "ecore.instanceClassName".equals(e.asInstanceOf[Tag].getName())).get.getValue()
+  }
+  
   def isAMapEntry(obj: ClassDefinition): Boolean = {
-    !obj.getName().equals("EStringToStringMapEntryAspect") && !obj.eContainer().asInstanceOf[Package].getName().equals("ecore") && hasEcoreTag(obj) && obj.getOwnedAttribute().size() == 2 && obj.getOwnedAttribute().exists(e => e.getName() == "key") && obj.getOwnedAttribute().exists(e => e.getName() == "value")
+    !obj.getName().equals("EStringToStringMapEntryAspect") && 
+    !obj.eContainer().asInstanceOf[Package].getName().equals("ecore") &&
+    //hasEcoreTag(obj) && 
+    hasEcoreInstanceClassNameTag(obj) && getEcoreInstanceClassNameTag(obj).equals("java.util.Map$Entry") && 
+    //obj.getOwnedAttribute().size() == 2 && 
+    obj.getOwnedAttribute().exists(e => e.getName() == "key") && 
+    obj.getOwnedAttribute().exists(e => e.getName() == "value")
   }
 
   def getQualifiedNameForMapEntry(par: ClassDefinition, visitor: ObjectVisitor, firstpass: Boolean): String = {
