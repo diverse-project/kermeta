@@ -21,12 +21,18 @@ package mainPackage{
 			var b2 : B
 			b2 ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(b1)
 			stdio.writeln(b1.toString)
-			stdio.writeln(b2.toString)
+			stdio.writeln("extern org::eclipse::emf::ecore::util::EcoreUtil.copy(b1) = "+b2.toString)
 			assert(b1 != b2)
 			assert(b1.name == b2.name)
 			//b2 := (extern org::eclipse::emf::ecore::util::EcoreUtil.copy(b1)).asType(B)
 			//stdio.writeln(b2.toString)
-			
+			var b3 : B
+			b3 := copy(b1)
+			stdio.writeln(b1.toString)
+			stdio.writeln("copy(b1) = "+b3.toString)
+			assert(b3 != void)
+			assert(b1 != b3)
+			assert(b1.name == b3.name)
 		end
 		
 		operation testEcoreUtilCopyOnAspectizedEcore() is do	
@@ -59,10 +65,26 @@ package mainPackage{
 				exceptionThrown := true
 			end
 			stdio.writeln(a1.toString)
-			stdio.writeln(a2.toString)
+			stdio.writeln(a2.toString)      
 			assert(exceptionThrown)
 			
 		end
+		
+		
+		operation copy<T>(object : T) : T is do
+	    	result ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(object.asType(ecore::EObject))
+	    	
+    	end
+    	/*operation copy<T>(object : T) : T is do
+	    	var o : kermeta::standard::Object 
+	    	o ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(object)
+	    	result ?= o
+	    	
+    	end*/
+    	/* another bug here :-(
+    	operation copy2<T>(object : T) : T is do 
+	    	result ?= extern org::eclipse::emf::ecore::util::EcoreUtil.copy(object)
+    	end*/
 	}
 	
 	class A {
