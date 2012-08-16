@@ -128,8 +128,12 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     } else if (useGet) {
       res.append(prefix + "get")
     }
-
-    res.append(baseName + "()")
+    if(useIs || useGet){
+    	res.append(baseName + "()")
+    }
+    else{
+      res.append(Util.protectScalaKeyword(baseName)+ "()")
+    }
 
   }
 
