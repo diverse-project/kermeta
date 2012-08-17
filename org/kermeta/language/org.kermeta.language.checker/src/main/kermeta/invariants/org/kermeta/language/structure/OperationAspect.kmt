@@ -13,6 +13,8 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
+
 // used to browse through expressions in order to retrieve CallResults
 require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/helpers/SearchCallResult.kmt"
 
@@ -239,6 +241,25 @@ aspect class Operation
 		end
 		
 	end	
+	/**
+	 * suspecting bug 1979, it is currently impossible to have an operation that uses a name similar to an ecore attribute/reference equals get<AttributeName> or set<AttributeName>
+	 */
+	@Scope "RESOLVED"
+	@IsWarning "true"
+	inv bug_1979_ecore_accessor_conflict is do
+		if name.startsWith("get") or name.startsWith("set") and not self.kOwnedTags.exists{ t | t.name.equals("ecore")} then
+			var searchedClassDef : kermeta::standard::OrderedSet<TypeDefinition> init self.owningClass.getAllSuperTypeDefinitions
+			searchedClassDef.add(self.owningClass)
+			not searchedClassDef.exists{ td |
+				td.asType(ClassDefinition).ownedAttribute.exists{ prop |
+					(name.toLowerCase().equals("get"+prop.name.toLowerCase()) or name.toLowerCase().equals("set"+prop.name.toLowerCase())) 
+					and prop.kOwnedTags.exists{ t | t.name.equals("ecore")}
+				} 
+			}
+		else
+			true
+		end
+	end
 	
 	/* 
 	 * Test
