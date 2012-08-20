@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="testArithm">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test_arithm" superType="//testArithm/Test_arithm/@containedType.0 //testArithm/Test_arithm/@containedType.1" isAspect="false">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Test_arithm" superType="//testArithm/Test_arithm/@containedType.0">
       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;100;420"/>
       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;100;389"/>
       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
         <usings fromQName="kermeta::standard" toName=""/>
       </containedType>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
-        <usings fromQName="kermeta::standard" toName=""/>
-      </containedType>
-      <ownedOperation name="operation1" type="//testArithm/Test_arithm/operation1/@containedType.0" isOrdered="true" isAbstract="false">
+      <ownedOperation kTag="//testArithm/Test_arithm/operation1/@kOwnedTags.1" name="operation1" type="//testArithm/Test_arithm/operation1/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;184;416"/>
+        <kOwnedTags name="documentation" value="&#xA; First documentation annotation on operation1" object="//testArithm/Test_arithm/operation1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
@@ -34,6 +32,7 @@
             </type>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;342;357"/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;342;344"/>
               <usings fromQName="kermeta::standard" toName=""/>
@@ -43,6 +42,7 @@
             </value>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;357;390"/>
             <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="result">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;357;365"/>
               <usings fromQName="kermeta::standard" toName=""/>
@@ -53,6 +53,7 @@
               </parameters>
               <usings fromQName="kermeta::standard" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;370;376"/>
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;368;378"/>
                 <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="a">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;374;376"/>
@@ -66,6 +67,7 @@
             </value>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;390;412"/>
             <target xsi:type="org_kermeta_language_behavior:CallResult">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/primary/testArithm_p.kmt;390;397"/>
             </target>
@@ -76,14 +78,16 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="operation1" type="//testArithm/Test_arithm/operation1.1/@containedType.0" isOrdered="true" isAbstract="false">
+      <ownedOperation kTag="//testArithm/Test_arithm/operation1.1/@kOwnedTags.1" name="operation1" type="//testArithm/Test_arithm/operation1.1/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;192;290"/>
+        <kOwnedTags name="documentation" value="&#xA; Second documentation annotation on operation1" object="//testArithm/Test_arithm/operation1.1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
           <usings fromQName="kermeta::standard" toName=""/>
         </containedType>
         <body xsi:type="org_kermeta_language_behavior:Block">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;247;290"/>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;263;282"/>
             <target xsi:type="org_kermeta_language_behavior:CallResult">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;263;270"/>
             </target>
@@ -99,7 +103,7 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="operation2" type="//testArithm/Test_arithm/operation2/@containedType.0" isOrdered="true" isAbstract="false">
+      <ownedOperation name="operation2" type="//testArithm/Test_arithm/operation2/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;290;385"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Integer">
           <usings fromQName="kermeta::standard" toName=""/>
@@ -107,6 +111,7 @@
         <body xsi:type="org_kermeta_language_behavior:Block">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;345;385"/>
           <statement xsi:type="org_kermeta_language_behavior:Assignment">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;364;381"/>
             <target xsi:type="org_kermeta_language_behavior:CallResult">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/kermetaV2_svn_5/org.kermeta.language.merger.binarymerger/target/test-classes/KmBinaryMerger_ValidPA/valid_002_merge_concrete_operations/aspect/testArithm_a.kmt;364;371"/>
             </target>
