@@ -92,6 +92,17 @@ aspect class ClassDefinition {
 				ownedAttribute.add(prop)
 			end
 		}
+		// make sure to use the opposite that is the result of the merge
+		ownedAttribute.each{ prop | 
+			//var 
+			if not prop.opposite.isVoid then
+				if ( prop.opposite.isInstanceOf(Property) ) then
+					if ( not (prop.opposite.asType(Property).opposite == prop) ) then
+						prop.opposite.asType(Property).opposite := prop
+					end
+				end
+			end
+		}
 	end
 
 }
@@ -107,7 +118,6 @@ aspect class Property {
 			self.setterBody:=otherProperty.setterBody
 		end
 		kOwnedTags.addAll(otherProperty.kOwnedTags)
-		//kTag.addAll(otherProperty.kTag)
 		otherProperty.kTag.asOrderedSet().each{ t | 
 			kTag.add(t) 
 			t.object.remove(otherProperty)
@@ -221,7 +231,6 @@ aspect class Operation {
 		end
 		
 		kOwnedTags.addAll(otherOperation.kOwnedTags)
-		//kTag.addAll(otherOperation.kTag)
 		otherOperation.kTag.asOrderedSet().each{ t | 
 			kTag.add(t) 
 			t.object.remove(otherOperation)
