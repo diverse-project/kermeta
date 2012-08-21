@@ -107,7 +107,11 @@ aspect class Property {
 			self.setterBody:=otherProperty.setterBody
 		end
 		kOwnedTags.addAll(otherProperty.kOwnedTags)
-		kTag.addAll(otherProperty.kTag)
+		//kTag.addAll(otherProperty.kTag)
+		otherProperty.kTag.asOrderedSet().each{ t | 
+			kTag.add(t) 
+			t.object.remove(otherProperty)
+		}
 		
 		if self.opposite.isVoid and not otherProperty.opposite.isVoid then
 			self.opposite:=otherProperty.opposite
@@ -203,14 +207,26 @@ x	upper are equals
 aspect class Operation {
 
 	operation merge(otherOperation : Operation, context : TypeAwareMergerContext) is do
-		if self.body.isVoid 
-		and not otherOperation.body.isVoid then
+		// remove VoidLiteral from body
+		if self.isBodyVoidLiteral() then
+			self.body := void
+		end
+		if otherOperation.isBodyVoidLiteral() then
+			otherOperation.body := void
+		end
+	
+		if self.body.isVoid and not otherOperation.body.isVoid then
 			otherOperation.body.rebind(self.typeParameter, otherOperation.typeParameter)
 			self.body:=otherOperation.body
 		end
 		
 		kOwnedTags.addAll(otherOperation.kOwnedTags)
-		kTag.addAll(otherOperation.kTag)
+		//kTag.addAll(otherOperation.kTag)
+		otherOperation.kTag.asOrderedSet().each{ t | 
+			kTag.add(t) 
+			t.object.remove(otherOperation)
+		}
+		
 		
 		otherOperation.~pre.each{c|
 			c.body.rebind(self.typeParameter, otherOperation.typeParameter)}
@@ -222,11 +238,15 @@ aspect class Operation {
 
 	end
 	
+	operation isBodyVoidLiteral() : Boolean is do
+		result := (not self.body.isVoid).andThen{y| self.body.isInstanceOf(org::kermeta::language::behavior::VoidLiteral)}
+	end
+	
 	/**says if two operations are mergeable
 	
 	two operations are mergeable if  : 
 	
-	- at least one of the body is void
+	- at least one of the body is void or at least one of the body is the VoidLiteral
 	- is abstract is equal
 	- all the MultiplicityElement attributes are equal (isOrdered, isUnique, lower, upper)
 	- name is equal
@@ -253,7 +273,9 @@ aspect class Operation {
 		//check quick equality check
 		if 	(self.name == otherOperation.name)
 			.andThen{x| self.ownedParameter.size == otherOperation.ownedParameter.size} 
-			.andThen{x| (self.body.isVoid or otherOperation.body.isVoid)} 
+			.andThen{x| (self.body.isVoid or otherOperation.body.isVoid)
+					  or self.isBodyVoidLiteral()	or otherOperation.isBodyVoidLiteral()
+				}
 			//and self.owningClass == otherOperation.owningClass 
 			.andThen{x| self.isOrdered == otherOperation.isOrdered}
 			.andThen{x| self.isUnique == otherOperation.isUnique}
