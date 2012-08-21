@@ -1,11 +1,11 @@
-KermetaProject "TypeAwareFusionTestSimple"
+KermetaProject "test_013_TypeAwareFusionTestSimple"
 //version :  "0.0.1"
 groupId ="group"
 defaultMainClass = "mainpackage::MainClass"
 defaultMainOperation = "mainOperation"
 sources = {
-require "${project.baseUri}/src/main/kmt/Main.kmt.km"
+require "${project.baseUri}/src/main/kmt/Main.kmt"
 require "${project.baseUri}/src/main/kmt/Main2.kmt"
 }
 dependencies = {
-dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"} 
+dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/LATEST"} 

@@ -5,6 +5,7 @@ package mainpackage{
 	{
 		
 		reference b: B#a
+		
 		@main ""
 		operation mainOperation() : Void is do 
 			// TODO: implement 'mainOperation' operation
@@ -13,6 +14,6 @@ package mainpackage{
 	
 	aspect class B{
 	
-		reference a : MainClass#b
+		 reference a : MainClass#b
 	}
 }

@@ -9,12 +9,13 @@ package mainpackage{
 	
 	
 	
-		operation mainOperation() : Void is do	end
+		/** doc from aspect */
+		operation mainOperation() : Void is void
 	}
 	
 	class B
 	{
-	reference a: MainClass
+	 reference a: MainClass
 	
 	}
 }
