@@ -100,14 +100,14 @@ public class GenModelHelper {
         
 
         GenModel genModelModel = null;
-        String modelDirectory = File.separatorChar + eclipseProjectName;
+        String modelDirectory = "/" + eclipseProjectName;
         if (runInEclipse){
         	String srcPathInProject = "src";
         	int index = sourcePath.getPath().indexOf(eclipseProjectName);
         	if(index != -1){
         		srcPathInProject = sourcePath.getPath().substring(index+eclipseProjectName.length()+1).replaceAll("\\\\", "/");
         	}
-        	modelDirectory =File.separatorChar+ eclipseProjectName+File.separatorChar+srcPathInProject;
+        	modelDirectory ="/"+ eclipseProjectName+"/"+srcPathInProject;
         }
         
 
