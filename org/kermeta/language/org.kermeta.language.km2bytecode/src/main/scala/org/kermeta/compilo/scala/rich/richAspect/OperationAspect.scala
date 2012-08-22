@@ -85,7 +85,7 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
       log.debug("Operation={}",thi.getName)
       res.append("\n   ")
       if (thi.getSuperOperation()!=null   
-          && !Util.hasEcoreTag( thi.getSuperOperation().asInstanceOf[Operation].getOwningClass ) 
+          && !Util.hasEcoreTag( thi.getSuperOperation() ) 
           && !Util.hasEcoreTag(thi)){
         res.append(" override")
       }
@@ -107,7 +107,7 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
         
      var res1 = new StringBuilder
       this.getListorType(thi,res1)
-      if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString)){
+      if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString) || "_root_.scala.Unit".equals(res1.toString)){
         res append " \n}\n"
       } else {
         //   println(res1.toString())
