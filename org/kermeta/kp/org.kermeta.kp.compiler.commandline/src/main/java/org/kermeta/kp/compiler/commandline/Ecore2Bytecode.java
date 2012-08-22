@@ -65,10 +65,10 @@ public class Ecore2Bytecode {
 		this.baseProgressGroup = baseProgressGroup;
 		this.kp = kp;
 		this.ecoreForGenerationURLs = ecoreForGenerationURLs;
-		this.targetGenmodelFolder = targetGenmodelFolder;
+		this.targetGenmodelFolder = targetGenmodelFolder.replaceAll("\\\\", "/");
 		this.additionalClassPath = additionalClassPath;
-		this.targetGeneratedJavaFolder = targetGeneratedJavaFolder;
-		this.targetClassesFolder = targetClassesFolder;
+		this.targetGeneratedJavaFolder = targetGeneratedJavaFolder.replaceAll("\\\\", "/");
+		this.targetClassesFolder = targetClassesFolder.replaceAll("\\\\", "/");
 		
 		compiler = ToolProvider.getSystemJavaCompiler();
 		if(compiler == null){
