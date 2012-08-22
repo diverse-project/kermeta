@@ -150,6 +150,7 @@ public class GenModelHelper {
             }
             genModelModel.initialize(ePackages);
             genModelModel.setModelName(genModelURI.trimFileExtension().lastSegment());
+            genModelModel.setModelPluginID(eclipseProjectName);
             genModelModel.setUpdateClasspath(false);
             
 			genModelModel.setComplianceLevel(GenJDKLevel.JDK60_LITERAL);
