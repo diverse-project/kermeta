@@ -224,13 +224,12 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     
     def generateToString(thi:CallFeature,res:StringBuilder) {
       
-      res.append("if(")
+      res.append("{ val _tostring_val_ = ")
       generateTarget(thi,res)
-      res.append("==null){\"void\"} else {")
-      generateTarget(thi,res)
-      res.append(".")
+      
+      res.append("; if( _tostring_val_ ==null){\"void\"} else {_tostring_val_.")
       res.append(Util.getEcoreRenameOperation(thi.asInstanceOf[CallOperation].getStaticOperation))
-      res.append("}")
+      res.append("}}")
     }
   
     def generateClone(thi:CallFeature,res:StringBuilder){
