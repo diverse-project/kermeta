@@ -167,8 +167,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       visitTypeParam(thi.getTarget.getStaticType, targetClass)
       //}
     } else {
-      if (thi.getTarget.getStaticType.isInstanceOf[Class] || thi.getTarget.getStaticType.isInstanceOf[PrimitiveType]) {
-        visit(thi.getTarget.getStaticType, targetClass)
+      if (thi.getTarget.getStaticType.isInstanceOf[Class] || thi.getTarget.getStaticType.isInstanceOf[PrimitiveType] || thi.getTarget.getStaticType.isInstanceOf[Enumeration]) {
+    	  visit(thi.getTarget.getStaticType, targetClass)
       } else {
         if (thi.getTarget.getStaticType.isInstanceOf[NamedElement]) {
           targetClass.append(thi.getTarget.getStaticType.asInstanceOf[NamedElement].getName)
