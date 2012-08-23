@@ -217,6 +217,7 @@
 		          </archive>
 		        </configuration>
 			</plugin>
+			<!-- correctly configure eclipse project accordingly to the pom -->
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-eclipse-plugin</artifactId>
@@ -243,6 +244,28 @@
 			      <useProjectReferences>false</useProjectReferences>
 			    </configuration>
 			  </plugin>
+			  <!-- copy the generated manifest to a place where eclipse expects it so it doesn't raise error -->
+			  <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <id>copy-manifest-for-eclipse-ide</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>META-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/classes/META-INF</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 </project>
