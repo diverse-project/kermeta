@@ -14,18 +14,18 @@ package mainPackage{
 		operation testEcoreOperationOverLoad() is do
 			var a1 : A := A.new
 			a1.name := "a1"
-			stdio.writeln("a1="+a1.toString)			
+			stdio.writeln("a1.toString="+a1.toString)			
 			
 			var b1 : B := B.new			
 			b1.name := "b1"
-			stdio.writeln("b1="+b1.toString)
+			stdio.writeln("b1.toString="+b1.toString)
 			assert(b1.name == b1.toString)
 			
 			var c1 : C := C.new			
 			c1.name := "c1"
 			c1.nameComplement := "beta"
 			stdio.writeln("c1.getQualifiedName="+c1.getQualifiedName)
-			stdio.writeln("c1="+c1.toString)
+			stdio.writeln("c1.toString="+c1.toString)
 			assert(c1.getQualifiedName == c1.name+c1.nameComplement)
 			assert(c1.toString == c1.name+c1.nameComplement)
 			
