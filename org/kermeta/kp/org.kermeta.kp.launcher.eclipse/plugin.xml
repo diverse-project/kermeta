@@ -91,6 +91,12 @@
                            property="org.eclipse.debug.ui.matchesPattern"
                            value="*.kp">
                      </test>
+                     <adapt type="org.eclipse.core.resources.IResource">
+                     	<test
+                           property="org.eclipse.core.resources.projectNature"
+                           value="org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID">
+                     	</test>
+                     </adapt>
                   </or>
                </iterate>
             </enablement>
