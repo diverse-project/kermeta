@@ -262,6 +262,18 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 			}
 		}
 	}
+	public IFile findRootKPinProject(IContainer aProject) throws CoreException {
+		for (IResource aMember : aProject.members()) {
+			if (aMember instanceof IFile) {
+				if (((IFile) aMember).getFileExtension() != null) {
+					if (((IFile) aMember).getFileExtension().equals(KP_FILE_EXTENSION)) {
+						return (IFile) aMember;
+					}
+				}
+			}
+		}
+		return null;
+	}
 	
 	public String getDefaultMainClass(IFile kpFile) {
 		
