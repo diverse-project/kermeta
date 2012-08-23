@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kermeta.kp</groupId>
 	<artifactId>kp.launcher.eclipse</artifactId>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 	<name>kp.launcher.eclipse :: launcher for km2</name>
 
     <parent>
@@ -97,15 +97,29 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+    		<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+					<include>plugin.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>icons</directory>
+				<targetPath>icons</targetPath>
+			</resource>
+		</resources>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-		          <archive>
-		            <manifestEntries>
-						<Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+			<!-- Creation of the bundle jar and its manifest -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>org.kermeta.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>org.kermeta.${project.artifactId}</Bundle-Name>
 						<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor>
 						<Bundle-Version>${bundle.version}</Bundle-Version>
@@ -113,9 +127,9 @@
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<Bundle-Localization>plugin</Bundle-Localization>
 						<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-						<Bundle-Version>${bundle.version}</Bundle-Version>						
-						<Bundle-ClassPath>.</Bundle-ClassPath>
-						<Require-Bundle>
+                        <Export-Package>
+                        </Export-Package>
+                        <Require-Bundle>
 							org.eclipse.core.runtime,
 							org.eclipse.core.resources,
 							org.eclipse.core.commands,
@@ -133,15 +147,75 @@
 							org.eclipse.swt,
 							org.eclipse.jdt.ui,
 							org.kermeta.language.texteditor.eclipse.nature
-                        </Require-Bundle>
-                        <Import-Packages>
+						</Require-Bundle>
+                        <Import-Package>
+                        	!*,
                         	org.kermeta.language.structure,
 							org.kermeta.language.behavior
-                        </Import-Packages>
-		            </manifestEntries>		            
-		          </archive>
-		        </configuration>
-			</plugin>
+                        </Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
+                    </instructions>
+                </configuration>
+            </plugin>
+			
+			<!-- correctly configure eclipse project accordingly to the pom -->
+            <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.9</version>
+			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
+			    <configuration>
+			      <downloadSources>true</downloadSources>
+			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectnatures>
+			      	<!-- <projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature> -->
+			        <!-- <projectnature>org.scala-ide.sdt.core.scalanature</projectnature> -->
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>	
+			        <projectnature>org.eclipse.pde.PluginNature</projectnature>		        
+			      </projectnatures>
+			      <buildcommands>
+			        <!-- <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>-->
+			        <buildcommand>org.eclipse.pde.ManifestBuilder</buildcommand>
+					<buildcommand>org.eclipse.pde.SchemaBuilder</buildcommand>
+			      </buildcommands>
+			      <classpathContainers>
+			        <!-- <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>-->
+			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			      </classpathContainers>
+			      <excludes> 
+			        <exclude>org.scala-lang:scala-library</exclude>
+			        <exclude>org.scala-lang:scala-compiler</exclude>
+			      </excludes>
+			      <sourceIncludes>
+			        <sourceInclude>**/*.scala</sourceInclude>
+			        <sourceInclude>**/*.java</sourceInclude>
+			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
+			    </configuration>
+			  </plugin>
+			  <!-- copy the generated manifest to a place where eclipse expects it so it doesn't raise error -->
+			  <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <id>copy-manifest-for-eclipse-ide</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>META-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/classes/META-INF</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 	

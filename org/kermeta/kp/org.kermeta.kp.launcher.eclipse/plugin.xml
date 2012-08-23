@@ -64,4 +64,45 @@
 	        id="org.kermeta.kp.launcher.eclipse.internal.KermetaTabGroupID">
 	    </launchConfigurationTabGroup>
 	</extension>
+	<extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.kermeta.kp.launcher.eclipse.internal.RunKLaunchShortcut"
+            icon="icons/kermeta.gif"
+            id="org.kermeta.kp.launcher.eclipse.kermetaApplication"
+            label="Kermeta Application"
+            modes="run, debug">
+         <configurationType
+               id="org.kermeta.kp.launcher.eclipse.internal.KermetaLauncherID">
+         </configurationType>
+         <contextualLaunch>
+            <enablement>
+               <count
+                     value="1">
+               </count>
+               <iterate
+                     operator="or">
+                  <or>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.kmt">
+                     </test>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.kp">
+                     </test>
+                  </or>
+               </iterate>
+            </enablement>
+            <contextLabel
+                  label="Run as Kermeta Application"
+                  mode="run">
+            </contextLabel>
+            <contextLabel
+                  label="Debug as Kermeta Application"
+                  mode="debug">
+            </contextLabel>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
 </plugin>
