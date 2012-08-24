@@ -224,11 +224,22 @@ public class KpCompilerMojo extends AbstractMojo {
 	        if(dependencies!=null){
 	        	for(Dependency dep:dependencies){
 	        		File depJarFile = aetherUtil.resolveMavenArtifact4J(dep.getGroupId(), 
-	        				dep.getArtefactId(), 
+	        				dep.getArtifactId(), 
 	        				dep.getVersion(), 
 	        				repositoryList);
-	        		kjcl.add(depJarFile.getAbsolutePath());
-	                classPathDebug.append(";"+depJarFile.getAbsolutePath());
+	        		if(depJarFile != null){
+	        			try{
+		        			kjcl.add(depJarFile.getAbsolutePath());
+		        			classPathDebug.append(";"+depJarFile.getAbsolutePath());
+	        			} catch (java.lang.SecurityException e){
+	        				this.getLog().error("invalid jar for kcl " +dep.getGroupId()+"/"+ dep.getArtifactId()+"/"+dep.getVersion() +" ("+depJarFile.getAbsolutePath()+")", e);
+	        			}
+	        			
+	        		}
+	        		else{
+	        			this.getLog().warn("unresolved artefact " +dep.getGroupId()+"/"+ dep.getArtifactId()+"/"+dep.getVersion());
+	        		}
+	        			
 	        	}
 	        }
 	        

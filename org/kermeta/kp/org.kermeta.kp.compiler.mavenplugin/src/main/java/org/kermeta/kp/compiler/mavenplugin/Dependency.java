@@ -10,7 +10,7 @@ public class Dependency {
 	/**
 	 * @parameter
 	 */
-	private String artefactId;
+	private String artifactId;
 	
 	/**
 	 * @parameter
@@ -25,12 +25,12 @@ public class Dependency {
 		this.groupId = groupId;
 	}
 
-	public String getArtefactId() {
-		return artefactId;
+	public String getArtifactId() {
+		return artifactId;
 	}
 
-	public void setArtefactId(String artefactId) {
-		this.artefactId = artefactId;
+	public void setArtifactId(String artifactId) {
+		this.artifactId = artifactId;
 	}
 
 	public String getVersion() {
