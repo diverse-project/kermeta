@@ -187,7 +187,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	classPathList.addAll(mavenClassPathList.subList(1, mavenClassPathList.size()));
 	        }
 	        
-	        String pluginVersion = "2.0.1";
+	        String pluginVersion = "2.0.4";
 	        for( org.apache.maven.model.Plugin plugin : project.getBuildPlugins()){
 	        	if(plugin.getArtifactId().equals("kp.compiler.mavenplugin")){
 	        		pluginVersion = plugin.getVersion();	        	
@@ -210,7 +210,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	this.getLog().info("kp.compiler.commandline.standalone not found using same version trying previous one." + e);
 	        	compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
 		        		"kp.compiler.commandline.standalone", 
-		        		"2.0.3-SNAPSHOT", 
+		        		"2.0.4", 
 		        		repositoryList);
 	        }
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();
@@ -219,7 +219,8 @@ public class KpCompilerMojo extends AbstractMojo {
 	        kjcl.add(compilerJarFile.getAbsolutePath());
 	        
 	        //kjcl.add(new java.io.FileInputStream(compilerJarFile));
-	        
+	        StringBuilder classPathDebug = new StringBuilder();
+            classPathDebug.append(compilerJarFile.getAbsolutePath());
 	        if(dependencies!=null){
 	        	for(Dependency dep:dependencies){
 	        		File depJarFile = aetherUtil.resolveMavenArtifact4J(dep.getGroupId(), 
@@ -227,6 +228,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        				dep.getVersion(), 
 	        				repositoryList);
 	        		kjcl.add(depJarFile.getAbsolutePath());
+	                classPathDebug.append(";"+depJarFile.getAbsolutePath());
 	        	}
 	        }
 	        
@@ -270,8 +272,14 @@ public class KpCompilerMojo extends AbstractMojo {
 	            String[] params = {};
 	            params = paramsArray.toArray(params);
 	            loadArgsMethod.invoke(compilerCLI, (Object) params);
-	            System.out.println("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ params);
-	            this.getLog().info("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ params);
+	            StringBuilder paramDebug = new StringBuilder();
+	            for(String p : params){
+	            	paramDebug.append(p+ " ");
+	            }
+	            //System.out.println("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ paramDebug);
+	            this.getLog().info("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ paramDebug);
+	            this.getLog().info("equivalent command line : \n   java -cp "+classPathDebug+" org.kermeta.kp.compiler.commandline.KermetaCompilerCLI "+ paramDebug);
+	            this.getLog().info("loadArgsMethod.invoke(compilerCLI, (Object) params); " +compilerCLI+" "+ paramDebug);
 	            Method runMethod = cls.getMethod("run");
 	            boolean hasFailed = (Boolean)  runMethod.invoke(compilerCLI);
 	            System.out.println("runMethod.invoke(compilerCLI); " +compilerCLI);
