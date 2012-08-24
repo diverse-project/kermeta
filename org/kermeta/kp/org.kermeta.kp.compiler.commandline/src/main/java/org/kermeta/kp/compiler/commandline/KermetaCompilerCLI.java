@@ -22,6 +22,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
@@ -94,6 +95,24 @@ public class KermetaCompilerCLI {
 			}
 			else classpath.add(additionalClasspath);
 		}
+		
+		String mavenRepository = "http://maven.inria.fr/artifactory/repo";		
+		ArrayList<String> additionalClassPath = new ArrayList<String>();
+		AetherUtil aetherUtil = new AetherUtil();
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());
+		//additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.genmodel", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.eclipse", "org.eclipse.emf.codegen", "2.6.0.v20100914-1218", mavenRepository).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.eclipse", "org.eclipse.emf.codegen.ecore", "2.6.1.v20100914-1218", mavenRepository).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.eclipse", "org.eclipse.jdt.core", "3.6.2.v_A76_R36x", mavenRepository).getAbsolutePath());
+		//additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.library.core", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		//additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.model", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		//additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.utils", "utils.helpers", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		//additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.utils", "utils.systemservices.api", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		classpath.addAll(additionalClassPath);
+		
+		
+		
 		compiler.stopOnError = !continueOnError;
 		compiler.checkingEnabled = !ignoreCheck;
 		compiler.saveIntermediateFiles = intermediateFilesRequired;
