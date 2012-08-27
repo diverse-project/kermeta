@@ -63,6 +63,23 @@ object PrettyPrinter {
         printOutline(pt.getInstanceType, res)
         res.append("\n")
       }
+      case c: Class =>{
+        res.append(c.getTypeDefinition().getName())
+        if(!c.getTypeParamBinding().isEmpty()){
+          res.append("[")
+          var i : Int = 0;
+          c.getTypeParamBinding().foreach{ tpb =>
+            if (i==0) {
+              printOutline(tpb, res)
+            } else {
+              res.append(", ")
+              printOutline(tpb, res)
+            }
+            i=i+1
+          }
+          res.append("]")
+        }
+      }
       case c: ClassDefinition => {
         c.getKOwnedTags.foreach{tag =>
           res.append("\t")
