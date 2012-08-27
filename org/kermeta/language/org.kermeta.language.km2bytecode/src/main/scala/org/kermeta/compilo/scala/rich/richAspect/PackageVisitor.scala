@@ -461,7 +461,16 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         res.append(k2.utils.UTilScala.getQualifiedNameTypeKermeta(thi.getTyperef().getType, "."))
         res.append("\")")
       }
-    } else {
+    } else if(thi.getTyperef().getType.isInstanceOf[org.kermeta.language.structure.Enumeration] 
+    		&& thi.eContainer() != null
+    		&& thi.eContainer().isInstanceOf[CallFeature]
+    		&& thi.eContainer().asInstanceOf[CallFeature].getTarget() == thi){
+      // enumeration is the target of a Call, We need to use the reflexivity to get access the features defined on the Enumeration
+      res.append("_root_.k2.utils.ReflexivityLoader.getMetaEnumeration(\"")
+      res.append(k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
+      res.append("\")")
+    }
+    else  {
       res.append("_root_." + k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
     }
   }
