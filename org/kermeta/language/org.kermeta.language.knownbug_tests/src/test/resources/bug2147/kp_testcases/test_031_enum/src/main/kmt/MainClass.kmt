@@ -1,0 +1,113 @@
+using kermeta::standard
+using P1
+using kermeta::io::StdIO => stdio
+using kermeta::kunit
+
+package mainPackage{
+	class MainClass  inherits TestCase
+	{
+	
+		operation mainTest() : Void is do
+			var testRunner : TestRunner init TestRunner.new
+		   	testRunner.run(self.getMetaClass)
+		   	testRunner.printTestResult
+		end
+		operation testEcoreEnumeration() : Void is do 
+			var myEcoreEnum : MyEcoreEnum init MyEcoreEnum.lit2
+			
+			 
+			var f : String
+			
+			stdio.writeln("myEcoreEnum = "+myEcoreEnum.toString)  
+			assert(myEcoreEnum != void)
+			
+			
+			assertTrueWithMsg(myEcoreEnum == myEcoreEnum, "myEcoreEnum != myEcoreEnum !!!") 
+			assertTrueWithMsg(myEcoreEnum == MyEcoreEnum.lit2, "myEcoreEnum != MyEcoreEnum.lit2 !!!")
+			
+			stdio.writeln((myEcoreEnum != MyEcoreEnum.lit1).toString)
+		end
+		operation testKermetaEnumeration() : Void is do 
+			var myKermetaEnum : MyKermetaEnum init MyKermetaEnum.e1
+			stdio.writeln("myKermetaEnum = "+myKermetaEnum.toString)
+			var test : Boolean init (myKermetaEnum == MyKermetaEnum.e1)
+			assertTrueWithMsg(myKermetaEnum == myKermetaEnum,"myKermetaEnum != myKermetaEnum !!!")
+			
+			assertTrueWithMsg(myKermetaEnum == MyKermetaEnum.e1, "myKermetaEnum != MyKermetaEnum.e1 !!!")
+			 
+			assertTrueWithMsg(myKermetaEnum != MyKermetaEnum.e2, "myKermetaEnum == MyKermetaEnum.e2 !!!")
+			
+			
+			var o : Object 
+			o := myKermetaEnum
+			
+			o.isInstanceOf(MyKermetaEnum)
+			o.asType(MyKermetaEnum)
+			
+		end
+		
+		
+		operation testReflectKermetaEnumeration() is do
+			var p : org::kermeta::language::structure::Package   
+			var e : org::kermeta::language::structure::Enumeration
+			var reflectLiteral : org::kermeta::language::structure::EnumerationLiteral
+			
+			p ?= self.getMetaClass.typeDefinition.container
+			e ?= p.ownedTypeDefinition.select{ t | t.name == "MyKermetaEnum" }.one
+			assert(e == MyKermetaEnum)
+			
+			
+			reflectLiteral := e.ownedLiteral.select{ l | l.name == "e1" }.one
+			
+			assert(reflectLiteral == MyKermetaEnum.e1)
+			
+			 
+			var c : MyKermetaEnum
+			c := MyKermetaEnum.e2
+			assert(c == MyKermetaEnum.e2)
+			
+			//c ?= reflectLiteral // bug
+			c := reflectLiteral.asType(MyKermetaEnum)
+			assert(c == MyKermetaEnum.e1)
+			
+			var j : MySecondKermetaEnum
+			j ?= reflectLiteral
+			assert(j == void)
+			
+			
+		end
+		
+		operation testReflectKermetaEnumeration2() is do
+		
+			assert(MyKermetaEnum.ownedLiteral.size == 2)
+			//assert(MyKermetaEnum.asType(org::kermeta::language::structure::Enumeration).ownedLiteral.size == 2)
+			var c : MyKermetaEnum
+			//c ?= MyKermetaEnum.ownedLiteral.first // bug
+			var reflectLiteral : org::kermeta::language::structure::EnumerationLiteral
+			reflectLiteral := MyKermetaEnum.ownedLiteral.first
+			//c :=  reflectLiteral.asType(MyKermetaEnum)
+			//c :=  MyKermetaEnum.asType(org::kermeta::language::structure::Enumeration).ownedLiteral.first.asType(MyKermetaEnum)
+			assert(c == MyKermetaEnum.e1)
+			
+		end
+		
+		operation testReflectEcoreEnumeration2() is do
+		
+			//assert(MyEcoreEnum.ownedLiteral.size == 3)
+		//	assert(MyEcoreEnum.asType(org::kermeta::language::structure::Enumeration).ownedLiteral.size == 3)
+			var c : MyEcoreEnum
+			//c ?= MyKermetaEnum.ownedLiteral.first // bug
+			//c :=  MyEcoreEnum.ownedLiteral.first.asType(MyEcoreEnum)
+		//	c :=  MyEcoreEnum.asType(org::kermeta::language::structure::Enumeration).ownedLiteral.first.asType(MyEcoreEnum)
+			assert(c == MyEcoreEnum.lit0)
+		end
+	}
+	
+	enumeration MyKermetaEnum {
+		e1; e2;
+	}
+	
+	enumeration MySecondKermetaEnum {
+		a1; a2;
+	}
+}

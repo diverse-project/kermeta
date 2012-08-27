@@ -1,0 +1,19 @@
+<classpath>
+  <classpathentry kind="src" path="target/scala" including="**/*.scala|**/*.java|**/*.java"/>
+  <classpathentry kind="src" path="target/emfjava" including="**/*.scala|**/*.java|**/*.java"/>
+  <classpathentry kind="src" path="target/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.5-SNAPSHOT/language.library.core-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.extended/2.0.5-SNAPSHOT/language.library.extended-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.5-SNAPSHOT/language.model-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar" sourcepath="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.5-SNAPSHOT/utils.helpers-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.5-SNAPSHOT/utils.systemservices.api-2.0.5-SNAPSHOT.jar"/>
+  <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>
