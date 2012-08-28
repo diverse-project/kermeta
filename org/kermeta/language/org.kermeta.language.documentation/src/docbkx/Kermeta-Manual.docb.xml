@@ -6,8 +6,7 @@
 	<bookinfo>
 		<mediaobject>
 			<imageobject>
-				<imagedata fileref="Kermeta-Manual_figures/KermetaLogo.png"
-					format="PNG" />
+				<imagedata fileref="Kermeta-Manual_figures/KermetaLogo.png" format="PNG" />
 			</imageobject>
 		</mediaobject>
 		<title>Kermeta language</title>
@@ -55,7 +54,8 @@
 		<abstract>
 			<para>This manual presents the various aspects of the Kermeta
 				language.
-				This is the reference manual for anybody who want to use
+				This is the reference
+				manual for anybody who want to use
 				Kermeta.
 			</para>
 		</abstract>
@@ -80,24 +80,29 @@
 		<para>
 			The action language is a Domain Specific Language (DLS) that
 			fills the
-			gap let by MOF which defines only the structure
+			gap let by MOF which
+			defines only the structure
 			of
 			meta-models, by adding a way to specify static semantic (similar to
 			OCL) and dynamic semantic (using operational semantic in the
 			operation of
-			the metamodel). Kermeta uses the object-oriented paradigm
+			the metamodel). Kermeta
+			uses the object-oriented paradigm
 			like Java or
 			Eiffel.
 		</para>
 		<para>The workbench allows to mashup various languages that, like
 			Kermeta,
-			works at the MOF level. (For example, OCL, QVT, UML profiles,
+			works at the MOF level.
+			(For example, OCL, QVT, UML profiles,
 			...).
-			This means that, at design time, a user may decide to use a
+			This means that, at design time, a user may decide to
+			use a
 			language
 			adapted for a given task.
 			The workbench will help to combine
-			the various inputs in an efficient
+			the various inputs in an
+			efficient
 			runtime.
 		</para>
 
@@ -109,7 +114,8 @@
 			<link linkend="chapter_reference">reference</link>
 			of all the aspects of the
 			language, including the textual syntax, the
-			metamodeling features and some
+			metamodeling features and
+			some
 			more advanced features. Two other
 			chapters present the
 			<link linkend="chapter_kermeta_mm">Kermeta Metamodel</link>
@@ -121,8 +127,10 @@
 		<important>
 			<para>
 				Kermeta is an evolving software and despite that we put a lot of
-				attention to this document, it may contain errors (more likely in
-				the code samples). If you find any error or have some information
+				attention to this document, it
+				may contain errors (more likely in
+				the code samples). If you find any error or have some
+				information
 				that improves this document, please send it to us using the bug
 				tracker in the forge:
 
@@ -146,9 +154,11 @@
 		<simplesect>
 			<title>New or changed in Kermeta 2</title>
 			<para>Kermeta has undergone a major refactorings between its version
-				1.x and 2.x. They apply both to the internal tooling and also on the
+				1.x and 2.x. They apply both
+				to the internal tooling and also on the
 				language itself.
-				In order to help identify the major changes between
+				In order to help identify the major
+				changes between
 				these versions,
 				you can look for notes like the following :
 			</para>
@@ -202,14 +212,17 @@
 
 		<para>This chapter aims to help you to have a quick overview of most
 			of
-			the features of Kermeta. Then, it gives the pointers to the
+			the features of Kermeta.
+			Then, it gives the pointers to the
 			detailed
-			sections in the reference chapter. It also gives some small
+			sections in the reference chapter. It also gives some
+			small
 			examples
 			that
 			should help you to understand the basis of the concepts
 			without having to
-			jump to the corresponding detailed section.
+			jump to
+			the corresponding detailed section.
 		</para>
 
 		<section id="sec_introduction_presentation.link">
@@ -219,17 +232,22 @@
 				<para></para>
 			</warning>
 			<para>Kermeta is a metamodeling language which allows describing both
-				the structure and the behavior of models. It has been designed to be
-				compliant with the OMG metamodeling language EMOF (part of the MOF
+				the structure and the
+				behavior of models. It has been designed to be
+				compliant with the OMG metamodeling language EMOF
+				(part of the MOF
 				2.0
 				specification) and Ecore (from Eclipse). It provides an action
 				language
-				for specifying the behavior of models.
+				for
+				specifying the behavior of models.
 			</para>
 
 			<para>Kermeta is intended to be used as the core language of a model
-				oriented platform. It has been designed to be a common basis to
-				implement Metadata languages, action languages, constraint languages
+				oriented platform. It has
+				been designed to be a common basis to
+				implement Metadata languages, action languages, constraint
+				languages
 				or
 				transformation language.
 			</para>
@@ -273,14 +291,16 @@
 
 			<para>In addition to these characteristics, it includes some
 				typically
-				model-oriented concepts like associations, multiplicities
+				model-oriented concepts like
+				associations, multiplicities
 				or object
 				containment management.
 			</para>
 
 			<para>This chapter presents the main features of the Kermeta
 				language.
-				Section 2 presents the general syntax of the language,
+				Section 2 presents the
+				general syntax of the language,
 				sections 3 &amp;
 				4 give details about the object-oriented and
 				model-oriented features
@@ -293,10 +313,12 @@
 			</para>
 			<para>With its workbench, it's goal is to provide a
 				support for all
-				Language Driven Engineering activities. It will be
+				Language Driven Engineering
+				activities. It will be
 				typically
 				used to
-				build tools useful to build software. This includes (but is not
+				build tools useful to build software. This includes (but
+				is not
 				restricted to):
 				model checkers, simulators, model transformations
 				(any kind of
@@ -314,7 +336,8 @@
 			</warning>
 			<para>Th action language of Kermeta is an imperative language for
 				modeling, with a basic
-				syntax inspired from Eiffel. Code is
+				syntax
+				inspired from Eiffel. Code is
 				statically type checked, and
 				execution is made by a compiler in its
 				version 2.x. The previous
@@ -330,7 +353,8 @@
 				</title>
 
 				<para>Even if it is not very useful in our context, since it doesn't
-					show the really interresting structures of the language, here is
+					show the really interresting
+					structures of the language, here is
 					the
 					traditional " Hello world " example you can find in every
 					programming
@@ -448,7 +472,8 @@ end
 				<para></para>
 			</warning>
 			<para>Users of modern programming languages, like Java, would feel
-				easy with object-oriented features in Kermeta: classes, inheritance,
+				easy with object-oriented
+				features in Kermeta: classes, inheritance,
 				exceptions, and even genericity.
 			</para>
 
@@ -571,7 +596,8 @@ class Child inherits Reader {
 				<xref endterm="section_architecture.title.link" linkend="section_architecture.link" />
 				, Kermeta extends the MOF. It
 				provides useful means to manipulate
-				models. The support of model introduces
+				models. The support of model
+				introduces
 				the main difference with
 				"more" traditional programming languages.
 			</para>
@@ -584,14 +610,17 @@ class Child inherits Reader {
 
 				<para>Association is one of the key concepts when using and defining
 					models.
-					It is obviously part of Kermeta.
+					It is obviously part
+					of Kermeta.
 				</para>
 				<para>
 					MOF defines the concept of "Property" which generalizes the
 					notions
-					of attributes, and associations (composite or not) that you
+					of attributes, and
+					associations (composite or not) that you
 					can find
-					in UML. Kermeta syntax also distinguishes these two notions
+					in UML. Kermeta syntax also distinguishes these
+					two notions
 					as
 					introduced in
 					<xref linkend="section_properties.link" />
@@ -607,7 +636,8 @@ class Child inherits Reader {
 					<literal>reference</literal>
 					keyword just defines an association. As
 					you can see, property
-					declarations are very close to variable
+					declarations are very close to
+					variable
 					declarations introduced in
 					<xref linkend="section_variables.link" />
 					).
@@ -666,7 +696,8 @@ class Author
 				<title>Loading an existing model</title>
 
 				<para>Using Eclipse Modeling Framework (EMF), Kermeta can load and
-					save models done with other EMF tools.
+					save models done with other
+					EMF tools.
 				</para>
 
 				<programlisting language="kermeta">/* Initialize the EMF repository */
@@ -706,14 +737,17 @@ aLibrary ?= resource.one // note the conditional assignment using the ?=, if not
 				<caution>
 					<para>Be aware that you CANNOT load kermeta text files (*.kmt).
 						Only xmi
-						files are allowed to be loaded. Parsing and obtaining a
+						files are allowed to be
+						loaded. Parsing and obtaining a
 						model from a
 						textual syntax is not part of
-						Kermeta. This is the role
+						Kermeta. This is the
+						role
 						of other tools (like sintaks). Technically, it
 						is possible to
 						create some
-						Kermeta operation that will hide this step, however,
+						Kermeta operation
+						that will hide this step, however,
 						this is not the goal
 						of this manual to explain
 						this procedure.
@@ -726,7 +760,8 @@ aLibrary ?= resource.one // note the conditional assignment using the ?=, if not
 
 				<para>Actually, navigating in a model is as simple as using objects
 					in
-					an object-oriented program. However, several features have been
+					an object-oriented program.
+					However, several features have been
 					added
 					in order to ease this activity.
 				</para>
@@ -734,11 +769,14 @@ aLibrary ?= resource.one // note the conditional assignment using the ?=, if not
 				<para>
 					For example, thanks to the lambda expressions, the collections
 					of
-					the language are easily manipulated using lexical closure (select,
-					collect, each, etc). This applies to all the collections of the
+					the language are easily
+					manipulated using lexical closure (select,
+					collect, each, etc). This applies to all the
+					collections of the
 					language, the one you may define directly but also the one which
 					are
-					used when an
+					used when
+					an
 					<link linkend="section_properties.link">Attribute or
 						Reference
 					</link>
@@ -757,7 +795,8 @@ smithBooks.addAll(
 		aLibraryBook.authors.exists{aBookAuthor | aBookAuthor.lastName == "Smith"}})
 		</programlisting>
 				<para>In the example above, lib is an instance of Library. It
-					searchs in the books, select the books
+					searchs in the books, select the
+					books
 					where the author last name is
 					"Smith".
 				</para>
@@ -767,9 +806,11 @@ smithBooks.addAll(
 				<title>Model type</title>
 
 				<para>In order to improve reuse of existing code between metamodel
-					variants, the language introduces the notion of ModelType. It is
+					variants, the language
+					introduces the notion of ModelType. It is
 					based
-					on the notion of conformance between two metamodels. This
+					on the notion of conformance between two
+					metamodels. This
 					allows to
 					write behavior that is valid for a given metamodel and
 					that will
@@ -779,7 +820,8 @@ smithBooks.addAll(
 
 
 				<para>TODO write a small illustrative example of a simple printer
-					based on a ModelType : a subset of class diagram of UML
+					based on a ModelType : a subset
+					of class diagram of UML
 				</para>
 			</section>
 
@@ -788,7 +830,8 @@ smithBooks.addAll(
 
 				<para>
 					Kermeta has been developed, using MDE principles so it also
-					provides its own metamodel (reflectiveley available). Details of
+					provides its own metamodel
+					(reflectiveley available). Details of
 					Kermeta metamodel is available in
 					<xref linkend="section_kermeta_metamodel.link" />
 				</para>
@@ -832,20 +875,24 @@ smithBooks.addAll(
 				Kermeta program that just declares
 				packages, classes and so on but does
 				nothing.
-				Kermeta can then be used
+				Kermeta can then
+				be used
 				to breath life into this meta-model by
 				incrementally
 				introducing
-				aspects for handling concerns of static semantics, dynamic
+				aspects for handling
+				concerns of static semantics, dynamic
 				semantics,
 				or model transformations.
 			</para>
 			<para>Kermeta allow to keep the concerns seprated at design time and
-				then merge them to build a runable tool.
+				then merge them to build a
+				runable tool.
 				It uses a powerful mecanism
 				of static introduction that works at the
 				model level
-				and at the model
+				and
+				at the model
 				element level.
 			</para>
 			<section>
@@ -856,31 +903,38 @@ smithBooks.addAll(
 					<literal>require</literal>
 					. This operator allows defining these various
 					aspects in separate
-					units and integrating them automatically into the
+					units and integrating them
+					automatically into the
 					meta-model. The
 					composition
 					is done statically and the composed model is
 					typed-checked to ensure
 					the safe integration of all units.
 					This
-					mechanism makes it easy to reuse existing meta-models or to split
+					mechanism makes it easy to reuse
+					existing meta-models or to split
 					meta-models into reusable pieces.
-					It allows to compose the various
+					It allows to compose the
+					various
 					files and models that will form
 					the final tool.
 				</para>
 				<para>
 					The workbench will seamlessly convert and merge the various files
-					into the final kermeta program.
+					into the final kermeta
+					program.
 					The classic inputs will be ecore
 					files, kmt files or uml profiles
-					files. The finala assembly will
+					files. The finala
+					assembly will
 					depend
 					on the capabilities of the inputs models. For example, a
 					ecore model
-					has a granularity at the class level
+					has a
+					granularity at the class level
 					(ie. it will just
-					add new classes) whereas Kermeta has a granularity at
+					add new classes) whereas Kermeta has a
+					granularity at
 					the feature
 					level and thus can
 					add new features to a class(see next section
@@ -905,52 +959,65 @@ smithBooks.addAll(
 					<literal>require</literal>
 					allows extending an existing meta-model with new elements
 					such as
-					properties, operations, constraints or classes. This operator
+					properties, operations,
+					constraints or classes. This operator
 					allows defining these various
 					aspects in separate units and
 					integrating them automatically into the
 					meta-model. The composition
-					is done statically and the composed model is typed-checked to
+					is done statically and the
+					composed model is typed-checked to
 					ensure
 					the safe integration of all units.
-					This mechanism makes it
+					This mechanism makes
+					it
 					easy to reuse existing meta-models or to split
 					meta-models into
 					reusable pieces.
-					It can be compared to the open class paradigm.
+					It can be
+					compared to the open class paradigm.
 					Consequently a
 					meta-class that identifies a domain concept
 					can be
 					extended without editing the meta-model directly. Open classes
 					in
-					Kermeta are used to organize
+					Kermeta are used to
+					organize
 					<literal>cross-cutting</literal>
 					concerns separately from the meta-model to which they belong, a key
-					feature of aspect-oriented programming. With this mechanism,
+					feature of aspect-oriented
+					programming. With this mechanism,
 					Kermeta can support the addition of new
-					meta-class, new subclasses,
+					meta-class, new
+					subclasses,
 					new methods, new properties, new contracts to
 					existing meta-model.
 					The
-					require mechanism also provides flexibility. For example,
+					require
+					mechanism also provides flexibility. For example,
 					several
 					operational semantics could be
-					defined in separate units for
+					defined
+					in separate units for
 					a single meta-model and then alternatively
 					composed depending on
-					particular needs. This is the case for instance in the UML
+					particular
+					needs. This is the case for instance in the UML
 					meta-model when
 					several semantics
-					variation points are defined.
+					variation points
+					are defined.
 				</para>
 				<para>
 					Thank to this composition operator, Kermeta can remain a
 					kernel platform
-					to safely integrate all the
+					to safely integrate
+					all the
 					concerns around a
 					meta-model. This feature has proved to be extremly useful
 					in the
-					context of
+					context
+					of
 					metamodel engineering.
 				</para>
 				<section>
@@ -989,7 +1056,8 @@ smithBooks.addAll(
 				</title>
 
 				<para>In order to implement and statically type check OCL-like
-					iterators, Kermeta includes some limited functional features by
+					iterators, Kermeta includes some
+					limited functional features by
 					implementing lambda expressions.
 				</para>
 
@@ -1046,8 +1114,7 @@ end</programlisting>
 					See sections "
 					<xref endterm="section_lambda_expression.title.link" linkend="section_lambda_expression.link" />
 					" and
-					<xref endterm="section_lambda_expression_mm.title.link"
-						linkend="section_lambda_expression_mm.link" />
+					<xref endterm="section_lambda_expression_mm.title.link" linkend="section_lambda_expression_mm.link" />
 					for detailed
 					informations.
 				</para>
@@ -1063,8 +1130,7 @@ end</programlisting>
 						Kermeta most recent versions embed advanced concepts like
 						<xref endterm="section_lambda_expression.title.link" linkend="section_lambda_expression.link" />
 						,
-						<xref endterm="section_dynamic_expressions.title.link"
-							linkend="section_dynamic_expressions.link" />
+						<xref endterm="section_dynamic_expressions.title.link" linkend="section_dynamic_expressions.link" />
 						,
 						<xref endterm="section_contracts.title.link" linkend="section_contracts.link" />
 						or
@@ -1079,7 +1145,8 @@ end</programlisting>
 					<para>
 						As Kermeta language is implemented upon Eclipse and Java, you
 						can
-						call Java code inside Kermeta code.(see
+						call Java code inside Kermeta
+						code.(see
 						<xref linkend="section_java_code.link" />
 						)
 					</para>
@@ -1099,7 +1166,8 @@ end</programlisting>
 		</title>
 
 		<para>The reference sections are ordered in four parts: the imperative
-			syntax (1-6), the object-oriented (7-10) and the model-oriented
+			syntax (1-6), the
+			object-oriented (7-10) and the model-oriented
 			(11-15)
 			features, the advanced concepts (16-21).
 		</para>
@@ -1116,12 +1184,14 @@ end</programlisting>
 			<warning>
 				<para>
 					Comments are a little bit particular in the Kermeta language
-					because they are not all ignored by the interpreter. There are two
+					because they are not all ignored by
+					the interpreter. There are two
 					kinds of comments: the first (syntax : // foo , /* bar *
 
 					<emphasis role="strong">/) is only associated to the text editor
 						view
-						in which the user edits his Kermeta file, and the second
+						in which the user edits his
+						Kermeta file, and the second
 						one(syntax
 						:
 					</emphasis>
@@ -1131,7 +1201,8 @@ end</programlisting>
 					<emphasis role="strong">or</emphasis>
 
 					@tag_name "tag value") is translated into a MOF tag linked to
-					structures described in the Kermeta model.
+					structures described in the
+					Kermeta model.
 					The first one, is a text
 					decoration, the second one is part of the
 					Kermeta model.
@@ -1156,8 +1227,10 @@ end</programlisting>
 						<para>
 							multi-line comments, i.e text between /* */. Be careful with
 							this
-							notation : the opening syntax must not have juxtaposed stars
-							("/**"), otherwise it will be considered as a linked comment (see
+							notation : the opening syntax
+							must not have juxtaposed stars
+							("/**"), otherwise it will be considered as a linked comment
+							(see
 							<xref linkend="section_linked-comments.link" />
 							), i.e a comment
 							that is part of the Kermeta program as a model.
@@ -1178,7 +1251,8 @@ this line too. */</programlisting>
 
 				<para>
 					Kermeta provides a way to define named and unnamed annotations,
-					that have to be defined just above any model element among
+					that have to be defined just
+					above any model element among
 					<literal>Package</literal>
 					,
 					<literal>ClassDefinition</literal>
@@ -1189,11 +1263,13 @@ this line too. */</programlisting>
 					. Such
 					annotations correspond to MOF tags, and are linked to the
 					elements
-					which immediately follows.
+					which immediately
+					follows.
 				</para>
 
 				<para>To define a named annotation, you have to use a special symbol
-					"@", whereas an anonymous annotation has to be written between /**
+					"@", whereas an anonymous
+					annotation has to be written between /**
 					and
 					*/
 				</para>
@@ -1256,17 +1332,20 @@ class MyClass {
 
 			<para>This doesn't mean you cannot use these words for your own
 				model.
-				Moreover, this is only a textual syntax limitation.
+				Moreover, this is only a
+				textual syntax limitation.
 			</para>
 
 			<para>So Kermeta syntax allows you to use the word you want, you
 				simply
-				have to prefix it with a tilda ~.
+				have to prefix it with a
+				tilda ~.
 			</para>
 
 			<para>This example is valid even if we use "class" and "attribute"
 				which
-				are keywords in the language:
+				are keywords in the
+				language:
 			</para>
 
 			<programlisting language="kermeta">
@@ -1406,9 +1485,11 @@ class ~class {
 			</informaltable>
 
 			<para>Notice that most of these arithmetic operators are only defined
-				for numeric primitive types like Integer. Except the + operator
+				for numeric primitive types
+				like Integer. Except the + operator
 				which is
-				a concatenation operator for String, they are not applicable
+				a concatenation operator for String, they are not
+				applicable
 				on
 				String,
 				Boolean nor collections
@@ -1692,7 +1773,8 @@ class ~class {
 					<literal>equals</literal>
 					operation defined for the object and thus
 					can be redefined to
-					compare only the values of the objects. To be sure
+					compare only the values of the
+					objects. To be sure
 					to compare the
 					identity of objects even if they redefine the
 					operation
@@ -1726,7 +1808,8 @@ class ~class {
 
 				<para>
 					Kermeta provides a block notion to manage scope of variable.
-					Instruction of the block have to be inserted between
+					Instruction of the block have to be
+					inserted between
 					<literal>do</literal>
 					and
 					<literal>end</literal>
@@ -1758,7 +1841,8 @@ end</programlisting>
 
 				<para>
 					Kermeta's conditional statement is composed of at least two
-					elements : a boolean expression and a block that is executed if the
+					elements : a boolean expression and
+					a block that is executed if the
 					boolean is evaluated to
 					<literal>true</literal>
 					. You can add a third
@@ -1803,7 +1887,8 @@ end</programlisting>
 					and
 					<literal>else</literal>
 					blocks (otherwise the type checker will send an error). The values
-					considered as the result of the evaluation (the "returned" values)
+					considered as the result of
+					the evaluation (the "returned" values)
 					of
 					the
 					<literal>if</literal>
@@ -1877,7 +1962,8 @@ end</programlisting>
 			</warning>
 			<para>
 				Kermeta code can be quite large, and invloves many classes in
-				different metamodels. The main mechanism used to organise your code
+				different metamodels. The main
+				mechanism used to organise your code
 				is
 				the
 				<literal>require</literal>
@@ -1894,7 +1980,8 @@ end</programlisting>
 					<literal>require</literal>
 					primitive. It allows loading definitions of an other Kermeta file
 					when
-					file is processed. In the following example, we define a class
+					file is processed. In the
+					following example, we define a class
 					C which
 					inherits from the A class previously defined.
 				</para>
@@ -1919,7 +2006,8 @@ class C inherits subPackage1::A
 				<note>
 					<para>
 						In most case, the order of the declaration in not important. The
-						only exception is a very rare situation related to aspects (see
+						only exception is a very rare
+						situation related to aspects (see
 
 						<xref linkend="section_weaving.link" />
 
@@ -1967,14 +2055,16 @@ class C inherits subPackage1::A
 					<emphasis role="strong">*.ecore files</emphasis>
 					. These models can then be used
 					as if they were written in Kermeta.
-					In order to add behavior to the
+					In order to add behavior to
+					the
 					classes defined in .ecore files you
 					may : use the
 					<link linkend="section_weaving.link">weaving</link>
 					to dynamically weave
 					behavior to the ecore, or roundtrip using the
 					button action in the
-					workbench (ecore-&gt;kmt-&gt;ecore) to
+					workbench
+					(ecore-&gt;kmt-&gt;ecore) to
 					statically add the behavior
 					(as
 					EAnnotations) into the ecore file.
@@ -1984,21 +2074,25 @@ class C inherits subPackage1::A
 				<warning>
 					<para>A special attention must be put when requiring resources. It
 						is not allowed
-						to get several versions of the same class that comes
+						to get several
+						versions of the same class that comes
 						from several
 						required files.
-						Kermeta cannot know which version it
+						Kermeta cannot know which
+						version it
 						must use, so you'll get an error.
 					</para>
 					<para>A typical error, is to require both an ecore file and the
-						registered version of it. They represent two
+						registered version of it. They
+						represent two
 						distinct resources in
 						memory.
 					</para>
 					<para>
 						A more clever error, is when the two versions are hidden
 						inside an
-						erroneous ecore file which uses
+						erroneous ecore file
+						which uses
 						several ways to access
 						some metaclass and actually is not consistent.
 						(ex: you find
@@ -2006,7 +2100,8 @@ class C inherits subPackage1::A
 						http://www.eclipse.org/emf/2002/Ecore
 						and
 						platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore in the
-						ecore file or one of the dependent files)
+						ecore file or one of the
+						dependent files)
 					</para>
 				</warning>
 
@@ -2017,7 +2112,8 @@ class C inherits subPackage1::A
 						file
 					</emphasis>
 					. It will automatically convert the java into a Kermeta
-					representation in order to be able to call java code as if it was
+					representation in order to be able to
+					call java code as if it was
 					written in Kermeta. see
 					<xref linkend="section_java_code.link" />
 					for
@@ -2041,7 +2137,8 @@ class C inherits subPackage1::A
 					<para>
 						In Eclipse, you can use a path
 						relative to the user's workspace. In
-						that case the path looks like
+						that case the path looks
+						like
 						<literal>
 							platform:/resource/
 							<replaceable>your_project_name</replaceable>
@@ -2055,7 +2152,8 @@ class C inherits subPackage1::A
 					<para>
 						In Eclipse, you can use a path that search in
 						the installed
-						plugins. In that case the path looks like
+						plugins. In that case the path looks
+						like
 						<literal>
 							platform:/plugin/
 							<replaceable>plugin_name</replaceable>
@@ -2069,7 +2167,8 @@ class C inherits subPackage1::A
 					<para>
 						When deploying Kermeta code, it is
 						sometime interesting to search
-						in both the user's workspace and in the
+						in both the user's workspace
+						and in the
 						plugins. In that case the
 						path looks like
 						<literal>
@@ -2085,7 +2184,8 @@ class C inherits subPackage1::A
 						in the require statement.
 					</para>
 					<para>Be careful, using the current version (Kermeta 1.3.1) since a
-						deployed plugin using this protocol may be modified by the user's
+						deployed plugin using this
+						protocol may be modified by the user's
 						workspace content!
 					</para>
 				</note>
@@ -2100,14 +2200,17 @@ class C inherits subPackage1::A
 						identifier (nsuri) in order to retreive it
 						quickly. In Kermeta you
 						can
-						also use this nsuri into the require
+						also use this nsuri into
+						the require
 						statement. This approach is
 						useful because you can be sure that you
-						require the very same
+						require the very
+						same
 						model as
 						Eclipse use to load and save models
 						of that sort. For example, instead
-						of requiring ecore.ecore you may
+						of requiring
+						ecore.ecore you may
 						use
 						<literal>require
 							"http://www.eclipse.org/emf/2002/Ecore"
@@ -2131,27 +2234,33 @@ class C inherits subPackage1::A
 				<para>
 					Kermeta lets you organise your code the way you prefer. There is
 					no
-					predefined organisation of your code, but the language and the
-					workbench proposes various mechanisms and tools to structure it
+					predefined organisation of
+					your code, but the language and the
+					workbench proposes various mechanisms and tools to structure
+					it
 					according to your needs and the style you wish for your code.
-					Typically if you use Kermeta internal weaver (see
+					Typically if you use Kermeta
+					internal weaver (see
 					<xref linkend="section_weaving.link" />
 					), manually transform your ecore into
 					Kermeta, eventually weaving
-					the ecore using the merge button available
+					the ecore using the merge
+					button available
 					on the worbench.
 				</para>
 
 				<para>
 					For example, you can put all your classes into a single file
 					(like
-					in Ecore, every classes is in the .ecore file) or you may create
+					in Ecore, every classes is in
+					the .ecore file) or you may create
 					a
 					file for each of them and then use the
 					<literal>require</literal>
 					to
 					indicates that they must know each other. You can also use an
-					organisation like java, with a file per class and a directory per
+					organisation like java, with a
+					file per class and a directory per
 					package.
 				</para>
 			</section>
@@ -2168,7 +2277,8 @@ class C inherits subPackage1::A
 				<para></para>
 			</warning>
 			<para>Whenever you need a data locally to a block because it doesn't
-				goes into a class attribute or reference, you can use a local
+				goes into a class attribute
+				or reference, you can use a local
 				variable.
 			</para>
 
@@ -2187,8 +2297,10 @@ class C inherits subPackage1::A
 			<para>
 				In the following example, we define 3 variables of type integer.
 				The
-				first is initialized with the "14" literal value, the second is
-				initialized with an expression using v1. For the last variable, we
+				first is initialized with the
+				"14" literal value, the second is
+				initialized with an expression using v1. For the last variable,
+				we
 				use a
 				multiplicity notation to specify an ordered set of integer (see
 				<xref linkend="section_collections.link" />
@@ -2208,12 +2320,14 @@ end</programlisting>
 
 			<para>
 				Be careful to the multiplicity, when you create a variable with
-				multiplicity, you have to initialize it with a
+				multiplicity, you have to
+				initialize it with a
 				<link linkend="section_collections.link">collection</link>
 				. Then to use its
 				content, you need to use the collection operation
 				like add, addAll,
-				remove, select, etc. If you use the assignment
+				remove,
+				select, etc. If you use the assignment
 				<literal>:=</literal>
 				it
 				will replace your collection.
@@ -2231,7 +2345,8 @@ end</programlisting>
 
 				<para>Kermeta implements a few primitive types. By primitive types,
 					we
-					mean types that are basic to any language, i.e integer, and that
+					mean types that are basic
+					to any language, i.e integer, and that
 					have
 					a literal value. See below table.
 				</para>
@@ -2325,9 +2440,11 @@ var myVar5 : boolean</programlisting>
 
 				<para>Kermeta also supports some other primitive types like Float
 					and
-					Character, but they currently don't have a surface syntax for
+					Character, but they
+					currently don't have a surface syntax for
 					their
-					literals. The way to get them is to use the convertion methods
+					literals. The way to get them is to use the
+					convertion methods
 					available on String (for both of them) or Integer (for Float).
 				</para>
 				<para>For example:</para>
@@ -2342,13 +2459,15 @@ var r : Real init "4.5".toReal
 
 				<para>You can define enumerations using the following syntax.
 					Note
-					that each enumeration literal must end with a ";".
+					that each enumeration literal
+					must end with a ";".
 				</para>
 
 				<programlisting><emphasis role="strong">enumeration</emphasis> Size { small; normal; big; huge; } </programlisting>
 
 				<para>You can manipulate enumerated variables and literals with
-					classical operators such as in the following example.
+					classical operators such as in
+					the following example.
 				</para>
 
 				<programlisting language="kermeta">var mySize : Size
@@ -2360,7 +2479,8 @@ end</programlisting>
 					<para>
 						Enumeration is a concept of the same level as Class, they
 						must both be
-						defined in a package.
+						defined in a
+						package.
 					</para>
 				</note>
 			</section>
@@ -2373,7 +2493,8 @@ end</programlisting>
 				</title>
 
 				<para>In Kermeta, you can define your own datatype based on existing
-					types without a hard dependency like inheritance.
+					types without a hard
+					dependency like inheritance.
 				</para>
 
 				<para>This is done using the alias syntax.</para>
@@ -2383,7 +2504,8 @@ end</programlisting>
 				<programlisting><emphasis role="strong">alias</emphasis> MyString : kermeta::standard::String;</programlisting>
 
 				<para>In this sample, MyString has all the behavior of
-					kermeta::standard::String but is declared locally. This means that
+					kermeta::standard::String but is declared
+					locally. This means that
 					you
 					don't have any dependency to the framework, even to the String
 					in the
@@ -2395,7 +2517,8 @@ end</programlisting>
 				<programlisting><emphasis role="strong">alias</emphasis> String : kermeta::standard::String;</programlisting>
 
 				<para>This will create a new type String in your package with the
-					behavior of String in the framework.
+					behavior of String in the
+					framework.
 				</para>
 
 				<para>
@@ -2413,23 +2536,28 @@ end</programlisting>
 
 				<para role="lineBreak">you simply defined a syntactical shortcut
 					allowing
-					you to access any definition in this package from within this
+					you to access any definition in
+					this package from within this
 					file.
 				</para>
 
 				<para>Wheras defining an alias allows you to access this new
-					definition from another package if needed.
+					definition from another package if
+					needed.
 				</para>
 
 				<tip>
 					<para>
 						It is interesting to redefine your own datatype for all the
 						standard
-						type you use in your metamodel, so when you convert the
+						type you use in your
+						metamodel, so when you convert the
 						file into
-						ecore in order to have serialisation, you won't have any
+						ecore in order to have serialisation, you won't
+						have any
 						dependency to framework.ecore (which is the ecore version of the
-						framework where Kermeta standard type) This allow a lazy coupling
+						framework where
+						Kermeta standard type) This allow a lazy coupling
 						of the type definitions.
 					</para>
 				</tip>
@@ -2455,14 +2583,16 @@ end</programlisting>
 					), Kermeta is an
 					object-oriented language. Kermeta
 					provides all MOF
-					concepts like properties, attributes, package.
+					concepts like properties,
+					attributes, package.
 					In addition, it
 					provides a body to operations and derived properties.
 				</para>
 
 				<para>Classes and abstract classes can be defined in a Java-like
 					way.
-					Class definition must be placed into brackets as it is in the
+					Class definition must be
+					placed into brackets as it is in the
 					following example.
 				</para>
 
@@ -2480,7 +2610,8 @@ end</programlisting>
 
 				<para>
 					Additionally, for better code robustness, and more user-friendly
-					programming, classes can use the genericity mechanisms (see
+					programming, classes can use
+					the genericity mechanisms (see
 					<xref linkend="section_genericity.link" />
 					for more information).
 				</para>
@@ -2496,7 +2627,8 @@ a := A&lt;Integer&gt;.new
 
 				<para>There are some limitations in regards to Java. For example,
 					you
-					cannot define nested classes in Kermeta. Kermeta offers the same
+					cannot define nested classes
+					in Kermeta. Kermeta offers the same
 					structural concepts than MOF language.
 				</para>
 			</section>
@@ -2505,39 +2637,40 @@ a := A&lt;Integer&gt;.new
 				<title>Defining operations</title>
 
 				<para>Kermeta provides a way to add operational (action) semantics
-					to your metamodels. For that, you can define operations with their
-					body, as in a classical programming language. You can also specify
+					to your metamodels. For that,
+					you can define operations with their
+					body, as in a classical programming language. You can also
+					specify
 					abstract operations (they have no body). Kermeta requires that
 					every
-					class that contains an abstract operation must be declared as
+					class that contains
+					an abstract operation must be declared as
 					an
 					abstract class.
 				</para>
 
 				<para>In the following example, we define some operations, based on
 					a
-					visitor pattern implementation
+					visitor pattern
+					implementation
 				</para>
 
 				<programlisting><emphasis role="strong">class</emphasis> Inventory 
 {
-    <emphasis role="strong">operation</emphasis> visitLibrary(l : Library) <emphasis
-					role="strong">is</emphasis>
+    <emphasis role="strong">operation</emphasis> visitLibrary(l : Library) <emphasis role="strong">is</emphasis>
     <emphasis role="strong">do</emphasis>
         writeln("Inventory : ");
         l.books.each(b : Book | b.accept(<emphasis role="strong">self</emphasis>))
         writeln("----")
     <emphasis role="strong">end</emphasis>
 
-    <emphasis role="strong">operation</emphasis> visitBook(b : Book) <emphasis
-					role="strong">is</emphasis>
+    <emphasis role="strong">operation</emphasis> visitBook(b : Book) <emphasis role="strong">is</emphasis>
     <emphasis role="strong">do</emphasis>
         stdio.write("Book : ", b.title, " by ")
         b.authors.each(a : Author | a.accept(<emphasis role="strong">self</emphasis>))
     <emphasis role="strong">end</emphasis>
 
-    <emphasis role="strong">operation</emphasis> visitAuthor(a : Author) <emphasis
-					role="strong">is</emphasis> 
+    <emphasis role="strong">operation</emphasis> visitAuthor(a : Author) <emphasis role="strong">is</emphasis> 
     <emphasis role="strong">do</emphasis>
         stdio.write(a.name, " ", a.lastName)
     <emphasis role="strong">end</emphasis>
@@ -2576,7 +2709,8 @@ a := A&lt;Integer&gt;.new
 					In this small example we define an
 					<literal>Inventory</literal>
 					class which can go over the library structure and print books
-					informations. For that, we apply the visitor GoF pattern's on the
+					informations. For that, we apply
+					the visitor GoF pattern's on the
 					library structure defining an
 					<literal>accept</literal>
 					method in
@@ -2596,8 +2730,7 @@ a := A&lt;Integer&gt;.new
 					<programlisting><emphasis role="strong">operation</emphasis> getName() : String<emphasis
 						role="strong"> is</emphasis>
     <emphasis role="strong">do</emphasis>
-        <emphasis role="strong">result</emphasis> := <emphasis
-						role="strong">self</emphasis>.name
+        <emphasis role="strong">result</emphasis> := <emphasis role="strong">self</emphasis>.name
     <emphasis role="strong">end</emphasis></programlisting>
 
 					<note>
@@ -2618,7 +2751,8 @@ a := A&lt;Integer&gt;.new
 					<para>
 						When you run a Kermeta program you'll start from an operation.
 						The
-						main operation that you want to run can have any number of
+						main operation that you want
+						to run can have any number of
 						parameters, whose types must be only and only String. For
 						operations
 						that are
@@ -2628,8 +2762,10 @@ a := A&lt;Integer&gt;.new
 					</para>
 
 					<para>Technically, if you use Kermeta inside Eclipse, when you will
-						ask it to run your operation, the interpreter will implicitely
-						instanciate the class containing this operation, and then will
+						ask it to run your
+						operation, the interpreter will implicitely
+						instanciate the class containing this operation,
+						and then will
 						call
 						this operation.
 					</para>
@@ -2641,12 +2777,12 @@ a := A&lt;Integer&gt;.new
 					</para>
 
 					<programlisting><emphasis role="strong">class</emphasis> A{
-    <emphasis role="strong">operation</emphasis> main0() <emphasis
-						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">operation</emphasis> main0() <emphasis role="strong">is</emphasis> <emphasis
+						role="strong">do</emphasis>
         <emphasis>// do something</emphasis>
     <emphasis role="strong">end</emphasis>
-    <emphasis role="strong">operation</emphasis> main1( arg1 : String) <emphasis
-						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">operation</emphasis> main1( arg1 : String) <emphasis role="strong">is</emphasis> <emphasis
+						role="strong">do</emphasis>
         <emphasis>// do something with 1rst argument</emphasis>
     <emphasis role="strong">end</emphasis>
     <emphasis role="strong">operation</emphasis> main3( arg1 : String, arg2 : String) <emphasis
@@ -2664,7 +2800,8 @@ a := A&lt;Integer&gt;.new
 				<para>Kermeta doesn't use constructors.</para>
 
 				<para>However in some situation, you may need to provide some
-					initialization operation. The best approach is simply to declare an
+					initialization operation. The best
+					approach is simply to declare an
 					operation which will return self after having done the
 					initialization
 					work.
@@ -2699,13 +2836,17 @@ class A
 					<title>No constructor</title>
 
 					<para>This is because of the compatibility with EMOF and Ecore. In
-						those metalanguages, the user must always be able to create object
-						(except if they are declared abstract), it cannot rely on a action
+						those metalanguages, the user
+						must always be able to create object
+						(except if they are declared abstract), it cannot rely on
+						a action
 						language (since they don't define one). In addition, we want that
 						all
-						Meta tool be able to create the object the same way, so, as
+						Meta tool be able
+						to create the object the same way, so, as
 						Ecore
-						doesn't provide constructor with its editors, then neither
+						doesn't provide constructor with its editors,
+						then neither
 						does
 						Kermeta.
 					</para>
@@ -2717,7 +2858,8 @@ class A
 						operation that will
 						take as many parameters as you want. Even
 						better, you can use a
-						Builder or a Factory design pattern.
+						Builder or a
+						Factory design pattern.
 					</para>
 					<programlisting language="kermeta">
 aspect class ClassFromMyEcore {
@@ -2741,7 +2883,8 @@ aspect class ClassFromMyEcore {
 					<title>No operation overloading</title>
 
 					<para>In order to simplify multiple inheritance management, Kermeta
-						allows only one operation or property with the same name in a
+						allows only one operation or
+						property with the same name in a
 						given
 						class.
 					</para>
@@ -2762,7 +2905,8 @@ aspect class ClassFromMyEcore {
 			</warning>
 			<para>As Kermeta is object-oriented, it supports inheritance. Like
 				its
-				basis EMOF, it support both, simple and multiple inheritance.
+				basis EMOF, it support both,
+				simple and multiple inheritance.
 			</para>
 
 			<section>
@@ -2795,7 +2939,8 @@ class Female inherits Person
 				<para>
 					In this example, we define a simple model which represent
 					simples
-					family trees. Here, persons are defined by their name and last
+					family trees. Here, persons are
+					defined by their name and last
 					name. Each person have a father and mother and respectively might
 					have
 					children. The figure representing this example is
@@ -2837,7 +2982,8 @@ class AnotherSubA inherits A {
         </programlisting>
 
 				<para>In this situation you must use one of the following methods :
-					conditional assignment or asType
+					conditional assignment or
+					asType
 				</para>
 
 				<section>
@@ -2849,7 +2995,8 @@ class AnotherSubA inherits A {
 						allows to
 						assign only if the passed object is of the correct type.
 						If not of
-						the correct type, the assigned value will simply be
+						the correct type,
+						the assigned value will simply be
 						<literal>Void</literal>
 						.
 					</para>
@@ -2861,7 +3008,8 @@ class AnotherSubA inherits A {
         	</programlisting>
 
 					<para>This still propose some control on the types and won't accept
-						all kind of cast, for example, you cannot conditionaly assign if
+						all kind of cast, for
+						example, you cannot conditionaly assign if
 						you don't have a common supertype.
 					</para>
 
@@ -2882,8 +3030,10 @@ class B {
 						<literal>asType</literal>
 						to
 						cast your value. This one use a syntax which is shorter in some
-						situation, since you don't have to create an intermediate variable
-						before passing the casted value to an operation. However, the
+						situation, since you don't
+						have to create an intermediate variable
+						before passing the casted value to an operation.
+						However, the
 						drawback is that, if it fails to cast, then it will raise an
 						exception.
 					</para>
@@ -2907,13 +3057,15 @@ class C {
 						In complement you can use the
 						<literal>isVoid</literal>
 						operation (available on every object) to test the result of a
-						conditional cast. Or you may use the
+						conditional cast. Or you may use
+						the
 						<literal>isKindOf</literal>
 						or the
 						<literal>isInstanceOf</literal>
 						operations to test if the calling object has the same type of the
 						given class before
-						the assignment/asType. The
+						the
+						assignment/asType. The
 						<literal>isKindOf</literal>
 						operation returns
 						<literal>true</literal>
@@ -2945,15 +3097,15 @@ class C {
 
 <emphasis role="strong">class</emphasis> Male { }
 
-<emphasis role="strong">class</emphasis> GrandFather <emphasis
-					role="strong">inherits</emphasis> Parent, Male
+<emphasis role="strong">class</emphasis> GrandFather <emphasis role="strong">inherits</emphasis> Parent, Male
 {
      <emphasis role="strong">boolean</emphasis> healthy : Boolean
 }</programlisting>
 
 				<para>The above example defines a class "GrandFather" that inherits
 					at
-					the same time the class "Parent", and the class "Male". Its
+					the same time the class
+					"Parent", and the class "Male". Its
 					graphical
 					representation is shown in below figure.
 				</para>
@@ -2976,7 +3128,8 @@ class C {
 
 				<para>
 					In the following sample, when an operation is declared for the
-					first time (in the parent class Person), it uses the
+					first time (in the parent class
+					Person), it uses the
 					<literal>operation</literal>
 					keyword. Then, whenever you override it,
 					you will have to use the
@@ -2987,8 +3140,10 @@ class C {
 				<note>
 					<para>
 						In the sample,Person and adopt are abstract, but this has no
-						influence on the operation-method keywords rule, it would have
-						been the same even if Person was not abstract or if adopt had a
+						influence on the
+						operation-method keywords rule, it would have
+						been the same even if Person was not abstract or
+						if adopt had a
 						behavior in this class.
 					</para>
 				</note>
@@ -2998,35 +3153,29 @@ class C {
     <emphasis role="strong">attribute</emphasis> name : String
     <emphasis role="strong">reference</emphasis> father : Male#children 
     <emphasis role="strong">reference</emphasis> mother : Female#children
-    <emphasis role="strong">operation</emphasis> adopt(child : Person) <emphasis
-					role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>}</programlisting>
+    <emphasis role="strong">operation</emphasis> adopt(child : Person) <emphasis role="strong">is</emphasis> <emphasis
+					role="strong">abstract</emphasis>}</programlisting>
 
-				<programlisting><emphasis role="strong">class</emphasis> Male <emphasis
-					role="strong">inherits</emphasis> Person 
+				<programlisting><emphasis role="strong">class</emphasis> Male <emphasis role="strong">inherits</emphasis> Person 
 {
     <emphasis role="strong">reference</emphasis> wife : Female#husband
     <emphasis role="strong">reference</emphasis> children : oset Person[0..*]#father<emphasis></emphasis>    <emphasis
-					role="strong">method</emphasis> adopt(child : Person) <emphasis
-					role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        children.add(child)
+					role="strong">method</emphasis> adopt(child : Person) <emphasis role="strong">is</emphasis>    <emphasis
+					role="strong">do</emphasis>        children.add(child)
         <emphasis role="strong">if</emphasis> <emphasis role="strong">not</emphasis> wife.children.contains(child) <emphasis
-					role="strong">then</emphasis>            child.father := <emphasis
-					role="strong">self</emphasis>            wife.adopt(child)
-        <emphasis role="strong">end</emphasis>    <emphasis
-					role="strong">end</emphasis>}</programlisting>
+					role="strong">then</emphasis>            child.father := <emphasis role="strong">self</emphasis>            wife.adopt(child)
+        <emphasis role="strong">end</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
 
-				<programlisting><emphasis role="strong">class</emphasis> Female <emphasis
-					role="strong">inherits</emphasis> Person
+				<programlisting><emphasis role="strong">class</emphasis> Female <emphasis role="strong">inherits</emphasis> Person
 {
     <emphasis role="strong">reference</emphasis> husband : Male#wife
     <emphasis role="strong">reference</emphasis> children : oset Person[0..*]#mother<emphasis></emphasis>    <emphasis
-					role="strong">method</emphasis> adopt(child : Person) <emphasis
-					role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        children.add(child)
+					role="strong">method</emphasis> adopt(child : Person) <emphasis role="strong">is</emphasis>    <emphasis
+					role="strong">do</emphasis>        children.add(child)
         <emphasis role="strong">if</emphasis> <emphasis role="strong">not</emphasis> husband.children.contains(child) <emphasis
-					role="strong">then</emphasis>            child.mother := <emphasis
-					role="strong">self</emphasis>
+					role="strong">then</emphasis>            child.mother := <emphasis role="strong">self</emphasis>
             husband.adopt(child)
-        <emphasis role="strong">end</emphasis>    <emphasis
-					role="strong">end</emphasis>}</programlisting>
+        <emphasis role="strong">end</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
 			</section>
 
 			<section>
@@ -3034,55 +3183,68 @@ class C {
 
 				<para>A MOF class can have operations but MOF does not provide any
 					way
-					to describe the behavior of these operations. Furthermore MOF
+					to describe the behavior of
+					these operations. Furthermore MOF
 					does
 					not
-					provide any semantics neither for operation call nor for
+					provide any semantics neither for operation call nor
+					for
 					operation
 					inheritance and redefinition. This section investigates
 					how, while
-					weaving actions into MOF, MOF semantics can be extended
+					weaving actions
+					into MOF, MOF semantics can be extended
 					to support
-					behavior definition and extension mechanisms provided by
+					behavior definition and extension mechanisms
+					provided by
 					the action
 					language. This implies answering several questions
 					concerning
-					redefinition and dispatch.
+					redefinition
+					and dispatch.
 				</para>
 
 				<section>
 					<title>Operation redefinition</title>
 
 					<para>MOF does not specify the notion of overriding an operation
-						because from a structural point of view it does not make any
+						because from a structural point
+						of view it does not make any
 						sense.
 						To stick to MOF structure one can argue that redefinition
 						should be
 						forbidden in an executable MOF. This is the simplest
 						solution as
 						it
-						also solves the problem of the dynamic dispatch since
+						also solves the
+						problem of the dynamic dispatch since
 						a simple
 						static binding policy can be used.
 					</para>
 
 					<para>However, operation redefinition is one of the key features of
-						Object-Oriented (OO) languages. The OO paradigm has demonstrated
-						that operation redefinition is a useful and powerful mechanism to
+						Object-Oriented (OO)
+						languages. The OO paradigm has demonstrated
+						that operation redefinition is a useful and
+						powerful mechanism to
 						define the behavior of objects and allow for variability. This
 						would
-						be very convenient to properly model dynamic semantic
+						be
+						very convenient to properly model dynamic semantic
 						variation
-						points existing in e.g. UML state-charts. For this reason
+						points existing in e.g. UML
+						state-charts. For this reason
 						we
 						believe
 						that an important feature of an executable MOF is to
 						provide a
 						precise behavior redefinition mechanism. The choice of
 						the operation
-						overriding mechanism must take into account the usual
+						overriding
+						mechanism must take into account the usual
 						problem of
-						redefinition such as method specialization and
+						redefinition such as method specialization
+						and
 						conflicting
 						redefinitions related to multiple inheritance.
 					</para>
@@ -3100,8 +3262,7 @@ class C {
 									<entry align="right">
 										<mediaobject>
 											<imageobject>
-												<imagedata depth="9.208cm"
-													fileref="Kermeta-Manual_figures/operation_redefinition.png"
+												<imagedata depth="9.208cm" fileref="Kermeta-Manual_figures/operation_redefinition.png"
 													width="2.29cm" />
 											</imageobject>
 										</mediaobject>
@@ -3111,27 +3272,26 @@ class C {
 									<entry>
 										<programlisting><emphasis role="strong">class</emphasis> A
 {
-     <emphasis role="strong">operation</emphasis> m1() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+     <emphasis role="strong">operation</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">do</emphasis>
          <emphasis>// Some behavior</emphasis>
      <emphasis role="strong">end</emphasis>
 
      <emphasis>// operation m2 is abstract</emphasis>
-     <emphasis role="strong">operation</emphasis> m2() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
+     <emphasis role="strong">operation</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">abstract</emphasis>
 }
 </programlisting>
-										<programlisting><emphasis role="strong">class</emphasis> B <emphasis
-											role="strong">inherits</emphasis> A
+										<programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> A
 {    
      <emphasis>// method m1 inherits operation m1 from A</emphasis>
-     <emphasis role="strong">method</emphasis> m1() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+     <emphasis role="strong">method</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">do</emphasis>
          <emphasis>// Behavior redefinition</emphasis>
      <emphasis role="strong">end</emphasis>
 
-     <emphasis role="strong">method</emphasis> m2() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">do</emphasis> <emphasis>//</emphasis><emphasis> Implementation of the abstract method</emphasis>
+     <emphasis role="strong">method</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">do</emphasis> <emphasis>//</emphasis><emphasis> Implementation of the abstract method</emphasis>
      <emphasis role="strong">end</emphasis>
 }</programlisting>
 									</entry>
@@ -3159,16 +3319,21 @@ class C {
 					<title>Operation specialization</title>
 
 					<para>The issue of choosing semantics for operation overriding has
-						been widely studied for the design of OO languages ( cf. M. Abadi
-						and L. Cardelli, A theory of objects, Springer). However, OO
+						been widely studied for the
+						design of OO languages ( cf. M. Abadi
+						and L. Cardelli, A theory of objects, Springer). However,
+						OO
 						languages have not adopted a unique solution to this problem. In
-						this context, any language that defines an operation overriding
-						mechanism should define precisely the solution it implements.
+						this context, any language
+						that defines an operation overriding
+						mechanism should define precisely the solution it
+						implements.
 					</para>
 
 					<para>
 						The simplest approach to overriding is to require that an
-						overriding method has exactly the same signature as the overridden
+						overriding method has exactly the
+						same signature as the overridden
 						method. That is that both the type of the parameters and the
 						return
 						type of the operation should be
@@ -3176,7 +3341,8 @@ class C {
 						among
 						the implementations of an operation. For the sake of
 						simplicity this
-						is the solution we have chosen for the current
+						is the solution we
+						have chosen for the current
 						version of
 						Kermeta.
 					</para>
@@ -3187,7 +3353,8 @@ class C {
 						i.e. specialization on the
 						types of parameters or/and return type
 						of the operation. On one
-						hand, the return type of the overriding
+						hand,
+						the return type of the overriding
 						method can be a sub-type of
 						the return type of the overridden
 						method. Method specialization is
@@ -3196,7 +3363,8 @@ class C {
 						for the return types. On
 						the other hand, the types of parameters of
 						the overriding method
-						might be super types of the parameters of the
+						might
+						be super types of the parameters of the
 						overridden methods.
 						Method specialization is thus
 						<emphasis>contravariant</emphasis>
@@ -3205,13 +3373,15 @@ class C {
 					</para>
 
 					<para>In practice languages can allow method specialization only on
-						the return type (this is the case of Java 1.5) or both on
+						the return type (this is the
+						case of Java 1.5) or both on
 						parameters
 						and return type (this is the case of Eiffel). Among
 						these solutions,
 						we may choose a less restrictive policy then
 						strict invariance for
-						future versions of Kermeta in order to
+						future
+						versions of Kermeta in order to
 						improve the static type
 						checking of Kermeta programs.
 					</para>
@@ -3221,28 +3391,35 @@ class C {
 					<title>Operation overloading</title>
 
 					<para>Overloading is not allowed in Kermeta. This mechanism allows
-						multiple operations taking different types of parameters to be
-						defined with the same name. For each call, depending on the type
+						multiple operations taking
+						different types of parameters to be
+						defined with the same name. For each call, depending on the
+						type
 						of
 						the actual parameters, the compiler or interpreter automatically
-						calls the right one. This provides a convenient way for writing
-						operations whose behaviors differ depending on the static type of
+						calls the right one.
+						This provides a convenient way for writing
+						operations whose behaviors differ depending on the
+						static type of
 						the parameters. Overloading is extensively used is some functional
-						languages such as Haskell and has been implemented in OO languages
-						such as Java or C#. However it causes numerous problems in an OO
+						languages such
+						as Haskell and has been implemented in OO languages
+						such as Java or C#. However it causes
+						numerous problems in an OO
 						context due to inheritance and even multiple inheritance in our
 						case
 						[REF?]. It is not implemented in some OO languages such as
 						Eiffel
-						for this reason, and that is why we chose to exclude
+						for this reason, and that is
+						why we chose to exclude
 						overloading
 						from Kermeta.
 					</para>
 
 					<programlisting><emphasis role="strong">class</emphasis> A
 {
-    <emphasis role="strong">method</emphasis> m(i : Integer) <emphasis
-						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">method</emphasis> m(i : Integer) <emphasis role="strong">is</emphasis> <emphasis
+						role="strong">do</emphasis>
         <emphasis>// [...]</emphasis>
     <emphasis role="strong">end 
     method </emphasis>m(s : String)<emphasis role="strong"> is do </emphasis><emphasis>// this is not allowed in Kermeta !!!</emphasis>
@@ -3255,7 +3432,8 @@ class C {
 					<title>Conflicts related to multiple inheritance</title>
 
 					<para>This is also a classical problem that has been solved in
-						several OO languages. There are mainly two kinds of conflicts when
+						several OO languages. There are
+						mainly two kinds of conflicts when
 						a
 						class inherits features from several super-classes:
 					</para>
@@ -3264,47 +3442,59 @@ class C {
 						<listitem>
 							<para>Several features with the same name might be inherited
 								from
-								different super classes causing a name clash.
+								different super classes
+								causing a name clash.
 							</para>
 						</listitem>
 
 						<listitem>
 							<para>Several implementations of a single operation could be
-								inherited from different super classes.
+								inherited from different super
+								classes.
 							</para>
 						</listitem>
 					</itemizedlist>
 
 					<para>There are two kinds of solutions to resolve these conflicts.
-						The first one is to have an implicit resolution mechanism which
-						chooses the method to inherit according to an arbitrary policy.
+						The first one is to have an
+						implicit resolution mechanism which
+						chooses the method to inherit according to an arbitrary
+						policy.
 						The
 						second one is to include in the language constructions that
 						allow
-						the programmer to explicitly resolve conflicts. In Eiffel,
+						the programmer to
+						explicitly resolve conflicts. In Eiffel,
 						for
-						instance, the programmer can rename features in order to avoid
+						instance, the programmer can rename features in
+						order to avoid
 						name
 						clashes and can select the method to inherit if several
 						redefinition
-						of an operation are inherited from parent classes.
+						of an
+						operation are inherited from parent classes.
 					</para>
 
 					<para>
 						In the current version of Kermeta, we have chosen to include a
-						minimal selection mechanism that allows the user to explicitly
-						select the inherited method to override if several implementations
+						minimal selection mechanism that
+						allows the user to explicitly
+						select the inherited method to override if several
+						implementations
 						of an operation are inherited. This mechanism does not allow
-						resolving some name clashes and thus reject some ambiguous
+						resolving some name
+						clashes and thus reject some ambiguous
 						programs.
-						For the future version of Kermeta we plan to include a
+						For the future version of Kermeta we plan to
+						include a
 						more general
 						mechanism such as
 						<emphasis>traits</emphasis>
 						proposed by Schärli et
 						al. In any case we believe the conflict
 						resolution mechanism should
-						be explicit for the programmer.
+						be
+						explicit for the programmer.
 					</para>
 
 					<table id="refTable1">
@@ -3320,8 +3510,7 @@ class C {
 									<entry align="center">
 										<mediaobject>
 											<imageobject>
-												<imagedata depth="11.374cm"
-													fileref="Kermeta-Manual_figures/superoperation_selection.png"
+												<imagedata depth="11.374cm" fileref="Kermeta-Manual_figures/superoperation_selection.png"
 													width="5.636cm" />
 											</imageobject>
 										</mediaobject>
@@ -3331,35 +3520,31 @@ class C {
 									<entry>
 										<programlisting><emphasis role="strong">class</emphasis> O
 {
-    <emphasis role="strong">operation</emphasis> m() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
+    <emphasis role="strong">operation</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">abstract</emphasis>
 }
 </programlisting>
-										<programlisting><emphasis role="strong">class</emphasis> A <emphasis
-											role="strong">inherits</emphasis> O
+										<programlisting><emphasis role="strong">class</emphasis> A <emphasis role="strong">inherits</emphasis> O
 {
-    <emphasis role="strong">method</emphasis> m() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">do</emphasis>
         <emphasis>// [...]</emphasis>
     <emphasis role="strong">end</emphasis>
 }
 </programlisting>
-										<programlisting><emphasis role="strong">class</emphasis> B <emphasis
-											role="strong">inherits</emphasis> O
+										<programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> O
 {
-    <emphasis role="strong">method</emphasis> m() <emphasis
-											role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis
+											role="strong">do</emphasis>
         <emphasis>// [...]</emphasis>
     <emphasis role="strong">end</emphasis>
 }
 </programlisting>
-										<programlisting><emphasis role="strong">class</emphasis> C <emphasis
-											role="strong">inherits</emphasis> A, B
+										<programlisting><emphasis role="strong">class</emphasis> C <emphasis role="strong">inherits</emphasis> A, B
 {
 <emphasis>// "from" : an explicit selection of the//implementation to inherit</emphasis>
-    <emphasis role="strong">method</emphasis> m() <emphasis
-											role="strong">from</emphasis> A <emphasis role="strong">is</emphasis> <emphasis
-											role="strong">do</emphasis>
+    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">from</emphasis> A <emphasis
+											role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
         <emphasis>// [...]</emphasis>
     <emphasis role="strong">end</emphasis>
 } 
@@ -3383,19 +3568,24 @@ class C {
 				<para></para>
 			</warning>
 			<para>One of the core characteristics of Kermeta is to be statically
-				typed. In order to allow static typing of OCL-like expressions, a
+				typed. In order to allow
+				static typing of OCL-like expressions, a
 				few
-				modifications had to be made to the EMOF type system (Please
+				modifications had to be made to the EMOF type system
+				(Please
 				refer to
 				paper Weaving Executability into Object-Oriented
 				Meta-Languages by P.A.
-				Muller et al., presented at the Models05
+				Muller et
+				al., presented at the Models05
 				conference).
 			</para>
 
 			<para>As a result to these modifications genericity support has been
-				added into Kermeta. Like Eiffel and Java 5, Kermeta supports generic
-				classes and generic operations. This section gives on overview of
+				added into Kermeta. Like
+				Eiffel and Java 5, Kermeta supports generic
+				classes and generic operations. This section gives on
+				overview of
 				these
 				concepts in Kermeta.
 			</para>
@@ -3405,16 +3595,20 @@ class C {
 
 				<para>In Kermeta classes can have a set of type parameters. These
 					type
-					variables can be used in the implementation of the class as any
+					variables can be used in
+					the implementation of the class as any
 					other
-					type. By default a type variable can take as value any type;
+					type. By default a type variable can take as value
+					any type;
 					but a
 					type variable can also be constrained by a type: in that case,
 					this
-					type variable can only be substituted by a sub-type of this
+					type variable
+					can only be substituted by a sub-type of this
 					type.
 					The
-					following code demonstrates how to create generic classes.
+					following code demonstrates how to create
+					generic classes.
 				</para>
 
 				<programlisting language="kermeta">// A class with a type variable G that can be bound with any type</programlisting>
@@ -3423,14 +3617,13 @@ class C {
 {
      <emphasis role="strong">reference</emphasis> elements : oset G[*]
 
-     <emphasis role="strong">operation</emphasis> enqueue(e : G) : <emphasis
-					role="strong">Void</emphasis> <emphasis role="strong">is</emphasis> <emphasis
-					role="strong">do</emphasis> 
+     <emphasis role="strong">operation</emphasis> enqueue(e : G) : <emphasis role="strong">Void</emphasis> <emphasis
+					role="strong">is</emphasis> <emphasis role="strong">do</emphasis> 
          elements.add(e)
      <emphasis role="strong">end</emphasis>
      
-     <emphasis role="strong">operation</emphasis> dequeue() : G <emphasis
-					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+     <emphasis role="strong">operation</emphasis> dequeue() : G <emphasis role="strong">is</emphasis> <emphasis
+					role="strong">do</emphasis>
          <emphasis role="strong">result</emphasis> := elements.first
          elements.removeAt(0)
      <emphasis role="strong">end</emphasis>
@@ -3442,13 +3635,11 @@ class C {
 				<programlisting><emphasis role="strong">class</emphasis> SortedQueue&lt;C : Comparable&gt; <emphasis
 					role="strong">inherits</emphasis> Queue&lt;C&gt; 
 {
-     <emphasis role="strong">method</emphasis> enqueue(e : C) : <emphasis
-					role="strong">Void</emphasis> <emphasis role="strong">is</emphasis> <emphasis
-					role="strong">do</emphasis>
+     <emphasis role="strong">method</emphasis> enqueue(e : C) : <emphasis role="strong">Void</emphasis> <emphasis
+					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
          <emphasis role="strong">var</emphasis> i : Integer
          <emphasis role="strong">from</emphasis> i := 0
-         <emphasis role="strong">until</emphasis> i == elements.size <emphasis
-					role="strong">or</emphasis> e &gt; elements.elementAt(i)
+         <emphasis role="strong">until</emphasis> i == elements.size <emphasis role="strong">or</emphasis> e &gt; elements.elementAt(i)
          <emphasis role="strong">loop</emphasis>
              i := i + 1
          <emphasis role="strong">end</emphasis>
@@ -3462,11 +3653,14 @@ class C {
 				<title>Generic operations</title>
 
 				<para>Kermeta operations can contain type parameters. Like type
-					variables for classes these type parameters can be constrained by a
-					super type. However, unlike for classes, for which the bindings to
+					variables for classes these type
+					parameters can be constrained by a
+					super type. However, unlike for classes, for which the
+					bindings to
 					these type parameters are explicit, for operations the actual type
 					to
-					bind to the variable is statically inferred for each call
+					bind to the
+					variable is statically inferred for each call
 					according to
 					the type of the actual parameters.
 				</para>
@@ -3474,9 +3668,8 @@ class C {
 				<programlisting><emphasis role="strong">class</emphasis> Utils {
     <emphasis role="strong">operation</emphasis> max&lt;T : Comparable&gt;(a : T, b : T) : T <emphasis
 					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis role="strong">result</emphasis> := <emphasis
-					role="strong">if</emphasis> a &gt; b <emphasis role="strong">then</emphasis> a <emphasis
-					role="strong">else</emphasis> b <emphasis role="strong">end</emphasis>
+        <emphasis role="strong">result</emphasis> := <emphasis role="strong">if</emphasis> a &gt; b <emphasis
+					role="strong">then</emphasis> a <emphasis role="strong">else</emphasis> b <emphasis role="strong">end</emphasis>
     <emphasis role="strong">end</emphasis>
 }
 </programlisting>
@@ -3485,7 +3678,8 @@ class C {
 					<para>
 						Notice in that sample that even the "if" is an expression
 						that can
-						return a value that is assigned here to the special
+						return a value that is
+						assigned here to the special
 						variable
 						"result".
 					</para>
@@ -3498,7 +3692,8 @@ class C {
 				<para>
 					Actually, all types can be used as a parameter of a generic
 					class or
-					generic operation. More, the ModelType, is really useful when
+					generic operation. More, the
+					ModelType, is really useful when
 					combined with generics. see
 					<xref linkend="section_modeltype.link" />
 				</para>
@@ -3511,8 +3706,10 @@ class C {
 				<phrase id="section_exceptions"></phrase>
 			</title>
 			<para>Kermeta provides also an exception mechanism. You can define a
-				"rescue" block to manage errors occurring during the execution of
-				another block. Exception mechanism is very close to the Java
+				"rescue" block to manage
+				errors occurring during the execution of
+				another block. Exception mechanism is very close to the
+				Java
 				Exception
 				mechanism.
 			</para>
@@ -3538,10 +3735,8 @@ class C {
 				: rescue block
 			</para>
 
-			<programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis
-				role="strong">init</emphasis> 2
-<emphasis role="strong">var</emphasis> v2 : Integer <emphasis
-				role="strong">init</emphasis> 3
+			<programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 2
+<emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 3
 
 <emphasis role="strong">do</emphasis>
     var v3 : Integer
@@ -3558,9 +3753,11 @@ class C {
 				<para>
 					do not hesitate to create "do .. end" block into another block
 					if you
-					want to check for an exception only in a part of the code.
+					want to check for an
+					exception only in a part of the code.
 					This
-					also works if you want to rescue code from within a rescue
+					also works if you want to rescue code from within a
+					rescue
 					code.
 				</para>
 			</tip>
@@ -3577,7 +3774,8 @@ class C {
 				<para></para>
 			</warning>
 			<para>This section explains how to load and save (deserialize and
-				serialize) an EMF model in Kermeta. For this purpose, we will use
+				serialize) an EMF model in
+				Kermeta. For this purpose, we will use
 				the
 				following small example :
 			</para>
@@ -3595,7 +3793,8 @@ class C {
 			<note>
 				<para>
 					Loading and saving model has it own tutorial. It provides more
-					information in a step by step approach. See the EMF tutorial at
+					information in a step by step
+					approach. See the EMF tutorial at
 					<ulink type="" url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/
 					</ulink>
 				</para>
@@ -3606,14 +3805,17 @@ class C {
 
 				<para>The user will refer to Eclipse documentation for the creation
 					of
-					an EMF model from its ECore meta-model. We suggest to use the
+					an EMF model from its ECore
+					meta-model. We suggest to use the
 					Wizard
-					samples to create, at the first hand, an Ecore meta-model,
+					samples to create, at the first hand, an Ecore
+					meta-model,
 					and
 					then,
 					at the second hand, instances of this Ecore meta-model,
 					using the
-					generated EMF reflexive editors.
+					generated
+					EMF reflexive editors.
 				</para>
 
 				<para>
@@ -3623,9 +3825,11 @@ class C {
 					of the root
 					package of the Ecore meta-model, otherwise the resource
 					load will
-					fail. This NsURI must equal the real path of your
+					fail. This NsURI
+					must equal the real path of your
 					metamodel. (You can
-					modify this property through the Properties View
+					modify this property through the Properties
+					View
 					of your
 					meta-model)
 				</para>
@@ -3635,7 +3839,8 @@ class C {
 				<title>Load a model from an EMF Resource</title>
 
 				<para>In the current version of the EMF resource loader, you have to
-					prepare your EMF Resource following these rules :
+					prepare your EMF Resource
+					following these rules :
 				</para>
 
 				<itemizedlist>
@@ -3662,7 +3867,8 @@ class C {
 
 						<para role="lineBreak">In this case, be careful that your kmt
 							required
-							metamodel is strictly equivalent to the ecore version of
+							metamodel is strictly equivalent
+							to the ecore version of
 							your
 							metamodel that is used in createResource method.
 						</para>
@@ -3672,7 +3878,8 @@ class C {
 						<para>
 							Then, create a repository and the resource that will contain
 							the
-							model instance that you want to load. In the following code
+							model instance that you want
+							to load. In the following code
 							example,
 							<literal>uri</literal>
 							stands for the uri (as relative or
@@ -3721,14 +3928,16 @@ class TestCSLoading
 							<literal>instances</literal>
 							, that contains all the objects that
 							you created through your EMF
-							generated reflexive editor. Now you
+							generated reflexive editor.
+							Now you
 							can "visit" your instances,
 							provided you "visit" them according to
 							their types. In the
 							simplest way, you can make very basic tests
 							to
 							display your
-							instances content, as in the following example, which
+							instances content, as in the
+							following example, which
 							visit the
 							objects of resource instances which types are
 							<literal>cs::Template</literal>
@@ -3766,9 +3975,11 @@ operation main() is do
 }</programlisting>
 
 				<para>If your resource is dependent of other resources and that EMF
-					succed to load it, the Repository that was used to load your
+					succed to load it, the
+					Repository that was used to load your
 					resource
-					will automatically load all these dependent resources.
+					will automatically load all these dependent
+					resources.
 				</para>
 			</section>
 
@@ -3777,17 +3988,20 @@ operation main() is do
 
 				<para>To save a model, simply add the model elements in a Resource
 					then
-					call the save operation. All model elements contained by these
+					call the save operation.
+					All model elements contained by these
 					added
 					elements
 					will also be saved in the Resource.
 				</para>
 				<para>You can split your model in several files by using several
 					resources,
-					but you need to make sure that they all belong to the
+					but you need to make
+					sure that they all belong to the
 					same Repository.
 					Otherwise,
-					you'll get at best a Dangling exception,
+					you'll get at best a Dangling
+					exception,
 					or worse create inconsistent
 					files.
 				</para>
@@ -3806,11 +4020,14 @@ operation main() is do
 
 			<para>
 				Kermeta provides package to structure models. So you can define
-				packages and sub-package as deep as you want. There are two main
+				packages and sub-package as deep
+				as you want. There are two main
 				ways
-				to do this, as shown in examples 2 and 3 (below). If you want to
+				to do this, as shown in examples 2 and 3 (below). If you want
+				to
 				define some classes in a package you may define them in a specific
-				file and start this file with a package naming directive (followed
+				file and start this file
+				with a package naming directive (followed
 				by
 				a semi-colon) like in the following example
 				<footnote id="ftn1">
@@ -3840,7 +4057,8 @@ class B {
 }</programlisting>
 
 			<para>Here, classes A and B are defined in a package called
-				"MyNewPackage". All classes defined in this file are under the scope
+				"MyNewPackage". All classes defined in
+				this file are under the scope
 				of this package.
 			</para>
 
@@ -3874,15 +4092,19 @@ package subPackage2
 }</programlisting>
 
 			<para>In this example, we define a main package called "MyPackage"
-				which contains 2 sub-packages "subPackage1" and "subPackage2". The
-				first one contains the A class and the second one the B class.
+				which contains 2 sub-packages
+				"subPackage1" and "subPackage2". The
+				first one contains the A class and the second one the B
+				class.
 			</para>
 
 			<para>If you want, you can declare the same package in several files.
-				You can also directly define subpackages in the package naming
+				You can also directly define
+				subpackages in the package naming
 				directive of your file (see example 1 above). In the following
 				example, we define a new sub-package of "MyPackage" called
-				"subPackage3" directly in the file. All features defined in this
+				"subPackage3" directly in the file.
+				All features defined in this
 				file
 				will belong to this sub-package.
 			</para>
@@ -3925,12 +4147,14 @@ class C
 			</note>
 			<para>While coding in Kermeta you regularly need to refer to class
 				definitions.
-				For example to indicate the type of a paramzeter or a
+				For example to
+				indicate the type of a paramzeter or a
 				variable or to
 				initialize an instance of it (ie. call new).
 			</para>
 			<para>If the definition you want to use isn't defined in the package
-				where you need to use it, the normal way to acces it is to use the
+				where you need to use it, the
+				normal way to acces it is to use the
 				full qualified name.
 			</para>
 			<example>
@@ -3944,9 +4168,11 @@ var e : kermeta::exceptions::NotImplementedException init kermeta::exceptions::N
 				Like the
 				<literal>import</literal>
 				statement in Java, Kermeta allows to defines shorcuts which allow
-				you to specify classes from other packages that can be referenced
+				you to specify classes from
+				other packages that can be referenced
 				without qualifying them with their full qualified name.
-				The keyword
+				The
+				keyword
 				used for that is
 				<literal>using</literal>
 				. It supports various syntax option in order to haheve either a fine
@@ -3967,8 +4193,10 @@ var e : NotImplementedException init NotImplementedException.new
 			</example>
 			<note>
 				<para>For support of retro compatibilty with kermeta 1, the 2
-					following syntaxes have the same effect. However the second one
-					raises a deprecation warning inviting you to use the first syntax.
+					following syntaxes have the same
+					effect. However the second one
+					raises a deprecation warning inviting you to use the first
+					syntax.
 				</para>
 				<programlisting language="kermeta">using kermeta::standard::*	// direct access to all definition of Package
 using kermeta::standard		// retro compatibility supported, exactly the same as above   
@@ -4020,7 +4248,8 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 					The
 					<literal>using</literal>
 					statement is just a syntactic sugar used by the type resolver when
-					building the Kermeta model of the program.
+					building the Kermeta model of
+					the program.
 					This is different from
 					the definition of a local datatype with an
 					<literal>alias</literal>
@@ -4034,7 +4263,8 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 				<literal>using</literal>
 				statements if there is a risk of conflicting names. In such
 				situation,
-				the type resolver will first look into the current
+				the type resolver will
+				first look into the current
 				package, then try
 				each
 				<literal>using</literal>
@@ -4054,7 +4284,8 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 			</warning>
 			<para>
 				Collections are widely used in Kermeta not only because of their
-				usual usage for collecting data in variables but also because they
+				usual usage for collecting data
+				in variables but also because they
 				are
 				used to represent
 				<link linkend="section_properties.link">class
@@ -4065,7 +4296,8 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 
 			<para>Collections is one of the concept where the genericity is the
 				most
-				visible since it greatly helps to write more robust code.
+				visible since it greatly
+				helps to write more robust code.
 			</para>
 
 			<section>
@@ -4074,7 +4306,8 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 				<para>
 					Kermeta defines some collection data types handling sets of
 					values.
-					The different available collection types are the result of a
+					The different available
+					collection types are the result of a
 					combination of the constraints
 					<emphasis role="strong">unique</emphasis>
 					and
@@ -4091,7 +4324,8 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 
 					<listitem>
 						<para>Ordered specifies a collection type where the position of an
-							object inside the collection can be modified.
+							object inside the collection
+							can be modified.
 						</para>
 					</listitem>
 				</itemizedlist>
@@ -4231,12 +4465,16 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 				<para></para>
 
 				<para>Another way to define set of objects would have been to use
-					arrays. In fact, Kermeta does not define explicitly the concept of
-					array, but it provides a multiplicity concept which can be used
+					arrays. In fact, Kermeta does
+					not define explicitly the concept of
+					array, but it provides a multiplicity concept which can be
+					used
 					instead. Multiplicities are a way to define a lower and upper bound
 					on
-					a collection. Syntactically, lower and upper bounds are defined
-					between brackets and are separated by two dots. Bounds can be an
+					a collection.
+					Syntactically, lower and upper bounds are defined
+					between brackets and are separated by two
+					dots. Bounds can be an
 					integer literal value or a star to specify there's no upper
 					bound.
 				</para>
@@ -4265,7 +4503,8 @@ using kermeta::standard		// don't need to specify it all the time
 				<para>
 					There is currently no way to define a collection by extension
 					like
-					you can do in C or Java. You must initialize your collection
+					you can do in C or Java. You
+					must initialize your collection
 					either
 					by calling
 					<literal>new</literal>
@@ -4304,13 +4543,15 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 					<para>
 						Conclusion : in most cases, you don't need to use this
 						special syntax, you
-						can simply use the generic collection names
+						can simply use
+						the generic collection names
 						(Set&lt;Something&gt;,
 						OrderedSet&lt;Something&gt;, etc.) available
 						in Kermeta framework.
 						Moreover, lower and upper bounds aren’t
 						checked yet by Kermeta
-						type checker and interpreter.
+						type checker
+						and interpreter.
 					</para>
 				</note>
 			</section>
@@ -4353,8 +4594,7 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 						<emphasis>select</emphasis>
 					</title>
 					<para>TODO</para>
-					<programlisting language="kermeta">aCollection2 := aCollection.<emphasis
-						role="strong">select</emphasis> { e | 
+					<programlisting language="kermeta">aCollection2 := aCollection.<emphasis role="strong">select</emphasis> { e | 
 	     /* put here a condition that returns true for elements that must be included in the resulting Collection */
 	}</programlisting>
 				</section>
@@ -4365,8 +4605,7 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 						<emphasis>reject</emphasis>
 					</title>
 					<para>TODO</para>
-					<programlisting language="kermeta">aCollection2 := aCollection.<emphasis
-						role="strong">reject</emphasis> { e | 
+					<programlisting language="kermeta">aCollection2 := aCollection.<emphasis role="strong">reject</emphasis> { e | 
 	     /* put here a condition that returns true for elements that must be exclude in the resulting Collection */
 	}</programlisting>
 				</section>
@@ -4390,8 +4629,7 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 						<emphasis>detect</emphasis>
 					</title>
 					<para>TODO</para>
-					<programlisting language="kermeta">anObject := aCollection.<emphasis
-						role="strong">detect</emphasis> { e | /* a condition */} // returns an element (usually the first) that fulfills the condition.</programlisting>
+					<programlisting language="kermeta">anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | /* a condition */} // returns an element (usually the first) that fulfills the condition.</programlisting>
 				</section>
 
 				<section>
@@ -4406,29 +4644,28 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 						<emphasis>true</emphasis>
 						if at least one element fulfills the last boolean
 						expression
-						defined into the block. For instance:
+						defined into the block. For
+						instance:
 					</para>
-					<programlisting language="kermeta">aBoolean := aCollection.<emphasis
-						role="strong">exists</emphasis> { e | /* a condition */} // returns true if at least one element fulfills the condition.</programlisting>
+					<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | /* a condition */} // returns true if at least one element fulfills the condition.</programlisting>
 					<para>
 						If several boolean condition are defined into the block of
 						function
 						<emphasis>exists</emphasis>
 						, the last condition is used for the test.
 						For instance, the
-						following function exists returns true at the first
+						following function exists returns
+						true at the first
 						iteration:
 					</para>
-					<programlisting language="kermeta">aBoolean := aCollection.<emphasis
-						role="strong">exists</emphasis> { e | false true }</programlisting>
+					<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | false true }</programlisting>
 					<para>
 						Instructions can be defined into the block of function
 						<emphasis>exists</emphasis>
 						. For instance, the following code displays the current object at
 						each iteration:
 					</para>
-					<programlisting language="kermeta">aBoolean := aCollection.<emphasis
-						role="strong">exists</emphasis> { e |
+					<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e |
 				stdio.writeln(e.toString)
 				/* a condition */
 			}
@@ -4444,8 +4681,7 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 						<emphasis>each</emphasis>
 						.
 					</para>
-					<programlisting language="kermeta">aBoolean := aCollection.<emphasis
-						role="strong">exists</emphasis> { e | stdio.writeln(e.toString) }/* The value of aBoolean is Void */</programlisting>
+					<programlisting language="kermeta">aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | stdio.writeln(e.toString) }/* The value of aBoolean is Void */</programlisting>
 				</section>
 			</section>
 		</section>
@@ -4461,9 +4697,11 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 			</warning>
 			<para>
 				A property of a (meta)class can be expressed in three ways : as a
-				reference, an attribute, or a derived property. In Kermeta, each
+				reference, an attribute, or a
+				derived property. In Kermeta, each
 				kind of
-				these properties has a specific behavior and a dedicated
+				these properties has a specific behavior and a
+				dedicated
 				syntax, which
 				is
 				<emphasis role="strong">attribute </emphasis>
@@ -4513,21 +4751,24 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 					</listitem>
 				</itemizedlist>
 
-				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis
-					role="strong">attribute</emphasis> x : <emphasis role="strong">set</emphasis> X[0..*] } 
+				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis role="strong">attribute</emphasis> x : <emphasis
+					role="strong">set</emphasis> X[0..*] } 
 <emphasis role="strong">class</emphasis> X {}</programlisting>
 
 				<note>
 					<para>
 						Composition notion also relates to containment notion. So,
 						there are some
-						restriction about valid model. For example, in an
+						restriction about
+						valid model. For example, in an
 						association,
-						only one end can be an attribute, otherwise this means
+						only one end can be an attribute, otherwise this
+						means
 						that we
 						have an association with a diamond on both end and we
 						cannot say
-						who is the container of the other.
+						who is the
+						container of the other.
 					</para>
 				</note>
 
@@ -4541,8 +4782,7 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 					</listitem>
 				</itemizedlist>
 
-				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis
-					role="strong">reference</emphasis> x : set X[0..*] } 
+				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis role="strong">reference</emphasis> x : set X[0..*] } 
 <emphasis role="strong">class</emphasis> X {}</programlisting>
 			</section>
 
@@ -4551,11 +4791,14 @@ var myCol3a : kermeta::standard::Sequence&lt;Integer&gt; init myCol4</programlis
 
 				<para>
 					Attributes, references and properties underlying collections may
-					eventually be specialized. By default, they are represented by an
-					OrderedSet. If you wish to be more precise and for exemple allow to
+					eventually be specialized. By
+					default, they are represented by an
+					OrderedSet. If you wish to be more precise and for exemple
+					allow to
 					have several items with the same value in your collection, you can
 					use
-					the collection modifiers as defined in
+					the collection
+					modifiers as defined in
 					<xref linkend="section_collections.link" />
 				</para>
 
@@ -4575,7 +4818,8 @@ class A {
 
 				<para>
 					The opposite [property] of a property defines an association
-					(bidirectional link) between two entities. An opposite is expressed
+					(bidirectional link) between two
+					entities. An opposite is expressed
 					by
 					a sharp #. In the following example,
 					<literal>a</literal>
@@ -4601,9 +4845,11 @@ class A {
 				</para>
 
 				<para>This means that a can be accessed from b. Subsequently, if you
-					modify the property b of an instance of A, it will mutually update
+					modify the property b of an
+					instance of A, it will mutually update
 					its
-					opposite property, i.e the property a of the instance of B
+					opposite property, i.e the property a of the instance
+					of B
 					contained
 					in property b. You can make a test with the following
 					example of
@@ -4616,8 +4862,7 @@ class A {
 					opposite properties
 				</para>
 
-				<programlisting><emphasis role="strong">var</emphasis> a1 : A <emphasis
-					role="strong">init</emphasis> A.new
+				<programlisting><emphasis role="strong">var</emphasis> a1 : A <emphasis role="strong">init</emphasis> A.new
 a1.name := "a1"
 <emphasis role="strong">var</emphasis> b1 : B <emphasis role="strong">init</emphasis> C.new
 a1.b := b1
@@ -4737,15 +4982,19 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 
 				<para>In a class definition, a derived property is a property that
 					is
-					derived or calculated, i.e it contains a body, like operations.
-					Usually, such properties are calculated from other properties
+					derived or calculated, i.e
+					it contains a body, like operations.
+					Usually, such properties are calculated from other
+					properties
 					available from its owning class definition. In practice, you can
-					define the code that you want inside a derived property.
+					define the code that
+					you want inside a derived property.
 				</para>
 
 				<para>In other words it does not reference to a concrete entity: it
 					is
-					calculated, through the accessor operations getter and setter.
+					calculated, through the
+					accessor operations getter and setter.
 				</para>
 
 				<para>
@@ -4761,10 +5010,8 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 <emphasis role="strong">class</emphasis> A 
 {
     <emphasis role="strong">attribute</emphasis> period : Real
-    <emphasis role="strong">property</emphasis> <emphasis
-					role="strong">readonly</emphasis> frequency : Real <emphasis>// property : keyword for derived property</emphasis>
-        <emphasis role="strong">getter</emphasis> <emphasis
-					role="strong">is</emphasis> do
+    <emphasis role="strong">property</emphasis> <emphasis role="strong">readonly</emphasis> frequency : Real <emphasis>// property : keyword for derived property</emphasis>
+        <emphasis role="strong">getter</emphasis> <emphasis role="strong">is</emphasis> do
             <emphasis role="strong">result</emphasis> := 1/period
         <emphasis role="strong">end</emphasis>
 }
@@ -4773,12 +5020,12 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 {
     <emphasis role="strong">attribute</emphasis> period : Real
     <emphasis role="strong">property</emphasis> frequency : Real
-        <emphasis role="strong">getter</emphasis> <emphasis
-					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+        <emphasis role="strong">getter</emphasis> <emphasis role="strong">is</emphasis> <emphasis
+					role="strong">do</emphasis>
             <emphasis role="strong">result</emphasis> result := 1/period
         <emphasis role="strong">end</emphasis>
-        <emphasis role="strong">setter</emphasis> <emphasis
-					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+        <emphasis role="strong">setter</emphasis> <emphasis role="strong">is</emphasis> <emphasis
+					role="strong">do</emphasis>
             period := 1/<emphasis role="strong">value</emphasis>
         <emphasis role="strong">end</emphasis>
 }
@@ -4807,7 +5054,8 @@ aB.frequency := freq + 1 // to use the setter, the period is also updated in the
 					<para>
 						Since derived properties aims to behave like attributes or
 						references,
-						if the multiplicity is greater than 1,
+						if the multiplicity
+						is greater than 1,
 						it doesn't make
 						sense to define a setter. This is because it means
 						reassigning the
@@ -4816,7 +5064,8 @@ aB.frequency := freq + 1 // to use the setter, the period is also updated in the
 				</warning>
 				<para>Properties are accessed or modified as classical properties.
 					See
-					next subsection for examples.
+					next subsection for
+					examples.
 				</para>
 			</section>
 
@@ -4862,8 +5111,7 @@ aB.frequency := freq + 1 // to use the setter, the period is also updated in the
 								</entry>
 
 								<entry>
-									<programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis
-										role="strong">init</emphasis> A6.new
+									<programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : OrderedSet&lt;B6&gt;
 <emphasis>// get the b attribute</emphasis>
 <emphasis>// Note that as the attribute as a multiplicity &gt;1 it is an OrderedSet </emphasis>
@@ -4921,13 +5169,11 @@ assert(b6.a == a6)</programlisting>
 								</entry>
 
 								<entry>
-									<programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis
-										role="strong">init</emphasis> A6.new
+									<programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 <emphasis role="strong">init</emphasis> B6.new
 <emphasis>// add ab6 to the attribute "b"</emphasis>
 a6.b.add(b6)</programlisting>
-									<programlisting><emphasis role="strong">var</emphasis> a6c : A6 <emphasis
-										role="strong">init</emphasis> b6.container()
+									<programlisting><emphasis role="strong">var</emphasis> a6c : A6 <emphasis role="strong">init</emphasis> b6.container()
 <emphasis>// this assertion is true</emphasis>
 assert(a6c.equals(a6))</programlisting>
 								</entry>
@@ -4980,8 +5226,7 @@ assert(a6c.equals(a6))</programlisting>
 								</entry>
 
 								<entry>
-									<programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis
-										role="strong">init</emphasis> A5.new
+									<programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis role="strong">init</emphasis> A5.new
 <emphasis role="strong">var</emphasis> b5 : B5
 <emphasis>// get the b attribute</emphasis>
 b5 := a5.b</programlisting>
@@ -5033,13 +5278,11 @@ assert(b5.a == a5)</programlisting>
 								</entry>
 
 								<entry>
-									<programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis
-										role="strong">init</emphasis> A5.new
+									<programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis role="strong">init</emphasis> A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 <emphasis role="strong">init</emphasis> B5.new
 <emphasis>// add b5 to the attribute "b"</emphasis>
 a5.b := b5</programlisting>
-									<programlisting><emphasis role="strong">var</emphasis> a5c : A5 <emphasis
-										role="strong">init</emphasis> b5.container()
+									<programlisting><emphasis role="strong">var</emphasis> a5c : A5 <emphasis role="strong">init</emphasis> b5.container()
 <emphasis>// this assertion is true</emphasis>
 assert(a5c.equals(a5))</programlisting>
 								</entry>
@@ -5051,10 +5294,12 @@ assert(a5c.equals(a5))</programlisting>
 				<note>
 					<para>
 						Be careful with attributes or references ref with multiplicity
-						greater than 1, they are automatically initialized with a
+						greater than 1, they are
+						automatically initialized with a
 						reflective collection (ie. a collection that is aware of an
 						eventual opposite). So, you cannot assign them using := If you
-						wish to change completely its content with the one of another
+						wish to change completely its
+						content with the one of another
 						collection, you must use the
 
 						<literal>clear</literal>
@@ -5074,7 +5319,8 @@ assert(a5c.equals(a5))</programlisting>
 						<literal>reference refB : String[0..*]</literal>
 						.
 						If both can be navigated the same way (using add, each or any
-						operation available on Collection),
+						operation available on
+						Collection),
 						<literal>refA</literal>
 						needs to be created before use with
 						<literal>refA := OrderedSet&lt;String&gt;.new</literal>
@@ -5085,7 +5331,8 @@ assert(a5c.equals(a5))</programlisting>
 						is a reference to
 						String with a multiplicity greater than 1 (which
 						is internally
-						represented as a ReflectiveCollection&lt;String&gt;)
+						represented as a
+						ReflectiveCollection&lt;String&gt;)
 					</para>
 				</note>
 			</section>
@@ -5102,20 +5349,23 @@ assert(a5c.equals(a5))</programlisting>
 				</para>
 
 				<para>This has some implication on the behavior of the assignment
-					because an attribute cannot be owned by more than one object at a
+					because an attribute cannot be
+					owned by more than one object at a
 					time.
 				</para>
 
 				<para>
 					There is an exception for attributes which type is a primitive
 					type
-					(String, Integer, Boolean, Real, Char) : since those types inherit
+					(String, Integer, Boolean,
+					Real, Char) : since those types inherit
 					from
 					<literal>ValueType</literal>
 					,
 					they are not concerned by the composition, opposite concepts.
 					In
-					this case, the assignment doesn't impact any value but the
+					this case, the assignment
+					doesn't impact any value but the
 					assigned
 					one.
 				</para>
@@ -5126,8 +5376,7 @@ assert(a5c.equals(a5))</programlisting>
 					behavior for attribute
 				</para>
 
-				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis
-					role="strong">attribute</emphasis> c1 : C }
+				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis role="strong">attribute</emphasis> c1 : C }
 <emphasis role="strong">class</emphasis> B { <emphasis role="strong">attribute</emphasis> c2 : C }
 <emphasis role="strong">class</emphasis> C { }
 aA.c1 := C.new
@@ -5139,8 +5388,7 @@ aB.c2 := aA.c1     <emphasis>// now aA.c1 == void !!!</emphasis></programlis
 					behavior for reference
 				</para>
 
-				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis
-					role="strong">reference</emphasis> c1 : C }
+				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis role="strong">reference</emphasis> c1 : C }
 <emphasis role="strong">class</emphasis> B {<emphasis role="strong"> reference</emphasis> c2 : C }
 <emphasis role="strong">class</emphasis> C { }
 
@@ -5153,9 +5401,8 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
 					behavior for attribute which type is String
 				</para>
 
-				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis
-					role="strong">reference</emphasis> c1 : String }<emphasis role="strong">class</emphasis> B {<emphasis
-					role="strong"> reference</emphasis> c2 : String }aA.c1 := "Robert"aB.c2 := aA.c1 // aB.c2 == aA.c1 == "Robert"</programlisting>
+				<programlisting><emphasis role="strong">class</emphasis> A { <emphasis role="strong">reference</emphasis> c1 : String }<emphasis
+					role="strong">class</emphasis> B {<emphasis role="strong"> reference</emphasis> c2 : String }aA.c1 := "Robert"aB.c2 := aA.c1 // aB.c2 == aA.c1 == "Robert"</programlisting>
 
 				<note>
 					<para>
@@ -5195,7 +5442,8 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
 				<literal>companion object</literal>
 				in scala or is similar to a static class in java.
 				Which means that
-				only a single instance of the class exists in memory.
+				only a single instance of the
+				class exists in memory.
 			</para>
 			<para>Access to this instance is done directly via the class name.
 			</para>
@@ -5221,10 +5469,12 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
 			</example>
 			<caution>
 				<para>Be careful when deploying a code that use singleton in
-					environment that uses multiple classpath.
+					environment that uses multiple
+					classpath.
 					For example in OSGI and
 					eclipse, you can (on purpose or not) create
-					several classpathes that
+					several classpathes
+					that
 					aren't shared and created several
 					instances of the same singleton.
 				</para>
@@ -5247,13 +5497,15 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
 				<literal>equals</literal>
 				method. Unlike, Java they do the
 				same and redefining the equals to
-				compare the content also affects the
+				compare the content also
+				affects the
 				<literal>==</literal>
 				.
 			</para>
 
 			<para>To compare the identity of two objects you must compare the
-				identifier of each object : using their oid
+				identifier of each object :
+				using their oid
 			</para>
 
 			<section>
@@ -5264,7 +5516,8 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
 					<emphasis>equals</emphasis>
 					method behaves the same way as
 					in java. This means that you can
-					overwrite it, if you want to compare
+					overwrite it, if you want to
+					compare
 					the contents of two objects of
 					the same class.
 				</para>
@@ -5319,7 +5572,8 @@ class Main inherits kermeta::kunit::TestCase{
 				<title>Comparison for Primitive Types</title>
 
 				<para>In Kermeta language, there is a notion of primitive type. Here
-					is the list of primitive types :
+					is the list of primitive
+					types :
 				</para>
 
 				<itemizedlist>
@@ -5350,7 +5604,8 @@ class Main inherits kermeta::kunit::TestCase{
 					operator to
 					compare values of primitive types. These classes simply
 					redefine the
-					equals. Then we can write this code :
+					equals. Then we
+					can write this code :
 				</para>
 
 				<programlisting language="kermeta">var i1 : Integer init 10
@@ -5371,13 +5626,16 @@ assert (i3 == i4)
 					<literal>equals</literal>
 					exists for the collections. The generic behavior
 					is the following :
-					for two collections a and b, if all elements of a
+					for two collections a and b,
+					if all elements of a
 					are contained in b
 					and vice-versa, then it returns true, false
-					otherwise. This behavior
+					otherwise.
+					This behavior
 					is little bit different for ordered
 					collection which takes into
-					account the order of elements. Have a
+					account the order of
+					elements. Have a
 					look
 					to the following pieces of
 					code :
@@ -5473,7 +5731,8 @@ end
 					</listitem>
 					<listitem>
 						<para>When an operation has only one parameter of type "function",
-							then a special shortcut syntax allows to ommit the perenthesis
+							then a special shortcut
+							syntax allows to ommit the perenthesis
 							when calling this operation.
 						</para>
 						<para>Examples of definition and call of operations that use only
@@ -5522,7 +5781,8 @@ end
 							</title>
 							<para>
 								It is now possible to ommit the variable when calling an
-								operation that uses a single lambda parameter with
+								operation that uses a single lambda
+								parameter with
 								<literal>Void</literal>
 								input type.
 							</para>
@@ -5556,7 +5816,8 @@ end
 							section bellow).
 						</para>
 						<para>Using the full syntax you can create operations that use
-							parameters of mixed type including function type:
+							parameters of mixed type
+							including function type:
 						</para>
 						<programlisting language="kermeta">operation operationWithMixedParameters ( f : &lt;INPUT_TYPE-&gt;RETURN_TYPE&gt;, otherParam : String ) : Void is do
 	var foo : INPUT_TYPE init INPUT_TYPE.new
@@ -5582,8 +5843,10 @@ var f2 : &lt;[ TYPE_1, TYPE_2, TYPE_3 ] -&gt; RETURN_TYPE&gt;
 f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME_CODE_WITH_RETURN_TYPE_RESULT */ }</programlisting>
 						<tip>
 							<para>You can also use function type in reference or attribute to
-								store them. However, since ecore doesn't know about them, you'll
-								have to define them on the kermeta side and thus cannot be
+								store them. However, since
+								ecore doesn't know about them, you'll
+								have to define them on the kermeta side and thus cannot
+								be
 								serialized in a model.
 							</para>
 						</tip>
@@ -5591,7 +5854,8 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 				</itemizedlist>
 
 				<para>In the following sections, you will find many examples of
-					declarations, definitions, and uses of functions.
+					declarations, definitions, and
+					uses of functions.
 				</para>
 			</section>
 
@@ -5600,7 +5864,8 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 
 				<para>The collections in Kermeta implement several functions based
 					on
-					lambda expression. These ones are very useful for model
+					lambda expression. These
+					ones are very useful for model
 					navigation.
 				</para>
 
@@ -5632,7 +5897,8 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 				<programlisting>10.<emphasis role="strong">times</emphasis> { i | stdio.writeln(i.toString) } <emphasis>// prints 0 to 9</emphasis> </programlisting>
 
 				<para>Notice that you can also write some complex code in the
-					function, using internal variables, etc. In such a case, the last
+					function, using internal variables,
+					etc. In such a case, the last
 					statement evaluation will be the returned result of the lambda
 					expression (provided it is declared to return something)
 				</para>
@@ -5655,10 +5921,12 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 					: postponing parameter evaluation in the andThen operation
 				</para>
 				<para>The operation andThen and orElse of Boolean use the ability of
-					functions to postpone the parameter evaluation.
+					functions to postpone the
+					parameter evaluation.
 					This allows to
 					implement the expected behavior without adding new
-					construct to the
+					construct
+					to the
 					language.
 				</para>
 				<programlisting language="kermeta">
@@ -5684,7 +5952,8 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 				<para>
 					You can also define your own functions, by declaring an
 					operation,
-					with a parameter as a function using the syntax described
+					with a parameter as a function
+					using the syntax described
 					in
 					<xref linkend="section_function-syntax.link" />
 					.
@@ -5696,14 +5965,13 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 					functions for collections
 				</para>
 
-				<programlisting><emphasis role="strong">abstract</emphasis> <emphasis
-					role="strong">class</emphasis> Collection&lt;G&gt;
+				<programlisting><emphasis role="strong">abstract</emphasis> <emphasis role="strong">class</emphasis> Collection&lt;G&gt;
 {     
      <emphasis>/** * runs func on each element of the collection */</emphasis>
      <emphasis role="strong">operation</emphasis> each(func : &lt;G -&gt; Object&gt;) : Void <emphasis
 					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-         <emphasis role="strong">from</emphasis> <emphasis
-					role="strong">var</emphasis> it : Iterator&lt;G&gt; <emphasis role="strong">init</emphasis> iterator
+         <emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> it : Iterator&lt;G&gt; <emphasis
+					role="strong">init</emphasis> iterator
          <emphasis role="strong">until</emphasis> it.isOff
          <emphasis role="strong">loop</emphasis>
              func(it.next)
@@ -5713,10 +5981,8 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 				<programlisting>     <emphasis>/** * checks that the condition is true on all the element of the collection * returns true if the collection is empty */</emphasis>
      <emphasis role="strong">operation</emphasis> forAll(func : &lt;G -&gt; Boolean&gt;) : Boolean <emphasis
 					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-         <emphasis role="strong">var</emphasis> test : Boolean <emphasis
-					role="strong">init</emphasis> true
-         <emphasis role="strong">from</emphasis> <emphasis
-					role="strong">var</emphasis> it : Iterator&lt;G&gt; init iterator
+         <emphasis role="strong">var</emphasis> test : Boolean <emphasis role="strong">init</emphasis> true
+         <emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> it : Iterator&lt;G&gt; init iterator
          <emphasis role="strong">until</emphasis> it.isOff
          <emphasis role="strong">loop</emphasis>
             test := test <emphasis role="strong">and</emphasis> func(it.next)
@@ -5730,7 +5996,8 @@ f2 :=  { var_name_1 : TYPE_1, var_name_2 : TYPE_2, var_name_3 : TYPE_3 | /* SOME
 				<title>Defining lambda expression variables</title>
 
 				<para>You can also define lambda expression as variable. This can be
-					useful if you don't want to ( or can't) modify the class.
+					useful if you don't want to
+					( or can't) modify the class.
 				</para>
 
 				<itemizedlist>
@@ -5798,10 +6065,12 @@ var sequence : Sequence&lt;Integer&gt; := init_set.collect { element | element*1
 				<title>Useful patterns that use lambda</title>
 				<para>
 					When starting to use the lambda expression you can define some
-					useful design patterns. One of them is the ability to propose an
+					useful design patterns. One of
+					them is the ability to propose an
 					<literal>each</literal>
 					that traverses all the owned element of a given metamodel. For some
-					usage, this can be an interresting alternative to the visitor
+					usage, this can be an
+					interresting alternative to the visitor
 					design pattern.
 				</para>
 				<para>Let's have the following metamodel:</para>
@@ -5819,7 +6088,8 @@ class C inherits A {
 	attribute ownedC : C
 }</programlisting>
 				<para>It would be nice to be able to call a simple lambda on all the
-					elements directly owned by an element. This can be done by adding
+					elements directly owned by
+					an element. This can be done by adding
 					an operation using the
 					following pattern:
 				</para>
@@ -5867,7 +6137,8 @@ var ownedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
 c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
 stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)</programlisting>
 				<para>It is then easy to extend this pattern to traverse the
-					directly and indirectly owned elements.
+					directly and indirectly owned
+					elements.
 				</para>
 				<programlisting language="kermeta">aspect class NamedElement {
 	operation eachAllOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do			
@@ -5886,7 +6157,8 @@ var allownedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
 c.eachAllOwnedElement{ aNamedElement | allownedElements.add(aNamedElement) }</programlisting>
 				<tip>
 					<para>Like any pattern, this task can be automated by using a model
-						transformation. The Ecore MDK offers such transformation that
+						transformation. The Ecore
+						MDK offers such transformation that
 						generates this pattern for a given Ecore model.
 					</para>
 				</tip>
@@ -5931,7 +6203,8 @@ de.execute(void, params)</programlisting>
 
 			<para>If you want to dynamically evaluate more than one statement,
 				you
-				will have to surround your set of statements with "do.. end"
+				will have to surround your
+				set of statements with "do.. end"
 				block:
 			</para>
 
@@ -5960,15 +6233,14 @@ de.parse(<emphasis>"do stdio.writeln(a) stdio.writeln("another stdio writeln ...
 <emphasis role="strong">class</emphasis> TestMain
 {
 
-    <emphasis role="strong">operation</emphasis> TestToto() <emphasis
-				role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">operation</emphasis> TestToto() <emphasis role="strong">is</emphasis> <emphasis
+				role="strong">do</emphasis>
         stdio.writeln("J'ai essayé de lancer testtoto!")
     <emphasis role="strong">end</emphasis>
 
-    <emphasis role="strong">operation</emphasis> testDynExp() <emphasis
-				role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis role="strong">var</emphasis> dynExpr : DynamicExpression <emphasis
-				role="strong">init</emphasis> DynamicExpression.new
+    <emphasis role="strong">operation</emphasis> testDynExp() <emphasis role="strong">is</emphasis> <emphasis
+				role="strong">do</emphasis>
+        <emphasis role="strong">var</emphasis> dynExpr : DynamicExpression <emphasis role="strong">init</emphasis> DynamicExpression.new
         dynExpr.initializeDefaults()
 
         <emphasis role="strong">self</emphasis>.getMetaClass.ownedOperation.select{op| <emphasis
@@ -6004,7 +6276,8 @@ and op.name.indexOf("All")==-1}
 			</warning>
 			<para>In Kermeta, a contract is specified by "pre" and "post"
 				conditions
-				and by the "invariant" constraint too.
+				and by the "invariant"
+				constraint too.
 			</para>
 
 			<section>
@@ -6014,8 +6287,10 @@ and op.name.indexOf("All")==-1}
 					<title>pre – post conditions syntax</title>
 
 					<para>A pre or a post condition is a boolean expression that may be
-						a simple equality checking or a lambda expression. The Kermeta
-						interpreter evaluates the body content like a boolean result
+						a simple equality checking
+						or a lambda expression. The Kermeta
+						interpreter evaluates the body content like a boolean
+						result
 					</para>
 
 					<para>The "pre condition" are declared just before the "is" of the
@@ -6025,16 +6300,15 @@ and op.name.indexOf("All")==-1}
 					<programlisting><emphasis role="strong">operation</emphasis> opName(c : String) : String
     
     <emphasis>// Declaration of the pre-condition</emphasis>
-    <emphasis role="strong">pre</emphasis> notVoidInput <emphasis
-						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+    <emphasis role="strong">pre</emphasis> notVoidInput <emphasis role="strong">is</emphasis> <emphasis
+						role="strong">do</emphasis>
         c != <emphasis role="strong">void</emphasis> and c != ""
     <emphasis role="strong">end</emphasis>
 
     <emphasis>// Declaration of the post-condition</emphasis>
-    <emphasis role="strong">post</emphasis> notVoidOutput <emphasis
-						role="strong">is</emphasis>
-        <emphasis role="strong">result</emphasis> != <emphasis
-						role="strong">void</emphasis> and <emphasis role="strong">result</emphasis> != ""
+    <emphasis role="strong">post</emphasis> notVoidOutput <emphasis role="strong">is</emphasis>
+        <emphasis role="strong">result</emphasis> != <emphasis role="strong">void</emphasis> and <emphasis
+						role="strong">result</emphasis> != ""
 
 <emphasis role="strong">is</emphasis>
     <emphasis role="strong">do</emphasis>
@@ -6045,7 +6319,8 @@ and op.name.indexOf("All")==-1}
 						<para>
 							If the body contains only one expression, the block
 							declaration "do
-							... end" is not mandatory. If your block contains
+							... end" is not
+							mandatory. If your block contains
 							several
 							instructions, the latest one will be evaluated as a
 							boolean
@@ -6063,7 +6338,8 @@ and op.name.indexOf("All")==-1}
 
 					<para>An invariant declaration is a boolean expression that may be
 						a
-						simple equality checking or a lambda expression. The Kermeta
+						simple equality checking or
+						a lambda expression. The Kermeta
 						interpreter evaluates the body content like a boolean result.
 					</para>
 
@@ -6074,8 +6350,7 @@ and op.name.indexOf("All")==-1}
     ...
 
     <emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
-    <emphasis role="strong">inv</emphasis> nameOfTheInvariant <emphasis
-						role="strong">is do</emphasis>
+    <emphasis role="strong">inv</emphasis> nameOfTheInvariant <emphasis role="strong">is do</emphasis>
         <emphasis role="strong">self</emphasis>.name != ""
     <emphasis role="strong">end</emphasis>
 
@@ -6084,12 +6359,12 @@ and op.name.indexOf("All")==-1}
 
 					<tip>
 						<para>If the body contains only one instruction, the block
-							declaration "do ... end" is not mandatory.
+							declaration "do ... end" is not
+							mandatory.
 						</para>
 
 						<programlisting><emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
-<emphasis role="strong">inv</emphasis> nameOfTheInvariant <emphasis
-							role="strong">is self</emphasis>.name != ""</programlisting>
+<emphasis role="strong">inv</emphasis> nameOfTheInvariant <emphasis role="strong">is self</emphasis>.name != ""</programlisting>
 					</tip>
 
 					<para>A lambda expression can be used into an invariant
@@ -6097,8 +6372,8 @@ and op.name.indexOf("All")==-1}
 					</para>
 
 					<programlisting><emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
-<emphasis role="strong">inv</emphasis> deterministicTransition <emphasis
-						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+<emphasis role="strong">inv</emphasis> deterministicTransition <emphasis role="strong">is</emphasis> <emphasis
+						role="strong">do</emphasis>
     <emphasis role="strong">self</emphasis>.outgoingTransition.forAll{tr1 |
         <emphasis role="strong">self</emphasis>.outgoingTransition.forAll{ tr2 |
             ( tr2.input==tr1.input ) == (tr1==tr2)
@@ -6115,7 +6390,8 @@ and op.name.indexOf("All")==-1}
 					<title>Checking pre – post condition</title>
 
 					<para>The activation of the checking of the pre - post conditions
-						depends of the run configuration, see the Kermeta UI user guide
+						depends of the run
+						configuration, see the Kermeta UI user guide
 						for
 						more information.
 					</para>
@@ -6123,7 +6399,8 @@ and op.name.indexOf("All")==-1}
 					<para>
 						If the boolean statement is evaluated to "false" then the pre
 						or
-						post condition is violated and an exception
+						post condition is violated and
+						an exception
 						<literal>ConstraintViolatedPre</literal>
 						or
 						<literal>ConstraintViolatedPost</literal>
@@ -6137,7 +6414,8 @@ and op.name.indexOf("All")==-1}
 					<para>
 						In order to check the well-formedness rules of a model
 						element,
-						there are two methods in Kermeta. The first-one :
+						there are two methods in
+						Kermeta. The first-one :
 						<literal>checkInvariants</literal>
 						, consists to check only the
 						current model element and the
@@ -6152,13 +6430,15 @@ and op.name.indexOf("All")==-1}
 </programlisting>
 
 					<para>The checkAllInvariants operation is a recursive method which
-						checks all the elements having a containment relation by
+						checks all the elements
+						having a containment relation by
 						transitivity with the checked element.
 					</para>
 
 					<para>checkAllInvariants is used especially to check the validity
 						of
-						a model fragment or a complete model.
+						a model fragment or a
+						complete model.
 					</para>
 
 					<programlisting>theModelElement.checkAllInvariants</programlisting>
@@ -6197,43 +6477,52 @@ and op.name.indexOf("All")==-1}
 				<para></para>
 			</warning>
 			<para>Since version 0.4.1, it is possible to write Kermeta code using
-				a simplified Aspect Oriented approach.
+				a simplified Aspect Oriented
+				approach.
 			</para>
 
 			<para>Technically, you can declare classes as "aspects" that will
-				contribute features (attributes, references, properties, operations,
+				contribute features (attributes,
+				references, properties, operations,
 				constraints) to an existing classes. In such situation, the
 				definition
 				of two classes that have the same qualified name will be
 				merged into a
-				single class at run time.
+				single class at
+				run time.
 			</para>
 
 			<para>This is a great help when you want to separate the concerns
 				into
-				several files. For example, you may have one file containing
+				several files. For example,
+				you may have one file containing
 				the
 				structural part of your metamodel, one file
 				containing the
 				constraints for a given purpose and another file
 				containing the
-				operation and special extension to the metamodel for
+				operation and special extension to
+				the metamodel for
 				an
 				interpreter.
 			</para>
 			<para>As a general guideline, this allow to reopen existing structure
-				in order to add new element. It is not possible to remove or change
-				an existing information. For example, you cannot trnasform an
+				in order to add new element.
+				It is not possible to remove or change
+				an existing information. For example, you cannot trnasform
+				an
 				abstract class into a concrete class.
 			</para>
 			<para>Obviously, the merge will be successful only if there is no
-				conflict between all the declared features.
+				conflict between all the
+				declared features.
 			</para>
 
 			<section>
 				<title>Textual syntax for merging</title>
 				<para>The merge is driven by the qualified name of the element to
-					merge. Two classes will be merged if they have exactly the same
+					merge. Two classes will be
+					merged if they have exactly the same
 					qualified name (packages names + class name)
 				</para>
 
@@ -6247,7 +6536,8 @@ and op.name.indexOf("All")==-1}
 						<listitem>
 							<para>This keyword is placed on a class, it indicates that this
 								class is an
-								aspect of another one. This allows to complement a
+								aspect of another
+								one. This allows to complement a
 								class with
 								the features of the aspect class.
 							</para>
@@ -6329,16 +6619,20 @@ aspect class A {
 						New in Kermeta 2
 					</title>
 					<para>In kermeta 1, the require statements were at the file level,
-						now they apply at the project level. This means that the
+						now they apply at the project
+						level. This means that the
 						contibution of an aspect will be visible in all the project. It is
 						still possible to manage the visibility of aspects using project
-						dependencies. It is often useful to separate some set of files
-						into projects.</para>
+						dependencies. It is often
+						useful to separate some set of files
+						into projects.
+					</para>
 				</note>
 
 				<tip>
 					<para>In the previous example we aspectize a *.kmt, we could choose
-						to aspectize the corresponding *.ecore file.
+						to aspectize the
+						corresponding *.ecore file.
 					</para>
 					<para>In fact, the both formats are available: *.kmt or *.ecore.
 					</para>
@@ -6378,13 +6672,15 @@ class Decoration{
 
 				<para>This sample shows that if the signature are strictly
 					equivalent,
-					then you can redefine the same structural feature
+					then you can redefine the
+					same structural feature
 					(attribute,
 					reference) in several aspect class.
 				</para>
 
 				<para>In addition, if an operation can be extended to addpre or post
-					conditions to a given operation.
+					conditions to a given
+					operation.
 				</para>
 				<note>
 					<title>
@@ -6397,10 +6693,12 @@ class Decoration{
 					</title>
 					<para>
 						In kermeta 1, and abstract operation was used to define an
-						operation with no body as a support for operation extensions. In
+						operation with no body as a support
+						for operation extensions. In
 						kermeta 2 we suppose that if the developper has defined the
 						operation abstract then his intents is that the operation must be
-						overriden via a sub class. So now, the abstract keyword cannot be
+						overriden via a sub class. So
+						now, the abstract keyword cannot be
 						used for that. We use the
 						<literal>void</literal>
 						keyword instead.
@@ -6434,17 +6732,22 @@ class A {
 
 			<section>
 				<title>Example 3: merge with overload of operation from ecore
-					genmodel</title>
+					genmodel
+				</title>
 
 				<para>
 					In ecore, it is possible to define some operation with body. this
 					is acheived either via the
 					<literal>generated NOT</literal>
 					comment in the generated java file or via a specific annotation in
-					the ecore file (Please refer to EMF documentation and book for
-					details on that). By default, kermeta will reuse these operations
+					the ecore file (Please refer
+					to EMF documentation and book for
+					details on that). By default, kermeta will reuse these
+					operations
 					and allows to call this code. However, in some situations, you may
-					want to overload this code by your own in kermeta. This can be done as follow:
+					want to overload
+					this code by your own in kermeta. This can be done
+					as follow:
 				</para>
 
 				<programlisting language="kermeta">package pack;
@@ -6474,14 +6777,17 @@ aspect class A {
 
 				<para>In this sample, the first declaration of the operation is adds
 					a
-					post condition to the operation. As it is abstract, it isn't in
+					post condition to the
+					operation. As it is abstract, it isn't in
 					conflict with the other declarations.
 				</para>
 
 				<para>The second declaration, has a body. It implements a kind of
-					default behavior for the operation that will be used if no other
+					default behavior for the
+					operation that will be used if no other
 					body
-					is declared for this operation. this is useful when converting
+					is declared for this operation. this is useful when
+					converting
 					ecore
 					models into Kermeta for example.
 				</para>
@@ -6496,9 +6802,11 @@ aspect class A {
 				<title>Aspect and inheritance</title>
 
 				<para>If you define some inheritance in one of your aspects, all the
-					aspects that require this aspect will have access to it. You
+					aspects that require this
+					aspect will have access to it. You
 					don't
-					need to redefine it. However, if it helps to clarify the code to
+					need to redefine it. However, if it helps to clarify the
+					code to
 					write it again, it will behave the same way.
 				</para>
 			</section>
@@ -6520,16 +6828,20 @@ aspect abstract class A {
 				<title>Aspect without common base</title>
 
 				<para>A special case of the use of AOP in Kermeta is having a
-					ClassDefinition A defined in 2 separately
+					ClassDefinition A defined in 2
+					separately
 					modeling units (*.kmt)
 					with the keyword aspect. But the two modeling units
-					does not require
+					does not
+					require
 					another kmt or ecore file containing the base
 					definition of A.
 					Now if
-					there is a new Modeling Unit that requires the two previous one
+					there is a new
+					Modeling Unit that requires the two previous one
 					the
-					available definition of A is the composition of the 2 defined
+					available definition of A is the composition
+					of the 2 defined
 					aspects.
 				</para>
 			</section>
@@ -6544,40 +6856,47 @@ aspect abstract class A {
 			<warning>
 				<para>
 					In current version of Kermeta(v1.1.0), ModelType is still a
-					prototype. Any help, feedback, contribution is welcome to help us
+					prototype. Any help, feedback,
+					contribution is welcome to help us
 					to finalize it.
 				</para>
 			</warning>
 
 			<para>Kermeta is clearly a model oriented language, one of its first
-				concept is a model element, because they are the manipulated
+				concept is a model element,
+				because they are the manipulated
 				objects.
-				However, we often need to organise them and manipulate them
+				However, we often need to organise them and manipulate
+				them
 				as a set : a
 				model. A common way to do that is to simply use a set,
 				and a
 				resource
-				(used for load and save) is just a set. This approach
+				(used for
+				load and save) is just a set. This approach
 				is not type safe
 				enough.
 			</para>
 
 			<para>So, Kermeta implements a clear notion of model type, in order
 				to be
-				able to typecheck this kind of model. A model type is simply
+				able to typecheck this
+				kind of model. A model type is simply
 				the set of
 				the type of all allowed model elements.
 			</para>
 
 			<para>In addition, it introduce a mechanism of conformance between
-				modeltype that helps to reuse code from one metamodel to another.
+				modeltype that helps to reuse
+				code from one metamodel to another.
 			</para>
 
 			<section>
 				<title>Definition of a model type</title>
 
 				<para>A model type is simply a set of metaclasses. Expressed in
-					Kermeta, this is a collection of Kermeta classes.
+					Kermeta, this is a collection of
+					Kermeta classes.
 				</para>
 
 				<programlisting language="kermeta">
@@ -6600,7 +6919,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 					<para>
 						You can use all classic way to define classes, in kmt, but
 						you can
-						also require an ecore file that will contain your class
+						also require an ecore
+						file that will contain your class
 						definition
 						(see require section ???)
 					</para>
@@ -6622,7 +6942,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 				<para>
 					But, your model is still empty. As its contents is a
 					(constrained)
-					Set you simply have to fill it with your model element
+					Set you simply have to fill it
+					with your model element
 					using
 					typechecked operations like
 					<literal>add</literal>
@@ -6652,7 +6973,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 				<para>
 					As a model type is based on "normal" class definitions, loading
 					and
-					saving models mostly relies on the normal way to load resource
+					saving models mostly relies
+					on the normal way to load resource
 					(see
 					<xref linkend="section_loadingsaving_models.link" />
 					)
@@ -6696,15 +7018,18 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
 				<para>Model types use a notion of conformance that allows to
 					determine
-					if a metamodel is conformant to another. The goal is to be
+					if a metamodel is
+					conformant to another. The goal is to be
 					able to
-					write code that will be valid not only for models of a given
+					write code that will be valid not only for
+					models of a given
 					metamodel, but will be valid for models of conformant
 					metamodels.
 				</para>
 
 				<para>In order to be flexible, the conformity between metamodel is
-					based on the properties offered by the metaclasses. It ignores the
+					based on the properties
+					offered by the metaclasses. It ignores the
 					name of the metaclasses.
 				</para>
 
@@ -6718,7 +7043,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
 				<note>
 					<para>We could also define a modeltype directly on top of the
-						previous metamodel (and restrain it to some of its metaclasses),
+						previous metamodel (and restrain
+						it to some of its metaclasses),
 						but
 						the sample would have been less general and wouldn't have
 						illustrated the fact that the name of metaclasses are
@@ -6734,11 +7060,14 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 					<para>
 						The current implementation works only when there is no
 						ambiguity, if
-						there is ambiguity between two metamodels, then they
+						there is ambiguity
+						between two metamodels, then they
 						are
-						considered as not conformant. A future version, may eventually
+						considered as not conformant. A future version, may
+						eventually
 						introduce a binding mechanism that would allows to remove those
-						ambiguity. (See Jim Steel Phd thesis for more details ???)
+						ambiguity. (See Jim
+						Steel Phd thesis for more details ???)
 					</para>
 				</warning>
 			</section>
@@ -6765,19 +7094,22 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 				<para></para>
 			</warning>
 			<para>If you have existing code that you want to run in a Kermeta
-				program, you can use one of those two mechanisms : extern call or
+				program, you can use one of
+				those two mechanisms : extern call or
 				seamless require.
 			</para>
 
 			<para>The extern call is currently the more robust approach as it is
-				used internally by Kermeta to implement some part of its framework.
+				used internally by Kermeta to
+				implement some part of its framework.
 				It
 				also helps to clearly specify the border between java and
 				Kermeta.
 			</para>
 
 			<para>The seamless java require is more straitghforward to use (no
-				wrapper to write) but is still in prototype (v0.4.2) and still have
+				wrapper to write) but is still
+				in prototype (v0.4.2) and still have
 				several limitations.
 			</para>
 
@@ -6788,9 +7120,11 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
 				<para>The extern allows you to call a java static method from
 					Kermeta.
-					But, to do that, you will have firstly to create a Java
+					But, to do that, you will
+					have firstly to create a Java
 					wrapper, that
-					will be able to manipulate correctly the Java objects,
+					will be able to manipulate correctly the Java
+					objects,
 					and secondly
 					to
 					add this wrapper in your java global classpath.
@@ -6798,13 +7132,15 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
 				<para role="lineBreak">Then, from this method you can access all your
 					java
-					libraries. One task of the static method will be to convert the
+					libraries. One task of the
+					static method will be to convert the
 					basic types like Integer or String.
 				</para>
 
 				<para>You'll need to refer to the Javadoc of the interpreter in
 					order
-					to know how to access the internal RuntimeObject of Kermeta.
+					to know how to access the
+					internal RuntimeObject of Kermeta.
 				</para>
 
 				<para>
@@ -6819,22 +7155,19 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
  <emphasis>/**</emphasis> <emphasis>* write the object to standard output</emphasis> <emphasis>*/</emphasis> 
  <emphasis role="strong">operation</emphasis> write(object : Object) : Void <emphasis
 					role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-   <emphasis role="strong">result</emphasis> ?= <emphasis
-					role="strong">extern </emphasis>fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
+   <emphasis role="strong">result</emphasis> ?= <emphasis role="strong">extern </emphasis>fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
  <emphasis role="strong">end</emphasis>
  
  <emphasis>/**</emphasis> <emphasis>* writeln the object to standard output</emphasis> <emphasis>*/</emphasis> 
  <emphasis role="strong">operation</emphasis> writeln(object : Object) : Void <emphasis
 					role="strong">is do</emphasis>
-   <emphasis role="strong">result</emphasis> ?= <emphasis
-					role="strong">extern</emphasis> fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
+   <emphasis role="strong">result</emphasis> ?= <emphasis role="strong">extern</emphasis> fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
  <emphasis role="strong">end</emphasis>
  
  <emphasis>/**</emphasis> <emphasis>* read an object from standard input</emphasis> <emphasis>*/</emphasis> 
  <emphasis role="strong">operation</emphasis> read(prompt : String) : String <emphasis
 					role="strong">is do</emphasis>
- <emphasis role="strong">  result</emphasis> ?= <emphasis
-					role="strong">extern</emphasis> fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)
+ <emphasis role="strong">  result</emphasis> ?= <emphasis role="strong">extern</emphasis> fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)
  <emphasis role="strong">end</emphasis>
 
 }
@@ -6850,21 +7183,18 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
    <emphasis role="strong">public</emphasis> <emphasis role="strong">class</emphasis> StdIO{ 
       // Implementation of method write called as :
       // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output) 
-      <emphasis role="strong">public</emphasis> <emphasis
-					role="strong">static</emphasis> RuntimeObject write(RuntimeObject output) {
+      <emphasis role="strong">public</emphasis> <emphasis role="strong">static</emphasis> RuntimeObject write(RuntimeObject output) {
          output.getFactory().getKermetaIOStream().print(output.getData().get("StringValue")); 
       <emphasis role="strong">return</emphasis> output.getFactory().getMemory().voidINSTANCE; 
       } 
       // Implementation of method writeln called as : // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output) 
-      <emphasis role="strong">public</emphasis> <emphasis
-					role="strong">static</emphasis> RuntimeObject writeln(RuntimeObject output) {
+      <emphasis role="strong">public</emphasis> <emphasis role="strong">static</emphasis> RuntimeObject writeln(RuntimeObject output) {
          <emphasis>write</emphasis>(output); 
          output.getFactory().getKermetaIOStream().print("\n"); 
       <emphasis role="strong">return</emphasis> output.getFactory().getMemory().voidINSTANCE; 
       } 
       // Implementation of method writeln called as : // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read(output) 
-      <emphasis role="strong">public</emphasis> <emphasis
-					role="strong">static</emphasis> RuntimeObject read(RuntimeObject prompt) {
+      <emphasis role="strong">public</emphasis> <emphasis role="strong">static</emphasis> RuntimeObject read(RuntimeObject prompt) {
          java.lang.String input = <emphasis role="strong">null</emphasis>; 
          // We also have our own String wrapper 
       <emphasis role="strong">if</emphasis> (String.<emphasis>getValue</emphasis>(prompt).length()&gt;0) 
@@ -6879,7 +7209,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 					<para>
 						This method is used to implement Kermeta framework. You'll
 						find much
-						more code samples of extern call in its sources.
+						more code samples of
+						extern call in its sources.
 					</para>
 				</tip>
 			</section>
@@ -6895,7 +7226,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
 				<warning>
 					<para>This feature is still a prototype and still have many
-						limitations. The first version is already available but any help
+						limitations. The first version is
+						already available but any help
 						is
 						welcome to help us to improve it.
 					</para>
@@ -6913,22 +7245,27 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
 
 				<para>Then Kermeta automatically retreive the class definition it
-					contains to be used from Kermeta code. However, as java and Kermeta
-					have different language constraints, some adaptation are
+					contains to be used from
+					Kermeta code. However, as java and Kermeta
+					have different language constraints, some adaptation
+					are
 					automatically
 					made.
 				</para>
 
 				<para>If there is several operations with the same name (as this is
-					legal in Java but not in Kermeta) they are renamed. (Please use the
-					outline to find the new name of the operation you want)
+					legal in Java but not in
+					Kermeta) they are renamed. (Please use the
+					outline to find the new name of the operation you
+					want)
 				</para>
 
 				<para>Java contructors are generated as "initialize" operation.
 				</para>
 
 				<para>When creating a new java object from Kermeta, a call to new is
-					not enough, you also need to call one of the "initialize" operation
+					not enough, you also need to
+					call one of the "initialize" operation
 					in
 					order to correctly create it.
 				</para>
@@ -6940,7 +7277,8 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 					but as this
 					library is really big and as you probably don't need all
 					java from
-					Kermeta ;-) then you must use the includeFilter and
+					Kermeta ;-) then
+					you must use the includeFilter and
 					excludeFilter.
 				</para>
 
@@ -7027,7 +7365,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<para>Currently known limitations: no support for java5 generics
 					(they
-					are ignored), requiring very big jar like the full java
+					are ignored), requiring
+					very big jar like the full java
 					library end up
 					with out of memory error (you need to use the
 					includefilter and
@@ -7051,8 +7390,10 @@ class testRequireJava inherits kermeta::kunit::TestCase
 			</warning>
 			<para>
 				As we saw in previous sections, class properties can be defined as
-				attribute or reference. An attribute cannot be shared between two or
-				more objects whereas a reference can be. Let's consider a class
+				attribute or reference. An
+				attribute cannot be shared between two or
+				more objects whereas a reference can be. Let's consider
+				a class
 				"
 				<literal>Family</literal>
 				" with a property "
@@ -7078,7 +7419,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				, it could not
 				be shared between the two objects, by definition of
 				attribute (in
-				"technical" words, an object cannot be contained by 2
+				"technical" words,
+				an object cannot be contained by 2
 				containers).
 			</para>
 
@@ -7094,16 +7436,12 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 <emphasis role="strong">class</emphasis> Main
 {
-    <emphasis role="strong">operation</emphasis> run() <emphasis
-				role="strong">is</emphasis>
-    <emphasis role="strong">do var</emphasis> family1 : Family <emphasis
-				role="strong">init</emphasis> Family.new
-       <emphasis role="strong">var</emphasis> p1 : Person <emphasis
-				role="strong">init</emphasis> Person.new
+    <emphasis role="strong">operation</emphasis> run() <emphasis role="strong">is</emphasis>
+    <emphasis role="strong">do var</emphasis> family1 : Family <emphasis role="strong">init</emphasis> Family.new
+       <emphasis role="strong">var</emphasis> p1 : Person <emphasis role="strong">init</emphasis> Person.new
        p1.name := "Robert"
        family1.father := p1
- <emphasis role="strong">var</emphasis> family2 : Family <emphasis
-				role="strong">init</emphasis> Family.new
+ <emphasis role="strong">var</emphasis> family2 : Family <emphasis role="strong">init</emphasis> Family.new
 
        <emphasis>// ERROR 1 : this assigns p1 to family2.father, which 
        // is already owned by family1.father, so it unsets family1.father 
@@ -7123,26 +7461,31 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				<literal>clone</literal>
 				" method creates a copy of the object
 				that it receives as input. If
-				it is a complex object, a deep clone is
+				it is a complex object, a deep
+				clone is
 				performed for each attribute
 				of its meta-class and a shallow clone
 				is
-				performed for each reference.
+				performed for each
+				reference.
 			</para>
 
 			<caution>
 				<para>
 					Reminder : be very careful with the use of the assignment
 					operator on
-					object. Most of the time, you need to use the "clone"
+					object. Most of the
+					time, you need to use the "clone"
 					feature.
 					Using assignment on attributes break the previous link
 					between
 					objects. So, In the previous example, p1 has no more name
 					after the
-					assignment !There is one exception to this behavior : when
+					assignment !There is
+					one exception to this behavior : when
 					the type
-					of attributes are DataType, i.e, in Kermeta, String,
+					of attributes are DataType, i.e, in Kermeta,
+					String,
 					Integer,
 					Boolean, the assignment behaves as if those entities were
 					defined
@@ -7163,16 +7506,20 @@ class testRequireJava inherits kermeta::kunit::TestCase
 		</warning>
 		<para>As Kermeta is designed to be used in a model driven environment,
 			its
-			structure is given as a model. This section presents the metamodel
+			structure is given as a
+			model. This section presents the metamodel
 			of
-			Kermeta which corresponds to the abstract syntax of Kermeta.
+			Kermeta which corresponds to the abstract syntax of
+			Kermeta.
 		</para>
 
 		<para>This metamodel may be useful for many use cases. For example,
 			you
-			can use it to manipulate your Kermeta code for analysis or even
+			can use it to manipulate
+			your Kermeta code for analysis or even
 			generate
-			some Kermeta code. This may be useful to understand how
+			some Kermeta code. This may be useful to understand
+			how
 			Kermeta works
 			too.
 		</para>
@@ -7187,26 +7534,33 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 		<para>The goal of the Kermeta language is to provide an action
 			language
-			for MOF models. The idea is to start from MOF, which provides
+			for MOF models. The idea is
+			to start from MOF, which provides
 			the
-			structure of the language, and to add an action model. Using the
+			structure of the language, and to add an action model. Using
+			the
 			MOF
 			to
 			define the structure of the Kermeta language has an important
 			impact on
-			the language. In fact, as MOF concepts are Object-Oriented
+			the language. In
+			fact, as MOF concepts are Object-Oriented
 			concepts,
-			Kermeta includes most of the classical Object-Oriented
+			Kermeta includes most of the classical
+			Object-Oriented
 			mechanisms.
 			Yet,
 			MOF only defines structures, and the operational
-			semantic corresponding
+			semantic
+			corresponding
 			to
 			MOF concepts has to be defined in Kermeta.
 			For instance MOF does not
-			provide a semantic for behavior inheritance
+			provide a
+			semantic for behavior inheritance
 			(concepts like method
-			redefinition, abstract method, etc does not have
+			redefinition, abstract method, etc does not
+			have
 			any sense in the
 			MOF).
 		</para>
@@ -7218,7 +7572,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				<para></para>
 			</warning>
 			<para>Kermeta has been designed to be fully compatible with the OMG
-				standard meta-data language EMOF. The metamodel of Kermeta is
+				standard meta-data language
+				EMOF. The metamodel of Kermeta is
 				divided
 				into two packages :
 			</para>
@@ -7238,14 +7593,16 @@ class testRequireJava inherits kermeta::kunit::TestCase
 						which corresponds to the
 						actions. This section gives an overview of
 						these two packages and
-						their relationships.
+						their
+						relationships.
 					</para>
 				</listitem>
 			</itemizedlist>
 
 			<para>Thanks to this reuse, Kermeta is fully compatible with EMOF.
 				This
-				is useful in the promotion of Kermeta as a metalanguage.
+				is useful in the promotion
+				of Kermeta as a metalanguage.
 			</para>
 
 			<figure id="refIllustration1">
@@ -7267,10 +7624,12 @@ class testRequireJava inherits kermeta::kunit::TestCase
 						Jézéquel. -- Weaving
 						executability into object-oriented
 						meta-languages. -- In S. Kent L.
-						Briand, editor, Proceedings of
+						Briand, editor, Proceedings
+						of
 						MODELS/UML'2005, volume 3713 of LNCS,
 						pages 264--278, Montego Bay,
-						Jamaica, October 2005. Springer.
+						Jamaica, October 2005.
+						Springer.
 					</ulink>
 				</para>
 			</note>
@@ -7301,32 +7660,38 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="Kermeta-Manual_figures/kermeta_structure_package.png" />
+						<imagedata fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_structure_PackageView.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
 
 			<para>This figure presents the main classes of the structure package.
 				To
-				design this package, we started from EMOF and completed it to
+				design this package, we
+				started from EMOF and completed it to
 				build the
-				Kermeta language. The choice of EMOF is motivated by two
+				Kermeta language. The choice of EMOF is motivated
+				by two
 				main
 				reasons :
 				firstly it is standardized by the OMG and secondly is
 				is well-supported
-				by tools such as Eclipse/EMF.
+				by
+				tools such as Eclipse/EMF.
 			</para>
 
 			<para>
 				As MOF is not initially designed to be executable, several
 				concepts
-				have to be completed and slightly modified to build an
+				have to be completed and
+				slightly modified to build an
 				executable
-				language. The first and most important modification is to add
+				language. The first and most important modification is to
+				add
 				the
 				ability to define the behavior of operations. To achieve this we
-				define an action language in the package
+				define an action language
+				in the package
 				<literal>behavior</literal>
 				<emphasis>
 				</emphasis>
@@ -7336,7 +7701,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				<xref linkend="refIllustration11" />
 				. In practice, Kermeta expressions have
 				been designed by adding model
-				modification capabilities (like assignment
+				modification capabilities
+				(like assignment
 				of properties for
 				instance) to OCL expressions.
 			</para>
@@ -7345,13 +7711,15 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 			<para>As a reminder, the structure of Kermeta is derived from EMOF
 				from
-				the OMG. During the build process, we merge and connect it with
+				the OMG. During the build
+				process, we merge and connect it with
 				the
 				behavior part.
 			</para>
 
 			<para>So all the meaning of those metaclasses are very close to those
-				described in the OMG standard specification.
+				described in the OMG
+				standard specification.
 			</para>
 			<section>
 				<title>NamedElement view</title>
@@ -7361,17 +7729,19 @@ class testRequireJava inherits kermeta::kunit::TestCase
 					<mediaobject>
 						<imageobject>
 							<imagedata
-								fileref="figures/kermeta_ecorediag/kermeta_structure_NamedElement.png" />
+								fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_named_elements.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
 
 				<para>This figure presents the element in the structure package that
 					have a name.
-					Kermeta relies on in various situation (For example in
+					Kermeta relies
+					on in various situation (For example in
 					the typechecking
 					process).
-					The containment hierarchy is also
+					The containment hierarchy is
+					also
 					presented since it is used in the
 					identification process.
 				</para>
@@ -7386,16 +7756,18 @@ class testRequireJava inherits kermeta::kunit::TestCase
 					<mediaobject>
 						<imageobject>
 							<imagedata
-								fileref="figures/kermeta_ecorediag/kermeta_structure_TypeSystemBigPicture.png" />
+								fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_complete_type_system.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
 
 				<para>This figure presents the global view of all the metaclasses
-					involved in Kermeta type system.
+					involved in Kermeta type
+					system.
 				</para>
 				<para>Basically, you can notice the split between Type and
-					TypeDefinion needed in order to handle generics.
+					TypeDefinion needed in order to handle
+					generics.
 				</para>
 				<para>The containment is also represented here.</para>
 				<para>
@@ -7417,8 +7789,42 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				</para>
 				<para>TODO add an object diagram or a figure to illustrate.</para>
 				<para>TODO : if time : provide a set of small diagrams that focus of
-					some elements of the type system.
+					some elements of the type
+					system.
 				</para>
+				<section>
+					<title>ModelType and ModelType adaptation view</title>
+
+					<figure id="refIllustrationModelTypeView">
+						<title>Kermeta ModelType system class diagram</title>
+						<mediaobject>
+							<imageobject>
+								<imagedata
+									fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_model_type.png" />
+							</imageobject>
+						</mediaobject>
+					</figure>
+
+					<para>This figure presents the global view of the main metaclasses
+						involved in Kermeta
+						ModelType.
+					</para>
+
+					<figure id="refIllustrationModelTypeAdaptationView">
+						<title>Kermeta ModelType adaptation class diagram</title>
+						<mediaobject>
+							<imageobject>
+								<imagedata
+									fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_model_type_adaptation.png" />
+							</imageobject>
+						</mediaobject>
+					</figure>
+
+					<para>This figure presents the view of the main metaclasses
+						used by
+						the ModelType adaptation.
+					</para>
+				</section>
 			</section>
 		</section>
 
@@ -7428,12 +7834,21 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				<title>Text not verified for kermeta 2</title>
 				<para></para>
 			</warning>
-			<figure id="refIllustration11">
+			<figure id="refIllustrationkermeta_language_behavior_packageView">
 				<title>Behavior package</title>
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="Kermeta-Manual_figures/kermeta_behavior_package.png" />
+						<imagedata fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_behavior_packageView.png" />
+					</imageobject>
+				</mediaobject>
+			</figure>
+			<figure id="refIllustrationkermeta_language_behavior">
+				<title>Behavior main metaclasses</title>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_behavior.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -7444,8 +7859,10 @@ class testRequireJava inherits kermeta::kunit::TestCase
 				<title>Control Structures</title>
 
 				<para>Kermeta provides basic control structures : block, conditional
-					branch, loop, and exception handling. Here there an excerpt of the
-					Meta-model describing control structures. Each basic control
+					branch, loop, and exception
+					handling. Here there an excerpt of the
+					Meta-model describing control structures. Each basic
+					control
 					structures derives from the Expression concept.
 				</para>
 
@@ -7515,8 +7932,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 <emphasis role="strong">class</emphasis> ChildClass {
     <emphasis role="strong">method</emphasis> op(element : Integer) : Integer <emphasis
 						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis role="strong">result</emphasis> := <emphasis
-						role="strong">super</emphasis>(element)
+        <emphasis role="strong">result</emphasis> := <emphasis role="strong">super</emphasis>(element)
     <emphasis role="strong">end</emphasis>
 }</programlisting>
 				</section>
@@ -7606,8 +8022,7 @@ res := lf(4)
     <emphasis role="strong">attribute</emphasis> attr : Integer
     <emphasis role="strong">operation</emphasis> myoperation(param : Integer) : Integer <emphasis
 						role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis role="strong">result</emphasis> := <emphasis
-						role="strong">self</emphasis>.attr + param
+        <emphasis role="strong">result</emphasis> := <emphasis role="strong">self</emphasis>.attr + param
     <emphasis role="strong">end</emphasis>
 }
 <emphasis role="strong">class</emphasis> B {
@@ -7628,8 +8043,7 @@ res := lf(4)
 
 					<mediaobject>
 						<imageobject>
-							<imagedata
-								fileref="Kermeta-Manual_figures/kermeta_assign_expressions.png" />
+							<imagedata fileref="Kermeta-Manual_figures/kermeta_assign_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7668,8 +8082,7 @@ num ?= a</programlisting>
 
 					<mediaobject>
 						<imageobject>
-							<imagedata
-								fileref="Kermeta-Manual_figures/kermeta_literal_expressions.png" />
+							<imagedata fileref="Kermeta-Manual_figures/kermeta_literal_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7694,14 +8107,44 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 					<mediaobject>
 						<imageobject>
-							<imagedata
-								fileref="Kermeta-Manual_figures/kermeta_lambda_expressions.png" />
+							<imagedata fileref="Kermeta-Manual_figures/kermeta_lambda_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
 			</section>
 		</section>
-
+		<section>
+			<title>Unresolved view</title>
+			<note>
+				<title>
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="gfx/fire.png" contentdepth="2em" />
+						</imageobject>
+					</inlinemediaobject>
+					New in Kermeta 2
+				</title>
+				<para></para>
+			</note>
+			<para>
+				In Kermeta 2, in order to delegate the resolution work to the tool,
+				it use a specific internal structure based on
+				<literal>Unresolved</literal>
+				metaclass. The resolver will transform every <literal>Unresolved</literal> into the final real
+				ModelElement. This allow to
+				build transformations that generate valid km models without the difficulty of dealing with the
+				framework default types and the resolving of km model splitted in several files. 
+				All Kermeta 2 internal transformations like kmt2km, ecore2km, qvt2km use this mechanism.
+			</para>
+			<figure id="refIllustration_kermeta_language_unresolved">
+				<title>Unresolved view</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_unresolved.png" />
+					</imageobject>
+				</mediaobject>
+			</figure>
+		</section>
 		<section>
 			<title>Viewing Kermeta metamodel</title>
 			<warning>
@@ -7712,9 +8155,11 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 			<para>First, the ecore file kermeta_java.ecore is available in the
 				lib
-				folder of Kermeta main plugin.It is used when saving a Kermeta
+				folder of Kermeta main
+				plugin.It is used when saving a Kermeta
 				program
-				in XMI ("Compile to XMI" function on *.kmt files). You can
+				in XMI ("Compile to XMI" function on *.kmt files).
+				You can
 				then load
 				Kermeta program as a model, typically to transform it.
 			</para>
@@ -7723,7 +8168,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 				<para>
 					You should not try to execute operations on Kermeta models
 					you've just
-					dynamically created unless you froze it. This is a
+					dynamically created
+					unless you froze it. This is a
 					feature which
 					has not been completly tested.
 				</para>
@@ -7731,7 +8177,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 			<para>
 				Another typical way to access to a Kermeta model and Kermeta
-				metamodel is to use the reflection. All objects inherits from Object
+				metamodel is to use the reflection.
+				All objects inherits from Object
 				that defines the
 				<literal>getMetaClass</literal>
 				operation. This use is
@@ -7763,7 +8210,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 			<para></para>
 		</warning>
 		<para>Kermeta is bundled with a framework that provides the base
-			functionalities for metamodel engineering.
+			functionalities for metamodel
+			engineering.
 		</para>
 
 		<tip>
@@ -7791,7 +8239,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 					<para>
 						This package defines some classes related to Kermeta
 						interpreter
-						and also to Kermeta surface syntax. Some uses of this
+						and also to Kermeta surface
+						syntax. Some uses of this
 						package are
 						illustrated in
 						<xref linkend="section_dynamic_expressions.link" />
@@ -7810,7 +8259,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 				<listitem>
 					<para>
 						This package defines the notion required to serialize and
-						deserialize models. This is illustrated in
+						deserialize models. This is
+						illustrated in
 						<xref linkend="section_loadingsaving_models.link" />
 						and in the EMF
 						tutorial document (
@@ -7844,8 +8294,10 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 				<listitem>
 					<para>It contains the classes of Kermeta structure. Note that it
-						slightly differs from the kermeta_java.ecore due to an inheritance
-						to the classes in Kermeta::reflexion. However, it proposes the
+						slightly differs from the
+						kermeta_java.ecore due to an inheritance
+						to the classes in Kermeta::reflexion. However, it
+						proposes the
 						very
 						same functionalities.
 					</para>
@@ -7873,8 +8325,10 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 				<listitem>
 					<para>It defines various exceptions that you can use in Kermeta.
-						Inheriting from kermeta::exceptions::Exception allows to give more
-						information to the end user because it will also provide a stack
+						Inheriting from
+						kermeta::exceptions::Exception allows to give more
+						information to the end user because it will
+						also provide a stack
 						trace (which would not be available otherwise).
 					</para>
 				</listitem>
@@ -7889,8 +8343,10 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 				<listitem>
 					<para>This package provides basic support for input/output with
-						Kermeta. It is voluntary minimal because that not the main role of
-						Kermeta to provide such primitives. In the future, this package
+						Kermeta. It is voluntary minimal
+						because that not the main role of
+						Kermeta to provide such primitives. In the future, this
+						package
 						may
 						even disappear and be replaced by the ability to directly call
 						Java
@@ -7908,7 +8364,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 				<listitem>
 					<para>This package contains all the abstract classes needed for the
-						reflexivity of Kermeta. The concrete implementation are in
+						reflexivity of Kermeta. The
+						concrete implementation are in
 						kermeta::standard or kermeta::structure.
 					</para>
 				</listitem>
@@ -7923,7 +8380,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 				<listitem>
 					<para>This package defines various tool classes that cannot be part
-						of the core of the language, but are important enough to be part
+						of the core of the language,
+						but are important enough to be part
 						of
 						the framework.
 					</para>
@@ -7939,7 +8397,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 				<listitem>
 					<para>This package defines all the basic objects needed for a
-						typical Kermeta application. For example, it defines data types,
+						typical Kermeta application. For
+						example, it defines data types,
 						collections, etc.
 					</para>
 				</listitem>
@@ -7949,9 +8408,9 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 		<note>
 			<para>
 				For more details about the content of these packages, please look at
-				the generated documentation available on line:
-				<ulink type=""
-					url="http://www.kermeta.org/docs/KermetaFramework/framework.km.html">http://www.kermeta.org/docs/KermetaFramework/framework.km.html
+				the generated documentation
+				available on line:
+				<ulink type="" url="http://www.kermeta.org/docs/KermetaFramework/framework.km.html">http://www.kermeta.org/docs/KermetaFramework/framework.km.html
 				</ulink>
 			</para>
 		</note>
@@ -7970,7 +8429,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 			<para>
 				If you want to name some class or property using those names,
 				you'll
-				need to escape them using the ~ (tilda).Ex:
+				need to escape them using the
+				~ (tilda).Ex:
 				<literal>class ~class
 					{}
 				</literal>
@@ -8600,7 +9060,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 		</warning>
 		<para>This annex collect the use of known tags.
 			They are generally used
-			as an extension on Kermeta in these typically
+			as an extension on Kermeta
+			in these typically
 			uses :
 		</para>
 		<itemizedlist>
@@ -8642,7 +9103,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 						<title>Use description</title>
 						<para>Old way to indicate that a Class must be reopened as an
 							aspect of another Class and
-							then merging its features. We now
+							then
+							merging its features. We now
 							prefer to use the dedicated
 							keyword.
 						</para>
@@ -8707,10 +9169,12 @@ package myPackage;
 					<formalpara>
 						<title>Use description</title>
 						<para>Indicates a preferred class from which the run configuration
-							should try to start the Kermeta program.
+							should try to start the
+							Kermeta program.
 							This helps to create a
 							default run configuration.
-							Must be used with the mainOperation
+							Must be used with the
+							mainOperation
 							tag.
 						</para>
 					</formalpara>
@@ -8751,7 +9215,8 @@ class MyMainClass
 					<formalpara>
 						<title>Use description</title>
 						<para>Indicates a preferred operation from which the run
-							configuration should try to start the Kermeta program.
+							configuration should try to start the
+							Kermeta program.
 							This helps
 							to create a default run configuration.
 							Must be used with the
@@ -8790,9 +9255,11 @@ class MyMainClass
 			<para></para>
 		</warning>
 		<para>Kermeta natively integrates Ecore defintions, however it uses an
-			internal mapping in order to import ecore model as Kermeta models.
+			internal mapping in order to
+			import ecore model as Kermeta models.
 			In
-			the other way round a Kermeta model can be translated into a pure
+			the other way round a Kermeta model can be translated into
+			a pure
 			ecore model. (for example in the compiler)
 		</para>
 		<para>This annex indicates how Kermeta models are translated into
@@ -8800,7 +9267,8 @@ class MyMainClass
 		</para>
 		<note>
 			<para>TODO : finish this by looking into kermeta2ecore transformation
-				and the compiler specifications.
+				and the compiler
+				specifications.
 			</para>
 		</note>
 		<informaltable>
@@ -8890,7 +9358,8 @@ class MyMainClass
 						<entry>
 							<para>
 								Most Tags are translated into an EAnnotation with
-								source="kermeta" and one DetailEntry with key=
+								source="kermeta" and one DetailEntry with
+								key=
 								<replaceable>NameOfTheTag</replaceable>
 								and value=
 								<replaceable>ValueOfTheTag</replaceable>
@@ -8911,7 +9380,8 @@ class MyMainClass
 							<para>
 								EAnnotation.references points to the EAnnotation
 								representing the
-								Constraints. DetailEntry with key=
+								Constraints. DetailEntry
+								with key=
 								<replaceable>NameOfTheTag</replaceable>
 								and value=
 								<replaceable>ValueOfTheTag</replaceable>
