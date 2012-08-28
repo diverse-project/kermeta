@@ -6,7 +6,7 @@
 	<bookinfo>
 		<mediaobject>
 			<imageobject>
-				<imagedata fileref="KerMeta-Manual_figures/KermetaLogo.png"
+				<imagedata fileref="Kermeta-Manual_figures/KermetaLogo.png"
 					format="PNG" />
 			</imageobject>
 		</mediaobject>
@@ -239,7 +239,7 @@
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="KerMeta-Manual_figures/kermeta_positioning2.png" />
+						<imagedata fileref="Kermeta-Manual_figures/kermeta_positioning2.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -656,7 +656,7 @@ class Author
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/library.png" />
+							<imagedata fileref="Kermeta-Manual_figures/library.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -2807,7 +2807,7 @@ class Female inherits Person
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/person.png" />
+							<imagedata fileref="Kermeta-Manual_figures/person.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -2963,7 +2963,7 @@ class C {
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/KMM_multiple_inheritance.png" />
+							<imagedata fileref="Kermeta-Manual_figures/KMM_multiple_inheritance.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -3101,7 +3101,7 @@ class C {
 										<mediaobject>
 											<imageobject>
 												<imagedata depth="9.208cm"
-													fileref="KerMeta-Manual_figures/operation_redefinition.png"
+													fileref="Kermeta-Manual_figures/operation_redefinition.png"
 													width="2.29cm" />
 											</imageobject>
 										</mediaobject>
@@ -3321,7 +3321,7 @@ class C {
 										<mediaobject>
 											<imageobject>
 												<imagedata depth="11.374cm"
-													fileref="KerMeta-Manual_figures/superoperation_selection.png"
+													fileref="Kermeta-Manual_figures/superoperation_selection.png"
 													width="5.636cm" />
 											</imageobject>
 										</mediaobject>
@@ -3587,7 +3587,7 @@ class C {
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="KerMeta-Manual_figures/cs_ecore.gif" />
+						<imagedata fileref="Kermeta-Manual_figures/cs_ecore.gif" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -4223,7 +4223,7 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/collections.png" />
+							<imagedata fileref="Kermeta-Manual_figures/collections.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -4632,7 +4632,7 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/properties.png" />
+							<imagedata fileref="Kermeta-Manual_figures/properties.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -5552,7 +5552,8 @@ end
 							<literal>forAllCpl</literal>
 							on
 							<literal>Collection</literal>
-							are examples of such lambda with several input parameters. (See section bellow).
+							are examples of such lambda with several input parameters. (See
+							section bellow).
 						</para>
 						<para>Using the full syntax you can create operations that use
 							parameters of mixed type including function type:
@@ -5818,7 +5819,8 @@ class C inherits A {
 	attribute ownedC : C
 }</programlisting>
 				<para>It would be nice to be able to call a simple lambda on all the
-					elements directly owned by an element. This can be done by adding an operation using the
+					elements directly owned by an element. This can be done by adding
+					an operation using the
 					following pattern:
 				</para>
 				<programlisting language="kermeta">aspect class NamedElement {
@@ -5864,7 +5866,8 @@ c.eachOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 var ownedElements : Sequence&lt;Object&gt; := Sequence&lt;Object&gt;.new
 c.eachOwnedElement{ aNamedElement | ownedElements.add(aNamedElement) }
 stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)</programlisting>
-				<para>It is then easy to extend this pattern to traverse the directly and indirectly owned elements.
+				<para>It is then easy to extend this pattern to traverse the
+					directly and indirectly owned elements.
 				</para>
 				<programlisting language="kermeta">aspect class NamedElement {
 	operation eachAllOwnedElement(func : &lt;NamedElement -&gt; Void&gt;) : Void is do			
@@ -5874,8 +5877,8 @@ stdio.writeln("ownedElements.size = "+ ownedElements.size.toString)</programlist
 		}
 	end
 }</programlisting>
-<para>This new operation can be called in the same easy way:</para>
-<programlisting language="kermeta">// write the name of all the elements directly or indirectly contained by c
+				<para>This new operation can be called in the same easy way:</para>
+				<programlisting language="kermeta">// write the name of all the elements directly or indirectly contained by c
 c.eachAllOwnedElement{ aNamedElement | stdio.writeln(aNamedElement.name) }
 
 // collect all the elements directly or indirectly contained by c
@@ -6194,8 +6197,7 @@ and op.name.indexOf("All")==-1}
 				<para></para>
 			</warning>
 			<para>Since version 0.4.1, it is possible to write Kermeta code using
-				a
-				simplified Aspect Oriented approach.
+				a simplified Aspect Oriented approach.
 			</para>
 
 			<para>Technically, you can declare classes as "aspects" that will
@@ -6204,14 +6206,14 @@ and op.name.indexOf("All")==-1}
 				definition
 				of two classes that have the same qualified name will be
 				merged into a
-				single class in the interpreter memory.
+				single class at run time.
 			</para>
 
 			<para>This is a great help when you want to separate the concerns
 				into
-				several files. For example, you may have one file the strictly
-				conforms
-				to the structural part of your metamodel, one file
+				several files. For example, you may have one file containing
+				the
+				structural part of your metamodel, one file
 				containing the
 				constraints for a given purpose and another file
 				containing the
@@ -6219,27 +6221,23 @@ and op.name.indexOf("All")==-1}
 				an
 				interpreter.
 			</para>
-
+			<para>As a general guideline, this allow to reopen existing structure
+				in order to add new element. It is not possible to remove or change
+				an existing information. For example, you cannot trnasform an
+				abstract class into a concrete class.
+			</para>
 			<para>Obviously, the merge will be successful only if there is no
 				conflict between all the declared features.
 			</para>
 
 			<section>
 				<title>Textual syntax for merging</title>
-
-				<!-- important><para> Since this feature is really successful and very 
-					well accepted, the surface syntax will change in the future release v1.0.0 
-					in order to use a dedicated keyword instead of a simple annotation. The syntax 
-					presented here is valid only for prior versions. </para></important> -->
-
 				<para>The merge is driven by the qualified name of the element to
 					merge. Two classes will be merged if they have exactly the same
 					qualified name (packages names + class name)
 				</para>
 
-				<para>In order to keep the compatibility with previous behaviour,
-					the
-					merge is allowed only if you add some keyword or tag:
+				<para>The merge is allowed only if you add the following keyword:
 				</para>
 
 				<variablelist>
@@ -6255,44 +6253,8 @@ and op.name.indexOf("All")==-1}
 							</para>
 						</listitem>
 					</varlistentry>
-
-					<varlistentry>
-						<term>@overloadable "true"</term>
-
-						<listitem>
-							<para>This tag is placed on an operation, it indicates that the
-								body of
-								the operation can be overloaded by another definition of
-								the
-								same operation in an aspect class. This is useful in some
-								situation were the code expect to be overloaded.
-							</para>
-						</listitem>
-					</varlistentry>
 				</variablelist>
 
-				<note>
-					<para>
-						When using overloadable tag, for a given set of definition,
-						the
-						operation that is not tagged overlodable will overload all
-						other
-						definitions. If all the declaration declare to be
-						overloadable,
-						then the declaration order is important. The last
-						declared will be
-						used by the interpreter.
-					</para>
-				</note>
-				<note>
-					<para>
-						Since version 1.0.0, there is a dedicated keyword
-						<emphasis>aspect</emphasis>
-						, with previous version this feature was possible using the tag
-						<emphasis>@aspect "true"</emphasis>
-						on classes.
-					</para>
-				</note>
 			</section>
 
 			<section>
@@ -6304,7 +6266,6 @@ and op.name.indexOf("All")==-1}
 
 				<programlisting language="kermeta">// aspect1.kmt
 package pack;
-require kermeta
 // this is the first aspect of class A
 aspect class A {
 	attribute decorations : Decoration[0..*]
@@ -6318,7 +6279,6 @@ class Decoration{
 
 				<programlisting language="kermeta">// base.kmt
 package pack;
-require kermeta
 // this is the base class
 class A {
 	attribute name : kermeta::standard::String
@@ -6333,9 +6293,6 @@ class A {
 
 				<programlisting language="kermeta">// aspect2.kmt
 package pack;
-require kermeta
-require "base.kmt"
-require "aspect1.kmt"
 
 // is this context we have access to all the features of class A : from base, aspect1 and aspect2
 aspect class A {
@@ -6347,14 +6304,36 @@ aspect class A {
 	end
 }</programlisting>
 
-
+				<programlisting language="kp">KermetaProject "aspect_sample"
+	groupId = "my.group"
+	defaultMainClass = "sample::AspectExample"
+	defaultMainOperation = "main"
+	sources = {
+		require "${project.baseUri}/base.kmt"
+		require "${project.baseUri}/aspect1.kmt"
+		require "${project.baseUri}/aspect2.kmt"
+	}
+	dependencies = {
+		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
+		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core",
+		                           "mvn:org.kermeta.language/language.library.core/LATEST"
+	}</programlisting>
 
 				<note>
-					<para>Please note that the visibility of the features is respected.
-						In
-						base.kmt, class A doesn't know about attributes id or
-						decorators.
-					</para>
+					<title>
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="gfx/fire.png" contentdepth="2em" />
+							</imageobject>
+						</inlinemediaobject>
+						New in Kermeta 2
+					</title>
+					<para>In kermeta 1, the require statements were at the file level,
+						now they apply at the project level. This means that the
+						contibution of an aspect will be visible in all the project. It is
+						still possible to manage the visibility of aspects using project
+						dependencies. It is often useful to separate some set of files
+						into projects.</para>
 				</note>
 
 				<tip>
@@ -6365,8 +6344,8 @@ aspect class A {
 					</para>
 				</tip>
 
-				<para>from the point of view of aspect2.kmt (ie. any file that
-					requires aspect2.kmt) is equivalent to write :
+				<para>from the point of view of the project the 3 kmt files are
+					equivalent to write :
 				</para>
 
 
@@ -6392,15 +6371,6 @@ class Decoration{
 
 
 
-				<note>
-					<para>When there is no conflict like in this sample, the order used
-						to
-						declare the features doesn't changes the final behavior of the
-						code.
-					</para>
-				</note>
-
-
 			</section>
 
 			<section>
@@ -6413,13 +6383,29 @@ class Decoration{
 					reference) in several aspect class.
 				</para>
 
-				<para>In addition, if an operation is declared abstract, it can be
-					an
-					aspect of another one which is concrete. This is useful in order
-					to
-					add pre or post conditions to a given operation.
+				<para>In addition, if an operation can be extended to addpre or post
+					conditions to a given operation.
 				</para>
-
+				<note>
+					<title>
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="gfx/fire.png" contentdepth="2em" />
+							</imageobject>
+						</inlinemediaobject>
+						New in Kermeta 2
+					</title>
+					<para>
+						In kermeta 1, and abstract operation was used to define an
+						operation with no body as a support for operation extensions. In
+						kermeta 2 we suppose that if the developper has defined the
+						operation abstract then his intents is that the operation must be
+						overriden via a sub class. So now, the abstract keyword cannot be
+						used for that. We use the
+						<literal>void</literal>
+						keyword instead.
+					</para>
+				</note>
 				<para>
 					Currently, (v1.0.0) the
 					<link linkend="section_derived_properties.link">derived properties</link>
@@ -6430,14 +6416,13 @@ class Decoration{
 	//the feature is equivalent to the one define in the base class, so this is legal
 	attribute name : kermeta::standard::String	
 	
-	// the operation has the same signature and is abstract, so this is legal
+	// the operation has the same signature and has no body (ie. void)
 	operation getQualifiedName() : kermeta::standard::String 
-		post notVoid is not result == Void
-		is abstract
+		post resultNotVoid is not result == Void
+		is void
 }</programlisting>
 
 				<programlisting language="kermeta">package pack;
-require kermeta
 class A {
 
 	attribute name : kermeta::standard::String
@@ -6448,9 +6433,19 @@ class A {
 			</section>
 
 			<section>
-				<title>Example 3: merge with operation overload</title>
+				<title>Example 3: merge with overload of operation from ecore
+					genmodel</title>
 
-				<para>This sample shows the use of the overloadable tag</para>
+				<para>
+					In ecore, it is possible to define some operation with body. this
+					is acheived either via the
+					<literal>generated NOT</literal>
+					comment in the generated java file or via a specific annotation in
+					the ecore file (Please refer to EMF documentation and book for
+					details on that). By default, kermeta will reuse these operations
+					and allows to call this code. However, in some situations, you may
+					want to overload this code by your own in kermeta. This can be done as follow:
+				</para>
 
 				<programlisting language="kermeta">package pack;
 require kermeta
@@ -7258,7 +7253,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="KerMeta-Manual_figures/kermeta_emof_promotion.png" />
+						<imagedata fileref="Kermeta-Manual_figures/kermeta_emof_promotion.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -7306,7 +7301,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="KerMeta-Manual_figures/kermeta_structure_package.png" />
+						<imagedata fileref="Kermeta-Manual_figures/kermeta_structure_package.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -7438,7 +7433,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="KerMeta-Manual_figures/kermeta_behavior_package.png" />
+						<imagedata fileref="Kermeta-Manual_figures/kermeta_behavior_package.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -7459,7 +7454,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/kermeta_control_struct.png" />
+							<imagedata fileref="Kermeta-Manual_figures/kermeta_control_struct.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7475,7 +7470,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/kermeta_var_expressions.png" />
+							<imagedata fileref="Kermeta-Manual_figures/kermeta_var_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7491,7 +7486,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="KerMeta-Manual_figures/kermeta_call_expressions.png" />
+							<imagedata fileref="Kermeta-Manual_figures/kermeta_call_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7634,7 +7629,7 @@ res := lf(4)
 					<mediaobject>
 						<imageobject>
 							<imagedata
-								fileref="KerMeta-Manual_figures/kermeta_assign_expressions.png" />
+								fileref="Kermeta-Manual_figures/kermeta_assign_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7674,7 +7669,7 @@ num ?= a</programlisting>
 					<mediaobject>
 						<imageobject>
 							<imagedata
-								fileref="KerMeta-Manual_figures/kermeta_literal_expressions.png" />
+								fileref="Kermeta-Manual_figures/kermeta_literal_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -7700,7 +7695,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 					<mediaobject>
 						<imageobject>
 							<imagedata
-								fileref="KerMeta-Manual_figures/kermeta_lambda_expressions.png" />
+								fileref="Kermeta-Manual_figures/kermeta_lambda_expressions.png" />
 						</imageobject>
 					</mediaobject>
 				</figure>
