@@ -148,6 +148,9 @@
 								<copy todir="target/docbkx/html/Kermeta-Manual.docb/Kermeta-Manual_figures">
 									<fileset dir="src/docbkx/Kermeta-Manual_figures" />
 								</copy>
+								<copy todir="target/docbkx/html/Kermeta-Manual.docb/external_figures">
+									<fileset dir="src/docbkx/external_figures" />
+								</copy>
 								<copy todir="target/docbkx/html/Kermeta-Manual.docb">
 									<fileset dir="src/docbkx/resources" />
 								</copy>
@@ -187,6 +190,9 @@
 							<preProcess>
 								<copy todir="target/docbkx/html/Kermeta-Manual.docb/Kermeta-Manual_figures">
 									<fileset dir="src/docbkx/Kermeta-Manual_figures" />
+								</copy>
+								<copy todir="target/docbkx/html/Kermeta-Manual.docb/external_figures">
+									<fileset dir="src/docbkx/external_figures" />
 								</copy>
 								<copy todir="target/docbkx/html/Kermeta-Manual.docb">
 									<fileset dir="src/docbkx/resources" />
