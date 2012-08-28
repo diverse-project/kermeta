@@ -8501,7 +8501,6 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 						<entry>
 							<para>alias</para>
 						</entry>
-
 						<entry>
 							<para>Definition of a primitive type</para>
 						</entry>
@@ -8514,6 +8513,15 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 						<entry>
 							<para>Boolean expression</para>
+						</entry>
+					</row>
+
+					<row>
+						<entry>
+							<para>aspect</para>
+						</entry>
+						<entry>
+							<para>Modifier for class. Indicates that the class reopen another class. See <xref linkend="section_weaving.link" /></para>
 						</entry>
 					</row>
 
@@ -8672,7 +8680,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 						</entry>
 
 						<entry>
-							<para>Initialization of a variable</para>
+							<para>Initialization of a variable. In Kermeta 2, this can be replaced by <literal>:=</literal></para>
 						</entry>
 					</row>
 
@@ -8874,18 +8882,6 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
 					<row>
 						<entry>
-							<para>require</para>
-						</entry>
-
-						<entry align="left">
-							<para>Declaration of a required
-								file
-							</para>
-						</entry>
-					</row>
-
-					<row>
-						<entry>
 							<para>rescue</para>
 						</entry>
 
@@ -8961,7 +8957,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 						</entry>
 						<entry align="left">
 							<para>
-								Defintion of a singleton class. See
+								Definition of a singleton class. See
 								<xref linkend="section_singleton_class.link" />
 							</para>
 						</entry>
