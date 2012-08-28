@@ -1366,13 +1366,13 @@ class ~class {
 			</warning>
 			<informaltable>
 				<tgroup cols="4">
-					<colspec colname="c1" colwidth="1.4cm" />
+					<colspec colname="c1" colwidth="1*" />
 
-					<colspec colname="c2" colwidth="2.5cm" />
+					<colspec colname="c2" colwidth="1*" />
 
-					<colspec colname="c3" colwidth="3cm" />
+					<colspec colname="c3" colwidth="1.5*" />
 
-					<colspec colname="c4" colwidth="8.1cm" />
+					<colspec colname="c4" colwidth="8*" />
 
 					<thead>
 						<row>
@@ -1497,13 +1497,13 @@ class ~class {
 
 			<informaltable>
 				<tgroup cols="4">
-					<colspec colname="c1" colwidth="1.4cm" />
+					<colspec colname="c1" colwidth="1*" />
 
-					<colspec colname="c2" colwidth="2.5cm" />
+					<colspec colname="c2" colwidth="1*" />
 
-					<colspec colname="c3" colwidth="3cm" />
+					<colspec colname="c3" colwidth="1.5*" />
 
-					<colspec colname="c4" colwidth="8.1cm" />
+					<colspec colname="c4" colwidth="8*" />
 
 					<thead>
 						<row>
@@ -1663,13 +1663,13 @@ class ~class {
 
 			<informaltable>
 				<tgroup cols="4">
-					<colspec colname="c1" colwidth="1.4cm" />
+					<colspec colname="c1" colwidth="1*" />
 
-					<colspec colname="c2" colwidth="2.5cm" />
+					<colspec colname="c2" colwidth="1*" />
 
-					<colspec colname="c3" colwidth="3cm" />
+					<colspec colname="c3" colwidth="1.5*" />
 
-					<colspec colname="c4" colwidth="8.1cm" />
+					<colspec colname="c4" colwidth="8*" />
 
 					<thead>
 						<row>
@@ -2353,11 +2353,11 @@ end</programlisting>
 
 				<informaltable>
 					<tgroup cols="3">
-						<colspec colname="c1" colwidth="2.7cm" />
+						<colspec colname="c1" colwidth="1*" />
 
-						<colspec colname="c2" colwidth="7.6cm" />
+						<colspec colname="c2" colwidth="4*" />
 
-						<colspec colname="c3" colwidth="4.7cm" />
+						<colspec colname="c3" colwidth="2*" />
 
 						<thead>
 							<row>
@@ -3253,9 +3253,9 @@ class C {
 						<title>Operation redefinition in Kermeta</title>
 
 						<tgroup cols="2">
-							<colspec colname="c1" colwidth="5.7cm" />
+							<colspec colname="c1" colwidth="1*" />
 
-							<colspec colname="c2" colwidth="11.3cm" />
+							<colspec colname="c2" colwidth="2*" />
 
 							<tbody>
 								<row>
@@ -3501,9 +3501,9 @@ class C {
 						<title>Explicit selection of super operation in Kermeta</title>
 
 						<tgroup cols="2">
-							<colspec colname="c1" colwidth="5.8cm" />
+							<colspec colname="c1" colwidth="1*" />
 
-							<colspec colname="c2" colwidth="11.2cm" />
+							<colspec colname="c2" colwidth="2*" />
 
 							<tbody>
 								<row>
@@ -4332,13 +4332,13 @@ var e : ke::NotImplementedException init ke::NotImplementedException.new</progra
 
 				<informaltable>
 					<tgroup cols="4">
-						<colspec colname="c1" colwidth="2.1cm" />
+						<colspec colname="c1" colwidth="1*" />
 
-						<colspec colname="c2" colwidth="7.9cm" />
+						<colspec colname="c2" colwidth="4*" />
 
-						<colspec colname="c3" colwidth="2.5cm" />
+						<colspec colname="c3" colwidth="1*" />
 
-						<colspec colname="c4" colwidth="2.5cm" />
+						<colspec colname="c4" colwidth="1*" />
 
 						<thead>
 							<row>
@@ -5088,9 +5088,9 @@ aB.frequency := freq + 1 // to use the setter, the period is also updated in the
 
 				<informaltable>
 					<tgroup cols="2">
-						<colspec colname="c1" colwidth="3.8cm" />
+						<colspec colname="c1" colwidth="1*" />
 
-						<colspec colname="c2" colwidth="13.2cm" />
+						<colspec colname="c2" colwidth="4*" />
 
 						<thead>
 							<row>
@@ -5201,9 +5201,9 @@ assert(a6c.equals(a6))</programlisting>
 
 				<informaltable>
 					<tgroup cols="2">
-						<colspec colname="c1" colwidth="3.8cm" />
+						<colspec colname="c1" colwidth="1*" />
 
-						<colspec colname="c2" colwidth="13.2cm" />
+						<colspec colname="c2" colwidth="4*" />
 
 						<thead>
 							<row>
@@ -5475,7 +5475,7 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
 					eclipse, you can (on purpose or not) create
 					several classpathes
 					that
-					aren't shared and created several
+					aren't shared and create several
 					instances of the same singleton.
 				</para>
 			</caution>
@@ -7660,7 +7660,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_structure_PackageView.png" />
+						<imagedata
+							fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_structure_PackageView.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -7839,7 +7840,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_behavior_packageView.png" />
+						<imagedata
+							fileref="external_figures/org.kermeta.language.model_ecore/kermeta_language_behavior_packageView.png" />
 					</imageobject>
 				</mediaobject>
 			</figure>
@@ -8128,13 +8130,19 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 			</note>
 			<para>
 				In Kermeta 2, in order to delegate the resolution work to the tool,
-				it use a specific internal structure based on
+				it use a specific internal
+				structure based on
 				<literal>Unresolved</literal>
-				metaclass. The resolver will transform every <literal>Unresolved</literal> into the final real
+				metaclass. The resolver will transform every
+				<literal>Unresolved</literal>
+				into the final real
 				ModelElement. This allow to
-				build transformations that generate valid km models without the difficulty of dealing with the
-				framework default types and the resolving of km model splitted in several files. 
-				All Kermeta 2 internal transformations like kmt2km, ecore2km, qvt2km use this mechanism.
+				build transformations that generate valid km
+				models without the difficulty of dealing with the
+				framework default types and the resolving of km
+				model splitted in several files.
+				All Kermeta 2 internal transformations like kmt2km, ecore2km,
+				qvt2km use this mechanism.
 			</para>
 			<figure id="refIllustration_kermeta_language_unresolved">
 				<title>Unresolved view</title>
