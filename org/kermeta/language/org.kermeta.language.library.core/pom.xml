@@ -81,6 +81,7 @@
 							org.kermeta,
 							org.kermeta.language.behavior,
 							org.kermeta.language.structure,
+							org.kermeta.utils.helpers.emf,
                             org.kermeta.utils.systemservices.api.messaging,
                             org.kermeta.utils.systemservices.api.impl
 						</Import-Package>
