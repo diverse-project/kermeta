@@ -586,6 +586,23 @@ object PrettyPrinter {
         print(pt.getInstanceType, res)
         res.append("\n")
       }
+      case c: Class =>{
+        res.append(c.getTypeDefinition().getName())
+        if(!c.getTypeParamBinding().isEmpty()){
+          res.append("[")
+          var i : Int = 0;
+          c.getTypeParamBinding().foreach{ tpb =>
+            if (i==0) {
+              print(tpb, res)
+            } else {
+              res.append(", ")
+              print(tpb, res)
+            }
+            i=i+1
+          }
+          res.append("]")
+        }
+      }
       case c: ClassDefinition => {
         c.getKOwnedTags.foreach{tag =>
           res.append("\t")
@@ -1032,7 +1049,17 @@ object PrettyPrinter {
         }
         
       }
+      case otv:ObjectTypeVariable =>{
+        res.append(otv.getName)
+        if (otv.getSupertype() != null){
+          res.append(" : " )
+          print(otv.getSupertype(), res)
+        }
+      }
 
+      case tvb:TypeVariableBinding =>{
+        print(tvb.getVariable(), res)        
+      }
       case t: Tag => {
          res.append("@")
         res.append(t.getName)
