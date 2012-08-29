@@ -1,6 +1,5 @@
 package org.kermeta.language.loader.kmt.scala.internal.printer
 
-
 import org.kermeta.KmPackage
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
@@ -12,15 +11,13 @@ import org.eclipse.emf.ecore.EObject
 import scala.collection.JavaConversions._
 import java.util.regex.Pattern
 
-
 object PrettyPrinter {
 
-	
   def main(args: Array[String]): Unit = {
 
     var res = new StringBuffer
-    print(loadKM("/home/barais/workspaces/compiloV2/org.kermeta.language.loader.kmt.scala/parsed.km"),res)
-    println(res.toString)    
+    print(loadKM("/home/barais/workspaces/compiloV2/org.kermeta.language.loader.kmt.scala/parsed.km"), res)
+    println(res.toString)
   }
 
   def loadKM(fileName: String): ModelingUnit = {
@@ -37,24 +34,21 @@ object PrettyPrinter {
     }
     return mu;
   }
-  
+
+  /**
+   * printer of labels for an outline
+   */
   def printOutline(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case m : ModelingUnit =>{
-        m.getPackages.foreach(p=>printOutline(p,res))
-        m.getOwnedTypeDefinition.foreach(p=>printOutline(p,res))
+      case m: ModelingUnit => {
+        m.getPackages.foreach(p => printOutline(p, res))
+        m.getOwnedTypeDefinition.foreach(p => printOutline(p, res))
       }
       case p: Package => {
-        p.getKOwnedTags.foreach{tag =>
-          printOutline(tag, res)
-        }
-        res.append("package " + p.getName() + " {\n")
-        p.getNestedPackage.foreach(e => printOutline(e, res))
-        p.getOwnedTypeDefinition.foreach(e => printOutline(e, res))
-        res.append("\n}\n")
+        res.append(p.getName())
       }
-      case pt: PrimitiveType =>{
-        pt.getKOwnedTags.foreach{tag =>
+      case pt: PrimitiveType => {
+        pt.getKOwnedTags.foreach { tag =>
           res.append("\t")
           printOutline(tag, res)
         }
@@ -63,29 +57,25 @@ object PrettyPrinter {
         printOutline(pt.getInstanceType, res)
         res.append("\n")
       }
-      case c: Class =>{
+      case c: Class => {
         res.append(c.getTypeDefinition().getName())
-        if(!c.getTypeParamBinding().isEmpty()){
+        if (!c.getTypeParamBinding().isEmpty()) {
           res.append("[")
-          var i : Int = 0;
-          c.getTypeParamBinding().foreach{ tpb =>
-            if (i==0) {
+          var i: Int = 0;
+          c.getTypeParamBinding().foreach { tpb =>
+            if (i == 0) {
               printOutline(tpb, res)
             } else {
               res.append(", ")
               printOutline(tpb, res)
             }
-            i=i+1
+            i = i + 1
           }
           res.append("]")
         }
       }
       case c: ClassDefinition => {
-        c.getKOwnedTags.foreach{tag =>
-          res.append("\t")
-          printOutline(tag, res)
-        }
-        res.append("\t")
+        
         if (c.getIsAbstract)
           res.append("abstract ")
         if (c.getIsAspect)
@@ -94,92 +84,59 @@ object PrettyPrinter {
           res.append("singleton ")
         res.append("class " + c.getName())
         //Generic parameters
-        if (c.getTypeParameter.size()>0) {
+        if (c.getTypeParameter.size() > 0) {
           res.append("<")
-          var i : Int = 0;
-          c.getTypeParameter.foreach{ tp =>
-            if (i==0) {
+          var i: Int = 0;
+          c.getTypeParameter.foreach { tp =>
+            if (i == 0) {
               res.append(tp.getName)
             } else {
               res.append(", " + tp.getName)
             }
             tp.getSupertype match {
-              case urt : UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
+              case urt: UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
               case (_) =>
             }
-            i=i+1
+            i = i + 1
           }
           res.append(">")
         }
 
-        res.append(" {\n")
-        //c.getTypeParameter.foreach{ tp => res.append("," + tp.getName)}
-        c.getOwnedAttribute.foreach { att => printOutline(att, res) }
-        c.getOwnedOperation.foreach { op => printOutline(op, res) }
-        //TODO Generic
-        //TODO Invariant
-        res.append("\n\t}\n")
       }
       case p: Property => {
-        p.getKOwnedTags.foreach{tag =>
-          res.append("\t\t")
-          printOutline(tag, res)
-        }
-        if (p.getIsComposite)
-          res.append("\t\tattribute ")
-        else {
-          if (p.getIsDerived) {
-            res.append("\t\tproperty ")
-          }
-          else
-            res.append("\t\treference ")
-        }
+
         if (p.getIsReadOnly)
           res.append("readonly ")
 
         res.append(p.getName + " : ")
-        printMultiplicityElementTypeType(p,res)
-          
-        //TODO opposite
-        //TODO getter setter for derived
-        res.append("\n")
-
-        if (p.getIsDerived) {
-
-          if (p.getGetterBody != null) {
-            res.append("\t\t\tgetter is ")
-            res.append(printOutline(p.getGetterBody, res))
+        printMultiplicityElementTypeType(p, res)
+        p.getOpposite() match {
+          case oppositeProperty: Property => {
+        	  res.append("#"+oppositeProperty.getName())
           }
-          if (p.getSetterBody != null) {
-            res.append("\t\t\tsetter is ")
-            res.append(printOutline(p.getSetterBody, res))
+          case oppositeProperty: UnresolvedProperty => {
+        	  res.append("#"+oppositeProperty.getPropertyIdentifier())
           }
+          case (_) =>
         }
 
       }
-      case op: Operation => {
-        /*
-        op.getKOwnedTags.foreach{tag =>
-          res.append("\t\t")
-          printOutline(tag, res)
-        }
-        res.append("\t\toperation " + op.getName)
-		*/
+      case op: Operation => {        
         res.append(op.getName)
-        if (op.getTypeParameter.size()>0) {
-          res.append("<")
-          var i=0
-          op.getTypeParameter.foreach( tp => {
-            if (i!=0)
+        if (op.getTypeParameter.size() > 0) {
+          res.append("[")
+          var i = 0
+          op.getTypeParameter.foreach(tp => {
+            if (i != 0)
               res.append(", ")
             res.append(tp.getName)
             tp.getSupertype match {
-              case urt : UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
+              case urt: UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
               case (_) =>
             }
-            i=i+1
+            i = i + 1
           })
-          res.append(">")
+          res.append("]")
         }
 
         res.append("(")
@@ -191,38 +148,17 @@ object PrettyPrinter {
           i = i + 1
         })
         res.append(") : ")
-        printMultiplicityElementTypeType(op,res)
-        //TODO lower upper superoperation
-        op.getPre.foreach(p=>{
-          res.append("\n\t\t\tpre " + p.getName + "is")
-          printOutline(p.getBody,res)
-
-        })
-        op.getPost.foreach(p=>{
-          res.append("\n\t\t\tpost " + p.getName + "is")
-          printOutline(p.getBody,res)
-
-        })
-        /*
-        res.append("\n\t\tis ")
-        if (op.getIsAbstract!= null && op.getIsAbstract)
-          res.append(" abstract ")
-        else {
-          printOutline(op.getBody, res)
-        //TODO pre post
-        }
-        //RaiseException
-        res.append("\n")
-        */
+        printMultiplicityElementTypeType(op, res)
+        
       }
-      
-      case p : Parameter =>{
-        res.append(p.getName + " : " )
-        printMultiplicityElementTypeType(p,res)
+
+      case p: Parameter => {
+        res.append(p.getName + " : ")
+        printMultiplicityElementTypeType(p, res)
       }
-      case p :UnresolvedType=>{
+      case p: UnresolvedType => {
         res.append(p.getTypeIdentifier)
-        if (p.getGenerics.size>0)
+        if (p.getGenerics.size > 0)
           res.append("<")
         var i = 0
         p.getGenerics.foreach(g => {
@@ -231,191 +167,27 @@ object PrettyPrinter {
           printOutline(g, res)
           i = i + 1
         })
-        if (p.getGenerics.size>0)
+        if (p.getGenerics.size > 0)
           res.append(">")
       }
 
       
-      
-      case b: Block => {
-        res.append("\n\t\t\tdo\n")
-        b.getStatement.foreach(s => {
-          res.append("\t\t\t")
-          printOutline(s, res)
-          res.append("\n")
-        })
-
-        if (b.getRescueBlock.size != 0) {
-          b.getRescueBlock.foreach(s => {
-            res.append("rescue ")
-            printOutline(s, res)
-            res.append("\n")
-          })
-        }
-        res.append("\t\t\tend\n")
-        
-      }
-      case v: VariableDecl => {
-        res.append("var " + v.getIdentifier + " : ")
-        printMultiplicityElementTypeType(v.getType,res)
-        if (v.getInitialization != null) {
-          res.append(" init ")
-          printOutline(v.getInitialization, res)
-        }
-      }
-
-      case c: Conditional => {
-        res.append("if (")
-        printOutline(c.getCondition, res)
-        res.append(") then \n")
-        printOutline(c.getThenBody, res)
-        if (c.getElseBody != null) {
-          res.append("\n\t\t\t else\n")
-          printOutline(c.getElseBody, res)
-        }
-        res.append("\n\t\t\t end \n")
-
-      }
-
-      case l: Loop => {
-        if (l.getInitialization != null) {
-          res.append("\t\t\t from ")
-          printOutline(l.getInitialization, res)
-        }
-        res.append(" \n\t\t\tuntil ")
-        printOutline(l.getStopCondition, res)
-        res.append(" \n\t\t\tloop ")
-        printOutline(l.getBody, res)
-        res.append(" \n\t\t\tend\n ")
-
-      }
-
-      case l: LambdaExpression => {
-        res.append("{")
-        var i = 0
-        l.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        res.append("|")
-        printOutline(l.getBody, res)
-        res.append("\t\t\t}")
-      }
-      case p : LambdaParameter =>{
-        res.append(p.getName)
-        if (p.getType!= null){
-	        res.append(" : ")
-	        printOutline(p.getType,res)
-	       }
-	    }
-      case p : TypeReference =>{
-        printOutline(p.getType,res)
-      }
-
-      case i: IntegerLiteral => {
-        res.append(i.getValue)
-      }
-      case i: StringLiteral => {
-        var lit = i.getValue.replaceAll("\\\\","\\\\\\\\")        
-        lit = lit.replaceAll("\n","\\\\n")
-        lit = lit.replaceAll("\t","\\\\t")
-        lit = lit.replaceAll("\r","\\\\r")
-        lit = lit.replaceAll("\f","\\\\f")
-        lit = lit.replaceAll("\"","\\\\\"")
-        lit = lit.replaceAll("\'","\\\\\'")
-        res.append("\"" + lit + "\"")
-      }
-      case i: BooleanLiteral => {
-        res.append(i.getValue)
-      }
-
-
       case i: VoidLiteral => {
         res.append("void")
-      
+
       }
-      case f : FunctionType =>{
-          res.append("<")
-        
-          printOutline(f.getLeft,res)
-          res.append("->")
-          printOutline(f.getRight,res)
-          
-        
-        
+      case f: FunctionType => {
+        res.append("<")
+
+        printOutline(f.getLeft, res)
+        res.append("->")
+        printOutline(f.getRight, res)
+
         res.append(">")
       }
-     
-      case u: UnresolvedCall => {
-        if (u.getTarget != null) {
-          printOutline(u.getTarget, res)
-        res.append("." )}
-        res.append(         u.getName)
 
-        var j = 0
-        if (u.getGenerics.size>0)
-          res.append("[")
-        u.getGenerics.foreach(p => {
-          if (j!=0) res.append(", ")
-          printOutline(p, res)
-          j = j+1
-        })
-        if (u.getGenerics.size>0)
-          res.append("]")
-
-        var i = 0
-        if (u.getParameters.size > 0)
-          res.append("(")
-        u.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (u.getParameters.size > 0) {
-          res.append(")")
-        }
-      }
-      case c:CallSuperOperation =>{
-        res.append("super." + c.getName)
-        var i = 0
-        if (c.getParameters.size > 0)
-          res.append("(")
-        c.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (c.getParameters.size > 0) {
-          res.append(")")
-        }
-      }
-     case c: CallOperation =>{
-        printOutline(c.getTarget,res)
-        res.append("." + c.getName)
-        var i = 0
-        if (c.getParameters.size > 0)
-          res.append("(")
-        c.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (c.getParameters.size > 0) {
-          res.append(")")
-        }
-        
-      }
-     case c: SelfExpression =>{
-    	 res.append("self")
-    	
-      }
-     
-      case c: ProductType =>{
+      
+      case c: ProductType => {
         res.append("[")
         var i = 0
         c.getType.foreach(p => {
@@ -427,148 +199,40 @@ object PrettyPrinter {
         res.append("]")
       }
 
-     case c: Assignment =>{
-    	 printOutline(c.getTarget,res)
-    	 if (c.getIsCast != null && c.getIsCast)
-    		 res.append("?=")
-    	else
-    	 res.append(":=")
-    	 printOutline(c.getValue,res)
-    	 
-    	  
-      }
-
-      case c:CallProperty =>{
-        printOutline(c.getTarget,res)
-        res.append("." + c.getName)
-        var i = 0
-        if (c.getParameters.size > 0)
-          res.append("(")
-        c.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (c.getParameters.size > 0) {
-          res.append(")")
-        }
-      }
-      
-      case c:CallResult =>{
-        res.append("result" )
-      }
-      case c:CallVariable =>{
-        printOutline(c.getStaticType,res)
-        res.append("." + c.getName)
-        var i = 0
-        if (c.getParameters.size > 0)
-          res.append("(")
-        c.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (c.getParameters.size > 0) {
-          res.append(")")
-        }
-      }
-
       case c: EnumerationLiteral => {
         res.append(c.getName + "; ")
       }
 
       case c: Enumeration => {
         res.append("enum " + c.getName + " {")
-        c.getOwnedLiteral.foreach(p=> printOutline(p, res))
-        res.append("}\n")
-      }
-
-      case c: Rescue => {
-        res.append("(" + c.getExceptionName + " : ")
-        printOutline(c.getExceptionType, res)
-        res.append(")\n\tdo\n")
-        c.getBody.foreach{exp => {
-          printOutline(exp, res)
-          res.append("\n")
-        }}
-        res.append("\tend\n")
-      }
-      
-      case c: CallEnumLiteral =>{
-        printOutline(c.getStaticEnumLiteral,res)
-        res.append("." + c.getName)
-        var i = 0
-        if (c.getParameters.size > 0)
-          res.append("(")
-        c.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (c.getParameters.size > 0) {
-          res.append(")")
-        }
-        
-      }
-      case c: CallValue =>{
-        res.append(c.getName)
-        var i = 0
-        
-        if (c.getParameters.size > 0)
-          res.append("(")
-        c.getParameters.foreach(p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i = i + 1
-        })
-        if (c.getParameters.size > 0) {
-          res.append(")")
-        }
-        
+        c.getOwnedLiteral.foreach(p => printOutline(p, res))
+        res.append("}")
       }
 
       case t: Tag => {
-         res.append("@")
+        res.append("@")
         res.append(t.getName)
         res.append(" \"")
         res.append(t.getValue)
-        res.append("\"\n")
+        res.append("\"")
       }
 
-      case j : JavaStaticCall => {
-        res.append("extern ")
-        res.append(j.getJclass)
-        res.append(".")
-        res.append(j.getJmethod)
-        res.append("(")
-        var i=0
-        j.getParameters.foreach( p => {
-          if (i != 0)
-            res.append(", ")
-          printOutline(p, res)
-          i=i+1
-        })
-        res.append(")")
-      }
-      case o:EObject => res.append("todo " + o.getClass )
+      case o: EObject => res.append("todo " + o.getClass)
     }
     return ;
   }
 
-  
-  
+  /**
+   * full pretty printer
+   */
   def print(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case m : ModelingUnit =>{
-        m.getPackages.foreach(p=>print(p,res))
-        m.getOwnedTypeDefinition.foreach(p=>print(p,res))
+      case m: ModelingUnit => {
+        m.getPackages.foreach(p => print(p, res))
+        m.getOwnedTypeDefinition.foreach(p => print(p, res))
       }
       case p: Package => {
-        p.getKOwnedTags.foreach{tag =>
+        p.getKOwnedTags.foreach { tag =>
           print(tag, res)
         }
         res.append("package " + p.getName() + " {\n")
@@ -576,8 +240,8 @@ object PrettyPrinter {
         p.getOwnedTypeDefinition.foreach(e => print(e, res))
         res.append("\n}\n")
       }
-      case pt: PrimitiveType =>{
-        pt.getKOwnedTags.foreach{tag =>
+      case pt: PrimitiveType => {
+        pt.getKOwnedTags.foreach { tag =>
           res.append("\t")
           print(tag, res)
         }
@@ -586,25 +250,25 @@ object PrettyPrinter {
         print(pt.getInstanceType, res)
         res.append("\n")
       }
-      case c: Class =>{
+      case c: Class => {
         res.append(c.getTypeDefinition().getName())
-        if(!c.getTypeParamBinding().isEmpty()){
+        if (!c.getTypeParamBinding().isEmpty()) {
           res.append("[")
-          var i : Int = 0;
-          c.getTypeParamBinding().foreach{ tpb =>
-            if (i==0) {
+          var i: Int = 0;
+          c.getTypeParamBinding().foreach { tpb =>
+            if (i == 0) {
               print(tpb, res)
             } else {
               res.append(", ")
               print(tpb, res)
             }
-            i=i+1
+            i = i + 1
           }
           res.append("]")
         }
       }
       case c: ClassDefinition => {
-        c.getKOwnedTags.foreach{tag =>
+        c.getKOwnedTags.foreach { tag =>
           res.append("\t")
           print(tag, res)
         }
@@ -617,20 +281,20 @@ object PrettyPrinter {
           res.append("singleton ")
         res.append("class " + c.getName())
         //Generic parameters
-        if (c.getTypeParameter.size()>0) {
+        if (c.getTypeParameter.size() > 0) {
           res.append("<")
-          var i : Int = 0;
-          c.getTypeParameter.foreach{ tp =>
-            if (i==0) {
+          var i: Int = 0;
+          c.getTypeParameter.foreach { tp =>
+            if (i == 0) {
               res.append(tp.getName)
             } else {
               res.append(", " + tp.getName)
             }
             tp.getSupertype match {
-              case urt : UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
+              case urt: UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
               case (_) =>
             }
-            i=i+1
+            i = i + 1
           }
           res.append(">")
         }
@@ -644,7 +308,7 @@ object PrettyPrinter {
         res.append("\n\t}\n")
       }
       case p: Property => {
-        p.getKOwnedTags.foreach{tag =>
+        p.getKOwnedTags.foreach { tag =>
           res.append("\t\t")
           print(tag, res)
         }
@@ -653,16 +317,15 @@ object PrettyPrinter {
         else {
           if (p.getIsDerived) {
             res.append("\t\tproperty ")
-          }
-          else
+          } else
             res.append("\t\treference ")
         }
         if (p.getIsReadOnly)
           res.append("readonly ")
 
         res.append(p.getName + " : ")
-        printMultiplicityElementTypeType(p,res)
-          
+        printMultiplicityElementTypeType(p, res)
+
         //TODO opposite
         //TODO getter setter for derived
         res.append("\n")
@@ -681,24 +344,24 @@ object PrettyPrinter {
 
       }
       case op: Operation => {
-        op.getKOwnedTags.foreach{tag =>
+        op.getKOwnedTags.foreach { tag =>
           res.append("\t\t")
           print(tag, res)
         }
         res.append("\t\toperation " + op.getName)
 
-        if (op.getTypeParameter.size()>0) {
+        if (op.getTypeParameter.size() > 0) {
           res.append("<")
-          var i=0
-          op.getTypeParameter.foreach( tp => {
-            if (i!=0)
+          var i = 0
+          op.getTypeParameter.foreach(tp => {
+            if (i != 0)
               res.append(", ")
             res.append(tp.getName)
             tp.getSupertype match {
-              case urt : UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
+              case urt: UnresolvedType => res.append(" : " + urt.getTypeIdentifier)
               case (_) =>
             }
-            i=i+1
+            i = i + 1
           })
           res.append(">")
         }
@@ -712,36 +375,36 @@ object PrettyPrinter {
           i = i + 1
         })
         res.append(") : ")
-        printMultiplicityElementTypeType(op,res)
+        printMultiplicityElementTypeType(op, res)
         //TODO lower upper superoperation
-        op.getPre.foreach(p=>{
+        op.getPre.foreach(p => {
           res.append("\n\t\t\tpre " + p.getName + "is")
-          print(p.getBody,res)
+          print(p.getBody, res)
 
         })
-        op.getPost.foreach(p=>{
+        op.getPost.foreach(p => {
           res.append("\n\t\t\tpost " + p.getName + "is")
-          print(p.getBody,res)
+          print(p.getBody, res)
 
         })
         res.append("\n\t\tis ")
-        if (op.getIsAbstract!= null && op.getIsAbstract)
+        if (op.getIsAbstract != null && op.getIsAbstract)
           res.append(" abstract ")
         else {
           print(op.getBody, res)
-        //TODO pre post
+          //TODO pre post
         }
         //RaiseException
         res.append("\n")
       }
-      
-      case p : Parameter =>{
-        res.append(p.getName + " : " )
-        printMultiplicityElementTypeType(p,res)
+
+      case p: Parameter => {
+        res.append(p.getName + " : ")
+        printMultiplicityElementTypeType(p, res)
       }
-      case p :UnresolvedType=>{
+      case p: UnresolvedType => {
         res.append(p.getTypeIdentifier)
-        if (p.getGenerics.size>0)
+        if (p.getGenerics.size > 0)
           res.append("<")
         var i = 0
         p.getGenerics.foreach(g => {
@@ -750,12 +413,10 @@ object PrettyPrinter {
           print(g, res)
           i = i + 1
         })
-        if (p.getGenerics.size>0)
+        if (p.getGenerics.size > 0)
           res.append(">")
       }
 
-      
-      
       case b: Block => {
         res.append("\n\t\t\tdo\n")
         b.getStatement.foreach(s => {
@@ -772,11 +433,11 @@ object PrettyPrinter {
           })
         }
         res.append("\t\t\tend\n")
-        
+
       }
       case v: VariableDecl => {
         res.append("var " + v.getIdentifier + " : ")
-        printMultiplicityElementTypeType(v.getType,res)
+        printMultiplicityElementTypeType(v.getType, res)
         if (v.getInitialization != null) {
           res.append(" init ")
           print(v.getInitialization, res)
@@ -822,66 +483,64 @@ object PrettyPrinter {
         print(l.getBody, res)
         res.append("\t\t\t}")
       }
-      case p : LambdaParameter =>{
+      case p: LambdaParameter => {
         res.append(p.getName)
-        if (p.getType!= null){
-	        res.append(" : ")
-	        print(p.getType,res)
-	       }
-	    }
-      case p : TypeReference =>{
-        print(p.getType,res)
+        if (p.getType != null) {
+          res.append(" : ")
+          print(p.getType, res)
+        }
+      }
+      case p: TypeReference => {
+        print(p.getType, res)
       }
 
       case i: IntegerLiteral => {
         res.append(i.getValue)
       }
       case i: StringLiteral => {
-        var lit = i.getValue.replaceAll("\\\\","\\\\\\\\")        
-        lit = lit.replaceAll("\n","\\\\n")
-        lit = lit.replaceAll("\t","\\\\t")
-        lit = lit.replaceAll("\r","\\\\r")
-        lit = lit.replaceAll("\f","\\\\f")
-        lit = lit.replaceAll("\"","\\\\\"")
-        lit = lit.replaceAll("\'","\\\\\'")
+        var lit = i.getValue.replaceAll("\\\\", "\\\\\\\\")
+        lit = lit.replaceAll("\n", "\\\\n")
+        lit = lit.replaceAll("\t", "\\\\t")
+        lit = lit.replaceAll("\r", "\\\\r")
+        lit = lit.replaceAll("\f", "\\\\f")
+        lit = lit.replaceAll("\"", "\\\\\"")
+        lit = lit.replaceAll("\'", "\\\\\'")
         res.append("\"" + lit + "\"")
       }
       case i: BooleanLiteral => {
         res.append(i.getValue)
       }
 
-
       case i: VoidLiteral => {
         res.append("void")
-      
+
       }
-      case f : FunctionType =>{
-          res.append("<")
-        
-          print(f.getLeft,res)
-          res.append("->")
-          print(f.getRight,res)
-          
-        
-        
+      case f: FunctionType => {
+        res.append("<")
+
+        print(f.getLeft, res)
+        res.append("->")
+        print(f.getRight, res)
+
         res.append(">")
       }
-     
+
       case u: UnresolvedCall => {
         if (u.getTarget != null) {
           print(u.getTarget, res)
-        res.append("." )}
-        res.append(         u.getName)
+          res.append(".")
+        }
+        res.append(u.getName)
 
         var j = 0
-        if (u.getGenerics.size>0)
+        if (u.getGenerics.size > 0)
           res.append("[")
         u.getGenerics.foreach(p => {
-          if (j!=0) res.append(", ")
+          if (j != 0) res.append(", ")
           print(p, res)
-          j = j+1
+          j = j + 1
         })
-        if (u.getGenerics.size>0)
+        if (u.getGenerics.size > 0)
           res.append("]")
 
         var i = 0
@@ -897,7 +556,7 @@ object PrettyPrinter {
           res.append(")")
         }
       }
-      case c:CallSuperOperation =>{
+      case c: CallSuperOperation => {
         res.append("super." + c.getName)
         var i = 0
         if (c.getParameters.size > 0)
@@ -912,8 +571,8 @@ object PrettyPrinter {
           res.append(")")
         }
       }
-     case c: CallOperation =>{
-        print(c.getTarget,res)
+      case c: CallOperation => {
+        print(c.getTarget, res)
         res.append("." + c.getName)
         var i = 0
         if (c.getParameters.size > 0)
@@ -927,14 +586,14 @@ object PrettyPrinter {
         if (c.getParameters.size > 0) {
           res.append(")")
         }
-        
+
       }
-     case c: SelfExpression =>{
-    	 res.append("self")
-    	
+      case c: SelfExpression => {
+        res.append("self")
+
       }
-     
-      case c: ProductType =>{
+
+      case c: ProductType => {
         res.append("[")
         var i = 0
         c.getType.foreach(p => {
@@ -946,19 +605,18 @@ object PrettyPrinter {
         res.append("]")
       }
 
-     case c: Assignment =>{
-    	 print(c.getTarget,res)
-    	 if (c.getIsCast != null && c.getIsCast)
-    		 res.append("?=")
-    	else
-    	 res.append(":=")
-    	 print(c.getValue,res)
-    	 
-    	  
+      case c: Assignment => {
+        print(c.getTarget, res)
+        if (c.getIsCast != null && c.getIsCast)
+          res.append("?=")
+        else
+          res.append(":=")
+        print(c.getValue, res)
+
       }
 
-      case c:CallProperty =>{
-        print(c.getTarget,res)
+      case c: CallProperty => {
+        print(c.getTarget, res)
         res.append("." + c.getName)
         var i = 0
         if (c.getParameters.size > 0)
@@ -973,12 +631,12 @@ object PrettyPrinter {
           res.append(")")
         }
       }
-      
-      case c:CallResult =>{
-        res.append("result" )
+
+      case c: CallResult => {
+        res.append("result")
       }
-      case c:CallVariable =>{
-        print(c.getStaticType,res)
+      case c: CallVariable => {
+        print(c.getStaticType, res)
         res.append("." + c.getName)
         var i = 0
         if (c.getParameters.size > 0)
@@ -1000,7 +658,7 @@ object PrettyPrinter {
 
       case c: Enumeration => {
         res.append("enum " + c.getName + " {")
-        c.getOwnedLiteral.foreach(p=> print(p, res))
+        c.getOwnedLiteral.foreach(p => print(p, res))
         res.append("}\n")
       }
 
@@ -1008,15 +666,17 @@ object PrettyPrinter {
         res.append("(" + c.getExceptionName + " : ")
         print(c.getExceptionType, res)
         res.append(")\n\tdo\n")
-        c.getBody.foreach{exp => {
-          print(exp, res)
-          res.append("\n")
-        }}
+        c.getBody.foreach { exp =>
+          {
+            print(exp, res)
+            res.append("\n")
+          }
+        }
         res.append("\tend\n")
       }
-      
-      case c: CallEnumLiteral =>{
-        print(c.getStaticEnumLiteral,res)
+
+      case c: CallEnumLiteral => {
+        print(c.getStaticEnumLiteral, res)
         res.append("." + c.getName)
         var i = 0
         if (c.getParameters.size > 0)
@@ -1030,12 +690,12 @@ object PrettyPrinter {
         if (c.getParameters.size > 0) {
           res.append(")")
         }
-        
+
       }
-      case c: CallValue =>{
+      case c: CallValue => {
         res.append(c.getName)
         var i = 0
-        
+
         if (c.getParameters.size > 0)
           res.append("(")
         c.getParameters.foreach(p => {
@@ -1047,43 +707,43 @@ object PrettyPrinter {
         if (c.getParameters.size > 0) {
           res.append(")")
         }
-        
+
       }
-      case otv:ObjectTypeVariable =>{
+      case otv: ObjectTypeVariable => {
         res.append(otv.getName)
-        if (otv.getSupertype() != null){
-          res.append(" : " )
+        if (otv.getSupertype() != null) {
+          res.append(" : ")
           print(otv.getSupertype(), res)
         }
       }
 
-      case tvb:TypeVariableBinding =>{
-        print(tvb.getVariable(), res)        
+      case tvb: TypeVariableBinding => {
+        print(tvb.getVariable(), res)
       }
       case t: Tag => {
-         res.append("@")
+        res.append("@")
         res.append(t.getName)
         res.append(" \"")
         res.append(t.getValue)
         res.append("\"\n")
       }
 
-      case j : JavaStaticCall => {
+      case j: JavaStaticCall => {
         res.append("extern ")
         res.append(j.getJclass)
         res.append(".")
         res.append(j.getJmethod)
         res.append("(")
-        var i=0
-        j.getParameters.foreach( p => {
+        var i = 0
+        j.getParameters.foreach(p => {
           if (i != 0)
             res.append(", ")
           print(p, res)
-          i=i+1
+          i = i + 1
         })
         res.append(")")
       }
-      case o:EObject => res.append("todo " + o.getClass )
+      case o: EObject => res.append("todo " + o.getClass)
     }
     return ;
   }
@@ -1092,24 +752,25 @@ object PrettyPrinter {
    * operation dedicated to print the type part of a MultiplicityElement
    */
   def printMultiplicityElementTypeType(me: MultiplicityElement, res: java.lang.StringBuffer): Unit = {
-    val modifier =  CollectionModifier(me.getIsOrdered, me.getIsUnique)
-    if (me.getUpper != 1) { modifier match {
-        case  CollectionModifier(false, false) => res.append("bag ")
-        case  CollectionModifier(false, true)  => res.append("seq ")
-        case  CollectionModifier(true, false)  => res.append("set ")
-        case  CollectionModifier(true, true)   =>
+    val modifier = CollectionModifier(me.getIsOrdered, me.getIsUnique)
+    if (me.getUpper != 1) {
+      modifier match {
+        case CollectionModifier(false, false) => res.append("bag ")
+        case CollectionModifier(false, true) => res.append("seq ")
+        case CollectionModifier(true, false) => res.append("set ")
+        case CollectionModifier(true, true) =>
       }
     }
     print(me.getType, res)
-    if ((me.getUpper != 1) || me.getLower != 0){
+    if ((me.getUpper != 1) || me.getLower != 0) {
       res.append("[")
       res.append(me.getLower)
       res.append("..")
-      res.append((""+me.getUpper).replace("-1","*"))
+      res.append(("" + me.getUpper).replace("-1", "*"))
       res.append("]")
     }
   }
-  case class CollectionModifier(isOrdered : Boolean, isUnique : Boolean)
+  case class CollectionModifier(isOrdered: Boolean, isUnique: Boolean)
 }
  
 
