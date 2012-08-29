@@ -195,10 +195,23 @@
 				<para></para>
 			</note>
 			<para>
+				You'll find the most significant in the following sections :
 				<itemizedlist>
 					<listitem>
 						<para>
 							<xref linkend="section_using.link" />
+							,
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<xref linkend="section_singleton_class.link" />
+							,
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<xref linkend="section_weaving.link" />
 							,
 						</para>
 					</listitem>
@@ -1951,7 +1964,7 @@ end</programlisting>
 			</section>
 		</section>
 
-		<section>
+		<section id="section_files.link">
 			<title>
 				File dependency : structuring code
 				<phrase id="section_files"></phrase>
@@ -6553,9 +6566,12 @@ and op.name.indexOf("All")==-1}
 				<title>Example 1: Simple Class merge</title>
 
 				<para>In this sample, writing:</para>
-
-				<programlisting language="kermeta">// aspect1.kmt
-package pack;
+				<simplesect>
+					<title>
+						file
+						<filename>aspect1.kmt</filename>
+					</title>
+					<programlisting language="kermeta">package pack;
 // this is the first aspect of class A
 aspect class A {
 	attribute decorations : Decoration[0..*]
@@ -6564,11 +6580,12 @@ aspect class A {
 class Decoration{
 	attribute val : kermeta::standard::String
 }</programlisting>
-
-
-
-				<programlisting language="kermeta">// base.kmt
-package pack;
+				</simplesect>
+				<simplesect>
+					<title>
+						<filename>base.kmt</filename>
+					</title>
+					<programlisting language="kermeta">package pack;
 // this is the base class
 class A {
 	attribute name : kermeta::standard::String
@@ -6578,11 +6595,12 @@ class A {
 		result := name
 	end
 }</programlisting>
-
-
-
-				<programlisting language="kermeta">// aspect2.kmt
-package pack;
+				</simplesect>
+				<simplesect>
+					<title>
+						<filename>aspect2.kmt</filename>
+					</title>
+					<programlisting language="kermeta">package pack;
 
 // is this context we have access to all the features of class A : from base, aspect1 and aspect2
 aspect class A {
@@ -6593,8 +6611,12 @@ aspect class A {
 		decorations.each{ decoration | result := result + "&lt;" + decoration.val+ "&gt;" }
 	end
 }</programlisting>
-
-				<programlisting language="kp">KermetaProject "aspect_sample"
+				</simplesect>
+				<simplesect>
+					<title>
+						<filename>aspect_sample.kp</filename>
+					</title>
+					<programlisting language="kp">KermetaProject "aspect_sample"
 	groupId = "my.group"
 	defaultMainClass = "sample::AspectExample"
 	defaultMainOperation = "main"
@@ -6608,6 +6630,7 @@ aspect class A {
 		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core",
 		                           "mvn:org.kermeta.language/language.library.core/LATEST"
 	}</programlisting>
+				</simplesect>
 
 				<note>
 					<title>
@@ -6638,13 +6661,12 @@ aspect class A {
 					</para>
 				</tip>
 
-				<para>from the point of view of the project the 3 kmt files are
-					equivalent to write :
+				<para>from the point of view of the project, the 3 kmt files are
+					equivalent to write a single kmt file containing :
 				</para>
 
-
-
-				<programlisting language="kermeta">class A {
+				<programlisting language="kermeta">package pack;
+class A {
 	attribute name : kermeta::standard::String
 	attribute decorations : Decoration[0..*]	
 	attribute id : kermeta::standard::Integer
@@ -8521,7 +8543,10 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 							<para>aspect</para>
 						</entry>
 						<entry>
-							<para>Modifier for class. Indicates that the class reopen another class. See <xref linkend="section_weaving.link" /></para>
+							<para>
+								Modifier for class. Indicates that the class reopen another class. See
+								<xref linkend="section_weaving.link" />
+							</para>
 						</entry>
 					</row>
 
@@ -8680,7 +8705,10 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 						</entry>
 
 						<entry>
-							<para>Initialization of a variable. In Kermeta 2, this can be replaced by <literal>:=</literal></para>
+							<para>
+								Initialization of a variable. In Kermeta 2, this can be replaced by
+								<literal>:=</literal>
+							</para>
 						</entry>
 					</row>
 
