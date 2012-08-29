@@ -763,8 +763,7 @@ object PrettyPrinter {
     }
     me.getType match {
       case en : Enumeration => {
-        en.getName()
-        print(en.getName(), res)
+        res.append(en.getName())
       }
       case _ =>{
         print(me.getType, res)
