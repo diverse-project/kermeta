@@ -19,6 +19,8 @@ import org.kermeta.language.loader.kmt.scala.KMPrinter;
 import org.kermeta.language.structure.Class;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Constraint;
+import org.kermeta.language.structure.Enumeration;
+import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.ModelingUnit;
@@ -55,7 +57,7 @@ public class KermetaOutlineHelper {
 		}
 		return base;
 	}
-	public OutlineItem[] getClassChildren(Package p,OutlineItem parent){
+	public OutlineItem[] getTypeDefinitionsChildrenForPackage(Package p,OutlineItem parent){
 		KMPrinter opPrinter = new KMPrinter();
 		for(int i=0; i < p.getOwnedTypeDefinition().size(); i++){
 			if ( p.getOwnedTypeDefinition().get(i).getName().compareTo(parent.getLabel()) == 0 &&
@@ -105,6 +107,24 @@ public class KermetaOutlineHelper {
 				}
 				return objs;
 			}
+			else if ( p.getOwnedTypeDefinition().get(i).getName().compareTo(parent.getLabel()) == 0 &&
+					(p.getOwnedTypeDefinition().get(i) instanceof org.kermeta.language.structure.Enumeration)	){
+				org.kermeta.language.structure.Enumeration en = (org.kermeta.language.structure.Enumeration)p.getOwnedTypeDefinition().get(i);
+				int size = getEnumerationChildrenCount(en);
+				OutlineItem[] objs = new OutlineItem[size];
+				int cnt = 0;
+				for(EnumerationLiteral lit : en.getOwnedLiteral()){
+					String label = opPrinter.convertToText(lit);
+					OutlineItem it = new OutlineItem(label,parent, this);
+					
+					it.type = OutlineTypes.EnumLiteral;
+					it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), en));
+
+					objs[cnt] = it;
+					cnt++;
+				}
+				return objs;
+			}
 		}
 		return null;
 		
@@ -144,9 +164,11 @@ public class KermetaOutlineHelper {
 			OutlineItem it = new OutlineItem(p.getOwnedTypeDefinition().get(i).getName(),parent, this);
 			if (p.getOwnedTypeDefinition().get(i) instanceof ClassDefinition){
 				it.type = OutlineTypes.Class;
-				it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), p.getOwnedTypeDefinition().get(i)));
 			}
-			
+			else if(p.getOwnedTypeDefinition().get(i) instanceof org.kermeta.language.structure.Enumeration){
+				it.type = OutlineTypes.Enumeration;
+			}
+			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), p.getOwnedTypeDefinition().get(i)));
 			objs[cnt] = it;
 			cnt++;
 		}
@@ -195,7 +217,10 @@ public class KermetaOutlineHelper {
 		return getPackageChildren(findPackage(it.fullName()),it);
 	}
 	public OutlineItem[] updateClass(OutlineItem it){
-		return getClassChildren(findPackage(it.getNamespace()),it);
+		return getTypeDefinitionsChildrenForPackage(findPackage(it.getNamespace()),it);
+	}
+	public OutlineItem[] updateEnumeration(OutlineItem it){
+		return getTypeDefinitionsChildrenForPackage(findPackage(it.getNamespace()),it);
 	}
 	
 	
@@ -215,6 +240,10 @@ public class KermetaOutlineHelper {
 		if (base.type == OutlineTypes.Class){
 			base.setChildren(updateClass(base));
 		}
+
+		if (base.type == OutlineTypes.Enumeration){
+			base.setChildren(updateEnumeration(base));
+		}
 		for(Object child : base.getChildren()){
 			updateAllChildren( (OutlineItem) child);
 		}
@@ -226,12 +255,16 @@ public class KermetaOutlineHelper {
 		return getPackageChildrenCount(p);
 		//return outlineItem.getChildren().length;
 	}
-	public int getClassChildrenCount(OutlineItem outlineItem) {		
+	public int getTypeDefinitionChildrenCount(OutlineItem outlineItem) {		
 		Package p = findPackage(outlineItem.fullName());
 		for(TypeDefinition td : p.getOwnedTypeDefinition()){
 			if ( td.getName().compareTo(outlineItem.fullName()) == 0 && (td instanceof ClassDefinition)	){
 				ClassDefinition cn = (ClassDefinition) td;
 				return getClassChildrenCount(cn);
+			}
+			if ( td.getName().compareTo(outlineItem.fullName()) == 0 && (td instanceof Enumeration)	){
+				Enumeration cn = (Enumeration) td;
+				return getEnumerationChildrenCount(cn);
 			}
 		}
 		return 0; 
@@ -239,6 +272,9 @@ public class KermetaOutlineHelper {
 	}
 	public int getClassChildrenCount(ClassDefinition cn) {
 		return cn.getOwnedAttribute().size() + cn.getOwnedOperation().size() + cn.getInv().size();
+	}
+	public int getEnumerationChildrenCount(Enumeration en) {
+		return en.getOwnedLiteral().size();
 	}
 	public int getPackageChildrenCount(Package p) {
 		return p.getOwnedTypeDefinition().size() + p.getNestedPackage().size();

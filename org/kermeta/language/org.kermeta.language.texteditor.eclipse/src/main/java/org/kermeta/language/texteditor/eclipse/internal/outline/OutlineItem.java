@@ -226,7 +226,8 @@ public class OutlineItem {
 			case Package:
 				return helper.getPackageChildrenCount(this);
 			case Class:
-				return helper.getClassChildrenCount(this);
+			case Enumeration:
+				return helper.getTypeDefinitionChildrenCount(this);
 			}			
 		}
 		return 0;
@@ -240,7 +241,11 @@ public class OutlineItem {
 			case Class:
 				children = helper.updateClass(this);
 				break;
+			case Enumeration:
+				children = helper.updateEnumeration(this);
+				break;
 			}
+			
 		}
 		return children;
 	}
