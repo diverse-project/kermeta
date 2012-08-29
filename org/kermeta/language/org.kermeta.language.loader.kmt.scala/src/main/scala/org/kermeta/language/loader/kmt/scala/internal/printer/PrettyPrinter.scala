@@ -200,7 +200,7 @@ object PrettyPrinter {
       }
 
       case c: EnumerationLiteral => {
-        res.append(c.getName + "; ")
+        res.append(c.getName )
       }
 
       case c: Enumeration => {
