@@ -761,7 +761,16 @@ object PrettyPrinter {
         case CollectionModifier(true, true) =>
       }
     }
-    print(me.getType, res)
+    me.getType match {
+      case en : Enumeration => {
+        en.getName()
+        print(en.getName(), res)
+      }
+      case _ =>{
+        print(me.getType, res)
+      }
+    }
+    
     if ((me.getUpper != 1) || me.getLower != 0) {
       res.append("[")
       res.append(me.getLower)
