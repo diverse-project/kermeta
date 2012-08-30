@@ -40,7 +40,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"\t}\n"+
 				"\tdependencies = {\n"+
 				"\t\t//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)\n"+
-				"\t\tdependency \"library.core\" =\"platform:/plugin/org.kermeta.language.library.core\",\"mvn:org.kermeta.language/language.library.core/2.0.5-SNAPSHOT\"\n"+
+				"\t\tdependency \"library.core\" =\"platform:/plugin/org.kermeta.language.library.core\",\"mvn:org.kermeta.language/language.library.core/2.0.6\"\n"+
 				"\t}"+
 				"\tpackageEquivalences={\n"+ 
 				"\t\t// indicates the real java name of a given package\n"+
