@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.kermeta.kp</groupId>
     <artifactId>kp.editor.multimodule</artifactId>
-    <version>2.0.5-SNAPSHOT</version>
+    <version>2.0.6</version>
   </parent>
 
   <build>
