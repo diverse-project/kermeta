@@ -55,16 +55,11 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
     res.append("(")
     var i = 0;
     thi.getOwnedParameter.foreach(par => {
-      if (i==0) {
-        res.append(Util.protectScalaKeyword(par.getName()))
-        res.append(" : ")
-        this.getListorType(par, res)//par.getType.generateScalaCode(res)
-      }else{
+      if (i!=0)
         res.append(", ")
-        res.append(Util.protectScalaKeyword(par.getName()))
-        res.append(" : ")
-        this.getListorType(par, res)//					par.getType.generateScalaCode(res)
-      }
+      res.append(Util.protectScalaKeyword(par.getName()))
+      res.append(" : ")
+      this.getListorType(par, res)//par.getType.generateScalaCode(res)
       i=i + 1
     })
     res.append(")")
