@@ -149,7 +149,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     //        res.append(thi.getName+"")
     res.append(thi.getName + "")
     res.append(" : ")
-    if (Util.isAMapEntry(thi.getType())){
+    if (Util.isAMapEntry(thi.getType()) || thi.getGetterBody != null){ // MapEntry and derived properties doesn't use ReflectiveCollection
     	getListorType(thi, res)
     } else if (thi.getUpper() > 1 || thi.getUpper() == -1) {
       res.append("k2.standard.Reflective")
@@ -478,9 +478,11 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       }
       //visit(thi.getOpposite.asInstanceOf[Property].getType(),ownerType)
     } else {
-      // Otherwise just put type variables for type parameters
-      res.append(getQualifiedNameCompilo(thi.getOwningClass))
-      generateParamerterClass(thi.getOwningClass(),res)
+      
+      // Otherwise just put type variables for type parameters      
+    	res.append(Util.protectScalaKeyword(getQualifiedNamedAspect(thi.getOwningClass)))
+      //res.append(getQualifiedNameCompilo(thi.getOwningClass))
+    	generateParamerterClass(thi.getOwningClass(),res)
     }
   }
 }
