@@ -124,7 +124,7 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 			String fileName = ifile.getFullPath().makeAbsolute().toOSString();
 			String projectName = ifile.getProject().getName();
 
-			List<ILaunchConfiguration> launchConfigurations = findLaunchConfigurations(projectName, fileName);
+			List<ILaunchConfiguration> launchConfigurations = findLaunchConfigurations(projectName, fileName.replace("\\", "/"));
 			
 			
 
