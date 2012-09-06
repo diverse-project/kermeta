@@ -34,11 +34,10 @@ public class CreateMSFAction extends KomprenAction {
 			action.convertKomprentFile(file);
 			file = ResourcesPlugin.getWorkspace().getRoot().getFile(file.getFullPath().removeFileExtension().addFileExtension("kompren"));
 		}
-
+try {
 		final Resource resource = new ResourceSetImpl().getResource(URI.createFileURI(file.getLocation().toString()), true);
 		final Slicer slicer = (Slicer)resource.getContents().get(0);
 		final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(slicer.getName());
-
 		try {
 			if(!project.exists()) {
 				project.create(null);
@@ -56,6 +55,8 @@ public class CreateMSFAction extends KomprenAction {
 			compiler.compile("platform:/resource"+file.getFullPath());
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		}catch(CoreException ex) { ex.printStackTrace(); }
+}catch(Exception e){System.out.println("err1:"); e.printStackTrace();}
+
 	}
 
 
