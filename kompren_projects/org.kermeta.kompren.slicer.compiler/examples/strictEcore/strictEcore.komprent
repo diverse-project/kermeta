@@ -1,5 +1,5 @@
 slicer strict StrictEcore{
-	domain: "http://www.eclipse.org/emf/2002/Ecore"
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore"
 	input: ecore.EClass
 	slicedClass: ecore.ENamedElement
 	slicedProperty: ecore.EClass.eSuperTypes
