@@ -76,7 +76,12 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 
 	@Override
 public synchronized void runFromKP(final String kpIdentifier, final ArrayList<String> params) {
-		
+		StringBuilder sb = new StringBuilder();
+		if(params != null){
+			for(String s : params)
+				sb.append(s+" ");				
+		}
+		Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevDEBUG, "will launch kermeta program for "+kpIdentifier+ " and with parameters : "+sb.toString(), LOG_MESSAGE_GROUP);
 		Job job = new Job("Running "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
