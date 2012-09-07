@@ -222,11 +222,11 @@
 	</build>
 	<repositories>
 		<!-- configure p2 repository to resolve against -->
-		<repository>
+		<!-- <repository>
 			<id>${eclipse.repository.version}</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/${eclipse.repository.version}/</url>
-		</repository>
+		</repository>-->
 	</repositories>
 	<distributionManagement>
 		<repository>
