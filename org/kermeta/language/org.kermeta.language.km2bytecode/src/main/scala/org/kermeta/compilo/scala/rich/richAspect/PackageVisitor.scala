@@ -670,7 +670,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       res.append("package " + k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi.eContainer())) + "\n")
       res.append("import k2.io._\n")
       res.append("import k2.standard._\n")
-      res.append("import k2.standard.JavaConversions._\n")
+      res.append("import k2.standard.JavaCollectionConversions._\n")
       res append "object " + thi.getName() + " extends Enumeration {\n"
       res append "type " + thi.getName() + " = Value\n"
       res append "val "

@@ -74,7 +74,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       res.append("package "+Util.protectScalaKeyword(genpackageName.toString)+"\n")
       res.append("import _root_.k2.io._\n")
       res.append("import _root_.k2.standard._\n")
-      res.append("import _root_.k2.standard.JavaConversions._\n")
+      res.append("import _root_.k2.standard.JavaCollectionConversions._\n")
       res.append("import _root_.k2.standard.PrimitiveConversion._\n")
 //      res.append("import _root_.kermeta.kunit.KunitConversions._\n")
       visitor.visit(par,res)
