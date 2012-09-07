@@ -16,7 +16,7 @@
 	<properties>
 		<kermeta.version>2.0.7-SNAPSHOT</kermeta.version>
 		<utils.version>2.0.7-SNAPSHOT</utils.version>
-		<traceability.version>2.0.7-SNAPSHOT</traceability.version>
+		<traceability.version>2.0.6</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<emf.version>2.7.0</emf.version>
 		<scala.version>2.9.0-1</scala.version>
