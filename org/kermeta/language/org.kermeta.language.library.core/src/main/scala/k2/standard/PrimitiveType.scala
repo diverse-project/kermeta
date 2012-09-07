@@ -77,7 +77,7 @@ object PrimitiveConversion{
 
 
     implicit def IteratorEObject2IteratorKObject(x:  java.util.Iterator[org.eclipse.emf.ecore.EObject]) :java.util.Iterator[_root_.k2.standard.KermetaObject] = {
-        import k2.standard.JavaConversions._
+        import k2.standard.JavaCollectionConversions._
         var res = new _root_.java.util.Iterator[_root_.k2.standard.KermetaObject]{
           def hasNext() : Boolean = x.hasNext
           def next() : _root_.k2.standard.KermetaObject = x.next.asInstanceOf[_root_.k2.standard.KermetaObject]
@@ -89,13 +89,13 @@ object PrimitiveConversion{
 
     
     implicit def ListInteger2ListInt(x:  org.eclipse.emf.common.util.EList[java.lang.Integer]) :java.util.List[Int] = {
-        import k2.standard.JavaConversions._
+        import k2.standard.JavaCollectionConversions._
         var l=new java.util.ArrayList[Int]() ;
         x.foreach(e=> l.add(e.intValue) );
         return l;
     }
     implicit def ListInt2ListInteger(x: java.util.List[Int] ) :org.eclipse.emf.common.util.EList[java.lang.Integer] = {
-        import k2.standard.JavaConversions._
+        import k2.standard.JavaCollectionConversions._
         var l=new java.util.ArrayList[Integer]()
         x.foreach(e=> l.add(new Integer(e)))
         //return l;
@@ -104,13 +104,13 @@ object PrimitiveConversion{
     }
 
     implicit def ListBoolean2ListBool(x:  org.eclipse.emf.common.util.EList[java.lang.Boolean]) :java.util.List[Boolean] = {
-        import k2.standard.JavaConversions._
+        import k2.standard.JavaCollectionConversions._
         var l=new java.util.ArrayList[Boolean]() ;
         x.foreach(e=> l.add(e.booleanValue) );
         return l;
     }
     implicit def ListBool2ListBoolean(x: java.util.List[Boolean] ) :org.eclipse.emf.common.util.EList[java.lang.Boolean] = {
-        import k2.standard.JavaConversions._
+        import k2.standard.JavaCollectionConversions._
         var l=new java.util.ArrayList[java.lang.Boolean]()
         x.foreach(e=> l.add(new java.lang.Boolean(e)))
         //return l;

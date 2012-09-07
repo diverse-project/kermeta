@@ -8,7 +8,7 @@ import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore._
-import k2.standard.JavaConversions._
+import k2.standard.JavaCollectionConversions._
 import k2.standard.PrimitiveConversion._
  
 trait Exception extends ExceptionAspect with k2.standard.KermetaObject with k2.standard.EObjectImplForPrimitive
