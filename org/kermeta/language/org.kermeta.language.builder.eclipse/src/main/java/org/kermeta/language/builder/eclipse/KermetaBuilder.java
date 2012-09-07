@@ -71,7 +71,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 		if (element == null) {
 			return "";
 		}
-		return element.getFullPath().toOSString();		
+		return element.getFullPath().toOSString().replaceAll("\\\\", "/");		
 	}
 
 	@Override
