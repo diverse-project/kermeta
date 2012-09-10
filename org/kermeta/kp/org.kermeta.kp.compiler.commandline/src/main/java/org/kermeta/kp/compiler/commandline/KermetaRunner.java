@@ -74,7 +74,7 @@ public class KermetaRunner {
 	        				"scala.tools.nsc.MainGenericRunner", 
 	        				"-savecompiled",
 	        				"-classpath",f.toString() + outputBinFolder,
-	        				scalaAspectPrefix + "runner.MainRunner"));
+	        				scalaAspectPrefix + "runner.DefaultRunner"));
 	        processBuilderParams.addAll(params);
 	        ProcessBuilder builder = new ProcessBuilder(processBuilderParams);
 	        this.logger.debug("starting new process with command " +builder.command().toString(), KermetaCompiler.LOG_MESSAGE_GROUP);
