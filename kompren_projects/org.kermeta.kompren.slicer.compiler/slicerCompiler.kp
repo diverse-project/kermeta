@@ -21,7 +21,7 @@ KermetaProject "org.kermeta.kompren.slicer.compiler"
 		dependency "ecore.model" =	"platform:/plugin/org.eclipse.emf.ecore",
 								   	"mvn:org.kermeta.emf/emf.lib.patched/2.7.0" sourceOnly
 		dependency "slicing.model" = "platform:/plugin/org.kermeta.kompren.slicer.model",
-								     "mvn:org.kermeta.kompren/kompren.slicer.model/2.0.8" byteCodeOnly 
+								     "mvn:org.kermeta.kompren/kompren.slicer.model/2.0.9-SNAPSHOT" byteCodeOnly 
 	} 
 	packageEquivalences={
 		// indicates the real java name of a given package
