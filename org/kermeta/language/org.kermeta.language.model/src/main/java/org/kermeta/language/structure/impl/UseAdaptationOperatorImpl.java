@@ -44,7 +44,7 @@ import org.kermeta.language.structure.UseAdaptationOperator;
  *
  * @generated
  */
-public class UseAdaptationOperatorImpl extends EObjectImpl implements UseAdaptationOperator {
+public class UseAdaptationOperatorImpl extends KermetaModelElementImpl implements UseAdaptationOperator {
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
 	 * <!-- begin-user-doc -->

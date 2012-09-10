@@ -597,6 +597,7 @@ public class StructureSwitch<T> {
 			case StructurePackage.ENUMERATION_BINDING: {
 				EnumerationBinding enumerationBinding = (EnumerationBinding)theEObject;
 				T result = caseEnumerationBinding(enumerationBinding);
+				if (result == null) result = caseKermetaModelElement(enumerationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -604,6 +605,7 @@ public class StructureSwitch<T> {
 				SimpleEnumerationBinding simpleEnumerationBinding = (SimpleEnumerationBinding)theEObject;
 				T result = caseSimpleEnumerationBinding(simpleEnumerationBinding);
 				if (result == null) result = caseEnumerationBinding(simpleEnumerationBinding);
+				if (result == null) result = caseKermetaModelElement(simpleEnumerationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -611,18 +613,21 @@ public class StructureSwitch<T> {
 				ComplexEnumerationBinding complexEnumerationBinding = (ComplexEnumerationBinding)theEObject;
 				T result = caseComplexEnumerationBinding(complexEnumerationBinding);
 				if (result == null) result = caseEnumerationBinding(complexEnumerationBinding);
+				if (result == null) result = caseKermetaModelElement(complexEnumerationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.PROPERTY_BINDING: {
 				PropertyBinding propertyBinding = (PropertyBinding)theEObject;
 				T result = casePropertyBinding(propertyBinding);
+				if (result == null) result = caseKermetaModelElement(propertyBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.OPERATION_BINDING: {
 				OperationBinding operationBinding = (OperationBinding)theEObject;
 				T result = caseOperationBinding(operationBinding);
+				if (result == null) result = caseKermetaModelElement(operationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -630,6 +635,7 @@ public class StructureSwitch<T> {
 				SimplePropertyBinding simplePropertyBinding = (SimplePropertyBinding)theEObject;
 				T result = caseSimplePropertyBinding(simplePropertyBinding);
 				if (result == null) result = casePropertyBinding(simplePropertyBinding);
+				if (result == null) result = caseKermetaModelElement(simplePropertyBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -637,6 +643,7 @@ public class StructureSwitch<T> {
 				ComplexPropertyBinding complexPropertyBinding = (ComplexPropertyBinding)theEObject;
 				T result = caseComplexPropertyBinding(complexPropertyBinding);
 				if (result == null) result = casePropertyBinding(complexPropertyBinding);
+				if (result == null) result = caseKermetaModelElement(complexPropertyBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -644,6 +651,7 @@ public class StructureSwitch<T> {
 				SimpleOperationBinding simpleOperationBinding = (SimpleOperationBinding)theEObject;
 				T result = caseSimpleOperationBinding(simpleOperationBinding);
 				if (result == null) result = caseOperationBinding(simpleOperationBinding);
+				if (result == null) result = caseKermetaModelElement(simpleOperationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -651,12 +659,14 @@ public class StructureSwitch<T> {
 				ComplexOperationBinding complexOperationBinding = (ComplexOperationBinding)theEObject;
 				T result = caseComplexOperationBinding(complexOperationBinding);
 				if (result == null) result = caseOperationBinding(complexOperationBinding);
+				if (result == null) result = caseKermetaModelElement(complexOperationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.PARAMETER_BINDING: {
 				ParameterBinding parameterBinding = (ParameterBinding)theEObject;
 				T result = caseParameterBinding(parameterBinding);
+				if (result == null) result = caseKermetaModelElement(parameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -664,6 +674,7 @@ public class StructureSwitch<T> {
 				SimpleParameterBinding simpleParameterBinding = (SimpleParameterBinding)theEObject;
 				T result = caseSimpleParameterBinding(simpleParameterBinding);
 				if (result == null) result = caseParameterBinding(simpleParameterBinding);
+				if (result == null) result = caseKermetaModelElement(simpleParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -671,12 +682,14 @@ public class StructureSwitch<T> {
 				ComplexParameterBinding complexParameterBinding = (ComplexParameterBinding)theEObject;
 				T result = caseComplexParameterBinding(complexParameterBinding);
 				if (result == null) result = caseParameterBinding(complexParameterBinding);
+				if (result == null) result = caseKermetaModelElement(complexParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StructurePackage.ENUM_LITERALBINDING: {
 				EnumLiteralbinding enumLiteralbinding = (EnumLiteralbinding)theEObject;
 				T result = caseEnumLiteralbinding(enumLiteralbinding);
+				if (result == null) result = caseKermetaModelElement(enumLiteralbinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -691,6 +704,7 @@ public class StructureSwitch<T> {
 			case StructurePackage.USE_ADAPTATION_OPERATOR: {
 				UseAdaptationOperator useAdaptationOperator = (UseAdaptationOperator)theEObject;
 				T result = caseUseAdaptationOperator(useAdaptationOperator);
+				if (result == null) result = caseKermetaModelElement(useAdaptationOperator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

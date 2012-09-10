@@ -22,7 +22,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public abstract class PropertyBindingImpl extends EObjectImpl implements PropertyBinding {
+public abstract class PropertyBindingImpl extends KermetaModelElementImpl implements PropertyBinding {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -22,7 +22,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public abstract class OperationBindingImpl extends EObjectImpl implements OperationBinding {
+public abstract class OperationBindingImpl extends KermetaModelElementImpl implements OperationBinding {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -34,7 +34,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class EnumLiteralbindingImpl extends EObjectImpl implements EnumLiteralbinding {
+public class EnumLiteralbindingImpl extends KermetaModelElementImpl implements EnumLiteralbinding {
 	/**
 	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->

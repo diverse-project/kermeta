@@ -4186,13 +4186,40 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_BINDING = 49;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS = 0;
+	int ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration Binding</em>' class.
@@ -4201,7 +4228,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_BINDING_FEATURE_COUNT = 1;
+	int ENUMERATION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleEnumerationBindingImpl <em>Simple Enumeration Binding</em>}' class.
@@ -4212,6 +4239,33 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	int SIMPLE_ENUMERATION_BINDING = 50;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_ENUMERATION_BINDING__KTAG = ENUMERATION_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_ENUMERATION_BINDING__KOWNED_TAGS = ENUMERATION_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_ENUMERATION_BINDING__KTYPE = ENUMERATION_BINDING__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
@@ -4260,6 +4314,33 @@ public interface StructurePackage extends EPackage {
 	int COMPLEX_ENUMERATION_BINDING = 51;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_ENUMERATION_BINDING__KTAG = ENUMERATION_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_ENUMERATION_BINDING__KOWNED_TAGS = ENUMERATION_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_ENUMERATION_BINDING__KTYPE = ENUMERATION_BINDING__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4306,13 +4387,40 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY_BINDING = 52;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The number of structural features of the '<em>Property Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_BINDING_FEATURE_COUNT = 0;
+	int PROPERTY_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.OperationBindingImpl <em>Operation Binding</em>}' class.
@@ -4325,13 +4433,40 @@ public interface StructurePackage extends EPackage {
 	int OPERATION_BINDING = 53;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The number of structural features of the '<em>Operation Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_BINDING_FEATURE_COUNT = 0;
+	int OPERATION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimplePropertyBindingImpl <em>Simple Property Binding</em>}' class.
@@ -4342,6 +4477,33 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	int SIMPLE_PROPERTY_BINDING = 54;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PROPERTY_BINDING__KTAG = PROPERTY_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PROPERTY_BINDING__KOWNED_TAGS = PROPERTY_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PROPERTY_BINDING__KTYPE = PROPERTY_BINDING__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -4381,6 +4543,33 @@ public interface StructurePackage extends EPackage {
 	int COMPLEX_PROPERTY_BINDING = 55;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_PROPERTY_BINDING__KTAG = PROPERTY_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_PROPERTY_BINDING__KOWNED_TAGS = PROPERTY_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_PROPERTY_BINDING__KTYPE = PROPERTY_BINDING__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4416,6 +4605,33 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	int SIMPLE_OPERATION_BINDING = 56;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_OPERATION_BINDING__KTAG = OPERATION_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_OPERATION_BINDING__KOWNED_TAGS = OPERATION_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_OPERATION_BINDING__KTYPE = OPERATION_BINDING__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -4464,6 +4680,33 @@ public interface StructurePackage extends EPackage {
 	int COMPLEX_OPERATION_BINDING = 57;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_OPERATION_BINDING__KTAG = OPERATION_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_OPERATION_BINDING__KOWNED_TAGS = OPERATION_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_OPERATION_BINDING__KTYPE = OPERATION_BINDING__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4510,13 +4753,40 @@ public interface StructurePackage extends EPackage {
 	int PARAMETER_BINDING = 58;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The number of structural features of the '<em>Parameter Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_BINDING_FEATURE_COUNT = 0;
+	int PARAMETER_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleParameterBindingImpl <em>Simple Parameter Binding</em>}' class.
@@ -4527,6 +4797,33 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	int SIMPLE_PARAMETER_BINDING = 59;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING__KTAG = PARAMETER_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING__KOWNED_TAGS = PARAMETER_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING__KTYPE = PARAMETER_BINDING__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -4566,6 +4863,33 @@ public interface StructurePackage extends EPackage {
 	int COMPLEX_PARAMETER_BINDING = 60;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_PARAMETER_BINDING__KTAG = PARAMETER_BINDING__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_PARAMETER_BINDING__KOWNED_TAGS = PARAMETER_BINDING__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_PARAMETER_BINDING__KTYPE = PARAMETER_BINDING__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4603,13 +4927,40 @@ public interface StructurePackage extends EPackage {
 	int ENUM_LITERALBINDING = 61;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERALBINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERALBINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERALBINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERALBINDING__SOURCES = 0;
+	int ENUM_LITERALBINDING__SOURCES = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Targets</b></em>' reference list.
@@ -4618,7 +4969,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERALBINDING__TARGETS = 1;
+	int ENUM_LITERALBINDING__TARGETS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Enum Literalbinding</em>' class.
@@ -4627,7 +4978,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERALBINDING_FEATURE_COUNT = 2;
+	int ENUM_LITERALBINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.AdaptationOperatorImpl <em>Adaptation Operator</em>}' class.
@@ -4704,13 +5055,40 @@ public interface StructurePackage extends EPackage {
 	int USE_ADAPTATION_OPERATOR = 63;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USE_ADAPTATION_OPERATOR__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USE_ADAPTATION_OPERATOR__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USE_ADAPTATION_OPERATOR__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USE_ADAPTATION_OPERATOR__PARAMETERS = 0;
+	int USE_ADAPTATION_OPERATOR__PARAMETERS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Unresolved</b></em>' containment reference list.
@@ -4719,7 +5097,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED = 1;
+	int USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Used Operator</b></em>' reference.
@@ -4728,7 +5106,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USE_ADAPTATION_OPERATOR__USED_OPERATOR = 2;
+	int USE_ADAPTATION_OPERATOR__USED_OPERATOR = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Use Adaptation Operator</em>' class.
@@ -4737,7 +5115,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USE_ADAPTATION_OPERATOR_FEATURE_COUNT = 3;
+	int USE_ADAPTATION_OPERATOR_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PropertyAdaptationOperatorImpl <em>Property Adaptation Operator</em>}' class.

@@ -18,5 +18,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface PropertyBinding extends EObject {
+public interface PropertyBinding extends KermetaModelElement {
 } // PropertyBinding

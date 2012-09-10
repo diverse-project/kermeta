@@ -4,7 +4,7 @@
 package org;
 
 require kermeta
-require "file://C:\Users\dvojtise\workspaces\kermetaV2_svn_5\org.kermeta.language.model\src\main\ecore\kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 using kermeta::language::structure
 
@@ -795,7 +795,8 @@ aspect class ComplexClassDefinitionBinding {
 }
 
 aspect class EnumerationBinding {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
 		self.ownedEnumLiteralBindings.each{ e |
 			func(e)
 		}
@@ -815,12 +816,14 @@ aspect class ComplexEnumerationBinding {
 }
 
 aspect class PropertyBinding {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
 	end
 }
 
 aspect class OperationBinding {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
 	end
 }
 
@@ -855,7 +858,8 @@ aspect class ComplexOperationBinding {
 }
 
 aspect class ParameterBinding {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
 	end
 }
 
@@ -872,7 +876,8 @@ aspect class ComplexParameterBinding {
 }
 
 aspect class EnumLiteralbinding {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
 	end
 }
 
@@ -883,7 +888,8 @@ aspect class AdaptationOperator {
 }
 
 aspect class UseAdaptationOperator {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
 		self.ownedUnresolved.each{ e |
 			func(e)
 		}

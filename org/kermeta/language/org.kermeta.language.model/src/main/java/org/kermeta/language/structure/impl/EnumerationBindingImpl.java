@@ -37,7 +37,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public abstract class EnumerationBindingImpl extends EObjectImpl implements EnumerationBinding {
+public abstract class EnumerationBindingImpl extends KermetaModelElementImpl implements EnumerationBinding {
 	/**
 	 * The cached value of the '{@link #getOwnedEnumLiteralBindings() <em>Owned Enum Literal Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

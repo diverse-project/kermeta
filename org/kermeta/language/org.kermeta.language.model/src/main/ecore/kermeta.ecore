@@ -1243,7 +1243,8 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
               upperBound="-1" eType="#//kermeta/language/structure/ClassDefinition"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="EnumerationBinding" abstract="true">
+        <eClassifiers xsi:type="ecore:EClass" name="EnumerationBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEnumLiteralBindings"
               upperBound="-1" eType="#//kermeta/language/structure/EnumLiteralbinding"
               containment="true"/>
@@ -1260,8 +1261,10 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
               upperBound="-1" eType="#//kermeta/language/structure/Enumeration"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="PropertyBinding" abstract="true"/>
-        <eClassifiers xsi:type="ecore:EClass" name="OperationBinding" abstract="true"/>
+        <eClassifiers xsi:type="ecore:EClass" name="PropertyBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/KermetaModelElement"/>
+        <eClassifiers xsi:type="ecore:EClass" name="OperationBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/KermetaModelElement"/>
         <eClassifiers xsi:type="ecore:EClass" name="SimplePropertyBinding" eSuperTypes="#//kermeta/language/structure/PropertyBinding">
           <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
               eType="#//kermeta/language/structure/Property"/>
@@ -1292,7 +1295,8 @@
               upperBound="-1" eType="#//kermeta/language/structure/ParameterBinding"
               containment="true"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="ParameterBinding" abstract="true"/>
+        <eClassifiers xsi:type="ecore:EClass" name="ParameterBinding" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/KermetaModelElement"/>
         <eClassifiers xsi:type="ecore:EClass" name="SimpleParameterBinding" eSuperTypes="#//kermeta/language/structure/ParameterBinding">
           <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
               eType="#//kermeta/language/structure/Parameter"/>
@@ -1305,7 +1309,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
               upperBound="-1" eType="#//kermeta/language/structure/Parameter"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralbinding">
+        <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralbinding" eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="sources" lowerBound="1"
               upperBound="-1" eType="#//kermeta/language/structure/EnumerationLiteral"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
@@ -1315,7 +1319,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
               eType="#//kermeta/language/structure/AdaptationParameter"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UseAdaptationOperator">
+        <eClassifiers xsi:type="ecore:EClass" name="UseAdaptationOperator" eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
               eType="#//kermeta/language/structure/KermetaModelElement">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

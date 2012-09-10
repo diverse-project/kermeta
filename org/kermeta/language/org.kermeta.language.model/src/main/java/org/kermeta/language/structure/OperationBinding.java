@@ -18,5 +18,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface OperationBinding extends EObject {
+public interface OperationBinding extends KermetaModelElement {
 } // OperationBinding

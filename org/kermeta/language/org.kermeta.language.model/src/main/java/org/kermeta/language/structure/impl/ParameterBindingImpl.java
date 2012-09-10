@@ -22,7 +22,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public abstract class ParameterBindingImpl extends EObjectImpl implements ParameterBinding {
+public abstract class ParameterBindingImpl extends KermetaModelElementImpl implements ParameterBinding {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

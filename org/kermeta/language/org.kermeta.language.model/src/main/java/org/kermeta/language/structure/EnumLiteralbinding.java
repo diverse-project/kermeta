@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface EnumLiteralbinding extends EObject {
+public interface EnumLiteralbinding extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.EnumerationLiteral}.

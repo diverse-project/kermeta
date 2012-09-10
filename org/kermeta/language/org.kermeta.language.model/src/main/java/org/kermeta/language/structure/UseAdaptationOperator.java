@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface UseAdaptationOperator extends EObject {
+public interface UseAdaptationOperator extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.KermetaModelElement}.

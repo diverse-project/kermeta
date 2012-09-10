@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.language.behavior.*;
 import org.kermeta.language.behavior.Assignment;
 import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.Block;
