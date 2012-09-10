@@ -53,29 +53,29 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     if (packName.equals("org.eclipse.emf.ecore")) {
       //res.append("\n{\n\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
       //res.append("\tc.setAccessible(true);\n")
-      res.append("\n{\n\tvar pack : org.eclipse.emf.ecore.EcorePackage =  org.eclipse.emf.ecore.impl.EcorePackageImpl.init\n")
-      res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
+      res.append("\n    {\n      var pack : org.eclipse.emf.ecore.EcorePackage =  org.eclipse.emf.ecore.impl.EcorePackageImpl.init\n")
+      res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
 
       //            res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
-      res.append("\tpack.setEFactoryInstance(" + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n ")
-      res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
-      res.append("\tf.setAccessible(true)\n")
+      res.append("      pack.setEFactoryInstance(" + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n ")
+      res.append("      var f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
+      res.append("      f.setAccessible(true)\n")
       if (packName.equals("org.eclipse.emf.ecore")) {
-        res.append("\tf.set(pack, " + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n")
+        res.append("      f.set(pack, " + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n")
       }
-      res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
-      res.append("\tk2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
-      res.append("\t" + impName + ".init\n}\n")
+      res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
+      res.append("      k2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
+      res.append("      " + impName + ".init\n}\n")
       return res.toString
     } else {
-      res.append("\n{\n\t")
-      res.append("var pack : " + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package") + " = " + Util.protectScalaKeyword(impName + ".init") + "\n")
-      res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
-      res.append("\tk2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
-      res.append("\tpack.setEFactoryInstance(")
+      res.append("\n    {\n")
+      res.append("      var pack : " + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package") + " = " + Util.protectScalaKeyword(impName + ".init") + "\n")
+      res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
+      res.append("      k2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
+      res.append("      pack.setEFactoryInstance(")
       res.append(Util.protectScalaKeyword(GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ""))
       res.append(")")
-      res.append("\n}\n\n")
+      res.append("\n    }\n\n")
       return res.toString
     }
 
@@ -143,35 +143,19 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 */
     factoryDefClass = new StringBuilder
   }
-  var packages: java.util.List[Package] = _
+  var ecorePackages: java.util.List[Package] = _
 
   def addPackage(packs: java.util.List[Package]): Unit = {
     packs.foreach({ e =>
       if (Util.hasEcoreTag(e))
-        packages.add(e);
+        ecorePackages.add(e);
       addPackage(e.getNestedPackage())
     })
   }
 
   def visit(par: ModelingUnit) {
-    packages = new java.util.ArrayList[Package]()
+    ecorePackages = new java.util.ArrayList[Package]()
     addPackage(par.getPackages());
-
-    var mainClass: String = GlobalConfiguration.baseClass() //par.getKTag().filter{e=> "mainClass".equals(e.getName)}.first.getValue
-    var mainOperation: String = GlobalConfiguration.baseOperation() // par.getKTag().filter{e=> "mainOperation".equals(e.getName)}.first.getValue
-    var packageName: String = mainClass.substring(0, mainClass.lastIndexOf("::")).replace("::", ".")
-    var className: String = mainClass.substring(mainClass.lastIndexOf("::") + 2).replace("::", ".")
-    var mainClassDef: org.eclipse.emf.ecore.EObject = null
-    var mainOperationSize = 0
-    try {
-      mainClassDef = par.eAllContents.filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => e.asInstanceOf[ClassDefinition].getName.equals(className)).toList.first
-      mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter { e => e.getName.equals(mainOperation) }.first.asInstanceOf[Operation].getOwnedParameter.size
-    } catch {
-      case e: java.util.NoSuchElementException => {
-        mainClassDef = null
-        mainOperation = null
-      }
-    }
 
     //TODO gérer le cas des package venant d'ecore
     var res: StringBuilder = new StringBuilder
@@ -180,15 +164,16 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     res.append("import java.io.PrintStream\n")
     res.append("import " + GlobalConfiguration.frameworkGeneratedPackageName + "." + GlobalConfiguration.implicitConvTraitName + "._\n")
 
-    res.append("object MainRunner  {\n")
+    // generates the common part for all runners
+    res.append("class DefaultRunner  {\n")
     //res.append("def main(args : Array[String]) : Unit = {\n\t" )
-    res.append("def init() : Unit = {\n\t")
+    res.append("  def init() : Unit = {\n    ")
     if (GlobalConfiguration.isTest) {
       res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
     }
-    res.append("k2.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
-    res.append("k2.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI + "\";\n")
-    java.util.Collections.sort(packages, new java.util.Comparator[Package] {
+    res.append("    k2.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
+    res.append("    k2.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI + "\";\n")
+    java.util.Collections.sort(ecorePackages, new java.util.Comparator[Package] {
       def compare(o1: Package, o2: Package): Int = {
         if ("ecore".equals(o1.getName))
           return -1;
@@ -200,7 +185,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
       };
       override def equals(obj: Any): Boolean = false;
     });
-    packages.foreach(e => //if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
+    ecorePackages.foreach(e => //if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
       if (!(e.getOwnedTypeDefinition.size() == 0 ||
         e.getOwnedTypeDefinition.filter(t => t.isInstanceOf[ClassDefinition]).filter(t => Util.hasEcoreTag(t)).size == 0 ||
         e.getOwnedTypeDefinition.filter(t => t.isInstanceOf[ClassDefinition]).forall(t => Util.hasCompilerIgnoreTag(t)))) {
@@ -220,44 +205,25 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
         }
       })
 
-    res.append("\n\t k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
-    res.append("\n\t k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+    res.append("\n      k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+    res.append("\n      k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
 
-    res.append("}\n")
-    res.append("def init4eclipse() : Unit = {\n\t")
+    res.append("  }\n")
+    res.append("  def init4eclipse() : Unit = {\n\t")
     res.append(resinitEclipse.toString)
-    res.append("\n\t k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
-    res.append("\n\t k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+    res.append("\n    k2.utils.ReflexivityLoader.pref(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+    res.append("\n    k2.utils.UTilScala.setScalaAspectPrefix(\"" + GlobalConfiguration.scalaAspectPrefix + "\")\n")
+    res.append("  }\n")
+
     res.append("}\n")
 
-    res.append("def main(args : Array[String]) : Unit = {\n")
-    //if (packages.exists(pac=> "ecore".equals(pac.getName))){
-    //     res.append("\t org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.asInstanceOf[org.eclipse.emf.ecore.EcoreFactoryWrapper].setWrap("+org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix+".org.eclipse.emf.ecore."+GlobalConfiguration.factoryName+") \n \t" )
-    //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
-    //}
-    res.append("\t init() \n")
-    res.append("\t\torg.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
-    if (mainClassDef != null && mainOperation != null) {
-      res.append("\t" + "_root_.")
-      if (packages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
-        res.append(GlobalConfiguration.scalaAspectPrefix + ".")
-
-      }
-      res.append(k2.utils.TypeEquivalence.getPackageEquivalence(packageName))
-
-      res.append("." + GlobalConfiguration.factoryName + ".create" + className + "." + mainOperation)
-
-      res.append("(")
-      for (i <- 0 until mainOperationSize) {
-        if (i != 0) { res.append(" , ") }
-        res.append("args(" + i + ")")
-      }
-      res.append(")")
-    }
-    res.append("\n}\n}")
-
-    Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "MainRunner", res.toString())
-    this.genetateUtilObject
+    val mrg = new MainRunnerGenerator(ecorePackages, visitor)
+    // generates the default runner file
+    mrg.generateDefaultRunner(par, res)
+    Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "DefaultRunner", res.toString())
+    
+    // generate the Util.scala file
+    UtilObjectGenerator.genetateUtilObject
 
     par.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
 
@@ -316,6 +282,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
       list.add(s)
 
     if (!Util.hasCompilerIgnoreTag(par)) {
+      // start by creating the main operation files
+      val mrg = new MainRunnerGenerator(ecorePackages, visitor)
+      mrg.generateRunnersForClassDefinition(par)
+      
+      // then contributes the implicit conversions to the various String Builders (implicitDef, viewDef and factoryDefClass)      
       var genpackageName: StringBuilder = new StringBuilder
       var packageName: StringBuilder = new StringBuilder
       var viewDefTemp: StringBuilder = new StringBuilder
@@ -491,25 +462,6 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
   def close {
     implicitDef append "}\n"
     Util.generateFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
-  }
-
-  def genetateUtilObject() = {
-    var template = new StringBuilder
-    template.append("package scalaUtil\n object Util {\n")
-    template.append("    def getMetaClass(t:String):org.kermeta.language.structure.Class={\n")
-    template.append("       var cd : _root_.org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(t);\n")
-    template.append("       if (cd !=null){\n")
-    template.append("            var cl = " + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure. " + GlobalConfiguration.factoryName + ".createClass\n")
-    template.append("            cl.setTypeDefinition(cd)\n")
-    template.append("            return cl\n")
-    template.append("       } else\n")
-    template.append("            return null;\n")
-    template.append("    }\n")
-    template.append("    def clone(t:org.kermeta.language.structure.Class, o:Any):Any={return null;}\n")
-    template.append("}\n")
-
-    Util.generateFile("scalaUtil", "Util", template.toString)
-
   }
 
 }
