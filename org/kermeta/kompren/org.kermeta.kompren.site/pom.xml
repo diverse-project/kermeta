@@ -7,9 +7,9 @@
 	<name>Kompren site builder</name>
 
     <properties>
-		<kompren.version>2.0.7-SNAPSHOT</kompren.version>
-		<utils.version>2.0.2</utils.version>
-		<traceability.version>2.0.2</traceability.version>
+		<kompren.version>2.0.8</kompren.version>
+		<utils.version>2.0.6</utils.version>
+		<traceability.version>2.0.6</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<emf.version>2.7.0</emf.version>
 		<scala.version>[2.9.0,2.10.0)</scala.version>
@@ -19,7 +19,6 @@
 		<osgi.version>4.2.0</osgi.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<bundle.vendor>IRISA/INRIA</bundle.vendor>
-    	<tycho.version>0.11.0</tycho.version>
     	<eclipse.repository.version>indigo</eclipse.repository.version>
 	</properties>
 	<build>
