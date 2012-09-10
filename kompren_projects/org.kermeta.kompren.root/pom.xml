@@ -22,6 +22,7 @@
 		<scala.version>2.9.1</scala.version>
 		<osgi.version>4.2.0</osgi.version>
 		<bundle.vendor>IRISA/INRIA</bundle.vendor>
+    	<eclipse.repository.version>indigo</eclipse.repository.version>
 	</properties>
 
 	<build>
