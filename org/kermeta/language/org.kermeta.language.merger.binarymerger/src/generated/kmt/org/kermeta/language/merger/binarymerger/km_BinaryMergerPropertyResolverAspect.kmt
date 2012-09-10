@@ -660,13 +660,9 @@ package kermeta {
 			}
 
 			aspect class EnumerationBinding inherits Mergeable  {
-				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
 					
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -685,24 +681,16 @@ package kermeta {
 			}
 
 			aspect class PropertyBinding inherits Mergeable  {
-				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
 					
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class OperationBinding inherits Mergeable  {
-				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+			aspect class OperationBinding inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -734,14 +722,10 @@ package kermeta {
 				end
 			}
 
-			aspect class ParameterBinding inherits Mergeable  {
-				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+			aspect class ParameterBinding inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -759,14 +743,10 @@ package kermeta {
 				end
 			}
 
-			aspect class EnumLiteralbinding inherits Mergeable  {
-				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+			aspect class EnumLiteralbinding inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -777,14 +757,10 @@ package kermeta {
 				end
 			}
 
-			aspect class UseAdaptationOperator inherits Mergeable  {
-				operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+			aspect class UseAdaptationOperator inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
-					result := primaryValue
-					// select non void value
-					if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-						result := aspectValue
-					end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
