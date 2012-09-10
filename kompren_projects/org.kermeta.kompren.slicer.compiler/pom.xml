@@ -104,14 +104,10 @@
                         <Require-Bundle>
                         		org.scala-ide.scala.library,
  								org.kermeta.language.model,
- 								org.kermeta.kompren.slicer.model
+ 								org.kermeta.kompren.slicer.model,
+ 								org.kermeta.language.library.core
                         </Require-Bundle>
                         <Import-Package>
-                        		k2.exceptions,
-                        		k2.persistence,
-                        		k2.standard,
-                        		k2.utils,
-                        		k2.io,
                         		org.kermeta.utils.helpers.emf,
                         		org.eclipse.emf.common.notify,
  								org.eclipse.emf.common.util,
