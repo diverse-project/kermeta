@@ -75,7 +75,11 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 	}
 
 	@Override
-public synchronized void runFromKP(final String kpIdentifier, final ArrayList<String> params) {
+	public synchronized void runFromKP(final String kpIdentifier, final ArrayList<String> params) {
+		runFromKP(kpIdentifier, "", "", params);
+	}
+	@Override
+	public synchronized void runFromKP(final String kpIdentifier, final String mainClass, final String mainOperation,final ArrayList<String> params) {
 		StringBuilder sb = new StringBuilder();
 		if(params != null){
 			for(String s : params)
@@ -103,8 +107,8 @@ public synchronized void runFromKP(final String kpIdentifier, final ArrayList<St
 					buildJob.setPriority(Job.LONG);
 					buildJob.schedule();
 					buildJob.join();
-					if(buildJob.getResult() == Status.OK_STATUS){					
-						kpBuilders.get(kpIdentifier).runKP(params, monitor);
+					if(buildJob.getResult() == Status.OK_STATUS){
+						kpBuilders.get(kpIdentifier).runKP(mainClass, mainOperation, params, monitor);						
 					}
 					else{
 						Activator.getDefault().getMessaggingSystem4Runner(kpIdentifier).logProblem(MessagingSystem.Kind.UserERROR, "Cannot run. The project has build error\n ", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));

@@ -441,7 +441,7 @@ public class KPBuilder {
 		}
 		else return true;
 	}
-	synchronized public void runKP( ArrayList<String> params, IProgressMonitor monitor){
+	synchronized public void runKP(final String mainClass, final String mainOperation, ArrayList<String> params, IProgressMonitor monitor){
 		KpLoaderImpl ldr = new KpLoaderImpl(compiler.logger);
 		
 		// Load KP file
@@ -460,7 +460,12 @@ public class KPBuilder {
 					getFullClassPath(),
 					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()), 
 					monitor);
-			runner.runK2Program(params,outputRootFolder+File.separator+"urimap.properties");
+			if((!mainClass.isEmpty()) && (!mainOperation.isEmpty())){
+				runner.runK2Program(mainClass, mainOperation, params,outputRootFolder+File.separator+"urimap.properties");
+			}
+			else{
+				runner.runK2Program(params,outputRootFolder+File.separator+"urimap.properties");
+			}
 			kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null); // refresh local project in case a file is created there
 			
 		} catch (IOException e) {
@@ -476,7 +481,7 @@ public class KPBuilder {
 	}
 	
 	/**
-	 * Implemnt the Runner that can be stopped using the monitor button
+	 * Implement the Runner that can be stopped using the monitor button
 	 *
 	 */
 	public class ProgressCancellableKermetaRunner extends KermetaRunner{
