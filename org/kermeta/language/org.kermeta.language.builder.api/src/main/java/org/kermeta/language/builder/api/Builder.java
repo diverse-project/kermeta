@@ -14,6 +14,7 @@ public abstract class Builder {
 	
 	public abstract void parseSpecificFile(IResource toParse, String content);
 	public abstract void runFromKP(String kpIdentifier,ArrayList<String> params);
+	public abstract void runFromKP(String kpIdentifier, String mainClass, String mainOperation, ArrayList<String> params);
 	public abstract void buildFromKP(String kpIdentifier);
 	public abstract void compileFromKP(String kpIdentifier);
 	public abstract void compileFromKP(String kpIdentifier, boolean checkEnabled);
