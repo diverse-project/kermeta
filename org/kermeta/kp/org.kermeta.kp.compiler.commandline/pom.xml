@@ -342,11 +342,16 @@
 			<version>[3.6.0.0,)</version>
 			<scope>test</scope>
 		</dependency>		
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.eclipse.core</groupId>
 			<artifactId>runtime</artifactId>
 			<version>[3.6.0.0,)</version>
 			<scope>test</scope>
+		</dependency> -->
+		<dependency>
+			<groupId>org.kermeta.eclipse</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>[3.6.0.0,)</version>
 		</dependency>
 		
         <dependency>
