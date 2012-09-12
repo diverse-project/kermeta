@@ -228,7 +228,7 @@
 		<!-- be careful to the order this has impacts on the classpath !!! -->
 		
 		<dependency>
-			<groupId>org.eclipse.core</groupId>
+			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.runtime</artifactId>
 			<version>3.7.0</version>
 			<exclusions>
