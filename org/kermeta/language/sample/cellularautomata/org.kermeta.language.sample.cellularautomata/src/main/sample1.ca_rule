@@ -1,0 +1,52 @@
+// Prédateurs/Proies
+
+Rule = if self > 0 { // proies
+		if neighbors.min < 0{
+			self - 1	// prédateurs à proximité
+		}
+		else {
+			self + 1 // grossi
+		}
+	}
+	else {	
+		if self < 0 { // prédateur
+			if neighbors.min > 0 {	// nourriture disponible => grossi
+				self + 1
+			}
+			else { // pas de nourriture => déperri
+				self - 1
+			}
+		}
+		else { // case vide
+			if neighbors.min < 0 and neighbors.max < 0 {
+				// proies à proximité + zone sans prédateurs
+				self + 1
+			}
+		}
+	}
+// prédateur / proie V2
+	
+	
+// Jeu de la vie V1 (taille figée à 4)
+
+Rule = if neighbors.sum > 1 and neighbors.sum < 4 {
+		if self = 0 and neighbors.sum = 3{
+			1 // rennaissance
+		}
+	}
+	else {
+		// surpopulation ou isolement
+		0 
+	}
+	
+// Jeu de la vie V1 (taille variable)
+
+Rule = if neighbors.sum > 1 and neighbors.sum < neighbors.size {
+		if self = 0 and neighbors.sum = 3{
+			1 // rennaissance
+		}
+	}
+	else {
+		// surpopulation ou isolement
+		0 
+	}

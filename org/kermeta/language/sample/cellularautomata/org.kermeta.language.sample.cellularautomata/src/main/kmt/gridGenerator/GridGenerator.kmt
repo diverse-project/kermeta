@@ -1,0 +1,103 @@
+using kermeta::standard
+using kermeta::emfpersistence
+using ca_vm
+using kermeta::io::StdIO => stdio
+
+package cellular_automata::vm{
+	class GridGenerator
+	{
+		@main ""
+		operation generateGrid() : Void is do 
+			var g : Grid := generateMooreSquareBoundedGrid(3)
+			saveGrid(g)
+		end
+		
+		
+		operation generateVonNeumannSquareBoundedGrid(gridSize : Integer) : ca_vm::Grid is do 
+			stdio.writeln("Generating a square Grid...")
+			var g : Grid := Grid.new
+			
+			var cellNumber : Integer := gridSize * gridSize
+			stdio.writeln("Generating "+cellNumber.toString+" Cells...")
+			cellNumber.times{ i | 
+				g.cells.add(Cell.new)
+			}
+			stdio.writeln("Generating bounded VonNeumann neighborhood for "+cellNumber.toString+" Cells...")
+			cellNumber.times{ i | 
+				var currentCell : Cell := g.cells.at(i)
+				var currentLine : Integer :=  i.div(gridSize)
+				var currentColumn : Integer := i.mod(gridSize)
+				//stdio.writeln("  "+ i.toString+ " line="+currentLine.toString+ ", col="+currentColumn.toString)
+				var maxCol : Integer := gridSize-1
+				if(currentLine > 0) then // add north 
+					currentCell.neighbors.add(g.cells.at(i-gridSize))
+				end
+				if(currentColumn < maxCol) then // add east 
+					currentCell.neighbors.add(g.cells.at(i+1))
+				end
+				if(currentLine < maxCol) then // add south 
+					currentCell.neighbors.add(g.cells.at(i+gridSize))
+				end
+				if(currentColumn > 0) then // add west 
+					currentCell.neighbors.add(g.cells.at(i-1))
+				end
+			}
+			result := g
+		end
+		operation generateMooreSquareBoundedGrid(gridSize : Integer) : ca_vm::Grid is do 
+			stdio.writeln("Generating a square Grid...")
+			var g : Grid := Grid.new
+			
+			var cellNumber : Integer := gridSize * gridSize
+			stdio.writeln("Generating "+cellNumber.toString+" Cells...")
+			cellNumber.times{ i | 
+				g.cells.add(Cell.new)
+			}
+			stdio.writeln("Generating bounded Moore neighborhood for "+cellNumber.toString+" Cells...")
+			cellNumber.times{ i | 
+				var currentCell : Cell := g.cells.at(i)
+				var currentLine : Integer :=  i.div(gridSize)
+				var currentColumn : Integer := i.mod(gridSize)
+				//stdio.writeln("  "+ i.toString+ " line="+currentLine.toString+ ", col="+currentColumn.toString)
+				var maxCol : Integer := gridSize-1
+				if(currentLine > 0) then // add north 
+					currentCell.neighbors.add(g.cells.at(i-gridSize))
+				end
+				if(currentLine > 0 and currentColumn < maxCol) then // add north/east 
+					currentCell.neighbors.add(g.cells.at(i-gridSize+1))
+				end
+				if(currentColumn < maxCol) then // add east 
+					currentCell.neighbors.add(g.cells.at(i+1))
+				end
+				if(currentColumn < maxCol and currentLine < maxCol) then // add south/east 
+					currentCell.neighbors.add(g.cells.at(i+1+gridSize))
+				end
+				if(currentLine < maxCol) then // add south 
+					currentCell.neighbors.add(g.cells.at(i+gridSize))
+				end
+				if(currentLine < maxCol and currentColumn > 0) then // add south/west
+					currentCell.neighbors.add(g.cells.at(i+gridSize-1))
+				end
+				if(currentColumn > 0) then // add west 
+					currentCell.neighbors.add(g.cells.at(i-1))
+				end
+				if(currentColumn > 0 and currentLine > 0) then // add north/west 
+					currentCell.neighbors.add(g.cells.at(i-1-gridSize))
+				end
+			}
+			result := g
+		end
+		
+		
+		operation saveGrid( grid : ca_vm::Grid) : Void is do
+			var resourceSet : ResourceSet init ResourceSet.new
+	        var resource : Resource init 
+	        	resourceSet.createResource("platform:/resource/org.kermeta.language.sample.cellularautomata/target/results/grid.xmi", 
+	        							 					 "platform:/resource/org.kermeta.language.sample.cellularautomata/src/main/ecore/CA_VM.ecore")       							 					
+		 	// Define a Root ...
+		 	resource.getContents.add(grid)
+		 		 	
+		 	resource.save(void)
+		end
+	}
+}
