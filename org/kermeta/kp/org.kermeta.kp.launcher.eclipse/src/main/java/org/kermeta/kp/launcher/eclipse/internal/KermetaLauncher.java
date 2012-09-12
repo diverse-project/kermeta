@@ -26,7 +26,10 @@ public class KermetaLauncher implements ILaunchConfigurationDelegate {
 			transmetedParams.add(aParam);
 		}
 		
-		KermetaBuilder.getDefault().runFromKP(configuration.getAttribute(KermetaLauncherConfiguration.KM_LAUNCH_KP_FILE,""), transmetedParams);
+		KermetaBuilder.getDefault().runFromKP(configuration.getAttribute(KermetaLauncherConfiguration.KM_LAUNCH_KP_FILE,""),
+				configuration.getAttribute(KermetaLauncherConfiguration.KM_LAUNCH_MAIN_CLASS,""), 
+				configuration.getAttribute(KermetaLauncherConfiguration.KM_LAUNCH_MAIN_OPERATION,""), 
+				transmetedParams);
 	}
 
 }
