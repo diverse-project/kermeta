@@ -139,6 +139,7 @@ public class KermetaCompiler {
 	 * @return the singleThreadExector
 	 */
 	public ExecutorService getSingleThreadExector() {
+		if(singleThreadExector == null) singleThreadExector = Executors.newSingleThreadExecutor();
 		return singleThreadExector;
 	}
 
@@ -146,6 +147,7 @@ public class KermetaCompiler {
 	 * @return the threadExector
 	 */
 	public ExecutorService getThreadExector() {
+		if(threadExector == null) threadExector = new ThreadPoolExecutor(16, 16, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 		return threadExector;
 	}
 
@@ -154,9 +156,9 @@ public class KermetaCompiler {
 	// this kind of executor should be able to queue any number of parallel tasks and run them on the available Threads in the pool
 	// it is tuned to accept a burst of request and process them ...
 	// see http://docs.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ThreadPoolExecutor.html
-	private ExecutorService threadExector = new ThreadPoolExecutor(16, 16, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+	private ExecutorService threadExector = null;
 	
-	private ExecutorService singleThreadExector = Executors.newSingleThreadExecutor();
+	private ExecutorService singleThreadExector = null;
 	
 	
 	
@@ -690,7 +692,7 @@ public class KermetaCompiler {
 			// generating 
 			ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
 			Ecore2Bytecode ecore2Bytecode = new Ecore2Bytecode(logger, getMainProgressGroup(), kp, ecoreForGenerationURLs, targetRootFolder ,targetGeneratedGenmodelFolder, targetGeneratedEMFSourceFolder, targetEMFBinaryFolder, additionalClassPath, runInEclipse);
-			Future<Boolean> genmodelFuture = ecore2Bytecode.ecore2java(singleThreadExector);
+			Future<Boolean> genmodelFuture = ecore2Bytecode.ecore2java(getSingleThreadExector());
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_LEGACY_SOURCE)){
 				// manually join the previously launched ecore2java() (this is normally done by ecorejava2bytecode)
 				try {
@@ -704,7 +706,7 @@ public class KermetaCompiler {
 				logger.debug("stopping after phase "+PHASE_GENERATE_LEGACY_SOURCE, LOG_MESSAGE_GROUP);
 				return resolvedUnit;
 			}
-			Future<Boolean> ecorejava2bytecode = ecore2Bytecode.ecorejava2bytecode(genmodelFuture, threadExector);
+			Future<Boolean> ecorejava2bytecode = ecore2Bytecode.ecorejava2bytecode(genmodelFuture, getThreadExector());
 			// process java diagnostic and ensure this thread is finished
 			ecore2Bytecode.processDiagnostic(ecorejava2bytecode);
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_GENERATE_LEGACY_SOURCE_BYTECODE)){

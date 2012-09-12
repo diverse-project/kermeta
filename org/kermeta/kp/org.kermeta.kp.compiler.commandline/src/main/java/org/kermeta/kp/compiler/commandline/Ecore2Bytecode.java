@@ -78,9 +78,11 @@ public class Ecore2Bytecode {
 			fileManager = compiler.getStandardFileManager(diagnostics, null, null);
 		}
 		if(!runInEclipse){
-			logger.debug("runInEclipse = true", KermetaCompiler.LOG_MESSAGE_GROUP);
+			logger.debug("runInEclipse = false", KermetaCompiler.LOG_MESSAGE_GROUP);
 			logger.debug("EcorePlugin.getPlatformResourceMap().put(\""+kp.getName()+"\", URI.createURI(\"file:///"+rootFolder.replaceAll("\\\\", "/")+"\"));", KermetaCompiler.LOG_MESSAGE_GROUP);
 			EcorePlugin.getPlatformResourceMap().put(kp.getName(), URI.createURI("file:///"+rootFolder.replaceAll("\\\\", "/")));
+			
+			logger.debug("org.eclipse.core.runtime.Platform.isRunning() = "+org.eclipse.core.runtime.Platform.isRunning(), KermetaCompiler.LOG_MESSAGE_GROUP);
 		}
 	}
 	/**

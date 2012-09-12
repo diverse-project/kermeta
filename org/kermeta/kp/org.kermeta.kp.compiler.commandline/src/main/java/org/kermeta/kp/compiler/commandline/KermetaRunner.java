@@ -49,9 +49,19 @@ public class KermetaRunner {
 		this.logger = logger;
 	}
 	
+	/**
+	 * call the default main class and main operation
+	 * @param params
+	 * @param uriMapFileLocation
+	 */
 	public void runK2Program( List<String> params, String uriMapFileLocation) {
-		
-		this.logger.initProgress(scalaAspectPrefix, "Starting "+scalaAspectPrefix + "runner.MainRunner", KermetaCompiler.LOG_MESSAGE_GROUP, 0);
+		runK2Program("DefaultRunner", params, uriMapFileLocation);
+	}
+	public void runK2Program( String mainClass, String mainOperation, List<String> params, String uriMapFileLocation) {
+		runK2Program(mainClass.replaceAll("::", ".")+"_"+mainOperation, params, uriMapFileLocation);
+	}
+	public void runK2Program( String runnerClass, List<String> params, String uriMapFileLocation) {
+		this.logger.initProgress(scalaAspectPrefix, "Starting "+scalaAspectPrefix + "runner."+runnerClass, KermetaCompiler.LOG_MESSAGE_GROUP, 0);
 		StringBuffer f = new StringBuffer();
 		for (String s : classpath) {
 			f.append(s);
@@ -74,7 +84,7 @@ public class KermetaRunner {
 	        				"scala.tools.nsc.MainGenericRunner", 
 	        				"-savecompiled",
 	        				"-classpath",f.toString() + outputBinFolder,
-	        				scalaAspectPrefix + "runner.DefaultRunner"));
+	        				scalaAspectPrefix + "runner."+runnerClass));
 	        processBuilderParams.addAll(params);
 	        ProcessBuilder builder = new ProcessBuilder(processBuilderParams);
 	        this.logger.debug("starting new process with command " +builder.command().toString(), KermetaCompiler.LOG_MESSAGE_GROUP);
