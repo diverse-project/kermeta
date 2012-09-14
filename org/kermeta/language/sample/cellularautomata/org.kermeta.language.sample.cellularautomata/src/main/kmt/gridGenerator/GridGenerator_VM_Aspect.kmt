@@ -7,5 +7,6 @@ using kermeta::standard
 package ca_vm{
 	aspect class Cell
 	{
+		attribute globalPosition : Integer
 	}
 }

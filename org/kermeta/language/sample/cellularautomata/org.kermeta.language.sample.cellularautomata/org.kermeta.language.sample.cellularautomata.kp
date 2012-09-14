@@ -6,8 +6,10 @@ KermetaProject "org.kermeta.language.sample.cellularautomata"
 		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
 		require "${project.baseUri}/src/main/kmt/gridGenerator/GridGenerator.kmt"
 		require "${project.baseUri}/src/main/kmt/gridGenerator/GridGenerator_VM_Aspect.kmt"
+		require "${project.baseUri}/src/main/kmt/evaluator/EvaluatorBase_CA_Aspect.kmt"
+		require "${project.baseUri}/src/main/kmt/evaluator/Context.kmt"
 		require "${project.baseUri}/src/main/ecore/CA_VM.ecore"
-		require "${project.baseUri}/src/main/ecore/CA_Rule.ecore"
+		require "${project.baseUri}/src/main/ecore/CA.ecore"
 	}
 	dependencies = {
 		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)

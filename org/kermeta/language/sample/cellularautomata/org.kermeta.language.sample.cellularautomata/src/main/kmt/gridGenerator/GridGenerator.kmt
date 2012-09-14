@@ -1,6 +1,8 @@
 using kermeta::standard
 using kermeta::emfpersistence
 using ca_vm
+using ca
+using ca::evaluator
 using kermeta::io::StdIO => stdio
 
 package cellular_automata::vm{
@@ -12,6 +14,39 @@ package cellular_automata::vm{
 			saveGrid(g)
 		end
 		
+		@main "platform:/resource/org.kermeta.language.sample.cellularautomata/src/main/samples/LifeGame3x3.xmi"
+		operation generateInitialGridForAutomataFile(automataFile : String) : Void is do 
+			var resourceSet : ResourceSet init ResourceSet.new
+	        var resource : Resource init 
+	        	resourceSet.createResource(automataFile, "platform:/resource/org.kermeta.language.sample.cellularautomata/src/main/ecore/CA.ecore")
+			resource.load(void)
+			var ca : CellularAutomata := resource.getContents.one.asType(CellularAutomata)
+			saveGrid(generateInitialGridForAutomata(ca))
+		end
+		
+		operation generateInitialGridForAutomata(automata : CellularAutomata) : Grid is do
+			result := void
+			var regularGeometry : RegularGeometry
+			regularGeometry ?= automata.geometry
+			if not regularGeometry.isVoid then				
+				if ((regularGeometry.neighborsNumber == 4) and (not regularGeometry.isCircular)) then
+					result := generateVonNeumannSquareBoundedGrid(regularGeometry.worldSize)
+				else if ((regularGeometry.neighborsNumber == 8) and (not regularGeometry.isCircular)) then
+					result := generateMooreSquareBoundedGrid(regularGeometry.worldSize)
+				else 
+					stdio.errorln(" Generic configuration not supported yet. Currently supported configurations : dimension=2; neighborsNumber=4|8; not circular")
+				end end
+				if not result.isVoid then
+					// fill default values
+					result.cells.each{cell |
+						var context : Context := Context.new.initialize(result, cell)
+						cell.~value := automata.initialValue.evaluate(context)
+					}
+				end
+			else
+				stdio.errorln(" Generic configuration not supported yet. Only RegularGeometry can be generated automatically by this.")
+			end				
+		end
 		
 		operation generateVonNeumannSquareBoundedGrid(gridSize : Integer) : ca_vm::Grid is do 
 			stdio.writeln("Generating a square Grid...")
@@ -20,7 +55,9 @@ package cellular_automata::vm{
 			var cellNumber : Integer := gridSize * gridSize
 			stdio.writeln("Generating "+cellNumber.toString+" Cells...")
 			cellNumber.times{ i | 
-				g.cells.add(Cell.new)
+				var cell : Cell := Cell.new
+				cell.globalPosition := i
+				g.cells.add(cell)
 			}
 			stdio.writeln("Generating bounded VonNeumann neighborhood for "+cellNumber.toString+" Cells...")
 			cellNumber.times{ i | 
@@ -41,6 +78,7 @@ package cellular_automata::vm{
 				if(currentColumn > 0) then // add west 
 					currentCell.neighbors.add(g.cells.at(i-1))
 				end
+				currentCell.~value := 0
 			}
 			result := g
 		end
@@ -51,7 +89,9 @@ package cellular_automata::vm{
 			var cellNumber : Integer := gridSize * gridSize
 			stdio.writeln("Generating "+cellNumber.toString+" Cells...")
 			cellNumber.times{ i | 
-				g.cells.add(Cell.new)
+				var cell : Cell := Cell.new
+				cell.globalPosition := i
+				g.cells.add(cell)
 			}
 			stdio.writeln("Generating bounded Moore neighborhood for "+cellNumber.toString+" Cells...")
 			cellNumber.times{ i | 
@@ -84,10 +124,11 @@ package cellular_automata::vm{
 				if(currentColumn > 0 and currentLine > 0) then // add north/west 
 					currentCell.neighbors.add(g.cells.at(i-1-gridSize))
 				end
+				currentCell.~value := 0
 			}
 			result := g
 		end
-		
+		 
 		
 		operation saveGrid( grid : ca_vm::Grid) : Void is do
 			var resourceSet : ResourceSet init ResourceSet.new

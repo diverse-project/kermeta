@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ca:CellularAutomata xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ca="http://ca/1.0">
+  <geometry xsi:type="ca:RegularGeometry" neighborsNumber="8" worldSize="3" dimension="2"/>
+  <initialValue xsi:type="ca:Mod">
+    <left xsi:type="ca:SelfGlobalPosition"/>
+    <right xsi:type="ca:IntegerLiteral" value="2"/>
+  </initialValue>
+</ca:CellularAutomata>
