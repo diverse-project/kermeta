@@ -18,6 +18,11 @@ class Void {
 } 
 
 @CompilerIgnore "true"
+class Model
+{
+}
+
+@CompilerIgnore "true"
 class Object
 {	
 
