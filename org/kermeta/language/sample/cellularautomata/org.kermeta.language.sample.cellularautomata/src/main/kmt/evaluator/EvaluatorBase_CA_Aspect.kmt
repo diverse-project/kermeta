@@ -4,7 +4,8 @@ using ca::evaluator
 using kermeta::io::StdIO => stdio
 
 
-/* base part of the evaluator that doesn't require support of a VM to evaluate
+/* base part of the evaluator that doesn't require to use the Cell value to evaluate.
+ * ie. the part that can be used in both as an initialisation expression or 
  */
 package ca{
 	aspect class IntegerExpression

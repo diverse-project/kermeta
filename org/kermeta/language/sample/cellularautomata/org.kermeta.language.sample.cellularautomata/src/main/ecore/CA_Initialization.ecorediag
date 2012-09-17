@@ -99,6 +99,18 @@
     <element xmi:type="ecore:EClass" href="CA_Initialization.ecore#//GlobalPositionLiteral"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7WLUQv5jEeGDotmnAUd6WQ" x="801" y="506"/>
   </children>
+  <children xmi:type="notation:Shape" xmi:id="_CrKQ4P58EeGDotmnAUd6WQ" type="Note" fontName="Segoe UI" description="ex: &#xD;&#xA;neighborsNumber = 4, dimension = 2 is the classic Von Neumann CA; &#xD;&#xA;neighborsNumber = 8, dimension = 2 is the classic Moore CA; " fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_CrOiUP58EeGDotmnAUd6WQ" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_CrPJYP58EeGDotmnAUd6WQ" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_CrKQ4f58EeGDotmnAUd6WQ"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_CrKQ4v58EeGDotmnAUd6WQ"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CrKQ4_58EeGDotmnAUd6WQ" x="140" y="455"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_zHXxsf5hEeGDotmnAUd6WQ"/>
   <element xmi:type="ecore:EPackage" href="CA_Initialization.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_eOGK0P5jEeGDotmnAUd6WQ" type="3003" source="_nL-hQP5iEeGDotmnAUd6WQ" target="_rzgtEP5iEeGDotmnAUd6WQ">
@@ -156,5 +168,13 @@
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__mPbQ_5jEeGDotmnAUd6WQ" points="[9, -8, -114, 118]$[120, -97, -3, 29]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__mRQcP5jEeGDotmnAUd6WQ" id="(0.5886524822695035,0.20930232558139536)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_EIqwsP58EeGDotmnAUd6WQ" type="NoteAttachment" source="_CrKQ4P58EeGDotmnAUd6WQ" target="_nL-hQP5iEeGDotmnAUd6WQ" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_EIqwsf58EeGDotmnAUd6WQ"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_EIqwsv58EeGDotmnAUd6WQ"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EIqws_58EeGDotmnAUd6WQ" points="[5, 12, -75, -157]$[81, 146, 1, -23]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EIr-0P58EeGDotmnAUd6WQ" id="(0.6395939086294417,0.7719298245614035)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EIr-0f58EeGDotmnAUd6WQ" id="(0.04678362573099415,0.23529411764705882)"/>
   </edges>
 </notation:Diagram>
