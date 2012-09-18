@@ -10,11 +10,9 @@
 package org.kermeta.kp.launcher.eclipse.internal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -35,6 +33,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
+import org.kermeta.language.builder.eclipse.KermetaBuilderHelper;
 
 abstract public class KLaunchShortcut implements ILaunchShortcut {
 
@@ -65,7 +64,7 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 				try {
 					if(project.hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)){
 
-						selectedFile = KermetaBuilder.getDefault().findRootKPinProject(project);
+						selectedFile = KermetaBuilderHelper.findRootKPinProject(project);
 						if(selectedFile != null){
 					        // Launch!
 							launchSelectedFile(selectedFile, mode);
