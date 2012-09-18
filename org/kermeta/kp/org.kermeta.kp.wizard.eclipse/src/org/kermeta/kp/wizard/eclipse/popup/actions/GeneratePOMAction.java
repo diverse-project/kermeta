@@ -58,7 +58,7 @@ public class GeneratePOMAction implements IObjectActionDelegate {
 					generatePOMContent(artefactId, 
 							groupId, 
 							kpfile.getName(), 
-							"2.0.4").getBytes());
+							"2.0.6").getBytes());
 			IFile pomFile = kpfile.getProject().getFile("pom.xml");
 			try {
 				if(pomFile.exists()){

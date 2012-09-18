@@ -16,8 +16,13 @@ import org.eclipse.core.runtime.CoreException;
 import java.io.*;
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
+import org.kermeta.kp.KermetaProject;
+import org.kermeta.kp.KpFactory;
+import org.kermeta.kp.Source;
+import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.kp.wizard.eclipse.Activator;
 import org.kermeta.kp.wizard.eclipse.preferences.PreferenceConstants;
+import org.kermeta.language.builder.eclipse.KermetaBuilderHelper;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -118,6 +123,18 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 				file.create(stream, true, monitor);
 			}
 			stream.close();
+			// update kp that should reference this new file
+			IFile kpfile = KermetaBuilderHelper.findRootKPinProject(file.getProject());
+			KpLoaderImpl ldr = new KpLoaderImpl(org.kermeta.utils.systemservices.eclipse.Activator.getDefault().getMessaggingSystem());
+			
+			// Load KP file
+			KermetaProject kp = ldr.loadKp(kpfile.getLocationURI().toString());
+			Source newSource = KpFactory.eINSTANCE.createSource();
+			newSource.setUrl("${project.baseUri}/"+file.getProjectRelativePath());
+			kp.getSources().add(newSource);
+			
+			// save back to disk
+			kp.eResource().save(null);
 		} catch (IOException e) {
 		}
 		monitor.worked(1);
