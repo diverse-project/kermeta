@@ -725,7 +725,7 @@ resource.load
 // get elements from the resource
 // in this sample, you know that your root element is always a Library, 
 // so you can directly get the first one
-var aLibrary : Libary
+var aLibrary : Library
 aLibrary ?= resource.one // note the conditional assignment using the ?=, if not a Library you'll get Void</programlisting>
 
 				<para>In the same way, you can serialize a model, or load, change
