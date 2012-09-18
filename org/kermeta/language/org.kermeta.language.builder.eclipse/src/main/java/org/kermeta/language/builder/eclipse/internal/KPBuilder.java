@@ -604,6 +604,8 @@ public class KPBuilder {
 	 * @throws IOException
 	 */
 	public void refreshFileIndex() throws IOException {
+		// verify if this kpFile still exists
+		// TODO
 		ArrayList<TracedURL> kpSources = compiler.getSources(kpFileURL);
 		//This list allow to preserve old files ever parsed
 		HashMap<String,KPFilesContainer> oldKpFiles = kpFiles;
