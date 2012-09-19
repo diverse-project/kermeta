@@ -193,8 +193,8 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedCall inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::behavior::CallExpression, org::kermeta::language::structure::TypeContainer {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
+			aspect class UnresolvedCall inherits org::kermeta::language::structure::UnresolvedReference, org::kermeta::language::behavior::CallExpression, org::kermeta::language::structure::TypeContainer {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::UnresolvedReference is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
@@ -337,7 +337,7 @@ package kermeta {
 				end
 			}
 
-			aspect class DataType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::TypeDefinition {
+			aspect class DataType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::ModelElementTypeDefinition {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -358,7 +358,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Package inherits org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeDefinitionContainer {
+			aspect class Package inherits org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::ModelElementTypeDefinitionContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -463,14 +463,14 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit inherits org::kermeta::language::structure::TypeDefinitionContainer, org::kermeta::language::structure::KermetaModelElement {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinitionContainer is do
+			aspect class ModelingUnit inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class TypeDefinitionContainer inherits org::kermeta::language::structure::NamedElement {
+			aspect class ModelElementTypeDefinitionContainer inherits org::kermeta::language::structure::NamedElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -484,8 +484,8 @@ package kermeta {
 				end
 			}
 
-			aspect class GenericTypeDefinition inherits org::kermeta::language::structure::TypeDefinition {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinition is do
+			aspect class GenericTypeDefinition inherits org::kermeta::language::structure::ModelElementTypeDefinition {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelElementTypeDefinition is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
@@ -512,14 +512,14 @@ package kermeta {
 				end
 			}
 
-			aspect class ModelType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::TypeDefinitionContainer {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
+			aspect class Metamodel inherits org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::ModelingUnit {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinition is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class ModelTypeVariable inherits org::kermeta::language::structure::TypeVariable {
+			aspect class MetamodelVariable inherits org::kermeta::language::structure::TypeVariable {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeVariable is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -547,28 +547,28 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeContainer {
+			aspect class UnresolvedType inherits org::kermeta::language::structure::Type, org::kermeta::language::structure::UnresolvedReference, org::kermeta::language::structure::TypeContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class Unresolved inherits org::kermeta::language::structure::KermetaModelElement {
+			aspect class UnresolvedReference inherits org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class UnresolvedProperty inherits org::kermeta::language::structure::AbstractProperty, org::kermeta::language::structure::Unresolved {
+			aspect class UnresolvedProperty inherits org::kermeta::language::structure::AbstractProperty, org::kermeta::language::structure::UnresolvedReference {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AbstractProperty is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeContainer {
+			aspect class UnresolvedOperation inherits org::kermeta::language::structure::AbstractOperation, org::kermeta::language::structure::UnresolvedReference, org::kermeta::language::structure::TypeContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AbstractOperation is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -603,36 +603,22 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedInferredType inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::Type {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
+			aspect class UnresolvedInferredType inherits org::kermeta::language::structure::UnresolvedReference, org::kermeta::language::structure::Type {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::UnresolvedReference is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class UnresolvedTypeVariable inherits org::kermeta::language::structure::Unresolved, org::kermeta::language::structure::TypeVariable {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Unresolved is do
+			aspect class UnresolvedTypeVariable inherits org::kermeta::language::structure::UnresolvedReference, org::kermeta::language::structure::TypeVariable {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::UnresolvedReference is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class ModelTypeBinding inherits org::kermeta::language::structure::KermetaModelElement {
+			aspect class MetamodelBinding inherits org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class SimpleBinding inherits org::kermeta::language::structure::ModelTypeBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class AdaptationBinding inherits org::kermeta::language::structure::ModelTypeBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeBinding is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
@@ -645,105 +631,21 @@ package kermeta {
 				end
 			}
 
-			aspect class SimpleClassDefinitionBinding inherits org::kermeta::language::structure::ClassDefinitionBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ClassDefinitionBinding is do
+			aspect class EnumerationBinding inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
-			aspect class ComplexClassDefinitionBinding inherits org::kermeta::language::structure::ClassDefinitionBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ClassDefinitionBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class EnumerationBinding inherits Mergeable  {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class SimpleEnumerationBinding inherits org::kermeta::language::structure::EnumerationBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::EnumerationBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class ComplexEnumerationBinding inherits org::kermeta::language::structure::EnumerationBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::EnumerationBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class PropertyBinding inherits Mergeable  {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
+			aspect class PropertyBinding inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
 			aspect class OperationBinding inherits org::kermeta::language::structure::KermetaModelElement {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class SimplePropertyBinding inherits org::kermeta::language::structure::PropertyBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::PropertyBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class ComplexPropertyBinding inherits org::kermeta::language::structure::PropertyBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::PropertyBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class SimpleOperationBinding inherits org::kermeta::language::structure::OperationBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::OperationBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class ComplexOperationBinding inherits org::kermeta::language::structure::OperationBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::OperationBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class ParameterBinding inherits org::kermeta::language::structure::KermetaModelElement {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class SimpleParameterBinding inherits org::kermeta::language::structure::ParameterBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ParameterBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class ComplexParameterBinding inherits org::kermeta::language::structure::ParameterBinding {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ParameterBinding is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class EnumLiteralbinding inherits org::kermeta::language::structure::KermetaModelElement {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -771,7 +673,7 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator, org::kermeta::language::structure::Unresolved {
+			aspect class UnresolvedAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator, org::kermeta::language::structure::UnresolvedReference {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AdaptationOperator is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -787,6 +689,27 @@ package kermeta {
 
 			aspect class OperationAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AdaptationOperator is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UnresolvedMetamodel inherits org::kermeta::language::structure::ModelingUnit {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelingUnit is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ModelElementTypeDefinition inherits org::kermeta::language::structure::TypeDefinition {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinition is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ModelType inherits org::kermeta::language::structure::Type {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::Type is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end

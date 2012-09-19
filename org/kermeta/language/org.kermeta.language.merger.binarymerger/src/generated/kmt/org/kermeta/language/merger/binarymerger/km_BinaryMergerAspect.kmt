@@ -175,7 +175,7 @@ package kermeta {
 			aspect class ModelingUnit inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class TypeDefinitionContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class ModelElementTypeDefinitionContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class Require inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -193,10 +193,10 @@ package kermeta {
 			aspect class ObjectTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class ModelType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class Metamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class ModelTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class MetamodelVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class VirtualType inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -211,7 +211,7 @@ package kermeta {
 			aspect class UnresolvedType inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class Unresolved inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class UnresolvedReference inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class UnresolvedProperty inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -238,61 +238,19 @@ package kermeta {
 			aspect class UnresolvedTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class ModelTypeBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class SimpleBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class AdaptationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class MetamodelBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class ClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class SimpleClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ComplexClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
 			aspect class EnumerationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class SimpleEnumerationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ComplexEnumerationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class PropertyBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class OperationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class SimplePropertyBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ComplexPropertyBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class SimpleOperationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ComplexOperationBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ParameterBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class SimpleParameterBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class ComplexParameterBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class EnumLiteralbinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class AdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -311,6 +269,15 @@ package kermeta {
 			}
 
 			aspect class OperationAdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedMetamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelElementTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelType inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 		}
