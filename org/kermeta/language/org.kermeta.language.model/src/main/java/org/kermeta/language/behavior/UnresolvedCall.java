@@ -7,10 +7,9 @@
 package org.kermeta.language.behavior;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
-import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedReference;
 import org.kermeta.language.structure.Using;
 
 /**
@@ -46,7 +45,7 @@ import org.kermeta.language.structure.Using;
  * @model
  * @generated
  */
-public interface UnresolvedCall extends Unresolved, CallExpression, TypeContainer {
+public interface UnresolvedCall extends UnresolvedReference, CallExpression, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Usings</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Using}.

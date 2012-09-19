@@ -34,7 +34,7 @@ import org.kermeta.language.structure.UnresolvedInferredType;
  *
  * @generated
  */
-public class UnresolvedInferredTypeImpl extends UnresolvedImpl implements UnresolvedInferredType {
+public class UnresolvedInferredTypeImpl extends UnresolvedReferenceImpl implements UnresolvedInferredType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

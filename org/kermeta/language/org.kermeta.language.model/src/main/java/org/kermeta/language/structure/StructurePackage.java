@@ -451,22 +451,13 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__UPPER = MULTIPLICITY_ELEMENT__UPPER;
 
 	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__RAISED_EXCEPTION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
+	int OPERATION__RAISED_EXCEPTION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -475,7 +466,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNED_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
+	int OPERATION__OWNED_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Pre</b></em>' containment reference list.
@@ -484,7 +475,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PRE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
+	int OPERATION__PRE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Post</b></em>' containment reference list.
@@ -493,7 +484,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__POST = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
+	int OPERATION__POST = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -502,7 +493,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+	int OPERATION__BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Super Operation</b></em>' reference.
@@ -511,7 +502,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__SUPER_OPERATION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+	int OPERATION__SUPER_OPERATION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Unresolved Operations</b></em>' containment reference list.
@@ -520,7 +511,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNED_UNRESOLVED_OPERATIONS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+	int OPERATION__OWNED_UNRESOLVED_OPERATIONS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
@@ -529,7 +520,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+	int OPERATION__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
@@ -538,7 +529,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
+	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Unique Name</b></em>' attribute.
@@ -2051,6 +2051,88 @@ public interface StructurePackage extends EPackage {
 	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelElementTypeDefinitionImpl <em>Model Element Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelElementTypeDefinitionImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelElementTypeDefinition()
+	 * @generated
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION = 55;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__KTAG = TYPE_DEFINITION__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__KOWNED_TAGS = TYPE_DEFINITION__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__KTYPE = TYPE_DEFINITION__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__CONTAINED_TYPE = TYPE_DEFINITION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__SUPER_TYPE = TYPE_DEFINITION__SUPER_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
+
+	/**
+	 * The number of structural features of the '<em>Model Element Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.GenericTypeDefinitionImpl <em>Generic Type Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2067,7 +2149,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__KTAG = TYPE_DEFINITION__KTAG;
+	int GENERIC_TYPE_DEFINITION__KTAG = MODEL_ELEMENT_TYPE_DEFINITION__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -2076,7 +2158,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__KOWNED_TAGS = TYPE_DEFINITION__KOWNED_TAGS;
+	int GENERIC_TYPE_DEFINITION__KOWNED_TAGS = MODEL_ELEMENT_TYPE_DEFINITION__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -2085,7 +2167,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__KTYPE = TYPE_DEFINITION__KTYPE;
+	int GENERIC_TYPE_DEFINITION__KTYPE = MODEL_ELEMENT_TYPE_DEFINITION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2094,7 +2176,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
+	int GENERIC_TYPE_DEFINITION__NAME = MODEL_ELEMENT_TYPE_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2103,7 +2185,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__CONTAINED_TYPE = TYPE_DEFINITION__CONTAINED_TYPE;
+	int GENERIC_TYPE_DEFINITION__CONTAINED_TYPE = MODEL_ELEMENT_TYPE_DEFINITION__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -2112,7 +2194,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__SUPER_TYPE = TYPE_DEFINITION__SUPER_TYPE;
+	int GENERIC_TYPE_DEFINITION__SUPER_TYPE = MODEL_ELEMENT_TYPE_DEFINITION__SUPER_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
@@ -2121,7 +2203,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
+	int GENERIC_TYPE_DEFINITION__IS_ASPECT = MODEL_ELEMENT_TYPE_DEFINITION__IS_ASPECT;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
@@ -2130,7 +2212,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = TYPE_DEFINITION_FEATURE_COUNT + 0;
+	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = MODEL_ELEMENT_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Generic Type Definition</em>' class.
@@ -2139,7 +2221,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int GENERIC_TYPE_DEFINITION_FEATURE_COUNT = MODEL_ELEMENT_TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
@@ -2287,70 +2369,6 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.TypeDefinitionContainerImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
-	 * @generated
-	 */
-	int TYPE_DEFINITION_CONTAINER = 22;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__KTAG = NAMED_ELEMENT__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__KTYPE = NAMED_ELEMENT__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Definition Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelingUnitImpl <em>Modeling Unit</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2367,7 +2385,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__KTAG = TYPE_DEFINITION_CONTAINER__KTAG;
+	int MODELING_UNIT__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -2376,7 +2394,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__KOWNED_TAGS = TYPE_DEFINITION_CONTAINER__KOWNED_TAGS;
+	int MODELING_UNIT__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -2385,7 +2403,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__KTYPE = TYPE_DEFINITION_CONTAINER__KTYPE;
+	int MODELING_UNIT__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2394,16 +2412,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__NAME = TYPE_DEFINITION_CONTAINER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__OWNED_TYPE_DEFINITION = TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
+	int MODELING_UNIT__NAME = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
@@ -2412,7 +2421,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__PACKAGES = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 0;
+	int MODELING_UNIT__PACKAGES = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Namespace Prefix</b></em>' attribute.
@@ -2421,7 +2430,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__NAMESPACE_PREFIX = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 1;
+	int MODELING_UNIT__NAMESPACE_PREFIX = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Requires</b></em>' containment reference list.
@@ -2430,7 +2439,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__REQUIRES = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 2;
+	int MODELING_UNIT__REQUIRES = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Modeling Unit</em>' class.
@@ -2439,7 +2448,71 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT_FEATURE_COUNT = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 3;
+	int MODELING_UNIT_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelElementTypeDefinitionContainerImpl <em>Model Element Type Definition Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelElementTypeDefinitionContainerImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelElementTypeDefinitionContainer()
+	 * @generated
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER = 22;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__KTAG = NAMED_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__KTYPE = NAMED_ELEMENT__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Element Type Definition Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.RequireImpl <em>Require</em>}' class.
@@ -2661,14 +2734,14 @@ public interface StructurePackage extends EPackage {
 	int OBJECT_TYPE_VARIABLE_FEATURE_COUNT = TYPE_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.MetamodelImpl <em>Metamodel</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ModelTypeImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
+	 * @see org.kermeta.language.structure.impl.MetamodelImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodel()
 	 * @generated
 	 */
-	int MODEL_TYPE = 28;
+	int METAMODEL = 28;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -2677,7 +2750,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__KTAG = TYPE__KTAG;
+	int METAMODEL__KTAG = TYPE_DEFINITION__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -2686,7 +2759,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
+	int METAMODEL__KOWNED_TAGS = TYPE_DEFINITION__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -2695,16 +2768,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__KTYPE = TYPE__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+	int METAMODEL__KTYPE = TYPE_DEFINITION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2713,7 +2777,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
+	int METAMODEL__NAME = TYPE_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2722,7 +2786,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 1;
+	int METAMODEL__CONTAINED_TYPE = TYPE_DEFINITION__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -2731,7 +2795,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__SUPER_TYPE = TYPE_FEATURE_COUNT + 2;
+	int METAMODEL__SUPER_TYPE = TYPE_DEFINITION__SUPER_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
@@ -2740,16 +2804,34 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 3;
+	int METAMODEL__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
 
 	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_TYPE_DEFINITION = TYPE_FEATURE_COUNT + 4;
+	int METAMODEL__PACKAGES = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__NAMESPACE_PREFIX = TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Requires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__REQUIRES = TYPE_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
@@ -2758,35 +2840,35 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_BINDINGS = TYPE_FEATURE_COUNT + 5;
+	int METAMODEL__OWNED_BINDINGS = TYPE_DEFINITION_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Metamodels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_PACKAGES = TYPE_FEATURE_COUNT + 6;
+	int METAMODEL__OWNED_METAMODELS = TYPE_DEFINITION_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the '<em>Model Type</em>' class.
+	 * The number of structural features of the '<em>Metamodel</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 7;
+	int METAMODEL_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.MetamodelVariableImpl <em>Metamodel Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ModelTypeVariableImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeVariable()
+	 * @see org.kermeta.language.structure.impl.MetamodelVariableImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodelVariable()
 	 * @generated
 	 */
-	int MODEL_TYPE_VARIABLE = 29;
+	int METAMODEL_VARIABLE = 29;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -2795,7 +2877,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__KTAG = TYPE_VARIABLE__KTAG;
+	int METAMODEL_VARIABLE__KTAG = TYPE_VARIABLE__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -2804,7 +2886,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__KOWNED_TAGS = TYPE_VARIABLE__KOWNED_TAGS;
+	int METAMODEL_VARIABLE__KOWNED_TAGS = TYPE_VARIABLE__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -2813,7 +2895,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__KTYPE = TYPE_VARIABLE__KTYPE;
+	int METAMODEL_VARIABLE__KTYPE = TYPE_VARIABLE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2822,7 +2904,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__CONTAINED_TYPE = TYPE_VARIABLE__CONTAINED_TYPE;
+	int METAMODEL_VARIABLE__CONTAINED_TYPE = TYPE_VARIABLE__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -2831,7 +2913,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__TYPE_CONTAINER = TYPE_VARIABLE__TYPE_CONTAINER;
+	int METAMODEL_VARIABLE__TYPE_CONTAINER = TYPE_VARIABLE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2840,7 +2922,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__NAME = TYPE_VARIABLE__NAME;
+	int METAMODEL_VARIABLE__NAME = TYPE_VARIABLE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Supertype</b></em>' reference.
@@ -2849,7 +2931,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__SUPERTYPE = TYPE_VARIABLE__SUPERTYPE;
+	int METAMODEL_VARIABLE__SUPERTYPE = TYPE_VARIABLE__SUPERTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Type</b></em>' reference list.
@@ -2858,16 +2940,26 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__VIRTUAL_TYPE = TYPE_VARIABLE_FEATURE_COUNT + 0;
+	int METAMODEL_VARIABLE__VIRTUAL_TYPE = TYPE_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Model Type Variable</em>' class.
+	 * The number of structural features of the '<em>Metamodel Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE_FEATURE_COUNT = TYPE_VARIABLE_FEATURE_COUNT + 1;
+	int METAMODEL_VARIABLE_FEATURE_COUNT = TYPE_VARIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelTypeImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
+	 * @generated
+	 */
+	int MODEL_TYPE = 56;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.VirtualTypeImpl <em>Virtual Type</em>}' class.
@@ -2952,13 +3044,13 @@ public interface StructurePackage extends EPackage {
 	int VIRTUAL_TYPE__CLASS_DEFINITION = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Model Type</b></em>' reference.
+	 * The feature id for the '<em><b>Metamodel Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_TYPE__MODEL_TYPE = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 1;
+	int VIRTUAL_TYPE__METAMODEL_VARIABLE = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -3171,14 +3263,14 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedImpl <em>Unresolved</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedReferenceImpl <em>Unresolved Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.UnresolvedImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolved()
+	 * @see org.kermeta.language.structure.impl.UnresolvedReferenceImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedReference()
 	 * @generated
 	 */
-	int UNRESOLVED = 34;
+	int UNRESOLVED_REFERENCE = 34;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -3187,7 +3279,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+	int UNRESOLVED_REFERENCE__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3196,7 +3288,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+	int UNRESOLVED_REFERENCE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3205,16 +3297,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+	int UNRESOLVED_REFERENCE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
-	 * The number of structural features of the '<em>Unresolved</em>' class.
+	 * The number of structural features of the '<em>Unresolved Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int UNRESOLVED_REFERENCE_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedPropertyImpl <em>Unresolved Property</em>}' class.
@@ -3635,7 +3727,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_INFERRED_TYPE__KTAG = UNRESOLVED__KTAG;
+	int UNRESOLVED_INFERRED_TYPE__KTAG = UNRESOLVED_REFERENCE__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3644,7 +3736,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_INFERRED_TYPE__KOWNED_TAGS = UNRESOLVED__KOWNED_TAGS;
+	int UNRESOLVED_INFERRED_TYPE__KOWNED_TAGS = UNRESOLVED_REFERENCE__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3653,7 +3745,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_INFERRED_TYPE__KTYPE = UNRESOLVED__KTYPE;
+	int UNRESOLVED_INFERRED_TYPE__KTYPE = UNRESOLVED_REFERENCE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -3662,7 +3754,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_INFERRED_TYPE__TYPE_CONTAINER = UNRESOLVED_FEATURE_COUNT + 0;
+	int UNRESOLVED_INFERRED_TYPE__TYPE_CONTAINER = UNRESOLVED_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Unresolved Inferred Type</em>' class.
@@ -3671,7 +3763,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_INFERRED_TYPE_FEATURE_COUNT = UNRESOLVED_FEATURE_COUNT + 1;
+	int UNRESOLVED_INFERRED_TYPE_FEATURE_COUNT = UNRESOLVED_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedTypeVariableImpl <em>Unresolved Type Variable</em>}' class.
@@ -3690,7 +3782,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__KTAG = UNRESOLVED__KTAG;
+	int UNRESOLVED_TYPE_VARIABLE__KTAG = UNRESOLVED_REFERENCE__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3699,7 +3791,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__KOWNED_TAGS = UNRESOLVED__KOWNED_TAGS;
+	int UNRESOLVED_TYPE_VARIABLE__KOWNED_TAGS = UNRESOLVED_REFERENCE__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3708,7 +3800,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__KTYPE = UNRESOLVED__KTYPE;
+	int UNRESOLVED_TYPE_VARIABLE__KTYPE = UNRESOLVED_REFERENCE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -3717,7 +3809,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__CONTAINED_TYPE = UNRESOLVED_FEATURE_COUNT + 0;
+	int UNRESOLVED_TYPE_VARIABLE__CONTAINED_TYPE = UNRESOLVED_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -3726,7 +3818,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__TYPE_CONTAINER = UNRESOLVED_FEATURE_COUNT + 1;
+	int UNRESOLVED_TYPE_VARIABLE__TYPE_CONTAINER = UNRESOLVED_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3735,7 +3827,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__NAME = UNRESOLVED_FEATURE_COUNT + 2;
+	int UNRESOLVED_TYPE_VARIABLE__NAME = UNRESOLVED_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Supertype</b></em>' reference.
@@ -3744,7 +3836,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE__SUPERTYPE = UNRESOLVED_FEATURE_COUNT + 3;
+	int UNRESOLVED_TYPE_VARIABLE__SUPERTYPE = UNRESOLVED_REFERENCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Unresolved Type Variable</em>' class.
@@ -3753,72 +3845,17 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_TYPE_VARIABLE_FEATURE_COUNT = UNRESOLVED_FEATURE_COUNT + 4;
+	int UNRESOLVED_TYPE_VARIABLE_FEATURE_COUNT = UNRESOLVED_REFERENCE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeBindingImpl <em>Model Type Binding</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.MetamodelBindingImpl <em>Metamodel Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ModelTypeBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeBinding()
+	 * @see org.kermeta.language.structure.impl.MetamodelBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodelBinding()
 	 * @generated
 	 */
-	int MODEL_TYPE_BINDING = 43;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Bound Model Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_BINDING__BOUND_MODEL_TYPE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Model Type Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleBindingImpl <em>Simple Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.SimpleBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleBinding()
-	 * @generated
-	 */
-	int SIMPLE_BINDING = 44;
+	int METAMODEL_BINDING = 43;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -3827,7 +3864,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_BINDING__KTAG = MODEL_TYPE_BINDING__KTAG;
+	int METAMODEL_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3836,7 +3873,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_BINDING__KOWNED_TAGS = MODEL_TYPE_BINDING__KOWNED_TAGS;
+	int METAMODEL_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -3845,16 +3882,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_BINDING__KTYPE = MODEL_TYPE_BINDING__KTYPE;
+	int METAMODEL_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
-	 * The feature id for the '<em><b>Bound Model Type</b></em>' reference.
+	 * The feature id for the '<em><b>Bound Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_BINDING__BOUND_MODEL_TYPE = MODEL_TYPE_BINDING__BOUND_MODEL_TYPE;
+	int METAMODEL_BINDING__BOUND_METAMODEL = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list.
@@ -3863,89 +3900,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = MODEL_TYPE_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_BINDING__OWNED_ENUMERATION_BINDINGS = MODEL_TYPE_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Simple Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_BINDING_FEATURE_COUNT = MODEL_TYPE_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.AdaptationBindingImpl <em>Adaptation Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.AdaptationBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getAdaptationBinding()
-	 * @generated
-	 */
-	int ADAPTATION_BINDING = 45;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_BINDING__KTAG = MODEL_TYPE_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_BINDING__KOWNED_TAGS = MODEL_TYPE_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_BINDING__KTYPE = MODEL_TYPE_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Bound Model Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_BINDING__BOUND_MODEL_TYPE = MODEL_TYPE_BINDING__BOUND_MODEL_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = MODEL_TYPE_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS = MODEL_TYPE_BINDING_FEATURE_COUNT + 1;
+	int METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Used Adaptation Operators</b></em>' containment reference list.
@@ -3954,16 +3909,25 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPTATION_BINDING__USED_ADAPTATION_OPERATORS = MODEL_TYPE_BINDING_FEATURE_COUNT + 2;
+	int METAMODEL_BINDING__USED_ADAPTATION_OPERATORS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Adaptation Binding</em>' class.
+	 * The feature id for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPTATION_BINDING_FEATURE_COUNT = MODEL_TYPE_BINDING_FEATURE_COUNT + 3;
+	int METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Metamodel Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ClassDefinitionBindingImpl <em>Class Definition Binding</em>}' class.
@@ -3973,7 +3937,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getClassDefinitionBinding()
 	 * @generated
 	 */
-	int CLASS_DEFINITION_BINDING = 46;
+	int CLASS_DEFINITION_BINDING = 44;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -4003,59 +3967,13 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
-	 * The number of structural features of the '<em>Class Definition Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleClassDefinitionBindingImpl <em>Simple Class Definition Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.SimpleClassDefinitionBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleClassDefinitionBinding()
-	 * @generated
-	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING = 47;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__KTAG = CLASS_DEFINITION_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__KOWNED_TAGS = CLASS_DEFINITION_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__KTYPE = CLASS_DEFINITION_BINDING__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Owned Property Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 0;
+	int CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Operation Bindings</b></em>' containment reference list.
@@ -4064,7 +3982,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 1;
+	int CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -4073,7 +3991,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__SOURCE = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 2;
+	int CLASS_DEFINITION_BINDING__SOURCE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -4082,98 +4000,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING__TARGET = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 3;
+	int CLASS_DEFINITION_BINDING__TARGET = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>Simple Class Definition Binding</em>' class.
+	 * The number of structural features of the '<em>Class Definition Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_CLASS_DEFINITION_BINDING_FEATURE_COUNT = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ComplexClassDefinitionBindingImpl <em>Complex Class Definition Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ComplexClassDefinitionBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexClassDefinitionBinding()
-	 * @generated
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING = 48;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__KTAG = CLASS_DEFINITION_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__KOWNED_TAGS = CLASS_DEFINITION_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__KTYPE = CLASS_DEFINITION_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__SOURCES = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING__TARGETS = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Complex Class Definition Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_CLASS_DEFINITION_BINDING_FEATURE_COUNT = CLASS_DEFINITION_BINDING_FEATURE_COUNT + 4;
+	int CLASS_DEFINITION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.EnumerationBindingImpl <em>Enumeration Binding</em>}' class.
@@ -4183,7 +4019,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getEnumerationBinding()
 	 * @generated
 	 */
-	int ENUMERATION_BINDING = 49;
+	int ENUMERATION_BINDING = 45;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -4213,77 +4049,13 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Enumeration Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleEnumerationBindingImpl <em>Simple Enumeration Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.SimpleEnumerationBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleEnumerationBinding()
-	 * @generated
-	 */
-	int SIMPLE_ENUMERATION_BINDING = 50;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_ENUMERATION_BINDING__KTAG = ENUMERATION_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_ENUMERATION_BINDING__KOWNED_TAGS = ENUMERATION_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_ENUMERATION_BINDING__KTYPE = ENUMERATION_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS = ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_ENUMERATION_BINDING__SOURCE = ENUMERATION_BINDING_FEATURE_COUNT + 0;
+	int ENUMERATION_BINDING__SOURCE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -4292,89 +4064,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_ENUMERATION_BINDING__TARGET = ENUMERATION_BINDING_FEATURE_COUNT + 1;
+	int ENUMERATION_BINDING__TARGET = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Simple Enumeration Binding</em>' class.
+	 * The number of structural features of the '<em>Enumeration Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_ENUMERATION_BINDING_FEATURE_COUNT = ENUMERATION_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ComplexEnumerationBindingImpl <em>Complex Enumeration Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ComplexEnumerationBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexEnumerationBinding()
-	 * @generated
-	 */
-	int COMPLEX_ENUMERATION_BINDING = 51;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING__KTAG = ENUMERATION_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING__KOWNED_TAGS = ENUMERATION_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING__KTYPE = ENUMERATION_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS = ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS;
-
-	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING__SOURCES = ENUMERATION_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING__TARGETS = ENUMERATION_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Complex Enumeration Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_ENUMERATION_BINDING_FEATURE_COUNT = ENUMERATION_BINDING_FEATURE_COUNT + 2;
+	int ENUMERATION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PropertyBindingImpl <em>Property Binding</em>}' class.
@@ -4384,7 +4083,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPropertyBinding()
 	 * @generated
 	 */
-	int PROPERTY_BINDING = 52;
+	int PROPERTY_BINDING = 46;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -4414,13 +4113,31 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_BINDING__SOURCE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_BINDING__TARGET = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Property Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int PROPERTY_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.OperationBindingImpl <em>Operation Binding</em>}' class.
@@ -4430,7 +4147,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getOperationBinding()
 	 * @generated
 	 */
-	int OPERATION_BINDING = 53;
+	int OPERATION_BINDING = 47;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -4460,525 +4177,31 @@ public interface StructurePackage extends EPackage {
 	int OPERATION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_BINDING__SOURCE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_BINDING__TARGET = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Operation Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimplePropertyBindingImpl <em>Simple Property Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.SimplePropertyBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimplePropertyBinding()
-	 * @generated
-	 */
-	int SIMPLE_PROPERTY_BINDING = 54;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PROPERTY_BINDING__KTAG = PROPERTY_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PROPERTY_BINDING__KOWNED_TAGS = PROPERTY_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PROPERTY_BINDING__KTYPE = PROPERTY_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PROPERTY_BINDING__SOURCE = PROPERTY_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PROPERTY_BINDING__TARGET = PROPERTY_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Simple Property Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PROPERTY_BINDING_FEATURE_COUNT = PROPERTY_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ComplexPropertyBindingImpl <em>Complex Property Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ComplexPropertyBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexPropertyBinding()
-	 * @generated
-	 */
-	int COMPLEX_PROPERTY_BINDING = 55;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PROPERTY_BINDING__KTAG = PROPERTY_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PROPERTY_BINDING__KOWNED_TAGS = PROPERTY_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PROPERTY_BINDING__KTYPE = PROPERTY_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PROPERTY_BINDING__SOURCES = PROPERTY_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PROPERTY_BINDING__TARGETS = PROPERTY_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Complex Property Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PROPERTY_BINDING_FEATURE_COUNT = PROPERTY_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleOperationBindingImpl <em>Simple Operation Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.SimpleOperationBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleOperationBinding()
-	 * @generated
-	 */
-	int SIMPLE_OPERATION_BINDING = 56;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING__KTAG = OPERATION_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING__KOWNED_TAGS = OPERATION_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING__KTYPE = OPERATION_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING__SOURCE = OPERATION_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING__TARGET = OPERATION_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owned Parameter Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS = OPERATION_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Simple Operation Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_BINDING_FEATURE_COUNT = OPERATION_BINDING_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ComplexOperationBindingImpl <em>Complex Operation Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ComplexOperationBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexOperationBinding()
-	 * @generated
-	 */
-	int COMPLEX_OPERATION_BINDING = 57;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING__KTAG = OPERATION_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING__KOWNED_TAGS = OPERATION_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING__KTYPE = OPERATION_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING__SOURCES = OPERATION_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING__TARGETS = OPERATION_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owned Parameter Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS = OPERATION_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Complex Operation Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_OPERATION_BINDING_FEATURE_COUNT = OPERATION_BINDING_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ParameterBindingImpl <em>Parameter Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ParameterBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getParameterBinding()
-	 * @generated
-	 */
-	int PARAMETER_BINDING = 58;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
-	 * The number of structural features of the '<em>Parameter Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.SimpleParameterBindingImpl <em>Simple Parameter Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.SimpleParameterBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleParameterBinding()
-	 * @generated
-	 */
-	int SIMPLE_PARAMETER_BINDING = 59;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PARAMETER_BINDING__KTAG = PARAMETER_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PARAMETER_BINDING__KOWNED_TAGS = PARAMETER_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PARAMETER_BINDING__KTYPE = PARAMETER_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PARAMETER_BINDING__SOURCE = PARAMETER_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PARAMETER_BINDING__TARGET = PARAMETER_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Simple Parameter Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_PARAMETER_BINDING_FEATURE_COUNT = PARAMETER_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ComplexParameterBindingImpl <em>Complex Parameter Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.ComplexParameterBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexParameterBinding()
-	 * @generated
-	 */
-	int COMPLEX_PARAMETER_BINDING = 60;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PARAMETER_BINDING__KTAG = PARAMETER_BINDING__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PARAMETER_BINDING__KOWNED_TAGS = PARAMETER_BINDING__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PARAMETER_BINDING__KTYPE = PARAMETER_BINDING__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PARAMETER_BINDING__SOURCES = PARAMETER_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PARAMETER_BINDING__TARGETS = PARAMETER_BINDING_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Complex Parameter Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_PARAMETER_BINDING_FEATURE_COUNT = PARAMETER_BINDING_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.EnumLiteralbindingImpl <em>Enum Literalbinding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.EnumLiteralbindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getEnumLiteralbinding()
-	 * @generated
-	 */
-	int ENUM_LITERALBINDING = 61;
-
-	/**
-	 * The feature id for the '<em><b>KTag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERALBINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
-
-	/**
-	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERALBINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERALBINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERALBINDING__SOURCES = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERALBINDING__TARGETS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Enum Literalbinding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERALBINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int OPERATION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.AdaptationOperatorImpl <em>Adaptation Operator</em>}' class.
@@ -4988,7 +4211,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getAdaptationOperator()
 	 * @generated
 	 */
-	int ADAPTATION_OPERATOR = 62;
+	int ADAPTATION_OPERATOR = 48;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -5052,7 +4275,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUseAdaptationOperator()
 	 * @generated
 	 */
-	int USE_ADAPTATION_OPERATOR = 63;
+	int USE_ADAPTATION_OPERATOR = 49;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -5125,7 +4348,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getPropertyAdaptationOperator()
 	 * @generated
 	 */
-	int PROPERTY_ADAPTATION_OPERATOR = 64;
+	int PROPERTY_ADAPTATION_OPERATOR = 50;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -5234,7 +4457,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedAdaptationOperator()
 	 * @generated
 	 */
-	int UNRESOLVED_ADAPTATION_OPERATOR = 65;
+	int UNRESOLVED_ADAPTATION_OPERATOR = 51;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -5298,7 +4521,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getAdaptationParameter()
 	 * @generated
 	 */
-	int ADAPTATION_PARAMETER = 66;
+	int ADAPTATION_PARAMETER = 52;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -5371,7 +4594,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getOperationAdaptationOperator()
 	 * @generated
 	 */
-	int OPERATION_ADAPTATION_OPERATOR = 67;
+	int OPERATION_ADAPTATION_OPERATOR = 53;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -5446,6 +4669,151 @@ public interface StructurePackage extends EPackage {
 	int OPERATION_ADAPTATION_OPERATOR_FEATURE_COUNT = ADAPTATION_OPERATOR_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedMetamodelImpl <em>Unresolved Metamodel</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.UnresolvedMetamodelImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedMetamodel()
+	 * @generated
+	 */
+	int UNRESOLVED_METAMODEL = 54;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__KTAG = MODELING_UNIT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__KOWNED_TAGS = MODELING_UNIT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__KTYPE = MODELING_UNIT__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__NAME = MODELING_UNIT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__PACKAGES = MODELING_UNIT__PACKAGES;
+
+	/**
+	 * The feature id for the '<em><b>Namespace Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__NAMESPACE_PREFIX = MODELING_UNIT__NAMESPACE_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Requires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__REQUIRES = MODELING_UNIT__REQUIRES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Modeling Units</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS = MODELING_UNIT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_METAMODEL_FEATURE_COUNT = MODELING_UNIT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__KTAG = TYPE__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__KTYPE = TYPE__KTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5453,7 +4821,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 68;
+	int CONSTRAINT_LANGUAGE = 57;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -5463,7 +4831,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 69;
+	int CONSTRAINT_TYPE = 58;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -5473,7 +4841,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 70;
+	int STRING = 59;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -5483,7 +4851,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 71;
+	int BOOLEAN = 60;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -5492,7 +4860,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 72;
+	int INTEGER = 61;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -5501,7 +4869,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 73;
+	int UNLIMITED_NATURAL = 62;
 
 
 	/**
@@ -6484,25 +5852,25 @@ public interface StructurePackage extends EPackage {
 	EReference getModelingUnit_Requires();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.TypeDefinitionContainer <em>Type Definition Container</em>}'.
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer <em>Model Element Type Definition Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Definition Container</em>'.
-	 * @see org.kermeta.language.structure.TypeDefinitionContainer
+	 * @return the meta object for class '<em>Model Element Type Definition Container</em>'.
+	 * @see org.kermeta.language.structure.ModelElementTypeDefinitionContainer
 	 * @generated
 	 */
-	EClass getTypeDefinitionContainer();
+	EClass getModelElementTypeDefinitionContainer();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.TypeDefinitionContainer#getOwnedTypeDefinition <em>Owned Type Definition</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer#getOwnedTypeDefinition <em>Owned Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Type Definition</em>'.
-	 * @see org.kermeta.language.structure.TypeDefinitionContainer#getOwnedTypeDefinition()
-	 * @see #getTypeDefinitionContainer()
+	 * @see org.kermeta.language.structure.ModelElementTypeDefinitionContainer#getOwnedTypeDefinition()
+	 * @see #getModelElementTypeDefinitionContainer()
 	 * @generated
 	 */
-	EReference getTypeDefinitionContainer_OwnedTypeDefinition();
+	EReference getModelElementTypeDefinitionContainer_OwnedTypeDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Require <em>Require</em>}'.
@@ -6621,6 +5989,59 @@ public interface StructurePackage extends EPackage {
 	EClass getObjectTypeVariable();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.Metamodel <em>Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metamodel</em>'.
+	 * @see org.kermeta.language.structure.Metamodel
+	 * @generated
+	 */
+	EClass getMetamodel();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.Metamodel#getOwnedBindings <em>Owned Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Bindings</em>'.
+	 * @see org.kermeta.language.structure.Metamodel#getOwnedBindings()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EReference getMetamodel_OwnedBindings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.Metamodel#getOwnedMetamodels <em>Owned Metamodels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Metamodels</em>'.
+	 * @see org.kermeta.language.structure.Metamodel#getOwnedMetamodels()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EReference getMetamodel_OwnedMetamodels();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.MetamodelVariable <em>Metamodel Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metamodel Variable</em>'.
+	 * @see org.kermeta.language.structure.MetamodelVariable
+	 * @generated
+	 */
+	EClass getMetamodelVariable();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.MetamodelVariable#getVirtualType <em>Virtual Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Virtual Type</em>'.
+	 * @see org.kermeta.language.structure.MetamodelVariable#getVirtualType()
+	 * @see #getMetamodelVariable()
+	 * @generated
+	 */
+	EReference getMetamodelVariable_VirtualType();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelType <em>Model Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6631,47 +6052,15 @@ public interface StructurePackage extends EPackage {
 	EClass getModelType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelType#getOwnedBindings <em>Owned Bindings</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.ModelType#getTypeDefinition <em>Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Bindings</em>'.
-	 * @see org.kermeta.language.structure.ModelType#getOwnedBindings()
+	 * @return the meta object for the reference '<em>Type Definition</em>'.
+	 * @see org.kermeta.language.structure.ModelType#getTypeDefinition()
 	 * @see #getModelType()
 	 * @generated
 	 */
-	EReference getModelType_OwnedBindings();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelType#getOwnedPackages <em>Owned Packages</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Packages</em>'.
-	 * @see org.kermeta.language.structure.ModelType#getOwnedPackages()
-	 * @see #getModelType()
-	 * @generated
-	 */
-	EReference getModelType_OwnedPackages();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeVariable <em>Model Type Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Type Variable</em>'.
-	 * @see org.kermeta.language.structure.ModelTypeVariable
-	 * @generated
-	 */
-	EClass getModelTypeVariable();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ModelTypeVariable#getVirtualType <em>Virtual Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Virtual Type</em>'.
-	 * @see org.kermeta.language.structure.ModelTypeVariable#getVirtualType()
-	 * @see #getModelTypeVariable()
-	 * @generated
-	 */
-	EReference getModelTypeVariable_VirtualType();
+	EReference getModelType_TypeDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.VirtualType <em>Virtual Type</em>}'.
@@ -6695,15 +6084,15 @@ public interface StructurePackage extends EPackage {
 	EReference getVirtualType_ClassDefinition();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.VirtualType#getMetamodelVariable <em>Metamodel Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Model Type</em>'.
-	 * @see org.kermeta.language.structure.VirtualType#getModelType()
+	 * @return the meta object for the reference '<em>Metamodel Variable</em>'.
+	 * @see org.kermeta.language.structure.VirtualType#getMetamodelVariable()
 	 * @see #getVirtualType()
 	 * @generated
 	 */
-	EReference getVirtualType_ModelType();
+	EReference getVirtualType_MetamodelVariable();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.VirtualType#getTypeParamBinding <em>Type Param Binding</em>}'.
@@ -6769,6 +6158,16 @@ public interface StructurePackage extends EPackage {
 	EAttribute getUnresolvedType_TypeIdentifier();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedReference <em>Unresolved Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Reference</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedReference
+	 * @generated
+	 */
+	EClass getUnresolvedReference();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.UnresolvedType#getUsings <em>Usings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6789,16 +6188,6 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUnresolvedType_Generics();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.Unresolved <em>Unresolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Unresolved</em>'.
-	 * @see org.kermeta.language.structure.Unresolved
-	 * @generated
-	 */
-	EClass getUnresolved();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedProperty <em>Unresolved Property</em>}'.
@@ -6969,100 +6358,58 @@ public interface StructurePackage extends EPackage {
 	EClass getUnresolvedTypeVariable();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeBinding <em>Model Type Binding</em>}'.
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.MetamodelBinding <em>Metamodel Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Type Binding</em>'.
-	 * @see org.kermeta.language.structure.ModelTypeBinding
+	 * @return the meta object for class '<em>Metamodel Binding</em>'.
+	 * @see org.kermeta.language.structure.MetamodelBinding
 	 * @generated
 	 */
-	EClass getModelTypeBinding();
+	EClass getMetamodelBinding();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.ModelTypeBinding#getBoundModelType <em>Bound Model Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.MetamodelBinding#getBoundMetamodel <em>Bound Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Bound Model Type</em>'.
-	 * @see org.kermeta.language.structure.ModelTypeBinding#getBoundModelType()
-	 * @see #getModelTypeBinding()
+	 * @return the meta object for the reference '<em>Bound Metamodel</em>'.
+	 * @see org.kermeta.language.structure.MetamodelBinding#getBoundMetamodel()
+	 * @see #getMetamodelBinding()
 	 * @generated
 	 */
-	EReference getModelTypeBinding_BoundModelType();
+	EReference getMetamodelBinding_BoundMetamodel();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.SimpleBinding <em>Simple Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Binding</em>'.
-	 * @see org.kermeta.language.structure.SimpleBinding
-	 * @generated
-	 */
-	EClass getSimpleBinding();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.SimpleBinding#getOwnedClassDefinitionBindings <em>Owned Class Definition Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.MetamodelBinding#getOwnedClassDefinitionBindings <em>Owned Class Definition Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Class Definition Bindings</em>'.
-	 * @see org.kermeta.language.structure.SimpleBinding#getOwnedClassDefinitionBindings()
-	 * @see #getSimpleBinding()
+	 * @see org.kermeta.language.structure.MetamodelBinding#getOwnedClassDefinitionBindings()
+	 * @see #getMetamodelBinding()
 	 * @generated
 	 */
-	EReference getSimpleBinding_OwnedClassDefinitionBindings();
+	EReference getMetamodelBinding_OwnedClassDefinitionBindings();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.SimpleBinding#getOwnedEnumerationBindings <em>Owned Enumeration Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Enumeration Bindings</em>'.
-	 * @see org.kermeta.language.structure.SimpleBinding#getOwnedEnumerationBindings()
-	 * @see #getSimpleBinding()
-	 * @generated
-	 */
-	EReference getSimpleBinding_OwnedEnumerationBindings();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.AdaptationBinding <em>Adaptation Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Adaptation Binding</em>'.
-	 * @see org.kermeta.language.structure.AdaptationBinding
-	 * @generated
-	 */
-	EClass getAdaptationBinding();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.AdaptationBinding#getOwnedClassDefinitionBindings <em>Owned Class Definition Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Class Definition Bindings</em>'.
-	 * @see org.kermeta.language.structure.AdaptationBinding#getOwnedClassDefinitionBindings()
-	 * @see #getAdaptationBinding()
-	 * @generated
-	 */
-	EReference getAdaptationBinding_OwnedClassDefinitionBindings();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.AdaptationBinding#getOwnedEnumerationBindings <em>Owned Enumeration Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Enumeration Bindings</em>'.
-	 * @see org.kermeta.language.structure.AdaptationBinding#getOwnedEnumerationBindings()
-	 * @see #getAdaptationBinding()
-	 * @generated
-	 */
-	EReference getAdaptationBinding_OwnedEnumerationBindings();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.AdaptationBinding#getUsedAdaptationOperators <em>Used Adaptation Operators</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.MetamodelBinding#getUsedAdaptationOperators <em>Used Adaptation Operators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Used Adaptation Operators</em>'.
-	 * @see org.kermeta.language.structure.AdaptationBinding#getUsedAdaptationOperators()
-	 * @see #getAdaptationBinding()
+	 * @see org.kermeta.language.structure.MetamodelBinding#getUsedAdaptationOperators()
+	 * @see #getMetamodelBinding()
 	 * @generated
 	 */
-	EReference getAdaptationBinding_UsedAdaptationOperators();
+	EReference getMetamodelBinding_UsedAdaptationOperators();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.MetamodelBinding#getOwnedEnumerationBindings <em>Owned Enumeration Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Enumeration Bindings</em>'.
+	 * @see org.kermeta.language.structure.MetamodelBinding#getOwnedEnumerationBindings()
+	 * @see #getMetamodelBinding()
+	 * @generated
+	 */
+	EReference getMetamodelBinding_OwnedEnumerationBindings();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.ClassDefinitionBinding <em>Class Definition Binding</em>}'.
@@ -7075,112 +6422,48 @@ public interface StructurePackage extends EPackage {
 	EClass getClassDefinitionBinding();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding <em>Simple Class Definition Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Class Definition Binding</em>'.
-	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding
-	 * @generated
-	 */
-	EClass getSimpleClassDefinitionBinding();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding#getOwnedPropertyBindings <em>Owned Property Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ClassDefinitionBinding#getOwnedPropertyBindings <em>Owned Property Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Property Bindings</em>'.
-	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding#getOwnedPropertyBindings()
-	 * @see #getSimpleClassDefinitionBinding()
+	 * @see org.kermeta.language.structure.ClassDefinitionBinding#getOwnedPropertyBindings()
+	 * @see #getClassDefinitionBinding()
 	 * @generated
 	 */
-	EReference getSimpleClassDefinitionBinding_OwnedPropertyBindings();
+	EReference getClassDefinitionBinding_OwnedPropertyBindings();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding#getOwnedOperationBindings <em>Owned Operation Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ClassDefinitionBinding#getOwnedOperationBindings <em>Owned Operation Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Operation Bindings</em>'.
-	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding#getOwnedOperationBindings()
-	 * @see #getSimpleClassDefinitionBinding()
+	 * @see org.kermeta.language.structure.ClassDefinitionBinding#getOwnedOperationBindings()
+	 * @see #getClassDefinitionBinding()
 	 * @generated
 	 */
-	EReference getSimpleClassDefinitionBinding_OwnedOperationBindings();
+	EReference getClassDefinitionBinding_OwnedOperationBindings();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.ClassDefinitionBinding#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding#getSource()
-	 * @see #getSimpleClassDefinitionBinding()
+	 * @see org.kermeta.language.structure.ClassDefinitionBinding#getSource()
+	 * @see #getClassDefinitionBinding()
 	 * @generated
 	 */
-	EReference getSimpleClassDefinitionBinding_Source();
+	EReference getClassDefinitionBinding_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.ClassDefinitionBinding#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding#getTarget()
-	 * @see #getSimpleClassDefinitionBinding()
+	 * @see org.kermeta.language.structure.ClassDefinitionBinding#getTarget()
+	 * @see #getClassDefinitionBinding()
 	 * @generated
 	 */
-	EReference getSimpleClassDefinitionBinding_Target();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding <em>Complex Class Definition Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Complex Class Definition Binding</em>'.
-	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding
-	 * @generated
-	 */
-	EClass getComplexClassDefinitionBinding();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding#getOwnedPropertyBindings <em>Owned Property Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Property Bindings</em>'.
-	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding#getOwnedPropertyBindings()
-	 * @see #getComplexClassDefinitionBinding()
-	 * @generated
-	 */
-	EReference getComplexClassDefinitionBinding_OwnedPropertyBindings();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding#getOwnedOperationBindings <em>Owned Operation Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Operation Bindings</em>'.
-	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding#getOwnedOperationBindings()
-	 * @see #getComplexClassDefinitionBinding()
-	 * @generated
-	 */
-	EReference getComplexClassDefinitionBinding_OwnedOperationBindings();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding#getSources()
-	 * @see #getComplexClassDefinitionBinding()
-	 * @generated
-	 */
-	EReference getComplexClassDefinitionBinding_Sources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding#getTargets()
-	 * @see #getComplexClassDefinitionBinding()
-	 * @generated
-	 */
-	EReference getComplexClassDefinitionBinding_Targets();
+	EReference getClassDefinitionBinding_Target();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.EnumerationBinding <em>Enumeration Binding</em>}'.
@@ -7193,79 +6476,26 @@ public interface StructurePackage extends EPackage {
 	EClass getEnumerationBinding();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.EnumerationBinding#getOwnedEnumLiteralBindings <em>Owned Enum Literal Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Enum Literal Bindings</em>'.
-	 * @see org.kermeta.language.structure.EnumerationBinding#getOwnedEnumLiteralBindings()
-	 * @see #getEnumerationBinding()
-	 * @generated
-	 */
-	EReference getEnumerationBinding_OwnedEnumLiteralBindings();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.SimpleEnumerationBinding <em>Simple Enumeration Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Enumeration Binding</em>'.
-	 * @see org.kermeta.language.structure.SimpleEnumerationBinding
-	 * @generated
-	 */
-	EClass getSimpleEnumerationBinding();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleEnumerationBinding#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.EnumerationBinding#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.kermeta.language.structure.SimpleEnumerationBinding#getSource()
-	 * @see #getSimpleEnumerationBinding()
+	 * @see org.kermeta.language.structure.EnumerationBinding#getSource()
+	 * @see #getEnumerationBinding()
 	 * @generated
 	 */
-	EReference getSimpleEnumerationBinding_Source();
+	EReference getEnumerationBinding_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleEnumerationBinding#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.EnumerationBinding#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.kermeta.language.structure.SimpleEnumerationBinding#getTarget()
-	 * @see #getSimpleEnumerationBinding()
+	 * @see org.kermeta.language.structure.EnumerationBinding#getTarget()
+	 * @see #getEnumerationBinding()
 	 * @generated
 	 */
-	EReference getSimpleEnumerationBinding_Target();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ComplexEnumerationBinding <em>Complex Enumeration Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Complex Enumeration Binding</em>'.
-	 * @see org.kermeta.language.structure.ComplexEnumerationBinding
-	 * @generated
-	 */
-	EClass getComplexEnumerationBinding();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexEnumerationBinding#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.kermeta.language.structure.ComplexEnumerationBinding#getSources()
-	 * @see #getComplexEnumerationBinding()
-	 * @generated
-	 */
-	EReference getComplexEnumerationBinding_Sources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexEnumerationBinding#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.kermeta.language.structure.ComplexEnumerationBinding#getTargets()
-	 * @see #getComplexEnumerationBinding()
-	 * @generated
-	 */
-	EReference getComplexEnumerationBinding_Targets();
+	EReference getEnumerationBinding_Target();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.PropertyBinding <em>Property Binding</em>}'.
@@ -7278,6 +6508,28 @@ public interface StructurePackage extends EPackage {
 	EClass getPropertyBinding();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.PropertyBinding#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see org.kermeta.language.structure.PropertyBinding#getSource()
+	 * @see #getPropertyBinding()
+	 * @generated
+	 */
+	EReference getPropertyBinding_Source();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.PropertyBinding#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.kermeta.language.structure.PropertyBinding#getTarget()
+	 * @see #getPropertyBinding()
+	 * @generated
+	 */
+	EReference getPropertyBinding_Target();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.OperationBinding <em>Operation Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7288,260 +6540,26 @@ public interface StructurePackage extends EPackage {
 	EClass getOperationBinding();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.SimplePropertyBinding <em>Simple Property Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Property Binding</em>'.
-	 * @see org.kermeta.language.structure.SimplePropertyBinding
-	 * @generated
-	 */
-	EClass getSimplePropertyBinding();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimplePropertyBinding#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.OperationBinding#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.kermeta.language.structure.SimplePropertyBinding#getSource()
-	 * @see #getSimplePropertyBinding()
+	 * @see org.kermeta.language.structure.OperationBinding#getSource()
+	 * @see #getOperationBinding()
 	 * @generated
 	 */
-	EReference getSimplePropertyBinding_Source();
+	EReference getOperationBinding_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimplePropertyBinding#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.OperationBinding#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.kermeta.language.structure.SimplePropertyBinding#getTarget()
-	 * @see #getSimplePropertyBinding()
+	 * @see org.kermeta.language.structure.OperationBinding#getTarget()
+	 * @see #getOperationBinding()
 	 * @generated
 	 */
-	EReference getSimplePropertyBinding_Target();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ComplexPropertyBinding <em>Complex Property Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Complex Property Binding</em>'.
-	 * @see org.kermeta.language.structure.ComplexPropertyBinding
-	 * @generated
-	 */
-	EClass getComplexPropertyBinding();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexPropertyBinding#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.kermeta.language.structure.ComplexPropertyBinding#getSources()
-	 * @see #getComplexPropertyBinding()
-	 * @generated
-	 */
-	EReference getComplexPropertyBinding_Sources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexPropertyBinding#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.kermeta.language.structure.ComplexPropertyBinding#getTargets()
-	 * @see #getComplexPropertyBinding()
-	 * @generated
-	 */
-	EReference getComplexPropertyBinding_Targets();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.SimpleOperationBinding <em>Simple Operation Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Operation Binding</em>'.
-	 * @see org.kermeta.language.structure.SimpleOperationBinding
-	 * @generated
-	 */
-	EClass getSimpleOperationBinding();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleOperationBinding#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.kermeta.language.structure.SimpleOperationBinding#getSource()
-	 * @see #getSimpleOperationBinding()
-	 * @generated
-	 */
-	EReference getSimpleOperationBinding_Source();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleOperationBinding#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.kermeta.language.structure.SimpleOperationBinding#getTarget()
-	 * @see #getSimpleOperationBinding()
-	 * @generated
-	 */
-	EReference getSimpleOperationBinding_Target();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.SimpleOperationBinding#getOwnedParameterBindings <em>Owned Parameter Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Parameter Bindings</em>'.
-	 * @see org.kermeta.language.structure.SimpleOperationBinding#getOwnedParameterBindings()
-	 * @see #getSimpleOperationBinding()
-	 * @generated
-	 */
-	EReference getSimpleOperationBinding_OwnedParameterBindings();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ComplexOperationBinding <em>Complex Operation Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Complex Operation Binding</em>'.
-	 * @see org.kermeta.language.structure.ComplexOperationBinding
-	 * @generated
-	 */
-	EClass getComplexOperationBinding();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexOperationBinding#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.kermeta.language.structure.ComplexOperationBinding#getSources()
-	 * @see #getComplexOperationBinding()
-	 * @generated
-	 */
-	EReference getComplexOperationBinding_Sources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexOperationBinding#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.kermeta.language.structure.ComplexOperationBinding#getTargets()
-	 * @see #getComplexOperationBinding()
-	 * @generated
-	 */
-	EReference getComplexOperationBinding_Targets();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ComplexOperationBinding#getOwnedParameterBindings <em>Owned Parameter Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Parameter Bindings</em>'.
-	 * @see org.kermeta.language.structure.ComplexOperationBinding#getOwnedParameterBindings()
-	 * @see #getComplexOperationBinding()
-	 * @generated
-	 */
-	EReference getComplexOperationBinding_OwnedParameterBindings();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ParameterBinding <em>Parameter Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameter Binding</em>'.
-	 * @see org.kermeta.language.structure.ParameterBinding
-	 * @generated
-	 */
-	EClass getParameterBinding();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.SimpleParameterBinding <em>Simple Parameter Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Parameter Binding</em>'.
-	 * @see org.kermeta.language.structure.SimpleParameterBinding
-	 * @generated
-	 */
-	EClass getSimpleParameterBinding();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleParameterBinding#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.kermeta.language.structure.SimpleParameterBinding#getSource()
-	 * @see #getSimpleParameterBinding()
-	 * @generated
-	 */
-	EReference getSimpleParameterBinding_Source();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.SimpleParameterBinding#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.kermeta.language.structure.SimpleParameterBinding#getTarget()
-	 * @see #getSimpleParameterBinding()
-	 * @generated
-	 */
-	EReference getSimpleParameterBinding_Target();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.ComplexParameterBinding <em>Complex Parameter Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Complex Parameter Binding</em>'.
-	 * @see org.kermeta.language.structure.ComplexParameterBinding
-	 * @generated
-	 */
-	EClass getComplexParameterBinding();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexParameterBinding#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.kermeta.language.structure.ComplexParameterBinding#getSources()
-	 * @see #getComplexParameterBinding()
-	 * @generated
-	 */
-	EReference getComplexParameterBinding_Sources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ComplexParameterBinding#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.kermeta.language.structure.ComplexParameterBinding#getTargets()
-	 * @see #getComplexParameterBinding()
-	 * @generated
-	 */
-	EReference getComplexParameterBinding_Targets();
-
-	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.EnumLiteralbinding <em>Enum Literalbinding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enum Literalbinding</em>'.
-	 * @see org.kermeta.language.structure.EnumLiteralbinding
-	 * @generated
-	 */
-	EClass getEnumLiteralbinding();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.EnumLiteralbinding#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.kermeta.language.structure.EnumLiteralbinding#getSources()
-	 * @see #getEnumLiteralbinding()
-	 * @generated
-	 */
-	EReference getEnumLiteralbinding_Sources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.EnumLiteralbinding#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.kermeta.language.structure.EnumLiteralbinding#getTargets()
-	 * @see #getEnumLiteralbinding()
-	 * @generated
-	 */
-	EReference getEnumLiteralbinding_Targets();
+	EReference getOperationBinding_Target();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.AdaptationOperator <em>Adaptation Operator</em>}'.
@@ -7723,6 +6741,37 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperationAdaptationOperator_Target();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedMetamodel <em>Unresolved Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Metamodel</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedMetamodel
+	 * @generated
+	 */
+	EClass getUnresolvedMetamodel();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.UnresolvedMetamodel#getOwnedModelingUnits <em>Owned Modeling Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Modeling Units</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedMetamodel#getOwnedModelingUnits()
+	 * @see #getUnresolvedMetamodel()
+	 * @generated
+	 */
+	EReference getUnresolvedMetamodel_OwnedModelingUnits();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelElementTypeDefinition <em>Model Element Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Element Type Definition</em>'.
+	 * @see org.kermeta.language.structure.ModelElementTypeDefinition
+	 * @generated
+	 */
+	EClass getModelElementTypeDefinition();
 
 	/**
 	 * Returns the meta object for enum '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}'.
@@ -8581,14 +7630,14 @@ public interface StructurePackage extends EPackage {
 		EReference MODELING_UNIT__REQUIRES = eINSTANCE.getModelingUnit_Requires();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelElementTypeDefinitionContainerImpl <em>Model Element Type Definition Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.TypeDefinitionContainerImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
+		 * @see org.kermeta.language.structure.impl.ModelElementTypeDefinitionContainerImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelElementTypeDefinitionContainer()
 		 * @generated
 		 */
-		EClass TYPE_DEFINITION_CONTAINER = eINSTANCE.getTypeDefinitionContainer();
+		EClass MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER = eINSTANCE.getModelElementTypeDefinitionContainer();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type Definition</b></em>' containment reference list feature.
@@ -8596,7 +7645,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition();
+		EReference MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = eINSTANCE.getModelElementTypeDefinitionContainer_OwnedTypeDefinition();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.RequireImpl <em>Require</em>}' class.
@@ -8697,6 +7746,50 @@ public interface StructurePackage extends EPackage {
 		EClass OBJECT_TYPE_VARIABLE = eINSTANCE.getObjectTypeVariable();
 
 		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.MetamodelImpl <em>Metamodel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.MetamodelImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodel()
+		 * @generated
+		 */
+		EClass METAMODEL = eINSTANCE.getMetamodel();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METAMODEL__OWNED_BINDINGS = eINSTANCE.getMetamodel_OwnedBindings();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Metamodels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METAMODEL__OWNED_METAMODELS = eINSTANCE.getMetamodel_OwnedMetamodels();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.MetamodelVariableImpl <em>Metamodel Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.MetamodelVariableImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodelVariable()
+		 * @generated
+		 */
+		EClass METAMODEL_VARIABLE = eINSTANCE.getMetamodelVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Virtual Type</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METAMODEL_VARIABLE__VIRTUAL_TYPE = eINSTANCE.getMetamodelVariable_VirtualType();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8707,38 +7800,12 @@ public interface StructurePackage extends EPackage {
 		EClass MODEL_TYPE = eINSTANCE.getModelType();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Bindings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Type Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_TYPE__OWNED_BINDINGS = eINSTANCE.getModelType_OwnedBindings();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Packages</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_TYPE__OWNED_PACKAGES = eINSTANCE.getModelType_OwnedPackages();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ModelTypeVariableImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeVariable()
-		 * @generated
-		 */
-		EClass MODEL_TYPE_VARIABLE = eINSTANCE.getModelTypeVariable();
-
-		/**
-		 * The meta object literal for the '<em><b>Virtual Type</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_TYPE_VARIABLE__VIRTUAL_TYPE = eINSTANCE.getModelTypeVariable_VirtualType();
+		EReference MODEL_TYPE__TYPE_DEFINITION = eINSTANCE.getModelType_TypeDefinition();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.VirtualTypeImpl <em>Virtual Type</em>}' class.
@@ -8759,12 +7826,12 @@ public interface StructurePackage extends EPackage {
 		EReference VIRTUAL_TYPE__CLASS_DEFINITION = eINSTANCE.getVirtualType_ClassDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Metamodel Variable</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VIRTUAL_TYPE__MODEL_TYPE = eINSTANCE.getVirtualType_ModelType();
+		EReference VIRTUAL_TYPE__METAMODEL_VARIABLE = eINSTANCE.getVirtualType_MetamodelVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
@@ -8821,6 +7888,16 @@ public interface StructurePackage extends EPackage {
 		EAttribute UNRESOLVED_TYPE__TYPE_IDENTIFIER = eINSTANCE.getUnresolvedType_TypeIdentifier();
 
 		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedReferenceImpl <em>Unresolved Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedReferenceImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedReference()
+		 * @generated
+		 */
+		EClass UNRESOLVED_REFERENCE = eINSTANCE.getUnresolvedReference();
+
+		/**
 		 * The meta object literal for the '<em><b>Usings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8835,16 +7912,6 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference UNRESOLVED_TYPE__GENERICS = eINSTANCE.getUnresolvedType_Generics();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedImpl <em>Unresolved</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.UnresolvedImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolved()
-		 * @generated
-		 */
-		EClass UNRESOLVED = eINSTANCE.getUnresolved();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedPropertyImpl <em>Unresolved Property</em>}' class.
@@ -8991,32 +8058,22 @@ public interface StructurePackage extends EPackage {
 		EClass UNRESOLVED_TYPE_VARIABLE = eINSTANCE.getUnresolvedTypeVariable();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeBindingImpl <em>Model Type Binding</em>}' class.
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.MetamodelBindingImpl <em>Metamodel Binding</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ModelTypeBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeBinding()
+		 * @see org.kermeta.language.structure.impl.MetamodelBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodelBinding()
 		 * @generated
 		 */
-		EClass MODEL_TYPE_BINDING = eINSTANCE.getModelTypeBinding();
+		EClass METAMODEL_BINDING = eINSTANCE.getMetamodelBinding();
 
 		/**
-		 * The meta object literal for the '<em><b>Bound Model Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Bound Metamodel</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_TYPE_BINDING__BOUND_MODEL_TYPE = eINSTANCE.getModelTypeBinding_BoundModelType();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.SimpleBindingImpl <em>Simple Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.SimpleBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleBinding()
-		 * @generated
-		 */
-		EClass SIMPLE_BINDING = eINSTANCE.getSimpleBinding();
+		EReference METAMODEL_BINDING__BOUND_METAMODEL = eINSTANCE.getMetamodelBinding_BoundMetamodel();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list feature.
@@ -9024,41 +8081,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = eINSTANCE.getSimpleBinding_OwnedClassDefinitionBindings();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_BINDING__OWNED_ENUMERATION_BINDINGS = eINSTANCE.getSimpleBinding_OwnedEnumerationBindings();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.AdaptationBindingImpl <em>Adaptation Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.AdaptationBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getAdaptationBinding()
-		 * @generated
-		 */
-		EClass ADAPTATION_BINDING = eINSTANCE.getAdaptationBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = eINSTANCE.getAdaptationBinding_OwnedClassDefinitionBindings();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS = eINSTANCE.getAdaptationBinding_OwnedEnumerationBindings();
+		EReference METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = eINSTANCE.getMetamodelBinding_OwnedClassDefinitionBindings();
 
 		/**
 		 * The meta object literal for the '<em><b>Used Adaptation Operators</b></em>' containment reference list feature.
@@ -9066,7 +8089,15 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ADAPTATION_BINDING__USED_ADAPTATION_OPERATORS = eINSTANCE.getAdaptationBinding_UsedAdaptationOperators();
+		EReference METAMODEL_BINDING__USED_ADAPTATION_OPERATORS = eINSTANCE.getMetamodelBinding_UsedAdaptationOperators();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS = eINSTANCE.getMetamodelBinding_OwnedEnumerationBindings();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ClassDefinitionBindingImpl <em>Class Definition Binding</em>}' class.
@@ -9079,22 +8110,12 @@ public interface StructurePackage extends EPackage {
 		EClass CLASS_DEFINITION_BINDING = eINSTANCE.getClassDefinitionBinding();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.SimpleClassDefinitionBindingImpl <em>Simple Class Definition Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.SimpleClassDefinitionBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleClassDefinitionBinding()
-		 * @generated
-		 */
-		EClass SIMPLE_CLASS_DEFINITION_BINDING = eINSTANCE.getSimpleClassDefinitionBinding();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Property Bindings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS = eINSTANCE.getSimpleClassDefinitionBinding_OwnedPropertyBindings();
+		EReference CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS = eINSTANCE.getClassDefinitionBinding_OwnedPropertyBindings();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Operation Bindings</b></em>' containment reference list feature.
@@ -9102,7 +8123,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS = eINSTANCE.getSimpleClassDefinitionBinding_OwnedOperationBindings();
+		EReference CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS = eINSTANCE.getClassDefinitionBinding_OwnedOperationBindings();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
@@ -9110,7 +8131,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_CLASS_DEFINITION_BINDING__SOURCE = eINSTANCE.getSimpleClassDefinitionBinding_Source();
+		EReference CLASS_DEFINITION_BINDING__SOURCE = eINSTANCE.getClassDefinitionBinding_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
@@ -9118,49 +8139,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_CLASS_DEFINITION_BINDING__TARGET = eINSTANCE.getSimpleClassDefinitionBinding_Target();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ComplexClassDefinitionBindingImpl <em>Complex Class Definition Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ComplexClassDefinitionBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexClassDefinitionBinding()
-		 * @generated
-		 */
-		EClass COMPLEX_CLASS_DEFINITION_BINDING = eINSTANCE.getComplexClassDefinitionBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Property Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS = eINSTANCE.getComplexClassDefinitionBinding_OwnedPropertyBindings();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Operation Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS = eINSTANCE.getComplexClassDefinitionBinding_OwnedOperationBindings();
-
-		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_CLASS_DEFINITION_BINDING__SOURCES = eINSTANCE.getComplexClassDefinitionBinding_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_CLASS_DEFINITION_BINDING__TARGETS = eINSTANCE.getComplexClassDefinitionBinding_Targets();
+		EReference CLASS_DEFINITION_BINDING__TARGET = eINSTANCE.getClassDefinitionBinding_Target();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.EnumerationBindingImpl <em>Enumeration Binding</em>}' class.
@@ -9173,30 +8152,12 @@ public interface StructurePackage extends EPackage {
 		EClass ENUMERATION_BINDING = eINSTANCE.getEnumerationBinding();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS = eINSTANCE.getEnumerationBinding_OwnedEnumLiteralBindings();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.SimpleEnumerationBindingImpl <em>Simple Enumeration Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.SimpleEnumerationBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleEnumerationBinding()
-		 * @generated
-		 */
-		EClass SIMPLE_ENUMERATION_BINDING = eINSTANCE.getSimpleEnumerationBinding();
-
-		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_ENUMERATION_BINDING__SOURCE = eINSTANCE.getSimpleEnumerationBinding_Source();
+		EReference ENUMERATION_BINDING__SOURCE = eINSTANCE.getEnumerationBinding_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
@@ -9204,33 +8165,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_ENUMERATION_BINDING__TARGET = eINSTANCE.getSimpleEnumerationBinding_Target();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ComplexEnumerationBindingImpl <em>Complex Enumeration Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ComplexEnumerationBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexEnumerationBinding()
-		 * @generated
-		 */
-		EClass COMPLEX_ENUMERATION_BINDING = eINSTANCE.getComplexEnumerationBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_ENUMERATION_BINDING__SOURCES = eINSTANCE.getComplexEnumerationBinding_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_ENUMERATION_BINDING__TARGETS = eINSTANCE.getComplexEnumerationBinding_Targets();
+		EReference ENUMERATION_BINDING__TARGET = eINSTANCE.getEnumerationBinding_Target();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.PropertyBindingImpl <em>Property Binding</em>}' class.
@@ -9243,6 +8178,22 @@ public interface StructurePackage extends EPackage {
 		EClass PROPERTY_BINDING = eINSTANCE.getPropertyBinding();
 
 		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_BINDING__SOURCE = eINSTANCE.getPropertyBinding_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_BINDING__TARGET = eINSTANCE.getPropertyBinding_Target();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.OperationBindingImpl <em>Operation Binding</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9253,22 +8204,12 @@ public interface StructurePackage extends EPackage {
 		EClass OPERATION_BINDING = eINSTANCE.getOperationBinding();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.SimplePropertyBindingImpl <em>Simple Property Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.SimplePropertyBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimplePropertyBinding()
-		 * @generated
-		 */
-		EClass SIMPLE_PROPERTY_BINDING = eINSTANCE.getSimplePropertyBinding();
-
-		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_PROPERTY_BINDING__SOURCE = eINSTANCE.getSimplePropertyBinding_Source();
+		EReference OPERATION_BINDING__SOURCE = eINSTANCE.getOperationBinding_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
@@ -9276,189 +8217,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_PROPERTY_BINDING__TARGET = eINSTANCE.getSimplePropertyBinding_Target();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ComplexPropertyBindingImpl <em>Complex Property Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ComplexPropertyBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexPropertyBinding()
-		 * @generated
-		 */
-		EClass COMPLEX_PROPERTY_BINDING = eINSTANCE.getComplexPropertyBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_PROPERTY_BINDING__SOURCES = eINSTANCE.getComplexPropertyBinding_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_PROPERTY_BINDING__TARGETS = eINSTANCE.getComplexPropertyBinding_Targets();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.SimpleOperationBindingImpl <em>Simple Operation Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.SimpleOperationBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleOperationBinding()
-		 * @generated
-		 */
-		EClass SIMPLE_OPERATION_BINDING = eINSTANCE.getSimpleOperationBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_OPERATION_BINDING__SOURCE = eINSTANCE.getSimpleOperationBinding_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_OPERATION_BINDING__TARGET = eINSTANCE.getSimpleOperationBinding_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Parameter Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS = eINSTANCE.getSimpleOperationBinding_OwnedParameterBindings();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ComplexOperationBindingImpl <em>Complex Operation Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ComplexOperationBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexOperationBinding()
-		 * @generated
-		 */
-		EClass COMPLEX_OPERATION_BINDING = eINSTANCE.getComplexOperationBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_OPERATION_BINDING__SOURCES = eINSTANCE.getComplexOperationBinding_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_OPERATION_BINDING__TARGETS = eINSTANCE.getComplexOperationBinding_Targets();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Parameter Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS = eINSTANCE.getComplexOperationBinding_OwnedParameterBindings();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ParameterBindingImpl <em>Parameter Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ParameterBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getParameterBinding()
-		 * @generated
-		 */
-		EClass PARAMETER_BINDING = eINSTANCE.getParameterBinding();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.SimpleParameterBindingImpl <em>Simple Parameter Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.SimpleParameterBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getSimpleParameterBinding()
-		 * @generated
-		 */
-		EClass SIMPLE_PARAMETER_BINDING = eINSTANCE.getSimpleParameterBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_PARAMETER_BINDING__SOURCE = eINSTANCE.getSimpleParameterBinding_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_PARAMETER_BINDING__TARGET = eINSTANCE.getSimpleParameterBinding_Target();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ComplexParameterBindingImpl <em>Complex Parameter Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.ComplexParameterBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getComplexParameterBinding()
-		 * @generated
-		 */
-		EClass COMPLEX_PARAMETER_BINDING = eINSTANCE.getComplexParameterBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_PARAMETER_BINDING__SOURCES = eINSTANCE.getComplexParameterBinding_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_PARAMETER_BINDING__TARGETS = eINSTANCE.getComplexParameterBinding_Targets();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.EnumLiteralbindingImpl <em>Enum Literalbinding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.EnumLiteralbindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getEnumLiteralbinding()
-		 * @generated
-		 */
-		EClass ENUM_LITERALBINDING = eINSTANCE.getEnumLiteralbinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUM_LITERALBINDING__SOURCES = eINSTANCE.getEnumLiteralbinding_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUM_LITERALBINDING__TARGETS = eINSTANCE.getEnumLiteralbinding_Targets();
+		EReference OPERATION_BINDING__TARGET = eINSTANCE.getOperationBinding_Target();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.AdaptationOperatorImpl <em>Adaptation Operator</em>}' class.
@@ -9607,6 +8366,34 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION_ADAPTATION_OPERATOR__TARGET = eINSTANCE.getOperationAdaptationOperator_Target();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedMetamodelImpl <em>Unresolved Metamodel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedMetamodelImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedMetamodel()
+		 * @generated
+		 */
+		EClass UNRESOLVED_METAMODEL = eINSTANCE.getUnresolvedMetamodel();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Modeling Units</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS = eINSTANCE.getUnresolvedMetamodel_OwnedModelingUnits();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelElementTypeDefinitionImpl <em>Model Element Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ModelElementTypeDefinitionImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelElementTypeDefinition()
+		 * @generated
+		 */
+		EClass MODEL_ELEMENT_TYPE_DEFINITION = eINSTANCE.getModelElementTypeDefinition();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

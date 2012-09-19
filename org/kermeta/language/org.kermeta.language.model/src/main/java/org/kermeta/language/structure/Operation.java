@@ -22,7 +22,6 @@ import org.kermeta.language.behavior.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.Operation#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getPre <em>Pre</em>}</li>
@@ -32,6 +31,7 @@ import org.kermeta.language.behavior.Expression;
  *   <li>{@link org.kermeta.language.structure.Operation#getOwnedUnresolvedOperations <em>Owned Unresolved Operations</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.Operation#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}</li>
  * </ul>
  * </p>

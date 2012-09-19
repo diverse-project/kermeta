@@ -10,23 +10,18 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.structure.AdaptationOperator;
+import org.kermeta.language.structure.ModelElementTypeDefinition;
+import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.language.structure.TypeDefinition;
-import org.kermeta.language.structure.TypeDefinitionContainer;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,7 +49,7 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeDefinition> ownedTypeDefinition;
+	protected EList<ModelElementTypeDefinition> ownedTypeDefinition;
 
 	/**
 	 * The cached value of the '{@link #getNestedPackage() <em>Nested Package</em>}' containment reference list.
@@ -120,9 +115,9 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeDefinition> getOwnedTypeDefinition() {
+	public EList<ModelElementTypeDefinition> getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
-			ownedTypeDefinition = new EObjectContainmentEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION);
+			ownedTypeDefinition = new EObjectContainmentEList<ModelElementTypeDefinition>(ModelElementTypeDefinition.class, this, StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
 	}
@@ -299,7 +294,7 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 		switch (featureID) {
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 				getOwnedTypeDefinition().clear();
-				getOwnedTypeDefinition().addAll((Collection<? extends TypeDefinition>)newValue);
+				getOwnedTypeDefinition().addAll((Collection<? extends ModelElementTypeDefinition>)newValue);
 				return;
 			case StructurePackage.PACKAGE__NESTED_PACKAGE:
 				getNestedPackage().clear();
@@ -375,9 +370,9 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeDefinitionContainer.class) {
+		if (baseClass == ModelElementTypeDefinitionContainer.class) {
 			switch (derivedFeatureID) {
-				case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION: return StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
+				case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION: return StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
 				default: return -1;
 			}
 		}
@@ -391,9 +386,9 @@ public class PackageImpl extends NamedElementImpl implements org.kermeta.languag
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeDefinitionContainer.class) {
+		if (baseClass == ModelElementTypeDefinitionContainer.class) {
 			switch (baseFeatureID) {
-				case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION: return StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION;
+				case StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION: return StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION;
 				default: return -1;
 			}
 		}

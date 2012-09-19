@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.DataType;
+import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
@@ -338,6 +339,11 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				default: return -1;
 			}
 		}
+		if (baseClass == ModelElementTypeDefinition.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -364,6 +370,11 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE_DEFINITION__SUPER_TYPE: return StructurePackage.DATA_TYPE__SUPER_TYPE;
 				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.DATA_TYPE__IS_ASPECT;
+				default: return -1;
+			}
+		}
+		if (baseClass == ModelElementTypeDefinition.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

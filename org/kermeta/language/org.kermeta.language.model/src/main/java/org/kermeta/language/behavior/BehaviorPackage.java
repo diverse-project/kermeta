@@ -2356,7 +2356,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__KTAG = StructurePackage.UNRESOLVED__KTAG;
+	int UNRESOLVED_CALL__KTAG = StructurePackage.UNRESOLVED_REFERENCE__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -2365,7 +2365,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__KOWNED_TAGS = StructurePackage.UNRESOLVED__KOWNED_TAGS;
+	int UNRESOLVED_CALL__KOWNED_TAGS = StructurePackage.UNRESOLVED_REFERENCE__KOWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>KType</b></em>' reference.
@@ -2374,7 +2374,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__KTYPE = StructurePackage.UNRESOLVED__KTYPE;
+	int UNRESOLVED_CALL__KTYPE = StructurePackage.UNRESOLVED_REFERENCE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2383,7 +2383,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__CONTAINED_TYPE = StructurePackage.UNRESOLVED_FEATURE_COUNT + 0;
+	int UNRESOLVED_CALL__CONTAINED_TYPE = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2392,7 +2392,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__STATIC_TYPE = StructurePackage.UNRESOLVED_FEATURE_COUNT + 1;
+	int UNRESOLVED_CALL__STATIC_TYPE = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2401,7 +2401,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__PARAMETERS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 2;
+	int UNRESOLVED_CALL__PARAMETERS = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2410,7 +2410,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__NAME = StructurePackage.UNRESOLVED_FEATURE_COUNT + 3;
+	int UNRESOLVED_CALL__NAME = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
@@ -2419,7 +2419,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__STATIC_TYPE_VARIABLE_BINDINGS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 4;
+	int UNRESOLVED_CALL__STATIC_TYPE_VARIABLE_BINDINGS = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
@@ -2428,7 +2428,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__USINGS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 5;
+	int UNRESOLVED_CALL__USINGS = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2437,7 +2437,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__TARGET = StructurePackage.UNRESOLVED_FEATURE_COUNT + 6;
+	int UNRESOLVED_CALL__TARGET = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
@@ -2446,7 +2446,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__IS_ATPRE = StructurePackage.UNRESOLVED_FEATURE_COUNT + 7;
+	int UNRESOLVED_CALL__IS_ATPRE = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Target Parent</b></em>' reference.
@@ -2455,7 +2455,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__TARGET_PARENT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 8;
+	int UNRESOLVED_CALL__TARGET_PARENT = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generics</b></em>' reference list.
@@ -2464,7 +2464,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__GENERICS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 9;
+	int UNRESOLVED_CALL__GENERICS = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Is Called With Parenthesis</b></em>' attribute.
@@ -2473,7 +2473,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS = StructurePackage.UNRESOLVED_FEATURE_COUNT + 10;
+	int UNRESOLVED_CALL__IS_CALLED_WITH_PARENTHESIS = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Unresolved Call</em>' class.
@@ -2482,7 +2482,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_CALL_FEATURE_COUNT = StructurePackage.UNRESOLVED_FEATURE_COUNT + 11;
+	int UNRESOLVED_CALL_FEATURE_COUNT = StructurePackage.UNRESOLVED_REFERENCE_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallPropertyImpl <em>Call Property</em>}' class.

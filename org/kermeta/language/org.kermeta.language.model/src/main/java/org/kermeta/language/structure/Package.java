@@ -31,7 +31,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Package extends NamedElement, TypeDefinitionContainer {
+public interface Package extends NamedElement, ModelElementTypeDefinitionContainer {
 	/**
 	 * Returns the value of the '<em><b>Nested Package</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Package}.

@@ -28,7 +28,7 @@ import org.kermeta.language.structure.TypeVariable;
  *
  * @generated
  */
-public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements GenericTypeDefinition {
+public abstract class GenericTypeDefinitionImpl extends ModelElementTypeDefinitionImpl implements GenericTypeDefinition {
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference list.
 	 * <!-- begin-user-doc -->

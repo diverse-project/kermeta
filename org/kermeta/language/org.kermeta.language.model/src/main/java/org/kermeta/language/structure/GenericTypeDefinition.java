@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface GenericTypeDefinition extends TypeDefinition {
+public interface GenericTypeDefinition extends ModelElementTypeDefinition {
 	/**
 	 * Returns the value of the '<em><b>Type Parameter</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.TypeVariable}.

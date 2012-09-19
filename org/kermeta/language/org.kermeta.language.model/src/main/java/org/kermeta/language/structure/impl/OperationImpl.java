@@ -38,7 +38,6 @@ import org.kermeta.language.structure.UnresolvedOperation;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getPre <em>Pre</em>}</li>
@@ -48,6 +47,7 @@ import org.kermeta.language.structure.UnresolvedOperation;
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getOwnedUnresolvedOperations <em>Owned Unresolved Operations</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.OperationImpl#getUniqueName <em>Unique Name</em>}</li>
  * </ul>
  * </p>
@@ -55,26 +55,6 @@ import org.kermeta.language.structure.UnresolvedOperation;
  * @generated
  */
 public class OperationImpl extends MultiplicityElementImpl implements Operation {
-	/**
-	 * The default value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_ABSTRACT_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isAbstract = IS_ABSTRACT_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getRaisedException() <em>Raised Exception</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -154,6 +134,26 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @ordered
 	 */
 	protected EList<TypeVariable> typeParameter;
+
+	/**
+	 * The default value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ABSTRACT_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isAbstract = IS_ABSTRACT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getUniqueName() <em>Unique Name</em>}' attribute.
@@ -508,8 +508,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.OPERATION__IS_ABSTRACT:
-				return getIsAbstract();
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				return getRaisedException();
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
@@ -529,6 +527,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				return getOwningClass();
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return getTypeParameter();
+			case StructurePackage.OPERATION__IS_ABSTRACT:
+				return getIsAbstract();
 			case StructurePackage.OPERATION__UNIQUE_NAME:
 				return getUniqueName();
 		}
@@ -544,9 +544,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.OPERATION__IS_ABSTRACT:
-				setIsAbstract((Boolean)newValue);
-				return;
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				getRaisedException().clear();
 				getRaisedException().addAll((Collection<? extends Type>)newValue);
@@ -580,6 +577,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				getTypeParameter().clear();
 				getTypeParameter().addAll((Collection<? extends TypeVariable>)newValue);
 				return;
+			case StructurePackage.OPERATION__IS_ABSTRACT:
+				setIsAbstract((Boolean)newValue);
+				return;
 			case StructurePackage.OPERATION__UNIQUE_NAME:
 				setUniqueName((String)newValue);
 				return;
@@ -595,9 +595,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.OPERATION__IS_ABSTRACT:
-				setIsAbstract(IS_ABSTRACT_EDEFAULT);
-				return;
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				getRaisedException().clear();
 				return;
@@ -625,6 +622,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				getTypeParameter().clear();
 				return;
+			case StructurePackage.OPERATION__IS_ABSTRACT:
+				setIsAbstract(IS_ABSTRACT_EDEFAULT);
+				return;
 			case StructurePackage.OPERATION__UNIQUE_NAME:
 				setUniqueName(UNIQUE_NAME_EDEFAULT);
 				return;
@@ -640,8 +640,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.OPERATION__IS_ABSTRACT:
-				return IS_ABSTRACT_EDEFAULT == null ? isAbstract != null : !IS_ABSTRACT_EDEFAULT.equals(isAbstract);
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				return raisedException != null && !raisedException.isEmpty();
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
@@ -660,6 +658,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				return getOwningClass() != null;
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return typeParameter != null && !typeParameter.isEmpty();
+			case StructurePackage.OPERATION__IS_ABSTRACT:
+				return IS_ABSTRACT_EDEFAULT == null ? isAbstract != null : !IS_ABSTRACT_EDEFAULT.equals(isAbstract);
 			case StructurePackage.OPERATION__UNIQUE_NAME:
 				return UNIQUE_NAME_EDEFAULT == null ? uniqueName != null : !UNIQUE_NAME_EDEFAULT.equals(uniqueName);
 		}

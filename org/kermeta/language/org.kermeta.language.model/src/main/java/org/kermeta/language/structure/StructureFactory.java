@@ -152,22 +152,13 @@ public interface StructureFactory extends EFactory {
 	ClassDefinition createClassDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Modeling Unit</em>'.
+	 * Returns a new object of class '<em>Model Element Type Definition Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Modeling Unit</em>'.
+	 * @return a new object of class '<em>Model Element Type Definition Container</em>'.
 	 * @generated
 	 */
-	ModelingUnit createModelingUnit();
-
-	/**
-	 * Returns a new object of class '<em>Type Definition Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Definition Container</em>'.
-	 * @generated
-	 */
-	TypeDefinitionContainer createTypeDefinitionContainer();
+	ModelElementTypeDefinitionContainer createModelElementTypeDefinitionContainer();
 
 	/**
 	 * Returns a new object of class '<em>Require</em>'.
@@ -188,6 +179,24 @@ public interface StructureFactory extends EFactory {
 	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
+	 * Returns a new object of class '<em>Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Metamodel</em>'.
+	 * @generated
+	 */
+	Metamodel createMetamodel();
+
+	/**
+	 * Returns a new object of class '<em>Metamodel Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Metamodel Variable</em>'.
+	 * @generated
+	 */
+	MetamodelVariable createMetamodelVariable();
+
+	/**
 	 * Returns a new object of class '<em>Model Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -195,15 +204,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	ModelType createModelType();
-
-	/**
-	 * Returns a new object of class '<em>Model Type Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Type Variable</em>'.
-	 * @generated
-	 */
-	ModelTypeVariable createModelTypeVariable();
 
 	/**
 	 * Returns a new object of class '<em>Virtual Type</em>'.
@@ -305,121 +305,49 @@ public interface StructureFactory extends EFactory {
 	UnresolvedTypeVariable createUnresolvedTypeVariable();
 
 	/**
-	 * Returns a new object of class '<em>Simple Binding</em>'.
+	 * Returns a new object of class '<em>Metamodel Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Binding</em>'.
+	 * @return a new object of class '<em>Metamodel Binding</em>'.
 	 * @generated
 	 */
-	SimpleBinding createSimpleBinding();
+	MetamodelBinding createMetamodelBinding();
 
 	/**
-	 * Returns a new object of class '<em>Adaptation Binding</em>'.
+	 * Returns a new object of class '<em>Class Definition Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Adaptation Binding</em>'.
+	 * @return a new object of class '<em>Class Definition Binding</em>'.
 	 * @generated
 	 */
-	AdaptationBinding createAdaptationBinding();
+	ClassDefinitionBinding createClassDefinitionBinding();
 
 	/**
-	 * Returns a new object of class '<em>Simple Class Definition Binding</em>'.
+	 * Returns a new object of class '<em>Enumeration Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Class Definition Binding</em>'.
+	 * @return a new object of class '<em>Enumeration Binding</em>'.
 	 * @generated
 	 */
-	SimpleClassDefinitionBinding createSimpleClassDefinitionBinding();
+	EnumerationBinding createEnumerationBinding();
 
 	/**
-	 * Returns a new object of class '<em>Complex Class Definition Binding</em>'.
+	 * Returns a new object of class '<em>Property Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complex Class Definition Binding</em>'.
+	 * @return a new object of class '<em>Property Binding</em>'.
 	 * @generated
 	 */
-	ComplexClassDefinitionBinding createComplexClassDefinitionBinding();
+	PropertyBinding createPropertyBinding();
 
 	/**
-	 * Returns a new object of class '<em>Simple Enumeration Binding</em>'.
+	 * Returns a new object of class '<em>Operation Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Enumeration Binding</em>'.
+	 * @return a new object of class '<em>Operation Binding</em>'.
 	 * @generated
 	 */
-	SimpleEnumerationBinding createSimpleEnumerationBinding();
-
-	/**
-	 * Returns a new object of class '<em>Complex Enumeration Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complex Enumeration Binding</em>'.
-	 * @generated
-	 */
-	ComplexEnumerationBinding createComplexEnumerationBinding();
-
-	/**
-	 * Returns a new object of class '<em>Simple Property Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Property Binding</em>'.
-	 * @generated
-	 */
-	SimplePropertyBinding createSimplePropertyBinding();
-
-	/**
-	 * Returns a new object of class '<em>Complex Property Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complex Property Binding</em>'.
-	 * @generated
-	 */
-	ComplexPropertyBinding createComplexPropertyBinding();
-
-	/**
-	 * Returns a new object of class '<em>Simple Operation Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Operation Binding</em>'.
-	 * @generated
-	 */
-	SimpleOperationBinding createSimpleOperationBinding();
-
-	/**
-	 * Returns a new object of class '<em>Complex Operation Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complex Operation Binding</em>'.
-	 * @generated
-	 */
-	ComplexOperationBinding createComplexOperationBinding();
-
-	/**
-	 * Returns a new object of class '<em>Simple Parameter Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Parameter Binding</em>'.
-	 * @generated
-	 */
-	SimpleParameterBinding createSimpleParameterBinding();
-
-	/**
-	 * Returns a new object of class '<em>Complex Parameter Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complex Parameter Binding</em>'.
-	 * @generated
-	 */
-	ComplexParameterBinding createComplexParameterBinding();
-
-	/**
-	 * Returns a new object of class '<em>Enum Literalbinding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enum Literalbinding</em>'.
-	 * @generated
-	 */
-	EnumLiteralbinding createEnumLiteralbinding();
+	OperationBinding createOperationBinding();
 
 	/**
 	 * Returns a new object of class '<em>Adaptation Operator</em>'.
@@ -474,6 +402,15 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	OperationAdaptationOperator createOperationAdaptationOperator();
+
+	/**
+	 * Returns a new object of class '<em>Unresolved Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Metamodel</em>'.
+	 * @generated
+	 */
+	UnresolvedMetamodel createUnresolvedMetamodel();
 
 	/**
 	 * Returns the package supported by this factory.

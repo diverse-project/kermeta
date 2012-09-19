@@ -1,0 +1,169 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.language.structure.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.kermeta.language.structure.MetamodelVariable;
+import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.structure.VirtualType;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Metamodel Variable</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.language.structure.impl.MetamodelVariableImpl#getVirtualType <em>Virtual Type</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class MetamodelVariableImpl extends TypeVariableImpl implements MetamodelVariable {
+	/**
+	 * The cached value of the '{@link #getVirtualType() <em>Virtual Type</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVirtualType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<VirtualType> virtualType;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetamodelVariableImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return StructurePackage.Literals.METAMODEL_VARIABLE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<VirtualType> getVirtualType() {
+		if (virtualType == null) {
+			virtualType = new EObjectWithInverseResolvingEList<VirtualType>(VirtualType.class, this, StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE);
+		}
+		return virtualType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVirtualType()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+				return ((InternalEList<?>)getVirtualType()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+				return getVirtualType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+				getVirtualType().clear();
+				getVirtualType().addAll((Collection<? extends VirtualType>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+				getVirtualType().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+				return virtualType != null && !virtualType.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+} //MetamodelVariableImpl

@@ -24,7 +24,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface UnresolvedOperation extends AbstractOperation, Unresolved, TypeContainer {
+public interface UnresolvedOperation extends AbstractOperation, UnresolvedReference, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Operation Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->

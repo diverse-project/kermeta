@@ -47,7 +47,7 @@ public interface UseAdaptationOperator extends KermetaModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Unresolved</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.Unresolved}.
+	 * The list contents are of type {@link org.kermeta.language.structure.UnresolvedReference}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Unresolved</em>' containment reference list isn't clear,
@@ -59,7 +59,7 @@ public interface UseAdaptationOperator extends KermetaModelElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Unresolved> getOwnedUnresolved();
+	EList<UnresolvedReference> getOwnedUnresolved();
 
 	/**
 	 * Returns the value of the '<em><b>Used Operator</b></em>' reference.

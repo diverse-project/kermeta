@@ -1219,7 +1219,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		loopEClass.getESuperTypes().add(this.getExpression());
 		selfExpressionEClass.getESuperTypes().add(this.getExpression());
 		variableDeclEClass.getESuperTypes().add(this.getExpression());
-		unresolvedCallEClass.getESuperTypes().add(theStructurePackage.getUnresolved());
+		unresolvedCallEClass.getESuperTypes().add(theStructurePackage.getUnresolvedReference());
 		unresolvedCallEClass.getESuperTypes().add(this.getCallExpression());
 		unresolvedCallEClass.getESuperTypes().add(theStructurePackage.getTypeContainer());
 		callOperationEClass.getESuperTypes().add(this.getCallFeature());

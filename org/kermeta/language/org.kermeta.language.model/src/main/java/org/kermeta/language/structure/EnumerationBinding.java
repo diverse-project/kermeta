@@ -18,29 +18,66 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.EnumerationBinding#getOwnedEnumLiteralBindings <em>Owned Enum Literal Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.EnumerationBinding#getSource <em>Source</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.EnumerationBinding#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getEnumerationBinding()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface EnumerationBinding extends KermetaModelElement {
 	/**
-	 * Returns the value of the '<em><b>Owned Enum Literal Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.EnumLiteralbinding}.
+	 * Returns the value of the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Enum Literal Bindings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Source</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Enum Literal Bindings</em>' containment reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getEnumerationBinding_OwnedEnumLiteralBindings()
-	 * @model containment="true"
+	 * @return the value of the '<em>Source</em>' reference.
+	 * @see #setSource(Enumeration)
+	 * @see org.kermeta.language.structure.StructurePackage#getEnumerationBinding_Source()
+	 * @model required="true"
 	 * @generated
 	 */
-	EList<EnumLiteralbinding> getOwnedEnumLiteralBindings();
+	Enumeration getSource();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.EnumerationBinding#getSource <em>Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source</em>' reference.
+	 * @see #getSource()
+	 * @generated
+	 */
+	void setSource(Enumeration value);
+
+	/**
+	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target</em>' reference.
+	 * @see #setTarget(Enumeration)
+	 * @see org.kermeta.language.structure.StructurePackage#getEnumerationBinding_Target()
+	 * @model required="true"
+	 * @generated
+	 */
+	Enumeration getTarget();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.EnumerationBinding#getTarget <em>Target</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target</em>' reference.
+	 * @see #getTarget()
+	 * @generated
+	 */
+	void setTarget(Enumeration value);
 
 } // EnumerationBinding

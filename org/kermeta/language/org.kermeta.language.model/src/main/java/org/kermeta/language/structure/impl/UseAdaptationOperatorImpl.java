@@ -10,23 +10,17 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.structure.AdaptationOperator;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.StructurePackage;
-import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedReference;
 import org.kermeta.language.structure.UseAdaptationOperator;
 
 /**
@@ -63,7 +57,7 @@ public class UseAdaptationOperatorImpl extends KermetaModelElementImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Unresolved> ownedUnresolved;
+	protected EList<UnresolvedReference> ownedUnresolved;
 
 	/**
 	 * The cached value of the '{@link #getUsedOperator() <em>Used Operator</em>}' reference.
@@ -111,9 +105,9 @@ public class UseAdaptationOperatorImpl extends KermetaModelElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Unresolved> getOwnedUnresolved() {
+	public EList<UnresolvedReference> getOwnedUnresolved() {
 		if (ownedUnresolved == null) {
-			ownedUnresolved = new EObjectContainmentEList<Unresolved>(Unresolved.class, this, StructurePackage.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED);
+			ownedUnresolved = new EObjectContainmentEList<UnresolvedReference>(UnresolvedReference.class, this, StructurePackage.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED);
 		}
 		return ownedUnresolved;
 	}
@@ -204,7 +198,7 @@ public class UseAdaptationOperatorImpl extends KermetaModelElementImpl implement
 				return;
 			case StructurePackage.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED:
 				getOwnedUnresolved().clear();
-				getOwnedUnresolved().addAll((Collection<? extends Unresolved>)newValue);
+				getOwnedUnresolved().addAll((Collection<? extends UnresolvedReference>)newValue);
 				return;
 			case StructurePackage.USE_ADAPTATION_OPERATOR__USED_OPERATOR:
 				setUsedOperator((AdaptationOperator)newValue);

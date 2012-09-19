@@ -8,36 +8,29 @@ package org.kermeta.language.structure.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
-import org.kermeta.language.structure.AdaptationBinding;
 import org.kermeta.language.structure.AdaptationOperator;
 import org.kermeta.language.structure.AdaptationParameter;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ClassDefinitionBinding;
-import org.kermeta.language.structure.ComplexClassDefinitionBinding;
-import org.kermeta.language.structure.ComplexEnumerationBinding;
-import org.kermeta.language.structure.ComplexOperationBinding;
-import org.kermeta.language.structure.ComplexParameterBinding;
-import org.kermeta.language.structure.ComplexPropertyBinding;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.DataType;
-import org.kermeta.language.structure.EnumLiteralbinding;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
+import org.kermeta.language.structure.Metamodel;
+import org.kermeta.language.structure.MetamodelBinding;
+import org.kermeta.language.structure.MetamodelVariable;
 import org.kermeta.language.structure.Model;
+import org.kermeta.language.structure.ModelElementTypeDefinition;
+import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
-import org.kermeta.language.structure.ModelTypeBinding;
-import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
@@ -46,7 +39,6 @@ import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.OperationAdaptationOperator;
 import org.kermeta.language.structure.OperationBinding;
 import org.kermeta.language.structure.Parameter;
-import org.kermeta.language.structure.ParameterBinding;
 import org.kermeta.language.structure.ParameterizedType;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
@@ -54,26 +46,20 @@ import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
-import org.kermeta.language.structure.SimpleBinding;
-import org.kermeta.language.structure.SimpleClassDefinitionBinding;
-import org.kermeta.language.structure.SimpleEnumerationBinding;
-import org.kermeta.language.structure.SimpleOperationBinding;
-import org.kermeta.language.structure.SimpleParameterBinding;
-import org.kermeta.language.structure.SimplePropertyBinding;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
-import org.kermeta.language.structure.TypeDefinitionContainer;
 import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
-import org.kermeta.language.structure.Unresolved;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedMetamodel;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
+import org.kermeta.language.structure.UnresolvedReference;
 import org.kermeta.language.structure.UnresolvedType;
 import org.kermeta.language.structure.UnresolvedTypeVariable;
 import org.kermeta.language.structure.UseAdaptationOperator;
@@ -226,8 +212,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createModelingUnitAdapter();
 			}
 			@Override
-			public Adapter caseTypeDefinitionContainer(TypeDefinitionContainer object) {
-				return createTypeDefinitionContainerAdapter();
+			public Adapter caseModelElementTypeDefinitionContainer(ModelElementTypeDefinitionContainer object) {
+				return createModelElementTypeDefinitionContainerAdapter();
 			}
 			@Override
 			public Adapter caseRequire(Require object) {
@@ -250,12 +236,12 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createObjectTypeVariableAdapter();
 			}
 			@Override
-			public Adapter caseModelType(ModelType object) {
-				return createModelTypeAdapter();
+			public Adapter caseMetamodel(Metamodel object) {
+				return createMetamodelAdapter();
 			}
 			@Override
-			public Adapter caseModelTypeVariable(ModelTypeVariable object) {
-				return createModelTypeVariableAdapter();
+			public Adapter caseMetamodelVariable(MetamodelVariable object) {
+				return createMetamodelVariableAdapter();
 			}
 			@Override
 			public Adapter caseVirtualType(VirtualType object) {
@@ -274,8 +260,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createUnresolvedTypeAdapter();
 			}
 			@Override
-			public Adapter caseUnresolved(Unresolved object) {
-				return createUnresolvedAdapter();
+			public Adapter caseUnresolvedReference(UnresolvedReference object) {
+				return createUnresolvedReferenceAdapter();
 			}
 			@Override
 			public Adapter caseUnresolvedProperty(UnresolvedProperty object) {
@@ -310,40 +296,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createUnresolvedTypeVariableAdapter();
 			}
 			@Override
-			public Adapter caseModelTypeBinding(ModelTypeBinding object) {
-				return createModelTypeBindingAdapter();
-			}
-			@Override
-			public Adapter caseSimpleBinding(SimpleBinding object) {
-				return createSimpleBindingAdapter();
-			}
-			@Override
-			public Adapter caseAdaptationBinding(AdaptationBinding object) {
-				return createAdaptationBindingAdapter();
+			public Adapter caseMetamodelBinding(MetamodelBinding object) {
+				return createMetamodelBindingAdapter();
 			}
 			@Override
 			public Adapter caseClassDefinitionBinding(ClassDefinitionBinding object) {
 				return createClassDefinitionBindingAdapter();
 			}
 			@Override
-			public Adapter caseSimpleClassDefinitionBinding(SimpleClassDefinitionBinding object) {
-				return createSimpleClassDefinitionBindingAdapter();
-			}
-			@Override
-			public Adapter caseComplexClassDefinitionBinding(ComplexClassDefinitionBinding object) {
-				return createComplexClassDefinitionBindingAdapter();
-			}
-			@Override
 			public Adapter caseEnumerationBinding(EnumerationBinding object) {
 				return createEnumerationBindingAdapter();
-			}
-			@Override
-			public Adapter caseSimpleEnumerationBinding(SimpleEnumerationBinding object) {
-				return createSimpleEnumerationBindingAdapter();
-			}
-			@Override
-			public Adapter caseComplexEnumerationBinding(ComplexEnumerationBinding object) {
-				return createComplexEnumerationBindingAdapter();
 			}
 			@Override
 			public Adapter casePropertyBinding(PropertyBinding object) {
@@ -352,38 +314,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOperationBinding(OperationBinding object) {
 				return createOperationBindingAdapter();
-			}
-			@Override
-			public Adapter caseSimplePropertyBinding(SimplePropertyBinding object) {
-				return createSimplePropertyBindingAdapter();
-			}
-			@Override
-			public Adapter caseComplexPropertyBinding(ComplexPropertyBinding object) {
-				return createComplexPropertyBindingAdapter();
-			}
-			@Override
-			public Adapter caseSimpleOperationBinding(SimpleOperationBinding object) {
-				return createSimpleOperationBindingAdapter();
-			}
-			@Override
-			public Adapter caseComplexOperationBinding(ComplexOperationBinding object) {
-				return createComplexOperationBindingAdapter();
-			}
-			@Override
-			public Adapter caseParameterBinding(ParameterBinding object) {
-				return createParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseSimpleParameterBinding(SimpleParameterBinding object) {
-				return createSimpleParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseComplexParameterBinding(ComplexParameterBinding object) {
-				return createComplexParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseEnumLiteralbinding(EnumLiteralbinding object) {
-				return createEnumLiteralbindingAdapter();
 			}
 			@Override
 			public Adapter caseAdaptationOperator(AdaptationOperator object) {
@@ -408,6 +338,18 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOperationAdaptationOperator(OperationAdaptationOperator object) {
 				return createOperationAdaptationOperatorAdapter();
+			}
+			@Override
+			public Adapter caseUnresolvedMetamodel(UnresolvedMetamodel object) {
+				return createUnresolvedMetamodelAdapter();
+			}
+			@Override
+			public Adapter caseModelElementTypeDefinition(ModelElementTypeDefinition object) {
+				return createModelElementTypeDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseModelType(ModelType object) {
+				return createModelTypeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -738,16 +680,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.TypeDefinitionContainer <em>Type Definition Container</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer <em>Model Element Type Definition Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.TypeDefinitionContainer
+	 * @see org.kermeta.language.structure.ModelElementTypeDefinitionContainer
 	 * @generated
 	 */
-	public Adapter createTypeDefinitionContainerAdapter() {
+	public Adapter createModelElementTypeDefinitionContainerAdapter() {
 		return null;
 	}
 
@@ -822,6 +764,34 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Metamodel <em>Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.Metamodel
+	 * @generated
+	 */
+	public Adapter createMetamodelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.MetamodelVariable <em>Metamodel Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.MetamodelVariable
+	 * @generated
+	 */
+	public Adapter createMetamodelVariableAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelType <em>Model Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -832,20 +802,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTypeVariable <em>Model Type Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ModelTypeVariable
-	 * @generated
-	 */
-	public Adapter createModelTypeVariableAdapter() {
 		return null;
 	}
 
@@ -906,16 +862,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Unresolved <em>Unresolved</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedReference <em>Unresolved Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.Unresolved
+	 * @see org.kermeta.language.structure.UnresolvedReference
 	 * @generated
 	 */
-	public Adapter createUnresolvedAdapter() {
+	public Adapter createUnresolvedReferenceAdapter() {
 		return null;
 	}
 
@@ -1032,44 +988,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTypeBinding <em>Model Type Binding</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.MetamodelBinding <em>Metamodel Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ModelTypeBinding
+	 * @see org.kermeta.language.structure.MetamodelBinding
 	 * @generated
 	 */
-	public Adapter createModelTypeBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleBinding <em>Simple Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.SimpleBinding
-	 * @generated
-	 */
-	public Adapter createSimpleBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.AdaptationBinding <em>Adaptation Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.AdaptationBinding
-	 * @generated
-	 */
-	public Adapter createAdaptationBindingAdapter() {
+	public Adapter createMetamodelBindingAdapter() {
 		return null;
 	}
 
@@ -1088,34 +1016,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleClassDefinitionBinding <em>Simple Class Definition Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.SimpleClassDefinitionBinding
-	 * @generated
-	 */
-	public Adapter createSimpleClassDefinitionBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexClassDefinitionBinding <em>Complex Class Definition Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ComplexClassDefinitionBinding
-	 * @generated
-	 */
-	public Adapter createComplexClassDefinitionBindingAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.EnumerationBinding <em>Enumeration Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1126,34 +1026,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnumerationBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleEnumerationBinding <em>Simple Enumeration Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.SimpleEnumerationBinding
-	 * @generated
-	 */
-	public Adapter createSimpleEnumerationBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexEnumerationBinding <em>Complex Enumeration Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ComplexEnumerationBinding
-	 * @generated
-	 */
-	public Adapter createComplexEnumerationBindingAdapter() {
 		return null;
 	}
 
@@ -1182,118 +1054,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimplePropertyBinding <em>Simple Property Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.SimplePropertyBinding
-	 * @generated
-	 */
-	public Adapter createSimplePropertyBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexPropertyBinding <em>Complex Property Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ComplexPropertyBinding
-	 * @generated
-	 */
-	public Adapter createComplexPropertyBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleOperationBinding <em>Simple Operation Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.SimpleOperationBinding
-	 * @generated
-	 */
-	public Adapter createSimpleOperationBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexOperationBinding <em>Complex Operation Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ComplexOperationBinding
-	 * @generated
-	 */
-	public Adapter createComplexOperationBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ParameterBinding <em>Parameter Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ParameterBinding
-	 * @generated
-	 */
-	public Adapter createParameterBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.SimpleParameterBinding <em>Simple Parameter Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.SimpleParameterBinding
-	 * @generated
-	 */
-	public Adapter createSimpleParameterBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ComplexParameterBinding <em>Complex Parameter Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ComplexParameterBinding
-	 * @generated
-	 */
-	public Adapter createComplexParameterBindingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.EnumLiteralbinding <em>Enum Literalbinding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.EnumLiteralbinding
-	 * @generated
-	 */
-	public Adapter createEnumLiteralbindingAdapter() {
 		return null;
 	}
 
@@ -1378,6 +1138,34 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationAdaptationOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedMetamodel <em>Unresolved Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.UnresolvedMetamodel
+	 * @generated
+	 */
+	public Adapter createUnresolvedMetamodelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelElementTypeDefinition <em>Model Element Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ModelElementTypeDefinition
+	 * @generated
+	 */
+	public Adapter createModelElementTypeDefinitionAdapter() {
 		return null;
 	}
 

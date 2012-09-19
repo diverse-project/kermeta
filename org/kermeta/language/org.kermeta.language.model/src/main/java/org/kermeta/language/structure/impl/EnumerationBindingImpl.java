@@ -6,21 +6,11 @@
  */
 package org.kermeta.language.structure.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.kermeta.language.structure.EnumLiteralbinding;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.StructurePackage;
 
@@ -31,23 +21,32 @@ import org.kermeta.language.structure.StructurePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.EnumerationBindingImpl#getOwnedEnumLiteralBindings <em>Owned Enum Literal Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.EnumerationBindingImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.EnumerationBindingImpl#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class EnumerationBindingImpl extends KermetaModelElementImpl implements EnumerationBinding {
+public class EnumerationBindingImpl extends KermetaModelElementImpl implements EnumerationBinding {
 	/**
-	 * The cached value of the '{@link #getOwnedEnumLiteralBindings() <em>Owned Enum Literal Bindings</em>}' containment reference list.
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedEnumLiteralBindings()
+	 * @see #getSource()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EnumLiteralbinding> ownedEnumLiteralBindings;
-
+	protected Enumeration source;
+	/**
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
+	protected Enumeration target;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,11 +71,16 @@ public abstract class EnumerationBindingImpl extends KermetaModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EnumLiteralbinding> getOwnedEnumLiteralBindings() {
-		if (ownedEnumLiteralBindings == null) {
-			ownedEnumLiteralBindings = new EObjectContainmentEList<EnumLiteralbinding>(EnumLiteralbinding.class, this, StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS);
+	public Enumeration getSource() {
+		if (source != null && source.eIsProxy()) {
+			InternalEObject oldSource = (InternalEObject)source;
+			source = (Enumeration)eResolveProxy(oldSource);
+			if (source != oldSource) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.ENUMERATION_BINDING__SOURCE, oldSource, source));
+			}
 		}
-		return ownedEnumLiteralBindings;
+		return source;
 	}
 
 	/**
@@ -84,13 +88,58 @@ public abstract class EnumerationBindingImpl extends KermetaModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS:
-				return ((InternalEList<?>)getOwnedEnumLiteralBindings()).basicRemove(otherEnd, msgs);
+	public Enumeration basicGetSource() {
+		return source;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSource(Enumeration newSource) {
+		Enumeration oldSource = source;
+		source = newSource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.ENUMERATION_BINDING__SOURCE, oldSource, source));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (Enumeration)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.ENUMERATION_BINDING__TARGET, oldTarget, target));
+			}
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return target;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration basicGetTarget() {
+		return target;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTarget(Enumeration newTarget) {
+		Enumeration oldTarget = target;
+		target = newTarget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.ENUMERATION_BINDING__TARGET, oldTarget, target));
 	}
 
 	/**
@@ -101,8 +150,12 @@ public abstract class EnumerationBindingImpl extends KermetaModelElementImpl imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS:
-				return getOwnedEnumLiteralBindings();
+			case StructurePackage.ENUMERATION_BINDING__SOURCE:
+				if (resolve) return getSource();
+				return basicGetSource();
+			case StructurePackage.ENUMERATION_BINDING__TARGET:
+				if (resolve) return getTarget();
+				return basicGetTarget();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,9 +169,11 @@ public abstract class EnumerationBindingImpl extends KermetaModelElementImpl imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS:
-				getOwnedEnumLiteralBindings().clear();
-				getOwnedEnumLiteralBindings().addAll((Collection<? extends EnumLiteralbinding>)newValue);
+			case StructurePackage.ENUMERATION_BINDING__SOURCE:
+				setSource((Enumeration)newValue);
+				return;
+			case StructurePackage.ENUMERATION_BINDING__TARGET:
+				setTarget((Enumeration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -132,8 +187,11 @@ public abstract class EnumerationBindingImpl extends KermetaModelElementImpl imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS:
-				getOwnedEnumLiteralBindings().clear();
+			case StructurePackage.ENUMERATION_BINDING__SOURCE:
+				setSource((Enumeration)null);
+				return;
+			case StructurePackage.ENUMERATION_BINDING__TARGET:
+				setTarget((Enumeration)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -147,8 +205,10 @@ public abstract class EnumerationBindingImpl extends KermetaModelElementImpl imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS:
-				return ownedEnumLiteralBindings != null && !ownedEnumLiteralBindings.isEmpty();
+			case StructurePackage.ENUMERATION_BINDING__SOURCE:
+				return source != null;
+			case StructurePackage.ENUMERATION_BINDING__TARGET:
+				return target != null;
 		}
 		return super.eIsSet(featureID);
 	}

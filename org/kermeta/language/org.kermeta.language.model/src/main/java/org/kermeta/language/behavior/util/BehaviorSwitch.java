@@ -47,7 +47,7 @@ import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypedElement;
-import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -371,7 +371,7 @@ public class BehaviorSwitch<T> {
 			case BehaviorPackage.UNRESOLVED_CALL: {
 				UnresolvedCall unresolvedCall = (UnresolvedCall)theEObject;
 				T result = caseUnresolvedCall(unresolvedCall);
-				if (result == null) result = caseUnresolved(unresolvedCall);
+				if (result == null) result = caseUnresolvedReference(unresolvedCall);
 				if (result == null) result = caseCallExpression(unresolvedCall);
 				if (result == null) result = caseExpression(unresolvedCall);
 				if (result == null) result = caseTypeContainer(unresolvedCall);
@@ -941,17 +941,17 @@ public class BehaviorSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unresolved</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unresolved</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUnresolved(Unresolved object) {
+	public T caseUnresolvedReference(UnresolvedReference object) {
 		return null;
 	}
 

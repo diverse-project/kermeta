@@ -10,19 +10,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.ModelTypeVariable;
+import org.kermeta.language.structure.MetamodelVariable;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.VirtualType;
@@ -35,7 +30,7 @@ import org.kermeta.language.structure.VirtualType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.VirtualTypeImpl#getClassDefinition <em>Class Definition</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.VirtualTypeImpl#getModelType <em>Model Type</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.VirtualTypeImpl#getMetamodelVariable <em>Metamodel Variable</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.VirtualTypeImpl#getTypeParamBinding <em>Type Param Binding</em>}</li>
  * </ul>
  * </p>
@@ -54,14 +49,14 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	protected ClassDefinition classDefinition;
 
 	/**
-	 * The cached value of the '{@link #getModelType() <em>Model Type</em>}' reference.
+	 * The cached value of the '{@link #getMetamodelVariable() <em>Metamodel Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModelType()
+	 * @see #getMetamodelVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected ModelTypeVariable modelType;
+	protected MetamodelVariable metamodelVariable;
 
 	/**
 	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
@@ -135,16 +130,16 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelTypeVariable getModelType() {
-		if (modelType != null && modelType.eIsProxy()) {
-			InternalEObject oldModelType = (InternalEObject)modelType;
-			modelType = (ModelTypeVariable)eResolveProxy(oldModelType);
-			if (modelType != oldModelType) {
+	public MetamodelVariable getMetamodelVariable() {
+		if (metamodelVariable != null && metamodelVariable.eIsProxy()) {
+			InternalEObject oldMetamodelVariable = (InternalEObject)metamodelVariable;
+			metamodelVariable = (MetamodelVariable)eResolveProxy(oldMetamodelVariable);
+			if (metamodelVariable != oldMetamodelVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE, oldModelType, modelType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE, oldMetamodelVariable, metamodelVariable));
 			}
 		}
-		return modelType;
+		return metamodelVariable;
 	}
 
 	/**
@@ -152,8 +147,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelTypeVariable basicGetModelType() {
-		return modelType;
+	public MetamodelVariable basicGetMetamodelVariable() {
+		return metamodelVariable;
 	}
 
 	/**
@@ -161,11 +156,11 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetModelType(ModelTypeVariable newModelType, NotificationChain msgs) {
-		ModelTypeVariable oldModelType = modelType;
-		modelType = newModelType;
+	public NotificationChain basicSetMetamodelVariable(MetamodelVariable newMetamodelVariable, NotificationChain msgs) {
+		MetamodelVariable oldMetamodelVariable = metamodelVariable;
+		metamodelVariable = newMetamodelVariable;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE, oldModelType, newModelType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE, oldMetamodelVariable, newMetamodelVariable);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -176,18 +171,18 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setModelType(ModelTypeVariable newModelType) {
-		if (newModelType != modelType) {
+	public void setMetamodelVariable(MetamodelVariable newMetamodelVariable) {
+		if (newMetamodelVariable != metamodelVariable) {
 			NotificationChain msgs = null;
-			if (modelType != null)
-				msgs = ((InternalEObject)modelType).eInverseRemove(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
-			if (newModelType != null)
-				msgs = ((InternalEObject)newModelType).eInverseAdd(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
-			msgs = basicSetModelType(newModelType, msgs);
+			if (metamodelVariable != null)
+				msgs = ((InternalEObject)metamodelVariable).eInverseRemove(this, StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE, MetamodelVariable.class, msgs);
+			if (newMetamodelVariable != null)
+				msgs = ((InternalEObject)newMetamodelVariable).eInverseAdd(this, StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE, MetamodelVariable.class, msgs);
+			msgs = basicSetMetamodelVariable(newMetamodelVariable, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE, newModelType, newModelType));
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE, newMetamodelVariable, newMetamodelVariable));
 	}
 
 	/**
@@ -210,10 +205,10 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				if (modelType != null)
-					msgs = ((InternalEObject)modelType).eInverseRemove(this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, ModelTypeVariable.class, msgs);
-				return basicSetModelType((ModelTypeVariable)otherEnd, msgs);
+			case StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE:
+				if (metamodelVariable != null)
+					msgs = ((InternalEObject)metamodelVariable).eInverseRemove(this, StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE, MetamodelVariable.class, msgs);
+				return basicSetMetamodelVariable((MetamodelVariable)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -226,8 +221,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				return basicSetModelType(null, msgs);
+			case StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE:
+				return basicSetMetamodelVariable(null, msgs);
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				return ((InternalEList<?>)getTypeParamBinding()).basicRemove(otherEnd, msgs);
 		}
@@ -245,9 +240,9 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
 				if (resolve) return getClassDefinition();
 				return basicGetClassDefinition();
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				if (resolve) return getModelType();
-				return basicGetModelType();
+			case StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE:
+				if (resolve) return getMetamodelVariable();
+				return basicGetMetamodelVariable();
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				return getTypeParamBinding();
 		}
@@ -266,8 +261,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
 				setClassDefinition((ClassDefinition)newValue);
 				return;
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				setModelType((ModelTypeVariable)newValue);
+			case StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE:
+				setMetamodelVariable((MetamodelVariable)newValue);
 				return;
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
@@ -288,8 +283,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
 				setClassDefinition((ClassDefinition)null);
 				return;
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				setModelType((ModelTypeVariable)null);
+			case StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE:
+				setMetamodelVariable((MetamodelVariable)null);
 				return;
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
@@ -308,8 +303,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
 				return classDefinition != null;
-			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
-				return modelType != null;
+			case StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE:
+				return metamodelVariable != null;
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				return typeParamBinding != null && !typeParamBinding.isEmpty();
 		}

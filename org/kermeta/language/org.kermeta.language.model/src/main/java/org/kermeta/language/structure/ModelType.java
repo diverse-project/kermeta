@@ -14,17 +14,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Model Type</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Type of a model, consisting of a set of included type definitions.
- * For historical reason, this is both a type and a TypeDefinition, mainly due to the fact that a ModelDefinition isn't a GenericTypeDefinition (maybe this should be discussed again ?)
- * 
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.ModelType#getOwnedBindings <em>Owned Bindings</em>}</li>
- *   <li>{@link org.kermeta.language.structure.ModelType#getOwnedPackages <em>Owned Packages</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.ModelType#getTypeDefinition <em>Type Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,38 +25,32 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ModelType extends Type, TypeDefinition, TypeDefinitionContainer {
+public interface ModelType extends Type {
 
 	/**
-	 * Returns the value of the '<em><b>Owned Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.ModelTypeBinding}.
+	 * Returns the value of the '<em><b>Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Bindings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Type Definition</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Bindings</em>' containment reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getModelType_OwnedBindings()
-	 * @model containment="true"
+	 * @return the value of the '<em>Type Definition</em>' reference.
+	 * @see #setTypeDefinition(Metamodel)
+	 * @see org.kermeta.language.structure.StructurePackage#getModelType_TypeDefinition()
+	 * @model required="true"
 	 * @generated
 	 */
-	EList<ModelTypeBinding> getOwnedBindings();
+	Metamodel getTypeDefinition();
 
 	/**
-	 * Returns the value of the '<em><b>Owned Packages</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.Package}.
+	 * Sets the value of the '{@link org.kermeta.language.structure.ModelType#getTypeDefinition <em>Type Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Packages</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Packages</em>' containment reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getModelType_OwnedPackages()
-	 * @model containment="true"
+	 * @param value the new value of the '<em>Type Definition</em>' reference.
+	 * @see #getTypeDefinition()
 	 * @generated
 	 */
-	EList<org.kermeta.language.structure.Package> getOwnedPackages();
+	void setTypeDefinition(Metamodel value);
 
 } // ModelType

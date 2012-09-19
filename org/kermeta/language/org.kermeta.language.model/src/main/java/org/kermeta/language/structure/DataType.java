@@ -21,5 +21,5 @@ package org.kermeta.language.structure;
  * @model abstract="true"
  * @generated
  */
-public interface DataType extends Type, TypeDefinition {
+public interface DataType extends Type, ModelElementTypeDefinition {
 } // DataType

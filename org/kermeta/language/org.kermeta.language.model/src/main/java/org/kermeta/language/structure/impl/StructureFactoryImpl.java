@@ -11,55 +11,45 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.kermeta.language.structure.AdaptationBinding;
 import org.kermeta.language.structure.AdaptationOperator;
 import org.kermeta.language.structure.AdaptationParameter;
 import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.ComplexClassDefinitionBinding;
-import org.kermeta.language.structure.ComplexEnumerationBinding;
-import org.kermeta.language.structure.ComplexOperationBinding;
-import org.kermeta.language.structure.ComplexParameterBinding;
-import org.kermeta.language.structure.ComplexPropertyBinding;
+import org.kermeta.language.structure.ClassDefinitionBinding;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.ConstraintLanguage;
 import org.kermeta.language.structure.ConstraintType;
-import org.kermeta.language.structure.EnumLiteralbinding;
 import org.kermeta.language.structure.Enumeration;
+import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
+import org.kermeta.language.structure.Metamodel;
+import org.kermeta.language.structure.MetamodelBinding;
+import org.kermeta.language.structure.MetamodelVariable;
 import org.kermeta.language.structure.Model;
+import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
-import org.kermeta.language.structure.ModelTypeVariable;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.OperationAdaptationOperator;
+import org.kermeta.language.structure.OperationBinding;
 import org.kermeta.language.structure.Parameter;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
+import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
-import org.kermeta.language.structure.SimpleBinding;
-import org.kermeta.language.structure.SimpleClassDefinitionBinding;
-import org.kermeta.language.structure.SimpleEnumerationBinding;
-import org.kermeta.language.structure.SimpleOperationBinding;
-import org.kermeta.language.structure.SimpleParameterBinding;
-import org.kermeta.language.structure.SimplePropertyBinding;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeDefinition;
-import org.kermeta.language.structure.TypeDefinitionContainer;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedMetamodel;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
@@ -127,12 +117,11 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.TAG: return createTag();
 			case StructurePackage.CONSTRAINT: return createConstraint();
 			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
-			case StructurePackage.MODELING_UNIT: return createModelingUnit();
-			case StructurePackage.TYPE_DEFINITION_CONTAINER: return createTypeDefinitionContainer();
+			case StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER: return createModelElementTypeDefinitionContainer();
 			case StructurePackage.REQUIRE: return createRequire();
 			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
-			case StructurePackage.MODEL_TYPE: return createModelType();
-			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
+			case StructurePackage.METAMODEL: return createMetamodel();
+			case StructurePackage.METAMODEL_VARIABLE: return createMetamodelVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.MODEL: return createModel();
 			case StructurePackage.UNRESOLVED_TYPE: return createUnresolvedType();
@@ -144,25 +133,19 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.VOID_TYPE: return createVoidType();
 			case StructurePackage.UNRESOLVED_INFERRED_TYPE: return createUnresolvedInferredType();
 			case StructurePackage.UNRESOLVED_TYPE_VARIABLE: return createUnresolvedTypeVariable();
-			case StructurePackage.SIMPLE_BINDING: return createSimpleBinding();
-			case StructurePackage.ADAPTATION_BINDING: return createAdaptationBinding();
-			case StructurePackage.SIMPLE_CLASS_DEFINITION_BINDING: return createSimpleClassDefinitionBinding();
-			case StructurePackage.COMPLEX_CLASS_DEFINITION_BINDING: return createComplexClassDefinitionBinding();
-			case StructurePackage.SIMPLE_ENUMERATION_BINDING: return createSimpleEnumerationBinding();
-			case StructurePackage.COMPLEX_ENUMERATION_BINDING: return createComplexEnumerationBinding();
-			case StructurePackage.SIMPLE_PROPERTY_BINDING: return createSimplePropertyBinding();
-			case StructurePackage.COMPLEX_PROPERTY_BINDING: return createComplexPropertyBinding();
-			case StructurePackage.SIMPLE_OPERATION_BINDING: return createSimpleOperationBinding();
-			case StructurePackage.COMPLEX_OPERATION_BINDING: return createComplexOperationBinding();
-			case StructurePackage.SIMPLE_PARAMETER_BINDING: return createSimpleParameterBinding();
-			case StructurePackage.COMPLEX_PARAMETER_BINDING: return createComplexParameterBinding();
-			case StructurePackage.ENUM_LITERALBINDING: return createEnumLiteralbinding();
+			case StructurePackage.METAMODEL_BINDING: return createMetamodelBinding();
+			case StructurePackage.CLASS_DEFINITION_BINDING: return createClassDefinitionBinding();
+			case StructurePackage.ENUMERATION_BINDING: return createEnumerationBinding();
+			case StructurePackage.PROPERTY_BINDING: return createPropertyBinding();
+			case StructurePackage.OPERATION_BINDING: return createOperationBinding();
 			case StructurePackage.ADAPTATION_OPERATOR: return createAdaptationOperator();
 			case StructurePackage.USE_ADAPTATION_OPERATOR: return createUseAdaptationOperator();
 			case StructurePackage.PROPERTY_ADAPTATION_OPERATOR: return createPropertyAdaptationOperator();
 			case StructurePackage.UNRESOLVED_ADAPTATION_OPERATOR: return createUnresolvedAdaptationOperator();
 			case StructurePackage.ADAPTATION_PARAMETER: return createAdaptationParameter();
 			case StructurePackage.OPERATION_ADAPTATION_OPERATOR: return createOperationAdaptationOperator();
+			case StructurePackage.UNRESOLVED_METAMODEL: return createUnresolvedMetamodel();
+			case StructurePackage.MODEL_TYPE: return createModelType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -363,19 +346,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelingUnit createModelingUnit() {
-		ModelingUnitImpl modelingUnit = new ModelingUnitImpl();
-		return modelingUnit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeDefinitionContainer createTypeDefinitionContainer() {
-		TypeDefinitionContainerImpl typeDefinitionContainer = new TypeDefinitionContainerImpl();
-		return typeDefinitionContainer;
+	public ModelElementTypeDefinitionContainer createModelElementTypeDefinitionContainer() {
+		ModelElementTypeDefinitionContainerImpl modelElementTypeDefinitionContainer = new ModelElementTypeDefinitionContainerImpl();
+		return modelElementTypeDefinitionContainer;
 	}
 
 	/**
@@ -403,9 +376,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelType createModelType() {
-		ModelTypeImpl modelType = new ModelTypeImpl();
-		return modelType;
+	public Metamodel createMetamodel() {
+		MetamodelImpl metamodel = new MetamodelImpl();
+		return metamodel;
 	}
 
 	/**
@@ -413,9 +386,19 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelTypeVariable createModelTypeVariable() {
-		ModelTypeVariableImpl modelTypeVariable = new ModelTypeVariableImpl();
-		return modelTypeVariable;
+	public MetamodelVariable createMetamodelVariable() {
+		MetamodelVariableImpl metamodelVariable = new MetamodelVariableImpl();
+		return metamodelVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelType createModelType() {
+		ModelTypeImpl modelType = new ModelTypeImpl();
+		return modelType;
 	}
 
 	/**
@@ -533,9 +516,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleBinding createSimpleBinding() {
-		SimpleBindingImpl simpleBinding = new SimpleBindingImpl();
-		return simpleBinding;
+	public MetamodelBinding createMetamodelBinding() {
+		MetamodelBindingImpl metamodelBinding = new MetamodelBindingImpl();
+		return metamodelBinding;
 	}
 
 	/**
@@ -543,9 +526,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AdaptationBinding createAdaptationBinding() {
-		AdaptationBindingImpl adaptationBinding = new AdaptationBindingImpl();
-		return adaptationBinding;
+	public ClassDefinitionBinding createClassDefinitionBinding() {
+		ClassDefinitionBindingImpl classDefinitionBinding = new ClassDefinitionBindingImpl();
+		return classDefinitionBinding;
 	}
 
 	/**
@@ -553,9 +536,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleClassDefinitionBinding createSimpleClassDefinitionBinding() {
-		SimpleClassDefinitionBindingImpl simpleClassDefinitionBinding = new SimpleClassDefinitionBindingImpl();
-		return simpleClassDefinitionBinding;
+	public EnumerationBinding createEnumerationBinding() {
+		EnumerationBindingImpl enumerationBinding = new EnumerationBindingImpl();
+		return enumerationBinding;
 	}
 
 	/**
@@ -563,9 +546,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComplexClassDefinitionBinding createComplexClassDefinitionBinding() {
-		ComplexClassDefinitionBindingImpl complexClassDefinitionBinding = new ComplexClassDefinitionBindingImpl();
-		return complexClassDefinitionBinding;
+	public PropertyBinding createPropertyBinding() {
+		PropertyBindingImpl propertyBinding = new PropertyBindingImpl();
+		return propertyBinding;
 	}
 
 	/**
@@ -573,89 +556,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleEnumerationBinding createSimpleEnumerationBinding() {
-		SimpleEnumerationBindingImpl simpleEnumerationBinding = new SimpleEnumerationBindingImpl();
-		return simpleEnumerationBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComplexEnumerationBinding createComplexEnumerationBinding() {
-		ComplexEnumerationBindingImpl complexEnumerationBinding = new ComplexEnumerationBindingImpl();
-		return complexEnumerationBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimplePropertyBinding createSimplePropertyBinding() {
-		SimplePropertyBindingImpl simplePropertyBinding = new SimplePropertyBindingImpl();
-		return simplePropertyBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComplexPropertyBinding createComplexPropertyBinding() {
-		ComplexPropertyBindingImpl complexPropertyBinding = new ComplexPropertyBindingImpl();
-		return complexPropertyBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimpleOperationBinding createSimpleOperationBinding() {
-		SimpleOperationBindingImpl simpleOperationBinding = new SimpleOperationBindingImpl();
-		return simpleOperationBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComplexOperationBinding createComplexOperationBinding() {
-		ComplexOperationBindingImpl complexOperationBinding = new ComplexOperationBindingImpl();
-		return complexOperationBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimpleParameterBinding createSimpleParameterBinding() {
-		SimpleParameterBindingImpl simpleParameterBinding = new SimpleParameterBindingImpl();
-		return simpleParameterBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComplexParameterBinding createComplexParameterBinding() {
-		ComplexParameterBindingImpl complexParameterBinding = new ComplexParameterBindingImpl();
-		return complexParameterBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EnumLiteralbinding createEnumLiteralbinding() {
-		EnumLiteralbindingImpl enumLiteralbinding = new EnumLiteralbindingImpl();
-		return enumLiteralbinding;
+	public OperationBinding createOperationBinding() {
+		OperationBindingImpl operationBinding = new OperationBindingImpl();
+		return operationBinding;
 	}
 
 	/**
@@ -716,6 +619,16 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public OperationAdaptationOperator createOperationAdaptationOperator() {
 		OperationAdaptationOperatorImpl operationAdaptationOperator = new OperationAdaptationOperatorImpl();
 		return operationAdaptationOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedMetamodel createUnresolvedMetamodel() {
+		UnresolvedMetamodelImpl unresolvedMetamodel = new UnresolvedMetamodelImpl();
+		return unresolvedMetamodel;
 	}
 
 	/**

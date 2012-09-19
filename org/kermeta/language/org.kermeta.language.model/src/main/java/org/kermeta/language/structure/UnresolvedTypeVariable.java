@@ -17,5 +17,5 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface UnresolvedTypeVariable extends Unresolved, TypeVariable {
+public interface UnresolvedTypeVariable extends UnresolvedReference, TypeVariable {
 } // UnresolvedTypeVariable

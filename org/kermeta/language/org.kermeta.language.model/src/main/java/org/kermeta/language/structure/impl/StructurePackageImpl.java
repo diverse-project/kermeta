@@ -7,56 +7,46 @@
 package org.kermeta.language.structure.impl;
 
 
-import org.OrgPackage;
+import static org.kermeta.language.structure.StructurePackage.CLASS;
 
+import org.OrgPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.impl.OrgPackageImpl;
 import org.kermeta.KmPackage;
 import org.kermeta.impl.KmPackageImpl;
-
 import org.kermeta.language.LanguagePackage;
-
 import org.kermeta.language.behavior.BehaviorPackage;
-
 import org.kermeta.language.behavior.impl.BehaviorPackageImpl;
-
 import org.kermeta.language.impl.LanguagePackageImpl;
-
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
-import org.kermeta.language.structure.AdaptationBinding;
 import org.kermeta.language.structure.AdaptationOperator;
 import org.kermeta.language.structure.AdaptationParameter;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.ClassDefinitionBinding;
-import org.kermeta.language.structure.ComplexClassDefinitionBinding;
-import org.kermeta.language.structure.ComplexEnumerationBinding;
-import org.kermeta.language.structure.ComplexOperationBinding;
-import org.kermeta.language.structure.ComplexParameterBinding;
-import org.kermeta.language.structure.ComplexPropertyBinding;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.ConstraintLanguage;
 import org.kermeta.language.structure.ConstraintType;
 import org.kermeta.language.structure.DataType;
-import org.kermeta.language.structure.EnumLiteralbinding;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
+import org.kermeta.language.structure.Metamodel;
+import org.kermeta.language.structure.MetamodelBinding;
+import org.kermeta.language.structure.MetamodelVariable;
 import org.kermeta.language.structure.Model;
+import org.kermeta.language.structure.ModelElementTypeDefinition;
+import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
-import org.kermeta.language.structure.ModelTypeBinding;
-import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
@@ -65,7 +55,6 @@ import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.OperationAdaptationOperator;
 import org.kermeta.language.structure.OperationBinding;
 import org.kermeta.language.structure.Parameter;
-import org.kermeta.language.structure.ParameterBinding;
 import org.kermeta.language.structure.ParameterizedType;
 import org.kermeta.language.structure.PrimitiveType;
 import org.kermeta.language.structure.ProductType;
@@ -73,27 +62,21 @@ import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
-import org.kermeta.language.structure.SimpleBinding;
-import org.kermeta.language.structure.SimpleClassDefinitionBinding;
-import org.kermeta.language.structure.SimpleEnumerationBinding;
-import org.kermeta.language.structure.SimpleOperationBinding;
-import org.kermeta.language.structure.SimpleParameterBinding;
-import org.kermeta.language.structure.SimplePropertyBinding;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypeDefinition;
-import org.kermeta.language.structure.TypeDefinitionContainer;
 import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
-import org.kermeta.language.structure.Unresolved;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedMetamodel;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
+import org.kermeta.language.structure.UnresolvedReference;
 import org.kermeta.language.structure.UnresolvedType;
 import org.kermeta.language.structure.UnresolvedTypeVariable;
 import org.kermeta.language.structure.UseAdaptationOperator;
@@ -267,7 +250,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeDefinitionContainerEClass = null;
+	private EClass modelElementTypeDefinitionContainerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -309,14 +292,21 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelTypeEClass = null;
+	private EClass metamodelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelTypeVariableEClass = null;
+	private EClass metamodelVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -351,7 +341,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass unresolvedEClass = null;
+	private EClass unresolvedReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -414,21 +404,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelTypeBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass adaptationBindingEClass = null;
+	private EClass metamodelBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -442,35 +418,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass simpleClassDefinitionBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass complexClassDefinitionBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass enumerationBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleEnumerationBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass complexEnumerationBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -485,62 +433,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass operationBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simplePropertyBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass complexPropertyBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleOperationBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass complexOperationBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass parameterBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleParameterBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass complexParameterBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumLiteralbindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -583,6 +475,20 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass operationAdaptationOperatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedMetamodelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelElementTypeDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -752,7 +658,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EAttribute getOperation_IsAbstract() {
-		return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -761,7 +667,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_RaisedException() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(1);
+		return (EReference)operationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -770,7 +676,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_OwnedParameter() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(2);
+		return (EReference)operationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -779,7 +685,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_Pre() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(3);
+		return (EReference)operationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -788,7 +694,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_Post() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(4);
+		return (EReference)operationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -797,7 +703,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_Body() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(5);
+		return (EReference)operationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -806,7 +712,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_SuperOperation() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(6);
+		return (EReference)operationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -815,7 +721,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_OwnedUnresolvedOperations() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(7);
+		return (EReference)operationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -824,7 +730,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_OwningClass() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(8);
+		return (EReference)operationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -833,7 +739,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getOperation_TypeParameter() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(9);
+		return (EReference)operationEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1525,8 +1431,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypeDefinitionContainer() {
-		return typeDefinitionContainerEClass;
+	public EClass getModelElementTypeDefinitionContainer() {
+		return modelElementTypeDefinitionContainerEClass;
 	}
 
 	/**
@@ -1534,8 +1440,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeDefinitionContainer_OwnedTypeDefinition() {
-		return (EReference)typeDefinitionContainerEClass.getEStructuralFeatures().get(0);
+	public EReference getModelElementTypeDefinitionContainer_OwnedTypeDefinition() {
+		return (EReference)modelElementTypeDefinitionContainerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1642,6 +1548,51 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMetamodel() {
+		return metamodelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetamodel_OwnedBindings() {
+		return (EReference)metamodelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetamodel_OwnedMetamodels() {
+		return (EReference)metamodelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetamodelVariable() {
+		return metamodelVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetamodelVariable_VirtualType() {
+		return (EReference)metamodelVariableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModelType() {
 		return modelTypeEClass;
 	}
@@ -1651,35 +1602,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelType_OwnedBindings() {
+	public EReference getModelType_TypeDefinition() {
 		return (EReference)modelTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModelType_OwnedPackages() {
-		return (EReference)modelTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getModelTypeVariable() {
-		return modelTypeVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModelTypeVariable_VirtualType() {
-		return (EReference)modelTypeVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1705,7 +1629,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVirtualType_ModelType() {
+	public EReference getVirtualType_MetamodelVariable() {
 		return (EReference)virtualTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1768,6 +1692,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnresolvedReference() {
+		return unresolvedReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getUnresolvedType_Usings() {
 		return (EReference)unresolvedTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1779,15 +1712,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 */
 	public EReference getUnresolvedType_Generics() {
 		return (EReference)unresolvedTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getUnresolved() {
-		return unresolvedEClass;
 	}
 
 	/**
@@ -1939,8 +1863,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getModelTypeBinding() {
-		return modelTypeBindingEClass;
+	public EClass getMetamodelBinding() {
+		return metamodelBindingEClass;
 	}
 
 	/**
@@ -1948,8 +1872,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelTypeBinding_BoundModelType() {
-		return (EReference)modelTypeBindingEClass.getEStructuralFeatures().get(0);
+	public EReference getMetamodelBinding_BoundMetamodel() {
+		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1957,8 +1881,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimpleBinding() {
-		return simpleBindingEClass;
+	public EReference getMetamodelBinding_OwnedClassDefinitionBindings() {
+		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1966,8 +1890,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleBinding_OwnedClassDefinitionBindings() {
-		return (EReference)simpleBindingEClass.getEStructuralFeatures().get(0);
+	public EReference getMetamodelBinding_UsedAdaptationOperators() {
+		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1975,44 +1899,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleBinding_OwnedEnumerationBindings() {
-		return (EReference)simpleBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAdaptationBinding() {
-		return adaptationBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAdaptationBinding_OwnedClassDefinitionBindings() {
-		return (EReference)adaptationBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAdaptationBinding_OwnedEnumerationBindings() {
-		return (EReference)adaptationBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAdaptationBinding_UsedAdaptationOperators() {
-		return (EReference)adaptationBindingEClass.getEStructuralFeatures().get(2);
+	public EReference getMetamodelBinding_OwnedEnumerationBindings() {
+		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2029,8 +1917,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimpleClassDefinitionBinding() {
-		return simpleClassDefinitionBindingEClass;
+	public EReference getClassDefinitionBinding_OwnedPropertyBindings() {
+		return (EReference)classDefinitionBindingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2038,8 +1926,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleClassDefinitionBinding_OwnedPropertyBindings() {
-		return (EReference)simpleClassDefinitionBindingEClass.getEStructuralFeatures().get(0);
+	public EReference getClassDefinitionBinding_OwnedOperationBindings() {
+		return (EReference)classDefinitionBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2047,8 +1935,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleClassDefinitionBinding_OwnedOperationBindings() {
-		return (EReference)simpleClassDefinitionBindingEClass.getEStructuralFeatures().get(1);
+	public EReference getClassDefinitionBinding_Source() {
+		return (EReference)classDefinitionBindingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2056,62 +1944,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleClassDefinitionBinding_Source() {
-		return (EReference)simpleClassDefinitionBindingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleClassDefinitionBinding_Target() {
-		return (EReference)simpleClassDefinitionBindingEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComplexClassDefinitionBinding() {
-		return complexClassDefinitionBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexClassDefinitionBinding_OwnedPropertyBindings() {
-		return (EReference)complexClassDefinitionBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexClassDefinitionBinding_OwnedOperationBindings() {
-		return (EReference)complexClassDefinitionBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexClassDefinitionBinding_Sources() {
-		return (EReference)complexClassDefinitionBindingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexClassDefinitionBinding_Targets() {
-		return (EReference)complexClassDefinitionBindingEClass.getEStructuralFeatures().get(3);
+	public EReference getClassDefinitionBinding_Target() {
+		return (EReference)classDefinitionBindingEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2128,7 +1962,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEnumerationBinding_OwnedEnumLiteralBindings() {
+	public EReference getEnumerationBinding_Source() {
 		return (EReference)enumerationBindingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2137,53 +1971,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimpleEnumerationBinding() {
-		return simpleEnumerationBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleEnumerationBinding_Source() {
-		return (EReference)simpleEnumerationBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleEnumerationBinding_Target() {
-		return (EReference)simpleEnumerationBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComplexEnumerationBinding() {
-		return complexEnumerationBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexEnumerationBinding_Sources() {
-		return (EReference)complexEnumerationBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexEnumerationBinding_Targets() {
-		return (EReference)complexEnumerationBindingEClass.getEStructuralFeatures().get(1);
+	public EReference getEnumerationBinding_Target() {
+		return (EReference)enumerationBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2200,6 +1989,24 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPropertyBinding_Source() {
+		return (EReference)propertyBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropertyBinding_Target() {
+		return (EReference)propertyBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOperationBinding() {
 		return operationBindingEClass;
 	}
@@ -2209,8 +2016,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimplePropertyBinding() {
-		return simplePropertyBindingEClass;
+	public EReference getOperationBinding_Source() {
+		return (EReference)operationBindingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2218,206 +2025,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimplePropertyBinding_Source() {
-		return (EReference)simplePropertyBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimplePropertyBinding_Target() {
-		return (EReference)simplePropertyBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComplexPropertyBinding() {
-		return complexPropertyBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexPropertyBinding_Sources() {
-		return (EReference)complexPropertyBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexPropertyBinding_Targets() {
-		return (EReference)complexPropertyBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSimpleOperationBinding() {
-		return simpleOperationBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleOperationBinding_Source() {
-		return (EReference)simpleOperationBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleOperationBinding_Target() {
-		return (EReference)simpleOperationBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleOperationBinding_OwnedParameterBindings() {
-		return (EReference)simpleOperationBindingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComplexOperationBinding() {
-		return complexOperationBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexOperationBinding_Sources() {
-		return (EReference)complexOperationBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexOperationBinding_Targets() {
-		return (EReference)complexOperationBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexOperationBinding_OwnedParameterBindings() {
-		return (EReference)complexOperationBindingEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getParameterBinding() {
-		return parameterBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSimpleParameterBinding() {
-		return simpleParameterBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleParameterBinding_Source() {
-		return (EReference)simpleParameterBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleParameterBinding_Target() {
-		return (EReference)simpleParameterBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComplexParameterBinding() {
-		return complexParameterBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexParameterBinding_Sources() {
-		return (EReference)complexParameterBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexParameterBinding_Targets() {
-		return (EReference)complexParameterBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEnumLiteralbinding() {
-		return enumLiteralbindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEnumLiteralbinding_Sources() {
-		return (EReference)enumLiteralbindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEnumLiteralbinding_Targets() {
-		return (EReference)enumLiteralbindingEClass.getEStructuralFeatures().get(1);
+	public EReference getOperationBinding_Target() {
+		return (EReference)operationBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2578,6 +2187,33 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnresolvedMetamodel() {
+		return unresolvedMetamodelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnresolvedMetamodel_OwnedModelingUnits() {
+		return (EReference)unresolvedMetamodelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelElementTypeDefinition() {
+		return modelElementTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintLanguage() {
 		return constraintLanguageEEnum;
 	}
@@ -2661,7 +2297,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(kermetaModelElementEClass, KERMETA_MODEL_ELEMENT__KTYPE);
 
 		operationEClass = createEClass(OPERATION);
-		createEAttribute(operationEClass, OPERATION__IS_ABSTRACT);
 		createEReference(operationEClass, OPERATION__RAISED_EXCEPTION);
 		createEReference(operationEClass, OPERATION__OWNED_PARAMETER);
 		createEReference(operationEClass, OPERATION__PRE);
@@ -2671,6 +2306,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(operationEClass, OPERATION__OWNED_UNRESOLVED_OPERATIONS);
 		createEReference(operationEClass, OPERATION__OWNING_CLASS);
 		createEReference(operationEClass, OPERATION__TYPE_PARAMETER);
+		createEAttribute(operationEClass, OPERATION__IS_ABSTRACT);
 		createEAttribute(operationEClass, OPERATION__UNIQUE_NAME);
 
 		propertyEClass = createEClass(PROPERTY);
@@ -2768,8 +2404,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEAttribute(modelingUnitEClass, MODELING_UNIT__NAMESPACE_PREFIX);
 		createEReference(modelingUnitEClass, MODELING_UNIT__REQUIRES);
 
-		typeDefinitionContainerEClass = createEClass(TYPE_DEFINITION_CONTAINER);
-		createEReference(typeDefinitionContainerEClass, TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
+		modelElementTypeDefinitionContainerEClass = createEClass(MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER);
+		createEReference(modelElementTypeDefinitionContainerEClass, MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 
 		requireEClass = createEClass(REQUIRE);
 		createEAttribute(requireEClass, REQUIRE__URI);
@@ -2787,16 +2423,16 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		objectTypeVariableEClass = createEClass(OBJECT_TYPE_VARIABLE);
 
-		modelTypeEClass = createEClass(MODEL_TYPE);
-		createEReference(modelTypeEClass, MODEL_TYPE__OWNED_BINDINGS);
-		createEReference(modelTypeEClass, MODEL_TYPE__OWNED_PACKAGES);
+		metamodelEClass = createEClass(METAMODEL);
+		createEReference(metamodelEClass, METAMODEL__OWNED_BINDINGS);
+		createEReference(metamodelEClass, METAMODEL__OWNED_METAMODELS);
 
-		modelTypeVariableEClass = createEClass(MODEL_TYPE_VARIABLE);
-		createEReference(modelTypeVariableEClass, MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
+		metamodelVariableEClass = createEClass(METAMODEL_VARIABLE);
+		createEReference(metamodelVariableEClass, METAMODEL_VARIABLE__VIRTUAL_TYPE);
 
 		virtualTypeEClass = createEClass(VIRTUAL_TYPE);
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__CLASS_DEFINITION);
-		createEReference(virtualTypeEClass, VIRTUAL_TYPE__MODEL_TYPE);
+		createEReference(virtualTypeEClass, VIRTUAL_TYPE__METAMODEL_VARIABLE);
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_PARAM_BINDING);
 
 		modelEClass = createEClass(MODEL);
@@ -2809,7 +2445,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(unresolvedTypeEClass, UNRESOLVED_TYPE__GENERICS);
 		createEAttribute(unresolvedTypeEClass, UNRESOLVED_TYPE__TYPE_IDENTIFIER);
 
-		unresolvedEClass = createEClass(UNRESOLVED);
+		unresolvedReferenceEClass = createEClass(UNRESOLVED_REFERENCE);
 
 		unresolvedPropertyEClass = createEClass(UNRESOLVED_PROPERTY);
 		createEAttribute(unresolvedPropertyEClass, UNRESOLVED_PROPERTY__PROPERTY_IDENTIFIER);
@@ -2835,78 +2471,29 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		unresolvedTypeVariableEClass = createEClass(UNRESOLVED_TYPE_VARIABLE);
 
-		modelTypeBindingEClass = createEClass(MODEL_TYPE_BINDING);
-		createEReference(modelTypeBindingEClass, MODEL_TYPE_BINDING__BOUND_MODEL_TYPE);
-
-		simpleBindingEClass = createEClass(SIMPLE_BINDING);
-		createEReference(simpleBindingEClass, SIMPLE_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
-		createEReference(simpleBindingEClass, SIMPLE_BINDING__OWNED_ENUMERATION_BINDINGS);
-
-		adaptationBindingEClass = createEClass(ADAPTATION_BINDING);
-		createEReference(adaptationBindingEClass, ADAPTATION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
-		createEReference(adaptationBindingEClass, ADAPTATION_BINDING__OWNED_ENUMERATION_BINDINGS);
-		createEReference(adaptationBindingEClass, ADAPTATION_BINDING__USED_ADAPTATION_OPERATORS);
+		metamodelBindingEClass = createEClass(METAMODEL_BINDING);
+		createEReference(metamodelBindingEClass, METAMODEL_BINDING__BOUND_METAMODEL);
+		createEReference(metamodelBindingEClass, METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
+		createEReference(metamodelBindingEClass, METAMODEL_BINDING__USED_ADAPTATION_OPERATORS);
+		createEReference(metamodelBindingEClass, METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS);
 
 		classDefinitionBindingEClass = createEClass(CLASS_DEFINITION_BINDING);
-
-		simpleClassDefinitionBindingEClass = createEClass(SIMPLE_CLASS_DEFINITION_BINDING);
-		createEReference(simpleClassDefinitionBindingEClass, SIMPLE_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS);
-		createEReference(simpleClassDefinitionBindingEClass, SIMPLE_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS);
-		createEReference(simpleClassDefinitionBindingEClass, SIMPLE_CLASS_DEFINITION_BINDING__SOURCE);
-		createEReference(simpleClassDefinitionBindingEClass, SIMPLE_CLASS_DEFINITION_BINDING__TARGET);
-
-		complexClassDefinitionBindingEClass = createEClass(COMPLEX_CLASS_DEFINITION_BINDING);
-		createEReference(complexClassDefinitionBindingEClass, COMPLEX_CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS);
-		createEReference(complexClassDefinitionBindingEClass, COMPLEX_CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS);
-		createEReference(complexClassDefinitionBindingEClass, COMPLEX_CLASS_DEFINITION_BINDING__SOURCES);
-		createEReference(complexClassDefinitionBindingEClass, COMPLEX_CLASS_DEFINITION_BINDING__TARGETS);
+		createEReference(classDefinitionBindingEClass, CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS);
+		createEReference(classDefinitionBindingEClass, CLASS_DEFINITION_BINDING__OWNED_OPERATION_BINDINGS);
+		createEReference(classDefinitionBindingEClass, CLASS_DEFINITION_BINDING__SOURCE);
+		createEReference(classDefinitionBindingEClass, CLASS_DEFINITION_BINDING__TARGET);
 
 		enumerationBindingEClass = createEClass(ENUMERATION_BINDING);
-		createEReference(enumerationBindingEClass, ENUMERATION_BINDING__OWNED_ENUM_LITERAL_BINDINGS);
-
-		simpleEnumerationBindingEClass = createEClass(SIMPLE_ENUMERATION_BINDING);
-		createEReference(simpleEnumerationBindingEClass, SIMPLE_ENUMERATION_BINDING__SOURCE);
-		createEReference(simpleEnumerationBindingEClass, SIMPLE_ENUMERATION_BINDING__TARGET);
-
-		complexEnumerationBindingEClass = createEClass(COMPLEX_ENUMERATION_BINDING);
-		createEReference(complexEnumerationBindingEClass, COMPLEX_ENUMERATION_BINDING__SOURCES);
-		createEReference(complexEnumerationBindingEClass, COMPLEX_ENUMERATION_BINDING__TARGETS);
+		createEReference(enumerationBindingEClass, ENUMERATION_BINDING__SOURCE);
+		createEReference(enumerationBindingEClass, ENUMERATION_BINDING__TARGET);
 
 		propertyBindingEClass = createEClass(PROPERTY_BINDING);
+		createEReference(propertyBindingEClass, PROPERTY_BINDING__SOURCE);
+		createEReference(propertyBindingEClass, PROPERTY_BINDING__TARGET);
 
 		operationBindingEClass = createEClass(OPERATION_BINDING);
-
-		simplePropertyBindingEClass = createEClass(SIMPLE_PROPERTY_BINDING);
-		createEReference(simplePropertyBindingEClass, SIMPLE_PROPERTY_BINDING__SOURCE);
-		createEReference(simplePropertyBindingEClass, SIMPLE_PROPERTY_BINDING__TARGET);
-
-		complexPropertyBindingEClass = createEClass(COMPLEX_PROPERTY_BINDING);
-		createEReference(complexPropertyBindingEClass, COMPLEX_PROPERTY_BINDING__SOURCES);
-		createEReference(complexPropertyBindingEClass, COMPLEX_PROPERTY_BINDING__TARGETS);
-
-		simpleOperationBindingEClass = createEClass(SIMPLE_OPERATION_BINDING);
-		createEReference(simpleOperationBindingEClass, SIMPLE_OPERATION_BINDING__SOURCE);
-		createEReference(simpleOperationBindingEClass, SIMPLE_OPERATION_BINDING__TARGET);
-		createEReference(simpleOperationBindingEClass, SIMPLE_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS);
-
-		complexOperationBindingEClass = createEClass(COMPLEX_OPERATION_BINDING);
-		createEReference(complexOperationBindingEClass, COMPLEX_OPERATION_BINDING__SOURCES);
-		createEReference(complexOperationBindingEClass, COMPLEX_OPERATION_BINDING__TARGETS);
-		createEReference(complexOperationBindingEClass, COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS);
-
-		parameterBindingEClass = createEClass(PARAMETER_BINDING);
-
-		simpleParameterBindingEClass = createEClass(SIMPLE_PARAMETER_BINDING);
-		createEReference(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING__SOURCE);
-		createEReference(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING__TARGET);
-
-		complexParameterBindingEClass = createEClass(COMPLEX_PARAMETER_BINDING);
-		createEReference(complexParameterBindingEClass, COMPLEX_PARAMETER_BINDING__SOURCES);
-		createEReference(complexParameterBindingEClass, COMPLEX_PARAMETER_BINDING__TARGETS);
-
-		enumLiteralbindingEClass = createEClass(ENUM_LITERALBINDING);
-		createEReference(enumLiteralbindingEClass, ENUM_LITERALBINDING__SOURCES);
-		createEReference(enumLiteralbindingEClass, ENUM_LITERALBINDING__TARGETS);
+		createEReference(operationBindingEClass, OPERATION_BINDING__SOURCE);
+		createEReference(operationBindingEClass, OPERATION_BINDING__TARGET);
 
 		adaptationOperatorEClass = createEClass(ADAPTATION_OPERATOR);
 		createEReference(adaptationOperatorEClass, ADAPTATION_OPERATOR__PARAMETERS);
@@ -2930,6 +2517,14 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		operationAdaptationOperatorEClass = createEClass(OPERATION_ADAPTATION_OPERATOR);
 		createEAttribute(operationAdaptationOperatorEClass, OPERATION_ADAPTATION_OPERATOR__BODY);
 		createEReference(operationAdaptationOperatorEClass, OPERATION_ADAPTATION_OPERATOR__TARGET);
+
+		unresolvedMetamodelEClass = createEClass(UNRESOLVED_METAMODEL);
+		createEReference(unresolvedMetamodelEClass, UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS);
+
+		modelElementTypeDefinitionEClass = createEClass(MODEL_ELEMENT_TYPE_DEFINITION);
+
+		modelTypeEClass = createEClass(MODEL_TYPE);
+		createEReference(modelTypeEClass, MODEL_TYPE__TYPE_DEFINITION);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2987,11 +2582,11 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeDefinitionEClass.getESuperTypes().add(this.getTypeContainer());
 		classEClass.getESuperTypes().add(this.getParameterizedType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
-		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
+		dataTypeEClass.getESuperTypes().add(this.getModelElementTypeDefinition());
 		enumerationEClass.getESuperTypes().add(this.getDataType());
 		namedElementEClass.getESuperTypes().add(this.getKermetaModelElement());
 		packageEClass.getESuperTypes().add(this.getNamedElement());
-		packageEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
+		packageEClass.getESuperTypes().add(this.getModelElementTypeDefinitionContainer());
 		parameterEClass.getESuperTypes().add(this.getMultiplicityElement());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
 		typedElementEClass.getESuperTypes().add(this.getTypeContainer());
@@ -3000,31 +2595,30 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		abstractPropertyEClass.getESuperTypes().add(this.getKermetaModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		classDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
-		modelingUnitEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
 		modelingUnitEClass.getESuperTypes().add(this.getKermetaModelElement());
-		typeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
+		modelingUnitEClass.getESuperTypes().add(this.getNamedElement());
+		modelElementTypeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
 		requireEClass.getESuperTypes().add(this.getKermetaModelElement());
-		genericTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+		genericTypeDefinitionEClass.getESuperTypes().add(this.getModelElementTypeDefinition());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getTypeContainer());
 		typeVariableEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getNamedElement());
 		objectTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
-		modelTypeEClass.getESuperTypes().add(this.getType());
-		modelTypeEClass.getESuperTypes().add(this.getTypeDefinition());
-		modelTypeEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
-		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
+		metamodelEClass.getESuperTypes().add(this.getTypeDefinition());
+		metamodelEClass.getESuperTypes().add(this.getModelingUnit());
+		metamodelVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
 		modelEClass.getESuperTypes().add(this.getKermetaModelElement());
 		abstractOperationEClass.getESuperTypes().add(this.getKermetaModelElement());
 		unresolvedTypeEClass.getESuperTypes().add(this.getType());
-		unresolvedTypeEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedTypeEClass.getESuperTypes().add(this.getUnresolvedReference());
 		unresolvedTypeEClass.getESuperTypes().add(this.getTypeContainer());
-		unresolvedEClass.getESuperTypes().add(this.getKermetaModelElement());
+		unresolvedReferenceEClass.getESuperTypes().add(this.getKermetaModelElement());
 		unresolvedPropertyEClass.getESuperTypes().add(this.getAbstractProperty());
-		unresolvedPropertyEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedPropertyEClass.getESuperTypes().add(this.getUnresolvedReference());
 		unresolvedOperationEClass.getESuperTypes().add(this.getAbstractOperation());
-		unresolvedOperationEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedOperationEClass.getESuperTypes().add(this.getUnresolvedReference());
 		unresolvedOperationEClass.getESuperTypes().add(this.getTypeContainer());
 		usingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
@@ -3032,36 +2626,25 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		functionTypeEClass.getESuperTypes().add(this.getTypeContainer());
 		functionTypeEClass.getESuperTypes().add(this.getType());
 		voidTypeEClass.getESuperTypes().add(this.getType());
-		unresolvedInferredTypeEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedInferredTypeEClass.getESuperTypes().add(this.getUnresolvedReference());
 		unresolvedInferredTypeEClass.getESuperTypes().add(this.getType());
-		unresolvedTypeVariableEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedTypeVariableEClass.getESuperTypes().add(this.getUnresolvedReference());
 		unresolvedTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
-		modelTypeBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
-		simpleBindingEClass.getESuperTypes().add(this.getModelTypeBinding());
-		adaptationBindingEClass.getESuperTypes().add(this.getModelTypeBinding());
+		metamodelBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		classDefinitionBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
-		simpleClassDefinitionBindingEClass.getESuperTypes().add(this.getClassDefinitionBinding());
-		complexClassDefinitionBindingEClass.getESuperTypes().add(this.getClassDefinitionBinding());
 		enumerationBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
-		simpleEnumerationBindingEClass.getESuperTypes().add(this.getEnumerationBinding());
-		complexEnumerationBindingEClass.getESuperTypes().add(this.getEnumerationBinding());
 		propertyBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		operationBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
-		simplePropertyBindingEClass.getESuperTypes().add(this.getPropertyBinding());
-		complexPropertyBindingEClass.getESuperTypes().add(this.getPropertyBinding());
-		simpleOperationBindingEClass.getESuperTypes().add(this.getOperationBinding());
-		complexOperationBindingEClass.getESuperTypes().add(this.getOperationBinding());
-		parameterBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
-		simpleParameterBindingEClass.getESuperTypes().add(this.getParameterBinding());
-		complexParameterBindingEClass.getESuperTypes().add(this.getParameterBinding());
-		enumLiteralbindingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		adaptationOperatorEClass.getESuperTypes().add(this.getNamedElement());
 		useAdaptationOperatorEClass.getESuperTypes().add(this.getKermetaModelElement());
 		propertyAdaptationOperatorEClass.getESuperTypes().add(this.getAdaptationOperator());
 		unresolvedAdaptationOperatorEClass.getESuperTypes().add(this.getAdaptationOperator());
-		unresolvedAdaptationOperatorEClass.getESuperTypes().add(this.getUnresolved());
+		unresolvedAdaptationOperatorEClass.getESuperTypes().add(this.getUnresolvedReference());
 		adaptationParameterEClass.getESuperTypes().add(this.getTypedElement());
 		operationAdaptationOperatorEClass.getESuperTypes().add(this.getAdaptationOperator());
+		unresolvedMetamodelEClass.getESuperTypes().add(this.getModelingUnit());
+		modelElementTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+		modelTypeEClass.getESuperTypes().add(this.getType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kermetaModelElementEClass, KermetaModelElement.class, "KermetaModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3070,7 +2653,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getKermetaModelElement_KType(), this.getType(), null, "kType", null, 1, 1, KermetaModelElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOperation_IsAbstract(), this.getBoolean(), "isAbstract", "false", 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_RaisedException(), this.getType(), null, "raisedException", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_OwnedParameter(), this.getParameter(), this.getParameter_Operation(), "ownedParameter", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_Pre(), this.getConstraint(), this.getConstraint_PreOwner(), "pre", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3080,6 +2662,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getOperation_OwnedUnresolvedOperations(), this.getUnresolvedOperation(), null, "ownedUnresolvedOperations", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_OwningClass(), this.getClassDefinition(), this.getClassDefinition_OwnedOperation(), "owningClass", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_TypeParameter(), this.getTypeVariable(), null, "typeParameter", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_IsAbstract(), this.getBoolean(), "isAbstract", "false", 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOperation_UniqueName(), this.getString(), "uniqueName", null, 0, 1, Operation.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3173,13 +2756,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEAttribute(getClassDefinition_IsSingleton(), this.getBoolean(), "isSingleton", "false", 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClassDefinition_IsFinal(), this.getBoolean(), "isFinal", "false", 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelingUnit_Packages(), this.getPackage(), null, "packages", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelingUnit_NamespacePrefix(), this.getString(), "namespacePrefix", null, 0, 1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelingUnit_Requires(), this.getRequire(), null, "requires", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeDefinitionContainerEClass, TypeDefinitionContainer.class, "TypeDefinitionContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeDefinitionContainer_OwnedTypeDefinition(), this.getTypeDefinition(), null, "ownedTypeDefinition", null, 0, -1, TypeDefinitionContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(modelElementTypeDefinitionContainerEClass, ModelElementTypeDefinitionContainer.class, "ModelElementTypeDefinitionContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelElementTypeDefinitionContainer_OwnedTypeDefinition(), this.getModelElementTypeDefinition(), null, "ownedTypeDefinition", null, 0, -1, ModelElementTypeDefinitionContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(requireEClass, Require.class, "Require", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRequire_Uri(), this.getString(), "uri", null, 0, 1, Require.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3197,16 +2780,16 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class, "ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelType_OwnedBindings(), this.getModelTypeBinding(), null, "ownedBindings", null, 0, -1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelType_OwnedPackages(), this.getPackage(), null, "ownedPackages", null, 0, -1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(metamodelEClass, Metamodel.class, "Metamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetamodel_OwnedBindings(), this.getMetamodelBinding(), null, "ownedBindings", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetamodel_OwnedMetamodels(), this.getMetamodel(), null, "ownedMetamodels", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(modelTypeVariableEClass, ModelTypeVariable.class, "ModelTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelTypeVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_ModelType(), "virtualType", null, 0, -1, ModelTypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(metamodelVariableEClass, MetamodelVariable.class, "MetamodelVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetamodelVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_MetamodelVariable(), "virtualType", null, 0, -1, MetamodelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(virtualTypeEClass, VirtualType.class, "VirtualType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVirtualType_ClassDefinition(), this.getClassDefinition(), null, "classDefinition", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVirtualType_ModelType(), this.getModelTypeVariable(), this.getModelTypeVariable_VirtualType(), "modelType", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualType_MetamodelVariable(), this.getMetamodelVariable(), this.getMetamodelVariable_VirtualType(), "metamodelVariable", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualType_TypeParamBinding(), this.getTypeVariableBinding(), null, "typeParamBinding", null, 0, -1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3219,7 +2802,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getUnresolvedType_Generics(), this.getType(), null, "generics", null, 0, -1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnresolvedType_TypeIdentifier(), this.getString(), "typeIdentifier", null, 1, 1, UnresolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(unresolvedEClass, Unresolved.class, "Unresolved", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(unresolvedReferenceEClass, UnresolvedReference.class, "UnresolvedReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unresolvedPropertyEClass, UnresolvedProperty.class, "UnresolvedProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnresolvedProperty_PropertyIdentifier(), this.getString(), "propertyIdentifier", null, 1, 1, UnresolvedProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3245,85 +2828,36 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(unresolvedTypeVariableEClass, UnresolvedTypeVariable.class, "UnresolvedTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(modelTypeBindingEClass, ModelTypeBinding.class, "ModelTypeBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelTypeBinding_BoundModelType(), this.getModelType(), null, "boundModelType", null, 1, 1, ModelTypeBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(metamodelBindingEClass, MetamodelBinding.class, "MetamodelBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetamodelBinding_BoundMetamodel(), this.getMetamodel(), null, "boundMetamodel", null, 1, 1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetamodelBinding_OwnedClassDefinitionBindings(), this.getClassDefinitionBinding(), null, "ownedClassDefinitionBindings", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetamodelBinding_UsedAdaptationOperators(), this.getUseAdaptationOperator(), null, "usedAdaptationOperators", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetamodelBinding_OwnedEnumerationBindings(), this.getEnumerationBinding(), null, "ownedEnumerationBindings", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(simpleBindingEClass, SimpleBinding.class, "SimpleBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleBinding_OwnedClassDefinitionBindings(), this.getSimpleClassDefinitionBinding(), null, "ownedClassDefinitionBindings", null, 0, -1, SimpleBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleBinding_OwnedEnumerationBindings(), this.getSimpleEnumerationBinding(), null, "ownedEnumerationBindings", null, 0, -1, SimpleBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(classDefinitionBindingEClass, ClassDefinitionBinding.class, "ClassDefinitionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassDefinitionBinding_OwnedPropertyBindings(), this.getPropertyBinding(), null, "ownedPropertyBindings", null, 0, -1, ClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDefinitionBinding_OwnedOperationBindings(), this.getOperationBinding(), null, "ownedOperationBindings", null, 0, -1, ClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDefinitionBinding_Source(), this.getClassDefinition(), null, "source", null, 1, 1, ClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDefinitionBinding_Target(), this.getClassDefinition(), null, "target", null, 1, 1, ClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(adaptationBindingEClass, AdaptationBinding.class, "AdaptationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAdaptationBinding_OwnedClassDefinitionBindings(), this.getClassDefinitionBinding(), null, "ownedClassDefinitionBindings", null, 0, -1, AdaptationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAdaptationBinding_OwnedEnumerationBindings(), this.getEnumerationBinding(), null, "ownedEnumerationBindings", null, 0, -1, AdaptationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAdaptationBinding_UsedAdaptationOperators(), this.getUseAdaptationOperator(), null, "usedAdaptationOperators", null, 0, -1, AdaptationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(enumerationBindingEClass, EnumerationBinding.class, "EnumerationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumerationBinding_Source(), this.getEnumeration(), null, "source", null, 1, 1, EnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEnumerationBinding_Target(), this.getEnumeration(), null, "target", null, 1, 1, EnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(classDefinitionBindingEClass, ClassDefinitionBinding.class, "ClassDefinitionBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(propertyBindingEClass, PropertyBinding.class, "PropertyBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPropertyBinding_Source(), this.getProperty(), null, "source", null, 1, 1, PropertyBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyBinding_Target(), this.getProperty(), null, "target", null, 1, 1, PropertyBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(simpleClassDefinitionBindingEClass, SimpleClassDefinitionBinding.class, "SimpleClassDefinitionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleClassDefinitionBinding_OwnedPropertyBindings(), this.getSimplePropertyBinding(), null, "ownedPropertyBindings", null, 0, -1, SimpleClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleClassDefinitionBinding_OwnedOperationBindings(), this.getSimpleOperationBinding(), null, "ownedOperationBindings", null, 0, -1, SimpleClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleClassDefinitionBinding_Source(), this.getClassDefinition(), null, "source", null, 1, 1, SimpleClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleClassDefinitionBinding_Target(), this.getClassDefinition(), null, "target", null, 1, 1, SimpleClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(complexClassDefinitionBindingEClass, ComplexClassDefinitionBinding.class, "ComplexClassDefinitionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComplexClassDefinitionBinding_OwnedPropertyBindings(), this.getPropertyBinding(), null, "ownedPropertyBindings", null, 0, -1, ComplexClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexClassDefinitionBinding_OwnedOperationBindings(), this.getOperationBinding(), null, "ownedOperationBindings", null, 0, -1, ComplexClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexClassDefinitionBinding_Sources(), this.getClassDefinition(), null, "sources", null, 1, -1, ComplexClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexClassDefinitionBinding_Targets(), this.getClassDefinition(), null, "targets", null, 1, -1, ComplexClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(enumerationBindingEClass, EnumerationBinding.class, "EnumerationBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumerationBinding_OwnedEnumLiteralBindings(), this.getEnumLiteralbinding(), null, "ownedEnumLiteralBindings", null, 0, -1, EnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(simpleEnumerationBindingEClass, SimpleEnumerationBinding.class, "SimpleEnumerationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleEnumerationBinding_Source(), this.getEnumeration(), null, "source", null, 1, 1, SimpleEnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleEnumerationBinding_Target(), this.getEnumeration(), null, "target", null, 1, 1, SimpleEnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(complexEnumerationBindingEClass, ComplexEnumerationBinding.class, "ComplexEnumerationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComplexEnumerationBinding_Sources(), this.getEnumeration(), null, "sources", null, 1, -1, ComplexEnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexEnumerationBinding_Targets(), this.getEnumeration(), null, "targets", null, 1, -1, ComplexEnumerationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(propertyBindingEClass, PropertyBinding.class, "PropertyBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(operationBindingEClass, OperationBinding.class, "OperationBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(simplePropertyBindingEClass, SimplePropertyBinding.class, "SimplePropertyBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimplePropertyBinding_Source(), this.getProperty(), null, "source", null, 1, 1, SimplePropertyBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimplePropertyBinding_Target(), this.getProperty(), null, "target", null, 1, 1, SimplePropertyBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(complexPropertyBindingEClass, ComplexPropertyBinding.class, "ComplexPropertyBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComplexPropertyBinding_Sources(), this.getProperty(), null, "sources", null, 1, -1, ComplexPropertyBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexPropertyBinding_Targets(), this.getProperty(), null, "targets", null, 1, -1, ComplexPropertyBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(simpleOperationBindingEClass, SimpleOperationBinding.class, "SimpleOperationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleOperationBinding_Source(), this.getOperation(), null, "source", null, 1, 1, SimpleOperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleOperationBinding_Target(), this.getOperation(), null, "target", null, 1, 1, SimpleOperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleOperationBinding_OwnedParameterBindings(), this.getSimpleParameterBinding(), null, "ownedParameterBindings", null, 0, -1, SimpleOperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(complexOperationBindingEClass, ComplexOperationBinding.class, "ComplexOperationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComplexOperationBinding_Sources(), this.getOperation(), null, "sources", null, 1, -1, ComplexOperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexOperationBinding_Targets(), this.getOperation(), null, "targets", null, 1, -1, ComplexOperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexOperationBinding_OwnedParameterBindings(), this.getParameterBinding(), null, "ownedParameterBindings", null, 0, -1, ComplexOperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(parameterBindingEClass, ParameterBinding.class, "ParameterBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(simpleParameterBindingEClass, SimpleParameterBinding.class, "SimpleParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleParameterBinding_Source(), this.getParameter(), null, "source", null, 1, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleParameterBinding_Target(), this.getParameter(), null, "target", null, 1, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(complexParameterBindingEClass, ComplexParameterBinding.class, "ComplexParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComplexParameterBinding_Sources(), this.getParameter(), null, "sources", null, 1, -1, ComplexParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexParameterBinding_Targets(), this.getParameter(), null, "targets", null, 1, -1, ComplexParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(enumLiteralbindingEClass, EnumLiteralbinding.class, "EnumLiteralbinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumLiteralbinding_Sources(), this.getEnumerationLiteral(), null, "sources", null, 1, -1, EnumLiteralbinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEnumLiteralbinding_Targets(), this.getEnumerationLiteral(), null, "targets", null, 1, -1, EnumLiteralbinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(operationBindingEClass, OperationBinding.class, "OperationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationBinding_Source(), this.getOperation(), null, "source", null, 1, 1, OperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperationBinding_Target(), this.getOperation(), null, "target", null, 1, 1, OperationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(adaptationOperatorEClass, AdaptationOperator.class, "AdaptationOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAdaptationOperator_Parameters(), this.getAdaptationParameter(), null, "parameters", null, 0, -1, AdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(useAdaptationOperatorEClass, UseAdaptationOperator.class, "UseAdaptationOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUseAdaptationOperator_Parameters(), this.getKermetaModelElement(), null, "parameters", null, 0, -1, UseAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUseAdaptationOperator_OwnedUnresolved(), this.getUnresolved(), null, "ownedUnresolved", null, 0, -1, UseAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUseAdaptationOperator_OwnedUnresolved(), this.getUnresolvedReference(), null, "ownedUnresolved", null, 0, -1, UseAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUseAdaptationOperator_UsedOperator(), this.getAdaptationOperator(), null, "usedOperator", null, 1, 1, UseAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyAdaptationOperatorEClass, PropertyAdaptationOperator.class, "PropertyAdaptationOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3340,6 +2874,14 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(operationAdaptationOperatorEClass, OperationAdaptationOperator.class, "OperationAdaptationOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperationAdaptationOperator_Body(), this.getString(), "body", null, 0, 1, OperationAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperationAdaptationOperator_Target(), this.getOperation(), null, "target", null, 1, 1, OperationAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unresolvedMetamodelEClass, UnresolvedMetamodel.class, "UnresolvedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnresolvedMetamodel_OwnedModelingUnits(), this.getModelingUnit(), null, "ownedModelingUnits", null, 0, -1, UnresolvedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelElementTypeDefinitionEClass, ModelElementTypeDefinition.class, "ModelElementTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelType_TypeDefinition(), this.getMetamodel(), null, "typeDefinition", null, 1, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

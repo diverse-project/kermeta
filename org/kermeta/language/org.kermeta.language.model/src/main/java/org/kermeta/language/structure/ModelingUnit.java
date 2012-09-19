@@ -28,10 +28,10 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getModelingUnit()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface ModelingUnit extends TypeDefinitionContainer, KermetaModelElement {
+public interface ModelingUnit extends KermetaModelElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Package}.

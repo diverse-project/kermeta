@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.Require;
 import org.kermeta.language.structure.StructurePackage;
 
@@ -32,6 +33,7 @@ import org.kermeta.language.structure.StructurePackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.kermeta.language.structure.impl.ModelingUnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelingUnitImpl#getPackages <em>Packages</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelingUnitImpl#getNamespacePrefix <em>Namespace Prefix</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.ModelingUnitImpl#getRequires <em>Requires</em>}</li>
@@ -40,7 +42,27 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements ModelingUnit {
+public abstract class ModelingUnitImpl extends KermetaModelElementImpl implements ModelingUnit {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -98,6 +120,27 @@ public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements Mod
 	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.MODELING_UNIT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.MODELING_UNIT__NAME, oldName, name));
 	}
 
 	/**
@@ -169,6 +212,8 @@ public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements Mod
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__NAME:
+				return getName();
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return getPackages();
 			case StructurePackage.MODELING_UNIT__NAMESPACE_PREFIX:
@@ -188,6 +233,9 @@ public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements Mod
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__NAME:
+				setName((String)newValue);
+				return;
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				getPackages().clear();
 				getPackages().addAll((Collection<? extends org.kermeta.language.structure.Package>)newValue);
@@ -211,6 +259,9 @@ public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements Mod
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				getPackages().clear();
 				return;
@@ -232,6 +283,8 @@ public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements Mod
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return packages != null && !packages.isEmpty();
 			case StructurePackage.MODELING_UNIT__NAMESPACE_PREFIX:
@@ -248,11 +301,45 @@ public class ModelingUnitImpl extends TypeDefinitionContainerImpl implements Mod
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case StructurePackage.MODELING_UNIT__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.MODELING_UNIT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (namespacePrefix: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", namespacePrefix: ");
 		result.append(namespacePrefix);
 		result.append(')');
 		return result.toString();

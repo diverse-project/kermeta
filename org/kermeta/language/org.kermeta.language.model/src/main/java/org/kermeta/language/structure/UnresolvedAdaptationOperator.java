@@ -17,5 +17,5 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface UnresolvedAdaptationOperator extends AdaptationOperator, Unresolved {
+public interface UnresolvedAdaptationOperator extends AdaptationOperator, UnresolvedReference {
 } // UnresolvedAdaptationOperator

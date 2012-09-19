@@ -30,5 +30,5 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface UnresolvedInferredType extends Unresolved, Type {
+public interface UnresolvedInferredType extends UnresolvedReference, Type {
 } // UnresolvedInferredType

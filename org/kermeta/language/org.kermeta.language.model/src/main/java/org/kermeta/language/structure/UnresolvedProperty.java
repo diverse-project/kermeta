@@ -23,7 +23,7 @@ package org.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface UnresolvedProperty extends AbstractProperty, Unresolved {
+public interface UnresolvedProperty extends AbstractProperty, UnresolvedReference {
 	/**
 	 * Returns the value of the '<em><b>Property Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->

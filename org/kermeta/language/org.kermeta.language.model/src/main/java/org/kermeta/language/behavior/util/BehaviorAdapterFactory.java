@@ -8,19 +8,46 @@ package org.kermeta.language.behavior.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.kermeta.language.behavior.*;
-
+import org.kermeta.language.behavior.Assignment;
+import org.kermeta.language.behavior.BehaviorPackage;
+import org.kermeta.language.behavior.Block;
+import org.kermeta.language.behavior.BooleanLiteral;
+import org.kermeta.language.behavior.CallEnumLiteral;
+import org.kermeta.language.behavior.CallExpression;
+import org.kermeta.language.behavior.CallFeature;
+import org.kermeta.language.behavior.CallOperation;
+import org.kermeta.language.behavior.CallProperty;
+import org.kermeta.language.behavior.CallResult;
+import org.kermeta.language.behavior.CallSuperOperation;
+import org.kermeta.language.behavior.CallTypeLiteral;
+import org.kermeta.language.behavior.CallValue;
+import org.kermeta.language.behavior.CallVariable;
+import org.kermeta.language.behavior.Conditional;
+import org.kermeta.language.behavior.EmptyExpression;
+import org.kermeta.language.behavior.Expression;
+import org.kermeta.language.behavior.IntegerLiteral;
+import org.kermeta.language.behavior.JavaStaticCall;
+import org.kermeta.language.behavior.LambdaExpression;
+import org.kermeta.language.behavior.LambdaParameter;
+import org.kermeta.language.behavior.Literal;
+import org.kermeta.language.behavior.Loop;
+import org.kermeta.language.behavior.Raise;
+import org.kermeta.language.behavior.Rescue;
+import org.kermeta.language.behavior.SelfExpression;
+import org.kermeta.language.behavior.StringLiteral;
+import org.kermeta.language.behavior.TypeReference;
+import org.kermeta.language.behavior.UnresolvedCall;
+import org.kermeta.language.behavior.VariableDecl;
+import org.kermeta.language.behavior.VoidLiteral;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.TypeContainer;
 import org.kermeta.language.structure.TypedElement;
-import org.kermeta.language.structure.Unresolved;
+import org.kermeta.language.structure.UnresolvedReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -219,8 +246,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 				return createMultiplicityElementAdapter();
 			}
 			@Override
-			public Adapter caseUnresolved(Unresolved object) {
-				return createUnresolvedAdapter();
+			public Adapter caseUnresolvedReference(UnresolvedReference object) {
+				return createUnresolvedReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -733,16 +760,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Unresolved <em>Unresolved</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedReference <em>Unresolved Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.Unresolved
+	 * @see org.kermeta.language.structure.UnresolvedReference
 	 * @generated
 	 */
-	public Adapter createUnresolvedAdapter() {
+	public Adapter createUnresolvedReferenceAdapter() {
 		return null;
 	}
 

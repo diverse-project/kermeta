@@ -31,7 +31,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface UnresolvedType extends Type, Unresolved, TypeContainer {
+public interface UnresolvedType extends Type, UnresolvedReference, TypeContainer {
 	/**
 	 * Returns the value of the '<em><b>Type Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->

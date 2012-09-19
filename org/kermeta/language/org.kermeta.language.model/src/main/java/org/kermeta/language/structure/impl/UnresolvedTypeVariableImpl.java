@@ -45,7 +45,7 @@ import org.kermeta.language.structure.UnresolvedTypeVariable;
  *
  * @generated
  */
-public class UnresolvedTypeVariableImpl extends UnresolvedImpl implements UnresolvedTypeVariable {
+public class UnresolvedTypeVariableImpl extends UnresolvedReferenceImpl implements UnresolvedTypeVariable {
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
