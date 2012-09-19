@@ -61,7 +61,7 @@ public class OutlineLabelProvider implements ILabelProvider{
 	@Override
 	public String getText(Object o) {
 		if (o instanceof OutlineItem) {
-			return ((OutlineItem)o).getLabel();
+			return ((OutlineItem)o).getDisplayedLabel();
 		}
 		return null;
 	}

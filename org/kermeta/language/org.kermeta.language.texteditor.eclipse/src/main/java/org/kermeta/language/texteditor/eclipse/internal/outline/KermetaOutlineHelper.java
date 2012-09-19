@@ -27,6 +27,7 @@ import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Package;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.Tag;
+import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation.LocalisationType;
 import org.kermeta.language.texteditor.eclipse.internal.outline.OutlineItem.OutlineTypes;
@@ -45,7 +46,7 @@ public class KermetaOutlineHelper {
 		base.setChildren(baseChildren);
 		boolean hasChildren = false;
 		for (int i = 0; i < this.modelingUnit.getPackages().size(); i++) {
-			OutlineItem ele = new OutlineItem(this.modelingUnit.getPackages().get(i).getName(),base, this);
+			OutlineItem ele = new OutlineItem(this.modelingUnit.getPackages().get(i).getName(), null, base, this);
 			ele.type = OutlineTypes.Package;
 			ele.setLocalisation (new ItemLocalisation(outlineForFile.toString(), this.modelingUnit.getPackages().get(i)));
 			baseChildren[i] = ele;
@@ -70,7 +71,7 @@ public class KermetaOutlineHelper {
 					if (cn.getOwnedOperation().get(j) instanceof Operation){
 						Operation op = cn.getOwnedOperation().get(j);
 						String label = opPrinter.convertToText(op);
-						OutlineItem it = new OutlineItem(label,parent, this);
+						OutlineItem it = new OutlineItem(label, null, parent, this);
 						
 						it.type = OutlineTypes.Operation;
 						it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), op));
@@ -83,7 +84,7 @@ public class KermetaOutlineHelper {
 				}
 				for(Property prop : cn.getOwnedAttribute()){
 					String label = opPrinter.convertToText(prop);
-					OutlineItem it = new OutlineItem(label,parent, this);
+					OutlineItem it = new OutlineItem(label, null, parent, this);
 					if(prop.getIsDerived()){
 						it.type = OutlineTypes.DerivedProperty;
 					}
@@ -99,7 +100,7 @@ public class KermetaOutlineHelper {
 				}
 				for(Constraint inv : cn.getInv()){
 					String label = opPrinter.convertToText(inv);
-					OutlineItem it = new OutlineItem(label,parent, this);
+					OutlineItem it = new OutlineItem(label, null, parent, this);
 					it.type = OutlineTypes.Invariant;
 					it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), inv));
 					objs[cnt] = it;
@@ -115,7 +116,7 @@ public class KermetaOutlineHelper {
 				int cnt = 0;
 				for(EnumerationLiteral lit : en.getOwnedLiteral()){
 					String label = opPrinter.convertToText(lit);
-					OutlineItem it = new OutlineItem(label,parent, this);
+					OutlineItem it = new OutlineItem(label, null, parent, this);
 					
 					it.type = OutlineTypes.EnumLiteral;
 					it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), en));
@@ -137,7 +138,7 @@ public class KermetaOutlineHelper {
 		int cnt = 0;
 		for(Constraint pre : op.getPre()){
 			String label = opPrinter.convertToText(pre);
-			OutlineItem it = new OutlineItem(label,parent, this);
+			OutlineItem it = new OutlineItem(label, null,parent, this);
 			it.type = OutlineTypes.Precondition;
 			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), pre));
 			
@@ -146,7 +147,7 @@ public class KermetaOutlineHelper {
 		}
 		for(Constraint post : op.getPost()){
 			String label = opPrinter.convertToText(post);
-			OutlineItem it = new OutlineItem(label,parent, this);
+			OutlineItem it = new OutlineItem(label, null,parent, this);
 			it.type = OutlineTypes.Postcondition;
 			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), post));
 			
@@ -161,7 +162,18 @@ public class KermetaOutlineHelper {
 		OutlineItem[] objs = new OutlineItem[size];
 		int cnt = 0;
 		for(int i=0; i < p.getOwnedTypeDefinition().size(); i++){
-			OutlineItem it = new OutlineItem(p.getOwnedTypeDefinition().get(i).getName(),parent, this);
+			StringBuilder displayedLabel = new StringBuilder();
+			String mainLabel = p.getOwnedTypeDefinition().get(i).getName();
+			displayedLabel.append(mainLabel);
+			if(p.getOwnedTypeDefinition().get(i) instanceof ClassDefinition){
+				ClassDefinition cd = (ClassDefinition) p.getOwnedTypeDefinition().get(i);				
+				if(!cd.getSuperType().isEmpty()) displayedLabel.append(" inherits ");
+				KMPrinter opPrinter = new KMPrinter();
+				for(Type t : cd.getSuperType()){
+					displayedLabel.append(opPrinter.convertToText(t)+" ");
+				}
+			}
+			OutlineItem it = new OutlineItem(mainLabel, displayedLabel.toString(), parent, this);
 			if (p.getOwnedTypeDefinition().get(i) instanceof ClassDefinition){
 				it.type = OutlineTypes.Class;
 			}
@@ -173,7 +185,7 @@ public class KermetaOutlineHelper {
 			cnt++;
 		}
 		for(int i=0; i < p.getNestedPackage().size(); i++){
-			OutlineItem it = new OutlineItem(p.getNestedPackage().get(i).getName(),parent, this);
+			OutlineItem it = new OutlineItem(p.getNestedPackage().get(i).getName(), null,parent, this);
 			it.type = OutlineTypes.Package;
 			it.setLocalisation (new ItemLocalisation(outlineForFile.toString(), p.getNestedPackage().get(i)));
 			objs[cnt] = it;

@@ -41,6 +41,7 @@ public class OutlineItem {
 	
 	protected KermetaOutlineHelper helper;
 	protected String label;
+	protected String displayedLabel; // this is the label that will be displayed
 
 	protected Image image;
 	
@@ -58,8 +59,12 @@ public class OutlineItem {
 		this.helper = helper;
 	}
 	
-	public OutlineItem(String text, OutlineItem parent, KermetaOutlineHelper helper) {
+	public OutlineItem(String text, String displayedLabel, OutlineItem parent, KermetaOutlineHelper helper) {
 		label = text;
+		if(displayedLabel == null)
+			this.displayedLabel = text;
+		else
+			this.displayedLabel = displayedLabel;
 		this.parent = parent;
 		this.namespace = "";
 		this.opParameters = "";
@@ -99,6 +104,9 @@ public class OutlineItem {
 		}*/
 		
 	    
+	}
+	public String getDisplayedLabel() {
+		return displayedLabel;		
 	}
 	public String getNamespace(){
 		return this.namespace;
