@@ -61,7 +61,7 @@ package structure{
 	
 	}
 	
-	aspect class UnresolvedType inherits Type, Unresolved, TypeContainer {
+	aspect class UnresolvedType inherits Type, UnresolvedReference, TypeContainer {
 		
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			// must maintain order	
@@ -100,7 +100,7 @@ package structure{
 			super(context)
 		end
 	}
-	aspect class UnresolvedOperation inherits AbstractOperation, Unresolved, TypeContainer {
+	aspect class UnresolvedOperation inherits AbstractOperation, UnresolvedReference, TypeContainer {
 		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
 			super(context)
 		end
@@ -293,7 +293,7 @@ package structure{
 		
 		end
 		
-		method resolveStructureReferencedType(context : LanguageVisitorContext) is do 
+		method resolveStructureReferencedType(context : LanguageVisitorContext) from TypeDefinition is do 
 			if not instanceType.isVoid then
 				if instanceType.isInstanceOf(UnresolvedType) then
 					if not instanceType.asType(UnresolvedType).correspondingType.isVoid then
@@ -307,7 +307,7 @@ package structure{
 
 }
 package behavior {
-	aspect class UnresolvedCall inherits Unresolved, CallExpression, TypeContainer{
+	aspect class UnresolvedCall inherits UnresolvedReference, CallExpression, TypeContainer{
 	
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
 			// must maintain order	

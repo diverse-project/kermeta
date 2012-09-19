@@ -78,7 +78,7 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation{
 	end
 }
 
-aspect class Package inherits NamedElement, TypeDefinitionContainer{
+aspect class Package inherits NamedElement, ModelElementTypeDefinitionContainer{
 	method resolveStructureInheritance(context : LanguageVisitorContext) is do
 		context.currentPackage:=self
 		super(context)

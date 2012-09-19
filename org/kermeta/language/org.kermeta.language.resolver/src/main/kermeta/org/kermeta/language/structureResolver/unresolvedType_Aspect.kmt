@@ -5,7 +5,7 @@ require kermeta
 using kermeta::standard
 using org::kermeta::language::resolver
 
-aspect class UnresolvedType inherits Type, Unresolved, TypeContainer{
+aspect class UnresolvedType inherits Type, UnresolvedReference, TypeContainer{
 
 	reference correspondingType : Type
 	operation findCorrespondingType(context : LanguageVisitorContext) : Type  is do

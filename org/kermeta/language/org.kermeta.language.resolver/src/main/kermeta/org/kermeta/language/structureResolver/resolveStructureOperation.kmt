@@ -10,7 +10,7 @@ aspect class KermetaModelElement{
 		
 	end
 }
-aspect class UnresolvedOperation inherits Unresolved, AbstractOperation, TypeContainer {
+aspect class UnresolvedOperation inherits UnresolvedReference, AbstractOperation, TypeContainer {
 
 	reference correspondingOperation : Operation
 	operation findCorrespondingOperation(context : LanguageVisitorContext) : Operation is do

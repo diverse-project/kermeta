@@ -160,7 +160,7 @@ aspect class VirtualType{
 		result := self
 	end
 }
-aspect class ModelTypeVariable{
+aspect class MetamodelVariable{
 		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
 	// TODO not sure must see with model type use case
 		result := self
