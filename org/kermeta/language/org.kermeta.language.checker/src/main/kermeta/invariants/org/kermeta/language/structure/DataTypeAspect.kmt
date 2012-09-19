@@ -14,7 +14,7 @@ aspect class DataType
 
 //		stdio.writeln("Checking inv container_must_be_TypeDefinitionContainer for " + self.name)
 //		stdio.writeln(" container is " + self.container.toString)
-		self.container.isInstanceOf(TypeDefinitionContainer)
+		self.container.isInstanceOf(ModelElementTypeDefinitionContainer)
 		
 	end
 
