@@ -83,13 +83,21 @@ aspect class Class
 	end
 }
 
-aspect class ModelType
+aspect class Metamodel
 {
 	method getQualifiedName() : String from TypeDefinition is do
 		
 		result := super()
 	end
 }
+
+aspect class ModelType
+{
+	method getQualifiedName() : String from Type is do
+		result := self.typeDefinition.getQualifiedName()
+	end
+}
+
 aspect class TypeVariable
 {
 	method getQualifiedName() : String from NamedElement is do

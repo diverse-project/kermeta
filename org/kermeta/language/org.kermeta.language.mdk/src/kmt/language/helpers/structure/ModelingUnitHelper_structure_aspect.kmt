@@ -11,6 +11,7 @@ require kermeta
 require "PackageHelper.kmt"
 require "../../../standard/StringUtils.kmt"
 require "GetQualifiedName_structure_aspect.kmt"
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 using kermeta::standard
 
@@ -31,25 +32,20 @@ aspect class ModelingUnit {
 				set_qname.add(qname)
 			end
 			
-			var pack : TypeDefinitionContainer init self.packages.detect{ p |
+			var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
 				p.name == set_qname.at(0)
 			}
 			if not pack.isVoid then
 				from var i : Integer init 1
 				until i>=(set_qname.size()-1) or pack.isVoid
 				loop
-					var oldpack : TypeDefinitionContainer init pack
+					var oldpack : ModelElementTypeDefinitionContainer init pack
 					if pack.isInstanceOf(Package) then
 						pack := pack.asType(Package).nestedPackage.detect{ p |
 							p.name == set_qname.at(i)
 						}
 					else
 						pack:=void
-					end
-					if pack.isVoid then
-						pack:= oldpack.ownedTypeDefinition.select{x|x.isInstanceOf(ModelType)}.collect{x|x.asType(ModelType)}.detect{ p |
-							p.name == set_qname.at(0)
-					}
 					end
 					i := i + 1
 				end
@@ -61,12 +57,8 @@ aspect class ModelingUnit {
 						c.name == set_qname.at(set_qname.size()-1)
 					}
 				end
-			else			
-				// search this qname in self.onwedTypeDefinition 
-				result := self.ownedTypeDefinition.detect{ c | c.name == set_qname.at(0)}
 			end
 		end
-		
 	end
 	
 	/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
@@ -135,16 +127,11 @@ aspect class ModelingUnit {
 	end
 	
 	/*
-	 * Return all the ClassDefinitions which are contained by the ModelingUnit or its Packages
+	 * Return all the ClassDefinitions which are contained by the ModelingUnit
 	*/
 	operation getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
 		var classDefinitions : OrderedSet<org::kermeta::language::structure::ClassDefinition> init OrderedSet<org::kermeta::language::structure::ClassDefinition>.new
 		
-		self.ownedTypeDefinition.each{td|
-			if td.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
-				classDefinitions.add(td.asType(org::kermeta::language::structure::ClassDefinition))
-			end
-		}
 		getAllPackages.each{p|
 			p.ownedTypeDefinition.each{td|
 				if td.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
@@ -156,12 +143,11 @@ aspect class ModelingUnit {
 	end
 	
 	/*
-	 * Return all the TypeDefinitions which are contained by the ModelingUnit or its Packages
+	 * Return all the TypeDefinitions which are contained by the ModelingUnit
 	*/
-	operation getTypeDefinitions() : Set<org::kermeta::language::structure::TypeDefinition> is do
-		var typeDefinitions : Set<org::kermeta::language::structure::TypeDefinition> init Set<org::kermeta::language::structure::TypeDefinition>.new
+	operation getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
+		var typeDefinitions : Set<org::kermeta::language::structure::ModelElementTypeDefinition> init Set<org::kermeta::language::structure::ModelElementTypeDefinition>.new
 		
-		typeDefinitions.addAll(self.ownedTypeDefinition)
 		getAllPackages.each{p|
 			typeDefinitions.addAll(p.ownedTypeDefinition)
 		}
@@ -199,6 +185,124 @@ aspect class ModelingUnit {
 		end
 		
 		result := pack
+	end
+}
+
+	
+	
+aspect class Metamodel {
+	
+	method getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
+		result := super(qname)
+		
+		if result == void then
+			self.ownedMetamodels.each{mm|
+				result := mm.getTypeDefinitionByQualifiedName(qname)
+			}
+		end
+	end
+	
+	method getTypeDefinitionByNameAndUsings( qname : String, 
+												usings : Collection<Using>, 
+												optionalCurrentPackage : Package) : TypeDefinition is do
+		result := super(qname, usings, optionalCurrentPackage)
+		
+		if result == void then
+			var set_qname : Sequence<String> init qname.split("::")
+			
+			var innerMM : Metamodel init self.ownedMetamodels.detect{mm|
+				mm.name == set_qname.at(0)
+			}
+			if innerMM != void then
+				var next_qname : String init ""
+				set_qname.each{s|
+					if s != set_qname.at(0) then
+						next_qname := next_qname + s
+					end
+				}
+				innerMM.getTypeDefinitionByNameAndUsings(next_qname, usings, optionalCurrentPackage)
+			end
+		end
+	end
+	
+	/*
+	 * Return all the ClassDefinitions which are contained by the ModelingUnit
+	*/
+	method getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
+		result := super()
+		
+		self.ownedMetamodels.each{mm|
+			result.addAll(mm.getClassDefinitions())
+		}
+	end
+	
+	/*
+	 * Return all the TypeDefinitions which are contained by the ModelingUnit
+	*/
+	method getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
+		result := super()
+		
+		self.ownedMetamodels.each{mm|
+			result.addAll(mm.getTypeDefinitions())
+		}
+	end
+}
+
+aspect class UnresolvedMetamodel {
+	
+	method getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
+		result := super(qname)
+		
+		if result == void then
+			self.ownedModelingUnits.each{mu|
+				result := mu.getTypeDefinitionByQualifiedName(qname)
+			}
+		end
+	end
+	
+	method getTypeDefinitionByNameAndUsings( qname : String, 
+												usings : Collection<Using>, 
+												optionalCurrentPackage : Package) : TypeDefinition is do
+		result := super(qname, usings, optionalCurrentPackage)
+		
+		if result == void then
+			var set_qname : Sequence<String> init qname.split("::")
+			
+			var innerMU : ModelingUnit init self.ownedModelingUnits.detect{mu|
+				mu.name == set_qname.at(0)
+			}
+			if innerMU != void then
+				var next_qname : String init ""
+				set_qname.each{s|
+					if s != set_qname.at(0) then
+						next_qname := next_qname + s
+					end
+				}
+				innerMU.getTypeDefinitionByNameAndUsings(next_qname, usings, optionalCurrentPackage)
+			end
+		end
+	end
+	
+	/*
+	 * Return all the ClassDefinitions which are contained by the ModelingUnit
+	*/
+	method getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
+		result := super()
+		
+		self.ownedModelingUnits.each{mu|
+			result.addAll(mu.getClassDefinitions())
+		}
+	end
+	
+	/*
+	 * Return all the TypeDefinitions which are contained by the ModelingUnit
+	*/
+	method getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
+		result := super()
+		
+		self.ownedModelingUnits.each{mu|
+			result.addAll(mu.getTypeDefinitions())
+		}
 	end
 }
 

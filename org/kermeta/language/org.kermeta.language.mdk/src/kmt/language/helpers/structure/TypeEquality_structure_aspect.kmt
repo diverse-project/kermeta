@@ -150,7 +150,7 @@ aspect class PrimitiveType inherits DataType {
 	end
 }
 
-aspect class UnresolvedType inherits Type, Unresolved, TypeContainer {
+aspect class UnresolvedType inherits Type, UnresolvedReference, TypeContainer {
 	method typeEquivalence(other : Type,bindings : Sequence<TypeEqualityBinding>) : Boolean is do
 		if not other.isVoid and other.isInstanceOf(UnresolvedType) then
 			var otherUT  : UnresolvedType 

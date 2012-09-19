@@ -29,7 +29,7 @@ aspect class ParameterizedType
 aspect class ModelType
 {
 	method getTypeDefinitionHelper() : TypeDefinition is do 
-		result := self
+		result := self.typeDefinition
 	end
 }
 
