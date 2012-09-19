@@ -42,6 +42,11 @@ public class ItemLocalisation {
 					extHighlight.add(new FileHighlight(tag.getValue()));
 				}
 			}
+			if(tag.getName().equals("ecore")){
+				if(!localFile.endsWith(".ecore")){
+					externalFound = true;
+				}
+			}
 		}
 		if(localFound && externalFound) localisationType = LocalisationType.Mixed;
 		else if(localFound) localisationType = LocalisationType.Local;
