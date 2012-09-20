@@ -239,13 +239,13 @@ object PrettyPrinter {
     o match {
       case umm : UnresolvedMetamodel => {
         res.append("metamodel " + umm.getName() + "{\n")
-        umm.getPackages().foreach(p => printOutline(p, res))
+        umm.getPackages().foreach(p => print(p, res))
         umm.getOwnedModelingUnits().foreach(mu => print(mu, res))
         res.append("\n}\n")
       }
       case mm : Metamodel => {
         res.append("metamodel " + mm.getName() + "{\n")
-        mm.getPackages().foreach(p => printOutline(p, res))
+        mm.getPackages().foreach(p => print(p, res))
         mm.getOwnedMetamodels().foreach(m => print(m, res))
         res.append("\n}\n")
       }

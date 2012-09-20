@@ -172,7 +172,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 	
 	
 	// reassign annotation to the following annotable element
-	private def topLevelDecl: Parser[List[Object]] = ((annotation | annotableElement)+) ^^ {
+	private def packageTopLevelDecl: Parser[List[Object]] = ((annotation | annotablePackageElement)+) ^^ {
 		case elems =>
 			var listAnnotElem: List[Object] = List()
 			var listTempTagToAdd: List[Tag] = List()
@@ -191,7 +191,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 	}
 	
 	// reassign annotation to the following annotable element
-	private def modelingUnitTopLevelDecl: Parser[List[Object]] = ((annotation | modelingUnitElement)+) ^^ {
+	private def modelingUnitTopLevelDecl: Parser[List[Object]] = ((annotation | annotableModelingUnitElement)+) ^^ {
 		case elems =>
 			var listAnnotElem: List[Object] = List()
 			var listTempTagToAdd: List[Tag] = List()
@@ -209,9 +209,10 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 			listAnnotElem
 	}
 
-	def annotableElement = kpositioned(subPackageDecl | classDecl | enumDecl | aliasStmt) //  | classDecl | enumDecl | dataTypeDecl )
+	def annotablePackageElement = kpositioned(subPackageDecl | classDecl | enumDecl | aliasStmt) //  | classDecl | enumDecl | dataTypeDecl )
 
-	def modelingUnitElement = kpositioned(subPackageDecl | metamodelDecl)
+	//TODO rename
+	def annotableModelingUnitElement = kpositioned(subPackageDecl | metamodelDecl | classDecl | enumDecl | aliasStmt)
 	/*
 	 * MODELTYPE ADDITION
 	 * Parse a modeltype/metamodel declaration with its ClassDefinition and Enumeration declarations
@@ -232,7 +233,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
 			newmt
 	}
 
-	def subPackageDecl = "package" ~ rep1sep(ident, "::") ~ "{" ~ (topLevelDecl?) ~ "}" ^^ {
+	def subPackageDecl = "package" ~ rep1sep(ident, "::") ~ "{" ~ (packageTopLevelDecl?) ~ "}" ^^ {
 		case _ ~ packageName ~ _ ~ decls ~ _ =>
 			var newp = StructureFactory.eINSTANCE.createPackage
 			//newp.setName(packageName)
