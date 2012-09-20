@@ -68,13 +68,14 @@ trait KClassDefinitionParser extends KAbstractParser
         case None =>
         case Some(paramsI) => {
             paramsI.foreach{params =>
-              var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
+              var ovar =StructureFactory.eINSTANCE.createUnresolvedTypeVariable
               ovar.setName(params._1)
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
               if (params._2 != null) {
-                ovar.setSupertype(params._2)
-                ovar.getContainedType.add(params._2)
+                var newu = params._2
+                ovar.setSupertype(newu)
+                ovar.getContainedType.add(newu)
               }
             }
           }
@@ -83,8 +84,9 @@ trait KClassDefinitionParser extends KAbstractParser
       parents match {
         case None => {
             // by default if there is no inherits, inherits from Object
-            var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, "kermeta::standard::Object")
-            newo.getSuperType.add(newParent)
+        	//This work is now done by the first pass of the resolver, to add inheritance to Object only on merged class definitions with no super type
+            //var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, "kermeta::standard::Object")
+            //newo.getSuperType.add(newParent)
         }
         case Some(parentI)=> {
             parentI.foreach{parent=>

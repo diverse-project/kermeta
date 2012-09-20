@@ -74,8 +74,9 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
               if (param._2 != null) {
-                ovar.setSupertype(param._2)
-                ovar.getContainedType.add(param._2)
+                var newu = param._2
+                ovar.setSupertype(newu)
+                ovar.getContainedType.add(newu)
               }
 
             }

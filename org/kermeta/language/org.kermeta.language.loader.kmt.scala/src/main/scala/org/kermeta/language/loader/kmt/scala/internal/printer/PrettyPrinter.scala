@@ -40,10 +40,20 @@ object PrettyPrinter {
    */
   def printOutline(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case m: ModelingUnit => {
+      case umm : UnresolvedMetamodel => {
+        res.append(umm.getName())
+        umm.getPackages().foreach(p => printOutline(p, res))
+        umm.getOwnedModelingUnits().foreach(mu => printOutline(mu, res))
+      }
+      case mm : Metamodel => {
+        res.append(mm.getName())
+        mm.getPackages().foreach(p => printOutline(p, res))
+        mm.getOwnedMetamodels().foreach(m => printOutline(m, res))
+      }
+      /*case m: ModelingUnit => {
         m.getPackages.foreach(p => printOutline(p, res))
         m.getOwnedTypeDefinition.foreach(p => printOutline(p, res))
-      }
+      }*/
       case p: Package => {
         res.append(p.getName())
       }
@@ -227,10 +237,22 @@ object PrettyPrinter {
    */
   def print(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case m: ModelingUnit => {
+      case umm : UnresolvedMetamodel => {
+        res.append("metamodel " + umm.getName() + "{\n")
+        umm.getPackages().foreach(p => printOutline(p, res))
+        umm.getOwnedModelingUnits().foreach(mu => print(mu, res))
+        res.append("\n}\n")
+      }
+      case mm : Metamodel => {
+        res.append("metamodel " + mm.getName() + "{\n")
+        mm.getPackages().foreach(p => printOutline(p, res))
+        mm.getOwnedMetamodels().foreach(m => print(m, res))
+        res.append("\n}\n")
+      }
+      /*case m: ModelingUnit => {
         m.getPackages.foreach(p => print(p, res))
         m.getOwnedTypeDefinition.foreach(p => print(p, res))
-      }
+      }*/
       case p: Package => {
         p.getKOwnedTags.foreach { tag =>
           print(tag, res)
