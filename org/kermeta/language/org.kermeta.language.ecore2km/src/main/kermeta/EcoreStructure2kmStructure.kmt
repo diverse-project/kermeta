@@ -27,6 +27,8 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	/** The modeling unit where all the created elements will be inserted. */
 	reference modelingUnit : ModelingUnit
 	
+	reference metamodel : Metamodel
+	
 	reference primitiveTypeMappings : Hashtable<String,String>
 	
 	reference traceRegistry : TraceRegistry
@@ -39,8 +41,9 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 * the root ecore package to convert.
 	 */
 	operation convert(pkg : EPackage, primitiveTypeMappings : Hashtable<String,String>, 
-					  modelingUnit : ModelingUnit, traceRegistry : TraceRegistry) : Void is do
+					  modelingUnit : ModelingUnit, metamodel : Metamodel, traceRegistry : TraceRegistry) : Void is do
 		self.modelingUnit := modelingUnit
+		self.metamodel := metamodel
 		self.primitiveTypeMappings := primitiveTypeMappings
 		self.traceRegistry := traceRegistry
 		
@@ -74,7 +77,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 		if(pkg.eSuperPackage.isVoid) then
 			// It means that this package is the root package.
 			// The kermeta package is thus the added to the modeling unit.
-			modelingUnit.packages.add(kmPkg)
+			metamodel.packages.add(kmPkg)
 		else
 			// This package is not the root package and is contained into an other package.
 			// The kermeta package is thus added to its parent Kermeta package: to do so, the ecore
