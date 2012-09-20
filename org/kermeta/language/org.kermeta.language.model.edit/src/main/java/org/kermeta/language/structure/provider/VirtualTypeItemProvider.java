@@ -64,6 +64,7 @@ public class VirtualTypeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addClassDefinitionPropertyDescriptor(object);
+			addMetamodelVariablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -82,6 +83,28 @@ public class VirtualTypeItemProvider
 				 getString("_UI_VirtualType_classDefinition_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualType_classDefinition_feature", "_UI_VirtualType_type"),
 				 StructurePackage.Literals.VIRTUAL_TYPE__CLASS_DEFINITION,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Metamodel Variable feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMetamodelVariablePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_VirtualType_metamodelVariable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualType_metamodelVariable_feature", "_UI_VirtualType_type"),
+				 StructurePackage.Literals.VIRTUAL_TYPE__METAMODEL_VARIABLE,
 				 true,
 				 false,
 				 true,

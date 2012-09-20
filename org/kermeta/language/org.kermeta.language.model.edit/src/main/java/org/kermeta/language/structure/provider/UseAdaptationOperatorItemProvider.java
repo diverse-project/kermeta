@@ -42,7 +42,7 @@ import org.provider.KermetaEditPlugin;
  * @generated
  */
 public class UseAdaptationOperatorItemProvider
-	extends ItemProviderAdapter
+	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -236,17 +236,6 @@ public class UseAdaptationOperatorItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED,
 				 BehaviorFactory.eINSTANCE.createUnresolvedCall()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

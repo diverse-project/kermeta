@@ -34,7 +34,7 @@ import org.kermeta.language.structure.StructurePackage;
  * @generated
  */
 public class GenericTypeDefinitionItemProvider
-	extends TypeDefinitionItemProvider
+	extends ModelElementTypeDefinitionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -148,7 +148,7 @@ public class GenericTypeDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+				 StructureFactory.eINSTANCE.createMetamodelVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter

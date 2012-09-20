@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -24,18 +23,18 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.language.structure.SimpleOperationBinding;
+import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.SimpleOperationBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SimpleOperationBindingItemProvider
-	extends OperationBindingItemProvider
+public class ModelElementTypeDefinitionContainerItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +47,7 @@ public class SimpleOperationBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleOperationBindingItemProvider(AdapterFactory adapterFactory) {
+	public ModelElementTypeDefinitionContainerItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,54 +62,8 @@ public class SimpleOperationBindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourcePropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Source feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimpleOperationBinding_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimpleOperationBinding_source_feature", "_UI_SimpleOperationBinding_type"),
-				 StructurePackage.Literals.SIMPLE_OPERATION_BINDING__SOURCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Target feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTargetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimpleOperationBinding_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimpleOperationBinding_target_feature", "_UI_SimpleOperationBinding_type"),
-				 StructurePackage.Literals.SIMPLE_OPERATION_BINDING__TARGET,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -125,7 +78,7 @@ public class SimpleOperationBindingItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.SIMPLE_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 		}
 		return childrenFeatures;
 	}
@@ -144,14 +97,14 @@ public class SimpleOperationBindingItemProvider
 	}
 
 	/**
-	 * This returns SimpleOperationBinding.gif.
+	 * This returns ModelElementTypeDefinitionContainer.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SimpleOperationBinding"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelElementTypeDefinitionContainer"));
 	}
 
 	/**
@@ -162,7 +115,10 @@ public class SimpleOperationBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_SimpleOperationBinding_type");
+		String label = ((ModelElementTypeDefinitionContainer)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ModelElementTypeDefinitionContainer_type") :
+			getString("_UI_ModelElementTypeDefinitionContainer_type") + " " + label;
 	}
 
 	/**
@@ -176,8 +132,8 @@ public class SimpleOperationBindingItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(SimpleOperationBinding.class)) {
-			case StructurePackage.SIMPLE_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS:
+		switch (notification.getFeatureID(ModelElementTypeDefinitionContainer.class)) {
+			case StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -197,8 +153,18 @@ public class SimpleOperationBindingItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.SIMPLE_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS,
-				 StructureFactory.eINSTANCE.createSimpleParameterBinding()));
+				(StructurePackage.Literals.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createEnumeration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createClassDefinition()));
 	}
 
 }

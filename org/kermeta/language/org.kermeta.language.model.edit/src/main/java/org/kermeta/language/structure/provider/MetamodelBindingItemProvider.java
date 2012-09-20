@@ -24,18 +24,18 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.language.structure.ComplexOperationBinding;
+import org.kermeta.language.structure.MetamodelBinding;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.ComplexOperationBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.MetamodelBinding} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComplexOperationBindingItemProvider
-	extends OperationBindingItemProvider
+public class MetamodelBindingItemProvider
+	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +48,7 @@ public class ComplexOperationBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComplexOperationBindingItemProvider(AdapterFactory adapterFactory) {
+	public MetamodelBindingItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,48 +63,25 @@ public class ComplexOperationBindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourcesPropertyDescriptor(object);
-			addTargetsPropertyDescriptor(object);
+			addBoundMetamodelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Sources feature.
+	 * This adds a property descriptor for the Bound Metamodel feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourcesPropertyDescriptor(Object object) {
+	protected void addBoundMetamodelPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ComplexOperationBinding_sources_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComplexOperationBinding_sources_feature", "_UI_ComplexOperationBinding_type"),
-				 StructurePackage.Literals.COMPLEX_OPERATION_BINDING__SOURCES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Targets feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTargetsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComplexOperationBinding_targets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComplexOperationBinding_targets_feature", "_UI_ComplexOperationBinding_type"),
-				 StructurePackage.Literals.COMPLEX_OPERATION_BINDING__TARGETS,
+				 getString("_UI_MetamodelBinding_boundMetamodel_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MetamodelBinding_boundMetamodel_feature", "_UI_MetamodelBinding_type"),
+				 StructurePackage.Literals.METAMODEL_BINDING__BOUND_METAMODEL,
 				 true,
 				 false,
 				 true,
@@ -125,7 +102,9 @@ public class ComplexOperationBindingItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL_BINDING__USED_ADAPTATION_OPERATORS);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS);
 		}
 		return childrenFeatures;
 	}
@@ -144,14 +123,14 @@ public class ComplexOperationBindingItemProvider
 	}
 
 	/**
-	 * This returns ComplexOperationBinding.gif.
+	 * This returns MetamodelBinding.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ComplexOperationBinding"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MetamodelBinding"));
 	}
 
 	/**
@@ -162,7 +141,7 @@ public class ComplexOperationBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ComplexOperationBinding_type");
+		return getString("_UI_MetamodelBinding_type");
 	}
 
 	/**
@@ -176,8 +155,10 @@ public class ComplexOperationBindingItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ComplexOperationBinding.class)) {
-			case StructurePackage.COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS:
+		switch (notification.getFeatureID(MetamodelBinding.class)) {
+			case StructurePackage.METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS:
+			case StructurePackage.METAMODEL_BINDING__USED_ADAPTATION_OPERATORS:
+			case StructurePackage.METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -197,13 +178,18 @@ public class ComplexOperationBindingItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS,
-				 StructureFactory.eINSTANCE.createSimpleParameterBinding()));
+				(StructurePackage.Literals.METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS,
+				 StructureFactory.eINSTANCE.createClassDefinitionBinding()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.COMPLEX_OPERATION_BINDING__OWNED_PARAMETER_BINDINGS,
-				 StructureFactory.eINSTANCE.createComplexParameterBinding()));
+				(StructurePackage.Literals.METAMODEL_BINDING__USED_ADAPTATION_OPERATORS,
+				 StructureFactory.eINSTANCE.createUseAdaptationOperator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS,
+				 StructureFactory.eINSTANCE.createEnumerationBinding()));
 	}
 
 }

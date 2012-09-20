@@ -206,12 +206,7 @@ public class UnresolvedTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+				 StructureFactory.eINSTANCE.createMetamodelVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -247,6 +242,11 @@ public class UnresolvedTypeItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -276,12 +276,7 @@ public class UnresolvedTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+				 StructureFactory.eINSTANCE.createMetamodelVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -317,6 +312,11 @@ public class UnresolvedTypeItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
+				 StructureFactory.eINSTANCE.createModelType()));
 	}
 
 	/**

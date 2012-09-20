@@ -66,10 +66,10 @@ public class OperationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIsAbstractPropertyDescriptor(object);
 			addRaisedExceptionPropertyDescriptor(object);
 			addSuperOperationPropertyDescriptor(object);
 			addTypeParameterPropertyDescriptor(object);
+			addIsAbstractPropertyDescriptor(object);
 			addUniqueNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;

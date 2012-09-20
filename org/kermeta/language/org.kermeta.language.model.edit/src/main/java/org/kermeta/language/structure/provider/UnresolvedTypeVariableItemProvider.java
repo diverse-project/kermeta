@@ -36,7 +36,7 @@ import org.kermeta.language.structure.UnresolvedTypeVariable;
  * @generated
  */
 public class UnresolvedTypeVariableItemProvider
-	extends UnresolvedItemProvider
+	extends UnresolvedReferenceItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -225,12 +225,7 @@ public class UnresolvedTypeVariableItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+				 StructureFactory.eINSTANCE.createMetamodelVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -266,6 +261,11 @@ public class UnresolvedTypeVariableItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelType()));
 	}
 
 }

@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -21,16 +20,14 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.kermeta.language.structure.StructurePackage;
-
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.ComplexParameterBinding} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.UnresolvedReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComplexParameterBindingItemProvider
-	extends ParameterBindingItemProvider
+public class UnresolvedReferenceItemProvider
+	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -43,7 +40,7 @@ public class ComplexParameterBindingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComplexParameterBindingItemProvider(AdapterFactory adapterFactory) {
+	public UnresolvedReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -58,65 +55,8 @@ public class ComplexParameterBindingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourcesPropertyDescriptor(object);
-			addTargetsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Sources feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSourcesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComplexParameterBinding_sources_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComplexParameterBinding_sources_feature", "_UI_ComplexParameterBinding_type"),
-				 StructurePackage.Literals.COMPLEX_PARAMETER_BINDING__SOURCES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Targets feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTargetsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComplexParameterBinding_targets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComplexParameterBinding_targets_feature", "_UI_ComplexParameterBinding_type"),
-				 StructurePackage.Literals.COMPLEX_PARAMETER_BINDING__TARGETS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns ComplexParameterBinding.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ComplexParameterBinding"));
 	}
 
 	/**
@@ -127,7 +67,7 @@ public class ComplexParameterBindingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ComplexParameterBinding_type");
+		return getString("_UI_UnresolvedReference_type");
 	}
 
 	/**

@@ -398,49 +398,26 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelingUnit} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ModelingUnitItemProvider modelingUnitItemProvider;
+	protected ModelElementTypeDefinitionContainerItemProvider modelElementTypeDefinitionContainerItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelingUnit}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createModelingUnitAdapter() {
-		if (modelingUnitItemProvider == null) {
-			modelingUnitItemProvider = new ModelingUnitItemProvider(this);
+	public Adapter createModelElementTypeDefinitionContainerAdapter() {
+		if (modelElementTypeDefinitionContainerItemProvider == null) {
+			modelElementTypeDefinitionContainerItemProvider = new ModelElementTypeDefinitionContainerItemProvider(this);
 		}
 
-		return modelingUnitItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.TypeDefinitionContainer} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeDefinitionContainerItemProvider typeDefinitionContainerItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.TypeDefinitionContainer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeDefinitionContainerAdapter() {
-		if (typeDefinitionContainerItemProvider == null) {
-			typeDefinitionContainerItemProvider = new TypeDefinitionContainerItemProvider(this);
-		}
-
-		return typeDefinitionContainerItemProvider;
+		return modelElementTypeDefinitionContainerItemProvider;
 	}
 
 	/**
@@ -490,50 +467,52 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelType} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.Metamodel} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ModelTypeItemProvider modelTypeItemProvider;
+	protected MetamodelItemProvider metamodelItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelType}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.Metamodel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createModelTypeAdapter() {
-		if (modelTypeItemProvider == null) {
-			modelTypeItemProvider = new ModelTypeItemProvider(this);
+	public Adapter createMetamodelAdapter() {
+		if (metamodelItemProvider == null) {
+			metamodelItemProvider = new MetamodelItemProvider(this);
 		}
 
-		return modelTypeItemProvider;
+		return metamodelItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTypeVariable} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.MetamodelVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ModelTypeVariableItemProvider modelTypeVariableItemProvider;
+	protected MetamodelVariableItemProvider metamodelVariableItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTypeVariable}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.MetamodelVariable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createModelTypeVariableAdapter() {
-		if (modelTypeVariableItemProvider == null) {
-			modelTypeVariableItemProvider = new ModelTypeVariableItemProvider(this);
+	public Adapter createMetamodelVariableAdapter() {
+		if (metamodelVariableItemProvider == null) {
+			metamodelVariableItemProvider = new MetamodelVariableItemProvider(this);
 		}
 
-		return modelTypeVariableItemProvider;
+		return metamodelVariableItemProvider;
 	}
+
+
 
 	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.VirtualType} instances.
@@ -789,302 +768,118 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.SimpleBinding} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.MetamodelBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SimpleBindingItemProvider simpleBindingItemProvider;
+	protected MetamodelBindingItemProvider metamodelBindingItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.SimpleBinding}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.MetamodelBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSimpleBindingAdapter() {
-		if (simpleBindingItemProvider == null) {
-			simpleBindingItemProvider = new SimpleBindingItemProvider(this);
+	public Adapter createMetamodelBindingAdapter() {
+		if (metamodelBindingItemProvider == null) {
+			metamodelBindingItemProvider = new MetamodelBindingItemProvider(this);
 		}
 
-		return simpleBindingItemProvider;
+		return metamodelBindingItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.AdaptationBinding} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ClassDefinitionBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AdaptationBindingItemProvider adaptationBindingItemProvider;
+	protected ClassDefinitionBindingItemProvider classDefinitionBindingItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.AdaptationBinding}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ClassDefinitionBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAdaptationBindingAdapter() {
-		if (adaptationBindingItemProvider == null) {
-			adaptationBindingItemProvider = new AdaptationBindingItemProvider(this);
+	public Adapter createClassDefinitionBindingAdapter() {
+		if (classDefinitionBindingItemProvider == null) {
+			classDefinitionBindingItemProvider = new ClassDefinitionBindingItemProvider(this);
 		}
 
-		return adaptationBindingItemProvider;
+		return classDefinitionBindingItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.SimpleClassDefinitionBinding} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.EnumerationBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SimpleClassDefinitionBindingItemProvider simpleClassDefinitionBindingItemProvider;
+	protected EnumerationBindingItemProvider enumerationBindingItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.SimpleClassDefinitionBinding}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.EnumerationBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSimpleClassDefinitionBindingAdapter() {
-		if (simpleClassDefinitionBindingItemProvider == null) {
-			simpleClassDefinitionBindingItemProvider = new SimpleClassDefinitionBindingItemProvider(this);
+	public Adapter createEnumerationBindingAdapter() {
+		if (enumerationBindingItemProvider == null) {
+			enumerationBindingItemProvider = new EnumerationBindingItemProvider(this);
 		}
 
-		return simpleClassDefinitionBindingItemProvider;
+		return enumerationBindingItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ComplexClassDefinitionBinding} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.PropertyBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComplexClassDefinitionBindingItemProvider complexClassDefinitionBindingItemProvider;
+	protected PropertyBindingItemProvider propertyBindingItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ComplexClassDefinitionBinding}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.PropertyBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createComplexClassDefinitionBindingAdapter() {
-		if (complexClassDefinitionBindingItemProvider == null) {
-			complexClassDefinitionBindingItemProvider = new ComplexClassDefinitionBindingItemProvider(this);
+	public Adapter createPropertyBindingAdapter() {
+		if (propertyBindingItemProvider == null) {
+			propertyBindingItemProvider = new PropertyBindingItemProvider(this);
 		}
 
-		return complexClassDefinitionBindingItemProvider;
+		return propertyBindingItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.SimpleEnumerationBinding} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.OperationBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SimpleEnumerationBindingItemProvider simpleEnumerationBindingItemProvider;
+	protected OperationBindingItemProvider operationBindingItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.SimpleEnumerationBinding}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.OperationBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSimpleEnumerationBindingAdapter() {
-		if (simpleEnumerationBindingItemProvider == null) {
-			simpleEnumerationBindingItemProvider = new SimpleEnumerationBindingItemProvider(this);
+	public Adapter createOperationBindingAdapter() {
+		if (operationBindingItemProvider == null) {
+			operationBindingItemProvider = new OperationBindingItemProvider(this);
 		}
 
-		return simpleEnumerationBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ComplexEnumerationBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComplexEnumerationBindingItemProvider complexEnumerationBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ComplexEnumerationBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createComplexEnumerationBindingAdapter() {
-		if (complexEnumerationBindingItemProvider == null) {
-			complexEnumerationBindingItemProvider = new ComplexEnumerationBindingItemProvider(this);
-		}
-
-		return complexEnumerationBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.SimplePropertyBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimplePropertyBindingItemProvider simplePropertyBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.SimplePropertyBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSimplePropertyBindingAdapter() {
-		if (simplePropertyBindingItemProvider == null) {
-			simplePropertyBindingItemProvider = new SimplePropertyBindingItemProvider(this);
-		}
-
-		return simplePropertyBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ComplexPropertyBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComplexPropertyBindingItemProvider complexPropertyBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ComplexPropertyBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createComplexPropertyBindingAdapter() {
-		if (complexPropertyBindingItemProvider == null) {
-			complexPropertyBindingItemProvider = new ComplexPropertyBindingItemProvider(this);
-		}
-
-		return complexPropertyBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.SimpleOperationBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimpleOperationBindingItemProvider simpleOperationBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.SimpleOperationBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSimpleOperationBindingAdapter() {
-		if (simpleOperationBindingItemProvider == null) {
-			simpleOperationBindingItemProvider = new SimpleOperationBindingItemProvider(this);
-		}
-
-		return simpleOperationBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ComplexOperationBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComplexOperationBindingItemProvider complexOperationBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ComplexOperationBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createComplexOperationBindingAdapter() {
-		if (complexOperationBindingItemProvider == null) {
-			complexOperationBindingItemProvider = new ComplexOperationBindingItemProvider(this);
-		}
-
-		return complexOperationBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.SimpleParameterBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimpleParameterBindingItemProvider simpleParameterBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.SimpleParameterBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSimpleParameterBindingAdapter() {
-		if (simpleParameterBindingItemProvider == null) {
-			simpleParameterBindingItemProvider = new SimpleParameterBindingItemProvider(this);
-		}
-
-		return simpleParameterBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ComplexParameterBinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComplexParameterBindingItemProvider complexParameterBindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ComplexParameterBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createComplexParameterBindingAdapter() {
-		if (complexParameterBindingItemProvider == null) {
-			complexParameterBindingItemProvider = new ComplexParameterBindingItemProvider(this);
-		}
-
-		return complexParameterBindingItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.EnumLiteralbinding} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumLiteralbindingItemProvider enumLiteralbindingItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.EnumLiteralbinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumLiteralbindingAdapter() {
-		if (enumLiteralbindingItemProvider == null) {
-			enumLiteralbindingItemProvider = new EnumLiteralbindingItemProvider(this);
-		}
-
-		return enumLiteralbindingItemProvider;
+		return operationBindingItemProvider;
 	}
 
 	/**
@@ -1226,6 +1021,52 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.UnresolvedMetamodel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnresolvedMetamodelItemProvider unresolvedMetamodelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.UnresolvedMetamodel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnresolvedMetamodelAdapter() {
+		if (unresolvedMetamodelItemProvider == null) {
+			unresolvedMetamodelItemProvider = new UnresolvedMetamodelItemProvider(this);
+		}
+
+		return unresolvedMetamodelItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelTypeItemProvider modelTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelTypeAdapter() {
+		if (modelTypeItemProvider == null) {
+			modelTypeItemProvider = new ModelTypeItemProvider(this);
+		}
+
+		return modelTypeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1338,12 +1179,11 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
-		if (modelingUnitItemProvider != null) modelingUnitItemProvider.dispose();
-		if (typeDefinitionContainerItemProvider != null) typeDefinitionContainerItemProvider.dispose();
+		if (modelElementTypeDefinitionContainerItemProvider != null) modelElementTypeDefinitionContainerItemProvider.dispose();
 		if (requireItemProvider != null) requireItemProvider.dispose();
 		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
-		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
-		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
+		if (metamodelItemProvider != null) metamodelItemProvider.dispose();
+		if (metamodelVariableItemProvider != null) metamodelVariableItemProvider.dispose();
 		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
 		if (modelItemProvider != null) modelItemProvider.dispose();
 		if (unresolvedTypeItemProvider != null) unresolvedTypeItemProvider.dispose();
@@ -1355,25 +1195,19 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
 		if (unresolvedInferredTypeItemProvider != null) unresolvedInferredTypeItemProvider.dispose();
 		if (unresolvedTypeVariableItemProvider != null) unresolvedTypeVariableItemProvider.dispose();
-		if (simpleBindingItemProvider != null) simpleBindingItemProvider.dispose();
-		if (adaptationBindingItemProvider != null) adaptationBindingItemProvider.dispose();
-		if (simpleClassDefinitionBindingItemProvider != null) simpleClassDefinitionBindingItemProvider.dispose();
-		if (complexClassDefinitionBindingItemProvider != null) complexClassDefinitionBindingItemProvider.dispose();
-		if (simpleEnumerationBindingItemProvider != null) simpleEnumerationBindingItemProvider.dispose();
-		if (complexEnumerationBindingItemProvider != null) complexEnumerationBindingItemProvider.dispose();
-		if (simplePropertyBindingItemProvider != null) simplePropertyBindingItemProvider.dispose();
-		if (complexPropertyBindingItemProvider != null) complexPropertyBindingItemProvider.dispose();
-		if (simpleOperationBindingItemProvider != null) simpleOperationBindingItemProvider.dispose();
-		if (complexOperationBindingItemProvider != null) complexOperationBindingItemProvider.dispose();
-		if (simpleParameterBindingItemProvider != null) simpleParameterBindingItemProvider.dispose();
-		if (complexParameterBindingItemProvider != null) complexParameterBindingItemProvider.dispose();
-		if (enumLiteralbindingItemProvider != null) enumLiteralbindingItemProvider.dispose();
+		if (metamodelBindingItemProvider != null) metamodelBindingItemProvider.dispose();
+		if (classDefinitionBindingItemProvider != null) classDefinitionBindingItemProvider.dispose();
+		if (enumerationBindingItemProvider != null) enumerationBindingItemProvider.dispose();
+		if (propertyBindingItemProvider != null) propertyBindingItemProvider.dispose();
+		if (operationBindingItemProvider != null) operationBindingItemProvider.dispose();
 		if (adaptationOperatorItemProvider != null) adaptationOperatorItemProvider.dispose();
 		if (useAdaptationOperatorItemProvider != null) useAdaptationOperatorItemProvider.dispose();
 		if (propertyAdaptationOperatorItemProvider != null) propertyAdaptationOperatorItemProvider.dispose();
 		if (unresolvedAdaptationOperatorItemProvider != null) unresolvedAdaptationOperatorItemProvider.dispose();
 		if (adaptationParameterItemProvider != null) adaptationParameterItemProvider.dispose();
 		if (operationAdaptationOperatorItemProvider != null) operationAdaptationOperatorItemProvider.dispose();
+		if (unresolvedMetamodelItemProvider != null) unresolvedMetamodelItemProvider.dispose();
+		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 	}
 
 }

@@ -34,6 +34,7 @@ import org.kermeta.language.behavior.UnresolvedCall;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
+import org.kermeta.language.structure.provider.UnresolvedReferenceItemProvider;
 import org.kermeta.language.structure.provider.UnresolvedItemProvider;
 
 import org.provider.KermetaEditPlugin;
@@ -45,7 +46,7 @@ import org.provider.KermetaEditPlugin;
  * @generated
  */
 public class UnresolvedCallItemProvider
-	extends UnresolvedItemProvider
+	extends UnresolvedReferenceItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -336,12 +337,7 @@ public class UnresolvedCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+				 StructureFactory.eINSTANCE.createMetamodelVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -377,6 +373,11 @@ public class UnresolvedCallItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -646,12 +647,7 @@ public class UnresolvedCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+				 StructureFactory.eINSTANCE.createMetamodelVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -687,6 +683,11 @@ public class UnresolvedCallItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
 				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
+				 StructureFactory.eINSTANCE.createModelType()));
 	}
 
 	/**

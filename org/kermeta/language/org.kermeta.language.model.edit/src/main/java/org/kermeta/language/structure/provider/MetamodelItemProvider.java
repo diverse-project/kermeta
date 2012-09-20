@@ -15,26 +15,28 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.language.structure.ModelTypeVariable;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.ModelTypeVariable} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.Metamodel} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelTypeVariableItemProvider
-	extends TypeVariableItemProvider
+public class MetamodelItemProvider
+	extends TypeDefinitionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -47,7 +49,7 @@ public class ModelTypeVariableItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelTypeVariableItemProvider(AdapterFactory adapterFactory) {
+	public MetamodelItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,8 +64,31 @@ public class ModelTypeVariableItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamespacePrefixPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Namespace Prefix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamespacePrefixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelingUnit_namespacePrefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelingUnit_namespacePrefix_feature", "_UI_ModelingUnit_type"),
+				 StructurePackage.Literals.MODELING_UNIT__NAMESPACE_PREFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -78,7 +103,10 @@ public class ModelTypeVariableItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
+			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__PACKAGES);
+			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__REQUIRES);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL__OWNED_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL__OWNED_METAMODELS);
 		}
 		return childrenFeatures;
 	}
@@ -97,14 +125,14 @@ public class ModelTypeVariableItemProvider
 	}
 
 	/**
-	 * This returns ModelTypeVariable.gif.
+	 * This returns Metamodel.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelTypeVariable"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Metamodel"));
 	}
 
 	/**
@@ -115,10 +143,10 @@ public class ModelTypeVariableItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ModelTypeVariable)object).getName();
+		String label = ((Metamodel)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ModelTypeVariable_type") :
-			getString("_UI_ModelTypeVariable_type") + " " + label;
+			getString("_UI_Metamodel_type") :
+			getString("_UI_Metamodel_type") + " " + label;
 	}
 
 	/**
@@ -132,8 +160,14 @@ public class ModelTypeVariableItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ModelTypeVariable.class)) {
-			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
+		switch (notification.getFeatureID(Metamodel.class)) {
+			case StructurePackage.METAMODEL__NAMESPACE_PREFIX:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case StructurePackage.METAMODEL__PACKAGES:
+			case StructurePackage.METAMODEL__REQUIRES:
+			case StructurePackage.METAMODEL__OWNED_BINDINGS:
+			case StructurePackage.METAMODEL__OWNED_METAMODELS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -153,31 +187,23 @@ public class ModelTypeVariableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE,
-				 StructureFactory.eINSTANCE.createVirtualType()));
-	}
+				(StructurePackage.Literals.MODELING_UNIT__PACKAGES,
+				 StructureFactory.eINSTANCE.createPackage()));
 
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.MODELING_UNIT__REQUIRES,
+				 StructureFactory.eINSTANCE.createRequire()));
 
-		boolean qualify =
-			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE ||
-			childFeature == StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE;
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.METAMODEL__OWNED_BINDINGS,
+				 StructureFactory.eINSTANCE.createMetamodelBinding()));
 
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.METAMODEL__OWNED_METAMODELS,
+				 StructureFactory.eINSTANCE.createMetamodel()));
 	}
 
 }
