@@ -4806,13 +4806,40 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>KType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Metamodels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__OWNED_METAMODELS = 0;
+	int MODELING_UNIT__OWNED_METAMODELS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Modeling Unit</em>' class.
@@ -4821,7 +4848,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT_FEATURE_COUNT = 1;
+	int MODELING_UNIT_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

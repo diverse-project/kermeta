@@ -41,7 +41,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
+public class ModelingUnitImpl extends KermetaModelElementImpl implements ModelingUnit {
 	/**
 	 * The cached value of the '{@link #getOwnedMetamodels() <em>Owned Metamodels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

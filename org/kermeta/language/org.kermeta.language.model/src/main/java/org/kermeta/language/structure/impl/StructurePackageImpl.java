@@ -2673,6 +2673,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		unresolvedMetamodelEClass.getESuperTypes().add(this.getMetamodel());
 		modelElementTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		modelTypeEClass.getESuperTypes().add(this.getType());
+		modelingUnitEClass.getESuperTypes().add(this.getKermetaModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kermetaModelElementEClass, KermetaModelElement.class, "KermetaModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

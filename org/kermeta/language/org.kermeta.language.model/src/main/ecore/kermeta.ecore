@@ -1285,7 +1285,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1"
               eType="#//kermeta/language/structure/ResolvedMetamodel"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit">
+        <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMetamodels"
               upperBound="-1" eType="#//kermeta/language/structure/Metamodel" containment="true"/>
         </eClassifiers>

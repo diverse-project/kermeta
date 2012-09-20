@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ModelingUnit extends EObject {
+public interface ModelingUnit extends KermetaModelElement {
 	/**
 	 * Returns the value of the '<em><b>Owned Metamodels</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Metamodel}.
