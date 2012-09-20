@@ -30,6 +30,7 @@ import org.kermeta.language.structure.MetamodelVariable;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
@@ -42,6 +43,7 @@ import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
+import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
@@ -120,7 +122,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER: return createModelElementTypeDefinitionContainer();
 			case StructurePackage.REQUIRE: return createRequire();
 			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
-			case StructurePackage.METAMODEL: return createMetamodel();
+			case StructurePackage.RESOLVED_METAMODEL: return createResolvedMetamodel();
 			case StructurePackage.METAMODEL_VARIABLE: return createMetamodelVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.MODEL: return createModel();
@@ -146,6 +148,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.OPERATION_ADAPTATION_OPERATOR: return createOperationAdaptationOperator();
 			case StructurePackage.UNRESOLVED_METAMODEL: return createUnresolvedMetamodel();
 			case StructurePackage.MODEL_TYPE: return createModelType();
+			case StructurePackage.MODELING_UNIT: return createModelingUnit();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -376,9 +379,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Metamodel createMetamodel() {
-		MetamodelImpl metamodel = new MetamodelImpl();
-		return metamodel;
+	public ResolvedMetamodel createResolvedMetamodel() {
+		ResolvedMetamodelImpl resolvedMetamodel = new ResolvedMetamodelImpl();
+		return resolvedMetamodel;
 	}
 
 	/**
@@ -399,6 +402,16 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public ModelType createModelType() {
 		ModelTypeImpl modelType = new ModelTypeImpl();
 		return modelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelingUnit createModelingUnit() {
+		ModelingUnitImpl modelingUnit = new ModelingUnitImpl();
+		return modelingUnit;
 	}
 
 	/**

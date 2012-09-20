@@ -46,6 +46,7 @@ import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.Require;
+import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.Type;
@@ -208,8 +209,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createClassDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseModelingUnit(ModelingUnit object) {
-				return createModelingUnitAdapter();
+			public Adapter caseMetamodel(Metamodel object) {
+				return createMetamodelAdapter();
 			}
 			@Override
 			public Adapter caseModelElementTypeDefinitionContainer(ModelElementTypeDefinitionContainer object) {
@@ -236,8 +237,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createObjectTypeVariableAdapter();
 			}
 			@Override
-			public Adapter caseMetamodel(Metamodel object) {
-				return createMetamodelAdapter();
+			public Adapter caseResolvedMetamodel(ResolvedMetamodel object) {
+				return createResolvedMetamodelAdapter();
 			}
 			@Override
 			public Adapter caseMetamodelVariable(MetamodelVariable object) {
@@ -350,6 +351,10 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseModelType(ModelType object) {
 				return createModelTypeAdapter();
+			}
+			@Override
+			public Adapter caseModelingUnit(ModelingUnit object) {
+				return createModelingUnitAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -760,6 +765,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createObjectTypeVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ResolvedMetamodel <em>Resolved Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ResolvedMetamodel
+	 * @generated
+	 */
+	public Adapter createResolvedMetamodelAdapter() {
 		return null;
 	}
 

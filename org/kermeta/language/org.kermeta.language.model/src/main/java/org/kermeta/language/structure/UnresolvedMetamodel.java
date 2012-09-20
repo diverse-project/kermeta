@@ -24,10 +24,10 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface UnresolvedMetamodel extends ModelingUnit {
+public interface UnresolvedMetamodel extends Metamodel {
 	/**
 	 * Returns the value of the '<em><b>Owned Modeling Units</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.ModelingUnit}.
+	 * The list contents are of type {@link org.kermeta.language.structure.Metamodel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Modeling Units</em>' containment reference list isn't clear,
@@ -39,6 +39,6 @@ public interface UnresolvedMetamodel extends ModelingUnit {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ModelingUnit> getOwnedModelingUnits();
+	EList<Metamodel> getOwnedModelingUnits();
 
 } // UnresolvedMetamodel

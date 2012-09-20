@@ -179,13 +179,13 @@ public interface StructureFactory extends EFactory {
 	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
-	 * Returns a new object of class '<em>Metamodel</em>'.
+	 * Returns a new object of class '<em>Resolved Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Metamodel</em>'.
+	 * @return a new object of class '<em>Resolved Metamodel</em>'.
 	 * @generated
 	 */
-	Metamodel createMetamodel();
+	ResolvedMetamodel createResolvedMetamodel();
 
 	/**
 	 * Returns a new object of class '<em>Metamodel Variable</em>'.
@@ -204,6 +204,15 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	ModelType createModelType();
+
+	/**
+	 * Returns a new object of class '<em>Modeling Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Modeling Unit</em>'.
+	 * @generated
+	 */
+	ModelingUnit createModelingUnit();
 
 	/**
 	 * Returns a new object of class '<em>Virtual Type</em>'.

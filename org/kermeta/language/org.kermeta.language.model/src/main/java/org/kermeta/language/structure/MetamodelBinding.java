@@ -37,12 +37,12 @@ public interface MetamodelBinding extends KermetaModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bound Metamodel</em>' reference.
-	 * @see #setBoundMetamodel(Metamodel)
+	 * @see #setBoundMetamodel(ResolvedMetamodel)
 	 * @see org.kermeta.language.structure.StructurePackage#getMetamodelBinding_BoundMetamodel()
 	 * @model required="true"
 	 * @generated
 	 */
-	Metamodel getBoundMetamodel();
+	ResolvedMetamodel getBoundMetamodel();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.language.structure.MetamodelBinding#getBoundMetamodel <em>Bound Metamodel</em>}' reference.
@@ -52,7 +52,7 @@ public interface MetamodelBinding extends KermetaModelElement {
 	 * @see #getBoundMetamodel()
 	 * @generated
 	 */
-	void setBoundMetamodel(Metamodel value);
+	void setBoundMetamodel(ResolvedMetamodel value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list.

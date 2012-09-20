@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
@@ -37,7 +38,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * @generated
 	 * @ordered
 	 */
-	protected Metamodel typeDefinition;
+	protected ResolvedMetamodel typeDefinition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,10 +64,10 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Metamodel getTypeDefinition() {
+	public ResolvedMetamodel getTypeDefinition() {
 		if (typeDefinition != null && typeDefinition.eIsProxy()) {
 			InternalEObject oldTypeDefinition = (InternalEObject)typeDefinition;
-			typeDefinition = (Metamodel)eResolveProxy(oldTypeDefinition);
+			typeDefinition = (ResolvedMetamodel)eResolveProxy(oldTypeDefinition);
 			if (typeDefinition != oldTypeDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.MODEL_TYPE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
@@ -80,7 +81,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Metamodel basicGetTypeDefinition() {
+	public ResolvedMetamodel basicGetTypeDefinition() {
 		return typeDefinition;
 	}
 
@@ -89,8 +90,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypeDefinition(Metamodel newTypeDefinition) {
-		Metamodel oldTypeDefinition = typeDefinition;
+	public void setTypeDefinition(ResolvedMetamodel newTypeDefinition) {
+		ResolvedMetamodel oldTypeDefinition = typeDefinition;
 		typeDefinition = newTypeDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.MODEL_TYPE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
@@ -121,7 +122,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__TYPE_DEFINITION:
-				setTypeDefinition((Metamodel)newValue);
+				setTypeDefinition((ResolvedMetamodel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +137,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__TYPE_DEFINITION:
-				setTypeDefinition((Metamodel)null);
+				setTypeDefinition((ResolvedMetamodel)null);
 				return;
 		}
 		super.eUnset(featureID);

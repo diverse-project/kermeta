@@ -14,54 +14,79 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Type of a model, consisting of a set of included type definitions.
- * For historical reason, this is both a type and a TypeDefinition, mainly due to the fact that a ModelDefinition isn't a GenericTypeDefinition (maybe this should be discussed again ?)
- * 
+ * Before normalization, for support of concrete syntax, a ModelingUnit can directly own TypeDefinition (ClassDefintion, ModelType, enumeration, ...)
+ * However, this suppose that a package is specified in the namespacePrefix.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.Metamodel#getOwnedBindings <em>Owned Bindings</em>}</li>
- *   <li>{@link org.kermeta.language.structure.Metamodel#getOwnedMetamodels <em>Owned Metamodels</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.Metamodel#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.Metamodel#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.Metamodel#getRequires <em>Requires</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getMetamodel()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface Metamodel extends TypeDefinition, ModelingUnit {
+public interface Metamodel extends KermetaModelElement {
 	/**
-	 * Returns the value of the '<em><b>Owned Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.MetamodelBinding}.
+	 * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.language.structure.Package}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Bindings</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Bindings</em>' containment reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getMetamodel_OwnedBindings()
+	 * <!-- begin-model-doc -->
+	 * root packages contained by this ModelingUnit
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Packages</em>' containment reference list.
+	 * @see org.kermeta.language.structure.StructurePackage#getMetamodel_Packages()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<MetamodelBinding> getOwnedBindings();
+	EList<org.kermeta.language.structure.Package> getPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Owned Metamodels</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.language.structure.Metamodel}.
+	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Metamodels</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Metamodels</em>' containment reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getMetamodel_OwnedMetamodels()
+	 * <!-- begin-model-doc -->
+	 * The namespacePrefix is used to capture syntax shortcut for creating NamedElement (ModelDefinition, Package, ClassDefinition, ...) in the ModelingUnit.
+	 * The normalization process will replace the namespacePrefix by its equivalent NamedElement for all its declared elements.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Uri</em>' attribute.
+	 * @see #setUri(String)
+	 * @see org.kermeta.language.structure.StructurePackage#getMetamodel_Uri()
+	 * @model dataType="org.kermeta.language.structure.String"
+	 * @generated
+	 */
+	String getUri();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.Metamodel#getUri <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Uri</em>' attribute.
+	 * @see #getUri()
+	 * @generated
+	 */
+	void setUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Requires</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.language.structure.Require}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Set of "require" statements associated with this ModelingUnit. Ie. list of the other
+	 * files required to run this unit
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Requires</em>' containment reference list.
+	 * @see org.kermeta.language.structure.StructurePackage#getMetamodel_Requires()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Metamodel> getOwnedMetamodels();
+	EList<Require> getRequires();
 
 } // Metamodel

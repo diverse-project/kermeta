@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.UnresolvedMetamodel;
@@ -35,7 +36,7 @@ import org.kermeta.language.structure.UnresolvedMetamodel;
  *
  * @generated
  */
-public class UnresolvedMetamodelImpl extends ModelingUnitImpl implements UnresolvedMetamodel {
+public class UnresolvedMetamodelImpl extends MetamodelImpl implements UnresolvedMetamodel {
 	/**
 	 * The cached value of the '{@link #getOwnedModelingUnits() <em>Owned Modeling Units</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -44,7 +45,7 @@ public class UnresolvedMetamodelImpl extends ModelingUnitImpl implements Unresol
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModelingUnit> ownedModelingUnits;
+	protected EList<Metamodel> ownedModelingUnits;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,9 +71,9 @@ public class UnresolvedMetamodelImpl extends ModelingUnitImpl implements Unresol
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModelingUnit> getOwnedModelingUnits() {
+	public EList<Metamodel> getOwnedModelingUnits() {
 		if (ownedModelingUnits == null) {
-			ownedModelingUnits = new EObjectContainmentEList<ModelingUnit>(ModelingUnit.class, this, StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS);
+			ownedModelingUnits = new EObjectContainmentEList<Metamodel>(Metamodel.class, this, StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS);
 		}
 		return ownedModelingUnits;
 	}
@@ -116,7 +117,7 @@ public class UnresolvedMetamodelImpl extends ModelingUnitImpl implements Unresol
 		switch (featureID) {
 			case StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS:
 				getOwnedModelingUnits().clear();
-				getOwnedModelingUnits().addAll((Collection<? extends ModelingUnit>)newValue);
+				getOwnedModelingUnits().addAll((Collection<? extends Metamodel>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
