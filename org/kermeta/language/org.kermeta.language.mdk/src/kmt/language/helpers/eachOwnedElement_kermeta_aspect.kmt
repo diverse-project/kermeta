@@ -554,7 +554,7 @@ aspect class ClassDefinition {
 }
 
 
-aspect class ModelingUnit {
+aspect class Metamodel {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
 		super(func)
 		self.packages.each{ e |
@@ -614,7 +614,7 @@ aspect class ObjectTypeVariable {
 	end
 }
 
-aspect class Metamodel {
+aspect class ResolvedMetamodel {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeDefinition is do
 		super(func)
 		self.ownedBindings.each{ e |
@@ -819,7 +819,7 @@ aspect class OperationAdaptationOperator {
 }
 
 aspect class UnresolvedMetamodel {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::ModelingUnit is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Metamodel is do
 		super(func)
 		self.ownedModelingUnits.each{ e |
 			func(e)
@@ -839,6 +839,15 @@ aspect class ModelElementTypeDefinition {
 aspect class ModelType {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Type is do
 		super(func)
+	end
+}
+
+aspect class ModelingUnit {
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
+		super(func)
+		self.ownedMetamodels.each{ e |
+			func(e)
+		}
 	end
 }
 
