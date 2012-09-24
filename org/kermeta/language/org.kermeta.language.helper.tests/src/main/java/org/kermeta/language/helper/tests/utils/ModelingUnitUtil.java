@@ -6,6 +6,7 @@
  *            Didier Vojtisek <didier.vojtisek@inria.fr>
  */
 
+package org.kermeta.language.helper.tests.utils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
