@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.loader.kmt.scala.internal.parser.*;
@@ -80,32 +80,33 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
     	// Add file URL to tag source.location for all contents
     	
     	ModelingUnit mu = (ModelingUnit)result.get();
-    	
-    	TreeIterator<EObject> tit = mu.eAllContents();
-    	while(tit.hasNext()) {
-    		KermetaModelElement kme = (KermetaModelElement) tit.next();
-    		for (Tag tag : kme.getKOwnedTags()) {
-    			if (tag.getName().equals("traceability_text_reference")) {
-    				tag.setValue(url.toString() + ";" + tag.getValue());
-    			}
-    		}
-    		
-    		// Check that no aspect on a ClassDefinition defines class parameters 
-            if (kme instanceof ClassDefinition) {
-                ClassDefinition cd = (ClassDefinition)kme;
-                if (cd.getIsAspect()) {
-                    // Check that there are no generic parameters
-                	if (cd.getTypeParameter().size()>0) {
-                		for (Tag tag : cd.getKOwnedTags()) {
-                			if (tag.getName().equals("traceability_text_reference")) {
-                				TextReference tRef = createTextReference(tag);
-                            	logger.logProblem(Kind.UserERROR, "You are not allowed to define class parameters within an aspect", KMTparser.LOG_MESSAGE_GROUP, tRef);
-                            	return null;
-                			}
-                		}
-                	}
-                }
-            }
+    	for(AbstractMetamodel amm : mu.getMetamodels()){
+	    	TreeIterator<EObject> tit = amm.eAllContents();
+	    	while(tit.hasNext()) {
+	    		KermetaModelElement kme = (KermetaModelElement) tit.next();
+	    		for (Tag tag : kme.getKOwnedTags()) {
+	    			if (tag.getName().equals("traceability_text_reference")) {
+	    				tag.setValue(url.toString() + ";" + tag.getValue());
+	    			}
+	    		}
+	    		
+	    		// Check that no aspect on a ClassDefinition defines class parameters 
+	            if (kme instanceof ClassDefinition) {
+	                ClassDefinition cd = (ClassDefinition)kme;
+	                if (cd.getIsAspect()) {
+	                    // Check that there are no generic parameters
+	                	if (cd.getTypeParameter().size()>0) {
+	                		for (Tag tag : cd.getKOwnedTags()) {
+	                			if (tag.getName().equals("traceability_text_reference")) {
+	                				TextReference tRef = createTextReference(tag);
+	                            	logger.logProblem(Kind.UserERROR, "You are not allowed to define class parameters within an aspect", KMTparser.LOG_MESSAGE_GROUP, tRef);
+	                            	return null;
+	                			}
+	                		}
+	                	}
+	                }
+	            }
+	    	}
     	}
 
         //return (ModelingUnit) result.get();

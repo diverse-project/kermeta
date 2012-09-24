@@ -11,7 +11,7 @@
 package org.kermeta.language.loader.kmt.scala.internal.parser
 
 import org.kermeta.language.behavior.Expression
-import org.kermeta.language.structure.ModelingUnit
+import org.kermeta.language.util.ModelingUnit
 import java.util.HashMap
 import org.kermeta.KmPackage
 import org.eclipse.emf.common.util.TreeIterator
@@ -63,7 +63,7 @@ object LoadSaveKM {
     var uri1:URI   = URI.createURI(uri)
     var res : Resource = rs.createResource(uri1)
     //r.getTag.foreach{tag=>res.getContents.add(tag)}
-    res.getContents.add(r)
+    res.getContents.addAll(r.getMetamodels)
     //recursiveAddToResource(r,res)
 
     res.save(new HashMap());

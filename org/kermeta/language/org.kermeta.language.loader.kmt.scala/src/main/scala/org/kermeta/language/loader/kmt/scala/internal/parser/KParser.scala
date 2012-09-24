@@ -18,6 +18,7 @@ import org.kermeta.language.behavior.impl._
 import org.kermeta.language.loader.kmt.scala.internal.parser.sub._
 import scala.collection.JavaConversions._
 import scala.util.parsing.input.OffsetPosition
+import org.kermeta.language.util.ModelingUnit
 
 /**
  * Parser of Kermeta for the full KMT textual syntax (including Expression, ModelingUnit and ClassDefinition

@@ -4,7 +4,7 @@ import org.kermeta.KmPackage
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.kermeta.language.structure.ModelingUnit
+import org.kermeta.language.util.ModelingUnit
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -40,15 +40,15 @@ object PrettyPrinter {
    */
   def printOutline(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case umm : UnresolvedMetamodel => {
+      case umm: UnresolvedMetamodel => {
         res.append(umm.getName())
         umm.getPackages().foreach(p => printOutline(p, res))
-        umm.getOwnedModelingUnits().foreach(mu => printOutline(mu, res))
+        umm.getReferencedMetamodels().foreach(muRef => printOutline(muRef, res))
       }
-      case mm : Metamodel => {
+      case mm: Metamodel => {
         res.append(mm.getName())
         mm.getPackages().foreach(p => printOutline(p, res))
-        mm.getOwnedMetamodels().foreach(m => printOutline(m, res))
+        mm.getReferencedMetamodels().foreach(muRef => printOutline(muRef, res))
       }
       /*case m: ModelingUnit => {
         m.getPackages.foreach(p => printOutline(p, res))
@@ -85,7 +85,7 @@ object PrettyPrinter {
         }
       }
       case c: ClassDefinition => {
-        
+
         if (c.getIsAbstract)
           res.append("abstract ")
         if (c.getIsAspect)
@@ -122,16 +122,16 @@ object PrettyPrinter {
         printMultiplicityElementTypeType(p, res)
         p.getOpposite() match {
           case oppositeProperty: Property => {
-        	  res.append("#"+oppositeProperty.getName())
+            res.append("#" + oppositeProperty.getName())
           }
           case oppositeProperty: UnresolvedProperty => {
-        	  res.append("#"+oppositeProperty.getPropertyIdentifier())
+            res.append("#" + oppositeProperty.getPropertyIdentifier())
           }
           case (_) =>
         }
 
       }
-      case op: Operation => {        
+      case op: Operation => {
         res.append(op.getName)
         if (op.getTypeParameter.size() > 0) {
           res.append("[")
@@ -159,7 +159,7 @@ object PrettyPrinter {
         })
         res.append(") : ")
         printMultiplicityElementTypeType(op, res)
-        
+
       }
 
       case p: Parameter => {
@@ -181,7 +181,6 @@ object PrettyPrinter {
           res.append(">")
       }
 
-      
       case i: VoidLiteral => {
         res.append("void")
 
@@ -196,7 +195,6 @@ object PrettyPrinter {
         res.append(">")
       }
 
-      
       case c: ProductType => {
         res.append("[")
         var i = 0
@@ -210,7 +208,7 @@ object PrettyPrinter {
       }
 
       case c: EnumerationLiteral => {
-        res.append(c.getName )
+        res.append(c.getName)
       }
 
       case c: Enumeration => {
@@ -235,18 +233,23 @@ object PrettyPrinter {
   /**
    * full pretty printer
    */
+  def print(mu: ModelingUnit, res: java.lang.StringBuffer): Unit = {
+    mu.getMetamodels.foreach { mm =>
+      print(mm, res)
+    }
+  }
   def print(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case umm : UnresolvedMetamodel => {
+      case umm: UnresolvedMetamodel => {
         res.append("metamodel " + umm.getName() + "{\n")
         umm.getPackages().foreach(p => print(p, res))
-        umm.getOwnedModelingUnits().foreach(mu => print(mu, res))
+        umm.getReferencedMetamodels().foreach(muRef => print(muRef, res))
         res.append("\n}\n")
       }
-      case mm : Metamodel => {
+      case mm: Metamodel => {
         res.append("metamodel " + mm.getName() + "{\n")
         mm.getPackages().foreach(p => print(p, res))
-        mm.getOwnedMetamodels().foreach(m => print(m, res))
+        mm.getReferencedMetamodels().foreach(muRef => print(muRef, res))
         res.append("\n}\n")
       }
       /*case m: ModelingUnit => {
@@ -784,14 +787,14 @@ object PrettyPrinter {
       }
     }
     me.getType match {
-      case en : Enumeration => {
+      case en: Enumeration => {
         res.append(en.getName())
       }
-      case _ =>{
+      case _ => {
         print(me.getType, res)
       }
     }
-    
+
     if ((me.getUpper != 1) || me.getLower != 0) {
       res.append("[")
       res.append(me.getLower)
