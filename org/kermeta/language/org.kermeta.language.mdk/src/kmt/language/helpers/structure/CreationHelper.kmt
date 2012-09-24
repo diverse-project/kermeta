@@ -204,19 +204,6 @@ aspect class Operation {
 	end
 }
 
-aspect class Require {
-	/**
-	 * Creates a new Require
-	 * 
-	 * @param uri
-	 *            uri of the Require
-	 */
-	operation initialize(uri : String) : Require is do
-		self.uri := uri
-		result := self
-	end
-}
-
 aspect class Class {
 	/**
 	 * Creates a new Class

@@ -554,13 +554,13 @@ aspect class ClassDefinition {
 }
 
 
-aspect class Metamodel {
+aspect class AbstractMetamodel {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
 		super(func)
 		self.packages.each{ e |
 			func(e)
 		}
-		self.requires.each{ e |
+		self.referencedMetamodels.each{ e |
 			func(e)
 		}
 	end
@@ -572,12 +572,6 @@ aspect class ModelElementTypeDefinitionContainer {
 		self.ownedTypeDefinition.each{ e |
 			func(e)
 		}
-	end
-}
-
-aspect class Require {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
-		super(func)
 	end
 }
 
@@ -614,19 +608,16 @@ aspect class ObjectTypeVariable {
 	end
 }
 
-aspect class ResolvedMetamodel {
+aspect class Metamodel {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::TypeDefinition is do
 		super(func)
 		self.ownedBindings.each{ e |
 			func(e)
 		}
-		self.ownedMetamodels.each{ e |
-			func(e)
-		}
 		self.packages.each{ e |
 			func(e)
 		}
-		self.requires.each{ e |
+		self.referencedMetamodels.each{ e |
 			func(e)
 		}
 		self.containedType.each{ e |
@@ -819,11 +810,8 @@ aspect class OperationAdaptationOperator {
 }
 
 aspect class UnresolvedMetamodel {
-	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::Metamodel is do
+	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::AbstractMetamodel is do
 		super(func)
-		self.ownedModelingUnits.each{ e |
-			func(e)
-		}
 	end
 }
 
@@ -842,12 +830,9 @@ aspect class ModelType {
 	end
 }
 
-aspect class ModelingUnit {
+aspect class FilteredMetamodelReference {
 	method eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void from org::kermeta::language::structure::KermetaModelElement is do
 		super(func)
-		self.ownedMetamodels.each{ e |
-			func(e)
-		}
 	end
 }
 
