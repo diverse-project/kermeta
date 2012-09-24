@@ -421,29 +421,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.Require} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RequireItemProvider requireItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.Require}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRequireAdapter() {
-		if (requireItemProvider == null) {
-			requireItemProvider = new RequireItemProvider(this);
-		}
-
-		return requireItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ObjectTypeVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1067,6 +1044,29 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.FilteredMetamodelReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FilteredMetamodelReferenceItemProvider filteredMetamodelReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.FilteredMetamodelReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFilteredMetamodelReferenceAdapter() {
+		if (filteredMetamodelReferenceItemProvider == null) {
+			filteredMetamodelReferenceItemProvider = new FilteredMetamodelReferenceItemProvider(this);
+		}
+
+		return filteredMetamodelReferenceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1180,7 +1180,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
 		if (modelElementTypeDefinitionContainerItemProvider != null) modelElementTypeDefinitionContainerItemProvider.dispose();
-		if (requireItemProvider != null) requireItemProvider.dispose();
 		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
 		if (metamodelItemProvider != null) metamodelItemProvider.dispose();
 		if (metamodelVariableItemProvider != null) metamodelVariableItemProvider.dispose();
@@ -1208,6 +1207,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (operationAdaptationOperatorItemProvider != null) operationAdaptationOperatorItemProvider.dispose();
 		if (unresolvedMetamodelItemProvider != null) unresolvedMetamodelItemProvider.dispose();
 		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
+		if (filteredMetamodelReferenceItemProvider != null) filteredMetamodelReferenceItemProvider.dispose();
 	}
 
 }

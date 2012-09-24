@@ -25,17 +25,17 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.ModelingUnit} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.AbstractMetamodel} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelingUnitItemProvider
+public class AbstractMetamodelItemProvider
 	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +49,7 @@ public class ModelingUnitItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelingUnitItemProvider(AdapterFactory adapterFactory) {
+	public AbstractMetamodelItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -65,7 +65,7 @@ public class ModelingUnitItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addNamespacePrefixPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -93,19 +93,19 @@ public class ModelingUnitItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Namespace Prefix feature.
+	 * This adds a property descriptor for the Uri feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamespacePrefixPropertyDescriptor(Object object) {
+	protected void addUriPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelingUnit_namespacePrefix_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelingUnit_namespacePrefix_feature", "_UI_ModelingUnit_type"),
-				 StructurePackage.Literals.MODELING_UNIT__NAMESPACE_PREFIX,
+				 getString("_UI_AbstractMetamodel_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractMetamodel_uri_feature", "_UI_AbstractMetamodel_type"),
+				 StructurePackage.Literals.ABSTRACT_METAMODEL__URI,
 				 true,
 				 false,
 				 false,
@@ -126,8 +126,8 @@ public class ModelingUnitItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__PACKAGES);
-			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__REQUIRES);
+			childrenFeatures.add(StructurePackage.Literals.ABSTRACT_METAMODEL__PACKAGES);
+			childrenFeatures.add(StructurePackage.Literals.ABSTRACT_METAMODEL__REFERENCED_METAMODELS);
 		}
 		return childrenFeatures;
 	}
@@ -146,17 +146,6 @@ public class ModelingUnitItemProvider
 	}
 
 	/**
-	 * This returns ModelingUnit.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelingUnit"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,10 +153,10 @@ public class ModelingUnitItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ModelingUnit)object).getName();
+		String label = ((AbstractMetamodel)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ModelingUnit_type") :
-			getString("_UI_ModelingUnit_type") + " " + label;
+			getString("_UI_AbstractMetamodel_type") :
+			getString("_UI_AbstractMetamodel_type") + " " + label;
 	}
 
 	/**
@@ -181,13 +170,13 @@ public class ModelingUnitItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ModelingUnit.class)) {
-			case StructurePackage.MODELING_UNIT__NAME:
-			case StructurePackage.MODELING_UNIT__NAMESPACE_PREFIX:
+		switch (notification.getFeatureID(AbstractMetamodel.class)) {
+			case StructurePackage.ABSTRACT_METAMODEL__NAME:
+			case StructurePackage.ABSTRACT_METAMODEL__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StructurePackage.MODELING_UNIT__PACKAGES:
-			case StructurePackage.MODELING_UNIT__REQUIRES:
+			case StructurePackage.ABSTRACT_METAMODEL__PACKAGES:
+			case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -207,13 +196,13 @@ public class ModelingUnitItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.MODELING_UNIT__PACKAGES,
+				(StructurePackage.Literals.ABSTRACT_METAMODEL__PACKAGES,
 				 StructureFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.MODELING_UNIT__REQUIRES,
-				 StructureFactory.eINSTANCE.createRequire()));
+				(StructurePackage.Literals.ABSTRACT_METAMODEL__REFERENCED_METAMODELS,
+				 StructureFactory.eINSTANCE.createFilteredMetamodelReference()));
 	}
 
 }

@@ -64,25 +64,25 @@ public class MetamodelItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamespacePrefixPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Namespace Prefix feature.
+	 * This adds a property descriptor for the Uri feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamespacePrefixPropertyDescriptor(Object object) {
+	protected void addUriPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ModelingUnit_namespacePrefix_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ModelingUnit_namespacePrefix_feature", "_UI_ModelingUnit_type"),
-				 StructurePackage.Literals.MODELING_UNIT__NAMESPACE_PREFIX,
+				 getString("_UI_AbstractMetamodel_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractMetamodel_uri_feature", "_UI_AbstractMetamodel_type"),
+				 StructurePackage.Literals.ABSTRACT_METAMODEL__URI,
 				 true,
 				 false,
 				 false,
@@ -103,10 +103,9 @@ public class MetamodelItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__PACKAGES);
-			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__REQUIRES);
+			childrenFeatures.add(StructurePackage.Literals.ABSTRACT_METAMODEL__PACKAGES);
+			childrenFeatures.add(StructurePackage.Literals.ABSTRACT_METAMODEL__REFERENCED_METAMODELS);
 			childrenFeatures.add(StructurePackage.Literals.METAMODEL__OWNED_BINDINGS);
-			childrenFeatures.add(StructurePackage.Literals.METAMODEL__OWNED_METAMODELS);
 		}
 		return childrenFeatures;
 	}
@@ -161,13 +160,12 @@ public class MetamodelItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Metamodel.class)) {
-			case StructurePackage.METAMODEL__NAMESPACE_PREFIX:
+			case StructurePackage.METAMODEL__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.METAMODEL__PACKAGES:
-			case StructurePackage.METAMODEL__REQUIRES:
+			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
 			case StructurePackage.METAMODEL__OWNED_BINDINGS:
-			case StructurePackage.METAMODEL__OWNED_METAMODELS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -187,23 +185,18 @@ public class MetamodelItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.MODELING_UNIT__PACKAGES,
+				(StructurePackage.Literals.ABSTRACT_METAMODEL__PACKAGES,
 				 StructureFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.MODELING_UNIT__REQUIRES,
-				 StructureFactory.eINSTANCE.createRequire()));
+				(StructurePackage.Literals.ABSTRACT_METAMODEL__REFERENCED_METAMODELS,
+				 StructureFactory.eINSTANCE.createFilteredMetamodelReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.METAMODEL__OWNED_BINDINGS,
 				 StructureFactory.eINSTANCE.createMetamodelBinding()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.METAMODEL__OWNED_METAMODELS,
-				 StructureFactory.eINSTANCE.createMetamodel()));
 	}
 
 }

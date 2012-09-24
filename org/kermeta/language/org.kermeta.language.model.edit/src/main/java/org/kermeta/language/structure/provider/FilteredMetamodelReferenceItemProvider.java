@@ -20,19 +20,16 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.language.structure.Require;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.Require} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.FilteredMetamodelReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RequireItemProvider
+public class FilteredMetamodelReferenceItemProvider
 	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -46,7 +43,7 @@ public class RequireItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RequireItemProvider(AdapterFactory adapterFactory) {
+	public FilteredMetamodelReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,42 +58,42 @@ public class RequireItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addUriPropertyDescriptor(object);
+			addMetamodelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Uri feature.
+	 * This adds a property descriptor for the Metamodel feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUriPropertyDescriptor(Object object) {
+	protected void addMetamodelPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Require_uri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Require_uri_feature", "_UI_Require_type"),
-				 StructurePackage.Literals.REQUIRE__URI,
+				 getString("_UI_FilteredMetamodelReference_metamodel_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FilteredMetamodelReference_metamodel_feature", "_UI_FilteredMetamodelReference_type"),
+				 StructurePackage.Literals.FILTERED_METAMODEL_REFERENCE__METAMODEL,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns Require.gif.
+	 * This returns FilteredMetamodelReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Require"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FilteredMetamodelReference"));
 	}
 
 	/**
@@ -107,10 +104,7 @@ public class RequireItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Require)object).getUri();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Require_type") :
-			getString("_UI_Require_type") + " " + label;
+		return getString("_UI_FilteredMetamodelReference_type");
 	}
 
 	/**
@@ -123,12 +117,6 @@ public class RequireItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(Require.class)) {
-			case StructurePackage.REQUIRE__URI:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
