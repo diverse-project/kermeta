@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>language.root</artifactId>
+		<groupId>org.kermeta.language</groupId>
+		<version>2.0.7-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>language.helper.tests</artifactId>
+	<packaging>jar</packaging>
+	<name>language.helper.tests :: helper test for Kermeta project</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>language.helper.base4tests</artifactId>
+			<version>${kermeta.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+						
+
+			
+			<!-- Scala plugin : allow to compile Scala file -->
+			<!-- <plugin> <groupId>org.scala-tools</groupId> <artifactId>maven-scala-plugin</artifactId> 
+				<executions> <execution> <id>scala-compile-first</id> <phase>process-resources</phase> 
+				<goals> <goal>add-source</goal> <goal>compile</goal> </goals> </execution> 
+				<execution> <id>scala-test-compile</id> <phase>process-test-resources</phase> 
+				<goals> <goal>testCompile</goal> </goals> </execution> </executions> <configuration> 
+				<jvmArgs> <jvmArg>-Xmx1024m</jvmArg> </jvmArgs> <launchers> <launcher> <id>language.merger</id> 
+				<mainClass>runner.MainRunner</mainClass> -->  <!-- args are optional <args> <arg>arg1</arg> </args> -->
+			<!-- </launcher> </launchers> </configuration> </plugin> -->
+			
+			
+			<!-- Create a correct OSGI bundle -->
+			<!-- <plugin> <groupId>org.apache.felix</groupId> <artifactId>maven-bundle-plugin</artifactId> 
+				<version>2.1.0</version> <extensions>true</extensions> <configuration> <instructions> 
+				<Bundle-SymbolicName>org.kermeta.${project.artifactId}</Bundle-SymbolicName> 
+				<Bundle-Vendor>${bundle.vendor}</Bundle-Vendor> <Bundle-ClassPath>.</Bundle-ClassPath> 
+				<Export-Package> org.kermeta.language.merger.binarymerger.* </Export-Package> 
+				<Require-Bundle> -->  <!-- avoid splitted package issue, must require some eclipse bundle -->
+			<!-- org.eclipse. -->
+			<!-- </Require-Bundle> <Private-Package> </Private-Package> --><!-- use the ! for avoiding to import some packages that are already there 
+				with the Require-Bundle Be careful some Packages does also come from framework.scala, 
+				they must be added even if present locally in this jar -->
+			<!-- <Import-Package> org.kermeta.*, org.eclipse.emf.*, scala.*, org.slf4j.*;version="${slf4j.version.range}", 
+				org.osgi.framework;version="[1.5,2)", ScalaAspect.org.kermeta.language.structure, 
+				runner </Import-Package> -->
+			<!-- add extra element in the manifest, copy them from this file ex: Bundle-ActivationPolicy: 
+				lazy -->
+			<!-- <_include>resources/META-INF/MANIFEST-part.MF</_include> -->
+			<!-- </instructions> </configuration> </plugin> -->
+		</plugins>
+	</build>
+</project>
+
