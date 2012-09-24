@@ -14,7 +14,7 @@
 	</properties>
 	-->
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>language.helper.tests</artifactId>
+	<artifactId>language.helper.base4tests</artifactId>
 	<packaging>jar</packaging>
 	<name>language.helper.tests :: helper test for Kermeta project</name>
 
