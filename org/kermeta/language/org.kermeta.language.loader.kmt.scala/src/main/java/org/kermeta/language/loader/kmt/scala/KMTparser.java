@@ -6,21 +6,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.JarURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.language.loader.kmt.scala.internal.parser.KParser;
+import org.kermeta.language.loader.kmt.scala.internal.parser.ParseException;
+import org.kermeta.language.loader.kmt.scala.internal.parser.ParserUtil;
+import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
-import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.language.structure.Tag;
-import org.kermeta.language.structure.TypeVariable;
-import org.kermeta.language.loader.kmt.scala.internal.parser.*;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
-import org.kermeta.utils.systemservices.api.reference.TextReference;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
+import org.kermeta.utils.systemservices.api.reference.TextReference;
 
 import scala.Option;
 
