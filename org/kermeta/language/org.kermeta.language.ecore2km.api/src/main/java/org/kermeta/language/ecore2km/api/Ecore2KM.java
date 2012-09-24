@@ -9,7 +9,7 @@
 package org.kermeta.language.ecore2km.api;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 
 public interface Ecore2KM {
 	

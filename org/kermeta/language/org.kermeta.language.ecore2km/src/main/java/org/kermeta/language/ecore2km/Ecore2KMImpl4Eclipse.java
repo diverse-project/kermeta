@@ -10,9 +10,12 @@
  */
 package org.kermeta.language.ecore2km;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.kermeta.language.ecore2km.internal.Activator;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.util.ModelingUnit;
 
 
 
@@ -31,7 +34,11 @@ public class Ecore2KMImpl4Eclipse  implements org.kermeta.language.ecore2km.api.
     	org.kermeta.language.language.ecore2kmrunner.MainRunner.init4eclipse();
     
         org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
-        return converter.convert(rootPackage, namespacePrefix);
+        
+        ModelingUnit mu = new ModelingUnit(new ArrayList<AbstractMetamodel>());
+        mu.getMetamodels().add(converter.convert(rootPackage, namespacePrefix));
+        
+        return mu;
     }
     
            

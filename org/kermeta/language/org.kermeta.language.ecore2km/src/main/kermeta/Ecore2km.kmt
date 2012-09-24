@@ -29,17 +29,18 @@ class Ecore2km {
 	/**
 	 * Converts the given ecore package as a Kermeta v2 modeling unit.
 	 */
-	operation convert(pkg : EPackage, namespacePrefix : String) : ModelingUnit is do
+	operation convert(pkg : EPackage, namespacePrefix : String) : Collection<AbstractMetamodel> is do
 		var ecore2kmStruct : EcoreStructure2kmStructure init EcoreStructure2kmStructure.new
 
 		traceRegistry := TraceRegistry.new
-		result := ModelingUnit.new
+		result := Collecion<AbstractMetamodel>.new
 		var umm : UnresolvedMetamodel init UnresolvedMetamodel.new
 		umm.uri := pkg.nsURI
-		result.ownedMetamodels.add(umm)
+		result.add(umm)
+		
 		//result.namespacePrefix := namespacePrefix
 		traceRegistry.addTraceFromObjects(pkg, result, void)
-		ecore2kmStruct.convert(pkg, getPrimitiveTypeMappings(), result, umm, traceRegistry)
+		ecore2kmStruct.convert(pkg, getPrimitiveTypeMappings(), result, traceRegistry)
 	end
 	
 	
