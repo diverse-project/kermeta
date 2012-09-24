@@ -51,13 +51,13 @@
             <version>${kermeta.version}</version>
         </dependency>
         
-        <dependency>
-			<groupId>org.kermeta.language</groupId>
-			<artifactId>language.helper.tests</artifactId>
-			<version>${kermeta.version}</version>
-			<scope>test</scope>
-		</dependency>
 
+        <dependency>
+        	<groupId>org.kermeta.language</groupId>
+        	<artifactId>language.helper.base4tests</artifactId>
+        	<version>${kermeta.version}</version>
+        	<scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
