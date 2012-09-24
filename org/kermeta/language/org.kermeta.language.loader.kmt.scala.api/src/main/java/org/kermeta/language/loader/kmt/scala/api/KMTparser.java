@@ -2,7 +2,7 @@ package org.kermeta.language.loader.kmt.scala.api;
 
 import java.net.URL;
 
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public interface KMTparser {
