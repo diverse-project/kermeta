@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
@@ -94,7 +94,7 @@ public class ModelingUnitUtil {
 		Resource resource = resourceSet.createResource(uri);
      /*   ((XMIResource)resource).getDefaultLoadOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");
         ((XMIResource)resource).getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");  */
-		resource.getContents().add(modelingUnit);
+		resource.getContents().addAll(modelingUnit.getMetamodels());
 		resource.save(null);
     }
     public static void registerEMFextensionToFactoryMap(String uri) {
