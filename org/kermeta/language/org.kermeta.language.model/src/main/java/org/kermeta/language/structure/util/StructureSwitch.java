@@ -6,10 +6,10 @@
  */
 package org.kermeta.language.structure.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
+import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationOperator;
@@ -21,6 +21,7 @@ import org.kermeta.language.structure.DataType;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
+import org.kermeta.language.structure.FilteredMetamodelReference;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
@@ -31,7 +32,6 @@ import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
@@ -45,8 +45,6 @@ import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
-import org.kermeta.language.structure.Require;
-import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.Type;
@@ -81,7 +79,7 @@ import org.kermeta.language.structure.VoidType;
  * @see org.kermeta.language.structure.StructurePackage
  * @generated
  */
-public class StructureSwitch<T> {
+public class StructureSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -103,34 +101,16 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @parameter ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -141,6 +121,7 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	//@Override
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case StructurePackage.KERMETA_MODEL_ELEMENT: {
@@ -339,10 +320,11 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.METAMODEL: {
-				Metamodel metamodel = (Metamodel)theEObject;
-				T result = caseMetamodel(metamodel);
-				if (result == null) result = caseKermetaModelElement(metamodel);
+			case StructurePackage.ABSTRACT_METAMODEL: {
+				AbstractMetamodel abstractMetamodel = (AbstractMetamodel)theEObject;
+				T result = caseAbstractMetamodel(abstractMetamodel);
+				if (result == null) result = caseNamedElement(abstractMetamodel);
+				if (result == null) result = caseKermetaModelElement(abstractMetamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -351,13 +333,6 @@ public class StructureSwitch<T> {
 				T result = caseModelElementTypeDefinitionContainer(modelElementTypeDefinitionContainer);
 				if (result == null) result = caseNamedElement(modelElementTypeDefinitionContainer);
 				if (result == null) result = caseKermetaModelElement(modelElementTypeDefinitionContainer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.REQUIRE: {
-				Require require = (Require)theEObject;
-				T result = caseRequire(require);
-				if (result == null) result = caseKermetaModelElement(require);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -401,14 +376,14 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.RESOLVED_METAMODEL: {
-				ResolvedMetamodel resolvedMetamodel = (ResolvedMetamodel)theEObject;
-				T result = caseResolvedMetamodel(resolvedMetamodel);
-				if (result == null) result = caseTypeDefinition(resolvedMetamodel);
-				if (result == null) result = caseMetamodel(resolvedMetamodel);
-				if (result == null) result = caseNamedElement(resolvedMetamodel);
-				if (result == null) result = caseTypeContainer(resolvedMetamodel);
-				if (result == null) result = caseKermetaModelElement(resolvedMetamodel);
+			case StructurePackage.METAMODEL: {
+				Metamodel metamodel = (Metamodel)theEObject;
+				T result = caseMetamodel(metamodel);
+				if (result == null) result = caseTypeDefinition(metamodel);
+				if (result == null) result = caseAbstractMetamodel(metamodel);
+				if (result == null) result = caseNamedElement(metamodel);
+				if (result == null) result = caseTypeContainer(metamodel);
+				if (result == null) result = caseKermetaModelElement(metamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -630,7 +605,8 @@ public class StructureSwitch<T> {
 			case StructurePackage.UNRESOLVED_METAMODEL: {
 				UnresolvedMetamodel unresolvedMetamodel = (UnresolvedMetamodel)theEObject;
 				T result = caseUnresolvedMetamodel(unresolvedMetamodel);
-				if (result == null) result = caseMetamodel(unresolvedMetamodel);
+				if (result == null) result = caseAbstractMetamodel(unresolvedMetamodel);
+				if (result == null) result = caseNamedElement(unresolvedMetamodel);
 				if (result == null) result = caseKermetaModelElement(unresolvedMetamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -653,10 +629,10 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.MODELING_UNIT: {
-				ModelingUnit modelingUnit = (ModelingUnit)theEObject;
-				T result = caseModelingUnit(modelingUnit);
-				if (result == null) result = caseKermetaModelElement(modelingUnit);
+			case StructurePackage.FILTERED_METAMODEL_REFERENCE: {
+				FilteredMetamodelReference filteredMetamodelReference = (FilteredMetamodelReference)theEObject;
+				T result = caseFilteredMetamodelReference(filteredMetamodelReference);
+				if (result == null) result = caseKermetaModelElement(filteredMetamodelReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -980,17 +956,17 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Modeling Unit</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Modeling Unit</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Metamodel</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseModelingUnit(ModelingUnit object) {
+	public T caseAbstractMetamodel(AbstractMetamodel object) {
 		return null;
 	}
 
@@ -1006,21 +982,6 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseModelElementTypeDefinitionContainer(ModelElementTypeDefinitionContainer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Require</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Require</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRequire(Require object) {
 		return null;
 	}
 
@@ -1085,21 +1046,6 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Resolved Metamodel</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Resolved Metamodel</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseResolvedMetamodel(ResolvedMetamodel object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1141,6 +1087,21 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseModelType(ModelType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Filtered Metamodel Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Filtered Metamodel Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFilteredMetamodelReference(FilteredMetamodelReference object) {
 		return null;
 	}
 
@@ -1546,6 +1507,7 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	//@Override
+	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}

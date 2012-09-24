@@ -36,12 +36,12 @@ public interface ModelType extends Type {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Definition</em>' reference.
-	 * @see #setTypeDefinition(ResolvedMetamodel)
+	 * @see #setTypeDefinition(Metamodel)
 	 * @see org.kermeta.language.structure.StructurePackage#getModelType_TypeDefinition()
 	 * @model required="true"
 	 * @generated
 	 */
-	ResolvedMetamodel getTypeDefinition();
+	Metamodel getTypeDefinition();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.language.structure.ModelType#getTypeDefinition <em>Type Definition</em>}' reference.
@@ -51,6 +51,6 @@ public interface ModelType extends Type {
 	 * @see #getTypeDefinition()
 	 * @generated
 	 */
-	void setTypeDefinition(ResolvedMetamodel value);
+	void setTypeDefinition(Metamodel value);
 
 } // ModelType

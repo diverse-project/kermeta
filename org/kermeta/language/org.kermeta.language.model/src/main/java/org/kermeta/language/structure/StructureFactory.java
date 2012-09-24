@@ -161,15 +161,6 @@ public interface StructureFactory extends EFactory {
 	ModelElementTypeDefinitionContainer createModelElementTypeDefinitionContainer();
 
 	/**
-	 * Returns a new object of class '<em>Require</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Require</em>'.
-	 * @generated
-	 */
-	Require createRequire();
-
-	/**
 	 * Returns a new object of class '<em>Object Type Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,13 +170,13 @@ public interface StructureFactory extends EFactory {
 	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
-	 * Returns a new object of class '<em>Resolved Metamodel</em>'.
+	 * Returns a new object of class '<em>Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resolved Metamodel</em>'.
+	 * @return a new object of class '<em>Metamodel</em>'.
 	 * @generated
 	 */
-	ResolvedMetamodel createResolvedMetamodel();
+	Metamodel createMetamodel();
 
 	/**
 	 * Returns a new object of class '<em>Metamodel Variable</em>'.
@@ -206,13 +197,13 @@ public interface StructureFactory extends EFactory {
 	ModelType createModelType();
 
 	/**
-	 * Returns a new object of class '<em>Modeling Unit</em>'.
+	 * Returns a new object of class '<em>Filtered Metamodel Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Modeling Unit</em>'.
+	 * @return a new object of class '<em>Filtered Metamodel Reference</em>'.
 	 * @generated
 	 */
-	ModelingUnit createModelingUnit();
+	FilteredMetamodelReference createFilteredMetamodelReference();
 
 	/**
 	 * Returns a new object of class '<em>Virtual Type</em>'.

@@ -10,22 +10,16 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.kermeta.language.structure.ClassDefinitionBinding;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.MetamodelBinding;
-import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.UseAdaptationOperator;
 
@@ -54,7 +48,7 @@ public class MetamodelBindingImpl extends KermetaModelElementImpl implements Met
 	 * @generated
 	 * @ordered
 	 */
-	protected ResolvedMetamodel boundMetamodel;
+	protected Metamodel boundMetamodel;
 
 	/**
 	 * The cached value of the '{@link #getOwnedClassDefinitionBindings() <em>Owned Class Definition Bindings</em>}' containment reference list.
@@ -110,10 +104,10 @@ public class MetamodelBindingImpl extends KermetaModelElementImpl implements Met
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResolvedMetamodel getBoundMetamodel() {
+	public Metamodel getBoundMetamodel() {
 		if (boundMetamodel != null && boundMetamodel.eIsProxy()) {
 			InternalEObject oldBoundMetamodel = (InternalEObject)boundMetamodel;
-			boundMetamodel = (ResolvedMetamodel)eResolveProxy(oldBoundMetamodel);
+			boundMetamodel = (Metamodel)eResolveProxy(oldBoundMetamodel);
 			if (boundMetamodel != oldBoundMetamodel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.METAMODEL_BINDING__BOUND_METAMODEL, oldBoundMetamodel, boundMetamodel));
@@ -127,7 +121,7 @@ public class MetamodelBindingImpl extends KermetaModelElementImpl implements Met
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResolvedMetamodel basicGetBoundMetamodel() {
+	public Metamodel basicGetBoundMetamodel() {
 		return boundMetamodel;
 	}
 
@@ -136,8 +130,8 @@ public class MetamodelBindingImpl extends KermetaModelElementImpl implements Met
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBoundMetamodel(ResolvedMetamodel newBoundMetamodel) {
-		ResolvedMetamodel oldBoundMetamodel = boundMetamodel;
+	public void setBoundMetamodel(Metamodel newBoundMetamodel) {
+		Metamodel oldBoundMetamodel = boundMetamodel;
 		boundMetamodel = newBoundMetamodel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.METAMODEL_BINDING__BOUND_METAMODEL, oldBoundMetamodel, boundMetamodel));
@@ -228,7 +222,7 @@ public class MetamodelBindingImpl extends KermetaModelElementImpl implements Met
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.METAMODEL_BINDING__BOUND_METAMODEL:
-				setBoundMetamodel((ResolvedMetamodel)newValue);
+				setBoundMetamodel((Metamodel)newValue);
 				return;
 			case StructurePackage.METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS:
 				getOwnedClassDefinitionBindings().clear();
@@ -255,7 +249,7 @@ public class MetamodelBindingImpl extends KermetaModelElementImpl implements Met
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.METAMODEL_BINDING__BOUND_METAMODEL:
-				setBoundMetamodel((ResolvedMetamodel)null);
+				setBoundMetamodel((Metamodel)null);
 				return;
 			case StructurePackage.METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS:
 				getOwnedClassDefinitionBindings().clear();

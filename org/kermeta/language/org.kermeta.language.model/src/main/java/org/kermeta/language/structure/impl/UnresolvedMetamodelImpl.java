@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.Metamodel;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.UnresolvedMetamodel;
 
@@ -28,25 +27,11 @@ import org.kermeta.language.structure.UnresolvedMetamodel;
  * An implementation of the model object '<em><b>Unresolved Metamodel</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.UnresolvedMetamodelImpl#getOwnedModelingUnits <em>Owned Modeling Units</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
-public class UnresolvedMetamodelImpl extends MetamodelImpl implements UnresolvedMetamodel {
-	/**
-	 * The cached value of the '{@link #getOwnedModelingUnits() <em>Owned Modeling Units</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedModelingUnits()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Metamodel> ownedModelingUnits;
-
+public class UnresolvedMetamodelImpl extends AbstractMetamodelImpl implements UnresolvedMetamodel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,92 +49,6 @@ public class UnresolvedMetamodelImpl extends MetamodelImpl implements Unresolved
 	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.UNRESOLVED_METAMODEL;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Metamodel> getOwnedModelingUnits() {
-		if (ownedModelingUnits == null) {
-			ownedModelingUnits = new EObjectContainmentEList<Metamodel>(Metamodel.class, this, StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS);
-		}
-		return ownedModelingUnits;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS:
-				return ((InternalEList<?>)getOwnedModelingUnits()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS:
-				return getOwnedModelingUnits();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS:
-				getOwnedModelingUnits().clear();
-				getOwnedModelingUnits().addAll((Collection<? extends Metamodel>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS:
-				getOwnedModelingUnits().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case StructurePackage.UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS:
-				return ownedModelingUnits != null && !ownedModelingUnits.isEmpty();
-		}
-		return super.eIsSet(featureID);
 	}
 
 } //UnresolvedMetamodelImpl

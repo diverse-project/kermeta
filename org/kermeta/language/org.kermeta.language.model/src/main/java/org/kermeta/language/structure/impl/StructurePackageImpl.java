@@ -24,6 +24,7 @@ import org.kermeta.language.LanguagePackage;
 import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import org.kermeta.language.impl.LanguagePackageImpl;
+import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationOperator;
@@ -37,6 +38,7 @@ import org.kermeta.language.structure.DataType;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
+import org.kermeta.language.structure.FilteredMetamodelReference;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
@@ -47,7 +49,6 @@ import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
@@ -61,8 +62,6 @@ import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
-import org.kermeta.language.structure.Require;
-import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
@@ -244,7 +243,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelingUnitEClass = null;
+	private EClass abstractMetamodelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,13 +251,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass modelElementTypeDefinitionContainerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass requireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,13 +285,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass resolvedMetamodelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass metamodelEClass = null;
 
 	/**
@@ -315,6 +300,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass modelTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass filteredMetamodelReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1403,8 +1395,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getModelingUnit() {
-		return modelingUnitEClass;
+	public EClass getAbstractMetamodel() {
+		return abstractMetamodelEClass;
 	}
 
 	/**
@@ -1412,8 +1404,26 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelingUnit_OwnedMetamodels() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(0);
+	public EReference getAbstractMetamodel_Packages() {
+		return (EReference)abstractMetamodelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractMetamodel_Uri() {
+		return (EAttribute)abstractMetamodelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractMetamodel_ReferencedMetamodels() {
+		return (EReference)abstractMetamodelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1432,24 +1442,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 */
 	public EReference getModelElementTypeDefinitionContainer_OwnedTypeDefinition() {
 		return (EReference)modelElementTypeDefinitionContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getRequire() {
-		return requireEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRequire_Uri() {
-		return (EAttribute)requireEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1538,33 +1530,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getResolvedMetamodel() {
-		return resolvedMetamodelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getResolvedMetamodel_OwnedBindings() {
-		return (EReference)resolvedMetamodelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getResolvedMetamodel_OwnedMetamodels() {
-		return (EReference)resolvedMetamodelEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getMetamodel() {
 		return metamodelEClass;
 	}
@@ -1574,26 +1539,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMetamodel_Packages() {
+	public EReference getMetamodel_OwnedBindings() {
 		return (EReference)metamodelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMetamodel_Uri() {
-		return (EAttribute)metamodelEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMetamodel_Requires() {
-		return (EReference)metamodelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1630,6 +1577,24 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 */
 	public EReference getModelType_TypeDefinition() {
 		return (EReference)modelTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFilteredMetamodelReference() {
+		return filteredMetamodelReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFilteredMetamodelReference_Metamodel() {
+		return (EReference)filteredMetamodelReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2222,15 +2187,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUnresolvedMetamodel_OwnedModelingUnits() {
-		return (EReference)unresolvedMetamodelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getModelElementTypeDefinition() {
 		return modelElementTypeDefinitionEClass;
 	}
@@ -2425,16 +2381,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__IS_SINGLETON);
 		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__IS_FINAL);
 
-		metamodelEClass = createEClass(METAMODEL);
-		createEReference(metamodelEClass, METAMODEL__PACKAGES);
-		createEAttribute(metamodelEClass, METAMODEL__URI);
-		createEReference(metamodelEClass, METAMODEL__REQUIRES);
+		abstractMetamodelEClass = createEClass(ABSTRACT_METAMODEL);
+		createEReference(abstractMetamodelEClass, ABSTRACT_METAMODEL__PACKAGES);
+		createEAttribute(abstractMetamodelEClass, ABSTRACT_METAMODEL__URI);
+		createEReference(abstractMetamodelEClass, ABSTRACT_METAMODEL__REFERENCED_METAMODELS);
 
 		modelElementTypeDefinitionContainerEClass = createEClass(MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER);
 		createEReference(modelElementTypeDefinitionContainerEClass, MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
-
-		requireEClass = createEClass(REQUIRE);
-		createEAttribute(requireEClass, REQUIRE__URI);
 
 		genericTypeDefinitionEClass = createEClass(GENERIC_TYPE_DEFINITION);
 		createEReference(genericTypeDefinitionEClass, GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
@@ -2449,9 +2402,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		objectTypeVariableEClass = createEClass(OBJECT_TYPE_VARIABLE);
 
-		resolvedMetamodelEClass = createEClass(RESOLVED_METAMODEL);
-		createEReference(resolvedMetamodelEClass, RESOLVED_METAMODEL__OWNED_BINDINGS);
-		createEReference(resolvedMetamodelEClass, RESOLVED_METAMODEL__OWNED_METAMODELS);
+		metamodelEClass = createEClass(METAMODEL);
+		createEReference(metamodelEClass, METAMODEL__OWNED_BINDINGS);
 
 		metamodelVariableEClass = createEClass(METAMODEL_VARIABLE);
 		createEReference(metamodelVariableEClass, METAMODEL_VARIABLE__VIRTUAL_TYPE);
@@ -2545,15 +2497,14 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(operationAdaptationOperatorEClass, OPERATION_ADAPTATION_OPERATOR__TARGET);
 
 		unresolvedMetamodelEClass = createEClass(UNRESOLVED_METAMODEL);
-		createEReference(unresolvedMetamodelEClass, UNRESOLVED_METAMODEL__OWNED_MODELING_UNITS);
 
 		modelElementTypeDefinitionEClass = createEClass(MODEL_ELEMENT_TYPE_DEFINITION);
 
 		modelTypeEClass = createEClass(MODEL_TYPE);
 		createEReference(modelTypeEClass, MODEL_TYPE__TYPE_DEFINITION);
 
-		modelingUnitEClass = createEClass(MODELING_UNIT);
-		createEReference(modelingUnitEClass, MODELING_UNIT__OWNED_METAMODELS);
+		filteredMetamodelReferenceEClass = createEClass(FILTERED_METAMODEL_REFERENCE);
+		createEReference(filteredMetamodelReferenceEClass, FILTERED_METAMODEL_REFERENCE__METAMODEL);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2624,17 +2575,17 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		abstractPropertyEClass.getESuperTypes().add(this.getKermetaModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		classDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
-		metamodelEClass.getESuperTypes().add(this.getKermetaModelElement());
+		abstractMetamodelEClass.getESuperTypes().add(this.getKermetaModelElement());
+		abstractMetamodelEClass.getESuperTypes().add(this.getNamedElement());
 		modelElementTypeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
-		requireEClass.getESuperTypes().add(this.getKermetaModelElement());
 		genericTypeDefinitionEClass.getESuperTypes().add(this.getModelElementTypeDefinition());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getTypeContainer());
 		typeVariableEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getNamedElement());
 		objectTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
-		resolvedMetamodelEClass.getESuperTypes().add(this.getTypeDefinition());
-		resolvedMetamodelEClass.getESuperTypes().add(this.getMetamodel());
+		metamodelEClass.getESuperTypes().add(this.getTypeDefinition());
+		metamodelEClass.getESuperTypes().add(this.getAbstractMetamodel());
 		metamodelVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
 		modelEClass.getESuperTypes().add(this.getKermetaModelElement());
@@ -2670,10 +2621,10 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		unresolvedAdaptationOperatorEClass.getESuperTypes().add(this.getUnresolvedReference());
 		adaptationParameterEClass.getESuperTypes().add(this.getTypedElement());
 		operationAdaptationOperatorEClass.getESuperTypes().add(this.getAdaptationOperator());
-		unresolvedMetamodelEClass.getESuperTypes().add(this.getMetamodel());
+		unresolvedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodel());
 		modelElementTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		modelTypeEClass.getESuperTypes().add(this.getType());
-		modelingUnitEClass.getESuperTypes().add(this.getKermetaModelElement());
+		filteredMetamodelReferenceEClass.getESuperTypes().add(this.getKermetaModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kermetaModelElementEClass, KermetaModelElement.class, "KermetaModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2785,16 +2736,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEAttribute(getClassDefinition_IsSingleton(), this.getBoolean(), "isSingleton", "false", 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClassDefinition_IsFinal(), this.getBoolean(), "isFinal", "false", 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(metamodelEClass, Metamodel.class, "Metamodel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMetamodel_Packages(), this.getPackage(), null, "packages", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMetamodel_Uri(), this.getString(), "uri", null, 0, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetamodel_Requires(), this.getRequire(), null, "requires", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractMetamodelEClass, AbstractMetamodel.class, "AbstractMetamodel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractMetamodel_Packages(), this.getPackage(), null, "packages", null, 0, -1, AbstractMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractMetamodel_Uri(), this.getString(), "uri", null, 0, 1, AbstractMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractMetamodel_ReferencedMetamodels(), this.getFilteredMetamodelReference(), null, "referencedMetamodels", null, 0, -1, AbstractMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelElementTypeDefinitionContainerEClass, ModelElementTypeDefinitionContainer.class, "ModelElementTypeDefinitionContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelElementTypeDefinitionContainer_OwnedTypeDefinition(), this.getModelElementTypeDefinition(), null, "ownedTypeDefinition", null, 0, -1, ModelElementTypeDefinitionContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(requireEClass, Require.class, "Require", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRequire_Uri(), this.getString(), "uri", null, 0, 1, Require.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(genericTypeDefinitionEClass, GenericTypeDefinition.class, "GenericTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGenericTypeDefinition_TypeParameter(), this.getTypeVariable(), null, "typeParameter", null, 0, -1, GenericTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2809,9 +2757,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class, "ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(resolvedMetamodelEClass, ResolvedMetamodel.class, "ResolvedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getResolvedMetamodel_OwnedBindings(), this.getMetamodelBinding(), null, "ownedBindings", null, 0, -1, ResolvedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getResolvedMetamodel_OwnedMetamodels(), this.getResolvedMetamodel(), null, "ownedMetamodels", null, 0, -1, ResolvedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(metamodelEClass, Metamodel.class, "Metamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetamodel_OwnedBindings(), this.getMetamodelBinding(), null, "ownedBindings", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metamodelVariableEClass, MetamodelVariable.class, "MetamodelVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetamodelVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_MetamodelVariable(), "virtualType", null, 0, -1, MetamodelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2858,7 +2805,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(unresolvedTypeVariableEClass, UnresolvedTypeVariable.class, "UnresolvedTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(metamodelBindingEClass, MetamodelBinding.class, "MetamodelBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMetamodelBinding_BoundMetamodel(), this.getResolvedMetamodel(), null, "boundMetamodel", null, 1, 1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetamodelBinding_BoundMetamodel(), this.getMetamodel(), null, "boundMetamodel", null, 1, 1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetamodelBinding_OwnedClassDefinitionBindings(), this.getClassDefinitionBinding(), null, "ownedClassDefinitionBindings", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetamodelBinding_UsedAdaptationOperators(), this.getUseAdaptationOperator(), null, "usedAdaptationOperators", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetamodelBinding_OwnedEnumerationBindings(), this.getEnumerationBinding(), null, "ownedEnumerationBindings", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2905,15 +2852,14 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getOperationAdaptationOperator_Target(), this.getOperation(), null, "target", null, 1, 1, OperationAdaptationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unresolvedMetamodelEClass, UnresolvedMetamodel.class, "UnresolvedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnresolvedMetamodel_OwnedModelingUnits(), this.getMetamodel(), null, "ownedModelingUnits", null, 0, -1, UnresolvedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelElementTypeDefinitionEClass, ModelElementTypeDefinition.class, "ModelElementTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelType_TypeDefinition(), this.getResolvedMetamodel(), null, "typeDefinition", null, 1, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelType_TypeDefinition(), this.getMetamodel(), null, "typeDefinition", null, 1, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelingUnit_OwnedMetamodels(), this.getMetamodel(), null, "ownedMetamodels", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(filteredMetamodelReferenceEClass, FilteredMetamodelReference.class, "FilteredMetamodelReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFilteredMetamodelReference_Metamodel(), this.getAbstractMetamodel(), null, "metamodel", null, 1, 1, FilteredMetamodelReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

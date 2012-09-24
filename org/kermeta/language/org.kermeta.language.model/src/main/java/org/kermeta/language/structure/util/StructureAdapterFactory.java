@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationOperator;
@@ -21,6 +22,7 @@ import org.kermeta.language.structure.DataType;
 import org.kermeta.language.structure.Enumeration;
 import org.kermeta.language.structure.EnumerationBinding;
 import org.kermeta.language.structure.EnumerationLiteral;
+import org.kermeta.language.structure.FilteredMetamodelReference;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
@@ -31,7 +33,6 @@ import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
@@ -45,8 +46,6 @@ import org.kermeta.language.structure.ProductType;
 import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.PropertyAdaptationOperator;
 import org.kermeta.language.structure.PropertyBinding;
-import org.kermeta.language.structure.Require;
-import org.kermeta.language.structure.ResolvedMetamodel;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.Type;
@@ -209,16 +208,12 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createClassDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseMetamodel(Metamodel object) {
-				return createMetamodelAdapter();
+			public Adapter caseAbstractMetamodel(AbstractMetamodel object) {
+				return createAbstractMetamodelAdapter();
 			}
 			@Override
 			public Adapter caseModelElementTypeDefinitionContainer(ModelElementTypeDefinitionContainer object) {
 				return createModelElementTypeDefinitionContainerAdapter();
-			}
-			@Override
-			public Adapter caseRequire(Require object) {
-				return createRequireAdapter();
 			}
 			@Override
 			public Adapter caseGenericTypeDefinition(GenericTypeDefinition object) {
@@ -237,8 +232,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createObjectTypeVariableAdapter();
 			}
 			@Override
-			public Adapter caseResolvedMetamodel(ResolvedMetamodel object) {
-				return createResolvedMetamodelAdapter();
+			public Adapter caseMetamodel(Metamodel object) {
+				return createMetamodelAdapter();
 			}
 			@Override
 			public Adapter caseMetamodelVariable(MetamodelVariable object) {
@@ -353,8 +348,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createModelTypeAdapter();
 			}
 			@Override
-			public Adapter caseModelingUnit(ModelingUnit object) {
-				return createModelingUnitAdapter();
+			public Adapter caseFilteredMetamodelReference(FilteredMetamodelReference object) {
+				return createFilteredMetamodelReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -671,16 +666,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelingUnit <em>Modeling Unit</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.AbstractMetamodel <em>Abstract Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ModelingUnit
+	 * @see org.kermeta.language.structure.AbstractMetamodel
 	 * @generated
 	 */
-	public Adapter createModelingUnitAdapter() {
+	public Adapter createAbstractMetamodelAdapter() {
 		return null;
 	}
 
@@ -695,20 +690,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelElementTypeDefinitionContainerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Require <em>Require</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.Require
-	 * @generated
-	 */
-	public Adapter createRequireAdapter() {
 		return null;
 	}
 
@@ -769,20 +750,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ResolvedMetamodel <em>Resolved Metamodel</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.ResolvedMetamodel
-	 * @generated
-	 */
-	public Adapter createResolvedMetamodelAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.Metamodel <em>Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -821,6 +788,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.FilteredMetamodelReference <em>Filtered Metamodel Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.FilteredMetamodelReference
+	 * @generated
+	 */
+	public Adapter createFilteredMetamodelReferenceAdapter() {
 		return null;
 	}
 

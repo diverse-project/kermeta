@@ -23,28 +23,46 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.FilteredMetamodelReference;
-import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.NamedElement;
-import org.kermeta.language.structure.MetamodelBinding;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Metamodel</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Metamodel</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.MetamodelImpl#getPackages <em>Packages</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.MetamodelImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.MetamodelImpl#getReferencedMetamodels <em>Referenced Metamodels</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.MetamodelImpl#getOwnedBindings <em>Owned Bindings</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.AbstractMetamodelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.AbstractMetamodelImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.AbstractMetamodelImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.AbstractMetamodelImpl#getReferencedMetamodels <em>Referenced Metamodels</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
+public abstract class AbstractMetamodelImpl extends KermetaModelElementImpl implements AbstractMetamodel {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -86,21 +104,11 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	protected EList<FilteredMetamodelReference> referencedMetamodels;
 
 	/**
-	 * The cached value of the '{@link #getOwnedBindings() <em>Owned Bindings</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedBindings()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<MetamodelBinding> ownedBindings;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MetamodelImpl() {
+	protected AbstractMetamodelImpl() {
 		super();
 	}
 
@@ -111,7 +119,28 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.METAMODEL;
+		return StructurePackage.Literals.ABSTRACT_METAMODEL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.ABSTRACT_METAMODEL__NAME, oldName, name));
 	}
 
 	/**
@@ -121,7 +150,7 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	 */
 	public EList<org.kermeta.language.structure.Package> getPackages() {
 		if (packages == null) {
-			packages = new EObjectContainmentEList<org.kermeta.language.structure.Package>(org.kermeta.language.structure.Package.class, this, StructurePackage.METAMODEL__PACKAGES);
+			packages = new EObjectContainmentEList<org.kermeta.language.structure.Package>(org.kermeta.language.structure.Package.class, this, StructurePackage.ABSTRACT_METAMODEL__PACKAGES);
 		}
 		return packages;
 	}
@@ -144,7 +173,7 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 		String oldUri = uri;
 		uri = newUri;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.METAMODEL__URI, oldUri, uri));
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.ABSTRACT_METAMODEL__URI, oldUri, uri));
 	}
 
 	/**
@@ -154,21 +183,9 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	 */
 	public EList<FilteredMetamodelReference> getReferencedMetamodels() {
 		if (referencedMetamodels == null) {
-			referencedMetamodels = new EObjectContainmentEList<FilteredMetamodelReference>(FilteredMetamodelReference.class, this, StructurePackage.METAMODEL__REFERENCED_METAMODELS);
+			referencedMetamodels = new EObjectContainmentEList<FilteredMetamodelReference>(FilteredMetamodelReference.class, this, StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS);
 		}
 		return referencedMetamodels;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<MetamodelBinding> getOwnedBindings() {
-		if (ownedBindings == null) {
-			ownedBindings = new EObjectContainmentEList<MetamodelBinding>(MetamodelBinding.class, this, StructurePackage.METAMODEL__OWNED_BINDINGS);
-		}
-		return ownedBindings;
 	}
 
 	/**
@@ -179,12 +196,10 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL__PACKAGES:
+			case StructurePackage.ABSTRACT_METAMODEL__PACKAGES:
 				return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
-			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
+			case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS:
 				return ((InternalEList<?>)getReferencedMetamodels()).basicRemove(otherEnd, msgs);
-			case StructurePackage.METAMODEL__OWNED_BINDINGS:
-				return ((InternalEList<?>)getOwnedBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -197,14 +212,14 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL__PACKAGES:
+			case StructurePackage.ABSTRACT_METAMODEL__NAME:
+				return getName();
+			case StructurePackage.ABSTRACT_METAMODEL__PACKAGES:
 				return getPackages();
-			case StructurePackage.METAMODEL__URI:
+			case StructurePackage.ABSTRACT_METAMODEL__URI:
 				return getUri();
-			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
+			case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS:
 				return getReferencedMetamodels();
-			case StructurePackage.METAMODEL__OWNED_BINDINGS:
-				return getOwnedBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -218,20 +233,19 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL__PACKAGES:
+			case StructurePackage.ABSTRACT_METAMODEL__NAME:
+				setName((String)newValue);
+				return;
+			case StructurePackage.ABSTRACT_METAMODEL__PACKAGES:
 				getPackages().clear();
 				getPackages().addAll((Collection<? extends org.kermeta.language.structure.Package>)newValue);
 				return;
-			case StructurePackage.METAMODEL__URI:
+			case StructurePackage.ABSTRACT_METAMODEL__URI:
 				setUri((String)newValue);
 				return;
-			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
+			case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS:
 				getReferencedMetamodels().clear();
 				getReferencedMetamodels().addAll((Collection<? extends FilteredMetamodelReference>)newValue);
-				return;
-			case StructurePackage.METAMODEL__OWNED_BINDINGS:
-				getOwnedBindings().clear();
-				getOwnedBindings().addAll((Collection<? extends MetamodelBinding>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -245,17 +259,17 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL__PACKAGES:
+			case StructurePackage.ABSTRACT_METAMODEL__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case StructurePackage.ABSTRACT_METAMODEL__PACKAGES:
 				getPackages().clear();
 				return;
-			case StructurePackage.METAMODEL__URI:
+			case StructurePackage.ABSTRACT_METAMODEL__URI:
 				setUri(URI_EDEFAULT);
 				return;
-			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
+			case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS:
 				getReferencedMetamodels().clear();
-				return;
-			case StructurePackage.METAMODEL__OWNED_BINDINGS:
-				getOwnedBindings().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -269,14 +283,14 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL__PACKAGES:
+			case StructurePackage.ABSTRACT_METAMODEL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StructurePackage.ABSTRACT_METAMODEL__PACKAGES:
 				return packages != null && !packages.isEmpty();
-			case StructurePackage.METAMODEL__URI:
+			case StructurePackage.ABSTRACT_METAMODEL__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
+			case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS:
 				return referencedMetamodels != null && !referencedMetamodels.isEmpty();
-			case StructurePackage.METAMODEL__OWNED_BINDINGS:
-				return ownedBindings != null && !ownedBindings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -288,11 +302,9 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == AbstractMetamodel.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case StructurePackage.METAMODEL__PACKAGES: return StructurePackage.ABSTRACT_METAMODEL__PACKAGES;
-				case StructurePackage.METAMODEL__URI: return StructurePackage.ABSTRACT_METAMODEL__URI;
-				case StructurePackage.METAMODEL__REFERENCED_METAMODELS: return StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS;
+				case StructurePackage.ABSTRACT_METAMODEL__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -306,11 +318,9 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == AbstractMetamodel.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case StructurePackage.ABSTRACT_METAMODEL__PACKAGES: return StructurePackage.METAMODEL__PACKAGES;
-				case StructurePackage.ABSTRACT_METAMODEL__URI: return StructurePackage.METAMODEL__URI;
-				case StructurePackage.ABSTRACT_METAMODEL__REFERENCED_METAMODELS: return StructurePackage.METAMODEL__REFERENCED_METAMODELS;
+				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.ABSTRACT_METAMODEL__NAME;
 				default: return -1;
 			}
 		}
@@ -327,10 +337,12 @@ public class MetamodelImpl extends TypeDefinitionImpl implements Metamodel {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (uri: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", uri: ");
 		result.append(uri);
 		result.append(')');
 		return result.toString();
 	}
 
-} //MetamodelImpl
+} //AbstractMetamodelImpl
