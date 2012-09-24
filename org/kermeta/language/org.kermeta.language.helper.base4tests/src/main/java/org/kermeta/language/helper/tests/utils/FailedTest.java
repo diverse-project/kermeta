@@ -6,7 +6,7 @@
 * Authors : 
 *      Didier Vojtisek <didier.vojtisek@inria.fr>
 */
-package org.kermeta.language.helper.base4tests.utils;
+package org.kermeta.language.helper.tests.utils;
 
 import junit.framework.TestCase;
 

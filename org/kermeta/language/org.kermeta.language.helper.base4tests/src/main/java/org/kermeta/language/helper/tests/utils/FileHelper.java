@@ -7,7 +7,7 @@
 * Authors :
 *           Marie Gouyette <marie.gouyette@inria.fr>
 */
-package org.kermeta.language.helper.base4tests.utils;
+package org.kermeta.language.helper.tests.utils;
 
 
 

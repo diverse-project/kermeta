@@ -7,7 +7,7 @@
  * Creation date : Jan 30, 2008
  * Authors       : Cyril Faucher <cfaucher@irisa.fr>
  */
-package org.kermeta.language.helper.base4tests.utils;
+package org.kermeta.language.helper.tests.utils;
 
 
 import java.io.IOException;

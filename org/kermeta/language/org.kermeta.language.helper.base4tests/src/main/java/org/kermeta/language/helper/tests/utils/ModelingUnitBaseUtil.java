@@ -5,7 +5,7 @@
  * Authors  : 
  *            Didier Vojtisek <didier.vojtisek@inria.fr>
  */
-package org.kermeta.language.helper.base4tests.utils;
+package org.kermeta.language.helper.tests.utils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,12 +18,8 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.util.ModelingUnit;
-import org.kermeta.utils.helpers.FileHelpers;
-import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
-import scala.collection.Iterator;
 
 public class ModelingUnitBaseUtil {
 
