@@ -20,9 +20,15 @@ import org.kermeta.language.structure.AbstractMetamodel;
  */
 public class ModelingUnit {
 	
-	public List<AbstractMetamodel> metamodels; 
+	protected List<AbstractMetamodel> metamodels = null; 
 	
-	ModelingUnit(List<AbstractMetamodel> metamodels){
+	public List<AbstractMetamodel> getMetamodels() {
+		if(metamodels == null) metamodels = new ArrayList<AbstractMetamodel>();
+		return metamodels;
+	}
+
+
+	public ModelingUnit(List<AbstractMetamodel> metamodels){
 		metamodels = new ArrayList<AbstractMetamodel>();
 		this.metamodels.addAll(metamodels);
 	}
