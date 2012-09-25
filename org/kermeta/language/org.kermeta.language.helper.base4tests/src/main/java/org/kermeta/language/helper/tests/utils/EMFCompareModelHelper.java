@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.metamodel.AttributeChange;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
@@ -27,14 +26,17 @@ import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.kermeta.language.structure.Tag;
+import org.kermeta.language.util.ModelingUnit;
 
-
+/**
+ * Helper class for accessing the comparison service of EMF
+ *
+ */
 public class EMFCompareModelHelper {
 	
 	/**
@@ -57,6 +59,19 @@ public class EMFCompareModelHelper {
 	 */
 	private static DiffModel getDiffModel(EObject model1, EObject model2) {
 		return DiffService.doDiff(getMatchModel(model1, model2));		
+	}
+	
+	/**
+	 * 
+	 * @param model1
+	 * @param model2
+	 * @return
+	 */
+	private static DiffModel getDiffModel(Resource modelResource1, Resource modelResource2) {
+		
+		
+		
+		return DiffService.doDiff(getMatchModel(modelResource1, modelResource2));		
 	}
 	
 	/**
@@ -110,6 +125,22 @@ public class EMFCompareModelHelper {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param model1
+	 * @param model2
+	 * @return
+	 */
+	private static MatchModel getMatchModel(Resource modelResource1, Resource modelResource2) {
+		
+		try {
+			// Creates the match then the diff model for those two models
+			return MatchService.doResourceMatch(modelResource1, modelResource2, null);
+		} catch (InterruptedException e) {
+			return null;
+		}
+	}
+	
 	
 	/**
 	 * 
@@ -130,35 +161,57 @@ public class EMFCompareModelHelper {
 		}
 		return true;
 	}
-	
-	public static boolean isSimilarAndSaveDiff(EObject model1, EObject model2, String diffModelPath) {
-		DiffModel diffModel = getDiffModel(model1, model2);
+	public static boolean isSimilarAndSaveDiff(ModelingUnit mu1, ModelingUnit mu2, String diffModelPath) {
+		URI uri = URI.createURI(diffModelPath);
+        uri = new ExtensibleURIConverterImpl().normalize(uri);
+        String uriAsString = uri.toString();//.replace("file:", "");
+        System.out.println("Saving diff model in "+uriAsString);
+        registerEMFextensionToFactoryMap(uriAsString);
+        registerEMFextensionToFactoryMap(uriAsString+".model1.xmi");
+        
+        ResourceSet rs = new ResourceSetImpl();
+        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
+        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("diff",new XMIResourceFactoryImpl());
+        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
+        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
+        final Map<String, String> options = new EMFCompareMap<String, String>();
+		options.put(XMLResource.OPTION_ENCODING, System.getProperty("file.encoding"));
+		Resource modelResource1 = rs.createResource(URI.createURI(uriAsString+".model1.xmi"));
+		modelResource1.getContents().addAll(mu1.getMetamodels());
+        //r.save(options);
+		Resource modelResource2 = rs.createResource(URI.createURI(uriAsString+".model2.xmi"));
+		modelResource2.getContents().addAll(mu2.getMetamodels());
+        //r.save(options);
+		DiffModel diffModel = getDiffModel(modelResource1, modelResource2);
+		if(isReallyDifferent(diffModel)){
 			
-		//Cédric Bouhours modification.
-		//Last :
-		//if(((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges()> 0) {
-		//New :
-		boolean isReallyDifferent = false;
-		if(diffModel.getDifferences().size() > 0) {
-			for (DiffElement elem : diffModel.getDifferences()) {
-				boolean isDifferent = true;
-				if (elem instanceof UpdateAttribute){
-					UpdateAttribute ac = (UpdateAttribute) elem;
-					if( ac.getAttribute().getName().equals("value") && ac.getLeftElement() instanceof Tag){
-						Tag t = (Tag)ac.getLeftElement();
-						if (t.getName().equals("traceability_text_reference")){
-							System.out.println("\t\tIgnoring change Tag.value UpdateAttribute : "+elem.toString());
-							isDifferent = false;
-						}
-					}
-				}
-				if(isDifferent){
-					System.out.println("\t\tDifference detected : "+elem.toString());
-					isReallyDifferent = true;
-				}
-			}
+			return false;
 		}
-		if(isReallyDifferent){
+		else return true;
+	}
+	public static boolean isSimilarAndSaveDiff(Resource modelResource1, Resource modelResource2, String diffModelPath) {
+		DiffModel diffModel = getDiffModel(modelResource1, modelResource2);
+		if(isReallyDifferent(diffModel)){
+			URI uri = URI.createURI(diffModelPath);
+	        uri = new ExtensibleURIConverterImpl().normalize(uri);
+	        ResourceSet rs = new ResourceSetImpl();
+	        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
+	        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("diff",new XMIResourceFactoryImpl());
+	        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
+	        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
+	        final Map<String, String> options = new EMFCompareMap<String, String>();
+			options.put(XMLResource.OPTION_ENCODING, System.getProperty("file.encoding"));
+			Resource r = rs.createResource(uri);
+			r.getContents().add(diffModel);
+		 // Bug : Save fails DVK I don't know exactly why, so I disabled it
+	     //   r.save(options);
+			return false;
+		}
+		else return true;
+	}
+	public static boolean isSimilarAndSaveDiff(EObject model1, EObject model2, String diffModelPath) {
+		DiffModel diffModel = getDiffModel(model1, model2);	
+		if(isReallyDifferent(diffModel)){
 			try {
 				URI uri = URI.createURI(diffModelPath);
 		        uri = new ExtensibleURIConverterImpl().normalize(uri);
@@ -194,7 +247,34 @@ public class EMFCompareModelHelper {
 			}
 			return false;
 		}
-		return true;
+		else return true;
+	}
+	public static boolean isReallyDifferent(DiffModel diffModel){
+		//Cédric Bouhours modification.
+		//Last :
+		//if(((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges()> 0) {
+		//New :
+		boolean isReallyDifferent = false;
+		if(diffModel.getDifferences().size() > 0) {
+			for (DiffElement elem : diffModel.getDifferences()) {
+				boolean isDifferent = true;
+				if (elem instanceof UpdateAttribute){
+					UpdateAttribute ac = (UpdateAttribute) elem;
+					if( ac.getAttribute().getName().equals("value") && ac.getLeftElement() instanceof Tag){
+						Tag t = (Tag)ac.getLeftElement();
+						if (t.getName().equals("traceability_text_reference")){
+							System.out.println("\t\tIgnoring change Tag.value UpdateAttribute : "+elem.toString());
+							isDifferent = false;
+						}
+					}
+				}
+				if(isDifferent){
+					System.out.println("\t\tDifference detected : "+elem.toString());
+					isReallyDifferent = true;
+				}
+			}
+		}
+		return isReallyDifferent;
 	}
 	
 	
