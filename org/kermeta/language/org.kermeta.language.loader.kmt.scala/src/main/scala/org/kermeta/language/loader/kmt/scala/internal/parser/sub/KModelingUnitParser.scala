@@ -6,19 +6,35 @@
  * Creation date : 2010
  * Authors : 
  * 		Francois Fouquet <ffouquet@irisa.fr>
+ * 		Clement Guy <clement.guy@irisa.fr>
+ * 		Didier Vojtisek <didier.vojtisek@inria.fr>
  */
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.util.ModelingUnit
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
-import scala.collection.JavaConversions._
-import scala.util.parsing.input.OffsetPosition
-import scala.util.parsing.input.Positional
 import java.util.ArrayList
+
+import scala.collection.JavaConversions.asScalaBuffer
+import scala.collection.JavaConversions.asScalaIterator
+import scala.util.parsing.input.Positional
+
+import org.kermeta.language.behavior.Expression
+import org.kermeta.language.behavior.UnresolvedCall
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KAbstractParser
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KAliasParser
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KTagParser
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KUsingParser
+import org.kermeta.language.structure.ClassDefinition
+import org.kermeta.language.structure.Enumeration
+import org.kermeta.language.structure.Metamodel
+import org.kermeta.language.structure.Package
+import org.kermeta.language.structure.PrimitiveType
+import org.kermeta.language.structure.StructureFactory
+import org.kermeta.language.structure.Tag
+import org.kermeta.language.structure.UnresolvedMetamodel
+import org.kermeta.language.structure.UnresolvedType
+import org.kermeta.language.structure.Using
+import org.kermeta.language.util.ModelingUnit
 
 /**
  * Sub parser dedicated to parse ModelingUnit in KMT textual syntax
@@ -36,7 +52,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   /* Root of a kmt file */
   def program =  opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ {
     case header ~ unitContent =>
-      var newModelingUnit = new ModelingUnit(new ArrayList());
+      var newModelingUnit = new ModelingUnit();
       var usings: List[Using] = List()
 
       var rootMetamodel: Option[UnresolvedMetamodel] = None
