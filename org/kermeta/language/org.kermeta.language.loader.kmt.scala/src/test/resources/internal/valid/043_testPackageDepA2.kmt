@@ -1,6 +1,6 @@
 package testPackDep;
 
-require kermeta
+
 require "testPackageDepB2.kmt"
 
 require "testPackageDepC2.kmt"

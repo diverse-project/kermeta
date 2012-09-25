@@ -1,6 +1,6 @@
 package testExpression;
 
-require kermeta
+
 
 class String {}
 class Integer {}

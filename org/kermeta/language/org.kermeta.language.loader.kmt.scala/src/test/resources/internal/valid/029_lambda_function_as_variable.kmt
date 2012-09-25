@@ -10,7 +10,7 @@
 package root_package;
 
 
-require kermeta
+
 
 using kermeta::standard
 using kermeta::exceptions

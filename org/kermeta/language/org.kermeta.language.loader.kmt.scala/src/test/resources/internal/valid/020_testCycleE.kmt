@@ -1,6 +1,6 @@
 package testCycle;
 
-require kermeta
+
 require "testCycleC.kmt"
 require "testCycleD.kmt"
 

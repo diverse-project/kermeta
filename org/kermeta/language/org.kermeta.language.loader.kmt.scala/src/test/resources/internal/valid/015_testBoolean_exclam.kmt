@@ -1,6 +1,6 @@
 package testConditional;
 
-require kermeta
+
 
 class String {}
 class Integer {}

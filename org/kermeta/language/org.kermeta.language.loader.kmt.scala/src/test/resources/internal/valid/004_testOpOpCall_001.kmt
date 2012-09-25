@@ -1,6 +1,5 @@
 package testOpOpCall;
 
-require kermeta
 // Call of an operation from another class inside an operation
 class Test_opopcall {
 

@@ -1,6 +1,5 @@
 package testExternPackage2;
 
-require "kermeta"
 
 using kermeta::standard
 

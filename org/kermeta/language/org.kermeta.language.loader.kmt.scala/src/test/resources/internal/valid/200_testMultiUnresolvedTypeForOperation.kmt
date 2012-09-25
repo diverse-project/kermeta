@@ -1,6 +1,6 @@
 package testArithm;
 
-require kermeta
+
 
 using kermeta::standard
 

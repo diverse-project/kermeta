@@ -12,7 +12,6 @@ package test;
 
 
 
-require kermeta
 
 using kermeta::language::structure
 class Main

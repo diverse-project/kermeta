@@ -1,6 +1,6 @@
 package testSCommentEndOfFile;
 
-require kermeta
+
 
 class String {}
 class Integer {}

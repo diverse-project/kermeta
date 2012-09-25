@@ -50,12 +50,21 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   def enumDecl: Parser[Enumeration]
 
   /* Root of a kmt file */
-  def program = opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ {
-    case packPrefix ~ header ~ unitContent =>
+  def program = opt((annotation)+) ~ opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ {
+    case rootTag ~ packPrefix ~ header ~ unitContent =>
       var newModelingUnit = new ModelingUnit();
       var rootMetamodel = StructureFactory.eINSTANCE.createUnresolvedMetamodel()
       newModelingUnit.getMetamodels().add(rootMetamodel)
 
+      rootTag.foreach{elem => elem match {
+          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
+              case t : Tag => 	rootMetamodel.getKTag.add(t);
+              					rootMetamodel.getKOwnedTags.add(t)
+              case _ @ elem => println("TODO unknow elem in rootTag:" + elem)
+          } }
+          case _ @ d => println("TODO modeling unit roottag content: "+d)
+      } }
+      
       var lastPackageRoot: Option[Package] = None
       packPrefix match {
         case Some(d) => {
@@ -74,6 +83,13 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       }
 
       var usings: List[Using] = List()
+      header.foreach{elem => elem match {
+          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
+              case u : Using => usings = usings ++ List(u)
+              case _ @ elem => println("TODO unknow elem in header:" + elem)
+          } }
+          case _ @ d => println("TODO modeling unit header content: "+d)
+      } }
 
       //var rootMetamodel: Option[UnresolvedMetamodel] = None
       unitContent.foreach { elem =>

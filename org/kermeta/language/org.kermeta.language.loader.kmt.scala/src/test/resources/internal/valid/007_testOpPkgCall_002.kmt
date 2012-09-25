@@ -1,7 +1,5 @@
 package testOpPackage;
 
-require "kermeta"
-require "007_testInterPackageCall_001.kmt"
 
 using kermeta::standard
 

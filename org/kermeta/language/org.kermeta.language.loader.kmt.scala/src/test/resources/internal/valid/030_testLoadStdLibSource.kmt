@@ -1,6 +1,6 @@
 package testBlocksSequence;
 
-require kermeta
+
 
 class String {}
 class Integer {}

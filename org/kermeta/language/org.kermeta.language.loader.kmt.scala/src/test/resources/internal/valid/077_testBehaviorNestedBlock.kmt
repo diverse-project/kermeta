@@ -1,7 +1,7 @@
 
 package testBlock;
  
-require kermeta
+
 class Class1 {
 	
 	operation operation1() is do

@@ -1,6 +1,6 @@
 package testPackDep;
 
-require kermeta
+
 
 package toto {
 

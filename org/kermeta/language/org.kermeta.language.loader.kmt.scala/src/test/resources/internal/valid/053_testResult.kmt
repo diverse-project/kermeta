@@ -1,6 +1,6 @@
 package testResult;
 
-require kermeta
+
 
 class String {}
 class Integer {}

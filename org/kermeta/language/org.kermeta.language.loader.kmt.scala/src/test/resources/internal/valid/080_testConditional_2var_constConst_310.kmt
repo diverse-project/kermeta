@@ -12,7 +12,7 @@
 package p1;
 
 
-require kermeta
+
 class Conditional2VarConstConst
 {
 	operation main() : Void is do 

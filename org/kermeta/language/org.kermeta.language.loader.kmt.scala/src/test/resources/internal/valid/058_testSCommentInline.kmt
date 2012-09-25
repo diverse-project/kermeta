@@ -1,6 +1,6 @@
 package testSCommentInline;
 
-require kermeta
+
 
 class String {}
 class Integer {}

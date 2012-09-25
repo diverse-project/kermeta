@@ -12,7 +12,7 @@
 package p1;
 
 
-require kermeta
+
 using kermeta::standard
 
 

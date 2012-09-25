@@ -1,6 +1,6 @@
 package testClass;
 
-require kermeta
+
 
 class Class1 {
 

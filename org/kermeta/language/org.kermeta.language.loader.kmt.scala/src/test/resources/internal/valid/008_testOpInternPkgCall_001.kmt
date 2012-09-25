@@ -1,6 +1,5 @@
 package testOpInternPkgCall;
 
-require kermeta
 
 package test_package1 
 {

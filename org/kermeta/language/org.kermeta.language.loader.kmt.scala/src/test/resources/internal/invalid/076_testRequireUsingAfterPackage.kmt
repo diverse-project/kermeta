@@ -1,6 +1,5 @@
 package PackageDeclaration;
 
-require kermeta
 
 package foo{}
 

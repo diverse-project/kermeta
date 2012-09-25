@@ -1,6 +1,5 @@
 package testOpCallObject;
 
-require kermeta
 
 
 // Creation of an object

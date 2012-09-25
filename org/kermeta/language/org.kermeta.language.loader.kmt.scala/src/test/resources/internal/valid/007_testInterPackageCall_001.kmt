@@ -1,6 +1,5 @@
 package testInterPackage;
 
-require "007_testOpPkgCall_002.kmt"
 using testOpPackage
 
 //from this

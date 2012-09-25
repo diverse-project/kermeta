@@ -1,6 +1,6 @@
 package testBlock::blah;
 
-require kermeta
+
 
 class Class1 {
 	

@@ -1,6 +1,6 @@
 package testVariable;
 
-require kermeta
+
 
 class String {}
 class Integer {}

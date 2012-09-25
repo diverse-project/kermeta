@@ -1,6 +1,5 @@
 package testAssignment;
 
-require kermeta
 
 class Test_assignment {
 

@@ -1,6 +1,6 @@
 package testEnum;
 
-require kermeta
+
 
 enumeration Enum1 {
 	toto;

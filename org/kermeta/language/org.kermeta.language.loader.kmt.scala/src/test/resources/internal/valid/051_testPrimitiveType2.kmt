@@ -1,6 +1,6 @@
 package testPrimitiveTypeDouble;
 
-require kermeta
+
 
 using Coucou => PClass1
 

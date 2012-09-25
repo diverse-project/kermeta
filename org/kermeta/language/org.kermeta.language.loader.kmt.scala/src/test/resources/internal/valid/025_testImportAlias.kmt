@@ -1,6 +1,6 @@
 package testPrimitiveType;
 
-require kermeta
+
 require "014_testClass.kmt"
 
 using testClass::package1::Coucou  =>  PClass1

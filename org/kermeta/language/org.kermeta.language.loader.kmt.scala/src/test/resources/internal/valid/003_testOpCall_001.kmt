@@ -1,6 +1,5 @@
 package testOpCall;
 
-require kermeta
 
 class Test_opcall {
 

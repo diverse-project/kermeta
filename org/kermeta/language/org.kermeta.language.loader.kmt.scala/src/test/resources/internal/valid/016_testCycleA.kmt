@@ -1,6 +1,6 @@
 package testCycle;
 
-require kermeta
+
 require "testCycleE.kmt"
 
 class A {

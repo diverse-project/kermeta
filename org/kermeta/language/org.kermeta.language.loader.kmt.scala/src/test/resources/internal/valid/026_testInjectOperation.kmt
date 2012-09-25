@@ -1,6 +1,6 @@
 package testExtractOperation;
 
-require kermeta
+
 
 class String
 {

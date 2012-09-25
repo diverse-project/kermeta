@@ -1,7 +1,7 @@
 
 package testPackDep;
 
-require kermeta
+
 require "A_013_PackageDepD2.kmt"
 
 

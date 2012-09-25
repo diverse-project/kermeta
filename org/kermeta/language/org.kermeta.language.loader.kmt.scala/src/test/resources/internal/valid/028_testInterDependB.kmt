@@ -1,6 +1,6 @@
 package testInterDepend;
 
-require kermeta
+
 require "testInterDependA.kmt"
 
 class B {

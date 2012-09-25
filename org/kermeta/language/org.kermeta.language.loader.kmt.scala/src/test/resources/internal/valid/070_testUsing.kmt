@@ -1,4 +1,4 @@
-require kermeta
+
 
 using kermeta::standard::*                      // direct access to all definition of Package
 using kermeta::standard                         // retro compatibility supported, same as above   (should raise a deprecation warning)
