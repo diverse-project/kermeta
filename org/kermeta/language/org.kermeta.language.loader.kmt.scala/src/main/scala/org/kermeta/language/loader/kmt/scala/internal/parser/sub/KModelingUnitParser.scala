@@ -71,6 +71,7 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
                         // create a new default "unnamed"/no uri UnresolvedMetamodel
                         val x: UnresolvedMetamodel = StructureFactory.eINSTANCE.createUnresolvedMetamodel()
                         rootMetamodel = Some(x)
+                        newModelingUnit.getMetamodels().add(x)
                         x.getPackages.add(p)
                       }
                     }
