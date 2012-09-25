@@ -50,12 +50,32 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   def enumDecl: Parser[Enumeration]
 
   /* Root of a kmt file */
-  def program =  opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ {
-    case header ~ unitContent =>
+  def program = opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ {
+    case packPrefix ~ header ~ unitContent =>
       var newModelingUnit = new ModelingUnit();
+      var rootMetamodel = StructureFactory.eINSTANCE.createUnresolvedMetamodel()
+      newModelingUnit.getMetamodels().add(rootMetamodel)
+
+      var lastPackageRoot: Option[Package] = None
+      packPrefix match {
+        case Some(d) => {
+
+          d.name.split("::").foreach { topPackage =>
+            var newPackage = StructureFactory.eINSTANCE.createPackage()
+            newPackage.setName(topPackage)
+            lastPackageRoot match {
+              case Some(previous) => previous.getNestedPackage.add(newPackage)
+              case None => rootMetamodel.getPackages.add(newPackage)
+            }
+            lastPackageRoot = Some(newPackage)
+          }
+        }
+        case None =>
+      }
+
       var usings: List[Using] = List()
 
-      var rootMetamodel: Option[UnresolvedMetamodel] = None
+      //var rootMetamodel: Option[UnresolvedMetamodel] = None
       unitContent.foreach { elem =>
         elem match {
           case l: List[_] => l.asInstanceOf[List[_]].foreach { listElem =>
@@ -65,21 +85,26 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
                 lelem match {
 
                   case p: Package => {
-                    rootMetamodel match {
-                      case Some(x) => { x.getPackages.add(p) }
-                      case None => {
-                        // create a new default "unnamed"/no uri UnresolvedMetamodel
-                        val x: UnresolvedMetamodel = StructureFactory.eINSTANCE.createUnresolvedMetamodel()
-                        rootMetamodel = Some(x)
-                        newModelingUnit.getMetamodels().add(x)
-                        x.getPackages.add(p)
-                      }
+                    lastPackageRoot match {
+                      case Some(previous) => previous.getNestedPackage.add(p)
+                      case None => rootMetamodel.getPackages.add(p)
+
                     }
 
                   }
-                  case mu: Metamodel => {
-                    newModelingUnit.getMetamodels().add(mu)
+                  case cd: ClassDefinition => {
+                    lastPackageRoot match {
+                      case Some(previous) => previous.getOwnedTypeDefinition.add(cd)
+                      case None => //newp.getOwnedTypeDefinition.add(cd) //TODO ERROR ?
+                    }
                   }
+                  case enum: Enumeration => {
+                    lastPackageRoot match {
+                      case Some(previous) => previous.getOwnedTypeDefinition.add(enum)
+                      case None => //newp.getOwnedTypeDefinition.add(enum) //TODO ERROR ?
+                    }
+                  }
+
                   case _@ elem => println("TODO unknow elem in main content:" + elem)
                 }
               }
@@ -108,11 +133,14 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       newModelingUnit
   }
 
+  // prefix
+  def packageNamespaceDecl: Parser[NameSpacePrefix] = "package" ~> packageName <~ ";" ^^ { case p => NameSpacePrefix(p) }
+
   // header part of the ModelingUnit : using 
   def kermetaUnitHeader = (kpositioned(usingStmt)+)
 
   // main part of the ModelingUnit : package and modeling unit declaration including their annotations
-  def kermetaUnitContent = (modelingUnitTopLevelDecl+)
+  def kermetaUnitContent = (packageTopLevelDecl+)
 
   // reassign annotation to the following annotable element
   private def packageTopLevelDecl: Parser[List[Object]] = ((annotation | annotablePackageElement)+) ^^ {
@@ -133,48 +161,9 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
       listAnnotElem
   }
 
-  // reassign annotation to the following annotable element
-  private def modelingUnitTopLevelDecl: Parser[List[Object]] = ((annotation | annotableModelingUnitElement)+) ^^ {
-    case elems =>
-      var listAnnotElem: List[Object] = List()
-      var listTempTagToAdd: List[Tag] = List()
-      for (elem <- elems) {
-        elem match {
-          case t: Tag => listTempTagToAdd = listTempTagToAdd ++ List(t)
-          case o: Object => {
-            listTempTagToAdd.foreach { tag => o.getKTag.add(tag); o.getKOwnedTags.add(tag) }
-            listAnnotElem = listAnnotElem ++ List(o)
-            listTempTagToAdd = Nil
-          }
-        }
-      }
-      if (listTempTagToAdd != Nil) { listAnnotElem = listAnnotElem ++ listTempTagToAdd }
-      listAnnotElem
-  }
 
   def annotablePackageElement = kpositioned(subPackageDecl | classDecl | enumDecl | aliasStmt) //  | classDecl | enumDecl | dataTypeDecl )
 
-  //TODO rename
-  def annotableModelingUnitElement = kpositioned(subPackageDecl | metamodelDecl | classDecl | enumDecl | aliasStmt)
-  /*
-	 * MODELTYPE ADDITION
-	 * Parse a modeltype/metamodel declaration with its ClassDefinition and Enumeration declarations
-	 */
-  def metamodelDecl = "metamodel" ~ ident ~ "{" ~ (modelingUnitTopLevelDecl?) ~ "}" ^^ {
-    case _ ~ modelTypeName ~ _ ~ decls ~ _ =>
-      var newmt = StructureFactory.eINSTANCE.createUnresolvedMetamodel()
-      newmt.setName(modelTypeName)
-      decls match {
-        case Some(_@ subElem) => subElem.asInstanceOf[List[_]].foreach { elem =>
-          elem match {
-            case subPack: Package => newmt.getPackages.add(subPack);
-            case _ => println("unknow subelem")
-          }
-        }
-        case None => println("Warning : Empty Metamodel " + newmt.getName)
-      }
-      newmt
-  }
 
   def subPackageDecl = "package" ~ rep1sep(ident, "::") ~ "{" ~ (packageTopLevelDecl?) ~ "}" ^^ {
     case _ ~ packageName ~ _ ~ decls ~ _ =>

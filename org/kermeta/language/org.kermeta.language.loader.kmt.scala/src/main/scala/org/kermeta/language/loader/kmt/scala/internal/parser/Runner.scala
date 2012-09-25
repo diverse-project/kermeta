@@ -22,7 +22,6 @@ import org.kermeta.language.loader.kmt.scala.internal.printer.PrettyPrinter
 object Runner {
 
   def main(args: Array[String]): Unit = {
-
     val input = Source.fromFile(new java.io.File("sample.kmt")).getLines().reduceLeft[String](_ + '\n' + _)
 
 
@@ -50,9 +49,11 @@ object Runner {
       //case Some(_ @ res )=> println(res)
       //case Some(_ @ res) => LoadSaveKM.saveKmModelingUnit("parsed.km", res) //new Interpreter(res).run
       case Some(_@res) => {
+        println("saving target/parsed.km ...")
         LoadSaveKM.saveKmModelingUnit("target/parsed.km", res)
 
         val buffer = new StringBuffer()
+        println("pretty printing...")
         PrettyPrinter.print(res, buffer)
         println(buffer.toString)
 
