@@ -1,6 +1,6 @@
 package trace;
 
-require kermeta
+
 
 using kermeta::utils
 
