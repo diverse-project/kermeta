@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+<org_kermeta_language_structure:UnresolvedMetamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="Math">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Math" superType="//Math/Math/@containedType.0">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Math">
       <kOwnedTags name="traceability_text_reference" value="114;734"/>
-      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
-        <usings fromQName="kermeta::standard" toName=""/>
-        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
-        <usings fromQName="kermeta::standard::Float" toName="Real"/>
-      </containedType>
-      <ownedOperation name="sin" type="//Math/Math/sin/@containedType.0" isOrdered="true">
+      <ownedOperation name="sin" type="//@packages.0/Math/sin/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="131;248"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           <usings fromQName="kermeta::standard::Float" toName="Real"/>
         </containedType>
-        <ownedParameter name="a" type="//Math/Math/sin/@ownedParameter.0/@containedType.0" isOrdered="true">
+        <ownedParameter name="a" type="//@packages.0/Math/sin/@ownedParameter.0/@containedType.0" isOrdered="true">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
             <usings fromQName="kermeta::standard" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -42,14 +37,14 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="cos" type="//Math/Math/cos/@containedType.0" isOrdered="true">
+      <ownedOperation name="cos" type="//@packages.0/Math/cos/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="248;365"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           <usings fromQName="kermeta::standard::Float" toName="Real"/>
         </containedType>
-        <ownedParameter name="a" type="//Math/Math/cos/@ownedParameter.0/@containedType.0" isOrdered="true">
+        <ownedParameter name="a" type="//@packages.0/Math/cos/@ownedParameter.0/@containedType.0" isOrdered="true">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
             <usings fromQName="kermeta::standard" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -76,7 +71,7 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="pi" type="//Math/Math/pi/@containedType.0" isOrdered="true">
+      <ownedOperation name="pi" type="//@packages.0/Math/pi/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="365;479"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
           <usings fromQName="kermeta::standard" toName=""/>
@@ -100,14 +95,14 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="toDegrees" type="//Math/Math/toDegrees/@containedType.0" isOrdered="true">
+      <ownedOperation name="toDegrees" type="//@packages.0/Math/toDegrees/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="479;608"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           <usings fromQName="kermeta::standard::Float" toName="Real"/>
         </containedType>
-        <ownedParameter name="a" type="//Math/Math/toDegrees/@ownedParameter.0/@containedType.0" isOrdered="true">
+        <ownedParameter name="a" type="//@packages.0/Math/toDegrees/@ownedParameter.0/@containedType.0" isOrdered="true">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
             <usings fromQName="kermeta::standard" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -134,14 +129,14 @@
           </statement>
         </body>
       </ownedOperation>
-      <ownedOperation name="toRadians" type="//Math/Math/toRadians/@containedType.0" isOrdered="true">
+      <ownedOperation name="toRadians" type="//@packages.0/Math/toRadians/@containedType.0" isOrdered="true">
         <kOwnedTags name="traceability_text_reference" value="608;733"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
           <usings fromQName="kermeta::standard" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           <usings fromQName="kermeta::standard::Float" toName="Real"/>
         </containedType>
-        <ownedParameter name="a" type="//Math/Math/toRadians/@ownedParameter.0/@containedType.0" isOrdered="true">
+        <ownedParameter name="a" type="//@packages.0/Math/toRadians/@ownedParameter.0/@containedType.0" isOrdered="true">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Real">
             <usings fromQName="kermeta::standard" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
@@ -170,4 +165,4 @@
       </ownedOperation>
     </ownedTypeDefinition>
   </packages>
-</org_kermeta_language_structure:ModelingUnit>
+</org_kermeta_language_structure:UnresolvedMetamodel>
