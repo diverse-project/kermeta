@@ -27,7 +27,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.helper.tests.utils.FileHelper;
-import org.kermeta.language.helper.tests.utils.ModelingUnitUtil;
+import org.kermeta.language.helper.tests.utils.ModelingUnitBaseUtil;
 import org.kermeta.language.helper.tests.utils.EMFCompareModelHelper;
 
 
@@ -92,7 +92,7 @@ public class ScalaKMTParserTest extends TestCase {
 							// Create modeling unit for the expected result
 							URL fileURL = FileHelpers.FileToURL(f);
 							try {
-							ModelingUnit expectedResult = ModelingUnitUtil.loadModelingUnit(fileURL.getPath());
+							ModelingUnit expectedResult = ModelingUnitBaseUtil.loadModelingUnit(fileURL.getPath());
 							
 							// Compare this file to the current modeling unit load by the parser (mu)
 							assertTrue("parsed result model not equals to expected output", EMFCompareModelHelper.isSimilarAndSaveDiff(mu, expectedResult, f.getPath()+".diff"));
