@@ -3,9 +3,9 @@
 package testPackDep;
 
 
-require "A_008_PackageDepB.kmt"
+// require "A_008_PackageDepB.kmt"
 
-require "A_010_PackageDepC.kmt"
+// require "A_010_PackageDepC.kmt"
 
 
 

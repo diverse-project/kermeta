@@ -1,7 +1,7 @@
 package testInterDepend;
 
 
-require "testInterDependA.kmt"
+// require "testInterDependA.kmt"
 
 class B {
 

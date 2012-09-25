@@ -2,7 +2,7 @@
 package testPackDep;
 
 
-require "A_012_PackageDepD.kmt"
+// require "A_012_PackageDepD.kmt"
 
 
 

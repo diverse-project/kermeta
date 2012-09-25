@@ -1,7 +1,7 @@
 package testPackDep;
 
 
-require "testPackageDepD.kmt"
+// require "testPackageDepD.kmt"
 
 class B {
 

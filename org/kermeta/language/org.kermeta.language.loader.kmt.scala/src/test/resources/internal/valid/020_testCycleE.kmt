@@ -1,8 +1,6 @@
 package testCycle;
 
 
-require "testCycleC.kmt"
-require "testCycleD.kmt"
 
 class E {
 

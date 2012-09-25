@@ -1,9 +1,9 @@
 package testPackDep;
 
 
-require "testPackageDepB2.kmt"
+// require "testPackageDepB2.kmt"
 
-require "testPackageDepC2.kmt"
+// require "testPackageDepC2.kmt"
 
 class A {
 

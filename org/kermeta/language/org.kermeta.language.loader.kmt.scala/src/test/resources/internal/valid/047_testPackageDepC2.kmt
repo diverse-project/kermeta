@@ -1,7 +1,7 @@
 package testPackDep;
 
 
-require "testPackageDepD2.kmt"
+// require "testPackageDepD2.kmt"
 
 package toto {
 
