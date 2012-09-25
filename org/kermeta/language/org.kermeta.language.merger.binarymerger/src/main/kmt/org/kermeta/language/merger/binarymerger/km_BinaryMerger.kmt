@@ -45,15 +45,30 @@ class BinaryMerger
 		result := context.errors
 	end
 	
-	operation merge(primaryModelModelingUnit : ModelingUnit, aspectModelModelingUnit : ModelingUnit) : ModelingUnit is do
+	operation merge(primaryModelModelingUnit : Collection<AbstractMetamodel>, aspectModelModelingUnit : Collection<AbstractMetamodel>) : Collection<AbstractMetamodel> is do
 		//primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
 		
 		// primaryModelModelingUnit is now used as mergedModel
-		var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit		
-		aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
+		//var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit
+		var mergedModelModelingUnit : Collection<AbstractMetamodel> init OrderedSet<AbstractMetamodel>.new
+		
+		//aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
+		aspectModelModelingUnit.each{aspectMM|
+			mergedModelModelingUnit.each{mergedMM|
+				if (aspectMM.uri == mergedMM.uri) then
+					aspectMM.similarElementInMergedModel := mergedMM
+				end
+			}
+		}
+		
+		
 		context := org::kermeta::ecore::binarymerger::BinaryMergerContext.new
 		do 
-			aspectModelModelingUnit.binaryMerger_MoveToMergedModel(context)
+			aspectModelModelingUnit.each{aspectMM|
+				aspectMM.binaryMerger_MoveToMergedModel(context)
+				
+			}
+			
 			//stdio.writeln("Merging references of "+context.elementsNeedingReferenceMerge.size.toString+" objects")
 			context.elementsNeedingReferenceMerge.each{o |
 				do
@@ -61,7 +76,7 @@ class BinaryMerger
 				rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 					getErrors.add(mergeException)
 				end
-			}	
+			}
 			//mergedModelModelingUnit.fixReferences
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
@@ -90,13 +105,13 @@ class BinaryMerger
    		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/valid_001/primary/AB.km")
        	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Valid/valid_001/aspect/Aatt.km")
        	
-       	var pmModelingUnit : ModelingUnit 
-       	pmModelingUnit ?= primaryModelResource.one
+       	var pmModelingUnit : Set<AbstractMetamodel>
+       	pmModelingUnit ?= primaryModelResource.contents
        	
-       	var amModelingUnit : ModelingUnit 
-       	amModelingUnit ?= aspectModelResource.one
+       	var amModelingUnit : Set<AbstractMetamodel>
+       	amModelingUnit ?= aspectModelResource.contents
        	
-       	var mergedModelingUnit : ModelingUnit
+       	var mergedModelingUnit : Collection<AbstractMetamodel>
        	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
        	
        	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/test_001/km/001_ABatt.km",
@@ -114,13 +129,13 @@ class BinaryMerger
    		var primaryModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Invalid/invalid_001_merge_non_aspect_classes/primary/AB.km")
        	var aspectModelResource : Resource init repository.getResource("platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmBinaryMerger_Invalid/invalid_001_merge_non_aspect_classes/aspect/Aatt.km")
        	
-       	var pmModelingUnit : ModelingUnit 
-       	pmModelingUnit ?= primaryModelResource.one
+       	var pmModelingUnit : Set<AbstractMetamodel> 
+       	pmModelingUnit ?= primaryModelResource.contents
        	
-       	var amModelingUnit : ModelingUnit 
-       	amModelingUnit ?= aspectModelResource.one
+       	var amModelingUnit : Set<AbstractMetamodel> 
+       	amModelingUnit ?= aspectModelResource.contents
        	
-       	var mergedModelingUnit : ModelingUnit
+       	var mergedModelingUnit : Collection<AbstractMetamodel>
        	mergedModelingUnit := merge(pmModelingUnit, amModelingUnit)
        	
        	var mergedModelResource : Resource init repository.createResource("platform:/resource/org.kermeta.language.merger.binarymerger/target/test/output/invalid_001/km/001_ABatt.km",

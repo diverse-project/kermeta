@@ -1803,13 +1803,13 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement {
+			aspect class AbstractMetamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
-					var mergedModelElement : org::kermeta::language::structure::ModelingUnit
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelingUnit)
+					var mergedModelElement : org::kermeta::language::structure::AbstractMetamodel
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::AbstractMetamodel)
 					if (not mergedModelElement.isVoid) then
 						do
-							//stdio.writeln("Merging content of a ModelingUnit")
+							//stdio.writeln("Merging content of a AbstractMetamodel")
 							self.packages.each{aspect_packages | 
 								var equivalent_packages : org::kermeta::language::structure::Package
 								equivalent_packages := mergedModelElement.packages.detect{ merged_packages |
@@ -1826,19 +1826,19 @@ package kermeta {
 								end
 							}
 
-							self.requires.each{aspect_requires | 
-								var equivalent_requires : org::kermeta::language::structure::Require
-								equivalent_requires := mergedModelElement.requires.detect{ merged_requires |
-									aspect_requires.localMatch(merged_requires)
+							self.referencedMetamodels.each{aspect_referencedMetamodels | 
+								var equivalent_referencedMetamodels : org::kermeta::language::structure::FilteredMetamodelReference
+								equivalent_referencedMetamodels := mergedModelElement.referencedMetamodels.detect{ merged_referencedMetamodels |
+									aspect_referencedMetamodels.localMatch(merged_referencedMetamodels)
 								}
-								if (not equivalent_requires.isVoid) then
+								if (not equivalent_referencedMetamodels.isVoid) then
 									// mark them as similar
-									aspect_requires.similarElementInMergedModel := equivalent_requires
+									aspect_referencedMetamodels.similarElementInMergedModel := equivalent_referencedMetamodels
 								else
 									// move it in merged model
-									mergedModelElement.requires.add(aspect_requires)
+									mergedModelElement.referencedMetamodels.add(aspect_referencedMetamodels)
 									// mark moved element so its references could be fixed
-									context.movedElementsNeedingReferenceFix.add(aspect_requires.asType(Mergeable))
+									context.movedElementsNeedingReferenceFix.add(aspect_referencedMetamodels.asType(Mergeable))
 								end
 							}
 
@@ -1875,23 +1875,6 @@ package kermeta {
 								end
 							}
 
-						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-						   context.errors.add(mergeException)
-						end
-					end
-					super(context)
-
-					result := self
-				end
-			}
-
-			aspect class Require inherits org::kermeta::language::structure::KermetaModelElement {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
-					var mergedModelElement : org::kermeta::language::structure::Require
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Require)
-					if (not mergedModelElement.isVoid) then
-						do
-							//stdio.writeln("Merging content of a Require")
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2018,7 +2001,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Metamodel inherits org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::ModelingUnit {
+			aspect class Metamodel inherits org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::AbstractMetamodel {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinition is do
 					var mergedModelElement : org::kermeta::language::structure::Metamodel
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Metamodel)
@@ -2041,22 +2024,6 @@ package kermeta {
 								end
 							}
 
-							self.ownedMetamodels.each{aspect_ownedMetamodels | 
-								var equivalent_ownedMetamodels : org::kermeta::language::structure::Metamodel
-								equivalent_ownedMetamodels := mergedModelElement.ownedMetamodels.detect{ merged_ownedMetamodels |
-									aspect_ownedMetamodels.localMatch(merged_ownedMetamodels)
-								}
-								if (not equivalent_ownedMetamodels.isVoid) then
-									// mark them as similar
-									aspect_ownedMetamodels.similarElementInMergedModel := equivalent_ownedMetamodels
-								else
-									// move it in merged model
-									mergedModelElement.ownedMetamodels.add(aspect_ownedMetamodels)
-									// mark moved element so its references could be fixed
-									context.movedElementsNeedingReferenceFix.add(aspect_ownedMetamodels.asType(Mergeable))
-								end
-							}
-
 							self.packages.each{aspect_packages | 
 								var equivalent_packages : org::kermeta::language::structure::Package
 								equivalent_packages := mergedModelElement.packages.detect{ merged_packages |
@@ -2073,19 +2040,19 @@ package kermeta {
 								end
 							}
 
-							self.requires.each{aspect_requires | 
-								var equivalent_requires : org::kermeta::language::structure::Require
-								equivalent_requires := mergedModelElement.requires.detect{ merged_requires |
-									aspect_requires.localMatch(merged_requires)
+							self.referencedMetamodels.each{aspect_referencedMetamodels | 
+								var equivalent_referencedMetamodels : org::kermeta::language::structure::FilteredMetamodelReference
+								equivalent_referencedMetamodels := mergedModelElement.referencedMetamodels.detect{ merged_referencedMetamodels |
+									aspect_referencedMetamodels.localMatch(merged_referencedMetamodels)
 								}
-								if (not equivalent_requires.isVoid) then
+								if (not equivalent_referencedMetamodels.isVoid) then
 									// mark them as similar
-									aspect_requires.similarElementInMergedModel := equivalent_requires
+									aspect_referencedMetamodels.similarElementInMergedModel := equivalent_referencedMetamodels
 								else
 									// move it in merged model
-									mergedModelElement.requires.add(aspect_requires)
+									mergedModelElement.referencedMetamodels.add(aspect_referencedMetamodels)
 									// mark moved element so its references could be fixed
-									context.movedElementsNeedingReferenceFix.add(aspect_requires.asType(Mergeable))
+									context.movedElementsNeedingReferenceFix.add(aspect_referencedMetamodels.asType(Mergeable))
 								end
 							}
 
@@ -2716,29 +2683,13 @@ package kermeta {
 				end
 			}
 
-			aspect class UnresolvedMetamodel inherits org::kermeta::language::structure::ModelingUnit {
-				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ModelingUnit is do
+			aspect class UnresolvedMetamodel inherits org::kermeta::language::structure::AbstractMetamodel {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::AbstractMetamodel is do
 					var mergedModelElement : org::kermeta::language::structure::UnresolvedMetamodel
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedMetamodel)
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UnresolvedMetamodel")
-							self.ownedModelingUnits.each{aspect_ownedModelingUnits | 
-								var equivalent_ownedModelingUnits : org::kermeta::language::structure::ModelingUnit
-								equivalent_ownedModelingUnits := mergedModelElement.ownedModelingUnits.detect{ merged_ownedModelingUnits |
-									aspect_ownedModelingUnits.localMatch(merged_ownedModelingUnits)
-								}
-								if (not equivalent_ownedModelingUnits.isVoid) then
-									// mark them as similar
-									aspect_ownedModelingUnits.similarElementInMergedModel := equivalent_ownedModelingUnits
-								else
-									// move it in merged model
-									mergedModelElement.ownedModelingUnits.add(aspect_ownedModelingUnits)
-									// mark moved element so its references could be fixed
-									context.movedElementsNeedingReferenceFix.add(aspect_ownedModelingUnits.asType(Mergeable))
-								end
-							}
-
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2789,6 +2740,23 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelType")
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class FilteredMetamodelReference inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
+					var mergedModelElement : org::kermeta::language::structure::FilteredMetamodelReference
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::FilteredMetamodelReference)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a FilteredMetamodelReference")
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end

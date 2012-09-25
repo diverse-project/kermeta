@@ -172,13 +172,10 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class AbstractMetamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class ModelElementTypeDefinitionContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class Require inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class GenericTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -278,6 +275,9 @@ package kermeta {
 			}
 
 			aspect class ModelType inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class FilteredMetamodelReference inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 		}

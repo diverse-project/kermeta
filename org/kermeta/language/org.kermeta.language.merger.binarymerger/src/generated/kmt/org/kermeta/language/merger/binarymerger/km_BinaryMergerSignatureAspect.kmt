@@ -407,7 +407,6 @@ package kermeta {
 							result := result and self.~value == aspectElement.~value
 						end
 
-
 					else
 						result := false
 					end
@@ -697,7 +696,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.getterBody.isVoid) and (not aspectElement.getterBody.isVoid) then
 							result := result and self.getterBody == aspectElement.getterBody
 						end
@@ -1142,10 +1140,10 @@ package kermeta {
 			}
 
 
-			aspect class ModelingUnit {
+			aspect class AbstractMetamodel {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					// TODO deal with aspectElementObj not a strict instance of ModelingUnit
-					var aspectElement : org::kermeta::language::structure::ModelingUnit
+					// TODO deal with aspectElementObj not a strict instance of AbstractMetamodel
+					var aspectElement : org::kermeta::language::structure::AbstractMetamodel
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
@@ -1153,8 +1151,8 @@ package kermeta {
 						result := super( aspectElement)
 
 
-						if (not self.namespacePrefix.isVoid) and (not aspectElement.namespacePrefix.isVoid) then
-							result := result and self.namespacePrefix == aspectElement.namespacePrefix
+						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
+							result := result and self.uri == aspectElement.uri
 						end
 
 					else
@@ -1172,25 +1170,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class Require {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					// TODO deal with aspectElementObj not a strict instance of Require
-					var aspectElement : org::kermeta::language::structure::Require
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
-							result := result and self.uri == aspectElement.uri
-						end
 
 					else
 						result := false
@@ -1383,11 +1362,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
-						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
-							result := result and self.typeIdentifier == aspectElement.typeIdentifier
-						end
 
 
 					else
@@ -1728,7 +1702,7 @@ package kermeta {
 			}
 
 			aspect class UnresolvedMetamodel {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelingUnit is do
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractMetamodel is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedMetamodel
 					var aspectElement : org::kermeta::language::structure::UnresolvedMetamodel
 					aspectElement ?= aspectElementObj
@@ -1736,7 +1710,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -1763,6 +1736,21 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					// TODO deal with aspectElementObj not a strict instance of ModelType
 					var aspectElement : org::kermeta::language::structure::ModelType
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class FilteredMetamodelReference {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					// TODO deal with aspectElementObj not a strict instance of FilteredMetamodelReference
+					var aspectElement : org::kermeta::language::structure::FilteredMetamodelReference
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 

@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
-	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="src" path="target/generated-sources/kermeta" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="src" path="/org.kermeta.language.model"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/fr/irisa/triskell/kermeta/kermeta.model/1.4.0/kermeta.model-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar" sourcepath="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/cguy/.m2/repository/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/cguy/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.framework.scala/1.4.4-SNAPSHOT/language.framework.scala-1.4.4-SNAPSHOT.jar"/>
+  <classpathentry kind="src" path="/org.kermeta.language.merger.binarymerger.api"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.7-SNAPSHOT/utils.systemservices.api-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.tests/2.0.7-SNAPSHOT/language.helper.tests-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.base4tests/2.0.7-SNAPSHOT/language.helper.base4tests-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare/1.1.1.v201009150438/org.eclipse.emf.compare-1.1.1.v201009150438.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare.diff/1.1.1.v201009150438/org.eclipse.emf.compare.diff-1.1.1.v201009150438.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare.match/1.1.1.v201009150438/org.eclipse.emf.compare.match-1.1.1.v201009150438.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/workbench/3.7.1-v20120104-1859/workbench-3.7.1-v20120104-1859.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/3.7.0-v20110110/runtime-3.7.0-v20110110.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/3.7.2-v20120110-1415/osgi-3.7.2-v20120110-1415.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/common/3.6.0-v20110523/common-3.6.0-v20110523.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/jobs/3.5.101-v20120113-1953/jobs-3.5.101-v20120113-1953.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/registry/3.5.101-R37x_v20110810-1611/registry-3.5.101-R37x_v20110810-1611.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/preferences/3.4.2-v20120111-2020/preferences-3.4.2-v20120111-2020.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/contenttype/3.4.100-v20110423-0524/contenttype-3.4.100-v20110423-0524.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/app/1.3.100-v20110321/app-1.3.100-v20110321.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/help/3.5.100-v20110426/help-3.5.100-v20110426.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/expressions/3.4.300-v20110228/expressions-3.4.300-v20110228.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jface/3.7.0-v20110928-1505/jface-3.7.0-v20110928-1505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/swt/3.7.2-v3740f/swt-3.7.2-v3740f.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/commands/3.6.0-I20110111-0800/commands-3.6.0-I20110111-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jface/databinding/1.5.0-I20100907-0800/databinding-1.5.0-I20100907-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/databinding/observable/1.4.0-I20110222-0800/observable-1.4.0-I20110222-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/databinding/property/1.4.0-I20110222-0800/property-1.4.0-I20110222-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/databinding/1.4.0-I20110111-0800/databinding-1.4.0-I20110111-0800.jar"/>
+  <classpathentry kind="src" path="/org.kermeta.language.loader.kmt.scala"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala.api/2.0.7-SNAPSHOT/language.loader.kmt.scala.api-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.7-SNAPSHOT/utils.helpers-2.0.7-SNAPSHOT.jar"/>
 </classpath>

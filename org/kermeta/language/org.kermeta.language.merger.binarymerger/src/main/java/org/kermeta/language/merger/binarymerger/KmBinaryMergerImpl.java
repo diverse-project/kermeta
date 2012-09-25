@@ -13,7 +13,7 @@ package org.kermeta.language.merger.binarymerger;
 
 import org.kermeta.language.merger.BinaryMerger;
 import org.kermeta.language.merger.binarymerger.internal.KmBinaryMergerOperations;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 
 

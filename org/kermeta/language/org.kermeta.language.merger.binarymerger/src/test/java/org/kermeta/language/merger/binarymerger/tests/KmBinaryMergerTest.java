@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.helper.tests.utils.EMFCompareModelHelper;
 import org.kermeta.language.helper.tests.utils.ModelingUnitUtil;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 //import org.kermeta.language.api.tests.ModelingUnitUtil;

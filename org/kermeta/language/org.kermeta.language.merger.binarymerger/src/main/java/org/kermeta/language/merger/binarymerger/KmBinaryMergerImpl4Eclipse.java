@@ -14,11 +14,11 @@ package org.kermeta.language.merger.binarymerger;
 import org.kermeta.language.merger.BinaryMerger;
 import org.kermeta.language.merger.binarymerger.internal.Activator;
 import org.kermeta.language.merger.binarymerger.internal.KmBinaryMergerOperations;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 
 
-public class KmBinaryMergerImpl4Eclipse  implements org.kermeta.language.merger.binarymerger.api.KmBinaryMerger {
+public class KmBinaryMergerImpl4Eclipse implements org.kermeta.language.merger.binarymerger.api.KmBinaryMerger {
 	
 	KmBinaryMergerOperations operations = null;
 	
@@ -33,5 +33,5 @@ public class KmBinaryMergerImpl4Eclipse  implements org.kermeta.language.merger.
 	public ErrorProneResult<ModelingUnit> merge(ModelingUnit first_mu, ModelingUnit second_mu) {
 	
         return operations.merge(first_mu, second_mu);
-	}           
+	}         
 }

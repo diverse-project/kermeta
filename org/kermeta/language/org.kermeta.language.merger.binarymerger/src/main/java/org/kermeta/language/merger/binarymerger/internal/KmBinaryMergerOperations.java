@@ -13,6 +13,7 @@ package org.kermeta.language.merger.binarymerger.internal;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -23,7 +24,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.merger.BinaryMerger;
 import org.kermeta.language.merger.BinaryMergerAspect;
 import org.kermeta.ecore.binarymerger.BinaryMergerExceptionAspect;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
@@ -41,7 +43,7 @@ public class KmBinaryMergerOperations {
 		
         ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
 		try {
-			result.setResult((ModelingUnit) merger.merge(enforceAspect(first_mu), enforceAspect(second_mu)));
+			result.setResult((ModelingUnit) merger.merge(enforceAspect(first_mu.getMetamodels()), enforceAspect(second_mu.getMetamodels())));
 		
 	        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
 	        for (Object o : mergerAspect.getErrors()) {
@@ -63,8 +65,9 @@ public class KmBinaryMergerOperations {
         return result;
 	}
    
-    protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
-    	if(! (mu instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.ModelingUnitAspect)){
+    protected List<AbstractMetamodel> enforceAspect(List<AbstractMetamodel> mu) throws IOException{
+    	//TODO Rewrite completely
+    	/*if(! (mu instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.ModelingUnitAspect)){
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
 	    	Map<String, String> options = null;
@@ -91,9 +94,9 @@ public class KmBinaryMergerOperations {
 			// let's suppose the ModelingUnit is the first element in the root
 			return (ModelingUnit)resource.getContents().get(0);
     	}
-    	else{
+    	else{*/
     		return mu;
-    	}
+    	/*}*/
     }
 
 
