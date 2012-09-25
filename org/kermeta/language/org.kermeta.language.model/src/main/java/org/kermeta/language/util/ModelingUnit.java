@@ -22,15 +22,18 @@ public class ModelingUnit {
 	
 	protected List<AbstractMetamodel> metamodels = null; 
 	
-	public List<AbstractMetamodel> getMetamodels() {
-		if(metamodels == null) metamodels = new ArrayList<AbstractMetamodel>();
-		return metamodels;
+	public ModelingUnit(){
+		metamodels = new ArrayList<AbstractMetamodel>();
 	}
-
 
 	public ModelingUnit(List<AbstractMetamodel> metamodels){
 		metamodels = new ArrayList<AbstractMetamodel>();
 		this.metamodels.addAll(metamodels);
 	}
 	
+	public List<AbstractMetamodel> getMetamodels() {
+		if(metamodels == null) metamodels = new ArrayList<AbstractMetamodel>();
+		return metamodels;
+	}
+
 }
