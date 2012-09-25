@@ -1,6 +1,5 @@
 package ClassMM;
 
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 abstract class Classifier
 {
 	attribute name : ecore::EString
