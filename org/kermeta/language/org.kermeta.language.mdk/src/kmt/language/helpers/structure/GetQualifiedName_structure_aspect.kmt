@@ -19,7 +19,7 @@ aspect class NamedElement
 	operation getQualifiedName() : String is do
 		var buffer : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
 		if (not self.container().isVoid()) then
-			if self.container().isInstanceOf(NamedElement) and not self.container().isInstanceOf(ModelingUnit) then
+			if self.container().isInstanceOf(NamedElement) and not self.container().isInstanceOf(AbstractMetamodel) then
 				buffer.append(self.container().asType(NamedElement).getQualifiedName())
 				buffer.append("::")
 			end

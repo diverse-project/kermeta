@@ -306,15 +306,15 @@ package structure {
 		end
 	}
 	
-	aspect class ModelTypeVariable {
+	aspect class MetamodelVariable {
 		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
 			visitor.visitModelTypeVariable(self, ctxt)
 		end
 	}
 	
-	aspect class ModelingUnit {
-		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
-			visitor.visitModelingUnit(self, ctxt)
+	aspect class AbstractMetamodel {
+		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) from KermetaModelElement is do
+			visitor.visitAbstractMetamodel(self, ctxt)
 		end
 	}
 	
@@ -384,12 +384,6 @@ package structure {
 		end
 	}
 	
-	aspect class Require {
-		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
-			visitor.visitRequire(self, ctxt)
-		end
-	}
-	
 	//aspect class Resource {
 	//	method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
 	//		visitor.visitResource(self, ctxt)
@@ -432,15 +426,9 @@ package structure {
 		end
 	}
 	
-	aspect class TypeDefinitionContainer {
+	aspect class ModelElementTypeDefinitionContainer {
 		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
-			visitor.visitTypeDefinitionContainer(self, ctxt)
-		end
-	}
-	
-	aspect class TypeMapping {
-		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
-			visitor.visitTypeMapping(self, ctxt)
+			visitor.visitModelElementTypeDefinitionContainer(self, ctxt)
 		end
 	}
 	
@@ -462,9 +450,9 @@ package structure {
 		end
 	}
 	
-	aspect class Unresolved {
+	aspect class UnresolvedReference {
 		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
-			visitor.visitUnresolved(self, ctxt)
+			visitor.visitUnresolvedReference(self, ctxt)
 		end
 	}
 	

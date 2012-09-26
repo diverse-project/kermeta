@@ -23,7 +23,7 @@ package structure{
 		end
 	}
 
-	aspect class ModelingUnit{
+	aspect class AbstractMetamodel{
 		method prettyPrint() : String is do
 			result := ""
 			self.packages.each{ onePackage |

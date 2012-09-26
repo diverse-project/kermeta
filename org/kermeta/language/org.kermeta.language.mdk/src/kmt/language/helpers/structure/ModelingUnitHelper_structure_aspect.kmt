@@ -16,9 +16,9 @@ require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ec
 using kermeta::standard
 
 
-aspect class ModelingUnit {
+aspect class AbstractMetamodel {
 	/**
-	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName
+	 * Get a TypeDefinition contained in the current AbstractMetamodel by qualifiedName
 	 */
 	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
 		if canUseCachedStructuralTypeDefinitions.isVoid then
@@ -58,11 +58,16 @@ aspect class ModelingUnit {
 					}
 				end
 			end
+			if result.isVoid() then
+				self.referencedMetamodels.each{mm|
+					mm.metamodel.getTypeDefinitionByQualifiedName(qname)
+				}
+			end
 		end
 	end
 	
 	/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
-	reference cache : internal::ModelingUnitCache
+	reference cache : internal::MetamodelCache
 	
 	/** If this attribute is set to true, then the ModelingUnitCache can be used */
 	attribute canUseCachedStructuralTypeDefinitions : Boolean
@@ -73,7 +78,7 @@ aspect class ModelingUnit {
 	
 		if cache.isVoid then
 			// need to build the cache
-			cache := internal::ModelingUnitCache.new.initialize(self)
+			cache := internal::MetamodelCache.new.initialize(self)
 		end
 		var typename : String init qname.split("::").last
 		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
@@ -123,6 +128,11 @@ aspect class ModelingUnit {
 					end					
 				end
 			end
+		end
+		if result.isVoid() then
+			self.referencedMetamodels.each{mm|
+				mm.metamodel.getTypeDefinitionByNameAndUsings(qname, usings, optionalCurrentPackage)
+			}
 		end
 	end
 	
@@ -188,133 +198,15 @@ aspect class ModelingUnit {
 	end
 }
 
-	
-	
-aspect class Metamodel {
-	
-	method getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
-		result := super(qname)
-		
-		if result == void then
-			self.ownedMetamodels.each{mm|
-				result := mm.getTypeDefinitionByQualifiedName(qname)
-			}
-		end
-	end
-	
-	method getTypeDefinitionByNameAndUsings( qname : String, 
-												usings : Collection<Using>, 
-												optionalCurrentPackage : Package) : TypeDefinition is do
-		result := super(qname, usings, optionalCurrentPackage)
-		
-		if result == void then
-			var set_qname : Sequence<String> init qname.split("::")
-			
-			var innerMM : Metamodel init self.ownedMetamodels.detect{mm|
-				mm.name == set_qname.at(0)
-			}
-			if innerMM != void then
-				var next_qname : String init ""
-				set_qname.each{s|
-					if s != set_qname.at(0) then
-						next_qname := next_qname + s
-					end
-				}
-				innerMM.getTypeDefinitionByNameAndUsings(next_qname, usings, optionalCurrentPackage)
-			end
-		end
-	end
-	
-	/*
-	 * Return all the ClassDefinitions which are contained by the ModelingUnit
-	*/
-	method getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
-		result := super()
-		
-		self.ownedMetamodels.each{mm|
-			result.addAll(mm.getClassDefinitions())
-		}
-	end
-	
-	/*
-	 * Return all the TypeDefinitions which are contained by the ModelingUnit
-	*/
-	method getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
-		result := super()
-		
-		self.ownedMetamodels.each{mm|
-			result.addAll(mm.getTypeDefinitions())
-		}
-	end
-}
-
-aspect class UnresolvedMetamodel {
-	
-	method getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
-		result := super(qname)
-		
-		if result == void then
-			self.ownedModelingUnits.each{mu|
-				result := mu.getTypeDefinitionByQualifiedName(qname)
-			}
-		end
-	end
-	
-	method getTypeDefinitionByNameAndUsings( qname : String, 
-												usings : Collection<Using>, 
-												optionalCurrentPackage : Package) : TypeDefinition is do
-		result := super(qname, usings, optionalCurrentPackage)
-		
-		if result == void then
-			var set_qname : Sequence<String> init qname.split("::")
-			
-			var innerMU : ModelingUnit init self.ownedModelingUnits.detect{mu|
-				mu.name == set_qname.at(0)
-			}
-			if innerMU != void then
-				var next_qname : String init ""
-				set_qname.each{s|
-					if s != set_qname.at(0) then
-						next_qname := next_qname + s
-					end
-				}
-				innerMU.getTypeDefinitionByNameAndUsings(next_qname, usings, optionalCurrentPackage)
-			end
-		end
-	end
-	
-	/*
-	 * Return all the ClassDefinitions which are contained by the ModelingUnit
-	*/
-	method getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
-		result := super()
-		
-		self.ownedModelingUnits.each{mu|
-			result.addAll(mu.getClassDefinitions())
-		}
-	end
-	
-	/*
-	 * Return all the TypeDefinitions which are contained by the ModelingUnit
-	*/
-	method getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
-		result := super()
-		
-		self.ownedModelingUnits.each{mu|
-			result.addAll(mu.getTypeDefinitions())
-		}
-	end
-}
-
 package internal{
-	class ModelingUnitCache {
+	class MetamodelCache {
 		/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
 		reference cachedStructuralTypeDefinitions : kermeta::utils::Hashtable<String,TypeDefinitionCollection>
-		operation initialize(mu : ModelingUnit) : ModelingUnitCache is do
+		operation initialize(mm : AbstractMetamodel) : MetamodelCache is do
 			// bug in kermeta 1 !?
 			//cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,Set<TypeDefinition>>.new
 			cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,TypeDefinitionCollection>.new
-			mu.getTypeDefinitions().each{ td |
+			mm.getTypeDefinitions().each{ td |
 				put(td)
 			} 
 			result := self

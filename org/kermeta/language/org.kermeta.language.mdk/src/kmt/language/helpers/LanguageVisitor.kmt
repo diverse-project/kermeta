@@ -138,18 +138,15 @@ class LanguageVisitor
 	
 	end
 	
-	operation visitModelTypeVariable(visited : ModelTypeVariable, ctxt : LanguageVisitorContext) is do
+	operation visitModelTypeVariable(visited : MetamodelVariable, ctxt : LanguageVisitorContext) is do
 		visited.virtualType.each{vT|
 			vT.accept(self, ctxt)
 		}
 	end
 	
-	operation visitModelingUnit(visited : ModelingUnit, ctxt : LanguageVisitorContext) is do
+	operation visitAbstractMetamodel(visited : AbstractMetamodel, ctxt : LanguageVisitorContext) is do
 		visited.packages.each{p|
 			p.accept(self, ctxt)
-		}
-		visited.requires.each{r|
-			r.accept(self, ctxt)
 		}
 	end
 	
@@ -192,10 +189,6 @@ class LanguageVisitor
 	
 	end
 
-	operation visitRequire(visited : Require, ctxt : LanguageVisitorContext) is do
-	
-	end
-	
 	operation visitTag(visited : Tag, ctxt : LanguageVisitorContext) is do
 	
 	end
@@ -211,21 +204,15 @@ class LanguageVisitor
 	end
 	
 	operation visitTypeDefinition(visited : TypeDefinition, ctxt : LanguageVisitorContext) is do
-		visited.typeMappings.each{tM|
-			tM.accept(self, ctxt)	
-		}
+
 	end
 	
-	operation visitTypeDefinitionContainer(visited : TypeDefinitionContainer, ctxt : LanguageVisitorContext) is do
+	operation visitModelElementTypeDefinitionContainer(visited : ModelElementTypeDefinitionContainer, ctxt : LanguageVisitorContext) is do
 		visited.ownedTypeDefinition.each{oT|
 			oT.accept(self, ctxt)
 		}
 	end
-	
-	operation visitTypeMapping(visited : TypeMapping, ctxt : LanguageVisitorContext) is do
-	
-	end
-	
+		
 	operation visitTypeVariable(visited : TypeVariable, ctxt : LanguageVisitorContext) is do
 	
 	end
@@ -238,7 +225,7 @@ class LanguageVisitor
 	
 	end
 	
-	operation visitUnresolved(visited : Unresolved, ctxt : LanguageVisitorContext) is do
+	operation visitUnresolvedReference(visited : UnresolvedReference, ctxt : LanguageVisitorContext) is do
 	
 	end
 	
