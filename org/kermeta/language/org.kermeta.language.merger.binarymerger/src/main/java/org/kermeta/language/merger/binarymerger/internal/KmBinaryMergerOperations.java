@@ -13,6 +13,7 @@ package org.kermeta.language.merger.binarymerger.internal;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,38 +66,43 @@ public class KmBinaryMergerOperations {
         return result;
 	}
    
-    protected List<AbstractMetamodel> enforceAspect(List<AbstractMetamodel> mu) throws IOException{
-    	//TODO Rewrite completely
-    	/*if(! (mu instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.ModelingUnitAspect)){
-	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
-	    	Map<String, String> options = null;
-	    	if(mu.eResource() != null){
-		    	uri = mu.eResource().getURI();
-	    	}
-	    	else{
-	    		// let's suppose that the ModelingUnit contains everything (otherwise we would have to look for references and save them too ...)
-	    		ResourceSet resourceSet = new ResourceSetImpl();
-	    		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
-	    		Map<String,Object> m = f.getExtensionToFactoryMap();
-	    		m.put("km_in_memory",new XMIResourceFactoryImpl());
-				Resource resource = resourceSet.createResource(uri);
-				resource.getContents().add(mu);
-	    	}
-			mu.eResource().save(outputStream, options);
+    protected List<AbstractMetamodel> enforceAspect(List<AbstractMetamodel> mms) throws IOException{
+    	List<AbstractMetamodel> result = new ArrayList<AbstractMetamodel>();
+    	
+    	for (AbstractMetamodel mm : mms) {
+    		if (! (mm instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.AbstractMetamodelAspect)) {
+    			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    			URI uri;
+    			Map<String, String> options = null;
+    			if (mm.eResource() != null) {
+    				uri = mm.eResource().getURI();
+    			}
+    			else {
+    				uri = URI.createURI(mm.getUri() + ".km_in_memory");
+    				// let's suppose that the ModelingUnit contains everything (otherwise we would have to look for references and save them too ...)
+    	    		ResourceSet resourceSet = new ResourceSetImpl();
+    	    		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+    	    		Map<String,Object> m = f.getExtensionToFactoryMap();
+    	    		m.put("km_in_memory",new XMIResourceFactoryImpl());
+    				Resource resource = resourceSet.createResource(uri);
+    				resource.getContents().add(mm);
+    			}
+    			mm.eResource().save(outputStream, options);
 
-	    	ResourceSet resourceSet = new ResourceSetImpl();
-    		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
-    		Map<String,Object> m = f.getExtensionToFactoryMap();
-    		m.put("*",new XMIResourceFactoryImpl());
-			Resource resource = resourceSet.createResource(uri);
-			resource.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
-			// let's suppose the ModelingUnit is the first element in the root
-			return (ModelingUnit)resource.getContents().get(0);
+    	    	ResourceSet resourceSet = new ResourceSetImpl();
+        		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+        		Map<String,Object> m = f.getExtensionToFactoryMap();
+        		m.put("*",new XMIResourceFactoryImpl());
+    			Resource resource = resourceSet.createResource(uri);
+    			resource.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
+    			// let's suppose the ModelingUnit is the first element in the root
+    			result.add((AbstractMetamodel)resource.getContents().get(0));
+    		}
+    		else {
+    			result.add(mm);
+    		}
     	}
-    	else{*/
-    		return mu;
-    	/*}*/
+    	return result;
     }
 
 
