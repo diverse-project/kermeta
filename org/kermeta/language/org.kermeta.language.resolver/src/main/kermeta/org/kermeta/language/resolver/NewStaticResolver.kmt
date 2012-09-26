@@ -71,36 +71,23 @@ class FullStaticResolver
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
 		       	
-       	var unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit
-       	var resolvedModelingUnit : org::kermeta::language::structure::ModelingUnit 
-       	unresolvedModelingUnit ?= unresolvedModelResource.one
-       	unresolvedModelingUnit.canUseCachedStructuralTypeDefinitions := true
-       	//checkUnresolved(unresolvedModelingUnit)
-        /*resolvedModelingUnit := doResolving(unresolvedModelingUnit)
-        
-        //workaround to remove cache before saving as it triggers errors in interpreted mode
-       	var cache : org::kermeta::language::structure::internal::ModelingUnitCache init resolvedModelingUnit.cache
-        resolvedModelingUnit.cache:=void
-       	         
-        stdio.writeln("	********** saving intermediate resolved but not set file "+ folder+"results/"+baseFileName+"Resolved.km")  	    	
-       	stdio.writeln("0")
-       //	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"Resolved.km")
-       	stdio.writeln("1")
-       	//workaround to remove cache before saving as it triggers errors in interpreted mode
-       	resolvedModelingUnit.cache:=cache
-        	stdio.writeln("2")      	
-
-       	resolvedModelingUnit := unresolvedModelingUnit
-       	stdio.writeln("3")
-       	checkUnresolved(resolvedModelingUnit)
-       	stdio.writeln("4")
-       	resolvedModelingUnit := doStaticSetting(resolvedModelingUnit)
-       	*/
-       	resolvedModelingUnit := resolve(unresolvedModelingUnit)
-       	checkUnresolved(resolvedModelingUnit)
+       	var unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>
+       	var resolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>
+       	
+       	unresolvedMetamodels ?= unresolvedModelResource.one
+       	unresolvedMetamodels.each{mm|
+       		mm.canUseCachedStructuralTypeDefinitions := true
+       	}
+       	
+       	resolvedMetamodels := resolve(unresolvedMetamodels)
+       	resolvedMetamodels.each{mm|
+			checkUnresolved(mm)
+	    }
        	stdio.writeln("unresolved elements checked")
        	//workaround to remove cache before saving as it triggers errors in interpreted mode
-       	resolvedModelingUnit.cache:=void
+      	resolvedMetamodels.each{mm|
+       		mm.cache := void
+       	}
        	unresolvedModelResource.saveWithNewURI(folder+"results/"+baseFileName+"StaticSetted.km")
        	
        	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"StaticSetted.km" + " saved ************************")
@@ -120,41 +107,55 @@ class FullStaticResolver
 	/* * 
 		launch the entire resolving process
 	*/
-	operation resolve(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		result := doStaticSetting(doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedModelingUnit)))))
+	operation resolve(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+		result := doStaticSetting(
+			doStructureResolving(
+				doTypeAwareMerging(
+					doPrimitiveTypeResolving(
+						doTypeResolving(unresolvedMetamodels)
+					)
+				)
+			)
+		)
 	end
 	/* * 
 		launch only the unresolved types resolution after this step all unresolved types should be resolved 
 	*/
-	operation doTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation doTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
 		//init of context
 		stdio.writeln("	********************* 666 Type Resolving *********************")
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedModelingUnit)
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels)
 		ctxt.verbose := false
-		unresolvedModelingUnit.resolveStructureInheritance(ctxt)
+		unresolvedMetamodels.each{mm|
+			mm.resolveStructureInheritance(ctxt)
+		}
 		stdio.writeln("	********************* End of Type Resolving *********************")
-		result:=unresolvedModelingUnit
+		result:=unresolvedMetamodels
 	end
 	
 	
-	operation doPrimitiveTypeResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation doPrimitiveTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
 		//stdio.writeln("doPrimitiveTypeResolving")
 		stdio.writeln("	********************* Primitive Type Resolving *********************")
-		unresolvedModelingUnit.resolvePrimitiveTypeEquivalence(ctxt)
+		unresolvedMetamodels.each{mm|
+			mm.resolvePrimitiveTypeEquivalence(ctxt)
+		}
 		stdio.writeln("	********************* End of Primitive Type Resolving *********************")
-		result:=unresolvedModelingUnit
+		result:=unresolvedMetamodels
 	end
 	/* *
 		pass to launch only when there are no more unresolved types
 		merge the operations and properties that have the same signature (not possible if some types are unresolved)
 	*/
-	operation doTypeAwareMerging(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation doTypeAwareMerging(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
 		stdio.writeln("	********************* Type Aware Merging  *********************")
 		var mergeCtxt : TypeAwareMergerContext init TypeAwareMergerContext.new
 		mergeCtxt.errors:=ctxt.errors
-		unresolvedModelingUnit.typeAwareMerge( mergeCtxt)
+		unresolvedMetamodels.each{mm|
+			mm.typeAwareMerge( mergeCtxt)
+		}
 		stdio.writeln("	********************* End of Type Aware Merging  *********************")
-		result:=unresolvedModelingUnit
+		result:=unresolvedMetamodels
 	
 	end
 	
@@ -167,49 +168,53 @@ class FullStaticResolver
 		not possible until there is one unique definition for each operation and property (i.e. not possible before type aware merging) 
 		
 	*/
-	operation doStructureResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
+	operation doStructureResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
 		//init of context
 		stdio.writeln("	********************* Structure Resolving  *********************")
-		unresolvedModelingUnit.resolveStructure(ctxt)
+		unresolvedMetamodels.each{mm|
+			mm.resolveStructure(ctxt)
+		}
 		stdio.writeln("	********************* End of Structure Resolving  *********************")
-		result:=unresolvedModelingUnit
+		result:=unresolvedMetamodels
 	end
 
 
 	/* *
 	*	chain all the resolving passes for the structural part of the program
 	*/
-	operation doResolving(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do
-		stdio.writeln("	********************* Resolving " + unresolvedModelingUnit.toString() + " *********************")
+	operation doResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+		stdio.writeln("	********************* Resolving " + unresolvedMetamodels.toString() + " *********************")
        	/*var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 
 		ctxt := LanguageVisitorContext.new.initialise()
 	
-   		unresolvedModelingUnit.accept(unresolvedFinder, ctxt)*/
+   		unresolvedMetamodels.accept(unresolvedFinder, ctxt)*/
    		
-   		doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedModelingUnit))))
-       	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " resolved *********************")
+   		doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedMetamodels))))
+       	stdio.writeln("	********************* " + unresolvedMetamodels.toString() + " resolved *********************")
        	
-       	//checkDangling(unresolvedModelingUnit.containingResource())       	
-		//checkUnresolved(unresolvedModelingUnit)
+       	//checkDangling(unresolvedMetamodels.containingResource())       	
+		//checkUnresolved(unresolvedMetamodels)
        	
-       	result := unresolvedModelingUnit
+       	result := unresolvedMetamodels
 	end
 	
 	/* *
 		resolve all the behavioral part and add static types
 	*/
-	operation doStaticSetting(unresolvedModelingUnit : org::kermeta::language::structure::ModelingUnit) : org::kermeta::language::structure::ModelingUnit is do      	
-		stdio.writeln("	********************* Static setting " + unresolvedModelingUnit.toString() + " *********************")
-		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedModelingUnit)
+	operation doStaticSetting(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do      	
+		stdio.writeln("	********************* Static setting " + unresolvedMetamodels.toString() + " *********************")
+		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedMetamodels)
 		
 		staticSetterContext.verbose := false
 		staticSetterContext.errors  := ctxt.errors
 		
-		unresolvedModelingUnit.inferContainedExpressionStatic(staticSetterContext)
+		unresolvedMetamodels.each{mm|
+			mm.inferContainedExpressionStatic(staticSetterContext)
+		}
 		
-       	stdio.writeln("	********************* " + unresolvedModelingUnit.toString() + " statically set *********************")
-       	result := unresolvedModelingUnit
+       	stdio.writeln("	********************* " + unresolvedMetamodels.toString() + " statically set *********************")
+       	result := unresolvedMetamodels
 	end
 	
 	/* * 

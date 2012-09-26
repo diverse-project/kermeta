@@ -29,7 +29,7 @@ import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.language.helper.tests.utils.ErrorAwareMessagingSystem;
 
 
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
 
 import java.io.File;

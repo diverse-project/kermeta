@@ -29,9 +29,9 @@ class StaticSetterContext
 
 	attribute verbose : Boolean
 
-	operation initialize(mu : org::kermeta::language::structure::ModelingUnit) : StaticSetterContext is do
+	operation initialize(mms : Collection<AbstractMetamodel>) : StaticSetterContext is do
 	 	result := self
-	 	currentModelingUnit := mu
+	 	currentMetamodels := mms
 	 	waitingContext:=Sequence<ToBeResolvedLater>.new
 	 	verbose := false
 	end
@@ -44,7 +44,7 @@ class StaticSetterContext
 		newContext.errors:=errors
 		newContext.waitingContext:=waitingContext
 		newContext.verbose:=verbose
-		newContext.currentModelingUnit:=currentModelingUnit
+		newContext.currentMetamodels:=currentMetamodels
 		newContext.currentClassDefinition:=currentClassDefinition
 		newContext.currentOperation:=currentOperation
 		newContext.currentProperty:=currentProperty
@@ -59,9 +59,9 @@ class StaticSetterContext
 	end 
 	
 	/**
-	 * ModelingUnit we are processing 
+	 * Metamodels we are processing 
 	 */
-	reference currentModelingUnit : org::kermeta::language::structure::ModelingUnit
+	reference currentMetamodels : Collection<AbstractMetamodel>
 	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
 	reference currentOperation : org::kermeta::language::structure::Operation
 	reference currentProperty : org::kermeta::language::structure::Property
@@ -100,7 +100,11 @@ class StaticSetterContext
 	
 	operation createTypeFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::Type is do
 		var cd : org::kermeta::language::structure::ClassDefinition
-		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+		currentMetamodels.each{mm|
+			if cd.isVoid then
+				mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+			end
+		}
 		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
 		if result.isVoid then
 			errors.add(ResolverException.new.initialize("Not able to create type for "+ classDefinitionQualifiedName, self))
@@ -109,7 +113,11 @@ class StaticSetterContext
 	
 	operation getClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
 		var cd : org::kermeta::language::structure::ClassDefinition
-		cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+		currentMetamodels.each{mm|
+			if cd.isVoid then
+				mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+			end
+		}
 		result := cd
 		if result.isVoid then
 			if verbose then
@@ -165,8 +173,14 @@ class StaticSetterContext
 				var typeParams : Sequence<org::kermeta::language::structure::Type> init Sequence<org::kermeta::language::structure::Type>.new
 				typeParams.add(typeCopy)
 				var cd : org::kermeta::language::structure::ClassDefinition
-				if (element.isUnique() and element.isOrdered()) then 
-					cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet")
+				if (element.isUnique() and element.isOrdered()) then
+				
+					currentMetamodels.each{mm|
+						if cd.isVoid then
+							mm.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet")
+						end
+					}
+					
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::OrderedSet", element))
 					else
@@ -174,7 +188,13 @@ class StaticSetterContext
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 				else if (element.isUnique() and not element.isOrdered()) then
-					cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
+				
+					currentMetamodels.each{mm|
+						if cd.isVoid then
+							mm.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
+						end
+					}
+
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find kermeta::standard::Set", element))
 					else
@@ -182,7 +202,13 @@ class StaticSetterContext
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 				else if ( not element.isUnique() and element.isOrdered()) then
-					cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
+				
+					currentMetamodels.each{mm|
+						if cd.isVoid then
+							mm.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
+						end
+					}
+
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find kermeta::standard::Sequence", element))
 					else
@@ -190,7 +216,12 @@ class StaticSetterContext
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 				else
-					cd ?= currentModelingUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
+					currentMetamodels.each{mm|
+						if cd.isVoid then
+							mm.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
+						end
+					}
+
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::Bag", element))
 					else

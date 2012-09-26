@@ -8,7 +8,7 @@
 package org.kermeta.language.resolver.api;
 
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 
 /**
  ** This service offers to resolve and to set static types of a ModelingUnit

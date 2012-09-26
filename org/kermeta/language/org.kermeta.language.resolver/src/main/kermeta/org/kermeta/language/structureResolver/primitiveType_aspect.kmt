@@ -28,7 +28,7 @@ aspect class Package{
 
 }
 
-aspect class ModelingUnit{
+aspect class AbstractMetamodel{
 	method resolvePrimitiveTypeEquivalence(context : LanguageVisitorContext) from KermetaModelElement is do 
 		self.eachOwnedElement{ e|
 				if e.isInstanceOf(KermetaModelElement) then

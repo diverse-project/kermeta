@@ -51,7 +51,7 @@ package structure {
 	} 
 
 
-	aspect class ModelingUnit {
+	aspect class AbstractMetamodel {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from KermetaModelElement is do
 			super(context)
 			
@@ -557,8 +557,13 @@ package behavior {
 		*/
 		operation resolveCallToTypeLiteral(context : StaticSetterContext) : CallTypeLiteral is do
 			if target.isVoid then
-				var typeDef : TypeDefinition 
-				typeDef := context.currentModelingUnit.getTypeDefinitionByNameAndUsings(self.name, usings, context.currentModelingUnit.retrievePackage(getQualifiedNameResolving()))
+				var typeDef : TypeDefinition
+				
+				context.currentMetamodels.each{mm|
+					if typeDef.isVoid() then
+						typeDef := mm.getTypeDefinitionByNameAndUsings(self.name, usings, mm.retrievePackage(getQualifiedNameResolving()))
+					end
+				}
 				
 				if not typeDef.isVoid then
 					if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found typeDef " + typeDef.name) end

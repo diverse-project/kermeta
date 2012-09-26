@@ -11,6 +11,8 @@ package org.kermeta.language.resolver.internal;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -22,7 +24,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.resolver.FullStaticResolver;
 import org.kermeta.language.resolver.ResolverException;
 import org.kermeta.language.resolver.api.KmResolver;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
 import org.kermeta.utils.systemservices.api.result.ResultProblemMessage;
@@ -44,8 +47,8 @@ public class KmResolverOperations {
 		}
 	}
 	
-	protected ModelingUnit enforceAspect(ModelingUnit mu) throws IOException{
-    	if(! (mu instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.ModelingUnitAspect)){
+	protected List<AbstractMetamodel> enforceAspect(List<AbstractMetamodel> mu) throws IOException{
+    	/*if(! (mu instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.ModelingUnitAspect)){
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
 	    	Map<String, String> options = null;
@@ -72,16 +75,16 @@ public class KmResolverOperations {
 			// let's suppose the ModelingUnit is the first element in the root
 			return (ModelingUnit)resource.getContents().get(0);
     	}
-    	else{
+    	else{*/
     		return mu;
-    	}
+    	/*}*/
     }
 
 	public ErrorProneResult<ModelingUnit> doResolving(ModelingUnit mu) {	
-		ModelingUnit muResolved = null;
+		ModelingUnit muResolved = new ModelingUnit(new ArrayList<AbstractMetamodel>());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = resolver.doResolving(enforceAspect(mu));	
+    		muResolved.getMetamodels().addAll(resolver.doResolving(enforceAspect(mu.getMetamodels())));	
     	}
     	catch (Exception e) {
     		logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
@@ -102,10 +105,10 @@ public class KmResolverOperations {
 	}
 
 	public ErrorProneResult<ModelingUnit> doStaticSetting(ModelingUnit mu) {		
-		ModelingUnit muResolved = null;
+		ModelingUnit muResolved = new ModelingUnit(new ArrayList<AbstractMetamodel>());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = resolver.doStaticSetting(enforceAspect(mu));
+    		muResolved.getMetamodels().addAll(resolver.doStaticSetting(enforceAspect(mu.getMetamodels())));
 		}
     	catch (Exception e) {
     		logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
@@ -125,10 +128,10 @@ public class KmResolverOperations {
 	}
 
 	public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu) {
-		ModelingUnit muResolved = null;
+		ModelingUnit muResolved = new ModelingUnit(new ArrayList<AbstractMetamodel>());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved = resolver.resolve(enforceAspect(mu));
+    		muResolved.getMetamodels().addAll(resolver.resolve(enforceAspect(mu.getMetamodels())));
 		} catch (Exception e) {
 			logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
 		}
