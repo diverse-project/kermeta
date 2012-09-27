@@ -1,0 +1,23 @@
+<!-- $Id: pom.xml 15436 2011-06-29 15:15:42Z bouhours $ -->
+<!-- License    : EPL                                    -->
+<!-- Project    : org.kermeta.utils.root -->
+<!-- Copyright  : IRISA / INRIA / Universite de Rennes 1 --> 
+<!-- Authors : Haja Rambelontsalama <hrambelo@irisa.fr> --> 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<parent>
+		<artifactId>kermeta.root</artifactId>
+		<groupId>org.kermeta</groupId>
+		<version>2.0.7-SNAPSHOT</version>
+	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
+    <groupId>org.eclipse.emf.ecoretools</groupId>
+    <artifactId>ecoretools.root</artifactId>
+    <packaging>pom</packaging>
+    <version>${emf.ecoretools.version}</version>
+    <name>emf.ecoretools.root :: Root for emf.ecoretools</name>
+	
+</project>
