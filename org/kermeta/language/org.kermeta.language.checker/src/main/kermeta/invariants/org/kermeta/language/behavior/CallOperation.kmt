@@ -65,8 +65,8 @@ aspect class CallOperation
 		//if self.staticOperation.isVoid, an error will be raised elsewhere ...
 		then
 			//Check that it is called on a Class
-		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
-			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+		  	var mm : AbstractMetamodel init self.getRootContainer.asType(AbstractMetamodel)
+			var classTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
 			
 			//stdio.writeln(" classTypeDef : " + classTypeDef.toString)
 			if (self.staticOperation.owningClass.equals(classTypeDef))
@@ -103,8 +103,8 @@ aspect class CallOperation
 		if (self.name.equals("new") and not(self.staticOperation.isVoid)) 
 		then
 			// Check that it is called on a Class
-		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
-			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+		  	var mm : AbstractMetamodel init self.getRootContainer.asType(AbstractMetamodel)
+			var classTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
 
 			if (self.staticOperation.owningClass.equals(classTypeDef))
 			then
@@ -140,8 +140,8 @@ aspect class CallOperation
 		if (self.name.equals("new") and not(self.staticOperation.isVoid))
 		then
 			// Check that it is called on a Class
-		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
-			var classTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+		  	var mm : AbstractMetamodel init self.getRootContainer.asType(AbstractMetamodel)
+			var classTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
 			
 			if (self.staticOperation.owningClass.equals(classTypeDef))
 			then

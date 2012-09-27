@@ -43,27 +43,37 @@ class MainCheckerV2
 		
 		inputRes.load()
 		
-		var mu : org::kermeta::language::structure::ModelingUnit
-		mu ?= inputRes.one
+		var mms : Set<AbstractMetamodel>
+		mms ?= inputRes.contents
 		
 	
 		var myChecker : Checker init Checker.new
 		
 		//myChecker.initialize()
 		
-		// test mu
-		var diagModel : DiagnosticModel init myChecker.checkObject(mu, "MERGER")
+		// test mms
+		var diagModels : Collection<DiagnosticModel> init OrderedSet<DiagnosticModel>.new
+		var diagModel : DiagnosticModel
+		var numberFailedConstraints : Integer init 0
+		mms.each{mm|
+			diagModel := myChecker.checkObject(mm, "MERGER")
+			diagModels.add(diagModel)
+			numberFailedConstraints := numberFailedConstraints + diagModel.diagnostics.size
+		}
 		
-		stdio.writeln("Number of failed constraints : " + diagModel.diagnostics.size.toString)
 		
-		diagModel.diagnostics.each{ diag |
-			stdio.writeln("------------------------------")
-			stdio.writeln("Invariant " + diag.failedConstraint.asType(InvariantProxy).invariantName 
-					+ " for Class " + diag.failedConstraint.asType(InvariantProxy).metaclassQualifiedName
-					+ " in " + diag.failedConstraint.asType(InvariantProxy).mmUri)
-			stdio.writeln(" on object : " + diag.appliesTo.asType(ModelReference).referencedObject.toString)
-			
-			
+		stdio.writeln("Number of failed constraints : " + numberFailedConstraints.toString)
+		
+		diagModels.each{dm|
+			dm.diagnostics.each{ diag |
+				stdio.writeln("------------------------------")
+				stdio.writeln("Invariant " + diag.failedConstraint.asType(InvariantProxy).invariantName 
+						+ " for Class " + diag.failedConstraint.asType(InvariantProxy).metaclassQualifiedName
+						+ " in " + diag.failedConstraint.asType(InvariantProxy).mmUri)
+				stdio.writeln(" on object : " + diag.appliesTo.asType(ModelReference).referencedObject.toString)
+				
+				
+			}
 		}
 		
 		// test packages :

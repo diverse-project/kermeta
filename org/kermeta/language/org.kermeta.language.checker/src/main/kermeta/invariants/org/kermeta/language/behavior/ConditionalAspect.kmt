@@ -38,8 +38,8 @@ aspect class Conditional
 			//stdio.writeln("   typeDefinition qualified name : " + typeDef.getQualifiedName()   )
 			
 			// retrieve Boolean Type Definition from the modelingUnit
-		  	var mu : ModelingUnit init self.getRootContainer.asType(ModelingUnit)
-		  	var booleanTypeDef : TypeDefinition init mu.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
+		  	var mm : AbstractMetamodel init self.getRootContainer.asType(AbstractMetamodel)
+		  	var booleanTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
 			
 			invResult:= typeDef.equals(booleanTypeDef)
 		end

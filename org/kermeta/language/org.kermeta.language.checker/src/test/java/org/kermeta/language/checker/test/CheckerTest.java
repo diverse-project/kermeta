@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -20,7 +23,8 @@ import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.checker.CheckerImpl;
 import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
+import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
@@ -150,9 +154,13 @@ public class CheckerTest extends TestCase {
 		Resource resource = resourceSet.createResource(URI.createFileURI(kmFile));
 		ModelingUnit mu;
 		resource.load(m);
-		mu = (ModelingUnit) resource.getContents().get(0);
+		List<AbstractMetamodel> mms = new ArrayList<AbstractMetamodel>();
+		for(EObject e : resource.getContents()) {
+			mms.add((AbstractMetamodel) e);
+		}
+		mu = new ModelingUnit(mms);
            
-		System.err.println("Mu name : " + mu.getName());
+		//System.err.println("Mu name : " + mu.getName());
 		
 		return mu;
 	}
