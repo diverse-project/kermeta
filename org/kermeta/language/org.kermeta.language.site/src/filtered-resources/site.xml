@@ -9,6 +9,9 @@
    <feature url="features/${org.kermeta.language.dev.feature.jar}" id="org.kermeta.language.dev.feature" version="${org.kermeta.language.dev.feature.version}">
       <category name="Kermeta2Tools"/>
    </feature>
+   <feature url="features/${org.eclipse.emf.ecoretools.registration.feature.jar}" id="org.eclipse.emf.ecoretools.registration.feature" version="${org.eclipse.emf.ecoretools.registration.feature.version}">
+      <category name="Kermeta2Tools"/>
+   </feature>
    <category-def name="Kermeta2Language" label="Kermeta 2 language">
       <description>
          Kermeta 2 workbench and action language.
