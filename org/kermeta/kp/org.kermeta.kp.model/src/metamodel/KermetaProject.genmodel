@@ -12,12 +12,12 @@
     <genClasses ecoreClass="KermetaProject.ecore#//KermetaProject">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/dependencies"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/sources"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/weaveDirectives"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/options"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainOperation"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/group"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/javaBasePackage"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/packageEquivalences"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/metamodels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/defaultMetamodel"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//Dependency">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/url"/>
@@ -32,25 +32,12 @@
     <genClasses image="false" ecoreClass="KermetaProject.ecore#//Source">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Source/url"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Source/byteCodeFromADependency"/>
-    </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//WeaveDirective">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//WeaveDirective/mix"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//WeaveDirective/target"/>
-    </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//Option">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Option/value"/>
-    </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//Expression"/>
-    <genClasses ecoreClass="KermetaProject.ecore#//StringExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//StringExpression/value"/>
-    </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//MixExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//MixExpression/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//MixExpression/right"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//Source/contributesTo"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//PackageEquivalence">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/ecorePackage"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/javaPackage"/>
     </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//Metamodel"/>
   </genPackages>
 </genmodel:GenModel>
