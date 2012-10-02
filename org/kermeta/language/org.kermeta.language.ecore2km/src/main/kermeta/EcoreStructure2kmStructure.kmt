@@ -26,7 +26,7 @@ using org::kermeta::traceability
 class EcoreStructure2kmStructure inherits EcoreVisitor {
 	/** The modeling unit where all the created elements will be inserted. */
 
-	reference metamodel : AbstractMetamodel
+	reference metamodel : Metamodel
 	
 	reference primitiveTypeMappings : Hashtable<String,String>
 	
@@ -40,7 +40,7 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 	 * the root ecore package to convert.
 	 */
 	operation convert(pkg : EPackage, primitiveTypeMappings : Hashtable<String,String>, 
-					  metamodel : AbstractMetamodel, traceRegistry : TraceRegistry) : Void is do
+					  metamodel : Metamodel, traceRegistry : TraceRegistry) : Void is do
 		self.metamodel := metamodel
 		self.primitiveTypeMappings := primitiveTypeMappings
 		self.traceRegistry := traceRegistry
