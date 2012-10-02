@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.merger.BinaryMerger;
 import org.kermeta.language.merger.BinaryMergerAspect;
 import org.kermeta.ecore.binarymerger.BinaryMergerExceptionAspect;
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
@@ -66,11 +66,11 @@ public class KmBinaryMergerOperations {
         return result;
 	}
    
-    protected List<AbstractMetamodel> enforceAspect(List<AbstractMetamodel> mms) throws IOException{
-    	List<AbstractMetamodel> result = new ArrayList<AbstractMetamodel>();
+    protected List<Metamodel> enforceAspect(List<Metamodel> mms) throws IOException{
+    	List<Metamodel> result = new ArrayList<Metamodel>();
     	
-    	for (AbstractMetamodel mm : mms) {
-    		if (! (mm instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.AbstractMetamodelAspect)) {
+    	for (Metamodel mm : mms) {
+    		if (! (mm instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.MetamodelAspect)) {
     			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     			URI uri;
     			Map<String, String> options = null;
@@ -96,7 +96,7 @@ public class KmBinaryMergerOperations {
     			Resource resource = resourceSet.createResource(uri);
     			resource.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
     			// let's suppose the ModelingUnit is the first element in the root
-    			result.add((AbstractMetamodel)resource.getContents().get(0));
+    			result.add((Metamodel)resource.getContents().get(0));
     		}
     		else {
     			result.add(mm);

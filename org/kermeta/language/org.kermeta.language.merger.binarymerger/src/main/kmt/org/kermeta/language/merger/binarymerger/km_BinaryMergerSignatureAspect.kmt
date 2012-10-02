@@ -533,7 +533,6 @@ package kermeta {
 							result := result and self.identifier == aspectElement.identifier
 						end
 
-
 					else
 						result := false
 					end
@@ -1140,10 +1139,10 @@ package kermeta {
 			}
 
 
-			aspect class AbstractMetamodel {
+			aspect class Metamodel {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					// TODO deal with aspectElementObj not a strict instance of AbstractMetamodel
-					var aspectElement : org::kermeta::language::structure::AbstractMetamodel
+					// TODO deal with aspectElementObj not a strict instance of Metamodel
+					var aspectElement : org::kermeta::language::structure::Metamodel
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
@@ -1251,49 +1250,15 @@ package kermeta {
 				end
 			}
 
-			aspect class Metamodel {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
-					// TODO deal with aspectElementObj not a strict instance of Metamodel
-					var aspectElement : org::kermeta::language::structure::Metamodel
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-
-
-
-						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
-							result := result and self.isAspect == aspectElement.isAspect
-						end
-
-
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-
-
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class MetamodelVariable {
+			aspect class ModelTypeVariable {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
-					// TODO deal with aspectElementObj not a strict instance of MetamodelVariable
-					var aspectElement : org::kermeta::language::structure::MetamodelVariable
+					// TODO deal with aspectElementObj not a strict instance of ModelTypeVariable
+					var aspectElement : org::kermeta::language::structure::ModelTypeVariable
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
 						
 						result := super( aspectElement)
-
-
-						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
-							result := result and self.name == aspectElement.name
-						end
-
 					else
 						result := false
 					end
@@ -1690,21 +1655,6 @@ package kermeta {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
 					// TODO deal with aspectElementObj not a strict instance of OperationAdaptationOperator
 					var aspectElement : org::kermeta::language::structure::OperationAdaptationOperator
-					aspectElement ?= aspectElementObj
-					if not aspectElement.isVoid then
-
-						
-						result := super( aspectElement)
-					else
-						result := false
-					end
-				end
-			}
-
-			aspect class UnresolvedMetamodel {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractMetamodel is do
-					// TODO deal with aspectElementObj not a strict instance of UnresolvedMetamodel
-					var aspectElement : org::kermeta::language::structure::UnresolvedMetamodel
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 

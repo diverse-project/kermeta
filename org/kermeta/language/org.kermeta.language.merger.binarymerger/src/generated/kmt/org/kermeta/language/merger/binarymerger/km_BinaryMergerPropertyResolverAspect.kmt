@@ -463,7 +463,7 @@ package kermeta {
 			}
 
 
-			aspect class AbstractMetamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement {
+			aspect class Metamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeDefinition {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -505,14 +505,7 @@ package kermeta {
 				end
 			}
 
-			aspect class Metamodel inherits org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::AbstractMetamodel {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinition is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class MetamodelVariable inherits org::kermeta::language::structure::TypeVariable {
+			aspect class ModelTypeVariable inherits org::kermeta::language::structure::TypeVariable {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeVariable is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -682,13 +675,6 @@ package kermeta {
 
 			aspect class OperationAdaptationOperator inherits org::kermeta::language::structure::AdaptationOperator {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AdaptationOperator is do
-					
-					result := super( propertyName, primaryValue, aspectValue)
-				end
-			}
-
-			aspect class UnresolvedMetamodel inherits org::kermeta::language::structure::AbstractMetamodel {
-				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::AbstractMetamodel is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
 				end

@@ -842,18 +842,20 @@ package kermeta {
 			}
 
 
-			aspect class AbstractMetamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement {
+			aspect class Metamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeDefinition {
 				method fixReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
-					var aspectModelElement : org::kermeta::language::structure::AbstractMetamodel
+					var aspectModelElement : org::kermeta::language::structure::Metamodel
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
 
 
+
 				end
 				method mergeReferences( ) : Void from org::kermeta::language::structure::KermetaModelElement is do
-					var mergedModelElement : org::kermeta::language::structure::AbstractMetamodel
+					var mergedModelElement : org::kermeta::language::structure::Metamodel
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
+
 
 
 				end
@@ -932,35 +934,14 @@ package kermeta {
 				end
 			}
 
-			aspect class Metamodel inherits org::kermeta::language::structure::TypeDefinition, org::kermeta::language::structure::AbstractMetamodel {
-				method fixReferences( ) : Void from org::kermeta::language::structure::TypeDefinition is do
-					var aspectModelElement : org::kermeta::language::structure::Metamodel
-					aspectModelElement ?= self.similarElementInAspectModel
-					super()
-
-
-
-
-				end
-				method mergeReferences( ) : Void from org::kermeta::language::structure::TypeDefinition is do
-					var mergedModelElement : org::kermeta::language::structure::Metamodel
-					mergedModelElement ?= self.similarElementInMergedModel
-					super()
-
-
-
-
-				end
-			}
-
-			aspect class MetamodelVariable inherits org::kermeta::language::structure::TypeVariable {
+			aspect class ModelTypeVariable inherits org::kermeta::language::structure::TypeVariable {
 				method fixReferences( ) : Void from org::kermeta::language::structure::TypeVariable is do
-					var aspectModelElement : org::kermeta::language::structure::MetamodelVariable
+					var aspectModelElement : org::kermeta::language::structure::ModelTypeVariable
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
 				end
 				method mergeReferences( ) : Void from org::kermeta::language::structure::TypeVariable is do
-					var mergedModelElement : org::kermeta::language::structure::MetamodelVariable
+					var mergedModelElement : org::kermeta::language::structure::ModelTypeVariable
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
 				end
@@ -1295,19 +1276,6 @@ package kermeta {
 				end
 				method mergeReferences( ) : Void from org::kermeta::language::structure::AdaptationOperator is do
 					var mergedModelElement : org::kermeta::language::structure::OperationAdaptationOperator
-					mergedModelElement ?= self.similarElementInMergedModel
-					super()
-				end
-			}
-
-			aspect class UnresolvedMetamodel inherits org::kermeta::language::structure::AbstractMetamodel {
-				method fixReferences( ) : Void from org::kermeta::language::structure::AbstractMetamodel is do
-					var aspectModelElement : org::kermeta::language::structure::UnresolvedMetamodel
-					aspectModelElement ?= self.similarElementInAspectModel
-					super()
-				end
-				method mergeReferences( ) : Void from org::kermeta::language::structure::AbstractMetamodel is do
-					var mergedModelElement : org::kermeta::language::structure::UnresolvedMetamodel
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
 				end

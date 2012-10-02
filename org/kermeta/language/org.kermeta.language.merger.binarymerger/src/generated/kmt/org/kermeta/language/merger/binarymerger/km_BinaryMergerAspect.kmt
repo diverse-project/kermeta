@@ -172,7 +172,7 @@ package kermeta {
 			}
 
 
-			aspect class AbstractMetamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class Metamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class ModelElementTypeDefinitionContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -190,10 +190,7 @@ package kermeta {
 			aspect class ObjectTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class Metamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class MetamodelVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class ModelTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class VirtualType inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -266,9 +263,6 @@ package kermeta {
 			}
 
 			aspect class OperationAdaptationOperator inherits org::kermeta::ecore::binarymerger::Mergeable {
-			}
-
-			aspect class UnresolvedMetamodel inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class ModelElementTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
