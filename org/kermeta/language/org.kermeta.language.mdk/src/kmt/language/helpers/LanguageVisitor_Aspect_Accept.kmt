@@ -306,15 +306,15 @@ package structure {
 		end
 	}
 	
-	aspect class MetamodelVariable {
+	aspect class ModelTypeVariable {
 		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) is do
 			visitor.visitModelTypeVariable(self, ctxt)
 		end
 	}
 	
-	aspect class AbstractMetamodel {
+	aspect class Metamodel {
 		method accept(visitor : LanguageVisitor, ctxt : LanguageVisitorContext) from KermetaModelElement is do
-			visitor.visitAbstractMetamodel(self, ctxt)
+			visitor.visitMetamodel(self, ctxt)
 		end
 	}
 	

@@ -8,12 +8,9 @@ package org.kermeta.language.structure.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.kermeta.language.structure.Property;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.kermeta.language.structure.PropertyBinding;
 import org.kermeta.language.structure.StructurePackage;
 

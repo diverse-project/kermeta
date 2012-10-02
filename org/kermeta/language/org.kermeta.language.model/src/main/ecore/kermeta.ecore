@@ -943,8 +943,7 @@
           <eLiterals name="pre" value="1"/>
           <eLiterals name="post" value="2"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="AbstractMetamodel" abstract="true"
-            eSuperTypes="#//kermeta/language/structure/KermetaModelElement #//kermeta/language/structure/NamedElement">
+        <eClassifiers xsi:type="ecore:EClass" name="Metamodel" eSuperTypes="#//kermeta/language/structure/KermetaModelElement #//kermeta/language/structure/NamedElement #//kermeta/language/structure/TypeDefinition">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Before normalization, for support of concrete syntax, a ModelingUnit can directly own TypeDefinition (ClassDefintion, ModelType, enumeration, ...)&#xD;&#xA;However, this suppose that a package is specified in the namespacePrefix."/>
           </eAnnotations>
@@ -968,6 +967,8 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="referencedMetamodels"
               upperBound="-1" eType="#//kermeta/language/structure/FilteredMetamodelReference"
               containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isResolved" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+              defaultValueLiteral="false"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelElementTypeDefinitionContainer"
             eSuperTypes="#//kermeta/language/structure/NamedElement">
@@ -1036,14 +1037,7 @@
             <details key="documentation" value="To be written"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="Metamodel" eSuperTypes="#//kermeta/language/structure/TypeDefinition #//kermeta/language/structure/AbstractMetamodel">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Type of a model, consisting of a set of included type definitions.&#xD;&#xA;For historical reason, this is both a type and a TypeDefinition, mainly due to the fact that a ModelDefinition isn't a GenericTypeDefinition (maybe this should be discussed again ?)&#xD;&#xA;"/>
-          </eAnnotations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBindings" upperBound="-1"
-              eType="#//kermeta/language/structure/MetamodelBinding" containment="true"/>
-        </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="MetamodelVariable" eSuperTypes="#//kermeta/language/structure/TypeVariable">
+        <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="#//kermeta/language/structure/TypeVariable">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="To be written"/>
           </eAnnotations>
@@ -1065,8 +1059,8 @@
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="metamodelVariable"
-              lowerBound="1" eType="#//kermeta/language/structure/MetamodelVariable"
-              eOpposite="#//kermeta/language/structure/MetamodelVariable/virtualType">
+              lowerBound="1" eType="#//kermeta/language/structure/ModelTypeVariable"
+              eOpposite="#//kermeta/language/structure/ModelTypeVariable/virtualType">
             <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
               <details key="documentation" value="To be written"/>
             </eAnnotations>
@@ -1260,7 +1254,6 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
               eType="#//kermeta/language/structure/Operation"/>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="UnresolvedMetamodel" eSuperTypes="#//kermeta/language/structure/AbstractMetamodel"/>
         <eClassifiers xsi:type="ecore:EClass" name="ModelElementTypeDefinition" abstract="true"
             eSuperTypes="#//kermeta/language/structure/TypeDefinition"/>
         <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//kermeta/language/structure/Type">
@@ -1269,7 +1262,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="FilteredMetamodelReference" eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" lowerBound="1"
-              eType="#//kermeta/language/structure/AbstractMetamodel"/>
+              eType="#//kermeta/language/structure/Metamodel"/>
         </eClassifiers>
       </eSubpackages>
     </eSubpackages>

@@ -9,13 +9,10 @@ package org.kermeta.language.structure.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.kermeta.language.structure.NamedElement;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.util.EncodingHelper;

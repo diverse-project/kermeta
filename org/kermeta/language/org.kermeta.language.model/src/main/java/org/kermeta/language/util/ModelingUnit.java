@@ -11,28 +11,28 @@ package org.kermeta.language.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 
 /**
- * Group of AbstractMetamodel
+ * Group of Metamodel
  * This class allows to manipulates a set of AbastractMetamodels (ie. kermeta root elements) as a single object
  *
  */
 public class ModelingUnit {
 	
-	protected List<AbstractMetamodel> metamodels = null; 
+	protected List<Metamodel> metamodels = null; 
 	
 	public ModelingUnit(){
-		metamodels = new ArrayList<AbstractMetamodel>();
+		metamodels = new ArrayList<Metamodel>();
 	}
 
-	public ModelingUnit(List<AbstractMetamodel> metamodels){
-		metamodels = new ArrayList<AbstractMetamodel>();
+	public ModelingUnit(List<Metamodel> metamodels){
+		metamodels = new ArrayList<Metamodel>();
 		this.metamodels.addAll(metamodels);
 	}
 	
-	public List<AbstractMetamodel> getMetamodels() {
-		if(metamodels == null) metamodels = new ArrayList<AbstractMetamodel>();
+	public List<Metamodel> getMetamodels() {
+		if(metamodels == null) metamodels = new ArrayList<Metamodel>();
 		return metamodels;
 	}
 

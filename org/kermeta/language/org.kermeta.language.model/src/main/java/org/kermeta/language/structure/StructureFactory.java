@@ -170,6 +170,15 @@ public interface StructureFactory extends EFactory {
 	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
+	 * Returns a new object of class '<em>Model Type Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Type Variable</em>'.
+	 * @generated
+	 */
+	ModelTypeVariable createModelTypeVariable();
+
+	/**
 	 * Returns a new object of class '<em>Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -177,15 +186,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	Metamodel createMetamodel();
-
-	/**
-	 * Returns a new object of class '<em>Metamodel Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Metamodel Variable</em>'.
-	 * @generated
-	 */
-	MetamodelVariable createMetamodelVariable();
 
 	/**
 	 * Returns a new object of class '<em>Model Type</em>'.
@@ -402,15 +402,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	OperationAdaptationOperator createOperationAdaptationOperator();
-
-	/**
-	 * Returns a new object of class '<em>Unresolved Metamodel</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unresolved Metamodel</em>'.
-	 * @generated
-	 */
-	UnresolvedMetamodel createUnresolvedMetamodel();
 
 	/**
 	 * Returns the package supported by this factory.

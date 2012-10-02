@@ -33,12 +33,12 @@ public interface FilteredMetamodelReference extends KermetaModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Metamodel</em>' reference.
-	 * @see #setMetamodel(AbstractMetamodel)
+	 * @see #setMetamodel(Metamodel)
 	 * @see org.kermeta.language.structure.StructurePackage#getFilteredMetamodelReference_Metamodel()
 	 * @model required="true"
 	 * @generated
 	 */
-	AbstractMetamodel getMetamodel();
+	Metamodel getMetamodel();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.language.structure.FilteredMetamodelReference#getMetamodel <em>Metamodel</em>}' reference.
@@ -48,6 +48,6 @@ public interface FilteredMetamodelReference extends KermetaModelElement {
 	 * @see #getMetamodel()
 	 * @generated
 	 */
-	void setMetamodel(AbstractMetamodel value);
+	void setMetamodel(Metamodel value);
 
 } // FilteredMetamodelReference

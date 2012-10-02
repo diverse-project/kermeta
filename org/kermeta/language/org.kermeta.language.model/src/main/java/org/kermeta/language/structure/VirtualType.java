@@ -58,20 +58,20 @@ public interface VirtualType extends ObjectTypeVariable {
 
 	/**
 	 * Returns the value of the '<em><b>Metamodel Variable</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.MetamodelVariable#getVirtualType <em>Virtual Type</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.ModelTypeVariable#getVirtualType <em>Virtual Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * To be written
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Metamodel Variable</em>' reference.
-	 * @see #setMetamodelVariable(MetamodelVariable)
+	 * @see #setMetamodelVariable(ModelTypeVariable)
 	 * @see org.kermeta.language.structure.StructurePackage#getVirtualType_MetamodelVariable()
-	 * @see org.kermeta.language.structure.MetamodelVariable#getVirtualType
+	 * @see org.kermeta.language.structure.ModelTypeVariable#getVirtualType
 	 * @model opposite="virtualType" required="true"
 	 * @generated
 	 */
-	MetamodelVariable getMetamodelVariable();
+	ModelTypeVariable getMetamodelVariable();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getMetamodelVariable <em>Metamodel Variable</em>}' reference.
@@ -81,7 +81,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see #getMetamodelVariable()
 	 * @generated
 	 */
-	void setMetamodelVariable(MetamodelVariable value);
+	void setMetamodelVariable(ModelTypeVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Param Binding</b></em>' containment reference list.

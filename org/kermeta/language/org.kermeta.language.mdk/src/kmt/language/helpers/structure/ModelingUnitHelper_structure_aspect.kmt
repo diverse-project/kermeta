@@ -16,9 +16,9 @@ require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ec
 using kermeta::standard
 
 
-aspect class AbstractMetamodel {
+aspect class Metamodel {
 	/**
-	 * Get a TypeDefinition contained in the current AbstractMetamodel by qualifiedName
+	 * Get a TypeDefinition contained in the current Metamodel by qualifiedName
 	 */
 	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
 		if canUseCachedStructuralTypeDefinitions.isVoid then
@@ -202,7 +202,7 @@ package internal{
 	class MetamodelCache {
 		/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
 		reference cachedStructuralTypeDefinitions : kermeta::utils::Hashtable<String,TypeDefinitionCollection>
-		operation initialize(mm : AbstractMetamodel) : MetamodelCache is do
+		operation initialize(mm : Metamodel) : MetamodelCache is do
 			// bug in kermeta 1 !?
 			//cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,Set<TypeDefinition>>.new
 			cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,TypeDefinitionCollection>.new

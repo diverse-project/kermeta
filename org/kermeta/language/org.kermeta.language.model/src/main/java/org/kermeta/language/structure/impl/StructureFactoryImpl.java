@@ -27,10 +27,10 @@ import org.kermeta.language.structure.FilteredMetamodelReference;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.MetamodelBinding;
-import org.kermeta.language.structure.MetamodelVariable;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
 import org.kermeta.language.structure.Operation;
@@ -49,7 +49,6 @@ import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
-import org.kermeta.language.structure.UnresolvedMetamodel;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
@@ -117,10 +116,10 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.TAG: return createTag();
 			case StructurePackage.CONSTRAINT: return createConstraint();
 			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
+			case StructurePackage.METAMODEL: return createMetamodel();
 			case StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER: return createModelElementTypeDefinitionContainer();
 			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
-			case StructurePackage.METAMODEL: return createMetamodel();
-			case StructurePackage.METAMODEL_VARIABLE: return createMetamodelVariable();
+			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.MODEL: return createModel();
 			case StructurePackage.UNRESOLVED_TYPE: return createUnresolvedType();
@@ -143,7 +142,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.UNRESOLVED_ADAPTATION_OPERATOR: return createUnresolvedAdaptationOperator();
 			case StructurePackage.ADAPTATION_PARAMETER: return createAdaptationParameter();
 			case StructurePackage.OPERATION_ADAPTATION_OPERATOR: return createOperationAdaptationOperator();
-			case StructurePackage.UNRESOLVED_METAMODEL: return createUnresolvedMetamodel();
 			case StructurePackage.MODEL_TYPE: return createModelType();
 			case StructurePackage.FILTERED_METAMODEL_REFERENCE: return createFilteredMetamodelReference();
 			default:
@@ -366,9 +364,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Metamodel createMetamodel() {
-		MetamodelImpl metamodel = new MetamodelImpl();
-		return metamodel;
+	public ModelTypeVariable createModelTypeVariable() {
+		ModelTypeVariableImpl modelTypeVariable = new ModelTypeVariableImpl();
+		return modelTypeVariable;
 	}
 
 	/**
@@ -376,9 +374,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetamodelVariable createMetamodelVariable() {
-		MetamodelVariableImpl metamodelVariable = new MetamodelVariableImpl();
-		return metamodelVariable;
+	public Metamodel createMetamodel() {
+		MetamodelImpl metamodel = new MetamodelImpl();
+		return metamodel;
 	}
 
 	/**
@@ -619,16 +617,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public OperationAdaptationOperator createOperationAdaptationOperator() {
 		OperationAdaptationOperatorImpl operationAdaptationOperator = new OperationAdaptationOperatorImpl();
 		return operationAdaptationOperator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnresolvedMetamodel createUnresolvedMetamodel() {
-		UnresolvedMetamodelImpl unresolvedMetamodel = new UnresolvedMetamodelImpl();
-		return unresolvedMetamodel;
 	}
 
 	/**

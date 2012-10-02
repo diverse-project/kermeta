@@ -138,13 +138,13 @@ class LanguageVisitor
 	
 	end
 	
-	operation visitModelTypeVariable(visited : MetamodelVariable, ctxt : LanguageVisitorContext) is do
+	operation visitModelTypeVariable(visited : ModelTypeVariable, ctxt : LanguageVisitorContext) is do
 		visited.virtualType.each{vT|
 			vT.accept(self, ctxt)
 		}
 	end
 	
-	operation visitAbstractMetamodel(visited : AbstractMetamodel, ctxt : LanguageVisitorContext) is do
+	operation visitMetamodel(visited : Metamodel, ctxt : LanguageVisitorContext) is do
 		visited.packages.each{p|
 			p.accept(self, ctxt)
 		}

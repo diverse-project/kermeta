@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.kermeta.language.structure.AbstractMetamodel;
 import org.kermeta.language.structure.FilteredMetamodelReference;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
@@ -39,7 +39,7 @@ public class FilteredMetamodelReferenceImpl extends KermetaModelElementImpl impl
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractMetamodel metamodel;
+	protected Metamodel metamodel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,10 +65,10 @@ public class FilteredMetamodelReferenceImpl extends KermetaModelElementImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractMetamodel getMetamodel() {
+	public Metamodel getMetamodel() {
 		if (metamodel != null && metamodel.eIsProxy()) {
 			InternalEObject oldMetamodel = (InternalEObject)metamodel;
-			metamodel = (AbstractMetamodel)eResolveProxy(oldMetamodel);
+			metamodel = (Metamodel)eResolveProxy(oldMetamodel);
 			if (metamodel != oldMetamodel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.FILTERED_METAMODEL_REFERENCE__METAMODEL, oldMetamodel, metamodel));
@@ -82,7 +82,7 @@ public class FilteredMetamodelReferenceImpl extends KermetaModelElementImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractMetamodel basicGetMetamodel() {
+	public Metamodel basicGetMetamodel() {
 		return metamodel;
 	}
 
@@ -91,8 +91,8 @@ public class FilteredMetamodelReferenceImpl extends KermetaModelElementImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetamodel(AbstractMetamodel newMetamodel) {
-		AbstractMetamodel oldMetamodel = metamodel;
+	public void setMetamodel(Metamodel newMetamodel) {
+		Metamodel oldMetamodel = metamodel;
 		metamodel = newMetamodel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.FILTERED_METAMODEL_REFERENCE__METAMODEL, oldMetamodel, metamodel));
@@ -122,7 +122,7 @@ public class FilteredMetamodelReferenceImpl extends KermetaModelElementImpl impl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.FILTERED_METAMODEL_REFERENCE__METAMODEL:
-				setMetamodel((AbstractMetamodel)newValue);
+				setMetamodel((Metamodel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +137,7 @@ public class FilteredMetamodelReferenceImpl extends KermetaModelElementImpl impl
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.FILTERED_METAMODEL_REFERENCE__METAMODEL:
-				setMetamodel((AbstractMetamodel)null);
+				setMetamodel((Metamodel)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Metamodel Variable</b></em>'.
+ * A representation of the model object '<em><b>Model Type Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -20,15 +20,15 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.MetamodelVariable#getVirtualType <em>Virtual Type</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.ModelTypeVariable#getVirtualType <em>Virtual Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.kermeta.language.structure.StructurePackage#getMetamodelVariable()
+ * @see org.kermeta.language.structure.StructurePackage#getModelTypeVariable()
  * @model
  * @generated
  */
-public interface MetamodelVariable extends TypeVariable {
+public interface ModelTypeVariable extends TypeVariable {
 	/**
 	 * Returns the value of the '<em><b>Virtual Type</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.VirtualType}.
@@ -39,11 +39,11 @@ public interface MetamodelVariable extends TypeVariable {
 	 * To be written
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Virtual Type</em>' reference list.
-	 * @see org.kermeta.language.structure.StructurePackage#getMetamodelVariable_VirtualType()
+	 * @see org.kermeta.language.structure.StructurePackage#getModelTypeVariable_VirtualType()
 	 * @see org.kermeta.language.structure.VirtualType#getMetamodelVariable
 	 * @model opposite="metamodelVariable"
 	 * @generated
 	 */
 	EList<VirtualType> getVirtualType();
 
-} // MetamodelVariable
+} // ModelTypeVariable

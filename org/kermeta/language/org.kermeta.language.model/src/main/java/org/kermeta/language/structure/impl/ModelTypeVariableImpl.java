@@ -18,24 +18,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.kermeta.language.structure.MetamodelVariable;
+import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.VirtualType;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Metamodel Variable</b></em>'.
+ * An implementation of the model object '<em><b>Model Type Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.impl.MetamodelVariableImpl#getVirtualType <em>Virtual Type</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.impl.ModelTypeVariableImpl#getVirtualType <em>Virtual Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MetamodelVariableImpl extends TypeVariableImpl implements MetamodelVariable {
+public class ModelTypeVariableImpl extends TypeVariableImpl implements ModelTypeVariable {
 	/**
 	 * The cached value of the '{@link #getVirtualType() <em>Virtual Type</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -51,7 +51,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MetamodelVariableImpl() {
+	protected ModelTypeVariableImpl() {
 		super();
 	}
 
@@ -62,7 +62,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.METAMODEL_VARIABLE;
+		return StructurePackage.Literals.MODEL_TYPE_VARIABLE;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	 */
 	public EList<VirtualType> getVirtualType() {
 		if (virtualType == null) {
-			virtualType = new EObjectWithInverseResolvingEList<VirtualType>(VirtualType.class, this, StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE);
+			virtualType = new EObjectWithInverseResolvingEList<VirtualType>(VirtualType.class, this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE);
 		}
 		return virtualType;
 	}
@@ -86,7 +86,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVirtualType()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -100,7 +100,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				return ((InternalEList<?>)getVirtualType()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -114,7 +114,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				return getVirtualType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -129,7 +129,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				getVirtualType().clear();
 				getVirtualType().addAll((Collection<? extends VirtualType>)newValue);
 				return;
@@ -145,7 +145,7 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				getVirtualType().clear();
 				return;
 		}
@@ -160,10 +160,10 @@ public class MetamodelVariableImpl extends TypeVariableImpl implements Metamodel
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.METAMODEL_VARIABLE__VIRTUAL_TYPE:
+			case StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE:
 				return virtualType != null && !virtualType.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //MetamodelVariableImpl
+} //ModelTypeVariableImpl
