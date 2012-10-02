@@ -72,7 +72,7 @@ aspect class ClassDefinition {
 			if getQualifiedName != "kermeta::standard::Object" then
 				var objectClass : Class init Class.new
 				objectClass.initializeFromAClassDefinition(
-					self.getRootContainer.asType(AbstractMetamodel).getTypeDefinitionByQualifiedName(
+					self.getRootContainer.asType(Metamodel).getTypeDefinitionByQualifiedName(
 						"kermeta::standard::Object").asType(ClassDefinition))
 				self.containedType.add(objectClass)
 				self.superType.add(objectClass)

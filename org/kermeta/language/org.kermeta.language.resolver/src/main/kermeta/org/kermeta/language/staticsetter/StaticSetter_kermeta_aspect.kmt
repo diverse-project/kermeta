@@ -51,7 +51,7 @@ package structure {
 	} 
 
 
-	aspect class AbstractMetamodel {
+	aspect class Metamodel {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from KermetaModelElement is do
 			super(context)
 			

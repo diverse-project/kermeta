@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.resolver.FullStaticResolver;
 import org.kermeta.language.resolver.ResolverException;
 import org.kermeta.language.resolver.api.KmResolver;
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.reference.ModelReference;
 import org.kermeta.utils.systemservices.api.result.ErrorProneResult;
@@ -47,7 +47,7 @@ public class KmResolverOperations {
 		}
 	}
 	
-	protected List<AbstractMetamodel> enforceAspect(List<AbstractMetamodel> mu) throws IOException{
+	protected List<Metamodel> enforceAspect(List<Metamodel> mu) throws IOException{
     	/*if(! (mu instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.ModelingUnitAspect)){
 	    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 	    	URI uri = URI.createURI(mu.getNamespacePrefix()+"."+mu.getName() + ".km_in_memory");
@@ -81,7 +81,7 @@ public class KmResolverOperations {
     }
 
 	public ErrorProneResult<ModelingUnit> doResolving(ModelingUnit mu) {	
-		ModelingUnit muResolved = new ModelingUnit(new ArrayList<AbstractMetamodel>());
+		ModelingUnit muResolved = new ModelingUnit(new ArrayList<Metamodel>());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved.getMetamodels().addAll(resolver.doResolving(enforceAspect(mu.getMetamodels())));	
@@ -105,7 +105,7 @@ public class KmResolverOperations {
 	}
 
 	public ErrorProneResult<ModelingUnit> doStaticSetting(ModelingUnit mu) {		
-		ModelingUnit muResolved = new ModelingUnit(new ArrayList<AbstractMetamodel>());
+		ModelingUnit muResolved = new ModelingUnit(new ArrayList<Metamodel>());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved.getMetamodels().addAll(resolver.doStaticSetting(enforceAspect(mu.getMetamodels())));
@@ -128,7 +128,7 @@ public class KmResolverOperations {
 	}
 
 	public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu) {
-		ModelingUnit muResolved = new ModelingUnit(new ArrayList<AbstractMetamodel>());
+		ModelingUnit muResolved = new ModelingUnit(new ArrayList<Metamodel>());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved.getMetamodels().addAll(resolver.resolve(enforceAspect(mu.getMetamodels())));

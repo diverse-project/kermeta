@@ -71,8 +71,8 @@ class FullStaticResolver
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
 		       	
-       	var unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>
-       	var resolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>
+       	var unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>
+       	var resolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>
        	
        	unresolvedMetamodels ?= unresolvedModelResource.one
        	unresolvedMetamodels.each{mm|
@@ -107,7 +107,7 @@ class FullStaticResolver
 	/* * 
 		launch the entire resolving process
 	*/
-	operation resolve(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+	operation resolve(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		result := doStaticSetting(
 			doStructureResolving(
 				doTypeAwareMerging(
@@ -121,7 +121,7 @@ class FullStaticResolver
 	/* * 
 		launch only the unresolved types resolution after this step all unresolved types should be resolved 
 	*/
-	operation doTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+	operation doTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		//init of context
 		stdio.writeln("	********************* 666 Type Resolving *********************")
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels)
@@ -134,7 +134,7 @@ class FullStaticResolver
 	end
 	
 	
-	operation doPrimitiveTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+	operation doPrimitiveTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		//stdio.writeln("doPrimitiveTypeResolving")
 		stdio.writeln("	********************* Primitive Type Resolving *********************")
 		unresolvedMetamodels.each{mm|
@@ -147,7 +147,7 @@ class FullStaticResolver
 		pass to launch only when there are no more unresolved types
 		merge the operations and properties that have the same signature (not possible if some types are unresolved)
 	*/
-	operation doTypeAwareMerging(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+	operation doTypeAwareMerging(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Type Aware Merging  *********************")
 		var mergeCtxt : TypeAwareMergerContext init TypeAwareMergerContext.new
 		mergeCtxt.errors:=ctxt.errors
@@ -168,7 +168,7 @@ class FullStaticResolver
 		not possible until there is one unique definition for each operation and property (i.e. not possible before type aware merging) 
 		
 	*/
-	operation doStructureResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+	operation doStructureResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		//init of context
 		stdio.writeln("	********************* Structure Resolving  *********************")
 		unresolvedMetamodels.each{mm|
@@ -182,7 +182,7 @@ class FullStaticResolver
 	/* *
 	*	chain all the resolving passes for the structural part of the program
 	*/
-	operation doResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do
+	operation doResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Resolving " + unresolvedMetamodels.toString() + " *********************")
        	/*var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 
@@ -202,7 +202,7 @@ class FullStaticResolver
 	/* *
 		resolve all the behavioral part and add static types
 	*/
-	operation doStaticSetting(unresolvedMetamodels : Collection<org::kermeta::language::structure::AbstractMetamodel>) : Collection<org::kermeta::language::structure::AbstractMetamodel> is do      	
+	operation doStaticSetting(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do      	
 		stdio.writeln("	********************* Static setting " + unresolvedMetamodels.toString() + " *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedMetamodels)
 		

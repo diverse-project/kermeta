@@ -29,7 +29,7 @@ class StaticSetterContext
 
 	attribute verbose : Boolean
 
-	operation initialize(mms : Collection<AbstractMetamodel>) : StaticSetterContext is do
+	operation initialize(mms : Collection<Metamodel>) : StaticSetterContext is do
 	 	result := self
 	 	currentMetamodels := mms
 	 	waitingContext:=Sequence<ToBeResolvedLater>.new
@@ -61,7 +61,7 @@ class StaticSetterContext
 	/**
 	 * Metamodels we are processing 
 	 */
-	reference currentMetamodels : Collection<AbstractMetamodel>
+	reference currentMetamodels : Collection<Metamodel>
 	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
 	reference currentOperation : org::kermeta::language::structure::Operation
 	reference currentProperty : org::kermeta::language::structure::Property
