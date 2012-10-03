@@ -40,11 +40,6 @@ object PrettyPrinter {
    */
   def printOutline(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case umm: UnresolvedMetamodel => {
-        res.append(umm.getName())
-        umm.getPackages().foreach(p => printOutline(p, res))
-        umm.getReferencedMetamodels().foreach(muRef => printOutline(muRef, res))
-      }
       case mm: Metamodel => {
         res.append(mm.getName())
         mm.getPackages().foreach(p => printOutline(p, res))
@@ -240,12 +235,6 @@ object PrettyPrinter {
   }
   def print(o: EObject, res: java.lang.StringBuffer): Unit = {
     o match {
-      case umm: UnresolvedMetamodel => {
-        res.append("metamodel " + umm.getName() + "{\n")
-        umm.getPackages().foreach(p => print(p, res))
-        umm.getReferencedMetamodels().foreach(muRef => print(muRef, res))
-        res.append("\n}\n")
-      }
       case mm: Metamodel => {
         res.append("metamodel " + mm.getName() + "{\n")
         mm.getPackages().foreach(p => print(p, res))

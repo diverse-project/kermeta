@@ -12,8 +12,6 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import java.util.ArrayList
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaIterator
 import scala.util.parsing.input.Positional
@@ -26,12 +24,10 @@ import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KTagParser
 import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KUsingParser
 import org.kermeta.language.structure.ClassDefinition
 import org.kermeta.language.structure.Enumeration
-import org.kermeta.language.structure.Metamodel
 import org.kermeta.language.structure.Package
 import org.kermeta.language.structure.PrimitiveType
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
-import org.kermeta.language.structure.UnresolvedMetamodel
 import org.kermeta.language.structure.UnresolvedType
 import org.kermeta.language.structure.Using
 import org.kermeta.language.util.ModelingUnit
@@ -53,7 +49,8 @@ trait KModelingUnitParser extends KAbstractParser with KTagParser with KUsingPar
   def program = opt((annotation)+) ~ opt(packageNamespaceDecl) ~ opt(kermetaUnitHeader) ~ opt(kermetaUnitContent) ^^ {
     case rootTag ~ packPrefix ~ header ~ unitContent =>
       var newModelingUnit = new ModelingUnit();
-      var rootMetamodel = StructureFactory.eINSTANCE.createUnresolvedMetamodel()
+      var rootMetamodel = StructureFactory.eINSTANCE.createMetamodel()
+      rootMetamodel.setIsResolved(false)
       newModelingUnit.getMetamodels().add(rootMetamodel)
 
       rootTag.foreach{elem => elem match {

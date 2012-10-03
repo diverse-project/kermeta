@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.loader.kmt.scala.internal.parser.KParser;
 import org.kermeta.language.loader.kmt.scala.internal.parser.ParseException;
 import org.kermeta.language.loader.kmt.scala.internal.parser.ParserUtil;
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Tag;
@@ -80,7 +80,7 @@ public class KMTparser implements org.kermeta.language.loader.kmt.scala.api.KMTp
     	// Add file URL to tag source.location for all contents
     	
     	ModelingUnit mu = (ModelingUnit)result.get();
-    	for(AbstractMetamodel amm : mu.getMetamodels()){
+    	for(Metamodel amm : mu.getMetamodels()){
 	    	TreeIterator<EObject> tit = amm.eAllContents();
 	    	while(tit.hasNext()) {
 	    		KermetaModelElement kme = (KermetaModelElement) tit.next();
