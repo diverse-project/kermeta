@@ -15,7 +15,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 using kermeta::standard
 
-aspect class AbstractMetamodel
+aspect class Metamodel
 {
 	/**
 	 * Fake invariant for testing purposes

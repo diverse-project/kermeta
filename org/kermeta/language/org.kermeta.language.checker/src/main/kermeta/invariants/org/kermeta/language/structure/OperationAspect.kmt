@@ -135,7 +135,7 @@ aspect class Operation
 			else
 				//stdio.writeln("There are " + nbParameter.toString + " parameters ...")
 		  		// retrieve the modelingunit and String TypeDefinition
-		  		var mm : AbstractMetamodel init self.getRootContainer.asType(AbstractMetamodel)
+		  		var mm : Metamodel init self.getRootContainer.asType(Metamodel)
 		  		var stringTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("kermeta::standard::String")
 		  		
 		  		//stdio.writeln("stringTypeDef retrieved : "+ stringTypeDef.toString)

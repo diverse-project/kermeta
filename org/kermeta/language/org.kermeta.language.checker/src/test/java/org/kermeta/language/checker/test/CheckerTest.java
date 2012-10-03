@@ -24,7 +24,7 @@ import org.kermeta.language.checker.CheckerImpl;
 import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.util.ModelingUnit;
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
@@ -154,9 +154,9 @@ public class CheckerTest extends TestCase {
 		Resource resource = resourceSet.createResource(URI.createFileURI(kmFile));
 		ModelingUnit mu;
 		resource.load(m);
-		List<AbstractMetamodel> mms = new ArrayList<AbstractMetamodel>();
+		List<Metamodel> mms = new ArrayList<Metamodel>();
 		for(EObject e : resource.getContents()) {
-			mms.add((AbstractMetamodel) e);
+			mms.add((Metamodel) e);
 		}
 		mu = new ModelingUnit(mms);
            

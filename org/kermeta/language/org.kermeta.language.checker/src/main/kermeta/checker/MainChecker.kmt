@@ -43,7 +43,7 @@ class MainCheckerV2
 		
 		inputRes.load()
 		
-		var mms : Set<AbstractMetamodel>
+		var mms : Set<Metamodel>
 		mms ?= inputRes.contents
 		
 	

@@ -4,7 +4,7 @@ import org.kermeta.diagnostic.DiagnosticModel;
 import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
 import org.kermeta.language.checker.internal.Activator;
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
@@ -23,8 +23,8 @@ public class CheckerImpl4Eclipse implements Checker {
 		DiagnosticModel result = null;
 		DiagnosticModel tmpDiagnostic;
 		
-		for (AbstractMetamodel mm : mu.getMetamodels()) {
-			((org.kermeta.language.language.checker.org.kermeta.language.structure.AbstractMetamodelAspect)mm).KersetCanUseCachedStructuralTypeDefinitions(true);
+		for (Metamodel mm : mu.getMetamodels()) {
+			((org.kermeta.language.language.checker.org.kermeta.language.structure.MetamodelAspect)mm).KersetCanUseCachedStructuralTypeDefinitions(true);
 			if (result == null) {
 				result = checker.checkObject(mm, scope.toString());
 			}
