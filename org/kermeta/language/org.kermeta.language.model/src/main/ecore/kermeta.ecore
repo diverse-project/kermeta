@@ -968,7 +968,7 @@
               upperBound="-1" eType="#//kermeta/language/structure/FilteredMetamodelReference"
               containment="true"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="isResolved" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-              defaultValueLiteral="false"/>
+              transient="true" defaultValueLiteral="false"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelElementTypeDefinitionContainer"
             eSuperTypes="#//kermeta/language/structure/NamedElement">

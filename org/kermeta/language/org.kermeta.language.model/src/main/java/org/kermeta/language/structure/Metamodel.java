@@ -102,7 +102,7 @@ public interface Metamodel extends KermetaModelElement, NamedElement, TypeDefini
 	 * @return the value of the '<em>Is Resolved</em>' attribute.
 	 * @see #setIsResolved(boolean)
 	 * @see org.kermeta.language.structure.StructurePackage#getMetamodel_IsResolved()
-	 * @model default="false"
+	 * @model default="false" transient="true"
 	 * @generated
 	 */
 	boolean isIsResolved();

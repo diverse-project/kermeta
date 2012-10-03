@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.*;
 import org.kermeta.DummyClass;
 import org.kermeta.KmPackage;
 

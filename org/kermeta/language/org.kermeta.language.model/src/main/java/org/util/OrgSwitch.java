@@ -8,6 +8,7 @@ package org.util;
 
 import java.util.List;
 
+import org.*;
 import org.DummyClass;
 import org.OrgPackage;
 import org.eclipse.emf.ecore.EClass;
