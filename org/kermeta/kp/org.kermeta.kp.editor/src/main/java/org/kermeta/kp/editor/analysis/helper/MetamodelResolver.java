@@ -81,6 +81,19 @@ public class MetamodelResolver {
 				}
 			}
 		}
+		// if we could not resolve the identifier, try to give a more
+		// detailed error message
+		if (!result.wasResolved()) {
+			StringBuffer sb = new StringBuffer();
+			for (String nextIdentifier : candidates.keySet()) {
+				if(!nextIdentifier.equals(candidates.keySet().iterator().next())){
+					sb.append(", ");
+				}
+				sb.append(nextIdentifier);
+				
+			}
+			result.setErrorMessage("'" + identifier + "' not found. \nCurrently known metamodels are : "+sb);			
+		}
 		
 	}
 	private void addCandidates(Map<String, Metamodel> candidates, KermetaProject kp) {
@@ -98,14 +111,14 @@ public class MetamodelResolver {
 		List<KermetaProject> result = new ArrayList<KermetaProject>();
 		for (ImportProjectJar importedProjectJar : kp.getImportedProjectJars()) {
 			String containerUrl = varExpander.expandVariables(importedProjectJar.getUrl());
-			KermetaProject foundProject = findKermetaProject(containerUrl.endsWith(".jar")? containerUrl+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER);
+			KermetaProject foundProject = findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER);
 			if(foundProject != null){
 				result.add(foundProject);
 			}
 		}
 		for(ImportProjectSources importedProjectSources : kp.getImportedProjectSources() ){
 			String containerUrl = varExpander.expandVariables(importedProjectSources.getUrl());
-			KermetaProject foundProject = findKermetaProject(containerUrl.endsWith(".jar") ? containerUrl+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER);
+			KermetaProject foundProject = findKermetaProject(containerUrl.endsWith(".jar") ? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER);
 			if(foundProject != null){
 				result.add(foundProject);
 			}
@@ -147,6 +160,8 @@ public class MetamodelResolver {
 			EReference reference) {
 		return element.getMetamodelName();
 	}
+	
+
 }
 
 
