@@ -76,7 +76,7 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 					 addKermetaNatureToProject(project);
 					 createFolder(project, "src/main/kmt", monitor);
 					 createDefaultKmt(project, "src/main/kmt/MainClass.kmt", monitor);
-					 createDefaultKp(project, project.getName()+".kp", monitor);
+					 createDefaultKp(project, "project.kp", monitor);
 				 }
 			};
 			ResourcesPlugin.getWorkspace().run(operation, null);
