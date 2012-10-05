@@ -1,25 +1,24 @@
 Manifest-Version: 1.0
-Export-Package: org.kermeta.kp.impl;uses:="org.eclipse.emf.ecore.util,
- org.eclipse.emf.ecore,org.kermeta.kp,org.eclipse.emf.common.util,org.
- eclipse.emf.common.notify,org.eclipse.emf.ecore.impl,org.eclipse.emf.
- ecore.plugin,org.eclipse.emf.ecore.resource",org.kermeta.kp;uses:="or
- g.eclipse.emf.common.util,org.eclipse.emf.ecore,org.kermeta.kp.impl",
- org.kermeta.kp.util;uses:="org.eclipse.emf.ecore,org.kermeta.kp,org.e
- clipse.emf.common.notify,org.eclipse.emf.common.notify.impl,org.eclip
- se.emf.ecore.util"
-Private-Package: .
-Bundle-ClassPath: .
-Built-By: dvojtise
-Tool: Bnd-0.0.311
-Bundle-Name: kp.model :: KP MODEL
-Created-By: Apache Maven Bundle Plugin
+Bnd-LastModified: 1349354227941
 Build-Jdk: 1.6.0_17
-Bundle-Version: 2.0.1.SNAPSHOT
-Bnd-LastModified: 1321518547589
+Built-By: dvojtise
+Bundle-ClassPath: .
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
- otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
- pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
- .resource,org.eclipse.emf.ecore.util
+Bundle-Name: kp.model :: KP MODEL
 Bundle-SymbolicName: org.kermeta.kp.model;singleton:=true
-
+Bundle-Version: 2.0.7.SNAPSHOT_20121004_1437
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.kp.impl;uses:="org.eclipse.emf.ecore,org.ker
+ meta.kp,org.eclipse.emf.common.notify,org.eclipse.emf.ecore.impl,org.ec
+ lipse.emf.ecore.util,org.eclipse.emf.common.util,org.eclipse.emf.ecore.
+ plugin,org.eclipse.emf.ecore.resource";version="2.0.7.SNAPSHOT_20121004
+ _1155",org.kermeta.kp;uses:="org.eclipse.emf.ecore,org.eclipse.emf.comm
+ on.util,org.kermeta.kp.impl";version="2.0.7.SNAPSHOT_20121004_1155",org
+ .kermeta.kp.util;uses:="org.eclipse.emf.ecore,org.kermeta.kp,org.eclips
+ e.emf.common.notify,org.eclipse.emf.common.notify.impl,org.eclipse.emf.
+ ecore.util";version="2.0.7.SNAPSHOT_20121004_1155"
+Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.not
+ ify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.eclipse.
+ emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.resou
+ rce,org.eclipse.emf.ecore.util
+Tool: Bnd-1.50.0

@@ -35,60 +35,6 @@ public interface KpFactory extends EFactory {
 	KermetaProject createKermetaProject();
 
 	/**
-   * Returns a new object of class '<em>Dependency</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Dependency</em>'.
-   * @generated
-   */
-	Dependency createDependency();
-
-	/**
-   * Returns a new object of class '<em>Source</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Source</em>'.
-   * @generated
-   */
-	Source createSource();
-
-	/**
-   * Returns a new object of class '<em>Weave Directive</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Weave Directive</em>'.
-   * @generated
-   */
-	WeaveDirective createWeaveDirective();
-
-	/**
-   * Returns a new object of class '<em>Option</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Option</em>'.
-   * @generated
-   */
-	Option createOption();
-
-	/**
-   * Returns a new object of class '<em>String Expression</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>String Expression</em>'.
-   * @generated
-   */
-	StringExpression createStringExpression();
-
-	/**
-   * Returns a new object of class '<em>Mix Expression</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Mix Expression</em>'.
-   * @generated
-   */
-	MixExpression createMixExpression();
-
-	/**
    * Returns a new object of class '<em>Package Equivalence</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,6 +42,60 @@ public interface KpFactory extends EFactory {
    * @generated
    */
 	PackageEquivalence createPackageEquivalence();
+
+	/**
+   * Returns a new object of class '<em>Metamodel</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Metamodel</em>'.
+   * @generated
+   */
+  Metamodel createMetamodel();
+
+  /**
+   * Returns a new object of class '<em>Reusable Resource</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reusable Resource</em>'.
+   * @generated
+   */
+	ReusableResource createReusableResource();
+
+	/**
+   * Returns a new object of class '<em>Import Project Sources</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Import Project Sources</em>'.
+   * @generated
+   */
+	ImportProjectSources createImportProjectSources();
+
+	/**
+   * Returns a new object of class '<em>Import Project Jar</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Import Project Jar</em>'.
+   * @generated
+   */
+	ImportProjectJar createImportProjectJar();
+
+	/**
+   * Returns a new object of class '<em>Import Bytecode Jar</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Import Bytecode Jar</em>'.
+   * @generated
+   */
+	ImportBytecodeJar createImportBytecodeJar();
+
+	/**
+   * Returns a new object of class '<em>Import File</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Import File</em>'.
+   * @generated
+   */
+	ImportFile createImportFile();
 
 	/**
    * Returns the package supported by this factory.

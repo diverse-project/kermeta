@@ -65,7 +65,8 @@
 						<Export-Package>org.kermeta.kp.*</Export-Package>
 						<Import-Package>
 							!org.eclipse.core.*,
-							org.eclipse.emf.*
+							org.eclipse.emf.*,
+							org.kermeta.utils.*
 						</Import-Package>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
 						<!-- add extra element in the manifest, copy them from this file ex: 
@@ -74,6 +75,40 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			<!-- correctly configure eclipse project accordingly to the pom -->
+            <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.8</version>
+			    <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html for more information -->
+			    <configuration>
+			      <downloadSources>true</downloadSources>
+			      <downloadJavadocs>true</downloadJavadocs>
+			      <projectNameTemplate>org.kermeta.[artifactId]</projectNameTemplate>
+			      <projectnatures>
+			        <projectnature>org.eclipse.pde.PluginNature</projectnature>
+			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+			      </projectnatures>
+			      <buildcommands>
+			        <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
+			        <buildcommand>org.eclipse.pde.SchemaBuilder</buildcommand>
+			        <buildcommand>org.eclipse.pde.ManifestBuilder</buildcommand>
+			      </buildcommands>
+			      <classpathContainers>
+			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			        <classpathContainer>org.eclipse.pde.core.requiredPlugins</classpathContainer>
+			      </classpathContainers>
+			      <excludes> 
+			        <!-- <exclude>org.scala-lang:scala-library</exclude> -->
+			        <!-- <exclude>org.scala-lang:scala-compiler</exclude> -->
+			      </excludes>
+			      <sourceIncludes>
+			        <!-- <sourceInclude>**/*.scala</sourceInclude>-->
+			        <sourceInclude>**/*.java</sourceInclude>
+			      </sourceIncludes>
+			      <useProjectReferences>false</useProjectReferences>
+			    </configuration>
+			  </plugin>
 			<!-- copy generated MANIFEST in the project for eclipse user -->
              <plugin>
                 <groupId>org.codehaus.mojo</groupId>

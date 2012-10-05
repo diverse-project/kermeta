@@ -7,6 +7,7 @@
 package org.kermeta.kp;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,14 +17,15 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.kp.KermetaProject#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getSources <em>Sources</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getWeaveDirectives <em>Weave Directives</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getOptions <em>Options</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getEclipseName <em>Eclipse Name</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getGroup <em>Group</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getPackageEquivalences <em>Package Equivalences</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getJavaBasePackage <em>Java Base Package</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getMetamodels <em>Metamodels</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getReusableResources <em>Reusable Resources</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectJars <em>Imported Project Jars</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectSources <em>Imported Project Sources</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,70 +33,32 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface KermetaProject extends NamedElement {
+public interface KermetaProject extends EObject {
 	/**
-   * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.Dependency}.
+   * Returns the value of the '<em><b>Eclipse Name</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Eclipse Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Dependencies</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_Dependencies()
-   * @model containment="true"
+   * @return the value of the '<em>Eclipse Name</em>' attribute.
+   * @see #setEclipseName(String)
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_EclipseName()
+   * @model required="true"
    * @generated
    */
-	EList<Dependency> getDependencies();
+	String getEclipseName();
 
 	/**
-   * Returns the value of the '<em><b>Sources</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.Source}.
+   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getEclipseName <em>Eclipse Name</em>}' attribute.
    * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sources</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Sources</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_Sources()
-   * @model containment="true"
+   * @param value the new value of the '<em>Eclipse Name</em>' attribute.
+   * @see #getEclipseName()
    * @generated
    */
-	EList<Source> getSources();
-
-	/**
-   * Returns the value of the '<em><b>Weave Directives</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.WeaveDirective}.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Weave Directives</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Weave Directives</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_WeaveDirectives()
-   * @model containment="true"
-   * @generated
-   */
-	EList<WeaveDirective> getWeaveDirectives();
-
-	/**
-   * Returns the value of the '<em><b>Options</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.Option}.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Options</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Options</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_Options()
-   * @model containment="true"
-   * @generated
-   */
-	EList<Option> getOptions();
+	void setEclipseName(String value);
 
 	/**
    * Returns the value of the '<em><b>Default Main Class</b></em>' attribute.
@@ -149,46 +113,110 @@ public interface KermetaProject extends NamedElement {
   void setDefaultMainOperation(String value);
 
 		/**
-   * Returns the value of the '<em><b>Group</b></em>' attribute.
+   * Returns the value of the '<em><b>Java Base Package</b></em>' attribute.
    * The default value is <code>"default"</code>.
    * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Group</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Java Base Package</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Group</em>' attribute.
-   * @see #setGroup(String)
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_Group()
+   * @return the value of the '<em>Java Base Package</em>' attribute.
+   * @see #setJavaBasePackage(String)
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_JavaBasePackage()
    * @model default="default"
    * @generated
    */
-	String getGroup();
+	String getJavaBasePackage();
 
 		/**
-   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getGroup <em>Group</em>}' attribute.
+   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getJavaBasePackage <em>Java Base Package</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Group</em>' attribute.
-   * @see #getGroup()
+   * @param value the new value of the '<em>Java Base Package</em>' attribute.
+   * @see #getJavaBasePackage()
    * @generated
    */
-	void setGroup(String value);
+	void setJavaBasePackage(String value);
 
 		/**
-   * Returns the value of the '<em><b>Package Equivalences</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.PackageEquivalence}.
+   * Returns the value of the '<em><b>Metamodels</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.Metamodel}.
    * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Package Equivalences</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Package Equivalences</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_PackageEquivalences()
+   * <p>
+   * If the meaning of the '<em>Metamodels</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Metamodels</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_Metamodels()
    * @model containment="true"
    * @generated
    */
-	EList<PackageEquivalence> getPackageEquivalences();
+  EList<Metamodel> getMetamodels();
+
+    /**
+   * Returns the value of the '<em><b>Reusable Resources</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.ReusableResource}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reusable Resources</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Reusable Resources</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_ReusableResources()
+   * @model containment="true"
+   * @generated
+   */
+	EList<ReusableResource> getReusableResources();
+
+				/**
+   * Returns the value of the '<em><b>Imported Project Jars</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.ImportProjectJar}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Project Jars</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Imported Project Jars</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedProjectJars()
+   * @model containment="true"
+   * @generated
+   */
+	EList<ImportProjectJar> getImportedProjectJars();
+
+				/**
+   * Returns the value of the '<em><b>Imported Bytecode Jars</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.ImportBytecodeJar}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Bytecode Jars</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Imported Bytecode Jars</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedBytecodeJars()
+   * @model containment="true"
+   * @generated
+   */
+	EList<ImportBytecodeJar> getImportedBytecodeJars();
+
+				/**
+   * Returns the value of the '<em><b>Imported Project Sources</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.ImportProjectSources}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Project Sources</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Imported Project Sources</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedProjectSources()
+   * @model containment="true"
+   * @generated
+   */
+	EList<ImportProjectSources> getImportedProjectSources();
 
 } // KermetaProject

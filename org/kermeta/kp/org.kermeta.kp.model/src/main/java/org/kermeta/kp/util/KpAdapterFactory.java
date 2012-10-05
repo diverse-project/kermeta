@@ -81,49 +81,39 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
         return createKermetaProjectAdapter();
       }
       @Override
-      public Adapter caseDependency(Dependency object)
+      public Adapter caseImportFile(ImportFile object)
       {
-        return createDependencyAdapter();
-      }
-      @Override
-      public Adapter caseNamedElement(NamedElement object)
-      {
-        return createNamedElementAdapter();
-      }
-      @Override
-      public Adapter caseSource(Source object)
-      {
-        return createSourceAdapter();
-      }
-      @Override
-      public Adapter caseWeaveDirective(WeaveDirective object)
-      {
-        return createWeaveDirectiveAdapter();
-      }
-      @Override
-      public Adapter caseOption(Option object)
-      {
-        return createOptionAdapter();
-      }
-      @Override
-      public Adapter caseExpression(Expression object)
-      {
-        return createExpressionAdapter();
-      }
-      @Override
-      public Adapter caseStringExpression(StringExpression object)
-      {
-        return createStringExpressionAdapter();
-      }
-      @Override
-      public Adapter caseMixExpression(MixExpression object)
-      {
-        return createMixExpressionAdapter();
+        return createImportFileAdapter();
       }
       @Override
       public Adapter casePackageEquivalence(PackageEquivalence object)
       {
         return createPackageEquivalenceAdapter();
+      }
+      @Override
+      public Adapter caseMetamodel(Metamodel object)
+      {
+        return createMetamodelAdapter();
+      }
+      @Override
+      public Adapter caseReusableResource(ReusableResource object)
+      {
+        return createReusableResourceAdapter();
+      }
+      @Override
+      public Adapter caseImportProjectSources(ImportProjectSources object)
+      {
+        return createImportProjectSourcesAdapter();
+      }
+      @Override
+      public Adapter caseImportProjectJar(ImportProjectJar object)
+      {
+        return createImportProjectJarAdapter();
+      }
+      @Override
+      public Adapter caseImportBytecodeJar(ImportBytecodeJar object)
+      {
+        return createImportBytecodeJarAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -161,118 +151,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.Dependency <em>Dependency</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.Dependency
-   * @generated
-   */
-	public Adapter createDependencyAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.NamedElement <em>Named Element</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.NamedElement
-   * @generated
-   */
-	public Adapter createNamedElementAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.Source <em>Source</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.Source
-   * @generated
-   */
-	public Adapter createSourceAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.WeaveDirective <em>Weave Directive</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.WeaveDirective
-   * @generated
-   */
-	public Adapter createWeaveDirectiveAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.Option <em>Option</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.Option
-   * @generated
-   */
-	public Adapter createOptionAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.Expression <em>Expression</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.Expression
-   * @generated
-   */
-	public Adapter createExpressionAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.StringExpression <em>String Expression</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.StringExpression
-   * @generated
-   */
-	public Adapter createStringExpressionAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.MixExpression <em>Mix Expression</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.MixExpression
-   * @generated
-   */
-	public Adapter createMixExpressionAdapter() {
-    return null;
-  }
-
-	/**
    * Creates a new adapter for an object of class '{@link org.kermeta.kp.PackageEquivalence <em>Package Equivalence</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -283,6 +161,91 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
 	public Adapter createPackageEquivalenceAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.Metamodel <em>Metamodel</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.Metamodel
+   * @generated
+   */
+  public Adapter createMetamodelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ReusableResource <em>Reusable Resource</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.ReusableResource
+   * @generated
+   */
+	public Adapter createReusableResourceAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportProjectSources <em>Import Project Sources</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.ImportProjectSources
+   * @generated
+   */
+	public Adapter createImportProjectSourcesAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportProjectJar <em>Import Project Jar</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.ImportProjectJar
+   * @generated
+   */
+	public Adapter createImportProjectJarAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportBytecodeJar <em>Import Bytecode Jar</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.ImportBytecodeJar
+   * @generated
+   */
+	public Adapter createImportBytecodeJarAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportFile <em>Import File</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.ImportFile
+   * @generated
+   */
+	public Adapter createImportFileAdapter() {
     return null;
   }
 

@@ -79,68 +79,13 @@ public class KpSwitch<T> extends Switch<T> {
       {
         KermetaProject kermetaProject = (KermetaProject)theEObject;
         T result = caseKermetaProject(kermetaProject);
-        if (result == null) result = caseNamedElement(kermetaProject);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case KpPackage.DEPENDENCY:
+      case KpPackage.IMPORT_FILE:
       {
-        Dependency dependency = (Dependency)theEObject;
-        T result = caseDependency(dependency);
-        if (result == null) result = caseNamedElement(dependency);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.NAMED_ELEMENT:
-      {
-        NamedElement namedElement = (NamedElement)theEObject;
-        T result = caseNamedElement(namedElement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.SOURCE:
-      {
-        Source source = (Source)theEObject;
-        T result = caseSource(source);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.WEAVE_DIRECTIVE:
-      {
-        WeaveDirective weaveDirective = (WeaveDirective)theEObject;
-        T result = caseWeaveDirective(weaveDirective);
-        if (result == null) result = caseNamedElement(weaveDirective);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.OPTION:
-      {
-        Option option = (Option)theEObject;
-        T result = caseOption(option);
-        if (result == null) result = caseNamedElement(option);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.EXPRESSION:
-      {
-        Expression expression = (Expression)theEObject;
-        T result = caseExpression(expression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.STRING_EXPRESSION:
-      {
-        StringExpression stringExpression = (StringExpression)theEObject;
-        T result = caseStringExpression(stringExpression);
-        if (result == null) result = caseExpression(stringExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.MIX_EXPRESSION:
-      {
-        MixExpression mixExpression = (MixExpression)theEObject;
-        T result = caseMixExpression(mixExpression);
-        if (result == null) result = caseExpression(mixExpression);
+        ImportFile importFile = (ImportFile)theEObject;
+        T result = caseImportFile(importFile);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -148,6 +93,41 @@ public class KpSwitch<T> extends Switch<T> {
       {
         PackageEquivalence packageEquivalence = (PackageEquivalence)theEObject;
         T result = casePackageEquivalence(packageEquivalence);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case KpPackage.METAMODEL:
+      {
+        Metamodel metamodel = (Metamodel)theEObject;
+        T result = caseMetamodel(metamodel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case KpPackage.REUSABLE_RESOURCE:
+      {
+        ReusableResource reusableResource = (ReusableResource)theEObject;
+        T result = caseReusableResource(reusableResource);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case KpPackage.IMPORT_PROJECT_SOURCES:
+      {
+        ImportProjectSources importProjectSources = (ImportProjectSources)theEObject;
+        T result = caseImportProjectSources(importProjectSources);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case KpPackage.IMPORT_PROJECT_JAR:
+      {
+        ImportProjectJar importProjectJar = (ImportProjectJar)theEObject;
+        T result = caseImportProjectJar(importProjectJar);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case KpPackage.IMPORT_BYTECODE_JAR:
+      {
+        ImportBytecodeJar importBytecodeJar = (ImportBytecodeJar)theEObject;
+        T result = caseImportBytecodeJar(importBytecodeJar);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -171,126 +151,6 @@ public class KpSwitch<T> extends Switch<T> {
   }
 
 	/**
-   * Returns the result of interpreting the object as an instance of '<em>Dependency</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Dependency</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseDependency(Dependency object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseNamedElement(NamedElement object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Source</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Source</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseSource(Source object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Weave Directive</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Weave Directive</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseWeaveDirective(WeaveDirective object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Option</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Option</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseOption(Option object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseExpression(Expression object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>String Expression</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>String Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseStringExpression(StringExpression object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Mix Expression</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Mix Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseMixExpression(MixExpression object) {
-    return null;
-  }
-
-	/**
    * Returns the result of interpreting the object as an instance of '<em>Package Equivalence</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -302,6 +162,97 @@ public class KpSwitch<T> extends Switch<T> {
    * @generated
    */
 	public T casePackageEquivalence(PackageEquivalence object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Metamodel</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Metamodel</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMetamodel(Metamodel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reusable Resource</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reusable Resource</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseReusableResource(ReusableResource object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Import Project Sources</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Import Project Sources</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseImportProjectSources(ImportProjectSources object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Import Project Jar</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Import Project Jar</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseImportProjectJar(ImportProjectJar object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Import Bytecode Jar</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Import Bytecode Jar</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseImportBytecodeJar(ImportBytecodeJar object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Import File</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Import File</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseImportFile(ImportFile object) {
     return null;
   }
 

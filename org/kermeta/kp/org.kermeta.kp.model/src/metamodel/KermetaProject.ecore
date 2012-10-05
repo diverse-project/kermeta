@@ -3,64 +3,59 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kp"
     nsURI="http://www.kermeta.org/kp/1.0.0" nsPrefix="org.kermeta.kp">
-  <eClassifiers xsi:type="ecore:EClass" name="KermetaProject" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
-        eType="#//Dependency" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
-        eType="#//Source" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="weaveDirectives" upperBound="-1"
-        eType="#//WeaveDirective" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="options" upperBound="-1"
-        eType="#//Option" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KermetaProject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eclipseName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMainOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaBasePackage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="default"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodels" upperBound="-1"
+        eType="#//Metamodel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reusableResources" upperBound="-1"
+        eType="#//ReusableResource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedProjectJars" upperBound="-1"
+        eType="#//ImportProjectJar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedBytecodeJars" upperBound="-1"
+        eType="#//ImportBytecodeJar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedProjectSources"
+        upperBound="-1" eType="#//ImportProjectSources" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportFile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bytecodeFrom" eType="#//ReusableResource"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageEquivalences" upperBound="-1"
         eType="#//PackageEquivalence" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignoreByteCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="genmodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="byteCodeOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Source">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="byteCodeFromADependency"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WeaveDirective" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mix" lowerBound="1" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//Expression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Option" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StringExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MixExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//Expression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageEquivalence">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ecorePackage" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaPackage" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metamodel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+        eType="#//Metamodel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedFiles" upperBound="-1"
+        eType="#//ImportFile" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReusableResource">
+    <eOperations name="allUrls" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alternateUrls" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reusableResourceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportProjectSources">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportProjectJar">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportBytecodeJar">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

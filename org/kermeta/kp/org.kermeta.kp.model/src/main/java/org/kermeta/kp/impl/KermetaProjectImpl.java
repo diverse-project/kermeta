@@ -10,24 +10,20 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.kermeta.kp.Dependency;
+import org.kermeta.kp.ImportBytecodeJar;
+import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpPackage;
-import org.kermeta.kp.Option;
-import org.kermeta.kp.PackageEquivalence;
-import org.kermeta.kp.Source;
-import org.kermeta.kp.WeaveDirective;
+import org.kermeta.kp.Metamodel;
+import org.kermeta.kp.ReusableResource;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,59 +32,40 @@ import org.kermeta.kp.WeaveDirective;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getSources <em>Sources</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getWeaveDirectives <em>Weave Directives</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getOptions <em>Options</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getEclipseName <em>Eclipse Name</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainOperation <em>Default Main Operation</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getGroup <em>Group</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getPackageEquivalences <em>Package Equivalences</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getJavaBasePackage <em>Java Base Package</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getMetamodels <em>Metamodels</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getReusableResources <em>Reusable Resources</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectJars <em>Imported Project Jars</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectSources <em>Imported Project Sources</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KermetaProjectImpl extends NamedElementImpl implements KermetaProject {
+public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	/**
-   * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
+   * The default value of the '{@link #getEclipseName() <em>Eclipse Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getDependencies()
+   * @see #getEclipseName()
    * @generated
    * @ordered
    */
-	protected EList<Dependency> dependencies;
+	protected static final String ECLIPSE_NAME_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getSources() <em>Sources</em>}' containment reference list.
+   * The cached value of the '{@link #getEclipseName() <em>Eclipse Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getSources()
+   * @see #getEclipseName()
    * @generated
    * @ordered
    */
-	protected EList<Source> sources;
-
-	/**
-   * The cached value of the '{@link #getWeaveDirectives() <em>Weave Directives</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getWeaveDirectives()
-   * @generated
-   * @ordered
-   */
-	protected EList<WeaveDirective> weaveDirectives;
-
-	/**
-   * The cached value of the '{@link #getOptions() <em>Options</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getOptions()
-   * @generated
-   * @ordered
-   */
-	protected EList<Option> options;
+	protected String eclipseName = ECLIPSE_NAME_EDEFAULT;
 
 	/**
    * The default value of the '{@link #getDefaultMainClass() <em>Default Main Class</em>}' attribute.
@@ -131,34 +108,74 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
   protected String defaultMainOperation = DEFAULT_MAIN_OPERATION_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getGroup() <em>Group</em>}' attribute.
+   * The default value of the '{@link #getJavaBasePackage() <em>Java Base Package</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getGroup()
+   * @see #getJavaBasePackage()
    * @generated
    * @ordered
    */
-	protected static final String GROUP_EDEFAULT = "default";
+	protected static final String JAVA_BASE_PACKAGE_EDEFAULT = "default";
 
 		/**
-   * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute.
+   * The cached value of the '{@link #getJavaBasePackage() <em>Java Base Package</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getGroup()
+   * @see #getJavaBasePackage()
    * @generated
    * @ordered
    */
-	protected String group = GROUP_EDEFAULT;
+	protected String javaBasePackage = JAVA_BASE_PACKAGE_EDEFAULT;
 
 		/**
-   * The cached value of the '{@link #getPackageEquivalences() <em>Package Equivalences</em>}' containment reference list.
+   * The cached value of the '{@link #getMetamodels() <em>Metamodels</em>}' containment reference list.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getPackageEquivalences()
+   * <!-- end-user-doc -->
+   * @see #getMetamodels()
    * @generated
    * @ordered
    */
-	protected EList<PackageEquivalence> packageEquivalences;
+  protected EList<Metamodel> metamodels;
+
+    /**
+   * The cached value of the '{@link #getReusableResources() <em>Reusable Resources</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getReusableResources()
+   * @generated
+   * @ordered
+   */
+	protected EList<ReusableResource> reusableResources;
+
+				/**
+   * The cached value of the '{@link #getImportedProjectJars() <em>Imported Project Jars</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getImportedProjectJars()
+   * @generated
+   * @ordered
+   */
+	protected EList<ImportProjectJar> importedProjectJars;
+
+		/**
+   * The cached value of the '{@link #getImportedBytecodeJars() <em>Imported Bytecode Jars</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getImportedBytecodeJars()
+   * @generated
+   * @ordered
+   */
+	protected EList<ImportBytecodeJar> importedBytecodeJars;
+
+		/**
+   * The cached value of the '{@link #getImportedProjectSources() <em>Imported Project Sources</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getImportedProjectSources()
+   * @generated
+   * @ordered
+   */
+	protected EList<ImportProjectSources> importedProjectSources;
 
 		/**
    * <!-- begin-user-doc -->
@@ -184,12 +201,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EList<Dependency> getDependencies() {
-    if (dependencies == null)
-    {
-      dependencies = new EObjectContainmentEList<Dependency>(Dependency.class, this, KpPackage.KERMETA_PROJECT__DEPENDENCIES);
-    }
-    return dependencies;
+	public String getEclipseName() {
+    return eclipseName;
   }
 
 	/**
@@ -197,38 +210,11 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EList<Source> getSources() {
-    if (sources == null)
-    {
-      sources = new EObjectContainmentEList<Source>(Source.class, this, KpPackage.KERMETA_PROJECT__SOURCES);
-    }
-    return sources;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EList<WeaveDirective> getWeaveDirectives() {
-    if (weaveDirectives == null)
-    {
-      weaveDirectives = new EObjectContainmentEList<WeaveDirective>(WeaveDirective.class, this, KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES);
-    }
-    return weaveDirectives;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EList<Option> getOptions() {
-    if (options == null)
-    {
-      options = new EObjectContainmentEList<Option>(Option.class, this, KpPackage.KERMETA_PROJECT__OPTIONS);
-    }
-    return options;
+	public void setEclipseName(String newEclipseName) {
+    String oldEclipseName = eclipseName;
+    eclipseName = newEclipseName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__ECLIPSE_NAME, oldEclipseName, eclipseName));
   }
 
 	/**
@@ -282,8 +268,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public String getGroup() {
-    return group;
+	public String getJavaBasePackage() {
+    return javaBasePackage;
   }
 
 		/**
@@ -291,11 +277,51 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setGroup(String newGroup) {
-    String oldGroup = group;
-    group = newGroup;
+	public void setJavaBasePackage(String newJavaBasePackage) {
+    String oldJavaBasePackage = javaBasePackage;
+    javaBasePackage = newJavaBasePackage;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__GROUP, oldGroup, group));
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE, oldJavaBasePackage, javaBasePackage));
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Metamodel> getMetamodels()
+  {
+    if (metamodels == null)
+    {
+      metamodels = new EObjectContainmentEList<Metamodel>(Metamodel.class, this, KpPackage.KERMETA_PROJECT__METAMODELS);
+    }
+    return metamodels;
+  }
+
+    /**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EList<ReusableResource> getReusableResources() {
+    if (reusableResources == null)
+    {
+      reusableResources = new EObjectContainmentEList<ReusableResource>(ReusableResource.class, this, KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES);
+    }
+    return reusableResources;
+  }
+
+				/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EList<ImportProjectJar> getImportedProjectJars() {
+    if (importedProjectJars == null)
+    {
+      importedProjectJars = new EObjectContainmentEList<ImportProjectJar>(ImportProjectJar.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS);
+    }
+    return importedProjectJars;
   }
 
 		/**
@@ -303,12 +329,25 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EList<PackageEquivalence> getPackageEquivalences() {
-    if (packageEquivalences == null)
+	public EList<ImportBytecodeJar> getImportedBytecodeJars() {
+    if (importedBytecodeJars == null)
     {
-      packageEquivalences = new EObjectContainmentEList<PackageEquivalence>(PackageEquivalence.class, this, KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES);
+      importedBytecodeJars = new EObjectContainmentEList<ImportBytecodeJar>(ImportBytecodeJar.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS);
     }
-    return packageEquivalences;
+    return importedBytecodeJars;
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EList<ImportProjectSources> getImportedProjectSources() {
+    if (importedProjectSources == null)
+    {
+      importedProjectSources = new EObjectContainmentEList<ImportProjectSources>(ImportProjectSources.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES);
+    }
+    return importedProjectSources;
   }
 
 		/**
@@ -320,16 +359,16 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__DEPENDENCIES:
-        return ((InternalEList<?>)getDependencies()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__SOURCES:
-        return ((InternalEList<?>)getSources()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES:
-        return ((InternalEList<?>)getWeaveDirectives()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__OPTIONS:
-        return ((InternalEList<?>)getOptions()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
-        return ((InternalEList<?>)getPackageEquivalences()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__METAMODELS:
+        return ((InternalEList<?>)getMetamodels()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
+        return ((InternalEList<?>)getReusableResources()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
+        return ((InternalEList<?>)getImportedProjectJars()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
+        return ((InternalEList<?>)getImportedBytecodeJars()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
+        return ((InternalEList<?>)getImportedProjectSources()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -343,22 +382,24 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__DEPENDENCIES:
-        return getDependencies();
-      case KpPackage.KERMETA_PROJECT__SOURCES:
-        return getSources();
-      case KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES:
-        return getWeaveDirectives();
-      case KpPackage.KERMETA_PROJECT__OPTIONS:
-        return getOptions();
+      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
+        return getEclipseName();
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         return getDefaultMainClass();
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         return getDefaultMainOperation();
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        return getGroup();
-      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
-        return getPackageEquivalences();
+      case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
+        return getJavaBasePackage();
+      case KpPackage.KERMETA_PROJECT__METAMODELS:
+        return getMetamodels();
+      case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
+        return getReusableResources();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
+        return getImportedProjectJars();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
+        return getImportedBytecodeJars();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
+        return getImportedProjectSources();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -373,21 +414,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__DEPENDENCIES:
-        getDependencies().clear();
-        getDependencies().addAll((Collection<? extends Dependency>)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT__SOURCES:
-        getSources().clear();
-        getSources().addAll((Collection<? extends Source>)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES:
-        getWeaveDirectives().clear();
-        getWeaveDirectives().addAll((Collection<? extends WeaveDirective>)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT__OPTIONS:
-        getOptions().clear();
-        getOptions().addAll((Collection<? extends Option>)newValue);
+      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
+        setEclipseName((String)newValue);
         return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         setDefaultMainClass((String)newValue);
@@ -395,12 +423,28 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         setDefaultMainOperation((String)newValue);
         return;
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        setGroup((String)newValue);
+      case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
+        setJavaBasePackage((String)newValue);
         return;
-      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
-        getPackageEquivalences().clear();
-        getPackageEquivalences().addAll((Collection<? extends PackageEquivalence>)newValue);
+      case KpPackage.KERMETA_PROJECT__METAMODELS:
+        getMetamodels().clear();
+        getMetamodels().addAll((Collection<? extends Metamodel>)newValue);
+        return;
+      case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
+        getReusableResources().clear();
+        getReusableResources().addAll((Collection<? extends ReusableResource>)newValue);
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
+        getImportedProjectJars().clear();
+        getImportedProjectJars().addAll((Collection<? extends ImportProjectJar>)newValue);
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
+        getImportedBytecodeJars().clear();
+        getImportedBytecodeJars().addAll((Collection<? extends ImportBytecodeJar>)newValue);
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
+        getImportedProjectSources().clear();
+        getImportedProjectSources().addAll((Collection<? extends ImportProjectSources>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -415,17 +459,8 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	public void eUnset(int featureID) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__DEPENDENCIES:
-        getDependencies().clear();
-        return;
-      case KpPackage.KERMETA_PROJECT__SOURCES:
-        getSources().clear();
-        return;
-      case KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES:
-        getWeaveDirectives().clear();
-        return;
-      case KpPackage.KERMETA_PROJECT__OPTIONS:
-        getOptions().clear();
+      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
+        setEclipseName(ECLIPSE_NAME_EDEFAULT);
         return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         setDefaultMainClass(DEFAULT_MAIN_CLASS_EDEFAULT);
@@ -433,11 +468,23 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         setDefaultMainOperation(DEFAULT_MAIN_OPERATION_EDEFAULT);
         return;
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        setGroup(GROUP_EDEFAULT);
+      case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
+        setJavaBasePackage(JAVA_BASE_PACKAGE_EDEFAULT);
         return;
-      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
-        getPackageEquivalences().clear();
+      case KpPackage.KERMETA_PROJECT__METAMODELS:
+        getMetamodels().clear();
+        return;
+      case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
+        getReusableResources().clear();
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
+        getImportedProjectJars().clear();
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
+        getImportedBytecodeJars().clear();
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
+        getImportedProjectSources().clear();
         return;
     }
     super.eUnset(featureID);
@@ -452,22 +499,24 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
 	public boolean eIsSet(int featureID) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__DEPENDENCIES:
-        return dependencies != null && !dependencies.isEmpty();
-      case KpPackage.KERMETA_PROJECT__SOURCES:
-        return sources != null && !sources.isEmpty();
-      case KpPackage.KERMETA_PROJECT__WEAVE_DIRECTIVES:
-        return weaveDirectives != null && !weaveDirectives.isEmpty();
-      case KpPackage.KERMETA_PROJECT__OPTIONS:
-        return options != null && !options.isEmpty();
+      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
+        return ECLIPSE_NAME_EDEFAULT == null ? eclipseName != null : !ECLIPSE_NAME_EDEFAULT.equals(eclipseName);
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         return DEFAULT_MAIN_CLASS_EDEFAULT == null ? defaultMainClass != null : !DEFAULT_MAIN_CLASS_EDEFAULT.equals(defaultMainClass);
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         return DEFAULT_MAIN_OPERATION_EDEFAULT == null ? defaultMainOperation != null : !DEFAULT_MAIN_OPERATION_EDEFAULT.equals(defaultMainOperation);
-      case KpPackage.KERMETA_PROJECT__GROUP:
-        return GROUP_EDEFAULT == null ? group != null : !GROUP_EDEFAULT.equals(group);
-      case KpPackage.KERMETA_PROJECT__PACKAGE_EQUIVALENCES:
-        return packageEquivalences != null && !packageEquivalences.isEmpty();
+      case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
+        return JAVA_BASE_PACKAGE_EDEFAULT == null ? javaBasePackage != null : !JAVA_BASE_PACKAGE_EDEFAULT.equals(javaBasePackage);
+      case KpPackage.KERMETA_PROJECT__METAMODELS:
+        return metamodels != null && !metamodels.isEmpty();
+      case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
+        return reusableResources != null && !reusableResources.isEmpty();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
+        return importedProjectJars != null && !importedProjectJars.isEmpty();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
+        return importedBytecodeJars != null && !importedBytecodeJars.isEmpty();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
+        return importedProjectSources != null && !importedProjectSources.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -482,12 +531,14 @@ public class KermetaProjectImpl extends NamedElementImpl implements KermetaProje
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (defaultMainClass: ");
+    result.append(" (eclipseName: ");
+    result.append(eclipseName);
+    result.append(", defaultMainClass: ");
     result.append(defaultMainClass);
     result.append(", defaultMainOperation: ");
     result.append(defaultMainOperation);
-    result.append(", group: ");
-    result.append(group);
+    result.append(", javaBasePackage: ");
+    result.append(javaBasePackage);
     result.append(')');
     return result.toString();
   }

@@ -19,20 +19,15 @@ TOKENS{
     DEFINE SL_COMMENT$'//'(~('\n'|'\r'))*$;
     DEFINE ML_COMMENT $'/*'.*'*/'$ ;
     //DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
-    DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
+    //DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
     //DEFINE SOURCE_VARIABLE${'.*'}'$;
     // DEFINE SOURCE_URL $'"'.*'"'$ ;
 }
 
 TOKENSTYLES{
 	//"source" COLOR #A22000, BOLD;
-	//"require" COLOR #A22000, BOLD;
-    //"dependency" COLOR #A22000, BOLD;
     //"weaver-directive" COLOR #007F55, BOLD;
-    "byteCodeFromADependency" COLOR #CC8000, BOLD;
-    "byteCodeOnly" COLOR #CC8000, BOLD;
-    "ignoreByteCode" COLOR #CC8000, BOLD;
-    "sourceOnly" COLOR #CC8000, BOLD;
+    //"extends" COLOR #CC8000, BOLD;
     "SL_COMMENT" COLOR #348017;
     "ML_COMMENT" COLOR #348017;
 }
@@ -40,52 +35,46 @@ TOKENSTYLES{
 RULES{
     
     KermetaProject::= 
-   // "KermetaProject" _[WHITESPACE]* ":" _[WHITESPACE]* name['"','"'] _[WHITESPACE]* !0
-    "KermetaProject" #1  name['"','"']  !1    
-    (
-    	(
-	    	("groupId"  "="  group['"','"']  ) |
-	    	("defaultMainClass"  "="   defaultMainClass['"','"']  ) |
-	    	("defaultMainOperation"  "="  defaultMainOperation['"','"']  ) |
-	    	("dependencies"  "=" "{" (dependencies)* !1 "}" ) |
-	    	("packageEquivalences"  "=" "{" (packageEquivalences)* !1 "}" ) |
-	    	("sources"  "=" "{" (sources)* !1 "}" ) |
-	    	("options"  "=" "{" (options)* !1 "}" ) |
-	    	("weaveDirectives"  "=" "{" (weaveDirectives)* !1 "}" )
-	    ) !1
-    )*
+    "KermetaProject" #1  eclipseName['"','"']  
+    	(!1"defaultMainClass"  defaultMainClass['"','"']  )?
+	    (!1"defaultMainOperation"  defaultMainOperation['"','"']  )?
+	    (!1"javaBasePackage"  javaBasePackage['"','"']  )?
+	     
+	    (  	(metamodels) |
+		   	(importedProjectJars) |
+		   	(importedProjectSources) |
+		   	(importedBytecodeJars) |
+		   	reusableResources
+	    )*
     ;
     
-    Source::=
-    !2( "require" | "source")   url['"','"'] byteCodeFromADependency["byteCodeFromADependency":""]
-    ;
     
     PackageEquivalence::=
-   	!2"packageEquivalence" ecorePackage['"','"']  ("=")  javaPackage['"','"'] 
+   	!3"packageEquivalence" ecorePackage['"','"']  ("=")  javaPackage['"','"'] 
+    ;
+        
+    Metamodel::=
+    !1metamodelName[TEXT] ("extends" (extends[](","extends[])*))? "{"
+    	(
+    	importedFiles 
+    	)* 
+    !1"}"
     ;
     
-    Dependency::=  
-    !2"dependency" name['"','"']  (("=")|("URLs" "="))  url['"','"']("," url['"','"'])*
-    ("genmodel" "=" genmodel['"','"'])?  
-    (ignoreByteCode["ignoreByteCode":""] | sourceOnly["sourceOnly":""]| byteCodeOnly["byteCodeOnly":""])?
+    ImportFile::=
+    	!2"importFile" url['"','"'] ("withBytecodeFrom" bytecodeFrom[] (packageEquivalences)*)?
     ;
-    
-    WeaveDirective::= 
-    !2"weaver-directive" name['"','"'] "="  mix target   
+   	ImportProjectJar ::=
+   		!1 "importProjectJar"  url['"','"'] 
+   	;
+   	ImportProjectSources ::=
+   		!1"importProjectSource" url['"','"']
+   	;
+   	ImportBytecodeJar ::=
+   		!1"importBytecodeJar" url['"','"']
+   	;
+   	
+    ReusableResource ::=
+    	!1reusableResourceName[] "=" url['"','"'] (!2"alternative" alternateUrls['"','"']("," alternateUrls['"','"'])* )?
     ;
-    
-    Option::= 
-    !2"option" name['"','"'] (!2"value")? "=" value['"','"'] 
-    ;
-    
-    StringExpression::= 
-    value['"','"']
-    ;
-     
-    MixExpression::= 
-    "(" left  right ")" 
-    ;
-    
-    
-    
 }

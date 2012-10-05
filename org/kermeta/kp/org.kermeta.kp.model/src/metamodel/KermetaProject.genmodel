@@ -10,34 +10,44 @@
   <genPackages prefix="Kp" basePackage="org.kermeta" disposableProviderFactory="true"
       ecorePackage="KermetaProject.ecore#/">
     <genClasses ecoreClass="KermetaProject.ecore#//KermetaProject">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/dependencies"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/sources"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/eclipseName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/defaultMainOperation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//KermetaProject/javaBasePackage"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/packageEquivalences"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/metamodels"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/defaultMetamodel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/reusableResources"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/importedProjectJars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/importedBytecodeJars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//KermetaProject/importedProjectSources"/>
     </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//Dependency">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/url"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/ignoreByteCode"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/sourceOnly"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/genmodel"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Dependency/byteCodeOnly"/>
-    </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//NamedElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//NamedElement/name"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="KermetaProject.ecore#//Source">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Source/url"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Source/byteCodeFromADependency"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//Source/contributesTo"/>
+    <genClasses ecoreClass="KermetaProject.ecore#//ImportFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ImportFile/url"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//ImportFile/bytecodeFrom"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//ImportFile/packageEquivalences"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//PackageEquivalence">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/ecorePackage"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/javaPackage"/>
     </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//Metamodel"/>
+    <genClasses ecoreClass="KermetaProject.ecore#//Metamodel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//Metamodel/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//Metamodel/importedFiles"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//Metamodel/metamodelName"/>
+    </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//ReusableResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/alternateUrls"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/reusableResourceName"/>
+      <genOperations ecoreOperation="KermetaProject.ecore#//ReusableResource/allUrls"/>
+    </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//ImportProjectSources">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ImportProjectSources/url"/>
+    </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//ImportProjectJar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ImportProjectJar/url"/>
+    </genClasses>
+    <genClasses ecoreClass="KermetaProject.ecore#//ImportBytecodeJar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ImportBytecodeJar/url"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

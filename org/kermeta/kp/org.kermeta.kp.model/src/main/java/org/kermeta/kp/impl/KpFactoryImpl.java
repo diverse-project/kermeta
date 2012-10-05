@@ -65,13 +65,13 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
     switch (eClass.getClassifierID())
     {
       case KpPackage.KERMETA_PROJECT: return createKermetaProject();
-      case KpPackage.DEPENDENCY: return createDependency();
-      case KpPackage.SOURCE: return createSource();
-      case KpPackage.WEAVE_DIRECTIVE: return createWeaveDirective();
-      case KpPackage.OPTION: return createOption();
-      case KpPackage.STRING_EXPRESSION: return createStringExpression();
-      case KpPackage.MIX_EXPRESSION: return createMixExpression();
+      case KpPackage.IMPORT_FILE: return createImportFile();
       case KpPackage.PACKAGE_EQUIVALENCE: return createPackageEquivalence();
+      case KpPackage.METAMODEL: return createMetamodel();
+      case KpPackage.REUSABLE_RESOURCE: return createReusableResource();
+      case KpPackage.IMPORT_PROJECT_SOURCES: return createImportProjectSources();
+      case KpPackage.IMPORT_PROJECT_JAR: return createImportProjectJar();
+      case KpPackage.IMPORT_BYTECODE_JAR: return createImportBytecodeJar();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -92,69 +92,70 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public Dependency createDependency() {
-    DependencyImpl dependency = new DependencyImpl();
-    return dependency;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public Source createSource() {
-    SourceImpl source = new SourceImpl();
-    return source;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public WeaveDirective createWeaveDirective() {
-    WeaveDirectiveImpl weaveDirective = new WeaveDirectiveImpl();
-    return weaveDirective;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public Option createOption() {
-    OptionImpl option = new OptionImpl();
-    return option;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public StringExpression createStringExpression() {
-    StringExpressionImpl stringExpression = new StringExpressionImpl();
-    return stringExpression;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public MixExpression createMixExpression() {
-    MixExpressionImpl mixExpression = new MixExpressionImpl();
-    return mixExpression;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
 	public PackageEquivalence createPackageEquivalence() {
     PackageEquivalenceImpl packageEquivalence = new PackageEquivalenceImpl();
     return packageEquivalence;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Metamodel createMetamodel()
+  {
+    MetamodelImpl metamodel = new MetamodelImpl();
+    return metamodel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public ReusableResource createReusableResource() {
+    ReusableResourceImpl reusableResource = new ReusableResourceImpl();
+    return reusableResource;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public ImportProjectSources createImportProjectSources() {
+    ImportProjectSourcesImpl importProjectSources = new ImportProjectSourcesImpl();
+    return importProjectSources;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public ImportProjectJar createImportProjectJar() {
+    ImportProjectJarImpl importProjectJar = new ImportProjectJarImpl();
+    return importProjectJar;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public ImportBytecodeJar createImportBytecodeJar() {
+    ImportBytecodeJarImpl importBytecodeJar = new ImportBytecodeJarImpl();
+    return importBytecodeJar;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public ImportFile createImportFile() {
+    ImportFileImpl importFile = new ImportFileImpl();
+    return importFile;
   }
 
 	/**
