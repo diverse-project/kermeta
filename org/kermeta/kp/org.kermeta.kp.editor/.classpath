@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="src/main/java-gen"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.kermeta.utils.helpers"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.kermeta.utils.systemservices.api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.kermeta.utils.helpers.eclipse"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

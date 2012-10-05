@@ -113,31 +113,31 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Source) {
+		if (element instanceof org.kermeta.kp.PackageEquivalence) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.PackageEquivalence) {
+		if (element instanceof org.kermeta.kp.Metamodel) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Dependency) {
+		if (element instanceof org.kermeta.kp.ImportFile) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.WeaveDirective) {
+		if (element instanceof org.kermeta.kp.ImportProjectJar) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.Option) {
+		if (element instanceof org.kermeta.kp.ImportProjectSources) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.StringExpression) {
+		if (element instanceof org.kermeta.kp.ImportBytecodeJar) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.MixExpression) {
+		if (element instanceof org.kermeta.kp.ReusableResource) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7, foundFormattingElements);
 			return;
 		}

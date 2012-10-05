@@ -58,62 +58,50 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
+		if (object instanceof org.kermeta.kp.ImportBytecodeJar) {
+			result = interprete_org_kermeta_kp_ImportBytecodeJar((org.kermeta.kp.ImportBytecodeJar) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.kermeta.kp.ImportProjectJar) {
+			result = interprete_org_kermeta_kp_ImportProjectJar((org.kermeta.kp.ImportProjectJar) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.kermeta.kp.ImportProjectSources) {
+			result = interprete_org_kermeta_kp_ImportProjectSources((org.kermeta.kp.ImportProjectSources) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.kermeta.kp.ReusableResource) {
+			result = interprete_org_kermeta_kp_ReusableResource((org.kermeta.kp.ReusableResource) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.kermeta.kp.Metamodel) {
+			result = interprete_org_kermeta_kp_Metamodel((org.kermeta.kp.Metamodel) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.kermeta.kp.PackageEquivalence) {
 			result = interprete_org_kermeta_kp_PackageEquivalence((org.kermeta.kp.PackageEquivalence) object, context);
 		}
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.kermeta.kp.MixExpression) {
-			result = interprete_org_kermeta_kp_MixExpression((org.kermeta.kp.MixExpression) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.StringExpression) {
-			result = interprete_org_kermeta_kp_StringExpression((org.kermeta.kp.StringExpression) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.Expression) {
-			result = interprete_org_kermeta_kp_Expression((org.kermeta.kp.Expression) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.Option) {
-			result = interprete_org_kermeta_kp_Option((org.kermeta.kp.Option) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.WeaveDirective) {
-			result = interprete_org_kermeta_kp_WeaveDirective((org.kermeta.kp.WeaveDirective) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.Source) {
-			result = interprete_org_kermeta_kp_Source((org.kermeta.kp.Source) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.Dependency) {
-			result = interprete_org_kermeta_kp_Dependency((org.kermeta.kp.Dependency) object, context);
+		if (object instanceof org.kermeta.kp.ImportFile) {
+			result = interprete_org_kermeta_kp_ImportFile((org.kermeta.kp.ImportFile) object, context);
 		}
 		if (result != null) {
 			return result;
 		}
 		if (object instanceof org.kermeta.kp.KermetaProject) {
 			result = interprete_org_kermeta_kp_KermetaProject((org.kermeta.kp.KermetaProject) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.NamedElement) {
-			result = interprete_org_kermeta_kp_NamedElement((org.kermeta.kp.NamedElement) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -125,39 +113,31 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 		return null;
 	}
 	
-	public ResultType interprete_org_kermeta_kp_Dependency(org.kermeta.kp.Dependency object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_NamedElement(org.kermeta.kp.NamedElement object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_Source(org.kermeta.kp.Source object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_WeaveDirective(org.kermeta.kp.WeaveDirective object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_Option(org.kermeta.kp.Option object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_Expression(org.kermeta.kp.Expression object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_StringExpression(org.kermeta.kp.StringExpression object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_MixExpression(org.kermeta.kp.MixExpression object, ContextType context) {
+	public ResultType interprete_org_kermeta_kp_ImportFile(org.kermeta.kp.ImportFile object, ContextType context) {
 		return null;
 	}
 	
 	public ResultType interprete_org_kermeta_kp_PackageEquivalence(org.kermeta.kp.PackageEquivalence object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_Metamodel(org.kermeta.kp.Metamodel object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_ReusableResource(org.kermeta.kp.ReusableResource object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_ImportProjectSources(org.kermeta.kp.ImportProjectSources object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_ImportProjectJar(org.kermeta.kp.ImportProjectJar object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_ImportBytecodeJar(org.kermeta.kp.ImportBytecodeJar object, ContextType context) {
 		return null;
 	}
 	

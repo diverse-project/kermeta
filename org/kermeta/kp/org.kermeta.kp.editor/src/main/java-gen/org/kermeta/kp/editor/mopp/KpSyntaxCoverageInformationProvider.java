@@ -11,13 +11,13 @@ public class KpSyntaxCoverageInformationProvider {
 	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
 		return new org.eclipse.emf.ecore.EClass[] {
 			org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getSource(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getPackageEquivalence(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getDependency(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getWeaveDirective(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getOption(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getStringExpression(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getMixExpression(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getMetamodel(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getImportFile(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectJar(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectSources(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getImportBytecodeJar(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getReusableResource(),
 		};
 	}
 	

@@ -100,6 +100,7 @@
             <Export-Package>
               org.kermeta.kp.editor,
               org.kermeta.kp.editor.analysis,
+              org.kermeta.kp.editor.analysis.helper,
               org.kermeta.kp.editor.debug,
               org.kermeta.kp.editor.grammar,
               org.kermeta.kp.editor.launch,
@@ -120,7 +121,8 @@
               !org.emftext.*,
               !org.antlr.*,
               !org.osgi.framework.*,
-              !org.kermeta.kp.* 
+              !org.kermeta.kp.*,
+              org.kermeta.utils.*
             </Import-Package>
 
             <!--
@@ -130,7 +132,7 @@
             <_include>../resources/META-INF/MANIFEST-part.MF</_include>
           </instructions>
         </configuration>
-      </plugin>
+      </plugin>			
     </plugins>
   </build>
   <dependencies>
@@ -143,7 +145,22 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>kp.model</artifactId>
       <version>${kermeta.version}</version>
-    </dependency>
+    </dependency>    
+	<dependency>
+		<groupId>org.kermeta.utils</groupId>
+		<artifactId>utils.helpers</artifactId>
+		<version>${kermeta.version}</version>
+	</dependency>   
+	<dependency>
+		<groupId>org.kermeta.utils</groupId>
+		<artifactId>utils.helpers.eclipse</artifactId>
+		<version>${kermeta.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.kermeta.utils</groupId>
+		<artifactId>utils.systemservices.api</artifactId>
+		<version>${kermeta.version}</version>
+	</dependency>
     <dependency>
       <groupId>org.emftext.commons</groupId>
       <artifactId>commons.antlr3_3_0</artifactId>
