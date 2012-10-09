@@ -17,7 +17,7 @@ import org.kermeta.kp.compiler.commandline.KpResourceHelper;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoader;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
 import org.kermeta.kp.compiler.commandline.TracedURL;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
@@ -38,7 +38,7 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 	}
 	
 	@Override
-	public /*ModelingUnit*/ Collection<ModelingUnit> call() throws Exception {
+	public Collection<ModelingUnit> call() throws Exception {
 		try {
 			ModelingUnitLoader muLoader = null; // = new ModelingUnitLoader(compiler.logger, compiler.runInEclipse, compiler.saveIntermediateFiles, compiler.targetIntermediateFolder);
 
@@ -81,17 +81,6 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.getLastLoadErrorMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
 			}
 			
-			/*
-			ModelingUnit mu = muLoader.loadModelingUnitFromURL(urlToLoad.getUrl().toString());
-			if (mu != null) {
-				if (mu.getName() == null) {
-					// force ModelingUnit name to the one provided in the kp
-					mu.setName(urlToLoad.getUrl().toString());
-				}
-				return mu;
-			} else {
-				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.lastLoadErrorMessage, KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
-			}*/
 		} catch( java.io.FileNotFoundException fnfe) {
 			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Source "+urlToLoad.getUrl()+" not found", KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(urlToLoad.getSource()));
 			compiler.failWithMessage("Source "+urlToLoad.getUrl()+" not found");

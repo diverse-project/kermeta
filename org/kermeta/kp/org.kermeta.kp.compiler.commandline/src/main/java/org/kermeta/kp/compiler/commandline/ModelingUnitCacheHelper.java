@@ -13,12 +13,14 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
@@ -98,8 +100,14 @@ public class ModelingUnitCacheHelper {
 		URI ruri =  URI.createURI(outputCacheUrl);
 		Resource resource = resourceSet.createResource(ruri);
 		resource.load(options);
-		// let's suppose the ModelingUnit is the first element in the root
-		return (ModelingUnit) resource.getContents().get(0);
+		// let's get all applicable element
+		ModelingUnit mu = new ModelingUnit(outputCacheUrl);
+		for(EObject o : resource.getContents()){
+			if(o instanceof Metamodel){
+				mu.getMetamodels().add((Metamodel) o);
+			}
+		}
+		return  mu;
 	}
 	
 }

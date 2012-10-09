@@ -15,7 +15,6 @@ import org.kermeta.diagnostic.InvariantProxy;
 import org.kermeta.diagnostic.ModelReference;
 import org.kermeta.kp.compiler.commandline.callable.CallableLogProblem;
 import org.kermeta.language.structure.KermetaModelElement;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.utils.helpers.StringHelper;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -43,7 +42,7 @@ public class ErrorHandlingHelper {
 	}
 
 	
-	protected void processErrors(ErrorProneResult<ModelingUnit> eprMu, URL kpFile) {
+	protected void processErrors(ErrorProneResult<org.kermeta.language.util.ModelingUnit> eprMu, URL kpFile) {
 		// TODO Retrieve faulty objects text reference and logProblem
 
 		ArrayList<Future<Boolean>> logProblemFutures = new ArrayList<Future<Boolean>>();

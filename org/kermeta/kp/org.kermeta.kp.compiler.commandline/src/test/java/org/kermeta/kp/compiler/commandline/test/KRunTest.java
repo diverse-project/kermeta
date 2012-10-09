@@ -21,16 +21,18 @@ import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
-import org.kermeta.kp.Dependency;
+import org.kermeta.kp.ImportBytecodeJar;
+import org.kermeta.kp.ImportProjectJar;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
-import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForEcore;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKm;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKmt;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForUmlProfile;
+import org.kermeta.kp.editor.analysis.helper.KpResourceHelper;
+import org.kermeta.kp.editor.analysis.helper.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.helper.tests.utils.ErrorAwareMessagingSystem;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
@@ -125,14 +127,29 @@ public class KRunTest extends TestCase {
     }
 	
 	
-	public void createURIMapFile(KermetaProject kp, KpVariableExpander varExpander, KermetaCompiler compiler) throws IOException{
+	public void createURIMapFile(KermetaProject kp,KpVariableExpander varExpander, KermetaCompiler compiler) throws IOException{
 		Properties props = new Properties();
-		String key = "platform:/resource/"+kp.getName();
+		String key = "platform:/resource/"+kp.getEclipseName();
 		String value = "file:/"+targetFolder;
 		props.put(key, value);
 		
-		for(Dependency dep : kp.getDependencies()){
-			createURIMapEntryForDependency(props, dep, varExpander, compiler);
+		for(ImportBytecodeJar dep : kp.getImportedBytecodeJars()){
+			String expandedVar = varExpander.expandVariables(dep.getUrl());
+			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER,
+					kp.eResource());
+			if(foundProject!=null){
+				props.put("platform:/resource/"+foundProject.getEclipseName()+"/",expandedVar);
+				props.put("platform:/plugin/"+foundProject.getEclipseName()+"/",expandedVar);
+			}
+		}
+		for(ImportProjectJar dep : kp.getImportedProjectJars()){
+			String expandedVar = varExpander.expandVariables(dep.getUrl());
+			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER,
+					kp.eResource());
+			if(foundProject!=null){
+				props.put("platform:/resource/"+foundProject.getEclipseName()+"/",expandedVar);
+				props.put("platform:/plugin/"+foundProject.getEclipseName()+"/",expandedVar);
+			}
 		}
 		
 		FileOutputStream fos;
@@ -140,8 +157,8 @@ public class KRunTest extends TestCase {
 		props.store(fos, "Simulating resolution of eclipse workbench URIs resolution using URI map translation");
 		fos.close();		
 	}
-    
-    private void createURIMapEntryForDependency(Properties props, Dependency dep, KpVariableExpander varExpander, KermetaCompiler compiler) {
+ /*   
+    private void createURIMapEntryForDependency(Properties props, String url, KermetaCompiler compiler, KpVariableExpander varExpander) {
 		// if there is more than one url for a dependency we may try to create an uri map if one of them is a platform:/...
     	if(dep.getUrl().size() > 1){
 			String platformUrl = null;
@@ -191,7 +208,7 @@ public class KRunTest extends TestCase {
 		}
 		
 	}
-
+*/
 
 
 	@Override

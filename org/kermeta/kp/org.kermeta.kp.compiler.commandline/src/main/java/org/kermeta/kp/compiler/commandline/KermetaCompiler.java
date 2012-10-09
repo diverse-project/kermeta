@@ -40,11 +40,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.DiagnosticModel;
-import org.kermeta.kp.Dependency;
+import org.kermeta.kp.ImportBytecodeJar;
+import org.kermeta.kp.ImportProjectJar;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
-import org.kermeta.kp.Source;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
+import org.kermeta.kp.editor.analysis.helper.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.checker.CheckerImpl;
 import org.kermeta.language.checker.CheckerImpl4Eclipse;
@@ -59,7 +60,7 @@ import org.kermeta.language.resolver.KmResolverImpl;
 import org.kermeta.language.resolver.KmResolverImpl4Eclipse;
 import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.aether.LocalFileConverterForAether;
 import org.kermeta.utils.helpers.CompositeLocalFileConverter;
@@ -84,6 +85,8 @@ public class KermetaCompiler {
 	public static String DEFAULT_KP_LOCATION_IN_FOLDER = "/project.kp";
 	public static String DEFAULT_BINARY_LOCATION_IN_ECLIPSE = "/target/scalaclasses";
 	public static String DEFAULT_EMFBINARY_LOCATION_IN_ECLIPSE = "/target/emfclasses";
+	public static String DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/all_importFiles_merged.km";
+	public static String DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_ECLIPSE = "/target/all_importFiles_merged.km";
 	public static String INTERMEDIATE_SUBFOLDER = "";
 	public static String INTERMEDIATE_SCALA_SUBFOLDER = INTERMEDIATE_SUBFOLDER + "/scala";
 
@@ -342,21 +345,21 @@ public class KermetaCompiler {
 			}
 	
 			if (!checkKP(kp, kpFileURL) ) return null;			
-			if (!kp.getName().isEmpty()) {
-				projectName = kp.getName();
+			if (!kp.getEclipseName().isEmpty()) {
+				projectName = kp.getEclipseName();
 			}
 			
 			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
-			ArrayList<TracedURL> kpSources = collectSourceHelper.getDirectSources(kp,kpFileURL, varExpander);
+			ArrayList<TracedURL> kpSources = collectSourceHelper.getResolvedImportProjectSources(kp,kpFileURL);
 			if (kpSources.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				this.errorMessage = "Invalid kp file. No sources detected.";
 				this.hasFailed = true;
 				return null;
 			}
-			List<ModelingUnit> sourceModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);				
+			List<ModelingUnit> sourceModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpSources, kp.getEclipseName(), dirtyMU);				
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + sourceModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, sourceModelingUnits);
 	
@@ -378,7 +381,7 @@ public class KermetaCompiler {
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Saving merged file as a library...", LOG_MESSAGE_GROUP, 1);
 			
 			// save resolvedUnit to the META-INF/kermeta/merged.km
-			URI uri = URI.createURI(((resultingUnit.getNamespacePrefix() ==null|| resultingUnit.getNamespacePrefix().isEmpty() ?"":resultingUnit.getNamespacePrefix() + ".") + resultingUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+			URI uri = URI.createURI(( resultingUnit.getName() + ".km_in_memory").replaceAll("::", "."));
 			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
 			if (!mergedFile.getParentFile().exists()) {
 				mergedFile.getParentFile().mkdirs();
@@ -436,14 +439,13 @@ public class KermetaCompiler {
 	
 			if (!checkKP(kp, kpFileURL) ) return null;
 			
-			if (!kp.getName().isEmpty()) {
-				projectName = kp.getName();
+			if (!kp.getEclipseName().isEmpty()) {
+				projectName = kp.getEclipseName();
 			}
 
 			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
-			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
-			ArrayList<TracedURL> kpSources = collectSourceHelper.getSources(kp,kpFileURL, varExpander);
+			ArrayList<TracedURL> kpSources = collectSourceHelper.getSources4Merge(kp,kpFileURL);
 			if (kpSources.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				this.errorMessage = "Invalid kp file. No sources detected.";
@@ -492,7 +494,7 @@ public class KermetaCompiler {
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveLoading "+kpPreResolveSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
 				
 				if (kpPreResolveSources.size() != 0) {
-					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, kp.getName(), dirtyMU);				
+					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, kp.getEclipseName(), dirtyMU);				
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveMerging " + preresolveModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 					ErrorProneResult<ModelingUnit> preresolvedMergedUnit = mergeModelingUnits(kp, preresolveModelingUnits);
 			
@@ -544,7 +546,7 @@ public class KermetaCompiler {
 			flushProblems(remainingSources);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+remainingSources.size()+" remaining sources...", LOG_MESSAGE_GROUP, 1);
 			
-			List<ModelingUnit> modelingUnits = collectSourceHelper.getSourceModelingUnits(kp, remainingSources, kp.getName(), dirtyMU);
+			List<ModelingUnit> modelingUnits = collectSourceHelper.getSourceModelingUnits(kp, remainingSources, kp.getEclipseName(), dirtyMU);
 	
 			if (modelingUnits.size() == 0 && preResolvedUnit == null) {
 				this.errorMessage = "Kermeta project invalid.  There is no modeling unit to compile.";
@@ -664,7 +666,7 @@ public class KermetaCompiler {
 			}
 				
 			// save resolvedUnit to the META-INF/kermeta/merged.km
-			URI uri = URI.createURI(((resolvedUnit.getNamespacePrefix().isEmpty() ?"":resolvedUnit.getNamespacePrefix() + ".") + resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
+			URI uri = URI.createURI((resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
 			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
 			if (!mergedFile.getParentFile().exists()) {
 				mergedFile.getParentFile().mkdirs();
@@ -685,9 +687,10 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
-			
+			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
 
-			List<String> fullBinaryDependencyClassPath = getBinaryDependencyClasspath(kp, varExpander);
+			List<String> fullBinaryDependencyClassPath = getImportProjetJarClasspath(kp, varExpander);
+			fullBinaryDependencyClassPath.addAll(getImportByteCodeJarClasspath(kp, varExpander));
 			fullBinaryDependencyClassPath.addAll(additionalClassPath);
 			// generating 
 			ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
@@ -790,9 +793,9 @@ public class KermetaCompiler {
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<TracedURL> getSources(String kpString) throws IOException {
+	public ArrayList<TracedURL> getResolvedImportProjectSources(String kpString) throws IOException {
 		CollectSourcesHelper sourceHelper = new CollectSourcesHelper(this, logger);
-		return sourceHelper.getSources(kpString);
+		return sourceHelper.getResolvedImportProjectSources(kpString);
 	}
 	
 
@@ -803,24 +806,23 @@ public class KermetaCompiler {
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<String> getBinaryDependencyClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+	public ArrayList<String> getImportProjetJarClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		ArrayList<String> result = new ArrayList<String>();
-		// TODO currently deal only with dependencies on the disk (no mvn:/ dependencies)
-		List<Dependency> dependencies = kp.getDependencies();
-		for (Dependency dep : dependencies) {
-			// ignore dependencies that are used only for importing sources or for importing a merged km
-			if(! dep.isIgnoreByteCode() && !dep.isSourceOnly()){
-				// for each dependency use the first URL that works			
-				String depResolvedURL = getResolvedDependencyURL(dep, varExpander);
-				if(depResolvedURL != null){
-					result.add(depResolvedURL);
-				}
-			}
+		for(ImportProjectJar dep : kp.getImportedProjectJars()){
+			varExpander.expandVariables(dep.getUrl());
 		}
 		return result;
 	}
 	
-	public String getResolvedDependencyURL(Dependency dep,  KpVariableExpander varExpander)  throws IOException {
+	public ArrayList<String> getImportByteCodeJarClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+		ArrayList<String> result = new ArrayList<String>();
+		for(ImportBytecodeJar dep : kp.getImportedBytecodeJars()){
+			varExpander.expandVariables(dep.getUrl());
+		}
+		return result;
+	}
+	
+/*	public String getResolvedDependencyURL(Dependency dep,  KpVariableExpander varExpander)  throws IOException {
 		// for a dependency use the first URL that works			
 		for(String dependencyURLWithVariable : dep.getUrl()){
 			String dependencyURL = varExpander.expandSimpleVariables(dependencyURLWithVariable);
@@ -911,7 +913,7 @@ public class KermetaCompiler {
 		}
 		return null;
 	}
-
+*/
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(KermetaProject kp, List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		KmBinaryMerger theMerger = null;
@@ -944,7 +946,7 @@ public class KermetaCompiler {
 			for (int i = 1; i < convertedModellingUnits.size(); i++) {
 				logger.debug("merging "+mergedMU.getResult().getName()+" + "+convertedModellingUnits.get(i).getName(), LOG_MESSAGE_GROUP);
 				mergedMU = theMerger.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
-				mergedMU.getResult().setName(kp.getName());
+				mergedMU.getResult().setName(kp.getEclipseName());
 				// Save previous problems
 				for (ResultProblemMessage prob : mergedMU.getProblems()) {
 					problems.add(prob);
@@ -1028,30 +1030,18 @@ public class KermetaCompiler {
 
 	
 	
-	private ArrayList<URL> getEcoreNeedingGeneration(KermetaProject kp,KpVariableExpander varExpander){
-		List<Source> srcs = kp.getSources();
+	private ArrayList<URL> getEcoreNeedingGeneration(KermetaProject kp,  KpVariableExpander varExpander){
+
 		ArrayList<URL> ecoreURLs = new ArrayList<URL>();
-		for (Source src : srcs) {
-			if(!src.isByteCodeFromADependency()){
-				try{
-					String sourceURLWithVariable = src.getUrl();
-					sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
-					String sourceURLString = varExpander.expandSourceVariables(sourceURLWithVariable);
-					if (sourceURLWithVariable.contains("${")) {
-						// deal with variable expansion
-					//	logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURLString + ")", LOG_MESSAGE_GROUP);
-					} else {
-					//	logger.debug("sourceURL : " + sourceURLWithVariable, LOG_MESSAGE_GROUP);
-					}
-					URL sourceURL = FileHelpers.StringToURL(sourceURLString);
-					if(sourceURL.getFile().endsWith(".ecore"))
-						ecoreURLs.add(sourceURL);
-				}
-				catch(IOException e){
-					//logger.logProblem(MessagingSystem.Kind.UserERROR, "Cannot load source "+src.getUrl()+ " "+e.getMessage(), 
-					//		KermetaCompiler.LOG_MESSAGE_GROUP, KpResourceHelper.createFileReference(src));
-				}
+		CollectSourcesHelper helper = new CollectSourcesHelper(this, logger);
+		try {
+			ArrayList<TracedURL> importedProjectSources = helper.getResolvedImportProjectSources(kp, kp.eResource().getURI().toString());
+			for (TracedURL src : importedProjectSources) {
+				if(src.getUrl().toString().endsWith(".ecore"))
+					ecoreURLs.add(src.getUrl());
 			}
+		} catch (Exception e) {	
+			logger.error("Pb retrieving ecore sources", LOG_MESSAGE_GROUP, e);
 		}
 		return ecoreURLs;
 	}
@@ -1070,7 +1060,8 @@ public class KermetaCompiler {
 		 * ().put(equivalence.getEcorePackageName(),
 		 * equivalence.getJavaPackageName()); } }
 		 */
-		for( PackageEquivalence packEquivalence : kp.getPackageEquivalences()){
+		CollectSourcesHelper helper = new CollectSourcesHelper(this, logger);
+		for( PackageEquivalence packEquivalence : helper.collectAllPackageEquivalences(kp)){
 			if(packEquivalence.getEcorePackage() !=  null && packEquivalence.getJavaPackage() !=  null &&
 					(!packEquivalence.getEcorePackage().isEmpty()) && (!packEquivalence.getJavaPackage().isEmpty()))	{
 				logger.debug("\tadding package equivalence "+packEquivalence.getEcorePackage() +"="+ packEquivalence.getJavaPackage(), LOG_MESSAGE_GROUP);
@@ -1093,14 +1084,14 @@ public class KermetaCompiler {
 		//*************
 		GlobalConfiguration.outputBinFolder_$eq(targetScalaBinaryFolder);
 		//*************
-		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getGroup() + "." + kp.getName());
+		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getEclipseName());
 		GlobalConfiguration.props_$eq(new Properties());
 		GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
 		GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
 		GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
 		// GroupId and ArtifactId are used to prefix the generated code
-		GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
-		GlobalConfiguration.props().setProperty("project.artefact.id", kp.getName());
+		//GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
+		GlobalConfiguration.props().setProperty("project.artefact.id", kp.getEclipseName());
 		
 		GlobalConfiguration.props().setProperty("user.additional.classpath",userAdditionalClassPath);
 
@@ -1113,7 +1104,7 @@ public class KermetaCompiler {
 		}
 
 		// GlobalConfiguration.load(GlobalConfiguration.props());
-		GlobalConfiguration.setScalaAspectPrefix(kp.getGroup() + "." + kp.getName());
+		GlobalConfiguration.setScalaAspectPrefix(kp.getEclipseName());
 	}
 
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
@@ -1226,27 +1217,27 @@ public class KermetaCompiler {
 	
 	public boolean  checkKP(KermetaProject kp, String kpFileURL) throws MalformedURLException{
 		//KpResourceHelper.createFileReference(kp.getName())
-		if (kp.getName() == null) {
+		if (kp.getEclipseName() == null) {
 			this.errorMessage = "Invalid kp file. Missing project name";
 			this.hasFailed = true;
 		}
-		if (kp.getName().isEmpty()) {
+		if (kp.getEclipseName().isEmpty()) {
 			this.errorMessage = "Invalid kp file. Missing project name";
 			this.hasFailed = true;
 		}
 
-		if (kp.getName().contains("-")) {
+		if (kp.getEclipseName().contains("-")) {
 			this.errorMessage = "Forbidden character '-' in project name";
 			this.hasFailed = true;
 		}
 		
-		if (kp.getName().contains(" ")) {
+		if (kp.getEclipseName().contains(" ")) {
 			this.errorMessage = "Forbidden character ' ' in project name";
 			this.hasFailed = true;
 		}
 		
 		
-		String firstChar = kp.getName().substring(0, 1);
+		String firstChar = kp.getEclipseName().substring(0, 1);
 		if ("0123456789".contains(firstChar)) {
 			this.errorMessage = "cannot use an integer as first character of the project name";
 			this.hasFailed = true;
@@ -1379,14 +1370,23 @@ public class KermetaCompiler {
 	 * @return
 	 */
 	protected ModelingUnit addStandardObjectIfRequired(ModelingUnit mu){
+		org.kermeta.language.structure.Metamodel kermetaMM = null;
+		for(org.kermeta.language.structure.Metamodel mm : mu.getMetamodels()){
+			if(mm.getName().equals("kermeta_library_core")) kermetaMM = mm;
+		}
+		if(kermetaMM == null) {
+			kermetaMM = org.kermeta.language.structure.StructureFactory.eINSTANCE.createMetamodel();
+			kermetaMM.setName("kermeta_library_core");
+			mu.getMetamodels().add(kermetaMM);
+		}
 		org.kermeta.language.structure.Package kermetaPackage = null;
-		for(org.kermeta.language.structure.Package pack : mu.getPackages()){
+		for(org.kermeta.language.structure.Package pack : kermetaMM.getPackages()){
 			if(pack.getName().equals("kermeta")) kermetaPackage = pack;
 		}
 		if(kermetaPackage == null) {
 			kermetaPackage = org.kermeta.language.structure.StructureFactory.eINSTANCE.createPackage();
 			kermetaPackage.setName("kermeta");
-			mu.getPackages().add(kermetaPackage);
+			kermetaMM.getPackages().add(kermetaPackage);
 		}
 		org.kermeta.language.structure.Package standardPackage = null;
 		for(org.kermeta.language.structure.Package pack : kermetaPackage.getNestedPackage()){
@@ -1407,7 +1407,7 @@ public class KermetaCompiler {
 			}
 		}
 		if(objectCD == null){
-			logger.debug("adding kermeta::standard::Objet to ModelingUnit that doesn't have it", LOG_MESSAGE_GROUP);
+			logger.debug("adding kermeta_library_core#kermeta::standard::Objet to ModelingUnit that doesn't have it", LOG_MESSAGE_GROUP);
 			objectCD = org.kermeta.language.structure.StructureFactory.eINSTANCE.createClassDefinition();
 			objectCD.setName("Object");
 			objectCD.setIsAspect(true);

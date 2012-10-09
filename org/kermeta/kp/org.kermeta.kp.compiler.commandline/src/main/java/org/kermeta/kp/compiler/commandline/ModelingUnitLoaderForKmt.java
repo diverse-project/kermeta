@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import scala.collection.Iterator;

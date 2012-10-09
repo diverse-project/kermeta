@@ -22,8 +22,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
@@ -64,15 +65,16 @@ public class ModelingUnitConverter {
 	public ModelingUnit convert(ModelingUnit mu) throws IOException{
 		ModelingUnit resultMU;
 		logger.initProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "Converting ModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
-		String prefix = "";
-		if(mu.getNamespacePrefix() != null && !mu.getNamespacePrefix().isEmpty()) prefix = mu.getNamespacePrefix() + ".";
-		URI uri = URI.createURI((prefix + mu.getName() + ".km_in_memory")
-				.replaceAll("::", "."));
-		if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
-			uri = mu.eResource().getURI();
+		String mms = "";
+		for(Metamodel mm : mu.getMetamodels()){
+			mms = mms+"_"+mm.getName();
+		}
+		URI uri = URI.createURI(mms+ ".km_in_memory");
+		if (mu.getMetamodels().size() > 0 &&  mu.getMainEResource() != null && mu.getMainEResource().getURI().isFile()) {
+			uri = mu.getMainEResource().getURI();
 			
 		} 	
-		logger.debug("\t converting using uri "+uri+" getname="+mu.getName(), KermetaCompiler.LOG_MESSAGE_GROUP);
+		logger.debug("\t converting using uri "+uri, KermetaCompiler.LOG_MESSAGE_GROUP);
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);
 		resultMU= this.LoadMu(stream, uri);
 
@@ -99,28 +101,29 @@ public class ModelingUnitConverter {
 		m.put("km", new XMIResourceFactoryImpl());
 		Resource resource = resourceSet.createResource(uri);
 		if(resource != null)
-			resource.getContents().add(mu);
+			resource.getContents().addAll(mu.getMetamodels());
 		else {
 			logger.error("Cannot create resource for  "+uri, KermetaCompiler.LOG_MESSAGE_GROUP, new Exception("Created resource is null"));			
 		}
 		Map<String, String> options = null;
 		try {
-			mu.eResource().save(outputStream, options);
+			mu.gatherInMainEResource();
+			mu.getMainEResource().save(outputStream, options);
 		}
 		catch(Exception e){
 			logger.error("Received Exception while saving "+e, KermetaCompiler.LOG_MESSAGE_GROUP, e);
 			java.util.Map<EObject,java.util.Collection<EStructuralFeature.Setting>> unresolvedMap ;
-			unresolvedMap = EcoreUtil.ExternalCrossReferencer.find(mu.eResource());
+			unresolvedMap = EcoreUtil.ExternalCrossReferencer.find(mu.getMainEResource());
 			for (EObject myEobject : unresolvedMap.keySet() ){
 				logger.error("Patching dangling element "+myEobject+ 
 						" referenced by "+unresolvedMap.get(myEobject) +
 						"\nthe dangling element is added to the root of the resource for debug purpose", 
 						KermetaCompiler.LOG_MESSAGE_GROUP, e);
-				mu.eResource().getContents().add(myEobject);				
+				mu.getMainEResource().getContents().add(myEobject);				
 			}			
 			logger.info("Retrying to save .... ", KermetaCompiler.LOG_MESSAGE_GROUP);
 			outputStream = new ByteArrayOutputStream();
-			mu.eResource().save(outputStream, options);
+			mu.getMainEResource().save(outputStream, options);
 		}
 
 		if (mustSaveToFile){
@@ -140,15 +143,18 @@ public class ModelingUnitConverter {
 	 */
 	public void saveMu(ModelingUnit mu) throws IOException{
 		logger.initProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "Saving ModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
-		String prefix = "";
-		if(mu.getNamespacePrefix() != null && !mu.getNamespacePrefix().isEmpty()) prefix = mu.getNamespacePrefix() + ".";
-		URI uri = URI.createURI((prefix + mu.getName() + ".km_in_memory")
-				.replaceAll("::", "."));
-		if (mu.eResource() != null && mu.eResource().getURI().isFile()) {
-			uri = mu.eResource().getURI();
+		
+		String mms = "";
+		for(Metamodel mm : mu.getMetamodels()){
+			mms = mms+"_"+mm.getName();
+		}
+		URI uri = URI.createURI(mms+ ".km_in_memory");
+		if (mu.getMetamodels().size() > 0 &&  mu.getMainEResource() != null && mu.getMainEResource().getURI().isFile()) {
+			uri = mu.getMainEResource().getURI();
 			
-		} 	
-		logger.debug("\t saving using uri "+uri+" getname="+mu.getName(), KermetaCompiler.LOG_MESSAGE_GROUP);
+		}
+		
+		logger.debug("\t saving using uri "+uri, KermetaCompiler.LOG_MESSAGE_GROUP);
 		this.saveMu(mu, uri);
 		
 
@@ -170,8 +176,7 @@ public class ModelingUnitConverter {
 		m.put("*", new XMIResourceFactoryImpl());
 		Resource resource = resourceSet.createResource(uri);
 		resource.load(new ByteArrayInputStream(mu.toByteArray()), options);
-		// let's suppose the ModelingUnit is the first element in the root
-		return (ModelingUnit) resource.getContents().get(0);
+		return new ModelingUnit(uri.toString(), resource.getContents());
 
 	}
 }

@@ -3,7 +3,8 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
+
 
 public interface ModelingUnitLoader {
 

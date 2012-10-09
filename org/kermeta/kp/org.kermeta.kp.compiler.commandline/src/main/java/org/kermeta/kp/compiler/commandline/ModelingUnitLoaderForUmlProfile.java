@@ -19,9 +19,9 @@ import org.eclipse.uml2.uml.Profile;
 import org.kermeta.language.ecore2km.Ecore2KMImpl;
 import org.kermeta.language.ecore2km.Ecore2KMImpl4Eclipse;
 import org.kermeta.language.ecore2km.api.Ecore2KM;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.umlprofile2ecore.UmlProfile2EcoreImpl;
 import org.kermeta.language.umlprofile2ecore.api.UmlProfile2Ecore;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
 

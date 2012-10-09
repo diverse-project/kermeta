@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.StructurePackage;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
@@ -81,8 +81,7 @@ public class ModelingUnitLoaderForKm implements ModelingUnitLoader{
 		URI ruri =  URI.createURI(uri);
 		Resource resource = resourceSet.createResource(ruri);
 		resource.load(options);
-		// let's suppose the ModelingUnit is the first element in the root
-		return (ModelingUnit) resource.getContents().get(0);
+		return new ModelingUnit(uri, resource.getContents());
 	}
 
 	@Override

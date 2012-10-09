@@ -10,15 +10,19 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import org.eclipse.emf.common.util.URI;
-import org.kermeta.kp.Dependency;
+import org.kermeta.kp.ImportFile;
+import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
-import org.kermeta.kp.Source;
+import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.compiler.commandline.callable.CallableModelingUnitLoader;
+import org.kermeta.kp.editor.analysis.helper.KermetaProjectHelper;
+import org.kermeta.kp.editor.analysis.helper.KpResourceHelper;
+import org.kermeta.kp.editor.analysis.helper.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl;
 import org.kermeta.language.merger.binarymerger.KmBinaryMergerImpl4Eclipse;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
@@ -48,7 +52,7 @@ public class CollectSourcesHelper {
 				java.net.URI fileUri;
 				boolean isLibraryCoreObject = sourceUrl.getUrl().toString().endsWith("baseType.kmt") && sourceUrl.getUrl().toString().contains("language.library.core");
 				
-				boolean isDependency = sourceUrl.getSource() instanceof Dependency;
+				boolean isDependency = sourceUrl.getSource() instanceof ImportProjectJar || sourceUrl.getSource() instanceof ImportProjectSources ;
 				if(sourceUrl.getUrl().getProtocol().equals("jar")){
 					String jarUrl = sourceUrl.getUrl().toString();
 					fileUri =  java.net.URI.create(jarUrl.substring(4, jarUrl.indexOf("!")));
@@ -104,41 +108,54 @@ public class CollectSourcesHelper {
 		}
 		return result;
 	}
-	public ArrayList<TracedURL> getDirectSources(String kpString) throws IOException {
+	
+	/**
+	 * returns the ImportFiles of this kp only
+	 * @param kpString
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<TracedURL> getDirectImportFiles(String kpString) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		KermetaProject kp = ldr.loadKp(kpString);
 		if (kp != null) {
-			return getDirectSources(kp, kpString, new KpVariableExpander(kpString, kp,compiler.fileSystemConverter, logger));
+			return getDirectImportFiles(kp, kpString);
 		} else {
 			return new ArrayList<TracedURL>();
 		}
 	}
-	public ArrayList<TracedURL> getSources(String kpString) throws IOException {
+	public ArrayList<TracedURL> getResolvedImportProjectSources(String kpString) throws IOException {
 		KpLoaderImpl ldr = new KpLoaderImpl(logger);
 		KermetaProject kp = ldr.loadKp(kpString);
 		if (kp != null) {
-			return getSources(kp, kpString, new KpVariableExpander(kpString, kp,compiler.fileSystemConverter, logger));
+			return getResolvedImportProjectSources(kp, kpString);
 		} else {
 			return new ArrayList<TracedURL>();
 		}
 	}
 	
-	public ArrayList<TracedURL> getDirectSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
+	/**
+	 * returns the ImportFiles of this kp only
+	 * @param kp
+	 * @param kpFileUrl
+	 * @param varExpander
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<TracedURL> getDirectImportFiles(KermetaProject kp, String kpFileUrl) throws IOException {
+		KpVariableExpander varExpander = new KpVariableExpander( kpFileUrl ,kp, compiler.fileSystemConverter, logger);
 		// Note that source is relative to the kp file not the jvm current dir
-		List<Source> srcs = kp.getSources();
+		List<ImportFile> srcs = new ArrayList<ImportFile>();
+		for(org.kermeta.kp.Metamodel kpMm : kp.getMetamodels()){
+			srcs.addAll(kpMm.getImportedFiles());
+		}
 		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
-		for (Source src : srcs) {
+		for (ImportFile src : srcs) {
 			String currentUrl=null;
 			try{
 				String sourceURLWithVariable = src.getUrl();
 				sourceURLWithVariable = sourceURLWithVariable != null ? sourceURLWithVariable : ""; // default set to emptyString rather than null
-				String sourceURL = varExpander.expandSourceVariables(sourceURLWithVariable);
-				if (sourceURLWithVariable.contains("${")) {
-					// deal with variable expansion
-					logger.debug("sourceURL : " + sourceURLWithVariable + " (expanded to : " + sourceURL + ")", getMessageGroup());
-				} else {
-					logger.debug("sourceURL : " + sourceURLWithVariable, getMessageGroup());
-				}
+				String sourceURL = varExpander.expandVariables(sourceURLWithVariable);
 				currentUrl = sourceURL;
 				kpSources.add(new TracedURL(src, FileHelpers.StringToURL(sourceURL)));
 				logger.debug("     FileHelpers.StringToURL(sourceURL) : " + FileHelpers.StringToURL(sourceURL), getMessageGroup());
@@ -152,85 +169,72 @@ public class CollectSourcesHelper {
 		}
 		return kpSources;
 	}
+	
 	/**
-	 * Get all sources for the given project including dependencies
+	 * returns the ImportFiles that are imported through the importProjectSources
 	 * @param kp
 	 * @param kpFileUrl
-	 * @param varExpander
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<TracedURL> getSources(KermetaProject kp, String kpFileUrl, KpVariableExpander varExpander) throws IOException {
-		KpLoaderImpl ldr = new KpLoaderImpl(logger);
-		// Note that source is relative to the kp file not the jvm current dir
-		//List<Source> srcs = kp.getSources();
-		ArrayList<TracedURL> kpSources = getDirectSources(kp, kpFileUrl, varExpander);
-
-		// get km from dependencies
-		List<Dependency> dependencies = kp.getDependencies();
-		for (Dependency dep : dependencies) {
-			// ignore dependencies that are meant to be used in a require or as bytcode only
-			if(!(dep.isSourceOnly() || dep.isByteCodeOnly())){
-				
-				String baseUriForDependency = varExpander.expandSourceVariables("${"+dep.getName()+KpVariableExpander.BASEURI_VARIABLE+"}");
-				boolean isDirectory = false;
-				try{
-					URI depURI = URI.createURI(baseUriForDependency+"/");
-					if((depURI.isPlatformResource() && depURI.fileExtension() == null) || (depURI.isPlatformResource() && ! depURI.fileExtension().equals("jar"))){
-						isDirectory = true;
-					}
-				}catch( Exception e){
-					logger.error(e.toString()+ " on " +baseUriForDependency, getMessageGroup(),e);
-					compiler.hasFailed = true; // notify that something has gone wrong
-					if(compiler.errorMessage.isEmpty()) compiler.errorMessage = e.getMessage(); // store first error
-				}
-				
-				
-				URI	dependencyKPURI = URI.createURI(baseUriForDependency+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR);
-				logger.debug("loading dependency kp : "+dependencyKPURI.toString(), getMessageGroup());
-				ldr = new KpLoaderImpl(logger);				
-				KermetaProject dependencyKP = ldr.loadKp(dependencyKPURI);
-				
-				if (dependencyKP == null) {
-					if(findSourceUsingDependency(kp,dep) != null){
-						logger.debug("\tdependency used at least for one require", getMessageGroup());
-					}
-					else if(!dep.isByteCodeOnly()){
-						logger.logProblem(MessagingSystem.Kind.UserWARNING, "dependency neither contains a kp file nor is used in a require. If you use it as a binary classpath complement only, please add the byteCodeOnly modifier. ", 
-								getMessageGroup(), KpResourceHelper.createFileReference(dep));
-					}
-				} else {
-					String dependencyMergedKMUrl;
-					if(isDirectory && compiler.runInEclipse){
-						dependencyMergedKMUrl = baseUriForDependency + KermetaCompiler.DEFAULT_BINARY_LOCATION_IN_ECLIPSE +KermetaCompiler.DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-						
-					} else {
-						dependencyMergedKMUrl = baseUriForDependency + KermetaCompiler.DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/" + dependencyKP.getName() + ".km";
-					}
-					kpSources.add(new TracedURL(dep, FileHelpers.StringToURL(dependencyMergedKMUrl)));
-				}
-				
-			}
+	public ArrayList<TracedURL> getResolvedImportProjectSources(KermetaProject kp, String kpFileUrl) throws IOException {
+			
+		ArrayList<TracedURL> kpSourceFiles = new ArrayList<TracedURL>();
+		for(KermetaProject importedSourceProject : KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp)){
+			// get importfiles from this refered project			
+			kpSourceFiles.addAll(getDirectImportFiles(importedSourceProject, importedSourceProject.eResource().getURI().toString()));
+			
+			// recursively get resolved imporProjectsources
+			kpSourceFiles.addAll(getResolvedImportProjectSources(importedSourceProject, importedSourceProject.eResource().getURI().toString()));
 		}
-		return kpSources;
+		
+		return kpSourceFiles;
 	}
 	
-	// TODO move to a kp helper project/class
-	protected Source findSourceUsingDependency(KermetaProject kp, Dependency dep){
-		List<Source> srcs = kp.getSources();		
-		for (Source src : srcs) {
-			if(src.getUrl().contains("${"+dep.getName()+KpVariableExpander.BASEURI_VARIABLE+"}")){
-				return src;
+	
+	/**
+	 * Get all sources for the given project including dependencies (ie. ImportProjectJar and ImportProjectSources) and indirectly loaded sources
+	 * Ie. everything that need to go in the merge process
+	 * @param kp
+	 * @param kpFileUrl
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<TracedURL> getSources4Merge(KermetaProject kp, String kpFileUrl) throws IOException {
+		
+		// get ImportFiles and indirectly loaded ImportProjectSources
+		ArrayList<TracedURL> kpSources = getResolvedImportProjectSources(kp, kpFileUrl);
+		
+		KpVariableExpander varExpander = new KpVariableExpander(kp.eResource().getURI().toString(),
+				kp, 
+				compiler.fileSystemConverter, 
+				logger);
+
+		// get ImportProjectJar
+		for (ImportProjectJar importedProjectJar : kp.getImportedProjectJars()) {
+			String containerUrl = varExpander.expandVariables(importedProjectJar.getUrl());
+			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+KermetaProjectHelper.DEFAULT_KP_LOCATION_IN_JAR : containerUrl+KermetaProjectHelper.DEFAULT_KP_LOCATION_IN_FOLDER,
+					kp.eResource());
+			if(foundProject != null){
+				if(containerUrl.endsWith(".jar")){
+
+					kpSources.add(new TracedURL(importedProjectJar, FileHelpers.StringToURL(containerUrl+KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_JAR)));
+				}
+				else{
+					kpSources.add(new TracedURL(importedProjectJar, FileHelpers.StringToURL(containerUrl+KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_ECLIPSE)));
+				}
 			}
 		}
-		return null;
+		
+		return kpSources;
 	}
+
 	
 	
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander, HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
-		ArrayList<TracedURL> kpSources = getSources(kp,kpFileURL, varExpander);
-		return getSourceModelingUnits(kp, kpSources, kp.getName(), dirtyMU);
+		ArrayList<TracedURL> kpSources = getSources4Merge(kp,kpFileURL);
+		return getSourceModelingUnits(kp, kpSources, kp.getEclipseName(), dirtyMU);
 	}
 
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp, String kpFileURL, KpVariableExpander varExpander) throws IOException {
@@ -359,6 +363,23 @@ public class CollectSourcesHelper {
 		
 		return modelingUnits;
 	}
+	
+	
+	public List<PackageEquivalence> collectAllPackageEquivalences(KermetaProject kp){
+		List<PackageEquivalence> result = new ArrayList<PackageEquivalence>();
+		
+		try {
+			for(TracedURL tracedUrl : getSources4Merge(kp, kp.eResource().getURI().toString())){
+				if(tracedUrl.getSource() instanceof ImportFile){
+					result.addAll(((ImportFile)tracedUrl.getSource()).getPackageEquivalences());
+				}
+			}
+		} catch (IOException e) {
+			logger.error("pb while collectAllPackageEquivalences" +e, getMessageGroup(), e);
+		}
+		return result;
+	}
+	
 	
 	public String getMessageGroup(){
 		return KermetaCompiler.LOG_MESSAGE_GROUP;

@@ -79,8 +79,8 @@ public class Ecore2Bytecode {
 		}
 		if(!runInEclipse){
 			logger.debug("runInEclipse = false", KermetaCompiler.LOG_MESSAGE_GROUP);
-			logger.debug("EcorePlugin.getPlatformResourceMap().put(\""+kp.getName()+"\", URI.createURI(\"file:///"+rootFolder.replaceAll("\\\\", "/")+"\"));", KermetaCompiler.LOG_MESSAGE_GROUP);
-			EcorePlugin.getPlatformResourceMap().put(kp.getName(), URI.createURI("file:///"+rootFolder.replaceAll("\\\\", "/")));
+			logger.debug("EcorePlugin.getPlatformResourceMap().put(\""+kp.getEclipseName()+"\", URI.createURI(\"file:///"+rootFolder.replaceAll("\\\\", "/")+"\"));", KermetaCompiler.LOG_MESSAGE_GROUP);
+			EcorePlugin.getPlatformResourceMap().put(kp.getEclipseName(), URI.createURI("file:///"+rootFolder.replaceAll("\\\\", "/")));
 			
 			logger.debug("org.eclipse.core.runtime.Platform.isRunning() = "+org.eclipse.core.runtime.Platform.isRunning(), KermetaCompiler.LOG_MESSAGE_GROUP);
 		}
@@ -112,9 +112,9 @@ public class Ecore2Bytecode {
 				logger.error(e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
 			}
 		}
-		File genmodelFile = new File(targetGenmodelFolder+File.separator+kp.getName()+"internalEcores.genmodel");
+		File genmodelFile = new File(targetGenmodelFolder+File.separator+kp.getEclipseName()+"internalEcores.genmodel");
 		File generatedSourcePath = new File(targetGeneratedJavaFolder);
-		return threadExector.submit(new CallableGenmodelGenerator(logger, inputEcoreFiles, genmodelFile, generatedSourcePath, kp.getName()));
+		return threadExector.submit(new CallableGenmodelGenerator(logger, inputEcoreFiles, genmodelFile, generatedSourcePath, kp.getEclipseName()));
 				
 	}
 	public Future<Boolean> ecorejava2bytecode(Future<Boolean> genmodelFuture, ExecutorService threadExector){
