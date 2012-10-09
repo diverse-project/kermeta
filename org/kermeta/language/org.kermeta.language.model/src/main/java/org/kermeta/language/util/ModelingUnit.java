@@ -29,7 +29,7 @@ public class ModelingUnit {
 	protected String name = "";
 	
 	public ModelingUnit(){
-		this.name = "";
+		this.name = "<unnamed_ModelingUnit>";
 		metamodels = new ArrayList<Metamodel>();
 	}
 	public ModelingUnit(String name){
