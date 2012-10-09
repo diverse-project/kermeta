@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.kermeta.kp.KermetaProject;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
@@ -30,10 +31,28 @@ public class KpChecker {
 	 */
 	public void checkDefaultMain(String kpFileURL, KermetaProject kp, ModelingUnit resolvedMU) throws MalformedURLException{
 		if(kp.getDefaultMainClass()== null) return;
-		if (resolvedMU instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.RichModelingUnit){
-			org.kermeta.language.language.resolver.org.kermeta.language.structure.RichModelingUnit mua 
-				= (org.kermeta.language.language.resolver.org.kermeta.language.structure.RichModelingUnit) resolvedMU;
-			TypeDefinition td = mua.getTypeDefinitionByQualifiedName(kp.getDefaultMainClass());
+		
+		if(!kp.getDefaultMainClass().contains("#")){
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class must refer to a metamodel using the # syntax", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			compiler.errorMessage = "Invalid kp file. Default main Class must refer to a metamodel using the # syntax";
+			compiler.hasFailed = true;
+			return;
+		}
+		String metamodelName = (kp.getDefaultMainClass().split("#"))[0];
+		Metamodel selectedMM= null;
+		for(Metamodel mm : resolvedMU.getMetamodels()){
+			if(mm.getName().equals(metamodelName)) selectedMM = mm;
+		}
+		if(!kp.getDefaultMainClass().contains("#")){
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found. Metamodel '"+metamodelName+"' not found", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			compiler.errorMessage = "Default main Class not found. Metamodel '"+metamodelName+"' not found";
+			compiler.hasFailed = true;
+			return;
+		}
+		if (selectedMM instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.RichMetamodel){
+			org.kermeta.language.language.resolver.org.kermeta.language.structure.RichMetamodel mma 
+				= (org.kermeta.language.language.resolver.org.kermeta.language.structure.RichMetamodel) selectedMM;
+			TypeDefinition td = mma.getTypeDefinitionByQualifiedName(kp.getDefaultMainClass());
 			if(td == null){
 				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				compiler.errorMessage = "Invalid kp file. Default main class not found";

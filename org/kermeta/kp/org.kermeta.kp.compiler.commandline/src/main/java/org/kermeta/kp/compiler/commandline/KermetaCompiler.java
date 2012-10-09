@@ -351,7 +351,7 @@ public class KermetaCompiler {
 			
 			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
-			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
+			//KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
 			ArrayList<TracedURL> kpSources = collectSourceHelper.getResolvedImportProjectSources(kp,kpFileURL);
 			if (kpSources.size() == 0) {
 				logger.logProblem(MessagingSystem.Kind.UserERROR, "Invalid kp file. No sources detected.", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
@@ -917,7 +917,7 @@ public class KermetaCompiler {
 	public ErrorProneResult<ModelingUnit> mergeModelingUnits(KermetaProject kp, List<ModelingUnit> modelingUnits) throws IOException {
 		List<ModelingUnit> convertedModellingUnits = new ArrayList<ModelingUnit>();
 		KmBinaryMerger theMerger = null;
-		ModelingUnitConverter muc = new ModelingUnitConverter(logger);
+		//ModelingUnitConverter muc = new ModelingUnitConverter(logger);
 
 		if (runInEclipse) {
 			theMerger = new KmBinaryMergerImpl4Eclipse();

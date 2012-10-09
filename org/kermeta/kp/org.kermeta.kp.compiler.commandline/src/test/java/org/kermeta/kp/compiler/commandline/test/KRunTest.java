@@ -105,7 +105,7 @@ public class KRunTest extends TestCase {
 		
 		ArrayList<String> fullClassPath = new ArrayList<String>();
 		fullClassPath.addAll(additionalClassPath);
-		fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, varExpander));
+		fullClassPath.addAll(compiler.getImportByteCodeJarClasspath(kp, varExpander));
 		fullClassPath.add(targetFolder+"emfclasses/");
 		
 		// set location of urimap file
@@ -113,7 +113,7 @@ public class KRunTest extends TestCase {
 		
 		ErrorAwareMessagingSystem errorAwareLogger = new ErrorAwareMessagingSystem();
 		KermetaRunner runner = new KermetaRunner(targetFolder+"classes/", 
-				kp.getGroup()+"."+ kp.getName(),
+				kp.getEclipseName(),
 				fullClassPath,
 				errorAwareLogger);
 		ArrayList<String> params = new ArrayList<String>();
@@ -135,7 +135,7 @@ public class KRunTest extends TestCase {
 		
 		for(ImportBytecodeJar dep : kp.getImportedBytecodeJars()){
 			String expandedVar = varExpander.expandVariables(dep.getUrl());
-			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER,
+			KermetaProject foundProject = KpResourceHelper.findKermetaProject(expandedVar.endsWith(".jar")? "jar:"+expandedVar+"!"+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR : expandedVar+KermetaCompiler.DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject!=null){
 				props.put("platform:/resource/"+foundProject.getEclipseName()+"/",expandedVar);
@@ -144,7 +144,7 @@ public class KRunTest extends TestCase {
 		}
 		for(ImportProjectJar dep : kp.getImportedProjectJars()){
 			String expandedVar = varExpander.expandVariables(dep.getUrl());
-			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER,
+			KermetaProject foundProject = KpResourceHelper.findKermetaProject(expandedVar.endsWith(".jar")? "jar:"+expandedVar+"!"+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR : expandedVar+KermetaCompiler.DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject!=null){
 				props.put("platform:/resource/"+foundProject.getEclipseName()+"/",expandedVar);
