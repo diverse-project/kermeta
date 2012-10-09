@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.language.structure.AbstractMetamodel;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.util.ModelingUnit;
 
 
@@ -36,7 +36,7 @@ public class ModelingUnitBaseUtil {
 	}
 	public static ModelingUnit loadModelingUnitFromKm(String modelFilePath, ResourceSet resourceSet){
     	URI uri = URI.createURI( modelFilePath );
-    	ModelingUnit result = new ModelingUnit();
+    	ModelingUnit result = new ModelingUnit(modelFilePath);
 		/*
 		 * If the loading is not done in a workbench, then uri matching platform:/resource or platform:/plugin
 		 * will be useless. Need to convert them into absolute path.
@@ -46,8 +46,8 @@ public class ModelingUnitBaseUtil {
 		uri = converter.normalize(uri);
 		Resource resource = resourceSet.getResource(uri, true);
 		for(EObject o : resource.getContents()){
-			if( o instanceof AbstractMetamodel){
-				result.getMetamodels().add((AbstractMetamodel) o);
+			if( o instanceof Metamodel){
+				result.getMetamodels().add((Metamodel) o);
 			}				
 		}
 		return result;
