@@ -26,9 +26,12 @@ public class ModelingUnit {
 	
 	protected List<Metamodel> metamodels = null;
 	
-	protected String name = null;
+	protected String name = "";
 	
-
+	public ModelingUnit(){
+		this.name = "";
+		metamodels = new ArrayList<Metamodel>();
+	}
 	public ModelingUnit(String name){
 		this.name = name;
 		metamodels = new ArrayList<Metamodel>();
