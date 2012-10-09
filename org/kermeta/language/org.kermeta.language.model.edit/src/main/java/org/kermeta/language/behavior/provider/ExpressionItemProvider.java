@@ -192,7 +192,7 @@ public class ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createMetamodelVariable()));
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter

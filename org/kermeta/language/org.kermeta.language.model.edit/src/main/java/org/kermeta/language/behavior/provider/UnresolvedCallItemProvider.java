@@ -329,7 +329,7 @@ public class UnresolvedCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createMetamodelVariable()));
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -639,7 +639,7 @@ public class UnresolvedCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.UNRESOLVED_CALL__GENERICS,
-				 StructureFactory.eINSTANCE.createMetamodelVariable()));
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter

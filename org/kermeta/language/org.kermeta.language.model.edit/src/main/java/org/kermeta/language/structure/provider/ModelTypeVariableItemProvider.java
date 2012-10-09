@@ -21,16 +21,16 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.kermeta.language.structure.MetamodelVariable;
+import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.StructurePackage;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.language.structure.MetamodelVariable} object.
+ * This is the item provider adapter for a {@link org.kermeta.language.structure.ModelTypeVariable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class MetamodelVariableItemProvider
+public class ModelTypeVariableItemProvider
 	extends TypeVariableItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -44,7 +44,7 @@ public class MetamodelVariableItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetamodelVariableItemProvider(AdapterFactory adapterFactory) {
+	public ModelTypeVariableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -75,9 +75,9 @@ public class MetamodelVariableItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_MetamodelVariable_virtualType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MetamodelVariable_virtualType_feature", "_UI_MetamodelVariable_type"),
-				 StructurePackage.Literals.METAMODEL_VARIABLE__VIRTUAL_TYPE,
+				 getString("_UI_ModelTypeVariable_virtualType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelTypeVariable_virtualType_feature", "_UI_ModelTypeVariable_type"),
+				 StructurePackage.Literals.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE,
 				 true,
 				 false,
 				 true,
@@ -87,14 +87,14 @@ public class MetamodelVariableItemProvider
 	}
 
 	/**
-	 * This returns MetamodelVariable.gif.
+	 * This returns ModelTypeVariable.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/MetamodelVariable"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelTypeVariable"));
 	}
 
 	/**
@@ -105,10 +105,10 @@ public class MetamodelVariableItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((MetamodelVariable)object).getName();
+		String label = ((ModelTypeVariable)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_MetamodelVariable_type") :
-			getString("_UI_MetamodelVariable_type") + " " + label;
+			getString("_UI_ModelTypeVariable_type") :
+			getString("_UI_ModelTypeVariable_type") + " " + label;
 	}
 
 	/**

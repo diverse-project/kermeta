@@ -444,6 +444,29 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTypeVariable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelTypeVariableItemProvider modelTypeVariableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTypeVariable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelTypeVariableAdapter() {
+		if (modelTypeVariableItemProvider == null) {
+			modelTypeVariableItemProvider = new ModelTypeVariableItemProvider(this);
+		}
+
+		return modelTypeVariableItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.Metamodel} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -465,31 +488,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 
 		return metamodelItemProvider;
 	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.MetamodelVariable} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MetamodelVariableItemProvider metamodelVariableItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.MetamodelVariable}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMetamodelVariableAdapter() {
-		if (metamodelVariableItemProvider == null) {
-			metamodelVariableItemProvider = new MetamodelVariableItemProvider(this);
-		}
-
-		return metamodelVariableItemProvider;
-	}
-
-
 
 	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.VirtualType} instances.
@@ -998,29 +996,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.UnresolvedMetamodel} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UnresolvedMetamodelItemProvider unresolvedMetamodelItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.UnresolvedMetamodel}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUnresolvedMetamodelAdapter() {
-		if (unresolvedMetamodelItemProvider == null) {
-			unresolvedMetamodelItemProvider = new UnresolvedMetamodelItemProvider(this);
-		}
-
-		return unresolvedMetamodelItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1179,10 +1154,10 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
+		if (metamodelItemProvider != null) metamodelItemProvider.dispose();
 		if (modelElementTypeDefinitionContainerItemProvider != null) modelElementTypeDefinitionContainerItemProvider.dispose();
 		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
-		if (metamodelItemProvider != null) metamodelItemProvider.dispose();
-		if (metamodelVariableItemProvider != null) metamodelVariableItemProvider.dispose();
+		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
 		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
 		if (modelItemProvider != null) modelItemProvider.dispose();
 		if (unresolvedTypeItemProvider != null) unresolvedTypeItemProvider.dispose();
@@ -1205,7 +1180,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (unresolvedAdaptationOperatorItemProvider != null) unresolvedAdaptationOperatorItemProvider.dispose();
 		if (adaptationParameterItemProvider != null) adaptationParameterItemProvider.dispose();
 		if (operationAdaptationOperatorItemProvider != null) operationAdaptationOperatorItemProvider.dispose();
-		if (unresolvedMetamodelItemProvider != null) unresolvedMetamodelItemProvider.dispose();
 		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 		if (filteredMetamodelReferenceItemProvider != null) filteredMetamodelReferenceItemProvider.dispose();
 	}

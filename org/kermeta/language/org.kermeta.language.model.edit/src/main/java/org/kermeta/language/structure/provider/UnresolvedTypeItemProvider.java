@@ -206,7 +206,7 @@ public class UnresolvedTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createMetamodelVariable()));
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -276,7 +276,7 @@ public class UnresolvedTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.UNRESOLVED_TYPE__GENERICS,
-				 StructureFactory.eINSTANCE.createMetamodelVariable()));
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter

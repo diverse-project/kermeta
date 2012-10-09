@@ -36,7 +36,7 @@ import org.kermeta.language.structure.StructurePackage;
  * @generated
  */
 public class MetamodelItemProvider
-	extends TypeDefinitionItemProvider
+	extends KermetaModelElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -64,9 +64,79 @@ public class MetamodelItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamePropertyDescriptor(object);
+			addSuperTypePropertyDescriptor(object);
+			addIsAspectPropertyDescriptor(object);
 			addUriPropertyDescriptor(object);
+			addIsResolvedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Super Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuperTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeDefinition_superType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_superType_feature", "_UI_TypeDefinition_type"),
+				 StructurePackage.Literals.TYPE_DEFINITION__SUPER_TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Aspect feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsAspectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeDefinition_isAspect_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_isAspect_feature", "_UI_TypeDefinition_type"),
+				 StructurePackage.Literals.TYPE_DEFINITION__IS_ASPECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -80,13 +150,35 @@ public class MetamodelItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AbstractMetamodel_uri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractMetamodel_uri_feature", "_UI_AbstractMetamodel_type"),
-				 StructurePackage.Literals.ABSTRACT_METAMODEL__URI,
+				 getString("_UI_Metamodel_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Metamodel_uri_feature", "_UI_Metamodel_type"),
+				 StructurePackage.Literals.METAMODEL__URI,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Resolved feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsResolvedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Metamodel_isResolved_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Metamodel_isResolved_feature", "_UI_Metamodel_type"),
+				 StructurePackage.Literals.METAMODEL__IS_RESOLVED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -103,9 +195,9 @@ public class MetamodelItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.ABSTRACT_METAMODEL__PACKAGES);
-			childrenFeatures.add(StructurePackage.Literals.ABSTRACT_METAMODEL__REFERENCED_METAMODELS);
-			childrenFeatures.add(StructurePackage.Literals.METAMODEL__OWNED_BINDINGS);
+			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL__PACKAGES);
+			childrenFeatures.add(StructurePackage.Literals.METAMODEL__REFERENCED_METAMODELS);
 		}
 		return childrenFeatures;
 	}
@@ -160,12 +252,15 @@ public class MetamodelItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Metamodel.class)) {
+			case StructurePackage.METAMODEL__NAME:
+			case StructurePackage.METAMODEL__IS_ASPECT:
 			case StructurePackage.METAMODEL__URI:
+			case StructurePackage.METAMODEL__IS_RESOLVED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case StructurePackage.METAMODEL__CONTAINED_TYPE:
 			case StructurePackage.METAMODEL__PACKAGES:
 			case StructurePackage.METAMODEL__REFERENCED_METAMODELS:
-			case StructurePackage.METAMODEL__OWNED_BINDINGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -185,18 +280,78 @@ public class MetamodelItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.ABSTRACT_METAMODEL__PACKAGES,
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createClass()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createEnumeration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createVirtualType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createProductType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createFunctionType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createVoidType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedInferredType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createUnresolvedTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.METAMODEL__PACKAGES,
 				 StructureFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.ABSTRACT_METAMODEL__REFERENCED_METAMODELS,
+				(StructurePackage.Literals.METAMODEL__REFERENCED_METAMODELS,
 				 StructureFactory.eINSTANCE.createFilteredMetamodelReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.METAMODEL__OWNED_BINDINGS,
-				 StructureFactory.eINSTANCE.createMetamodelBinding()));
 	}
 
 }

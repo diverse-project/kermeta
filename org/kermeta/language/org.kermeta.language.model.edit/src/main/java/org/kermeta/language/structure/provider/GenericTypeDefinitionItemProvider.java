@@ -148,7 +148,7 @@ public class GenericTypeDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
-				 StructureFactory.eINSTANCE.createMetamodelVariable()));
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
