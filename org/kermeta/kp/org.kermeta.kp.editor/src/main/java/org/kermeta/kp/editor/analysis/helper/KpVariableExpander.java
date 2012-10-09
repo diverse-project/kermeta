@@ -82,17 +82,22 @@ public class KpVariableExpander {
 				if(fileSystemConverter == null){
 					logger.error("fileSystemConverter not correctly initialized", KpVariableExpander.LOG_MESSAGE_GROUP, new Exception());
 				}
-				java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(currentReusableResourceURL));				
-				if(fileURI != null){					
-					if(fileURI.toString().startsWith("jar:") && fileURI.toString().endsWith("!/")){
-						fileURI = java.net.URI.create(fileURI.toString().replaceFirst("jar:", "").replaceFirst("!/",""));
+				try{
+					java.net.URI fileURI = fileSystemConverter.convertSpecialURItoFileURI(java.net.URI.create(currentReusableResourceURL));				
+					if(fileURI != null){					
+						if(fileURI.toString().startsWith("jar:") && fileURI.toString().endsWith("!/")){
+							fileURI = java.net.URI.create(fileURI.toString().replaceFirst("jar:", "").replaceFirst("!/",""));
+						}
+						logger.debug( currentReusableResourceURL.toString() + " is converted to " + fileURI, 	KpVariableExpander.LOG_MESSAGE_GROUP);
+						currentReusableResourceURL = fileURI.toString();
 					}
-					logger.debug( currentReusableResourceURL.toString() + " is converted to " + fileURI, 	KpVariableExpander.LOG_MESSAGE_GROUP);
-					currentReusableResourceURL = fileURI.toString();
+					if (reusableResourceURLWithVariable.contains("${")) {
+						// deal with variable expansion
+						logger.debug("url : " + reusableResourceURLWithVariable + " is expanded to : " + currentReusableResourceURL , KpVariableExpander.LOG_MESSAGE_GROUP);
+					}
 				}
-				if (reusableResourceURLWithVariable.contains("${")) {
-					// deal with variable expansion
-					logger.debug("url : " + reusableResourceURLWithVariable + " is expanded to : " + currentReusableResourceURL , KpVariableExpander.LOG_MESSAGE_GROUP);
+				catch(Exception e){
+					logger.error("KpVariableExpander cannot expand " +currentReusableResourceURL+ " due to "+e, KpVariableExpander.LOG_MESSAGE_GROUP, e);
 				}
 
 				try {
