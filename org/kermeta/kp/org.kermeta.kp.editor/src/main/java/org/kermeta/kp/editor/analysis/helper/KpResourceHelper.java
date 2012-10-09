@@ -10,6 +10,10 @@ package org.kermeta.kp.editor.analysis.helper;
 
 import java.net.MalformedURLException;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.editor.IKpLocationMap;
 import org.kermeta.kp.editor.mopp.KpResource;
 import org.kermeta.utils.helpers.emf.EMFUriHelper;
@@ -40,6 +44,34 @@ public class KpResourceHelper {
 	
 		}
 		return result;
+	}
+	
+	public static KermetaProject findKermetaProject(String uriString, Resource resource) {
+		if (resource == null) {
+			return null;
+		}
+		ResourceSet rs = resource.getResourceSet();
+		if (rs == null) {
+			return null;
+		}
+		Resource kermetaProjectResource = null;
+		URI uri = URI.createURI(uriString);
+		
+		URI resourceURI = resource.getURI();
+		if (resourceURI.isRelative() || resourceURI.isHierarchical()) {
+			uri = uri.resolve(resourceURI); // relative
+		}
+		try {
+			kermetaProjectResource = rs.getResource(uri, true);
+		} catch (Exception e) {
+		}
+
+		if (kermetaProjectResource == null ||
+				kermetaProjectResource.getContents().isEmpty() || 
+			!(kermetaProjectResource.getContents().get(0) instanceof KermetaProject)) {
+			return null;
+		}
+		return (KermetaProject) kermetaProjectResource.getContents().get(0);
 	}
 
 }

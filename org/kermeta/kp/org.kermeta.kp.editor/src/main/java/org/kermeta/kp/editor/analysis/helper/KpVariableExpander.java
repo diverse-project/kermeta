@@ -175,7 +175,9 @@ public class KpVariableExpander {
 		
 		// also use simple expansion
 		String allExpanded = expandSimpleVariables(sb.toString());
-		
+		if(input.contains("${")){
+			logger.debug(input + " expanded to " +allExpanded, LOG_MESSAGE_GROUP);
+		}
 		/*if(p.matcher(allExpanded).matches()){
 			System.out.println("Failed to expand some variable ");
 			System.out.print("    known system properties : ");
