@@ -80,6 +80,13 @@ public class CollectSourcesHelper {
 			}
 			
 		}
+		if(result == null){
+			logger.warn("cannot get lastModified from sourcesUrls.size="+sourcesUrls.size(), getMessageGroup());
+			if(sourcesUrls.size() >0){
+			logger.warn("cannot get lastModified from sourcesUrl.get(0)"+sourcesUrls.get(0), getMessageGroup());
+			logger.warn("cannot get lastModified from sourcesUrl.get(0).getUrl"+sourcesUrls.get(0).getUrl(), getMessageGroup());
+			}
+		}
 		return result;
 	}
 	
@@ -101,6 +108,8 @@ public class CollectSourcesHelper {
 			TracedURL lastModified = getLastModifiedFile(sourcesUrls, dirtyMU);
 			
 			for(TracedURL sourceUrl : sourcesUrls){
+				System.out.println("lastModified.getUrl()="+lastModified.getUrl());
+				System.out.println("sourceUrl.getUrl()="+sourceUrl.getUrl());
 				if(!sourceUrl.getUrl().equals(lastModified.getUrl())){
 					result.add(sourceUrl);
 				}
@@ -149,6 +158,7 @@ public class CollectSourcesHelper {
 		for(org.kermeta.kp.Metamodel kpMm : kp.getMetamodels()){
 			srcs.addAll(kpMm.getImportedFiles());
 		}
+		logger.debug("getmetamodels.size="+kp.getMetamodels().size()+" gives srcs.size="+srcs.size(), getMessageGroup());
 		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
 		for (ImportFile src : srcs) {
 			String currentUrl=null;
@@ -203,8 +213,9 @@ public class CollectSourcesHelper {
 	public ArrayList<TracedURL> getSources4Merge(KermetaProject kp, String kpFileUrl) throws IOException {
 		
 		// get ImportFiles and indirectly loaded ImportProjectSources
-		ArrayList<TracedURL> kpSources = getResolvedImportProjectSources(kp, kpFileUrl);
-		
+		ArrayList<TracedURL> kpSources = getDirectImportFiles(kp, kpFileUrl); 
+		kpSources.addAll(getResolvedImportProjectSources(kp, kpFileUrl));
+		logger.debug("(getSources4Merge) found "+kpSources.size()+" files sources", getMessageGroup());
 		KpVariableExpander varExpander = new KpVariableExpander(kp.eResource().getURI().toString(),
 				kp, 
 				compiler.fileSystemConverter, 
@@ -218,7 +229,7 @@ public class CollectSourcesHelper {
 			if(foundProject != null){
 				if(containerUrl.endsWith(".jar")){
 
-					kpSources.add(new TracedURL(importedProjectJar, FileHelpers.StringToURL(containerUrl+KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_JAR)));
+					kpSources.add(new TracedURL(importedProjectJar, FileHelpers.StringToURL("jar:"+containerUrl+"!"+KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_JAR)));
 				}
 				else{
 					kpSources.add(new TracedURL(importedProjectJar, FileHelpers.StringToURL(containerUrl+KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_ECLIPSE)));
