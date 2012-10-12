@@ -76,7 +76,8 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 
 				
 		KMTparser parser = new KMTparser();		
-		Iterator<String> src = scala.io.Source.fromFile( new java.io.File(FileHelpers.StringToURI(fileuri)),
+		java.io.File file = new java.io.File(FileHelpers.StringToURI(fileuri));
+		Iterator<String> src = scala.io.Source.fromFile( file,
 				"UTF8").getLines();
 
 		StringBuffer buf = new StringBuffer();
@@ -86,7 +87,7 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 
 
 		ModelingUnit mu = parser.load(FileHelpers.StringToURL(fileuri), buf.toString(), logger);
-
+		mu.setName(file.getName());
 		return mu;
 
 	}

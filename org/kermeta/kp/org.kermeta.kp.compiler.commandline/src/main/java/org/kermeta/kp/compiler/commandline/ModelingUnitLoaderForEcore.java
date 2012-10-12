@@ -151,8 +151,9 @@ public class ModelingUnitLoaderForEcore implements ModelingUnitLoader {
 		else{
 			rootPackage = (EPackage) resource.getContents().get(0);
 		}*/
-		
-        return   converter.convertPackage(rootPackage, "");
+		ModelingUnit result = converter.convertPackage(rootPackage, "");
+		result.setName(ruri.lastSegment());
+        return  result;
 	}
 	
 	private EObject getRootContainer(EObject obj){
