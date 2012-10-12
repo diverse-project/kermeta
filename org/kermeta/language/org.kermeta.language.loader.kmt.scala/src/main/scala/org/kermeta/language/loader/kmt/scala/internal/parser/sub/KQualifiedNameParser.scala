@@ -21,7 +21,15 @@ import scala.collection.JavaConversions._
  */
 trait KQualifiedNameParser extends KAbstractParser {
 
-  def packageName : Parser[String] = ident ~ packageQualifiedName ^^ { case id ~ q => id+q  }
+  def packageName : Parser[String] = ident ~ metamodelQualifiedName ^^ { case id ~ q => id+q  }
+  
+  def metamodelQualifiedName : Parser[String] = opt("#" ~> ident) ~ packageQualifiedName ^^ { case id ~ q =>
+    id match {
+      case Some(ident) => "#"+ident+q
+      case None => q
+    }
+  }
+  
   def packageQualifiedName : Parser[String] =  (( "::" ~ ident )*) ^^ { case lId =>
       (for(idp <- lId) yield idp match {case _ ~ ident => "::"+ident.toString}).mkString
   }
