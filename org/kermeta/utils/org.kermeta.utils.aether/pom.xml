@@ -21,7 +21,7 @@
     <dependencies>
     
     
-		<dependency>
+		<!-- <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-api</artifactId>
             <version>1.13.1</version>
@@ -40,7 +40,7 @@
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-impl</artifactId>
             <version>1.13.1</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.sonatype.aether</groupId>
             <artifactId>aether-connector-file</artifactId>
