@@ -12,10 +12,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.maven.model.Resource;
@@ -23,15 +21,12 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
-import org.eclipse.emf.common.util.URI;
+import org.kermeta.utils.aether.AetherUtil;
+import org.kevoree.kcl.KevoreeJarClassLoader;
 //import org.kermeta.kp.KermetaProject;
 //import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 //import org.kermeta.kp.compiler.commandline.KermetaRunner;
 //import org.kermeta.kp.loader.kp.KpLoaderImpl;
-import org.kermeta.utils.aether.AetherUtil;
-import org.kermeta.utils.helpers.SimpleLocalFileConverter;
-import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
-import org.kevoree.kcl.KevoreeJarClassLoader;
 
 /**
  * This class implement a maven plugin that compiles a kermeta project into scala files and then bytecode
