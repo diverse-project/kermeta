@@ -187,15 +187,31 @@ class AetherUtil(val messagingSystem : MessagingSystem, val baseMsgGroup : Strin
     session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(System.getProperty("user.home").toString + "/.m2/repository")))
     //TRY TO FOUND MAVEN CONFIGURATION
     val configFile = new File(System.getProperty("user.home").toString + File.separator + ".m2" + File.separator + "settings.xml")
+    var foundUserSpecificLocalRepositorySettings : Boolean = false
     if (configFile.exists()) {
       val configRoot = scala.xml.XML.loadFile(configFile)
+      
       configRoot.child.find(c => c.label == "localRepository").map {
         localRepo =>
     		messagingSystem.debug("Found localRepository value from settings.xml in user path => \"" + localRepo.text+"\"", msgGroup)
     		session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(localRepo.text)))
+    	
       }
-    } else {
-    	messagingSystem.debug("settings.xml not found", msgGroup)
+      configRoot.child.find(c => c.label == "offline").map {
+        offline =>
+    		messagingSystem.debug("Found offline value from settings.xml in user path => \"" + offline.text+"\"", msgGroup)
+    		offline.text match {
+    		case "true" => session.setOffline(true)
+    		case "yes" => session.setOffline(true)
+    		case _ =>
+    		} 
+    	}
+    	
+    } 
+    if(! foundUserSpecificLocalRepositorySettings){
+      val localRepoString = System.getProperty("user.home").toString + File.separator + ".m2" + File.separator +"repository"
+      messagingSystem.debug("localRepository not found in settings.xml, using "+localRepoString , msgGroup)
+      session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(localRepoString)))
     }
     session.getConfigProperties.put(ConfigurationProperties.REQUEST_TIMEOUT, 2000.asInstanceOf[java.lang.Integer])
     session.getConfigProperties.put(ConfigurationProperties.CONNECT_TIMEOUT, 1000.asInstanceOf[java.lang.Integer])
