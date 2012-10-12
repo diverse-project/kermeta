@@ -10,6 +10,7 @@ package org.kermeta.kp.compiler.commandline.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
@@ -25,6 +26,7 @@ import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
+
 
 
 
@@ -51,19 +53,24 @@ public class CompilationTest extends TestCase {
         KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
         
         String currentKermetaVersion = "LATEST";
-        String mavenRepository = "http://maven.inria.fr/artifactory/repo";
+        List<String> repositories = new ArrayList<String>();
+        repositories.add("http://maven.inria.fr/artifactory/repo");
+        //repositories.add("http://maven.inria.fr/artifactory/public-release");
+        //repositories.add("http://maven.inria.fr/artifactory/public-snapshot");
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
 		AetherUtil aetherUtil = new AetherUtil();
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.lib", "2.7.0", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.emf", "emf.genmodel", currentKermetaVersion, mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.eclipse", "org.eclipse.emf.codegen", "2.6.0.v20100914-1218", mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.eclipse", "org.eclipse.emf.codegen.ecore", "2.6.1.v20100914-1218", mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.eclipse", "org.eclipse.jdt.core", "3.6.2.v_A76_R36x", mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.library.core", currentKermetaVersion, mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.language", "language.model", currentKermetaVersion, mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.utils", "utils.helpers", currentKermetaVersion, mavenRepository).getAbsolutePath());
-		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.utils", "utils.systemservices.api", currentKermetaVersion, mavenRepository).getAbsolutePath());
+		//aetherUtil.
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("mvn:org.kermeta.scala/scala-library/2.9.0-1", repositories).getAbsolutePath());
+		//additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.scala", "scala-library", "2.9.0-1", scala.collection.JavaConversions.asScalaBuffer(repositoriesList)).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("mvn:org.kermeta.emf/emf.lib/2.7.0", repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.emf", "emf.genmodel", currentKermetaVersion, repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.eclipse", "org.eclipse.emf.codegen", "2.6.0.v20100914-1218", repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.eclipse", "org.eclipse.emf.codegen.ecore", "2.6.1.v20100914-1218", repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.eclipse", "org.eclipse.jdt.core", "3.6.2.v_A76_R36x", repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.language", "language.library.core", currentKermetaVersion, repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.language", "language.model", currentKermetaVersion, repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.utils", "utils.helpers", currentKermetaVersion, repositories).getAbsolutePath());
+		additionalClassPath.add(aetherUtil.resolveMavenArtifact4J("org.kermeta.utils", "utils.systemservices.api", currentKermetaVersion, repositories).getAbsolutePath());
 		
 		compiler.initializeTargetFolders(targetFolder, targetFolder,
 				targetFolder+"scala/", targetFolder+"classes/", 
