@@ -81,7 +81,9 @@ public class ModelingUnitLoaderForKm implements ModelingUnitLoader{
 		URI ruri =  URI.createURI(uri);
 		Resource resource = resourceSet.createResource(ruri);
 		resource.load(options);
-		return new ModelingUnit(uri, resource.getContents());
+		ModelingUnit result = new ModelingUnit(uri, resource.getContents());
+		result.setName(ruri.lastSegment());
+		return result;
 	}
 
 	@Override

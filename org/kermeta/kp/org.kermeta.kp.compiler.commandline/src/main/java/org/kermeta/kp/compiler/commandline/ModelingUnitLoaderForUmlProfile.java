@@ -147,7 +147,9 @@ public class ModelingUnitLoaderForUmlProfile implements ModelingUnitLoader {
 				else{
 					rootPackage = pack;
 				}*/
-				result.add(ecoreConverter.convertPackage(rootPackage, ""));
+				ModelingUnit mu = ecoreConverter.convertPackage(rootPackage, "");
+				mu.setName(ruri.lastSegment());
+				result.add(mu);
 			}
 			
 			
