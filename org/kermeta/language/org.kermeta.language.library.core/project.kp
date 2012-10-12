@@ -1,22 +1,21 @@
 KermetaProject "language.library.core" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId =  "org.kermeta.language" 
-sources ={ 
+ 
+ kermeta { 
 	//source = "file:C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-	require "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
-	require "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
-	require "${project.baseUri}/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt"
-	require "${project.baseUri}/src/main/kmt/kermeta/exceptions/exceptions.kmt"
-	require "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
-	require "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
-	require "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/exceptions/exceptions.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
+	importFile "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
 	//require "${project.baseUri}/src/main/kmt/kermeta/utils/MapEntry.kmt"
-	require "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
+	importFile "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
 	// import kermeta.ecore from the maven jar that distribute it officially
-	require "${language.model.baseUri}/src/main/ecore/kermeta.ecore" byteCodeFromADependency  
-}
-dependencies={	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.model/LATEST" 
-} 
+	importFile "${language_model.baseUri}/src/main/ecore/kermeta.ecore" withBytecodeFrom  language_model
+	}
+
+language_model = "mvn:org.kermeta.language/language.model/LATEST" 
+
 
  
