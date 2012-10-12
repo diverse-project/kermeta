@@ -23,10 +23,12 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.kermeta.utils.aether.AetherUtil;
 import org.kevoree.kcl.KevoreeJarClassLoader;
+import org.sonatype.aether.RepositorySystem;
 //import org.kermeta.kp.KermetaProject;
 //import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 //import org.kermeta.kp.compiler.commandline.KermetaRunner;
 //import org.kermeta.kp.loader.kp.KpLoaderImpl;
+import org.sonatype.aether.RepositorySystemSession;
 
 /**
  * This class implement a maven plugin that compiles a kermeta project into scala files and then bytecode
@@ -59,6 +61,22 @@ public class KpCompilerMojo extends AbstractMojo {
      * @required
      */
     protected org.apache.maven.artifact.repository.ArtifactRepository local;
+    
+	/**
+	* The current repository/network configuration of Maven.
+	*
+	* @parameter default-value="${repositorySystemSession}"
+	* @readonly
+	*/
+	private RepositorySystemSession repoSession;
+	
+	/**
+	* The entry point to Aether, i.e. the component doing all the work.
+	*
+	* @component
+	*/
+	private RepositorySystem repoSystem;
+    
     /**
      * POM
      *
@@ -167,6 +185,9 @@ public class KpCompilerMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
     	try {
 	        org.apache.log4j.BasicConfigurator.configure();
+	        AetherUtil aetherUtil = new AetherUtil();
+	        aetherUtil.setRepositorySystemSession(repoSession);
+	        aetherUtil.setRepositorySystem(repoSystem);
 	
 	        this.getLog().info("Generating sources in "+sourceOutputDirectory.getAbsolutePath());
 	        this.getLog().info("Generating other resources in "+resourceOutputDirectory.getAbsolutePath());
@@ -182,7 +203,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	classPathList.addAll(mavenClassPathList.subList(1, mavenClassPathList.size()));
 	        }
 	        
-	        String pluginVersion = "2.0.4";
+	        String pluginVersion = "2.0.6";
 	        for( org.apache.maven.model.Plugin plugin : project.getBuildPlugins()){
 	        	if(plugin.getArtifactId().equals("kp.compiler.mavenplugin")){
 	        		pluginVersion = plugin.getVersion();	        	
@@ -193,7 +214,6 @@ public class KpCompilerMojo extends AbstractMojo {
 	        repositoryList.add("http://maven.inria.fr/artifactory/public-release");
 	        repositoryList.add("http://maven.inria.fr/artifactory/public-snapshot");
 	        
-	        AetherUtil aetherUtil = new AetherUtil();
 	        File compilerJarFile;
 	        try{
 		        compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
@@ -205,7 +225,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	this.getLog().info("kp.compiler.commandline.standalone not found using same version trying previous one." + e);
 	        	compilerJarFile = aetherUtil.resolveMavenArtifact4J("org.kermeta.kp", 
 		        		"kp.compiler.commandline.standalone", 
-		        		"2.0.4", 
+		        		"2.0.6", 
 		        		repositoryList);
 	        }
 	        KevoreeJarClassLoader kjcl = new KevoreeJarClassLoader();

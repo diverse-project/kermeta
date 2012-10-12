@@ -1,12 +1,7 @@
-#Fri Oct 12 13:15:26 CEST 2012
+#Fri Oct 12 14:13:07 CEST 2012
 encoding/src/test/java=UTF-8
-encoding//src/main/java=UTF-8
 encoding/target/resources=UTF-8
 org.eclipse.jdt.core.compiler.compliance=1.6
-encoding//target/resources=UTF-8
-encoding//src/main/resources=UTF-8
-encoding//src/test/resources=UTF-8
-encoding//src/test/java=UTF-8
 encoding/src/main/resources=UTF-8
 encoding/src/main/java=UTF-8
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6

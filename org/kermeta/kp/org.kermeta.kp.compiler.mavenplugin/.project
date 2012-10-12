@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>kp.compiler.mavenplugin</name>
+  <name>org.kermeta.kp.compiler.mavenplugin</name>
   <comment>Maven plugin that compiles Kermeta 2 projects. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects>
-    <project>org.kermeta.utils.systemservices.api</project>
-  </projects>
+  <projects/>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>
