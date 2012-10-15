@@ -1,9 +1,8 @@
 package org.kermeta.kp.compiler.commandline;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -12,6 +11,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
 public class ModelingUnitLoaderForKm implements ModelingUnitLoader{
@@ -39,17 +39,14 @@ public class ModelingUnitLoaderForKm implements ModelingUnitLoader{
 	}
 	
 	
-	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
+	public ModelingUnit loadModelingUnitFromURL(String urlString) throws IOException{
 		lastLoadErrorMessage = "";
-		ModelingUnit mu = null;
-		Collection<ModelingUnit> mus = new ArrayList<ModelingUnit>(); 
+		ModelingUnit mu = null; 
 		
 		if (urlString.endsWith(".km")) {
 			try {
 				mu = this.loadKM(urlString);
-				if (mu!=null) {
-					mus.add(mu);
-				}
+				
 			} catch (IOException e) {
 				lastLoadErrorMessage = e.toString();
 				this.logger.debug(e.toString(),this.getClass().getName());
@@ -57,7 +54,7 @@ public class ModelingUnitLoaderForKm implements ModelingUnitLoader{
 			}
 			
 		}
-		return mus;
+		return mu;
 	}
 	
 	/**

@@ -19,6 +19,7 @@ import org.eclipse.uml2.uml.Profile;
 import org.kermeta.language.ecore2km.Ecore2KMImpl;
 import org.kermeta.language.ecore2km.Ecore2KMImpl4Eclipse;
 import org.kermeta.language.ecore2km.api.Ecore2KM;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.umlprofile2ecore.UmlProfile2EcoreImpl;
 import org.kermeta.language.umlprofile2ecore.api.UmlProfile2Ecore;
 import org.kermeta.language.util.ModelingUnit;
@@ -49,15 +50,14 @@ public class ModelingUnitLoaderForUmlProfile implements ModelingUnitLoader {
 	}
 	
 	
-	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
+	public ModelingUnit loadModelingUnitFromURL(String urlString) throws IOException{
 		lastLoadErrorMessage = "";
-		Collection<ModelingUnit> mus = new ArrayList<ModelingUnit>(); 
 		
 		if (urlString.endsWith(".profile.uml")) {
 			//Collection<ModelingUnit> mu = new ArrayList<ModelingUnit>();
 			
 			try {
-				mus.addAll(loadUMLProfile(urlString));
+				return loadUMLProfile(urlString);
 				
 				
 			} catch (IOException e) {
@@ -67,7 +67,7 @@ public class ModelingUnitLoaderForUmlProfile implements ModelingUnitLoader {
 			}
 			
 		}
-		return mus;
+		return null;
 	}
 	
 	/**
@@ -77,9 +77,11 @@ public class ModelingUnitLoaderForUmlProfile implements ModelingUnitLoader {
 	 * @return
 	 * @throws IOException
 	 */
-	protected Collection<ModelingUnit> loadUMLProfile(String urlString) throws IOException {		
+	protected ModelingUnit loadUMLProfile(String urlString) throws IOException {		
 		
-		Collection<ModelingUnit> result = new ArrayList<ModelingUnit>();
+		ModelingUnit result = new ModelingUnit();
+		Metamodel mm = org.kermeta.language.structure.StructureFactory.eINSTANCE.createMetamodel();
+		result.getMetamodels().add(mm);
 		
 		Map<String, String> options = null;
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -115,7 +117,7 @@ public class ModelingUnitLoaderForUmlProfile implements ModelingUnitLoader {
 			
 			for (EPackage pack : myEPackages) {
 				logger.debug("Found a package : " + pack.getName(), this.getClass().getName());
-				org.eclipse.emf.common.util.TreeIterator<EObject> it =  pack.eAllContents();
+				//org.eclipse.emf.common.util.TreeIterator<EObject> it =  pack.eAllContents();
 				/*
 				while (it.hasNext()) {
 					logger.error(" -"+it.next().toString(), this.getClass().getName());
@@ -147,9 +149,12 @@ public class ModelingUnitLoaderForUmlProfile implements ModelingUnitLoader {
 				else{
 					rootPackage = pack;
 				}*/
+					
+				// merge the packages in the profile metamodel
 				ModelingUnit mu = ecoreConverter.convertPackage(rootPackage, "");
-				mu.setName(ruri.lastSegment());
-				result.add(mu);
+				for(Metamodel newMM : mu.getMetamodels()){
+					mm.getPackages().addAll(newMM.getPackages());
+				}
 			}
 			
 			

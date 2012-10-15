@@ -50,12 +50,11 @@ public class ModelingUnitLoaderForEcore implements ModelingUnitLoader {
 	}
 	
 	@Override
-	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
+	public ModelingUnit loadModelingUnitFromURL(String urlString) throws IOException{
 		ModelingUnitCacheHelper muCacheHelper = new ModelingUnitCacheHelper(logger);
 		lastLoadErrorMessage = "";
 		URI uri =  URI.createURI(URLDecoder.decode(urlString,"UTF-8"));
-		ModelingUnit mu = null;
-		Collection<ModelingUnit> mus = new ArrayList<ModelingUnit>(); 
+		ModelingUnit mu = null; 
 		
 		if (urlString.endsWith(".ecore")) {
 			//this.logger.debug("URI.createFileURI "+targetIntermediateFolder+"/ecore2km"+uri.path()+".km",this.getClass().getName());
@@ -82,11 +81,8 @@ public class ModelingUnitLoaderForEcore implements ModelingUnitLoader {
 					new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
 				}
 			}
-			if (mu != null) {
-				mus.add(mu);
-			}
 		}
-		return mus;
+		return mu;
 	}
 	
 	/**

@@ -11,6 +11,7 @@ package org.kermeta.kp.compiler.commandline.callable;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 
+import org.kermeta.kp.ImportFile;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KpResourceHelper;
@@ -23,7 +24,7 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;
 
 
-public class CallableModelingUnitLoader implements Callable<Collection<ModelingUnit>> {
+public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 
 	public TracedURL urlToLoad;
 	public KermetaCompiler compiler;
@@ -38,7 +39,7 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 	}
 	
 	@Override
-	public Collection<ModelingUnit> call() throws Exception {
+	public ModelingUnit call() throws Exception {
 		try {
 			ModelingUnitLoader muLoader = null; // = new ModelingUnitLoader(compiler.logger, compiler.runInEclipse, compiler.saveIntermediateFiles, compiler.targetIntermediateFolder);
 
@@ -61,21 +62,22 @@ public class CallableModelingUnitLoader implements Callable<Collection<ModelingU
 				return null;
 			}
 			
-			Collection<ModelingUnit> mus = muLoader.loadModelingUnitFromURL(urlToLoad.getUrl().toString());
+			ModelingUnit mu = muLoader.loadModelingUnitFromURL(urlToLoad.getUrl().toString());
 			
-			if (mus != null) {
-				if (mus.size()>0) {
-					for (ModelingUnit mu : mus) {
-						if (mu.getName() == null) {
+			if (mu != null) {
+				if (mu.getName() == null) {
 							// force ModelingUnit name to the one provided in the kp
-							mu.setName(urlToLoad.getUrl().toString());
-						}
-						return mus;
+						mu.setName(urlToLoad.getUrl().toString());
+				}
+				// if comes from an import file, forces metamodel name to the one provided in the kp
+				if(urlToLoad.getSource() instanceof org.kermeta.kp.ImportFile){
+					org.kermeta.kp.ImportFile importFile = (ImportFile) urlToLoad.getSource();
+					String mmName =((org.kermeta.kp.Metamodel)importFile.eContainer()).getMetamodelName();
+					for(org.kermeta.language.structure.Metamodel mm : mu.getMetamodels()){
+						mm.setName(mmName);
 					}
 				}
-				else {
-					compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.getLastLoadErrorMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));
-				}
+				return mu;
 			}
 			else {
 				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Empty ModelingUnit, failed to load " + urlToLoad.getUrl() + " "+muLoader.getLastLoadErrorMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kp.eResource().getURI().devicePath())));

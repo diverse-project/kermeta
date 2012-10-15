@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
+
 import scala.collection.Iterator;
 
 public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
@@ -37,11 +37,10 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 	}
 	
 	
-	public Collection<ModelingUnit> loadModelingUnitFromURL(String urlString) throws IOException{
+	public ModelingUnit loadModelingUnitFromURL(String urlString) throws IOException{
 		lastLoadErrorMessage = "";
 		URI uri =  URI.createURI(URLDecoder.decode(urlString,"UTF-8"));
-		ModelingUnit mu = null;
-		Collection<ModelingUnit> mus = new ArrayList<ModelingUnit>(); 
+		ModelingUnit mu = null; 
 		
 		if (urlString.endsWith(".kmt")) {
 			try {
@@ -54,9 +53,6 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 					URI saveKMURI = URI.createFileURI(targetIntermediateFolder+"/kmt2km"+uri.path()+".km");
 					new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(mu, saveKMURI);
 				}
-				if (mu != null) {
-					mus.add(mu);
-				}
 			} catch (MalformedURLException e) {
 				lastLoadErrorMessage = e.toString();
 				this.logger.debug(e.toString(),this.getClass().getName());
@@ -67,7 +63,7 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 				//e.printStackTrace();
 			}
 		} 
-		return mus;
+		return mu;
 	}
 	
 	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, MalformedURLException  {
