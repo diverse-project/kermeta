@@ -147,6 +147,9 @@ object AetherRepositoryStandalone {
           session.setLocalRepositoryManager(newRepositorySystem.newLocalRepositoryManager(new LocalRepository(localRepo.text)))
       }
       val nodes = configRoot \\ "repositories" \ "repository" \ "url"
+      
+      // make sure it has be initiated 
+      getConfigURLS
       nodes.foreach {
         url =>
           defaultRepo.add(url.text)
