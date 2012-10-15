@@ -43,8 +43,11 @@ public class KmBinaryMergerOperations {
 	public ErrorProneResult<ModelingUnit> merge(ModelingUnit first_mu, ModelingUnit second_mu) {
 		
         ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
+        ModelingUnit resultMu = new ModelingUnit(); 
+        resultMu.setName("{"+first_mu.getName()+","+second_mu.getName()+"}");
+        result.setResult(resultMu);
 		try {
-			result.setResult((ModelingUnit) merger.merge(enforceAspect(first_mu.getMetamodels()), enforceAspect(second_mu.getMetamodels())));
+			resultMu.getMetamodels().addAll( merger.merge(enforceAspect(first_mu.getMetamodels()), enforceAspect(second_mu.getMetamodels())));
 		
 	        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
 	        for (Object o : mergerAspect.getErrors()) {
