@@ -81,7 +81,7 @@ public class KmResolverOperations {
     }
 
 	public ErrorProneResult<ModelingUnit> doResolving(ModelingUnit mu) {	
-		ModelingUnit muResolved = new ModelingUnit(new ArrayList<Metamodel>());
+		ModelingUnit muResolved = new ModelingUnit(mu.getName());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved.getMetamodels().addAll(resolver.doResolving(enforceAspect(mu.getMetamodels())));	
@@ -105,7 +105,7 @@ public class KmResolverOperations {
 	}
 
 	public ErrorProneResult<ModelingUnit> doStaticSetting(ModelingUnit mu) {		
-		ModelingUnit muResolved = new ModelingUnit(new ArrayList<Metamodel>());
+		ModelingUnit muResolved = new ModelingUnit(mu.getName());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved.getMetamodels().addAll(resolver.doStaticSetting(enforceAspect(mu.getMetamodels())));
@@ -128,7 +128,7 @@ public class KmResolverOperations {
 	}
 
 	public ErrorProneResult<ModelingUnit> resolve(ModelingUnit mu) {
-		ModelingUnit muResolved = new ModelingUnit(new ArrayList<Metamodel>());
+		ModelingUnit muResolved = new ModelingUnit(mu.getName());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
     		muResolved.getMetamodels().addAll(resolver.resolve(enforceAspect(mu.getMetamodels())));
