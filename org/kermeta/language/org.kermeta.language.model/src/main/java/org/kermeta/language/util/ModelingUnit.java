@@ -45,7 +45,7 @@ public class ModelingUnit {
 	
 	public ModelingUnit(String name, EList<EObject> eObjects){
 		this.name = name;
-		metamodels = new ArrayList<Metamodel>();
+		this.metamodels = new ArrayList<Metamodel>();
 		for(EObject o : eObjects){
 			if(o instanceof Metamodel)
 				metamodels.add((Metamodel) o);
