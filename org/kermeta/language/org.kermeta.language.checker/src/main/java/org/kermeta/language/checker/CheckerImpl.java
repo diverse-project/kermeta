@@ -1,5 +1,7 @@
 package org.kermeta.language.checker;
 
+import java.util.ArrayList;
+
 import org.kermeta.diagnostic.DiagnosticModel;
 import org.kermeta.language.checker.api.Checker;
 import org.kermeta.language.checker.api.CheckerScope;
@@ -17,8 +19,9 @@ public class CheckerImpl implements Checker {
 			String optionalContent, MessagingSystem logger) {
 		
 		org.kermeta.language.checker.Checker checker = org.kermeta.language.checker.KerRichFactory.createChecker();
-				
-		DiagnosticModel result = checker.checkObject(mu, scope.toString());
+		ArrayList<Object> mms = new ArrayList<Object>();
+		mms.addAll(mu.getMetamodels());
+		DiagnosticModel result = checker.checkCollection(mms, scope.toString());
 		return result;
 	}
 

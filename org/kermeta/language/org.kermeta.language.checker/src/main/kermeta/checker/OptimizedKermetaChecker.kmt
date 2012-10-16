@@ -65,10 +65,20 @@ class Checker
 	
 	*/
 	
-	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
-
-		//stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
+	operation checkCollection(objs : Collection<Object>, scope : String) : DiagnosticModel is do
 		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
+		objs.each{obj | checkObjectAppendDiagnostic(obj, scope, diagnosticModel)}
+		result := diagnosticModel
+	end
+	operation checkObject(obj : Object, scope : String) : DiagnosticModel is do
+		var diagnosticModel : DiagnosticModel init DiagnosticModel.new
+		checkObjectAppendDiagnostic(obj, scope, diagnosticModel)
+		result := diagnosticModel
+	end
+	operation checkObjectAppendDiagnostic(obj : Object, scope : String, diagnosticModel : DiagnosticModel) : Void is do
+		
+		//stdio.writeln("--> checkObject (" + obj.toString + ") for scope " + scope)
+		
 
 		// Retrieve obj classDefinition	
 		var cd : kermeta::language::structure::ClassDefinition 
@@ -188,7 +198,6 @@ class Checker
 
 		//stdio.writeln("<-- checkObject")
 
-		result := diagnosticModel
 		
 	end
 	

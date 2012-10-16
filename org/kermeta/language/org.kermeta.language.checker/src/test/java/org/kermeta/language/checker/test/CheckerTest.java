@@ -158,7 +158,7 @@ public class CheckerTest extends TestCase {
 		for(EObject e : resource.getContents()) {
 			mms.add((Metamodel) e);
 		}
-		mu = new ModelingUnit(mms);
+		mu = new ModelingUnit(kmFile2,mms);
            
 		//System.err.println("Mu name : " + mu.getName());
 		
