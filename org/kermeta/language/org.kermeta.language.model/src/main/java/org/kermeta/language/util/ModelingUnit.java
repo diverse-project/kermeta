@@ -39,7 +39,7 @@ public class ModelingUnit {
 
 	public ModelingUnit(String name, List<Metamodel> metamodels){
 		this.name = name;
-		metamodels = new ArrayList<Metamodel>();
+		this.metamodels = new ArrayList<Metamodel>();
 		this.metamodels.addAll(metamodels);
 	}
 	
