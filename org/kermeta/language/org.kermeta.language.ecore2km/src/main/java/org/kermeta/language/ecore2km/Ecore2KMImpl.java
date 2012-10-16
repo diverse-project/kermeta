@@ -35,8 +35,11 @@ public class Ecore2KMImpl  implements org.kermeta.language.ecore2km.api.Ecore2KM
     	org.kermeta.language.language.ecore2kmrunner.MainRunner.init();
 
         org.kermeta.language.ecore2km.Ecore2km converter = org.kermeta.language.ecore2km.KerRichFactory.createEcore2km();
-        
-        ModelingUnit mu = new ModelingUnit(new ArrayList<Metamodel>());
+        String muName = rootPackage.getName();
+        if(rootPackage.eResource() != null){ // use the resource name as name for the ModelingUnit
+        	muName = rootPackage.eResource().getURI().lastSegment();
+        }
+        ModelingUnit mu = new ModelingUnit(muName, new ArrayList<Metamodel>());
         mu.getMetamodels().addAll(converter.convert(rootPackage, namespacePrefix));
         
         return mu;
