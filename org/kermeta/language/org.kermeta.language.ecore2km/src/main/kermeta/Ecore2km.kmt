@@ -41,7 +41,7 @@ class Ecore2km {
 		result.add(mm)
 		
 		//result.namespacePrefix := namespacePrefix
-		traceRegistry.addTraceFromObjects(pkg, result, void)
+		traceRegistry.addTraceFromObjects(pkg, mm, void)
 		ecore2kmStruct.convert(pkg, getPrimitiveTypeMappings(), mm, traceRegistry)
 	end
 	
