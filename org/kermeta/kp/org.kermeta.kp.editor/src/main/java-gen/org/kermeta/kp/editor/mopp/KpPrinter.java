@@ -938,6 +938,9 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		localtab += "	";
 		out.println();
 		out.print(localtab);
+		// DEFINITION PART BEGINS (CsString)
+		out.print("resource");
+		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("reusableResourceName");
 		if (count > 0) {

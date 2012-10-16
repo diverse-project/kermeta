@@ -21,7 +21,7 @@ public class KpFollowSetProvider {
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_6 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_1);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_7 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_1);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_8 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_1);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_9 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_1);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_9 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_1);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_10 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_3_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_11 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_12 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5_0_0_2);
@@ -42,12 +42,13 @@ public class KpFollowSetProvider {
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_27 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_28 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_29 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6_0_0_2);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_30 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_2);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_31 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_3);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_32 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_4_0_0_1);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_33 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_4_0_0_2);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_34 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_4_0_0_3_0_0_0);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_35 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_4_0_0_3_0_0_1);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_30 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_2);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_31 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_3);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_32 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_4);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_33 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_5_0_0_1);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_34 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_5_0_0_2);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_35 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_5_0_0_3_0_0_0);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_36 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_7_0_0_5_0_0_3_0_0_1);
 	
 	public final static org.eclipse.emf.ecore.EStructuralFeature FEATURE_0 = org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__METAMODELS);
 	public final static org.eclipse.emf.ecore.EStructuralFeature FEATURE_1 = org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS);
@@ -140,25 +141,26 @@ public class KpFollowSetProvider {
 		TERMINAL_9.addFollower(TERMINAL_30, EMPTY_FEATURE_ARRAY);
 		TERMINAL_30.addFollower(TERMINAL_31, EMPTY_FEATURE_ARRAY);
 		TERMINAL_31.addFollower(TERMINAL_32, EMPTY_FEATURE_ARRAY);
-		TERMINAL_31.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
-		TERMINAL_31.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_31.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-		TERMINAL_31.addFollower(TERMINAL_8, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_31.addFollower(TERMINAL_9, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
 		TERMINAL_32.addFollower(TERMINAL_33, EMPTY_FEATURE_ARRAY);
+		TERMINAL_32.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
+		TERMINAL_32.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_32.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+		TERMINAL_32.addFollower(TERMINAL_8, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_32.addFollower(TERMINAL_9, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
 		TERMINAL_33.addFollower(TERMINAL_34, EMPTY_FEATURE_ARRAY);
-		TERMINAL_33.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
-		TERMINAL_33.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_33.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-		TERMINAL_33.addFollower(TERMINAL_8, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_33.addFollower(TERMINAL_9, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
 		TERMINAL_34.addFollower(TERMINAL_35, EMPTY_FEATURE_ARRAY);
-		TERMINAL_35.addFollower(TERMINAL_34, EMPTY_FEATURE_ARRAY);
-		TERMINAL_35.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
-		TERMINAL_35.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_35.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-		TERMINAL_35.addFollower(TERMINAL_8, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_35.addFollower(TERMINAL_9, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
+		TERMINAL_34.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
+		TERMINAL_34.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_34.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+		TERMINAL_34.addFollower(TERMINAL_8, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_34.addFollower(TERMINAL_9, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
+		TERMINAL_35.addFollower(TERMINAL_36, EMPTY_FEATURE_ARRAY);
+		TERMINAL_36.addFollower(TERMINAL_35, EMPTY_FEATURE_ARRAY);
+		TERMINAL_36.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
+		TERMINAL_36.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_36.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+		TERMINAL_36.addFollower(TERMINAL_8, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_36.addFollower(TERMINAL_9, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
 	}
 	// wire the terminals
 	static {

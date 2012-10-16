@@ -48,6 +48,9 @@ public class KpTokenStyleInformationProvider {
 		if ("importBytecodeJar".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("resource".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("alternative".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
