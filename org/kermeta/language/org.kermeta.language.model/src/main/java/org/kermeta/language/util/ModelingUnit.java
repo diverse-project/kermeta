@@ -9,12 +9,12 @@
 package org.kermeta.language.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.kermeta.language.structure.Metamodel;
 
 /**
@@ -77,6 +77,21 @@ public class ModelingUnit {
 		for(Metamodel mm : metamodels){
 			mainRes.getContents().add(mm);
 		}
+	}
+	
+	public List<EObject> getAllMetamodelsContents() {
+		List<EObject> result = new ArrayList<EObject>();
+		
+		//TODO cguy: Seems pretty heavy and ugly to just add all the direct and indirect contents of each Metamodel
+		Iterator<EObject> it;
+		for (Metamodel mm : this.getMetamodels()) {
+			it = mm.eAllContents();
+			while (it.hasNext()) {
+				result.add(it.next());
+			}
+		}
+		
+		return result;
 	}
 
 }
