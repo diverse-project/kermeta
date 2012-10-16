@@ -68,7 +68,7 @@ trait KClassDefinitionParser extends KAbstractParser
         case None =>
         case Some(paramsI) => {
             paramsI.foreach{params =>
-              var ovar =StructureFactory.eINSTANCE.createUnresolvedTypeVariable
+              var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
               ovar.setName(params._1)
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
