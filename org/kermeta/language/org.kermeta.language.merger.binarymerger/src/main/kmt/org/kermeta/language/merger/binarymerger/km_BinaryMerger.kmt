@@ -45,31 +45,38 @@ class BinaryMerger
 		result := context.errors
 	end
 	
-	operation merge(primaryModelModelingUnit : Collection<Metamodel>, aspectModelModelingUnit : Collection<Metamodel>) : Collection<Metamodel> is do
-		//primaryModelModelingUnit.eachOwnedElement(void, function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
+	operation merge(primaryMetamodels : Collection<Metamodel>, aspectMetamodels : Collection<Metamodel>) : Collection<Metamodel> is do
 		
-		// primaryModelModelingUnit is now used as mergedModel
-		//var mergedModelModelingUnit : ModelingUnit init primaryModelModelingUnit
-		var mergedModelModelingUnit : Collection<Metamodel> init OrderedSet<Metamodel>.new
 		
-		//aspectModelModelingUnit.similarElementInMergedModel := mergedModelModelingUnit
-		aspectModelModelingUnit.each{aspectMM|
-			mergedModelModelingUnit.each{mergedMM|
-				if (aspectMM.uri == mergedMM.uri) then
-					aspectMM.similarElementInMergedModel := mergedMM
-				end
-			}
-		}
+		var mergedMetamodels : Collection<Metamodel> init OrderedSet<Metamodel>.new
+		var metamodelsToMerge : Collection<Metamodel> init OrderedSet<Metamodel>.new
+		// everything shoould be merged in case several metamodel with the same name already exist in the primary collection
+		metamodelsToMerge.addAll(primaryMetamodels)
+		metamodelsToMerge.addAll(aspectMetamodels)
 		
 		
 		context := org::kermeta::ecore::binarymerger::BinaryMergerContext.new
 		do 
-			aspectModelModelingUnit.each{aspectMM|
-				aspectMM.binaryMerger_MoveToMergedModel(context)
+			// for each metamodels to be merged, either add it into the result or merge it in the appropriate existing metamodel
+			metamodelsToMerge.each{mmToMerge|
+			
+				var existingCorrespondingMMs : Collection<Metamodel> init mergedMetamodels.select{ alreadyMergedMM |
+					mmToMerge.name == alreadyMergedMM.name
+				} 
+				
+				if (existingCorrespondingMMs.isEmpty) then
+					// simply add this mm
+					mergedMetamodels.add(mmToMerge)
+				else do
+					mmToMerge.similarElementInMergedModel := existingCorrespondingMMs.one // there is normally only one CorrespondingMM  
+					mmToMerge.binaryMerger_MoveToMergedModel(context)
+					rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						getErrors.add(mergeException)
+					end
+				end
 				
 			}
-			
-			//stdio.writeln("Merging references of "+context.elementsNeedingReferenceMerge.size.toString+" objects")
+		
 			context.elementsNeedingReferenceMerge.each{o |
 				do
 					o.asType(KermetaModelElement).mergeReferences
@@ -77,25 +84,15 @@ class BinaryMerger
 					getErrors.add(mergeException)
 				end
 			}
-			//mergedModelModelingUnit.fixReferences
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
 			}
 		rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 			getErrors.add(mergeException)
 		end
-		/* aspectModelModelingUnit.eachOwnedElement{ c |
-				c.binaryMerger_MoveToMergedModel(context)}
-		 mergedModelModelingUnit.eachOwnedElement(mergedModelModelingUnit, 
-			function { c : kermeta::standard::Object|
-				c.binaryMerger_FixReferences()})
-		*/
-		// control result
-		/* stdio.writeln("Check result")		
-		primaryModelModelingUnit.eachOwnedElement(void, 
-			function { c : kermeta::standard::Object| stdio.writeln(c.toString)})
-			*/		
-		result := primaryModelModelingUnit
+		
+		
+		result := mergedMetamodels
 	end
 	
 	operation test_001_a() : Void is do 
