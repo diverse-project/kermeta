@@ -79,10 +79,14 @@ public class ModelingUnit {
 		}
 	}
 	
+
+	/*
+	 * Returns all the direct and indirect contents of all the modeling unit's metamodels
+	 */
 	public List<EObject> getAllMetamodelsContents() {
 		List<EObject> result = new ArrayList<EObject>();
 		
-		//TODO cguy: Seems pretty heavy and ugly just in order to add all the direct and indirect contents of each Metamodel
+		//TODO cguy: Seems pretty heavy and ugly only to add all the direct and indirect contents of each Metamodel
 		Iterator<EObject> it;
 		for (Metamodel mm : this.getMetamodels()) {
 			it = mm.eAllContents();
