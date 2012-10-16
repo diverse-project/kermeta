@@ -75,6 +75,6 @@ RULES{
    	;
    	
     ReusableResource ::=
-    	!1reusableResourceName[] "=" url['"','"'] (!2"alternative" alternateUrls['"','"']("," alternateUrls['"','"'])* )?
+    	!1"resource" reusableResourceName[] "=" url['"','"'] (!2"alternative" alternateUrls['"','"']("," alternateUrls['"','"'])* )?
     ;
 }
