@@ -1,0 +1,269 @@
+/* $Id: ModelingUnitHelper.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
+ * Creation date: May 19, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: 
+ *		Cyril Faucher <cfaucher@irisa.fr>
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "PackageHelper.kmt"
+require "../../../standard/StringUtils.kmt"
+require "GetQualifiedName_structure_aspect.kmt"
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+
+
+aspect class Metamodel {
+	/**
+	 * Get a TypeDefinition contained in the current Metamodel by qualifiedName
+	 */
+	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
+		if canUseCachedStructuralTypeDefinitions.isVoid then
+			canUseCachedStructuralTypeDefinitions := false
+		end
+		if canUseCachedStructuralTypeDefinitions then
+			result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
+		else
+			var mmName : String
+			var newQName : String
+			
+			//Handle qualified names with metamodel name following by "#"
+			if qname.contains("#") then
+				var set_tmp : Sequence<String> init qname.split("#")
+				mmName := set_tmp.at(0)
+				newQName := set_tmp.at(1)
+			else
+				mmName := self.name
+				newQName := qname
+			end
+			
+			if mmName == self.name then
+			
+				var set_qname : Sequence<String> init newQName.split("::")	
+			
+				var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
+					p.name == set_qname.at(0)
+				}
+				if not pack.isVoid then
+					from var i : Integer init 1
+					until i>=(set_qname.size()-1) or pack.isVoid
+					loop
+						var oldpack : ModelElementTypeDefinitionContainer init pack
+						if pack.isInstanceOf(Package) then
+							pack := pack.asType(Package).nestedPackage.detect{ p |
+								p.name == set_qname.at(i)
+							}
+						else
+							pack:=void
+						end
+						i := i + 1
+					end
+					if pack.isVoid then
+						// using goes to an unknown package (checker should raise something about that before entering here, anyway I  don't want to crash)
+						result := void
+					else
+						result := pack.ownedTypeDefinition.detect{ c |
+							c.name == set_qname.at(set_qname.size()-1)
+						}
+					end
+				end
+				if result.isVoid() then
+					self.referencedMetamodels.each{mm|
+						mm.metamodel.getTypeDefinitionByQualifiedName(qname)
+					}
+				end
+			else
+				//Need to access other metamodels to find the good one (such that its name == mmName)
+				var metamodels : Collection<Metamodel> init self.containingResource.contents.asType(Collection<Metamodel>)
+				metamodels.detect{mm|
+					mm.name == mmName
+				}.getTypeDefinitionByQualifiedName(newQName)
+			end
+		end
+	end
+	
+	/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
+	reference cache : internal::MetamodelCache
+	
+	/** If this attribute is set to true, then the ModelingUnitCache can be used */
+	attribute canUseCachedStructuralTypeDefinitions : Boolean
+	
+	/** uses a cache in order to retreive TypeDefinitions in the ModelingUnit
+	 */
+	operation getCachedStructuralTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
+	
+		if cache.isVoid then
+			// need to build the cache
+			cache := internal::MetamodelCache.new.initialize(self)
+		end
+		var typename : String init qname.split("::").last
+		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
+		result := possibleTypeDefs.detect{t| t.getQualifiedName() == qname}
+	end
+	/**
+	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName and taking into account a set of Usings
+	 * and optionally looking in the current Package (if not void)
+	 */
+	operation getTypeDefinitionByNameAndUsings( qname : String, 
+												usings : Collection<Using>, 
+												optionalCurrentPackage : Package) : TypeDefinition is do
+		
+		// search the exact qualified name
+		result := getTypeDefinitionByQualifiedName(qname)
+		if (optionalCurrentPackage.isVoid) then
+			stdio.writeln( "        optionalCurrentPackage is void" )			
+		end
+		if (result.isVoid and not optionalCurrentPackage.isVoid) then
+			// search this qualified name in the current Package
+			result := optionalCurrentPackage.getTypeDefinitionByRelativeQName(qname) 
+		end		
+		if (result.isVoid and not usings.isEmpty) then
+			
+			from var iterator :Iterator<Using> init usings.iterator
+			until (not result.isVoid) or iterator.isOff
+			loop
+				var currentUsing : Using init iterator.next
+				// stdio.writeln("             using " +currentUsing.fromQName + "->" +currentUsing.toName)
+				//If the using does not define an alias
+				if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
+					//We now look for a type which the same name and which qualifiedPath is the fromQName
+					result := getTypeDefinitionByQualifiedName(currentUsing.fromQName + "::"+ qname)						
+				else					
+					if not currentUsing.fromQName.contains("*") then
+						// this is a TypeDefinition alias
+						if (currentUsing.toName.equals(qname)) then
+							result := getTypeDefinitionByQualifiedName(currentUsing.fromQName)
+						end
+					else
+						// this is a Package alias
+						var searchedStartString : String init currentUsing.toName.replace("*","")
+						if qname.startsWith(searchedStartString) then
+							var replacementStartString : String init currentUsing.fromQName.replace("*","")
+							result := getTypeDefinitionByQualifiedName(qname.replace(searchedStartString, replacementStartString))
+						end						
+					end					
+				end
+			end
+		end
+		if result.isVoid() then
+			self.referencedMetamodels.each{mm|
+				mm.metamodel.getTypeDefinitionByNameAndUsings(qname, usings, optionalCurrentPackage)
+			}
+		end
+	end
+	
+	/*
+	 * Return all the ClassDefinitions which are contained by the ModelingUnit
+	*/
+	operation getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
+		var classDefinitions : OrderedSet<org::kermeta::language::structure::ClassDefinition> init OrderedSet<org::kermeta::language::structure::ClassDefinition>.new
+		
+		getAllPackages.each{p|
+			p.ownedTypeDefinition.each{td|
+				if td.isInstanceOf(org::kermeta::language::structure::ClassDefinition) then
+					classDefinitions.add(td.asType(org::kermeta::language::structure::ClassDefinition))
+				end
+			}
+		}
+		result := classDefinitions
+	end
+	
+	/*
+	 * Return all the TypeDefinitions which are contained by the ModelingUnit
+	*/
+	operation getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
+		var typeDefinitions : Set<org::kermeta::language::structure::ModelElementTypeDefinition> init Set<org::kermeta::language::structure::ModelElementTypeDefinition>.new
+		
+		getAllPackages.each{p|
+			typeDefinitions.addAll(p.ownedTypeDefinition)
+		}
+		result := typeDefinitions
+	end
+	
+	operation getAllPackages() : OrderedSet<Package> is do
+		result := OrderedSet<Package>.new()
+				
+		self.packages.each{ p |
+			result.add(p)
+			result.addAll(p.getAllSubPackages())
+		}
+
+	end
+	
+	
+	operation retrievePackage( qname : String ) : Package is do
+		var set_qname : Sequence<String> init qname.split("::")
+		if set_qname.size()==0 then
+			set_qname.add(qname)
+		end
+		
+		var pack : Package init self.packages.detect{ p |
+			p.name == set_qname.at(0)
+		}
+		
+		from var i : Integer init 1
+		until i>=(set_qname.size())
+		loop
+			pack := pack.nestedPackage.detect{ p |
+				p.name == set_qname.at(i)
+			}
+			i := i + 1
+		end
+		
+		result := pack
+	end
+}
+
+package internal{
+	class MetamodelCache {
+		/** cache for getCachedStructuralTypeDefinitionByQualifiedName() */
+		reference cachedStructuralTypeDefinitions : kermeta::utils::Hashtable<String,TypeDefinitionCollection>
+		operation initialize(mm : Metamodel) : MetamodelCache is do
+			// bug in kermeta 1 !?
+			//cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,Set<TypeDefinition>>.new
+			cachedStructuralTypeDefinitions := kermeta::utils::Hashtable<String,TypeDefinitionCollection>.new
+			mm.getTypeDefinitions().each{ td |
+				put(td)
+			} 
+			result := self
+		end
+		
+		/**
+		 * put this TypeDefinition in the cache
+		 */
+		operation put(typeDefinition : TypeDefinition) is do
+			var typename : String init typeDefinition.name
+			var possibleTypeDefs : TypeDefinitionCollection init cachedStructuralTypeDefinitions.getValue(typename)
+			if  possibleTypeDefs.isVoid then 
+				possibleTypeDefs := TypeDefinitionCollection.new
+				cachedStructuralTypeDefinitions.put(typename, possibleTypeDefs)
+			end
+			possibleTypeDefs.typeDefinitions.add(typeDefinition)
+		end
+		
+		/**
+		 * returns the list of TypeDefinition with this name
+		 */
+		operation getTypeDefinitions(typeName : String) : Set<TypeDefinition> is do
+			var tdc : TypeDefinitionCollection init cachedStructuralTypeDefinitions.getValue(typeName)
+			if tdc.isVoid then
+				result:=void
+			else
+				result := tdc.typeDefinitions
+			end
+			if result.isVoid then // always returns at least an empty Set
+				result := Set<TypeDefinition>.new
+			end
+		end
+	}
+	/**
+	 * used to workaround pb of kermeta::utils::Hashtable<String,Set<TypeDefinition>>.new
+	 */
+	class TypeDefinitionCollection{ 
+		reference typeDefinitions : TypeDefinition[0..*]
+	}
+}
