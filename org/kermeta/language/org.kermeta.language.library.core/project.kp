@@ -1,6 +1,6 @@
 KermetaProject "language.library.core" 
  
- kermeta { 
+kermeta_standard { 
 	//source = "file:C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 	importFile "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
 	importFile "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
@@ -13,9 +13,10 @@ KermetaProject "language.library.core"
 	importFile "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
 	// import kermeta.ecore from the maven jar that distribute it officially
 	importFile "${language_model.baseUri}/src/main/ecore/kermeta.ecore" withBytecodeFrom  language_model
-	}
+}
 
-language_model = "mvn:org.kermeta.language/language.model/LATEST" 
+resource language_model = "mvn:org.kermeta.language/language.model/LATEST"
+
 
 
  
