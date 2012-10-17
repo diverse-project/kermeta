@@ -66,15 +66,19 @@ class FullStaticResolver
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/interpreterTests/"
-		var baseFileName : String init "beforeResolving"
+		var baseFileName : String init "beforePreresolveResolving"
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
 		       	
-       	var unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>
+       	var unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel> init OrderedSet<org::kermeta::language::structure::Metamodel>.new
        	var resolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>
        	
-       	unresolvedMetamodels ?= unresolvedModelResource.one
+       	unresolvedModelResource.each{r|
+       		if( r.isInstanceOf(org::kermeta::language::structure::Metamodel)) then
+       			unresolvedMetamodels.add(r.asType(org::kermeta::language::structure::Metamodel))
+       		end
+		}
        	unresolvedMetamodels.each{mm|
        		mm.canUseCachedStructuralTypeDefinitions := true
        	}
