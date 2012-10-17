@@ -69,11 +69,11 @@ aspect class ClassDefinition {
 	 */
 	operation addObjectInheritance(context : TypeAwareMergerContext) is do
 		if superType.size == 0 then
-			if getQualifiedName != "kermeta::standard::Object" then
+			if getQualifiedName != "kermeta_standard#kermeta::standard::Object" then
 				var objectClass : Class init Class.new
 				objectClass.initializeFromAClassDefinition(
 					self.getRootContainer.asType(Metamodel).getTypeDefinitionByQualifiedName(
-						"kermeta::standard::Object").asType(ClassDefinition))
+						"kermeta_standard#kermeta::standard::Object").asType(ClassDefinition))
 				self.containedType.add(objectClass)
 				self.superType.add(objectClass)
 			end
