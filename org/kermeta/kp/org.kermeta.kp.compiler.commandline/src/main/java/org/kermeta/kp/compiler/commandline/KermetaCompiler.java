@@ -529,7 +529,9 @@ public class KermetaCompiler {
 					}
 					else{
 						URI saveKMURI = URI.createURI(preResolveCacheUrl);
+						preResolvedUnit.setName(saveKMURI.lastSegment());
 						new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(preResolvedUnit, saveKMURI);
+						
 						savePreResolveSrcList(preResolveSrcListUrl,kpPreResolveSources);
 					}
 			
@@ -1372,11 +1374,11 @@ public class KermetaCompiler {
 	protected ModelingUnit addStandardObjectIfRequired(ModelingUnit mu){
 		org.kermeta.language.structure.Metamodel kermetaMM = null;
 		for(org.kermeta.language.structure.Metamodel mm : mu.getMetamodels()){
-			if(mm.getName().equals("kermeta_library_core")) kermetaMM = mm;
+			if(mm.getName().equals("kermeta_standard")) kermetaMM = mm;
 		}
 		if(kermetaMM == null) {
 			kermetaMM = org.kermeta.language.structure.StructureFactory.eINSTANCE.createMetamodel();
-			kermetaMM.setName("kermeta_library_core");
+			kermetaMM.setName("kermeta_standard");
 			mu.getMetamodels().add(kermetaMM);
 		}
 		org.kermeta.language.structure.Package kermetaPackage = null;
@@ -1407,7 +1409,7 @@ public class KermetaCompiler {
 			}
 		}
 		if(objectCD == null){
-			logger.debug("adding kermeta_library_core#kermeta::standard::Objet to ModelingUnit that doesn't have it", LOG_MESSAGE_GROUP);
+			logger.debug("adding kermeta_standard#kermeta::standard::Objet to ModelingUnit that doesn't have it", LOG_MESSAGE_GROUP);
 			objectCD = org.kermeta.language.structure.StructureFactory.eINSTANCE.createClassDefinition();
 			objectCD.setName("Object");
 			objectCD.setIsAspect(true);

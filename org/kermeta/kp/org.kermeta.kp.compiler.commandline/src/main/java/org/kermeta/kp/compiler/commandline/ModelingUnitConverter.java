@@ -78,7 +78,7 @@ public class ModelingUnitConverter {
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);
 		resultMU= this.LoadMu(stream, uri);
 
-		logger.doneProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "ModelingUnit converted", KermetaCompiler.LOG_MESSAGE_GROUP);
+		logger.doneProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "ModelingUnit converted "+resultMU, KermetaCompiler.LOG_MESSAGE_GROUP);
 		return resultMU;
 	}
 	
@@ -143,7 +143,8 @@ public class ModelingUnitConverter {
 	 */
 	public void saveMu(ModelingUnit mu) throws IOException{
 		logger.initProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "Saving ModelingUnit", KermetaCompiler.LOG_MESSAGE_GROUP, 1);
-		
+
+		mu.gatherInMainEResource();
 		String mms = "";
 		for(Metamodel mm : mu.getMetamodels()){
 			mms = mms+"_"+mm.getName();
