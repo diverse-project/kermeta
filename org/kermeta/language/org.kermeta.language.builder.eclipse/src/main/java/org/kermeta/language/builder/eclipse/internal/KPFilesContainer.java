@@ -2,7 +2,7 @@ package org.kermeta.language.builder.eclipse.internal;
 
 import java.net.URL;
 
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 
 public class KPFilesContainer {
 	

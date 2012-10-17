@@ -18,7 +18,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NavigableMap;
@@ -44,18 +43,18 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
-import org.kermeta.kp.compiler.commandline.KpVariableExpander;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForEcore;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKm;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForKmt;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactoryForUmlProfile;
 import org.kermeta.kp.compiler.commandline.TracedURL;
+import org.kermeta.kp.editor.analysis.helper.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.builder.eclipse.Activator;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
@@ -251,7 +250,7 @@ public class KPBuilder {
 				return true;
 			}
 			
-			ArrayList<TracedURL> theSources = compiler.getSources(kpFileURL);
+			ArrayList<TracedURL> theSources = compiler.getResolvedImportProjectSources(kpFileURL);
 			for (TracedURL oneURL : theSources) {
 				IFile theFile = ResourceHelpers.getIFile(oneURL.getUrl().toString());
 				if (theFile != null) {
@@ -297,7 +296,8 @@ public class KPBuilder {
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		ArrayList<String> fullClassPath = new ArrayList<String>();
 		fullClassPath.addAll(getBuildAdditionalClassPath());
-		fullClassPath.addAll(compiler.getBinaryDependencyClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
+		fullClassPath.addAll(compiler.getImportByteCodeJarClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
+		fullClassPath.addAll(compiler.getImportProjetJarClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
 		fullClassPath.add(outputEMFBinaryFolder);
 		
 		return fullClassPath;
@@ -447,7 +447,7 @@ public class KPBuilder {
 		// Load KP file
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		// full build required so clear the consoles
-		Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).clearLog();
+		Activator.getDefault().getMessaggingSystem4Runner(kp.getEclipseName()).clearLog();
 		//k2.io.StdIO._messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 		/* k2.io.StdIO$.MODULE$.messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 		Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");
@@ -456,9 +456,9 @@ public class KPBuilder {
 		
 		try {
 			KermetaRunner runner = new ProgressCancellableKermetaRunner(outputScalaBinaryFolder, 
-					kp.getGroup()+"."+ kp.getName(),
+					kp.getEclipseName(),
 					getFullClassPath(),
-					Activator.getDefault().getMessaggingSystem4Runner(kp.getName()), 
+					Activator.getDefault().getMessaggingSystem4Runner(kp.getEclipseName()), 
 					monitor);
 			if((!mainClass.isEmpty()) && (!mainOperation.isEmpty())){
 				runner.runK2Program(mainClass, mainOperation, params,outputRootFolder+File.separator+"urimap.properties");
@@ -606,7 +606,7 @@ public class KPBuilder {
 	public void refreshFileIndex() throws IOException {
 		// verify if this kpFile still exists
 		// TODO
-		ArrayList<TracedURL> kpSources = compiler.getSources(kpFileURL);
+		ArrayList<TracedURL> kpSources = compiler.getResolvedImportProjectSources(kpFileURL);
 		//This list allow to preserve old files ever parsed
 		HashMap<String,KPFilesContainer> oldKpFiles = kpFiles;
 		kpFiles = new HashMap<String, KPFilesContainer>();
@@ -659,7 +659,7 @@ public class KPBuilder {
 		if (ldr != null) {
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			if (kp != null) {
-				return kp.getName();
+				return kp.getEclipseName();
 			}
 		}
 		return "";

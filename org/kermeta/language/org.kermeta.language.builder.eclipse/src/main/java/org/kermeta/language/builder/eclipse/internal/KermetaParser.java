@@ -10,7 +10,7 @@ import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaExecutionner;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceConstants;
 import org.kermeta.language.builder.eclipse.preferences.PreferenceToBuildAction;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
 import org.kermeta.utils.helpers.eclipse.ResourceHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;

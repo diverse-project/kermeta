@@ -31,7 +31,7 @@ import org.kermeta.language.builder.eclipse.internal.CompilerFromKP;
 import org.kermeta.language.builder.eclipse.internal.KPBuilder;
 import org.kermeta.language.builder.eclipse.internal.KermetaParser;
 import org.kermeta.language.builder.eclipse.internal.executionner.KermetaRunner;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 import org.kermeta.utils.systemservices.api.reference.FileReference;

@@ -14,7 +14,7 @@ package org.kermeta.language.builder.eclipse;
 import java.util.EventListener;
 
 import org.eclipse.core.resources.IProject;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 
 public interface KermetaBuilderEventListener extends EventListener {
 	public void projectCompiled(IProject project, ModelingUnit lastModelingUnit);
