@@ -5,7 +5,7 @@
 
 package k2.utils
 
-import org.kermeta.language.structure.ModelingUnit
+import org.kermeta.language.util.ModelingUnit
 import org.kermeta.language.structure.ClassDefinition
 import org.kermeta.language.structure.StructurePackage
 import java.io.File
@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import _root_.org.osgi.framework.BundleContext
+import org.kermeta.language.structure.Metamodel
 /*object ReflexivityLoader {
 
     var isInit:Boolean = false;
@@ -192,11 +193,15 @@ object ReflexivityLoader {
       rs.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
       return rs.getResource(URI.createURI(uri), true).getAllContents();
    }
-   def loadKmModelRoot(uri: String): ModelingUnit = {
+   def loadKmModelRoot(uriString: String): ModelingUnit = {
+      import scala.collection.JavaConversions._ 
       var rs: ResourceSetImpl = new ResourceSetImpl();
       rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
       rs.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
-      return rs.getResource(URI.createURI(uri), true).getContents.get(0).asInstanceOf[ModelingUnit];
+      val uri = URI.createURI(uriString);
+      val  mu : ModelingUnit = new ModelingUnit(uri.lastSegment());
+      mu.getMetamodels().addAll(rs.getResource(uri, true).getContents.filter((mm: EObject) => mm.isInstanceOf[Metamodel]).map((mm: EObject) => mm.asInstanceOf[Metamodel]));
+      return mu;
    }
 
    def copyFile(in: File, out: File): Unit = {

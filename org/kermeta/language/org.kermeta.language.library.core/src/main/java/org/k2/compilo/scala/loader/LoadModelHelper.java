@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import org.kermeta.KmPackage;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 
 public class LoadModelHelper {
 
@@ -34,10 +34,7 @@ public class LoadModelHelper {
 		rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
 		URI uri = URI.createFileURI(fileName);
 		Resource resource = rs.getResource(uri, true);
-		ModelingUnit mu = null;
-		if (resource.isLoaded() && resource.getContents().size() > 0) {
-			mu = (ModelingUnit) resource.getContents().get(0);
-		}
+		ModelingUnit mu = new ModelingUnit(uri.lastSegment(), resource.getContents());
 		return mu;
 	}
 
