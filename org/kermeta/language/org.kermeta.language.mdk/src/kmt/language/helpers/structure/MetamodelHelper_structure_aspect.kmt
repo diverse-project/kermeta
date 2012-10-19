@@ -20,29 +20,31 @@ using kermeta::persistence
 aspect class Metamodel {
 	/**
 	 * Get a TypeDefinition contained in the current Metamodel by qualifiedName
+	 * Note : this operation uses cache if canUseCachedStructuralTypeDefinitions is set to true
 	 */
 	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
-		if canUseCachedStructuralTypeDefinitions.isVoid then
-			canUseCachedStructuralTypeDefinitions := false
-		end
-		if canUseCachedStructuralTypeDefinitions then
-			result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
+	
+		var mmName : String
+		var newQName : String
+	
+		//Handle qualified names with metamodel name following by "#"
+		if qname.contains("#") then
+			var set_tmp : Sequence<String> init qname.split("#")
+			mmName := set_tmp.at(0)
+			newQName := set_tmp.at(1)
 		else
-			var mmName : String
-			var newQName : String
-			
-			//Handle qualified names with metamodel name following by "#"
-			if qname.contains("#") then
-				var set_tmp : Sequence<String> init qname.split("#")
-				mmName := set_tmp.at(0)
-				newQName := set_tmp.at(1)
-			else
-				mmName := self.name
-				newQName := qname
+			mmName := self.name
+			newQName := qname
+		end
+	
+		if mmName == self.name then
+			if canUseCachedStructuralTypeDefinitions.isVoid then
+				canUseCachedStructuralTypeDefinitions := false
 			end
-			
-			if mmName == self.name then
-			
+			if canUseCachedStructuralTypeDefinitions then
+				result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
+			else
+		
 				var set_qname : Sequence<String> init newQName.split("::")	
 			
 				var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
@@ -76,13 +78,13 @@ aspect class Metamodel {
 						mm.metamodel.getTypeDefinitionByQualifiedName(qname)
 					}
 				end
-			else
-				//Need to access other metamodels to find the good one (such that its name == mmName)
-				var metamodels : Collection<Metamodel> init self.containingResource.contents.asType(Collection<Metamodel>)
-				metamodels.detect{mm|
-					mm.name == mmName
-				}.getTypeDefinitionByQualifiedName(newQName)
 			end
+		else
+			//Need to access other metamodels to find the good one (such that its name == mmName)
+			var metamodels : Collection<Metamodel> init self.containingResource.contents.asType(Collection<Metamodel>)
+			metamodels.detect{mm|
+				mm.name == mmName
+			}.getTypeDefinitionByQualifiedName(newQName)
 		end
 	end
 	
