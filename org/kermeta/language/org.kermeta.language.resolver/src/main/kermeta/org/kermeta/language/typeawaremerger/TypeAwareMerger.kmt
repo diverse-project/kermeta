@@ -1,7 +1,11 @@
 package org::kermeta::language::structure;
 require kermeta
 
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+//require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeAwareMergerContext.kmt"
+
 
 using kermeta::standard
 using org::kermeta::language::resolver
@@ -71,9 +75,12 @@ aspect class ClassDefinition {
 		if superType.size == 0 then
 			if getQualifiedName != "kermeta_standard#kermeta::standard::Object" then
 				var objectClass : Class init Class.new
-				objectClass.initializeFromAClassDefinition(
-					self.getRootContainer.asType(Metamodel).getTypeDefinitionByQualifiedName(
-						"kermeta_standard#kermeta::standard::Object").asType(ClassDefinition))
+				var cd : ClassDefinition init self.getRootContainer.asType(Metamodel).getTypeDefinitionByQualifiedName(
+						"kermeta_standard#kermeta::standard::Object").asType(ClassDefinition)
+				if(cd.isVoid) then
+					stdio.errorln("failed to find classDefinition kermeta_standard#kermeta::standard::Object")
+				end
+				objectClass.initializeFromAClassDefinition(cd)
 				self.containedType.add(objectClass)
 				self.superType.add(objectClass)
 			end

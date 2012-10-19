@@ -1,6 +1,11 @@
 package org::kermeta::language::structure;
 require kermeta
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+
 using kermeta::standard
 using org::kermeta::language::resolver
 
@@ -119,6 +124,7 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 			context.currentClassDef.superType.each{t|
 				if t.isInstanceOf(Class) then
 					if context.verbose then
+						stdio.writeln("context.currentClassDef = "+context.currentClassDef.name + " t=" +t.toString)
 						stdio.writeln("look into "+t.asType(Class).typeDefinition.name)
 					end
 					callableOps.addAll(t.asType(Class).typeDefinition.asType(ClassDefinition).getAllCallableOperations().select{op|

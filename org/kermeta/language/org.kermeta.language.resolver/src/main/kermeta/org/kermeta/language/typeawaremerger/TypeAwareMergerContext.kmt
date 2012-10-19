@@ -11,7 +11,7 @@ package org::kermeta::language::resolver;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
 
 using kermeta::standard
 

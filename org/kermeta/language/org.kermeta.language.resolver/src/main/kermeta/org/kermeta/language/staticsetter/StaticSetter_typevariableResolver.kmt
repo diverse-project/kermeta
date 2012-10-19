@@ -13,7 +13,9 @@ package org::kermeta::language::structure;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/StaticSetterContext.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/primitiveType_aspect.kmt"
+
 using kermeta::standard
 
 using org::kermeta::language::structure
