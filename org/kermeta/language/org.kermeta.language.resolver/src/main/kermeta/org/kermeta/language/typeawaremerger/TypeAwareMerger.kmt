@@ -4,7 +4,15 @@ require kermeta
 //require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/NewStaticResolver.kmt"
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeRebind.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeAwareMergerContext.kmt"
+
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 
 
 using kermeta::standard
