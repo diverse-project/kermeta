@@ -73,18 +73,27 @@ aspect class Metamodel {
 						}
 					end
 				end
-				if result.isVoid() then
-					self.referencedMetamodels.each{mm|
-						mm.metamodel.getTypeDefinitionByQualifiedName(qname)
-					}
-				end
+			end
+			if result.isVoid() and not qname.contains("#") then
+				result := self.referencedMetamodels
+							.collect{mm| mm.metamodel.getTypeDefinitionByQualifiedName(qname)}
+							.detect{ s | not s.isVoid}
 			end
 		else
 			//Need to access other metamodels to find the good one (such that its name == mmName)
-			var metamodels : Collection<Metamodel> init self.containingResource.contents.asType(Collection<Metamodel>)
-			metamodels.detect{mm|
-				mm.name == mmName
-			}.getTypeDefinitionByQualifiedName(newQName)
+			var metamodels : Collection<Metamodel> init self.containingResource.contents
+				.select{mm | mm.isInstanceOf(Metamodel)}.collect{ selectedMM | selectedMM.asType(Metamodel)}
+			var foundMM : Metamodel init metamodels.detect{mm|	mm.name == mmName}
+			if not foundMM.isVoid then
+				result := foundMM.getTypeDefinitionByQualifiedName(newQName)
+				if result.isVoid then
+					stdio.errorln("failed to find "+newQName+ " in "+ foundMM.name )
+					stdio.errorln(foundMM.cache.printAllTypeDefinitions)
+				end
+			else
+				stdio.errorln("failed to find metamodel "+mmName)
+			end
+			
 		end
 	end
 	
@@ -100,11 +109,19 @@ aspect class Metamodel {
 	
 		if cache.isVoid then
 			// need to build the cache
+			stdio.writeln("initializing cache from "+qname+ "...")
 			cache := internal::MetamodelCache.new.initialize(self)
+			stdio.writeln("cache intialized.")
 		end
 		var typename : String init qname.split("::").last
 		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
-		result := possibleTypeDefs.detect{t| t.getQualifiedName() == qname}
+		var searchedFullQName : String 
+		if qname.contains("#") then
+			searchedFullQName := qname
+		else
+			searchedFullQName := self.name+"#"+qname
+		end
+		result := possibleTypeDefs.detect{t| t.getQualifiedName() == searchedFullQName}
 	end
 	/**
 	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName and taking into account a set of Usings
@@ -260,6 +277,14 @@ package internal{
 			if result.isVoid then // always returns at least an empty Set
 				result := Set<TypeDefinition>.new
 			end
+		end
+		
+		operation printAllTypeDefinitions() : String is do
+			var sb : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+			sb.append("{")
+			cachedStructuralTypeDefinitions.keys.each{ s | sb.append(s+", ")}
+			sb.append("}")
+			result := sb.toString
 		end
 	}
 	/**
