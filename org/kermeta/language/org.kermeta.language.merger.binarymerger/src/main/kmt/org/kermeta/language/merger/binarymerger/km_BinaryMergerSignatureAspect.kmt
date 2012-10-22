@@ -1259,6 +1259,9 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
 					else
 						result := false
 					end
@@ -1327,7 +1330,9 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
+						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
+							result := result and self.typeIdentifier == aspectElement.typeIdentifier
+						end
 
 					else
 						result := false
@@ -1615,6 +1620,18 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						if (not self.~getter.isVoid) and (not aspectElement.~getter.isVoid) then
+							result := result and self.~getter == aspectElement.~getter
+						end
+						if (not self.~setter.isVoid) and (not aspectElement.~setter.isVoid) then
+							result := result and self.~setter == aspectElement.~setter
+						end
+						if (not self.adder.isVoid) and (not aspectElement.adder.isVoid) then
+							result := result and self.adder == aspectElement.adder
+						end
+						if (not self.remover.isVoid) and (not aspectElement.remover.isVoid) then
+							result := result and self.remover == aspectElement.remover
+						end
 					else
 						result := false
 					end
@@ -1645,6 +1662,9 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
 					else
 						result := false
 					end
@@ -1660,6 +1680,9 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
 					else
 						result := false
 					end

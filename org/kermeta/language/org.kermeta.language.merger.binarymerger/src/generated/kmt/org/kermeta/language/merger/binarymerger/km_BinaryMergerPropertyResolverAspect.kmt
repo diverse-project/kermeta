@@ -241,28 +241,8 @@ package kermeta {
 
 			aspect class Operation inherits org::kermeta::language::structure::MultiplicityElement, org::kermeta::language::structure::AbstractOperation {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
-				
-					if (propertyName.equals("isAbstract")) then
-						 var primaryIsAbstract : Boolean
-						 var aspectIsAbstract : Boolean
-						// DVK : workaround compiler problem : use string comparaison, cast to Boolean doesn't work correctly
-					    primaryIsAbstract := primaryValue.toString.equals("true") // workaround for primaryValue.asType(Boolean)
-					    aspectIsAbstract := aspectValue.toString.equals("true") // workaround for aspectValue.asType(Boolean)						
-						result := primaryIsAbstract.asType(Boolean) and aspectIsAbstract.asType(Boolean)						
-					else if  (propertyName.equals("body")) then
-						if ( (not primaryValue.isVoid) and (not aspectValue.isVoid) ) then
-							// 2 operation with a body cannot be merged
-							raise BinaryMergerException.new.initialize("Cannot merge 2 operations which both provide a body", void, self)
-						end
-						if (not aspectValue.isVoid) then
-							result := aspectValue
-						else
-							result := primaryValue 
-						end
-						
-					else
-						result := super( propertyName, primaryValue, aspectValue)
-					end end
+					
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -310,23 +290,8 @@ package kermeta {
 
 			aspect class TypeDefinition inherits org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::NamedElement is do
-					// deal with isAspect
-					if (propertyName.equals("isAspect")) then
-						 var primaryIsAspect : Boolean
-						 var aspectIsAspect : Boolean
-						// DVK : workaround compiler problem : use string comparaison, cast to Boolean doesn't work correctly
-					    primaryIsAspect := primaryValue.toString.equals("true") // workaround for primaryValue.asType(Boolean)
-					    aspectIsAspect := aspectValue.toString.equals("true") // workaround for aspectValue.asType(Boolean)
-						if ((not primaryIsAspect) and (not aspectIsAspect)) then
-							// 2 non open classes shouldn't be merged
-					        //stdio.writeln("raising BinaryMergerException for Typedefinition.isAspect... primaryIsAspect="+primaryIsAspect.toString+", aspectIsAspect="+aspectIsAspect.toString)
-							raise BinaryMergerException.new.initialize("Cannot merge classes which aren't opened using aspect", void, self)
-						end
-						result := primaryIsAspect.asType(Boolean) and aspectIsAspect.asType(Boolean)
-						//stdio.writeln("primaryIsAspect="+primaryIsAspect.toString+"; aspectIsAspect="+aspectIsAspect.toString+ "; result="+result.toString)
-					else
-						result := super( propertyName, primaryValue, aspectValue)
-					end
+					
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
@@ -412,53 +377,7 @@ package kermeta {
 			aspect class ClassDefinition inherits org::kermeta::language::structure::GenericTypeDefinition {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::GenericTypeDefinition is do
 					
-					// deal with isAbstract
-					// 
-					if (propertyName.equals("isAbstract")) then
-						// asbtract
-						if not primaryValue.equals(aspectValue) then
-							var otherClassDef : org::kermeta::language::structure::ClassDefinition 
-							otherClassDef ?= self.getSimilarElement()
-							if(self.isAspect and otherClassDef.isAspect) then
-								//  the merge order might be important,
-								// different values in 2 aspect classes
-								result := false
-							else
-								if(not self.isAspect) then
-									if(self.isAbstract) then
-										// ok
-										result := true
-									else
-										// problem 
-										raise BinaryMergerException.new.initialize("Cannot change a concrete Class into an abstract class using an aspect.", void, self.getElementInMergedModel())
-									end
-								else
-									if(otherClassDef.isAbstract) then
-										result := true
-									else // problem 
-										raise BinaryMergerException.new.initialize("Cannot change a concrete Class into an abstract class using an aspect.", void, self.getElementInMergedModel())
-									end
-								end
-							end
-							//stdio.writeln("\tself.isAspect="+self.isAspect.toString+", otherClassDef.isAspect="+otherClassDef.isAspect.toString)
-						else
-							// same value, return the first one
-							result := primaryValue
-						end
-						// TODO may be we can avoid the abstract keyword on an aspect class if it is present on a non aspect class
-						// in that case the result would be an abstract class	
-						//  the merge order might be important, if the merge takes two aspects classes: one abstract one concrete the result is abstract, 
-						//   because they must be coherents together, even if 					
-					else
-					if (propertyName.equals("isSingleton")) then
-						if not primaryValue.equals(aspectValue) then
-							raise BinaryMergerException.new.initialize("Cannot merge a singleton class with a non singleton class. Please either use singleton or class keyword on every definitions of this class.", void, self.getElementInMergedModel())
-						else
-							result := primaryValue
-						end						
-					else
-						result := super( propertyName, primaryValue, aspectValue)
-					end end
+					result := super( propertyName, primaryValue, aspectValue)
 				end
 			}
 
