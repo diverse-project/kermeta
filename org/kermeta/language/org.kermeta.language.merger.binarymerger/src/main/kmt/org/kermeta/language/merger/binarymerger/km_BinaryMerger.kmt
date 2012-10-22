@@ -49,13 +49,14 @@ class BinaryMerger
 		
 		
 		var mergedMetamodels : Collection<Metamodel> init OrderedSet<Metamodel>.new
+		mergedMetamodels.addAll(primaryMetamodels)
 		var metamodelsToMerge : Collection<Metamodel> init OrderedSet<Metamodel>.new
 		// everything shoould be merged in case several metamodel with the same name already exist in the primary collection
-		metamodelsToMerge.addAll(primaryMetamodels)
 		metamodelsToMerge.addAll(aspectMetamodels)
 		
 		
 		context := org::kermeta::ecore::binarymerger::BinaryMergerContext.new
+			
 		do 
 			// for each metamodels to be merged, either add it into the result or merge it in the appropriate existing metamodel
 			metamodelsToMerge.each{mmToMerge|
@@ -70,6 +71,8 @@ class BinaryMerger
 				else do
 					mmToMerge.similarElementInMergedModel := existingCorrespondingMMs.one // there is normally only one CorrespondingMM  
 					mmToMerge.binaryMerger_MoveToMergedModel(context)
+					//context.movedElementsNeedingReferenceFix.add(mmToMerge)
+					//context.elementsNeedingReferenceMerge.add(mmToMerge)
 					rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						getErrors.add(mergeException)
 					end
