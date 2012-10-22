@@ -1,4 +1,4 @@
-KermetaProject "language.library.core" 
+KermetaProject "org.kermeta.language.library.core" 
  
 kermeta_standard { 
 	//source = "file:C:/Users/dvojtise/workspaces/kermetaV2_svn_3/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
