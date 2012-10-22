@@ -153,7 +153,7 @@ package behavior {
 		operation resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of Expression") end
 			// by default the StaticType is void
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))			
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void"))			
 			result := self
 			
 			// the algorithm is bottom up
@@ -187,7 +187,7 @@ package behavior {
 			
 			// self.parameters.addAll(newParameters)
 			newParameters.each{ p | self.parameters.add(p) }
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Object"))
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Object"))
 			result := self
 		end
 		
@@ -219,7 +219,7 @@ package behavior {
 			if (not self.statement.isEmpty()) then
 				setInferedStaticType(context, self.statement.last.staticType)
 			else
-				setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))
+				setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void"))
 			end
 			// type of the block is the same as the one of the last instruction of the block 
 			result := self
@@ -393,7 +393,7 @@ package behavior {
 				if ops.isEmpty then
 					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
 					var objectAny : ClassDefinition
-					objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
+					objectAny := context.getClassDefinitionFromQualifiedName("kermeta_standard#kermeta::standard::Object")
 					ops := objectAny.getAllCallableOperations.select{o|o.name==self.name}
 				end
 				//if we finally found at least one operation
@@ -500,7 +500,7 @@ package behavior {
 				if (prop.isVoid) then
 					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find property : "+self.name)  end
 					var objectAny : ClassDefinition
-					objectAny := context.getClassDefinitionFromQualifiedName("kermeta::standard::Object")
+					objectAny := context.getClassDefinitionFromQualifiedName("kermeta_standard#kermeta::standard::Object")
 					prop := objectAny.getCallablePropertyByName(self.name)
 				end
 				
@@ -550,7 +550,7 @@ package behavior {
 					var callTL : CallTypeLiteral init CallTypeLiteral.new
 					callTL.typeref := TypeReference.new
 					callTL.typeref.type := typeVar
-					callTL.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+					callTL.setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#org::kermeta::language::structure::Class"))
 					result:=callTL
 				else 
 					result:=void
@@ -608,17 +608,17 @@ package behavior {
 						end
 						
 										
-						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+						callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#org::kermeta::language::structure::Class"))
 					end
 					if typeDef.isInstanceOf(DataType) then
 						if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found an Enumeration " + typeDef.name) end
 						callTypeLiteral.typeref.type := typeDef.asType(DataType)										
 						if typeDef.asType(Type).realInstanceType.isInstanceOf(Class) then /*#1*/										
-							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Class"))
+							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#org::kermeta::language::structure::Class"))
 						else if typeDef.asType(Type).realInstanceType.isInstanceOf(Enumeration) then /*#2*/
-							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::Enumeration"))
+							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#org::kermeta::language::structure::Enumeration"))
 						else if typeDef.asType(Type).realInstanceType.isInstanceOf(FunctionType) then /*#3*/
-							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("org::kermeta::language::structure::FunctionType"))
+							callTypeLiteral.setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#org::kermeta::language::structure::FunctionType"))
 						end /*#3*/ end /*#2*/ end /*#1*/
 					end
 					//TODO deal with function types
@@ -754,7 +754,7 @@ package behavior {
 	{
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of EmptyExpression") end
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))			
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void"))			
 			result := self
 		end 
 	}
@@ -762,7 +762,7 @@ package behavior {
 	aspect class StringLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of StringLiteral") end
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::String"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::String"))								
 			result := self
 		end 
 	}
@@ -770,7 +770,7 @@ package behavior {
 	aspect class IntegerLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of IntegerLiteral") end
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Integer"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Integer"))								
 			result := self
 		end 
 	}	
@@ -778,7 +778,7 @@ package behavior {
 	aspect class VoidLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of VoidLiteral")	 end
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void"))								
 			result := self
 		end 
 	}
@@ -786,7 +786,7 @@ package behavior {
 	aspect class BooleanLiteral {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of BooleanLiteral") end
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Boolean"))								
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Boolean"))								
 			result := self
 		end 
 	}
@@ -806,7 +806,7 @@ package behavior {
 			var staticTypeVariable : Type init context.createTypeFromMultiplicityElement(self.type)
 			
 			// type of the variable
-			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta::standard::Void"))
+			setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void"))
 			 			 			
 			result := self
 			
@@ -852,7 +852,7 @@ package behavior {
 					// TODO temporary code
 					if not self.elseBody.staticType.realInstanceType.typeEquals(self.thenBody.staticType.realInstanceType) then
 						// use Object as common super type
-						staticTypeOfIF:= context.createTypeFromQualifiedName("kermeta::standard::Object")
+						staticTypeOfIF:= context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Object")
 					else
 						staticTypeOfIF:=self.elseBody.staticType	
 				
@@ -890,7 +890,7 @@ package behavior {
 			end
 			
 			if (staticTypeOfLOOP.isVoid) then
-				context.createTypeFromQualifiedName("kermeta::standard::Void")
+				context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void")
 			end
 			
 			self.setInferedStaticType(context, staticTypeOfLOOP)

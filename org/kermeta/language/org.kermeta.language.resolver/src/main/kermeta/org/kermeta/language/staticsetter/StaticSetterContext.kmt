@@ -107,7 +107,7 @@ class StaticSetterContext
 		var cd : org::kermeta::language::structure::ClassDefinition
 		currentMetamodels.each{mm|
 			if cd.isVoid then
-				mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+				cd ?= mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
 			end
 		}
 		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
@@ -120,7 +120,7 @@ class StaticSetterContext
 		var cd : org::kermeta::language::structure::ClassDefinition
 		currentMetamodels.each{mm|
 			if cd.isVoid then
-				mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
+				cd ?= mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
 			end
 		}
 		result := cd
@@ -169,7 +169,7 @@ class StaticSetterContext
 				 
 			if element.upper == 0 then
 				// the only type valid with upper bound == 0 is Void 
-				result := createTypeFromQualifiedName("kermeta::standard::Void")
+				result := createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void")
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = VOID")
 			else if element.upper == 1 then
 				result := typeCopy
@@ -182,12 +182,12 @@ class StaticSetterContext
 				
 					currentMetamodels.each{mm|
 						if cd.isVoid then
-							mm.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet")
+							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::OrderedSet")
 						end
 					}
 					
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::OrderedSet", element))
+						errors.add(ResolverException.new.initialize("Not able to find  kermeta_standard#kermeta::standard::OrderedSet", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
@@ -196,12 +196,12 @@ class StaticSetterContext
 				
 					currentMetamodels.each{mm|
 						if cd.isVoid then
-							mm.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
+							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Set")
 						end
 					}
 
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find kermeta::standard::Set", element))
+						errors.add(ResolverException.new.initialize("Not able to find kermeta_standard#kermeta::standard::Set", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
@@ -210,12 +210,12 @@ class StaticSetterContext
 				
 					currentMetamodels.each{mm|
 						if cd.isVoid then
-							mm.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
+							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Sequence")
 						end
 					}
 
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find kermeta::standard::Sequence", element))
+						errors.add(ResolverException.new.initialize("Not able to find kermeta_standard#kermeta::standard::Sequence", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
@@ -223,12 +223,12 @@ class StaticSetterContext
 				else
 					currentMetamodels.each{mm|
 						if cd.isVoid then
-							mm.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
+							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Bag")
 						end
 					}
 
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::Bag", element))
+						errors.add(ResolverException.new.initialize("Not able to find  kermeta_standard#kermeta::standard::Bag", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end

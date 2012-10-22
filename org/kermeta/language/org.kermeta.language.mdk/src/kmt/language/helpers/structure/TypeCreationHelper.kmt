@@ -46,7 +46,7 @@ class TypeCreationHelper
 				 
 			if element.upper == 0 then
 				// the only type valid with upper bound == 0 is Void 
-				result := createTypeFromQualifiedName("kermeta::standard::Void")
+				result := createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void")
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = VOID")
 			else if element.upper == 1 then
 				result := typeCopy
@@ -57,34 +57,34 @@ class TypeCreationHelper
 				
 				var cd : ClassDefinition
 				if (element.isUnique() and element.isOrdered()) then 
-					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet")
+					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::OrderedSet")
 					if cd.isVoid then
 						//errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::OrderedSet", element))
-						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::OrderedSet")
+						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta_standard#kermeta::standard::OrderedSet")
 					else
 						result := Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 				else if (element.isUnique() and not element.isOrdered()) then
-					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta::standard::Set")
+					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Set")
 					if cd.isVoid then
-						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::Set")
+						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta_standard#kermeta::standard::Set")
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 				else if ( not element.isUnique() and element.isOrdered()) then
-					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence")
+					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Sequence")
 					if cd.isVoid then
-						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::Sequence")
+						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta_standard#kermeta::standard::Sequence")
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 				else
-					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta::standard::Bag")
+					cd ?= currentMetamodel.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Bag")
 					if cd.isVoid then
-						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::Bag")
+						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta_standard#kermeta::standard::Bag")
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end

@@ -78,7 +78,7 @@ package behavior {
 				self.staticType := type.resolveTypeVariables(context,bindings)
 				if(self.staticType.isVoid) then
 					if context.verbose then stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType") end					
-					self.staticType := context.createTypeFromQualifiedName("kermeta::standard::Void")
+					self.staticType := context.createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void")
 				end
 				if(self.staticType.container.isVoid) then
 					
