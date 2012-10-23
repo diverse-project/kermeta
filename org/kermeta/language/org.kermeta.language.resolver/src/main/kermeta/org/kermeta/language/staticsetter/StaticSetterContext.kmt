@@ -16,7 +16,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
 
 
 using kermeta::standard
@@ -24,6 +24,7 @@ using kermeta::utils
 using org::kermeta::language::structure
 using org::kermeta::language::behavior
 using org::kermeta::language::resolver
+using kmt::language::helpers::structure
 
 class StaticSetterContext
 {
@@ -76,6 +77,8 @@ class StaticSetterContext
 	 */
 	attribute contextFrames : seq StaticSetterContextFrame[0..*]
 	
+	attribute typeDefFinder : TypeDefinitionFinder
+	
 	operation pushContext() is do
 		contextFrames.add(StaticSetterContextFrame.new.initialize())
 	end
@@ -105,11 +108,7 @@ class StaticSetterContext
 	
 	operation createTypeFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::Type is do
 		var cd : org::kermeta::language::structure::ClassDefinition
-		currentMetamodels.each{mm|
-			if cd.isVoid then
-				cd ?= mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
-			end
-		}
+		cd ?= typeDefFinder.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName, currentMetamodels)
 		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
 		if result.isVoid then
 			errors.add(ResolverException.new.initialize("Not able to create type for "+ classDefinitionQualifiedName, self))
@@ -118,11 +117,7 @@ class StaticSetterContext
 	
 	operation getClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
 		var cd : org::kermeta::language::structure::ClassDefinition
-		currentMetamodels.each{mm|
-			if cd.isVoid then
-				cd ?= mm.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName)
-			end
-		}
+		cd ?= typeDefFinder.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName, currentMetamodels)
 		result := cd
 		if result.isVoid then
 			if verbose then
@@ -179,12 +174,8 @@ class StaticSetterContext
 				typeParams.add(typeCopy)
 				var cd : org::kermeta::language::structure::ClassDefinition
 				if (element.isUnique() and element.isOrdered()) then
-				
-					currentMetamodels.each{mm|
-						if cd.isVoid then
-							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::OrderedSet")
-						end
-					}
+					
+					cd ?= typeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::OrderedSet", currentMetamodels)
 					
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find  kermeta_standard#kermeta::standard::OrderedSet", element))
@@ -194,12 +185,8 @@ class StaticSetterContext
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 				else if (element.isUnique() and not element.isOrdered()) then
 				
-					currentMetamodels.each{mm|
-						if cd.isVoid then
-							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Set")
-						end
-					}
-
+					cd ?= typeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Set", currentMetamodels)
+					
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find kermeta_standard#kermeta::standard::Set", element))
 					else
@@ -208,12 +195,8 @@ class StaticSetterContext
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 				else if ( not element.isUnique() and element.isOrdered()) then
 				
-					currentMetamodels.each{mm|
-						if cd.isVoid then
-							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Sequence")
-						end
-					}
-
+					cd ?= typeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Sequence", currentMetamodels)
+					
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find kermeta_standard#kermeta::standard::Sequence", element))
 					else
@@ -221,12 +204,9 @@ class StaticSetterContext
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 				else
-					currentMetamodels.each{mm|
-						if cd.isVoid then
-							cd ?= mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Bag")
-						end
-					}
-
+					
+					cd ?= typeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Bag", currentMetamodels)
+					
 					if cd.isVoid then
 						errors.add(ResolverException.new.initialize("Not able to find  kermeta_standard#kermeta::standard::Bag", element))
 					else

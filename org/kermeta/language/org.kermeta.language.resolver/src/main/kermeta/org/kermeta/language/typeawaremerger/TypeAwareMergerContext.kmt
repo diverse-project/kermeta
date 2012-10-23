@@ -12,12 +12,15 @@ package org::kermeta::language::resolver;
 
 require kermeta
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
+using org::kermeta::language::structure
 using kermeta::standard
 
 
 class TypeAwareMergerContext 
 {
 	reference errors : Sequence<ResolverException>
+	reference currentMetamodels : Collection<Metamodel>
 
 }

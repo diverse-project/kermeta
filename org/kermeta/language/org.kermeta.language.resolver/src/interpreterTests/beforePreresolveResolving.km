@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <org_kermeta_language_structure:Metamodel kTag="/0/@kOwnedTags.0" name="kermeta_library_extended">
+    <kOwnedTags name="documentation" value="&#xA; main features of the famous Unit test tool for Kermeta language&#xA; &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;/>" object="/0"/>
+    <packages name="kermeta">
+      <nestedPackage name="kunit">
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/0/@packages.0/kunit/AbstractFallible/@kOwnedTags.1" name="AbstractFallible" isAbstract="true">
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;439;2657"/>
+          <kOwnedTags name="documentation" value="&#xA; to be written ############################" object="/0/@packages.0/kunit/AbstractFallible"/>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assert/@kOwnedTags.1" name="assert" type="/0/@packages.0/kunit/AbstractFallible/assert/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;550;617"/>
+            <kOwnedTags name="documentation" value=" process the given condition and react if it is not satisfied " object="/0/@packages.0/kunit/AbstractFallible/assert"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/AbstractFallible/assert/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertWithMsg/@kOwnedTags.1" name="assertWithMsg" type="/0/@packages.0/kunit/AbstractFallible/assertWithMsg/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;731;815"/>
+            <kOwnedTags name="documentation" value="&#xA; process the given condition and react with the given message&#xA; if it is not satisfied" object="/0/@packages.0/kunit/AbstractFallible/assertWithMsg"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/AbstractFallible/assertWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="msg" type="/0/@packages.0/kunit/AbstractFallible/assertWithMsg/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/fail/@kOwnedTags.1" name="fail" type="/0/@packages.0/kunit/AbstractFallible/fail/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;866;923"/>
+            <kOwnedTags name="documentation" value=" to be used if a failure reaction is needed " object="/0/@packages.0/kunit/AbstractFallible/fail"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="msg" type="/0/@packages.0/kunit/AbstractFallible/fail/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertTrue/@kOwnedTags.1" name="assertTrue" type="/0/@packages.0/kunit/AbstractFallible/assertTrue/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;992;1060"/>
+            <kOwnedTags name="documentation" value=" process the given condition and react if it is not satisfied " object="/0/@packages.0/kunit/AbstractFallible/assertTrue"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/AbstractFallible/assertTrue/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@kOwnedTags.1" name="assertTrueWithMsg" type="/0/@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1171;1262"/>
+            <kOwnedTags name="documentation" value="&#xA; process the given condition and react with the given message&#xA; if it is not satisfied" object="/0/@packages.0/kunit/AbstractFallible/assertTrueWithMsg"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="message" type="/0/@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertFalse/@kOwnedTags.1" name="assertFalse" type="/0/@packages.0/kunit/AbstractFallible/assertFalse/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1327;1396"/>
+            <kOwnedTags name="documentation" value=" process the given condition and react if it is satisfied " object="/0/@packages.0/kunit/AbstractFallible/assertFalse"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/AbstractFallible/assertFalse/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@kOwnedTags.1" name="assertFalseWithMsg" type="/0/@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1503;1592"/>
+            <kOwnedTags name="documentation" value="&#xA; process the given condition and react with the given message&#xA; if it is satisfied" object="/0/@packages.0/kunit/AbstractFallible/assertFalseWithMsg"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="message" type="/0/@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertEqual/@kOwnedTags.1" name="assertEqual" type="/0/@packages.0/kunit/AbstractFallible/assertEqual/@containedType.0" isOrdered="true" isAbstract="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1663;1742"/>
+            <kOwnedTags name="documentation" value=" process the two given string and react if they are not equal " object="/0/@packages.0/kunit/AbstractFallible/assertEqual"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="expected" type="/0/@packages.0/kunit/AbstractFallible/assertEqual/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="actual" type="/0/@packages.0/kunit/AbstractFallible/assertEqual/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/assertSimilar/@kOwnedTags.1" name="assertSimilar" type="/0/@packages.0/kunit/AbstractFallible/assertSimilar/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1829;2130"/>
+            <kOwnedTags name="documentation" value="&#xA; Log a failure if the two strings are not identical modulo-white-space" object="/0/@packages.0/kunit/AbstractFallible/assertSimilar"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="expected" type="/0/@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="actual" type="/0/@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1898;2130"/>
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="expectedBis">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1905;1955"/>
+                <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="distil" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1935;1955"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1935;1955"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="expected">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1942;1950"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1942;1950"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </initialization>
+                <type name="String" type="/0/@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </containedType>
+                </type>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="actualBis">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1955;2001"/>
+                <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="distil" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1983;2001"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1983;2001"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actual">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1990;1996"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;1990;1996"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </initialization>
+                <type name="String" type="/0/@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </containedType>
+                </type>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="assertWithMsg" isCalledWithParenthesis="true">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2001;2122"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2001;2122"/>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2026;2044"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2015;2044"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actualBis">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2034;2043"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2034;2043"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="expectedBis">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2015;2026"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </parameters>
+                <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2046;2118"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="]">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2115;2118"/>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actualBis">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2103;2113"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="] != &#xA;actual  &#x9;:[">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2079;2101"/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="expectedBis">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2065;2077"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                        </parameters>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="&#xA;expected&#x9;:[">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2046;2063"/>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </parameters>
+                <usings fromQName="kermeta::standard" toName=""/>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/AbstractFallible/distil/@kOwnedTags.1" name="distil" type="/0/@packages.0/kunit/AbstractFallible/distil/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2207;2653"/>
+            <kOwnedTags name="documentation" value=" &#xA;* reduces all runs of white-space to a single space character&#xA;" object="/0/@packages.0/kunit/AbstractFallible/distil"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="s" type="/0/@packages.0/kunit/AbstractFallible/distil/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2248;2653"/>
+              <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2254;2270"/>
+                <target xsi:type="org_kermeta_language_behavior:CallResult">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2254;2261"/>
+                </target>
+                <value xsi:type="org_kermeta_language_behavior:StringLiteral" value="">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2264;2270"/>
+                </value>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="white">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2270;2303"/>
+                <initialization xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2294;2303"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2294;2303"/>
+                </initialization>
+                <type name="Boolean" type="/0/@packages.0/kunit/AbstractFallible/distil/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </containedType>
+                </type>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:Loop">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2303;2647"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2303;2647"/>
+                <initialization xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="i">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2312;2338"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:IntegerLiteral">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2333;2338"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2333;2338"/>
+                  </initialization>
+                  <type name="Integer" type="/0/@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@initialization/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </containedType>
+                  </type>
+                </initialization>
+                <body xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="c">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2372;2419"/>
+                    <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="toString">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2405;2419"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2391;2419"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="elementAt" isCalledWithParenthesis="true">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2392;2405"/>
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2403;2404"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2403;2404"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                        </parameters>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="s">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2391;2392"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                        </target>
+                      </target>
+                    </initialization>
+                    <type name="String" type="/0/@packages.0/kunit/AbstractFallible/distil/@body/@statement.2/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </containedType>
+                    </type>
+                  </statement>
+                  <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2419;2627"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2419;2627"/>
+                    <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                      <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2456;2535"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2456;2535"/>
+                        <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2480;2500"/>
+                            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="white">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2480;2486"/>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                            </target>
+                            <value xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="true">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2489;2500"/>
+                            </value>
+                          </statement>
+                          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2500;2527"/>
+                            <target xsi:type="org_kermeta_language_behavior:CallResult">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2500;2507"/>
+                            </target>
+                            <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                              <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value=" ">
+                                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2518;2527"/>
+                              </parameters>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                              <target xsi:type="org_kermeta_language_behavior:CallResult">
+                                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2510;2517"/>
+                              </target>
+                            </value>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="not">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2459;2469"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="white">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2463;2469"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                          </target>
+                        </condition>
+                      </statement>
+                    </thenBody>
+                    <elseBody xsi:type="org_kermeta_language_behavior:Block">
+                      <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2545;2571"/>
+                        <target xsi:type="org_kermeta_language_behavior:CallResult">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2545;2552"/>
+                        </target>
+                        <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                          <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2564;2571"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                          </parameters>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <target xsi:type="org_kermeta_language_behavior:CallResult">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2555;2562"/>
+                          </target>
+                        </value>
+                      </statement>
+                      <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2571;2619"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2571;2619"/>
+                        <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                          <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2591;2611"/>
+                            <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="white">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2591;2597"/>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                            </target>
+                            <value xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="false">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2600;2611"/>
+                            </value>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="white">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2574;2580"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2574;2580"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                        </condition>
+                      </statement>
+                    </elseBody>
+                    <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isGreaterOrEqual">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2422;2446"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2444;2446"/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="indexOf" isCalledWithParenthesis="true">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2429;2441"/>
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="c">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2438;2439"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2438;2439"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                        </parameters>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <target xsi:type="org_kermeta_language_behavior:StringLiteral" value=" &#xA;&#x9;">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2422;2429"/>
+                        </target>
+                      </target>
+                    </condition>
+                  </statement>
+                  <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2627;2641"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2627;2629"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </target>
+                    <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" value="1">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2636;2641"/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2632;2634"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </target>
+                    </value>
+                  </statement>
+                </body>
+                <stopCondition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2348;2363"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="size">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2354;2363"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="s">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2353;2354"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </target>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="i">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2348;2350"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </stopCondition>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/0/@packages.0/kunit/AssertionFailedError/@kOwnedTags.1" name="AssertionFailedError" superType="/0/@packages.0/kunit/AssertionFailedError/@containedType.0">
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2731;2803"/>
+          <kOwnedTags name="documentation" value=" AssertionViolatedException are raised when assertions are violated " object="/0/@packages.0/kunit/AssertionFailedError"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::exceptions::Exception">
+            <usings fromQName="kermeta::standard" toName=""/>
+          </containedType>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Assert" superType="/0/@packages.0/kunit/Assert/@containedType.0">
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2803;4708"/>
+          <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="AbstractFallible">
+            <usings fromQName="kermeta::standard" toName=""/>
+          </containedType>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assert/@kOwnedTags.1" name="assert" type="/0/@packages.0/kunit/Assert/assert/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2882;3042"/>
+            <kOwnedTags name="documentation" value=" Fails if condition is false " object="/0/@packages.0/kunit/Assert/assert"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/Assert/assert/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2936;3042"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2951;3034"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2951;3034"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2987;3022"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2987;3022"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="assert failed">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2992;3007"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2992;3007"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="not">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2954;2968"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="condition">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;2958;2968"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assertTrue/@kOwnedTags.1" name="assertTrue" type="/0/@packages.0/kunit/Assert/assertTrue/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3082;3249"/>
+            <kOwnedTags name="documentation" value=" will fail if condition is false " object="/0/@packages.0/kunit/Assert/assertTrue"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/Assert/assertTrue/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3140;3249"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3155;3242"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3155;3242"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3191;3230"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3191;3230"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="assertTrue failed">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3196;3215"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3196;3215"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="not">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3158;3172"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="condition">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3162;3172"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assertTrueWithMsg/@kOwnedTags.1" name="assertTrueWithMsg" type="/0/@packages.0/kunit/Assert/assertTrueWithMsg/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3289;3494"/>
+            <kOwnedTags name="documentation" value=" will fail if condition is false " object="/0/@packages.0/kunit/Assert/assertTrueWithMsg"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/Assert/assertTrueWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="msg" type="/0/@packages.0/kunit/Assert/assertTrueWithMsg/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3368;3494"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3383;3487"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3383;3487"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3419;3474"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3419;3474"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3424;3459"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="msg">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3456;3459"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="assertTrueWithMsg failed : ">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3424;3454"/>
+                      </target>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="not">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3386;3400"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="condition">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3390;3400"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assertFalse/@kOwnedTags.1" name="assertFalse" type="/0/@packages.0/kunit/Assert/assertFalse/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3533;3703"/>
+            <kOwnedTags name="documentation" value=" will fail if condition is true " object="/0/@packages.0/kunit/Assert/assertFalse"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/Assert/assertFalse/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3591;3703"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3606;3696"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3606;3696"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3638;3684"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3638;3684"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="assertTrue number failed">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3643;3669"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3643;3669"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="condition">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3609;3619"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3609;3619"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assertFalseWithMsg/@kOwnedTags.1" name="assertFalseWithMsg" type="/0/@packages.0/kunit/Assert/assertFalseWithMsg/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3742;3943"/>
+            <kOwnedTags name="documentation" value=" will fail if condition is true " object="/0/@packages.0/kunit/Assert/assertFalseWithMsg"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/Assert/assertFalseWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="msg" type="/0/@packages.0/kunit/Assert/assertFalseWithMsg/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3821;3943"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3836;3936"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3836;3936"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3868;3923"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3868;3923"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3873;3908"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="msg">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3905;3908"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="assertTrueWithMsg failed : ">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3873;3903"/>
+                      </target>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="condition">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3839;3849"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3839;3849"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assertWithMsg/@kOwnedTags.1" name="assertWithMsg" type="/0/@packages.0/kunit/Assert/assertWithMsg/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;3986;4172"/>
+            <kOwnedTags name="documentation" value=" will fail if condition is false " object="/0/@packages.0/kunit/Assert/assertWithMsg"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="condition" type="/0/@packages.0/kunit/Assert/assertWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="msg" type="/0/@packages.0/kunit/Assert/assertWithMsg/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4053;4172"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4068;4166"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4068;4166"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4104;4159"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4104;4159"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4109;4144"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="msg">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4141;4144"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="assertTrueWithMsg failed : ">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4109;4139"/>
+                      </target>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="not">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4071;4085"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="condition">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4075;4085"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/fail/@kOwnedTags.1" name="fail" type="/0/@packages.0/kunit/Assert/fail/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4241;4436"/>
+            <kOwnedTags name="documentation" value=" raise a AssertionViolatedException with the provided message " object="/0/@packages.0/kunit/Assert/fail"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="msg" type="/0/@packages.0/kunit/Assert/fail/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4277;4436"/>
+              <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="exception">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4292;4371"/>
+                <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4354;4371"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4334;4371"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="AssertionFailedError">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4334;4354"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </initialization>
+                <type name="AssertionFailedError" type="/0/@packages.0/kunit/Assert/fail/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                  <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="AssertionFailedError">
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </containedType>
+                </type>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4371;4408"/>
+                <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="message">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4380;4389"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="exception">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4371;4380"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </target>
+                <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="msg">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4392;4408"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </value>
+              </statement>
+              <statement xsi:type="org_kermeta_language_behavior:Raise">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4408;4426"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4408;4426"/>
+                <expression xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="exception">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4414;4426"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4414;4426"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                </expression>
+              </statement>
+            </body>
+          </ownedOperation>
+          <ownedOperation kTag="/0/@packages.0/kunit/Assert/assertEqual/@kOwnedTags.1" name="assertEqual" type="/0/@packages.0/kunit/Assert/assertEqual/@containedType.0" isOrdered="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4492;4706"/>
+            <kOwnedTags name="documentation" value=" Will fail if the two strings are not identical " object="/0/@packages.0/kunit/Assert/assertEqual"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedParameter name="expected" type="/0/@packages.0/kunit/Assert/assertEqual/@ownedParameter.0/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="actual" type="/0/@packages.0/kunit/Assert/assertEqual/@ownedParameter.1/@containedType.0" isOrdered="true">
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+            </ownedParameter>
+            <body xsi:type="org_kermeta_language_behavior:Block">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4556;4706"/>
+              <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4562;4701"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4562;4701"/>
+                <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                  <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="fail" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4602;4695"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4602;4695"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4608;4690"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="]">
+                        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4687;4690"/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actual">
+                          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4678;4685"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                        </parameters>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                          <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="] != &#xA;actual&#x9;:[">
+                            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4656;4676"/>
+                          </parameters>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="plus">
+                            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="expected">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4645;4654"/>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                            </parameters>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <target xsi:type="org_kermeta_language_behavior:StringLiteral" value="assertEqual failed&#xA;expected&#x9;:[">
+                              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4608;4643"/>
+                            </target>
+                          </target>
+                        </target>
+                      </target>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="not">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4565;4593"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="equals" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4577;4593"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="actual">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4585;4591"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4585;4591"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="expected">
+                      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.extended/src/main/kmt/kunit/assert.kmt;4569;4577"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </target>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+      </nestedPackage>
+    </packages>
+  </org_kermeta_language_structure:Metamodel>
+  <org_kermeta_language_structure:Metamodel name="kermeta_standard">
+    <packages name="kermeta">
+      <nestedPackage name="standard">
+        <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Object" isAspect="true"/>
+      </nestedPackage>
+    </packages>
+  </org_kermeta_language_structure:Metamodel>
+</xmi:XMI>

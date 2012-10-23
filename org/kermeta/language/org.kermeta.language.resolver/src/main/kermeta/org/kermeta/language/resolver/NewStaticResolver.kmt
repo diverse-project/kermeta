@@ -156,6 +156,7 @@ class FullStaticResolver
 	operation doTypeAwareMerging(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Type Aware Merging...  *********************")
 		var mergeCtxt : TypeAwareMergerContext init TypeAwareMergerContext.new
+		mergeCtxt.currentMetamodels := unresolvedMetamodels
 		mergeCtxt.errors:=ctxt.errors
 		unresolvedMetamodels.each{mm|
 			mm.typeAwareMerge( mergeCtxt)

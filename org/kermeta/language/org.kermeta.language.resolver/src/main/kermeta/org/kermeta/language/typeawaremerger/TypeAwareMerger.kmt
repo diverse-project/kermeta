@@ -11,13 +11,14 @@ require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/k
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 
 
 using kermeta::standard
 using org::kermeta::language::resolver
 using kermeta::utils
+using kmt::language::helpers::structure
 
 /* *
  	The type aware merge will finish the process of merging after every unresolved type is resolved
@@ -83,8 +84,9 @@ aspect class ClassDefinition {
 		if superType.size == 0 then
 			if getQualifiedName != "kermeta_standard#kermeta::standard::Object" then
 				var objectClass : Class init Class.new
-				var cd : ClassDefinition init self.getRootContainer.asType(Metamodel).getTypeDefinitionByQualifiedName(
-						"kermeta_standard#kermeta::standard::Object").asType(ClassDefinition)
+				var typeDefFinder : TypeDefinitionFinder init TypeDefinitionFinder.new
+				var cd : ClassDefinition init typeDefFinder.getTypeDefinitionByQualifiedName(
+						"kermeta_standard#kermeta::standard::Object", context.currentMetamodels).asType(ClassDefinition)
 				if(cd.isVoid) then
 					stdio.errorln("failed to find classDefinition kermeta_standard#kermeta::standard::Object")
 				end
