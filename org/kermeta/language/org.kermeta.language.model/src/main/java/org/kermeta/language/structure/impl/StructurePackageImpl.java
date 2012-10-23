@@ -7,9 +7,6 @@
 package org.kermeta.language.structure.impl;
 
 
-import static org.kermeta.language.structure.StructurePackage.CLASS;
-
-import org.OrgPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -17,13 +14,8 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.impl.OrgPackageImpl;
-import org.kermeta.KmPackage;
-import org.kermeta.impl.KmPackageImpl;
-import org.kermeta.language.LanguagePackage;
 import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.impl.BehaviorPackageImpl;
-import org.kermeta.language.impl.LanguagePackageImpl;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationOperator;
@@ -81,6 +73,7 @@ import org.kermeta.language.structure.UseAdaptationOperator;
 import org.kermeta.language.structure.Using;
 import org.kermeta.language.structure.VirtualType;
 import org.kermeta.language.structure.VoidType;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -563,23 +556,14 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		OrgPackageImpl theOrgPackage = (OrgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) instanceof OrgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) : OrgPackage.eINSTANCE);
-		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) : KmPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) : LanguagePackage.eINSTANCE);
 		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI) : BehaviorPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theStructurePackage.createPackageContents();
-		theOrgPackage.createPackageContents();
-		theKmPackage.createPackageContents();
-		theLanguagePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theStructurePackage.initializePackageContents();
-		theOrgPackage.initializePackageContents();
-		theKmPackage.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -2832,6 +2816,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEDataType(booleanEDataType, Boolean.class, "Boolean", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(integerEDataType, int.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(unlimitedNaturalEDataType, int.class, "UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+
+		// Create resource
+		createResource(eNS_URI);
 	}
 
 } //StructurePackageImpl

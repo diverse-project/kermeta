@@ -3,25 +3,10 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
     nsURI="http://www.kermeta.org/kermeta/2_0_0/" nsPrefix="org">
-  <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
-    </eAnnotations>
-  </eClassifiers>
   <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta"
       nsPrefix="org_kermeta">
-    <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
-      </eAnnotations>
-    </eClassifiers>
     <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language"
         nsPrefix="org_kermeta_language">
-      <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
-        </eAnnotations>
-      </eClassifiers>
       <eSubpackages name="behavior" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
           nsPrefix="org_kermeta_language_behavior">
         <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//kermeta/language/behavior/Expression">

@@ -826,13 +826,31 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_SUPER_OPERATION__STATIC_OPERATION = CALL_OPERATION__STATIC_OPERATION;
 
 	/**
+	 * The feature id for the '<em><b>Super Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__SUPER_TYPE = CALL_OPERATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Super Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__SUPER_OPERATION = CALL_OPERATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Call Super Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION_FEATURE_COUNT = CALL_OPERATION_FEATURE_COUNT + 0;
+	int CALL_SUPER_OPERATION_FEATURE_COUNT = CALL_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
@@ -2905,6 +2923,28 @@ public interface BehaviorPackage extends EPackage {
 	EClass getCallSuperOperation();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallSuperOperation#getSuperType <em>Super Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Super Type</em>'.
+	 * @see org.kermeta.language.behavior.CallSuperOperation#getSuperType()
+	 * @see #getCallSuperOperation()
+	 * @generated
+	 */
+	EReference getCallSuperOperation_SuperType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallSuperOperation#getSuperOperation <em>Super Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Super Operation</em>'.
+	 * @see org.kermeta.language.behavior.CallSuperOperation#getSuperOperation()
+	 * @see #getCallSuperOperation()
+	 * @generated
+	 */
+	EReference getCallSuperOperation_SuperOperation();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallResult <em>Call Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3684,6 +3724,22 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CALL_SUPER_OPERATION = eINSTANCE.getCallSuperOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_SUPER_OPERATION__SUPER_TYPE = eINSTANCE.getCallSuperOperation_SuperType();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_SUPER_OPERATION__SUPER_OPERATION = eINSTANCE.getCallSuperOperation_SuperOperation();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.

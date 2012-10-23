@@ -6,21 +6,12 @@
  */
 package org.kermeta.language.behavior.impl;
 
-import org.OrgPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.impl.OrgPackageImpl;
-import org.kermeta.KmPackage;
-import org.kermeta.impl.KmPackageImpl;
-
-import org.kermeta.language.LanguagePackage;
-
 import org.kermeta.language.behavior.Assignment;
 import org.kermeta.language.behavior.BehaviorFactory;
 import org.kermeta.language.behavior.BehaviorPackage;
@@ -53,12 +44,9 @@ import org.kermeta.language.behavior.TypeReference;
 import org.kermeta.language.behavior.UnresolvedCall;
 import org.kermeta.language.behavior.VariableDecl;
 import org.kermeta.language.behavior.VoidLiteral;
-
-import org.kermeta.language.impl.LanguagePackageImpl;
-
 import org.kermeta.language.structure.StructurePackage;
-
 import org.kermeta.language.structure.impl.StructurePackageImpl;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -324,23 +312,14 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		OrgPackageImpl theOrgPackage = (OrgPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) instanceof OrgPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OrgPackage.eNS_URI) : OrgPackage.eINSTANCE);
-		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) : KmPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) : LanguagePackage.eINSTANCE);
 		StructurePackageImpl theStructurePackage = (StructurePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) : StructurePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theBehaviorPackage.createPackageContents();
-		theOrgPackage.createPackageContents();
-		theKmPackage.createPackageContents();
-		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theBehaviorPackage.initializePackageContents();
-		theOrgPackage.initializePackageContents();
-		theKmPackage.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -521,6 +500,24 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 */
 	public EClass getCallSuperOperation() {
 		return callSuperOperationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallSuperOperation_SuperType() {
+		return (EReference)callSuperOperationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallSuperOperation_SuperOperation() {
+		return (EReference)callSuperOperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1080,6 +1077,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		createEAttribute(callFeatureEClass, CALL_FEATURE__IS_ATPRE);
 
 		callSuperOperationEClass = createEClass(CALL_SUPER_OPERATION);
+		createEReference(callSuperOperationEClass, CALL_SUPER_OPERATION__SUPER_TYPE);
+		createEReference(callSuperOperationEClass, CALL_SUPER_OPERATION__SUPER_OPERATION);
 
 		callResultEClass = createEClass(CALL_RESULT);
 
@@ -1252,6 +1251,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEAttribute(getCallFeature_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", "false", 1, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callSuperOperationEClass, CallSuperOperation.class, "CallSuperOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCallSuperOperation_SuperType(), this.getTypeReference(), null, "superType", null, 1, 1, CallSuperOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCallSuperOperation_SuperOperation(), theStructurePackage.getOperation(), null, "superOperation", null, 0, 1, CallSuperOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(callResultEClass, CallResult.class, "CallResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1331,6 +1332,9 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		initEClass(callEnumLiteralEClass, CallEnumLiteral.class, "CallEnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallEnumLiteral_StaticEnumLiteral(), theStructurePackage.getEnumerationLiteral(), null, "staticEnumLiteral", null, 0, 1, CallEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Create resource
+		createResource(eNS_URI);
 	}
 
 } //BehaviorPackageImpl
