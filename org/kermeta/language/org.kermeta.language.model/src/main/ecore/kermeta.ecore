@@ -429,12 +429,6 @@
               <details key="documentation" value="An object can contains a Tag.  &#xA;Be careful, owning a tag doesn't means that the tag applies to the Object&#xA;To know which Tags apply to the object use the &quot;tag&quot; reference"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="kType" lowerBound="1"
-              eType="#//kermeta/language/structure/Type" transient="true">
-            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-              <details key="documentation" value="Convenient reference to the type of this Object (in replacement of getMetaclass operation)"/>
-            </eAnnotations>
-          </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
         <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//kermeta/language/structure/MultiplicityElement #//kermeta/language/structure/AbstractOperation">

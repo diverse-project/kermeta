@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.kermeta.language.structure.KermetaModelElement#getKTag <em>KTag</em>}</li>
  *   <li>{@link org.kermeta.language.structure.KermetaModelElement#getKOwnedTags <em>KOwned Tags</em>}</li>
- *   <li>{@link org.kermeta.language.structure.KermetaModelElement#getKType <em>KType</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,30 +66,5 @@ public interface KermetaModelElement extends EObject {
 	 * @generated
 	 */
 	EList<Tag> getKOwnedTags();
-
-	/**
-	 * Returns the value of the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Convenient reference to the type of this Object (in replacement of getMetaclass operation)
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>KType</em>' reference.
-	 * @see #setKType(Type)
-	 * @see org.kermeta.language.structure.StructurePackage#getKermetaModelElement_KType()
-	 * @model required="true" transient="true"
-	 * @generated
-	 */
-	Type getKType();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.KermetaModelElement#getKType <em>KType</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>KType</em>' reference.
-	 * @see #getKType()
-	 * @generated
-	 */
-	void setKType(Type value);
 
 } // KermetaModelElement

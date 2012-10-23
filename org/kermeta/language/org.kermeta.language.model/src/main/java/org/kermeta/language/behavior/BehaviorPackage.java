@@ -90,15 +90,6 @@ public interface BehaviorPackage extends EPackage {
 	int EXPRESSION__KOWNED_TAGS = StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__KTYPE = StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,15 +143,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGNMENT__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__KTYPE = EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -245,15 +227,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_EXPRESSION__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_EXPRESSION__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -336,15 +309,6 @@ public interface BehaviorPackage extends EPackage {
 	int BLOCK__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,15 +380,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VARIABLE__KOWNED_TAGS = CALL_EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_VARIABLE__KTYPE = CALL_EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -516,15 +471,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_FEATURE__KOWNED_TAGS = CALL_EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__KTYPE = CALL_EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -625,15 +571,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_OPERATION__KOWNED_TAGS = CALL_FEATURE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_OPERATION__KTYPE = CALL_FEATURE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -743,15 +680,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_SUPER_OPERATION__KOWNED_TAGS = CALL_OPERATION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_SUPER_OPERATION__KTYPE = CALL_OPERATION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -881,15 +809,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_RESULT__KOWNED_TAGS = CALL_VARIABLE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_RESULT__KTYPE = CALL_VARIABLE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -981,15 +900,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VALUE__KOWNED_TAGS = CALL_EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_VALUE__KTYPE = CALL_EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1070,15 +980,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONDITIONAL__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITIONAL__KTYPE = EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1163,15 +1064,6 @@ public interface BehaviorPackage extends EPackage {
 	int RAISE__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RAISE__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1236,15 +1128,6 @@ public interface BehaviorPackage extends EPackage {
 	int RESCUE__KOWNED_TAGS = StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__KTYPE = StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1307,15 +1190,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_REFERENCE__KOWNED_TAGS = StructurePackage.MULTIPLICITY_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_REFERENCE__KTYPE = StructurePackage.MULTIPLICITY_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1418,15 +1292,6 @@ public interface BehaviorPackage extends EPackage {
 	int LITERAL__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1482,15 +1347,6 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPTY_EXPRESSION__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1544,15 +1400,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_STATIC_CALL__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_STATIC_CALL__KTYPE = EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1637,15 +1484,6 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_EXPRESSION__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_EXPRESSION__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1719,15 +1557,6 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_PARAMETER__KOWNED_TAGS = StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_PARAMETER__KTYPE = StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1781,15 +1610,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL__KTYPE = LITERAL__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1856,15 +1676,6 @@ public interface BehaviorPackage extends EPackage {
 	int STRING_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_LITERAL__KTYPE = LITERAL__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1927,15 +1738,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_LITERAL__KTYPE = LITERAL__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2002,15 +1804,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_TYPE_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_TYPE_LITERAL__KTYPE = LITERAL__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2075,15 +1868,6 @@ public interface BehaviorPackage extends EPackage {
 	int VOID_LITERAL__KOWNED_TAGS = LITERAL__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_LITERAL__KTYPE = LITERAL__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2137,15 +1921,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP__KTYPE = EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2230,15 +2005,6 @@ public interface BehaviorPackage extends EPackage {
 	int SELF_EXPRESSION__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELF_EXPRESSION__KTYPE = EXPRESSION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2292,15 +2058,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DECL__KOWNED_TAGS = EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DECL__KTYPE = EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2384,15 +2141,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNRESOLVED_CALL__KOWNED_TAGS = StructurePackage.UNRESOLVED_REFERENCE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_CALL__KTYPE = StructurePackage.UNRESOLVED_REFERENCE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2531,15 +2279,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_PROPERTY__KOWNED_TAGS = CALL_FEATURE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_PROPERTY__KTYPE = CALL_FEATURE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2647,15 +2386,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_ENUM_LITERAL__KOWNED_TAGS = CALL_EXPRESSION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_ENUM_LITERAL__KTYPE = CALL_EXPRESSION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.

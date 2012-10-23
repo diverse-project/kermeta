@@ -141,8 +141,6 @@
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/KermetaModelElement/kTag"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/KermetaModelElement/kOwnedTags"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/KermetaModelElement/kType"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Operation">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"

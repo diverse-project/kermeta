@@ -96,22 +96,13 @@ public interface StructurePackage extends EPackage {
 	int KERMETA_MODEL_ELEMENT__KOWNED_TAGS = 1;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_MODEL_ELEMENT__KTYPE = 2;
-
-	/**
 	 * The number of structural features of the '<em>Kermeta Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_MODEL_ELEMENT_FEATURE_COUNT = 3;
+	int KERMETA_MODEL_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.TypeContainerImpl <em>Type Container</em>}' class.
@@ -140,15 +131,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_CONTAINER__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CONTAINER__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -195,15 +177,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_ELEMENT__KOWNED_TAGS = TYPE_CONTAINER__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPED_ELEMENT__KTYPE = TYPE_CONTAINER__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -268,15 +241,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int MULTIPLICITY_ELEMENT__KOWNED_TAGS = TYPED_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MULTIPLICITY_ELEMENT__KTYPE = TYPED_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -377,15 +341,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__KOWNED_TAGS = MULTIPLICITY_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__KTYPE = MULTIPLICITY_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -585,15 +540,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__KOWNED_TAGS = MULTIPLICITY_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__KTYPE = MULTIPLICITY_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -804,15 +750,6 @@ public interface StructurePackage extends EPackage {
 	int TYPE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -859,15 +796,6 @@ public interface StructurePackage extends EPackage {
 	int NAMED_ELEMENT__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -912,15 +840,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_LITERAL__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL__KTYPE = NAMED_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -976,15 +895,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_VARIABLE_BINDING__KOWNED_TAGS = TYPE_CONTAINER__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_BINDING__KTYPE = TYPE_CONTAINER__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1049,15 +959,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_DEFINITION__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__KTYPE = NAMED_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1133,15 +1034,6 @@ public interface StructurePackage extends EPackage {
 	int PARAMETERIZED_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__KTYPE = TYPE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1213,15 +1105,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS__KOWNED_TAGS = PARAMETERIZED_TYPE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__KTYPE = PARAMETERIZED_TYPE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -1342,15 +1225,6 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__KTYPE = TYPE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1431,15 +1305,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__KOWNED_TAGS = DATA_TYPE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__KTYPE = DATA_TYPE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -1533,15 +1398,6 @@ public interface StructurePackage extends EPackage {
 	int PACKAGE__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__KTYPE = NAMED_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1631,15 +1487,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER__KOWNED_TAGS = MULTIPLICITY_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__KTYPE = MULTIPLICITY_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1751,15 +1598,6 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__KOWNED_TAGS = DATA_TYPE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__KTYPE = DATA_TYPE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1851,15 +1689,6 @@ public interface StructurePackage extends EPackage {
 	int TAG__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1924,15 +1753,6 @@ public interface StructurePackage extends EPackage {
 	int ABSTRACT_PROPERTY__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_PROPERTY__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The number of structural features of the '<em>Abstract Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1968,15 +1788,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT__KTYPE = NAMED_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2079,15 +1890,6 @@ public interface StructurePackage extends EPackage {
 	int MODEL_ELEMENT_TYPE_DEFINITION__KOWNED_TAGS = TYPE_DEFINITION__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_ELEMENT_TYPE_DEFINITION__KTYPE = TYPE_DEFINITION__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2159,15 +1961,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERIC_TYPE_DEFINITION__KOWNED_TAGS = MODEL_ELEMENT_TYPE_DEFINITION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__KTYPE = MODEL_ELEMENT_TYPE_DEFINITION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2250,15 +2043,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DEFINITION__KOWNED_TAGS = GENERIC_TYPE_DEFINITION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__KTYPE = GENERIC_TYPE_DEFINITION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2437,15 +2221,6 @@ public interface StructurePackage extends EPackage {
 	int METAMODEL__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METAMODEL__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2545,15 +2320,6 @@ public interface StructurePackage extends EPackage {
 	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER__KTYPE = NAMED_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2597,15 +2363,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_VARIABLE__KOWNED_TAGS = TYPE_CONTAINER__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__KTYPE = TYPE_CONTAINER__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2671,15 +2428,6 @@ public interface StructurePackage extends EPackage {
 	int OBJECT_TYPE_VARIABLE__KOWNED_TAGS = TYPE_VARIABLE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__KTYPE = TYPE_VARIABLE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2741,15 +2489,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_TYPE_VARIABLE__KOWNED_TAGS = TYPE_VARIABLE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_VARIABLE__KTYPE = TYPE_VARIABLE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2842,15 +2581,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_TYPE__KOWNED_TAGS = OBJECT_TYPE_VARIABLE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_TYPE__KTYPE = OBJECT_TYPE_VARIABLE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2953,15 +2683,6 @@ public interface StructurePackage extends EPackage {
 	int MODEL__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Contents</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3008,15 +2729,6 @@ public interface StructurePackage extends EPackage {
 	int ABSTRACT_OPERATION__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_OPERATION__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The number of structural features of the '<em>Abstract Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3052,15 +2764,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNRESOLVED_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_TYPE__KTYPE = TYPE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -3145,15 +2848,6 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_REFERENCE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_REFERENCE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The number of structural features of the '<em>Unresolved Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3189,15 +2883,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNRESOLVED_PROPERTY__KOWNED_TAGS = ABSTRACT_PROPERTY__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_PROPERTY__KTYPE = ABSTRACT_PROPERTY__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Property Identifier</b></em>' attribute.
@@ -3244,15 +2929,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNRESOLVED_OPERATION__KOWNED_TAGS = ABSTRACT_OPERATION__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_OPERATION__KTYPE = ABSTRACT_OPERATION__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -3319,15 +2995,6 @@ public interface StructurePackage extends EPackage {
 	int USING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>From QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3381,15 +3048,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRODUCT_TYPE__KOWNED_TAGS = TYPE_CONTAINER__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__KTYPE = TYPE_CONTAINER__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -3454,15 +3112,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTION_TYPE__KOWNED_TAGS = TYPE_CONTAINER__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__KTYPE = TYPE_CONTAINER__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -3538,15 +3187,6 @@ public interface StructurePackage extends EPackage {
 	int VOID_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__KTYPE = TYPE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3593,15 +3233,6 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_INFERRED_TYPE__KOWNED_TAGS = UNRESOLVED_REFERENCE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_INFERRED_TYPE__KTYPE = UNRESOLVED_REFERENCE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3646,15 +3277,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int UNRESOLVED_TYPE_VARIABLE__KOWNED_TAGS = UNRESOLVED_REFERENCE__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_TYPE_VARIABLE__KTYPE = UNRESOLVED_REFERENCE__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -3730,15 +3352,6 @@ public interface StructurePackage extends EPackage {
 	int METAMODEL_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METAMODEL_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Bound Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3810,15 +3423,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DEFINITION_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property Bindings</b></em>' containment reference list.
@@ -3894,15 +3498,6 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3956,15 +3551,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -4022,15 +3608,6 @@ public interface StructurePackage extends EPackage {
 	int OPERATION_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_BINDING__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4086,15 +3663,6 @@ public interface StructurePackage extends EPackage {
 	int ADAPTATION_OPERATOR__KOWNED_TAGS = NAMED_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_OPERATOR__KTYPE = NAMED_ELEMENT__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4148,15 +3716,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int USE_ADAPTATION_OPERATOR__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USE_ADAPTATION_OPERATOR__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
@@ -4221,15 +3780,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_ADAPTATION_OPERATOR__KOWNED_TAGS = ADAPTATION_OPERATOR__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_ADAPTATION_OPERATOR__KTYPE = ADAPTATION_OPERATOR__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4332,15 +3882,6 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_ADAPTATION_OPERATOR__KOWNED_TAGS = ADAPTATION_OPERATOR__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_ADAPTATION_OPERATOR__KTYPE = ADAPTATION_OPERATOR__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4394,15 +3935,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ADAPTATION_PARAMETER__KOWNED_TAGS = TYPED_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADAPTATION_PARAMETER__KTYPE = TYPED_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -4469,15 +4001,6 @@ public interface StructurePackage extends EPackage {
 	int OPERATION_ADAPTATION_OPERATOR__KOWNED_TAGS = ADAPTATION_OPERATOR__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_ADAPTATION_OPERATOR__KTYPE = ADAPTATION_OPERATOR__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4541,15 +4064,6 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__KOWNED_TAGS = TYPE__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__KTYPE = TYPE__KTYPE;
-
-	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4603,15 +4117,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int FILTERED_METAMODEL_REFERENCE__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>KType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILTERED_METAMODEL_REFERENCE__KTYPE = KERMETA_MODEL_ELEMENT__KTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Metamodel</b></em>' reference.
@@ -4721,17 +4226,6 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKermetaModelElement_KOwnedTags();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.KermetaModelElement#getKType <em>KType</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>KType</em>'.
-	 * @see org.kermeta.language.structure.KermetaModelElement#getKType()
-	 * @see #getKermetaModelElement()
-	 * @generated
-	 */
-	EReference getKermetaModelElement_KType();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Operation <em>Operation</em>}'.
@@ -6658,14 +6152,6 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference KERMETA_MODEL_ELEMENT__KOWNED_TAGS = eINSTANCE.getKermetaModelElement_KOwnedTags();
-
-		/**
-		 * The meta object literal for the '<em><b>KType</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KERMETA_MODEL_ELEMENT__KTYPE = eINSTANCE.getKermetaModelElement_KType();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.

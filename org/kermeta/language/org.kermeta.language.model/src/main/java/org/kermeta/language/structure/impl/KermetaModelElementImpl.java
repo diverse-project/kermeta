@@ -37,7 +37,6 @@ import org.kermeta.language.structure.Type;
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.KermetaModelElementImpl#getKTag <em>KTag</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.KermetaModelElementImpl#getKOwnedTags <em>KOwned Tags</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.KermetaModelElementImpl#getKType <em>KType</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,16 +62,6 @@ public abstract class KermetaModelElementImpl extends EObjectImpl implements Ker
 	 * @ordered
 	 */
 	protected EList<Tag> kOwnedTags;
-
-	/**
-	 * The cached value of the '{@link #getKType() <em>KType</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type kType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,44 +111,6 @@ public abstract class KermetaModelElementImpl extends EObjectImpl implements Ker
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getKType() {
-		if (kType != null && kType.eIsProxy()) {
-			InternalEObject oldKType = (InternalEObject)kType;
-			kType = (Type)eResolveProxy(oldKType);
-			if (kType != oldKType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE, oldKType, kType));
-			}
-		}
-		return kType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type basicGetKType() {
-		return kType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setKType(Type newKType) {
-		Type oldKType = kType;
-		kType = newKType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE, oldKType, kType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -198,9 +149,6 @@ public abstract class KermetaModelElementImpl extends EObjectImpl implements Ker
 				return getKTag();
 			case StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS:
 				return getKOwnedTags();
-			case StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE:
-				if (resolve) return getKType();
-				return basicGetKType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,9 +170,6 @@ public abstract class KermetaModelElementImpl extends EObjectImpl implements Ker
 				getKOwnedTags().clear();
 				getKOwnedTags().addAll((Collection<? extends Tag>)newValue);
 				return;
-			case StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE:
-				setKType((Type)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -243,9 +188,6 @@ public abstract class KermetaModelElementImpl extends EObjectImpl implements Ker
 			case StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS:
 				getKOwnedTags().clear();
 				return;
-			case StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE:
-				setKType((Type)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -262,8 +204,6 @@ public abstract class KermetaModelElementImpl extends EObjectImpl implements Ker
 				return kTag != null && !kTag.isEmpty();
 			case StructurePackage.KERMETA_MODEL_ELEMENT__KOWNED_TAGS:
 				return kOwnedTags != null && !kOwnedTags.isEmpty();
-			case StructurePackage.KERMETA_MODEL_ELEMENT__KTYPE:
-				return kType != null;
 		}
 		return super.eIsSet(featureID);
 	}
