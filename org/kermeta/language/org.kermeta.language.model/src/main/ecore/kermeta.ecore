@@ -115,7 +115,7 @@
             <details key="documentation" value="This class represents a call to the operation in a parent class. &#xD;&#xA;&#x9;In the following example, the type of super(element) is CallSuperOperation:&#xD;&#xA;&#xD;&#xA;class ParentClass {&#xD;&#xA;  operation op(element : Integer) : Integer is do&#xD;&#xA;      result := element + 1&#xD;&#xA;  end&#xD;&#xA;}&#xD;&#xA; *&#xD;&#xA;class ChildClass {&#xD;&#xA;  method op(element : Integer) : Integer is do&#xD;&#xA;      result := super(element)&#xD;&#xA;  end&#xD;&#xA;}"/>
           </eAnnotations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="superType" lowerBound="1"
-              eType="#//kermeta/language/behavior/TypeReference"/>
+              eType="#//kermeta/language/structure/Type"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="#//kermeta/language/structure/Operation"
               derived="true"/>
         </eClassifiers>

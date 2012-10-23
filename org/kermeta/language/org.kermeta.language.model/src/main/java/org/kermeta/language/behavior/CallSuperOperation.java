@@ -7,6 +7,7 @@
 package org.kermeta.language.behavior;
 
 import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.Type;
 
 
 /**
@@ -54,12 +55,12 @@ public interface CallSuperOperation extends CallOperation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference.
-	 * @see #setSuperType(TypeReference)
+	 * @see #setSuperType(Type)
 	 * @see org.kermeta.language.behavior.BehaviorPackage#getCallSuperOperation_SuperType()
 	 * @model required="true"
 	 * @generated
 	 */
-	TypeReference getSuperType();
+	Type getSuperType();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.language.behavior.CallSuperOperation#getSuperType <em>Super Type</em>}' reference.
@@ -69,7 +70,7 @@ public interface CallSuperOperation extends CallOperation {
 	 * @see #getSuperType()
 	 * @generated
 	 */
-	void setSuperType(TypeReference value);
+	void setSuperType(Type value);
 
 	/**
 	 * Returns the value of the '<em><b>Super Operation</b></em>' reference.

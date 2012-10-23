@@ -15,6 +15,7 @@ import org.kermeta.language.behavior.BehaviorPackage;
 import org.kermeta.language.behavior.CallSuperOperation;
 import org.kermeta.language.behavior.TypeReference;
 import org.kermeta.language.structure.Operation;
+import org.kermeta.language.structure.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +40,7 @@ public class CallSuperOperationImpl extends CallOperationImpl implements CallSup
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference superType;
+	protected Type superType;
 	/**
 	 * The cached value of the '{@link #getSuperOperation() <em>Super Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -75,10 +76,10 @@ public class CallSuperOperationImpl extends CallOperationImpl implements CallSup
 	 * @generated
 	 */
 	@Override
-	public TypeReference getSuperType() {
+	public Type getSuperType() {
 		if (superType != null && superType.eIsProxy()) {
 			InternalEObject oldSuperType = (InternalEObject)superType;
-			superType = (TypeReference)eResolveProxy(oldSuperType);
+			superType = (Type)eResolveProxy(oldSuperType);
 			if (superType != oldSuperType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_SUPER_OPERATION__SUPER_TYPE, oldSuperType, superType));
@@ -92,7 +93,7 @@ public class CallSuperOperationImpl extends CallOperationImpl implements CallSup
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeReference basicGetSuperType() {
+	public Type basicGetSuperType() {
 		return superType;
 	}
 
@@ -101,9 +102,8 @@ public class CallSuperOperationImpl extends CallOperationImpl implements CallSup
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setSuperType(TypeReference newSuperType) {
-		TypeReference oldSuperType = superType;
+	public void setSuperType(Type newSuperType) {
+		Type oldSuperType = superType;
 		superType = newSuperType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_SUPER_OPERATION__SUPER_TYPE, oldSuperType, superType));
@@ -176,7 +176,7 @@ public class CallSuperOperationImpl extends CallOperationImpl implements CallSup
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_SUPER_OPERATION__SUPER_TYPE:
-				setSuperType((TypeReference)newValue);
+				setSuperType((Type)newValue);
 				return;
 			case BehaviorPackage.CALL_SUPER_OPERATION__SUPER_OPERATION:
 				setSuperOperation((Operation)newValue);
@@ -194,7 +194,7 @@ public class CallSuperOperationImpl extends CallOperationImpl implements CallSup
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_SUPER_OPERATION__SUPER_TYPE:
-				setSuperType((TypeReference)null);
+				setSuperType((Type)null);
 				return;
 			case BehaviorPackage.CALL_SUPER_OPERATION__SUPER_OPERATION:
 				setSuperOperation((Operation)null);
