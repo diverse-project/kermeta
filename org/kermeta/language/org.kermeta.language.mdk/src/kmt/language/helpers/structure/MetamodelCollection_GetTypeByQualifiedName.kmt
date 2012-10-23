@@ -1,0 +1,30 @@
+/* $Id:$ 
+ * Creation : October 23, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package kmt::language::helpers::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+
+
+using org::kermeta::language::structure
+using kermeta::standard
+
+class TypeDefinitionFinder {
+	operation getTypeDefinitionByQualifiedName(qname : String, metamodels : Collection<Metamodel>) : TypeDefinition is do
+		if qname.contains("#") then
+			var mmName : String init qname.split("#").at(0)
+			var partialName : String init qname.split("#").at(1)
+			var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
+			result := metamodel.getTypeDefinitionByName(partialName)
+		else
+			result := void
+		end
+	end
+}

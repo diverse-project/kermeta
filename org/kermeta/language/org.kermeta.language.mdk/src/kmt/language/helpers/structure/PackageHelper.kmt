@@ -9,7 +9,7 @@ package org::kermeta::language::structure;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetTypeDefinitionByRelativeSetQName_TypeDefinitionContainer_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetTypeDefinitionByRelativeSetName_TypeDefinitionContainer_Aspect.kmt"
 
 using kermeta::standard
 
@@ -55,7 +55,7 @@ aspect class Package {
 			end
 		end*/
 		var set_qname : Sequence<String> init qname.split("::")
-		result := getTypeDefinitionByRelativeSetQName(set_qname)
+		result := getTypeDefinitionByRelativeSetName(set_qname)
 	end
 }
 }
