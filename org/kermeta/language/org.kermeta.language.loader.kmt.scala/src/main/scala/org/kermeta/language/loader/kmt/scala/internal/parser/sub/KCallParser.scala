@@ -4,7 +4,7 @@
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 2010
- * Authors : 
+ * Authors :
  * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
@@ -28,7 +28,7 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
   //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
 
 
-  def nCall = "." ~> ident ~ opt(opGenericParems) ~ (callFeatureParams ?) ^^ {
+  def nCall = "." ~> ident ~ opt(opGenericParams) ~ (callFeatureParams ?) ^^ {
     case id ~ genparams ~ params =>
       val newo = BehaviorFactory.eINSTANCE.createUnresolvedCall
 
@@ -54,7 +54,7 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       newo
   }
 
-  def superCall : Parser[Expression] = "super" ~ opt(opGenericParems) ~ (callFeatureParams ?) ^^ { case _ ~ genparams ~ params =>
+  def superCall : Parser[Expression] = "super" ~ opt(opGenericParams) ~ (callFeatureParams ?) ^^ { case _ ~ genparams ~ params =>
 
     val newo = BehaviorFactory.eINSTANCE.createCallSuperOperation()
 
@@ -104,7 +104,7 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
 
   def callFeatureParams = "(" ~> repsep(fStatement, ",") <~ ")" | (fLambda ^^ {case l => List(l)})
 
-  def opGenericParems = "[" ~ rep1sep(genericQualifiedTypeObject,",") ~ "]" ^^{case _ ~ params ~ _ => params }
+  def opGenericParams = "[" ~ rep1sep(genericQualifiedTypeObject,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 
 
 }
