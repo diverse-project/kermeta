@@ -8,7 +8,6 @@
 */
 package org.kermeta.kp.compiler.commandline.callable;
 
-import java.util.Collection;
 import java.util.concurrent.Callable;
 
 import org.kermeta.kp.ImportFile;
@@ -29,13 +28,11 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 	public TracedURL urlToLoad;
 	public KermetaCompiler compiler;
 	KermetaProject kp;
-	String projectName;
 	
-	public CallableModelingUnitLoader(TracedURL urlToLoad, KermetaCompiler compiler, KermetaProject kp, String projectName){
+	public CallableModelingUnitLoader(TracedURL urlToLoad, KermetaCompiler compiler, KermetaProject kp){
 		this.urlToLoad = urlToLoad;
 		this.compiler = compiler;
 		this.kp = kp;
-		this.projectName = projectName;
 	}
 	
 	@Override
@@ -72,7 +69,7 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 				// if comes from an import file, forces metamodel name to the one provided in the kp
 				if(urlToLoad.getSource() instanceof org.kermeta.kp.ImportFile){
 					org.kermeta.kp.ImportFile importFile = (ImportFile) urlToLoad.getSource();
-					String mmName =((org.kermeta.kp.Metamodel)importFile.eContainer()).getMetamodelName();
+					String mmName =((org.kermeta.kp.KermetaProject)importFile.eContainer()).getMetamodelName();
 					for(org.kermeta.language.structure.Metamodel mm : mu.getMetamodels()){
 						mm.setName(mmName);
 					}

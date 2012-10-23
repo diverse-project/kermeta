@@ -74,6 +74,7 @@ public class ModelingUnitConverter {
 			uri = mu.getMainEResource().getURI();
 			
 		} 	
+		mu.gatherInMainEResource();
 		logger.debug("\t converting using uri "+uri, KermetaCompiler.LOG_MESSAGE_GROUP);
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);
 		resultMU= this.LoadMu(stream, uri);
@@ -154,7 +155,6 @@ public class ModelingUnitConverter {
 			uri = mu.getMainEResource().getURI();
 			
 		}
-		
 		logger.debug("\t saving using uri "+uri, KermetaCompiler.LOG_MESSAGE_GROUP);
 		this.saveMu(mu, uri);
 		

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -47,6 +46,9 @@ public class CollectSourcesHelper {
 		TracedURL result = null;
 		long newerDate = 0;
 
+		logger.debug(
+				"getLastModifiedFile from " + sourcesUrls.size() + " sourcesUrls",
+				getMessageGroup());
 		for (TracedURL sourceUrl : sourcesUrls) {
 
 			try {
@@ -177,11 +179,8 @@ public class CollectSourcesHelper {
 				compiler.fileSystemConverter, logger);
 		// Note that source is relative to the kp file not the jvm current dir
 		List<ImportFile> srcs = new ArrayList<ImportFile>();
-		for (org.kermeta.kp.Metamodel kpMm : kp.getMetamodels()) {
-			srcs.addAll(kpMm.getImportedFiles());
-		}
-		logger.debug("getmetamodels.size=" + kp.getMetamodels().size()
-				+ " gives srcs.size=" + srcs.size(), getMessageGroup());
+		srcs.addAll(kp.getImportedFiles());
+		
 		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
 		for (ImportFile src : srcs) {
 			String currentUrl = null;
@@ -284,15 +283,24 @@ public class CollectSourcesHelper {
 											.StringToURL("jar:"
 													+ containerUrl
 													+ "!"
-													+ KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_JAR)));
+													+ KermetaCompiler.DEFAULT_REFLEXIVITY_LOCATION_IN_JAR + "/"
+													+ foundProject.getMetamodelName() + ".km"
+													)));
 				} else {
 					kpSources
 							.add(new TracedURL(
 									importedProjectJar,
 									FileHelpers
 											.StringToURL(containerUrl
-													+ KermetaCompiler.DEFAULT_ALL_IMPORTFILE_RESULT_LOCATION_IN_ECLIPSE)));
+													+ KermetaCompiler.DEFAULT_REFLEXIVITY_LOCATION_IN_ECLIPSE + "/"
+													+ foundProject.getMetamodelName() + ".km")));
 				}
+			}
+			else{
+				logger.logProblem(
+						MessagingSystem.Kind.UserERROR,
+						"Cannot find project.kp in " + importedProjectJar.getUrl() , getMessageGroup(),
+						KpResourceHelper.createFileReference(importedProjectJar));
 			}
 		}
 
@@ -303,7 +311,7 @@ public class CollectSourcesHelper {
 			String kpFileURL, KpVariableExpander varExpander,
 			HashMap<URL, ModelingUnit> dirtyMU) throws IOException {
 		ArrayList<TracedURL> kpSources = getSources4Merge(kp, kpFileURL);
-		return getSourceModelingUnits(kp, kpSources, kp.getEclipseName(),
+		return getSourceModelingUnits(kp, kpSources, 
 				dirtyMU);
 	}
 
@@ -324,7 +332,7 @@ public class CollectSourcesHelper {
 	 * @return
 	 */
 	public List<ModelingUnit> getSourceModelingUnits(KermetaProject kp,
-			ArrayList<TracedURL> kpSources, String projectName,
+			ArrayList<TracedURL> kpSources, 
 			HashMap<URL, ModelingUnit> dirtyMU) {
 		List<ModelingUnit> modelingUnits = new ArrayList<ModelingUnit>();
 
@@ -355,8 +363,7 @@ public class CollectSourcesHelper {
 		ArrayList<Future<ModelingUnit>> umlprofileFutures = new ArrayList<Future<ModelingUnit>>();
 		for (TracedURL umlprofileURL : umlProfilesURLs) {
 			umlprofileFutures.add(compiler.getSingleThreadExector().submit(
-					new CallableModelingUnitLoader(umlprofileURL, compiler, kp,
-							projectName)));
+					new CallableModelingUnitLoader(umlprofileURL, compiler, kp)));
 		}
 		// join
 		for (Future<ModelingUnit> future : umlprofileFutures) {
@@ -383,8 +390,7 @@ public class CollectSourcesHelper {
 			// TODO EMF isn't thread safe, cannot even run the same transfo in
 			// parallel ! => singleThreadExecutor
 			ecoreFutures.add(compiler.getSingleThreadExector().submit(
-					new CallableModelingUnitLoader(ecoreURL, compiler, kp,
-							projectName)));
+					new CallableModelingUnitLoader(ecoreURL, compiler, kp)));
 		}
 		// join
 		for (Future<ModelingUnit> future : ecoreFutures) {
@@ -421,8 +427,7 @@ public class CollectSourcesHelper {
 		ArrayList<Future<ModelingUnit>> normalLoadFutures = new ArrayList<Future<ModelingUnit>>();
 		for (TracedURL normalLoadURL : normalLoadURLs) {
 			normalLoadFutures.add(compiler.getThreadExector().submit(
-					new CallableModelingUnitLoader(normalLoadURL, compiler, kp,
-							projectName)));
+					new CallableModelingUnitLoader(normalLoadURL, compiler, kp)));
 		}
 		// join
 		for (Future<ModelingUnit> future : normalLoadFutures) {

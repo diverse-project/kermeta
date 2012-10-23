@@ -79,8 +79,8 @@ public class Ecore2Bytecode {
 		}
 		if(!runInEclipse){
 			logger.debug("runInEclipse = false", KermetaCompiler.LOG_MESSAGE_GROUP);
-			logger.debug("EcorePlugin.getPlatformResourceMap().put(\""+kp.getEclipseName()+"\", URI.createURI(\"file:///"+rootFolder.replaceAll("\\\\", "/")+"\"));", KermetaCompiler.LOG_MESSAGE_GROUP);
-			EcorePlugin.getPlatformResourceMap().put(kp.getEclipseName(), URI.createURI("file:///"+rootFolder.replaceAll("\\\\", "/")));
+			logger.debug("EcorePlugin.getPlatformResourceMap().put(\""+getEclipseName(kp)+"\", URI.createURI(\"file:///"+rootFolder.replaceAll("\\\\", "/")+"\"));", KermetaCompiler.LOG_MESSAGE_GROUP);
+			EcorePlugin.getPlatformResourceMap().put(getEclipseName(kp), URI.createURI("file:///"+rootFolder.replaceAll("\\\\", "/")));
 			
 			logger.debug("org.eclipse.core.runtime.Platform.isRunning() = "+org.eclipse.core.runtime.Platform.isRunning(), KermetaCompiler.LOG_MESSAGE_GROUP);
 		}
@@ -112,9 +112,9 @@ public class Ecore2Bytecode {
 				logger.error(e.getMessage(), KermetaCompiler.LOG_MESSAGE_GROUP, e);
 			}
 		}
-		File genmodelFile = new File(targetGenmodelFolder+File.separator+kp.getEclipseName()+"internalEcores.genmodel");
+		File genmodelFile = new File(targetGenmodelFolder+File.separator+kp.getMetamodelName()+"internalEcores.genmodel");
 		File generatedSourcePath = new File(targetGeneratedJavaFolder);
-		return threadExector.submit(new CallableGenmodelGenerator(logger, inputEcoreFiles, genmodelFile, generatedSourcePath, kp.getEclipseName()));
+		return threadExector.submit(new CallableGenmodelGenerator(logger, inputEcoreFiles, genmodelFile, generatedSourcePath,getEclipseName(kp)));
 				
 	}
 	public Future<Boolean> ecorejava2bytecode(Future<Boolean> genmodelFuture, ExecutorService threadExector){
@@ -230,6 +230,18 @@ public class Ecore2Bytecode {
 				}
 			}
 		}
+	}
+	
+	public String getEclipseName(KermetaProject kp){
+		// the kp file is supposed to be directly contained by the eclipse folder
+		if(kp.eResource() != null){
+			List<String> sList = kp.eResource().getURI().segmentsList();
+			if(sList.size() >= 2){
+				return sList.get(sList.size()-2);
+			}	
+		}
+		// else fallback 
+		return "";
 	}
 	
 	public String getMainProgressGroup(){

@@ -10,14 +10,10 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -61,7 +57,6 @@ import org.kermeta.language.resolver.KmResolverImpl4Eclipse;
 import org.kermeta.language.resolver.api.KmResolver;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.util.ModelingUnit;
-import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.aether.LocalFileConverterForAether;
 import org.kermeta.utils.helpers.CompositeLocalFileConverter;
 import org.kermeta.utils.helpers.FileHelpers;
@@ -80,7 +75,8 @@ public class KermetaCompiler {
 	public final static String LOG_MESSAGE_GROUP = "org.kermeta.kp.compiler.commandline";
 	
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
-	public static String DEFAULT_REFLEXIVITY_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
+	public static String DEFAULT_REFLEXIVITY_LOCATION_IN_JAR = "/META-INF/kermeta";
+	public static String DEFAULT_REFLEXIVITY_LOCATION_IN_ECLIPSE = "/target";
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
 	public static String DEFAULT_KP_LOCATION_IN_FOLDER = "/project.kp";
 	public static String DEFAULT_BINARY_LOCATION_IN_ECLIPSE = "/target/scalaclasses";
@@ -332,7 +328,7 @@ public class KermetaCompiler {
 		try {
 			lock.lock();
 			this.hasFailed = false;
-			String projectName = "project";
+			//String projectName = "project";
 			logger.initProgress(getMainProgressGroup()+".kp2bytecode", "Building library from " + kpFileURL, LOG_MESSAGE_GROUP, 2);
 			KpLoaderImpl ldr = new KpLoaderImpl(logger);
 			// Load KP file
@@ -345,9 +341,9 @@ public class KermetaCompiler {
 			}
 	
 			if (!checkKP(kp, kpFileURL) ) return null;			
-			if (!kp.getEclipseName().isEmpty()) {
+			/*if (!kp.getEclipseName().isEmpty()) {
 				projectName = kp.getEclipseName();
-			}
+			}*/
 			
 			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
@@ -359,7 +355,7 @@ public class KermetaCompiler {
 				this.hasFailed = true;
 				return null;
 			}
-			List<ModelingUnit> sourceModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpSources, kp.getEclipseName(), dirtyMU);				
+			List<ModelingUnit> sourceModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpSources, dirtyMU);				
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Merging " + sourceModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 			ErrorProneResult<ModelingUnit> mergedUnit = mergeModelingUnits(kp, sourceModelingUnits);
 	
@@ -382,7 +378,7 @@ public class KermetaCompiler {
 			
 			// save resolvedUnit to the META-INF/kermeta/merged.km
 			URI uri = URI.createURI(( resultingUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
+			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ kp.getMetamodelName() + ".km");
 			if (!mergedFile.getParentFile().exists()) {
 				mergedFile.getParentFile().mkdirs();
 			}
@@ -418,7 +414,7 @@ public class KermetaCompiler {
 			if(this.checkingEnabled){
 				flushProblems(FileHelpers.StringToURL(kpFileURL));
 			}
-			String projectName = "project";
+			//String projectName = "project";
 
 			int workUnit = phaseRank(stopAfterPhase);
 			
@@ -439,9 +435,9 @@ public class KermetaCompiler {
 	
 			if (!checkKP(kp, kpFileURL) ) return null;
 			
-			if (!kp.getEclipseName().isEmpty()) {
+			/*if (!kp.getEclipseName().isEmpty()) {
 				projectName = kp.getEclipseName();
-			}
+			}*/
 
 			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
@@ -494,7 +490,7 @@ public class KermetaCompiler {
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveLoading "+kpPreResolveSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
 				
 				if (kpPreResolveSources.size() != 0) {
-					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, kp.getEclipseName(), dirtyMU);				
+					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, dirtyMU);				
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveMerging " + preresolveModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 					ErrorProneResult<ModelingUnit> preresolvedMergedUnit = mergeModelingUnits(kp, preresolveModelingUnits);
 			
@@ -548,7 +544,7 @@ public class KermetaCompiler {
 			flushProblems(remainingSources);
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Loading "+remainingSources.size()+" remaining sources...", LOG_MESSAGE_GROUP, 1);
 			
-			List<ModelingUnit> modelingUnits = collectSourceHelper.getSourceModelingUnits(kp, remainingSources, kp.getEclipseName(), dirtyMU);
+			List<ModelingUnit> modelingUnits = collectSourceHelper.getSourceModelingUnits(kp, remainingSources,  dirtyMU);
 	
 			if (modelingUnits.size() == 0 && preResolvedUnit == null) {
 				this.errorMessage = "Kermeta project invalid.  There is no modeling unit to compile.";
@@ -669,7 +665,7 @@ public class KermetaCompiler {
 				
 			// save resolvedUnit to the META-INF/kermeta/merged.km
 			URI uri = URI.createURI((resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ projectName + ".km");
+			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ kp.getMetamodelName() + ".km");
 			if (!mergedFile.getParentFile().exists()) {
 				mergedFile.getParentFile().mkdirs();
 			}
@@ -948,7 +944,7 @@ public class KermetaCompiler {
 			for (int i = 1; i < convertedModellingUnits.size(); i++) {
 				logger.debug("merging "+mergedMU.getResult().getName()+" + "+convertedModellingUnits.get(i).getName(), LOG_MESSAGE_GROUP);
 				mergedMU = theMerger.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
-				mergedMU.getResult().setName(kp.getEclipseName());
+				mergedMU.getResult().setName(kp.getMetamodelName());
 				// Save previous problems
 				for (ResultProblemMessage prob : mergedMU.getProblems()) {
 					problems.add(prob);
@@ -1086,14 +1082,14 @@ public class KermetaCompiler {
 		//*************
 		GlobalConfiguration.outputBinFolder_$eq(targetScalaBinaryFolder);
 		//*************
-		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getEclipseName());
+		GlobalConfiguration.frameworkGeneratedPackageName_$eq("ScalaImplicit." + kp.getMetamodelName());
 		GlobalConfiguration.props_$eq(new Properties());
 		GlobalConfiguration.props().setProperty("use.default.aspect.uml", "false");
 		GlobalConfiguration.props().setProperty("use.default.aspect.ecore", "false");
 		GlobalConfiguration.props().setProperty("use.default.aspect.km", "false");
 		// GroupId and ArtifactId are used to prefix the generated code
 		//GlobalConfiguration.props().setProperty("project.group.id", kp.getGroup());
-		GlobalConfiguration.props().setProperty("project.artefact.id", kp.getEclipseName());
+		GlobalConfiguration.props().setProperty("project.artefact.id", kp.getMetamodelName());
 		
 		GlobalConfiguration.props().setProperty("user.additional.classpath",userAdditionalClassPath);
 
@@ -1106,7 +1102,7 @@ public class KermetaCompiler {
 		}
 
 		// GlobalConfiguration.load(GlobalConfiguration.props());
-		GlobalConfiguration.setScalaAspectPrefix(kp.getEclipseName());
+		GlobalConfiguration.setScalaAspectPrefix(kp.getMetamodelName());
 	}
 
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
@@ -1219,27 +1215,27 @@ public class KermetaCompiler {
 	
 	public boolean  checkKP(KermetaProject kp, String kpFileURL) throws MalformedURLException{
 		//KpResourceHelper.createFileReference(kp.getName())
-		if (kp.getEclipseName() == null) {
+		if (kp.getMetamodelName() == null) {
 			this.errorMessage = "Invalid kp file. Missing project name";
 			this.hasFailed = true;
 		}
-		if (kp.getEclipseName().isEmpty()) {
+		if (kp.getMetamodelName().isEmpty()) {
 			this.errorMessage = "Invalid kp file. Missing project name";
 			this.hasFailed = true;
 		}
 
-		if (kp.getEclipseName().contains("-")) {
+		if (kp.getMetamodelName().contains("-")) {
 			this.errorMessage = "Forbidden character '-' in project name";
 			this.hasFailed = true;
 		}
 		
-		if (kp.getEclipseName().contains(" ")) {
+		if (kp.getMetamodelName().contains(" ")) {
 			this.errorMessage = "Forbidden character ' ' in project name";
 			this.hasFailed = true;
 		}
 		
 		
-		String firstChar = kp.getEclipseName().substring(0, 1);
+		String firstChar = kp.getMetamodelName().substring(0, 1);
 		if ("0123456789".contains(firstChar)) {
 			this.errorMessage = "cannot use an integer as first character of the project name";
 			this.hasFailed = true;
