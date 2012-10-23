@@ -4,7 +4,7 @@
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 2010
- * Authors : 
+ * Authors :
  * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
@@ -13,7 +13,6 @@ package org.kermeta.language.loader.kmt.scala.internal.parser
 import org.kermeta.language.behavior.Expression
 import org.kermeta.language.util.ModelingUnit
 import java.util.HashMap
-import org.kermeta.KmPackage
 import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -30,7 +29,7 @@ object LoadSaveKM {
   def loadKmModel(uri:String): TreeIterator[EObject] ={
     var rs:ResourceSetImpl  = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
-    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
+  //  rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     return  rs.getResource(URI.createURI(uri),true).getAllContents();
 
   }
@@ -38,15 +37,15 @@ object LoadSaveKM {
   def saveKmModel( uri: String, r:Resource ) = {
     var rs :ResourceSetImpl = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
-    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
+ //   rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     var uri1:URI   = URI.createURI(uri);//.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
     r.setURI(uri1);
-    r.save(new HashMap());	
+    r.save(new HashMap());
   }
   def saveKmExpression( uri: String, r:Expression ) = {
     var rs :ResourceSetImpl = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
-    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
+ //   rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     var uri1:URI   = URI.createURI(uri)
     var res : Resource = rs.createResource(uri1)
     //r.getTag.foreach{tag=>res.getContents.add(tag)}
@@ -59,7 +58,7 @@ object LoadSaveKM {
   def saveKmModelingUnit( uri: String, r:ModelingUnit ) = {
     var rs :ResourceSetImpl = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
-    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
+//    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     var uri1:URI   = URI.createURI(uri)
     var res : Resource = rs.createResource(uri1)
     //r.getTag.foreach{tag=>res.getContents.add(tag)}
@@ -67,7 +66,7 @@ object LoadSaveKM {
     //recursiveAddToResource(r,res)
 
     res.save(new HashMap());
-  
+
   }
 /*
   def recursiveAddToResource(elem : EObject, res : Resource) : Any = {

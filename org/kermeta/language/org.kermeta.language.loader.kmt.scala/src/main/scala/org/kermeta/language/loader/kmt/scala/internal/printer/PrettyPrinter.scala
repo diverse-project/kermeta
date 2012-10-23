@@ -1,6 +1,5 @@
 package org.kermeta.language.loader.kmt.scala.internal.printer
 
-import org.kermeta.KmPackage
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
@@ -25,7 +24,7 @@ object PrettyPrinter {
     var f = rs.getResourceFactoryRegistry()
     var m = f.getExtensionToFactoryMap()
     m.put("km", new XMIResourceFactoryImpl())
-    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
+//    rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     var uri = URI.createFileURI(fileName)
     var resource = rs.getResource(uri, true)
     var mu: ModelingUnit = null;
@@ -794,6 +793,6 @@ object PrettyPrinter {
   }
   case class CollectionModifier(isOrdered: Boolean, isUnique: Boolean)
 }
- 
+
 
 
