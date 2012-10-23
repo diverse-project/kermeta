@@ -36,7 +36,6 @@ public class KpBracketInformationProvider {
 	
 	public java.util.Collection<org.kermeta.kp.editor.IKpBracketPair> getBracketPairs() {
 		java.util.Collection<org.kermeta.kp.editor.IKpBracketPair> result = new java.util.ArrayList<org.kermeta.kp.editor.IKpBracketPair>();
-		result.add(new BracketPair("{", "}", true));
 		result.add(new BracketPair("\"", "\"", false));
 		return result;
 	}

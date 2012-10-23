@@ -12,7 +12,6 @@ public class KpSyntaxCoverageInformationProvider {
 		return new org.eclipse.emf.ecore.EClass[] {
 			org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getPackageEquivalence(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getMetamodel(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportFile(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectJar(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectSources(),

@@ -14,7 +14,6 @@ import java.util.List;
 import org.kermeta.kp.ImportProjectJar;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
-import org.kermeta.kp.Metamodel;
 import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.utils.helpers.eclipse.LocalFileConverterForEclipse;
 import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;

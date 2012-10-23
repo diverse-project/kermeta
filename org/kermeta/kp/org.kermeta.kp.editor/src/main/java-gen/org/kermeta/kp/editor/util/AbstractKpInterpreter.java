@@ -82,12 +82,6 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.kermeta.kp.Metamodel) {
-			result = interprete_org_kermeta_kp_Metamodel((org.kermeta.kp.Metamodel) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		if (object instanceof org.kermeta.kp.PackageEquivalence) {
 			result = interprete_org_kermeta_kp_PackageEquivalence((org.kermeta.kp.PackageEquivalence) object, context);
 		}
@@ -118,10 +112,6 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_org_kermeta_kp_PackageEquivalence(org.kermeta.kp.PackageEquivalence object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_Metamodel(org.kermeta.kp.Metamodel object, ContextType context) {
 		return null;
 	}
 	
