@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 import org.kermeta.kp.ImportBytecodeJar;
 import org.kermeta.kp.ImportProjectJar;
 import org.kermeta.kp.KermetaProject;
+import org.kermeta.kp.compiler.commandline.Ecore2Bytecode;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
 import org.kermeta.kp.compiler.commandline.KermetaRunner;
 import org.kermeta.kp.compiler.commandline.ModelingUnitLoaderFactory;
@@ -113,7 +114,7 @@ public class KRunTest extends TestCase {
 		
 		ErrorAwareMessagingSystem errorAwareLogger = new ErrorAwareMessagingSystem();
 		KermetaRunner runner = new KermetaRunner(targetFolder+"classes/", 
-				kp.getEclipseName(),
+				Ecore2Bytecode.getEclipseName(kp),
 				fullClassPath,
 				errorAwareLogger);
 		ArrayList<String> params = new ArrayList<String>();
@@ -129,7 +130,7 @@ public class KRunTest extends TestCase {
 	
 	public void createURIMapFile(KermetaProject kp,KpVariableExpander varExpander, KermetaCompiler compiler) throws IOException{
 		Properties props = new Properties();
-		String key = "platform:/resource/"+kp.getEclipseName();
+		String key = "platform:/resource/"+Ecore2Bytecode.getEclipseName(kp);
 		String value = "file:/"+targetFolder;
 		props.put(key, value);
 		
@@ -138,8 +139,8 @@ public class KRunTest extends TestCase {
 			KermetaProject foundProject = KpResourceHelper.findKermetaProject(expandedVar.endsWith(".jar")? "jar:"+expandedVar+"!"+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR : expandedVar+KermetaCompiler.DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject!=null){
-				props.put("platform:/resource/"+foundProject.getEclipseName()+"/",expandedVar);
-				props.put("platform:/plugin/"+foundProject.getEclipseName()+"/",expandedVar);
+				props.put("platform:/resource/"+Ecore2Bytecode.getEclipseName(foundProject)+"/",expandedVar);
+				props.put("platform:/plugin/"+Ecore2Bytecode.getEclipseName(foundProject)+"/",expandedVar);
 			}
 		}
 		for(ImportProjectJar dep : kp.getImportedProjectJars()){
@@ -147,8 +148,8 @@ public class KRunTest extends TestCase {
 			KermetaProject foundProject = KpResourceHelper.findKermetaProject(expandedVar.endsWith(".jar")? "jar:"+expandedVar+"!"+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR : expandedVar+KermetaCompiler.DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject!=null){
-				props.put("platform:/resource/"+foundProject.getEclipseName()+"/",expandedVar);
-				props.put("platform:/plugin/"+foundProject.getEclipseName()+"/",expandedVar);
+				props.put("platform:/resource/"+Ecore2Bytecode.getEclipseName(foundProject)+"/",expandedVar);
+				props.put("platform:/plugin/"+Ecore2Bytecode.getEclipseName(foundProject)+"/",expandedVar);
 			}
 		}
 		

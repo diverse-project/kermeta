@@ -232,7 +232,7 @@ public class Ecore2Bytecode {
 		}
 	}
 	
-	public String getEclipseName(KermetaProject kp){
+	public static String getEclipseName(KermetaProject kp){
 		// the kp file is supposed to be directly contained by the eclipse folder
 		if(kp.eResource() != null){
 			List<String> sList = kp.eResource().getURI().segmentsList();
