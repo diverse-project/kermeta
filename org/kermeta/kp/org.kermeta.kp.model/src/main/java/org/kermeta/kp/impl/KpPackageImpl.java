@@ -18,7 +18,6 @@ import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpFactory;
 import org.kermeta.kp.KpPackage;
-import org.kermeta.kp.Metamodel;
 import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.ReusableResource;
 
@@ -44,13 +43,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	private EClass packageEquivalenceEClass = null;
 
 	/**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass metamodelEClass = null;
-
-  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -160,7 +152,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EAttribute getKermetaProject_EclipseName() {
+	public EAttribute getKermetaProject_MetamodelName() {
     return (EAttribute)kermetaProjectEClass.getEStructuralFeatures().get(0);
   }
 
@@ -195,21 +187,11 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
 		/**
    * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getKermetaProject_Metamodels()
-  {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(4);
-  }
-
-    /**
-   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
 	public EReference getKermetaProject_ReusableResources() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(5);
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(4);
   }
 
 				/**
@@ -218,7 +200,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
    * @generated
    */
 	public EReference getKermetaProject_ImportedProjectJars() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(6);
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(5);
   }
 
 		/**
@@ -227,7 +209,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
    * @generated
    */
 	public EReference getKermetaProject_ImportedBytecodeJars() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(7);
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(6);
   }
 
 		/**
@@ -236,6 +218,15 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
    * @generated
    */
 	public EReference getKermetaProject_ImportedProjectSources() {
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(7);
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EReference getKermetaProject_ImportedFiles() {
     return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(8);
   }
 
@@ -264,34 +255,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
    */
 	public EAttribute getPackageEquivalence_JavaPackage() {
     return (EAttribute)packageEquivalenceEClass.getEStructuralFeatures().get(1);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getMetamodel()
-  {
-    return metamodelEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EReference getMetamodel_ImportedFiles() {
-    return (EReference)metamodelEClass.getEStructuralFeatures().get(1);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getMetamodel_MetamodelName() {
-    return (EAttribute)metamodelEClass.getEStructuralFeatures().get(2);
   }
 
 	/**
@@ -389,15 +352,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getMetamodel_Extends() {
-    return (EReference)metamodelEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
 	public EClass getImportFile() {
     return importFileEClass;
   }
@@ -458,15 +412,15 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
     // Create classes and their features
     kermetaProjectEClass = createEClass(KERMETA_PROJECT);
-    createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__ECLIPSE_NAME);
+    createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__METAMODEL_NAME);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_CLASS);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_OPERATION);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__JAVA_BASE_PACKAGE);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__METAMODELS);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__REUSABLE_RESOURCES);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECT_JARS);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_BYTECODE_JARS);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES);
+    createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_FILES);
 
     importFileEClass = createEClass(IMPORT_FILE);
     createEAttribute(importFileEClass, IMPORT_FILE__URL);
@@ -476,11 +430,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     packageEquivalenceEClass = createEClass(PACKAGE_EQUIVALENCE);
     createEAttribute(packageEquivalenceEClass, PACKAGE_EQUIVALENCE__ECORE_PACKAGE);
     createEAttribute(packageEquivalenceEClass, PACKAGE_EQUIVALENCE__JAVA_PACKAGE);
-
-    metamodelEClass = createEClass(METAMODEL);
-    createEReference(metamodelEClass, METAMODEL__EXTENDS);
-    createEReference(metamodelEClass, METAMODEL__IMPORTED_FILES);
-    createEAttribute(metamodelEClass, METAMODEL__METAMODEL_NAME);
 
     reusableResourceEClass = createEClass(REUSABLE_RESOURCE);
     createEAttribute(reusableResourceEClass, REUSABLE_RESOURCE__URL);
@@ -528,15 +477,15 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
     // Initialize classes and features; add operations and parameters
     initEClass(kermetaProjectEClass, KermetaProject.class, "KermetaProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getKermetaProject_EclipseName(), ecorePackage.getEString(), "eclipseName", null, 1, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getKermetaProject_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_DefaultMainClass(), ecorePackage.getEString(), "defaultMainClass", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_DefaultMainOperation(), ecorePackage.getEString(), "defaultMainOperation", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_JavaBasePackage(), ecorePackage.getEString(), "javaBasePackage", "default", 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_Metamodels(), this.getMetamodel(), null, "metamodels", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ReusableResources(), this.getReusableResource(), null, "reusableResources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedProjectJars(), this.getImportProjectJar(), null, "importedProjectJars", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedBytecodeJars(), this.getImportBytecodeJar(), null, "importedBytecodeJars", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedProjectSources(), this.getImportProjectSources(), null, "importedProjectSources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getKermetaProject_ImportedFiles(), this.getImportFile(), null, "importedFiles", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importFileEClass, ImportFile.class, "ImportFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImportFile_Url(), ecorePackage.getEString(), "url", null, 1, 1, ImportFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -546,11 +495,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEClass(packageEquivalenceEClass, PackageEquivalence.class, "PackageEquivalence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPackageEquivalence_EcorePackage(), ecorePackage.getEString(), "ecorePackage", null, 1, 1, PackageEquivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPackageEquivalence_JavaPackage(), ecorePackage.getEString(), "javaPackage", null, 1, 1, PackageEquivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(metamodelEClass, Metamodel.class, "Metamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMetamodel_Extends(), this.getMetamodel(), null, "extends", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMetamodel_ImportedFiles(), this.getImportFile(), null, "importedFiles", null, 0, -1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMetamodel_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(reusableResourceEClass, ReusableResource.class, "ReusableResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getReusableResource_Url(), ecorePackage.getEString(), "url", null, 1, 1, ReusableResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

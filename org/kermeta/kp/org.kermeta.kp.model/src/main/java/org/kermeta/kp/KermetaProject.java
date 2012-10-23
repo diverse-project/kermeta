@@ -17,15 +17,15 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.kp.KermetaProject#getEclipseName <em>Eclipse Name</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getMetamodelName <em>Metamodel Name</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getJavaBasePackage <em>Java Base Package</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getMetamodels <em>Metamodels</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getReusableResources <em>Reusable Resources</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectJars <em>Imported Project Jars</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectSources <em>Imported Project Sources</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getImportedFiles <em>Imported Files</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,30 +35,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KermetaProject extends EObject {
 	/**
-   * Returns the value of the '<em><b>Eclipse Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Metamodel Name</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Eclipse Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Metamodel Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Eclipse Name</em>' attribute.
-   * @see #setEclipseName(String)
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_EclipseName()
+   * @return the value of the '<em>Metamodel Name</em>' attribute.
+   * @see #setMetamodelName(String)
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_MetamodelName()
    * @model required="true"
    * @generated
    */
-	String getEclipseName();
+	String getMetamodelName();
 
 	/**
-   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getEclipseName <em>Eclipse Name</em>}' attribute.
+   * Sets the value of the '{@link org.kermeta.kp.KermetaProject#getMetamodelName <em>Metamodel Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Eclipse Name</em>' attribute.
-   * @see #getEclipseName()
+   * @param value the new value of the '<em>Metamodel Name</em>' attribute.
+   * @see #getMetamodelName()
    * @generated
    */
-	void setEclipseName(String value);
+	void setMetamodelName(String value);
 
 	/**
    * Returns the value of the '<em><b>Default Main Class</b></em>' attribute.
@@ -140,22 +140,6 @@ public interface KermetaProject extends EObject {
 	void setJavaBasePackage(String value);
 
 		/**
-   * Returns the value of the '<em><b>Metamodels</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.Metamodel}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Metamodels</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Metamodels</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_Metamodels()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Metamodel> getMetamodels();
-
-    /**
    * Returns the value of the '<em><b>Reusable Resources</b></em>' containment reference list.
    * The list contents are of type {@link org.kermeta.kp.ReusableResource}.
    * <!-- begin-user-doc -->
@@ -218,5 +202,21 @@ public interface KermetaProject extends EObject {
    * @generated
    */
 	EList<ImportProjectSources> getImportedProjectSources();
+
+				/**
+   * Returns the value of the '<em><b>Imported Files</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.ImportFile}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Files</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Imported Files</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedFiles()
+   * @model containment="true"
+   * @generated
+   */
+	EList<ImportFile> getImportedFiles();
 
 } // KermetaProject

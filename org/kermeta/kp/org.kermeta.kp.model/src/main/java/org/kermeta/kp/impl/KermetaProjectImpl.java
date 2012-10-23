@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.kermeta.kp.ImportBytecodeJar;
+import org.kermeta.kp.ImportFile;
 import org.kermeta.kp.ImportProjectJar;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpPackage;
-import org.kermeta.kp.Metamodel;
 import org.kermeta.kp.ReusableResource;
 
 /**
@@ -32,15 +32,15 @@ import org.kermeta.kp.ReusableResource;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getEclipseName <em>Eclipse Name</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getMetamodelName <em>Metamodel Name</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainClass <em>Default Main Class</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getJavaBasePackage <em>Java Base Package</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getMetamodels <em>Metamodels</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getReusableResources <em>Reusable Resources</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectJars <em>Imported Project Jars</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectSources <em>Imported Project Sources</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedFiles <em>Imported Files</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,24 +48,24 @@ import org.kermeta.kp.ReusableResource;
  */
 public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	/**
-   * The default value of the '{@link #getEclipseName() <em>Eclipse Name</em>}' attribute.
+   * The default value of the '{@link #getMetamodelName() <em>Metamodel Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getEclipseName()
+   * @see #getMetamodelName()
    * @generated
    * @ordered
    */
-	protected static final String ECLIPSE_NAME_EDEFAULT = null;
+	protected static final String METAMODEL_NAME_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getEclipseName() <em>Eclipse Name</em>}' attribute.
+   * The cached value of the '{@link #getMetamodelName() <em>Metamodel Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getEclipseName()
+   * @see #getMetamodelName()
    * @generated
    * @ordered
    */
-	protected String eclipseName = ECLIPSE_NAME_EDEFAULT;
+	protected String metamodelName = METAMODEL_NAME_EDEFAULT;
 
 	/**
    * The default value of the '{@link #getDefaultMainClass() <em>Default Main Class</em>}' attribute.
@@ -128,16 +128,6 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	protected String javaBasePackage = JAVA_BASE_PACKAGE_EDEFAULT;
 
 		/**
-   * The cached value of the '{@link #getMetamodels() <em>Metamodels</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMetamodels()
-   * @generated
-   * @ordered
-   */
-  protected EList<Metamodel> metamodels;
-
-    /**
    * The cached value of the '{@link #getReusableResources() <em>Reusable Resources</em>}' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,6 +168,16 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	protected EList<ImportProjectSources> importedProjectSources;
 
 		/**
+   * The cached value of the '{@link #getImportedFiles() <em>Imported Files</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getImportedFiles()
+   * @generated
+   * @ordered
+   */
+	protected EList<ImportFile> importedFiles;
+
+		/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -201,8 +201,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public String getEclipseName() {
-    return eclipseName;
+	public String getMetamodelName() {
+    return metamodelName;
   }
 
 	/**
@@ -210,11 +210,11 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setEclipseName(String newEclipseName) {
-    String oldEclipseName = eclipseName;
-    eclipseName = newEclipseName;
+	public void setMetamodelName(String newMetamodelName) {
+    String oldMetamodelName = metamodelName;
+    metamodelName = newMetamodelName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__ECLIPSE_NAME, oldEclipseName, eclipseName));
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.KERMETA_PROJECT__METAMODEL_NAME, oldMetamodelName, metamodelName));
   }
 
 	/**
@@ -286,20 +286,6 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 
 		/**
    * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Metamodel> getMetamodels()
-  {
-    if (metamodels == null)
-    {
-      metamodels = new EObjectContainmentEList<Metamodel>(Metamodel.class, this, KpPackage.KERMETA_PROJECT__METAMODELS);
-    }
-    return metamodels;
-  }
-
-    /**
-   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -355,12 +341,23 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EList<ImportFile> getImportedFiles() {
+    if (importedFiles == null)
+    {
+      importedFiles = new EObjectContainmentEList<ImportFile>(ImportFile.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_FILES);
+    }
+    return importedFiles;
+  }
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__METAMODELS:
-        return ((InternalEList<?>)getMetamodels()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         return ((InternalEList<?>)getReusableResources()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
@@ -369,6 +366,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return ((InternalEList<?>)getImportedBytecodeJars()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         return ((InternalEList<?>)getImportedProjectSources()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
+        return ((InternalEList<?>)getImportedFiles()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -382,16 +381,14 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
-        return getEclipseName();
+      case KpPackage.KERMETA_PROJECT__METAMODEL_NAME:
+        return getMetamodelName();
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         return getDefaultMainClass();
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         return getDefaultMainOperation();
       case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
         return getJavaBasePackage();
-      case KpPackage.KERMETA_PROJECT__METAMODELS:
-        return getMetamodels();
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         return getReusableResources();
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
@@ -400,6 +397,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return getImportedBytecodeJars();
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         return getImportedProjectSources();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
+        return getImportedFiles();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -414,8 +413,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
-        setEclipseName((String)newValue);
+      case KpPackage.KERMETA_PROJECT__METAMODEL_NAME:
+        setMetamodelName((String)newValue);
         return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         setDefaultMainClass((String)newValue);
@@ -425,10 +424,6 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return;
       case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
         setJavaBasePackage((String)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT__METAMODELS:
-        getMetamodels().clear();
-        getMetamodels().addAll((Collection<? extends Metamodel>)newValue);
         return;
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         getReusableResources().clear();
@@ -446,6 +441,10 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         getImportedProjectSources().clear();
         getImportedProjectSources().addAll((Collection<? extends ImportProjectSources>)newValue);
         return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
+        getImportedFiles().clear();
+        getImportedFiles().addAll((Collection<? extends ImportFile>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -459,8 +458,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	public void eUnset(int featureID) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
-        setEclipseName(ECLIPSE_NAME_EDEFAULT);
+      case KpPackage.KERMETA_PROJECT__METAMODEL_NAME:
+        setMetamodelName(METAMODEL_NAME_EDEFAULT);
         return;
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         setDefaultMainClass(DEFAULT_MAIN_CLASS_EDEFAULT);
@@ -470,9 +469,6 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return;
       case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
         setJavaBasePackage(JAVA_BASE_PACKAGE_EDEFAULT);
-        return;
-      case KpPackage.KERMETA_PROJECT__METAMODELS:
-        getMetamodels().clear();
         return;
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         getReusableResources().clear();
@@ -485,6 +481,9 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return;
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         getImportedProjectSources().clear();
+        return;
+      case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
+        getImportedFiles().clear();
         return;
     }
     super.eUnset(featureID);
@@ -499,16 +498,14 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	public boolean eIsSet(int featureID) {
     switch (featureID)
     {
-      case KpPackage.KERMETA_PROJECT__ECLIPSE_NAME:
-        return ECLIPSE_NAME_EDEFAULT == null ? eclipseName != null : !ECLIPSE_NAME_EDEFAULT.equals(eclipseName);
+      case KpPackage.KERMETA_PROJECT__METAMODEL_NAME:
+        return METAMODEL_NAME_EDEFAULT == null ? metamodelName != null : !METAMODEL_NAME_EDEFAULT.equals(metamodelName);
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_CLASS:
         return DEFAULT_MAIN_CLASS_EDEFAULT == null ? defaultMainClass != null : !DEFAULT_MAIN_CLASS_EDEFAULT.equals(defaultMainClass);
       case KpPackage.KERMETA_PROJECT__DEFAULT_MAIN_OPERATION:
         return DEFAULT_MAIN_OPERATION_EDEFAULT == null ? defaultMainOperation != null : !DEFAULT_MAIN_OPERATION_EDEFAULT.equals(defaultMainOperation);
       case KpPackage.KERMETA_PROJECT__JAVA_BASE_PACKAGE:
         return JAVA_BASE_PACKAGE_EDEFAULT == null ? javaBasePackage != null : !JAVA_BASE_PACKAGE_EDEFAULT.equals(javaBasePackage);
-      case KpPackage.KERMETA_PROJECT__METAMODELS:
-        return metamodels != null && !metamodels.isEmpty();
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         return reusableResources != null && !reusableResources.isEmpty();
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
@@ -517,6 +514,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return importedBytecodeJars != null && !importedBytecodeJars.isEmpty();
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         return importedProjectSources != null && !importedProjectSources.isEmpty();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
+        return importedFiles != null && !importedFiles.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -531,8 +530,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (eclipseName: ");
-    result.append(eclipseName);
+    result.append(" (metamodelName: ");
+    result.append(metamodelName);
     result.append(", defaultMainClass: ");
     result.append(defaultMainClass);
     result.append(", defaultMainOperation: ");

@@ -67,7 +67,6 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
       case KpPackage.KERMETA_PROJECT: return createKermetaProject();
       case KpPackage.IMPORT_FILE: return createImportFile();
       case KpPackage.PACKAGE_EQUIVALENCE: return createPackageEquivalence();
-      case KpPackage.METAMODEL: return createMetamodel();
       case KpPackage.REUSABLE_RESOURCE: return createReusableResource();
       case KpPackage.IMPORT_PROJECT_SOURCES: return createImportProjectSources();
       case KpPackage.IMPORT_PROJECT_JAR: return createImportProjectJar();
@@ -98,17 +97,6 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
   }
 
 	/**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Metamodel createMetamodel()
-  {
-    MetamodelImpl metamodel = new MetamodelImpl();
-    return metamodel;
-  }
-
-  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated

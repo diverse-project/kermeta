@@ -91,11 +91,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
         return createPackageEquivalenceAdapter();
       }
       @Override
-      public Adapter caseMetamodel(Metamodel object)
-      {
-        return createMetamodelAdapter();
-      }
-      @Override
       public Adapter caseReusableResource(ReusableResource object)
       {
         return createReusableResourceAdapter();
@@ -165,21 +160,6 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.Metamodel <em>Metamodel</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.Metamodel
-   * @generated
-   */
-  public Adapter createMetamodelAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.kermeta.kp.ReusableResource <em>Reusable Resource</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;

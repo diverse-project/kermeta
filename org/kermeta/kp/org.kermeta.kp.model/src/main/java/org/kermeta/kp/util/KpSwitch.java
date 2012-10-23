@@ -96,13 +96,6 @@ public class KpSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case KpPackage.METAMODEL:
-      {
-        Metamodel metamodel = (Metamodel)theEObject;
-        T result = caseMetamodel(metamodel);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case KpPackage.REUSABLE_RESOURCE:
       {
         ReusableResource reusableResource = (ReusableResource)theEObject;
@@ -166,22 +159,6 @@ public class KpSwitch<T> extends Switch<T> {
   }
 
 	/**
-   * Returns the result of interpreting the object as an instance of '<em>Metamodel</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Metamodel</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMetamodel(Metamodel object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Reusable Resource</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;

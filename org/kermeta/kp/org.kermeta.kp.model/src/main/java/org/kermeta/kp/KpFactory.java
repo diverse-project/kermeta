@@ -44,15 +44,6 @@ public interface KpFactory extends EFactory {
 	PackageEquivalence createPackageEquivalence();
 
 	/**
-   * Returns a new object of class '<em>Metamodel</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Metamodel</em>'.
-   * @generated
-   */
-  Metamodel createMetamodel();
-
-  /**
    * Returns a new object of class '<em>Reusable Resource</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

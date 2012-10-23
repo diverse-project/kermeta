@@ -70,13 +70,13 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT = 0;
 
 	/**
-   * The feature id for the '<em><b>Eclipse Name</b></em>' attribute.
+   * The feature id for the '<em><b>Metamodel Name</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__ECLIPSE_NAME = 0;
+	int KERMETA_PROJECT__METAMODEL_NAME = 0;
 
 	/**
    * The feature id for the '<em><b>Default Main Class</b></em>' attribute.
@@ -106,22 +106,13 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT__JAVA_BASE_PACKAGE = 3;
 
 		/**
-   * The feature id for the '<em><b>Metamodels</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KERMETA_PROJECT__METAMODELS = 4;
-
-    /**
    * The feature id for the '<em><b>Reusable Resources</b></em>' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__REUSABLE_RESOURCES = 5;
+	int KERMETA_PROJECT__REUSABLE_RESOURCES = 4;
 
 				/**
    * The feature id for the '<em><b>Imported Project Jars</b></em>' containment reference list.
@@ -130,7 +121,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__IMPORTED_PROJECT_JARS = 6;
+	int KERMETA_PROJECT__IMPORTED_PROJECT_JARS = 5;
 
 		/**
    * The feature id for the '<em><b>Imported Bytecode Jars</b></em>' containment reference list.
@@ -139,7 +130,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__IMPORTED_BYTECODE_JARS = 7;
+	int KERMETA_PROJECT__IMPORTED_BYTECODE_JARS = 6;
 
 		/**
    * The feature id for the '<em><b>Imported Project Sources</b></em>' containment reference list.
@@ -148,7 +139,16 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES = 8;
+	int KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES = 7;
+
+		/**
+   * The feature id for the '<em><b>Imported Files</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int KERMETA_PROJECT__IMPORTED_FILES = 8;
 
 		/**
    * The number of structural features of the '<em>Kermeta Project</em>' class.
@@ -170,16 +170,6 @@ public interface KpPackage extends EPackage {
 	int PACKAGE_EQUIVALENCE = 2;
 
 	/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.MetamodelImpl <em>Metamodel</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.MetamodelImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getMetamodel()
-   * @generated
-   */
-  int METAMODEL = 3;
-
-  /**
    * The meta object id for the '{@link org.kermeta.kp.impl.ReusableResourceImpl <em>Reusable Resource</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -187,7 +177,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getReusableResource()
    * @generated
    */
-	int REUSABLE_RESOURCE = 4;
+	int REUSABLE_RESOURCE = 3;
 
 		/**
    * The meta object id for the '{@link org.kermeta.kp.impl.ImportProjectSourcesImpl <em>Import Project Sources</em>}' class.
@@ -197,7 +187,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getImportProjectSources()
    * @generated
    */
-	int IMPORT_PROJECT_SOURCES = 5;
+	int IMPORT_PROJECT_SOURCES = 4;
 
 		/**
    * The meta object id for the '{@link org.kermeta.kp.impl.ImportFileImpl <em>Import File</em>}' class.
@@ -273,42 +263,6 @@ public interface KpPackage extends EPackage {
 		int PACKAGE_EQUIVALENCE_FEATURE_COUNT = 2;
 
 		/**
-   * The feature id for the '<em><b>Extends</b></em>' reference list.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int METAMODEL__EXTENDS = 0;
-
-		/**
-   * The feature id for the '<em><b>Imported Files</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int METAMODEL__IMPORTED_FILES = 1;
-
-		/**
-   * The feature id for the '<em><b>Metamodel Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int METAMODEL__METAMODEL_NAME = 2;
-
-		/**
-   * The number of structural features of the '<em>Metamodel</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int METAMODEL_FEATURE_COUNT = 3;
-
-		/**
    * The feature id for the '<em><b>Url</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -370,7 +324,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getImportProjectJar()
    * @generated
    */
-	int IMPORT_PROJECT_JAR = 6;
+	int IMPORT_PROJECT_JAR = 5;
 
 		/**
    * The feature id for the '<em><b>Url</b></em>' attribute.
@@ -398,7 +352,7 @@ public interface KpPackage extends EPackage {
    * @see org.kermeta.kp.impl.KpPackageImpl#getImportBytecodeJar()
    * @generated
    */
-	int IMPORT_BYTECODE_JAR = 7;
+	int IMPORT_BYTECODE_JAR = 6;
 
 		/**
    * The feature id for the '<em><b>Url</b></em>' attribute.
@@ -429,15 +383,15 @@ public interface KpPackage extends EPackage {
 	EClass getKermetaProject();
 
 	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getEclipseName <em>Eclipse Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getMetamodelName <em>Metamodel Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Eclipse Name</em>'.
-   * @see org.kermeta.kp.KermetaProject#getEclipseName()
+   * @return the meta object for the attribute '<em>Metamodel Name</em>'.
+   * @see org.kermeta.kp.KermetaProject#getMetamodelName()
    * @see #getKermetaProject()
    * @generated
    */
-	EAttribute getKermetaProject_EclipseName();
+	EAttribute getKermetaProject_MetamodelName();
 
 	/**
    * Returns the meta object for the attribute '{@link org.kermeta.kp.KermetaProject#getDefaultMainClass <em>Default Main Class</em>}'.
@@ -473,17 +427,6 @@ public interface KpPackage extends EPackage {
 	EAttribute getKermetaProject_JavaBasePackage();
 
 		/**
-   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getMetamodels <em>Metamodels</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Metamodels</em>'.
-   * @see org.kermeta.kp.KermetaProject#getMetamodels()
-   * @see #getKermetaProject()
-   * @generated
-   */
-  EReference getKermetaProject_Metamodels();
-
-    /**
    * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getReusableResources <em>Reusable Resources</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -528,6 +471,17 @@ public interface KpPackage extends EPackage {
 	EReference getKermetaProject_ImportedProjectSources();
 
 		/**
+   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getImportedFiles <em>Imported Files</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Imported Files</em>'.
+   * @see org.kermeta.kp.KermetaProject#getImportedFiles()
+   * @see #getKermetaProject()
+   * @generated
+   */
+	EReference getKermetaProject_ImportedFiles();
+
+		/**
    * Returns the meta object for class '{@link org.kermeta.kp.PackageEquivalence <em>Package Equivalence</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,38 +512,6 @@ public interface KpPackage extends EPackage {
    * @generated
    */
 	EAttribute getPackageEquivalence_JavaPackage();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.Metamodel <em>Metamodel</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Metamodel</em>'.
-   * @see org.kermeta.kp.Metamodel
-   * @generated
-   */
-  EClass getMetamodel();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.Metamodel#getImportedFiles <em>Imported Files</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imported Files</em>'.
-   * @see org.kermeta.kp.Metamodel#getImportedFiles()
-   * @see #getMetamodel()
-   * @generated
-   */
-	EReference getMetamodel_ImportedFiles();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.Metamodel#getMetamodelName <em>Metamodel Name</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Metamodel Name</em>'.
-   * @see org.kermeta.kp.Metamodel#getMetamodelName()
-   * @see #getMetamodel()
-   * @generated
-   */
-	EAttribute getMetamodel_MetamodelName();
 
 	/**
    * Returns the meta object for class '{@link org.kermeta.kp.ReusableResource <em>Reusable Resource</em>}'.
@@ -698,17 +620,6 @@ public interface KpPackage extends EPackage {
 	EAttribute getImportBytecodeJar_Url();
 
 	/**
-   * Returns the meta object for the reference list '{@link org.kermeta.kp.Metamodel#getExtends <em>Extends</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Extends</em>'.
-   * @see org.kermeta.kp.Metamodel#getExtends()
-   * @see #getMetamodel()
-   * @generated
-   */
-	EReference getMetamodel_Extends();
-
-	/**
    * Returns the meta object for class '{@link org.kermeta.kp.ImportFile <em>Import File</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -784,12 +695,12 @@ public interface KpPackage extends EPackage {
 		EClass KERMETA_PROJECT = eINSTANCE.getKermetaProject();
 
 		/**
-     * The meta object literal for the '<em><b>Eclipse Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Metamodel Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EAttribute KERMETA_PROJECT__ECLIPSE_NAME = eINSTANCE.getKermetaProject_EclipseName();
+		EAttribute KERMETA_PROJECT__METAMODEL_NAME = eINSTANCE.getKermetaProject_MetamodelName();
 
 		/**
      * The meta object literal for the '<em><b>Default Main Class</b></em>' attribute feature.
@@ -816,14 +727,6 @@ public interface KpPackage extends EPackage {
 		EAttribute KERMETA_PROJECT__JAVA_BASE_PACKAGE = eINSTANCE.getKermetaProject_JavaBasePackage();
 
 				/**
-     * The meta object literal for the '<em><b>Metamodels</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference KERMETA_PROJECT__METAMODELS = eINSTANCE.getKermetaProject_Metamodels();
-
-        /**
      * The meta object literal for the '<em><b>Reusable Resources</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -856,6 +759,14 @@ public interface KpPackage extends EPackage {
 		EReference KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES = eINSTANCE.getKermetaProject_ImportedProjectSources();
 
 				/**
+     * The meta object literal for the '<em><b>Imported Files</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference KERMETA_PROJECT__IMPORTED_FILES = eINSTANCE.getKermetaProject_ImportedFiles();
+
+				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.PackageEquivalenceImpl <em>Package Equivalence</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -882,32 +793,6 @@ public interface KpPackage extends EPackage {
 		EAttribute PACKAGE_EQUIVALENCE__JAVA_PACKAGE = eINSTANCE.getPackageEquivalence_JavaPackage();
 
     /**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.MetamodelImpl <em>Metamodel</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.MetamodelImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getMetamodel()
-     * @generated
-     */
-    EClass METAMODEL = eINSTANCE.getMetamodel();
-
-				/**
-     * The meta object literal for the '<em><b>Imported Files</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference METAMODEL__IMPORTED_FILES = eINSTANCE.getMetamodel_ImportedFiles();
-
-				/**
-     * The meta object literal for the '<em><b>Metamodel Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute METAMODEL__METAMODEL_NAME = eINSTANCE.getMetamodel_MetamodelName();
-
-				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.ReusableResourceImpl <em>Reusable Resource</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -958,14 +843,6 @@ public interface KpPackage extends EPackage {
      * @generated
      */
 		EAttribute IMPORT_PROJECT_SOURCES__URL = eINSTANCE.getImportProjectSources_Url();
-
-				/**
-     * The meta object literal for the '<em><b>Extends</b></em>' reference list feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference METAMODEL__EXTENDS = eINSTANCE.getMetamodel_Extends();
 
 				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.ImportFileImpl <em>Import File</em>}' class.

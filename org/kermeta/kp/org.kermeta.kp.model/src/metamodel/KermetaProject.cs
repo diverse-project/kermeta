@@ -35,12 +35,11 @@ TOKENSTYLES{
 RULES{
     
     KermetaProject::= 
-    "KermetaProject" #1  eclipseName['"','"']  
+    "KermetaProject" #1  metamodelName['"','"']  
     	(!1"defaultMainClass"  defaultMainClass['"','"']  )?
 	    (!1"defaultMainOperation"  defaultMainOperation['"','"']  )?
-	    (!1"javaBasePackage"  javaBasePackage['"','"']  )?
-	     
-	    (  	(metamodels) |
+	    (!1"javaBasePackage"  javaBasePackage['"','"']  )? 
+	    (  	(importedFiles) |
 		   	(importedProjectJars) |
 		   	(importedProjectSources) |
 		   	(importedBytecodeJars) |
@@ -53,13 +52,6 @@ RULES{
    	!3"packageEquivalence" ecorePackage['"','"']  ("=")  javaPackage['"','"'] 
     ;
         
-    Metamodel::=
-    !1metamodelName[TEXT] ("extends" (extends[](","extends[])*))? "{"
-    	(
-    	importedFiles 
-    	)* 
-    !1"}"
-    ;
     
     ImportFile::=
     	!2"importFile" url['"','"'] ("withBytecodeFrom" bytecodeFrom[] (packageEquivalences)*)?
