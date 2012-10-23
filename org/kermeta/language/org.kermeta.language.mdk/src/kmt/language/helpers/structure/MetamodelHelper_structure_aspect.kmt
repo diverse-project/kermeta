@@ -81,7 +81,8 @@ aspect class Metamodel {
 			end
 		else
 			//Need to access other metamodels to find the good one (such that its name == mmName)
-			var metamodels : Collection<Metamodel> init self.containingResource.contents
+			// note: Metamodel are directly contained by the resources, no need to search deeper
+			var metamodels : Collection<Metamodel> init self.containingResource
 				.select{mm | mm.isInstanceOf(Metamodel)}.collect{ selectedMM | selectedMM.asType(Metamodel)}
 			var foundMM : Metamodel init metamodels.detect{mm|	mm.name == mmName}
 			if not foundMM.isVoid then
@@ -109,9 +110,9 @@ aspect class Metamodel {
 	
 		if cache.isVoid then
 			// need to build the cache
-			stdio.writeln("initializing cache from "+qname+ "...")
+			//stdio.writeln("initializing cache from "+qname+ "...")
 			cache := internal::MetamodelCache.new.initialize(self)
-			stdio.writeln("cache intialized.")
+			//stdio.writeln("cache intialized.")
 		end
 		var typename : String init qname.split("::").last
 		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
