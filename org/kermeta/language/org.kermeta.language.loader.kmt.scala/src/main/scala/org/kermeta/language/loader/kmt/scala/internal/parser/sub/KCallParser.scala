@@ -54,9 +54,14 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       newo
   }
 
-  def superCall : Parser[Expression] = "super" ~ opt(opGenericParams) ~ (callFeatureParams ?) ^^ { case _ ~ genparams ~ params =>
+  /** Parses a super call. */
+  def superCall : Parser[Expression] = "super" ~ opt(superType) ~ opt(opGenericParams) ~ (callFeatureParams ?) ^^ { case _ ~ supert ~ genparams ~ params =>
+    val newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
 
-    val newo = BehaviorFactory.eINSTANCE.createCallSuperOperation()
+    supert match {
+      case Some(value) => newo.setSuperType(value)
+      case None =>
+    }
 
     params match {
       case Some(_@par) => for (p <- par) newo.getParameters.add(p)
@@ -101,10 +106,12 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
 
   }
 
+  /** Parses the super type targeted by the super call. */
+  private def superType = "<" ~ genericQualifiedTypeObject ~ ">" ^^ {case _ ~ superType ~ _ => superType }
 
-  def callFeatureParams = "(" ~> repsep(fStatement, ",") <~ ")" | (fLambda ^^ {case l => List(l)})
+  /** Parses the parameters of the super call. */
+  private def callFeatureParams = "(" ~> repsep(fStatement, ",") <~ ")" | (fLambda ^^ {case l => List(l)})
 
-  def opGenericParams = "[" ~ rep1sep(genericQualifiedTypeObject,",") ~ "]" ^^{case _ ~ params ~ _ => params }
-
-
+  /** Parses the generics of the super call. */
+  private def opGenericParams = "[" ~ rep1sep(genericQualifiedTypeObject,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 }
