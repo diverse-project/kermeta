@@ -18,15 +18,10 @@ import org.kermeta.language.structure.UnresolvedType
 
 /**
  * Sub parser dedicated to parse the various way to call something in KMt textual syntax
- *
  */
 trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaParser {
 
-
-  def fCall: Parser[Expression] = nCall /*| firstCallLiteral*/ | firstCall | superCall
-
-  //private def fSuperLiteral : Parser[Expression] = ( "super" ) ^^^ { BehaviorFactory.eINSTANCE.createCallSuperOperation() }
-
+  def fCall: Parser[Expression] = nCall | firstCall | superCall
 
   def nCall = "." ~> ident ~ opt(opGenericParams) ~ (callFeatureParams ?) ^^ {
     case id ~ genparams ~ params =>
@@ -55,7 +50,7 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
   }
 
   /** Parses a super call. */
-  def superCall : Parser[Expression] = "super" ~ opt(superType) ~ opt(opGenericParams) ~ (callFeatureParams ?) ^^ { case _ ~ supert ~ genparams ~ params =>
+  def superCall : Parser[Expression] = "super" ~ opt(superType) ~ (callFeatureParams ?) ^^ { case _ ~ supert ~ params =>
     val newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
 
     supert match {
@@ -67,22 +62,13 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
       case Some(_@par) => for (p <- par) newo.getParameters.add(p)
       case None =>
     }
-
-    genparams match {
-      case None =>
-      case Some(gparams) => {
-        newo.getContainedType.addAll(gparams)
-        newo.getStaticTypeVariableBindings.addAll(gparams)
-      }
-    }
     newo
   }
 
-  def firstCall: Parser[Expression] = (genericQualifiedTypeObject /*| "super"*/) ~ (callFeatureParams ?) ^^ {
-    case unresType ~ params =>
 
+  def firstCall: Parser[Expression] = genericQualifiedTypeObject ~ (callFeatureParams ?) ^^ {
+    case unresType ~ params =>
       val newo = unresType match {
-        //case "super" => BehaviorFactory.eINSTANCE.createCallSuperOperation()
         case typeRef: UnresolvedType => {
           val newoo = BehaviorFactory.eINSTANCE.createUnresolvedCall
           newoo.setName(typeRef.getTypeIdentifier())
@@ -107,11 +93,11 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
   }
 
   /** Parses the super type targeted by the super call. */
-  private def superType = "<" ~ genericQualifiedTypeObject ~ ">" ^^ {case _ ~ superType ~ _ => superType }
+  private def superType = "[" ~ genericQualifiedTypeObject ~ "]" ^^ {case _ ~ superType ~ _ => superType }
 
-  /** Parses the parameters of the super call. */
+  /** Parses the parameters of a call. */
   private def callFeatureParams = "(" ~> repsep(fStatement, ",") <~ ")" | (fLambda ^^ {case l => List(l)})
 
-  /** Parses the generics of the super call. */
+  /** Parses the generics of a call. */
   private def opGenericParams = "[" ~ rep1sep(genericQualifiedTypeObject,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 }

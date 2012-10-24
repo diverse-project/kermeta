@@ -8,8 +8,8 @@ package test;
 using kermeta::language::structure
 class Main
 {
-	operation main() : Void is do 
-		super<Type1>
-		super<Type2>
+	operation main[Foo inherits String]() : Void is do 
+		super[SuperType1]
+		super[SuperType2]
 	end
 }
