@@ -39,7 +39,7 @@
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
                             <stopAfterPhase>TYPE_SET</stopAfterPhase>
-                            <checkingEnabled>false</checkingEnabled>
+                            <checkingEnabled>true</checkingEnabled>
                             <intermediateFilesRequired>true</intermediateFilesRequired>
                         </configuration>
                     </execution>
@@ -78,7 +78,7 @@
                         <Import-Package>
 							org.k2.compilo.scala.loader,
 							org.k2.console,
-							org.kermeta,
+							org.kermeta.language.util,
 							org.kermeta.language.behavior,
 							org.kermeta.language.structure,
 							org.kermeta.utils.helpers.emf,
