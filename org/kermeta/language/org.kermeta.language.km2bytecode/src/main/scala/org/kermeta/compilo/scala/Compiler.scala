@@ -13,6 +13,7 @@ import _root_.java.util.concurrent.TimeUnit
 import _root_.java.util.concurrent.Executors
 import _root_.java.io.File
 import org.k2.compilo.scala.loader.LoadModelHelper
+import org.kermeta.language.util.ModelingUnit
 
 class Compiler extends LogAspect {
 

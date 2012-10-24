@@ -1,19 +1,25 @@
 package org.kermeta.compilo.scala.visitor.impl
 
 import org.kermeta.language._
-import org.kermeta.language.structure._ 
+import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
 import org.kermeta.compilo.scala._
 import org.kermeta.compilo.scala.visitor._
 import scala.collection.JavaConversions._
+import org.kermeta.language.util.ModelingUnit
 
 class ScalaAspectVisitor extends IVisitor with LogAspect {
 	
   def visit(par : ModelingUnit){
     //PreCompiler.visit(par)
-    par.getPackages().foreach(p => (this.visit(p)))
+    par.getMetamodels().foreach(p => (this.visit(p)))
+  }
+  
+  def visit(mm : Metamodel){
+    //PreCompiler.visit(par)
+    mm.getPackages().foreach(p => (this.visit(p)))
   }
 
   def visit(par : Package){
@@ -45,6 +51,8 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
 	
   var visitor : PackageVisitor = new PackageVisitor
     
+  def visit(mm : Metamodel){Console.println("multithread error")}
+  
   def visit(par : Package){
     actualPackage = visitor.getQualifiedName(par)
 		

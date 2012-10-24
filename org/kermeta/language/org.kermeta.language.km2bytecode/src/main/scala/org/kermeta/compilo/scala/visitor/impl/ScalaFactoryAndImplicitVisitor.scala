@@ -9,6 +9,7 @@ import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
+import org.kermeta.language.util.ModelingUnit
 
 class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
@@ -155,7 +156,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
   def visit(par: ModelingUnit) {
     ecorePackages = new java.util.ArrayList[Package]()
-    addPackage(par.getPackages());
+    par.getMetamodels().foreach({mm => addPackage(mm.getPackages())})
 
     //TODO gérer le cas des package venant d'ecore
     var res: StringBuilder = new StringBuilder
@@ -225,10 +226,15 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     // generate the Util.scala file
     UtilObjectGenerator.genetateUtilObject
 
-    par.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
+    par.getMetamodels().foreach(mm => new AcceptableMetamodel(mm).accept(this))
 
   }
 
+  def visit(mm: Metamodel) {
+    
+    mm.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
+  }
+  
   def visit(par: Package) {
 
     if (Util.doesGeneratePackage(visitor.getQualifiedName(par))) {

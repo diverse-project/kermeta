@@ -142,6 +142,7 @@
 							!org.apache.maven.*,
 							!org.codehaus.plexus.*,
 							!scala.*,
+							org.kermeta.language.util.*,
 							org.kermeta.language.structure.*,
 							org.kermeta.language.behavior.*,
 							k2.utils,

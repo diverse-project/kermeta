@@ -1,5 +1,5 @@
 package org.kermeta.compilo.scala.visitor.impl
-import org.kermeta.language.structure.ModelingUnit
+import org.kermeta.language.util.ModelingUnit
 import org.kermeta.compilo.scala.GlobalConfiguration
 import org.kermeta.language.structure.Operation
 import org.kermeta.language.structure.Package
@@ -7,6 +7,7 @@ import org.kermeta.language.structure.ClassDefinition
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala.rich.richAspect.PackageVisitor
 import org.kermeta.compilo.scala.Util
+import org.kermeta.language.structure.Metamodel
 
 /**
  * generates the classes and objects for the declared main classes
@@ -22,7 +23,10 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     var mainClassDef: org.eclipse.emf.ecore.EObject = null
     var mainOperationSize = 0
     try {
-      mainClassDef = mu.eAllContents.filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => e.asInstanceOf[ClassDefinition].getName.equals(className)).toList.first
+      
+      
+      mainClassDef = mu.getAllMetamodelsContents().filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => (new PackageVisitor).getQualifiedNameKermeta(e.asInstanceOf[ClassDefinition]).equals(mainClass)).toList.first
+      
       mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter { e => e.getName.equals(mainOperation) }.first.asInstanceOf[Operation].getOwnedParameter.size
     } catch {
       case e: java.util.NoSuchElementException => {

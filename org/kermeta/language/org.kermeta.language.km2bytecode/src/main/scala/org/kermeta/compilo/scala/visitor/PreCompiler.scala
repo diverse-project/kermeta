@@ -2,6 +2,7 @@ package org.kermeta.compilo.scala.visitor
 import org.kermeta.language.structure._
 import scala.collection.JavaConversions._
 import org.kermeta.compilo.scala.Util
+import org.kermeta.language.util.ModelingUnit
 
 object PreCompiler {
   
@@ -10,9 +11,10 @@ object PreCompiler {
    * If one of those do not have an opposite, create one opposite and adds it.
    */
   def visit(o:org.kermeta.language.structure.KermetaModelElement) : Unit = o match {
-    case o:ModelingUnit => 
-      o.getPackages().foreach(visit)
-      o.getOwnedTypeDefinition().filter(_.isInstanceOf[ClassDefinition]).foreach(visit)
+    case mu:ModelingUnit => 
+      mu.getMetamodels().foreach(visit)
+    case mm : Metamodel =>
+      mm.getPackages().foreach(visit)
     case o:Package => 
       o.getNestedPackage().foreach(visit)
       o.getOwnedTypeDefinition().filter(_.isInstanceOf[ClassDefinition]).foreach(visit)
