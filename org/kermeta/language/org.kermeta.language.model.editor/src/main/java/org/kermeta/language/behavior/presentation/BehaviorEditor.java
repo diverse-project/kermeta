@@ -9,7 +9,6 @@ package org.kermeta.language.behavior.presentation;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,22 +27,55 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-
+import org.eclipse.emf.common.command.BasicCommandStack;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CommandStackListener;
+import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.ui.MarkerHelper;
+import org.eclipse.emf.common.ui.ViewerPane;
+import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
+import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
+import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
+import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
+import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
+import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
+import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -57,28 +89,20 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.swt.SWT;
-
 import org.eclipse.swt.custom.CTabFolder;
-
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
-
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-
 import org.eclipse.swt.graphics.Point;
-
 import org.eclipse.swt.layout.FillLayout;
-
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
-
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -86,90 +110,21 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
-
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.SaveAsDialog;
-
 import org.eclipse.ui.ide.IGotoMarker;
-
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
-
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CommandStackListener;
-
-import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.ui.MarkerHelper;
-import org.eclipse.emf.common.ui.ViewerPane;
-
-import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
-
-import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-
-import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-
-import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
-
-import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
-
-import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
-
-import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
-import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
-import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
-
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
-
-import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
-import org.eclipse.emf.edit.ui.util.EditUIUtil;
-
-import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-
 import org.kermeta.language.behavior.provider.BehaviorItemProviderAdapterFactory;
-
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
-
-import org.kermeta.language.provider.LanguageItemProviderAdapterFactory;
-
 import org.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
-
-import org.kermeta.provider.KmItemProviderAdapterFactory;
-
 import org.presentation.KermetaEditorPlugin;
 
-import org.provider.OrgItemProviderAdapterFactory;
 
 
 /**
@@ -337,7 +292,8 @@ public class BehaviorEditor
 	 */
 	protected IPartListener partListener =
 		new IPartListener() {
-			public void partActivated(IWorkbenchPart p) {
+			@Override
+			public void partActivated(final IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
 						getActionBarContributor().setActiveEditor(BehaviorEditor.this);
@@ -355,16 +311,20 @@ public class BehaviorEditor
 					handleActivate();
 				}
 			}
-			public void partBroughtToTop(IWorkbenchPart p) {
+			@Override
+			public void partBroughtToTop(final IWorkbenchPart p) {
 				// Ignore.
 			}
-			public void partClosed(IWorkbenchPart p) {
+			@Override
+			public void partClosed(final IWorkbenchPart p) {
 				// Ignore.
 			}
-			public void partDeactivated(IWorkbenchPart p) {
+			@Override
+			public void partDeactivated(final IWorkbenchPart p) {
 				// Ignore.
 			}
-			public void partOpened(IWorkbenchPart p) {
+			@Override
+			public void partOpened(final IWorkbenchPart p) {
 				// Ignore.
 			}
 		};
@@ -415,10 +375,10 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EContentAdapter problemIndicationAdapter = 
+	protected EContentAdapter problemIndicationAdapter =
 		new EContentAdapter() {
 			@Override
-			public void notifyChanged(Notification notification) {
+			public void notifyChanged(final Notification notification) {
 				if (notification.getNotifier() instanceof Resource) {
 					switch (notification.getFeatureID(Resource.class)) {
 						case Resource.RESOURCE__IS_LOADED:
@@ -436,7 +396,8 @@ public class BehaviorEditor
 							if (updateProblemIndication) {
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
-										 public void run() {
+										 @Override
+										public void run() {
 											 updateProblemIndication();
 										 }
 									 });
@@ -451,12 +412,12 @@ public class BehaviorEditor
 			}
 
 			@Override
-			protected void setTarget(Resource target) {
+			protected void setTarget(final Resource target) {
 				basicSetTarget(target);
 			}
 
 			@Override
-			protected void unsetTarget(Resource target) {
+			protected void unsetTarget(final Resource target) {
 				basicUnsetTarget(target);
 			}
 		};
@@ -469,7 +430,8 @@ public class BehaviorEditor
 	 */
 	protected IResourceChangeListener resourceChangeListener =
 		new IResourceChangeListener() {
-			public void resourceChanged(IResourceChangeEvent event) {
+			@Override
+			public void resourceChanged(final IResourceChangeEvent event) {
 				IResourceDelta delta = event.getDelta();
 				try {
 					class ResourceDeltaVisitor implements IResourceDeltaVisitor {
@@ -477,7 +439,8 @@ public class BehaviorEditor
 						protected Collection<Resource> changedResources = new ArrayList<Resource>();
 						protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
-						public boolean visit(IResourceDelta delta) {
+						@Override
+						public boolean visit(final IResourceDelta delta) {
 							if (delta.getResource().getType() == IResource.FILE) {
 								if (delta.getKind() == IResourceDelta.REMOVED ||
 								    delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
@@ -511,7 +474,8 @@ public class BehaviorEditor
 					if (!visitor.getRemovedResources().isEmpty()) {
 						getSite().getShell().getDisplay().asyncExec
 							(new Runnable() {
-								 public void run() {
+								 @Override
+								public void run() {
 									 removedResources.addAll(visitor.getRemovedResources());
 									 if (!isDirty()) {
 										 getSite().getPage().closeEditor(BehaviorEditor.this, false);
@@ -523,7 +487,8 @@ public class BehaviorEditor
 					if (!visitor.getChangedResources().isEmpty()) {
 						getSite().getShell().getDisplay().asyncExec
 							(new Runnable() {
-								 public void run() {
+								 @Override
+								public void run() {
 									 changedResources.addAll(visitor.getChangedResources());
 									 if (getSite().getPage().getActiveEditor() == BehaviorEditor.this) {
 										 handleActivate();
@@ -609,7 +574,7 @@ public class BehaviorEditor
 			updateProblemIndication();
 		}
 	}
-  
+
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
 	 * <!-- begin-user-doc -->
@@ -704,9 +669,6 @@ public class BehaviorEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new OrgItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new KmItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new LanguageItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new BehaviorItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new StructureItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
@@ -719,10 +681,12 @@ public class BehaviorEditor
 		//
 		commandStack.addCommandStackListener
 			(new CommandStackListener() {
-				 public void commandStackChanged(final EventObject event) {
+				 @Override
+				public void commandStackChanged(final EventObject event) {
 					 getContainer().getDisplay().asyncExec
 						 (new Runnable() {
-							  public void run() {
+							  @Override
+							public void run() {
 								  firePropertyChange(IEditorPart.PROP_DIRTY);
 
 								  // Try to select the affected objects.
@@ -751,7 +715,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 			@Override
-	protected void firePropertyChange(int action) {
+	protected void firePropertyChange(final int action) {
 		super.firePropertyChange(action);
 	}
 
@@ -761,13 +725,14 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSelectionToViewer(Collection<?> collection) {
+	public void setSelectionToViewer(final Collection<?> collection) {
 		final Collection<?> theSelection = collection;
 		// Make sure it's okay.
 		//
 		if (theSelection != null && !theSelection.isEmpty()) {
 			Runnable runnable =
 				new Runnable() {
+					@Override
 					public void run() {
 						// Try to select the items in the current content viewer of the editor.
 						//
@@ -788,6 +753,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EditingDomain getEditingDomain() {
 		return editingDomain;
 	}
@@ -803,7 +769,7 @@ public class BehaviorEditor
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public ReverseAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
+		public ReverseAdapterFactoryContentProvider(final AdapterFactory adapterFactory) {
 			super(adapterFactory);
 		}
 
@@ -813,7 +779,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public Object [] getElements(Object object) {
+		public Object [] getElements(final Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
 		}
@@ -824,7 +790,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public Object [] getChildren(Object object) {
+		public Object [] getChildren(final Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
 		}
@@ -835,7 +801,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public boolean hasChildren(Object object) {
+		public boolean hasChildren(final Object object) {
 			Object parent = super.getParent(object);
 			return parent != null;
 		}
@@ -846,7 +812,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public Object getParent(Object object) {
+		public Object getParent(final Object object) {
 			return null;
 		}
 	}
@@ -856,7 +822,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCurrentViewerPane(ViewerPane viewerPane) {
+	public void setCurrentViewerPane(final ViewerPane viewerPane) {
 		if (currentViewerPane != viewerPane) {
 			if (currentViewerPane != null) {
 				currentViewerPane.showFocus(false);
@@ -873,7 +839,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCurrentViewer(Viewer viewer) {
+	public void setCurrentViewer(final Viewer viewer) {
 		// If it is changing...
 		//
 		if (currentViewer != viewer) {
@@ -884,7 +850,8 @@ public class BehaviorEditor
 					new ISelectionChangedListener() {
 						// This just notifies those things that are affected by the section.
 						//
-						public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
+						@Override
+						public void selectionChanged(final SelectionChangedEvent selectionChangedEvent) {
 							setSelection(selectionChangedEvent.getSelection());
 						}
 					};
@@ -918,6 +885,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Viewer getViewer() {
 		return currentViewer;
 	}
@@ -928,7 +896,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createContextMenuFor(StructuredViewer viewer) {
+	protected void createContextMenuFor(final StructuredViewer viewer) {
 		MenuManager contextMenu = new MenuManager("#PopUp");
 		contextMenu.add(new Separator("additions"));
 		contextMenu.setRemoveAllWhenShown(true);
@@ -977,7 +945,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
+	public Diagnostic analyzeResourceProblems(final Resource resource, final Exception exception) {
 		if (!resource.getErrors().isEmpty() || !resource.getWarnings().isEmpty()) {
 			BasicDiagnostic basicDiagnostic =
 				new BasicDiagnostic
@@ -1024,7 +992,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(Composite composite) {
+						public Viewer createViewer(final Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
 							return newTreeViewer;
@@ -1058,7 +1026,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(Composite composite) {
+						public Viewer createViewer(final Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
 							return newTreeViewer;
@@ -1087,7 +1055,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(Composite composite) {
+						public Viewer createViewer(final Composite composite) {
 							return new ListViewer(composite);
 						}
 						@Override
@@ -1112,7 +1080,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(Composite composite) {
+						public Viewer createViewer(final Composite composite) {
 							return new TreeViewer(composite);
 						}
 						@Override
@@ -1139,7 +1107,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(Composite composite) {
+						public Viewer createViewer(final Composite composite) {
 							return new TableViewer(composite);
 						}
 						@Override
@@ -1182,7 +1150,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(Composite composite) {
+						public Viewer createViewer(final Composite composite) {
 							return new TreeViewer(composite);
 						}
 						@Override
@@ -1221,7 +1189,8 @@ public class BehaviorEditor
 
 			getSite().getShell().getDisplay().asyncExec
 				(new Runnable() {
-					 public void run() {
+					 @Override
+					public void run() {
 						 setActivePage(0);
 					 }
 				 });
@@ -1234,7 +1203,7 @@ public class BehaviorEditor
 			(new ControlAdapter() {
 				boolean guard = false;
 				@Override
-				public void controlResized(ControlEvent event) {
+				public void controlResized(final ControlEvent event) {
 					if (!guard) {
 						guard = true;
 						hideTabs();
@@ -1245,7 +1214,8 @@ public class BehaviorEditor
 
 		getSite().getShell().getDisplay().asyncExec
 			(new Runnable() {
-				 public void run() {
+				 @Override
+				public void run() {
 					 updateProblemIndication();
 				 }
 			 });
@@ -1294,7 +1264,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	protected void pageChange(int pageIndex) {
+	protected void pageChange(final int pageIndex) {
 		super.pageChange(pageIndex);
 
 		if (contentOutlinePage != null) {
@@ -1310,7 +1280,7 @@ public class BehaviorEditor
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object getAdapter(Class key) {
+	public Object getAdapter(final Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
 			return showOutlineView() ? getContentOutlinePage() : null;
 		}
@@ -1337,7 +1307,7 @@ public class BehaviorEditor
 			//
 			class MyContentOutlinePage extends ContentOutlinePage {
 				@Override
-				public void createControl(Composite parent) {
+				public void createControl(final Composite parent) {
 					super.createControl(parent);
 					contentOutlineViewer = getTreeViewer();
 					contentOutlineViewer.addSelectionChangedListener(this);
@@ -1360,13 +1330,13 @@ public class BehaviorEditor
 				}
 
 				@Override
-				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
+				public void makeContributions(final IMenuManager menuManager, final IToolBarManager toolBarManager, final IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager, statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
 
 				@Override
-				public void setActionBars(IActionBars actionBars) {
+				public void setActionBars(final IActionBars actionBars) {
 					super.setActionBars(actionBars);
 					getActionBarContributor().shareGlobalActions(this, actionBars);
 				}
@@ -1380,7 +1350,8 @@ public class BehaviorEditor
 				(new ISelectionChangedListener() {
 					 // This ensures that we handle selections correctly.
 					 //
-					 public void selectionChanged(SelectionChangedEvent event) {
+					 @Override
+					public void selectionChanged(final SelectionChangedEvent event) {
 						 handleContentOutlineSelection(event.getSelection());
 					 }
 				 });
@@ -1400,13 +1371,13 @@ public class BehaviorEditor
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
 					@Override
-					public void setSelectionToViewer(List<?> selection) {
+					public void setSelectionToViewer(final List<?> selection) {
 						BehaviorEditor.this.setSelectionToViewer(selection);
 						BehaviorEditor.this.setFocus();
 					}
 
 					@Override
-					public void setActionBars(IActionBars actionBars) {
+					public void setActionBars(final IActionBars actionBars) {
 						super.setActionBars(actionBars);
 						getActionBarContributor().shareGlobalActions(this, actionBars);
 					}
@@ -1423,7 +1394,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void handleContentOutlineSelection(ISelection selection) {
+	public void handleContentOutlineSelection(final ISelection selection) {
 		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
@@ -1474,7 +1445,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void doSave(IProgressMonitor progressMonitor) {
+	public void doSave(final IProgressMonitor progressMonitor) {
 		// Save only resources that have actually changed.
 		//
 		final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
@@ -1487,7 +1458,7 @@ public class BehaviorEditor
 				// This is the method that gets invoked when the operation runs.
 				//
 				@Override
-				public void execute(IProgressMonitor monitor) {
+				public void execute(final IProgressMonitor monitor) {
 					// Save the resources to the file system.
 					//
 					boolean first = true;
@@ -1531,12 +1502,12 @@ public class BehaviorEditor
 
 	/**
 	 * This returns whether something has been persisted to the URI of the specified resource.
-	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
+	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected boolean isPersisted(Resource resource) {
+	protected boolean isPersisted(final Resource resource) {
 		boolean result = false;
 		try {
 			InputStream stream = editingDomain.getResourceSet().getURIConverter().createInputStream(resource.getURI());
@@ -1586,8 +1557,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void doSaveAs(URI uri, IEditorInput editorInput) {
-		(editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
+	protected void doSaveAs(final URI uri, final IEditorInput editorInput) {
+		editingDomain.getResourceSet().getResources().get(0).setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor =
@@ -1602,7 +1573,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void gotoMarker(IMarker marker) {
+	@Override
+	public void gotoMarker(final IMarker marker) {
 		try {
 			if (marker.getType().equals(EValidator.MARKER)) {
 				String uriAttribute = marker.getAttribute(EValidator.URI_ATTRIBUTE, null);
@@ -1627,7 +1599,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void init(IEditorSite site, IEditorInput editorInput) {
+	public void init(final IEditorSite site, final IEditorInput editorInput) {
 		setSite(site);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
@@ -1657,7 +1629,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+	@Override
+	public void addSelectionChangedListener(final ISelectionChangedListener listener) {
 		selectionChangedListeners.add(listener);
 	}
 
@@ -1667,7 +1640,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+	@Override
+	public void removeSelectionChangedListener(final ISelectionChangedListener listener) {
 		selectionChangedListeners.remove(listener);
 	}
 
@@ -1677,6 +1651,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ISelection getSelection() {
 		return editorSelection;
 	}
@@ -1688,7 +1663,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSelection(ISelection selection) {
+	@Override
+	public void setSelection(final ISelection selection) {
 		editorSelection = selection;
 
 		for (ISelectionChangedListener listener : selectionChangedListeners) {
@@ -1702,7 +1678,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatusLineManager(ISelection selection) {
+	public void setStatusLineManager(final ISelection selection) {
 		IStatusLineManager statusLineManager = currentViewer != null && currentViewer == contentOutlineViewer ?
 			contentOutlineStatusLineManager : getActionBars().getStatusLineManager();
 
@@ -1737,7 +1713,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static String getString(String key) {
+	private static String getString(final String key) {
 		return KermetaEditorPlugin.INSTANCE.getString(key);
 	}
 
@@ -1747,7 +1723,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static String getString(String key, Object s1) {
+	private static String getString(final String key, final Object s1) {
 		return KermetaEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
@@ -1757,7 +1733,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void menuAboutToShow(IMenuManager menuManager) {
+	@Override
+	public void menuAboutToShow(final IMenuManager menuManager) {
 		((IMenuListener)getEditorSite().getActionBarContributor()).menuAboutToShow(menuManager);
 	}
 
