@@ -181,8 +181,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     //    var rightClass: StringBuilder = new StringBuilder
     /*if(thi.getValue().isInstanceOf[VoidLiteral]){
      visit(thi.getValue.getStaticType, rightClass)
-    
-    	
+
+
     //println("left " + rightClass + "\n right " + targetClass)
     if ("_root_.java.lang.Integer".equals(rightClass.toString()) && "_root_.java.lang.Short".equals(targetClass.toString()))
     {
@@ -200,7 +200,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     {
       res append ".toInt"
     }
-    
+
     */
 
     /* Generate Cast if found */
@@ -461,7 +461,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         res.append(k2.utils.UTilScala.getQualifiedNameTypeKermeta(thi.getTyperef().getType, "."))
         res.append("\")")
       }
-    } else if(thi.getTyperef().getType.isInstanceOf[org.kermeta.language.structure.Enumeration] 
+    } else if(thi.getTyperef().getType.isInstanceOf[org.kermeta.language.structure.Enumeration]
     		&& thi.eContainer() != null
     		&& thi.eContainer().isInstanceOf[CallFeature]
     		&& thi.eContainer().asInstanceOf[CallFeature].getTarget() == thi){
@@ -611,47 +611,15 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitCallSuperOperation(thi: CallSuperOperation, res: StringBuilder): Unit = {
-    /* SEARCH FOR CONTAINER OPERATION */
-    var actualEObject: EObject = thi
-    while (!actualEObject.eClass().getName().equals("Operation")) {
-      log.debug("Search For super Operation {}", actualEObject.eClass.getName)
-      actualEObject = actualEObject.eContainer()
-    }
-    var actualOperation = actualEObject.asInstanceOf[Operation]
-    /* Out EObject Iinstance of Operaiton */
-
-    var superClassFromName = actualOperation.getSuperOperation().asInstanceOf[Operation].getOwningClass.getName
-    var classFrom = actualOperation.getOwningClass
-
-    //SEARCH THE FIRST LEVEL SUPER TYPE WHERE OPERATION COMING FROM
-    var superTrait = classFrom.getSuperType.filter({ s => isSubTypeOf(s, superClassFromName) }).head
-    var superTraitQualifiedName = getQualifiedNameCompilo(superTrait)
-    var superTraitName = superTraitQualifiedName.substring(superTraitQualifiedName.lastIndexOf(".") + 1)
-    /* var superTrait : Type = null
-    var maxLevel : Int = 2
-    classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).foreach{stype=>
-      log.debug("Selecting classFrom {} or {}",stype.getQualifiedNameCompilo, classFrom.getQualifiedNameCompilo)
-      if (stype.getQualifiedNameCompilo == classFrom.getQualifiedNameCompilo) {
-        superTrait = stype
-        maxLevel = 1
-        log.debug("Found stype level 1 {}",superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
-      }
-      else {
-        if (maxLevel == 2 ){
-          superTrait = stype
-          log.debug("Found stype level 2 {}",superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
-        }
-      }
-
-    }*/
-
-    log.debug("operation {} from {}", actualOperation.getName, superClassFromName)
-    log.debug(" => {}", superTraitName)
-    res.append("super[" + superTraitName + "Aspect]")
-    res.append("." + Util.getEcoreRenameOperation(actualOperation.getSuperOperation.asInstanceOf[Operation]))
+    val superTypeName = if(thi.getSuperType.getTypeContainer.isInstanceOf[ClassDefinition])
+    						thi.getSuperType.getTypeContainer.asInstanceOf[ClassDefinition].getName else ""
+    res.append("super[")
+    res.append(superTypeName)
+    res.append("Aspect]")
+    res.append(".")
+    res.append(thi.getStaticOperation.getName)
     res.append("(")
     generateScalaCodeEach(res, thi.getParameters, ",")
-    //this.getParameters().foreach(par => par.generateScalaCode(res))
     res.append(")")
   }
 
@@ -727,7 +695,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 	  }
 	  return res
    }
-  
+
   def getQualifiedNameCompilo(thi: EObject): String = {
     thi match {
       case (p: Package) => {
@@ -757,7 +725,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 	         i = i+1
 	         })
 	         res.append("]")
-	
+
 	         }*/
 
       }
