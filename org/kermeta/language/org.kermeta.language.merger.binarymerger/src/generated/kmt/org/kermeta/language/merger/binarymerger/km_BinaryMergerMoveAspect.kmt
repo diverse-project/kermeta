@@ -276,6 +276,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallSuperOperation")
+							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
+							context.elementsNeedingReferenceMerge.add(self)
+							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -2897,74 +2900,8 @@ package kermeta {
 		}
 
 
-		aspect class DummyClass inherits Mergeable  {
-			method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
-				var mergedModelElement : org::kermeta::language::DummyClass
-				mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::DummyClass)
-				if (not mergedModelElement.isVoid) then
-					do
-						//stdio.writeln("Merging content of a DummyClass")
-					rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-					   context.errors.add(mergeException)
-					end
-				end
-				self.eachOwnedElement{ e | do 
-				      e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)
-				   rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-				      context.errors.add(mergeException)
-				   end
-				   e
-				}
-				result := self
-			end
-		}
-
 	}
 
 
-	aspect class DummyClass inherits Mergeable  {
-		method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
-			var mergedModelElement : org::kermeta::DummyClass
-			mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::DummyClass)
-			if (not mergedModelElement.isVoid) then
-				do
-					//stdio.writeln("Merging content of a DummyClass")
-				rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-				   context.errors.add(mergeException)
-				end
-			end
-			self.eachOwnedElement{ e | do 
-			      e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)
-			   rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-			      context.errors.add(mergeException)
-			   end
-			   e
-			}
-			result := self
-		end
-	}
-
 }
 
-
-aspect class DummyClass inherits Mergeable  {
-	method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable is do
-		var mergedModelElement : org::DummyClass
-		mergedModelElement := self.similarElementInMergedModel.asType(org::DummyClass)
-		if (not mergedModelElement.isVoid) then
-			do
-				//stdio.writeln("Merging content of a DummyClass")
-			rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-			   context.errors.add(mergeException)
-			end
-		end
-		self.eachOwnedElement{ e | do 
-		      e.asType(Mergeable).binaryMerger_MoveToMergedModel(context)
-		   rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
-		      context.errors.add(mergeException)
-		   end
-		   e
-		}
-		result := self
-	end
-}

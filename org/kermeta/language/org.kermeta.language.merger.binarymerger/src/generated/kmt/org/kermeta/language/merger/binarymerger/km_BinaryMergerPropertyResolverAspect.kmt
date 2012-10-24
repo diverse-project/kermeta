@@ -623,41 +623,8 @@ package kermeta {
 		}
 
 
-		aspect class DummyClass inherits Mergeable  {
-			operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
-				
-				result := primaryValue
-				// select non void value
-				if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-					result := aspectValue
-				end
-			end
-		}
-
 	}
 
 
-	aspect class DummyClass inherits Mergeable  {
-		operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
-			
-			result := primaryValue
-			// select non void value
-			if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-				result := aspectValue
-			end
-		end
-	}
-
 }
 
-
-aspect class DummyClass inherits Mergeable  {
-	operation selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do
-		
-		result := primaryValue
-		// select non void value
-		if (not aspectValue.isVoid) and (primaryValue.isVoid) then
-			result := aspectValue
-		end
-	end
-}

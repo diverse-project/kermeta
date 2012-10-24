@@ -1577,53 +1577,8 @@ package kermeta {
 		}
 
 
-		aspect class DummyClass {
-			operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-				// TODO deal with aspectElementObj not a strict instance of DummyClass
-				var aspectElement : org::kermeta::language::DummyClass
-				aspectElement ?= aspectElementObj
-				if not aspectElement.isVoid then
-
-					
-					result := true
-				else
-					result := false
-				end
-			end
-		}
-
 	}
 
 
-	aspect class DummyClass {
-		operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-			// TODO deal with aspectElementObj not a strict instance of DummyClass
-			var aspectElement : org::kermeta::DummyClass
-			aspectElement ?= aspectElementObj
-			if not aspectElement.isVoid then
-
-				
-				result := true
-			else
-				result := false
-			end
-		end
-	}
-
 }
 
-
-aspect class DummyClass {
-	operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
-		// TODO deal with aspectElementObj not a strict instance of DummyClass
-		var aspectElement : org::DummyClass
-		aspectElement ?= aspectElementObj
-		if not aspectElement.isVoid then
-
-			
-			result := true
-		else
-			result := false
-		end
-	end
-}

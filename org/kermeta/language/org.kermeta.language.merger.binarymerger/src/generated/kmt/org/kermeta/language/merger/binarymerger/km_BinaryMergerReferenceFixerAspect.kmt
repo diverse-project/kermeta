@@ -129,11 +129,22 @@ package kermeta {
 					var aspectModelElement : org::kermeta::language::behavior::CallSuperOperation
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
+					if not self.superType.isVoid then
+						if not self.superType.similarElementInMergedModel.isVoid then
+							// element pointed by this moved element is still in the unmoved model
+							self.superType := self.superType.similarElementInMergedModel.asType(org::kermeta::language::structure::Type)
+						end
+					end
 				end
 				method mergeReferences( ) : Void from org::kermeta::language::behavior::CallOperation is do
 					var mergedModelElement : org::kermeta::language::behavior::CallSuperOperation
 					mergedModelElement ?= self.similarElementInMergedModel
 					super()
+					// select value for unary reference (not involved in composition)
+					mergedModelElement.superType ?= mergedModelElement.selectUnaryProperty("superType", self.superType, mergedModelElement.superType)
+					if (not mergedModelElement.superType.isVoid) then
+						mergedModelElement.superType ?= mergedModelElement.superType.getElementInMergedModel
+					end
 				end
 			}
 
@@ -1881,59 +1892,8 @@ package kermeta {
 		}
 
 
-		aspect class DummyClass inherits Mergeable  {
-			method fixReferences( ) : Void is do
-				var aspectModelElement : org::kermeta::language::DummyClass
-				aspectModelElement ?= self.similarElementInAspectModel
-				
-				// drill down into all contained elements
-				self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
-					void
-				}
-			end
-			operation mergeReferences( ) : Void is do
-				var mergedModelElement : org::kermeta::language::DummyClass
-				mergedModelElement ?= self.similarElementInMergedModel
-				
-			end
-		}
-
 	}
 
 
-	aspect class DummyClass inherits Mergeable  {
-		method fixReferences( ) : Void is do
-			var aspectModelElement : org::kermeta::DummyClass
-			aspectModelElement ?= self.similarElementInAspectModel
-			
-			// drill down into all contained elements
-			self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
-				void
-			}
-		end
-		operation mergeReferences( ) : Void is do
-			var mergedModelElement : org::kermeta::DummyClass
-			mergedModelElement ?= self.similarElementInMergedModel
-			
-		end
-	}
-
 }
 
-
-aspect class DummyClass inherits Mergeable  {
-	method fixReferences( ) : Void is do
-		var aspectModelElement : org::DummyClass
-		aspectModelElement ?= self.similarElementInAspectModel
-		
-		// drill down into all contained elements
-		self.eachOwnedElement{ e | e.asType(Mergeable).fixReferences()
-			void
-		}
-	end
-	operation mergeReferences( ) : Void is do
-		var mergedModelElement : org::DummyClass
-		mergedModelElement ?= self.similarElementInMergedModel
-		
-	end
-}

@@ -277,17 +277,8 @@ package kermeta {
 		}
 
 
-		aspect class DummyClass inherits org::kermeta::ecore::binarymerger::Mergeable {
-		}
-
 	}
 
 
-	aspect class DummyClass inherits org::kermeta::ecore::binarymerger::Mergeable {
-	}
-
 }
 
-
-aspect class DummyClass inherits org::kermeta::ecore::binarymerger::Mergeable {
-}
