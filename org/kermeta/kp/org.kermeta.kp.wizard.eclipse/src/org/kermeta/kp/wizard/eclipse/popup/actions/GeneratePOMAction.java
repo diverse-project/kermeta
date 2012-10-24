@@ -17,8 +17,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.kp.KermetaProject;
-import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.kp.wizard.eclipse.Activator;
 
 public class GeneratePOMAction implements IObjectActionDelegate {
@@ -47,18 +45,17 @@ public class GeneratePOMAction implements IObjectActionDelegate {
 	public void run(IAction action) {
 		if (selection instanceof IStructuredSelection) {
 			IFile kpfile = (IFile) ((IStructuredSelection) selection).getFirstElement();
-			KpLoaderImpl ldr = new KpLoaderImpl(org.kermeta.utils.systemservices.eclipse.Activator.getDefault().getMessaggingSystem());
 			
-			// Load KP file
-			KermetaProject kp = ldr.loadKp(kpfile.getLocationURI().toString());
-			String artefactId = kp.getName();
-			String groupId = kp.getGroup();
+			String artefactId = kpfile.getProject().getName();
+			String groupId = artefactId.contains(".") ? artefactId.substring(0, artefactId.lastIndexOf(".")) : artefactId;
+			
+			String version = Activator.getDefault().getBundle().getVersion().toString().replace(".qualifier", "-SNAPSHOT");
 			
 			InputStream is= new ByteArrayInputStream(
 					generatePOMContent(artefactId, 
 							groupId, 
 							kpfile.getName(), 
-							"2.0.6").getBytes());
+							version).getBytes());
 			IFile pomFile = kpfile.getProject().getFile("pom.xml");
 			try {
 				if(pomFile.exists()){

@@ -16,9 +16,9 @@ import org.eclipse.core.runtime.CoreException;
 import java.io.*;
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
+import org.kermeta.kp.ImportFile;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpFactory;
-import org.kermeta.kp.Source;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.kp.wizard.eclipse.Activator;
 import org.kermeta.kp.wizard.eclipse.preferences.PreferenceConstants;
@@ -129,9 +129,9 @@ public class KmtNewWizard extends Wizard implements INewWizard {
 			
 			// Load KP file
 			KermetaProject kp = ldr.loadKp(kpfile.getLocationURI().toString());
-			Source newSource = KpFactory.eINSTANCE.createSource();
-			newSource.setUrl("${project.baseUri}/"+file.getProjectRelativePath());
-			kp.getSources().add(newSource);
+			ImportFile newImportFile = KpFactory.eINSTANCE.createImportFile();
+			newImportFile.setUrl("${project.baseUri}/"+file.getProjectRelativePath());
+			kp.getImportedFiles().add(newImportFile);
 			
 			// save back to disk
 			kp.eResource().save(null);
