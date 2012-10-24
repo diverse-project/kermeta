@@ -4,7 +4,7 @@
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 2010
- * Authors : 
+ * Authors :
  * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
@@ -23,9 +23,9 @@ trait KLambdaParser extends KAbstractParser {
 
   def fLambda : Parser[Expression] = "{" ~ repsep(lambdaProperty, ",") ~ "|" ~ fExpressionLst ~ "}" ^^ {
     case _ ~ params ~ _ ~ exps ~ _ => {
-	 	  
+
         var newLambdaExp = BehaviorFactory.eINSTANCE.createLambdaExpression
-	 	 
+
         params.foreach{prop=>
           newLambdaExp.getParameters.add(prop)
         }
@@ -35,7 +35,7 @@ trait KLambdaParser extends KAbstractParser {
         newLambdaExp.setBody(newBlock)
         newLambdaExp
       }
-	  
+
   }
 
 
@@ -68,14 +68,13 @@ trait KLambdaParser extends KAbstractParser {
 
   def lambdaType : Parser[Type] = "<" ~ ( lambdaTypeParam | lambdaSingleTypeParam )  ~ "->" ~ genericQualifiedType ~ ">" ^^ {case _ ~ params ~ _ ~ res ~ _ =>
       var newType = StructureFactory.eINSTANCE.createFunctionType
-      newType.setKType(res)
       newType.getContainedType.add(res)
       var left = StructureFactory.eINSTANCE.createProductType
       newType.getContainedType.add(left)
-      left.getType.addAll(params) 
+      left.getType.addAll(params)
       newType.setLeft(left)
       newType.setRight(res)
-      
+
       left.getContainedType.addAll(params)
 
       newType
@@ -90,7 +89,7 @@ trait KLambdaParser extends KAbstractParser {
     unresolvedType
   }
 
-  
-  
+
+
 
 }
