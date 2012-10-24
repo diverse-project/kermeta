@@ -817,22 +817,7 @@ aspect class FilteredMetamodelReference {
 
 }
 
-aspect class DummyClass {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
-	end
 }
 
-}
-
-aspect class DummyClass {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
-	end
-}
-
-}
-
-aspect class DummyClass {
-	operation eachOwnedElement(func : <kermeta::standard::Object -> kermeta::standard::Object>) : Void is do
-	end
 }
 
