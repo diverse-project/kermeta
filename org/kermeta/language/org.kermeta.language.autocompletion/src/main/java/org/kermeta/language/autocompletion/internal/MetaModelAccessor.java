@@ -2,20 +2,16 @@ package org.kermeta.language.autocompletion.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.language.behavior.VariableDecl;
 import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.KermetaModelElement;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.NamedElement;
-import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Package;
-import org.kermeta.language.structure.Using;
+import org.kermeta.language.util.ModelingUnit;
 
 
 public class MetaModelAccessor {
@@ -24,7 +20,7 @@ public class MetaModelAccessor {
 	
 	public MetaModelAccessor(ModelingUnit aModelingUnit) {
 		
-		TreeIterator<EObject> objects = aModelingUnit.eAllContents();				
+		ListIterator<EObject> objects = aModelingUnit.getAllMetamodelsContents().listIterator();				
 		while (objects.hasNext()) {
 			
 			EObject element = objects.next();

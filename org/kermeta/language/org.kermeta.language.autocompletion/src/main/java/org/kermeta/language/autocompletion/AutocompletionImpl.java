@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.kermeta.language.autocompletion.api.Autocompletion;
 import org.kermeta.language.autocompletion.internal.MetaModelAccessor;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
 
 public class AutocompletionImpl implements Autocompletion {
