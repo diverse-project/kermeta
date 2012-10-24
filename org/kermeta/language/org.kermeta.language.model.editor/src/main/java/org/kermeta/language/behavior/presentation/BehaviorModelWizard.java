@@ -153,7 +153,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	@Override
-	public void init(final IWorkbench workbench, final IStructuredSelection selection) {
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(KermetaEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
@@ -212,7 +212,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 			WorkspaceModifyOperation operation =
 				new WorkspaceModifyOperation() {
 					@Override
-					protected void execute(final IProgressMonitor progressMonitor) {
+					protected void execute(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
 							//
@@ -259,8 +259,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 				final ISelection targetSelection = new StructuredSelection(modelFile);
 				getShell().getDisplay().asyncExec
 					(new Runnable() {
-						 @Override
-						public void run() {
+						 public void run() {
 							 ((ISetSelectionTarget)activePart).selectReveal(targetSelection);
 						 }
 					 });
@@ -271,7 +270,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 			try {
 				page.openEditor
 					(new FileEditorInput(modelFile),
-					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());
+					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());					 	 
 			}
 			catch (PartInitException exception) {
 				MessageDialog.openError(workbenchWindow.getShell(), KermetaEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
@@ -299,7 +298,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public BehaviorModelWizardNewFileCreationPage(final String pageId, final IStructuredSelection selection) {
+		public BehaviorModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -367,7 +366,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public BehaviorModelWizardInitialObjectCreationPage(final String pageId) {
+		public BehaviorModelWizardInitialObjectCreationPage(String pageId) {
 			super(pageId);
 		}
 
@@ -377,7 +376,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		@Override
-		public void createControl(final Composite parent) {
+		public void createControl(Composite parent) {
 			Composite composite = new Composite(parent, SWT.NONE); {
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
@@ -451,8 +450,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 */
 		protected ModifyListener validator =
 			new ModifyListener() {
-				@Override
-				public void modifyText(final ModifyEvent e) {
+				public void modifyText(ModifyEvent e) {
 					setPageComplete(validatePage());
 				}
 			};
@@ -472,7 +470,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		@Override
-		public void setVisible(final boolean visible) {
+		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
 				if (initialObjectField.getItemCount() == 1) {
@@ -517,7 +515,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		protected String getLabel(final String typeName) {
+		protected String getLabel(String typeName) {
 			try {
 				return KermetaEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
 			}

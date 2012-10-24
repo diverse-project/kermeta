@@ -162,7 +162,7 @@ public class BehaviorActionBarContributor
 	 * @generated
 	 */
 	@Override
-	public void contributeToToolBar(final IToolBarManager toolBarManager) {
+	public void contributeToToolBar(IToolBarManager toolBarManager) {
 		toolBarManager.add(new Separator("behavior-settings"));
 		toolBarManager.add(new Separator("behavior-additions"));
 	}
@@ -175,7 +175,7 @@ public class BehaviorActionBarContributor
 	 * @generated
 	 */
 	@Override
-	public void contributeToMenu(final IMenuManager menuManager) {
+	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
 		IMenuManager submenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_BehaviorEditor_menu"), "org.kermeta.language.behaviorMenuID");
@@ -199,8 +199,7 @@ public class BehaviorActionBarContributor
 		//
 		submenuManager.addMenuListener
 			(new IMenuListener() {
-				 @Override
-				public void menuAboutToShow(final IMenuManager menuManager) {
+				 public void menuAboutToShow(IMenuManager menuManager) {
 					 menuManager.updateAll(true);
 				 }
 			 });
@@ -215,7 +214,7 @@ public class BehaviorActionBarContributor
 	 * @generated
 	 */
 	@Override
-	public void setActiveEditor(final IEditorPart part) {
+	public void setActiveEditor(IEditorPart part) {
 		super.setActiveEditor(part);
 		activeEditorPart = part;
 
@@ -248,7 +247,7 @@ public class BehaviorActionBarContributor
 	 * @generated
 	 */
 	@Override
-	public void selectionChanged(final SelectionChangedEvent event) {
+	public void selectionChanged(SelectionChangedEvent event) {
 		// Remove any menu items for old selection.
 		//
 		if (createChildMenuManager != null) {
@@ -295,7 +294,7 @@ public class BehaviorActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<IAction> generateCreateChildActions(final Collection<?> descriptors, final ISelection selection) {
+	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
@@ -312,7 +311,7 @@ public class BehaviorActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<IAction> generateCreateSiblingActions(final Collection<?> descriptors, final ISelection selection) {
+	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
@@ -331,7 +330,7 @@ public class BehaviorActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void populateManager(final IContributionManager manager, final Collection<? extends IAction> actions, final String contributionID) {
+	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions, String contributionID) {
 		if (actions != null) {
 			for (IAction action : actions) {
 				if (contributionID != null) {
@@ -351,7 +350,7 @@ public class BehaviorActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void depopulateManager(final IContributionManager manager, final Collection<? extends IAction> actions) {
+	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
 		if (actions != null) {
 			IContributionItem[] items = manager.getItems();
 			for (int i = 0; i < items.length; i++) {
@@ -381,7 +380,7 @@ public class BehaviorActionBarContributor
 	 * @generated
 	 */
 	@Override
-	public void menuAboutToShow(final IMenuManager menuManager) {
+	public void menuAboutToShow(IMenuManager menuManager) {
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
@@ -401,11 +400,11 @@ public class BehaviorActionBarContributor
 	 * @generated
 	 */
 	@Override
-	protected void addGlobalActions(final IMenuManager menuManager) {
+	protected void addGlobalActions(IMenuManager menuManager) {
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
 
-		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
+		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
 
 		super.addGlobalActions(menuManager);

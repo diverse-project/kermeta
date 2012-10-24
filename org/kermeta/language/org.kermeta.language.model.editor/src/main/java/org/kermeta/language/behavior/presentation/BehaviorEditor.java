@@ -292,8 +292,7 @@ public class BehaviorEditor
 	 */
 	protected IPartListener partListener =
 		new IPartListener() {
-			@Override
-			public void partActivated(final IWorkbenchPart p) {
+			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
 						getActionBarContributor().setActiveEditor(BehaviorEditor.this);
@@ -311,20 +310,16 @@ public class BehaviorEditor
 					handleActivate();
 				}
 			}
-			@Override
-			public void partBroughtToTop(final IWorkbenchPart p) {
+			public void partBroughtToTop(IWorkbenchPart p) {
 				// Ignore.
 			}
-			@Override
-			public void partClosed(final IWorkbenchPart p) {
+			public void partClosed(IWorkbenchPart p) {
 				// Ignore.
 			}
-			@Override
-			public void partDeactivated(final IWorkbenchPart p) {
+			public void partDeactivated(IWorkbenchPart p) {
 				// Ignore.
 			}
-			@Override
-			public void partOpened(final IWorkbenchPart p) {
+			public void partOpened(IWorkbenchPart p) {
 				// Ignore.
 			}
 		};
@@ -378,7 +373,7 @@ public class BehaviorEditor
 	protected EContentAdapter problemIndicationAdapter =
 		new EContentAdapter() {
 			@Override
-			public void notifyChanged(final Notification notification) {
+			public void notifyChanged(Notification notification) {
 				if (notification.getNotifier() instanceof Resource) {
 					switch (notification.getFeatureID(Resource.class)) {
 						case Resource.RESOURCE__IS_LOADED:
@@ -396,8 +391,7 @@ public class BehaviorEditor
 							if (updateProblemIndication) {
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
-										 @Override
-										public void run() {
+										 public void run() {
 											 updateProblemIndication();
 										 }
 									 });
@@ -412,12 +406,12 @@ public class BehaviorEditor
 			}
 
 			@Override
-			protected void setTarget(final Resource target) {
+			protected void setTarget(Resource target) {
 				basicSetTarget(target);
 			}
 
 			@Override
-			protected void unsetTarget(final Resource target) {
+			protected void unsetTarget(Resource target) {
 				basicUnsetTarget(target);
 			}
 		};
@@ -430,8 +424,7 @@ public class BehaviorEditor
 	 */
 	protected IResourceChangeListener resourceChangeListener =
 		new IResourceChangeListener() {
-			@Override
-			public void resourceChanged(final IResourceChangeEvent event) {
+			public void resourceChanged(IResourceChangeEvent event) {
 				IResourceDelta delta = event.getDelta();
 				try {
 					class ResourceDeltaVisitor implements IResourceDeltaVisitor {
@@ -439,8 +432,7 @@ public class BehaviorEditor
 						protected Collection<Resource> changedResources = new ArrayList<Resource>();
 						protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
-						@Override
-						public boolean visit(final IResourceDelta delta) {
+						public boolean visit(IResourceDelta delta) {
 							if (delta.getResource().getType() == IResource.FILE) {
 								if (delta.getKind() == IResourceDelta.REMOVED ||
 								    delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
@@ -474,8 +466,7 @@ public class BehaviorEditor
 					if (!visitor.getRemovedResources().isEmpty()) {
 						getSite().getShell().getDisplay().asyncExec
 							(new Runnable() {
-								 @Override
-								public void run() {
+								 public void run() {
 									 removedResources.addAll(visitor.getRemovedResources());
 									 if (!isDirty()) {
 										 getSite().getPage().closeEditor(BehaviorEditor.this, false);
@@ -487,8 +478,7 @@ public class BehaviorEditor
 					if (!visitor.getChangedResources().isEmpty()) {
 						getSite().getShell().getDisplay().asyncExec
 							(new Runnable() {
-								 @Override
-								public void run() {
+								 public void run() {
 									 changedResources.addAll(visitor.getChangedResources());
 									 if (getSite().getPage().getActiveEditor() == BehaviorEditor.this) {
 										 handleActivate();
@@ -681,12 +671,10 @@ public class BehaviorEditor
 		//
 		commandStack.addCommandStackListener
 			(new CommandStackListener() {
-				 @Override
-				public void commandStackChanged(final EventObject event) {
+				 public void commandStackChanged(final EventObject event) {
 					 getContainer().getDisplay().asyncExec
 						 (new Runnable() {
-							  @Override
-							public void run() {
+							  public void run() {
 								  firePropertyChange(IEditorPart.PROP_DIRTY);
 
 								  // Try to select the affected objects.
@@ -715,7 +703,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 			@Override
-	protected void firePropertyChange(final int action) {
+	protected void firePropertyChange(int action) {
 		super.firePropertyChange(action);
 	}
 
@@ -725,14 +713,13 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSelectionToViewer(final Collection<?> collection) {
+	public void setSelectionToViewer(Collection<?> collection) {
 		final Collection<?> theSelection = collection;
 		// Make sure it's okay.
 		//
 		if (theSelection != null && !theSelection.isEmpty()) {
 			Runnable runnable =
 				new Runnable() {
-					@Override
 					public void run() {
 						// Try to select the items in the current content viewer of the editor.
 						//
@@ -769,7 +756,7 @@ public class BehaviorEditor
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public ReverseAdapterFactoryContentProvider(final AdapterFactory adapterFactory) {
+		public ReverseAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
 			super(adapterFactory);
 		}
 
@@ -779,7 +766,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public Object [] getElements(final Object object) {
+		public Object [] getElements(Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
 		}
@@ -790,7 +777,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public Object [] getChildren(final Object object) {
+		public Object [] getChildren(Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
 		}
@@ -801,7 +788,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public boolean hasChildren(final Object object) {
+		public boolean hasChildren(Object object) {
 			Object parent = super.getParent(object);
 			return parent != null;
 		}
@@ -812,7 +799,7 @@ public class BehaviorEditor
 		 * @generated
 		 */
 		@Override
-		public Object getParent(final Object object) {
+		public Object getParent(Object object) {
 			return null;
 		}
 	}
@@ -822,7 +809,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCurrentViewerPane(final ViewerPane viewerPane) {
+	public void setCurrentViewerPane(ViewerPane viewerPane) {
 		if (currentViewerPane != viewerPane) {
 			if (currentViewerPane != null) {
 				currentViewerPane.showFocus(false);
@@ -839,7 +826,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCurrentViewer(final Viewer viewer) {
+	public void setCurrentViewer(Viewer viewer) {
 		// If it is changing...
 		//
 		if (currentViewer != viewer) {
@@ -850,8 +837,7 @@ public class BehaviorEditor
 					new ISelectionChangedListener() {
 						// This just notifies those things that are affected by the section.
 						//
-						@Override
-						public void selectionChanged(final SelectionChangedEvent selectionChangedEvent) {
+						public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
 							setSelection(selectionChangedEvent.getSelection());
 						}
 					};
@@ -896,7 +882,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createContextMenuFor(final StructuredViewer viewer) {
+	protected void createContextMenuFor(StructuredViewer viewer) {
 		MenuManager contextMenu = new MenuManager("#PopUp");
 		contextMenu.add(new Separator("additions"));
 		contextMenu.setRemoveAllWhenShown(true);
@@ -945,7 +931,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Diagnostic analyzeResourceProblems(final Resource resource, final Exception exception) {
+	public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
 		if (!resource.getErrors().isEmpty() || !resource.getWarnings().isEmpty()) {
 			BasicDiagnostic basicDiagnostic =
 				new BasicDiagnostic
@@ -992,7 +978,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(final Composite composite) {
+						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
 							return newTreeViewer;
@@ -1026,7 +1012,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(final Composite composite) {
+						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
 							return newTreeViewer;
@@ -1055,7 +1041,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(final Composite composite) {
+						public Viewer createViewer(Composite composite) {
 							return new ListViewer(composite);
 						}
 						@Override
@@ -1080,7 +1066,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(final Composite composite) {
+						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
 						}
 						@Override
@@ -1107,7 +1093,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(final Composite composite) {
+						public Viewer createViewer(Composite composite) {
 							return new TableViewer(composite);
 						}
 						@Override
@@ -1150,7 +1136,7 @@ public class BehaviorEditor
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), BehaviorEditor.this) {
 						@Override
-						public Viewer createViewer(final Composite composite) {
+						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
 						}
 						@Override
@@ -1189,8 +1175,7 @@ public class BehaviorEditor
 
 			getSite().getShell().getDisplay().asyncExec
 				(new Runnable() {
-					 @Override
-					public void run() {
+					 public void run() {
 						 setActivePage(0);
 					 }
 				 });
@@ -1203,7 +1188,7 @@ public class BehaviorEditor
 			(new ControlAdapter() {
 				boolean guard = false;
 				@Override
-				public void controlResized(final ControlEvent event) {
+				public void controlResized(ControlEvent event) {
 					if (!guard) {
 						guard = true;
 						hideTabs();
@@ -1214,8 +1199,7 @@ public class BehaviorEditor
 
 		getSite().getShell().getDisplay().asyncExec
 			(new Runnable() {
-				 @Override
-				public void run() {
+				 public void run() {
 					 updateProblemIndication();
 				 }
 			 });
@@ -1264,7 +1248,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	protected void pageChange(final int pageIndex) {
+	protected void pageChange(int pageIndex) {
 		super.pageChange(pageIndex);
 
 		if (contentOutlinePage != null) {
@@ -1280,7 +1264,7 @@ public class BehaviorEditor
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object getAdapter(final Class key) {
+	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
 			return showOutlineView() ? getContentOutlinePage() : null;
 		}
@@ -1307,7 +1291,7 @@ public class BehaviorEditor
 			//
 			class MyContentOutlinePage extends ContentOutlinePage {
 				@Override
-				public void createControl(final Composite parent) {
+				public void createControl(Composite parent) {
 					super.createControl(parent);
 					contentOutlineViewer = getTreeViewer();
 					contentOutlineViewer.addSelectionChangedListener(this);
@@ -1330,13 +1314,13 @@ public class BehaviorEditor
 				}
 
 				@Override
-				public void makeContributions(final IMenuManager menuManager, final IToolBarManager toolBarManager, final IStatusLineManager statusLineManager) {
+				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager, statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
 
 				@Override
-				public void setActionBars(final IActionBars actionBars) {
+				public void setActionBars(IActionBars actionBars) {
 					super.setActionBars(actionBars);
 					getActionBarContributor().shareGlobalActions(this, actionBars);
 				}
@@ -1350,8 +1334,7 @@ public class BehaviorEditor
 				(new ISelectionChangedListener() {
 					 // This ensures that we handle selections correctly.
 					 //
-					 @Override
-					public void selectionChanged(final SelectionChangedEvent event) {
+					 public void selectionChanged(SelectionChangedEvent event) {
 						 handleContentOutlineSelection(event.getSelection());
 					 }
 				 });
@@ -1371,13 +1354,13 @@ public class BehaviorEditor
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
 					@Override
-					public void setSelectionToViewer(final List<?> selection) {
+					public void setSelectionToViewer(List<?> selection) {
 						BehaviorEditor.this.setSelectionToViewer(selection);
 						BehaviorEditor.this.setFocus();
 					}
 
 					@Override
-					public void setActionBars(final IActionBars actionBars) {
+					public void setActionBars(IActionBars actionBars) {
 						super.setActionBars(actionBars);
 						getActionBarContributor().shareGlobalActions(this, actionBars);
 					}
@@ -1394,7 +1377,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void handleContentOutlineSelection(final ISelection selection) {
+	public void handleContentOutlineSelection(ISelection selection) {
 		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
@@ -1445,7 +1428,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void doSave(final IProgressMonitor progressMonitor) {
+	public void doSave(IProgressMonitor progressMonitor) {
 		// Save only resources that have actually changed.
 		//
 		final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
@@ -1458,7 +1441,7 @@ public class BehaviorEditor
 				// This is the method that gets invoked when the operation runs.
 				//
 				@Override
-				public void execute(final IProgressMonitor monitor) {
+				public void execute(IProgressMonitor monitor) {
 					// Save the resources to the file system.
 					//
 					boolean first = true;
@@ -1502,12 +1485,12 @@ public class BehaviorEditor
 
 	/**
 	 * This returns whether something has been persisted to the URI of the specified resource.
-	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream.
+	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected boolean isPersisted(final Resource resource) {
+	protected boolean isPersisted(Resource resource) {
 		boolean result = false;
 		try {
 			InputStream stream = editingDomain.getResourceSet().getURIConverter().createInputStream(resource.getURI());
@@ -1557,8 +1540,8 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void doSaveAs(final URI uri, final IEditorInput editorInput) {
-		editingDomain.getResourceSet().getResources().get(0).setURI(uri);
+	protected void doSaveAs(URI uri, IEditorInput editorInput) {
+		(editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor =
@@ -1574,7 +1557,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void gotoMarker(final IMarker marker) {
+	public void gotoMarker(IMarker marker) {
 		try {
 			if (marker.getType().equals(EValidator.MARKER)) {
 				String uriAttribute = marker.getAttribute(EValidator.URI_ATTRIBUTE, null);
@@ -1599,7 +1582,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void init(final IEditorSite site, final IEditorInput editorInput) {
+	public void init(IEditorSite site, IEditorInput editorInput) {
 		setSite(site);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
@@ -1630,7 +1613,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void addSelectionChangedListener(final ISelectionChangedListener listener) {
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.add(listener);
 	}
 
@@ -1641,7 +1624,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void removeSelectionChangedListener(final ISelectionChangedListener listener) {
+	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.remove(listener);
 	}
 
@@ -1664,7 +1647,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void setSelection(final ISelection selection) {
+	public void setSelection(ISelection selection) {
 		editorSelection = selection;
 
 		for (ISelectionChangedListener listener : selectionChangedListeners) {
@@ -1678,7 +1661,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatusLineManager(final ISelection selection) {
+	public void setStatusLineManager(ISelection selection) {
 		IStatusLineManager statusLineManager = currentViewer != null && currentViewer == contentOutlineViewer ?
 			contentOutlineStatusLineManager : getActionBars().getStatusLineManager();
 
@@ -1713,7 +1696,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static String getString(final String key) {
+	private static String getString(String key) {
 		return KermetaEditorPlugin.INSTANCE.getString(key);
 	}
 
@@ -1723,7 +1706,7 @@ public class BehaviorEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static String getString(final String key, final Object s1) {
+	private static String getString(String key, Object s1) {
 		return KermetaEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
@@ -1734,7 +1717,7 @@ public class BehaviorEditor
 	 * @generated
 	 */
 	@Override
-	public void menuAboutToShow(final IMenuManager menuManager) {
+	public void menuAboutToShow(IMenuManager menuManager) {
 		((IMenuListener)getEditorSite().getActionBarContributor()).menuAboutToShow(menuManager);
 	}
 
