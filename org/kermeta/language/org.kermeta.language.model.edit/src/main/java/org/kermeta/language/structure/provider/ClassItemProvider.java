@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,11 +21,9 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.kermeta.language.structure.StructurePackage;
-
 import org.kermeta.language.structure.Class;
 import org.kermeta.language.structure.NamedElement;
+import org.kermeta.language.structure.StructurePackage;
 
 
 
@@ -50,7 +47,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassItemProvider(AdapterFactory adapterFactory) {
+	public ClassItemProvider(final AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,7 +58,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(final Object object) {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -80,7 +77,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOwnedAttributePropertyDescriptor(Object object) {
+	protected void addOwnedAttributePropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -102,7 +99,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOwnedOperationPropertyDescriptor(Object object) {
+	protected void addOwnedOperationPropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -124,7 +121,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSuperClassPropertyDescriptor(Object object) {
+	protected void addSuperClassPropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -146,7 +143,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsAbstractPropertyDescriptor(Object object) {
+	protected void addIsAbstractPropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -168,7 +165,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(final Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
@@ -191,7 +188,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	@Override
-	public Object getImage(Object object) {
+	public Object getImage(final Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/Class"));
 	}
 
@@ -202,21 +199,22 @@ public class ClassItemProvider
 	 * @generated NOT
 	 */
 	@Override
-	public String getText(Object object) {
+	public String getText(final Object object) {
 		// We get the label of the class definition that is referred by the given
-				// class
-				// a '->' is added to show the "reference" semantic
-				String label = "";
-			    if (object instanceof Class && ((Class) object).getTypeDefinition() != null) {
-			    	label = " -> " + ((Class) object).getTypeDefinition().getName();
-			    }
-			    String parent = "";
-			    if (object instanceof Class && ((Class) object).eContainer() instanceof NamedElement && ((NamedElement) ((Class) object).eContainer()).getName() != null) {
-			        parent = " owned by " + ((NamedElement) ((Class) object).eContainer()).getName();
-			    }
+		// class
+		// a '->' is added to show the "reference" semantic
+		String label = "";
+	    if (object instanceof Class && ((Class) object).getTypeDefinition() != null) {
+	    	label = " -> " + ((Class) object).getTypeDefinition().getName();
+	    }
+	    String parent = "";
+	    if (object instanceof Class && ((Class) object).eContainer() instanceof NamedElement && ((NamedElement) ((Class) object).eContainer()).getName() != null) {
+	        parent = " owned by " + ((NamedElement) ((Class) object).eContainer()).getName();
+	    }
 
-			    return label == null || label.length() == 0 ? getString("_UI_Class_type") : getString("_UI_Class_type") + label + parent; 
+	    return label.length() == 0 ? getString("_UI_Class_type") : getString("_UI_Class_type") + label + parent;
 	}
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -226,7 +224,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	@Override
-	public void notifyChanged(Notification notification) {
+	public void notifyChanged(final Notification notification) {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(org.kermeta.language.structure.Class.class)) {
@@ -246,7 +244,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(final Collection<Object> newChildDescriptors, final Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -257,7 +255,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(final Object owner, final Object feature, final Object child, final Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 

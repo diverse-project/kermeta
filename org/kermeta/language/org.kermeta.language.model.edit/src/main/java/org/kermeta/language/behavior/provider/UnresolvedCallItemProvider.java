@@ -29,7 +29,6 @@ import org.kermeta.language.behavior.UnresolvedCall;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.provider.UnresolvedReferenceItemProvider;
-import org.provider.KermetaEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link org.kermeta.language.behavior.UnresolvedCall} object.

@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,7 +22,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.StructureFactory;
 import org.kermeta.language.structure.StructurePackage;
@@ -176,7 +173,7 @@ public class ClassDefinitionItemProvider
 	 * @generated NOT
 	 */
 	@Override
-	public Object getImage(Object object) {
+	public Object getImage(final Object object) {
 		if(((ClassDefinition)object).getIsAbstract()){
 			return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassDefinition_abstract"));
 		}
@@ -191,7 +188,7 @@ public class ClassDefinitionItemProvider
 	 * @generated NOT
 	 */
 	@Override
-	public String getText(Object object) {
+	public String getText(final Object object) {
 		String label = ((ClassDefinition)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ClassDefinition_type") :
