@@ -10,10 +10,14 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -807,7 +811,7 @@ public class KermetaCompiler {
 	public ArrayList<String> getImportProjetJarClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		ArrayList<String> result = new ArrayList<String>();
 		for(ImportProjectJar dep : kp.getImportedProjectJars()){
-			varExpander.expandVariables(dep.getUrl());
+			result.add(convertUrlToclassPath(varExpander.expandVariables(dep.getUrl())));
 		}
 		return result;
 	}
@@ -815,9 +819,56 @@ public class KermetaCompiler {
 	public ArrayList<String> getImportByteCodeJarClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		ArrayList<String> result = new ArrayList<String>();
 		for(ImportBytecodeJar dep : kp.getImportedBytecodeJars()){
-			varExpander.expandVariables(dep.getUrl());
+			result.add(convertUrlToclassPath(varExpander.expandVariables(dep.getUrl())));
 		}
 		return result;
+	}
+	
+	public String convertUrlToclassPath(String urlString){
+		try {
+			URL jarURL = new URL(urlString);
+			/*if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
+				// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
+				jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
+			}*/
+			if( jarURL.getProtocol().equals("file")){ 
+				File theFile = new File(jarURL.toURI());
+				if (theFile!=null) {
+					if(theFile.exists()){
+						if(theFile.getName().equals("bundlefile")){
+							//some version of scala compiler doesn't accept classpath to jar that doesn't end with .jar
+							// so bundlefile that are used by OSGI doesn't works correctly
+							// create a copy with the correct name
+							
+							File outFile = new File(java.net.URI.create(jarURL+".jar"));
+							if(!outFile.exists()){
+								// copy the file to have the correct extension
+								InputStream inputStream = new FileInputStream(theFile);					
+								OutputStream out = new FileOutputStream(outFile);
+								 
+								int read = 0;
+								byte[] bytes = new byte[1024];
+							 
+								while ((read = inputStream.read(bytes)) != -1) {
+									out.write(bytes, 0, read);
+								}
+							 
+								inputStream.close();
+								out.flush();
+								out.close();
+							}
+							theFile = outFile;
+						}
+						return theFile.getAbsolutePath();
+					}
+				}
+			
+			}
+		} catch (URISyntaxException e) {}
+		catch (java.net.MalformedURLException e) {}
+		catch(IOException e){}
+		// ignore URI that cannot be translated into a local file ...
+		return urlString;
 	}
 	
 /*	public String getResolvedDependencyURL(Dependency dep,  KpVariableExpander varExpander)  throws IOException {
