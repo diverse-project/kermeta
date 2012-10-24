@@ -213,6 +213,11 @@
 							org.kermeta.diagnostic.model,
 							org.kermeta.language.texteditor.eclipse.nature				
                         </Require-Bundle>
+                        <Import-Package>
+                        	org.kermeta.kp.editor,
+              				org.kermeta.kp.editor.analysis,
+              				org.kermeta.kp.editor.analysis.helper
+                        </Import-Package>
 		            </manifestEntries>		            
 		          </archive>
 		        </configuration>
