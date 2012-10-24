@@ -611,8 +611,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   }
 
   def visitCallSuperOperation(thi: CallSuperOperation, res: StringBuilder): Unit = {
-    val superTypeName = if(thi.getSuperType.getTypeContainer.isInstanceOf[ClassDefinition])
-    						thi.getSuperType.getTypeContainer.asInstanceOf[ClassDefinition].getName else ""
+    val superTypeName = if(thi.getSuperType.isInstanceOf[Class])
+    						thi.getSuperType.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName else ""
     res.append("super[")
     res.append(superTypeName)
     res.append("Aspect]")
