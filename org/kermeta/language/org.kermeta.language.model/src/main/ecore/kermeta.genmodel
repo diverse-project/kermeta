@@ -42,8 +42,6 @@
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallSuperOperation">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallSuperOperation/superType"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/behavior/CallSuperOperation/superOperation"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallResult"/>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/behavior/CallValue"/>

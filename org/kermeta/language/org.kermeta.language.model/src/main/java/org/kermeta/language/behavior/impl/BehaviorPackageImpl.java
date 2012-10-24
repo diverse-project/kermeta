@@ -516,15 +516,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCallSuperOperation_SuperOperation() {
-		return (EReference)callSuperOperationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCallResult() {
 		return callResultEClass;
 	}
@@ -1078,7 +1069,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		callSuperOperationEClass = createEClass(CALL_SUPER_OPERATION);
 		createEReference(callSuperOperationEClass, CALL_SUPER_OPERATION__SUPER_TYPE);
-		createEReference(callSuperOperationEClass, CALL_SUPER_OPERATION__SUPER_OPERATION);
 
 		callResultEClass = createEClass(CALL_RESULT);
 
@@ -1252,7 +1242,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		initEClass(callSuperOperationEClass, CallSuperOperation.class, "CallSuperOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallSuperOperation_SuperType(), theStructurePackage.getType(), null, "superType", null, 1, 1, CallSuperOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallSuperOperation_SuperOperation(), theStructurePackage.getOperation(), null, "superOperation", null, 0, 1, CallSuperOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(callResultEClass, CallResult.class, "CallResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
