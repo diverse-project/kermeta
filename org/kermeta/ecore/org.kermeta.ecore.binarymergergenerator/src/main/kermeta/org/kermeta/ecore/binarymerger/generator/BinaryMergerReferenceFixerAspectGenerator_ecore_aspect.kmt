@@ -284,7 +284,8 @@ aspect class EReference {
 				content.append(mangledName+"ToMove.each{ o |") 
 				context.pushIndent
 					content.append(context.indentString)
-					content.append("\\\\stdio.writeln(\"[fixReferences]replacing \"+o.toString+\" by \"+o.similarElementInMergedModel.toString+\" (referenced by attribute "+mangledName+")\")")
+					
+					content.append("/"+"/stdio.writeln(\"[fixReferences]replacing \"+o.toString+\" by \"+o.similarElementInMergedModel.toString+\" (referenced by attribute "+mangledName+")\")")
 					//content.append("stdio.writeln(\"[fixReferences]moving a \"+o.toString+\" referenced by attribute "+mangledName+"\")")
 					content.append(context.indentString)
 					content.append("self."+mangledName+".remove(o)")
