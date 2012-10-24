@@ -15,11 +15,12 @@ import org.kermeta.language.behavior.UnresolvedCall;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Package;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeDefinition;
+import org.kermeta.language.util.ModelingUnit;
 
 public class ClosestElementFinder {
 
@@ -52,9 +53,11 @@ public class ClosestElementFinder {
 	public KermetaModelElement findClosestContainerModelelement(ModelingUnit mu){
 		KermetaModelElement result = null;
 		if (mu != null) {
-			for(  org.kermeta.language.structure.Package pack : mu.getPackages()){				 
-				KermetaModelElement res = findClosestContainerModelelement(pack);
-				if(res != null) result = res;
+			for(Metamodel mm : mu.getMetamodels()){
+				for(  org.kermeta.language.structure.Package pack : mm.getPackages()){				 
+					KermetaModelElement res = findClosestContainerModelelement(pack);
+					if(res != null) result = res;
+				}
 			}
 		}
 		return result;

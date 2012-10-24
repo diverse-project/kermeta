@@ -12,8 +12,6 @@
 package org.kermeta.language.texteditor.eclipse.internal.outline;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
@@ -23,6 +21,7 @@ import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation
 
 public class OutlineItem {
 	public enum OutlineTypes {
+		Metamodel,
 		Package,
 		Class,
 		Operation,
@@ -69,13 +68,16 @@ public class OutlineItem {
 		this.namespace = "";
 		this.opParameters = "";
 		if (this.parent != null){
+			this.namespace =  this.parent.fullName();
+			
+			/*
 			if (this.parent.getNamespace().compareTo("") != 0){
 				this.namespace = this.parent.getNamespace() + "::" + this.parent.label;
 			} else {
 				if (this.parent.label.compareTo("KermetaRoot") != 0){
 					this.namespace = this.parent.label;
 				} 
-			}
+			}*/
 		}
 		this.helper = helper;
 		
@@ -118,6 +120,15 @@ public class OutlineItem {
 	    
 	    */
 		switch(type){
+		case Metamodel:
+			switch(localisationType){
+			case External:
+				return Activator.getDefault().getImage(Activator.ImageTypes.ExtMetamodel);
+			case Local: 
+				return Activator.getDefault().getImage(Activator.ImageTypes.LocalMetamodel);
+			case Mixed:
+				return Activator.getDefault().getImage(Activator.ImageTypes.MixedMetamodel);
+			}
 		case Package:
 			switch(localisationType){
 			case External:
@@ -231,6 +242,8 @@ public class OutlineItem {
 			return children.length;
 		} else {
 			switch(type){
+			case Metamodel:
+				return helper.getMetamodelChildrenCount(this);
 			case Package:
 				return helper.getPackageChildrenCount(this);
 			case Class:
@@ -243,6 +256,9 @@ public class OutlineItem {
 	public Object[] getChildren() {
 		if(children == null){
 			switch(type){
+			case Metamodel:
+				children = helper.updateMetamodel(this);
+				break;
 			case Package:
 				children = helper.updatePackage(this);
 				break;
@@ -270,7 +286,11 @@ public class OutlineItem {
 	
 	public String fullName(){
 		if(namespace != null && !namespace.isEmpty()){
-			return namespace+"::"+label;
+			//if(namespace.contains(""))
+			if(parent!= null && parent.type == OutlineTypes.Metamodel){
+				return namespace+"#"+label;
+			}
+			else return namespace+"::"+label;
 		}
 		else{
 			return label;

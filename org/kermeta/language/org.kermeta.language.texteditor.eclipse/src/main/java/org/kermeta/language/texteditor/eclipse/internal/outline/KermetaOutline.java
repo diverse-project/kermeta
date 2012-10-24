@@ -53,7 +53,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.FileEditorInput;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
 import org.kermeta.language.texteditor.eclipse.internal.outline.ItemLocalisation.FileHighlight;
 import org.kermeta.language.texteditor.eclipse.internal.outline.OutlineItem.OutlineTypes;

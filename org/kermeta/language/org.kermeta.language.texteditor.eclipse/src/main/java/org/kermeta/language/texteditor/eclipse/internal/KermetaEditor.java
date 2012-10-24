@@ -2,11 +2,6 @@ package org.kermeta.language.texteditor.eclipse.internal;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.ITextViewerExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Composite;
@@ -15,9 +10,9 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.builder.eclipse.KermetaBuilderEventListener;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.texteditor.eclipse.internal.autocompletion.BracketInserter;
 import org.kermeta.language.texteditor.eclipse.internal.outline.KermetaOutline;
+import org.kermeta.language.util.ModelingUnit;
 
 
 public class KermetaEditor extends TextEditor implements  KermetaBuilderEventListener {

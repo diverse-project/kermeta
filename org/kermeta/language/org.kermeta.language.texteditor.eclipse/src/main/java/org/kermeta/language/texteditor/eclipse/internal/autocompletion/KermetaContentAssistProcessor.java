@@ -34,12 +34,12 @@ import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.loader.kmt.scala.Lexer;
 import org.kermeta.language.loader.kmt.scala.api.IKToken;
 import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.ModelingUnit;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.texteditor.eclipse.internal.Activator;
 import org.kermeta.language.texteditor.eclipse.internal.ClosestElementFinder;
 import org.kermeta.language.texteditor.eclipse.internal.KermetaEditor;
+import org.kermeta.language.util.ModelingUnit;
 
 public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 
@@ -412,7 +412,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		if(closestContainer != null){
 			if(closestContainer instanceof CallExpression){
 				CallExpression ce = (CallExpression) closestContainer;
-				ce.getKType();
+				ce.getStaticType();
 			}
 		}
 		//}

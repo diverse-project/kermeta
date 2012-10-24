@@ -68,7 +68,7 @@
 			org.eclipse.emf.ecore.xmi.impl,
 			org.kermeta.language.structure,
 			org.kermeta.language.behavior,
-			org.kermeta.language,
+			org.kermeta.language.util,
 			org.kermeta.utils.systemservices.eclipse
                         </Import-Package>
 		            </manifestEntries>		            

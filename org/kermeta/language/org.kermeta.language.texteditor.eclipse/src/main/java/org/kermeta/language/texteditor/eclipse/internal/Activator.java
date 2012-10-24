@@ -28,6 +28,9 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	public enum ImageTypes {
+		LocalMetamodel,
+		ExtMetamodel,
+		MixedMetamodel,
 		LocalPackage,
 		ExtPackage,
 		MixedPackage,
@@ -122,6 +125,12 @@ public class Activator extends AbstractUIPlugin {
 			return (Image)imageObj;
 		} else {
 			switch (name){
+			case LocalMetamodel:
+				return this.getImageFile("icons/yellow/package.png", ImageTypes.LocalMetamodel);
+			case ExtMetamodel:
+				return this.getImageFile("icons/yellow/package.png", ImageTypes.ExtMetamodel);
+			case MixedMetamodel:
+				return this.getImageFile("icons/yellow/package.png", ImageTypes.MixedMetamodel);
 			case LocalPackage:
 				return this.getImageFile("icons/red/package.png", ImageTypes.LocalPackage);
 			case ExtPackage:
