@@ -7,7 +7,6 @@ package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
-import java.util.regex.Pattern
 
 trait KTagParser extends KAbstractParser {
 

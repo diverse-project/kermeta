@@ -11,10 +11,9 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure.Property
 import org.kermeta.language.behavior.Expression
+import org.kermeta.language.structure.Property
 import org.kermeta.language.structure.StructureFactory
-import scala.Predef._
 
 trait KAttributeParser extends KAbstractParser with KMultiplicityParser{
 

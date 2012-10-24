@@ -8,7 +8,8 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.behavior.{BehaviorFactory, Expression}
+import org.kermeta.language.behavior.BehaviorFactory
+import org.kermeta.language.behavior.Expression
 
 trait KExternParser extends KAbstractParser {
 

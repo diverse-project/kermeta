@@ -4,24 +4,23 @@
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 2010
- * Authors : 
+ * Authors :
  * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
 import scala.collection.JavaConversions._
+
+import org.kermeta.language.behavior.BehaviorFactory
+import org.kermeta.language.behavior.Expression
 
 /**
  * Sub parser dedicated to parse Conditional expression in KMT textual syntax
  */
 trait KConditionalParser extends KAbstractParser {
 
-  
+
   def fConditional : Parser[Expression] = "if"~fStatement~"then"~fExpressionLst~( opt("else"~fExpressionLst ))~"end" ^^ { case _~cond~_~thenBody~elseBody~_=>
       var newo = BehaviorFactory.eINSTANCE.createConditional
       newo.setCondition(cond)

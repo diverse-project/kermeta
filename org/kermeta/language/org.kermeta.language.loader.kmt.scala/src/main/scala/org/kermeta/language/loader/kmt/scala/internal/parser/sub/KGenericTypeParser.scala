@@ -10,10 +10,11 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
+import scala.collection.JavaConversions._
+
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Type
 import org.kermeta.language.structure.UnresolvedType
-import scala.collection.JavaConversions._
 
 trait KGenericTypeParser extends KAbstractParser with KLambdaParser {
   /* PUBLIC METHOD */

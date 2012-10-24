@@ -11,13 +11,12 @@
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import scala.collection.mutable.HashMap
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
-import org.kermeta.language.loader.kmt.scala.internal.lexer.KMLexical
-import scala.collection.JavaConversions._
 import scala.util.parsing.combinator.syntactical.TokenParsers
+
+import org.kermeta.language.behavior.Expression
+import org.kermeta.language.behavior.impl.EmptyExpressionImpl
+import org.kermeta.language.loader.kmt.scala.internal.lexer.KMLexical
+import org.kermeta.language.structure.Type
 
 /**
  * Common part of all Sub parsers

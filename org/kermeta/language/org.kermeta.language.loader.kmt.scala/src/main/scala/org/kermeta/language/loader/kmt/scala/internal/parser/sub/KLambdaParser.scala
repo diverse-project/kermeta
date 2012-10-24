@@ -10,11 +10,14 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
 import scala.collection.JavaConversions._
+
+import org.kermeta.language.behavior.BehaviorFactory
+import org.kermeta.language.behavior.Expression
+import org.kermeta.language.behavior.LambdaParameter
+import org.kermeta.language.structure.StructureFactory
+import org.kermeta.language.structure.Type
+import org.kermeta.language.structure.UnresolvedType
 
 /**
  * Sub parser dedicated to parse Lambda expression in KMT textual syntax

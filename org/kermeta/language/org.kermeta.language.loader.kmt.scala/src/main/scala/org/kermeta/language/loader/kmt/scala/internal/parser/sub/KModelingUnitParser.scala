@@ -18,10 +18,6 @@ import scala.util.parsing.input.Positional
 
 import org.kermeta.language.behavior.Expression
 import org.kermeta.language.behavior.UnresolvedCall
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KAbstractParser
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KAliasParser
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KTagParser
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KUsingParser
 import org.kermeta.language.structure.ClassDefinition
 import org.kermeta.language.structure.Enumeration
 import org.kermeta.language.structure.Package

@@ -10,11 +10,12 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser
 
+import scala.collection.JavaConversions.asScalaBuffer
+
 import org.kermeta.language.structure.StructureFactory
+import org.kermeta.language.structure.Type
 import org.kermeta.language.structure.TypeContainer
 import org.kermeta.language.structure.UnresolvedType
-import org.kermeta.language.structure.Type
-import scala.collection.JavaConversions._
 
 /**
  * Helper operation for building Km model element

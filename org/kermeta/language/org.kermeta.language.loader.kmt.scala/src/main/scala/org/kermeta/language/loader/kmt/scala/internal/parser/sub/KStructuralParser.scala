@@ -4,22 +4,29 @@
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 2010
- * Authors : 
+ * Authors :
  * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 
+import org.kermeta.language.behavior.BehaviorFactory
+import org.kermeta.language.behavior.Block
+import org.kermeta.language.behavior.CallResult
+import org.kermeta.language.behavior.CallSuperOperation
+import org.kermeta.language.behavior.Expression
+import org.kermeta.language.behavior.Literal
+import org.kermeta.language.behavior.Rescue
+import org.kermeta.language.behavior.SelfExpression
+import org.kermeta.language.behavior.UnresolvedCall
+import org.kermeta.language.structure.StructureFactory
+
 /**
- * Sub parser dedicated to parse Block and Expression lists (using parenthesis) in KMT textual syntax  
+ * Sub parser dedicated to parse Block and Expression lists (using parenthesis) in KMT textual syntax
  */
 trait KStructuralParser extends KAbstractParser {
 
@@ -58,7 +65,7 @@ trait KStructuralParser extends KAbstractParser {
                     Success(elems.toList, in0)
                   }
                 }
-             
+
               case block : Block => {
                 if (elems.size == 0) {
                     elems += x;
@@ -159,7 +166,7 @@ trait KStructuralParser extends KAbstractParser {
   }
 
   /*  def fExpressionMergedCall : Parser[Expression] = fCall ^^ {
-   case _@e => e	
+   case _@e => e
    }*/
 
 
@@ -220,7 +227,7 @@ trait KStructuralParser extends KAbstractParser {
 
       newo
   }
-  
+
   private def attributeBound : Parser[Tuple2[Int,Int]] = "[" ~ ( numericLit | "*" ) ~ "]" ^^ { case _ ~ bound ~ _ =>
       bound match {
         case "*" => (0,-1)
@@ -236,7 +243,7 @@ trait KStructuralParser extends KAbstractParser {
   }
 
   def attributeBounds = ( biattributeBounds | attributeBound )
-  
-  
+
+
 
 }

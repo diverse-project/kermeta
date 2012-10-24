@@ -10,9 +10,9 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure.{Type,  MultiplicityElement}
 import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
-import org.kermeta.language.loader.kmt.scala.internal.printer.PrettyPrinter
+import org.kermeta.language.structure.MultiplicityElement
+import org.kermeta.language.structure.Type
 
 
 /**

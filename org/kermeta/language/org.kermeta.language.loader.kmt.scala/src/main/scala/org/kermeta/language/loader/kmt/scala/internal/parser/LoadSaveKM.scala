@@ -10,16 +10,16 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser
 
-import org.kermeta.language.behavior.Expression
-import org.kermeta.language.util.ModelingUnit
 import java.util.HashMap
+
 import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import scala.collection.JavaConversions._
+import org.kermeta.language.behavior.Expression
+import org.kermeta.language.util.ModelingUnit
 
 /**
  * Singleton methods used to load and save km model files

@@ -10,8 +10,8 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
-import scala.collection.JavaConversions._
+import org.kermeta.language.structure.Enumeration
+import org.kermeta.language.structure.StructureFactory
 
 
 trait KEnumerationParser extends KAbstractParser {

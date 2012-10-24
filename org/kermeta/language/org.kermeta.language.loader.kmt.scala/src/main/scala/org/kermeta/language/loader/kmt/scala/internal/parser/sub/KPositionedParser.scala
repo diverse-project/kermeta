@@ -5,10 +5,11 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure.KermetaModelElement
-import org.kermeta.language.structure.StructureFactory
 import scala.util.parsing.input.OffsetPosition
 import scala.util.parsing.input.Positional
+
+import org.kermeta.language.structure.KermetaModelElement
+import org.kermeta.language.structure.StructureFactory
 
 trait KPositionedParser extends KAbstractParser {
 

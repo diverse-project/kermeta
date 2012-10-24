@@ -10,11 +10,11 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
+import org.kermeta.language.behavior.Expression
+import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 import org.kermeta.language.structure.Parameter
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
-import org.kermeta.language.behavior.Expression
-import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
 import org.kermeta.language.structure.Type
 
 trait KOperationParser extends KAbstractParser with KMultiplicityParser {

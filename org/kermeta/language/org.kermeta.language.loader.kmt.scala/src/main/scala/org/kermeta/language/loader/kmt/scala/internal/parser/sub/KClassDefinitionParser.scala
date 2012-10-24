@@ -10,12 +10,14 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
 import org.kermeta.language.loader.kmt.scala.internal.parser.KmBuildHelper
-import scala.collection.JavaConversions._
+import org.kermeta.language.structure.ClassDefinition
+import org.kermeta.language.structure.Constraint
+import org.kermeta.language.structure.Operation
+import org.kermeta.language.structure.Property
+import org.kermeta.language.structure.StructureFactory
+import org.kermeta.language.structure.Tag
+import org.kermeta.language.structure.Type
 
 /**
  * Sub parser dedicated to parse ClassDefinition in KMt textual syntax

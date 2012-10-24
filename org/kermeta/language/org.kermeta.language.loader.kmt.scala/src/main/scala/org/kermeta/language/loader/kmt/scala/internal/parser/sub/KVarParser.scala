@@ -10,7 +10,8 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.behavior._
+import org.kermeta.language.behavior.BehaviorFactory
+import org.kermeta.language.behavior.Expression
 import org.kermeta.language.loader.kmt.scala.internal.printer.PrettyPrinter
 
 /**

@@ -10,13 +10,12 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.lexer
 
-import scala.util.parsing.input._
-import org.kermeta.language.loader.kmt.scala.api.IKToken
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.combinator.token.Tokens
 import scala.util.parsing.input.OffsetPosition
 import scala.util.parsing.input.Positional
-import scala.collection.JavaConversions._
+
+import org.kermeta.language.loader.kmt.scala.api.IKToken
 
 trait KTokens extends Tokens with Parsers {
 

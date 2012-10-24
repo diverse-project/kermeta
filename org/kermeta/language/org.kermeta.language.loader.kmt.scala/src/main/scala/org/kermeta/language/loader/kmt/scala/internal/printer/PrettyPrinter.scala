@@ -1,14 +1,14 @@
 package org.kermeta.language.loader.kmt.scala.internal.printer
 
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.kermeta.language.util.ModelingUnit
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import scala.collection.JavaConversions.asScalaBuffer
+
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
-import scala.collection.JavaConversions._
-import java.util.regex.Pattern
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import org.kermeta.language.behavior._
+import org.kermeta.language.structure._
+import org.kermeta.language.util.ModelingUnit
 
 object PrettyPrinter {
 

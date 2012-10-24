@@ -10,9 +10,11 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser
 
-import org.kermeta.language.loader.kmt.scala.internal.lexer.KMLexer
-import scala.io.Source
 import java.lang.StringBuffer
+
+import scala.io.Source
+
+import org.kermeta.language.loader.kmt.scala.internal.lexer.KMLexer
 import org.kermeta.language.loader.kmt.scala.internal.printer.PrettyPrinter
 
 /**

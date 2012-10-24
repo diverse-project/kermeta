@@ -4,19 +4,14 @@
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 2010
- * Authors : 
+ * Authors :
  * 		Francois Fouquet <ffouquet@irisa.fr>
  */
 
 package org.kermeta.language.loader.kmt.scala.internal.parser
 
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KAbstractParser
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
+import org.kermeta.language.behavior.Expression
 import org.kermeta.language.loader.kmt.scala.internal.parser.sub._
-import scala.collection.JavaConversions._
 
 /**
  * Parser of Kermeta expression in KMT textual syntax
@@ -39,7 +34,7 @@ trait KExpressionParser extends KAbstractParser
   /**
    * extend the fExpression parser with sub parser
    */
-  override def fExpression : Parser[Expression] =  positionedfExpression | fBlock |   fVariableDecl 
+  override def fExpression : Parser[Expression] =  positionedfExpression | fBlock |   fVariableDecl
   def positionedfExpression : Parser[Expression] = kpositioned ( fExtern | fRaise | pExpression  | fLoop | fConditional | fLambda |  fCall | fLiteral)
   override def fStatement : Parser[Expression] = kpositioned (fAssignement)
 

@@ -10,12 +10,10 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
-import scala.collection.JavaConversions._
 import java.util.regex.Pattern
+
+import org.kermeta.language.behavior.BehaviorFactory
+import org.kermeta.language.behavior.Expression
 
 /**
  * Sub parser dedicated to parse Literal expression in KMT textual syntax

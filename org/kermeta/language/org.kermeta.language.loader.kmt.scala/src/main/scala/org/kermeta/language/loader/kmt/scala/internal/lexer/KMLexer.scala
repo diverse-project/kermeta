@@ -10,8 +10,6 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.lexer
 
-import java.io.File
-
 class KMLexer(content : String) extends KMLexical {
 
   var tokens = new Scanner(content)

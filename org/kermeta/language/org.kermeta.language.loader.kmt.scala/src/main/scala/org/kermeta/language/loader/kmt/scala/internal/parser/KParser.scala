@@ -10,14 +10,11 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.parser
 
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KAbstractParser
-import org.kermeta.language.structure._
-import org.kermeta.language.behavior._
-import org.kermeta.language.structure.impl._
-import org.kermeta.language.behavior.impl._
-import org.kermeta.language.loader.kmt.scala.internal.parser.sub._
-import scala.collection.JavaConversions._
 import scala.util.parsing.input.OffsetPosition
+
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KClassDefinitionParser
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KEnumerationParser
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KModelingUnitParser
 import org.kermeta.language.util.ModelingUnit
 
 /**

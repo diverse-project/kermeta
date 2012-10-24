@@ -11,15 +11,10 @@
 
 package org.kermeta.language.loader.kmt.scala.internal.lexer
 
-import scala.annotation.tailrec
 import scala.collection.mutable.HashSet
 import scala.collection.mutable.ListBuffer
-import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.combinator.lexical.Lexical
-import scala.util.parsing.combinator.lexical.Scanners
-import scala.util.parsing.combinator.lexical.StdLexical
 import scala.util.parsing.input.CharArrayReader.EofCh
-import scala.util.parsing.input.Position
 
 class KMLexical extends Lexical with KTokens {
 
