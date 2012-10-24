@@ -131,7 +131,7 @@ package behavior {
 				tvb.variable:= tv
 				tvb.type:=tv
 				result.typeParamBinding.add(tvb)
-				}
+			}
 		end
 		
 	}

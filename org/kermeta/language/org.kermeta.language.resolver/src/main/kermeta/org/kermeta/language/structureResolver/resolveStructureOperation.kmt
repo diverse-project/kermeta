@@ -102,7 +102,7 @@ aspect class UnresolvedOperation inherits UnresolvedReference, AbstractOperation
 aspect class Operation inherits MultiplicityElement, AbstractOperation {
 	method resolveStructureOperation(context : LanguageVisitorContext) is do
 		//if there is a super operation 
-		if not superOperation.isVoid then
+/* 		if not superOperation.isVoid then
 			if superOperation.isInstanceOf(UnresolvedOperation) then
 				var unresolvedOp : UnresolvedOperation init superOperation.asType(UnresolvedOperation)
 				// at this point superOperation
@@ -141,7 +141,7 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation {
 					end
 				end	
 				
-		end
+		end */
 		
 	end
 }

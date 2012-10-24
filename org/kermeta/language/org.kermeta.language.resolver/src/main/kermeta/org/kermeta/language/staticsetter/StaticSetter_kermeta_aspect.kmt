@@ -3,7 +3,7 @@
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
- *            dvojtise,cbouhour
+ *            dvojtise,cbouhour, ablouin
  * this Aspect compute the staticType and resolve the UnresolvedCall
  */
 
@@ -246,23 +246,35 @@ package behavior {
 		
 		
 	}
+
 	aspect class CallSuperOperation{
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression from CallExpression is do
-			
-			if not context.currentOperation.isVoid then
+			if context.currentOperation.isVoid then
+				context.errors.add(ResolverException.new.initialize("\"super\" keyword should not be used outside of an operation", self))
+			else
 				//set parameters
 				super(context)
-				//get super operation from the currentOperation
-				if context.verbose then stdio.writeln("set staticOperation for a CallSuperOperation") end
-				if context.currentOperation.superOperation.isVoid then
-					context.errors.add(ResolverException.new.initialize("No Super Operation found for"+context.currentOperation.name, self))
-				else
-					if context.currentOperation.superOperation.isInstanceOf(Operation) then
-						staticOperation:=context.currentOperation.superOperation.asType(Operation)
-					end
+				
+				// Resolving the super class targeted by the super call (super[FooClass])
+				// Suppose that a class does not inherit from several classes with the same name (but not the same qualified name).
+				if superType.isInstanceOf(UnresolvedType) then
+					var superClassName : String init superType.asType(UnresolvedType).typeIdentifier
+					var type : Type init context.currentClassDefinition.superType.detect{t| t.isInstanceOf(Class).andThen{b | t.asType(Class).name==superClassName}}
+					if(type.isVoid) then 
+						context.errors.add(ResolverException.new.initialize("No super class with this name found: "+superClassName, self))
+					else superType := type end
 				end
+				
+				// Resolving the super operation using the resolved super type.
+				if (staticOperation.isVoid or staticOperation.isInstanceOf(UnresolvedOperation)) and superType.isInstanceOf(Class) then
+					var clazz : ClassDefinition init superType.asType(Class).typeDefinition.asType(ClassDefinition)
+					var op : Operation init clazz.ownedOperation.detect{op2| op2.name==context.currentOperation.name}
+					if op.isVoid then 
+						context.errors.add(ResolverException.new.initialize("No super operation with this name found: "+context.currentOperation.name, self))
+					else staticOperation := op end
+				end
+				
 				//retry to resolve lambda here, when staticOperation is known
-						
 				from var lambdaToBeResolved : ToBeResolvedLater
 				until context.waitingContext.isEmpty()
 				loop
@@ -278,22 +290,13 @@ package behavior {
 				end
 				
 				if not staticOperation.isVoid then
-				
 					self.inferTypeVariableFromParameters(context)
-
-				end
-				
-				
-				// The static type of the call operation must be infered.
-				if context.currentOperation.superOperation.isInstanceOf(Operation) then
-					setInferedStaticType(context,context.currentOperation.superOperation.asType(Operation).type)
+					// The static type of the call operation must be infered.
+					setInferedStaticType(context, staticOperation.type)
 				end
 				
 				result := self
-			else
-				context.errors.add(ResolverException.new.initialize("\"super\" keyword should not be used outside of an operation", self))
 			end
-		
 		end
 	}
 	
