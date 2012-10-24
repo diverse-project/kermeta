@@ -447,7 +447,7 @@ public class KPBuilder {
 		// Load KP file
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		// full build required so clear the consoles
-		Activator.getDefault().getMessaggingSystem4Runner(kp.getEclipseName()).clearLog();
+		Activator.getDefault().getMessaggingSystem4Runner(kp.getMetamodelName()).clearLog();
 		//k2.io.StdIO._messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 		/* k2.io.StdIO$.MODULE$.messagingSystem_$eq(Activator.getDefault().getMessaggingSystem4Runner(kp.getName()));
 		Activator.getDefault().getMessaggingSystem4Runner(kp.getName()).info("console test", "aGroup");
@@ -456,9 +456,9 @@ public class KPBuilder {
 		
 		try {
 			KermetaRunner runner = new ProgressCancellableKermetaRunner(outputScalaBinaryFolder, 
-					kp.getEclipseName(),
+					kp.getMetamodelName(),
 					getFullClassPath(),
-					Activator.getDefault().getMessaggingSystem4Runner(kp.getEclipseName()), 
+					Activator.getDefault().getMessaggingSystem4Runner(kp.getMetamodelName()), 
 					monitor);
 			if((!mainClass.isEmpty()) && (!mainOperation.isEmpty())){
 				runner.runK2Program(mainClass, mainOperation, params,outputRootFolder+File.separator+"urimap.properties");
@@ -659,7 +659,7 @@ public class KPBuilder {
 		if (ldr != null) {
 			KermetaProject kp = ldr.loadKp(kpFileURL);
 			if (kp != null) {
-				return kp.getEclipseName();
+				return kp.getMetamodelName();
 			}
 		}
 		return "";
