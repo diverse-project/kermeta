@@ -45,47 +45,6 @@ aspect class Operation
 		end
 	end
 
-	/*
-	 * The "from" keyword must refer to a direct supertype of the
-	 * operation's owning class
-	 */
-	/*
-	@Scope "RESOLVED"
-	inv from_must_refer_to_direct_supertype is do
-	
-		if (not(self.superOperation.isVoid))
-		then
-			
-			//
-			//var classDef : ClassDefinition init self.superOperation.owningClass
-			if (self.superOperation.isInstanceOf(Operation))
-			then
-				var classDef : ClassDefinition init self.superOperation.asType(Operation).owningClass
-				// this classdefinition must be a direct superType of
-				// the operation's owning class
-				if (not(
-					self.owningClass.superType.exists{ st | 
-						st.asType(Class).typeDefinition.asType(ClassDefinition).equals(classDef) }
-				
-				))
-				then
-				
-					stdio.writeln("Problem when checking from_must_refer_to_direct_supertype for operation " + self.name + " on class" + self.owningClass.name)
-					
-				end
-				
-				self.owningClass.superType.exists{ st | 
-					st.asType(Class).typeDefinition.asType(ClassDefinition).equals(classDef) }
-			else
-				// is it possible ???
-				true
-			end
-		else
-			// nothin to check
-			true
-		end
-	end
-	*/
 
 	/**
 	 * The information in the super (or lack of information in super)
