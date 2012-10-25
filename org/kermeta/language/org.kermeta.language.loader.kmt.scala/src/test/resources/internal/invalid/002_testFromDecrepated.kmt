@@ -1,0 +1,6 @@
+package testFrom;
+
+class TestFrom{
+    operation foobar() from FooClass is do
+    end
+}
