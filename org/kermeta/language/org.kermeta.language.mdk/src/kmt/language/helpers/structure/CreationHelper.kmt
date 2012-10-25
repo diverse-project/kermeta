@@ -120,7 +120,6 @@ aspect class UnresolvedOperation {
 			raise e
 		end
 		self.operationIdentifier := operationIdentifier
-		self.~from := fromType
 		result := self
 	end
 }
@@ -191,11 +190,10 @@ aspect class Operation {
 	 * @param returnType
 	 *            the type returned by the Operation
 	 * @param parent
-	 *            the parent of the Operation
+	 *            the parent of the Operation. Decrepated and not used.
 	 */
 	operation initialize(name : String, returnType : Type, parent : Operation) : Operation is do
 		self.name := name
-		self.superOperation := parent
 		if(not returnType.isVoid) then
 			self.containedType.add(returnType)
 			self.type := returnType
