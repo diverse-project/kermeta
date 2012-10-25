@@ -57,6 +57,9 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
     supert match {
       case Some(value) => newo.setSuperType(value)
       case None =>
+        val unresType = StructureFactory.eINSTANCE.createUnresolvedType
+        unresType.setTypeIdentifier("")
+        newo.setSuperType(unresType)
     }
 
     params match {
