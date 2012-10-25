@@ -707,7 +707,7 @@ class OrderedSet[G] inherits Set[G], OrderedCollection[G]
 	/**
 	 * See OrderedCollection<G>.equals(Object) 
 	 */
-	operation equals(element : Object) : Boolean from OrderedCollection[G] is do
+	operation equals(element : Object) : Boolean is do
 
 	end
 	
@@ -765,7 +765,7 @@ class Sequence[G] inherits Bag[G], OrderedCollection[G]
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current Sequence	
 	 */
-	operation equals(element : Object) : Boolean from OrderedCollection[G] is do
+	operation equals(element : Object) : Boolean is do
 
 	end
 	
