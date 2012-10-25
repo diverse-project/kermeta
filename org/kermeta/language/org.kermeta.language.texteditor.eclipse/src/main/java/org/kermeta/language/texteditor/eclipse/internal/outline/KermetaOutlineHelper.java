@@ -299,12 +299,12 @@ public class KermetaOutlineHelper {
 
 	public OutlineItem[] updateClass(OutlineItem it) {
 		return getTypeDefinitionsChildrenForPackage(
-				findPackage(it.getNamespace()), it);
+				findPackage(it.parent.realName()), it);
 	}
 
 	public OutlineItem[] updateEnumeration(OutlineItem it) {
 		return getTypeDefinitionsChildrenForPackage(
-				findPackage(it.getNamespace()), it);
+				findPackage(it.parent.realName()), it);
 	}
 
 	public URI getOutlineForFile() {
