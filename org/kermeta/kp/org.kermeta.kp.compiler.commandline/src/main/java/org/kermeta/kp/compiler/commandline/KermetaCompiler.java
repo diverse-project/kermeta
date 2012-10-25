@@ -790,14 +790,16 @@ public class KermetaCompiler {
 	}
 
 	/**
-	 * computes the list of the sources for this project
+	 * computes the list of all the sources for this project
 	 * @param kpString
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<TracedURL> getResolvedImportProjectSources(String kpString) throws IOException {
+	public ArrayList<TracedURL> getAllResolvedProjectSources(String kpString) throws IOException {
 		CollectSourcesHelper sourceHelper = new CollectSourcesHelper(this, logger);
-		return sourceHelper.getResolvedImportProjectSources(kpString);
+		ArrayList<TracedURL> result = sourceHelper.getResolvedImportProjectSources(kpString);
+		result.addAll(sourceHelper.getDirectImportFiles(kpString));
+		return result;
 	}
 	
 

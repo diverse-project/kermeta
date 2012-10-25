@@ -15,9 +15,11 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.language.builder.eclipse.internal.WorkspaceResourceChangeListener;
@@ -87,7 +89,15 @@ public class Activator extends AbstractUIPlugin {
 		KermetaBuilder.getDefault();
 		plugin = this;
 		workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
+		Job job = new Job("Kermeta builder initialization job") {
+			protected IStatus run(IProgressMonitor monitor) {
+				//
+				ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
+				return Status.OK_STATUS;
+			}
+		};
+	    job.setPriority(Job.LONG);
+	    job.schedule(); // start as soon as possible		
 		this.setMyContext(context);
 	}
 

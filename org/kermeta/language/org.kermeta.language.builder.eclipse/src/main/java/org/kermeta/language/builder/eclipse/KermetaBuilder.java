@@ -85,7 +85,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 			for(String s : params)
 				sb.append(s+" ");				
 		}
-		Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevDEBUG, "will launch kermeta program for "+kpIdentifier+ " and with parameters : "+sb.toString(), LOG_MESSAGE_GROUP);
+		Activator.getDefault().getMessaggingSystem().log(MessagingSystem.Kind.DevDEBUG, "will launch kermeta program for "+kpIdentifier+ " and with parameters : "+sb.toString(), KermetaBuilder.LOG_MESSAGE_GROUP);
 		Job job = new Job("Running "+kpBuilders.get(kpIdentifier).getKpProjectFile().getRawLocation()) {
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
@@ -96,7 +96,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 								else return Status.CANCEL_STATUS;
 							} catch (Exception e) {
 								try {
-									Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+									Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
 								} catch (Exception u) {
 									e.printStackTrace();
 								}
@@ -111,12 +111,12 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 						kpBuilders.get(kpIdentifier).runKP(mainClass, mainOperation, params, monitor);						
 					}
 					else{
-						Activator.getDefault().getMessaggingSystem4Runner(kpIdentifier).logProblem(MessagingSystem.Kind.UserERROR, "Cannot run. The project has build error\n ", LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+						Activator.getDefault().getMessaggingSystem4Runner(kpIdentifier).logProblem(MessagingSystem.Kind.UserERROR, "Cannot run. The project has build error\n ", KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
 					}
 					
 				} catch (Exception e) {
 					try {
-						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
 					} catch (Exception u) {
 						e.printStackTrace();
 					}
@@ -137,7 +137,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 					kpBuilders.get(kpIdentifier).build(monitor);
 				} catch (Exception e) {
 					try {
-						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
 					} catch (Exception u) {
 						e.printStackTrace();
 					}
@@ -160,7 +160,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 					
 				} catch (Exception e) {
 					try {
-						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
+						Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, "Unable to build this project.\n "+e.getMessage(), KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpBuilders.get(kpIdentifier).getKpFileURL())));
 					} catch (Exception u) {
 						e.printStackTrace();
 					}
@@ -224,8 +224,9 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 
 	@Override
 	public void setDirty(IResource kmt, boolean dirty) {
+		
 		try {
-			Activator.getDefault().getMessaggingSystem().flushProblem(LOG_MESSAGE_GROUP, kmt.getLocationURI().toURL());
+			Activator.getDefault().getMessaggingSystem().flushProblem(KermetaBuilder.LOG_MESSAGE_GROUP, kmt.getLocationURI().toURL());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -234,7 +235,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 				kpBuilders.get(findKPidentifierFromKMT(kmt)).kpFiles.get(generateIdentifier(kmt)).dirtyFile = dirty;		
 			} else {
 				try {				
-					Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", LOG_MESSAGE_GROUP, new FileReference(kmt.getLocationURI().toURL()));
+					Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserWARNING, "not able to retreive a kp project referencing "+kmt.getName()+ ", completion and outline support reduced to minimal, please add this file to a kp project", KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(kmt.getLocationURI().toURL()));
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
 				}
@@ -242,7 +243,7 @@ public class KermetaBuilder extends org.kermeta.language.builder.api.Builder{
 		}
 		else{
 			try {
-				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserWARNING, "not able to retreive a kp project referencing "+kmt+ ", completion support reduced to minimal", LOG_MESSAGE_GROUP, new FileReference(kmt.getLocationURI().toURL()));
+				Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserWARNING, "not able to retreive a kp project referencing "+kmt.getName()+ ", completion and outline support reduced to minimal, please add this file to a kp project", KermetaBuilder.LOG_MESSAGE_GROUP, new FileReference(kmt.getLocationURI().toURL()));
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}

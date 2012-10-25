@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.language.structure.Metamodel;
+import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.helpers.FileHelpers;
@@ -96,6 +97,16 @@ public class KpChecker {
 											compiler.errorMessage = "Invalid kp file. Default main operation not usable due to invalid parameter type";
 											compiler.hasFailed = true;
 										}
+									}
+									// check that the default operation has a @main tag
+									Boolean tagFound = false;
+									for(Tag t : op.getKOwnedTags()){
+										if(t.getName().equals("main")) tagFound = true;
+									}
+									if(!tagFound){
+										compiler.logger.logProblem(MessagingSystem.Kind.UserWARNING, "Default main operation not usable because it doesn't have the @main tag", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+										compiler.errorMessage = "Invalid kp file. Default main operation not usable due to invalid parameter type";
+										compiler.hasFailed = true;
 									}
 								}
 							}

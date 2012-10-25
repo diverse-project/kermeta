@@ -250,7 +250,7 @@ public class KPBuilder {
 				return true;
 			}
 			
-			ArrayList<TracedURL> theSources = compiler.getResolvedImportProjectSources(kpFileURL);
+			ArrayList<TracedURL> theSources = compiler.getAllResolvedProjectSources(kpFileURL);
 			for (TracedURL oneURL : theSources) {
 				IFile theFile = ResourceHelpers.getIFile(oneURL.getUrl().toString());
 				if (theFile != null) {
@@ -606,7 +606,7 @@ public class KPBuilder {
 	public void refreshFileIndex() throws IOException {
 		// verify if this kpFile still exists
 		// TODO
-		ArrayList<TracedURL> kpSources = compiler.getResolvedImportProjectSources(kpFileURL);
+		ArrayList<TracedURL> kpSources = compiler.getAllResolvedProjectSources(kpFileURL);
 		//This list allow to preserve old files ever parsed
 		HashMap<String,KPFilesContainer> oldKpFiles = kpFiles;
 		kpFiles = new HashMap<String, KPFilesContainer>();
@@ -671,13 +671,13 @@ public class KPBuilder {
 					kpURL);
 			String name = getKPProjectName();
 		
-			if(!name.equals(kpProjectFile.getProject().getName())){
+			/*if(!name.equals(kpProjectFile.getProject().getName())){
 					Activator.getDefault().getMessaggingSystem().logProblem(MessagingSystem.Kind.UserERROR, 
 							"Project name in kp file ("+name+") must be equals to the eclipse project name ("+kpProjectFile.getName()+")", 
 							KermetaBuilder.LOG_MESSAGE_GROUP+".eclipse", 
 							new FileReference(kpURL));
 				
-			}
+			}*/
 		} catch (MalformedURLException e) {
 		}
 	}
