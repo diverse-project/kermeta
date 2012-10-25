@@ -296,6 +296,17 @@ public class OutlineItem {
 			return label;
 		}
 	}
+	/**
+	 * 
+	 * @return the fullName except the leading "KermetaRoot::"
+	 */
+	public String realName(){
+		String name = fullName();
+		if(name.startsWith("KermetaRoot::")){
+			name = name.replaceFirst("KermetaRoot::", "");
+		}
+		return name;
+	}
 	
 	public void setLocalisation(ItemLocalisation loc){
 		this.localisationType =  loc.localisationType;

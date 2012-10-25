@@ -248,6 +248,8 @@ public class KermetaOutlineHelper {
 	}
 
 	public Metamodel findMetamodel(String metamodelName) {
+		
+		
 		for (Metamodel mm : this.modelingUnit.getMetamodels()) {
 			if (mm.getName().equals(metamodelName))
 				return mm;
@@ -262,7 +264,7 @@ public class KermetaOutlineHelper {
 			Package curr = null;
 			String[] result = packageName.split("::");
 			for (int x = 0; x < result.length; x++) {
-				Package p = getNestedPackage(result[x], curr);
+				Package p = (curr == null) ? findPackage(result[x], mm) : getNestedPackage(result[x], curr);
 				if (p != null) {
 					curr = p;
 				}
@@ -288,11 +290,11 @@ public class KermetaOutlineHelper {
 	}
 
 	public OutlineItem[] updateMetamodel(OutlineItem it) {
-		return getMetamodelChildren(findMetamodel(it.fullName()), it);
+		return getMetamodelChildren(findMetamodel(it.realName()), it);
 	}
 
 	public OutlineItem[] updatePackage(OutlineItem it) {
-		return getPackageChildren(findPackage(it.fullName()), it);
+		return getPackageChildren(findPackage(it.realName()), it);
 	}
 
 	public OutlineItem[] updateClass(OutlineItem it) {
@@ -334,26 +336,26 @@ public class KermetaOutlineHelper {
 	}
 
 	public int getMetamodelChildrenCount(OutlineItem outlineItem) {
-		Metamodel mm = findMetamodel(outlineItem.fullName());
+		Metamodel mm = findMetamodel(outlineItem.realName());
 		return getMetamodelChildrenCount(mm);
 		// return outlineItem.getChildren().length;
 	}
 
 	public int getPackageChildrenCount(OutlineItem outlineItem) {
-		Package p = findPackage(outlineItem.fullName());
+		Package p = findPackage(outlineItem.realName());
 		return getPackageChildrenCount(p);
 		// return outlineItem.getChildren().length;
 	}
 
 	public int getTypeDefinitionChildrenCount(OutlineItem outlineItem) {
-		Package p = findPackage(outlineItem.fullName());
+		Package p = findPackage(outlineItem.realName());
 		for (TypeDefinition td : p.getOwnedTypeDefinition()) {
-			if (td.getName().compareTo(outlineItem.fullName()) == 0
+			if (td.getName().compareTo(outlineItem.realName()) == 0
 					&& (td instanceof ClassDefinition)) {
 				ClassDefinition cn = (ClassDefinition) td;
 				return getClassChildrenCount(cn);
 			}
-			if (td.getName().compareTo(outlineItem.fullName()) == 0
+			if (td.getName().compareTo(outlineItem.realName()) == 0
 					&& (td instanceof Enumeration)) {
 				Enumeration cn = (Enumeration) td;
 				return getEnumerationChildrenCount(cn);
