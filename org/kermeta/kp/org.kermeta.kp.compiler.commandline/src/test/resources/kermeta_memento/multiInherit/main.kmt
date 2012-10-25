@@ -12,9 +12,10 @@ package pkg{
 		end
 	}
 	class CapitalText inherits LeftHand, RightHand {
-		method addOp(textToAdd : kermeta::standard::String) : kermeta::standard::Void from LeftHand is
+		method addOp(textToAdd : kermeta::standard::String) : kermeta::standard::Void is
 		do
-			super(textToAdd)
+			super[LeftHand](textToAdd)
+			super[RightHand](textToAdd)
 		end
 	}
 	class LeftHand {
