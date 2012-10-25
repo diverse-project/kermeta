@@ -62,7 +62,6 @@ public class UnresolvedOperationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addOperationIdentifierPropertyDescriptor(object);
-			addFromPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -85,28 +84,6 @@ public class UnresolvedOperationItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the From feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFromPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_UnresolvedOperation_from_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_UnresolvedOperation_from_feature", "_UI_UnresolvedOperation_type"),
-				 StructurePackage.Literals.UNRESOLVED_OPERATION__FROM,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}

@@ -63,7 +63,6 @@ public class OperationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addRaisedExceptionPropertyDescriptor(object);
-			addSuperOperationPropertyDescriptor(object);
 			addTypeParameterPropertyDescriptor(object);
 			addIsAbstractPropertyDescriptor(object);
 			addUniqueNamePropertyDescriptor(object);
@@ -107,28 +106,6 @@ public class OperationItemProvider
 				 getString("_UI_Operation_raisedException_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_raisedException_feature", "_UI_Operation_type"),
 				 StructurePackage.Literals.OPERATION__RAISED_EXCEPTION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Super Operation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSuperOperationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Operation_superOperation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_superOperation_feature", "_UI_Operation_type"),
-				 StructurePackage.Literals.OPERATION__SUPER_OPERATION,
 				 true,
 				 false,
 				 true,
