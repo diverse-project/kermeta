@@ -76,7 +76,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       case o: Loop => {
         visitLoop(o, res)
       }
-
+      
       case o: ProductType => {
         visitProductType(o, res)
       }
@@ -698,6 +698,9 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 
   def getQualifiedNameCompilo(thi: EObject): String = {
     thi match {
+      case (mm: Metamodel) => {
+        return mm.getName()
+      }
       case (p: Package) => {
         return k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi))
       }
@@ -751,10 +754,13 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
   def getQualifiedName(thi: EObject): String = {
     var res = new StringBuilder
     thi match {
+      case (mm: Metamodel) => {
+        res.append(mm.getName)
+      }
       case (p: Package) => {
 
-        if (p.getNestingPackage != null) {
-          res.append(getQualifiedName(p.getNestingPackage) + ".")
+        if (p.eContainer() != null && (p.eContainer().isInstanceOf[Package] || p.eContainer().isInstanceOf[Metamodel])) {
+          res.append(getQualifiedName(p.eContainer()) + ".")
         }
         res.append(p.getName)
       }
@@ -765,11 +771,18 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     return res.toString()
   }
 
+   def getQualifiedNameKermeta(thi: Metamodel): String = {
+    return  thi.getName
+
+  }
   def getQualifiedNameKermeta(thi: Package): String = {
     var res: String = ""
-    if (thi.getNestingPackage != null) {
-      res = getQualifiedName(thi.getNestingPackage) + "::"
+    if (thi.eContainer() != null && thi.eContainer().isInstanceOf[Metamodel]) {
+      res = getQualifiedNameKermeta(thi.eContainer().asInstanceOf[Metamodel]) + "#"
     }
+    if (thi.getNestingPackage != null) {
+      res = getQualifiedNameKermeta(thi.getNestingPackage) + "::"
+    }    
     res = res + thi.getName
     return res
 

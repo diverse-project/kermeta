@@ -7,7 +7,7 @@ import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 
-trait OperationAspect extends ObjectVisitor with LogAspect {
+trait OperationAspect extends ObjectVisitor with LogAspect with ClassDefinitionAspect {
 	
  
 
@@ -16,7 +16,7 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
       log.debug("Operation={}",thi.getName)
       res.append("\n   ")
       //TODO in fact it should limit this case to operation that come from Kermeta Object
-      if (thi.getSuperOperation()!=null  && !Util.hasEcoreTag( thi.getSuperOperation().asInstanceOf[Operation].getOwningClass ) 
+      if (this.getSuperOperation(thi)!=null  && !Util.hasEcoreTag( this.getSuperOperation(thi).asInstanceOf[Operation].getOwningClass ) 
           && !Util.hasEcoreTag(thi) ){
                res.append(" override")
       }
@@ -24,6 +24,19 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
     }
   }
 	
+  /**
+   * returns the first superOperation that match this operation signature (currently, operation name and number of parameters)
+   */
+  def getSuperOperation(thi:Operation) : Operation = {
+    this.getAllOperations(thi.getOwningClass()).filter({op => (
+      (op != thi)
+      && (op.getName().equals(thi.getName()))
+      && (op.getOwnedParameter().size().equals(thi.getOwnedParameter().size()))
+          )}).first
+    
+  }
+  
+  
   /**
    * Generate the signature of an operation without checking for its super operations
    */
@@ -79,8 +92,8 @@ trait OperationAspect extends ObjectVisitor with LogAspect {
     if (!Util.hasCompilerIgnoreTag(thi)){
       log.debug("Operation={}",thi.getName)
       res.append("\n   ")
-      if (thi.getSuperOperation()!=null   
-          && !Util.hasEcoreTag( thi.getSuperOperation() ) 
+      if (this.getSuperOperation(thi)!=null   
+          && !Util.hasEcoreTag( this.getSuperOperation(thi) ) 
           && !Util.hasEcoreTag(thi)){
         res.append(" override")
       }

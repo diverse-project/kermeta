@@ -212,6 +212,9 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
   }
 
+  /**
+   * Returns all the invariant of this ClassDefinition including inherited ones
+   */
   def getAllInvariants(thi: ClassDefinition): java.util.List[Constraint] = {
     var result = new ArrayList[Constraint]()
     result.addAll(thi.getInv)
@@ -219,6 +222,23 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       st match {
         case cd: Class => {
           result.addAll(getAllInvariants(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition]))
+        }
+        case _ => println("TOTO " + st)
+      }
+    }
+    return result
+  }
+  
+  /**
+   * Returns all the operation of this ClassDefinition including inherited ones
+   */
+  def getAllOperations(thi: ClassDefinition): java.util.List[Operation] = {
+    var result = new ArrayList[Operation]()
+    result.addAll(thi.getOwnedOperation())
+    thi.getSuperType.foreach { st =>
+      st match {
+        case cd: Class => {
+          result.addAll(getAllOperations(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition]))
         }
         case _ => println("TOTO " + st)
       }

@@ -12,9 +12,11 @@ import org.kermeta.language.util.ModelingUnit
 
 class ScalaAspectVisitor extends IVisitor with LogAspect {
 	
-  def visit(par : ModelingUnit){
+  def visit(mu : ModelingUnit){
     //PreCompiler.visit(par)
-    par.getMetamodels().foreach(p => (this.visit(p)))
+    mu.getMetamodels().foreach(p => 
+      (this.visit(p)
+          ))
   }
   
   def visit(mm : Metamodel){
