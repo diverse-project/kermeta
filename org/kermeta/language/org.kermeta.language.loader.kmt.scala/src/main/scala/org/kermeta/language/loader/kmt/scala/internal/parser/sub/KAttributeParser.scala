@@ -109,10 +109,4 @@ trait KAttributeParser extends KAbstractParser with KMultiplicityParser{
 
       newo
   }
-
-
-
-
-
-
 }

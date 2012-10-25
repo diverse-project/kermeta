@@ -11,10 +11,11 @@
 package org.kermeta.language.loader.kmt.scala.internal.parser.sub
 
 import scala.collection.JavaConversions._
-
 import org.kermeta.language.behavior.BehaviorFactory
 import org.kermeta.language.behavior.Expression
 import org.kermeta.language.structure.UnresolvedType
+import org.kermeta.language.structure.UnresolvedOperation
+import org.kermeta.language.structure.StructureFactory
 
 /**
  * Sub parser dedicated to parse the various way to call something in KMt textual syntax

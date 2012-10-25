@@ -20,50 +20,29 @@ import org.kermeta.language.structure.Type
 trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   /* SUB PARSER CONTRACT */
   def annotation : Parser[Tag]
-
   /* END SUB PARSER CONTRACT */
-
 
   def operationParameters = repsep(operationParameter ,",")
   def operationReturnType = opt(":" ~> multiplicityType)
-  def methodFromType = opt("from" ~> genericQualifiedType )
+  def methodFromType = opt("from" ~> genericQualifiedType ~> failure("The keyword 'from' is decrepated. Instead, the targeted super class should be specified at the super call: 'super[MySuperClass]' instead of 'from MySuperClass'.") )
 
   /* Pre and post conditions for operations */
-  def preconditionParser : Parser[Tuple3[String,String,Expression]]= "pre" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp =>
-    /*var resTuple: Tuple2[String, Expression] = (id, exp)
-    resTuple*/
-    (key,id,exp)
-  }
-  def postconditionParser : Parser[Tuple3[String, String,Expression]] = "post" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp =>
-    /*var resTuple : Tuple2[String, Expression] = (id, exp)
-    resTuple*/
-    (key,id,exp)
-  }
+  def preconditionParser : Parser[Tuple3[String,String,Expression]] = "pre" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp => (key,id,exp) }
+  def postconditionParser : Parser[Tuple3[String, String,Expression]] = "post" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp => (key,id,exp) }
 
   def prePostConditionParser : Parser[Tuple3[String, String, Expression]] = (preconditionParser | postconditionParser)
 
-  def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~ operationReturnType ~ methodFromType ~ rep(prePostConditionParser) ~ "is" ~ operationBody) ^^ { case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ fromType ~ prePosts ~ _ ~ body =>
-      var newo =StructureFactory.eINSTANCE.createOperation
-      fromType match {
-        case None =>
-        case Some(ft)=> {
-            var newsuperO = StructureFactory.eINSTANCE.createUnresolvedOperation
-            newsuperO.setOperationIdentifier(opName)
-            newsuperO.getContainedType.add(ft)
-            newsuperO.setFrom(ft)
-            newo.setSuperOperation(newsuperO)
-            newo.getOwnedUnresolvedOperations.add(newsuperO)
-        }
-      }
-
+  def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~
+		  			operationReturnType ~ methodFromType ~ rep(prePostConditionParser) ~ "is" ~ operationBody) ^^ {
+    case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ _ ~ prePosts ~ _ ~ body =>
+      var newo = StructureFactory.eINSTANCE.createOperation
       newo.setName(opName)
       if(body != null) {
         newo.setIsAbstract(false)
         newo.setBody(body)
       }
-      else {
+      else
         newo.setIsAbstract(true)
-      }
 
       opGParams match {
         case None =>
@@ -78,19 +57,16 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
                 ovar.setSupertype(newu)
                 ovar.getContainedType.add(newu)
               }
-
             }
           }
       }
-      
+
       /*
        params match {
        case Some(_ @ lpara) => for(par <- lpara) newo.getOwnedParameter.add(par)
        case None => // DO NOTHING
        }*/
-      params.foreach{par=>
-        newo.getOwnedParameter.add(par)
-      }
+      params.foreach{par=> newo.getOwnedParameter.add(par)}
 
       unresolveType match {
         case None => {
@@ -102,9 +78,6 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
         case Some(urt)=> {
             // copy Type and multiplicity information in this Operation
             urt.copyToKElem(newo)
-
-
-
             //var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt._1)
             //newo.setType(selectedUnresolvedType)
             //newo.getContainedType.add(selectedUnresolvedType)
@@ -116,23 +89,19 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
         var constraint = StructureFactory.eINSTANCE.createConstraint()
         constraint.setName(tuple._2)
         constraint.setBody(tuple._3)
-        if (tuple._1=="pre") {
+        if (tuple._1=="pre")
           // This is a pre condition
           constraint.setPreOwner(newo)
-        } else {
+        else
           // this is a post condition
           constraint.setPostOwner(newo)
-        }
-
       }
-
       newo
   }
 
   private def operationGenericParems = operationGenericParemsWithChevrons | operationGenericParemsWithBrackets
   private def operationGenericParemsWithChevrons = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
   private def operationGenericParemsWithBrackets = "[" ~ rep1sep(genericDef,",") ~ "]" ^^{case _ ~ params ~ _ => params }
-
 
   private def genericDef : Parser[Tuple2[String, Type] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
     var resTuple : Tuple2[String, Type] = (null,  null)
@@ -163,13 +132,10 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
 
   def operationExpressionBody = ( (annotation?) ~ fStatement) ^^ { case a1 ~ exp =>
       a1 match {
-        case Some(_ @ tag) => 	exp.getKTag.add(tag); 
+        case Some(_ @ tag) => 	exp.getKTag.add(tag)
         						exp.getKOwnedTags().add(tag)
         case None =>
       }
       exp
   }
-
-  
-
 }
