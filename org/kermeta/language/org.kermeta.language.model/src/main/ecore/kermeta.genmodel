@@ -147,8 +147,6 @@
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Operation/pre"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Operation/post"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Operation/body"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Operation/superOperation"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Operation/ownedUnresolvedOperations"/>
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/Operation/owningClass"/>
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -300,8 +298,6 @@
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/UnresolvedOperation">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/UnresolvedOperation/operationIdentifier"/>
-            <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                ecoreFeature="ecore:EReference kermeta.ecore#//kermeta/language/structure/UnresolvedOperation/from"/>
           </genClasses>
           <genClasses ecoreClass="kermeta.ecore#//kermeta/language/structure/Using">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta.ecore#//kermeta/language/structure/Using/fromQName"/>

@@ -451,22 +451,13 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Super Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__SUPER_OPERATION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Owned Unresolved Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNED_UNRESOLVED_OPERATIONS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+	int OPERATION__OWNED_UNRESOLVED_OPERATIONS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
@@ -475,7 +466,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+	int OPERATION__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
@@ -484,7 +475,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -493,7 +484,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
+	int OPERATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Unique Name</b></em>' attribute.
@@ -502,7 +493,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__UNIQUE_NAME = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
+	int OPERATION__UNIQUE_NAME = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -511,7 +502,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 11;
+	int OPERATION_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
@@ -2949,22 +2940,13 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNRESOLVED_OPERATION__FROM = ABSTRACT_OPERATION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Unresolved Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNRESOLVED_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 3;
+	int UNRESOLVED_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.
@@ -4304,17 +4286,6 @@ public interface StructurePackage extends EPackage {
 	EReference getOperation_Body();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.Operation#getSuperOperation <em>Super Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Super Operation</em>'.
-	 * @see org.kermeta.language.structure.Operation#getSuperOperation()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EReference getOperation_SuperOperation();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.Operation#getOwnedUnresolvedOperations <em>Owned Unresolved Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5523,17 +5494,6 @@ public interface StructurePackage extends EPackage {
 	EAttribute getUnresolvedOperation_OperationIdentifier();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.UnresolvedOperation#getFrom <em>From</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>From</em>'.
-	 * @see org.kermeta.language.structure.UnresolvedOperation#getFrom()
-	 * @see #getUnresolvedOperation()
-	 * @generated
-	 */
-	EReference getUnresolvedOperation_From();
-
-	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Using <em>Using</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6210,14 +6170,6 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION__BODY = eINSTANCE.getOperation_Body();
-
-		/**
-		 * The meta object literal for the '<em><b>Super Operation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPERATION__SUPER_OPERATION = eINSTANCE.getOperation_SuperOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Unresolved Operations</b></em>' containment reference list feature.
@@ -7192,14 +7144,6 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute UNRESOLVED_OPERATION__OPERATION_IDENTIFIER = eINSTANCE.getUnresolvedOperation_OperationIdentifier();
-
-		/**
-		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UNRESOLVED_OPERATION__FROM = eINSTANCE.getUnresolvedOperation_From();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.

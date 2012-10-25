@@ -31,7 +31,6 @@ import org.kermeta.language.structure.UnresolvedReference;
  * <ul>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedOperationImpl#getContainedType <em>Contained Type</em>}</li>
  *   <li>{@link org.kermeta.language.structure.impl.UnresolvedOperationImpl#getOperationIdentifier <em>Operation Identifier</em>}</li>
- *   <li>{@link org.kermeta.language.structure.impl.UnresolvedOperationImpl#getFrom <em>From</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,16 +66,6 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 	 * @ordered
 	 */
 	protected String operationIdentifier = OPERATION_IDENTIFIER_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFrom()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type from;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,44 +124,6 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getFrom() {
-		if (from != null && from.eIsProxy()) {
-			InternalEObject oldFrom = (InternalEObject)from;
-			from = (Type)eResolveProxy(oldFrom);
-			if (from != oldFrom) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.UNRESOLVED_OPERATION__FROM, oldFrom, from));
-			}
-		}
-		return from;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type basicGetFrom() {
-		return from;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFrom(Type newFrom) {
-		Type oldFrom = from;
-		from = newFrom;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.UNRESOLVED_OPERATION__FROM, oldFrom, from));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -209,9 +160,6 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 				return getContainedType();
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				return getOperationIdentifier();
-			case StructurePackage.UNRESOLVED_OPERATION__FROM:
-				if (resolve) return getFrom();
-				return basicGetFrom();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -232,9 +180,6 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				setOperationIdentifier((String)newValue);
 				return;
-			case StructurePackage.UNRESOLVED_OPERATION__FROM:
-				setFrom((Type)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -253,9 +198,6 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				setOperationIdentifier(OPERATION_IDENTIFIER_EDEFAULT);
 				return;
-			case StructurePackage.UNRESOLVED_OPERATION__FROM:
-				setFrom((Type)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -272,8 +214,6 @@ public class UnresolvedOperationImpl extends AbstractOperationImpl implements Un
 				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.UNRESOLVED_OPERATION__OPERATION_IDENTIFIER:
 				return OPERATION_IDENTIFIER_EDEFAULT == null ? operationIdentifier != null : !OPERATION_IDENTIFIER_EDEFAULT.equals(operationIdentifier);
-			case StructurePackage.UNRESOLVED_OPERATION__FROM:
-				return from != null;
 		}
 		return super.eIsSet(featureID);
 	}

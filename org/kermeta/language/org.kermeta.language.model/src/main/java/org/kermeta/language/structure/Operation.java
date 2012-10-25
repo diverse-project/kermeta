@@ -27,7 +27,6 @@ import org.kermeta.language.behavior.Expression;
  *   <li>{@link org.kermeta.language.structure.Operation#getPre <em>Pre</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getPost <em>Post</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getBody <em>Body</em>}</li>
- *   <li>{@link org.kermeta.language.structure.Operation#getSuperOperation <em>Super Operation</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getOwnedUnresolvedOperations <em>Owned Unresolved Operations</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.kermeta.language.structure.Operation#getTypeParameter <em>Type Parameter</em>}</li>
@@ -157,31 +156,6 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	 * @generated
 	 */
 	void setBody(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Super Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Super-operation of the Operation, if any
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Super Operation</em>' reference.
-	 * @see #setSuperOperation(AbstractOperation)
-	 * @see org.kermeta.language.structure.StructurePackage#getOperation_SuperOperation()
-	 * @model
-	 * @generated
-	 */
-	AbstractOperation getSuperOperation();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.Operation#getSuperOperation <em>Super Operation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Super Operation</em>' reference.
-	 * @see #getSuperOperation()
-	 * @generated
-	 */
-	void setSuperOperation(AbstractOperation value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Unresolved Operations</b></em>' containment reference list.

@@ -16,7 +16,6 @@ package org.kermeta.language.structure;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.language.structure.UnresolvedOperation#getOperationIdentifier <em>Operation Identifier</em>}</li>
- *   <li>{@link org.kermeta.language.structure.UnresolvedOperation#getFrom <em>From</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,31 +49,5 @@ public interface UnresolvedOperation extends AbstractOperation, UnresolvedRefere
 	 * @generated
 	 */
 	void setOperationIdentifier(String value);
-
-	/**
-	 * Returns the value of the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>From</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From</em>' reference.
-	 * @see #setFrom(Type)
-	 * @see org.kermeta.language.structure.StructurePackage#getUnresolvedOperation_From()
-	 * @model
-	 * @generated
-	 */
-	Type getFrom();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.UnresolvedOperation#getFrom <em>From</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>From</em>' reference.
-	 * @see #getFrom()
-	 * @generated
-	 */
-	void setFrom(Type value);
 
 } // UnresolvedOperation
