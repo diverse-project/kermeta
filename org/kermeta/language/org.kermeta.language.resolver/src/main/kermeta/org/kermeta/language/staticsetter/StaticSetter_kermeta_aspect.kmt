@@ -248,6 +248,38 @@ package behavior {
 	}
 
 	aspect class CallSuperOperation{
+		/** Checks the the super call operation, which super type is not specified, has a single corresponding class with the operation. */
+		operation checkOperationInSuperTypes(context : StaticSetterContext) : Boolean is do
+			var matchingClasses : Sequence<Type> init context.currentClassDefinition.superType.select{t| 
+				t.isInstanceOf(Class).andThen{b | t.asType(Class).ownedOperation.exists{op | op.name==context.currentOperation.name}}}
+			if(matchingClasses.size==0) then
+				context.errors.add(ResolverException.new.initialize("No super operation corresponding to "+ context.currentClassDefinition.name, self))
+				result := false
+			else
+				if(matchingClasses.size==1) then
+					result := true
+				else
+					context.errors.add(ResolverException.new.initialize("Several super operations '" + context.currentClassDefinition.name +
+						"' are possible (because of multi-inheritance). The name of the targeted class must be specified like this 'super[MyType]'.", self))
+					result := false
+				end
+			end
+		end
+	
+		/** Checks that the super call operation is valid: the class has a super type having the corresponding operation. */
+		operation checkSuperTypeForSuperCall(context : StaticSetterContext) : Boolean is do
+			if(context.currentClassDefinition.superType.size==0) then
+				context.errors.add(ResolverException.new.initialize("No super type found: "+ context.currentClassDefinition.name, self))
+				result := false
+			else
+				if(context.currentClassDefinition.superType.size>1) then
+					
+					context.errors.add(ResolverException.new.initialize("More than : "+context.currentOperation.name, self))
+					result := checkOperationInSuperTypes(context)
+				else result := true end
+			end
+		end
+	
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression from CallExpression is do
 			if context.currentOperation.isVoid then
 				context.errors.add(ResolverException.new.initialize("\"super\" keyword should not be used outside of an operation", self))
@@ -259,7 +291,16 @@ package behavior {
 				// Suppose that a class does not inherit from several classes with the same name (but not the same qualified name).
 				if superType.isInstanceOf(UnresolvedType) then
 					var superClassName : String init superType.asType(UnresolvedType).typeIdentifier
-					var type : Type init context.currentClassDefinition.superType.detect{t| t.isInstanceOf(Class).andThen{b | t.asType(Class).name==superClassName}}
+					var type : Type
+					
+					if(superClassName=="") then // No super class is specified. Must check single inheritance.
+						if(checkSuperTypeForSuperCall(context)) then// If the check is ok the inferred type is the single super type.
+							type := context.currentClassDefinition.superType.one
+						end
+					else
+						type := context.currentClassDefinition.superType.detect{t| t.isInstanceOf(Class).andThen{b | t.asType(Class).name==superClassName}}
+					end
+					
 					if(type.isVoid) then 
 						context.errors.add(ResolverException.new.initialize("No super class with this name found: "+superClassName, self))
 					else superType := type end
