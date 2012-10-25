@@ -746,7 +746,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 	/**
 	 * See Set<G>.add(G)
 	 */
-	method add(element : G) from Set is do
+	method add(element : G) is do
                  throw kermeta::exception::NotImplementedException.new
 	end
 
@@ -762,7 +762,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 	/**
 	 * See OrderedCollection<G>.equals(Object) 
 	 */
-	method equals(element : Object) : Boolean from OrderedCollection is do
+	method equals(element : Object) : Boolean is do
                  throw kermeta::exception::NotImplementedException.new
 	end
 	
@@ -833,7 +833,7 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 	 * Returns a Boolean stating whether the provided element is equal to
 	 * current Sequence	
 	 */
-	method equals(element : Object) : Boolean from OrderedCollection is do
+	method equals(element : Object) : Boolean is do
                  throw kermeta::exception::NotImplementedException.new
 	end
 	
