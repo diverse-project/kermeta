@@ -2,7 +2,6 @@ package org::kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureOperation.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureProperty.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureType.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
@@ -45,7 +44,6 @@ aspect class KermetaModelElement{
 					e.asType(KermetaModelElement).resolveStructure(context)
 				end
 			e}// must return somthing for scala compiler to work		
-		self.resolveStructureOperation(context)
 		self.resolveStructureProperty(context)
 	end
 }
@@ -78,8 +76,7 @@ aspect class Operation inherits MultiplicityElement, AbstractOperation{
 	*/
 	method resolveStructure(context : LanguageVisitorContext) is do
 		context.currentOperation:=self
-		//super(context)
-		self.resolveStructureOperation(context)
+		super(context)
 		context.currentOperation:=void
 	end
 }

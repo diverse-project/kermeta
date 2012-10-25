@@ -26,7 +26,6 @@ require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/k
 
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/primitiveType_aspect.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureOperation.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureProperty.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureType.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/structureResolver.kmt"
@@ -245,7 +244,6 @@ class FullStaticResolver
 			end
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedOperation) then
 				stdio.writeln("UNRESOLVED_OPERATION -- operationIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedOperation).operationIdentifier.toString)
-				stdio.writeln("|-------------from: " + p.asType(org::kermeta::language::structure::UnresolvedOperation).~from.toString)
 			end
 			if p.isInstanceOf(org::kermeta::language::structure::UnresolvedProperty) then
 				stdio.writeln("UNRESOLVED_PROPERTY -- propertyIdentifier: " + p.asType(org::kermeta::language::structure::UnresolvedProperty).propertyIdentifier.toString)

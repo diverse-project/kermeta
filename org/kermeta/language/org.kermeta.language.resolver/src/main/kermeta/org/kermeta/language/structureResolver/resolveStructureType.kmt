@@ -103,7 +103,7 @@ package structure{
 			super(context)
 		end
 	}
-	aspect class UnresolvedOperation inherits AbstractOperation, UnresolvedReference, TypeContainer {
+/* 	aspect class UnresolvedOperation inherits AbstractOperation, UnresolvedReference, TypeContainer {
 		method resolveStructureContainedType(context : LanguageVisitorContext) from TypeContainer is do
 			super(context)
 		end
@@ -116,7 +116,7 @@ package structure{
 				end
 			end
 		end
-	}
+	}*/
 	
 	
 	
