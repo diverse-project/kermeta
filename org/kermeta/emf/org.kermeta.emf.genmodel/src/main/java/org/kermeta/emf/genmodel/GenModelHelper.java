@@ -80,7 +80,7 @@ public class GenModelHelper {
     public void createGenModel(java.net.URI ecore, File genmodel, File sourcePath, Boolean clearOutputDir) {
     	List<java.net.URI> ecoreFiles = new ArrayList<java.net.URI>();
     	ecoreFiles.add(ecore);
-    	createGenModel(ecoreFiles, sourcePath, sourcePath, clearOutputDir);
+    	createGenModel(ecoreFiles, genmodel, sourcePath, clearOutputDir);
     	
     }
     public void createGenModel(List<java.net.URI> ecoreFiles, File genmodel, File sourcePath, Boolean clearOutputDir) {
