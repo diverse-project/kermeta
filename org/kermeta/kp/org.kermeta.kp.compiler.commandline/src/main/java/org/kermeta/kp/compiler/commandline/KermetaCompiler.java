@@ -40,8 +40,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.DiagnosticModel;
-import org.kermeta.kp.ImportBytecodeJar;
-import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
@@ -691,8 +690,7 @@ public class KermetaCompiler {
 			
 			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
 
-			List<String> fullBinaryDependencyClassPath = getImportProjetJarClasspath(kp, varExpander);
-			fullBinaryDependencyClassPath.addAll(getImportByteCodeJarClasspath(kp, varExpander));
+			List<String> fullBinaryDependencyClassPath = getImportProjetClasspath(kp, varExpander);
 			fullBinaryDependencyClassPath.addAll(additionalClassPath);
 			// generating 
 			ArrayList<URL> ecoreForGenerationURLs = getEcoreNeedingGeneration(kp, varExpander );
@@ -810,21 +808,14 @@ public class KermetaCompiler {
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<String> getImportProjetJarClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
+	public ArrayList<String> getImportProjetClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
 		ArrayList<String> result = new ArrayList<String>();
-		for(ImportProjectJar dep : kp.getImportedProjectJars()){
-			result.add(convertUrlToclassPath(varExpander.expandVariables(dep.getUrl())));
+		for(ImportProject dep : kp.getImportedProjects()){
+			result.add(convertUrlToclassPath(varExpander.getSelectedUrl4ReusableResource(dep.getProjectResource())));
 		}
 		return result;
 	}
 	
-	public ArrayList<String> getImportByteCodeJarClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
-		ArrayList<String> result = new ArrayList<String>();
-		for(ImportBytecodeJar dep : kp.getImportedBytecodeJars()){
-			result.add(convertUrlToclassPath(varExpander.expandVariables(dep.getUrl())));
-		}
-		return result;
-	}
 	
 	public String convertUrlToclassPath(String urlString){
 		try {

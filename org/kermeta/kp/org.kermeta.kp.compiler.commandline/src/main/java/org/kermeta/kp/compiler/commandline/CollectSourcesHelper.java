@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import org.kermeta.kp.ImportFile;
-import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
@@ -58,7 +58,7 @@ public class CollectSourcesHelper {
 						&& sourceUrl.getUrl().toString()
 								.contains("language.library.core");
 
-				boolean isDependency = sourceUrl.getSource() instanceof ImportProjectJar
+				boolean isDependency = sourceUrl.getSource() instanceof ImportProject
 						|| sourceUrl.getSource() instanceof ImportProjectSources;
 				if (sourceUrl.getUrl().getProtocol().equals("jar")) {
 					String jarUrl = sourceUrl.getUrl().toString();
@@ -261,9 +261,9 @@ public class CollectSourcesHelper {
 				.getURI().toString(), kp, compiler.fileSystemConverter, logger);
 
 		// get ImportProjectJar
-		for (ImportProjectJar importedProjectJar : kp.getImportedProjectJars()) {
+		for (ImportProject importedProjectJar : kp.getImportedProjects()) {
 			String containerUrl = varExpander
-					.expandVariables(importedProjectJar.getUrl());
+					.getSelectedUrl4ReusableResource(importedProjectJar.getProjectResource());
 			KermetaProject foundProject = KpResourceHelper
 					.findKermetaProject(
 							containerUrl.endsWith(".jar") ? "jar:"
@@ -299,7 +299,7 @@ public class CollectSourcesHelper {
 			else{
 				logger.logProblem(
 						MessagingSystem.Kind.UserERROR,
-						"Cannot find project.kp in " + importedProjectJar.getUrl() , getMessageGroup(),
+						"Cannot find project.kp in " + importedProjectJar.getProjectResource().getUrl() , getMessageGroup(),
 						KpResourceHelper.createFileReference(importedProjectJar));
 			}
 		}

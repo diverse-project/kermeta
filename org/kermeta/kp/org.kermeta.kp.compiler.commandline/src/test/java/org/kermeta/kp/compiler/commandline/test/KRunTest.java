@@ -16,13 +16,10 @@ import java.util.ArrayList;
 import java.util.NavigableMap;
 import java.util.Properties;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
-import org.kermeta.kp.ImportBytecodeJar;
-import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.compiler.commandline.Ecore2Bytecode;
 import org.kermeta.kp.compiler.commandline.KermetaCompiler;
@@ -36,12 +33,12 @@ import org.kermeta.kp.editor.analysis.helper.KpResourceHelper;
 import org.kermeta.kp.editor.analysis.helper.KpVariableExpander;
 import org.kermeta.kp.loader.kp.KpLoaderImpl;
 import org.kermeta.language.helper.tests.utils.ErrorAwareMessagingSystem;
-import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 import org.kermeta.utils.aether.AetherUtil;
 import org.kermeta.utils.helpers.FileExtensionComparator;
 import org.kermeta.utils.helpers.FileHelpers;
 import org.kermeta.utils.helpers.SimpleLocalFileConverter;
 import org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper;
+import org.kermeta.utils.systemservices.api.impl.StdioSimpleMessagingSystem;
 
 
 
@@ -106,7 +103,7 @@ public class KRunTest extends TestCase {
 		
 		ArrayList<String> fullClassPath = new ArrayList<String>();
 		fullClassPath.addAll(additionalClassPath);
-		fullClassPath.addAll(compiler.getImportByteCodeJarClasspath(kp, varExpander));
+		fullClassPath.addAll(compiler.getImportProjetClasspath(kp, varExpander));
 		fullClassPath.add(targetFolder+"emfclasses/");
 		
 		// set location of urimap file
@@ -134,17 +131,8 @@ public class KRunTest extends TestCase {
 		String value = "file:/"+targetFolder;
 		props.put(key, value);
 		
-		for(ImportBytecodeJar dep : kp.getImportedBytecodeJars()){
-			String expandedVar = varExpander.expandVariables(dep.getUrl());
-			KermetaProject foundProject = KpResourceHelper.findKermetaProject(expandedVar.endsWith(".jar")? "jar:"+expandedVar+"!"+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR : expandedVar+KermetaCompiler.DEFAULT_KP_LOCATION_IN_FOLDER,
-					kp.eResource());
-			if(foundProject!=null){
-				props.put("platform:/resource/"+Ecore2Bytecode.getEclipseName(foundProject)+"/",expandedVar);
-				props.put("platform:/plugin/"+Ecore2Bytecode.getEclipseName(foundProject)+"/",expandedVar);
-			}
-		}
-		for(ImportProjectJar dep : kp.getImportedProjectJars()){
-			String expandedVar = varExpander.expandVariables(dep.getUrl());
+		for(ImportProject dep : kp.getImportedProjects()){
+			String expandedVar = varExpander.getSelectedUrl4ReusableResource(dep.getProjectResource());
 			KermetaProject foundProject = KpResourceHelper.findKermetaProject(expandedVar.endsWith(".jar")? "jar:"+expandedVar+"!"+KermetaCompiler.DEFAULT_KP_LOCATION_IN_JAR : expandedVar+KermetaCompiler.DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject!=null){

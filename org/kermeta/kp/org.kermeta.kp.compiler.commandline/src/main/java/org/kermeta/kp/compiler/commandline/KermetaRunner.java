@@ -58,9 +58,9 @@ public class KermetaRunner {
 		runK2Program("DefaultRunner", params, uriMapFileLocation);
 	}
 	public void runK2Program( String mainClass, String mainOperation, List<String> params, String uriMapFileLocation) {
-		runK2Program(mainClass.replaceAll("::", ".")+"_"+mainOperation, params, uriMapFileLocation);
+		runK2Program(mainClass.replaceAll("::", ".").replaceAll("#", ".")+"_"+mainOperation, params, uriMapFileLocation);
 	}
-	public void runK2Program( String runnerClass, List<String> params, String uriMapFileLocation) {
+	public void runK2Program( String runnerClass, List<String> params, String uriMapFileLocation) {		
 		this.logger.initProgress(scalaAspectPrefix, "Starting "+scalaAspectPrefix + "runner."+runnerClass, KermetaCompiler.LOG_MESSAGE_GROUP, 0);
 		StringBuffer f = new StringBuffer();
 		for (String s : classpath) {
