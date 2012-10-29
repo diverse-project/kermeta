@@ -9,29 +9,29 @@ package org.kermeta.kp.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.kermeta.kp.ImportProjectSources;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.KpPackage;
 import org.kermeta.kp.ReusableResource;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Import Project Sources</b></em>'.
+ * An implementation of the model object '<em><b>Import Project</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.kp.impl.ImportProjectSourcesImpl#getProjectResource <em>Project Resource</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.ImportProjectImpl#getProjectResource <em>Project Resource</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProjectSources {
+public class ImportProjectImpl extends EObjectImpl implements ImportProject {
 	/**
    * The cached value of the '{@link #getProjectResource() <em>Project Resource</em>}' reference.
    * <!-- begin-user-doc -->
@@ -47,7 +47,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
 	 * <!-- end-user-doc -->
    * @generated
    */
-	protected ImportProjectSourcesImpl() {
+	protected ImportProjectImpl() {
     super();
   }
 
@@ -58,7 +58,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
    */
 	@Override
 	protected EClass eStaticClass() {
-    return KpPackage.Literals.IMPORT_PROJECT_SOURCES;
+    return KpPackage.Literals.IMPORT_PROJECT;
   }
 
 	/**
@@ -74,7 +74,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
       if (projectResource != oldProjectResource)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpPackage.IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE, oldProjectResource, projectResource));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpPackage.IMPORT_PROJECT__PROJECT_RESOURCE, oldProjectResource, projectResource));
       }
     }
     return projectResource;
@@ -98,7 +98,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
     ReusableResource oldProjectResource = projectResource;
     projectResource = newProjectResource;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE, oldProjectResource, projectResource));
+      eNotify(new ENotificationImpl(this, Notification.SET, KpPackage.IMPORT_PROJECT__PROJECT_RESOURCE, oldProjectResource, projectResource));
   }
 
 	/**
@@ -110,7 +110,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID)
     {
-      case KpPackage.IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE:
+      case KpPackage.IMPORT_PROJECT__PROJECT_RESOURCE:
         if (resolve) return getProjectResource();
         return basicGetProjectResource();
     }
@@ -126,7 +126,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
     {
-      case KpPackage.IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE:
+      case KpPackage.IMPORT_PROJECT__PROJECT_RESOURCE:
         setProjectResource((ReusableResource)newValue);
         return;
     }
@@ -142,7 +142,7 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
 	public void eUnset(int featureID) {
     switch (featureID)
     {
-      case KpPackage.IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE:
+      case KpPackage.IMPORT_PROJECT__PROJECT_RESOURCE:
         setProjectResource((ReusableResource)null);
         return;
     }
@@ -158,10 +158,10 @@ public class ImportProjectSourcesImpl extends EObjectImpl implements ImportProje
 	public boolean eIsSet(int featureID) {
     switch (featureID)
     {
-      case KpPackage.IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE:
+      case KpPackage.IMPORT_PROJECT__PROJECT_RESOURCE:
         return projectResource != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ImportProjectSourcesImpl
+} //ImportProjectImpl

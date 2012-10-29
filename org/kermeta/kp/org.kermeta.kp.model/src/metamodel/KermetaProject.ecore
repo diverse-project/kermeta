@@ -12,10 +12,8 @@
         defaultValueLiteral="default"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reusableResources" upperBound="-1"
         eType="#//ReusableResource" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importedProjectJars" upperBound="-1"
-        eType="#//ImportProjectJar" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importedBytecodeJars" upperBound="-1"
-        eType="#//ImportBytecodeJar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedProjects" upperBound="-1"
+        eType="#//ImportProject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedProjectSources"
         upperBound="-1" eType="#//ImportProjectSources" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedFiles" upperBound="-1"
@@ -42,12 +40,11 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportProjectSources">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projectResource" lowerBound="1"
+        eType="#//ReusableResource"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImportProjectJar">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImportBytecodeJar">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportProject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projectResource" lowerBound="1"
+        eType="#//ReusableResource"/>
   </eClassifiers>
 </ecore:EPackage>

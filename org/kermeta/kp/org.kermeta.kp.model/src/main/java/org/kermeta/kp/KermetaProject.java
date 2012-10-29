@@ -22,8 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.kp.KermetaProject#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getJavaBasePackage <em>Java Base Package</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getReusableResources <em>Reusable Resources</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectJars <em>Imported Project Jars</em>}</li>
- *   <li>{@link org.kermeta.kp.KermetaProject#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjects <em>Imported Projects</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectSources <em>Imported Project Sources</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedFiles <em>Imported Files</em>}</li>
  * </ul>
@@ -156,36 +155,20 @@ public interface KermetaProject extends EObject {
 	EList<ReusableResource> getReusableResources();
 
 				/**
-   * Returns the value of the '<em><b>Imported Project Jars</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.ImportProjectJar}.
+   * Returns the value of the '<em><b>Imported Projects</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.ImportProject}.
    * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Imported Project Jars</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Imported Projects</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Imported Project Jars</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedProjectJars()
+   * @return the value of the '<em>Imported Projects</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedProjects()
    * @model containment="true"
    * @generated
    */
-	EList<ImportProjectJar> getImportedProjectJars();
-
-				/**
-   * Returns the value of the '<em><b>Imported Bytecode Jars</b></em>' containment reference list.
-   * The list contents are of type {@link org.kermeta.kp.ImportBytecodeJar}.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Imported Bytecode Jars</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Imported Bytecode Jars</em>' containment reference list.
-   * @see org.kermeta.kp.KpPackage#getKermetaProject_ImportedBytecodeJars()
-   * @model containment="true"
-   * @generated
-   */
-	EList<ImportBytecodeJar> getImportedBytecodeJars();
+	EList<ImportProject> getImportedProjects();
 
 				/**
    * Returns the value of the '<em><b>Imported Project Sources</b></em>' containment reference list.

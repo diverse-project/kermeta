@@ -9,12 +9,17 @@ package org.kermeta.kp.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.kermeta.kp.*;
+import org.kermeta.kp.ImportFile;
+import org.kermeta.kp.ImportProject;
+import org.kermeta.kp.ImportProjectSources;
+import org.kermeta.kp.KermetaProject;
+import org.kermeta.kp.KpFactory;
+import org.kermeta.kp.KpPackage;
+import org.kermeta.kp.PackageEquivalence;
+import org.kermeta.kp.ReusableResource;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,8 +74,7 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
       case KpPackage.PACKAGE_EQUIVALENCE: return createPackageEquivalence();
       case KpPackage.REUSABLE_RESOURCE: return createReusableResource();
       case KpPackage.IMPORT_PROJECT_SOURCES: return createImportProjectSources();
-      case KpPackage.IMPORT_PROJECT_JAR: return createImportProjectJar();
-      case KpPackage.IMPORT_BYTECODE_JAR: return createImportBytecodeJar();
+      case KpPackage.IMPORT_PROJECT: return createImportProject();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -121,19 +125,9 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public ImportProjectJar createImportProjectJar() {
-    ImportProjectJarImpl importProjectJar = new ImportProjectJarImpl();
-    return importProjectJar;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public ImportBytecodeJar createImportBytecodeJar() {
-    ImportBytecodeJarImpl importBytecodeJar = new ImportBytecodeJarImpl();
-    return importBytecodeJar;
+	public ImportProject createImportProject() {
+    ImportProjectImpl importProject = new ImportProjectImpl();
+    return importProject;
   }
 
 	/**

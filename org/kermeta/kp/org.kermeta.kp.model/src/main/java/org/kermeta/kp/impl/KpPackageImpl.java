@@ -11,9 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.kermeta.kp.ImportBytecodeJar;
 import org.kermeta.kp.ImportFile;
-import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpFactory;
@@ -61,21 +60,14 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	private EClass importProjectEClass = null;
+
+		/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	private EClass importFileEClass = null;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private EClass importProjectJarEClass = null;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private EClass importBytecodeJarEClass = null;
 
 	/**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -199,16 +191,16 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getKermetaProject_ImportedProjectJars() {
+	public EReference getKermetaProject_ImportedProjects() {
     return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(5);
   }
 
-		/**
+				/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getKermetaProject_ImportedBytecodeJars() {
+	public EReference getKermetaProject_ImportedProjectSources() {
     return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(6);
   }
 
@@ -217,17 +209,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getKermetaProject_ImportedProjectSources() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(7);
-  }
-
-		/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
 	public EReference getKermetaProject_ImportedFiles() {
-    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(8);
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(7);
   }
 
 		/**
@@ -307,8 +290,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EAttribute getImportProjectSources_Url() {
-    return (EAttribute)importProjectSourcesEClass.getEStructuralFeatures().get(0);
+	public EReference getImportProjectSources_ProjectResource() {
+    return (EReference)importProjectSourcesEClass.getEStructuralFeatures().get(0);
   }
 
 	/**
@@ -316,8 +299,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EClass getImportProjectJar() {
-    return importProjectJarEClass;
+	public EClass getImportProject() {
+    return importProjectEClass;
   }
 
 	/**
@@ -325,26 +308,8 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EAttribute getImportProjectJar_Url() {
-    return (EAttribute)importProjectJarEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EClass getImportBytecodeJar() {
-    return importBytecodeJarEClass;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getImportBytecodeJar_Url() {
-    return (EAttribute)importBytecodeJarEClass.getEStructuralFeatures().get(0);
+	public EReference getImportProject_ProjectResource() {
+    return (EReference)importProjectEClass.getEStructuralFeatures().get(0);
   }
 
 	/**
@@ -417,8 +382,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__DEFAULT_MAIN_OPERATION);
     createEAttribute(kermetaProjectEClass, KERMETA_PROJECT__JAVA_BASE_PACKAGE);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__REUSABLE_RESOURCES);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECT_JARS);
-    createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_BYTECODE_JARS);
+    createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECTS);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_FILES);
 
@@ -437,13 +401,10 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEAttribute(reusableResourceEClass, REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME);
 
     importProjectSourcesEClass = createEClass(IMPORT_PROJECT_SOURCES);
-    createEAttribute(importProjectSourcesEClass, IMPORT_PROJECT_SOURCES__URL);
+    createEReference(importProjectSourcesEClass, IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE);
 
-    importProjectJarEClass = createEClass(IMPORT_PROJECT_JAR);
-    createEAttribute(importProjectJarEClass, IMPORT_PROJECT_JAR__URL);
-
-    importBytecodeJarEClass = createEClass(IMPORT_BYTECODE_JAR);
-    createEAttribute(importBytecodeJarEClass, IMPORT_BYTECODE_JAR__URL);
+    importProjectEClass = createEClass(IMPORT_PROJECT);
+    createEReference(importProjectEClass, IMPORT_PROJECT__PROJECT_RESOURCE);
   }
 
 	/**
@@ -482,8 +443,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEAttribute(getKermetaProject_DefaultMainOperation(), ecorePackage.getEString(), "defaultMainOperation", null, 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getKermetaProject_JavaBasePackage(), ecorePackage.getEString(), "javaBasePackage", "default", 0, 1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ReusableResources(), this.getReusableResource(), null, "reusableResources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_ImportedProjectJars(), this.getImportProjectJar(), null, "importedProjectJars", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getKermetaProject_ImportedBytecodeJars(), this.getImportBytecodeJar(), null, "importedBytecodeJars", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getKermetaProject_ImportedProjects(), this.getImportProject(), null, "importedProjects", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedProjectSources(), this.getImportProjectSources(), null, "importedProjectSources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedFiles(), this.getImportFile(), null, "importedFiles", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -504,13 +464,10 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     addEOperation(reusableResourceEClass, ecorePackage.getEString(), "allUrls", 1, -1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(importProjectSourcesEClass, ImportProjectSources.class, "ImportProjectSources", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImportProjectSources_Url(), ecorePackage.getEString(), "url", null, 1, 1, ImportProjectSources.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getImportProjectSources_ProjectResource(), this.getReusableResource(), null, "projectResource", null, 1, 1, ImportProjectSources.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(importProjectJarEClass, ImportProjectJar.class, "ImportProjectJar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImportProjectJar_Url(), ecorePackage.getEString(), "url", null, 1, 1, ImportProjectJar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(importBytecodeJarEClass, ImportBytecodeJar.class, "ImportBytecodeJar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImportBytecodeJar_Url(), ecorePackage.getEString(), "url", null, 1, 1, ImportBytecodeJar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(importProjectEClass, ImportProject.class, "ImportProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getImportProject_ProjectResource(), this.getReusableResource(), null, "projectResource", null, 1, 1, ImportProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -110,17 +110,10 @@ public class KpSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case KpPackage.IMPORT_PROJECT_JAR:
+      case KpPackage.IMPORT_PROJECT:
       {
-        ImportProjectJar importProjectJar = (ImportProjectJar)theEObject;
-        T result = caseImportProjectJar(importProjectJar);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case KpPackage.IMPORT_BYTECODE_JAR:
-      {
-        ImportBytecodeJar importBytecodeJar = (ImportBytecodeJar)theEObject;
-        T result = caseImportBytecodeJar(importBytecodeJar);
+        ImportProject importProject = (ImportProject)theEObject;
+        T result = caseImportProject(importProject);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -189,32 +182,17 @@ public class KpSwitch<T> extends Switch<T> {
   }
 
 	/**
-   * Returns the result of interpreting the object as an instance of '<em>Import Project Jar</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Import Project</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Import Project Jar</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Import Project</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-	public T caseImportProjectJar(ImportProjectJar object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Import Bytecode Jar</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Import Bytecode Jar</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseImportBytecodeJar(ImportBytecodeJar object) {
+	public T caseImportProject(ImportProject object) {
     return null;
   }
 

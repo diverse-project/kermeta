@@ -17,9 +17,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.kermeta.kp.ImportBytecodeJar;
 import org.kermeta.kp.ImportFile;
-import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpPackage;
@@ -37,8 +36,7 @@ import org.kermeta.kp.ReusableResource;
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getDefaultMainOperation <em>Default Main Operation</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getJavaBasePackage <em>Java Base Package</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getReusableResources <em>Reusable Resources</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectJars <em>Imported Project Jars</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjects <em>Imported Projects</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectSources <em>Imported Project Sources</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedFiles <em>Imported Files</em>}</li>
  * </ul>
@@ -138,26 +136,16 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	protected EList<ReusableResource> reusableResources;
 
 				/**
-   * The cached value of the '{@link #getImportedProjectJars() <em>Imported Project Jars</em>}' containment reference list.
+   * The cached value of the '{@link #getImportedProjects() <em>Imported Projects</em>}' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getImportedProjectJars()
+   * @see #getImportedProjects()
    * @generated
    * @ordered
    */
-	protected EList<ImportProjectJar> importedProjectJars;
+	protected EList<ImportProject> importedProjects;
 
-		/**
-   * The cached value of the '{@link #getImportedBytecodeJars() <em>Imported Bytecode Jars</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getImportedBytecodeJars()
-   * @generated
-   * @ordered
-   */
-	protected EList<ImportBytecodeJar> importedBytecodeJars;
-
-		/**
+				/**
    * The cached value of the '{@link #getImportedProjectSources() <em>Imported Project Sources</em>}' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -302,28 +290,15 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EList<ImportProjectJar> getImportedProjectJars() {
-    if (importedProjectJars == null)
+	public EList<ImportProject> getImportedProjects() {
+    if (importedProjects == null)
     {
-      importedProjectJars = new EObjectContainmentEList<ImportProjectJar>(ImportProjectJar.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS);
+      importedProjects = new EObjectContainmentEList<ImportProject>(ImportProject.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS);
     }
-    return importedProjectJars;
+    return importedProjects;
   }
 
-		/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EList<ImportBytecodeJar> getImportedBytecodeJars() {
-    if (importedBytecodeJars == null)
-    {
-      importedBytecodeJars = new EObjectContainmentEList<ImportBytecodeJar>(ImportBytecodeJar.class, this, KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS);
-    }
-    return importedBytecodeJars;
-  }
-
-		/**
+				/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -360,10 +335,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
     {
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         return ((InternalEList<?>)getReusableResources()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
-        return ((InternalEList<?>)getImportedProjectJars()).basicRemove(otherEnd, msgs);
-      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
-        return ((InternalEList<?>)getImportedBytecodeJars()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS:
+        return ((InternalEList<?>)getImportedProjects()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         return ((InternalEList<?>)getImportedProjectSources()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
@@ -391,10 +364,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return getJavaBasePackage();
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         return getReusableResources();
-      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
-        return getImportedProjectJars();
-      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
-        return getImportedBytecodeJars();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS:
+        return getImportedProjects();
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         return getImportedProjectSources();
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
@@ -429,13 +400,9 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         getReusableResources().clear();
         getReusableResources().addAll((Collection<? extends ReusableResource>)newValue);
         return;
-      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
-        getImportedProjectJars().clear();
-        getImportedProjectJars().addAll((Collection<? extends ImportProjectJar>)newValue);
-        return;
-      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
-        getImportedBytecodeJars().clear();
-        getImportedBytecodeJars().addAll((Collection<? extends ImportBytecodeJar>)newValue);
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS:
+        getImportedProjects().clear();
+        getImportedProjects().addAll((Collection<? extends ImportProject>)newValue);
         return;
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         getImportedProjectSources().clear();
@@ -473,11 +440,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         getReusableResources().clear();
         return;
-      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
-        getImportedProjectJars().clear();
-        return;
-      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
-        getImportedBytecodeJars().clear();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS:
+        getImportedProjects().clear();
         return;
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         getImportedProjectSources().clear();
@@ -508,10 +472,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return JAVA_BASE_PACKAGE_EDEFAULT == null ? javaBasePackage != null : !JAVA_BASE_PACKAGE_EDEFAULT.equals(javaBasePackage);
       case KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES:
         return reusableResources != null && !reusableResources.isEmpty();
-      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_JARS:
-        return importedProjectJars != null && !importedProjectJars.isEmpty();
-      case KpPackage.KERMETA_PROJECT__IMPORTED_BYTECODE_JARS:
-        return importedBytecodeJars != null && !importedBytecodeJars.isEmpty();
+      case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS:
+        return importedProjects != null && !importedProjects.isEmpty();
       case KpPackage.KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES:
         return importedProjectSources != null && !importedProjectSources.isEmpty();
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:

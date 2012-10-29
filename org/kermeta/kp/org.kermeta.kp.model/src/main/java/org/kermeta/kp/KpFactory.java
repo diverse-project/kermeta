@@ -62,22 +62,13 @@ public interface KpFactory extends EFactory {
 	ImportProjectSources createImportProjectSources();
 
 	/**
-   * Returns a new object of class '<em>Import Project Jar</em>'.
+   * Returns a new object of class '<em>Import Project</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Import Project Jar</em>'.
+   * @return a new object of class '<em>Import Project</em>'.
    * @generated
    */
-	ImportProjectJar createImportProjectJar();
-
-	/**
-   * Returns a new object of class '<em>Import Bytecode Jar</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Import Bytecode Jar</em>'.
-   * @generated
-   */
-	ImportBytecodeJar createImportBytecodeJar();
+	ImportProject createImportProject();
 
 	/**
    * Returns a new object of class '<em>Import File</em>'.

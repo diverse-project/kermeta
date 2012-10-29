@@ -101,14 +101,9 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
         return createImportProjectSourcesAdapter();
       }
       @Override
-      public Adapter caseImportProjectJar(ImportProjectJar object)
+      public Adapter caseImportProject(ImportProject object)
       {
-        return createImportProjectJarAdapter();
-      }
-      @Override
-      public Adapter caseImportBytecodeJar(ImportBytecodeJar object)
-      {
-        return createImportBytecodeJarAdapter();
+        return createImportProjectAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -188,30 +183,16 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportProjectJar <em>Import Project Jar</em>}'.
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportProject <em>Import Project</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.kermeta.kp.ImportProjectJar
+   * @see org.kermeta.kp.ImportProject
    * @generated
    */
-	public Adapter createImportProjectJarAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportBytecodeJar <em>Import Bytecode Jar</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.kermeta.kp.ImportBytecodeJar
-   * @generated
-   */
-	public Adapter createImportBytecodeJarAdapter() {
+	public Adapter createImportProjectAdapter() {
     return null;
   }
 

@@ -115,31 +115,22 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT__REUSABLE_RESOURCES = 4;
 
 				/**
-   * The feature id for the '<em><b>Imported Project Jars</b></em>' containment reference list.
+   * The feature id for the '<em><b>Imported Projects</b></em>' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__IMPORTED_PROJECT_JARS = 5;
+	int KERMETA_PROJECT__IMPORTED_PROJECTS = 5;
 
-		/**
-   * The feature id for the '<em><b>Imported Bytecode Jars</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int KERMETA_PROJECT__IMPORTED_BYTECODE_JARS = 6;
-
-		/**
+				/**
    * The feature id for the '<em><b>Imported Project Sources</b></em>' containment reference list.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES = 7;
+	int KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES = 6;
 
 		/**
    * The feature id for the '<em><b>Imported Files</b></em>' containment reference list.
@@ -148,7 +139,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT__IMPORTED_FILES = 8;
+	int KERMETA_PROJECT__IMPORTED_FILES = 7;
 
 		/**
    * The number of structural features of the '<em>Kermeta Project</em>' class.
@@ -157,7 +148,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT_FEATURE_COUNT = 9;
+	int KERMETA_PROJECT_FEATURE_COUNT = 8;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.PackageEquivalenceImpl <em>Package Equivalence</em>}' class.
@@ -299,13 +290,13 @@ public interface KpPackage extends EPackage {
 	int REUSABLE_RESOURCE_FEATURE_COUNT = 3;
 
 		/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
+   * The feature id for the '<em><b>Project Resource</b></em>' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int IMPORT_PROJECT_SOURCES__URL = 0;
+	int IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE = 0;
 
 		/**
    * The number of structural features of the '<em>Import Project Sources</em>' class.
@@ -317,60 +308,32 @@ public interface KpPackage extends EPackage {
 	int IMPORT_PROJECT_SOURCES_FEATURE_COUNT = 1;
 
 		/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.ImportProjectJarImpl <em>Import Project Jar</em>}' class.
+   * The meta object id for the '{@link org.kermeta.kp.impl.ImportProjectImpl <em>Import Project</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.ImportProjectJarImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getImportProjectJar()
+   * @see org.kermeta.kp.impl.ImportProjectImpl
+   * @see org.kermeta.kp.impl.KpPackageImpl#getImportProject()
    * @generated
    */
-	int IMPORT_PROJECT_JAR = 5;
+	int IMPORT_PROJECT = 5;
 
 		/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
+   * The feature id for the '<em><b>Project Resource</b></em>' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int IMPORT_PROJECT_JAR__URL = 0;
+	int IMPORT_PROJECT__PROJECT_RESOURCE = 0;
 
 		/**
-   * The number of structural features of the '<em>Import Project Jar</em>' class.
+   * The number of structural features of the '<em>Import Project</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int IMPORT_PROJECT_JAR_FEATURE_COUNT = 1;
-
-		/**
-   * The meta object id for the '{@link org.kermeta.kp.impl.ImportBytecodeJarImpl <em>Import Bytecode Jar</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.kermeta.kp.impl.ImportBytecodeJarImpl
-   * @see org.kermeta.kp.impl.KpPackageImpl#getImportBytecodeJar()
-   * @generated
-   */
-	int IMPORT_BYTECODE_JAR = 6;
-
-		/**
-   * The feature id for the '<em><b>Url</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int IMPORT_BYTECODE_JAR__URL = 0;
-
-		/**
-   * The number of structural features of the '<em>Import Bytecode Jar</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int IMPORT_BYTECODE_JAR_FEATURE_COUNT = 1;
+	int IMPORT_PROJECT_FEATURE_COUNT = 1;
 
 		/**
    * Returns the meta object for class '{@link org.kermeta.kp.KermetaProject <em>Kermeta Project</em>}'.
@@ -438,28 +401,17 @@ public interface KpPackage extends EPackage {
 	EReference getKermetaProject_ReusableResources();
 
 				/**
-   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getImportedProjectJars <em>Imported Project Jars</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getImportedProjects <em>Imported Projects</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imported Project Jars</em>'.
-   * @see org.kermeta.kp.KermetaProject#getImportedProjectJars()
+   * @return the meta object for the containment reference list '<em>Imported Projects</em>'.
+   * @see org.kermeta.kp.KermetaProject#getImportedProjects()
    * @see #getKermetaProject()
    * @generated
    */
-	EReference getKermetaProject_ImportedProjectJars();
+	EReference getKermetaProject_ImportedProjects();
 
-		/**
-   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getImportedBytecodeJars <em>Imported Bytecode Jars</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imported Bytecode Jars</em>'.
-   * @see org.kermeta.kp.KermetaProject#getImportedBytecodeJars()
-   * @see #getKermetaProject()
-   * @generated
-   */
-	EReference getKermetaProject_ImportedBytecodeJars();
-
-		/**
+				/**
    * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getImportedProjectSources <em>Imported Project Sources</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -567,57 +519,36 @@ public interface KpPackage extends EPackage {
 	EClass getImportProjectSources();
 
 	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.ImportProjectSources#getUrl <em>Url</em>}'.
+   * Returns the meta object for the reference '{@link org.kermeta.kp.ImportProjectSources#getProjectResource <em>Project Resource</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Url</em>'.
-   * @see org.kermeta.kp.ImportProjectSources#getUrl()
+   * @return the meta object for the reference '<em>Project Resource</em>'.
+   * @see org.kermeta.kp.ImportProjectSources#getProjectResource()
    * @see #getImportProjectSources()
    * @generated
    */
-	EAttribute getImportProjectSources_Url();
+	EReference getImportProjectSources_ProjectResource();
 
 	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.ImportProjectJar <em>Import Project Jar</em>}'.
+   * Returns the meta object for class '{@link org.kermeta.kp.ImportProject <em>Import Project</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import Project Jar</em>'.
-   * @see org.kermeta.kp.ImportProjectJar
+   * @return the meta object for class '<em>Import Project</em>'.
+   * @see org.kermeta.kp.ImportProject
    * @generated
    */
-	EClass getImportProjectJar();
+	EClass getImportProject();
 
 	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.ImportProjectJar#getUrl <em>Url</em>}'.
+   * Returns the meta object for the reference '{@link org.kermeta.kp.ImportProject#getProjectResource <em>Project Resource</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Url</em>'.
-   * @see org.kermeta.kp.ImportProjectJar#getUrl()
-   * @see #getImportProjectJar()
+   * @return the meta object for the reference '<em>Project Resource</em>'.
+   * @see org.kermeta.kp.ImportProject#getProjectResource()
+   * @see #getImportProject()
    * @generated
    */
-	EAttribute getImportProjectJar_Url();
-
-	/**
-   * Returns the meta object for class '{@link org.kermeta.kp.ImportBytecodeJar <em>Import Bytecode Jar</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import Bytecode Jar</em>'.
-   * @see org.kermeta.kp.ImportBytecodeJar
-   * @generated
-   */
-	EClass getImportBytecodeJar();
-
-	/**
-   * Returns the meta object for the attribute '{@link org.kermeta.kp.ImportBytecodeJar#getUrl <em>Url</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Url</em>'.
-   * @see org.kermeta.kp.ImportBytecodeJar#getUrl()
-   * @see #getImportBytecodeJar()
-   * @generated
-   */
-	EAttribute getImportBytecodeJar_Url();
+	EReference getImportProject_ProjectResource();
 
 	/**
    * Returns the meta object for class '{@link org.kermeta.kp.ImportFile <em>Import File</em>}'.
@@ -735,22 +666,14 @@ public interface KpPackage extends EPackage {
 		EReference KERMETA_PROJECT__REUSABLE_RESOURCES = eINSTANCE.getKermetaProject_ReusableResources();
 
 								/**
-     * The meta object literal for the '<em><b>Imported Project Jars</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Imported Projects</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EReference KERMETA_PROJECT__IMPORTED_PROJECT_JARS = eINSTANCE.getKermetaProject_ImportedProjectJars();
+		EReference KERMETA_PROJECT__IMPORTED_PROJECTS = eINSTANCE.getKermetaProject_ImportedProjects();
 
-				/**
-     * The meta object literal for the '<em><b>Imported Bytecode Jars</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference KERMETA_PROJECT__IMPORTED_BYTECODE_JARS = eINSTANCE.getKermetaProject_ImportedBytecodeJars();
-
-				/**
+								/**
      * The meta object literal for the '<em><b>Imported Project Sources</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -837,12 +760,30 @@ public interface KpPackage extends EPackage {
 		EClass IMPORT_PROJECT_SOURCES = eINSTANCE.getImportProjectSources();
 
 				/**
-     * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Project Resource</b></em>' reference feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EAttribute IMPORT_PROJECT_SOURCES__URL = eINSTANCE.getImportProjectSources_Url();
+		EReference IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE = eINSTANCE.getImportProjectSources_ProjectResource();
+
+				/**
+     * The meta object literal for the '{@link org.kermeta.kp.impl.ImportProjectImpl <em>Import Project</em>}' class.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @see org.kermeta.kp.impl.ImportProjectImpl
+     * @see org.kermeta.kp.impl.KpPackageImpl#getImportProject()
+     * @generated
+     */
+		EClass IMPORT_PROJECT = eINSTANCE.getImportProject();
+
+				/**
+     * The meta object literal for the '<em><b>Project Resource</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference IMPORT_PROJECT__PROJECT_RESOURCE = eINSTANCE.getImportProject_ProjectResource();
 
 				/**
      * The meta object literal for the '{@link org.kermeta.kp.impl.ImportFileImpl <em>Import File</em>}' class.
@@ -877,42 +818,6 @@ public interface KpPackage extends EPackage {
      * @generated
      */
 		EReference IMPORT_FILE__PACKAGE_EQUIVALENCES = eINSTANCE.getImportFile_PackageEquivalences();
-
-				/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.ImportProjectJarImpl <em>Import Project Jar</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.ImportProjectJarImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getImportProjectJar()
-     * @generated
-     */
-		EClass IMPORT_PROJECT_JAR = eINSTANCE.getImportProjectJar();
-
-				/**
-     * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute IMPORT_PROJECT_JAR__URL = eINSTANCE.getImportProjectJar_Url();
-
-				/**
-     * The meta object literal for the '{@link org.kermeta.kp.impl.ImportBytecodeJarImpl <em>Import Bytecode Jar</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.kermeta.kp.impl.ImportBytecodeJarImpl
-     * @see org.kermeta.kp.impl.KpPackageImpl#getImportBytecodeJar()
-     * @generated
-     */
-		EClass IMPORT_BYTECODE_JAR = eINSTANCE.getImportBytecodeJar();
-
-				/**
-     * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EAttribute IMPORT_BYTECODE_JAR__URL = eINSTANCE.getImportBytecodeJar_Url();
 
 	}
 
