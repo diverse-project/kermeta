@@ -15,13 +15,16 @@ public class KpTokenStyleInformationProvider {
 		if ("ML_COMMENT".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x34, 0x80, 0x17}, null, false, false, false, false);
 		}
-		if ("KermetaProject".equals(tokenName)) {
+		if ("project".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
-		if ("defaultMainClass".equals(tokenName)) {
+		if ("extends".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
-		if ("defaultMainOperation".equals(tokenName)) {
+		if ("mainClass".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("mainOperation".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("javaBasePackage".equals(tokenName)) {
@@ -36,13 +39,7 @@ public class KpTokenStyleInformationProvider {
 		if ("withBytecodeFrom".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
-		if ("importProjectJar".equals(tokenName)) {
-			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
-		}
-		if ("importProjectSource".equals(tokenName)) {
-			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
-		}
-		if ("importBytecodeJar".equals(tokenName)) {
+		if ("importProject".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("resource".equals(tokenName)) {

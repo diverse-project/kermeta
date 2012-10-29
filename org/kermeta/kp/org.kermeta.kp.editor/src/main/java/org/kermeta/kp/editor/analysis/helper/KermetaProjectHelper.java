@@ -11,7 +11,7 @@ package org.kermeta.kp.editor.analysis.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kermeta.kp.ImportProjectJar;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
@@ -28,10 +28,10 @@ public class KermetaProjectHelper {
 
 		List<KermetaProject> result = new ArrayList<KermetaProject>();
 		result.addAll(collectKermetaProjectFromImportProjectSources(kp));
-		result.addAll(collectKermetaProjectFromImportProjectJar(kp));
+		result.addAll(collectKermetaProjectFromImportProjects(kp));
 		return result;
 	}
-	public static  List<KermetaProject> collectKermetaProjectFromImportProjectJar(KermetaProject kp) {
+	public static  List<KermetaProject> collectKermetaProjectFromImportProjects(KermetaProject kp) {
 		KpVariableExpander varExpander = new KpVariableExpander(kp.eResource().getURI().toString(),
 				kp, 
 				new LocalFileConverterForEclipse(), 
@@ -39,8 +39,8 @@ public class KermetaProjectHelper {
 		
 		
 		List<KermetaProject> result = new ArrayList<KermetaProject>();
-		for (ImportProjectJar importedProjectJar : kp.getImportedProjectJars()) {
-			String containerUrl = varExpander.expandVariables(importedProjectJar.getUrl());
+		for (ImportProject importedProjectJar : kp.getImportedProjects()) {
+			String containerUrl = varExpander.getSelectedUrl4ReusableResource(importedProjectJar.getProjectResource());
 			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar")? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject != null){
@@ -60,7 +60,7 @@ public class KermetaProjectHelper {
 		
 		List<KermetaProject> result = new ArrayList<KermetaProject>();
 		for(ImportProjectSources importedProjectSources : kp.getImportedProjectSources() ){
-			String containerUrl = varExpander.expandVariables(importedProjectSources.getUrl());
+			String containerUrl = varExpander.getSelectedUrl4ReusableResource(importedProjectSources.getProjectResource());
 			KermetaProject foundProject = KpResourceHelper.findKermetaProject(containerUrl.endsWith(".jar") ? "jar:"+containerUrl+"!"+DEFAULT_KP_LOCATION_IN_JAR : containerUrl+DEFAULT_KP_LOCATION_IN_FOLDER,
 					kp.eResource());
 			if(foundProject != null){

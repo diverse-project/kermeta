@@ -121,7 +121,7 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.ImportProjectJar) {
+		if (element instanceof org.kermeta.kp.ImportProject) {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3, foundFormattingElements);
 			return;
 		}
@@ -129,12 +129,8 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.kermeta.kp.ImportBytecodeJar) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
-			return;
-		}
 		if (element instanceof org.kermeta.kp.ReusableResource) {
-			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6, foundFormattingElements);
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
 			return;
 		}
 		

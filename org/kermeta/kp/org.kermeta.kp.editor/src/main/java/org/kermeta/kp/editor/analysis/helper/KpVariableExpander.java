@@ -48,6 +48,7 @@ public class KpVariableExpander {
 	protected MessagingSystem logger;
 	
 	protected HashMap<String,String> possibleVariableReplacements = new HashMap<String,String>();
+	protected HashMap<ReusableResource,String> selectedURL4Resource = new HashMap<ReusableResource,String>();
 
 	public KpVariableExpander(String kpFileURL, KermetaProject kp, LocalFileConverter fileSystemConverter, MessagingSystem logger) {
 		this.kpFileURL = kpFileURL;
@@ -111,6 +112,7 @@ public class KpVariableExpander {
 									foundFile = true;
 									possibleVariableReplacements.put("${"+reusableResource.getReusableResourceName()+BASEURI_VARIABLE+"}", theFile.getAbsolutePath());
 									possibleVariableReplacements.put("${"+reusableResource.getReusableResourceName()+URI_VARIABLE+"}", currentReusableResourceURL);
+									selectedURL4Resource.put(reusableResource, currentReusableResourceURL);
 									break; // skip other urls of this dependency
 								}
 							}
@@ -125,6 +127,7 @@ public class KpVariableExpander {
 							foundFile = true;
 							possibleVariableReplacements.put("${"+reusableResource.getReusableResourceName()+BASEURI_VARIABLE+"}", "jar:"+currentReusableResourceURL+"!");
 							possibleVariableReplacements.put("${"+reusableResource.getReusableResourceName()+URI_VARIABLE+"}", currentReusableResourceURL);
+							selectedURL4Resource.put(reusableResource, currentReusableResourceURL);
 							break; // skip other urls of this dependency
 						}
 					} catch (IOException e) {
@@ -145,7 +148,9 @@ public class KpVariableExpander {
 	}
 
 	
-	
+	public String getSelectedUrl4ReusableResource(ReusableResource res){
+		return selectedURL4Resource.get(res);
+	}
 	
 
 	/**

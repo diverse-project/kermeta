@@ -13,9 +13,8 @@ public class KpSyntaxCoverageInformationProvider {
 			org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getPackageEquivalence(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportFile(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectJar(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getImportProject(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectSources(),
-			org.kermeta.kp.KpPackage.eINSTANCE.getImportBytecodeJar(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getReusableResource(),
 		};
 	}

@@ -58,14 +58,8 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
-		if (object instanceof org.kermeta.kp.ImportBytecodeJar) {
-			result = interprete_org_kermeta_kp_ImportBytecodeJar((org.kermeta.kp.ImportBytecodeJar) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.kermeta.kp.ImportProjectJar) {
-			result = interprete_org_kermeta_kp_ImportProjectJar((org.kermeta.kp.ImportProjectJar) object, context);
+		if (object instanceof org.kermeta.kp.ImportProject) {
+			result = interprete_org_kermeta_kp_ImportProject((org.kermeta.kp.ImportProject) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -123,11 +117,7 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 		return null;
 	}
 	
-	public ResultType interprete_org_kermeta_kp_ImportProjectJar(org.kermeta.kp.ImportProjectJar object, ContextType context) {
-		return null;
-	}
-	
-	public ResultType interprete_org_kermeta_kp_ImportBytecodeJar(org.kermeta.kp.ImportBytecodeJar object, ContextType context) {
+	public ResultType interprete_org_kermeta_kp_ImportProject(org.kermeta.kp.ImportProject object, ContextType context) {
 		return null;
 	}
 	
