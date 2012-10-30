@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>language.library.core</artifactId>
+    <artifactId>language.library.standard</artifactId>
     <packaging>jar</packaging>
-    <name>Kermeta :: Library :: Core</name>
+    <name>Kermeta :: Library :: Standard</name>
 
     <parent>
         <groupId>org.kermeta.language</groupId>
@@ -23,7 +23,7 @@
      	</resources>
         <plugins>
            <!-- Kermeta Compiler plugin -->
-           <!-- <plugin>
+           <plugin>
                 <groupId>org.kermeta.kp</groupId>
                 <artifactId>kp.compiler.mavenplugin</artifactId>
                 <version>2.0.7-SNAPSHOT</version>
@@ -45,7 +45,7 @@
                     </execution>
                 </executions>
             </plugin>
-            --> 
+             
             <!-- package into a jar for OSGI -->
             <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
@@ -98,6 +98,7 @@
 			      <downloadSources>true</downloadSources>
 			      <downloadJavadocs>true</downloadJavadocs>
 			      <projectnatures>
+			      	<projectnature>org.kermeta.language.texteditor.eclipse.nature.KermetaNatureID</projectnature>
 			        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
 			        <projectnature>org.eclipse.jdt.core.javanature</projectnature>			        
 			      </projectnatures>
@@ -166,6 +167,11 @@
             <artifactId>language.api</artifactId>
             <version>${kermeta.version}</version>
         </dependency> -->
+        <dependency>
+        	<groupId>org.kermeta.language</groupId>
+        	<artifactId>language.library.core</artifactId>
+        	<version>${kermeta.version}</version>
+        </dependency>
     </dependencies>
 
 

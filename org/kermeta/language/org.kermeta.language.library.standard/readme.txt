@@ -1,6 +1,4 @@
-This project contains the native scala code of the kmt definitions of the minimal (core) k2 framework. 
-The KMT definitions are in the library.standard project and can be partially extended via aspects.
-More complex framework is provided in another project : org.k2.language.library.extended
+This project contains the kmt definitions of the minimal (core) k2 framework. More complex framework is provided in another project : org.k2.language.library.extended
 Ie. element needed for basic interactions and primitives types.
 As they are primitives they implementation are provided as scala code (ie. not generated from the k2)
 
