@@ -297,10 +297,9 @@ public class CollectSourcesHelper {
 				}
 			}
 			else{
-				logger.logProblem(
-						MessagingSystem.Kind.UserERROR,
-						"Cannot find project.kp in " + importedProjectJar.getProjectResource().getUrl() , getMessageGroup(),
-						KpResourceHelper.createFileReference(importedProjectJar));
+				logger.log(
+						MessagingSystem.Kind.DevINFO,
+						"ImportProject used for bytecode only because there is no project.kp in " + importedProjectJar.getProjectResource().getUrl() , getMessageGroup());
 			}
 		}
 
