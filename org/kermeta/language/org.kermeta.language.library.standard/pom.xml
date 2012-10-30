@@ -38,7 +38,7 @@
                             <resourceOutputDirectory>${project.build.directory}/resources</resourceOutputDirectory>
                             <targetGroupId>${project.groupId}</targetGroupId>
                             <targetArtifactId>${project.artifactId}</targetArtifactId>
-                            <stopAfterPhase>TYPE_SET</stopAfterPhase>
+                            <stopAfterPhase>GENERATE_SCALA</stopAfterPhase>
                             <checkingEnabled>true</checkingEnabled>
                             <intermediateFilesRequired>true</intermediateFilesRequired>
                         </configuration>
