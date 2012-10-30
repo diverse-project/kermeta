@@ -63,7 +63,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       var param: StringBuilder = new StringBuilder
       generateParamerterClass(thi, param)
       if (!Util.hasEcoreFromAPITag(thi)) {
-        res append " with " + Util.protectScalaKeyword("_root_." + getQualifiedNamedBase(thi) + param.toString)
+        res append " with " + Util.protectScalaKeyword("_root_." + getPQualifiedNamedBase(thi) + param.toString)
       } else
         res.append(" with " + Util.protectScalaKeyword("_root_." + getQualifiedNameCompilo(thi.eContainer)) + ".itf." + thi.getName() + "Itf" + param.toString)
 
@@ -228,7 +228,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
     return result
   }
-  
+
   /**
    * Returns all the operation of this ClassDefinition including inherited ones
    */

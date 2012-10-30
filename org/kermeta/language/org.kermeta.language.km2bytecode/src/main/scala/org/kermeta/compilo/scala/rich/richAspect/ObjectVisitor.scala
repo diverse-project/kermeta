@@ -24,6 +24,8 @@ trait ObjectVisitor {
   def generateScalaCodeForInstanceOf(thi:CallTypeLiteral,res : StringBuilder) : Unit;
 
   def getQualifiedNamedBase(typD : GenericTypeDefinition) : String
+  /** returns the qualified named up to the package */
+  def getPQualifiedNamedBase(typD : GenericTypeDefinition) : String
 	 
   def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String
         

@@ -73,10 +73,10 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       genpackageName.append(k2.utils.TypeEquivalence.getPackageEquivalence(visitor.getQualifiedNameCompilo(par.eContainer)))
 	
       //og.error("AspectVisitor ClassDef Gen | {} | {}",genpackageName.toString,par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameNoRoot)
-			
+	/*		
       if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])){
         genpackageName.insert(0, GlobalConfiguration.scalaAspectPrefix+".")
-      }
+      }*/
       //packageName.append(genpackageName.toString)
       //packageName.append(".")
 			
@@ -87,7 +87,14 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
       res.append("import _root_.k2.standard.JavaCollectionConversions._\n")
       res.append("import _root_.k2.standard.PrimitiveConversion._\n")
 //      res.append("import _root_.kermeta.kunit.KunitConversions._\n")
-      visitor.visit(par,res)
+      try{
+        visitor.visit(par,res)
+      }
+      catch {
+       	case e : Throwable => 
+       	  log.error("Problem while generating "+par.getName+"Aspect.scala : "+e.getMessage(), e)
+        case _ =>
+      }
       Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
       if (!Util.hasEcoreTag(par)){
         var res1 : StringBuilder = new StringBuilder

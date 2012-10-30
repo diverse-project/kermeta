@@ -19,9 +19,9 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
 				
                     var ty : TypeDefinition =thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType].getTypeDefinition()
                     res.append("_root_.")
-                    if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package])){
+                    /*if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package])){
                         res.append(GlobalConfiguration.scalaAspectPrefix+".")
-                    }
+                    }*/
                     res.append(k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedNameCompilo(ty.eContainer)))
                     res.append("."+GlobalConfiguration.factoryName+".create")
                     res.append(ty.getName())

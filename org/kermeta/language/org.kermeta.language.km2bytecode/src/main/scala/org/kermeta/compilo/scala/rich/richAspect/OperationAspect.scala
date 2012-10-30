@@ -28,12 +28,13 @@ trait OperationAspect extends ObjectVisitor with LogAspect with ClassDefinitionA
    * returns the first superOperation that match this operation signature (currently, operation name and number of parameters)
    */
   def getSuperOperation(thi:Operation) : Operation = {
-    this.getAllOperations(thi.getOwningClass()).filter({op => (
+    val superOps = this.getAllOperations(thi.getOwningClass()).filter({op => (
       (op != thi)
       && (op.getName().equals(thi.getName()))
       && (op.getOwnedParameter().size().equals(thi.getOwnedParameter().size()))
-          )}).first
-    
+          )})
+    if(superOps.isEmpty) return null
+    else return superOps.first
   }
   
   

@@ -696,6 +696,64 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
 	  return res
    }
 
+   /*
+    * return the qualified name without the metamodel (ie.limited to Package)
+    */
+  def getPQualifiedNameCompilo(thi: EObject): String = {
+    thi match {
+      case (mm: Metamodel) => {
+        return mm.getName()
+      }
+      case (p: Package) => {
+        return k2.utils.TypeEquivalence.getPackageEquivalence(getPQualifiedName(thi))
+      }
+      case (p: ObjectTypeVariable) => {
+        return p.getName()
+      }
+      case c: Class => {
+
+        if (Util.hasEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)) {
+          // special case for types that are mapped to java types in Ecore
+          return Util.getEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)
+        } else {
+          var res = new StringBuilder
+          var typename = Util.protectScalaKeyword(getQualifiedNamedBase(c.getTypeDefinition))
+          if (typename.contains(".")) res.append("_root_.")
+          res.append(typename)
+          return res.toString
+        }
+        /*if (this.getTypeParamBinding.size>0){
+	         var i = 0;
+	         res.append("[")
+	         this.getTypeParamBinding.foreach(ty => {
+	         if (i>0) {res.append(",")}
+	         ty.generateScalaCode(res)
+	         i = i+1
+	         })
+	         res.append("]")
+
+	         }*/
+
+      }
+      case (pt: PrimitiveType) => {
+        var res = new StringBuilder
+        visit(pt, res)
+        return res.toString()
+      }
+      case (c: Enumeration) => {
+        return getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName();
+      }
+      case c: ClassDefinition => {
+        var res = new StringBuilder
+        /*if (Util.isAMapEntry(c))
+          res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
+        res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        return res.toString()
+
+      }
+    }
+  }
+   
   def getQualifiedNameCompilo(thi: EObject): String = {
     thi match {
       case (mm: Metamodel) => {
@@ -742,8 +800,8 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       }
       case c: ClassDefinition => {
         var res = new StringBuilder
-        if (Util.isAMapEntry(c))
-          res.append(GlobalConfiguration.scalaAspectPrefix + ".")
+        /*if (Util.isAMapEntry(c))
+          res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
         res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
         return res.toString()
 
@@ -751,6 +809,28 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     }
   }
 
+  /**
+   * returns the qualified excluding the metamodel name part
+   */
+  def getPQualifiedName(thi: EObject): String = {
+    var res = new StringBuilder
+    thi match {
+      case (mm: Metamodel) => {
+        res.append(mm.getName)
+      }
+      case (p: Package) => {
+
+        if (p.eContainer() != null && (p.eContainer().isInstanceOf[Package])) {
+          res.append(getPQualifiedName(p.eContainer()) + ".")
+        }
+        res.append(p.getName)
+      }
+
+      case _ =>
+    }
+
+    return res.toString()
+  }
   def getQualifiedName(thi: EObject): String = {
     var res = new StringBuilder
     thi match {
@@ -803,13 +883,25 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
       //case _ if(!Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => { "ScalaAspect."+baseName }
       //case _ if(Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => baseName
       case _ if (!Util.hasEcoreTag(typD) && !Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement])) => baseName
-      case _ => { GlobalConfiguration.scalaAspectPrefix + "." + baseName }
+      case _ => { baseName }
     }
     return baseName + "Aspect"
   }
 
   def getQualifiedNamedBase(typD: GenericTypeDefinition): String = {
     var baseName = getQualifiedNameCompilo(typD)
+    baseName = baseName match {
+      case _ if (!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List")) => { GlobalConfiguration.scalaAspectPrefix + "." + baseName }
+      case _ => { baseName }
+    }
+    return baseName
+  }
+  
+  /**
+   * returns the qualified excluding the metamodel name part
+   */
+  def getPQualifiedNamedBase(typD: GenericTypeDefinition): String = {
+    var baseName = getPQualifiedNameCompilo(typD)
     baseName = baseName match {
       case _ if (!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List")) => { GlobalConfiguration.scalaAspectPrefix + "." + baseName }
       case _ => { baseName }

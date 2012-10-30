@@ -16,10 +16,13 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
 
   def generateDefaultRunner(mu: ModelingUnit, res: StringBuilder) {
 
+   // var baseMetamodel: String = GlobalConfiguration.baseMetamodel()
     var mainClass: String = GlobalConfiguration.baseClass() //par.getKTag().filter{e=> "mainClass".equals(e.getName)}.first.getValue
     var mainOperation: String = GlobalConfiguration.baseOperation() // par.getKTag().filter{e=> "mainOperation".equals(e.getName)}.first.getValue
-    var packageName: String = mainClass.substring(0, mainClass.lastIndexOf("::")).replace("::", ".").replace("#",".")
-    var className: String = mainClass.substring(mainClass.lastIndexOf("::") + 2)
+    
+    
+    var packageName: String = if(mainClass != null){ mainClass.substring(0, mainClass.lastIndexOf("::")).replace("::", ".").replace("#",".")} else {""}
+    var className: String = if(mainClass != null){ mainClass.substring(mainClass.lastIndexOf("::") + 2)} else {""}
     var mainClassDef: org.eclipse.emf.ecore.EObject = null
     var mainOperationSize = 0
     try {
