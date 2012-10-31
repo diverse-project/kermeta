@@ -33,10 +33,13 @@ public class KpTokenStyleInformationProvider {
 		if ("packageEquivalence".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
-		if ("importFile".equals(tokenName)) {
+		if ("import".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
-		if ("withBytecodeFrom".equals(tokenName)) {
+		if ("using".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("EMFBytecode".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("importProject".equals(tokenName)) {
@@ -49,6 +52,9 @@ public class KpTokenStyleInformationProvider {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("QUOTED_34_34".equals(tokenName)) {
+			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
+		}
+		if ("QUOTED_40_41".equals(tokenName)) {
 			return new org.kermeta.kp.editor.mopp.KpTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
 		}
 		return null;

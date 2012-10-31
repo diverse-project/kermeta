@@ -25,6 +25,7 @@ public class KpTokenResolverFactory implements org.kermeta.kp.editor.IKpTokenRes
 		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, org.kermeta.kp.editor.IKpTokenResolver>();
 		registerTokenResolver("TEXT", new org.kermeta.kp.editor.analysis.KpTEXTTokenResolver());
 		registerTokenResolver("QUOTED_34_34", new org.kermeta.kp.editor.analysis.KpQUOTED_34_34TokenResolver());
+		registerTokenResolver("QUOTED_40_41", new org.kermeta.kp.editor.analysis.KpQUOTED_40_41TokenResolver());
 	}
 	
 	public org.kermeta.kp.editor.IKpTokenResolver createTokenResolver(String tokenName) {
