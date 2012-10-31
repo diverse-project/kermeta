@@ -30,15 +30,35 @@ import org.kermeta.kp.ReusableResource;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.kermeta.kp.impl.ReusableResourceImpl#getReusableResourceName <em>Reusable Resource Name</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.ReusableResourceImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.ReusableResourceImpl#getAlternateUrls <em>Alternate Urls</em>}</li>
- *   <li>{@link org.kermeta.kp.impl.ReusableResourceImpl#getReusableResourceName <em>Reusable Resource Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class ReusableResourceImpl extends EObjectImpl implements ReusableResource {
+	/**
+   * The default value of the '{@link #getReusableResourceName() <em>Reusable Resource Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getReusableResourceName()
+   * @generated
+   * @ordered
+   */
+	protected static final String REUSABLE_RESOURCE_NAME_EDEFAULT = null;
+
+	/**
+   * The cached value of the '{@link #getReusableResourceName() <em>Reusable Resource Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getReusableResourceName()
+   * @generated
+   * @ordered
+   */
+	protected String reusableResourceName = REUSABLE_RESOURCE_NAME_EDEFAULT;
+
 	/**
    * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -68,26 +88,6 @@ public class ReusableResourceImpl extends EObjectImpl implements ReusableResourc
    * @ordered
    */
 	protected EList<String> alternateUrls;
-
-	/**
-   * The default value of the '{@link #getReusableResourceName() <em>Reusable Resource Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getReusableResourceName()
-   * @generated
-   * @ordered
-   */
-	protected static final String REUSABLE_RESOURCE_NAME_EDEFAULT = null;
-
-	/**
-   * The cached value of the '{@link #getReusableResourceName() <em>Reusable Resource Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getReusableResourceName()
-   * @generated
-   * @ordered
-   */
-	protected String reusableResourceName = REUSABLE_RESOURCE_NAME_EDEFAULT;
 
 	/**
    * <!-- begin-user-doc -->
@@ -184,12 +184,12 @@ public class ReusableResourceImpl extends EObjectImpl implements ReusableResourc
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID)
     {
+      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
+        return getReusableResourceName();
       case KpPackage.REUSABLE_RESOURCE__URL:
         return getUrl();
       case KpPackage.REUSABLE_RESOURCE__ALTERNATE_URLS:
         return getAlternateUrls();
-      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
-        return getReusableResourceName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -204,15 +204,15 @@ public class ReusableResourceImpl extends EObjectImpl implements ReusableResourc
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
     {
+      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
+        setReusableResourceName((String)newValue);
+        return;
       case KpPackage.REUSABLE_RESOURCE__URL:
         setUrl((String)newValue);
         return;
       case KpPackage.REUSABLE_RESOURCE__ALTERNATE_URLS:
         getAlternateUrls().clear();
         getAlternateUrls().addAll((Collection<? extends String>)newValue);
-        return;
-      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
-        setReusableResourceName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -227,14 +227,14 @@ public class ReusableResourceImpl extends EObjectImpl implements ReusableResourc
 	public void eUnset(int featureID) {
     switch (featureID)
     {
+      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
+        setReusableResourceName(REUSABLE_RESOURCE_NAME_EDEFAULT);
+        return;
       case KpPackage.REUSABLE_RESOURCE__URL:
         setUrl(URL_EDEFAULT);
         return;
       case KpPackage.REUSABLE_RESOURCE__ALTERNATE_URLS:
         getAlternateUrls().clear();
-        return;
-      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
-        setReusableResourceName(REUSABLE_RESOURCE_NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -249,12 +249,12 @@ public class ReusableResourceImpl extends EObjectImpl implements ReusableResourc
 	public boolean eIsSet(int featureID) {
     switch (featureID)
     {
+      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
+        return REUSABLE_RESOURCE_NAME_EDEFAULT == null ? reusableResourceName != null : !REUSABLE_RESOURCE_NAME_EDEFAULT.equals(reusableResourceName);
       case KpPackage.REUSABLE_RESOURCE__URL:
         return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
       case KpPackage.REUSABLE_RESOURCE__ALTERNATE_URLS:
         return alternateUrls != null && !alternateUrls.isEmpty();
-      case KpPackage.REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME:
-        return REUSABLE_RESOURCE_NAME_EDEFAULT == null ? reusableResourceName != null : !REUSABLE_RESOURCE_NAME_EDEFAULT.equals(reusableResourceName);
     }
     return super.eIsSet(featureID);
   }
@@ -269,12 +269,12 @@ public class ReusableResourceImpl extends EObjectImpl implements ReusableResourc
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (url: ");
+    result.append(" (reusableResourceName: ");
+    result.append(reusableResourceName);
+    result.append(", url: ");
     result.append(url);
     result.append(", alternateUrls: ");
     result.append(alternateUrls);
-    result.append(", reusableResourceName: ");
-    result.append(reusableResourceName);
     result.append(')');
     return result.toString();
   }

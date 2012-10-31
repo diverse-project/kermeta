@@ -254,13 +254,22 @@ public interface KpPackage extends EPackage {
 		int PACKAGE_EQUIVALENCE_FEATURE_COUNT = 2;
 
 		/**
+   * The feature id for the '<em><b>Reusable Resource Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME = 0;
+
+		/**
    * The feature id for the '<em><b>Url</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int REUSABLE_RESOURCE__URL = 0;
+	int REUSABLE_RESOURCE__URL = 1;
 
 		/**
    * The feature id for the '<em><b>Alternate Urls</b></em>' attribute list.
@@ -269,16 +278,7 @@ public interface KpPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int REUSABLE_RESOURCE__ALTERNATE_URLS = 1;
-
-		/**
-   * The feature id for the '<em><b>Reusable Resource Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME = 2;
+	int REUSABLE_RESOURCE__ALTERNATE_URLS = 2;
 
 		/**
    * The number of structural features of the '<em>Reusable Resource</em>' class.

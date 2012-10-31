@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.kermeta.kp.ReusableResource#getReusableResourceName <em>Reusable Resource Name</em>}</li>
  *   <li>{@link org.kermeta.kp.ReusableResource#getUrl <em>Url</em>}</li>
  *   <li>{@link org.kermeta.kp.ReusableResource#getAlternateUrls <em>Alternate Urls</em>}</li>
- *   <li>{@link org.kermeta.kp.ReusableResource#getReusableResourceName <em>Reusable Resource Name</em>}</li>
  * </ul>
  * </p>
  *

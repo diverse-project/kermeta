@@ -34,16 +34,17 @@ TOKENSTYLES{
 
 RULES{
     
-    KermetaProject::= 
+    KermetaProject::=
+     (  	(importedProjects) |
+		   	reusableResources
+	    )* 
     "project" #1  metamodelName[] ("extends" importedProjectSources("," importedProjectSources)*)? "{"
     	(!1"mainClass"  defaultMainClass['"','"']  )?
 	    (!1"mainOperation"  defaultMainOperation['"','"']  )?
 	    (!1"javaBasePackage"  javaBasePackage['"','"']  )? 
 	    (  	importedFiles   )*
 	    "}"
-	    (  	(importedProjects) |
-		   	reusableResources
-	    )*
+	   
     ;
     
     
@@ -53,16 +54,16 @@ RULES{
         
     
     ImportFile::=
-    	!2"importFile" url['"','"'] ("withBytecodeFrom" bytecodeFrom[] (packageEquivalences)*)?
+    	!1"import" url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" (packageEquivalences)(packageEquivalences)* "}")?)?
     ;
    	ImportProject ::=
-   		"importProject" projectResource[] 
+   		!0"importProject" projectResource[] 
    	;
    	ImportProjectSources ::=
    		projectResource[]
    	;
    	
     ReusableResource ::=
-    	!1"resource" reusableResourceName[] "=" url['"','"'] (!2"alternative" alternateUrls['"','"']("," alternateUrls['"','"'])* )?
+    	!0"resource" reusableResourceName[] "=" url['"','"'] (!2"alternative" alternateUrls['"','"']("," alternateUrls['"','"'])* )?
     ;
 }

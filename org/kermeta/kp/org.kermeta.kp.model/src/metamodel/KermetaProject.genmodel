@@ -29,9 +29,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//PackageEquivalence/javaPackage"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//ReusableResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/reusableResourceName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/url"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/alternateUrls"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//ReusableResource/reusableResourceName"/>
       <genOperations ecoreOperation="KermetaProject.ecore#//ReusableResource/allUrls"/>
     </genClasses>
     <genClasses ecoreClass="KermetaProject.ecore#//ImportProjectSources">

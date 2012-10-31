@@ -255,15 +255,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
    * @generated
    */
 	public EAttribute getReusableResource_Url() {
-    return (EAttribute)reusableResourceEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EAttribute getReusableResource_AlternateUrls() {
     return (EAttribute)reusableResourceEClass.getEStructuralFeatures().get(1);
   }
 
@@ -272,8 +263,17 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EAttribute getReusableResource_ReusableResourceName() {
+	public EAttribute getReusableResource_AlternateUrls() {
     return (EAttribute)reusableResourceEClass.getEStructuralFeatures().get(2);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EAttribute getReusableResource_ReusableResourceName() {
+    return (EAttribute)reusableResourceEClass.getEStructuralFeatures().get(0);
   }
 
 	/**
@@ -396,9 +396,9 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEAttribute(packageEquivalenceEClass, PACKAGE_EQUIVALENCE__JAVA_PACKAGE);
 
     reusableResourceEClass = createEClass(REUSABLE_RESOURCE);
+    createEAttribute(reusableResourceEClass, REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME);
     createEAttribute(reusableResourceEClass, REUSABLE_RESOURCE__URL);
     createEAttribute(reusableResourceEClass, REUSABLE_RESOURCE__ALTERNATE_URLS);
-    createEAttribute(reusableResourceEClass, REUSABLE_RESOURCE__REUSABLE_RESOURCE_NAME);
 
     importProjectSourcesEClass = createEClass(IMPORT_PROJECT_SOURCES);
     createEReference(importProjectSourcesEClass, IMPORT_PROJECT_SOURCES__PROJECT_RESOURCE);
@@ -457,9 +457,9 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEAttribute(getPackageEquivalence_JavaPackage(), ecorePackage.getEString(), "javaPackage", null, 1, 1, PackageEquivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(reusableResourceEClass, ReusableResource.class, "ReusableResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getReusableResource_ReusableResourceName(), ecorePackage.getEString(), "reusableResourceName", null, 1, 1, ReusableResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getReusableResource_Url(), ecorePackage.getEString(), "url", null, 1, 1, ReusableResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getReusableResource_AlternateUrls(), ecorePackage.getEString(), "alternateUrls", null, 0, -1, ReusableResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getReusableResource_ReusableResourceName(), ecorePackage.getEString(), "reusableResourceName", null, 1, 1, ReusableResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(reusableResourceEClass, ecorePackage.getEString(), "allUrls", 1, -1, IS_UNIQUE, IS_ORDERED);
 
