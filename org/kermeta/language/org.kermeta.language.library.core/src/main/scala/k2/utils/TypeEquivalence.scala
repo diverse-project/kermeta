@@ -7,16 +7,16 @@ object TypeEquivalence {
 	 
   var packageEquivelence :  java.util.HashMap[String,String] ={
     var pack1 : java.util.HashMap[String,String]= new java.util.HashMap[String,String]();
-    pack1.put("kermeta.standard","k2.standard");
-    pack1.put("kermeta.io","k2.io");
-    pack1.put("kermeta.exceptions","k2.exceptions");
-    pack1.put("kermeta.persistence","k2.persistence");
-    pack1.put("kermeta.emfpersistence","k2.persistence");
-    pack1.put("kermeta.utils","k2.utils");
-    pack1.put("kermeta","org.kermeta")
-    pack1.put("kermeta.language","org.kermeta.language")				
-    pack1.put("kermeta.language.structure","org.kermeta.language.structure")
-    pack1.put("kermeta.language.behavior", "org.kermeta.language.behavior")
+    pack1.put("kermeta_standard.kermeta.standard","k2.standard");
+    pack1.put("kermeta_standard.kermeta.io","k2.io");
+    pack1.put("kermeta_standard.kermeta.exceptions","k2.exceptions");
+    pack1.put("kermeta_standard.kermeta.persistence","k2.persistence");
+    pack1.put("kermeta_standard.kermeta.emfpersistence","k2.persistence");
+    pack1.put("kermeta_standard.kermeta.utils","k2.utils");
+    pack1.put("kermeta_standard.kermeta","org.kermeta")
+    pack1.put("kermeta_standard.kermeta.language","org.kermeta.language")				
+    pack1.put("kermeta_standard.kermeta.language.structure","org.kermeta.language.structure")
+    pack1.put("kermeta_standard.kermeta.language.behavior", "org.kermeta.language.behavior")
     
     pack1.put("ecore","org.eclipse.emf.ecore");
 //    pack1.put("trace","fr.inria.aoste.trace");
@@ -73,6 +73,7 @@ object TypeEquivalence {
         res=res.replace("CHESS","chess.CHESS")
     return res
   }
+ 
 	
 	
   var typeEquivelence :  java.util.HashMap[String,String] = {typeEquivelence = new java.util.HashMap[String,String]()
