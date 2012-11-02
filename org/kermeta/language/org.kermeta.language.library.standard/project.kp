@@ -1,24 +1,28 @@
+resource language_model = "platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/LATEST"
+resource library_core = "platform:/plugin/org.kermeta.language.library.core" alternative "mvn:org.kermeta.language/language.library.core/LATEST"
+
+
+importProject language_model
+importProject library_core
+
 project kermeta_standard {
-	importFile "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
-	importFile "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
-	importFile "${project.baseUri}/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt"
-	importFile "${project.baseUri}/src/main/kmt/kermeta/exceptions/exceptions.kmt"
-	importFile "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
-	importFile "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
-	importFile "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/standard/baseType.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/standard/collections.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/emfpersistence/emfpersistence.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/exceptions/exceptions.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/exceptions/constraint_exceptions.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/io/io.kmt"
+	import "${project.baseUri}/src/main/kmt/kermeta/utils/hashtable.kmt"
 	//require "${project.baseUri}/src/main/kmt/kermeta/utils/MapEntry.kmt"
 	//importFile "resource://src/main/kmt/org/kermeta/language/structure/aspects.kmt"
 	//importFile "${user.home}/workspace/myproject/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
-	importFile "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
+	import "${project.baseUri}/src/main/kmt/org/kermeta/language/structure/aspects.kmt"
 	//importFile "resource:/language_model/src/main/ecore/kermeta.ecore" withBytecodeFrom  language_model
-	importFile "${language_model.baseUri}/src/main/ecore/kermeta.ecore" withBytecodeFrom  language_model
+	import "${language_model.baseUri}/src/main/ecore/kermeta.ecore" using EMFBytecode(language_model)
 	
 }
 	
-importProject language_model
 
 	
-resource language_model = "platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/LATEST"
-resource library_core = "platform:/plugin/org.kermeta.language.library.core" alternative "mvn:org.kermeta.language/language.library.core/LATEST"
 	
 	
