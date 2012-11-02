@@ -119,10 +119,10 @@ trait ClassDefinitionAspect extends ObjectVisitor {
 
   def generategetQualifiedName(thi: ClassDefinition, res: StringBuilder) = {
     var qualifiedName = ReflexivityLoader.qualifiedName(thi)
-    res.append("override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n")
-    res.append(" var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"" + qualifiedName + "\"); \n")
-    res.append("         if (cd !=null){ \n var cl = _root_." + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure." + GlobalConfiguration.factoryName + ".createClass \n")
-    res.append(" cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+    res.append("  override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n")
+    res.append("    var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"" + qualifiedName + "\"); \n")
+    res.append("    if (cd !=null){ \n      var cl = _root_." + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure." + GlobalConfiguration.factoryName + ".createClass \n")
+    res.append("      cl.setTypeDefinition(cd) \n      return cl \n    } else \n      return null; \n  }\n")
 
   }
 
@@ -130,8 +130,8 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     var listInv = this.getAllInvariants(thi)
 
     if (listInv.size() > 0) {
-      res1.append("override def checkInvariants(stopOnError : Boolean){\n")
-      res1.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
+      res1.append("  override def checkInvariants(stopOnError : Boolean){\n")
+      res1.append("    val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
       var i = 0
       listInv.filter(b => !Util.hasCompilerIgnoreTag(b)).foreach(a => {
         if (i != 0) res1.append(",")

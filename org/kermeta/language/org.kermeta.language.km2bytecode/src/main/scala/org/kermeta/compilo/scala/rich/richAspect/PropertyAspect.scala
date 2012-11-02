@@ -66,7 +66,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
-    res.append("def ")
+    res.append("  def ")
     var s: StringBuilder = new StringBuilder
     visit(thi.getType(), s)
     if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")) {
@@ -145,7 +145,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     val ownerType = new StringBuilder; getOwnerType(thi,ownerType) // Contains the type of thi owner, i.e. the type of opposite if there is one
 
 
-    res.append("def " + GlobalConfiguration.scalaPrefix)
+    res.append("  def " + GlobalConfiguration.scalaPrefix)
     //        res.append(thi.getName+"")
     res.append(thi.getName + "")
     res.append(" : ")
@@ -310,7 +310,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       def kergetName: String = prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
       var scalaName = GlobalConfiguration.scalaPrefix + thi.getName()
 
-      res.append("def " + scalaName + "_=(")
+      res.append("  def " + scalaName + "_=(")
       res.append("`~value` : ")
       var listType = new StringBuilder
       getListorType(thi, listType)
