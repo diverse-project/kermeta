@@ -198,9 +198,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
             resinitEclipse.append(initForEclipseEcorePackage("", e.getName()))
           } else {
             res.append(
-              initForEcorePackage(visitor.getQualifiedName(e.getNestingPackage()), e.getName()))
+              initForEcorePackage(visitor.getPQualifiedName(e.getNestingPackage()), e.getName()))
             resinitEclipse.append(
-              initForEclipseEcorePackage(visitor.getQualifiedName(e.getNestingPackage()), e.getName()))
+              initForEclipseEcorePackage(visitor.getPQualifiedName(e.getNestingPackage()), e.getName()))
 
           }
         }
