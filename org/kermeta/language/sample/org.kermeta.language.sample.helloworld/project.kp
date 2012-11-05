@@ -1,18 +1,13 @@
-KermetaProject "org.kermeta.language.sample.helloworld" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="org.kermeta.language.sample" 
-defaultMainClass ="helloworld::Helloworld"
-defaultMainOperation ="main"
-sources={ 
-	
-	require "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"
-	//srcQuery = "/src/main/ecore/kermeta.ecore" from "language.model" 
-}
-dependencies={
-	// depends on library.core	
-	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-	//dependency "language.model" URL="mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT"    
-		 
-} 
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/LATEST"
 
- 
+importProject library_standard
+
+project hello_world {
+
+	mainClass "hello_world#helloworld::Helloworld"
+	mainOperation "main"
+	
+	import "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"
+
+}
+

@@ -21,7 +21,7 @@ package helloworld {
 			//c.add(3)
 			//c.each{e | kermeta::io::StdIO.writeln(e)}
 		end
-		@main ""
+		@main "some default param"
 		operation main2(str : kermeta::standard::String) : kermeta::standard::Void is do 
 			kermeta::io::StdIO.writeln(str)
 		end
