@@ -627,7 +627,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
     if (!Util.hasEcoreTag(thi)) {
       res.append("_root_." + k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi.eContainer())) + "." + thi.getName() + "." + thi.getName())
     } else {
-      res.append("_root_." + k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi.eContainer())) + "." + thi.getName())
+      res.append("_root_." + k2.utils.TypeEquivalence.getPackageEquivalence(getPQualifiedName(thi.eContainer())) + "." + thi.getName())
     }
   }
 
@@ -747,7 +747,12 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         var res = new StringBuilder
         /*if (Util.isAMapEntry(c))
           res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
-        res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        if(Util.hasEcoreTag(c)){
+        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        }
+        else{
+        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        }
         return res.toString()
 
       }
@@ -810,6 +815,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         /*if (Util.isAMapEntry(c))
           res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
         res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        
         
         return res.toString()
 

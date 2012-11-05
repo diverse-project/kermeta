@@ -105,7 +105,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       var s: StringBuilder = new StringBuilder
       visit(thi.getType(), s)
       if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("_root_.java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean") || s.toString.equals("_root_.kermeta.standard.Boolean")) {
-        val classQualifiedName = getQualifiedNamedBase(thi.eContainer.asInstanceOf[ClassDefinition])
+        val classQualifiedName = getPQualifiedNamedBase(thi.eContainer.asInstanceOf[ClassDefinition])
         if (Util.doesMethodExists(classQualifiedName, "is" + baseName)) {
           useIs = true
           log.debug(classQualifiedName + "." + "is" + baseName + " found in additional classpath")
