@@ -256,11 +256,19 @@ aspect class TypeReference {
 	 *            type of the TypeReference
 	 */
 	operation initialize(type : Type) : TypeReference is do
-		var c : Class
-		c ?= type
+		
 		self.type := type
 		self.upper := 1
-		self.name := c.name
+		var c : Class
+		c ?= type
+		var pt : PrimitiveType
+		pt ?= type
+		if(not c.isVoid) then
+			self.name := c.name
+		end
+		if(not pt.isVoid) then
+			self.name := pt.name
+		end
 		self.containedType.add(c)
 		result := self
 	end

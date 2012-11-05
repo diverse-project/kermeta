@@ -17,6 +17,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/StaticSetterContext.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/callOperationConformanceChecker.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/behaviorResolver_inferedStaticType.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/behavior/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
@@ -592,8 +593,7 @@ package behavior {
 				end
 				if not typeVar.isVoid then
 					var callTL : CallTypeLiteral init CallTypeLiteral.new
-					callTL.typeref := TypeReference.new
-					callTL.typeref.type := typeVar
+					callTL.typeref := TypeReference.new.initialize(typeVar)
 					callTL.setInferedStaticType(context, context.createTypeFromQualifiedName("kermeta_standard#org::kermeta::language::structure::Class"))
 					result:=callTL
 				else 
@@ -622,7 +622,7 @@ package behavior {
 					callTypeLiteral.typeref := TypeReference.new
 					if typeDef.isInstanceOf(ClassDefinition) then
 						if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found a ClassDefinition " + typeDef.name) end
-						callTypeLiteral.typeref.type := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(typeDef.asType(ClassDefinition))
+						callTypeLiteral.typeref.initialize(org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(typeDef.asType(ClassDefinition)))
 						callTypeLiteral.typeref.containedType.add(callTypeLiteral.typeref.type)				
 						// TODO deal with generics
 						if typeDef.asType(ClassDefinition).typeParameter.isEmpty.~not() then
@@ -1050,6 +1050,16 @@ package behavior {
 									typeRef.type:=funcParamTypes.elementAt(i).resolveTypeVariables(context,bindings)
 									if typeRef.type.container.isVoid then
 										typeRef.containedType.add(typeRef.type)
+									end
+									var c : Class
+									c ?= typeRef.type
+									var pt : PrimitiveType
+									pt ?= typeRef.type
+									if(not c.isVoid) then
+										typeRef.name := c.name
+									end
+									if(not pt.isVoid) then
+										typeRef.name := pt.name
 									end
 									i:=i+1
 								end
