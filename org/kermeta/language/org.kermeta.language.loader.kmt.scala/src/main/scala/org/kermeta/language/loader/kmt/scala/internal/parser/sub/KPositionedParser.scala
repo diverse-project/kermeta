@@ -41,6 +41,7 @@ trait KPositionedParser extends KAbstractParser {
     newtag.setValue(beginOffset.toString + ";" + endOffset.toString)
     
     modelElem.getKOwnedTags.add(newtag)
+    newtag.getObject().add(modelElem) // make sure to create a correct tag
     modelElem
   }
   
