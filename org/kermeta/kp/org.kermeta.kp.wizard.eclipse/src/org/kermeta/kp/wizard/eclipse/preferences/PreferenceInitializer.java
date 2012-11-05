@@ -31,23 +31,17 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		        "\t\tend"+
 		        "\n\t}"+
 		        "\n}");
-		store.setDefault(PreferenceConstants.P_NEW_KP_TEMPLATE_STRING, "KermetaProject \"${project.name}\"\n"+ 
-				"\tgroupId = \"my.group\"\n" +
-				"\tdefaultMainClass = \"${package.name}::${class.name}\"\n"+
-				"\tdefaultMainOperation = \"${operation.name}\"\n"+
-				"\tsources = {\n" +
-				"\t\trequire \"${project.baseUri}/src/main/kmt/${class.name}.kmt\"\n"+  
-				"\t}\n"+
-				"\tdependencies = {\n"+
-				"\t\t//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)\n"+
-				"\t\tdependency \"library.core\" =\"platform:/plugin/org.kermeta.language.library.core\",\"mvn:org.kermeta.language/language.library.core/2.0.6\"\n"+
-				"\t}"+
-				"\tpackageEquivalences={\n"+ 
-				"\t\t// indicates the real java name of a given package\n"+
-				"\t\t// useful for deployed thirdparty metamodels\n"+
-				"\t\tpackageEquivalence \"ecore\" = \"org.eclipse.emf.ecore\"\n"+
-				"\t\tpackageEquivalence \"uml\" = \"org.eclipse.uml2.uml\"\n"+
-				"\t}"
+		store.setDefault(PreferenceConstants.P_NEW_KP_TEMPLATE_STRING, 
+				"resource library_standard =\"platform:/plugin/org.kermeta.language.library.standard\" alternative \"mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT\"\n"+
+				"importProject library_standard\n" +
+
+				"project ${project.name} {\n"+ 
+				"\tmainClass \"${project.name}#${package.name}::${class.name}\"\n"+ 
+				"\tmainOperation \"${operation.name}\""+
+					
+				"\timport \"${project.baseUri}/src/main/kmt/${class.name}.kmt\"\n"+ 
+				"}\n"
+
 				);
 		
 	}
