@@ -354,6 +354,12 @@
 			<version>[3.6.0.0,)</version>
 			<scope>test</scope>
 		</dependency> -->
+		
+		<dependency> <!-- required to be able to call org.eclipse.core.runtime.Platform.isRunning() -->
+		    <groupId>org.eclipse</groupId>
+		    <artifactId>osgi</artifactId>
+		    <version>3.7.2-v20120110-1415</version>
+		</dependency>
 		<dependency>
 			<groupId>org.kermeta.eclipse</groupId>
 			<artifactId>org.eclipse.core.runtime</artifactId>
