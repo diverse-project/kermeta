@@ -67,6 +67,10 @@
                             org.eclipse.emf.ecore.xmi
                         </Require-Bundle>
                         <Export-Package>
+                        	kermeta_standard.org.kermeta.language.behavior,
+                        	kermeta_standard.org.kermeta.language.structure,
+                        	kermeta_standardrunner,
+                        	ScalaImplicit.kermeta_standard,
                         	k2.io,
                         	k2.standard,
                         	k2.persistence,
