@@ -28,6 +28,7 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 	
 	/**
 	 * be careful java.net.URI uses RFC 2396 compliant string, which means that " " are enforced into "%20" for example
+	 * return null if it cannot be converted
 	 */
 	@Override
 	public java.net.URI convertSpecialURItoFileURI(java.net.URI javaUri) {
@@ -54,11 +55,9 @@ public class LocalFileConverterForEclipse extends LocalFileConverter {
 				resolvedURL = FileLocator.resolve(javaUri.toURL()); 
 				return java.net.URI.create(encodeSpecialChars(resolvedURL.toString()));
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		return null;
