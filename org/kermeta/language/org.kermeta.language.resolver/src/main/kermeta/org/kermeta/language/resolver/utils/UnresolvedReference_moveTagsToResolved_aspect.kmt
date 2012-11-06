@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : November 6, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+/**
+ * Move referenced tags (.kTag) to the corresponding resolved model element
+ */
+aspect class UnresolvedReference
+{
+	operation moveTagsToResolved(resolvedElement : KermetaModelElement) : Void is do 
+		self.kTag.each{tag|
+			tag.object.remove(self)
+			tag.object.add(resolvedElement)
+		}
+	end
+}

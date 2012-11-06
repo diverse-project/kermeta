@@ -2,6 +2,8 @@ package org::kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/UnresolvedReference_moveTagsToResolved_aspect.kmt"
+
 
 using kermeta::standard
 using org::kermeta::language::resolver
@@ -34,6 +36,7 @@ aspect class UnresolvedProperty inherits AbstractProperty, UnresolvedReference {
 				x.name==propertyIdentifier
 				}
 			result:=correspondingProperty
+			self.moveTagsToResolved(correspondingProperty)
 		end
 	end
 }
