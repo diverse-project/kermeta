@@ -22,5 +22,6 @@ aspect class UnresolvedReference
 			tag.object.remove(self)
 			tag.object.add(resolvedElement)
 		}
+		resolvedElement.kOwnedTags.addAll(self.kOwnedTags)
 	end
 }

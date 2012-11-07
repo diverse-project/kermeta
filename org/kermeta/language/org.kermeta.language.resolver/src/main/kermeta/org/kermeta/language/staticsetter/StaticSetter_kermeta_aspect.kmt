@@ -369,7 +369,6 @@ package behavior {
 					//	this is the CallVariable that must replace this UnresolvedCall
 					result := callVariable
 					self.resolvedCall:=result
-					self.moveTagsToResolved(resolvedCall)
 				else
 					result:= void
 				end
@@ -393,7 +392,7 @@ package behavior {
 						var callEnumLiteral :  CallEnumLiteral init  CallEnumLiteral.new
 						callEnumLiteral.staticEnumLiteral := enumLiteral
 						callEnumLiteral.staticType:= callTypeLiteral.typeref.type
-						callEnumLiteral.kOwnedTags.addAll(self.kOwnedTags)
+						// callEnumLiteral.kOwnedTags.addAll(self.kOwnedTags) Handled in moveTagsToResolvedOperation
 						// callEnumLiteral.target := self.target
 						result := callEnumLiteral
 						self.resolvedCall:=result
@@ -462,7 +461,7 @@ package behavior {
 						callOperation.staticOperation:=op
 						// move content of UnresolvedCall into the new CallOperation
 						callOperation.name := self.name
-						callOperation.kOwnedTags.addAll(self.kOwnedTags)
+						//callOperation.kOwnedTags.addAll(self.kOwnedTags) Handled in moveTagsToResolvedOperation
 						// infer staticType of the content (except target which has been done previously)
 						// TODO check if necessary, probably already done
 						callOperation.eachOwnedElement{ e | 
@@ -558,7 +557,7 @@ package behavior {
 					// move content of UnresolvedCall into the new CallOperation
 					callProperty.name := self.name
 					//callProperty.parameters.addAll(self.parameters)
-					callProperty.kOwnedTags.addAll(self.kOwnedTags)
+					//callProperty.kOwnedTags.addAll(self.kOwnedTags) Handled in moveTagsToResolvedOperation
 					// infer staticType of the content (except target which has been done previously)
 					callProperty.eachOwnedElement{ e | 
 						e.asType(KermetaModelElement).inferContainedExpressionStatic(context)						
@@ -756,6 +755,7 @@ package behavior {
 				end
 				result := self		
 			end
+			self.moveTagsToResolved(result)
 		end
 		
 		
