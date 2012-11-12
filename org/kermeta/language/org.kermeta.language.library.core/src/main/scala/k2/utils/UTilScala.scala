@@ -5,6 +5,8 @@
 
 package  k2.utils
 import org.eclipse.emf.ecore._
+import k2.utils.reflexivity.TagUtil
+import k2.utils.reflexivity.KermetaModelElementUtil
 
 object UTilScala {
 
@@ -113,9 +115,34 @@ object UTilScala {
     res = res + pack.getName
     return res
   }
+    
+ /**
+  * return the qualifiedname including the metamodel name
+  */
+ def getQualifiedNameMetamodelPackage(pack : org.kermeta.language.structure.Package,sep: _root_.java.lang.String):String ={
+    var res : _root_.java.lang.String= KermetaModelElementUtil.getMetamodel(pack).getName()
+    if(res !=  null){
+      res = res + sep
+    }
+    else{
+      res = ""
+    }
+    res = res + getQualifiedNamePackage(pack,sep)
+    return res
+  }
 
-   def getQualifiedNameClassJava(pack : org.kermeta.language.structure.GenericTypeDefinition, sep: _root_.java.lang.String):String ={
-       return    k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedNamePackage(pack.eContainer().asInstanceOf[org.kermeta.language.structure.Package],sep)) + sep+ pack.getName();
+    /**
+     * returns the qualified name as generated for the java base. Ie. including the metamodel name if this is a pure kermeta object, only the package name if it comes from an ecore
+     */
+   def getQualifiedNameClassJava(td : org.kermeta.language.structure.GenericTypeDefinition, sep: _root_.java.lang.String):String ={
+       // if doesn't comes from ecore -> metamodel + package name only
+		if(!TagUtil.hasEcoreTag(td)){
+		   return    k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedNameMetamodelPackage(td.eContainer().asInstanceOf[org.kermeta.language.structure.Package],sep)) + sep+ td.getName();
+		}
+		else{
+		  // package name only
+		  return    k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedNamePackage(td.eContainer().asInstanceOf[org.kermeta.language.structure.Package],sep)) + sep+ td.getName();
+		}
     }
  def getQualifiedNameTypeJava(pack : org.kermeta.language.structure.Type, sep: _root_.java.lang.String):_root_.java.lang.String ={
      if (pack.isInstanceOf[org.kermeta.language.structure.Class]){
