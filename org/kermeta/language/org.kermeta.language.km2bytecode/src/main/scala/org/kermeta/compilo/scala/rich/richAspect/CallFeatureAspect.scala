@@ -23,6 +23,7 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
                         res.append(GlobalConfiguration.scalaAspectPrefix+".")
                     }*/
                     res.append(k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedNameCompilo(ty.eContainer)))
+                    
                     res.append("."+GlobalConfiguration.factoryName+".create")
                     res.append(ty.getName())
                     var ty1 : ParameterizedType = thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType]

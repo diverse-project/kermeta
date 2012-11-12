@@ -19,6 +19,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ExecutorService
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
+import org.eclipse.emf.ecore.EObject
 
 object Util extends LogAspect {
   /**
@@ -352,6 +353,18 @@ object Util extends LogAspect {
     	name == "kermeta.standard.Boolean" || name == "kermeta.standard.Short" ||
     	name == "kermeta.standard.Double" || name == "kermeta.standard.Long" ||
     	name == "kermeta.standard.Float" || name == "kermeta.standard.Character"
+  }
+  
+  def getMetamodel(k : EObject) : Metamodel = {
+    var container = k.eContainer()
+    container match {
+      case m : Metamodel => {
+        return m
+      }
+      case o => {
+        return getMetamodel(o)
+      }
+    }
   }
 
 }

@@ -134,6 +134,8 @@ object GlobalConfiguration extends LogAspect{
     var workspaceURI : String = null
     var pluginURI : String = null
     var withRich : Boolean = true
+    
+    var kermeta_standardMM : String = "kermeta_standard"
 
     def baseClass() : String = {var  baseClass = props.getProperty("baseClass")
                           if (baseClass != null)
