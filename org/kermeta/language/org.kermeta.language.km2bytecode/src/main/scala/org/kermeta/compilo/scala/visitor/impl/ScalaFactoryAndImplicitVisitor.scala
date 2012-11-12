@@ -20,34 +20,46 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
   var visitor: PackageVisitor = new PackageVisitor
 
-  def initForEclipseEcorePackage(parentpack: String, packNam: String): String = {
+  def initForEclipseEcorePackage(parentpack: Package, pack: Package): String = {
+    var packNam = pack.getName()
     var res: StringBuilder = new StringBuilder
     var packNameUpper: String = packNam.substring(0, 1).toUpperCase + packNam.substring(1, packNam.size)
+    
     var packName: String = null
-    if ("".equals(parentpack)) {
+    var packNameMM : String = null
+    
+    if (parentpack == null) {
       packName = packNam
+      packNameMM = packNam
     } else {
-      packName = parentpack + "." + packNam
+      packName = visitor.getPQualifiedName(parentpack) + "." + packNam
+      packNameMM = visitor.getQualifiedName(parentpack) + "." + packNam
     }
     packName = k2.utils.TypeEquivalence.getPackageEquivalence(packName)
     var impName = packName + Util.getImplPackageSuffix(packName) + Util.getPackagePrefix(packNameUpper) + "PackageImpl"
 
     res.append(Util.protectScalaKeyword(impName + ".init()"))
     res.append(".setEFactoryInstance(")
-    res.append(Util.protectScalaKeyword(GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ""))
+    res.append(Util.protectScalaKeyword(/*GlobalConfiguration.scalaAspectPrefix + "." +*/ packNameMM + "." + GlobalConfiguration.factoryName + ""))
     res.append(")")
     res.append("\n")
     return res.toString()
   }
 
-  def initForEcorePackage(parentpack: String, packNam: String): String = {
+  def initForEcorePackage(parentpack: Package, pack: Package): String = {
+    var packNam = pack.getName()
     var res: StringBuilder = new StringBuilder
     var packNameUpper: String = packNam.substring(0, 1).toUpperCase + packNam.substring(1, packNam.size)
+    
     var packName: String = null
-    if ("".equals(parentpack)) {
+    var packNameMM : String = null
+    
+    if (parentpack == null) {
       packName = packNam
+      packNameMM = packNam
     } else {
-      packName = parentpack + "." + packNam
+      packName = visitor.getPQualifiedName(parentpack) + "." + packNam
+      packNameMM = visitor.getQualifiedName(parentpack) + "." + packNam
     }
     packName = k2.utils.TypeEquivalence.getPackageEquivalence(packName)
     var impName = packName + Util.getImplPackageSuffix(packName) + Util.getPackagePrefix(packNameUpper) + "PackageImpl"
@@ -58,7 +70,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
       res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
 
       //            res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
-      res.append("      pack.setEFactoryInstance(" + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n ")
+      res.append("      pack.setEFactoryInstance(" + /*GlobalConfiguration.scalaAspectPrefix + "." +*/ packName + "." + GlobalConfiguration.factoryName + ")\n ")
       res.append("      var f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
       res.append("      f.setAccessible(true)\n")
       if (packName.equals("org.eclipse.emf.ecore")) {
@@ -74,7 +86,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
       res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
       res.append("      k2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
       res.append("      pack.setEFactoryInstance(")
-      res.append(Util.protectScalaKeyword(GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ""))
+      res.append(Util.protectScalaKeyword(/*GlobalConfiguration.scalaAspectPrefix + "." + */packNameMM + "." + GlobalConfiguration.factoryName + ""))
       res.append(")")
       res.append("\n    }\n\n")
       return res.toString
@@ -156,7 +168,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
   def visit(par: ModelingUnit) {
     ecorePackages = new java.util.ArrayList[Package]()
-    par.getMetamodels().foreach({mm => addPackage(mm.getPackages())})
+    par.getMetamodels().foreach({ mm => addPackage(mm.getPackages()) })
 
     //TODO gérer le cas des package venant d'ecore
     var res: StringBuilder = new StringBuilder
@@ -194,13 +206,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
           if (e.getNestingPackage() == null) {
             res.append(
-              initForEcorePackage("", e.getName()))
-            resinitEclipse.append(initForEclipseEcorePackage("", e.getName()))
+              initForEcorePackage(null, e))
+            resinitEclipse.append(initForEclipseEcorePackage(null, e))
           } else {
-            res.append(
-              initForEcorePackage(visitor.getPQualifiedName(e.getNestingPackage()), e.getName()))
-            resinitEclipse.append(
-              initForEclipseEcorePackage(visitor.getPQualifiedName(e.getNestingPackage()), e.getName()))
+            res.append(initForEcorePackage(e.getNestingPackage(), e))
+            resinitEclipse.append(initForEclipseEcorePackage(e.getNestingPackage(), e))
 
           }
         }
@@ -222,7 +232,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     // generates the default runner file
     mrg.generateDefaultRunner(par, res)
     Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "DefaultRunner", res.toString())
-    
+
     // generate the Util.scala file
     UtilObjectGenerator.genetateUtilObject
 
@@ -231,10 +241,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
   }
 
   def visit(mm: Metamodel) {
-    
+
     mm.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
   }
-  
+
   def visit(par: Package) {
 
     if (Util.doesGeneratePackage(visitor.getQualifiedName(par))) {
@@ -291,7 +301,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
       // start by creating the main operation files
       val mrg = new MainRunnerGenerator(ecorePackages, visitor)
       mrg.generateRunnersForClassDefinition(par)
-      
+
       // then contributes the implicit conversions to the various String Builders (implicitDef, viewDef and factoryDefClass)      
       var genpackageName: StringBuilder = new StringBuilder
       var ecorepackageName: StringBuilder = new StringBuilder
