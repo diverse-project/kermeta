@@ -96,7 +96,7 @@ public class KermetaCompilerCLI {
 			else classpath.add(additionalClasspath);
 		}
 		
-		String mavenRepository = "http://maven.inria.fr/artifactory/repo";		
+		String mavenRepository = "http://maven.inria.fr/artifactory/public";		
 		ArrayList<String> additionalClassPath = new ArrayList<String>();
 		AetherUtil aetherUtil = new AetherUtil();
 		additionalClassPath.add(aetherUtil.resolveMavenArtifact("org.kermeta.scala", "scala-library", "2.9.0-1", "http://maven.inria.fr/artifactory/public-release").getAbsolutePath());

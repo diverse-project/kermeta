@@ -40,6 +40,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.DiagnosticModel;
+import org.kermeta.kp.ImportFile;
 import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
@@ -187,7 +188,7 @@ public class KermetaCompiler {
 		this.logger = logger;
 		this.fileSystemConverter = new CompositeLocalFileConverter(new ArrayList<LocalFileConverter>(
 				Arrays.asList(uriPhysicalConverter, 
-						new LocalFileConverterForAether(logger,getMainProgressGroup(),"http://maven.inria.fr/artifactory/repo"))));
+						new LocalFileConverterForAether(logger,getMainProgressGroup(),"http://maven.inria.fr/artifactory/public"))));
 		this.saveIntermediateFiles = false;
 		this.runInEclipse = willRunInEclipse;
 		this.checkingEnabled = true;
@@ -228,7 +229,7 @@ public class KermetaCompiler {
 		System.err.println("checking enabled (" + checkingEnabled + ") stop on error (" + stopOnError + ")");
 		this.logger = logger;
 		this.fileSystemConverter = new CompositeLocalFileConverter(Arrays.asList(uriPhysicalConverter, 
-			    							new LocalFileConverterForAether(logger,getMainProgressGroup(), "http://maven.inria.fr/artifactory/repo")));
+			    							new LocalFileConverterForAether(logger,getMainProgressGroup(), "http://maven.inria.fr/artifactory/public")));
 		this.saveIntermediateFiles = saveIntermediateFiles;
 		this.runInEclipse = willRunInEclipse;
 		this.checkingEnabled = checkingEnabled;
@@ -1078,9 +1079,11 @@ public class KermetaCompiler {
 		CollectSourcesHelper helper = new CollectSourcesHelper(this, logger);
 		try {
 			ArrayList<TracedURL> importedProjectSources = helper.getResolvedImportProjectSources(kp, kp.eResource().getURI().toString());
-			for (TracedURL src : importedProjectSources) {
+			for (TracedURL src : importedProjectSources) {				
 				if(src.getUrl().toString().endsWith(".ecore"))
-					ecoreURLs.add(src.getUrl());
+					if(((ImportFile)(src.getSource())).getBytecodeFrom() == null){
+						ecoreURLs.add(src.getUrl());
+					}
 			}
 		} catch (Exception e) {	
 			logger.error("Pb retrieving ecore sources", LOG_MESSAGE_GROUP, e);
