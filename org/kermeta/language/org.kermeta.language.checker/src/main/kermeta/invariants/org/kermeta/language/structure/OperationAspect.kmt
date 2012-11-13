@@ -139,7 +139,7 @@ aspect class Operation
 				  				var typeSeq : Sequence<Type> init Sequence<Type>.new
 				  				typeSeq.add(Class.new.initializeFromAClassDefinition(stringTypeDef.asType(ClassDefinition)))
 				  				var StringCollectionType : Type init Class.new.initializeFromAGenericClassDefinition(
-				  								mm.getTypeDefinitionByQualifiedName("kermeta::standard::Collection").asType(ClassDefinition),
+				  								mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Collection").asType(ClassDefinition),
 				  								typeSeq)
 
 				  				//stdio.writeln("   stringCollType : " + StringCollectionType.toString)
