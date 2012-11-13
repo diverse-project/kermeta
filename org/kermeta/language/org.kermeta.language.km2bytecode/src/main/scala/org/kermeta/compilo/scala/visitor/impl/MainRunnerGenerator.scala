@@ -79,7 +79,8 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
   def generateRunnerForMainOperation(op: Operation, cd: ClassDefinition, p: Package) {
     var res: StringBuilder = new StringBuilder
     var resinitEclipse: StringBuilder = new StringBuilder
-    val packageName = visitor.getQualifiedName(p)
+    val packageFullName = visitor.getQualifiedName(p)
+    val packageName = visitor.getPQualifiedName(p)
     res.append("package " + GlobalConfiguration.scalaAspectPrefix + "runner." + packageName + " \n")
     res.append("import " + GlobalConfiguration.scalaAspectPrefix + "runner.DefaultRunner\n")
     res.append("import " + GlobalConfiguration.frameworkGeneratedPackageName + "." + GlobalConfiguration.implicitConvTraitName + "._\n")
@@ -93,11 +94,11 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     res.append("    org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
 
     res.append("    " + "_root_.")
-    if (ecorePackages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
+    if (ecorePackages.filter { e => visitor.getQualifiedName(e).equals(packageFullName) }.size == 1) {
       res.append(GlobalConfiguration.scalaAspectPrefix + ".")
 
     }
-    res.append(k2.utils.TypeEquivalence.getPackageEquivalence(packageName))
+    res.append(k2.utils.TypeEquivalence.getPackageEquivalence(packageFullName))
 
     res.append("." + GlobalConfiguration.factoryName + ".create" + cd.getName + "." + op.getName)
 
