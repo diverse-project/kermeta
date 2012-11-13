@@ -296,8 +296,7 @@ public class KPBuilder {
 		KermetaProject kp = ldr.loadKp(kpFileURL);
 		ArrayList<String> fullClassPath = new ArrayList<String>();
 		fullClassPath.addAll(getBuildAdditionalClassPath());
-		fullClassPath.addAll(compiler.getImportByteCodeJarClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
-		fullClassPath.addAll(compiler.getImportProjetJarClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
+		fullClassPath.addAll(compiler.getImportProjetClasspath(kp, new KpVariableExpander(kpFileURL, kp, compiler.fileSystemConverter, compiler.logger )));
 		fullClassPath.add(outputEMFBinaryFolder);
 		
 		return fullClassPath;
