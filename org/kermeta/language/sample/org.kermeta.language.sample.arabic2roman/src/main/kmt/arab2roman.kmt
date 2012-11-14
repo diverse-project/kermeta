@@ -33,7 +33,8 @@ class ArabicNumber
 		from var i : Integer init 1000
 		until i == 0
 		loop
-			digit := Digit.new  digit.~value := rest / i
+			digit := Digit.new  
+			digit.~value := rest / i
 			rest := rest - digit.~value * i
 			content.add(digit)
 			i := i / 10
@@ -141,6 +142,7 @@ class Main
 		end		
 	end
 
+	@main ""
     operation main() : Void is do 
        	var a : ArabicNumber init ArabicNumber.new()
    	    var r : RomanNumber init RomanNumber.new()

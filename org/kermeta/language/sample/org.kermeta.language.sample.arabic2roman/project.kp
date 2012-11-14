@@ -1,16 +1,16 @@
-KermetaProject "org.kermeta.language.sample.arabic2roman" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="org.kermeta.language.sample" 
-defaultMainClass="root_package::Main"
-defaultMainOperation="main"
-sources={ 
-	  
-	require "${project.baseUri}/src/main/kmt/arab2roman.kmt" 
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject library_standard
+
+project arabic2roman {
+
+	mainClass "arabic2roman#root_package::Main"
+	mainOperation "main"
+	
+	import "${project.baseUri}/src/main/kmt/arab2roman.kmt"
+
 }
-dependencies={	
-	// depends on library.core	
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST" 
-		 
-} 
+
+ 
 
  
