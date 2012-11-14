@@ -18,7 +18,8 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
 
 using org::kermeta::language::structure
 
@@ -38,9 +39,11 @@ aspect class Conditional
 			//stdio.writeln("   typeDefinition qualified name : " + typeDef.getQualifiedName()   )
 			
 			// retrieve Boolean Type Definition from the modelingUnit
-		  	var mm : Metamodel init self.getRootContainer.asType(Metamodel)
-		  	var booleanTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")
-			
+			var mms : kermeta::standard::Collection<Metamodel> init self.getRootContainer.asType(Metamodel).getNeighbours
+		  	var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
+		  	
+			var booleanTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Boolean", mms)
+						
 			invResult:= typeDef.equals(booleanTypeDef)
 		end
 		

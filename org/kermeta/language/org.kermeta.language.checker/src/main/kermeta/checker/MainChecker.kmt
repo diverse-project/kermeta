@@ -30,7 +30,8 @@ class MainCheckerV2
 		
 		//org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km
 		//var file : String init "platform:/resource/org.kermeta.language.api.tests/src/main/resources/KmResolver_Valid/valid_001/001_testHelloWorld_standalone.km"
-		var file : String init "platform:/resource/org.kermeta.language.resolver/src/tests/HelloWorldMiniframework.km"
+		//var file : String init "platform:/resource/org.kermeta.language.resolver/src/tests/HelloWorldMiniframework.km"
+		var file : String init "platform:/resource/org.kermeta.language.checker/src/test/beforeCheckingforScopeRESOLVED.km"
 		
 		// load 		
 		var inputRep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
@@ -39,12 +40,12 @@ class MainCheckerV2
 		inputRep.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		
 		inputRes ?= inputRep.createResource(file,
-						"http://www.kermeta.org/kermeta/2_0_0/")
+						"http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure")
 		
 		inputRes.load()
 		
 		var mms : Set<Metamodel>
-		mms ?= inputRes.contents
+		mms ?= inputRes
 		
 	
 		var myChecker : Checker init Checker.new
@@ -56,9 +57,11 @@ class MainCheckerV2
 		var diagModel : DiagnosticModel
 		var numberFailedConstraints : Integer init 0
 		mms.each{mm|
-			diagModel := myChecker.checkObject(mm, "MERGER")
+			stdio.writeln("processing " + mm.name + "...")
+			diagModel := myChecker.checkObject(mm, "RESOLVED")
 			diagModels.add(diagModel)
 			numberFailedConstraints := numberFailedConstraints + diagModel.diagnostics.size
+			stdio.writeln("   failed constraints in  " + mm.name + " = " +diagModel.diagnostics.size.toString)
 		}
 		
 		

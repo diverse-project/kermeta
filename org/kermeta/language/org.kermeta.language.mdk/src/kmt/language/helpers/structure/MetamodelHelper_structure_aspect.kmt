@@ -32,7 +32,9 @@ aspect class Metamodel {
 		else
 		
 			var set_name : Sequence<String> init name.split("::")	
-			
+			if set_name.size()==0 then
+				set_name.add(name)
+			end
 			var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
 				p.name == set_name.at(0)
 			}
@@ -204,6 +206,20 @@ aspect class Metamodel {
 		end
 		
 		result := pack
+	end
+	
+	/**
+	 * returns the list of neighbour metamodels (including self) calculated from the containingResource (if any)
+	 * or an empty list
+	 */
+	operation getNeighbours() : Collection<Metamodel> is do
+		result := OrderedSet<Metamodel>.new
+		var res : Resource init self.containingResource
+		if(not res.isVoid) then
+			result := res.select{ o1 | o1.isInstanceOf(Metamodel)}.collect{ o2 | o2.asType(Metamodel)}
+		else 
+			stdio.errorln("Cannot find neighbours of Metamodel " + self.name + " because it isn't contained in a resource")
+		end
 	end
 }
 

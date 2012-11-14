@@ -225,12 +225,13 @@ aspect class Class {
 		if( not typesForBinding.isVoid) then
 			var index : Integer init 0
 			typesForBinding.each{ t |
-//				stdio.writeln("typeforbinding "+t.toString)
+				//stdio.writeln("ClassDefinition "+ cd.name + " typeforbinding "+t.toString)
 				var tvb : TypeVariableBinding init  TypeVariableBinding.new
 				tvb.type := t
 				if t.container.isVoid then
 					tvb.containedType.add(t)
 				end
+				//stdio.writeln("ClassDefinition "+ cd.name + " cd.typeParameter "+cd.typeParameter.toString)
 				tvb.variable := cd.typeParameter.at(index)
 				self.typeParamBinding.add(tvb)
 				index := index +1

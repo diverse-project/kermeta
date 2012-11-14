@@ -29,7 +29,8 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -83,6 +84,9 @@ aspect class Operation
 		if self.kOwnedTags.exists{ t | t.name.equals("main") }
 		then
 			//stdio.writeln("Checking main_tag_validity on operation " + self.name)
+			var mms : Collection<Metamodel> init self.getRootContainer.asType(Metamodel).getNeighbours
+		  	var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
+		  		
 
 			var nbParameter : Integer init self.ownedParameter.size
 			res:=false
@@ -93,9 +97,9 @@ aspect class Operation
 				res:=true
 			else
 				//stdio.writeln("There are " + nbParameter.toString + " parameters ...")
-		  		// retrieve the modelingunit and String TypeDefinition
-		  		var mm : Metamodel init self.getRootContainer.asType(Metamodel)
-		  		var stringTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("kermeta::standard::String")
+		  		// retrieve String TypeDefinition supposing that only one metamodel will define this specific qualified name
+		  		
+		  		var stringTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::String", mms)
 		  		
 		  		//stdio.writeln("stringTypeDef retrieved : "+ stringTypeDef.toString)
 		  		
@@ -131,15 +135,18 @@ aspect class Operation
 					if (not(param.containedType.isVoid))
 					then
 				  		param.containedType.each{ t |
-							//stdio.writeln("   t : " + t.toString())
 			  				if (t.isInstanceOf(ParameterizedType))
 			  				then
 								// Check it is a Collection<String>		  				
 				  				// build a Collection<String> type
 				  				var typeSeq : Sequence<Type> init Sequence<Type>.new
 				  				typeSeq.add(Class.new.initializeFromAClassDefinition(stringTypeDef.asType(ClassDefinition)))
+				  				var collectionClassDef : ClassDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Collection", mms).asType(ClassDefinition)
+				  				if collectionClassDef.isVoid then 
+				  					stdio.errorln("PROBLEM finding kermeta::standard::Collection")
+				  				end
 				  				var StringCollectionType : Type init Class.new.initializeFromAGenericClassDefinition(
-				  								mm.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Collection").asType(ClassDefinition),
+				  								collectionClassDef,
 				  								typeSeq)
 
 				  				//stdio.writeln("   stringCollType : " + StringCollectionType.toString)
@@ -181,7 +188,7 @@ aspect class Operation
 				true
 			else
 				//stdio.writeln("qualifiedName : " + returnType.getQualifiedName)
-				if (returnType.getQualifiedName.equals("kermeta::standard::Void"))
+				if (returnType.getQualifiedName.endsWith("#kermeta::standard::Void"))
 				then
 					// nothing to do
 					true

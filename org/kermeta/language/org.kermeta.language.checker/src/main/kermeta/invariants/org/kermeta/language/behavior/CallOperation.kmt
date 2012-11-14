@@ -16,7 +16,8 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeCreationHelper.kmt"
 
 
@@ -65,8 +66,10 @@ aspect class CallOperation
 		//if self.staticOperation.isVoid, an error will be raised elsewhere ...
 		then
 			//Check that it is called on a Class
-		  	var mm : Metamodel init self.getRootContainer.asType(Metamodel)
-			var classTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+		  	var mms : Collection<Metamodel> init self.getRootContainer.asType(Metamodel).getNeighbours
+		  	var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
+		  	
+			var classTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class", mms)
 			
 			//stdio.writeln(" classTypeDef : " + classTypeDef.toString)
 			if (self.staticOperation.owningClass.equals(classTypeDef))
@@ -103,9 +106,11 @@ aspect class CallOperation
 		if (self.name.equals("new") and not(self.staticOperation.isVoid)) 
 		then
 			// Check that it is called on a Class
-		  	var mm : Metamodel init self.getRootContainer.asType(Metamodel)
-			var classTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
-
+		  	var mms : Collection<Metamodel> init self.getRootContainer.asType(Metamodel).getNeighbours
+		  	var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
+		  	
+			var classTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class", mms)
+			
 			if (self.staticOperation.owningClass.equals(classTypeDef))
 			then
 				// Now check that it is not an abstract class
@@ -140,8 +145,10 @@ aspect class CallOperation
 		if (self.name.equals("new") and not(self.staticOperation.isVoid))
 		then
 			// Check that it is called on a Class
-		  	var mm : Metamodel init self.getRootContainer.asType(Metamodel)
-			var classTypeDef : TypeDefinition init mm.getTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class")
+		  	var mms : Collection<Metamodel> init self.getRootContainer.asType(Metamodel).getNeighbours
+		  	var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
+		  	
+			var classTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("org::kermeta::language::structure::Class", mms)
 			
 			if (self.staticOperation.owningClass.equals(classTypeDef))
 			then

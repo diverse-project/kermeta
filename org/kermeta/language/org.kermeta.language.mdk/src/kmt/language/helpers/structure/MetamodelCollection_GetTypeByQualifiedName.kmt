@@ -9,14 +9,17 @@
 package kmt::language::helpers::structure;
 
 require kermeta
-require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
 
 
 using org::kermeta::language::structure
 using kermeta::standard
 
 class TypeDefinitionFinder {
+	/**
+	 * retrieves the TypeDefinition with the given full qualified name (ie. must include the metamodel name)
+	 */	
 	operation getTypeDefinitionByQualifiedName(qname : String, metamodels : Collection<Metamodel>) : TypeDefinition is do
 		if qname.contains("#") then
 			var mmName : String init qname.split("#").at(0)
@@ -26,5 +29,36 @@ class TypeDefinitionFinder {
 		else
 			result := void
 		end
+	end
+	
+	/**
+	 * retrieves the TypeDefinition with the given qualified name, the name can be partial or full
+	 * (partial in the sense that it doesn't use the #)
+	 */
+	operation getFirstTypeDefinitionByQualifiedName(qname : String,  metamodels : Collection<Metamodel>) : TypeDefinition is do
+		result := void
+		if qname.contains("#") then
+			var mmName : String init qname.split("#").at(0)
+			var partialName : String init qname.split("#").at(1)
+			var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
+			result := metamodel.getTypeDefinitionByName(partialName)
+		else
+			var metamodel : Metamodel init metamodels.detect{mm|not mm.getTypeDefinitionByName(qname).isVoid}
+			if(not metamodel.isVoid) then
+				result := metamodel.getTypeDefinitionByName(qname)
+			else
+				stdio.errorln("FAILED to find " + qname + " in " +metamodels.size.toString + " metamodels")
+				stdio.writeln("FAILED to find " + qname + " in " +metamodels.size.toString + " metamodels")
+			end
+		end
+		
+	end
+	
+	/**
+	 * retrieves the first metamodel in the collection that contains a TypeDefinition with the given partial qualified name
+	 * (partial in the sense that it doesn't use the #)
+	 */
+	operation getFirstMetamodelWithTypeDefinition(partialQName : String,  metamodels : Collection<Metamodel>) : Metamodel is do
+		result := metamodels.detect{mm| not mm.getTypeDefinitionByName(partialQName).isVoid}
 	end
 }
