@@ -259,4 +259,14 @@ public class KpVariableExpander {
 		
 		return sb.toString();
 	}
+
+
+	public LocalFileConverter getFileSystemConverter() {
+		return fileSystemConverter;
+	}
+
+
+	public MessagingSystem getLogger() {
+		return logger;
+	}
 }
