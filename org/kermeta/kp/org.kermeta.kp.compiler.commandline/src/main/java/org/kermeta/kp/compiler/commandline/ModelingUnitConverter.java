@@ -73,7 +73,24 @@ public class ModelingUnitConverter {
 		if (mu.getMetamodels().size() > 0 &&  mu.getMainEResource() != null && mu.getMainEResource().getURI().isFile()) {
 			uri = mu.getMainEResource().getURI();
 			
-		} 	
+		} 
+		if(mu.getMetamodels().size() > 0 &&  mu.getMainEResource() == null){
+			// no resource yet, make sure to have a real resource
+			ResourceSet resourceSet = new ResourceSetImpl();
+			resourceSet.getPackageRegistry().put(StructurePackage.eNS_URI, StructurePackage.eINSTANCE);
+			resourceSet.getPackageRegistry().put(BehaviorPackage.eNS_URI, BehaviorPackage.eINSTANCE);
+			Resource.Factory.Registry f = resourceSet
+					.getResourceFactoryRegistry();
+			Map<String, Object> m = f.getExtensionToFactoryMap();
+			m.put("km_in_memory", new XMIResourceFactoryImpl());
+			m.put("km", new XMIResourceFactoryImpl());
+			Resource resource = resourceSet.createResource(uri);
+			if(resource != null)
+				resource.getContents().addAll(mu.getMetamodels());
+			else {
+				logger.error("Cannot create resource for  "+uri, KermetaCompiler.LOG_MESSAGE_GROUP, new Exception("Created resource is null"));			
+			}
+		}
 		mu.gatherInMainEResource();
 		logger.debug("\t converting using uri "+uri, KermetaCompiler.LOG_MESSAGE_GROUP);
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);

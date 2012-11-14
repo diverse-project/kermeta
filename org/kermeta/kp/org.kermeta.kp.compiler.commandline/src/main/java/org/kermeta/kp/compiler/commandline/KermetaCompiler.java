@@ -809,61 +809,11 @@ public class KermetaCompiler {
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<String> getImportProjetClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {
-		ArrayList<String> result = new ArrayList<String>();
-		for(ImportProject dep : kp.getImportedProjects()){
-			result.add(convertUrlToclassPath(varExpander.getSelectedUrl4ReusableResource(dep.getProjectResource())));
-		}
-		return result;
+	public ArrayList<String> getImportProjetClasspath(KermetaProject kp, KpVariableExpander varExpander) throws IOException {		
+		return new ArrayList<String>( KpDependenciesHelper.getDependentProjetsClasspath(kp, varExpander));
 	}
 	
 	
-	public String convertUrlToclassPath(String urlString){
-		try {
-			URL jarURL = new URL(urlString);
-			/*if (jarURL.getProtocol().equals("jar") && jarURL.getFile().endsWith("!/")){
-				// this is something like jar:file:/C:/eclipse3.7_base/eclipse/plugins/org.eclipse.emf.ecore_2.7.0.v20110912-0920.jar!/
-				jarURL = new URL(jarURL.getFile().replaceAll("!/", ""));
-			}*/
-			if( jarURL.getProtocol().equals("file")){ 
-				File theFile = new File(jarURL.toURI());
-				if (theFile!=null) {
-					if(theFile.exists()){
-						if(theFile.getName().equals("bundlefile")){
-							//some version of scala compiler doesn't accept classpath to jar that doesn't end with .jar
-							// so bundlefile that are used by OSGI doesn't works correctly
-							// create a copy with the correct name
-							
-							File outFile = new File(java.net.URI.create(jarURL+".jar"));
-							if(!outFile.exists()){
-								// copy the file to have the correct extension
-								InputStream inputStream = new FileInputStream(theFile);					
-								OutputStream out = new FileOutputStream(outFile);
-								 
-								int read = 0;
-								byte[] bytes = new byte[1024];
-							 
-								while ((read = inputStream.read(bytes)) != -1) {
-									out.write(bytes, 0, read);
-								}
-							 
-								inputStream.close();
-								out.flush();
-								out.close();
-							}
-							theFile = outFile;
-						}
-						return theFile.getAbsolutePath();
-					}
-				}
-			
-			}
-		} catch (URISyntaxException e) {}
-		catch (java.net.MalformedURLException e) {}
-		catch(IOException e){}
-		// ignore URI that cannot be translated into a local file ...
-		return urlString;
-	}
 	
 /*	public String getResolvedDependencyURL(Dependency dep,  KpVariableExpander varExpander)  throws IOException {
 		// for a dependency use the first URL that works			
