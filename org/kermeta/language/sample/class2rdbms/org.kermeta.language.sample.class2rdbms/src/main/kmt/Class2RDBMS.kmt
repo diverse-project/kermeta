@@ -200,6 +200,7 @@ class Class2RDBMS
 
 class Main
 {
+	@main ""
     operation main() : Void is do 
         var inputModel : ClassModel init loadClassModel
         var tranfo : Class2RDBMS init Class2RDBMS.new
