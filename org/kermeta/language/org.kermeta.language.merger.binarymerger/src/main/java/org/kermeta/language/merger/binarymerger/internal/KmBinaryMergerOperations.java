@@ -48,6 +48,7 @@ public class KmBinaryMergerOperations {
         result.setResult(resultMu);
 		try {
 			resultMu.getMetamodels().addAll( merger.merge(enforceAspect(first_mu.getMetamodels()), enforceAspect(second_mu.getMetamodels())));
+			//resultMu.getMetamodels().addAll( merger.merge(first_mu.getMetamodels(), second_mu.getMetamodels()));
 		
 	        BinaryMergerAspect mergerAspect = (BinaryMergerAspect) merger;
 	        for (Object o : mergerAspect.getErrors()) {
@@ -71,41 +72,33 @@ public class KmBinaryMergerOperations {
    
     protected List<Metamodel> enforceAspect(List<Metamodel> mms) throws IOException{
     	List<Metamodel> result = new ArrayList<Metamodel>();
+    	ModelingUnit mu = new ModelingUnit();
+    	mu.getMetamodels().addAll(mms);
     	
-    	for (Metamodel mm : mms) {
-    		if (! (mm instanceof org.kermeta.language.language.merger.binarymerger.org.kermeta.language.structure.MetamodelAspect)) {
-    			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    			URI uri;
-    			Map<String, String> options = null;
-    			if (mm.eResource() != null) {
-    				uri = mm.eResource().getURI();
-    			}
-    			else {
-    				uri = URI.createURI(mm.getUri() + ".km_in_memory");
-    				// let's suppose that the ModelingUnit contains everything (otherwise we would have to look for references and save them too ...)
-    	    		ResourceSet resourceSet = new ResourceSetImpl();
-    	    		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
-    	    		Map<String,Object> m = f.getExtensionToFactoryMap();
-    	    		m.put("km_in_memory",new XMIResourceFactoryImpl());
-    				Resource resource = resourceSet.createResource(uri);
-    				resource.getContents().add(mm);
-    			}
-    			mm.eResource().save(outputStream, options);
+    	mu.gatherInMainEResource();
+    	
+    	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    	URI uri;
+		Map<String, String> options = null;
+    	uri = URI.createURI(mu.getMainEResource().getURI().toString() + ".km_in_memory");
+		// let's suppose that the ModelingUnit contains everything (otherwise we would have to look for references and save them too ...)
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
+		Map<String,Object> m = f.getExtensionToFactoryMap();
+		m.put("km_in_memory",new XMIResourceFactoryImpl());
+		Resource resource = resourceSet.createResource(uri);
+		resource.getContents().addAll(mu.getMetamodels());
+		resource.save(outputStream, options);
 
-    	    	ResourceSet resourceSet = new ResourceSetImpl();
-        		Resource.Factory.Registry f = resourceSet.getResourceFactoryRegistry();
-        		Map<String,Object> m = f.getExtensionToFactoryMap();
-        		m.put("*",new XMIResourceFactoryImpl());
-    			Resource resource = resourceSet.createResource(uri);
-    			resource.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
-    			// let's suppose the ModelingUnit is the first element in the root
-    			result.add((Metamodel)resource.getContents().get(0));
-    		}
-    		else {
-    			result.add(mm);
-    		}
-    	}
-    	return result;
+    	ResourceSet resourceSet2 = new ResourceSetImpl();
+		Resource.Factory.Registry f2 = resourceSet2.getResourceFactoryRegistry();
+		Map<String,Object> m2 = f.getExtensionToFactoryMap();
+		m2.put("*",new XMIResourceFactoryImpl());
+		Resource resource2 = resourceSet2.createResource(uri);
+		resource2.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
+    	
+		return new ModelingUnit(uri.toString(), resource2.getContents()).getMetamodels();
+
     }
 
 
