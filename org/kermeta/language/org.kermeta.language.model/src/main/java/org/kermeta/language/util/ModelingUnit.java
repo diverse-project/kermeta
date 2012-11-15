@@ -63,7 +63,7 @@ public class ModelingUnit {
 		sb.append("{");
 		for (int i = 0; i < getMetamodels().size(); i++){
 			sb.append(getMetamodels().get(i).getName());
-			if(i < getMetamodels().size() ){
+			if(i < getMetamodels().size()-1 ){
 				sb.append(", ");
 			}
 		}
