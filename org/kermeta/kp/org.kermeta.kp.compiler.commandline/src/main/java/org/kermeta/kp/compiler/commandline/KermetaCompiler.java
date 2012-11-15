@@ -569,7 +569,7 @@ public class KermetaCompiler {
 			}
 			
 			if(preResolvedUnit!= null){
-				modelingUnits.add(preResolvedUnit);
+				modelingUnits.add(0,preResolvedUnit);
 			}
 			if(dirtyMU != null && ! dirtyMU.isEmpty()){
 				logger.info("adding  "+dirtyMU.size()+" dirty modeling units (ie. unit being modified by the user)", LOG_MESSAGE_GROUP);
@@ -937,9 +937,10 @@ public class KermetaCompiler {
 			List<ResultProblemMessage> problems = new ArrayList<ResultProblemMessage>();
 
 			for (int i = 1; i < convertedModellingUnits.size(); i++) {
-				logger.debug("merging "+mergedMU.getResult().getName()+" + "+convertedModellingUnits.get(i).getName(), LOG_MESSAGE_GROUP);
+				
+				logger.debug("merging "+mergedMU.getResult().getDescriptionString()+" + "+convertedModellingUnits.get(i).getDescriptionString(), LOG_MESSAGE_GROUP);
 				mergedMU = theMerger.merge(mergedMU.getResult(), convertedModellingUnits.get(i));
-				mergedMU.getResult().setName(kp.getMetamodelName());
+				//mergedMU.getResult().setName(kp.getMetamodelName());
 				// Save previous problems
 				for (ResultProblemMessage prob : mergedMU.getProblems()) {
 					problems.add(prob);
@@ -1026,9 +1027,8 @@ public class KermetaCompiler {
 	private ArrayList<URL> getEcoreNeedingGeneration(KermetaProject kp,  KpVariableExpander varExpander){
 
 		ArrayList<URL> ecoreURLs = new ArrayList<URL>();
-		CollectSourcesHelper helper = new CollectSourcesHelper(this, logger);
 		try {
-			ArrayList<TracedURL> importedProjectSources = helper.getResolvedImportProjectSources(kp, kp.eResource().getURI().toString());
+			ArrayList<TracedURL> importedProjectSources = getAllResolvedProjectSources(kp.eResource().getURI().toString());
 			for (TracedURL src : importedProjectSources) {				
 				if(src.getUrl().toString().endsWith(".ecore"))
 					if(((ImportFile)(src.getSource())).getBytecodeFrom() == null){
@@ -1104,7 +1104,7 @@ public class KermetaCompiler {
 
 	public DiagnosticModel checkModelingUnit(ModelingUnit mu, CheckerScope scope) throws IOException {
 
-		logger.debug("checkModelingUnit " + mu.getName() + " for scope " + scope.toString(), LOG_MESSAGE_GROUP);
+		logger.debug("checkModelingUnit " + mu.getDescriptionString() + " for scope " + scope.toString(), LOG_MESSAGE_GROUP);
 		
 		Checker theChecker;
 
