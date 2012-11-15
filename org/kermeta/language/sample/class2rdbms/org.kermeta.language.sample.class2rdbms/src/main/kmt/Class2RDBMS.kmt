@@ -106,12 +106,15 @@ class Class2RDBMS
     
     /**
      * Return the top persistent class for the class given as parameter
+     * or void if no pesistent class found
      */
     operation getPersistentClass(cls : Class) : Class is do
     	if cls.is_persistent then
     		result := cls
     	else if cls.parent != void then
     		result := getPersistentClass(cls.parent)
+    	else
+    		result := void
     	end end
     end
     
