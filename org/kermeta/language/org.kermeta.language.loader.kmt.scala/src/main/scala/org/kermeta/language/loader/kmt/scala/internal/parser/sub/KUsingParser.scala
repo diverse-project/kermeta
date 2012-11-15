@@ -77,7 +77,7 @@ trait KUsingParser extends KAbstractParser {
           endIds.foreach{nid =>
             resTuple = (resTuple._1+"::"+nid, resTuple._2+"::"+nid)
           }
-          resTuple = (fromMM+"#"+resTuple._1,fromMM+"#"+resTuple._2)
+          resTuple = (fromMM+"#"+resTuple._1,resTuple._2)
           resTuple
       }
  /*def usingStmt : Parser[Using] = "using" ~ usingStatment ~ opt(usingToStatment)^^ { case _ ~ from ~ to =>
