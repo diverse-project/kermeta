@@ -57,6 +57,20 @@ public class ModelingUnit {
 		return metamodels;
 	}
 
+	public String getDescriptionString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name);
+		sb.append("{");
+		for (int i = 0; i < getMetamodels().size(); i++){
+			sb.append(getMetamodels().get(i).getName());
+			if(i < getMetamodels().size() ){
+				sb.append(", ");
+			}
+		}
+		sb.append("}");
+		return name;
+	}
+	
 	public String getName() {
 		return name;
 	}
