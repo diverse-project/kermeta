@@ -68,7 +68,7 @@ public class ModelingUnit {
 			}
 		}
 		sb.append("}");
-		return name;
+		return sb.toString();
 	}
 	
 	public String getName() {
