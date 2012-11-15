@@ -231,7 +231,7 @@ aspect class ProductType {
 				// Special checks in case self with a ProductType with 0 or 1 types inside
 				if (self.type.size == 0)
 				then
-					result:=expectedType.getQualifiedName.equals("kermeta::standard::Void")
+					result:=expectedType.getQualifiedName.endsWith("#kermeta::standard::Void")
 				else
 					if (self.type.size == 1)
 					then
@@ -471,7 +471,7 @@ aspect class Class
 		//TODO : rajouter le cas du expectedType=PrimitiveType
 		
 		// First of all, check if self is kermeta::standard::void 
-		if (self.getQualifiedName.equals("kermeta::standard::Void"))
+		if (self.getQualifiedName.endsWith("#kermeta::standard::Void"))
 		then
 			result:=true
 		else
