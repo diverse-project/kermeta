@@ -169,6 +169,7 @@ public class KPBuilder {
 			updateCompilerPreferences();
 			compiler.checkingEnabled = mustCheck;
 			ModelingUnit result = compiler.kp2bytecode(kpFileURL,getDirtyFiles(), additionalCalssPath,KermetaCompiler.PHASE_TYPE_SET);
+			
 			if (result != null) {
 				kp_last_modelingunit = result;
 				// notify that a new km file is ready for this project
@@ -364,7 +365,7 @@ public class KPBuilder {
 					Activator.getDefault().fireCompiledEvent(getKpProjectFile().getProject(), kp_last_modelingunit);
 				}
 				
-				
+				kpProjectFile.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 				if (result != null && !compiler.hasFailed) {
 					
 					// generate urimap file
