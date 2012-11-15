@@ -30,7 +30,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     
     if (parentpack == null) {
       packName = packNam
-      packNameMM = packNam
+      packNameMM = visitor.getQualifiedName(pack)
     } else {
       packName = visitor.getPQualifiedName(parentpack) + "." + packNam
       packNameMM = visitor.getQualifiedName(parentpack) + "." + packNam
@@ -56,7 +56,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
     
     if (parentpack == null) {
       packName = packNam
-      packNameMM = packNam
+      packNameMM = visitor.getQualifiedName(pack)
     } else {
       packName = visitor.getPQualifiedName(parentpack) + "." + packNam
       packNameMM = visitor.getQualifiedName(parentpack) + "." + packNam
