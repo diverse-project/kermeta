@@ -14,58 +14,116 @@ require "GetQualifiedName_structure_aspect.kmt"
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 using kermeta::standard
+using kermeta::exceptions
 using kermeta::persistence
 
 
 aspect class Metamodel {
 	/**
-	 * Get a TypeDefinition contained in the current Metamodel by qualifiedName
+	 * Get a TypeDefinition contained in the current Metamodel by qualifiedName (i.e., containing #)
 	 * Note : this operation uses cache if canUseCachedStructuralTypeDefinitions is set to true
 	 */
-	operation getTypeDefinitionByName( name : String ) : TypeDefinition is do
+	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
 	
 		if canUseCachedStructuralTypeDefinitions.isVoid then
 			canUseCachedStructuralTypeDefinitions := false
 		end
 		if canUseCachedStructuralTypeDefinitions then
-			result := getCachedStructuralTypeDefinitionByName(name)
+			result := getCachedStructuralTypeDefinitionByQualifiedName(qname)
 		else
-		
-			var set_name : Sequence<String> init name.split("::")	
-			if set_name.size()==0 then
-				set_name.add(name)
-			end
-			var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
-				p.name == set_name.at(0)
-			}
-			if not pack.isVoid then
-				from var i : Integer init 1
-				until i>=(set_name.size()-1) or pack.isVoid
-				loop
-					var oldpack : ModelElementTypeDefinitionContainer init pack
-					if pack.isInstanceOf(Package) then
-						pack := pack.asType(Package).nestedPackage.detect{ p |
-							p.name == set_name.at(i)
-						}
-					else
-						pack:=void
+			if qname.contains("#") then
+				var set_qname : Sequence<String> init qname.split("#")
+				if set_qname.at(0) == self.name then
+					set_qname := set_qname.at(1).split("::")
+					if set_qname.size()==0 then
+						set_qname.add(qname)
 					end
-					i := i + 1
-				end
-				if pack.isVoid then
-					// using goes to an unknown package (checker should raise something about that before entering here, anyway I  don't want to crash)
-					result := void
-				else
-					result := pack.ownedTypeDefinition.detect{ c |
-						c.name == set_name.at(set_name.size()-1)
+					var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
+						p.name == set_qname.at(0)
 					}
+					if not pack.isVoid then
+						from var i : Integer init 1
+						until i>=(set_qname.size()-1) or pack.isVoid
+						loop
+							var oldpack : ModelElementTypeDefinitionContainer init pack
+							if pack.isInstanceOf(Package) then
+								pack := pack.asType(Package).nestedPackage.detect{ p |
+									p.name == set_qname.at(i)
+								}
+							else
+								pack:=void
+							end
+							i := i + 1
+						end
+						if pack.isVoid then
+							// using goes to an unknown package (checker should raise something about that before entering here, anyway I  don't want to crash)
+							result := void
+						else
+							result := pack.ownedTypeDefinition.detect{ c |
+								c.name == set_qname.at(set_qname.size()-1)
+							}
+						end
+					end
+				else
+					//We are looking in the wrong metamodel
+					result := void
 				end
+			else
+				var e : Exception init RuntimeError.new
+				e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname
+				raise e
 			end
 		end
-		if result.isVoid() then
-			result := self.referencedMetamodels
-						.collect{mm| mm.metamodel.getTypeDefinitionByName(name)}
-						.detect{ s | not s.isVoid}
+	end
+	
+	/**
+	 * Get a TypeDefinition contained in the current Metamodel by qualifiedName
+	 * Note : this operation uses cache if canUseCachedStructuralTypeDefinitions is set to true
+	 */
+	operation getTypeDefinitionByPartialName( pname : String ) : TypeDefinition is do
+	
+		if canUseCachedStructuralTypeDefinitions.isVoid then
+			canUseCachedStructuralTypeDefinitions := false
+		end
+		if canUseCachedStructuralTypeDefinitions then
+			result := getCachedStructuralTypeDefinitionByPartialName(pname)
+		else
+			if pname.contains("#") then
+				var e : Exception init RuntimeError.new
+				e.message := "getTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname
+				raise e
+			else
+				var set_pname : Sequence<String> init pname.split("::")
+				if set_pname.size()==0 then
+					set_pname.add(pname)
+				end
+				var pack : ModelElementTypeDefinitionContainer init self.packages.detect{ p |
+					p.name == set_pname.at(0)
+				}
+				if not pack.isVoid then
+					from var i : Integer init 1
+					until i>=(set_pname.size()-1) or pack.isVoid
+					loop
+					var oldpack : ModelElementTypeDefinitionContainer init pack
+						if pack.isInstanceOf(Package) then
+							pack := pack.asType(Package).nestedPackage.detect{ p |
+								p.name == set_pname.at(i)
+							}
+						else
+							pack:=void
+						end
+						i := i + 1
+					end
+					if pack.isVoid then
+						// using goes to an unknown package (checker should raise something about that before entering here, anyway I  don't want to crash)
+						result := void
+					else
+						result := pack.ownedTypeDefinition.detect{ c |
+							c.name == set_pname.at(set_pname.size()-1)
+						}
+					end
+				end
+			end
 		end
 	end
 	
@@ -75,80 +133,54 @@ aspect class Metamodel {
 	/** If this attribute is set to true, then the ModelingUnitCache can be used */
 	attribute canUseCachedStructuralTypeDefinitions : Boolean
 	
-	/** uses a cache in order to retreive TypeDefinitions in the ModelingUnit
+	/** uses a cache in order to retreive TypeDefinitions in the Metamodel using its qualified name (i.e., containing #)
 	 */
-	operation getCachedStructuralTypeDefinitionByName( name : String ) : TypeDefinition is do
+	operation getCachedStructuralTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
 	
 		if cache.isVoid then
 			// need to build the cache
-			//stdio.writeln("initializing cache from "+qname+ "...")
-			cache := internal::MetamodelCache.new.initialize(self)
-			//stdio.writeln("cache intialized.")
+			cache := internal::MetamodelCache.new.initialize(self)			
 		end
-		var typename : String init name.split("::").last
+		var typename : String init qname.split("::").last
 		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
-		var searchedFullQName : String 
-		if name.contains("#") then
-			searchedFullQName := name
-		else
-			searchedFullQName := self.name+"#"+name
-		end
-		result := possibleTypeDefs.detect{t| t.getQualifiedName() == searchedFullQName}
-	end
-	/**
-	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName and taking into account a set of Usings
-	 * and optionally looking in the current Package (if not void)
-	 */
-	operation getTypeDefinitionByNameAndUsings( name : String, 
-												usings : Collection<Using>, 
-												optionalCurrentPackage : Package) : TypeDefinition is do
 		
-		// search the exact qualified name
-		result := getTypeDefinitionByName(name)
-		if (optionalCurrentPackage.isVoid) then
-			stdio.writeln( "        optionalCurrentPackage is void" )			
-		end
-		if (result.isVoid and not optionalCurrentPackage.isVoid) then
-			// search this qualified name in the current Package
-			result := optionalCurrentPackage.getTypeDefinitionByRelativeQName(name) 
-		end		
-		if (result.isVoid and not usings.isEmpty) then
-			
-			from var iterator :Iterator<Using> init usings.iterator
-			until (not result.isVoid) or iterator.isOff
-			loop
-				var currentUsing : Using init iterator.next
-				// stdio.writeln("             using " +currentUsing.fromQName + "->" +currentUsing.toName)
-				//If the using does not define an alias
-				if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
-					//We now look for a type which the same name and which qualifiedPath is the fromQName
-					result := getTypeDefinitionByName(currentUsing.fromQName + "::"+ name)						
-				else					
-					if not currentUsing.fromQName.contains("*") then
-						// this is a TypeDefinition alias
-						if (currentUsing.toName.equals(name)) then
-							result := getTypeDefinitionByName(currentUsing.fromQName)
-						end
-					else
-						// this is a Package alias
-						var searchedStartString : String init currentUsing.toName.replace("*","")
-						if name.startsWith(searchedStartString) then
-							var replacementStartString : String init currentUsing.fromQName.replace("*","")
-							result := getTypeDefinitionByName(name.replace(searchedStartString, replacementStartString))
-						end						
-					end					
-				end
+		if qname.contains("#") then
+			if qname.split("#").at(0) == self.name then		
+				result := possibleTypeDefs.detect{t| t.getQualifiedName() == qname}
+			else
+				//We are looking in the wrong metamodel
+				result := void
 			end
+		else
+			var e : Exception init RuntimeError.new
+			e.message := "getCachedStructuralTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname
+			raise e
 		end
-		if result.isVoid() then
-			self.referencedMetamodels.each{mm|
-				mm.metamodel.getTypeDefinitionByNameAndUsings(name, usings, optionalCurrentPackage)
-			}
-		end
+		
 	end
 	
+	/** uses a cache in order to retreive TypeDefinitions in the Metamodel using its partial name (i.e., without #)
+	 */
+	operation getCachedStructuralTypeDefinitionByPartialName( pname : String ) : TypeDefinition is do
+	
+		if cache.isVoid then
+			// need to build the cache
+			cache := internal::MetamodelCache.new.initialize(self)
+		end
+		var typename : String init pname.split("::").last
+		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
+		
+		if pname.contains("#") then
+			var e : Exception init RuntimeError.new
+			e.message := "getCachedStructuralTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname
+			raise e
+		else
+			result := possibleTypeDefs.detect{t| t.getQualifiedName() == self.name+"#"+pname}
+		end
+	end
+		
 	/*
-	 * Return all the ClassDefinitions which are contained by the ModelingUnit
+	 * Return all the ClassDefinitions which are contained by the Metamodel
 	*/
 	operation getClassDefinitions() : OrderedSet<org::kermeta::language::structure::ClassDefinition> is do
 		var classDefinitions : OrderedSet<org::kermeta::language::structure::ClassDefinition> init OrderedSet<org::kermeta::language::structure::ClassDefinition>.new
@@ -164,7 +196,7 @@ aspect class Metamodel {
 	end
 	
 	/*
-	 * Return all the TypeDefinitions which are contained by the ModelingUnit
+	 * Return all the TypeDefinitions which are contained by the Metamodel
 	*/
 	operation getTypeDefinitions() : Set<org::kermeta::language::structure::ModelElementTypeDefinition> is do
 		var typeDefinitions : Set<org::kermeta::language::structure::ModelElementTypeDefinition> init Set<org::kermeta::language::structure::ModelElementTypeDefinition>.new
@@ -185,22 +217,24 @@ aspect class Metamodel {
 
 	end
 	
-	
-	operation retrievePackage( qname : String ) : Package is do
-		var set_qname : Sequence<String> init qname.split("::")
-		if set_qname.size()==0 then
-			set_qname.add(qname)
+	/**
+	 * Retrieve a package in the metamodel using its partial name (without its metamodel name)
+	 */
+	operation retrievePackage( pname : String ) : Package is do
+		var set_pname : Sequence<String> init pname.split("::")
+		if set_pname.size()==0 then
+			set_pname.add(pname)
 		end
 		
 		var pack : Package init self.packages.detect{ p |
-			p.name == set_qname.at(0)
+			p.name == set_pname.at(0)
 		}
 		
 		from var i : Integer init 1
-		until i>=(set_qname.size())
+		until i>=(set_pname.size())
 		loop
 			pack := pack.nestedPackage.detect{ p |
-				p.name == set_qname.at(i)
+				p.name == set_pname.at(i)
 			}
 			i := i + 1
 		end
