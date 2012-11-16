@@ -24,10 +24,10 @@ aspect class Package {
 	end
 	
 	/**
-	 * search in this Package a relative Qualified name representing a TypeDefinition
-	 * ie. a name that might contains :: in order to search in sub packages 
+	 * search in this Package a partial Qualified name representing a TypeDefinition
+	 * ie. a name that might contains ::, but not # in order to search in sub packages 
 	 */ 
-	operation getTypeDefinitionByRelativeQName(qname : String) : TypeDefinition is do
+	operation getTypeDefinitionByPartialName(pname : String) : TypeDefinition is do
 		
 		// stdio.writeln( "        searching " + qname + " in " +self.name)
 		/*var set_qname : Sequence<String> init qname.split("::")
@@ -54,8 +54,8 @@ aspect class Package {
 				result := void
 			end
 		end*/
-		var set_qname : Sequence<String> init qname.split("::")
-		result := getTypeDefinitionByRelativeSetName(set_qname)
+		var set_pname : Sequence<String> init pname.split("::")
+		result := getTypeDefinitionByPartialSetName(set_pname)
 	end
 }
 }
