@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : November 16, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+
+/**
+ * Retrieve the containing package
+ */
+aspect class KermetaModelElement
+{
+	operation getPackage() : Package is do
+		if self.container.isInstanceOf(KermetaModelElement) then
+			result := self.container.asType(KermetaModelElement).getPackage()
+		else
+			result := void
+		end
+	end
+}
+
+aspect class Package inherits KermetaModelElement
+{
+	method getPackage() : Package from KermetaModelElement is do
+		result := self
+	end
+}
