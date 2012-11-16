@@ -15,6 +15,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 
 using org::kermeta::language::structure
 using kermeta::standard
+using kermeta::exceptions
 
 class TypeDefinitionFinder {
 	/**
@@ -25,9 +26,11 @@ class TypeDefinitionFinder {
 			var mmName : String init qname.split("#").at(0)
 			var partialName : String init qname.split("#").at(1)
 			var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
-			result := metamodel.getTypeDefinitionByName(partialName)
+			result := metamodel.getTypeDefinitionByQualifiedName(partialName)
 		else
-			result := void
+			var e : Exception init RuntimeError.new
+			e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"#\"), but was called on: " + qname
+			raise e
 		end
 	end
 	
@@ -35,20 +38,22 @@ class TypeDefinitionFinder {
 	 * retrieves the TypeDefinition with the given qualified name, the name can be partial or full
 	 * (partial in the sense that it doesn't use the #)
 	 */
-	operation getFirstTypeDefinitionByQualifiedName(qname : String,  metamodels : Collection<Metamodel>) : TypeDefinition is do
+	operation getFirstTypeDefinitionByName(name : String,  metamodels : Collection<Metamodel>) : TypeDefinition is do
 		result := void
-		if qname.contains("#") then
-			var mmName : String init qname.split("#").at(0)
-			var partialName : String init qname.split("#").at(1)
+		//If the name is a qualified name (including metamodel name followed by #)
+		if name.contains("#") then
+			var mmName : String init name.split("#").at(0)
 			var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
-			result := metamodel.getTypeDefinitionByName(partialName)
+			result := metamodel.getTypeDefinitionByQualifiedName(name)
+		//If the name is a partial name (without metamodel name nor #)
 		else
-			var metamodel : Metamodel init metamodels.detect{mm|not mm.getTypeDefinitionByName(qname).isVoid}
+			//We look for the first metamodel containing a type definition corresponding to the partial name
+			var metamodel : Metamodel init metamodels.detect{mm|not mm.getTypeDefinitionByPartialName(name).isVoid}
 			if(not metamodel.isVoid) then
-				result := metamodel.getTypeDefinitionByName(qname)
+				result := metamodel.getTypeDefinitionByPartialName(name)
 			else
-				stdio.errorln("FAILED to find " + qname + " in " +metamodels.size.toString + " metamodels")
-				stdio.writeln("FAILED to find " + qname + " in " +metamodels.size.toString + " metamodels")
+				stdio.errorln("FAILED to find " + name + " in " +metamodels.size.toString + " metamodels")
+				stdio.writeln("FAILED to find " + name + " in " +metamodels.size.toString + " metamodels")
 			end
 		end
 		
@@ -59,6 +64,45 @@ class TypeDefinitionFinder {
 	 * (partial in the sense that it doesn't use the #)
 	 */
 	operation getFirstMetamodelWithTypeDefinition(partialQName : String,  metamodels : Collection<Metamodel>) : Metamodel is do
-		result := metamodels.detect{mm| not mm.getTypeDefinitionByName(partialQName).isVoid}
+		result := metamodels.detect{mm| not mm.getTypeDefinitionByPartialName(partialQName).isVoid}
+	end
+
+	/**
+	 * Get a TypeDefinition contained in the current Metamodel by name (either qualified or partial)
+	 * and taking into account a set of Usings
+	 * and optionally looking in the current Package (if not void)
+	 */
+	operation getTypeDefinitionByNameAndUsings( name : String, usings : Collection<Using>, metamodels : Collection<Metamodel>, optionalCurrentPackage : Package) : TypeDefinition is do
+		
+		if name.contains("#") then
+			// search the exact qualified name
+			result := getTypeDefinitionByQualifiedName(name, metamodels)
+		else
+			if (not optionalCurrentPackage.isVoid) then
+				// search this qualified name in the current Package
+				result := optionalCurrentPackage.getTypeDefinitionByPartialName(name)
+			end	
+			
+			if (result.isVoid and not usings.isEmpty) then
+				
+				from var iterator :Iterator<Using> init usings.iterator
+				until (not result.isVoid) or iterator.isOff
+				loop
+					var currentUsing : Using init iterator.next
+					
+					//If the using does not define an alias
+					if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
+						//We now look for a type which the same name and which qualifiedPath is the fromQName
+						var newName : String init currentUsing.fromQName.replace("*", name)
+						result := getTypeDefinitionByQualifiedName(newName, metamodels)
+					else
+						if name.startsWith(currentUsing.toName) then
+							var newName : String init name.replace(currentUsing.toName, currentUsing.fromQName)
+							result := getTypeDefinitionByQualifiedName(newName, metamodels)
+						end			
+					end
+				end
+			end
+		end
 	end
 }
