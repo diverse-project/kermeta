@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:UnresolvedMetamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="testPackage">
-    <nestedPackage name="package1">
-      <kOwnedTags name="traceability_text_reference" value="53;126"/>
-      <nestedPackage name="package11">
-        <kOwnedTags name="traceability_text_reference" value="74;97"/>
+    <nestedPackage kTag="//@packages.0/package1/@kOwnedTags.0" name="package1">
+      <kOwnedTags name="traceability_text_reference" value="53;126" object="//@packages.0/package1"/>
+      <nestedPackage kTag="//@packages.0/package1/package11/@kOwnedTags.0" name="package11">
+        <kOwnedTags name="traceability_text_reference" value="74;97" object="//@packages.0/package1/package11"/>
       </nestedPackage>
-      <nestedPackage name="package12">
-        <kOwnedTags name="traceability_text_reference" value="97;123"/>
+      <nestedPackage kTag="//@packages.0/package1/package12/@kOwnedTags.0" name="package12">
+        <kOwnedTags name="traceability_text_reference" value="97;123" object="//@packages.0/package1/package12"/>
       </nestedPackage>
     </nestedPackage>
-    <nestedPackage name="package2">
-      <kOwnedTags name="traceability_text_reference" value="126;192"/>
-      <nestedPackage name="package21">
-        <kOwnedTags name="traceability_text_reference" value="147;189"/>
-        <nestedPackage name="package211">
-          <kOwnedTags name="traceability_text_reference" value="167;187"/>
+    <nestedPackage kTag="//@packages.0/package2/@kOwnedTags.0" name="package2">
+      <kOwnedTags name="traceability_text_reference" value="126;192" object="//@packages.0/package2"/>
+      <nestedPackage kTag="//@packages.0/package2/package21/@kOwnedTags.0" name="package21">
+        <kOwnedTags name="traceability_text_reference" value="147;189" object="//@packages.0/package2/package21"/>
+        <nestedPackage kTag="//@packages.0/package2/package21/package211/@kOwnedTags.0" name="package211">
+          <kOwnedTags name="traceability_text_reference" value="167;187" object="//@packages.0/package2/package21/package211"/>
         </nestedPackage>
       </nestedPackage>
     </nestedPackage>
-    <nestedPackage name="package3">
-      <kOwnedTags name="traceability_text_reference" value="192;211"/>
+    <nestedPackage kTag="//@packages.0/package3/@kOwnedTags.0" name="package3">
+      <kOwnedTags name="traceability_text_reference" value="192;211" object="//@packages.0/package3"/>
     </nestedPackage>
   </packages>
-</org_kermeta_language_structure:UnresolvedMetamodel>
+</org_kermeta_language_structure:Metamodel>

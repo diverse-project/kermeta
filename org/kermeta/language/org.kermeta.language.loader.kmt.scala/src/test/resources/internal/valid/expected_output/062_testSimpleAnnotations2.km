@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:UnresolvedMetamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
   <packages name="testSimpleAnnotations">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String">
-      <kOwnedTags name="traceability_text_reference" value="64;80"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/String/@kOwnedTags.0" name="String">
+      <kOwnedTags name="traceability_text_reference" value="64;80" object="//@packages.0/String"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Integer">
-      <kOwnedTags name="traceability_text_reference" value="80;97"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/Integer/@kOwnedTags.0" name="Integer">
+      <kOwnedTags name="traceability_text_reference" value="80;97" object="//@packages.0/Integer"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean">
-      <kOwnedTags name="traceability_text_reference" value="97;153"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/Boolean/@kOwnedTags.0" name="Boolean">
+      <kOwnedTags name="traceability_text_reference" value="97;153" object="//@packages.0/Boolean"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Class1">
-      <kOwnedTags name="traceability_text_reference" value="153;503"/>
-      <ownedOperation name="truc" type="//@packages.0/Class1/truc/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="172;205"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/Class1/@kOwnedTags.0" name="Class1">
+      <kOwnedTags name="traceability_text_reference" value="153;503" object="//@packages.0/Class1"/>
+      <ownedOperation kTag="//@packages.0/Class1/truc/@kOwnedTags.0" name="truc" type="//@packages.0/Class1/truc/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="172;205" object="//@packages.0/Class1/truc"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="192;205"/>
+        <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/Class1/truc/@body/@kOwnedTags.0">
+          <kOwnedTags name="traceability_text_reference" value="192;205" object="//@packages.0/Class1/truc/@body"/>
         </body>
       </ownedOperation>
-      <ownedOperation kTag="//@packages.0/Class1/operation1/@kOwnedTags.1 //@packages.0/Class1/operation1/@kOwnedTags.2 //@packages.0/Class1/operation1/@kOwnedTags.3" name="operation1" type="//@packages.0/Class1/operation1/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="275;459"/>
+      <ownedOperation kTag="//@packages.0/Class1/operation1/@kOwnedTags.0 //@packages.0/Class1/operation1/@kOwnedTags.1 //@packages.0/Class1/operation1/@kOwnedTags.2 //@packages.0/Class1/operation1/@kOwnedTags.3" name="operation1" type="//@packages.0/Class1/operation1/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="275;459" object="//@packages.0/Class1/operation1"/>
         <kOwnedTags name="documentation" value=" Mon operation " object="//@packages.0/Class1/operation1"/>
         <kOwnedTags name="return" value="of the jedi" object="//@packages.0/Class1/operation1"/>
         <kOwnedTags name="documentation" value="ma doc" object="//@packages.0/Class1/operation1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <kOwnedTags name="traceability_text_reference" value="301;459"/>
-          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="v1">
-            <kOwnedTags name="traceability_text_reference" value="341;360"/>
+        <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/Class1/operation1/@body/@kOwnedTags.0">
+          <kOwnedTags name="traceability_text_reference" value="301;459" object="//@packages.0/Class1/operation1/@body"/>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="//@packages.0/Class1/operation1/@body/@statement.0/@kOwnedTags.0" identifier="v1">
+            <kOwnedTags name="traceability_text_reference" value="341;360" object="//@packages.0/Class1/operation1/@body/@statement.0"/>
             <type name="Boolean" type="//@packages.0/Class1/operation1/@body/@statement.0/@type/@containedType.0" isOrdered="true">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean"/>
             </type>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="v2">
-            <kOwnedTags name="traceability_text_reference" value="360;441"/>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="//@packages.0/Class1/operation1/@body/@statement.1/@kOwnedTags.0" identifier="v2">
+            <kOwnedTags name="traceability_text_reference" value="360;441" object="//@packages.0/Class1/operation1/@body/@statement.1"/>
             <type name="Boolean" type="//@packages.0/Class1/operation1/@body/@statement.1/@type/@containedType.0" isOrdered="true">
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Boolean"/>
             </type>
@@ -43,4 +43,4 @@
       </ownedOperation>
     </ownedTypeDefinition>
   </packages>
-</org_kermeta_language_structure:UnresolvedMetamodel>
+</org_kermeta_language_structure:Metamodel>
