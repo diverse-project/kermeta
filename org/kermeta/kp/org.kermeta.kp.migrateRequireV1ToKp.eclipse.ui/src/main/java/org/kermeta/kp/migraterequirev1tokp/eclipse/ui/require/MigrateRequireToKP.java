@@ -15,11 +15,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +27,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.kp.Dependency;
+import org.kermeta.kp.ImportFile;
+import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpFactory;
-import org.kermeta.kp.Source;
+import org.kermeta.kp.ReusableResource;
 import org.kermeta.kp.migraterequirev1tokp.eclipse.ui.parser.RequireParser;
-import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
+import org.kermeta.utils.systemservices.eclipse.api.EclipseMessagingSystem;
 
 
 
@@ -41,18 +42,22 @@ import org.kermeta.utils.systemservices.api.messaging.MessagingSystem.Kind;
  require does not exist in kermeta V2 */
 public class MigrateRequireToKP {
 	
+	public static String MESSAGE_GROUP = "V1_TO_V2";
+	
+	
 	private EclipseMessagingSystem eclipseMess;
 	
 	/**  Constructor*/
 	public MigrateRequireToKP() {
-		eclipseMess = new EclipseMessagingSystem("migrate Kermeta V1 to V2", "Migrate");
+		eclipseMess = new EclipseMessagingSystem(MESSAGE_GROUP, "Migrate");
 	}
 	
 	/**
 	 * Parse the selected Kermeta V1 kmt file to migrate require in a .kp file
 	 * @param pathFile : the path to the .kmt file
+	 * @throws IOException 
 	 */
-	public List<String> parseKMTFile (String pathFile)throws FileNotFoundException {
+	public List<String> parseKMTFile (String pathFile)throws IOException {
 	    RequireParser parser = new RequireParser(pathFile);
 	    List<String> requiredFiles = new ArrayList<String>();
 	    requiredFiles = parser.processLineByLine();
@@ -74,34 +79,37 @@ public class MigrateRequireToKP {
 	 * @return :  the complete  list of required file (each file is added once)
 	 * @throws FileNotFoundException 
 	 */
-	public List<String> allRequires (String pathFile, String baseProject, String baseWorkspace) throws FileNotFoundException {
+	public List<String> allRequires (String pathFile, String baseProject, String baseWorkspace) {
 		List<String> requiredFiles = new ArrayList<String>();
-		// Parse main kmt
-		requiredFiles = parseKMTFile (pathFile);
-		List<String> addRequired = new ArrayList<String>();
-		
-		
-		// Iterate on the obtained required files
-		for (String rf : requiredFiles) {
-			if (isKMTFile(rf)) {
-				String path  = obtainPath(rf, baseProject, baseWorkspace);
-				addRequired = parseKMTFile (path);
-			}
-			
-		}
-		
-			
-			// Add these new requires on the requiredFiles list if it is not ever added
-			if (! addRequired.isEmpty()){
-				for (String newRequire : addRequired){
-					if (! requiredFiles.contains(newRequire)) {
-						requiredFiles.add(newRequire);
-					}
-				}
-			}
-			
+		allRequires(pathFile, baseProject, baseWorkspace, requiredFiles);
 		return requiredFiles;
 	}
+	
+	public void allRequires (String pathFile, String baseProject, String baseWorkspace, List<String> currentList) {
+		
+		if (! currentList.contains(pathFile)) {
+			currentList.add(pathFile);
+			if (isKMTFile(pathFile)) {
+				List<String> newRequired;
+				try {
+					newRequired = parseKMTFile (pathFile);
+				
+					// Add these new requires on the requiredFiles list if it is not ever added
+					for (String newRequire : newRequired){
+						//"------" : Remove the quotes at the beginning and the end
+						String path =newRequire.substring(2, newRequire.length()-1);
+						allRequires(path, baseProject, baseWorkspace, currentList);
+					}
+				} catch (FileNotFoundException e) {
+					eclipseMess.warn("File not found : "+pathFile, MESSAGE_GROUP);
+				} catch (IOException e) {
+					eclipseMess.warn("Problem reading file : "+pathFile, MESSAGE_GROUP, e);
+				}
+			}
+		}
+	}
+	
+	
 	
 	
 	/** Determines whether the path in parameter is a kmt file path 
@@ -158,6 +166,8 @@ public class MigrateRequireToKP {
 	 @result : the list of required files in the kp
 	  */
 	public List<String> migrateRequireInKP (String pathFile, String baseProject,String baseProjectNotation, String baseWorkspace, String projectName, String groupName) throws FileNotFoundException, IOException {
+		eclipseMess.debug("baseProject="+baseProject, MESSAGE_GROUP);
+		eclipseMess.debug("baseWorkspace="+baseWorkspace, MESSAGE_GROUP);
 		// Parse kmt main file
 		List<String> reqFiles = allRequires( pathFile, baseProject, baseWorkspace);
 		
@@ -168,11 +178,11 @@ public class MigrateRequireToKP {
 		String kpPath = createNewKpFile ( pathFile, baseProject,baseProjectNotation,requiredFiles, projectName, groupName);
 		
 		// Add message for user in the Eclipse console
-		eclipseMess.log(Kind.UserINFO," New kp sucessfully created in " + kpPath, "migrate Kermeta V1 to V2" );
+		eclipseMess.log(Kind.UserINFO," New kp sucessfully created in " + kpPath, MESSAGE_GROUP );
 		
 		// List all of the required files for this kp in the Eclipse console
 		for ( String req : requiredFiles) {
-		eclipseMess.log(Kind.UserINFO, req + "file added in "+ kpPath, "migrate Kermeta V1 to V2" );
+		eclipseMess.log(Kind.UserINFO, req + "file added in "+ kpPath, MESSAGE_GROUP );
 		}
 		
 		// Return kp path file
@@ -189,7 +199,7 @@ public class MigrateRequireToKP {
 	 @param reqFiles : The list of path files from all the require of the Kermeta V1 file
 	 @result : the new modified list of path files */
 	public List<String> sourcesInKP (String baseProject, String baseProjectNotation,List<String> reqFiles ){
-		List<String> sourceFiles = new ArrayList<String> ();
+		/*List<String> sourceFiles = new ArrayList<String> ();
 		String bproject = baseProject.replace("\\", "/");
 		if (! reqFiles.isEmpty()) {
 			for (String s1 : reqFiles) {
@@ -214,7 +224,9 @@ public class MigrateRequireToKP {
 				sourceFiles.add(source);
 			}
 		}
-		return sourceFiles;
+		return sourceFiles;*
+		*/
+		return reqFiles;
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------
@@ -257,30 +269,28 @@ public class MigrateRequireToKP {
 		kp.setDefaultMainClass(mainClass);
 		kp.setDefaultMainOperation(mainOperation);
 		// to improve
-		kp.setName(projectName);
-		kp.setGroup(groupName);
+		kp.setMetamodelName(projectName);
 		
-		//Add kmt file as source
-		String [] splitPath = pathFile.split("/");
-		String kmtName = splitPath[splitPath.length-1]; // --/--/name.kmt (name is the last)
-		String mainKmt = baseProjectNotation + "/" + kmtName;
-		Source sourceMainKmt = KpFactory.eINSTANCE.createSource();
-		sourceMainKmt.setUrl(mainKmt);
-		kp.getSources().add(sourceMainKmt);
+				
 		
 		// Iterate on required files
 		if (! requiredFiles.isEmpty()) {
 			for (String reqFile : requiredFiles) {
-				Source source = KpFactory.eINSTANCE.createSource();
-				source.setUrl(reqFile);
-				kp.getSources().add(source);
+				String lookupFreeReqFile = reqFile.replaceFirst("platform:/lookup/", "platform:/resource/");
+				ImportFile source = KpFactory.eINSTANCE.createImportFile();
+				source.setUrl(lookupFreeReqFile);
+				kp.getImportedFiles().add(source);
 			}
 		}
-		// Add dependency to library core
-		Dependency dep = KpFactory.eINSTANCE.createDependency();
-		dep.setName("language.model");
-		dep.getUrl().add("mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT");
-		kp.getDependencies().add(dep);
+		// Add dependency to library standard
+		ReusableResource rr = KpFactory.eINSTANCE.createReusableResource();
+		rr.setReusableResourceName("library_standard");
+		rr.setUrl("platform:/plugin/org.kermeta.language.library.standard");
+		kp.getReusableResources().add(rr);
+		
+		ImportProject ip = KpFactory.eINSTANCE.createImportProject();
+		ip.setProjectResource(rr);
+		kp.getImportedProjects().add(ip);
 		
 		// Add kp to the resource
 		resource.getContents().add(kp);
@@ -346,7 +356,7 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 						copy(path, path + ".old");
 						
 			// Add message to the user for the Eclipse console
-			eclipseMess.log(Kind.UserINFO, path + "kmt file migrated", "migration Kermeta V1 to V2" );
+			eclipseMess.log(Kind.UserINFO, path + "kmt file migrated", MESSAGE_GROUP );
 			
 			// Initiate the file lines of the file with the current content
 			List<String> fileLines = parser.parseInList();
@@ -391,8 +401,9 @@ public void migrateKMT (String pathFile, String baseProject, String baseWorkspac
 /** 
  * Determines whether a given file need to be migrated
  * @param parser : the parser associated with a given file
+ * @throws IOException 
  * */
-public boolean willBeMigrated (RequireParser parser) throws FileNotFoundException {
+public boolean willBeMigrated (RequireParser parser) throws IOException {
 	return (parser.has_element("stdio.")  || parser.has_element("@mainClass") || parser.has_element("@mainOperation") );
 }
 
@@ -405,8 +416,9 @@ public boolean willBeMigrated (RequireParser parser) throws FileNotFoundExceptio
 	/** Add a given using on a file
 	 @param pathFile : the file where the using will be added
 	 @param using : the using to add
+	 * @throws MalformedURLException 
 	 */
-	public List<String> addUsing (String pathFile, String using, List<String> fileLines) throws FileNotFoundException  {
+	public List<String> addUsing (String pathFile, String using, List<String> fileLines) throws FileNotFoundException, MalformedURLException  {
 		RequireParser parser = new RequireParser (pathFile);
 		
 		// Put all lines of the file in a list
@@ -562,9 +574,10 @@ public boolean willBeMigrated (RequireParser parser) throws FileNotFoundExceptio
 	 * Remove main annotation in the file if it is exists
 	 * @param pathFile : the path to the migrated file
 	 * @param startLinesToRemove : list of annotations that start future removed lines
+	 * @throws MalformedURLException 
 	 * @result : the new file lines
 	 *  */
-	public List<String> removeMainAnnotations (String pathFile, List<String> startLinesToRemove, List<String> fileLines) throws FileNotFoundException {
+	public List<String> removeMainAnnotations (String pathFile, List<String> startLinesToRemove, List<String> fileLines) throws FileNotFoundException, MalformedURLException {
 		
 		// Retrieve all of the lines from the file with path as parameter of the method
 		RequireParser parser = new RequireParser (pathFile);
