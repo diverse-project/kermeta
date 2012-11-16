@@ -1,6 +1,6 @@
-using kermeta::standard
-using org::kermeta::language::structure
-using kermeta::exceptions
+using kermeta::standard::*
+using org::kermeta::language::structure::*
+using kermeta::exceptions::*
 
 
 
