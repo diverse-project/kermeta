@@ -1,6 +1,7 @@
 package org.kermeta.kp.launcher.eclipse.internal;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -42,11 +43,12 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ClassDefinition;
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Tag;
 import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.texteditor.eclipse.nature.Activator;
+import org.kermeta.language.util.ModelingUnit;
 
 public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 
@@ -558,11 +560,10 @@ public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 			// collect classes with @main tag
 			validMainClasses = new ArrayList<ClassDefinition>();
 
-			for (TypeDefinition td : mu.getOwnedTypeDefinition()) {
-				fillValidMain(td);
-			}
-			for (org.kermeta.language.structure.Package p : mu.getPackages()) {
-				fillValidMain(p);
+			for(Metamodel mm : mu.getMetamodels()){
+				for (org.kermeta.language.structure.Package p : mm.getPackages()) {
+					fillValidMain(p);
+				}
 			}
 		}
 	}
@@ -601,15 +602,22 @@ public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 	public ModelingUnit loadResource() {
 		IFile file = selectedProject
 				.getFile("target/beforeCheckingforScopeMERGED.km");
+		
 		if (file != null) {
 			try {
-				ResourceSet resSet = new ResourceSetImpl();
-				Resource res = resSet.getResource(
+				
+				Map<String, String> options = null;
+				
+				ResourceSet resourceSet = new ResourceSetImpl();
+								Resource res = resourceSet.getResource(
 						org.kermeta.utils.helpers.emf.EMFUriHelper
 								.convertToEMFUri(file.getLocationURI()), true);
-				ModelingUnit rtNode = (ModelingUnit) res.getContents().get(0);
-
-				return rtNode;
+				ModelingUnit result = new ModelingUnit(res.getURI().lastSegment(), res.getContents());
+				
+				return result;
+				
+				
+				
 			} catch (RuntimeException e) {
 				return null;
 			}
