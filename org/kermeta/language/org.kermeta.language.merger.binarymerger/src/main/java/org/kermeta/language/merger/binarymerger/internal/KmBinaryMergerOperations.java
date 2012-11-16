@@ -92,7 +92,7 @@ public class KmBinaryMergerOperations {
 
     	ResourceSet resourceSet2 = new ResourceSetImpl();
 		Resource.Factory.Registry f2 = resourceSet2.getResourceFactoryRegistry();
-		Map<String,Object> m2 = f.getExtensionToFactoryMap();
+		Map<String,Object> m2 = f2.getExtensionToFactoryMap();
 		m2.put("*",new XMIResourceFactoryImpl());
 		Resource resource2 = resourceSet2.createResource(uri);
 		resource2.load(new ByteArrayInputStream(outputStream.toByteArray()), options);
