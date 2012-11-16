@@ -13,25 +13,36 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 
 using kermeta::standard
 
+/**
+ * Retrieve a ModelElementTypeDefinition from a ModelElementTypeDefinitionContainer using its partial qualified name (without "#")
+ */
+
 aspect class ModelElementTypeDefinitionContainer
 {
-	operation getTypeDefinitionByRelativeSetName(set_name : Sequence<String>) : TypeDefinition is do
-		var foundTypeDef : TypeDefinition
-		var container : ModelElementTypeDefinitionContainer
+	operation getTypeDefinitionByPartialSetName(set_pname : Sequence<String>) : ModelElementTypeDefinition is do
+		var foundTypeDef : ModelElementTypeDefinition
 		//If set_qname only contains one identifier, the TypeDefinition must be in this container
-		if set_name.size()==1 then
+		if set_pname.size()==1 then
 			foundTypeDef := self.ownedTypeDefinition.detect{td|
-				td.name == set_name.at(0)
+				td.name == set_pname.at(0)
 			}
-		//Else the TypeDefinition may be referenced by a ModelType contained by this package, or by a nested package
-		else
-			if (container.isVoid() and self.isInstanceOf(Package)) then
-				container := self.asType(Package).nestedPackage.detect{p|p.name == set_name.at(0)}
-			end
-			if (not container.isVoid()) then
-				var nextName : Sequence<String> init set_name
+		end
+		result := foundTypeDef
+	end
+}
+
+aspect class Package
+{
+	method getTypeDefinitionByPartialSetName(set_pname : Sequence<String>) : ModelElementTypeDefinition is do
+		var foundTypeDef : ModelElementTypeDefinition init super(set_pname)
+		var nestedP : Package
+		//Else the ModelElementTypeDefinition may be referenced by a nested package
+		if foundTypeDef.isVoid() then
+			nestedP := self.nestedPackage.detect{p|p.name == set_pname.at(0)}
+			if (not nestedP.isVoid()) then
+				var nextName : Sequence<String> init set_pname
 				nextName.removeAt(0)
-				foundTypeDef := container.getTypeDefinitionByRelativeSetName(nextName)
+				foundTypeDef := nestedP.getTypeDefinitionByPartialSetName(nextName)
 			end
 		end
 		result := foundTypeDef
