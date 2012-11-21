@@ -26,11 +26,14 @@ class TypeDefinitionFinder {
 			var mmName : String init qname.split("#").at(0)
 			var partialName : String init qname.split("#").at(1)
 			var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
-			result := metamodel.getTypeDefinitionByQualifiedName(partialName)
+			result := metamodel.getTypeDefinitionByQualifiedName(qname)
 		else
-			var e : Exception init RuntimeError.new
+			stdio.writeln("TypeDefinitionFinder.getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"#\"), but was called on: " + qname)
+			/*stdio.writeln("Creating an exception")
+			var e : Exception init Exception.new
 			e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"#\"), but was called on: " + qname
-			raise e
+			stdio.writeln("Raising the exception")
+			raise e*/
 		end
 	end
 	
@@ -67,20 +70,30 @@ class TypeDefinitionFinder {
 		result := metamodels.detect{mm| not mm.getTypeDefinitionByPartialName(partialQName).isVoid}
 	end
 
-	/**
+	/*
 	 * Get a TypeDefinition contained in the current Metamodel by name (either qualified or partial)
 	 * and taking into account a set of Usings
 	 * and optionally looking in the current Package (if not void)
 	 */
-	operation getTypeDefinitionByNameAndUsings( name : String, usings : Collection<Using>, metamodels : Collection<Metamodel>, optionalCurrentPackage : Package) : TypeDefinition is do
+	 
+	operation getTypeDefinitionByNameAndUsings( lookingForName : String, usings : Collection<Using>, currentMetamodel : Metamodel, optionalCurrentPackage : Package) : TypeDefinition is do
 		
-		if name.contains("#") then
+		var metamodels : Collection<Metamodel> init currentMetamodel.getNeighbours()
+		
+		if lookingForName.contains("#") then
+			var set_name : Sequence<String> init lookingForName.split("#")
+	 		if not set_name.at(0).equals("") then
+	 			
+	 		else
+	 			result := currentMetamodel.getTypeDefinitionByQualifiedName(currentMetamodel.name + lookingForName)
+	 		end
 			// search the exact qualified name
-			result := getTypeDefinitionByQualifiedName(name, metamodels)
+			result := getTypeDefinitionByQualifiedName(lookingForName, metamodels)
+			
 		else
 			if (not optionalCurrentPackage.isVoid) then
 				// search this qualified name in the current Package
-				result := optionalCurrentPackage.getTypeDefinitionByPartialName(name)
+				result := optionalCurrentPackage.getTypeDefinitionByPartialName(lookingForName)
 			end	
 			
 			if (result.isVoid and not usings.isEmpty) then
@@ -93,11 +106,11 @@ class TypeDefinitionFinder {
 					//If the using does not define an alias
 					if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
 						//We now look for a type which the same name and which qualifiedPath is the fromQName
-						var newName : String init currentUsing.fromQName.replace("*", name)
+						var newName : String init currentUsing.fromQName.replace("*", lookingForName)
 						result := getTypeDefinitionByQualifiedName(newName, metamodels)
 					else
-						if name.startsWith(currentUsing.toName) then
-							var newName : String init name.replace(currentUsing.toName, currentUsing.fromQName)
+						if lookingForName.startsWith(currentUsing.toName) then
+							var newName : String init lookingForName.replace(currentUsing.toName, currentUsing.fromQName)
 							result := getTypeDefinitionByQualifiedName(newName, metamodels)
 						end			
 					end

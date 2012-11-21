@@ -6,7 +6,7 @@
  *            cguy
  */
 
-package kermeta::language::structure;
+package org::kermeta::language::structure;
 
 require kermeta
 require "ModelingUnitHelperV1_structure_aspect.kmt"
@@ -18,12 +18,24 @@ using org::kermeta::language::structure
 
 aspect class KermetaModelElement
 {
-	operation getMetamodelClassDefinitions() : Set<ClassDefinition> is do
+	/*operation getMetamodelClassDefinitions() : Set<ClassDefinition> is do
 		var rootContainer : Object init self.getMetaClass().getRootContainer()
 		result := Set<ClassDefinition>.new
 		if rootContainer.isInstanceOf(ModelingUnit) then
 			var collec : Collection<TypeDefinition> init Set<TypeDefinition>.new
 			result.addAll( rootContainer.asType(ModelingUnit).getClassDefinitions() )			
+		end
+	end*/
+	
+	operation getRootMetamodel() : Metamodel is do
+		if (not self.container.isVoid()) then
+			if (self.container.isInstanceOf(Metamodel)) then
+				result := self.container.asType(Metamodel)
+			else
+				if (self.container.isInstanceOf(KermetaModelElement)) then
+					result := self.container.asType(KermetaModelElement).getRootMetamodel()
+				end
+			end
 		end
 	end
 }

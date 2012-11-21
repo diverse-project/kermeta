@@ -11,11 +11,13 @@ require kermeta
 require "PackageHelper.kmt"
 require "../../../standard/StringUtils.kmt"
 require "GetQualifiedName_structure_aspect.kmt"
+require "MetamodelCollection_GetTypeDefinitionByName.kmt"
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 using kermeta::standard
 using kermeta::exceptions
 using kermeta::persistence
+using kmt::language::helpers::structure
 
 
 aspect class Metamodel {
@@ -69,9 +71,12 @@ aspect class Metamodel {
 					result := void
 				end
 			else
-				var e : Exception init RuntimeError.new
+				stdio.writeln("Metamodel.getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname)
+				/*stdio.writeln("Creating an exception")
+				var e : Exception init Exception.new
 				e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname
-				raise e
+				stdio.writeln("Raising the exception")
+				raise e*/
 			end
 		end
 	end
@@ -89,9 +94,12 @@ aspect class Metamodel {
 			result := getCachedStructuralTypeDefinitionByPartialName(pname)
 		else
 			if pname.contains("#") then
-				var e : Exception init RuntimeError.new
+				stdio.writeln("Metamodel.getTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname)
+				/*stdio.writeln("Creating an exception")
+				var e : Exception init Exception.new
 				e.message := "getTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname
-				raise e
+				stdio.writeln("Raising the exception")
+				raise e*/
 			else
 				var set_pname : Sequence<String> init pname.split("::")
 				if set_pname.size()==0 then
@@ -152,9 +160,12 @@ aspect class Metamodel {
 				result := void
 			end
 		else
-			var e : Exception init RuntimeError.new
-			e.message := "getCachedStructuralTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname
-			raise e
+			stdio.writeln("Metamodel.getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname)
+			/*stdio.writeln("Creating an exception")
+			var e : Exception init Exception.new
+			e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name with metamodel name followed by \"#\"), but was called on: " + qname
+			stdio.writeln("Raising the exception")
+			raise e*/
 		end
 		
 	end
@@ -171,9 +182,12 @@ aspect class Metamodel {
 		var possibleTypeDefs : Set<TypeDefinition> init cache.getTypeDefinitions(typename)
 		
 		if pname.contains("#") then
-			var e : Exception init RuntimeError.new
-			e.message := "getCachedStructuralTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname
-			raise e
+			stdio.writeln("Metamodel.getTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname)
+			/*stdio.writeln("Creating an exception")
+			var e : Exception init Exception.new
+			e.message := "getTypeDefinitionByPartialName expects a partial qualified name (i.e., qualified name without metamodel name, nor \"#\"), but was called on: " + pname
+			stdio.writeln("Raising the exception")
+			raise e*/
 		else
 			result := possibleTypeDefs.detect{t| t.getQualifiedName() == self.name+"#"+pname}
 		end

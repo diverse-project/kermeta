@@ -40,9 +40,3 @@ aspect class DataType inherits Type, TypeDefinition {
 		result := super()
 	end
 }
-
-aspect class Metamodel {
-	method getAllSuperTypes() : OrderedSet<Type> from TypeDefinition is do 
-		result := super()
-	end
-}

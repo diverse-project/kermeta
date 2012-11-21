@@ -8,6 +8,9 @@
 package org::kermeta::language::structure;
 
 require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using org::kermeta::language::structure
 
 /**
  * Retrieve the containing package
@@ -15,17 +18,14 @@ require kermeta
 aspect class KermetaModelElement
 {
 	operation getPackage() : Package is do
-		if self.container.isInstanceOf(KermetaModelElement) then
-			result := self.container.asType(KermetaModelElement).getPackage()
-		else
-			result := void
+		if (not self.container.isVoid()) then
+			if (self.container.isInstanceOf(Package)) then
+				result := self.container.asType(Package)
+			else
+				if (self.container.isInstanceOf(KermetaModelElement)) then
+					result := self.container.asType(KermetaModelElement).getPackage()
+				end
+			end
 		end
-	end
-}
-
-aspect class Package inherits KermetaModelElement
-{
-	method getPackage() : Package from KermetaModelElement is do
-		result := self
 	end
 }

@@ -14,7 +14,7 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 
@@ -32,7 +32,7 @@ class TypeCreationHelper
 		var cd : ClassDefinition
 		var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
 		  	
-		cd ?= typeFinder.getFirstTypeDefinitionByQualifiedName(classDefinitionQualifiedName, metamodels)
+		cd ?= typeFinder.getFirstTypeDefinitionByName(classDefinitionQualifiedName, metamodels)
 		result := Class.new.initializeFromAClassDefinition(cd)
 	end
 
@@ -62,7 +62,7 @@ class TypeCreationHelper
 		  	
 				var cd : ClassDefinition
 				if (element.isUnique() and element.isOrdered()) then 
-					cd ?= typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet",metamodels)
+					cd ?= typeFinder.getFirstTypeDefinitionByName("kermeta::standard::OrderedSet",metamodels)
 					if cd.isVoid then
 						//errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::OrderedSet", element))
 						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::OrderedSet in any known metamodel")
@@ -71,7 +71,7 @@ class TypeCreationHelper
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 				else if (element.isUnique() and not element.isOrdered()) then
-					cd ?= typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Set",metamodels)
+					cd ?= typeFinder.getFirstTypeDefinitionByName("kermeta::standard::Set",metamodels)
 					if cd.isVoid then
 						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::Set  in any known metamodel")
 					else
@@ -79,7 +79,7 @@ class TypeCreationHelper
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 				else if ( not element.isUnique() and element.isOrdered()) then
-					cd ?= typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Sequence",metamodels)
+					cd ?= typeFinder.getFirstTypeDefinitionByName("kermeta::standard::Sequence",metamodels)
 					if cd.isVoid then
 						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::Sequence  in any known metamodel")
 					else
@@ -87,7 +87,7 @@ class TypeCreationHelper
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 				else
-					cd ?= typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Bag",metamodels)
+					cd ?= typeFinder.getFirstTypeDefinitionByName("kermeta::standard::Bag",metamodels)
 					if cd.isVoid then
 						stdio.writeln("TypeCreationHelper.kmt - Not able to find  kermeta::standard::Bag  in any known metamodel")
 					else
