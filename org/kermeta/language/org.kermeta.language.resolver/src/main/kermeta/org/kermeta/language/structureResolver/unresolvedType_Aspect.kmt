@@ -3,13 +3,16 @@ package org::kermeta::language::structure;
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetMetamodel_KermetaModelElement_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/UnresolvedReference_moveTagsToResolved_aspect.kmt"
 
 require kermeta
 using kermeta::standard
 using org::kermeta::language::resolver
+using kmt::language::helpers::structure
+
 
 aspect class UnresolvedType inherits Type, UnresolvedReference, TypeContainer{
 
@@ -32,13 +35,10 @@ aspect class UnresolvedType inherits Type, UnresolvedReference, TypeContainer{
 		
 		if correspondingType.isVoid then
 			var typeDef : TypeDefinition
+					
+			var typeDefFinder : TypeDefinitionFinder init TypeDefinitionFinder.new
+			typeDef := typeDefFinder.getTypeDefinitionByNameAndUsings(self.typeIdentifier, usings, self.getRootMetamodel(), context.currentPackage)
 			
-			context.currentMetamodels.each{mm|
-				if typeDef.isVoid() then
-					typeDef := mm.getTypeDefinitionByNameAndUsings(self.typeIdentifier, self.usings, context.currentPackage)
-				end
-			}
-
 			if not typeDef.isVoid then
 				correspondingType:=typeDef.getTypeFromDefinition(self, context)
 				self.moveTagsToResolved(correspondingType)

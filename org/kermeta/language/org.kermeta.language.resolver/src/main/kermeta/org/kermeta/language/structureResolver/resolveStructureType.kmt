@@ -162,7 +162,7 @@ package structure{
 				if involdedTypeDefiniton.exists{typeDefInHierarchy | typeDefInHierarchy == self } 
 				then
 					// error on self and all supertype definition but don't report if this is kermeta::standard::Object pointing to self
-					if not (self.getQualifiedName.equals("kermeta::standard::Object") and involdedTypeDefiniton.size() == 1) then
+					if not (self.getQualifiedName.equals("kermeta_standard#kermeta::standard::Object") and involdedTypeDefiniton.size() == 1) then
 						var involvedList : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
 						involdedTypeDefiniton.each{td | involvedList.append(td.getQualifiedName + " ")}
 						involdedTypeDefiniton.each{td |

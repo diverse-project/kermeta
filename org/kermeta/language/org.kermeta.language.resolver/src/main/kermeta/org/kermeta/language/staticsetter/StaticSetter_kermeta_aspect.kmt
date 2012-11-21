@@ -19,6 +19,9 @@ require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/k
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/behaviorResolver_inferedStaticType.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/behavior/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetPackage_KermetaModelElement_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetMetamodel_KermetaModelElement_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/TypeEquality_structure_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/UnresolvedReference_moveTagsToResolved_aspect.kmt"
@@ -28,6 +31,8 @@ using org::kermeta::language::resolver
 using org::kermeta::language::structure
 using org::kermeta::language::staticsetter
 using kermeta::standard
+using kmt::language::helpers::structure
+
 
 package structure {
 	 aspect class KermetaModelElement {
@@ -610,12 +615,9 @@ package behavior {
 		operation resolveCallToTypeLiteral(context : StaticSetterContext) : CallTypeLiteral is do
 			if target.isVoid then
 				var typeDef : TypeDefinition
-				
-				context.currentMetamodels.each{mm|
-					if typeDef.isVoid() then
-						typeDef := mm.getTypeDefinitionByNameAndUsings(self.name, usings, mm.retrievePackage(getQualifiedNameResolving()))
-					end
-				}
+								
+				var typeDefFinder : TypeDefinitionFinder init context.getTypeDefFinder()
+				typeDef := typeDefFinder.getTypeDefinitionByNameAndUsings(self.name, usings, self.getRootMetamodel(), self.getPackage())
 				
 				if not typeDef.isVoid then
 					if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found typeDef " + typeDef.name) end
