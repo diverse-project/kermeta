@@ -55,7 +55,7 @@ public class KpChecker {
 		if (selectedMM instanceof org.kermeta.language.language.resolver.org.kermeta.language.structure.RichMetamodel){
 			org.kermeta.language.language.resolver.org.kermeta.language.structure.RichMetamodel mma 
 				= (org.kermeta.language.language.resolver.org.kermeta.language.structure.RichMetamodel) selectedMM;
-			TypeDefinition td = mma.getTypeDefinitionByName(defaultMainClassInMM);
+			TypeDefinition td = mma.getTypeDefinitionByPartialName(defaultMainClassInMM);
 			if(td == null){
 				compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 				compiler.errorMessage = "Invalid kp file. Default main class not found";
