@@ -30,7 +30,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -99,7 +99,7 @@ aspect class Operation
 				//stdio.writeln("There are " + nbParameter.toString + " parameters ...")
 		  		// retrieve String TypeDefinition supposing that only one metamodel will define this specific qualified name
 		  		
-		  		var stringTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::String", mms)
+		  		var stringTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByName("kermeta::standard::String", mms)
 		  		
 		  		//stdio.writeln("stringTypeDef retrieved : "+ stringTypeDef.toString)
 		  		
@@ -141,7 +141,7 @@ aspect class Operation
 				  				// build a Collection<String> type
 				  				var typeSeq : Sequence<Type> init Sequence<Type>.new
 				  				typeSeq.add(Class.new.initializeFromAClassDefinition(stringTypeDef.asType(ClassDefinition)))
-				  				var collectionClassDef : ClassDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Collection", mms).asType(ClassDefinition)
+				  				var collectionClassDef : ClassDefinition init typeFinder.getFirstTypeDefinitionByName("kermeta::standard::Collection", mms).asType(ClassDefinition)
 				  				if collectionClassDef.isVoid then 
 				  					stdio.errorln("PROBLEM finding kermeta::standard::Collection")
 				  				end

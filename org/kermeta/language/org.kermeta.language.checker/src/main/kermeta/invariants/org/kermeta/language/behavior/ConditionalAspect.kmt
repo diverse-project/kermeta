@@ -19,7 +19,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetRootContainer_object_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeByQualifiedName.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
 
 using org::kermeta::language::structure
 
@@ -42,7 +42,7 @@ aspect class Conditional
 			var mms : kermeta::standard::Collection<Metamodel> init self.getRootContainer.asType(Metamodel).getNeighbours
 		  	var typeFinder : kmt::language::helpers::structure::TypeDefinitionFinder init kmt::language::helpers::structure::TypeDefinitionFinder.new
 		  	
-			var booleanTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByQualifiedName("kermeta::standard::Boolean", mms)
+			var booleanTypeDef : TypeDefinition init typeFinder.getFirstTypeDefinitionByName("kermeta::standard::Boolean", mms)
 						
 			invResult:= typeDef.equals(booleanTypeDef)
 		end

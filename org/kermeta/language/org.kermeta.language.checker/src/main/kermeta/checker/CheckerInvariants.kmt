@@ -10,6 +10,6 @@ package org::kermeta::language::checker;
 
 require kermeta
 
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/UnresolvedAspect.kmt"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/ModelingUnitAspect.kmt"
-require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/KermetaModelElementAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/UnresolvedAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/MetamodelAspect.kmt"
+require "platform:/lookup/org.kermeta.language.checker/src/main/kermeta/invariants/org/kermeta/language/structure/KermetaModelElementAspect.kmt"
