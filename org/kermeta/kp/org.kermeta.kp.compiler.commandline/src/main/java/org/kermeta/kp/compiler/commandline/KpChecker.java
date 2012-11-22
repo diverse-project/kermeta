@@ -47,8 +47,8 @@ public class KpChecker {
 			if(mm.getName().equals(metamodelName)) selectedMM = mm;
 		}
 		if(!kp.getDefaultMainClass().contains("#")){
-			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found. Metamodel '"+metamodelName+"' not found", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
-			compiler.errorMessage = "Default main Class not found. Metamodel '"+metamodelName+"' not found";
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found. You need to specify in wich metamodel searching. Suggestions : "+metamodelName+"#"+kp.getDefaultMainClass() + " or #"+kp.getDefaultMainClass(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			compiler.errorMessage = "Default main Class not found. You need to specify in wich metamodel searching. Suggestions : "+metamodelName+"#"+kp.getDefaultMainClass() + " or #"+kp.getDefaultMainClass();
 			compiler.hasFailed = true;
 			return;
 		}
