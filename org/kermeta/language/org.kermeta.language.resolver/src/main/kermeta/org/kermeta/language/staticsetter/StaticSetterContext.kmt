@@ -68,6 +68,7 @@ class StaticSetterContext
 	 * Metamodels we are processing 
 	 */
 	reference currentMetamodels : Collection<Metamodel>
+	reference mainCurrentMetamodel : Metamodel // metamodel of the project being resolve, we suppose that imported MM are resolved before hand
 	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
 	reference currentOperation : org::kermeta::language::structure::Operation
 	reference currentProperty : org::kermeta::language::structure::Property
@@ -112,18 +113,38 @@ class StaticSetterContext
 	
 	// end of code about symbols
 	
-	operation createTypeFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::Type is do
+	operation createTypeFromQualifiedName(classDefinitionQualifiedName : String, currentMetamodel : Metamodel) : org::kermeta::language::structure::Type is do
 		var cd : org::kermeta::language::structure::ClassDefinition
-		cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName, currentMetamodels)
+		cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName, currentMetamodels, currentMetamodel)
 		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
 		if result.isVoid then
 			errors.add(ResolverException.new.initialize("Not able to create type for "+ classDefinitionQualifiedName, self))
 		end
 	end
 	
-	operation getClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
+	operation getClassDefinitionFromQualifiedName(classDefinitionQualifiedName : String, currentMetamodel : Metamodel) : org::kermeta::language::structure::ClassDefinition is do
 		var cd : org::kermeta::language::structure::ClassDefinition
-		cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName, currentMetamodels)
+		cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName(classDefinitionQualifiedName, currentMetamodels, currentMetamodel)
+		result := cd
+		if result.isVoid then
+			if verbose then
+				stdio.writeln("Not able to get ClassDefinition for "+ classDefinitionQualifiedName)
+			end
+			errors.add(ResolverException.new.initialize("Not able to get ClassDefinition for "+ classDefinitionQualifiedName, self))
+		end
+	end	
+	
+	operation createTypeFromPartialName(classDefinitionPartialName : String) : org::kermeta::language::structure::Type is do
+		var cd : org::kermeta::language::structure::ClassDefinition
+		cd ?= getTypeDefFinder.getFirstTypeDefinitionByName(classDefinitionPartialName, currentMetamodels)
+		result := org::kermeta::language::structure::Class.new.initializeFromAClassDefinition(cd)
+		if result.isVoid then
+			errors.add(ResolverException.new.initialize("Not able to create type for "+ classDefinitionPartialName, self))
+		end
+	end
+	operation getClassDefinitionFromPartialName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
+		var cd : org::kermeta::language::structure::ClassDefinition
+		cd ?= getTypeDefFinder.getFirstTypeDefinitionByName(classDefinitionQualifiedName, currentMetamodels)
 		result := cd
 		if result.isVoid then
 			if verbose then
@@ -132,7 +153,6 @@ class StaticSetterContext
 			errors.add(ResolverException.new.initialize("Not able to get ClassDefinition for "+ classDefinitionQualifiedName, self))
 		end
 	end
-	
 	/**
 	 * Return the type of self.
 	 * The Type parameters are bound with least derived admitable type
@@ -170,7 +190,7 @@ class StaticSetterContext
 				 
 			if element.upper == 0 then
 				// the only type valid with upper bound == 0 is Void 
-				result := createTypeFromQualifiedName("kermeta_standard#kermeta::standard::Void")
+				result := createTypeFromPartialName("kermeta::standard::Void")
 				//stdio.writeln("createTypeFromMultiplicityElement typeCopy = VOID")
 			else if element.upper == 1 then
 				result := typeCopy
@@ -181,40 +201,40 @@ class StaticSetterContext
 				var cd : org::kermeta::language::structure::ClassDefinition
 				if (element.isUnique() and element.isOrdered()) then
 					
-					cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::OrderedSet", currentMetamodels)
+					cd ?= getTypeDefFinder.getFirstTypeDefinitionByName("kermeta::standard::OrderedSet", currentMetamodels)
 					
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find  kermeta_standard#kermeta::standard::OrderedSet", element))
+						errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::OrderedSet", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = OrderedSet<"+result.toString+">")
 				else if (element.isUnique() and not element.isOrdered()) then
 				
-					cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Set", currentMetamodels)
+					cd ?= getTypeDefFinder.getFirstTypeDefinitionByName("kermeta::standard::Set", currentMetamodels)
 					
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find kermeta_standard#kermeta::standard::Set", element))
+						errors.add(ResolverException.new.initialize("Not able to find kermeta::standard::Set", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Set<"+result.toString+">")
 				else if ( not element.isUnique() and element.isOrdered()) then
 				
-					cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Sequence", currentMetamodels)
+					cd ?= getTypeDefFinder.getFirstTypeDefinitionByName("kermeta::standard::Sequence", currentMetamodels)
 					
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find kermeta_standard#kermeta::standard::Sequence", element))
+						errors.add(ResolverException.new.initialize("Not able to find kermeta::standard::Sequence", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
 					//stdio.writeln("createTypeFromMultiplicityElement typeCopy = Sequence<"+result.toString+">")
 				else
 					
-					cd ?= getTypeDefFinder.getTypeDefinitionByQualifiedName("kermeta_standard#kermeta::standard::Bag", currentMetamodels)
+					cd ?= getTypeDefFinder.getFirstTypeDefinitionByName("kermeta::standard::Bag", currentMetamodels)
 					
 					if cd.isVoid then
-						errors.add(ResolverException.new.initialize("Not able to find  kermeta_standard#kermeta::standard::Bag", element))
+						errors.add(ResolverException.new.initialize("Not able to find  kermeta::standard::Bag", element))
 					else
 						result := org::kermeta::language::structure::Class.new.initializeFromAGenericClassDefinition(cd, typeParams)
 					end
