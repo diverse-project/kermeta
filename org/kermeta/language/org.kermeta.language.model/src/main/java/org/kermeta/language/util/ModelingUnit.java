@@ -11,10 +11,15 @@ package org.kermeta.language.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.language.structure.Metamodel;
 
 /**
@@ -89,6 +94,15 @@ public class ModelingUnit {
 	
 	public void gatherInMainEResource(){
 		Resource mainRes = getMainEResource();
+		if(mainRes == null){
+			// create a Resource
+			URI uri = URI.createURI(getName() + ".km_in_memory");
+			ResourceSet resourceSet2 = new ResourceSetImpl();
+			Resource.Factory.Registry f2 = resourceSet2.getResourceFactoryRegistry();
+			Map<String,Object> m2 = f2.getExtensionToFactoryMap();
+			m2.put("*",new XMIResourceFactoryImpl());
+			mainRes = resourceSet2.createResource(uri);
+		}
 		for(Metamodel mm : metamodels){
 			mainRes.getContents().add(mm);
 		}
