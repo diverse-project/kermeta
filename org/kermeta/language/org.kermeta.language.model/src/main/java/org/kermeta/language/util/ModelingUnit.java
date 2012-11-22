@@ -81,7 +81,8 @@ public class ModelingUnit {
 	
 	public Resource getMainEResource(){
 		for(Metamodel mm : metamodels){
-			return mm.eResource();
+			if(mm.eResource() != null)
+				return mm.eResource();
 		}
 		return null;
 	}
