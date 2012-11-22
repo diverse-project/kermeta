@@ -1,5 +1,5 @@
-using kermeta::standard::*
-using kermeta::io::StdIO => stdio
+using #kermeta::standard::*
+using #kermeta::io::StdIO => stdio
 
 package kermeta::utils{
 
