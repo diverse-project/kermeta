@@ -1,8 +1,6 @@
 package trace;
 
-require kermeta
-
-using kermeta::utils
+using kermeta_standard#kermeta::utils::*
 
 /**
  * This class represents the trace of a transfo

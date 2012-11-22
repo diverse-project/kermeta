@@ -1,16 +1,12 @@
-KermetaProject "001_genericCall" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="001_genericCall" 
-defaultMainClass ="class2RDBMS::Main"
-defaultMainOperation = "main"
-sources ={ 
-	
-	require "${project.baseUri}/src/main/kmt/001_genericCall.kmt"
-	}  
-	dependencies = {
-	// depends on library.core	
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"   
-		 
-} 
 
- 
+resource library_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/LATEST"
+
+
+importProject library_standard
+
+project p001_genericCall {
+	mainClass "class2RDBMS::Main"
+	mainOperation "main"
+	import "${project.baseUri}/src/main/kmt/001_genericCall.kmt"
+}
+
