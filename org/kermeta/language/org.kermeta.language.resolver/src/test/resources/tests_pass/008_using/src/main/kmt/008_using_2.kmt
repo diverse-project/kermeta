@@ -1,6 +1,6 @@
 
-using p1
-using kermeta::standard
+using #p1::*
+using kermeta_standard#kermeta::standard::*
 package p3 {
 
 class B {

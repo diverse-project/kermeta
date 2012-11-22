@@ -1,5 +1,5 @@
-using p2
-using kermeta::standard
+using p2::*
+using kermeta::standard::*
 package p3 {
 
 class C {

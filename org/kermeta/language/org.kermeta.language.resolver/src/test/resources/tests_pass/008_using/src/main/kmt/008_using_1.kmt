@@ -1,4 +1,4 @@
-using kermeta::standard
+using kermeta::standard::*
 package p1{
 
 

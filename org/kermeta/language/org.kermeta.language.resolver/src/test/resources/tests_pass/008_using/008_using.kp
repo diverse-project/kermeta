@@ -1,11 +1,14 @@
-KermetaProject "008_using" 
-//version :  "someVersion" 
-groupId ="group"
-sources = 
-{ 
-	require "${project.baseUri}/src/main/kmt/008_using_1.kmt"
-	require "${project.baseUri}/src/main/kmt/008_using_2.kmt"
-	require "${project.baseUri}/src/main/kmt/008_using_3.kmt"}
-dependencies = {
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT" 
-}  
+resource library_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/LATEST"
+
+
+importProject library_standard
+
+project p008_using {
+	mainClass "#root_package::Main"
+	mainOperation "main"
+	import "${project.baseUri}/src/main/kmt/008_using_1.kmt"
+	import "${project.baseUri}/src/main/kmt/008_using_2.kmt"
+	import "${project.baseUri}/src/main/kmt/008_using_3.kmt"
+}
+
+ 
