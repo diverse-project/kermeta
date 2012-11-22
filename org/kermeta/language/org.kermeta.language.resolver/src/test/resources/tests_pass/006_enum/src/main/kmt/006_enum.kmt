@@ -1,8 +1,7 @@
 package testEnum;
 
-require kermeta
 
-using kermeta::standard
+using kermeta_standard#kermeta::standard::*
 
 enumeration Couleur {
 	jaune;
