@@ -116,11 +116,19 @@ class TypeDefinitionFinder {
 					if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
 						//We now look for a type which the same name and which qualifiedPath is the fromQName
 						var newName : String init currentUsing.fromQName.replace("*", lookingForName)
-						result := getTypeDefinitionByQualifiedName(newName, metamodels, currentMetamodel)
+						if newName.contains("#") then
+							result := getTypeDefinitionByQualifiedName(newName, metamodels, currentMetamodel)
+						else
+							result := getFirstTypeDefinitionByName(newName, metamodels)
+						end
 					else
 						if lookingForName.startsWith(currentUsing.toName) then
 							var newName : String init lookingForName.replace(currentUsing.toName, currentUsing.fromQName)
-							result := getTypeDefinitionByQualifiedName(newName, metamodels, currentMetamodel)
+							if newName.contains("#") then
+								result := getTypeDefinitionByQualifiedName(newName, metamodels, currentMetamodel)
+							else
+								result := getFirstTypeDefinitionByName(newName, metamodels)
+							end
 						end			
 					end
 				end
