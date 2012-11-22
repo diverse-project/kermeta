@@ -1,1 +1,0 @@
-km file coming from kmt files in svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/org/kermeta/language/org.kermeta.language.library.core

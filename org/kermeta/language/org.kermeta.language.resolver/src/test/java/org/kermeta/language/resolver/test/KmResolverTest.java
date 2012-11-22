@@ -63,9 +63,10 @@ public class KmResolverTest extends TestCase {
 		Map<String, Object> m = f.getExtensionToFactoryMap();
 		m.put("km", new XMIResourceFactoryImpl());
 		Resource resource = resourceSet.createResource(URI.createFileURI(kmFile));
-		ModelingUnit beforeResolving;
 		resource.load(m);
-		beforeResolving= (ModelingUnit) resource.getContents().get(0);
+		ModelingUnit beforeResolving = new ModelingUnit(kmFile,resource.getContents());
+		
+		
                 
 		ErrorProneResult<ModelingUnit> epr=	resolver.resolve(beforeResolving);
 		String firstError = (epr.getProblems().size()!=0 ? epr.getProblems().get(0).getMessage() : "");
