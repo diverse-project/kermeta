@@ -520,7 +520,7 @@ public class KermetaCompiler {
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreResolving...", LOG_MESSAGE_GROUP, 1);
 					preResolvedUnit = resolveModelingUnit(preresolvedMergedUnit.getResult(), kpFileURL, true);
 			
-					if (preResolvedUnit == null) {
+					if (preResolvedUnit == null || preResolvedUnit.getMetamodels().isEmpty()) {
 						this.errorMessage = "The preresolved result is not valid. Compilation not complete for this project.";
 						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
