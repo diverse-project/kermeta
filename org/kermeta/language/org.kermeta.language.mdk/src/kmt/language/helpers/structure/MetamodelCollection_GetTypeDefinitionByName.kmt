@@ -6,7 +6,7 @@
  *            cguy
  */
 
-package kmt::language::helpers::structure;
+package kmt::language::helpers;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
@@ -17,6 +17,9 @@ using org::kermeta::language::structure
 using kermeta::standard
 using kermeta::exceptions
 
+// this tag is to woprkaround a problem of generation using K1toScala
+@ecore "true"
+package structure {
 class TypeDefinitionFinder {
 	/**
 	 * retrieves the TypeDefinition with the given full qualified name (ie. must include the metamodel name)
@@ -144,4 +147,5 @@ class TypeDefinitionFinder {
 			end
 		end
 	end
+}
 }
