@@ -50,7 +50,7 @@ public class CompilationTest extends TestCase {
         System.out.println("            to " + targetFolder);
         
         // Phase 1 : compiles without crashing
-        KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), false);
+        KermetaCompiler compiler = new KermetaCompiler(true, new StdioSimpleMessagingSystem(), new SimpleLocalFileConverter(), true, false, true, true);
         
         String currentKermetaVersion = "LATEST";
         List<String> repositories = new ArrayList<String>();
