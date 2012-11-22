@@ -1,4 +1,4 @@
-using kermeta::standard
+using kermeta_standard#kermeta::standard::*
 package root_package{
 	class C<Z>{
 		operation c() is do
