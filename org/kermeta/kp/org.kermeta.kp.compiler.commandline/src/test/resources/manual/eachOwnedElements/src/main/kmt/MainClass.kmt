@@ -1,9 +1,9 @@
-using kermeta::standard
-using kermeta::io::StdIO => stdio
-using rootPackage
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
+using #rootPackage::*
 
 package mainPackage{
-	class MainClass inherits kermeta::kunit::TestCase
+	class MainClass inherits library_utils#kermeta::kunit::TestCase
 	{
 		operation mainOperation() : Void is do 
 			var c : C := C.new

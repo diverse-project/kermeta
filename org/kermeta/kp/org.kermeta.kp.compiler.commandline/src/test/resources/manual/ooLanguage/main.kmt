@@ -1,19 +1,20 @@
-using kermeta::standard
+using kermeta_standard#kermeta::standard::*
+
 package pkg{
 	// persons who write documents
 	class Writer {
-		attribute name : kermeta::standard::String
+		attribute name : String
 	}
 	// generic concept for every document
 	abstract class Document {
 		reference author : Writer
-		attribute text : kermeta::standard::String
+		attribute text : String
 	}
 	// a "Document" from the real world
 	class Book inherits Document {}
 	// a specialized "Book"
 	class ChildBook inherits Book {
-		attribute minimalAge : kermeta::standard::Integer
+		attribute minimalAge : Integer
 	}
 
 	class AgeException inherits kermeta::exceptions::Exception {}
@@ -21,8 +22,8 @@ package pkg{
 		operation read(book : ChildBook) : Void is abstract
 	}
 	class Child inherits Reader {
-		attribute age : kermeta::standard::Integer
-		operation initialize(age : kermeta::standard::Integer) : Void is
+		attribute age : Integer
+		operation initialize(age : Integer) : Void is
 		do
 			self.age := age
 		end

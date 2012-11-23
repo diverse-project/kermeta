@@ -1,19 +1,21 @@
-KermetaProject "eachOwnedElements"
-	groupId = "my.group"
-	defaultMainClass = "mainPackage::MainClass"
-	defaultMainOperation = "mainOperation"
-	sources = {
-		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
-		require "${project.baseUri}/src/main/kmt/MM.kmt"
-		require "${project.baseUri}/src/main/kmt/MM_aspect.kmt"
-	}
-	dependencies = {
-		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
-		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/LATEST"
-		dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/LATEST"
-	}	packageEquivalences={
-		// indicates the real java name of a given package
-		// useful for deployed thirdparty metamodels
-		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
-		packageEquivalence "uml2" = "org.eclipse.uml2.uml"
-	}
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+resource library_utils = "mvn:org.kermeta.language/language.library.extended/LATEST"
+
+importProject kermeta_standard
+importProject library_utils
+
+project EachOwnedElements {
+	mainClass "#mainPackage::MainClass"
+	mainOperation "mainOperation"
+	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
+	import "${project.baseUri}/src/main/kmt/MM.kmt"
+	import "${project.baseUri}/src/main/kmt/MM_aspect.kmt"
+}
+
+
+/*packageEquivalences={
+	// indicates the real java name of a given package
+	// useful for deployed thirdparty metamodels
+	packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+	packageEquivalence "uml2" = "org.eclipse.uml2.uml"
+}*/
