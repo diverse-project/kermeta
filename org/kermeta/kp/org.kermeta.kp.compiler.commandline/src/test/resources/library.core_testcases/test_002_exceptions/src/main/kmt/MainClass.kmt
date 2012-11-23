@@ -1,7 +1,7 @@
-using kermeta::standard
-using kermeta::io::StdIO => stdio
-using kermeta::exceptions
-using rootPackage
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
+using kermeta_standard#kermeta::exceptions::*
+using #rootPackage::*
 
 package mainPackage{
 	class MainClass

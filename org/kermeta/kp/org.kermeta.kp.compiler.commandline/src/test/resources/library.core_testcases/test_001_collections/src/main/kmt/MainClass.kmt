@@ -1,6 +1,6 @@
-using kermeta::standard
-using kermeta::io::StdIO => stdio
-using testPackage
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
+using #testPackage::*
 
 package mainPackage{
 	class MainClass
