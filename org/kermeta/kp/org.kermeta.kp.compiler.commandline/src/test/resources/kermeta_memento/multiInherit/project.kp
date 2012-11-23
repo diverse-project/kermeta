@@ -1,6 +1,6 @@
-resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
 
-importProject library_standard
+importProject kermeta_standard
 
 project MultiInherit {
 	mainClass "#pkg::MultiInheritt"
