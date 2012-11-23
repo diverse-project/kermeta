@@ -15,10 +15,10 @@ package org::kermeta::language::prettyprinter;
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "PrettyPrinterAspect.kmt"
 */
-using kermeta::standard
-using kermeta::emfpersistence
-using kermeta::io
-using kermeta::utils::FileIO
+using kermeta::standard::*
+using kermeta::emfpersistence::*
+using kermeta::io::*
+using kermeta::utils::FileIO::*
 class PrettyPrinter
 {
 	operation testMain(arg: String) : Void is do 

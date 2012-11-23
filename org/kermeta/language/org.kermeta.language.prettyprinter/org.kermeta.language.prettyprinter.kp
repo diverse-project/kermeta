@@ -1,16 +1,16 @@
-KermetaProject "org.kermeta.language.prettyprinter"
-//version :  "0.0.1"
-groupId = "org.kermeta.language"
-defaultMainClass = "org::kermeta::language::prettyprinter::PrettyPrinter"
-defaultMainOperation = "testMain"
-sources = {
-	require "${project.baseUri}/src/main/kmt/PrettyPrinter.kmt"
-	require "${project.baseUri}/src/main/kmt/PrettyPrinterAspect.kmt"
+resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
 
-	
- }
- dependencies ={
 
-	dependency "language.model" URL="mvn:org.kermeta.language/language.library.core/LATEST"
+
+importProject kermeta_standard
+
+project kermeta_prettyprinter extends kermeta_standard {
+
+	mainClass "kermeta_prettyprinter#org::kermeta::language::prettyprinter::PrettyPrinter"
+	mainOperation "testMain"
 	
+	import "${project.baseUri}/src/main/kmt/PrettyPrinter.kmt"
+	import "${project.baseUri}/src/main/kmt/PrettyPrinterAspect.kmt"
+
 }
+

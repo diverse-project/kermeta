@@ -24,7 +24,7 @@
         </dependency>   
     	 <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>language.library.core</artifactId>
+            <artifactId>language.library.standard</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
     </dependencies>
