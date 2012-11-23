@@ -89,6 +89,12 @@
             <artifactId>language.model</artifactId>
             <version>${kermeta.version}</version>
         </dependency>
+        
+    	<dependency> <!-- TODO find a way to retrieve this information directly from the kp -->
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>language.library.standard</artifactId>
+            <version>${kermeta.version}</version>
+        </dependency>
     </dependencies>
 
 
