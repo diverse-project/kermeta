@@ -1,12 +1,10 @@
-KermetaProject "schools" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="CollegeMM::Test"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/main.kmt"
-	require "${project.baseUri}/CollegeMM.ecore"
-}
-dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject library_standard
+
+project Schools {
+	mainClass "CollegeMM::Test"
+	mainOperation "main"
+	import "${project.baseUri}/main.kmt"
+	import "${project.baseUri}/CollegeMM.ecore"
 }

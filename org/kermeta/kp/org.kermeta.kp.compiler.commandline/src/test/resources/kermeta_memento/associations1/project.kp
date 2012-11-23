@@ -1,10 +1,10 @@
-KermetaProject "associations1"
-	defaultMainClass "pkg::Test"
-	defaultMainOperation "main"
-	associations1 {
-		importFile "${project.baseUri}/main.kmt"
-	}
-	importProjectJar "${library_core.uri}"
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject library_standard
 	
-	library_core = "platform:/plugin/org.kermeta.language.library.core" alternative  "mvn:org.kermeta.language/language.library.core/LATEST"
-	
+
+project Associations1 {
+	mainClass "pkg::Test"
+	mainOperation "main"
+	import "${project.baseUri}/main.kmt"
+}

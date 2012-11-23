@@ -1,13 +1,9 @@
-KermetaProject "test.memento.MultiInherit" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="pkg::MultiInherit"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/main.kmt"
-}
-dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-}
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
 
- 
+importProject library_standard
+
+project MultiInherit {
+	mainClass "pkg::MultiInheritt"
+	mainOperation "main"
+	import "${project.baseUri}/main.kmt"
+}
