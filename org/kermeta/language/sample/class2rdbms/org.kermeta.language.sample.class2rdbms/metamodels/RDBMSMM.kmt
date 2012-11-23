@@ -1,6 +1,6 @@
 package RDBMSMM;
 
-using kermeta::standard
+using kermeta_standard#kermeta::standard::*
 
 class Table
 {

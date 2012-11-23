@@ -1,7 +1,7 @@
 package RDBMSMM;
 
-using kermeta::standard
-using kermeta::io::StdIO => stdio
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
 
 aspect class FKey
 {
@@ -27,7 +27,6 @@ aspect class FKey
 			src_table.cols.add(c)
 		}
 		Column.new
-	end 
-	
+	end 	
 }
 
