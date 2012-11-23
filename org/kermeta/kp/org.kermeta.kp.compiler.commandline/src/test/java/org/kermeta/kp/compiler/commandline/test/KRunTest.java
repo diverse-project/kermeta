@@ -108,10 +108,10 @@ public class KRunTest extends TestCase {
 		
 		// set location of urimap file
 		System.setProperty(ExtensibleURIConverterImplURIMapHelper.URIMAP_LOCATION_SYSTEM_PROPERTY, targetFolder+File.separator+"urimap.properties");
-		
+		kp.
 		ErrorAwareMessagingSystem errorAwareLogger = new ErrorAwareMessagingSystem();
-		KermetaRunner runner = new KermetaRunner(targetFolder+"classes/", 
-				Ecore2Bytecode.getEclipseName(kp),
+		KermetaRunner runner = new KermetaRunner(targetFolder+"classes/",
+				kp.getMetamodelName(), //Ecore2Bytecode.getEclipseName(kp),
 				fullClassPath,
 				errorAwareLogger);
 		ArrayList<String> params = new ArrayList<String>();
