@@ -98,7 +98,7 @@ aspect class FunctionType
 		//stdio.writeln("isSubtypeOf for FunctionType ...")
 		
 		result:=false
-		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+		if (expectedType.getQualifiedName.endsWith("#kermeta::standard::Object"))
 		then
 			result:=true
 		else
@@ -225,7 +225,7 @@ aspect class ProductType {
 				result:=bool
 			end
 		else
-			if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+			if (expectedType.getQualifiedName.endsWith("#kermeta::standard::Object"))
 			then
 				result:=true
 			else
@@ -267,7 +267,7 @@ aspect class Enumeration
 	method isSubTypeOf(expectedType : Type/*,  typeVariableToSet : Hashtable<TypeVariable, Type>*/) : Boolean is do
 		
 		result:=false
-		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+		if (expectedType.getQualifiedName.endsWith("#kermeta::standard::Object"))
 		then
 			result:=true
 		else
@@ -651,7 +651,7 @@ aspect class ObjectTypeVariable {
 			- si exp=Enumeration
 		
 		*/
-		if (expectedType.getQualifiedName.equals("kermeta::standard::Object"))
+		if (expectedType.getQualifiedName.endsWith("#kermeta::standard::Object"))
 		then
 			result:=true
 		else
