@@ -68,8 +68,8 @@ class TypeDefinitionFinder {
 			var metamodel : Metamodel init metamodels.detect{mm|not mm.getTypeDefinitionByPartialName(name).isVoid}
 			if(not metamodel.isVoid) then
 				result := metamodel.getTypeDefinitionByPartialName(name)
-			else
-				stdio.writeln("FAILED to find " + name + " in " +metamodels.size.toString + " metamodels")
+		//	else
+		//		stdio.writeln("FAILED to find " + name + " in " +metamodels.size.toString + " metamodels")
 			end
 		end
 		
