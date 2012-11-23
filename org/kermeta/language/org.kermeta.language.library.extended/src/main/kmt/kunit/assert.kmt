@@ -10,7 +10,7 @@
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
 package kermeta::kunit;
-using kermeta::standard
+using kermeta::standard::*
 
 /**
  * to be written ############################

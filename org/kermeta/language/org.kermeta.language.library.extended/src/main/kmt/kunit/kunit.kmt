@@ -16,11 +16,11 @@
  */
 package kermeta::kunit;
 
-using kermeta::standard
-using kermeta::utils
-using kermeta
-using org::kermeta::language::structure
-using kermeta::kunit
+using kermeta::standard::*
+using kermeta::utils::*
+using kermeta::*
+using org::kermeta::language::structure::*
+using kermeta::kunit::*
 using kermeta::io::StdIO => stdio
 
 
@@ -720,17 +720,19 @@ class TestRunner
 		"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
 
 		if not log.failures.empty then
-			stdio.errorln("\nFailures: ("+log.failures.size.toString+")")
-			log.failures.each { f | stdio.errorln("\n   " + f.toString) 	}
+			stdio.errorln("Failures: ("+log.failures.size.toString+")")
+			log.failures.each { f | 
+				stdio.errorln("   " + f.toString) 	}
 		end
 		if not log.errors.empty then
-			stdio.errorln("\nErrors: ("+log.errors.size.toString+")")	
+			stdio.errorln("Errors: ("+log.errors.size.toString+")")	
 			log.errors.each { e | 
-			stdio.errorln("\n   " + e.toString) 	}
+				stdio.errorln("   " + e.toString) 	}
 		end
 		if not log.harnessErrors.empty then
-			stdio.errorln("\nErrors from setUp or tearDown : ("+log.harnessErrors.size.toString+")")	
-			log.harnessErrors.each { e | stdio.errorln("\n   " + e.toString) 	}
+			stdio.errorln("Errors from setUp or tearDown : ("+log.harnessErrors.size.toString+")")	
+			log.harnessErrors.each { e | 
+				stdio.errorln("   " + e.toString) 	}
 		end
 		stdio.writeln("\n Summary: ")
 		stdio.writeln("   Number of launched tests : " + log.runtests.toString)
