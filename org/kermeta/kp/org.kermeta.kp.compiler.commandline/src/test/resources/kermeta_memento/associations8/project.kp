@@ -3,7 +3,7 @@ resource library_standard ="platform:/plugin/org.kermeta.language.library.standa
 importProject library_standard
 
 project Associations8 /*"test.memento.conditions"*/ {
-	mainClass "pkg::Test"
+	mainClass "#pkg::Test"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt"
 }

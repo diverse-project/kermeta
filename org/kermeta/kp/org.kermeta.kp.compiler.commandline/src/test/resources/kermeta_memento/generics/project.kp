@@ -3,7 +3,7 @@ resource library_standard ="platform:/plugin/org.kermeta.language.library.standa
 importProject library_standard
 
 project Generics {
-	mainClass "pkg::Genericity"
+	mainClass "#pkg::Genericity"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt"
 }
