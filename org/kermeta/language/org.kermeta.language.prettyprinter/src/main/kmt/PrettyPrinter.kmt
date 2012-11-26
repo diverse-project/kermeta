@@ -21,6 +21,7 @@ using kermeta::io::*
 using kermeta::utils::FileIO::*
 class PrettyPrinter
 {
+	@main ""
 	operation testMain(arg: String) : Void is do 
 		var repository : ResourceSet init ResourceSet.new
 		//var path : String init arg
