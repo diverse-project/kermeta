@@ -1,16 +1,18 @@
 resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+//resource kermeta_model ="platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.7-SNAPSHOT"
 
 
-
-importProject kermeta_standard
+//importProject kermeta_standard
 
 project kermeta_prettyprinter extends kermeta_standard {
+//project kermeta_prettyprinter {
 
 	mainClass "kermeta_prettyprinter#org::kermeta::language::prettyprinter::PrettyPrinter"
 	mainOperation "testMain"
 	
 	import "${project.baseUri}/src/main/kmt/PrettyPrinter.kmt"
 	import "${project.baseUri}/src/main/kmt/PrettyPrinterAspect.kmt"
+//	import "${kermeta_model.baseUri}/src/main/ecore/kermeta.ecore"
 
 }
 

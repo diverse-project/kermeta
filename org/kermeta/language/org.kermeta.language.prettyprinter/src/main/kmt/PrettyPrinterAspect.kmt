@@ -148,22 +148,18 @@ package org::kermeta::language{
 				
 			end
 		}
-	
-		aspect class ModelingUnit{
-			method prettyPrint(indent : Integer) : String is do
-				result := ""
-				self.packages.each{ onePackage |
-					result := result + onePackage.prettyPrint(indent)
-				}
-			end
-		}
+			
 		
 		aspect class NamedElement{
 			operation qualifiedName() : String is do
 				result:=""
 				if not name.isVoid then
-					if  container.isVoid.~not.andThen{x|container.isInstanceOf(NamedElement) and not container.isInstanceOf(ModelingUnit)} then
-						result:=container.asType(NamedElement).qualifiedName+"::"+name
+					if  container.isVoid.~not.andThen{x|container.isInstanceOf(NamedElement) } then
+						if(container.isInstanceOf(Metamodel)) then
+							result:=container.asType(NamedElement).qualifiedName+"#"+name
+						else
+							result:=container.asType(NamedElement).qualifiedName+"::"+name
+						end
 					else
 						result:=name
 					end
