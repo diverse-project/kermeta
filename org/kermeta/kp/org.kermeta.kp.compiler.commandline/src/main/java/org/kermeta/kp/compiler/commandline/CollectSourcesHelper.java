@@ -53,10 +53,12 @@ public class CollectSourcesHelper {
 
 			try {
 				java.net.URI fileUri;
+				
+				
 				boolean isLibraryCoreObject = sourceUrl.getUrl().toString()
 						.endsWith("baseType.kmt")
 						&& sourceUrl.getUrl().toString()
-								.contains("language.library.core");
+								.contains("language.library.standard");
 
 				boolean isDependency = sourceUrl.getSource() instanceof ImportProject
 						|| sourceUrl.getSource() instanceof ImportProjectSources;
@@ -224,6 +226,12 @@ public class CollectSourcesHelper {
 			KermetaProject kp, String kpFileUrl) throws IOException {
 
 		ArrayList<TracedURL> kpSourceFiles = new ArrayList<TracedURL>();
+		
+		logger.log(
+				MessagingSystem.Kind.DevINFO,
+				"getResolvedImportProjectSources found "+KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() + " kp projects while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
+				, getMessageGroup());
+		
 		for (KermetaProject importedSourceProject : KermetaProjectHelper
 				.collectKermetaProjectFromImportProjectSources(kp)) {
 			// get importfiles from this refered project

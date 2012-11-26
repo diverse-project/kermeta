@@ -514,7 +514,7 @@ public class KermetaCompiler {
 					kermeta.standard.JavaConversions.cleanCache();
 
 					// adding kermeta::standard::Objet if necessary					
-					addStandardObjectIfRequired(preresolvedMergedUnit.getResult());
+					//addStandardObjectIfRequired(preresolvedMergedUnit.getResult());
 					
 					
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreResolving...", LOG_MESSAGE_GROUP, 1);
@@ -1359,12 +1359,12 @@ public class KermetaCompiler {
 		this.muLoaders = muLoaders;
 	}
 	
-	/**
+	/* *
 	 * In case the modelingUnit doesn't have kermeta::standard::Object create it as aspect
 	 * @param mu
 	 * @return
 	 */
-	protected ModelingUnit addStandardObjectIfRequired(ModelingUnit mu){
+	/* protected ModelingUnit addStandardObjectIfRequired(ModelingUnit mu){
 		org.kermeta.language.structure.Metamodel kermetaMM = null;
 		for(org.kermeta.language.structure.Metamodel mm : mu.getMetamodels()){
 			if(mm.getName().equals("kermeta_standard")) kermetaMM = mm;
@@ -1410,5 +1410,5 @@ public class KermetaCompiler {
 		}
 		
 		return mu;
-	}
+	} */
 }

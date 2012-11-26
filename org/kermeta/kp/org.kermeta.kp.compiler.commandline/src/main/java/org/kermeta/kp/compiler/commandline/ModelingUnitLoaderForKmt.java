@@ -1,9 +1,14 @@
 package org.kermeta.kp.compiler.commandline;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.loader.kmt.scala.KMTparser;
@@ -61,29 +66,49 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
 				lastLoadErrorMessage = e.toString();
 				this.logger.debug(e.toString(),this.getClass().getName());
 				//e.printStackTrace();
+			} catch (IOException e) {
+				lastLoadErrorMessage = e.toString();
+				this.logger.debug(e.toString(),this.getClass().getName());
+				//e.printStackTrace();
 			}
 		} 
 		return mu;
 	}
 	
-	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, MalformedURLException  {
+	protected ModelingUnit loadKMT(String fileuri) throws URISyntaxException, IOException  {
 		//StructurePackage.eINSTANCE.setEFactoryInstance(StructureFactoryImpl.init());
 		//BehaviorPackage.eINSTANCE.setEFactoryInstance(BehaviorFactoryImpl.init());
 
 				
-		KMTparser parser = new KMTparser();		
-		java.io.File file = new java.io.File(FileHelpers.StringToURI(fileuri));
-		Iterator<String> src = scala.io.Source.fromFile( file,
+		KMTparser parser = new KMTparser();
+		
+		URL url =new URL(fileuri);
+		//URLConnection yc = url.openStream();
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream())); 
+        String inputLine;
+        StringBuilder buf = new StringBuilder();
+		while ((inputLine = in.readLine()) != null) {
+			buf.append(inputLine+"\n"); 
+		}
+        in.close();
+		
+        
+        String filename = fileuri.substring(0, fileuri.lastIndexOf("/"));
+		
+		//java.io.File file = new java.io.File(FileHelpers.StringToURI(fileuri));
+		
+		
+		/*Iterator<String> src = scala.io.Source.fromFile( file,
 				"UTF8").getLines();
 
 		StringBuffer buf = new StringBuffer();
 		while (src.hasNext()) {
 			buf.append(src.next() + "\n");
-		}
+		}*/
 
 
 		ModelingUnit mu = parser.load(FileHelpers.StringToURL(fileuri), buf.toString(), logger);
-		mu.setName(file.getName());
+		mu.setName(filename);
 		return mu;
 
 	}
