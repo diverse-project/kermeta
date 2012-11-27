@@ -10,8 +10,10 @@ package kermeta{
 package emfpersistence{
 
 
-@CompilerIgnore "true"
-class Resource {        @CompilerIgnore "true"
+	@CompilerIgnore "true"
+	@ScalaCompilerName "k2.persistence.Resource"
+	class Resource {        
+		@CompilerIgnore "true"
          operation load(arg0:Map<Object,Object>) : Void is do
 
           end
@@ -106,9 +108,11 @@ class Resource {        @CompilerIgnore "true"
          operation eSetDeliver(arg0:Boolean) : Void is do
 
           end
-}
-@CompilerIgnore "true"
-class ResourceSet {        @CompilerIgnore "true"
+	}
+	@CompilerIgnore "true"
+	@ScalaCompilerName "k2.persistence.ResourceSet"
+	class ResourceSet {        
+		@CompilerIgnore "true"
          operation getResource(arg0:String,arg1:Boolean) : Resource is do
 
           end
@@ -156,7 +160,7 @@ class ResourceSet {        @CompilerIgnore "true"
          operation resolveAllProxies() : Void is do
 
           end
-}
+	}
 
 }
 

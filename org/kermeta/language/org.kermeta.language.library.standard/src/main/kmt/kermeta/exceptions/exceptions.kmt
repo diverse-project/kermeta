@@ -7,6 +7,7 @@ package kermeta{
 package exceptions{
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.Exception"
 /** Super class of all Exceptions in Kermeta. 
  * Unlike in Kermata 1, where is was possible to"raise" any object, 
  * in Kermeta 2 only objects that inherits from this kermeta::exceptions::Exception can be used in a "raise" statement. 
@@ -99,101 +100,130 @@ class Exception
 }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.RuntimeError"
 class RuntimeError inherits Exception {
 	
 	attribute expression : Expression
 }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.CallOnVoidTarget"
 class CallOnVoidTarget inherits RuntimeError {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.TypeCastError"
 class TypeCastError inherits RuntimeError {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.NotImplementedException"
 class NotImplementedException inherits RuntimeError {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.UpperBoundReachedError"
 class UpperBoundReachedError inherits RuntimeError {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.AbstractClassInstantiationError"
 class AbstractClassInstantiationError inherits RuntimeError {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.IncompatibleTypeError"
 class IncompatibleTypeError inherits RuntimeError {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.DivisionByZero"
 class DivisionByZero inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.OverflowError"
 class OverflowError inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.VoidOperandError"
 class VoidOperandError inherits Exception {}
  
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.StringFormatException"
 class StringIndexOutOfBound inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.CallOnVoidTarget"
 class StringFormatException inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.IndexOutOfBound"
 class IndexOutOfBound inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.EmptyCollection"
 class EmptyCollection inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.IteratorIsOff"
 class IteratorIsOff inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.IOException"
 class IOException inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.FileNotFoundException"
 class FileNotFoundException inherits IOException {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ConstraintViolatedException"
 /** Special Exception raised when a constraint has been violated.
  */
 class ConstraintViolatedException inherits Exception {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ConstraintViolatedPre"
 /** Special Exception raised when a precondition has been violated.
  * This constraint is usually raised when the program is run in a mode where operation precondition check is activated 
  */
 class ConstraintViolatedPre inherits ConstraintViolatedException {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ConstraintViolatedPost"
 /** Special Exception raised when a postcondition has been violated.
  * This constraint is usually raised when the program is run in a mode where operation postcondition check is activated 
  */
 class ConstraintViolatedPost inherits ConstraintViolatedException {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ConstraintViolatedInv"
 /** Special Exception raised when an invariant has been violated.
  * This constraint is usually raised by one of the following : checkInvariant, checkAllInvariants 
  */
 class ConstraintViolatedInv inherits ConstraintViolatedException {}
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ResourceLoadException"
 class ResourceLoadException inherits Exception { }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ResourceSaveException"
 class ResourceSaveException inherits Exception {
 }
-
+/*
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ResourceMixedLevelsException"
 class ResourceMixedLevelsException inherits ResourceSaveException { }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ResourceCreateException"
 class ResourceCreateException inherits Exception { }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ResourceUnconformityException"
 class ResourceUnconformityException inherits Exception { }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.UnregisteredMetamodelException"
 class UnregisteredMetamodelException inherits Exception { }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.DynamicExpressionException"
 class DynamicExpressionException inherits Exception { }
+*/
 }}

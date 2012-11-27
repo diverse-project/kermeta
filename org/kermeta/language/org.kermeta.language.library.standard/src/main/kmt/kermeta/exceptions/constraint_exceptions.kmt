@@ -7,6 +7,7 @@ package kermeta{
 package exceptions{
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.exceptions.ConstraintsDiagnostic"
 class ConstraintsDiagnostic 
 {
 	attribute setConstraints : Bag<ConstraintViolatedInv>

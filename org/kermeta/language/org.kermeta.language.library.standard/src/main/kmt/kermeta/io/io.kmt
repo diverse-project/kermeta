@@ -23,6 +23,7 @@ package io{
  * <img src="platform:/plugin/org.kermeta.documentation/src/figures/io_package.png"/>
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.io.FileIO"
 singleton FileIO
 {
 	/**
@@ -56,6 +57,7 @@ singleton FileIO
 
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.io.StdIO"
 singleton StdIO
 {
 	/**

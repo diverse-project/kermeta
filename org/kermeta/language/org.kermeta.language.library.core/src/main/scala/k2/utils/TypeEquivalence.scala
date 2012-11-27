@@ -7,12 +7,12 @@ object TypeEquivalence {
 	 
   var packageEquivelence :  java.util.HashMap[String,String] ={
     var pack1 : java.util.HashMap[String,String]= new java.util.HashMap[String,String]();
-    pack1.put("kermeta_standard.kermeta.standard","k2.standard");
-    pack1.put("kermeta_standard.kermeta.io","k2.io");
-    pack1.put("kermeta_standard.kermeta.exceptions","k2.exceptions");
-    pack1.put("kermeta_standard.kermeta.persistence","k2.persistence");
-    pack1.put("kermeta_standard.kermeta.emfpersistence","k2.persistence");
-    pack1.put("kermeta_standard.kermeta.utils","k2.utils");
+    //pack1.put("kermeta_standard.kermeta.standard","k2.standard");
+    //pack1.put("kermeta_standard.kermeta.io","k2.io");
+    //pack1.put("kermeta_standard.kermeta.exceptions","k2.exceptions");
+    //pack1.put("kermeta_standard.kermeta.persistence","k2.persistence");
+    //pack1.put("kermeta_standard.kermeta.emfpersistence","k2.persistence");
+    //pack1.put("kermeta_standard.kermeta.utils","k2.utils");
     pack1.put("kermeta_standard.kermeta","org.kermeta")
     pack1.put("kermeta_standard.kermeta.language","org.kermeta.language")				
     pack1.put("kermeta_standard.kermeta.language.structure","org.kermeta.language.structure")

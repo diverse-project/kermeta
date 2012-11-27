@@ -14,15 +14,18 @@ package standard{
  * TODO : miss operations 
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Void"
 class Void {
 } 
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Model"
 class Model
 {
 }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Object"
 class Object
 {	
 
@@ -250,14 +253,15 @@ class Object
 	end
 }
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.String"
 class String {
 		@CompilerIgnore "true"
 		operation plus(other : Object) : String is do
 		end
     
-	@CompilerIgnore "true"
-         operation equals(arg0:Object) : Boolean is do
-          end
+		@CompilerIgnore "true"
+        operation equals(arg0:Object) : Boolean is do
+        end
 
         @CompilerIgnore "true"
          operation toString() : String is do
@@ -519,8 +523,7 @@ class String {
         @CompilerIgnore "true"
         operation toInteger() : Integer is do
         end
-
-        //@CompilerIgnore "true"
+        
         @Deprecated "true"
         operation replaceKeyword(keyword : String, replacement : String) : String is do
         end
@@ -541,21 +544,13 @@ class String {
 		@CompilerIgnore "true"
         operation toURI() : URI is do
         end
-		
-/*
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-        @CompilerIgnore "true"
-  */
+
 }
 
 @CompilerIgnore "true"
-class Integer inherits Numeric<Integer> {        @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Integer"
+class Integer inherits Numeric<Integer> {        
+		@CompilerIgnore "true"
          operation numberOfLeadingZeros(arg0:Integer) : Integer is do
 
           end
@@ -726,7 +721,9 @@ class Integer inherits Numeric<Integer> {        @CompilerIgnore "true"
 
 }
 @CompilerIgnore "true"
-class Boolean {        @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Boolean"
+class Boolean {        
+		@CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -811,6 +808,7 @@ class Boolean {        @CompilerIgnore "true"
 
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Random"
 class Random {
 	@CompilerIgnore "true"
 	operation equals(arg0:Object) : Boolean is do end
@@ -848,7 +846,9 @@ class Random {
 
 
 @CompilerIgnore "true"
-class Date inherits Comparable<Date> {        @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Date"
+class Date inherits Comparable<Date> {        
+		@CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -982,7 +982,9 @@ class Date inherits Comparable<Date> {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
-class Short inherits Numeric<Short> {        @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Short"
+class Short inherits Numeric<Short> {        
+		@CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
 
           end
@@ -1080,6 +1082,7 @@ class Short inherits Numeric<Short> {        @CompilerIgnore "true"
  * TODO : miss operations 
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Long"
 class Long inherits Numeric<Long> {
 	@CompilerIgnore "true"
     operation equals(obj : Object) : Boolean is do end
@@ -1108,6 +1111,7 @@ class Long inherits Numeric<Long> {
 
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Double"
 class Double inherits Numeric<Double> {        
 		 @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
@@ -1223,6 +1227,7 @@ class Double inherits Numeric<Double> {
           end
 }
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Float"
 class Float inherits Numeric<Float> {        
 		 @CompilerIgnore "true"
          operation equals(arg0:Object) : Boolean is do
@@ -1338,7 +1343,9 @@ class Float inherits Numeric<Float> {
           end
 }
 @CompilerIgnore "true"
-class StringBuffer {        @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.StringBuffer"
+class StringBuffer {        
+		@CompilerIgnore "true"
          operation toString() : String is do
 
           end
@@ -1554,6 +1561,7 @@ class StringBuffer {        @CompilerIgnore "true"
           end
 }
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Character"
 class Character {        
 		/*@CompilerIgnore "true"
          operation isJavaIdentifierStart(arg0:Character) : Boolean is do
@@ -1871,6 +1879,7 @@ class Character {
  * Sub-classes only has to implement abstract operation plus.
   */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Summable"
 abstract class Summable<G> {
 	/**
 	 * Summarization method to be implemented by any summable class.
@@ -1881,6 +1890,7 @@ abstract class Summable<G> {
 }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Comparable"
 abstract class Comparable<G> {
 	
 	/**
@@ -1917,6 +1927,7 @@ abstract class Comparable<G> {
 	end
 }
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Numeric"
 //We propose to put a concrete Numeric in order to allow Numeric.new to create an implicit Float.new
 class Numeric<G> inherits Summable<G>,Comparable<G> {
 	operation minus(other : G) : G is abstract
@@ -1927,6 +1938,7 @@ class Numeric<G> inherits Summable<G>,Comparable<G> {
 }
 
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.URI"
 class URI{
 	operation toString() : String is do end
 	operation appendSegment(pathSegment : String ) : URI is do end

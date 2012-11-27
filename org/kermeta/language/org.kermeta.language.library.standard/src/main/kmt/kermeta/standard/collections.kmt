@@ -26,6 +26,7 @@ package standard{
  * TODO : miss operations 
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Map"
 abstract class Map[K,V] 
 {
 }
@@ -33,6 +34,7 @@ abstract class Map[K,V]
  * Collection is the root abstract class for all kermeta collections
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Collection"
 abstract class Collection[G] 
 {
 	/**
@@ -385,6 +387,7 @@ abstract class Collection[G]
  * (with regards to the G.equals(Object) operation)
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Set"
 class Set[G] inherits Collection[G]
 {
 	/**
@@ -515,6 +518,7 @@ class Set[G] inherits Collection[G]
  * Bag is a concrete non-ordered Collection allowing duplicates
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Bag"
 class Bag[G] inherits Collection[G]
 {
 	/**
@@ -616,6 +620,7 @@ class Bag[G] inherits Collection[G]
  * An OrderedCollection is the root abstract class for all ordered Collections.
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.OrderedCollection"
 abstract class OrderedCollection[G] inherits Collection[G] {
 	
 	/**
@@ -693,6 +698,7 @@ abstract class OrderedCollection[G] inherits Collection[G] {
  * An OrderedSet is a Set that contained ordered distinct elements
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.OrderedSet"
 class OrderedSet[G] inherits Set[G], OrderedCollection[G]
 {
 	/**
@@ -758,6 +764,7 @@ class OrderedSet[G] inherits Set[G], OrderedCollection[G]
  * A Sequence is an OrderedCollection of elements allowing duplicates
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Sequence"
 class Sequence[G] inherits Bag[G], OrderedCollection[G]
 {
 	/**
@@ -813,6 +820,7 @@ class Sequence[G] inherits Bag[G], OrderedCollection[G]
  * See also Collection<G>.iterator()
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.Iterator"
 class Iterator<G>
 {
 	/**
@@ -851,6 +859,7 @@ class Iterator<G>
  * See also Collection[G].indexedEach
  */
 @CompilerIgnore "true"
+@ScalaCompilerName "k2.standard.EachContext"
 class EachContext {
 	attribute index : Integer
 	attribute isFirst : Boolean
