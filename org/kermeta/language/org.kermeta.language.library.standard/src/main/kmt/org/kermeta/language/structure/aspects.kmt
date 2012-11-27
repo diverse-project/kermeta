@@ -1,13 +1,14 @@
-package org{
-	package kermeta{
-		package language{ 
-			package structure{
-				aspect class Class inherits ParameterizedType{
-					@CompilerIgnore "true"
-					operation new() : kermeta::standard::Object is do
-					end
-				} 
-			}
+@kermeta_standard "true"
+package org;
+
+package kermeta{
+	package language{ 
+		package structure{
+			aspect class Class inherits ParameterizedType{
+				@CompilerIgnore "true"
+				operation new() : kermeta::standard::Object is do
+				end
+			} 
 		}
 	}
 }
