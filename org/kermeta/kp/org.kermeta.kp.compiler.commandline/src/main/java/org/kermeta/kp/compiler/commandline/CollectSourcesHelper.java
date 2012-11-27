@@ -66,7 +66,7 @@ public class CollectSourcesHelper {
 					String jarUrl = sourceUrl.getUrl().toString();
 					fileUri = java.net.URI.create(jarUrl.substring(4,
 							jarUrl.indexOf("!")));
-					logger.debug("jar detected trying to find its location = "
+					logger.debug("   jar detected trying to find its location = "
 							+ fileUri, getMessageGroup());
 				} else {
 					fileUri = sourceUrl.getUrl().toURI();
@@ -76,19 +76,19 @@ public class CollectSourcesHelper {
 				if (newerDate < file.lastModified()) {
 					if (!(isDependency || isLibraryCoreObject)) {
 						logger.debug(
-								"changed to newer file = " + fileUri.toString(),
+								"   changed to newer file = " + fileUri.toString(),
 								getMessageGroup());
 						newerDate = file.lastModified();
 						result = sourceUrl;
 					} else {
 						logger.debug(
-								"ignoring url that might contains Object from latest modified= "
+								"   ignoring url that might contains Object from latest modified= "
 										+ fileUri.toString(), getMessageGroup());
 					}
 				}
 
 			} catch (Exception e) {
-				logger.warn("cannot get lastModified of " + sourceUrl.getUrl(),
+				logger.warn("   cannot get lastModified of " + sourceUrl.getUrl(),
 						getMessageGroup());
 			}
 

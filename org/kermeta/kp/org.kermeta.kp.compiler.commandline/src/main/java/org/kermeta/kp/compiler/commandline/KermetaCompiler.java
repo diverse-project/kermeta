@@ -678,6 +678,11 @@ public class KermetaCompiler {
 			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
 			writer.close();
 			
+			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
+			
+			// copy all internal sources in exported resource for possible reuse by a project using extends
+			CompilerFileCopy.copyInternalSourcesToResource(kp, targetGeneratedResourcesFolder, logger, varExpander);
+			
 			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_TYPE_SET)){
 				logger.debug("stopping after phase "+PHASE_TYPE_SET, LOG_MESSAGE_GROUP);
 				return resolvedUnit;
@@ -689,7 +694,7 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
-			KpVariableExpander varExpander = new KpVariableExpander(kpFileURL, kp, fileSystemConverter, logger);
+			
 
 			List<String> fullBinaryDependencyClassPath = getImportProjetClasspath(kp, varExpander);
 			fullBinaryDependencyClassPath.addAll(additionalClassPath);
