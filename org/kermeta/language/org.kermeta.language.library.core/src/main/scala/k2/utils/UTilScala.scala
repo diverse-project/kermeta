@@ -137,7 +137,12 @@ object UTilScala {
    def getQualifiedNameClassJava(td : org.kermeta.language.structure.GenericTypeDefinition, sep: _root_.java.lang.String):String ={
        // if doesn't comes from ecore -> metamodel + package name only
 		if(!TagUtil.hasEcoreTag(td)){
+		  if(TagUtil.hasScalaCompilerNameTag(td)) {
+			  return TagUtil.getScalaCompilerNameTag(td)
+		  }
+		  else {
 		   return    k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedNameMetamodelPackage(td.eContainer().asInstanceOf[org.kermeta.language.structure.Package],sep)) + sep+ td.getName();
+		  }
 		}
 		else{
 		  // package name only
@@ -156,8 +161,8 @@ object UTilScala {
 
 
 
-   def getQualifiedNameClassKermeta(pack : org.kermeta.language.structure.GenericTypeDefinition, sep: _root_.java.lang.String):_root_.java.lang.String ={
-       return    getQualifiedNamePackage(pack.eContainer().asInstanceOf[org.kermeta.language.structure.Package],sep) + sep+ pack.getName();
+   def getQualifiedNameClassKermeta(typeDef : org.kermeta.language.structure.GenericTypeDefinition, sep: _root_.java.lang.String):_root_.java.lang.String ={       
+       return    getQualifiedNamePackage(typeDef.eContainer().asInstanceOf[org.kermeta.language.structure.Package],sep) + sep+ typeDef.getName();
     }
  def getQualifiedNameTypeKermeta(pack : org.kermeta.language.structure.Type, sep: _root_.java.lang.String):_root_.java.lang.String ={
      if (pack.isInstanceOf[org.kermeta.language.structure.Class]){
