@@ -145,7 +145,7 @@ object Util extends LogAspect {
   }
 
   /**
-   * Check if a model element has an
+   * Check if a model element has an CompilerIgnore tag
    * @param obj model element to test
    * @return true if CompilerIgnore tag is found
    */
@@ -153,6 +153,22 @@ object Util extends LogAspect {
     obj.getKOwnedTags.exists(e => "CompilerIgnore".equals(e.asInstanceOf[Tag].getName()))
   }
 
+  /**
+   * Check if a model element has an ScalaCompilerName tag
+   * @param obj model element to test
+   * @return true if ScalaCompilerName tag is found
+   */
+  def hasScalaCompilerNameTag(obj: KermetaModelElement): Boolean = {
+    obj.getKOwnedTags.exists(e => "ScalaCompilerName".equals(e.asInstanceOf[Tag].getName()))
+  }
+  /**
+   * Check if a model element has an ScalaCompilerName Tag
+   * @param obj model element to test
+   * @return the value of the tag
+   */
+  def getScalaCompilerNameTag(obj: KermetaModelElement): String = {
+    obj.getKOwnedTags().find(e => "ScalaCompilerName".equals(e.asInstanceOf[Tag].getName())).get.getValue()
+  }
   /**
    * Utility method, generate src file
    * @param repName Target directory name, sub directory separated by .

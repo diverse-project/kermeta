@@ -751,7 +751,12 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
         }
         else{
-        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        	 if(Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)){
+	        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(Util.getScalaCompilerNameTag(c)))
+	        }
+	        else{
+	        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+	        }
         }
         return res.toString()
 
@@ -814,8 +819,12 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         var res = new StringBuilder
         /*if (Util.isAMapEntry(c))
           res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
-        res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
-        
+        if(Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)){
+        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(Util.getScalaCompilerNameTag(c)))
+        }
+        else{
+        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        }
         
         return res.toString()
 
