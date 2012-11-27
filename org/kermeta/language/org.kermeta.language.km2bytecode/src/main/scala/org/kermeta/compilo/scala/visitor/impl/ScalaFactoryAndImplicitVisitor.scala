@@ -11,14 +11,14 @@ import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.language.util.ModelingUnit
 
-class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
+class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfiguration) extends IVisitor with LogAspect {
 
   var viewDef: StringBuilder = _
   var implicitDef: StringBuilder = _
   var actualPackage: String = _
   var factoryDefClass: StringBuilder = _
 
-  var visitor: PackageVisitor = new PackageVisitor
+  var visitor: PackageVisitor = new PackageVisitor(compilerConfiguration)
 
   def initForEclipseEcorePackage(parentpack: Package, pack: Package): String = {
     var packNam = pack.getName()
@@ -228,13 +228,14 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
     res.append("}\n")
 
-    val mrg = new MainRunnerGenerator(ecorePackages, visitor)
+    val mrg = new MainRunnerGenerator(ecorePackages, visitor, compilerConfiguration)
     // generates the default runner file
     mrg.generateDefaultRunner(par, res)
     Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "DefaultRunner", res.toString())
 
     // generate the Util.scala file
-    UtilObjectGenerator.genetateUtilObject
+    // TODO check if really necessary, methods are already in the Aspect
+    // UtilObjectGenerator.genetateUtilObject
 
     par.getMetamodels().foreach(mm => new AcceptableMetamodel(mm).accept(this))
 
@@ -299,7 +300,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
     if (!Util.hasCompilerIgnoreTag(par)) {
       // start by creating the main operation files
-      val mrg = new MainRunnerGenerator(ecorePackages, visitor)
+      val mrg = new MainRunnerGenerator(ecorePackages, visitor, compilerConfiguration)
       mrg.generateRunnersForClassDefinition(par)
 
       // then contributes the implicit conversions to the various String Builders (implicitDef, viewDef and factoryDefClass)      

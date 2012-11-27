@@ -17,7 +17,7 @@ import org.kermeta.language.util.ModelingUnit
 
 class Compiler extends LogAspect {
 
-    def compile(url : _root_.java.lang.String){
+    def compile(url : _root_.java.lang.String, configuration : CompilerConfiguration){
         log.debug("Cleaning Output Step")
         Util.cleanFolder(GlobalConfiguration.outputFolder)
         Util.cleanFolder(GlobalConfiguration.outputBinFolder)
@@ -28,7 +28,9 @@ class Compiler extends LogAspect {
 
         /* Loading Model KM Step */
         var startTime = System.currentTimeMillis
-        var v : IVisitable = new AcceptableModelingUnit(t.loadKM(url).asInstanceOf[ModelingUnit]) /* Load KM Model */
+        var mu : ModelingUnit = t.loadKM(url).asInstanceOf[ModelingUnit] /* Load KM Model */
+        configuration.kermetaStandardMMName = Util.getKermetaStandardMetamodelName(mu)
+        var v : IVisitable = new AcceptableModelingUnit(mu) 
 
         //println(GlobalConfiguration.outputFolder)
         var fi  = new File(url);
@@ -46,12 +48,12 @@ class Compiler extends LogAspect {
         log.info("Loading KM model step complete in "+(midTime)+" millisecondes ")
         startTime = System.currentTimeMillis
         /* Target Model Aspect Generation */
-        var visitorAspect = new ScalaAspectVisitor
+        var visitorAspect = new ScalaAspectVisitor(configuration)
 
         
         var futur = VisitorAsyncUtility.runAfterCallback(v,visitorAspect)
         /* Utility Files & Factory Generation */
-        var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor
+        var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor(configuration)
         VisitorAsyncUtility.runAfter(v,visitorImplicitFactory)
 
         /* Synchronisation Step */

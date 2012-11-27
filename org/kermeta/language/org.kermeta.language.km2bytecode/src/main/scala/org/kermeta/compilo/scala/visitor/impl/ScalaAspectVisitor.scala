@@ -10,7 +10,7 @@ import org.kermeta.compilo.scala.visitor._
 import scala.collection.JavaConversions._
 import org.kermeta.language.util.ModelingUnit
 
-class ScalaAspectVisitor extends IVisitor with LogAspect {
+class ScalaAspectVisitor(compilerConfiguration : CompilerConfiguration) extends IVisitor with LogAspect {
 	
   def visit(mu : ModelingUnit){
     //PreCompiler.visit(par)
@@ -25,11 +25,11 @@ class ScalaAspectVisitor extends IVisitor with LogAspect {
   }
 
   def visit(par : Package){
-    var util = new PackageVisitor
+    var util = new PackageVisitor(compilerConfiguration)
     
     var actualPackage = util.getQualifiedName(par)
     if (Util.doesGeneratePackage(actualPackage)){
-      var subTask = new ScalaAspectPackageVisitorRunnable
+      var subTask = new ScalaAspectPackageVisitorRunnable(compilerConfiguration)
       VisitorAsyncUtility.runAfter(new AcceptablePackage(par),subTask)
       par.getNestedPackage.foreach(p=> {new AcceptablePackage(p).accept(this)})
     }
@@ -45,13 +45,13 @@ class ScalaAspectVisitor extends IVisitor with LogAspect {
 
 
 
-class ScalaAspectPackageVisitorRunnable extends IVisitor with LogAspect  {
+class ScalaAspectPackageVisitorRunnable(compilerConfiguration : CompilerConfiguration) extends IVisitor with LogAspect  {
 
   def visit(par : ModelingUnit){Console.println("multithread error")}
 	
   var actualPackage : String = ""
 	
-  var visitor : PackageVisitor = new PackageVisitor
+  var visitor : PackageVisitor = new PackageVisitor(compilerConfiguration)
     
   def visit(mm : Metamodel){Console.println("multithread error")}
   

@@ -137,8 +137,8 @@ object Main extends LogAspect {
     if (inputFile != "") {
       log.info("KM compilation begin on " + inputFile)
       time = System.currentTimeMillis()
-      
-      compilo.compile(inputFile)
+      var configuration = new CompilerConfiguration 
+      compilo.compile(inputFile, configuration)
       endtime = System.currentTimeMillis()
       println("time to generate scala : " + (endtime - time))
     } else {

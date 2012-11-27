@@ -67,6 +67,7 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 						mu.setName(urlToLoad.getUrl().toString());
 				}
 				// if comes from an import file, forces metamodel name to the one provided in the kp
+				// if metamodel name of the importFile container is kermeta_standard, then this is the new version of kermeta_standard, so add a tag to point it
 				if(urlToLoad.getSource() instanceof org.kermeta.kp.ImportFile){
 					org.kermeta.kp.ImportFile importFile = (ImportFile) urlToLoad.getSource();
 					String mmName = kp.getMetamodelName();

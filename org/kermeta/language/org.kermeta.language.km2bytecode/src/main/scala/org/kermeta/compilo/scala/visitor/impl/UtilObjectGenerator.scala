@@ -5,13 +5,13 @@ import org.kermeta.compilo.scala.GlobalConfiguration
 object UtilObjectGenerator {
   //FIXME: Duplicated code with the getMetaClass generated in ClassDefinitionAspect
 
-  def genetateUtilObject() = {
+  def genetateUtilObject(kermeta_standardMMName : String) = {
     var template = new StringBuilder
     template.append("package scalaUtil\n object Util {\n")
     template.append("    def getMetaClass(t:String):org.kermeta.language.structure.Class={\n")
     template.append("       var cd : _root_.org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(t);\n")
     template.append("       if (cd !=null){\n")
-    template.append("            var cl = " + org.kermeta.compilo.scala.GlobalConfiguration.kermeta_standardMM + ".org.kermeta.language.structure. " + GlobalConfiguration.factoryName + ".createClass\n")
+    template.append("            var cl = " + kermeta_standardMMName + ".org.kermeta.language.structure. " + GlobalConfiguration.factoryName + ".createClass\n")
     template.append("            cl.setTypeDefinition(cd)\n")
     template.append("            return cl\n")
     template.append("       } else\n")

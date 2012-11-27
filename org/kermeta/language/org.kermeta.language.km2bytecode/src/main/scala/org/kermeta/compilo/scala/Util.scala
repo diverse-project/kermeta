@@ -11,6 +11,7 @@ package org.kermeta.compilo.scala
 import org.kermeta.language._
 import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
+import org.kermeta.language.util.ModelingUnit
 import java.io.File
 import java.io.IOException
 import java.util._
@@ -383,6 +384,19 @@ object Util extends LogAspect {
     }
   }
 
+  /**
+   * return the metamodel that defines the KermetaStandard reflexivity layer
+   */
+  def getKermetaStandardMetamodelName(mu : ModelingUnit) : String = {
+    mu.getMetamodels().find(mm => mm.getKOwnedTags.exists(t =>  t.getName().equals("kermeta_standard"))) match {
+      case Some(m)  => {
+      	 m.getName()
+      }
+      case _ => {
+        "kermeta_standard"
+      }
+    }
+  }
 }
 
    

@@ -38,6 +38,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.emf.common.util.URI;
+import org.kermeta.compilo.scala.CompilerConfiguration;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.DiagnosticModel;
 import org.kermeta.kp.ImportFile;
@@ -1073,7 +1074,7 @@ public class KermetaCompiler {
 			
 		}
 		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
-		km2ScalaCompiler.compile(URLDecoder.decode(kmFileURL,"UTF-8"));
+		km2ScalaCompiler.compile(URLDecoder.decode(kmFileURL,"UTF-8"), new CompilerConfiguration());
 	}
 
 	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) {

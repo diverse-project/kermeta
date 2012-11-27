@@ -1,6 +1,7 @@
 package org.kermeta.compilo.scala.visitor.impl
 import org.kermeta.language.util.ModelingUnit
 import org.kermeta.compilo.scala.GlobalConfiguration
+import org.kermeta.compilo.scala.CompilerConfiguration
 import org.kermeta.language.structure.Operation
 import org.kermeta.language.structure.Package
 import org.kermeta.language.structure.ClassDefinition
@@ -12,7 +13,7 @@ import org.kermeta.language.structure.Metamodel
 /**
  * generates the classes and objects for the declared main classes
  */
-class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: PackageVisitor) {
+class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: PackageVisitor,compilerConfiguration : CompilerConfiguration) {
 
   def generateDefaultRunner(mu: ModelingUnit, res: StringBuilder) {
 
@@ -28,7 +29,7 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     try {
       
       
-      mainClassDef = mu.getAllMetamodelsContents().filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => (new PackageVisitor).getQualifiedNameKermeta(e.asInstanceOf[ClassDefinition]).equals(mainClass)).toList.first
+      mainClassDef = mu.getAllMetamodelsContents().filter { e => e.isInstanceOf[ClassDefinition] }.filter(e => (new PackageVisitor(compilerConfiguration)).getQualifiedNameKermeta(e.asInstanceOf[ClassDefinition]).equals(mainClass)).toList.first
       
       mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter { e => e.getName.equals(mainOperation) }.first.asInstanceOf[Operation].getOwnedParameter.size
     } catch {

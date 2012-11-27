@@ -28,7 +28,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
 	} 
 }*/
 
-  def visitClassDefinition(thi: ClassDefinition, res: StringBuilder): Unit = {
+  def visitClassDefinition(thi: ClassDefinition, res: StringBuilder, compilerConfiguration : CompilerConfiguration): Unit = {
     res.append("import " + "_root_." + GlobalConfiguration.frameworkGeneratedPackageName + "." + GlobalConfiguration.implicitConvTraitName + "._\n")
     if (Util.hasEcoreTag(thi) && !Util.isAMapEntry(thi)) {
       res.append("trait ")
@@ -72,11 +72,11 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       thi.getOwnedAttribute foreach (a => visit(a, res))
       thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op) || op.getBody != null) foreach (op => visit(op, res))
       this.generateInvariants(thi, res)
-      this.generategetQualifiedName(thi, res)
+      this.generategetQualifiedName(thi, res, compilerConfiguration)
       res.append("}\n")
 
     } else if (Util.hasEcoreTag(thi) && Util.isAMapEntry(thi)) {
-      this.generateMapEntryWrapper(thi, res)
+      this.generateMapEntryWrapper(thi, res, compilerConfiguration)
     } else {
       res.append("trait ")
       res.append(thi.getName())
@@ -111,18 +111,23 @@ trait ClassDefinitionAspect extends ObjectVisitor {
 
       /* Generate Invariants */
       this.generateInvariants(thi, res)
-      this.generategetQualifiedName(thi, res)
+      this.generategetQualifiedName(thi, res, compilerConfiguration)
 
       res.append("}\n")
     }
   }
 
-  def generategetQualifiedName(thi: ClassDefinition, res: StringBuilder) = {
+  def generategetQualifiedName(thi: ClassDefinition, res: StringBuilder, compilerConfiguration : CompilerConfiguration) = {
     var qualifiedName = ReflexivityLoader.qualifiedName(thi)
     res.append("  override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n")
     res.append("    var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"" + qualifiedName + "\"); \n")
-    res.append("    if (cd !=null){ \n      var cl = _root_." + org.kermeta.compilo.scala.GlobalConfiguration.kermeta_standardMM + ".org.kermeta.language.structure." + GlobalConfiguration.factoryName + ".createClass \n")
-    res.append("      cl.setTypeDefinition(cd) \n      return cl \n    } else \n      return null; \n  }\n")
+    res.append("    if (cd !=null){ \n")
+    res.append("       var cl = _root_." + compilerConfiguration.kermetaStandardMMName + ".org.kermeta.language.structure." + GlobalConfiguration.factoryName + ".createClass \n")
+    res.append("       cl.setTypeDefinition(cd) \n")
+    res.append("      return cl \n")
+    res.append("    } else \n")
+    res.append("      return null; \n")
+    res.append("  }\n")
 
   }
 
@@ -272,7 +277,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
   }
 
-  def generateMapEntryWrapper(thi: ClassDefinition, res: StringBuilder) = {
+  def generateMapEntryWrapper(thi: ClassDefinition, res: StringBuilder, compilerConfiguration : CompilerConfiguration) = {
     res.append("class ")
     res.append(thi.getName())
     res.append("( self : ")
@@ -291,7 +296,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     thi.getOwnedAttribute foreach (a => visit(a, res))
     thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op) || op.getBody != null) foreach (op => visit(op, res))
     this.generateInvariants(thi, res)
-    this.generategetQualifiedName(thi, res)
+    this.generategetQualifiedName(thi, res, compilerConfiguration)
     res.append("}\n")
 
   }

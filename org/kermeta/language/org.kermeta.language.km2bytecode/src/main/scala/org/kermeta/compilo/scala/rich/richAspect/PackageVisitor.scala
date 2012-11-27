@@ -7,10 +7,11 @@ import org.kermeta.compilo.scala.rich.RichIterable
 import scala.collection.JavaConversions._
 import org.eclipse.emf.ecore.EObject
 import org.kermeta.compilo.scala.GlobalConfiguration
+import org.kermeta.compilo.scala.CompilerConfiguration
 
 import org.kermeta.compilo.scala.rich.RichUtil._
 
-class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefinitionAspect with OperationAspect with PropertyAspect with LogAspect {
+class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends ObjectVisitor with CallFeatureAspect with ClassDefinitionAspect with OperationAspect with PropertyAspect with LogAspect {
 
   def visit(e: org.kermeta.language.structure.KermetaModelElement, res: StringBuilder) = {
     e match {
@@ -116,7 +117,7 @@ class PackageVisitor extends ObjectVisitor with CallFeatureAspect with ClassDefi
         visitVoidType(o, res)
       }
       case o: ClassDefinition => {
-        visitClassDefinition(o, res)
+        visitClassDefinition(o, res, compilerConfiguration)
       }
       case o: CallOperation => {
         visitCallOperation(o, res)
