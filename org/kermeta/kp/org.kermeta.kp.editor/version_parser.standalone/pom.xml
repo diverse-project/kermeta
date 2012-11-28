@@ -166,6 +166,11 @@
 		<artifactId>utils.systemservices.api</artifactId>
 		<version>${kermeta.version}</version>
 	</dependency>
+	<dependency> 
+		<groupId>org.kermeta.utils</groupId>
+		<artifactId>utils.aether</artifactId>
+		<version>${utils.version}</version>
+	</dependency>
     <dependency>
       <groupId>org.emftext.commons</groupId>
       <artifactId>commons.antlr3_3_0</artifactId>
