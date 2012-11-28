@@ -167,6 +167,7 @@
 		              		are already there with the Require-Bundle
 			            -->
 		            	<Import-Package>
+		            		!org.kermeta.language.gendoc.km2html,
 		              		*
 		            	</Import-Package>		            
                     </instructions>
@@ -191,6 +192,7 @@
 			      </buildcommands>
 			      <classpathContainers>
 			        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+			        <classpathContainer>org.eclipse.pde.core.requiredPlugins</classpathContainer>
 			      </classpathContainers>
 			      <excludes> 
 			        <!-- <exclude>org.scala-lang:scala-library</exclude> -->
