@@ -1,0 +1,78 @@
+/* $Id:$ 
+ * Creation : November 27, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "org::kermeta::language::km2llvm::Km2llvm"
+@mainOperation "main"
+
+package org::kermeta::language::km2llvm;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "km2llvm_structure.kmt"
+
+using org::kermeta::language::structure
+using kermeta::utils
+using kermeta::persistence
+
+
+class Km2llvm {
+	operation main() is do
+		stdio.writeln(compile(createKm).toString)
+	end
+
+	operation compile(km:Metamodel) : StringBuffer is do
+		var ctx : Context init Context.new.initialise
+		km.generateLLVM(ctx)
+		result := ctx.llvmCode
+	end
+	
+	
+	operation getKmModel() : Metamodel is do
+		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0/"
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile(uriMM)          
+   		var resource : Resource init repository.createResource("../../test/Ecore2km.km", uriMM)
+       	resource.load
+	
+		result ?= resource.one	
+	end
+	
+	operation createKm() : Metamodel is do
+		result := Metamodel.new
+		var pkg1 : Package init Package.new
+		var pkg2 : Package init Package.new
+		pkg1.name := "pkg1"
+		pkg2.name := "pkg2"
+		result.packages.add(pkg1)
+		pkg1.nestedPackage.add(pkg2)
+		var cd1 : ClassDefinition init ClassDefinition.new
+		cd1.name := "Cd1"
+		pkg1.ownedTypeDefinition.add(cd1)
+		var cd3 : ClassDefinition init ClassDefinition.new
+		cd3.name := "Cd3"
+		pkg1.ownedTypeDefinition.add(cd3)
+		var cd2 : ClassDefinition init ClassDefinition.new
+		cd2.name := "Cd2"
+		pkg2.ownedTypeDefinition.add(cd2)
+		var type1 : Class init Class.new
+		type1.typeDefinition := cd1
+		cd2.superType.add(type1)
+		cd2.containedType.add(type1)
+		var type3 : Class init Class.new
+		type3.typeDefinition := cd3
+		cd2.superType.add(type3)
+		cd2.containedType.add(type3)
+		
+	end
+}
+
+
+
+
+
+
+

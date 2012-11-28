@@ -1,0 +1,15 @@
+/* $Id:$ 
+ * Creation : November 27, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::km2llvm;
+
+require kermeta
+require "km2llvmContext.kmt"
+
+abstract class LLVMGenerator {
+	operation generateLLVM(ctx:Context) is abstract
+}

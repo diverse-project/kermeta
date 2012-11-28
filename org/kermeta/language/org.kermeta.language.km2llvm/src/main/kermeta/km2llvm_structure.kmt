@@ -1,0 +1,91 @@
+/* $Id:$ 
+ * Creation : November 27, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "km2llvm_aspectGenerator.kmt"
+
+using org::kermeta::language::km2llvm
+using kermeta::standard
+
+aspect class KermetaModelElement inherits LLVMGenerator{}
+
+
+aspect class Metamodel {
+	method generateLLVM(ctx:Context) : Void is do
+		packages.each{pkg | pkg.generateLLVM(ctx)}
+	end
+}
+
+
+aspect class ClassDefinition {
+	// This sequence is useful to keep a trace of the order of the created llvm attributes (super-types, etc.)
+	// If you want to access in llvm to an attribute, we just have to get the position of the searched type into
+	// that list.
+	attribute llvmAttributes : seq String[*]
+
+	method generateLLVM(ctx:Context) : Void is do
+		// Creating the variable of the type
+		ctx.types.append(ctx.getLocalVariableName(getLLVMQualifiedName)).append("= type {")
+		// Creating the supertype parameters
+		var list : Sequence<String> init generateSuperTypeListLLVM(ctx)
+		ctx.types.append(ctx.flatStringList(list, ", "))
+		// Must keep a trace of the order of the created llvm attributes.
+		list.each{attr | llvmAttributes.add(attr)}
+		// Closing the type definition.
+		ctx.types.append("}\n")
+	end
+	
+	
+	operation generateSuperTypeListLLVM(ctx:Context) : Sequence<String> is do
+		result := Sequence<String>.new
+		superType.each{st | result.add(ctx.getPointerName(ctx.getLocalVariableName(st.getLLVMQualifiedName))) }
+	end
+}
+
+
+aspect class Type {
+	operation getLLVMQualifiedName() : String is do
+		result := void
+	end
+}
+
+
+
+aspect class Class {
+	method getLLVMQualifiedName() : String is do
+		result := typeDefinition.getLLVMQualifiedName
+	end
+}
+
+
+aspect class Package {
+	method generateLLVM(ctx:Context) : Void is do
+		ownedTypeDefinition.each{td | td.generateLLVM(ctx)}
+		nestedPackage.each{pkg | pkg.generateLLVM(ctx)}
+	end
+	
+	operation getLLVMQualifiedName() : String is do
+		result := name
+		if(not nestingPackage.isVoid) then
+			result := nestingPackage.getLLVMQualifiedName + "::" + result
+		end
+	end
+}
+
+
+aspect class TypeDefinition {
+	operation getLLVMQualifiedName() : String is do
+		result := name
+		if(container.isKindOf(Package)) then
+			result := container.asType(Package).getLLVMQualifiedName + "_" + result
+		end
+	end
+}
+

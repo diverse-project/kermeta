@@ -1,0 +1,77 @@
+/* $Id:$ 
+ * Creation : November 27, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::km2llvm;
+
+require kermeta
+
+using kermeta::utils
+using kermeta::standard
+
+
+class Context{
+	// The llvm code defining all the strings defined in the km.
+	attribute strings : StringBuffer
+	
+	// This map contains tuples of (name of the variable, string represented)
+	// It is useful to know if a string has been already compiled in llvm and to get its variable name.
+	attribute stringVars : Hashtable<String, String>
+	
+	// The llvm code defining all the types defined in the km.
+	attribute types : StringBuffer
+
+	
+	operation initialise() : Context is do
+		strings := StringBuffer.new
+		stringVars :=  Hashtable<String, String>.new
+		types := StringBuffer.new
+		result := self
+	end
+	
+	operation llvmCode() : StringBuffer is do
+		result := StringBuffer.new
+		result.append(strings.toString)
+		result.append(types.toString)
+	end
+	
+	
+	operation getPointerName(varName:String) : String is do
+		result := varName + "*"
+	end
+	
+	operation getLocalVariableName(name:String) : String is do
+		result := "%" + format2llvmID(name)
+	end
+	
+	
+	operation getGlobalVariableName(name:String) : String is do
+		result := "@" + format2llvmID(name)
+	end
+	
+	
+	operation format2llvmID(name:String) : String is do
+		result := "\"" + name + "\""
+	end
+	
+	
+	operation flatStringList(list:Sequence<String>, sepStr:String) : String is do
+		result := ""
+		
+		var max : Integer init list.size-1
+		from var i : Integer init 0
+		until i>=max
+		loop
+			result := result + list.at(i) + sepStr
+			i := i + 1
+		end
+		
+		if(list.size>0) then
+			result := result + list.at(list.size-1)
+		end
+	end 
+}
+
