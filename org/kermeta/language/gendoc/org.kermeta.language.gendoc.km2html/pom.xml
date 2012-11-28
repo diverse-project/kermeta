@@ -103,7 +103,8 @@
 		            
 		            	<!-- note: imports k2 to workaround problem about loading reflexivity.km
 		            	     and reexport it to allow an external plugin (ui for ex) to set the messagingsystem of stdio -->
-                        <Export-Package>org.kermeta.language.gendoc.km2html,
+                        <Export-Package>kermeta_km2html.*,
+                        	kermeta_km2htmlrunner.*,
 		            		k2.utils.*,
 		            		k2.exceptions.*,
 		            		k2.io.*,
@@ -113,10 +114,7 @@
 		            		org.k2.console.*
 		            	</Export-Package>
 		            	<Private-Package>
-		            		gendoc,
-		            		org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2html.*,
-		            		org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2htmlrunner.*,
-		            		ScalaImplicit.org.kermeta.language.gendoc.org.kermeta.language.gendoc.km2html.*,
+		            		ScalaImplicit.kermeta_km2html.*,
 		            		scalaUtil
 		            	</Private-Package>
 		            	<!--
