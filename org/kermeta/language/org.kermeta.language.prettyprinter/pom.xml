@@ -102,10 +102,8 @@
 		            
 		            	<!-- note: imports k2 to workaround problem about loading reflexivity.km
 		            	     and reexport it to allow an external plugin (ui for ex) to set the messagingsystem of stdio -->
-                        <Export-Package>org.kermeta.language.prettyprinter,
-		            		org.kermeta.language.org.kermeta.language.prettyprinter.*,
-		            		org.kermeta.language.org.kermeta.language.prettyprinterrunner.*,
-		            		printer.*,
+                        <Export-Package>kermeta_prettyprinter.*,
+		            		kermeta_prettyprinterrunner.*,
 		            		k2.utils.*,
 		            		k2.exceptions.*,
 		            		k2.io.*,
@@ -115,7 +113,7 @@
 		            		org.k2.console.*
 		            	</Export-Package>
 		            	<Private-Package>
-		            		ScalaImplicit.org.kermeta.language.org.kermeta.language.prettyprinter.*,
+		            		ScalaImplicit.kermeta_prettyprinter.*,
 		            		scalaUtil
 		            	</Private-Package>
 		            	<!--
