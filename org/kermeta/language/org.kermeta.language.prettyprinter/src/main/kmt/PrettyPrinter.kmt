@@ -53,6 +53,7 @@ class PrettyPrinter
 		result := aModelingUnit.each{ mm | mm.prettyPrint(0)}
 	end
 	
+	@main ""
 	operation prettyPrintFile(inputFileUrl: String, outputFileUrl : String) : Void is do 
 		var repository : ResourceSet init ResourceSet.new
 		var theModelResource : Resource init repository.createResource(inputFileUrl,"http://www.kermeta.org/kermeta/2_0_0/")
