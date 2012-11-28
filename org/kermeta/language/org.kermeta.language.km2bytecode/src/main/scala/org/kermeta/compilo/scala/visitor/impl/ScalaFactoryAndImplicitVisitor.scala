@@ -233,9 +233,8 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
     mrg.generateDefaultRunner(par, res)
     Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "DefaultRunner", res.toString())
 
-    // generate the Util.scala file
-    // TODO check if really necessary, methods are already in the Aspect
-    // UtilObjectGenerator.genetateUtilObject
+    // generate the Util.scala file (used for call on Types)
+    UtilObjectGenerator.genetateUtilObject(compilerConfiguration.kermetaStandardMMName)
 
     par.getMetamodels().foreach(mm => new AcceptableMetamodel(mm).accept(this))
 
