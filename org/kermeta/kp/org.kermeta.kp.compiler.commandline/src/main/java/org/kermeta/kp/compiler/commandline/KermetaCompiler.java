@@ -10,14 +10,11 @@ package org.kermeta.kp.compiler.commandline;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -36,13 +33,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.jar.Attributes;
+import java.util.jar.JarInputStream;
+import java.util.jar.Manifest;
 
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.compilo.scala.CompilerConfiguration;
 import org.kermeta.compilo.scala.GlobalConfiguration;
 import org.kermeta.diagnostic.DiagnosticModel;
 import org.kermeta.kp.ImportFile;
-import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.PackageEquivalence;
 import org.kermeta.kp.compiler.commandline.urlhandler.ExtensibleURLStreamHandlerFactory;
@@ -60,7 +59,6 @@ import org.kermeta.language.merger.binarymerger.api.KmBinaryMerger;
 import org.kermeta.language.resolver.KmResolverImpl;
 import org.kermeta.language.resolver.KmResolverImpl4Eclipse;
 import org.kermeta.language.resolver.api.KmResolver;
-import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.util.ModelingUnit;
 import org.kermeta.utils.aether.LocalFileConverterForAether;
 import org.kermeta.utils.helpers.CompositeLocalFileConverter;
@@ -1202,8 +1200,21 @@ public class KermetaCompiler {
 		logger.info("Compiling generated scala to bytecode in " + GlobalConfiguration.outputBinFolder(), LOG_MESSAGE_GROUP);
 		logger.debug("Classpath: " + classpath.size(), LOG_MESSAGE_GROUP);
 		for (String path : classpath) {
-
-			logger.debug("\t" + path, LOG_MESSAGE_GROUP);
+			String bundleName = "";
+			try{
+				File jarFile = new File(path);
+				InputStream stream = jarFile.toURI().toURL().openStream();
+				JarInputStream jarStream = new JarInputStream(stream);
+				Manifest mf = jarStream.getManifest();
+				Attributes mainAttribs = mf.getMainAttributes();
+				bundleName = mainAttribs.getValue("Bundle-SymbolicName");
+				if(bundleName != null && bundleName.contains(";")){
+					bundleName = bundleName.substring(0, bundleName.indexOf(";"));
+				}
+				jarStream.close();
+				stream.close();
+			} catch (Exception e){}
+			logger.debug("\t" + path + " (" +bundleName+")", LOG_MESSAGE_GROUP);
 		}
 		logger.debug("End Classpath: " + classpath.size(), LOG_MESSAGE_GROUP);
 
