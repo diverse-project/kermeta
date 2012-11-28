@@ -1,14 +1,18 @@
-KermetaProject "org.kermeta.language.gendoc.km2html"
-groupId  = "org.kermeta.language.gendoc"
-defaultMainClass =  "gendoc::HtmlGenerator"
-defaultMainOperation =  "generateHtml"
+resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+//resource kermeta_model ="platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.7-SNAPSHOT"
 
-sources = {
-	require "${project.baseUri}/src/main/kmt/Km2Html.kmt"
-	require "${project.baseUri}/src/main/kmt/Km2Html_structure_aspect.kmt"
-} 
-    
-dependencies = { 
-      
-	dependency "language.model" URLs ="mvn:org.kermeta.language/language.library.core/LATEST"
+//importProject kermeta_standard
+
+project kermeta_km2html extends kermeta_standard {
+//project kermeta_prettyprinter {
+
+	mainClass "kermeta_km2html#gendoc::HtmlGenerator"
+	mainOperation "generateHtml"
+	
+	import "${project.baseUri}/src/main/kmt/Km2Html.kmt"
+	import "${project.baseUri}/src/main/kmt/Km2Html_structure_aspect.kmt"
+//	import "${kermeta_model.baseUri}/src/main/ecore/kermeta.ecore"
+
 }
+
+

@@ -1,16 +1,9 @@
-using kermeta
-using kermeta::standard
-using org::kermeta::language::structure
-using kermeta::emfpersistence
-require "helpers/EcoreUtil.kmt"
-require "helpers/ecore_behavior.kmt"
-require "helpers/EcoreDocHelper.kmt"
-using kermeta::standard
-using kermeta::utils
-using kermeta::io
-using ecore
-using EcoreUtil
-using EcoreDocHelper  
+using kermeta::standard::*
+using #org::kermeta::language::structure::*
+using kermeta::emfpersistence::*
+using kermeta::utils::*
+using kermeta::io::*
+
 
 package gendoc{
 	/** 
@@ -19,7 +12,7 @@ package gendoc{
 	
 	class HtmlGenerator
 	{
-		//@main ""
+		@main ""
 		operation generateHtml(inputModelUrl : String , outputFolderUrl : String, excludePackages : String, documentName : String) : Void is do 
 			
 			kermeta::io::StdIO.writeln("Generating Html from " + inputModelUrl)
@@ -29,24 +22,126 @@ package gendoc{
 			
 			// Retrieve km rooot
 			//var mu : ModelingUnit init resource.getContents().first
-			from var it : Iterator<Object> init resource.getContents.iterator
-	       	until it.isOff
-	       	loop
-	           var next : Object init it.next
-	           if (next.isInstanceOf(ModelingUnit)) then                 
-	           		var mu : ModelingUnit
-	           		mu ?= next
-	           		mu.generateHtml(outputFolderUrl, excludePackages)
-	           		mu.generateXmlToc(outputFolderUrl, excludePackages, documentName)
-					kermeta::io::StdIO.writeln("Html generated in " + outputFolderUrl)
-	           		
-	           end
-	       	end
+			var mu : ModelingUnit init ModelingUnit.new //.initialize(resource.getContents)
+			resource.getContents.each{ e |	if e.isInstanceOf(org::kermeta::language::structure::Metamodel) then
+       				mu.metamodels.add(e.asType(org::kermeta::language::structure::Metamodel))
+       			end
+       		}
+	       	
+      		mu.generateHtml(outputFolderUrl, excludePackages)
+       		mu.generateXmlToc(outputFolderUrl, excludePackages, documentName)
+			kermeta::io::StdIO.writeln("Html generated in " + outputFolderUrl)
+	           			
 			//mu.generateHtml()
+		end
+			
+	}
+	class ModelingUnit {
+	
+		reference metamodels : Metamodel[0..*]
+		
+		
+		/*operation initialize(inputMM : OrderedSet<Object>) : ModelingUnit is do
+			inputMM.each{ e |	if e.isInstanceOf(org::kermeta::language::structure::Metamodel) then
+       				metamodels.add(e.asType(org::kermeta::language::structure::Metamodel))
+	       		end
+	       	}
+			result := self
+		end*/
+		//attribute defaultPath : String init "file:/C:/CodeCamp/Workspace/KermetaDoc/target/beforeCheckingforScopeMERGED.km"
+		operation generateHtml( baseFolder : String, excludePackages : String) : Void is do
+			StdIO.writeln ("Html file generated Modeling Unit")
+			metamodels.each{mm | 
+				var path : String init baseFolder + "/" + mm.name + "_Metamodel.html"
+				var contents : String init self.createHtml (baseFolder, excludePackages)
+				   
+				//create Toc page for ModelingUnit page
+				self.createTocpage(baseFolder, excludePackages)
+				// Create html file
+				FileIO.writeTextFile(path.toURI(), contents)
+			}
+		end 
+	
+		operation generateXmlToc(baseFolder : String, excludePackages : String, documentName : String) : Void is do
+			var contents : StringBuffer init StringBuffer.new
+			var path : String init baseFolder + "/toc.xml"
+			xmlToc(baseFolder, excludePackages, documentName)
+			contents.append("<toc label=\"Kermeta framework (generated doc)\" href = \""+ documentName +".html\">\n")
+			metamodels.each{mm |
+				mm.packages.each{pack | 
+					if (not excludePackages.contains(pack.name.trim)) then
+						contents.append("<topic label=\"" + pack.name +"\" href = \"" + baseFolder + "/" + pack.name + ".toc.html" + "\">\n")
+						contents.append(pack.generateXmlToc(baseFolder, excludePackages))
+						contents.append("</topic>\n")
+					end
+				}
+			}
+		
+			contents.append("</toc>\n")					
+							
+			FileIO.writeTextFile(path.toURI,contents.toString)
+		end
+		
+		operation xmlToc(baseFolder : String, excludePackages : String, documentName : String) : Void is do
+			var path : String init baseFolder + "/" + documentName + ".html"
+			var contents : StringBuffer init StringBuffer.new
+			contents.append("<HTML>" + "<HEAD>"+ "<TITLE>" + "The list of packages here ?" +"</TITLE>")
+			contents.append("</HEAD>\n")
+			metamodels.each{mm |
+				mm.packages.each{pack |
+					if (not excludePackages.contains(pack.name.trim)) then
+						contents.append(pack.generateCodeForMainToc(baseFolder, excludePackages))
+					end
+				}
+			}		
+			contents.append("</html>\n")
+			
+			FileIO.writeTextFile(path.toURI,contents.toString)
+		end
+		
+		/** Create an html page for Modeling unit */
+		operation createHtml (baseFolder:String, excludePackages : String) : String is do
+			var html : StringBuffer init StringBuffer.new
+			html.append("<HTML>" + "<HEAD>"+ "<TITLE>")
+			metamodels.indexedEach{ mm, eachContext | 
+				html.append(mm.name)
+				if(!eachContext.isLast) then html.append(", ") end
+			}
+			
+
+			html.append("</TITLE>\n")
+			html.append("</HEAD>\n")
+			html.append("<frameset cols=20%,80%>\n")
+			html.append("<frame src=allclasses-frame.html name= TOC target = Content scrolling=yes>\n")
+			html.append("<frame src=contents.html name= Content scrolling=yes>\n")
+			html.append("</frameset>\n")
+			html.append("</html>\n")
+					
+			result := html.toString
 		end
 		
 		
-		
-		
+		/**create Toc page for the ModelingUnit page*/
+		operation createTocpage(baseFolder:String, excludePackages : String) : Void is do
+			var path : String init baseFolder + "/" + "allclasses-frame.html"
+			var contents : StringBuffer init StringBuffer.new
+			contents.append("<h3>All Classes </h3>")
+			var html : StringBuffer init StringBuffer.new
+			contents.append("<html>" + "<body>")
+			//create links list of the packages, should add calls to the operations for creating the pages for packages
+			metamodels.each{mm |
+				mm.packages.each{pack | 
+					if (not excludePackages.contains(pack.name.trim)) then
+						html.append(pack.createClassesHtml(baseFolder, excludePackages))
+					end
+				}
+			}
+			//set package list of the Toc page
+			if html.toString != "" then
+				contents.append(html.toString)
+			end
+					
+			FileIO.writeTextFile(path.toURI, contents.toString)
+		end
 	}
 }
