@@ -21,7 +21,9 @@ using kermeta::persistence
 
 class Km2llvm {
 	operation main() is do
-		stdio.writeln(compile(createKm).toString)
+		var mm : Metamodel init createKm
+		mm.preprocess4LLVM
+		stdio.writeln(compile(mm).toString)
 	end
 
 	operation compile(km:Metamodel) : StringBuffer is do
@@ -49,6 +51,9 @@ class Km2llvm {
 		pkg2.name := "pkg2"
 		result.packages.add(pkg1)
 		pkg1.nestedPackage.add(pkg2)
+		var cd0 : ClassDefinition init ClassDefinition.new
+		cd0.name := "Cd0"
+		pkg1.ownedTypeDefinition.add(cd0)
 		var cd1 : ClassDefinition init ClassDefinition.new
 		cd1.name := "Cd1"
 		pkg1.ownedTypeDefinition.add(cd1)
@@ -66,7 +71,14 @@ class Km2llvm {
 		type3.typeDefinition := cd3
 		cd2.superType.add(type3)
 		cd2.containedType.add(type3)
-		
+		var type0 : Class init Class.new
+		type0.typeDefinition := cd0
+		cd1.superType.add(type0)
+		cd1.containedType.add(type0)
+		var type0b : Class init Class.new
+		type0b.typeDefinition := cd0
+		cd3.superType.add(type0b)
+		cd3.containedType.add(type0b)
 	end
 }
 

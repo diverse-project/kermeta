@@ -1,0 +1,19 @@
+/* $Id:$ 
+ * Creation : November 28, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::llvm;
+
+require kermeta
+
+using kermeta::utils
+using kermeta::standard
+
+class LLVMHelper {
+	operation return(type:String, val:String):String is do result := "ret " +type+" %result" end
+	operation alloca(type:String):String is do result := "alloca "+type end
+	operation assign(left:String, right:String):String is do result := left+" = "+right end
+}

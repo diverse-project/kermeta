@@ -8,26 +8,31 @@
 package org::kermeta::language::km2llvm;
 
 require kermeta
+require "llvmHelper.kmt"
 
 using kermeta::utils
 using kermeta::standard
+using org::kermeta::language::llvm
 
 
 class Context{
+	attribute llvm : LLVMHelper
 	// The llvm code defining all the strings defined in the km.
 	attribute strings : StringBuffer
-	
 	// This map contains tuples of (name of the variable, string represented)
 	// It is useful to know if a string has been already compiled in llvm and to get its variable name.
 	attribute stringVars : Hashtable<String, String>
-	
 	// The llvm code defining all the types defined in the km.
 	attribute types : StringBuffer
+	// The contructors	
+	attribute constructors : StringBuffer
 
 	
 	operation initialise() : Context is do
+		llvm := LLVMHelper.new
 		strings := StringBuffer.new
 		stringVars :=  Hashtable<String, String>.new
+		constructors := StringBuffer.new
 		types := StringBuffer.new
 		result := self
 	end
@@ -36,29 +41,30 @@ class Context{
 		result := StringBuffer.new
 		result.append(strings.toString)
 		result.append(types.toString)
+		result.append(constructors.toString)
 	end
 	
 	
-	operation getPointerName(varName:String) : String is do
+	operation pointer(varName:String) : String is do
 		result := varName + "*"
 	end
 	
-	operation getLocalVariableName(name:String) : String is do
-		result := "%" + format2llvmID(name)
+	operation localVar(name:String) : String is do
+		result := "%" + llvmID(name)
 	end
 	
 	
-	operation getGlobalVariableName(name:String) : String is do
-		result := "@" + format2llvmID(name)
+	operation globalVar(name:String) : String is do
+		result := "@" + llvmID(name)
 	end
 	
 	
-	operation format2llvmID(name:String) : String is do
+	operation llvmID(name:String) : String is do
 		result := "\"" + name + "\""
 	end
 	
 	
-	operation flatStringList(list:Sequence<String>, sepStr:String) : String is do
+	operation flatStringList(list: OrderedSet<String>, sepStr:String) : String is do
 		result := ""
 		
 		var max : Integer init list.size-1

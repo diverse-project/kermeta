@@ -18,59 +18,62 @@ aspect class KermetaModelElement inherits LLVMGenerator{}
 
 
 aspect class Metamodel {
-	method generateLLVM(ctx:Context) : Void is do
+	method generateLLVM(ctx:Context) is do
 		packages.each{pkg | pkg.generateLLVM(ctx)}
+	end
+	
+	method preprocess4LLVM() is do
+		packages.each{pkg | pkg.preprocess4LLVM}
 	end
 }
 
 
 aspect class ClassDefinition {
-	// This sequence is useful to keep a trace of the order of the created llvm attributes (super-types, etc.)
-	// If you want to access in llvm to an attribute, we just have to get the position of the searched type into
-	// that list.
-	attribute llvmAttributes : seq String[*]
-
-	method generateLLVM(ctx:Context) : Void is do
-		// Creating the variable of the type
-		ctx.types.append(ctx.getLocalVariableName(getLLVMQualifiedName)).append("= type {")
-		// Creating the supertype parameters
-		var list : Sequence<String> init generateSuperTypeListLLVM(ctx)
-		ctx.types.append(ctx.flatStringList(list, ", "))
-		// Must keep a trace of the order of the created llvm attributes.
-		list.each{attr | llvmAttributes.add(attr)}
-		// Closing the type definition.
-		ctx.types.append("}\n")
+	// Generates the LLVM code
+	method generateLLVM(ctx:Context) is do
+		generateLLVMType(ctx)
+		generateLLVMConstructor(ctx)
 	end
 	
 	
-	operation generateSuperTypeListLLVM(ctx:Context) : Sequence<String> is do
-		result := Sequence<String>.new
-		superType.each{st | result.add(ctx.getPointerName(ctx.getLocalVariableName(st.getLLVMQualifiedName))) }
+	// Generates the contructor of the class.
+	operation generateLLVMConstructor(ctx:Context) is do
+		var typeName : String init ctx.pointer(ctx.localVar(qualifiedNameLLVM))
+		ctx.constructors.append("define ").append(typeName).append(" ")
+		ctx.constructors.append(ctx.globalVar("@create_" + qualifiedNameLLVM)).append("(){\n")
+		// Creation of the super types.
+		var i : Integer init 0
+		llvmSupertypes.each{st |
+			ctx.constructors.append("%\"var").append(i.toString).append("\" = ").append(callNew(st)).append("\n")
+			i := i + 1
+		}
+		// Creation of the object.
+		ctx.constructors.append(ctx.llvm.assign("%result", ctx.llvm.alloca(ctx.localVar(qualifiedNameLLVM)))).append("\n")
+		// Returning the created object.
+		ctx.constructors.append(ctx.llvm.return(typeName, "%result")).append("\n}\n")
 	end
-}
-
-
-aspect class Type {
-	operation getLLVMQualifiedName() : String is do
-		result := void
-	end
-}
-
-
-
-aspect class Class {
-	method getLLVMQualifiedName() : String is do
-		result := typeDefinition.getLLVMQualifiedName
+	
+	
+	operation callNew(name:String) : String is do
+		result := "call " + name + " @create_" + name + "()"
 	end
 }
 
 
 aspect class Package {
+	// Preprocessing useful for the compilation
+	operation preprocess4LLVM() is do
+		ownedTypeDefinition.each{td | td.preprocess4LLVM}
+		nestedPackage.each{pkg | pkg.preprocess4LLVM}
+	end
+
+	// Generates the LLVM code
 	method generateLLVM(ctx:Context) : Void is do
 		ownedTypeDefinition.each{td | td.generateLLVM(ctx)}
 		nestedPackage.each{pkg | pkg.generateLLVM(ctx)}
 	end
 	
+	// Returns the qualified name of the package
 	operation getLLVMQualifiedName() : String is do
 		result := name
 		if(not nestingPackage.isVoid) then
@@ -81,6 +84,80 @@ aspect class Package {
 
 
 aspect class TypeDefinition {
+	// The lower types of the class. Computed during pre-processing.
+	reference lowerTypes : oset TypeDefinition[*]
+	reference superTypes : oset TypeDefinition[*]
+	
+	// This sequence is useful to keep a trace of the order of the created llvm super-types (in fact attributes
+	// of the llvm type). If you want to access in llvm to a super-type, we just have to get the position of 
+	// the searched type into that list.
+	attribute llvmSupertypes : seq String[*]
+	attribute llvmLowertypes : seq String[*]
+	
+	attribute qualifiedNameLLVM : String
+	
+
+	// Generates the llvm type corresponding to the class.
+	operation generateLLVMType(ctx:Context) is do
+		// Creating the variable of the type
+		ctx.types.append(ctx.localVar(qualifiedNameLLVM)).append("= type {")
+		
+		// Creating the supertype parameters
+		var list : OrderedSet<String> init generateSuperTypeListLLVM(ctx)
+		ctx.types.append(ctx.flatStringList(list, ", "))
+		// Must keep a trace of the order of the created llvm attributes.
+		list.each{attr | llvmSupertypes.add(attr)}
+		
+		// Creating the lowertype parameters
+		list := generateLowerTypeListLLVM(ctx)
+		// Must keep a trace of the order of the created llvm attributes.
+		list.each{attr | llvmLowertypes.add(attr)}
+		if not llvmSupertypes.isEmpty and not llvmLowertypes.isEmpty then
+			ctx.types.append(", ")
+		end
+		ctx.types.append(ctx.flatStringList(list, ", "))
+		
+		// Closing the type definition.
+		ctx.types.append("}\n")
+	end
+	
+	
+	operation generateLowerTypeListLLVM(ctx:Context) : OrderedSet<String> is do
+		result := OrderedSet<String>.new
+		lowerTypes.each{st |
+			result.add(ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)))
+			result.addAll(st.generateLowerTypeListLLVM(ctx))
+		}
+	end	
+	
+	
+	operation generateSuperTypeListLLVM(ctx:Context) : OrderedSet<String> is do
+		result := OrderedSet<String>.new
+		superTypes.each{st |
+			result.add(ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)))
+			result.addAll(st.generateSuperTypeListLLVM(ctx))
+		}
+	end
+	
+
+	operation preprocess4LLVM() is do
+		defineLowerSuperTypes
+		qualifiedNameLLVM := getLLVMQualifiedName
+	end
+
+	
+	operation defineLowerSuperTypes() is do
+		var superT : TypeDefinition
+		superType.each{st |
+			if st.isInstanceOf(Class) then
+				superT := st.asType(Class).typeDefinition
+				superT.lowerTypes.add(self)	
+				superTypes.add(superT)			
+			end
+		}
+	end
+	
+	
 	operation getLLVMQualifiedName() : String is do
 		result := name
 		if(container.isKindOf(Package)) then
@@ -88,4 +165,3 @@ aspect class TypeDefinition {
 		end
 	end
 }
-
