@@ -227,21 +227,20 @@ public class CollectSourcesHelper {
 
 		ArrayList<TracedURL> kpSourceFiles = new ArrayList<TracedURL>();
 		
-		
-		if(KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() < kp.getImportedProjectSources().size()){
+		 List<KermetaProject> kps = KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp);
+		if(kps.size() < kp.getImportedProjectSources().size()){
 			logger.log(
 					MessagingSystem.Kind.UserERROR,
-					"getResolvedImportProjectSources found only "+KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() + " kp projects in resources while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
+					"getResolvedImportProjectSources found only "+kps.size() + " kp projects in resources while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
 					, getMessageGroup());
 		}
 		else{
 			logger.log(
 					MessagingSystem.Kind.DevINFO,
-					"getResolvedImportProjectSources found "+KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() + " kp projects while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
+					"getResolvedImportProjectSources found "+kps.size() + " kp projects while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
 					, getMessageGroup());
 		}
-		for (KermetaProject importedSourceProject : KermetaProjectHelper
-				.collectKermetaProjectFromImportProjectSources(kp)) {
+		for (KermetaProject importedSourceProject : kps) {
 			// get importfiles from this refered project
 			kpSourceFiles.addAll(getDirectImportFiles(importedSourceProject,
 					importedSourceProject.eResource().getURI().toString()));
