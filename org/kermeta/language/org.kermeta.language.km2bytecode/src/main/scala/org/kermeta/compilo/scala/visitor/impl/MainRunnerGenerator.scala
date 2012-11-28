@@ -46,7 +46,7 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
     //}
     res.append("    init() \n")
-    res.append("    org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
+    res.append("    _root_.org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
     if (mainClassDef != null && mainOperation != null) {
       res.append("    " + "_root_.")
       if (ecorePackages.filter { e => visitor.getQualifiedName(e).equals(packageName) }.size == 1) {
@@ -92,7 +92,7 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     //CopyEcoreFile.copyEcorefiles(GlobalConfiguration.outputFolder)
     //}
     res.append("    init() \n")
-    res.append("    org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
+    res.append("    _root_.org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
 
     res.append("    " + "_root_.")
     if (ecorePackages.filter { e => visitor.getQualifiedName(e).equals(packageFullName) }.size == 1) {

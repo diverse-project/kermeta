@@ -38,7 +38,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
     packName = k2.utils.TypeEquivalence.getPackageEquivalence(packName)
     var impName = packName + Util.getImplPackageSuffix(packName) + Util.getPackagePrefix(packNameUpper) + "PackageImpl"
 
-    res.append(Util.protectScalaKeyword(impName + ".init()"))
+    res.append("_root_."+Util.protectScalaKeyword(impName + ".init()"))
     res.append(".setEFactoryInstance(")
     res.append(Util.protectScalaKeyword(/*GlobalConfiguration.scalaAspectPrefix + "." +*/ packNameMM + "." + GlobalConfiguration.factoryName + ""))
     res.append(")")
@@ -66,25 +66,25 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
     if (packName.equals("org.eclipse.emf.ecore")) {
       //res.append("\n{\n\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
       //res.append("\tc.setAccessible(true);\n")
-      res.append("\n    {\n      var pack : org.eclipse.emf.ecore.EcorePackage =  org.eclipse.emf.ecore.impl.EcorePackageImpl.init\n")
-      res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
+      res.append("\n    {\n      var pack : _root_.org.eclipse.emf.ecore.EcorePackage =  _root_.org.eclipse.emf.ecore.impl.EcorePackageImpl.init\n")
+      res.append("      _root_.org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(_root_.org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
 
       //            res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
       res.append("      pack.setEFactoryInstance(" + /*GlobalConfiguration.scalaAspectPrefix + "." +*/ packName + "." + GlobalConfiguration.factoryName + ")\n ")
-      res.append("      var f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
+      res.append("      var f : java.lang.reflect.Field = classOf[_root_.org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
       res.append("      f.setAccessible(true)\n")
       if (packName.equals("org.eclipse.emf.ecore")) {
         res.append("      f.set(pack, " + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n")
       }
-      res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
-      res.append("      k2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
+      res.append("      _root_.org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(_root_." + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
+      res.append("      k2.persistence.EcorePackages.getPacks().put(_root_." + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
       res.append("      " + impName + ".init\n}\n")
       return res.toString
     } else {
       res.append("\n    {\n")
-      res.append("      var pack : " + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package") + " = " + Util.protectScalaKeyword(impName + ".init") + "\n")
-      res.append("      org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
-      res.append("      k2.persistence.EcorePackages.getPacks().put(" + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
+      res.append("      var pack : _root_." + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package") + " = _root_." + Util.protectScalaKeyword(impName + ".init") + "\n")
+      res.append("      _root_.org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(_root_." + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
+      res.append("      k2.persistence.EcorePackages.getPacks().put(_root_." + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
       res.append("      pack.setEFactoryInstance(")
       res.append(Util.protectScalaKeyword(/*GlobalConfiguration.scalaAspectPrefix + "." + */packNameMM + "." + GlobalConfiguration.factoryName + ""))
       res.append(")")
