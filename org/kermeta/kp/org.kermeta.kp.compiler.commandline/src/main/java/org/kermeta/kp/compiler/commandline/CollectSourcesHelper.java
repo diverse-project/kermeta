@@ -227,11 +227,19 @@ public class CollectSourcesHelper {
 
 		ArrayList<TracedURL> kpSourceFiles = new ArrayList<TracedURL>();
 		
-		logger.log(
-				MessagingSystem.Kind.DevINFO,
-				"getResolvedImportProjectSources found "+KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() + " kp projects while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
-				, getMessageGroup());
 		
+		if(KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() < kp.getImportedProjectSources().size()){
+			logger.log(
+					MessagingSystem.Kind.UserERROR,
+					"getResolvedImportProjectSources found only "+KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() + " kp projects in resources while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
+					, getMessageGroup());
+		}
+		else{
+			logger.log(
+					MessagingSystem.Kind.DevINFO,
+					"getResolvedImportProjectSources found "+KermetaProjectHelper.collectKermetaProjectFromImportProjectSources(kp).size() + " kp projects while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
+					, getMessageGroup());
+		}
 		for (KermetaProject importedSourceProject : KermetaProjectHelper
 				.collectKermetaProjectFromImportProjectSources(kp)) {
 			// get importfiles from this refered project
