@@ -168,6 +168,7 @@
 			            -->
 		            	<Import-Package>
 		            		!org.kermeta.language.gendoc.km2html,
+		            		!k2.*,
 		              		*
 		            	</Import-Package>		            
                     </instructions>
