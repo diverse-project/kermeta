@@ -41,6 +41,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
+import org.kermeta.compilo.scala.CompilerConfiguration;
 import org.kermeta.language.builder.eclipse.KermetaBuilder;
 import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Metamodel;
@@ -532,8 +533,9 @@ public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 		dialog.setTitle("Choose main class (ie. class having operation with @main tag)");
 		dialog.setElements(validMainClasses.toArray());
 		// Set the default selection to currently selected resource
+		CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
 		for (ClassDefinition cd : validMainClasses) {
-			if (new org.kermeta.compilo.scala.rich.richAspect.PackageVisitor()
+			if (new org.kermeta.compilo.scala.rich.richAspect.PackageVisitor(compilerConfiguration)
 					.getQualifiedNameKermeta(cd)
 					.equals(mainClassText.getText())) {
 				dialog.setInitialSelections(new Object[] { cd });
@@ -544,7 +546,7 @@ public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 			ClassDefinition result = (ClassDefinition) dialog.getFirstResult();
 			// selectedKP = result;
 			mainClassText
-					.setText(new org.kermeta.compilo.scala.rich.richAspect.PackageVisitor()
+					.setText(new org.kermeta.compilo.scala.rich.richAspect.PackageVisitor(compilerConfiguration)
 							.getQualifiedNameKermeta(result));
 		} else {
 			// selectedKP = null;
@@ -845,7 +847,7 @@ public class KermetaTabConfiguration extends AbstractLaunchConfigurationTab {
 		// find current class
 		ClassDefinition currentClassDefinition = null;
 		for (ClassDefinition cd : validMainClasses) {
-			if (new org.kermeta.compilo.scala.rich.richAspect.PackageVisitor()
+			if (new org.kermeta.compilo.scala.rich.richAspect.PackageVisitor(new CompilerConfiguration())
 					.getQualifiedNameKermeta(cd)
 					.equals(mainClassText.getText())) {
 				return cd;
