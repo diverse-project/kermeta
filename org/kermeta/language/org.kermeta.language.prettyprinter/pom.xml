@@ -102,7 +102,8 @@
 		            
 		            	<!-- note: imports k2 to workaround problem about loading reflexivity.km
 		            	     and reexport it to allow an external plugin (ui for ex) to set the messagingsystem of stdio -->
-                        <Export-Package>kermeta_prettyprinter.*,
+                        <Export-Package>org.kermeta.language.prettyprinter.*,
+                        	kermeta_prettyprinter.*,
 		            		kermeta_prettyprinterrunner.*,
 		            		k2.utils.*,
 		            		k2.exceptions.*,
