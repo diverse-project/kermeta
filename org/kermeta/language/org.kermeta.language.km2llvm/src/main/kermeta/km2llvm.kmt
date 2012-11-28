@@ -79,6 +79,12 @@ class Km2llvm {
 		type0b.typeDefinition := cd0
 		cd3.superType.add(type0b)
 		cd3.containedType.add(type0b)
+		var prop : Property init Property.new
+		prop.name := "attr1"
+		var clazz : Class init Class.new
+		clazz.typeDefinition := cd2
+		prop.type := clazz
+		cd1.ownedAttribute.add(prop)
 	end
 }
 

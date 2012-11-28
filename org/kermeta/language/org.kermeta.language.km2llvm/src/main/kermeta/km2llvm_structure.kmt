@@ -28,11 +28,47 @@ aspect class Metamodel {
 }
 
 
+aspect class Type {
+	operation llvmType() : String is abstract
+}
+
+
+aspect class Class {
+	method llvmType() : String is do
+		result := typeDefinition.qualifiedNameLLVM
+	end
+}
+
+
+aspect class PrimitiveType {
+	method llvmType() : String is do
+		result := name
+		if(container.isKindOf(Package)) then
+			result := container.asType(Package).getLLVMQualifiedName + "_" + result
+		end
+	end
+}
+
+
 aspect class ClassDefinition {
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
 		generateLLVMType(ctx)
 		generateLLVMConstructor(ctx)
+	end
+	
+	
+	// Generates the llvm type corresponding to the class.
+	operation generateLLVMType(ctx:Context) is do
+		allSupertypes := getAllSuperTypes
+		allLowertypes := getAllLowerTypes
+		
+		// Creating the supertype parameters
+		var list : Sequence<String> init allSupertypes.collect{st | ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)) }
+		// Creating the lowertype parameters
+		list.addAll(allLowertypes.collect{st | ctx.pointer(ctx.localVar(st.qualifiedNameLLVM))})
+		ownedAttribute.each{attr | list.add(ctx.pointer(ctx.localVar(attr.type.llvmType))) }
+		ctx.types.append(ctx.llvm.type(ctx.localVar(qualifiedNameLLVM), list)).append("\n")
 	end
 	
 	
@@ -63,7 +99,7 @@ aspect class Package {
 	end
 
 	// Generates the LLVM code
-	method generateLLVM(ctx:Context) : Void is do
+	method generateLLVM(ctx:Context) is do
 		ownedTypeDefinition.each{td | td.generateLLVM(ctx)}
 		nestedPackage.each{pkg | pkg.generateLLVM(ctx)}
 	end
@@ -92,19 +128,6 @@ aspect class TypeDefinition {
 	attribute qualifiedNameLLVM : String
 	
 
-	// Generates the llvm type corresponding to the class.
-	operation generateLLVMType(ctx:Context) is do
-		allSupertypes := getAllSuperTypes
-		allLowertypes := getAllLowerTypes
-		
-		// Creating the supertype parameters
-		var list : Sequence<String> init allSupertypes.collect{st | ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)) }
-		// Creating the lowertype parameters
-		list.addAll(allLowertypes.collect{st | ctx.pointer(ctx.localVar(st.qualifiedNameLLVM))})
-		ctx.types.append(ctx.llvm.type(ctx.localVar(qualifiedNameLLVM), list)).append("\n")
-	end
-	
-	
 	operation defineLowerSuperTypes() is do
 		var superT : TypeDefinition
 		superType.each{st |
