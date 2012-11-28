@@ -14,6 +14,24 @@ using kermeta::standard
 
 class LLVMHelper {
 	operation return(type:String, val:String):String is do result := "ret " +type+" %result" end
+	
 	operation alloca(type:String):String is do result := "alloca "+type end
+	
 	operation assign(left:String, right:String):String is do result := left+" = "+right end
+	
+	operation type(varName:String, attributes : Sequence<String>) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		var size : Integer init attributes.size-1
+		buf.append(varName).append(" = type {")
+		
+		from var i : Integer init 0
+		until i>=size
+		loop
+			buf.append(attributes.at(i)).append(", ")
+			i := i + 1
+		end
+		if(attributes.size>0) then buf.append(attributes.at(attributes.size-1)) end
+		buf.append("}")
+		result := buf.toString
+	end
 }

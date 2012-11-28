@@ -62,22 +62,4 @@ class Context{
 	operation llvmID(name:String) : String is do
 		result := "\"" + name + "\""
 	end
-	
-	
-	operation flatStringList(list: OrderedSet<String>, sepStr:String) : String is do
-		result := ""
-		
-		var max : Integer init list.size-1
-		from var i : Integer init 0
-		until i>=max
-		loop
-			result := result + list.at(i) + sepStr
-			i := i + 1
-		end
-		
-		if(list.size>0) then
-			result := result + list.at(list.size-1)
-		end
-	end 
 }
-
