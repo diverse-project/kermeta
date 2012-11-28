@@ -170,6 +170,15 @@ package org::kermeta::language{
 				end
 			end
 		}
+		aspect class Metamodel{
+			method prettyPrint(indent : Integer) : String is do
+				result :=printIndent(indent)+ "// ##### "+self.name+" ####\n"
+				self.packages.each{p|
+					result := result + p.prettyPrint(indent)
+				}
+				result:=result+"\n"
+			end
+		}
 		aspect class Package{
 			method prettyPrint(indent : Integer) : String is do
 				result :=printIndent(indent)+ "package "+self.name+" {\n"

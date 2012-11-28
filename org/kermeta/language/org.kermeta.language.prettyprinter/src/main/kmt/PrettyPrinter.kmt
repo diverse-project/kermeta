@@ -26,7 +26,7 @@ class PrettyPrinter
 		var repository : ResourceSet init ResourceSet.new
 		//var path : String init arg
 		StdIO.writeln(arg)
-		var folder : String init "platform:/resource/QVTtest/src/main/kmt/"
+		var folder : String init "platform:/resource/org.kermeta.lan/src/main/kmt/"
 		var baseFileName : String init "sam2samdyn"
 		//var folder : String init "platform:/resource/QVTtest/target/"
 		//var baseFileName : String init "beforeResolving"
@@ -50,7 +50,9 @@ class PrettyPrinter
 	end
 	
 	operation prettyPrint(aModelingUnit : Collection<org::kermeta::language::structure::Metamodel>) : String is do
-		result := aModelingUnit.each{ mm | mm.prettyPrint(0)}
+		var sb : StringBuffer := StringBuffer.new
+		aModelingUnit.each{ mm | sb.append(mm.prettyPrint(0))}
+		result := sb.toString
 	end
 	
 	@main ""
@@ -59,7 +61,7 @@ class PrettyPrinter
 		var theModelResource : Resource init repository.createResource(inputFileUrl,"http://www.kermeta.org/kermeta/2_0_0/")
        	theModelResource.load(void)
        	       	
-       	var theModelingUnit : Collection<org::kermeta::language::structure::Metamodel>
+       	var theModelingUnit : Collection<org::kermeta::language::structure::Metamodel> init OrderedSet<org::kermeta::language::structure::Metamodel>.new
        	theModelResource.getContents.each{ e |	if e.isInstanceOf(org::kermeta::language::structure::Metamodel) then
        			theModelingUnit.add(e.asType(org::kermeta::language::structure::Metamodel))
        		end
