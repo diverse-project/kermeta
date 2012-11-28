@@ -39,13 +39,12 @@ aspect class ClassDefinition {
 	// Generates the contructor of the class.
 	operation generateLLVMConstructor(ctx:Context) is do
 	 	var typeName : String init ctx.pointer(ctx.localVar(qualifiedNameLLVM))
-		ctx.constructors.append("define ").append(typeName).append(" ")
-		ctx.constructors.append(ctx.globalVar("create_" + qualifiedNameLLVM)).append("(){\n")
+	 	ctx.constructors.append(ctx.llvm.define(typeName, ctx.globalVar("create_" + qualifiedNameLLVM), void)).append("{\n")
 		// Creation of the super types.
 		var i : Integer init 0
 		allSupertypes.each{st |
-			ctx.constructors.append("%\"var").append(i.toString).append("\" = call ").append(
-				ctx.pointer(ctx.localVar(st.qualifiedNameLLVM))).append(" @\"create_").append(st.qualifiedNameLLVM).append("\"()\n")
+			ctx.constructors.append(ctx.llvm.assign("%\"var"+i.toString+"\"", 
+				ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)), void))).append("\n")
 			i := i + 1
 		}
 		// Creation of the object.

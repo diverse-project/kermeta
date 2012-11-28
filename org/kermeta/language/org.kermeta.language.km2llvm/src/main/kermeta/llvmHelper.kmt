@@ -13,6 +13,14 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation call(name:String, return:String, params:Sequence<String>) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		buf.append("call ").append(return).append(" ").append(name).append("(")
+		flatListString(buf, params, ", ")
+		buf.append(")")
+		result := buf.toString
+	end
+
 	operation return(type:String, val:String):String is do result := "ret " +type+" %result" end
 	
 	operation alloca(type:String):String is do result := "alloca "+type end
@@ -23,15 +31,31 @@ class LLVMHelper {
 		var buf : StringBuffer init StringBuffer.new
 		var size : Integer init attributes.size-1
 		buf.append(varName).append(" = type {")
-		
-		from var i : Integer init 0
-		until i>=size
-		loop
-			buf.append(attributes.at(i)).append(", ")
-			i := i + 1
-		end
-		if(attributes.size>0) then buf.append(attributes.at(attributes.size-1)) end
+		flatListString(buf, attributes, ", ")
 		buf.append("}")
 		result := buf.toString
+	end
+	
+	
+	operation define(return:String, name:String, params:Sequence<String>) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		buf.append("define ").append(return).append(" ").append(name).append("(")
+		if(not params.isVoid) then flatListString(buf, params, ", ") end
+		buf.append(")")
+		result := buf.toString
+	end
+	
+	
+	operation flatListString(buf:StringBuffer, list:OrderedCollection<String>, sep:String) is do
+		if(not list.isVoid) then
+			var size : Integer init list.size-1
+			from var i : Integer init 0
+			until i>=size
+			loop
+				buf.append(list.elementAt(i)).append(sep)
+				i := i + 1
+			end
+			if(list.size>0) then buf.append(list.elementAt(list.size-1)) end
+		end
 	end
 }
