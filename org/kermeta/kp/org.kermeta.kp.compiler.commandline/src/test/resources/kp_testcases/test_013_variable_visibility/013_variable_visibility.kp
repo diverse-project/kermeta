@@ -5,7 +5,7 @@ resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST
 importProject kermeta_standard
 
 project Test_013_variable_visibility {
-	mainClass "root_package::Foo"
+	mainClass "#root_package::Foo"
 	mainOperation "bar"
 	import "${project.baseUri}/013_variable_visibility.kmt" 
 }

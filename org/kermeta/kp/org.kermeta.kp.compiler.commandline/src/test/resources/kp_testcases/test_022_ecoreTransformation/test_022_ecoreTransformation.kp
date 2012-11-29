@@ -4,7 +4,7 @@ resource ecore_model = "mvn:org.kermeta.language/language.library.utils/LATEST" 
 importProject kermeta_standard
 
 project Test_022_ecoreTransformation {
-	mainClass "mainPackage::MainClass"
+	mainClass "#mainPackage::MainClass"
 	mainOperation "mainOperation"
 	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
 	import "${ecore_model.baseUri}/model/Ecore.ecore" using EMFBytecode(ecore_model)

@@ -4,7 +4,7 @@ resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST
 importProject kermeta_standard
 
 project Test_019_exception {
-	mainClass "testExceptionsPackage::TestExceptions"
+	mainClass "#testExceptionsPackage::TestExceptions"
 	mainOperation "main"
 	import "${project.baseUri}/019_exception.kmt"
 }

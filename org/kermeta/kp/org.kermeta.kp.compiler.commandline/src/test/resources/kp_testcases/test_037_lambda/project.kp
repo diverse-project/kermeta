@@ -4,7 +4,7 @@ resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST
 importProject kermeta_standard
 
 project Test_037_lambda {
-	mainClass "root_package_lambda::LambdaTester"
+	mainClass "#root_package_lambda::LambdaTester"
 	mainOperation "mainTest"
 	import "${project.baseUri}/037_lambda.kmt"
 }

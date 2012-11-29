@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_018_multDivPlus_Number {
-	mainClass "root_package::Test"
+	mainClass "#root_package::Test"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt" 
 }
