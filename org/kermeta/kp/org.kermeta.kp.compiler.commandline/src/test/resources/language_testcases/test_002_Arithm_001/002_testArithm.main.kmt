@@ -1,9 +1,7 @@
 
 
-using kermeta::standard
-
-using kermeta::standard::Integer
-using kermeta::io::StdIO => stdio
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
 
 package testArithm{
 

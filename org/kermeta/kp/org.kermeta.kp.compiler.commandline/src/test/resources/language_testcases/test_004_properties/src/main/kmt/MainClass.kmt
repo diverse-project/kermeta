@@ -1,8 +1,8 @@
-using kermeta::standard
-using kermeta::io::StdIO => stdio
-using org::kermeta::language::structure
-using kermeta::kunit
-using testPackage
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
+using kermeta_standard#org::kermeta::language::structure::*
+using library_utils#kermeta::kunit::*
+using #testPackage::*
 
 package mainPackage{
 	class MainClass inherits TestCase

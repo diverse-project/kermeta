@@ -1,13 +1,9 @@
-KermetaProject "test_003_OpCall_003" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="testOpOpCall::Test_opopcall"
-defaultMainOperation ="operation1"
-sources={
-	require "${project.baseUri}/004_testOpOpCall.main.kmt" 
-}
-dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-} 
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
 
- 
+importProject kermeta_standard
+
+project Test_003_opCall_003 {
+	mainClass "#testOpOpCall::Test_opopcall"
+	mainOperation "operation1"
+	import "${project.baseUri}/004_testOpOpCall.main.kmt"
+}

@@ -2,6 +2,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST"
 
 importProject kermeta_standard
+importProject library_utils
 
 project Test_019_exception {
 	mainClass "#testExceptionsPackage::TestExceptions"
