@@ -1,13 +1,9 @@
-KermetaProject "test_018_multDivPlus_Number" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="root_package::Test"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/main.kmt" 
-}
-dependencies={
-	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-} 
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
 
- 
+importProject kermeta_standard
+
+project Test_018_multDivPlus_Number {
+	mainClass "root_package::Test"
+	mainOperation "main"
+	import "${project.baseUri}/main.kmt" 
+}

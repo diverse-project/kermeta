@@ -1,12 +1,10 @@
-KermetaProject "test_021_primitivetypesandlambda"
-	groupId = "my.group"
-	defaultMainClass = "test::MainClass"
-	defaultMainOperation = "mainOperation"
-	sources = {
-		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
-		require "${project.baseUri}/model/My.ecore" 
-	}
-	dependencies = {
-		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
-		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/LATEST"
-	}
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject kermeta_standard
+
+project Test_021_primitivetypesandlambda {
+	mainClass "test::MainClass"
+	mainOperation "mainOperation"
+	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
+	import "${project.baseUri}/model/My.ecore"
+}

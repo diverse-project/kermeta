@@ -1,5 +1,5 @@
 resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
-resource library_utils = "mvn:org.kermeta.language/language.library.extended/LATEST"
+resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST"
 
 importProject kermeta_standard
 importProject library_utils

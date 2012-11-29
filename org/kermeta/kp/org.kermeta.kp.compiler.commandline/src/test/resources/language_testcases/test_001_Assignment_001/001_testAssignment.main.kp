@@ -1,12 +1,19 @@
-KermetaProject "test_001_Assignment_001" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="testAssignment::Main"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/001_testAssignment.main.kmt"
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST"
+
+importProject kermeta_standard
+importProject library_utils
+
+project EcoreOperationOverload {
+	mainClass "#testAssignment::Main"
+	mainOperation "main"
+	import "${project.baseUri}/001_testAssignment.main.kmt"
 }
-dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-	dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/LATEST"
-}
+
+
+/*packageEquivalences={
+	// indicates the real java name of a given package
+	// useful for deployed thirdparty metamodels
+	packageEquivalence "ecore" = "org.eclipse.emf.ecore"
+	packageEquivalence "uml2" = "org.eclipse.uml2.uml"
+}*/

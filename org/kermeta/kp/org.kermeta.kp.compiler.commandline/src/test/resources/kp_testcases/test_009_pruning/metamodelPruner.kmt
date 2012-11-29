@@ -15,9 +15,9 @@
  */
 package kermeta::pruning;
 
-using kermeta::standard
-using kermeta::utils
-using org::kermeta::language::structure
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::utils::*
+using kermeta_standard#org::kermeta::language::structure::*
 
 class RequiredProperty {
 	attribute name: String

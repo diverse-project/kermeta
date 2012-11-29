@@ -1,12 +1,11 @@
-KermetaProject "test_013_variable_visibility" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="root_package::Foo"
-defaultMainOperation ="bar"
-sources={
-	require "${project.baseUri}/013_variable_visibility.kmt" 
-}
-dependencies={
-	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-	dependency "library.extended" URLs="mvn:org.kermeta.language/language.library.extended/LATEST"
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST"
+
+
+importProject kermeta_standard
+
+project Test_013_variable_visibility {
+	mainClass "root_package::Foo"
+	mainOperation "bar"
+	import "${project.baseUri}/013_variable_visibility.kmt" 
 }

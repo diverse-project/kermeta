@@ -1,11 +1,9 @@
-KermetaProject "test_014_lambda_as_variable" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="root_package::Main"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/014_lambda_function_as_variable.kmt" 
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject kermeta_standard
+
+project Test_014_lambda_as_variable {
+	mainClass "root_package::Main"
+	mainOperation "main"
+	import "${project.baseUri}/014_lambda_function_as_variable.kmt"
 }
-dependencies={
-	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-} 

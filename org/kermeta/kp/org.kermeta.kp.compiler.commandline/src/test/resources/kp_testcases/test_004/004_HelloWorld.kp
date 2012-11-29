@@ -1,11 +1,9 @@
-KermetaProject "test_004" 
-//version :  "2.0.1-SNAPSHOT" 
-groupId ="pkg"
-defaultMainClass ="helloworld::HelloWorld"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/004_HelloWorld.kmt" 
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject kermeta_standard
+
+project Test_004 {
+	mainClass "#helloworld::HelloWorld"
+	mainOperation "main"
+	import "${project.baseUri}/004_HelloWorld.kmt"
 }
-dependencies={
-	dependency "language.library.core" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
-} 

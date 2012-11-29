@@ -1,6 +1,6 @@
 package root_package;
 
-using kermeta::standard
+using kermeta_standard#kermeta::standard::*
 
 class Test
 {

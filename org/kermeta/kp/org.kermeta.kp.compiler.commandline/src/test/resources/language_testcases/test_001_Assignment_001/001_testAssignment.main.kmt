@@ -1,6 +1,7 @@
 
-using kermeta::standard
-using kermeta::io::StdIO => stdio
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::io::StdIO => stdio
+using library_utils#kermeta::kunit::*
 
 package testAssignment {
 
@@ -18,10 +19,10 @@ class Main {
 // Test simple assignments and casts on variables.
 // assignment of properties is covered by other tests
 
-class Test_assignment  inherits kermeta::kunit::TestCase {
+class Test_assignment  inherits TestCase {
 
 	@main "main"
-	operation main() : kermeta::standard::Void is do 
+	operation main() : Void is do 
 		// Test assignment to a variable that need to be escaped
 		testAssignment1()
 		
@@ -44,8 +45,8 @@ class Test_assignment  inherits kermeta::kunit::TestCase {
 	
 
 	// Test assignment to a variable that need to be escaped
-    operation testAssignment1() : kermeta::standard::Integer is do
-        var ~result : kermeta::standard::Integer
+    operation testAssignment1() : Integer is do
+        var ~result : Integer
         ~result := 4
        	stdio.writeln(~result.toString)
         result := ~result
@@ -109,16 +110,16 @@ class ATestAttr
 
 class B
 {
-	attribute name : kermeta::standard::String
+	attribute name : String
 }
 
 class C
 {
-	attribute attr_name1 : kermeta::standard::String
-	attribute attr_name2 : kermeta::standard::String
+	attribute attr_name1 : String
+	attribute attr_name2 : String
 }
 
-class TestAssignmentString   inherits kermeta::kunit::TestCase
+class TestAssignmentString   inherits TestCase
 {
 	// -------------------------------------------------------------
 	// String test
@@ -183,7 +184,7 @@ class TestAssignmentString   inherits kermeta::kunit::TestCase
 
 
 
-class Test_assignment_behavior   inherits kermeta::kunit::TestCase
+class Test_assignment_behavior   inherits TestCase
 {
 
 	@main "main"

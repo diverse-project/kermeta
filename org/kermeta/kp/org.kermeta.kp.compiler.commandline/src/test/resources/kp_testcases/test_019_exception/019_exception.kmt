@@ -4,8 +4,8 @@ package testExceptionsPackage;
 
 
 
-using kermeta::standard
-using kermeta::exceptions
+using kermeta_standard#kermeta::standard::*
+using kermeta_standard#kermeta::exceptions::*
 
 using kermeta::io::StdIO => stdio
  

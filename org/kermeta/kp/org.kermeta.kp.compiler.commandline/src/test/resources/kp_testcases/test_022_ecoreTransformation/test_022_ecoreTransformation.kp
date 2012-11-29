@@ -1,19 +1,12 @@
-KermetaProject "test_022_ecoreTransformation"
-	groupId = "my.group"
-	defaultMainClass = "mainPackage::MainClass"
-	defaultMainOperation = "mainOperation"
-	sources = {
-		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
-		//require "platform:/plugin/org.eclipse.emf.ecore//model/Ecore.ecore" byteCodeFromADependency
-		require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
-		//require "platform:/resource/language.sample.class2rdbms/src/main/ecore/ClassMM.ecore"
-		//require "${rdbms.baseUri}/src/main/ecore/ClassMM.ecore"
-	}
-	dependencies = {
-		//default dependency to kermeta framework (SNAPSHOT = use the last development version)
-		//dependency "library.core" ="mvn:org.kermeta.language/language.library.core/LATEST"
-		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/LATEST"
-		//dependency "rdbms" ="platform:/resource/language.sample.class2rdbms"
-		dependency "ecore.model" ="platform:/plugin/org.eclipse.emf.ecore", "mvn:org.eclipse.emf/ecore/LATEST"
-	// DVK
-	}
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+resource ecore_model = "mvn:org.kermeta.language/language.library.utils/LATEST" alternative "mvn:org.eclipse.emf/ecore/LATEST"
+
+importProject kermeta_standard
+
+project Test_022_ecoreTransformation {
+	mainClass "mainPackage::MainClass"
+	mainOperation "mainOperation"
+	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
+	import "${ecore_model.baseUri}/model/Ecore.ecore" using EMFBytecode(ecore_model)
+	//require "${ecore.model.baseUri}/model/Ecore.ecore" byteCodeFromADependency
+}

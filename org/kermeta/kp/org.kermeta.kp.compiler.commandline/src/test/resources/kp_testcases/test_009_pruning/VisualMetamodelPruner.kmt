@@ -8,9 +8,9 @@
  */
 package kermeta::ki::kompren;
 
-using kermeta::pruning
-using org::kermeta::language::structure
-using kermeta::standard
+using #kermeta::pruning::*
+using kermeta_standard#org::kermeta::language::structure::*
+using kermeta_standard#kermeta::standard::*
 
 
 class Test {

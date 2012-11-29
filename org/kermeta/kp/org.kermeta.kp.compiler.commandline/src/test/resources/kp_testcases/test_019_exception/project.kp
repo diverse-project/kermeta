@@ -1,16 +1,10 @@
-KermetaProject "test_019_exception"  
-	groupId ="org.kermeta.language" 
-	defaultMainClass ="testExceptionsPackage::TestExceptions"
-	defaultMainOperation ="main"
-	sources={
-		require "${project.baseUri}/019_exception.kmt"
-	}
-	dependencies={
-			
-		// import library.extended	
-		dependency "language.library.core" URLs="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/LATEST"
-		dependency "library.extended" URL="mvn:org.kermeta.language/language.library.extended/LATEST"   
-			 
-	} 
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+resource library_utils = "mvn:org.kermeta.language/language.library.utils/LATEST"
 
- 
+importProject kermeta_standard
+
+project Test_019_exception {
+	mainClass "testExceptionsPackage::TestExceptions"
+	mainOperation "main"
+	import "${project.baseUri}/019_exception.kmt"
+}

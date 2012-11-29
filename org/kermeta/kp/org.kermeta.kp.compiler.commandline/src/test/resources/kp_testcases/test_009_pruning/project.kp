@@ -1,11 +1,10 @@
-KermetaProject "test_009_pruning" 
-groupId = "kermeta.ki.kompren"
-defaultMainClass ="kermeta::ki::kompren::Test"
-defaultMainOperation ="main"
-sources={
-	require "${project.baseUri}/metamodelPruner.kmt"
-	require "${project.baseUri}/VisualMetamodelPruner.kmt"
-}
-dependencies={
-	dependency "language.model" URLs="mvn:org.kermeta.language/language.library.core/LATEST"
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject kermeta_standard
+
+project Test_009_pruning {
+	mainClass "#kermeta.ki.kompren::Test"
+	mainOperation "main"
+	import "${project.baseUri}/metamodelPruner.kmt"
+	import "${project.baseUri}/VisualMetamodelPruner.kmt"
 }

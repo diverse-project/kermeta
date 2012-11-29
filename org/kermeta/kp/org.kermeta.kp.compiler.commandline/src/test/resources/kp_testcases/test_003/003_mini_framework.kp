@@ -1,14 +1,12 @@
-KermetaProject "test_003"
-	defaultMainClass "helloworld::HelloWorld"
-	defaultMainOperation "main"
-	miniframework {
-		importFile "${project.baseUri}/003_mini_framework.kmt" 
-		importFile "${project.baseUri}/003_hello_on_mini_framework.kmt" 
-		importFile "${language_model.baseUri}/src/main/ecore/kermeta.ecore"
-	}
-	
-	// still reuse the real library.core bytecode because we don't want to rewrite everything for a simple test
-	importBytecodeJar "${dummy_library.uri}"
-	language_model = "mvn:org.kermeta.language/language.model/2.0.1-SNAPSHOT"
-	dummy_library ="mvn:org.kermeta.language/language.library.core/LATEST"
+resource kermeta_core = "platform:/plugin/org.kermeta.language.library.core" alternative "mvn:org.kermeta.language/language.library.core/2.0.7-SNAPSHOT"
+resource language_model = "platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.7-SNAPSHOT"
 
+importProject kermeta_core
+
+project Test_003 {
+	mainClass "#helloworld::HelloWorld"
+	mainOperation "main"
+	import "${project.baseUri}/003_mini_framework.kmt"
+	import "${project.baseUri}/003_hello_on_mini_framework.kmt"
+	import "${language_model.baseUri}/src/main/ecore/kermeta.ecore"
+}
