@@ -48,10 +48,16 @@ class LLVMHelper {
 	end
 	
 	
-	operation define(return:String, name:String, params:Sequence<String>) : String is do
+	operation define(linkage:LinkageType, return:String, name:String, params:Sequence<String>) : String is do
 		var buf : StringBuffer init StringBuffer.new
-		buf.append("define ").append(return).append(" ").append(name).append("(")
+		buf.append("define ")
+
+		if(not linkage.isVoid) then buf.append(linkage.name).append(" ") end
+
+		buf.append(return).append(" ").append(name).append("(")
+
 		if(not params.isVoid) then flatListString(buf, params, ", ") end
+
 		buf.append(")")
 		result := buf.toString
 	end
@@ -89,3 +95,12 @@ class LLVMHelper {
 		result := "\"" + name + "\""
 	end
 }
+
+
+
+enumeration LinkageType {
+	internal; private; linker_private; linker_private_weak; available_externally; linkonce; weak; common; appending; extern_weak; linkonce_odr; weak_odr;
+	linkonce_odr_auto_hide; external; dllimport; dllexport;
+}
+
+

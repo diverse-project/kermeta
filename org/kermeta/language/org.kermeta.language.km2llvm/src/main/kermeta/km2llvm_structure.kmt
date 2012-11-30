@@ -13,6 +13,7 @@ require "km2llvm_aspectGenerator.kmt"
 
 using org::kermeta::language::km2llvm
 using kermeta::standard
+using org::kermeta::language::llvm
 
 aspect class KermetaModelElement inherits LLVMGenerator{}
 
@@ -87,7 +88,7 @@ aspect class ClassDefinition {
 	operation generateLLVMConstructor(ctx:Context) is do
 	 	var typeName : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 	 	var resultVar : String init "%r"
-	 	ctx.constructors.append(ctx.llvm.define(typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void)).append("{\n")
+	 	ctx.constructors.append(ctx.llvm.define(LinkageType.internal, typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void)).append("{\n")
 		
 		// Creation of the object.
 		ctx.constructors.append(ctx.llvm.assign(resultVar, ctx.llvm.alloca(ctx.llvm.localVar(qualifiedNameLLVM)))).append("\n")
