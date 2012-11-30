@@ -40,6 +40,17 @@ aspect class Class {
 }
 
 
+aspect class Enumeration {
+	method llvmType() : String is do
+		result := "FIXMEEnum"
+	end
+	
+	method generateLLVM(ctx:Context) is do
+		stdio.writeln("FIXME ENUM GENERATE LLVM")
+	end
+}
+
+
 aspect class PrimitiveType {
 	method llvmType() : String is do
 		result := name
@@ -64,29 +75,38 @@ aspect class ClassDefinition {
 		allLowertypes := getAllLowerTypes
 		
 		// Creating the supertype parameters
-		var list : Sequence<String> init allSupertypes.collect{st | ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)) }
+		var list : Sequence<String> init allSupertypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)) }
 		// Creating the lowertype parameters
-		list.addAll(allLowertypes.collect{st | ctx.pointer(ctx.localVar(st.qualifiedNameLLVM))})
-		ownedAttribute.each{attr | list.add(ctx.pointer(ctx.localVar(attr.type.llvmType))) }
-		ctx.types.append(ctx.llvm.type(ctx.localVar(qualifiedNameLLVM), list)).append("\n")
+		list.addAll(allLowertypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))})
+		ownedAttribute.each{attr | list.add(ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType))) }
+		ctx.types.append(ctx.llvm.type(ctx.llvm.localVar(qualifiedNameLLVM), list)).append("\n")
 	end
 	
 	
 	// Generates the contructor of the class.
 	operation generateLLVMConstructor(ctx:Context) is do
-	 	var typeName : String init ctx.pointer(ctx.localVar(qualifiedNameLLVM))
-	 	ctx.constructors.append(ctx.llvm.define(typeName, ctx.globalVar("create_" + qualifiedNameLLVM), void)).append("{\n")
+	 	var typeName : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+	 	var resultVar : String init "%r"
+	 	ctx.constructors.append(ctx.llvm.define(typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void)).append("{\n")
+		
+		// Creation of the object.
+		ctx.constructors.append(ctx.llvm.assign(resultVar, ctx.llvm.alloca(ctx.llvm.localVar(qualifiedNameLLVM)))).append("\n")
+		
 		// Creation of the super types.
 		var i : Integer init 0
+		var istr : String
+		var ptrSuperType : String
 		allSupertypes.each{st |
-			ctx.constructors.append(ctx.llvm.assign("%\"var"+i.toString+"\"", 
-				ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ctx.pointer(ctx.localVar(st.qualifiedNameLLVM)), void))).append("\n")
+			istr := i.toString
+			ptrSuperType := ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
+			ctx.constructors.append(ctx.llvm.assign("%\""+istr+"\"", ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void))).append("\n")
+			ctx.constructors.append(ctx.llvm.assign("%\""+istr+istr+"\"",  ctx.llvm.getelementptr(typeName, resultVar, ctx.llvm.i32, 0, ctx.llvm.i32, i))).append("\n")
+			ctx.constructors.append(ctx.llvm.store(ptrSuperType, "%\""+istr+"\"", "%\""+istr+istr+"\"")).append("\n")
 			i := i + 1
 		}
-		// Creation of the object.
-		ctx.constructors.append(ctx.llvm.assign("%result", ctx.llvm.alloca(ctx.localVar(qualifiedNameLLVM)))).append("\n")
+
 		// Returning the created object.
-		ctx.constructors.append(ctx.llvm.return(typeName, "%result")).append("\n}\n")
+		ctx.constructors.append(ctx.llvm.return(typeName, resultVar)).append("\n}\n")
 	end
 }
 
@@ -145,6 +165,7 @@ aspect class TypeDefinition {
 			result.add(st)
 			result.addAll(st.getAllLowerTypes)
 		}
+		var cd : ClassDefinition init self.asType(ClassDefinition)
 	end	
 	
 	

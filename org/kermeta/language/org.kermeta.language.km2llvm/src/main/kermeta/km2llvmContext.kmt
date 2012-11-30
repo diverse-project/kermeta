@@ -43,23 +43,4 @@ class Context{
 		result.append(types.toString)
 		result.append(constructors.toString)
 	end
-	
-	
-	operation pointer(varName:String) : String is do
-		result := varName + "*"
-	end
-	
-	operation localVar(name:String) : String is do
-		result := "%" + llvmID(name)
-	end
-	
-	
-	operation globalVar(name:String) : String is do
-		result := "@" + llvmID(name)
-	end
-	
-	
-	operation llvmID(name:String) : String is do
-		result := "\"" + name + "\""
-	end
 }

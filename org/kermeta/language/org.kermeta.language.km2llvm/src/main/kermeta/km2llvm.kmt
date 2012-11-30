@@ -17,13 +17,16 @@ require "km2llvm_structure.kmt"
 using org::kermeta::language::structure
 using kermeta::utils
 using kermeta::persistence
-
+using kermeta::io
 
 class Km2llvm {
 	operation main() is do
 		var mm : Metamodel init createKm
 		mm.preprocess4LLVM
-		stdio.writeln(compile(mm).toString)
+		var llvmCode : String init compile(mm).toString
+		stdio.writeln(llvmCode)
+		var f : FileIO init FileIO.new
+		f.writeTextFile("../../test/test.ll", llvmCode)
 	end
 
 	operation compile(km:Metamodel) : StringBuffer is do
@@ -34,12 +37,9 @@ class Km2llvm {
 	
 	
 	operation getKmModel() : Metamodel is do
-		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0/"
    		var repository : EMFRepository init EMFRepository.new
-   		repository.registerEcoreFile(uriMM)          
-   		var resource : Resource init repository.createResource("../../test/Ecore2km.km", uriMM)
+   		var resource : Resource init repository.createResource("../../test/test.km", "../../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore")
        	resource.load
-	
 		result ?= resource.one	
 	end
 	

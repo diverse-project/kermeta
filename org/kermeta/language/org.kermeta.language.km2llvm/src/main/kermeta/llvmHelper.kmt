@@ -13,6 +13,17 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation store(typeNew:String, varNew:String, varContainer:String) : String is do
+		result := "store " + typeNew + " " + varNew + "," +  pointer(typeNew) + " " + varContainer
+	end
+
+	operation i32() : String is do result := "i32" end
+	operation i64() : String is do result := "i64" end
+
+	operation getelementptr(return:String, val:String, type1:String, pos1:Integer, type2:String, pos2:Integer) : String is do 
+		result := "getelementptr " + return + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString
+	end
+
 	operation call(name:String, return:String, params:Sequence<String>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		buf.append("call ").append(return).append(" ").append(name).append("(")
@@ -21,7 +32,7 @@ class LLVMHelper {
 		result := buf.toString
 	end
 
-	operation return(type:String, val:String):String is do result := "ret " +type+" %result" end
+	operation return(type:String, val:String):String is do result := "ret " + type + " " + val end
 	
 	operation alloca(type:String):String is do result := "alloca "+type end
 	
@@ -57,5 +68,24 @@ class LLVMHelper {
 			end
 			if(list.size>0) then buf.append(list.elementAt(list.size-1)) end
 		end
+	end
+	
+
+	operation pointer(varName:String) : String is do
+		result := varName + "*"
+	end
+	
+	operation localVar(name:String) : String is do
+		result := "%" + llvmID(name)
+	end
+	
+	
+	operation globalVar(name:String) : String is do
+		result := "@" + llvmID(name)
+	end
+	
+	
+	operation llvmID(name:String) : String is do
+		result := "\"" + name + "\""
 	end
 }
