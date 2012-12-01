@@ -24,8 +24,10 @@ class Context{
 	attribute stringVars : Hashtable<String, String>
 	// The llvm code defining all the types defined in the km.
 	attribute types : StringBuffer
-	// The contructors	
+	// The constructors	
 	attribute constructors : StringBuffer
+	// The getters
+	attribute getters : StringBuffer
 
 	
 	operation initialise() : Context is do
@@ -34,6 +36,7 @@ class Context{
 		stringVars :=  Hashtable<String, String>.new
 		constructors := StringBuffer.new
 		types := StringBuffer.new
+		getters := StringBuffer.new
 		result := self
 	end
 	
@@ -42,5 +45,6 @@ class Context{
 		result.append(strings.toString)
 		result.append(types.toString)
 		result.append(constructors.toString)
+		result.append(getters.toString)
 	end
 }

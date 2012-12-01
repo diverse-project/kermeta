@@ -67,18 +67,45 @@ aspect class ClassDefinition {
 	method generateLLVM(ctx:Context) is do
 		generateLLVMType(ctx)
 		generateLLVMConstructor(ctx)
+		generateLLVMGetters(ctx)
+	end
+	
+	
+	operation generateLLVMGetters(ctx:Context) is do
+		var params : Sequence<String> init  Sequence<String>.new
+		var fctAttr: Sequence<FunctionAttr> init  Sequence<FunctionAttr>.new
+		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+		var selfVar : String init ctx.llvm.localVar("self")
+		var returnVar : String init ctx.llvm.localVar("r")
+		var getterName : String
+		var cpt : Integer init superTypes.size + lowerTypes.size
+		var returnType : String
+		
+		params.add(typeCD + " " + selfVar)
+		fctAttr.add(FunctionAttr.~readonly)
+		fctAttr.add(FunctionAttr.inlinehint)
+		
+		ownedAttribute.each{attr |
+			returnType := ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType)))
+			getterName := ctx.llvm.globalVar(qualifiedNameLLVM + ".#" + attr.name )
+			ctx.getters.append(ctx.llvm.define(LinkageType.internal, returnType, getterName, params, fctAttr)).append("{\n")
+			ctx.getters.append(ctx.llvm.assign(returnVar, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, cpt))).append("\n")
+			ctx.getters.append(ctx.llvm.return(returnType, returnVar)).append("\n")
+			ctx.getters.append("}\n")
+			cpt := cpt + 1
+		}
 	end
 	
 	
 	// Generates the llvm type corresponding to the class.
 	operation generateLLVMType(ctx:Context) is do
-		allSupertypes := getAllSuperTypes
-		allLowertypes := getAllLowerTypes
+//		allSupertypes := getAllSuperTypes
+//		allLowertypes := getAllLowerTypes
 		
 		// Creating the supertype parameters
-		var list : Sequence<String> init allSupertypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)) }
+		var list : Sequence<String> init superTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)) }
 		// Creating the lowertype parameters
-		list.addAll(allLowertypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))})
+		list.addAll(lowerTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))})
 		ownedAttribute.each{attr | list.add(ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType))) }
 		ctx.types.append(ctx.llvm.type(ctx.llvm.localVar(qualifiedNameLLVM), list)).append("\n")
 	end
@@ -88,7 +115,7 @@ aspect class ClassDefinition {
 	operation generateLLVMConstructor(ctx:Context) is do
 	 	var typeName : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 	 	var resultVar : String init "%r"
-	 	ctx.constructors.append(ctx.llvm.define(LinkageType.internal, typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void)).append("{\n")
+	 	ctx.constructors.append(ctx.llvm.define(LinkageType.internal, typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void, void)).append("{\n")
 		
 		// Creation of the object.
 		ctx.constructors.append(ctx.llvm.assign(resultVar, ctx.llvm.alloca(ctx.llvm.localVar(qualifiedNameLLVM)))).append("\n")
@@ -97,7 +124,7 @@ aspect class ClassDefinition {
 		var i : Integer init 0
 		var istr : String
 		var ptrSuperType : String
-		allSupertypes.each{st |
+		superTypes.each{st |
 			istr := i.toString
 			ptrSuperType := ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
 			ctx.constructors.append(ctx.llvm.assign("%\""+istr+"\"", ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void))).append("\n")
@@ -143,8 +170,8 @@ aspect class TypeDefinition {
 	// This sequence is useful to keep a trace of the order of the created llvm super-types (in fact attributes
 	// of the llvm type). If you want to access in llvm to a super-type, we just have to get the position of 
 	// the searched type into that list.
-	reference allSupertypes : OrderedSet<TypeDefinition>
-	reference allLowertypes : OrderedSet<TypeDefinition>
+//	reference allSupertypes : OrderedSet<TypeDefinition>
+//	reference allLowertypes : OrderedSet<TypeDefinition>
 	
 	attribute qualifiedNameLLVM : String
 	
@@ -160,7 +187,7 @@ aspect class TypeDefinition {
 		}
 	end
 	
-	operation getAllLowerTypes() : OrderedSet<TypeDefinition> is do
+/* 	operation getAllLowerTypes() : OrderedSet<TypeDefinition> is do
 		result := OrderedSet<TypeDefinition>.new
 		lowerTypes.each{st |
 			result.add(st)
@@ -177,7 +204,7 @@ aspect class TypeDefinition {
 			result.addAll(st.getAllLowerTypes)
 		}
 	end
-
+*/ 
 	operation preprocess4LLVM() is do
 		defineLowerSuperTypes
 		qualifiedNameLLVM := getLLVMQualifiedName

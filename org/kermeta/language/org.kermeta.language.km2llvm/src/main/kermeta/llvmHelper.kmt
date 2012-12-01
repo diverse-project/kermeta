@@ -48,7 +48,7 @@ class LLVMHelper {
 	end
 	
 	
-	operation define(linkage:LinkageType, return:String, name:String, params:Sequence<String>) : String is do
+	operation define(linkage:LinkageType, return:String, name:String, params:Sequence<String>, fctAttr:Sequence<FunctionAttr>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		buf.append("define ")
 
@@ -59,6 +59,9 @@ class LLVMHelper {
 		if(not params.isVoid) then flatListString(buf, params, ", ") end
 
 		buf.append(")")
+		
+		if(not fctAttr.isVoid) then	fctAttr.each{attr | buf.append(" ").append(attr.name) } end
+		
 		result := buf.toString
 	end
 	
@@ -96,6 +99,11 @@ class LLVMHelper {
 	end
 }
 
+
+enumeration FunctionAttr {//FIXME: no lignstack(<n>)
+	address_safety; alwaysinline; nonlazybind; inlinehint; naked; noimplicitfloat; noinline; noredzone; noreturn; nounwind; optsize; readnone; ~readonly; 
+	returns_twice; ssp; sspreq; uwtable;
+}
 
 
 enumeration LinkageType {
