@@ -28,7 +28,8 @@ class Context{
 	attribute constructors : StringBuffer
 	// The getters
 	attribute getters : StringBuffer
-
+	// Used to count the string constants (to name it).
+	attribute cptStrings : Integer
 	
 	operation initialise() : Context is do
 		llvm := LLVMHelper.new
@@ -37,6 +38,7 @@ class Context{
 		constructors := StringBuffer.new
 		types := StringBuffer.new
 		getters := StringBuffer.new
+		cptStrings := 0
 		result := self
 	end
 	
@@ -46,5 +48,19 @@ class Context{
 		result.append(types.toString)
 		result.append(constructors.toString)
 		result.append(getters.toString)
+	end
+	
+	// Returns the name of the variable corresponding to the given string.
+	// If the variable does not exist, it is created and added to the pool of strings
+	// (thus, generated as a string constant in llvm).
+	operation getStringVarName(str:String) : String is do
+		result := stringVars.getValue(str)
+
+		if(result.isVoid) then
+			result := "s"+cptStrings.toString
+			stringVars.put(str, result)
+			strings.append(llvm.assign(llvm.globalVar(result), "private unnamed_addr constant ["+(str.size+1).toString+" x i8] c\""+str+"\\00\"")).append("\n")
+			cptStrings := cptStrings + 1
+		end
 	end
 }

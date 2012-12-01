@@ -85,6 +85,15 @@ class Km2llvm {
 		clazz.typeDefinition := cd2
 		prop.type := clazz
 		cd1.ownedAttribute.add(prop)
+		var enum : Enumeration init Enumeration.new
+		enum.name := "myEnum"
+		var lit1 : EnumerationLiteral init EnumerationLiteral.new
+		lit1.name : = "lit1"
+		var lit2 : EnumerationLiteral init EnumerationLiteral.new
+		lit2.name : = "lit2"
+		enum.ownedLiteral.add(lit1)
+		enum.ownedLiteral.add(lit2)
+		pkg1.ownedTypeDefinition.add(enum)
 	end
 }
 

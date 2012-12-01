@@ -13,6 +13,19 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation pointerString(str:String, name:String) : String is do
+		result := getelementptr("["+(str.size+1).toString+" x i8]*", name, i32, 0, i32, 0, true)
+	end
+
+	operation constStruct(type:String, varName:String, attrs:Sequence<String>) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		var size : Integer init attrs.size-1
+		buf.append(varName).append(" = constant ").append(type).append("{")
+		flatListString(buf, attrs, ", ")
+		buf.append("}")
+		result := buf.toString
+	end
+
 	operation load(type:String, varName:String) : String is do result := "load " + type + " " + varName end
 
 	operation store(typeNew:String, varNew:String, varContainer:String) : String is do
@@ -22,8 +35,18 @@ class LLVMHelper {
 	operation i32() : String is do result := "i32" end
 	operation i64() : String is do result := "i64" end
 
-	operation getelementptr(return:String, val:String, type1:String, pos1:Integer, type2:String, pos2:Integer) : String is do 
-		result := "getelementptr " + return + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString
+	operation getelementptr(return:String, val:String, type1:String, pos1:Integer, type2:String, pos2:Integer, asFct:Boolean) : String is do
+		var sep1 : String
+		var sep2 : String
+		
+		if(asFct) then 
+			sep1 := "("
+			sep2 := ")"
+		else
+			sep1 := " "
+			sep2 := ""
+		end
+		result := "getelementptr" + sep1 + return + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString+sep2
 	end
 
 	operation call(name:String, return:String, params:Sequence<String>) : String is do
