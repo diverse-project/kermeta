@@ -77,6 +77,7 @@ aspect class ClassDefinition {
 		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 		var selfVar : String init ctx.llvm.localVar("self")
 		var returnVar : String init ctx.llvm.localVar("r")
+		var tmpVar : String init ctx.llvm.localVar("t")
 		var getterName : String
 		var cpt : Integer init superTypes.size + lowerTypes.size
 		var returnType : String
@@ -86,10 +87,11 @@ aspect class ClassDefinition {
 		fctAttr.add(FunctionAttr.inlinehint)
 		
 		ownedAttribute.each{attr |
-			returnType := ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType)))
+			returnType := ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType))
 			getterName := ctx.llvm.globalVar(qualifiedNameLLVM + ".#" + attr.name )
 			ctx.getters.append(ctx.llvm.define(LinkageType.internal, returnType, getterName, params, fctAttr)).append("{\n")
-			ctx.getters.append(ctx.llvm.assign(returnVar, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, cpt))).append("\n")
+			ctx.getters.append(ctx.llvm.assign(tmpVar, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, cpt))).append("\n")
+			ctx.getters.append(ctx.llvm.assign(returnVar, ctx.llvm.load(ctx.llvm.pointer(returnType), tmpVar))).append("\n")
 			ctx.getters.append(ctx.llvm.return(returnType, returnVar)).append("\n")
 			ctx.getters.append("}\n")
 			cpt := cpt + 1

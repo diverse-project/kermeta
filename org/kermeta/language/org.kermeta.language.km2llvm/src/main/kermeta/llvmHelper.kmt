@@ -13,6 +13,8 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation load(type:String, varName:String) : String is do result := "load " + type + " " + varName end
+
 	operation store(typeNew:String, varNew:String, varContainer:String) : String is do
 		result := "store " + typeNew + " " + varNew + "," +  pointer(typeNew) + " " + varContainer
 	end
