@@ -43,7 +43,7 @@ aspect class Class {
 
 aspect class Enumeration {
 	method llvmType() : String is do
-		result := "FIXMEEnum"
+		result := qualifiedNameLLVM
 	end
 	
 	method generateLLVM(ctx:Context) is do
