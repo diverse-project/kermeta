@@ -41,6 +41,49 @@ aspect class Class {
 }
 
 
+aspect class FunctionType {
+	method llvmType() : String is do
+		result := "FIXME_FunctionType"
+	end
+}
+
+
+aspect class ObjectTypeVariable {
+	method llvmType() : String is do
+		result := "FIXME_ObjectTypeVariable"
+	end
+}
+
+
+aspect class Operation {
+	method generateLLVM(ctx:Context) is do
+		var attrs : Sequence<String> init  Sequence<String>.new
+		var opName : String init ctx.llvm.globalVar(getLLVMQualifiedName)
+		
+		if(isMain) then
+			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
+			ctx.operations.append(ctx.llvm.call(opName, ctx.llvm.~void, attrs)).append("\n")
+			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
+			ctx.operations.append("}\n")
+		end
+
+		ownedParameter.each{param | attrs.add(ctx.llvm.localVar(param.type.llvmType)+" "+ ctx.llvm.localVar(param.name)) }
+		ctx.operations.append(ctx.llvm.define(LinkageType.internal, ctx.llvm.~void, opName, attrs, void)).append("{\n")
+		ctx.operations.append("}\n")
+	end
+
+
+	operation getLLVMQualifiedName() : String is do
+		result := owningClass.qualifiedNameLLVM + "." + name
+	end
+	
+	
+	operation isMain() : Boolean is do
+		result := kOwnedTags.exists{t | t.name=="main"}
+	end
+}
+
+
 aspect class Enumeration {
 	method llvmType() : String is do
 		result := qualifiedNameLLVM
@@ -103,10 +146,12 @@ aspect class ClassDefinition {
 			ctx.getters.append(ctx.llvm.define(LinkageType.internal, returnType, getterName, params, fctAttr)).append("{\n")
 			ctx.getters.append(ctx.llvm.assign(tmpVar, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, cpt, false))).append("\n")
 			ctx.getters.append(ctx.llvm.assign(returnVar, ctx.llvm.load(ctx.llvm.pointer(returnType), tmpVar))).append("\n")
-			ctx.getters.append(ctx.llvm.return(returnType, returnVar)).append("\n")
+			ctx.getters.append(ctx.llvm.ret(returnType, returnVar)).append("\n")
 			ctx.getters.append("}\n")
 			cpt := cpt + 1
 		}
+		
+		ownedOperation.each{op | op.generateLLVM(ctx) }
 	end
 	
 	
@@ -147,7 +192,7 @@ aspect class ClassDefinition {
 		}
 
 		// Returning the created object.
-		ctx.constructors.append(ctx.llvm.return(typeName, resultVar)).append("\n}\n")
+		ctx.constructors.append(ctx.llvm.ret(typeName, resultVar)).append("\n}\n")
 	end
 }
 

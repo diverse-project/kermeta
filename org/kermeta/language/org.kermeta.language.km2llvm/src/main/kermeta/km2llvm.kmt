@@ -18,38 +18,42 @@ using org::kermeta::language::structure
 using kermeta::utils
 using kermeta::persistence
 using kermeta::io
+using kermeta::standard
 
 class Km2llvm {
 	operation main() is do
-		var mm : Metamodel init createKm
-		mm.preprocess4LLVM
-		var llvmCode : String init compile(mm).toString
+		var mms : Collection<Metamodel> init getKmModel
+		mms.each{mm | mm.preprocess4LLVM }
+		var llvmCode : String init compile(mms).toString
 		stdio.writeln(llvmCode)
 		var f : FileIO init FileIO.new
 		f.writeTextFile("../../test/test.ll", llvmCode)
 	end
 
-	operation compile(km:Metamodel) : StringBuffer is do
+	operation compile(kms:Collection<Metamodel>) : StringBuffer is do
 		var ctx : Context init Context.new.initialise
-		km.generateLLVM(ctx)
+		kms.each{km | km.generateLLVM(ctx)}
 		result := ctx.llvmCode
 	end
 	
 	
-	operation getKmModel() : Metamodel is do
+	operation getKmModel() : Collection<Metamodel> is do
    		var repository : EMFRepository init EMFRepository.new
    		var resource : Resource init repository.createResource("../../test/test.km", "../../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore")
        	resource.load
-		result ?= resource.one	
+		result := Sequence<Metamodel>.new
+		resource.each{obj | if(obj.isInstanceOf(Metamodel)) then result.add(obj.asType(Metamodel)) end }
 	end
 	
-	operation createKm() : Metamodel is do
-		result := Metamodel.new
+	operation createKm() : Collection<Metamodel> is do
+		result := Sequence<Metamodel>.new
+		var mm : Metamodel init Metamodel.new
+		result.add(mm)
 		var pkg1 : Package init Package.new
 		var pkg2 : Package init Package.new
 		pkg1.name := "pkg1"
 		pkg2.name := "pkg2"
-		result.packages.add(pkg1)
+		mm.packages.add(pkg1)
 		pkg1.nestedPackage.add(pkg2)
 		var cd0 : ClassDefinition init ClassDefinition.new
 		cd0.name := "Cd0"
