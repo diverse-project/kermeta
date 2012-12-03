@@ -9,10 +9,12 @@ package org::kermeta::language::structure;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "km2llvm_aspectGenerator.kmt"
+require "../km2llvm_aspectGenerator.kmt"
+require "km2llvm_castFunctions.kmt"
 
 using org::kermeta::language::km2llvm
 using kermeta::standard
+using kermeta::utils
 using org::kermeta::language::llvm
 
 aspect class KermetaModelElement inherits LLVMGenerator{}
@@ -73,11 +75,6 @@ aspect class Operation {
 	end
 
 
-	operation getLLVMQualifiedName() : String is do
-		result := owningClass.qualifiedNameLLVM + "." + name
-	end
-	
-	
 	operation isMain() : Boolean is do
 		result := kOwnedTags.exists{t | t.name=="main"}
 	end
@@ -126,38 +123,6 @@ aspect class ClassDefinition {
 	end
 	
 	
-	operation generateLLVMCast(ctx:Context) is do
-		//TODO generate cast to all super/lower types
-		generateLLVMDirectCast(ctx)
-	end
-	
-	
-	operation generateLLVMDirectCast(ctx:Context) is do
-		var params : Sequence<String> init Sequence<String>.new
-		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
-		var selfVar : String init ctx.llvm.localVar("self")
-		var v0 : String init ctx.llvm.localVar("0")
-		var v1 : String init ctx.llvm.localVar("1")
-		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
-		var i : Integer init 0
-		params.add(typeCD + " " + selfVar)
-		fctAttrs.add(FunctionAttr.~readonly)
-		fctAttrs.add(FunctionAttr.inlinehint)
-		
-		superTypes.each{st |
-			var stType : String init ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
-			ctx.casts.append(ctx.llvm.define(LinkageType.internal, stType, 
-								ctx.llvm.globalVar("cast_"+qualifiedNameLLVM+"_"+st.qualifiedNameLLVM), params, fctAttrs)).append("{\n")
-			ctx.casts.append(ctx.llvm.assign(v0, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
-			ctx.casts.append(ctx.llvm.assign(v1, ctx.llvm.load(ctx.llvm.pointer(stType), v0))).append("\n")
-			ctx.casts.append(ctx.llvm.ret(stType, v1)).append("\n")
-			ctx.casts.append("}\n")
-			i := i + 1
-		}
-		//TODO generate direct lower type casts.
-	end
-
-	
 	operation generateLLVMGetters(ctx:Context) is do
 		var params : Sequence<String> init  Sequence<String>.new
 		var fctAttr: Sequence<FunctionAttr> init  Sequence<FunctionAttr>.new
@@ -190,9 +155,6 @@ aspect class ClassDefinition {
 	
 	// Generates the llvm type corresponding to the class.
 	operation generateLLVMType(ctx:Context) is do
-//		allSupertypes := getAllSuperTypes
-//		allLowertypes := getAllLowerTypes
-		
 		// Creating the supertype parameters
 		var list : Sequence<String> init superTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)) }
 		// Creating the lowertype parameters
@@ -230,7 +192,7 @@ aspect class ClassDefinition {
 }
 
 
-aspect class Package {
+aspect class Package  {
 	// Preprocessing useful for the compilation
 	operation preprocess4LLVM() is do
 		ownedTypeDefinition.each{td | td.preprocess4LLVM}
@@ -242,70 +204,13 @@ aspect class Package {
 		ownedTypeDefinition.each{td | td.generateLLVM(ctx)}
 		nestedPackage.each{pkg | pkg.generateLLVM(ctx)}
 	end
-	
-	// Returns the qualified name of the package
-	operation getLLVMQualifiedName() : String is do
-		result := name
-		if(not nestingPackage.isVoid) then
-			result := nestingPackage.getLLVMQualifiedName + "::" + result
-		end
-	end
 }
 
 
 aspect class TypeDefinition {
-	// The lower types of the class. Computed during pre-processing.
-	reference lowerTypes : oset TypeDefinition[*]
-	reference superTypes : oset TypeDefinition[*]
-	
-	// This sequence is useful to keep a trace of the order of the created llvm super-types (in fact attributes
-	// of the llvm type). If you want to access in llvm to a super-type, we just have to get the position of 
-	// the searched type into that list.
-//	reference allSupertypes : OrderedSet<TypeDefinition>
-//	reference allLowertypes : OrderedSet<TypeDefinition>
-	
-	attribute qualifiedNameLLVM : String
-	
-
-	operation defineLowerSuperTypes() is do
-		var superT : TypeDefinition
-		superType.each{st |
-			if st.isInstanceOf(Class) then
-				superT := st.asType(Class).typeDefinition
-				superT.lowerTypes.add(self)	
-				superTypes.add(superT)
-			end
-		}
-	end
-	
-/* 	operation getAllLowerTypes() : OrderedSet<TypeDefinition> is do
-		result := OrderedSet<TypeDefinition>.new
-		lowerTypes.each{st |
-			result.add(st)
-			result.addAll(st.getAllLowerTypes)
-		}
-		var cd : ClassDefinition init self.asType(ClassDefinition)
-	end	
-	
-	
-	operation getAllSuperTypes() : OrderedSet<TypeDefinition> is do
-		result := OrderedSet<TypeDefinition>.new
-		superTypes.each{st |
-			result.add(st)
-			result.addAll(st.getAllLowerTypes)
-		}
-	end
-*/ 
+	// Preprocessing useful for the compilation
 	operation preprocess4LLVM() is do
 		defineLowerSuperTypes
 		qualifiedNameLLVM := getLLVMQualifiedName
-	end
-	
-	
-	operation getLLVMQualifiedName() : String is do
-		result := name
-		if(container.isKindOf(Package)) then
-			result := container.asType(Package).getLLVMQualifiedName + "_" + result
-		end
 	end
 }

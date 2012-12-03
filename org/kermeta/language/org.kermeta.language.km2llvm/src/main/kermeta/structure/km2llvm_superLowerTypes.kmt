@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : November 27, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "../km2llvmContext.kmt"
+require "km2llvm_qualifiedName.kmt"
+
+using org::kermeta::language::km2llvm
+using org::kermeta::language::llvm
+using kermeta::standard
+using kermeta::utils
+
+
+aspect class TypeDefinition {
+	// The lower types of the class. Computed during pre-processing.
+	reference lowerTypes : oset TypeDefinition[*]
+	reference superTypes : oset TypeDefinition[*]
+
+	operation defineLowerSuperTypes() is do
+		var superT : TypeDefinition
+		superType.each{st |
+			if st.isInstanceOf(Class) then
+				superT := st.asType(Class).typeDefinition
+				superT.lowerTypes.add(self)	
+				superTypes.add(superT)
+			end
+		}
+	end
+}

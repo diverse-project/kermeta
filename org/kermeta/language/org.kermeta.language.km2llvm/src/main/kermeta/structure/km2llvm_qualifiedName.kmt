@@ -1,0 +1,48 @@
+/* $Id:$ 
+ * Creation : November 27, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "../km2llvmContext.kmt"
+
+using org::kermeta::language::km2llvm
+using org::kermeta::language::llvm
+using kermeta::standard
+using kermeta::utils
+
+
+aspect class Operation {
+	operation getLLVMQualifiedName() : String is do
+		result := owningClass.qualifiedNameLLVM + "." + name
+	end
+}
+
+
+aspect class TypeDefinition {
+	attribute qualifiedNameLLVM : String
+	
+	
+	operation getLLVMQualifiedName() : String is do
+		result := name
+		if(container.isKindOf(Package)) then
+			result := container.asType(Package).getLLVMQualifiedName + "_" + result
+		end
+	end
+}
+
+
+aspect class Package  {
+	// Returns the qualified name of the package
+	operation getLLVMQualifiedName() : String is do
+		result := name
+		if(not nestingPackage.isVoid) then
+			result := nestingPackage.getLLVMQualifiedName + "::" + result
+		end
+	end
+}

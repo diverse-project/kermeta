@@ -12,7 +12,7 @@ package org::kermeta::language::km2llvm;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
-require "km2llvm_structure.kmt"
+require "structure/km2llvm_structure.kmt"
 
 using org::kermeta::language::structure
 using kermeta::utils
