@@ -193,7 +193,7 @@ public class KermetaOutline extends ContentOutlinePage implements IDoubleClickLi
 			try {
 				ResourceSet resSet = new ResourceSetImpl();
 				Resource res = resSet.getResource(org.kermeta.utils.helpers.emf.EMFUriHelper.convertToEMFUri(file.getLocationURI()), true);
-				ModelingUnit rtNode = (ModelingUnit) res.getContents().get(0);	
+				ModelingUnit rtNode = new ModelingUnit( "beforeCheckingforScopeRESOLVED.km", res.getContents());	
 				
 				return rtNode;
 			} catch(RuntimeException e){
