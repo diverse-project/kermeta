@@ -28,6 +28,8 @@ class Context{
 	attribute constructors : StringBuffer
 	// The getters
 	attribute getters : StringBuffer
+	// The cast operations
+	attribute casts : StringBuffer
 	// The operations
 	attribute operations : StringBuffer
 	// Used to count the string constants (to name it).
@@ -41,6 +43,7 @@ class Context{
 		types := StringBuffer.new
 		getters := StringBuffer.new
 		operations := StringBuffer.new
+		casts := StringBuffer.new
 		cptStrings := 0
 		result := self
 	end
@@ -51,6 +54,7 @@ class Context{
 		result.append(types.toString)
 		result.append(constructors.toString)
 		result.append(getters.toString)
+		result.append(casts.toString)
 		result.append(operations.toString)
 	end
 	

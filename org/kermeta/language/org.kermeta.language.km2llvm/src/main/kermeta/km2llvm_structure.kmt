@@ -122,8 +122,41 @@ aspect class ClassDefinition {
 		generateLLVMType(ctx)
 		generateLLVMConstructor(ctx)
 		generateLLVMGetters(ctx)
+		generateLLVMCast(ctx)
 	end
 	
+	
+	operation generateLLVMCast(ctx:Context) is do
+		//TODO generate cast to all super/lower types
+		generateLLVMDirectCast(ctx)
+	end
+	
+	
+	operation generateLLVMDirectCast(ctx:Context) is do
+		var params : Sequence<String> init Sequence<String>.new
+		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+		var selfVar : String init ctx.llvm.localVar("self")
+		var v0 : String init ctx.llvm.localVar("0")
+		var v1 : String init ctx.llvm.localVar("1")
+		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
+		var i : Integer init 0
+		params.add(typeCD + " " + selfVar)
+		fctAttrs.add(FunctionAttr.~readonly)
+		fctAttrs.add(FunctionAttr.inlinehint)
+		
+		superTypes.each{st |
+			var stType : String init ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
+			ctx.casts.append(ctx.llvm.define(LinkageType.internal, stType, 
+								ctx.llvm.globalVar("cast_"+qualifiedNameLLVM+"_"+st.qualifiedNameLLVM), params, fctAttrs)).append("{\n")
+			ctx.casts.append(ctx.llvm.assign(v0, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
+			ctx.casts.append(ctx.llvm.assign(v1, ctx.llvm.load(ctx.llvm.pointer(stType), v0))).append("\n")
+			ctx.casts.append(ctx.llvm.ret(stType, v1)).append("\n")
+			ctx.casts.append("}\n")
+			i := i + 1
+		}
+		//TODO generate direct lower type casts.
+	end
+
 	
 	operation generateLLVMGetters(ctx:Context) is do
 		var params : Sequence<String> init  Sequence<String>.new
