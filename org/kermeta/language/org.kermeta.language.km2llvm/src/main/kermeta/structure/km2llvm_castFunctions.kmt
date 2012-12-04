@@ -40,30 +40,30 @@ aspect class ClassDefinition {
 		
 		// Creating a cast function for each direct super type.
 		superTypes.each{st |
-			ctx.casts.append(createCastFunction(ctx, qualifiedNameLLVM, v0, v1, params, fctAttrs, typeCD, selfVar, i))
+			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
 			i := i + 1
 		}
 		// Creating a cast function for each direct lower type.
 		lowerTypes.each{st |
-			ctx.casts.append(createCastFunction(ctx, qualifiedNameLLVM, v0, v1, params, fctAttrs, typeCD, selfVar, i))
+			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
 			i := i + 1
 		}
 	end
 	
 	
 	// A private helper function. See generateLLVMDirectCast
-	operation createCastFunction(ctx:Context, qn:String, v0:String, v1:String, params:Sequence<String>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
+	operation createCastFunction(ctx:Context, td:TypeDefinition, v0:String, v1:String, params:Sequence<String>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
 		var buf : StringBuffer init StringBuffer.new
-		var stType : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+		var tdType : String init ctx.llvm.pointer(ctx.llvm.localVar(td.qualifiedNameLLVM))
 		// Creating the function header
-		buf.append(ctx.llvm.define(LinkageType.internal, stType, 
-							ctx.llvm.globalVar("cast_"+qn+"_"+qualifiedNameLLVM), params, fctAttrs)).append("{\n")
+		buf.append(ctx.llvm.define(LinkageType.internal, tdType, 
+							ctx.llvm.globalVar("cast_"+qualifiedNameLLVM+"_"+td.qualifiedNameLLVM), params, fctAttrs)).append("{\n")
 		// Getting the pointer to the attribute
 		buf.append(ctx.llvm.assign(v0, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
 		// loading the value of the pointer
-		buf.append(ctx.llvm.assign(v1, ctx.llvm.load(ctx.llvm.pointer(stType), v0))).append("\n")
+		buf.append(ctx.llvm.assign(v1, ctx.llvm.load(ctx.llvm.pointer(tdType), v0))).append("\n")
 		// Returing the value.
-		buf.append(ctx.llvm.ret(stType, v1)).append("\n")
+		buf.append(ctx.llvm.ret(tdType, v1)).append("\n")
 		buf.append("}\n")
 		result := buf.toString
 	end
