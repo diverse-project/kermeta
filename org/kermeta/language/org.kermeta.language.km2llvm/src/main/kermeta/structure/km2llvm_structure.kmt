@@ -45,7 +45,7 @@ aspect class Class {
 
 aspect class FunctionType {
 	method llvmType() : String is do
-		result := "FIXME_FunctionType"
+		result := "i32"
 	end
 }
 
@@ -58,9 +58,13 @@ aspect class ObjectTypeVariable {
 
 
 aspect class Operation {
+	attribute id : Integer
+
 	method generateLLVM(ctx:Context) is do
+		id := ctx.nextId
+	
 		var attrs : Sequence<String> init  Sequence<String>.new
-		var opName : String init ctx.llvm.globalVar(getLLVMQualifiedName)
+		var opName : String init ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
 		
 		if(isMain) then
 			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
@@ -70,7 +74,11 @@ aspect class Operation {
 		end
 
 		ownedParameter.each{param | attrs.add(ctx.llvm.localVar(param.type.llvmType)+" "+ ctx.llvm.localVar(param.name)) }
+		// TODO return type
+		// FIXME LLVM does not support two operations with the same name. Not supported by Kermeta as well but the km contains that.
 		ctx.operations.append(ctx.llvm.define(LinkageType.internal, ctx.llvm.~void, opName, attrs, void)).append("{\n")
+		// TODO body
+		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
 		ctx.operations.append("}\n")
 	end
 

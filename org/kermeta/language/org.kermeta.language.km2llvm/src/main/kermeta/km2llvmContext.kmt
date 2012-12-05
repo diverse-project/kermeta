@@ -34,6 +34,8 @@ class Context{
 	attribute operations : StringBuffer
 	// Used to count the string constants (to name it).
 	attribute cptStrings : Integer
+	// Used to have unique ID.
+	attribute id : Integer
 	
 	operation initialise() : Context is do
 		llvm := LLVMHelper.new
@@ -45,7 +47,14 @@ class Context{
 		operations := StringBuffer.new
 		casts := StringBuffer.new
 		cptStrings := 0
+		id := 0
 		result := self
+	end
+	
+	
+	operation nextId() : Integer is do 
+		id := id + 1
+		result := id
 	end
 	
 	operation llvmCode() : StringBuffer is do
