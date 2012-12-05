@@ -62,7 +62,12 @@ class LLVMHelper {
 		result := buf.toString
 	end
 
-	operation ret(type:String, val:String):String is do result := "ret " + type + " " + val end
+
+	operation ret(type:String, val:String):String is do 
+		result := "ret " + type
+		if not val.isVoid then result := result + " " + val end
+	end
+	
 	
 	operation alloca(type:String):String is do result := "alloca "+type end
 	
