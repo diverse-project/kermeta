@@ -58,17 +58,23 @@ aspect class ObjectTypeVariable {
 
 
 aspect class Operation {
+	// The ID that permits to differenciate operation having the same name.
+	// Each llvm function will be postfixed with this ID.
 	attribute id : Integer
+
+	// The llvm name of the operation.
+	attribute llvmName : String
+	
 
 	method generateLLVM(ctx:Context) is do
 		id := ctx.nextId
 	
 		var attrs : Sequence<String> init  Sequence<String>.new
-		var opName : String init ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
+		llvmName := ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
 		
 		if(isMain) then
 			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
-			ctx.operations.append(ctx.llvm.call(opName, ctx.llvm.~void, attrs)).append("\n")
+			ctx.operations.append(ctx.llvm.call(llvmName, ctx.llvm.~void, attrs)).append("\n")
 			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
 			ctx.operations.append("}\n")
 		end
@@ -76,7 +82,7 @@ aspect class Operation {
 		ownedParameter.each{param | attrs.add(ctx.llvm.localVar(param.type.llvmType)+" "+ ctx.llvm.localVar(param.name)) }
 		// TODO return type
 		// FIXME LLVM does not support two operations with the same name. Not supported by Kermeta as well but the km contains that.
-		ctx.operations.append(ctx.llvm.define(LinkageType.internal, ctx.llvm.~void, opName, attrs, void)).append("{\n")
+		ctx.operations.append(ctx.llvm.define(LinkageType.internal, ctx.llvm.~void, llvmName, attrs, void)).append("{\n")
 		// TODO body
 		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
 		ctx.operations.append("}\n")
