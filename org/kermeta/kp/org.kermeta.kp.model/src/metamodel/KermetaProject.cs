@@ -53,8 +53,9 @@ RULES{
     ;
         
     
+    // TODO deal with syntax for "using KMFBytecode()" and "using EMFBytecode()" (the later is equivalent to the default)
     ImportFile::=
-    	!1"import" url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" (packageEquivalences)(packageEquivalences)* "}")?)?
+    	!1"import" url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" (packageEquivalences)* "}")? )?
     ;
    	ImportProject ::=
    		!0"importProject" projectResource[] 
