@@ -60,6 +60,7 @@ trait KCallParser extends KAbstractParser with KGenericTypeParser with KLambdaPa
         val unresType = StructureFactory.eINSTANCE.createUnresolvedType
         unresType.setTypeIdentifier("")
         newo.setSuperType(unresType)
+        newo.getContainedType().add(unresType)
     }
 
     params match {
