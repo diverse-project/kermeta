@@ -637,14 +637,12 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 		out.print("{");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		print_org_kermeta_kp_ImportFile_0_0_0(element, localtab, out, printCountingMap);
-		// DEFINITION PART BEGINS (CompoundDefinition)
 		iterate = true;
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-			print_org_kermeta_kp_ImportFile_0_0_1(element, localtab, out1, printCountingMap1);
+			print_org_kermeta_kp_ImportFile_0_0_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
 				out1.close();
@@ -661,27 +659,6 @@ public class KpPrinter implements org.kermeta.kp.editor.IKpTextPrinter {
 	}
 	
 	public void print_org_kermeta_kp_ImportFile_0_0_0(org.kermeta.kp.ImportFile element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
-		String localtab = outertab;
-		int count;
-		// DEFINITION PART BEGINS (Containment)
-		count = printCountingMap.get("packageEquivalences");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kp.KpPackage.IMPORT_FILE__PACKAGE_EQUIVALENCES));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("packageEquivalences", count - 1);
-		}
-	}
-	
-	public void print_org_kermeta_kp_ImportFile_0_0_1(org.kermeta.kp.ImportFile element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)

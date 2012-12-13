@@ -32,7 +32,7 @@ public class KpFollowSetProvider {
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_17 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_18 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_3_0_0_0);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_19 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_4);
-	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_20 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_3_0_0_3);
+	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_20 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_3_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_21 = new org.kermeta.kp.editor.mopp.KpExpectedStructuralFeature(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_2);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_22 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_0);
 	public final static org.kermeta.kp.editor.IKpExpectedElement TERMINAL_23 = new org.kermeta.kp.editor.mopp.KpExpectedCsString(org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_1);
@@ -93,6 +93,7 @@ public class KpFollowSetProvider {
 		TERMINAL_24.addFollower(TERMINAL_11, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
 		TERMINAL_24.addFollower(TERMINAL_12, EMPTY_FEATURE_ARRAY);
 		TERMINAL_25.addFollower(TERMINAL_16, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_4, });
+		TERMINAL_25.addFollower(TERMINAL_20, EMPTY_FEATURE_ARRAY);
 		TERMINAL_20.addFollower(TERMINAL_11, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
 		TERMINAL_20.addFollower(TERMINAL_12, EMPTY_FEATURE_ARRAY);
 		TERMINAL_0.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
