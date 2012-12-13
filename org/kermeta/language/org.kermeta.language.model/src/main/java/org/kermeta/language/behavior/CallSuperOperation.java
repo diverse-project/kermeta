@@ -53,10 +53,13 @@ public interface CallSuperOperation extends CallOperation {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * After resolving this type must be set (either because the user entered it, or it can be computed because there is only one parent)
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference.
 	 * @see #setSuperType(Type)
 	 * @see org.kermeta.language.behavior.BehaviorPackage#getCallSuperOperation_SuperType()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Type getSuperType();

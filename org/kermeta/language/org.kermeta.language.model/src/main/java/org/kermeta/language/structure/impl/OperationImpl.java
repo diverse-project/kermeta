@@ -198,7 +198,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public void setIsAbstract(final Boolean newIsAbstract) {
+	public void setIsAbstract(Boolean newIsAbstract) {
 		Boolean oldIsAbstract = isAbstract;
 		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
@@ -272,7 +272,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBody(final Expression newBody, NotificationChain msgs) {
+	public NotificationChain basicSetBody(Expression newBody, NotificationChain msgs) {
 		Expression oldBody = body;
 		body = newBody;
 		if (eNotificationRequired()) {
@@ -288,7 +288,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public void setBody(final Expression newBody) {
+	public void setBody(Expression newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
 			if (body != null)
@@ -331,7 +331,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningClass(final ClassDefinition newOwningClass, NotificationChain msgs) {
+	public NotificationChain basicSetOwningClass(ClassDefinition newOwningClass, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newOwningClass, StructurePackage.OPERATION__OWNING_CLASS, msgs);
 		return msgs;
 	}
@@ -342,8 +342,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public void setOwningClass(final ClassDefinition newOwningClass) {
-		if (newOwningClass != eInternalContainer() || eContainerFeatureID() != StructurePackage.OPERATION__OWNING_CLASS && newOwningClass != null) {
+	public void setOwningClass(ClassDefinition newOwningClass) {
+		if (newOwningClass != eInternalContainer() || (eContainerFeatureID() != StructurePackage.OPERATION__OWNING_CLASS && newOwningClass != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -396,7 +396,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public void setUniqueName(final String newUniqueName) {
+	public void setUniqueName(String newUniqueName) {
 		String oldUniqueName = uniqueName;
 		uniqueName = newUniqueName;
 		if (eNotificationRequired())
@@ -410,7 +410,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(final InternalEObject otherEnd, final int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedParameter()).basicAdd(otherEnd, msgs);
@@ -432,7 +432,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(final InternalEObject otherEnd, final int featureID, final NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
 				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
@@ -456,7 +456,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(final NotificationChain msgs) {
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case StructurePackage.OPERATION__OWNING_CLASS:
 				return eInternalContainer().eInverseRemove(this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, ClassDefinition.class, msgs);
@@ -470,7 +470,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				return getRaisedException();
@@ -503,7 +503,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(final int featureID, final Object newValue) {
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				getRaisedException().clear();
@@ -551,7 +551,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public void eUnset(final int featureID) {
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				getRaisedException().clear();
@@ -593,7 +593,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(final int featureID) {
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				return raisedException != null && !raisedException.isEmpty();
