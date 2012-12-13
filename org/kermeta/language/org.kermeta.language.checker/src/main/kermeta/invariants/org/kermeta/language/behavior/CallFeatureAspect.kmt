@@ -18,11 +18,11 @@ aspect class CallFeature
 {
 
 	/**
-	 * This CallFeature is deprecated
+	 * The called feature is deprecated
 	 */
 	@IsWarning "true"
 	@Scope "RESOLVED"
-	inv called_feature_deprecated is do
+	inv called_feature_should_not_be_deprecated is do
 		
 		if (self.isInstanceOf(CallProperty))
 		then

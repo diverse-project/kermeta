@@ -1,0 +1,35 @@
+/* $Id:$ 
+ * Creation : December 13, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+package org::kermeta::language::behavior;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class CallSuperOperation
+{
+	/**
+	 * It is recommended to select the direct parent when calling a super operation (in case someone adds an inheritance to the object via an aspect)
+	 * Please use the following syntax : super[ParentType]() .
+	 */
+	@IsWarning "true"
+	@Scope "MERGED"
+	inv no_recommended_parent_selection_in_super_call is do
+		not self.superType.isVoid
+	end
+	
+	/**
+	 * Unresolved super operation. A super to super must either have one and only one direct parent with a matching operation, 
+	 * or the call must precise which direct parent should be selected. (Using the following syntax : super[ParentType]() ).
+	 */
+	@Scope "RESOLVED"
+	inv no_super_call_with_undefined_parent_selection is do
+		not self.superType.isVoid
+	end
+}

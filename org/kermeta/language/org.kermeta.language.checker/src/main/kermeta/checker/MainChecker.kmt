@@ -45,7 +45,7 @@ class MainCheckerV2
 		inputRes.load()
 		
 		var mms : Set<Metamodel>
-		mms ?= inputRes
+		mms := inputRes
 		
 	
 		var myChecker : Checker init Checker.new
