@@ -104,7 +104,7 @@ public class KpChecker {
 										if(t.getName().equals("main")) tagFound = true;
 									}
 									if(!tagFound){
-										compiler.logger.logProblem(MessagingSystem.Kind.UserWARNING, "Default main operation not usable because it doesn't have the @main tag", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+										compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main operation not usable because it doesn't have the @main tag. You should either remove this from the kp file (usefull for library project) or add the @main tag on the operation", KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
 										compiler.errorMessage = "Invalid kp file. Default main operation not usable due to invalid parameter type";
 										compiler.hasFailed = true;
 									}
