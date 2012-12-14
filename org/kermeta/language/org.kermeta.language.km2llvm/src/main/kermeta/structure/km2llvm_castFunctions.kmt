@@ -62,7 +62,7 @@ aspect class ClassDefinition {
 		ctx.casts.append(ctx.llvm.ret(selfVarPtr, currVar)).append("\n")
 		ctx.casts.append("}\n")
 		
-		// Generation for the super types.
+		// Generation for the super/lower types.
 		if(superType) then
 			superTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, initType, superType) }
 		else
