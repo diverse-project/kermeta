@@ -7694,43 +7694,44 @@
   </org_kermeta_language_structure:Metamodel>
   <org_kermeta_language_structure:Metamodel name="a025_callToSuper2">
     <packages kTag="/1/@packages.0/@kOwnedTags.0" name="mainPackage">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;150;626" object="/1/@packages.0"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;150;637" object="/1/@packages.0"/>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/MainClass/@kOwnedTags.0" name="MainClass">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;172;353" object="/1/@packages.0/MainClass"/>
-        <ownedOperation kTag="/1/@packages.0/MainClass/mainOperation/@kOwnedTags.0" name="mainOperation" type="/1/@packages.0/MainClass/mainOperation/@containedType.0" isOrdered="true">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;193;348" object="/1/@packages.0/MainClass/mainOperation"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;172;364" object="/1/@packages.0/MainClass"/>
+        <ownedOperation kTag="/1/@packages.0/MainClass/mainOperation/@kOwnedTags.0 /1/@packages.0/MainClass/mainOperation/@kOwnedTags.1" name="mainOperation" type="/1/@packages.0/MainClass/mainOperation/@containedType.0" isOrdered="true">
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;204;359" object="/1/@packages.0/MainClass/mainOperation"/>
+          <kOwnedTags name="main" value="" object="/1/@packages.0/MainClass/mainOperation"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
             <usings fromQName="kermeta::standard::*" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/MainClass/mainOperation/@body/@kOwnedTags.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;229;348" object="/1/@packages.0/MainClass/mainOperation/@body"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;240;359" object="/1/@packages.0/MainClass/mainOperation/@body"/>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@kOwnedTags.0 /1/@packages.0/MainClass/mainOperation/@body/@statement.0/@kOwnedTags.1" name="writeln" isCalledWithParenthesis="true">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;289;329" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;284;329" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;300;340" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;295;340" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0"/>
               <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" kTag="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@parameters.0/@kOwnedTags.0 /1/@packages.0/MainClass/mainOperation/@body/@statement.0/@parameters.0/@kOwnedTags.1" value="Hello from mainOperation">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;298;324" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@parameters.0"/>
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;298;324" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;309;335" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;309;335" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@parameters.0"/>
               </parameters>
               <usings fromQName="kermeta::standard::*" toName=""/>
               <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@target/@kOwnedTags.0" name="stdio">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;284;289" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@target"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;295;300" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.0/@target"/>
                 <usings fromQName="kermeta::standard::*" toName=""/>
                 <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@kOwnedTags.0 /1/@packages.0/MainClass/mainOperation/@body/@statement.1/@kOwnedTags.1" name="foo" isCalledWithParenthesis="true">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;334;343" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;329;343" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;345;354" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;340;354" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1"/>
               <usings fromQName="kermeta::standard::*" toName=""/>
               <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@target/@kOwnedTags.0" name="new">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;330;334" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@target"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;341;345" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@target"/>
                 <usings fromQName="kermeta::standard::*" toName=""/>
                 <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@target/@target/@kOwnedTags.0" name="D">
-                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;329;330" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@target/@target"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;340;341" object="/1/@packages.0/MainClass/mainOperation/@body/@statement.1/@target/@target"/>
                   <usings fromQName="kermeta::standard::*" toName=""/>
                   <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
                 </target>
@@ -7740,26 +7741,26 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/A/@kOwnedTags.0" name="A">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;353;431" object="/1/@packages.0/A"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;364;442" object="/1/@packages.0/A"/>
         <ownedOperation kTag="/1/@packages.0/A/foo/@kOwnedTags.0" name="foo" type="/1/@packages.0/A/foo/@containedType.0">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;365;428" object="/1/@packages.0/A/foo"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;376;439" object="/1/@packages.0/A/foo"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
             <usings fromQName="kermeta::standard::*" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/A/foo/@body/@kOwnedTags.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;385;428" object="/1/@packages.0/A/foo/@body"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;396;439" object="/1/@packages.0/A/foo/@body"/>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/A/foo/@body/@statement.0/@kOwnedTags.0 /1/@packages.0/A/foo/@body/@statement.0/@kOwnedTags.1" name="writeln" isCalledWithParenthesis="true">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;396;423" object="/1/@packages.0/A/foo/@body/@statement.0"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;391;423" object="/1/@packages.0/A/foo/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;407;434" object="/1/@packages.0/A/foo/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;402;434" object="/1/@packages.0/A/foo/@body/@statement.0"/>
               <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" kTag="/1/@packages.0/A/foo/@body/@statement.0/@parameters.0/@kOwnedTags.0 /1/@packages.0/A/foo/@body/@statement.0/@parameters.0/@kOwnedTags.1" value="Hello from A">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;405;419" object="/1/@packages.0/A/foo/@body/@statement.0/@parameters.0"/>
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;405;419" object="/1/@packages.0/A/foo/@body/@statement.0/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;416;430" object="/1/@packages.0/A/foo/@body/@statement.0/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;416;430" object="/1/@packages.0/A/foo/@body/@statement.0/@parameters.0"/>
               </parameters>
               <usings fromQName="kermeta::standard::*" toName=""/>
               <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/A/foo/@body/@statement.0/@target/@kOwnedTags.0" name="stdio">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;391;396" object="/1/@packages.0/A/foo/@body/@statement.0/@target"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;402;407" object="/1/@packages.0/A/foo/@body/@statement.0/@target"/>
                 <usings fromQName="kermeta::standard::*" toName=""/>
                 <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               </target>
@@ -7768,65 +7769,65 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/B/@kOwnedTags.0" name="B" superType="/1/@packages.0/B/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;431;456" object="/1/@packages.0/B"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;442;467" object="/1/@packages.0/B"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
           <usings fromQName="kermeta::standard::*" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/C/@kOwnedTags.0" name="C" superType="/1/@packages.0/C/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;456;556" object="/1/@packages.0/C"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;467;567" object="/1/@packages.0/C"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="B">
           <usings fromQName="kermeta::standard::*" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
         </containedType>
         <ownedOperation kTag="/1/@packages.0/C/foo/@kOwnedTags.0" name="foo" type="/1/@packages.0/C/foo/@containedType.0">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;479;553" object="/1/@packages.0/C/foo"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;490;564" object="/1/@packages.0/C/foo"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
             <usings fromQName="kermeta::standard::*" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/C/foo/@body/@kOwnedTags.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;499;553" object="/1/@packages.0/C/foo/@body"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;510;564" object="/1/@packages.0/C/foo/@body"/>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/C/foo/@body/@statement.0/@kOwnedTags.0 /1/@packages.0/C/foo/@body/@statement.0/@kOwnedTags.1" name="writeln" isCalledWithParenthesis="true">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;510;538" object="/1/@packages.0/C/foo/@body/@statement.0"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;505;538" object="/1/@packages.0/C/foo/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;521;549" object="/1/@packages.0/C/foo/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;516;549" object="/1/@packages.0/C/foo/@body/@statement.0"/>
               <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" kTag="/1/@packages.0/C/foo/@body/@statement.0/@parameters.0/@kOwnedTags.0 /1/@packages.0/C/foo/@body/@statement.0/@parameters.0/@kOwnedTags.1" value="Hello from C">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;519;533" object="/1/@packages.0/C/foo/@body/@statement.0/@parameters.0"/>
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;519;533" object="/1/@packages.0/C/foo/@body/@statement.0/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;530;544" object="/1/@packages.0/C/foo/@body/@statement.0/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;530;544" object="/1/@packages.0/C/foo/@body/@statement.0/@parameters.0"/>
               </parameters>
               <usings fromQName="kermeta::standard::*" toName=""/>
               <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/C/foo/@body/@statement.0/@target/@kOwnedTags.0" name="stdio">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;505;510" object="/1/@packages.0/C/foo/@body/@statement.0/@target"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;516;521" object="/1/@packages.0/C/foo/@body/@statement.0/@target"/>
                 <usings fromQName="kermeta::standard::*" toName=""/>
                 <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:CallSuperOperation" kTag="/1/@packages.0/C/foo/@body/@statement.1/@kOwnedTags.0 /1/@packages.0/C/foo/@body/@statement.1/@kOwnedTags.1">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;538;548" object="/1/@packages.0/C/foo/@body/@statement.1"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;538;548" object="/1/@packages.0/C/foo/@body/@statement.1"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;549;559" object="/1/@packages.0/C/foo/@body/@statement.1"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;549;559" object="/1/@packages.0/C/foo/@body/@statement.1"/>
             </statement>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/D/@kOwnedTags.0" name="D" superType="/1/@packages.0/D/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;556;624" object="/1/@packages.0/D"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;567;635" object="/1/@packages.0/D"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="C">
           <usings fromQName="kermeta::standard::*" toName=""/>
           <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
         </containedType>
         <ownedOperation kTag="/1/@packages.0/D/foo/@kOwnedTags.0" name="foo" type="/1/@packages.0/D/foo/@containedType.0">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;578;622" object="/1/@packages.0/D/foo"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;589;633" object="/1/@packages.0/D/foo"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
             <usings fromQName="kermeta::standard::*" toName=""/>
             <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/D/foo/@body/@kOwnedTags.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;597;622" object="/1/@packages.0/D/foo/@body"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;608;633" object="/1/@packages.0/D/foo/@body"/>
             <statement xsi:type="org_kermeta_language_behavior:CallSuperOperation" kTag="/1/@packages.0/D/foo/@body/@statement.0/@kOwnedTags.0 /1/@packages.0/D/foo/@body/@statement.0/@kOwnedTags.1" superType="/1/@packages.0/D/foo/@body/@statement.0/@containedType.0">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;604;617" object="/1/@packages.0/D/foo/@body/@statement.0"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;604;617" object="/1/@packages.0/D/foo/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;615;628" object="/1/@packages.0/D/foo/@body/@statement.0"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/025_callToSuper2/src/main/kmt/MainClass.kmt;615;628" object="/1/@packages.0/D/foo/@body/@statement.0"/>
               <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="C">
                 <usings fromQName="kermeta::standard::*" toName=""/>
                 <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
