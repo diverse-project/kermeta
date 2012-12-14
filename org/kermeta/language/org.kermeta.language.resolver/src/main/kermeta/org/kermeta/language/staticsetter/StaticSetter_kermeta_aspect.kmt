@@ -303,6 +303,7 @@ package behavior {
 					// No super class is specified. Must check single inheritance.
 						if(checkSuperTypeForSuperCall(context)) then// If the check is ok the inferred type is the single super type.
 							type := context.currentClassDefinition.superType.one
+							superType := type
 						else
 							// fill superClassName for suggestion in error message
 							if context.currentClassDefinition.superType.one.isInstanceOf(Class) then
