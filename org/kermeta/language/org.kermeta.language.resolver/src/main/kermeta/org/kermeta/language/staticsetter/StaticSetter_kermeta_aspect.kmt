@@ -281,7 +281,7 @@ package behavior {
 			else
 				if(context.currentClassDefinition.superType.size>1) then
 					
-					context.errors.add(ResolverException.new.initialize("More than : "+context.currentOperation.name, self))
+					context.errors.add(ResolverException.new.initialize("More than one supertype found for ingferring super of : "+context.currentOperation.name, self))
 					result := checkOperationInSuperTypes(context)
 				else result := true end
 			end
@@ -291,34 +291,45 @@ package behavior {
 			if context.currentOperation.isVoid then
 				context.errors.add(ResolverException.new.initialize("\"super\" keyword should not be used outside of an operation", self))
 			else
+				//stdio.writeln("CallSuperOperation.resolveCallAndInferStatic in "+context.currentOperation.name)
 				//set parameters
 				super(context)
 				
 				// Resolving the super class targeted by the super call (super[FooClass])
 				// Suppose that a class does not inherit from several classes with the same name (but not the same qualified name).
-				if superType.isInstanceOf(UnresolvedType) then
-					var superClassName : String init superType.asType(UnresolvedType).typeIdentifier
+				if superType.isVoid then
+					var superClassName : String
 					var type : Type
-					
-					if(superClassName=="") then // No super class is specified. Must check single inheritance.
+					// No super class is specified. Must check single inheritance.
 						if(checkSuperTypeForSuperCall(context)) then// If the check is ok the inferred type is the single super type.
 							type := context.currentClassDefinition.superType.one
+						else
+							// fill superClassName for suggestion in error message
+							if context.currentClassDefinition.superType.one.isInstanceOf(Class) then
+								superClassName := context.currentClassDefinition.superType.one.asType(Class).typeDefinition.asType(ClassDefinition).name
+							else
+								superClassName := "Object"
+							end
 						end
-					else
-						type := context.currentClassDefinition.superType.detect{t| t.isInstanceOf(Class).andThen{b | t.asType(Class).name==superClassName}}
+						
+					if(type.isVoid) then
+						//stdio.writeln("CallSuperOperation.resolveCallAndInferStatic no superType found") 
+						if superType.isVoid then // No super class is specified.
+							context.errors.add(ResolverException.new.initialize("Multiple inheritance found, you must specify a parent when calling super. For example : super["+superClassName+"]", self))
+						else
+							context.errors.add(ResolverException.new.initialize("No super class with this name found: "+superClassName, self))
+						end					
 					end
-					
-					if(type.isVoid) then 
-						context.errors.add(ResolverException.new.initialize("No super class with this name found: "+superClassName, self))
-					else superType := type end
 				end
 				
 				// Resolving the super operation using the resolved super type.
 				if (staticOperation.isVoid or staticOperation.isInstanceOf(UnresolvedOperation)) and superType.isInstanceOf(Class) then
 					var clazz : ClassDefinition init superType.asType(Class).typeDefinition.asType(ClassDefinition)
-					var op : Operation init clazz.ownedOperation.detect{op2| op2.name==context.currentOperation.name}
+					var op : Operation init clazz.getAllCallableOperations.detect{op2| 
+															op2.name == context.currentOperation.name 
+														and op2.ownedParameter.size == context.currentOperation.ownedParameter.size}
 					if op.isVoid then 
-						context.errors.add(ResolverException.new.initialize("No super operation with this name found: "+context.currentOperation.name, self))
+						context.errors.add(ResolverException.new.initialize("No super operation with this name and same number of parameter found: "+context.currentOperation.name, self))
 					else staticOperation := op end
 				end
 				

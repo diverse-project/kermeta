@@ -130,7 +130,7 @@ class FullStaticResolver
 		//init of context
 		stdio.writeln("	********************* Type Resolving... *********************")
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels)
-		ctxt.verbose := false
+		ctxt.verbose := true
 		unresolvedMetamodels.each{mm|
 			mm.resolveStructureInheritance(ctxt)
 		}
