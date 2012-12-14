@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:Metamodel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="test"
+    uri="http://www.kermeta.org/kermeta/2_0_0/">
+  <packages name="pkgFoo">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="A"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="B" superType="#//@packages.0/B/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="C" superType="#//@packages.0/C/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/B"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="D" superType="#//@packages.0/D/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
+    </ownedTypeDefinition>
+  </packages>
+</org_kermeta_language_structure:Metamodel>

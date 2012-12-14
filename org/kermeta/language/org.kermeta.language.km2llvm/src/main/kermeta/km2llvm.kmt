@@ -27,7 +27,7 @@ class Km2llvm {
 		var llvmCode : String init compile(mms).toString
 		stdio.writeln(llvmCode)
 		var f : FileIO init FileIO.new
-		f.writeTextFile("../../test/test.ll", llvmCode)
+		f.writeTextFile("../../test/testCastInheritance.ll", llvmCode)
 	end
 
 	operation compile(kms:Collection<Metamodel>) : StringBuffer is do
@@ -39,7 +39,7 @@ class Km2llvm {
 	
 	operation getKmModel() : Collection<Metamodel> is do
    		var repository : EMFRepository init EMFRepository.new
-   		var resource : Resource init repository.createResource("../../test/test.km", "../../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore")
+   		var resource : Resource init repository.createResource("../../test/testCastInheritance.km", "../../../../org.kermeta.language.model/src/main/ecore/kermeta.ecore")
        	resource.load
 		result := Sequence<Metamodel>.new
 		resource.each{obj | if(obj.isInstanceOf(Metamodel)) then result.add(obj.asType(Metamodel)) end }
