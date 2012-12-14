@@ -74,14 +74,50 @@ cast_pkgFoo_A_pkgFoo_B:                 # @cast_pkgFoo_A_pkgFoo_B
 	.cfi_endproc
 
 	.align	16, 0x90
+	.type	cast_pkgFoo_A_pkgFoo_C,@function
+cast_pkgFoo_A_pkgFoo_C:                 # @cast_pkgFoo_A_pkgFoo_C
+	.cfi_startproc
+# BB#0:
+	pushq	%rax
+.Ltmp12:
+	.cfi_def_cfa_offset 16
+	callq	cast_pkgFoo_A_pkgFoo_B
+	movq	%rax, %rdi
+	callq	cast_pkgFoo_B_pkgFoo_C
+	popq	%rdx
+	ret
+.Ltmp13:
+	.size	cast_pkgFoo_A_pkgFoo_C, .Ltmp13-cast_pkgFoo_A_pkgFoo_C
+	.cfi_endproc
+
+	.align	16, 0x90
+	.type	cast_pkgFoo_A_pkgFoo_D,@function
+cast_pkgFoo_A_pkgFoo_D:                 # @cast_pkgFoo_A_pkgFoo_D
+	.cfi_startproc
+# BB#0:
+	pushq	%rax
+.Ltmp15:
+	.cfi_def_cfa_offset 16
+	callq	cast_pkgFoo_A_pkgFoo_B
+	movq	%rax, %rdi
+	callq	cast_pkgFoo_B_pkgFoo_C
+	movq	%rax, %rdi
+	callq	cast_pkgFoo_C_pkgFoo_D
+	popq	%rdx
+	ret
+.Ltmp16:
+	.size	cast_pkgFoo_A_pkgFoo_D, .Ltmp16-cast_pkgFoo_A_pkgFoo_D
+	.cfi_endproc
+
+	.align	16, 0x90
 	.type	cast_pkgFoo_B_pkgFoo_A,@function
 cast_pkgFoo_B_pkgFoo_A:                 # @cast_pkgFoo_B_pkgFoo_A
 	.cfi_startproc
 # BB#0:
 	movq	(%rdi), %rax
 	ret
-.Ltmp11:
-	.size	cast_pkgFoo_B_pkgFoo_A, .Ltmp11-cast_pkgFoo_B_pkgFoo_A
+.Ltmp17:
+	.size	cast_pkgFoo_B_pkgFoo_A, .Ltmp17-cast_pkgFoo_B_pkgFoo_A
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -91,8 +127,25 @@ cast_pkgFoo_B_pkgFoo_C:                 # @cast_pkgFoo_B_pkgFoo_C
 # BB#0:
 	movq	8(%rdi), %rax
 	ret
-.Ltmp12:
-	.size	cast_pkgFoo_B_pkgFoo_C, .Ltmp12-cast_pkgFoo_B_pkgFoo_C
+.Ltmp18:
+	.size	cast_pkgFoo_B_pkgFoo_C, .Ltmp18-cast_pkgFoo_B_pkgFoo_C
+	.cfi_endproc
+
+	.align	16, 0x90
+	.type	cast_pkgFoo_B_pkgFoo_D,@function
+cast_pkgFoo_B_pkgFoo_D:                 # @cast_pkgFoo_B_pkgFoo_D
+	.cfi_startproc
+# BB#0:
+	pushq	%rax
+.Ltmp20:
+	.cfi_def_cfa_offset 16
+	callq	cast_pkgFoo_B_pkgFoo_C
+	movq	%rax, %rdi
+	callq	cast_pkgFoo_C_pkgFoo_D
+	popq	%rdx
+	ret
+.Ltmp21:
+	.size	cast_pkgFoo_B_pkgFoo_D, .Ltmp21-cast_pkgFoo_B_pkgFoo_D
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -102,8 +155,8 @@ cast_pkgFoo_C_pkgFoo_B:                 # @cast_pkgFoo_C_pkgFoo_B
 # BB#0:
 	movq	(%rdi), %rax
 	ret
-.Ltmp13:
-	.size	cast_pkgFoo_C_pkgFoo_B, .Ltmp13-cast_pkgFoo_C_pkgFoo_B
+.Ltmp22:
+	.size	cast_pkgFoo_C_pkgFoo_B, .Ltmp22-cast_pkgFoo_C_pkgFoo_B
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -112,15 +165,15 @@ cast_pkgFoo_C_pkgFoo_A:                 # @cast_pkgFoo_C_pkgFoo_A
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp15:
+.Ltmp24:
 	.cfi_def_cfa_offset 16
 	callq	cast_pkgFoo_C_pkgFoo_B
 	movq	%rax, %rdi
 	callq	cast_pkgFoo_B_pkgFoo_A
 	popq	%rdx
 	ret
-.Ltmp16:
-	.size	cast_pkgFoo_C_pkgFoo_A, .Ltmp16-cast_pkgFoo_C_pkgFoo_A
+.Ltmp25:
+	.size	cast_pkgFoo_C_pkgFoo_A, .Ltmp25-cast_pkgFoo_C_pkgFoo_A
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -130,8 +183,8 @@ cast_pkgFoo_C_pkgFoo_D:                 # @cast_pkgFoo_C_pkgFoo_D
 # BB#0:
 	movq	8(%rdi), %rax
 	ret
-.Ltmp17:
-	.size	cast_pkgFoo_C_pkgFoo_D, .Ltmp17-cast_pkgFoo_C_pkgFoo_D
+.Ltmp26:
+	.size	cast_pkgFoo_C_pkgFoo_D, .Ltmp26-cast_pkgFoo_C_pkgFoo_D
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -141,8 +194,8 @@ cast_pkgFoo_D_pkgFoo_C:                 # @cast_pkgFoo_D_pkgFoo_C
 # BB#0:
 	movq	(%rdi), %rax
 	ret
-.Ltmp18:
-	.size	cast_pkgFoo_D_pkgFoo_C, .Ltmp18-cast_pkgFoo_D_pkgFoo_C
+.Ltmp27:
+	.size	cast_pkgFoo_D_pkgFoo_C, .Ltmp27-cast_pkgFoo_D_pkgFoo_C
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -151,15 +204,15 @@ cast_pkgFoo_D_pkgFoo_B:                 # @cast_pkgFoo_D_pkgFoo_B
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp20:
+.Ltmp29:
 	.cfi_def_cfa_offset 16
 	callq	cast_pkgFoo_D_pkgFoo_C
 	movq	%rax, %rdi
 	callq	cast_pkgFoo_C_pkgFoo_B
 	popq	%rdx
 	ret
-.Ltmp21:
-	.size	cast_pkgFoo_D_pkgFoo_B, .Ltmp21-cast_pkgFoo_D_pkgFoo_B
+.Ltmp30:
+	.size	cast_pkgFoo_D_pkgFoo_B, .Ltmp30-cast_pkgFoo_D_pkgFoo_B
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -168,7 +221,7 @@ cast_pkgFoo_D_pkgFoo_A:                 # @cast_pkgFoo_D_pkgFoo_A
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp23:
+.Ltmp32:
 	.cfi_def_cfa_offset 16
 	callq	cast_pkgFoo_D_pkgFoo_C
 	movq	%rax, %rdi
@@ -177,8 +230,8 @@ cast_pkgFoo_D_pkgFoo_A:                 # @cast_pkgFoo_D_pkgFoo_A
 	callq	cast_pkgFoo_B_pkgFoo_A
 	popq	%rdx
 	ret
-.Ltmp24:
-	.size	cast_pkgFoo_D_pkgFoo_A, .Ltmp24-cast_pkgFoo_D_pkgFoo_A
+.Ltmp33:
+	.size	cast_pkgFoo_D_pkgFoo_A, .Ltmp33-cast_pkgFoo_D_pkgFoo_A
 	.cfi_endproc
 
 

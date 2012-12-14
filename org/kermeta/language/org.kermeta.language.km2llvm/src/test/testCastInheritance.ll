@@ -32,6 +32,17 @@ define internal %"pkgFoo_B"* @"cast_pkgFoo_A_pkgFoo_B"(%"pkgFoo_A"* %"self") rea
 %"1" = load %"pkgFoo_B"** %"0"
 ret %"pkgFoo_B"* %"1"
 }
+define internal %"pkgFoo_C"* @"cast_pkgFoo_A_pkgFoo_C"(%"pkgFoo_A"* %"self") readonly{
+%"v0" = call %"pkgFoo_B"* @"cast_pkgFoo_A_pkgFoo_B"(%"pkgFoo_A"* %"self")
+%"v1" = call %"pkgFoo_C"* @"cast_pkgFoo_B_pkgFoo_C"(%"pkgFoo_B"* %"v0")
+ret %"pkgFoo_C"* %"v1"
+}
+define internal %"pkgFoo_D"* @"cast_pkgFoo_A_pkgFoo_D"(%"pkgFoo_A"* %"self") readonly{
+%"v0" = call %"pkgFoo_B"* @"cast_pkgFoo_A_pkgFoo_B"(%"pkgFoo_A"* %"self")
+%"v1" = call %"pkgFoo_C"* @"cast_pkgFoo_B_pkgFoo_C"(%"pkgFoo_B"* %"v0")
+%"v2" = call %"pkgFoo_D"* @"cast_pkgFoo_C_pkgFoo_D"(%"pkgFoo_C"* %"v1")
+ret %"pkgFoo_D"* %"v2"
+}
 define internal %"pkgFoo_A"* @"cast_pkgFoo_B_pkgFoo_A"(%"pkgFoo_B"* %"self") readonly inlinehint{
 %"0" = getelementptr %"pkgFoo_B"* %"self",i32 0,i32 0
 %"1" = load %"pkgFoo_A"** %"0"
@@ -41,6 +52,11 @@ define internal %"pkgFoo_C"* @"cast_pkgFoo_B_pkgFoo_C"(%"pkgFoo_B"* %"self") rea
 %"0" = getelementptr %"pkgFoo_B"* %"self",i32 0,i32 1
 %"1" = load %"pkgFoo_C"** %"0"
 ret %"pkgFoo_C"* %"1"
+}
+define internal %"pkgFoo_D"* @"cast_pkgFoo_B_pkgFoo_D"(%"pkgFoo_B"* %"self") readonly{
+%"v0" = call %"pkgFoo_C"* @"cast_pkgFoo_B_pkgFoo_C"(%"pkgFoo_B"* %"self")
+%"v1" = call %"pkgFoo_D"* @"cast_pkgFoo_C_pkgFoo_D"(%"pkgFoo_C"* %"v0")
+ret %"pkgFoo_D"* %"v1"
 }
 define internal %"pkgFoo_B"* @"cast_pkgFoo_C_pkgFoo_B"(%"pkgFoo_C"* %"self") readonly inlinehint{
 %"0" = getelementptr %"pkgFoo_C"* %"self",i32 0,i32 0

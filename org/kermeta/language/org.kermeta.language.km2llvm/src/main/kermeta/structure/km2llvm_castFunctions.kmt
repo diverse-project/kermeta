@@ -25,7 +25,7 @@ aspect class ClassDefinition {
 	end
 	
 	
-	operation generateLLVMIndirectSuperCast(ctx:Context, types:Sequence<ClassDefinition>, initType:ClassDefinition) is do
+	operation generateLLVMIndirectCast(ctx:Context, types:Sequence<ClassDefinition>, initType:ClassDefinition, superType : Boolean) is do
 		// self is the type to cast into the first type (i.e. initType)
 		// All the elements of 'types' are the types necessary to incrementally convert self into initType
 		var selfVarPtr : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
@@ -46,7 +46,7 @@ aspect class ClassDefinition {
 		
 		types.add(self)
 		
-		types.each{t| true
+		types.each{t|
 			currVar := ctx.llvm.localVar("v"+i.toString)
 			params.clear
 			params.add(ctx.llvm.pointer(ctx.llvm.localVar(prevType.qualifiedNameLLVM))+" "+prevVar)
@@ -63,7 +63,11 @@ aspect class ClassDefinition {
 		ctx.casts.append("}\n")
 		
 		// Generation for the super types.
-		superTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectSuperCast(ctx, types, initType) }
+		if(superType) then
+			superTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, initType, superType) }
+		else
+			lowerTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, initType, superType) }
+		end
 	end
 	
 	
@@ -87,14 +91,18 @@ aspect class ClassDefinition {
 			st.superTypes.each{t |
 				types.clear
 				types.add(st.asType(ClassDefinition))
-				t.asType(ClassDefinition).generateLLVMIndirectSuperCast(ctx, types, self)
+				t.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, self, true)
 			}
 			i := i + 1
 		}
 		// Creating a cast function for each direct lower type.
 		lowerTypes.each{st |
 			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
-	//		generateLLVMIndirectCast(ctx, st, false, alreadyGen)
+			st.lowerTypes.each{t |
+				types.clear
+				types.add(st.asType(ClassDefinition))
+				t.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, self, false)
+			}
 			i := i + 1
 		}
 	end
