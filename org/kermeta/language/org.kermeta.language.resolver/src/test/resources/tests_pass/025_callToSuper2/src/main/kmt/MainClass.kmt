@@ -1,4 +1,4 @@
-using kermeta::standard
+using kermeta::standard::*
 using kermeta::io::StdIO => stdio
 /* this test check the call to a super operation which is not in the direct super type*/
 package mainPackage{
@@ -12,17 +12,21 @@ package mainPackage{
 	}
 	
 	class A {
-	operation foo()  is do
-	stdio.writeln("Hello from A")
-	end
+		operation foo()  is do
+			stdio.writeln("Hello from A")
+		end
 	}
 	class B inherits A {
 	}
 	class C inherits B {
+		operation foo()  is do
+			stdio.writeln("Hello from C")
+			super()
+		end
 	}
 	class D inherits C{
-		operation foo() from C is do 
-		super()
+		operation foo() is do 
+			super[C]()
 		end
 	}
 }

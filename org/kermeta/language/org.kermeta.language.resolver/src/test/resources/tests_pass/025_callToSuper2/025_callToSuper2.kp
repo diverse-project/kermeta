@@ -1,16 +1,15 @@
-KermetaProject "a025_callToSuper2"
-	groupId = "my.group"
-	defaultMainClass = "mainPackage::MainClass"
-	defaultMainOperation = "mainOperation"
-	sources = {
-		require "${project.baseUri}/src/main/kmt/MainClass.kmt"
-	}
-	dependencies = {
-		//default dependency to kermeta framework (try first in eclipse plugin, then look into maven repository)
-		dependency "library.core" ="platform:/plugin/org.kermeta.language.library.core","mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT"
-	}	packageEquivalences={
-		// indicates the real java name of a given package
-		// useful for deployed thirdparty metamodels
-		packageEquivalence "ecore" = "org.eclipse.emf.ecore"
-		packageEquivalence "uml2" = "org.eclipse.uml2.uml"
-	}
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" 
+				alternative "mvn:org.kermeta.language/language.library.standard/2.0.7-SNAPSHOT"
+
+importProject kermeta_standard
+//importProject ram_model
+//importProject ecore_model
+
+project a025_callToSuper2 {
+
+	mainClass "a025_callToSuper2#mainPackage::MainClass"
+	mainOperation "mainOperation"
+	
+	
+	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
+}
