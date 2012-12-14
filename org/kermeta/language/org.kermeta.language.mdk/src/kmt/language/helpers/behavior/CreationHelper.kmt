@@ -264,12 +264,13 @@ aspect class TypeReference {
 		var pt : PrimitiveType
 		pt ?= type
 		if(not c.isVoid) then
-			self.name := c.name
+			//self.name := c.name // doesn't work in interpreted mode
+			self.name := c.typeDefinition.asType(ClassDefinition).name
 		end
 		if(not pt.isVoid) then
 			self.name := pt.name
 		end
-		self.containedType.add(c)
+		self.containedType.add(type)
 		result := self
 	end
 	
