@@ -184,7 +184,7 @@ aspect class CallOperation
 		/*stdio.writeln(" self.parameters.size : " + self.parameters.size.toString)
 		stdio.writeln(" self.staticOperation.ownedParameter.size : " + self.staticOperation.ownedParameter.size.toString)
 		*/
-		if (self.parameters.size != self.staticOperation.ownedParameter.size)
+		if ( (not self.staticOperation.isVoid).andThen{ b |self.parameters.size != self.staticOperation.ownedParameter.size})
 		then
 			// Error
 			false
