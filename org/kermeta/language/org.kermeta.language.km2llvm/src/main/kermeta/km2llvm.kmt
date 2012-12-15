@@ -33,9 +33,6 @@ class Km2llvm {
 	operation compile(kms:Collection<Metamodel>) : StringBuffer is do
 		var ctx : Context init Context.new.initialise
 		kms.each{km | km.generateLLVM(ctx)}
-		
-		// Loading 
-		
 		result := ctx.llvmCode
 	end
 	

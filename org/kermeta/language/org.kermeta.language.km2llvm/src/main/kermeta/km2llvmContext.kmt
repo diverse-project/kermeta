@@ -13,7 +13,7 @@ require "llvmHelper.kmt"
 using kermeta::utils
 using kermeta::standard
 using org::kermeta::language::llvm
-
+using kermeta::io
 
 class Context{
 	attribute llvm : LLVMHelper
@@ -59,6 +59,11 @@ class Context{
 	
 	operation llvmCode() : StringBuffer is do
 		result := StringBuffer.new
+		
+		// Loading the lib standard llvm code.
+		var f : FileIO init FileIO.new
+		
+		result.append(f.readTextFile("file:///home/ablouin/workspace/org.kermeta.language.km2llvm/src/main/C/lib_std/lib_std.s"))
 		result.append(strings.toString)
 		result.append(types.toString)
 		result.append(constructors.toString)

@@ -90,7 +90,7 @@ void kermeta___io__Stdio_error(struct kermeta_standard__String* o) {
 	fprintf(stderr, "%s", o->_str);
 }
 
-struct kermeta_standard_String* kermeta___io__Stdio_read(struct kermeta_standard__String* o) {
+struct kermeta_standard__String* kermeta___io__Stdio_read(struct kermeta_standard__String* o) {
 	//TODO
 	return NULL;
 }

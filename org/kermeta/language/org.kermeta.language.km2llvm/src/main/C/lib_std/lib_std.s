@@ -6,7 +6,6 @@ target triple = "x86_64-pc-linux-gnu"
 %struct._IO_marker = type { %struct._IO_marker*, %struct._IO_FILE*, i32 }
 %struct.kermeta_standard__String = type { i8* }
 %struct.kermeta_standard__Object = type {}
-%struct.kermeta_standard_String = type opaque
 
 @.str = private unnamed_addr constant [3 x i8] c"%s\00", align 1
 @stderr = external global %struct._IO_FILE*
@@ -136,8 +135,8 @@ define void @kermeta___io__Stdio_error(%struct.kermeta_standard__String* %o) nou
   ret void
 }
 
-define %struct.kermeta_standard_String* @kermeta___io__Stdio_read(%struct.kermeta_standard__String* %o) nounwind uwtable {
+define %struct.kermeta_standard__String* @kermeta___io__Stdio_read(%struct.kermeta_standard__String* %o) nounwind uwtable {
   %1 = alloca %struct.kermeta_standard__String*, align 8
   store %struct.kermeta_standard__String* %o, %struct.kermeta_standard__String** %1, align 8
-  ret %struct.kermeta_standard_String* null
+  ret %struct.kermeta_standard__String* null
 }

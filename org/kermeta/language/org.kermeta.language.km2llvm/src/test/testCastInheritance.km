@@ -18,5 +18,15 @@
         name="D" superType="#//@packages.0/D/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
     </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="Main">
+      <ownedOperation kTag="#//@packages.0/Main/main/@kOwnedTags.0" name="main">
+        <kOwnedTags name="main" object="#//@packages.0/Main/main"/>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+        kTag="#//@packages.0/MustNotBeGenerated/@kOwnedTags.0" name="MustNotBeGenerated">
+      <kOwnedTags name="CompilerIgnore" object="#//@packages.0/MustNotBeGenerated"/>
+    </ownedTypeDefinition>
   </packages>
 </org_kermeta_language_structure:Metamodel>
