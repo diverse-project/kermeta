@@ -19,7 +19,7 @@ using kermeta::utils
 
 aspect class Operation {
 	operation getLLVMQualifiedName() : String is do
-		result := owningClass.qualifiedNameLLVM + "." + name
+		result := owningClass.qualifiedNameLLVM + "___" + name
 	end
 }
 
@@ -31,7 +31,7 @@ aspect class TypeDefinition {
 	operation getLLVMQualifiedName() : String is do
 		result := name
 		if(container.isKindOf(Package)) then
-			result := container.asType(Package).getLLVMQualifiedName + "_" + result
+			result := container.asType(Package).getLLVMQualifiedName + "__" + result
 		end
 	end
 }
@@ -42,7 +42,7 @@ aspect class Package  {
 	operation getLLVMQualifiedName() : String is do
 		result := name
 		if(not nestingPackage.isVoid) then
-			result := nestingPackage.getLLVMQualifiedName + "::" + result
+			result := nestingPackage.getLLVMQualifiedName + "_" + result
 		end
 	end
 }
