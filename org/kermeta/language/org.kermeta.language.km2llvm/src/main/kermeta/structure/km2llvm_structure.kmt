@@ -130,10 +130,12 @@ aspect class PrimitiveType {
 aspect class ClassDefinition {
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
-		generateLLVMType(ctx)
-		generateLLVMConstructor(ctx)
-		generateLLVMGetters(ctx)
-		generateLLVMCast(ctx)
+		if(not kOwnedTags.exists{t | t.name=="CompilerIgnore" }) then
+			generateLLVMType(ctx)
+			generateLLVMConstructor(ctx)
+			generateLLVMGetters(ctx)
+			generateLLVMCast(ctx)
+		end
 	end
 	
 	
