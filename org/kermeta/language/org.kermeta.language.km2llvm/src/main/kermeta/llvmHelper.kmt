@@ -57,7 +57,9 @@ class LLVMHelper {
 	operation call(name:String, return:String, params:Sequence<String>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		buf.append("call ").append(return).append(" ").append(name).append("(")
-		flatListString(buf, params, ", ")
+		if(not params.isVoid) then
+			flatListString(buf, params, ", ")
+		end
 		buf.append(")")
 		result := buf.toString
 	end

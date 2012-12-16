@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:Metamodel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
     xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="test"
     uri="http://www.kermeta.org/kermeta/2_0_0/">
   <packages name="pkgFoo">
@@ -20,13 +21,45 @@
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="Main">
-      <ownedOperation kTag="#//@packages.0/Main/main/@kOwnedTags.0" name="main">
+      <ownedOperation kTag="#//@packages.0/Main/main/@kOwnedTags.0" name="main" type="#//@packages.0/Main/main/@containedType.0">
         <kOwnedTags name="main" object="#//@packages.0/Main/main"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
+              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
+          </statement>
+        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         kTag="#//@packages.0/MustNotBeGenerated/@kOwnedTags.0" name="MustNotBeGenerated">
       <kOwnedTags name="CompilerIgnore" object="#//@packages.0/MustNotBeGenerated"/>
     </ownedTypeDefinition>
+  </packages>
+  <packages name="kermeta">
+    <nestedPackage name="io">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="StdIO">
+        <kOwnedTags name="CompilerIgnore"/>
+        <ownedOperation name="writeln" type="#//@packages.1/io/StdIO/writeln/@containedType.0">
+          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+          <ownedParameter name="object" type="#//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0">
+            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/String"/>
+          </ownedParameter>
+          <body xsi:type="org_kermeta_language_behavior:Block"/>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </nestedPackage>
+    <nestedPackage name="standard">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="String">
+        <kOwnedTags name="CompilerIgnore"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="Void">
+        <kOwnedTags name="CompilerIgnore"/>
+      </ownedTypeDefinition>
+    </nestedPackage>
   </packages>
 </org_kermeta_language_structure:Metamodel>

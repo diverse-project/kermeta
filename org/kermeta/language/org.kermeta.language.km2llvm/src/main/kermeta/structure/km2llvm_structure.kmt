@@ -11,6 +11,7 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "../km2llvm_aspectGenerator.kmt"
 require "km2llvm_castFunctions.kmt"
+require "../behaviour/km2llvm_calls.kmt"
 
 using org::kermeta::language::km2llvm
 using kermeta::standard
@@ -38,7 +39,11 @@ aspect class Type {
 
 aspect class Class {
 	method llvmType() : String is do
-		result := typeDefinition.qualifiedNameLLVM
+		if(typeDefinition.qualifiedNameLLVM=="kermeta_standard__Void") then
+			result := "void"
+		else
+			result := typeDefinition.qualifiedNameLLVM
+		end
 	end
 }
 
@@ -63,27 +68,39 @@ aspect class Operation {
 	attribute id : Integer
 
 	// The llvm name of the operation.
-	attribute llvmName : String
+	attribute _llvmName : String
+	
+	
+	operation llvmName(ctx:Context) : String is do
+		if(_llvmName.isVoid) then
+			if(owningClass.toIgnore) then// Class not compiled must not be renamed.
+				_llvmName := ctx.llvm.globalVar(getLLVMQualifiedName)
+			else
+				// An ID must be added to the class to avoid several classes to have the same name
+				// in the same class.
+				id := ctx.nextId
+				_llvmName := ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
+			end
+		end
+		result :=  _llvmName
+	end
 	
 
 	method generateLLVM(ctx:Context) is do
-		id := ctx.nextId
-	
 		var attrs : Sequence<String> init  Sequence<String>.new
-		llvmName := ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
+		
+		ctx.currentVarCpt := 1
 		
 		if(isMain) then
 			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
-			ctx.operations.append(ctx.llvm.call(llvmName, ctx.llvm.~void, attrs)).append("\n")
+			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType, attrs)).append("\n")
 			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
 			ctx.operations.append("}\n")
 		end
 
 		ownedParameter.each{param | attrs.add(ctx.llvm.localVar(param.type.llvmType)+" "+ ctx.llvm.localVar(param.name)) }
-		// TODO return type
-		// FIXME LLVM does not support two operations with the same name. Not supported by Kermeta as well but the km contains that.
-		ctx.operations.append(ctx.llvm.define(LinkageType.internal, ctx.llvm.~void, llvmName, attrs, void)).append("{\n")
-		// TODO body
+		ctx.operations.append(ctx.llvm.define(LinkageType.internal, type.llvmType, llvmName(ctx), attrs, void)).append("{\n")
+		body.generateLLVM(ctx)
 		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
 		ctx.operations.append("}\n")
 	end
@@ -128,9 +145,18 @@ aspect class PrimitiveType {
 
 
 aspect class ClassDefinition {
+	attribute _toIgnore : Boolean
+	
+	operation toIgnore() : Boolean is do
+		if(_toIgnore.isVoid) then
+			_toIgnore := kOwnedTags.exists{t | t.name=="CompilerIgnore" }
+		end
+		result := _toIgnore
+	end
+
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
-		if(not kOwnedTags.exists{t | t.name=="CompilerIgnore" }) then
+		if(not toIgnore) then
 			generateLLVMType(ctx)
 			generateLLVMConstructor(ctx)
 			generateLLVMGetters(ctx)

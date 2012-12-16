@@ -36,8 +36,24 @@ class Context{
 	attribute cptStrings : Integer
 	// Used to have unique ID.
 	attribute id : Integer
+	// The parameters of each call operations
+	// These parameters are stored into a variable before the call.
+	// The call uses these variables contained into this list.
+	attribute currentOpCallParams : Sequence<String>
+	// a counter for generating variables in operations.
+	attribute currentVarCpt : Integer
+
+
+	// To use for generating variables for operations.
+	operation nextOperationVar(ctx:Context) : String is do 
+		result := ctx.llvm.localVar(currentVarCpt.toString)
+		currentVarCpt := currentVarCpt + 1
+	end
+	
+	
 	
 	operation initialise() : Context is do
+		currentOpCallParams := Sequence<String>.new
 		llvm := LLVMHelper.new
 		strings := StringBuffer.new
 		stringVars :=  Hashtable<String, String>.new
