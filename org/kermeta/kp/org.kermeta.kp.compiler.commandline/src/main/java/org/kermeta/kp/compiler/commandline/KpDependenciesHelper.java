@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
+import org.kermeta.kp.ImportFile;
 import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
@@ -70,6 +71,15 @@ public class KpDependenciesHelper {
 				result.addAll(getDependentProjetsClasspath(foundProject, innerVarExpander));
 			}
 			
+		}
+		
+		// deal with EMFBytecode
+		for(ImportFile importedFile : kp.getImportedFiles()){
+			if (importedFile.getBytecodeFrom() != null){
+				String containerUrl = varExpander.getSelectedUrl4ReusableResource(importedFile.getBytecodeFrom());
+				// add it in classpath			
+				result.add(convertUrlToclassPath(containerUrl));
+			}
 		}
 		return result;
 	}
