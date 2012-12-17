@@ -135,7 +135,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 
 			case IResource.FILE:
 				if ( (resource.getFileExtension() != null ) && 
-						(resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION))) {
+						(resource.getFileExtension().equals(KermetaBuilder.KP_FILE_EXTENSION))  && !resource.getProjectRelativePath().toString().startsWith("target")) {
 					KPBuilder builder = null;
 					switch (delta.getKind()) {
 					case IResourceDelta.ADDED:
@@ -164,7 +164,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 							// we care only about content change
 							return false;
 						try {
-							if (resource.getProject() != null) {
+							if (resource.getProject() != null && !resource.getProjectRelativePath().toString().startsWith("target")) {
 								if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
 									Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "refreshing builder for " + resource.getFullPath(), this.getClass().getName());
 									builder = kermetaBuilder.kpBuilders.get(kermetaBuilder.generateIdentifier(resource));
@@ -199,14 +199,15 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener 
 							// we care only about content change
 							return false;
 						try {
-							if (resource.getProject() != null) {
+							if (resource.getProject() != null && !resource.getProjectRelativePath().toString().startsWith("target")) {
 								if (resource.getProject().hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)) {
-									Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "Save action on  " + resource.getFullPath(), this.getClass().getName());
+									Activator.getDefault().getMessaggingSystem().log(Kind.DevDEBUG, "Save action on  " + resource.getFullPath() + " " +resource.getProjectRelativePath().toString(), this.getClass().getName());
 
 									KermetaBuilder kermetaBuilder = KermetaBuilder.getDefault();
-									if (kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)) != null) {
+									String kpIdentifier = kermetaBuilder.findKPidentifierFromKMT(resource);
+									if (kermetaBuilder.kpBuilders.get(kpIdentifier) != null) {
 										//kermetaBuilder.kpBuilders.get(kermetaBuilder.findKPidentifierFromKMT(resource)).kpFiles.get(kermetaBuilder.generateIdentifier(resource)).modelingUnit = freshModelingUnit;
-										if (kermetaBuilder.findKPidentifierFromKMT(resource) != null) {
+										if (kpIdentifier != null) {
 											if(PreferenceToBuildAction.mustGenerateBytecode(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_KMT_EDITOR_ONSAVE_STRING))){
 												kermetaBuilder.buildFromKP(kermetaBuilder.findKPidentifierFromKMT(resource));
 											}
