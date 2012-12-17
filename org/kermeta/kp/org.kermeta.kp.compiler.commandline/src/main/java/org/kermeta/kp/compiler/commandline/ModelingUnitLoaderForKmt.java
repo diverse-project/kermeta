@@ -93,7 +93,7 @@ public class ModelingUnitLoaderForKmt implements ModelingUnitLoader{
         in.close();
 		
         
-        String filename = fileuri.substring(0, fileuri.lastIndexOf("/"));
+        String filename = fileuri.substring( fileuri.lastIndexOf("/")+1, fileuri.length());
 		
 		//java.io.File file = new java.io.File(FileHelpers.StringToURI(fileuri));
 		
