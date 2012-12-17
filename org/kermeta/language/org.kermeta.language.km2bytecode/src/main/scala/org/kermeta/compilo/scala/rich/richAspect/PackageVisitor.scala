@@ -612,11 +612,16 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
   }
 
   def visitCallSuperOperation(thi: CallSuperOperation, res: StringBuilder): Unit = {
-    val superTypeName = if(thi.getSuperType.isInstanceOf[Class])
-    						thi.getSuperType.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName else ""
-    res.append("super[")
-    res.append(superTypeName)
-    res.append("Aspect]")
+    val superTypeName = if (thi.getSuperType.isInstanceOf[Class])
+      thi.getSuperType.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName else ""
+    if (superTypeName == "Object" && getQualifiedNameKermeta(thi.getSuperType.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition]).endsWith("kermeta::standard::Object")) {
+      // ignore kermeta::standard::Object when calling super, to be fixed if we decide to reenable the support of aspects on Object/Any 
+      res.append("super")
+    } else {
+      res.append("super[")
+      res.append(superTypeName)
+      res.append("Aspect]")
+    }
     res.append(".")
     res.append(thi.getStaticOperation.getName)
     res.append("(")
