@@ -13,6 +13,10 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation getStringType(str:String):String is do
+		result := "[" + (str.size+1).toString + " x i8]*"  
+	end
+
 	operation ~alias(trueName:String, aliasName:String) : String is do
 		result := assign(aliasName, "alias " + trueName)
 	end
@@ -40,7 +44,7 @@ class LLVMHelper {
 	operation i64() : String is do result := "i64" end
 	operation ~void() : String is do result := "void" end
 
-	operation getelementptr(return:String, val:String, type1:String, pos1:Integer, type2:String, pos2:Integer, asFct:Boolean) : String is do
+	operation getelementptr(typeVal:String, val:String, type1:String, pos1:Integer, type2:String, pos2:Integer, asFct:Boolean) : String is do
 		var sep1 : String
 		var sep2 : String
 		
@@ -51,7 +55,7 @@ class LLVMHelper {
 			sep1 := " "
 			sep2 := ""
 		end
-		result := "getelementptr" + sep1 + return + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString+sep2
+		result := "getelementptr" + sep1 + typeVal + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString+sep2
 	end
 
 	operation call(name:String, return:String, params:Sequence<String>) : String is do

@@ -19,8 +19,18 @@ using org::kermeta::language::llvm
 
 aspect class StringLiteral {
 	method generateLLVM(ctx:Context) is do
+		// Creation of the variable that will store the string literal.
+		// The name of the variable that will contain the String.
 		var varStr : String init ctx.nextOperationVar(ctx)
+		var strName : String init ctx.getStringVarName(~value)
+		var attrs : Sequence<String> init  Sequence<String>.new
+		var getEltPts : String init ctx.llvm.getelementptr(ctx.llvm.getStringType(~value), strName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, true)
+		
+		// Setting the parameters of the call.
 		ctx.currentOpCallParams.add(varStr)
+		attrs.add("i8* " + getEltPts)
+		// Creating a String using as parameter the char*.
+		ctx.operations.append(ctx.llvm.assign(varStr, ctx.llvm.call("@create_kermeta_standard__String", "%struct.kermeta_standard__String*", attrs))).append("\n")
 	end
 }
 
@@ -28,8 +38,25 @@ aspect class StringLiteral {
 aspect class CallOperation {
 	method generateLLVM(ctx:Context) is do
 		ctx.currentOpCallParams.clear
+		// Each parameter expression is stored into a variable before the call.
+		// The ordered list of these variables are temporary stored into ctx.currentOpCallParams.
 		parameters.each{p| p.generateLLVM(ctx)}
-		ctx.operations.append(ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType, ctx.currentOpCallParams)).append("\n")
+		
+		var paramsSize : Integer init ctx.currentOpCallParams.size
+		var strTmp : String
+		// For each variables (see the previous comment), the type must be defined using the parameters
+		// of the operation.
+		from var i : Integer init 0
+		until i>=paramsSize
+		loop
+			strTmp := ctx.currentOpCallParams.at(0)
+			ctx.currentOpCallParams.removeAt(0)
+			// Adding the type to the parameter.
+			ctx.currentOpCallParams.add(ctx.llvm.pointer(staticOperation.ownedParameter.at(i).type.llvmType(ctx))+" "+strTmp)
+			i := i + 1
+		end
+		// Generating the call.
+		ctx.operations.append(ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), ctx.currentOpCallParams)).append("\n")
 	end
 }
 

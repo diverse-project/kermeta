@@ -42,7 +42,8 @@ class Context{
 	attribute currentOpCallParams : Sequence<String>
 	// a counter for generating variables in operations.
 	attribute currentVarCpt : Integer
-
+	// The real names of the std library types.
+	attribute stdLibName : Hashtable<String, String>
 
 	// To use for generating variables for operations.
 	operation nextOperationVar(ctx:Context) : String is do 
@@ -53,6 +54,7 @@ class Context{
 	
 	
 	operation initialise() : Context is do
+		stdLibName :=  Hashtable<String, String>.new
 		currentOpCallParams := Sequence<String>.new
 		llvm := LLVMHelper.new
 		strings := StringBuffer.new
@@ -65,6 +67,9 @@ class Context{
 		cptStrings := 0
 		id := 0
 		result := self
+		
+		stdLibName.put("kermeta_standard__Void", llvm.~void)
+		stdLibName.put("kermeta_standard__String", "%struct.kermeta_standard__String")
 	end
 	
 	
@@ -95,9 +100,9 @@ class Context{
 		result := stringVars.getValue(str)
 
 		if(result.isVoid) then
-			result := "s"+cptStrings.toString
+			result := llvm.globalVar("s"+cptStrings.toString)
 			stringVars.put(str, result)
-			strings.append(llvm.assign(llvm.globalVar(result), "private unnamed_addr constant ["+(str.size+1).toString+" x i8] c\""+str+"\\00\"")).append("\n")
+			strings.append(llvm.assign(result, "private unnamed_addr constant ["+(str.size+1).toString+" x i8] c\""+str+"\\00\"")).append("\n")
 			cptStrings := cptStrings + 1
 		end
 	end

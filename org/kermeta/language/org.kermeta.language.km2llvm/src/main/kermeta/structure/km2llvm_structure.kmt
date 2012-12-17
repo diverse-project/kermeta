@@ -33,30 +33,30 @@ aspect class Metamodel {
 
 
 aspect class Type {
-	operation llvmType() : String is abstract
+	operation llvmType(ctx:Context) : String is abstract
 }
 
 
 aspect class Class {
-	method llvmType() : String is do
-		if(typeDefinition.qualifiedNameLLVM=="kermeta_standard__Void") then
-			result := "void"
-		else
-			result := typeDefinition.qualifiedNameLLVM
+	method llvmType(ctx:Context) : String is do
+		result := ctx.stdLibName.getValue(typeDefinition.qualifiedNameLLVM)
+		
+		if(result.isVoid) then
+			result := "%\""+typeDefinition.qualifiedNameLLVM+"\""
 		end
 	end
 }
 
 
 aspect class FunctionType {
-	method llvmType() : String is do
+	method llvmType(ctx:Context) : String is do
 		result := "i32"
 	end
 }
 
 
 aspect class ObjectTypeVariable {
-	method llvmType() : String is do
+	method llvmType(ctx:Context) : String is do
 		result := "FIXME_ObjectTypeVariable"
 	end
 }
@@ -74,7 +74,7 @@ aspect class Operation {
 	operation llvmName(ctx:Context) : String is do
 		if(_llvmName.isVoid) then
 			if(owningClass.toIgnore) then// Class not compiled must not be renamed.
-				_llvmName := ctx.llvm.globalVar(getLLVMQualifiedName)
+				_llvmName := "@"+getLLVMQualifiedName // no quote since clang does not generate quote.
 			else
 				// An ID must be added to the class to avoid several classes to have the same name
 				// in the same class.
@@ -93,13 +93,13 @@ aspect class Operation {
 		
 		if(isMain) then
 			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
-			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType, attrs)).append("\n")
+			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType(ctx), attrs)).append("\n")
 			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
 			ctx.operations.append("}\n")
 		end
 
-		ownedParameter.each{param | attrs.add(ctx.llvm.localVar(param.type.llvmType)+" "+ ctx.llvm.localVar(param.name)) }
-		ctx.operations.append(ctx.llvm.define(LinkageType.internal, type.llvmType, llvmName(ctx), attrs, void)).append("{\n")
+		ownedParameter.each{param | attrs.add(param.type.llvmType(ctx)+" "+ ctx.llvm.localVar(param.name)) }
+		ctx.operations.append(ctx.llvm.define(LinkageType.internal, type.llvmType(ctx), llvmName(ctx), attrs, void)).append("{\n")
 		body.generateLLVM(ctx)
 		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
 		ctx.operations.append("}\n")
@@ -113,8 +113,8 @@ aspect class Operation {
 
 
 aspect class Enumeration {
-	method llvmType() : String is do
-		result := qualifiedNameLLVM
+	method llvmType(ctx:Context) : String is do
+		result := "%\""+qualifiedNameLLVM+"\""
 	end
 	
 	method generateLLVM(ctx:Context) is do
@@ -127,7 +127,7 @@ aspect class Enumeration {
 		ownedLiteral.each{lit |
 			attrs.clear
 			var stringVarName : String init ctx.getStringVarName(lit.name)
-			attrs.add("i8* " + ctx.llvm.pointerString(lit.name, ctx.llvm.globalVar(stringVarName)))
+			attrs.add("i8* " + ctx.llvm.pointerString(lit.name, stringVarName))
 			ctx.types.append(ctx.llvm.constStruct(typeName, ctx.llvm.globalVar(qualifiedNameLLVM+"#"+lit.name), attrs)).append("\n")
 		}
 	end
@@ -135,11 +135,12 @@ aspect class Enumeration {
 
 
 aspect class PrimitiveType {
-	method llvmType() : String is do
+	method llvmType(ctx:Context) : String is do
 		result := name
 		if(container.isKindOf(Package)) then
 			result := container.asType(Package).getLLVMQualifiedName + "_" + result
 		end
+		result := "%\""+result+"\""
 	end
 }
 
@@ -181,8 +182,8 @@ aspect class ClassDefinition {
 		fctAttr.add(FunctionAttr.inlinehint)
 		
 		ownedAttribute.each{attr |
-			returnType := ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType))
-			getterName := ctx.llvm.globalVar(qualifiedNameLLVM + ".#" + attr.name )
+			returnType := ctx.llvm.pointer(attr.type.llvmType(ctx))
+			getterName := ctx.llvm.globalVar(qualifiedNameLLVM + ".#" + attr.name)
 			ctx.getters.append(ctx.llvm.define(LinkageType.internal, returnType, getterName, params, fctAttr)).append("{\n")
 			ctx.getters.append(ctx.llvm.assign(tmpVar, ctx.llvm.getelementptr(typeCD, selfVar, ctx.llvm.i32, 0, ctx.llvm.i32, cpt, false))).append("\n")
 			ctx.getters.append(ctx.llvm.assign(returnVar, ctx.llvm.load(ctx.llvm.pointer(returnType), tmpVar))).append("\n")
@@ -201,7 +202,7 @@ aspect class ClassDefinition {
 		var list : Sequence<String> init superTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)) }
 		// Creating the lowertype parameters
 		list.addAll(lowerTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))})
-		ownedAttribute.each{attr | list.add(ctx.llvm.pointer(ctx.llvm.localVar(attr.type.llvmType))) }
+		ownedAttribute.each{attr | list.add(ctx.llvm.pointer(attr.type.llvmType(ctx))) }
 		ctx.types.append(ctx.llvm.type(ctx.llvm.localVar(qualifiedNameLLVM), list)).append("\n")
 	end
 	

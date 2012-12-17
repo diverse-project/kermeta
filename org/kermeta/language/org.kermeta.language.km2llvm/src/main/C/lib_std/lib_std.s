@@ -11,13 +11,19 @@ target triple = "x86_64-pc-linux-gnu"
 @stderr = external global %struct._IO_FILE*
 @.str1 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
 
-define %struct.kermeta_standard__String* @create_kermeta_standard__String() nounwind uwtable {
+define %struct.kermeta_standard__String* @create_kermeta_standard__String(i8* %str) nounwind uwtable {
+  %1 = alloca i8*, align 8
   %res = alloca %struct.kermeta_standard__String*, align 8
-  %1 = call noalias i8* @malloc(i64 8) nounwind
-  %2 = bitcast i8* %1 to %struct.kermeta_standard__String*
-  store %struct.kermeta_standard__String* %2, %struct.kermeta_standard__String** %res, align 8
-  %3 = load %struct.kermeta_standard__String** %res, align 8
-  ret %struct.kermeta_standard__String* %3
+  store i8* %str, i8** %1, align 8
+  %2 = call noalias i8* @malloc(i64 8) nounwind
+  %3 = bitcast i8* %2 to %struct.kermeta_standard__String*
+  store %struct.kermeta_standard__String* %3, %struct.kermeta_standard__String** %res, align 8
+  %4 = load i8** %1, align 8
+  %5 = load %struct.kermeta_standard__String** %res, align 8
+  %6 = getelementptr inbounds %struct.kermeta_standard__String* %5, i32 0, i32 1
+  store i8* %4, i8** %6, align 8
+  %7 = load %struct.kermeta_standard__String** %res, align 8
+  ret %struct.kermeta_standard__String* %7
 }
 
 declare noalias i8* @malloc(i64) nounwind
@@ -72,7 +78,7 @@ define void @kermeta_standard__String___charAt(%struct.kermeta_standard__String*
   ret void
 }
 
-define void @kermeta___io__StdIO_writeln(%struct.kermeta_standard__String* %o) nounwind uwtable {
+define void @kermeta_io__StdIO___writeln(%struct.kermeta_standard__String* %o) nounwind uwtable {
   %1 = alloca %struct.kermeta_standard__String*, align 8
   store %struct.kermeta_standard__String* %o, %struct.kermeta_standard__String** %1, align 8
   %2 = load %struct.kermeta_standard__String** %1, align 8
@@ -84,7 +90,7 @@ define void @kermeta___io__StdIO_writeln(%struct.kermeta_standard__String* %o) n
 
 declare i32 @puts(i8*)
 
-define void @kermeta___io__StdIO_write(%struct.kermeta_standard__String* %o) nounwind uwtable {
+define void @kermeta_io__StdIO___write(%struct.kermeta_standard__String* %o) nounwind uwtable {
   %1 = alloca %struct.kermeta_standard__String*, align 8
   store %struct.kermeta_standard__String* %o, %struct.kermeta_standard__String** %1, align 8
   %2 = load %struct.kermeta_standard__String** %1, align 8
@@ -96,7 +102,7 @@ define void @kermeta___io__StdIO_write(%struct.kermeta_standard__String* %o) nou
 
 declare i32 @printf(i8*, ...)
 
-define void @kermeta___io__StdIO_errorln(%struct.kermeta_standard__String* %o) nounwind uwtable {
+define void @kermeta_io__StdIO___errorln(%struct.kermeta_standard__String* %o) nounwind uwtable {
   %1 = alloca %struct.kermeta_standard__String*, align 8
   store %struct.kermeta_standard__String* %o, %struct.kermeta_standard__String** %1, align 8
   %2 = load %struct._IO_FILE** @stderr, align 8
@@ -109,7 +115,7 @@ define void @kermeta___io__StdIO_errorln(%struct.kermeta_standard__String* %o) n
 
 declare i32 @fprintf(%struct._IO_FILE*, i8*, ...)
 
-define void @kermeta___io__StdIO_error(%struct.kermeta_standard__String* %o) nounwind uwtable {
+define void @kermeta__o__StdIO___error(%struct.kermeta_standard__String* %o) nounwind uwtable {
   %1 = alloca %struct.kermeta_standard__String*, align 8
   store %struct.kermeta_standard__String* %o, %struct.kermeta_standard__String** %1, align 8
   %2 = load %struct._IO_FILE** @stderr, align 8

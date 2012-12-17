@@ -6,13 +6,13 @@ struct kermeta_standard__String {
 	char* llvm_str;
 };
 
-struct kermeta_standard__String* create_kermeta_standard__String() {
+struct kermeta_standard__String* create_kermeta_standard__String(char* str) {
 	struct kermeta_standard__String* res = malloc(sizeof(struct kermeta_standard__String*));
+	res->llvm_str = str;
 	return res;
 }
 
 inline void delete_kermeta_standard__String(struct kermeta_standard__String* s) {
-	free(s->llvm_str);
 	free(s);
 }
 
