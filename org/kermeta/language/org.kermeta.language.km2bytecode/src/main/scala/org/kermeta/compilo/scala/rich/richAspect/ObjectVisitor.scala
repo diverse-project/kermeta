@@ -15,6 +15,7 @@ trait ObjectVisitor {
   def whichBoolean(thi:PrimitiveType):String 
      
   def getQualifiedNameEMap(thi: EObject):String
+  def getPQualifiedNameCompilo(thi: EObject):String
   def getQualifiedNameCompilo(thi: EObject):String 
 	
   def getQualifiedName(thi: EObject):String 

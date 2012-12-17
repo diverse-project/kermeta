@@ -291,7 +291,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     res append " with k2.standard.EObjectImplForPrimitive "
 
     res.append("{\n")
-    res.append("\tvar wrappedvalue = self\n")
+    res.append("  var wrappedvalue = self\n")
 
     thi.getOwnedAttribute foreach (a => visit(a, res))
     thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op) || op.getBody != null) foreach (op => visit(op, res))

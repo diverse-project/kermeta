@@ -11,7 +11,7 @@ import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import org.kermeta.language.util.ModelingUnit
 
-class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfiguration) extends IVisitor with LogAspect {
+class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguration) extends IVisitor with LogAspect {
 
   var viewDef: StringBuilder = _
   var implicitDef: StringBuilder = _
@@ -24,10 +24,10 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
     var packNam = pack.getName()
     var res: StringBuilder = new StringBuilder
     var packNameUpper: String = packNam.substring(0, 1).toUpperCase + packNam.substring(1, packNam.size)
-    
+
     var packName: String = null
-    var packNameMM : String = null
-    
+    var packNameMM: String = null
+
     if (parentpack == null) {
       packName = packNam
       packNameMM = visitor.getQualifiedName(pack)
@@ -38,9 +38,9 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
     packName = k2.utils.TypeEquivalence.getPackageEquivalence(packName)
     var impName = packName + Util.getImplPackageSuffix(packName) + Util.getPackagePrefix(packNameUpper) + "PackageImpl"
 
-    res.append("_root_."+Util.protectScalaKeyword(impName + ".init()"))
+    res.append("_root_." + Util.protectScalaKeyword(impName + ".init()"))
     res.append(".setEFactoryInstance(")
-    res.append(Util.protectScalaKeyword(/*GlobalConfiguration.scalaAspectPrefix + "." +*/ packNameMM + "." + GlobalConfiguration.factoryName + ""))
+    res.append(Util.protectScalaKeyword( /*GlobalConfiguration.scalaAspectPrefix + "." +*/ packNameMM + "." + GlobalConfiguration.factoryName + ""))
     res.append(")")
     res.append("\n")
     return res.toString()
@@ -50,10 +50,10 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
     var packNam = pack.getName()
     var res: StringBuilder = new StringBuilder
     var packNameUpper: String = packNam.substring(0, 1).toUpperCase + packNam.substring(1, packNam.size)
-    
+
     var packName: String = null
-    var packNameMM : String = null
-    
+    var packNameMM: String = null
+
     if (parentpack == null) {
       packName = packNam
       packNameMM = visitor.getQualifiedName(pack)
@@ -70,15 +70,15 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
       res.append("      _root_.org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(_root_.org.eclipse.emf.ecore.EcorePackage.eNS_URI,pack)\n")
 
       //            res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
-      res.append("      pack.setEFactoryInstance(" + /*GlobalConfiguration.scalaAspectPrefix + "." +*/ packName + "." + GlobalConfiguration.factoryName + ")\n ")
+      res.append("      pack.setEFactoryInstance(" + packNameMM + "." + GlobalConfiguration.factoryName + ")\n ")
       res.append("      var f : java.lang.reflect.Field = classOf[_root_.org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
       res.append("      f.setAccessible(true)\n")
       if (packName.equals("org.eclipse.emf.ecore")) {
-        res.append("      f.set(pack, " + GlobalConfiguration.scalaAspectPrefix + "." + packName + "." + GlobalConfiguration.factoryName + ")\n")
+        res.append("      f.set(pack, " + packNameMM + "." + GlobalConfiguration.factoryName + ")\n")
       }
       res.append("      _root_.org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(_root_." + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
       res.append("      k2.persistence.EcorePackages.getPacks().put(_root_." + Util.protectScalaKeyword(packName) + "." + packNameUpper + "Package.eNS_URI, pack)\n")
-      res.append("      " + impName + ".init\n}\n")
+      res.append("      " + impName + ".init\n    }\n")
       return res.toString
     } else {
       res.append("\n    {\n")
@@ -86,7 +86,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
       res.append("      _root_.org.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put(_root_." + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
       res.append("      k2.persistence.EcorePackages.getPacks().put(_root_." + Util.protectScalaKeyword(packName + "." + Util.getPackagePrefix(packNameUpper) + "Package.eNS_URI") + ", pack)\n")
       res.append("      pack.setEFactoryInstance(")
-      res.append(Util.protectScalaKeyword(/*GlobalConfiguration.scalaAspectPrefix + "." + */packNameMM + "." + GlobalConfiguration.factoryName + ""))
+      res.append(Util.protectScalaKeyword( /*GlobalConfiguration.scalaAspectPrefix + "." + */ packNameMM + "." + GlobalConfiguration.factoryName + ""))
       res.append(")")
       res.append("\n    }\n\n")
       return res.toString
@@ -205,8 +205,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
         if (!Util.hasEcoreFromAPITag(e)) {
 
           if (e.getNestingPackage() == null) {
-            res.append(
-              initForEcorePackage(null, e))
+            res.append(initForEcorePackage(null, e))
             resinitEclipse.append(initForEclipseEcorePackage(null, e))
           } else {
             res.append(initForEcorePackage(e.getNestingPackage(), e))
@@ -344,11 +343,11 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration : CompilerConfigurati
         if ("EObject".equals(par.getName)) {
           implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[k2.standard.KermetaObject]\n"
         } else if ("EGenericType".equals(par.getName)) {
-          implicitDef.append(" implicit def richAspect(v : org.eclipse.emf.ecore.EGenericType) : " + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect = { \n")
-          implicitDef.append(" if (v.isInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect])\n")
-          implicitDef.append("  return v.asInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect]\n")
+          implicitDef.append(" implicit def richAspect(v : org.eclipse.emf.ecore.EGenericType) : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + " = { \n")
+          implicitDef.append(" if (v.isInstanceOf[" + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + "])\n")
+          implicitDef.append("  return v.asInstanceOf[" + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + "]\n")
           implicitDef.append(" else\n")
-          implicitDef.append("  return k2.utils.ConvertGenericType.convert(v).asInstanceOf[" + org.kermeta.compilo.scala.GlobalConfiguration.scalaAspectPrefix + ".org.eclipse.emf.ecore.EGenericTypeAspect]\n")
+          implicitDef.append("  return k2.utils.ConvertGenericType.convert(v).asInstanceOf[" + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + "]\n")
           implicitDef.append("  }\n")
 
         } else if (Util.isAMapEntry(par)) {

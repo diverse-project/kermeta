@@ -128,34 +128,32 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     } else if (useGet) {
       res.append(prefix + "get")
     }
-    if(useIs || useGet){
-    	res.append(baseName + "()")
-    }
-    else{
-      res.append(Util.protectScalaKeyword(baseName)+ "()")
+    if (useIs || useGet) {
+      res.append(baseName + "()")
+    } else {
+      res.append(Util.protectScalaKeyword(baseName) + "()")
     }
 
   }
 
   def generateScalGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
-    
-    val thiType: StringBuilder = new StringBuilder // Contains the type of thi
-    visit(thi.getType(),thiType)
-    
-    val ownerType = new StringBuilder; getOwnerType(thi,ownerType) // Contains the type of thi owner, i.e. the type of opposite if there is one
 
+    val thiType: StringBuilder = new StringBuilder // Contains the type of thi
+    visit(thi.getType(), thiType)
+
+    val ownerType = new StringBuilder; getOwnerType(thi, ownerType) // Contains the type of thi owner, i.e. the type of opposite if there is one
 
     res.append("  def " + GlobalConfiguration.scalaPrefix)
     //        res.append(thi.getName+"")
     res.append(thi.getName + "")
     res.append(" : ")
-    if (Util.isAMapEntry(thi.getType()) || thi.getGetterBody != null){ // MapEntry and derived properties doesn't use ReflectiveCollection
-    	getListorType(thi, res)
+    if (Util.isAMapEntry(thi.getType()) || thi.getGetterBody != null) { // MapEntry and derived properties doesn't use ReflectiveCollection
+      getListorType(thi, res)
     } else if (thi.getUpper() > 1 || thi.getUpper() == -1) {
       res.append("k2.standard.Reflective")
-      getCollectionType(thi,res)
+      getCollectionType(thi, res)
       res.append("[" + ownerType.toString + ",")
-      visitTypeParam(thi.getType(),res)
+      visitTypeParam(thi.getType(), res)
       res.append("]")
     } else
       res.append(thiType.toString)
@@ -174,34 +172,33 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(" == null ) ")
           res.append(res1.toString.replace("this.get", "this.set").replace("()", "("))
           res.append("k2.standard.KerRichFactory.createKermeta")
-          getCollectionType(thi,res)
+          getCollectionType(thi, res)
           res.append("[")
           res.append(thiType.toString + "]);")
         }
 
-        if (Util.isAMapEntry(thi.getType())){
+        if (Util.isAMapEntry(thi.getType())) {
           val mapEntryQualifiedName = Util.getQualifiedNameForMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true)
           res.append("  // force the convertion of Set of EObjects into list of KermetaObject")
-          res.append("\n  var l : java.util.List[")
+          res.append("\n    var l : java.util.List[")
           res.append(mapEntryQualifiedName)
           res.append("] = new java.util.ArrayList[")
           res.append(mapEntryQualifiedName)
           res.append("]()\n")
-          res.append("  l.addAll(")
+          res.append("    l.addAll(")
           getGetter(thi, thiType, res, prefix) // Note doesn't work for mapEntry using UML style ...
-          res.append(".entrySet().asInstanceOf[java.util.Set[")          
+          res.append(".entrySet().asInstanceOf[java.util.Set[")
           res.append(mapEntryQualifiedName)
-          res.append("]])\n")    
+          res.append("]])\n")
         }
-        
-        res.append("  new k2.standard.RichReflective")
-        getCollectionType(thi,res)
+        res.append("    new k2.standard.RichReflective")
+        getCollectionType(thi, res)
         res.append("[" + ownerType.toString + ",")
-         if (Util.isAMapEntry(thi.getType())){
-        	 res.append(Util.getQualifiedNameForMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true))        	 
-         } else {
-        	 visitTypeParam(thi.getType(), res)
-         }
+        if (Util.isAMapEntry(thi.getType())) {
+          res.append(Util.getQualifiedNameForMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition], this, true))
+        } else {
+          visitTypeParam(thi.getType(), res)
+        }
         res.append("](thisUpper = " + thi.getUpper + ",value=")
       }
 
@@ -216,34 +213,33 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(thi.getName.substring(0, 1).toUpperCase() + thi.getName.substring(1, thi.getName.length) + "()")
         }
 
-      } else if (Util.isAMapEntry(thi.getType())){
+      } else if (Util.isAMapEntry(thi.getType())) {
         res.append("l")
-      }
-      else {
+      } else {
         getGetter(thi, thiType, res, prefix)
       } // For reflexivity
       if (thi.getUpper > 1 || thi.getUpper == -1) {
-      	if(thi.getOpposite()!=null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())){
-      	  val opposite = thi.getOpposite().asInstanceOf[Property]
-      	  
-      	  res.append(",owner=this.asInstanceOf["+ownerType.toString+"],hasOpposite=true")
-      	  if(opposite.getUpper() == 1){
-      	    // opposite upper == 1
-      	    res.append(",oppositeKerSetter={")
-      	    res.append("(opp:"+thiType+",thi:"+ ownerType.toString)
-      	    res.append(")=>opp.")
-      	    res.append(prefix+"set"+opposite.getName().substring(0, 1).toUpperCase()+opposite.getName.substring(1, opposite.getName.size))
-      	    res.append("(thi)}")
-      	    res.append(",oppositeScalaSetter={(opp:"+thiType+",thi:"+ ownerType.toString)
-      	    res.append(")=>opp.")
-      	    res.append(GlobalConfiguration.scalaPrefix+opposite.getName())
-      	    res.append("=thi}")
-      	  } else {
-      	    // opposite upper > 1 or == -1
-      	    res.append(",oppositeUpper= " + opposite.getUpper())
-      	    res.append(",oppositeScalaGetter={(opp:"+thiType+")=>opp."+GlobalConfiguration.scalaPrefix+opposite.getName()+"}")
-      	  }
-      	}
+        if (thi.getOpposite() != null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
+          val opposite = thi.getOpposite().asInstanceOf[Property]
+
+          res.append(",owner=this.asInstanceOf[" + ownerType.toString + "],hasOpposite=true")
+          if (opposite.getUpper() == 1) {
+            // opposite upper == 1
+            res.append(",oppositeKerSetter={")
+            res.append("(opp:" + thiType + ",thi:" + ownerType.toString)
+            res.append(")=>opp.")
+            res.append(prefix + "set" + opposite.getName().substring(0, 1).toUpperCase() + opposite.getName.substring(1, opposite.getName.size))
+            res.append("(thi)}")
+            res.append(",oppositeScalaSetter={(opp:" + thiType + ",thi:" + ownerType.toString)
+            res.append(")=>opp.")
+            res.append(GlobalConfiguration.scalaPrefix + opposite.getName())
+            res.append("=thi}")
+          } else {
+            // opposite upper > 1 or == -1
+            res.append(",oppositeUpper= " + opposite.getUpper())
+            res.append(",oppositeScalaGetter={(opp:" + thiType + ")=>opp." + GlobalConfiguration.scalaPrefix + opposite.getName() + "}")
+          }
+        }
         res.append(")")
       } else {
         var typestring = new StringBuilder
@@ -376,15 +372,15 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           if (thi.getOpposite() != null && thi.getOpposite().asInstanceOf[Property].getUpper() == 1
             && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
             // Opposite upper == 1
-            var oppKersetName = prefix+"set"+thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase()+thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
-            var oppScalaName = GlobalConfiguration.scalaPrefix+thi.getOpposite().asInstanceOf[Property].getName()
-            var oppType = new StringBuilder ; getOwnerType(thi,oppType)
-            
-            res.append("\n  if(this."+ kergetName +"!=null)\n")
-            res.append("    this."+ kergetName +"." + oppKersetName +"(null.asInstanceOf[" + oppType + "])\n")
+            var oppKersetName = prefix + "set" + thi.getOpposite.asInstanceOf[Property].getName().substring(0, 1).toUpperCase() + thi.getOpposite.asInstanceOf[Property].getName.substring(1, thi.getOpposite.asInstanceOf[Property].getName.size)
+            var oppScalaName = GlobalConfiguration.scalaPrefix + thi.getOpposite().asInstanceOf[Property].getName()
+            var oppType = new StringBuilder; getOwnerType(thi, oppType)
+
+            res.append("\n  if(this." + kergetName + "!=null)\n")
+            res.append("    this." + kergetName + "." + oppKersetName + "(null.asInstanceOf[" + oppType + "])\n")
             res.append("  if(`~value`!=null){\n")
-            res.append("    `~value`."+ oppScalaName +"=null.asInstanceOf[" + oppType + "]\n")
-            res.append("    `~value`."+ oppKersetName +"(this.asInstanceOf[" + oppType + "])\n")
+            res.append("    `~value`." + oppScalaName + "=null.asInstanceOf[" + oppType + "]\n")
+            res.append("    `~value`." + oppKersetName + "(this.asInstanceOf[" + oppType + "])\n")
             res.append("  }\n")
             res.append("  ")
           } else if (thi.getOpposite() != null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
@@ -455,34 +451,37 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         res.append("Bag")
     }
   }
-  
-  /** 
+
+  /**
    * Appends the type of thi owner, i.e. the type of opposite if there is one, to res
    */
-  def getOwnerType(thi:Property,res:StringBuilder)={
-    if(thi.getOpposite()!= null){
+  def getOwnerType(thi: Property, res: StringBuilder) = {
+    if (thi.getOpposite() != null) {
       // If there is an opposite, use it to get the type, associated with the right type parameters
       res.append(getQualifiedNameCompilo(thi.getOpposite.asInstanceOf[Property].getType))
       val typeParamNumber = thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.size
-      if(typeParamNumber>0){
-    	res.append("[")
-        for(i <-0 until typeParamNumber){
-          if(i!=0)
+      if (typeParamNumber > 0) {
+        res.append("[")
+        for (i <- 0 until typeParamNumber) {
+          if (i != 0)
             res.append(",")
-          if(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getType().isInstanceOf[TypeVariable])
-            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getVariable,res)
+          if (thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getType().isInstanceOf[TypeVariable])
+            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i).getVariable, res)
           else
-            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i),res)
+            visit(thi.getOpposite.asInstanceOf[Property].getType.asInstanceOf[Class].getTypeParamBinding.get(i), res)
         }
-    	res.append("]")
+        res.append("]")
       }
       //visit(thi.getOpposite.asInstanceOf[Property].getType(),ownerType)
     } else {
-      
-      // Otherwise just put type variables for type parameters      
-    	res.append(Util.protectScalaKeyword(getQualifiedNamedAspect(thi.getOwningClass)))
-      //res.append(getQualifiedNameCompilo(thi.getOwningClass))
-    	generateParamerterClass(thi.getOwningClass(),res)
+
+      // Otherwise just put type variables for type parameters  
+      if (Util.isAMapEntry(thi.getOwningClass)) {
+    	res.append(Util.protectScalaKeyword(getQualifiedNameCompilo(thi.getOwningClass)))
+      } else {
+        res.append(Util.protectScalaKeyword(getQualifiedNamedAspect(thi.getOwningClass)))
+      }
+      generateParamerterClass(thi.getOwningClass(), res)
     }
   }
 }

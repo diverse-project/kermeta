@@ -297,8 +297,14 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
          	def visitCallEnumLiteral(thi:CallEnumLiteral,res : StringBuilder) : Unit = {
                 log.debug("CallEnumLiteral={}",thi.getName())
                 thi.getName match {
-                    case _ if(thi.getStaticEnumLiteral !=null ) => {                      
-                    res.append(getQualifiedNameCompilo(thi.getStaticEnumLiteral.getEnumeration));res.append(".");generateEnumLiteralCall(thi,res); }
+                    case _ if(thi.getStaticEnumLiteral !=null ) => { 
+                      if (Util.hasEcoreTag(thi.getStaticEnumLiteral.getEnumeration)){
+                        res.append(getPQualifiedNameCompilo(thi.getStaticEnumLiteral.getEnumeration));res.append(".");generateEnumLiteralCall(thi,res);
+                      }
+                      else{
+                    	res.append(getQualifiedNameCompilo(thi.getStaticEnumLiteral.getEnumeration));res.append(".");generateEnumLiteralCall(thi,res); 
+                      }
+                    }
                     case _ => log.debug("!!! Uncatch case ")
  
                 }
