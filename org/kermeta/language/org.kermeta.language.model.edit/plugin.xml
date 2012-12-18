@@ -12,7 +12,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0/"
+            uri="http://www.kermeta.org/kermeta/2_1_0/"
             class="org.provider.OrgItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
@@ -24,7 +24,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta"
             class="org.kermeta.provider.KmItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
@@ -36,7 +36,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language"
             class="org.kermeta.language.provider.LanguageItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
@@ -48,7 +48,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior"
             class="org.kermeta.language.behavior.provider.BehaviorItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
@@ -60,7 +60,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure"
             class="org.kermeta.language.structure.provider.StructureItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
@@ -73,7 +73,7 @@
 	<!-- EEF extensions from structure_properties.plugin.xml-->
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure"
             class="org.kermeta.language.structure.providers.StructureEEFAdapterFactory"
             supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
    </extension>
@@ -400,7 +400,7 @@
 	<!-- EEF extensions from beahavior-->
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior"
             class="org.kermeta.language.behavior.providers.BehaviorEEFAdapterFactory"
             supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
    </extension>
@@ -687,7 +687,7 @@
 	<!-- EEF extensions from org -->
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0/"
+            uri="http://www.kermeta.org/kermeta/2_1_0/"
             class="org.providers.OrgEEFAdapterFactory"
             supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
    </extension>
@@ -760,7 +760,7 @@
 	<!-- EEF extensions  from kermeta-->
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta"
             class="org.kermeta.providers.KermetaEEFAdapterFactory"
             supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
    </extension>
@@ -832,7 +832,7 @@
 	<!-- EEF extensions from language-->
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language"
+            uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language"
             class="org.kermeta.language.providers.LanguageEEFAdapterFactory"
             supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
    </extension>
