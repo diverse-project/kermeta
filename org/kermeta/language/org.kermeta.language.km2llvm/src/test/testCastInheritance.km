@@ -49,8 +49,8 @@
       <ownedOperation name="foo" type="#//@packages.0/D/foo/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/D/@containedType.0"
-              name="super" staticOperation="#//@packages.0/C/foo" superType="#//@packages.0/D/@containedType.0"/>
+          <statement xsi:type="org_kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+              name="super" staticOperation="#//@packages.0/D/foo" superType="#//@packages.0/D/@containedType.0"/>
           <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/D/foo/@containedType.0"
               name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
             <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="D.foo!"/>

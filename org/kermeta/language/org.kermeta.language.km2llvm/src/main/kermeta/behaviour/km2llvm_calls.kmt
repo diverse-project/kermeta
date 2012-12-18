@@ -15,6 +15,7 @@ using org::kermeta::language::km2llvm
 using kermeta::standard
 using kermeta::utils
 using org::kermeta::language::llvm
+using org::kermeta::language::structure
 
 
 aspect class Expression {
@@ -71,7 +72,21 @@ aspect class StringLiteral {
 
 
 aspect class CallSuperOperation {
-	method generateLLVM(ctx:Context) is do
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		// Looking for the super operation.
+		var op : Operation init superType.getOperation(staticOperation)
+		var attrs : Sequence<String> init  Sequence<String>.new
+		ctx.currentOpCallParams.clear
+		// Getting the variable corresponding to the super type (will be the parameter of the super call).
+		var varStr : String init ctx.nextOperationVar(ctx) // Declaring a local variable.
+		attrs.add(ctx.llvm.pointer(staticType.llvmType(ctx))+" "+ctx.llvm.localVar("self")) // The parameters of the call.
+		ctx.operations.append(ctx.llvm.assign(varStr, 
+				ctx.llvm.call("@cast_"+staticType.qualifiedNameLLVM+"_"+superType.qualifiedNameLLVM, ctx.llvm.pointer(superType.llvmType(ctx)), attrs)
+				)).append("\n") // Casting self into the super type.
+		// Creating the super call.
+		attrs.clear
+		attrs.add(ctx.llvm.pointer(superType.llvmType(ctx))+" "+varStr) // The parameters of the call.
+		result := ctx.llvm.call(op.llvmName(ctx), staticOperation.type.llvmType(ctx), attrs)
 	end
 }
 

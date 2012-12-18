@@ -39,7 +39,11 @@ aspect class Type {
 		result := "FIXME_qualifiedNameLLVM: "+self.toString
 	end
 	
-//	operation isSingletonType() : Boolean is do result := false end
+	// Returns the operation of the type corresponding to the given prototype.
+	// For instance, this operation is useful to get the super operation of a given operation.
+	operation getOperation(prototype:Operation) : Operation is do
+		result := void
+	end
 }
 
 
@@ -56,9 +60,11 @@ aspect class Class {
 	method qualifiedNameLLVM() : String is do
 		result := typeDefinition.qualifiedNameLLVM
 	end
-/*	method isSingletonType() : Boolean is do
-		result := typeDefinition.isSingletonType
-	end*/
+	
+	
+	method getOperation(prototype:Operation) : Operation is do
+		result := typeDefinition.getOperation(prototype)
+	end
 }
 
 
@@ -181,12 +187,14 @@ aspect class ClassDefinition {
 		end
 		result := _toIgnore
 	end
-
-/*
-	method isSingletonType() : Boolean is do
-		result := isSingleton
+	
+	
+	method getOperation(prototype:Operation) : Operation is do
+		// Looking for the operation.
+		// TODO: the current detection is not restrictive enough since the type of the parameters are not checked.
+		result := ownedOperation.detect{op | op.name==prototype.name and op.ownedParameter.size==prototype.ownedParameter.size }
 	end
-*/
+
 
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
@@ -289,8 +297,9 @@ aspect class TypeDefinition {
 		defineLowerSuperTypes
 		qualifiedNameLLVM := getLLVMQualifiedName
 	end
-	/*
-	operation isSingletonType() : Boolean is do
-		result := false
-	end*/
+	
+	
+	operation getOperation(prototype:Operation) : Operation is do
+		result := void
+	end
 }
