@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" kTag="//@kOwnedTags.0 //@kOwnedTags.1" name="kermeta_standard" uri="http://www.kermeta.org/kermeta/2_0_0/">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" kTag="//@kOwnedTags.0 //@kOwnedTags.1" name="kermeta_standard" uri="http://www.kermeta.org/kermeta/2_1_0/">
   <kOwnedTags name="documentation" value="&#xA; Defines Collection types &#xA; &lt;img src=&quot;./figures/collections_view.png&quot;/>" object="/"/>
   <kOwnedTags name="documentation" value=" &#xA; Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; metamodel&#xA; &#xA; &lt;img src=&quot;./figures/utils_package.png&quot;/>" object="/"/>
   <packages kTag="//@packages.0/@kOwnedTags.0 //@packages.0/@kOwnedTags.1 //@packages.0/@kOwnedTags.2 //@packages.0/@kOwnedTags.3 //@packages.0/@kOwnedTags.4 //@packages.0/@kOwnedTags.5 //@packages.0/@kOwnedTags.6" name="kermeta">
@@ -5953,16 +5953,16 @@
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-  <packages kTag="//@packages.1/@kOwnedTags.0 //@packages.1/@kOwnedTags.1" name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
+  <packages kTag="//@packages.1/@kOwnedTags.0 //@packages.1/@kOwnedTags.1" name="org" uri="http://www.kermeta.org/kermeta/2_1_0/">
     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;0;238" object="//@packages.1"/>
     <kOwnedTags name="ecore" value="true" object="//@packages.1"/>
-    <nestedPackage kTag="//@packages.1/kermeta/@kOwnedTags.0 //@packages.1/kermeta/@kOwnedTags.1" name="kermeta" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta">
+    <nestedPackage kTag="//@packages.1/kermeta/@kOwnedTags.0 //@packages.1/kermeta/@kOwnedTags.1" name="kermeta" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta">
       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;14;236" object="//@packages.1/kermeta"/>
       <kOwnedTags name="ecore" value="true" object="//@packages.1/kermeta"/>
-      <nestedPackage kTag="//@packages.1/kermeta/language/@kOwnedTags.0 //@packages.1/kermeta/language/@kOwnedTags.1" name="language" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language">
+      <nestedPackage kTag="//@packages.1/kermeta/language/@kOwnedTags.0 //@packages.1/kermeta/language/@kOwnedTags.1" name="language" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language">
         <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;33;234" object="//@packages.1/kermeta/language"/>
         <kOwnedTags name="ecore" value="true" object="//@packages.1/kermeta/language"/>
-        <nestedPackage kTag="//@packages.1/kermeta/language/structure/@kOwnedTags.0 //@packages.1/kermeta/language/structure/@kOwnedTags.1 //@packages.1/kermeta/language/structure/@kOwnedTags.2" name="structure" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+        <nestedPackage kTag="//@packages.1/kermeta/language/structure/@kOwnedTags.0 //@packages.1/kermeta/language/structure/@kOwnedTags.1 //@packages.1/kermeta/language/structure/@kOwnedTags.2" name="structure" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;55;231" object="//@packages.1/kermeta/language/structure"/>
           <kOwnedTags name="ecore" value="true" object="//@packages.1/kermeta/language/structure"/>
           <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//@packages.1/kermeta/language/structure"/>
@@ -6848,7 +6848,7 @@
             </ownedAttribute>
           </ownedTypeDefinition>
         </nestedPackage>
-        <nestedPackage kTag="//@packages.1/kermeta/language/behavior/@kOwnedTags.0" name="behavior" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior">
+        <nestedPackage kTag="//@packages.1/kermeta/language/behavior/@kOwnedTags.0" name="behavior" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior">
           <kOwnedTags name="ecore" value="true" object="//@packages.1/kermeta/language/behavior"/>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.1/kermeta/language/behavior/Assignment/@kOwnedTags.0 //@packages.1/kermeta/language/behavior/Assignment/@kOwnedTags.1" name="Assignment" superType="//@packages.1/kermeta/language/behavior/Assignment/@containedType.0">
             <kOwnedTags name="ecore" value="true" object="//@packages.1/kermeta/language/behavior/Assignment"/>

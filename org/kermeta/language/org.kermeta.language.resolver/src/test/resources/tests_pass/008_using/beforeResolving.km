@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure">
   <org_kermeta_language_structure:Metamodel name="p008_using">
     <packages kTag="/0/@packages.0/@kOwnedTags.0" name="p1">
       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/008_using/src/main/kmt/008_using_1.kmt;27;93" object="/0/@packages.0"/>
@@ -208,19 +208,19 @@
       </ownedTypeDefinition>
     </packages>
   </org_kermeta_language_structure:Metamodel>
-  <org_kermeta_language_structure:Metamodel kTag="/1/@kOwnedTags.0 /1/@kOwnedTags.1" name="kermeta_standard" uri="http://www.kermeta.org/kermeta/2_0_0/">
+  <org_kermeta_language_structure:Metamodel kTag="/1/@kOwnedTags.0 /1/@kOwnedTags.1" name="kermeta_standard" uri="http://www.kermeta.org/kermeta/2_1_0/">
     <kOwnedTags name="documentation" value="&#xA; Defines Collection types &#xA; &lt;img src=&quot;./figures/collections_view.png&quot;/>" object="/1"/>
     <kOwnedTags name="documentation" value=" &#xA; Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; metamodel&#xA; &#xA; &lt;img src=&quot;./figures/utils_package.png&quot;/>" object="/1"/>
-    <packages kTag="/1/@packages.0/@kOwnedTags.0 /1/@packages.0/@kOwnedTags.1" name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
+    <packages kTag="/1/@packages.0/@kOwnedTags.0 /1/@packages.0/@kOwnedTags.1" name="org" uri="http://www.kermeta.org/kermeta/2_1_0/">
       <kOwnedTags name="ecore" value="true" object="/1/@packages.0"/>
       <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.standard/workspace/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;0;238" object="/1/@packages.0"/>
-      <nestedPackage kTag="/1/@packages.0/kermeta/@kOwnedTags.0 /1/@packages.0/kermeta/@kOwnedTags.1" name="kermeta" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta">
+      <nestedPackage kTag="/1/@packages.0/kermeta/@kOwnedTags.0 /1/@packages.0/kermeta/@kOwnedTags.1" name="kermeta" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta">
         <kOwnedTags name="ecore" value="true" object="/1/@packages.0/kermeta"/>
         <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.standard/workspace/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;14;236" object="/1/@packages.0/kermeta"/>
-        <nestedPackage kTag="/1/@packages.0/kermeta/language/@kOwnedTags.0 /1/@packages.0/kermeta/language/@kOwnedTags.1" name="language" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language">
+        <nestedPackage kTag="/1/@packages.0/kermeta/language/@kOwnedTags.0 /1/@packages.0/kermeta/language/@kOwnedTags.1" name="language" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language">
           <kOwnedTags name="ecore" value="true" object="/1/@packages.0/kermeta/language"/>
           <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.standard/workspace/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;33;234" object="/1/@packages.0/kermeta/language"/>
-          <nestedPackage kTag="/1/@packages.0/kermeta/language/behavior/@kOwnedTags.0" name="behavior" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior">
+          <nestedPackage kTag="/1/@packages.0/kermeta/language/behavior/@kOwnedTags.0" name="behavior" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior">
             <kOwnedTags name="ecore" value="true" object="/1/@packages.0/kermeta/language/behavior"/>
             <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/kermeta/language/behavior/Assignment/@kOwnedTags.0 /1/@packages.0/kermeta/language/behavior/Assignment/@kOwnedTags.1" name="Assignment" superType="/1/@packages.0/kermeta/language/behavior/Assignment/@containedType.0">
               <kOwnedTags name="ecore" value="true" object="/1/@packages.0/kermeta/language/behavior/Assignment"/>
@@ -600,7 +600,7 @@
               </ownedAttribute>
             </ownedTypeDefinition>
           </nestedPackage>
-          <nestedPackage kTag="/1/@packages.0/kermeta/language/structure/@kOwnedTags.0 /1/@packages.0/kermeta/language/structure/@kOwnedTags.1 /1/@packages.0/kermeta/language/structure/@kOwnedTags.2" name="structure" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+          <nestedPackage kTag="/1/@packages.0/kermeta/language/structure/@kOwnedTags.0 /1/@packages.0/kermeta/language/structure/@kOwnedTags.1 /1/@packages.0/kermeta/language/structure/@kOwnedTags.2" name="structure" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure">
             <kOwnedTags name="ecore" value="true" object="/1/@packages.0/kermeta/language/structure"/>
             <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="/1/@packages.0/kermeta/language/structure"/>
             <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.standard/workspace/org.kermeta.language.library.standard/src/main/kmt/org/kermeta/language/structure/aspects.kmt;55;231" object="/1/@packages.0/kermeta/language/structure"/>

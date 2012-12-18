@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" name="language.library.core" namespacePrefix="">
   <packages kTag="//helloworld/@kOwnedTags.1 //helloworld/@kOwnedTags.2" name="helloworld">
     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/jfalcou/Desktop/KermetaV2/eclipseTest/eclipse/workspace/org.kermeta.language.sample.helloworld/src/main/kmt/helloworld/HelloWorld.kmt;176;828"/>
     <kOwnedTags name="mainClass" value="helloworld.HelloWorld" object="//helloworld"/>
@@ -6925,7 +6925,7 @@
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-  <packages name="org" uri="http://www.kermeta.org/kermeta/2_0_0/">
+  <packages name="org" uri="http://www.kermeta.org/kermeta/2_1_0/">
     <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;0;192"/>
     <kOwnedTags name="ecore" value="true">
       <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.null.km_in_memory#//org"/>
@@ -6934,7 +6934,7 @@
       <kOwnedTags name="ecore" value="true" object="//org/DummyClass"/>
       <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/DummyClass"/>
     </ownedTypeDefinition>
-    <nestedPackage name="kermeta" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta">
+    <nestedPackage name="kermeta" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta">
       <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;13;190"/>
       <kOwnedTags name="ecore" value="true">
         <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.null.km_in_memory#//org/kermeta"/>
@@ -6943,7 +6943,7 @@
         <kOwnedTags name="ecore" value="true" object="//org/kermeta/DummyClass"/>
         <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/DummyClass"/>
       </ownedTypeDefinition>
-      <nestedPackage name="language" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language">
+      <nestedPackage name="language" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language">
         <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;30;188"/>
         <kOwnedTags name="ecore" value="true">
           <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.null.km_in_memory#//org/kermeta/language"/>
@@ -6952,7 +6952,7 @@
           <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/DummyClass"/>
           <kOwnedTags name="http://www.eclipse.org/emf/2002/GenModel" object="//org/kermeta/language/DummyClass"/>
         </ownedTypeDefinition>
-        <nestedPackage name="structure" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+        <nestedPackage name="structure" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure">
           <kOwnedTags name="traceability_text_reference" value="file:/usr/local/jenkins/jenkins_kermeta/data/jobs/K2_org.kermeta.language.library.core/workspace/org.kermeta.language.library.core/src/main/kmt/org/kermeta/language/structure/aspects.kmt;48;186"/>
           <kOwnedTags name="ecore" value="true">
             <object href="jar:mvn:org.kermeta.language/language.library.core/2.0.1-SNAPSHOT!/META-INF/kermeta/.null.km_in_memory#//org/kermeta/language/structure"/>
@@ -7676,7 +7676,7 @@
             </ownedAttribute>
           </ownedTypeDefinition>
         </nestedPackage>
-        <nestedPackage kTag="//org/kermeta/language/behavior/@kOwnedTags.0" name="behavior" uri="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior">
+        <nestedPackage kTag="//org/kermeta/language/behavior/@kOwnedTags.0" name="behavior" uri="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior">
           <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior"/>
           <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org/kermeta/language/behavior/Assignment/@kOwnedTags.0 //org/kermeta/language/behavior/Assignment/@kOwnedTags.1" name="Assignment" superType="//org/kermeta/language/behavior/Assignment/@containedType.0" isAspect="false" isAbstract="false">
             <kOwnedTags name="ecore" value="true" object="//org/kermeta/language/behavior/Assignment"/>
