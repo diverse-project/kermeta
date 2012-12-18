@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure">
   <packages name="Math">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/Math/@kOwnedTags.0" name="Math">
       <kOwnedTags name="traceability_text_reference" value="114;734" object="//@packages.0/Math"/>

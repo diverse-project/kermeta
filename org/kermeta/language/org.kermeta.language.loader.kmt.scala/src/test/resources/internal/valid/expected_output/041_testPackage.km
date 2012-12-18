@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure">
   <packages name="testPackage">
     <nestedPackage kTag="//@packages.0/package1/@kOwnedTags.0" name="package1">
       <kOwnedTags name="traceability_text_reference" value="53;126" object="//@packages.0/package1"/>
