@@ -27,7 +27,6 @@ aspect class Operation {
 aspect class TypeDefinition {
 	attribute qualifiedNameLLVM : String
 	
-	
 	operation getLLVMQualifiedName() : String is do
 		result := name
 		if(container.isKindOf(Package)) then

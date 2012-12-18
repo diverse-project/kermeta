@@ -40,6 +40,7 @@ class LLVMHelper {
 		result := "store " + typeNew + " " + varNew + "," +  pointer(typeNew) + " " + varContainer
 	end
 
+	operation i8() : String is do result := "i8" end
 	operation i32() : String is do result := "i32" end
 	operation i64() : String is do result := "i64" end
 	operation ~void() : String is do result := "void" end

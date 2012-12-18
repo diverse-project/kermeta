@@ -17,27 +17,74 @@ using kermeta::utils
 using org::kermeta::language::llvm
 
 
+aspect class Expression {
+	operation generateLLVM4CallOperationTarget(ctx:Context) is do
+		ctx.operations.append("FIXME generateLLVM4CallOp: ").append(toString)
+	end
+	
+	/**
+	* Generates the LLVM code and returns the corresponding line instead of putting it into a string buffer.
+	* However, all the LLVM code required for the line to work will ba added to a buffer.
+	*/
+	operation generateLLVMNoBuffer(ctx:Context) : String is do
+		result := "FIXME generateLLVM4RightExpression: "+self.toString
+	end
+}
+
+
+aspect class CallTypeLiteral {
+	method generateLLVM4CallOperationTarget(ctx:Context) is do
+		// When an operation is called using a type literal, it means that it is a singleton operation call.
+		ctx.currentOpCallParams.add(ctx.llvm.pointer(typeref.type.llvmType(ctx))+" @SINGLETON_"+typeref.type.qualifiedNameLLVM)
+	end
+}
+
+
+aspect class CallVariable {
+	method generateLLVM4CallOperationTarget(ctx:Context) is do
+		// When an operation is called using a call variable, it implies that the calling object is passed as the last argument of the LLVM operation.
+		ctx.currentOpCallParams.add(ctx.llvm.pointer(staticType.llvmType(ctx)) + " " + ctx.llvm.localVar(name))
+	end
+}
+
+
+aspect class VariableDecl {
+	method generateLLVM(ctx:Context) is do
+		ctx.operations.append(ctx.llvm.assign(ctx.llvm.localVar(identifier), initialization.generateLLVMNoBuffer(ctx))).append("\n")
+	end
+}
+
+
 aspect class StringLiteral {
 	method generateLLVM(ctx:Context) is do
-		// Creation of the variable that will store the string literal.
-		// The name of the variable that will contain the String.
+		// A string in LLVM is a char*. No String structure.
 		var varStr : String init ctx.nextOperationVar(ctx)
 		var strName : String init ctx.getStringVarName(~value)
-		var attrs : Sequence<String> init  Sequence<String>.new
-		var getEltPts : String init ctx.llvm.getelementptr(ctx.llvm.getStringType(~value), strName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, true)
+		var getEltPts : String init ctx.llvm.getelementptr(ctx.llvm.getStringType(~value), strName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, false)
 		
 		// Setting the parameters of the call.
 		ctx.currentOpCallParams.add(varStr)
-		attrs.add("i8* " + getEltPts)
 		// Creating a String using as parameter the char*.
-		ctx.operations.append(ctx.llvm.assign(varStr, ctx.llvm.call("@create_kermeta_standard__String", "%struct.kermeta_standard__String*", attrs))).append("\n")
+		ctx.operations.append(ctx.llvm.assign(varStr, getEltPts)).append("\n")
+	end
+}
+
+
+aspect class CallSuperOperation {
+	method generateLLVM(ctx:Context) is do
 	end
 }
 
 
 aspect class CallOperation {
-	method generateLLVM(ctx:Context) is do
-		ctx.currentOpCallParams.clear
+	// Generates the LLVM code corresponding to a call to the operation 'new'.
+	operation _generateLLVM4New(ctx:Context) : String is do
+		result := ctx.llvm.call(ctx.llvm.globalVar("create_"+staticType.qualifiedNameLLVM), ctx.llvm.pointer(staticType.llvmType(ctx)), void)
+	end
+
+
+	// Generates the LLVM code corresponding to a standard call of an operation (i.e. not a new, etc.)
+	operation _generateLLVM4StdCall(ctx:Context) : String is do
 		// Each parameter expression is stored into a variable before the call.
 		// The ordered list of these variables are temporary stored into ctx.currentOpCallParams.
 		parameters.each{p| p.generateLLVM(ctx)}
@@ -55,8 +102,27 @@ aspect class CallOperation {
 			ctx.currentOpCallParams.add(ctx.llvm.pointer(staticOperation.ownedParameter.at(i).type.llvmType(ctx))+" "+strTmp)
 			i := i + 1
 		end
+
+		// The last parameter is self.
+		target.generateLLVM4CallOperationTarget(ctx)
 		// Generating the call.
-		ctx.operations.append(ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), ctx.currentOpCallParams)).append("\n")
+		result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), ctx.currentOpCallParams)
+	end
+
+
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		ctx.currentOpCallParams.clear
+
+		if(name=="new") then
+			result := _generateLLVM4New(ctx)
+		else
+			result := _generateLLVM4StdCall(ctx)
+		end
+	end
+
+
+	method generateLLVM(ctx:Context) is do
+		ctx.operations.append(generateLLVMNoBuffer(ctx)).append("\n")
 	end
 }
 

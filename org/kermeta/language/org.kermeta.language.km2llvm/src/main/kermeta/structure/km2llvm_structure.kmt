@@ -34,17 +34,31 @@ aspect class Metamodel {
 
 aspect class Type {
 	operation llvmType(ctx:Context) : String is abstract
+	
+	operation qualifiedNameLLVM() : String is do
+		result := "FIXME_qualifiedNameLLVM: "+self.toString
+	end
+	
+//	operation isSingletonType() : Boolean is do result := false end
 }
 
 
 aspect class Class {
 	method llvmType(ctx:Context) : String is do
-		result := ctx.stdLibName.getValue(typeDefinition.qualifiedNameLLVM)
+		result := ctx.stdLibName.getValue(qualifiedNameLLVM)
 		
 		if(result.isVoid) then
-			result := "%\""+typeDefinition.qualifiedNameLLVM+"\""
+			result := ctx.llvm.localVar(qualifiedNameLLVM)
 		end
 	end
+	
+	
+	method qualifiedNameLLVM() : String is do
+		result := typeDefinition.qualifiedNameLLVM
+	end
+/*	method isSingletonType() : Boolean is do
+		result := typeDefinition.isSingletonType
+	end*/
 }
 
 
@@ -91,14 +105,27 @@ aspect class Operation {
 		
 		ctx.currentVarCpt := 1
 		
+		// If this operation is the main operation, an operation "main" must be created to create an instance
+		// of the main Kermeta class and then call the main Kermeta operation.
 		if(isMain) then
+			var mainClassType : String init ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM))
 			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
+			// Creating the instance of the main Kermeta class.
+			ctx.operations.append(ctx.llvm.assign("%1", 
+				ctx.llvm.call(ctx.llvm.globalVar("create_"+owningClass.qualifiedNameLLVM), mainClassType, void))).append("\n")
+			attrs.add(mainClassType + " %1")
+			// Calling the main Kermeta operation
 			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType(ctx), attrs)).append("\n")
+			// C operation must return an int (0 for ok)
 			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
 			ctx.operations.append("}\n")
 		end
 
+		attrs.clear
+		// Creation of the parameters
 		ownedParameter.each{param | attrs.add(param.type.llvmType(ctx)+" "+ ctx.llvm.localVar(param.name)) }
+		// The last parameter is the calling object
+		attrs.add(ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM))+" "+ctx.llvm.localVar("self"))
 		ctx.operations.append(ctx.llvm.define(LinkageType.internal, type.llvmType(ctx), llvmName(ctx), attrs, void)).append("{\n")
 		body.generateLLVM(ctx)
 		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
@@ -154,6 +181,12 @@ aspect class ClassDefinition {
 		end
 		result := _toIgnore
 	end
+
+/*
+	method isSingletonType() : Boolean is do
+		result := isSingleton
+	end
+*/
 
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
@@ -256,4 +289,8 @@ aspect class TypeDefinition {
 		defineLowerSuperTypes
 		qualifiedNameLLVM := getLLVMQualifiedName
 	end
+	/*
+	operation isSingletonType() : Boolean is do
+		result := false
+	end*/
 }

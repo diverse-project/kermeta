@@ -69,7 +69,8 @@ class Context{
 		result := self
 		
 		stdLibName.put("kermeta_standard__Void", llvm.~void)
-		stdLibName.put("kermeta_standard__String", "%struct.kermeta_standard__String")
+		stdLibName.put("kermeta_standard__String", llvm.i8)
+		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO")
 	end
 	
 	

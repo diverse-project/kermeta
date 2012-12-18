@@ -10,14 +10,58 @@
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="B" superType="#//@packages.0/B/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
+      <ownedOperation name="foo" type="#//@packages.0/B/foo/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
+              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="B.foo!"/>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" staticType="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+              </typeref>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="C" superType="#//@packages.0/C/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/B"/>
+      <ownedOperation name="foo" type="#//@packages.0/C/foo/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/C/foo/@containedType.0"
+              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="C.foo!"/>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+              </typeref>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="D" superType="#//@packages.0/D/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
+      <ownedOperation name="foo" type="#//@packages.0/D/foo/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+        <body xsi:type="org_kermeta_language_behavior:Block">
+          <statement xsi:type="org_kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/D/@containedType.0"
+              name="super" staticOperation="#//@packages.0/C/foo" superType="#//@packages.0/D/@containedType.0"/>
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/D/foo/@containedType.0"
+              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="D.foo!"/>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+              </typeref>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="Main">
@@ -28,6 +72,27 @@
           <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
               name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
             <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+              </typeref>
+            </target>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/B/foo/@containedType.0"
+              identifier="d">
+            <initialization xsi:type="org_kermeta_language_behavior:CallOperation"
+                staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+                name="new">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/D"/>
+            </initialization>
+            <type name="D" type="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0">
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/D"/>
+            </type>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/B/foo/@containedType.0"
+              name="foo" staticOperation="#//@packages.0/D/foo">
+            <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+                name="d"/>
           </statement>
         </body>
       </ownedOperation>
