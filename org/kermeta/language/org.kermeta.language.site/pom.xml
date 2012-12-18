@@ -17,6 +17,7 @@
 		<utils.version>2.0.7-SNAPSHOT</utils.version>
 		<traceability.version>2.0.7-SNAPSHOT</traceability.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<emf.ecoretools.version>0.0.99-SNAPSHOT</emf.ecoretools.version>
 		<emf.version>2.7.0</emf.version>
 		<scala.version>[2.9.0,2.10.0)</scala.version>
 		<framework.scala.version>1.4.4-SNAPSHOT</framework.scala.version>
@@ -337,7 +338,8 @@
 					<artifactId>*</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.builder.eclipse</artifactId>
 			<version>${kermeta.version}</version>
