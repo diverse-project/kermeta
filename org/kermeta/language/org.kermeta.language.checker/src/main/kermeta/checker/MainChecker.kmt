@@ -40,7 +40,7 @@ class MainCheckerV2
 		inputRep.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		
 		inputRes ?= inputRep.createResource(file,
-						"http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure")
+						"http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure")
 		
 		inputRes.load()
 		
