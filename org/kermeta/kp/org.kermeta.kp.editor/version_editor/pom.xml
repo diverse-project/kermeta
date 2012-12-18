@@ -95,6 +95,8 @@
 				org.emftext.access;resolution:=optional,
 				org.emftext.commons.antlr3_3_0,
 				org.kermeta.kp.model,
+				org.kermeta.utils.systemservices.api,
+				org.kermeta.utils.systemservices.eclipse,
 				org.kermeta.utils.aether
             </Require-Bundle>
             
