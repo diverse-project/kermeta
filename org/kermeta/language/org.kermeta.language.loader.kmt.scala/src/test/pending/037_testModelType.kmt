@@ -1,6 +1,5 @@
 package testPackage;
 
-require kermeta
 
 
 modeltype mtype1 { c2 }

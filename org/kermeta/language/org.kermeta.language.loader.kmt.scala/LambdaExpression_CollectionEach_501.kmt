@@ -12,7 +12,6 @@
 package kmt_testCase::foo;
 
 
-require kermeta
 
 using kermeta::standard::*
 using kermeta::standard::A
