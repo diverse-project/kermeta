@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <org_kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="default">
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" namespacePrefix="default">
   <packages name="root" uri="">
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="A" isAspect="false" isAbstract="false">
