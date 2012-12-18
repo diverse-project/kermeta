@@ -2,12 +2,12 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
-    nsURI="http://www.kermeta.org/kermeta/2_0_0/" nsPrefix="org">
-  <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta"
+    nsURI="http://www.kermeta.org/kermeta/2_1_0/" nsPrefix="org">
+  <eSubpackages name="kermeta" nsURI="http://www.kermeta.org/kermeta/2_1_0//org/kermeta"
       nsPrefix="org_kermeta">
-    <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language"
+    <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language"
         nsPrefix="org_kermeta_language">
-      <eSubpackages name="behavior" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
+      <eSubpackages name="behavior" nsURI="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior"
           nsPrefix="org_kermeta_language_behavior">
         <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//kermeta/language/behavior/Expression">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -407,7 +407,7 @@
           </eStructuralFeatures>
         </eClassifiers>
       </eSubpackages>
-      <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure"
+      <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure"
           nsPrefix="org_kermeta_language_structure">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xA;properties&lt;/b> contained in the classes; declares the abstract operations.&#xA;Concrete implementation is in kermeta.language.structure.&#xA;&lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png&quot;>"/>

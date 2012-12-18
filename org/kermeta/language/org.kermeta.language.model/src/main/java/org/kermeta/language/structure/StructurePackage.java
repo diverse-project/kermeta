@@ -49,7 +49,7 @@ public interface StructurePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure";
+	String eNS_URI = "http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure";
 
 	/**
 	 * The package namespace name.

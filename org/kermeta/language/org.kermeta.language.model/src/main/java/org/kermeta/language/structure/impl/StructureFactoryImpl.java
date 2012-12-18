@@ -73,7 +73,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 */
 	public static StructureFactory init() {
 		try {
-			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure"); 
+			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure"); 
 			if (theStructureFactory != null) {
 				return theStructureFactory;
 			}

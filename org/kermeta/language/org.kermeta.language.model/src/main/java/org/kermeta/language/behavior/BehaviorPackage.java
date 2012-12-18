@@ -43,7 +43,7 @@ public interface BehaviorPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior";
+	String eNS_URI = "http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior";
 
 	/**
 	 * The package namespace name.
