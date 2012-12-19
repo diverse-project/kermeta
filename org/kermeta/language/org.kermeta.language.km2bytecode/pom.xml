@@ -151,6 +151,7 @@
 							org.kermeta.language,
 							org.kermeta.language.structure.*,
 							org.kermeta.language.behavior.*,
+							org.kermeta.language.util.*,
 							k2.utils,
 							org.eclipse.emf.*,
 							org.slf4j;version="[0,2)",
