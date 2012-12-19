@@ -94,6 +94,35 @@
             <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
                 name="d"/>
           </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+                <parameters xsi:type="org_kermeta_language_behavior:StringLiteral"
+                    value="ifthen!"/>
+                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                  <typeref name="StdIO" type="#//@packages.0/Main/main/@body/@statement.3/@thenBody/@statement.0/@target/@typeref/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class"
+                        typeDefinition="#//@packages.1/io/StdIO"/>
+                  </typeref>
+                </target>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="org_kermeta_language_behavior:Block">
+              <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+                <parameters xsi:type="org_kermeta_language_behavior:StringLiteral"
+                    value="ifElse!"/>
+                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                  <typeref name="StdIO" type="#//@packages.0/Main/main/@body/@statement.3/@elseBody/@statement.0/@target/@typeref/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class"
+                        typeDefinition="#//@packages.1/io/StdIO"/>
+                  </typeref>
+                </target>
+              </statement>
+            </elseBody>
+            <condition xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="true"/>
+          </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>

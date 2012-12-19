@@ -51,6 +51,10 @@ class Context{
 		currentVarCpt := currentVarCpt + 1
 	end
 	
+	operation nextLabel() : String is do
+		result := "llvmlabel"+currentVarCpt.toString
+		currentVarCpt := currentVarCpt + 1
+	end
 	
 	
 	operation initialise() : Context is do

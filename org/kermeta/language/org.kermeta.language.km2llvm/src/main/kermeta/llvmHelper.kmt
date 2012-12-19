@@ -13,6 +13,18 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation label(name:String):String is do result := name+":" end
+
+	operation br_uncond(label:String):String is do result := "br label "+label end
+
+	operation br(cond:String, labelTrue:String, labelFalse:String) : String is do
+		result := "br "+i1+" "+cond+", label "+labelTrue+",label "+labelFalse
+	end
+
+	operation icmp(cond:IcmpCondition, type:String, v1:String, v2:String) : String is do
+		result := "icmp "+cond.name+" "+type+" "+v1+", "+v2		
+	end
+
 	operation getStringType(str:String):String is do
 		result := "[" + (str.size+1).toString + " x i8]*"  
 	end
@@ -40,10 +52,13 @@ class LLVMHelper {
 		result := "store " + typeNew + " " + varNew + "," +  pointer(typeNew) + " " + varContainer
 	end
 
+	operation i1() : String is do result := "i1" end
 	operation i8() : String is do result := "i8" end
 	operation i32() : String is do result := "i32" end
 	operation i64() : String is do result := "i64" end
 	operation ~void() : String is do result := "void" end
+	operation ~true() : String is do result := "true" end
+	operation ~false() : String is do result := "false" end
 
 	operation getelementptr(typeVal:String, val:String, type1:String, pos1:Integer, type2:String, pos2:Integer, asFct:Boolean) : String is do
 		var sep1 : String
@@ -139,6 +154,11 @@ class LLVMHelper {
 	operation llvmID(name:String) : String is do
 		result := "\"" + name + "\""
 	end
+}
+
+
+enumeration IcmpCondition {
+eq; ne; ugt; uge; ult; ule; sgt; sge; slt; sle;
 }
 
 

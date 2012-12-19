@@ -1,0 +1,58 @@
+/* $Id:$ 
+ * Creation : December 19, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::behavior;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "../structure/km2llvm_structure.kmt"
+
+using org::kermeta::language::km2llvm
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::llvm
+using org::kermeta::language::structure
+
+
+aspect class Conditional {
+	method generateLLVM(ctx:Context) is do
+		var condStr : String init condition.generateLLVMNoBuffer(ctx)
+		var varStr : String init ctx.nextOperationVar(ctx)
+		var labelIf : String init ctx.nextLabel
+		var labelEndIf : String init ctx.nextLabel
+		var secondLabelBr : String
+		
+		// If there is no else block, must go to the end of the if.
+		if(elseBody.isVoid) then secondLabelBr := labelEndIf
+		else secondLabelBr := ctx.nextLabel
+		end
+		
+		// Creating a var containing the result of the condition.
+		ctx.operations.append(ctx.llvm.assign(varStr, ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i1, condStr, ctx.llvm.~true))).append("\n")
+		// Creating the conditional branch.
+		ctx.operations.append(ctx.llvm.br(varStr, "%"+labelIf, "%"+secondLabelBr)).append("\n")
+		// Defining the 'if' label.
+		ctx.operations.append(ctx.llvm.label(labelIf)).append("\n")
+		// Generating the 'if' block
+		thenBody.generateLLVM(ctx)
+		
+		if(not elseBody.isVoid) then
+			// At the end of the 'if' block, must go to the end of the if statement.
+			var gotoEnd : String init ctx.llvm.br_uncond("%"+labelEndIf)+"\n"
+			ctx.operations.append(gotoEnd)
+			// Creating the 'else' label.
+			ctx.operations.append(ctx.llvm.label(secondLabelBr)).append("\n")
+			// Generating the 'else' block
+			elseBody.generateLLVM(ctx)
+			// Jumping to the end of the if statement.
+			ctx.operations.append(gotoEnd)
+		end
+		// Creating the label of the endif.
+		ctx.operations.append(ctx.llvm.label(labelEndIf)).append("\n")
+	end
+}
+

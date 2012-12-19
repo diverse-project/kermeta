@@ -33,6 +33,17 @@ aspect class Expression {
 }
 
 
+
+aspect class BooleanLiteral {
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		if(~value) then result := ctx.llvm.~true
+		else result := ctx.llvm.~false
+		end
+	end
+}
+
+
+
 aspect class CallTypeLiteral {
 	method generateLLVM4CallOperationTarget(ctx:Context) is do
 		// When an operation is called using a type literal, it means that it is a singleton operation call.

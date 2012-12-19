@@ -12,6 +12,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "../km2llvm_aspectGenerator.kmt"
 require "km2llvm_castFunctions.kmt"
 require "../behaviour/km2llvm_calls.kmt"
+require "../behaviour/km2llvm_cond_statements.kmt"
 
 using org::kermeta::language::km2llvm
 using kermeta::standard

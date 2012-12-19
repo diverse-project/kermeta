@@ -7,12 +7,12 @@ void delete_kermeta_standard__String(char* s) {
 }
 
 
-struct kermeta_standard__Object* kermeta_standard__String___container(char* self) {
+struct kermeta_standard__Object* kermeta_standard__String___container(const char* const self) {
 	return NULL;
 }
 
 
-char* kermeta_standard__String___plus(char* s, char* self) {
+char* kermeta_standard__String___plus(const char* const s, const char* const self) {
 	char* res = calloc(strlen(s)+strlen(self)+1, sizeof(char*));
 	strcat(res, self);
 	strcat(res, s);
@@ -20,7 +20,7 @@ char* kermeta_standard__String___plus(char* s, char* self) {
 }
 
 
-void kermeta_standard__String___equals(struct kermeta_standard__Object* o, char* self) {
+void kermeta_standard__String___equals(const struct kermeta_standard__Object* const o, const char* const self) {
 	//TODO
 }
 
@@ -30,12 +30,12 @@ char* kermeta_standard__String___toString(char* self) {
 }
 
 
-void kermeta_standard__String___hashcode(char* self) {
+void kermeta_standard__String___hashcode(const char* const self) {
 	//TODO
 }
 
 
-int kermeta_standard__String___compareTo(char* s, char* self) {
+int kermeta_standard__String___compareTo(const char* const s, const char* const self) {
 	return strcmp(self, s);
 }
 
