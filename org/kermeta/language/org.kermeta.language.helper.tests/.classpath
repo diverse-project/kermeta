@@ -13,10 +13,10 @@
   <classpathentry kind="var" path="M2_REPO/org/eclipse/jface/3.7.0-v20110928-1505/jface-3.7.0-v20110928-1505.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/core/jobs/3.5.101-v20120113-1953/jobs-3.5.101-v20120113-1953.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.base4tests/2.0.7-SNAPSHOT/language.helper.base4tests-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala/2.0.7-SNAPSHOT/language.loader.kmt.scala-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala.api/2.0.7-SNAPSHOT/language.loader.kmt.scala.api-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.7-SNAPSHOT/language.model-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.base4tests/2.0.98/language.helper.base4tests-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala/2.0.98/language.loader.kmt.scala-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala.api/2.0.98/language.loader.kmt.scala.api-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.98/language.model-2.0.98.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/core/databinding/observable/1.4.0-I20110222-0800/observable-1.4.0-I20110222-0800.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare/1.1.1.v201009150438/org.eclipse.emf.compare-1.1.1.v201009150438.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare.diff/1.1.1.v201009150438/org.eclipse.emf.compare.diff-1.1.1.v201009150438.jar"/>
@@ -28,8 +28,8 @@
   <classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/3.7.0-v20110110/runtime-3.7.0-v20110110.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/swt/3.7.2-v3740f/swt-3.7.2-v3740f.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.7-SNAPSHOT/utils.helpers-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.7-SNAPSHOT/utils.systemservices.api-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.98/utils.helpers-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.98/utils.systemservices.api-2.0.98.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/workbench/3.7.1-v20120104-1859/workbench-3.7.1-v20120104-1859.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 </classpath>

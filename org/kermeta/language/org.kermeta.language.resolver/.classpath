@@ -27,7 +27,7 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="src" path="/org.kermeta.language.framework.scala"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.resolver.api/2.0.7-SNAPSHOT/language.resolver.api-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.resolver.api/2.0.98/language.resolver.api-2.0.98.jar"/>
   <classpathentry kind="src" path="/org.kermeta.utils.systemservices.api"/>
   <classpathentry kind="src" path="/language.helper.tests"/>
   <classpathentry kind="src" path="/org.kermeta.language.helper.base4tests"/>

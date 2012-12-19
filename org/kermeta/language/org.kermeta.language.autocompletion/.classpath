@@ -3,8 +3,8 @@
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.autocompletion.api/2.0.7-SNAPSHOT/language.autocompletion.api-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.7-SNAPSHOT/language.model-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.autocompletion.api/2.0.98/language.autocompletion.api-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.98/language.model-2.0.98.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.jobs/3.5.1.R36x_v20100824/org.eclipse.core.jobs-3.5.1.R36x_v20100824.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.resources/3.6.1.R36x_v20110131-1630/org.eclipse.core.resources-3.6.1.R36x_v20110131-1630.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.runtime/3.6.0.v20100505/org.eclipse.core.runtime-3.6.0.v20100505.jar"/>
@@ -23,8 +23,8 @@
       <attribute value="jar:file:/C:/Users/dvojtise/.m2/repository/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.7-SNAPSHOT/utils.helpers-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.7-SNAPSHOT/utils.systemservices.api-2.0.7-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.eclipse/2.0.7-SNAPSHOT/utils.systemservices.eclipse-2.0.7-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.98/utils.helpers-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.98/utils.systemservices.api-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.eclipse/2.0.98/utils.systemservices.eclipse-2.0.98.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 </classpath>
