@@ -85,6 +85,7 @@ aspect class CallSuperOperation {
 				)).append("\n") // Casting self into the super type.
 		// Creating the super call.
 		attrs.clear
+		//TODO: put the other parameters of the operation.
 		attrs.add(ctx.llvm.pointer(superType.llvmType(ctx))+" "+varStr) // The parameters of the call.
 		result := ctx.llvm.call(op.llvmName(ctx), staticOperation.type.llvmType(ctx), attrs)
 	end

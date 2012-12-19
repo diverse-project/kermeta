@@ -5,5 +5,6 @@
 #include "Object.c"
 #include "Void.c"
 #include "String.c"
+#include "Integer.c"
 #include "StdIO.c"
 

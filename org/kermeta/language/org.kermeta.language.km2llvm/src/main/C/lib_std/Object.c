@@ -8,7 +8,7 @@ struct kermeta_standard__Object {
 //TODO
 
 
-inline struct kermeta_standard__Object* kermeta_standard__Object___container(struct kermeta_standard__Object* self) {
+struct kermeta_standard__Object* kermeta_standard__Object___container(struct kermeta_standard__Object* self) {
 	return self->llvm_container;
 }
 

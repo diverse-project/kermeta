@@ -2,12 +2,12 @@
 //#######################
 // String
 
-inline void delete_kermeta_standard__String(char* s) {
+void delete_kermeta_standard__String(char* s) {
 	free(s);
 }
 
 
-inline struct kermeta_standard__Object* kermeta_standard__String___container(char* self) {
+struct kermeta_standard__Object* kermeta_standard__String___container(char* self) {
 	return NULL;
 }
 

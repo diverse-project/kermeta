@@ -24,14 +24,14 @@ void kermeta__o__StdIO___error(char* o, struct kermeta_io__StdIO* self) {
 	fprintf(stderr, "%s", o);
 }
 
-struct kermeta_standard__String* kermeta___io__StdIO_read(char* o, struct kermeta_io__StdIO* self) {
+char* kermeta___io__StdIO_read(char* o, struct kermeta_io__StdIO* self) {
 	//TODO
 	return NULL;
 }
 
 
 // Operations from Object
-inline struct kermeta_standard__Object* kermeta_io__StdIO___container(struct kermeta_io__StdIO* self) {
+struct kermeta_standard__Object* kermeta_io__StdIO___container(struct kermeta_io__StdIO* self) {
 	return NULL;
 }
 
