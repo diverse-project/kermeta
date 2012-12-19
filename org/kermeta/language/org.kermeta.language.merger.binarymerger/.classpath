@@ -22,9 +22,9 @@
   <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.framework.scala/1.4.4-SNAPSHOT/language.framework.scala-1.4.4-SNAPSHOT.jar"/>
   <classpathentry kind="src" path="/org.kermeta.language.merger.binarymerger.api"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.98/utils.systemservices.api-2.0.98.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.tests/2.0.98/language.helper.tests-2.0.98.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.base4tests/2.0.98/language.helper.base4tests-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.99-SNAPSHOT/utils.systemservices.api-2.0.99-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.tests/2.0.99-SNAPSHOT/language.helper.tests-2.0.99-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.helper.base4tests/2.0.99-SNAPSHOT/language.helper.base4tests-2.0.99-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare/1.1.1.v201009150438/org.eclipse.emf.compare-1.1.1.v201009150438.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare.diff/1.1.1.v201009150438/org.eclipse.emf.compare.diff-1.1.1.v201009150438.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.compare.match/1.1.1.v201009150438/org.eclipse.emf.compare.match-1.1.1.v201009150438.jar"/>
@@ -48,6 +48,6 @@
   <classpathentry kind="var" path="M2_REPO/org/eclipse/core/databinding/property/1.4.0-I20110222-0800/property-1.4.0-I20110222-0800.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/core/databinding/1.4.0-I20110111-0800/databinding-1.4.0-I20110111-0800.jar"/>
   <classpathentry kind="src" path="/org.kermeta.language.loader.kmt.scala"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala.api/2.0.98/language.loader.kmt.scala.api-2.0.98.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.98/utils.helpers-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.kmt.scala.api/2.0.99-SNAPSHOT/language.loader.kmt.scala.api-2.0.99-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.99-SNAPSHOT/utils.helpers-2.0.99-SNAPSHOT.jar"/>
 </classpath>

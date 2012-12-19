@@ -1,5 +1,5 @@
-resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.98"
-//resource kermeta_model ="platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.98"
+resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+//resource kermeta_model ="platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.99-SNAPSHOT"
 
 
 //importProject kermeta_standard

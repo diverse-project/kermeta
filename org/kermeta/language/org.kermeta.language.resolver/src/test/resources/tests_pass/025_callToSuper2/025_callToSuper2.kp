@@ -1,5 +1,5 @@
 resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" 
-				alternative "mvn:org.kermeta.language/language.library.standard/2.0.98"
+				alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
 
 importProject kermeta_standard
 //importProject ram_model

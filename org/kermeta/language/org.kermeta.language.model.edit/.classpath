@@ -12,7 +12,7 @@
   <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/core/jobs/3.5.101-v20120113-1953/jobs-3.5.101-v20120113-1953.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.98/language.model-2.0.98.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.99-SNAPSHOT/language.model-2.0.99-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/3.7.2-v20120110-1415/osgi-3.7.2-v20120110-1415.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/preferences/3.4.2-v20120111-2020/preferences-3.4.2-v20120111-2020.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/registry/3.5.101-R37x_v20110810-1611/registry-3.5.101-R37x_v20110810-1611.jar"/>
