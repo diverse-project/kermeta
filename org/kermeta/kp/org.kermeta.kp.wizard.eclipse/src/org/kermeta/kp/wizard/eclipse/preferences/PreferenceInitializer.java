@@ -19,7 +19,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
 		store.setDefault(PreferenceConstants.P_NEW_KMT_TEMPLATE_STRING, 
-				"using kermeta::standard\n"+
+				"using kermeta::standard::*\n"+
 				"using kermeta::io::StdIO => stdio\n\n"+
 				"package "+"${package.name}"+"{\n"+
 		        "\tclass "+"${class.name}"+
