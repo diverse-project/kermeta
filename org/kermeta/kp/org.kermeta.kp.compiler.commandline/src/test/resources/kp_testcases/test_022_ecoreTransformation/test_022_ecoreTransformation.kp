@@ -1,4 +1,4 @@
-resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.98"
+resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
 resource ecore_model = "mvn:org.kermeta.language/language.library.utils/LATEST" alternative "mvn:org.eclipse.emf/ecore/LATEST"
 
 importProject kermeta_standard
