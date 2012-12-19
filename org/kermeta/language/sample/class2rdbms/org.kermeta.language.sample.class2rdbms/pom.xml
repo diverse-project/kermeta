@@ -10,13 +10,13 @@
     <parent>
         <groupId>org.kermeta.language</groupId>
         <artifactId>language.root</artifactId>
-        <version>2.0.4</version>
+        <version>2.0.98</version>
     </parent>
 	<dependencies>
 		<dependency>
 			<groupId>org.kermeta.language</groupId>
 			<artifactId>language.library.core</artifactId>
-			<version>2.0.1-BETA3</version>
+			<version>2.0.98</version>
 		</dependency>
 	</dependencies>
     <build>
