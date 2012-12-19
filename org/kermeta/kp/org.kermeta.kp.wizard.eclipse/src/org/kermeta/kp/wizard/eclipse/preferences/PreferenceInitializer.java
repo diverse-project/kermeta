@@ -32,7 +32,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		        "\n\t}"+
 		        "\n}");
 		store.setDefault(PreferenceConstants.P_NEW_KP_TEMPLATE_STRING, 
-				"resource library_standard =\"platform:/plugin/org.kermeta.language.library.standard\" alternative \"mvn:org.kermeta.language/language.library.standard/2.0.98\"\n"+
+				"resource library_standard =\"platform:/plugin/org.kermeta.language.library.standard\" alternative \"mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT\"\n"+
 				"importProject library_standard\n" +
 
 				"project ${project.name} {\n"+ 
