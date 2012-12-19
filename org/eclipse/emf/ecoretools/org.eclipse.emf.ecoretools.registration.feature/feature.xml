@@ -5,8 +5,12 @@
       version="${bundle.version}"
       provider-name="IRISA/INRIA">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description>
+      This set of plugins offers to dynamically register EPackages
+from ecore files. This allows to be able to load conforming models
+without having to physically generate the bytecode and deploy
+it in another eclipse runtime.
+It propose a view showing all registerer EPackages and ther origin.
    </description>
 
    <copyright>

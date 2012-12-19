@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.ecoretools</groupId>
 	<artifactId>org.eclipse.ecoretools.registration-NoUI</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>Kermeta - ecoretools registration - no UI</name>
 	<description>version of Regsitration for ecore that doesn't includes classes dependent on Eclipse UI</description>
 	<build>
