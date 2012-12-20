@@ -203,7 +203,7 @@ public class KpCompilerMojo extends AbstractMojo {
 	        	classPathList.addAll(mavenClassPathList.subList(1, mavenClassPathList.size()));
 	        }
 	        
-	        String pluginVersion = "2.0.6";
+	        String pluginVersion = "2.0.98";
 	        for( org.apache.maven.model.Plugin plugin : project.getBuildPlugins()){
 	        	if(plugin.getArtifactId().equals("kp.compiler.mavenplugin")){
 	        		pluginVersion = plugin.getVersion();	        	
