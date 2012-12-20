@@ -6,9 +6,9 @@
  */
 package org2::kermeta::kompren::slicer;
 
-using kermeta::standard
-using kermeta::utils
-using ecore
+using kermeta::standard::*
+using kermeta::utils::*
+using ecore::*
 using kermeta::io::StdIO => stdio
 
 class SlicerAspectGenerator inherits Generator {
