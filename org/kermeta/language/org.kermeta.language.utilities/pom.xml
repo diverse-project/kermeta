@@ -37,7 +37,8 @@
                         	org.eclipse.emf.ecore.impl,
 							org.osgi.framework,
 							org.kermeta.language.structure,
-							org.kermeta.language.behavior
+							org.kermeta.language.behavior,
+							org.kermeta.language.util
                         </Import-Package>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
                         <Bundle-SymbolicName>org.kermeta.language.utilities</Bundle-SymbolicName>

@@ -14,7 +14,8 @@ package org.kermeta.language.utilities.helpers;
 
 import java.util.Iterator;
 
-import org.kermeta.language.structure.ModelingUnit;
+import org.kermeta.language.util.ModelingUnit;
+import org.kermeta.language.structure.Metamodel;
 import org.kermeta.language.structure.Package;
 import org.kermeta.language.structure.StructureFactory;
 
@@ -29,6 +30,7 @@ public class ModelingUnitHelper {
 	/**
 	 * recursively create a Package from a qualified name
 	 * If already exist, simply return the existing Package
+	 * The qulified name must use the metamodelname#
 	 * @param packageQualifiedName
 	 * @return
 	 */
@@ -37,22 +39,34 @@ public class ModelingUnitHelper {
 		if ( result != null ) {
 			return result;
 		}
-		String[] parts = packageQualifiedName.split("::");
+		
+		String[] mmParts = packageQualifiedName.split("#");
+		
+		Metamodel mm = null;
+		for(Metamodel aMM : modelingUnit.getMetamodels()){
+			if(aMM.getName().equals(mmParts[0])){
+				mm = aMM;
+				break;
+			}
+		}
+		if(mm == null) return null;
+		
+		String[] packageParts = mmParts[1].split("::");
 		StringBuffer currentQualifiedName = new StringBuffer();
 		String currentName = "";
 		Package currentPackage = null;
 		
-		for ( int i = 0; i < parts.length; i++ ) {
+		for ( int i = 0; i < packageParts.length; i++ ) {
 			
-			currentQualifiedName.append(parts[i]);
-			currentName = parts[i];
+			currentQualifiedName.append(packageParts[i]);
+			currentName = packageParts[i];
 			
 			Package p = findPackage(modelingUnit, currentQualifiedName.toString() );
 			if ( p == null ) {
 				p = StructureFactory.eINSTANCE.createPackage();
 				p.setName( currentName );
 				
-				modelingUnit.getPackages().add( p );
+				mm.getPackages().add( p );
 				if ( currentPackage != null ){
 					currentPackage.getNestedPackage().add( p );
 				}
@@ -73,14 +87,25 @@ public class ModelingUnitHelper {
 	 */
 	static public Package findPackage(ModelingUnit modelingUnit, String packageQualifiedName) {
 		Package result = null;
-		String[] parts = packageQualifiedName.split("::");
+		String[] mmParts = packageQualifiedName.split("#");
+		
+		Metamodel mm = null;
+		for(Metamodel aMM : modelingUnit.getMetamodels()){
+			if(aMM.getName().equals(mmParts[0])){
+				mm = aMM;
+				break;
+			}
+		}
+		if(mm == null) return null;
+		
+		String[] packageParts = mmParts[1].split("::");
 		String currentName = "";
 		Package currentPackage = null;
-		for ( int i = 0; i < parts.length; i++ ) {
-			currentName = parts[i];
+		for ( int i = 0; i < packageParts.length; i++ ) {
+			currentName = packageParts[i];
 			Iterator<Package> it;
 			if(currentPackage == null){
-				it = modelingUnit.getPackages().iterator();
+				it = mm.getPackages().iterator();
 			}
 			else{
 				it = currentPackage.getNestedPackage().iterator();
