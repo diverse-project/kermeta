@@ -7,7 +7,7 @@
  */
 package ecore;
 
-using kermeta::standard
+using kermeta::standard::*
 
 aspect class EPackage {
 	operation getAllClasses() : Bag<EClass> is do
