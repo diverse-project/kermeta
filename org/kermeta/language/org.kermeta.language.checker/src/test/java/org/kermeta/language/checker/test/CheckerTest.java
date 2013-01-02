@@ -34,20 +34,22 @@ import junit.framework.TestCase;
 public class CheckerTest extends TestCase {
 
 	String kmFile;
+	String baseParent;
 	Boolean isInvalidTestCase;
 	String kmFileInvDescr=null;
 	String fileSeparator;
 	CheckerScope scope=null;
 	
 	
-	public CheckerTest(String path/*, String parent*/) {
+	public CheckerTest(String fullPath, String baseParentPath) {
 		super();
-		System.out.println("--------------------------------------\nCreating test for file " + path);
-		this.kmFile=path;
+		System.out.println("--------------------------------------\nCreating test for file " + fullPath);
+		this.kmFile=fullPath;
+		baseParent = baseParentPath;
 
 		String fileSeparator=System.getProperty("file.separator");
 		
-		if (path.contains(fileSeparator+"invalid"+fileSeparator)) {
+		if (fullPath.contains(fileSeparator+"invalid"+fileSeparator)) {
 			System.out.println("- This is an invalid testcase");
 			this.isInvalidTestCase=true;
 			this.kmFileInvDescr=kmFile+".txt";
@@ -210,11 +212,9 @@ public class CheckerTest extends TestCase {
 	
     @Override
     public String getName() {
-    	//return kmFile;
-    	
-    	int last = kmFile.lastIndexOf(System.getProperty("file.separator"));
-    	return kmFile.substring(last+1);
-    	
+    	//int last = kmFile.lastIndexOf(System.getProperty("file.separator"));
+    	//return kmFile.substring(last+1);
+    	return kmFile.substring(baseParent.length()+1); // remove the parent part of the name
     }
 
     @Override

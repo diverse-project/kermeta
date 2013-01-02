@@ -33,7 +33,7 @@ public class CheckerTestSuite extends TestSuite {
 		
 		for(File file : files) {
 			System.err.println("Testing: " + file.getPath());
-			suite.addTest(new CheckerTest(file.getPath()));
+			suite.addTest(new CheckerTest(file.getPath(), folderFullURI));
 		}
 		
     	
