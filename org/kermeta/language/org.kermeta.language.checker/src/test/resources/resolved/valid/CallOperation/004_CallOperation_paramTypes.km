@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" kTag="//@kOwnedTags.0 //@kOwnedTags.1" name="associations6" namespacePrefix="">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" kTag="//@kOwnedTags.0 //@kOwnedTags.1" name="associations6" namespacePrefix="">
   <kOwnedTags name="documentation" value="&#xA; Defines Collection types &#xA; &lt;img src=&quot;./figures/collections_view.png&quot;/>" object="/"/>
   <kOwnedTags name="documentation" value=" &#xA; Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; metamodel&#xA; &#xA; &lt;img src=&quot;./figures/utils_package.png&quot;/>" object="/"/>
   <packages name="test">
@@ -8106,4 +8106,4 @@
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-</org_kermeta_language_structure:ModelingUnit>
+</org_kermeta_language_structure:Metamodel>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" name="hello.world" namespacePrefix="">
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" name="hello.world" namespacePrefix="">
   <packages name="test">
     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/jfalcou/Desktop/KermetaV2_64/eclipse/workspace/org.kermeta.language.sample.helloworld/src/main/kmt/helloworld/HelloWorld.kmt;143;305"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//test/Main/@containedType.0" isAspect="false">
@@ -7487,4 +7487,4 @@
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-</org_kermeta_language_structure:ModelingUnit>
+</org_kermeta_language_structure:Metamodel>
