@@ -5,7 +5,7 @@ importProject library_standard
 
 	
 //metamodel test_hello
-project VariableDecl {
+project CallOperation_deprecated {
 
 	
 	import "${project.baseUri}/003_CallOperation_deprecated.kmt" 
