@@ -1,0 +1,13 @@
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/LATEST"
+
+importProject library_standard
+	
+
+	
+//metamodel test_hello
+project VariableDecl {
+
+	
+	import "${project.baseUri}/001_CallOperation_NoNewOnAbstractClass.kmt" 
+
+}

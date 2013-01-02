@@ -1,8 +1,8 @@
 
 
-using kermeta::emfpersistence
-using kermeta::standard
-using kermeta::io
+using kermeta::emfpersistence::*
+using kermeta::standard::*
+
 using kermeta::io::StdIO => stdio
 
 package test{
