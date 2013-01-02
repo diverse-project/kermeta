@@ -113,7 +113,7 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
    * @generated
    * @ordered
    */
-	protected static final String JAVA_BASE_PACKAGE_EDEFAULT = "default";
+	protected static final String JAVA_BASE_PACKAGE_EDEFAULT = null;
 
 		/**
    * The cached value of the '{@link #getJavaBasePackage() <em>Java Base Package</em>}' attribute.

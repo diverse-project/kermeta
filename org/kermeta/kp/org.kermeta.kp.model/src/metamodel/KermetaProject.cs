@@ -34,11 +34,9 @@ TOKENSTYLES{
 
 RULES{
     
-    KermetaProject::=
-     (  	(importedProjects) |
-		   	reusableResources
-	    )* 
-    "project" #1  metamodelName[] ("extends" importedProjectSources("," importedProjectSources)*)? "{"
+    KermetaProject::= (reusableResources)*  (importedProjects)*
+      
+    "project" #1  metamodelName[] ("extends" #1 importedProjectSources("," #1 importedProjectSources)*)? "{"
     	(!1"mainClass"  defaultMainClass['"','"']  )?
 	    (!1"mainOperation"  defaultMainOperation['"','"']  )?
 	    (!1"javaBasePackage"  javaBasePackage['"','"']  )? 
@@ -49,22 +47,22 @@ RULES{
     
     
     PackageEquivalence::=
-   	!3"packageEquivalence" ecorePackage['"','"']  ("=")  javaPackage['"','"'] 
+   	!3"packageEquivalence" #1 ecorePackage['"','"']  ("=")  javaPackage['"','"'] 
     ;
         
     
     // TODO deal with syntax for "using KMFBytecode()" and "using EMFBytecode()" (the later is equivalent to the default)
     ImportFile::=
-    	!1"import" url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" (packageEquivalences)* "}")? )?
+    	!1"import" #1 url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" (packageEquivalences)* "}")? )?
     ;
    	ImportProject ::=
-   		!0"importProject" projectResource[] 
+   		!0"importProject" #1 projectResource[] 
    	;
    	ImportProjectSources ::=
    		projectResource[]
    	;
    	
     ReusableResource ::=
-    	!0"resource" reusableResourceName[] "=" url['"','"'] (!2"alternative" alternateUrls['"','"']("," alternateUrls['"','"'])* )?
+    	!0"resource" #1 reusableResourceName[] #1 "=" #1 url['"','"'] (!2"alternative" #1 alternateUrls['"','"']("," #1 alternateUrls['"','"'])* )?
     ;
 }
