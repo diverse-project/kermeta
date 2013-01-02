@@ -5,17 +5,14 @@
  * Authors  : 
  *            jfalcou
  */
-@mainClass "test::kermeta::Main"
-@mainOperation "main"
 
 
 package test::kermeta;
 
 
-require kermeta
 
 
-using kermeta::standard
+using kermeta::standard::*
 class Main
 {
 	operation main() : Void is do 
